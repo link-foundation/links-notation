@@ -1,9 +1,10 @@
 @namespace Link.Foundation.Links.Notation
 @classname Parser
 @using System.Linq
-document <IList<Link<string>>> = #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); } _ l:links eof { l.ToLinksList() } / #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); } _ eof { new List<Link<string>>() }
+document <IList<Link<string>>> = #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = null; } skipEmptyLines l:links _ eof { l.ToLinksList() } / #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = null; } _ eof { new List<Link<string>>() }
+skipEmptyLines = ([ \t]* [\r\n])*
 links <IList<LinksGroup<string>>> = fl:firstLine list:line* POP_INDENTATION { new List<LinksGroup<string>> { fl }.Concat(list).ToList() }
-firstLine <LinksGroup<string>> = l:element { l }
+firstLine <LinksGroup<string>> = SET_BASE_INDENTATION l:element { l }
 line <LinksGroup<string>> = CHECK_INDENTATION l:element { l }
 element <LinksGroup<string>> = e:anyLink PUSH_INDENTATION l:links { new LinksGroup<string>(e, l) } / e:anyLink { new LinksGroup<string>(e) }
 referenceOrLink <Link<string>> = l:multiLineAnyLink { l } / i:reference { i }
@@ -20,13 +21,14 @@ singleLineValueLink <Link<string>> = v:singleLineValues { new Link<string>(v) }
 multiLineValueLink <Link<string>> = "(" v:multiLineValues _ ")" { new Link<string>(v) }
 indentedIdLink <Link<string>> = id:(reference) __ ":" eol { new Link<string>(id) }
 
-reference <string> = doubleQuotedReference / singleQuotedReference / simpleReference 
+reference <string> = doubleQuotedReference / singleQuotedReference / simpleReference
 simpleReference <string> = "" referenceSymbol+
 doubleQuotedReference <string> = '"' r:([^"]+) '"' { string.Join("", r) }
 singleQuotedReference <string> = "'" r:([^']+) "'" { string.Join("", r) }
-PUSH_INDENTATION = spaces:" "* &{ spaces.Count > state["IndentationStack"].Peek() } #{ state["IndentationStack"].Push(spaces.Count); }
+SET_BASE_INDENTATION = spaces:" "* #{ if (state["BaseIndentation"] == null) { state["BaseIndentation"] = spaces.Count; } }
+PUSH_INDENTATION = spaces:" "* &{ int baseInd = state["BaseIndentation"] != null ? (int)state["BaseIndentation"] : 0; int normalized = Math.Max(0, spaces.Count - baseInd); return normalized > state["IndentationStack"].Peek(); } #{ int baseInd = state["BaseIndentation"] != null ? (int)state["BaseIndentation"] : 0; int normalized = Math.Max(0, spaces.Count - baseInd); state["IndentationStack"].Push(normalized); }
 POP_INDENTATION = #{ state["IndentationStack"].Pop(); }
-CHECK_INDENTATION = spaces:" "* &{ spaces.Count >= state["IndentationStack"].Peek() }
+CHECK_INDENTATION = spaces:" "* &{ int baseInd = state["BaseIndentation"] != null ? (int)state["BaseIndentation"] : 0; int normalized = Math.Max(0, spaces.Count - baseInd); return normalized >= state["IndentationStack"].Peek(); }
 eol = __ ("" [\r\n]+ / eof)
 eof = !.
 __ = [ \t]*
