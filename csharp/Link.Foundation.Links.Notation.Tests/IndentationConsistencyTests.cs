@@ -28,8 +28,8 @@ TELEGRAM_HIVE_OVERRIDES:
   --once
 TELEGRAM_BOT_VERBOSE: true";
 
-            var resultWith = Parser.Parse(withLeading);
-            var resultWithout = Parser.Parse(withoutLeading);
+            var resultWith = new Parser().Parse(withLeading);
+            var resultWithout = new Parser().Parse(withoutLeading);
 
             // Both should produce the same number of links
             Assert.Equal(resultWithout.Count, resultWith.Count);
@@ -54,8 +54,8 @@ TELEGRAM_BOT_VERBOSE: true";
     child1
     child2";
 
-            var resultTwo = Parser.Parse(twoSpaces);
-            var resultFour = Parser.Parse(fourSpaces);
+            var resultTwo = new Parser().Parse(twoSpaces);
+            var resultFour = new Parser().Parse(fourSpaces);
 
             Assert.Equal(resultFour.Count, resultTwo.Count);
             Assert.Equal(resultFour[0].ToString(), resultTwo[0].ToString());
@@ -78,8 +78,8 @@ TELEGRAM_BOT_VERBOSE: true";
         level3b
     level2b";
 
-            var resultTwo = Parser.Parse(twoSpaces);
-            var resultFour = Parser.Parse(fourSpaces);
+            var resultTwo = new Parser().Parse(twoSpaces);
+            var resultFour = new Parser().Parse(fourSpaces);
 
             Assert.Equal(resultFour.Count, resultTwo.Count);
 

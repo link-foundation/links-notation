@@ -26,6 +26,7 @@ class Parser:
         self.pos = 0
         self.text = ""
         self.lines = []
+        self.base_indentation = None
 
     def parse(self, input_text: str) -> List[Link]:
         """
@@ -48,6 +49,7 @@ class Parser:
             self.lines = input_text.split('\n')
             self.pos = 0
             self.indentation_stack = [0]
+            self.base_indentation = None
 
             raw_result = self._parse_document()
             return self._transform_result(raw_result)
@@ -76,7 +78,14 @@ class Parser:
             return None
 
         line = self.lines[self.pos]
-        indent = len(line) - len(line.lstrip(' '))
+        raw_indent = len(line) - len(line.lstrip(' '))
+
+        # Set base indentation from first content line
+        if self.base_indentation is None and line.strip():
+            self.base_indentation = raw_indent
+
+        # Normalize indentation relative to base
+        indent = max(0, raw_indent - (self.base_indentation or 0))
 
         if indent < current_indent:
             return None
@@ -97,7 +106,9 @@ class Parser:
 
         while self.pos < len(self.lines):
             next_line = self.lines[self.pos]
-            next_indent = len(next_line) - len(next_line.lstrip(' '))
+            raw_next_indent = len(next_line) - len(next_line.lstrip(' '))
+            # Normalize next line's indentation
+            next_indent = max(0, raw_next_indent - (self.base_indentation or 0))
 
             if next_line.strip() and next_indent > indent:
                 # This is a child

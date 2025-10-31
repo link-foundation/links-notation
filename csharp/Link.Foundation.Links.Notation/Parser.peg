@@ -1,7 +1,7 @@
 @namespace Link.Foundation.Links.Notation
 @classname Parser
 @using System.Linq
-document <IList<Link<string>>> = #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = null; } skipEmptyLines l:links _ eof { l.ToLinksList() } / #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = null; } _ eof { new List<Link<string>>() }
+document <IList<Link<string>>> = #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = -1; } skipEmptyLines l:links _ eof { l.ToLinksList() } / #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = -1; } _ eof { new List<Link<string>>() }
 skipEmptyLines = ([ \t]* [\r\n])*
 links <IList<LinksGroup<string>>> = fl:firstLine list:line* POP_INDENTATION { new List<LinksGroup<string>> { fl }.Concat(list).ToList() }
 firstLine <LinksGroup<string>> = SET_BASE_INDENTATION l:element { l }
@@ -25,10 +25,10 @@ reference <string> = doubleQuotedReference / singleQuotedReference / simpleRefer
 simpleReference <string> = "" referenceSymbol+
 doubleQuotedReference <string> = '"' r:([^"]+) '"' { string.Join("", r) }
 singleQuotedReference <string> = "'" r:([^']+) "'" { string.Join("", r) }
-SET_BASE_INDENTATION = spaces:" "* #{ if (state["BaseIndentation"] == null) { state["BaseIndentation"] = spaces.Count; } }
-PUSH_INDENTATION = spaces:" "* &{ int baseInd = state["BaseIndentation"] != null ? (int)state["BaseIndentation"] : 0; int normalized = Math.Max(0, spaces.Count - baseInd); return normalized > state["IndentationStack"].Peek(); } #{ int baseInd = state["BaseIndentation"] != null ? (int)state["BaseIndentation"] : 0; int normalized = Math.Max(0, spaces.Count - baseInd); state["IndentationStack"].Push(normalized); }
+SET_BASE_INDENTATION = spaces:" "* #{ if ((int)state["BaseIndentation"] == -1) state["BaseIndentation"] = spaces.Count; }
+PUSH_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] > (int)state["IndentationStack"].Peek() } #{ state["IndentationStack"].Push((int)state["NormalizedIndent"]); }
 POP_INDENTATION = #{ state["IndentationStack"].Pop(); }
-CHECK_INDENTATION = spaces:" "* &{ int baseInd = state["BaseIndentation"] != null ? (int)state["BaseIndentation"] : 0; int normalized = Math.Max(0, spaces.Count - baseInd); return normalized >= state["IndentationStack"].Peek(); }
+CHECK_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] >= (int)state["IndentationStack"].Peek() }
 eol = __ ("" [\r\n]+ / eof)
 eof = !.
 __ = [ \t]*
