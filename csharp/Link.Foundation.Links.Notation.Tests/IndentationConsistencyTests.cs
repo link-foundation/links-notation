@@ -31,14 +31,8 @@ TELEGRAM_BOT_VERBOSE: true";
             var resultWith = new Parser().Parse(withLeading);
             var resultWithout = new Parser().Parse(withoutLeading);
 
-            // Both should produce the same number of links
-            Assert.Equal(resultWithout.Count, resultWith.Count);
-
-            // Both should have the same structure when formatted
-            for (int i = 0; i < resultWith.Count; i++)
-            {
-                Assert.Equal(resultWithout[i].ToString(), resultWith[i].ToString());
-            }
+            // Compare the entire formatted output (complete round trip test)
+            Assert.Equal(resultWithout.Format(), resultWith.Format());
         }
 
         [Fact]
@@ -57,8 +51,8 @@ TELEGRAM_BOT_VERBOSE: true";
             var resultTwo = new Parser().Parse(twoSpaces);
             var resultFour = new Parser().Parse(fourSpaces);
 
-            Assert.Equal(resultFour.Count, resultTwo.Count);
-            Assert.Equal(resultFour[0].ToString(), resultTwo[0].ToString());
+            // Compare the entire formatted output (complete round trip test)
+            Assert.Equal(resultFour.Format(), resultTwo.Format());
         }
 
         [Fact]
@@ -81,12 +75,8 @@ TELEGRAM_BOT_VERBOSE: true";
             var resultTwo = new Parser().Parse(twoSpaces);
             var resultFour = new Parser().Parse(fourSpaces);
 
-            Assert.Equal(resultFour.Count, resultTwo.Count);
-
-            for (int i = 0; i < resultTwo.Count; i++)
-            {
-                Assert.Equal(resultFour[i].ToString(), resultTwo[i].ToString());
-            }
+            // Compare the entire formatted output (complete round trip test)
+            Assert.Equal(resultFour.Format(), resultTwo.Format());
         }
     }
 }

@@ -1,4 +1,5 @@
 import { Parser } from '../src/Parser.js';
+import { formatLinks } from '../src/Link.js';
 
 describe('Indentation Consistency Tests (Issue #135)', () => {
   let parser;
@@ -31,13 +32,8 @@ TELEGRAM_BOT_VERBOSE: true`;
     const resultWith = parser.parse(withLeading);
     const resultWithout = parser.parse(withoutLeading);
 
-    // Both should produce the same number of links
-    expect(resultWith.length).toBe(resultWithout.length);
-
-    // Both should have the same structure when formatted
-    for (let i = 0; i < resultWith.length; i++) {
-      expect(resultWith[i].toString()).toBe(resultWithout[i].toString());
-    }
+    // Compare the entire formatted output (complete round trip test)
+    expect(formatLinks(resultWith)).toBe(formatLinks(resultWithout));
   });
 
   test('simple two vs four spaces indentation', () => {
@@ -54,8 +50,8 @@ TELEGRAM_BOT_VERBOSE: true`;
     const resultTwo = parser.parse(twoSpaces);
     const resultFour = parser.parse(fourSpaces);
 
-    expect(resultTwo.length).toBe(resultFour.length);
-    expect(resultTwo[0].toString()).toBe(resultFour[0].toString());
+    // Compare the entire formatted output (complete round trip test)
+    expect(formatLinks(resultTwo)).toBe(formatLinks(resultFour));
   });
 
   test('three level nesting with different indentation', () => {
@@ -76,10 +72,7 @@ TELEGRAM_BOT_VERBOSE: true`;
     const resultTwo = parser.parse(twoSpaces);
     const resultFour = parser.parse(fourSpaces);
 
-    expect(resultTwo.length).toBe(resultFour.length);
-
-    for (let i = 0; i < resultTwo.length; i++) {
-      expect(resultTwo[i].toString()).toBe(resultFour[i].toString());
-    }
+    // Compare the entire formatted output (complete round trip test)
+    expect(formatLinks(resultTwo)).toBe(formatLinks(resultFour));
   });
 });

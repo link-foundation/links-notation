@@ -1,6 +1,6 @@
 """Tests for indentation consistency (issue #135)."""
 
-from links_notation import Parser
+from links_notation import Parser, format_links
 
 
 def test_leading_spaces_vs_no_leading_spaces():
@@ -30,12 +30,8 @@ TELEGRAM_BOT_VERBOSE: true"""
     result_with = parser.parse(with_leading)
     result_without = parser.parse(without_leading)
 
-    # Both should produce the same number of links
-    assert len(result_with) == len(result_without)
-
-    # Both should have the same structure when formatted
-    for i in range(len(result_with)):
-        assert str(result_with[i]) == str(result_without[i])
+    # Compare the entire formatted output (complete round trip test)
+    assert format_links(result_with) == format_links(result_without)
 
 
 def test_simple_two_vs_four_spaces_indentation():
@@ -55,8 +51,8 @@ def test_simple_two_vs_four_spaces_indentation():
     result_two = parser.parse(two_spaces)
     result_four = parser.parse(four_spaces)
 
-    assert len(result_two) == len(result_four)
-    assert str(result_two[0]) == str(result_four[0])
+    # Compare the entire formatted output (complete round trip test)
+    assert format_links(result_two) == format_links(result_four)
 
 
 def test_three_level_nesting_with_different_indentation():
@@ -80,7 +76,5 @@ def test_three_level_nesting_with_different_indentation():
     result_two = parser.parse(two_spaces)
     result_four = parser.parse(four_spaces)
 
-    assert len(result_two) == len(result_four)
-
-    for i in range(len(result_two)):
-        assert str(result_two[i]) == str(result_four[i])
+    # Compare the entire formatted output (complete round trip test)
+    assert format_links(result_two) == format_links(result_four)

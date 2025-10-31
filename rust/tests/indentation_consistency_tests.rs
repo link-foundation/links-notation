@@ -1,4 +1,4 @@
-use links_notation::parse_lino_to_links;
+use links_notation::{parse_lino_to_links, format_links};
 
 #[cfg(test)]
 mod tests {
@@ -21,24 +21,12 @@ mod tests {
         let links_with = result_with.unwrap();
         let links_without = result_without.unwrap();
 
-        // Both should produce the same number of links
+        // Compare the entire formatted output (complete round trip test)
         assert_eq!(
-            links_with.len(),
-            links_without.len(),
-            "Both indentation styles should produce the same number of links. With leading: {}, Without: {}",
-            links_with.len(),
-            links_without.len()
+            format_links(&links_with),
+            format_links(&links_without),
+            "Both indentation styles should produce identical formatted output"
         );
-
-        // Both should have the same structure when formatted
-        for (i, (link_with, link_without)) in links_with.iter().zip(links_without.iter()).enumerate() {
-            assert_eq!(
-                format!("{}", link_with),
-                format!("{}", link_without),
-                "Link {} should be identical regardless of leading indentation. With: {:?}, Without: {:?}",
-                i, link_with, link_without
-            );
-        }
     }
 
     #[test]
@@ -58,22 +46,12 @@ mod tests {
         let links_two = result_two.unwrap();
         let links_four = result_four.unwrap();
 
-        // Both should produce the same number of links
+        // Compare the entire formatted output (complete round trip test)
         assert_eq!(
-            links_two.len(),
-            links_four.len(),
-            "Both indentation styles should produce the same number of links"
+            format_links(&links_two),
+            format_links(&links_four),
+            "Both indentation styles should produce identical formatted output"
         );
-
-        // Both should have the same structure when formatted
-        for (i, (link_two, link_four)) in links_two.iter().zip(links_four.iter()).enumerate() {
-            assert_eq!(
-                format!("{}", link_two),
-                format!("{}", link_four),
-                "Link {} should be identical regardless of indentation style",
-                i
-            );
-        }
     }
 
     #[test]
@@ -93,8 +71,12 @@ mod tests {
         let links_two = result_two.unwrap();
         let links_four = result_four.unwrap();
 
-        assert_eq!(links_two.len(), links_four.len());
-        assert_eq!(format!("{}", links_two[0]), format!("{}", links_four[0]));
+        // Compare the entire formatted output (complete round trip test)
+        assert_eq!(
+            format_links(&links_two),
+            format_links(&links_four),
+            "Both indentation styles should produce identical formatted output"
+        );
     }
 
     #[test]
@@ -114,15 +96,11 @@ mod tests {
         let links_two = result_two.unwrap();
         let links_four = result_four.unwrap();
 
-        assert_eq!(links_two.len(), links_four.len());
-
-        for (i, (link_two, link_four)) in links_two.iter().zip(links_four.iter()).enumerate() {
-            assert_eq!(
-                format!("{}", link_two),
-                format!("{}", link_four),
-                "Link {} should be identical",
-                i
-            );
-        }
+        // Compare the entire formatted output (complete round trip test)
+        assert_eq!(
+            format_links(&links_two),
+            format_links(&links_four),
+            "Both indentation styles should produce identical formatted output"
+        );
     }
 }
