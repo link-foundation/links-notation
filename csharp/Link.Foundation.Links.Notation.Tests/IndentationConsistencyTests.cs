@@ -36,6 +36,58 @@ TELEGRAM_BOT_VERBOSE: true";
         }
 
         [Fact]
+        public void TwoSpacesVsFourSpacesIndentation()
+        {
+            // Example with 2 spaces per level
+            var twoSpaces = @"TELEGRAM_BOT_TOKEN: '849...355:AAG...rgk_YZk...aPU'
+TELEGRAM_ALLOWED_CHATS:
+  -1002975819706
+  -1002861722681
+TELEGRAM_HIVE_OVERRIDES:
+  --all-issues
+  --once
+  --auto-fork
+  --skip-issues-with-prs
+  --attach-logs
+  --verbose
+  --no-tool-check
+TELEGRAM_SOLVE_OVERRIDES:
+  --auto-fork
+  --auto-continue
+  --attach-logs
+  --verbose
+  --no-tool-check
+TELEGRAM_BOT_VERBOSE: true";
+
+            // Example with 4 spaces per level
+            var fourSpaces = @"TELEGRAM_BOT_TOKEN: '849...355:AAG...rgk_YZk...aPU'
+TELEGRAM_ALLOWED_CHATS:
+    -1002975819706
+    -1002861722681
+TELEGRAM_HIVE_OVERRIDES:
+    --all-issues
+    --once
+    --auto-fork
+    --skip-issues-with-prs
+    --attach-logs
+    --verbose
+    --no-tool-check
+TELEGRAM_SOLVE_OVERRIDES:
+    --auto-fork
+    --auto-continue
+    --attach-logs
+    --verbose
+    --no-tool-check
+TELEGRAM_BOT_VERBOSE: true";
+
+            var resultTwo = new Parser().Parse(twoSpaces);
+            var resultFour = new Parser().Parse(fourSpaces);
+
+            // Compare the entire formatted output (complete round trip test)
+            Assert.Equal(resultFour.Format(), resultTwo.Format());
+        }
+
+        [Fact]
         public void SimpleTwoVsFourSpacesIndentation()
         {
             // Simple example with 2 spaces

@@ -36,6 +36,56 @@ TELEGRAM_BOT_VERBOSE: true`;
     expect(formatLinks(resultWith)).toBe(formatLinks(resultWithout));
   });
 
+  test('two spaces vs four spaces indentation', () => {
+    // Example with 2 spaces per level
+    const twoSpaces = `TELEGRAM_BOT_TOKEN: '849...355:AAG...rgk_YZk...aPU'
+TELEGRAM_ALLOWED_CHATS:
+  -1002975819706
+  -1002861722681
+TELEGRAM_HIVE_OVERRIDES:
+  --all-issues
+  --once
+  --auto-fork
+  --skip-issues-with-prs
+  --attach-logs
+  --verbose
+  --no-tool-check
+TELEGRAM_SOLVE_OVERRIDES:
+  --auto-fork
+  --auto-continue
+  --attach-logs
+  --verbose
+  --no-tool-check
+TELEGRAM_BOT_VERBOSE: true`;
+
+    // Example with 4 spaces per level
+    const fourSpaces = `TELEGRAM_BOT_TOKEN: '849...355:AAG...rgk_YZk...aPU'
+TELEGRAM_ALLOWED_CHATS:
+    -1002975819706
+    -1002861722681
+TELEGRAM_HIVE_OVERRIDES:
+    --all-issues
+    --once
+    --auto-fork
+    --skip-issues-with-prs
+    --attach-logs
+    --verbose
+    --no-tool-check
+TELEGRAM_SOLVE_OVERRIDES:
+    --auto-fork
+    --auto-continue
+    --attach-logs
+    --verbose
+    --no-tool-check
+TELEGRAM_BOT_VERBOSE: true`;
+
+    const resultTwo = parser.parse(twoSpaces);
+    const resultFour = parser.parse(fourSpaces);
+
+    // Compare the entire formatted output (complete round trip test)
+    expect(formatLinks(resultTwo)).toBe(formatLinks(resultFour));
+  });
+
   test('simple two vs four spaces indentation', () => {
     // Simple example with 2 spaces
     const twoSpaces = `parent:
