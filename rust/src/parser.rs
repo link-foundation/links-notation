@@ -63,12 +63,34 @@ impl Link {
 
 pub struct ParserState {
     indentation_stack: RefCell<Vec<usize>>,
+    base_indentation: RefCell<Option<usize>>,
 }
 
 impl ParserState {
     pub fn new() -> Self {
         ParserState {
             indentation_stack: RefCell::new(vec![0]),
+            base_indentation: RefCell::new(None),
+        }
+    }
+
+    pub fn set_base_indentation(&self, indent: usize) {
+        let mut base = self.base_indentation.borrow_mut();
+        if base.is_none() {
+            *base = Some(indent);
+        }
+    }
+
+    pub fn get_base_indentation(&self) -> usize {
+        self.base_indentation.borrow().unwrap_or(0)
+    }
+
+    pub fn normalize_indentation(&self, indent: usize) -> usize {
+        let base = self.get_base_indentation();
+        if indent >= base {
+            indent - base
+        } else {
+            0
         }
     }
 
@@ -280,10 +302,11 @@ fn count_indentation(input: &str) -> IResult<&str, usize> {
 
 fn push_indentation<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, ()> {
     let (input, spaces) = count_indentation(input)?;
+    let normalized_spaces = state.normalize_indentation(spaces);
     let current = state.current_indentation();
-    
-    if spaces > current {
-        state.push_indentation(spaces);
+
+    if normalized_spaces > current {
+        state.push_indentation(normalized_spaces);
         Ok((input, ()))
     } else {
         Err(nom::Err::Error(nom::error::Error::new(input, nom::error::ErrorKind::Verify)))
@@ -292,8 +315,9 @@ fn push_indentation<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str,
 
 fn check_indentation<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, ()> {
     let (input, spaces) = count_indentation(input)?;
-    
-    if state.check_indentation(spaces) {
+    let normalized_spaces = state.normalize_indentation(spaces);
+
+    if state.check_indentation(normalized_spaces) {
         Ok((input, ()))
     } else {
         Err(nom::Err::Error(nom::error::Error::new(input, nom::error::ErrorKind::Verify)))
@@ -312,6 +336,9 @@ fn element<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
 }
 
 fn first_line<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
+    // Set base indentation from the first line
+    let (_, spaces) = count_indentation(input)?;
+    state.set_base_indentation(spaces);
     element(input, state)
 }
 
@@ -335,19 +362,19 @@ fn links<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>>
 
 pub fn parse_document(input: &str) -> IResult<&str, Vec<Link>> {
     let state = ParserState::new();
-    
+
     // Skip leading whitespace but preserve the line structure
     let input = input.trim_start_matches(|c: char| c == '\n' || c == '\r');
-    
+
     // Handle empty or whitespace-only documents
     if input.trim().is_empty() {
         return Ok(("", vec![]));
     }
-    
+
     let (input, result) = links(input, &state)?;
     let (input, _) = whitespace(input)?;
     let (input, _) = eof(input)?;
-    
+
     Ok((input, result))
 }
 

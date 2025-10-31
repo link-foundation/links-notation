@@ -1,31 +1,49 @@
 {
   let indentationStack = [0];
-  
-  function pushIndentation(spaces) {
-    indentationStack.push(spaces.length);
+  let baseIndentation = null;
+
+  function setBaseIndentation(spaces) {
+    if (baseIndentation === null) {
+      baseIndentation = spaces.length;
+    }
   }
-  
+
+  function normalizeIndentation(spaces) {
+    if (baseIndentation === null) {
+      return spaces.length;
+    }
+    return Math.max(0, spaces.length - baseIndentation);
+  }
+
+  function pushIndentation(spaces) {
+    const normalized = normalizeIndentation(spaces);
+    indentationStack.push(normalized);
+  }
+
   function popIndentation() {
     if (indentationStack.length > 1) {
       indentationStack.pop();
     }
   }
-  
+
   function checkIndentation(spaces) {
-    return spaces.length >= indentationStack[indentationStack.length - 1];
+    const normalized = normalizeIndentation(spaces);
+    return normalized >= indentationStack[indentationStack.length - 1];
   }
-  
+
   function getCurrentIndentation() {
     return indentationStack[indentationStack.length - 1];
   }
 }
 
-document = _ links:links eof { return links; }
-  / _ eof { return []; }
+document = &{ indentationStack = [0]; baseIndentation = null; return true; } skipEmptyLines links:links _ eof { return links; }
+  / &{ indentationStack = [0]; baseIndentation = null; return true; } _ eof { return []; }
+
+skipEmptyLines = ([ \t]* [\r\n])*
 
 links = fl:firstLine list:line* { popIndentation(); return [fl].concat(list || []); }
 
-firstLine = l:element { return l; }
+firstLine = SET_BASE_INDENTATION l:element { return l; }
 
 line = CHECK_INDENTATION l:element { return l; }
 
@@ -69,7 +87,9 @@ doubleQuotedReference = '"' r:[^"]+ '"' { return r.join(''); }
 
 singleQuotedReference = "'" r:[^']+ "'" { return r.join(''); }
 
-PUSH_INDENTATION = spaces:" "* &{ return spaces.length > getCurrentIndentation(); } { pushIndentation(spaces); }
+SET_BASE_INDENTATION = spaces:" "* { setBaseIndentation(spaces); }
+
+PUSH_INDENTATION = spaces:" "* &{ return normalizeIndentation(spaces) > getCurrentIndentation(); } { pushIndentation(spaces); }
 
 CHECK_INDENTATION = spaces:" "* &{ return checkIndentation(spaces); }
 

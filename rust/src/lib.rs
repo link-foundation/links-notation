@@ -200,7 +200,7 @@ pub fn parse_lino_to_links(document: &str) -> Result<Vec<LiNo<String>>, String> 
     if document.trim().is_empty() {
         return Ok(vec![]);
     }
-    
+
     match parser::parse_document(document) {
         Ok((_, links)) => {
             if links.is_empty() {
@@ -213,5 +213,14 @@ pub fn parse_lino_to_links(document: &str) -> Result<Vec<LiNo<String>>, String> 
         }
         Err(e) => Err(format!("Parse error: {:?}", e))
     }
+}
+
+/// Formats a collection of LiNo links as a multi-line string.
+/// Each link is formatted on a separate line.
+pub fn format_links(links: &[LiNo<String>]) -> String {
+    links.iter()
+        .map(|link| format!("{}", link))
+        .collect::<Vec<_>>()
+        .join("\n")
 }
 
