@@ -333,5 +333,6 @@ ASALocalRun/
 .DS_Store
 
 # rust
+rust/target/
 target/venv/
 .venv/
