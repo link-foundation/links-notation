@@ -1,0 +1,75 @@
+====================================================================================================
+DETAILED TEST COVERAGE COMPARISON MATRIX
+====================================================================================================
+
+SUMMARY BY CATEGORY:
+----------------------------------------------------------------------------------------------------
+Category                            Python       JavaScript   C#           Rust        
+----------------------------------------------------------------------------------------------------
+api                                   8            8            -            8         
+edge_case_parser                      -            9            -            9         
+indentation_consistency               4            4            4            4         
+indented_id_syntax                    -           11            -            6         
+link                                 10           10            -           10         
+links_group                           -            3            -            3         
+mixed_indentation_modes               -            8            -            8         
+multiline_parser                      -           11            -           11         
+multiline_quoted_string               -            4            -            4         
+nested_parser                         -           10            -           10         
+single_line_parser                   27           29            -           29         
+tuple                                 -            -            2            -         
+----------------------------------------------------------------------------------------------------
+TOTAL                               49           107          6            102         
+
+
+====================================================================================================
+MISSING TESTS BY LANGUAGE
+====================================================================================================
+
+PYTHON:
+----------------------------------------------------------------------------------------------------
+  - edge_case_parser                    (available in: JAVASCRIPT, RUST)
+  - indented_id_syntax                  (available in: JAVASCRIPT, RUST)
+  - links_group                         (available in: JAVASCRIPT, RUST)
+  - mixed_indentation_modes             (available in: JAVASCRIPT, RUST)
+  - multiline_parser                    (available in: JAVASCRIPT, RUST)
+  - multiline_quoted_string             (available in: JAVASCRIPT, RUST)
+  - nested_parser                       (available in: JAVASCRIPT, RUST)
+  - tuple                               (available in: CSHARP)
+
+JAVASCRIPT:
+----------------------------------------------------------------------------------------------------
+  - tuple                               (available in: CSHARP)
+
+CSHARP:
+----------------------------------------------------------------------------------------------------
+  - api                                 (available in: PYTHON, JAVASCRIPT, RUST)
+  - edge_case_parser                    (available in: JAVASCRIPT, RUST)
+  - indented_id_syntax                  (available in: JAVASCRIPT, RUST)
+  - link                                (available in: PYTHON, JAVASCRIPT, RUST)
+  - links_group                         (available in: JAVASCRIPT, RUST)
+  - mixed_indentation_modes             (available in: JAVASCRIPT, RUST)
+  - multiline_parser                    (available in: JAVASCRIPT, RUST)
+  - multiline_quoted_string             (available in: JAVASCRIPT, RUST)
+  - nested_parser                       (available in: JAVASCRIPT, RUST)
+  - single_line_parser                  (available in: PYTHON, JAVASCRIPT, RUST)
+
+RUST:
+----------------------------------------------------------------------------------------------------
+  - tuple                               (available in: CSHARP)
+
+====================================================================================================
+TEST COUNT DISCREPANCIES (Same category, different test counts)
+====================================================================================================
+
+indented_id_syntax:
+    javascript:  11 tests
+          rust:   6 tests
+
+single_line_parser:
+    javascript:  29 tests
+        python:  27 tests
+          rust:  29 tests
+
+
+Detailed missing tests report saved to: /tmp/gh-issue-solver-1762060803665/experiments/missing_tests_report.json
