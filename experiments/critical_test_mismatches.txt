@@ -1,0 +1,37 @@
+CRITICAL TEST NAME MISMATCHES TO FIX
+=====================================
+
+Based on the TEST_CASE_COMPARISON.md, here are the critical mismatches where
+tests clearly test the same thing but have different names:
+
+1. Indented ID Syntax Category
+   - JavaScript has extra spaces: "indented  i d" vs Python/Rust/C#: "indented id"
+   - This appears to be a bug in JavaScript test naming (double spaces)
+   
+2. Nested Parser Category  
+   - "indentation (parser)" (JS) vs "indentation parser" (C#) vs "indentation" (Python/Rust)
+   - "nested indentation" vs "nested indentation (parser)" vs "nested indentation parser"
+   
+3. API Category
+   - Test names are well aligned already!
+
+4. Mixed Indentation Modes
+   - JavaScript has "issue #105" in test names, others don't
+   - "sequence/list context" (JS) vs "sequence context" (others)
+   - "set/object context" (JS) vs "set context" (others)
+
+5. Link Category
+   - "link to string" vs "link tostring" (just casing/spacing)
+   - "link escape reference for simple reference" vs "link escape reference simple"
+
+6. Multiline Parser  
+   - "parse and stringify 2" vs "parse and stringify test2" vs "parse and stringify test 2"
+   - Just need consistent naming for this one test
+
+RECOMMENDATIONS:
+- Fix JavaScript test names with double spaces in "indented  i d"
+- Standardize "indentation (parser)" → "indentation parser" (remove parentheses)
+- Standardize "parse and stringify test 2" variations to single name
+- Consider renaming "issue #105" tests to remove issue numbers from names
+
+Most of these are in JavaScript tests. Let's prioritize fixing the most obvious issues.

@@ -193,13 +193,11 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 |-----------|--------|------------|------|----|
 | complex indentation | ✅ | ✅ | ✅ | ✅ |
 | indentation | ✅ | ❌ | ✅ | ❌ |
-| indentation (parser) | ❌ | ✅ | ❌ | ❌ |
 | indentation based children | ✅ | ✅ | ✅ | ✅ |
 | indentation consistency | ✅ | ✅ | ✅ | ✅ |
-| indentation parser | ❌ | ❌ | ❌ | ✅ |
+| indentation parser | ❌ | ✅ | ❌ | ✅ |
 | nested indentation | ✅ | ❌ | ✅ | ❌ |
-| nested indentation (parser) | ❌ | ✅ | ❌ | ❌ |
-| nested indentation parser | ❌ | ❌ | ❌ | ✅ |
+| nested indentation parser | ❌ | ✅ | ❌ | ✅ |
 | nested links | ✅ | ✅ | ✅ | ✅ |
 | parse nested structure with indentation | ✅ | ✅ | ✅ | ✅ |
 | significant whitespace | ✅ | ✅ | ✅ | ✅ |
@@ -340,10 +338,8 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - simple multiline double quoted
 - simple multiline single quoted
 
-**Nested Parser** (4 missing):
-- indentation (parser)
+**Nested Parser** (2 missing):
 - indentation parser
-- nested indentation (parser)
 - nested indentation parser
 
 **Single Line Parser** (19 missing):
@@ -371,7 +367,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - named tuple to link
 - tuple to link
 
-**Total missing: 71 tests**
+**Total missing: 69 tests**
 
 ### JavaScript Missing Tests
 
@@ -424,11 +420,9 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - parse and stringify 2
 - parse and stringify test 2
 
-**Nested Parser** (4 missing):
+**Nested Parser** (2 missing):
 - indentation
-- indentation parser
 - nested indentation
-- nested indentation parser
 
 **Single Line Parser** (20 missing):
 - bug1
@@ -456,7 +450,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - named tuple to link
 - tuple to link
 
-**Total missing: 61 tests**
+**Total missing: 59 tests**
 
 ### Rust Missing Tests
 
@@ -509,10 +503,8 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - parse and stringify 2
 - parse and stringify test2
 
-**Nested Parser** (4 missing):
-- indentation (parser)
+**Nested Parser** (2 missing):
 - indentation parser
-- nested indentation (parser)
 - nested indentation parser
 
 **Single Line Parser** (20 missing):
@@ -541,7 +533,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - named tuple to link
 - tuple to link
 
-**Total missing: 61 tests**
+**Total missing: 59 tests**
 
 ### C# Missing Tests
 
@@ -594,11 +586,9 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - parse and stringify 2
 - parse and stringify test 2
 
-**Nested Parser** (4 missing):
+**Nested Parser** (2 missing):
 - indentation
-- indentation (parser)
 - nested indentation
-- nested indentation (parser)
 
 **Single Line Parser** (19 missing):
 - bug1
@@ -621,5 +611,5 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - singlet link (parser)
 - value link (parser)
 
-**Total missing: 58 tests**
+**Total missing: 56 tests**
 
