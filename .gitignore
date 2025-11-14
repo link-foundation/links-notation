@@ -336,3 +336,4 @@ ASALocalRun/
 rust/target/
 target/venv/
 .venv/
+venv/
