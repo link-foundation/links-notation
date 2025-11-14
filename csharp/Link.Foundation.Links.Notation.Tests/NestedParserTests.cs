@@ -113,7 +113,7 @@ users
         }
 
         [Fact]
-        public static void TestIndentationConsistencyTest()
+        public static void IndentationConsistencyTest()
         {
             // Test that indentation must be consistent
             var input = @"parent
@@ -158,7 +158,7 @@ users
         }
 
         [Fact]
-        public static void TestNestedLinksTest()
+        public static void NestedLinksTest()
         {
             var input = "(1: (2: (3: 3)))";
             var parser = new Parser();
@@ -174,7 +174,7 @@ users
         }
 
         [Fact]
-        public static void TestIndentationParserTest()
+        public static void IndentationParserTest()
         {
             var input = "parent\n  child1\n  child2";
             var parser = new Parser();
@@ -185,7 +185,7 @@ users
         }
 
         [Fact]
-        public static void TestNestedIndentationParserTest()
+        public static void NestedIndentationParserTest()
         {
             var input = "parent\n  child\n    grandchild";
             var parser = new Parser();

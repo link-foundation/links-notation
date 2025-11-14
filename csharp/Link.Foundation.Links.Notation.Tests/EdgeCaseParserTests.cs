@@ -35,7 +35,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestAllFeaturesTest()
+        public static void AllFeaturesTest()
         {
             // Test single-line link with id
             var input = "id: value1 value2";
@@ -143,7 +143,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestEmptyDocumentTest()
+        public static void EmptyDocumentTest()
         {
             var input = "";
             // Empty document should return empty list
@@ -152,7 +152,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestWhitespaceOnlyTest()
+        public static void WhitespaceOnlyTest()
         {
             var input = "   \n   \n   ";
             // Whitespace-only document should return empty list (similar to empty document)
@@ -161,7 +161,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestEmptyLinksTest()
+        public static void EmptyLinksTest()
         {
             var input = "()";
             var result = new Parser().Parse(input);
@@ -177,7 +177,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestInvalidInputTest()
+        public static void InvalidInputTest()
         {
             var input = "(invalid";
             // Unclosed parentheses should throw an exception

@@ -1,0 +1,29 @@
+DOUBLE "TEST" SUFFIX ANALYSIS
+==============================
+
+JavaScript (js/tests/EdgeCaseParser.test.js):
+- TestAllFeaturesTest → AllFeaturesTest
+- TestEmptyDocumentTest → EmptyDocumentTest
+- TestWhitespaceOnlyTest → WhitespaceOnlyTest
+- TestEmptyLinksTest → EmptyLinksTest
+- TestSingletLinksTest → SingletLinksTest
+- TestInvalidInputTest → InvalidInputTest
+
+C# (csharp/.../EdgeCaseParserTests.cs):
+- TestAllFeaturesTest → AllFeaturesTest
+- TestEmptyDocumentTest → EmptyDocumentTest
+- TestWhitespaceOnlyTest → WhitespaceOnlyTest
+- TestEmptyLinksTest → EmptyLinksTest
+- TestInvalidInputTest → InvalidInputTest
+
+C# (csharp/.../ApiTests.cs):
+- TestIsRefEquivalentTest → IsRefEquivalentTest
+- TestIsLinkEquivalentTest → IsLinkEquivalentTest
+- TestEmptyLinkTest → EmptyLinkTest
+- TestSimpleLinkTest → SimpleLinkTest
+- TestLinkWithSourceTargetTest → LinkWithSourceTargetTest
+- TestLinkWithSourceTypeTargetTest → LinkWithSourceTypeTargetTest
+- TestSingleLineFormatTest → SingleLineFormatTest
+- TestQuotedReferencesTest → QuotedReferencesTest
+
+TOTAL: ~20 renames needed in JS and C#
