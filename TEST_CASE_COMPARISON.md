@@ -17,7 +17,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | Python     | 96 | 9 |
 | JavaScript | 107 | 11 |
 | Rust       | 107 | 11 |
-| C#         | 6 | 2 |
+| C#         | 109 | 12 |
 
 ---
 
@@ -25,50 +25,34 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| empty link | ✅ | ✅ | ✅ | ❌ |
+| empty link | ✅ | ✅ | ✅ | ✅ |
 | is link | ❌ | ❌ | ✅ | ❌ |
-| is link equivalent | ✅ | ✅ | ❌ | ❌ |
+| is link equivalent | ✅ | ✅ | ❌ | ✅ |
 | is ref | ❌ | ❌ | ✅ | ❌ |
-| is ref equivalent | ✅ | ✅ | ❌ | ❌ |
-| link with source target | ✅ | ✅ | ✅ | ❌ |
-| link with source type target | ✅ | ✅ | ✅ | ❌ |
-| quoted references | ✅ | ✅ | ✅ | ❌ |
-| simple link | ✅ | ✅ | ✅ | ❌ |
-| single line format | ✅ | ✅ | ✅ | ❌ |
+| is ref equivalent | ✅ | ✅ | ❌ | ✅ |
+| link with source target | ✅ | ✅ | ✅ | ✅ |
+| link with source type target | ✅ | ✅ | ✅ | ✅ |
+| quoted references | ✅ | ✅ | ✅ | ✅ |
+| simple link | ✅ | ✅ | ✅ | ✅ |
+| single line format | ✅ | ✅ | ✅ | ✅ |
 
-**Category totals:** Python: 8, JavaScript: 8, Rust: 8, C#: 0
+**Category totals:** Python: 8, JavaScript: 8, Rust: 8, C#: 8
 
 ## Edge Case Parser
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| all features | ✅ | ❌ | ❌ | ❌ |
-| all features test | ❌ | ❌ | ✅ | ❌ |
-| empty document | ✅ | ❌ | ❌ | ❌ |
-| empty document test | ❌ | ❌ | ✅ | ❌ |
-| empty link | ✅ | ❌ | ❌ | ❌ |
-| empty link test | ❌ | ❌ | ✅ | ❌ |
-| empty link with empty self reference | ✅ | ❌ | ❌ | ❌ |
-| empty link with empty self reference test | ❌ | ❌ | ✅ | ❌ |
-| empty link with parentheses | ✅ | ❌ | ❌ | ❌ |
-| empty link with parentheses test | ❌ | ❌ | ✅ | ❌ |
-| empty links | ✅ | ❌ | ❌ | ❌ |
-| empty links test | ❌ | ❌ | ✅ | ❌ |
-| emptylinktest | ❌ | ✅ | ❌ | ❌ |
-| emptylinkwithemptyselfreferencetest | ❌ | ✅ | ❌ | ❌ |
-| emptylinkwithparenthesestest | ❌ | ✅ | ❌ | ❌ |
-| invalid input | ✅ | ❌ | ✅ | ❌ |
-| singlet links | ✅ | ❌ | ✅ | ❌ |
-| testallfeaturestest | ❌ | ✅ | ❌ | ❌ |
-| testemptydocumenttest | ❌ | ✅ | ❌ | ❌ |
-| testemptylinkstest | ❌ | ✅ | ❌ | ❌ |
-| testinvalidinputtest | ❌ | ✅ | ❌ | ❌ |
-| testsingletlinkstest | ❌ | ✅ | ❌ | ❌ |
-| testwhitespaceonlytest | ❌ | ✅ | ❌ | ❌ |
-| whitespace only | ✅ | ❌ | ❌ | ❌ |
-| whitespace only test | ❌ | ❌ | ✅ | ❌ |
+| all features | ✅ | ✅ | ✅ | ✅ |
+| empty document | ✅ | ✅ | ✅ | ✅ |
+| empty link | ✅ | ✅ | ✅ | ✅ |
+| empty link with empty self reference | ✅ | ✅ | ✅ | ✅ |
+| empty link with parentheses | ✅ | ✅ | ✅ | ✅ |
+| empty links | ✅ | ✅ | ✅ | ✅ |
+| invalid input | ✅ | ✅ | ✅ | ✅ |
+| singlet links | ✅ | ✅ | ✅ | ✅ |
+| whitespace only | ✅ | ✅ | ✅ | ✅ |
 
-**Category totals:** Python: 9, JavaScript: 9, Rust: 9, C#: 0
+**Category totals:** Python: 9, JavaScript: 9, Rust: 9, C#: 9
 
 ## Indentation Consistency
 
@@ -88,233 +72,203 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| basic indented id syntax | ✅ | ❌ | ❌ | ❌ |
-| basic indented id syntax   issue #21 | ❌ | ✅ | ❌ | ❌ |
-| basic indented id syntax test | ❌ | ❌ | ✅ | ❌ |
-| empty indented id should work | ✅ | ✅ | ❌ | ❌ |
-| empty indented id test | ❌ | ❌ | ✅ | ❌ |
+| basic indented  i d syntax   issue #21 | ❌ | ✅ | ❌ | ❌ |
+| basic indented id syntax | ✅ | ❌ | ✅ | ✅ |
+| empty indented  i d should work | ❌ | ✅ | ❌ | ❌ |
+| empty indented id | ❌ | ❌ | ✅ | ✅ |
+| empty indented id should work | ✅ | ❌ | ❌ | ❌ |
 | equivalence comprehensive | ✅ | ❌ | ❌ | ❌ |
-| equivalence   comprehensive | ❌ | ✅ | ❌ | ❌ |
-| equivalence comprehensive | ❌ | ❌ | ✅ | ❌ |
-| indented id multiple values test | ❌ | ❌ | ✅ | ❌ |
-| indented id numeric test | ❌ | ❌ | ✅ | ❌ |
-| indented id single value test | ❌ | ❌ | ✅ | ❌ |
-| indented id syntax with multiple values | ✅ | ✅ | ❌ | ❌ |
-| indented id syntax with numeric id | ✅ | ✅ | ❌ | ❌ |
-| indented id syntax with quoted id | ✅ | ✅ | ❌ | ❌ |
-| indented id syntax with single value | ✅ | ✅ | ❌ | ❌ |
-| indented id with deeper nesting | ✅ | ✅ | ❌ | ❌ |
-| indented id with deeper nesting test | ❌ | ❌ | ✅ | ❌ |
-| indented id with quoted id test | ❌ | ❌ | ✅ | ❌ |
-| mixed indented and regular syntax | ✅ | ✅ | ❌ | ❌ |
-| mixed indented and regular syntax test | ❌ | ❌ | ✅ | ❌ |
-| multiple indented id links | ✅ | ✅ | ❌ | ❌ |
-| multiple indented id links test | ❌ | ❌ | ✅ | ❌ |
-| unsupported colon only syntax should fail | ✅ | ✅ | ❌ | ❌ |
-| unsupported colon only syntax test | ❌ | ❌ | ✅ | ❌ |
+| equivalence test   comprehensive | ❌ | ✅ | ❌ | ❌ |
+| equivalence test comprehensive | ❌ | ❌ | ✅ | ✅ |
+| indented  i d syntax with multiple values | ❌ | ✅ | ❌ | ❌ |
+| indented  i d syntax with numeric  i d | ❌ | ✅ | ❌ | ❌ |
+| indented  i d syntax with quoted  i d | ❌ | ✅ | ❌ | ❌ |
+| indented  i d syntax with single value | ❌ | ✅ | ❌ | ❌ |
+| indented  i d with deeper nesting | ❌ | ✅ | ❌ | ❌ |
+| indented id multiple values | ❌ | ❌ | ✅ | ❌ |
+| indented id numeric | ❌ | ❌ | ✅ | ❌ |
+| indented id single value | ❌ | ❌ | ✅ | ❌ |
+| indented id syntax with multiple values | ✅ | ❌ | ❌ | ✅ |
+| indented id syntax with numeric id | ✅ | ❌ | ❌ | ✅ |
+| indented id syntax with quoted id | ✅ | ❌ | ❌ | ✅ |
+| indented id syntax with single value | ✅ | ❌ | ❌ | ✅ |
+| indented id with deeper nesting | ✅ | ❌ | ✅ | ✅ |
+| indented id with quoted id | ❌ | ❌ | ✅ | ❌ |
+| mixed indented and regular syntax | ✅ | ✅ | ✅ | ✅ |
+| multiple indented  i d links | ❌ | ✅ | ❌ | ❌ |
+| multiple indented id links | ✅ | ❌ | ✅ | ✅ |
+| unsupported colon only syntax | ❌ | ❌ | ✅ | ❌ |
+| unsupported colon only syntax should fail | ✅ | ✅ | ❌ | ✅ |
 
-**Category totals:** Python: 11, JavaScript: 11, Rust: 11, C#: 0
+**Category totals:** Python: 11, JavaScript: 11, Rust: 11, C#: 11
 
 ## Link
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| link combine | ✅ | ✅ | ❌ | ❌ |
-| link combine test | ❌ | ❌ | ✅ | ❌ |
-| link constructor with id and values | ✅ | ✅ | ❌ | ❌ |
-| link constructor with id and values test | ❌ | ❌ | ✅ | ❌ |
-| link constructor with id only | ✅ | ✅ | ❌ | ❌ |
-| link constructor with id only test | ❌ | ❌ | ✅ | ❌ |
-| link equals | ✅ | ✅ | ❌ | ❌ |
-| link equals test | ❌ | ❌ | ✅ | ❌ |
-| link escape reference simple | ✅ | ❌ | ❌ | ❌ |
-| link escape reference simple test | ❌ | ❌ | ✅ | ❌ |
+| link combine | ✅ | ✅ | ✅ | ✅ |
+| link constructor with id and values | ✅ | ✅ | ✅ | ✅ |
+| link constructor with id only | ✅ | ✅ | ✅ | ✅ |
+| link equals | ✅ | ✅ | ✅ | ✅ |
+| link escape reference for simple reference | ❌ | ✅ | ❌ | ❌ |
+| link escape reference simple | ✅ | ❌ | ✅ | ✅ |
 | link escape reference special chars | ✅ | ❌ | ❌ | ❌ |
-| link escape reference with special characters test | ❌ | ❌ | ✅ | ❌ |
-| link escapereference for simple reference | ❌ | ✅ | ❌ | ❌ |
-| link escapereference with special characters | ❌ | ✅ | ❌ | ❌ |
-| link simplify | ✅ | ✅ | ❌ | ❌ |
-| link simplify test | ❌ | ❌ | ✅ | ❌ |
-| link to string with id and values test | ❌ | ❌ | ✅ | ❌ |
-| link to string with id only test | ❌ | ❌ | ✅ | ❌ |
-| link to string with values only test | ❌ | ❌ | ✅ | ❌ |
-| link tostring with id and values | ✅ | ✅ | ❌ | ❌ |
-| link tostring with id only | ✅ | ✅ | ❌ | ❌ |
-| link tostring with values only | ✅ | ✅ | ❌ | ❌ |
+| link escape reference with special characters | ❌ | ✅ | ✅ | ✅ |
+| link simplify | ✅ | ✅ | ✅ | ✅ |
+| link to string with id and values | ❌ | ✅ | ✅ | ✅ |
+| link to string with id only | ❌ | ✅ | ✅ | ✅ |
+| link to string with values only | ❌ | ✅ | ✅ | ✅ |
+| link tostring with id and values | ✅ | ❌ | ❌ | ❌ |
+| link tostring with id only | ✅ | ❌ | ❌ | ❌ |
+| link tostring with values only | ✅ | ❌ | ❌ | ❌ |
 
-**Category totals:** Python: 10, JavaScript: 10, Rust: 10, C#: 0
+**Category totals:** Python: 10, JavaScript: 10, Rust: 10, C#: 10
 
 ## Links Group
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| links group constructor equivalent test | ❌ | ❌ | ✅ | ❌ |
-| links group to list flattens structure test | ❌ | ❌ | ✅ | ❌ |
-| links group to string test | ❌ | ❌ | ✅ | ❌ |
-| linksgroup constructor | ❌ | ✅ | ❌ | ❌ |
-| linksgroup tolist flattens structure | ❌ | ✅ | ❌ | ❌ |
-| linksgroup tostring | ❌ | ✅ | ❌ | ❌ |
+| links group append to links list | ❌ | ❌ | ❌ | ✅ |
+| links group constructor | ❌ | ✅ | ❌ | ✅ |
+| links group constructor equivalent | ❌ | ❌ | ✅ | ❌ |
+| links group to list flattens structure | ❌ | ✅ | ✅ | ✅ |
+| links group to string | ❌ | ✅ | ✅ | ❌ |
 
-**Category totals:** Python: 0, JavaScript: 3, Rust: 3, C#: 0
+**Category totals:** Python: 0, JavaScript: 3, Rust: 3, C#: 3
 
 ## Mixed Indentation Modes
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| deeply nested mixed modes | ✅ | ✅ | ❌ | ❌ |
-| deeply nested mixed modes test | ❌ | ❌ | ✅ | ❌ |
+| deeply nested mixed modes | ✅ | ✅ | ✅ | ✅ |
 | hero example   alternative format   issue #105 | ❌ | ✅ | ❌ | ❌ |
-| hero example   equivalence   issue #105 | ❌ | ✅ | ❌ | ❌ |
+| hero example   equivalence test   issue #105 | ❌ | ✅ | ❌ | ❌ |
 | hero example   mixed modes   issue #105 | ❌ | ✅ | ❌ | ❌ |
-| hero example alternative format test | ❌ | ❌ | ✅ | ❌ |
-| hero example equivalence test | ❌ | ❌ | ✅ | ❌ |
-| hero example mixed modes test | ❌ | ❌ | ✅ | ❌ |
-| nested set and sequence contexts | ✅ | ✅ | ❌ | ❌ |
-| nested set and sequence contexts test | ❌ | ❌ | ✅ | ❌ |
+| hero example alternative format | ❌ | ❌ | ✅ | ✅ |
+| hero example equivalence | ❌ | ❌ | ✅ | ✅ |
+| hero example mixed modes | ❌ | ❌ | ✅ | ✅ |
+| nested set and sequence contexts | ✅ | ✅ | ✅ | ✅ |
 | sequence/list context with colon | ❌ | ✅ | ❌ | ❌ |
-| sequence context with colon | ✅ | ❌ | ❌ | ❌ |
-| sequence context with colon test | ❌ | ❌ | ✅ | ❌ |
-| sequence context with complex values | ❌ | ✅ | ❌ | ❌ |
-| sequence context with complex values test | ❌ | ❌ | ✅ | ❌ |
+| sequence context with colon | ✅ | ❌ | ✅ | ✅ |
+| sequence context with complex values | ❌ | ✅ | ✅ | ✅ |
 | set/object context without colon | ❌ | ✅ | ❌ | ❌ |
-| set context without colon | ✅ | ❌ | ❌ | ❌ |
-| set context without colon test | ❌ | ❌ | ✅ | ❌ |
+| set context without colon | ✅ | ❌ | ✅ | ✅ |
 
-**Category totals:** Python: 4, JavaScript: 8, Rust: 8, C#: 0
+**Category totals:** Python: 4, JavaScript: 8, Rust: 8, C#: 8
 
 ## Multiline Parser
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| complex structure | ✅ | ✅ | ✅ | ❌ |
-| duplicate identifiers | ✅ | ❌ | ❌ | ❌ |
-| duplicate identifiers test | ❌ | ❌ | ✅ | ❌ |
-| duplicateidentifierstest | ❌ | ✅ | ❌ | ❌ |
-| indented children | ✅ | ✅ | ✅ | ❌ |
-| mixed formats | ✅ | ✅ | ✅ | ❌ |
-| multiline simple links | ✅ | ✅ | ✅ | ❌ |
-| multiline with id | ✅ | ✅ | ✅ | ❌ |
-| multiple top level elements | ✅ | ✅ | ✅ | ❌ |
-| parse and stringify | ✅ | ❌ | ❌ | ❌ |
+| complex structure | ✅ | ✅ | ✅ | ✅ |
+| duplicate identifiers | ✅ | ✅ | ✅ | ✅ |
+| indented children | ✅ | ✅ | ✅ | ✅ |
+| mixed formats | ✅ | ✅ | ✅ | ✅ |
+| multiline simple links | ✅ | ✅ | ✅ | ✅ |
+| multiline with id | ✅ | ✅ | ✅ | ✅ |
+| multiple top level elements | ✅ | ✅ | ✅ | ✅ |
+| parse and stringify | ✅ | ✅ | ✅ | ✅ |
 | parse and stringify 2 | ✅ | ❌ | ❌ | ❌ |
-| parse and stringify test | ❌ | ❌ | ✅ | ❌ |
-| parse and stringify 2 | ❌ | ❌ | ✅ | ❌ |
-| parse and stringify with less parentheses | ✅ | ❌ | ❌ | ❌ |
-| parse and stringify with less parentheses test | ❌ | ❌ | ✅ | ❌ |
-| parseandstringifytest | ❌ | ✅ | ❌ | ❌ |
-| parseandstringifytest2 | ❌ | ✅ | ❌ | ❌ |
-| parseandstringifywithlessparenthesestest | ❌ | ✅ | ❌ | ❌ |
-| two links | ✅ | ❌ | ❌ | ❌ |
-| two links test | ❌ | ❌ | ✅ | ❌ |
-| twolinkstest | ❌ | ✅ | ❌ | ❌ |
+| parse and stringify test2 | ❌ | ✅ | ❌ | ✅ |
+| parse and stringify test 2 | ❌ | ❌ | ✅ | ❌ |
+| parse and stringify with less parentheses | ✅ | ✅ | ✅ | ✅ |
+| two links | ✅ | ✅ | ✅ | ✅ |
 
-**Category totals:** Python: 11, JavaScript: 11, Rust: 11, C#: 0
+**Category totals:** Python: 11, JavaScript: 11, Rust: 11, C#: 11
 
 ## Multiline Quoted String
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| multiline double quoted reference | ❌ | ❌ | ✅ | ❌ |
-| multiline quoted as id | ❌ | ❌ | ✅ | ❌ |
-| simple multiline double quoted | ❌ | ❌ | ✅ | ❌ |
-| simple multiline single quoted | ❌ | ❌ | ✅ | ❌ |
-| testmultilinedoublequotedreference | ❌ | ✅ | ❌ | ❌ |
-| testmultilinequotedasid | ❌ | ✅ | ❌ | ❌ |
-| testsimplemultilinedoublequoted | ❌ | ✅ | ❌ | ❌ |
-| testsimplemultilinesinglequoted | ❌ | ✅ | ❌ | ❌ |
+| multiline double quoted reference | ❌ | ✅ | ✅ | ✅ |
+| multiline quoted as id | ❌ | ✅ | ✅ | ✅ |
+| simple multiline double quoted | ❌ | ✅ | ✅ | ✅ |
+| simple multiline single quoted | ❌ | ✅ | ✅ | ✅ |
 
-**Category totals:** Python: 0, JavaScript: 4, Rust: 4, C#: 0
+**Category totals:** Python: 0, JavaScript: 4, Rust: 4, C#: 4
 
 ## Nested Parser
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| complex indentation | ✅ | ✅ | ✅ | ❌ |
+| complex indentation | ✅ | ✅ | ✅ | ✅ |
 | indentation | ✅ | ❌ | ✅ | ❌ |
 | indentation (parser) | ❌ | ✅ | ❌ | ❌ |
-| indentation based children | ✅ | ✅ | ✅ | ❌ |
-| indentation consistency | ✅ | ✅ | ✅ | ❌ |
+| indentation based children | ✅ | ✅ | ✅ | ✅ |
+| indentation consistency | ✅ | ✅ | ✅ | ✅ |
+| indentation parser | ❌ | ❌ | ❌ | ✅ |
 | nested indentation | ✅ | ❌ | ✅ | ❌ |
 | nested indentation (parser) | ❌ | ✅ | ❌ | ❌ |
-| nested links | ✅ | ✅ | ✅ | ❌ |
-| parse nested structure with indentation | ✅ | ✅ | ✅ | ❌ |
-| significant whitespace | ✅ | ❌ | ❌ | ❌ |
-| significant whitespace test | ❌ | ❌ | ✅ | ❌ |
-| significantwhitespacetest | ❌ | ✅ | ❌ | ❌ |
-| simple significant whitespace | ✅ | ❌ | ❌ | ❌ |
-| simple significant whitespace test | ❌ | ❌ | ✅ | ❌ |
-| simplesignificantwhitespacetest | ❌ | ✅ | ❌ | ❌ |
-| two spaces sized whitespace | ✅ | ❌ | ❌ | ❌ |
-| two spaces sized whitespace test | ❌ | ❌ | ✅ | ❌ |
-| twospacessizedwhitespacetest | ❌ | ✅ | ❌ | ❌ |
+| nested indentation parser | ❌ | ❌ | ❌ | ✅ |
+| nested links | ✅ | ✅ | ✅ | ✅ |
+| parse nested structure with indentation | ✅ | ✅ | ✅ | ✅ |
+| significant whitespace | ✅ | ✅ | ✅ | ✅ |
+| simple significant whitespace | ✅ | ✅ | ✅ | ✅ |
+| two spaces sized whitespace | ✅ | ✅ | ✅ | ✅ |
 
-**Category totals:** Python: 10, JavaScript: 10, Rust: 10, C#: 0
+**Category totals:** Python: 10, JavaScript: 10, Rust: 10, C#: 10
 
 ## Single Line Parser
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
 | bug1 | ✅ | ❌ | ❌ | ❌ |
-| bug 1 | ❌ | ❌ | ✅ | ❌ |
-| bugtest1 | ❌ | ✅ | ❌ | ❌ |
-| deeply nested | ✅ | ✅ | ✅ | ❌ |
-| hyphenated identifiers | ✅ | ✅ | ✅ | ❌ |
+| bug test1 | ❌ | ✅ | ❌ | ✅ |
+| bug test 1 | ❌ | ❌ | ✅ | ❌ |
+| deeply nested | ✅ | ✅ | ✅ | ✅ |
+| hyphenated identifiers | ✅ | ✅ | ✅ | ✅ |
 | link with id | ❌ | ❌ | ✅ | ❌ |
 | link without id (multi line) | ❌ | ✅ | ❌ | ❌ |
 | link without id (single line) | ❌ | ✅ | ❌ | ❌ |
-| link without id multi line | ❌ | ❌ | ✅ | ❌ |
+| link without id multi line | ❌ | ❌ | ✅ | ✅ |
 | link without id multiline colon | ✅ | ❌ | ❌ | ❌ |
 | link without id single line | ✅ | ❌ | ✅ | ❌ |
-| multi line link with id | ✅ | ✅ | ✅ | ❌ |
-| multiple words in quotes | ✅ | ✅ | ✅ | ❌ |
+| multi line link with id | ✅ | ✅ | ✅ | ✅ |
+| multiline without id | ❌ | ❌ | ❌ | ✅ |
+| multiple words in quotes | ✅ | ✅ | ✅ | ✅ |
 | nested links | ✅ | ✅ | ✅ | ❌ |
-| parse multiline link | ✅ | ✅ | ✅ | ❌ |
+| nested links single line | ❌ | ❌ | ❌ | ✅ |
+| parse multiline link | ✅ | ✅ | ✅ | ✅ |
 | parse quoted references | ✅ | ✅ | ✅ | ❌ |
-| parse quoted references values only | ✅ | ❌ | ❌ | ❌ |
-| parse reference with colon and values | ✅ | ✅ | ✅ | ❌ |
-| parse simple reference | ✅ | ✅ | ✅ | ❌ |
-| parse values only | ❌ | ✅ | ✅ | ❌ |
+| parse quoted references values only | ✅ | ✅ | ❌ | ✅ |
+| parse reference with colon and values | ✅ | ✅ | ✅ | ✅ |
+| parse simple reference | ✅ | ✅ | ✅ | ✅ |
+| parse values only | ❌ | ✅ | ✅ | ✅ |
 | parse values only standalone colon | ✅ | ❌ | ❌ | ❌ |
-| parsequotedreferencesvaluesonly | ❌ | ✅ | ❌ | ❌ |
 | quoted reference | ❌ | ❌ | ✅ | ❌ |
 | quoted reference (parser) | ❌ | ✅ | ❌ | ❌ |
-| quoted reference parser | ✅ | ❌ | ❌ | ❌ |
-| quoted references | ✅ | ✅ | ✅ | ❌ |
-| quoted references test | ❌ | ❌ | ✅ | ❌ |
-| quoted references with spaces | ✅ | ❌ | ❌ | ❌ |
+| quoted reference parser | ✅ | ❌ | ❌ | ✅ |
+| quoted references | ✅ | ✅ | ✅ | ✅ |
+| quoted references with spaces | ✅ | ✅ | ✅ | ✅ |
 | quoted references with spaces in link | ✅ | ❌ | ❌ | ❌ |
-| quoted references with spaces test | ❌ | ❌ | ✅ | ❌ |
-| quotedreferencestest | ❌ | ✅ | ❌ | ❌ |
-| quotedreferenceswithspacestest | ❌ | ✅ | ❌ | ❌ |
-| simple ref | ✅ | ✅ | ❌ | ❌ |
+| quoted references with special chars | ❌ | ❌ | ❌ | ✅ |
+| simple ref | ✅ | ✅ | ❌ | ✅ |
 | simple reference | ❌ | ❌ | ✅ | ❌ |
 | simple reference (parser) | ❌ | ✅ | ❌ | ❌ |
-| simple reference parser | ✅ | ❌ | ❌ | ❌ |
+| simple reference parser | ✅ | ❌ | ❌ | ✅ |
 | single line link | ❌ | ❌ | ✅ | ❌ |
 | single line link with id | ✅ | ✅ | ✅ | ❌ |
-| single link | ✅ | ❌ | ❌ | ❌ |
-| single link test | ❌ | ❌ | ✅ | ❌ |
-| single quoted references | ✅ | ✅ | ✅ | ❌ |
-| singlelinktest | ❌ | ✅ | ❌ | ❌ |
-| singlet link | ✅ | ✅ | ✅ | ❌ |
+| single line with id | ❌ | ❌ | ❌ | ✅ |
+| single line without id | ❌ | ❌ | ❌ | ✅ |
+| single link | ✅ | ✅ | ✅ | ✅ |
+| single quoted references | ✅ | ✅ | ✅ | ✅ |
+| singlet link | ✅ | ✅ | ✅ | ✅ |
 | singlet link (parser) | ❌ | ✅ | ❌ | ❌ |
-| singlet link parser | ✅ | ❌ | ✅ | ❌ |
-| special characters in quotes | ✅ | ✅ | ✅ | ❌ |
-| triplet single link | ✅ | ❌ | ❌ | ❌ |
-| triplet single link test | ❌ | ❌ | ✅ | ❌ |
-| tripletsinglelinktest | ❌ | ✅ | ❌ | ❌ |
-| value link | ✅ | ✅ | ✅ | ❌ |
+| singlet link parser | ✅ | ❌ | ✅ | ✅ |
+| special characters in quotes | ✅ | ✅ | ✅ | ✅ |
+| triplet single link | ✅ | ✅ | ✅ | ✅ |
+| value link | ✅ | ✅ | ✅ | ✅ |
 | value link (parser) | ❌ | ✅ | ❌ | ❌ |
-| value link parser | ✅ | ❌ | ✅ | ❌ |
+| value link parser | ✅ | ❌ | ✅ | ✅ |
 
-**Category totals:** Python: 29, JavaScript: 29, Rust: 29, C#: 0
+**Category totals:** Python: 29, JavaScript: 28, Rust: 28, C#: 29
 
 ## Tuple
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| named tuple to link test | ❌ | ❌ | ❌ | ✅ |
-| tuple to link test | ❌ | ❌ | ❌ | ✅ |
+| named tuple to link | ❌ | ❌ | ❌ | ✅ |
+| tuple to link | ❌ | ❌ | ❌ | ✅ |
 
 **Category totals:** Python: 0, JavaScript: 0, Rust: 0, C#: 2
 
@@ -328,144 +282,96 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - is link
 - is ref
 
-**Edge Case Parser** (16 missing):
-- all features test
-- empty document test
-- empty link test
-- empty link with empty self reference test
-- empty link with parentheses test
-- empty links test
-- emptylinktest
-- emptylinkwithemptyselfreferencetest
-- emptylinkwithparenthesestest
-- testallfeaturestest
-- testemptydocumenttest
-- testemptylinkstest
-- testinvalidinputtest
-- testsingletlinkstest
-- testwhitespaceonlytest
-- whitespace only test
-
 **Indentation Consistency** (3 missing):
 - leading spaces vs no leading spaces should produce same result
 - simple two vs four spaces
 - three level nesting
 
-**Indented Id Syntax** (13 missing):
-- basic indented id syntax   issue #21
-- basic indented id syntax test
-- empty indented id test
-- equivalence   comprehensive
-- equivalence comprehensive
-- indented id multiple values test
-- indented id numeric test
-- indented id single value test
-- indented id with deeper nesting test
-- indented id with quoted id test
-- mixed indented and regular syntax test
-- multiple indented id links test
-- unsupported colon only syntax test
+**Indented Id Syntax** (16 missing):
+- basic indented  i d syntax   issue #21
+- empty indented  i d should work
+- empty indented id
+- equivalence test   comprehensive
+- equivalence test comprehensive
+- indented  i d syntax with multiple values
+- indented  i d syntax with numeric  i d
+- indented  i d syntax with quoted  i d
+- indented  i d syntax with single value
+- indented  i d with deeper nesting
+- indented id multiple values
+- indented id numeric
+- indented id single value
+- indented id with quoted id
+- multiple indented  i d links
+- unsupported colon only syntax
 
-**Link** (12 missing):
-- link combine test
-- link constructor with id and values test
-- link constructor with id only test
-- link equals test
-- link escape reference simple test
-- link escape reference with special characters test
-- link escapereference for simple reference
-- link escapereference with special characters
-- link simplify test
-- link to string with id and values test
-- link to string with id only test
-- link to string with values only test
+**Link** (5 missing):
+- link escape reference for simple reference
+- link escape reference with special characters
+- link to string with id and values
+- link to string with id only
+- link to string with values only
 
-**Links Group** (6 missing):
-- links group constructor equivalent test
-- links group to list flattens structure test
-- links group to string test
-- linksgroup constructor
-- linksgroup tolist flattens structure
-- linksgroup tostring
+**Links Group** (5 missing):
+- links group append to links list
+- links group constructor
+- links group constructor equivalent
+- links group to list flattens structure
+- links group to string
 
-**Mixed Indentation Modes** (14 missing):
-- deeply nested mixed modes test
+**Mixed Indentation Modes** (9 missing):
 - hero example   alternative format   issue #105
-- hero example   equivalence   issue #105
+- hero example   equivalence test   issue #105
 - hero example   mixed modes   issue #105
-- hero example alternative format test
-- hero example equivalence test
-- hero example mixed modes test
-- nested set and sequence contexts test
+- hero example alternative format
+- hero example equivalence
+- hero example mixed modes
 - sequence/list context with colon
-- sequence context with colon test
 - sequence context with complex values
-- sequence context with complex values test
 - set/object context without colon
-- set context without colon test
 
-**Multiline Parser** (10 missing):
-- duplicate identifiers test
-- duplicateidentifierstest
-- parse and stringify test
-- parse and stringify 2
-- parse and stringify with less parentheses test
-- parseandstringifytest
-- parseandstringifytest2
-- parseandstringifywithlessparenthesestest
-- two links test
-- twolinkstest
+**Multiline Parser** (2 missing):
+- parse and stringify test2
+- parse and stringify test 2
 
-**Multiline Quoted String** (8 missing):
+**Multiline Quoted String** (4 missing):
 - multiline double quoted reference
 - multiline quoted as id
 - simple multiline double quoted
 - simple multiline single quoted
-- testmultilinedoublequotedreference
-- testmultilinequotedasid
-- testsimplemultilinedoublequoted
-- testsimplemultilinesinglequoted
 
-**Nested Parser** (8 missing):
+**Nested Parser** (4 missing):
 - indentation (parser)
+- indentation parser
 - nested indentation (parser)
-- significant whitespace test
-- significantwhitespacetest
-- simple significant whitespace test
-- simplesignificantwhitespacetest
-- two spaces sized whitespace test
-- twospacessizedwhitespacetest
+- nested indentation parser
 
-**Single Line Parser** (23 missing):
-- bug 1
-- bugtest1
+**Single Line Parser** (19 missing):
+- bug test1
+- bug test 1
 - link with id
 - link without id (multi line)
 - link without id (single line)
 - link without id multi line
+- multiline without id
+- nested links single line
 - parse values only
-- parsequotedreferencesvaluesonly
 - quoted reference
 - quoted reference (parser)
-- quoted references test
-- quoted references with spaces test
-- quotedreferencestest
-- quotedreferenceswithspacestest
+- quoted references with special chars
 - simple reference
 - simple reference (parser)
 - single line link
-- single link test
-- singlelinktest
+- single line with id
+- single line without id
 - singlet link (parser)
-- triplet single link test
-- tripletsinglelinktest
 - value link (parser)
 
 **Tuple** (2 missing):
-- named tuple to link test
-- tuple to link test
+- named tuple to link
+- tuple to link
 
-**Total missing: 117 tests**
+**Total missing: 71 tests**
 
 ### JavaScript Missing Tests
 
@@ -473,133 +379,84 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - is link
 - is ref
 
-**Edge Case Parser** (16 missing):
-- all features
-- all features test
-- empty document
-- empty document test
-- empty link
-- empty link test
-- empty link with empty self reference
-- empty link with empty self reference test
-- empty link with parentheses
-- empty link with parentheses test
-- empty links
-- empty links test
-- invalid input
-- singlet links
-- whitespace only
-- whitespace only test
-
 **Indentation Consistency** (3 missing):
 - leading spaces vs no leading spaces
 - simple two vs four spaces
 - three level nesting
 
-**Indented Id Syntax** (13 missing):
+**Indented Id Syntax** (16 missing):
 - basic indented id syntax
-- basic indented id syntax test
-- empty indented id test
+- empty indented id
+- empty indented id should work
 - equivalence comprehensive
-- equivalence comprehensive
-- indented id multiple values test
-- indented id numeric test
-- indented id single value test
-- indented id with deeper nesting test
-- indented id with quoted id test
-- mixed indented and regular syntax test
-- multiple indented id links test
-- unsupported colon only syntax test
+- equivalence test comprehensive
+- indented id multiple values
+- indented id numeric
+- indented id single value
+- indented id syntax with multiple values
+- indented id syntax with numeric id
+- indented id syntax with quoted id
+- indented id syntax with single value
+- indented id with deeper nesting
+- indented id with quoted id
+- multiple indented id links
+- unsupported colon only syntax
 
-**Link** (12 missing):
-- link combine test
-- link constructor with id and values test
-- link constructor with id only test
-- link equals test
+**Link** (5 missing):
 - link escape reference simple
-- link escape reference simple test
 - link escape reference special chars
-- link escape reference with special characters test
-- link simplify test
-- link to string with id and values test
-- link to string with id only test
-- link to string with values only test
+- link tostring with id and values
+- link tostring with id only
+- link tostring with values only
 
-**Links Group** (3 missing):
-- links group constructor equivalent test
-- links group to list flattens structure test
-- links group to string test
+**Links Group** (2 missing):
+- links group append to links list
+- links group constructor equivalent
 
-**Mixed Indentation Modes** (10 missing):
-- deeply nested mixed modes test
-- hero example alternative format test
-- hero example equivalence test
-- hero example mixed modes test
-- nested set and sequence contexts test
+**Mixed Indentation Modes** (5 missing):
+- hero example alternative format
+- hero example equivalence
+- hero example mixed modes
 - sequence context with colon
-- sequence context with colon test
-- sequence context with complex values test
 - set context without colon
-- set context without colon test
 
-**Multiline Parser** (10 missing):
-- duplicate identifiers
-- duplicate identifiers test
-- parse and stringify
+**Multiline Parser** (2 missing):
 - parse and stringify 2
-- parse and stringify test
-- parse and stringify 2
-- parse and stringify with less parentheses
-- parse and stringify with less parentheses test
-- two links
-- two links test
+- parse and stringify test 2
 
-**Multiline Quoted String** (4 missing):
-- multiline double quoted reference
-- multiline quoted as id
-- simple multiline double quoted
-- simple multiline single quoted
-
-**Nested Parser** (8 missing):
+**Nested Parser** (4 missing):
 - indentation
+- indentation parser
 - nested indentation
-- significant whitespace
-- significant whitespace test
-- simple significant whitespace
-- simple significant whitespace test
-- two spaces sized whitespace
-- two spaces sized whitespace test
+- nested indentation parser
 
-**Single Line Parser** (23 missing):
+**Single Line Parser** (20 missing):
 - bug1
-- bug 1
+- bug test 1
 - link with id
 - link without id multi line
 - link without id multiline colon
 - link without id single line
-- parse quoted references values only
+- multiline without id
+- nested links single line
 - parse values only standalone colon
 - quoted reference
 - quoted reference parser
-- quoted references test
-- quoted references with spaces
 - quoted references with spaces in link
-- quoted references with spaces test
+- quoted references with special chars
 - simple reference
 - simple reference parser
 - single line link
-- single link
-- single link test
+- single line with id
+- single line without id
 - singlet link parser
-- triplet single link
-- triplet single link test
 - value link parser
 
 **Tuple** (2 missing):
-- named tuple to link test
-- tuple to link test
+- named tuple to link
+- tuple to link
 
-**Total missing: 106 tests**
+**Total missing: 61 tests**
 
 ### Rust Missing Tests
 
@@ -607,364 +464,162 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - is link equivalent
 - is ref equivalent
 
-**Edge Case Parser** (16 missing):
-- all features
-- empty document
-- empty link
-- empty link with empty self reference
-- empty link with parentheses
-- empty links
-- emptylinktest
-- emptylinkwithemptyselfreferencetest
-- emptylinkwithparenthesestest
-- testallfeaturestest
-- testemptydocumenttest
-- testemptylinkstest
-- testinvalidinputtest
-- testsingletlinkstest
-- testwhitespaceonlytest
-- whitespace only
-
 **Indentation Consistency** (3 missing):
 - leading spaces vs no leading spaces should produce same result
 - simple two vs four spaces indentation
 - three level nesting with different indentation
 
-**Indented Id Syntax** (13 missing):
-- basic indented id syntax
-- basic indented id syntax   issue #21
+**Indented Id Syntax** (16 missing):
+- basic indented  i d syntax   issue #21
+- empty indented  i d should work
 - empty indented id should work
 - equivalence comprehensive
-- equivalence   comprehensive
+- equivalence test   comprehensive
+- indented  i d syntax with multiple values
+- indented  i d syntax with numeric  i d
+- indented  i d syntax with quoted  i d
+- indented  i d syntax with single value
+- indented  i d with deeper nesting
 - indented id syntax with multiple values
 - indented id syntax with numeric id
 - indented id syntax with quoted id
 - indented id syntax with single value
-- indented id with deeper nesting
-- mixed indented and regular syntax
-- multiple indented id links
+- multiple indented  i d links
 - unsupported colon only syntax should fail
 
-**Link** (12 missing):
-- link combine
-- link constructor with id and values
-- link constructor with id only
-- link equals
-- link escape reference simple
+**Link** (5 missing):
+- link escape reference for simple reference
 - link escape reference special chars
-- link escapereference for simple reference
-- link escapereference with special characters
-- link simplify
 - link tostring with id and values
 - link tostring with id only
 - link tostring with values only
 
-**Links Group** (3 missing):
-- linksgroup constructor
-- linksgroup tolist flattens structure
-- linksgroup tostring
+**Links Group** (2 missing):
+- links group append to links list
+- links group constructor
 
-**Mixed Indentation Modes** (10 missing):
-- deeply nested mixed modes
+**Mixed Indentation Modes** (5 missing):
 - hero example   alternative format   issue #105
-- hero example   equivalence   issue #105
+- hero example   equivalence test   issue #105
 - hero example   mixed modes   issue #105
-- nested set and sequence contexts
 - sequence/list context with colon
-- sequence context with colon
-- sequence context with complex values
 - set/object context without colon
-- set context without colon
 
-**Multiline Parser** (10 missing):
-- duplicate identifiers
-- duplicateidentifierstest
-- parse and stringify
+**Multiline Parser** (2 missing):
 - parse and stringify 2
-- parse and stringify with less parentheses
-- parseandstringifytest
-- parseandstringifytest2
-- parseandstringifywithlessparenthesestest
-- two links
-- twolinkstest
+- parse and stringify test2
 
-**Multiline Quoted String** (4 missing):
-- testmultilinedoublequotedreference
-- testmultilinequotedasid
-- testsimplemultilinedoublequoted
-- testsimplemultilinesinglequoted
-
-**Nested Parser** (8 missing):
+**Nested Parser** (4 missing):
 - indentation (parser)
+- indentation parser
 - nested indentation (parser)
-- significant whitespace
-- significantwhitespacetest
-- simple significant whitespace
-- simplesignificantwhitespacetest
-- two spaces sized whitespace
-- twospacessizedwhitespacetest
+- nested indentation parser
 
-**Single Line Parser** (23 missing):
+**Single Line Parser** (20 missing):
 - bug1
-- bugtest1
+- bug test1
 - link without id (multi line)
 - link without id (single line)
 - link without id multiline colon
+- multiline without id
+- nested links single line
 - parse quoted references values only
 - parse values only standalone colon
-- parsequotedreferencesvaluesonly
 - quoted reference (parser)
 - quoted reference parser
-- quoted references with spaces
 - quoted references with spaces in link
-- quotedreferencestest
-- quotedreferenceswithspacestest
+- quoted references with special chars
 - simple ref
 - simple reference (parser)
 - simple reference parser
-- single link
-- singlelinktest
+- single line with id
+- single line without id
 - singlet link (parser)
-- triplet single link
-- tripletsinglelinktest
 - value link (parser)
 
 **Tuple** (2 missing):
-- named tuple to link test
-- tuple to link test
+- named tuple to link
+- tuple to link
 
-**Total missing: 106 tests**
+**Total missing: 61 tests**
 
 ### C# Missing Tests
 
-**Api** (10 missing):
-- empty link
+**Api** (2 missing):
 - is link
-- is link equivalent
 - is ref
-- is ref equivalent
-- link with source target
-- link with source type target
-- quoted references
-- simple link
-- single line format
-
-**Edge Case Parser** (25 missing):
-- all features
-- all features test
-- empty document
-- empty document test
-- empty link
-- empty link test
-- empty link with empty self reference
-- empty link with empty self reference test
-- empty link with parentheses
-- empty link with parentheses test
-- empty links
-- empty links test
-- emptylinktest
-- emptylinkwithemptyselfreferencetest
-- emptylinkwithparenthesestest
-- invalid input
-- singlet links
-- testallfeaturestest
-- testemptydocumenttest
-- testemptylinkstest
-- testinvalidinputtest
-- testsingletlinkstest
-- testwhitespaceonlytest
-- whitespace only
-- whitespace only test
 
 **Indentation Consistency** (3 missing):
 - leading spaces vs no leading spaces
 - simple two vs four spaces
 - three level nesting
 
-**Indented Id Syntax** (24 missing):
-- basic indented id syntax
-- basic indented id syntax   issue #21
-- basic indented id syntax test
+**Indented Id Syntax** (16 missing):
+- basic indented  i d syntax   issue #21
+- empty indented  i d should work
 - empty indented id should work
-- empty indented id test
 - equivalence comprehensive
-- equivalence   comprehensive
-- equivalence comprehensive
-- indented id multiple values test
-- indented id numeric test
-- indented id single value test
-- indented id syntax with multiple values
-- indented id syntax with numeric id
-- indented id syntax with quoted id
-- indented id syntax with single value
-- indented id with deeper nesting
-- indented id with deeper nesting test
-- indented id with quoted id test
-- mixed indented and regular syntax
-- mixed indented and regular syntax test
-- multiple indented id links
-- multiple indented id links test
-- unsupported colon only syntax should fail
-- unsupported colon only syntax test
+- equivalence test   comprehensive
+- indented  i d syntax with multiple values
+- indented  i d syntax with numeric  i d
+- indented  i d syntax with quoted  i d
+- indented  i d syntax with single value
+- indented  i d with deeper nesting
+- indented id multiple values
+- indented id numeric
+- indented id single value
+- indented id with quoted id
+- multiple indented  i d links
+- unsupported colon only syntax
 
-**Link** (22 missing):
-- link combine
-- link combine test
-- link constructor with id and values
-- link constructor with id and values test
-- link constructor with id only
-- link constructor with id only test
-- link equals
-- link equals test
-- link escape reference simple
-- link escape reference simple test
+**Link** (5 missing):
+- link escape reference for simple reference
 - link escape reference special chars
-- link escape reference with special characters test
-- link escapereference for simple reference
-- link escapereference with special characters
-- link simplify
-- link simplify test
-- link to string with id and values test
-- link to string with id only test
-- link to string with values only test
 - link tostring with id and values
 - link tostring with id only
 - link tostring with values only
 
-**Links Group** (6 missing):
-- links group constructor equivalent test
-- links group to list flattens structure test
-- links group to string test
-- linksgroup constructor
-- linksgroup tolist flattens structure
-- linksgroup tostring
+**Links Group** (2 missing):
+- links group constructor equivalent
+- links group to string
 
-**Mixed Indentation Modes** (18 missing):
-- deeply nested mixed modes
-- deeply nested mixed modes test
+**Mixed Indentation Modes** (5 missing):
 - hero example   alternative format   issue #105
-- hero example   equivalence   issue #105
+- hero example   equivalence test   issue #105
 - hero example   mixed modes   issue #105
-- hero example alternative format test
-- hero example equivalence test
-- hero example mixed modes test
-- nested set and sequence contexts
-- nested set and sequence contexts test
 - sequence/list context with colon
-- sequence context with colon
-- sequence context with colon test
-- sequence context with complex values
-- sequence context with complex values test
 - set/object context without colon
-- set context without colon
-- set context without colon test
 
-**Multiline Parser** (21 missing):
-- complex structure
-- duplicate identifiers
-- duplicate identifiers test
-- duplicateidentifierstest
-- indented children
-- mixed formats
-- multiline simple links
-- multiline with id
-- multiple top level elements
-- parse and stringify
+**Multiline Parser** (2 missing):
 - parse and stringify 2
-- parse and stringify test
-- parse and stringify 2
-- parse and stringify with less parentheses
-- parse and stringify with less parentheses test
-- parseandstringifytest
-- parseandstringifytest2
-- parseandstringifywithlessparenthesestest
-- two links
-- two links test
-- twolinkstest
+- parse and stringify test 2
 
-**Multiline Quoted String** (8 missing):
-- multiline double quoted reference
-- multiline quoted as id
-- simple multiline double quoted
-- simple multiline single quoted
-- testmultilinedoublequotedreference
-- testmultilinequotedasid
-- testsimplemultilinedoublequoted
-- testsimplemultilinesinglequoted
-
-**Nested Parser** (18 missing):
-- complex indentation
+**Nested Parser** (4 missing):
 - indentation
 - indentation (parser)
-- indentation based children
-- indentation consistency
 - nested indentation
 - nested indentation (parser)
-- nested links
-- parse nested structure with indentation
-- significant whitespace
-- significant whitespace test
-- significantwhitespacetest
-- simple significant whitespace
-- simple significant whitespace test
-- simplesignificantwhitespacetest
-- two spaces sized whitespace
-- two spaces sized whitespace test
-- twospacessizedwhitespacetest
 
-**Single Line Parser** (52 missing):
+**Single Line Parser** (19 missing):
 - bug1
-- bug 1
-- bugtest1
-- deeply nested
-- hyphenated identifiers
+- bug test 1
 - link with id
 - link without id (multi line)
 - link without id (single line)
-- link without id multi line
 - link without id multiline colon
 - link without id single line
-- multi line link with id
-- multiple words in quotes
 - nested links
-- parse multiline link
 - parse quoted references
-- parse quoted references values only
-- parse reference with colon and values
-- parse simple reference
-- parse values only
 - parse values only standalone colon
-- parsequotedreferencesvaluesonly
 - quoted reference
 - quoted reference (parser)
-- quoted reference parser
-- quoted references
-- quoted references test
-- quoted references with spaces
 - quoted references with spaces in link
-- quoted references with spaces test
-- quotedreferencestest
-- quotedreferenceswithspacestest
-- simple ref
 - simple reference
 - simple reference (parser)
-- simple reference parser
 - single line link
 - single line link with id
-- single link
-- single link test
-- single quoted references
-- singlelinktest
-- singlet link
 - singlet link (parser)
-- singlet link parser
-- special characters in quotes
-- triplet single link
-- triplet single link test
-- tripletsinglelinktest
-- value link
 - value link (parser)
-- value link parser
 
-**Total missing: 207 tests**
+**Total missing: 58 tests**
 
