@@ -20,13 +20,21 @@ class Parser:
     Handles both inline and indented syntax for defining links.
     """
 
-    def __init__(self):
-        """Initialize the parser."""
+    def __init__(self, max_input_size: int = 10 * 1024 * 1024, max_depth: int = 1000):
+        """
+        Initialize the parser.
+
+        Args:
+            max_input_size: Maximum input size in bytes (default: 10MB)
+            max_depth: Maximum nesting depth (default: 1000)
+        """
         self.indentation_stack = [0]
         self.pos = 0
         self.text = ""
         self.lines = []
         self.base_indentation = None
+        self.max_input_size = max_input_size
+        self.max_depth = max_depth
 
     def parse(self, input_text: str) -> List[Link]:
         """
@@ -40,7 +48,17 @@ class Parser:
 
         Raises:
             ParseError: If parsing fails
+            TypeError: If input is not a string
+            ValueError: If input exceeds maximum size
         """
+        # Validate input type
+        if not isinstance(input_text, str):
+            raise TypeError("Input must be a string")
+
+        # Validate input size
+        if len(input_text) > self.max_input_size:
+            raise ValueError(f"Input size exceeds maximum allowed size of {self.max_input_size} bytes")
+
         try:
             if not input_text or not input_text.strip():
                 return []
@@ -53,7 +71,14 @@ class Parser:
 
             raw_result = self._parse_document()
             return self._transform_result(raw_result)
-        except Exception as e:
+        except (TypeError, ValueError):
+            # Re-raise validation errors without wrapping
+            raise
+        except ParseError:
+            # Re-raise ParseError without wrapping
+            raise
+        except (KeyError, IndexError, AttributeError) as e:
+            # Catch specific parsing-related exceptions
             raise ParseError(f"Parse error: {str(e)}") from e
 
     def _parse_document(self) -> List[Dict]:
@@ -254,7 +279,8 @@ class Parser:
         links = []
 
         for item in raw_result:
-            if item:
+            # Use explicit None check
+            if item is not None:
                 self._collect_links(item, [], links)
 
         return links
@@ -266,7 +292,8 @@ class Parser:
         Handles both inline and indented syntax, flattening the hierarchy
         appropriately.
         """
-        if not item:
+        # Use explicit None check
+        if item is None:
             return
 
         children = item.get('children', [])

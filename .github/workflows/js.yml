@@ -22,10 +22,11 @@ defaults:
 jobs:
   findChangedJsFiles:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       isJsFilesChanged: ${{ steps.setIsJsFilesChangedOutput.outputs.isJsFilesChanged }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Get changed files using defaults
@@ -50,8 +51,9 @@ jobs:
     needs: [findChangedJsFiles]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Setup Bun
@@ -69,8 +71,9 @@ jobs:
     needs: [test, findChangedJsFiles]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Setup Bun
@@ -106,10 +109,11 @@ jobs:
 
   publishRelease:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: [publishToNpm]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && needs.publishToNpm.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Setup Bun
@@ -138,9 +142,9 @@ jobs:
         run: |
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           PACKAGE_NAME=$(node -p "require('./package.json').name")
-          
-          # Create release
-          gh release create "${PACKAGE_VERSION}_js" \
+
+          # Create release with consistent tag format: js_version
+          gh release create "js_${PACKAGE_VERSION}" \
             --title "[JS] $PACKAGE_VERSION" \
             --notes "https://www.npmjs.com/package/$PACKAGE_NAME"
         env:

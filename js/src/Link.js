@@ -1,43 +1,92 @@
 export class Link {
+  /**
+   * Create a new Link
+   * @param {string|null} id - Optional identifier for the link
+   * @param {Link[]|null} values - Optional array of nested links
+   * @throws {TypeError} If values is not an array or null
+   */
   constructor(id = null, values = null) {
     this.id = id;
-    this.values = values || [];
+
+    // Validate that values is an array if provided
+    if (values !== null && values !== undefined) {
+      if (!Array.isArray(values)) {
+        throw new TypeError('values must be an array or null');
+      }
+      this.values = values;
+    } else {
+      this.values = [];
+    }
   }
 
+  /**
+   * Convert link to string representation
+   * @returns {string} String representation of the link
+   */
   toString() {
     return this.format(false);
   }
 
+  /**
+   * Get formatted string of all values
+   * @returns {string} Space-separated string of values
+   */
   getValuesString() {
-    return (!this.values || this.values.length === 0) ? 
+    return (!this.values || this.values.length === 0) ?
       '' : this.values.map(v => Link.getValueString(v)).join(' ');
   }
 
+  /**
+   * Simplify the link structure by unwrapping single-value containers
+   * @returns {Link} Simplified link
+   */
   simplify() {
     if (!this.values || this.values.length === 0) {
       return this;
     } else if (this.values.length === 1) {
       return this.values[0];
     } else {
-      const newValues = this.values.map(v => v.simplify());
+      const newValues = this.values.map(v => {
+        // Check if value has simplify method (defensive programming)
+        return v && typeof v.simplify === 'function' ? v.simplify() : v;
+      });
       return new Link(this.id, newValues);
     }
   }
 
+  /**
+   * Combine this link with another link
+   * @param {Link} other - The link to combine with
+   * @returns {Link} Combined link
+   */
   combine(other) {
     return new Link(null, [this, other]);
   }
 
+  /**
+   * Get string representation of a value
+   * @param {Link} value - The value to stringify
+   * @returns {string} String representation
+   */
   static getValueString(value) {
-    return value.toLinkOrIdString();
+    // Defensive check for method existence
+    return value && typeof value.toLinkOrIdString === 'function' ? value.toLinkOrIdString() : String(value);
   }
 
+  /**
+   * Escape a reference string by adding quotes if necessary
+   * @param {string} reference - The reference to escape
+   * @returns {string} Escaped reference
+   */
   static escapeReference(reference) {
     if (!reference || reference.trim() === '') {
       return '';
     }
-    
-    const needsSingleQuotes = 
+
+    const hasSingleQuote = reference.includes("'");
+    const hasDoubleQuote = reference.includes('"');
+
+    const needsQuoting =
       reference.includes(':') ||
       reference.includes('(') ||
       reference.includes(')') ||
@@ -45,17 +94,38 @@ export class Link {
       reference.includes('\t') ||
       reference.includes('\n') ||
       reference.includes('\r') ||
-      reference.includes('"');
-    
-    if (needsSingleQuotes) {
-      return `'${reference}'`;
-    } else if (reference.includes("'")) {
-      return `"${reference}"`;
-    } else {
-      return reference;
+      hasDoubleQuote ||
+      hasSingleQuote;
+
+    // Handle edge case: reference contains both single and double quotes
+    if (hasSingleQuote && hasDoubleQuote) {
+      // Escape single quotes and wrap in single quotes
+      return `'${reference.replace(/'/g, "\\'")}'`;
     }
+
+    // Prefer single quotes if double quotes are present
+    if (hasDoubleQuote) {
+      return `'${reference}'`;
+    }
+
+    // Use double quotes if single quotes are present
+    if (hasSingleQuote) {
+      return `"${reference}"`;
+    }
+
+    // Use single quotes for special characters
+    if (needsQuoting) {
+      return `'${reference}'`;
+    }
+
+    // No quoting needed
+    return reference;
   }
 
+  /**
+   * Convert to string using either just ID or full format
+   * @returns {string} String representation
+   */
   toLinkOrIdString() {
     if (!this.values || this.values.length === 0) {
       return this.id === null ? '' : Link.escapeReference(this.id);
@@ -63,20 +133,44 @@ export class Link {
     return this.toString();
   }
 
+  /**
+   * Check equality with another Link
+   * @param {*} other - Object to compare with
+   * @returns {boolean} True if links are equal
+   */
   equals(other) {
     if (!(other instanceof Link)) return false;
     if (this.id !== other.id) return false;
-    if (this.values.length !== other.values.length) return false;
-    
-    for (let i = 0; i < this.values.length; i++) {
-      if (!this.values[i].equals(other.values[i])) {
-        return false;
+
+    // Handle null/undefined values arrays
+    const thisValues = this.values || [];
+    const otherValues = other.values || [];
+
+    if (thisValues.length !== otherValues.length) return false;
+
+    for (let i = 0; i < thisValues.length; i++) {
+      // Defensive check for equals method
+      if (thisValues[i] && typeof thisValues[i].equals === 'function') {
+        if (!thisValues[i].equals(otherValues[i])) {
+          return false;
+        }
+      } else {
+        // Fallback to reference equality
+        if (thisValues[i] !== otherValues[i]) {
+          return false;
+        }
       }
     }
     return true;
   }
 
-  
+
+  /**
+   * Format the link as a string
+   * @param {boolean} lessParentheses - If true, omit parentheses where safe
+   * @param {boolean} isCompoundValue - If true, this is a value in a compound link
+   * @returns {string} Formatted string
+   */
   format(lessParentheses = false, isCompoundValue = false) {
     // Empty link
     if (this.id === null && (!this.values || this.values.length === 0)) {
@@ -121,29 +215,39 @@ export class Link {
     return lessParentheses && !this.needsParentheses(this.id) ? withColon : `(${withColon})`;
   }
   
+  /**
+   * Format a value within this link
+   * @param {Link} value - The value to format
+   * @returns {string} Formatted value string
+   */
   formatValue(value) {
-    if (!value.format) {
-      return Link.escapeReference(value.id || '');
+    if (!value || !value.format) {
+      return Link.escapeReference((value && value.id) || '');
     }
-    
+
     // Check if we're in a compound link that was created from path combinations
     // This is indicated by having a parent context passed through
     const isCompoundFromPaths = this._isFromPathCombination === true;
-    
+
     // For compound links from paths, format values with parentheses
     if (isCompoundFromPaths) {
       return value.format(false, true);
     }
-    
+
     // Simple link with just an ID - don't wrap in parentheses when used as a value
     if (!value.values || value.values.length === 0) {
       return Link.escapeReference(value.id);
     }
-    
+
     // Complex value with its own structure - format it normally with parentheses
     return value.format(false, false);
   }
-  
+
+  /**
+   * Check if a string needs to be wrapped in parentheses
+   * @param {string} str - The string to check
+   * @returns {boolean} True if parentheses are needed
+   */
   needsParentheses(str) {
     return str && (str.includes(' ') || str.includes(':') || str.includes('(') || str.includes(')'));
   }
