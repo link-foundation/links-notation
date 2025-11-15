@@ -129,7 +129,7 @@ jobs:
           if [ $PUBLISH_EXIT_CODE -eq 0 ]; then
             echo "✅ Successfully published $PACKAGE_NAME@$PACKAGE_VERSION to crates.io"
             echo "publish_result=success" >> $GITHUB_OUTPUT
-          elif grep -q "already exists on crates.io" publish_output.txt; then
+          elif grep -q "already exists on crates.io index" publish_output.txt; then
             echo "ℹ️ Version $PACKAGE_VERSION already exists on crates.io - this is OK"
             echo "publish_result=already_exists" >> $GITHUB_OUTPUT
             exit 0  # Don't fail the workflow
@@ -168,9 +168,9 @@ jobs:
         id: release-check
         run: |
           PACKAGE_VERSION=$(grep '^version = ' Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
-          TAG_NAME="rust_$PACKAGE_VERSION"
+          TAG_NAME="${PACKAGE_VERSION}_rust"
           echo "Checking if release $TAG_NAME already exists"
-          
+
           # Check if release exists
           if gh release view "$TAG_NAME" >/dev/null 2>&1; then
             echo "Release $TAG_NAME already exists"
@@ -186,7 +186,7 @@ jobs:
         run: |
           PACKAGE_NAME=$(grep '^name = ' Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/')
           PACKAGE_VERSION=$(grep '^version = ' Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
-          
+
           # Create release
           gh release create "${PACKAGE_VERSION}_rust" \
             --title "[Rust] $PACKAGE_VERSION" \
