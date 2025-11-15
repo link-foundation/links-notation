@@ -124,7 +124,7 @@ jobs:
         id: release-check
         run: |
           PACKAGE_VERSION=$(grep "^version" pyproject.toml | sed 's/version = "\(.*\)"/\1/')
-          TAG_NAME="python_$PACKAGE_VERSION"
+          TAG_NAME="${PACKAGE_VERSION}_python"
           echo "Checking if release $TAG_NAME already exists"
 
           # Check if release exists
