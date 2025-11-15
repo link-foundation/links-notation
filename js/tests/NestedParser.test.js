@@ -105,7 +105,7 @@ test('Parse nested structure with indentation', () => {
   expect(result[2].values.length).toBe(2);
 });
 
-test('Test indentation consistency', () => {
+test('Indentation consistency', () => {
   // Test that indentation must be consistent
   const input = `parent
   child1
@@ -135,7 +135,7 @@ test('Complex indentation', () => {
   expect(result.length).toBe(6);
 });
 
-test('Test nested links', () => {
+test('Nested links', () => {
   const input = '(1: (2: (3: 3)))';
   const parsed = parser.parse(input);
   expect(parsed.length).toBeGreaterThan(0);
@@ -148,7 +148,7 @@ test('Test nested links', () => {
   expect(parsed.length).toBe(1);
 });
 
-test('Test indentation (parser)', () => {
+test('Indentation parser', () => {
   const input = 'parent\n  child1\n  child2';
   const result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);
@@ -157,7 +157,7 @@ test('Test indentation (parser)', () => {
   expect(hasParentLink).toBe(true);
 });
 
-test('Test nested indentation (parser)', () => {
+test('Nested indentation parser', () => {
   const input = 'parent\n  child\n    grandchild';
   const result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);

@@ -1,0 +1,649 @@
+{
+  "python": {
+    "edge_case_parser": [
+      {
+        "language": "javascript",
+        "test_count": 9,
+        "tests": [
+          "EmptyLinkTest",
+          "EmptyLinkWithParenthesesTest",
+          "EmptyLinkWithEmptySelfReferenceTest",
+          "TestAllFeaturesTest",
+          "TestEmptyDocumentTest",
+          "TestWhitespaceOnlyTest",
+          "TestEmptyLinksTest",
+          "TestSingletLinksTest",
+          "TestInvalidInputTest"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 9,
+        "tests": [
+          "empty_link_test",
+          "empty_link_with_parentheses_test",
+          "empty_link_with_empty_self_reference_test",
+          "test_all_features_test",
+          "test_empty_document_test",
+          "test_whitespace_only_test",
+          "test_empty_links_test",
+          "test_singlet_links",
+          "test_invalid_input"
+        ]
+      }
+    ],
+    "indented_id_syntax": [
+      {
+        "language": "javascript",
+        "test_count": 11,
+        "tests": [
+          "Basic indented ID syntax - issue #21",
+          "Indented ID syntax with single value",
+          "Indented ID syntax with multiple values",
+          "Indented ID syntax with numeric ID",
+          "Indented ID syntax with quoted ID",
+          "Multiple indented ID links",
+          "Mixed indented and regular syntax",
+          "Unsupported colon-only syntax should fail",
+          "Indented ID with deeper nesting",
+          "Empty indented ID should work",
+          "Equivalence test - comprehensive"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 6,
+        "tests": [
+          "basic_indented_id_syntax_test",
+          "indented_id_single_value_test",
+          "indented_id_multiple_values_test",
+          "indented_id_numeric_test",
+          "unsupported_colon_only_syntax_test",
+          "empty_indented_id_test"
+        ]
+      }
+    ],
+    "links_group": [
+      {
+        "language": "javascript",
+        "test_count": 3,
+        "tests": [
+          "LinksGroup constructor",
+          "LinksGroup toList flattens structure",
+          "LinksGroup toString"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 3,
+        "tests": [
+          "links_group_constructor_equivalent_test",
+          "links_group_to_list_flattens_structure_test",
+          "links_group_to_string_test"
+        ]
+      }
+    ],
+    "mixed_indentation_modes": [
+      {
+        "language": "javascript",
+        "test_count": 8,
+        "tests": [
+          "Hero example - mixed modes - issue #105",
+          "Hero example - alternative format - issue #105",
+          "Hero example - equivalence test - issue #105",
+          "Set/object context without colon",
+          "Sequence/list context with colon",
+          "Sequence context with complex values",
+          "Nested set and sequence contexts",
+          "Deeply nested mixed modes"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 8,
+        "tests": [
+          "hero_example_mixed_modes_test",
+          "hero_example_alternative_format_test",
+          "hero_example_equivalence_test",
+          "set_context_without_colon_test",
+          "sequence_context_with_colon_test",
+          "sequence_context_with_complex_values_test",
+          "nested_set_and_sequence_contexts_test",
+          "deeply_nested_mixed_modes_test"
+        ]
+      }
+    ],
+    "multiline_parser": [
+      {
+        "language": "javascript",
+        "test_count": 11,
+        "tests": [
+          "TwoLinksTest",
+          "ParseAndStringifyTest",
+          "ParseAndStringifyTest2",
+          "ParseAndStringifyWithLessParenthesesTest",
+          "DuplicateIdentifiersTest",
+          "Test complex structure",
+          "Test mixed formats",
+          "Test multiline with id",
+          "Test multiple top level elements",
+          "Test multiline simple links",
+          "Test indented children"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 11,
+        "tests": [
+          "two_links_test",
+          "parse_and_stringify_test",
+          "parse_and_stringify_test_2",
+          "parse_and_stringify_with_less_parentheses_test",
+          "duplicate_identifiers_test",
+          "test_complex_structure",
+          "test_mixed_formats",
+          "test_multiple_top_level_elements",
+          "test_multiline_with_id",
+          "test_multiline_simple_links",
+          "test_indented_children"
+        ]
+      }
+    ],
+    "multiline_quoted_string": [
+      {
+        "language": "javascript",
+        "test_count": 4,
+        "tests": [
+          "TestMultilineDoubleQuotedReference",
+          "TestSimpleMultilineDoubleQuoted",
+          "TestSimpleMultilineSingleQuoted",
+          "TestMultilineQuotedAsId"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 4,
+        "tests": [
+          "test_multiline_double_quoted_reference",
+          "test_simple_multiline_double_quoted",
+          "test_simple_multiline_single_quoted",
+          "test_multiline_quoted_as_id"
+        ]
+      }
+    ],
+    "nested_parser": [
+      {
+        "language": "javascript",
+        "test_count": 10,
+        "tests": [
+          "SignificantWhitespaceTest",
+          "SimpleSignificantWhitespaceTest",
+          "TwoSpacesSizedWhitespaceTest",
+          "Parse nested structure with indentation",
+          "Test indentation consistency",
+          "Indentation-based children",
+          "Complex indentation",
+          "Test nested links",
+          "Test indentation (parser)",
+          "Test nested indentation (parser)"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 10,
+        "tests": [
+          "significant_whitespace_test",
+          "simple_significant_whitespace_test",
+          "two_spaces_sized_whitespace_test",
+          "parse_nested_structure_with_indentation",
+          "test_indentation_consistency",
+          "test_indentation_based_children",
+          "test_complex_indentation",
+          "test_nested_links",
+          "test_indentation",
+          "test_nested_indentation"
+        ]
+      }
+    ],
+    "tuple": [
+      {
+        "language": "csharp",
+        "test_count": 2,
+        "tests": [
+          "TupleToLinkTest",
+          "NamedTupleToLinkTest"
+        ]
+      }
+    ]
+  },
+  "javascript": {
+    "tuple": [
+      {
+        "language": "csharp",
+        "test_count": 2,
+        "tests": [
+          "TupleToLinkTest",
+          "NamedTupleToLinkTest"
+        ]
+      }
+    ]
+  },
+  "csharp": {
+    "api": [
+      {
+        "language": "python",
+        "test_count": 8,
+        "tests": [
+          "test_is_ref_equivalent",
+          "test_is_link_equivalent",
+          "test_empty_link",
+          "test_simple_link",
+          "test_link_with_source_target",
+          "test_link_with_source_type_target",
+          "test_single_line_format",
+          "test_quoted_references"
+        ]
+      },
+      {
+        "language": "javascript",
+        "test_count": 8,
+        "tests": [
+          "test_is_ref equivalent",
+          "test_is_link equivalent",
+          "test_empty_link",
+          "test_simple_link",
+          "test_link_with_source_target",
+          "test_link_with_source_type_target",
+          "test_single_line_format",
+          "test_quoted_references"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 8,
+        "tests": [
+          "test_is_ref",
+          "test_is_link",
+          "test_empty_link",
+          "test_simple_link",
+          "test_link_with_source_target",
+          "test_link_with_source_type_target",
+          "test_single_line_format",
+          "test_quoted_references"
+        ]
+      }
+    ],
+    "edge_case_parser": [
+      {
+        "language": "javascript",
+        "test_count": 9,
+        "tests": [
+          "EmptyLinkTest",
+          "EmptyLinkWithParenthesesTest",
+          "EmptyLinkWithEmptySelfReferenceTest",
+          "TestAllFeaturesTest",
+          "TestEmptyDocumentTest",
+          "TestWhitespaceOnlyTest",
+          "TestEmptyLinksTest",
+          "TestSingletLinksTest",
+          "TestInvalidInputTest"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 9,
+        "tests": [
+          "empty_link_test",
+          "empty_link_with_parentheses_test",
+          "empty_link_with_empty_self_reference_test",
+          "test_all_features_test",
+          "test_empty_document_test",
+          "test_whitespace_only_test",
+          "test_empty_links_test",
+          "test_singlet_links",
+          "test_invalid_input"
+        ]
+      }
+    ],
+    "indented_id_syntax": [
+      {
+        "language": "javascript",
+        "test_count": 11,
+        "tests": [
+          "Basic indented ID syntax - issue #21",
+          "Indented ID syntax with single value",
+          "Indented ID syntax with multiple values",
+          "Indented ID syntax with numeric ID",
+          "Indented ID syntax with quoted ID",
+          "Multiple indented ID links",
+          "Mixed indented and regular syntax",
+          "Unsupported colon-only syntax should fail",
+          "Indented ID with deeper nesting",
+          "Empty indented ID should work",
+          "Equivalence test - comprehensive"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 6,
+        "tests": [
+          "basic_indented_id_syntax_test",
+          "indented_id_single_value_test",
+          "indented_id_multiple_values_test",
+          "indented_id_numeric_test",
+          "unsupported_colon_only_syntax_test",
+          "empty_indented_id_test"
+        ]
+      }
+    ],
+    "link": [
+      {
+        "language": "python",
+        "test_count": 10,
+        "tests": [
+          "test_link_constructor_with_id_only",
+          "test_link_constructor_with_id_and_values",
+          "test_link_tostring_with_id_only",
+          "test_link_tostring_with_values_only",
+          "test_link_tostring_with_id_and_values",
+          "test_link_escape_reference_simple",
+          "test_link_escape_reference_special_chars",
+          "test_link_simplify",
+          "test_link_combine",
+          "test_link_equals"
+        ]
+      },
+      {
+        "language": "javascript",
+        "test_count": 10,
+        "tests": [
+          "Link constructor with id only",
+          "Link constructor with id and values",
+          "Link toString with id only",
+          "Link toString with values only",
+          "Link toString with id and values",
+          "Link escapeReference for simple reference",
+          "Link escapeReference with special characters",
+          "Link simplify",
+          "Link combine",
+          "Link equals"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 10,
+        "tests": [
+          "link_constructor_with_id_only_test",
+          "link_constructor_with_id_and_values_test",
+          "link_to_string_with_id_only_test",
+          "link_to_string_with_values_only_test",
+          "link_to_string_with_id_and_values_test",
+          "link_equals_test",
+          "link_combine_test",
+          "link_escape_reference_simple_test",
+          "link_escape_reference_with_special_characters_test",
+          "link_simplify_test"
+        ]
+      }
+    ],
+    "links_group": [
+      {
+        "language": "javascript",
+        "test_count": 3,
+        "tests": [
+          "LinksGroup constructor",
+          "LinksGroup toList flattens structure",
+          "LinksGroup toString"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 3,
+        "tests": [
+          "links_group_constructor_equivalent_test",
+          "links_group_to_list_flattens_structure_test",
+          "links_group_to_string_test"
+        ]
+      }
+    ],
+    "mixed_indentation_modes": [
+      {
+        "language": "javascript",
+        "test_count": 8,
+        "tests": [
+          "Hero example - mixed modes - issue #105",
+          "Hero example - alternative format - issue #105",
+          "Hero example - equivalence test - issue #105",
+          "Set/object context without colon",
+          "Sequence/list context with colon",
+          "Sequence context with complex values",
+          "Nested set and sequence contexts",
+          "Deeply nested mixed modes"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 8,
+        "tests": [
+          "hero_example_mixed_modes_test",
+          "hero_example_alternative_format_test",
+          "hero_example_equivalence_test",
+          "set_context_without_colon_test",
+          "sequence_context_with_colon_test",
+          "sequence_context_with_complex_values_test",
+          "nested_set_and_sequence_contexts_test",
+          "deeply_nested_mixed_modes_test"
+        ]
+      }
+    ],
+    "multiline_parser": [
+      {
+        "language": "javascript",
+        "test_count": 11,
+        "tests": [
+          "TwoLinksTest",
+          "ParseAndStringifyTest",
+          "ParseAndStringifyTest2",
+          "ParseAndStringifyWithLessParenthesesTest",
+          "DuplicateIdentifiersTest",
+          "Test complex structure",
+          "Test mixed formats",
+          "Test multiline with id",
+          "Test multiple top level elements",
+          "Test multiline simple links",
+          "Test indented children"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 11,
+        "tests": [
+          "two_links_test",
+          "parse_and_stringify_test",
+          "parse_and_stringify_test_2",
+          "parse_and_stringify_with_less_parentheses_test",
+          "duplicate_identifiers_test",
+          "test_complex_structure",
+          "test_mixed_formats",
+          "test_multiple_top_level_elements",
+          "test_multiline_with_id",
+          "test_multiline_simple_links",
+          "test_indented_children"
+        ]
+      }
+    ],
+    "multiline_quoted_string": [
+      {
+        "language": "javascript",
+        "test_count": 4,
+        "tests": [
+          "TestMultilineDoubleQuotedReference",
+          "TestSimpleMultilineDoubleQuoted",
+          "TestSimpleMultilineSingleQuoted",
+          "TestMultilineQuotedAsId"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 4,
+        "tests": [
+          "test_multiline_double_quoted_reference",
+          "test_simple_multiline_double_quoted",
+          "test_simple_multiline_single_quoted",
+          "test_multiline_quoted_as_id"
+        ]
+      }
+    ],
+    "nested_parser": [
+      {
+        "language": "javascript",
+        "test_count": 10,
+        "tests": [
+          "SignificantWhitespaceTest",
+          "SimpleSignificantWhitespaceTest",
+          "TwoSpacesSizedWhitespaceTest",
+          "Parse nested structure with indentation",
+          "Test indentation consistency",
+          "Indentation-based children",
+          "Complex indentation",
+          "Test nested links",
+          "Test indentation (parser)",
+          "Test nested indentation (parser)"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 10,
+        "tests": [
+          "significant_whitespace_test",
+          "simple_significant_whitespace_test",
+          "two_spaces_sized_whitespace_test",
+          "parse_nested_structure_with_indentation",
+          "test_indentation_consistency",
+          "test_indentation_based_children",
+          "test_complex_indentation",
+          "test_nested_links",
+          "test_indentation",
+          "test_nested_indentation"
+        ]
+      }
+    ],
+    "single_line_parser": [
+      {
+        "language": "python",
+        "test_count": 27,
+        "tests": [
+          "test_single_link",
+          "test_triplet_single_link",
+          "test_bug1",
+          "test_quoted_references",
+          "test_quoted_references_with_spaces",
+          "test_parse_simple_reference",
+          "test_parse_reference_with_colon_and_values",
+          "test_parse_multiline_link",
+          "test_parse_quoted_references",
+          "test_parse_values_only_standalone_colon",
+          "test_single_line_link_with_id",
+          "test_multi_line_link_with_id",
+          "test_link_without_id_multiline_colon",
+          "test_singlet_link",
+          "test_value_link",
+          "test_parse_quoted_references_values_only",
+          "test_quoted_references_with_spaces_in_link",
+          "test_single_quoted_references",
+          "test_nested_links",
+          "test_special_characters_in_quotes",
+          "test_deeply_nested",
+          "test_hyphenated_identifiers",
+          "test_multiple_words_in_quotes",
+          "test_simple_ref",
+          "test_simple_reference_parser",
+          "test_quoted_reference_parser",
+          "test_value_link_parser"
+        ]
+      },
+      {
+        "language": "javascript",
+        "test_count": 29,
+        "tests": [
+          "SingleLinkTest",
+          "TripletSingleLinkTest",
+          "BugTest1",
+          "QuotedReferencesTest",
+          "QuotedReferencesWithSpacesTest",
+          "Parse simple reference",
+          "Parse reference with colon and values",
+          "Parse multiline link",
+          "Parse quoted references",
+          "Parse values only",
+          "Test single-line link with id",
+          "Test multi-line link with id",
+          "Test link without id (single-line)",
+          "Test link without id (multi-line)",
+          "Test singlet link",
+          "Test value link",
+          "ParseQuotedReferencesValuesOnly",
+          "Test quoted references",
+          "Test single-quoted references",
+          "Test nested links",
+          "Test special characters in quotes",
+          "Test deeply nested",
+          "Test hyphenated identifiers",
+          "Test multiple words in quotes",
+          "Test simple ref",
+          "Test simple reference (parser)",
+          "Test quoted reference (parser)",
+          "Test singlet link (parser)",
+          "Test value link (parser)"
+        ]
+      },
+      {
+        "language": "rust",
+        "test_count": 29,
+        "tests": [
+          "single_link_test",
+          "triplet_single_link_test",
+          "bug_test_1",
+          "quoted_references_test",
+          "quoted_references_with_spaces_test",
+          "parse_simple_reference",
+          "parse_reference_with_colon_and_values",
+          "parse_multiline_link",
+          "parse_quoted_references",
+          "parse_values_only",
+          "test_single_line_link_with_id",
+          "test_multi_line_link_with_id",
+          "test_link_without_id_single_line",
+          "test_link_without_id_multi_line",
+          "test_singlet_link",
+          "test_value_link",
+          "test_quoted_references",
+          "test_single_quoted_references",
+          "test_nested_links",
+          "test_special_characters_in_quotes",
+          "test_deeply_nested",
+          "test_hyphenated_identifiers",
+          "test_multiple_words_in_quotes",
+          "test_simple_reference",
+          "test_quoted_reference",
+          "test_singlet_link_parser",
+          "test_value_link_parser",
+          "test_link_with_id",
+          "test_single_line_link"
+        ]
+      }
+    ]
+  },
+  "rust": {
+    "tuple": [
+      {
+        "language": "csharp",
+        "test_count": 2,
+        "tests": [
+          "TupleToLinkTest",
+          "NamedTupleToLinkTest"
+        ]
+      }
+    ]
+  }
+}

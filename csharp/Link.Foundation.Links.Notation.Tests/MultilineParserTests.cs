@@ -69,7 +69,7 @@ all (love mama)";
         }
 
         [Fact]
-        public static void TestComplexStructureTest()
+        public static void ComplexStructureTest()
         {
             var input = @"(Type: Type Type)
   Number
@@ -84,7 +84,7 @@ all (love mama)";
         }
 
         [Fact]
-        public static void TestMixedFormatsTest()
+        public static void MixedFormatsTest()
         {
             // Mix of single-line and multi-line formats
             var input = @"id1: value1
@@ -100,7 +100,7 @@ simple_ref
         }
 
         [Fact]
-        public static void TestMultilineWithIdTest()
+        public static void MultilineWithIdTest()
         {
             // Test multi-line link with id
             var input = "(id: value1 value2)";
@@ -109,7 +109,7 @@ simple_ref
         }
 
         [Fact]
-        public static void TestMultipleTopLevelElementsTest()
+        public static void MultipleTopLevelElementsTest()
         {
             // Test multiple top-level elements
             var input = "(elem1: val1)\n(elem2: val2)";
@@ -118,7 +118,7 @@ simple_ref
         }
 
         [Fact]
-        public static void TestMultilineSimpleLinksTest()
+        public static void MultilineSimpleLinksTest()
         {
             var input = "(1: 1 1)\n(2: 2 2)";
             var parser = new Parser();
@@ -136,7 +136,7 @@ simple_ref
         }
 
         [Fact]
-        public static void TestIndentedChildrenTest()
+        public static void IndentedChildrenTest()
         {
             var input = "parent\n  child1\n  child2";
             var parser = new Parser();

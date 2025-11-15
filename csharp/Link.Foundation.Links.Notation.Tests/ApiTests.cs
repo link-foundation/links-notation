@@ -7,7 +7,7 @@ namespace Link.Foundation.Links.Notation.Tests
     public static class ApiTests
     {
         [Fact]
-        public static void TestIsRefEquivalentTest()
+        public static void IsRefEquivalentTest()
         {
             // C# doesn't have separate Ref/Link types, but we can test simple link behavior
             var simpleLink = new Link<string>("some_value", null);
@@ -16,7 +16,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestIsLinkEquivalentTest()
+        public static void IsLinkEquivalentTest()
         {
             // Test link with values
             var values = new List<Link<string>> { new Link<string>("child", null) };
@@ -27,7 +27,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestEmptyLinkTest()
+        public static void EmptyLinkTest()
         {
             var link = new Link<string>(null, new List<Link<string>>());
             var output = link.ToString();
@@ -35,7 +35,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestSimpleLinkTest()
+        public static void SimpleLinkTest()
         {
             var input = "(1: 1 1)";
             var parser = new Parser();
@@ -48,7 +48,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestLinkWithSourceTargetTest()
+        public static void LinkWithSourceTargetTest()
         {
             var input = "(index: source target)";
             var parser = new Parser();
@@ -60,7 +60,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestLinkWithSourceTypeTargetTest()
+        public static void LinkWithSourceTypeTargetTest()
         {
             var input = "(index: source type target)";
             var parser = new Parser();
@@ -72,7 +72,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestSingleLineFormatTest()
+        public static void SingleLineFormatTest()
         {
             var input = "id: value1 value2";
             var parser = new Parser();
@@ -86,7 +86,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestQuotedReferencesTest()
+        public static void QuotedReferencesTest()
         {
             var input = @"(""quoted id"": ""value with spaces"")";
             var parser = new Parser();

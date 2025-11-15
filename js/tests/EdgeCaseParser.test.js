@@ -24,7 +24,7 @@ test('EmptyLinkWithEmptySelfReferenceTest', () => {
   expect(() => parser.parse(source)).toThrow();
 });
 
-test('TestAllFeaturesTest', () => {
+test('AllFeaturesTest', () => {
   // Test single-line link with id
   let input = 'id: value1 value2';
   let result = parser.parse(input);
@@ -73,21 +73,21 @@ test('TestAllFeaturesTest', () => {
   expect(result.length).toBeGreaterThan(0);
 });
 
-test('TestEmptyDocumentTest', () => {
+test('EmptyDocumentTest', () => {
   const input = '';
   // Empty document should return empty array
   const result = parser.parse(input);
   expect(result).toEqual([]);
 });
 
-test('TestWhitespaceOnlyTest', () => {
+test('WhitespaceOnlyTest', () => {
   const input = '   \n   \n   ';
   // Whitespace-only document should return empty array
   const result = parser.parse(input);
   expect(result).toEqual([]);
 });
 
-test('TestEmptyLinksTest', () => {
+test('EmptyLinksTest', () => {
   let input = '()';
   let result = parser.parse(input);
   expect(result.length).toBe(1);
@@ -105,7 +105,7 @@ test('TestEmptyLinksTest', () => {
   expect(result[0].values).toEqual([]);
 });
 
-test('TestSingletLinksTest', () => {
+test('SingletLinksTest', () => {
   // Test singlet (1)
   let input = '(1)';
   let result = parser.parse(input);
@@ -155,7 +155,7 @@ test('TestSingletLinksTest', () => {
   expect(result[0].values[3].values).toEqual([]);
 });
 
-test('TestInvalidInputTest', () => {
+test('InvalidInputTest', () => {
   const input = '(invalid';
   // Unclosed parentheses should throw an error
   expect(() => parser.parse(input)).toThrow();
