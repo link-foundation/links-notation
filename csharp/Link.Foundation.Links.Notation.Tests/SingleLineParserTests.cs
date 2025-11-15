@@ -110,7 +110,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestSingletLinkTest()
+        public static void SingletLinkTest()
         {
             // Test singlet link
             var input = "(singlet)";
@@ -124,7 +124,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestValueLinkTest()
+        public static void ValueLinkTest()
         {
             // Test value link
             var input = "(value1 value2 value3)";
@@ -133,7 +133,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestQuotedReferencesWithSpecialCharsTest()
+        public static void QuotedReferencesWithSpecialCharsTest()
         {
             // Test quoted references
             var input = @"(""id with spaces"": ""value with spaces"")";
@@ -142,7 +142,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestSingleQuotedReferencesTest()
+        public static void SingleQuotedReferencesTest()
         {
             // Test single-quoted references
             var input = "('id': 'value')";
@@ -168,7 +168,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestNestedLinksSingleLineTest()
+        public static void NestedLinksSingleLineTest()
         {
             // Test nested links
             var input = "(outer: (inner: value))";
@@ -177,7 +177,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestHyphenatedIdentifiersTest()
+        public static void HyphenatedIdentifiersTest()
         {
             // Test support for hyphenated identifiers like in BugTest1
             var source = @"(conan-center-index: repository info)";
@@ -188,7 +188,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestMultipleWordsInQuotesTest()
+        public static void MultipleWordsInQuotesTest()
         {
             var source = @"(""New York"": city state)";
             var parser = new Parser();
@@ -199,7 +199,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestSpecialCharactersInQuotesTest()
+        public static void SpecialCharactersInQuotesTest()
         {
             var input = @"(""key:with:colons"": ""value(with)parens"")";
             var result = new Parser().Parse(input);
@@ -211,7 +211,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestDeeplyNestedTest()
+        public static void DeeplyNestedTest()
         {
             var input = "(a: (b: (c: (d: (e: value)))))";
             var result = new Parser().Parse(input);
@@ -219,7 +219,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestSingleLineWithIdTest()
+        public static void SingleLineWithIdTest()
         {
             // Test single-line link with id
             var input = "id: value1 value2";
@@ -228,7 +228,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestSingleLineWithoutIdTest()
+        public static void SingleLineWithoutIdTest()
         {
             // Test link without id (single-line) - now forbidden
             var input = ": value1 value2";
@@ -236,7 +236,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestMultilineWithoutIdTest()
+        public static void MultilineWithoutIdTest()
         {
             // Test link without id (multi-line) - now forbidden
             var input = "(: value1 value2)";
@@ -244,7 +244,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestSimpleRefTest()
+        public static void SimpleRefTest()
         {
             var input = "simple_ref";
             var result = new Parser().Parse(input);
@@ -252,7 +252,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestMultiLineLinkWithIdTest()
+        public static void MultiLineLinkWithIdTest()
         {
             var input = "(id: value1 value2)";
             var result = new Parser().Parse(input);
@@ -260,14 +260,14 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestLinkWithoutIdMultiLineTest()
+        public static void LinkWithoutIdMultiLineTest()
         {
             var input = "(: value1 value2)";
             Assert.Throws<FormatException>(() => new Parser().Parse(input));
         }
 
         [Fact]
-        public static void TestSimpleReferenceParserTest()
+        public static void SimpleReferenceParserTest()
         {
             var input = "hello";
             var result = new Parser().Parse(input);
@@ -279,7 +279,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestQuotedReferenceParserTest()
+        public static void QuotedReferenceParserTest()
         {
             var input = "\"hello world\"";
             var result = new Parser().Parse(input);
@@ -291,7 +291,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestSingletLinkParserTest()
+        public static void SingletLinkParserTest()
         {
             var input = "(singlet)";
             var result = new Parser().Parse(input);
@@ -304,7 +304,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void TestValueLinkParserTest()
+        public static void ValueLinkParserTest()
         {
             var input = "(a b c)";
             var result = new Parser().Parse(input);

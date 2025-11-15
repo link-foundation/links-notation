@@ -62,9 +62,72 @@ mod tests {
     fn empty_indented_id_test() {
         let input = "empty:";
         let result = parse_lino_to_links(input).unwrap();
-        
+
         assert_eq!(result.len(), 1);
         // For empty ID, it shows just the ID as a reference
         assert_eq!(format!("{}", result[0]), "empty");
+    }
+
+    #[test]
+    fn indented_id_with_quoted_id_test() {
+        let input = "\"complex id\":\n  value1\n  value2";
+        let result = parse_lino_to_links(input).unwrap();
+
+        assert_eq!(result.len(), 1);
+        let formatted = format!("{}", result[0]);
+        assert!(formatted.contains("complex id"));
+        assert!(formatted.contains("value1"));
+        assert!(formatted.contains("value2"));
+    }
+
+    #[test]
+    fn multiple_indented_id_links_test() {
+        let input = "first:\n  a\n  b\nsecond:\n  c\n  d";
+        let result = parse_lino_to_links(input).unwrap();
+
+        assert_eq!(result.len(), 2);
+        let formatted1 = format!("{}", result[0]);
+        let formatted2 = format!("{}", result[1]);
+        assert!(formatted1.contains("first"));
+        assert!(formatted2.contains("second"));
+    }
+
+    #[test]
+    fn mixed_indented_and_regular_syntax_test() {
+        let input = "first:\n  a\n  b\n(second: c d)\nthird value";
+        let result = parse_lino_to_links(input).unwrap();
+
+        assert_eq!(result.len(), 3);
+        // First link should have 'first' with values
+        let formatted1 = format!("{}", result[0]);
+        assert!(formatted1.contains("first"));
+    }
+
+    #[test]
+    fn indented_id_with_deeper_nesting_test() {
+        let input = "root:\n  child1\n  child2\n    grandchild";
+        let result = parse_lino_to_links(input).unwrap();
+
+        assert!(result.len() > 0);
+        // The root should exist
+        let formatted = format!("{}", result[0]);
+        assert!(formatted.contains("root"));
+    }
+
+    #[test]
+    fn equivalence_test_comprehensive() {
+        let test_cases = vec![
+            ("test:\n  one", "(test: one)"),
+            ("x:\n  a\n  b\n  c", "(x: a b c)"),
+        ];
+
+        for (indented, inline) in test_cases {
+            let indented_result = parse_lino_to_links(indented).unwrap();
+            let inline_result = parse_lino_to_links(inline).unwrap();
+
+            assert_eq!(indented_result.len(), inline_result.len());
+            // Both should format to the same output
+            assert_eq!(format!("{}", indented_result[0]), format!("{}", inline_result[0]));
+        }
     }
 }

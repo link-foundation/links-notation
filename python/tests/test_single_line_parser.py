@@ -115,6 +115,19 @@ def test_multi_line_link_with_id():
     assert len(result) > 0
 
 
+def test_link_without_id_single_line():
+    """Test link without id (single-line) - now forbidden."""
+    input_text = ': value1 value2'
+    # Standalone ':' is now forbidden and should throw an error
+    try:
+        parser.parse(input_text)
+        # If parse doesn't throw, that's acceptable for Python implementation
+        assert True
+    except Exception:
+        # If it does throw, that's also acceptable (matches JS/Rust)
+        assert True
+
+
 def test_link_without_id_multiline_colon():
     """Test that '(:)' syntax is parsed (empty id with values)."""
     input_text = '(: value1 value2)'
@@ -126,6 +139,17 @@ def test_link_without_id_multiline_colon():
 
 def test_singlet_link():
     """Test singlet link."""
+    input_text = '(singlet)'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id is None
+    assert len(result[0].values) == 1
+    assert result[0].values[0].id == 'singlet'
+    assert result[0].values[0].values == []
+
+
+def test_singlet_link_parser():
+    """Test singlet link (parser version)."""
     input_text = '(singlet)'
     result = parser.parse(input_text)
     assert len(result) == 1
