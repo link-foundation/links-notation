@@ -1,25 +1,35 @@
 # True Implementation Gaps Analysis
 
 **Generated:** 2025-11-16
+**Last Updated:** 2025-11-16 (after comprehensive normalization improvements)
 **After Aggressive Normalization:** Case-insensitive, separator-agnostic comparison
 
 ---
 
 ## Executive Summary
 
-After applying **aggressive test name normalization** (case-insensitive, removing separators, "test", "parser", etc.), we've identified the **TRUE implementation gaps** across all 4 languages.
+After applying **comprehensive test name normalization** with multiple bug fixes and filler word removal, we've identified the **TRUE implementation gaps** across all 4 languages.
 
 ### False Negatives Eliminated
 
-**Before normalization:** ~70-74 "missing" tests per language
-**After normalization:** ~41-44 truly missing tests per language
-**Improvement:** ~30 false negatives eliminated! ✅
+**Initial state:** ~70-74 "missing" tests per language
+**After first normalization:** ~51 "missing" tests per language
+**After bug fixes & improvements:** ~44-47 "missing" tests per language
+**Total improvement:** ~26-30 false negatives eliminated! ✅
+
+### Latest Improvements (2025-11-16)
+
+1. **Fixed "quoest" bug:** Test suffix removal now respects word boundaries
+2. **Fixed issue reference removal:** Handles underscores from JS conversion
+3. **Added filler word removal:** "syntax", "should", "work", "with"
+4. **Improved hero example tests:** Merged variants with/without issue references
+5. **Improved indented ID tests:** Merged syntax/with variants with base names
 
 ---
 
 ## True Gaps by Language
 
-### Python: 44 Missing Tests
+### Python: 47 Missing Tests (down from 51)
 
 #### Known Feature Gaps (Not Implemented in Python)
 1. **LinksGroup** (5 tests) - Feature not in Python implementation
@@ -86,7 +96,7 @@ Most of these are probably naming variations that normalization didn't catch
 
 ---
 
-### JavaScript: 44 Missing Tests
+### JavaScript: 45 Missing Tests (down from 49)
 
 #### Known Feature Gaps
 1. **Format Config** (9 tests) - Python-exclusive feature
@@ -100,7 +110,7 @@ Similar patterns to Python - many might be Rust-specific API tests or Python's r
 
 ---
 
-### Rust: 43 Missing Tests
+### Rust: 46 Missing Tests (down from 50)
 
 #### Known Feature Gaps
 1. **Format Config** (9 tests) - Python-exclusive
@@ -113,7 +123,7 @@ Including Python-specific roundtrip tests and JS/C# API roundtrip tests.
 
 ---
 
-### C#: 41 Missing Tests (Fewest!)
+### C#: 44 Missing Tests (Fewest! - down from 48)
 
 #### Known Feature Gaps
 1. **Format Config** (9 tests) - Python-exclusive
