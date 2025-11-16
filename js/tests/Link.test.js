@@ -30,7 +30,7 @@ test('Link toString with id and values', () => {
   expect(link.toString()).toBe('(parent: child1 child2)');
 });
 
-test('Link escapeReference for simple reference', () => {
+test('Link escapeReference simple', () => {
   expect(Link.escapeReference('simple')).toBe('simple');
 });
 

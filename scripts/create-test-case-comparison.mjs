@@ -29,21 +29,8 @@ function normalizeTestName(testName) {
   return testName
     .toLowerCase()                             // Lowercase everything
     .replace(/^test[_\s-]*/g, '')             // Remove "test" prefix with separators
-    .replace(/issue[\s_#-]*\d+/g, '')         // Remove issue references like "issue #21", "issue_105", etc.
     .replace(/[_\s-]*test[_\s-]*$/g, '')      // Remove "test" suffix with leading/trailing separators
-    .replace(/[_\s\-()'":#/\\]/g, '')         // Remove ALL separators and special chars FIRST
-    .replace(/^parser$/g, '')                  // Remove standalone "parser"
-    .replace(/parser$/g, '')                   // Remove "parser" at end
-    .replace(/link/g, '')                      // Remove "link" anywhere
-    .replace(/^list$/g, '')                    // Remove standalone "list"
-    .replace(/^object$/g, '')                  // Remove standalone "object"
-    .replace(/syntax/g, '')                    // Remove "syntax" anywhere
-    .replace(/should/g, '')                    // Remove "should" anywhere
-    .replace(/work/g, '')                      // Remove "work" anywhere
-    .replace(/produce/g, '')                   // Remove "produce" anywhere
-    .replace(/same/g, '')                      // Remove "same" anywhere
-    .replace(/result/g, '')                    // Remove "result" anywhere
-    .replace(/^with$/g, '')                    // Remove standalone "with"
+    .replace(/[_\s\-()'":#/\\]/g, '')         // Remove ALL separators and special chars
     .trim();
 }
 
