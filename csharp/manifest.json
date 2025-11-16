@@ -32,6 +32,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.FormatOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.FormatOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.FormatOptions",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.FormatOptions.yml\" sourcestartlinenumber=\"1\">FormatOptions for Lino notation formatting.\nProvides configuration options for controlling how Link objects are formatted.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Link.Foundation.Links.Notation.ILinksGroupListExtensions.yml",
       "output": {
         ".html": {
@@ -71,6 +85,20 @@
       "IsMRef": true,
       "Title": "Link.Foundation.Links.Notation.Link<TLinkAddress>",
       "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Link-1.yml\" sourcestartlinenumber=\"1\">Represents a link in the Links Notation with an optional identifier and nested values.\nLinks can represent simple references, complex nested structures, or relationships between references to links.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.LinkFormatExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.LinkFormatExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.LinkFormatExtensions",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.LinkFormatExtensions.yml\" sourcestartlinenumber=\"1\">Provides extension methods for formatting <xref href=\"Link.Foundation.Links.Notation.Link%601\" data-throw-if-not-resolved=\"false\"></xref> instances with FormatOptions.</p>\n"
     },
     {
       "type": "ManagedReference",

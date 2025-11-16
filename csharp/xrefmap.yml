@@ -7,6 +7,135 @@ references:
   commentId: N:Link.Foundation.Links.Notation
   fullName: Link.Foundation.Links.Notation
   nameWithType: Link.Foundation.Links.Notation
+- uid: Link.Foundation.Links.Notation.FormatOptions
+  name: FormatOptions
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html
+  commentId: T:Link.Foundation.Links.Notation.FormatOptions
+  fullName: Link.Foundation.Links.Notation.FormatOptions
+  nameWithType: FormatOptions
+- uid: Link.Foundation.Links.Notation.FormatOptions.GroupConsecutive
+  name: GroupConsecutive
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_GroupConsecutive
+  commentId: P:Link.Foundation.Links.Notation.FormatOptions.GroupConsecutive
+  fullName: Link.Foundation.Links.Notation.FormatOptions.GroupConsecutive
+  nameWithType: FormatOptions.GroupConsecutive
+- uid: Link.Foundation.Links.Notation.FormatOptions.GroupConsecutive*
+  name: GroupConsecutive
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_GroupConsecutive_
+  commentId: Overload:Link.Foundation.Links.Notation.FormatOptions.GroupConsecutive
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.FormatOptions.GroupConsecutive
+  nameWithType: FormatOptions.GroupConsecutive
+- uid: Link.Foundation.Links.Notation.FormatOptions.IndentLongLines
+  name: IndentLongLines
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_IndentLongLines
+  commentId: P:Link.Foundation.Links.Notation.FormatOptions.IndentLongLines
+  fullName: Link.Foundation.Links.Notation.FormatOptions.IndentLongLines
+  nameWithType: FormatOptions.IndentLongLines
+- uid: Link.Foundation.Links.Notation.FormatOptions.IndentLongLines*
+  name: IndentLongLines
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_IndentLongLines_
+  commentId: Overload:Link.Foundation.Links.Notation.FormatOptions.IndentLongLines
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.FormatOptions.IndentLongLines
+  nameWithType: FormatOptions.IndentLongLines
+- uid: Link.Foundation.Links.Notation.FormatOptions.IndentString
+  name: IndentString
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_IndentString
+  commentId: P:Link.Foundation.Links.Notation.FormatOptions.IndentString
+  fullName: Link.Foundation.Links.Notation.FormatOptions.IndentString
+  nameWithType: FormatOptions.IndentString
+- uid: Link.Foundation.Links.Notation.FormatOptions.IndentString*
+  name: IndentString
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_IndentString_
+  commentId: Overload:Link.Foundation.Links.Notation.FormatOptions.IndentString
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.FormatOptions.IndentString
+  nameWithType: FormatOptions.IndentString
+- uid: Link.Foundation.Links.Notation.FormatOptions.LessParentheses
+  name: LessParentheses
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_LessParentheses
+  commentId: P:Link.Foundation.Links.Notation.FormatOptions.LessParentheses
+  fullName: Link.Foundation.Links.Notation.FormatOptions.LessParentheses
+  nameWithType: FormatOptions.LessParentheses
+- uid: Link.Foundation.Links.Notation.FormatOptions.LessParentheses*
+  name: LessParentheses
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_LessParentheses_
+  commentId: Overload:Link.Foundation.Links.Notation.FormatOptions.LessParentheses
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.FormatOptions.LessParentheses
+  nameWithType: FormatOptions.LessParentheses
+- uid: Link.Foundation.Links.Notation.FormatOptions.MaxInlineRefs
+  name: MaxInlineRefs
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_MaxInlineRefs
+  commentId: P:Link.Foundation.Links.Notation.FormatOptions.MaxInlineRefs
+  fullName: Link.Foundation.Links.Notation.FormatOptions.MaxInlineRefs
+  nameWithType: FormatOptions.MaxInlineRefs
+- uid: Link.Foundation.Links.Notation.FormatOptions.MaxInlineRefs*
+  name: MaxInlineRefs
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_MaxInlineRefs_
+  commentId: Overload:Link.Foundation.Links.Notation.FormatOptions.MaxInlineRefs
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.FormatOptions.MaxInlineRefs
+  nameWithType: FormatOptions.MaxInlineRefs
+- uid: Link.Foundation.Links.Notation.FormatOptions.MaxLineLength
+  name: MaxLineLength
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_MaxLineLength
+  commentId: P:Link.Foundation.Links.Notation.FormatOptions.MaxLineLength
+  fullName: Link.Foundation.Links.Notation.FormatOptions.MaxLineLength
+  nameWithType: FormatOptions.MaxLineLength
+- uid: Link.Foundation.Links.Notation.FormatOptions.MaxLineLength*
+  name: MaxLineLength
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_MaxLineLength_
+  commentId: Overload:Link.Foundation.Links.Notation.FormatOptions.MaxLineLength
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.FormatOptions.MaxLineLength
+  nameWithType: FormatOptions.MaxLineLength
+- uid: Link.Foundation.Links.Notation.FormatOptions.PreferInline
+  name: PreferInline
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_PreferInline
+  commentId: P:Link.Foundation.Links.Notation.FormatOptions.PreferInline
+  fullName: Link.Foundation.Links.Notation.FormatOptions.PreferInline
+  nameWithType: FormatOptions.PreferInline
+- uid: Link.Foundation.Links.Notation.FormatOptions.PreferInline*
+  name: PreferInline
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_PreferInline_
+  commentId: Overload:Link.Foundation.Links.Notation.FormatOptions.PreferInline
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.FormatOptions.PreferInline
+  nameWithType: FormatOptions.PreferInline
+- uid: Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByLength(System.String)
+  name: ShouldIndentByLength(string)
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_ShouldIndentByLength_System_String_
+  commentId: M:Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByLength(System.String)
+  name.vb: ShouldIndentByLength(String)
+  fullName: Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByLength(string)
+  fullName.vb: Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByLength(String)
+  nameWithType: FormatOptions.ShouldIndentByLength(string)
+  nameWithType.vb: FormatOptions.ShouldIndentByLength(String)
+- uid: Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByLength*
+  name: ShouldIndentByLength
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_ShouldIndentByLength_
+  commentId: Overload:Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByLength
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByLength
+  nameWithType: FormatOptions.ShouldIndentByLength
+- uid: Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByRefCount(System.Int32)
+  name: ShouldIndentByRefCount(int)
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_ShouldIndentByRefCount_System_Int32_
+  commentId: M:Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByRefCount(System.Int32)
+  name.vb: ShouldIndentByRefCount(Integer)
+  fullName: Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByRefCount(int)
+  fullName.vb: Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByRefCount(Integer)
+  nameWithType: FormatOptions.ShouldIndentByRefCount(int)
+  nameWithType.vb: FormatOptions.ShouldIndentByRefCount(Integer)
+- uid: Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByRefCount*
+  name: ShouldIndentByRefCount
+  href: api/Link.Foundation.Links.Notation.FormatOptions.html#Link_Foundation_Links_Notation_FormatOptions_ShouldIndentByRefCount_
+  commentId: Overload:Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByRefCount
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.FormatOptions.ShouldIndentByRefCount
+  nameWithType: FormatOptions.ShouldIndentByRefCount
 - uid: Link.Foundation.Links.Notation.ILinksGroupListExtensions
   name: ILinksGroupListExtensions
   href: api/Link.Foundation.Links.Notation.ILinksGroupListExtensions.html
@@ -51,6 +180,15 @@ references:
   fullName.vb: Link.Foundation.Links.Notation.IListExtensions.Format(Of TLinkAddress)(System.Collections.Generic.IList(Of Link.Foundation.Links.Notation.Link(Of TLinkAddress)))
   nameWithType: IListExtensions.Format<TLinkAddress>(IList<Link<TLinkAddress>>)
   nameWithType.vb: IListExtensions.Format(Of TLinkAddress)(IList(Of Link(Of TLinkAddress)))
+- uid: Link.Foundation.Links.Notation.IListExtensions.Format``1(System.Collections.Generic.IList{Link.Foundation.Links.Notation.Link{``0}},Link.Foundation.Links.Notation.FormatOptions)
+  name: Format<TLinkAddress>(IList<Link<TLinkAddress>>, FormatOptions)
+  href: api/Link.Foundation.Links.Notation.IListExtensions.html#Link_Foundation_Links_Notation_IListExtensions_Format__1_System_Collections_Generic_IList_Link_Foundation_Links_Notation_Link___0___Link_Foundation_Links_Notation_FormatOptions_
+  commentId: M:Link.Foundation.Links.Notation.IListExtensions.Format``1(System.Collections.Generic.IList{Link.Foundation.Links.Notation.Link{``0}},Link.Foundation.Links.Notation.FormatOptions)
+  name.vb: Format(Of TLinkAddress)(IList(Of Link(Of TLinkAddress)), FormatOptions)
+  fullName: Link.Foundation.Links.Notation.IListExtensions.Format<TLinkAddress>(System.Collections.Generic.IList<Link.Foundation.Links.Notation.Link<TLinkAddress>>, Link.Foundation.Links.Notation.FormatOptions)
+  fullName.vb: Link.Foundation.Links.Notation.IListExtensions.Format(Of TLinkAddress)(System.Collections.Generic.IList(Of Link.Foundation.Links.Notation.Link(Of TLinkAddress)), Link.Foundation.Links.Notation.FormatOptions)
+  nameWithType: IListExtensions.Format<TLinkAddress>(IList<Link<TLinkAddress>>, FormatOptions)
+  nameWithType.vb: IListExtensions.Format(Of TLinkAddress)(IList(Of Link(Of TLinkAddress)), FormatOptions)
 - uid: Link.Foundation.Links.Notation.IListExtensions.Format``1(System.Collections.Generic.IList{Link.Foundation.Links.Notation.Link{``0}},System.Boolean)
   name: Format<TLinkAddress>(IList<Link<TLinkAddress>>, bool)
   href: api/Link.Foundation.Links.Notation.IListExtensions.html#Link_Foundation_Links_Notation_IListExtensions_Format__1_System_Collections_Generic_IList_Link_Foundation_Links_Notation_Link___0___System_Boolean_
@@ -60,6 +198,28 @@ references:
   fullName.vb: Link.Foundation.Links.Notation.IListExtensions.Format(Of TLinkAddress)(System.Collections.Generic.IList(Of Link.Foundation.Links.Notation.Link(Of TLinkAddress)), Boolean)
   nameWithType: IListExtensions.Format<TLinkAddress>(IList<Link<TLinkAddress>>, bool)
   nameWithType.vb: IListExtensions.Format(Of TLinkAddress)(IList(Of Link(Of TLinkAddress)), Boolean)
+- uid: Link.Foundation.Links.Notation.LinkFormatExtensions
+  name: LinkFormatExtensions
+  href: api/Link.Foundation.Links.Notation.LinkFormatExtensions.html
+  commentId: T:Link.Foundation.Links.Notation.LinkFormatExtensions
+  fullName: Link.Foundation.Links.Notation.LinkFormatExtensions
+  nameWithType: LinkFormatExtensions
+- uid: Link.Foundation.Links.Notation.LinkFormatExtensions.FormatWithOptions*
+  name: FormatWithOptions
+  href: api/Link.Foundation.Links.Notation.LinkFormatExtensions.html#Link_Foundation_Links_Notation_LinkFormatExtensions_FormatWithOptions_
+  commentId: Overload:Link.Foundation.Links.Notation.LinkFormatExtensions.FormatWithOptions
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.LinkFormatExtensions.FormatWithOptions
+  nameWithType: LinkFormatExtensions.FormatWithOptions
+- uid: Link.Foundation.Links.Notation.LinkFormatExtensions.FormatWithOptions``1(Link.Foundation.Links.Notation.Link{``0},Link.Foundation.Links.Notation.FormatOptions)
+  name: FormatWithOptions<TLinkAddress>(Link<TLinkAddress>, FormatOptions)
+  href: api/Link.Foundation.Links.Notation.LinkFormatExtensions.html#Link_Foundation_Links_Notation_LinkFormatExtensions_FormatWithOptions__1_Link_Foundation_Links_Notation_Link___0__Link_Foundation_Links_Notation_FormatOptions_
+  commentId: M:Link.Foundation.Links.Notation.LinkFormatExtensions.FormatWithOptions``1(Link.Foundation.Links.Notation.Link{``0},Link.Foundation.Links.Notation.FormatOptions)
+  name.vb: FormatWithOptions(Of TLinkAddress)(Link(Of TLinkAddress), FormatOptions)
+  fullName: Link.Foundation.Links.Notation.LinkFormatExtensions.FormatWithOptions<TLinkAddress>(Link.Foundation.Links.Notation.Link<TLinkAddress>, Link.Foundation.Links.Notation.FormatOptions)
+  fullName.vb: Link.Foundation.Links.Notation.LinkFormatExtensions.FormatWithOptions(Of TLinkAddress)(Link.Foundation.Links.Notation.Link(Of TLinkAddress), Link.Foundation.Links.Notation.FormatOptions)
+  nameWithType: LinkFormatExtensions.FormatWithOptions<TLinkAddress>(Link<TLinkAddress>, FormatOptions)
+  nameWithType.vb: LinkFormatExtensions.FormatWithOptions(Of TLinkAddress)(Link(Of TLinkAddress), FormatOptions)
 - uid: Link.Foundation.Links.Notation.Link`1
   name: Link<TLinkAddress>
   href: api/Link.Foundation.Links.Notation.Link-1.html
