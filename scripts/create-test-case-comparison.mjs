@@ -31,14 +31,16 @@ function normalizeTestName(testName) {
     .replace(/^test[_\s-]*/g, '')             // Remove "test" prefix with separators
     .replace(/issue[\s_#-]*\d+/g, '')         // Remove issue references like "issue #21", "issue_105", etc.
     .replace(/[_\s-]*test[_\s-]*$/g, '')      // Remove "test" suffix with leading/trailing separators
-    .replace(/[_\s-]*parser[_\s-]*$/g, '')    // Remove "parser" suffix with leading/trailing separators
-    .replace(/(^|[_\s-]+)list([_\s-]+|$)/g, '$1$2')     // Remove "list" with separators
-    .replace(/(^|[_\s-]+)object([_\s-]+|$)/g, '$1$2')   // Remove "object" with separators
-    .replace(/(^|[_\s-]+)syntax([_\s-]+|$)/g, '$1$2')   // Remove "syntax" with separators
-    .replace(/(^|[_\s-]+)should([_\s-]+|$)/g, '$1$2')   // Remove "should" with separators
-    .replace(/(^|[_\s-]+)work([_\s-]+|$)/g, '$1$2')     // Remove "work" with separators
-    .replace(/(^|[_\s-]+)with([_\s-]+|$)/g, '$1$2')     // Remove "with" with separators
-    .replace(/[_\s\-()'":#/\\]/g, '')         // Remove ALL separators and special chars
+    .replace(/[_\s\-()'":#/\\]/g, '')         // Remove ALL separators and special chars FIRST
+    .replace(/^parser$/g, '')                  // Remove standalone "parser"
+    .replace(/parser$/g, '')                   // Remove "parser" at end
+    .replace(/link/g, '')                      // Remove "link" anywhere
+    .replace(/^list$/g, '')                    // Remove standalone "list"
+    .replace(/^object$/g, '')                  // Remove standalone "object"
+    .replace(/syntax/g, '')                    // Remove "syntax" anywhere
+    .replace(/should/g, '')                    // Remove "should" anywhere
+    .replace(/work/g, '')                      // Remove "work" anywhere
+    .replace(/^with$/g, '')                    // Remove standalone "with"
     .trim();
 }
 

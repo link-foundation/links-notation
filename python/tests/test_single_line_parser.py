@@ -115,7 +115,7 @@ def test_multi_line_link_with_id():
     assert len(result) > 0
 
 
-def test_link_without_id_single_line():
+def test_single_line_without_id():
     """Test link without id (single-line) - now forbidden."""
     input_text = ': value1 value2'
     # Standalone ':' is now forbidden and should throw an error
@@ -128,7 +128,7 @@ def test_link_without_id_single_line():
         assert True
 
 
-def test_link_without_id_multiline_colon():
+def test_multiline_without_id():
     """Test that '(:)' syntax is parsed (empty id with values)."""
     input_text = '(: value1 value2)'
     # Python parser allows this - empty id with values
