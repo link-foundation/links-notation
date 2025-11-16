@@ -40,6 +40,9 @@ function normalizeTestName(testName) {
     .replace(/syntax/g, '')                    // Remove "syntax" anywhere
     .replace(/should/g, '')                    // Remove "should" anywhere
     .replace(/work/g, '')                      // Remove "work" anywhere
+    .replace(/produce/g, '')                   // Remove "produce" anywhere
+    .replace(/same/g, '')                      // Remove "same" anywhere
+    .replace(/result/g, '')                    // Remove "result" anywhere
     .replace(/^with$/g, '')                    // Remove standalone "with"
     .trim();
 }

@@ -79,8 +79,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| leadingspacesvsnoleadingspaces | [✅](python/tests/test_indentation_consistency.py:6) | ❌ | [✅](rust/tests/indentation_consistency_tests.rs:7) | ❌ |
-| leadingspacesvsnoleadingspacesproducesameresult | ❌ | [✅](js/tests/IndentationConsistency.test.js:11) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:8) |
+| leadingspacesvsnoleadingspaces | [✅](python/tests/test_indentation_consistency.py:6) | [✅](js/tests/IndentationConsistency.test.js:11) | [✅](rust/tests/indentation_consistency_tests.rs:7) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:8) |
 | simpletwovsfourspaces | ❌ | ❌ | [✅](rust/tests/indentation_consistency_tests.rs:57) | ❌ |
 | simpletwovsfourspacesindentation | [✅](python/tests/test_indentation_consistency.py:90) | [✅](js/tests/IndentationConsistency.test.js:89) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:90) |
 | threelevelnesting | ❌ | ❌ | [✅](rust/tests/indentation_consistency_tests.rs:82) | ❌ |
@@ -272,8 +271,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - multipleindentedidroundtrip
 - quotedreferencesparsing
 
-**Indentation Consistency** (3 missing):
-- leadingspacesvsnoleadingspacesproducesameresult
+**Indentation Consistency** (2 missing):
 - simpletwovsfourspaces
 - threelevelnesting
 
@@ -322,7 +320,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupleto
 - tupleto
 
-**Total missing: 39 tests**
+**Total missing: 38 tests**
 
 ### JavaScript Missing Tests
 
@@ -344,8 +342,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - indentbyrefcount
 - roundtripwithlinelengthformatting
 
-**Indentation Consistency** (3 missing):
-- leadingspacesvsnoleadingspaces
+**Indentation Consistency** (2 missing):
 - simpletwovsfourspaces
 - threelevelnesting
 
@@ -387,7 +384,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupleto
 - tupleto
 
-**Total missing: 39 tests**
+**Total missing: 38 tests**
 
 ### Rust Missing Tests
 
@@ -408,8 +405,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - indentbyrefcount
 - roundtripwithlinelengthformatting
 
-**Indentation Consistency** (3 missing):
-- leadingspacesvsnoleadingspacesproducesameresult
+**Indentation Consistency** (2 missing):
 - simpletwovsfourspacesindentation
 - threelevelnestingwithdifferentindentation
 
@@ -451,7 +447,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupleto
 - tupleto
 
-**Total missing: 38 tests**
+**Total missing: 37 tests**
 
 ### C# Missing Tests
 
@@ -473,8 +469,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - indentbyrefcount
 - roundtripwithlinelengthformatting
 
-**Indentation Consistency** (3 missing):
-- leadingspacesvsnoleadingspaces
+**Indentation Consistency** (2 missing):
 - simpletwovsfourspaces
 - threelevelnesting
 
@@ -511,5 +506,5 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - withid
 - withoutidsingleline
 
-**Total missing: 36 tests**
+**Total missing: 35 tests**
 
