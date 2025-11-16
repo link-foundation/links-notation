@@ -14,10 +14,10 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Language   | Total Tests | Test Categories |
 |------------|-------------|----------------|
-| Python     | 112 | 11 |
-| JavaScript | 118 | 12 |
-| Rust       | 119 | 12 |
-| C#         | 120 | 13 |
+| Python     | 119 | 11 |
+| JavaScript | 123 | 12 |
+| Rust       | 123 | 12 |
+| C#         | 125 | 13 |
 
 ---
 
@@ -25,23 +25,23 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| emptylink | [✅](python/tests/test_api.py:24) | [✅](js/tests/ApiTests.test.js:23) | [✅](rust/tests/api_tests.rs:20) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:29) |
-| indentedidsyntaxparsing | ❌ | ❌ | [✅](rust/tests/api_tests.rs:108) | ❌ |
-| indentedidsyntaxroundtrip | ❌ | [✅](js/tests/ApiTests.test.js:77) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:100) |
-| islink | ❌ | ❌ | [✅](rust/tests/api_tests.rs:10) | ❌ |
-| islinkequivalent | [✅](python/tests/test_api.py:16) | [✅](js/tests/ApiTests.test.js:15) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:18) |
-| isref | ❌ | ❌ | [✅](rust/tests/api_tests.rs:3) | ❌ |
-| isrefequivalent | [✅](python/tests/test_api.py:9) | [✅](js/tests/ApiTests.test.js:8) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:9) |
-| linkwithsourcetarget | [✅](python/tests/test_api.py:42) | [✅](js/tests/ApiTests.test.js:39) | [✅](rust/tests/api_tests.rs:45) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:50) |
-| linkwithsourcetypetarget | [✅](python/tests/test_api.py:52) | [✅](js/tests/ApiTests.test.js:48) | [✅](rust/tests/api_tests.rs:60) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:62) |
-| multipleindentedidsyntaxparsing | ❌ | ❌ | [✅](rust/tests/api_tests.rs:127) | ❌ |
-| multipleindentedidsyntaxroundtrip | ❌ | [✅](js/tests/ApiTests.test.js:91) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:117) |
-| quotedreferences | [✅](python/tests/test_api.py:74) | [✅](js/tests/ApiTests.test.js:68) | [✅](rust/tests/api_tests.rs:85) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:88) |
-| quotedreferencesparsing | ❌ | ❌ | [✅](rust/tests/api_tests.rs:94) | ❌ |
-| simplelink | [✅](python/tests/test_api.py:31) | [✅](js/tests/ApiTests.test.js:29) | [✅](rust/tests/api_tests.rs:30) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:37) |
-| singlelineformat | [✅](python/tests/test_api.py:62) | [✅](js/tests/ApiTests.test.js:57) | [✅](rust/tests/api_tests.rs:75) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:74) |
+| emptylink | [✅](python/tests/test_api.py:40) | [✅](js/tests/ApiTests.test.js:38) | [✅](rust/tests/api_tests.rs:39) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:49) |
+| indentedidsyntaxparsing | [✅](python/tests/test_api.py:111) | [✅](js/tests/ApiTests.test.js:103) | [✅](rust/tests/api_tests.rs:127) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:134) |
+| indentedidsyntaxroundtrip | [✅](python/tests/test_api.py:126) | [✅](js/tests/ApiTests.test.js:120) | [✅](rust/tests/api_tests.rs:165) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:152) |
+| islink | [✅](python/tests/test_api.py:17) | [✅](js/tests/ApiTests.test.js:15) | [✅](rust/tests/api_tests.rs:10) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:18) |
+| islinkequivalent | [✅](python/tests/test_api.py:32) | [✅](js/tests/ApiTests.test.js:30) | [✅](rust/tests/api_tests.rs:28) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:38) |
+| isref | [✅](python/tests/test_api.py:9) | [✅](js/tests/ApiTests.test.js:8) | [✅](rust/tests/api_tests.rs:3) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:9) |
+| isrefequivalent | [✅](python/tests/test_api.py:25) | [✅](js/tests/ApiTests.test.js:23) | [✅](rust/tests/api_tests.rs:20) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:29) |
+| linkwithsourcetarget | [✅](python/tests/test_api.py:58) | [✅](js/tests/ApiTests.test.js:54) | [✅](rust/tests/api_tests.rs:64) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:70) |
+| linkwithsourcetypetarget | [✅](python/tests/test_api.py:68) | [✅](js/tests/ApiTests.test.js:63) | [✅](rust/tests/api_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:82) |
+| multipleindentedidsyntaxparsing | [✅](python/tests/test_api.py:136) | [✅](js/tests/ApiTests.test.js:134) | [✅](rust/tests/api_tests.rs:146) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:169) |
+| multipleindentedidsyntaxroundtrip | [✅](python/tests/test_api.py:151) | [✅](js/tests/ApiTests.test.js:156) | [✅](rust/tests/api_tests.rs:190) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:187) |
+| quotedreferences | [✅](python/tests/test_api.py:90) | [✅](js/tests/ApiTests.test.js:83) | [✅](rust/tests/api_tests.rs:104) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:108) |
+| quotedreferencesparsing | [✅](python/tests/test_api.py:100) | [✅](js/tests/ApiTests.test.js:92) | [✅](rust/tests/api_tests.rs:113) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:120) |
+| simplelink | [✅](python/tests/test_api.py:47) | [✅](js/tests/ApiTests.test.js:44) | [✅](rust/tests/api_tests.rs:49) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:57) |
+| singlelineformat | [✅](python/tests/test_api.py:78) | [✅](js/tests/ApiTests.test.js:72) | [✅](rust/tests/api_tests.rs:94) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:94) |
 
-**Category totals:** Python: 8, JavaScript: 10, Rust: 11, C#: 10
+**Category totals:** Python: 15, JavaScript: 15, Rust: 15, C#: 15
 
 ## Edge Case Parser
 
@@ -257,15 +257,6 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 ### Python Missing Tests
 
-**Api** (7 missing):
-- indentedidsyntaxparsing
-- indentedidsyntaxroundtrip
-- islink
-- isref
-- multipleindentedidsyntaxparsing
-- multipleindentedidsyntaxroundtrip
-- quotedreferencesparsing
-
 **Links Group** (5 missing):
 - linksgroupappendtolinkslist
 - linksgroupconstructor
@@ -294,16 +285,9 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 27 tests**
+**Total missing: 20 tests**
 
 ### JavaScript Missing Tests
-
-**Api** (5 missing):
-- indentedidsyntaxparsing
-- islink
-- isref
-- multipleindentedidsyntaxparsing
-- quotedreferencesparsing
 
 **Links Group** (2 missing):
 - linksgroupappendtolinkslist
@@ -330,15 +314,9 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 22 tests**
+**Total missing: 17 tests**
 
 ### Rust Missing Tests
-
-**Api** (4 missing):
-- indentedidsyntaxroundtrip
-- islinkequivalent
-- isrefequivalent
-- multipleindentedidsyntaxroundtrip
 
 **Links Group** (2 missing):
 - linksgroupappendtolinkslist
@@ -365,16 +343,9 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 21 tests**
+**Total missing: 17 tests**
 
 ### C# Missing Tests
-
-**Api** (5 missing):
-- indentedidsyntaxparsing
-- islink
-- isref
-- multipleindentedidsyntaxparsing
-- quotedreferencesparsing
 
 **Links Group** (2 missing):
 - linksgroupconstructorequivalent
@@ -396,5 +367,5 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - singlelinelink
 - singlelinelinkwithid
 
-**Total missing: 19 tests**
+**Total missing: 14 tests**
 

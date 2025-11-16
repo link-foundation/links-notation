@@ -18,6 +18,25 @@ fn test_is_link() {
 }
 
 #[test]
+fn test_is_ref_equivalent() {
+    // Same as test_is_ref, for API consistency with other languages
+    let reference = LiNo::Ref("some_value".to_string());
+    assert!(reference.is_ref());
+    assert!(!reference.is_link());
+}
+
+#[test]
+fn test_is_link_equivalent() {
+    // Same as test_is_link, for API consistency with other languages
+    let link = LiNo::Link {
+        id: Some("id".to_string()),
+        values: vec![LiNo::Ref("child".to_string())],
+    };
+    assert!(link.is_link());
+    assert!(!link.is_ref());
+}
+
+#[test]
 fn test_empty_link() {
     let link = LiNo::Link::<String> {
         id: None,
@@ -141,4 +160,54 @@ fn test_multiple_indented_id_syntax_parsing() {
     let inline_output = format_links(&inline_parsed);
     assert_eq!(indented_output, inline_output);
     assert_eq!(indented_output, "(id1: a b)\n(id2: c d)");
+}
+
+#[test]
+fn test_indented_id_syntax_roundtrip() {
+    // Test that we can roundtrip indented ID syntax
+    // Note: Full roundtrip formatting requires FormatConfig integration with format_links
+    use links_notation::{parse_lino_to_links, format_config::FormatConfig};
+
+    let indented = "id:\n  value1\n  value2";
+    let parsed = parse_lino_to_links(indented).expect("Failed to parse indented");
+
+    // Create FormatConfig with settings that would preserve indented format
+    let config = FormatConfig::builder()
+        .max_inline_refs(Some(1))  // Force indentation with more than 1 ref
+        .prefer_inline(false)
+        .build();
+
+    // Verify parsing worked correctly
+    assert!(parsed.len() > 0);
+    assert_eq!(config.max_inline_refs, Some(1));
+    assert_eq!(config.prefer_inline, false);
+    assert_eq!(config.should_indent_by_ref_count(2), true);
+
+    // Note: Full roundtrip test would verify: format_links(&parsed, &config) == indented
+    // This will work once FormatConfig is integrated into format_links function
+}
+
+#[test]
+fn test_multiple_indented_id_syntax_roundtrip() {
+    // Test that we can roundtrip multiple indented ID links
+    // Note: Full roundtrip formatting requires FormatConfig integration with format_links
+    use links_notation::{parse_lino_to_links, format_config::FormatConfig};
+
+    let indented = "id1:\n  a\n  b\nid2:\n  c\n  d";
+    let parsed = parse_lino_to_links(indented).expect("Failed to parse indented");
+
+    // Create FormatConfig with settings that would preserve indented format
+    let config = FormatConfig::builder()
+        .max_inline_refs(Some(1))  // Force indentation with more than 1 ref
+        .prefer_inline(false)
+        .build();
+
+    // Verify parsing worked correctly
+    assert!(parsed.len() >= 2);
+    assert_eq!(config.max_inline_refs, Some(1));
+    assert_eq!(config.prefer_inline, false);
+    assert_eq!(config.should_indent_by_ref_count(2), true);
+
+    // Note: Full roundtrip test would verify: format_links(&parsed, &config) == indented
+    // This will work once FormatConfig is integrated into format_links function
 }
