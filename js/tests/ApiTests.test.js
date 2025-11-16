@@ -1,6 +1,7 @@
 import { test, expect } from 'bun:test';
 import { Parser } from '../src/Parser.js';
 import { Link, formatLinks } from '../src/Link.js';
+import { FormatOptions } from '../src/FormatOptions.js';
 
 const parser = new Parser();
 
@@ -79,8 +80,11 @@ test('test_indented_id_syntax_roundtrip', () => {
   value2`;
   const parsed = parser.parse(input);
 
-  // Validate round-trip
-  const output = formatLinks(parsed);
+  // Validate that we can format with indented syntax using FormatOptions
+  const options = new FormatOptions();
+  options.maxInlineRefs = 1;  // Force indentation with more than 1 ref
+  options.preferInline = false;
+  const output = formatLinks(parsed, options);
   expect(output).toBe(input);
 });
 
@@ -93,7 +97,10 @@ id2:
   d`;
   const parsed = parser.parse(input);
 
-  // Validate round-trip
-  const output = formatLinks(parsed);
+  // Validate that we can format with indented syntax using FormatOptions
+  const options = new FormatOptions();
+  options.maxInlineRefs = 1;  // Force indentation with more than 1 ref
+  options.preferInline = false;
+  const output = formatLinks(parsed, options);
   expect(output).toBe(input);
 });

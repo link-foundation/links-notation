@@ -20,9 +20,10 @@ def test_format_with_line_length_limit():
     link = Link('sequence', [Link(str(i)) for i in range(1, 11)])
 
     # Format with line length limit
+    # The line '(sequence: 1 2 3 4 5 6 7 8 9 10)' is 32 chars, so use threshold of 30
     config = FormatConfig(
         indent_long_lines=True,
-        max_line_length=40,
+        max_line_length=30,
         prefer_inline=False
     )
 

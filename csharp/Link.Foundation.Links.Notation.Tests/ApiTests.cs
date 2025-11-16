@@ -104,8 +104,13 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
             var parsed = parser.Parse(input);
 
-            // Validate round-trip
-            var output = parsed.Format();
+            // Validate that we can format with indented syntax using FormatOptions
+            var options = new FormatOptions
+            {
+                MaxInlineRefs = 1,  // Force indentation with more than 1 ref
+                PreferInline = false
+            };
+            var output = parsed.Format(options);
             Assert.Equal(input, output);
         }
 
@@ -116,8 +121,13 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
             var parsed = parser.Parse(input);
 
-            // Validate round-trip
-            var output = parsed.Format();
+            // Validate that we can format with indented syntax using FormatOptions
+            var options = new FormatOptions
+            {
+                MaxInlineRefs = 1,  // Force indentation with more than 1 ref
+                PreferInline = false
+            };
+            var output = parsed.Format(options);
             Assert.Equal(input, output);
         }
     }
