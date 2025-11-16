@@ -407,5 +407,29 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Null(result[0].Id);
             Assert.Equal(2, result[0].Values?.Count);
         }
+
+        [Fact]
+        public static void ParseValuesOnlyStandaloneColonTest()
+        {
+            // Test that standalone ':' is forbidden and should throw
+            var input = ": value1 value2";
+            var parser = new Parser();
+
+            // C# parser forbids this syntax (like JS/Rust)
+            Assert.Throws<Exception>(() => parser.Parse(input));
+        }
+
+        [Fact]
+        public static void QuotedReferencesWithSpacesInLinkTest()
+        {
+            var input = "(id: \"value with spaces\")";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("id", result[0].Id);
+            Assert.Single(result[0].Values);
+            Assert.Equal("value with spaces", result[0].Values?[0].Id);
+        }
     }
 }

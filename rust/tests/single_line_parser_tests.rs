@@ -420,3 +420,37 @@ fn test_quoted_references_with_special_chars() {
         _ => panic!("Expected Link"),
     }
 }
+
+#[test]
+fn test_single_line_with_id() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "myid: val1 val2";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert!(!result.is_empty());
+    match &result[0] {
+        links_notation::LiNo::Link { id, values } => {
+            assert_eq!(id, &Some("myid".to_string()));
+            assert_eq!(values.len(), 2);
+        }
+        _ => panic!("Expected Link"),
+    }
+}
+
+#[test]
+fn test_single_line_without_id() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "(value1 value2)";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert_eq!(result.len(), 1);
+    match &result[0] {
+        links_notation::LiNo::Link { id, values } => {
+            assert_eq!(id, &None);
+            assert_eq!(values.len(), 2);
+        }
+        _ => panic!("Expected Link"),
+    }
+}

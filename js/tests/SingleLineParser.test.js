@@ -259,3 +259,51 @@ test('Single line without id', () => {
   expect(result[0].id).toBe(null);
   expect(result[0].values.length).toBe(2);
 });
+
+test('Link with id', () => {
+  const input = '(id: a b c)';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('id');
+  expect(result[0].values.length).toBe(3);
+});
+
+test('Quoted reference', () => {
+  const input = '"quoted value"';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe(null);
+  expect(result[0].values.length).toBe(1);
+  expect(result[0].values[0].id).toBe('quoted value');
+});
+
+test('Quoted references with special chars', () => {
+  const input = '("special:char" "another@char")';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe(null);
+  expect(result[0].values.length).toBe(2);
+  expect(result[0].values[0].id).toBe('special:char');
+  expect(result[0].values[1].id).toBe('another@char');
+});
+
+test('Simple reference', () => {
+  const input = 'simplereference';
+  const result = parser.parse(input);
+  expect(result.length).toBeGreaterThan(0);
+});
+
+test('Single line link', () => {
+  const input = 'id: value1 value2';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('id');
+  expect(result[0].values.length).toBe(2);
+});
+
+test('Single line with id', () => {
+  const input = 'myid: val1 val2';
+  const result = parser.parse(input);
+  expect(result.length).toBeGreaterThan(0);
+  expect(result[0].id).toBe('myid');
+});
