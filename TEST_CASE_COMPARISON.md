@@ -14,7 +14,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Language   | Total Tests | Test Categories |
 |------------|-------------|----------------|
-| Python     | 119 | 11 |
+| Python     | 123 | 11 |
 | JavaScript | 126 | 12 |
 | Rust       | 126 | 12 |
 | C#         | 128 | 13 |
@@ -137,16 +137,16 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| deeplynestedmixedmodes | [✅](python/tests/test_mixed_indentation_modes.py:67) | [✅](js/tests/MixedIndentationModes.test.js:173) | [✅](rust/tests/mixed_indentation_modes_tests.rs:106) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:198) |
-| heroexamplealternativeformat | ❌ | [✅](js/tests/MixedIndentationModes.test.js:34) | [✅](rust/tests/mixed_indentation_modes_tests.rs:22) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:38) |
-| heroexampleequivalence | ❌ | [✅](js/tests/MixedIndentationModes.test.js:63) | [✅](rust/tests/mixed_indentation_modes_tests.rs:37) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:70) |
-| heroexamplemixedmodes | ❌ | [✅](js/tests/MixedIndentationModes.test.js:7) | [✅](rust/tests/mixed_indentation_modes_tests.rs:7) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:8) |
-| nestedsetandsequencecontexts | [✅](python/tests/test_mixed_indentation_modes.py:48) | [✅](js/tests/MixedIndentationModes.test.js:155) | [✅](rust/tests/mixed_indentation_modes_tests.rs:93) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:177) |
-| sequencecontextwithcolon | [✅](python/tests/test_mixed_indentation_modes.py:30) | [✅](js/tests/MixedIndentationModes.test.js:117) | [✅](rust/tests/mixed_indentation_modes_tests.rs:64) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:133) |
-| sequencecontextwithcomplexvalues | ❌ | [✅](js/tests/MixedIndentationModes.test.js:134) | [✅](rust/tests/mixed_indentation_modes_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:153) |
-| setcontextwithoutcolon | [✅](python/tests/test_mixed_indentation_modes.py:17) | [✅](js/tests/MixedIndentationModes.test.js:105) | [✅](rust/tests/mixed_indentation_modes_tests.rs:52) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:118) |
+| deeplynestedmixedmodes | [✅](python/tests/test_mixed_indentation_modes.py:182) | [✅](js/tests/MixedIndentationModes.test.js:173) | [✅](rust/tests/mixed_indentation_modes_tests.rs:106) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:198) |
+| heroexamplealternativeformat | [✅](python/tests/test_mixed_indentation_modes.py:37) | [✅](js/tests/MixedIndentationModes.test.js:34) | [✅](rust/tests/mixed_indentation_modes_tests.rs:22) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:38) |
+| heroexampleequivalence | [✅](python/tests/test_mixed_indentation_modes.py:67) | [✅](js/tests/MixedIndentationModes.test.js:63) | [✅](rust/tests/mixed_indentation_modes_tests.rs:37) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:70) |
+| heroexamplemixedmodes | [✅](python/tests/test_mixed_indentation_modes.py:9) | [✅](js/tests/MixedIndentationModes.test.js:7) | [✅](rust/tests/mixed_indentation_modes_tests.rs:7) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:8) |
+| nestedsetandsequencecontexts | [✅](python/tests/test_mixed_indentation_modes.py:163) | [✅](js/tests/MixedIndentationModes.test.js:155) | [✅](rust/tests/mixed_indentation_modes_tests.rs:93) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:177) |
+| sequencecontextwithcolon | [✅](python/tests/test_mixed_indentation_modes.py:123) | [✅](js/tests/MixedIndentationModes.test.js:117) | [✅](rust/tests/mixed_indentation_modes_tests.rs:64) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:133) |
+| sequencecontextwithcomplexvalues | [✅](python/tests/test_mixed_indentation_modes.py:141) | [✅](js/tests/MixedIndentationModes.test.js:134) | [✅](rust/tests/mixed_indentation_modes_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:153) |
+| setcontextwithoutcolon | [✅](python/tests/test_mixed_indentation_modes.py:110) | [✅](js/tests/MixedIndentationModes.test.js:105) | [✅](rust/tests/mixed_indentation_modes_tests.rs:52) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:118) |
 
-**Category totals:** Python: 4, JavaScript: 8, Rust: 8, C#: 8
+**Category totals:** Python: 8, JavaScript: 8, Rust: 8, C#: 8
 
 ## Multiline Parser
 
@@ -264,12 +264,6 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - linksgrouptolistflattensstructure
 - linksgrouptostring
 
-**Mixed Indentation Modes** (4 missing):
-- heroexamplealternativeformat
-- heroexampleequivalence
-- heroexamplemixedmodes
-- sequencecontextwithcomplexvalues
-
 **Single Line Parser** (9 missing):
 - linkwithid
 - linkwithoutidmultiline
@@ -285,7 +279,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 20 tests**
+**Total missing: 16 tests**
 
 ### JavaScript Missing Tests
 
