@@ -14,10 +14,10 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Language   | Total Tests | Test Categories |
 |------------|-------------|----------------|
-| Python     | 126 | 11 |
-| JavaScript | 126 | 12 |
-| Rust       | 131 | 12 |
-| C#         | 131 | 13 |
+| Python     | 132 | 11 |
+| JavaScript | 130 | 12 |
+| Rust       | 134 | 12 |
+| C#         | 136 | 13 |
 
 ---
 
@@ -204,11 +204,11 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | bugtest1 | [✅](python/tests/test_single_line_parser.py:25) | [✅](js/tests/SingleLineParser.test.js:21) | [✅](rust/tests/single_line_parser_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:28) |
 | deeplynested | [✅](python/tests/test_single_line_parser.py:213) | [✅](js/tests/SingleLineParser.test.js:170) | [✅](rust/tests/single_line_parser_tests.rs:257) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:213) |
 | hyphenatedidentifiers | [✅](python/tests/test_single_line_parser.py:220) | [✅](js/tests/SingleLineParser.test.js:176) | [✅](rust/tests/single_line_parser_tests.rs:264) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:179) |
-| linkwithid | ❌ | ❌ | [✅](rust/tests/single_line_parser_tests.rs:310) | ❌ |
+| linkwithid | [✅](python/tests/test_single_line_parser.py:299) | ❌ | [✅](rust/tests/single_line_parser_tests.rs:310) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:352) |
 | linkwithoutidmultiline | [✅](python/tests/test_single_line_parser.py:281) | [✅](js/tests/SingleLineParser.test.js:108) | [✅](rust/tests/single_line_parser_tests.rs:196) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:262) |
 | linkwithoutidsingleline | [✅](python/tests/test_single_line_parser.py:290) | [✅](js/tests/SingleLineParser.test.js:102) | [✅](rust/tests/single_line_parser_tests.rs:188) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:329) |
 | multilinelinkwithid | [✅](python/tests/test_single_line_parser.py:111) | [✅](js/tests/SingleLineParser.test.js:96) | [✅](rust/tests/single_line_parser_tests.rs:181) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:254) |
-| multilinewithoutid | [✅](python/tests/test_single_line_parser.py:131) | ❌ | [✅](rust/tests/single_line_parser_tests.rs:370) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:238) |
+| multilinewithoutid | [✅](python/tests/test_single_line_parser.py:131) | [✅](js/tests/SingleLineParser.test.js:231) | [✅](rust/tests/single_line_parser_tests.rs:370) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:238) |
 | multiplewordsinquotes | [✅](python/tests/test_single_line_parser.py:227) | [✅](js/tests/SingleLineParser.test.js:182) | [✅](rust/tests/single_line_parser_tests.rs:271) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:190) |
 | nestedlinks | [✅](python/tests/test_single_line_parser.py:195) | [✅](js/tests/SingleLineParser.test.js:154) | [✅](rust/tests/single_line_parser_tests.rs:239) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:170) |
 | parsemultilinelink | [✅](python/tests/test_single_line_parser.py:73) | [✅](js/tests/SingleLineParser.test.js:64) | [✅](rust/tests/single_line_parser_tests.rs:144) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:90) |
@@ -217,20 +217,20 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | parsereferencewithcolonandvalues | [✅](python/tests/test_single_line_parser.py:62) | [✅](js/tests/SingleLineParser.test.js:54) | [✅](rust/tests/single_line_parser_tests.rs:130) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:75) |
 | parsesimplereference | [✅](python/tests/test_single_line_parser.py:51) | [✅](js/tests/SingleLineParser.test.js:44) | [✅](rust/tests/single_line_parser_tests.rs:116) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:59) |
 | parsevaluesonly | [✅](python/tests/test_single_line_parser.py:95) | [✅](js/tests/SingleLineParser.test.js:84) | [✅](rust/tests/single_line_parser_tests.rs:166) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:103) |
-| parsevaluesonlystandalonecolon | [✅](python/tests/test_single_line_parser.py:95) | ❌ | ❌ | ❌ |
-| quotedreference | ❌ | ❌ | [✅](rust/tests/single_line_parser_tests.rs:287) | ❌ |
+| parsevaluesonlystandalonecolon | [✅](python/tests/test_single_line_parser.py:95) | [✅](js/tests/SingleLineParser.test.js:238) | [✅](rust/tests/single_line_parser_tests.rs:380) | ❌ |
+| quotedreference | [✅](python/tests/test_single_line_parser.py:33) | ❌ | [✅](rust/tests/single_line_parser_tests.rs:287) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:364) |
 | quotedreferenceparser | [✅](python/tests/test_single_line_parser.py:253) | [✅](js/tests/SingleLineParser.test.js:204) | [✅](rust/tests/single_line_parser_tests.rs:343) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:281) |
 | quotedreferences | [✅](python/tests/test_single_line_parser.py:33) | [✅](js/tests/SingleLineParser.test.js:142) | [✅](rust/tests/single_line_parser_tests.rs:225) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:37) |
 | quotedreferenceswithspaces | [✅](python/tests/test_single_line_parser.py:42) | [✅](js/tests/SingleLineParser.test.js:36) | [✅](rust/tests/single_line_parser_tests.rs:102) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:48) |
-| quotedreferenceswithspacesinlink | [✅](python/tests/test_single_line_parser.py:181) | ❌ | ❌ | ❌ |
-| quotedreferenceswithspecialchars | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:135) |
+| quotedreferenceswithspacesinlink | [✅](python/tests/test_single_line_parser.py:181) | [✅](js/tests/SingleLineParser.test.js:245) | [✅](rust/tests/single_line_parser_tests.rs:390) | ❌ |
+| quotedreferenceswithspecialchars | [✅](python/tests/test_single_line_parser.py:340) | ❌ | [✅](rust/tests/single_line_parser_tests.rs:407) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:135) |
 | simpleref | [✅](python/tests/test_single_line_parser.py:236) | [✅](js/tests/SingleLineParser.test.js:189) | [✅](rust/tests/single_line_parser_tests.rs:352) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:246) |
-| simplereference | ❌ | ❌ | [✅](rust/tests/single_line_parser_tests.rs:280) | ❌ |
+| simplereference | [✅](python/tests/test_single_line_parser.py:243) | ❌ | [✅](rust/tests/single_line_parser_tests.rs:280) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:377) |
 | simplereferenceparser | [✅](python/tests/test_single_line_parser.py:243) | [✅](js/tests/SingleLineParser.test.js:195) | [✅](rust/tests/single_line_parser_tests.rs:361) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:269) |
-| singlelinelink | ❌ | ❌ | [✅](rust/tests/single_line_parser_tests.rs:318) | ❌ |
+| singlelinelink | [✅](python/tests/test_single_line_parser.py:104) | ❌ | [✅](rust/tests/single_line_parser_tests.rs:318) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:387) |
 | singlelinelinkwithid | [✅](python/tests/test_single_line_parser.py:104) | [✅](js/tests/SingleLineParser.test.js:90) | [✅](rust/tests/single_line_parser_tests.rs:174) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:340) |
-| singlelinewithid | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:221) |
-| singlelinewithoutid | [✅](python/tests/test_single_line_parser.py:118) | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:230) |
+| singlelinewithid | [✅](python/tests/test_single_line_parser.py:332) | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:221) |
+| singlelinewithoutid | [✅](python/tests/test_single_line_parser.py:118) | [✅](js/tests/SingleLineParser.test.js:254) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:399) |
 | singlelink | [✅](python/tests/test_single_line_parser.py:9) | [✅](js/tests/SingleLineParser.test.js:7) | [✅](rust/tests/single_line_parser_tests.rs:63) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:8) |
 | singlequotedreferences | [✅](python/tests/test_single_line_parser.py:188) | [✅](js/tests/SingleLineParser.test.js:148) | [✅](rust/tests/single_line_parser_tests.rs:232) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:144) |
 | singletlink | [✅](python/tests/test_single_line_parser.py:140) | [✅](js/tests/SingleLineParser.test.js:114) | [✅](rust/tests/single_line_parser_tests.rs:204) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:112) |
@@ -240,7 +240,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | valuelink | [✅](python/tests/test_single_line_parser.py:162) | [✅](js/tests/SingleLineParser.test.js:124) | [✅](rust/tests/single_line_parser_tests.rs:218) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:126) |
 | valuelinkparser | [✅](python/tests/test_single_line_parser.py:263) | [✅](js/tests/SingleLineParser.test.js:223) | [✅](rust/tests/single_line_parser_tests.rs:303) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:306) |
 
-**Category totals:** Python: 32, JavaScript: 28, Rust: 33, C#: 32
+**Category totals:** Python: 38, JavaScript: 32, Rust: 36, C#: 36
 
 ## Tuple
 
@@ -264,19 +264,11 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - linksgrouptolistflattensstructure
 - linksgrouptostring
 
-**Single Line Parser** (6 missing):
-- linkwithid
-- quotedreference
-- quotedreferenceswithspecialchars
-- simplereference
-- singlelinelink
-- singlelinewithid
-
 **Tuple** (2 missing):
 - namedtupletolink
 - tupletolink
 
-**Total missing: 13 tests**
+**Total missing: 7 tests**
 
 ### JavaScript Missing Tests
 
@@ -284,23 +276,19 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - linksgroupappendtolinkslist
 - linksgroupconstructorequivalent
 
-**Single Line Parser** (10 missing):
+**Single Line Parser** (6 missing):
 - linkwithid
-- multilinewithoutid
-- parsevaluesonlystandalonecolon
 - quotedreference
-- quotedreferenceswithspacesinlink
 - quotedreferenceswithspecialchars
 - simplereference
 - singlelinelink
 - singlelinewithid
-- singlelinewithoutid
 
 **Tuple** (2 missing):
 - namedtupletolink
 - tupletolink
 
-**Total missing: 14 tests**
+**Total missing: 10 tests**
 
 ### Rust Missing Tests
 
@@ -308,10 +296,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - linksgroupappendtolinkslist
 - linksgroupconstructor
 
-**Single Line Parser** (5 missing):
-- parsevaluesonlystandalonecolon
-- quotedreferenceswithspacesinlink
-- quotedreferenceswithspecialchars
+**Single Line Parser** (2 missing):
 - singlelinewithid
 - singlelinewithoutid
 
@@ -319,7 +304,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 9 tests**
+**Total missing: 6 tests**
 
 ### C# Missing Tests
 
@@ -327,13 +312,9 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - linksgroupconstructorequivalent
 - linksgrouptostring
 
-**Single Line Parser** (6 missing):
-- linkwithid
+**Single Line Parser** (2 missing):
 - parsevaluesonlystandalonecolon
-- quotedreference
 - quotedreferenceswithspacesinlink
-- simplereference
-- singlelinelink
 
-**Total missing: 8 tests**
+**Total missing: 4 tests**
 

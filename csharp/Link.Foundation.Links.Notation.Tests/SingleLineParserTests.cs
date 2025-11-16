@@ -348,5 +348,64 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.NotNull(result[0].Id);
             Assert.Equal("id", result[0].Id);
         }
+
+        [Fact]
+        public static void LinkWithIdTest()
+        {
+            var input = "(id: a b c)";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("id", result[0].Id);
+            Assert.Equal(3, result[0].Values?.Count);
+        }
+
+        [Fact]
+        public static void QuotedReferenceTest()
+        {
+            var input = "\"quoted value\"";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.NotEmpty(result);
+            Assert.NotNull(result[0].Values);
+            Assert.Single(result[0].Values);
+            Assert.Equal("quoted value", result[0].Values[0].Id);
+        }
+
+        [Fact]
+        public static void SimpleReferenceTest()
+        {
+            var input = "simplereference";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.NotEmpty(result);
+        }
+
+        [Fact]
+        public static void SingleLineLinkTest()
+        {
+            var input = "myid: value1 value2";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("myid", result[0].Id);
+            Assert.Equal(2, result[0].Values?.Count);
+        }
+
+        [Fact]
+        public static void SingleLineWithoutIdTest()
+        {
+            var input = "(value1 value2)";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Null(result[0].Id);
+            Assert.Equal(2, result[0].Values?.Count);
+        }
     }
 }

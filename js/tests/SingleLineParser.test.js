@@ -227,3 +227,35 @@ test('Test value link (parser)', () => {
   expect(result[0].id).toBe(null);
   expect(result[0].values.length).toBe(3);
 });
+
+test('Multiline without id', () => {
+  // Test that '(:)' syntax is forbidden and should throw an error
+  const input = '(: value1 value2)';
+  // JS parser forbids this syntax
+  expect(() => parser.parse(input)).toThrow();
+});
+
+test('Parse values only standalone colon', () => {
+  // Test that standalone ':' is forbidden and should throw an error
+  const input = ': value1 value2';
+  // JS parser forbids this syntax
+  expect(() => parser.parse(input)).toThrow();
+});
+
+test('Quoted references with spaces in link', () => {
+  const input = '(id: "value with spaces")';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('id');
+  expect(result[0].values.length).toBe(1);
+  expect(result[0].values[0].id).toBe('value with spaces');
+});
+
+test('Single line without id', () => {
+  // Test parsing a single line without ID (just values)
+  const input = '(value1 value2)';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe(null);
+  expect(result[0].values.length).toBe(2);
+});

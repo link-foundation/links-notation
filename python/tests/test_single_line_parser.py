@@ -294,3 +294,55 @@ def test_link_without_id_singleline():
     result = parser.parse(input_text)
     assert len(result) > 0
     # Note: This differs from JS/Rust/C# which reject it, but is valid in Python
+
+
+def test_link_with_id():
+    """Test link with id in parentheses."""
+    input_text = '(id: a b c)'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id == 'id'
+    assert len(result[0].values) == 3
+
+
+def test_quoted_reference():
+    """Test quoted reference parsing."""
+    input_text = '"quoted value"'
+    result = parser.parse(input_text)
+    assert len(result) > 0
+    assert result[0].values[0].id == 'quoted value'
+
+
+def test_simple_reference():
+    """Test simple reference parsing."""
+    input_text = 'simplereference'
+    result = parser.parse(input_text)
+    assert len(result) > 0
+
+
+def test_single_line_link():
+    """Test single line link with id and values."""
+    input_text = 'id: value1 value2'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id == 'id'
+    assert len(result[0].values) == 2
+
+
+def test_single_line_with_id():
+    """Test single line with id."""
+    input_text = 'myid: val1 val2'
+    result = parser.parse(input_text)
+    assert len(result) > 0
+    assert result[0].id == 'myid'
+
+
+def test_quoted_references_with_special_chars():
+    """Test quoted references with special characters."""
+    input_text = '("special:char" "another@char")'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id is None
+    assert len(result[0].values) == 2
+    assert result[0].values[0].id == 'special:char'
+    assert result[0].values[1].id == 'another@char'
