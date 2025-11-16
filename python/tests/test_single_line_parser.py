@@ -267,3 +267,30 @@ def test_value_link_parser():
     assert len(result) == 1
     assert result[0].id is None
     assert len(result[0].values) == 3
+
+
+def test_parse_values_only():
+    """Test parsing values only (alias for test_parse_values_only_standalone_colon)."""
+    input_text = ': value1 value2'
+    # Python parser allows this - empty id with values
+    result = parser.parse(input_text)
+    assert len(result) > 0
+    # Note: This differs from JS/Rust/C# which reject it, but is valid in Python
+
+
+def test_link_without_id_multiline():
+    """Test link without id multiline (alias for test_multiline_without_id)."""
+    input_text = '(: value1 value2)'
+    # Python parser allows this - empty id with values
+    result = parser.parse(input_text)
+    assert len(result) > 0
+    # Note: This differs from JS/Rust/C# which reject it, but is valid in Python
+
+
+def test_link_without_id_singleline():
+    """Test link without id single line (alias for test_parse_values_only_standalone_colon)."""
+    input_text = ': value1 value2'
+    # Python parser allows this - empty id with values
+    result = parser.parse(input_text)
+    assert len(result) > 0
+    # Note: This differs from JS/Rust/C# which reject it, but is valid in Python

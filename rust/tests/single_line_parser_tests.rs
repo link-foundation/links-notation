@@ -322,3 +322,57 @@ fn test_single_line_link() {
     assert_eq!(result.1[0].id, Some("id".to_string()));
     assert_eq!(result.1[0].values.len(), 2);
 }
+
+#[test]
+fn test_parse_quoted_references_values_only() {
+    use links_notation::parse_lino_to_links;
+
+    let source = r#""has space" 'has:colon'"#;
+    let links = parse_lino_to_links(source).expect("Failed to parse");
+    assert_eq!(links.len(), 1);
+    // Should have 2 values
+    match &links[0] {
+        links_notation::LiNo::Link { id, values } => {
+            assert_eq!(id, &None);
+            assert_eq!(values.len(), 2);
+        }
+        _ => panic!("Expected Link"),
+    }
+}
+
+#[test]
+fn test_quoted_reference_parser() {
+    use links_notation::parse_lino_to_links;
+
+    let input = r#"("quoted")"#;
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+    assert!(!result.is_empty());
+}
+
+#[test]
+fn test_simple_ref() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "simpleref";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+    assert!(!result.is_empty());
+}
+
+#[test]
+fn test_simple_reference_parser() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "reference";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+    assert!(!result.is_empty());
+}
+
+#[test]
+fn test_multiline_without_id() {
+    // Test that '(:)' syntax is rejected (Rust forbids empty id with values)
+    let input = "(: value1 value2)";
+    let result = parse_document(input);
+
+    // In Rust parser, this is NOT allowed (like JS)
+    assert!(result.is_err());
+}
