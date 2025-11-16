@@ -24,19 +24,19 @@ mod tests {
     }
 
     #[test]
-    fn indented_id_single_value_test() {
+    fn indented_id_syntax_with_single_value_test() {
         let input = "greeting:\n  hello";
         let result = parse_lino_to_links(input).unwrap();
-        
+
         assert_eq!(result.len(), 1);
         assert_eq!(format!("{}", result[0]), "(greeting: hello)");
     }
 
     #[test]
-    fn indented_id_multiple_values_test() {
+    fn indented_id_syntax_with_multiple_values_test() {
         let input = "action:\n  run\n  fast\n  now";
         let result = parse_lino_to_links(input).unwrap();
-        
+
         assert_eq!(result.len(), 1);
         assert_eq!(format!("{}", result[0]), "(action: run fast now)");
     }
@@ -51,15 +51,15 @@ mod tests {
     }
 
     #[test]
-    fn unsupported_colon_only_syntax_test() {
+    fn unsupported_colon_only_syntax_should_fail_test() {
         let input = ":\n  papa\n  loves\n  mama";
-        
+
         // This should fail
         assert!(parse_lino_to_links(input).is_err());
     }
 
     #[test]
-    fn empty_indented_id_test() {
+    fn empty_indented_id_should_work_test() {
         let input = "empty:";
         let result = parse_lino_to_links(input).unwrap();
 
@@ -69,7 +69,7 @@ mod tests {
     }
 
     #[test]
-    fn indented_id_with_quoted_id_test() {
+    fn indented_id_syntax_with_quoted_id_test() {
         let input = "\"complex id\":\n  value1\n  value2";
         let result = parse_lino_to_links(input).unwrap();
 

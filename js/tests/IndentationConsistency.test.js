@@ -8,7 +8,7 @@ describe('Indentation Consistency Tests (Issue #135)', () => {
     parser = new Parser();
   });
 
-  test('leading spaces vs no leading spaces should produce same result', () => {
+  test('Leading spaces vs no leading spaces', () => {
     // Example with 2 leading spaces (from issue #135)
     const withLeading = `  TELEGRAM_BOT_TOKEN: '849...355:AAG...rgk_YZk...aPU'
   TELEGRAM_ALLOWED_CHATS:

@@ -4,7 +4,7 @@ import { formatLinks } from '../src/Link.js';
 
 const parser = new Parser();
 
-test('TwoLinksTest', () => {
+test('Two links', () => {
   const source = `(first: x y)
 (second: a b)`;
   const links = parser.parse(source);
@@ -12,7 +12,7 @@ test('TwoLinksTest', () => {
   expect(target).toBe(source);
 });
 
-test('ParseAndStringifyTest', () => {
+test('Parse and stringify', () => {
   const source = `(papa (lovesMama: loves mama))
 (son lovesMama)
 (daughter lovesMama)
@@ -22,7 +22,7 @@ test('ParseAndStringifyTest', () => {
   expect(target).toBe(source);
 });
 
-test('ParseAndStringifyTest2', () => {
+test('Parse and stringify 2', () => {
   const source = `father (lovesMom: loves mom)
 son lovesMom
 daughter lovesMom
@@ -32,7 +32,7 @@ all (love mom)`;
   expect(target).toBe(source);
 });
 
-test('ParseAndStringifyWithLessParenthesesTest', () => {
+test('Parse and stringify with less parentheses', () => {
   const source = `lovesMama: loves mama
 papa lovesMama
 son lovesMama
@@ -43,7 +43,7 @@ all (love mama)`;
   expect(target).toBe(source);
 });
 
-test('DuplicateIdentifiersTest', () => {
+test('Duplicate identifiers', () => {
   const source = `(a: a b)
 (a: b c)`;
   const target = `(a: a b)

@@ -4,7 +4,7 @@ import { formatLinks } from "../src/Link.js";
 
 const parser = new Parser();
 
-test("Hero example - mixed modes - issue #105", () => {
+test("Hero example mixed modes", () => {
   const input = `empInfo
   employees:
     (
@@ -31,7 +31,7 @@ test("Hero example - mixed modes - issue #105", () => {
   expect(formatted).toContain("Wesley Crusher");
 });
 
-test("Hero example - alternative format - issue #105", () => {
+test("Hero example alternative format", () => {
   const input = `empInfo
   (
     employees:
@@ -60,7 +60,7 @@ test("Hero example - alternative format - issue #105", () => {
   expect(formatted).toContain("Wesley Crusher");
 });
 
-test("Hero example - equivalence test - issue #105", () => {
+test("Hero example equivalence", () => {
   const version1 = `empInfo
   employees:
     (
@@ -102,7 +102,7 @@ test("Hero example - equivalence test - issue #105", () => {
   expect(formatted1).toBe(formatted2);
 });
 
-test("Set/object context without colon", () => {
+test("Set context without colon", () => {
   const input = `empInfo
   employees`;
 
@@ -114,7 +114,7 @@ test("Set/object context without colon", () => {
   expect(formatted).toContain("employees");
 });
 
-test("Sequence/list context with colon", () => {
+test("Sequence context with colon", () => {
   const input = `employees:
   James Kirk
   Jean-Luc Picard

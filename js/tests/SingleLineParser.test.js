@@ -4,28 +4,28 @@ import { formatLinks } from '../src/Link.js';
 
 const parser = new Parser();
 
-test('SingleLinkTest', () => {
+test('Single link', () => {
   const source = '(address: source target)';
   const links = parser.parse(source);
   const target = formatLinks(links);
   expect(target).toBe(source);
 });
 
-test('TripletSingleLinkTest', () => {
+test('Triplet single link', () => {
   const source = '(papa has car)';
   const links = parser.parse(source);
   const target = formatLinks(links);
   expect(target).toBe(source);
 });
 
-test('BugTest1', () => {
+test('Bug test 1', () => {
   const source = '(ignore conan-center-index repository)';
   const links = parser.parse(source);
   const target = formatLinks(links);
   expect(target).toBe(source);
 });
 
-test('QuotedReferencesTest', () => {
+test('Quoted references', () => {
   const source = `(a: 'b' "c")`;
   const target = `(a: b c)`;
   const links = parser.parse(source);
@@ -33,7 +33,7 @@ test('QuotedReferencesTest', () => {
   expect(formattedLinks).toBe(target);
 });
 
-test('QuotedReferencesWithSpacesTest', () => {
+test('Quoted references with spaces', () => {
   const source = `('a a': 'b b' "c c")`;
   const target = `('a a': 'b b' 'c c')`;
   const links = parser.parse(source);
@@ -127,7 +127,7 @@ test('Test value link', () => {
   expect(result.length).toBeGreaterThan(0);
 });
 
-test('ParseQuotedReferencesValuesOnly', () => {
+test('Parse quoted references values only', () => {
   const source = `"has space" 'has:colon'`;
   const parser = new Parser();
   const links = parser.parse(source);

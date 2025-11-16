@@ -4,7 +4,7 @@ import { formatLinks } from "../src/Link.js";
 
 const parser = new Parser();
 
-test("Basic indented ID syntax - issue #21", () => {
+test("Basic indented ID syntax", () => {
   const indentedSyntax = `3:
   papa
   loves
@@ -145,7 +145,7 @@ test("Empty indented ID should work", () => {
   expect(formatted).toBe("(empty)");
 });
 
-test("Equivalence test - comprehensive", () => {
+test("Equivalence test comprehensive", () => {
   const testCases = [
     {
       indented: "test:\n  one",

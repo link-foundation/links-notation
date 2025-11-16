@@ -141,7 +141,7 @@ third value";
         }
 
         [Fact]
-        public static void EmptyIndentedIdTest()
+        public static void EmptyIndentedIdShouldWorkTest()
         {
             var input = "empty:";
 
