@@ -91,10 +91,44 @@ namespace Link.Foundation.Links.Notation.Tests
             var input = @"(""quoted id"": ""value with spaces"")";
             var parser = new Parser();
             var parsed = parser.Parse(input);
-            
+
             var output = parsed.Format();
             Assert.Contains("quoted id", output);
             Assert.Contains("value with spaces", output);
+        }
+
+        [Fact]
+        public static void IndentedIdSyntaxRoundtripTest()
+        {
+            var input = "id:\n  value1\n  value2";
+            var parser = new Parser();
+            var parsed = parser.Parse(input);
+
+            // Validate that we can format with indented syntax using FormatOptions
+            var options = new FormatOptions
+            {
+                MaxInlineRefs = 1,  // Force indentation with more than 1 ref
+                PreferInline = false
+            };
+            var output = parsed.Format(options);
+            Assert.Equal(input, output);
+        }
+
+        [Fact]
+        public static void MultipleIndentedIdSyntaxRoundtripTest()
+        {
+            var input = "id1:\n  a\n  b\nid2:\n  c\n  d";
+            var parser = new Parser();
+            var parsed = parser.Parse(input);
+
+            // Validate that we can format with indented syntax using FormatOptions
+            var options = new FormatOptions
+            {
+                MaxInlineRefs = 1,  // Force indentation with more than 1 ref
+                PreferInline = false
+            };
+            var output = parsed.Format(options);
+            Assert.Equal(input, output);
         }
     }
 }
