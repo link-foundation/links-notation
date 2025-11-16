@@ -22,7 +22,7 @@ test('Parse and stringify', () => {
   expect(target).toBe(source);
 });
 
-test('Parse and stringify 2', () => {
+test('Parse and stringify test 2', () => {
   const source = `father (lovesMom: loves mom)
 son lovesMom
 daughter lovesMom

@@ -119,7 +119,7 @@ fn test_nested_links() {
 // Tests moved from parser.rs
 
 #[test]
-fn test_indentation() {
+fn test_indentation_parser() {
     let input = "parent\n  child1\n  child2";
     let result = parse_document(input).unwrap();
     assert_eq!(result.1.len(), 1);
@@ -128,7 +128,7 @@ fn test_indentation() {
 }
 
 #[test]
-fn test_nested_indentation() {
+fn test_nested_indentation_parser() {
     let input = "parent\n  child\n    grandchild";
     let result = parse_document(input).unwrap();
     assert_eq!(result.1.len(), 1);

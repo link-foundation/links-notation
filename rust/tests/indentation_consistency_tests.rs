@@ -55,7 +55,7 @@ mod tests {
     }
 
     #[test]
-    fn test_simple_two_vs_four_spaces() {
+    fn test_simple_two_vs_four_spaces_indentation() {
         // Simple example with 2 spaces
         let two_spaces = "parent:\n  child1\n  child2";
 
@@ -80,7 +80,7 @@ mod tests {
     }
 
     #[test]
-    fn test_three_level_nesting() {
+    fn test_three_level_nesting_with_different_indentation() {
         // Three levels with 2 spaces
         let two_spaces = "level1:\n  level2:\n    level3a\n    level3b\n  level2b";
 

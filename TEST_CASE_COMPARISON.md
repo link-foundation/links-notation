@@ -80,10 +80,8 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
 | leadingspacesvsnoleadingspaces | [✅](python/tests/test_indentation_consistency.py:6) | [✅](js/tests/IndentationConsistency.test.js:11) | [✅](rust/tests/indentation_consistency_tests.rs:7) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:8) |
-| simpletwovsfourspaces | ❌ | ❌ | [✅](rust/tests/indentation_consistency_tests.rs:57) | ❌ |
-| simpletwovsfourspacesindentation | [✅](python/tests/test_indentation_consistency.py:90) | [✅](js/tests/IndentationConsistency.test.js:89) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:90) |
-| threelevelnesting | ❌ | ❌ | [✅](rust/tests/indentation_consistency_tests.rs:82) | ❌ |
-| threelevelnestingwithdifferentindentation | [✅](python/tests/test_indentation_consistency.py:111) | [✅](js/tests/IndentationConsistency.test.js:107) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:110) |
+| simpletwovsfourspacesindentation | [✅](python/tests/test_indentation_consistency.py:90) | [✅](js/tests/IndentationConsistency.test.js:89) | [✅](rust/tests/indentation_consistency_tests.rs:57) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:90) |
+| threelevelnestingwithdifferentindentation | [✅](python/tests/test_indentation_consistency.py:111) | [✅](js/tests/IndentationConsistency.test.js:107) | [✅](rust/tests/indentation_consistency_tests.rs:82) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:110) |
 | twospacesvsfourspacesindentation | [✅](python/tests/test_indentation_consistency.py:37) | [✅](js/tests/IndentationConsistency.test.js:39) | [✅](rust/tests/indentation_consistency_tests.rs:32) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:38) |
 
 **Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4
@@ -162,8 +160,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | multilinewithid | [✅](python/tests/test_multiline_parser.py:104) | [✅](js/tests/MultilineParser.test.js:83) | [✅](rust/tests/multiline_parser_tests.rs:149) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:102) |
 | multipletoplevelelements | [✅](python/tests/test_multiline_parser.py:112) | [✅](js/tests/MultilineParser.test.js:90) | [✅](rust/tests/multiline_parser_tests.rs:141) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:111) |
 | parseandstringify | [✅](python/tests/test_multiline_parser.py:18) | [✅](js/tests/MultilineParser.test.js:15) | [✅](rust/tests/multiline_parser_tests.rs:80) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:19) |
-| parseandstringify2 | [✅](python/tests/test_multiline_parser.py:35) | [✅](js/tests/MultilineParser.test.js:25) | ❌ | ❌ |
-| parseandstringifytest2 | ❌ | ❌ | [✅](rust/tests/multiline_parser_tests.rs:88) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:32) |
+| parseandstringifytest2 | [✅](python/tests/test_multiline_parser.py:35) | [✅](js/tests/MultilineParser.test.js:25) | [✅](rust/tests/multiline_parser_tests.rs:88) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:32) |
 | parseandstringifywithlessparentheses | [✅](python/tests/test_multiline_parser.py:52) | [✅](js/tests/MultilineParser.test.js:35) | [✅](rust/tests/multiline_parser_tests.rs:96) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:44) |
 | twolinks | [✅](python/tests/test_multiline_parser.py:9) | [✅](js/tests/MultilineParser.test.js:7) | [✅](rust/tests/multiline_parser_tests.rs:72) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:8) |
 
@@ -186,13 +183,11 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 |-----------|--------|------------|------|----|
 | complexindentation | [✅](python/tests/test_nested_parser.py:137) | [✅](js/tests/NestedParser.test.js:127) | [✅](rust/tests/nested_parser_tests.rs:89) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:142) |
 | deepnestedstructureroundtrip | [✅](python/tests/test_nested_parser.py:195) | ❌ | ❌ | ❌ |
-| indentation | [✅](python/tests/test_nested_parser.py:116) | ❌ | [✅](rust/tests/nested_parser_tests.rs:121) | ❌ |
 | indentationbasedchildren | [✅](python/tests/test_nested_parser.py:127) | [✅](js/tests/NestedParser.test.js:118) | [✅](rust/tests/nested_parser_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:127) |
 | indentationconsistency | [✅](python/tests/test_nested_parser.py:116) | [✅](js/tests/NestedParser.test.js:108) | [✅](rust/tests/nested_parser_tests.rs:68) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:115) |
-| indentationparser | ❌ | [✅](js/tests/NestedParser.test.js:151) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:176) |
+| indentationparser | [✅](python/tests/test_nested_parser.py:163) | [✅](js/tests/NestedParser.test.js:151) | [✅](rust/tests/nested_parser_tests.rs:121) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:176) |
 | multiplenestedlinksroundtrip | [✅](python/tests/test_nested_parser.py:205) | ❌ | ❌ | ❌ |
-| nestedindentation | [✅](python/tests/test_nested_parser.py:176) | ❌ | [✅](rust/tests/nested_parser_tests.rs:130) | ❌ |
-| nestedindentationparser | ❌ | [✅](js/tests/NestedParser.test.js:160) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:187) |
+| nestedindentationparser | [✅](python/tests/test_nested_parser.py:176) | [✅](js/tests/NestedParser.test.js:160) | [✅](rust/tests/nested_parser_tests.rs:130) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:187) |
 | nestedlinks | [✅](python/tests/test_nested_parser.py:149) | [✅](js/tests/NestedParser.test.js:138) | [✅](rust/tests/nested_parser_tests.rs:104) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:160) |
 | parsenestedstructurewithindentation | [✅](python/tests/test_nested_parser.py:99) | [✅](js/tests/NestedParser.test.js:93) | [✅](rust/tests/nested_parser_tests.rs:59) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:102) |
 | significantwhitespace | [✅](python/tests/test_nested_parser.py:10) | [✅](js/tests/NestedParser.test.js:7) | [✅](rust/tests/nested_parser_tests.rs:4) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:9) |
@@ -271,10 +266,6 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - multipleindentedidsyntaxroundtrip
 - quotedreferencesparsing
 
-**Indentation Consistency** (2 missing):
-- simpletwovsfourspaces
-- threelevelnesting
-
 **Links Group** (5 missing):
 - linksgroupappendtolinkslist
 - linksgroupconstructor
@@ -287,13 +278,6 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - heroexampleequivalence
 - heroexamplemixedmodes
 - sequencecontextwithcomplexvalues
-
-**Multiline Parser** (1 missing):
-- parseandstringifytest2
-
-**Nested Parser** (2 missing):
-- indentationparser
-- nestedindentationparser
 
 **Single Line Parser** (9 missing):
 - linkwithid
@@ -310,7 +294,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 32 tests**
+**Total missing: 27 tests**
 
 ### JavaScript Missing Tests
 
@@ -321,22 +305,13 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - multipleindentedidsyntaxparsing
 - quotedreferencesparsing
 
-**Indentation Consistency** (2 missing):
-- simpletwovsfourspaces
-- threelevelnesting
-
 **Links Group** (2 missing):
 - linksgroupappendtolinkslist
 - linksgroupconstructorequivalent
 
-**Multiline Parser** (1 missing):
-- parseandstringifytest2
-
-**Nested Parser** (5 missing):
+**Nested Parser** (3 missing):
 - deepnestedstructureroundtrip
-- indentation
 - multiplenestedlinksroundtrip
-- nestedindentation
 - threelevelnestingroundtrip
 
 **Single Line Parser** (10 missing):
@@ -355,7 +330,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 27 tests**
+**Total missing: 22 tests**
 
 ### Rust Missing Tests
 
@@ -365,22 +340,13 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - isrefequivalent
 - multipleindentedidsyntaxroundtrip
 
-**Indentation Consistency** (2 missing):
-- simpletwovsfourspacesindentation
-- threelevelnestingwithdifferentindentation
-
 **Links Group** (2 missing):
 - linksgroupappendtolinkslist
 - linksgroupconstructor
 
-**Multiline Parser** (1 missing):
-- parseandstringify2
-
-**Nested Parser** (5 missing):
+**Nested Parser** (3 missing):
 - deepnestedstructureroundtrip
-- indentationparser
 - multiplenestedlinksroundtrip
-- nestedindentationparser
 - threelevelnestingroundtrip
 
 **Single Line Parser** (10 missing):
@@ -399,7 +365,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 26 tests**
+**Total missing: 21 tests**
 
 ### C# Missing Tests
 
@@ -410,22 +376,13 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - multipleindentedidsyntaxparsing
 - quotedreferencesparsing
 
-**Indentation Consistency** (2 missing):
-- simpletwovsfourspaces
-- threelevelnesting
-
 **Links Group** (2 missing):
 - linksgroupconstructorequivalent
 - linksgrouptostring
 
-**Multiline Parser** (1 missing):
-- parseandstringify2
-
-**Nested Parser** (5 missing):
+**Nested Parser** (3 missing):
 - deepnestedstructureroundtrip
-- indentation
 - multiplenestedlinksroundtrip
-- nestedindentation
 - threelevelnestingroundtrip
 
 **Single Line Parser** (9 missing):
@@ -439,5 +396,5 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - singlelinelink
 - singlelinelinkwithid
 
-**Total missing: 24 tests**
+**Total missing: 19 tests**
 
