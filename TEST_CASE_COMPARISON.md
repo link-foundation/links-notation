@@ -95,12 +95,10 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 |-----------|--------|------------|------|----|
 | basicindentedid | [✅](python/tests/test_indented_id_syntax.py:10) | [✅](js/tests/IndentedIdSyntax.test.js:7) | [✅](rust/tests/indented_id_syntax_tests.rs:7) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:8) |
 | emptyindentedid | [✅](python/tests/test_indented_id_syntax.py:149) | [✅](js/tests/IndentedIdSyntax.test.js:136) | [✅](rust/tests/indented_id_syntax_tests.rs:61) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:143) |
-| equivalencecomprehensive | [✅](python/tests/test_indented_id_syntax.py:162) | ❌ | ❌ | ❌ |
-| equivalencetestcomprehensive | ❌ | [✅](js/tests/IndentedIdSyntax.test.js:148) | [✅](rust/tests/indented_id_syntax_tests.rs:117) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:159) |
+| equivalencetestcomprehensive | [✅](python/tests/test_indented_id_syntax.py:162) | [✅](js/tests/IndentedIdSyntax.test.js:148) | [✅](rust/tests/indented_id_syntax_tests.rs:117) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:159) |
 | indentediddeepernesting | [✅](python/tests/test_indented_id_syntax.py:132) | [✅](js/tests/IndentedIdSyntax.test.js:120) | [✅](rust/tests/indented_id_syntax_tests.rs:106) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:183) |
 | indentedidmultiplevalues | [✅](python/tests/test_indented_id_syntax.py:45) | [✅](js/tests/IndentedIdSyntax.test.js:40) | [✅](rust/tests/indented_id_syntax_tests.rs:35) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:45) |
-| indentedidnumeric | ❌ | ❌ | [✅](rust/tests/indented_id_syntax_tests.rs:44) | ❌ |
-| indentedidnumericid | [✅](python/tests/test_indented_id_syntax.py:61) | [✅](js/tests/IndentedIdSyntax.test.js:55) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:63) |
+| indentedidnumericid | [✅](python/tests/test_indented_id_syntax.py:61) | [✅](js/tests/IndentedIdSyntax.test.js:55) | [✅](rust/tests/indented_id_syntax_tests.rs:44) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:63) |
 | indentedidquotedid | [✅](python/tests/test_indented_id_syntax.py:74) | [✅](js/tests/IndentedIdSyntax.test.js:67) | [✅](rust/tests/indented_id_syntax_tests.rs:71) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:78) |
 | indentedidsinglevalue | [✅](python/tests/test_indented_id_syntax.py:30) | [✅](js/tests/IndentedIdSyntax.test.js:26) | [✅](rust/tests/indented_id_syntax_tests.rs:26) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:28) |
 | mixedindentedandregular | [✅](python/tests/test_indented_id_syntax.py:102) | [✅](js/tests/IndentedIdSyntax.test.js:93) | [✅](rust/tests/indented_id_syntax_tests.rs:95) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:111) |
@@ -283,9 +281,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - simpletwovsfourspaces
 - threelevelnesting
 
-**Indented Id Syntax** (3 missing):
-- equivalencetestcomprehensive
-- indentedidnumeric
+**Indented Id Syntax** (1 missing):
 - unsupportedcolononly
 
 **Link** (2 missing):
@@ -334,7 +330,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 45 tests**
+**Total missing: 43 tests**
 
 ### JavaScript Missing Tests
 
@@ -361,9 +357,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - simpletwovsfourspaces
 - threelevelnesting
 
-**Indented Id Syntax** (3 missing):
-- equivalencecomprehensive
-- indentedidnumeric
+**Indented Id Syntax** (1 missing):
 - unsupportedcolononly
 
 **Link** (2 missing):
@@ -403,7 +397,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 43 tests**
+**Total missing: 41 tests**
 
 ### Rust Missing Tests
 
@@ -429,9 +423,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - simpletwovsfourspacesindentation
 - threelevelnestingdifferentindentation
 
-**Indented Id Syntax** (3 missing):
-- equivalencecomprehensive
-- indentedidnumericid
+**Indented Id Syntax** (1 missing):
 - unsupportedcolononlyfail
 
 **Link** (2 missing):
@@ -473,7 +465,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 44 tests**
+**Total missing: 42 tests**
 
 ### C# Missing Tests
 
@@ -500,9 +492,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - simpletwovsfourspaces
 - threelevelnesting
 
-**Indented Id Syntax** (3 missing):
-- equivalencecomprehensive
-- indentedidnumeric
+**Indented Id Syntax** (1 missing):
 - unsupportedcolononly
 
 **Link** (2 missing):
@@ -539,5 +529,5 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - singletlinkparser
 - valuelinkparser
 
-**Total missing: 42 tests**
+**Total missing: 40 tests**
 

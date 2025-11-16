@@ -42,10 +42,10 @@ mod tests {
     }
 
     #[test]
-    fn indented_id_numeric_test() {
+    fn indented_id_syntax_with_numeric_id_test() {
         let input = "42:\n  answer\n  to\n  everything";
         let result = parse_lino_to_links(input).unwrap();
-        
+
         assert_eq!(result.len(), 1);
         assert_eq!(format!("{}", result[0]), "(42: answer to everything)");
     }
