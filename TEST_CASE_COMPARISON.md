@@ -14,7 +14,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Language   | Total Tests | Test Categories |
 |------------|-------------|----------------|
-| Python     | 108 | 10 |
+| Python     | 112 | 11 |
 | JavaScript | 118 | 12 |
 | Rust       | 119 | 12 |
 | C#         | 120 | 13 |
@@ -173,12 +173,12 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| multilinedoublequotedreference | ❌ | [✅](js/tests/MultilineQuotedString.test.js:6) | [✅](rust/tests/multiline_quoted_string_tests.rs:3) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineQuotedStringTests.cs:8) |
-| multilinequotedasid | ❌ | [✅](js/tests/MultilineQuotedString.test.js:65) | [✅](rust/tests/multiline_quoted_string_tests.rs:83) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineQuotedStringTests.cs:76) |
-| simplemultilinedoublequoted | ❌ | [✅](js/tests/MultilineQuotedString.test.js:35) | [✅](rust/tests/multiline_quoted_string_tests.rs:43) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineQuotedStringTests.cs:40) |
-| simplemultilinesinglequoted | ❌ | [✅](js/tests/MultilineQuotedString.test.js:50) | [✅](rust/tests/multiline_quoted_string_tests.rs:63) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineQuotedStringTests.cs:58) |
+| multilinedoublequotedreference | [✅](python/tests/test_multiline_quoted_string.py:8) | [✅](js/tests/MultilineQuotedString.test.js:6) | [✅](rust/tests/multiline_quoted_string_tests.rs:3) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineQuotedStringTests.cs:8) |
+| multilinequotedasid | [✅](python/tests/test_multiline_quoted_string.py:70) | [✅](js/tests/MultilineQuotedString.test.js:65) | [✅](rust/tests/multiline_quoted_string_tests.rs:83) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineQuotedStringTests.cs:76) |
+| simplemultilinedoublequoted | [✅](python/tests/test_multiline_quoted_string.py:38) | [✅](js/tests/MultilineQuotedString.test.js:35) | [✅](rust/tests/multiline_quoted_string_tests.rs:43) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineQuotedStringTests.cs:40) |
+| simplemultilinesinglequoted | [✅](python/tests/test_multiline_quoted_string.py:54) | [✅](js/tests/MultilineQuotedString.test.js:50) | [✅](rust/tests/multiline_quoted_string_tests.rs:63) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineQuotedStringTests.cs:58) |
 
-**Category totals:** Python: 0, JavaScript: 4, Rust: 4, C#: 4
+**Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4
 
 ## Nested Parser
 
@@ -291,12 +291,6 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 **Multiline Parser** (1 missing):
 - parseandstringifytest2
 
-**Multiline Quoted String** (4 missing):
-- multilinedoublequotedreference
-- multilinequotedasid
-- simplemultilinedoublequoted
-- simplemultilinesinglequoted
-
 **Nested Parser** (2 missing):
 - indentationparser
 - nestedindentationparser
@@ -316,7 +310,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 36 tests**
+**Total missing: 32 tests**
 
 ### JavaScript Missing Tests
 
