@@ -1,4 +1,5 @@
 pub mod parser;
+pub mod format_config;
 
 use std::fmt;
 use std::error::Error as StdError;
