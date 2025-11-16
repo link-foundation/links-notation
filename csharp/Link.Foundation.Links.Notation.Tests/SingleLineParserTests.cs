@@ -168,7 +168,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void NestedLinksSingleLineTest()
+        public static void NestedLinksTest()
         {
             // Test nested links
             var input = "(outer: (inner: value))";

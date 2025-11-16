@@ -22,7 +22,7 @@ def test_triplet_single_link():
     assert target == source
 
 
-def test_bug1():
+def test_bug_test_1():
     """Test hyphenated identifiers."""
     source = '(ignore conan-center-index repository)'
     links = parser.parse(source)

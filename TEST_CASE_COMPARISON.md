@@ -212,8 +212,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| bug1 | [✅](python/tests/test_single_line_parser.py:25) | ❌ | ❌ | ❌ |
-| bugtest1 | ❌ | [✅](js/tests/SingleLineParser.test.js:21) | [✅](rust/tests/single_line_parser_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:28) |
+| bugtest1 | [✅](python/tests/test_single_line_parser.py:25) | [✅](js/tests/SingleLineParser.test.js:21) | [✅](rust/tests/single_line_parser_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:28) |
 | deeplynested | [✅](python/tests/test_single_line_parser.py:213) | [✅](js/tests/SingleLineParser.test.js:170) | [✅](rust/tests/single_line_parser_tests.rs:257) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:213) |
 | hyphenatedidentifiers | [✅](python/tests/test_single_line_parser.py:220) | [✅](js/tests/SingleLineParser.test.js:176) | [✅](rust/tests/single_line_parser_tests.rs:264) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:179) |
 | linkid | ❌ | ❌ | [✅](rust/tests/single_line_parser_tests.rs:310) | ❌ |
@@ -223,8 +222,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | multilinelinkid | [✅](python/tests/test_single_line_parser.py:111) | [✅](js/tests/SingleLineParser.test.js:96) | [✅](rust/tests/single_line_parser_tests.rs:181) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:254) |
 | multilinewithoutid | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:238) |
 | multiplewordsinquotes | [✅](python/tests/test_single_line_parser.py:227) | [✅](js/tests/SingleLineParser.test.js:182) | [✅](rust/tests/single_line_parser_tests.rs:271) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:190) |
-| nestedlinks | [✅](python/tests/test_single_line_parser.py:195) | [✅](js/tests/SingleLineParser.test.js:154) | [✅](rust/tests/single_line_parser_tests.rs:239) | ❌ |
-| nestedlinkssingleline | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:170) |
+| nestedlinks | [✅](python/tests/test_single_line_parser.py:195) | [✅](js/tests/SingleLineParser.test.js:154) | [✅](rust/tests/single_line_parser_tests.rs:239) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:170) |
 | parsemultilinelink | [✅](python/tests/test_single_line_parser.py:73) | [✅](js/tests/SingleLineParser.test.js:64) | [✅](rust/tests/single_line_parser_tests.rs:144) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:90) |
 | parsequotedreferences | [✅](python/tests/test_single_line_parser.py:82) | [✅](js/tests/SingleLineParser.test.js:72) | [✅](rust/tests/single_line_parser_tests.rs:158) | ❌ |
 | parsequotedreferencesvaluesonly | [✅](python/tests/test_single_line_parser.py:169) | [✅](js/tests/SingleLineParser.test.js:130) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:153) |
@@ -318,12 +316,10 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - simplemultilinedoublequoted
 - simplemultilinesinglequoted
 
-**Single Line Parser** (14 missing):
-- bugtest1
+**Single Line Parser** (12 missing):
 - linkid
 - linkwithoutidmultiline
 - multilinewithoutid
-- nestedlinkssingleline
 - parsevaluesonly
 - quotedreferenceparser
 - quotedreferencesspecialchars
@@ -338,7 +334,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 47 tests**
+**Total missing: 45 tests**
 
 ### JavaScript Missing Tests
 
@@ -390,12 +386,10 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - multiplenestedlinksroundtrip
 - threelevelnestingroundtrip
 
-**Single Line Parser** (13 missing):
-- bug1
+**Single Line Parser** (11 missing):
 - linkid
 - linkwithoutidmultilinecolon
 - multilinewithoutid
-- nestedlinkssingleline
 - parsevaluesonlystandalonecolon
 - quotedreference
 - quotedreferencesspacesinlink
@@ -409,7 +403,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 45 tests**
+**Total missing: 43 tests**
 
 ### Rust Missing Tests
 
@@ -460,11 +454,9 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - multiplenestedlinksroundtrip
 - threelevelnestingroundtrip
 
-**Single Line Parser** (15 missing):
-- bug1
+**Single Line Parser** (13 missing):
 - linkwithoutidmultilinecolon
 - multilinewithoutid
-- nestedlinkssingleline
 - parsequotedreferencesvaluesonly
 - parsevaluesonlystandalonecolon
 - quotedreferenceparser
@@ -481,7 +473,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 46 tests**
+**Total missing: 44 tests**
 
 ### C# Missing Tests
 
@@ -533,12 +525,10 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - multiplenestedlinksroundtrip
 - threelevelnestingroundtrip
 
-**Single Line Parser** (14 missing):
-- bug1
+**Single Line Parser** (12 missing):
 - linkid
 - linkwithoutidmultilinecolon
 - linkwithoutidsingleline
-- nestedlinks
 - parsequotedreferences
 - parsevaluesonlystandalonecolon
 - quotedreferenceparser
@@ -549,5 +539,5 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - singletlinkparser
 - valuelinkparser
 
-**Total missing: 44 tests**
+**Total missing: 42 tests**
 
