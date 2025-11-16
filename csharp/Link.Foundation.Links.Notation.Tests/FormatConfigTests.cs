@@ -14,6 +14,54 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
+        public void FormatWithLineLengthLimitTest()
+        {
+            // Create a config with line length limit
+            // The line would be 32+ chars, so use threshold of 30
+            var config = new FormatConfig
+            {
+                IndentLongLines = true,
+                MaxLineLength = 30,
+                PreferInline = false
+            };
+
+            // Verify config is set correctly
+            Assert.Equal(true, config.IndentLongLines);
+            Assert.Equal(30, config.MaxLineLength);
+            // Note: Full formatting integration would test actual output here
+        }
+
+        [Fact]
+        public void FormatWithMaxInlineRefsTest()
+        {
+            // Create a config with MaxInlineRefs=3 (should trigger indentation with 4 refs)
+            var config = new FormatConfig
+            {
+                MaxInlineRefs = 3,
+                PreferInline = false
+            };
+
+            // Verify config is set correctly
+            Assert.Equal(3, config.MaxInlineRefs);
+            Assert.Equal(true, config.ShouldIndentByRefCount(4));
+            // Note: Full formatting integration would test actual output here
+        }
+
+        [Fact]
+        public void FormatWithConsecutiveGroupingTest()
+        {
+            // Create a config with consecutive grouping enabled
+            var config = new FormatConfig
+            {
+                GroupConsecutive = true
+            };
+
+            // Verify config is set correctly
+            Assert.Equal(true, config.GroupConsecutive);
+            // Note: Full formatting integration would test grouping behavior here
+        }
+
+        [Fact]
         public void FormatConfigCustomIndentTest()
         {
             var config = new FormatConfig

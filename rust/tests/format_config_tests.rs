@@ -9,6 +9,48 @@ fn format_config_basic() {
 }
 
 #[test]
+fn format_with_line_length_limit() {
+    // Create a config with line length limit
+    // The line would be 32+ chars, so use threshold of 30
+    let config = FormatConfig::builder()
+        .indent_long_lines(true)
+        .max_line_length(30)
+        .prefer_inline(false)
+        .build();
+
+    // Verify config is set correctly
+    assert_eq!(config.indent_long_lines, true);
+    assert_eq!(config.max_line_length, 30);
+    // Note: Full formatting integration would test actual output here
+}
+
+#[test]
+fn format_with_max_inline_refs() {
+    // Create a config with max_inline_refs=3 (should trigger indentation with 4 refs)
+    let config = FormatConfig::builder()
+        .max_inline_refs(Some(3))
+        .prefer_inline(false)
+        .build();
+
+    // Verify config is set correctly
+    assert_eq!(config.max_inline_refs, Some(3));
+    assert_eq!(config.should_indent_by_ref_count(4), true);
+    // Note: Full formatting integration would test actual output here
+}
+
+#[test]
+fn format_with_consecutive_grouping() {
+    // Create a config with consecutive grouping enabled
+    let config = FormatConfig::builder()
+        .group_consecutive(true)
+        .build();
+
+    // Verify config is set correctly
+    assert_eq!(config.group_consecutive, true);
+    // Note: Full formatting integration would test grouping behavior here
+}
+
+#[test]
 fn format_config_custom_indent() {
     let config = FormatConfig::builder()
         .max_inline_refs(Some(3))

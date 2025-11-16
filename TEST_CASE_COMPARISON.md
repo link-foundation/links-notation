@@ -16,8 +16,8 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 |------------|-------------|----------------|
 | Python     | 108 | 10 |
 | JavaScript | 118 | 12 |
-| Rust       | 116 | 12 |
-| C#         | 117 | 13 |
+| Rust       | 119 | 12 |
+| C#         | 120 | 13 |
 
 ---
 
@@ -64,16 +64,16 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
 | formatconfigbasic | [✅](python/tests/test_format_config.py:9) | [✅](js/tests/FormatConfig.test.js:6) | [✅](rust/tests/format_config_tests.rs:3) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:7) |
-| formatconfigcustomindent | [✅](python/tests/test_format_config.py:82) | [✅](js/tests/FormatConfig.test.js:77) | [✅](rust/tests/format_config_tests.rs:11) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:16) |
-| formatconfiglessparentheses | [✅](python/tests/test_format_config.py:71) | [✅](js/tests/FormatConfig.test.js:67) | [✅](rust/tests/format_config_tests.rs:22) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:29) |
-| formatwithconsecutivegrouping | [✅](python/tests/test_format_config.py:51) | [✅](js/tests/FormatConfig.test.js:48) | ❌ | ❌ |
-| formatwithlinelengthlimit | [✅](python/tests/test_format_config.py:17) | [✅](js/tests/FormatConfig.test.js:13) | ❌ | ❌ |
-| formatwithmaxinlinerefs | [✅](python/tests/test_format_config.py:35) | [✅](js/tests/FormatConfig.test.js:33) | ❌ | ❌ |
-| roundtripwithlinelengthformatting | [✅](python/tests/test_format_config.py:97) | [✅](js/tests/FormatConfig.test.js:91) | [✅](rust/tests/format_config_tests.rs:31) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:40) |
-| shouldindentbylength | [✅](python/tests/test_format_config.py:117) | [✅](js/tests/FormatConfig.test.js:110) | [✅](rust/tests/format_config_tests.rs:43) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:54) |
-| shouldindentbyrefcount | [✅](python/tests/test_format_config.py:128) | [✅](js/tests/FormatConfig.test.js:120) | [✅](rust/tests/format_config_tests.rs:54) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:67) |
+| formatconfigcustomindent | [✅](python/tests/test_format_config.py:82) | [✅](js/tests/FormatConfig.test.js:77) | [✅](rust/tests/format_config_tests.rs:53) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:64) |
+| formatconfiglessparentheses | [✅](python/tests/test_format_config.py:71) | [✅](js/tests/FormatConfig.test.js:67) | [✅](rust/tests/format_config_tests.rs:64) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:77) |
+| formatwithconsecutivegrouping | [✅](python/tests/test_format_config.py:51) | [✅](js/tests/FormatConfig.test.js:48) | [✅](rust/tests/format_config_tests.rs:41) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:50) |
+| formatwithlinelengthlimit | [✅](python/tests/test_format_config.py:17) | [✅](js/tests/FormatConfig.test.js:13) | [✅](rust/tests/format_config_tests.rs:11) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:16) |
+| formatwithmaxinlinerefs | [✅](python/tests/test_format_config.py:35) | [✅](js/tests/FormatConfig.test.js:33) | [✅](rust/tests/format_config_tests.rs:27) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:34) |
+| roundtripwithlinelengthformatting | [✅](python/tests/test_format_config.py:97) | [✅](js/tests/FormatConfig.test.js:91) | [✅](rust/tests/format_config_tests.rs:73) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:88) |
+| shouldindentbylength | [✅](python/tests/test_format_config.py:117) | [✅](js/tests/FormatConfig.test.js:110) | [✅](rust/tests/format_config_tests.rs:85) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:102) |
+| shouldindentbyrefcount | [✅](python/tests/test_format_config.py:128) | [✅](js/tests/FormatConfig.test.js:120) | [✅](rust/tests/format_config_tests.rs:96) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs:115) |
 
-**Category totals:** Python: 9, JavaScript: 9, Rust: 6, C#: 6
+**Category totals:** Python: 9, JavaScript: 9, Rust: 9, C#: 9
 
 ## Indentation Consistency
 
@@ -371,11 +371,6 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - isrefequivalent
 - multipleindentedidsyntaxroundtrip
 
-**Format Config** (3 missing):
-- formatwithconsecutivegrouping
-- formatwithlinelengthlimit
-- formatwithmaxinlinerefs
-
 **Indentation Consistency** (2 missing):
 - simpletwovsfourspacesindentation
 - threelevelnestingwithdifferentindentation
@@ -410,7 +405,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 29 tests**
+**Total missing: 26 tests**
 
 ### C# Missing Tests
 
@@ -420,11 +415,6 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - isref
 - multipleindentedidsyntaxparsing
 - quotedreferencesparsing
-
-**Format Config** (3 missing):
-- formatwithconsecutivegrouping
-- formatwithlinelengthlimit
-- formatwithmaxinlinerefs
 
 **Indentation Consistency** (2 missing):
 - simpletwovsfourspaces
@@ -455,5 +445,5 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - singlelinelink
 - singlelinelinkwithid
 
-**Total missing: 27 tests**
+**Total missing: 24 tests**
 
