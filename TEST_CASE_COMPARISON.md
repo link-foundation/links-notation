@@ -26,16 +26,16 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
 | emptylink | [✅](python/tests/test_api.py:24) | [✅](js/tests/ApiTests.test.js:23) | [✅](rust/tests/api_tests.rs:20) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:29) |
-| indentedidsyntaxparsing | ❌ | ❌ | [✅](rust/tests/api_tests.rs:108) | ❌ |
-| indentedidsyntaxroundtrip | ❌ | [✅](js/tests/ApiTests.test.js:77) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:100) |
+| indentedidparsing | ❌ | ❌ | [✅](rust/tests/api_tests.rs:108) | ❌ |
+| indentedidroundtrip | ❌ | [✅](js/tests/ApiTests.test.js:77) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:100) |
 | islink | ❌ | ❌ | [✅](rust/tests/api_tests.rs:10) | ❌ |
 | islinkequivalent | [✅](python/tests/test_api.py:16) | [✅](js/tests/ApiTests.test.js:15) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:18) |
 | isref | ❌ | ❌ | [✅](rust/tests/api_tests.rs:3) | ❌ |
 | isrefequivalent | [✅](python/tests/test_api.py:9) | [✅](js/tests/ApiTests.test.js:8) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:9) |
-| linkwithsourcetarget | [✅](python/tests/test_api.py:42) | [✅](js/tests/ApiTests.test.js:39) | [✅](rust/tests/api_tests.rs:45) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:50) |
-| linkwithsourcetypetarget | [✅](python/tests/test_api.py:52) | [✅](js/tests/ApiTests.test.js:48) | [✅](rust/tests/api_tests.rs:60) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:62) |
-| multipleindentedidsyntaxparsing | ❌ | ❌ | [✅](rust/tests/api_tests.rs:127) | ❌ |
-| multipleindentedidsyntaxroundtrip | ❌ | [✅](js/tests/ApiTests.test.js:91) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:117) |
+| linksourcetarget | [✅](python/tests/test_api.py:42) | [✅](js/tests/ApiTests.test.js:39) | [✅](rust/tests/api_tests.rs:45) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:50) |
+| linksourcetypetarget | [✅](python/tests/test_api.py:52) | [✅](js/tests/ApiTests.test.js:48) | [✅](rust/tests/api_tests.rs:60) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:62) |
+| multipleindentedidparsing | ❌ | ❌ | [✅](rust/tests/api_tests.rs:127) | ❌ |
+| multipleindentedidroundtrip | ❌ | [✅](js/tests/ApiTests.test.js:91) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:117) |
 | quotedreferences | [✅](python/tests/test_api.py:74) | [✅](js/tests/ApiTests.test.js:68) | [✅](rust/tests/api_tests.rs:85) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:88) |
 | quotedreferencesparsing | ❌ | ❌ | [✅](rust/tests/api_tests.rs:94) | ❌ |
 | simplelink | [✅](python/tests/test_api.py:31) | [✅](js/tests/ApiTests.test.js:29) | [✅](rust/tests/api_tests.rs:30) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs:37) |
@@ -50,9 +50,9 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | allfeatures | [✅](python/tests/test_edge_case_parser.py:35) | [✅](js/tests/EdgeCaseParser.test.js:27) | [✅](rust/tests/edge_case_parser_tests.rs:30) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs:37) |
 | emptydocument | [✅](python/tests/test_edge_case_parser.py:89) | [✅](js/tests/EdgeCaseParser.test.js:76) | [✅](rust/tests/edge_case_parser_tests.rs:86) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs:145) |
 | emptylink | [✅](python/tests/test_edge_case_parser.py:10) | [✅](js/tests/EdgeCaseParser.test.js:7) | [✅](rust/tests/edge_case_parser_tests.rs:3) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs:8) |
+| emptylinkemptyselfreference | [✅](python/tests/test_edge_case_parser.py:27) | [✅](js/tests/EdgeCaseParser.test.js:21) | [✅](rust/tests/edge_case_parser_tests.rs:22) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs:28) |
+| emptylinkparentheses | [✅](python/tests/test_edge_case_parser.py:18) | [✅](js/tests/EdgeCaseParser.test.js:13) | [✅](rust/tests/edge_case_parser_tests.rs:11) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs:17) |
 | emptylinks | [✅](python/tests/test_edge_case_parser.py:105) | [✅](js/tests/EdgeCaseParser.test.js:90) | [✅](rust/tests/edge_case_parser_tests.rs:106) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs:163) |
-| emptylinkwithemptyselfreference | [✅](python/tests/test_edge_case_parser.py:27) | [✅](js/tests/EdgeCaseParser.test.js:21) | [✅](rust/tests/edge_case_parser_tests.rs:22) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs:28) |
-| emptylinkwithparentheses | [✅](python/tests/test_edge_case_parser.py:18) | [✅](js/tests/EdgeCaseParser.test.js:13) | [✅](rust/tests/edge_case_parser_tests.rs:11) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs:17) |
 | invalidinput | [✅](python/tests/test_edge_case_parser.py:176) | [✅](js/tests/EdgeCaseParser.test.js:158) | [✅](rust/tests/edge_case_parser_tests.rs:189) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs:179) |
 | singletlinks | [✅](python/tests/test_edge_case_parser.py:125) | [✅](js/tests/EdgeCaseParser.test.js:108) | [✅](rust/tests/edge_case_parser_tests.rs:122) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs:89) |
 | whitespaceonly | [✅](python/tests/test_edge_case_parser.py:97) | [✅](js/tests/EdgeCaseParser.test.js:83) | [✅](rust/tests/edge_case_parser_tests.rs:96) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs:154) |
@@ -66,12 +66,12 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | formatconfigbasic | [✅](python/tests/test_format_config.py:9) | ❌ | ❌ | ❌ |
 | formatconfigcustomindent | [✅](python/tests/test_format_config.py:82) | ❌ | ❌ | ❌ |
 | formatconfiglessparentheses | [✅](python/tests/test_format_config.py:71) | ❌ | ❌ | ❌ |
-| formatwithconsecutivegrouping | [✅](python/tests/test_format_config.py:51) | ❌ | ❌ | ❌ |
-| formatwithlinelengthlimit | [✅](python/tests/test_format_config.py:17) | ❌ | ❌ | ❌ |
-| formatwithmaxinlinerefs | [✅](python/tests/test_format_config.py:35) | ❌ | ❌ | ❌ |
-| roundtripwithlinelengthformatting | [✅](python/tests/test_format_config.py:97) | ❌ | ❌ | ❌ |
-| shouldindentbylength | [✅](python/tests/test_format_config.py:117) | ❌ | ❌ | ❌ |
-| shouldindentbyrefcount | [✅](python/tests/test_format_config.py:128) | ❌ | ❌ | ❌ |
+| formatconsecutivegrouping | [✅](python/tests/test_format_config.py:51) | ❌ | ❌ | ❌ |
+| formatlinelengthlimit | [✅](python/tests/test_format_config.py:17) | ❌ | ❌ | ❌ |
+| formatmaxinlinerefs | [✅](python/tests/test_format_config.py:35) | ❌ | ❌ | ❌ |
+| indentbylength | [✅](python/tests/test_format_config.py:117) | ❌ | ❌ | ❌ |
+| indentbyrefcount | [✅](python/tests/test_format_config.py:128) | ❌ | ❌ | ❌ |
+| roundtriplinelengthformatting | [✅](python/tests/test_format_config.py:97) | ❌ | ❌ | ❌ |
 
 **Category totals:** Python: 9, JavaScript: 0, Rust: 0, C#: 0
 
@@ -80,11 +80,11 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
 | leadingspacesvsnoleadingspaces | [✅](python/tests/test_indentation_consistency.py:6) | ❌ | [✅](rust/tests/indentation_consistency_tests.rs:7) | ❌ |
-| leadingspacesvsnoleadingspacesshouldproducesameresult | ❌ | [✅](js/tests/IndentationConsistency.test.js:11) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:8) |
+| leadingspacesvsnoleadingspacesproducesameresult | ❌ | [✅](js/tests/IndentationConsistency.test.js:11) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:8) |
 | simpletwovsfourspaces | ❌ | ❌ | [✅](rust/tests/indentation_consistency_tests.rs:57) | ❌ |
 | simpletwovsfourspacesindentation | [✅](python/tests/test_indentation_consistency.py:90) | [✅](js/tests/IndentationConsistency.test.js:89) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:90) |
 | threelevelnesting | ❌ | ❌ | [✅](rust/tests/indentation_consistency_tests.rs:82) | ❌ |
-| threelevelnestingwithdifferentindentation | [✅](python/tests/test_indentation_consistency.py:111) | [✅](js/tests/IndentationConsistency.test.js:107) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:110) |
+| threelevelnestingdifferentindentation | [✅](python/tests/test_indentation_consistency.py:111) | [✅](js/tests/IndentationConsistency.test.js:107) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:110) |
 | twospacesvsfourspacesindentation | [✅](python/tests/test_indentation_consistency.py:37) | [✅](js/tests/IndentationConsistency.test.js:39) | [✅](rust/tests/indentation_consistency_tests.rs:32) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs:38) |
 
 **Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4
@@ -93,23 +93,20 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| basicindentedidsyntax | [✅](python/tests/test_indented_id_syntax.py:10) | [✅](js/tests/IndentedIdSyntax.test.js:7) | [✅](rust/tests/indented_id_syntax_tests.rs:7) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:8) |
-| emptyindentedid | ❌ | ❌ | [✅](rust/tests/indented_id_syntax_tests.rs:61) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:143) |
-| emptyindentedidshouldwork | [✅](python/tests/test_indented_id_syntax.py:149) | [✅](js/tests/IndentedIdSyntax.test.js:136) | ❌ | ❌ |
-| equivalencecomprehensive | [✅](python/tests/test_indented_id_syntax.py:162) | [✅](js/tests/IndentedIdSyntax.test.js:148) | [✅](rust/tests/indented_id_syntax_tests.rs:117) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:159) |
-| indentedidmultiplevalues | ❌ | ❌ | [✅](rust/tests/indented_id_syntax_tests.rs:35) | ❌ |
+| basicindentedid | [✅](python/tests/test_indented_id_syntax.py:10) | [✅](js/tests/IndentedIdSyntax.test.js:7) | [✅](rust/tests/indented_id_syntax_tests.rs:7) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:8) |
+| emptyindentedid | [✅](python/tests/test_indented_id_syntax.py:149) | [✅](js/tests/IndentedIdSyntax.test.js:136) | [✅](rust/tests/indented_id_syntax_tests.rs:61) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:143) |
+| equivalencecomprehensive | [✅](python/tests/test_indented_id_syntax.py:162) | ❌ | ❌ | ❌ |
+| equivalencetestcomprehensive | ❌ | [✅](js/tests/IndentedIdSyntax.test.js:148) | [✅](rust/tests/indented_id_syntax_tests.rs:117) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:159) |
+| indentediddeepernesting | [✅](python/tests/test_indented_id_syntax.py:132) | [✅](js/tests/IndentedIdSyntax.test.js:120) | [✅](rust/tests/indented_id_syntax_tests.rs:106) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:183) |
+| indentedidmultiplevalues | [✅](python/tests/test_indented_id_syntax.py:45) | [✅](js/tests/IndentedIdSyntax.test.js:40) | [✅](rust/tests/indented_id_syntax_tests.rs:35) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:45) |
 | indentedidnumeric | ❌ | ❌ | [✅](rust/tests/indented_id_syntax_tests.rs:44) | ❌ |
-| indentedidsinglevalue | ❌ | ❌ | [✅](rust/tests/indented_id_syntax_tests.rs:26) | ❌ |
-| indentedidsyntaxwithmultiplevalues | [✅](python/tests/test_indented_id_syntax.py:45) | [✅](js/tests/IndentedIdSyntax.test.js:40) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:45) |
-| indentedidsyntaxwithnumericid | [✅](python/tests/test_indented_id_syntax.py:61) | [✅](js/tests/IndentedIdSyntax.test.js:55) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:63) |
-| indentedidsyntaxwithquotedid | [✅](python/tests/test_indented_id_syntax.py:74) | [✅](js/tests/IndentedIdSyntax.test.js:67) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:78) |
-| indentedidsyntaxwithsinglevalue | [✅](python/tests/test_indented_id_syntax.py:30) | [✅](js/tests/IndentedIdSyntax.test.js:26) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:28) |
-| indentedidwithdeepernesting | [✅](python/tests/test_indented_id_syntax.py:132) | [✅](js/tests/IndentedIdSyntax.test.js:120) | [✅](rust/tests/indented_id_syntax_tests.rs:106) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:183) |
-| indentedidwithquotedid | ❌ | ❌ | [✅](rust/tests/indented_id_syntax_tests.rs:71) | ❌ |
-| mixedindentedandregularsyntax | [✅](python/tests/test_indented_id_syntax.py:102) | [✅](js/tests/IndentedIdSyntax.test.js:93) | [✅](rust/tests/indented_id_syntax_tests.rs:95) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:111) |
+| indentedidnumericid | [✅](python/tests/test_indented_id_syntax.py:61) | [✅](js/tests/IndentedIdSyntax.test.js:55) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:63) |
+| indentedidquotedid | [✅](python/tests/test_indented_id_syntax.py:74) | [✅](js/tests/IndentedIdSyntax.test.js:67) | [✅](rust/tests/indented_id_syntax_tests.rs:71) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:78) |
+| indentedidsinglevalue | [✅](python/tests/test_indented_id_syntax.py:30) | [✅](js/tests/IndentedIdSyntax.test.js:26) | [✅](rust/tests/indented_id_syntax_tests.rs:26) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:28) |
+| mixedindentedandregular | [✅](python/tests/test_indented_id_syntax.py:102) | [✅](js/tests/IndentedIdSyntax.test.js:93) | [✅](rust/tests/indented_id_syntax_tests.rs:95) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:111) |
 | multipleindentedidlinks | [✅](python/tests/test_indented_id_syntax.py:86) | [✅](js/tests/IndentedIdSyntax.test.js:78) | [✅](rust/tests/indented_id_syntax_tests.rs:83) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:92) |
-| unsupportedcolononlysyntax | ❌ | ❌ | [✅](rust/tests/indented_id_syntax_tests.rs:53) | ❌ |
-| unsupportedcolononlysyntaxshouldfail | [✅](python/tests/test_indented_id_syntax.py:119) | [✅](js/tests/IndentedIdSyntax.test.js:109) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:131) |
+| unsupportedcolononly | ❌ | ❌ | [✅](rust/tests/indented_id_syntax_tests.rs:53) | ❌ |
+| unsupportedcolononlyfail | [✅](python/tests/test_indented_id_syntax.py:119) | [✅](js/tests/IndentedIdSyntax.test.js:109) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs:131) |
 
 **Category totals:** Python: 11, JavaScript: 11, Rust: 11, C#: 11
 
@@ -118,17 +115,17 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
 | linkcombine | [✅](python/tests/test_link.py:62) | [✅](js/tests/Link.test.js:52) | [✅](rust/tests/link_tests.rs:89) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:60) |
-| linkconstructorwithidandvalues | [✅](python/tests/test_link.py:13) | [✅](js/tests/Link.test.js:10) | [✅](rust/tests/link_tests.rs:17) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:17) |
-| linkconstructorwithidonly | [✅](python/tests/test_link.py:6) | [✅](js/tests/Link.test.js:4) | [✅](rust/tests/link_tests.rs:3) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:9) |
+| linkconstructoridandvalues | [✅](python/tests/test_link.py:13) | [✅](js/tests/Link.test.js:10) | [✅](rust/tests/link_tests.rs:17) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:17) |
+| linkconstructoridonly | [✅](python/tests/test_link.py:6) | [✅](js/tests/Link.test.js:4) | [✅](rust/tests/link_tests.rs:3) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:9) |
 | linkequals | [✅](python/tests/test_link.py:73) | [✅](js/tests/Link.test.js:62) | [✅](rust/tests/link_tests.rs:70) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:49) |
 | linkescapereferenceforsimplereference | ❌ | [✅](js/tests/Link.test.js:33) | ❌ | ❌ |
 | linkescapereferencesimple | [✅](python/tests/test_link.py:40) | ❌ | [✅](rust/tests/link_tests.rs:107) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:73) |
+| linkescapereferencespecialcharacters | ❌ | [✅](js/tests/Link.test.js:37) | [✅](rust/tests/link_tests.rs:116) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:80) |
 | linkescapereferencespecialchars | [✅](python/tests/test_link.py:45) | ❌ | ❌ | ❌ |
-| linkescapereferencewithspecialcharacters | ❌ | [✅](js/tests/Link.test.js:37) | [✅](rust/tests/link_tests.rs:116) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:80) |
 | linksimplify | [✅](python/tests/test_link.py:54) | [✅](js/tests/Link.test.js:45) | [✅](rust/tests/link_tests.rs:127) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:91) |
-| linktostringwithidandvalues | [✅](python/tests/test_link.py:34) | [✅](js/tests/Link.test.js:28) | [✅](rust/tests/link_tests.rs:57) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:41) |
-| linktostringwithidonly | [✅](python/tests/test_link.py:22) | [✅](js/tests/Link.test.js:18) | [✅](rust/tests/link_tests.rs:35) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:26) |
-| linktostringwithvaluesonly | [✅](python/tests/test_link.py:28) | [✅](js/tests/Link.test.js:23) | [✅](rust/tests/link_tests.rs:44) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:33) |
+| linktostringidandvalues | [✅](python/tests/test_link.py:34) | [✅](js/tests/Link.test.js:28) | [✅](rust/tests/link_tests.rs:57) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:41) |
+| linktostringidonly | [✅](python/tests/test_link.py:22) | [✅](js/tests/Link.test.js:18) | [✅](rust/tests/link_tests.rs:35) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:26) |
+| linktostringvaluesonly | [✅](python/tests/test_link.py:28) | [✅](js/tests/Link.test.js:23) | [✅](rust/tests/link_tests.rs:44) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs:33) |
 
 **Category totals:** Python: 10, JavaScript: 10, Rust: 10, C#: 10
 
@@ -153,9 +150,11 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | heroexampleequivalence | ❌ | [✅](js/tests/MixedIndentationModes.test.js:63) | [✅](rust/tests/mixed_indentation_modes_tests.rs:37) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:70) |
 | heroexamplemixedmodes | ❌ | [✅](js/tests/MixedIndentationModes.test.js:7) | [✅](rust/tests/mixed_indentation_modes_tests.rs:7) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:8) |
 | nestedsetandsequencecontexts | [✅](python/tests/test_mixed_indentation_modes.py:48) | [✅](js/tests/MixedIndentationModes.test.js:155) | [✅](rust/tests/mixed_indentation_modes_tests.rs:93) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:177) |
-| sequencecontextwithcolon | [✅](python/tests/test_mixed_indentation_modes.py:30) | [✅](js/tests/MixedIndentationModes.test.js:117) | [✅](rust/tests/mixed_indentation_modes_tests.rs:64) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:133) |
-| sequencecontextwithcomplexvalues | ❌ | [✅](js/tests/MixedIndentationModes.test.js:134) | [✅](rust/tests/mixed_indentation_modes_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:153) |
-| setcontextwithoutcolon | [✅](python/tests/test_mixed_indentation_modes.py:17) | [✅](js/tests/MixedIndentationModes.test.js:105) | [✅](rust/tests/mixed_indentation_modes_tests.rs:52) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:118) |
+| sequencecontextcolon | [✅](python/tests/test_mixed_indentation_modes.py:30) | ❌ | [✅](rust/tests/mixed_indentation_modes_tests.rs:64) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:133) |
+| sequencecontextcomplexvalues | ❌ | [✅](js/tests/MixedIndentationModes.test.js:134) | [✅](rust/tests/mixed_indentation_modes_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:153) |
+| sequencelistcontextcolon | ❌ | [✅](js/tests/MixedIndentationModes.test.js:117) | ❌ | ❌ |
+| setcontextwithoutcolon | [✅](python/tests/test_mixed_indentation_modes.py:17) | ❌ | [✅](rust/tests/mixed_indentation_modes_tests.rs:52) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MixedIndentationModesTests.cs:118) |
+| setobjectcontextwithoutcolon | ❌ | [✅](js/tests/MixedIndentationModes.test.js:105) | ❌ | ❌ |
 
 **Category totals:** Python: 4, JavaScript: 8, Rust: 8, C#: 8
 
@@ -167,12 +166,13 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | duplicateidentifiers | [✅](python/tests/test_multiline_parser.py:64) | [✅](js/tests/MultilineParser.test.js:46) | [✅](rust/tests/multiline_parser_tests.rs:104) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:58) |
 | indentedchildren | [✅](python/tests/test_multiline_parser.py:136) | [✅](js/tests/MultilineParser.test.js:112) | [✅](rust/tests/multiline_parser_tests.rs:172) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:138) |
 | mixedformats | [✅](python/tests/test_multiline_parser.py:89) | [✅](js/tests/MultilineParser.test.js:69) | [✅](rust/tests/multiline_parser_tests.rs:126) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:86) |
+| multilineid | [✅](python/tests/test_multiline_parser.py:104) | [✅](js/tests/MultilineParser.test.js:83) | [✅](rust/tests/multiline_parser_tests.rs:149) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:102) |
 | multilinesimplelinks | [✅](python/tests/test_multiline_parser.py:120) | [✅](js/tests/MultilineParser.test.js:97) | [✅](rust/tests/multiline_parser_tests.rs:157) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:120) |
-| multilinewithid | [✅](python/tests/test_multiline_parser.py:104) | [✅](js/tests/MultilineParser.test.js:83) | [✅](rust/tests/multiline_parser_tests.rs:149) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:102) |
 | multipletoplevelelements | [✅](python/tests/test_multiline_parser.py:112) | [✅](js/tests/MultilineParser.test.js:90) | [✅](rust/tests/multiline_parser_tests.rs:141) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:111) |
 | parseandstringify | [✅](python/tests/test_multiline_parser.py:18) | [✅](js/tests/MultilineParser.test.js:15) | [✅](rust/tests/multiline_parser_tests.rs:80) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:19) |
-| parseandstringify2 | [✅](python/tests/test_multiline_parser.py:35) | [✅](js/tests/MultilineParser.test.js:25) | [✅](rust/tests/multiline_parser_tests.rs:88) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:32) |
-| parseandstringifywithlessparentheses | [✅](python/tests/test_multiline_parser.py:52) | [✅](js/tests/MultilineParser.test.js:35) | [✅](rust/tests/multiline_parser_tests.rs:96) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:44) |
+| parseandstringify2 | [✅](python/tests/test_multiline_parser.py:35) | ❌ | ❌ | ❌ |
+| parseandstringifylessparentheses | [✅](python/tests/test_multiline_parser.py:52) | [✅](js/tests/MultilineParser.test.js:35) | [✅](rust/tests/multiline_parser_tests.rs:96) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:44) |
+| parseandstringifytest2 | ❌ | [✅](js/tests/MultilineParser.test.js:25) | [✅](rust/tests/multiline_parser_tests.rs:88) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:32) |
 | twolinks | [✅](python/tests/test_multiline_parser.py:9) | [✅](js/tests/MultilineParser.test.js:7) | [✅](rust/tests/multiline_parser_tests.rs:72) | [✅](csharp/Link.Foundation.Links.Notation.Tests/MultilineParserTests.cs:8) |
 
 **Category totals:** Python: 11, JavaScript: 11, Rust: 11, C#: 11
@@ -200,7 +200,7 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | multiplenestedlinksroundtrip | [✅](python/tests/test_nested_parser.py:205) | ❌ | ❌ | ❌ |
 | nestedindentation | [✅](python/tests/test_nested_parser.py:176) | [✅](js/tests/NestedParser.test.js:160) | [✅](rust/tests/nested_parser_tests.rs:130) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:187) |
 | nestedlinks | [✅](python/tests/test_nested_parser.py:149) | [✅](js/tests/NestedParser.test.js:138) | [✅](rust/tests/nested_parser_tests.rs:104) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:160) |
-| parsenestedstructurewithindentation | [✅](python/tests/test_nested_parser.py:99) | [✅](js/tests/NestedParser.test.js:93) | [✅](rust/tests/nested_parser_tests.rs:59) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:102) |
+| parsenestedstructureindentation | [✅](python/tests/test_nested_parser.py:99) | [✅](js/tests/NestedParser.test.js:93) | [✅](rust/tests/nested_parser_tests.rs:59) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:102) |
 | significantwhitespace | [✅](python/tests/test_nested_parser.py:10) | [✅](js/tests/NestedParser.test.js:7) | [✅](rust/tests/nested_parser_tests.rs:4) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:9) |
 | simplesignificantwhitespace | [✅](python/tests/test_nested_parser.py:74) | [✅](js/tests/NestedParser.test.js:70) | [✅](rust/tests/nested_parser_tests.rs:41) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:73) |
 | threelevelnestingroundtrip | [✅](python/tests/test_nested_parser.py:185) | ❌ | ❌ | ❌ |
@@ -212,46 +212,49 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
-| bug1 | [✅](python/tests/test_single_line_parser.py:25) | [✅](js/tests/SingleLineParser.test.js:21) | [✅](rust/tests/single_line_parser_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:28) |
+| bug1 | [✅](python/tests/test_single_line_parser.py:25) | ❌ | ❌ | ❌ |
+| bugtest1 | ❌ | [✅](js/tests/SingleLineParser.test.js:21) | [✅](rust/tests/single_line_parser_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:28) |
 | deeplynested | [✅](python/tests/test_single_line_parser.py:213) | [✅](js/tests/SingleLineParser.test.js:170) | [✅](rust/tests/single_line_parser_tests.rs:257) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:213) |
-| eferencewithcolonandvalues | [✅](python/tests/test_single_line_parser.py:62) | [✅](js/tests/SingleLineParser.test.js:54) | [✅](rust/tests/single_line_parser_tests.rs:130) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:75) |
 | hyphenatedidentifiers | [✅](python/tests/test_single_line_parser.py:220) | [✅](js/tests/SingleLineParser.test.js:176) | [✅](rust/tests/single_line_parser_tests.rs:264) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:179) |
-| linkwithid | ❌ | ❌ | [✅](rust/tests/single_line_parser_tests.rs:310) | ❌ |
+| linkid | ❌ | ❌ | [✅](rust/tests/single_line_parser_tests.rs:310) | ❌ |
 | linkwithoutidmultiline | ❌ | [✅](js/tests/SingleLineParser.test.js:108) | [✅](rust/tests/single_line_parser_tests.rs:196) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:262) |
 | linkwithoutidmultilinecolon | [✅](python/tests/test_single_line_parser.py:131) | ❌ | ❌ | ❌ |
 | linkwithoutidsingleline | [✅](python/tests/test_single_line_parser.py:118) | [✅](js/tests/SingleLineParser.test.js:102) | [✅](rust/tests/single_line_parser_tests.rs:188) | ❌ |
-| multilinelinkwithid | [✅](python/tests/test_single_line_parser.py:111) | [✅](js/tests/SingleLineParser.test.js:96) | [✅](rust/tests/single_line_parser_tests.rs:181) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:254) |
+| multilinelinkid | [✅](python/tests/test_single_line_parser.py:111) | [✅](js/tests/SingleLineParser.test.js:96) | [✅](rust/tests/single_line_parser_tests.rs:181) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:254) |
 | multilinewithoutid | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:238) |
-| multiplewordsinquoest | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:190) |
-| multiplewordsinquotes | [✅](python/tests/test_single_line_parser.py:227) | [✅](js/tests/SingleLineParser.test.js:182) | [✅](rust/tests/single_line_parser_tests.rs:271) | ❌ |
+| multiplewordsinquotes | [✅](python/tests/test_single_line_parser.py:227) | [✅](js/tests/SingleLineParser.test.js:182) | [✅](rust/tests/single_line_parser_tests.rs:271) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:190) |
 | nestedlinks | [✅](python/tests/test_single_line_parser.py:195) | [✅](js/tests/SingleLineParser.test.js:154) | [✅](rust/tests/single_line_parser_tests.rs:239) | ❌ |
 | nestedlinkssingleline | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:170) |
 | parsemultilinelink | [✅](python/tests/test_single_line_parser.py:73) | [✅](js/tests/SingleLineParser.test.js:64) | [✅](rust/tests/single_line_parser_tests.rs:144) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:90) |
 | parsequotedreferences | [✅](python/tests/test_single_line_parser.py:82) | [✅](js/tests/SingleLineParser.test.js:72) | [✅](rust/tests/single_line_parser_tests.rs:158) | ❌ |
 | parsequotedreferencesvaluesonly | [✅](python/tests/test_single_line_parser.py:169) | [✅](js/tests/SingleLineParser.test.js:130) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:153) |
+| parsereferencecolonandvalues | [✅](python/tests/test_single_line_parser.py:62) | [✅](js/tests/SingleLineParser.test.js:54) | [✅](rust/tests/single_line_parser_tests.rs:130) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:75) |
 | parsesimplereference | [✅](python/tests/test_single_line_parser.py:51) | [✅](js/tests/SingleLineParser.test.js:44) | [✅](rust/tests/single_line_parser_tests.rs:116) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:59) |
 | parsevaluesonly | ❌ | [✅](js/tests/SingleLineParser.test.js:84) | [✅](rust/tests/single_line_parser_tests.rs:166) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:103) |
 | parsevaluesonlystandalonecolon | [✅](python/tests/test_single_line_parser.py:95) | ❌ | ❌ | ❌ |
-| quotedreference | [✅](python/tests/test_single_line_parser.py:253) | [✅](js/tests/SingleLineParser.test.js:204) | [✅](rust/tests/single_line_parser_tests.rs:287) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:281) |
+| quotedreference | [✅](python/tests/test_single_line_parser.py:253) | ❌ | [✅](rust/tests/single_line_parser_tests.rs:287) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:281) |
+| quotedreferenceparser | ❌ | [✅](js/tests/SingleLineParser.test.js:204) | ❌ | ❌ |
 | quotedreferences | [✅](python/tests/test_single_line_parser.py:33) | [✅](js/tests/SingleLineParser.test.js:142) | [✅](rust/tests/single_line_parser_tests.rs:225) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:37) |
-| quotedreferenceswithspaces | [✅](python/tests/test_single_line_parser.py:42) | [✅](js/tests/SingleLineParser.test.js:36) | [✅](rust/tests/single_line_parser_tests.rs:102) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:48) |
-| quotedreferenceswithspacesinlink | [✅](python/tests/test_single_line_parser.py:181) | ❌ | ❌ | ❌ |
-| quotedreferenceswithspecialchars | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:135) |
+| quotedreferencesspaces | [✅](python/tests/test_single_line_parser.py:42) | [✅](js/tests/SingleLineParser.test.js:36) | [✅](rust/tests/single_line_parser_tests.rs:102) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:48) |
+| quotedreferencesspacesinlink | [✅](python/tests/test_single_line_parser.py:181) | ❌ | ❌ | ❌ |
+| quotedreferencesspecialchars | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:135) |
 | simpleref | [✅](python/tests/test_single_line_parser.py:236) | [✅](js/tests/SingleLineParser.test.js:189) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:246) |
-| simplereference | [✅](python/tests/test_single_line_parser.py:243) | [✅](js/tests/SingleLineParser.test.js:195) | [✅](rust/tests/single_line_parser_tests.rs:280) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:269) |
+| simplereference | [✅](python/tests/test_single_line_parser.py:243) | ❌ | [✅](rust/tests/single_line_parser_tests.rs:280) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:269) |
+| simplereferenceparser | ❌ | [✅](js/tests/SingleLineParser.test.js:195) | ❌ | ❌ |
+| singlelineid | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:221) |
 | singlelinelink | ❌ | ❌ | [✅](rust/tests/single_line_parser_tests.rs:318) | ❌ |
-| singlelinelinkwithid | [✅](python/tests/test_single_line_parser.py:104) | [✅](js/tests/SingleLineParser.test.js:90) | [✅](rust/tests/single_line_parser_tests.rs:174) | ❌ |
-| singlelinewithid | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:221) |
+| singlelinelinkid | [✅](python/tests/test_single_line_parser.py:104) | [✅](js/tests/SingleLineParser.test.js:90) | [✅](rust/tests/single_line_parser_tests.rs:174) | ❌ |
 | singlelinewithoutid | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:230) |
 | singlelink | [✅](python/tests/test_single_line_parser.py:9) | [✅](js/tests/SingleLineParser.test.js:7) | [✅](rust/tests/single_line_parser_tests.rs:63) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:8) |
 | singlequotedreferences | [✅](python/tests/test_single_line_parser.py:188) | [✅](js/tests/SingleLineParser.test.js:148) | [✅](rust/tests/single_line_parser_tests.rs:232) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:144) |
-| singletlink | [✅](python/tests/test_single_line_parser.py:151) | [✅](js/tests/SingleLineParser.test.js:213) | [✅](rust/tests/single_line_parser_tests.rs:294) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:293) |
-| specialcharactersinquoest | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:201) |
-| specialcharactersinquotes | [✅](python/tests/test_single_line_parser.py:202) | [✅](js/tests/SingleLineParser.test.js:160) | [✅](rust/tests/single_line_parser_tests.rs:246) | ❌ |
+| singletlink | [✅](python/tests/test_single_line_parser.py:151) | [✅](js/tests/SingleLineParser.test.js:114) | [✅](rust/tests/single_line_parser_tests.rs:294) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:293) |
+| singletlinkparser | ❌ | [✅](js/tests/SingleLineParser.test.js:213) | ❌ | ❌ |
+| specialcharactersinquotes | [✅](python/tests/test_single_line_parser.py:202) | [✅](js/tests/SingleLineParser.test.js:160) | [✅](rust/tests/single_line_parser_tests.rs:246) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:201) |
 | tripletsinglelink | [✅](python/tests/test_single_line_parser.py:17) | [✅](js/tests/SingleLineParser.test.js:14) | [✅](rust/tests/single_line_parser_tests.rs:71) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:18) |
-| valuelink | [✅](python/tests/test_single_line_parser.py:263) | [✅](js/tests/SingleLineParser.test.js:223) | [✅](rust/tests/single_line_parser_tests.rs:303) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:306) |
+| valuelink | [✅](python/tests/test_single_line_parser.py:263) | [✅](js/tests/SingleLineParser.test.js:124) | [✅](rust/tests/single_line_parser_tests.rs:303) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs:306) |
+| valuelinkparser | ❌ | [✅](js/tests/SingleLineParser.test.js:223) | ❌ | ❌ |
 
-**Category totals:** Python: 27, JavaScript: 26, Rust: 26, C#: 27
+**Category totals:** Python: 27, JavaScript: 28, Rust: 26, C#: 27
 
 ## Tuple
 
@@ -269,30 +272,27 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 ### Python Missing Tests
 
 **Api** (7 missing):
-- indentedidsyntaxparsing
-- indentedidsyntaxroundtrip
+- indentedidparsing
+- indentedidroundtrip
 - islink
 - isref
-- multipleindentedidsyntaxparsing
-- multipleindentedidsyntaxroundtrip
+- multipleindentedidparsing
+- multipleindentedidroundtrip
 - quotedreferencesparsing
 
 **Indentation Consistency** (3 missing):
-- leadingspacesvsnoleadingspacesshouldproducesameresult
+- leadingspacesvsnoleadingspacesproducesameresult
 - simpletwovsfourspaces
 - threelevelnesting
 
-**Indented Id Syntax** (6 missing):
-- emptyindentedid
-- indentedidmultiplevalues
+**Indented Id Syntax** (3 missing):
+- equivalencetestcomprehensive
 - indentedidnumeric
-- indentedidsinglevalue
-- indentedidwithquotedid
-- unsupportedcolononlysyntax
+- unsupportedcolononly
 
 **Link** (2 missing):
 - linkescapereferenceforsimplereference
-- linkescapereferencewithspecialcharacters
+- linkescapereferencespecialcharacters
 
 **Links Group** (5 missing):
 - linksgroupappendtolinks
@@ -301,11 +301,16 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - linksgrouptoflattensstructure
 - linksgrouptostring
 
-**Mixed Indentation Modes** (4 missing):
+**Mixed Indentation Modes** (6 missing):
 - heroexamplealternativeformat
 - heroexampleequivalence
 - heroexamplemixedmodes
-- sequencecontextwithcomplexvalues
+- sequencecontextcomplexvalues
+- sequencelistcontextcolon
+- setobjectcontextwithoutcolon
+
+**Multiline Parser** (1 missing):
+- parseandstringifytest2
 
 **Multiline Quoted String** (4 missing):
 - multilinedoublequotedreference
@@ -313,57 +318,57 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - simplemultilinedoublequoted
 - simplemultilinesinglequoted
 
-**Single Line Parser** (11 missing):
-- linkwithid
+**Single Line Parser** (14 missing):
+- bugtest1
+- linkid
 - linkwithoutidmultiline
 - multilinewithoutid
-- multiplewordsinquoest
 - nestedlinkssingleline
 - parsevaluesonly
-- quotedreferenceswithspecialchars
+- quotedreferenceparser
+- quotedreferencesspecialchars
+- simplereferenceparser
+- singlelineid
 - singlelinelink
-- singlelinewithid
 - singlelinewithoutid
-- specialcharactersinquoest
+- singletlinkparser
+- valuelinkparser
 
 **Tuple** (2 missing):
 - namedtupletolink
 - tupletolink
 
-**Total missing: 44 tests**
+**Total missing: 47 tests**
 
 ### JavaScript Missing Tests
 
 **Api** (5 missing):
-- indentedidsyntaxparsing
+- indentedidparsing
 - islink
 - isref
-- multipleindentedidsyntaxparsing
+- multipleindentedidparsing
 - quotedreferencesparsing
 
 **Format Config** (9 missing):
 - formatconfigbasic
 - formatconfigcustomindent
 - formatconfiglessparentheses
-- formatwithconsecutivegrouping
-- formatwithlinelengthlimit
-- formatwithmaxinlinerefs
-- roundtripwithlinelengthformatting
-- shouldindentbylength
-- shouldindentbyrefcount
+- formatconsecutivegrouping
+- formatlinelengthlimit
+- formatmaxinlinerefs
+- indentbylength
+- indentbyrefcount
+- roundtriplinelengthformatting
 
 **Indentation Consistency** (3 missing):
 - leadingspacesvsnoleadingspaces
 - simpletwovsfourspaces
 - threelevelnesting
 
-**Indented Id Syntax** (6 missing):
-- emptyindentedid
-- indentedidmultiplevalues
+**Indented Id Syntax** (3 missing):
+- equivalencecomprehensive
 - indentedidnumeric
-- indentedidsinglevalue
-- indentedidwithquotedid
-- unsupportedcolononlysyntax
+- unsupportedcolononly
 
 **Link** (2 missing):
 - linkescapereferencesimple
@@ -373,62 +378,67 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - linksgroupappendtolinks
 - linksgroupconstructorequivalent
 
+**Mixed Indentation Modes** (2 missing):
+- sequencecontextcolon
+- setcontextwithoutcolon
+
+**Multiline Parser** (1 missing):
+- parseandstringify2
+
 **Nested Parser** (3 missing):
 - deepnestedstructureroundtrip
 - multiplenestedlinksroundtrip
 - threelevelnestingroundtrip
 
-**Single Line Parser** (12 missing):
-- linkwithid
+**Single Line Parser** (13 missing):
+- bug1
+- linkid
 - linkwithoutidmultilinecolon
 - multilinewithoutid
-- multiplewordsinquoest
 - nestedlinkssingleline
 - parsevaluesonlystandalonecolon
-- quotedreferenceswithspacesinlink
-- quotedreferenceswithspecialchars
+- quotedreference
+- quotedreferencesspacesinlink
+- quotedreferencesspecialchars
+- simplereference
+- singlelineid
 - singlelinelink
-- singlelinewithid
 - singlelinewithoutid
-- specialcharactersinquoest
 
 **Tuple** (2 missing):
 - namedtupletolink
 - tupletolink
 
-**Total missing: 44 tests**
+**Total missing: 45 tests**
 
 ### Rust Missing Tests
 
 **Api** (4 missing):
-- indentedidsyntaxroundtrip
+- indentedidroundtrip
 - islinkequivalent
 - isrefequivalent
-- multipleindentedidsyntaxroundtrip
+- multipleindentedidroundtrip
 
 **Format Config** (9 missing):
 - formatconfigbasic
 - formatconfigcustomindent
 - formatconfiglessparentheses
-- formatwithconsecutivegrouping
-- formatwithlinelengthlimit
-- formatwithmaxinlinerefs
-- roundtripwithlinelengthformatting
-- shouldindentbylength
-- shouldindentbyrefcount
+- formatconsecutivegrouping
+- formatlinelengthlimit
+- formatmaxinlinerefs
+- indentbylength
+- indentbyrefcount
+- roundtriplinelengthformatting
 
 **Indentation Consistency** (3 missing):
-- leadingspacesvsnoleadingspacesshouldproducesameresult
+- leadingspacesvsnoleadingspacesproducesameresult
 - simpletwovsfourspacesindentation
-- threelevelnestingwithdifferentindentation
+- threelevelnestingdifferentindentation
 
-**Indented Id Syntax** (6 missing):
-- emptyindentedidshouldwork
-- indentedidsyntaxwithmultiplevalues
-- indentedidsyntaxwithnumericid
-- indentedidsyntaxwithquotedid
-- indentedidsyntaxwithsinglevalue
-- unsupportedcolononlysyntaxshouldfail
+**Indented Id Syntax** (3 missing):
+- equivalencecomprehensive
+- indentedidnumericid
+- unsupportedcolononlyfail
 
 **Link** (2 missing):
 - linkescapereferenceforsimplereference
@@ -438,63 +448,70 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - linksgroupappendtolinks
 - linksgroupconstructor
 
+**Mixed Indentation Modes** (2 missing):
+- sequencelistcontextcolon
+- setobjectcontextwithoutcolon
+
+**Multiline Parser** (1 missing):
+- parseandstringify2
+
 **Nested Parser** (3 missing):
 - deepnestedstructureroundtrip
 - multiplenestedlinksroundtrip
 - threelevelnestingroundtrip
 
-**Single Line Parser** (12 missing):
+**Single Line Parser** (15 missing):
+- bug1
 - linkwithoutidmultilinecolon
 - multilinewithoutid
-- multiplewordsinquoest
 - nestedlinkssingleline
 - parsequotedreferencesvaluesonly
 - parsevaluesonlystandalonecolon
-- quotedreferenceswithspacesinlink
-- quotedreferenceswithspecialchars
+- quotedreferenceparser
+- quotedreferencesspacesinlink
+- quotedreferencesspecialchars
 - simpleref
-- singlelinewithid
+- simplereferenceparser
+- singlelineid
 - singlelinewithoutid
-- specialcharactersinquoest
+- singletlinkparser
+- valuelinkparser
 
 **Tuple** (2 missing):
 - namedtupletolink
 - tupletolink
 
-**Total missing: 43 tests**
+**Total missing: 46 tests**
 
 ### C# Missing Tests
 
 **Api** (5 missing):
-- indentedidsyntaxparsing
+- indentedidparsing
 - islink
 - isref
-- multipleindentedidsyntaxparsing
+- multipleindentedidparsing
 - quotedreferencesparsing
 
 **Format Config** (9 missing):
 - formatconfigbasic
 - formatconfigcustomindent
 - formatconfiglessparentheses
-- formatwithconsecutivegrouping
-- formatwithlinelengthlimit
-- formatwithmaxinlinerefs
-- roundtripwithlinelengthformatting
-- shouldindentbylength
-- shouldindentbyrefcount
+- formatconsecutivegrouping
+- formatlinelengthlimit
+- formatmaxinlinerefs
+- indentbylength
+- indentbyrefcount
+- roundtriplinelengthformatting
 
 **Indentation Consistency** (3 missing):
 - leadingspacesvsnoleadingspaces
 - simpletwovsfourspaces
 - threelevelnesting
 
-**Indented Id Syntax** (6 missing):
-- emptyindentedidshouldwork
-- indentedidmultiplevalues
+**Indented Id Syntax** (3 missing):
+- equivalencecomprehensive
 - indentedidnumeric
-- indentedidsinglevalue
-- indentedidwithquotedid
-- unsupportedcolononlysyntax
+- unsupportedcolononly
 
 **Link** (2 missing):
 - linkescapereferenceforsimplereference
@@ -504,23 +521,33 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - linksgroupconstructorequivalent
 - linksgrouptostring
 
+**Mixed Indentation Modes** (2 missing):
+- sequencelistcontextcolon
+- setobjectcontextwithoutcolon
+
+**Multiline Parser** (1 missing):
+- parseandstringify2
+
 **Nested Parser** (3 missing):
 - deepnestedstructureroundtrip
 - multiplenestedlinksroundtrip
 - threelevelnestingroundtrip
 
-**Single Line Parser** (11 missing):
-- linkwithid
+**Single Line Parser** (14 missing):
+- bug1
+- linkid
 - linkwithoutidmultilinecolon
 - linkwithoutidsingleline
-- multiplewordsinquotes
 - nestedlinks
 - parsequotedreferences
 - parsevaluesonlystandalonecolon
-- quotedreferenceswithspacesinlink
+- quotedreferenceparser
+- quotedreferencesspacesinlink
+- simplereferenceparser
 - singlelinelink
-- singlelinelinkwithid
-- specialcharactersinquotes
+- singlelinelinkid
+- singletlinkparser
+- valuelinkparser
 
-**Total missing: 41 tests**
+**Total missing: 44 tests**
 
