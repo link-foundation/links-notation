@@ -231,11 +231,29 @@ namespace Link.Foundation.Links.Notation
 
         /// <summary>
         /// Indicates whether the current link is equal to another link.
+        /// Two anonymous links (both with null Ids) are considered equal if their values are equal.
         /// </summary>
         /// <param name="other">The link to compare with this link.</param>
         /// <returns>True if the current link is equal to the other parameter; otherwise, false.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Link<TLinkAddress> other) => Id != null && other.Id != null && EqualityComparerInstance.Equals(Id, other.Id) && (Values ?? Array.Empty<Link<TLinkAddress>>()).EqualTo(other.Values ?? Array.Empty<Link<TLinkAddress>>());
+        public bool Equals(Link<TLinkAddress> other)
+        {
+            // Both have null IDs - compare only values
+            if (Id == null && other.Id == null)
+            {
+                return (Values ?? Array.Empty<Link<TLinkAddress>>()).EqualTo(other.Values ?? Array.Empty<Link<TLinkAddress>>());
+            }
+
+            // Only one has null ID - not equal
+            if (Id == null || other.Id == null)
+            {
+                return false;
+            }
+
+            // Both have IDs - compare IDs and values
+            return EqualityComparerInstance.Equals(Id, other.Id) &&
+                   (Values ?? Array.Empty<Link<TLinkAddress>>()).EqualTo(other.Values ?? Array.Empty<Link<TLinkAddress>>());
+        }
 
         /// <summary>
         /// Determines whether two link instances are equal.

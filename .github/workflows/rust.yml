@@ -22,15 +22,16 @@ defaults:
 jobs:
   findChangedRustFiles:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       isRustFilesChanged: ${{ steps.setIsRustFilesChangedOutput.outputs.isRustFilesChanged }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Get changed files using defaults
         id: changed-files
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@v47
       - name: Set output isRustFilesChanged
         id: setIsRustFilesChangedOutput
         run: |
@@ -50,28 +51,25 @@ jobs:
     needs: [findChangedRustFiles]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Setup Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          override: true
+        uses: dtolnay/rust-toolchain@stable
       - name: Cache Cargo registry
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cargo/registry
           key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
       - name: Cache Cargo index
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cargo/git
           key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
       - name: Cache Cargo build
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: target
           key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
@@ -84,28 +82,25 @@ jobs:
     needs: [test, findChangedRustFiles]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Setup Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          override: true
+        uses: dtolnay/rust-toolchain@stable
       - name: Cache Cargo registry
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cargo/registry
           key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
       - name: Cache Cargo index
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cargo/git
           key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
       - name: Cache Cargo build
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: target
           key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
@@ -152,23 +147,20 @@ jobs:
 
   publishRelease:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: [publishToCratesIO]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && needs.publishToCratesIO.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Setup Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          override: true
+        uses: dtolnay/rust-toolchain@stable
       - name: Check if GitHub release already exists
         id: release-check
         run: |
           PACKAGE_VERSION=$(grep '^version = ' Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
-          TAG_NAME="${PACKAGE_VERSION}_rust"
+          TAG_NAME="rust_$PACKAGE_VERSION"
           echo "Checking if release $TAG_NAME already exists"
 
           # Check if release exists
@@ -187,8 +179,8 @@ jobs:
           PACKAGE_NAME=$(grep '^name = ' Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/')
           PACKAGE_VERSION=$(grep '^version = ' Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
 
-          # Create release
-          gh release create "${PACKAGE_VERSION}_rust" \
+          # Create release with consistent tag format: rust_version
+          gh release create "rust_${PACKAGE_VERSION}" \
             --title "[Rust] $PACKAGE_VERSION" \
             --notes "https://crates.io/crates/$PACKAGE_NAME"
         env:

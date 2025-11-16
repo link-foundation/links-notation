@@ -22,15 +22,16 @@ defaults:
 jobs:
   findChangedCsFiles:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       isCsFilesChanged: ${{ steps.setIsCsFilesChangedOutput.outputs.isCsFilesChanged }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Get changed files using defaults
         id: changed-files
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@v47
       - name: Set output isCsFilesChanged
         id: setIsCsFilesChangedOutput
         run: |
@@ -50,12 +51,13 @@ jobs:
     needs: [findChangedCsFiles]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x' # Specify your desired .NET version
       - name: Restore Dependencies
@@ -68,14 +70,15 @@ jobs:
 
   pushToNuget:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: [test]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x' # Ensure this matches your project's target
       - name: Check if version already published to NuGet.org

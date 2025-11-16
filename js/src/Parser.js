@@ -2,24 +2,52 @@ import { Link } from './Link.js';
 import * as parserModule from './parser-generated.js';
 
 export class Parser {
-  constructor() {
+  /**
+   * Create a new Parser instance
+   * @param {Object} options - Parser options
+   * @param {number} options.maxInputSize - Maximum input size in bytes (default: 10MB)
+   * @param {number} options.maxDepth - Maximum nesting depth (default: 1000)
+   */
+  constructor(options = {}) {
+    this.maxInputSize = options.maxInputSize || 10 * 1024 * 1024; // 10MB default
+    this.maxDepth = options.maxDepth || 1000;
   }
 
+  /**
+   * Parse Lino notation text into Link objects
+   * @param {string} input - The Lino notation text to parse
+   * @returns {Link[]} Array of parsed Link objects
+   * @throws {Error} If parsing fails
+   */
   parse(input) {
+    // Validate input
+    if (typeof input !== 'string') {
+      throw new TypeError('Input must be a string');
+    }
+
+    if (input.length > this.maxInputSize) {
+      throw new Error(`Input size exceeds maximum allowed size of ${this.maxInputSize} bytes`);
+    }
+
     try {
       const rawResult = parserModule.parse(input);
       return this.transformResult(rawResult);
     } catch (error) {
-      throw new Error(`Parse error: ${error.message}`);
+      // Preserve original error information
+      const parseError = new Error(`Parse error: ${error.message}`);
+      parseError.cause = error;
+      parseError.location = error.location;
+      throw parseError;
     }
   }
 
   transformResult(rawResult) {
     const links = [];
     const items = Array.isArray(rawResult) ? rawResult : [rawResult];
-    
+
     for (const item of items) {
-      if (item) {
+      // Use explicit null/undefined check
+      if (item !== null && item !== undefined) {
         this.collectLinks(item, [], links);
       }
     }
@@ -27,7 +55,8 @@ export class Parser {
   }
 
   collectLinks(item, parentPath, result) {
-    if (!item) return;
+    // Use explicit null/undefined check
+    if (item === null || item === undefined) return;
 
     // For items with children (indented structure)
     if (item.children && item.children.length > 0) {
@@ -105,9 +134,15 @@ export class Parser {
   }
   
 
+  /**
+   * Transform a parsed item into a Link object
+   * @param {*} item - The item to transform
+   * @returns {Link|null} The transformed Link or null
+   */
   transformLink(item) {
-    if (!item) return null;
-    
+    // Use explicit null/undefined check
+    if (item === null || item === undefined) return null;
+
     if (item instanceof Link) {
       return item;
     }
@@ -124,7 +159,7 @@ export class Parser {
       link.values = item.values.map(v => this.transformLink(v));
       return link;
     }
-    
+
     // Default case
     return new Link(item.id || null, []);
   }

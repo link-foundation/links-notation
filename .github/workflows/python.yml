@@ -22,15 +22,16 @@ defaults:
 jobs:
   findChangedPythonFiles:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       isPythonFilesChanged: ${{ steps.setIsPythonFilesChangedOutput.outputs.isPythonFilesChanged }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v46
+        uses: tj-actions/changed-files@v47
       - name: Set output isPythonFilesChanged
         id: setIsPythonFilesChangedOutput
         run: |
@@ -50,12 +51,13 @@ jobs:
     needs: [findChangedPythonFiles]
     if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Set up Python 3.13
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.13'
       - name: Install dependencies
@@ -71,12 +73,13 @@ jobs:
     needs: [test, findChangedPythonFiles]
     if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.13'
       - name: Install dependencies
@@ -110,21 +113,22 @@ jobs:
 
   publishRelease:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: [publishToPyPI]
     if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && needs.publishToPyPI.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.13'
       - name: Check if GitHub release already exists
         id: release-check
         run: |
           PACKAGE_VERSION=$(grep "^version" pyproject.toml | sed 's/version = "\(.*\)"/\1/')
-          TAG_NAME="${PACKAGE_VERSION}_python"
+          TAG_NAME="python_$PACKAGE_VERSION"
           echo "Checking if release $TAG_NAME already exists"
 
           # Check if release exists
@@ -143,8 +147,8 @@ jobs:
           PACKAGE_VERSION=$(grep "^version" pyproject.toml | sed 's/version = "\(.*\)"/\1/')
           PACKAGE_NAME=$(grep "^name" pyproject.toml | sed 's/name = "\(.*\)"/\1/')
 
-          # Create release
-          gh release create "${PACKAGE_VERSION}_python" \
+          # Create release with consistent tag format: python_version
+          gh release create "python_${PACKAGE_VERSION}" \
             --title "[Python] $PACKAGE_VERSION" \
             --notes "https://pypi.org/project/$PACKAGE_NAME/"
         env:
