@@ -135,3 +135,39 @@ fn test_nested_indentation_parser() {
     assert_eq!(result.1[0].children.len(), 1);
     assert_eq!(result.1[0].children[0].children.len(), 1);
 }
+
+#[test]
+fn test_three_level_nesting_roundtrip() {
+    use links_notation::{parse_lino_to_links, format_links};
+
+    let input = "(1: (2: (3: 3)))";
+    let parsed = parse_lino_to_links(input).expect("Failed to parse");
+
+    // Validate round-trip
+    let output = format_links(&parsed);
+    assert_eq!(output, input);
+}
+
+#[test]
+fn test_deep_nested_structure_roundtrip() {
+    use links_notation::{parse_lino_to_links, format_links};
+
+    let input = "(a: (b: (c: (d: d))))";
+    let parsed = parse_lino_to_links(input).expect("Failed to parse");
+
+    // Validate round-trip
+    let output = format_links(&parsed);
+    assert_eq!(output, input);
+}
+
+#[test]
+fn test_multiple_nested_links_roundtrip() {
+    use links_notation::{parse_lino_to_links, format_links};
+
+    let input = "(parent: (child1: value1) (child2: value2))";
+    let parsed = parse_lino_to_links(input).expect("Failed to parse");
+
+    // Validate round-trip
+    let output = format_links(&parsed);
+    assert_eq!(output, input);
+}

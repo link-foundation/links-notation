@@ -164,3 +164,30 @@ test('Nested indentation parser', () => {
   // Should create nested structure with proper hierarchy
   expect(result.length).toBeGreaterThanOrEqual(1);
 });
+
+test('Three level nesting roundtrip', () => {
+  const input = '(1: (2: (3: 3)))';
+  const parsed = parser.parse(input);
+
+  // Validate round-trip
+  const output = formatLinks(parsed);
+  expect(output).toBe(input);
+});
+
+test('Deep nested structure roundtrip', () => {
+  const input = '(a: (b: (c: (d: d))))';
+  const parsed = parser.parse(input);
+
+  // Validate round-trip
+  const output = formatLinks(parsed);
+  expect(output).toBe(input);
+});
+
+test('Multiple nested links roundtrip', () => {
+  const input = '(parent: (child1: value1) (child2: value2))';
+  const parsed = parser.parse(input);
+
+  // Validate round-trip
+  const output = formatLinks(parsed);
+  expect(output).toBe(input);
+});

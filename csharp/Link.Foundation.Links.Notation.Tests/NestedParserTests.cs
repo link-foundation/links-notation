@@ -194,5 +194,41 @@ users
             // Should create nested structure with proper hierarchy
             Assert.True(result.Count >= 1);
         }
+
+        [Fact]
+        public static void ThreeLevelNestingRoundtripTest()
+        {
+            var input = "(1: (2: (3: 3)))";
+            var parser = new Parser();
+            var parsed = parser.Parse(input);
+
+            // Validate round-trip
+            var output = parsed.Format();
+            Assert.Equal(input, output);
+        }
+
+        [Fact]
+        public static void DeepNestedStructureRoundtripTest()
+        {
+            var input = "(a: (b: (c: (d: d))))";
+            var parser = new Parser();
+            var parsed = parser.Parse(input);
+
+            // Validate round-trip
+            var output = parsed.Format();
+            Assert.Equal(input, output);
+        }
+
+        [Fact]
+        public static void MultipleNestedLinksRoundtripTest()
+        {
+            var input = "(parent: (child1: value1) (child2: value2))";
+            var parser = new Parser();
+            var parsed = parser.Parse(input);
+
+            // Validate round-trip
+            var output = parsed.Format();
+            Assert.Equal(input, output);
+        }
     }
 }

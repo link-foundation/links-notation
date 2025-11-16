@@ -15,9 +15,9 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | Language   | Total Tests | Test Categories |
 |------------|-------------|----------------|
 | Python     | 119 | 11 |
-| JavaScript | 123 | 12 |
-| Rust       | 123 | 12 |
-| C#         | 125 | 13 |
+| JavaScript | 126 | 12 |
+| Rust       | 126 | 12 |
+| C#         | 128 | 13 |
 
 ---
 
@@ -182,20 +182,20 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 | Test Name | Python | JavaScript | Rust | C# |
 |-----------|--------|------------|------|----|
 | complexindentation | [✅](python/tests/test_nested_parser.py:137) | [✅](js/tests/NestedParser.test.js:127) | [✅](rust/tests/nested_parser_tests.rs:89) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:142) |
-| deepnestedstructureroundtrip | [✅](python/tests/test_nested_parser.py:195) | ❌ | ❌ | ❌ |
+| deepnestedstructureroundtrip | [✅](python/tests/test_nested_parser.py:195) | [✅](js/tests/NestedParser.test.js:177) | [✅](rust/tests/nested_parser_tests.rs:151) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:210) |
 | indentationbasedchildren | [✅](python/tests/test_nested_parser.py:127) | [✅](js/tests/NestedParser.test.js:118) | [✅](rust/tests/nested_parser_tests.rs:79) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:127) |
 | indentationconsistency | [✅](python/tests/test_nested_parser.py:116) | [✅](js/tests/NestedParser.test.js:108) | [✅](rust/tests/nested_parser_tests.rs:68) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:115) |
 | indentationparser | [✅](python/tests/test_nested_parser.py:163) | [✅](js/tests/NestedParser.test.js:151) | [✅](rust/tests/nested_parser_tests.rs:121) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:176) |
-| multiplenestedlinksroundtrip | [✅](python/tests/test_nested_parser.py:205) | ❌ | ❌ | ❌ |
+| multiplenestedlinksroundtrip | [✅](python/tests/test_nested_parser.py:205) | [✅](js/tests/NestedParser.test.js:186) | [✅](rust/tests/nested_parser_tests.rs:163) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:222) |
 | nestedindentationparser | [✅](python/tests/test_nested_parser.py:176) | [✅](js/tests/NestedParser.test.js:160) | [✅](rust/tests/nested_parser_tests.rs:130) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:187) |
 | nestedlinks | [✅](python/tests/test_nested_parser.py:149) | [✅](js/tests/NestedParser.test.js:138) | [✅](rust/tests/nested_parser_tests.rs:104) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:160) |
 | parsenestedstructurewithindentation | [✅](python/tests/test_nested_parser.py:99) | [✅](js/tests/NestedParser.test.js:93) | [✅](rust/tests/nested_parser_tests.rs:59) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:102) |
 | significantwhitespace | [✅](python/tests/test_nested_parser.py:10) | [✅](js/tests/NestedParser.test.js:7) | [✅](rust/tests/nested_parser_tests.rs:4) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:9) |
 | simplesignificantwhitespace | [✅](python/tests/test_nested_parser.py:74) | [✅](js/tests/NestedParser.test.js:70) | [✅](rust/tests/nested_parser_tests.rs:41) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:73) |
-| threelevelnestingroundtrip | [✅](python/tests/test_nested_parser.py:185) | ❌ | ❌ | ❌ |
+| threelevelnestingroundtrip | [✅](python/tests/test_nested_parser.py:185) | [✅](js/tests/NestedParser.test.js:168) | [✅](rust/tests/nested_parser_tests.rs:139) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:198) |
 | twospacessizedwhitespace | [✅](python/tests/test_nested_parser.py:87) | [✅](js/tests/NestedParser.test.js:82) | [✅](rust/tests/nested_parser_tests.rs:50) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs:88) |
 
-**Category totals:** Python: 13, JavaScript: 10, Rust: 10, C#: 10
+**Category totals:** Python: 13, JavaScript: 13, Rust: 13, C#: 13
 
 ## Single Line Parser
 
@@ -293,11 +293,6 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - linksgroupappendtolinkslist
 - linksgroupconstructorequivalent
 
-**Nested Parser** (3 missing):
-- deepnestedstructureroundtrip
-- multiplenestedlinksroundtrip
-- threelevelnestingroundtrip
-
 **Single Line Parser** (10 missing):
 - linkwithid
 - multilinewithoutid
@@ -314,18 +309,13 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 17 tests**
+**Total missing: 14 tests**
 
 ### Rust Missing Tests
 
 **Links Group** (2 missing):
 - linksgroupappendtolinkslist
 - linksgroupconstructor
-
-**Nested Parser** (3 missing):
-- deepnestedstructureroundtrip
-- multiplenestedlinksroundtrip
-- threelevelnestingroundtrip
 
 **Single Line Parser** (10 missing):
 - multilinewithoutid
@@ -343,18 +333,13 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - namedtupletolink
 - tupletolink
 
-**Total missing: 17 tests**
+**Total missing: 14 tests**
 
 ### C# Missing Tests
 
 **Links Group** (2 missing):
 - linksgroupconstructorequivalent
 - linksgrouptostring
-
-**Nested Parser** (3 missing):
-- deepnestedstructureroundtrip
-- multiplenestedlinksroundtrip
-- threelevelnestingroundtrip
 
 **Single Line Parser** (9 missing):
 - linkwithid
@@ -367,5 +352,5 @@ This document provides a detailed comparison of test cases across Python, JavaSc
 - singlelinelink
 - singlelinelinkwithid
 
-**Total missing: 14 tests**
+**Total missing: 11 tests**
 
