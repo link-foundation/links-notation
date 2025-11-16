@@ -37,15 +37,21 @@ function extractPythonTests(baseDir) {
     // e.g., "test_api.py" -> "api"
     const category = testFile.replace('test_', '').replace('.py', '');
     const content = readFileSync(join(testDir, testFile), 'utf8');
+    const lines = content.split('\n');
 
     // Find all test functions
     const matches = content.matchAll(/^def (test_\w+)/gm);
     tests[category] = [];
     for (const match of matches) {
       const testName = match[1];
+      // Find line number
+      const lineNum = lines.findIndex(line => line.includes(`def ${testName}`)) + 1;
+
       tests[category].push({
         original: testName,
-        normalized: normalizeTestName(testName)
+        normalized: normalizeTestName(testName),
+        file: `python/tests/${testFile}`,
+        line: lineNum
       });
     }
   }
@@ -72,12 +78,16 @@ function extractJavaScriptTests(baseDir) {
     );
 
     const content = readFileSync(join(testDir, testFile), 'utf8');
+    const lines = content.split('\n');
 
     // Find all test cases: test('test_name', ...) or it('test_name', ...)
-    const matches = content.matchAll(/(?:test|it)\(['"]([^'"]+)['"]/g);
+    const regex = /(?:test|it)\(['"]([^'"]+)['"]/g;
+    let match;
     tests[category] = [];
-    for (const match of matches) {
-      let testName = match[1];
+
+    while ((match = regex.exec(content)) !== null) {
+      const originalTestName = match[1];
+      let testName = originalTestName;
 
       // Convert PascalCase to snake_case first
       // e.g., "EmptyLinkTest" -> "empty_link_test"
@@ -93,9 +103,16 @@ function extractJavaScriptTests(baseDir) {
         testName = 'test_' + testName;
       }
 
+      // Find line number
+      const matchPos = match.index;
+      const lineNum = content.substring(0, matchPos).split('\n').length;
+
       tests[category].push({
         original: testName,
-        normalized: normalizeTestName(testName)
+        originalName: originalTestName,
+        normalized: normalizeTestName(testName),
+        file: `js/tests/${testFile}`,
+        line: lineNum
       });
     }
   }
@@ -117,19 +134,31 @@ function extractRustTests(baseDir) {
     const category = testFile.replace('_tests.rs', '');
 
     const content = readFileSync(join(testDir, testFile), 'utf8');
+    const lines = content.split('\n');
 
     // Find all test functions marked with #[test]
-    const matches = content.matchAll(/#\[test\]\s*fn\s+(\w+)/g);
+    const regex = /#\[test\]\s*fn\s+(\w+)/g;
+    let match;
     tests[category] = [];
-    for (const match of matches) {
-      let testName = match[1];
+
+    while ((match = regex.exec(content)) !== null) {
+      const originalTestName = match[1];
+      let testName = originalTestName;
       // Ensure it starts with test_
       if (!testName.startsWith('test_')) {
         testName = 'test_' + testName;
       }
+
+      // Find line number
+      const matchPos = match.index;
+      const lineNum = content.substring(0, matchPos).split('\n').length;
+
       tests[category].push({
         original: testName,
-        normalized: normalizeTestName(testName)
+        originalName: originalTestName,
+        normalized: normalizeTestName(testName),
+        file: `rust/tests/${testFile}`,
+        line: lineNum
       });
     }
   }
@@ -155,12 +184,16 @@ function extractCSharpTests(baseDir) {
     );
 
     const content = readFileSync(join(testDir, testFile), 'utf8');
+    const lines = content.split('\n');
 
     // Find all test methods marked with [Fact] or [Theory]
-    const matches = content.matchAll(/\[(?:Fact|Theory)\]\s*public\s+(?:static\s+)?(?:void|async\s+Task)\s+(\w+)/g);
+    const regex = /\[(?:Fact|Theory)\]\s*public\s+(?:static\s+)?(?:void|async\s+Task)\s+(\w+)/g;
+    let match;
     tests[category] = [];
-    for (const match of matches) {
-      let testName = match[1];
+
+    while ((match = regex.exec(content)) !== null) {
+      const originalTestName = match[1];
+      let testName = originalTestName;
       // Convert to snake_case
       testName = testName.replace(/([A-Z])/g, (match, p1, offset) =>
         offset > 0 ? '_' + p1.toLowerCase() : p1.toLowerCase()
@@ -168,9 +201,17 @@ function extractCSharpTests(baseDir) {
       if (!testName.startsWith('test_')) {
         testName = 'test_' + testName;
       }
+
+      // Find line number
+      const matchPos = match.index;
+      const lineNum = content.substring(0, matchPos).split('\n').length;
+
       tests[category].push({
         original: testName,
-        normalized: normalizeTestName(testName)
+        originalName: originalTestName,
+        normalized: normalizeTestName(testName),
+        file: `csharp/Link.Foundation.Links.Notation.Tests/${testFile}`,
+        line: lineNum
       });
     }
   }
@@ -245,10 +286,11 @@ function createComparisonDocument(baseDir, outputFile) {
     const categoryDisplay = category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     content += `## ${categoryDisplay}\n\n`;
 
-    const pyTests = new Set((pythonTests[category] || []).map(t => t.normalized));
-    const jsTestsSet = new Set((jsTests[category] || []).map(t => t.normalized));
-    const rustTestsSet = new Set((rustTests[category] || []).map(t => t.normalized));
-    const csTests = new Set((csharpTests[category] || []).map(t => t.normalized));
+    // Create maps from normalized name to test object for easy lookup
+    const pyTestMap = new Map((pythonTests[category] || []).map(t => [t.normalized, t]));
+    const jsTestMap = new Map((jsTests[category] || []).map(t => [t.normalized, t]));
+    const rustTestMap = new Map((rustTests[category] || []).map(t => [t.normalized, t]));
+    const csTestMap = new Map((csharpTests[category] || []).map(t => [t.normalized, t]));
 
     const allTests = Array.from(allTestsByCategory[category]).sort();
 
@@ -265,17 +307,23 @@ function createComparisonDocument(baseDir, outputFile) {
       // Clean up test name for display
       const displayName = normalizedTestName.replace(/_/g, ' ');
 
-      const pyStatus = pyTests.has(normalizedTestName) ? "✅" : "❌";
-      const jsStatus = jsTestsSet.has(normalizedTestName) ? "✅" : "❌";
-      const rustStatus = rustTestsSet.has(normalizedTestName) ? "✅" : "❌";
-      const csStatus = csTests.has(normalizedTestName) ? "✅" : "❌";
+      // Create links to actual test code
+      const pyTest = pyTestMap.get(normalizedTestName);
+      const jsTest = jsTestMap.get(normalizedTestName);
+      const rustTest = rustTestMap.get(normalizedTestName);
+      const csTest = csTestMap.get(normalizedTestName);
+
+      const pyStatus = pyTest ? `[✅](${pyTest.file}:${pyTest.line})` : "❌";
+      const jsStatus = jsTest ? `[✅](${jsTest.file}:${jsTest.line})` : "❌";
+      const rustStatus = rustTest ? `[✅](${rustTest.file}:${rustTest.line})` : "❌";
+      const csStatus = csTest ? `[✅](${csTest.file}:${csTest.line})` : "❌";
 
       content += `| ${displayName} | ${pyStatus} | ${jsStatus} | ${rustStatus} | ${csStatus} |\n`;
     }
 
     // Category statistics
     content += "\n";
-    content += `**Category totals:** Python: ${pyTests.size}, JavaScript: ${jsTestsSet.size}, Rust: ${rustTestsSet.size}, C#: ${csTests.size}\n\n`;
+    content += `**Category totals:** Python: ${pyTestMap.size}, JavaScript: ${jsTestMap.size}, Rust: ${rustTestMap.size}, C#: ${csTestMap.size}\n\n`;
   }
 
   // Missing tests summary
