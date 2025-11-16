@@ -251,14 +251,32 @@ function createComparisonDocument(baseDir, outputFile) {
   ].sort();
 
   // Get all unique NORMALIZED test names across all categories
+  // Also keep track of a "display name" from the first test we encounter
   const allTestsByCategory = {};
+  const testDisplayNames = {}; // Map from normalized name to display name
+
   for (const category of allCategories) {
-    allTestsByCategory[category] = new Set([
-      ...(pythonTests[category] || []).map(t => t.normalized),
-      ...(jsTests[category] || []).map(t => t.normalized),
-      ...(rustTests[category] || []).map(t => t.normalized),
-      ...(csharpTests[category] || []).map(t => t.normalized)
-    ]);
+    allTestsByCategory[category] = new Set();
+    if (!testDisplayNames[category]) {
+      testDisplayNames[category] = {};
+    }
+
+    // Process all tests and build both the set and display name mapping
+    const allTests = [
+      ...(pythonTests[category] || []),
+      ...(jsTests[category] || []),
+      ...(rustTests[category] || []),
+      ...(csharpTests[category] || [])
+    ];
+
+    for (const test of allTests) {
+      allTestsByCategory[category].add(test.normalized);
+      // Use the first original test name we encounter as the display name
+      if (!testDisplayNames[category][test.normalized]) {
+        // Prefer Python's snake_case naming for display
+        testDisplayNames[category][test.normalized] = test.original;
+      }
+    }
   }
 
   // Create markdown document
@@ -314,8 +332,14 @@ function createComparisonDocument(baseDir, outputFile) {
     content += "|-----------|--------|------------|------|----|\n";
 
     for (const normalizedTestName of allTests) {
-      // Clean up test name for display
-      const displayName = normalizedTestName.replace(/_/g, ' ');
+      // Get the original display name and format it nicely
+      const originalName = testDisplayNames[category][normalizedTestName] || normalizedTestName;
+
+      // Convert test_snake_case to readable format
+      let displayName = originalName
+        .replace(/^test_/, '')  // Remove 'test_' prefix
+        .replace(/_/g, ' ')     // Replace underscores with spaces
+        .trim();
 
       // Create links to actual test code
       const pyTest = pyTestMap.get(normalizedTestName);
@@ -359,7 +383,15 @@ function createComparisonDocument(baseDir, outputFile) {
         const categoryDisplay = category.replace('test_', '').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
         content += `**${categoryDisplay}** (${missing.length} missing):\n`;
         for (const test of missing.sort()) {
-          content += `- ${test.replace(/_/g, ' ')}\n`;
+          // Format test name with spaces between words
+          const formattedTest = test
+            .replace(/([a-z])([A-Z])/g, '$1 $2')
+            .replace(/([a-z])(\d)/g, '$1 $2')
+            .replace(/(\d)([a-z])/g, '$1 $2')
+            .replace(/_/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+          content += `- ${formattedTest}\n`;
         }
         content += "\n";
       }
