@@ -86,7 +86,37 @@ fn test_single_line_format() {
 fn test_quoted_references() {
     let input = r#"("quoted id": "value with spaces")"#;
     let parsed = parse_lino(input).expect("Failed to parse input");
-    
+
     let output = parsed.to_string();
     assert!(output.contains("quoted id") && output.contains("value with spaces"));
+}
+
+#[test]
+fn test_quoted_references_roundtrip() {
+    let input = r#"("quoted id": "value with spaces")"#;
+    let parsed = parse_lino(input).expect("Failed to parse input");
+
+    // Validate round-trip with alternate formatting
+    let output = format!("{:#}", parsed);
+    assert_eq!(input, output);
+}
+
+#[test]
+fn test_indented_id_syntax_roundtrip() {
+    let input = "id:\n  value1\n  value2";
+    let parsed = parse_lino(input).expect("Failed to parse input");
+
+    // Validate round-trip
+    let output = format!("{:#}", parsed);
+    assert_eq!(input, output);
+}
+
+#[test]
+fn test_multiple_indented_id_syntax_roundtrip() {
+    let input = "id1:\n  a\n  b\nid2:\n  c\n  d";
+    let parsed = parse_lino(input).expect("Failed to parse input");
+
+    // Validate round-trip
+    let output = format!("{:#}", parsed);
+    assert_eq!(input, output);
 }

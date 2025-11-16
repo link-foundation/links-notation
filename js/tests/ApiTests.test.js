@@ -1,6 +1,6 @@
 import { test, expect } from 'bun:test';
 import { Parser } from '../src/Parser.js';
-import { Link } from '../src/Link.js';
+import { Link, formatLinks } from '../src/Link.js';
 
 const parser = new Parser();
 
@@ -67,8 +67,33 @@ test('test_single_line_format', () => {
 test('test_quoted_references', () => {
   const input = '("quoted id": "value with spaces")';
   const parsed = parser.parse(input);
-  
+
   const output = parsed[0].format();
   expect(output).toContain('quoted id');
   expect(output).toContain('value with spaces');
+});
+
+test('test_indented_id_syntax_roundtrip', () => {
+  const input = `id:
+  value1
+  value2`;
+  const parsed = parser.parse(input);
+
+  // Validate round-trip
+  const output = formatLinks(parsed);
+  expect(output).toBe(input);
+});
+
+test('test_multiple_indented_id_syntax_roundtrip', () => {
+  const input = `id1:
+  a
+  b
+id2:
+  c
+  d`;
+  const parsed = parser.parse(input);
+
+  // Validate round-trip
+  const output = formatLinks(parsed);
+  expect(output).toBe(input);
 });

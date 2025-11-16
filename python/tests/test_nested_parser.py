@@ -180,3 +180,33 @@ def test_nested_indentation():
     assert len(result) > 0
     # Should create nested structure with proper hierarchy
     assert len(result) >= 1
+
+
+def test_three_level_nesting_roundtrip():
+    """Test three level nesting round-trip."""
+    input_text = """(1: (2: (3: 3)))"""
+    parsed = parser.parse(input_text)
+
+    # Validate round-trip
+    output = format_links(parsed)
+    assert output == input_text
+
+
+def test_deep_nested_structure_roundtrip():
+    """Test deep nested structure round-trip."""
+    input_text = """(a: (b: (c: (d: d))))"""
+    parsed = parser.parse(input_text)
+
+    # Validate round-trip
+    output = format_links(parsed)
+    assert output == input_text
+
+
+def test_multiple_nested_links_roundtrip():
+    """Test multiple nested links round-trip."""
+    input_text = """(parent: (child1: value1) (child2: value2))"""
+    parsed = parser.parse(input_text)
+
+    # Validate round-trip
+    output = format_links(parsed)
+    assert output == input_text

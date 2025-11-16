@@ -2,7 +2,10 @@
 Link class representing a Lino link with optional ID and values.
 """
 
-from typing import List, Optional
+from typing import List, Optional, Union, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .format_config import FormatConfig
 
 
 class Link:
@@ -105,17 +108,23 @@ class Link:
             return Link.escape_reference(self.id) if self.id is not None else ''
         return str(self)
 
-    def format(self, less_parentheses: bool = False, is_compound_value: bool = False) -> str:
+    def format(self, less_parentheses: Union[bool, 'FormatConfig'] = False, is_compound_value: bool = False) -> str:
         """
         Format the link as a string.
 
         Args:
-            less_parentheses: If True, omit parentheses when safe
+            less_parentheses: If True, omit parentheses when safe; or a FormatConfig object
             is_compound_value: If True, this is a value in a compound link
 
         Returns:
             Formatted string representation
         """
+        # Support FormatConfig as first parameter
+        from .format_config import FormatConfig
+        if isinstance(less_parentheses, FormatConfig):
+            return self._format_with_config(less_parentheses, is_compound_value)
+
+        # Original implementation for backward compatibility
         # Empty link
         if self.id is None and not self.values:
             return '' if less_parentheses else '()'
@@ -176,3 +185,86 @@ class Link:
     def needs_parentheses(self, s: Optional[str]) -> bool:
         """Check if a string needs to be wrapped in parentheses."""
         return s and any(c in s for c in [' ', ':', '(', ')'])
+
+    def _format_with_config(self, config: 'FormatConfig', is_compound_value: bool = False) -> str:
+        """
+        Format the link using a FormatConfig object.
+
+        Args:
+            config: FormatConfig object with formatting options
+            is_compound_value: If True, this is a value in a compound link
+
+        Returns:
+            Formatted string representation
+        """
+        from .format_config import FormatConfig
+
+        # Empty link
+        if self.id is None and not self.values:
+            return '' if config.less_parentheses else '()'
+
+        # Link with only ID, no values
+        if not self.values:
+            escaped_id = Link.escape_reference(self.id)
+            if is_compound_value:
+                return f'({escaped_id})'
+            return escaped_id if (config.less_parentheses and not self.needs_parentheses(self.id)) else f'({escaped_id})'
+
+        # Check if we should use indented format
+        should_indent = False
+        if config.should_indent_by_ref_count(len(self.values)):
+            should_indent = True
+        else:
+            # Try inline format first
+            values_str = ' '.join(self.format_value(v) for v in self.values)
+            if self.id is not None:
+                id_str = Link.escape_reference(self.id)
+                test_line = f'{id_str}: {values_str}' if config.less_parentheses else f'({id_str}: {values_str})'
+            else:
+                test_line = values_str if config.less_parentheses else f'({values_str})'
+
+            if config.should_indent_by_length(test_line):
+                should_indent = True
+
+        # Format with indentation if needed
+        if should_indent and config.prefer_inline is False:
+            return self._format_indented(config)
+
+        # Standard inline formatting
+        values_str = ' '.join(self.format_value(v) for v in self.values)
+
+        # Link with values only (null id)
+        if self.id is None:
+            if config.less_parentheses:
+                all_simple = all(not v.values for v in self.values)
+                if all_simple:
+                    return ' '.join(Link.escape_reference(v.id) for v in self.values)
+                return values_str
+            return f'({values_str})'
+
+        # Link with ID and values
+        id_str = Link.escape_reference(self.id)
+        with_colon = f'{id_str}: {values_str}'
+        return with_colon if (config.less_parentheses and not self.needs_parentheses(self.id)) else f'({with_colon})'
+
+    def _format_indented(self, config: 'FormatConfig') -> str:
+        """
+        Format the link with indentation.
+
+        Args:
+            config: FormatConfig object with formatting options
+
+        Returns:
+            Indented formatted string
+        """
+        if self.id is None:
+            # Values only - format each on separate line
+            lines = [self.format_value(v) for v in self.values]
+            return '\n'.join(config.indent_string + line for line in lines)
+
+        # Link with ID - format as id:\n  value1\n  value2
+        id_str = Link.escape_reference(self.id)
+        lines = [f'{id_str}:']
+        for v in self.values:
+            lines.append(config.indent_string + self.format_value(v))
+        return '\n'.join(lines)
