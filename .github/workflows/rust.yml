@@ -124,7 +124,7 @@ jobs:
           if [ $PUBLISH_EXIT_CODE -eq 0 ]; then
             echo "✅ Successfully published $PACKAGE_NAME@$PACKAGE_VERSION to crates.io"
             echo "publish_result=success" >> $GITHUB_OUTPUT
-          elif grep -q "already exists on crates.io" publish_output.txt; then
+          elif grep -q "already exists on crates.io index" publish_output.txt; then
             echo "ℹ️ Version $PACKAGE_VERSION already exists on crates.io - this is OK"
             echo "publish_result=already_exists" >> $GITHUB_OUTPUT
             exit 0  # Don't fail the workflow

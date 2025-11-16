@@ -126,7 +126,7 @@ jobs:
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           TAG_NAME="js_$PACKAGE_VERSION"
           echo "Checking if release $TAG_NAME already exists"
-          
+
           # Check if release exists
           if gh release view "$TAG_NAME" >/dev/null 2>&1; then
             echo "Release $TAG_NAME already exists"
