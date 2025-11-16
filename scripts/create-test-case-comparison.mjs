@@ -13,15 +13,28 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 /**
- * Normalize a test name by removing common prefixes/suffixes for comparison.
- * Keeps the core test name consistent across languages.
+ * Normalize a test name for comparison by:
+ * 1. Converting to lowercase
+ * 2. Removing all non-alphanumeric characters (spaces, underscores, hyphens, parentheses, slashes, etc.)
+ * 3. Removing "test" from anywhere in the name
+ * 4. Removing common issue references like "issue21", "issue105"
+ * 5. Removing "parser" suffix variations
+ *
+ * This allows matching tests with different naming conventions:
+ * - test_bug1, BugTest1, bug_test_1 all → "bug1"
+ * - test_link_tostring_with_id_only, LinkToStringWithIdOnly → "linktostringwithidonly"
+ * - "sequence/list context" vs "sequence context" → "sequencecontext" (after removing "list")
  */
 function normalizeTestName(testName) {
-  // Remove test_ prefix
-  let normalized = testName.replace(/^test_/, '');
-  // Remove trailing _test suffix (from C# TestXxxTest pattern)
-  normalized = normalized.replace(/_test$/, '');
-  return normalized;
+  return testName
+    .toLowerCase()                           // Lowercase everything
+    .replace(/[_\s\-()'":#/\\]/g, '')       // Remove separators and special chars (added / and \)
+    .replace(/test/g, '')                   // Remove "test" from anywhere
+    .replace(/parser/g, '')                 // Remove "parser" suffix
+    .replace(/issue\d+/g, '')               // Remove issue references like "issue21"
+    .replace(/list/g, '')                   // Remove "list" (sequence/list → sequence)
+    .replace(/object/g, '')                 // Remove "object" (set/object → set)
+    .trim();
 }
 
 /**
