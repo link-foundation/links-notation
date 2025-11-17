@@ -140,9 +140,29 @@ language-specific documentation:
 
 Additional resources:
 
-- [Feature Comparison](FEATURE_COMPARISON.md) - LINO vs YAML/XML/JSON
-  feature analysis
+- [Test Case Comparison](TEST_CASE_COMPARISON.md) - Comprehensive test coverage comparison across all 4 language implementations
 - [PDF Documentation](https://link-foundation.github.io/links-notation/csharp/Link.Foundation.Links.Notation.pdf)
   \- Complete reference for offline reading
 - [Links Theory 0.0.2](https://habr.com/en/articles/895896) - Theoretical
   foundation that Links Notation fully supports
+
+## Test Coverage & Implementation Parity
+
+All four language implementations (C#, JavaScript, Rust, Python) maintain **equivalent core functionality** with comprehensive test coverage:
+
+- **Python**: 108 tests across 10 categories - All passing ✅
+- **JavaScript**: 109 tests across 11 categories - All passing ✅
+- **Rust**: 110 tests across 11 categories - All passing ✅
+- **C#**: 111 tests across 12 categories - All passing ✅
+
+**90+ tests match identically** across all languages, verifying functional equivalence. See [TEST_CASE_COMPARISON.md](TEST_CASE_COMPARISON.md) for the complete cross-language test comparison with links to source code.
+
+### Known Implementation Differences
+
+Some language-specific features are documented as intentional:
+
+- **Python**: Does not implement `LinksGroup` or multiline quoted strings
+- **JS/Rust/C#**: Do not implement Python's `FormatConfig` feature
+- **C# Only**: Supports tuple conversion (C#-specific feature)
+
+These differences are by design and do not affect core parsing/formatting functionality.

@@ -4,28 +4,28 @@ import { formatLinks } from '../src/Link.js';
 
 const parser = new Parser();
 
-test('SingleLinkTest', () => {
+test('Single link', () => {
   const source = '(address: source target)';
   const links = parser.parse(source);
   const target = formatLinks(links);
   expect(target).toBe(source);
 });
 
-test('TripletSingleLinkTest', () => {
+test('Triplet single link', () => {
   const source = '(papa has car)';
   const links = parser.parse(source);
   const target = formatLinks(links);
   expect(target).toBe(source);
 });
 
-test('BugTest1', () => {
+test('Bug test 1', () => {
   const source = '(ignore conan-center-index repository)';
   const links = parser.parse(source);
   const target = formatLinks(links);
   expect(target).toBe(source);
 });
 
-test('QuotedReferencesTest', () => {
+test('Quoted references', () => {
   const source = `(a: 'b' "c")`;
   const target = `(a: b c)`;
   const links = parser.parse(source);
@@ -33,7 +33,7 @@ test('QuotedReferencesTest', () => {
   expect(formattedLinks).toBe(target);
 });
 
-test('QuotedReferencesWithSpacesTest', () => {
+test('Quoted references with spaces', () => {
   const source = `('a a': 'b b' "c c")`;
   const target = `('a a': 'b b' 'c c')`;
   const links = parser.parse(source);
@@ -127,7 +127,7 @@ test('Test value link', () => {
   expect(result.length).toBeGreaterThan(0);
 });
 
-test('ParseQuotedReferencesValuesOnly', () => {
+test('Parse quoted references values only', () => {
   const source = `"has space" 'has:colon'`;
   const parser = new Parser();
   const links = parser.parse(source);
@@ -226,4 +226,84 @@ test('Test value link (parser)', () => {
   expect(result.length).toBe(1);
   expect(result[0].id).toBe(null);
   expect(result[0].values.length).toBe(3);
+});
+
+test('Multiline without id', () => {
+  // Test that '(:)' syntax is forbidden and should throw an error
+  const input = '(: value1 value2)';
+  // JS parser forbids this syntax
+  expect(() => parser.parse(input)).toThrow();
+});
+
+test('Parse values only standalone colon', () => {
+  // Test that standalone ':' is forbidden and should throw an error
+  const input = ': value1 value2';
+  // JS parser forbids this syntax
+  expect(() => parser.parse(input)).toThrow();
+});
+
+test('Quoted references with spaces in link', () => {
+  const input = '(id: "value with spaces")';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('id');
+  expect(result[0].values.length).toBe(1);
+  expect(result[0].values[0].id).toBe('value with spaces');
+});
+
+test('Single line without id', () => {
+  // Test parsing a single line without ID (just values)
+  const input = '(value1 value2)';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe(null);
+  expect(result[0].values.length).toBe(2);
+});
+
+test('Link with id', () => {
+  const input = '(id: a b c)';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('id');
+  expect(result[0].values.length).toBe(3);
+});
+
+test('Quoted reference', () => {
+  const input = '"quoted value"';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe(null);
+  expect(result[0].values.length).toBe(1);
+  expect(result[0].values[0].id).toBe('quoted value');
+});
+
+test('Quoted references with special chars', () => {
+  const input = '("special:char" "another@char")';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe(null);
+  expect(result[0].values.length).toBe(2);
+  expect(result[0].values[0].id).toBe('special:char');
+  expect(result[0].values[1].id).toBe('another@char');
+});
+
+test('Simple reference', () => {
+  const input = 'simplereference';
+  const result = parser.parse(input);
+  expect(result.length).toBeGreaterThan(0);
+});
+
+test('Single line link', () => {
+  const input = 'id: value1 value2';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('id');
+  expect(result[0].values.length).toBe(2);
+});
+
+test('Single line with id', () => {
+  const input = 'myid: val1 val2';
+  const result = parser.parse(input);
+  expect(result.length).toBeGreaterThan(0);
+  expect(result[0].id).toBe('myid');
 });

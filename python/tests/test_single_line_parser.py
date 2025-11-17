@@ -22,7 +22,7 @@ def test_triplet_single_link():
     assert target == source
 
 
-def test_bug1():
+def test_bug_test_1():
     """Test hyphenated identifiers."""
     source = '(ignore conan-center-index repository)'
     links = parser.parse(source)
@@ -115,7 +115,7 @@ def test_multi_line_link_with_id():
     assert len(result) > 0
 
 
-def test_link_without_id_single_line():
+def test_single_line_without_id():
     """Test link without id (single-line) - now forbidden."""
     input_text = ': value1 value2'
     # Standalone ':' is now forbidden and should throw an error
@@ -128,7 +128,7 @@ def test_link_without_id_single_line():
         assert True
 
 
-def test_link_without_id_multiline_colon():
+def test_multiline_without_id():
     """Test that '(:)' syntax is parsed (empty id with values)."""
     input_text = '(: value1 value2)'
     # Python parser allows this - empty id with values
@@ -267,3 +267,82 @@ def test_value_link_parser():
     assert len(result) == 1
     assert result[0].id is None
     assert len(result[0].values) == 3
+
+
+def test_parse_values_only():
+    """Test parsing values only (alias for test_parse_values_only_standalone_colon)."""
+    input_text = ': value1 value2'
+    # Python parser allows this - empty id with values
+    result = parser.parse(input_text)
+    assert len(result) > 0
+    # Note: This differs from JS/Rust/C# which reject it, but is valid in Python
+
+
+def test_link_without_id_multiline():
+    """Test link without id multiline (alias for test_multiline_without_id)."""
+    input_text = '(: value1 value2)'
+    # Python parser allows this - empty id with values
+    result = parser.parse(input_text)
+    assert len(result) > 0
+    # Note: This differs from JS/Rust/C# which reject it, but is valid in Python
+
+
+def test_link_without_id_singleline():
+    """Test link without id single line (alias for test_parse_values_only_standalone_colon)."""
+    input_text = ': value1 value2'
+    # Python parser allows this - empty id with values
+    result = parser.parse(input_text)
+    assert len(result) > 0
+    # Note: This differs from JS/Rust/C# which reject it, but is valid in Python
+
+
+def test_link_with_id():
+    """Test link with id in parentheses."""
+    input_text = '(id: a b c)'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id == 'id'
+    assert len(result[0].values) == 3
+
+
+def test_quoted_reference():
+    """Test quoted reference parsing."""
+    input_text = '"quoted value"'
+    result = parser.parse(input_text)
+    assert len(result) > 0
+    assert result[0].values[0].id == 'quoted value'
+
+
+def test_simple_reference():
+    """Test simple reference parsing."""
+    input_text = 'simplereference'
+    result = parser.parse(input_text)
+    assert len(result) > 0
+
+
+def test_single_line_link():
+    """Test single line link with id and values."""
+    input_text = 'id: value1 value2'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id == 'id'
+    assert len(result[0].values) == 2
+
+
+def test_single_line_with_id():
+    """Test single line with id."""
+    input_text = 'myid: val1 val2'
+    result = parser.parse(input_text)
+    assert len(result) > 0
+    assert result[0].id == 'myid'
+
+
+def test_quoted_references_with_special_chars():
+    """Test quoted references with special characters."""
+    input_text = '("special:char" "another@char")'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id is None
+    assert len(result[0].values) == 2
+    assert result[0].values[0].id == 'special:char'
+    assert result[0].values[1].id == 'another@char'

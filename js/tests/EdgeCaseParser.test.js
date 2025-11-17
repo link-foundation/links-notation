@@ -4,13 +4,13 @@ import { formatLinks } from '../src/Link.js';
 
 const parser = new Parser();
 
-test('EmptyLinkTest', () => {
+test('Empty link', () => {
   const source = ':';
   // Standalone ':' is now forbidden and should throw an error
   expect(() => parser.parse(source)).toThrow();
 });
 
-test('EmptyLinkWithParenthesesTest', () => {
+test('Empty link with parentheses', () => {
   const source = '()';
   const target = '()';
   const links = parser.parse(source);
@@ -18,13 +18,13 @@ test('EmptyLinkWithParenthesesTest', () => {
   expect(formattedLinks).toBe(target);
 });
 
-test('EmptyLinkWithEmptySelfReferenceTest', () => {
+test('Empty link with empty self reference', () => {
   const source = '(:)';
   // '(:)' is now forbidden and should throw an error
   expect(() => parser.parse(source)).toThrow();
 });
 
-test('AllFeaturesTest', () => {
+test('All features', () => {
   // Test single-line link with id
   let input = 'id: value1 value2';
   let result = parser.parse(input);
@@ -73,21 +73,21 @@ test('AllFeaturesTest', () => {
   expect(result.length).toBeGreaterThan(0);
 });
 
-test('EmptyDocumentTest', () => {
+test('Empty document', () => {
   const input = '';
   // Empty document should return empty array
   const result = parser.parse(input);
   expect(result).toEqual([]);
 });
 
-test('WhitespaceOnlyTest', () => {
+test('Whitespace only', () => {
   const input = '   \n   \n   ';
   // Whitespace-only document should return empty array
   const result = parser.parse(input);
   expect(result).toEqual([]);
 });
 
-test('EmptyLinksTest', () => {
+test('Empty links', () => {
   let input = '()';
   let result = parser.parse(input);
   expect(result.length).toBe(1);
@@ -105,7 +105,7 @@ test('EmptyLinksTest', () => {
   expect(result[0].values).toEqual([]);
 });
 
-test('SingletLinksTest', () => {
+test('Singlet links', () => {
   // Test singlet (1)
   let input = '(1)';
   let result = parser.parse(input);
@@ -155,7 +155,7 @@ test('SingletLinksTest', () => {
   expect(result[0].values[3].values).toEqual([]);
 });
 
-test('InvalidInputTest', () => {
+test('Invalid input', () => {
   const input = '(invalid';
   // Unclosed parentheses should throw an error
   expect(() => parser.parse(input)).toThrow();

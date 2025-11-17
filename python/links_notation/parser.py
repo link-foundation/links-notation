@@ -64,7 +64,8 @@ class Parser:
                 return []
 
             self.text = input_text
-            self.lines = input_text.split('\n')
+            # Use smart line splitting that respects quoted strings
+            self.lines = self._split_lines_respecting_quotes(input_text)
             self.pos = 0
             self.indentation_stack = [0]
             self.base_indentation = None
@@ -80,6 +81,57 @@ class Parser:
         except (KeyError, IndexError, AttributeError) as e:
             # Catch specific parsing-related exceptions
             raise ParseError(f"Parse error: {str(e)}") from e
+
+    def _split_lines_respecting_quotes(self, text: str) -> List[str]:
+        """
+        Split text into lines, but preserve newlines inside quoted strings
+        and handle multiline parenthesized expressions.
+
+        Quoted strings can span multiple lines, and newlines within them
+        should be preserved as part of the string value. Also, parenthesized
+        expressions that span multiple lines are kept together.
+        """
+        lines = []
+        current_line = ""
+        in_single = False
+        in_double = False
+        paren_depth = 0
+        i = 0
+
+        while i < len(text):
+            char = text[i]
+
+            # Handle quote toggling
+            if char == '"' and not in_single:
+                in_double = not in_double
+                current_line += char
+            elif char == "'" and not in_double:
+                in_single = not in_single
+                current_line += char
+            elif char == '(' and not in_single and not in_double:
+                paren_depth += 1
+                current_line += char
+            elif char == ')' and not in_single and not in_double:
+                paren_depth -= 1
+                current_line += char
+            elif char == '\n':
+                if in_single or in_double or paren_depth > 0:
+                    # Inside quotes or unclosed parens: preserve the newline
+                    current_line += char
+                else:
+                    # Outside quotes and parens balanced: this is a line break
+                    lines.append(current_line)
+                    current_line = ""
+            else:
+                current_line += char
+
+            i += 1
+
+        # Add the last line if non-empty
+        if current_line:
+            lines.append(current_line)
+
+        return lines
 
     def _parse_document(self) -> List[Dict]:
         """Parse the entire document."""
@@ -191,16 +243,29 @@ class Parser:
         return {'values': values}
 
     def _find_colon_outside_quotes(self, text: str) -> int:
-        """Find the position of a colon that's not inside quotes."""
+        """
+        Find the position of a colon that's not inside quotes or parentheses.
+
+        This is crucial for correctly parsing nested self-referenced objects.
+        For example, in: ((str key) (obj_1: dict ...))
+        The colon after obj_1 should NOT be found as a top-level colon
+        because it's inside the second parenthesized expression.
+        """
         in_single = False
         in_double = False
+        paren_depth = 0
 
         for i, char in enumerate(text):
             if char == "'" and not in_double:
                 in_single = not in_single
             elif char == '"' and not in_single:
                 in_double = not in_double
-            elif char == ':' and not in_single and not in_double:
+            elif char == '(' and not in_single and not in_double:
+                paren_depth += 1
+            elif char == ')' and not in_single and not in_double:
+                paren_depth -= 1
+            elif char == ':' and not in_single and not in_double and paren_depth == 0:
+                # Only return colon if it's outside quotes AND at parenthesis depth 0
                 return i
 
         return -1

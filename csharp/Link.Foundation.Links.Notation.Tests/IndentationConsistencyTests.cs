@@ -6,7 +6,7 @@ namespace Link.Foundation.Links.Notation.Tests
     public class IndentationConsistencyTests
     {
         [Fact]
-        public void LeadingSpacesVsNoLeadingSpacesShouldProduceSameResult()
+        public void LeadingSpacesVsNoLeadingSpaces()
         {
             // Example with 2 leading spaces (from issue #135)
             var withLeading = @"  TELEGRAM_BOT_TOKEN: '849...355:AAG...rgk_YZk...aPU'

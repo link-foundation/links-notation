@@ -168,7 +168,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void NestedLinksSingleLineTest()
+        public static void NestedLinksTest()
         {
             // Test nested links
             var input = "(outer: (inner: value))";
@@ -311,6 +311,125 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.Null(result[0].Id);
             Assert.Equal(3, result[0].Values?.Count);
+        }
+
+        [Fact]
+        public static void ParseQuotedReferencesTest()
+        {
+            var input = "(\"quoted id\": \"value with spaces\")";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.NotEmpty(result);
+            var formatted = result.Format();
+            Assert.Contains("quoted id", formatted);
+            Assert.Contains("value with spaces", formatted);
+        }
+
+        [Fact]
+        public static void LinkWithoutIdSingleLineTest()
+        {
+            // Test that standalone ':' is forbidden and should throw
+            var input = ": value1 value2";
+            var parser = new Parser();
+
+            // C# parser forbids this syntax (like JS/Rust)
+            Assert.Throws<Exception>(() => parser.Parse(input));
+        }
+
+        [Fact]
+        public static void SingleLineLinkWithIdTest()
+        {
+            var input = "id: value1 value2";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.NotEmpty(result);
+            Assert.NotNull(result[0].Id);
+            Assert.Equal("id", result[0].Id);
+        }
+
+        [Fact]
+        public static void LinkWithIdTest()
+        {
+            var input = "(id: a b c)";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("id", result[0].Id);
+            Assert.Equal(3, result[0].Values?.Count);
+        }
+
+        [Fact]
+        public static void QuotedReferenceTest()
+        {
+            var input = "\"quoted value\"";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.NotEmpty(result);
+            Assert.NotNull(result[0].Values);
+            Assert.Single(result[0].Values);
+            Assert.Equal("quoted value", result[0].Values[0].Id);
+        }
+
+        [Fact]
+        public static void SimpleReferenceTest()
+        {
+            var input = "simplereference";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.NotEmpty(result);
+        }
+
+        [Fact]
+        public static void SingleLineLinkTest()
+        {
+            var input = "myid: value1 value2";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("myid", result[0].Id);
+            Assert.Equal(2, result[0].Values?.Count);
+        }
+
+        [Fact]
+        public static void SingleLineWithoutIdTest()
+        {
+            var input = "(value1 value2)";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Null(result[0].Id);
+            Assert.Equal(2, result[0].Values?.Count);
+        }
+
+        [Fact]
+        public static void ParseValuesOnlyStandaloneColonTest()
+        {
+            // Test that standalone ':' is forbidden and should throw
+            var input = ": value1 value2";
+            var parser = new Parser();
+
+            // C# parser forbids this syntax (like JS/Rust)
+            Assert.Throws<Exception>(() => parser.Parse(input));
+        }
+
+        [Fact]
+        public static void QuotedReferencesWithSpacesInLinkTest()
+        {
+            var input = "(id: \"value with spaces\")";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("id", result[0].Id);
+            Assert.Single(result[0].Values);
+            Assert.Equal("value with spaces", result[0].Values?[0].Id);
         }
     }
 }

@@ -7,6 +7,26 @@ namespace Link.Foundation.Links.Notation.Tests
     public static class ApiTests
     {
         [Fact]
+        public static void IsRefTest()
+        {
+            // C# doesn't have separate Ref/Link types, but we can test simple link behavior
+            var simpleLink = new Link<string>("some_value", null);
+            Assert.Equal("some_value", simpleLink.Id);
+            Assert.Null(simpleLink.Values);
+        }
+
+        [Fact]
+        public static void IsLinkTest()
+        {
+            // Test link with values
+            var values = new List<Link<string>> { new Link<string>("child", null) };
+            var link = new Link<string>("id", values);
+            Assert.Equal("id", link.Id);
+            Assert.Single(link.Values);
+            Assert.Equal("child", link.Values?[0].Id);
+        }
+
+        [Fact]
         public static void IsRefEquivalentTest()
         {
             // C# doesn't have separate Ref/Link types, but we can test simple link behavior
@@ -98,6 +118,38 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
+        public static void QuotedReferencesParsingTest()
+        {
+            // Test that quoted references are parsed correctly
+            var input = @"(""quoted id"": ""value with spaces"")";
+            var parser = new Parser();
+            var parsed = parser.Parse(input);
+
+            // Verify parsing worked correctly
+            var output = parsed.Format();
+            Assert.Contains("quoted id", output);
+            Assert.Contains("value with spaces", output);
+        }
+
+        [Fact]
+        public static void IndentedIdSyntaxParsingTest()
+        {
+            // Test that indented ID syntax is parsed correctly
+            var indented = "id:\n  value1\n  value2";
+            var inline = "(id: value1 value2)";
+
+            var parser = new Parser();
+            var indentedParsed = parser.Parse(indented);
+            var inlineParsed = parser.Parse(inline);
+
+            // Both should produce equivalent structures
+            var indentedOutput = indentedParsed.Format();
+            var inlineOutput = inlineParsed.Format();
+            Assert.Equal(indentedOutput, inlineOutput);
+            Assert.Equal("(id: value1 value2)", indentedOutput);
+        }
+
+        [Fact]
         public static void IndentedIdSyntaxRoundtripTest()
         {
             var input = "id:\n  value1\n  value2";
@@ -112,6 +164,24 @@ namespace Link.Foundation.Links.Notation.Tests
             };
             var output = parsed.Format(options);
             Assert.Equal(input, output);
+        }
+
+        [Fact]
+        public static void MultipleIndentedIdSyntaxParsingTest()
+        {
+            // Test that multiple indented ID links are parsed correctly
+            var indented = "id1:\n  a\n  b\nid2:\n  c\n  d";
+            var inline = "(id1: a b)\n(id2: c d)";
+
+            var parser = new Parser();
+            var indentedParsed = parser.Parse(indented);
+            var inlineParsed = parser.Parse(inline);
+
+            // Both should produce equivalent structures
+            var indentedOutput = indentedParsed.Format();
+            var inlineOutput = inlineParsed.Format();
+            Assert.Equal(indentedOutput, inlineOutput);
+            Assert.Equal("(id1: a b)\n(id2: c d)", indentedOutput);
         }
 
         [Fact]

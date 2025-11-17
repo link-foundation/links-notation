@@ -159,7 +159,7 @@ def test_empty_indented_id_should_work():
     assert formatted == "(empty)"
 
 
-def test_equivalence_comprehensive():
+def test_equivalence_test_comprehensive():
     """Test equivalence - comprehensive."""
     test_cases = [
         {

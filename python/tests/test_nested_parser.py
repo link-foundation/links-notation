@@ -160,7 +160,7 @@ def test_nested_links():
     assert len(parsed) == 1
 
 
-def test_indentation():
+def test_indentation_parser():
     """Test indentation (parser)."""
     input_text = 'parent\n  child1\n  child2'
     result = parser.parse(input_text)
@@ -173,7 +173,7 @@ def test_indentation():
     assert has_parent_link is True
 
 
-def test_nested_indentation():
+def test_nested_indentation_parser():
     """Test nested indentation (parser)."""
     input_text = 'parent\n  child\n    grandchild'
     result = parser.parse(input_text)

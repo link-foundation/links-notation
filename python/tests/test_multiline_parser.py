@@ -32,7 +32,7 @@ def test_parse_and_stringify():
     assert "daughter" in target
 
 
-def test_parse_and_stringify_2():
+def test_parse_and_stringify_test_2():
     """Test parse and stringify 2."""
     source = """father (lovesMom: loves mom)
 son lovesMom

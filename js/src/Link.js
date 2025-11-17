@@ -172,8 +172,10 @@ export class Link {
    * @returns {string} Formatted string
    */
   format(lessParentheses = false, isCompoundValue = false) {
-    // Support FormatOptions as first parameter
-    if (lessParentheses && typeof lessParentheses === 'object' && lessParentheses.constructor.name === 'FormatOptions') {
+    // Support FormatOptions/FormatConfig as first parameter
+    // Check if it's an object with formatting properties (FormatOptions or FormatConfig)
+    if (lessParentheses && typeof lessParentheses === 'object' &&
+        (lessParentheses.constructor.name === 'FormatOptions' || lessParentheses.constructor.name === 'FormatConfig')) {
       return this._formatWithOptions(lessParentheses, isCompoundValue);
     }
 
@@ -398,8 +400,9 @@ function _groupConsecutiveLinks(links) {
 export function formatLinks(links, lessParentheses = false) {
   if (!links || links.length === 0) return '';
 
-  // Support FormatOptions as parameter
-  if (lessParentheses && typeof lessParentheses === 'object' && lessParentheses.constructor.name === 'FormatOptions') {
+  // Support FormatOptions/FormatConfig as parameter
+  if (lessParentheses && typeof lessParentheses === 'object' &&
+      (lessParentheses.constructor.name === 'FormatOptions' || lessParentheses.constructor.name === 'FormatConfig')) {
     const options = lessParentheses;
     // Apply consecutive link grouping if enabled
     let linksToFormat = links;

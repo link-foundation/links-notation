@@ -42,7 +42,7 @@ def test_link_escape_reference_simple():
     assert Link.escape_reference('simple') == 'simple'
 
 
-def test_link_escape_reference_special_chars():
+def test_link_escape_reference_with_special_characters():
     """Test escapeReference with special characters."""
     assert Link.escape_reference('has:colon') == "'has:colon'"
     assert Link.escape_reference('has space') == "'has space'"
