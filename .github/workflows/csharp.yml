@@ -57,7 +57,7 @@ jobs:
         with:
           submodules: true
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '8.0.x' # Specify your desired .NET version
       - name: Restore Dependencies
@@ -78,7 +78,7 @@ jobs:
         with:
           submodules: true
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '8.0.x' # Ensure this matches your project's target
       - name: Check if version already published to NuGet.org
@@ -120,7 +120,7 @@ jobs:
         with:
           submodules: true
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '8.0.x' # Ensure this matches your project's target
       - name: Read project information
@@ -174,7 +174,7 @@ jobs:
         with:
           submodules: true
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '8.0.x' # Ensure this matches your project's target
       - name: Install dependencies for PDF generation
@@ -222,7 +222,7 @@ jobs:
         with:
           submodules: true
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '8.0.x' # Ensure this matches your project's target
       - name: Install dependencies for documentation
