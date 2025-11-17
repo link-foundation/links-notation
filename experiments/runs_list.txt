@@ -1,0 +1,5 @@
+completed	skipped	Fix C# tests compilation issues and pin language version	auto-merge	issue-158-fb24e781ad8d	pull_request	19424294666	1s	2025-11-17T09:13:14Z
+completed	failure	Fix C# tests compilation issues and pin language version	csharp	issue-158-fb24e781ad8d	pull_request	19424294667	49s	2025-11-17T09:13:14Z
+completed	skipped	Fix C# tests compilation issues and pin language version	auto-merge	issue-158-fb24e781ad8d	pull_request	19423900311	1s	2025-11-17T08:59:00Z
+completed	failure	Fix C# tests compilation issues and pin language version	csharp	issue-158-fb24e781ad8d	pull_request	19423900316	36s	2025-11-17T08:59:00Z
+completed	skipped	Fix C# tests compilation issues and pin language version	auto-merge	issue-158-fb24e781ad8d	pull_request	19423853266	1s	2025-11-17T08:57:08Z
