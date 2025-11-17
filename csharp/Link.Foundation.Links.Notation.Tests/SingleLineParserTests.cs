@@ -397,7 +397,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void SingleLineWithoutIdTest()
+        public static void ValuesOnlyInParenthesesTest()
         {
             var input = "(value1 value2)";
             var parser = new Parser();
