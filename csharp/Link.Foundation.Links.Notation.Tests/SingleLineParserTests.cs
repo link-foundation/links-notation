@@ -334,7 +334,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
 
             // C# parser forbids this syntax (like JS/Rust)
-            Assert.Throws<Exception>(() => parser.Parse(input));
+            Assert.Throws<FormatException>(() => parser.Parse(input));
         }
 
         [Fact]
@@ -416,7 +416,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
 
             // C# parser forbids this syntax (like JS/Rust)
-            Assert.Throws<Exception>(() => parser.Parse(input));
+            Assert.Throws<FormatException>(() => parser.Parse(input));
         }
 
         [Fact]

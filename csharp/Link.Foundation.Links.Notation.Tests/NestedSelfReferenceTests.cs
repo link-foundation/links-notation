@@ -75,10 +75,12 @@ namespace Link.Foundation.Links.Notation.Tests
             // obj_1's first pair: ((str bmFtZQ==) (str ZGljdDI=))
             var obj1Pair1 = obj1.Values[1];
             Assert.Equal(2, obj1Pair1.Values.Count);
+            Assert.Null(obj1Pair1.Values[0].Id);
             Assert.Equal("str", obj1Pair1.Values[0].Values[0].Id);
-            Assert.Equal("bmFtZQ==", obj1Pair1.Values[0].Values[1].Id);
+            Assert.Equal("bmFtZQ==", obj1Pair1.Values[0].Values[0].Values[0].Id);
+            Assert.Null(obj1Pair1.Values[1].Id);
             Assert.Equal("str", obj1Pair1.Values[1].Values[0].Id);
-            Assert.Equal("ZGljdDI=", obj1Pair1.Values[1].Values[1].Id);
+            Assert.Equal("ZGljdDI=", obj1Pair1.Values[1].Values[0].Values[0].Id);
 
             // obj_1's second pair: ((str b3RoZXI=) obj_0) - reference back to obj_0
             var obj1Pair2 = obj1.Values[2];
