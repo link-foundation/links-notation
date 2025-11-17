@@ -26,7 +26,7 @@ namespace Link.Foundation.Links.Notation.Tests
             };
 
             // Verify config is set correctly
-            Assert.Equal(true, config.IndentLongLines);
+            Assert.True(config.IndentLongLines);
             Assert.Equal(30, config.MaxLineLength);
             // Note: Full formatting integration would test actual output here
         }
@@ -43,7 +43,7 @@ namespace Link.Foundation.Links.Notation.Tests
 
             // Verify config is set correctly
             Assert.Equal(3, config.MaxInlineRefs);
-            Assert.Equal(true, config.ShouldIndentByRefCount(4));
+            Assert.True(config.ShouldIndentByRefCount(4));
             // Note: Full formatting integration would test actual output here
         }
 
@@ -57,7 +57,7 @@ namespace Link.Foundation.Links.Notation.Tests
             };
 
             // Verify config is set correctly
-            Assert.Equal(true, config.GroupConsecutive);
+            Assert.True(config.GroupConsecutive);
             // Note: Full formatting integration would test grouping behavior here
         }
 
@@ -82,7 +82,7 @@ namespace Link.Foundation.Links.Notation.Tests
                 LessParentheses = true
             };
 
-            Assert.Equal(true, config.LessParentheses);
+            Assert.True(config.LessParentheses);
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace Link.Foundation.Links.Notation.Tests
             };
 
             Assert.False(config.ShouldIndentByLength("short"));
-            Assert.Equal(true, config.ShouldIndentByLength(new string('a', 100)));
+            Assert.True(config.ShouldIndentByLength(new string('a', 100)));
         }
 
         [Fact]
@@ -122,7 +122,7 @@ namespace Link.Foundation.Links.Notation.Tests
 
             Assert.False(config.ShouldIndentByRefCount(2));
             Assert.False(config.ShouldIndentByRefCount(3));
-            Assert.Equal(true, config.ShouldIndentByRefCount(4));
+            Assert.True(config.ShouldIndentByRefCount(4));
         }
     }
 }
