@@ -22,7 +22,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <LangVersion>12.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <PackageReleaseNotes>Added README.md to NuGet package for better package documentation.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
     <RootNamespace>Link.Foundation.Links.Notation</RootNamespace>
