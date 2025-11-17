@@ -26,7 +26,7 @@ jobs:
     outputs:
       isCsFilesChanged: ${{ steps.setIsCsFilesChangedOutput.outputs.isCsFilesChanged }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - name: Get changed files using defaults
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           submodules: true
       - name: Setup .NET SDK
@@ -74,7 +74,7 @@ jobs:
     needs: [test]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           submodules: true
       - name: Setup .NET SDK
@@ -116,7 +116,7 @@ jobs:
     needs: [pushToNuget, publishDocumentation]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && needs.pushToNuget.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
         with:
           submodules: true
       - name: Setup .NET SDK
@@ -170,7 +170,7 @@ jobs:
     needs: [test]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
         with:
           submodules: true
       - name: Setup .NET SDK
@@ -218,7 +218,7 @@ jobs:
     needs: [test, generatePdfWithCode]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
         with:
           submodules: true
       - name: Setup .NET SDK
