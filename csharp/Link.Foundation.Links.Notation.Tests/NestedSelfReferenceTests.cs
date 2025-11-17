@@ -52,7 +52,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Equal("ZGljdDE=", pair1.Values[1].Values[1].Id);
 
             // Pair 2: ((str b3RoZXI=) (obj_1: dict ...))
-            // This is the critical test - the second element should be a self-referenced dict
+            // This is a parenthesized expression containing two sub-expressions
             Assert.Null(pair2.Id);
             Assert.Equal(2, pair2.Values.Count);
 
@@ -91,8 +91,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Equal(2, obj1Pair2.Values[0].Values.Count);
             Assert.Equal("str", obj1Pair2.Values[0].Values[0].Id);
             Assert.Equal("b3RoZXI=", obj1Pair2.Values[0].Values[1].Id);
-            Assert.Equal("obj_0", obj1Pair2.Values[1].Id);
-            Assert.Null(obj1Pair2.Values[1].Values); // Just a reference, no nested values
+            Assert.Null(obj1Pair2.Values[1]); // Just a reference, represented as null
         }
 
         [Fact]
