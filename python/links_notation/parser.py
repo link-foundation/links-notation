@@ -243,16 +243,29 @@ class Parser:
         return {'values': values}
 
     def _find_colon_outside_quotes(self, text: str) -> int:
-        """Find the position of a colon that's not inside quotes."""
+        """
+        Find the position of a colon that's not inside quotes or parentheses.
+
+        This is crucial for correctly parsing nested self-referenced objects.
+        For example, in: ((str key) (obj_1: dict ...))
+        The colon after obj_1 should NOT be found as a top-level colon
+        because it's inside the second parenthesized expression.
+        """
         in_single = False
         in_double = False
+        paren_depth = 0
 
         for i, char in enumerate(text):
             if char == "'" and not in_double:
                 in_single = not in_single
             elif char == '"' and not in_single:
                 in_double = not in_double
-            elif char == ':' and not in_single and not in_double:
+            elif char == '(' and not in_single and not in_double:
+                paren_depth += 1
+            elif char == ')' and not in_single and not in_double:
+                paren_depth -= 1
+            elif char == ':' and not in_single and not in_double and paren_depth == 0:
+                # Only return colon if it's outside quotes AND at parenthesis depth 0
                 return i
 
         return -1
