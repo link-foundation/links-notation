@@ -1,0 +1,20 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Link.Foundation.Links.Notation -> /tmp/gh-issue-solver-1763371470963/csharp/Link.Foundation.Links.Notation/bin/Debug/net8/Link.Foundation.Links.Notation.dll
+  Link.Foundation.Links.Notation.Tests -> /tmp/gh-issue-solver-1763371470963/csharp/Link.Foundation.Links.Notation.Tests/bin/Debug/net8/Link.Foundation.Links.Notation.Tests.dll
+Test run for /tmp/gh-issue-solver-1763371470963/csharp/Link.Foundation.Links.Notation.Tests/bin/Debug/net8/Link.Foundation.Links.Notation.Tests.dll (.NETCoreApp,Version=v8.0)
+Microsoft (R) Test Execution Command Line Tool Version 17.8.0 (x64)
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:01.68]     Link.Foundation.Links.Notation.Tests.NestedSelfReferenceTests.NestedSelfReferencedObjectInPairValueTest [FAIL]
+  Failed Link.Foundation.Links.Notation.Tests.NestedSelfReferenceTests.NestedSelfReferencedObjectInPairValueTest [6 ms]
+  Error Message:
+   System.ArgumentNullException : Value cannot be null. (Parameter 'collection')
+  Stack Trace:
+     at Link.Foundation.Links.Notation.Tests.NestedSelfReferenceTests.NestedSelfReferencedObjectInPairValueTest() in /tmp/gh-issue-solver-1763371470963/csharp/Link.Foundation.Links.Notation.Tests/NestedSelfReferenceTests.cs:line 95
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+
+Failed!  - Failed:     1, Passed:   141, Skipped:     0, Total:   142, Duration: 260 ms - Link.Foundation.Links.Notation.Tests.dll (net8.0)

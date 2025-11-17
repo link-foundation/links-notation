@@ -26,35 +26,35 @@ namespace Link.Foundation.Links.Notation
         /// </summary>
         /// <param name="value">The link to convert.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator _<TLinkAddress>(Link<TLinkAddress> value) => new (value);
+        public static implicit operator _<TLinkAddress>(Link<TLinkAddress> value) => new(value);
 
         /// <summary>
         /// Implicitly converts a link address to this utility struct.
         /// </summary>
         /// <param name="id">The link address to convert.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator _<TLinkAddress>(TLinkAddress id) => new (id);
+        public static implicit operator _<TLinkAddress>(TLinkAddress id) => new(id);
 
         /// <summary>
         /// Implicitly converts a tuple of address and link to this utility struct.
         /// </summary>
         /// <param name="value">The tuple containing address and link.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator _<TLinkAddress>((TLinkAddress, Link<TLinkAddress>) value) => new Link<TLinkAddress>(value.Item1, new [] { value.Item2 });
+        public static implicit operator _<TLinkAddress>((TLinkAddress, Link<TLinkAddress>) value) => new Link<TLinkAddress>(value.Item1, new[] { value.Item2 });
 
         /// <summary>
         /// Implicitly converts a tuple of address and two links to this utility struct.
         /// </summary>
         /// <param name="value">The tuple containing address and two links.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator _<TLinkAddress>((TLinkAddress, Link<TLinkAddress>, Link<TLinkAddress>) value) => new Link<TLinkAddress>(value.Item1, new [] { value.Item2, value.Item3 });
+        public static implicit operator _<TLinkAddress>((TLinkAddress, Link<TLinkAddress>, Link<TLinkAddress>) value) => new Link<TLinkAddress>(value.Item1, new[] { value.Item2, value.Item3 });
 
         /// <summary>
         /// Implicitly converts a tuple of address and three links to this utility struct.
         /// </summary>
         /// <param name="value">The tuple containing address and three links.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator _<TLinkAddress>((TLinkAddress, Link<TLinkAddress>, Link<TLinkAddress>, Link<TLinkAddress>) value) => new Link<TLinkAddress>(value.Item1, new [] { value.Item2, value.Item3, value.Item4 });
+        public static implicit operator _<TLinkAddress>((TLinkAddress, Link<TLinkAddress>, Link<TLinkAddress>, Link<TLinkAddress>) value) => new Link<TLinkAddress>(value.Item1, new[] { value.Item2, value.Item3, value.Item4 });
 
         /// <summary>
         /// Implicitly converts this utility struct back to a link.

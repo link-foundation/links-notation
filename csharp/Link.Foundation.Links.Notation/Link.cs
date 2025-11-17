@@ -61,8 +61,8 @@ namespace Link.Foundation.Links.Notation
         /// <returns>A string representation of the link with proper escaping and formatting.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => Id == null ?
-         $"({GetValuesString()})" : 
-            (Values == null || Values.Count == 0) ? 
+         $"({GetValuesString()})" :
+            (Values == null || Values.Count == 0) ?
                 $"({EscapeReference(Id.ToString())})" :
                 $"({EscapeReference(Id.ToString())}: {GetValuesString()})";
 
@@ -142,7 +142,7 @@ namespace Link.Foundation.Links.Notation
             {
                 return "";
             }
-            if  (
+            if (
                     reference.Contains(":") ||
                     reference.Contains("(") ||
                     reference.Contains(")") ||
@@ -184,35 +184,35 @@ namespace Link.Foundation.Links.Notation
         /// </summary>
         /// <param name="value">The tuple containing identifier and values.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator Link<TLinkAddress>((TLinkAddress, IList<Link<TLinkAddress>>) value) => new (value.Item1, value.Item2);
+        public static implicit operator Link<TLinkAddress>((TLinkAddress, IList<Link<TLinkAddress>>) value) => new(value.Item1, value.Item2);
 
         /// <summary>
         /// Implicitly converts a source-target pair to an anonymous link.
         /// </summary>
         /// <param name="value">The tuple containing source and target links.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator Link<TLinkAddress>((Link<TLinkAddress> source, Link<TLinkAddress> target) value) => new (value.source, value.target);
+        public static implicit operator Link<TLinkAddress>((Link<TLinkAddress> source, Link<TLinkAddress> target) value) => new(value.source, value.target);
 
         /// <summary>
         /// Implicitly converts a tuple of identifier, source, and target to a link.
         /// </summary>
         /// <param name="value">The tuple containing id, source and target.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator Link<TLinkAddress>((id<TLinkAddress> id, Link<TLinkAddress> source, Link<TLinkAddress> target) value) => new (value.id.Id, new [] { value.source, value.target });
+        public static implicit operator Link<TLinkAddress>((id<TLinkAddress> id, Link<TLinkAddress> source, Link<TLinkAddress> target) value) => new(value.id.Id, new[] { value.source, value.target });
 
         /// <summary>
         /// Implicitly converts a source-linker-target triplet to an anonymous link.
         /// </summary>
         /// <param name="value">The tuple containing source, linker, and target links.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator Link<TLinkAddress>((Link<TLinkAddress> source, Link<TLinkAddress> linker, Link<TLinkAddress> target) value) => new (value.source, value.linker, value.target);
-        
+        public static implicit operator Link<TLinkAddress>((Link<TLinkAddress> source, Link<TLinkAddress> linker, Link<TLinkAddress> target) value) => new(value.source, value.linker, value.target);
+
         /// <summary>
         /// Implicitly converts a tuple of identifier, source, linker, and target to a link.
         /// </summary>
         /// <param name="value">The tuple containing id, source, linker, and target.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator Link<TLinkAddress>((id<TLinkAddress> id, Link<TLinkAddress> source, Link<TLinkAddress> linker, Link<TLinkAddress> target) value) => new (value.id.Id, new [] { value.source, value.linker, value.target });
+        public static implicit operator Link<TLinkAddress>((id<TLinkAddress> id, Link<TLinkAddress> source, Link<TLinkAddress> linker, Link<TLinkAddress> target) value) => new(value.id.Id, new[] { value.source, value.linker, value.target });
 
         /// <summary>
         /// Determines whether the specified object is equal to this link.

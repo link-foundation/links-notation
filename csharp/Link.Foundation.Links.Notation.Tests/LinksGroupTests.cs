@@ -16,7 +16,7 @@ namespace Link.Foundation.Links.Notation.Tests
                 new LinksGroup<string>(new Link<string>("child2", null))
             };
             var group = new LinksGroup<string>(element, groups);
-            
+
             Assert.Equal(element, group.Link);
             Assert.Equal(groups, group.Groups);
         }
@@ -28,18 +28,18 @@ namespace Link.Foundation.Links.Notation.Tests
             var child1 = new Link<string>("child1", null);
             var child2 = new Link<string>("child2", null);
             var grandchild = new Link<string>("grandchild", null);
-            
-            var childGroup = new LinksGroup<string>(child2, new List<LinksGroup<string>> 
-            { 
-                new LinksGroup<string>(grandchild) 
+
+            var childGroup = new LinksGroup<string>(child2, new List<LinksGroup<string>>
+            {
+                new LinksGroup<string>(grandchild)
             });
-            
+
             var group = new LinksGroup<string>(root, new List<LinksGroup<string>>
             {
                 new LinksGroup<string>(child1),
                 childGroup
             });
-            
+
             var list = group.ToLinksList();
             // The C# implementation creates a hierarchical structure
             // root, root.Combine(child1), root.Combine(child2), root.Combine(child2).Combine(grandchild)

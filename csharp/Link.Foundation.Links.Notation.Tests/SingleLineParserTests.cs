@@ -31,7 +31,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var source = @"(ignore conan-center-index repository)";
             var links = new Parser().Parse(source);
             var target = links.Format();
-            Assert.Equal(source,target);
+            Assert.Equal(source, target);
         }
 
         [Fact]
@@ -204,7 +204,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var input = @"(""key:with:colons"": ""value(with)parens"")";
             var result = new Parser().Parse(input);
             Assert.NotEmpty(result);
-            
+
             input = @"('key with spaces': 'value: with special chars')";
             result = new Parser().Parse(input);
             Assert.NotEmpty(result);

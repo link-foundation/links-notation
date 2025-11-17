@@ -84,7 +84,7 @@ users
             var formattedLinks = links.Format();
             Assert.Equal(target, formattedLinks);
         }
-        
+
         [Fact]
         public static void TwoSpacesSizedWhitespaceTest()
         {
@@ -168,7 +168,7 @@ users
             // Validate regular formatting
             var output = parsed.Format();
             Assert.NotEmpty(output);
-            
+
             // Validate that the structure is properly nested
             Assert.Single(parsed);
         }

@@ -29,7 +29,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var targetFromTuples = constructedLinks.Format();
             Assert.Equal(targetFromString, targetFromTuples);
         }
-        
+
         [Fact]
         public void NamedTupleToLinkTest()
         {

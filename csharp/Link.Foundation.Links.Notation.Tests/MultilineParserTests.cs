@@ -38,7 +38,7 @@ daughter lovesMom
 all (love mom)";
             var links = new Parser().Parse(source);
             var target = links.Format(lessParentheses: true);
-            Assert.Equal(source,target);
+            Assert.Equal(source, target);
         }
 
         [Fact]
@@ -78,7 +78,7 @@ all (love mama)";
   Value
     (property: name type)
     (method: name params return)";
-            
+
             var result = new Parser().Parse(input);
             Assert.NotEmpty(result);
         }
@@ -94,7 +94,7 @@ simple_ref
   nested1
   nested2
 )";
-            
+
             var result = new Parser().Parse(input);
             Assert.NotEmpty(result);
         }
@@ -124,12 +124,12 @@ simple_ref
             var parser = new Parser();
             var parsed = parser.Parse(input);
             Assert.NotEmpty(parsed);
-            
+
             // Validate regular formatting
             var output = parsed.Format();
             Assert.Contains("(1: 1 1)", output);
             Assert.Contains("(2: 2 2)", output);
-            
+
             // Validate alternate formatting matches input
             var outputAlternate = parsed.Format();
             Assert.Equal(input, outputAlternate);
@@ -141,7 +141,7 @@ simple_ref
             var input = "parent\n  child1\n  child2";
             var parser = new Parser();
             var parsed = parser.Parse(input);
-            
+
             // The parsed structure should have parent with children
             Assert.NotEmpty(parsed);
         }

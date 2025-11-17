@@ -166,11 +166,11 @@ namespace Link.Foundation.Links.Notation.Tests
             var input = "()";
             var result = new Parser().Parse(input);
             Assert.NotEmpty(result);
-            
+
             // '(:)' is now forbidden
             input = "(:)";
             Assert.Throws<FormatException>(() => new Parser().Parse(input));
-            
+
             input = "(id:)";
             result = new Parser().Parse(input);
             Assert.NotEmpty(result);

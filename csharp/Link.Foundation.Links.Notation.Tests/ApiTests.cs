@@ -60,7 +60,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var input = "(1: 1 1)";
             var parser = new Parser();
             var parsed = parser.Parse(input);
-            
+
             // Validate regular formatting
             var output = parsed.Format();
             Assert.Contains("1:", output);
@@ -73,7 +73,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var input = "(index: source target)";
             var parser = new Parser();
             var parsed = parser.Parse(input);
-            
+
             // Validate regular formatting
             var output = parsed.Format();
             Assert.Equal(input, output);
@@ -85,7 +85,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var input = "(index: source type target)";
             var parser = new Parser();
             var parsed = parser.Parse(input);
-            
+
             // Validate regular formatting
             var output = parsed.Format();
             Assert.Equal(input, output);
@@ -97,7 +97,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var input = "id: value1 value2";
             var parser = new Parser();
             var parsed = parser.Parse(input);
-            
+
             // The parser should handle single-line format
             var output = parsed.Format();
             Assert.Contains("id", output);

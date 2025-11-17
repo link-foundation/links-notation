@@ -8,9 +8,9 @@ namespace Link.Foundation.Links.Notation.Tests
         public void FormatConfigBasicTest()
         {
             var config = new FormatConfig();
-            Assert.Equal(false, config.LessParentheses);
+            Assert.False(config.LessParentheses);
             Assert.Equal(80, config.MaxLineLength);
-            Assert.Equal(false, config.IndentLongLines);
+            Assert.False(config.IndentLongLines);
         }
 
         [Fact]
@@ -108,7 +108,7 @@ namespace Link.Foundation.Links.Notation.Tests
                 MaxLineLength = 80
             };
 
-            Assert.Equal(false, config.ShouldIndentByLength("short"));
+            Assert.False(config.ShouldIndentByLength("short"));
             Assert.Equal(true, config.ShouldIndentByLength(new string('a', 100)));
         }
 
@@ -120,8 +120,8 @@ namespace Link.Foundation.Links.Notation.Tests
                 MaxInlineRefs = 3
             };
 
-            Assert.Equal(false, config.ShouldIndentByRefCount(2));
-            Assert.Equal(false, config.ShouldIndentByRefCount(3));
+            Assert.False(config.ShouldIndentByRefCount(2));
+            Assert.False(config.ShouldIndentByRefCount(3));
             Assert.Equal(true, config.ShouldIndentByRefCount(4));
         }
     }
