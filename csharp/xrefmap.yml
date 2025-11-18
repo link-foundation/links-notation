@@ -7,6 +7,12 @@ references:
   commentId: N:Link.Foundation.Links.Notation
   fullName: Link.Foundation.Links.Notation
   nameWithType: Link.Foundation.Links.Notation
+- uid: Link.Foundation.Links.Notation.FormatConfig
+  name: FormatConfig
+  href: api/Link.Foundation.Links.Notation.FormatConfig.html
+  commentId: T:Link.Foundation.Links.Notation.FormatConfig
+  fullName: Link.Foundation.Links.Notation.FormatConfig
+  nameWithType: FormatConfig
 - uid: Link.Foundation.Links.Notation.FormatOptions
   name: FormatOptions
   href: api/Link.Foundation.Links.Notation.FormatOptions.html
@@ -718,6 +724,23 @@ references:
   fullName.vb: Link.Foundation.Links.Notation.LinksGroup(Of TLinkAddress).ToLinksList
   nameWithType: LinksGroup<TLinkAddress>.ToLinksList
   nameWithType.vb: LinksGroup(Of TLinkAddress).ToLinksList
+- uid: Link.Foundation.Links.Notation.LinksGroup`1.ToString
+  name: ToString()
+  href: api/Link.Foundation.Links.Notation.LinksGroup-1.html#Link_Foundation_Links_Notation_LinksGroup_1_ToString
+  commentId: M:Link.Foundation.Links.Notation.LinksGroup`1.ToString
+  fullName: Link.Foundation.Links.Notation.LinksGroup<TLinkAddress>.ToString()
+  fullName.vb: Link.Foundation.Links.Notation.LinksGroup(Of TLinkAddress).ToString()
+  nameWithType: LinksGroup<TLinkAddress>.ToString()
+  nameWithType.vb: LinksGroup(Of TLinkAddress).ToString()
+- uid: Link.Foundation.Links.Notation.LinksGroup`1.ToString*
+  name: ToString
+  href: api/Link.Foundation.Links.Notation.LinksGroup-1.html#Link_Foundation_Links_Notation_LinksGroup_1_ToString_
+  commentId: Overload:Link.Foundation.Links.Notation.LinksGroup`1.ToString
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.LinksGroup<TLinkAddress>.ToString
+  fullName.vb: Link.Foundation.Links.Notation.LinksGroup(Of TLinkAddress).ToString
+  nameWithType: LinksGroup<TLinkAddress>.ToString
+  nameWithType.vb: LinksGroup(Of TLinkAddress).ToString
 - uid: Link.Foundation.Links.Notation.LinksGroup`1.op_Equality(Link.Foundation.Links.Notation.LinksGroup{`0},Link.Foundation.Links.Notation.LinksGroup{`0})
   name: operator ==(LinksGroup<TLinkAddress>, LinksGroup<TLinkAddress>)
   href: api/Link.Foundation.Links.Notation.LinksGroup-1.html#Link_Foundation_Links_Notation_LinksGroup_1_op_Equality_Link_Foundation_Links_Notation_LinksGroup__0__Link_Foundation_Links_Notation_LinksGroup__0__

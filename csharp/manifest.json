@@ -32,6 +32,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.FormatConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.FormatConfig.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.FormatConfig",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.FormatConfig.yml\" sourcestartlinenumber=\"1\">FormatConfig is an alias for FormatOptions to maintain API consistency\nwith the Python implementation.</p>\n<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.FormatConfig.yml\" sourcestartlinenumber=\"4\">C# uses 'FormatOptions' internally, but provides 'FormatConfig'\nas an alias to match Python's naming convention.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Link.Foundation.Links.Notation.FormatOptions.yml",
       "output": {
         ".html": {
