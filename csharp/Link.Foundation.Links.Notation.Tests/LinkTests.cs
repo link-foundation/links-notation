@@ -52,7 +52,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var link1 = new Link<string>("test");
             var link2 = new Link<string>("test");
             var link3 = new Link<string>("other");
-            
+
             Assert.Equal(link1, link2);
             Assert.NotEqual(link1, link3);
         }
@@ -63,7 +63,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var link1 = new Link<string>("first");
             var link2 = new Link<string>("second");
             var combined = link1.Combine(link2);
-            
+
             Assert.Null(combined.Id);
             Assert.Equal(2, combined.Values?.Count);
             Assert.Equal("first", combined.Values?[0].Id);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Platform.Collections;
@@ -141,5 +141,12 @@ namespace Link.Foundation.Links.Notation
         /// <returns>True if the links groups are not equal; otherwise, false.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(LinksGroup<TLinkAddress> left, LinksGroup<TLinkAddress> right) => !(left == right);
+
+        /// <summary>
+        /// Returns a string representation of this links group.
+        /// </summary>
+        /// <returns>A string representation of this links group.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override string ToString() => ToLinksList().Format();
     }
 }

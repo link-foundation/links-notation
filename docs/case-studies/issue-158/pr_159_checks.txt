@@ -1,0 +1,7 @@
+test	fail	39s	https://github.com/link-foundation/links-notation/actions/runs/19424294667/job/55568107479	
+generatePdfWithCode	skipping	0	https://github.com/link-foundation/links-notation/actions/runs/19424294667/job/55568169033	
+publishDocumentation	skipping	0	https://github.com/link-foundation/links-notation/actions/runs/19424294667/job/55568169280	
+publishRelease	skipping	0	https://github.com/link-foundation/links-notation/actions/runs/19424294667/job/55568169445	
+pushToNuget	skipping	0	https://github.com/link-foundation/links-notation/actions/runs/19424294667/job/55568168771	
+findChangedCsFiles	pass	4s	https://github.com/link-foundation/links-notation/actions/runs/19424294667/job/55568098063	
+auto-merge	skipping	0	https://github.com/link-foundation/links-notation/actions/runs/19424294666/job/55568098112	

@@ -26,6 +26,6 @@ namespace Link.Foundation.Links.Notation
         /// </summary>
         /// <param name="id">The value to convert to an identifier.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator id<TLinkAddress>(TLinkAddress id) => new (id);
+        public static explicit operator id<TLinkAddress>(TLinkAddress id) => new(id);
     }
 }
