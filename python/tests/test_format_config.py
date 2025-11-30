@@ -8,9 +8,9 @@ parser = Parser()
 def test_format_config_basic():
     """Test basic FormatConfig usage."""
     config = FormatConfig()
-    assert config.less_parentheses == False
+    assert config.less_parentheses is False
     assert config.max_line_length == 80
-    assert config.indent_long_lines == False
+    assert config.indent_long_lines is False
 
 
 def test_format_with_line_length_limit():
@@ -102,14 +102,14 @@ def test_should_indent_by_length():
     short_line = "short"
     long_line = "a" * 100
 
-    assert config.should_indent_by_length(short_line) == False
-    assert config.should_indent_by_length(long_line) == True
+    assert config.should_indent_by_length(short_line) is False
+    assert config.should_indent_by_length(long_line) is True
 
 
 def test_should_indent_by_ref_count():
     """Test shouldIndentByRefCount helper method."""
     config = FormatConfig(max_inline_refs=3)
 
-    assert config.should_indent_by_ref_count(2) == False
-    assert config.should_indent_by_ref_count(3) == False
-    assert config.should_indent_by_ref_count(4) == True
+    assert config.should_indent_by_ref_count(2) is False
+    assert config.should_indent_by_ref_count(3) is False
+    assert config.should_indent_by_ref_count(4) is True

@@ -25,7 +25,10 @@ def test_nested_self_referenced_object_in_pair_value():
     The critical test is that obj_1 should have its ID preserved and its
     nested dict structure should be properly parsed.
     """
-    notation = "(obj_0: dict ((str bmFtZQ==) (str ZGljdDE=)) ((str b3RoZXI=) (obj_1: dict ((str bmFtZQ==) (str ZGljdDI=)) ((str b3RoZXI=) obj_0))))"
+    notation = (
+        "(obj_0: dict ((str bmFtZQ==) (str ZGljdDE=)) "
+        "((str b3RoZXI=) (obj_1: dict ((str bmFtZQ==) (str ZGljdDI=)) ((str b3RoZXI=) obj_0))))"
+    )
 
     links = parser.parse(notation)
 

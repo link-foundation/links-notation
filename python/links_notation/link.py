@@ -198,7 +198,9 @@ class Link:
         Returns:
             Formatted string representation
         """
-        from .format_config import FormatConfig
+        # Note: FormatConfig import is needed for type checking but the parameter
+        # is already validated by the caller, so we use a noqa comment here
+        from .format_config import FormatConfig  # noqa: F401
 
         # Empty link
         if self.id is None and not self.values:

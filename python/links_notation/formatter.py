@@ -4,7 +4,7 @@ Formatter for Lino notation.
 Provides utilities for formatting Link objects back into Lino notation strings.
 """
 
-from typing import List, Optional, Union
+from typing import List, Union
 
 from .format_config import FormatConfig
 from .link import Link

@@ -166,7 +166,7 @@ def test_indentation_parser():
     result = parser.parse(input_text)
     assert len(result) > 0
     # Should have parent link
-    has_parent_link = any(l.values and any(v.id == "parent" for v in l.values) for l in result)
+    has_parent_link = any(link.values and any(v.id == "parent" for v in link.values) for link in result)
     assert has_parent_link is True
 
 
