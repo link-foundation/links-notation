@@ -152,6 +152,59 @@ pip install build
 python -m build
 ```
 
+## Maintenance
+
+### Linting and Formatting
+
+Install linting tools:
+
+```bash
+pip install ".[lint]"
+# Or install all dev dependencies
+pip install ".[dev]"
+```
+
+Check code formatting with Black:
+
+```bash
+black --check --diff .
+```
+
+Auto-fix formatting:
+
+```bash
+black .
+```
+
+Check import sorting with isort:
+
+```bash
+isort --check-only --diff .
+```
+
+Auto-fix import sorting:
+
+```bash
+isort .
+```
+
+Run flake8 linter:
+
+```bash
+flake8 --max-line-length=120
+```
+
+### Pre-commit Hooks
+
+This project uses pre-commit hooks that automatically run Black, isort, and
+flake8 before commits. To set up pre-commit hooks locally:
+
+```bash
+# From repository root
+pip install pre-commit
+pre-commit install
+```
+
 ## License
 
 This project is released into the public domain under the [Unlicense](../LICENSE).
