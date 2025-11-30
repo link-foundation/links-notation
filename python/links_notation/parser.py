@@ -13,6 +13,17 @@ class ParseError(Exception):
     """Exception raised when parsing fails."""
 
 
+# Bracket pairs for multiline link delimiters
+OPEN_BRACKETS = '([{'
+CLOSE_BRACKETS = ')]}'
+BRACKET_PAIRS = {'(': ')', '[': ']', '{': '}'}
+
+
+def _is_matching_brackets(open_char: str, close_char: str) -> bool:
+    """Check if open and close characters are matching bracket pairs."""
+    return BRACKET_PAIRS.get(open_char) == close_char
+
+
 class Parser:
     """
     Parser for Lino notation.
@@ -85,17 +96,18 @@ class Parser:
     def _split_lines_respecting_quotes(self, text: str) -> List[str]:
         """
         Split text into lines, but preserve newlines inside quoted strings
-        and handle multiline parenthesized expressions.
+        and handle multiline bracketed expressions.
 
         Quoted strings can span multiple lines, and newlines within them
-        should be preserved as part of the string value. Also, parenthesized
-        expressions that span multiple lines are kept together.
+        should be preserved as part of the string value. Also, bracketed
+        expressions (parentheses, braces, brackets) that span multiple lines
+        are kept together.
         """
         lines = []
         current_line = ""
         in_single = False
         in_double = False
-        paren_depth = 0
+        bracket_depth = 0
         i = 0
 
         while i < len(text):
@@ -108,18 +120,18 @@ class Parser:
             elif char == "'" and not in_double:
                 in_single = not in_single
                 current_line += char
-            elif char == '(' and not in_single and not in_double:
-                paren_depth += 1
+            elif char in OPEN_BRACKETS and not in_single and not in_double:
+                bracket_depth += 1
                 current_line += char
-            elif char == ')' and not in_single and not in_double:
-                paren_depth -= 1
+            elif char in CLOSE_BRACKETS and not in_single and not in_double:
+                bracket_depth -= 1
                 current_line += char
             elif char == '\n':
-                if in_single or in_double or paren_depth > 0:
-                    # Inside quotes or unclosed parens: preserve the newline
+                if in_single or in_double or bracket_depth > 0:
+                    # Inside quotes or unclosed brackets: preserve the newline
                     current_line += char
                 else:
-                    # Outside quotes and parens balanced: this is a line break
+                    # Outside quotes and brackets balanced: this is a line break
                     lines.append(current_line)
                     current_line = ""
             else:
@@ -202,8 +214,11 @@ class Parser:
 
     def _parse_line_content(self, content: str) -> Dict:
         """Parse the content of a single line."""
-        # Try multiline link format: (id: values) or (values)
-        if content.startswith('(') and content.endswith(')'):
+        # Try multiline link format: (id: values) or (values) or {id: values} or [id: values]
+        if (len(content) >= 2 and
+            content[0] in OPEN_BRACKETS and
+            content[-1] in CLOSE_BRACKETS and
+            _is_matching_brackets(content[0], content[-1])):
             inner = content[1:-1].strip()
             return self._parse_parenthesized(inner)
 
@@ -244,28 +259,28 @@ class Parser:
 
     def _find_colon_outside_quotes(self, text: str) -> int:
         """
-        Find the position of a colon that's not inside quotes or parentheses.
+        Find the position of a colon that's not inside quotes or brackets.
 
         This is crucial for correctly parsing nested self-referenced objects.
         For example, in: ((str key) (obj_1: dict ...))
         The colon after obj_1 should NOT be found as a top-level colon
-        because it's inside the second parenthesized expression.
+        because it's inside the second bracketed expression.
         """
         in_single = False
         in_double = False
-        paren_depth = 0
+        bracket_depth = 0
 
         for i, char in enumerate(text):
             if char == "'" and not in_double:
                 in_single = not in_single
             elif char == '"' and not in_single:
                 in_double = not in_double
-            elif char == '(' and not in_single and not in_double:
-                paren_depth += 1
-            elif char == ')' and not in_single and not in_double:
-                paren_depth -= 1
-            elif char == ':' and not in_single and not in_double and paren_depth == 0:
-                # Only return colon if it's outside quotes AND at parenthesis depth 0
+            elif char in OPEN_BRACKETS and not in_single and not in_double:
+                bracket_depth += 1
+            elif char in CLOSE_BRACKETS and not in_single and not in_double:
+                bracket_depth -= 1
+            elif char == ':' and not in_single and not in_double and bracket_depth == 0:
+                # Only return colon if it's outside quotes AND at bracket depth 0
                 return i
 
         return -1
@@ -279,7 +294,7 @@ class Parser:
         current = ""
         in_single = False
         in_double = False
-        paren_depth = 0
+        bracket_depth = 0
 
         i = 0
         while i < len(text):
@@ -291,13 +306,13 @@ class Parser:
             elif char == '"' and not in_single:
                 in_double = not in_double
                 current += char
-            elif char == '(' and not in_single and not in_double:
-                paren_depth += 1
+            elif char in OPEN_BRACKETS and not in_single and not in_double:
+                bracket_depth += 1
                 current += char
-            elif char == ')' and not in_single and not in_double:
-                paren_depth -= 1
+            elif char in CLOSE_BRACKETS and not in_single and not in_double:
+                bracket_depth -= 1
                 current += char
-            elif char == ' ' and not in_single and not in_double and paren_depth == 0:
+            elif char == ' ' and not in_single and not in_double and bracket_depth == 0:
                 # End of current value
                 if current.strip():
                     values.append(self._parse_value(current.strip()))
@@ -315,8 +330,11 @@ class Parser:
 
     def _parse_value(self, value: str) -> Dict:
         """Parse a single value (could be a reference or nested link)."""
-        # Nested link in parentheses
-        if value.startswith('(') and value.endswith(')'):
+        # Nested link in brackets (parentheses, braces, or square brackets)
+        if (len(value) >= 2 and
+            value[0] in OPEN_BRACKETS and
+            value[-1] in CLOSE_BRACKETS and
+            _is_matching_brackets(value[0], value[-1])):
             inner = value[1:-1].strip()
             return self._parse_parenthesized(inner)
 

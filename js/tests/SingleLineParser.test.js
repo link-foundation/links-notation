@@ -307,3 +307,123 @@ test('Single line with id', () => {
   expect(result.length).toBeGreaterThan(0);
   expect(result[0].id).toBe('myid');
 });
+
+// Tests for alternative bracket delimiters (issue #143)
+
+test('Curly braces as delimiters - link with id', () => {
+  const input = '{id: source target}';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('id');
+  expect(result[0].values.length).toBe(2);
+  expect(result[0].values[0].id).toBe('source');
+  expect(result[0].values[1].id).toBe('target');
+});
+
+test('Square brackets as delimiters - link with id', () => {
+  const input = '[id: source target]';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('id');
+  expect(result[0].values.length).toBe(2);
+  expect(result[0].values[0].id).toBe('source');
+  expect(result[0].values[1].id).toBe('target');
+});
+
+test('Curly braces as delimiters - value link', () => {
+  const input = '{a b c}';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe(null);
+  expect(result[0].values.length).toBe(3);
+});
+
+test('Square brackets as delimiters - value link', () => {
+  const input = '[a b c]';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe(null);
+  expect(result[0].values.length).toBe(3);
+});
+
+test('Curly braces - singlet', () => {
+  const input = '{singlet}';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe(null);
+  expect(result[0].values.length).toBe(1);
+  expect(result[0].values[0].id).toBe('singlet');
+});
+
+test('Square brackets - singlet', () => {
+  const input = '[singlet]';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe(null);
+  expect(result[0].values.length).toBe(1);
+  expect(result[0].values[0].id).toBe('singlet');
+});
+
+test('Nested curly braces', () => {
+  const input = '{outer: {inner: value}}';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('outer');
+  expect(result[0].values.length).toBe(1);
+  expect(result[0].values[0].id).toBe('inner');
+  expect(result[0].values[0].values.length).toBe(1);
+  expect(result[0].values[0].values[0].id).toBe('value');
+});
+
+test('Nested square brackets', () => {
+  const input = '[outer: [inner: value]]';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('outer');
+  expect(result[0].values.length).toBe(1);
+  expect(result[0].values[0].id).toBe('inner');
+  expect(result[0].values[0].values.length).toBe(1);
+  expect(result[0].values[0].values[0].id).toBe('value');
+});
+
+test('Mixed delimiters - parentheses with curly braces', () => {
+  const input = '(outer: {inner: value})';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('outer');
+  expect(result[0].values.length).toBe(1);
+  expect(result[0].values[0].id).toBe('inner');
+});
+
+test('Mixed delimiters - square brackets with parentheses', () => {
+  const input = '[outer: (inner: value)]';
+  const result = parser.parse(input);
+  expect(result.length).toBe(1);
+  expect(result[0].id).toBe('outer');
+  expect(result[0].values.length).toBe(1);
+  expect(result[0].values[0].id).toBe('inner');
+});
+
+test('Curly braces equivalent to parentheses', () => {
+  const parenInput = '(id: source target)';
+  const curlyInput = '{id: source target}';
+
+  const parenResult = parser.parse(parenInput);
+  const curlyResult = parser.parse(curlyInput);
+
+  expect(parenResult.length).toBe(curlyResult.length);
+  expect(parenResult[0].id).toBe(curlyResult[0].id);
+  expect(parenResult[0].values.length).toBe(curlyResult[0].values.length);
+});
+
+test('Square brackets equivalent to parentheses', () => {
+  const parenInput = '(id: source target)';
+  const bracketInput = '[id: source target]';
+
+  const parenResult = parser.parse(parenInput);
+  const bracketResult = parser.parse(bracketInput);
+
+  expect(parenResult.length).toBe(bracketResult.length);
+  expect(parenResult[0].id).toBe(bracketResult[0].id);
+  expect(parenResult[0].values.length).toBe(bracketResult[0].values.length);
+});

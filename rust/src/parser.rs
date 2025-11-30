@@ -123,7 +123,23 @@ fn is_horizontal_whitespace(c: char) -> bool {
 }
 
 fn is_reference_char(c: char) -> bool {
-    !is_whitespace_char(c) && c != '(' && c != ':' && c != ')'
+    !is_whitespace_char(c) && c != '(' && c != ')' && c != '{' && c != '}' && c != '[' && c != ']' && c != ':'
+}
+
+fn open_bracket(input: &str) -> IResult<&str, char> {
+    alt((
+        char('('),
+        char('{'),
+        char('['),
+    )).parse(input)
+}
+
+fn close_bracket(input: &str) -> IResult<&str, char> {
+    alt((
+        char(')'),
+        char('}'),
+        char(']'),
+    )).parse(input)
 }
 
 fn horizontal_whitespace(input: &str) -> IResult<&str, &str> {
@@ -222,14 +238,14 @@ fn single_line_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str,
 
 fn multi_line_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     (
-        char('('),
+        open_bracket,
         whitespace,
         reference,
         whitespace,
         char(':'),
         |i| multi_line_values(i, state),
         whitespace,
-        char(')')
+        close_bracket
     ).map(|(_, _, id, _, _, values, _, _)| Link::new_link(Some(id), values))
     .parse(input)
 }
@@ -258,10 +274,10 @@ fn indented_id_link<'a>(input: &'a str, _state: &ParserState) -> IResult<&'a str
 
 fn multi_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     (
-        char('('),
+        open_bracket,
         |i| multi_line_values(i, state),
         whitespace,
-        char(')')
+        close_bracket
     ).map(|(_, values, _, _)| {
         if values.len() == 1 && values[0].id.is_some() && values[0].values.is_empty() && values[0].children.is_empty() {
             Link::new_singlet(values[0].id.clone().unwrap())

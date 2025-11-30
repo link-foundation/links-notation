@@ -346,3 +346,136 @@ def test_quoted_references_with_special_chars():
     assert len(result[0].values) == 2
     assert result[0].values[0].id == 'special:char'
     assert result[0].values[1].id == 'another@char'
+
+
+# Tests for alternative bracket delimiters (issue #143)
+
+
+def test_curly_braces_as_delimiters_link_with_id():
+    """Test curly braces as delimiters - link with id."""
+    input_text = '{id: source target}'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id == 'id'
+    assert len(result[0].values) == 2
+    assert result[0].values[0].id == 'source'
+    assert result[0].values[1].id == 'target'
+
+
+def test_square_brackets_as_delimiters_link_with_id():
+    """Test square brackets as delimiters - link with id."""
+    input_text = '[id: source target]'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id == 'id'
+    assert len(result[0].values) == 2
+    assert result[0].values[0].id == 'source'
+    assert result[0].values[1].id == 'target'
+
+
+def test_curly_braces_as_delimiters_value_link():
+    """Test curly braces as delimiters - value link."""
+    input_text = '{a b c}'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id is None
+    assert len(result[0].values) == 3
+
+
+def test_square_brackets_as_delimiters_value_link():
+    """Test square brackets as delimiters - value link."""
+    input_text = '[a b c]'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id is None
+    assert len(result[0].values) == 3
+
+
+def test_curly_braces_singlet():
+    """Test curly braces - singlet."""
+    input_text = '{singlet}'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id is None
+    assert len(result[0].values) == 1
+    assert result[0].values[0].id == 'singlet'
+
+
+def test_square_brackets_singlet():
+    """Test square brackets - singlet."""
+    input_text = '[singlet]'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id is None
+    assert len(result[0].values) == 1
+    assert result[0].values[0].id == 'singlet'
+
+
+def test_nested_curly_braces():
+    """Test nested curly braces."""
+    input_text = '{outer: {inner: value}}'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id == 'outer'
+    assert len(result[0].values) == 1
+    assert result[0].values[0].id == 'inner'
+    assert len(result[0].values[0].values) == 1
+    assert result[0].values[0].values[0].id == 'value'
+
+
+def test_nested_square_brackets():
+    """Test nested square brackets."""
+    input_text = '[outer: [inner: value]]'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id == 'outer'
+    assert len(result[0].values) == 1
+    assert result[0].values[0].id == 'inner'
+    assert len(result[0].values[0].values) == 1
+    assert result[0].values[0].values[0].id == 'value'
+
+
+def test_mixed_delimiters_parentheses_with_curly_braces():
+    """Test mixed delimiters - parentheses with curly braces."""
+    input_text = '(outer: {inner: value})'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id == 'outer'
+    assert len(result[0].values) == 1
+    assert result[0].values[0].id == 'inner'
+
+
+def test_mixed_delimiters_square_brackets_with_parentheses():
+    """Test mixed delimiters - square brackets with parentheses."""
+    input_text = '[outer: (inner: value)]'
+    result = parser.parse(input_text)
+    assert len(result) == 1
+    assert result[0].id == 'outer'
+    assert len(result[0].values) == 1
+    assert result[0].values[0].id == 'inner'
+
+
+def test_curly_braces_equivalent_to_parentheses():
+    """Test curly braces are equivalent to parentheses."""
+    paren_input = '(id: source target)'
+    curly_input = '{id: source target}'
+
+    paren_result = parser.parse(paren_input)
+    curly_result = parser.parse(curly_input)
+
+    assert len(paren_result) == len(curly_result)
+    assert paren_result[0].id == curly_result[0].id
+    assert len(paren_result[0].values) == len(curly_result[0].values)
+
+
+def test_square_brackets_equivalent_to_parentheses():
+    """Test square brackets are equivalent to parentheses."""
+    paren_input = '(id: source target)'
+    bracket_input = '[id: source target]'
+
+    paren_result = parser.parse(paren_input)
+    bracket_result = parser.parse(bracket_input)
+
+    assert len(paren_result) == len(bracket_result)
+    assert paren_result[0].id == bracket_result[0].id
+    assert len(paren_result[0].values) == len(bracket_result[0].values)

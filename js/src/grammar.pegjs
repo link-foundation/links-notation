@@ -71,11 +71,14 @@ singleLineValues = list:singleLineValueAndWhitespace+ { return list; }
 
 singleLineLink = __ id:reference __ ":" v:singleLineValues { return { id: id, values: v }; }
 
-multiLineLink = "(" _ id:reference _ ":" v:multiLineValues _ ")" { return { id: id, values: v }; }
+multiLineLink = openBracket _ id:reference _ ":" v:multiLineValues _ closeBracket { return { id: id, values: v }; }
 
 singleLineValueLink = v:singleLineValues { return { values: v }; }
 
-multiLineValueLink = "(" v:multiLineValues _ ")" { return { values: v }; }
+multiLineValueLink = openBracket v:multiLineValues _ closeBracket { return { values: v }; }
+
+openBracket = "(" / "{" / "["
+closeBracket = ")" / "}" / "]"
 
 indentedIdLink = id:reference __ ":" eol { return { id: id, values: [] }; }
 
@@ -103,4 +106,4 @@ _ = whiteSpaceSymbol*
 
 whiteSpaceSymbol = [ \t\n\r]
 
-referenceSymbol = [^ \t\n\r(:)]
+referenceSymbol = [^ \t\n\r(:)\[\]{}]

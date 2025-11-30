@@ -454,3 +454,221 @@ fn test_single_line_without_id() {
         _ => panic!("Expected Link"),
     }
 }
+
+// Tests for alternative bracket delimiters (issue #143)
+
+#[test]
+fn test_curly_braces_as_delimiters_link_with_id() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "{id: source target}";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert_eq!(result.len(), 1);
+    match &result[0] {
+        links_notation::LiNo::Link { id, values } => {
+            assert_eq!(id, &Some("id".to_string()));
+            assert_eq!(values.len(), 2);
+        }
+        _ => panic!("Expected Link"),
+    }
+}
+
+#[test]
+fn test_square_brackets_as_delimiters_link_with_id() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "[id: source target]";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert_eq!(result.len(), 1);
+    match &result[0] {
+        links_notation::LiNo::Link { id, values } => {
+            assert_eq!(id, &Some("id".to_string()));
+            assert_eq!(values.len(), 2);
+        }
+        _ => panic!("Expected Link"),
+    }
+}
+
+#[test]
+fn test_curly_braces_as_delimiters_value_link() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "{a b c}";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert_eq!(result.len(), 1);
+    match &result[0] {
+        links_notation::LiNo::Link { id, values } => {
+            assert_eq!(id, &None);
+            assert_eq!(values.len(), 3);
+        }
+        _ => panic!("Expected Link"),
+    }
+}
+
+#[test]
+fn test_square_brackets_as_delimiters_value_link() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "[a b c]";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert_eq!(result.len(), 1);
+    match &result[0] {
+        links_notation::LiNo::Link { id, values } => {
+            assert_eq!(id, &None);
+            assert_eq!(values.len(), 3);
+        }
+        _ => panic!("Expected Link"),
+    }
+}
+
+#[test]
+fn test_curly_braces_singlet() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "{singlet}";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert_eq!(result.len(), 1);
+    match &result[0] {
+        links_notation::LiNo::Ref(id) => {
+            assert_eq!(id, "singlet");
+        }
+        _ => panic!("Expected Ref"),
+    }
+}
+
+#[test]
+fn test_square_brackets_singlet() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "[singlet]";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert_eq!(result.len(), 1);
+    match &result[0] {
+        links_notation::LiNo::Ref(id) => {
+            assert_eq!(id, "singlet");
+        }
+        _ => panic!("Expected Ref"),
+    }
+}
+
+#[test]
+fn test_nested_curly_braces() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "{outer: {inner: value}}";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert_eq!(result.len(), 1);
+    match &result[0] {
+        links_notation::LiNo::Link { id, values } => {
+            assert_eq!(id, &Some("outer".to_string()));
+            assert_eq!(values.len(), 1);
+        }
+        _ => panic!("Expected Link"),
+    }
+}
+
+#[test]
+fn test_nested_square_brackets() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "[outer: [inner: value]]";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert_eq!(result.len(), 1);
+    match &result[0] {
+        links_notation::LiNo::Link { id, values } => {
+            assert_eq!(id, &Some("outer".to_string()));
+            assert_eq!(values.len(), 1);
+        }
+        _ => panic!("Expected Link"),
+    }
+}
+
+#[test]
+fn test_mixed_delimiters_parentheses_with_curly_braces() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "(outer: {inner: value})";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert_eq!(result.len(), 1);
+    match &result[0] {
+        links_notation::LiNo::Link { id, values } => {
+            assert_eq!(id, &Some("outer".to_string()));
+            assert_eq!(values.len(), 1);
+        }
+        _ => panic!("Expected Link"),
+    }
+}
+
+#[test]
+fn test_mixed_delimiters_square_brackets_with_parentheses() {
+    use links_notation::parse_lino_to_links;
+
+    let input = "[outer: (inner: value)]";
+    let result = parse_lino_to_links(input).expect("Failed to parse");
+
+    assert_eq!(result.len(), 1);
+    match &result[0] {
+        links_notation::LiNo::Link { id, values } => {
+            assert_eq!(id, &Some("outer".to_string()));
+            assert_eq!(values.len(), 1);
+        }
+        _ => panic!("Expected Link"),
+    }
+}
+
+#[test]
+fn test_curly_braces_equivalent_to_parentheses() {
+    use links_notation::parse_lino_to_links;
+
+    let paren_input = "(id: source target)";
+    let curly_input = "{id: source target}";
+
+    let paren_result = parse_lino_to_links(paren_input).expect("Failed to parse paren");
+    let curly_result = parse_lino_to_links(curly_input).expect("Failed to parse curly");
+
+    assert_eq!(paren_result.len(), curly_result.len());
+
+    match (&paren_result[0], &curly_result[0]) {
+        (
+            links_notation::LiNo::Link { id: paren_id, values: paren_values },
+            links_notation::LiNo::Link { id: curly_id, values: curly_values },
+        ) => {
+            assert_eq!(paren_id, curly_id);
+            assert_eq!(paren_values.len(), curly_values.len());
+        }
+        _ => panic!("Expected Links"),
+    }
+}
+
+#[test]
+fn test_square_brackets_equivalent_to_parentheses() {
+    use links_notation::parse_lino_to_links;
+
+    let paren_input = "(id: source target)";
+    let bracket_input = "[id: source target]";
+
+    let paren_result = parse_lino_to_links(paren_input).expect("Failed to parse paren");
+    let bracket_result = parse_lino_to_links(bracket_input).expect("Failed to parse bracket");
+
+    assert_eq!(paren_result.len(), bracket_result.len());
+
+    match (&paren_result[0], &bracket_result[0]) {
+        (
+            links_notation::LiNo::Link { id: paren_id, values: paren_values },
+            links_notation::LiNo::Link { id: bracket_id, values: bracket_values },
+        ) => {
+            assert_eq!(paren_id, bracket_id);
+            assert_eq!(paren_values.len(), bracket_values.len());
+        }
+        _ => panic!("Expected Links"),
+    }
+}
