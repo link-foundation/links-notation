@@ -1,14 +1,14 @@
-import { Parser } from '../src/Parser.js';
-import { formatLinks } from '../src/Link.js';
+import { Parser } from "../src/Parser.js";
+import { formatLinks } from "../src/Link.js";
 
-describe('Indentation Consistency Tests (Issue #135)', () => {
+describe("Indentation Consistency Tests (Issue #135)", () => {
   let parser;
 
   beforeEach(() => {
     parser = new Parser();
   });
 
-  test('Leading spaces vs no leading spaces', () => {
+  test("Leading spaces vs no leading spaces", () => {
     // Example with 2 leading spaces (from issue #135)
     const withLeading = `  TELEGRAM_BOT_TOKEN: '849...355:AAG...rgk_YZk...aPU'
   TELEGRAM_ALLOWED_CHATS:
@@ -36,7 +36,7 @@ TELEGRAM_BOT_VERBOSE: true`;
     expect(formatLinks(resultWith)).toBe(formatLinks(resultWithout));
   });
 
-  test('two spaces vs four spaces indentation', () => {
+  test("two spaces vs four spaces indentation", () => {
     // Example with 2 spaces per level
     const twoSpaces = `TELEGRAM_BOT_TOKEN: '849...355:AAG...rgk_YZk...aPU'
 TELEGRAM_ALLOWED_CHATS:
@@ -86,7 +86,7 @@ TELEGRAM_BOT_VERBOSE: true`;
     expect(formatLinks(resultTwo)).toBe(formatLinks(resultFour));
   });
 
-  test('simple two vs four spaces indentation', () => {
+  test("simple two vs four spaces indentation", () => {
     // Simple example with 2 spaces
     const twoSpaces = `parent:
   child1
@@ -104,7 +104,7 @@ TELEGRAM_BOT_VERBOSE: true`;
     expect(formatLinks(resultTwo)).toBe(formatLinks(resultFour));
   });
 
-  test('three level nesting with different indentation', () => {
+  test("three level nesting with different indentation", () => {
     // Three levels with 2 spaces
     const twoSpaces = `level1:
   level2:

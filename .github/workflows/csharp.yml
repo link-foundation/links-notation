@@ -47,6 +47,24 @@ jobs:
           echo "isCsFilesChanged=${isCsFilesChanged}" >> $GITHUB_OUTPUT
           echo "isCsFilesChanged: ${isCsFilesChanged}"
 
+  format:
+    needs: [findChangedCsFiles]
+    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: true
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore Dependencies
+        run: dotnet restore
+      - name: Check formatting with dotnet format
+        run: dotnet format --verify-no-changes
+
   test:
     needs: [findChangedCsFiles]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}

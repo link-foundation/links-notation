@@ -1,5 +1,5 @@
-import { Link } from './Link.js';
-import * as parserModule from './parser-generated.js';
+import { Link } from "./Link.js";
+import * as parserModule from "./parser-generated.js";
 
 export class Parser {
   /**
@@ -21,12 +21,14 @@ export class Parser {
    */
   parse(input) {
     // Validate input
-    if (typeof input !== 'string') {
-      throw new TypeError('Input must be a string');
+    if (typeof input !== "string") {
+      throw new TypeError("Input must be a string");
     }
 
     if (input.length > this.maxInputSize) {
-      throw new Error(`Input size exceeds maximum allowed size of ${this.maxInputSize} bytes`);
+      throw new Error(
+        `Input size exceeds maximum allowed size of ${this.maxInputSize} bytes`,
+      );
     }
 
     try {
@@ -72,10 +74,10 @@ export class Parser {
         });
         const linkWithChildren = {
           id: item.id,
-          values: childValues
+          values: childValues,
         };
         const currentLink = this.transformLink(linkWithChildren);
-        
+
         if (parentPath.length === 0) {
           result.push(currentLink);
         } else {
@@ -84,17 +86,17 @@ export class Parser {
       } else {
         // Regular indented structure - process as before
         const currentLink = this.transformLink(item);
-        
+
         // Add the link combined with parent path
         if (parentPath.length === 0) {
           result.push(currentLink);
         } else {
           result.push(this.combinePathElements(parentPath, currentLink));
         }
-        
+
         // Process each child with this item in the path
         const newPath = [...parentPath, currentLink];
-        
+
         for (const child of item.children) {
           this.collectLinks(child, newPath, result);
         }
@@ -102,7 +104,7 @@ export class Parser {
     } else {
       // Leaf item or item with inline values
       const currentLink = this.transformLink(item);
-      
+
       if (parentPath.length === 0) {
         result.push(currentLink);
       } else {
@@ -110,7 +112,7 @@ export class Parser {
       }
     }
   }
-  
+
   combinePathElements(pathElements, current) {
     if (pathElements.length === 0) return current;
     if (pathElements.length === 1) {
@@ -118,21 +120,20 @@ export class Parser {
       combined._isFromPathCombination = true;
       return combined;
     }
-    
+
     // For multiple path elements, we need to build proper nesting
     // The last element in the path should be combined with its parent
     const parentPath = pathElements.slice(0, -1);
     const lastElement = pathElements[pathElements.length - 1];
-    
+
     // Build the parent structure
     let parent = this.combinePathElements(parentPath, lastElement);
-    
+
     // Add current element to the built structure
     const combined = new Link(null, [parent, current]);
     combined._isFromPathCombination = true;
     return combined;
   }
-  
 
   /**
    * Transform a parsed item into a Link object
@@ -156,12 +157,11 @@ export class Parser {
     if (item.values && Array.isArray(item.values)) {
       // Create a link with id (if present) and transformed values
       const link = new Link(item.id || null, []);
-      link.values = item.values.map(v => this.transformLink(v));
+      link.values = item.values.map((v) => this.transformLink(v));
       return link;
     }
 
     // Default case
     return new Link(item.id || null, []);
   }
-
 }

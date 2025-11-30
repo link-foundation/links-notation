@@ -47,6 +47,22 @@ jobs:
           echo "isJsFilesChanged=${isJsFilesChanged}" >> $GITHUB_OUTPUT
           echo "isJsFilesChanged: ${isJsFilesChanged}"
 
+  format:
+    needs: [findChangedJsFiles]
+    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Check formatting with Prettier
+        run: npx prettier --check .
+
   test:
     needs: [findChangedJsFiles]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}

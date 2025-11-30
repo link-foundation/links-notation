@@ -5,7 +5,8 @@ This module provides parsing functionality for Links Notation (Lino),
 converting text into structured Link objects.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import Any, Dict, List, Optional
+
 from .link import Link
 
 
@@ -57,7 +58,9 @@ class Parser:
 
         # Validate input size
         if len(input_text) > self.max_input_size:
-            raise ValueError(f"Input size exceeds maximum allowed size of {self.max_input_size} bytes")
+            raise ValueError(
+                f"Input size exceeds maximum allowed size of {self.max_input_size} bytes"
+            )
 
         try:
             if not input_text or not input_text.strip():
@@ -108,13 +111,13 @@ class Parser:
             elif char == "'" and not in_double:
                 in_single = not in_single
                 current_line += char
-            elif char == '(' and not in_single and not in_double:
+            elif char == "(" and not in_single and not in_double:
                 paren_depth += 1
                 current_line += char
-            elif char == ')' and not in_single and not in_double:
+            elif char == ")" and not in_single and not in_double:
                 paren_depth -= 1
                 current_line += char
-            elif char == '\n':
+            elif char == "\n":
                 if in_single or in_double or paren_depth > 0:
                     # Inside quotes or unclosed parens: preserve the newline
                     current_line += char
@@ -155,7 +158,7 @@ class Parser:
             return None
 
         line = self.lines[self.pos]
-        raw_indent = len(line) - len(line.lstrip(' '))
+        raw_indent = len(line) - len(line.lstrip(" "))
 
         # Set base indentation from first content line
         if self.base_indentation is None and line.strip():
@@ -183,49 +186,51 @@ class Parser:
 
         while self.pos < len(self.lines):
             next_line = self.lines[self.pos]
-            raw_next_indent = len(next_line) - len(next_line.lstrip(' '))
+            raw_next_indent = len(next_line) - len(next_line.lstrip(" "))
             # Normalize next line's indentation
             next_indent = max(0, raw_next_indent - (self.base_indentation or 0))
 
             if next_line.strip() and next_indent > indent:
                 # This is a child
-                child = self._parse_element(child_indent if not children else indent + 2)
+                child = self._parse_element(
+                    child_indent if not children else indent + 2
+                )
                 if child:
                     children.append(child)
             else:
                 break
 
         if children:
-            element['children'] = children
+            element["children"] = children
 
         return element
 
     def _parse_line_content(self, content: str) -> Dict:
         """Parse the content of a single line."""
         # Try multiline link format: (id: values) or (values)
-        if content.startswith('(') and content.endswith(')'):
+        if content.startswith("(") and content.endswith(")"):
             inner = content[1:-1].strip()
             return self._parse_parenthesized(inner)
 
         # Try indented ID syntax: id:
-        if content.endswith(':'):
+        if content.endswith(":"):
             id_part = content[:-1].strip()
             ref = self._extract_reference(id_part)
-            return {'id': ref, 'values': [], 'is_indented_id': True}
+            return {"id": ref, "values": [], "is_indented_id": True}
 
         # Try single-line link: id: values
-        if ':' in content and not (content.startswith('"') or content.startswith("'")):
-            parts = content.split(':', 1)
+        if ":" in content and not (content.startswith('"') or content.startswith("'")):
+            parts = content.split(":", 1)
             if len(parts) == 2:
                 id_part = parts[0].strip()
                 values_part = parts[1].strip()
                 ref = self._extract_reference(id_part)
                 values = self._parse_values(values_part)
-                return {'id': ref, 'values': values}
+                return {"id": ref, "values": values}
 
         # Simple value list
         values = self._parse_values(content)
-        return {'values': values}
+        return {"values": values}
 
     def _parse_parenthesized(self, inner: str) -> Dict:
         """Parse content within parentheses."""
@@ -233,14 +238,14 @@ class Parser:
         colon_pos = self._find_colon_outside_quotes(inner)
         if colon_pos >= 0:
             id_part = inner[:colon_pos].strip()
-            values_part = inner[colon_pos + 1:].strip()
+            values_part = inner[colon_pos + 1 :].strip()
             ref = self._extract_reference(id_part)
             values = self._parse_values(values_part)
-            return {'id': ref, 'values': values}
+            return {"id": ref, "values": values}
 
         # Just values
         values = self._parse_values(inner)
-        return {'values': values}
+        return {"values": values}
 
     def _find_colon_outside_quotes(self, text: str) -> int:
         """
@@ -260,11 +265,11 @@ class Parser:
                 in_single = not in_single
             elif char == '"' and not in_single:
                 in_double = not in_double
-            elif char == '(' and not in_single and not in_double:
+            elif char == "(" and not in_single and not in_double:
                 paren_depth += 1
-            elif char == ')' and not in_single and not in_double:
+            elif char == ")" and not in_single and not in_double:
                 paren_depth -= 1
-            elif char == ':' and not in_single and not in_double and paren_depth == 0:
+            elif char == ":" and not in_single and not in_double and paren_depth == 0:
                 # Only return colon if it's outside quotes AND at parenthesis depth 0
                 return i
 
@@ -291,13 +296,13 @@ class Parser:
             elif char == '"' and not in_single:
                 in_double = not in_double
                 current += char
-            elif char == '(' and not in_single and not in_double:
+            elif char == "(" and not in_single and not in_double:
                 paren_depth += 1
                 current += char
-            elif char == ')' and not in_single and not in_double:
+            elif char == ")" and not in_single and not in_double:
                 paren_depth -= 1
                 current += char
-            elif char == ' ' and not in_single and not in_double and paren_depth == 0:
+            elif char == " " and not in_single and not in_double and paren_depth == 0:
                 # End of current value
                 if current.strip():
                     values.append(self._parse_value(current.strip()))
@@ -316,13 +321,13 @@ class Parser:
     def _parse_value(self, value: str) -> Dict:
         """Parse a single value (could be a reference or nested link)."""
         # Nested link in parentheses
-        if value.startswith('(') and value.endswith(')'):
+        if value.startswith("(") and value.endswith(")"):
             inner = value[1:-1].strip()
             return self._parse_parenthesized(inner)
 
         # Simple reference
         ref = self._extract_reference(value)
-        return {'id': ref}
+        return {"id": ref}
 
     def _extract_reference(self, text: str) -> str:
         """Extract reference, handling quoted strings."""
@@ -350,7 +355,9 @@ class Parser:
 
         return links
 
-    def _collect_links(self, item: Dict, parent_path: List[Link], result: List[Link]) -> None:
+    def _collect_links(
+        self, item: Dict, parent_path: List[Link], result: List[Link]
+    ) -> None:
         """
         Recursively collect links from parse tree.
 
@@ -361,22 +368,24 @@ class Parser:
         if item is None:
             return
 
-        children = item.get('children', [])
+        children = item.get("children", [])
 
         # Special case: indented ID syntax (id: followed by children)
-        if item.get('is_indented_id') and item.get('id') and not item.get('values') and children:
+        if (
+            item.get("is_indented_id")
+            and item.get("id")
+            and not item.get("values")
+            and children
+        ):
             child_values = []
             for child in children:
                 # Extract the reference from child's values
-                if child.get('values') and len(child['values']) == 1:
-                    child_values.append(self._transform_link(child['values'][0]))
+                if child.get("values") and len(child["values"]) == 1:
+                    child_values.append(self._transform_link(child["values"][0]))
                 else:
                     child_values.append(self._transform_link(child))
 
-            link_with_children = {
-                'id': item['id'],
-                'values': child_values
-            }
+            link_with_children = {"id": item["id"], "values": child_values}
             current_link = self._transform_link(link_with_children)
 
             if not parent_path:
@@ -440,14 +449,14 @@ class Parser:
             return Link(str(item))
 
         # Simple reference
-        if 'id' in item and 'values' not in item:
-            return Link(item['id'])
+        if "id" in item and "values" not in item:
+            return Link(item["id"])
 
         # Link with values
-        if 'values' in item:
-            link_id = item.get('id')
-            values = [self._transform_link(v) for v in item['values']]
+        if "values" in item:
+            link_id = item.get("id")
+            values = [self._transform_link(v) for v in item["values"]]
             return Link(link_id, values)
 
         # Default
-        return Link(item.get('id'))
+        return Link(item.get("id"))

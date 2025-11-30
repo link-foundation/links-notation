@@ -1,4 +1,4 @@
-use links_notation::{parse_lino_to_links, format_links};
+use links_notation::{format_links, parse_lino_to_links};
 
 #[cfg(test)]
 mod tests {
@@ -15,8 +15,14 @@ mod tests {
         let result_with = parse_lino_to_links(with_leading);
         let result_without = parse_lino_to_links(without_leading);
 
-        assert!(result_with.is_ok(), "With leading spaces should parse successfully");
-        assert!(result_without.is_ok(), "Without leading spaces should parse successfully");
+        assert!(
+            result_with.is_ok(),
+            "With leading spaces should parse successfully"
+        );
+        assert!(
+            result_without.is_ok(),
+            "Without leading spaces should parse successfully"
+        );
 
         let links_with = result_with.unwrap();
         let links_without = result_without.unwrap();

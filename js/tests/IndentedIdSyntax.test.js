@@ -149,16 +149,16 @@ test("Equivalence test comprehensive", () => {
   const testCases = [
     {
       indented: "test:\n  one",
-      inline: "(test: one)"
+      inline: "(test: one)",
     },
     {
       indented: "x:\n  a\n  b\n  c",
-      inline: "(x: a b c)"
+      inline: "(x: a b c)",
     },
     {
-      indented: "\"quoted\":\n  value",
-      inline: "(\"quoted\": value)"
-    }
+      indented: '"quoted":\n  value',
+      inline: '("quoted": value)',
+    },
   ];
 
   for (const testCase of testCases) {

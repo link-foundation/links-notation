@@ -152,6 +152,32 @@ pip install build
 python -m build
 ```
 
+## Maintenance
+
+### Code Formatting
+
+This project uses [Black](https://github.com/psf/black) for code formatting,
+[isort](https://pycqa.github.io/isort/) for import sorting, and
+[flake8](https://flake8.pycqa.org/) for linting.
+
+#### Format all files
+
+```bash
+black .
+isort .
+```
+
+#### Check formatting (without modifying files)
+
+```bash
+black --check .
+isort --check .
+flake8 --max-line-length=120 .
+```
+
+These checks are also enforced in CI. Pull requests with formatting issues will
+fail the format check.
+
 ## License
 
 This project is released into the public domain under the [Unlicense](../LICENSE).

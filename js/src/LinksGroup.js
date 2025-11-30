@@ -25,6 +25,6 @@ export class LinksGroup {
 
   toString() {
     const list = this.toList();
-    return list.map(item => `(${item.id || item})`).join(' ');
+    return list.map((item) => `(${item.id || item})`).join(" ");
   }
 }

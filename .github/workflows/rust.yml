@@ -47,6 +47,22 @@ jobs:
           echo "isRustFilesChanged=${isRustFilesChanged}" >> $GITHUB_OUTPUT
           echo "isRustFilesChanged: ${isRustFilesChanged}"
 
+  format:
+    needs: [findChangedRustFiles]
+    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: true
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - name: Check formatting with rustfmt
+        run: cargo fmt --check
+
   test:
     needs: [findChangedRustFiles]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}

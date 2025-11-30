@@ -1,8 +1,8 @@
 """Nested parser tests - ported from JS/Rust implementations."""
 
 import pytest
-from links_notation import Parser, format_links
 
+from links_notation import Parser, format_links
 
 parser = Parser()
 
@@ -105,14 +105,16 @@ def test_parse_nested_structure_with_indentation():
     assert len(result) == 3
     # The parser creates (parent), ((parent) (child1)), ((parent) (child2))
     assert result[0].id is None
-    assert result[0].values[0].id == 'parent'
+    assert result[0].values[0].id == "parent"
     assert result[1].id is None
     assert len(result[1].values) == 2
     assert result[2].id is None
     assert len(result[2].values) == 2
 
 
-@pytest.mark.skip(reason="Parser has infinite loop bug with inconsistent indentation - needs investigation")
+@pytest.mark.skip(
+    reason="Parser has infinite loop bug with inconsistent indentation - needs investigation"
+)
 def test_indentation_consistency():
     """Test indentation consistency."""
     # Test that indentation must be consistent
@@ -148,7 +150,7 @@ def test_complex_indentation():
 
 def test_nested_links():
     """Test nested links."""
-    input_text = '(1: (2: (3: 3)))'
+    input_text = "(1: (2: (3: 3)))"
     parsed = parser.parse(input_text)
     assert len(parsed) > 0
 
@@ -162,20 +164,19 @@ def test_nested_links():
 
 def test_indentation_parser():
     """Test indentation (parser)."""
-    input_text = 'parent\n  child1\n  child2'
+    input_text = "parent\n  child1\n  child2"
     result = parser.parse(input_text)
     assert len(result) > 0
     # Should have parent link
     has_parent_link = any(
-        l.values and any(v.id == 'parent' for v in l.values)
-        for l in result
+        l.values and any(v.id == "parent" for v in l.values) for l in result
     )
     assert has_parent_link is True
 
 
 def test_nested_indentation_parser():
     """Test nested indentation (parser)."""
-    input_text = 'parent\n  child\n    grandchild'
+    input_text = "parent\n  child\n    grandchild"
     result = parser.parse(input_text)
     assert len(result) > 0
     # Should create nested structure with proper hierarchy

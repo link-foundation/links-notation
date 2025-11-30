@@ -1,0 +1,4 @@
+dist/
+src/parser-generated.js
+bun.lock
+package-lock.json

@@ -174,9 +174,7 @@ mod tests {
 
     #[test]
     fn test_should_indent_by_ref_count() {
-        let config = FormatConfig::builder()
-            .max_inline_refs(Some(3))
-            .build();
+        let config = FormatConfig::builder().max_inline_refs(Some(3)).build();
 
         assert_eq!(config.should_indent_by_ref_count(2), false);
         assert_eq!(config.should_indent_by_ref_count(3), false);
