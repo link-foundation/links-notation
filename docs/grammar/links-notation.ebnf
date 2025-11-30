@@ -1,0 +1,171 @@
+(* Links Notation (Lino) Grammar - Extended Backus-Naur Form (EBNF) *)
+(* Version: 0.12.0 *)
+(* Repository: https://github.com/link-foundation/links-notation *)
+(* License: Unlicense *)
+
+(* ============================================================== *)
+(*                      DOCUMENT STRUCTURE                         *)
+(* ============================================================== *)
+
+(* A document is either content followed by whitespace and EOF,
+   or just whitespace and EOF (empty document) *)
+document            = skip_empty_lines, links, whitespace, EOF
+                    | whitespace, EOF ;
+
+(* Skip any leading empty lines at the start of the document *)
+skip_empty_lines    = { horizontal_whitespace, newline } ;
+
+(* A links block is one or more elements at the same indentation level *)
+links               = first_line, { line } ;
+
+(* The first line sets the base indentation for the document *)
+first_line          = SET_BASE_INDENTATION, element ;
+
+(* Subsequent lines must respect the current indentation level *)
+line                = CHECK_INDENTATION, element ;
+
+(* An element is a link, optionally followed by indented children *)
+element             = any_link, PUSH_INDENTATION, links
+                    | any_link ;
+
+(* ============================================================== *)
+(*                         LINK TYPES                              *)
+(* ============================================================== *)
+
+(* Any type of link that can appear in the document *)
+any_link            = multiline_any_link, eol
+                    | indented_id_link
+                    | single_line_any_link ;
+
+(* Multiline links are enclosed in parentheses *)
+multiline_any_link  = multiline_value_link
+                    | multiline_link ;
+
+(* Single-line links end with end-of-line *)
+single_line_any_link = single_line_link, eol
+                     | single_line_value_link, eol ;
+
+(* ============================================================== *)
+(*                  MULTILINE LINKS (PARENTHESIZED)                *)
+(* ============================================================== *)
+
+(* A named multiline link: (id: value1 value2 ...) *)
+multiline_link      = "(", whitespace, reference, whitespace, ":",
+                      multiline_values, whitespace, ")" ;
+
+(* An anonymous multiline link: (value1 value2 ...) *)
+multiline_value_link = "(", multiline_values, whitespace, ")" ;
+
+(* Values in a multiline context (can include newlines) *)
+multiline_values    = whitespace, { reference_or_link, whitespace } ;
+
+(* ============================================================== *)
+(*                      SINGLE-LINE LINKS                          *)
+(* ============================================================== *)
+
+(* A named single-line link: id: value1 value2 ... *)
+single_line_link    = horizontal_whitespace, reference,
+                      horizontal_whitespace, ":", single_line_values ;
+
+(* An anonymous single-line link: value1 value2 ... *)
+single_line_value_link = single_line_values ;
+
+(* Values in a single-line context (no newlines allowed) *)
+single_line_values  = { horizontal_whitespace, reference_or_link }- ;
+                    (* Note: {x}- means one or more occurrences of x *)
+
+(* ============================================================== *)
+(*                      INDENTED ID LINK                           *)
+(* ============================================================== *)
+
+(* A named link where children follow as indented lines: id: *)
+indented_id_link    = reference, horizontal_whitespace, ":", eol ;
+
+(* ============================================================== *)
+(*                       REFERENCE TYPES                           *)
+(* ============================================================== *)
+
+(* A reference can be a nested link or a simple reference *)
+reference_or_link   = multiline_any_link
+                    | reference ;
+
+(* A reference is either quoted or simple *)
+reference           = double_quoted_reference
+                    | single_quoted_reference
+                    | simple_reference ;
+
+(* An unquoted reference (alphanumeric and special chars) *)
+simple_reference    = reference_symbol, { reference_symbol } ;
+
+(* A double-quoted reference: "any text except double quote" *)
+double_quoted_reference = '"', { any_char - '"' }, '"' ;
+
+(* A single-quoted reference: 'any text except single quote' *)
+single_quoted_reference = "'", { any_char - "'" }, "'" ;
+
+(* ============================================================== *)
+(*                      TERMINAL SYMBOLS                           *)
+(* ============================================================== *)
+
+(* Characters allowed in simple references *)
+(* Excludes: whitespace, opening paren, colon, closing paren *)
+reference_symbol    = any_char - whitespace_char - "(" - ":" - ")" ;
+
+(* Whitespace characters (used for separating tokens and indentation) *)
+whitespace_char     = " " | "\t" | "\n" | "\r" ;
+
+(* Horizontal whitespace (spaces and tabs only) *)
+horizontal_whitespace = { " " | "\t" } ;
+
+(* Any whitespace (including newlines) *)
+whitespace          = { whitespace_char } ;
+
+(* Line endings (cross-platform) *)
+newline             = "\r\n" | "\n" | "\r" ;
+
+(* End of line (newline or end of file) *)
+eol                 = horizontal_whitespace, ( newline | EOF ) ;
+
+(* End of file marker *)
+EOF                 = ? end of input ? ;
+
+(* Any Unicode character *)
+any_char            = ? any unicode character ? ;
+
+(* ============================================================== *)
+(*                   INDENTATION CONTROL                           *)
+(* These are semantic actions, not syntactic rules.                *)
+(* They track indentation state during parsing.                    *)
+(* ============================================================== *)
+
+(* Set base indentation from first content line *)
+(* Action: if base_indentation is null, set it to current spaces *)
+SET_BASE_INDENTATION = { " " } ;
+
+(* Push new indentation level if deeper than current *)
+(* Condition: normalized_indent > current_indentation *)
+(* Action: push normalized_indent onto indentation_stack *)
+PUSH_INDENTATION    = { " " } ;
+
+(* Verify current line's indentation is valid *)
+(* Condition: normalized_indent >= current_indentation *)
+CHECK_INDENTATION   = { " " } ;
+
+(* ============================================================== *)
+(*                      EBNF NOTATION LEGEND                       *)
+(* ============================================================== *)
+(*
+   =           definition
+   ,           concatenation (sequence)
+   |           alternation (choice)
+   { ... }     repetition (zero or more)
+   { ... }-    repetition (one or more)
+   [ ... ]     optional (zero or one)
+   ( ... )     grouping
+   " ... "     terminal string (literal)
+   ' ... '     terminal string (literal, alternative)
+   (* ... *)   comment
+   ? ... ?     special sequence (prose description)
+   -           exception (set difference)
+   ;           rule terminator
+*)

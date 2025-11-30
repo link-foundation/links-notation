@@ -1,0 +1,110 @@
+(grammar: links-notation
+  (version: 0.12.0)
+  (description: "Links Notation (Lino) grammar expressed in links-notation format")
+
+  (document:
+    (alternative:
+      (sequence skip_empty_lines links whitespace EOF)
+      (sequence whitespace EOF)))
+
+  (skip_empty_lines:
+    (zero_or_more:
+      (sequence horizontal_whitespace newline)))
+
+  (links:
+    (sequence first_line (zero_or_more line)))
+
+  (first_line:
+    (sequence SET_BASE_INDENTATION element))
+
+  (line:
+    (sequence CHECK_INDENTATION element))
+
+  (element:
+    (alternative:
+      (sequence any_link PUSH_INDENTATION links)
+      any_link))
+
+  (any_link:
+    (alternative:
+      (sequence multiline_any_link eol)
+      indented_id_link
+      single_line_any_link))
+
+  (multiline_any_link:
+    (alternative multiline_value_link multiline_link))
+
+  (single_line_any_link:
+    (alternative:
+      (sequence single_line_link eol)
+      (sequence single_line_value_link eol)))
+
+  (multiline_link:
+    (sequence "(" whitespace reference whitespace ":" multiline_values whitespace ")"))
+
+  (multiline_value_link:
+    (sequence "(" multiline_values whitespace ")"))
+
+  (multiline_values:
+    (sequence whitespace (zero_or_more (sequence reference_or_link whitespace))))
+
+  (single_line_link:
+    (sequence horizontal_whitespace reference horizontal_whitespace ":" single_line_values))
+
+  (single_line_value_link:
+    single_line_values)
+
+  (single_line_values:
+    (one_or_more (sequence horizontal_whitespace reference_or_link)))
+
+  (indented_id_link:
+    (sequence reference horizontal_whitespace ":" eol))
+
+  (reference_or_link:
+    (alternative multiline_any_link reference))
+
+  (reference:
+    (alternative double_quoted_reference single_quoted_reference simple_reference))
+
+  (simple_reference:
+    (one_or_more reference_symbol))
+
+  (double_quoted_reference:
+    (sequence "\"" (zero_or_more (not "\"")) "\""))
+
+  (single_quoted_reference:
+    (sequence "'" (zero_or_more (not "'")) "'"))
+
+  (reference_symbol:
+    (not (alternative whitespace_char "(" ":" ")")))
+
+  (whitespace_char:
+    (alternative " " "\t" "\n" "\r"))
+
+  (horizontal_whitespace:
+    (zero_or_more (alternative " " "\t")))
+
+  (whitespace:
+    (zero_or_more whitespace_char))
+
+  (newline:
+    (alternative "\r\n" "\n" "\r"))
+
+  (eol:
+    (sequence horizontal_whitespace (alternative newline EOF)))
+
+  (meta_operators:
+    (description: "EBNF operators expressed as links")
+    (sequence: "Concatenation - elements must appear in order")
+    (alternative: "Choice - one of the elements must match")
+    (zero_or_more: "Repetition - zero or more occurrences")
+    (one_or_more: "Repetition - one or more occurrences")
+    (optional: "Optional - zero or one occurrence")
+    (not: "Negation - character class exclusion"))
+
+  (indentation_control:
+    (description: "Semantic actions for indentation tracking")
+    (SET_BASE_INDENTATION: "Sets base indentation from first content line")
+    (PUSH_INDENTATION: "Pushes new indentation level when deeper")
+    (CHECK_INDENTATION: "Verifies indentation is valid for context")
+    (POP_INDENTATION: "Restores previous indentation level")))
