@@ -409,7 +409,14 @@ export function formatLinks(links, lessParentheses = false) {
     if (options.groupConsecutive) {
       linksToFormat = _groupConsecutiveLinks(links);
     }
-    return linksToFormat.map(link => link.format(options)).join('\n');
+    let result = linksToFormat.map(link => link.format(options)).join('\n');
+
+    // Apply compact formatting if enabled
+    if (options.compactSymbols && typeof options.compactOutput === 'function') {
+      result = options.compactOutput(result);
+    }
+
+    return result;
   }
 
   // Backward compatibility with boolean parameter

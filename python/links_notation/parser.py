@@ -7,6 +7,7 @@ converting text into structured Link objects.
 
 from typing import List, Optional, Dict, Any
 from .link import Link
+from .tokenizer import Tokenizer, DEFAULT_PUNCTUATION_SYMBOLS, DEFAULT_MATH_SYMBOLS
 
 
 class ParseError(Exception):
@@ -20,13 +21,23 @@ class Parser:
     Handles both inline and indented syntax for defining links.
     """
 
-    def __init__(self, max_input_size: int = 10 * 1024 * 1024, max_depth: int = 1000):
+    def __init__(
+        self,
+        max_input_size: int = 10 * 1024 * 1024,
+        max_depth: int = 1000,
+        tokenize_symbols: bool = True,
+        punctuation_symbols: Optional[List[str]] = None,
+        math_symbols: Optional[List[str]] = None
+    ):
         """
         Initialize the parser.
 
         Args:
             max_input_size: Maximum input size in bytes (default: 10MB)
             max_depth: Maximum nesting depth (default: 1000)
+            tokenize_symbols: If True, tokenize punctuation and math symbols (default: True)
+            punctuation_symbols: Custom punctuation symbols to tokenize
+            math_symbols: Custom math symbols to tokenize
         """
         self.indentation_stack = [0]
         self.pos = 0
@@ -35,6 +46,11 @@ class Parser:
         self.base_indentation = None
         self.max_input_size = max_input_size
         self.max_depth = max_depth
+        self.tokenizer = Tokenizer(
+            punctuation_symbols=punctuation_symbols,
+            math_symbols=math_symbols,
+            enabled=tokenize_symbols
+        )
 
     def parse(self, input_text: str) -> List[Link]:
         """
@@ -63,9 +79,12 @@ class Parser:
             if not input_text or not input_text.strip():
                 return []
 
-            self.text = input_text
+            # Apply tokenization to separate punctuation and math symbols
+            tokenized_text = self.tokenizer.tokenize(input_text)
+
+            self.text = tokenized_text
             # Use smart line splitting that respects quoted strings
-            self.lines = self._split_lines_respecting_quotes(input_text)
+            self.lines = self._split_lines_respecting_quotes(tokenized_text)
             self.pos = 0
             self.indentation_stack = [0]
             self.base_indentation = None

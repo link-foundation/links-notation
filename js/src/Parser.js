@@ -1,16 +1,34 @@
 import { Link } from './Link.js';
 import * as parserModule from './parser-generated.js';
 
+/**
+ * Default punctuation symbols that should be tokenized as separate references.
+ * These are separated from adjacent characters during parsing.
+ */
+export const DEFAULT_PUNCTUATION_SYMBOLS = [',', '.', ';', '!', '?'];
+
+/**
+ * Default math symbols that should be tokenized as separate references.
+ * These are separated from adjacent characters during parsing.
+ */
+export const DEFAULT_MATH_SYMBOLS = ['+', '-', '*', '/', '=', '<', '>', '%', '^'];
+
 export class Parser {
   /**
    * Create a new Parser instance
    * @param {Object} options - Parser options
    * @param {number} options.maxInputSize - Maximum input size in bytes (default: 10MB)
    * @param {number} options.maxDepth - Maximum nesting depth (default: 1000)
+   * @param {boolean} options.tokenizeSymbols - If true, tokenize punctuation and math symbols (default: true)
+   * @param {string[]} options.punctuationSymbols - Custom punctuation symbols to tokenize
+   * @param {string[]} options.mathSymbols - Custom math symbols to tokenize
    */
   constructor(options = {}) {
     this.maxInputSize = options.maxInputSize || 10 * 1024 * 1024; // 10MB default
     this.maxDepth = options.maxDepth || 1000;
+    this.tokenizeSymbols = options.tokenizeSymbols !== false; // default true
+    this.punctuationSymbols = options.punctuationSymbols || DEFAULT_PUNCTUATION_SYMBOLS;
+    this.mathSymbols = options.mathSymbols || DEFAULT_MATH_SYMBOLS;
   }
 
   /**
@@ -30,7 +48,9 @@ export class Parser {
     }
 
     try {
-      const rawResult = parserModule.parse(input);
+      // Apply tokenization if enabled
+      const processedInput = this.tokenizeSymbols ? this.tokenize(input) : input;
+      const rawResult = parserModule.parse(processedInput);
       return this.transformResult(rawResult);
     } catch (error) {
       // Preserve original error information
@@ -39,6 +59,120 @@ export class Parser {
       parseError.location = error.location;
       throw parseError;
     }
+  }
+
+  /**
+   * Check if a character is a letter (alphabetic)
+   * @param {string} char - Single character to check
+   * @returns {boolean} True if the character is a letter
+   */
+  isLetter(char) {
+    if (!char) return false;
+    return /[a-zA-Z]/.test(char);
+  }
+
+  /**
+   * Check if a character is a digit
+   * @param {string} char - Single character to check
+   * @returns {boolean} True if the character is a digit
+   */
+  isDigit(char) {
+    if (!char) return false;
+    return /[0-9]/.test(char);
+  }
+
+  /**
+   * Tokenize input by separating punctuation and math symbols from adjacent characters.
+   * Quoted strings are preserved as-is.
+   * Math symbols are only tokenized when between digits (e.g., "1+1" → "1 + 1").
+   * Punctuation is only tokenized when following an alphanumeric character (e.g., "hello," → "hello ,").
+   * @param {string} input - The input text to tokenize
+   * @returns {string} Tokenized input with symbols separated by spaces
+   */
+  tokenize(input) {
+    const punctuationSet = new Set(this.punctuationSymbols);
+    const mathSet = new Set(this.mathSymbols);
+    let result = '';
+    let inSingleQuote = false;
+    let inDoubleQuote = false;
+    let i = 0;
+
+    while (i < input.length) {
+      const char = input[i];
+      const prevChar = i > 0 ? input[i - 1] : '';
+      const nextChar = i + 1 < input.length ? input[i + 1] : '';
+
+      // Handle quote toggling
+      if (char === '"' && !inSingleQuote) {
+        inDoubleQuote = !inDoubleQuote;
+        result += char;
+        i++;
+        continue;
+      }
+      if (char === "'" && !inDoubleQuote) {
+        inSingleQuote = !inSingleQuote;
+        result += char;
+        i++;
+        continue;
+      }
+
+      // If inside quotes, preserve as-is
+      if (inSingleQuote || inDoubleQuote) {
+        result += char;
+        i++;
+        continue;
+      }
+
+      // Check if current char is a punctuation symbol
+      if (punctuationSet.has(char)) {
+        // Only tokenize punctuation when it follows an alphanumeric character
+        // This handles "hello," → "hello ," but not standalone punctuation
+        const prevIsAlphanumeric = /[a-zA-Z0-9]/.test(prevChar);
+
+        if (prevIsAlphanumeric) {
+          // Add space before
+          if (result.length > 0 && !result.endsWith(' ') && !result.endsWith('\t') && !result.endsWith('\n')) {
+            result += ' ';
+          }
+          result += char;
+          // Add space after if next char is alphanumeric (not whitespace or more punctuation)
+          if (nextChar && /[a-zA-Z0-9]/.test(nextChar)) {
+            result += ' ';
+          }
+        } else {
+          result += char;
+        }
+        i++;
+        continue;
+      }
+
+      // Check if current char is a math symbol
+      if (mathSet.has(char)) {
+        // Only tokenize math symbols when BOTH sides are digits
+        // This handles "1+1" → "1 + 1" but preserves "Jean-Luc", "a-b", "bmFtZQ=="
+        const prevIsDigit = this.isDigit(prevChar);
+        const nextIsDigit = this.isDigit(nextChar);
+
+        if (prevIsDigit && nextIsDigit) {
+          // Tokenize: both sides are digits
+          if (result.length > 0 && !result.endsWith(' ') && !result.endsWith('\t') && !result.endsWith('\n')) {
+            result += ' ';
+          }
+          result += char;
+          result += ' ';
+        } else {
+          // Don't tokenize: preserve as part of identifier
+          result += char;
+        }
+        i++;
+        continue;
+      }
+
+      result += char;
+      i++;
+    }
+
+    return result;
   }
 
   transformResult(rawResult) {
