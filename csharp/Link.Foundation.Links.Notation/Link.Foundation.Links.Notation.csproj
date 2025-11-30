@@ -4,7 +4,7 @@
     <Description>Link.Foundation's Platform.Protocols.Lino Class Library</Description>
     <Copyright>Konstantin Diachenko</Copyright>
     <AssemblyTitle>Link.Foundation.Links.Notation</AssemblyTitle>
-    <VersionPrefix>0.12.0</VersionPrefix>
+    <VersionPrefix>0.13.0</VersionPrefix>
     <Authors>Konstantin Diachenko</Authors>
     <TargetFramework>net8</TargetFramework>
     <PackageId>Link.Foundation.Links.Notation</PackageId>

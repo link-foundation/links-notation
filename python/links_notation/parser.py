@@ -95,6 +95,7 @@ class Parser:
         current_line = ""
         in_single = False
         in_double = False
+        in_backtick = False
         paren_depth = 0
         i = 0
 
@@ -102,20 +103,23 @@ class Parser:
             char = text[i]
 
             # Handle quote toggling
-            if char == '"' and not in_single:
+            if char == '"' and not in_single and not in_backtick:
                 in_double = not in_double
                 current_line += char
-            elif char == "'" and not in_double:
+            elif char == "'" and not in_double and not in_backtick:
                 in_single = not in_single
                 current_line += char
-            elif char == '(' and not in_single and not in_double:
+            elif char == "`" and not in_single and not in_double:
+                in_backtick = not in_backtick
+                current_line += char
+            elif char == '(' and not in_single and not in_double and not in_backtick:
                 paren_depth += 1
                 current_line += char
-            elif char == ')' and not in_single and not in_double:
+            elif char == ')' and not in_single and not in_double and not in_backtick:
                 paren_depth -= 1
                 current_line += char
             elif char == '\n':
-                if in_single or in_double or paren_depth > 0:
+                if in_single or in_double or in_backtick or paren_depth > 0:
                     # Inside quotes or unclosed parens: preserve the newline
                     current_line += char
                 else:
@@ -253,18 +257,21 @@ class Parser:
         """
         in_single = False
         in_double = False
+        in_backtick = False
         paren_depth = 0
 
         for i, char in enumerate(text):
-            if char == "'" and not in_double:
+            if char == "'" and not in_double and not in_backtick:
                 in_single = not in_single
-            elif char == '"' and not in_single:
+            elif char == '"' and not in_single and not in_backtick:
                 in_double = not in_double
-            elif char == '(' and not in_single and not in_double:
+            elif char == '`' and not in_single and not in_double:
+                in_backtick = not in_backtick
+            elif char == '(' and not in_single and not in_double and not in_backtick:
                 paren_depth += 1
-            elif char == ')' and not in_single and not in_double:
+            elif char == ')' and not in_single and not in_double and not in_backtick:
                 paren_depth -= 1
-            elif char == ':' and not in_single and not in_double and paren_depth == 0:
+            elif char == ':' and not in_single and not in_double and not in_backtick and paren_depth == 0:
                 # Only return colon if it's outside quotes AND at parenthesis depth 0
                 return i
 
@@ -276,42 +283,106 @@ class Parser:
             return []
 
         values = []
-        current = ""
-        in_single = False
-        in_double = False
-        paren_depth = 0
-
         i = 0
+
         while i < len(text):
-            char = text[i]
+            # Skip all whitespace (space, tab, newline, carriage return)
+            while i < len(text) and text[i] in ' \t\n\r':
+                i += 1
+            if i >= len(text):
+                break
 
-            if char == "'" and not in_double:
-                in_single = not in_single
-                current += char
-            elif char == '"' and not in_single:
-                in_double = not in_double
-                current += char
-            elif char == '(' and not in_single and not in_double:
-                paren_depth += 1
-                current += char
-            elif char == ')' and not in_single and not in_double:
-                paren_depth -= 1
-                current += char
-            elif char == ' ' and not in_single and not in_double and paren_depth == 0:
-                # End of current value
-                if current.strip():
-                    values.append(self._parse_value(current.strip()))
-                current = ""
+            # Try to extract the next value
+            value_end, value_text = self._extract_next_value(text, i)
+            if value_text and value_text.strip():
+                values.append(self._parse_value(value_text))
+            if value_end == i:
+                # No progress made - skip this character to avoid infinite loop
+                i += 1
             else:
-                current += char
-
-            i += 1
-
-        # Add last value
-        if current.strip():
-            values.append(self._parse_value(current.strip()))
+                i = value_end
 
         return values
+
+    def _extract_next_value(self, text: str, start: int) -> tuple:
+        """
+        Extract the next value from text starting at start position.
+        Returns (end_position, value_text).
+        """
+        if start >= len(text):
+            return (start, "")
+
+        # Check if this starts with a multi-quote string
+        for quote_count in range(5, 0, -1):
+            for quote_char in ['"', "'", '`']:
+                quote_seq = quote_char * quote_count
+                if text[start:].startswith(quote_seq):
+                    # Parse this multi-quote string
+                    remaining = text[start:]
+                    open_close = quote_seq
+                    escape_seq = quote_char * (quote_count * 2)
+
+                    pos = len(open_close)
+                    while pos < len(remaining):
+                        # Check for escape sequence (2*N quotes)
+                        if remaining[pos:].startswith(escape_seq):
+                            pos += len(escape_seq)
+                            continue
+                        # Check for closing quotes
+                        if remaining[pos:].startswith(open_close):
+                            after_close_pos = pos + len(open_close)
+                            # Make sure this is exactly N quotes (not more)
+                            if after_close_pos >= len(remaining) or remaining[after_close_pos] != quote_char:
+                                # Found the end
+                                return (start + after_close_pos, remaining[:after_close_pos])
+                        pos += 1
+
+                    # No closing found, treat as regular text
+                    break
+
+        # Check if this starts with a parenthesized expression
+        if text[start] == '(':
+            paren_depth = 1
+            in_single = False
+            in_double = False
+            in_backtick = False
+            i = start + 1
+
+            while i < len(text) and paren_depth > 0:
+                char = text[i]
+                if char == "'" and not in_double and not in_backtick:
+                    in_single = not in_single
+                elif char == '"' and not in_single and not in_backtick:
+                    in_double = not in_double
+                elif char == '`' and not in_single and not in_double:
+                    in_backtick = not in_backtick
+                elif char == '(' and not in_single and not in_double and not in_backtick:
+                    paren_depth += 1
+                elif char == ')' and not in_single and not in_double and not in_backtick:
+                    paren_depth -= 1
+                i += 1
+
+            return (i, text[start:i])
+
+        # Regular value - read until space or end
+        in_single = False
+        in_double = False
+        in_backtick = False
+        i = start
+
+        while i < len(text):
+            char = text[i]
+            if char == "'" and not in_double and not in_backtick:
+                in_single = not in_single
+            elif char == '"' and not in_single and not in_backtick:
+                in_double = not in_double
+            elif char == '`' and not in_single and not in_double:
+                in_backtick = not in_backtick
+            elif char == ' ' and not in_single and not in_double and not in_backtick:
+                break
+            i += 1
+
+        return (i, text[start:i])
 
     def _parse_value(self, value: str) -> Dict:
         """Parse a single value (could be a reference or nested link)."""
@@ -325,19 +396,64 @@ class Parser:
         return {'id': ref}
 
     def _extract_reference(self, text: str) -> str:
-        """Extract reference, handling quoted strings."""
+        """Extract reference, handling quoted strings with escaping support."""
         text = text.strip()
 
-        # Double quoted
-        if text.startswith('"') and text.endswith('"'):
-            return text[1:-1]
-
-        # Single quoted
-        if text.startswith("'") and text.endswith("'"):
-            return text[1:-1]
+        # Try multi-quote strings (check longer sequences first: 5, 4, 3, 2, 1)
+        for quote_count in range(5, 0, -1):
+            for quote_char in ['"', "'", '`']:
+                quote_seq = quote_char * quote_count
+                if text.startswith(quote_seq) and len(text) > len(quote_seq):
+                    # Try to parse this multi-quote string
+                    result = self._parse_multi_quote_string(text, quote_char, quote_count)
+                    if result is not None:
+                        return result
 
         # Unquoted
         return text
+
+    def _parse_multi_quote_string(self, text: str, quote_char: str, quote_count: int) -> Optional[str]:
+        """
+        Parse a multi-quote string.
+
+        For N quotes: opening = N quotes, closing = N quotes, escape = 2*N quotes -> N quotes
+        """
+        open_close = quote_char * quote_count
+        escape_seq = quote_char * (quote_count * 2)
+        escape_val = quote_char * quote_count
+
+        # Check for opening quotes
+        if not text.startswith(open_close):
+            return None
+
+        remaining = text[len(open_close):]
+        content = ""
+
+        while remaining:
+            # Check for escape sequence (2*N quotes)
+            if remaining.startswith(escape_seq):
+                content += escape_val
+                remaining = remaining[len(escape_seq):]
+                continue
+
+            # Check for closing quotes (N quotes not followed by more quotes)
+            if remaining.startswith(open_close):
+                after_close = remaining[len(open_close):]
+                # Make sure this is exactly N quotes (not more)
+                if not after_close or not after_close.startswith(quote_char):
+                    # Closing found - but only if we consumed the entire text
+                    if not after_close.strip():
+                        return content
+                    else:
+                        # There's more text after closing, may not be valid
+                        return content
+
+            # Take the next character
+            content += remaining[0]
+            remaining = remaining[1:]
+
+        # No closing quotes found
+        return None
 
     def _transform_result(self, raw_result: List[Dict]) -> List[Link]:
         """Transform raw parse result into Link objects."""

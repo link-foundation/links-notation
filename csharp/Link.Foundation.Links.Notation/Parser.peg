@@ -21,10 +21,69 @@ singleLineValueLink <Link<string>> = v:singleLineValues { new Link<string>(v) }
 multiLineValueLink <Link<string>> = "(" v:multiLineValues _ ")" { new Link<string>(v) }
 indentedIdLink <Link<string>> = id:(reference) __ ":" eol { new Link<string>(id) }
 
-reference <string> = doubleQuotedReference / singleQuotedReference / simpleReference
+reference <string> = quintupleQuotedReference / quadrupleQuotedReference / tripleQuotedReference / doubleQuotedReference / singleQuotedReference / simpleReference
+
 simpleReference <string> = "" referenceSymbol+
-doubleQuotedReference <string> = '"' r:([^"]+) '"' { string.Join("", r) }
-singleQuotedReference <string> = "'" r:([^']+) "'" { string.Join("", r) }
+
+// Single quotes (1 quote char) with escaping via doubling
+singleQuotedReference <string> = doubleQuote1 / singleQuote1 / backtickQuote1
+
+doubleQuote1 <string> = '"' r:doubleQuote1Content* '"' { string.Join("", r) }
+doubleQuote1Content <string> = '""' { "\"" } / c:[^"] { c.ToString() }
+
+singleQuote1 <string> = "'" r:singleQuote1Content* "'" { string.Join("", r) }
+singleQuote1Content <string> = "''" { "'" } / c:[^'] { c.ToString() }
+
+backtickQuote1 <string> = '`' r:backtickQuote1Content* '`' { string.Join("", r) }
+backtickQuote1Content <string> = '``' { "`" } / c:[^`] { c.ToString() }
+
+// Double quotes (2 quote chars)
+doubleQuotedReference <string> = doubleQuote2 / singleQuote2 / backtickQuote2
+
+doubleQuote2 <string> = '""' r:doubleQuote2Content* '""' { string.Join("", r) }
+doubleQuote2Content <string> = '""""' { "\"\"" } / !'""' c:. { c.ToString() }
+
+singleQuote2 <string> = "''" r:singleQuote2Content* "''" { string.Join("", r) }
+singleQuote2Content <string> = "''''" { "''" } / !"''" c:. { c.ToString() }
+
+backtickQuote2 <string> = '``' r:backtickQuote2Content* '``' { string.Join("", r) }
+backtickQuote2Content <string> = '````' { "``" } / !'``' c:. { c.ToString() }
+
+// Triple quotes (3 quote chars)
+tripleQuotedReference <string> = doubleQuote3 / singleQuote3 / backtickQuote3
+
+doubleQuote3 <string> = '"""' r:doubleQuote3Content* '"""' { string.Join("", r) }
+doubleQuote3Content <string> = '""""""' { "\"\"\"" } / !'"""' c:. { c.ToString() }
+
+singleQuote3 <string> = "'''" r:singleQuote3Content* "'''" { string.Join("", r) }
+singleQuote3Content <string> = "''''''" { "'''" } / !"'''" c:. { c.ToString() }
+
+backtickQuote3 <string> = '```' r:backtickQuote3Content* '```' { string.Join("", r) }
+backtickQuote3Content <string> = '``````' { "```" } / !'```' c:. { c.ToString() }
+
+// Quadruple quotes (4 quote chars)
+quadrupleQuotedReference <string> = doubleQuote4 / singleQuote4 / backtickQuote4
+
+doubleQuote4 <string> = '""""' r:doubleQuote4Content* '""""' { string.Join("", r) }
+doubleQuote4Content <string> = '""""""""' { "\"\"\"\"" } / !'""""' c:. { c.ToString() }
+
+singleQuote4 <string> = "''''" r:singleQuote4Content* "''''" { string.Join("", r) }
+singleQuote4Content <string> = "''''''''''" { "''''" } / !"''''" c:. { c.ToString() }
+
+backtickQuote4 <string> = '````' r:backtickQuote4Content* '````' { string.Join("", r) }
+backtickQuote4Content <string> = '````````' { "````" } / !'````' c:. { c.ToString() }
+
+// Quintuple quotes (5 quote chars)
+quintupleQuotedReference <string> = doubleQuote5 / singleQuote5 / backtickQuote5
+
+doubleQuote5 <string> = '"""""' r:doubleQuote5Content* '"""""' { string.Join("", r) }
+doubleQuote5Content <string> = '""""""""""' { "\"\"\"\"\"" } / !'"""""' c:. { c.ToString() }
+
+singleQuote5 <string> = "'''''" r:singleQuote5Content* "'''''" { string.Join("", r) }
+singleQuote5Content <string> = "''''''''''" { "'''''" } / !"'''''" c:. { c.ToString() }
+
+backtickQuote5 <string> = '`````' r:backtickQuote5Content* '`````' { string.Join("", r) }
+backtickQuote5Content <string> = '``````````' { "`````" } / !'`````' c:. { c.ToString() }
 SET_BASE_INDENTATION = spaces:" "* #{ if ((int)state["BaseIndentation"] == -1) state["BaseIndentation"] = spaces.Count; }
 PUSH_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] > (int)state["IndentationStack"].Peek() } #{ state["IndentationStack"].Push((int)state["NormalizedIndent"]); }
 POP_INDENTATION = #{ state["IndentationStack"].Pop(); }

@@ -34,6 +34,25 @@
   function getCurrentIndentation() {
     return indentationStack[indentationStack.length - 1];
   }
+
+  // Process escape sequences for multi-quote strings
+  // For N quotes: 2*N consecutive quotes become N quotes
+  function processEscapes(content, quoteChar, quoteCount) {
+    const escapeSequence = quoteChar.repeat(quoteCount * 2);
+    const replacement = quoteChar.repeat(quoteCount);
+    let result = '';
+    let i = 0;
+    while (i < content.length) {
+      if (content.substr(i, escapeSequence.length) === escapeSequence) {
+        result += replacement;
+        i += escapeSequence.length;
+      } else {
+        result += content[i];
+        i++;
+      }
+    }
+    return result;
+  }
 }
 
 document = &{ indentationStack = [0]; baseIndentation = null; return true; } skipEmptyLines links:links _ eof { return links; }
@@ -79,13 +98,73 @@ multiLineValueLink = "(" v:multiLineValues _ ")" { return { values: v }; }
 
 indentedIdLink = id:reference __ ":" eol { return { id: id, values: [] }; }
 
-reference = doubleQuotedReference / singleQuotedReference / simpleReference 
+// Reference can be quoted (with 1-5+ quotes) or simple unquoted
+reference = quotedReference / simpleReference
 
 simpleReference = chars:referenceSymbol+ { return chars.join(''); }
 
-doubleQuotedReference = '"' r:[^"]+ '"' { return r.join(''); }
+// Quoted references - try longer quote sequences first (greedy matching)
+quotedReference = quintupleQuotedReference / quadrupleQuotedReference / tripleQuotedReference / doubleQuotedReference / singleQuotedReference
 
-singleQuotedReference = "'" r:[^']+ "'" { return r.join(''); }
+// Single quote (1 quote char)
+singleQuotedReference = doubleQuote1 / singleQuote1 / backtickQuote1
+
+doubleQuote1 = '"' r:doubleQuote1Content* '"' { return r.join(''); }
+doubleQuote1Content = '""' { return '"'; } / [^"]
+
+singleQuote1 = "'" r:singleQuote1Content* "'" { return r.join(''); }
+singleQuote1Content = "''" { return "'"; } / [^']
+
+backtickQuote1 = '`' r:backtickQuote1Content* '`' { return r.join(''); }
+backtickQuote1Content = '``' { return '`'; } / [^`]
+
+// Double quotes (2 quote chars)
+doubleQuotedReference = doubleQuote2 / singleQuote2 / backtickQuote2
+
+doubleQuote2 = '""' r:doubleQuote2Content* '""' { return r.join(''); }
+doubleQuote2Content = '""""' { return '""'; } / !('""') c:. { return c; }
+
+singleQuote2 = "''" r:singleQuote2Content* "''" { return r.join(''); }
+singleQuote2Content = "''''" { return "''"; } / !("''") c:. { return c; }
+
+backtickQuote2 = '``' r:backtickQuote2Content* '``' { return r.join(''); }
+backtickQuote2Content = '````' { return '``'; } / !('``') c:. { return c; }
+
+// Triple quotes (3 quote chars)
+tripleQuotedReference = doubleQuote3 / singleQuote3 / backtickQuote3
+
+doubleQuote3 = '"""' r:doubleQuote3Content* '"""' { return r.join(''); }
+doubleQuote3Content = '""""""' { return '"""'; } / !('"""') c:. { return c; }
+
+singleQuote3 = "'''" r:singleQuote3Content* "'''" { return r.join(''); }
+singleQuote3Content = "''''''" { return "'''"; } / !("'''") c:. { return c; }
+
+backtickQuote3 = '```' r:backtickQuote3Content* '```' { return r.join(''); }
+backtickQuote3Content = '``````' { return '```'; } / !('```') c:. { return c; }
+
+// Quadruple quotes (4 quote chars)
+quadrupleQuotedReference = doubleQuote4 / singleQuote4 / backtickQuote4
+
+doubleQuote4 = '""""' r:doubleQuote4Content* '""""' { return r.join(''); }
+doubleQuote4Content = '""""""""' { return '""""'; } / !('""""') c:. { return c; }
+
+singleQuote4 = "''''" r:singleQuote4Content* "''''" { return r.join(''); }
+singleQuote4Content = "''''''''''" { return "''''"; } / !("''''") c:. { return c; }
+
+backtickQuote4 = '````' r:backtickQuote4Content* '````' { return r.join(''); }
+backtickQuote4Content = '````````' { return '````'; } / !('````') c:. { return c; }
+
+// Quintuple quotes (5 quote chars)
+quintupleQuotedReference = doubleQuote5 / singleQuote5 / backtickQuote5
+
+doubleQuote5 = '"""""' r:doubleQuote5Content* '"""""' { return r.join(''); }
+doubleQuote5Content = '""""""""""' { return '"""""'; } / !('"""""') c:. { return c; }
+
+singleQuote5 = "'''''" r:singleQuote5Content* "'''''" { return r.join(''); }
+singleQuote5Content = "''''''''''" { return "'''''"; } / !("'''''") c:. { return c; }
+
+backtickQuote5 = '`````' r:backtickQuote5Content* '`````' { return r.join(''); }
+backtickQuote5Content = '``````````' { return '`````'; } / !('`````') c:. { return c; }
 
 SET_BASE_INDENTATION = spaces:" "* { setBaseIndentation(spaces); }
 

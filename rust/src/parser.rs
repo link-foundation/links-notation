@@ -1,11 +1,11 @@
 use nom::{
     IResult,
     branch::alt,
-    bytes::complete::{take_while, take_while1, is_not},
+    bytes::complete::{take_while, take_while1},
     character::complete::{char, line_ending},
     combinator::eof,
     multi::{many0, many1},
-    sequence::{preceded, terminated, delimited},
+    sequence::{preceded, terminated},
     Parser,
 };
 use std::cell::RefCell;
@@ -140,30 +140,128 @@ fn simple_reference(input: &str) -> IResult<&str, String> {
         .parse(input)
 }
 
-fn double_quoted_reference(input: &str) -> IResult<&str, String> {
-    delimited(
-        char('"'),
-        is_not("\""),
-        char('"')
-    )
-    .map(|s: &str| s.to_string())
-    .parse(input)
+/// Parse a multi-quote string with a given quote character and count.
+/// For N quotes: opening = N quotes, closing = N quotes, escape = 2*N quotes -> N quotes
+fn parse_multi_quote_string(input: &str, quote_char: char, quote_count: usize) -> IResult<&str, String> {
+    let open_close = quote_char.to_string().repeat(quote_count);
+    let escape_seq = quote_char.to_string().repeat(quote_count * 2);
+    let escape_val = quote_char.to_string().repeat(quote_count);
+
+    // Check for opening quotes
+    if !input.starts_with(&open_close) {
+        return Err(nom::Err::Error(nom::error::Error::new(input, nom::error::ErrorKind::Tag)));
+    }
+
+    let mut remaining = &input[open_close.len()..];
+    let mut content = String::new();
+
+    loop {
+        if remaining.is_empty() {
+            return Err(nom::Err::Error(nom::error::Error::new(input, nom::error::ErrorKind::Tag)));
+        }
+
+        // Check for escape sequence (2*N quotes)
+        if remaining.starts_with(&escape_seq) {
+            content.push_str(&escape_val);
+            remaining = &remaining[escape_seq.len()..];
+            continue;
+        }
+
+        // Check for closing quotes (N quotes not followed by more quotes)
+        if remaining.starts_with(&open_close) {
+            let after_close = &remaining[open_close.len()..];
+            // Make sure this is exactly N quotes (not more)
+            if after_close.is_empty() || !after_close.starts_with(quote_char) {
+                return Ok((after_close, content));
+            }
+        }
+
+        // Take the next character
+        let c = remaining.chars().next().unwrap();
+        content.push(c);
+        remaining = &remaining[c.len_utf8()..];
+    }
 }
 
-fn single_quoted_reference(input: &str) -> IResult<&str, String> {
-    delimited(
-        char('\''),
-        is_not("'"),
-        char('\'')
-    )
-    .map(|s: &str| s.to_string())
-    .parse(input)
+// Single quote char (1 quote)
+fn double_quote_1(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '"', 1)
+}
+
+fn single_quote_1(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '\'', 1)
+}
+
+fn backtick_quote_1(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '`', 1)
+}
+
+// Double quote chars (2 quotes)
+fn double_quote_2(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '"', 2)
+}
+
+fn single_quote_2(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '\'', 2)
+}
+
+fn backtick_quote_2(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '`', 2)
+}
+
+// Triple quote chars (3 quotes)
+fn double_quote_3(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '"', 3)
+}
+
+fn single_quote_3(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '\'', 3)
+}
+
+fn backtick_quote_3(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '`', 3)
+}
+
+// Quadruple quote chars (4 quotes)
+fn double_quote_4(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '"', 4)
+}
+
+fn single_quote_4(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '\'', 4)
+}
+
+fn backtick_quote_4(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '`', 4)
+}
+
+// Quintuple quote chars (5 quotes)
+fn double_quote_5(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '"', 5)
+}
+
+fn single_quote_5(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '\'', 5)
+}
+
+fn backtick_quote_5(input: &str) -> IResult<&str, String> {
+    parse_multi_quote_string(input, '`', 5)
 }
 
 fn reference(input: &str) -> IResult<&str, String> {
+    // Try longer quote sequences first (greedy matching)
     alt((
-        double_quoted_reference,
-        single_quoted_reference,
+        // 5 quotes
+        double_quote_5, single_quote_5, backtick_quote_5,
+        // 4 quotes
+        double_quote_4, single_quote_4, backtick_quote_4,
+        // 3 quotes
+        double_quote_3, single_quote_3, backtick_quote_3,
+        // 2 quotes
+        double_quote_2, single_quote_2, backtick_quote_2,
+        // 1 quote
+        double_quote_1, single_quote_1, backtick_quote_1,
+        // Simple unquoted
         simple_reference,
     )).parse(input)
 }
