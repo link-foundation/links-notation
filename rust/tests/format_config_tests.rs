@@ -41,9 +41,7 @@ fn format_with_max_inline_refs() {
 #[test]
 fn format_with_consecutive_grouping() {
     // Create a config with consecutive grouping enabled
-    let config = FormatConfig::builder()
-        .group_consecutive(true)
-        .build();
+    let config = FormatConfig::builder().group_consecutive(true).build();
 
     // Verify config is set correctly
     assert_eq!(config.group_consecutive, true);
@@ -63,9 +61,7 @@ fn format_config_custom_indent() {
 
 #[test]
 fn format_config_less_parentheses() {
-    let config = FormatConfig::builder()
-        .less_parentheses(true)
-        .build();
+    let config = FormatConfig::builder().less_parentheses(true).build();
 
     assert_eq!(config.less_parentheses, true);
 }
@@ -95,9 +91,7 @@ fn should_indent_by_length() {
 
 #[test]
 fn should_indent_by_ref_count() {
-    let config = FormatConfig::builder()
-        .max_inline_refs(Some(3))
-        .build();
+    let config = FormatConfig::builder().max_inline_refs(Some(3)).build();
 
     assert_eq!(config.should_indent_by_ref_count(2), false);
     assert_eq!(config.should_indent_by_ref_count(3), false);

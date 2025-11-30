@@ -24,7 +24,11 @@ fn link_constructor_with_id_and_values_test() {
         id: Some("parent".to_string()),
         values: values.clone(),
     };
-    if let LiNo::Link { id, values: link_values } = link {
+    if let LiNo::Link {
+        id,
+        values: link_values,
+    } = link
+    {
         assert_eq!(id, Some("parent".to_string()));
         assert_eq!(link_values.len(), 2);
     } else {
@@ -47,10 +51,7 @@ fn link_to_string_with_values_only_test() {
         LiNo::Ref("value1".to_string()),
         LiNo::Ref("value2".to_string()),
     ];
-    let link = LiNo::Link::<String> {
-        id: None,
-        values,
-    };
+    let link = LiNo::Link::<String> { id: None, values };
     assert_eq!(link.to_string(), "(value1 value2)");
 }
 
@@ -81,7 +82,7 @@ fn link_equals_test() {
         id: Some("other".to_string()),
         values: vec![],
     };
-    
+
     assert_eq!(link1, link2);
     assert_ne!(link1, link3);
 }
@@ -95,7 +96,7 @@ fn link_combine_test() {
         id: None,
         values: vec![link1, link2],
     };
-    
+
     if let LiNo::Link { id, values } = combined {
         assert_eq!(id, None);
         assert_eq!(values.len(), 2);
@@ -108,7 +109,7 @@ fn link_combine_test() {
 fn link_escape_reference_simple_test() {
     let ref_simple = LiNo::Ref("test".to_string());
     assert_eq!(ref_simple.to_string(), "test");
-    
+
     let ref_with_nums = LiNo::Ref("test123".to_string());
     assert_eq!(ref_with_nums.to_string(), "test123");
 }
@@ -119,7 +120,7 @@ fn link_escape_reference_with_special_characters_test() {
     // These tests verify basic string handling
     let ref_space = LiNo::Ref("has space".to_string());
     assert_eq!(ref_space.to_string(), "has space");
-    
+
     let ref_colon = LiNo::Ref("has:colon".to_string());
     assert_eq!(ref_colon.to_string(), "has:colon");
 }

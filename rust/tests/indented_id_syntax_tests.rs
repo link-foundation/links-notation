@@ -8,19 +8,22 @@ mod tests {
     fn basic_indented_id_syntax_test() {
         let indented_syntax = "3:\n  papa\n  loves\n  mama";
         let inline_syntax = "(3: papa loves mama)";
-        
+
         let indented_result = parse_lino_to_links(indented_syntax).unwrap();
         let inline_result = parse_lino_to_links(inline_syntax).unwrap();
-        
+
         // Both should produce the same structure when formatted
         assert_eq!(indented_result.len(), 1);
         assert_eq!(inline_result.len(), 1);
-        
+
         println!("Indented result: {:?}", indented_result);
         println!("Inline result: {:?}", inline_result);
-        
+
         // Both should format to similar structure
-        assert_eq!(format!("{}", indented_result[0]), format!("{}", inline_result[0]));
+        assert_eq!(
+            format!("{}", indented_result[0]),
+            format!("{}", inline_result[0])
+        );
     }
 
     #[test]
@@ -127,7 +130,10 @@ mod tests {
 
             assert_eq!(indented_result.len(), inline_result.len());
             // Both should format to the same output
-            assert_eq!(format!("{}", indented_result[0]), format!("{}", inline_result[0]));
+            assert_eq!(
+                format!("{}", indented_result[0]),
+                format!("{}", inline_result[0])
+            );
         }
     }
 }
