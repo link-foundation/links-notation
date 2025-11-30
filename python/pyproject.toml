@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "links-notation"
-version = "0.12.0"
+version = "0.13.0"
 description = "Python implementation of the Links Notation parser"
 readme = "README.md"
 license = {text = "Unlicense"}

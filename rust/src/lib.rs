@@ -1,8 +1,10 @@
 pub mod parser;
 pub mod format_config;
+pub mod tokenizer;
 
 use std::fmt;
 use std::error::Error as StdError;
+pub use tokenizer::{Tokenizer, DEFAULT_PUNCTUATION_SYMBOLS, DEFAULT_MATH_SYMBOLS};
 
 /// Error type for Lino parsing
 #[derive(Debug)]
@@ -210,13 +212,23 @@ fn flatten_link_recursive(link: &parser::Link, parent: Option<&LiNo<String>>, re
     }
 }
 
+/// Parse a Lino document with default tokenization enabled.
+/// This tokenizes punctuation and math symbols as separate references.
 pub fn parse_lino(document: &str) -> Result<LiNo<String>, ParseError> {
+    parse_lino_with_tokenizer(document, &Tokenizer::new())
+}
+
+/// Parse a Lino document with a custom tokenizer.
+pub fn parse_lino_with_tokenizer(document: &str, tokenizer: &Tokenizer) -> Result<LiNo<String>, ParseError> {
     // Handle empty or whitespace-only input by returning empty result
     if document.trim().is_empty() {
         return Ok(LiNo::Link { id: None, values: vec![] });
     }
 
-    match parser::parse_document(document) {
+    // Apply tokenization
+    let tokenized = tokenizer.tokenize(document);
+
+    match parser::parse_document(&tokenized) {
         Ok((_, links)) => {
             if links.is_empty() {
                 Ok(LiNo::Link { id: None, values: vec![] })
@@ -230,14 +242,28 @@ pub fn parse_lino(document: &str) -> Result<LiNo<String>, ParseError> {
     }
 }
 
-// New function that matches C# and JS API - returns collection of links
+/// Parse a Lino document without tokenization (backward compatible).
+pub fn parse_lino_raw(document: &str) -> Result<LiNo<String>, ParseError> {
+    parse_lino_with_tokenizer(document, &Tokenizer::disabled())
+}
+
+/// Parse Lino notation to a collection of links (matches C# and JS API).
+/// This uses default tokenization.
 pub fn parse_lino_to_links(document: &str) -> Result<Vec<LiNo<String>>, ParseError> {
+    parse_lino_to_links_with_tokenizer(document, &Tokenizer::new())
+}
+
+/// Parse Lino notation to a collection of links with a custom tokenizer.
+pub fn parse_lino_to_links_with_tokenizer(document: &str, tokenizer: &Tokenizer) -> Result<Vec<LiNo<String>>, ParseError> {
     // Handle empty or whitespace-only input by returning empty collection
     if document.trim().is_empty() {
         return Ok(vec![]);
     }
 
-    match parser::parse_document(document) {
+    // Apply tokenization
+    let tokenized = tokenizer.tokenize(document);
+
+    match parser::parse_document(&tokenized) {
         Ok((_, links)) => {
             if links.is_empty() {
                 Ok(vec![])
@@ -251,6 +277,11 @@ pub fn parse_lino_to_links(document: &str) -> Result<Vec<LiNo<String>>, ParseErr
     }
 }
 
+/// Parse Lino notation to a collection of links without tokenization (backward compatible).
+pub fn parse_lino_to_links_raw(document: &str) -> Result<Vec<LiNo<String>>, ParseError> {
+    parse_lino_to_links_with_tokenizer(document, &Tokenizer::disabled())
+}
+
 /// Formats a collection of LiNo links as a multi-line string.
 /// Each link is formatted on a separate line.
 pub fn format_links(links: &[LiNo<String>]) -> String {
@@ -258,5 +289,13 @@ pub fn format_links(links: &[LiNo<String>]) -> String {
         .map(|link| format!("{}", link))
         .collect::<Vec<_>>()
         .join("\n")
+}
+
+/// Formats a collection of LiNo links with compact symbols (no spaces around punctuation/math).
+/// This is useful for making output more human-readable.
+pub fn format_links_compact(links: &[LiNo<String>]) -> String {
+    let tokenizer = Tokenizer::new();
+    let formatted = format_links(links);
+    tokenizer.compact(&formatted)
 }
 
