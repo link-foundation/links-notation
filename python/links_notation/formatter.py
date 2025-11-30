@@ -4,9 +4,10 @@ Formatter for Lino notation.
 Provides utilities for formatting Link objects back into Lino notation strings.
 """
 
-from typing import List, Union, Optional
-from .link import Link
+from typing import List, Optional, Union
+
 from .format_config import FormatConfig
+from .link import Link
 
 
 def format_links(links: List[Link], less_parentheses: Union[bool, FormatConfig] = False) -> str:
@@ -21,7 +22,7 @@ def format_links(links: List[Link], less_parentheses: Union[bool, FormatConfig] 
         Formatted string in Lino notation
     """
     if not links:
-        return ''
+        return ""
 
     # Support FormatConfig as parameter
     if isinstance(less_parentheses, FormatConfig):
@@ -29,10 +30,10 @@ def format_links(links: List[Link], less_parentheses: Union[bool, FormatConfig] 
         # Apply consecutive link grouping if enabled
         if config.group_consecutive:
             links = _group_consecutive_links(links)
-        return '\n'.join(link.format(config) for link in links)
+        return "\n".join(link.format(config) for link in links)
 
     # Backward compatibility with boolean parameter
-    return '\n'.join(link.format(less_parentheses) for link in links)
+    return "\n".join(link.format(less_parentheses) for link in links)
 
 
 def _group_consecutive_links(links: List[Link]) -> List[Link]:
