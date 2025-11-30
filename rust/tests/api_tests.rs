@@ -178,10 +178,10 @@ fn test_indented_id_syntax_roundtrip() {
         .build();
 
     // Verify parsing worked correctly
-    assert!(parsed.len() > 0);
+    assert!(!parsed.is_empty());
     assert_eq!(config.max_inline_refs, Some(1));
-    assert_eq!(config.prefer_inline, false);
-    assert_eq!(config.should_indent_by_ref_count(2), true);
+    assert!(!config.prefer_inline);
+    assert!(config.should_indent_by_ref_count(2));
 
     // Note: Full roundtrip test would verify: format_links(&parsed, &config) == indented
     // This will work once FormatConfig is integrated into format_links function
@@ -205,8 +205,8 @@ fn test_multiple_indented_id_syntax_roundtrip() {
     // Verify parsing worked correctly
     assert!(parsed.len() >= 2);
     assert_eq!(config.max_inline_refs, Some(1));
-    assert_eq!(config.prefer_inline, false);
-    assert_eq!(config.should_indent_by_ref_count(2), true);
+    assert!(!config.prefer_inline);
+    assert!(config.should_indent_by_ref_count(2));
 
     // Note: Full roundtrip test would verify: format_links(&parsed, &config) == indented
     // This will work once FormatConfig is integrated into format_links function
