@@ -146,6 +146,10 @@ namespace Link.Foundation.Links.Notation
                     reference.Contains(":") ||
                     reference.Contains("(") ||
                     reference.Contains(")") ||
+                    reference.Contains("{") ||
+                    reference.Contains("}") ||
+                    reference.Contains("[") ||
+                    reference.Contains("]") ||
                     reference.Contains(" ") ||
                     reference.Contains("\t") ||
                     reference.Contains("\n") ||

@@ -431,5 +431,169 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result[0].Values);
             Assert.Equal("value with spaces", result[0].Values?[0].Id);
         }
+
+        // Tests for alternative bracket delimiters (issue #143)
+
+        [Fact]
+        public static void CurlyBracesAsDelimitersLinkWithIdTest()
+        {
+            var input = "{id: source target}";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("id", result[0].Id);
+            Assert.NotNull(result[0].Values);
+            Assert.Equal(2, result[0].Values!.Count);
+            Assert.Equal("source", result[0].Values![0].Id);
+            Assert.Equal("target", result[0].Values![1].Id);
+        }
+
+        [Fact]
+        public static void SquareBracketsAsDelimitersLinkWithIdTest()
+        {
+            var input = "[id: source target]";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("id", result[0].Id);
+            Assert.NotNull(result[0].Values);
+            Assert.Equal(2, result[0].Values!.Count);
+            Assert.Equal("source", result[0].Values![0].Id);
+            Assert.Equal("target", result[0].Values![1].Id);
+        }
+
+        [Fact]
+        public static void CurlyBracesAsDelimitersValueLinkTest()
+        {
+            var input = "{a b c}";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Null(result[0].Id);
+            Assert.Equal(3, result[0].Values?.Count);
+        }
+
+        [Fact]
+        public static void SquareBracketsAsDelimitersValueLinkTest()
+        {
+            var input = "[a b c]";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Null(result[0].Id);
+            Assert.Equal(3, result[0].Values?.Count);
+        }
+
+        [Fact]
+        public static void CurlyBracesSingletTest()
+        {
+            var input = "{singlet}";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Null(result[0].Id);
+            Assert.Single(result[0].Values);
+            Assert.Equal("singlet", result[0].Values?[0].Id);
+        }
+
+        [Fact]
+        public static void SquareBracketsSingletTest()
+        {
+            var input = "[singlet]";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Null(result[0].Id);
+            Assert.Single(result[0].Values);
+            Assert.Equal("singlet", result[0].Values?[0].Id);
+        }
+
+        [Fact]
+        public static void NestedCurlyBracesTest()
+        {
+            var input = "{outer: {inner: value}}";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("outer", result[0].Id);
+            Assert.Single(result[0].Values);
+            Assert.Equal("inner", result[0].Values?[0].Id);
+        }
+
+        [Fact]
+        public static void NestedSquareBracketsTest()
+        {
+            var input = "[outer: [inner: value]]";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("outer", result[0].Id);
+            Assert.Single(result[0].Values);
+            Assert.Equal("inner", result[0].Values?[0].Id);
+        }
+
+        [Fact]
+        public static void MixedDelimitersParenthesesWithCurlyBracesTest()
+        {
+            var input = "(outer: {inner: value})";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("outer", result[0].Id);
+            Assert.Single(result[0].Values);
+            Assert.Equal("inner", result[0].Values?[0].Id);
+        }
+
+        [Fact]
+        public static void MixedDelimitersSquareBracketsWithParenthesesTest()
+        {
+            var input = "[outer: (inner: value)]";
+            var parser = new Parser();
+            var result = parser.Parse(input);
+
+            Assert.Single(result);
+            Assert.Equal("outer", result[0].Id);
+            Assert.Single(result[0].Values);
+            Assert.Equal("inner", result[0].Values?[0].Id);
+        }
+
+        [Fact]
+        public static void CurlyBracesEquivalentToParenthesesTest()
+        {
+            var parenInput = "(id: source target)";
+            var curlyInput = "{id: source target}";
+            var parser = new Parser();
+
+            var parenResult = parser.Parse(parenInput);
+            var curlyResult = parser.Parse(curlyInput);
+
+            Assert.Equal(parenResult.Count, curlyResult.Count);
+            Assert.Equal(parenResult[0].Id, curlyResult[0].Id);
+            Assert.Equal(parenResult[0].Values?.Count, curlyResult[0].Values?.Count);
+        }
+
+        [Fact]
+        public static void SquareBracketsEquivalentToParenthesesTest()
+        {
+            var parenInput = "(id: source target)";
+            var bracketInput = "[id: source target]";
+            var parser = new Parser();
+
+            var parenResult = parser.Parse(parenInput);
+            var bracketResult = parser.Parse(bracketInput);
+
+            Assert.Equal(parenResult.Count, bracketResult.Count);
+            Assert.Equal(parenResult[0].Id, bracketResult[0].Id);
+            Assert.Equal(parenResult[0].Values?.Count, bracketResult[0].Values?.Count);
+        }
     }
 }
