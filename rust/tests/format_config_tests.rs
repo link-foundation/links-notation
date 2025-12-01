@@ -1,5 +1,5 @@
 use links_notation::format_config::FormatConfig;
-use links_notation::{LiNo, format_links_with_config, parse_lino_to_links};
+use links_notation::{format_links_with_config, parse_lino_to_links, LiNo};
 
 #[test]
 fn format_config_basic() {
@@ -109,9 +109,7 @@ fn format_link_with_less_parentheses_integration() {
         values: vec![LiNo::Ref("value".to_string())],
     };
 
-    let config = FormatConfig::builder()
-        .less_parentheses(true)
-        .build();
+    let config = FormatConfig::builder().less_parentheses(true).build();
 
     let output = link.format_with_config(&config);
     // Should not have outer parentheses
@@ -139,7 +137,10 @@ fn format_link_with_max_inline_refs_integration() {
 
     let output = link.format_with_config(&config);
     assert!(output.contains("id:"), "Output should contain 'id:'");
-    assert!(output.contains('\n'), "Output should be indented across multiple lines");
+    assert!(
+        output.contains('\n'),
+        "Output should be indented across multiple lines"
+    );
 }
 
 #[test]
@@ -159,8 +160,14 @@ fn format_link_with_line_length_limit_integration() {
         .build();
 
     let output = link.format_with_config(&config);
-    assert!(output.contains("sequence:"), "Output should contain 'sequence:'");
-    assert!(output.contains('\n'), "Output should be indented across multiple lines");
+    assert!(
+        output.contains("sequence:"),
+        "Output should contain 'sequence:'"
+    );
+    assert!(
+        output.contains('\n'),
+        "Output should be indented across multiple lines"
+    );
 }
 
 #[test]
@@ -181,9 +188,7 @@ fn format_links_with_consecutive_grouping_integration() {
         },
     ];
 
-    let config = FormatConfig::builder()
-        .group_consecutive(true)
-        .build();
+    let config = FormatConfig::builder().group_consecutive(true).build();
 
     let output = format_links_with_config(&links, &config);
 
@@ -215,7 +220,10 @@ fn format_link_with_custom_indent_integration() {
 
     let output = link.format_with_config(&config);
     // Check for custom indentation (4 spaces)
-    assert!(output.contains("    "), "Output should use 4-space indentation");
+    assert!(
+        output.contains("    "),
+        "Output should use 4-space indentation"
+    );
 }
 
 #[test]
@@ -243,7 +251,10 @@ fn format_roundtrip_with_config_integration() {
 
     // Should parse successfully and preserve structure
     assert!(parsed.is_ok(), "Should parse successfully");
-    assert!(!parsed.unwrap().is_empty(), "Parsed result should not be empty");
+    assert!(
+        !parsed.unwrap().is_empty(),
+        "Parsed result should not be empty"
+    );
 }
 
 #[test]
@@ -262,9 +273,7 @@ fn format_single_ref_with_config() {
     let output_with_parens = link.format_with_config(&config_with_parens);
     assert_eq!(output_with_parens, "(value)");
 
-    let config_less_parens = FormatConfig::builder()
-        .less_parentheses(true)
-        .build();
+    let config_less_parens = FormatConfig::builder().less_parentheses(true).build();
     let output_less_parens = link.format_with_config(&config_less_parens);
     assert_eq!(output_less_parens, "value");
 }

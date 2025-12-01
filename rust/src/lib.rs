@@ -1,9 +1,9 @@
 pub mod format_config;
 pub mod parser;
 
+use format_config::FormatConfig;
 use std::error::Error as StdError;
 use std::fmt;
-use format_config::FormatConfig;
 
 /// Error type for Lino parsing
 #[derive(Debug)]
@@ -65,20 +65,29 @@ impl<T: ToString + Clone> LiNo<T> {
             LiNo::Link { id, values } => {
                 // Empty link
                 if id.is_none() && values.is_empty() {
-                    return if config.less_parentheses { String::new() } else { "()".to_string() };
+                    return if config.less_parentheses {
+                        String::new()
+                    } else {
+                        "()".to_string()
+                    };
                 }
 
                 // Link with only ID, no values
                 if values.is_empty() {
                     if let Some(ref id_val) = id {
                         let escaped_id = escape_reference(&id_val.to_string());
-                        return if config.less_parentheses && !needs_parentheses(&id_val.to_string()) {
+                        return if config.less_parentheses && !needs_parentheses(&id_val.to_string())
+                        {
                             escaped_id
                         } else {
                             format!("({})", escaped_id)
                         };
                     }
-                    return if config.less_parentheses { String::new() } else { "()".to_string() };
+                    return if config.less_parentheses {
+                        String::new()
+                    } else {
+                        "()".to_string()
+                    };
                 }
 
                 // Check if we should use indented format
@@ -87,7 +96,8 @@ impl<T: ToString + Clone> LiNo<T> {
                     should_indent = true;
                 } else {
                     // Try inline format first to check line length
-                    let values_str = values.iter()
+                    let values_str = values
+                        .iter()
                         .map(|v| format_value(v))
                         .collect::<Vec<_>>()
                         .join(" ");
@@ -116,7 +126,8 @@ impl<T: ToString + Clone> LiNo<T> {
                 }
 
                 // Standard inline formatting
-                let values_str = values.iter()
+                let values_str = values
+                    .iter()
                     .map(|v| format_value(v))
                     .collect::<Vec<_>>()
                     .join(" ");
@@ -127,7 +138,8 @@ impl<T: ToString + Clone> LiNo<T> {
                         // Check if all values are simple (no nested values)
                         let all_simple = values.iter().all(|v| matches!(v, LiNo::Ref(_)));
                         if all_simple {
-                            return values.iter()
+                            return values
+                                .iter()
                                 .map(|v| match v {
                                     LiNo::Ref(r) => escape_reference(&r.to_string()),
                                     _ => format_value(v),
@@ -143,7 +155,8 @@ impl<T: ToString + Clone> LiNo<T> {
                 // Link with ID and values
                 let id_str = escape_reference(&id.as_ref().unwrap().to_string());
                 let with_colon = format!("{}: {}", id_str, values_str);
-                if config.less_parentheses && !needs_parentheses(&id.as_ref().unwrap().to_string()) {
+                if config.less_parentheses && !needs_parentheses(&id.as_ref().unwrap().to_string())
+                {
                     with_colon
                 } else {
                     format!("({})", with_colon)
@@ -162,7 +175,8 @@ impl<T: ToString + Clone> LiNo<T> {
             LiNo::Link { id, values } => {
                 if id.is_none() {
                     // Values only - format each on separate line
-                    values.iter()
+                    values
+                        .iter()
                         .map(|v| format!("{}{}", config.indent_string, format_value(v)))
                         .collect::<Vec<_>>()
                         .join("\n")
@@ -471,7 +485,8 @@ pub fn format_links_with_config(links: &[LiNo<String>], config: &FormatConfig) -
         links.to_vec()
     };
 
-    links_to_format.iter()
+    links_to_format
+        .iter()
         .map(|link| link.format_with_config(config))
         .collect::<Vec<_>>()
         .join("\n")
@@ -504,14 +519,22 @@ fn group_consecutive_links(links: &[LiNo<String>]) -> Vec<LiNo<String>> {
         let current = &links[i];
 
         // Look ahead for consecutive links with same ID
-        if let LiNo::Link { id: Some(ref current_id), values: ref current_values } = current {
+        if let LiNo::Link {
+            id: Some(ref current_id),
+            values: ref current_values,
+        } = current
+        {
             if !current_values.is_empty() {
                 // Collect all values with same ID
                 let mut same_id_values = current_values.clone();
                 let mut j = i + 1;
 
                 while j < links.len() {
-                    if let LiNo::Link { id: Some(ref next_id), values: ref next_values } = &links[j] {
+                    if let LiNo::Link {
+                        id: Some(ref next_id),
+                        values: ref next_values,
+                    } = &links[j]
+                    {
                         if next_id == current_id && !next_values.is_empty() {
                             same_id_values.extend(next_values.clone());
                             j += 1;
