@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Xunit;
 using LinkType = Link.Foundation.Links.Notation.Link<string>;
 using id = Link.Foundation.Links.Notation.id<string>;
