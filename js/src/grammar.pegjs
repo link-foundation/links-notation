@@ -35,17 +35,18 @@
     return indentationStack[indentationStack.length - 1];
   }
 
-  // Parse a multi-quote string dynamically for N >= 6 quotes
+  // Universal parser for any N-quote strings
+  // For N quotes: opening = N quotes, closing = N quotes, escape = 2*N quotes -> N quotes
   // Returns { value: string, length: number } or null if no match
-  function parseHighQuoteString(inputStr, quoteChar) {
+  function parseNQuoteString(inputStr, quoteChar) {
     // Count opening quotes
     let quoteCount = 0;
     while (quoteCount < inputStr.length && inputStr[quoteCount] === quoteChar) {
       quoteCount++;
     }
 
-    if (quoteCount < 6) {
-      return null; // Let the regular rules handle 1-5 quotes
+    if (quoteCount < 1) {
+      return null;
     }
 
     const openClose = quoteChar.repeat(quoteCount);
@@ -130,111 +131,46 @@ multiLineValueLink = "(" v:multiLineValues _ ")" { return { values: v }; }
 indentedIdLink = id:reference __ ":" eol { return { id: id, values: [] }; }
 
 // Reference can be quoted (with any number of quotes) or simple unquoted
-// Order matters: try longer quote sequences first (greedy matching)
-// For 6+ quotes, use procedural parsing via highQuotedReference
-reference = highQuotedReference / quintupleQuotedReference / quadrupleQuotedReference / tripleQuotedReference / doubleQuotedReference / singleQuotedReference / simpleReference
+// Universal approach: use procedural parsing for all N-quote strings
+reference = quotedReference / simpleReference
 
 simpleReference = chars:referenceSymbol+ { return chars.join(''); }
 
-// High quote sequences (6+ quotes) - use procedural parsing
-// Capture everything that looks like a quoted string and validate
-highQuotedReference = &('""""""' / "''''''" / '``````') raw:highQuoteCapture {
-  return raw;
-}
+// Universal quoted reference - handles any N quotes for all three quote types
+// Captures the raw string and uses parseNQuoteString for validation and parsing
+quotedReference = doubleQuotedAny / singleQuotedAny / backtickQuotedAny
 
-// Capture high quote content - match any characters including embedded quotes
-// The key insight: for 6+ quotes, we need to capture chars that might include
-// sequences of quotes less than the closing count
-highQuoteCapture = raw:$('"'+ highQuoteDoubleContent* '"'+) &{
-  const result = parseHighQuoteString(raw, '"');
+doubleQuotedAny = raw:$('"'+ doubleQuoteContent* '"'+) &{
+  const result = parseNQuoteString(raw, '"');
   if (result && result.length === raw.length) {
-    options._highQuoteValue = result.value;
+    options._quoteValue = result.value;
     return true;
   }
   return false;
-} { return options._highQuoteValue; }
-/ raw:$("'"+ highQuoteSingleContent* "'"+ ) &{
-  const result = parseHighQuoteString(raw, "'");
+} { return options._quoteValue; }
+
+singleQuotedAny = raw:$("'"+ singleQuoteContent* "'"+) &{
+  const result = parseNQuoteString(raw, "'");
   if (result && result.length === raw.length) {
-    options._highQuoteValue = result.value;
+    options._quoteValue = result.value;
     return true;
   }
   return false;
-} { return options._highQuoteValue; }
-/ raw:$('`'+ highQuoteBacktickContent* '`'+) &{
-  const result = parseHighQuoteString(raw, '`');
+} { return options._quoteValue; }
+
+backtickQuotedAny = raw:$('`'+ backtickQuoteContent* '`'+) &{
+  const result = parseNQuoteString(raw, '`');
   if (result && result.length === raw.length) {
-    options._highQuoteValue = result.value;
+    options._quoteValue = result.value;
     return true;
   }
   return false;
-} { return options._highQuoteValue; }
+} { return options._quoteValue; }
 
-// Content for high quote strings - match non-quote chars OR quote sequences
-// followed by non-quote (so they're not closing sequences)
-highQuoteDoubleContent = [^"] / '"'+ &[^"]
-highQuoteSingleContent = [^'] / "'"+ &[^']
-highQuoteBacktickContent = [^\`] / '`'+ &[^\`]
-
-// Single quote (1 quote char)
-singleQuotedReference = doubleQuote1 / singleQuote1 / backtickQuote1
-
-doubleQuote1 = '"' r:doubleQuote1Content* '"' { return r.join(''); }
-doubleQuote1Content = '""' { return '"'; } / [^"]
-
-singleQuote1 = "'" r:singleQuote1Content* "'" { return r.join(''); }
-singleQuote1Content = "''" { return "'"; } / [^']
-
-backtickQuote1 = '`' r:backtickQuote1Content* '`' { return r.join(''); }
-backtickQuote1Content = '``' { return '`'; } / [^`]
-
-// Double quotes (2 quote chars)
-doubleQuotedReference = doubleQuote2 / singleQuote2 / backtickQuote2
-
-doubleQuote2 = '""' r:doubleQuote2Content* '""' { return r.join(''); }
-doubleQuote2Content = '""""' { return '""'; } / !('""') c:. { return c; }
-
-singleQuote2 = "''" r:singleQuote2Content* "''" { return r.join(''); }
-singleQuote2Content = "''''" { return "''"; } / !("''") c:. { return c; }
-
-backtickQuote2 = '``' r:backtickQuote2Content* '``' { return r.join(''); }
-backtickQuote2Content = '````' { return '``'; } / !('``') c:. { return c; }
-
-// Triple quotes (3 quote chars)
-tripleQuotedReference = doubleQuote3 / singleQuote3 / backtickQuote3
-
-doubleQuote3 = '"""' r:doubleQuote3Content* '"""' { return r.join(''); }
-doubleQuote3Content = '""""""' { return '"""'; } / !('"""') c:. { return c; }
-
-singleQuote3 = "'''" r:singleQuote3Content* "'''" { return r.join(''); }
-singleQuote3Content = "''''''" { return "'''"; } / !("'''") c:. { return c; }
-
-backtickQuote3 = '```' r:backtickQuote3Content* '```' { return r.join(''); }
-backtickQuote3Content = '``````' { return '```'; } / !('```') c:. { return c; }
-
-// Quadruple quotes (4 quote chars)
-quadrupleQuotedReference = doubleQuote4 / singleQuote4 / backtickQuote4
-
-doubleQuote4 = '""""' r:doubleQuote4Content* '""""' { return r.join(''); }
-doubleQuote4Content = '""""""""' { return '""""'; } / !('""""') c:. { return c; }
-
-singleQuote4 = "''''" r:singleQuote4Content* "''''" { return r.join(''); }
-singleQuote4Content = "''''''''''" { return "''''"; } / !("''''") c:. { return c; }
-
-backtickQuote4 = '````' r:backtickQuote4Content* '````' { return r.join(''); }
-backtickQuote4Content = '````````' { return '````'; } / !('````') c:. { return c; }
-
-// Quintuple quotes (5 quote chars)
-quintupleQuotedReference = doubleQuote5 / singleQuote5 / backtickQuote5
-
-doubleQuote5 = '"""""' r:doubleQuote5Content* '"""""' { return r.join(''); }
-doubleQuote5Content = '""""""""""' { return '"""""'; } / !('"""""') c:. { return c; }
-
-singleQuote5 = "'''''" r:singleQuote5Content* "'''''" { return r.join(''); }
-singleQuote5Content = "''''''''''" { return "'''''"; } / !("'''''") c:. { return c; }
-
-backtickQuote5 = '`````' r:backtickQuote5Content* '`````' { return r.join(''); }
-backtickQuote5Content = '``````````' { return '`````'; } / !('`````') c:. { return c; }
+// Content for quoted strings - match non-quote chars OR quote sequences followed by non-quote
+doubleQuoteContent = [^"] / '"'+ &[^"]
+singleQuoteContent = [^'] / "'"+ &[^']
+backtickQuoteContent = [^`] / '`'+ &[^`]
 
 SET_BASE_INDENTATION = spaces:" "* { setBaseIndentation(spaces); }
 
