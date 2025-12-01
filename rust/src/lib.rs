@@ -99,12 +99,10 @@ impl<T: ToString + Clone> LiNo<T> {
                         } else {
                             format!("({}: {})", id_str, values_str)
                         }
+                    } else if config.less_parentheses {
+                        values_str.clone()
                     } else {
-                        if config.less_parentheses {
-                            values_str.clone()
-                        } else {
-                            format!("({})", values_str)
-                        }
+                        format!("({})", values_str)
                     };
 
                     if config.should_indent_by_length(&test_line) {
