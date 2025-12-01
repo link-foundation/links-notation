@@ -1,6 +1,7 @@
 pub mod format_config;
 pub mod parser;
 
+use format_config::FormatConfig;
 use std::error::Error as StdError;
 use std::fmt;
 
@@ -40,6 +41,156 @@ impl<T> LiNo<T> {
 
     pub fn is_link(&self) -> bool {
         matches!(self, LiNo::Link { .. })
+    }
+}
+
+impl<T: ToString + Clone> LiNo<T> {
+    /// Format the link using FormatConfig configuration.
+    ///
+    /// # Arguments
+    /// * `config` - The FormatConfig to use for formatting
+    ///
+    /// # Returns
+    /// Formatted string representation
+    pub fn format_with_config(&self, config: &FormatConfig) -> String {
+        match self {
+            LiNo::Ref(value) => {
+                let escaped = escape_reference(&value.to_string());
+                if config.less_parentheses {
+                    escaped
+                } else {
+                    format!("({})", escaped)
+                }
+            }
+            LiNo::Link { id, values } => {
+                // Empty link
+                if id.is_none() && values.is_empty() {
+                    return if config.less_parentheses {
+                        String::new()
+                    } else {
+                        "()".to_string()
+                    };
+                }
+
+                // Link with only ID, no values
+                if values.is_empty() {
+                    if let Some(ref id_val) = id {
+                        let escaped_id = escape_reference(&id_val.to_string());
+                        return if config.less_parentheses && !needs_parentheses(&id_val.to_string())
+                        {
+                            escaped_id
+                        } else {
+                            format!("({})", escaped_id)
+                        };
+                    }
+                    return if config.less_parentheses {
+                        String::new()
+                    } else {
+                        "()".to_string()
+                    };
+                }
+
+                // Check if we should use indented format
+                let mut should_indent = false;
+                if config.should_indent_by_ref_count(values.len()) {
+                    should_indent = true;
+                } else {
+                    // Try inline format first to check line length
+                    let values_str = values
+                        .iter()
+                        .map(|v| format_value(v))
+                        .collect::<Vec<_>>()
+                        .join(" ");
+
+                    let test_line = if let Some(ref id_val) = id {
+                        let id_str = escape_reference(&id_val.to_string());
+                        if config.less_parentheses {
+                            format!("{}: {}", id_str, values_str)
+                        } else {
+                            format!("({}: {})", id_str, values_str)
+                        }
+                    } else if config.less_parentheses {
+                        values_str.clone()
+                    } else {
+                        format!("({})", values_str)
+                    };
+
+                    if config.should_indent_by_length(&test_line) {
+                        should_indent = true;
+                    }
+                }
+
+                // Format with indentation if needed
+                if should_indent && !config.prefer_inline {
+                    return self.format_indented(config);
+                }
+
+                // Standard inline formatting
+                let values_str = values
+                    .iter()
+                    .map(|v| format_value(v))
+                    .collect::<Vec<_>>()
+                    .join(" ");
+
+                // Link with values only (null id)
+                if id.is_none() {
+                    if config.less_parentheses {
+                        // Check if all values are simple (no nested values)
+                        let all_simple = values.iter().all(|v| matches!(v, LiNo::Ref(_)));
+                        if all_simple {
+                            return values
+                                .iter()
+                                .map(|v| match v {
+                                    LiNo::Ref(r) => escape_reference(&r.to_string()),
+                                    _ => format_value(v),
+                                })
+                                .collect::<Vec<_>>()
+                                .join(" ");
+                        }
+                        return values_str;
+                    }
+                    return format!("({})", values_str);
+                }
+
+                // Link with ID and values
+                let id_str = escape_reference(&id.as_ref().unwrap().to_string());
+                let with_colon = format!("{}: {}", id_str, values_str);
+                if config.less_parentheses && !needs_parentheses(&id.as_ref().unwrap().to_string())
+                {
+                    with_colon
+                } else {
+                    format!("({})", with_colon)
+                }
+            }
+        }
+    }
+
+    /// Format the link with indentation.
+    fn format_indented(&self, config: &FormatConfig) -> String {
+        match self {
+            LiNo::Ref(value) => {
+                let escaped = escape_reference(&value.to_string());
+                format!("({})", escaped)
+            }
+            LiNo::Link { id, values } => {
+                if id.is_none() {
+                    // Values only - format each on separate line
+                    values
+                        .iter()
+                        .map(|v| format!("{}{}", config.indent_string, format_value(v)))
+                        .collect::<Vec<_>>()
+                        .join("\n")
+                } else {
+                    // Link with ID - format as id:\n  value1\n  value2
+                    let id_str = escape_reference(&id.as_ref().unwrap().to_string());
+                    let mut lines = vec![format!("{}:", id_str)];
+                    for v in values {
+                        lines.push(format!("{}{}", config.indent_string, format_value(v)));
+                    }
+                    lines.join("\n")
+                }
+            }
+        }
     }
 }
 
@@ -311,4 +462,172 @@ pub fn format_links(links: &[LiNo<String>]) -> String {
         .map(|link| format!("{}", link))
         .collect::<Vec<_>>()
         .join("\n")
+}
+
+/// Formats a collection of LiNo links as a multi-line string using FormatConfig.
+/// Supports all formatting options including consecutive link grouping.
+///
+/// # Arguments
+/// * `links` - The collection of links to format
+/// * `config` - The FormatConfig to use for formatting
+///
+/// # Returns
+/// Formatted string in Lino notation
+pub fn format_links_with_config(links: &[LiNo<String>], config: &FormatConfig) -> String {
+    if links.is_empty() {
+        return String::new();
+    }
+
+    // Apply consecutive link grouping if enabled
+    let links_to_format = if config.group_consecutive {
+        group_consecutive_links(links)
+    } else {
+        links.to_vec()
+    };
+
+    links_to_format
+        .iter()
+        .map(|link| link.format_with_config(config))
+        .collect::<Vec<_>>()
+        .join("\n")
+}
+
+/// Groups consecutive links with the same ID.
+///
+/// For example:
+/// ```text
+/// SetA a
+/// SetA b
+/// SetA c
+/// ```
+/// Becomes:
+/// ```text
+/// SetA
+///   a
+///   b
+///   c
+/// ```
+fn group_consecutive_links(links: &[LiNo<String>]) -> Vec<LiNo<String>> {
+    if links.is_empty() {
+        return vec![];
+    }
+
+    let mut grouped = vec![];
+    let mut i = 0;
+
+    while i < links.len() {
+        let current = &links[i];
+
+        // Look ahead for consecutive links with same ID
+        if let LiNo::Link {
+            id: Some(ref current_id),
+            values: ref current_values,
+        } = current
+        {
+            if !current_values.is_empty() {
+                // Collect all values with same ID
+                let mut same_id_values = current_values.clone();
+                let mut j = i + 1;
+
+                while j < links.len() {
+                    if let LiNo::Link {
+                        id: Some(ref next_id),
+                        values: ref next_values,
+                    } = &links[j]
+                    {
+                        if next_id == current_id && !next_values.is_empty() {
+                            same_id_values.extend(next_values.clone());
+                            j += 1;
+                        } else {
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+
+                // If we found consecutive links, create grouped link
+                if j > i + 1 {
+                    grouped.push(LiNo::Link {
+                        id: Some(current_id.clone()),
+                        values: same_id_values,
+                    });
+                    i = j;
+                    continue;
+                }
+            }
+        }
+
+        grouped.push(current.clone());
+        i += 1;
+    }
+
+    grouped
+}
+
+/// Escape a reference string by adding quotes if necessary.
+fn escape_reference(reference: &str) -> String {
+    if reference.is_empty() || reference.trim().is_empty() {
+        return String::new();
+    }
+
+    let has_single_quote = reference.contains('\'');
+    let has_double_quote = reference.contains('"');
+
+    let needs_quoting = reference.contains(':')
+        || reference.contains('(')
+        || reference.contains(')')
+        || reference.contains(' ')
+        || reference.contains('\t')
+        || reference.contains('\n')
+        || reference.contains('\r')
+        || has_double_quote
+        || has_single_quote;
+
+    // Handle edge case: reference contains both single and double quotes
+    if has_single_quote && has_double_quote {
+        // Escape single quotes and wrap in single quotes
+        return format!("'{}'", reference.replace('\'', "\\'"));
+    }
+
+    // Prefer single quotes if double quotes are present
+    if has_double_quote {
+        return format!("'{}'", reference);
+    }
+
+    // Use double quotes if single quotes are present
+    if has_single_quote {
+        return format!("\"{}\"", reference);
+    }
+
+    // Use single quotes for special characters
+    if needs_quoting {
+        return format!("'{}'", reference);
+    }
+
+    // No quoting needed
+    reference.to_string()
+}
+
+/// Check if a string needs to be wrapped in parentheses.
+fn needs_parentheses(s: &str) -> bool {
+    s.contains(' ') || s.contains(':') || s.contains('(') || s.contains(')')
+}
+
+/// Format a value within a link.
+fn format_value<T: ToString>(value: &LiNo<T>) -> String {
+    match value {
+        LiNo::Ref(r) => escape_reference(&r.to_string()),
+        LiNo::Link { id, values } => {
+            // Simple link with just an ID - don't wrap in extra parentheses
+            if values.is_empty() {
+                if let Some(ref id_val) = id {
+                    return escape_reference(&id_val.to_string());
+                }
+                return String::new();
+            }
+            // Complex value - format with parentheses
+            format!("{}", value)
+        }
+    }
 }
