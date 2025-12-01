@@ -35,55 +35,58 @@
     return indentationStack[indentationStack.length - 1];
   }
 
-  // Parse a multi-quote string dynamically for N >= 6 quotes
-  // Returns { value: string, length: number } or null if no match
-  function parseHighQuoteString(inputStr, quoteChar) {
+  // Universal procedural parser for N-quote strings (any N >= 1)
+  // Parses from the given position in the input string
+  // Returns { value, length } or null
+  function parseQuotedStringAt(inputStr, startPos, quoteChar) {
+    if (startPos >= inputStr.length || inputStr[startPos] !== quoteChar) {
+      return null;
+    }
+
     // Count opening quotes
     let quoteCount = 0;
-    while (quoteCount < inputStr.length && inputStr[quoteCount] === quoteChar) {
+    let pos = startPos;
+    while (pos < inputStr.length && inputStr[pos] === quoteChar) {
       quoteCount++;
+      pos++;
     }
 
-    if (quoteCount < 6) {
-      return null; // Let the regular rules handle 1-5 quotes
-    }
-
-    const openClose = quoteChar.repeat(quoteCount);
+    const closeSeq = quoteChar.repeat(quoteCount);
     const escapeSeq = quoteChar.repeat(quoteCount * 2);
-    const escapeVal = quoteChar.repeat(quoteCount);
 
-    let pos = quoteCount; // Start after opening quotes
     let content = '';
-
     while (pos < inputStr.length) {
       // Check for escape sequence (2*N quotes)
       if (inputStr.substr(pos, escapeSeq.length) === escapeSeq) {
-        content += escapeVal;
+        content += closeSeq; // 2*N quotes become N quotes
         pos += escapeSeq.length;
         continue;
       }
 
-      // Check for closing quotes (exactly N quotes, not more)
-      if (inputStr.substr(pos, quoteCount) === openClose) {
-        // Make sure it's exactly N quotes (not followed by more of the same quote)
+      // Check for closing sequence (exactly N quotes)
+      if (inputStr.substr(pos, quoteCount) === closeSeq) {
+        // Verify it's exactly N quotes (not followed by more of same char)
         const afterClose = pos + quoteCount;
         if (afterClose >= inputStr.length || inputStr[afterClose] !== quoteChar) {
           // Found valid closing
           return {
             value: content,
-            length: afterClose
+            length: afterClose - startPos
           };
         }
       }
 
-      // Take next character
+      // Add character to content
       content += inputStr[pos];
       pos++;
     }
 
-    // No closing quotes found
-    return null;
+    return null; // No valid closing found
   }
+
+  // Global state for passing parsed values between predicate and action
+  let parsedValue = null;
+  let parsedLength = 0;
 }
 
 document = &{ indentationStack = [0]; baseIndentation = null; return true; } skipEmptyLines links:links _ eof { return links; }
@@ -129,112 +132,61 @@ multiLineValueLink = "(" v:multiLineValues _ ")" { return { values: v }; }
 
 indentedIdLink = id:reference __ ":" eol { return { id: id, values: [] }; }
 
-// Reference can be quoted (with any number of quotes) or simple unquoted
-// Order matters: try longer quote sequences first (greedy matching)
-// For 6+ quotes, use procedural parsing via highQuotedReference
-reference = highQuotedReference / quintupleQuotedReference / quadrupleQuotedReference / tripleQuotedReference / doubleQuotedReference / singleQuotedReference / simpleReference
+// Reference can be quoted (with any number of quotes N >= 1) or simple unquoted
+// Universal approach: use procedural parsing for all quote types and counts
+reference = quotedReference / simpleReference
 
 simpleReference = chars:referenceSymbol+ { return chars.join(''); }
 
-// High quote sequences (6+ quotes) - use procedural parsing
-// Capture everything that looks like a quoted string and validate
-highQuotedReference = &('""""""' / "''''''" / '``````') raw:highQuoteCapture {
-  return raw;
-}
+// Universal quoted reference - handles any N quotes for all quote types
+// Uses procedural parsing with input/offset() for clean, simple logic
+quotedReference = doubleQuotedUniversal / singleQuotedUniversal / backtickQuotedUniversal
 
-// Capture high quote content - match any characters including embedded quotes
-// The key insight: for 6+ quotes, we need to capture chars that might include
-// sequences of quotes less than the closing count
-highQuoteCapture = raw:$('"'+ highQuoteDoubleContent* '"'+) &{
-  const result = parseHighQuoteString(raw, '"');
-  if (result && result.length === raw.length) {
-    options._highQuoteValue = result.value;
+// Double quotes: peek at input, parse procedurally, consume exact chars
+doubleQuotedUniversal = &'"' &{
+  const pos = offset();
+  const result = parseQuotedStringAt(input, pos, '"');
+  if (result) {
+    parsedValue = result.value;
+    parsedLength = result.length;
     return true;
   }
   return false;
-} { return options._highQuoteValue; }
-/ raw:$("'"+ highQuoteSingleContent* "'"+ ) &{
-  const result = parseHighQuoteString(raw, "'");
-  if (result && result.length === raw.length) {
-    options._highQuoteValue = result.value;
+} chars:consumeDouble { return parsedValue; }
+
+// Consume exactly parsedLength characters for double quotes
+consumeDouble = c:. cs:consumeDoubleMore* { return [c].concat(cs).join(''); }
+consumeDoubleMore = &{ return parsedLength > 1 && (parsedLength--, true); } c:. { return c; }
+
+// Single quotes
+singleQuotedUniversal = &"'" &{
+  const pos = offset();
+  const result = parseQuotedStringAt(input, pos, "'");
+  if (result) {
+    parsedValue = result.value;
+    parsedLength = result.length;
     return true;
   }
   return false;
-} { return options._highQuoteValue; }
-/ raw:$('`'+ highQuoteBacktickContent* '`'+) &{
-  const result = parseHighQuoteString(raw, '`');
-  if (result && result.length === raw.length) {
-    options._highQuoteValue = result.value;
+} chars:consumeSingle { return parsedValue; }
+
+consumeSingle = c:. cs:consumeSingleMore* { return [c].concat(cs).join(''); }
+consumeSingleMore = &{ return parsedLength > 1 && (parsedLength--, true); } c:. { return c; }
+
+// Backticks
+backtickQuotedUniversal = &'`' &{
+  const pos = offset();
+  const result = parseQuotedStringAt(input, pos, '`');
+  if (result) {
+    parsedValue = result.value;
+    parsedLength = result.length;
     return true;
   }
   return false;
-} { return options._highQuoteValue; }
+} chars:consumeBacktick { return parsedValue; }
 
-// Content for high quote strings - match non-quote chars OR quote sequences
-// followed by non-quote (so they're not closing sequences)
-highQuoteDoubleContent = [^"] / '"'+ &[^"]
-highQuoteSingleContent = [^'] / "'"+ &[^']
-highQuoteBacktickContent = [^\`] / '`'+ &[^\`]
-
-// Single quote (1 quote char)
-singleQuotedReference = doubleQuote1 / singleQuote1 / backtickQuote1
-
-doubleQuote1 = '"' r:doubleQuote1Content* '"' { return r.join(''); }
-doubleQuote1Content = '""' { return '"'; } / [^"]
-
-singleQuote1 = "'" r:singleQuote1Content* "'" { return r.join(''); }
-singleQuote1Content = "''" { return "'"; } / [^']
-
-backtickQuote1 = '`' r:backtickQuote1Content* '`' { return r.join(''); }
-backtickQuote1Content = '``' { return '`'; } / [^`]
-
-// Double quotes (2 quote chars)
-doubleQuotedReference = doubleQuote2 / singleQuote2 / backtickQuote2
-
-doubleQuote2 = '""' r:doubleQuote2Content* '""' { return r.join(''); }
-doubleQuote2Content = '""""' { return '""'; } / !('""') c:. { return c; }
-
-singleQuote2 = "''" r:singleQuote2Content* "''" { return r.join(''); }
-singleQuote2Content = "''''" { return "''"; } / !("''") c:. { return c; }
-
-backtickQuote2 = '``' r:backtickQuote2Content* '``' { return r.join(''); }
-backtickQuote2Content = '````' { return '``'; } / !('``') c:. { return c; }
-
-// Triple quotes (3 quote chars)
-tripleQuotedReference = doubleQuote3 / singleQuote3 / backtickQuote3
-
-doubleQuote3 = '"""' r:doubleQuote3Content* '"""' { return r.join(''); }
-doubleQuote3Content = '""""""' { return '"""'; } / !('"""') c:. { return c; }
-
-singleQuote3 = "'''" r:singleQuote3Content* "'''" { return r.join(''); }
-singleQuote3Content = "''''''" { return "'''"; } / !("'''") c:. { return c; }
-
-backtickQuote3 = '```' r:backtickQuote3Content* '```' { return r.join(''); }
-backtickQuote3Content = '``````' { return '```'; } / !('```') c:. { return c; }
-
-// Quadruple quotes (4 quote chars)
-quadrupleQuotedReference = doubleQuote4 / singleQuote4 / backtickQuote4
-
-doubleQuote4 = '""""' r:doubleQuote4Content* '""""' { return r.join(''); }
-doubleQuote4Content = '""""""""' { return '""""'; } / !('""""') c:. { return c; }
-
-singleQuote4 = "''''" r:singleQuote4Content* "''''" { return r.join(''); }
-singleQuote4Content = "''''''''''" { return "''''"; } / !("''''") c:. { return c; }
-
-backtickQuote4 = '````' r:backtickQuote4Content* '````' { return r.join(''); }
-backtickQuote4Content = '````````' { return '````'; } / !('````') c:. { return c; }
-
-// Quintuple quotes (5 quote chars)
-quintupleQuotedReference = doubleQuote5 / singleQuote5 / backtickQuote5
-
-doubleQuote5 = '"""""' r:doubleQuote5Content* '"""""' { return r.join(''); }
-doubleQuote5Content = '""""""""""' { return '"""""'; } / !('"""""') c:. { return c; }
-
-singleQuote5 = "'''''" r:singleQuote5Content* "'''''" { return r.join(''); }
-singleQuote5Content = "''''''''''" { return "'''''"; } / !("'''''") c:. { return c; }
-
-backtickQuote5 = '`````' r:backtickQuote5Content* '`````' { return r.join(''); }
-backtickQuote5Content = '``````````' { return '`````'; } / !('`````') c:. { return c; }
+consumeBacktick = c:. cs:consumeBacktickMore* { return [c].concat(cs).join(''); }
+consumeBacktickMore = &{ return parsedLength > 1 && (parsedLength--, true); } c:. { return c; }
 
 SET_BASE_INDENTATION = spaces:" "* { setBaseIndentation(spaces); }
 
