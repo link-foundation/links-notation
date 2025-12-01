@@ -192,14 +192,37 @@ highQuoteCapture <string> = raw:highQuoteDoubleRaw &{ ParseMultiQuoteString(raw,
 docs/case-studies/csharp-peg-simplification/
 ├── README.md                    # This file
 ├── timeline.md                  # Detailed timeline with timestamps
-├── root-causes.md              # Deep dive into each root cause
-├── solutions/                   # Experimental solutions
-│   ├── 01-parse-expression/    # #parse{} approach
-│   ├── 02-capture-validate/    # Capture-then-validate approach
-│   ├── 03-semantic-predicates/ # Semantic predicates approach
-│   └── 04-other-approaches/    # Other attempted solutions
-└── experiments/                 # Standalone experiment files
+├── root-causes.md               # Deep dive into each root cause
+└── solutions/                   # All attempted solutions with runnable test projects
+    ├── 01-parse-expression/     # #parse{} approach (FAILED - PEG0011 error)
+    │   ├── README.md
+    │   └── project/             # Runnable test project demonstrating the error
+    ├── 02-capture-validate/     # Capture-then-validate (PARTIAL - disambiguation fails)
+    │   ├── README.md
+    │   └── project/             # Runnable test project
+    ├── 03-semantic-predicates/  # Semantic predicates (FAILED - no input access)
+    │   ├── README.md
+    │   └── project/             # Runnable test project
+    ├── 04-hybrid-approach/      # Hybrid N=1-5 explicit + N>=6 procedural (SUCCESS)
+    │   ├── README.md
+    │   └── project/             # Runnable test project
+    └── 05-minimized-hybrid/     # CURRENT: N=1,2 explicit + N>=3 procedural (SUCCESS)
+        ├── README.md
+        └── project/             # Runnable test project
 ```
+
+### Running the Test Projects
+
+Each solution has a standalone test project. To run:
+
+```bash
+cd solutions/<solution-name>/project
+dotnet build
+dotnet run
+```
+
+Solution 01 will fail to build (demonstrating the PEG0011 error).
+Solutions 02-05 will build and run, showing their respective behaviors.
 
 ## References
 

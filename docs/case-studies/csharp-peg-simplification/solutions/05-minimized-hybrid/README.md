@@ -1,8 +1,8 @@
 # Solution 5: Minimized Hybrid Approach (N=1,2 explicit + N>=3 procedural)
 
-## Status: SUCCESS
+## Status: ✅ SUCCESS (Current Production Implementation)
 
-This solution successfully reduces the number of explicit PEG rules while maintaining full functionality.
+This solution successfully reduces the number of explicit PEG rules while maintaining full functionality. This is the **current production implementation** used in `Parser.peg`.
 
 ## Approach
 
@@ -47,6 +47,24 @@ All tests pass:
 - Python: 176 tests
 - Rust: 39 tests
 
+## Runnable Test Project
+
+A complete standalone test project is available in the `project/` subdirectory:
+
+```bash
+cd project
+dotnet build
+dotnet run
+```
+
+The test demonstrates:
+- All three quote types (", ', `)
+- Quote levels N=1 through N=10+
+- Escape sequences at all levels
+- Multiple quoted strings on the same line (disambiguation)
+- Real-world use cases (JSON, code blocks)
+
 ## Code
 
-See `../../csharp/Link.Foundation.Links.Notation/Parser.peg` for the complete implementation.
+- **Test Project**: `./project/` - Standalone demonstration
+- **Production**: `../../../../csharp/Link.Foundation.Links.Notation/Parser.peg` - Full implementation

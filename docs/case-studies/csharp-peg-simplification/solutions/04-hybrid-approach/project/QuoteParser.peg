@@ -1,0 +1,116 @@
+@namespace TestHybrid
+@classname QuoteParser
+@using System.Linq
+
+@members
+{
+    private string _multiQuoteValue = "";
+
+    /// <summary>
+    /// Parse a multi-quote string dynamically for N >= 3 quotes.
+    /// Uses a universal procedural algorithm that handles any N.
+    /// </summary>
+    private bool ParseMultiQuoteString(string input, char quoteChar)
+    {
+        _multiQuoteValue = "";
+        if (string.IsNullOrEmpty(input)) return false;
+
+        // Count opening quotes
+        int quoteCount = 0;
+        while (quoteCount < input.Length && input[quoteCount] == quoteChar)
+        {
+            quoteCount++;
+        }
+
+        if (quoteCount < 3) return false; // Let explicit rules handle N=1 and N=2
+
+        string openClose = new string(quoteChar, quoteCount);
+        string escapeSeq = new string(quoteChar, quoteCount * 2);
+        string escapeVal = new string(quoteChar, quoteCount);
+
+        int pos = quoteCount;
+        var content = new System.Text.StringBuilder();
+
+        while (pos < input.Length)
+        {
+            // Check for escape sequence (2*N quotes)
+            if (pos + escapeSeq.Length <= input.Length &&
+                input.Substring(pos, escapeSeq.Length) == escapeSeq)
+            {
+                content.Append(escapeVal);
+                pos += escapeSeq.Length;
+                continue;
+            }
+
+            // Check for closing quotes
+            if (pos + quoteCount <= input.Length &&
+                input.Substring(pos, quoteCount) == openClose)
+            {
+                int afterClose = pos + quoteCount;
+                if (afterClose >= input.Length || input[afterClose] != quoteChar)
+                {
+                    if (afterClose == input.Length)
+                    {
+                        _multiQuoteValue = content.ToString();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            content.Append(input[pos]);
+            pos++;
+        }
+        return false;
+    }
+}
+
+// Entry: parse a list of quoted strings
+document <IList<string>> = list:quotedString* eof { list }
+
+quotedString <string> = _ q:quoted _ { q }
+
+// Order: high quotes (3+) first, then double (2), then single (1)
+quoted <string> = highQuoted / doubleQuoted / singleQuoted
+
+// === HIGH QUOTES (N >= 3) - Procedural parsing ===
+highQuoted <string> = &('"""' / "'''" / '```') raw:highQuoteCapture { raw }
+
+highQuoteCapture <string> = raw:highQuoteDoubleRaw &{ ParseMultiQuoteString(raw, '"') } { _multiQuoteValue }
+/ raw:highQuoteSingleRaw &{ ParseMultiQuoteString(raw, '\'') } { _multiQuoteValue }
+/ raw:highQuoteBacktickRaw &{ ParseMultiQuoteString(raw, '`') } { _multiQuoteValue }
+
+highQuoteDoubleRaw <string> = "" ('"'+ highQuoteDoubleContent* '"'+)
+highQuoteSingleRaw <string> = "" ("'"+ highQuoteSingleContent* "'"+)
+highQuoteBacktickRaw <string> = "" ('`'+ highQuoteBacktickContent* '`'+)
+
+highQuoteDoubleContent = [^"] / '"'+ &[^"]
+highQuoteSingleContent = [^'] / "'"+ &[^']
+highQuoteBacktickContent = [^`] / '`'+ &[^`]
+
+// === DOUBLE QUOTES (N = 2) - Explicit PEG rules ===
+doubleQuoted <string> = doubleDouble / doubleSingle / doubleBacktick
+
+doubleDouble <string> = '""' r:doubleDoubleContent* '""' { string.Join("", r) }
+doubleDoubleContent <string> = '""""' { "\"\"" } / !'""' c:. { c.ToString() }
+
+doubleSingle <string> = "''" r:doubleSingleContent* "''" { string.Join("", r) }
+doubleSingleContent <string> = "''''" { "''" } / !"''" c:. { c.ToString() }
+
+doubleBacktick <string> = '``' r:doubleBacktickContent* '``' { string.Join("", r) }
+doubleBacktickContent <string> = '````' { "``" } / !'``' c:. { c.ToString() }
+
+// === SINGLE QUOTES (N = 1) - Explicit PEG rules for disambiguation ===
+singleQuoted <string> = singleDouble / singleSingle / singleBacktick
+
+singleDouble <string> = '"' r:singleDoubleContent* '"' { string.Join("", r) }
+singleDoubleContent <string> = '""' { "\"" } / c:[^"] { c.ToString() }
+
+singleSingle <string> = "'" r:singleSingleContent* "'" { string.Join("", r) }
+singleSingleContent <string> = "''" { "'" } / c:[^'] { c.ToString() }
+
+singleBacktick <string> = '`' r:singleBacktickContent* '`' { string.Join("", r) }
+singleBacktickContent <string> = '``' { "`" } / c:[^`] { c.ToString() }
+
+_ = [ \t\r\n]*
+eof = !.

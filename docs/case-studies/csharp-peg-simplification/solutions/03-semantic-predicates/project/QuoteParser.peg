@@ -1,0 +1,94 @@
+@namespace TestSemanticPredicates
+@classname QuoteParser
+@using System.Linq
+
+@members
+{
+    private string _parsedValue = "";
+    private int _parsedLength;
+
+    /// <summary>
+    /// Universal parser for N-quote strings.
+    /// This method CANNOT be used in semantic predicates because
+    /// they don't have access to the input string (subject).
+    /// </summary>
+    private bool ParseQuotedStringAt(string input, int startPos, char quoteChar)
+    {
+        if (startPos >= input.Length || input[startPos] != quoteChar)
+            return false;
+
+        // Count opening quotes
+        int quoteCount = 0;
+        int pos = startPos;
+        while (pos < input.Length && input[pos] == quoteChar)
+        {
+            quoteCount++;
+            pos++;
+        }
+
+        string closeSeq = new string(quoteChar, quoteCount);
+        string escapeSeq = new string(quoteChar, quoteCount * 2);
+        var content = new System.Text.StringBuilder();
+
+        while (pos < input.Length)
+        {
+            // Check for escape sequence (2*N quotes)
+            if (pos + escapeSeq.Length <= input.Length &&
+                input.Substring(pos, escapeSeq.Length) == escapeSeq)
+            {
+                content.Append(closeSeq);
+                pos += escapeSeq.Length;
+                continue;
+            }
+
+            // Check for closing sequence (exactly N quotes)
+            if (pos + quoteCount <= input.Length &&
+                input.Substring(pos, quoteCount) == closeSeq)
+            {
+                int afterClose = pos + quoteCount;
+                if (afterClose >= input.Length || input[afterClose] != quoteChar)
+                {
+                    _parsedValue = content.ToString();
+                    _parsedLength = afterClose - startPos;
+                    return true;
+                }
+            }
+
+            content.Append(input[pos]);
+            pos++;
+        }
+        return false;
+    }
+}
+
+// This grammar demonstrates what we WANT to do but CANNOT
+// because semantic predicates don't have access to the input string.
+//
+// In JavaScript (Peggy.js), we can write:
+//   doubleQuoted = &'"' &{
+//     const pos = offset();
+//     const result = parseQuotedStringAt(input, pos, '"');
+//     return result != null;
+//   }
+//
+// In C# (Pegasus), we would want to write:
+//   doubleQuoted = &'"' &{ ParseQuotedStringAt(subject, state.Location, '"') }
+//
+// But 'subject' is not accessible in semantic predicates.
+// The predicate receives only 'state' (Cursor) which has 'Location' but not 'Subject'.
+
+document <string> = q:quoted { q }
+
+// Fallback: We have to use explicit PEG rules instead
+// Because we can't access 'subject' in &{ } predicates
+quoted <string> = doubleQuote1 / singleQuote1 / backtickQuote1
+
+// Simple N=1 explicit rules (no access to input needed)
+doubleQuote1 <string> = '"' r:doubleQuote1Content* '"' { string.Join("", r) }
+doubleQuote1Content <string> = '""' { "\"" } / c:[^"] { c.ToString() }
+
+singleQuote1 <string> = "'" r:singleQuote1Content* "'" { string.Join("", r) }
+singleQuote1Content <string> = "''" { "'" } / c:[^'] { c.ToString() }
+
+backtickQuote1 <string> = '`' r:backtickQuote1Content* '`' { string.Join("", r) }
+backtickQuote1Content <string> = '``' { "`" } / c:[^`] { c.ToString() }
