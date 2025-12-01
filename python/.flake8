@@ -1,0 +1,8 @@
+[flake8]
+max-line-length = 120
+extend-ignore = E203, W503
+per-file-ignores =
+    # E402: module level import not at top of file - needed for path setup
+    run_tests.py:E402
+    tests/test_links_group.py:E402
+    tests/test_nested_self_reference.py:E402

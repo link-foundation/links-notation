@@ -161,7 +161,7 @@ test('Test special characters in quotes', () => {
   let input = '("key:with:colons": "value(with)parens")';
   let result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);
-  
+
   input = "('key with spaces': 'value: with special chars')";
   result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);

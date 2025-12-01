@@ -5,7 +5,8 @@ test('Nested self-referenced object in pair value', () => {
   // Test case from PARSER_BUG.md
   // This should parse a dict with two pairs, where the second pair's value
   // is itself a self-referenced dict definition (obj_1: dict ...)
-  const notation = '(obj_0: dict ((str bmFtZQ==) (str ZGljdDE=)) ((str b3RoZXI=) (obj_1: dict ((str bmFtZQ==) (str ZGljdDI=)) ((str b3RoZXI=) obj_0))))';
+  const notation =
+    '(obj_0: dict ((str bmFtZQ==) (str ZGljdDE=)) ((str b3RoZXI=) (obj_1: dict ((str bmFtZQ==) (str ZGljdDI=)) ((str b3RoZXI=) obj_0))))';
 
   const parser = new Parser();
   const links = parser.parse(notation);
@@ -85,7 +86,8 @@ test('Nested self-referenced object in pair value', () => {
 
 test('Self-reference as direct child works correctly', () => {
   // This pattern should work (and did work before)
-  const notation = '(obj_0: list (int 1) (int 2) (obj_1: list (int 3) (int 4) obj_0))';
+  const notation =
+    '(obj_0: list (int 1) (int 2) (obj_1: list (int 3) (int 4) obj_0))';
 
   const parser = new Parser();
   const links = parser.parse(notation);

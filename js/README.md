@@ -24,7 +24,7 @@ bun add links-notation
 #### Using Deno
 
 ```typescript
-import { Parser, Link } from "npm:links-notation@^0.6.0";
+import { Parser, Link } from 'npm:links-notation@^0.6.0';
 ```
 
 ### Local Development Setup
@@ -93,8 +93,8 @@ const result = parser.parse(input);
 console.log(result);
 
 // Access parsed structure
-result.forEach(link => {
-    console.log(link.toString());
+result.forEach((link) => {
+  console.log(link.toString());
 });
 ```
 
@@ -104,10 +104,7 @@ result.forEach(link => {
 import { Link } from 'links-notation';
 
 // Create links programmatically
-const link = new Link('parent', [
-    new Link('child1'),
-    new Link('child2')
-]);
+const link = new Link('parent', [new Link('child1'), new Link('child2')]);
 
 console.log(link.toString()); // (parent: child1 child2)
 
@@ -207,10 +204,58 @@ Container for grouping related links.
 - `src/index.js` - Main entry point
 - `tests/` - Test files
 
+## Maintenance
+
+### Linting
+
+Run ESLint to check for code style issues:
+
+```bash
+bun run lint
+```
+
+Auto-fix linting issues:
+
+```bash
+bun run lint:fix
+```
+
+### Pre-commit Hooks
+
+This project uses pre-commit hooks that automatically run ESLint before commits.
+To set up pre-commit hooks locally:
+
+```bash
+# From repository root
+pip install pre-commit
+pre-commit install
+```
+
 ## Dependencies
 
 - Peggy.js (5.0.6) - Parser generator
 - Bun runtime (development)
+
+## Maintenance
+
+### Code Formatting
+
+This project uses [Prettier](https://prettier.io/) for code formatting.
+
+#### Format all files
+
+```bash
+npx prettier --write .
+```
+
+#### Check formatting (without modifying files)
+
+```bash
+npx prettier --check .
+```
+
+These checks are also enforced in CI. Pull requests with formatting issues will
+fail the format check.
 
 ## Package Information
 

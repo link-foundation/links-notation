@@ -61,7 +61,7 @@ test('Test complex structure', () => {
   Value
     (property: name type)
     (method: name params return)`;
-  
+
   const result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);
 });
@@ -75,44 +75,44 @@ simple_ref
   nested1
   nested2
 )`;
-  
+
   const result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);
 });
 
 test('Test multiline with id', () => {
   // Test multi-line link with id
-  const input = "(id: value1 value2)";
+  const input = '(id: value1 value2)';
   const result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);
 });
 
 test('Test multiple top level elements', () => {
   // Test multiple top-level elements
-  const input = "(elem1: val1)\n(elem2: val2)";
+  const input = '(elem1: val1)\n(elem2: val2)';
   const result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);
 });
 
 test('Test multiline simple links', () => {
-  const input = "(1: 1 1)\n(2: 2 2)";
+  const input = '(1: 1 1)\n(2: 2 2)';
   const parsed = parser.parse(input);
   expect(parsed.length).toBeGreaterThan(0);
-  
+
   // Validate regular formatting
   const output = formatLinks(parsed);
-  expect(output).toContain("(1: 1 1)");
-  expect(output).toContain("(2: 2 2)");
-  
+  expect(output).toContain('(1: 1 1)');
+  expect(output).toContain('(2: 2 2)');
+
   // Validate alternate formatting matches input
   const outputAlternate = formatLinks(parsed);
   expect(outputAlternate).toBe(input);
 });
 
 test('Test indented children', () => {
-  const input = "parent\n  child1\n  child2";
+  const input = 'parent\n  child1\n  child2';
   const parsed = parser.parse(input);
-  
+
   // The parsed structure should have parent with children
   expect(parsed.length).toBeGreaterThan(0);
 });

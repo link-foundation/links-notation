@@ -152,6 +152,51 @@ pip install build
 python -m build
 ```
 
+## Maintenance
+
+### Linting and Formatting
+
+This project uses [Black](https://github.com/psf/black) for code formatting,
+[isort](https://pycqa.github.io/isort/) for import sorting, and
+[flake8](https://flake8.pycqa.org/) for linting.
+
+Install linting tools:
+
+```bash
+pip install ".[lint]"
+# Or install all dev dependencies
+pip install ".[dev]"
+```
+
+#### Format all code files
+
+```bash
+black .
+isort .
+```
+
+#### Check formatting (without modifying files)
+
+```bash
+black --check --diff .
+isort --check-only --diff .
+flake8 --max-line-length=120
+```
+
+These checks are enforced in CI. Pull requests with unformatted code will fail
+the lint check.
+
+### Pre-commit Hooks
+
+This project uses pre-commit hooks that automatically run Black, isort, and
+flake8 before commits. To set up pre-commit hooks locally:
+
+```bash
+# From repository root
+pip install pre-commit
+pre-commit install
+```
+
 ## License
 
 This project is released into the public domain under the [Unlicense](../LICENSE).

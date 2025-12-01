@@ -30,6 +30,8 @@ dependencies = []
 
 [project.optional-dependencies]
 test = ["pytest>=7.0", "pytest-timeout>=2.1"]
+lint = ["black>=24.1", "isort>=5.13", "flake8>=7.0"]
+dev = ["pytest>=7.0", "pytest-timeout>=2.1", "black>=24.1", "isort>=5.13", "flake8>=7.0"]
 
 [project.urls]
 Homepage = "https://github.com/link-foundation/links-notation"
@@ -46,3 +48,15 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 timeout = 60
 timeout_func_only = true
+
+[tool.black]
+line-length = 120
+target-version = ["py39", "py310", "py311", "py312", "py313"]
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = ["E203", "W503"]

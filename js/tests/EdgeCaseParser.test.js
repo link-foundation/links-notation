@@ -93,11 +93,11 @@ test('Empty links', () => {
   expect(result.length).toBe(1);
   expect(result[0].id).toBe(null);
   expect(result[0].values).toEqual([]);
-  
+
   // '(:)' is now forbidden
   input = '(:)';
   expect(() => parser.parse(input)).toThrow();
-  
+
   input = '(id:)';
   result = parser.parse(input);
   expect(result.length).toBe(1);

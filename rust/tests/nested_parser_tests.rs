@@ -82,7 +82,8 @@ fn test_indentation_based_children() {
     let input = "parent\n  child1\n  child2\n    grandchild";
     let result = parse_lino(input).unwrap();
     let output = format!("{:#}", result);
-    let expected = "(parent)\n((parent) (child1))\n((parent) (child2))\n(((parent) (child2)) (grandchild))";
+    let expected =
+        "(parent)\n((parent) (child1))\n((parent) (child2))\n(((parent) (child2)) (grandchild))";
     assert_eq!(expected, output);
 }
 
@@ -138,7 +139,7 @@ fn test_nested_indentation_parser() {
 
 #[test]
 fn test_three_level_nesting_roundtrip() {
-    use links_notation::{parse_lino_to_links, format_links};
+    use links_notation::{format_links, parse_lino_to_links};
 
     let input = "(1: (2: (3: 3)))";
     let parsed = parse_lino_to_links(input).expect("Failed to parse");
@@ -150,7 +151,7 @@ fn test_three_level_nesting_roundtrip() {
 
 #[test]
 fn test_deep_nested_structure_roundtrip() {
-    use links_notation::{parse_lino_to_links, format_links};
+    use links_notation::{format_links, parse_lino_to_links};
 
     let input = "(a: (b: (c: (d: d))))";
     let parsed = parse_lino_to_links(input).expect("Failed to parse");
@@ -162,7 +163,7 @@ fn test_deep_nested_structure_roundtrip() {
 
 #[test]
 fn test_multiple_nested_links_roundtrip() {
-    use links_notation::{parse_lino_to_links, format_links};
+    use links_notation::{format_links, parse_lino_to_links};
 
     let input = "(parent: (child1: value1) (child2: value2))";
     let parsed = parse_lino_to_links(input).expect("Failed to parse");

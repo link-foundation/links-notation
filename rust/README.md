@@ -214,6 +214,39 @@ The `Display` trait is implemented for `LiNo<T>` where `T: ToString`:
 - Regular format: `format!("{}", lino)` - Parenthesized output
 - Alternate format: `format!("{:#}", lino)` - Line-based output
 
+## Maintenance
+
+### Linting and Formatting
+
+Check code formatting:
+
+```bash
+cargo fmt --all -- --check
+```
+
+Auto-fix formatting:
+
+```bash
+cargo fmt --all
+```
+
+Run Clippy linter:
+
+```bash
+cargo clippy --all-targets --all-features -- -D warnings
+```
+
+### Pre-commit Hooks
+
+This project uses pre-commit hooks that automatically run `cargo fmt` and
+`cargo check` before commits. To set up pre-commit hooks locally:
+
+```bash
+# From repository root
+pip install pre-commit
+pre-commit install
+```
+
 ## Dependencies
 
 - nom (8.0) - Parser combinator library
@@ -233,3 +266,31 @@ match parse_lino("(invalid") {
     Err(error) => eprintln!("Error: {}", error),
 }
 ```
+
+## Maintenance
+
+### Code Formatting
+
+This project uses [rustfmt](https://github.com/rust-lang/rustfmt) for code
+formatting and [clippy](https://github.com/rust-lang/rust-clippy) for linting.
+
+#### Format all files
+
+```bash
+cargo fmt
+```
+
+#### Check formatting (without modifying files)
+
+```bash
+cargo fmt --check
+```
+
+#### Run linter
+
+```bash
+cargo clippy
+```
+
+These checks are also enforced in CI. Pull requests with formatting issues will
+fail the format check.

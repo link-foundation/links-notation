@@ -13,8 +13,16 @@ test('Format config basic', () => {
 test('Format with line length limit', () => {
   // Create a link with many references that exceeds line length
   const link = new Link('sequence', [
-    new Link('1'), new Link('2'), new Link('3'), new Link('4'), new Link('5'),
-    new Link('6'), new Link('7'), new Link('8'), new Link('9'), new Link('10')
+    new Link('1'),
+    new Link('2'),
+    new Link('3'),
+    new Link('4'),
+    new Link('5'),
+    new Link('6'),
+    new Link('7'),
+    new Link('8'),
+    new Link('9'),
+    new Link('10'),
   ]);
 
   // Format with line length limit
@@ -22,7 +30,7 @@ test('Format with line length limit', () => {
   const config = new FormatConfig({
     indentLongLines: true,
     maxLineLength: 30,
-    preferInline: false
+    preferInline: false,
   });
 
   const output = link.format(config);
@@ -32,12 +40,17 @@ test('Format with line length limit', () => {
 
 test('Format with max inline refs', () => {
   // Create a link with 4 references
-  const link = new Link('id', [new Link('1'), new Link('2'), new Link('3'), new Link('4')]);
+  const link = new Link('id', [
+    new Link('1'),
+    new Link('2'),
+    new Link('3'),
+    new Link('4'),
+  ]);
 
   // Format with maxInlineRefs=3 (should trigger indentation)
   const config = new FormatConfig({
     maxInlineRefs: 3,
-    preferInline: false
+    preferInline: false,
   });
 
   const output = link.format(config);
@@ -49,7 +62,7 @@ test('Format with consecutive grouping', () => {
   const links = [
     new Link('SetA', [new Link('a')]),
     new Link('SetA', [new Link('b')]),
-    new Link('SetA', [new Link('c')])
+    new Link('SetA', [new Link('c')]),
   ];
 
   const config = new FormatConfig({ groupConsecutive: true });
@@ -75,12 +88,17 @@ test('Format config less parentheses', () => {
 });
 
 test('Format config custom indent', () => {
-  const link = new Link('id', [new Link('1'), new Link('2'), new Link('3'), new Link('4')]);
+  const link = new Link('id', [
+    new Link('1'),
+    new Link('2'),
+    new Link('3'),
+    new Link('4'),
+  ]);
 
   const config = new FormatConfig({
     maxInlineRefs: 3,
     preferInline: false,
-    indentString: '    ' // 4 spaces
+    indentString: '    ', // 4 spaces
   });
 
   const output = link.format(config);
@@ -90,12 +108,16 @@ test('Format config custom indent', () => {
 
 test('Roundtrip with line length formatting', () => {
   // Create a simple link
-  const originalLink = new Link('test', [new Link('a'), new Link('b'), new Link('c')]);
+  const originalLink = new Link('test', [
+    new Link('a'),
+    new Link('b'),
+    new Link('c'),
+  ]);
 
   // Format with indentation
   const config = new FormatConfig({
     maxInlineRefs: 2,
-    preferInline: false
+    preferInline: false,
   });
 
   const formatted = originalLink.format(config);
