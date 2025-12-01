@@ -1,6 +1,7 @@
 """Tests for multi-quote string support in parser."""
 
 import pytest
+
 from links_notation.parser import Parser
 
 
