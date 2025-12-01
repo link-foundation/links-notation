@@ -193,6 +193,18 @@ pre-commit install
 <li>Pegasus (4.1.0)</li>
 <li>Platform.Collections (0.3.2)</li>
 </ul>
+<h2 id="maintenance-1">Maintenance</h2>
+<h3 id="code-formatting">Code Formatting</h3>
+<p>This project uses <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format">dotnet format</a>
+for code formatting.</p>
+<h4 id="format-all-files">Format all files</h4>
+<pre><code class="lang-bash">dotnet format
+</code></pre>
+<h4 id="check-formatting-without-modifying-files">Check formatting (without modifying files)</h4>
+<pre><code class="lang-bash">dotnet format --verify-no-changes
+</code></pre>
+<p>These checks are also enforced in CI. Pull requests with formatting issues will
+fail the format check.</p>
 <h2 id="documentation">Documentation</h2>
 <p>For complete API documentation, visit:
 <a href="https://link-foundation.github.io/links-notation/csharp/api/Link.Foundation.Links.Notation.html">Link.Foundation.Links.Notation Documentation</a></p>
