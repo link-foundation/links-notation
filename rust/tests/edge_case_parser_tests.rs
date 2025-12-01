@@ -108,12 +108,12 @@ fn test_empty_links_test() {
     let input = "()";
     let result = parse_lino(input);
     assert!(result.is_ok());
-    
+
     // '(:)' is now forbidden
     let input = "(:)";
     let result = parse_lino(input);
     assert!(result.is_err());
-    
+
     let input = "(id:)";
     let result = parse_lino(input);
     assert!(result.is_ok());

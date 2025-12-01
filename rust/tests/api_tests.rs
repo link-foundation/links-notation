@@ -95,7 +95,7 @@ fn test_link_with_source_type_target() {
 fn test_single_line_format() {
     let input = "id: value1 value2";
     let parsed = parse_lino(input).expect("Failed to parse input");
-    
+
     // The parser should handle single-line format
     let output = parsed.to_string();
     assert!(output.contains("id") && output.contains("value1") && output.contains("value2"));
@@ -128,7 +128,7 @@ fn test_quoted_references_parsing() {
 fn test_indented_id_syntax_parsing() {
     // Test that indented ID syntax is parsed correctly
     // Note: Round-trip preservation requires FormatConfig (not yet implemented in Rust)
-    use links_notation::{parse_lino_to_links, format_links};
+    use links_notation::{format_links, parse_lino_to_links};
 
     let indented = "id:\n  value1\n  value2";
     let inline = "(id: value1 value2)";
@@ -147,7 +147,7 @@ fn test_indented_id_syntax_parsing() {
 fn test_multiple_indented_id_syntax_parsing() {
     // Test that multiple indented ID links are parsed correctly
     // Note: Round-trip preservation requires FormatConfig (not yet implemented in Rust)
-    use links_notation::{parse_lino_to_links, format_links};
+    use links_notation::{format_links, parse_lino_to_links};
 
     let indented = "id1:\n  a\n  b\nid2:\n  c\n  d";
     let inline = "(id1: a b)\n(id2: c d)";
@@ -166,22 +166,22 @@ fn test_multiple_indented_id_syntax_parsing() {
 fn test_indented_id_syntax_roundtrip() {
     // Test that we can roundtrip indented ID syntax
     // Note: Full roundtrip formatting requires FormatConfig integration with format_links
-    use links_notation::{parse_lino_to_links, format_config::FormatConfig};
+    use links_notation::{format_config::FormatConfig, parse_lino_to_links};
 
     let indented = "id:\n  value1\n  value2";
     let parsed = parse_lino_to_links(indented).expect("Failed to parse indented");
 
     // Create FormatConfig with settings that would preserve indented format
     let config = FormatConfig::builder()
-        .max_inline_refs(Some(1))  // Force indentation with more than 1 ref
+        .max_inline_refs(Some(1)) // Force indentation with more than 1 ref
         .prefer_inline(false)
         .build();
 
     // Verify parsing worked correctly
-    assert!(parsed.len() > 0);
+    assert!(!parsed.is_empty());
     assert_eq!(config.max_inline_refs, Some(1));
-    assert_eq!(config.prefer_inline, false);
-    assert_eq!(config.should_indent_by_ref_count(2), true);
+    assert!(!config.prefer_inline);
+    assert!(config.should_indent_by_ref_count(2));
 
     // Note: Full roundtrip test would verify: format_links(&parsed, &config) == indented
     // This will work once FormatConfig is integrated into format_links function
@@ -191,22 +191,22 @@ fn test_indented_id_syntax_roundtrip() {
 fn test_multiple_indented_id_syntax_roundtrip() {
     // Test that we can roundtrip multiple indented ID links
     // Note: Full roundtrip formatting requires FormatConfig integration with format_links
-    use links_notation::{parse_lino_to_links, format_config::FormatConfig};
+    use links_notation::{format_config::FormatConfig, parse_lino_to_links};
 
     let indented = "id1:\n  a\n  b\nid2:\n  c\n  d";
     let parsed = parse_lino_to_links(indented).expect("Failed to parse indented");
 
     // Create FormatConfig with settings that would preserve indented format
     let config = FormatConfig::builder()
-        .max_inline_refs(Some(1))  // Force indentation with more than 1 ref
+        .max_inline_refs(Some(1)) // Force indentation with more than 1 ref
         .prefer_inline(false)
         .build();
 
     // Verify parsing worked correctly
     assert!(parsed.len() >= 2);
     assert_eq!(config.max_inline_refs, Some(1));
-    assert_eq!(config.prefer_inline, false);
-    assert_eq!(config.should_indent_by_ref_count(2), true);
+    assert!(!config.prefer_inline);
+    assert!(config.should_indent_by_ref_count(2));
 
     // Note: Full roundtrip test would verify: format_links(&parsed, &config) == indented
     // This will work once FormatConfig is integrated into format_links function

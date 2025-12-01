@@ -1,8 +1,6 @@
 """Indented ID syntax tests - ported from JS/Rust implementations."""
 
-import pytest
 from links_notation import Parser, format_links
-
 
 parser = Parser()
 
@@ -162,18 +160,9 @@ def test_empty_indented_id_should_work():
 def test_equivalence_test_comprehensive():
     """Test equivalence - comprehensive."""
     test_cases = [
-        {
-            "indented": "test:\n  one",
-            "inline": "(test: one)"
-        },
-        {
-            "indented": "x:\n  a\n  b\n  c",
-            "inline": "(x: a b c)"
-        },
-        {
-            "indented": '"quoted":\n  value',
-            "inline": '("quoted": value)'
-        }
+        {"indented": "test:\n  one", "inline": "(test: one)"},
+        {"indented": "x:\n  a\n  b\n  c", "inline": "(x: a b c)"},
+        {"indented": '"quoted":\n  value', "inline": '("quoted": value)'},
     ]
 
     for test_case in test_cases:

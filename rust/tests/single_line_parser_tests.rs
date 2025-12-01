@@ -1,11 +1,15 @@
-use links_notation::{parse_lino, LiNo};
 use links_notation::parser::parse_document;
+use links_notation::{parse_lino, LiNo};
 
 /// Helper function to format links similar to C# and JS versions
 fn format_links(lino: &LiNo<String>, less_parentheses: bool) -> String {
     match lino {
         LiNo::Ref(value) => {
-            if value.contains(' ') || value.contains(':') || value.contains('(') || value.contains(')') {
+            if value.contains(' ')
+                || value.contains(':')
+                || value.contains('(')
+                || value.contains(')')
+            {
                 format!("'{}'", value)
             } else {
                 value.clone()
@@ -16,7 +20,11 @@ fn format_links(lino: &LiNo<String>, less_parentheses: bool) -> String {
                 if let Some(id) = id {
                     // Escape id same as references
                     let escaped_id = format_links(&LiNo::Ref(id.clone()), false);
-                    if less_parentheses { escaped_id } else { format!("({})", escaped_id) }
+                    if less_parentheses {
+                        escaped_id
+                    } else {
+                        format!("({})", escaped_id)
+                    }
                 } else {
                     "()".to_string()
                 }
@@ -26,7 +34,7 @@ fn format_links(lino: &LiNo<String>, less_parentheses: bool) -> String {
                     .map(|v| format_links(v, false))
                     .collect::<Vec<_>>()
                     .join(" ");
-                
+
                 if let Some(id) = id {
                     let escaped_id = format_links(&LiNo::Ref(id.clone()), false);
                     if less_parentheses && values.len() == 1 {
@@ -34,13 +42,11 @@ fn format_links(lino: &LiNo<String>, less_parentheses: bool) -> String {
                     } else {
                         format!("({}: {})", escaped_id, formatted_values)
                     }
+                } else if less_parentheses && values.iter().all(|v| matches!(v, LiNo::Ref(_))) {
+                    // All values are references, can skip parentheses
+                    formatted_values
                 } else {
-                    if less_parentheses && values.iter().all(|v| matches!(v, LiNo::Ref(_))) {
-                        // All values are references, can skip parentheses
-                        formatted_values
-                    } else {
-                        format!("({})", formatted_values)
-                    }
+                    format!("({})", formatted_values)
                 }
             }
         }
@@ -49,13 +55,11 @@ fn format_links(lino: &LiNo<String>, less_parentheses: bool) -> String {
 
 fn format_links_multiline(lino: &LiNo<String>) -> String {
     match lino {
-        LiNo::Link { values, .. } if !values.is_empty() => {
-            values
-                .iter()
-                .map(|v| format_links(v, false))
-                .collect::<Vec<_>>()
-                .join("\n")
-        }
+        LiNo::Link { values, .. } if !values.is_empty() => values
+            .iter()
+            .map(|v| format_links(v, false))
+            .collect::<Vec<_>>()
+            .join("\n"),
         _ => format_links(lino, false),
     }
 }
@@ -248,7 +252,7 @@ fn test_special_characters_in_quotes() {
     let input = r#"("key:with:colons": "value(with)parens")"#;
     let result = parse_lino(input);
     assert!(result.is_ok());
-    
+
     let input = r#"('key with spaces': 'value: with special chars')"#;
     let result = parse_lino(input);
     assert!(result.is_ok());

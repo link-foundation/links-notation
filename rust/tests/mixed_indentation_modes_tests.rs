@@ -11,12 +11,25 @@ mod tests {
         let result = parse_lino_to_links(input).unwrap();
 
         assert!(!result.is_empty());
-        let formatted = result.iter().map(|l| format!("{}", l)).collect::<Vec<_>>().join("\n");
+        let formatted = result
+            .iter()
+            .map(|l| format!("{}", l))
+            .collect::<Vec<_>>()
+            .join("\n");
         assert!(formatted.contains("empInfo"));
         assert!(formatted.contains("employees:"));
-        assert!(formatted.contains("James Kirk") || formatted.contains("James") && formatted.contains("Kirk"));
-        assert!(formatted.contains("Jean-Luc Picard") || formatted.contains("Jean-Luc") && formatted.contains("Picard"));
-        assert!(formatted.contains("Wesley Crusher") || formatted.contains("Wesley") && formatted.contains("Crusher"));
+        assert!(
+            formatted.contains("James Kirk")
+                || formatted.contains("James") && formatted.contains("Kirk")
+        );
+        assert!(
+            formatted.contains("Jean-Luc Picard")
+                || formatted.contains("Jean-Luc") && formatted.contains("Picard")
+        );
+        assert!(
+            formatted.contains("Wesley Crusher")
+                || formatted.contains("Wesley") && formatted.contains("Crusher")
+        );
     }
 
     #[test]
@@ -26,12 +39,25 @@ mod tests {
         let result = parse_lino_to_links(input).unwrap();
 
         assert!(!result.is_empty());
-        let formatted = result.iter().map(|l| format!("{}", l)).collect::<Vec<_>>().join("\n");
+        let formatted = result
+            .iter()
+            .map(|l| format!("{}", l))
+            .collect::<Vec<_>>()
+            .join("\n");
         assert!(formatted.contains("empInfo"));
         assert!(formatted.contains("employees:"));
-        assert!(formatted.contains("James Kirk") || formatted.contains("James") && formatted.contains("Kirk"));
-        assert!(formatted.contains("Jean-Luc Picard") || formatted.contains("Jean-Luc") && formatted.contains("Picard"));
-        assert!(formatted.contains("Wesley Crusher") || formatted.contains("Wesley") && formatted.contains("Crusher"));
+        assert!(
+            formatted.contains("James Kirk")
+                || formatted.contains("James") && formatted.contains("Kirk")
+        );
+        assert!(
+            formatted.contains("Jean-Luc Picard")
+                || formatted.contains("Jean-Luc") && formatted.contains("Picard")
+        );
+        assert!(
+            formatted.contains("Wesley Crusher")
+                || formatted.contains("Wesley") && formatted.contains("Crusher")
+        );
     }
 
     #[test]
@@ -43,8 +69,16 @@ mod tests {
         let result1 = parse_lino_to_links(version1).unwrap();
         let result2 = parse_lino_to_links(version2).unwrap();
 
-        let formatted1 = result1.iter().map(|l| format!("{}", l)).collect::<Vec<_>>().join("\n");
-        let formatted2 = result2.iter().map(|l| format!("{}", l)).collect::<Vec<_>>().join("\n");
+        let formatted1 = result1
+            .iter()
+            .map(|l| format!("{}", l))
+            .collect::<Vec<_>>()
+            .join("\n");
+        let formatted2 = result2
+            .iter()
+            .map(|l| format!("{}", l))
+            .collect::<Vec<_>>()
+            .join("\n");
 
         assert_eq!(formatted1, formatted2);
     }
@@ -56,7 +90,11 @@ mod tests {
         let result = parse_lino_to_links(input).unwrap();
 
         assert!(!result.is_empty());
-        let formatted = result.iter().map(|l| format!("{}", l)).collect::<Vec<_>>().join("\n");
+        let formatted = result
+            .iter()
+            .map(|l| format!("{}", l))
+            .collect::<Vec<_>>()
+            .join("\n");
         assert!(formatted.contains("empInfo"));
         assert!(formatted.contains("employees"));
     }
@@ -69,11 +107,24 @@ mod tests {
 
         assert!(!result.is_empty());
         assert_eq!(result.len(), 1);
-        let formatted = result.iter().map(|l| format!("{}", l)).collect::<Vec<_>>().join("\n");
+        let formatted = result
+            .iter()
+            .map(|l| format!("{}", l))
+            .collect::<Vec<_>>()
+            .join("\n");
         assert!(formatted.contains("employees:"));
-        assert!(formatted.contains("James Kirk") || formatted.contains("James") && formatted.contains("Kirk"));
-        assert!(formatted.contains("Jean-Luc Picard") || formatted.contains("Jean-Luc") && formatted.contains("Picard"));
-        assert!(formatted.contains("Wesley Crusher") || formatted.contains("Wesley") && formatted.contains("Crusher"));
+        assert!(
+            formatted.contains("James Kirk")
+                || formatted.contains("James") && formatted.contains("Kirk")
+        );
+        assert!(
+            formatted.contains("Jean-Luc Picard")
+                || formatted.contains("Jean-Luc") && formatted.contains("Picard")
+        );
+        assert!(
+            formatted.contains("Wesley Crusher")
+                || formatted.contains("Wesley") && formatted.contains("Crusher")
+        );
     }
 
     #[test]
@@ -84,10 +135,20 @@ mod tests {
 
         assert!(!result.is_empty());
         assert_eq!(result.len(), 1);
-        let formatted = result.iter().map(|l| format!("{}", l)).collect::<Vec<_>>().join("\n");
+        let formatted = result
+            .iter()
+            .map(|l| format!("{}", l))
+            .collect::<Vec<_>>()
+            .join("\n");
         assert!(formatted.contains("employees:"));
-        assert!(formatted.contains("James Kirk") || formatted.contains("James") && formatted.contains("Kirk"));
-        assert!(formatted.contains("Jean-Luc Picard") || formatted.contains("Jean-Luc") && formatted.contains("Picard"));
+        assert!(
+            formatted.contains("James Kirk")
+                || formatted.contains("James") && formatted.contains("Kirk")
+        );
+        assert!(
+            formatted.contains("Jean-Luc Picard")
+                || formatted.contains("Jean-Luc") && formatted.contains("Picard")
+        );
     }
 
     #[test]
@@ -97,7 +158,11 @@ mod tests {
         let result = parse_lino_to_links(input).unwrap();
 
         assert!(!result.is_empty());
-        let formatted = result.iter().map(|l| format!("{}", l)).collect::<Vec<_>>().join("\n");
+        let formatted = result
+            .iter()
+            .map(|l| format!("{}", l))
+            .collect::<Vec<_>>()
+            .join("\n");
         assert!(formatted.contains("company"));
         assert!(formatted.contains("departments:"));
         assert!(formatted.contains("employees:"));
@@ -105,12 +170,17 @@ mod tests {
 
     #[test]
     fn deeply_nested_mixed_modes_test() {
-        let input = "root\n  level1\n    level2:\n      value1\n      value2\n    level2b\n      level3";
+        let input =
+            "root\n  level1\n    level2:\n      value1\n      value2\n    level2b\n      level3";
 
         let result = parse_lino_to_links(input).unwrap();
 
         assert!(!result.is_empty());
-        let formatted = result.iter().map(|l| format!("{}", l)).collect::<Vec<_>>().join("\n");
+        let formatted = result
+            .iter()
+            .map(|l| format!("{}", l))
+            .collect::<Vec<_>>()
+            .join("\n");
         assert!(formatted.contains("root"));
         assert!(formatted.contains("level2:"));
     }

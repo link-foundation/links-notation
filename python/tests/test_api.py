@@ -1,7 +1,6 @@
 """API tests for Lino parser - ported from JS/Rust implementations."""
 
-from links_notation import Parser, Link, format_links
-
+from links_notation import Link, Parser, format_links
 
 parser = Parser()
 
@@ -9,55 +8,55 @@ parser = Parser()
 def test_is_ref():
     """Test is_ref behavior (Python doesn't have separate Ref type)."""
     # In Python, a Link with no values acts like a reference
-    simple_link = Link('some_value')
-    assert simple_link.id == 'some_value'
+    simple_link = Link("some_value")
+    assert simple_link.id == "some_value"
     assert simple_link.values == []
 
 
 def test_is_link():
     """Test is_link behavior."""
-    link = Link('id', [Link('child')])
-    assert link.id == 'id'
+    link = Link("id", [Link("child")])
+    assert link.id == "id"
     assert len(link.values) == 1
-    assert link.values[0].id == 'child'
+    assert link.values[0].id == "child"
 
 
 def test_is_ref_equivalent():
     """Test simple link behavior (equivalent to Rust is_ref test)."""
-    simple_link = Link('some_value')
-    assert simple_link.id == 'some_value'
+    simple_link = Link("some_value")
+    assert simple_link.id == "some_value"
     assert simple_link.values == []
 
 
 def test_is_link_equivalent():
     """Test link with values."""
-    link = Link('id', [Link('child')])
-    assert link.id == 'id'
+    link = Link("id", [Link("child")])
+    assert link.id == "id"
     assert len(link.values) == 1
-    assert link.values[0].id == 'child'
+    assert link.values[0].id == "child"
 
 
 def test_empty_link():
     """Test empty link formatting."""
     link = Link(None, [])
     output = str(link)
-    assert output == '()'
+    assert output == "()"
 
 
 def test_simple_link():
     """Test simple link parsing and formatting."""
-    input_text = '(1: 1 1)'
+    input_text = "(1: 1 1)"
     parsed = parser.parse(input_text)
 
     # Validate regular formatting
     output = parsed[0].format()
-    expected = '(1: 1 1)'
+    expected = "(1: 1 1)"
     assert output == expected
 
 
 def test_link_with_source_target():
     """Test link with source and target."""
-    input_text = '(index: source target)'
+    input_text = "(index: source target)"
     parsed = parser.parse(input_text)
 
     # Validate regular formatting
@@ -67,7 +66,7 @@ def test_link_with_source_target():
 
 def test_link_with_source_type_target():
     """Test link with source, type, and target."""
-    input_text = '(index: source type target)'
+    input_text = "(index: source type target)"
     parsed = parser.parse(input_text)
 
     # Validate regular formatting
@@ -77,14 +76,14 @@ def test_link_with_source_type_target():
 
 def test_single_line_format():
     """Test single-line format parsing."""
-    input_text = 'id: value1 value2'
+    input_text = "id: value1 value2"
     parsed = parser.parse(input_text)
 
     # The parser should handle single-line format
     output = parsed[0].format(True)  # less_parentheses mode
-    assert 'id' in output
-    assert 'value1' in output
-    assert 'value2' in output
+    assert "id" in output
+    assert "value1" in output
+    assert "value2" in output
 
 
 def test_quoted_references():
@@ -93,8 +92,8 @@ def test_quoted_references():
     parsed = parser.parse(input_text)
 
     output = parsed[0].format()
-    assert 'quoted id' in output
-    assert 'value with spaces' in output
+    assert "quoted id" in output
+    assert "value with spaces" in output
 
 
 def test_quoted_references_parsing():
@@ -104,8 +103,8 @@ def test_quoted_references_parsing():
 
     # Verify parsing worked correctly
     output = format_links(parsed)
-    assert 'quoted id' in output
-    assert 'value with spaces' in output
+    assert "quoted id" in output
+    assert "value with spaces" in output
 
 
 def test_indented_id_syntax_parsing():
@@ -130,7 +129,7 @@ def test_indented_id_syntax_roundtrip():
 
     # Validate structure
     assert len(parsed) > 0
-    assert 'id' in format_links(parsed)
+    assert "id" in format_links(parsed)
 
 
 def test_multiple_indented_id_syntax_parsing():
@@ -156,5 +155,5 @@ def test_multiple_indented_id_syntax_roundtrip():
     # Validate structure
     assert len(parsed) >= 2
     output = format_links(parsed)
-    assert 'id1' in output
-    assert 'id2' in output
+    assert "id1" in output
+    assert "id2" in output

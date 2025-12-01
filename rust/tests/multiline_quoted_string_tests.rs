@@ -13,7 +13,11 @@ as another reference'
 )"#;
     let result = parse_lino(input).unwrap();
 
-    if let LiNo::Link { id: outer_id, values: outer_values } = &result {
+    if let LiNo::Link {
+        id: outer_id,
+        values: outer_values,
+    } = &result
+    {
         assert!(outer_id.is_none());
         assert_eq!(outer_values.len(), 1);
 
@@ -22,13 +26,19 @@ as another reference'
             assert_eq!(values.len(), 2);
 
             if let LiNo::Ref(ref first_value) = values[0] {
-                assert_eq!(first_value, "long\nstring literal representing\nthe reference");
+                assert_eq!(
+                    first_value,
+                    "long\nstring literal representing\nthe reference"
+                );
             } else {
                 panic!("Expected first value to be a Ref");
             }
 
             if let LiNo::Ref(ref second_value) = values[1] {
-                assert_eq!(second_value, "another\nlong string literal\nas another reference");
+                assert_eq!(
+                    second_value,
+                    "another\nlong string literal\nas another reference"
+                );
             } else {
                 panic!("Expected second value to be a Ref");
             }
@@ -87,7 +97,11 @@ line
 id": value1 value2)"#;
     let result = parse_lino(input).unwrap();
 
-    if let LiNo::Link { id: outer_id, values: outer_values } = &result {
+    if let LiNo::Link {
+        id: outer_id,
+        values: outer_values,
+    } = &result
+    {
         assert!(outer_id.is_none());
         assert_eq!(outer_values.len(), 1);
 

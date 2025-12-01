@@ -1,0 +1,60 @@
+name: bom-check
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  check-bom-consistency:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check for Unicode BOM in text files
+        run: |
+          echo "Checking for files with Unicode BOM..."
+          echo "Repository standard: NO BOM (UTF-8 without BOM)"
+          echo ""
+
+          # Find all text files that contain BOM (EF BB BF at start)
+          # Exclude binary files, .git directory, and common binary extensions
+          files_with_bom=""
+
+          while IFS= read -r -d '' file; do
+            # Check if file starts with UTF-8 BOM (EF BB BF)
+            if head -c 3 "$file" | od -An -tx1 | grep -q "ef bb bf"; then
+              files_with_bom="$files_with_bom$file"$'\n'
+            fi
+          done < <(find . -type f \
+            -not -path './.git/*' \
+            -not -name '*.png' \
+            -not -name '*.jpg' \
+            -not -name '*.jpeg' \
+            -not -name '*.gif' \
+            -not -name '*.ico' \
+            -not -name '*.woff' \
+            -not -name '*.woff2' \
+            -not -name '*.ttf' \
+            -not -name '*.eot' \
+            -not -name '*.pdf' \
+            -not -name '*.zip' \
+            -not -name '*.tar' \
+            -not -name '*.gz' \
+            -not -name '*.lock' \
+            -print0)
+
+          if [ -n "$files_with_bom" ]; then
+            echo "ERROR: The following files contain Unicode BOM but should not:"
+            echo "$files_with_bom"
+            echo ""
+            echo "To fix this, remove the BOM from these files."
+            echo "You can use: sed -i '1s/^\xEF\xBB\xBF//' <filename>"
+            echo "Or configure your editor to save files without BOM."
+            exit 1
+          else
+            echo "SUCCESS: All text files are consistent (no BOM found)."
+            exit 0
+          fi

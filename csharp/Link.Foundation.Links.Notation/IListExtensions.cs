@@ -1,4 +1,4 @@
-﻿using Platform.Collections;
+using Platform.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;

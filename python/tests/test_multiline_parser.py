@@ -2,7 +2,6 @@
 
 from links_notation import Parser, format_links
 
-
 parser = Parser()
 
 

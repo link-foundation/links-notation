@@ -145,9 +145,9 @@ mod tests {
     #[test]
     fn test_default_values() {
         let config = FormatConfig::default();
-        assert_eq!(config.less_parentheses, false);
+        assert!(!config.less_parentheses);
         assert_eq!(config.max_line_length, 80);
-        assert_eq!(config.indent_long_lines, false);
+        assert!(!config.indent_long_lines);
     }
 
     #[test]
@@ -157,7 +157,7 @@ mod tests {
             .max_line_length(100)
             .build();
 
-        assert_eq!(config.less_parentheses, true);
+        assert!(config.less_parentheses);
         assert_eq!(config.max_line_length, 100);
     }
 
@@ -168,18 +168,16 @@ mod tests {
             .max_line_length(80)
             .build();
 
-        assert_eq!(config.should_indent_by_length("short"), false);
-        assert_eq!(config.should_indent_by_length(&"a".repeat(100)), true);
+        assert!(!config.should_indent_by_length("short"));
+        assert!(config.should_indent_by_length(&"a".repeat(100)));
     }
 
     #[test]
     fn test_should_indent_by_ref_count() {
-        let config = FormatConfig::builder()
-            .max_inline_refs(Some(3))
-            .build();
+        let config = FormatConfig::builder().max_inline_refs(Some(3)).build();
 
-        assert_eq!(config.should_indent_by_ref_count(2), false);
-        assert_eq!(config.should_indent_by_ref_count(3), false);
-        assert_eq!(config.should_indent_by_ref_count(4), true);
+        assert!(!config.should_indent_by_ref_count(2));
+        assert!(!config.should_indent_by_ref_count(3));
+        assert!(config.should_indent_by_ref_count(4));
     }
 }
