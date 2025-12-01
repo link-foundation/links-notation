@@ -1,0 +1,103 @@
+@namespace CSharpPegTest
+@classname UniversalParser
+@using System.Linq
+
+@members
+{
+    private string _parsedValue;
+    private int _parsedLength;
+
+    /// <summary>
+    /// Universal parser for N-quote strings.
+    /// Handles any quote character and any number N of quotes.
+    /// </summary>
+    private bool ParseQuotedStringAt(string input, int startPos, char quoteChar)
+    {
+        if (startPos >= input.Length || input[startPos] != quoteChar)
+            return false;
+
+        // Count opening quotes
+        int quoteCount = 0;
+        int pos = startPos;
+        while (pos < input.Length && input[pos] == quoteChar)
+        {
+            quoteCount++;
+            pos++;
+        }
+
+        string closeSeq = new string(quoteChar, quoteCount);
+        string escapeSeq = new string(quoteChar, quoteCount * 2);
+        var content = new System.Text.StringBuilder();
+
+        while (pos < input.Length)
+        {
+            // Check for escape sequence (2*N quotes)
+            if (pos + escapeSeq.Length <= input.Length &&
+                input.Substring(pos, escapeSeq.Length) == escapeSeq)
+            {
+                content.Append(closeSeq);
+                pos += escapeSeq.Length;
+                continue;
+            }
+
+            // Check for closing sequence (exactly N quotes)
+            if (pos + quoteCount <= input.Length &&
+                input.Substring(pos, quoteCount) == closeSeq)
+            {
+                int afterClose = pos + quoteCount;
+                if (afterClose >= input.Length || input[afterClose] != quoteChar)
+                {
+                    _parsedValue = content.ToString();
+                    _parsedLength = afterClose - startPos;
+                    return true;
+                }
+            }
+
+            content.Append(input[pos]);
+            pos++;
+        }
+        return false;
+    }
+}
+
+document <string> = q:quoted { q }
+
+// Universal quoted string - handles any N quotes
+// THIS DOES NOT WORK with <PegGrammar> tag due to PEG0011 error
+quoted <string> = doubleQuoted / singleQuoted / backtickQuoted
+
+doubleQuoted <string> = #parse{
+    if (ParseQuotedStringAt(subject, startCursor.Location, '"'))
+    {
+        return new Pegasus.Common.ParseResult<string>(
+            ref startCursor,
+            startCursor.Advance(_parsedLength),
+            _parsedValue
+        );
+    }
+    return null;
+}
+
+singleQuoted <string> = #parse{
+    if (ParseQuotedStringAt(subject, startCursor.Location, '\''))
+    {
+        return new Pegasus.Common.ParseResult<string>(
+            ref startCursor,
+            startCursor.Advance(_parsedLength),
+            _parsedValue
+        );
+    }
+    return null;
+}
+
+backtickQuoted <string> = #parse{
+    if (ParseQuotedStringAt(subject, startCursor.Location, '`'))
+    {
+        return new Pegasus.Common.ParseResult<string>(
+            ref startCursor,
+            startCursor.Advance(_parsedLength),
+            _parsedValue
+        );
+    }
+    return null;
+}

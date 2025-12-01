@@ -1,0 +1,147 @@
+@namespace CSharpPegTest
+@classname SemanticPredicateParser
+@using System.Linq
+
+@members
+{
+    private string _parsedValue;
+    private int _parsedLength;
+
+    /// <summary>
+    /// Universal parser for N-quote strings.
+    /// </summary>
+    private bool ParseQuotedStringAt(string input, int startPos, char quoteChar)
+    {
+        if (input == null || startPos >= input.Length || input[startPos] != quoteChar)
+            return false;
+
+        // Count opening quotes
+        int quoteCount = 0;
+        int pos = startPos;
+        while (pos < input.Length && input[pos] == quoteChar)
+        {
+            quoteCount++;
+            pos++;
+        }
+
+        string closeSeq = new string(quoteChar, quoteCount);
+        string escapeSeq = new string(quoteChar, quoteCount * 2);
+        var content = new System.Text.StringBuilder();
+
+        while (pos < input.Length)
+        {
+            // Check for escape sequence
+            if (pos + escapeSeq.Length <= input.Length &&
+                input.Substring(pos, escapeSeq.Length) == escapeSeq)
+            {
+                content.Append(closeSeq);
+                pos += escapeSeq.Length;
+                continue;
+            }
+
+            // Check for closing sequence
+            if (pos + quoteCount <= input.Length &&
+                input.Substring(pos, quoteCount) == closeSeq)
+            {
+                int afterClose = pos + quoteCount;
+                if (afterClose >= input.Length || input[afterClose] != quoteChar)
+                {
+                    _parsedValue = content.ToString();
+                    _parsedLength = afterClose - startPos;
+                    return true;
+                }
+            }
+
+            content.Append(input[pos]);
+            pos++;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Workaround: Validate captured text (since we can't access input directly).
+    /// </summary>
+    private bool ValidateCapturedQuote(string capturedText, char quoteChar)
+    {
+        _parsedValue = null;
+        if (string.IsNullOrEmpty(capturedText) || capturedText[0] != quoteChar)
+            return false;
+
+        // Count opening quotes
+        int quoteCount = 0;
+        int pos = 0;
+        while (pos < capturedText.Length && capturedText[pos] == quoteChar)
+        {
+            quoteCount++;
+            pos++;
+        }
+
+        string closeSeq = new string(quoteChar, quoteCount);
+        string escapeSeq = new string(quoteChar, quoteCount * 2);
+        var content = new System.Text.StringBuilder();
+
+        while (pos < capturedText.Length)
+        {
+            if (pos + escapeSeq.Length <= capturedText.Length &&
+                capturedText.Substring(pos, escapeSeq.Length) == escapeSeq)
+            {
+                content.Append(closeSeq);
+                pos += escapeSeq.Length;
+                continue;
+            }
+
+            if (pos + quoteCount <= capturedText.Length &&
+                capturedText.Substring(pos, quoteCount) == closeSeq)
+            {
+                int afterClose = pos + quoteCount;
+                if (afterClose >= capturedText.Length || capturedText[afterClose] != quoteChar)
+                {
+                    if (afterClose == capturedText.Length)
+                    {
+                        _parsedValue = content.ToString();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            content.Append(capturedText[pos]);
+            pos++;
+        }
+        return false;
+    }
+}
+
+document <string> = q:quoted { q }
+
+quoted <string> = doubleQuoted / singleQuoted / backtickQuoted
+
+// =============================================================================
+// WHAT WE WANT TO WRITE (but doesn't work):
+// =============================================================================
+//
+// doubleQuotedIdeal <string> = &'"' &{
+//     // This would be ideal - access input and position directly
+//     return ParseQuotedStringAt(subject, state.Location, '"');
+// } chars:consume { _parsedValue }
+//
+// Errors:
+// - 'subject' does not exist in current context
+// - Lambda doesn't have access to parser instance
+//
+// =============================================================================
+
+// WHAT WE CAN ACTUALLY DO (workaround using capture):
+// Capture first, then validate - but this has disambiguation problems
+
+doubleQuoted <string> = raw:doubleCapture &{ ValidateCapturedQuote(raw, '"') } { _parsedValue }
+doubleCapture <string> = "" ('"'+ doubleContent* '"'+)
+doubleContent = [^"] / '"'+ &[^"]
+
+singleQuoted <string> = raw:singleCapture &{ ValidateCapturedQuote(raw, '\'') } { _parsedValue }
+singleCapture <string> = "" ("'"+ singleContent* "'"+)
+singleContent = [^'] / "'"+ &[^']
+
+backtickQuoted <string> = raw:backtickCapture &{ ValidateCapturedQuote(raw, '`') } { _parsedValue }
+backtickCapture <string> = "" ('`'+ backtickContent* '`'+)
+backtickContent = [^`] / '`'+ &[^`]
