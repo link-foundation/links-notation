@@ -143,7 +143,7 @@ test('Nested links', () => {
   // Validate regular formatting
   const output = formatLinks(parsed);
   expect(output).toBeTruthy();
-  
+
   // Validate that the structure is properly nested
   expect(parsed.length).toBe(1);
 });
@@ -153,7 +153,9 @@ test('Indentation parser', () => {
   const result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);
   // Should have parent link
-  const hasParentLink = result.some(l => l.values && l.values.some(v => v.id === 'parent'));
+  const hasParentLink = result.some(
+    (l) => l.values && l.values.some((v) => v.id === 'parent')
+  );
   expect(hasParentLink).toBe(true);
 });
 

@@ -24,9 +24,5 @@
     "semi": ["error", "always"],
     "quotes": ["warn", "single", { "avoidEscape": true }]
   },
-  "ignorePatterns": [
-    "dist/",
-    "node_modules/",
-    "src/parser-generated.js"
-  ]
+  "ignorePatterns": ["dist/", "node_modules/", "src/parser-generated.js"]
 }

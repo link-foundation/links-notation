@@ -67,8 +67,8 @@ const result = parser.parse(input);
 console.log(result);
 
 // Обращение к распарсенной структуре
-result.forEach(link => {
-    console.log(link.toString());
+result.forEach((link) => {
+  console.log(link.toString());
 });
 ```
 
@@ -78,10 +78,7 @@ result.forEach(link => {
 import { Link } from 'links-notation';
 
 // Создание связей программно
-const link = new Link('родитель', [
-    new Link('ребенок1'),
-    new Link('ребенок2')
-]);
+const link = new Link('родитель', [new Link('ребенок1'), new Link('ребенок2')]);
 
 console.log(link.toString()); // (родитель: ребенок1 ребенок2)
 

@@ -156,6 +156,10 @@ python -m build
 
 ### Linting and Formatting
 
+This project uses [Black](https://github.com/psf/black) for code formatting,
+[isort](https://pycqa.github.io/isort/) for import sorting, and
+[flake8](https://flake8.pycqa.org/) for linting.
+
 Install linting tools:
 
 ```bash
@@ -164,35 +168,23 @@ pip install ".[lint]"
 pip install ".[dev]"
 ```
 
-Check code formatting with Black:
-
-```bash
-black --check --diff .
-```
-
-Auto-fix formatting:
+#### Format all code files
 
 ```bash
 black .
-```
-
-Check import sorting with isort:
-
-```bash
-isort --check-only --diff .
-```
-
-Auto-fix import sorting:
-
-```bash
 isort .
 ```
 
-Run flake8 linter:
+#### Check formatting (without modifying files)
 
 ```bash
+black --check --diff .
+isort --check-only --diff .
 flake8 --max-line-length=120
 ```
+
+These checks are enforced in CI. Pull requests with unformatted code will fail
+the lint check.
 
 ### Pre-commit Hooks
 

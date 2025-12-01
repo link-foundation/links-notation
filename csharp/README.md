@@ -177,6 +177,28 @@ Note: C# formatting checks are integrated into the CI pipeline using
 - Pegasus (4.1.0)
 - Platform.Collections (0.3.2)
 
+## Maintenance
+
+### Code Formatting
+
+This project uses [dotnet format](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format)
+for code formatting.
+
+#### Format all files
+
+```bash
+dotnet format
+```
+
+#### Check formatting (without modifying files)
+
+```bash
+dotnet format --verify-no-changes
+```
+
+These checks are also enforced in CI. Pull requests with formatting issues will
+fail the format check.
+
 ## Documentation
 
 For complete API documentation, visit:

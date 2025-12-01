@@ -63,7 +63,7 @@ test('Link equals', () => {
   const link1 = new Link('test', [new Link('child')]);
   const link2 = new Link('test', [new Link('child')]);
   const link3 = new Link('different', [new Link('child')]);
-  
+
   expect(link1.equals(link2)).toBe(true);
   expect(link1.equals(link3)).toBe(false);
 });

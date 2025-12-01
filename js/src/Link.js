@@ -32,8 +32,9 @@ export class Link {
    * @returns {string} Space-separated string of values
    */
   getValuesString() {
-    return (!this.values || this.values.length === 0) ?
-      '' : this.values.map(v => Link.getValueString(v)).join(' ');
+    return !this.values || this.values.length === 0
+      ? ''
+      : this.values.map((v) => Link.getValueString(v)).join(' ');
   }
 
   /**
@@ -46,7 +47,7 @@ export class Link {
     } else if (this.values.length === 1) {
       return this.values[0];
     } else {
-      const newValues = this.values.map(v => {
+      const newValues = this.values.map((v) => {
         // Check if value has simplify method (defensive programming)
         return v && typeof v.simplify === 'function' ? v.simplify() : v;
       });
@@ -70,7 +71,9 @@ export class Link {
    */
   static getValueString(value) {
     // Defensive check for method existence
-    return value && typeof value.toLinkOrIdString === 'function' ? value.toLinkOrIdString() : String(value);
+    return value && typeof value.toLinkOrIdString === 'function'
+      ? value.toLinkOrIdString()
+      : String(value);
   }
 
   /**
@@ -164,7 +167,6 @@ export class Link {
     return true;
   }
 
-
   /**
    * Format the link as a string
    * @param {boolean|FormatOptions} lessParentheses - If true, omit parentheses where safe; or a FormatOptions object
@@ -174,8 +176,12 @@ export class Link {
   format(lessParentheses = false, isCompoundValue = false) {
     // Support FormatOptions/FormatConfig as first parameter
     // Check if it's an object with formatting properties (FormatOptions or FormatConfig)
-    if (lessParentheses && typeof lessParentheses === 'object' &&
-        (lessParentheses.constructor.name === 'FormatOptions' || lessParentheses.constructor.name === 'FormatConfig')) {
+    if (
+      lessParentheses &&
+      typeof lessParentheses === 'object' &&
+      (lessParentheses.constructor.name === 'FormatOptions' ||
+        lessParentheses.constructor.name === 'FormatConfig')
+    ) {
       return this._formatWithOptions(lessParentheses, isCompoundValue);
     }
 
@@ -184,7 +190,7 @@ export class Link {
     if (this.id === null && (!this.values || this.values.length === 0)) {
       return lessParentheses ? '' : '()';
     }
-    
+
     // Link with only ID, no values
     if (!this.values || this.values.length === 0) {
       const escapedId = Link.escapeReference(this.id);
@@ -192,21 +198,27 @@ export class Link {
       if (isCompoundValue) {
         return `(${escapedId})`;
       }
-      return lessParentheses && !this.needsParentheses(this.id) ? escapedId : `(${escapedId})`;
+      return lessParentheses && !this.needsParentheses(this.id)
+        ? escapedId
+        : `(${escapedId})`;
     }
-    
-    // Format values recursively  
-    const valuesStr = this.values.map(v => this.formatValue(v)).join(' ');
-    
+
+    // Format values recursively
+    const valuesStr = this.values.map((v) => this.formatValue(v)).join(' ');
+
     // Link with values only (null id)
     if (this.id === null) {
       // For lessParentheses mode with simple values, don't wrap the whole thing
       if (lessParentheses) {
         // Check if all values are simple (no nested values)
-        const allSimple = this.values.every(v => !v.values || v.values.length === 0);
+        const allSimple = this.values.every(
+          (v) => !v.values || v.values.length === 0
+        );
         if (allSimple) {
           // Format each value without extra wrapping
-          const simpleValuesStr = this.values.map(v => Link.escapeReference(v.id)).join(' ');
+          const simpleValuesStr = this.values
+            .map((v) => Link.escapeReference(v.id))
+            .join(' ');
           return simpleValuesStr;
         }
         // For mixed or complex values in lessParentheses mode, still avoid outer wrapper
@@ -216,13 +228,15 @@ export class Link {
       // For normal mode, wrap in parentheses
       return `(${valuesStr})`;
     }
-    
+
     // Link with ID and values
     const idStr = Link.escapeReference(this.id);
     const withColon = `${idStr}: ${valuesStr}`;
-    return lessParentheses && !this.needsParentheses(this.id) ? withColon : `(${withColon})`;
+    return lessParentheses && !this.needsParentheses(this.id)
+      ? withColon
+      : `(${withColon})`;
   }
-  
+
   /**
    * Format a value within this link
    * @param {Link} value - The value to format
@@ -257,7 +271,13 @@ export class Link {
    * @returns {boolean} True if parentheses are needed
    */
   needsParentheses(str) {
-    return str && (str.includes(' ') || str.includes(':') || str.includes('(') || str.includes(')'));
+    return (
+      str &&
+      (str.includes(' ') ||
+        str.includes(':') ||
+        str.includes('(') ||
+        str.includes(')'))
+    );
   }
 
   /**
@@ -278,7 +298,9 @@ export class Link {
       if (isCompoundValue) {
         return `(${escapedId})`;
       }
-      return options.lessParentheses && !this.needsParentheses(this.id) ? escapedId : `(${escapedId})`;
+      return options.lessParentheses && !this.needsParentheses(this.id)
+        ? escapedId
+        : `(${escapedId})`;
     }
 
     // Check if we should use indented format
@@ -287,11 +309,13 @@ export class Link {
       shouldIndent = true;
     } else {
       // Try inline format first
-      const valuesStr = this.values.map(v => this.formatValue(v)).join(' ');
+      const valuesStr = this.values.map((v) => this.formatValue(v)).join(' ');
       let testLine;
       if (this.id !== null) {
         const idStr = Link.escapeReference(this.id);
-        testLine = options.lessParentheses ? `${idStr}: ${valuesStr}` : `(${idStr}: ${valuesStr})`;
+        testLine = options.lessParentheses
+          ? `${idStr}: ${valuesStr}`
+          : `(${idStr}: ${valuesStr})`;
       } else {
         testLine = options.lessParentheses ? valuesStr : `(${valuesStr})`;
       }
@@ -307,14 +331,16 @@ export class Link {
     }
 
     // Standard inline formatting
-    const valuesStr = this.values.map(v => this.formatValue(v)).join(' ');
+    const valuesStr = this.values.map((v) => this.formatValue(v)).join(' ');
 
     // Link with values only (null id)
     if (this.id === null) {
       if (options.lessParentheses) {
-        const allSimple = this.values.every(v => !v.values || v.values.length === 0);
+        const allSimple = this.values.every(
+          (v) => !v.values || v.values.length === 0
+        );
         if (allSimple) {
-          return this.values.map(v => Link.escapeReference(v.id)).join(' ');
+          return this.values.map((v) => Link.escapeReference(v.id)).join(' ');
         }
         return valuesStr;
       }
@@ -324,7 +350,9 @@ export class Link {
     // Link with ID and values
     const idStr = Link.escapeReference(this.id);
     const withColon = `${idStr}: ${valuesStr}`;
-    return options.lessParentheses && !this.needsParentheses(this.id) ? withColon : `(${withColon})`;
+    return options.lessParentheses && !this.needsParentheses(this.id)
+      ? withColon
+      : `(${withColon})`;
   }
 
   /**
@@ -335,7 +363,9 @@ export class Link {
   _formatIndented(options) {
     if (this.id === null) {
       // Values only - format each on separate line
-      const lines = this.values.map(v => options.indentString + this.formatValue(v));
+      const lines = this.values.map(
+        (v) => options.indentString + this.formatValue(v)
+      );
       return lines.join('\n');
     }
 
@@ -373,7 +403,11 @@ function _groupConsecutiveLinks(links) {
 
       while (j < links.length) {
         const nextLink = links[j];
-        if (nextLink.id === current.id && nextLink.values && nextLink.values.length > 0) {
+        if (
+          nextLink.id === current.id &&
+          nextLink.values &&
+          nextLink.values.length > 0
+        ) {
           sameIdValues.push(...nextLink.values);
           j++;
         } else {
@@ -401,17 +435,21 @@ export function formatLinks(links, lessParentheses = false) {
   if (!links || links.length === 0) return '';
 
   // Support FormatOptions/FormatConfig as parameter
-  if (lessParentheses && typeof lessParentheses === 'object' &&
-      (lessParentheses.constructor.name === 'FormatOptions' || lessParentheses.constructor.name === 'FormatConfig')) {
+  if (
+    lessParentheses &&
+    typeof lessParentheses === 'object' &&
+    (lessParentheses.constructor.name === 'FormatOptions' ||
+      lessParentheses.constructor.name === 'FormatConfig')
+  ) {
     const options = lessParentheses;
     // Apply consecutive link grouping if enabled
     let linksToFormat = links;
     if (options.groupConsecutive) {
       linksToFormat = _groupConsecutiveLinks(links);
     }
-    return linksToFormat.map(link => link.format(options)).join('\n');
+    return linksToFormat.map((link) => link.format(options)).join('\n');
   }
 
   // Backward compatibility with boolean parameter
-  return links.map(link => link.format(lessParentheses)).join('\n');
+  return links.map((link) => link.format(lessParentheses)).join('\n');
 }

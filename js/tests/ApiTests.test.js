@@ -125,7 +125,7 @@ test('test_indented_id_syntax_roundtrip', () => {
 
   // Validate that we can format with indented syntax using FormatOptions
   const options = new FormatOptions();
-  options.maxInlineRefs = 1;  // Force indentation with more than 1 ref
+  options.maxInlineRefs = 1; // Force indentation with more than 1 ref
   options.preferInline = false;
   const output = formatLinks(parsed, options);
   expect(output).toBe(input);
@@ -164,7 +164,7 @@ id2:
 
   // Validate that we can format with indented syntax using FormatOptions
   const options = new FormatOptions();
-  options.maxInlineRefs = 1;  // Force indentation with more than 1 ref
+  options.maxInlineRefs = 1; // Force indentation with more than 1 ref
   options.preferInline = false;
   const output = formatLinks(parsed, options);
   expect(output).toBe(input);

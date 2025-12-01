@@ -266,3 +266,31 @@ match parse_lino("(invalid") {
     Err(error) => eprintln!("Error: {}", error),
 }
 ```
+
+## Maintenance
+
+### Code Formatting
+
+This project uses [rustfmt](https://github.com/rust-lang/rustfmt) for code
+formatting and [clippy](https://github.com/rust-lang/rust-clippy) for linting.
+
+#### Format all files
+
+```bash
+cargo fmt
+```
+
+#### Check formatting (without modifying files)
+
+```bash
+cargo fmt --check
+```
+
+#### Run linter
+
+```bash
+cargo clippy
+```
+
+These checks are also enforced in CI. Pull requests with formatting issues will
+fail the format check.

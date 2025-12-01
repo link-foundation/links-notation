@@ -21,7 +21,7 @@ export class FormatOptions {
     this.indentLongLines = options.indentLongLines ?? false;
     this.maxInlineRefs = options.maxInlineRefs ?? null;
     this.groupConsecutive = options.groupConsecutive ?? false;
-    this.indentString = options.indentString ?? "  ";
+    this.indentString = options.indentString ?? '  ';
     this.preferInline = options.preferInline ?? true;
   }
 
