@@ -170,6 +170,22 @@ mama has house
 <li><strong>IListExtensions.Format()</strong>: Converts list of links back to string format</li>
 <li><strong>ILinksGroupListExtensions</strong>: Additional operations for link groups</li>
 </ul>
+<h2 id="maintenance">Maintenance</h2>
+<h3 id="linting-and-formatting">Linting and Formatting</h3>
+<p>Check code formatting:</p>
+<pre><code class="lang-bash">dotnet format --verify-no-changes --verbosity diagnostic
+</code></pre>
+<p>Auto-fix formatting:</p>
+<pre><code class="lang-bash">dotnet format
+</code></pre>
+<h3 id="pre-commit-hooks">Pre-commit Hooks</h3>
+<p>This project uses pre-commit hooks. To set up pre-commit hooks locally:</p>
+<pre><code class="lang-bash"># From repository root
+pip install pre-commit
+pre-commit install
+</code></pre>
+<p>Note: C# formatting checks are integrated into the CI pipeline using
+<code>dotnet format</code>.</p>
 <h2 id="dependencies">Dependencies</h2>
 <ul>
 <li>.NET 8.0</li>
