@@ -1,0 +1,94 @@
+@namespace TestMinimalRules
+@classname QuoteParser
+@using System.Linq
+@members
+{
+    // Universal parser for N-quote strings (any N >= 1)
+    // Returns the parsed content or null if parsing fails
+    private string? _parsedValue;
+
+    private bool ParseUniversalQuoteString(string input, char quoteChar)
+    {
+        _parsedValue = null;
+        if (string.IsNullOrEmpty(input)) return false;
+
+        // Count opening quotes
+        int quoteCount = 0;
+        while (quoteCount < input.Length && input[quoteCount] == quoteChar)
+        {
+            quoteCount++;
+        }
+
+        if (quoteCount < 1) return false; // Must have at least one quote
+
+        string openClose = new string(quoteChar, quoteCount);
+        string escapeSeq = new string(quoteChar, quoteCount * 2);
+        string escapeVal = new string(quoteChar, quoteCount);
+
+        int pos = quoteCount; // Start after opening quotes
+        var content = new System.Text.StringBuilder();
+
+        while (pos < input.Length)
+        {
+            // Check for escape sequence (2*N quotes)
+            if (pos + escapeSeq.Length <= input.Length &&
+                input.Substring(pos, escapeSeq.Length) == escapeSeq)
+            {
+                content.Append(escapeVal);
+                pos += escapeSeq.Length;
+                continue;
+            }
+
+            // Check for closing quotes (exactly N quotes, not more)
+            if (pos + quoteCount <= input.Length &&
+                input.Substring(pos, quoteCount) == openClose)
+            {
+                // Make sure it's exactly N quotes (not followed by more of the same quote)
+                int afterClose = pos + quoteCount;
+                if (afterClose >= input.Length || input[afterClose] != quoteChar)
+                {
+                    // Found valid closing - check if we consumed the entire input
+                    if (afterClose == input.Length)
+                    {
+                        _parsedValue = content.ToString();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            // Take next character
+            content.Append(input[pos]);
+            pos++;
+        }
+
+        // No closing quotes found
+        return false;
+    }
+}
+
+// Test: Can we parse multiple quoted strings on the same line with a universal approach?
+document <IList<string>> = list:quotedString* eof { list }
+
+quotedString <string> = _ q:(universalQuote) _ { q }
+
+// Attempt 1: Universal capture with validation
+universalQuote <string> = doubleQuoteUniversal / singleQuoteUniversal / backtickQuoteUniversal
+
+// Capture pattern: quote+ content* quote+ and validate
+doubleQuoteUniversal <string> = raw:doubleQuoteCapture &{ ParseUniversalQuoteString(raw, '"') } { _parsedValue }
+singleQuoteUniversal <string> = raw:singleQuoteCapture &{ ParseUniversalQuoteString(raw, '\'') } { _parsedValue }
+backtickQuoteUniversal <string> = raw:backtickQuoteCapture &{ ParseUniversalQuoteString(raw, '`') } { _parsedValue }
+
+// Raw capture - greedily match quotes and content
+doubleQuoteCapture <string> = "" ('"'+ doubleQuoteContent* '"'+)
+singleQuoteCapture <string> = "" ("'"+ singleQuoteContent* "'"+)
+backtickQuoteCapture <string> = "" ('`'+ backtickQuoteContent* '`'+)
+
+// Content - non-quote chars or quote sequences followed by non-quote
+doubleQuoteContent = [^"] / '"'+ &[^"]
+singleQuoteContent = [^'] / "'"+ &[^']
+backtickQuoteContent = [^`] / '`'+ &[^`]
+
+_ = [ \t]*
+eof = !.

@@ -34,6 +34,59 @@
   function getCurrentIndentation() {
     return indentationStack[indentationStack.length - 1];
   }
+
+  // Universal procedural parser for N-quote strings (any N >= 1)
+  // Parses from the given position in the input string
+  // Returns { value, length } or null
+  function parseQuotedStringAt(inputStr, startPos, quoteChar) {
+    if (startPos >= inputStr.length || inputStr[startPos] !== quoteChar) {
+      return null;
+    }
+
+    // Count opening quotes
+    let quoteCount = 0;
+    let pos = startPos;
+    while (pos < inputStr.length && inputStr[pos] === quoteChar) {
+      quoteCount++;
+      pos++;
+    }
+
+    const closeSeq = quoteChar.repeat(quoteCount);
+    const escapeSeq = quoteChar.repeat(quoteCount * 2);
+
+    let content = '';
+    while (pos < inputStr.length) {
+      // Check for escape sequence (2*N quotes)
+      if (inputStr.substr(pos, escapeSeq.length) === escapeSeq) {
+        content += closeSeq; // 2*N quotes become N quotes
+        pos += escapeSeq.length;
+        continue;
+      }
+
+      // Check for closing sequence (exactly N quotes)
+      if (inputStr.substr(pos, quoteCount) === closeSeq) {
+        // Verify it's exactly N quotes (not followed by more of same char)
+        const afterClose = pos + quoteCount;
+        if (afterClose >= inputStr.length || inputStr[afterClose] !== quoteChar) {
+          // Found valid closing
+          return {
+            value: content,
+            length: afterClose - startPos
+          };
+        }
+      }
+
+      // Add character to content
+      content += inputStr[pos];
+      pos++;
+    }
+
+    return null; // No valid closing found
+  }
+
+  // Global state for passing parsed values between predicate and action
+  let parsedValue = null;
+  let parsedLength = 0;
 }
 
 document = &{ indentationStack = [0]; baseIndentation = null; return true; } skipEmptyLines links:links _ eof { return links; }
@@ -79,13 +132,61 @@ multiLineValueLink = "(" v:multiLineValues _ ")" { return { values: v }; }
 
 indentedIdLink = id:reference __ ":" eol { return { id: id, values: [] }; }
 
-reference = doubleQuotedReference / singleQuotedReference / simpleReference 
+// Reference can be quoted (with any number of quotes N >= 1) or simple unquoted
+// Universal approach: use procedural parsing for all quote types and counts
+reference = quotedReference / simpleReference
 
 simpleReference = chars:referenceSymbol+ { return chars.join(''); }
 
-doubleQuotedReference = '"' r:[^"]+ '"' { return r.join(''); }
+// Universal quoted reference - handles any N quotes for all quote types
+// Uses procedural parsing with input/offset() for clean, simple logic
+quotedReference = doubleQuotedUniversal / singleQuotedUniversal / backtickQuotedUniversal
 
-singleQuotedReference = "'" r:[^']+ "'" { return r.join(''); }
+// Double quotes: peek at input, parse procedurally, consume exact chars
+doubleQuotedUniversal = &'"' &{
+  const pos = offset();
+  const result = parseQuotedStringAt(input, pos, '"');
+  if (result) {
+    parsedValue = result.value;
+    parsedLength = result.length;
+    return true;
+  }
+  return false;
+} chars:consumeDouble { return parsedValue; }
+
+// Consume exactly parsedLength characters for double quotes
+consumeDouble = c:. cs:consumeDoubleMore* { return [c].concat(cs).join(''); }
+consumeDoubleMore = &{ return parsedLength > 1 && (parsedLength--, true); } c:. { return c; }
+
+// Single quotes
+singleQuotedUniversal = &"'" &{
+  const pos = offset();
+  const result = parseQuotedStringAt(input, pos, "'");
+  if (result) {
+    parsedValue = result.value;
+    parsedLength = result.length;
+    return true;
+  }
+  return false;
+} chars:consumeSingle { return parsedValue; }
+
+consumeSingle = c:. cs:consumeSingleMore* { return [c].concat(cs).join(''); }
+consumeSingleMore = &{ return parsedLength > 1 && (parsedLength--, true); } c:. { return c; }
+
+// Backticks
+backtickQuotedUniversal = &'`' &{
+  const pos = offset();
+  const result = parseQuotedStringAt(input, pos, '`');
+  if (result) {
+    parsedValue = result.value;
+    parsedLength = result.length;
+    return true;
+  }
+  return false;
+} chars:consumeBacktick { return parsedValue; }
+
+consumeBacktick = c:. cs:consumeBacktickMore* { return [c].concat(cs).join(''); }
+consumeBacktickMore = &{ return parsedLength > 1 && (parsedLength--, true); } c:. { return c; }
 
 SET_BASE_INDENTATION = spaces:" "* { setBaseIndentation(spaces); }
 

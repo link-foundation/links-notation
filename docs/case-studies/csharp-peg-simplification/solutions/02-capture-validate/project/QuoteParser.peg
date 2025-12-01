@@ -1,0 +1,92 @@
+@namespace TestCaptureValidate
+@classname QuoteParser
+@using System.Linq
+
+@members
+{
+    private string _parsedValue = "";
+
+    /// <summary>
+    /// Parse captured text as an N-quote string.
+    /// The captured text should include opening and closing quotes.
+    /// </summary>
+    private bool TryParseQuotedString(string capturedText, char quoteChar)
+    {
+        _parsedValue = "";
+        if (string.IsNullOrEmpty(capturedText) || capturedText[0] != quoteChar)
+            return false;
+
+        // Count opening quotes
+        int quoteCount = 0;
+        int pos = 0;
+        while (pos < capturedText.Length && capturedText[pos] == quoteChar)
+        {
+            quoteCount++;
+            pos++;
+        }
+
+        string closeSeq = new string(quoteChar, quoteCount);
+        string escapeSeq = new string(quoteChar, quoteCount * 2);
+        var content = new System.Text.StringBuilder();
+
+        while (pos < capturedText.Length)
+        {
+            // Check for escape sequence (2*N quotes)
+            if (pos + escapeSeq.Length <= capturedText.Length &&
+                capturedText.Substring(pos, escapeSeq.Length) == escapeSeq)
+            {
+                content.Append(closeSeq);
+                pos += escapeSeq.Length;
+                continue;
+            }
+
+            // Check for closing sequence
+            if (pos + quoteCount <= capturedText.Length &&
+                capturedText.Substring(pos, quoteCount) == closeSeq)
+            {
+                int afterClose = pos + quoteCount;
+                if (afterClose >= capturedText.Length || capturedText[afterClose] != quoteChar)
+                {
+                    // Valid closing - check if we consumed entire captured text
+                    if (afterClose == capturedText.Length)
+                    {
+                        _parsedValue = content.ToString();
+                        return true;
+                    }
+                    // Captured more than one quoted string (disambiguation problem)
+                    return false;
+                }
+            }
+
+            content.Append(capturedText[pos]);
+            pos++;
+        }
+        return false;
+    }
+}
+
+// Entry point: parse a single quoted string
+document <string> = q:quoted { q }
+
+// Try to parse quoted strings using capture-then-validate
+// NOTE: This has disambiguation problems with multiple quoted strings
+quoted <string> = doubleQuoted / singleQuoted / backtickQuoted
+
+// Double quotes: capture greedy pattern, then validate
+doubleQuoted <string> = raw:doubleQuoteCaptureRaw &{ TryParseQuotedString(raw, '"') } { _parsedValue }
+
+// Capture pattern for double quotes
+// Matches: one or more ", then content, then one or more "
+// WARNING: Greedy - will match from first " to LAST " in input
+doubleQuoteCaptureRaw <string> = "" ('"'+ doubleQuoteContent* '"'+)
+doubleQuoteContent = [^"] / '"'+ &[^"]
+
+// Single quotes: same pattern
+singleQuoted <string> = raw:singleQuoteCaptureRaw &{ TryParseQuotedString(raw, '\'') } { _parsedValue }
+singleQuoteCaptureRaw <string> = "" ("'"+ singleQuoteContent* "'"+)
+singleQuoteContent = [^'] / "'"+ &[^']
+
+// Backticks: same pattern
+backtickQuoted <string> = raw:backtickCaptureRaw &{ TryParseQuotedString(raw, '`') } { _parsedValue }
+backtickCaptureRaw <string> = "" ('`'+ backtickContent* '`'+)
+backtickContent = [^`] / '`'+ &[^`]

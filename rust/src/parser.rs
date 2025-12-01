@@ -1,10 +1,10 @@
 use nom::{
     branch::alt,
-    bytes::complete::{is_not, take_while, take_while1},
+    bytes::complete::{take_while, take_while1},
     character::complete::{char, line_ending},
     combinator::eof,
     multi::{many0, many1},
-    sequence::{delimited, preceded, terminated},
+    sequence::{preceded, terminated},
     IResult, Parser,
 };
 use std::cell::RefCell;
@@ -141,22 +141,94 @@ fn simple_reference(input: &str) -> IResult<&str, String> {
         .parse(input)
 }
 
-fn double_quoted_reference(input: &str) -> IResult<&str, String> {
-    delimited(char('"'), is_not("\""), char('"'))
-        .map(|s: &str| s.to_string())
-        .parse(input)
+/// Parse a multi-quote string with a given quote character and count.
+/// For N quotes: opening = N quotes, closing = N quotes, escape = 2*N quotes -> N quotes
+fn parse_multi_quote_string(
+    input: &str,
+    quote_char: char,
+    quote_count: usize,
+) -> IResult<&str, String> {
+    let open_close = quote_char.to_string().repeat(quote_count);
+    let escape_seq = quote_char.to_string().repeat(quote_count * 2);
+    let escape_val = quote_char.to_string().repeat(quote_count);
+
+    // Check for opening quotes
+    if !input.starts_with(&open_close) {
+        return Err(nom::Err::Error(nom::error::Error::new(
+            input,
+            nom::error::ErrorKind::Tag,
+        )));
+    }
+
+    let mut remaining = &input[open_close.len()..];
+    let mut content = String::new();
+
+    loop {
+        if remaining.is_empty() {
+            return Err(nom::Err::Error(nom::error::Error::new(
+                input,
+                nom::error::ErrorKind::Tag,
+            )));
+        }
+
+        // Check for escape sequence (2*N quotes)
+        if remaining.starts_with(&escape_seq) {
+            content.push_str(&escape_val);
+            remaining = &remaining[escape_seq.len()..];
+            continue;
+        }
+
+        // Check for closing quotes (N quotes not followed by more quotes)
+        if remaining.starts_with(&open_close) {
+            let after_close = &remaining[open_close.len()..];
+            // Make sure this is exactly N quotes (not more)
+            if after_close.is_empty() || !after_close.starts_with(quote_char) {
+                return Ok((after_close, content));
+            }
+        }
+
+        // Take the next character
+        let c = remaining.chars().next().unwrap();
+        content.push(c);
+        remaining = &remaining[c.len_utf8()..];
+    }
 }
 
-fn single_quoted_reference(input: &str) -> IResult<&str, String> {
-    delimited(char('\''), is_not("'"), char('\''))
-        .map(|s: &str| s.to_string())
-        .parse(input)
+/// Parse a quoted string with dynamically detected quote count.
+/// Counts opening quotes and uses that count for parsing.
+fn parse_dynamic_quote_string(input: &str, quote_char: char) -> IResult<&str, String> {
+    // Count opening quotes
+    let quote_count = input.chars().take_while(|&c| c == quote_char).count();
+
+    if quote_count == 0 {
+        return Err(nom::Err::Error(nom::error::Error::new(
+            input,
+            nom::error::ErrorKind::Tag,
+        )));
+    }
+
+    parse_multi_quote_string(input, quote_char, quote_count)
+}
+
+fn double_quoted_dynamic(input: &str) -> IResult<&str, String> {
+    parse_dynamic_quote_string(input, '"')
+}
+
+fn single_quoted_dynamic(input: &str) -> IResult<&str, String> {
+    parse_dynamic_quote_string(input, '\'')
+}
+
+fn backtick_quoted_dynamic(input: &str) -> IResult<&str, String> {
+    parse_dynamic_quote_string(input, '`')
 }
 
 fn reference(input: &str) -> IResult<&str, String> {
+    // Try quoted strings with dynamic quote detection (supports any N quotes)
+    // Then fall back to simple unquoted reference
     alt((
-        double_quoted_reference,
-        single_quoted_reference,
+        double_quoted_dynamic,
+        single_quoted_dynamic,
+        backtick_quoted_dynamic,
         simple_reference,
     ))
     .parse(input)

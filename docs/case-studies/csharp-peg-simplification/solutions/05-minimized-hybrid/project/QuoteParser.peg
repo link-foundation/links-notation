@@ -1,0 +1,122 @@
+@namespace TestMinimizedHybrid
+@classname QuoteParser
+@using System.Linq
+
+@members
+{
+    private string _multiQuoteValue = "";
+
+    /// <summary>
+    /// Parse a multi-quote string dynamically for N >= 3 quotes.
+    /// This is the MINIMIZED version that handles N>=3 procedurally.
+    /// </summary>
+    private bool ParseMultiQuoteString(string input, char quoteChar)
+    {
+        _multiQuoteValue = "";
+        if (string.IsNullOrEmpty(input)) return false;
+
+        // Count opening quotes
+        int quoteCount = 0;
+        while (quoteCount < input.Length && input[quoteCount] == quoteChar)
+        {
+            quoteCount++;
+        }
+
+        if (quoteCount < 3) return false; // N=1,2 handled by explicit rules
+
+        string openClose = new string(quoteChar, quoteCount);
+        string escapeSeq = new string(quoteChar, quoteCount * 2);
+        string escapeVal = new string(quoteChar, quoteCount);
+
+        int pos = quoteCount;
+        var content = new System.Text.StringBuilder();
+
+        while (pos < input.Length)
+        {
+            // Check for escape sequence (2*N quotes)
+            if (pos + escapeSeq.Length <= input.Length &&
+                input.Substring(pos, escapeSeq.Length) == escapeSeq)
+            {
+                content.Append(escapeVal);
+                pos += escapeSeq.Length;
+                continue;
+            }
+
+            // Check for closing quotes
+            if (pos + quoteCount <= input.Length &&
+                input.Substring(pos, quoteCount) == openClose)
+            {
+                int afterClose = pos + quoteCount;
+                if (afterClose >= input.Length || input[afterClose] != quoteChar)
+                {
+                    if (afterClose == input.Length)
+                    {
+                        _multiQuoteValue = content.ToString();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            content.Append(input[pos]);
+            pos++;
+        }
+        return false;
+    }
+}
+
+// MINIMIZED HYBRID: Only N=1,2 explicit + N>=3 procedural
+// This is the CURRENT PRODUCTION implementation in Parser.peg
+
+document <IList<string>> = list:quotedString* eof { list }
+
+quotedString <string> = _ q:quoted _ { q }
+
+// Order: high quotes (3+) first, then double (2), then single (1)
+quoted <string> = highQuoted / doubleQuoted / singleQuoted
+
+// === HIGH QUOTES (N >= 3) - Procedural parsing ===
+// Lookahead for 3+ quotes, then capture and validate
+highQuoted <string> = &('"""' / "'''" / '```') raw:highQuoteCapture { raw }
+
+highQuoteCapture <string> = raw:highQuoteDoubleRaw &{ ParseMultiQuoteString(raw, '"') } { _multiQuoteValue }
+/ raw:highQuoteSingleRaw &{ ParseMultiQuoteString(raw, '\'') } { _multiQuoteValue }
+/ raw:highQuoteBacktickRaw &{ ParseMultiQuoteString(raw, '`') } { _multiQuoteValue }
+
+// Raw capture for 3+ quotes
+highQuoteDoubleRaw <string> = "" ('"'+ highQuoteDoubleContent* '"'+)
+highQuoteSingleRaw <string> = "" ("'"+ highQuoteSingleContent* "'"+)
+highQuoteBacktickRaw <string> = "" ('`'+ highQuoteBacktickContent* '`'+)
+
+highQuoteDoubleContent = [^"] / '"'+ &[^"]
+highQuoteSingleContent = [^'] / "'"+ &[^']
+highQuoteBacktickContent = [^`] / '`'+ &[^`]
+
+// === DOUBLE QUOTES (N = 2) - Explicit PEG rules ===
+// Required for proper escape handling
+doubleQuoted <string> = doubleDouble / doubleSingle / doubleBacktick
+
+doubleDouble <string> = '""' r:doubleDoubleContent* '""' { string.Join("", r) }
+doubleDoubleContent <string> = '""""' { "\"\"" } / !'""' c:. { c.ToString() }
+
+doubleSingle <string> = "''" r:doubleSingleContent* "''" { string.Join("", r) }
+doubleSingleContent <string> = "''''" { "''" } / !"''" c:. { c.ToString() }
+
+doubleBacktick <string> = '``' r:doubleBacktickContent* '``' { string.Join("", r) }
+doubleBacktickContent <string> = '````' { "``" } / !'``' c:. { c.ToString() }
+
+// === SINGLE QUOTES (N = 1) - Explicit PEG rules ===
+// Required for disambiguation of multiple strings
+singleQuoted <string> = singleDouble / singleSingle / singleBacktick
+
+singleDouble <string> = '"' r:singleDoubleContent* '"' { string.Join("", r) }
+singleDoubleContent <string> = '""' { "\"" } / c:[^"] { c.ToString() }
+
+singleSingle <string> = "'" r:singleSingleContent* "'" { string.Join("", r) }
+singleSingleContent <string> = "''" { "'" } / c:[^'] { c.ToString() }
+
+singleBacktick <string> = '`' r:singleBacktickContent* '`' { string.Join("", r) }
+singleBacktickContent <string> = '``' { "`" } / c:[^`] { c.ToString() }
+
+_ = [ \t\r\n]*
+eof = !.
