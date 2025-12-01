@@ -1,9 +1,9 @@
-import { test, expect } from "bun:test";
-import { Parser } from "../src/Parser.js";
+import { test, expect } from 'bun:test';
+import { Parser } from '../src/Parser.js';
 
 const parser = new Parser();
 
-test("TestMultilineDoubleQuotedReference", () => {
+test('TestMultilineDoubleQuotedReference', () => {
   const input = `(
   "long
 string literal representing
@@ -32,7 +32,7 @@ long string literal
 as another reference`);
 });
 
-test("TestSimpleMultilineDoubleQuoted", () => {
+test('TestSimpleMultilineDoubleQuoted', () => {
   const input = `("line1
 line2")`;
   const result = parser.parse(input);
@@ -44,10 +44,10 @@ line2")`;
   expect(link.id).toBe(null);
   expect(link.values).toBeTruthy();
   expect(link.values.length).toBe(1);
-  expect(link.values[0].id).toBe("line1\nline2");
+  expect(link.values[0].id).toBe('line1\nline2');
 });
 
-test("TestSimpleMultilineSingleQuoted", () => {
+test('TestSimpleMultilineSingleQuoted', () => {
   const input = `('line1
 line2')`;
   const result = parser.parse(input);
@@ -59,10 +59,10 @@ line2')`;
   expect(link.id).toBe(null);
   expect(link.values).toBeTruthy();
   expect(link.values.length).toBe(1);
-  expect(link.values[0].id).toBe("line1\nline2");
+  expect(link.values[0].id).toBe('line1\nline2');
 });
 
-test("TestMultilineQuotedAsId", () => {
+test('TestMultilineQuotedAsId', () => {
   const input = `("multi
 line
 id": value1 value2)`;
@@ -72,7 +72,7 @@ id": value1 value2)`;
   expect(result.length).toBe(1);
 
   const link = result[0];
-  expect(link.id).toBe("multi\nline\nid");
+  expect(link.id).toBe('multi\nline\nid');
   expect(link.values).toBeTruthy();
   expect(link.values.length).toBe(2);
 });

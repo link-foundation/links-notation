@@ -52,7 +52,7 @@ bun test --watch
 ### Базовый парсинг
 
 ```javascript
-import { Parser, Link } from "links-notation";
+import { Parser, Link } from 'links-notation';
 
 // Создание парсера
 const parser = new Parser();
@@ -75,16 +75,16 @@ result.forEach((link) => {
 ### Работа со связями
 
 ```javascript
-import { Link } from "links-notation";
+import { Link } from 'links-notation';
 
 // Создание связей программно
-const link = new Link("родитель", [new Link("ребенок1"), new Link("ребенок2")]);
+const link = new Link('родитель', [new Link('ребенок1'), new Link('ребенок2')]);
 
 console.log(link.toString()); // (родитель: ребенок1 ребенок2)
 
 // Доступ к свойствам связи
-console.log("ID:", link.id);
-console.log("Значения:", link.values);
+console.log('ID:', link.id);
+console.log('Значения:', link.values);
 ```
 
 ### Расширенное использование
@@ -100,7 +100,7 @@ const input = `родитель
 const parsed = await parser.parse(input);
 
 // Работа с группами
-import { LinksGroup } from "links-notation";
+import { LinksGroup } from 'links-notation';
 const group = new LinksGroup(parsed);
 console.log(group.format());
 ```

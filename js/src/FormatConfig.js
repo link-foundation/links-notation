@@ -5,7 +5,7 @@
  * JavaScript uses 'FormatOptions' internally, but exports 'FormatConfig'
  * as the primary name to match Python's naming convention.
  */
-import { FormatOptions } from "./FormatOptions.js";
+import { FormatOptions } from './FormatOptions.js';
 
 /**
  * FormatConfig for Lino notation formatting.

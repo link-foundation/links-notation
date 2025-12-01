@@ -1,10 +1,10 @@
-import { test, expect } from "bun:test";
-import { Parser } from "../src/Parser.js";
-import { formatLinks } from "../src/Link.js";
+import { test, expect } from 'bun:test';
+import { Parser } from '../src/Parser.js';
+import { formatLinks } from '../src/Link.js';
 
 const parser = new Parser();
 
-test("Two links", () => {
+test('Two links', () => {
   const source = `(first: x y)
 (second: a b)`;
   const links = parser.parse(source);
@@ -12,7 +12,7 @@ test("Two links", () => {
   expect(target).toBe(source);
 });
 
-test("Parse and stringify", () => {
+test('Parse and stringify', () => {
   const source = `(papa (lovesMama: loves mama))
 (son lovesMama)
 (daughter lovesMama)
@@ -22,7 +22,7 @@ test("Parse and stringify", () => {
   expect(target).toBe(source);
 });
 
-test("Parse and stringify test 2", () => {
+test('Parse and stringify test 2', () => {
   const source = `father (lovesMom: loves mom)
 son lovesMom
 daughter lovesMom
@@ -32,7 +32,7 @@ all (love mom)`;
   expect(target).toBe(source);
 });
 
-test("Parse and stringify with less parentheses", () => {
+test('Parse and stringify with less parentheses', () => {
   const source = `lovesMama: loves mama
 papa lovesMama
 son lovesMama
@@ -43,7 +43,7 @@ all (love mama)`;
   expect(target).toBe(source);
 });
 
-test("Duplicate identifiers", () => {
+test('Duplicate identifiers', () => {
   const source = `(a: a b)
 (a: b c)`;
   const target = `(a: a b)
@@ -53,7 +53,7 @@ test("Duplicate identifiers", () => {
   expect(formattedLinks).toBe(target);
 });
 
-test("Test complex structure", () => {
+test('Test complex structure', () => {
   const input = `(Type: Type Type)
   Number
   String
@@ -66,7 +66,7 @@ test("Test complex structure", () => {
   expect(result.length).toBeGreaterThan(0);
 });
 
-test("Test mixed formats", () => {
+test('Test mixed formats', () => {
   // Mix of single-line and multi-line formats
   const input = `id1: value1
 (id2: value2 value3)
@@ -80,37 +80,37 @@ simple_ref
   expect(result.length).toBeGreaterThan(0);
 });
 
-test("Test multiline with id", () => {
+test('Test multiline with id', () => {
   // Test multi-line link with id
-  const input = "(id: value1 value2)";
+  const input = '(id: value1 value2)';
   const result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);
 });
 
-test("Test multiple top level elements", () => {
+test('Test multiple top level elements', () => {
   // Test multiple top-level elements
-  const input = "(elem1: val1)\n(elem2: val2)";
+  const input = '(elem1: val1)\n(elem2: val2)';
   const result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);
 });
 
-test("Test multiline simple links", () => {
-  const input = "(1: 1 1)\n(2: 2 2)";
+test('Test multiline simple links', () => {
+  const input = '(1: 1 1)\n(2: 2 2)';
   const parsed = parser.parse(input);
   expect(parsed.length).toBeGreaterThan(0);
 
   // Validate regular formatting
   const output = formatLinks(parsed);
-  expect(output).toContain("(1: 1 1)");
-  expect(output).toContain("(2: 2 2)");
+  expect(output).toContain('(1: 1 1)');
+  expect(output).toContain('(2: 2 2)');
 
   // Validate alternate formatting matches input
   const outputAlternate = formatLinks(parsed);
   expect(outputAlternate).toBe(input);
 });
 
-test("Test indented children", () => {
-  const input = "parent\n  child1\n  child2";
+test('Test indented children', () => {
+  const input = 'parent\n  child1\n  child2';
   const parsed = parser.parse(input);
 
   // The parsed structure should have parent with children

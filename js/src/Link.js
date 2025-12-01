@@ -11,7 +11,7 @@ export class Link {
     // Validate that values is an array if provided
     if (values !== null && values !== undefined) {
       if (!Array.isArray(values)) {
-        throw new TypeError("values must be an array or null");
+        throw new TypeError('values must be an array or null');
       }
       this.values = values;
     } else {
@@ -33,8 +33,8 @@ export class Link {
    */
   getValuesString() {
     return !this.values || this.values.length === 0
-      ? ""
-      : this.values.map((v) => Link.getValueString(v)).join(" ");
+      ? ''
+      : this.values.map((v) => Link.getValueString(v)).join(' ');
   }
 
   /**
@@ -49,7 +49,7 @@ export class Link {
     } else {
       const newValues = this.values.map((v) => {
         // Check if value has simplify method (defensive programming)
-        return v && typeof v.simplify === "function" ? v.simplify() : v;
+        return v && typeof v.simplify === 'function' ? v.simplify() : v;
       });
       return new Link(this.id, newValues);
     }
@@ -71,7 +71,7 @@ export class Link {
    */
   static getValueString(value) {
     // Defensive check for method existence
-    return value && typeof value.toLinkOrIdString === "function"
+    return value && typeof value.toLinkOrIdString === 'function'
       ? value.toLinkOrIdString()
       : String(value);
   }
@@ -82,21 +82,21 @@ export class Link {
    * @returns {string} Escaped reference
    */
   static escapeReference(reference) {
-    if (!reference || reference.trim() === "") {
-      return "";
+    if (!reference || reference.trim() === '') {
+      return '';
     }
 
     const hasSingleQuote = reference.includes("'");
     const hasDoubleQuote = reference.includes('"');
 
     const needsQuoting =
-      reference.includes(":") ||
-      reference.includes("(") ||
-      reference.includes(")") ||
-      reference.includes(" ") ||
-      reference.includes("\t") ||
-      reference.includes("\n") ||
-      reference.includes("\r") ||
+      reference.includes(':') ||
+      reference.includes('(') ||
+      reference.includes(')') ||
+      reference.includes(' ') ||
+      reference.includes('\t') ||
+      reference.includes('\n') ||
+      reference.includes('\r') ||
       hasDoubleQuote ||
       hasSingleQuote;
 
@@ -131,7 +131,7 @@ export class Link {
    */
   toLinkOrIdString() {
     if (!this.values || this.values.length === 0) {
-      return this.id === null ? "" : Link.escapeReference(this.id);
+      return this.id === null ? '' : Link.escapeReference(this.id);
     }
     return this.toString();
   }
@@ -153,7 +153,7 @@ export class Link {
 
     for (let i = 0; i < thisValues.length; i++) {
       // Defensive check for equals method
-      if (thisValues[i] && typeof thisValues[i].equals === "function") {
+      if (thisValues[i] && typeof thisValues[i].equals === 'function') {
         if (!thisValues[i].equals(otherValues[i])) {
           return false;
         }
@@ -178,9 +178,9 @@ export class Link {
     // Check if it's an object with formatting properties (FormatOptions or FormatConfig)
     if (
       lessParentheses &&
-      typeof lessParentheses === "object" &&
-      (lessParentheses.constructor.name === "FormatOptions" ||
-        lessParentheses.constructor.name === "FormatConfig")
+      typeof lessParentheses === 'object' &&
+      (lessParentheses.constructor.name === 'FormatOptions' ||
+        lessParentheses.constructor.name === 'FormatConfig')
     ) {
       return this._formatWithOptions(lessParentheses, isCompoundValue);
     }
@@ -188,7 +188,7 @@ export class Link {
     // Original implementation for backward compatibility
     // Empty link
     if (this.id === null && (!this.values || this.values.length === 0)) {
-      return lessParentheses ? "" : "()";
+      return lessParentheses ? '' : '()';
     }
 
     // Link with only ID, no values
@@ -204,7 +204,7 @@ export class Link {
     }
 
     // Format values recursively
-    const valuesStr = this.values.map((v) => this.formatValue(v)).join(" ");
+    const valuesStr = this.values.map((v) => this.formatValue(v)).join(' ');
 
     // Link with values only (null id)
     if (this.id === null) {
@@ -212,13 +212,13 @@ export class Link {
       if (lessParentheses) {
         // Check if all values are simple (no nested values)
         const allSimple = this.values.every(
-          (v) => !v.values || v.values.length === 0,
+          (v) => !v.values || v.values.length === 0
         );
         if (allSimple) {
           // Format each value without extra wrapping
           const simpleValuesStr = this.values
             .map((v) => Link.escapeReference(v.id))
-            .join(" ");
+            .join(' ');
           return simpleValuesStr;
         }
         // For mixed or complex values in lessParentheses mode, still avoid outer wrapper
@@ -244,7 +244,7 @@ export class Link {
    */
   formatValue(value) {
     if (!value || !value.format) {
-      return Link.escapeReference((value && value.id) || "");
+      return Link.escapeReference((value && value.id) || '');
     }
 
     // Check if we're in a compound link that was created from path combinations
@@ -273,10 +273,10 @@ export class Link {
   needsParentheses(str) {
     return (
       str &&
-      (str.includes(" ") ||
-        str.includes(":") ||
-        str.includes("(") ||
-        str.includes(")"))
+      (str.includes(' ') ||
+        str.includes(':') ||
+        str.includes('(') ||
+        str.includes(')'))
     );
   }
 
@@ -289,7 +289,7 @@ export class Link {
   _formatWithOptions(options, isCompoundValue = false) {
     // Empty link
     if (this.id === null && (!this.values || this.values.length === 0)) {
-      return options.lessParentheses ? "" : "()";
+      return options.lessParentheses ? '' : '()';
     }
 
     // Link with only ID, no values
@@ -309,7 +309,7 @@ export class Link {
       shouldIndent = true;
     } else {
       // Try inline format first
-      const valuesStr = this.values.map((v) => this.formatValue(v)).join(" ");
+      const valuesStr = this.values.map((v) => this.formatValue(v)).join(' ');
       let testLine;
       if (this.id !== null) {
         const idStr = Link.escapeReference(this.id);
@@ -331,16 +331,16 @@ export class Link {
     }
 
     // Standard inline formatting
-    const valuesStr = this.values.map((v) => this.formatValue(v)).join(" ");
+    const valuesStr = this.values.map((v) => this.formatValue(v)).join(' ');
 
     // Link with values only (null id)
     if (this.id === null) {
       if (options.lessParentheses) {
         const allSimple = this.values.every(
-          (v) => !v.values || v.values.length === 0,
+          (v) => !v.values || v.values.length === 0
         );
         if (allSimple) {
-          return this.values.map((v) => Link.escapeReference(v.id)).join(" ");
+          return this.values.map((v) => Link.escapeReference(v.id)).join(' ');
         }
         return valuesStr;
       }
@@ -364,9 +364,9 @@ export class Link {
     if (this.id === null) {
       // Values only - format each on separate line
       const lines = this.values.map(
-        (v) => options.indentString + this.formatValue(v),
+        (v) => options.indentString + this.formatValue(v)
       );
-      return lines.join("\n");
+      return lines.join('\n');
     }
 
     // Link with ID - format as id:\n  value1\n  value2
@@ -375,7 +375,7 @@ export class Link {
     for (const v of this.values) {
       lines.push(options.indentString + this.formatValue(v));
     }
-    return lines.join("\n");
+    return lines.join('\n');
   }
 }
 
@@ -432,14 +432,14 @@ function _groupConsecutiveLinks(links) {
 }
 
 export function formatLinks(links, lessParentheses = false) {
-  if (!links || links.length === 0) return "";
+  if (!links || links.length === 0) return '';
 
   // Support FormatOptions/FormatConfig as parameter
   if (
     lessParentheses &&
-    typeof lessParentheses === "object" &&
-    (lessParentheses.constructor.name === "FormatOptions" ||
-      lessParentheses.constructor.name === "FormatConfig")
+    typeof lessParentheses === 'object' &&
+    (lessParentheses.constructor.name === 'FormatOptions' ||
+      lessParentheses.constructor.name === 'FormatConfig')
   ) {
     const options = lessParentheses;
     // Apply consecutive link grouping if enabled
@@ -447,9 +447,9 @@ export function formatLinks(links, lessParentheses = false) {
     if (options.groupConsecutive) {
       linksToFormat = _groupConsecutiveLinks(links);
     }
-    return linksToFormat.map((link) => link.format(options)).join("\n");
+    return linksToFormat.map((link) => link.format(options)).join('\n');
   }
 
   // Backward compatibility with boolean parameter
-  return links.map((link) => link.format(lessParentheses)).join("\n");
+  return links.map((link) => link.format(lessParentheses)).join('\n');
 }

@@ -1,5 +1,5 @@
-import { Link } from "./Link.js";
-import * as parserModule from "./parser-generated.js";
+import { Link } from './Link.js';
+import * as parserModule from './parser-generated.js';
 
 export class Parser {
   /**
@@ -21,13 +21,13 @@ export class Parser {
    */
   parse(input) {
     // Validate input
-    if (typeof input !== "string") {
-      throw new TypeError("Input must be a string");
+    if (typeof input !== 'string') {
+      throw new TypeError('Input must be a string');
     }
 
     if (input.length > this.maxInputSize) {
       throw new Error(
-        `Input size exceeds maximum allowed size of ${this.maxInputSize} bytes`,
+        `Input size exceeds maximum allowed size of ${this.maxInputSize} bytes`
       );
     }
 

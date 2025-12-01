@@ -1,4 +1,4 @@
-import { Parser } from "../src/Parser.js";
+import { Parser } from '../src/Parser.js';
 
 const parser = new Parser();
 
@@ -10,7 +10,7 @@ const withLeading = `  A: a
 const withoutLeading = `A: a
 B: b`;
 
-console.log("=== With Leading Spaces ===");
+console.log('=== With Leading Spaces ===');
 try {
   const result = parser.parse(withLeading);
   console.log(`Parsed ${result.length} links:`);
@@ -18,10 +18,10 @@ try {
     console.log(`  Link ${i}: ${link.toString()}`);
   });
 } catch (e) {
-  console.log("Error:", e.message);
+  console.log('Error:', e.message);
 }
 
-console.log("\n=== Without Leading Spaces ===");
+console.log('\n=== Without Leading Spaces ===');
 try {
   const result = parser.parse(withoutLeading);
   console.log(`Parsed ${result.length} links:`);
@@ -29,5 +29,5 @@ try {
     console.log(`  Link ${i}: ${link.toString()}`);
   });
 } catch (e) {
-  console.log("Error:", e.message);
+  console.log('Error:', e.message);
 }

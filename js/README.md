@@ -24,7 +24,7 @@ bun add links-notation
 #### Using Deno
 
 ```typescript
-import { Parser, Link } from "npm:links-notation@^0.6.0";
+import { Parser, Link } from 'npm:links-notation@^0.6.0';
 ```
 
 ### Local Development Setup
@@ -78,7 +78,7 @@ bun test --watch
 ### Basic Parsing
 
 ```javascript
-import { Parser, Link } from "links-notation";
+import { Parser, Link } from 'links-notation';
 
 // Create parser
 const parser = new Parser();
@@ -101,16 +101,16 @@ result.forEach((link) => {
 ### Working with Links
 
 ```javascript
-import { Link } from "links-notation";
+import { Link } from 'links-notation';
 
 // Create links programmatically
-const link = new Link("parent", [new Link("child1"), new Link("child2")]);
+const link = new Link('parent', [new Link('child1'), new Link('child2')]);
 
 console.log(link.toString()); // (parent: child1 child2)
 
 // Access link properties
-console.log("ID:", link.id);
-console.log("Values:", link.values);
+console.log('ID:', link.id);
+console.log('Values:', link.values);
 ```
 
 ### Advanced Usage
@@ -126,7 +126,7 @@ const input = `parent
 const parsed = await parser.parse(input);
 
 // Work with groups
-import { LinksGroup } from "links-notation";
+import { LinksGroup } from 'links-notation';
 const group = new LinksGroup(parsed);
 console.log(group.format());
 ```

@@ -10,9 +10,7 @@ from .format_config import FormatConfig
 from .link import Link
 
 
-def format_links(
-    links: List[Link], less_parentheses: Union[bool, FormatConfig] = False
-) -> str:
+def format_links(links: List[Link], less_parentheses: Union[bool, FormatConfig] = False) -> str:
     """
     Format a list of links into Lino notation.
 
