@@ -3,19 +3,20 @@
 @using System.Linq
 @members
 {
-    // Field to store parsed high quote value
-    private string _highQuoteValue;
+    // Field to store parsed multi-quote value
+    private string _multiQuoteValue;
 
     /// <summary>
-    /// Parse a multi-quote string dynamically for N >= 6 quotes.
-    /// Stores result in _highQuoteValue field.
+    /// Parse a multi-quote string dynamically for N >= 3 quotes.
+    /// Uses a universal procedural algorithm that handles any N.
+    /// Stores result in _multiQuoteValue field.
     /// </summary>
     /// <param name="input">The raw string including opening and closing quotes</param>
     /// <param name="quoteChar">The quote character (", ', or `)</param>
     /// <returns>True if parsing succeeded and the result matches the input length</returns>
-    private bool ParseHighQuoteString(string input, char quoteChar)
+    private bool ParseMultiQuoteString(string input, char quoteChar)
     {
-        _highQuoteValue = null;
+        _multiQuoteValue = null;
         if (string.IsNullOrEmpty(input)) return false;
 
         // Count opening quotes
@@ -25,7 +26,7 @@
             quoteCount++;
         }
 
-        if (quoteCount < 6) return false; // Let the regular rules handle 1-5 quotes
+        if (quoteCount < 3) return false; // Let explicit rules handle N=1 and N=2
 
         string openClose = new string(quoteChar, quoteCount);
         string escapeSeq = new string(quoteChar, quoteCount * 2);
@@ -56,7 +57,7 @@
                     // Found valid closing - check if we consumed the entire input
                     if (afterClose == input.Length)
                     {
-                        _highQuoteValue = content.ToString();
+                        _multiQuoteValue = content.ToString();
                         return true;
                     }
                     return false;
@@ -93,89 +94,55 @@ multiLineValueLink <Link<string>> = "(" v:multiLineValues _ ")" { new Link<strin
 indentedIdLink <Link<string>> = id:(reference) __ ":" eol { new Link<string>(id) }
 
 // Reference can be quoted (with any number of quotes) or simple unquoted
-// Order matters: try high quotes (6+), then quintuple down to single, then simple
-reference <string> = highQuotedReference / quintupleQuotedReference / quadrupleQuotedReference / tripleQuotedReference / doubleQuotedReference / singleQuotedReference / simpleReference
+// Order: high quotes (3+) first, then double quotes (2), then single quotes (1), then simple
+// This ordering ensures proper precedence for quote matching
+reference <string> = highQuotedReference / doubleQuotedReference / singleQuotedReference / simpleReference
 
 simpleReference <string> = "" referenceSymbol+
 
-// High quote sequences (6+ quotes) - use procedural parsing
-// Capture everything that looks like a quoted string and validate
-highQuotedReference <string> = &('""""""' / "''''''" / '``````') raw:highQuoteCapture { raw }
+// High quote references (N >= 3) - use universal procedural parsing
+// Lookahead for 3+ quotes, then capture and validate with the procedural parser
+highQuotedReference <string> = &('"""' / "'''" / '```') raw:highQuoteCapture { raw }
 
-// Capture high quote content - match any characters including embedded quotes
-highQuoteCapture <string> = raw:highQuoteDoubleRaw &{ ParseHighQuoteString(raw, '"') } { _highQuoteValue }
-/ raw:highQuoteSingleRaw &{ ParseHighQuoteString(raw, '\'') } { _highQuoteValue }
-/ raw:highQuoteBacktickRaw &{ ParseHighQuoteString(raw, '`') } { _highQuoteValue }
+highQuoteCapture <string> = raw:highQuoteDoubleRaw &{ ParseMultiQuoteString(raw, '"') } { _multiQuoteValue }
+/ raw:highQuoteSingleRaw &{ ParseMultiQuoteString(raw, '\'') } { _multiQuoteValue }
+/ raw:highQuoteBacktickRaw &{ ParseMultiQuoteString(raw, '`') } { _multiQuoteValue }
 
-// Raw capture patterns - return string directly
+// Raw capture for high quotes - greedily match quotes and content
 highQuoteDoubleRaw <string> = "" ('"'+ highQuoteDoubleContent* '"'+)
 highQuoteSingleRaw <string> = "" ("'"+ highQuoteSingleContent* "'"+)
 highQuoteBacktickRaw <string> = "" ('`'+ highQuoteBacktickContent* '`'+)
 
-// Content for high quote strings - match non-quote chars OR quote sequences followed by non-quote
+// Content for high quotes: any char OR quote sequences followed by non-quote
 highQuoteDoubleContent = [^"] / '"'+ &[^"]
 highQuoteSingleContent = [^'] / "'"+ &[^']
 highQuoteBacktickContent = [^`] / '`'+ &[^`]
 
-// Single quotes (1 quote char) with escaping via doubling
-singleQuotedReference <string> = doubleQuote1 / singleQuote1 / backtickQuote1
+// Double quotes (N=2) - explicit PEG rules for proper escape handling
+doubleQuotedReference <string> = doubleDoubleQuote / doubleSingleQuote / doubleBacktickQuote
 
-doubleQuote1 <string> = '"' r:doubleQuote1Content* '"' { string.Join("", r) }
-doubleQuote1Content <string> = '""' { "\"" } / c:[^"] { c.ToString() }
+doubleDoubleQuote <string> = '""' r:doubleDoubleContent* '""' { string.Join("", r) }
+doubleDoubleContent <string> = '""""' { "\"\"" } / !'""' c:. { c.ToString() }
 
-singleQuote1 <string> = "'" r:singleQuote1Content* "'" { string.Join("", r) }
-singleQuote1Content <string> = "''" { "'" } / c:[^'] { c.ToString() }
+doubleSingleQuote <string> = "''" r:doubleSingleContent* "''" { string.Join("", r) }
+doubleSingleContent <string> = "''''" { "''" } / !"''" c:. { c.ToString() }
 
-backtickQuote1 <string> = '`' r:backtickQuote1Content* '`' { string.Join("", r) }
-backtickQuote1Content <string> = '``' { "`" } / c:[^`] { c.ToString() }
+doubleBacktickQuote <string> = '``' r:doubleBacktickContent* '``' { string.Join("", r) }
+doubleBacktickContent <string> = '````' { "``" } / !'``' c:. { c.ToString() }
 
-// Double quotes (2 quote chars)
-doubleQuotedReference <string> = doubleQuote2 / singleQuote2 / backtickQuote2
+// Single quotes (N=1) - explicit PEG rules for proper disambiguation
+// These are needed because single-quoted strings on the same line must be correctly parsed
+singleQuotedReference <string> = singleDoubleQuote / singleSingleQuote / singleBacktickQuote
 
-doubleQuote2 <string> = '""' r:doubleQuote2Content* '""' { string.Join("", r) }
-doubleQuote2Content <string> = '""""' { "\"\"" } / !'""' c:. { c.ToString() }
+singleDoubleQuote <string> = '"' r:singleDoubleContent* '"' { string.Join("", r) }
+singleDoubleContent <string> = '""' { "\"" } / c:[^"] { c.ToString() }
 
-singleQuote2 <string> = "''" r:singleQuote2Content* "''" { string.Join("", r) }
-singleQuote2Content <string> = "''''" { "''" } / !"''" c:. { c.ToString() }
+singleSingleQuote <string> = "'" r:singleSingleContent* "'" { string.Join("", r) }
+singleSingleContent <string> = "''" { "'" } / c:[^'] { c.ToString() }
 
-backtickQuote2 <string> = '``' r:backtickQuote2Content* '``' { string.Join("", r) }
-backtickQuote2Content <string> = '````' { "``" } / !'``' c:. { c.ToString() }
+singleBacktickQuote <string> = '`' r:singleBacktickContent* '`' { string.Join("", r) }
+singleBacktickContent <string> = '``' { "`" } / c:[^`] { c.ToString() }
 
-// Triple quotes (3 quote chars)
-tripleQuotedReference <string> = doubleQuote3 / singleQuote3 / backtickQuote3
-
-doubleQuote3 <string> = '"""' r:doubleQuote3Content* '"""' { string.Join("", r) }
-doubleQuote3Content <string> = '""""""' { "\"\"\"" } / !'"""' c:. { c.ToString() }
-
-singleQuote3 <string> = "'''" r:singleQuote3Content* "'''" { string.Join("", r) }
-singleQuote3Content <string> = "''''''" { "'''" } / !"'''" c:. { c.ToString() }
-
-backtickQuote3 <string> = '```' r:backtickQuote3Content* '```' { string.Join("", r) }
-backtickQuote3Content <string> = '``````' { "```" } / !'```' c:. { c.ToString() }
-
-// Quadruple quotes (4 quote chars)
-quadrupleQuotedReference <string> = doubleQuote4 / singleQuote4 / backtickQuote4
-
-doubleQuote4 <string> = '""""' r:doubleQuote4Content* '""""' { string.Join("", r) }
-doubleQuote4Content <string> = '""""""""' { "\"\"\"\"" } / !'""""' c:. { c.ToString() }
-
-singleQuote4 <string> = "''''" r:singleQuote4Content* "''''" { string.Join("", r) }
-singleQuote4Content <string> = "''''''''''" { "''''" } / !"''''" c:. { c.ToString() }
-
-backtickQuote4 <string> = '````' r:backtickQuote4Content* '````' { string.Join("", r) }
-backtickQuote4Content <string> = '````````' { "````" } / !'````' c:. { c.ToString() }
-
-// Quintuple quotes (5 quote chars)
-quintupleQuotedReference <string> = doubleQuote5 / singleQuote5 / backtickQuote5
-
-doubleQuote5 <string> = '"""""' r:doubleQuote5Content* '"""""' { string.Join("", r) }
-doubleQuote5Content <string> = '""""""""""' { "\"\"\"\"\"" } / !'"""""' c:. { c.ToString() }
-
-singleQuote5 <string> = "'''''" r:singleQuote5Content* "'''''" { string.Join("", r) }
-singleQuote5Content <string> = "''''''''''" { "'''''" } / !"'''''" c:. { c.ToString() }
-
-backtickQuote5 <string> = '`````' r:backtickQuote5Content* '`````' { string.Join("", r) }
-backtickQuote5Content <string> = '``````````' { "`````" } / !'`````' c:. { c.ToString() }
 SET_BASE_INDENTATION = spaces:" "* #{ if ((int)state["BaseIndentation"] == -1) state["BaseIndentation"] = spaces.Count; }
 PUSH_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] > (int)state["IndentationStack"].Peek() } #{ state["IndentationStack"].Push((int)state["NormalizedIndent"]); }
 POP_INDENTATION = #{ state["IndentationStack"].Pop(); }

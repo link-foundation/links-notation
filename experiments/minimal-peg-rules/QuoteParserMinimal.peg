@@ -1,0 +1,110 @@
+@namespace TestMinimalRules
+@classname QuoteParserMinimal
+@using System.Linq
+@members
+{
+    // Universal parser for N-quote strings (any N >= 2)
+    // Returns the parsed content or null if parsing fails
+    private string _parsedValue;
+
+    private bool ParseMultiQuoteString(string input, char quoteChar)
+    {
+        _parsedValue = null;
+        if (string.IsNullOrEmpty(input)) return false;
+
+        // Count opening quotes
+        int quoteCount = 0;
+        while (quoteCount < input.Length && input[quoteCount] == quoteChar)
+        {
+            quoteCount++;
+        }
+
+        if (quoteCount < 2) return false; // Let single quote rules handle N=1
+
+        string openClose = new string(quoteChar, quoteCount);
+        string escapeSeq = new string(quoteChar, quoteCount * 2);
+        string escapeVal = new string(quoteChar, quoteCount);
+
+        int pos = quoteCount; // Start after opening quotes
+        var content = new System.Text.StringBuilder();
+
+        while (pos < input.Length)
+        {
+            // Check for escape sequence (2*N quotes)
+            if (pos + escapeSeq.Length <= input.Length &&
+                input.Substring(pos, escapeSeq.Length) == escapeSeq)
+            {
+                content.Append(escapeVal);
+                pos += escapeSeq.Length;
+                continue;
+            }
+
+            // Check for closing quotes (exactly N quotes, not more)
+            if (pos + quoteCount <= input.Length &&
+                input.Substring(pos, quoteCount) == openClose)
+            {
+                // Make sure it's exactly N quotes (not followed by more of the same quote)
+                int afterClose = pos + quoteCount;
+                if (afterClose >= input.Length || input[afterClose] != quoteChar)
+                {
+                    // Found valid closing - check if we consumed the entire input
+                    if (afterClose == input.Length)
+                    {
+                        _parsedValue = content.ToString();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            // Take next character
+            content.Append(input[pos]);
+            pos++;
+        }
+
+        // No closing quotes found
+        return false;
+    }
+}
+
+// Test: Minimal explicit rules (N=1 only) + procedural for N>=2
+document <IList<string>> = list:quotedString* eof { list }
+
+quotedString <string> = _ q:(quotedRef) _ { q }
+
+// Order: try multi-quote (N>=2) first, then single quote (N=1)
+// This is because "" should match as double-quote-empty, not two single-quote-empty
+quotedRef <string> = multiQuotedRef / singleQuotedRef
+
+// Multi-quote references (N >= 2) - use procedural parsing
+// Lookahead for 2+ quotes, then capture and validate
+multiQuotedRef <string> = &('""' / "''" / '``') raw:multiQuoteCapture { raw }
+
+multiQuoteCapture <string> = raw:multiQuoteDoubleRaw &{ ParseMultiQuoteString(raw, '"') } { _parsedValue }
+/ raw:multiQuoteSingleRaw &{ ParseMultiQuoteString(raw, '\'') } { _parsedValue }
+/ raw:multiQuoteBacktickRaw &{ ParseMultiQuoteString(raw, '`') } { _parsedValue }
+
+// Raw capture for multi-quotes - match 2+ quotes
+multiQuoteDoubleRaw <string> = "" ('""' '"'* multiQuoteDoubleContent* '""' '"'*)
+multiQuoteSingleRaw <string> = "" ("''" "'"* multiQuoteSingleContent* "''" "'"*)
+multiQuoteBacktickRaw <string> = "" ('``' '`'* multiQuoteBacktickContent* '``' '`'*)
+
+// Content for multi-quote strings
+multiQuoteDoubleContent = [^"] / '"' !'"'
+multiQuoteSingleContent = [^'] / "'" !"'"
+multiQuoteBacktickContent = [^`] / '`' !'`'
+
+// Single quote references (N = 1) - explicit PEG rules for disambiguation
+singleQuotedRef <string> = singleDoubleQuote / singleSingleQuote / singleBacktickQuote
+
+singleDoubleQuote <string> = '"' r:singleDoubleContent* '"' { string.Join("", r) }
+singleDoubleContent <string> = '""' { "\"" } / c:[^"] { c.ToString() }
+
+singleSingleQuote <string> = "'" r:singleSingleContent* "'" { string.Join("", r) }
+singleSingleContent <string> = "''" { "'" } / c:[^'] { c.ToString() }
+
+singleBacktickQuote <string> = '`' r:singleBacktickContent* '`' { string.Join("", r) }
+singleBacktickContent <string> = '``' { "`" } / c:[^`] { c.ToString() }
+
+_ = [ \t]*
+eof = !.

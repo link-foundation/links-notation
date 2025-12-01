@@ -113,19 +113,42 @@ See the `solutions/` subdirectory for detailed experiments:
 
 **C# Pegasus cannot use the exact same universal approach as JavaScript** due to fundamental differences in how the parser generators work.
 
-### Recommended Approach: Hybrid
+### Recommended Approach: Minimized Hybrid
 
-The current C# implementation uses a **hybrid approach** that achieves the same functionality:
+After further investigation, we found that the number of explicit PEG rules can be **minimized to just N=1 and N=2**, with procedural parsing handling N>=3.
 
-1. **Explicit PEG rules for quote levels 1-5** (most common cases)
-   - Required for Pegasus to correctly disambiguate multiple quoted strings
-   - Provides proper PEG parsing semantics
+#### Why N=1 Explicit Rules Are Required
+Multiple single-quoted strings on the same line (e.g., `"a" "b"`) require explicit PEG rules for proper disambiguation. Without explicit rules, greedy PEG operators capture too much.
 
-2. **Procedural `ParseHighQuoteString()` method for levels 6+**
-   - Handles unlimited quote counts
+#### Why N=2 Explicit Rules Are Required
+Escape sequences in N=2 strings (e.g., `""text with """" escaped""`) cannot be correctly captured by generic patterns because the content pattern cannot distinguish between escape sequences and closing quotes without knowing N.
+
+#### Why N>=3 Can Use Procedural Parsing
+For N>=3, the content pattern `'"'+ &[^"]` (quote sequences followed by non-quote) works because:
+- The raw capture is permissive enough to capture escape sequences
+- The procedural validator correctly identifies the exact N from the captured string
+- The lookahead `&('"""' / "'''" / '```')` ensures we only try the procedural path for 3+ quotes
+
+### Grammar Size Comparison
+
+| Approach | Grammar Lines | Reduction |
+|----------|---------------|-----------|
+| Original (explicit 1-5, procedural 6+) | 188 | baseline |
+| **Optimized (explicit 1-2, procedural 3+)** | 155 | **17.5% smaller** |
+
+### Current Implementation
+
+The optimized C# implementation uses:
+
+1. **Explicit PEG rules for N=1** (3 quote types × 2 rules = 6 rules)
+   - Required for disambiguation of multiple strings on same line
+
+2. **Explicit PEG rules for N=2** (3 quote types × 2 rules = 6 rules)
+   - Required for proper escape sequence handling
+
+3. **Procedural `ParseMultiQuoteString()` method for N>=3**
+   - Handles unlimited quote counts (3, 4, 5, ... 100, ... any N)
    - Uses the same universal parsing algorithm
-
-The core parsing logic is universal and simple - it's just wrapped in PEG rules that provide correct disambiguation semantics.
 
 ### Code Comparison
 
@@ -143,16 +166,24 @@ doubleQuotedUniversal = &'"' &{
 } chars:consumeDouble { return parsedValue; }
 ```
 
-**C# (Pegasus) - Hybrid approach:**
+**C# (Pegasus) - Optimized hybrid approach:**
 ```
-// Explicit rules for 1-5 quotes
-singleQuotedReference <string> = doubleQuote1 / singleQuote1 / backtickQuote1
-doubleQuote1 <string> = '"' r:doubleQuote1Content* '"' { string.Join("", r) }
-// ... (similar for levels 2-5)
+// Order: high quotes (3+) first, then double quotes (2), then single quotes (1), then simple
+reference <string> = highQuotedReference / doubleQuotedReference / singleQuotedReference / simpleReference
 
-// Procedural for 6+ quotes
-highQuotedReference <string> = &('""""""' / "''''''" / '``````') raw:highQuoteCapture { raw }
-highQuoteCapture <string> = raw:highQuoteDoubleRaw &{ ParseHighQuoteString(raw, '"') } { _highQuoteValue }
+// N=1: Explicit PEG rules for disambiguation
+singleQuotedReference <string> = singleDoubleQuote / singleSingleQuote / singleBacktickQuote
+singleDoubleQuote <string> = '"' r:singleDoubleContent* '"' { string.Join("", r) }
+singleDoubleContent <string> = '""' { "\"" } / c:[^"] { c.ToString() }
+
+// N=2: Explicit PEG rules for escape handling
+doubleQuotedReference <string> = doubleDoubleQuote / doubleSingleQuote / doubleBacktickQuote
+doubleDoubleQuote <string> = '""' r:doubleDoubleContent* '""' { string.Join("", r) }
+doubleDoubleContent <string> = '""""' { "\"\"" } / !'""' c:. { c.ToString() }
+
+// N>=3: Procedural parsing for unlimited quotes
+highQuotedReference <string> = &('"""' / "'''" / '```') raw:highQuoteCapture { raw }
+highQuoteCapture <string> = raw:highQuoteDoubleRaw &{ ParseMultiQuoteString(raw, '"') } { _multiQuoteValue }
 ```
 
 ## Files in This Case Study
