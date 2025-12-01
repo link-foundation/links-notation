@@ -313,30 +313,36 @@ class Parser:
         if start >= len(text):
             return (start, "")
 
-        # Check if this starts with a multi-quote string
-        for quote_count in range(5, 0, -1):
-            for quote_char in ['"', "'", "`"]:
-                quote_seq = quote_char * quote_count
-                if text[start:].startswith(quote_seq):
+        # Check if this starts with a multi-quote string (supports any N quotes)
+        for quote_char in ['"', "'", "`"]:
+            if text[start:].startswith(quote_char):
+                # Count opening quotes dynamically
+                quote_count = 0
+                pos = start
+                while pos < len(text) and text[pos] == quote_char:
+                    quote_count += 1
+                    pos += 1
+
+                if quote_count >= 1:
                     # Parse this multi-quote string
                     remaining = text[start:]
-                    open_close = quote_seq
+                    open_close = quote_char * quote_count
                     escape_seq = quote_char * (quote_count * 2)
 
-                    pos = len(open_close)
-                    while pos < len(remaining):
+                    inner_pos = len(open_close)
+                    while inner_pos < len(remaining):
                         # Check for escape sequence (2*N quotes)
-                        if remaining[pos:].startswith(escape_seq):
-                            pos += len(escape_seq)
+                        if remaining[inner_pos:].startswith(escape_seq):
+                            inner_pos += len(escape_seq)
                             continue
                         # Check for closing quotes
-                        if remaining[pos:].startswith(open_close):
-                            after_close_pos = pos + len(open_close)
+                        if remaining[inner_pos:].startswith(open_close):
+                            after_close_pos = inner_pos + len(open_close)
                             # Make sure this is exactly N quotes (not more)
                             if after_close_pos >= len(remaining) or remaining[after_close_pos] != quote_char:
                                 # Found the end
                                 return (start + after_close_pos, remaining[:after_close_pos])
-                        pos += 1
+                        inner_pos += 1
 
                     # No closing found, treat as regular text
                     break
@@ -400,11 +406,15 @@ class Parser:
         """Extract reference, handling quoted strings with escaping support."""
         text = text.strip()
 
-        # Try multi-quote strings (check longer sequences first: 5, 4, 3, 2, 1)
-        for quote_count in range(5, 0, -1):
-            for quote_char in ['"', "'", "`"]:
-                quote_seq = quote_char * quote_count
-                if text.startswith(quote_seq) and len(text) > len(quote_seq):
+        # Try multi-quote strings (supports any N quotes)
+        for quote_char in ['"', "'", "`"]:
+            if text.startswith(quote_char):
+                # Count opening quotes dynamically
+                quote_count = 0
+                while quote_count < len(text) and text[quote_count] == quote_char:
+                    quote_count += 1
+
+                if quote_count >= 1 and len(text) > quote_count:
                     # Try to parse this multi-quote string
                     result = self._parse_multi_quote_string(text, quote_char, quote_count)
                     if result is not None:

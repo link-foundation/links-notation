@@ -467,3 +467,55 @@ fn test_multiline_in_double_double_quotes() {
     }
     panic!("Expected multiline content in double double quotes");
 }
+
+// ============================================================================
+// Unlimited Quotes (6+ quote chars) Tests
+// ============================================================================
+
+#[test]
+fn test_unlimited_quotes_6() {
+    // Test 6-quote strings
+    let result = parse_lino("\"\"\"\"\"\"hello\"\"\"\"\"\"").unwrap();
+    assert_eq!(get_single_ref_id(&result), Some(&"hello".to_string()));
+}
+
+#[test]
+fn test_unlimited_quotes_10() {
+    // Test 10-quote strings
+    let result = parse_lino("\"\"\"\"\"\"\"\"\"\"very deeply quoted\"\"\"\"\"\"\"\"\"\"").unwrap();
+    assert_eq!(
+        get_single_ref_id(&result),
+        Some(&"very deeply quoted".to_string())
+    );
+}
+
+#[test]
+fn test_unlimited_quotes_6_with_inner_quotes() {
+    // Test 6-quote strings with inner 5-quote sequences
+    let result =
+        parse_lino("\"\"\"\"\"\"hello with \"\"\"\"\" five quotes inside\"\"\"\"\"\"").unwrap();
+    assert_eq!(
+        get_single_ref_id(&result),
+        Some(&"hello with \"\"\"\"\" five quotes inside".to_string())
+    );
+}
+
+#[test]
+fn test_unlimited_single_quotes_7() {
+    // Test 7-quote single quote strings
+    let result = parse_lino("'''''''seven single quotes'''''''").unwrap();
+    assert_eq!(
+        get_single_ref_id(&result),
+        Some(&"seven single quotes".to_string())
+    );
+}
+
+#[test]
+fn test_unlimited_backticks_8() {
+    // Test 8-quote backtick strings
+    let result = parse_lino("````````eight backticks````````").unwrap();
+    assert_eq!(
+        get_single_ref_id(&result),
+        Some(&"eight backticks".to_string())
+    );
+}

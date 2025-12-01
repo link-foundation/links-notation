@@ -1,6 +1,77 @@
 @namespace Link.Foundation.Links.Notation
 @classname Parser
 @using System.Linq
+@members
+{
+    // Field to store parsed high quote value
+    private string _highQuoteValue;
+
+    /// <summary>
+    /// Parse a multi-quote string dynamically for N >= 6 quotes.
+    /// Stores result in _highQuoteValue field.
+    /// </summary>
+    /// <param name="input">The raw string including opening and closing quotes</param>
+    /// <param name="quoteChar">The quote character (", ', or `)</param>
+    /// <returns>True if parsing succeeded and the result matches the input length</returns>
+    private bool ParseHighQuoteString(string input, char quoteChar)
+    {
+        _highQuoteValue = null;
+        if (string.IsNullOrEmpty(input)) return false;
+
+        // Count opening quotes
+        int quoteCount = 0;
+        while (quoteCount < input.Length && input[quoteCount] == quoteChar)
+        {
+            quoteCount++;
+        }
+
+        if (quoteCount < 6) return false; // Let the regular rules handle 1-5 quotes
+
+        string openClose = new string(quoteChar, quoteCount);
+        string escapeSeq = new string(quoteChar, quoteCount * 2);
+        string escapeVal = new string(quoteChar, quoteCount);
+
+        int pos = quoteCount; // Start after opening quotes
+        var content = new System.Text.StringBuilder();
+
+        while (pos < input.Length)
+        {
+            // Check for escape sequence (2*N quotes)
+            if (pos + escapeSeq.Length <= input.Length &&
+                input.Substring(pos, escapeSeq.Length) == escapeSeq)
+            {
+                content.Append(escapeVal);
+                pos += escapeSeq.Length;
+                continue;
+            }
+
+            // Check for closing quotes (exactly N quotes, not more)
+            if (pos + quoteCount <= input.Length &&
+                input.Substring(pos, quoteCount) == openClose)
+            {
+                // Make sure it's exactly N quotes (not followed by more of the same quote)
+                int afterClose = pos + quoteCount;
+                if (afterClose >= input.Length || input[afterClose] != quoteChar)
+                {
+                    // Found valid closing - check if we consumed the entire input
+                    if (afterClose == input.Length)
+                    {
+                        _highQuoteValue = content.ToString();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            // Take next character
+            content.Append(input[pos]);
+            pos++;
+        }
+
+        // No closing quotes found
+        return false;
+    }
+}
 document <IList<Link<string>>> = #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = -1; } skipEmptyLines l:links _ eof { l.ToLinksList() } / #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = -1; } _ eof { new List<Link<string>>() }
 skipEmptyLines = ([ \t]* [\r\n])*
 links <IList<LinksGroup<string>>> = fl:firstLine list:line* POP_INDENTATION { new List<LinksGroup<string>> { fl }.Concat(list).ToList() }
@@ -21,9 +92,30 @@ singleLineValueLink <Link<string>> = v:singleLineValues { new Link<string>(v) }
 multiLineValueLink <Link<string>> = "(" v:multiLineValues _ ")" { new Link<string>(v) }
 indentedIdLink <Link<string>> = id:(reference) __ ":" eol { new Link<string>(id) }
 
-reference <string> = quintupleQuotedReference / quadrupleQuotedReference / tripleQuotedReference / doubleQuotedReference / singleQuotedReference / simpleReference
+// Reference can be quoted (with any number of quotes) or simple unquoted
+// Order matters: try high quotes (6+), then quintuple down to single, then simple
+reference <string> = highQuotedReference / quintupleQuotedReference / quadrupleQuotedReference / tripleQuotedReference / doubleQuotedReference / singleQuotedReference / simpleReference
 
 simpleReference <string> = "" referenceSymbol+
+
+// High quote sequences (6+ quotes) - use procedural parsing
+// Capture everything that looks like a quoted string and validate
+highQuotedReference <string> = &('""""""' / "''''''" / '``````') raw:highQuoteCapture { raw }
+
+// Capture high quote content - match any characters including embedded quotes
+highQuoteCapture <string> = raw:highQuoteDoubleRaw &{ ParseHighQuoteString(raw, '"') } { _highQuoteValue }
+/ raw:highQuoteSingleRaw &{ ParseHighQuoteString(raw, '\'') } { _highQuoteValue }
+/ raw:highQuoteBacktickRaw &{ ParseHighQuoteString(raw, '`') } { _highQuoteValue }
+
+// Raw capture patterns - return string directly
+highQuoteDoubleRaw <string> = "" ('"'+ highQuoteDoubleContent* '"'+)
+highQuoteSingleRaw <string> = "" ("'"+ highQuoteSingleContent* "'"+)
+highQuoteBacktickRaw <string> = "" ('`'+ highQuoteBacktickContent* '`'+)
+
+// Content for high quote strings - match non-quote chars OR quote sequences followed by non-quote
+highQuoteDoubleContent = [^"] / '"'+ &[^"]
+highQuoteSingleContent = [^'] / "'"+ &[^']
+highQuoteBacktickContent = [^`] / '`'+ &[^`]
 
 // Single quotes (1 quote char) with escaping via doubling
 singleQuotedReference <string> = doubleQuote1 / singleQuote1 / backtickQuote1

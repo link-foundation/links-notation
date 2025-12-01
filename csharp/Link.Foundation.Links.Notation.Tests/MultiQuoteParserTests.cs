@@ -328,5 +328,54 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result[0].Values);
             Assert.Equal("line1\nline2", result[0].Values![0].Id);
         }
+
+        // ============================================================================
+        // Unlimited Quotes (6+ quote chars) Tests
+        // ============================================================================
+
+        [Fact]
+        public static void TestUnlimitedQuotes6()
+        {
+            // Test 6-quote strings
+            var parser = new Parser();
+            var result = parser.Parse("\"\"\"\"\"\"hello\"\"\"\"\"\"");
+            Assert.Equal("hello", GetSingleRefId(result));
+        }
+
+        [Fact]
+        public static void TestUnlimitedQuotes10()
+        {
+            // Test 10-quote strings
+            var parser = new Parser();
+            var result = parser.Parse("\"\"\"\"\"\"\"\"\"\"very deeply quoted\"\"\"\"\"\"\"\"\"\"");
+            Assert.Equal("very deeply quoted", GetSingleRefId(result));
+        }
+
+        [Fact]
+        public static void TestUnlimitedQuotes6WithInnerQuotes()
+        {
+            // Test 6-quote strings with inner 5-quote sequences
+            var parser = new Parser();
+            var result = parser.Parse("\"\"\"\"\"\"hello with \"\"\"\"\" five quotes inside\"\"\"\"\"\"");
+            Assert.Equal("hello with \"\"\"\"\" five quotes inside", GetSingleRefId(result));
+        }
+
+        [Fact]
+        public static void TestUnlimitedSingleQuotes7()
+        {
+            // Test 7-quote single quote strings
+            var parser = new Parser();
+            var result = parser.Parse("'''''''seven single quotes'''''''");
+            Assert.Equal("seven single quotes", GetSingleRefId(result));
+        }
+
+        [Fact]
+        public static void TestUnlimitedBackticks8()
+        {
+            // Test 8-quote backtick strings
+            var parser = new Parser();
+            var result = parser.Parse("````````eight backticks````````");
+            Assert.Equal("eight backticks", GetSingleRefId(result));
+        }
     }
 }

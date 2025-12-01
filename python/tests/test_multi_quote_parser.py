@@ -1,7 +1,5 @@
 """Tests for multi-quote string support in parser."""
 
-import pytest
-
 from links_notation.parser import Parser
 
 
@@ -225,3 +223,42 @@ class TestEdgeCases:
         assert result[0].values is not None
         assert len(result[0].values) == 1
         assert result[0].values[0].id == "line1\nline2"
+
+
+class TestUnlimitedQuotes:
+    """Tests for unlimited quotes (6+ quote chars)."""
+
+    def test_unlimited_quotes_6(self):
+        """Test 6-quote strings."""
+        parser = Parser()
+        result = parser.parse('""""""hello""""""')
+        assert len(result) == 1
+        assert get_single_ref_id(result) == "hello"
+
+    def test_unlimited_quotes_10(self):
+        """Test 10-quote strings."""
+        parser = Parser()
+        result = parser.parse('""""""""""very deeply quoted""""""""""')
+        assert len(result) == 1
+        assert get_single_ref_id(result) == "very deeply quoted"
+
+    def test_unlimited_quotes_6_with_inner_quotes(self):
+        """Test 6-quote strings with inner 5-quote sequences."""
+        parser = Parser()
+        result = parser.parse('""""""hello with """"" five quotes inside""""""')
+        assert len(result) == 1
+        assert get_single_ref_id(result) == 'hello with """"" five quotes inside'
+
+    def test_unlimited_single_quotes_7(self):
+        """Test 7-quote single quote strings."""
+        parser = Parser()
+        result = parser.parse("'''''''seven single quotes'''''''")
+        assert len(result) == 1
+        assert get_single_ref_id(result) == "seven single quotes"
+
+    def test_unlimited_backticks_8(self):
+        """Test 8-quote backtick strings."""
+        parser = Parser()
+        result = parser.parse("````````eight backticks````````")
+        assert len(result) == 1
+        assert get_single_ref_id(result) == "eight backticks"

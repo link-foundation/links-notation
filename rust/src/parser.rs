@@ -194,95 +194,41 @@ fn parse_multi_quote_string(
     }
 }
 
-// Single quote char (1 quote)
-fn double_quote_1(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '"', 1)
+/// Parse a quoted string with dynamically detected quote count.
+/// Counts opening quotes and uses that count for parsing.
+fn parse_dynamic_quote_string(input: &str, quote_char: char) -> IResult<&str, String> {
+    // Count opening quotes
+    let quote_count = input.chars().take_while(|&c| c == quote_char).count();
+
+    if quote_count == 0 {
+        return Err(nom::Err::Error(nom::error::Error::new(
+            input,
+            nom::error::ErrorKind::Tag,
+        )));
+    }
+
+    parse_multi_quote_string(input, quote_char, quote_count)
 }
 
-fn single_quote_1(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '\'', 1)
+fn double_quoted_dynamic(input: &str) -> IResult<&str, String> {
+    parse_dynamic_quote_string(input, '"')
 }
 
-fn backtick_quote_1(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '`', 1)
+fn single_quoted_dynamic(input: &str) -> IResult<&str, String> {
+    parse_dynamic_quote_string(input, '\'')
 }
 
-// Double quote chars (2 quotes)
-fn double_quote_2(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '"', 2)
-}
-
-fn single_quote_2(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '\'', 2)
-}
-
-fn backtick_quote_2(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '`', 2)
-}
-
-// Triple quote chars (3 quotes)
-fn double_quote_3(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '"', 3)
-}
-
-fn single_quote_3(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '\'', 3)
-}
-
-fn backtick_quote_3(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '`', 3)
-}
-
-// Quadruple quote chars (4 quotes)
-fn double_quote_4(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '"', 4)
-}
-
-fn single_quote_4(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '\'', 4)
-}
-
-fn backtick_quote_4(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '`', 4)
-}
-
-// Quintuple quote chars (5 quotes)
-fn double_quote_5(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '"', 5)
-}
-
-fn single_quote_5(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '\'', 5)
-}
-
-fn backtick_quote_5(input: &str) -> IResult<&str, String> {
-    parse_multi_quote_string(input, '`', 5)
+fn backtick_quoted_dynamic(input: &str) -> IResult<&str, String> {
+    parse_dynamic_quote_string(input, '`')
 }
 
 fn reference(input: &str) -> IResult<&str, String> {
-    // Try longer quote sequences first (greedy matching)
+    // Try quoted strings with dynamic quote detection (supports any N quotes)
+    // Then fall back to simple unquoted reference
     alt((
-        // 5 quotes
-        double_quote_5,
-        single_quote_5,
-        backtick_quote_5,
-        // 4 quotes
-        double_quote_4,
-        single_quote_4,
-        backtick_quote_4,
-        // 3 quotes
-        double_quote_3,
-        single_quote_3,
-        backtick_quote_3,
-        // 2 quotes
-        double_quote_2,
-        single_quote_2,
-        backtick_quote_2,
-        // 1 quote
-        double_quote_1,
-        single_quote_1,
-        backtick_quote_1,
-        // Simple unquoted
+        double_quoted_dynamic,
+        single_quoted_dynamic,
+        backtick_quoted_dynamic,
         simple_reference,
     ))
     .parse(input)

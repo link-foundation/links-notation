@@ -412,3 +412,52 @@ test('TestMultilineInDoubleDoubleQuotes', () => {
   expect(result.length).toBe(1);
   expect(result[0].values[0].id).toBe('line1\nline2');
 });
+
+// ============================================================================
+// Unlimited Quotes (6+ quote chars) Tests
+// ============================================================================
+
+test('TestUnlimitedQuotes6', () => {
+  // Test 6-quote strings
+  const input = '""""""hello""""""';
+  const result = parser.parse(input);
+
+  expect(result.length).toBe(1);
+  expect(getSingleRefId(result)).toBe('hello');
+});
+
+test('TestUnlimitedQuotes10', () => {
+  // Test 10-quote strings
+  const input = '""""""""""very deeply quoted""""""""""';
+  const result = parser.parse(input);
+
+  expect(result.length).toBe(1);
+  expect(getSingleRefId(result)).toBe('very deeply quoted');
+});
+
+test('TestUnlimitedQuotes6WithInnerQuotes', () => {
+  // Test 6-quote strings with inner 5-quote sequences
+  const input = '""""""hello with """"" five quotes inside""""""';
+  const result = parser.parse(input);
+
+  expect(result.length).toBe(1);
+  expect(getSingleRefId(result)).toBe('hello with """"" five quotes inside');
+});
+
+test('TestUnlimitedSingleQuotes7', () => {
+  // Test 7-quote single quote strings
+  const input = "'''''''seven single quotes'''''''";
+  const result = parser.parse(input);
+
+  expect(result.length).toBe(1);
+  expect(getSingleRefId(result)).toBe('seven single quotes');
+});
+
+test('TestUnlimitedBackticks8', () => {
+  // Test 8-quote backtick strings
+  const input = '````````eight backticks````````';
+  const result = parser.parse(input);
+
+  expect(result.length).toBe(1);
+  expect(getSingleRefId(result)).toBe('eight backticks');
+});

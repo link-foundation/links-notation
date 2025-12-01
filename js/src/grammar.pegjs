@@ -35,23 +35,54 @@
     return indentationStack[indentationStack.length - 1];
   }
 
-  // Process escape sequences for multi-quote strings
-  // For N quotes: 2*N consecutive quotes become N quotes
-  function processEscapes(content, quoteChar, quoteCount) {
-    const escapeSequence = quoteChar.repeat(quoteCount * 2);
-    const replacement = quoteChar.repeat(quoteCount);
-    let result = '';
-    let i = 0;
-    while (i < content.length) {
-      if (content.substr(i, escapeSequence.length) === escapeSequence) {
-        result += replacement;
-        i += escapeSequence.length;
-      } else {
-        result += content[i];
-        i++;
-      }
+  // Parse a multi-quote string dynamically for N >= 6 quotes
+  // Returns { value: string, length: number } or null if no match
+  function parseHighQuoteString(inputStr, quoteChar) {
+    // Count opening quotes
+    let quoteCount = 0;
+    while (quoteCount < inputStr.length && inputStr[quoteCount] === quoteChar) {
+      quoteCount++;
     }
-    return result;
+
+    if (quoteCount < 6) {
+      return null; // Let the regular rules handle 1-5 quotes
+    }
+
+    const openClose = quoteChar.repeat(quoteCount);
+    const escapeSeq = quoteChar.repeat(quoteCount * 2);
+    const escapeVal = quoteChar.repeat(quoteCount);
+
+    let pos = quoteCount; // Start after opening quotes
+    let content = '';
+
+    while (pos < inputStr.length) {
+      // Check for escape sequence (2*N quotes)
+      if (inputStr.substr(pos, escapeSeq.length) === escapeSeq) {
+        content += escapeVal;
+        pos += escapeSeq.length;
+        continue;
+      }
+
+      // Check for closing quotes (exactly N quotes, not more)
+      if (inputStr.substr(pos, quoteCount) === openClose) {
+        // Make sure it's exactly N quotes (not followed by more of the same quote)
+        const afterClose = pos + quoteCount;
+        if (afterClose >= inputStr.length || inputStr[afterClose] !== quoteChar) {
+          // Found valid closing
+          return {
+            value: content,
+            length: afterClose
+          };
+        }
+      }
+
+      // Take next character
+      content += inputStr[pos];
+      pos++;
+    }
+
+    // No closing quotes found
+    return null;
   }
 }
 
@@ -98,13 +129,52 @@ multiLineValueLink = "(" v:multiLineValues _ ")" { return { values: v }; }
 
 indentedIdLink = id:reference __ ":" eol { return { id: id, values: [] }; }
 
-// Reference can be quoted (with 1-5+ quotes) or simple unquoted
-reference = quotedReference / simpleReference
+// Reference can be quoted (with any number of quotes) or simple unquoted
+// Order matters: try longer quote sequences first (greedy matching)
+// For 6+ quotes, use procedural parsing via highQuotedReference
+reference = highQuotedReference / quintupleQuotedReference / quadrupleQuotedReference / tripleQuotedReference / doubleQuotedReference / singleQuotedReference / simpleReference
 
 simpleReference = chars:referenceSymbol+ { return chars.join(''); }
 
-// Quoted references - try longer quote sequences first (greedy matching)
-quotedReference = quintupleQuotedReference / quadrupleQuotedReference / tripleQuotedReference / doubleQuotedReference / singleQuotedReference
+// High quote sequences (6+ quotes) - use procedural parsing
+// Capture everything that looks like a quoted string and validate
+highQuotedReference = &('""""""' / "''''''" / '``````') raw:highQuoteCapture {
+  return raw;
+}
+
+// Capture high quote content - match any characters including embedded quotes
+// The key insight: for 6+ quotes, we need to capture chars that might include
+// sequences of quotes less than the closing count
+highQuoteCapture = raw:$('"'+ highQuoteDoubleContent* '"'+) &{
+  const result = parseHighQuoteString(raw, '"');
+  if (result && result.length === raw.length) {
+    options._highQuoteValue = result.value;
+    return true;
+  }
+  return false;
+} { return options._highQuoteValue; }
+/ raw:$("'"+ highQuoteSingleContent* "'"+ ) &{
+  const result = parseHighQuoteString(raw, "'");
+  if (result && result.length === raw.length) {
+    options._highQuoteValue = result.value;
+    return true;
+  }
+  return false;
+} { return options._highQuoteValue; }
+/ raw:$('`'+ highQuoteBacktickContent* '`'+) &{
+  const result = parseHighQuoteString(raw, '`');
+  if (result && result.length === raw.length) {
+    options._highQuoteValue = result.value;
+    return true;
+  }
+  return false;
+} { return options._highQuoteValue; }
+
+// Content for high quote strings - match non-quote chars OR quote sequences
+// followed by non-quote (so they're not closing sequences)
+highQuoteDoubleContent = [^"] / '"'+ &[^"]
+highQuoteSingleContent = [^'] / "'"+ &[^']
+highQuoteBacktickContent = [^\`] / '`'+ &[^\`]
 
 // Single quote (1 quote char)
 singleQuotedReference = doubleQuote1 / singleQuote1 / backtickQuote1
