@@ -167,10 +167,10 @@ backtickQuotedAny = raw:$('`'+ backtickQuoteContent* '`'+) &{
   return false;
 } { return options._quoteValue; }
 
-// Content for quoted strings - match non-quote chars OR quote sequences followed by non-quote
-doubleQuoteContent = [^"] / '"'+ &[^"]
-singleQuoteContent = [^'] / "'"+ &[^']
-backtickQuoteContent = [^`] / '`'+ &[^`]
+// Content for quoted strings - match non-quote chars (including newlines) OR quote sequences followed by non-quote
+doubleQuoteContent = [^"\r\n] / [\r\n] / '"'+ &[^"]
+singleQuoteContent = [^'\r\n] / [\r\n] / "'"+ &[^']
+backtickQuoteContent = [^`\r\n] / [\r\n] / '`'+ &[^`]
 
 SET_BASE_INDENTATION = spaces:" "* { setBaseIndentation(spaces); }
 
