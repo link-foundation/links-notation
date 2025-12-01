@@ -207,6 +207,33 @@ Container for grouping related links.
 - `src/index.js` - Main entry point
 - `tests/` - Test files
 
+## Maintenance
+
+### Linting
+
+Run ESLint to check for code style issues:
+
+```bash
+bun run lint
+```
+
+Auto-fix linting issues:
+
+```bash
+bun run lint:fix
+```
+
+### Pre-commit Hooks
+
+This project uses pre-commit hooks that automatically run ESLint before commits.
+To set up pre-commit hooks locally:
+
+```bash
+# From repository root
+pip install pre-commit
+pre-commit install
+```
+
 ## Dependencies
 
 - Peggy.js (5.0.6) - Parser generator

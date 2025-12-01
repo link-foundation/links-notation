@@ -26,13 +26,19 @@ as another reference'
     assert link.values is not None
     assert len(link.values) == 2
 
-    assert link.values[0].id == """long
+    assert (
+        link.values[0].id
+        == """long
 string literal representing
 the reference"""
+    )
 
-    assert link.values[1].id == """another
+    assert (
+        link.values[1].id
+        == """another
 long string literal
 as another reference"""
+    )
 
 
 def test_simple_multiline_double_quoted():

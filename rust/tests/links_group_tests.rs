@@ -4,7 +4,7 @@ use links_notation::LiNo;
 fn links_group_constructor_test() {
     // Test creating a basic group structure (similar to LinksGroup constructor)
     let element = LiNo::Ref("root".to_string());
-    let children = vec![
+    let children = [
         LiNo::Ref("child1".to_string()),
         LiNo::Ref("child2".to_string()),
     ];
@@ -28,9 +28,12 @@ fn links_group_constructor_equivalent_test() {
     ];
     let group = LiNo::Link {
         id: Some("group".to_string()),
-        values: vec![root.clone()].into_iter().chain(children.clone()).collect(),
+        values: vec![root.clone()]
+            .into_iter()
+            .chain(children.clone())
+            .collect(),
     };
-    
+
     if let LiNo::Link { id, values } = group {
         assert_eq!(id, Some("group".to_string()));
         assert_eq!(values.len(), 3); // root + 2 children
@@ -47,27 +50,31 @@ fn links_group_to_list_flattens_structure_test() {
     let child1 = LiNo::Ref("child1".to_string());
     let child2 = LiNo::Ref("child2".to_string());
     let grandchild = LiNo::Ref("grandchild".to_string());
-    
+
     // Create nested structure: root with child1 and (child2 with grandchild)
     let nested_child = LiNo::Link::<String> {
         id: None,
         values: vec![child2.clone(), grandchild.clone()],
     };
-    
+
     let group = LiNo::Link {
         id: None,
         values: vec![root.clone(), child1.clone(), nested_child],
     };
-    
+
     // Verify the structure
     if let LiNo::Link { id, values } = group {
         assert_eq!(id, None);
         assert_eq!(values.len(), 3);
         assert_eq!(values[0], root);
         assert_eq!(values[1], child1);
-        
+
         // Check nested structure
-        if let LiNo::Link { id: nested_id, values: nested_values } = &values[2] {
+        if let LiNo::Link {
+            id: nested_id,
+            values: nested_values,
+        } = &values[2]
+        {
             assert_eq!(*nested_id, None);
             assert_eq!(nested_values.len(), 2);
             assert_eq!(nested_values[0], child2);
@@ -108,7 +115,10 @@ fn links_group_append_to_links_list_test() {
     // Create a group structure
     let group = LiNo::Link::<String> {
         id: None,
-        values: vec![element.clone()].into_iter().chain(children.clone()).collect(),
+        values: vec![element.clone()]
+            .into_iter()
+            .chain(children.clone())
+            .collect(),
     };
 
     // Append to a list (simulating AppendToLinksList)
