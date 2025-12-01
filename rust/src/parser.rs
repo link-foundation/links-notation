@@ -143,14 +143,21 @@ fn simple_reference(input: &str) -> IResult<&str, String> {
 
 /// Parse a multi-quote string with a given quote character and count.
 /// For N quotes: opening = N quotes, closing = N quotes, escape = 2*N quotes -> N quotes
-fn parse_multi_quote_string(input: &str, quote_char: char, quote_count: usize) -> IResult<&str, String> {
+fn parse_multi_quote_string(
+    input: &str,
+    quote_char: char,
+    quote_count: usize,
+) -> IResult<&str, String> {
     let open_close = quote_char.to_string().repeat(quote_count);
     let escape_seq = quote_char.to_string().repeat(quote_count * 2);
     let escape_val = quote_char.to_string().repeat(quote_count);
 
     // Check for opening quotes
     if !input.starts_with(&open_close) {
-        return Err(nom::Err::Error(nom::error::Error::new(input, nom::error::ErrorKind::Tag)));
+        return Err(nom::Err::Error(nom::error::Error::new(
+            input,
+            nom::error::ErrorKind::Tag,
+        )));
     }
 
     let mut remaining = &input[open_close.len()..];
@@ -158,7 +165,10 @@ fn parse_multi_quote_string(input: &str, quote_char: char, quote_count: usize) -
 
     loop {
         if remaining.is_empty() {
-            return Err(nom::Err::Error(nom::error::Error::new(input, nom::error::ErrorKind::Tag)));
+            return Err(nom::Err::Error(nom::error::Error::new(
+                input,
+                nom::error::ErrorKind::Tag,
+            )));
         }
 
         // Check for escape sequence (2*N quotes)
@@ -253,15 +263,25 @@ fn reference(input: &str) -> IResult<&str, String> {
     // Try longer quote sequences first (greedy matching)
     alt((
         // 5 quotes
-        double_quote_5, single_quote_5, backtick_quote_5,
+        double_quote_5,
+        single_quote_5,
+        backtick_quote_5,
         // 4 quotes
-        double_quote_4, single_quote_4, backtick_quote_4,
+        double_quote_4,
+        single_quote_4,
+        backtick_quote_4,
         // 3 quotes
-        double_quote_3, single_quote_3, backtick_quote_3,
+        double_quote_3,
+        single_quote_3,
+        backtick_quote_3,
         // 2 quotes
-        double_quote_2, single_quote_2, backtick_quote_2,
+        double_quote_2,
+        single_quote_2,
+        backtick_quote_2,
         // 1 quote
-        double_quote_1, single_quote_1, backtick_quote_1,
+        double_quote_1,
+        single_quote_1,
+        backtick_quote_1,
         // Simple unquoted
         simple_reference,
     ))

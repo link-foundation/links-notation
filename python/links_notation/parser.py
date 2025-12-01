@@ -288,7 +288,7 @@ class Parser:
 
         while i < len(text):
             # Skip all whitespace (space, tab, newline, carriage return)
-            while i < len(text) and text[i] in ' \t\n\r':
+            while i < len(text) and text[i] in " \t\n\r":
                 i += 1
             if i >= len(text):
                 break
@@ -315,7 +315,7 @@ class Parser:
 
         # Check if this starts with a multi-quote string
         for quote_count in range(5, 0, -1):
-            for quote_char in ['"', "'", '`']:
+            for quote_char in ['"', "'", "`"]:
                 quote_seq = quote_char * quote_count
                 if text[start:].startswith(quote_seq):
                     # Parse this multi-quote string
@@ -342,7 +342,7 @@ class Parser:
                     break
 
         # Check if this starts with a parenthesized expression
-        if text[start] == '(':
+        if text[start] == "(":
             paren_depth = 1
             in_single = False
             in_double = False
@@ -355,11 +355,11 @@ class Parser:
                     in_single = not in_single
                 elif char == '"' and not in_single and not in_backtick:
                     in_double = not in_double
-                elif char == '`' and not in_single and not in_double:
+                elif char == "`" and not in_single and not in_double:
                     in_backtick = not in_backtick
-                elif char == '(' and not in_single and not in_double and not in_backtick:
+                elif char == "(" and not in_single and not in_double and not in_backtick:
                     paren_depth += 1
-                elif char == ')' and not in_single and not in_double and not in_backtick:
+                elif char == ")" and not in_single and not in_double and not in_backtick:
                     paren_depth -= 1
                 i += 1
 
@@ -377,9 +377,9 @@ class Parser:
                 in_single = not in_single
             elif char == '"' and not in_single and not in_backtick:
                 in_double = not in_double
-            elif char == '`' and not in_single and not in_double:
+            elif char == "`" and not in_single and not in_double:
                 in_backtick = not in_backtick
-            elif char == ' ' and not in_single and not in_double and not in_backtick:
+            elif char == " " and not in_single and not in_double and not in_backtick:
                 break
             i += 1
 
@@ -402,7 +402,7 @@ class Parser:
 
         # Try multi-quote strings (check longer sequences first: 5, 4, 3, 2, 1)
         for quote_count in range(5, 0, -1):
-            for quote_char in ['"', "'", '`']:
+            for quote_char in ['"', "'", "`"]:
                 quote_seq = quote_char * quote_count
                 if text.startswith(quote_seq) and len(text) > len(quote_seq):
                     # Try to parse this multi-quote string
@@ -427,19 +427,19 @@ class Parser:
         if not text.startswith(open_close):
             return None
 
-        remaining = text[len(open_close):]
+        remaining = text[len(open_close) :]
         content = ""
 
         while remaining:
             # Check for escape sequence (2*N quotes)
             if remaining.startswith(escape_seq):
                 content += escape_val
-                remaining = remaining[len(escape_seq):]
+                remaining = remaining[len(escape_seq) :]
                 continue
 
             # Check for closing quotes (N quotes not followed by more quotes)
             if remaining.startswith(open_close):
-                after_close = remaining[len(open_close):]
+                after_close = remaining[len(open_close) :]
                 # Make sure this is exactly N quotes (not more)
                 if not after_close or not after_close.startswith(quote_char):
                     # Closing found - but only if we consumed the entire text

@@ -177,7 +177,7 @@ class TestComplexScenarios:
 
     def test_mixed_quotes_in_link(self):
         parser = Parser()
-        result = parser.parse('("double" \'single\' `backtick`)')
+        result = parser.parse("(\"double\" 'single' `backtick`)")
         assert len(result) == 1
         assert result[0].values is not None
         assert len(result[0].values) == 3
