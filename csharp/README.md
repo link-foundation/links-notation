@@ -141,6 +141,35 @@ mama has house
 - **IListExtensions.Format()**: Converts list of links back to string format
 - **ILinksGroupListExtensions**: Additional operations for link groups
 
+## Maintenance
+
+### Linting and Formatting
+
+Check code formatting:
+
+```bash
+dotnet format --verify-no-changes --verbosity diagnostic
+```
+
+Auto-fix formatting:
+
+```bash
+dotnet format
+```
+
+### Pre-commit Hooks
+
+This project uses pre-commit hooks. To set up pre-commit hooks locally:
+
+```bash
+# From repository root
+pip install pre-commit
+pre-commit install
+```
+
+Note: C# formatting checks are integrated into the CI pipeline using
+`dotnet format`.
+
 ## Dependencies
 
 - .NET 8.0

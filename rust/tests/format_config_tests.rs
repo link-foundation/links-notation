@@ -3,9 +3,9 @@ use links_notation::format_config::FormatConfig;
 #[test]
 fn format_config_basic() {
     let config = FormatConfig::default();
-    assert_eq!(config.less_parentheses, false);
+    assert!(!config.less_parentheses);
     assert_eq!(config.max_line_length, 80);
-    assert_eq!(config.indent_long_lines, false);
+    assert!(!config.indent_long_lines);
 }
 
 #[test]
@@ -19,7 +19,7 @@ fn format_with_line_length_limit() {
         .build();
 
     // Verify config is set correctly
-    assert_eq!(config.indent_long_lines, true);
+    assert!(config.indent_long_lines);
     assert_eq!(config.max_line_length, 30);
     // Note: Full formatting integration would test actual output here
 }
@@ -34,7 +34,7 @@ fn format_with_max_inline_refs() {
 
     // Verify config is set correctly
     assert_eq!(config.max_inline_refs, Some(3));
-    assert_eq!(config.should_indent_by_ref_count(4), true);
+    assert!(config.should_indent_by_ref_count(4));
     // Note: Full formatting integration would test actual output here
 }
 
@@ -44,7 +44,7 @@ fn format_with_consecutive_grouping() {
     let config = FormatConfig::builder().group_consecutive(true).build();
 
     // Verify config is set correctly
-    assert_eq!(config.group_consecutive, true);
+    assert!(config.group_consecutive);
     // Note: Full formatting integration would test grouping behavior here
 }
 
@@ -63,7 +63,7 @@ fn format_config_custom_indent() {
 fn format_config_less_parentheses() {
     let config = FormatConfig::builder().less_parentheses(true).build();
 
-    assert_eq!(config.less_parentheses, true);
+    assert!(config.less_parentheses);
 }
 
 #[test]
@@ -85,15 +85,15 @@ fn should_indent_by_length() {
         .max_line_length(80)
         .build();
 
-    assert_eq!(config.should_indent_by_length("short"), false);
-    assert_eq!(config.should_indent_by_length(&"a".repeat(100)), true);
+    assert!(!config.should_indent_by_length("short"));
+    assert!(config.should_indent_by_length(&"a".repeat(100)));
 }
 
 #[test]
 fn should_indent_by_ref_count() {
     let config = FormatConfig::builder().max_inline_refs(Some(3)).build();
 
-    assert_eq!(config.should_indent_by_ref_count(2), false);
-    assert_eq!(config.should_indent_by_ref_count(3), false);
-    assert_eq!(config.should_indent_by_ref_count(4), true);
+    assert!(!config.should_indent_by_ref_count(2));
+    assert!(!config.should_indent_by_ref_count(3));
+    assert!(config.should_indent_by_ref_count(4));
 }

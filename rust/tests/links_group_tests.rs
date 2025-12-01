@@ -4,7 +4,7 @@ use links_notation::LiNo;
 fn links_group_constructor_test() {
     // Test creating a basic group structure (similar to LinksGroup constructor)
     let element = LiNo::Ref("root".to_string());
-    let children = vec![
+    let children = [
         LiNo::Ref("child1".to_string()),
         LiNo::Ref("child2".to_string()),
     ];

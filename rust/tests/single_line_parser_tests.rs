@@ -42,13 +42,11 @@ fn format_links(lino: &LiNo<String>, less_parentheses: bool) -> String {
                     } else {
                         format!("({}: {})", escaped_id, formatted_values)
                     }
+                } else if less_parentheses && values.iter().all(|v| matches!(v, LiNo::Ref(_))) {
+                    // All values are references, can skip parentheses
+                    formatted_values
                 } else {
-                    if less_parentheses && values.iter().all(|v| matches!(v, LiNo::Ref(_))) {
-                        // All values are references, can skip parentheses
-                        formatted_values
-                    } else {
-                        format!("({})", formatted_values)
-                    }
+                    format!("({})", formatted_values)
                 }
             }
         }

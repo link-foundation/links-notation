@@ -65,6 +65,12 @@ pub struct ParserState {
     base_indentation: RefCell<Option<usize>>,
 }
 
+impl Default for ParserState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ParserState {
     pub fn new() -> Self {
         ParserState {
@@ -86,11 +92,7 @@ impl ParserState {
 
     pub fn normalize_indentation(&self, indent: usize) -> usize {
         let base = self.get_base_indentation();
-        if indent >= base {
-            indent - base
-        } else {
-            0
-        }
+        indent.saturating_sub(base)
     }
 
     pub fn push_indentation(&self, indent: usize) {
@@ -368,7 +370,7 @@ pub fn parse_document(input: &str) -> IResult<&str, Vec<Link>> {
     let state = ParserState::new();
 
     // Skip leading whitespace but preserve the line structure
-    let input = input.trim_start_matches(|c: char| c == '\n' || c == '\r');
+    let input = input.trim_start_matches(['\n', '\r']);
 
     // Handle empty or whitespace-only documents
     if input.trim().is_empty() {

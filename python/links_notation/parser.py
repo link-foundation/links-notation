@@ -58,9 +58,7 @@ class Parser:
 
         # Validate input size
         if len(input_text) > self.max_input_size:
-            raise ValueError(
-                f"Input size exceeds maximum allowed size of {self.max_input_size} bytes"
-            )
+            raise ValueError(f"Input size exceeds maximum allowed size of {self.max_input_size} bytes")
 
         try:
             if not input_text or not input_text.strip():
@@ -192,9 +190,7 @@ class Parser:
 
             if next_line.strip() and next_indent > indent:
                 # This is a child
-                child = self._parse_element(
-                    child_indent if not children else indent + 2
-                )
+                child = self._parse_element(child_indent if not children else indent + 2)
                 if child:
                     children.append(child)
             else:
@@ -355,9 +351,7 @@ class Parser:
 
         return links
 
-    def _collect_links(
-        self, item: Dict, parent_path: List[Link], result: List[Link]
-    ) -> None:
+    def _collect_links(self, item: Dict, parent_path: List[Link], result: List[Link]) -> None:
         """
         Recursively collect links from parse tree.
 
@@ -371,12 +365,7 @@ class Parser:
         children = item.get("children", [])
 
         # Special case: indented ID syntax (id: followed by children)
-        if (
-            item.get("is_indented_id")
-            and item.get("id")
-            and not item.get("values")
-            and children
-        ):
+        if item.get("is_indented_id") and item.get("id") and not item.get("values") and children:
             child_values = []
             for child in children:
                 # Extract the reference from child's values

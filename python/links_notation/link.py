@@ -18,9 +18,7 @@ class Link:
     - A link with only values (no id)
     """
 
-    def __init__(
-        self, link_id: Optional[str] = None, values: Optional[List["Link"]] = None
-    ):
+    def __init__(self, link_id: Optional[str] = None, values: Optional[List["Link"]] = None):
         """
         Initialize a Link.
 
@@ -95,9 +93,7 @@ class Link:
             return ""
 
         # Check if single quotes are needed
-        needs_single_quotes = any(
-            c in reference for c in [":", "(", ")", " ", "\t", "\n", "\r", '"']
-        )
+        needs_single_quotes = any(c in reference for c in [":", "(", ")", " ", "\t", "\n", "\r", '"'])
 
         if needs_single_quotes:
             return f"'{reference}'"
@@ -112,11 +108,7 @@ class Link:
             return Link.escape_reference(self.id) if self.id is not None else ""
         return str(self)
 
-    def format(
-        self,
-        less_parentheses: Union[bool, "FormatConfig"] = False,
-        is_compound_value: bool = False,
-    ) -> str:
+    def format(self, less_parentheses: Union[bool, "FormatConfig"] = False, is_compound_value: bool = False) -> str:
         """
         Format the link as a string.
 
@@ -144,11 +136,7 @@ class Link:
             # When used as a value in a compound link, wrap in parentheses
             if is_compound_value:
                 return f"({escaped_id})"
-            return (
-                escaped_id
-                if (less_parentheses and not self.needs_parentheses(self.id))
-                else f"({escaped_id})"
-            )
+            return escaped_id if (less_parentheses and not self.needs_parentheses(self.id)) else f"({escaped_id})"
 
         # Format values recursively
         values_str = " ".join(self.format_value(v) for v in self.values)
@@ -169,11 +157,7 @@ class Link:
         # Link with ID and values
         id_str = Link.escape_reference(self.id)
         with_colon = f"{id_str}: {values_str}"
-        return (
-            with_colon
-            if (less_parentheses and not self.needs_parentheses(self.id))
-            else f"({with_colon})"
-        )
+        return with_colon if (less_parentheses and not self.needs_parentheses(self.id)) else f"({with_colon})"
 
     def format_value(self, value: "Link") -> str:
         """
@@ -203,9 +187,7 @@ class Link:
         """Check if a string needs to be wrapped in parentheses."""
         return s and any(c in s for c in [" ", ":", "(", ")"])
 
-    def _format_with_config(
-        self, config: "FormatConfig", is_compound_value: bool = False
-    ) -> str:
+    def _format_with_config(self, config: "FormatConfig", is_compound_value: bool = False) -> str:
         """
         Format the link using a FormatConfig object.
 
@@ -216,6 +198,10 @@ class Link:
         Returns:
             Formatted string representation
         """
+        # Note: FormatConfig import is needed for type checking but the parameter
+        # is already validated by the caller, so we use a noqa comment here
+        from .format_config import FormatConfig  # noqa: F401
+
         # Empty link
         if self.id is None and not self.values:
             return "" if config.less_parentheses else "()"
@@ -226,9 +212,7 @@ class Link:
             if is_compound_value:
                 return f"({escaped_id})"
             return (
-                escaped_id
-                if (config.less_parentheses and not self.needs_parentheses(self.id))
-                else f"({escaped_id})"
+                escaped_id if (config.less_parentheses and not self.needs_parentheses(self.id)) else f"({escaped_id})"
             )
 
         # Check if we should use indented format
@@ -240,11 +224,7 @@ class Link:
             values_str = " ".join(self.format_value(v) for v in self.values)
             if self.id is not None:
                 id_str = Link.escape_reference(self.id)
-                test_line = (
-                    f"{id_str}: {values_str}"
-                    if config.less_parentheses
-                    else f"({id_str}: {values_str})"
-                )
+                test_line = f"{id_str}: {values_str}" if config.less_parentheses else f"({id_str}: {values_str})"
             else:
                 test_line = values_str if config.less_parentheses else f"({values_str})"
 
@@ -270,11 +250,7 @@ class Link:
         # Link with ID and values
         id_str = Link.escape_reference(self.id)
         with_colon = f"{id_str}: {values_str}"
-        return (
-            with_colon
-            if (config.less_parentheses and not self.needs_parentheses(self.id))
-            else f"({with_colon})"
-        )
+        return with_colon if (config.less_parentheses and not self.needs_parentheses(self.id)) else f"({with_colon})"
 
     def _format_indented(self, config: "FormatConfig") -> str:
         """

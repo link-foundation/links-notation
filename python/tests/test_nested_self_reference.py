@@ -27,8 +27,7 @@ def test_nested_self_referenced_object_in_pair_value():
     """
     notation = (
         "(obj_0: dict ((str bmFtZQ==) (str ZGljdDE=)) "
-        "((str b3RoZXI=) (obj_1: dict ((str bmFtZQ==) (str ZGljdDI=)) "
-        "((str b3RoZXI=) obj_0))))"
+        "((str b3RoZXI=) (obj_1: dict ((str bmFtZQ==) (str ZGljdDI=)) ((str b3RoZXI=) obj_0))))"
     )
 
     links = parser.parse(notation)
@@ -84,9 +83,7 @@ def test_nested_self_referenced_object_in_pair_value():
     obj1 = pair2.values[1]
     assert obj1.id == "obj_1", f"Expected obj_1.id to be 'obj_1', got {obj1.id}"
     assert obj1.values is not None, "obj_1 should have nested values (dict definition)"
-    assert (
-        len(obj1.values) == 3
-    ), f"Expected 3 values (type marker + 2 pairs), got {len(obj1.values)}"
+    assert len(obj1.values) == 3, f"Expected 3 values (type marker + 2 pairs), got {len(obj1.values)}"
 
     # obj_1's type marker
     assert obj1.values[0].id == "dict"
@@ -105,9 +102,7 @@ def test_nested_self_referenced_object_in_pair_value():
     assert obj1_pair2.values[0].values[0].id == "str"
     assert obj1_pair2.values[0].values[1].id == "b3RoZXI="
     assert obj1_pair2.values[1].id == "obj_0", "Should reference back to obj_0"
-    assert (
-        len(obj1_pair2.values[1].values) == 0
-    ), "Should be just a reference, no nested values"
+    assert len(obj1_pair2.values[1].values) == 0, "Should be just a reference, no nested values"
 
 
 def test_self_reference_as_direct_child_works_correctly():

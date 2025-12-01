@@ -1,7 +1,5 @@
 """Indented ID syntax tests - ported from JS/Rust implementations."""
 
-import pytest
-
 from links_notation import Parser, format_links
 
 parser = Parser()

@@ -1,7 +1,5 @@
 """Edge case parser tests - ported from JS/Rust implementations."""
 
-import pytest
-
 from links_notation import Parser, format_links
 
 parser = Parser()
@@ -178,9 +176,9 @@ def test_invalid_input():
     input_text = "(invalid"
     # Python implementation may or may not throw an error
     try:
-        result = parser.parse(input_text)
+        parser.parse(input_text)
         # If it parses, that's acceptable for Python implementation
-        assert True
+        pass
     except Exception:
         # If it throws, that's also expected
-        assert True
+        pass

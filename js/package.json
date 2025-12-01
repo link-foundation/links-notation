@@ -8,7 +8,9 @@
     "build": "bun run build:grammar && bun build src/index.js --outdir=dist --target=node",
     "build:grammar": "peggy --format es -o src/parser-generated.js src/grammar.pegjs",
     "test": "bun test",
-    "test:watch": "bun test --watch"
+    "test:watch": "bun test --watch",
+    "lint": "eslint src/ tests/",
+    "lint:fix": "eslint src/ tests/ --fix"
   },
   "keywords": [
     "lino",
@@ -20,6 +22,7 @@
   "license": "Unlicense",
   "devDependencies": {
     "bun-types": "^1.2.19",
+    "eslint": "^8.56.0",
     "peggy": "^5.0.6"
   },
   "dependencies": {}

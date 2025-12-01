@@ -8,9 +8,9 @@ parser = Parser()
 def test_format_config_basic():
     """Test basic FormatConfig usage."""
     config = FormatConfig()
-    assert config.less_parentheses == False
+    assert config.less_parentheses is False
     assert config.max_line_length == 80
-    assert config.indent_long_lines == False
+    assert config.indent_long_lines is False
 
 
 def test_format_with_line_length_limit():
@@ -20,9 +20,7 @@ def test_format_with_line_length_limit():
 
     # Format with line length limit
     # The line '(sequence: 1 2 3 4 5 6 7 8 9 10)' is 32 chars, so use threshold of 30
-    config = FormatConfig(
-        indent_long_lines=True, max_line_length=30, prefer_inline=False
-    )
+    config = FormatConfig(indent_long_lines=True, max_line_length=30, prefer_inline=False)
 
     output = link.format(config)
     assert "sequence:" in output
@@ -44,11 +42,7 @@ def test_format_with_max_inline_refs():
 
 def test_format_with_consecutive_grouping():
     """Test formatting with consecutive link grouping."""
-    links = [
-        Link("SetA", [Link("a")]),
-        Link("SetA", [Link("b")]),
-        Link("SetA", [Link("c")]),
-    ]
+    links = [Link("SetA", [Link("a")]), Link("SetA", [Link("b")]), Link("SetA", [Link("c")])]
 
     config = FormatConfig(group_consecutive=True)
 
@@ -77,9 +71,7 @@ def test_format_config_custom_indent():
     """Test FormatConfig with custom indent string."""
     link = Link("id", [Link("1"), Link("2"), Link("3"), Link("4")])
 
-    config = FormatConfig(
-        max_inline_refs=3, prefer_inline=False, indent_string="    "  # 4 spaces
-    )
+    config = FormatConfig(max_inline_refs=3, prefer_inline=False, indent_string="    ")  # 4 spaces
 
     output = link.format(config)
     # Check for custom indentation
@@ -110,14 +102,14 @@ def test_should_indent_by_length():
     short_line = "short"
     long_line = "a" * 100
 
-    assert config.should_indent_by_length(short_line) == False
-    assert config.should_indent_by_length(long_line) == True
+    assert config.should_indent_by_length(short_line) is False
+    assert config.should_indent_by_length(long_line) is True
 
 
 def test_should_indent_by_ref_count():
     """Test shouldIndentByRefCount helper method."""
     config = FormatConfig(max_inline_refs=3)
 
-    assert config.should_indent_by_ref_count(2) == False
-    assert config.should_indent_by_ref_count(3) == False
-    assert config.should_indent_by_ref_count(4) == True
+    assert config.should_indent_by_ref_count(2) is False
+    assert config.should_indent_by_ref_count(3) is False
+    assert config.should_indent_by_ref_count(4) is True

@@ -214,6 +214,39 @@ The `Display` trait is implemented for `LiNo<T>` where `T: ToString`:
 - Regular format: `format!("{}", lino)` - Parenthesized output
 - Alternate format: `format!("{:#}", lino)` - Line-based output
 
+## Maintenance
+
+### Linting and Formatting
+
+Check code formatting:
+
+```bash
+cargo fmt --all -- --check
+```
+
+Auto-fix formatting:
+
+```bash
+cargo fmt --all
+```
+
+Run Clippy linter:
+
+```bash
+cargo clippy --all-targets --all-features -- -D warnings
+```
+
+### Pre-commit Hooks
+
+This project uses pre-commit hooks that automatically run `cargo fmt` and
+`cargo check` before commits. To set up pre-commit hooks locally:
+
+```bash
+# From repository root
+pip install pre-commit
+pre-commit install
+```
+
 ## Dependencies
 
 - nom (8.0) - Parser combinator library

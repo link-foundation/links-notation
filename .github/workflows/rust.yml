@@ -47,7 +47,7 @@ jobs:
           echo "isRustFilesChanged=${isRustFilesChanged}" >> $GITHUB_OUTPUT
           echo "isRustFilesChanged: ${isRustFilesChanged}"
 
-  format:
+  lint:
     needs: [findChangedRustFiles]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
     runs-on: ubuntu-latest
@@ -59,12 +59,24 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          components: rustfmt
-      - name: Check formatting with rustfmt
-        run: cargo fmt --check
+          components: rustfmt, clippy
+      - name: Cache Cargo registry
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+      - name: Cache Cargo index
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
 
   test:
-    needs: [findChangedRustFiles]
+    needs: [findChangedRustFiles, lint]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20

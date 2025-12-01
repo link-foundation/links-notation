@@ -112,9 +112,7 @@ def test_parse_nested_structure_with_indentation():
     assert len(result[2].values) == 2
 
 
-@pytest.mark.skip(
-    reason="Parser has infinite loop bug with inconsistent indentation - needs investigation"
-)
+@pytest.mark.skip(reason="Parser has infinite loop bug with inconsistent indentation - needs investigation")
 def test_indentation_consistency():
     """Test indentation consistency."""
     # Test that indentation must be consistent
@@ -168,9 +166,7 @@ def test_indentation_parser():
     result = parser.parse(input_text)
     assert len(result) > 0
     # Should have parent link
-    has_parent_link = any(
-        l.values and any(v.id == "parent" for v in l.values) for l in result
-    )
+    has_parent_link = any(link.values and any(v.id == "parent" for v in link.values) for link in result)
     assert has_parent_link is True
 
 
