@@ -41,7 +41,7 @@ Test cases suite is updated.</PackageReleaseNotes>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Pegasus" Version="4.1.0" />
-    <PackageReference Include="Platform.Collections" Version="0.3.2" />
+    <PackageReference Include="Platform.Collections" Version="0.4.0" />
   </ItemGroup>
 
   <ItemGroup>
