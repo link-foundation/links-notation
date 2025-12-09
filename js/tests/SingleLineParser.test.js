@@ -26,16 +26,16 @@ test('Bug test 1', () => {
 });
 
 test('Quoted references', () => {
-  const source = `(a: 'b' "c")`;
-  const target = `(a: b c)`;
+  const source = '(a: \'b\' "c")';
+  const target = '(a: b c)';
   const links = parser.parse(source);
   const formattedLinks = formatLinks(links);
   expect(formattedLinks).toBe(target);
 });
 
 test('Quoted references with spaces', () => {
-  const source = `('a a': 'b b' "c c")`;
-  const target = `('a a': 'b b' 'c c')`;
+  const source = '(\'a a\': \'b b\' "c c")';
+  const target = '(\'a a\': \'b b\' \'c c\')';
   const links = parser.parse(source);
   const formattedLinks = formatLinks(links);
   expect(formattedLinks).toBe(target);
@@ -70,7 +70,7 @@ test('Parse multiline link', () => {
 });
 
 test('Parse quoted references', () => {
-  const input = `"has space" 'has:colon'`;
+  const input = '"has space" \'has:colon\'';
   const result = parser.parse(input);
   expect(result.length).toBe(1);
   expect(result[0].id).toBe(null);
@@ -78,7 +78,7 @@ test('Parse quoted references', () => {
   expect(result[0].values[0].id).toBe('has space');
   expect(result[0].values[1].id).toBe('has:colon');
   // Ensure formatting matches C# expectation
-  expect(formatLinks(result)).toBe(`('has space' 'has:colon')`);
+  expect(formatLinks(result)).toBe('(\'has space\' \'has:colon\')');
 });
 
 test('Parse values only', () => {
@@ -128,7 +128,7 @@ test('Test value link', () => {
 });
 
 test('Parse quoted references values only', () => {
-  const source = `"has space" 'has:colon'`;
+  const source = '"has space" \'has:colon\'';
   const parser = new Parser();
   const links = parser.parse(source);
   expect(links).toBeTruthy();
