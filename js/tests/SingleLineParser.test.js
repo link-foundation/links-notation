@@ -34,8 +34,8 @@ test('Quoted references', () => {
 });
 
 test('Quoted references with spaces', () => {
-  const source = '(\'a a\': \'b b\' "c c")';
-  const target = '(\'a a\': \'b b\' \'c c\')';
+  const source = "('a a': 'b b' \"c c\")";
+  const target = "('a a': 'b b' 'c c')";
   const links = parser.parse(source);
   const formattedLinks = formatLinks(links);
   expect(formattedLinks).toBe(target);
@@ -78,7 +78,7 @@ test('Parse quoted references', () => {
   expect(result[0].values[0].id).toBe('has space');
   expect(result[0].values[1].id).toBe('has:colon');
   // Ensure formatting matches C# expectation
-  expect(formatLinks(result)).toBe('(\'has space\' \'has:colon\')');
+  expect(formatLinks(result)).toBe("('has space' 'has:colon')");
 });
 
 test('Parse values only', () => {
