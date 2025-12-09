@@ -38,8 +38,8 @@ test('Link escapeReference with special characters', () => {
   expect(Link.escapeReference('has:colon')).toBe("'has:colon'");
   expect(Link.escapeReference('has space')).toBe("'has space'");
   expect(Link.escapeReference('has(paren)')).toBe("'has(paren)'");
-  expect(Link.escapeReference('has"quote')).toBe(`'has"quote'`);
-  expect(Link.escapeReference("has'quote")).toBe(`"has'quote"`);
+  expect(Link.escapeReference('has"quote')).toBe("'has\"quote'");
+  expect(Link.escapeReference("has'quote")).toBe('"has\'quote"');
 });
 
 test('Link simplify', () => {
