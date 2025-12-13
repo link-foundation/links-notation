@@ -21,13 +21,19 @@ class Parser:
     Handles both inline and indented syntax for defining links.
     """
 
-    def __init__(self, max_input_size: int = 10 * 1024 * 1024, max_depth: int = 1000):
+    def __init__(
+        self,
+        max_input_size: int = 10 * 1024 * 1024,
+        max_depth: int = 1000,
+        enable_multi_ref_context: bool = True,
+    ):
         """
         Initialize the parser.
 
         Args:
             max_input_size: Maximum input size in bytes (default: 10MB)
             max_depth: Maximum nesting depth (default: 1000)
+            enable_multi_ref_context: Enable context-aware multi-reference recognition (default: True)
         """
         self.indentation_stack = [0]
         self.pos = 0
@@ -36,6 +42,9 @@ class Parser:
         self.base_indentation = None
         self.max_input_size = max_input_size
         self.max_depth = max_depth
+        self.enable_multi_ref_context = enable_multi_ref_context
+        # Storage for defined multi-references (keys are tuple of parts for lookup)
+        self.multi_ref_definitions: Dict[str, List[str]] = {}
 
     def parse(self, input_text: str) -> List[Link]:
         """
@@ -59,6 +68,9 @@ class Parser:
         # Validate input size
         if len(input_text) > self.max_input_size:
             raise ValueError(f"Input size exceeds maximum allowed size of {self.max_input_size} bytes")
+
+        # Clear previous multi-ref definitions for each parse
+        self.multi_ref_definitions.clear()
 
         try:
             if not input_text or not input_text.strip():
@@ -212,21 +224,21 @@ class Parser:
             inner = content[1:-1].strip()
             return self._parse_parenthesized(inner)
 
-        # Try indented ID syntax: id:
+        # Try indented ID syntax: id: (or multi-word: some example:)
         if content.endswith(":"):
             id_part = content[:-1].strip()
-            ref = self._extract_reference(id_part)
-            return {"id": ref, "values": [], "is_indented_id": True}
+            multi_ref = self._extract_multi_reference_id(id_part)
+            return {"id": multi_ref, "values": [], "is_indented_id": True, "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1}
 
-        # Try single-line link: id: values
+        # Try single-line link: id: values (or multi-word: some example: values)
         if ":" in content and not (content.startswith('"') or content.startswith("'")):
-            parts = content.split(":", 1)
-            if len(parts) == 2:
-                id_part = parts[0].strip()
-                values_part = parts[1].strip()
-                ref = self._extract_reference(id_part)
+            colon_pos = self._find_colon_outside_quotes(content)
+            if colon_pos >= 0:
+                id_part = content[:colon_pos].strip()
+                values_part = content[colon_pos + 1 :].strip()
+                multi_ref = self._extract_multi_reference_id(id_part)
                 values = self._parse_values(values_part)
-                return {"id": ref, "values": values}
+                return {"id": multi_ref, "values": values, "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1}
 
         # Simple value list
         values = self._parse_values(content)
@@ -239,9 +251,10 @@ class Parser:
         if colon_pos >= 0:
             id_part = inner[:colon_pos].strip()
             values_part = inner[colon_pos + 1 :].strip()
-            ref = self._extract_reference(id_part)
+            # Try to extract multi-reference ID (multiple space-separated words)
+            multi_ref = self._extract_multi_reference_id(id_part)
             values = self._parse_values(values_part)
-            return {"id": ref, "values": values}
+            return {"id": multi_ref, "values": values, "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1}
 
         # Just values
         values = self._parse_values(inner)
@@ -423,6 +436,39 @@ class Parser:
         # Unquoted
         return text
 
+    def _extract_multi_reference_id(self, text: str) -> Any:
+        """
+        Extract a multi-reference ID from text.
+
+        Multi-reference IDs are multiple space-separated words before a colon.
+        For example: "some example" -> ["some", "example"]
+
+        If the ID is a single word or a quoted string, returns the string directly
+        for backward compatibility.
+
+        Args:
+            text: The ID portion (before the colon)
+
+        Returns:
+            Either a string (single reference) or list of strings (multi-reference)
+        """
+        text = text.strip()
+
+        # If quoted, treat as single reference (existing behavior)
+        for quote_char in ['"', "'", "`"]:
+            if text.startswith(quote_char):
+                return self._extract_reference(text)
+
+        # Split by whitespace to check for multi-word
+        parts = text.split()
+
+        if len(parts) == 1:
+            # Single word - return as string for backward compatibility
+            return parts[0]
+        else:
+            # Multiple words - return as list (multi-reference)
+            return parts
+
     def _parse_multi_quote_string(self, text: str, quote_char: str, quote_count: int) -> Optional[str]:
         """
         Parse a multi-quote string.
@@ -468,14 +514,47 @@ class Parser:
 
     def _transform_result(self, raw_result: List[Dict]) -> List[Link]:
         """Transform raw parse result into Link objects."""
+        # First pass: collect all multi-reference definitions
+        if self.enable_multi_ref_context:
+            self._collect_multi_ref_definitions(raw_result)
+
         links = []
 
+        # Second pass: transform with multi-reference recognition
         for item in raw_result:
             # Use explicit None check
             if item is not None:
                 self._collect_links(item, [], links)
 
         return links
+
+    def _collect_multi_ref_definitions(self, items: List[Dict]) -> None:
+        """
+        Collect multi-reference definitions from parsed items.
+
+        Args:
+            items: List of parsed items
+        """
+        for item in items:
+            if item is None:
+                continue
+
+            # Check if this item has a multi-reference ID (list)
+            item_id = item.get("id")
+            if isinstance(item_id, list) and len(item_id) > 1:
+                # Store the multi-reference definition
+                key = " ".join(item_id)
+                self.multi_ref_definitions[key] = item_id
+
+            # Recursively check children
+            children = item.get("children", [])
+            if children:
+                self._collect_multi_ref_definitions(children)
+
+            # Recursively check values (they might contain nested links with multi-ref IDs)
+            values = item.get("values", [])
+            if values:
+                self._collect_multi_ref_definitions(values)
 
     def _collect_links(self, item: Dict, parent_path: List[Link], result: List[Link]) -> None:
         """
@@ -570,8 +649,112 @@ class Parser:
         # Link with values
         if "values" in item:
             link_id = item.get("id")
-            values = [self._transform_link(v) for v in item["values"]]
+
+            # Apply multi-reference context recognition to values
+            if self.enable_multi_ref_context and self.multi_ref_definitions:
+                values = self._transform_values_with_multi_ref_context(item["values"])
+            else:
+                values = [self._transform_link(v) for v in item["values"]]
+
             return Link(link_id, values)
 
         # Default
         return Link(item.get("id"))
+
+    def _transform_values_with_multi_ref_context(self, values: List[Dict]) -> List[Link]:
+        """
+        Transform values with multi-reference context recognition.
+
+        Consecutive simple references that form a known multi-reference are combined.
+
+        Args:
+            values: List of parsed value dicts
+
+        Returns:
+            List of transformed Link objects
+        """
+        result = []
+        i = 0
+
+        while i < len(values):
+            current = values[i]
+
+            # Check if this could be the start of a multi-reference
+            if self._is_simple_reference(current):
+                # Try to match against known multi-references
+                match_result = self._try_match_multi_ref(values, i)
+
+                if match_result:
+                    # Found a multi-reference match
+                    result.append(Link(match_result["multi_ref"]))
+                    i += match_result["consumed"]
+                    continue
+
+            # No multi-reference match, transform normally
+            result.append(self._transform_link(current))
+            i += 1
+
+        return result
+
+    def _is_simple_reference(self, item: Dict) -> bool:
+        """
+        Check if a parsed item is a simple reference (just an ID, no nested values).
+
+        Args:
+            item: The item to check
+
+        Returns:
+            True if it's a simple reference
+        """
+        if not isinstance(item, dict):
+            return False
+
+        item_id = item.get("id")
+        item_values = item.get("values", [])
+        item_children = item.get("children", [])
+
+        return (
+            item_id is not None
+            and isinstance(item_id, str)
+            and not item_values
+            and not item_children
+        )
+
+    def _try_match_multi_ref(self, values: List[Dict], start_index: int) -> Optional[Dict]:
+        """
+        Try to match a sequence of references against known multi-references.
+
+        Args:
+            values: List of values to check
+            start_index: Starting index
+
+        Returns:
+            Match result with multi_ref list and consumed count, or None
+        """
+        # Sort multi-refs by length (longest first) to match greedily
+        sorted_multi_refs = sorted(
+            self.multi_ref_definitions.items(),
+            key=lambda x: len(x[1]),
+            reverse=True,
+        )
+
+        for _, multi_ref_parts in sorted_multi_refs:
+            # Check if we have enough values left to match
+            if start_index + len(multi_ref_parts) > len(values):
+                continue
+
+            # Check if all parts match
+            matches = True
+            for j, part in enumerate(multi_ref_parts):
+                value = values[start_index + j]
+                if not self._is_simple_reference(value) or value.get("id") != part:
+                    matches = False
+                    break
+
+            if matches:
+                return {
+                    "multi_ref": list(multi_ref_parts),
+                    "consumed": len(multi_ref_parts),
+                }
+
+        return None

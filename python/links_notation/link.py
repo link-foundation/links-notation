@@ -2,7 +2,7 @@
 Link class representing a Lino link with optional ID and values.
 """
 
-from typing import TYPE_CHECKING, List, Optional, Union
+from typing import TYPE_CHECKING, Any, List, Optional, Union
 
 if TYPE_CHECKING:
     from .format_config import FormatConfig
@@ -79,28 +79,36 @@ class Link:
         return value.to_link_or_id_string()
 
     @staticmethod
-    def escape_reference(reference: Optional[str]) -> str:
+    def escape_reference(reference: Optional[Union[str, List[str]]]) -> str:
         """
-        Escape a reference string if it contains special characters.
+        Escape a reference string or multi-reference list if it contains special characters.
 
         Args:
-            reference: The reference string to escape
+            reference: The reference string or list of strings (multi-reference) to escape
 
         Returns:
             Escaped reference with quotes if needed
         """
-        if not reference or not reference.strip():
+        # Handle multi-reference (list of strings)
+        if isinstance(reference, list):
+            # Multi-reference: join with space, each part should be a simple reference
+            return " ".join(Link.escape_reference(r) for r in reference)
+
+        if not reference or (isinstance(reference, str) and not reference.strip()):
             return ""
 
+        # Ensure reference is a string
+        ref_str = str(reference)
+
         # Check if single quotes are needed
-        needs_single_quotes = any(c in reference for c in [":", "(", ")", " ", "\t", "\n", "\r", '"'])
+        needs_single_quotes = any(c in ref_str for c in [":", "(", ")", " ", "\t", "\n", "\r", '"'])
 
         if needs_single_quotes:
-            return f"'{reference}'"
-        elif "'" in reference:
-            return f'"{reference}"'
+            return f"'{ref_str}'"
+        elif "'" in ref_str:
+            return f'"{ref_str}"'
         else:
-            return reference
+            return ref_str
 
     def to_link_or_id_string(self) -> str:
         """Convert to string, using just ID if no values, otherwise full format."""
@@ -183,8 +191,11 @@ class Link:
         # Complex value with its own structure - format it normally with parentheses
         return value.format(False, False)
 
-    def needs_parentheses(self, s: Optional[str]) -> bool:
-        """Check if a string needs to be wrapped in parentheses."""
+    def needs_parentheses(self, s: Optional[Union[str, List[str]]]) -> bool:
+        """Check if a string or array needs to be wrapped in parentheses."""
+        # Multi-reference arrays always need parentheses when formatted inline
+        if isinstance(s, list):
+            return len(s) > 1
         return s and any(c in s for c in [" ", ":", "(", ")"])
 
     def _format_with_config(self, config: "FormatConfig", is_compound_value: bool = False) -> str:
