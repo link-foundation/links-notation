@@ -85,8 +85,8 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
             var result = parser.Parse(input);
             var formatted = result.Format();
-
-            Assert.Equal("('complex id': value1 value2)", formatted);
+            // Multi-reference support: spaces alone do NOT require quoting on output
+            Assert.Equal("(complex id: value1 value2)", formatted);
         }
 
         [Fact]

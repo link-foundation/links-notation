@@ -9,30 +9,82 @@ use nom::{
 };
 use std::cell::RefCell;
 
+/// Represents a reference ID that can be either a single string or a multi-reference (multiple words).
+#[derive(Debug, Clone, PartialEq)]
+pub enum RefId {
+    /// Single-word reference
+    Single(String),
+    /// Multi-word reference (e.g., "some example" as vec!["some", "example"])
+    Multi(Vec<String>),
+}
+
+impl RefId {
+    /// Check if this is a multi-reference
+    pub fn is_multi(&self) -> bool {
+        matches!(self, RefId::Multi(parts) if parts.len() > 1)
+    }
+
+    /// Get the reference as a single string (joining with space for multi-ref)
+    pub fn to_single_string(&self) -> String {
+        match self {
+            RefId::Single(s) => s.clone(),
+            RefId::Multi(parts) => parts.join(" "),
+        }
+    }
+
+    /// Get parts of the reference
+    pub fn parts(&self) -> Vec<String> {
+        match self {
+            RefId::Single(s) => vec![s.clone()],
+            RefId::Multi(parts) => parts.clone(),
+        }
+    }
+}
+
+impl From<String> for RefId {
+    fn from(s: String) -> Self {
+        RefId::Single(s)
+    }
+}
+
+impl From<Vec<String>> for RefId {
+    fn from(v: Vec<String>) -> Self {
+        if v.len() == 1 {
+            RefId::Single(v.into_iter().next().unwrap())
+        } else {
+            RefId::Multi(v)
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq)]
 pub struct Link {
-    pub id: Option<String>,
+    pub id: Option<RefId>,
     pub values: Vec<Link>,
     pub children: Vec<Link>,
     pub is_indented_id: bool,
+    pub is_multi_ref: bool,
 }
 
 impl Link {
     pub fn new_singlet(id: String) -> Self {
         Link {
-            id: Some(id),
+            id: Some(RefId::Single(id)),
             values: vec![],
             children: vec![],
             is_indented_id: false,
+            is_multi_ref: false,
         }
     }
 
-    pub fn new_indented_id(id: String) -> Self {
+    pub fn new_indented_id(id: RefId) -> Self {
+        let is_multi = id.is_multi();
         Link {
             id: Some(id),
             values: vec![],
             children: vec![],
             is_indented_id: true,
+            is_multi_ref: is_multi,
         }
     }
 
@@ -42,21 +94,29 @@ impl Link {
             values,
             children: vec![],
             is_indented_id: false,
+            is_multi_ref: false,
         }
     }
 
-    pub fn new_link(id: Option<String>, values: Vec<Link>) -> Self {
+    pub fn new_link(id: Option<RefId>, values: Vec<Link>) -> Self {
+        let is_multi = id.as_ref().map(|i| i.is_multi()).unwrap_or(false);
         Link {
             id,
             values,
             children: vec![],
             is_indented_id: false,
+            is_multi_ref: is_multi,
         }
     }
 
     pub fn with_children(mut self, children: Vec<Link>) -> Self {
         self.children = children;
         self
+    }
+
+    /// Get ID as String (for backward compatibility)
+    pub fn id_string(&self) -> Option<String> {
+        self.id.as_ref().map(|id| id.to_single_string())
     }
 }
 
@@ -234,6 +294,55 @@ fn reference(input: &str) -> IResult<&str, String> {
     .parse(input)
 }
 
+/// Parse a multi-reference ID (multiple space-separated words before colon).
+/// Returns RefId::Single for single words, RefId::Multi for multiple words.
+/// Stops when it encounters ':' or ')'.
+fn multi_ref_id(input: &str) -> IResult<&str, RefId> {
+    let (input, first) = reference(input)?;
+    let mut parts = vec![first];
+    let mut remaining = input;
+
+    // Try to parse more references (space-separated, not followed by ':' immediately)
+    loop {
+        // Skip horizontal whitespace
+        let (after_ws, _) = horizontal_whitespace(remaining)?;
+
+        // Check if we've hit the colon or closing paren - stop here
+        if after_ws.starts_with(':') || after_ws.starts_with(')') || after_ws.is_empty() {
+            break;
+        }
+
+        // Check for end-of-line
+        if after_ws.starts_with('\n') || after_ws.starts_with('\r') {
+            break;
+        }
+
+        // Try to parse another reference
+        match reference(after_ws) {
+            Ok((rest, ref_str)) => {
+                // Check that the next reference is followed by space or colon
+                // (not immediately by something else that would indicate nested structure)
+                if rest.starts_with(':')
+                    || rest.starts_with(')')
+                    || rest.is_empty()
+                    || rest.starts_with(' ')
+                    || rest.starts_with('\t')
+                    || rest.starts_with('\n')
+                    || rest.starts_with('\r')
+                {
+                    parts.push(ref_str);
+                    remaining = rest;
+                } else {
+                    break;
+                }
+            }
+            Err(_) => break,
+        }
+    }
+
+    Ok((remaining, RefId::from(parts)))
+}
+
 fn eol(input: &str) -> IResult<&str, &str> {
     alt((
         preceded(horizontal_whitespace, line_ending),
@@ -279,7 +388,7 @@ fn single_line_values<'a>(input: &'a str, state: &ParserState) -> IResult<&'a st
 fn single_line_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     (
         horizontal_whitespace,
-        reference,
+        multi_ref_id,
         horizontal_whitespace,
         char(':'),
         |i| single_line_values(i, state),
@@ -292,7 +401,7 @@ fn multi_line_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, 
     (
         char('('),
         whitespace,
-        reference,
+        multi_ref_id,
         whitespace,
         char(':'),
         |i| multi_line_values(i, state),
@@ -311,7 +420,7 @@ fn single_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'
                 && values[0].values.is_empty()
                 && values[0].children.is_empty()
             {
-                Link::new_singlet(values[0].id.clone().unwrap())
+                Link::new_singlet(values[0].id.as_ref().unwrap().to_single_string())
             } else {
                 Link::new_value(values)
             }
@@ -320,7 +429,7 @@ fn single_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'
 }
 
 fn indented_id_link<'a>(input: &'a str, _state: &ParserState) -> IResult<&'a str, Link> {
-    (reference, horizontal_whitespace, char(':'), eol)
+    (multi_ref_id, horizontal_whitespace, char(':'), eol)
         .map(|(id, _, _, _)| Link::new_indented_id(id))
         .parse(input)
 }
@@ -338,7 +447,7 @@ fn multi_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a
                 && values[0].values.is_empty()
                 && values[0].children.is_empty()
             {
-                Link::new_singlet(values[0].id.clone().unwrap())
+                Link::new_singlet(values[0].id.as_ref().unwrap().to_single_string())
             } else {
                 Link::new_value(values)
             }

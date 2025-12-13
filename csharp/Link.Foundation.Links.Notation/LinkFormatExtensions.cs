@@ -131,10 +131,11 @@ namespace Link.Foundation.Links.Notation
 
         /// <summary>
         /// Check if a string needs to be wrapped in parentheses.
+        /// Note: spaces alone don't require parentheses (multi-reference support).
         /// </summary>
         private static bool NeedsParentheses(string s)
         {
-            return s != null && (s.Contains(" ") || s.Contains(":") || s.Contains("(") || s.Contains(")"));
+            return s != null && (s.Contains(":") || s.Contains("(") || s.Contains(")"));
         }
     }
 }

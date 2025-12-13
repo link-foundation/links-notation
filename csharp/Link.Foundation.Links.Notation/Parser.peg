@@ -87,11 +87,16 @@ multiLineValueAndWhitespace <Link<string>> = value:referenceOrLink _ { value }
 multiLineValues <IList<Link<string>>> = _ list:multiLineValueAndWhitespace* { list }
 singleLineValueAndWhitespace <Link<string>> = __ value:referenceOrLink { value }
 singleLineValues <IList<Link<string>>> = list:singleLineValueAndWhitespace+ { list }
-singleLineLink <Link<string>> = __ id:(reference) __ ":" v:singleLineValues { new Link<string>(id, v) }
-multiLineLink <Link<string>> = "(" _ id:(reference) _ ":" v:multiLineValues _ ")" { new Link<string>(id, v) }
+singleLineLink <Link<string>> = __ id:multiRefId __ ":" v:singleLineValues { new Link<string>(id, v) }
+multiLineLink <Link<string>> = "(" _ id:multiRefId _ ":" v:multiLineValues _ ")" { new Link<string>(id, v) }
 singleLineValueLink <Link<string>> = v:singleLineValues { new Link<string>(v) }
 multiLineValueLink <Link<string>> = "(" v:multiLineValues _ ")" { new Link<string>(v) }
-indentedIdLink <Link<string>> = id:(reference) __ ":" eol { new Link<string>(id) }
+indentedIdLink <Link<string>> = id:multiRefId __ ":" eol { new Link<string>(id) }
+
+// Multi-reference ID: space-separated words before colon (joined with space)
+// For backward compatibility, single word remains as-is
+multiRefId <string> = refs:multiRefIdParts { string.Join(" ", refs) }
+multiRefIdParts <IList<string>> = first:reference rest:(__ !(":" / eol / ")") r:reference { r })* { new List<string> { first }.Concat(rest).ToList() }
 
 // Reference can be quoted (with any number of quotes) or simple unquoted
 // Order: high quotes (3+) first, then double quotes (2), then single quotes (1), then simple

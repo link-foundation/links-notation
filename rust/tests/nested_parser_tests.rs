@@ -124,7 +124,7 @@ fn test_indentation_parser() {
     let input = "parent\n  child1\n  child2";
     let result = parse_document(input).unwrap();
     assert_eq!(result.1.len(), 1);
-    assert_eq!(result.1[0].id, Some("parent".to_string()));
+    assert_eq!(result.1[0].id_string(), Some("parent".to_string()));
     assert_eq!(result.1[0].children.len(), 2);
 }
 

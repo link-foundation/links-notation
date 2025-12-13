@@ -122,15 +122,28 @@ singleLineValueAndWhitespace = __ value:referenceOrLink { return value; }
 
 singleLineValues = list:singleLineValueAndWhitespace+ { return list; }
 
-singleLineLink = __ id:reference __ ":" v:singleLineValues { return { id: id, values: v }; }
+// Multi-reference support: multiple space-separated references form a single multi-reference ID
+// Example: "some example: some example is a link" -> id: ["some", "example"], values: [...]
+singleLineLink = __ id:multiRefId __ ":" v:singleLineValues { return { id: id, values: v, isMultiRef: Array.isArray(id) && id.length > 1 }; }
 
-multiLineLink = "(" _ id:reference _ ":" v:multiLineValues _ ")" { return { id: id, values: v }; }
+multiLineLink = "(" _ id:multiRefId _ ":" v:multiLineValues _ ")" { return { id: id, values: v, isMultiRef: Array.isArray(id) && id.length > 1 }; }
+
+// Multi-reference ID: one or more references before the colon
+// Returns array of strings for multi-word, or single string for backward compatibility
+multiRefId = refs:multiRefIdParts {
+  if (refs.length === 1) {
+    return refs[0]; // Single reference: return as string for backward compatibility
+  }
+  return refs; // Multiple references: return as array
+}
+
+multiRefIdParts = first:reference rest:(__ !(":" / eol / ")") r:reference { return r; })* { return [first].concat(rest); }
 
 singleLineValueLink = v:singleLineValues { return { values: v }; }
 
 multiLineValueLink = "(" v:multiLineValues _ ")" { return { values: v }; }
 
-indentedIdLink = id:reference __ ":" eol { return { id: id, values: [] }; }
+indentedIdLink = id:multiRefId __ ":" eol { return { id: id, values: [], isMultiRef: Array.isArray(id) && id.length > 1 }; }
 
 // Reference can be quoted (with any number of quotes N >= 1) or simple unquoted
 // Universal approach: use procedural parsing for all quote types and counts
