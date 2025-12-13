@@ -77,52 +77,62 @@ export class Link {
   }
 
   /**
-   * Escape a reference string by adding quotes if necessary
-   * @param {string} reference - The reference to escape
+   * Escape a reference string or multi-reference array by adding quotes if necessary
+   * @param {string|string[]} reference - The reference to escape (string or array of strings for multi-ref)
    * @returns {string} Escaped reference
    */
   static escapeReference(reference) {
-    if (!reference || reference.trim() === '') {
+    // Handle multi-reference (array of strings)
+    if (Array.isArray(reference)) {
+      // Multi-reference: join with space, each part should be a simple reference
+      // For output, we can either keep as space-separated or quote if needed
+      return reference.map((r) => Link.escapeReference(r)).join(' ');
+    }
+
+    if (!reference || (typeof reference === 'string' && reference.trim() === '')) {
       return '';
     }
 
-    const hasSingleQuote = reference.includes("'");
-    const hasDoubleQuote = reference.includes('"');
+    // Ensure reference is a string
+    const refStr = String(reference);
+
+    const hasSingleQuote = refStr.includes("'");
+    const hasDoubleQuote = refStr.includes('"');
 
     const needsQuoting =
-      reference.includes(':') ||
-      reference.includes('(') ||
-      reference.includes(')') ||
-      reference.includes(' ') ||
-      reference.includes('\t') ||
-      reference.includes('\n') ||
-      reference.includes('\r') ||
+      refStr.includes(':') ||
+      refStr.includes('(') ||
+      refStr.includes(')') ||
+      refStr.includes(' ') ||
+      refStr.includes('\t') ||
+      refStr.includes('\n') ||
+      refStr.includes('\r') ||
       hasDoubleQuote ||
       hasSingleQuote;
 
     // Handle edge case: reference contains both single and double quotes
     if (hasSingleQuote && hasDoubleQuote) {
       // Escape single quotes and wrap in single quotes
-      return `'${reference.replace(/'/g, "\\'")}'`;
+      return `'${refStr.replace(/'/g, "\\'")}'`;
     }
 
     // Prefer single quotes if double quotes are present
     if (hasDoubleQuote) {
-      return `'${reference}'`;
+      return `'${refStr}'`;
     }
 
     // Use double quotes if single quotes are present
     if (hasSingleQuote) {
-      return `"${reference}"`;
+      return `"${refStr}"`;
     }
 
     // Use single quotes for special characters
     if (needsQuoting) {
-      return `'${reference}'`;
+      return `'${refStr}'`;
     }
 
     // No quoting needed
-    return reference;
+    return refStr;
   }
 
   /**
@@ -266,11 +276,15 @@ export class Link {
   }
 
   /**
-   * Check if a string needs to be wrapped in parentheses
-   * @param {string} str - The string to check
+   * Check if a string or array needs to be wrapped in parentheses
+   * @param {string|string[]} str - The string or array to check
    * @returns {boolean} True if parentheses are needed
    */
   needsParentheses(str) {
+    // Multi-reference arrays always need parentheses when formatted inline
+    if (Array.isArray(str)) {
+      return str.length > 1;
+    }
     return (
       str &&
       (str.includes(' ') ||
