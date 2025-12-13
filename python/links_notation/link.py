@@ -2,7 +2,7 @@
 Link class representing a Lino link with optional ID and values.
 """
 
-from typing import TYPE_CHECKING, Any, List, Optional, Union
+from typing import TYPE_CHECKING, List, Optional, Union
 
 if TYPE_CHECKING:
     from .format_config import FormatConfig
