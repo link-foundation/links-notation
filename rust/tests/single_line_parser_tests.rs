@@ -285,21 +285,21 @@ fn test_multiple_words_in_quotes() {
 fn test_simple_reference() {
     let result = parse_document("hello").unwrap();
     assert_eq!(result.1.len(), 1);
-    assert_eq!(result.1[0].id, Some("hello".to_string()));
+    assert_eq!(result.1[0].id_string(), Some("hello".to_string()));
 }
 
 #[test]
 fn test_quoted_reference() {
     let result = parse_document("\"hello world\"").unwrap();
     assert_eq!(result.1.len(), 1);
-    assert_eq!(result.1[0].id, Some("hello world".to_string()));
+    assert_eq!(result.1[0].id_string(), Some("hello world".to_string()));
 }
 
 #[test]
 fn test_singlet_link_parser() {
     let result = parse_document("(singlet)").unwrap();
     assert_eq!(result.1.len(), 1);
-    assert_eq!(result.1[0].id, Some("singlet".to_string()));
+    assert_eq!(result.1[0].id_string(), Some("singlet".to_string()));
     assert_eq!(result.1[0].values.len(), 0);
     assert_eq!(result.1[0].children.len(), 0);
 }
@@ -315,7 +315,7 @@ fn test_value_link_parser() {
 fn test_link_with_id() {
     let result = parse_document("(id: a b c)").unwrap();
     assert_eq!(result.1.len(), 1);
-    assert_eq!(result.1[0].id, Some("id".to_string()));
+    assert_eq!(result.1[0].id_string(), Some("id".to_string()));
     assert_eq!(result.1[0].values.len(), 3);
 }
 
@@ -323,7 +323,7 @@ fn test_link_with_id() {
 fn test_single_line_link() {
     let result = parse_document("id: value1 value2").unwrap();
     assert_eq!(result.1.len(), 1);
-    assert_eq!(result.1[0].id, Some("id".to_string()));
+    assert_eq!(result.1[0].id_string(), Some("id".to_string()));
     assert_eq!(result.1[0].values.len(), 2);
 }
 

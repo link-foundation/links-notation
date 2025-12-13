@@ -237,7 +237,7 @@ impl From<parser::Link> for LiNo<String> {
     fn from(link: parser::Link) -> Self {
         if link.values.is_empty() && link.children.is_empty() {
             if let Some(id) = link.id {
-                LiNo::Ref(id)
+                LiNo::Ref(id.to_single_string())
             } else {
                 LiNo::Link {
                     id: None,
@@ -247,7 +247,7 @@ impl From<parser::Link> for LiNo<String> {
         } else {
             let values: Vec<LiNo<String>> = link.values.into_iter().map(|v| v.into()).collect();
             LiNo::Link {
-                id: link.id,
+                id: link.id.map(|id| id.to_single_string()),
                 values,
             }
         }
@@ -288,7 +288,7 @@ fn flatten_link_recursive(
                 {
                     // Use if let to safely extract the ID instead of unwrap()
                     if let Some(ref id) = child.values[0].id {
-                        LiNo::Ref(id.clone())
+                        LiNo::Ref(id.to_single_string())
                     } else {
                         // If no ID, create an empty link
                         parser::Link {
@@ -296,6 +296,7 @@ fn flatten_link_recursive(
                             values: child.values.clone(),
                             children: vec![],
                             is_indented_id: false,
+                            is_multi_ref: false,
                         }
                         .into()
                     }
@@ -305,6 +306,7 @@ fn flatten_link_recursive(
                         values: child.values.clone(),
                         children: vec![],
                         is_indented_id: false,
+                        is_multi_ref: false,
                     }
                     .into()
                 }
@@ -312,7 +314,7 @@ fn flatten_link_recursive(
             .collect();
 
         let current = LiNo::Link {
-            id: link.id.clone(),
+            id: link.id.as_ref().map(|id| id.to_single_string()),
             values: child_values,
         };
 
@@ -341,7 +343,7 @@ fn flatten_link_recursive(
     // Create the current link without children
     let current = if link.values.is_empty() {
         if let Some(id) = &link.id {
-            LiNo::Ref(id.clone())
+            LiNo::Ref(id.to_single_string())
         } else {
             LiNo::Link {
                 id: None,
@@ -358,12 +360,13 @@ fn flatten_link_recursive(
                     values: v.values.clone(),
                     children: vec![],
                     is_indented_id: false,
+                    is_multi_ref: false,
                 }
                 .into()
             })
             .collect();
         LiNo::Link {
-            id: link.id.clone(),
+            id: link.id.as_ref().map(|id| id.to_single_string()),
             values,
         }
     };
