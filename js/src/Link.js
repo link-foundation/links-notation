@@ -89,7 +89,10 @@ export class Link {
       return reference.map((r) => Link.escapeReference(r)).join(' ');
     }
 
-    if (!reference || (typeof reference === 'string' && reference.trim() === '')) {
+    if (
+      !reference ||
+      (typeof reference === 'string' && reference.trim() === '')
+    ) {
       return '';
     }
 

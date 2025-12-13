@@ -259,9 +259,13 @@ export class Parser {
    * @returns {boolean} True if it's a simple reference
    */
   isSimpleReference(item) {
-    return item && item.id !== undefined && typeof item.id === 'string' &&
-           (!item.values || item.values.length === 0) &&
-           (!item.children || item.children.length === 0);
+    return (
+      item &&
+      item.id !== undefined &&
+      typeof item.id === 'string' &&
+      (!item.values || item.values.length === 0) &&
+      (!item.children || item.children.length === 0)
+    );
   }
 
   /**
@@ -272,8 +276,9 @@ export class Parser {
    */
   tryMatchMultiRef(values, startIndex) {
     // Sort multi-refs by length (longest first) to match greedily
-    const sortedMultiRefs = [...this.multiRefDefinitions.entries()]
-      .sort((a, b) => b[1].length - a[1].length);
+    const sortedMultiRefs = [...this.multiRefDefinitions.entries()].sort(
+      (a, b) => b[1].length - a[1].length
+    );
 
     for (const [, multiRefParts] of sortedMultiRefs) {
       // Check if we have enough values left to match

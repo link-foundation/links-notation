@@ -142,7 +142,10 @@ fn test_backward_compatibility_nested() {
             assert_eq!(id.as_ref().unwrap(), "outer");
             assert_eq!(values.len(), 1);
             match &values[0] {
-                LiNo::Link { id: inner_id, values: inner_values } => {
+                LiNo::Link {
+                    id: inner_id,
+                    values: inner_values,
+                } => {
                     assert_eq!(inner_id.as_ref().unwrap(), "inner");
                     assert_eq!(inner_values.len(), 1);
                 }

@@ -228,7 +228,12 @@ class Parser:
         if content.endswith(":"):
             id_part = content[:-1].strip()
             multi_ref = self._extract_multi_reference_id(id_part)
-            return {"id": multi_ref, "values": [], "is_indented_id": True, "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1}
+            return {
+                "id": multi_ref,
+                "values": [],
+                "is_indented_id": True,
+                "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1,
+            }
 
         # Try single-line link: id: values (or multi-word: some example: values)
         if ":" in content and not (content.startswith('"') or content.startswith("'")):
@@ -238,7 +243,11 @@ class Parser:
                 values_part = content[colon_pos + 1 :].strip()
                 multi_ref = self._extract_multi_reference_id(id_part)
                 values = self._parse_values(values_part)
-                return {"id": multi_ref, "values": values, "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1}
+                return {
+                    "id": multi_ref,
+                    "values": values,
+                    "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1,
+                }
 
         # Simple value list
         values = self._parse_values(content)
@@ -254,7 +263,11 @@ class Parser:
             # Try to extract multi-reference ID (multiple space-separated words)
             multi_ref = self._extract_multi_reference_id(id_part)
             values = self._parse_values(values_part)
-            return {"id": multi_ref, "values": values, "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1}
+            return {
+                "id": multi_ref,
+                "values": values,
+                "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1,
+            }
 
         # Just values
         values = self._parse_values(inner)
@@ -713,12 +726,7 @@ class Parser:
         item_values = item.get("values", [])
         item_children = item.get("children", [])
 
-        return (
-            item_id is not None
-            and isinstance(item_id, str)
-            and not item_values
-            and not item_children
-        )
+        return item_id is not None and isinstance(item_id, str) and not item_values and not item_children
 
     def _try_match_multi_ref(self, values: List[Dict], start_index: int) -> Optional[Dict]:
         """

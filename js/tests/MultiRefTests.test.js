@@ -153,7 +153,9 @@ describe('Multi-Reference Parsing', () => {
   describe('Parser options', () => {
     test('can disable multi-reference context with option', () => {
       const parserNoContext = new Parser({ enableMultiRefContext: false });
-      const result = parserNoContext.parse('(some example: some example is a link)');
+      const result = parserNoContext.parse(
+        '(some example: some example is a link)'
+      );
       // ID should still be array (grammar change)
       expect(result[0].id).toEqual(['some', 'example']);
       // But values should NOT be grouped (context disabled)
