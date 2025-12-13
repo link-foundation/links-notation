@@ -80,7 +80,8 @@ namespace Link.Foundation.Links.Notation.Tests
         [Fact]
         public static void LinkEscapeReferenceWithSpecialCharactersTest()
         {
-            Assert.Equal("'has space'", Link<string>.EscapeReference("has space"));
+            // Multi-reference support: spaces alone do NOT require quoting
+            Assert.Equal("has space", Link<string>.EscapeReference("has space"));
             Assert.Equal("'has:colon'", Link<string>.EscapeReference("has:colon"));
             Assert.Equal("'has(paren)'", Link<string>.EscapeReference("has(paren)"));
             Assert.Equal("'has)paren'", Link<string>.EscapeReference("has)paren"));
