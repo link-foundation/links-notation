@@ -56,7 +56,9 @@ describe('Multi-Reference Parsing', () => {
 
     test('id property throws for multi-reference IDs', () => {
       const result = parser.parse('(some example: value)');
-      expect(() => result[0].id).toThrow(/Use the 'ids' property instead of 'id'/);
+      expect(() => result[0].id).toThrow(
+        /Use the 'ids' property instead of 'id'/
+      );
     });
   });
 
