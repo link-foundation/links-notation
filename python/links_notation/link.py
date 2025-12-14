@@ -16,19 +16,69 @@ class Link:
     - A simple reference (id only, no values)
     - A link with id and values
     - A link with only values (no id)
+
+    For multi-reference IDs (e.g., "some example" before colon), use the `ids` property.
+    The `id` property will throw an error for multi-reference IDs.
     """
 
-    def __init__(self, link_id: Optional[str] = None, values: Optional[List["Link"]] = None):
+    def __init__(self, link_id: Optional[Union[str, List[str]]] = None, values: Optional[List["Link"]] = None):
         """
         Initialize a Link.
 
         Args:
-            link_id: Optional identifier for the link
+            link_id: Optional identifier for the link (string or list of strings for multi-reference)
             values: Optional list of child links
         """
-        self.id = link_id
+        # Store ids as a list internally (primary storage)
+        if link_id is None:
+            self._ids: Optional[List[str]] = None
+        elif isinstance(link_id, list):
+            self._ids = link_id
+        else:
+            self._ids = [link_id]
+
         self.values = values if values is not None else []
         self._is_from_path_combination = False
+
+    @property
+    def ids(self) -> Optional[List[str]]:
+        """Get the ids list (primary storage for reference identifiers)."""
+        return self._ids
+
+    @ids.setter
+    def ids(self, value: Optional[List[str]]) -> None:
+        """Set the ids list."""
+        self._ids = value
+
+    @property
+    def id(self) -> Optional[str]:
+        """
+        Get the id as a single string (backward compatibility).
+
+        Raises:
+            ValueError: If ids has more than one element (use ids property instead)
+
+        Returns:
+            Single reference string, or None if no id
+        """
+        if self._ids is None:
+            return None
+        if len(self._ids) > 1:
+            raise ValueError(
+                f"This link has a multi-reference id with {len(self._ids)} parts. "
+                "Use the 'ids' property instead of 'id'."
+            )
+        return self._ids[0]
+
+    @id.setter
+    def id(self, value: Optional[Union[str, List[str]]]) -> None:
+        """Set the id (backward compatibility)."""
+        if value is None:
+            self._ids = None
+        elif isinstance(value, list):
+            self._ids = value
+        else:
+            self._ids = [value]
 
     def __str__(self) -> str:
         """String representation using standard formatting."""
@@ -36,14 +86,22 @@ class Link:
 
     def __repr__(self) -> str:
         """Developer-friendly representation."""
-        return f"Link(id={self.id!r}, values={self.values!r})"
+        return f"Link(ids={self._ids!r}, values={self.values!r})"
 
     def __eq__(self, other) -> bool:
         """Check equality with another Link."""
         if not isinstance(other, Link):
             return False
-        if self.id != other.id:
+        # Compare ids lists
+        if self._ids is None and other._ids is not None:
             return False
+        if self._ids is not None and other._ids is None:
+            return False
+        if self._ids is not None and other._ids is not None:
+            if len(self._ids) != len(other._ids):
+                return False
+            if not all(a == b for a, b in zip(self._ids, other._ids)):
+                return False
         if len(self.values) != len(other.values):
             return False
         return all(v1 == v2 for v1, v2 in zip(self.values, other.values))
@@ -67,7 +125,7 @@ class Link:
             return self.values[0]
         else:
             new_values = [v.simplify() for v in self.values]
-            return Link(self.id, new_values)
+            return Link(self._ids, new_values)
 
     def combine(self, other: "Link") -> "Link":
         """Combine this link with another to create a compound link."""
@@ -113,7 +171,7 @@ class Link:
     def to_link_or_id_string(self) -> str:
         """Convert to string, using just ID if no values, otherwise full format."""
         if not self.values:
-            return Link.escape_reference(self.id) if self.id is not None else ""
+            return Link.escape_reference(self._ids) if self._ids is not None else ""
         return str(self)
 
     def format(self, less_parentheses: Union[bool, "FormatConfig"] = False, is_compound_value: bool = False) -> str:
@@ -135,37 +193,37 @@ class Link:
 
         # Original implementation for backward compatibility
         # Empty link
-        if self.id is None and not self.values:
+        if self._ids is None and not self.values:
             return "" if less_parentheses else "()"
 
         # Link with only ID, no values
         if not self.values:
-            escaped_id = Link.escape_reference(self.id)
+            escaped_id = Link.escape_reference(self._ids)
             # When used as a value in a compound link, wrap in parentheses
             if is_compound_value:
                 return f"({escaped_id})"
-            return escaped_id if (less_parentheses and not self.needs_parentheses(self.id)) else f"({escaped_id})"
+            return escaped_id if (less_parentheses and not self.needs_parentheses(self._ids)) else f"({escaped_id})"
 
         # Format values recursively
         values_str = " ".join(self.format_value(v) for v in self.values)
 
         # Link with values only (null id)
-        if self.id is None:
+        if self._ids is None:
             if less_parentheses:
                 # Check if all values are simple (no nested values)
                 all_simple = all(not v.values for v in self.values)
                 if all_simple:
                     # Format each value without extra wrapping
-                    return " ".join(Link.escape_reference(v.id) for v in self.values)
+                    return " ".join(Link.escape_reference(v._ids) for v in self.values)
                 # For mixed or complex values, return without outer wrapper
                 return values_str
             # For normal mode, wrap in parentheses
             return f"({values_str})"
 
         # Link with ID and values
-        id_str = Link.escape_reference(self.id)
+        id_str = Link.escape_reference(self._ids)
         with_colon = f"{id_str}: {values_str}"
-        return with_colon if (less_parentheses and not self.needs_parentheses(self.id)) else f"({with_colon})"
+        return with_colon if (less_parentheses and not self.needs_parentheses(self._ids)) else f"({with_colon})"
 
     def format_value(self, value: "Link") -> str:
         """
@@ -186,7 +244,7 @@ class Link:
 
         # Simple link with just an ID - don't wrap in parentheses when used as a value
         if not value.values:
-            return Link.escape_reference(value.id)
+            return Link.escape_reference(value._ids)
 
         # Complex value with its own structure - format it normally with parentheses
         return value.format(False, False)
@@ -214,16 +272,16 @@ class Link:
         from .format_config import FormatConfig  # noqa: F401
 
         # Empty link
-        if self.id is None and not self.values:
+        if self._ids is None and not self.values:
             return "" if config.less_parentheses else "()"
 
         # Link with only ID, no values
         if not self.values:
-            escaped_id = Link.escape_reference(self.id)
+            escaped_id = Link.escape_reference(self._ids)
             if is_compound_value:
                 return f"({escaped_id})"
             return (
-                escaped_id if (config.less_parentheses and not self.needs_parentheses(self.id)) else f"({escaped_id})"
+                escaped_id if (config.less_parentheses and not self.needs_parentheses(self._ids)) else f"({escaped_id})"
             )
 
         # Check if we should use indented format
@@ -233,8 +291,8 @@ class Link:
         else:
             # Try inline format first
             values_str = " ".join(self.format_value(v) for v in self.values)
-            if self.id is not None:
-                id_str = Link.escape_reference(self.id)
+            if self._ids is not None:
+                id_str = Link.escape_reference(self._ids)
                 test_line = f"{id_str}: {values_str}" if config.less_parentheses else f"({id_str}: {values_str})"
             else:
                 test_line = values_str if config.less_parentheses else f"({values_str})"
@@ -250,18 +308,18 @@ class Link:
         values_str = " ".join(self.format_value(v) for v in self.values)
 
         # Link with values only (null id)
-        if self.id is None:
+        if self._ids is None:
             if config.less_parentheses:
                 all_simple = all(not v.values for v in self.values)
                 if all_simple:
-                    return " ".join(Link.escape_reference(v.id) for v in self.values)
+                    return " ".join(Link.escape_reference(v._ids) for v in self.values)
                 return values_str
             return f"({values_str})"
 
         # Link with ID and values
-        id_str = Link.escape_reference(self.id)
+        id_str = Link.escape_reference(self._ids)
         with_colon = f"{id_str}: {values_str}"
-        return with_colon if (config.less_parentheses and not self.needs_parentheses(self.id)) else f"({with_colon})"
+        return with_colon if (config.less_parentheses and not self.needs_parentheses(self._ids)) else f"({with_colon})"
 
     def _format_indented(self, config: "FormatConfig") -> str:
         """
@@ -273,13 +331,13 @@ class Link:
         Returns:
             Indented formatted string
         """
-        if self.id is None:
+        if self._ids is None:
             # Values only - format each on separate line
             lines = [self.format_value(v) for v in self.values]
             return "\n".join(config.indent_string + line for line in lines)
 
         # Link with ID - format as id:\n  value1\n  value2
-        id_str = Link.escape_reference(self.id)
+        id_str = Link.escape_reference(self._ids)
         lines = [f"{id_str}:"]
         for v in self.values:
             lines.append(config.indent_string + self.format_value(v))

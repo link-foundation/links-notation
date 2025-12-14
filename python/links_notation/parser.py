@@ -25,7 +25,6 @@ class Parser:
         self,
         max_input_size: int = 10 * 1024 * 1024,
         max_depth: int = 1000,
-        enable_multi_ref_context: bool = True,
     ):
         """
         Initialize the parser.
@@ -33,7 +32,6 @@ class Parser:
         Args:
             max_input_size: Maximum input size in bytes (default: 10MB)
             max_depth: Maximum nesting depth (default: 1000)
-            enable_multi_ref_context: Enable context-aware multi-reference recognition (default: True)
         """
         self.indentation_stack = [0]
         self.pos = 0
@@ -42,9 +40,6 @@ class Parser:
         self.base_indentation = None
         self.max_input_size = max_input_size
         self.max_depth = max_depth
-        self.enable_multi_ref_context = enable_multi_ref_context
-        # Storage for defined multi-references (keys are tuple of parts for lookup)
-        self.multi_ref_definitions: Dict[str, List[str]] = {}
 
     def parse(self, input_text: str) -> List[Link]:
         """
@@ -68,9 +63,6 @@ class Parser:
         # Validate input size
         if len(input_text) > self.max_input_size:
             raise ValueError(f"Input size exceeds maximum allowed size of {self.max_input_size} bytes")
-
-        # Clear previous multi-ref definitions for each parse
-        self.multi_ref_definitions.clear()
 
         try:
             if not input_text or not input_text.strip():
@@ -527,47 +519,14 @@ class Parser:
 
     def _transform_result(self, raw_result: List[Dict]) -> List[Link]:
         """Transform raw parse result into Link objects."""
-        # First pass: collect all multi-reference definitions
-        if self.enable_multi_ref_context:
-            self._collect_multi_ref_definitions(raw_result)
-
         links = []
 
-        # Second pass: transform with multi-reference recognition
         for item in raw_result:
             # Use explicit None check
             if item is not None:
                 self._collect_links(item, [], links)
 
         return links
-
-    def _collect_multi_ref_definitions(self, items: List[Dict]) -> None:
-        """
-        Collect multi-reference definitions from parsed items.
-
-        Args:
-            items: List of parsed items
-        """
-        for item in items:
-            if item is None:
-                continue
-
-            # Check if this item has a multi-reference ID (list)
-            item_id = item.get("id")
-            if isinstance(item_id, list) and len(item_id) > 1:
-                # Store the multi-reference definition
-                key = " ".join(item_id)
-                self.multi_ref_definitions[key] = item_id
-
-            # Recursively check children
-            children = item.get("children", [])
-            if children:
-                self._collect_multi_ref_definitions(children)
-
-            # Recursively check values (they might contain nested links with multi-ref IDs)
-            values = item.get("values", [])
-            if values:
-                self._collect_multi_ref_definitions(values)
 
     def _collect_links(self, item: Dict, parent_path: List[Link], result: List[Link]) -> None:
         """
@@ -662,107 +621,8 @@ class Parser:
         # Link with values
         if "values" in item:
             link_id = item.get("id")
-
-            # Apply multi-reference context recognition to values
-            if self.enable_multi_ref_context and self.multi_ref_definitions:
-                values = self._transform_values_with_multi_ref_context(item["values"])
-            else:
-                values = [self._transform_link(v) for v in item["values"]]
-
+            values = [self._transform_link(v) for v in item["values"]]
             return Link(link_id, values)
 
         # Default
         return Link(item.get("id"))
-
-    def _transform_values_with_multi_ref_context(self, values: List[Dict]) -> List[Link]:
-        """
-        Transform values with multi-reference context recognition.
-
-        Consecutive simple references that form a known multi-reference are combined.
-
-        Args:
-            values: List of parsed value dicts
-
-        Returns:
-            List of transformed Link objects
-        """
-        result = []
-        i = 0
-
-        while i < len(values):
-            current = values[i]
-
-            # Check if this could be the start of a multi-reference
-            if self._is_simple_reference(current):
-                # Try to match against known multi-references
-                match_result = self._try_match_multi_ref(values, i)
-
-                if match_result:
-                    # Found a multi-reference match
-                    result.append(Link(match_result["multi_ref"]))
-                    i += match_result["consumed"]
-                    continue
-
-            # No multi-reference match, transform normally
-            result.append(self._transform_link(current))
-            i += 1
-
-        return result
-
-    def _is_simple_reference(self, item: Dict) -> bool:
-        """
-        Check if a parsed item is a simple reference (just an ID, no nested values).
-
-        Args:
-            item: The item to check
-
-        Returns:
-            True if it's a simple reference
-        """
-        if not isinstance(item, dict):
-            return False
-
-        item_id = item.get("id")
-        item_values = item.get("values", [])
-        item_children = item.get("children", [])
-
-        return item_id is not None and isinstance(item_id, str) and not item_values and not item_children
-
-    def _try_match_multi_ref(self, values: List[Dict], start_index: int) -> Optional[Dict]:
-        """
-        Try to match a sequence of references against known multi-references.
-
-        Args:
-            values: List of values to check
-            start_index: Starting index
-
-        Returns:
-            Match result with multi_ref list and consumed count, or None
-        """
-        # Sort multi-refs by length (longest first) to match greedily
-        sorted_multi_refs = sorted(
-            self.multi_ref_definitions.items(),
-            key=lambda x: len(x[1]),
-            reverse=True,
-        )
-
-        for _, multi_ref_parts in sorted_multi_refs:
-            # Check if we have enough values left to match
-            if start_index + len(multi_ref_parts) > len(values):
-                continue
-
-            # Check if all parts match
-            matches = True
-            for j, part in enumerate(multi_ref_parts):
-                value = values[start_index + j]
-                if not self._is_simple_reference(value) or value.get("id") != part:
-                    matches = False
-                    break
-
-            if matches:
-                return {
-                    "multi_ref": list(multi_ref_parts),
-                    "consumed": len(multi_ref_parts),
-                }
-
-        return None

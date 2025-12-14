@@ -3,8 +3,8 @@ Multi-Reference Feature Tests (Issue #184)
 
 Tests for multi-word references without quotes:
 - (some example: some example is a link)
-- ID as list: ["some", "example"]
-- Context-aware recognition in values
+- IDs as list: ["some", "example"]
+- id property throws for multi-refs, use ids instead
 """
 
 import pytest
@@ -20,8 +20,9 @@ class TestMultiReferenceParsing:
         parser = Parser()
         result = parser.parse("(some example: value)")
         assert len(result) == 1
-        assert isinstance(result[0].id, list)
-        assert result[0].id == ["some", "example"]
+        # Use ids property for multi-references
+        assert isinstance(result[0].ids, list)
+        assert result[0].ids == ["some", "example"]
         assert len(result[0].values) == 1
         assert result[0].values[0].id == "value"
 
@@ -30,76 +31,71 @@ class TestMultiReferenceParsing:
         parser = Parser()
         result = parser.parse("(new york city: value)")
         assert len(result) == 1
-        assert result[0].id == ["new", "york", "city"]
+        assert result[0].ids == ["new", "york", "city"]
 
     def test_parses_four_word_multi_reference_id(self):
         """Test parsing four-word multi-reference ID."""
         parser = Parser()
         result = parser.parse("(a b c d: value)")
         assert len(result) == 1
-        assert result[0].id == ["a", "b", "c", "d"]
+        assert result[0].ids == ["a", "b", "c", "d"]
 
-    def test_single_word_id_remains_string(self):
-        """Test backward compatibility: single-word ID remains string."""
+    def test_single_word_id_accessible_via_id_property(self):
+        """Test backward compatibility: single-word ID accessible via id property."""
         parser = Parser()
         result = parser.parse("(papa: value)")
         assert len(result) == 1
+        # Single-word: id returns string, ids returns list with single element
         assert isinstance(result[0].id, str)
         assert result[0].id == "papa"
+        assert result[0].ids == ["papa"]
 
     def test_quoted_multi_word_id_remains_string(self):
         """Test backward compatibility: quoted multi-word ID remains string."""
         parser = Parser()
         result = parser.parse("('some example': value)")
         assert len(result) == 1
+        # Quoted multi-word is a single reference, so id works
         assert isinstance(result[0].id, str)
         assert result[0].id == "some example"
+        assert result[0].ids == ["some example"]
+
+    def test_id_property_throws_for_multi_reference(self):
+        """Test that id property throws for multi-reference IDs."""
+        parser = Parser()
+        result = parser.parse("(some example: value)")
+        with pytest.raises(ValueError, match="Use the 'ids' property instead of 'id'"):
+            _ = result[0].id
 
 
-class TestContextAwareMultiRefRecognition:
-    """Tests for context-aware multi-reference recognition."""
+class TestNoContextAwareParsing:
+    """Tests that values are NOT context-aware (per issue #184 feedback)."""
 
-    def test_recognizes_multi_reference_in_values(self):
-        """Test recognizing multi-reference in values when same as ID."""
+    def test_values_parsed_as_separate_references(self):
+        """Test that values are parsed as separate references."""
         parser = Parser()
         result = parser.parse("(some example: some example is a link)")
-        assert result[0].id == ["some", "example"]
-        # First value should be the multi-reference "some example"
-        assert result[0].values[0].id == ["some", "example"]
-        # Remaining values
-        assert result[0].values[1].id == "is"
-        assert result[0].values[2].id == "a"
-        assert result[0].values[3].id == "link"
-        assert len(result[0].values) == 4
+        assert result[0].ids == ["some", "example"]
+        # Values should be 5 separate references (no context-aware grouping)
+        assert len(result[0].values) == 5
+        assert result[0].values[0].id == "some"
+        assert result[0].values[1].id == "example"
+        assert result[0].values[2].id == "is"
+        assert result[0].values[3].id == "a"
+        assert result[0].values[4].id == "link"
 
-    def test_recognizes_three_word_multi_reference_in_values(self):
-        """Test recognizing three-word multi-reference in values."""
+    def test_three_word_multi_ref_values_separate(self):
+        """Test that three-word multi-ref values are separate."""
         parser = Parser()
         result = parser.parse("(new york city: new york city is great)")
-        assert result[0].id == ["new", "york", "city"]
-        assert result[0].values[0].id == ["new", "york", "city"]
-        assert result[0].values[1].id == "is"
-        assert result[0].values[2].id == "great"
-        assert len(result[0].values) == 3
-
-    def test_does_not_recognize_partial_multi_reference(self):
-        """Test that partial matches don't trigger multi-reference recognition."""
-        parser = Parser()
-        result = parser.parse("(some example: some other example)")
-        assert result[0].id == ["some", "example"]
-        # "some" should be separate, "other" separate, "example" separate
-        assert result[0].values[0].id == "some"
-        assert result[0].values[1].id == "other"
-        assert result[0].values[2].id == "example"
-
-    def test_greedy_multi_reference_matching(self):
-        """Test that longest match is used (greedy matching)."""
-        parser = Parser()
-        result = parser.parse("(a b c: a b c d)\n(a b: x)")
-        assert result[0].id == ["a", "b", "c"]
-        # Should recognize "a b c" (3 words) not "a b" (2 words)
-        assert result[0].values[0].id == ["a", "b", "c"]
-        assert result[0].values[1].id == "d"
+        assert result[0].ids == ["new", "york", "city"]
+        # Values should be 5 separate references
+        assert len(result[0].values) == 5
+        assert result[0].values[0].id == "new"
+        assert result[0].values[1].id == "york"
+        assert result[0].values[2].id == "city"
+        assert result[0].values[3].id == "is"
+        assert result[0].values[4].id == "great"
 
 
 class TestMultiRefFormatting:
@@ -112,20 +108,13 @@ class TestMultiRefFormatting:
         formatted = format_links(result, True)
         assert formatted == "(some example: value)"
 
-    def test_formats_multi_reference_value(self):
-        """Test formatting multi-reference value correctly."""
-        parser = Parser()
-        result = parser.parse("(some example: some example is a link)")
-        formatted = format_links(result, True)
-        assert formatted == "(some example: some example is a link)"
-
     def test_round_trip_preserves_structure(self):
         """Test that parse then format preserves structure."""
         parser = Parser()
-        input_text = "(new york city: new york city is great)"
+        input_text = "(new york city: one two three)"
         result = parser.parse(input_text)
         formatted = format_links(result, True)
-        assert formatted == "(new york city: new york city is great)"
+        assert formatted == "(new york city: one two three)"
 
 
 class TestMultiRefIndentedSyntax:
@@ -139,7 +128,7 @@ class TestMultiRefIndentedSyntax:
   value2"""
         result = parser.parse(input_text)
         assert len(result) == 1
-        assert result[0].id == ["some", "example"]
+        assert result[0].ids == ["some", "example"]
         assert len(result[0].values) == 2
 
 
@@ -150,14 +139,14 @@ class TestEdgeCases:
         """Test multi-reference with special characters in quoted parts."""
         parser = Parser()
         result = parser.parse("(some example: 'value:special')")
-        assert result[0].id == ["some", "example"]
+        assert result[0].ids == ["some", "example"]
         assert result[0].values[0].id == "value:special"
 
     def test_empty_values_with_multi_ref_id(self):
         """Test empty values with multi-reference ID."""
         parser = Parser()
         result = parser.parse("(some example:)")
-        assert result[0].id == ["some", "example"]
+        assert result[0].ids == ["some", "example"]
         assert len(result[0].values) == 0
 
     def test_multiple_links_same_multi_ref(self):
@@ -167,23 +156,8 @@ class TestEdgeCases:
 (some example: second)"""
         result = parser.parse(input_text)
         assert len(result) == 2
-        assert result[0].id == ["some", "example"]
-        assert result[1].id == ["some", "example"]
-
-
-class TestParserOptions:
-    """Tests for parser options related to multi-reference."""
-
-    def test_disable_multi_ref_context(self):
-        """Test disabling multi-reference context with option."""
-        parser = Parser(enable_multi_ref_context=False)
-        result = parser.parse("(some example: some example is a link)")
-        # ID should still be list (parsing change)
-        assert result[0].id == ["some", "example"]
-        # But values should NOT be grouped (context disabled)
-        assert len(result[0].values) == 5  # some, example, is, a, link
-        assert result[0].values[0].id == "some"
-        assert result[0].values[1].id == "example"
+        assert result[0].ids == ["some", "example"]
+        assert result[1].ids == ["some", "example"]
 
 
 class TestBackwardCompatibility:
@@ -224,5 +198,5 @@ class TestBackwardCompatibility:
         """Test existing value-only links still work."""
         parser = Parser()
         result = parser.parse("(a b c)")
-        assert result[0].id is None
+        assert result[0].ids is None
         assert len(result[0].values) == 3

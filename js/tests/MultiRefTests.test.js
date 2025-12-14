@@ -6,8 +6,8 @@ import { Parser, Link, formatLinks } from '../src/index.js';
  *
  * Tests for multi-word references without quotes:
  * - (some example: some example is a link)
- * - ID as array: ["some", "example"]
- * - Context-aware recognition in values
+ * - IDs as array: ["some", "example"]
+ * - id property throws for multi-refs, use ids instead
  */
 
 describe('Multi-Reference Parsing', () => {
@@ -17,8 +17,9 @@ describe('Multi-Reference Parsing', () => {
     test('parses two-word multi-reference ID', () => {
       const result = parser.parse('(some example: value)');
       expect(result.length).toBe(1);
-      expect(Array.isArray(result[0].id)).toBe(true);
-      expect(result[0].id).toEqual(['some', 'example']);
+      // Use ids property for multi-references
+      expect(Array.isArray(result[0].ids)).toBe(true);
+      expect(result[0].ids).toEqual(['some', 'example']);
       expect(result[0].values.length).toBe(1);
       expect(result[0].values[0].id).toBe('value');
     });
@@ -26,69 +27,63 @@ describe('Multi-Reference Parsing', () => {
     test('parses three-word multi-reference ID', () => {
       const result = parser.parse('(new york city: value)');
       expect(result.length).toBe(1);
-      expect(result[0].id).toEqual(['new', 'york', 'city']);
+      expect(result[0].ids).toEqual(['new', 'york', 'city']);
     });
 
     test('parses four-word multi-reference ID', () => {
       const result = parser.parse('(a b c d: value)');
       expect(result.length).toBe(1);
-      expect(result[0].id).toEqual(['a', 'b', 'c', 'd']);
+      expect(result[0].ids).toEqual(['a', 'b', 'c', 'd']);
     });
 
-    test('single-word ID remains string (backward compatibility)', () => {
+    test('single-word ID still accessible via id property (backward compatibility)', () => {
       const result = parser.parse('(papa: value)');
       expect(result.length).toBe(1);
+      // Single-word: id returns string, ids returns array with single element
       expect(typeof result[0].id).toBe('string');
       expect(result[0].id).toBe('papa');
+      expect(result[0].ids).toEqual(['papa']);
     });
 
     test('quoted multi-word ID remains string (backward compatibility)', () => {
       const result = parser.parse("('some example': value)");
       expect(result.length).toBe(1);
+      // Quoted multi-word is a single reference, so id works
       expect(typeof result[0].id).toBe('string');
       expect(result[0].id).toBe('some example');
+      expect(result[0].ids).toEqual(['some example']);
+    });
+
+    test('id property throws for multi-reference IDs', () => {
+      const result = parser.parse('(some example: value)');
+      expect(() => result[0].id).toThrow(/Use the 'ids' property instead of 'id'/);
     });
   });
 
-  describe('Context-aware multi-reference recognition', () => {
-    test('recognizes multi-reference in values when same as ID', () => {
+  describe('Multi-reference values are NOT context-aware', () => {
+    // Per issue #184 feedback: context-aware parsing is out of scope
+    test('values are parsed as separate references', () => {
       const result = parser.parse('(some example: some example is a link)');
-      expect(result[0].id).toEqual(['some', 'example']);
-      // First value should be the multi-reference "some example"
-      expect(result[0].values[0].id).toEqual(['some', 'example']);
-      // Remaining values
-      expect(result[0].values[1].id).toBe('is');
-      expect(result[0].values[2].id).toBe('a');
-      expect(result[0].values[3].id).toBe('link');
-      expect(result[0].values.length).toBe(4);
-    });
-
-    test('recognizes three-word multi-reference in values', () => {
-      const result = parser.parse('(new york city: new york city is great)');
-      expect(result[0].id).toEqual(['new', 'york', 'city']);
-      expect(result[0].values[0].id).toEqual(['new', 'york', 'city']);
-      expect(result[0].values[1].id).toBe('is');
-      expect(result[0].values[2].id).toBe('great');
-      expect(result[0].values.length).toBe(3);
-    });
-
-    test('does not recognize multi-reference when parts are separated', () => {
-      // If "some example" is defined, "some" alone should not trigger match
-      const result = parser.parse('(some example: some other example)');
-      expect(result[0].id).toEqual(['some', 'example']);
-      // "some" should be separate, "other" separate, "example" separate
+      expect(result[0].ids).toEqual(['some', 'example']);
+      // Values should be 5 separate references (no context-aware grouping)
+      expect(result[0].values.length).toBe(5);
       expect(result[0].values[0].id).toBe('some');
-      expect(result[0].values[1].id).toBe('other');
-      expect(result[0].values[2].id).toBe('example');
+      expect(result[0].values[1].id).toBe('example');
+      expect(result[0].values[2].id).toBe('is');
+      expect(result[0].values[3].id).toBe('a');
+      expect(result[0].values[4].id).toBe('link');
     });
 
-    test('multi-reference recognition is greedy (longest match first)', () => {
-      // With definitions like "a b" and "a b c", should match "a b c"
-      const result = parser.parse('(a b c: a b c d)\n(a b: x)');
-      expect(result[0].id).toEqual(['a', 'b', 'c']);
-      // Should recognize "a b c" (3 words) not "a b" (2 words)
-      expect(result[0].values[0].id).toEqual(['a', 'b', 'c']);
-      expect(result[0].values[1].id).toBe('d');
+    test('three-word multi-reference values are separate', () => {
+      const result = parser.parse('(new york city: new york city is great)');
+      expect(result[0].ids).toEqual(['new', 'york', 'city']);
+      // Values should be 5 separate references
+      expect(result[0].values.length).toBe(5);
+      expect(result[0].values[0].id).toBe('new');
+      expect(result[0].values[1].id).toBe('york');
+      expect(result[0].values[2].id).toBe('city');
+      expect(result[0].values[3].id).toBe('is');
+      expect(result[0].values[4].id).toBe('great');
     });
   });
 
@@ -100,17 +95,11 @@ describe('Multi-Reference Parsing', () => {
       expect(formatted).toBe('(some example: value)');
     });
 
-    test('formats multi-reference value correctly', () => {
-      const result = parser.parse('(some example: some example is a link)');
-      const formatted = formatLinks(result, true);
-      expect(formatted).toBe('(some example: some example is a link)');
-    });
-
     test('round-trip: parse then format preserves structure', () => {
-      const input = '(new york city: new york city is great)';
+      const input = '(new york city: one two three)';
       const result = parser.parse(input);
       const formatted = formatLinks(result, true);
-      expect(formatted).toBe('(new york city: new york city is great)');
+      expect(formatted).toBe('(new york city: one two three)');
     });
   });
 
@@ -121,7 +110,7 @@ describe('Multi-Reference Parsing', () => {
   value2`;
       const result = parser.parse(input);
       expect(result.length).toBe(1);
-      expect(result[0].id).toEqual(['some', 'example']);
+      expect(result[0].ids).toEqual(['some', 'example']);
       expect(result[0].values.length).toBe(2);
     });
   });
@@ -130,13 +119,13 @@ describe('Multi-Reference Parsing', () => {
     test('handles multi-reference with special characters in quoted parts', () => {
       // Mixed: unquoted multi-ref ID, quoted value with special chars
       const result = parser.parse("(some example: 'value:special')");
-      expect(result[0].id).toEqual(['some', 'example']);
+      expect(result[0].ids).toEqual(['some', 'example']);
       expect(result[0].values[0].id).toBe('value:special');
     });
 
     test('handles empty values with multi-reference ID', () => {
       const result = parser.parse('(some example:)');
-      expect(result[0].id).toEqual(['some', 'example']);
+      expect(result[0].ids).toEqual(['some', 'example']);
       expect(result[0].values.length).toBe(0);
     });
 
@@ -145,23 +134,8 @@ describe('Multi-Reference Parsing', () => {
 (some example: second)`;
       const result = parser.parse(input);
       expect(result.length).toBe(2);
-      expect(result[0].id).toEqual(['some', 'example']);
-      expect(result[1].id).toEqual(['some', 'example']);
-    });
-  });
-
-  describe('Parser options', () => {
-    test('can disable multi-reference context with option', () => {
-      const parserNoContext = new Parser({ enableMultiRefContext: false });
-      const result = parserNoContext.parse(
-        '(some example: some example is a link)'
-      );
-      // ID should still be array (grammar change)
-      expect(result[0].id).toEqual(['some', 'example']);
-      // But values should NOT be grouped (context disabled)
-      expect(result[0].values.length).toBe(5); // some, example, is, a, link
-      expect(result[0].values[0].id).toBe('some');
-      expect(result[0].values[1].id).toBe('example');
+      expect(result[0].ids).toEqual(['some', 'example']);
+      expect(result[1].ids).toEqual(['some', 'example']);
     });
   });
 });
@@ -198,7 +172,7 @@ describe('Backward Compatibility', () => {
 
   test('existing value-only links still work', () => {
     const result = parser.parse('(a b c)');
-    expect(result[0].id).toBe(null);
+    expect(result[0].ids).toBe(null);
     expect(result[0].values.length).toBe(3);
   });
 });

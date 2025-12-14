@@ -1,12 +1,19 @@
 export class Link {
   /**
    * Create a new Link
-   * @param {string|null} id - Optional identifier for the link
+   * @param {string|string[]|null} id - Optional identifier for the link (string for single ref, array for multi-ref)
    * @param {Link[]|null} values - Optional array of nested links
    * @throws {TypeError} If values is not an array or null
    */
   constructor(id = null, values = null) {
-    this.id = id;
+    // Store ids as an array internally (primary storage)
+    if (id === null || id === undefined) {
+      this._ids = null;
+    } else if (Array.isArray(id)) {
+      this._ids = id;
+    } else {
+      this._ids = [id];
+    }
 
     // Validate that values is an array if provided
     if (values !== null && values !== undefined) {
@@ -16,6 +23,53 @@ export class Link {
       this.values = values;
     } else {
       this.values = [];
+    }
+  }
+
+  /**
+   * Get the ids array (primary storage for reference identifiers)
+   * @returns {string[]|null} Array of reference strings, or null if no id
+   */
+  get ids() {
+    return this._ids;
+  }
+
+  /**
+   * Set the ids array
+   * @param {string[]|null} value - Array of reference strings, or null
+   */
+  set ids(value) {
+    this._ids = value;
+  }
+
+  /**
+   * Get the id as a single string (backward compatibility)
+   * @throws {Error} If ids has more than one element (use ids property instead)
+   * @returns {string|null} Single reference string, or null if no id
+   */
+  get id() {
+    if (this._ids === null) {
+      return null;
+    }
+    if (this._ids.length > 1) {
+      throw new Error(
+        `This link has a multi-reference id with ${this._ids.length} parts. Use the 'ids' property instead of 'id'.`
+      );
+    }
+    return this._ids[0];
+  }
+
+  /**
+   * Set the id (backward compatibility)
+   * @param {string|string[]|null} value - Single reference string, array, or null
+   */
+  set id(value) {
+    if (value === null || value === undefined) {
+      this._ids = null;
+    } else if (Array.isArray(value)) {
+      this._ids = value;
+    } else {
+      this._ids = [value];
     }
   }
 
@@ -51,7 +105,7 @@ export class Link {
         // Check if value has simplify method (defensive programming)
         return v && typeof v.simplify === 'function' ? v.simplify() : v;
       });
-      return new Link(this.id, newValues);
+      return new Link(this._ids, newValues);
     }
   }
 
@@ -144,7 +198,7 @@ export class Link {
    */
   toLinkOrIdString() {
     if (!this.values || this.values.length === 0) {
-      return this.id === null ? '' : Link.escapeReference(this.id);
+      return this._ids === null ? '' : Link.escapeReference(this._ids);
     }
     return this.toString();
   }
@@ -156,7 +210,16 @@ export class Link {
    */
   equals(other) {
     if (!(other instanceof Link)) return false;
-    if (this.id !== other.id) return false;
+
+    // Compare ids arrays
+    if (this._ids === null && other._ids !== null) return false;
+    if (this._ids !== null && other._ids === null) return false;
+    if (this._ids !== null && other._ids !== null) {
+      if (this._ids.length !== other._ids.length) return false;
+      for (let i = 0; i < this._ids.length; i++) {
+        if (this._ids[i] !== other._ids[i]) return false;
+      }
+    }
 
     // Handle null/undefined values arrays
     const thisValues = this.values || [];
@@ -200,18 +263,18 @@ export class Link {
 
     // Original implementation for backward compatibility
     // Empty link
-    if (this.id === null && (!this.values || this.values.length === 0)) {
+    if (this._ids === null && (!this.values || this.values.length === 0)) {
       return lessParentheses ? '' : '()';
     }
 
     // Link with only ID, no values
     if (!this.values || this.values.length === 0) {
-      const escapedId = Link.escapeReference(this.id);
+      const escapedId = Link.escapeReference(this._ids);
       // When used as a value in a compound link (created from combining links), wrap in parentheses
       if (isCompoundValue) {
         return `(${escapedId})`;
       }
-      return lessParentheses && !this.needsParentheses(this.id)
+      return lessParentheses && !this.needsParentheses(this._ids)
         ? escapedId
         : `(${escapedId})`;
     }
@@ -220,7 +283,7 @@ export class Link {
     const valuesStr = this.values.map((v) => this.formatValue(v)).join(' ');
 
     // Link with values only (null id)
-    if (this.id === null) {
+    if (this._ids === null) {
       // For lessParentheses mode with simple values, don't wrap the whole thing
       if (lessParentheses) {
         // Check if all values are simple (no nested values)
@@ -230,7 +293,7 @@ export class Link {
         if (allSimple) {
           // Format each value without extra wrapping
           const simpleValuesStr = this.values
-            .map((v) => Link.escapeReference(v.id))
+            .map((v) => Link.escapeReference(v._ids))
             .join(' ');
           return simpleValuesStr;
         }
@@ -243,9 +306,9 @@ export class Link {
     }
 
     // Link with ID and values
-    const idStr = Link.escapeReference(this.id);
+    const idStr = Link.escapeReference(this._ids);
     const withColon = `${idStr}: ${valuesStr}`;
-    return lessParentheses && !this.needsParentheses(this.id)
+    return lessParentheses && !this.needsParentheses(this._ids)
       ? withColon
       : `(${withColon})`;
   }
@@ -257,7 +320,7 @@ export class Link {
    */
   formatValue(value) {
     if (!value || !value.format) {
-      return Link.escapeReference((value && value.id) || '');
+      return Link.escapeReference((value && value._ids) || '');
     }
 
     // Check if we're in a compound link that was created from path combinations
@@ -271,7 +334,7 @@ export class Link {
 
     // Simple link with just an ID - don't wrap in parentheses when used as a value
     if (!value.values || value.values.length === 0) {
-      return Link.escapeReference(value.id);
+      return Link.escapeReference(value._ids);
     }
 
     // Complex value with its own structure - format it normally with parentheses
@@ -305,17 +368,17 @@ export class Link {
    */
   _formatWithOptions(options, isCompoundValue = false) {
     // Empty link
-    if (this.id === null && (!this.values || this.values.length === 0)) {
+    if (this._ids === null && (!this.values || this.values.length === 0)) {
       return options.lessParentheses ? '' : '()';
     }
 
     // Link with only ID, no values
     if (!this.values || this.values.length === 0) {
-      const escapedId = Link.escapeReference(this.id);
+      const escapedId = Link.escapeReference(this._ids);
       if (isCompoundValue) {
         return `(${escapedId})`;
       }
-      return options.lessParentheses && !this.needsParentheses(this.id)
+      return options.lessParentheses && !this.needsParentheses(this._ids)
         ? escapedId
         : `(${escapedId})`;
     }
@@ -328,8 +391,8 @@ export class Link {
       // Try inline format first
       const valuesStr = this.values.map((v) => this.formatValue(v)).join(' ');
       let testLine;
-      if (this.id !== null) {
-        const idStr = Link.escapeReference(this.id);
+      if (this._ids !== null) {
+        const idStr = Link.escapeReference(this._ids);
         testLine = options.lessParentheses
           ? `${idStr}: ${valuesStr}`
           : `(${idStr}: ${valuesStr})`;
@@ -351,13 +414,13 @@ export class Link {
     const valuesStr = this.values.map((v) => this.formatValue(v)).join(' ');
 
     // Link with values only (null id)
-    if (this.id === null) {
+    if (this._ids === null) {
       if (options.lessParentheses) {
         const allSimple = this.values.every(
           (v) => !v.values || v.values.length === 0
         );
         if (allSimple) {
-          return this.values.map((v) => Link.escapeReference(v.id)).join(' ');
+          return this.values.map((v) => Link.escapeReference(v._ids)).join(' ');
         }
         return valuesStr;
       }
@@ -365,9 +428,9 @@ export class Link {
     }
 
     // Link with ID and values
-    const idStr = Link.escapeReference(this.id);
+    const idStr = Link.escapeReference(this._ids);
     const withColon = `${idStr}: ${valuesStr}`;
-    return options.lessParentheses && !this.needsParentheses(this.id)
+    return options.lessParentheses && !this.needsParentheses(this._ids)
       ? withColon
       : `(${withColon})`;
   }
@@ -378,7 +441,7 @@ export class Link {
    * @returns {string} Indented formatted string
    */
   _formatIndented(options) {
-    if (this.id === null) {
+    if (this._ids === null) {
       // Values only - format each on separate line
       const lines = this.values.map(
         (v) => options.indentString + this.formatValue(v)
@@ -387,7 +450,7 @@ export class Link {
     }
 
     // Link with ID - format as id:\n  value1\n  value2
-    const idStr = Link.escapeReference(this.id);
+    const idStr = Link.escapeReference(this._ids);
     const lines = [`${idStr}:`];
     for (const v of this.values) {
       lines.push(options.indentString + this.formatValue(v));
@@ -409,11 +472,19 @@ function _groupConsecutiveLinks(links) {
   const grouped = [];
   let i = 0;
 
+  // Helper to compare ids arrays
+  const idsEqual = (ids1, ids2) => {
+    if (ids1 === null && ids2 === null) return true;
+    if (ids1 === null || ids2 === null) return false;
+    if (ids1.length !== ids2.length) return false;
+    return ids1.every((id, idx) => id === ids2[idx]);
+  };
+
   while (i < links.length) {
     const current = links[i];
 
     // Look ahead for consecutive links with same ID
-    if (current.id !== null && current.values && current.values.length > 0) {
+    if (current._ids !== null && current.values && current.values.length > 0) {
       // Collect all values with same ID
       const sameIdValues = [...current.values];
       let j = i + 1;
@@ -421,7 +492,7 @@ function _groupConsecutiveLinks(links) {
       while (j < links.length) {
         const nextLink = links[j];
         if (
-          nextLink.id === current.id &&
+          idsEqual(nextLink._ids, current._ids) &&
           nextLink.values &&
           nextLink.values.length > 0
         ) {
@@ -434,7 +505,7 @@ function _groupConsecutiveLinks(links) {
 
       // If we found consecutive links, create grouped link
       if (j > i + 1) {
-        const groupedLink = new Link(current.id, sameIdValues);
+        const groupedLink = new Link(current._ids, sameIdValues);
         grouped.push(groupedLink);
         i = j;
         continue;
