@@ -5,6 +5,7 @@
 | [![Actions Status](https://github.com/link-foundation/links-notation/workflows/rust/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=rust) | [![Crates.io Version and Downloads count](https://img.shields.io/crates/v/links-notation?label=crates.io&style=flat)](https://crates.io/crates/links-notation) | **[Rust](rust/README.md)** |
 | [![Actions Status](https://github.com/link-foundation/links-notation/workflows/csharp/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=csharp) | [![NuGet Version and Downloads count](https://img.shields.io/nuget/v/Link.Foundation.Links.Notation?label=nuget&style=flat)](https://www.nuget.org/packages/Link.Foundation.Links.Notation) | **[C#](csharp/README.md)** |
 | [![Actions Status](https://github.com/link-foundation/links-notation/workflows/python/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=python) | [![PyPI Version and Downloads count](https://img.shields.io/pypi/v/links-notation?label=pypi&style=flat)](https://pypi.org/project/links-notation/) | **[Python](python/README.md)** |
+| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/go/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=go) | [![Go Reference](https://pkg.go.dev/badge/github.com/link-foundation/links-notation/go.svg)](https://pkg.go.dev/github.com/link-foundation/links-notation/go) | **[Go](go/README.md)** |
 
 [![Gitpod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/link-foundation/links-notation)
 [![Open in GitHub Codespaces](https://img.shields.io/badge/GitHub%20Codespaces-Open-181717?logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=link-foundation/links-notation)
@@ -54,6 +55,13 @@ let links = parse_lino("papa (lovesMama: loves mama)").unwrap();
 from links_notation import Parser
 parser = Parser()
 links = parser.parse("papa (lovesMama: loves mama)")
+```
+
+### Go
+
+```go
+import lino "github.com/link-foundation/links-notation/go"
+links, _ := lino.Parse("papa (lovesMama: loves mama)")
 ```
 
 ## Examples
@@ -137,10 +145,11 @@ language-specific documentation:
 - **[JavaScript README](js/README.md)** - Modern web development guide
 - **[Rust README](rust/README.md)** - High-performance parsing guide
 - **[Python README](python/README.md)** - Python package guide
+- **[Go README](go/README.md)** - Go package guide
 
 Additional resources:
 
-- [Test Case Comparison](TEST_CASE_COMPARISON.md) - Comprehensive test coverage comparison across all 4 language implementations
+- [Test Case Comparison](TEST_CASE_COMPARISON.md) - Comprehensive test coverage comparison across all 5 language implementations
 - [PDF Documentation](https://link-foundation.github.io/links-notation/csharp/Link.Foundation.Links.Notation.pdf)
   \- Complete reference for offline reading
 - [Links Theory 0.0.2](https://habr.com/en/articles/895896) - Theoretical
@@ -148,12 +157,13 @@ Additional resources:
 
 ## Test Coverage & Implementation Parity
 
-All four language implementations (C#, JavaScript, Rust, Python) maintain **equivalent core functionality** with comprehensive test coverage:
+All five language implementations (C#, JavaScript, Rust, Python, Go) maintain **equivalent core functionality** with comprehensive test coverage:
 
 - **Python**: 108 tests across 10 categories - All passing ✅
 - **JavaScript**: 109 tests across 11 categories - All passing ✅
 - **Rust**: 110 tests across 11 categories - All passing ✅
 - **C#**: 111 tests across 12 categories - All passing ✅
+- **Go**: 90+ tests across 10 categories - All passing ✅
 
 **90+ tests match identically** across all languages, verifying functional equivalence. See [TEST_CASE_COMPARISON.md](TEST_CASE_COMPARISON.md) for the complete cross-language test comparison with links to source code.
 

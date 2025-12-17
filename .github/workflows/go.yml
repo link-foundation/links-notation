@@ -1,0 +1,97 @@
+name: go
+
+on:
+  push:
+    branches: main
+    paths:
+      - 'go/**'
+      - '.github/workflows/go.yml'
+  pull_request:
+    paths:
+      - 'go/**'
+      - '.github/workflows/go.yml'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+defaults:
+  run:
+    working-directory: go
+
+jobs:
+  findChangedGoFiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      isGoFilesChanged: ${{ steps.setIsGoFilesChangedOutput.outputs.isGoFilesChanged }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Get changed files using defaults
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+      - name: Set output isGoFilesChanged
+        id: setIsGoFilesChangedOutput
+        run: |
+          isGoFilesChanged='false'
+          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ $changedFile == go/*.go ]] || [[ $changedFile == go/go.mod ]] || [[ $changedFile == go/go.sum ]] || [[ $changedFile == go/* ]] || [[ $changedFile == .github/workflows/go.yml ]]; then
+              echo "isGoFilesChanged='true'"
+              isGoFilesChanged='true'
+              break
+            fi
+          done
+          echo "isGoFilesChanged=${isGoFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isGoFilesChanged: ${isGoFilesChanged}"
+
+  lint:
+    needs: [findChangedGoFiles]
+    if: ${{ needs.findChangedGoFiles.outputs.isGoFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+          cache-dependency-path: go/go.sum
+      - name: Check formatting
+        run: |
+          gofmt_output=$(gofmt -l .)
+          if [ -n "$gofmt_output" ]; then
+            echo "The following files are not formatted correctly:"
+            echo "$gofmt_output"
+            exit 1
+          fi
+      - name: Run go vet
+        run: go vet ./...
+
+  test:
+    needs: [findChangedGoFiles, lint]
+    if: ${{ needs.findChangedGoFiles.outputs.isGoFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+          cache-dependency-path: go/go.sum
+      - name: Build
+        run: go build -v ./...
+      - name: Test
+        run: go test -v -race -coverprofile=coverage.out ./...
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          files: go/coverage.out
+          flags: go
+          fail_ci_if_error: false
