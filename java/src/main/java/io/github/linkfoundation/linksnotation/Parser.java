@@ -13,7 +13,7 @@ import java.util.Map;
  * <ul>
  *   <li>Single-line links: {@code id: value1 value2}
  *   <li>Multi-line links: {@code (id: value1 value2)}
- *   <li>Indented syntax with colons: {@code id:\n  value1\n  value2}
+ *   <li>Indented syntax with colons: {@code id:\n value1\n value2}
  *   <li>Nested structures with parentheses
  *   <li>Quoted references (single, double, backtick)
  *   <li>Multi-quote strings (e.g., triple quotes)
@@ -193,8 +193,7 @@ public class Parser {
       String nextLine = lines.get(pos);
       int rawNextIndent = nextLine.length() - nextLine.stripLeading().length();
       // Normalize next line's indentation
-      int nextIndent =
-          Math.max(0, rawNextIndent - (baseIndentation != null ? baseIndentation : 0));
+      int nextIndent = Math.max(0, rawNextIndent - (baseIndentation != null ? baseIndentation : 0));
 
       if (!nextLine.trim().isEmpty() && nextIndent > indent) {
         // This is a child
@@ -235,9 +234,7 @@ public class Parser {
     }
 
     // Try single-line link: id: values
-    if (content.contains(":")
-        && !content.startsWith("\"")
-        && !content.startsWith("'")) {
+    if (content.contains(":") && !content.startsWith("\"") && !content.startsWith("'")) {
       int colonPos = findColonOutsideQuotes(content);
       if (colonPos >= 0) {
         String idPart = content.substring(0, colonPos).trim();
@@ -551,8 +548,7 @@ public class Parser {
 
   /** Recursively collect links from parse tree. */
   @SuppressWarnings("unchecked")
-  private void collectLinks(
-      Map<String, Object> item, List<Link> parentPath, List<Link> result) {
+  private void collectLinks(Map<String, Object> item, List<Link> parentPath, List<Link> result) {
     if (item == null) {
       return;
     }

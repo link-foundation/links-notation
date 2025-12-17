@@ -69,9 +69,7 @@ class LinksGroupTest {
   @Test
   void testFormatWithLessParentheses() {
     List<Link> links =
-        Arrays.asList(
-            new Link("parent", Arrays.asList(new Link("child"))),
-            new Link("simple"));
+        Arrays.asList(new Link("parent", Arrays.asList(new Link("child"))), new Link("simple"));
     LinksGroup group = new LinksGroup(links);
     String formatted = group.format(true);
     assertTrue(formatted.contains("parent: child"));

@@ -315,10 +315,7 @@ public class Link {
    */
   private boolean needsParentheses(String str) {
     return str != null
-        && (str.contains(" ")
-            || str.contains(":")
-            || str.contains("(")
-            || str.contains(")"));
+        && (str.contains(" ") || str.contains(":") || str.contains("(") || str.contains(")"));
   }
 
   /**

@@ -22,9 +22,7 @@ public class LinksGroup {
     this.links = links != null ? new ArrayList<>(links) : new ArrayList<>();
   }
 
-  /**
-   * Creates an empty LinksGroup.
-   */
+  /** Creates an empty LinksGroup. */
   public LinksGroup() {
     this.links = new ArrayList<>();
   }

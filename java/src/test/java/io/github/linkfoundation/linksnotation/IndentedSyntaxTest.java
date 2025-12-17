@@ -120,7 +120,6 @@ class IndentedSyntaxTest {
     assertEquals(1, indentedResult.size());
     assertEquals(1, inlineResult.size());
     assertEquals(inlineResult.get(0).getId(), indentedResult.get(0).getId());
-    assertEquals(
-        inlineResult.get(0).getValues().size(), indentedResult.get(0).getValues().size());
+    assertEquals(inlineResult.get(0).getValues().size(), indentedResult.get(0).getValues().size());
   }
 }

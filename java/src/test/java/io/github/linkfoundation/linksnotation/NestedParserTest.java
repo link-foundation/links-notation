@@ -101,8 +101,7 @@ class NestedParserTest {
 
   @Test
   void testComplexStructure() throws ParseException {
-    String input =
-        "(config: (database: (host: localhost) (port: 5432)) (cache: enabled))";
+    String input = "(config: (database: (host: localhost) (port: 5432)) (cache: enabled))";
     List<Link> result = parser.parse(input);
     assertEquals(1, result.size());
     assertEquals("config", result.get(0).getId());

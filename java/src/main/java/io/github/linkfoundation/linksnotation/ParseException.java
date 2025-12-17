@@ -1,8 +1,6 @@
 package io.github.linkfoundation.linksnotation;
 
-/**
- * Exception thrown when parsing Links Notation fails.
- */
+/** Exception thrown when parsing Links Notation fails. */
 public class ParseException extends Exception {
 
   private static final long serialVersionUID = 1L;
