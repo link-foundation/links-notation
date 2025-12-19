@@ -1,0 +1,195 @@
+name: java
+
+on:
+  push:
+    branches: main
+    paths:
+      - 'java/**'
+      - '.github/workflows/java.yml'
+  pull_request:
+    paths:
+      - 'java/**'
+      - '.github/workflows/java.yml'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+defaults:
+  run:
+    working-directory: java
+
+jobs:
+  findChangedJavaFiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      isJavaFilesChanged: ${{ steps.setIsJavaFilesChangedOutput.outputs.isJavaFilesChanged }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Get changed files using defaults
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+      - name: Set output isJavaFilesChanged
+        id: setIsJavaFilesChangedOutput
+        run: |
+          isJavaFilesChanged='false'
+          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ $changedFile == java/*.java ]] || [[ $changedFile == java/*.xml ]] || [[ $changedFile == java/* ]] || [[ $changedFile == .github/workflows/java.yml ]]; then
+              echo "isJavaFilesChanged='true'"
+              isJavaFilesChanged='true'
+              break
+            fi
+          done
+          echo "isJavaFilesChanged=${isJavaFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isJavaFilesChanged: ${isJavaFilesChanged}"
+
+  build:
+    needs: [findChangedJavaFiles]
+    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B compile --file pom.xml
+
+  test:
+    needs: [findChangedJavaFiles, build]
+    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        java: ['11', '17', '21']
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+          cache: maven
+      - name: Test with Maven
+        run: mvn -B test --file pom.xml
+
+  format:
+    needs: [findChangedJavaFiles]
+    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven
+      - name: Check formatting with Spotless
+        run: mvn -B spotless:check --file pom.xml
+
+  publishToMavenCentral:
+    needs: [test, format, findChangedJavaFiles]
+    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+      - name: Check if version already published
+        id: version-check
+        run: |
+          PACKAGE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          PACKAGE_GROUP=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)
+          PACKAGE_ARTIFACT=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
+          echo "Package: $PACKAGE_GROUP:$PACKAGE_ARTIFACT:$PACKAGE_VERSION"
+
+          # Check if version exists on Maven Central
+          URL="https://repo1.maven.org/maven2/$(echo $PACKAGE_GROUP | tr '.' '/')/$PACKAGE_ARTIFACT/$PACKAGE_VERSION/"
+          if curl --head --silent --fail "$URL" > /dev/null 2>&1; then
+            echo "Version $PACKAGE_VERSION already exists on Maven Central"
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "Version $PACKAGE_VERSION does not exist on Maven Central"
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Publish to Maven Central
+        if: steps.version-check.outputs.should_publish == 'true'
+        run: mvn -B deploy -Prelease --file pom.xml
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+  publishRelease:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [publishToMavenCentral]
+    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && needs.publishToMavenCentral.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven
+      - name: Check if GitHub release already exists
+        id: release-check
+        run: |
+          PACKAGE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          TAG_NAME="java_$PACKAGE_VERSION"
+          echo "Checking if release $TAG_NAME already exists"
+
+          # Check if release exists
+          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Release $TAG_NAME already exists"
+            echo "should_create_release=false" >> $GITHUB_OUTPUT
+          else
+            echo "Release $TAG_NAME does not exist"
+            echo "should_create_release=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GitHub release
+        if: steps.release-check.outputs.should_create_release == 'true'
+        run: |
+          PACKAGE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          PACKAGE_GROUP=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)
+          PACKAGE_ARTIFACT=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
+
+          # Create release with consistent tag format: java_version
+          gh release create "java_${PACKAGE_VERSION}" \
+            --title "[Java] $PACKAGE_VERSION" \
+            --notes "https://central.sonatype.com/artifact/$PACKAGE_GROUP/$PACKAGE_ARTIFACT/$PACKAGE_VERSION"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
