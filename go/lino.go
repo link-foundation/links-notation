@@ -331,13 +331,13 @@ func escapeReferenceForParenthesizedID(reference string) string {
 	// Check if quoting is needed for reasons other than spaces
 	needsQuotingForOtherReasons :=
 		strings.Contains(reference, ":") ||
-		strings.Contains(reference, "(") ||
-		strings.Contains(reference, ")") ||
-		strings.Contains(reference, "\t") ||
-		strings.Contains(reference, "\n") ||
-		strings.Contains(reference, "\r") ||
-		hasDoubleQuote ||
-		hasSingleQuote
+			strings.Contains(reference, "(") ||
+			strings.Contains(reference, ")") ||
+			strings.Contains(reference, "\t") ||
+			strings.Contains(reference, "\n") ||
+			strings.Contains(reference, "\r") ||
+			hasDoubleQuote ||
+			hasSingleQuote
 
 	// Handle edge case: reference contains both single and double quotes
 	if hasSingleQuote && hasDoubleQuote {
