@@ -337,3 +337,6 @@ rust/target/
 target/venv/
 .venv/
 venv/
+
+# java
+java/target/
