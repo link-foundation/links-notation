@@ -50,7 +50,10 @@ impl StdError for MultiRefError {}
 pub enum LiNo<T> {
     /// A link with optional multi-reference ids and values.
     /// The `ids` field stores references as a vector (like JS/Python).
-    Link { ids: Option<Vec<T>>, values: Vec<Self> },
+    Link {
+        ids: Option<Vec<T>>,
+        values: Vec<Self>,
+    },
     /// A simple reference value.
     Ref(T),
 }
@@ -130,8 +133,7 @@ impl<T: ToString + Clone> LiNo<T> {
                 if values.is_empty() {
                     if let Some(id_str) = Self::ids_to_string(ids) {
                         let escaped_id = escape_reference(&id_str);
-                        return if config.less_parentheses && !needs_parentheses(&id_str)
-                        {
+                        return if config.less_parentheses && !needs_parentheses(&id_str) {
                             escaped_id
                         } else {
                             format!("({})", escaped_id)
@@ -210,8 +212,7 @@ impl<T: ToString + Clone> LiNo<T> {
                 let id_str = Self::ids_to_string(ids).unwrap();
                 let escaped_id = escape_reference(&id_str);
                 let with_colon = format!("{}: {}", escaped_id, values_str);
-                if config.less_parentheses && !needs_parentheses(&id_str)
-                {
+                if config.less_parentheses && !needs_parentheses(&id_str) {
                     with_colon
                 } else {
                     format!("({})", with_colon)
@@ -257,7 +258,11 @@ impl<T: ToString> fmt::Display for LiNo<T> {
                 let id_str = ids
                     .as_ref()
                     .map(|v| {
-                        let joined = v.iter().map(|t| t.to_string()).collect::<Vec<_>>().join(" ");
+                        let joined = v
+                            .iter()
+                            .map(|t| t.to_string())
+                            .collect::<Vec<_>>()
+                            .join(" ");
                         format!("{}: ", joined)
                     })
                     .unwrap_or_default();

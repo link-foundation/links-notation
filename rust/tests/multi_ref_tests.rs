@@ -13,7 +13,10 @@ fn test_parses_two_word_multi_reference_id() {
     match &result[0] {
         LiNo::Link { ids, values } => {
             // Multi-word ID is now stored as separate words
-            assert_eq!(ids.as_ref().unwrap(), &vec!["some".to_string(), "example".to_string()]);
+            assert_eq!(
+                ids.as_ref().unwrap(),
+                &vec!["some".to_string(), "example".to_string()]
+            );
             assert_eq!(values.len(), 1);
         }
         _ => panic!("Expected Link"),
@@ -26,7 +29,10 @@ fn test_parses_three_word_multi_reference_id() {
     assert_eq!(result.len(), 1);
     match &result[0] {
         LiNo::Link { ids, .. } => {
-            assert_eq!(ids.as_ref().unwrap(), &vec!["new".to_string(), "york".to_string(), "city".to_string()]);
+            assert_eq!(
+                ids.as_ref().unwrap(),
+                &vec!["new".to_string(), "york".to_string(), "city".to_string()]
+            );
         }
         _ => panic!("Expected Link"),
     }
@@ -82,7 +88,10 @@ fn test_indented_syntax_multi_reference() {
     assert_eq!(result.len(), 1);
     match &result[0] {
         LiNo::Link { ids, values } => {
-            assert_eq!(ids.as_ref().unwrap(), &vec!["some".to_string(), "example".to_string()]);
+            assert_eq!(
+                ids.as_ref().unwrap(),
+                &vec!["some".to_string(), "example".to_string()]
+            );
             assert_eq!(values.len(), 2);
         }
         _ => panic!("Expected Link"),
@@ -98,7 +107,10 @@ fn test_values_include_multi_reference_context() {
     assert_eq!(result.len(), 1);
     match &result[0] {
         LiNo::Link { ids, values } => {
-            assert_eq!(ids.as_ref().unwrap(), &vec!["some".to_string(), "example".to_string()]);
+            assert_eq!(
+                ids.as_ref().unwrap(),
+                &vec!["some".to_string(), "example".to_string()]
+            );
             // Values should include "some", "example", "is", "a", "link"
             // (context-aware grouping not implemented in Rust yet)
             assert!(values.len() >= 4);
