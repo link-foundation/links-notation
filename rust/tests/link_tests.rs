@@ -3,11 +3,11 @@ use links_notation::LiNo;
 #[test]
 fn link_constructor_with_id_only_test() {
     let link = LiNo::Link::<String> {
-        id: Some("test".to_string()),
+        ids: Some(vec!["test".to_string()]),
         values: vec![],
     };
-    if let LiNo::Link { id, values } = link {
-        assert_eq!(id, Some("test".to_string()));
+    if let LiNo::Link { ids, values } = link {
+        assert_eq!(ids, Some(vec!["test".to_string()]));
         assert!(values.is_empty());
     } else {
         panic!("Expected Link variant");
@@ -21,15 +21,15 @@ fn link_constructor_with_id_and_values_test() {
         LiNo::Ref("value2".to_string()),
     ];
     let link = LiNo::Link {
-        id: Some("parent".to_string()),
+        ids: Some(vec!["parent".to_string()]),
         values: values.clone(),
     };
     if let LiNo::Link {
-        id,
+        ids,
         values: link_values,
     } = link
     {
-        assert_eq!(id, Some("parent".to_string()));
+        assert_eq!(ids, Some(vec!["parent".to_string()]));
         assert_eq!(link_values.len(), 2);
     } else {
         panic!("Expected Link variant");
@@ -39,7 +39,7 @@ fn link_constructor_with_id_and_values_test() {
 #[test]
 fn link_to_string_with_id_only_test() {
     let link = LiNo::Link::<String> {
-        id: Some("test".to_string()),
+        ids: Some(vec!["test".to_string()]),
         values: vec![],
     };
     assert_eq!(link.to_string(), "(test: )");
@@ -51,7 +51,7 @@ fn link_to_string_with_values_only_test() {
         LiNo::Ref("value1".to_string()),
         LiNo::Ref("value2".to_string()),
     ];
-    let link = LiNo::Link::<String> { id: None, values };
+    let link = LiNo::Link::<String> { ids: None, values };
     assert_eq!(link.to_string(), "(value1 value2)");
 }
 
@@ -62,7 +62,7 @@ fn link_to_string_with_id_and_values_test() {
         LiNo::Ref("child2".to_string()),
     ];
     let link = LiNo::Link {
-        id: Some("parent".to_string()),
+        ids: Some(vec!["parent".to_string()]),
         values,
     };
     assert_eq!(link.to_string(), "(parent: child1 child2)");
@@ -71,15 +71,15 @@ fn link_to_string_with_id_and_values_test() {
 #[test]
 fn link_equals_test() {
     let link1 = LiNo::Link::<String> {
-        id: Some("test".to_string()),
+        ids: Some(vec!["test".to_string()]),
         values: vec![],
     };
     let link2 = LiNo::Link::<String> {
-        id: Some("test".to_string()),
+        ids: Some(vec!["test".to_string()]),
         values: vec![],
     };
     let link3 = LiNo::Link::<String> {
-        id: Some("other".to_string()),
+        ids: Some(vec!["other".to_string()]),
         values: vec![],
     };
 
@@ -93,12 +93,12 @@ fn link_combine_test() {
     let link1 = LiNo::Ref("first".to_string());
     let link2 = LiNo::Ref("second".to_string());
     let combined = LiNo::Link::<String> {
-        id: None,
+        ids: None,
         values: vec![link1, link2],
     };
 
-    if let LiNo::Link { id, values } = combined {
-        assert_eq!(id, None);
+    if let LiNo::Link { ids, values } = combined {
+        assert_eq!(ids, None);
         assert_eq!(values.len(), 2);
     } else {
         panic!("Expected Link variant");
@@ -129,23 +129,23 @@ fn link_escape_reference_with_special_characters_test() {
 fn link_simplify_test() {
     // Test simplification behavior - empty values
     let link1 = LiNo::Link::<String> {
-        id: Some("test".to_string()),
+        ids: Some(vec!["test".to_string()]),
         values: vec![],
     };
     // In Rust, we don't have a simplify method, but we can test the structure
-    if let LiNo::Link { id, values } = link1 {
-        assert_eq!(id, Some("test".to_string()));
+    if let LiNo::Link { ids, values } = link1 {
+        assert_eq!(ids, Some(vec!["test".to_string()]));
         assert!(values.is_empty());
     }
 
     // Test with single value
     let single_ref = LiNo::Ref("single".to_string());
     let link2 = LiNo::Link::<String> {
-        id: None,
+        ids: None,
         values: vec![single_ref.clone()],
     };
-    if let LiNo::Link { id, values } = link2 {
-        assert_eq!(id, None);
+    if let LiNo::Link { ids, values } = link2 {
+        assert_eq!(ids, None);
         assert_eq!(values.len(), 1);
         assert_eq!(values[0], single_ref);
     }

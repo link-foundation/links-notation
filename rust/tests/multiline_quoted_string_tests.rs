@@ -14,15 +14,15 @@ as another reference'
     let result = parse_lino(input).unwrap();
 
     if let LiNo::Link {
-        id: outer_id,
+        ids: outer_ids,
         values: outer_values,
     } = &result
     {
-        assert!(outer_id.is_none());
+        assert!(outer_ids.is_none());
         assert_eq!(outer_values.len(), 1);
 
-        if let LiNo::Link { id, values } = &outer_values[0] {
-            assert!(id.is_none());
+        if let LiNo::Link { ids, values } = &outer_values[0] {
+            assert!(ids.is_none());
             assert_eq!(values.len(), 2);
 
             if let LiNo::Ref(ref first_value) = values[0] {
@@ -56,8 +56,8 @@ fn test_simple_multiline_double_quoted() {
 line2")"#;
     let result = parse_lino(input).unwrap();
 
-    if let LiNo::Link { id, values } = &result {
-        assert!(id.is_none());
+    if let LiNo::Link { ids, values } = &result {
+        assert!(ids.is_none());
         assert_eq!(values.len(), 1);
 
         if let LiNo::Ref(ref value) = values[0] {
@@ -76,8 +76,8 @@ fn test_simple_multiline_single_quoted() {
 line2')"#;
     let result = parse_lino(input).unwrap();
 
-    if let LiNo::Link { id, values } = &result {
-        assert!(id.is_none());
+    if let LiNo::Link { ids, values } = &result {
+        assert!(ids.is_none());
         assert_eq!(values.len(), 1);
 
         if let LiNo::Ref(ref value) = values[0] {
@@ -98,15 +98,15 @@ id": value1 value2)"#;
     let result = parse_lino(input).unwrap();
 
     if let LiNo::Link {
-        id: outer_id,
+        ids: outer_ids,
         values: outer_values,
     } = &result
     {
-        assert!(outer_id.is_none());
+        assert!(outer_ids.is_none());
         assert_eq!(outer_values.len(), 1);
 
-        if let LiNo::Link { id, values } = &outer_values[0] {
-            assert_eq!(id.as_ref().unwrap(), "multi\nline\nid");
+        if let LiNo::Link { ids, values } = &outer_values[0] {
+            assert_eq!(ids.as_ref().unwrap(), &vec!["multi\nline\nid".to_string()]);
             assert_eq!(values.len(), 2);
         } else {
             panic!("Expected first value to be a Link");

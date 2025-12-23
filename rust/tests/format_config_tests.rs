@@ -105,7 +105,7 @@ fn should_indent_by_ref_count() {
 fn format_link_with_less_parentheses_integration() {
     // Create a link with ID and values
     let link: LiNo<String> = LiNo::Link {
-        id: Some("id".to_string()),
+        ids: Some(vec!["id".to_string()]),
         values: vec![LiNo::Ref("value".to_string())],
     };
 
@@ -120,7 +120,7 @@ fn format_link_with_less_parentheses_integration() {
 fn format_link_with_max_inline_refs_integration() {
     // Create a link with 4 references
     let link: LiNo<String> = LiNo::Link {
-        id: Some("id".to_string()),
+        ids: Some(vec!["id".to_string()]),
         values: vec![
             LiNo::Ref("1".to_string()),
             LiNo::Ref("2".to_string()),
@@ -147,7 +147,7 @@ fn format_link_with_max_inline_refs_integration() {
 fn format_link_with_line_length_limit_integration() {
     // Create a link with many references that exceeds line length
     let link: LiNo<String> = LiNo::Link {
-        id: Some("sequence".to_string()),
+        ids: Some(vec!["sequence".to_string()]),
         values: (1..=10).map(|i| LiNo::Ref(i.to_string())).collect(),
     };
 
@@ -175,15 +175,15 @@ fn format_links_with_consecutive_grouping_integration() {
     // Create consecutive links with same ID
     let links: Vec<LiNo<String>> = vec![
         LiNo::Link {
-            id: Some("SetA".to_string()),
+            ids: Some(vec!["SetA".to_string()]),
             values: vec![LiNo::Ref("a".to_string())],
         },
         LiNo::Link {
-            id: Some("SetA".to_string()),
+            ids: Some(vec!["SetA".to_string()]),
             values: vec![LiNo::Ref("b".to_string())],
         },
         LiNo::Link {
-            id: Some("SetA".to_string()),
+            ids: Some(vec!["SetA".to_string()]),
             values: vec![LiNo::Ref("c".to_string())],
         },
     ];
@@ -203,7 +203,7 @@ fn format_links_with_consecutive_grouping_integration() {
 #[test]
 fn format_link_with_custom_indent_integration() {
     let link: LiNo<String> = LiNo::Link {
-        id: Some("id".to_string()),
+        ids: Some(vec!["id".to_string()]),
         values: vec![
             LiNo::Ref("1".to_string()),
             LiNo::Ref("2".to_string()),
@@ -230,7 +230,7 @@ fn format_link_with_custom_indent_integration() {
 fn format_roundtrip_with_config_integration() {
     // Create a simple link
     let original_link: LiNo<String> = LiNo::Link {
-        id: Some("test".to_string()),
+        ids: Some(vec!["test".to_string()]),
         values: vec![
             LiNo::Ref("a".to_string()),
             LiNo::Ref("b".to_string()),

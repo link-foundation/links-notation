@@ -15,15 +15,19 @@ fn format_links(lino: &LiNo<String>, less_parentheses: bool) -> String {
                 value.clone()
             }
         }
-        LiNo::Link { id, values } => {
+        LiNo::Link { ids, values } => {
             if values.is_empty() {
-                if let Some(id) = id {
-                    // Escape id same as references
-                    let escaped_id = format_links(&LiNo::Ref(id.clone()), false);
-                    if less_parentheses {
-                        escaped_id
+                if let Some(ids) = ids {
+                    if ids.len() == 1 {
+                        // Escape id same as references
+                        let escaped_id = format_links(&LiNo::Ref(ids[0].clone()), false);
+                        if less_parentheses {
+                            escaped_id
+                        } else {
+                            format!("({})", escaped_id)
+                        }
                     } else {
-                        format!("({})", escaped_id)
+                        "()".to_string()
                     }
                 } else {
                     "()".to_string()
@@ -35,12 +39,16 @@ fn format_links(lino: &LiNo<String>, less_parentheses: bool) -> String {
                     .collect::<Vec<_>>()
                     .join(" ");
 
-                if let Some(id) = id {
-                    let escaped_id = format_links(&LiNo::Ref(id.clone()), false);
-                    if less_parentheses && values.len() == 1 {
-                        format!("{}: {}", escaped_id, formatted_values)
+                if let Some(ids) = ids {
+                    if ids.len() == 1 {
+                        let escaped_id = format_links(&LiNo::Ref(ids[0].clone()), false);
+                        if less_parentheses && values.len() == 1 {
+                            format!("{}: {}", escaped_id, formatted_values)
+                        } else {
+                            format!("({}: {})", escaped_id, formatted_values)
+                        }
                     } else {
-                        format!("({}: {})", escaped_id, formatted_values)
+                        format!("({})", formatted_values)
                     }
                 } else if less_parentheses && values.iter().all(|v| matches!(v, LiNo::Ref(_))) {
                     // All values are references, can skip parentheses
@@ -96,8 +104,8 @@ fn quoted_references_test() {
     assert!(parsed.is_link());
     if let LiNo::Link { values, .. } = &parsed {
         assert_eq!(values.len(), 1);
-        if let LiNo::Link { id, values } = &values[0] {
-            assert_eq!(id.as_deref(), Some("a"));
+        if let LiNo::Link { ids, values } = &values[0] {
+            assert_eq!(ids.as_ref().unwrap()[0], "a");
             assert_eq!(values.len(), 2);
         }
     }
@@ -110,8 +118,8 @@ fn quoted_references_with_spaces_test() {
     assert!(parsed.is_link());
     if let LiNo::Link { values, .. } = &parsed {
         assert_eq!(values.len(), 1);
-        if let LiNo::Link { id, values } = &values[0] {
-            assert_eq!(id.as_deref(), Some("a a"));
+        if let LiNo::Link { ids, values } = &values[0] {
+            assert_eq!(ids.as_ref().unwrap()[0], "a a");
             assert_eq!(values.len(), 2);
         }
     }
@@ -122,8 +130,8 @@ fn parse_simple_reference() {
     let input = "test";
     let result = parse_lino(input).unwrap();
     assert!(result.is_link());
-    if let LiNo::Link { id, values } = &result {
-        assert!(id.is_none());
+    if let LiNo::Link { ids, values } = &result {
+        assert!(ids.is_none());
         assert_eq!(values.len(), 1);
         if let LiNo::Ref(id) = &values[0] {
             assert_eq!(id, "test");
@@ -138,8 +146,8 @@ fn parse_reference_with_colon_and_values() {
     assert!(result.is_link());
     if let LiNo::Link { values, .. } = &result {
         assert_eq!(values.len(), 1);
-        if let LiNo::Link { id, values } = &values[0] {
-            assert_eq!(id.as_deref(), Some("parent"));
+        if let LiNo::Link { ids, values } = &values[0] {
+            assert_eq!(ids.as_ref().unwrap()[0], "parent");
             assert_eq!(values.len(), 2);
         }
     }
@@ -152,8 +160,8 @@ fn parse_multiline_link() {
     assert!(result.is_link());
     if let LiNo::Link { values, .. } = &result {
         assert_eq!(values.len(), 1);
-        if let LiNo::Link { id, values } = &values[0] {
-            assert_eq!(id.as_deref(), Some("parent"));
+        if let LiNo::Link { ids, values } = &values[0] {
+            assert_eq!(ids.as_ref().unwrap()[0], "parent");
             assert_eq!(values.len(), 2);
         }
     }
@@ -210,8 +218,8 @@ fn test_singlet_link() {
     let input = "(singlet)";
     let result = parse_lino(input).unwrap();
     assert!(result.is_link());
-    if let LiNo::Link { id, values } = &result {
-        assert!(id.is_none());
+    if let LiNo::Link { ids, values } = &result {
+        assert!(ids.is_none());
         assert_eq!(values.len(), 1);
         if let LiNo::Ref(ref_id) = &values[0] {
             assert_eq!(ref_id, "singlet");
@@ -336,8 +344,8 @@ fn test_parse_quoted_references_values_only() {
     assert_eq!(links.len(), 1);
     // Should have 2 values
     match &links[0] {
-        links_notation::LiNo::Link { id, values } => {
-            assert_eq!(id, &None);
+        links_notation::LiNo::Link { ids, values } => {
+            assert_eq!(ids, &None);
             assert_eq!(values.len(), 2);
         }
         _ => panic!("Expected Link"),
@@ -400,8 +408,8 @@ fn test_quoted_references_with_spaces_in_link() {
 
     assert_eq!(result.len(), 1);
     match &result[0] {
-        links_notation::LiNo::Link { id, values } => {
-            assert_eq!(id, &Some("id".to_string()));
+        links_notation::LiNo::Link { ids, values } => {
+            assert_eq!(ids, &Some(vec!["id".to_string()]));
             assert_eq!(values.len(), 1);
         }
         _ => panic!("Expected Link"),
@@ -417,8 +425,8 @@ fn test_quoted_references_with_special_chars() {
 
     assert_eq!(result.len(), 1);
     match &result[0] {
-        links_notation::LiNo::Link { id, values } => {
-            assert_eq!(id, &None);
+        links_notation::LiNo::Link { ids, values } => {
+            assert_eq!(ids, &None);
             assert_eq!(values.len(), 2);
         }
         _ => panic!("Expected Link"),
@@ -434,8 +442,8 @@ fn test_single_line_with_id() {
 
     assert!(!result.is_empty());
     match &result[0] {
-        links_notation::LiNo::Link { id, values } => {
-            assert_eq!(id, &Some("myid".to_string()));
+        links_notation::LiNo::Link { ids, values } => {
+            assert_eq!(ids, &Some(vec!["myid".to_string()]));
             assert_eq!(values.len(), 2);
         }
         _ => panic!("Expected Link"),
@@ -451,8 +459,8 @@ fn test_single_line_without_id() {
 
     assert_eq!(result.len(), 1);
     match &result[0] {
-        links_notation::LiNo::Link { id, values } => {
-            assert_eq!(id, &None);
+        links_notation::LiNo::Link { ids, values } => {
+            assert_eq!(ids, &None);
             assert_eq!(values.len(), 2);
         }
         _ => panic!("Expected Link"),

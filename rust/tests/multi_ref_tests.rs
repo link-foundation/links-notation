@@ -11,9 +11,9 @@ fn test_parses_two_word_multi_reference_id() {
     let result = parse_lino_to_links("(some example: value)").expect("Failed to parse");
     assert_eq!(result.len(), 1);
     match &result[0] {
-        LiNo::Link { id, values } => {
-            // Multi-word ID should be joined with space
-            assert_eq!(id.as_ref().unwrap(), "some example");
+        LiNo::Link { ids, values } => {
+            // Multi-word ID is now stored as separate words
+            assert_eq!(ids.as_ref().unwrap(), &vec!["some".to_string(), "example".to_string()]);
             assert_eq!(values.len(), 1);
         }
         _ => panic!("Expected Link"),
@@ -25,8 +25,8 @@ fn test_parses_three_word_multi_reference_id() {
     let result = parse_lino_to_links("(new york city: value)").expect("Failed to parse");
     assert_eq!(result.len(), 1);
     match &result[0] {
-        LiNo::Link { id, .. } => {
-            assert_eq!(id.as_ref().unwrap(), "new york city");
+        LiNo::Link { ids, .. } => {
+            assert_eq!(ids.as_ref().unwrap(), &vec!["new".to_string(), "york".to_string(), "city".to_string()]);
         }
         _ => panic!("Expected Link"),
     }
@@ -37,8 +37,8 @@ fn test_single_word_id_backward_compatible() {
     let result = parse_lino_to_links("(papa: value)").expect("Failed to parse");
     assert_eq!(result.len(), 1);
     match &result[0] {
-        LiNo::Link { id, .. } => {
-            assert_eq!(id.as_ref().unwrap(), "papa");
+        LiNo::Link { ids, .. } => {
+            assert_eq!(ids.as_ref().unwrap(), &vec!["papa".to_string()]);
         }
         _ => panic!("Expected Link"),
     }
@@ -49,9 +49,9 @@ fn test_quoted_multi_word_id_backward_compatible() {
     let result = parse_lino_to_links("('some example': value)").expect("Failed to parse");
     assert_eq!(result.len(), 1);
     match &result[0] {
-        LiNo::Link { id, .. } => {
+        LiNo::Link { ids, .. } => {
             // Quoted ID should be preserved as-is
-            assert_eq!(id.as_ref().unwrap(), "some example");
+            assert_eq!(ids.as_ref().unwrap(), &vec!["some example".to_string()]);
         }
         _ => panic!("Expected Link"),
     }
@@ -81,8 +81,8 @@ fn test_indented_syntax_multi_reference() {
     let result = parse_lino_to_links(input).expect("Failed to parse");
     assert_eq!(result.len(), 1);
     match &result[0] {
-        LiNo::Link { id, values } => {
-            assert_eq!(id.as_ref().unwrap(), "some example");
+        LiNo::Link { ids, values } => {
+            assert_eq!(ids.as_ref().unwrap(), &vec!["some".to_string(), "example".to_string()]);
             assert_eq!(values.len(), 2);
         }
         _ => panic!("Expected Link"),
@@ -97,8 +97,8 @@ fn test_values_include_multi_reference_context() {
     let result = parse_lino_to_links(input).expect("Failed to parse");
     assert_eq!(result.len(), 1);
     match &result[0] {
-        LiNo::Link { id, values } => {
-            assert_eq!(id.as_ref().unwrap(), "some example");
+        LiNo::Link { ids, values } => {
+            assert_eq!(ids.as_ref().unwrap(), &vec!["some".to_string(), "example".to_string()]);
             // Values should include "some", "example", "is", "a", "link"
             // (context-aware grouping not implemented in Rust yet)
             assert!(values.len() >= 4);
@@ -112,8 +112,8 @@ fn test_backward_compatibility_single_line() {
     let result = parse_lino_to_links("papa: loves mama").expect("Failed to parse");
     assert_eq!(result.len(), 1);
     match &result[0] {
-        LiNo::Link { id, values } => {
-            assert_eq!(id.as_ref().unwrap(), "papa");
+        LiNo::Link { ids, values } => {
+            assert_eq!(ids.as_ref().unwrap(), &vec!["papa".to_string()]);
             assert_eq!(values.len(), 2);
         }
         _ => panic!("Expected Link"),
@@ -125,8 +125,8 @@ fn test_backward_compatibility_parenthesized() {
     let result = parse_lino_to_links("(papa: loves mama)").expect("Failed to parse");
     assert_eq!(result.len(), 1);
     match &result[0] {
-        LiNo::Link { id, values } => {
-            assert_eq!(id.as_ref().unwrap(), "papa");
+        LiNo::Link { ids, values } => {
+            assert_eq!(ids.as_ref().unwrap(), &vec!["papa".to_string()]);
             assert_eq!(values.len(), 2);
         }
         _ => panic!("Expected Link"),
@@ -138,15 +138,15 @@ fn test_backward_compatibility_nested() {
     let result = parse_lino_to_links("(outer: (inner: value))").expect("Failed to parse");
     assert_eq!(result.len(), 1);
     match &result[0] {
-        LiNo::Link { id, values } => {
-            assert_eq!(id.as_ref().unwrap(), "outer");
+        LiNo::Link { ids, values } => {
+            assert_eq!(ids.as_ref().unwrap(), &vec!["outer".to_string()]);
             assert_eq!(values.len(), 1);
             match &values[0] {
                 LiNo::Link {
-                    id: inner_id,
+                    ids: inner_ids,
                     values: inner_values,
                 } => {
-                    assert_eq!(inner_id.as_ref().unwrap(), "inner");
+                    assert_eq!(inner_ids.as_ref().unwrap(), &vec!["inner".to_string()]);
                     assert_eq!(inner_values.len(), 1);
                 }
                 _ => panic!("Expected nested Link"),
