@@ -117,7 +117,8 @@ func (l *Link) Format(lessParentheses bool) string {
 	}
 
 	// Link with ID and values
-	idStr := escapeReference(*l.ID)
+	// For multi-word IDs in parenthesized form, don't quote if only spaces
+	idStr := escapeReferenceForParenthesizedID(*l.ID)
 	withColon := idStr + ": " + valuesStr
 	if lessParentheses && !needsParentheses(*l.ID) {
 		return withColon
@@ -171,7 +172,7 @@ func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) stri
 
 		var testLine string
 		if l.ID != nil {
-			idStr := escapeReference(*l.ID)
+			idStr := escapeReferenceForParenthesizedID(*l.ID)
 			if config.LessParentheses {
 				testLine = idStr + ": " + valuesStr
 			} else {
@@ -225,7 +226,7 @@ func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) stri
 	}
 
 	// Link with ID and values
-	idStr := escapeReference(*l.ID)
+	idStr := escapeReferenceForParenthesizedID(*l.ID)
 	withColon := idStr + ": " + valuesStr
 	if config.LessParentheses && !needsParentheses(*l.ID) {
 		return withColon
@@ -244,7 +245,7 @@ func (l *Link) formatIndented(config *FormatConfig) string {
 	}
 
 	// Link with ID - format as id:\n  value1\n  value2
-	idStr := escapeReference(*l.ID)
+	idStr := escapeReferenceForIndentedID(*l.ID)
 	lines := []string{idStr + ":"}
 	for _, v := range l.Values {
 		lines = append(lines, config.IndentString+formatValue(v))
@@ -315,6 +316,58 @@ func escapeReference(reference string) string {
 
 	// No quoting needed
 	return reference
+}
+
+// escapeReferenceForParenthesizedID escapes a reference for use as an ID in parenthesized form.
+// Multi-word IDs like "some example" don't need quotes when inside parentheses with a colon.
+func escapeReferenceForParenthesizedID(reference string) string {
+	if reference == "" || strings.TrimSpace(reference) == "" {
+		return ""
+	}
+
+	hasSingleQuote := strings.Contains(reference, "'")
+	hasDoubleQuote := strings.Contains(reference, "\"")
+
+	// Check if quoting is needed for reasons other than spaces
+	needsQuotingForOtherReasons :=
+		strings.Contains(reference, ":") ||
+		strings.Contains(reference, "(") ||
+		strings.Contains(reference, ")") ||
+		strings.Contains(reference, "\t") ||
+		strings.Contains(reference, "\n") ||
+		strings.Contains(reference, "\r") ||
+		hasDoubleQuote ||
+		hasSingleQuote
+
+	// Handle edge case: reference contains both single and double quotes
+	if hasSingleQuote && hasDoubleQuote {
+		return "'" + strings.ReplaceAll(reference, "'", "\\'") + "'"
+	}
+
+	// Prefer single quotes if double quotes are present
+	if hasDoubleQuote {
+		return "'" + reference + "'"
+	}
+
+	// Use double quotes if single quotes are present
+	if hasSingleQuote {
+		return "\"" + reference + "\""
+	}
+
+	// Use single quotes for special characters (but not for spaces alone)
+	if needsQuotingForOtherReasons {
+		return "'" + reference + "'"
+	}
+
+	// Multi-word IDs (only spaces) don't need quoting in parenthesized form
+	return reference
+}
+
+// escapeReferenceForIndentedID escapes a reference for use as an ID in indented syntax.
+// Multi-word IDs like "some example" don't need quotes when followed by a colon.
+func escapeReferenceForIndentedID(reference string) string {
+	// Same logic as parenthesized IDs
+	return escapeReferenceForParenthesizedID(reference)
 }
 
 // needsParentheses checks if a string needs to be wrapped in parentheses.

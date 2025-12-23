@@ -185,6 +185,56 @@ public class Link {
   }
 
   /**
+   * Escape a reference for use as an ID in parenthesized form. Multi-word IDs like "some example"
+   * don't need quotes when inside parentheses with a colon.
+   *
+   * @param reference the reference to escape
+   * @return the escaped reference
+   */
+  private static String escapeReferenceForParenthesizedId(String reference) {
+    if (reference == null || reference.trim().isEmpty()) {
+      return "";
+    }
+
+    boolean hasSingleQuote = reference.contains("'");
+    boolean hasDoubleQuote = reference.contains("\"");
+
+    // Check if quoting is needed for reasons other than spaces
+    boolean needsQuotingForOtherReasons =
+        reference.contains(":")
+            || reference.contains("(")
+            || reference.contains(")")
+            || reference.contains("\t")
+            || reference.contains("\n")
+            || reference.contains("\r")
+            || hasDoubleQuote
+            || hasSingleQuote;
+
+    // Handle edge case: reference contains both single and double quotes
+    if (hasSingleQuote && hasDoubleQuote) {
+      return "'" + reference.replace("'", "\\'") + "'";
+    }
+
+    // Prefer single quotes if double quotes are present
+    if (hasDoubleQuote) {
+      return "'" + reference + "'";
+    }
+
+    // Use double quotes if single quotes are present
+    if (hasSingleQuote) {
+      return "\"" + reference + "\"";
+    }
+
+    // Use single quotes for special characters (but not for spaces alone)
+    if (needsQuotingForOtherReasons) {
+      return "'" + reference + "'";
+    }
+
+    // Multi-word IDs (only spaces) don't need quoting in parenthesized form
+    return reference;
+  }
+
+  /**
    * Convert to string using either just ID or full format.
    *
    * @return string representation
@@ -278,7 +328,8 @@ public class Link {
     }
 
     // Link with ID and values
-    String idStr = escapeReference(id);
+    // For multi-word IDs in parenthesized form, don't quote if only spaces
+    String idStr = escapeReferenceForParenthesizedId(id);
     String withColon = idStr + ": " + valuesStr;
     return lessParentheses && !needsParentheses(id) ? withColon : "(" + withColon + ")";
   }
