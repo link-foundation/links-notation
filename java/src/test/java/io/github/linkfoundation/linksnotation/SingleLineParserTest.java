@@ -52,7 +52,8 @@ class SingleLineParserTest {
   @Test
   void testQuotedReferencesWithSpaces() throws ParseException {
     String source = "('a a': 'b b' \"c c\")";
-    String expected = "('a a': 'b b' 'c c')";
+    // Multi-word IDs are formatted without quotes in parenthesized form (issue #184)
+    String expected = "(a a: 'b b' 'c c')";
     List<Link> links = parser.parse(source);
     String formattedLinks = Link.formatLinks(links);
     assertEquals(expected, formattedLinks);
