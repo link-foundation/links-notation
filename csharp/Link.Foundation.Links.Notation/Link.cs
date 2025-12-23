@@ -133,7 +133,6 @@ namespace Link.Foundation.Links.Notation
 
         /// <summary>
         /// Escapes a reference string for safe use in Links Notation format by adding quotes if necessary.
-        /// Multi-word references (space-separated simple words) are NOT quoted to support multi-reference syntax.
         /// </summary>
         /// <param name="reference">The reference string to escape.</param>
         /// <returns>The escaped reference string with appropriate quoting.</returns>
@@ -143,12 +142,11 @@ namespace Link.Foundation.Links.Notation
             {
                 return "";
             }
-            // Check for special characters that require quoting
-            // Note: spaces alone do NOT require quoting (multi-reference support)
             if (
                     reference.Contains(":") ||
                     reference.Contains("(") ||
                     reference.Contains(")") ||
+                    reference.Contains(" ") ||
                     reference.Contains("\t") ||
                     reference.Contains("\n") ||
                     reference.Contains("\r") ||
@@ -163,7 +161,6 @@ namespace Link.Foundation.Links.Notation
             }
             else
             {
-                // Multi-word references and simple references are returned as-is
                 return reference;
             }
         }

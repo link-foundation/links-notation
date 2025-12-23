@@ -85,8 +85,8 @@ func TestFormatMultiReferenceID(t *testing.T) {
 		t.Fatalf("Parse failed: %v", err)
 	}
 	formatted := Format(result)
-	// Multi-reference IDs are formatted with space-separated words
-	expected := "(some example: value)"
+	// Multi-reference IDs are formatted with quotes (normalized form)
+	expected := "('some example': value)"
 	if formatted != expected {
 		t.Errorf("Expected '%s', got '%s'", expected, formatted)
 	}
@@ -99,9 +99,10 @@ func TestRoundTripMultiReference(t *testing.T) {
 		t.Fatalf("Parse failed: %v", err)
 	}
 	formatted := Format(result)
-	// Round-trip preserves the multi-word ID structure
-	if formatted != input {
-		t.Errorf("Expected '%s', got '%s'", input, formatted)
+	// Round-trip normalizes multi-word ID to quoted form
+	expected := "('new york city': great)"
+	if formatted != expected {
+		t.Errorf("Expected '%s', got '%s'", expected, formatted)
 	}
 }
 

@@ -57,8 +57,8 @@ public class MultiRefTest {
     Parser parser = new Parser();
     List<Link> result = parser.parse("(some example: value)");
     String formatted = Link.formatLinks(result);
-    // Multi-reference IDs are formatted with space-separated words
-    assertEquals("(some example: value)", formatted);
+    // Multi-reference IDs are formatted with quotes (normalized form)
+    assertEquals("('some example': value)", formatted);
   }
 
   @Test
@@ -67,8 +67,8 @@ public class MultiRefTest {
     String input = "(new york city: great)";
     List<Link> result = parser.parse(input);
     String formatted = Link.formatLinks(result);
-    // Round-trip preserves the multi-word ID structure
-    assertEquals(input, formatted);
+    // Round-trip normalizes multi-word ID to quoted form
+    assertEquals("('new york city': great)", formatted);
   }
 
   @Test

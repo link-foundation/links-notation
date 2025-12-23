@@ -49,8 +49,7 @@ namespace Link.Foundation.Links.Notation.Tests
         public static void QuotedReferencesWithSpacesTest()
         {
             var source = @"('a a': 'b b' ""c c"")";
-            // Multi-reference support: spaces alone do NOT require quoting on output
-            var target = @"(a a: b b c c)";
+            var target = @"('a a': 'b b' 'c c')";
             var parser = new Parser();
             var links = parser.Parse(source);
             var formattedLinks = links.Format();
@@ -165,8 +164,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Equal("has space", links[0].Values![0].Id);
             Assert.Equal("has:colon", links[0].Values![1].Id);
             var formatted = links.Format();
-            // Multi-reference support: spaces alone do NOT require quoting on output
-            Assert.Equal("(has space 'has:colon')", formatted);
+            Assert.Equal("('has space' 'has:colon')", formatted);
         }
 
         [Fact]

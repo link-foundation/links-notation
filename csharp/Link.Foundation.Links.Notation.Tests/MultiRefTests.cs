@@ -55,8 +55,8 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
             var result = parser.Parse("(some example: value)");
             var formatted = result.Format();
-            // Multi-reference IDs are formatted without quotes
-            Assert.Equal("(some example: value)", formatted);
+            // Multi-reference IDs are formatted with quotes (normalized form)
+            Assert.Equal("('some example': value)", formatted);
         }
 
         [Fact]
@@ -66,8 +66,8 @@ namespace Link.Foundation.Links.Notation.Tests
             var input = "(new york city: great)";
             var result = parser.Parse(input);
             var formatted = result.Format();
-            // Round-trip preserves the multi-word ID structure
-            Assert.Equal("(new york city: great)", formatted);
+            // Round-trip normalizes multi-word ID to quoted form
+            Assert.Equal("('new york city': great)", formatted);
         }
 
         [Fact]
