@@ -49,7 +49,7 @@ namespace Link.Foundation.Links.Notation.Tests
         [Fact]
         public static void EmptyLinkTest()
         {
-            var link = new Link<string>(null, new List<Link<string>>());
+            var link = new Link<string>((string?)null, new List<Link<string>>());
             var output = link.ToString();
             Assert.Equal("()", output);
         }

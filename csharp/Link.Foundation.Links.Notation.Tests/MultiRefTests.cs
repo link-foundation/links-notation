@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Xunit;
 
 namespace Link.Foundation.Links.Notation.Tests
@@ -6,7 +8,8 @@ namespace Link.Foundation.Links.Notation.Tests
     /// Multi-Reference Feature Tests (Issue #184)
     /// Tests for multi-word references without quotes:
     /// - (some example: some example is a link)
-    /// - ID as multi-word string: "some example"
+    /// - Ids as array: ["some", "example"]
+    /// - Id property throws for multi-refs, use Ids instead
     /// </summary>
     public static class MultiRefTests
     {
@@ -16,8 +19,10 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
             var result = parser.Parse("(some example: value)");
             Assert.Single(result);
-            // Multi-word ID should be joined with space
-            Assert.Equal("some example", result[0].Id);
+            // Use Ids property for multi-references
+            Assert.NotNull(result[0].Ids);
+            Assert.Equal(2, result[0].Ids.Count);
+            Assert.Equal(new[] { "some", "example" }, result[0].Ids);
             Assert.Single(result[0].Values);
         }
 
@@ -27,7 +32,21 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
             var result = parser.Parse("(new york city: value)");
             Assert.Single(result);
-            Assert.Equal("new york city", result[0].Id);
+            Assert.NotNull(result[0].Ids);
+            Assert.Equal(3, result[0].Ids.Count);
+            Assert.Equal(new[] { "new", "york", "city" }, result[0].Ids);
+        }
+
+        [Fact]
+        public static void IdPropertyThrowsForMultiRef()
+        {
+            var parser = new Parser();
+            var result = parser.Parse("(some example: value)");
+            Assert.Single(result);
+            // Id property should throw MultiReferenceException for multi-refs
+            var ex = Assert.Throws<MultiReferenceException>(() => result[0].Id);
+            Assert.Equal(2, ex.ReferenceCount);
+            Assert.Contains("Use the 'Ids' property instead of 'Id'", ex.Message);
         }
 
         [Fact]
@@ -36,7 +55,11 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
             var result = parser.Parse("(papa: value)");
             Assert.Single(result);
+            // Single-word: Id returns string, Ids returns array with single element
             Assert.Equal("papa", result[0].Id);
+            Assert.NotNull(result[0].Ids);
+            Assert.Single(result[0].Ids);
+            Assert.Equal(new[] { "papa" }, result[0].Ids);
         }
 
         [Fact]
@@ -45,8 +68,11 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
             var result = parser.Parse("('some example': value)");
             Assert.Single(result);
-            // Quoted ID should be preserved as-is
+            // Quoted multi-word is a single reference, so Id works
             Assert.Equal("some example", result[0].Id);
+            Assert.NotNull(result[0].Ids);
+            Assert.Single(result[0].Ids);
+            Assert.Equal(new[] { "some example" }, result[0].Ids);
         }
 
         [Fact]
@@ -77,7 +103,8 @@ namespace Link.Foundation.Links.Notation.Tests
             var input = "some example:\n  value1\n  value2";
             var result = parser.Parse(input);
             Assert.Single(result);
-            Assert.Equal("some example", result[0].Id);
+            Assert.NotNull(result[0].Ids);
+            Assert.Equal(new[] { "some", "example" }, result[0].Ids);
             Assert.Equal(2, result[0].Values?.Count);
         }
 
@@ -118,11 +145,33 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
             var result = parser.Parse("(some example: one two three)");
             Assert.Single(result);
-            Assert.Equal("some example", result[0].Id);
+            // Ids should contain the multi-ref parts
+            Assert.NotNull(result[0].Ids);
+            Assert.Equal(new[] { "some", "example" }, result[0].Ids);
+            // Id should throw for multi-ref
+            Assert.Throws<MultiReferenceException>(() => result[0].Id);
+            // Values should be 3 separate references
             Assert.Equal(3, result[0].Values?.Count);
             Assert.Equal("one", result[0].Values?[0].Id);
             Assert.Equal("two", result[0].Values?[1].Id);
             Assert.Equal("three", result[0].Values?[2].Id);
+        }
+
+        [Fact]
+        public static void MultiRefValuesAreSeparateReferences()
+        {
+            // Per issue #184 feedback: context-aware parsing is out of scope
+            var parser = new Parser();
+            var result = parser.Parse("(some example: some example is a link)");
+            Assert.NotNull(result[0].Ids);
+            Assert.Equal(new[] { "some", "example" }, result[0].Ids);
+            // Values should be 5 separate references (no context-aware grouping)
+            Assert.Equal(5, result[0].Values?.Count);
+            Assert.Equal("some", result[0].Values?[0].Id);
+            Assert.Equal("example", result[0].Values?[1].Id);
+            Assert.Equal("is", result[0].Values?[2].Id);
+            Assert.Equal("a", result[0].Values?[3].Id);
+            Assert.Equal("link", result[0].Values?[4].Id);
         }
     }
 }
