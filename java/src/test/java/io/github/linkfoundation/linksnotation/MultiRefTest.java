@@ -2,6 +2,7 @@ package io.github.linkfoundation.linksnotation;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +23,9 @@ public class MultiRefTest {
     Parser parser = new Parser();
     List<Link> result = parser.parse("(some example: value)");
     assertEquals(1, result.size());
-    // Multi-word ID should be joined with space
-    assertEquals("some example", result.get(0).getId());
+    // Multi-word ID should be in ids list and returned as joined string
+    assertNotNull(result.get(0).getIds());
+    assertEquals("some example", result.get(0).getIdString());
     assertEquals(1, result.get(0).getValues().size());
   }
 
@@ -32,7 +34,7 @@ public class MultiRefTest {
     Parser parser = new Parser();
     List<Link> result = parser.parse("(new york city: value)");
     assertEquals(1, result.size());
-    assertEquals("new york city", result.get(0).getId());
+    assertEquals("new york city", result.get(0).getIdString());
   }
 
   @Test
@@ -40,6 +42,7 @@ public class MultiRefTest {
     Parser parser = new Parser();
     List<Link> result = parser.parse("(papa: value)");
     assertEquals(1, result.size());
+    // Single-word ID should work with getId()
     assertEquals("papa", result.get(0).getId());
   }
 
@@ -48,7 +51,7 @@ public class MultiRefTest {
     Parser parser = new Parser();
     List<Link> result = parser.parse("('some example': value)");
     assertEquals(1, result.size());
-    // Quoted ID should be preserved as-is
+    // Quoted ID should be preserved as-is and work with getId()
     assertEquals("some example", result.get(0).getId());
   }
 
@@ -77,7 +80,7 @@ public class MultiRefTest {
     String input = "some example:\n  value1\n  value2";
     List<Link> result = parser.parse(input);
     assertEquals(1, result.size());
-    assertEquals("some example", result.get(0).getId());
+    assertEquals("some example", result.get(0).getIdString());
     assertEquals(2, result.get(0).getValues().size());
   }
 
@@ -89,7 +92,7 @@ public class MultiRefTest {
     String input = "(some example: some example is a link)";
     List<Link> result = parser.parse(input);
     assertEquals(1, result.size());
-    assertEquals("some example", result.get(0).getId());
+    assertEquals("some example", result.get(0).getIdString());
     // Values should be separate: "some", "example", "is", "a", "link"
     assertEquals(5, result.get(0).getValues().size());
   }
@@ -127,10 +130,27 @@ public class MultiRefTest {
     Parser parser = new Parser();
     List<Link> result = parser.parse("(some example: one two three)");
     assertEquals(1, result.size());
-    assertEquals("some example", result.get(0).getId());
+    assertEquals("some example", result.get(0).getIdString());
     assertEquals(3, result.get(0).getValues().size());
     assertEquals("one", result.get(0).getValues().get(0).getId());
     assertEquals("two", result.get(0).getValues().get(1).getId());
     assertEquals("three", result.get(0).getValues().get(2).getId());
+  }
+
+  @Test
+  public void testGetIdThrowsForMultiRef() {
+    // Create a link with multi-reference IDs manually
+    Link link = new Link(Arrays.asList("some", "example"));
+    assertThrows(MultiReferenceException.class, () -> link.getId());
+  }
+
+  @Test
+  public void testMultiReferenceExceptionDetails() {
+    Link link = new Link(Arrays.asList("some", "example"));
+    MultiReferenceException exception =
+        assertThrows(MultiReferenceException.class, () -> link.getId());
+    assertEquals(2, exception.getReferenceCount());
+    assertTrue(exception.getMessage().contains("2"));
+    assertTrue(exception.getMessage().contains("getIds()"));
   }
 }

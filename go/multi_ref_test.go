@@ -18,12 +18,13 @@ func TestParsesTwoWordMultiReferenceID(t *testing.T) {
 	if len(result) != 1 {
 		t.Fatalf("Expected 1 link, got %d", len(result))
 	}
-	// Multi-word ID should be joined with space
-	if result[0].ID == nil {
-		t.Fatal("Expected ID to be set")
+	// Multi-word ID should be in IDs array
+	if result[0].IDs == nil || len(result[0].IDs) == 0 {
+		t.Fatal("Expected IDs to be set")
 	}
-	if *result[0].ID != "some example" {
-		t.Errorf("Expected ID 'some example', got '%s'", *result[0].ID)
+	idStr := result[0].GetIdString()
+	if idStr == nil || *idStr != "some example" {
+		t.Errorf("Expected ID 'some example', got '%v'", idStr)
 	}
 	if len(result[0].Values) != 1 {
 		t.Errorf("Expected 1 value, got %d", len(result[0].Values))
@@ -38,11 +39,12 @@ func TestParsesThreeWordMultiReferenceID(t *testing.T) {
 	if len(result) != 1 {
 		t.Fatalf("Expected 1 link, got %d", len(result))
 	}
-	if result[0].ID == nil {
-		t.Fatal("Expected ID to be set")
+	if result[0].IDs == nil || len(result[0].IDs) == 0 {
+		t.Fatal("Expected IDs to be set")
 	}
-	if *result[0].ID != "new york city" {
-		t.Errorf("Expected ID 'new york city', got '%s'", *result[0].ID)
+	idStr := result[0].GetIdString()
+	if idStr == nil || *idStr != "new york city" {
+		t.Errorf("Expected ID 'new york city', got '%v'", idStr)
 	}
 }
 
@@ -54,11 +56,16 @@ func TestSingleWordIDBackwardCompatible(t *testing.T) {
 	if len(result) != 1 {
 		t.Fatalf("Expected 1 link, got %d", len(result))
 	}
-	if result[0].ID == nil {
-		t.Fatal("Expected ID to be set")
+	if result[0].IDs == nil || len(result[0].IDs) == 0 {
+		t.Fatal("Expected IDs to be set")
 	}
-	if *result[0].ID != "papa" {
-		t.Errorf("Expected ID 'papa', got '%s'", *result[0].ID)
+	// Single word ID should work with Id() method
+	id, err := result[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "papa" {
+		t.Errorf("Expected ID 'papa', got '%v'", id)
 	}
 }
 
@@ -70,12 +77,16 @@ func TestQuotedMultiWordIDBackwardCompatible(t *testing.T) {
 	if len(result) != 1 {
 		t.Fatalf("Expected 1 link, got %d", len(result))
 	}
-	if result[0].ID == nil {
-		t.Fatal("Expected ID to be set")
+	if result[0].IDs == nil || len(result[0].IDs) == 0 {
+		t.Fatal("Expected IDs to be set")
 	}
-	// Quoted ID should be preserved as-is
-	if *result[0].ID != "some example" {
-		t.Errorf("Expected ID 'some example', got '%s'", *result[0].ID)
+	// Quoted ID should be preserved as-is (single reference)
+	id, err := result[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "some example" {
+		t.Errorf("Expected ID 'some example', got '%v'", id)
 	}
 }
 
@@ -115,11 +126,12 @@ func TestIndentedSyntaxMultiReference(t *testing.T) {
 	if len(result) != 1 {
 		t.Fatalf("Expected 1 link, got %d", len(result))
 	}
-	if result[0].ID == nil {
-		t.Fatal("Expected ID to be set")
+	if result[0].IDs == nil || len(result[0].IDs) == 0 {
+		t.Fatal("Expected IDs to be set")
 	}
-	if *result[0].ID != "some example" {
-		t.Errorf("Expected ID 'some example', got '%s'", *result[0].ID)
+	idStr := result[0].GetIdString()
+	if idStr == nil || *idStr != "some example" {
+		t.Errorf("Expected ID 'some example', got '%v'", idStr)
 	}
 	if len(result[0].Values) != 2 {
 		t.Errorf("Expected 2 values, got %d", len(result[0].Values))
@@ -137,11 +149,12 @@ func TestValuesIncludeMultiReferenceContext(t *testing.T) {
 	if len(result) != 1 {
 		t.Fatalf("Expected 1 link, got %d", len(result))
 	}
-	if result[0].ID == nil {
-		t.Fatal("Expected ID to be set")
+	if result[0].IDs == nil || len(result[0].IDs) == 0 {
+		t.Fatal("Expected IDs to be set")
 	}
-	if *result[0].ID != "some example" {
-		t.Errorf("Expected ID 'some example', got '%s'", *result[0].ID)
+	idStr := result[0].GetIdString()
+	if idStr == nil || *idStr != "some example" {
+		t.Errorf("Expected ID 'some example', got '%v'", idStr)
 	}
 	// Values should be separate: "some", "example", "is", "a", "link"
 	if len(result[0].Values) != 5 {
@@ -157,11 +170,15 @@ func TestBackwardCompatibilitySingleLine(t *testing.T) {
 	if len(result) != 1 {
 		t.Fatalf("Expected 1 link, got %d", len(result))
 	}
-	if result[0].ID == nil {
-		t.Fatal("Expected ID to be set")
+	if result[0].IDs == nil || len(result[0].IDs) == 0 {
+		t.Fatal("Expected IDs to be set")
 	}
-	if *result[0].ID != "papa" {
-		t.Errorf("Expected ID 'papa', got '%s'", *result[0].ID)
+	id, err := result[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "papa" {
+		t.Errorf("Expected ID 'papa', got '%v'", id)
 	}
 	if len(result[0].Values) != 2 {
 		t.Errorf("Expected 2 values, got %d", len(result[0].Values))
@@ -176,11 +193,15 @@ func TestBackwardCompatibilityParenthesized(t *testing.T) {
 	if len(result) != 1 {
 		t.Fatalf("Expected 1 link, got %d", len(result))
 	}
-	if result[0].ID == nil {
-		t.Fatal("Expected ID to be set")
+	if result[0].IDs == nil || len(result[0].IDs) == 0 {
+		t.Fatal("Expected IDs to be set")
 	}
-	if *result[0].ID != "papa" {
-		t.Errorf("Expected ID 'papa', got '%s'", *result[0].ID)
+	id, err := result[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "papa" {
+		t.Errorf("Expected ID 'papa', got '%v'", id)
 	}
 	if len(result[0].Values) != 2 {
 		t.Errorf("Expected 2 values, got %d", len(result[0].Values))
@@ -195,21 +216,29 @@ func TestBackwardCompatibilityNested(t *testing.T) {
 	if len(result) != 1 {
 		t.Fatalf("Expected 1 link, got %d", len(result))
 	}
-	if result[0].ID == nil {
-		t.Fatal("Expected ID to be set")
+	if result[0].IDs == nil || len(result[0].IDs) == 0 {
+		t.Fatal("Expected IDs to be set")
 	}
-	if *result[0].ID != "outer" {
-		t.Errorf("Expected ID 'outer', got '%s'", *result[0].ID)
+	id, err := result[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "outer" {
+		t.Errorf("Expected ID 'outer', got '%v'", id)
 	}
 	if len(result[0].Values) != 1 {
 		t.Errorf("Expected 1 value, got %d", len(result[0].Values))
 	}
 	innerLink := result[0].Values[0]
-	if innerLink.ID == nil {
-		t.Fatal("Expected inner ID to be set")
+	if innerLink.IDs == nil || len(innerLink.IDs) == 0 {
+		t.Fatal("Expected inner IDs to be set")
 	}
-	if *innerLink.ID != "inner" {
-		t.Errorf("Expected inner ID 'inner', got '%s'", *innerLink.ID)
+	innerId, err := innerLink.Id()
+	if err != nil {
+		t.Fatalf("Inner Id() failed: %v", err)
+	}
+	if innerId == nil || *innerId != "inner" {
+		t.Errorf("Expected inner ID 'inner', got '%v'", innerId)
 	}
 }
 
@@ -221,23 +250,42 @@ func TestMultiRefWithMultipleValues(t *testing.T) {
 	if len(result) != 1 {
 		t.Fatalf("Expected 1 link, got %d", len(result))
 	}
-	if result[0].ID == nil {
-		t.Fatal("Expected ID to be set")
+	if result[0].IDs == nil || len(result[0].IDs) == 0 {
+		t.Fatal("Expected IDs to be set")
 	}
-	if *result[0].ID != "some example" {
-		t.Errorf("Expected ID 'some example', got '%s'", *result[0].ID)
+	idStr := result[0].GetIdString()
+	if idStr == nil || *idStr != "some example" {
+		t.Errorf("Expected ID 'some example', got '%v'", idStr)
 	}
 	if len(result[0].Values) != 3 {
 		t.Errorf("Expected 3 values, got %d", len(result[0].Values))
 	}
 	expectedValues := []string{"one", "two", "three"}
 	for i, expectedValue := range expectedValues {
-		if result[0].Values[i].ID == nil {
-			t.Errorf("Expected value %d to have ID", i)
+		id, err := result[0].Values[i].Id()
+		if err != nil {
+			t.Errorf("Value %d Id() failed: %v", i, err)
 			continue
 		}
-		if *result[0].Values[i].ID != expectedValue {
-			t.Errorf("Expected value %d to be '%s', got '%s'", i, expectedValue, *result[0].Values[i].ID)
+		if id == nil || *id != expectedValue {
+			t.Errorf("Expected value %d to be '%s', got '%v'", i, expectedValue, id)
 		}
+	}
+}
+
+// Test that Id() returns error for multi-reference IDs
+func TestIdMethodReturnsErrorForMultiRef(t *testing.T) {
+	// Create a link with multi-reference IDs manually
+	link := &Link{IDs: []string{"some", "example"}}
+	_, err := link.Id()
+	if err == nil {
+		t.Fatal("Expected error for multi-reference ID, got nil")
+	}
+	multiRefErr, ok := err.(*MultiRefError)
+	if !ok {
+		t.Fatalf("Expected MultiRefError, got %T", err)
+	}
+	if multiRefErr.Count != 2 {
+		t.Errorf("Expected count 2, got %d", multiRefErr.Count)
 	}
 }
