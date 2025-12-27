@@ -1,6 +1,7 @@
 package io.github.linkfoundation.linksnotation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -11,49 +12,102 @@ import java.util.stream.Collectors;
  * <p>A link can be:
  *
  * <ul>
- *   <li>A simple reference (id only, no values)
- *   <li>A link with id and values
- *   <li>A link with only values (no id)
+ *   <li>A simple reference (ids only, no values)
+ *   <li>A link with ids and values
+ *   <li>A link with only values (no ids)
  * </ul>
+ *
+ * <p>For multi-reference IDs (e.g., "some example" before colon), use the {@link #getIds()} method.
+ * The {@link #getId()} method will throw {@link MultiReferenceException} for multi-reference IDs.
  */
 public class Link {
 
-  private final String id;
+  private final List<String> ids;
   private final List<Link> values;
   private boolean isFromPathCombination = false;
 
-  /** Creates an empty link with no id and no values. */
+  /** Creates an empty link with no ids and no values. */
   public Link() {
-    this(null, null);
+    this((List<String>) null, null);
   }
 
   /**
-   * Creates a link with an id but no values.
+   * Creates a link with a single id but no values.
    *
    * @param id the link identifier
    */
   public Link(String id) {
-    this(id, null);
+    this(id != null ? Collections.singletonList(id) : null, null);
   }
 
   /**
-   * Creates a link with an id and values.
+   * Creates a link with multiple ids but no values.
+   *
+   * @param ids the list of link identifiers
+   */
+  public Link(List<String> ids) {
+    this(ids, (List<Link>) null);
+  }
+
+  /**
+   * Creates a link with a single id and values.
    *
    * @param id the link identifier (can be null)
    * @param values the list of child links (can be null)
    */
   public Link(String id, List<Link> values) {
-    this.id = id;
+    this(id != null ? Collections.singletonList(id) : null, values);
+  }
+
+  /**
+   * Creates a link with multiple ids and values.
+   *
+   * @param ids the list of link identifiers (can be null)
+   * @param values the list of child links (can be null)
+   */
+  public Link(List<String> ids, List<Link> values) {
+    this.ids = ids != null ? new ArrayList<>(ids) : null;
     this.values = values != null ? new ArrayList<>(values) : new ArrayList<>();
   }
 
   /**
-   * Gets the link identifier.
+   * Gets the link identifier (backward compatible).
+   *
+   * <p>For multi-reference IDs (more than one element in ids), this method throws {@link
+   * MultiReferenceException}. Use {@link #getIds()} for multi-reference access.
    *
    * @return the identifier, or null if not set
+   * @throws MultiReferenceException if the link has a multi-reference ID
    */
-  public String getId() {
-    return id;
+  public String getId() throws MultiReferenceException {
+    if (ids == null || ids.isEmpty()) {
+      return null;
+    }
+    if (ids.size() > 1) {
+      throw new MultiReferenceException(ids.size());
+    }
+    return ids.get(0);
+  }
+
+  /**
+   * Gets the list of link identifiers.
+   *
+   * @return the list of identifiers, or null if not set
+   */
+  public List<String> getIds() {
+    return ids;
+  }
+
+  /**
+   * Gets the ID as a joined string for formatting purposes. Returns null if ids is null or empty.
+   *
+   * @return the joined ID string, or null
+   */
+  public String getIdString() {
+    if (ids == null || ids.isEmpty()) {
+      return null;
+    }
+    return String.join(" ", ids);
   }
 
   /**
@@ -107,7 +161,7 @@ public class Link {
       return values.get(0);
     } else {
       List<Link> newValues = values.stream().map(Link::simplify).collect(Collectors.toList());
-      return new Link(id, newValues);
+      return new Link(ids, newValues);
     }
   }
 
@@ -121,7 +175,7 @@ public class Link {
     List<Link> combined = new ArrayList<>();
     combined.add(this);
     combined.add(other);
-    return new Link(null, combined);
+    return new Link((List<String>) null, combined);
   }
 
   /**
@@ -190,8 +244,9 @@ public class Link {
    * @return string representation
    */
   public String toLinkOrIdString() {
+    String idStr = getIdString();
     if (values.isEmpty()) {
-      return id == null ? "" : escapeReference(id);
+      return idStr == null ? "" : escapeReference(idStr);
     }
     return toString();
   }
@@ -207,12 +262,12 @@ public class Link {
     if (this == other) return true;
     if (!(other instanceof Link)) return false;
     Link link = (Link) other;
-    return Objects.equals(id, link.id) && Objects.equals(values, link.values);
+    return Objects.equals(ids, link.ids) && Objects.equals(values, link.values);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, values);
+    return Objects.hash(ids, values);
   }
 
   /**
@@ -243,32 +298,36 @@ public class Link {
    * @return formatted string
    */
   public String format(boolean lessParentheses, boolean isCompoundValue) {
+    String idStr = getIdString();
+
     // Empty link
-    if (id == null && values.isEmpty()) {
+    if (idStr == null && values.isEmpty()) {
       return lessParentheses ? "" : "()";
     }
 
     // Link with only ID, no values
     if (values.isEmpty()) {
-      String escapedId = escapeReference(id);
+      String escapedId = escapeReference(idStr);
       // When used as a value in a compound link, wrap in parentheses
       if (isCompoundValue) {
         return "(" + escapedId + ")";
       }
-      return lessParentheses && !needsParentheses(id) ? escapedId : "(" + escapedId + ")";
+      return lessParentheses && !needsParentheses(idStr) ? escapedId : "(" + escapedId + ")";
     }
 
     // Format values recursively
     String valuesStr = values.stream().map(this::formatValue).collect(Collectors.joining(" "));
 
     // Link with values only (null id)
-    if (id == null) {
+    if (idStr == null) {
       if (lessParentheses) {
         // Check if all values are simple (no nested values)
         boolean allSimple = values.stream().allMatch(v -> v.values.isEmpty());
         if (allSimple) {
           // Format each value without extra wrapping
-          return values.stream().map(v -> escapeReference(v.id)).collect(Collectors.joining(" "));
+          return values.stream()
+              .map(v -> escapeReference(v.getIdString()))
+              .collect(Collectors.joining(" "));
         }
         // For mixed or complex values in lessParentheses mode
         return valuesStr;
@@ -278,9 +337,9 @@ public class Link {
     }
 
     // Link with ID and values
-    String idStr = escapeReference(id);
-    String withColon = idStr + ": " + valuesStr;
-    return lessParentheses && !needsParentheses(id) ? withColon : "(" + withColon + ")";
+    String escapedId = escapeReference(idStr);
+    String withColon = escapedId + ": " + valuesStr;
+    return lessParentheses && !needsParentheses(idStr) ? withColon : "(" + withColon + ")";
   }
 
   /**
@@ -300,7 +359,7 @@ public class Link {
 
     // Simple link with just an ID - don't wrap in parentheses when used as a value
     if (value.values.isEmpty()) {
-      return escapeReference(value.id);
+      return escapeReference(value.getIdString());
     }
 
     // Complex value with its own structure - format it normally with parentheses

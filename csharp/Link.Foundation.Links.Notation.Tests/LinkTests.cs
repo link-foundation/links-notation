@@ -34,7 +34,7 @@ namespace Link.Foundation.Links.Notation.Tests
         public static void LinkToStringWithValuesOnlyTest()
         {
             var values = new List<Link<string>> { new Link<string>("value1"), new Link<string>("value2") };
-            var link = new Link<string>(null, values);
+            var link = new Link<string>((string?)null, values);
             Assert.Equal("(value1 value2)", link.ToString());
         }
 
@@ -97,7 +97,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Equal(link1, simplified1);
 
             // Test simplify with single value
-            var link2 = new Link<string>(null, new List<Link<string>> { new Link<string>("single", null) });
+            var link2 = new Link<string>((string?)null, new List<Link<string>> { new Link<string>("single", null) });
             var simplified2 = link2.Simplify();
             Assert.Equal("single", simplified2.Id);
             Assert.Null(simplified2.Values);

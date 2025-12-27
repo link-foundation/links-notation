@@ -32,7 +32,7 @@ namespace Link.Foundation.Links.Notation
 
             if (groups != null && groups.Count > 0)
             {
-                bool isIndentedIdSyntax = link.Id != null &&
+                bool isIndentedIdSyntax = (link.Ids != null && link.Ids.Count > 0) &&
                                           (link.Values == null || link.Values.Count == 0);
 
                 if (isIndentedIdSyntax && !parentDependency.HasValue)
@@ -44,7 +44,7 @@ namespace Link.Foundation.Links.Notation
                         childValues.Add(transformedLink);
                     }
 
-                    var linkWithChildren = new Link<TLinkAddress>(link.Id, childValues);
+                    var linkWithChildren = new Link<TLinkAddress>(link.Ids, childValues);
                     list.Add(linkWithChildren);
                 }
                 else
@@ -56,7 +56,7 @@ namespace Link.Foundation.Links.Notation
                         var childLink = childGroup.Link;
                         var childGroups = childGroup.Groups;
 
-                        if (childLink.Id != null &&
+                        if ((childLink.Ids != null && childLink.Ids.Count > 0) &&
                             (childLink.Values == null || childLink.Values.Count == 0) &&
                             childGroups != null && childGroups.Count > 0)
                         {
@@ -91,7 +91,7 @@ namespace Link.Foundation.Links.Notation
             var groups = group.Groups;
 
             if (groups != null && groups.Count > 0 &&
-                link.Id != null &&
+                (link.Ids != null && link.Ids.Count > 0) &&
                 (link.Values == null || link.Values.Count == 0))
             {
                 var childValues = new List<Link<TLinkAddress>>();
@@ -100,7 +100,7 @@ namespace Link.Foundation.Links.Notation
                     var transformedChild = TransformIndentedIdLink(groups[i]);
                     childValues.Add(transformedChild);
                 }
-                return new Link<TLinkAddress>(link.Id, childValues);
+                return new Link<TLinkAddress>(link.Ids, childValues);
             }
             else if (link.Values != null && link.Values.Count == 1)
             {

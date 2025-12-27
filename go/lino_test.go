@@ -19,8 +19,12 @@ func TestIsRef(t *testing.T) {
 	if !link.IsRef() {
 		t.Error("Expected link to be a reference")
 	}
-	if *link.ID != "some_value" {
-		t.Errorf("Expected ID to be 'some_value', got '%s'", *link.ID)
+	id, err := link.Id()
+	if err != nil {
+		t.Errorf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "some_value" {
+		t.Errorf("Expected ID to be 'some_value', got '%v'", id)
 	}
 }
 
@@ -29,8 +33,12 @@ func TestIsLink(t *testing.T) {
 	if !link.IsLink() {
 		t.Error("Expected link to be a link with values")
 	}
-	if *link.ID != "id" {
-		t.Errorf("Expected ID to be 'id', got '%s'", *link.ID)
+	id, err := link.Id()
+	if err != nil {
+		t.Errorf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "id" {
+		t.Errorf("Expected ID to be 'id', got '%v'", id)
 	}
 	if len(link.Values) != 1 {
 		t.Errorf("Expected 1 value, got %d", len(link.Values))
@@ -207,8 +215,12 @@ func TestQuotedReferencesWithSpacesTest(t *testing.T) {
 	if len(parsed) == 0 {
 		t.Fatal("Expected at least one link")
 	}
-	if *parsed[0].ID != "a a" {
-		t.Errorf("Expected ID 'a a', got '%v'", parsed[0].ID)
+	id, err := parsed[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "a a" {
+		t.Errorf("Expected ID 'a a', got '%v'", id)
 	}
 }
 
@@ -222,8 +234,12 @@ func TestParseSimpleReference(t *testing.T) {
 	if len(parsed[0].Values) != 1 {
 		t.Errorf("Expected 1 value, got %d", len(parsed[0].Values))
 	}
-	if *parsed[0].Values[0].ID != "test" {
-		t.Errorf("Expected 'test', got '%v'", parsed[0].Values[0].ID)
+	id, err := parsed[0].Values[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "test" {
+		t.Errorf("Expected 'test', got '%v'", id)
 	}
 }
 
@@ -233,8 +249,12 @@ func TestParseReferenceWithColonAndValues(t *testing.T) {
 	if len(parsed) == 0 {
 		t.Fatal("Expected at least one link")
 	}
-	if *parsed[0].ID != "parent" {
-		t.Errorf("Expected ID 'parent', got '%v'", parsed[0].ID)
+	id, err := parsed[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "parent" {
+		t.Errorf("Expected ID 'parent', got '%v'", id)
 	}
 	if len(parsed[0].Values) != 2 {
 		t.Errorf("Expected 2 values, got %d", len(parsed[0].Values))
@@ -247,8 +267,12 @@ func TestParseMultilineLink(t *testing.T) {
 	if len(parsed) == 0 {
 		t.Fatal("Expected at least one link")
 	}
-	if *parsed[0].ID != "parent" {
-		t.Errorf("Expected ID 'parent', got '%v'", parsed[0].ID)
+	id, err := parsed[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "parent" {
+		t.Errorf("Expected ID 'parent', got '%v'", id)
 	}
 	if len(parsed[0].Values) != 2 {
 		t.Errorf("Expected 2 values, got %d", len(parsed[0].Values))
@@ -264,8 +288,12 @@ func TestSingletLink(t *testing.T) {
 	if len(parsed[0].Values) != 1 {
 		t.Errorf("Expected 1 value, got %d", len(parsed[0].Values))
 	}
-	if *parsed[0].Values[0].ID != "singlet" {
-		t.Errorf("Expected 'singlet', got '%v'", parsed[0].Values[0].ID)
+	id, err := parsed[0].Values[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "singlet" {
+		t.Errorf("Expected 'singlet', got '%v'", id)
 	}
 }
 
@@ -275,8 +303,8 @@ func TestValueLink(t *testing.T) {
 	if len(parsed) == 0 {
 		t.Fatal("Expected at least one link")
 	}
-	if parsed[0].ID != nil {
-		t.Errorf("Expected nil ID, got '%v'", parsed[0].ID)
+	if parsed[0].IDs != nil && len(parsed[0].IDs) > 0 {
+		t.Errorf("Expected nil IDs, got '%v'", parsed[0].IDs)
 	}
 	if len(parsed[0].Values) != 3 {
 		t.Errorf("Expected 3 values, got %d", len(parsed[0].Values))
@@ -617,8 +645,12 @@ func TestDoubleQuotedString(t *testing.T) {
 	if len(parsed) == 0 {
 		t.Fatal("Expected at least one link")
 	}
-	if *parsed[0].Values[0].ID != "hello world" {
-		t.Errorf("Expected 'hello world', got '%v'", parsed[0].Values[0].ID)
+	id, err := parsed[0].Values[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "hello world" {
+		t.Errorf("Expected 'hello world', got '%v'", id)
 	}
 }
 
@@ -631,8 +663,12 @@ func TestSingleQuotedString(t *testing.T) {
 	if len(parsed) == 0 {
 		t.Fatal("Expected at least one link")
 	}
-	if *parsed[0].Values[0].ID != "hello world" {
-		t.Errorf("Expected 'hello world', got '%v'", parsed[0].Values[0].ID)
+	id, err := parsed[0].Values[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "hello world" {
+		t.Errorf("Expected 'hello world', got '%v'", id)
 	}
 }
 
@@ -645,8 +681,12 @@ func TestBacktickQuotedString(t *testing.T) {
 	if len(parsed) == 0 {
 		t.Fatal("Expected at least one link")
 	}
-	if *parsed[0].Values[0].ID != "hello world" {
-		t.Errorf("Expected 'hello world', got '%v'", parsed[0].Values[0].ID)
+	id, err := parsed[0].Values[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != "hello world" {
+		t.Errorf("Expected 'hello world', got '%v'", id)
 	}
 }
 
@@ -660,8 +700,12 @@ func TestTripleQuotedString(t *testing.T) {
 		t.Fatal("Expected at least one link")
 	}
 	expected := `hello "world" test`
-	if *parsed[0].Values[0].ID != expected {
-		t.Errorf("Expected '%s', got '%v'", expected, parsed[0].Values[0].ID)
+	id, err := parsed[0].Values[0].Id()
+	if err != nil {
+		t.Fatalf("Id() failed: %v", err)
+	}
+	if id == nil || *id != expected {
+		t.Errorf("Expected '%s', got '%v'", expected, id)
 	}
 }
 

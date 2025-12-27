@@ -10,7 +10,7 @@ fn test_is_ref() {
 #[test]
 fn test_is_link() {
     let link = LiNo::Link {
-        id: Some("id".to_string()),
+        ids: Some(vec!["id".to_string()]),
         values: vec![LiNo::Ref("child".to_string())],
     };
     assert!(link.is_link());
@@ -29,7 +29,7 @@ fn test_is_ref_equivalent() {
 fn test_is_link_equivalent() {
     // Same as test_is_link, for API consistency with other languages
     let link = LiNo::Link {
-        id: Some("id".to_string()),
+        ids: Some(vec!["id".to_string()]),
         values: vec![LiNo::Ref("child".to_string())],
     };
     assert!(link.is_link());
@@ -39,7 +39,7 @@ fn test_is_link_equivalent() {
 #[test]
 fn test_empty_link() {
     let link = LiNo::Link::<String> {
-        id: None,
+        ids: None,
         values: vec![],
     };
     let output = link.to_string();

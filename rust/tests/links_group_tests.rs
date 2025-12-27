@@ -27,15 +27,15 @@ fn links_group_constructor_equivalent_test() {
         LiNo::Ref("child2".to_string()),
     ];
     let group = LiNo::Link {
-        id: Some("group".to_string()),
+        ids: Some(vec!["group".to_string()]),
         values: vec![root.clone()]
             .into_iter()
             .chain(children.clone())
             .collect(),
     };
 
-    if let LiNo::Link { id, values } = group {
-        assert_eq!(id, Some("group".to_string()));
+    if let LiNo::Link { ids, values } = group {
+        assert_eq!(ids, Some(vec!["group".to_string()]));
         assert_eq!(values.len(), 3); // root + 2 children
         assert_eq!(values[0], root);
     } else {
@@ -53,29 +53,29 @@ fn links_group_to_list_flattens_structure_test() {
 
     // Create nested structure: root with child1 and (child2 with grandchild)
     let nested_child = LiNo::Link::<String> {
-        id: None,
+        ids: None,
         values: vec![child2.clone(), grandchild.clone()],
     };
 
     let group = LiNo::Link {
-        id: None,
+        ids: None,
         values: vec![root.clone(), child1.clone(), nested_child],
     };
 
     // Verify the structure
-    if let LiNo::Link { id, values } = group {
-        assert_eq!(id, None);
+    if let LiNo::Link { ids, values } = group {
+        assert_eq!(ids, None);
         assert_eq!(values.len(), 3);
         assert_eq!(values[0], root);
         assert_eq!(values[1], child1);
 
         // Check nested structure
         if let LiNo::Link {
-            id: nested_id,
+            ids: nested_ids,
             values: nested_values,
         } = &values[2]
         {
-            assert_eq!(*nested_id, None);
+            assert_eq!(*nested_ids, None);
             assert_eq!(nested_values.len(), 2);
             assert_eq!(nested_values[0], child2);
             assert_eq!(nested_values[1], grandchild);
@@ -92,7 +92,7 @@ fn links_group_to_string_test() {
         LiNo::Ref("child2".to_string()),
     ];
     let group = LiNo::Link::<String> {
-        id: None,
+        ids: None,
         values: vec![root].into_iter().chain(children).collect(),
     };
 
@@ -114,7 +114,7 @@ fn links_group_append_to_links_list_test() {
 
     // Create a group structure
     let group = LiNo::Link::<String> {
-        id: None,
+        ids: None,
         values: vec![element.clone()]
             .into_iter()
             .chain(children.clone())
@@ -125,7 +125,7 @@ fn links_group_append_to_links_list_test() {
     let mut list: Vec<LiNo<String>> = Vec::new();
     list.push(group.clone());
 
-    if let LiNo::Link { id: _, values } = group {
+    if let LiNo::Link { ids: _, values } = group {
         for value in values {
             list.push(value);
         }

@@ -573,7 +573,7 @@ func (p *Parser) collectLinks(item *internalLink, parentPath []*Link, result *[]
 			}
 		}
 
-		currentLink := &Link{ID: item.id, Values: childValues}
+		currentLink := &Link{IDs: p.idToIds(item.id), Values: childValues}
 
 		if len(parentPath) == 0 {
 			*result = append(*result, currentLink)
@@ -619,7 +619,7 @@ func (p *Parser) combinePathElements(pathElements []*Link, current *Link) *Link 
 
 	if len(pathElements) == 1 {
 		return &Link{
-			ID:     nil,
+			IDs:    nil,
 			Values: []*Link{pathElements[0], current},
 		}
 	}
@@ -633,7 +633,7 @@ func (p *Parser) combinePathElements(pathElements []*Link, current *Link) *Link 
 
 	// Add current element to the built structure
 	return &Link{
-		ID:     nil,
+		IDs:    nil,
 		Values: []*Link{parent, current},
 	}
 }
@@ -645,7 +645,7 @@ func (p *Parser) transformLink(item *internalLink) *Link {
 
 	// Simple reference
 	if item.id != nil && len(item.values) == 0 {
-		return &Link{ID: item.id}
+		return &Link{IDs: p.idToIds(item.id)}
 	}
 
 	// Link with values
@@ -654,9 +654,18 @@ func (p *Parser) transformLink(item *internalLink) *Link {
 		for _, v := range item.values {
 			values = append(values, p.transformLink(v))
 		}
-		return &Link{ID: item.id, Values: values}
+		return &Link{IDs: p.idToIds(item.id), Values: values}
 	}
 
 	// Default
-	return &Link{ID: item.id}
+	return &Link{IDs: p.idToIds(item.id)}
+}
+
+// idToIds converts a single id string pointer to an IDs slice.
+// This handles multi-word IDs by splitting them.
+func (p *Parser) idToIds(id *string) []string {
+	if id == nil {
+		return nil
+	}
+	return []string{*id}
 }

@@ -21,7 +21,11 @@ class Parser:
     Handles both inline and indented syntax for defining links.
     """
 
-    def __init__(self, max_input_size: int = 10 * 1024 * 1024, max_depth: int = 1000):
+    def __init__(
+        self,
+        max_input_size: int = 10 * 1024 * 1024,
+        max_depth: int = 1000,
+    ):
         """
         Initialize the parser.
 
@@ -212,21 +216,30 @@ class Parser:
             inner = content[1:-1].strip()
             return self._parse_parenthesized(inner)
 
-        # Try indented ID syntax: id:
+        # Try indented ID syntax: id: (or multi-word: some example:)
         if content.endswith(":"):
             id_part = content[:-1].strip()
-            ref = self._extract_reference(id_part)
-            return {"id": ref, "values": [], "is_indented_id": True}
+            multi_ref = self._extract_multi_reference_id(id_part)
+            return {
+                "id": multi_ref,
+                "values": [],
+                "is_indented_id": True,
+                "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1,
+            }
 
-        # Try single-line link: id: values
+        # Try single-line link: id: values (or multi-word: some example: values)
         if ":" in content and not (content.startswith('"') or content.startswith("'")):
-            parts = content.split(":", 1)
-            if len(parts) == 2:
-                id_part = parts[0].strip()
-                values_part = parts[1].strip()
-                ref = self._extract_reference(id_part)
+            colon_pos = self._find_colon_outside_quotes(content)
+            if colon_pos >= 0:
+                id_part = content[:colon_pos].strip()
+                values_part = content[colon_pos + 1 :].strip()
+                multi_ref = self._extract_multi_reference_id(id_part)
                 values = self._parse_values(values_part)
-                return {"id": ref, "values": values}
+                return {
+                    "id": multi_ref,
+                    "values": values,
+                    "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1,
+                }
 
         # Simple value list
         values = self._parse_values(content)
@@ -239,9 +252,14 @@ class Parser:
         if colon_pos >= 0:
             id_part = inner[:colon_pos].strip()
             values_part = inner[colon_pos + 1 :].strip()
-            ref = self._extract_reference(id_part)
+            # Try to extract multi-reference ID (multiple space-separated words)
+            multi_ref = self._extract_multi_reference_id(id_part)
             values = self._parse_values(values_part)
-            return {"id": ref, "values": values}
+            return {
+                "id": multi_ref,
+                "values": values,
+                "is_multi_ref": isinstance(multi_ref, list) and len(multi_ref) > 1,
+            }
 
         # Just values
         values = self._parse_values(inner)
@@ -422,6 +440,39 @@ class Parser:
 
         # Unquoted
         return text
+
+    def _extract_multi_reference_id(self, text: str) -> Any:
+        """
+        Extract a multi-reference ID from text.
+
+        Multi-reference IDs are multiple space-separated words before a colon.
+        For example: "some example" -> ["some", "example"]
+
+        If the ID is a single word or a quoted string, returns the string directly
+        for backward compatibility.
+
+        Args:
+            text: The ID portion (before the colon)
+
+        Returns:
+            Either a string (single reference) or list of strings (multi-reference)
+        """
+        text = text.strip()
+
+        # If quoted, treat as single reference (existing behavior)
+        for quote_char in ['"', "'", "`"]:
+            if text.startswith(quote_char):
+                return self._extract_reference(text)
+
+        # Split by whitespace to check for multi-word
+        parts = text.split()
+
+        if len(parts) == 1:
+            # Single word - return as string for backward compatibility
+            return parts[0]
+        else:
+            # Multiple words - return as list (multi-reference)
+            return parts
 
     def _parse_multi_quote_string(self, text: str, quote_char: str, quote_count: int) -> Optional[str]:
         """

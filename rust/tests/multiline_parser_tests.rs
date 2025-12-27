@@ -14,15 +14,19 @@ fn format_links(lino: &LiNo<String>, less_parentheses: bool) -> String {
                 value.clone()
             }
         }
-        LiNo::Link { id, values } => {
+        LiNo::Link { ids, values } => {
             if values.is_empty() {
-                if let Some(id) = id {
-                    // Escape id same way as references
-                    let escaped_id = format_links(&LiNo::Ref(id.clone()), false);
-                    if less_parentheses {
-                        escaped_id
+                if let Some(ids) = ids {
+                    if ids.len() == 1 {
+                        // Escape id same way as references
+                        let escaped_id = format_links(&LiNo::Ref(ids[0].clone()), false);
+                        if less_parentheses {
+                            escaped_id
+                        } else {
+                            format!("({})", escaped_id)
+                        }
                     } else {
-                        format!("({})", escaped_id)
+                        "()".to_string()
                     }
                 } else {
                     "()".to_string()
@@ -34,18 +38,22 @@ fn format_links(lino: &LiNo<String>, less_parentheses: bool) -> String {
                     .collect::<Vec<_>>()
                     .join(" ");
 
-                if let Some(id) = id {
-                    let escaped_id = format_links(&LiNo::Ref(id.clone()), false);
-                    // Mirror JS/C#: if less_parentheses and id doesn't need parentheses, drop outer parens
-                    if less_parentheses
-                        && !escaped_id.contains(' ')
-                        && !escaped_id.contains(':')
-                        && !escaped_id.contains('(')
-                        && !escaped_id.contains(')')
-                    {
-                        format!("{}: {}", escaped_id, formatted_values)
+                if let Some(ids) = ids {
+                    if ids.len() == 1 {
+                        let escaped_id = format_links(&LiNo::Ref(ids[0].clone()), false);
+                        // Mirror JS/C#: if less_parentheses and id doesn't need parentheses, drop outer parens
+                        if less_parentheses
+                            && !escaped_id.contains(' ')
+                            && !escaped_id.contains(':')
+                            && !escaped_id.contains('(')
+                            && !escaped_id.contains(')')
+                        {
+                            format!("{}: {}", escaped_id, formatted_values)
+                        } else {
+                            format!("({}: {})", escaped_id, formatted_values)
+                        }
                     } else {
-                        format!("({}: {})", escaped_id, formatted_values)
+                        format!("({})", formatted_values)
                     }
                 } else {
                     // Values-only link: in less_parentheses mode always drop outer parentheses

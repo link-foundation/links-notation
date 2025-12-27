@@ -15,32 +15,81 @@
 package lino
 
 import (
+	"fmt"
 	"strings"
 )
 
+// MultiRefError is returned when attempting to access the Id() method on a multi-reference Link.
+type MultiRefError struct {
+	Count int
+}
+
+func (e *MultiRefError) Error() string {
+	return fmt.Sprintf("This link has a multi-reference id with %d parts. Use 'Ids()' instead of 'Id()'.", e.Count)
+}
+
 // Link represents a link in Lino notation.
 // A link can be:
-//   - A reference (ID only, no values)
-//   - A link with ID and values
-//   - A link with only values (no ID)
+//   - A reference (IDs only, no values)
+//   - A link with IDs and values
+//   - A link with only values (no IDs)
+//
+// For multi-reference IDs (e.g., "some example" before colon), use the IDs field.
+// The Id() method will return an error for multi-reference IDs.
 type Link struct {
-	ID     *string
+	IDs    []string
 	Values []*Link
 }
 
 // NewRef creates a new reference Link (ID only, no values).
 func NewRef(id string) *Link {
-	return &Link{ID: &id, Values: nil}
+	return &Link{IDs: []string{id}, Values: nil}
+}
+
+// NewMultiRef creates a new multi-reference Link (multiple IDs, no values).
+func NewMultiRef(ids []string) *Link {
+	return &Link{IDs: ids, Values: nil}
 }
 
 // NewLink creates a new Link with optional ID and values.
 func NewLink(id *string, values []*Link) *Link {
-	return &Link{ID: id, Values: values}
+	if id == nil {
+		return &Link{IDs: nil, Values: values}
+	}
+	return &Link{IDs: []string{*id}, Values: values}
+}
+
+// NewLinkWithIDs creates a new Link with multiple IDs and values.
+func NewLinkWithIDs(ids []string, values []*Link) *Link {
+	return &Link{IDs: ids, Values: values}
 }
 
 // NewValuesLink creates a new Link with values only (no ID).
 func NewValuesLink(values []*Link) *Link {
-	return &Link{ID: nil, Values: values}
+	return &Link{IDs: nil, Values: values}
+}
+
+// Id returns the single ID string (backward compatibility).
+// Returns an error if IDs has more than one element.
+// Use IDs field for multi-reference access.
+func (l *Link) Id() (*string, error) {
+	if l.IDs == nil || len(l.IDs) == 0 {
+		return nil, nil
+	}
+	if len(l.IDs) > 1 {
+		return nil, &MultiRefError{Count: len(l.IDs)}
+	}
+	return &l.IDs[0], nil
+}
+
+// GetIdString returns the ID as a joined string for formatting purposes.
+// Returns nil if IDs is nil or empty.
+func (l *Link) GetIdString() *string {
+	if l.IDs == nil || len(l.IDs) == 0 {
+		return nil
+	}
+	result := strings.Join(l.IDs, " ")
+	return &result
 }
 
 // IsRef returns true if this Link is a simple reference (ID only, no values).
@@ -61,8 +110,10 @@ func (l *Link) String() string {
 // Format formats the link as a string.
 // If lessParentheses is true, omits parentheses when safe.
 func (l *Link) Format(lessParentheses bool) string {
+	idStr := l.GetIdString()
+
 	// Empty link
-	if l.ID == nil && len(l.Values) == 0 {
+	if idStr == nil && len(l.Values) == 0 {
 		if lessParentheses {
 			return ""
 		}
@@ -71,9 +122,9 @@ func (l *Link) Format(lessParentheses bool) string {
 
 	// Link with only ID, no values
 	if len(l.Values) == 0 {
-		if l.ID != nil {
-			escapedID := escapeReference(*l.ID)
-			if lessParentheses && !needsParentheses(*l.ID) {
+		if idStr != nil {
+			escapedID := escapeReference(*idStr)
+			if lessParentheses && !needsParentheses(*idStr) {
 				return escapedID
 			}
 			return "(" + escapedID + ")"
@@ -92,7 +143,7 @@ func (l *Link) Format(lessParentheses bool) string {
 	valuesStr := strings.Join(valueParts, " ")
 
 	// Link with values only (nil ID)
-	if l.ID == nil {
+	if idStr == nil {
 		if lessParentheses {
 			// Check if all values are simple (no nested values)
 			allSimple := true
@@ -105,8 +156,9 @@ func (l *Link) Format(lessParentheses bool) string {
 			if allSimple {
 				var refs []string
 				for _, v := range l.Values {
-					if v.ID != nil {
-						refs = append(refs, escapeReference(*v.ID))
+					vIdStr := v.GetIdString()
+					if vIdStr != nil {
+						refs = append(refs, escapeReference(*vIdStr))
 					}
 				}
 				return strings.Join(refs, " ")
@@ -117,9 +169,9 @@ func (l *Link) Format(lessParentheses bool) string {
 	}
 
 	// Link with ID and values
-	idStr := escapeReference(*l.ID)
-	withColon := idStr + ": " + valuesStr
-	if lessParentheses && !needsParentheses(*l.ID) {
+	escapedID := escapeReference(*idStr)
+	withColon := escapedID + ": " + valuesStr
+	if lessParentheses && !needsParentheses(*idStr) {
 		return withColon
 	}
 	return "(" + withColon + ")"
@@ -131,8 +183,10 @@ func (l *Link) FormatWithConfig(config *FormatConfig) string {
 }
 
 func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) string {
+	idStr := l.GetIdString()
+
 	// Empty link
-	if l.ID == nil && len(l.Values) == 0 {
+	if idStr == nil && len(l.Values) == 0 {
 		if config.LessParentheses {
 			return ""
 		}
@@ -141,12 +195,12 @@ func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) stri
 
 	// Link with only ID, no values
 	if len(l.Values) == 0 {
-		if l.ID != nil {
-			escapedID := escapeReference(*l.ID)
+		if idStr != nil {
+			escapedID := escapeReference(*idStr)
 			if isCompoundValue {
 				return "(" + escapedID + ")"
 			}
-			if config.LessParentheses && !needsParentheses(*l.ID) {
+			if config.LessParentheses && !needsParentheses(*idStr) {
 				return escapedID
 			}
 			return "(" + escapedID + ")"
@@ -170,12 +224,12 @@ func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) stri
 		valuesStr := strings.Join(valueParts, " ")
 
 		var testLine string
-		if l.ID != nil {
-			idStr := escapeReference(*l.ID)
+		if idStr != nil {
+			escapedID := escapeReference(*idStr)
 			if config.LessParentheses {
-				testLine = idStr + ": " + valuesStr
+				testLine = escapedID + ": " + valuesStr
 			} else {
-				testLine = "(" + idStr + ": " + valuesStr + ")"
+				testLine = "(" + escapedID + ": " + valuesStr + ")"
 			}
 		} else if config.LessParentheses {
 			testLine = valuesStr
@@ -201,7 +255,7 @@ func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) stri
 	valuesStr := strings.Join(valueParts, " ")
 
 	// Link with values only (nil ID)
-	if l.ID == nil {
+	if idStr == nil {
 		if config.LessParentheses {
 			allSimple := true
 			for _, v := range l.Values {
@@ -213,8 +267,9 @@ func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) stri
 			if allSimple {
 				var refs []string
 				for _, v := range l.Values {
-					if v.ID != nil {
-						refs = append(refs, escapeReference(*v.ID))
+					vIdStr := v.GetIdString()
+					if vIdStr != nil {
+						refs = append(refs, escapeReference(*vIdStr))
 					}
 				}
 				return strings.Join(refs, " ")
@@ -225,16 +280,17 @@ func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) stri
 	}
 
 	// Link with ID and values
-	idStr := escapeReference(*l.ID)
-	withColon := idStr + ": " + valuesStr
-	if config.LessParentheses && !needsParentheses(*l.ID) {
+	escapedID := escapeReference(*idStr)
+	withColon := escapedID + ": " + valuesStr
+	if config.LessParentheses && !needsParentheses(*idStr) {
 		return withColon
 	}
 	return "(" + withColon + ")"
 }
 
 func (l *Link) formatIndented(config *FormatConfig) string {
-	if l.ID == nil {
+	idStr := l.GetIdString()
+	if idStr == nil {
 		// Values only - format each on separate line
 		var lines []string
 		for _, v := range l.Values {
@@ -244,8 +300,8 @@ func (l *Link) formatIndented(config *FormatConfig) string {
 	}
 
 	// Link with ID - format as id:\n  value1\n  value2
-	idStr := escapeReference(*l.ID)
-	lines := []string{idStr + ":"}
+	escapedID := escapeReference(*idStr)
+	lines := []string{escapedID + ":"}
 	for _, v := range l.Values {
 		lines = append(lines, config.IndentString+formatValue(v))
 	}
@@ -257,12 +313,16 @@ func (l *Link) Equal(other *Link) bool {
 	if other == nil {
 		return false
 	}
-	if (l.ID == nil) != (other.ID == nil) {
+	// Compare IDs
+	if len(l.IDs) != len(other.IDs) {
 		return false
 	}
-	if l.ID != nil && *l.ID != *other.ID {
-		return false
+	for i := range l.IDs {
+		if l.IDs[i] != other.IDs[i] {
+			return false
+		}
 	}
+	// Compare values
 	if len(l.Values) != len(other.Values) {
 		return false
 	}
@@ -328,8 +388,9 @@ func needsParentheses(s string) bool {
 // formatValue formats a value within a link.
 func formatValue(value *Link) string {
 	if value.IsRef() {
-		if value.ID != nil {
-			return escapeReference(*value.ID)
+		idStr := value.GetIdString()
+		if idStr != nil {
+			return escapeReference(*idStr)
 		}
 		return ""
 	}
@@ -382,17 +443,18 @@ func groupConsecutiveLinks(links []*Link) []*Link {
 
 	for i < len(links) {
 		current := links[i]
+		currentIdStr := current.GetIdString()
 
 		// Look ahead for consecutive links with same ID
-		if current.ID != nil && len(current.Values) > 0 {
-			currentID := *current.ID
+		if currentIdStr != nil && len(current.Values) > 0 {
 			sameIDValues := make([]*Link, len(current.Values))
 			copy(sameIDValues, current.Values)
 
 			j := i + 1
 			for j < len(links) {
 				next := links[j]
-				if next.ID != nil && *next.ID == currentID && len(next.Values) > 0 {
+				nextIdStr := next.GetIdString()
+				if nextIdStr != nil && *nextIdStr == *currentIdStr && len(next.Values) > 0 {
 					sameIDValues = append(sameIDValues, next.Values...)
 					j++
 				} else {
@@ -403,7 +465,7 @@ func groupConsecutiveLinks(links []*Link) []*Link {
 			// If we found consecutive links, create grouped link
 			if j > i+1 {
 				grouped = append(grouped, &Link{
-					ID:     &currentID,
+					IDs:    current.IDs,
 					Values: sameIDValues,
 				})
 				i = j

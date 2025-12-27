@@ -28,9 +28,33 @@ impl fmt::Display for ParseError {
 
 impl StdError for ParseError {}
 
+/// Error type for accessing `id` on a multi-reference Link.
+#[derive(Debug, Clone, PartialEq)]
+pub struct MultiRefError {
+    pub count: usize,
+}
+
+impl fmt::Display for MultiRefError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "This link has a multi-reference id with {} parts. Use 'ids()' instead of 'id()'.",
+            self.count
+        )
+    }
+}
+
+impl StdError for MultiRefError {}
+
 #[derive(Debug, Clone, PartialEq)]
 pub enum LiNo<T> {
-    Link { id: Option<T>, values: Vec<Self> },
+    /// A link with optional multi-reference ids and values.
+    /// The `ids` field stores references as a vector (like JS/Python).
+    Link {
+        ids: Option<Vec<T>>,
+        values: Vec<Self>,
+    },
+    /// A simple reference value.
     Ref(T),
 }
 
@@ -42,9 +66,42 @@ impl<T> LiNo<T> {
     pub fn is_link(&self) -> bool {
         matches!(self, LiNo::Link { .. })
     }
+
+    /// Get the ids array (primary storage for reference identifiers).
+    /// Returns None if this is a Ref variant or if ids is None.
+    pub fn ids(&self) -> Option<&Vec<T>> {
+        match self {
+            LiNo::Link { ids, .. } => ids.as_ref(),
+            LiNo::Ref(_) => None,
+        }
+    }
+
+    /// Get the id as a single reference (backward compatibility).
+    /// Returns an error if ids has more than one element.
+    /// Use `ids()` for multi-reference access.
+    pub fn id(&self) -> Result<Option<&T>, MultiRefError> {
+        match self {
+            LiNo::Link { ids, .. } => match ids {
+                None => Ok(None),
+                Some(v) if v.len() > 1 => Err(MultiRefError { count: v.len() }),
+                Some(v) => Ok(v.first()),
+            },
+            LiNo::Ref(_) => Ok(None),
+        }
+    }
 }
 
 impl<T: ToString + Clone> LiNo<T> {
+    /// Helper to get the id as a joined string (for formatting purposes).
+    fn ids_to_string(ids: &Option<Vec<T>>) -> Option<String> {
+        ids.as_ref().map(|v| {
+            v.iter()
+                .map(|t| t.to_string())
+                .collect::<Vec<_>>()
+                .join(" ")
+        })
+    }
+
     /// Format the link using FormatConfig configuration.
     ///
     /// # Arguments
@@ -62,9 +119,9 @@ impl<T: ToString + Clone> LiNo<T> {
                     format!("({})", escaped)
                 }
             }
-            LiNo::Link { id, values } => {
+            LiNo::Link { ids, values } => {
                 // Empty link
-                if id.is_none() && values.is_empty() {
+                if ids.is_none() && values.is_empty() {
                     return if config.less_parentheses {
                         String::new()
                     } else {
@@ -74,10 +131,9 @@ impl<T: ToString + Clone> LiNo<T> {
 
                 // Link with only ID, no values
                 if values.is_empty() {
-                    if let Some(ref id_val) = id {
-                        let escaped_id = escape_reference(&id_val.to_string());
-                        return if config.less_parentheses && !needs_parentheses(&id_val.to_string())
-                        {
+                    if let Some(id_str) = Self::ids_to_string(ids) {
+                        let escaped_id = escape_reference(&id_str);
+                        return if config.less_parentheses && !needs_parentheses(&id_str) {
                             escaped_id
                         } else {
                             format!("({})", escaped_id)
@@ -102,12 +158,12 @@ impl<T: ToString + Clone> LiNo<T> {
                         .collect::<Vec<_>>()
                         .join(" ");
 
-                    let test_line = if let Some(ref id_val) = id {
-                        let id_str = escape_reference(&id_val.to_string());
+                    let test_line = if let Some(id_str) = Self::ids_to_string(ids) {
+                        let escaped_id = escape_reference(&id_str);
                         if config.less_parentheses {
-                            format!("{}: {}", id_str, values_str)
+                            format!("{}: {}", escaped_id, values_str)
                         } else {
-                            format!("({}: {})", id_str, values_str)
+                            format!("({}: {})", escaped_id, values_str)
                         }
                     } else if config.less_parentheses {
                         values_str.clone()
@@ -133,7 +189,7 @@ impl<T: ToString + Clone> LiNo<T> {
                     .join(" ");
 
                 // Link with values only (null id)
-                if id.is_none() {
+                if ids.is_none() {
                     if config.less_parentheses {
                         // Check if all values are simple (no nested values)
                         let all_simple = values.iter().all(|v| matches!(v, LiNo::Ref(_)));
@@ -153,10 +209,10 @@ impl<T: ToString + Clone> LiNo<T> {
                 }
 
                 // Link with ID and values
-                let id_str = escape_reference(&id.as_ref().unwrap().to_string());
-                let with_colon = format!("{}: {}", id_str, values_str);
-                if config.less_parentheses && !needs_parentheses(&id.as_ref().unwrap().to_string())
-                {
+                let id_str = Self::ids_to_string(ids).unwrap();
+                let escaped_id = escape_reference(&id_str);
+                let with_colon = format!("{}: {}", escaped_id, values_str);
+                if config.less_parentheses && !needs_parentheses(&id_str) {
                     with_colon
                 } else {
                     format!("({})", with_colon)
@@ -172,8 +228,8 @@ impl<T: ToString + Clone> LiNo<T> {
                 let escaped = escape_reference(&value.to_string());
                 format!("({})", escaped)
             }
-            LiNo::Link { id, values } => {
-                if id.is_none() {
+            LiNo::Link { ids, values } => {
+                if ids.is_none() {
                     // Values only - format each on separate line
                     values
                         .iter()
@@ -182,7 +238,7 @@ impl<T: ToString + Clone> LiNo<T> {
                         .join("\n")
                 } else {
                     // Link with ID - format as id:\n  value1\n  value2
-                    let id_str = escape_reference(&id.as_ref().unwrap().to_string());
+                    let id_str = escape_reference(&Self::ids_to_string(ids).unwrap());
                     let mut lines = vec![format!("{}:", id_str)];
                     for v in values {
                         lines.push(format!("{}{}", config.indent_string, format_value(v)));
@@ -198,10 +254,17 @@ impl<T: ToString> fmt::Display for LiNo<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             LiNo::Ref(value) => write!(f, "{}", value.to_string()),
-            LiNo::Link { id, values } => {
-                let id_str = id
+            LiNo::Link { ids, values } => {
+                let id_str = ids
                     .as_ref()
-                    .map(|id| format!("{}: ", id.to_string()))
+                    .map(|v| {
+                        let joined = v
+                            .iter()
+                            .map(|t| t.to_string())
+                            .collect::<Vec<_>>()
+                            .join(" ");
+                        format!("{}: ", joined)
+                    })
                     .unwrap_or_default();
 
                 if f.alternate() {
@@ -237,17 +300,17 @@ impl From<parser::Link> for LiNo<String> {
     fn from(link: parser::Link) -> Self {
         if link.values.is_empty() && link.children.is_empty() {
             if let Some(id) = link.id {
-                LiNo::Ref(id)
+                LiNo::Ref(id.to_single_string())
             } else {
                 LiNo::Link {
-                    id: None,
+                    ids: None,
                     values: vec![],
                 }
             }
         } else {
             let values: Vec<LiNo<String>> = link.values.into_iter().map(|v| v.into()).collect();
             LiNo::Link {
-                id: link.id,
+                ids: link.id.map(|id| id.parts()),
                 values,
             }
         }
@@ -288,7 +351,7 @@ fn flatten_link_recursive(
                 {
                     // Use if let to safely extract the ID instead of unwrap()
                     if let Some(ref id) = child.values[0].id {
-                        LiNo::Ref(id.clone())
+                        LiNo::Ref(id.to_single_string())
                     } else {
                         // If no ID, create an empty link
                         parser::Link {
@@ -296,6 +359,7 @@ fn flatten_link_recursive(
                             values: child.values.clone(),
                             children: vec![],
                             is_indented_id: false,
+                            is_multi_ref: false,
                         }
                         .into()
                     }
@@ -305,6 +369,7 @@ fn flatten_link_recursive(
                         values: child.values.clone(),
                         children: vec![],
                         is_indented_id: false,
+                        is_multi_ref: false,
                     }
                     .into()
                 }
@@ -312,7 +377,7 @@ fn flatten_link_recursive(
             .collect();
 
         let current = LiNo::Link {
-            id: link.id.clone(),
+            ids: link.id.as_ref().map(|id| id.parts()),
             values: child_values,
         };
 
@@ -320,14 +385,14 @@ fn flatten_link_recursive(
             // Wrap parent in parentheses if it's a reference
             let wrapped_parent = match parent {
                 LiNo::Ref(ref_id) => LiNo::Link {
-                    id: None,
+                    ids: None,
                     values: vec![LiNo::Ref(ref_id.clone())],
                 },
                 link => link.clone(),
             };
 
             LiNo::Link {
-                id: None,
+                ids: None,
                 values: vec![wrapped_parent, current],
             }
         } else {
@@ -341,10 +406,10 @@ fn flatten_link_recursive(
     // Create the current link without children
     let current = if link.values.is_empty() {
         if let Some(id) = &link.id {
-            LiNo::Ref(id.clone())
+            LiNo::Ref(id.to_single_string())
         } else {
             LiNo::Link {
-                id: None,
+                ids: None,
                 values: vec![],
             }
         }
@@ -358,12 +423,13 @@ fn flatten_link_recursive(
                     values: v.values.clone(),
                     children: vec![],
                     is_indented_id: false,
+                    is_multi_ref: false,
                 }
                 .into()
             })
             .collect();
         LiNo::Link {
-            id: link.id.clone(),
+            ids: link.id.as_ref().map(|id| id.parts()),
             values,
         }
     };
@@ -373,7 +439,7 @@ fn flatten_link_recursive(
         // Wrap parent in parentheses if it's a reference
         let wrapped_parent = match parent {
             LiNo::Ref(ref_id) => LiNo::Link {
-                id: None,
+                ids: None,
                 values: vec![LiNo::Ref(ref_id.clone())],
             },
             link => link.clone(),
@@ -382,14 +448,14 @@ fn flatten_link_recursive(
         // Wrap current in parentheses if it's a reference
         let wrapped_current = match &current {
             LiNo::Ref(ref_id) => LiNo::Link {
-                id: None,
+                ids: None,
                 values: vec![LiNo::Ref(ref_id.clone())],
             },
             link => link.clone(),
         };
 
         LiNo::Link {
-            id: None,
+            ids: None,
             values: vec![wrapped_parent, wrapped_current],
         }
     } else {
@@ -408,7 +474,7 @@ pub fn parse_lino(document: &str) -> Result<LiNo<String>, ParseError> {
     // Handle empty or whitespace-only input by returning empty result
     if document.trim().is_empty() {
         return Ok(LiNo::Link {
-            id: None,
+            ids: None,
             values: vec![],
         });
     }
@@ -417,14 +483,14 @@ pub fn parse_lino(document: &str) -> Result<LiNo<String>, ParseError> {
         Ok((_, links)) => {
             if links.is_empty() {
                 Ok(LiNo::Link {
-                    id: None,
+                    ids: None,
                     values: vec![],
                 })
             } else {
                 // Flatten the indented structure according to Lino spec
                 let flattened = flatten_links(links);
                 Ok(LiNo::Link {
-                    id: None,
+                    ids: None,
                     values: flattened,
                 })
             }
@@ -520,7 +586,7 @@ fn group_consecutive_links(links: &[LiNo<String>]) -> Vec<LiNo<String>> {
 
         // Look ahead for consecutive links with same ID
         if let LiNo::Link {
-            id: Some(ref current_id),
+            ids: Some(ref current_ids),
             values: ref current_values,
         } = current
         {
@@ -531,11 +597,11 @@ fn group_consecutive_links(links: &[LiNo<String>]) -> Vec<LiNo<String>> {
 
                 while j < links.len() {
                     if let LiNo::Link {
-                        id: Some(ref next_id),
+                        ids: Some(ref next_ids),
                         values: ref next_values,
                     } = &links[j]
                     {
-                        if next_id == current_id && !next_values.is_empty() {
+                        if next_ids == current_ids && !next_values.is_empty() {
                             same_id_values.extend(next_values.clone());
                             j += 1;
                         } else {
@@ -549,7 +615,7 @@ fn group_consecutive_links(links: &[LiNo<String>]) -> Vec<LiNo<String>> {
                 // If we found consecutive links, create grouped link
                 if j > i + 1 {
                     grouped.push(LiNo::Link {
-                        id: Some(current_id.clone()),
+                        ids: Some(current_ids.clone()),
                         values: same_id_values,
                     });
                     i = j;
@@ -618,11 +684,16 @@ fn needs_parentheses(s: &str) -> bool {
 fn format_value<T: ToString>(value: &LiNo<T>) -> String {
     match value {
         LiNo::Ref(r) => escape_reference(&r.to_string()),
-        LiNo::Link { id, values } => {
+        LiNo::Link { ids, values } => {
             // Simple link with just an ID - don't wrap in extra parentheses
             if values.is_empty() {
-                if let Some(ref id_val) = id {
-                    return escape_reference(&id_val.to_string());
+                if let Some(ref ids_vec) = ids {
+                    let joined = ids_vec
+                        .iter()
+                        .map(|t| t.to_string())
+                        .collect::<Vec<_>>()
+                        .join(" ");
+                    return escape_reference(&joined);
                 }
                 return String::new();
             }

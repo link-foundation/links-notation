@@ -626,7 +626,7 @@ public class Parser {
       List<Link> combined = new ArrayList<>();
       combined.add(pathElements.get(0));
       combined.add(current);
-      Link link = new Link(null, combined);
+      Link link = new Link((String) null, combined);
       link.setFromPathCombination(true);
       return link;
     }
@@ -642,7 +642,7 @@ public class Parser {
     List<Link> combined = new ArrayList<>();
     combined.add(parent);
     combined.add(current);
-    Link link = new Link(null, combined);
+    Link link = new Link((String) null, combined);
     link.setFromPathCombination(true);
     return link;
   }
