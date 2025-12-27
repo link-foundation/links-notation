@@ -1,7 +1,6 @@
 package io.github.linkfoundation.linksnotation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -74,8 +73,8 @@ public class Link {
   /**
    * Gets the link identifier (backward compatible).
    *
-   * <p>For multi-reference IDs (more than one element in ids), this method throws
-   * {@link MultiReferenceException}. Use {@link #getIds()} for multi-reference access.
+   * <p>For multi-reference IDs (more than one element in ids), this method throws {@link
+   * MultiReferenceException}. Use {@link #getIds()} for multi-reference access.
    *
    * @return the identifier, or null if not set
    * @throws MultiReferenceException if the link has a multi-reference ID
@@ -100,8 +99,7 @@ public class Link {
   }
 
   /**
-   * Gets the ID as a joined string for formatting purposes.
-   * Returns null if ids is null or empty.
+   * Gets the ID as a joined string for formatting purposes. Returns null if ids is null or empty.
    *
    * @return the joined ID string, or null
    */
@@ -327,7 +325,9 @@ public class Link {
         boolean allSimple = values.stream().allMatch(v -> v.values.isEmpty());
         if (allSimple) {
           // Format each value without extra wrapping
-          return values.stream().map(v -> escapeReference(v.getIdString())).collect(Collectors.joining(" "));
+          return values.stream()
+              .map(v -> escapeReference(v.getIdString()))
+              .collect(Collectors.joining(" "));
         }
         // For mixed or complex values in lessParentheses mode
         return valuesStr;
