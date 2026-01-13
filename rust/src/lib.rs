@@ -2,6 +2,10 @@ pub mod format_config;
 pub mod parser;
 
 use format_config::FormatConfig;
+
+// Re-export the lino! macro when the macro feature is enabled
+#[cfg(feature = "macro")]
+pub use links_notation_macro::lino;
 use std::error::Error as StdError;
 use std::fmt;
 

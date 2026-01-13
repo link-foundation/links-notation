@@ -14,3 +14,8 @@ path = "src/lib.rs"
 
 [dependencies]
 nom = "8.0"
+links-notation-macro = { path = "links-notation-macro", version = "0.1.0", optional = true }
+
+[features]
+default = ["macro"]
+macro = ["links-notation-macro"]

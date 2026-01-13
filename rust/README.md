@@ -54,7 +54,35 @@ cargo test -- --nocapture
 
 ## Usage
 
-### Basic Parsing
+### Using the `lino!` Macro (Recommended)
+
+The `lino!` macro provides compile-time validation and a convenient way to work with Links Notation:
+
+```rust
+use links_notation::lino;
+
+fn main() {
+    // Parse at compile time with validation
+    let result = lino!("papa (lovesMama: loves mama)");
+
+    // The result is a fully typed LiNo structure
+    println!("Parsed: {}", result);
+
+    // Syntax errors are caught at compile time!
+    // This would fail to compile:
+    // let invalid = lino!("(unclosed parenthesis");
+}
+```
+
+The `lino!` macro:
+- ✅ Validates syntax at compile time
+- ✅ Provides clear error messages for invalid syntax
+- ✅ Returns fully typed `LiNo<String>` structures
+- ✅ Zero runtime parsing overhead for the validation
+
+### Basic Runtime Parsing
+
+For dynamic content, use the runtime parser:
 
 ```rust
 use links_notation::{parse_lino, LiNo};
@@ -65,11 +93,11 @@ fn main() {
 son lovesMama
 daughter lovesMama
 all (love mama)"#;
-    
+
     match parse_lino(input) {
         Ok(parsed) => {
             println!("Parsed: {}", parsed);
-            
+
             // Access the structure
             if let LiNo::Link { values, .. } = parsed {
                 for link in values {
