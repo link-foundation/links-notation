@@ -631,3 +631,143 @@ fn format_value<T: ToString>(value: &LiNo<T>) -> String {
         }
     }
 }
+
+// Tuple conversion implementations for ergonomic link creation
+// These implementations allow creating links using Rust tuple syntax
+
+/// Convert a 2-tuple into a LiNo Link.
+/// The first element becomes the ID, the second becomes a single value.
+/// Example: `("parent", "child")` becomes `(parent: child)`
+impl From<(&str, &str)> for LiNo<String> {
+    fn from(tuple: (&str, &str)) -> Self {
+        LiNo::Link {
+            id: Some(tuple.0.to_string()),
+            values: vec![LiNo::Ref(tuple.1.to_string())],
+        }
+    }
+}
+
+/// Convert a 2-tuple with owned strings into a LiNo Link.
+impl From<(String, String)> for LiNo<String> {
+    fn from(tuple: (String, String)) -> Self {
+        LiNo::Link {
+            id: Some(tuple.0),
+            values: vec![LiNo::Ref(tuple.1)],
+        }
+    }
+}
+
+/// Convert a 2-tuple where the second element is a LiNo into a LiNo Link.
+/// Example: `("parent", LiNo::Ref("child"))` becomes `(parent: child)`
+impl From<(&str, LiNo<String>)> for LiNo<String> {
+    fn from(tuple: (&str, LiNo<String>)) -> Self {
+        LiNo::Link {
+            id: Some(tuple.0.to_string()),
+            values: vec![tuple.1],
+        }
+    }
+}
+
+/// Convert a 2-tuple where both elements are LiNo into an anonymous LiNo Link.
+/// Example: `(LiNo::Ref("a"), LiNo::Ref("b"))` becomes `(a b)`
+impl From<(LiNo<String>, LiNo<String>)> for LiNo<String> {
+    fn from(tuple: (LiNo<String>, LiNo<String>)) -> Self {
+        LiNo::Link {
+            id: None,
+            values: vec![tuple.0, tuple.1],
+        }
+    }
+}
+
+/// Convert a 3-tuple into a LiNo Link.
+/// The first element becomes the ID, the remaining elements become values.
+/// Example: `("parent", "child1", "child2")` becomes `(parent: child1 child2)`
+impl From<(&str, &str, &str)> for LiNo<String> {
+    fn from(tuple: (&str, &str, &str)) -> Self {
+        LiNo::Link {
+            id: Some(tuple.0.to_string()),
+            values: vec![
+                LiNo::Ref(tuple.1.to_string()),
+                LiNo::Ref(tuple.2.to_string()),
+            ],
+        }
+    }
+}
+
+/// Convert a 3-tuple with owned strings into a LiNo Link.
+impl From<(String, String, String)> for LiNo<String> {
+    fn from(tuple: (String, String, String)) -> Self {
+        LiNo::Link {
+            id: Some(tuple.0),
+            values: vec![LiNo::Ref(tuple.1), LiNo::Ref(tuple.2)],
+        }
+    }
+}
+
+/// Convert a 3-tuple where elements after the first are LiNo into a LiNo Link.
+/// Example: `("parent", LiNo::Ref("child1"), LiNo::Ref("child2"))` becomes `(parent: child1 child2)`
+impl From<(&str, LiNo<String>, LiNo<String>)> for LiNo<String> {
+    fn from(tuple: (&str, LiNo<String>, LiNo<String>)) -> Self {
+        LiNo::Link {
+            id: Some(tuple.0.to_string()),
+            values: vec![tuple.1, tuple.2],
+        }
+    }
+}
+
+/// Convert a 3-tuple where all elements are LiNo into an anonymous LiNo Link.
+/// Example: `(LiNo::Ref("a"), LiNo::Ref("b"), LiNo::Ref("c"))` becomes `(a b c)`
+impl From<(LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+    fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+        LiNo::Link {
+            id: None,
+            values: vec![tuple.0, tuple.1, tuple.2],
+        }
+    }
+}
+
+/// Convert a 4-tuple into a LiNo Link.
+/// The first element becomes the ID, the remaining elements become values.
+/// Example: `("parent", "c1", "c2", "c3")` becomes `(parent: c1 c2 c3)`
+impl From<(&str, &str, &str, &str)> for LiNo<String> {
+    fn from(tuple: (&str, &str, &str, &str)) -> Self {
+        LiNo::Link {
+            id: Some(tuple.0.to_string()),
+            values: vec![
+                LiNo::Ref(tuple.1.to_string()),
+                LiNo::Ref(tuple.2.to_string()),
+                LiNo::Ref(tuple.3.to_string()),
+            ],
+        }
+    }
+}
+
+/// Convert a 4-tuple with owned strings into a LiNo Link.
+impl From<(String, String, String, String)> for LiNo<String> {
+    fn from(tuple: (String, String, String, String)) -> Self {
+        LiNo::Link {
+            id: Some(tuple.0),
+            values: vec![LiNo::Ref(tuple.1), LiNo::Ref(tuple.2), LiNo::Ref(tuple.3)],
+        }
+    }
+}
+
+/// Convert a 4-tuple where elements after the first are LiNo into a LiNo Link.
+impl From<(&str, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+    fn from(tuple: (&str, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+        LiNo::Link {
+            id: Some(tuple.0.to_string()),
+            values: vec![tuple.1, tuple.2, tuple.3],
+        }
+    }
+}
+
+/// Convert a 4-tuple where all elements are LiNo into an anonymous LiNo Link.
+impl From<(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+    fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+        LiNo::Link {
+            id: None,
+            values: vec![tuple.0, tuple.1, tuple.2, tuple.3],
+        }
+    }
+}

@@ -145,6 +145,86 @@ let quoted = r#"("quoted id": "value with spaces")"#;
 let parsed = parse_lino(quoted)?;
 ```
 
+## Tuple Conversion
+
+The library supports ergonomic conversion from Rust tuples to Links Notation, similar to C#'s tuple conversion feature. This allows you to create links using native Rust tuple syntax.
+
+### Basic Usage
+
+```rust
+use links_notation::LiNo;
+
+// Convert a 2-tuple to a link
+let link: LiNo<String> = ("papa", "mama").into();
+println!("{}", link); // (papa: mama)
+
+// Convert a 3-tuple to a link
+let link: LiNo<String> = ("papa", "loves", "mama").into();
+println!("{}", link); // (papa: loves mama)
+
+// Convert a 4-tuple to a link
+let link: LiNo<String> = ("id", "val1", "val2", "val3").into();
+println!("{}", link); // (id: val1 val2 val3)
+```
+
+### Mixed Tuple Types
+
+You can also mix strings and `LiNo` values in tuples:
+
+```rust
+use links_notation::LiNo;
+
+// Mix string and LiNo
+let child = LiNo::Ref("child".to_string());
+let link: LiNo<String> = ("parent", child).into();
+println!("{}", link); // (parent: child)
+
+// Create anonymous links from multiple LiNo values
+let a = LiNo::Ref("a".to_string());
+let b = LiNo::Ref("b".to_string());
+let link: LiNo<String> = (a, b).into();
+println!("{}", link); // (a b)
+```
+
+### Complex Nested Structures
+
+Tuples can be nested to create complex link structures:
+
+```rust
+use links_notation::{format_links, LiNo};
+
+// Create nested links using tuples
+let loves_mama: LiNo<String> = ("lovesMama", "loves", "mama").into();
+let papa: LiNo<String> = ("papa", loves_mama).into();
+let son: LiNo<String> = ("son", "lovesMama").into();
+let daughter: LiNo<String> = ("daughter", "lovesMama").into();
+
+let links = vec![papa, son, daughter];
+let result = format_links(&links);
+println!("{}", result);
+// Output:
+// (papa: (lovesMama: loves mama))
+// (son: lovesMama)
+// (daughter: lovesMama)
+```
+
+### Supported Tuple Conversions
+
+The following tuple conversions are supported:
+
+- `(&str, &str)` → Link with ID and one value
+- `(String, String)` → Link with ID and one value
+- `(&str, LiNo<String>)` → Link with ID and LiNo value
+- `(LiNo<String>, LiNo<String>)` → Anonymous link with two values
+- `(&str, &str, &str)` → Link with ID and two values
+- `(String, String, String)` → Link with ID and two values
+- `(&str, LiNo<String>, LiNo<String>)` → Link with ID and two LiNo values
+- `(LiNo<String>, LiNo<String>, LiNo<String>)` → Anonymous link with three values
+- `(&str, &str, &str, &str)` → Link with ID and three values
+- `(String, String, String, String)` → Link with ID and three values
+- `(&str, LiNo<String>, LiNo<String>, LiNo<String>)` → Link with ID and three LiNo values
+- `(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)` → Anonymous link with four values
+
 ## Syntax Examples
 
 ### Doublets (2-tuple)
