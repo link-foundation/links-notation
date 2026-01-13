@@ -1,6 +1,8 @@
 pub mod format_config;
 pub mod parser;
+pub mod stream_parser;
 
+pub use stream_parser::{ErrorLocation, StreamParseError, StreamParser};
 use format_config::FormatConfig;
 use std::error::Error as StdError;
 use std::fmt;

@@ -14,3 +14,7 @@ path = "src/lib.rs"
 
 [dependencies]
 nom = "8.0"
+
+[[example]]
+name = "rust_streaming_parser"
+path = "../examples/rust_streaming_parser.rs"
