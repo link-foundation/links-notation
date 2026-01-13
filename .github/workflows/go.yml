@@ -166,14 +166,14 @@ jobs:
             --title "[Go] $PACKAGE_VERSION" \
             --notes "Go module release for \`$MODULE_PATH\`
 
-## Installation
+          ## Installation
 
-\`\`\`bash
-go get $MODULE_PATH@$TAG_NAME
-\`\`\`
+          \`\`\`bash
+          go get $MODULE_PATH@$TAG_NAME
+          \`\`\`
 
-## Documentation
+          ## Documentation
 
-https://pkg.go.dev/$MODULE_PATH@$TAG_NAME"
+          https://pkg.go.dev/$MODULE_PATH@$TAG_NAME"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
