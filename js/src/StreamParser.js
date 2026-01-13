@@ -77,7 +77,7 @@ export class StreamParser {
     this._handlers = {
       link: [],
       error: [],
-      end: []
+      end: [],
     };
 
     // Parsed links
@@ -341,7 +341,10 @@ export class StreamParser {
 
             // If next line is at base indentation and we're not waiting for indented children
             // this could be a new top-level element
-            const normalizedNext = baseIndentation !== null ? Math.max(0, nextIndent - baseIndentation) : nextIndent;
+            const normalizedNext =
+              baseIndentation !== null
+                ? Math.max(0, nextIndent - baseIndentation)
+                : nextIndent;
 
             if (normalizedNext === 0) {
               // This line boundary is a safe parse point
@@ -394,9 +397,10 @@ export class StreamParser {
 
       if (error.location) {
         line = this._currentLine + error.location.start.line - 1;
-        column = error.location.start.line === 1
-          ? this._currentColumn + error.location.start.column - 1
-          : error.location.start.column;
+        column =
+          error.location.start.line === 1
+            ? this._currentColumn + error.location.start.column - 1
+            : error.location.start.column;
         offset = error.location.start.offset;
       }
 
@@ -576,7 +580,7 @@ export class StreamParser {
     return {
       line: this._currentLine,
       column: this._currentColumn,
-      offset: this._totalBytesReceived
+      offset: this._totalBytesReceived,
     };
   }
 

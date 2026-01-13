@@ -75,7 +75,9 @@ daughter lovesMama`;
       expect(streamLinks.length).toBe(regularLinks.length);
 
       for (let i = 0; i < regularLinks.length; i++) {
-        expect(formatLinks([streamLinks[i]])).toBe(formatLinks([regularLinks[i]]));
+        expect(formatLinks([streamLinks[i]])).toBe(
+          formatLinks([regularLinks[i]])
+        );
       }
     });
   });
@@ -228,7 +230,9 @@ daughter lovesMama`;
       const parser = new StreamParser();
       parser.end();
 
-      expect(() => parser.write('more data')).toThrow('Cannot write to a parser that has ended');
+      expect(() => parser.write('more data')).toThrow(
+        'Cannot write to a parser that has ended'
+      );
     });
 
     test('throws on non-string input', () => {
@@ -243,7 +247,9 @@ daughter lovesMama`;
 
       const largeInput = 'x'.repeat(200);
 
-      expect(() => parser.write(largeInput)).toThrow(/exceeds maximum allowed size/);
+      expect(() => parser.write(largeInput)).toThrow(
+        /exceeds maximum allowed size/
+      );
     });
   });
 
@@ -259,7 +265,9 @@ daughter lovesMama`;
     test('ParseError toString includes location', () => {
       const error = new ParseError('test error', 3, 7);
 
-      expect(error.toString()).toBe('ParseError at line 3, column 7: test error');
+      expect(error.toString()).toBe(
+        'ParseError at line 3, column 7: test error'
+      );
     });
 
     test('ParseError toString without location', () => {
@@ -470,7 +478,7 @@ other:
         errors.push({
           message: error.message,
           line: error.line,
-          column: error.column
+          column: error.column,
         });
       });
 

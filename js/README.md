@@ -130,7 +130,9 @@ parser.on('link', (link) => {
 
 parser.on('error', (error) => {
   // Handle parse errors with location info
-  console.error(`Error at line ${error.line}, col ${error.column}: ${error.message}`);
+  console.error(
+    `Error at line ${error.line}, col ${error.column}: ${error.message}`
+  );
 });
 
 // Feed data incrementally
@@ -142,6 +144,7 @@ const links = parser.end();
 ```
 
 The streaming parser supports:
+
 - **Memory efficiency**: Process large messages without loading everything into memory
 - **Low latency**: Start processing before the full message is received
 - **Detailed error reporting**: Errors include line and column information
