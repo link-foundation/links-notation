@@ -47,7 +47,7 @@ class LinkTest {
   @Test
   void testFormatLinkWithValuesOnly() {
     List<Link> values = Arrays.asList(new Link("a"), new Link("b"), new Link("c"));
-    Link link = new Link(null, values);
+    Link link = new Link((String) null, values);
     assertEquals("(a b c)", link.toString());
   }
 
@@ -111,7 +111,7 @@ class LinkTest {
 
   @Test
   void testSimplify() {
-    Link link = new Link(null, Arrays.asList(new Link("only")));
+    Link link = new Link((String) null, Arrays.asList(new Link("only")));
     Link simplified = link.simplify();
     assertEquals("only", simplified.getId());
   }

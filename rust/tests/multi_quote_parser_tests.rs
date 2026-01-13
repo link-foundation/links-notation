@@ -4,16 +4,16 @@ use links_notation::{parse_lino, LiNo};
 fn get_single_ref_id(lino: &LiNo<String>) -> Option<&String> {
     match lino {
         LiNo::Ref(id) => Some(id),
-        LiNo::Link { id: None, values } if values.len() == 1 => {
+        LiNo::Link { ids: None, values } if values.len() == 1 => {
             if let LiNo::Ref(id) = &values[0] {
                 Some(id)
             } else if let LiNo::Link {
-                id: Some(ref_id),
+                ids: Some(ref_ids),
                 values: inner_values,
             } = &values[0]
             {
-                if inner_values.is_empty() {
-                    Some(ref_id)
+                if inner_values.is_empty() && ref_ids.len() == 1 {
+                    Some(&ref_ids[0])
                 } else {
                     None
                 }
@@ -22,9 +22,9 @@ fn get_single_ref_id(lino: &LiNo<String>) -> Option<&String> {
             }
         }
         LiNo::Link {
-            id: Some(ref_id),
+            ids: Some(ref_ids),
             values,
-        } if values.is_empty() => Some(ref_id),
+        } if values.is_empty() && ref_ids.len() == 1 => Some(&ref_ids[0]),
         _ => None,
     }
 }
@@ -407,11 +407,11 @@ fn test_backtick_as_id_in_link() {
     let result = parse_lino("(`myId`: value1 value2)").unwrap();
     if let LiNo::Link { values, .. } = &result {
         if let Some(LiNo::Link {
-            id,
+            ids,
             values: inner_values,
         }) = values.first()
         {
-            assert_eq!(id.as_deref(), Some("myId"));
+            assert_eq!(ids.as_ref().unwrap()[0], "myId");
             assert_eq!(inner_values.len(), 2);
             return;
         }

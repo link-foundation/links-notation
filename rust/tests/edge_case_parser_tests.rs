@@ -54,8 +54,8 @@ fn test_all_features_test() {
     let result = parse_lino(input);
     assert!(result.is_ok());
     let parsed = result.unwrap();
-    if let LiNo::Link { id, values } = parsed {
-        assert!(id.is_none());
+    if let LiNo::Link { ids, values } = parsed {
+        assert!(ids.is_none());
         assert_eq!(values.len(), 1);
         if let LiNo::Ref(ref_id) = &values[0] {
             assert_eq!(ref_id, "singlet");
@@ -126,8 +126,8 @@ fn test_singlet_links() {
     let result = parse_lino(input);
     assert!(result.is_ok());
     let parsed = result.unwrap();
-    if let LiNo::Link { id, values } = parsed {
-        assert!(id.is_none());
+    if let LiNo::Link { ids, values } = parsed {
+        assert!(ids.is_none());
         assert_eq!(values.len(), 1);
         if let LiNo::Ref(ref_id) = &values[0] {
             assert_eq!(ref_id, "1");
@@ -139,11 +139,11 @@ fn test_singlet_links() {
     let result = parse_lino(input);
     assert!(result.is_ok());
     let parsed = result.unwrap();
-    if let LiNo::Link { id, values } = parsed {
-        assert!(id.is_none());
+    if let LiNo::Link { ids, values } = parsed {
+        assert!(ids.is_none());
         assert_eq!(values.len(), 1);
-        if let LiNo::Link { id, values } = &values[0] {
-            assert!(id.is_none());
+        if let LiNo::Link { ids, values } = &values[0] {
+            assert!(ids.is_none());
             assert_eq!(values.len(), 2);
             assert_eq!(values[0], LiNo::Ref("1".to_string()));
             assert_eq!(values[1], LiNo::Ref("2".to_string()));
@@ -155,11 +155,11 @@ fn test_singlet_links() {
     let result = parse_lino(input);
     assert!(result.is_ok());
     let parsed = result.unwrap();
-    if let LiNo::Link { id, values } = parsed {
-        assert!(id.is_none());
+    if let LiNo::Link { ids, values } = parsed {
+        assert!(ids.is_none());
         assert_eq!(values.len(), 1);
-        if let LiNo::Link { id, values } = &values[0] {
-            assert!(id.is_none());
+        if let LiNo::Link { ids, values } = &values[0] {
+            assert!(ids.is_none());
             assert_eq!(values.len(), 3);
             assert_eq!(values[0], LiNo::Ref("1".to_string()));
             assert_eq!(values[1], LiNo::Ref("2".to_string()));
@@ -172,11 +172,11 @@ fn test_singlet_links() {
     let result = parse_lino(input);
     assert!(result.is_ok());
     let parsed = result.unwrap();
-    if let LiNo::Link { id, values } = parsed {
-        assert!(id.is_none());
+    if let LiNo::Link { ids, values } = parsed {
+        assert!(ids.is_none());
         assert_eq!(values.len(), 1);
-        if let LiNo::Link { id, values } = &values[0] {
-            assert!(id.is_none());
+        if let LiNo::Link { ids, values } = &values[0] {
+            assert!(ids.is_none());
             assert_eq!(values.len(), 4);
             assert_eq!(values[0], LiNo::Ref("1".to_string()));
             assert_eq!(values[1], LiNo::Ref("2".to_string()));
