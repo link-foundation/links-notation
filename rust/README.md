@@ -65,11 +65,11 @@ fn main() {
 son lovesMama
 daughter lovesMama
 all (love mama)"#;
-    
+
     match parse_lino(input) {
         Ok(parsed) => {
             println!("Parsed: {}", parsed);
-            
+
             // Access the structure
             if let LiNo::Link { values, .. } = parsed {
                 for link in values {
@@ -144,6 +144,51 @@ let parsed = parse_lino(indented)?;
 let quoted = r#"("quoted id": "value with spaces")"#;
 let parsed = parse_lino(quoted)?;
 ```
+
+### Streaming Parser (for Large Messages)
+
+The `StreamParser` allows you to parse Links Notation incrementally, processing data as it arrives without loading the entire message into memory. This is ideal for:
+
+- Large files that don't fit in memory
+- Network streaming (TCP/HTTP)
+- Real-time processing of incoming data
+
+```rust
+use links_notation::StreamParser;
+use std::sync::{Arc, Mutex};
+
+let mut parser = StreamParser::new();
+
+// Set up link callback
+let count = Arc::new(Mutex::new(0));
+let count_clone = Arc::clone(&count);
+parser.on_link(move |link| {
+    let mut c = count_clone.lock().unwrap();
+    *c += 1;
+    println!("Parsed link #{}: {:?}", *c, link);
+});
+
+// Set up error callback with location info
+parser.on_error(|error| {
+    if let Some(ref loc) = error.location {
+        eprintln!("Error at line {}, col {}: {}",
+                  loc.line, loc.column, error.message);
+    } else {
+        eprintln!("Error: {}", error.message);
+    }
+});
+
+// Feed data incrementally
+parser.write("papa (lovesMama: loves mama)\n")?;
+parser.write("son lovesMama\n")?;
+parser.write("daughter lovesMama\n")?;
+
+// Finish parsing and get all links
+let links = parser.finish()?;
+println!("Total links: {}", links.len());
+```
+
+See the [streaming parser example](../examples/rust_streaming_parser.rs) for more use cases including TCP stream simulation and memory-efficient processing of large datasets.
 
 ## Syntax Examples
 

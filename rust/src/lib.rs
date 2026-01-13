@@ -1,9 +1,11 @@
 pub mod format_config;
 pub mod parser;
+pub mod stream_parser;
 
 use format_config::FormatConfig;
 use std::error::Error as StdError;
 use std::fmt;
+pub use stream_parser::{ErrorLocation, StreamParseError, StreamParser};
 
 /// Error type for Lino parsing
 #[derive(Debug)]

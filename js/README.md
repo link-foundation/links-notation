@@ -131,6 +131,43 @@ const group = new LinksGroup(parsed);
 console.log(group.format());
 ```
 
+### Streaming Parser (for Large Messages)
+
+The `StreamParser` allows you to parse Links Notation incrementally, processing data as it arrives without loading the entire message into memory. This is ideal for:
+
+- Large files that don't fit in memory
+- Network streaming (TCP/HTTP)
+- Real-time processing of incoming data
+
+```javascript
+import { StreamParser } from 'links-notation';
+
+const parser = new StreamParser();
+
+// Listen for parsed links
+parser.on('link', (link) => {
+  console.log('Parsed link:', link.toString());
+});
+
+// Listen for errors with location information
+parser.on('error', (error) => {
+  console.error(
+    `Error at line ${error.line}, col ${error.column}: ${error.message}`
+  );
+});
+
+// Feed data incrementally (e.g., from network chunks)
+parser.write('papa (lovesMama: loves mama)\n');
+parser.write('son lovesMama\n');
+parser.write('daughter lovesMama\n');
+
+// Finish parsing and get all links
+const links = parser.end();
+console.log('Total links:', links.length);
+```
+
+See the [streaming parser example](../examples/js_streaming_parser.js) for more use cases including TCP stream simulation and memory-efficient processing of large datasets.
+
 ## Syntax Examples
 
 ### Doublets (2-tuple)
@@ -194,6 +231,19 @@ Container for grouping related links.
 
 - `constructor(links)` - Create a new group
 - `format()` - Format the group as a string
+
+#### `StreamParser`
+
+EventEmitter-based streaming parser for incremental parsing.
+
+- `constructor(options)` - Create a new streaming parser
+  - `options.maxInputSize` - Maximum input size in bytes (default: 10MB)
+  - `options.maxDepth` - Maximum nesting depth (default: 1000)
+- `write(chunk)` - Feed a chunk of data to the parser
+- `end()` - Finish parsing and return all parsed links
+- `position()` - Get current parsing position (line, column, offset)
+- Event: `'link'` - Emitted when a link is parsed (callback receives Link object)
+- Event: `'error'` - Emitted on parse error (callback receives Error with line/column info)
 
 ## Project Structure
 
