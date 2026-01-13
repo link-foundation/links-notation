@@ -75,6 +75,22 @@ bun test --watch
 
 ## Usage
 
+### TypeScript Support
+
+This package includes TypeScript type definitions for improved developer experience with IntelliSense, autocomplete, and compile-time type checking.
+
+```typescript
+import { Parser, Link, FormatOptions } from 'links-notation';
+
+// TypeScript provides full type checking and autocomplete
+const parser = new Parser({
+  maxInputSize: 10 * 1024 * 1024,
+  maxDepth: 1000,
+});
+
+const links: Link[] = parser.parse('(source: type target)');
+```
+
 ### Basic Parsing
 
 ```javascript
@@ -129,6 +145,45 @@ const parsed = await parser.parse(input);
 import { LinksGroup } from 'links-notation';
 const group = new LinksGroup(parsed);
 console.log(group.format());
+```
+
+### TypeScript Usage Examples
+
+```typescript
+import {
+  Parser,
+  Link,
+  FormatOptions,
+  FormatConfig,
+  formatLinks,
+} from 'links-notation';
+
+// Create parser with options
+const parser = new Parser({
+  maxInputSize: 5 * 1024 * 1024,
+  maxDepth: 500,
+});
+
+// Parse with full type safety
+const links: Link[] = parser.parse('(id: value1 value2)');
+
+// Create links programmatically
+const link = new Link('parent', [new Link('child1'), new Link('child2')]);
+
+// Use formatting options
+const formatOptions = new FormatOptions({
+  lessParentheses: true,
+  maxLineLength: 80,
+  indentLongLines: true,
+  maxInlineRefs: 3,
+  groupConsecutive: false,
+});
+
+// Format with type-checked options
+const formatted: string = link.format(formatOptions);
+
+// Format multiple links
+const output: string = formatLinks(links, formatOptions);
 ```
 
 ## Syntax Examples
