@@ -113,6 +113,40 @@ console.log('ID:', link.id);
 console.log('Values:', link.values);
 ```
 
+### Streaming Parser
+
+For processing large messages efficiently without loading everything into memory:
+
+```javascript
+import { StreamParser, ParseError } from 'links-notation';
+
+const parser = new StreamParser();
+
+// Register event handlers
+parser.on('link', (link) => {
+  // Process each link as it's parsed
+  console.log('Parsed:', link.toString());
+});
+
+parser.on('error', (error) => {
+  // Handle parse errors with location info
+  console.error(`Error at line ${error.line}, col ${error.column}: ${error.message}`);
+});
+
+// Feed data incrementally
+parser.write('papa (lovesMama: loves mama)\n');
+parser.write('son lovesMama\n');
+
+// Finish parsing and get all links
+const links = parser.end();
+```
+
+The streaming parser supports:
+- **Memory efficiency**: Process large messages without loading everything into memory
+- **Low latency**: Start processing before the full message is received
+- **Detailed error reporting**: Errors include line and column information
+- **Event-based API**: Receive links as they are parsed
+
 ### Advanced Usage
 
 ```javascript
@@ -195,12 +229,38 @@ Container for grouping related links.
 - `constructor(links)` - Create a new group
 - `format()` - Format the group as a string
 
+#### `StreamParser`
+
+Streaming parser for incremental processing.
+
+- `constructor(options = {})` - Create a new streaming parser
+  - `options.maxInputSize` - Maximum input size in bytes (default: 10MB)
+  - `options.maxDepth` - Maximum nesting depth (default: 1000)
+- `on(event, handler)` - Register an event handler ('link', 'error', 'end')
+- `off(event, handler)` - Remove an event handler
+- `write(chunk)` - Write a chunk of data to the parser
+- `end()` - Signal end of input and get all parsed links
+- `reset()` - Reset the parser for reuse
+- `getLinks()` - Get all links parsed so far
+- `getPosition()` - Get current parser position (line, column, offset)
+- `isEnded()` - Check if parser has ended
+
+#### `ParseError`
+
+Error class with location information.
+
+- `message` - Error message
+- `line` - Line number (1-based)
+- `column` - Column number (1-based)
+- `offset` - Byte offset in the input
+
 ## Project Structure
 
 - `src/grammar.pegjs` - Peggy.js grammar definition
 - `src/Link.js` - Link data structure
 - `src/LinksGroup.js` - Links group container
 - `src/Parser.js` - Parser wrapper
+- `src/StreamParser.js` - Streaming parser for large messages
 - `src/index.js` - Main entry point
 - `tests/` - Test files
 
