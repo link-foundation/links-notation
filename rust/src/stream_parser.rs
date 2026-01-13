@@ -347,7 +347,7 @@ mod tests {
         parser.write("mama)\n").unwrap();
 
         let result = parser.finish().unwrap();
-        assert!(result.len() >= 1);
+        assert!(!result.is_empty());
         assert!(*count.lock().unwrap() >= 1);
     }
 
@@ -378,7 +378,7 @@ mod tests {
         parser.write("  mama\n").unwrap();
 
         let result = parser.finish().unwrap();
-        assert!(result.len() >= 1);
+        assert!(!result.is_empty());
     }
 
     #[test]
