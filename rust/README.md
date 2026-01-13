@@ -145,6 +145,39 @@ let quoted = r#"("quoted id": "value with spaces")"#;
 let parsed = parse_lino(quoted)?;
 ```
 
+### Streaming Parser
+
+For processing large messages efficiently without loading everything into memory:
+
+```rust
+use links_notation::stream_parser::StreamParser;
+
+let mut parser = StreamParser::new();
+
+// Register callback for each parsed link
+parser.on_link(|link| {
+    println!("{:?}", link);
+});
+
+// Register error callback
+parser.on_error(|error| {
+    eprintln!("Error at line {}: {}", error.line.unwrap_or(0), error.message);
+});
+
+// Feed data incrementally
+parser.write("papa (lovesMama: loves mama)\n")?;
+parser.write("son lovesMama\n")?;
+
+// Finish parsing and get all links
+let links = parser.finish()?;
+```
+
+The streaming parser supports:
+- **Memory efficiency**: Process large messages without loading everything into memory
+- **Low latency**: Start processing before the full message is received
+- **Detailed error reporting**: Errors include line and column information
+- **Callback-based API**: Receive links as they are parsed
+
 ## Syntax Examples
 
 ### Doublets (2-tuple)
@@ -206,6 +239,40 @@ Represents either a Link or a Reference:
 #### `parse_lino(document: &str) -> Result<LiNo<String>, String>`
 
 Parses a Links Notation document string and returns the parsed structure or an error.
+
+### Streaming Parser
+
+#### `StreamParser`
+
+Streaming parser for incremental processing of large messages.
+
+- `StreamParser::new()` - Create a new streaming parser
+- `StreamParser::with_max_size(size)` - Create with custom max input size
+- `on_link(callback)` - Register callback for parsed links
+- `on_error(callback)` - Register callback for parse errors
+- `write(chunk) -> Result<(), StreamParseError>` - Write a chunk of data
+- `finish() -> Result<Vec<LiNo<String>>, StreamParseError>` - Finish parsing
+- `reset()` - Reset the parser for reuse
+- `get_links()` - Get all links parsed so far
+- `get_position()` - Get current parser position
+- `is_ended()` - Check if parser has ended
+
+#### `StreamParseError`
+
+Error type with location information.
+
+- `message` - Error message
+- `line` - Line number (1-based, optional)
+- `column` - Column number (1-based, optional)
+- `offset` - Byte offset in the input (optional)
+
+#### `Position`
+
+Parser position in the input stream.
+
+- `line` - Line number (1-based)
+- `column` - Column number (1-based)
+- `offset` - Byte offset
 
 ### Formatting
 
