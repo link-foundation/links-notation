@@ -151,7 +151,9 @@ parser.on('link', (link) => {
 
 // Listen for errors with location information
 parser.on('error', (error) => {
-  console.error(`Error at line ${error.line}, col ${error.column}: ${error.message}`);
+  console.error(
+    `Error at line ${error.line}, col ${error.column}: ${error.message}`
+  );
 });
 
 // Feed data incrementally (e.g., from network chunks)

@@ -65,11 +65,11 @@ fn main() {
 son lovesMama
 daughter lovesMama
 all (love mama)"#;
-    
+
     match parse_lino(input) {
         Ok(parsed) => {
             println!("Parsed: {}", parsed);
-            
+
             // Access the structure
             if let LiNo::Link { values, .. } = parsed {
                 for link in values {

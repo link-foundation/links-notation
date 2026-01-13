@@ -10,7 +10,6 @@
 /// ```
 /// cargo run --example rust_streaming_parser
 /// ```
-
 use links_notation::StreamParser;
 use std::sync::{Arc, Mutex};
 
