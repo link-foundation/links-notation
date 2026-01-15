@@ -1,16 +1,6 @@
-[package]
-name = "links-notation"
-version = "0.13.0"
-edition = "2021"
-description = "Rust implementation of the Links Notation parser"
-license = "Unlicense"
-repository = "https://github.com/link-foundation/links-notation"
-keywords = ["lino", "parser", "links", "notation", "protocol"]
-categories = ["parsing"]
-
-[lib]
-name = "links_notation"
-path = "src/lib.rs"
-
-[dependencies]
-nom = "8.0"
+[workspace]
+members = [
+    "links-notation",
+    "links-notation-macro",
+]
+resolver = "2"

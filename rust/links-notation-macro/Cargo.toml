@@ -1,0 +1,15 @@
+[package]
+name = "links-notation-macro"
+version = "0.1.0"
+edition = "2021"
+description = "Procedural macro for Links Notation compile-time parsing"
+license = "Unlicense"
+repository = "https://github.com/link-foundation/links-notation"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "2.0", features = ["full", "extra-traits"] }
+quote = "1.0"
+proc-macro2 = "1.0"

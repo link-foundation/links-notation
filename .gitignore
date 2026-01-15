@@ -334,6 +334,8 @@ ASALocalRun/
 
 # rust
 rust/target/
+rust/**/target/
+rust/**/Cargo.lock
 target/venv/
 .venv/
 venv/

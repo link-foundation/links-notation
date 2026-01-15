@@ -137,15 +137,15 @@ jobs:
       - name: Publish to Crates.io (with version check)
         id: publish-crate
         run: |
-          PACKAGE_NAME=$(grep '^name = ' Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/')
-          PACKAGE_VERSION=$(grep '^version = ' Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
+          PACKAGE_NAME=$(grep '^name = ' links-notation/Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/')
+          PACKAGE_VERSION=$(grep '^version = ' links-notation/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
           echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
           
           echo "=== Attempting to publish to crates.io ==="
           
           # Try to publish and capture the result
           set +e  # Don't exit on error
-          cargo publish --token ${{ secrets.CARGO_TOKEN }} --allow-dirty 2>&1 | tee publish_output.txt
+          cargo publish -p links-notation --token ${{ secrets.CARGO_TOKEN }} --allow-dirty 2>&1 | tee publish_output.txt
           PUBLISH_EXIT_CODE=$?
           set -e  # Re-enable exit on error
           
@@ -187,7 +187,7 @@ jobs:
       - name: Check if GitHub release already exists
         id: release-check
         run: |
-          PACKAGE_VERSION=$(grep '^version = ' Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
+          PACKAGE_VERSION=$(grep '^version = ' links-notation/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
           TAG_NAME="rust_$PACKAGE_VERSION"
           echo "Checking if release $TAG_NAME already exists"
 
@@ -204,8 +204,8 @@ jobs:
       - name: Create GitHub release
         if: steps.release-check.outputs.should_create_release == 'true'
         run: |
-          PACKAGE_NAME=$(grep '^name = ' Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/')
-          PACKAGE_VERSION=$(grep '^version = ' Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
+          PACKAGE_NAME=$(grep '^name = ' links-notation/Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/')
+          PACKAGE_VERSION=$(grep '^version = ' links-notation/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
 
           # Create release with consistent tag format: rust_version
           gh release create "rust_${PACKAGE_VERSION}" \
