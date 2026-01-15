@@ -166,24 +166,15 @@ fn tokens_to_lino_string(tokens: proc_macro2::TokenStream, output: &mut String) 
                     '-' => {
                         // Check if this is part of a negative number or hyphenated word
                         // Look at next token
-                        if let Some(next) = tokens_iter.peek() {
-                            match next {
-                                TokenTree::Literal(_) | TokenTree::Ident(_) => {
-                                    // Part of a compound like -123 or hyphenated word
-                                    if prev_needs_space {
-                                        output.push(' ');
-                                    }
-                                    output.push('-');
-                                    prev_needs_space = false;
-                                }
-                                _ => {
-                                    if prev_needs_space {
-                                        output.push(' ');
-                                    }
-                                    output.push('-');
-                                    prev_needs_space = true;
-                                }
+                        if let Some(TokenTree::Literal(_) | TokenTree::Ident(_)) =
+                            tokens_iter.peek()
+                        {
+                            // Part of a compound like -123 or hyphenated word
+                            if prev_needs_space {
+                                output.push(' ');
                             }
+                            output.push('-');
+                            prev_needs_space = false;
                         } else {
                             if prev_needs_space {
                                 output.push(' ');

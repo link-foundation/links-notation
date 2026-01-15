@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "links-notation",
+    "links-notation-macro",
+]
+resolver = "2"
