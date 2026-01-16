@@ -54,7 +54,81 @@ cargo test -- --nocapture
 
 ## Usage
 
-### Basic Parsing
+### Using the `lino!` Macro (Recommended)
+
+The `lino!` macro provides compile-time validation and a convenient way to work with Links Notation. It supports two syntax options:
+
+#### Direct Syntax (Recommended for Simple Cases)
+
+Write Links Notation directly without quotes for a cleaner, more native feel:
+
+```rust
+use links_notation::lino;
+
+fn main() {
+    // Direct syntax - no quotes needed!
+    let result = lino!(papa (lovesMama: loves mama));
+
+    // Simple triplets
+    let triplet = lino!(papa has car);
+
+    // Nested links with IDs
+    let nested = lino!((outer: (inner: value)));
+
+    // Multiple links
+    let multi = lino!((a x) (b y));
+
+    println!("Parsed: {}", result);
+}
+```
+
+#### String Literal Syntax (For Complex Cases)
+
+Use string literals when you need special characters, newlines, or quoted strings:
+
+```rust
+use links_notation::lino;
+
+fn main() {
+    // String literal for content with newlines
+    let multiline = lino!("papa has car\nmama has house");
+
+    // String literal for quoted identifiers with spaces
+    let quoted = lino!(r#"("quoted id": "quoted value")"#);
+
+    // Indented syntax requires string literal
+    let indented = lino!(r#"3:
+  papa
+  loves
+  mama"#);
+
+    println!("Parsed: {}", multiline);
+}
+```
+
+#### Benefits
+
+The `lino!` macro:
+- **Direct syntax**: Write Links Notation natively without quotes
+- **Compile-time validation**: Syntax errors are caught at compile time
+- **Clear error messages**: Descriptive errors for invalid syntax
+- **Type-safe**: Returns fully typed `LiNo<String>` structures
+- **Zero overhead**: Validation happens at compile time
+
+#### When to Use Each Syntax
+
+| Use Case | Syntax |
+|----------|--------|
+| Simple identifiers | `lino!(papa has car)` |
+| Nested links | `lino!(papa (loves mama))` |
+| Links with IDs | `lino!((myId: value))` |
+| Multiline content | `lino!("line1\nline2")` |
+| Quoted strings with spaces | `lino!(r#"("my id": "my value")"#)` |
+| Indented syntax | `lino!(r#"id:\n  child"#)` |
+
+### Basic Runtime Parsing
+
+For dynamic content, use the runtime parser:
 
 ```rust
 use links_notation::{parse_lino, LiNo};
@@ -65,11 +139,11 @@ fn main() {
 son lovesMama
 daughter lovesMama
 all (love mama)"#;
-    
+
     match parse_lino(input) {
         Ok(parsed) => {
             println!("Parsed: {}", parsed);
-            
+
             // Access the structure
             if let LiNo::Link { values, .. } = parsed {
                 for link in values {
