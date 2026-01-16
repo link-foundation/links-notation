@@ -284,20 +284,45 @@ println!("{}", result);
 
 ### Supported Tuple Conversions
 
-The following tuple conversions are supported:
+Tuple conversions are supported for tuples of size 2 through 12 (following Rust's standard library convention). For each tuple size N, four conversion types are implemented:
 
-- `(&str, &str)` → Link with ID and one value
-- `(String, String)` → Link with ID and one value
-- `(&str, LiNo<String>)` → Link with ID and LiNo value
-- `(LiNo<String>, LiNo<String>)` → Anonymous link with two values
-- `(&str, &str, &str)` → Link with ID and two values
-- `(String, String, String)` → Link with ID and two values
-- `(&str, LiNo<String>, LiNo<String>)` → Link with ID and two LiNo values
-- `(LiNo<String>, LiNo<String>, LiNo<String>)` → Anonymous link with three values
-- `(&str, &str, &str, &str)` → Link with ID and three values
-- `(String, String, String, String)` → Link with ID and three values
-- `(&str, LiNo<String>, LiNo<String>, LiNo<String>)` → Link with ID and three LiNo values
-- `(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)` → Anonymous link with four values
+1. **All `&str`** - First element becomes ID, rest become values
+   - `("id", "v1", ...)` → `(id: v1 ...)`
+
+2. **All `String`** - Same as above but with owned strings
+   - `(id.to_string(), v1.to_string(), ...)` → `(id: v1 ...)`
+
+3. **`&str` ID with `LiNo<String>` values** - For nested links
+   - `("id", lino1, lino2, ...)` → `(id: <lino1> <lino2> ...)`
+
+4. **All `LiNo<String>`** - Creates anonymous link (no ID)
+   - `(lino1, lino2, ...)` → `(<lino1> <lino2> ...)`
+
+#### Examples by Tuple Size
+
+```rust
+use links_notation::LiNo;
+
+// 2-tuple
+let link: LiNo<String> = ("id", "value").into();  // (id: value)
+
+// 5-tuple
+let link: LiNo<String> = ("id", "v1", "v2", "v3", "v4").into();  // (id: v1 v2 v3 v4)
+
+// 8-tuple
+let link: LiNo<String> = ("id", "v1", "v2", "v3", "v4", "v5", "v6", "v7").into();
+
+// 12-tuple (maximum)
+let link: LiNo<String> = ("id", "v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11").into();
+
+// Anonymous links from LiNo tuples
+let refs: Vec<LiNo<String>> = (1..=6).map(|i| LiNo::Ref(format!("v{}", i))).collect();
+let link: LiNo<String> = (refs[0].clone(), refs[1].clone(), refs[2].clone(),
+                          refs[3].clone(), refs[4].clone(), refs[5].clone()).into();
+// Result: (v1 v2 v3 v4 v5 v6)
+```
+
+This macro-generated implementation reduces code duplication while providing compile-time type safety for all tuple sizes.
 
 ## Syntax Examples
 

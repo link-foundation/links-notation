@@ -638,140 +638,722 @@ fn format_value<T: ToString>(value: &LiNo<T>) -> String {
 
 // Tuple conversion implementations for ergonomic link creation
 // These implementations allow creating links using Rust tuple syntax
+//
+// The macro generates From implementations for tuples of sizes 2-12.
+// For each size, it generates 4 types of conversions:
+// 1. All &str - first element becomes ID, rest become values
+// 2. All String - first element becomes ID, rest become values
+// 3. &str ID with LiNo values - first element becomes ID, LiNo elements become values
+// 4. All LiNo - creates anonymous link (no ID) with all elements as values
 
-/// Convert a 2-tuple into a LiNo Link.
-/// The first element becomes the ID, the second becomes a single value.
-/// Example: `("parent", "child")` becomes `(parent: child)`
-impl From<(&str, &str)> for LiNo<String> {
-    fn from(tuple: (&str, &str)) -> Self {
-        LiNo::Link {
-            id: Some(tuple.0.to_string()),
-            values: vec![LiNo::Ref(tuple.1.to_string())],
+/// Macro to implement From trait for tuples converting to LiNo<String>.
+///
+/// This macro generates four From implementations for each tuple size:
+/// - `(&str, &str, ...)` - First element becomes ID, rest become string values
+/// - `(String, String, ...)` - First element becomes ID, rest become string values
+/// - `(&str, LiNo<String>, ...)` - First element becomes ID, LiNo elements become values
+/// - `(LiNo<String>, LiNo<String>, ...)` - Creates anonymous link with all elements as values
+///
+/// # Examples
+/// ```
+/// use links_notation::LiNo;
+///
+/// // 2-tuple: ("id", "value") -> (id: value)
+/// let link: LiNo<String> = ("papa", "mama").into();
+/// assert_eq!(format!("{}", link), "(papa: mama)");
+///
+/// // 3-tuple: ("id", "v1", "v2") -> (id: v1 v2)
+/// let link: LiNo<String> = ("parent", "child1", "child2").into();
+/// assert_eq!(format!("{}", link), "(parent: child1 child2)");
+///
+/// // Anonymous link from all LiNo elements
+/// let a = LiNo::Ref("a".to_string());
+/// let b = LiNo::Ref("b".to_string());
+/// let link: LiNo<String> = (a, b).into();
+/// assert_eq!(format!("{}", link), "(a b)");
+/// ```
+macro_rules! impl_tuple_from {
+    // Implementation for 2-tuples
+    (@str_tuple 2, $t0:tt, $t1:tt) => {
+        impl From<(&str, &str)> for LiNo<String> {
+            fn from(tuple: (&str, &str)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![LiNo::Ref(tuple.$t1.to_string())],
+                }
+            }
         }
-    }
+    };
+    (@string_tuple 2, $t0:tt, $t1:tt) => {
+        impl From<(String, String)> for LiNo<String> {
+            fn from(tuple: (String, String)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0),
+                    values: vec![LiNo::Ref(tuple.$t1)],
+                }
+            }
+        }
+    };
+    (@str_lino_tuple 2, $t0:tt, $t1:tt) => {
+        impl From<(&str, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (&str, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![tuple.$t1],
+                }
+            }
+        }
+    };
+    (@lino_tuple 2, $t0:tt, $t1:tt) => {
+        impl From<(LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: None,
+                    values: vec![tuple.$t0, tuple.$t1],
+                }
+            }
+        }
+    };
+
+    // Implementation for 3-tuples
+    (@str_tuple 3, $t0:tt, $t1:tt, $t2:tt) => {
+        impl From<(&str, &str, &str)> for LiNo<String> {
+            fn from(tuple: (&str, &str, &str)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![LiNo::Ref(tuple.$t1.to_string()), LiNo::Ref(tuple.$t2.to_string())],
+                }
+            }
+        }
+    };
+    (@string_tuple 3, $t0:tt, $t1:tt, $t2:tt) => {
+        impl From<(String, String, String)> for LiNo<String> {
+            fn from(tuple: (String, String, String)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0),
+                    values: vec![LiNo::Ref(tuple.$t1), LiNo::Ref(tuple.$t2)],
+                }
+            }
+        }
+    };
+    (@str_lino_tuple 3, $t0:tt, $t1:tt, $t2:tt) => {
+        impl From<(&str, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (&str, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![tuple.$t1, tuple.$t2],
+                }
+            }
+        }
+    };
+    (@lino_tuple 3, $t0:tt, $t1:tt, $t2:tt) => {
+        impl From<(LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: None,
+                    values: vec![tuple.$t0, tuple.$t1, tuple.$t2],
+                }
+            }
+        }
+    };
+
+    // Implementation for 4-tuples
+    (@str_tuple 4, $t0:tt, $t1:tt, $t2:tt, $t3:tt) => {
+        impl From<(&str, &str, &str, &str)> for LiNo<String> {
+            fn from(tuple: (&str, &str, &str, &str)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1.to_string()),
+                        LiNo::Ref(tuple.$t2.to_string()),
+                        LiNo::Ref(tuple.$t3.to_string()),
+                    ],
+                }
+            }
+        }
+    };
+    (@string_tuple 4, $t0:tt, $t1:tt, $t2:tt, $t3:tt) => {
+        impl From<(String, String, String, String)> for LiNo<String> {
+            fn from(tuple: (String, String, String, String)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0),
+                    values: vec![LiNo::Ref(tuple.$t1), LiNo::Ref(tuple.$t2), LiNo::Ref(tuple.$t3)],
+                }
+            }
+        }
+    };
+    (@str_lino_tuple 4, $t0:tt, $t1:tt, $t2:tt, $t3:tt) => {
+        impl From<(&str, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (&str, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![tuple.$t1, tuple.$t2, tuple.$t3],
+                }
+            }
+        }
+    };
+    (@lino_tuple 4, $t0:tt, $t1:tt, $t2:tt, $t3:tt) => {
+        impl From<(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: None,
+                    values: vec![tuple.$t0, tuple.$t1, tuple.$t2, tuple.$t3],
+                }
+            }
+        }
+    };
+
+    // Implementation for 5-tuples
+    (@str_tuple 5, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt) => {
+        impl From<(&str, &str, &str, &str, &str)> for LiNo<String> {
+            fn from(tuple: (&str, &str, &str, &str, &str)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1.to_string()),
+                        LiNo::Ref(tuple.$t2.to_string()),
+                        LiNo::Ref(tuple.$t3.to_string()),
+                        LiNo::Ref(tuple.$t4.to_string()),
+                    ],
+                }
+            }
+        }
+    };
+    (@string_tuple 5, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt) => {
+        impl From<(String, String, String, String, String)> for LiNo<String> {
+            fn from(tuple: (String, String, String, String, String)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1),
+                        LiNo::Ref(tuple.$t2),
+                        LiNo::Ref(tuple.$t3),
+                        LiNo::Ref(tuple.$t4),
+                    ],
+                }
+            }
+        }
+    };
+    (@str_lino_tuple 5, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt) => {
+        impl From<(&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4],
+                }
+            }
+        }
+    };
+    (@lino_tuple 5, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt) => {
+        impl From<(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: None,
+                    values: vec![tuple.$t0, tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4],
+                }
+            }
+        }
+    };
+
+    // Implementation for 6-tuples
+    (@str_tuple 6, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt) => {
+        impl From<(&str, &str, &str, &str, &str, &str)> for LiNo<String> {
+            fn from(tuple: (&str, &str, &str, &str, &str, &str)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1.to_string()),
+                        LiNo::Ref(tuple.$t2.to_string()),
+                        LiNo::Ref(tuple.$t3.to_string()),
+                        LiNo::Ref(tuple.$t4.to_string()),
+                        LiNo::Ref(tuple.$t5.to_string()),
+                    ],
+                }
+            }
+        }
+    };
+    (@string_tuple 6, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt) => {
+        impl From<(String, String, String, String, String, String)> for LiNo<String> {
+            fn from(tuple: (String, String, String, String, String, String)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1),
+                        LiNo::Ref(tuple.$t2),
+                        LiNo::Ref(tuple.$t3),
+                        LiNo::Ref(tuple.$t4),
+                        LiNo::Ref(tuple.$t5),
+                    ],
+                }
+            }
+        }
+    };
+    (@str_lino_tuple 6, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt) => {
+        impl From<(&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5],
+                }
+            }
+        }
+    };
+    (@lino_tuple 6, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt) => {
+        impl From<(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: None,
+                    values: vec![tuple.$t0, tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5],
+                }
+            }
+        }
+    };
+
+    // Implementation for 7-tuples
+    (@str_tuple 7, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt) => {
+        impl From<(&str, &str, &str, &str, &str, &str, &str)> for LiNo<String> {
+            fn from(tuple: (&str, &str, &str, &str, &str, &str, &str)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1.to_string()),
+                        LiNo::Ref(tuple.$t2.to_string()),
+                        LiNo::Ref(tuple.$t3.to_string()),
+                        LiNo::Ref(tuple.$t4.to_string()),
+                        LiNo::Ref(tuple.$t5.to_string()),
+                        LiNo::Ref(tuple.$t6.to_string()),
+                    ],
+                }
+            }
+        }
+    };
+    (@string_tuple 7, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt) => {
+        impl From<(String, String, String, String, String, String, String)> for LiNo<String> {
+            fn from(tuple: (String, String, String, String, String, String, String)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1),
+                        LiNo::Ref(tuple.$t2),
+                        LiNo::Ref(tuple.$t3),
+                        LiNo::Ref(tuple.$t4),
+                        LiNo::Ref(tuple.$t5),
+                        LiNo::Ref(tuple.$t6),
+                    ],
+                }
+            }
+        }
+    };
+    (@str_lino_tuple 7, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt) => {
+        impl From<(&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6],
+                }
+            }
+        }
+    };
+    (@lino_tuple 7, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt) => {
+        impl From<(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: None,
+                    values: vec![tuple.$t0, tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6],
+                }
+            }
+        }
+    };
+
+    // Implementation for 8-tuples
+    (@str_tuple 8, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt) => {
+        impl From<(&str, &str, &str, &str, &str, &str, &str, &str)> for LiNo<String> {
+            fn from(tuple: (&str, &str, &str, &str, &str, &str, &str, &str)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1.to_string()),
+                        LiNo::Ref(tuple.$t2.to_string()),
+                        LiNo::Ref(tuple.$t3.to_string()),
+                        LiNo::Ref(tuple.$t4.to_string()),
+                        LiNo::Ref(tuple.$t5.to_string()),
+                        LiNo::Ref(tuple.$t6.to_string()),
+                        LiNo::Ref(tuple.$t7.to_string()),
+                    ],
+                }
+            }
+        }
+    };
+    (@string_tuple 8, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt) => {
+        impl From<(String, String, String, String, String, String, String, String)> for LiNo<String> {
+            fn from(tuple: (String, String, String, String, String, String, String, String)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1),
+                        LiNo::Ref(tuple.$t2),
+                        LiNo::Ref(tuple.$t3),
+                        LiNo::Ref(tuple.$t4),
+                        LiNo::Ref(tuple.$t5),
+                        LiNo::Ref(tuple.$t6),
+                        LiNo::Ref(tuple.$t7),
+                    ],
+                }
+            }
+        }
+    };
+    (@str_lino_tuple 8, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt) => {
+        impl From<(&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6, tuple.$t7],
+                }
+            }
+        }
+    };
+    (@lino_tuple 8, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt) => {
+        impl From<(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: None,
+                    values: vec![tuple.$t0, tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6, tuple.$t7],
+                }
+            }
+        }
+    };
+
+    // Implementation for 9-tuples
+    (@str_tuple 9, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt) => {
+        impl From<(&str, &str, &str, &str, &str, &str, &str, &str, &str)> for LiNo<String> {
+            fn from(tuple: (&str, &str, &str, &str, &str, &str, &str, &str, &str)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1.to_string()),
+                        LiNo::Ref(tuple.$t2.to_string()),
+                        LiNo::Ref(tuple.$t3.to_string()),
+                        LiNo::Ref(tuple.$t4.to_string()),
+                        LiNo::Ref(tuple.$t5.to_string()),
+                        LiNo::Ref(tuple.$t6.to_string()),
+                        LiNo::Ref(tuple.$t7.to_string()),
+                        LiNo::Ref(tuple.$t8.to_string()),
+                    ],
+                }
+            }
+        }
+    };
+    (@string_tuple 9, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt) => {
+        impl From<(String, String, String, String, String, String, String, String, String)> for LiNo<String> {
+            fn from(tuple: (String, String, String, String, String, String, String, String, String)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1),
+                        LiNo::Ref(tuple.$t2),
+                        LiNo::Ref(tuple.$t3),
+                        LiNo::Ref(tuple.$t4),
+                        LiNo::Ref(tuple.$t5),
+                        LiNo::Ref(tuple.$t6),
+                        LiNo::Ref(tuple.$t7),
+                        LiNo::Ref(tuple.$t8),
+                    ],
+                }
+            }
+        }
+    };
+    (@str_lino_tuple 9, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt) => {
+        impl From<(&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6, tuple.$t7, tuple.$t8],
+                }
+            }
+        }
+    };
+    (@lino_tuple 9, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt) => {
+        impl From<(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: None,
+                    values: vec![tuple.$t0, tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6, tuple.$t7, tuple.$t8],
+                }
+            }
+        }
+    };
+
+    // Implementation for 10-tuples
+    (@str_tuple 10, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt) => {
+        impl From<(&str, &str, &str, &str, &str, &str, &str, &str, &str, &str)> for LiNo<String> {
+            fn from(tuple: (&str, &str, &str, &str, &str, &str, &str, &str, &str, &str)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1.to_string()),
+                        LiNo::Ref(tuple.$t2.to_string()),
+                        LiNo::Ref(tuple.$t3.to_string()),
+                        LiNo::Ref(tuple.$t4.to_string()),
+                        LiNo::Ref(tuple.$t5.to_string()),
+                        LiNo::Ref(tuple.$t6.to_string()),
+                        LiNo::Ref(tuple.$t7.to_string()),
+                        LiNo::Ref(tuple.$t8.to_string()),
+                        LiNo::Ref(tuple.$t9.to_string()),
+                    ],
+                }
+            }
+        }
+    };
+    (@string_tuple 10, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt) => {
+        impl From<(String, String, String, String, String, String, String, String, String, String)> for LiNo<String> {
+            fn from(tuple: (String, String, String, String, String, String, String, String, String, String)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1),
+                        LiNo::Ref(tuple.$t2),
+                        LiNo::Ref(tuple.$t3),
+                        LiNo::Ref(tuple.$t4),
+                        LiNo::Ref(tuple.$t5),
+                        LiNo::Ref(tuple.$t6),
+                        LiNo::Ref(tuple.$t7),
+                        LiNo::Ref(tuple.$t8),
+                        LiNo::Ref(tuple.$t9),
+                    ],
+                }
+            }
+        }
+    };
+    (@str_lino_tuple 10, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt) => {
+        impl From<(&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6, tuple.$t7, tuple.$t8, tuple.$t9],
+                }
+            }
+        }
+    };
+    (@lino_tuple 10, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt) => {
+        impl From<(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: None,
+                    values: vec![tuple.$t0, tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6, tuple.$t7, tuple.$t8, tuple.$t9],
+                }
+            }
+        }
+    };
+
+    // Implementation for 11-tuples
+    (@str_tuple 11, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt, $t10:tt) => {
+        impl From<(&str, &str, &str, &str, &str, &str, &str, &str, &str, &str, &str)> for LiNo<String> {
+            fn from(tuple: (&str, &str, &str, &str, &str, &str, &str, &str, &str, &str, &str)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1.to_string()),
+                        LiNo::Ref(tuple.$t2.to_string()),
+                        LiNo::Ref(tuple.$t3.to_string()),
+                        LiNo::Ref(tuple.$t4.to_string()),
+                        LiNo::Ref(tuple.$t5.to_string()),
+                        LiNo::Ref(tuple.$t6.to_string()),
+                        LiNo::Ref(tuple.$t7.to_string()),
+                        LiNo::Ref(tuple.$t8.to_string()),
+                        LiNo::Ref(tuple.$t9.to_string()),
+                        LiNo::Ref(tuple.$t10.to_string()),
+                    ],
+                }
+            }
+        }
+    };
+    (@string_tuple 11, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt, $t10:tt) => {
+        impl From<(String, String, String, String, String, String, String, String, String, String, String)> for LiNo<String> {
+            fn from(tuple: (String, String, String, String, String, String, String, String, String, String, String)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1),
+                        LiNo::Ref(tuple.$t2),
+                        LiNo::Ref(tuple.$t3),
+                        LiNo::Ref(tuple.$t4),
+                        LiNo::Ref(tuple.$t5),
+                        LiNo::Ref(tuple.$t6),
+                        LiNo::Ref(tuple.$t7),
+                        LiNo::Ref(tuple.$t8),
+                        LiNo::Ref(tuple.$t9),
+                        LiNo::Ref(tuple.$t10),
+                    ],
+                }
+            }
+        }
+    };
+    (@str_lino_tuple 11, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt, $t10:tt) => {
+        impl From<(&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6, tuple.$t7, tuple.$t8, tuple.$t9, tuple.$t10],
+                }
+            }
+        }
+    };
+    (@lino_tuple 11, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt, $t10:tt) => {
+        impl From<(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: None,
+                    values: vec![tuple.$t0, tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6, tuple.$t7, tuple.$t8, tuple.$t9, tuple.$t10],
+                }
+            }
+        }
+    };
+
+    // Implementation for 12-tuples
+    (@str_tuple 12, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt, $t10:tt, $t11:tt) => {
+        impl From<(&str, &str, &str, &str, &str, &str, &str, &str, &str, &str, &str, &str)> for LiNo<String> {
+            fn from(tuple: (&str, &str, &str, &str, &str, &str, &str, &str, &str, &str, &str, &str)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1.to_string()),
+                        LiNo::Ref(tuple.$t2.to_string()),
+                        LiNo::Ref(tuple.$t3.to_string()),
+                        LiNo::Ref(tuple.$t4.to_string()),
+                        LiNo::Ref(tuple.$t5.to_string()),
+                        LiNo::Ref(tuple.$t6.to_string()),
+                        LiNo::Ref(tuple.$t7.to_string()),
+                        LiNo::Ref(tuple.$t8.to_string()),
+                        LiNo::Ref(tuple.$t9.to_string()),
+                        LiNo::Ref(tuple.$t10.to_string()),
+                        LiNo::Ref(tuple.$t11.to_string()),
+                    ],
+                }
+            }
+        }
+    };
+    (@string_tuple 12, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt, $t10:tt, $t11:tt) => {
+        impl From<(String, String, String, String, String, String, String, String, String, String, String, String)> for LiNo<String> {
+            fn from(tuple: (String, String, String, String, String, String, String, String, String, String, String, String)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0),
+                    values: vec![
+                        LiNo::Ref(tuple.$t1),
+                        LiNo::Ref(tuple.$t2),
+                        LiNo::Ref(tuple.$t3),
+                        LiNo::Ref(tuple.$t4),
+                        LiNo::Ref(tuple.$t5),
+                        LiNo::Ref(tuple.$t6),
+                        LiNo::Ref(tuple.$t7),
+                        LiNo::Ref(tuple.$t8),
+                        LiNo::Ref(tuple.$t9),
+                        LiNo::Ref(tuple.$t10),
+                        LiNo::Ref(tuple.$t11),
+                    ],
+                }
+            }
+        }
+    };
+    (@str_lino_tuple 12, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt, $t10:tt, $t11:tt) => {
+        impl From<(&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (&str, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: Some(tuple.$t0.to_string()),
+                    values: vec![tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6, tuple.$t7, tuple.$t8, tuple.$t9, tuple.$t10, tuple.$t11],
+                }
+            }
+        }
+    };
+    (@lino_tuple 12, $t0:tt, $t1:tt, $t2:tt, $t3:tt, $t4:tt, $t5:tt, $t6:tt, $t7:tt, $t8:tt, $t9:tt, $t10:tt, $t11:tt) => {
+        impl From<(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
+            fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
+                LiNo::Link {
+                    id: None,
+                    values: vec![tuple.$t0, tuple.$t1, tuple.$t2, tuple.$t3, tuple.$t4, tuple.$t5, tuple.$t6, tuple.$t7, tuple.$t8, tuple.$t9, tuple.$t10, tuple.$t11],
+                }
+            }
+        }
+    };
+
+    // Entry point - generates all four types for a given tuple size
+    (2) => {
+        impl_tuple_from!(@str_tuple 2, 0, 1);
+        impl_tuple_from!(@string_tuple 2, 0, 1);
+        impl_tuple_from!(@str_lino_tuple 2, 0, 1);
+        impl_tuple_from!(@lino_tuple 2, 0, 1);
+    };
+    (3) => {
+        impl_tuple_from!(@str_tuple 3, 0, 1, 2);
+        impl_tuple_from!(@string_tuple 3, 0, 1, 2);
+        impl_tuple_from!(@str_lino_tuple 3, 0, 1, 2);
+        impl_tuple_from!(@lino_tuple 3, 0, 1, 2);
+    };
+    (4) => {
+        impl_tuple_from!(@str_tuple 4, 0, 1, 2, 3);
+        impl_tuple_from!(@string_tuple 4, 0, 1, 2, 3);
+        impl_tuple_from!(@str_lino_tuple 4, 0, 1, 2, 3);
+        impl_tuple_from!(@lino_tuple 4, 0, 1, 2, 3);
+    };
+    (5) => {
+        impl_tuple_from!(@str_tuple 5, 0, 1, 2, 3, 4);
+        impl_tuple_from!(@string_tuple 5, 0, 1, 2, 3, 4);
+        impl_tuple_from!(@str_lino_tuple 5, 0, 1, 2, 3, 4);
+        impl_tuple_from!(@lino_tuple 5, 0, 1, 2, 3, 4);
+    };
+    (6) => {
+        impl_tuple_from!(@str_tuple 6, 0, 1, 2, 3, 4, 5);
+        impl_tuple_from!(@string_tuple 6, 0, 1, 2, 3, 4, 5);
+        impl_tuple_from!(@str_lino_tuple 6, 0, 1, 2, 3, 4, 5);
+        impl_tuple_from!(@lino_tuple 6, 0, 1, 2, 3, 4, 5);
+    };
+    (7) => {
+        impl_tuple_from!(@str_tuple 7, 0, 1, 2, 3, 4, 5, 6);
+        impl_tuple_from!(@string_tuple 7, 0, 1, 2, 3, 4, 5, 6);
+        impl_tuple_from!(@str_lino_tuple 7, 0, 1, 2, 3, 4, 5, 6);
+        impl_tuple_from!(@lino_tuple 7, 0, 1, 2, 3, 4, 5, 6);
+    };
+    (8) => {
+        impl_tuple_from!(@str_tuple 8, 0, 1, 2, 3, 4, 5, 6, 7);
+        impl_tuple_from!(@string_tuple 8, 0, 1, 2, 3, 4, 5, 6, 7);
+        impl_tuple_from!(@str_lino_tuple 8, 0, 1, 2, 3, 4, 5, 6, 7);
+        impl_tuple_from!(@lino_tuple 8, 0, 1, 2, 3, 4, 5, 6, 7);
+    };
+    (9) => {
+        impl_tuple_from!(@str_tuple 9, 0, 1, 2, 3, 4, 5, 6, 7, 8);
+        impl_tuple_from!(@string_tuple 9, 0, 1, 2, 3, 4, 5, 6, 7, 8);
+        impl_tuple_from!(@str_lino_tuple 9, 0, 1, 2, 3, 4, 5, 6, 7, 8);
+        impl_tuple_from!(@lino_tuple 9, 0, 1, 2, 3, 4, 5, 6, 7, 8);
+    };
+    (10) => {
+        impl_tuple_from!(@str_tuple 10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        impl_tuple_from!(@string_tuple 10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        impl_tuple_from!(@str_lino_tuple 10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        impl_tuple_from!(@lino_tuple 10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+    };
+    (11) => {
+        impl_tuple_from!(@str_tuple 11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        impl_tuple_from!(@string_tuple 11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        impl_tuple_from!(@str_lino_tuple 11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        impl_tuple_from!(@lino_tuple 11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    };
+    (12) => {
+        impl_tuple_from!(@str_tuple 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+        impl_tuple_from!(@string_tuple 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+        impl_tuple_from!(@str_lino_tuple 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+        impl_tuple_from!(@lino_tuple 12, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+    };
 }
 
-/// Convert a 2-tuple with owned strings into a LiNo Link.
-impl From<(String, String)> for LiNo<String> {
-    fn from(tuple: (String, String)) -> Self {
-        LiNo::Link {
-            id: Some(tuple.0),
-            values: vec![LiNo::Ref(tuple.1)],
-        }
-    }
-}
-
-/// Convert a 2-tuple where the second element is a LiNo into a LiNo Link.
-/// Example: `("parent", LiNo::Ref("child"))` becomes `(parent: child)`
-impl From<(&str, LiNo<String>)> for LiNo<String> {
-    fn from(tuple: (&str, LiNo<String>)) -> Self {
-        LiNo::Link {
-            id: Some(tuple.0.to_string()),
-            values: vec![tuple.1],
-        }
-    }
-}
-
-/// Convert a 2-tuple where both elements are LiNo into an anonymous LiNo Link.
-/// Example: `(LiNo::Ref("a"), LiNo::Ref("b"))` becomes `(a b)`
-impl From<(LiNo<String>, LiNo<String>)> for LiNo<String> {
-    fn from(tuple: (LiNo<String>, LiNo<String>)) -> Self {
-        LiNo::Link {
-            id: None,
-            values: vec![tuple.0, tuple.1],
-        }
-    }
-}
-
-/// Convert a 3-tuple into a LiNo Link.
-/// The first element becomes the ID, the remaining elements become values.
-/// Example: `("parent", "child1", "child2")` becomes `(parent: child1 child2)`
-impl From<(&str, &str, &str)> for LiNo<String> {
-    fn from(tuple: (&str, &str, &str)) -> Self {
-        LiNo::Link {
-            id: Some(tuple.0.to_string()),
-            values: vec![
-                LiNo::Ref(tuple.1.to_string()),
-                LiNo::Ref(tuple.2.to_string()),
-            ],
-        }
-    }
-}
-
-/// Convert a 3-tuple with owned strings into a LiNo Link.
-impl From<(String, String, String)> for LiNo<String> {
-    fn from(tuple: (String, String, String)) -> Self {
-        LiNo::Link {
-            id: Some(tuple.0),
-            values: vec![LiNo::Ref(tuple.1), LiNo::Ref(tuple.2)],
-        }
-    }
-}
-
-/// Convert a 3-tuple where elements after the first are LiNo into a LiNo Link.
-/// Example: `("parent", LiNo::Ref("child1"), LiNo::Ref("child2"))` becomes `(parent: child1 child2)`
-impl From<(&str, LiNo<String>, LiNo<String>)> for LiNo<String> {
-    fn from(tuple: (&str, LiNo<String>, LiNo<String>)) -> Self {
-        LiNo::Link {
-            id: Some(tuple.0.to_string()),
-            values: vec![tuple.1, tuple.2],
-        }
-    }
-}
-
-/// Convert a 3-tuple where all elements are LiNo into an anonymous LiNo Link.
-/// Example: `(LiNo::Ref("a"), LiNo::Ref("b"), LiNo::Ref("c"))` becomes `(a b c)`
-impl From<(LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
-    fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
-        LiNo::Link {
-            id: None,
-            values: vec![tuple.0, tuple.1, tuple.2],
-        }
-    }
-}
-
-/// Convert a 4-tuple into a LiNo Link.
-/// The first element becomes the ID, the remaining elements become values.
-/// Example: `("parent", "c1", "c2", "c3")` becomes `(parent: c1 c2 c3)`
-impl From<(&str, &str, &str, &str)> for LiNo<String> {
-    fn from(tuple: (&str, &str, &str, &str)) -> Self {
-        LiNo::Link {
-            id: Some(tuple.0.to_string()),
-            values: vec![
-                LiNo::Ref(tuple.1.to_string()),
-                LiNo::Ref(tuple.2.to_string()),
-                LiNo::Ref(tuple.3.to_string()),
-            ],
-        }
-    }
-}
-
-/// Convert a 4-tuple with owned strings into a LiNo Link.
-impl From<(String, String, String, String)> for LiNo<String> {
-    fn from(tuple: (String, String, String, String)) -> Self {
-        LiNo::Link {
-            id: Some(tuple.0),
-            values: vec![LiNo::Ref(tuple.1), LiNo::Ref(tuple.2), LiNo::Ref(tuple.3)],
-        }
-    }
-}
-
-/// Convert a 4-tuple where elements after the first are LiNo into a LiNo Link.
-impl From<(&str, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
-    fn from(tuple: (&str, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
-        LiNo::Link {
-            id: Some(tuple.0.to_string()),
-            values: vec![tuple.1, tuple.2, tuple.3],
-        }
-    }
-}
-
-/// Convert a 4-tuple where all elements are LiNo into an anonymous LiNo Link.
-impl From<(LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)> for LiNo<String> {
-    fn from(tuple: (LiNo<String>, LiNo<String>, LiNo<String>, LiNo<String>)) -> Self {
-        LiNo::Link {
-            id: None,
-            values: vec![tuple.0, tuple.1, tuple.2, tuple.3],
-        }
-    }
-}
+// Generate implementations for tuples of sizes 2 through 12
+// This follows the Rust standard library convention of supporting up to 12-tuples
+impl_tuple_from!(2);
+impl_tuple_from!(3);
+impl_tuple_from!(4);
+impl_tuple_from!(5);
+impl_tuple_from!(6);
+impl_tuple_from!(7);
+impl_tuple_from!(8);
+impl_tuple_from!(9);
+impl_tuple_from!(10);
+impl_tuple_from!(11);
+impl_tuple_from!(12);
