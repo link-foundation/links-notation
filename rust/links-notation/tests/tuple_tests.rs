@@ -1,4 +1,4 @@
-use links_notation::{format_links, LiNo};
+use links_notation::{format_links, LiNo, LinkBuilder};
 
 #[test]
 fn test_tuple_to_link_basic() {
@@ -303,4 +303,229 @@ fn test_tuple_large_with_nested_links() {
         format!("{}", link),
         "(outer: (inner1: value1) (inner2: value2) (inner3: value3) (inner4: value4) (inner5: value5))"
     );
+}
+
+// ============================================================================
+// Tests for Vec-based conversions (arbitrary-length support)
+// ============================================================================
+
+#[test]
+fn test_vec_str_to_anonymous_link() {
+    // Test converting a Vec of &str to an anonymous link
+    let values: Vec<&str> = vec!["a", "b", "c", "d", "e"];
+    let link: LiNo<String> = values.into();
+    assert_eq!(format!("{}", link), "(a b c d e)");
+}
+
+#[test]
+fn test_vec_string_to_anonymous_link() {
+    // Test converting a Vec of String to an anonymous link
+    let values: Vec<String> = vec!["x".to_string(), "y".to_string(), "z".to_string()];
+    let link: LiNo<String> = values.into();
+    assert_eq!(format!("{}", link), "(x y z)");
+}
+
+#[test]
+fn test_vec_lino_to_anonymous_link() {
+    // Test converting a Vec of LiNo to an anonymous link
+    let values: Vec<LiNo<String>> = vec![
+        LiNo::Ref("first".to_string()),
+        ("nested", "value").into(),
+        LiNo::Ref("last".to_string()),
+    ];
+    let link: LiNo<String> = values.into();
+    assert_eq!(format!("{}", link), "(first (nested: value) last)");
+}
+
+#[test]
+fn test_tuple_id_vec_str_named_link() {
+    // Test converting (id, Vec<&str>) to a named link
+    let values: Vec<&str> = vec!["v1", "v2", "v3", "v4", "v5"];
+    let link: LiNo<String> = ("myLink", values).into();
+    assert_eq!(format!("{}", link), "(myLink: v1 v2 v3 v4 v5)");
+}
+
+#[test]
+fn test_tuple_id_vec_string_named_link() {
+    // Test converting (String, Vec<String>) to a named link
+    let values: Vec<String> = vec!["a".to_string(), "b".to_string()];
+    let link: LiNo<String> = ("id".to_string(), values).into();
+    assert_eq!(format!("{}", link), "(id: a b)");
+}
+
+#[test]
+fn test_tuple_id_vec_lino_named_link() {
+    // Test converting (&str, Vec<LiNo>) to a named link
+    let nested: LiNo<String> = ("inner", "val").into();
+    let values: Vec<LiNo<String>> = vec![LiNo::Ref("ref1".to_string()), nested];
+    let link: LiNo<String> = ("outer", values).into();
+    assert_eq!(format!("{}", link), "(outer: ref1 (inner: val))");
+}
+
+#[test]
+fn test_vec_large_arbitrary_size() {
+    // Test creating link with more than 12 values (impossible with tuples)
+    let values: Vec<&str> = (1..=20)
+        .map(|i| match i {
+            1 => "v1",
+            2 => "v2",
+            3 => "v3",
+            4 => "v4",
+            5 => "v5",
+            6 => "v6",
+            7 => "v7",
+            8 => "v8",
+            9 => "v9",
+            10 => "v10",
+            11 => "v11",
+            12 => "v12",
+            13 => "v13",
+            14 => "v14",
+            15 => "v15",
+            16 => "v16",
+            17 => "v17",
+            18 => "v18",
+            19 => "v19",
+            _ => "v20",
+        })
+        .collect();
+    let link: LiNo<String> = ("bigLink", values).into();
+    let result = format!("{}", link);
+    assert!(result.starts_with("(bigLink: v1 v2"));
+    assert!(result.ends_with("v19 v20)"));
+    // Verify we have all 20 values
+    for i in 1..=20 {
+        assert!(result.contains(&format!("v{}", i)));
+    }
+}
+
+// ============================================================================
+// Tests for LinkBuilder API (fluent arbitrary-length construction)
+// ============================================================================
+
+#[test]
+fn test_link_builder_basic() {
+    // Test basic builder usage
+    let link: LiNo<String> = LinkBuilder::new()
+        .id("myId")
+        .value("v1")
+        .value("v2")
+        .build();
+    assert_eq!(format!("{}", link), "(myId: v1 v2)");
+}
+
+#[test]
+fn test_link_builder_anonymous() {
+    // Test building anonymous link (no ID)
+    let link: LiNo<String> = LinkBuilder::new().value("a").value("b").value("c").build();
+    assert_eq!(format!("{}", link), "(a b c)");
+}
+
+#[test]
+fn test_link_builder_with_lino() {
+    // Test builder with LiNo values
+    let nested: LiNo<String> = ("inner", "x", "y").into();
+    let link: LiNo<String> = LinkBuilder::new()
+        .id("outer")
+        .lino(nested)
+        .value("z")
+        .build();
+    assert_eq!(format!("{}", link), "(outer: (inner: x y) z)");
+}
+
+#[test]
+fn test_link_builder_values_batch() {
+    // Test builder with multiple values at once
+    let link: LiNo<String> = LinkBuilder::new()
+        .id("batch")
+        .values(vec!["a", "b", "c", "d"])
+        .build();
+    assert_eq!(format!("{}", link), "(batch: a b c d)");
+}
+
+#[test]
+fn test_link_builder_linos_batch() {
+    // Test builder with multiple LiNo values at once
+    let linos: Vec<LiNo<String>> = vec![("child1", "val1").into(), ("child2", "val2").into()];
+    let link: LiNo<String> = LinkBuilder::new().id("parent").linos(linos).build();
+    assert_eq!(
+        format!("{}", link),
+        "(parent: (child1: val1) (child2: val2))"
+    );
+}
+
+#[test]
+fn test_link_builder_large_link() {
+    // Test building a link with many values (more than 12)
+    let mut builder = LinkBuilder::new().id("large");
+    for i in 1..=50 {
+        builder = builder.value(&format!("v{}", i));
+    }
+    let link = builder.build();
+    let result = format!("{}", link);
+    assert!(result.starts_with("(large: v1 v2"));
+    assert!(result.contains("v25"));
+    assert!(result.ends_with("v49 v50)"));
+}
+
+#[test]
+fn test_link_builder_chaining() {
+    // Test complex chaining
+    let nested1: LiNo<String> = ("n1", "a").into();
+    let nested2: LiNo<String> = ("n2", "b").into();
+    let link: LiNo<String> = LinkBuilder::new()
+        .id("root")
+        .value("first")
+        .lino(nested1)
+        .values(vec!["middle1", "middle2"])
+        .lino(nested2)
+        .value("last")
+        .build();
+    assert_eq!(
+        format!("{}", link),
+        "(root: first (n1: a) middle1 middle2 (n2: b) last)"
+    );
+}
+
+// ============================================================================
+// Tests for LiNo::new() and LiNo::anonymous() static methods
+// ============================================================================
+
+#[test]
+fn test_lino_new_static_method() {
+    // Test LiNo::new() static method
+    let values: Vec<LiNo<String>> = vec![LiNo::Ref("a".to_string()), LiNo::Ref("b".to_string())];
+    let link = LiNo::new(Some("myId".to_string()), values);
+    assert_eq!(format!("{}", link), "(myId: a b)");
+}
+
+#[test]
+fn test_lino_anonymous_static_method() {
+    // Test LiNo::anonymous() static method
+    let values: Vec<LiNo<String>> = vec![
+        LiNo::Ref("x".to_string()),
+        LiNo::Ref("y".to_string()),
+        LiNo::Ref("z".to_string()),
+    ];
+    let link = LiNo::anonymous(values);
+    assert_eq!(format!("{}", link), "(x y z)");
+}
+
+#[test]
+fn test_lino_reference_static_method() {
+    // Test LiNo::reference() static method
+    let r: LiNo<String> = LiNo::reference("hello".to_string());
+    assert!(r.is_ref());
+    assert_eq!(format!("{}", r), "hello");
+}
+
+#[test]
+fn test_lino_new_arbitrary_size() {
+    // Test creating link with arbitrary number of values using LiNo::new()
+    let values: Vec<LiNo<String>> = (1..=100).map(|i| LiNo::Ref(format!("item{}", i))).collect();
+    let link = LiNo::new(Some("hundred".to_string()), values);
+    let result = format!("{}", link);
+    assert!(result.contains("item1"));
+    assert!(result.contains("item50"));
+    assert!(result.contains("item100"));
 }
