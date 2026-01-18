@@ -1,4 +1,4 @@
-use links_notation::{format_links, LiNo, LinkBuilder};
+use links_notation::{format_links, LiNo, LiNoBuilder};
 
 #[test]
 fn test_tuple_to_link_basic() {
@@ -400,13 +400,13 @@ fn test_vec_large_arbitrary_size() {
 }
 
 // ============================================================================
-// Tests for LinkBuilder API (fluent arbitrary-length construction)
+// Tests for LiNoBuilder API (fluent arbitrary-length construction)
 // ============================================================================
 
 #[test]
-fn test_link_builder_basic() {
+fn test_lino_builder_basic() {
     // Test basic builder usage
-    let link: LiNo<String> = LinkBuilder::new()
+    let link: LiNo<String> = LiNoBuilder::new()
         .id("myId")
         .value("v1")
         .value("v2")
@@ -415,17 +415,17 @@ fn test_link_builder_basic() {
 }
 
 #[test]
-fn test_link_builder_anonymous() {
+fn test_lino_builder_anonymous() {
     // Test building anonymous link (no ID)
-    let link: LiNo<String> = LinkBuilder::new().value("a").value("b").value("c").build();
+    let link: LiNo<String> = LiNoBuilder::new().value("a").value("b").value("c").build();
     assert_eq!(format!("{}", link), "(a b c)");
 }
 
 #[test]
-fn test_link_builder_with_lino() {
+fn test_lino_builder_with_lino() {
     // Test builder with LiNo values
     let nested: LiNo<String> = ("inner", "x", "y").into();
-    let link: LiNo<String> = LinkBuilder::new()
+    let link: LiNo<String> = LiNoBuilder::new()
         .id("outer")
         .lino(nested)
         .value("z")
@@ -434,9 +434,9 @@ fn test_link_builder_with_lino() {
 }
 
 #[test]
-fn test_link_builder_values_batch() {
+fn test_lino_builder_values_batch() {
     // Test builder with multiple values at once
-    let link: LiNo<String> = LinkBuilder::new()
+    let link: LiNo<String> = LiNoBuilder::new()
         .id("batch")
         .values(vec!["a", "b", "c", "d"])
         .build();
@@ -444,10 +444,10 @@ fn test_link_builder_values_batch() {
 }
 
 #[test]
-fn test_link_builder_linos_batch() {
+fn test_lino_builder_linos_batch() {
     // Test builder with multiple LiNo values at once
     let linos: Vec<LiNo<String>> = vec![("child1", "val1").into(), ("child2", "val2").into()];
-    let link: LiNo<String> = LinkBuilder::new().id("parent").linos(linos).build();
+    let link: LiNo<String> = LiNoBuilder::new().id("parent").linos(linos).build();
     assert_eq!(
         format!("{}", link),
         "(parent: (child1: val1) (child2: val2))"
@@ -455,9 +455,9 @@ fn test_link_builder_linos_batch() {
 }
 
 #[test]
-fn test_link_builder_large_link() {
+fn test_lino_builder_large_link() {
     // Test building a link with many values (more than 12)
-    let mut builder = LinkBuilder::new().id("large");
+    let mut builder = LiNoBuilder::new().id("large");
     for i in 1..=50 {
         builder = builder.value(&format!("v{}", i));
     }
@@ -469,11 +469,11 @@ fn test_link_builder_large_link() {
 }
 
 #[test]
-fn test_link_builder_chaining() {
+fn test_lino_builder_chaining() {
     // Test complex chaining
     let nested1: LiNo<String> = ("n1", "a").into();
     let nested2: LiNo<String> = ("n2", "b").into();
-    let link: LiNo<String> = LinkBuilder::new()
+    let link: LiNo<String> = LiNoBuilder::new()
         .id("root")
         .value("first")
         .lino(nested1)

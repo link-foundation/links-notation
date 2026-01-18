@@ -102,10 +102,10 @@ impl<T> LiNo<T> {
 ///
 /// # Examples
 /// ```
-/// use links_notation::{LiNo, LinkBuilder};
+/// use links_notation::{LiNo, LiNoBuilder};
 ///
 /// // Build a link with many string values
-/// let link: LiNo<String> = LinkBuilder::new()
+/// let link: LiNo<String> = LiNoBuilder::new()
 ///     .id("myLink")
 ///     .value("v1")
 ///     .value("v2")
@@ -115,7 +115,7 @@ impl<T> LiNo<T> {
 ///
 /// // Build a link with LiNo values
 /// let nested: LiNo<String> = ("inner", "a", "b").into();
-/// let link: LiNo<String> = LinkBuilder::new()
+/// let link: LiNo<String> = LiNoBuilder::new()
 ///     .id("outer")
 ///     .lino(nested)
 ///     .value("c")
@@ -123,20 +123,20 @@ impl<T> LiNo<T> {
 /// assert_eq!(format!("{}", link), "(outer: (inner: a b) c)");
 ///
 /// // Build anonymous link
-/// let link: LiNo<String> = LinkBuilder::new()
+/// let link: LiNo<String> = LiNoBuilder::new()
 ///     .value("a")
 ///     .value("b")
 ///     .build();
 /// assert_eq!(format!("{}", link), "(a b)");
 /// ```
 #[derive(Debug, Clone, Default)]
-pub struct LinkBuilder {
+pub struct LiNoBuilder {
     id: Option<String>,
     values: Vec<LiNo<String>>,
 }
 
-impl LinkBuilder {
-    /// Creates a new empty LinkBuilder.
+impl LiNoBuilder {
+    /// Creates a new empty LiNoBuilder.
     pub fn new() -> Self {
         Self::default()
     }
@@ -190,6 +190,10 @@ impl LinkBuilder {
         }
     }
 }
+
+/// Type alias for backward compatibility (deprecated).
+#[deprecated(since = "0.3.0", note = "Use LiNoBuilder instead")]
+pub type LinkBuilder = LiNoBuilder;
 
 impl<T: ToString + Clone> LiNo<T> {
     /// Format the link using FormatConfig configuration.
@@ -1517,7 +1521,7 @@ impl_tuple_from!(12);
 // - https://github.com/rust-lang/rust/issues/10124 (RFC: variadic generics)
 //
 // Alternative approaches for arbitrary-length links:
-// 1. Use the `LinkBuilder` API for fluent construction
+// 1. Use the `LiNoBuilder` API for fluent construction
 // 2. Use `LiNo::new()` or `LiNo::anonymous()` with a `Vec`
 // 3. Use the `From<Vec<_>>` implementations below
 

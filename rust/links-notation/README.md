@@ -324,6 +324,117 @@ let link: LiNo<String> = (refs[0].clone(), refs[1].clone(), refs[2].clone(),
 
 This macro-generated implementation reduces code duplication while providing compile-time type safety for all tuple sizes.
 
+## Alternative APIs for Arbitrary-Length Links
+
+Since Rust doesn't support variadic generics, tuples are limited to 12 elements (following Rust's standard library convention). For links with more than 12 values or when the number of values is determined at runtime, use one of these alternative APIs:
+
+### Vec-based Conversions
+
+Convert vectors directly to links:
+
+```rust
+use links_notation::LiNo;
+
+// Anonymous link from Vec<&str>
+let values: Vec<&str> = vec!["a", "b", "c", "d", "e"];
+let link: LiNo<String> = values.into();
+println!("{}", link); // (a b c d e)
+
+// Named link from (id, Vec) tuple
+let values: Vec<&str> = vec!["v1", "v2", "v3", "v4", "v5"];
+let link: LiNo<String> = ("myLink", values).into();
+println!("{}", link); // (myLink: v1 v2 v3 v4 v5)
+
+// Large links with more than 12 values
+let values: Vec<&str> = (1..=100).map(|_| "val").collect();
+let link: LiNo<String> = ("big", values).into();
+```
+
+### LiNoBuilder (Fluent API)
+
+Build links using a fluent API for maximum flexibility:
+
+```rust
+use links_notation::{LiNo, LiNoBuilder};
+
+// Build a link with chained method calls
+let link: LiNo<String> = LiNoBuilder::new()
+    .id("myLink")
+    .value("v1")
+    .value("v2")
+    .value("v3")
+    .build();
+println!("{}", link); // (myLink: v1 v2 v3)
+
+// Build anonymous link (no ID)
+let link: LiNo<String> = LiNoBuilder::new()
+    .value("a")
+    .value("b")
+    .value("c")
+    .build();
+println!("{}", link); // (a b c)
+
+// Mix values and nested LiNo elements
+let nested: LiNo<String> = ("inner", "a", "b").into();
+let link: LiNo<String> = LiNoBuilder::new()
+    .id("outer")
+    .lino(nested)
+    .value("c")
+    .build();
+println!("{}", link); // (outer: (inner: a b) c)
+
+// Add multiple values at once
+let link: LiNo<String> = LiNoBuilder::new()
+    .id("batch")
+    .values(vec!["a", "b", "c", "d"])
+    .build();
+println!("{}", link); // (batch: a b c d)
+```
+
+### LiNo Static Methods
+
+Create links directly using static methods:
+
+```rust
+use links_notation::LiNo;
+
+// Create a named link with LiNo::new()
+let values: Vec<LiNo<String>> = vec![
+    LiNo::Ref("a".to_string()),
+    LiNo::Ref("b".to_string()),
+];
+let link = LiNo::new(Some("myId".to_string()), values);
+println!("{}", link); // (myId: a b)
+
+// Create an anonymous link with LiNo::anonymous()
+let values: Vec<LiNo<String>> = vec![
+    LiNo::Ref("x".to_string()),
+    LiNo::Ref("y".to_string()),
+    LiNo::Ref("z".to_string()),
+];
+let link = LiNo::anonymous(values);
+println!("{}", link); // (x y z)
+
+// Create a reference with LiNo::reference()
+let r: LiNo<String> = LiNo::reference("hello".to_string());
+println!("{}", r); // hello
+
+// Create links with arbitrary number of values
+let values: Vec<LiNo<String>> = (1..=100)
+    .map(|i| LiNo::Ref(format!("item{}", i)))
+    .collect();
+let link = LiNo::new(Some("hundred".to_string()), values);
+```
+
+### API Summary
+
+| API | Max Length | Use Case |
+|-----|-----------|----------|
+| Tuple conversion | 12 | Most common cases, ergonomic syntax |
+| Vec conversion | Unlimited | Runtime-determined or large fixed sets |
+| LiNoBuilder | Unlimited | Fluent construction, mixing types |
+| LiNo::new() | Unlimited | Direct construction with Vec |
+
 ## Syntax Examples
 
 ### Doublets (2-tuple)
