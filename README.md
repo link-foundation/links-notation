@@ -183,7 +183,8 @@ All six language implementations (C#, JavaScript, Rust, Python, Go, Java) mainta
 Some language-specific features are documented as intentional:
 
 - **Python**: Does not implement `LinksGroup` or multiline quoted strings
-- **JS/Rust/C#**: Do not implement Python's `FormatConfig` feature
-- **C# Only**: Supports tuple conversion (C#-specific feature)
+- **JS**: Does not implement Python's `FormatConfig` feature or tuple conversion
+- **C#**: Supports tuple conversion via implicit operators (C#-specific feature)
+- **Rust**: Supports tuple conversion via `From` trait implementations (Rust-specific feature)
 
 These differences are by design and do not affect core parsing/formatting functionality.
