@@ -1,0 +1,21 @@
+{
+  "company": {
+    "name": "TechCorp",
+    "departments": [
+      {
+        "name": "Engineering",
+        "teams": [
+          { "name": "Frontend", "size": 5 },
+          { "name": "Backend", "size": 8 }
+        ]
+      },
+      {
+        "name": "Marketing",
+        "teams": [
+          { "name": "Digital", "size": 3 },
+          { "name": "Content", "size": 4 }
+        ]
+      }
+    ]
+  }
+}
