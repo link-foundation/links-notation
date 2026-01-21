@@ -1,0 +1,7 @@
+{
+  "relations": [
+    { "subject": "papa", "predicate": "has", "object": "car" },
+    { "subject": "mama", "predicate": "has", "object": "house" },
+    { "subject": "papa and mama", "predicate": "are", "object": "happy" }
+  ]
+}

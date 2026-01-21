@@ -1,0 +1,14 @@
+<links>
+  <link>
+    <from>papa</from>
+    <to>loves mama</to>
+  </link>
+  <link>
+    <from>son</from>
+    <to>loves mama</to>
+  </link>
+  <link>
+    <from>daughter</from>
+    <to>loves mama</to>
+  </link>
+</links>
