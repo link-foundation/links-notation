@@ -115,9 +115,12 @@ fn aggregate_results(results: &[BenchmarkResult]) -> AggregatedResults {
     let total_yaml_chars: usize = results.iter().map(|r| r.yaml_chars).sum();
     let total_xml_chars: usize = results.iter().map(|r| r.xml_chars).sum();
 
-    let avg_lino_vs_json: f64 = results.iter().map(|r| r.lino_vs_json).sum::<f64>() / results.len() as f64;
-    let avg_lino_vs_yaml: f64 = results.iter().map(|r| r.lino_vs_yaml).sum::<f64>() / results.len() as f64;
-    let avg_lino_vs_xml: f64 = results.iter().map(|r| r.lino_vs_xml).sum::<f64>() / results.len() as f64;
+    let avg_lino_vs_json: f64 =
+        results.iter().map(|r| r.lino_vs_json).sum::<f64>() / results.len() as f64;
+    let avg_lino_vs_yaml: f64 =
+        results.iter().map(|r| r.lino_vs_yaml).sum::<f64>() / results.len() as f64;
+    let avg_lino_vs_xml: f64 =
+        results.iter().map(|r| r.lino_vs_xml).sum::<f64>() / results.len() as f64;
 
     AggregatedResults {
         total_lino_chars,
@@ -230,16 +233,16 @@ fn generate_json_report(results: &[BenchmarkResult], aggregated: &AggregatedResu
 fn main() {
     // Determine the data directory - try multiple possible locations
     let possible_paths = [
-        "benchmarks/data",              // Running from repo root
-        "../benchmarks/data",           // Running from rust/
-        "../../benchmarks/data",        // Running from rust/links-notation-benchmark/
-        "../../../benchmarks/data",     // Running from rust/links-notation-benchmark/src/
+        "benchmarks/data",          // Running from repo root
+        "../benchmarks/data",       // Running from rust/
+        "../../benchmarks/data",    // Running from rust/links-notation-benchmark/
+        "../../../benchmarks/data", // Running from rust/links-notation-benchmark/src/
     ];
 
     let data_dir = possible_paths
         .iter()
         .find(|p| Path::new(p).exists())
-        .map(|p| Path::new(p));
+        .map(Path::new);
 
     let data_dir = match data_dir {
         Some(path) => path,
@@ -273,9 +276,18 @@ fn main() {
     println!("  Total XML characters:   {}", aggregated.total_xml_chars);
     println!();
     println!("Average savings with Lino:");
-    println!("  vs JSON: {:.1}% fewer characters", aggregated.avg_lino_vs_json);
-    println!("  vs YAML: {:.1}% fewer characters", aggregated.avg_lino_vs_yaml);
-    println!("  vs XML:  {:.1}% fewer characters", aggregated.avg_lino_vs_xml);
+    println!(
+        "  vs JSON: {:.1}% fewer characters",
+        aggregated.avg_lino_vs_json
+    );
+    println!(
+        "  vs YAML: {:.1}% fewer characters",
+        aggregated.avg_lino_vs_yaml
+    );
+    println!(
+        "  vs XML:  {:.1}% fewer characters",
+        aggregated.avg_lino_vs_xml
+    );
     println!();
 
     // Generate reports
@@ -284,9 +296,9 @@ fn main() {
 
     // Determine output directory using the same search logic
     let output_possible_paths = [
-        "benchmarks",              // Running from repo root
-        "../benchmarks",           // Running from rust/
-        "../../benchmarks",        // Running from rust/links-notation-benchmark/
+        "benchmarks",       // Running from repo root
+        "../benchmarks",    // Running from rust/
+        "../../benchmarks", // Running from rust/links-notation-benchmark/
     ];
 
     let output_dir = output_possible_paths
@@ -298,7 +310,10 @@ fn main() {
     // Write markdown report
     let md_path = output_dir.join("BENCHMARK_RESULTS.md");
     if let Err(e) = fs::write(&md_path, &markdown_report) {
-        eprintln!("Warning: Could not write markdown report to {:?}: {}", md_path, e);
+        eprintln!(
+            "Warning: Could not write markdown report to {:?}: {}",
+            md_path, e
+        );
     } else {
         println!("Markdown report written to {:?}", md_path);
     }
@@ -306,7 +321,10 @@ fn main() {
     // Write JSON report
     let json_path = output_dir.join("benchmark_results.json");
     if let Err(e) = fs::write(&json_path, &json_report) {
-        eprintln!("Warning: Could not write JSON report to {:?}: {}", json_path, e);
+        eprintln!(
+            "Warning: Could not write JSON report to {:?}: {}",
+            json_path, e
+        );
     } else {
         println!("JSON report written to {:?}", json_path);
     }
