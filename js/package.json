@@ -22,7 +22,7 @@
   "license": "Unlicense",
   "devDependencies": {
     "bun-types": "^1.2.19",
-    "eslint": "^9.39.1",
+    "eslint": "^10.0.0",
     "peggy": "^5.0.6"
   },
   "dependencies": {}
