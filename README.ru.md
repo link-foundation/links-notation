@@ -136,10 +136,7 @@ List<Link> links = parser.parse("папа (любитМаму: любит мам
 
 Дополнительные ресурсы:
 
-- [Сравнение возможностей](FEATURE_COMPARISON.md) - Анализ возможностей LINO
-  по сравнению с YAML/XML/JSON
-
-- [PDF Документация](https://link-foundation.github.io/links-notation/csharp/Link.Foundation.Links.Notation.pdf)
-  \- Полный справочник для офлайн чтения
+- [Сравнение тестовых сценариев](TEST_CASE_COMPARISON.md) - Всестороннее
+  сравнение тестового покрытия по всем реализациям
 - [Теория связей 0.0.2](https://habr.com/ru/articles/804617) -
   Теоретическая основа, которую Нотация Связей полностью поддерживает
