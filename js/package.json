@@ -3,6 +3,7 @@
   "version": "0.13.0",
   "description": "Links Notation parser for JavaScript",
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "type": "module",
   "scripts": {
     "build": "bun run build:grammar && bun build src/index.js --outdir=dist --target=node",
@@ -23,7 +24,7 @@
   "devDependencies": {
     "bun-types": "^1.2.19",
     "eslint": "^9.39.1",
-    "peggy": "^5.0.6"
-  },
-  "dependencies": {}
+    "peggy": "^5.0.6",
+    "typescript": "^5.9.3"
+  }
 }
