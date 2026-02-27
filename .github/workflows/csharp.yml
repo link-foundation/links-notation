@@ -204,16 +204,16 @@ jobs:
           wget "$SCRIPTS_BASE_URL/format-csharp-files.py"
           wget "$SCRIPTS_BASE_URL/format-csharp-document.sh"
           wget "$SCRIPTS_BASE_URL/generate-csharp-pdf.sh"
-          
+
           # Debug: Show downloaded files and their encoding
           echo "=== Downloaded files debug ==="
           ls -la *.py *.sh
           file format-csharp-files.py
           hexdump -C format-csharp-files.py | head -5
-          
+
           # Remove BOM (Byte Order Mark) if present
           sed -i '1s/^\xEF\xBB\xBF//' ./format-csharp-files.py
-          
+
           # Replace python-pygments with python3-pygments and python2 with python3
           sed -i 's/python-pygments/python3-pygments/g' ./generate-csharp-pdf.sh
           sed -i 's/python2/python3/g' ./format-csharp-document.sh
@@ -222,13 +222,30 @@ jobs:
           sed -i '1i import importlib' ./format-csharp-files.py
           # Also remove sys.setdefaultencoding which doesn't exist in Python 3
           sed -i '/sys.setdefaultencoding/d' ./format-csharp-files.py
-          
+
+          # Fix paths: the project uses Link.Foundation.Links.Notation namespace, not Platform.$REPOSITORY_NAME
+          # Also fix the ./csharp/ prefix since the script runs from the csharp/ working directory
+          sed -i 's|\./csharp/Platform\.\$REPOSITORY_NAME|./Link.Foundation.Links.Notation|g' ./format-csharp-document.sh
+
+          # Fix the PDF output filename to match the documented link name
+          sed -i 's|_site/Platform\.\$REPOSITORY_NAME\.pdf|_site/Link.Foundation.Links.Notation.pdf|g' ./generate-csharp-pdf.sh
+
           # Debug: Show file after fixes
           echo "=== After fixes ==="
           file format-csharp-files.py
           head -5 format-csharp-files.py
-          
+          echo "=== format-csharp-document.sh after fixes ==="
+          cat ./format-csharp-document.sh
+          echo "=== generate-csharp-pdf.sh after fixes ==="
+          cat ./generate-csharp-pdf.sh
+
           bash ./generate-csharp-pdf.sh
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: csharp-pdf
+          path: csharp/_site/Link.Foundation.Links.Notation.pdf
+          retention-days: 1
 
   publishDocumentation:
     runs-on: ubuntu-latest
@@ -238,6 +255,11 @@ jobs:
       - uses: actions/checkout@v6
         with:
           submodules: true
+      - name: Download PDF artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: csharp-pdf
+          path: csharp/pdf-artifact
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v5
         with:
@@ -274,6 +296,8 @@ jobs:
           sed -i 's/^nuget install docfx.console.*$/echo "Skipping docfx installation via nuget"/g' ./publish-csharp-docs.sh
           # Remove --force flag as it's not supported in DocFX 2.78.3
           sed -i 's/^docfx docfx.json --force$/docfx docfx.json/g' ./publish-csharp-docs.sh
+          # Copy generated PDF into _site after DocFX generates documentation
+          sed -i '/^docfx docfx.json$/a cp -v "$GITHUB_WORKSPACE/csharp/pdf-artifact/Link.Foundation.Links.Notation.pdf" _site/ 2>/dev/null || echo "PDF artifact not found, skipping"' ./publish-csharp-docs.sh
           
           # Clean up ALL build artifacts to avoid conflicts
           echo "=== Cleaning up ALL build artifacts ==="
