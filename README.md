@@ -150,6 +150,8 @@ language-specific documentation:
 
 - **[C# Documentation](https://link-foundation.github.io/links-notation/csharp/api/Link.Foundation.Links.Notation.html)**
   \- Complete API reference
+- **[PDF Documentation](https://link-foundation.github.io/links-notation/csharp/Link.Foundation.Links.Notation.pdf)**
+  \- Complete reference for offline reading
 - **[C# README](csharp/README.md)** - Installation and usage guide
 - **[JavaScript README](js/README.md)** - Modern web development guide
 - **[Rust README](rust/README.md)** - High-performance parsing guide

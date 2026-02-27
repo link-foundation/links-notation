@@ -126,6 +126,8 @@ List<Link> links = parser.parse("папа (любитМаму: любит мам
 
 - **[Документация C#](https://link-foundation.github.io/links-notation/csharp/api/Link.Foundation.Links.Notation.html)**
   \- Полный справочник API
+- **[PDF Документация](https://link-foundation.github.io/links-notation/csharp/Link.Foundation.Links.Notation.pdf)**
+  \- Полный справочник для офлайн чтения
 - **[README C#](csharp/README.ru.md)** - Руководство по установке и использованию
 - **[README JavaScript](js/README.ru.md)** - Руководство для современной
   веб-разработки

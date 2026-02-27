@@ -3,7 +3,7 @@
 **Issue**: [#217 - Broken links](https://github.com/link-foundation/links-notation/issues/217)
 **Author**: konard
 **Date Reported**: 2026-02-27
-**Status**: Root cause identified, fixes applied
+**Status**: Root cause identified, full CI/CD fix implemented
 
 ## Summary
 
@@ -136,20 +136,23 @@ CI log from run `20053077913` (2025-12-09, push to main):
 
 Full log saved to: `ci-logs/csharp-push-20053077913.log`
 
-### Fix
+### Fix (Implemented)
 
-Two approaches:
+**Full fix** — fixing the PDF generation pipeline in `csharp.yml`:
 
-**Approach A (Quick fix)**: Remove the broken PDF link from all documentation files since the PDF
-pipeline is broken and would require significant work to fix. The C# API documentation is still
-accessible at `https://link-foundation.github.io/links-notation/csharp/api/Link.Foundation.Links.Notation.html`.
-
-**Approach B (Full fix)**: Fix the PDF generation pipeline:
-1. Update `csharp.yml` to override `REPOSITORY_NAME` in the PDF generation script to use the
-   correct C# namespace (e.g., `Link.Foundation.Links.Notation`)
-2. Add an artifact upload step after `generatePdfWithCode` to share the PDF
-3. Add an artifact download step in `publishDocumentation` before DocFX runs
-4. Copy the PDF into the DocFX `_site` output directory
+1. **Fixed paths in `format-csharp-document.sh`**: Patched `Platform.$REPOSITORY_NAME` references
+   to use `Link.Foundation.Links.Notation` (the actual C# project directory name).
+2. **Fixed PDF filename in `generate-csharp-pdf.sh`**: Patched the `cp` command to produce
+   `_site/Link.Foundation.Links.Notation.pdf` instead of `_site/Platform.links-notation.pdf`.
+3. **Added artifact upload**: After PDF generation, uploads the PDF as a GitHub Actions artifact
+   (`csharp-pdf`) using `actions/upload-artifact@v4`.
+4. **Added artifact download**: `publishDocumentation` job downloads the PDF artifact before
+   running the documentation script.
+5. **Added PDF copy into `_site/`**: After DocFX runs and generates `_site/`, the PDF is copied
+   in so it gets included in the deployment to gh-pages.
+6. **Restored PDF links**: All documentation files (`README.md`, `README.ru.md`,
+   `docs/website/index.html`, `docs/website/dist/index.html`) have their PDF links restored
+   to point to `Link.Foundation.Links.Notation.pdf`.
 
 ---
 
@@ -157,11 +160,12 @@ accessible at `https://link-foundation.github.io/links-notation/csharp/api/Link.
 
 | File | Broken Link | Status |
 |------|-------------|--------|
-| `README.md` | PDF link | Broken (file never existed) |
-| `README.ru.md` | `FEATURE_COMPARISON.md` | Broken (file deleted Nov 2025) |
-| `README.ru.md` | PDF link | Broken (file never existed) |
-| `docs/website/index.html` | PDF link | Broken (file never existed) |
-| `docs/website/dist/index.html` | PDF link | Broken (file never existed) |
+| `README.md` | PDF link | Fixed (CI/CD pipeline fixed to generate PDF) |
+| `README.ru.md` | `FEATURE_COMPARISON.md` | Fixed (updated to point to `TEST_CASE_COMPARISON.md`) |
+| `README.ru.md` | PDF link | Fixed (CI/CD pipeline fixed to generate PDF) |
+| `docs/website/index.html` | PDF link | Fixed (CI/CD pipeline fixed to generate PDF) |
+| `docs/website/dist/index.html` | PDF link | Fixed (CI/CD pipeline fixed to generate PDF) |
+| `.github/workflows/csharp.yml` | N/A | Fixed (generatePdfWithCode + publishDocumentation pipeline) |
 
 ---
 
@@ -178,14 +182,11 @@ without deliberate intent.
 
 ### For the PDF link
 
-**Option 1** (Recommended short-term): Remove the PDF links from all documentation until the PDF
-generation pipeline is fixed. Reference the existing HTML API docs instead.
-
-**Option 2** (Recommended long-term): Fix the CI pipeline to correctly generate and deploy the PDF:
-- The `linksplatform/Scripts` repository's `generate-csharp-pdf.sh` script needs to support
-  custom repository names (not just `Platform.$REPOSITORY_NAME`)
-- Alternatively, inline the PDF generation in `csharp.yml` with the correct filename
-- Add artifact sharing between `generatePdfWithCode` and `publishDocumentation` jobs
+**Implemented (Full fix)**: Fix the CI pipeline to correctly generate and deploy the PDF:
+- Patched `format-csharp-document.sh` to use `Link.Foundation.Links.Notation` directory paths
+- Patched `generate-csharp-pdf.sh` to produce `Link.Foundation.Links.Notation.pdf` as output
+- Added artifact upload/download between `generatePdfWithCode` and `publishDocumentation` jobs
+- Added PDF copy into DocFX `_site/` output before deployment
 
 ### Known Libraries/Tools for PDF Documentation Generation
 
