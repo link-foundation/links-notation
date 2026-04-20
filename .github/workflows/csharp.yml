@@ -241,7 +241,7 @@ jobs:
 
           bash ./generate-csharp-pdf.sh
       - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: csharp-pdf
           path: csharp/_site/Link.Foundation.Links.Notation.pdf
