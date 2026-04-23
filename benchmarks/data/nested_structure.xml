@@ -1,0 +1,31 @@
+<company>
+  <name>TechCorp</name>
+  <departments>
+    <department>
+      <name>Engineering</name>
+      <teams>
+        <team>
+          <name>Frontend</name>
+          <size>5</size>
+        </team>
+        <team>
+          <name>Backend</name>
+          <size>8</size>
+        </team>
+      </teams>
+    </department>
+    <department>
+      <name>Marketing</name>
+      <teams>
+        <team>
+          <name>Digital</name>
+          <size>3</size>
+        </team>
+        <team>
+          <name>Content</name>
+          <size>4</size>
+        </team>
+      </teams>
+    </department>
+  </departments>
+</company>
