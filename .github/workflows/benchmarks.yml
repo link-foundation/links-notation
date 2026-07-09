@@ -1,0 +1,208 @@
+name: benchmarks
+
+on:
+  push:
+    branches: main
+    paths:
+      - 'benchmarks/**'
+      - 'rust/links-notation-benchmark/**'
+      - '.github/workflows/benchmarks.yml'
+  pull_request:
+    paths:
+      - 'benchmarks/**'
+      - 'rust/links-notation-benchmark/**'
+      - '.github/workflows/benchmarks.yml'
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  findChangedBenchmarkFiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      isBenchmarkFilesChanged: ${{ steps.setIsBenchmarkFilesChangedOutput.outputs.isBenchmarkFilesChanged }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Get changed files using defaults
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+      - name: Set output isBenchmarkFilesChanged
+        id: setIsBenchmarkFilesChangedOutput
+        run: |
+          isBenchmarkFilesChanged='false'
+          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ $changedFile == benchmarks/* ]] || [[ $changedFile == rust/links-notation-benchmark/* ]] || [[ $changedFile == .github/workflows/benchmarks.yml ]]; then
+              echo "isBenchmarkFilesChanged='true'"
+              isBenchmarkFilesChanged='true'
+              break
+            fi
+          done
+          echo "isBenchmarkFilesChanged=${isBenchmarkFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isBenchmarkFilesChanged: ${isBenchmarkFilesChanged}"
+
+  run-benchmark:
+    needs: [findChangedBenchmarkFiles]
+    if: ${{ needs.findChangedBenchmarkFiles.outputs.isBenchmarkFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Cargo registry
+        uses: actions/cache@v5
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Cache Cargo index
+        uses: actions/cache@v5
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Cache Cargo build
+        uses: actions/cache@v5
+        with:
+          path: rust/target
+          key: ${{ runner.os }}-cargo-build-target-benchmark-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build benchmark
+        working-directory: rust
+        run: cargo build -p links-notation-benchmark --release
+
+      - name: Run benchmark tests
+        working-directory: rust
+        run: cargo test -p links-notation-benchmark
+
+      - name: Run benchmark and generate report
+        working-directory: rust
+        run: cargo run -p links-notation-benchmark --release
+
+      - name: Check for changes in benchmark results
+        id: check-changes
+        run: |
+          if git diff --quiet benchmarks/BENCHMARK_RESULTS.md benchmarks/benchmark_results.json; then
+            echo "No changes in benchmark results"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "Benchmark results have changed"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit updated benchmark results
+        if: ${{ steps.check-changes.outputs.has_changes == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add benchmarks/BENCHMARK_RESULTS.md benchmarks/benchmark_results.json
+          git diff --staged --quiet || git commit -m "Update benchmark results [skip ci]"
+          git push
+
+  validate-all-benchmarks:
+    needs: [run-benchmark]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+
+      # Rust benchmark (already tested in run-benchmark job)
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Cargo
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            rust/target
+          key: ${{ runner.os }}-cargo-validate-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Validate Rust benchmark
+        working-directory: rust
+        run: |
+          cargo build -p links-notation-benchmark --release
+          cargo run -p links-notation-benchmark --release
+          echo "Rust benchmark: PASSED"
+
+      # JavaScript benchmark
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+
+      - name: Validate JavaScript benchmark
+        run: |
+          node benchmarks/js/benchmark.mjs
+          echo "JavaScript benchmark: PASSED"
+
+      # Python benchmark
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate Python benchmark
+        run: |
+          python3 benchmarks/python/benchmark.py
+          echo "Python benchmark: PASSED"
+
+      # C# benchmark
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Validate C# benchmark
+        run: |
+          dotnet run --project benchmarks/csharp/Benchmark.csproj
+          echo "C# benchmark: PASSED"
+
+      # Go benchmark
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Validate Go benchmark
+        working-directory: benchmarks/go
+        run: |
+          go run benchmark.go
+          echo "Go benchmark: PASSED"
+
+      # Java benchmark
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Validate Java benchmark
+        working-directory: benchmarks/java
+        run: |
+          mvn compile exec:java -q
+          echo "Java benchmark: PASSED"
+
+      - name: Summary
+        run: |
+          echo "=== All benchmarks validated successfully ==="
+          echo "- Rust: PASSED"
+          echo "- JavaScript: PASSED"
+          echo "- Python: PASSED"
+          echo "- C#: PASSED"
+          echo "- Go: PASSED"
+          echo "- Java: PASSED"

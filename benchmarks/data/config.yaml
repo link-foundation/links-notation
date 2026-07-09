@@ -1,0 +1,14 @@
+server:
+  host: localhost
+  port: 8080
+  ssl: true
+  timeout: 30
+database:
+  driver: postgres
+  host: db.example.com
+  port: 5432
+  name: myapp
+features:
+  cache: true
+  logging: true
+  metrics: false
