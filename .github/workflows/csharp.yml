@@ -256,7 +256,7 @@ jobs:
         with:
           submodules: true
       - name: Download PDF artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: csharp-pdf
           path: csharp/pdf-artifact
