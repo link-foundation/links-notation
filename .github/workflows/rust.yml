@@ -134,13 +134,34 @@ jobs:
           key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
       - name: Build
         run: cargo build --release
+      - name: Publish links-notation-macro to Crates.io
+        id: publish-macro-crate
+        run: |
+          PACKAGE_VERSION=$(grep '^version = ' links-notation-macro/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
+          echo "Package: links-notation-macro@$PACKAGE_VERSION"
+
+          # The main crate depends on links-notation-macro, so it must be published first
+          set +e  # Don't exit on error
+          cargo publish -p links-notation-macro --token ${{ secrets.CARGO_TOKEN }} --allow-dirty 2>&1 | tee macro_publish_output.txt
+          PUBLISH_EXIT_CODE=$?
+          set -e  # Re-enable exit on error
+
+          if [ $PUBLISH_EXIT_CODE -eq 0 ]; then
+            echo "✅ Successfully published links-notation-macro@$PACKAGE_VERSION to crates.io"
+          elif grep -q "already exists on crates.io index" macro_publish_output.txt; then
+            echo "ℹ️ links-notation-macro@$PACKAGE_VERSION already exists on crates.io - this is OK"
+          else
+            echo "❌ Failed to publish links-notation-macro"
+            cat macro_publish_output.txt
+            exit 1
+          fi
       - name: Publish to Crates.io (with version check)
         id: publish-crate
         run: |
           PACKAGE_NAME=$(grep '^name = ' links-notation/Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/')
           PACKAGE_VERSION=$(grep '^version = ' links-notation/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
           echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
-          
+
           echo "=== Attempting to publish to crates.io ==="
           
           # Try to publish and capture the result
@@ -176,7 +197,7 @@ jobs:
   publishRelease:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [publishToCratesIO]
+    needs: [findChangedRustFiles, publishToCratesIO]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && needs.publishToCratesIO.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v6

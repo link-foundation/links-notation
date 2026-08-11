@@ -95,3 +95,29 @@ jobs:
           files: go/coverage.out
           flags: go
           fail_ci_if_error: false
+
+  publishRelease:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [findChangedGoFiles, test]
+    if: ${{ needs.findChangedGoFiles.outputs.isGoFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Create Go module tag and GitHub release
+        run: |
+          PACKAGE_VERSION=$(cat VERSION)
+          # Go modules in the go/ subdirectory require tags in the form go/vX.Y.Z
+          TAG_NAME="go/v$PACKAGE_VERSION"
+          echo "Checking if release $TAG_NAME already exists"
+
+          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Release $TAG_NAME already exists"
+          else
+            gh release create "$TAG_NAME" \
+              --title "[Go] $PACKAGE_VERSION" \
+              --notes "Go module release. Install with: \`go get github.com/link-foundation/links-notation/go@v$PACKAGE_VERSION\`"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
