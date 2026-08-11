@@ -138,7 +138,7 @@ jobs:
   publishRelease:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [publishToPyPI]
+    needs: [findChangedPythonFiles, publishToPyPI]
     if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && needs.publishToPyPI.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v6

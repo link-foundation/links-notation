@@ -103,10 +103,11 @@ jobs:
         run: |
           PACKAGE_VERSION=$(grep '<VersionPrefix>' Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj | sed 's/.*<VersionPrefix>\(.*\)<\/VersionPrefix>.*/\1/')
           PACKAGE_ID="Link.Foundation.Links.Notation"
+          PACKAGE_ID_LOWER=$(echo "$PACKAGE_ID" | tr '[:upper:]' '[:lower:]')
           echo "Package: $PACKAGE_ID@$PACKAGE_VERSION"
-          
-          # Check if version exists on NuGet.org
-          if curl -f "https://api.nuget.org/v3-flatcontainer/$PACKAGE_ID/$PACKAGE_VERSION/$PACKAGE_ID.nuspec" > /dev/null 2>&1; then
+
+          # Check if version exists on NuGet.org (flat-container URLs are lowercase-only)
+          if curl -f "https://api.nuget.org/v3-flatcontainer/$PACKAGE_ID_LOWER/$PACKAGE_VERSION/$PACKAGE_ID_LOWER.nuspec" > /dev/null 2>&1; then
             echo "Version $PACKAGE_VERSION already exists on NuGet.org"
             echo "should_publish=false" >> $GITHUB_OUTPUT
           else
@@ -130,7 +131,7 @@ jobs:
 
   publishRelease:
     runs-on: ubuntu-latest
-    needs: [pushToNuget, publishDocumentation]
+    needs: [findChangedCsFiles, pushToNuget, publishDocumentation]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && needs.pushToNuget.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v6

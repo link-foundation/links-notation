@@ -144,7 +144,7 @@ jobs:
   publishRelease:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [publishToNpm]
+    needs: [findChangedJsFiles, publishToNpm]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && needs.publishToNpm.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v6

@@ -108,22 +108,35 @@ jobs:
     if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    outputs:
+      published: ${{ steps.creds.outputs.have_creds == 'true' && steps.version-check.outputs.should_publish == 'true' }}
     steps:
       - uses: actions/checkout@v6
         with:
           submodules: true
+      - name: Check publishing credentials
+        id: creds
+        run: |
+          if [ -n "${{ secrets.CENTRAL_USERNAME }}" ] && [ -n "${{ secrets.CENTRAL_TOKEN }}" ] && [ -n "${{ secrets.GPG_PRIVATE_KEY }}" ]; then
+            echo "have_creds=true" >> $GITHUB_OUTPUT
+          else
+            echo "have_creds=false" >> $GITHUB_OUTPUT
+            echo "::warning::Skipping Maven Central publishing: CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets are not configured. Generate a token at https://central.sonatype.com/account and add these repository secrets to enable publishing."
+          fi
       - name: Set up JDK 11
+        if: steps.creds.outputs.have_creds == 'true'
         uses: actions/setup-java@v5
         with:
           java-version: '11'
           distribution: 'temurin'
           cache: maven
-          server-id: ossrh
+          server-id: central
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Check if version already published
+        if: steps.creds.outputs.have_creds == 'true'
         id: version-check
         run: |
           PACKAGE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
@@ -141,18 +154,18 @@ jobs:
             echo "should_publish=true" >> $GITHUB_OUTPUT
           fi
       - name: Publish to Maven Central
-        if: steps.version-check.outputs.should_publish == 'true'
+        if: steps.creds.outputs.have_creds == 'true' && steps.version-check.outputs.should_publish == 'true'
         run: mvn -B deploy -Prelease --file pom.xml
         env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+          MAVEN_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
   publishRelease:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [publishToMavenCentral]
-    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && needs.publishToMavenCentral.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: [findChangedJavaFiles, publishToMavenCentral]
+    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && needs.publishToMavenCentral.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v6
         with:
