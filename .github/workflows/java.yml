@@ -25,7 +25,7 @@ jobs:
     outputs:
       isJavaFilesChanged: ${{ steps.setIsJavaFilesChangedOutput.outputs.isJavaFilesChanged }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Get changed files using defaults
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           submodules: true
       - name: Set up JDK 11
@@ -73,7 +73,7 @@ jobs:
       matrix:
         java: ['11', '17', '21']
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           submodules: true
       - name: Set up JDK ${{ matrix.java }}
@@ -91,7 +91,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           submodules: true
       - name: Set up JDK 11
@@ -111,7 +111,7 @@ jobs:
     outputs:
       published: ${{ steps.creds.outputs.have_creds == 'true' && steps.version-check.outputs.should_publish == 'true' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           submodules: true
       - name: Check publishing credentials
@@ -167,7 +167,7 @@ jobs:
     needs: [findChangedJavaFiles, publishToMavenCentral]
     if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && needs.publishToMavenCentral.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           submodules: true
       - name: Set up JDK 11
