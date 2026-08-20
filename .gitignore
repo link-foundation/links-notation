@@ -342,3 +342,9 @@ venv/
 
 # java
 java/target/
+
+# PHP
+php/vendor/
+php/composer.lock
+php/.phpunit.cache/
+php/.phpunit.result.cache
