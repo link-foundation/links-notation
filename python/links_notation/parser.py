@@ -417,27 +417,10 @@ class Parser:
 
         # Check if this starts with a parenthesized expression
         if text[start] == "(":
-            paren_depth = 1
-            in_single = False
-            in_double = False
-            in_backtick = False
-            i = start + 1
-
-            while i < len(text) and paren_depth > 0:
-                char = text[i]
-                if char == "'" and not in_double and not in_backtick:
-                    in_single = not in_single
-                elif char == '"' and not in_single and not in_backtick:
-                    in_double = not in_double
-                elif char == "`" and not in_single and not in_double:
-                    in_backtick = not in_backtick
-                elif char == "(" and not in_single and not in_double and not in_backtick:
-                    paren_depth += 1
-                elif char == ")" and not in_single and not in_double and not in_backtick:
-                    paren_depth -= 1
-                i += 1
-
-            return (i, text[start:i])
+            end = self._find_matching_paren(text, start)
+            if end >= 0:
+                return (end + 1, text[start : end + 1])
+            return (len(text), text[start:])
 
         # Regular value - read until space or end
         in_single = False
