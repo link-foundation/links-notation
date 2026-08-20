@@ -6,6 +6,7 @@
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/workflows/csharp/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=csharp) | [![Версия NuGet пакета и количество загрузок](https://img.shields.io/nuget/v/Link.Foundation.Links.Notation?label=nuget&style=flat)](https://www.nuget.org/packages/Link.Foundation.Links.Notation) | **[C#](csharp/README.ru.md)** |
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/workflows/python/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=python) | [![Версия PyPI и количество загрузок](https://img.shields.io/pypi/v/links-notation?label=pypi&style=flat)](https://pypi.org/project/links-notation/) | **[Python](python/README.ru.md)** |
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/workflows/java/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=java) | [![Версия Maven Central](https://img.shields.io/maven-central/v/io.github.link-foundation/links-notation?label=maven&style=flat)](https://central.sonatype.com/artifact/io.github.link-foundation/links-notation) | **[Java](java/README.ru.md)** |
+| [![Состояние Actions](https://github.com/link-foundation/links-notation/workflows/php/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=php) | [![Версия Packagist и количество загрузок](https://img.shields.io/packagist/v/link-foundation/links-notation?label=packagist&style=flat)](https://packagist.org/packages/link-foundation/links-notation) | **[PHP](php/README.ru.md)** |
 
 [![Gitpod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/link-foundation/links-notation)
 [![Open in GitHub Codespaces](https://img.shields.io/badge/GitHub%20Codespaces-Open-181717?logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=link-foundation/links-notation)
@@ -63,6 +64,14 @@ links = parser.parse("папа (любитМаму: любит маму)")
 import io.github.linkfoundation.linksnotation.Parser;
 Parser parser = new Parser();
 List<Link> links = parser.parse("папа (любитМаму: любит маму)");
+```
+
+### PHP
+
+```php
+use LinkFoundation\LinksNotation\Parser;
+$parser = new Parser();
+$links = $parser->parse("папа (любитМаму: любит маму)");
 ```
 
 ## Примеры
