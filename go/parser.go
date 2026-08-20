@@ -42,6 +42,10 @@ type internalLink struct {
 	values       []*internalLink
 	children     []*internalLink
 	isIndentedID bool
+	// A parenthesized group is parsed as a nested document, isNested tells an
+	// empty group apart from a link that simply has no nested content.
+	nested   []*internalLink
+	isNested bool
 }
 
 // Parse parses Lino notation text into a slice of Link objects.
@@ -66,55 +70,113 @@ func (p *Parser) Parse(input string) ([]*Link, error) {
 	return p.transformResult(rawResult), nil
 }
 
+// skipQuotedString skips over the quoted string starting at start.
+// Any number N of quotes opens and closes the string, 2*N quotes are an escaped
+// quote sequence. It returns the position right after the closing quotes, or -1
+// when text does not start a terminated quoted string.
+func (p *Parser) skipQuotedString(text string, start int) int {
+	if start >= len(text) {
+		return -1
+	}
+
+	quoteChar := text[start]
+	if quoteChar != '"' && quoteChar != '\'' && quoteChar != '`' {
+		return -1
+	}
+
+	quoteCount := 0
+	pos := start
+	for pos < len(text) && text[pos] == quoteChar {
+		quoteCount++
+		pos++
+	}
+
+	openClose := strings.Repeat(string(quoteChar), quoteCount)
+	escapeSeq := strings.Repeat(string(quoteChar), quoteCount*2)
+
+	for pos < len(text) {
+		if strings.HasPrefix(text[pos:], escapeSeq) {
+			pos += len(escapeSeq)
+			continue
+		}
+		if strings.HasPrefix(text[pos:], openClose) {
+			afterClose := pos + quoteCount
+			if afterClose >= len(text) || text[afterClose] != quoteChar {
+				return afterClose
+			}
+		}
+		pos++
+	}
+
+	return -1
+}
+
+// findMatchingParen finds the parenthesis closing the one at start.
+// Quoted strings are skipped, so parentheses inside them are ignored.
+// It returns -1 when the group is not closed.
+func (p *Parser) findMatchingParen(text string, start int) int {
+	depth := 0
+	i := start
+
+	for i < len(text) {
+		char := text[i]
+		if char == '"' || char == '\'' || char == '`' {
+			if end := p.skipQuotedString(text, i); end > i {
+				i = end
+				continue
+			}
+		} else if char == '(' {
+			depth++
+		} else if char == ')' {
+			depth--
+			if depth == 0 {
+				return i
+			}
+		}
+		i++
+	}
+
+	return -1
+}
+
 // splitLinesRespectingQuotes splits text into lines while preserving newlines inside quotes
 // and handling multiline parenthesized expressions.
 func (p *Parser) splitLinesRespectingQuotes(text string) []string {
 	var lines []string
 	var currentLine strings.Builder
-	inSingle := false
-	inDouble := false
-	inBacktick := false
 	parenDepth := 0
+	i := 0
 
-	for i := 0; i < len(text); i++ {
+	for i < len(text) {
 		char := text[i]
 
-		switch char {
-		case '"':
-			if !inSingle && !inBacktick {
-				inDouble = !inDouble
+		if char == '"' || char == '\'' || char == '`' {
+			if end := p.skipQuotedString(text, i); end > i {
+				// A quoted string is opaque: newlines inside it are content
+				currentLine.WriteString(text[i:end])
+				i = end
+				continue
 			}
 			currentLine.WriteByte(char)
-		case '\'':
-			if !inDouble && !inBacktick {
-				inSingle = !inSingle
-			}
+		} else if char == '(' {
+			parenDepth++
 			currentLine.WriteByte(char)
-		case '`':
-			if !inSingle && !inDouble {
-				inBacktick = !inBacktick
-			}
+		} else if char == ')' {
+			parenDepth--
 			currentLine.WriteByte(char)
-		case '(':
-			if !inSingle && !inDouble && !inBacktick {
-				parenDepth++
-			}
-			currentLine.WriteByte(char)
-		case ')':
-			if !inSingle && !inDouble && !inBacktick {
-				parenDepth--
-			}
-			currentLine.WriteByte(char)
-		case '\n':
-			if inSingle || inDouble || inBacktick || parenDepth > 0 {
+		} else if char == '\n' {
+			if parenDepth > 0 {
+				// Inside unclosed parens: preserve the newline
 				currentLine.WriteByte(char)
 			} else {
 				lines = append(lines, currentLine.String())
 				currentLine.Reset()
 			}
-		default:
+		} else {
 			currentLine.WriteByte(char)
 		}
+
+		i++
 	}
 
 	// Add the last line if non-empty
@@ -228,10 +290,9 @@ func countLeadingSpaces(s string) int {
 }
 
 func (p *Parser) parseLineContent(content string) *internalLink {
-	// Try multiline link format: (id: values) or (values)
-	if strings.HasPrefix(content, "(") && strings.HasSuffix(content, ")") {
-		inner := strings.TrimSpace(content[1 : len(content)-1])
-		return p.parseParenthesized(inner)
+	// A whole parenthesized group: (id: values), (values) or a nested document
+	if strings.HasPrefix(content, "(") && p.findMatchingParen(content, 0) == len(content)-1 {
+		return p.parseParenthesized(content[1 : len(content)-1])
 	}
 
 	// Try indented ID syntax: id:
@@ -242,15 +303,12 @@ func (p *Parser) parseLineContent(content string) *internalLink {
 	}
 
 	// Try single-line link: id: values
-	if strings.Contains(content, ":") && !strings.HasPrefix(content, "\"") && !strings.HasPrefix(content, "'") {
-		colonPos := p.findColonOutsideQuotes(content)
-		if colonPos >= 0 {
-			idPart := strings.TrimSpace(content[:colonPos])
-			valuesPart := strings.TrimSpace(content[colonPos+1:])
-			ref := p.extractReference(idPart)
-			values := p.parseValues(valuesPart)
-			return &internalLink{id: &ref, values: values}
-		}
+	if colonPos := p.findColonOutsideQuotes(content); colonPos >= 0 {
+		idPart := strings.TrimSpace(content[:colonPos])
+		valuesPart := strings.TrimSpace(content[colonPos+1:])
+		ref := p.extractReference(idPart)
+		values := p.parseValues(valuesPart)
+		return &internalLink{id: &ref, values: values}
 	}
 
 	// Simple value list
@@ -258,55 +316,56 @@ func (p *Parser) parseLineContent(content string) *internalLink {
 	return &internalLink{values: values}
 }
 
+// parseParenthesized parses the content of a parenthesized group.
+//
+// The group opens a nested context that starts fresh at indentation level zero
+// and follows exactly the rules used at the root of the document, so line breaks
+// separate links and indentation nests them.
 func (p *Parser) parseParenthesized(inner string) *internalLink {
-	// Check for id: values format
-	colonPos := p.findColonOutsideQuotes(inner)
-	if colonPos >= 0 {
-		idPart := strings.TrimSpace(inner[:colonPos])
-		valuesPart := strings.TrimSpace(inner[colonPos+1:])
-		ref := p.extractReference(idPart)
-		values := p.parseValues(valuesPart)
-		return &internalLink{id: &ref, values: values}
-	}
-
-	// Just values
-	values := p.parseValues(inner)
-	return &internalLink{values: values}
+	return &internalLink{nested: p.parseNestedDocument(inner), isNested: true}
 }
 
-func (p *Parser) findColonOutsideQuotes(text string) int {
-	inSingle := false
-	inDouble := false
-	inBacktick := false
-	parenDepth := 0
+// parseNestedDocument parses the text of a parenthesized group as a document of its own.
+func (p *Parser) parseNestedDocument(inner string) []*internalLink {
+	savedLines := p.lines
+	savedPos := p.pos
+	savedBaseIndentation := p.baseIndentation
+	savedIndentStack := p.indentStack
 
-	for i, char := range text {
-		switch char {
-		case '\'':
-			if !inDouble && !inBacktick {
-				inSingle = !inSingle
+	p.lines = p.splitLinesRespectingQuotes(inner)
+	p.pos = 0
+	p.baseIndentation = nil
+	p.indentStack = []int{0}
+	nested := p.parseDocument()
+
+	p.lines = savedLines
+	p.pos = savedPos
+	p.baseIndentation = savedBaseIndentation
+	p.indentStack = savedIndentStack
+
+	return nested
+}
+
+// findColonOutsideQuotes finds a colon that is not inside quotes or parentheses.
+func (p *Parser) findColonOutsideQuotes(text string) int {
+	parenDepth := 0
+	i := 0
+
+	for i < len(text) {
+		char := text[i]
+		if char == '"' || char == '\'' || char == '`' {
+			if end := p.skipQuotedString(text, i); end > i {
+				i = end
+				continue
 			}
-		case '"':
-			if !inSingle && !inBacktick {
-				inDouble = !inDouble
-			}
-		case '`':
-			if !inSingle && !inDouble {
-				inBacktick = !inBacktick
-			}
-		case '(':
-			if !inSingle && !inDouble && !inBacktick {
-				parenDepth++
-			}
-		case ')':
-			if !inSingle && !inDouble && !inBacktick {
-				parenDepth--
-			}
-		case ':':
-			if !inSingle && !inDouble && !inBacktick && parenDepth == 0 {
-				return i
-			}
+		} else if char == '(' {
+			parenDepth++
+		} else if char == ')' {
+			parenDepth--
+		} else if char == ':' && parenDepth == 0 {
+			return i
 		}
+		i++
 	}
 
 	return -1
@@ -396,40 +455,10 @@ func (p *Parser) extractNextValue(text string, start int) (int, string) {
 
 	// Check if this starts with a parenthesized expression
 	if text[start] == '(' {
-		parenDepth := 1
-		inSingle := false
-		inDouble := false
-		inBacktick := false
-		i := start + 1
-
-		for i < len(text) && parenDepth > 0 {
-			char := text[i]
-			switch char {
-			case '\'':
-				if !inDouble && !inBacktick {
-					inSingle = !inSingle
-				}
-			case '"':
-				if !inSingle && !inBacktick {
-					inDouble = !inDouble
-				}
-			case '`':
-				if !inSingle && !inDouble {
-					inBacktick = !inBacktick
-				}
-			case '(':
-				if !inSingle && !inDouble && !inBacktick {
-					parenDepth++
-				}
-			case ')':
-				if !inSingle && !inDouble && !inBacktick {
-					parenDepth--
-				}
-			}
-			i++
+		if end := p.findMatchingParen(text, start); end >= 0 {
+			return end + 1, text[start : end+1]
 		}
-
-		return i, text[start:i]
+		return len(text), text[start:]
 	}
 
 	// Regular value - read until space or end
@@ -466,9 +495,8 @@ func (p *Parser) extractNextValue(text string, start int) (int, string) {
 
 func (p *Parser) parseValue(value string) *internalLink {
 	// Nested link in parentheses
-	if strings.HasPrefix(value, "(") && strings.HasSuffix(value, ")") {
-		inner := strings.TrimSpace(value[1 : len(value)-1])
-		return p.parseParenthesized(inner)
+	if strings.HasPrefix(value, "(") && p.findMatchingParen(value, 0) == len(value)-1 {
+		return p.parseParenthesized(value[1 : len(value)-1])
 	}
 
 	// Simple reference
@@ -638,9 +666,36 @@ func (p *Parser) combinePathElements(pathElements []*Link, current *Link) *Link 
 	}
 }
 
+// transformNested turns the links of a nested (parenthesized) context into one Link.
+//
+// The nested context is parsed with the same rules as the root, so it yields a
+// list of links; a single link is used as is, several links become the values of
+// one anonymous link. An already parenthesized single link keeps its own group,
+// so "((a b))" stays distinct from "(a b)".
+func (p *Parser) transformNested(nested []*internalLink) *Link {
+	var nestedLinks []*Link
+	for _, item := range nested {
+		if item != nil {
+			p.collectLinks(item, nil, &nestedLinks)
+		}
+	}
+
+	wrapsSingleGroup := len(nested) == 1 && nested[0] != nil && nested[0].isNested
+	if len(nestedLinks) == 1 && !wrapsSingleGroup {
+		return nestedLinks[0]
+	}
+
+	return &Link{ID: nil, Values: nestedLinks}
+}
+
 func (p *Parser) transformLink(item *internalLink) *Link {
 	if item == nil {
 		return &Link{}
+	}
+
+	// Parenthesized group parsed as a nested context
+	if item.isNested {
+		return p.transformNested(item.nested)
 	}
 
 	// Simple reference
