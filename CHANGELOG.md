@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Native PHP implementation of the Links Notation parser and formatter
+  (`link-foundation/links-notation` on Packagist), with a full PHPUnit test
+  suite ported from Python, PSR-12 linting and a dedicated CI workflow
+  ([#284](https://github.com/link-foundation/links-notation/issues/284))
 - Parentheses open a nested context in every implementation (JavaScript, Python,
   Rust, Go, Java, C#): the body of `( )` starts fresh at indentation level zero
   and follows the same rules as the root document, so indentation is structural

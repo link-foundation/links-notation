@@ -7,6 +7,7 @@
 | [![Actions Status](https://github.com/link-foundation/links-notation/workflows/python/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=python) | [![PyPI Version and Downloads count](https://img.shields.io/pypi/v/links-notation?label=pypi&style=flat)](https://pypi.org/project/links-notation/) | **[Python](python/README.md)** |
 | [![Actions Status](https://github.com/link-foundation/links-notation/workflows/go/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=go) | [![Go Reference](https://pkg.go.dev/badge/github.com/link-foundation/links-notation/go.svg)](https://pkg.go.dev/github.com/link-foundation/links-notation/go) | **[Go](go/README.md)** |
 | [![Actions Status](https://github.com/link-foundation/links-notation/workflows/java/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=java) | [![Maven Central Version](https://img.shields.io/maven-central/v/io.github.link-foundation/links-notation?label=maven&style=flat)](https://central.sonatype.com/artifact/io.github.link-foundation/links-notation) | **[Java](java/README.md)** |
+| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/php/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=php) | [![Packagist Version and Downloads count](https://img.shields.io/packagist/v/link-foundation/links-notation?label=packagist&style=flat)](https://packagist.org/packages/link-foundation/links-notation) | **[PHP](php/README.md)** |
 
 [![Gitpod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/link-foundation/links-notation)
 [![Open in GitHub Codespaces](https://img.shields.io/badge/GitHub%20Codespaces-Open-181717?logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=link-foundation/links-notation)
@@ -71,6 +72,14 @@ links, _ := lino.Parse("papa (lovesMama: loves mama)")
 import io.github.linkfoundation.linksnotation.Parser;
 Parser parser = new Parser();
 List<Link> links = parser.parse("papa (lovesMama: loves mama)");
+```
+
+### PHP
+
+```php
+use LinkFoundation\LinksNotation\Parser;
+$parser = new Parser();
+$links = $parser->parse("papa (lovesMama: loves mama)");
 ```
 
 ## Examples
