@@ -72,25 +72,134 @@
         // No closing quotes found
         return false;
     }
+    /// <summary>
+    /// Saved indentation context of an enclosing scope.
+    /// Every parenthesized group opens a nested context that starts fresh at
+    /// indentation level zero, so line breaks and indentation mean the same
+    /// thing at every depth.
+    /// </summary>
+    private sealed class IndentationContext
+    {
+        public IndentationContext(Stack<int> indentationStack, int baseIndentation, IndentationContext parent)
+        {
+            IndentationStack = indentationStack;
+            BaseIndentation = baseIndentation;
+            Parent = parent;
+        }
+
+        public Stack<int> IndentationStack { get; }
+
+        public int BaseIndentation { get; }
+
+        public IndentationContext Parent { get; }
+    }
+
+    /// <summary>
+    /// Start a fresh indentation context at the beginning of the document.
+    /// </summary>
+    private static void ResetState(Cursor state)
+    {
+        state["IndentationStack"] = NewIndentationStack();
+        state["BaseIndentation"] = -1;
+        state["NestedContext"] = null;
+    }
+
+    /// <summary>
+    /// Create an indentation stack that starts at level zero.
+    /// </summary>
+    private static Stack<int> NewIndentationStack()
+    {
+        var indentationStack = new Stack<int>();
+        indentationStack.Push(0);
+        return indentationStack;
+    }
+
+    /// <summary>
+    /// Save the current indentation context and start a fresh one, so that the
+    /// contents of a parenthesized group are read exactly like the root of the document.
+    /// </summary>
+    private static void EnterNestedContext(Cursor state)
+    {
+        state["NestedContext"] = new IndentationContext(
+            (Stack<int>)state["IndentationStack"],
+            (int)state["BaseIndentation"],
+            (IndentationContext)state["NestedContext"]);
+        state["IndentationStack"] = NewIndentationStack();
+        state["BaseIndentation"] = -1;
+    }
+
+    /// <summary>
+    /// Restore the indentation context that was saved when the group was opened.
+    /// </summary>
+    private static void ExitNestedContext(Cursor state)
+    {
+        var saved = (IndentationContext)state["NestedContext"];
+        if (saved != null)
+        {
+            state["IndentationStack"] = saved.IndentationStack;
+            state["BaseIndentation"] = saved.BaseIndentation;
+            state["NestedContext"] = saved.Parent;
+        }
+    }
+
+    /// <summary>
+    /// Check whether the parser is currently reading the contents of a parenthesized group.
+    /// </summary>
+    private static bool IsInsideNestedContext(Cursor state) => (IndentationContext)state["NestedContext"] != null;
+
+    /// <summary>
+    /// Turn the links of a nested (parenthesized) context into a single link.
+    /// The nested context is parsed with the same rules as the root, so it yields
+    /// a list of links; a single link is used as is, several links become the
+    /// values of one anonymous link.
+    /// </summary>
+    private static Link<string> NestedLink(IList<LinksGroup<string>> groups)
+    {
+        var links = groups.ToLinksList();
+        return links.Count == 1 ? links[0] : new Link<string>(links);
+    }
+
+    /// <summary>
+    /// Wrap a parenthesized group into a links group, remembering that it was written
+    /// with parentheses so that it keeps its own identifier and values.
+    /// </summary>
+    private static LinksGroup<string> ParenthesizedGroup(Link<string> link, IList<LinksGroup<string>> groups)
+    {
+        return new LinksGroup<string>(link, groups) { IsParenthesized = true };
+    }
 }
-document <IList<Link<string>>> = #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = -1; } skipEmptyLines l:links _ eof { l.ToLinksList() } / #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = -1; } _ eof { new List<Link<string>>() }
+document <IList<Link<string>>> = #{ ResetState(state); } skipEmptyLines l:links _ eof { l.ToLinksList() } / #{ ResetState(state); } _ eof { new List<Link<string>>() }
 skipEmptyLines = ([ \t]* [\r\n])*
 links <IList<LinksGroup<string>>> = fl:firstLine list:line* POP_INDENTATION { new List<LinksGroup<string>> { fl }.Concat(list).ToList() }
 firstLine <LinksGroup<string>> = SET_BASE_INDENTATION l:element { l }
 line <LinksGroup<string>> = CHECK_INDENTATION l:element { l }
-element <LinksGroup<string>> = e:anyLink PUSH_INDENTATION l:links { new LinksGroup<string>(e, l) } / e:anyLink { new LinksGroup<string>(e) }
+element <LinksGroup<string>> = e:nestedGroup eol PUSH_INDENTATION l:links { ParenthesizedGroup(e, l) }
+/ e:nestedGroup eol { ParenthesizedGroup(e, null) }
+/ e:anyLink PUSH_INDENTATION l:links { new LinksGroup<string>(e, l) }
+/ e:anyLink { new LinksGroup<string>(e) }
 referenceOrLink <Link<string>> = l:multiLineAnyLink { l } / i:reference { i }
 anyLink <Link<string>> = ml:multiLineAnyLink eol { ml } / il:indentedIdLink { il } / sl:singleLineAnyLink { sl }
-multiLineAnyLink <Link<string>> = multiLineValueLink / multiLineLink
+multiLineAnyLink <Link<string>> = nestedGroup
 singleLineAnyLink <Link<string>> = fl:singleLineLink eol { fl } / vl:singleLineValueLink eol { vl }
-multiLineValueAndWhitespace <Link<string>> = value:referenceOrLink _ { value }
-multiLineValues <IList<Link<string>>> = _ list:multiLineValueAndWhitespace* { list }
+
+// A parenthesized group opens a nested context that follows exactly the same
+// rules as the root of the document: line breaks separate links and
+// indentation nests them, starting fresh at indentation level zero.
+// A group that holds nothing but another group keeps its own parentheses,
+// so that "((a b))" stays distinct from "(a b)".
+nestedGroup <Link<string>> = "(" _ inner:nestedGroup _ ")" { new Link<string>(new List<Link<string>> { inner }) }
+/ "(" ENTER_NESTED_CONTEXT body:nestedGroupBody { body }
+
+nestedGroupBody <Link<string>> = skipEmptyLines l:links _ ")" EXIT_NESTED_CONTEXT { NestedLink(l) }
+/ _ ")" EXIT_NESTED_CONTEXT { new Link<string>(new List<Link<string>>()) }
+
+ENTER_NESTED_CONTEXT = #{ EnterNestedContext(state); }
+EXIT_NESTED_CONTEXT = #{ ExitNestedContext(state); }
+
 singleLineValueAndWhitespace <Link<string>> = __ value:referenceOrLink { value }
 singleLineValues <IList<Link<string>>> = list:singleLineValueAndWhitespace+ { list }
 singleLineLink <Link<string>> = __ id:(reference) __ ":" v:singleLineValues { new Link<string>(id, v) }
-multiLineLink <Link<string>> = "(" _ id:(reference) _ ":" v:multiLineValues _ ")" { new Link<string>(id, v) }
 singleLineValueLink <Link<string>> = v:singleLineValues { new Link<string>(v) }
-multiLineValueLink <Link<string>> = "(" v:multiLineValues _ ")" { new Link<string>(v) }
 indentedIdLink <Link<string>> = id:(reference) __ ":" eol { new Link<string>(id) }
 
 // Reference can be quoted (with any number of quotes) or simple unquoted
@@ -147,7 +256,11 @@ SET_BASE_INDENTATION = spaces:" "* #{ if ((int)state["BaseIndentation"] == -1) s
 PUSH_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] > (int)state["IndentationStack"].Peek() } #{ state["IndentationStack"].Push((int)state["NormalizedIndent"]); }
 POP_INDENTATION = #{ state["IndentationStack"].Pop(); }
 CHECK_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] >= (int)state["IndentationStack"].Peek() }
-eol = __ ("" [\r\n]+ / eof)
+eol = __ ("" [\r\n]+ / eof / nestedGroupEnd)
+
+// Inside a parenthesized group the closing parenthesis terminates a line the
+// same way the end of the input does at the root.
+nestedGroupEnd = &{ IsInsideNestedContext(state) } &")"
 eof = !.
 __ = [ \t]*
 _ = whiteSpaceSymbol*

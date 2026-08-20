@@ -102,7 +102,7 @@ namespace Link.Foundation.Links.Notation
                 }
                 return new Link<TLinkAddress>(link.Id, childValues);
             }
-            else if (link.Values != null && link.Values.Count == 1)
+            else if (!group.IsParenthesized && link.Values != null && link.Values.Count == 1)
             {
                 return link.Values[0];
             }
