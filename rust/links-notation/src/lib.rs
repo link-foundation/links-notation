@@ -386,6 +386,9 @@ impl<T: ToString> fmt::Display for LiNo<T> {
 // Convert from parser::Link to LiNo (without flattening)
 impl From<parser::Link> for LiNo<String> {
     fn from(link: parser::Link) -> Self {
+        if let Some(body) = &link.nested {
+            return transform_nested(body);
+        }
         if link.values.is_empty() && link.children.is_empty() {
             if let Some(id) = link.id {
                 LiNo::Ref(id)
@@ -402,6 +405,23 @@ impl From<parser::Link> for LiNo<String> {
                 values,
             }
         }
+    }
+}
+
+// A parenthesized group is a nested document: its body follows the same rules as
+// the root, so it is flattened the same way. A body that produces a single link
+// collapses to that link, unless the body is a single parenthesized group, which
+// keeps `((a b))` different from `(a b)`.
+fn transform_nested(body: &[parser::Link]) -> LiNo<String> {
+    let links = flatten_links(body.to_vec());
+    let wraps_single_group =
+        body.len() == 1 && body[0].nested.is_some() && body[0].children.is_empty();
+    if links.len() == 1 && !wraps_single_group {
+        return links.into_iter().next().unwrap();
+    }
+    LiNo::Link {
+        id: None,
+        values: links,
     }
 }
 
@@ -447,6 +467,7 @@ fn flatten_link_recursive(
                             values: child.values.clone(),
                             children: vec![],
                             is_indented_id: false,
+                            nested: child.nested.clone(),
                         }
                         .into()
                     }
@@ -456,6 +477,7 @@ fn flatten_link_recursive(
                         values: child.values.clone(),
                         children: vec![],
                         is_indented_id: false,
+                        nested: child.nested.clone(),
                     }
                     .into()
                 }
@@ -490,7 +512,9 @@ fn flatten_link_recursive(
     }
 
     // Create the current link without children
-    let current = if link.values.is_empty() {
+    let current = if let Some(body) = &link.nested {
+        transform_nested(body)
+    } else if link.values.is_empty() {
         if let Some(id) = &link.id {
             LiNo::Ref(id.clone())
         } else {
@@ -509,6 +533,7 @@ fn flatten_link_recursive(
                     values: v.values.clone(),
                     children: vec![],
                     is_indented_id: false,
+                    nested: v.nested.clone(),
                 }
                 .into()
             })
