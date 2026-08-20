@@ -1,0 +1,68 @@
+{
+  "summary": {
+    "total_lino_chars": 734,
+    "total_json_chars": 1332,
+    "total_yaml_chars": 920,
+    "total_xml_chars": 1882,
+    "avg_lino_vs_json": 47.88766454479672,
+    "avg_lino_vs_yaml": 21.476205048227925,
+    "avg_lino_vs_xml": 61.47141614170713
+  },
+  "results": [
+    {
+      "name": "employees",
+      "description": "Employee records with nested structure",
+      "lino_chars": 177,
+      "json_chars": 251,
+      "yaml_chars": 142,
+      "xml_chars": 302,
+      "lino_vs_json": 29.482071713147413,
+      "lino_vs_yaml": -24.647887323943664,
+      "lino_vs_xml": 41.390728476821195
+    },
+    {
+      "name": "simple_doublets",
+      "description": "Simple doublet links (2-tuples)",
+      "lino_chars": 62,
+      "json_chars": 155,
+      "yaml_chars": 112,
+      "xml_chars": 215,
+      "lino_vs_json": 60.0,
+      "lino_vs_yaml": 44.642857142857146,
+      "lino_vs_xml": 71.16279069767441
+    },
+    {
+      "name": "triplets",
+      "description": "Triplet relations (3-tuples)",
+      "lino_chars": 54,
+      "json_chars": 229,
+      "yaml_chars": 183,
+      "xml_chars": 371,
+      "lino_vs_json": 76.41921397379913,
+      "lino_vs_yaml": 70.49180327868852,
+      "lino_vs_xml": 85.44474393530997
+    },
+    {
+      "name": "nested_structure",
+      "description": "Deeply nested company structure",
+      "lino_chars": 254,
+      "json_chars": 400,
+      "yaml_chars": 282,
+      "xml_chars": 615,
+      "lino_vs_json": 36.5,
+      "lino_vs_yaml": 9.929078014184398,
+      "lino_vs_xml": 58.69918699186992
+    },
+    {
+      "name": "config",
+      "description": "Application configuration",
+      "lino_chars": 187,
+      "json_chars": 297,
+      "yaml_chars": 201,
+      "xml_chars": 379,
+      "lino_vs_json": 37.03703703703704,
+      "lino_vs_yaml": 6.965174129353234,
+      "lino_vs_xml": 50.65963060686016
+    }
+  ]
+}

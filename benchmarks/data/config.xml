@@ -1,0 +1,19 @@
+<config>
+  <server>
+    <host>localhost</host>
+    <port>8080</port>
+    <ssl>true</ssl>
+    <timeout>30</timeout>
+  </server>
+  <database>
+    <driver>postgres</driver>
+    <host>db.example.com</host>
+    <port>5432</port>
+    <name>myapp</name>
+  </database>
+  <features>
+    <cache>true</cache>
+    <logging>true</logging>
+    <metrics>false</metrics>
+  </features>
+</config>

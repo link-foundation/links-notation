@@ -1,0 +1,17 @@
+<relations>
+  <relation>
+    <subject>papa</subject>
+    <predicate>has</predicate>
+    <object>car</object>
+  </relation>
+  <relation>
+    <subject>mama</subject>
+    <predicate>has</predicate>
+    <object>house</object>
+  </relation>
+  <relation>
+    <subject>papa and mama</subject>
+    <predicate>are</predicate>
+    <object>happy</object>
+  </relation>
+</relations>
