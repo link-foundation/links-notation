@@ -1,6 +1,37 @@
 {
   let indentationStack = [0];
   let baseIndentation = null;
+  // Saved indentation contexts of the enclosing scopes. Every parenthesised
+  // group opens a nested context that starts fresh at indentation level zero,
+  // so line breaks and indentation mean the same thing at every depth.
+  let contextStack = [];
+
+  function resetState() {
+    indentationStack = [0];
+    baseIndentation = null;
+    contextStack = [];
+    return true;
+  }
+
+  function enterNestedContext() {
+    contextStack.push({ indentationStack, baseIndentation });
+    indentationStack = [0];
+    baseIndentation = null;
+    return true;
+  }
+
+  function exitNestedContext() {
+    const saved = contextStack.pop();
+    if (saved) {
+      indentationStack = saved.indentationStack;
+      baseIndentation = saved.baseIndentation;
+    }
+    return true;
+  }
+
+  function isInsideNestedContext() {
+    return contextStack.length > 0;
+  }
 
   function setBaseIndentation(spaces) {
     if (baseIndentation === null) {
@@ -89,8 +120,8 @@
   let parsedLength = 0;
 }
 
-document = &{ indentationStack = [0]; baseIndentation = null; return true; } skipEmptyLines links:links _ eof { return links; }
-  / &{ indentationStack = [0]; baseIndentation = null; return true; } _ eof { return []; }
+document = &{ return resetState(); } skipEmptyLines links:links _ eof { return links; }
+  / &{ return resetState(); } _ eof { return []; }
 
 skipEmptyLines = ([ \t]* [\r\n])*
 
@@ -101,7 +132,7 @@ firstLine = SET_BASE_INDENTATION l:element { return l; }
 line = CHECK_INDENTATION l:element { return l; }
 
 element = e:anyLink PUSH_INDENTATION l:links {
-    return { id: e.id, values: e.values, children: l };
+    return Object.assign({}, e, { children: l });
   }
   / e:anyLink { return e; }
 
@@ -109,14 +140,23 @@ referenceOrLink = l:multiLineAnyLink { return l; } / i:reference { return { id: 
 
 anyLink = ml:multiLineAnyLink eol { return ml; } / il:indentedIdLink { return il; } / sl:singleLineAnyLink { return sl; }
 
-multiLineAnyLink = multiLineValueLink / multiLineLink
+multiLineAnyLink = nestedGroup
 
 singleLineAnyLink = fl:singleLineLink eol { return fl; }
   / vl:singleLineValueLink eol { return vl; }
 
-multiLineValueAndWhitespace = value:referenceOrLink _ { return value; }
+// A parenthesised group opens a nested context that follows exactly the same
+// rules as the root of the document: line breaks separate links and
+// indentation nests them, starting fresh at indentation level zero.
+nestedGroup = "(" ENTER_NESTED_CONTEXT body:nestedGroupBody {
+    exitNestedContext();
+    return body;
+  }
 
-multiLineValues = _ list:multiLineValueAndWhitespace* { return list; }
+nestedGroupBody = skipEmptyLines l:links _ ")" { return { nested: l }; }
+  / _ ")" { return { nested: [] }; }
+
+ENTER_NESTED_CONTEXT = &{ return enterNestedContext(); }
 
 singleLineValueAndWhitespace = __ value:referenceOrLink { return value; }
 
@@ -124,11 +164,7 @@ singleLineValues = list:singleLineValueAndWhitespace+ { return list; }
 
 singleLineLink = __ id:reference __ ":" v:singleLineValues { return { id: id, values: v }; }
 
-multiLineLink = "(" _ id:reference _ ":" v:multiLineValues _ ")" { return { id: id, values: v }; }
-
 singleLineValueLink = v:singleLineValues { return { values: v }; }
-
-multiLineValueLink = "(" v:multiLineValues _ ")" { return { values: v }; }
 
 indentedIdLink = id:reference __ ":" eol { return { id: id, values: [] }; }
 
@@ -194,7 +230,11 @@ PUSH_INDENTATION = spaces:" "* &{ return normalizeIndentation(spaces) > getCurre
 
 CHECK_INDENTATION = spaces:" "* &{ return checkIndentation(spaces); }
 
-eol = __ ([\r\n]+ / eof)
+eol = __ ([\r\n]+ / eof / nestedGroupEnd)
+
+// Inside a parenthesised group the closing parenthesis terminates a line the
+// same way the end of the input does at the root.
+nestedGroupEnd = &{ return isInsideNestedContext(); } &")"
 
 eof = !.
 

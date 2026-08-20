@@ -136,6 +136,30 @@ export class Parser {
   }
 
   /**
+   * Transform the links of a nested (parenthesised) context into a single Link.
+   * The nested context is parsed with the same rules as the root, so it yields
+   * a list of links; a single link is used as is, several links become the
+   * values of one anonymous link. An already parenthesised single link keeps
+   * its own group so that `((a b))` stays distinct from `(a b)`.
+   * @param {Array} nested - Raw items parsed inside the parentheses
+   * @returns {Link} The link representing the parenthesised group
+   */
+  transformNested(nested) {
+    const nestedLinks = [];
+    for (const item of nested) {
+      if (item !== null && item !== undefined) {
+        this.collectLinks(item, [], nestedLinks);
+      }
+    }
+    const wrapsSingleGroup =
+      nested.length === 1 && nested[0] && nested[0].nested !== undefined;
+    if (nestedLinks.length === 1 && !wrapsSingleGroup) {
+      return nestedLinks[0];
+    }
+    return new Link(null, nestedLinks);
+  }
+
+  /**
    * Transform a parsed item into a Link object
    * @param {*} item - The item to transform
    * @returns {Link|null} The transformed Link or null
@@ -146,6 +170,11 @@ export class Parser {
 
     if (item instanceof Link) {
       return item;
+    }
+
+    // Parenthesised group parsed as a nested context
+    if (item.nested !== undefined) {
+      return this.transformNested(item.nested);
     }
 
     // Handle simple reference objects like {id: 'a'}
