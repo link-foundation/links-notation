@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Parentheses open a nested context in every implementation (JavaScript, Python,
+  Rust, Go, Java, C#): the body of `( )` starts fresh at indentation level zero
+  and follows the same rules as the root document, so indentation is structural
+  inside parentheses and parenthesised groups can express nested records
+  ([#282](https://github.com/link-foundation/links-notation/issues/282))
+- Blank lines inside a block are skipped instead of ending it, at the root and
+  inside parentheses alike
+- Tests covering nested indentation inside parentheses for all six
+  implementations
 - Comprehensive code quality improvements across all language implementations
 - Input validation and size limits for all parsers
 - Proper error types in Rust implementation
@@ -17,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dependabot for automated dependency updates
 
 ### Changed
+- Grammar: `multiline_link`, `multiline_value_link` and `multiline_values` are
+  replaced by `nested_group` and `nested_group_body`; `eol` now also matches the
+  end of a nested group, and `ENTER_NESTED_CONTEXT`/`EXIT_NESTED_CONTEXT` were
+  added to the indentation semantic actions
 - Python minimum version relaxed from 3.13 to 3.9+
 - Updated GitHub Actions to latest versions (v4/v5)
 - Replaced deprecated `actions-rs` with `dtolnay/rust-toolchain`
@@ -28,6 +41,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved quote escaping to handle edge cases in JavaScript
 
 ### Fixed
+- Indentation inside `( )` was ignored, so a parenthesised group collapsed to one
+  flat list of references and records such as `value (` / `  id "1"` /
+  `  label "one"` / `)` lost their boundaries
+  ([#282](https://github.com/link-foundation/links-notation/issues/282))
 - JavaScript Parser: Fixed null/undefined checks to use explicit comparison
 - JavaScript Parser: Preserved error stack traces in error handling
 - JavaScript Link: Added input validation for constructor parameters

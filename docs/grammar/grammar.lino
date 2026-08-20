@@ -1,5 +1,5 @@
 (grammar: links-notation
-  (version: 0.12.0)
+  (version: 0.14.0)
   (description: "Links Notation (Lino) grammar expressed in links-notation format")
 
   (document:
@@ -18,7 +18,7 @@
     (sequence SET_BASE_INDENTATION element))
 
   (line:
-    (sequence CHECK_INDENTATION element))
+    (sequence skip_empty_lines CHECK_INDENTATION element))
 
   (element:
     (alternative:
@@ -27,26 +27,22 @@
 
   (any_link:
     (alternative:
-      (sequence multiline_any_link eol)
+      (sequence nested_group eol)
       indented_id_link
       single_line_any_link))
-
-  (multiline_any_link:
-    (alternative multiline_value_link multiline_link))
 
   (single_line_any_link:
     (alternative:
       (sequence single_line_link eol)
       (sequence single_line_value_link eol)))
 
-  (multiline_link:
-    (sequence "(" whitespace reference whitespace ":" multiline_values whitespace ")"))
+  (nested_group:
+    (sequence "(" ENTER_NESTED_CONTEXT nested_group_body EXIT_NESTED_CONTEXT))
 
-  (multiline_value_link:
-    (sequence "(" multiline_values whitespace ")"))
-
-  (multiline_values:
-    (sequence whitespace (zero_or_more (sequence reference_or_link whitespace))))
+  (nested_group_body:
+    (alternative:
+      (sequence skip_empty_lines links whitespace ")")
+      (sequence whitespace ")")))
 
   (single_line_link:
     (sequence horizontal_whitespace reference horizontal_whitespace ":" single_line_values))
@@ -61,7 +57,7 @@
     (sequence reference horizontal_whitespace ":" eol))
 
   (reference_or_link:
-    (alternative multiline_any_link reference))
+    (alternative nested_group reference))
 
   (reference:
     (alternative double_quoted_reference single_quoted_reference simple_reference))
@@ -91,7 +87,12 @@
     (alternative "\r\n" "\n" "\r"))
 
   (eol:
-    (sequence horizontal_whitespace (alternative newline EOF)))
+    (alternative:
+      (sequence horizontal_whitespace (alternative newline EOF))
+      nested_group_end))
+
+  (nested_group_end:
+    (sequence inside_nested_context horizontal_whitespace (lookahead ")")))
 
   (meta_operators:
     (description: "EBNF operators expressed as links")
@@ -100,11 +101,15 @@
     (zero_or_more: "Repetition - zero or more occurrences")
     (one_or_more: "Repetition - one or more occurrences")
     (optional: "Optional - zero or one occurrence")
-    (not: "Negation - character class exclusion"))
+    (not: "Negation - character class exclusion")
+    (lookahead: "Match without consuming input"))
 
   (indentation_control:
     (description: "Semantic actions for indentation tracking")
     (SET_BASE_INDENTATION: "Sets base indentation from first content line")
     (PUSH_INDENTATION: "Pushes new indentation level when deeper")
     (CHECK_INDENTATION: "Verifies indentation is valid for context")
-    (POP_INDENTATION: "Restores previous indentation level")))
+    (POP_INDENTATION: "Restores previous indentation level")
+    (ENTER_NESTED_CONTEXT: "Saves indentation state and starts a fresh context at level zero")
+    (EXIT_NESTED_CONTEXT: "Restores the indentation state saved when the group was opened")
+    (inside_nested_context: "Holds only while at least one parenthesized group is open")))
