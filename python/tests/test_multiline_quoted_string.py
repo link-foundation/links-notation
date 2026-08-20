@@ -21,16 +21,18 @@ as another reference'
     assert len(result) > 0
     assert len(result) == 1
 
+    # The two references sit on separate lines inside the parentheses, so the
+    # nested context turns each of them into its own link.
     link = result[0]
     assert link.id is None
     assert link.values is not None
     assert len(link.values) == 2
 
-    assert link.values[0].id == """long
+    assert link.values[0].values[0].id == """long
 string literal representing
 the reference"""
 
-    assert link.values[1].id == """another
+    assert link.values[1].values[0].id == """another
 long string literal
 as another reference"""
 
