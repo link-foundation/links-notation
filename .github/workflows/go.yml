@@ -83,7 +83,12 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version: '1.21'
-          cache-dependency-path: go/go.sum
+          # This module has no dependencies: go/go.sum does not exist and
+          # go.mod has no require block. Pointing the dependency cache at a
+          # file that is not there made setup-go emit "Restore cache failed:
+          # Some specified paths were not resolved" on every run, in both
+          # jobs. There is nothing to cache, so the cache is off.
+          cache: false
       - name: Check formatting
         run: |
           gofmt_output=$(gofmt -l .)
@@ -112,7 +117,12 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version: '1.21'
-          cache-dependency-path: go/go.sum
+          # This module has no dependencies: go/go.sum does not exist and
+          # go.mod has no require block. Pointing the dependency cache at a
+          # file that is not there made setup-go emit "Restore cache failed:
+          # Some specified paths were not resolved" on every run, in both
+          # jobs. There is nothing to cache, so the cache is off.
+          cache: false
       - name: Build
         run: go build -v ./...
       - name: Test
