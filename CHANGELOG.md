@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- CI/CD: Dependabot covers every ecosystem in the repository. The `maven`,
+  `composer` and `gomod` manifests were unwatched, so Java, PHP and Go were
+  never offered updates ([#292](https://github.com/link-foundation/links-notation/issues/292))
+- CI/CD: `scripts/version-consistency.mjs`, a hard-failing check on every pull
+  request that the seven implementations declare the same version. The release
+  audit only warns, because a bump legitimately lands before the release that
+  publishes it; disagreement between the implementations reads only the working
+  tree and is always a defect
+  ([#292](https://github.com/link-foundation/links-notation/issues/292))
 - Native PHP implementation of the Links Notation parser and formatter
   (`link-foundation/links-notation` on Packagist), with a full PHPUnit test
   suite ported from Python, PSR-12 linting and a dedicated CI workflow
@@ -49,6 +58,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   registry confirms it ([#290](https://github.com/link-foundation/links-notation/issues/290))
 
 ### Changed
+- Every language's dependencies updated to their current releases, including the
+  major bumps: PHPUnit 10 to 13, PHP_CodeSniffer 3 to 4, xunit 2 to xunit.v3 4,
+  JUnit 5 to 6, `maven.compiler.release` 11 to 21, Go 1.21 to 1.24 (CI on 1.26),
+  `net8.0` to `net10.0`, and PHP `>=8.1` to `>=8.4` (CI on 8.4 and 8.5). Each
+  suite was run against the new versions before the bump was kept
+  ([#292](https://github.com/link-foundation/links-notation/issues/292))
+- C#: the test project runs on Microsoft.Testing.Platform. The .NET 10 SDK
+  dropped the VSTest path xunit v2 used, so `csharp/global.json` selects the new
+  runner and the test project builds as a self-executing `Exe`
+  ([#292](https://github.com/link-foundation/links-notation/issues/292))
 - Grammar: a reference is a `delimited_reference` (`n_quoted_reference` or
   `empty_reference`) or a `simple_reference`; the three delimiters `"`, `'`
   and `` ` `` are documented as equivalent, and an even delimiter run that does

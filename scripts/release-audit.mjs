@@ -10,18 +10,9 @@
 // Run it locally with `node scripts/release-audit.mjs`; CI runs it from
 // .github/workflows/release-audit.yml and annotates every mismatch.
 
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { declaredVersions, match, read } from './declared-versions.mjs';
 
-const root = new URL('..', import.meta.url).pathname;
-const read = (p) => readFileSync(join(root, p), 'utf8');
 const verbose = process.env.CI_VERBOSE === 'true';
-
-const match = (text, re, what) => {
-  const m = text.match(re);
-  if (!m) throw new Error(`could not read ${what}`);
-  return m[1].trim();
-};
 
 async function head(url) {
   const response = await fetch(url, { headers: { 'user-agent': 'links-notation-release-audit' } });
@@ -33,7 +24,7 @@ const languages = [
   {
     name: 'js',
     registry: 'npm',
-    declared: () => JSON.parse(read('js/package.json')).version,
+    declared: declaredVersions.js,
     published: async () => {
       const name = JSON.parse(read('js/package.json')).name;
       const r = await head(`https://registry.npmjs.org/${name}`);
@@ -44,7 +35,7 @@ const languages = [
   {
     name: 'python',
     registry: 'PyPI',
-    declared: () => match(read('python/pyproject.toml'), /^version\s*=\s*"([^"]+)"/m, 'python version'),
+    declared: declaredVersions.python,
     published: async () => {
       const name = match(read('python/pyproject.toml'), /^name\s*=\s*"([^"]+)"/m, 'python name');
       const r = await head(`https://pypi.org/pypi/${name}/json`);
@@ -55,7 +46,7 @@ const languages = [
   {
     name: 'rust',
     registry: 'crates.io',
-    declared: () => match(read('rust/links-notation/Cargo.toml'), /^version\s*=\s*"([^"]+)"/m, 'rust version'),
+    declared: declaredVersions.rust,
     published: async () => {
       const r = await head('https://crates.io/api/v1/crates/links-notation');
       if (!r.ok) return null;
@@ -65,12 +56,7 @@ const languages = [
   {
     name: 'csharp',
     registry: 'NuGet.org',
-    declared: () =>
-      match(
-        read('csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj'),
-        /<VersionPrefix>([^<]+)<\/VersionPrefix>/,
-        'csharp version',
-      ),
+    declared: declaredVersions.csharp,
     published: async () => {
       const r = await head('https://api.nuget.org/v3-flatcontainer/link.foundation.links.notation/index.json');
       if (!r.ok) return null;
@@ -81,7 +67,7 @@ const languages = [
   {
     name: 'go',
     registry: 'proxy.golang.org',
-    declared: () => read('go/VERSION').trim(),
+    declared: declaredVersions.go,
     published: async () => {
       const r = await head('https://proxy.golang.org/github.com/link-foundation/links-notation/go/@latest');
       if (!r.ok) return null;
@@ -91,7 +77,7 @@ const languages = [
   {
     name: 'java',
     registry: 'Maven Central',
-    declared: () => match(read('java/pom.xml'), /<artifactId>links-notation<\/artifactId>\s*<version>([^<]+)<\/version>/, 'java version'),
+    declared: declaredVersions.java,
     published: async () => {
       const r = await head(
         'https://repo1.maven.org/maven2/io/github/link-foundation/links-notation/maven-metadata.xml',
@@ -104,7 +90,7 @@ const languages = [
   {
     name: 'php',
     registry: 'Packagist',
-    declared: () => JSON.parse(read('php/composer.json')).version,
+    declared: declaredVersions.php,
     published: async () => {
       const r = await head('https://repo.packagist.org/p2/link-foundation/links-notation.json');
       if (!r.ok) return null;

@@ -82,7 +82,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v6
         with:
-          go-version: '1.21'
+          go-version: '1.26'
           # This module has no dependencies: go/go.sum does not exist and
           # go.mod has no require block. Pointing the dependency cache at a
           # file that is not there made setup-go emit "Restore cache failed:
@@ -120,7 +120,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v6
         with:
-          go-version: '1.21'
+          go-version: '1.26'
           # This module has no dependencies: go/go.sum does not exist and
           # go.mod has no require block. Pointing the dependency cache at a
           # file that is not there made setup-go emit "Restore cache failed:
