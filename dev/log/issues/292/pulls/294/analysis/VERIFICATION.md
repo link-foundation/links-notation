@@ -81,3 +81,28 @@ exit=0
 `release-audit-after-bump.txt` is the audit's output with 0.16.0 declared and every registry still
 serving 0.15.0 — seven warnings and exit 0. This is exactly the state
 [REQUIREMENTS.md](REQUIREMENTS.md) describes as the reason that check must not be a hard failure.
+
+## Pre-commit hooks
+
+`.pre-commit-config.yaml` pins its hooks by git tag, which is a dependency declaration like any
+other, and they had drifted badly: `pre-commit-hooks` v4.5.0 (v6.0.0 current), `mirrors-eslint`
+v8.56.0 while `js/package.json` asks for eslint 10, `black` 24.1.1 while `python/pyproject.toml`
+asks for 26.5, `isort` 5.13.2 against 9.0, `flake8` 7.0.0 against 7.3, `markdownlint-cli` v0.39.0
+(v0.49.1 current). All six were bumped to match. `doublify/pre-commit-rust` stays at v1.0 — that is
+still its newest tag.
+
+`pre-commit run --all-files` does **not** pass on this repository, and did not before this pull
+request either. It is not wired into any workflow, and the failures are all outside the shipped
+implementations: `black` and `isort` want to reformat `csharp/scripts/format-files.py` and two
+`experiments/` scripts, `flake8` reports E203/E501 in `docs/comparison/generate_comparison_svgs.py`,
+and `markdownlint` reports hundreds of MD013/MD024/MD040 findings across `docs/case-studies/` and
+the READMEs. The `python/` package itself is clean under all three linters. Reformatting the rest of
+the repository is not part of #292, so it was left alone rather than folded into a dependency
+update — the auto-fixing hooks were run once, and their edits reverted.
+
+## Dependabot ecosystems
+
+`.github/dependabot.yml` watched `cargo`, `npm`, `pip` and `github-actions`. It now also watches
+`maven` (/java), `composer` (/php) and `gomod` (/go), so every manifest in the repository is
+covered. `.pre-commit-config.yaml` is not: Dependabot has no `pre-commit` ecosystem, so those tags
+stay a manual bump.
