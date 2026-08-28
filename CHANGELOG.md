@@ -101,6 +101,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Core parser functionality
 - Basic link notation support
 
-[Unreleased]: https://github.com/link-foundation/links-notation/compare/v0.11.2...HEAD
-[0.11.2]: https://github.com/link-foundation/links-notation/releases/tag/v0.11.2
-[0.11.0]: https://github.com/link-foundation/links-notation/releases/tag/v0.11.0
+<!-- This repository never tagged a unified `vX.Y.Z`; every release carries a
+     per-language tag, so these links use the tags that actually exist. -->
+[Unreleased]: https://github.com/link-foundation/links-notation/compare/0.11.2_rust...main
+[0.11.2]: https://github.com/link-foundation/links-notation/releases/tag/0.11.2_rust
+[0.11.0]: https://github.com/link-foundation/links-notation/releases/tag/0.11.0_rust

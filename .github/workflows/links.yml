@@ -1,0 +1,63 @@
+name: links
+
+on:
+  push:
+    branches: main
+    paths:
+      - '**.md'
+      - '.lycheeignore'
+      - '.github/workflows/links.yml'
+  pull_request:
+    paths:
+      - '**.md'
+      - '.lycheeignore'
+      - '.github/workflows/links.yml'
+  # Links rot without anyone touching the repository, so check them weekly too.
+  schedule:
+    - cron: '23 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      verbose:
+        description: 'Print extra diagnostics (never secret values)'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-link-checker
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Check links with lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # docs/case-studies quotes documents from other repositories, and
+          # docs/website/dist is generated output whose asset URLs are only
+          # valid once the site is served. Known false positives live in
+          # .lycheeignore, which lychee picks up automatically.
+          args: >-
+            --no-progress
+            --cache
+            --max-cache-age 1d
+            --max-retries 3
+            --timeout 30
+            --exclude-path docs/case-studies
+            --exclude-path docs/website/dist
+            './**/*.md'
+          fail: true
+          jobSummary: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

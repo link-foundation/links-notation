@@ -353,3 +353,6 @@ php/.phpunit.result.cache
 _site/
 csharp/pdf-artifact/
 csharp/fvextra.sty
+
+# lychee link-checker cache (see .github/workflows/links.yml)
+.lycheecache
