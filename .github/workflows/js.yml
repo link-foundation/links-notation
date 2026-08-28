@@ -39,7 +39,7 @@ jobs:
     outputs:
       isJsFilesChanged: ${{ steps.setIsJsFilesChangedOutput.outputs.isJsFilesChanged }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -75,7 +75,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-format
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true
@@ -99,7 +99,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true
@@ -121,7 +121,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-test
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true
@@ -154,7 +154,7 @@ jobs:
       version: ${{ steps.version-check.outputs.version }}
       name: ${{ steps.version-check.outputs.name }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true
@@ -165,7 +165,7 @@ jobs:
       # npm itself does the publishing: trusted publishing needs npm >= 11.5.1,
       # and setup-node writes the registry entry ~/.npmrc that npm reads.
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
@@ -252,7 +252,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true

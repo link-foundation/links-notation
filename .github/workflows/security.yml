@@ -55,7 +55,7 @@ jobs:
           - language: go
             build-mode: autobuild
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true
@@ -81,7 +81,7 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: Review dependency changes
@@ -98,7 +98,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-secrets
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           # A secret is only removed once it is out of the history, so the
@@ -125,10 +125,10 @@ jobs:
       matrix:
         directory: [js, docs/website]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'
       - name: Audit the committed lockfile

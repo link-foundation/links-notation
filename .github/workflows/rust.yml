@@ -39,7 +39,7 @@ jobs:
     outputs:
       isRustFilesChanged: ${{ steps.setIsRustFilesChangedOutput.outputs.isRustFilesChanged }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -75,7 +75,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true
@@ -105,7 +105,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-test
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true
@@ -137,7 +137,7 @@ jobs:
       version: ${{ steps.publish.outputs.version }}
       name: ${{ steps.publish.outputs.name }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true
@@ -256,7 +256,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true
