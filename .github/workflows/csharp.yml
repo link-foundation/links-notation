@@ -69,7 +69,7 @@ jobs:
               break
             fi
           done
-          echo "isCsFilesChanged=${isCsFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isCsFilesChanged=${isCsFilesChanged}" >> "$GITHUB_OUTPUT"
           echo "isCsFilesChanged: ${isCsFilesChanged}"
 
   lint:
@@ -156,17 +156,17 @@ jobs:
             exit 1
           fi
           PACKAGE_ID_LOWER=$(echo "$PACKAGE_ID" | tr '[:upper:]' '[:lower:]')
-          echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
-          echo "package_id_lower=$PACKAGE_ID_LOWER" >> $GITHUB_OUTPUT
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "package_id_lower=$PACKAGE_ID_LOWER" >> "$GITHUB_OUTPUT"
           echo "Package: $PACKAGE_ID@$PACKAGE_VERSION"
 
           # Flat-container URLs are lowercase-only.
           if curl -fsS "https://api.nuget.org/v3-flatcontainer/$PACKAGE_ID_LOWER/$PACKAGE_VERSION/$PACKAGE_ID_LOWER.nuspec" > /dev/null 2>&1; then
             echo "Version $PACKAGE_VERSION already exists on NuGet.org"
-            echo "should_publish=false" >> $GITHUB_OUTPUT
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
           else
             echo "Version $PACKAGE_VERSION does not exist on NuGet.org"
-            echo "should_publish=true" >> $GITHUB_OUTPUT
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
           fi
       - name: Pack
         if: steps.version-check.outputs.should_publish == 'true'
@@ -181,7 +181,7 @@ jobs:
         run: |
           set -euo pipefail
           if [ "${{ steps.version-check.outputs.should_publish }}" != "true" ]; then
-            echo "published=skipped" >> $GITHUB_OUTPUT
+            echo "published=skipped" >> "$GITHUB_OUTPUT"
             echo "::notice::Version ${{ steps.version-check.outputs.version }} is already on NuGet.org, nothing to publish"
             exit 0
           fi
@@ -189,7 +189,7 @@ jobs:
           API_KEY="${NUGET_API_KEY:-$NUGET_TOKEN}"
           # Report presence, never the value.
           if [ -z "$API_KEY" ]; then
-            echo "published=failed" >> $GITHUB_OUTPUT
+            echo "published=failed" >> "$GITHUB_OUTPUT"
             echo "::warning::Neither NUGET_API_KEY nor NUGET_TOKEN is configured; skipping the NuGet push. No GitHub release will be created."
             exit 0
           fi
@@ -199,7 +199,7 @@ jobs:
             --api-key "$API_KEY" \
             --source https://api.nuget.org/v3/index.json \
             --skip-duplicate
-          echo "published=true" >> $GITHUB_OUTPUT
+          echo "published=true" >> "$GITHUB_OUTPUT"
       - name: Verify the package is really on NuGet.org
         if: steps.publish.outputs.published == 'true'
         env:
@@ -281,7 +281,7 @@ jobs:
       - name: Install DocFX
         run: |
           dotnet tool install -g docfx
-          echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
       - name: Publish documentation to gh-pages branch
         run: |
           if [ "$CI_VERBOSE" = "true" ]; then

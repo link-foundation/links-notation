@@ -63,7 +63,7 @@ jobs:
               break
             fi
           done
-          echo "isPhpFilesChanged=${isPhpFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isPhpFilesChanged=${isPhpFilesChanged}" >> "$GITHUB_OUTPUT"
           echo "isPhpFilesChanged: ${isPhpFilesChanged}"
 
   lint:
@@ -149,26 +149,26 @@ jobs:
           set -euo pipefail
           PACKAGE_NAME=$(php -r 'echo json_decode(file_get_contents("composer.json"))->name;')
           PACKAGE_VERSION=$(php -r 'echo json_decode(file_get_contents("composer.json"))->version;')
-          echo "name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
-          echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
+          echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
           echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
 
           # Distinguish "package is not on Packagist at all" from "this version
           # is not there yet". The old check collapsed both into should_publish
           # and then the update call quietly did nothing.
           if ! METADATA=$(curl -fsS "https://repo.packagist.org/p2/${PACKAGE_NAME}.json" 2>/dev/null); then
-            echo "package_known=false" >> $GITHUB_OUTPUT
-            echo "should_publish=true" >> $GITHUB_OUTPUT
+            echo "package_known=false" >> "$GITHUB_OUTPUT"
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          echo "package_known=true" >> $GITHUB_OUTPUT
+          echo "package_known=true" >> "$GITHUB_OUTPUT"
 
           if printf '%s' "$METADATA" | grep -q "\"version\":\"${PACKAGE_VERSION}\""; then
             echo "Version $PACKAGE_VERSION already exists on Packagist"
-            echo "should_publish=false" >> $GITHUB_OUTPUT
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
           else
             echo "Version $PACKAGE_VERSION does not exist on Packagist"
-            echo "should_publish=true" >> $GITHUB_OUTPUT
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
           fi
       - name: Notify Packagist about the new version
         id: publish
@@ -181,7 +181,7 @@ jobs:
         run: |
           set -euo pipefail
           if [ "${{ steps.version-check.outputs.should_publish }}" != "true" ]; then
-            echo "published=skipped" >> $GITHUB_OUTPUT
+            echo "published=skipped" >> "$GITHUB_OUTPUT"
             echo "::notice::Version ${PACKAGE_VERSION} is already on Packagist, nothing to publish"
             exit 0
           fi
@@ -191,13 +191,13 @@ jobs:
           # re-read the repository. That only works once the package has been
           # submitted at https://packagist.org/packages/submit.
           if [ "${{ steps.version-check.outputs.package_known }}" != "true" ]; then
-            echo "published=failed" >> $GITHUB_OUTPUT
+            echo "published=failed" >> "$GITHUB_OUTPUT"
             echo "::warning::${PACKAGE_NAME} is not registered on Packagist (repo.packagist.org returns 404). Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created."
             exit 0
           fi
 
           if [ -z "$PACKAGIST_TOKEN" ] || [ -z "$PACKAGIST_USERNAME" ]; then
-            echo "published=failed" >> $GITHUB_OUTPUT
+            echo "published=failed" >> "$GITHUB_OUTPUT"
             echo "::warning::PACKAGIST_USERNAME/PACKAGIST_TOKEN are not configured; skipping the Packagist update. No PHP release will be created."
             exit 0
           fi
@@ -206,7 +206,7 @@ jobs:
           curl -fsS -XPOST -H'content-type:application/json' \
             "https://packagist.org/api/update-package?username=${PACKAGIST_USERNAME}&apiToken=${PACKAGIST_TOKEN}" \
             -d"{\"repository\":{\"url\":\"${REPOSITORY_URL}\"}}"
-          echo "published=true" >> $GITHUB_OUTPUT
+          echo "published=true" >> "$GITHUB_OUTPUT"
       - name: Verify the version is really on Packagist
         if: steps.publish.outputs.published == 'true'
         env:

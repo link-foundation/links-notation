@@ -63,7 +63,7 @@ jobs:
               break
             fi
           done
-          echo "isJavaFilesChanged=${isJavaFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isJavaFilesChanged=${isJavaFilesChanged}" >> "$GITHUB_OUTPUT"
           echo "isJavaFilesChanged: ${isJavaFilesChanged}"
 
   build:
@@ -166,10 +166,10 @@ jobs:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
         run: |
           if [ -n "$CENTRAL_USERNAME" ] && [ -n "$CENTRAL_TOKEN" ] && [ -n "$GPG_PRIVATE_KEY" ]; then
-            echo "have_creds=true" >> $GITHUB_OUTPUT
+            echo "have_creds=true" >> "$GITHUB_OUTPUT"
             echo "Maven Central credentials: present"
           else
-            echo "have_creds=false" >> $GITHUB_OUTPUT
+            echo "have_creds=false" >> "$GITHUB_OUTPUT"
             echo "::warning::Skipping Maven Central publishing: CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets are not configured. Generate a token at https://central.sonatype.com/account and add these repository secrets to enable publishing. No GitHub release will be created."
           fi
       - name: Set up JDK 11
@@ -190,18 +190,20 @@ jobs:
           PACKAGE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           PACKAGE_GROUP=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)
           PACKAGE_ARTIFACT=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
-          echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
-          echo "group=$PACKAGE_GROUP" >> $GITHUB_OUTPUT
-          echo "artifact=$PACKAGE_ARTIFACT" >> $GITHUB_OUTPUT
+          {
+            echo "version=$PACKAGE_VERSION"
+            echo "group=$PACKAGE_GROUP"
+            echo "artifact=$PACKAGE_ARTIFACT"
+          } >> "$GITHUB_OUTPUT"
           echo "Package: $PACKAGE_GROUP:$PACKAGE_ARTIFACT:$PACKAGE_VERSION"
 
           URL="https://repo1.maven.org/maven2/$(echo "$PACKAGE_GROUP" | tr '.' '/')/$PACKAGE_ARTIFACT/$PACKAGE_VERSION/"
           if curl --head --silent --fail "$URL" > /dev/null 2>&1; then
             echo "Version $PACKAGE_VERSION already exists on Maven Central"
-            echo "should_publish=false" >> $GITHUB_OUTPUT
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
           else
             echo "Version $PACKAGE_VERSION does not exist on Maven Central"
-            echo "should_publish=true" >> $GITHUB_OUTPUT
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
           fi
       - name: Publish to Maven Central
         id: publish
@@ -212,16 +214,16 @@ jobs:
         run: |
           set -euo pipefail
           if [ "${{ steps.creds.outputs.have_creds }}" != "true" ]; then
-            echo "published=failed" >> $GITHUB_OUTPUT
+            echo "published=failed" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           if [ "${{ steps.version-check.outputs.should_publish }}" != "true" ]; then
-            echo "published=skipped" >> $GITHUB_OUTPUT
+            echo "published=skipped" >> "$GITHUB_OUTPUT"
             echo "::notice::Version ${{ steps.version-check.outputs.version }} is already on Maven Central, nothing to publish"
             exit 0
           fi
           mvn -B deploy -Prelease --file pom.xml
-          echo "published=true" >> $GITHUB_OUTPUT
+          echo "published=true" >> "$GITHUB_OUTPUT"
       # `autoPublish` hands the bundle to the Portal, which validates and
       # syncs it asynchronously, so a successful `mvn deploy` is not yet a
       # published artifact. Nothing is released until it is really there.

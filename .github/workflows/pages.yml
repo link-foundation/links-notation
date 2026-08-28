@@ -79,7 +79,7 @@ jobs:
               break
             fi
           done
-          echo "isDocsFilesChanged=${isDocsFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isDocsFilesChanged=${isDocsFilesChanged}" >> "$GITHUB_OUTPUT"
           echo "isDocsFilesChanged: ${isDocsFilesChanged}"
 
   build:

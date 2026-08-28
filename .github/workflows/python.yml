@@ -63,7 +63,7 @@ jobs:
               break
             fi
           done
-          echo "isPythonFilesChanged=${isPythonFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isPythonFilesChanged=${isPythonFilesChanged}" >> "$GITHUB_OUTPUT"
           echo "isPythonFilesChanged: ${isPythonFilesChanged}"
 
   lint:
@@ -163,8 +163,8 @@ jobs:
               p = tomllib.load(f)['project']
           print(p['name'], p['version'])
           ")"
-          echo "name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
-          echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
+          echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
           echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
 
           # The JSON API is an exact lookup. The previous `pip index versions |
@@ -172,10 +172,10 @@ jobs:
           # existed.
           if curl -fsS "https://pypi.org/pypi/${PACKAGE_NAME}/${PACKAGE_VERSION}/json" >/dev/null 2>&1; then
             echo "Version $PACKAGE_VERSION already exists on PyPI"
-            echo "should_publish=false" >> $GITHUB_OUTPUT
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
           else
             echo "Version $PACKAGE_VERSION does not exist on PyPI"
-            echo "should_publish=true" >> $GITHUB_OUTPUT
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
           fi
       # Trusted publishing when configured; an empty `password` makes the
       # action fall back to OIDC, and PYPI_TOKEN is only the bootstrap.
@@ -189,9 +189,9 @@ jobs:
         id: publish
         run: |
           if [ "${{ steps.version-check.outputs.should_publish }}" = "true" ]; then
-            echo "published=true" >> $GITHUB_OUTPUT
+            echo "published=true" >> "$GITHUB_OUTPUT"
           else
-            echo "published=skipped" >> $GITHUB_OUTPUT
+            echo "published=skipped" >> "$GITHUB_OUTPUT"
             echo "::notice::Version ${{ steps.version-check.outputs.version }} is already on PyPI, nothing to publish"
           fi
       - name: Verify the package is really on PyPI

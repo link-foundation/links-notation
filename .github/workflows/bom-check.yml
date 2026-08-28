@@ -62,7 +62,9 @@ jobs:
             echo "$files_with_bom"
             echo ""
             echo "To fix this, remove the BOM from these files."
-            echo "You can use: sed -i '1s/^\xEF\xBB\xBF//' <filename>"
+            # printf, not echo: the point is to show the escape sequences
+            # themselves, and echo is allowed to expand them.
+            printf '%s\n' "You can use: sed -i '1s/^\xEF\xBB\xBF//' <filename>"
             echo "Or configure your editor to save files without BOM."
             exit 1
           else
