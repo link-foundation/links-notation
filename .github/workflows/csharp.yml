@@ -293,7 +293,9 @@ jobs:
   publishRelease:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [findChangedCsFiles, pushToNuget, publishDocumentation]
+    # Deliberately not `needs: publishDocumentation`: a DocFX failure must not
+    # withhold the release for a package that is already on NuGet.org.
+    needs: [findChangedCsFiles, pushToNuget]
     # Gate on what actually happened, not on the job result: a job that skipped
     # its publish step (missing credential, or nothing new to push) still
     # reports `success`, which is how green runs shipped no package at all.
