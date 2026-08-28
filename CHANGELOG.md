@@ -30,6 +30,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dependabot for automated dependency updates
 
 ### Changed
+- Grammar: a reference is a `delimited_reference` (`n_quoted_reference` or
+  `empty_reference`) or a `simple_reference`; the three delimiters `"`, `'`
+  and `` ` `` are documented as equivalent, and an even delimiter run that does
+  not open an n-quoted reference with a substantive body is the empty reference
+  ([#288](https://github.com/link-foundation/links-notation/issues/288))
 - Grammar: `multiline_link`, `multiline_value_link` and `multiline_values` are
   replaced by `nested_group` and `nested_group_body`; `eol` now also matches the
   end of a nested group, and `ENTER_NESTED_CONTEXT`/`EXIT_NESTED_CONTEXT` were
@@ -45,6 +50,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved quote escaping to handle edge cases in JavaScript
 
 ### Fixed
+- A bare delimiter pair is now the empty reference in every implementation
+  (JavaScript, Python, Rust, Go, Java, C#, PHP): `(a "" b)` holds an empty
+  reference instead of the two-character text `""`, `(a "" "" b)` holds two
+  empty references instead of merging into one holding a space, and
+  `("" ("" 1))` parses instead of failing. A run of an even number of
+  delimiters keeps its n-quote meaning only when it encloses a substantive
+  body, so `(a ""x"" b)` and `(x "" " "")` are unchanged
+  ([#288](https://github.com/link-foundation/links-notation/issues/288))
+- Formatters no longer drop a reference that holds nothing or only whitespace:
+  the empty reference is written as `""` and `Ref(" ")` as `' '`, so both read
+  back as themselves
+  ([#288](https://github.com/link-foundation/links-notation/issues/288))
 - Indentation inside `( )` was ignored, so a parenthesised group collapsed to one
   flat list of references and records such as `value (` / `  id "1"` /
   `  label "one"` / `)` lost their boundaries

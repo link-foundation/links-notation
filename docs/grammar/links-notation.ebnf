@@ -1,5 +1,5 @@
 (* Links Notation (Lino) Grammar - Extended Backus-Naur Form (EBNF) *)
-(* Version: 0.14.0 *)
+(* Version: 0.15.0 *)
 (* Repository: https://github.com/link-foundation/links-notation *)
 (* License: Unlicense *)
 
@@ -90,19 +90,39 @@ indented_id_link    = reference, horizontal_whitespace, ":", eol ;
 reference_or_link   = nested_group
                     | reference ;
 
-(* A reference is either quoted or simple *)
-reference           = double_quoted_reference
-                    | single_quoted_reference
+(* A reference is either delimited or simple *)
+reference           = delimited_reference
                     | simple_reference ;
 
 (* An unquoted reference (alphanumeric and special chars) *)
 simple_reference    = reference_symbol, { reference_symbol } ;
 
-(* A double-quoted reference: "any text except double quote" *)
-double_quoted_reference = '"', { any_char - '"' }, '"' ;
+(* The three delimiters behave identically; nothing else delimits *)
+delimiter           = '"' | "'" | "`" ;
 
-(* A single-quoted reference: 'any text except single quote' *)
-single_quoted_reference = "'", { any_char - "'" }, "'" ;
+(* A run of one or more of the same delimiter *)
+delimiter_run       = delimiter, { delimiter } ;
+
+(* A delimited reference is either an n-quoted one or the empty reference.
+   The n-quoted reading is tried first; when it does not apply, an even run
+   of delimiters is the empty reference *)
+delimited_reference = n_quoted_reference
+                    | empty_reference ;
+
+(* A run of N delimiters, a body, then a run of exactly N of the same
+   delimiter. Inside the body a run of 2N delimiters stands for N literal
+   delimiters. N cannot be written in EBNF, so it is stated as a condition *)
+n_quoted_reference  = delimiter_run, { any_char }, delimiter_run ;
+(* Conditions: both runs use the same delimiter and have the same length N;
+   the closing run is not followed by another delimiter; and when N is even
+   the body is substantive, meaning it holds at least one non-whitespace
+   character and its parentheses are balanced *)
+
+(* A bare delimiter pair is the empty reference, and so is any longer even
+   run that does not open an n-quoted reference: the shortest reading wins,
+   so "" is one empty reference and "" "" is two of them *)
+empty_reference     = delimiter, delimiter, { delimiter, delimiter } ;
+(* Condition: the whole run uses the same delimiter *)
 
 (* ============================================================== *)
 (*                      TERMINAL SYMBOLS                           *)

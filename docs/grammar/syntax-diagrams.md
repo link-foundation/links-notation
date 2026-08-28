@@ -75,21 +75,24 @@ element ───┤  any_link  ├───┬───────────
 
 ## Reference
 
-A reference can be quoted or unquoted.
+A reference is either delimited or simple.
 
 ```text
               ┌────────────────────────────┐
-     ┌────────┤  double_quoted_reference   ├────────┐
+     ┌────────┤    n_quoted_reference      ├────────┐
      │        └────────────────────────────┘        │
      │                                              │
 ─────┼────────┌────────────────────────────┐────────┼────▶
-     │        │  single_quoted_reference   │        │
+     │        │      empty_reference       │        │
      │        └────────────────────────────┘        │
      │                                              │
      │        ┌────────────────────────────┐        │
      └────────┤     simple_reference       ├────────┘
               └────────────────────────────┘
 ```
+
+The three delimiters `"`, `'` and `` ` `` behave identically, and the n-quoted
+reading is tried before the empty one.
 
 ## Simple Reference
 
@@ -104,24 +107,35 @@ simple_reference ──┤   reference_symbol   ├────┬────�
                               └────────────────┘
 ```
 
-## Double-Quoted Reference
+## N-Quoted Reference
+
+A run of N identical delimiters, a body, then a run of exactly N of the same
+delimiter that is not followed by another one. A run of 2N delimiters inside
+the body stands for N literal delimiters.
 
 ```text
-                      ┌─────┐   ┌─────────────────┐   ┌─────┐
-double_quoted_ref ────┤  "  ├───┤  any char ≠ "   ├───┤  "  ├───▶
-                      └─────┘   └────────┬────────┘   └─────┘
-                                         │      ▲
-                                         └──────┘
+                      ┌──────────────┐   ┌─────────────────┐   ┌──────────────┐
+n_quoted_ref ─────────┤ N delimiters ├───┤    any char     ├───┤ N delimiters ├───▶
+                      └──────────────┘   └────────┬────────┘   └──────────────┘
+                                                  │      ▲
+                                                  └──────┘
 ```
 
-## Single-Quoted Reference
+When N is even the body must be substantive: it holds at least one
+non-whitespace character and its parentheses are balanced. Otherwise the run
+reads as empty references instead.
+
+## Empty Reference
+
+An even run of the same delimiter that does not open an n-quoted reference:
+`""` is one empty reference, `"" ""` is two of them.
 
 ```text
-                      ┌─────┐   ┌─────────────────┐   ┌─────┐
-single_quoted_ref ────┤  '  ├───┤  any char ≠ '   ├───┤  '  ├───▶
-                      └─────┘   └────────┬────────┘   └─────┘
-                                         │      ▲
-                                         └──────┘
+                      ┌─────┐   ┌─────┐
+empty_reference ──────┤  d  ├───┤  d  ├──────┬─────▶
+                      └─────┘   └─────┘      │
+                         ▲                   │
+                         └───────────────────┘
 ```
 
 ## Nested Group (Parenthesized)
@@ -455,6 +469,8 @@ symbol            ║  • Space ( )                          ║
 │  │  :  - Separator between id and values                              ││
 │  │  "  - Double quote delimiter                                       ││
 │  │  '  - Single quote delimiter                                       ││
+│  │  `  - Backtick delimiter                                           ││
+│  │  "" - The empty reference (a bare delimiter pair)                  ││
 │  │  ␣  - Space (value separator, indentation)                         ││
 │  └────────────────────────────────────────────────────────────────────┘│
 │                                                                         │
