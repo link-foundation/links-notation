@@ -1,0 +1,236 @@
+name: rust
+
+on:
+  push:
+    branches: main
+    paths:
+      - 'rust/**'
+      - '.github/workflows/rust.yml'
+  pull_request:
+    paths:
+      - 'rust/**'
+      - '.github/workflows/rust.yml'
+
+env:
+  CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+defaults:
+  run:
+    working-directory: rust
+
+jobs:
+  findChangedRustFiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      isRustFilesChanged: ${{ steps.setIsRustFilesChangedOutput.outputs.isRustFilesChanged }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Get changed files using defaults
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+      - name: Set output isRustFilesChanged
+        id: setIsRustFilesChangedOutput
+        run: |
+          isRustFilesChanged='false'
+          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ $changedFile == rust/*.rs ]] || [[ $changedFile == rust/Cargo.toml ]] || [[ $changedFile == rust/Cargo.lock ]] || [[ $changedFile == rust/* ]] || [[ $changedFile == .github/workflows/rust.yml ]]; then
+              echo "isRustFilesChanged='true'"
+              isRustFilesChanged='true'
+              break
+            fi
+          done
+          echo "isRustFilesChanged=${isRustFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isRustFilesChanged: ${isRustFilesChanged}"
+
+  lint:
+    needs: [findChangedRustFiles]
+    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - name: Cache Cargo registry
+        uses: actions/cache@v5
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+      - name: Cache Cargo index
+        uses: actions/cache@v5
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+  test:
+    needs: [findChangedRustFiles, lint]
+    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache Cargo registry
+        uses: actions/cache@v5
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+      - name: Cache Cargo index
+        uses: actions/cache@v5
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
+      - name: Cache Cargo build
+        uses: actions/cache@v5
+        with:
+          path: target
+          key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
+      - name: Build
+        run: cargo build --release
+      - name: Test
+        run: cargo test
+
+  publishToCratesIO:
+    needs: [test, findChangedRustFiles]
+    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache Cargo registry
+        uses: actions/cache@v5
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+      - name: Cache Cargo index
+        uses: actions/cache@v5
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
+      - name: Cache Cargo build
+        uses: actions/cache@v5
+        with:
+          path: target
+          key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
+      - name: Build
+        run: cargo build --release
+      - name: Publish links-notation-macro to Crates.io
+        id: publish-macro-crate
+        run: |
+          PACKAGE_VERSION=$(grep '^version = ' links-notation-macro/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
+          echo "Package: links-notation-macro@$PACKAGE_VERSION"
+
+          # The main crate depends on links-notation-macro, so it must be published first
+          set +e  # Don't exit on error
+          cargo publish -p links-notation-macro --token ${{ secrets.CARGO_TOKEN }} --allow-dirty 2>&1 | tee macro_publish_output.txt
+          PUBLISH_EXIT_CODE=$?
+          set -e  # Re-enable exit on error
+
+          if [ $PUBLISH_EXIT_CODE -eq 0 ]; then
+            echo "✅ Successfully published links-notation-macro@$PACKAGE_VERSION to crates.io"
+          elif grep -q "already exists on crates.io index" macro_publish_output.txt; then
+            echo "ℹ️ links-notation-macro@$PACKAGE_VERSION already exists on crates.io - this is OK"
+          else
+            echo "❌ Failed to publish links-notation-macro"
+            cat macro_publish_output.txt
+            exit 1
+          fi
+      - name: Publish to Crates.io (with version check)
+        id: publish-crate
+        run: |
+          PACKAGE_NAME=$(grep '^name = ' links-notation/Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/')
+          PACKAGE_VERSION=$(grep '^version = ' links-notation/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
+          echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
+
+          echo "=== Attempting to publish to crates.io ==="
+          
+          # Try to publish and capture the result
+          set +e  # Don't exit on error
+          cargo publish -p links-notation --token ${{ secrets.CARGO_TOKEN }} --allow-dirty 2>&1 | tee publish_output.txt
+          PUBLISH_EXIT_CODE=$?
+          set -e  # Re-enable exit on error
+          
+          if [ $PUBLISH_EXIT_CODE -eq 0 ]; then
+            echo "✅ Successfully published $PACKAGE_NAME@$PACKAGE_VERSION to crates.io"
+            echo "publish_result=success" >> $GITHUB_OUTPUT
+          elif grep -q "already exists on crates.io index" publish_output.txt; then
+            echo "ℹ️ Version $PACKAGE_VERSION already exists on crates.io - this is OK"
+            echo "publish_result=already_exists" >> $GITHUB_OUTPUT
+            exit 0  # Don't fail the workflow
+          else
+            echo "❌ Failed to publish for unknown reason"
+            cat publish_output.txt
+            echo "publish_result=failed" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+      - name: Report publish status
+        if: always()
+        run: |
+          if [ "${{ steps.publish-crate.outputs.publish_result }}" = "success" ]; then
+            echo "✅ Package was successfully published"
+          elif [ "${{ steps.publish-crate.outputs.publish_result }}" = "already_exists" ]; then
+            echo "ℹ️ Package version already exists - no action needed"
+          else
+            echo "❌ Publishing failed - please check the logs"
+          fi
+
+  publishRelease:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [findChangedRustFiles, publishToCratesIO]
+    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && needs.publishToCratesIO.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Check if GitHub release already exists
+        id: release-check
+        run: |
+          PACKAGE_VERSION=$(grep '^version = ' links-notation/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
+          TAG_NAME="rust_$PACKAGE_VERSION"
+          echo "Checking if release $TAG_NAME already exists"
+
+          # Check if release exists
+          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Release $TAG_NAME already exists"
+            echo "should_create_release=false" >> $GITHUB_OUTPUT
+          else
+            echo "Release $TAG_NAME does not exist"
+            echo "should_create_release=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GitHub release
+        if: steps.release-check.outputs.should_create_release == 'true'
+        run: |
+          PACKAGE_NAME=$(grep '^name = ' links-notation/Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/')
+          PACKAGE_VERSION=$(grep '^version = ' links-notation/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
+
+          # Create release with consistent tag format: rust_version
+          gh release create "rust_${PACKAGE_VERSION}" \
+            --title "[Rust] $PACKAGE_VERSION" \
+            --notes "https://crates.io/crates/$PACKAGE_NAME"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

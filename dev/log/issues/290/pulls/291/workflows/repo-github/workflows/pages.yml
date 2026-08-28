@@ -1,0 +1,86 @@
+name: pages
+
+on:
+  push:
+    branches: main
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: docs/website
+
+jobs:
+  findChangedDocsFiles:
+    runs-on: ubuntu-latest
+    outputs:
+      isDocsFilesChanged: ${{ steps.setIsDocsFilesChangedOutput.outputs.isDocsFilesChanged }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Get changed files using defaults
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+      - name: Set output isDocsFilesChanged
+        id: setIsDocsFilesChangedOutput
+        run: |
+          isDocsFilesChanged='false'
+          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ $changedFile == docs/* ]] || [[ $changedFile == .github/workflows/pages.yml ]]; then
+              echo "isDocsFilesChanged='true'"
+              isDocsFilesChanged='true'
+              break
+            fi
+          done
+          echo "isDocsFilesChanged=${isDocsFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isDocsFilesChanged: ${isDocsFilesChanged}"
+
+  build:
+    needs: [findChangedDocsFiles]
+    if: ${{ needs.findChangedDocsFiles.outputs.isDocsFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: docs/website/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Build website
+        run: npm run build
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs/website/dist
+
+  deploy:
+    needs: [build, findChangedDocsFiles]
+    if: ${{ needs.findChangedDocsFiles.outputs.isDocsFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

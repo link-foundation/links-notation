@@ -1,0 +1,186 @@
+name: js
+
+on:
+  push:
+    branches: main
+    paths:
+      - 'js/**'
+      - '.github/workflows/js.yml'
+  pull_request:
+    paths:
+      - 'js/**'
+      - '.github/workflows/js.yml'
+
+env:
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+defaults:
+  run:
+    working-directory: js
+
+jobs:
+  findChangedJsFiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      isJsFilesChanged: ${{ steps.setIsJsFilesChangedOutput.outputs.isJsFilesChanged }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Get changed files using defaults
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+      - name: Set output isJsFilesChanged
+        id: setIsJsFilesChangedOutput
+        run: |
+          isJsFilesChanged='false'
+          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ $changedFile == js/*.js ]] || [[ $changedFile == js/*.json ]] || [[ $changedFile == js/*.pegjs ]] || [[ $changedFile == js/* ]] || [[ $changedFile == .github/workflows/js.yml ]]; then
+              echo "isJsFilesChanged='true'"
+              isJsFilesChanged='true'
+              break
+            fi
+          done
+          echo "isJsFilesChanged=${isJsFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isJsFilesChanged: ${isJsFilesChanged}"
+
+  format:
+    needs: [findChangedJsFiles]
+    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Check formatting with Prettier
+        run: npx prettier --check .
+
+  lint:
+    needs: [findChangedJsFiles, format]
+    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install Dependencies
+        run: bun install
+      - name: Lint
+        run: bun run lint
+
+  test:
+    needs: [findChangedJsFiles, format, lint]
+    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install Dependencies
+        run: bun install
+      - name: Build
+        run: bun run build
+      - name: Test
+        run: bun test
+
+  publishToNpm:
+    needs: [test, findChangedJsFiles]
+    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install Dependencies
+        run: bun install
+      - name: Build
+        run: bun run build
+      - name: Check if version already published
+        id: version-check
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
+          
+          # Check if version exists on NPM
+          if npm view $PACKAGE_NAME@$PACKAGE_VERSION version 2>/dev/null; then
+            echo "Version $PACKAGE_VERSION already exists on NPM"
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "Version $PACKAGE_VERSION does not exist on NPM"
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Publish to NPM
+        if: steps.version-check.outputs.should_publish == 'true'
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          npm publish --access public
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publishRelease:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [findChangedJsFiles, publishToNpm]
+    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && needs.publishToNpm.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Check if GitHub release already exists
+        id: release-check
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          TAG_NAME="js_$PACKAGE_VERSION"
+          echo "Checking if release $TAG_NAME already exists"
+
+          # Check if release exists
+          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Release $TAG_NAME already exists"
+            echo "should_create_release=false" >> $GITHUB_OUTPUT
+          else
+            echo "Release $TAG_NAME does not exist"
+            echo "should_create_release=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GitHub release
+        if: steps.release-check.outputs.should_create_release == 'true'
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+
+          # Create release with consistent tag format: js_version
+          gh release create "js_${PACKAGE_VERSION}" \
+            --title "[JS] $PACKAGE_VERSION" \
+            --notes "https://www.npmjs.com/package/$PACKAGE_NAME"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

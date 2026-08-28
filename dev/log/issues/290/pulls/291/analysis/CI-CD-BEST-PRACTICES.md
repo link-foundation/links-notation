@@ -440,5 +440,5 @@ fix owner/repo --ci-cd --no-solve
 ## References
 
 - [Code Architecture Principles](https://github.com/link-foundation/code-architecture-principles)
-- [Contributing Guidelines](https://github.com/link-assistant/hive-mind/blob/main/CONTRIBUTING.md)
+- [Contributing Guidelines](https://github.com/link-assistant/hive-mind/blob/main/docs/CONTRIBUTING.md)
 - [Best Practices](https://github.com/link-assistant/hive-mind/blob/main/docs/BEST-PRACTICES.md)

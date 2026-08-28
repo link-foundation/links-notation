@@ -1,0 +1,457 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      release_mode:
+        description: 'Release mode'
+        required: true
+        default: 'changeset'
+        type: choice
+        options:
+          - changeset
+          - instant
+          - changeset-pr
+      bump_type:
+        description: 'Version bump type (for instant mode or changeset-pr)'
+        required: false
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      description:
+        description: 'Change description (for changeset-pr mode)'
+        required: false
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  JAVA_VERSION: '21'
+  JAVA_DISTRIBUTION: 'temurin'
+
+jobs:
+  # =============================================================================
+  # Detect Changes - determines which jobs should run
+  # =============================================================================
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_dispatch'
+    outputs:
+      java-changed: ${{ steps.changes.outputs.java-changed }}
+      pom-changed: ${{ steps.changes.outputs.pom-changed }}
+      mjs-changed: ${{ steps.changes.outputs.mjs-changed }}
+      docs-changed: ${{ steps.changes.outputs.docs-changed }}
+      workflow-changed: ${{ steps.changes.outputs.workflow-changed }}
+      any-code-changed: ${{ steps.changes.outputs.any-code-changed }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Detect changes
+        id: changes
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          GITHUB_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: bun scripts/detect-code-changes.mjs
+
+  # =============================================================================
+  # Lint and Format Check
+  # Runs independently of changeset-check - it's a fast check that should always run
+  # See: https://github.com/link-foundation/js-ai-driven-development-pipeline-template/pull/18
+  # =============================================================================
+  lint:
+    name: Lint & Format
+    runs-on: ubuntu-latest
+    needs: [detect-changes]
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'push' ||
+      needs.detect-changes.outputs.java-changed == 'true' ||
+      needs.detect-changes.outputs.pom-changed == 'true' ||
+      needs.detect-changes.outputs.mjs-changed == 'true' ||
+      needs.detect-changes.outputs.docs-changed == 'true' ||
+      needs.detect-changes.outputs.workflow-changed == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: maven
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Check code formatting (Spotless)
+        run: mvn spotless:check -B
+
+      - name: Run SpotBugs static analysis
+        run: mvn spotbugs:check -B
+
+      - name: Check file sizes
+        run: bun scripts/check-file-size.mjs
+
+  # =============================================================================
+  # Build and Test
+  # =============================================================================
+  test:
+    name: Test (Java ${{ matrix.java }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    needs: [detect-changes, changeset-check]
+    # Run if: push event, workflow_dispatch, OR changeset-check succeeded, OR changeset-check was skipped (docs-only PR)
+    if: always() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || needs.changeset-check.result == 'success' || needs.changeset-check.result == 'skipped')
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        java: ['21']
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: maven
+
+      - name: Run tests with coverage
+        run: mvn test jacoco:report -B
+
+      - name: Upload coverage to Codecov
+        if: matrix.os == 'ubuntu-latest' && matrix.java == '21'
+        uses: codecov/codecov-action@v4
+        with:
+          file: target/site/jacoco/jacoco.xml
+          flags: unittests
+          fail_ci_if_error: false
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  # =============================================================================
+  # Build Package
+  # =============================================================================
+  build:
+    name: Build Package
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    # Run only if lint and test succeeded (handles skipped lint gracefully)
+    if: always() && (needs.lint.result == 'success' || needs.lint.result == 'skipped') && needs.test.result == 'success'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn package -DskipTests -B
+
+      - name: Verify JAR contents
+        run: |
+          echo "=== JAR contents ==="
+          jar tf target/*.jar | head -50
+          echo "..."
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            target/*.jar
+            target/site/jacoco/
+          retention-days: 7
+
+  # =============================================================================
+  # Changeset Validation (PRs only, skipped for docs-only changes)
+  # Docs-only PRs (./docs folder, markdown files) don't require changesets
+  # =============================================================================
+  changeset-check:
+    name: Changeset Check
+    runs-on: ubuntu-latest
+    needs: [detect-changes]
+    if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Validate changeset
+        run: bun scripts/validate-changeset.mjs
+        env:
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+
+  # =============================================================================
+  # Auto Release (on push to main with changesets)
+  # =============================================================================
+  auto-release:
+    name: Auto Release
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: maven
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Check for changesets
+        id: changesets
+        run: |
+          CHANGESET_COUNT=$(find .changeset -name "*.md" ! -name "README.md" 2>/dev/null | wc -l)
+          echo "count=$CHANGESET_COUNT" >> $GITHUB_OUTPUT
+          if [ "$CHANGESET_COUNT" -gt 0 ]; then
+            echo "has_changesets=true" >> $GITHUB_OUTPUT
+            echo "Found $CHANGESET_COUNT changeset(s)"
+          else
+            echo "has_changesets=false" >> $GITHUB_OUTPUT
+            echo "No changesets found"
+          fi
+
+      - name: Merge changesets (if multiple)
+        if: steps.changesets.outputs.has_changesets == 'true' && steps.changesets.outputs.count > 1
+        run: bun scripts/merge-changesets.mjs
+
+      - name: Run version and commit script
+        if: steps.changesets.outputs.has_changesets == 'true'
+        id: release
+        run: bun scripts/version-and-commit.mjs --mode changeset
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build release artifacts
+        if: steps.release.outputs.released == 'true'
+        run: mvn package source:jar javadoc:jar -DskipTests -B
+
+      - name: Create GitHub Release
+        if: steps.release.outputs.released == 'true'
+        run: |
+          bun scripts/create-github-release.mjs \
+            --release-version "${{ steps.release.outputs.new_version }}" \
+            --repository "${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload release artifacts
+        if: steps.release.outputs.released == 'true'
+        run: |
+          TAG="v${{ steps.release.outputs.new_version }}"
+          gh release upload "$TAG" target/*.jar --clobber || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # =============================================================================
+  # Manual Release - Changeset Mode (workflow dispatch)
+  # =============================================================================
+  manual-release-changeset:
+    name: Manual Release (Changeset)
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changeset'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: maven
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Merge changesets (if multiple)
+        run: bun scripts/merge-changesets.mjs
+
+      - name: Run version and commit script
+        id: release
+        run: bun scripts/version-and-commit.mjs --mode changeset
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build release artifacts
+        if: steps.release.outputs.released == 'true'
+        run: mvn package source:jar javadoc:jar -DskipTests -B
+
+      - name: Create GitHub Release
+        if: steps.release.outputs.released == 'true'
+        run: |
+          bun scripts/create-github-release.mjs \
+            --release-version "${{ steps.release.outputs.new_version }}" \
+            --repository "${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload release artifacts
+        if: steps.release.outputs.released == 'true'
+        run: |
+          TAG="v${{ steps.release.outputs.new_version }}"
+          gh release upload "$TAG" target/*.jar --clobber || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # =============================================================================
+  # Manual Release - Instant Mode (workflow dispatch)
+  # =============================================================================
+  manual-release-instant:
+    name: Manual Release (Instant)
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'instant'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          cache: maven
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Run version and commit script
+        id: release
+        run: bun scripts/version-and-commit.mjs --mode instant --bump-type ${{ inputs.bump_type }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build release artifacts
+        if: steps.release.outputs.released == 'true'
+        run: mvn package source:jar javadoc:jar -DskipTests -B
+
+      - name: Create GitHub Release
+        if: steps.release.outputs.released == 'true'
+        run: |
+          bun scripts/create-github-release.mjs \
+            --release-version "${{ steps.release.outputs.new_version }}" \
+            --repository "${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload release artifacts
+        if: steps.release.outputs.released == 'true'
+        run: |
+          TAG="v${{ steps.release.outputs.new_version }}"
+          gh release upload "$TAG" target/*.jar --clobber || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # =============================================================================
+  # Manual Changeset PR (workflow dispatch)
+  # =============================================================================
+  changeset-pr:
+    name: Create Changeset PR
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changeset-pr'
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Create changeset file
+        run: |
+          DESCRIPTION="${{ inputs.description }}"
+          if [ -z "$DESCRIPTION" ]; then
+            DESCRIPTION="Manual release"
+          fi
+          bun scripts/create-manual-changeset.mjs \
+            --bump-type "${{ inputs.bump_type }}" \
+            --description "$DESCRIPTION"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: add changeset for ${{ inputs.bump_type }} release"
+          branch: changeset-manual-release-${{ github.run_id }}
+          delete-branch: true
+          title: "chore: ${{ inputs.bump_type }} release changeset"
+          body: |
+            ## Summary
+
+            This PR adds a changeset for a **${{ inputs.bump_type }}** release.
+
+            ${{ inputs.description }}
+
+            ---
+            *This PR was automatically created by the changeset-pr workflow.*
+          labels: |
+            release
+            automated

@@ -1,0 +1,1678 @@
+findChangedGoFiles	Set up job	﻿2026-08-28T07:07:11.6410764Z Current runner version: '2.336.0'
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6444447Z ##[group]Runner Image Provisioner
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6445702Z Hosted Compute Agent
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6446562Z Version: 20260819.586
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6447641Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6448974Z Build Date: 2026-08-18T23:20:18Z
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6450153Z Worker ID: {3394e0ba-443d-4bba-b996-accf59af0d46}
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6451267Z Azure Region: eastus
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6452107Z ##[endgroup]
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6454256Z ##[group]Operating System
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6455170Z Ubuntu
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6456101Z 24.04.4
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6456877Z LTS
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6457693Z ##[endgroup]
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6458741Z ##[group]Runner Image
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6459656Z Image: ubuntu-24.04
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6460650Z Version: 20260823.283.1
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6462353Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6465130Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6466665Z ##[endgroup]
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6472170Z ##[group]GITHUB_TOKEN Permissions
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6475123Z Actions: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6476056Z ArtifactMetadata: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6476952Z Attestations: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6477930Z Checks: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6478995Z CodeQuality: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6479940Z Contents: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6480806Z CopilotRequests: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6481824Z Deployments: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6482751Z Discussions: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6483594Z Drives: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6484478Z Issues: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6485289Z Metadata: read
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6486224Z Models: read
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6487109Z Packages: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6488331Z Pages: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6489289Z PullRequests: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6490191Z RepositoryProjects: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6491211Z SecurityEvents: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6492157Z Statuses: write
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6493118Z VulnerabilityAlerts: read
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6494129Z ##[endgroup]
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6496975Z Secret source: Actions
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.6499002Z Prepare workflow directory
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.7217534Z Prepare all required actions
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.7283779Z Getting action download info
+findChangedGoFiles	Set up job	2026-08-28T07:07:11.9293098Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+findChangedGoFiles	Set up job	2026-08-28T07:07:12.0484213Z Download action repository 'tj-actions/changed-files@v47' (SHA:24d32ffd492484c1d75e0c0b894501ddb9d30d62)
+findChangedGoFiles	Set up job	2026-08-28T07:07:12.3155694Z Complete job name: findChangedGoFiles
+findChangedGoFiles	Run actions/checkout@v6	﻿2026-08-28T07:07:12.3827644Z ##[group]Run actions/checkout@v6
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3828712Z with:
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3829156Z   fetch-depth: 0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3829657Z   repository: link-foundation/links-notation
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3833426Z   token: ***
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3833930Z   ssh-strict: true
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3834400Z   ssh-user: git
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3834854Z   persist-credentials: true
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3835353Z   clean: true
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3835808Z   sparse-checkout-cone-mode: true
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3836342Z   fetch-tags: false
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3836796Z   show-progress: true
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3837244Z   lfs: false
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3837657Z   submodules: false
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3838307Z   set-safe-directory: true
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3838827Z   allow-unsafe-pr-checkout: false
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3839563Z env:
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3843130Z   GITHUB_TOKEN: ***
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.3843585Z ##[endgroup]
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.4863133Z Syncing repository: link-foundation/links-notation
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.4865450Z ##[group]Getting Git version info
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.4866251Z Working directory is '/home/runner/work/links-notation/links-notation'
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.4867459Z [command]/usr/bin/git version
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.4898696Z git version 2.55.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.4921653Z ##[endgroup]
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.4942754Z Temporarily overriding HOME='/home/runner/work/_temp/fe6dbcbc-e5ef-4552-819e-6e57692fc467' before making global git config changes
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.4944990Z Adding repository directory to the temporary git global config as a safe directory
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.4949277Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.4993490Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5009119Z ##[group]Determining repository object format
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5010499Z ##[endgroup]
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5018983Z ##[group]Initializing the repository
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5020424Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5086716Z hint: Using 'master' as the name for the initial branch. This default branch name
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5088454Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5089966Z hint: to use in all of your new repositories, which will suppress this warning,
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5091119Z hint: call:
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5091731Z hint:
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5092305Z hint: 	git config --global init.defaultBranch <name>
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5092952Z hint:
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5093546Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5094640Z hint: 'development'. The just-created branch can be renamed via this command:
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5095785Z hint:
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5096333Z hint: 	git branch -m <name>
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5096836Z hint:
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5097509Z hint: Disable this message with "git config set advice.defaultBranchName false"
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5099115Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5100936Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5138898Z ##[endgroup]
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5143569Z ##[group]Disabling automatic garbage collection
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5144282Z [command]/usr/bin/git config --local gc.auto 0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5175961Z ##[endgroup]
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5177048Z ##[group]Setting up auth
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5177839Z Removing SSH command configuration
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5183439Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5219141Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5549719Z Removing HTTP extra header
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5557835Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5600255Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5852790Z Removing includeIf entries pointing to credentials config files
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5860031Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.5897444Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.6169044Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.6213005Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.6249419Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.6289053Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.6342217Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.6411507Z ##[endgroup]
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.6412958Z ##[group]Fetching the repository
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:12.6420473Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3432444Z From https://github.com/link-foundation/links-notation
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3435591Z  * [new branch]      claude/code-review-and-issues-01CuJmcRr2phiQJAnhoqeEY5 -> origin/claude/code-review-and-issues-01CuJmcRr2phiQJAnhoqeEY5
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3439832Z  * [new branch]      claude/review-test-coverage-011UTL6DkCfp7LuwpUZj9HyC -> origin/claude/review-test-coverage-011UTL6DkCfp7LuwpUZj9HyC
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3444457Z  * [new branch]      claude/review-test-standards-01GsYvAqSF7k3oxTeEwYsX9W -> origin/claude/review-test-standards-01GsYvAqSF7k3oxTeEwYsX9W
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3448657Z  * [new branch]      dependabot/add-v2-config-file -> origin/dependabot/add-v2-config-file
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3452059Z  * [new branch]      dependabot/github_actions/actions/checkout-7 -> origin/dependabot/github_actions/actions/checkout-7
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3455825Z  * [new branch]      dependabot/github_actions/actions/setup-dotnet-6 -> origin/dependabot/github_actions/actions/setup-dotnet-6
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3459445Z  * [new branch]      dependabot/github_actions/actions/setup-node-7 -> origin/dependabot/github_actions/actions/setup-node-7
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3463760Z  * [new branch]      dependabot/github_actions/actions/upload-pages-artifact-5 -> origin/dependabot/github_actions/actions/upload-pages-artifact-5
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3469432Z  * [new branch]      dependabot/github_actions/dependabot/fetch-metadata-3 -> origin/dependabot/github_actions/dependabot/fetch-metadata-3
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3475370Z  * [new branch]      dependabot/nuget/csharp/Link.Foundation.Links.Notation.Tests/xunit.runner.visualstudio-4.0.0 -> origin/dependabot/nuget/csharp/Link.Foundation.Links.Notation.Tests/xunit.runner.visualstudio-4.0.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3480027Z  * [new branch]      draft/update           -> origin/draft/update
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3481860Z  * [new branch]      fix-cicd-publishing    -> origin/fix-cicd-publishing
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3483687Z  * [new branch]      gh-pages               -> origin/gh-pages
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3485806Z  * [new branch]      issue-101-5db7b374     -> origin/issue-101-5db7b374
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3487730Z  * [new branch]      issue-103-604d0cc9     -> origin/issue-103-604d0cc9
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3489721Z  * [new branch]      issue-105-b29688eb     -> origin/issue-105-b29688eb
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3491943Z  * [new branch]      issue-107-516f1733     -> origin/issue-107-516f1733
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3494182Z  * [new branch]      issue-109-d76b5c33     -> origin/issue-109-d76b5c33
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3496320Z  * [new branch]      issue-110-ec5b7eeb     -> origin/issue-110-ec5b7eeb
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3498862Z  * [new branch]      issue-111-8aef2f31     -> origin/issue-111-8aef2f31
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3500857Z  * [new branch]      issue-115-e9580372     -> origin/issue-115-e9580372
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3503371Z  * [new branch]      issue-117-e66fa934     -> origin/issue-117-e66fa934
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3505496Z  * [new branch]      issue-119-69bab4a2     -> origin/issue-119-69bab4a2
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3507568Z  * [new branch]      issue-121-0287f55a     -> origin/issue-121-0287f55a
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3510268Z  * [new branch]      issue-123-656309e4     -> origin/issue-123-656309e4
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3512389Z  * [new branch]      issue-125-79dfb0d1     -> origin/issue-125-79dfb0d1
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3514740Z  * [new branch]      issue-125-ee879ed7     -> origin/issue-125-ee879ed7
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3516851Z  * [new branch]      issue-125-f3a03b7d     -> origin/issue-125-f3a03b7d
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3519231Z  * [new branch]      issue-129-04c8c0a5     -> origin/issue-129-04c8c0a5
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3521370Z  * [new branch]      issue-131-fc081b5b     -> origin/issue-131-fc081b5b
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3523435Z  * [new branch]      issue-133-629cdf98     -> origin/issue-133-629cdf98
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3525504Z  * [new branch]      issue-135-00fb7516     -> origin/issue-135-00fb7516
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3527568Z  * [new branch]      issue-138-9d33fad1     -> origin/issue-138-9d33fad1
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3530467Z  * [new branch]      issue-140-28a755bca96b -> origin/issue-140-28a755bca96b
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3532988Z  * [new branch]      issue-142-23f307922307 -> origin/issue-142-23f307922307
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3535383Z  * [new branch]      issue-143-71fa1d3dc218 -> origin/issue-143-71fa1d3dc218
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3537704Z  * [new branch]      issue-144-f281d2df737c -> origin/issue-144-f281d2df737c
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3540453Z  * [new branch]      issue-146-52f1d9a571ed -> origin/issue-146-52f1d9a571ed
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3542774Z  * [new branch]      issue-148-6ee2ca2dbea2 -> origin/issue-148-6ee2ca2dbea2
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3545062Z  * [new branch]      issue-155-7899dac8e6ec -> origin/issue-155-7899dac8e6ec
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3547545Z  * [new branch]      issue-158-fb24e781ad8d -> origin/issue-158-fb24e781ad8d
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3550025Z  * [new branch]      issue-164-2e5b1c046253 -> origin/issue-164-2e5b1c046253
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3552208Z  * [new branch]      issue-165-a26029ce2e34 -> origin/issue-165-a26029ce2e34
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3554360Z  * [new branch]      issue-166-0169a4dd2a40 -> origin/issue-166-0169a4dd2a40
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3556501Z  * [new branch]      issue-184-e00f7290354f -> origin/issue-184-e00f7290354f
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3559402Z  * [new branch]      issue-188-09a2f723ae76 -> origin/issue-188-09a2f723ae76
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3561678Z  * [new branch]      issue-189-7e97f19d7811 -> origin/issue-189-7e97f19d7811
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3563874Z  * [new branch]      issue-192-3568aae3e63c -> origin/issue-192-3568aae3e63c
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3566008Z  * [new branch]      issue-197-0f9688b95d4f -> origin/issue-197-0f9688b95d4f
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3568332Z  * [new branch]      issue-197-93f74116bd61 -> origin/issue-197-93f74116bd61
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3570507Z  * [new branch]      issue-198-ef3a7c229ad3 -> origin/issue-198-ef3a7c229ad3
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3572670Z  * [new branch]      issue-200-432e1145db9f -> origin/issue-200-432e1145db9f
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3574848Z  * [new branch]      issue-201-5c2770ec8b03 -> origin/issue-201-5c2770ec8b03
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3577276Z  * [new branch]      issue-209-8128719f23bf -> origin/issue-209-8128719f23bf
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3579553Z  * [new branch]      issue-21-66d67e65      -> origin/issue-21-66d67e65
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3581652Z  * [new branch]      issue-217-c1c06cbe0168 -> origin/issue-217-c1c06cbe0168
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3583747Z  * [new branch]      issue-23-cfc667a8      -> origin/issue-23-cfc667a8
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3585988Z  * [new branch]      issue-282-c154325b4497 -> origin/issue-282-c154325b4497
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3588375Z  * [new branch]      issue-284-ed60ce81c8a6 -> origin/issue-284-ed60ce81c8a6
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3590771Z  * [new branch]      issue-288-cc91e23553e8 -> origin/issue-288-cc91e23553e8
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3592900Z  * [new branch]      issue-52-4a282d24      -> origin/issue-52-4a282d24
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3594874Z  * [new branch]      issue-53-12d80c86      -> origin/issue-53-12d80c86
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3669312Z  * [new branch]      issue-53-1bd6f8d5      -> origin/issue-53-1bd6f8d5
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3671767Z  * [new branch]      issue-53-4d399364      -> origin/issue-53-4d399364
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3673824Z  * [new branch]      issue-55-353ece6e      -> origin/issue-55-353ece6e
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3676118Z  * [new branch]      issue-55-deaa6f4c      -> origin/issue-55-deaa6f4c
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3678381Z  * [new branch]      issue-62-8dc57ee4      -> origin/issue-62-8dc57ee4
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3680381Z  * [new branch]      issue-62-9aaf7516      -> origin/issue-62-9aaf7516
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3682362Z  * [new branch]      issue-62-ba398481      -> origin/issue-62-ba398481
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3684370Z  * [new branch]      issue-63-2062e7bf      -> origin/issue-63-2062e7bf
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3686362Z  * [new branch]      issue-63-fe0edcdd      -> origin/issue-63-fe0edcdd
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3688434Z  * [new branch]      issue-68-00e93de8      -> origin/issue-68-00e93de8
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3690432Z  * [new branch]      issue-68-08c66206      -> origin/issue-68-08c66206
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3692407Z  * [new branch]      issue-68-38c3f25f      -> origin/issue-68-38c3f25f
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3694374Z  * [new branch]      issue-68-c3ec7178      -> origin/issue-68-c3ec7178
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3696352Z  * [new branch]      issue-69-1ad2dc0a      -> origin/issue-69-1ad2dc0a
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3698468Z  * [new branch]      issue-69-909b524a      -> origin/issue-69-909b524a
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3700424Z  * [new branch]      issue-81-b7913964      -> origin/issue-81-b7913964
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3702374Z  * [new branch]      issue-87-3609cfa2      -> origin/issue-87-3609cfa2
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3704315Z  * [new branch]      issue-90-8b6fbd3d      -> origin/issue-90-8b6fbd3d
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3706272Z  * [new branch]      issue-91-1bc78531      -> origin/issue-91-1bc78531
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3708427Z  * [new branch]      issue-99-0e526c7c      -> origin/issue-99-0e526c7c
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3710232Z  * [new branch]      main                   -> origin/main
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3711891Z  * [new branch]      master                 -> origin/master
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3713546Z  * [new branch]      segment                -> origin/segment
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3715345Z  * [new branch]      update-all-deps        -> origin/update-all-deps
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3717277Z  * [new branch]      update-java-deps       -> origin/update-java-deps
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3719509Z  * [new tag]         0.0.1                  -> 0.0.1
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3721414Z  * [new tag]         0.0.2                  -> 0.0.2
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3723361Z  * [new tag]         0.1.0                  -> 0.1.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3725401Z  * [new tag]         0.10.0_python          -> 0.10.0_python
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3727478Z  * [new tag]         0.11.0_csharp          -> 0.11.0_csharp
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3730101Z  * [new tag]         0.11.0_js              -> 0.11.0_js
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3732259Z  * [new tag]         0.11.0_python          -> 0.11.0_python
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3734059Z  * [new tag]         0.11.0_rust            -> 0.11.0_rust
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3735630Z  * [new tag]         0.11.1_csharp          -> 0.11.1_csharp
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3737210Z  * [new tag]         0.11.2_csharp          -> 0.11.2_csharp
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3739006Z  * [new tag]         0.11.2_js              -> 0.11.2_js
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3740535Z  * [new tag]         0.11.2_python          -> 0.11.2_python
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3742083Z  * [new tag]         0.11.2_rust            -> 0.11.2_rust
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3743627Z  * [new tag]         0.12.0_csharp          -> 0.12.0_csharp
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3745622Z  * [new tag]         0.13.0_csharp          -> 0.13.0_csharp
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3747444Z  * [new tag]         0.2.0                  -> 0.2.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3749056Z  * [new tag]         0.2.1                  -> 0.2.1
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3750495Z  * [new tag]         0.2.2                  -> 0.2.2
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3751898Z  * [new tag]         0.2.3                  -> 0.2.3
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3753319Z  * [new tag]         0.3.0                  -> 0.3.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3754735Z  * [new tag]         0.4.0                  -> 0.4.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3756204Z  * [new tag]         0.7.0_csharp           -> 0.7.0_csharp
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3757889Z  * [new tag]         0.7.0_js               -> 0.7.0_js
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3759526Z  * [new tag]         0.7.0_rust             -> 0.7.0_rust
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3760992Z  * [new tag]         0.8.0_js               -> 0.8.0_js
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3762496Z  * [new tag]         0.8.0_rust             -> 0.8.0_rust
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3764000Z  * [new tag]         0.9.0_csharp           -> 0.9.0_csharp
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3765472Z  * [new tag]         0.9.0_js               -> 0.9.0_js
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3766945Z  * [new tag]         0.9.0_python           -> 0.9.0_python
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3768517Z  * [new tag]         0.9.0_rust             -> 0.9.0_rust
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3770030Z  * [new tag]         csharp_0.4.0           -> csharp_0.4.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3771742Z  * [new tag]         csharp_0.4.1           -> csharp_0.4.1
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3773285Z  * [new tag]         csharp_0.4.2           -> csharp_0.4.2
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3774821Z  * [new tag]         csharp_0.4.3           -> csharp_0.4.3
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3776355Z  * [new tag]         csharp_0.4.4           -> csharp_0.4.4
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3777879Z  * [new tag]         csharp_0.4.5           -> csharp_0.4.5
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3779672Z  * [new tag]         csharp_0.4.6           -> csharp_0.4.6
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3781196Z  * [new tag]         csharp_0.5.0           -> csharp_0.5.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3782706Z  * [new tag]         csharp_0.6.0           -> csharp_0.6.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3784200Z  * [new tag]         go/v0.13.0             -> go/v0.13.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3785687Z  * [new tag]         go/v0.14.0             -> go/v0.14.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3787140Z  * [new tag]         js_0.1.0               -> js_0.1.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3788771Z  * [new tag]         js_0.11.2              -> js_0.11.2
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3790228Z  * [new tag]         js_0.12.0              -> js_0.12.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3791687Z  * [new tag]         js_0.13.0              -> js_0.13.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3793124Z  * [new tag]         js_0.2.0               -> js_0.2.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3794531Z  * [new tag]         js_0.6.0               -> js_0.6.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3795980Z  * [new tag]         php_0.1.0              -> php_0.1.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3797497Z  * [new tag]         python_0.11.2          -> python_0.11.2
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3799222Z  * [new tag]         python_0.12.0          -> python_0.12.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3800791Z  * [new tag]         python_0.13.0          -> python_0.13.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3802354Z  * [new tag]         python_0.14.0          -> python_0.14.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3803892Z  * [new tag]         rust_0.11.2            -> rust_0.11.2
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3805365Z  * [new tag]         rust_0.12.0            -> rust_0.12.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3807080Z  * [new tag]         rust_0.13.0            -> rust_0.13.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3808674Z  * [new tag]         rust_0.14.0            -> rust_0.14.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3810147Z  * [new tag]         rust_0.2.0             -> rust_0.2.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3811625Z  * [new tag]         rust_0.6.0             -> rust_0.6.0
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3814802Z [command]/usr/bin/git branch --list --remote origin/main
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3816207Z   origin/main
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3818745Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3820326Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3823271Z ##[endgroup]
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3824803Z ##[group]Determining the checkout info
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3826550Z ##[endgroup]
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3827561Z [command]/usr/bin/git sparse-checkout disable
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3830595Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3834053Z ##[group]Checking out the ref
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3835710Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3924107Z Switched to a new branch 'main'
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3929559Z branch 'main' set up to track 'origin/main'.
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3939203Z ##[endgroup]
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.3983678Z [command]/usr/bin/git log -1 --format=%H
+findChangedGoFiles	Run actions/checkout@v6	2026-08-28T07:07:13.4013273Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+findChangedGoFiles	Get changed files using defaults	﻿2026-08-28T07:07:13.4638540Z ##[group]Run tj-actions/changed-files@v47
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4639770Z with:
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4640618Z   separator:  
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4641567Z   include_all_old_new_renamed_files: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4642742Z   old_new_separator: ,
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4643718Z   old_new_files_separator:  
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4644801Z   files_from_source_file_separator: 
+findChangedGoFiles	Get changed files using defaults	
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4645939Z   files_separator: 
+findChangedGoFiles	Get changed files using defaults	
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4646943Z   files_yaml_from_source_file_separator: 
+findChangedGoFiles	Get changed files using defaults	
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4648373Z   files_ignore_yaml_from_source_file_separator: 
+findChangedGoFiles	Get changed files using defaults	
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4649632Z   files_ignore_separator: 
+findChangedGoFiles	Get changed files using defaults	
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4650739Z   files_ignore_from_source_file_separator: 
+findChangedGoFiles	Get changed files using defaults	
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4651901Z   path: .
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4652744Z   quotepath: true
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4653657Z   diff_relative: true
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4654619Z   dir_names: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4655583Z   dir_names_exclude_current_dir: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4656754Z   dir_names_include_files_separator: 
+findChangedGoFiles	Get changed files using defaults	
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4658214Z   dir_names_deleted_files_include_only_deleted_dirs: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4659519Z   json: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4660396Z   escape_json: true
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4661311Z   safe_output: true
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4662218Z   fetch_depth: 25
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4663138Z   skip_initial_fetch: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4664207Z   fetch_additional_submodule_history: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4665412Z   since_last_remote_commit: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4666495Z   write_output_files: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4667530Z   output_dir: .github/outputs
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4668771Z   output_renamed_files_as_deleted_and_added: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4670043Z   recover_deleted_files: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4671112Z   recover_files_separator: 
+findChangedGoFiles	Get changed files using defaults	
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4672176Z   recover_files_ignore_separator: 
+findChangedGoFiles	Get changed files using defaults	
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4680186Z   token: ***
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4681120Z   api_url: https://api.github.com
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4682201Z   use_rest_api: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4683171Z   fail_on_initial_diff_error: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4684279Z   fail_on_submodule_diff_error: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4685402Z   negation_patterns_first: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4686418Z   matrix: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4687293Z   exclude_submodules: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4688408Z   fetch_missing_history_max_retries: 20
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4689543Z   use_posix_path_separator: false
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4690621Z   tags_pattern: *
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4691475Z env:
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4699250Z   GITHUB_TOKEN: ***
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.4700128Z ##[endgroup]
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.5747435Z ##[group]changed-files
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.5872821Z Using local .git directory
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.6381010Z Running on a push event...
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.6657162Z Retrieving changes between 96878c375041d3c3bbbd9f2ffe5664d2f7d72dc5 (main) → 4958f3cf8012ba9e67f19309b9c58984f7ce106a (main)
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.6713456Z All Done!
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.6715671Z ##[endgroup]
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.6717930Z ##[group]changed-files-all
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.6772514Z All Done!
+findChangedGoFiles	Get changed files using defaults	2026-08-28T07:07:13.6775234Z ##[endgroup]
+findChangedGoFiles	Set output isGoFilesChanged	﻿2026-08-28T07:07:13.7010721Z ##[group]Run isGoFilesChanged='false'
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7012062Z ^[[36;1misGoFilesChanged='false'^[[0m
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7034033Z ^[[36;1mecho "Changed files: .gitkeep csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs experiments/issue-288/csharp/GroundTruth.csproj experiments/issue-288/csharp/Program.cs experiments/issue-288/go/go.mod experiments/issue-288/go/main.go experiments/issue-288/ground_truth.mjs experiments/issue-288/ground_truth.py experiments/issue-288/ground_truth.rs experiments/issue-288/java/GroundTruth.java experiments/issue-288/php/ground_truth.php experiments/issue-288/roundtrip.rs go/empty_reference_test.go java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java js/examples/empty_reference.js js/tests/EmptyReference.test.js php/tests/EmptyReferenceTest.php python/tests/test_empty_reference.py rust/links-notation/tests/empty_reference_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/Link.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/lino.go go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Link.java java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/MultiQuoteParserTest.java js/bun.lock js/package-lock.json js/package.json js/src/Link.js js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js php/composer.json php/src/Link.php php/src/Parser.php php/tests/LinkTest.php python/links_notation/link.py python/links_notation/parser.py python/pyproject.toml rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/tuple_tests.rs"^[[0m
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7077936Z ^[[36;1mfor changedFile in .gitkeep csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs experiments/issue-288/csharp/GroundTruth.csproj experiments/issue-288/csharp/Program.cs experiments/issue-288/go/go.mod experiments/issue-288/go/main.go experiments/issue-288/ground_truth.mjs experiments/issue-288/ground_truth.py experiments/issue-288/ground_truth.rs experiments/issue-288/java/GroundTruth.java experiments/issue-288/php/ground_truth.php experiments/issue-288/roundtrip.rs go/empty_reference_test.go java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java js/examples/empty_reference.js js/tests/EmptyReference.test.js php/tests/EmptyReferenceTest.php python/tests/test_empty_reference.py rust/links-notation/tests/empty_reference_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/Link.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/lino.go go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Link.java java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/MultiQuoteParserTest.java js/bun.lock js/package-lock.json js/package.json js/src/Link.js js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js php/composer.json php/src/Link.php php/src/Parser.php php/tests/LinkTest.php python/links_notation/link.py python/links_notation/parser.py python/pyproject.toml rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/tuple_tests.rs; do^[[0m
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7101786Z ^[[36;1m  if [[ $changedFile == go/*.go ]] || [[ $changedFile == go/go.mod ]] || [[ $changedFile == go/go.sum ]] || [[ $changedFile == go/* ]] || [[ $changedFile == .github/workflows/go.yml ]]; then^[[0m
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7104260Z ^[[36;1m    echo "isGoFilesChanged='true'"^[[0m
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7105467Z ^[[36;1m    isGoFilesChanged='true'^[[0m
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7106826Z ^[[36;1m    break^[[0m
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7107750Z ^[[36;1m  fi^[[0m
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7108691Z ^[[36;1mdone^[[0m
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7109888Z ^[[36;1mecho "isGoFilesChanged=${isGoFilesChanged}" >> $GITHUB_OUTPUT^[[0m
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7111468Z ^[[36;1mecho "isGoFilesChanged: ${isGoFilesChanged}"^[[0m
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7158945Z shell: /usr/bin/bash -e {0}
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7159998Z env:
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7167593Z   GITHUB_TOKEN: ***
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7168660Z ##[endgroup]
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7287320Z Changed files: .gitkeep csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs experiments/issue-288/csharp/GroundTruth.csproj experiments/issue-288/csharp/Program.cs experiments/issue-288/go/go.mod experiments/issue-288/go/main.go experiments/issue-288/ground_truth.mjs experiments/issue-288/ground_truth.py experiments/issue-288/ground_truth.rs experiments/issue-288/java/GroundTruth.java experiments/issue-288/php/ground_truth.php experiments/issue-288/roundtrip.rs go/empty_reference_test.go java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java js/examples/empty_reference.js js/tests/EmptyReference.test.js php/tests/EmptyReferenceTest.php python/tests/test_empty_reference.py rust/links-notation/tests/empty_reference_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/Link.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/lino.go go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Link.java java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/MultiQuoteParserTest.java js/bun.lock js/package-lock.json js/package.json js/src/Link.js js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js php/composer.json php/src/Link.php php/src/Parser.php php/tests/LinkTest.php python/links_notation/link.py python/links_notation/parser.py python/pyproject.toml rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/tuple_tests.rs
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7312790Z isGoFilesChanged='true'
+findChangedGoFiles	Set output isGoFilesChanged	2026-08-28T07:07:13.7313843Z isGoFilesChanged: true
+findChangedGoFiles	Post Run actions/checkout@v6	﻿2026-08-28T07:07:13.7560630Z Post job cleanup.
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8449493Z [command]/usr/bin/git version
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8491998Z git version 2.55.0
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8529205Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/13453b4c-bdb4-4601-9b32-17c612075030/.gitconfig'
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8540128Z Temporarily overriding HOME='/home/runner/work/_temp/13453b4c-bdb4-4601-9b32-17c612075030' before making global git config changes
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8543155Z Adding repository directory to the temporary git global config as a safe directory
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8546313Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8579315Z Removing SSH command configuration
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8585243Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8623650Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8888895Z Removing HTTP extra header
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8894540Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.8932445Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9208967Z Removing includeIf entries pointing to credentials config files
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9212176Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9230655Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9234209Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9237346Z includeif.gitdir:/github/workspace/.git.path
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9239973Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9246537Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9270541Z /home/runner/work/_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9284987Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9329391Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9365772Z /home/runner/work/_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9379179Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9428708Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9458653Z /github/runner_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9469401Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9511821Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9539417Z /github/runner_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9549283Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9591820Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+findChangedGoFiles	Post Run actions/checkout@v6	2026-08-28T07:07:13.9827001Z Removing credentials config '/home/runner/work/_temp/git-credentials-8be0d46a-fbd4-43ba-839c-7eadfcdf433e.config'
+findChangedGoFiles	Complete job	﻿2026-08-28T07:07:14.0001455Z Evaluate and set job outputs
+findChangedGoFiles	Complete job	2026-08-28T07:07:14.0009446Z Set output 'isGoFilesChanged'
+findChangedGoFiles	Complete job	2026-08-28T07:07:14.0013057Z Cleaning up orphan processes
+lint	Set up job	﻿2026-08-28T07:07:19.7057724Z Current runner version: '2.336.0'
+lint	Set up job	2026-08-28T07:07:19.7083261Z ##[group]Runner Image Provisioner
+lint	Set up job	2026-08-28T07:07:19.7084206Z Hosted Compute Agent
+lint	Set up job	2026-08-28T07:07:19.7084826Z Version: 20260819.586
+lint	Set up job	2026-08-28T07:07:19.7085563Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+lint	Set up job	2026-08-28T07:07:19.7086387Z Build Date: 2026-08-18T23:20:18Z
+lint	Set up job	2026-08-28T07:07:19.7087118Z Worker ID: {2b818d2d-d191-4aaa-9a01-67754cb628ba}
+lint	Set up job	2026-08-28T07:07:19.7087866Z Azure Region: westus
+lint	Set up job	2026-08-28T07:07:19.7088450Z ##[endgroup]
+lint	Set up job	2026-08-28T07:07:19.7089973Z ##[group]Operating System
+lint	Set up job	2026-08-28T07:07:19.7090677Z Ubuntu
+lint	Set up job	2026-08-28T07:07:19.7091455Z 24.04.4
+lint	Set up job	2026-08-28T07:07:19.7092078Z LTS
+lint	Set up job	2026-08-28T07:07:19.7092610Z ##[endgroup]
+lint	Set up job	2026-08-28T07:07:19.7093204Z ##[group]Runner Image
+lint	Set up job	2026-08-28T07:07:19.7093905Z Image: ubuntu-24.04
+lint	Set up job	2026-08-28T07:07:19.7094469Z Version: 20260823.283.1
+lint	Set up job	2026-08-28T07:07:19.7095593Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+lint	Set up job	2026-08-28T07:07:19.7097358Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+lint	Set up job	2026-08-28T07:07:19.7098412Z ##[endgroup]
+lint	Set up job	2026-08-28T07:07:19.7101685Z ##[group]GITHUB_TOKEN Permissions
+lint	Set up job	2026-08-28T07:07:19.7104069Z Actions: write
+lint	Set up job	2026-08-28T07:07:19.7104723Z ArtifactMetadata: write
+lint	Set up job	2026-08-28T07:07:19.7105499Z Attestations: write
+lint	Set up job	2026-08-28T07:07:19.7106122Z Checks: write
+lint	Set up job	2026-08-28T07:07:19.7106738Z CodeQuality: write
+lint	Set up job	2026-08-28T07:07:19.7107330Z Contents: write
+lint	Set up job	2026-08-28T07:07:19.7107891Z CopilotRequests: write
+lint	Set up job	2026-08-28T07:07:19.7108589Z Deployments: write
+lint	Set up job	2026-08-28T07:07:19.7109230Z Discussions: write
+lint	Set up job	2026-08-28T07:07:19.7109833Z Drives: write
+lint	Set up job	2026-08-28T07:07:19.7110398Z Issues: write
+lint	Set up job	2026-08-28T07:07:19.7110954Z Metadata: read
+lint	Set up job	2026-08-28T07:07:19.7111956Z Models: read
+lint	Set up job	2026-08-28T07:07:19.7112525Z Packages: write
+lint	Set up job	2026-08-28T07:07:19.7113126Z Pages: write
+lint	Set up job	2026-08-28T07:07:19.7113697Z PullRequests: write
+lint	Set up job	2026-08-28T07:07:19.7114292Z RepositoryProjects: write
+lint	Set up job	2026-08-28T07:07:19.7115022Z SecurityEvents: write
+lint	Set up job	2026-08-28T07:07:19.7115607Z Statuses: write
+lint	Set up job	2026-08-28T07:07:19.7116168Z VulnerabilityAlerts: read
+lint	Set up job	2026-08-28T07:07:19.7116838Z ##[endgroup]
+lint	Set up job	2026-08-28T07:07:19.7118861Z Secret source: Actions
+lint	Set up job	2026-08-28T07:07:19.7120100Z Prepare workflow directory
+lint	Set up job	2026-08-28T07:07:19.7710325Z Prepare all required actions
+lint	Set up job	2026-08-28T07:07:19.7758912Z Getting action download info
+lint	Set up job	2026-08-28T07:07:20.1047891Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+lint	Set up job	2026-08-28T07:07:20.2202920Z Download action repository 'actions/setup-go@v6' (SHA:924ae3a1cded613372ab5595356fb5720e22ba16)
+lint	Set up job	2026-08-28T07:07:20.7787404Z Complete job name: lint
+lint	Run actions/checkout@v6	﻿2026-08-28T07:07:20.8525745Z ##[group]Run actions/checkout@v6
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8526878Z with:
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8527406Z   submodules: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8527982Z   repository: link-foundation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8532745Z   token: ***
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8533262Z   ssh-strict: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8533780Z   ssh-user: git
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8534300Z   persist-credentials: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8534860Z   clean: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8535370Z   sparse-checkout-cone-mode: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8535961Z   fetch-depth: 1
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8536451Z   fetch-tags: false
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8536956Z   show-progress: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8537463Z   lfs: false
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8537965Z   set-safe-directory: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8538539Z   allow-unsafe-pr-checkout: false
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8539408Z env:
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8543833Z   GITHUB_TOKEN: ***
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.8544358Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9541018Z Syncing repository: link-foundation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9544352Z ##[group]Getting Git version info
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9545852Z Working directory is '/home/runner/work/links-notation/links-notation'
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9547850Z [command]/usr/bin/git version
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9627456Z git version 2.55.0
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9698297Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9714240Z Temporarily overriding HOME='/home/runner/work/_temp/d20bb7e3-11a7-4769-a1ea-f622bc2864e4' before making global git config changes
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9717236Z Adding repository directory to the temporary git global config as a safe directory
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9719677Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9782973Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9787431Z ##[group]Determining repository object format
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9789754Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9791570Z ##[group]Initializing the repository
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9794910Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9910817Z hint: Using 'master' as the name for the initial branch. This default branch name
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9912966Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9914056Z hint: to use in all of your new repositories, which will suppress this warning,
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9914853Z hint: call:
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9915296Z hint:
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9915862Z hint: 	git config --global init.defaultBranch <name>
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9916537Z hint:
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9917181Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9918190Z hint: 'development'. The just-created branch can be renamed via this command:
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9918991Z hint:
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9919462Z hint: 	git branch -m <name>
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9919997Z hint:
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9920685Z hint: Disable this message with "git config set advice.defaultBranchName false"
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9926932Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9938232Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:20.9999798Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0001506Z ##[group]Disabling automatic garbage collection
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0008120Z [command]/usr/bin/git config --local gc.auto 0
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0039415Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0040681Z ##[group]Setting up auth
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0041904Z Removing SSH command configuration
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0050995Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0088457Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0472318Z Removing HTTP extra header
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0478576Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0516108Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0733597Z Removing includeIf entries pointing to credentials config files
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0740064Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.0776582Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.1003291Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.1043242Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.1077477Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.1115709Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.1157693Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.1221766Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.1223215Z ##[group]Fetching the repository
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.1225539Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4958f3cf8012ba9e67f19309b9c58984f7ce106a:refs/remotes/origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6748978Z From https://github.com/link-foundation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6751444Z  * [new ref]         4958f3cf8012ba9e67f19309b9c58984f7ce106a -> origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6766889Z [command]/usr/bin/git branch --list --remote origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6794863Z   origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6805545Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6835865Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6841038Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6842866Z ##[group]Determining the checkout info
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6844555Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6846791Z [command]/usr/bin/git sparse-checkout disable
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6899129Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6930866Z ##[group]Checking out the ref
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.6933712Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7200314Z Switched to a new branch 'main'
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7207449Z branch 'main' set up to track 'origin/main'.
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7217136Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7220159Z ##[group]Setting up auth for fetching submodules
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7225879Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7265671Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7300330Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7342425Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7378708Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7410696Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7414112Z ##[group]Fetching submodules
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7415646Z [command]/usr/bin/git submodule sync
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7648543Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.7925673Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.8176632Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.8180039Z ##[group]Persisting credentials for submodules
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.8188892Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.8434285Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.8665189Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.8897090Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.9138335Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.9183132Z [command]/usr/bin/git log -1 --format=%H
+lint	Run actions/checkout@v6	2026-08-28T07:07:21.9210699Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+lint	Setup Go	﻿2026-08-28T07:07:21.9570104Z ##[group]Run actions/setup-go@v6
+lint	Setup Go	2026-08-28T07:07:21.9571451Z with:
+lint	Setup Go	2026-08-28T07:07:21.9572318Z   go-version: 1.21
+lint	Setup Go	2026-08-28T07:07:21.9573308Z   cache-dependency-path: go/go.sum
+lint	Setup Go	2026-08-28T07:07:21.9574482Z   check-latest: false
+lint	Setup Go	2026-08-28T07:07:21.9585026Z   token: ***
+lint	Setup Go	2026-08-28T07:07:21.9585911Z   cache: true
+lint	Setup Go	2026-08-28T07:07:21.9586771Z env:
+lint	Setup Go	2026-08-28T07:07:21.9597123Z   GITHUB_TOKEN: ***
+lint	Setup Go	2026-08-28T07:07:21.9598055Z ##[endgroup]
+lint	Setup Go	2026-08-28T07:07:22.0958932Z Setup go version spec 1.21
+lint	Setup Go	2026-08-28T07:07:22.1024492Z Attempting to download 1.21...
+lint	Setup Go	2026-08-28T07:07:22.8420371Z matching 1.21...
+lint	Setup Go	2026-08-28T07:07:22.8477824Z Acquiring 1.21.13 from https://github.com/actions/go-versions/releases/download/1.21.13-10277905115/go-1.21.13-linux-x64.tar.gz
+lint	Setup Go	2026-08-28T07:07:23.3607436Z Extracting Go...
+lint	Setup Go	2026-08-28T07:07:23.3722458Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/b8e60dba-5ce1-4311-b310-0e4c58682584 -f /home/runner/work/_temp/4c6a2db9-8e97-42c8-bcd3-7f716211f085
+lint	Setup Go	2026-08-28T07:07:24.9096711Z Successfully extracted go to /home/runner/work/_temp/b8e60dba-5ce1-4311-b310-0e4c58682584
+lint	Setup Go	2026-08-28T07:07:24.9103916Z Adding to the cache ...
+lint	Setup Go	2026-08-28T07:07:29.6679816Z Successfully cached go to /opt/hostedtoolcache/go/1.21.13/x64
+lint	Setup Go	2026-08-28T07:07:29.6682140Z Added go to the path
+lint	Setup Go	2026-08-28T07:07:29.6684893Z Successfully set up Go version 1.21
+lint	Setup Go	2026-08-28T07:07:29.6861516Z [command]/opt/hostedtoolcache/go/1.21.13/x64/bin/go env GOMODCACHE
+lint	Setup Go	2026-08-28T07:07:29.6894468Z [command]/opt/hostedtoolcache/go/1.21.13/x64/bin/go env GOCACHE
+lint	Setup Go	2026-08-28T07:07:29.6927402Z /home/runner/go/pkg/mod
+lint	Setup Go	2026-08-28T07:07:29.6939880Z /home/runner/.cache/go-build
+lint	Setup Go	2026-08-28T07:07:29.7002820Z ##[warning]Restore cache failed: Some specified paths were not resolved, unable to cache dependencies.
+lint	Setup Go	2026-08-28T07:07:29.7029709Z go version go1.21.13 linux/amd64
+lint	Setup Go	2026-08-28T07:07:29.7030004Z 
+lint	Setup Go	2026-08-28T07:07:29.7030290Z ##[group]go env
+lint	Setup Go	2026-08-28T07:07:29.8395251Z GO111MODULE=''
+lint	Setup Go	2026-08-28T07:07:29.8395785Z GOARCH='amd64'
+lint	Setup Go	2026-08-28T07:07:29.8396143Z GOBIN=''
+lint	Setup Go	2026-08-28T07:07:29.8396526Z GOCACHE='/home/runner/.cache/go-build'
+lint	Setup Go	2026-08-28T07:07:29.8396871Z GOENV='/home/runner/.config/go/env'
+lint	Setup Go	2026-08-28T07:07:29.8397167Z GOEXE=''
+lint	Setup Go	2026-08-28T07:07:29.8397393Z GOEXPERIMENT=''
+lint	Setup Go	2026-08-28T07:07:29.8397623Z GOFLAGS=''
+lint	Setup Go	2026-08-28T07:07:29.8397839Z GOHOSTARCH='amd64'
+lint	Setup Go	2026-08-28T07:07:29.8398071Z GOHOSTOS='linux'
+lint	Setup Go	2026-08-28T07:07:29.8398300Z GOINSECURE=''
+lint	Setup Go	2026-08-28T07:07:29.8398546Z GOMODCACHE='/home/runner/go/pkg/mod'
+lint	Setup Go	2026-08-28T07:07:29.8398853Z GONOPROXY=''
+lint	Setup Go	2026-08-28T07:07:29.8399076Z GONOSUMDB=''
+lint	Setup Go	2026-08-28T07:07:29.8399305Z GOOS='linux'
+lint	Setup Go	2026-08-28T07:07:29.8399571Z GOPATH='/home/runner/go'
+lint	Setup Go	2026-08-28T07:07:29.8399811Z GOPRIVATE=''
+lint	Setup Go	2026-08-28T07:07:29.8400094Z GOPROXY='https://proxy.golang.org,direct'
+lint	Setup Go	2026-08-28T07:07:29.8400463Z GOROOT='/opt/hostedtoolcache/go/1.21.13/x64'
+lint	Setup Go	2026-08-28T07:07:29.8400809Z GOSUMDB='sum.golang.org'
+lint	Setup Go	2026-08-28T07:07:29.8401050Z GOTMPDIR=''
+lint	Setup Go	2026-08-28T07:07:29.8401601Z GOTOOLCHAIN='local'
+lint	Setup Go	2026-08-28T07:07:29.8401972Z GOTOOLDIR='/opt/hostedtoolcache/go/1.21.13/x64/pkg/tool/linux_amd64'
+lint	Setup Go	2026-08-28T07:07:29.8402369Z GOVCS=''
+lint	Setup Go	2026-08-28T07:07:29.8402575Z GOVERSION='go1.21.13'
+lint	Setup Go	2026-08-28T07:07:29.8402803Z GCCGO='gccgo'
+lint	Setup Go	2026-08-28T07:07:29.8403008Z GOAMD64='v1'
+lint	Setup Go	2026-08-28T07:07:29.8403216Z AR='ar'
+lint	Setup Go	2026-08-28T07:07:29.8403404Z CC='gcc'
+lint	Setup Go	2026-08-28T07:07:29.8403591Z CXX='g++'
+lint	Setup Go	2026-08-28T07:07:29.8403786Z CGO_ENABLED='1'
+lint	Setup Go	2026-08-28T07:07:29.8403998Z GOMOD='/dev/null'
+lint	Setup Go	2026-08-28T07:07:29.8404206Z GOWORK=''
+lint	Setup Go	2026-08-28T07:07:29.8404434Z CGO_CFLAGS='-O2 -g'
+lint	Setup Go	2026-08-28T07:07:29.8404666Z CGO_CPPFLAGS=''
+lint	Setup Go	2026-08-28T07:07:29.8404883Z CGO_CXXFLAGS='-O2 -g'
+lint	Setup Go	2026-08-28T07:07:29.8405115Z CGO_FFLAGS='-O2 -g'
+lint	Setup Go	2026-08-28T07:07:29.8405338Z CGO_LDFLAGS='-O2 -g'
+lint	Setup Go	2026-08-28T07:07:29.8405593Z PKG_CONFIG='pkg-config'
+lint	Setup Go	2026-08-28T07:07:29.8406334Z GOGCCFLAGS='-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build1965074048=/tmp/go-build -gno-record-gcc-switches'
+lint	Setup Go	2026-08-28T07:07:29.8407363Z 
+lint	Setup Go	2026-08-28T07:07:29.8407681Z ##[endgroup]
+lint	Check formatting	﻿2026-08-28T07:07:29.8598195Z ##[group]Run gofmt_output=$(gofmt -l .)
+lint	Check formatting	2026-08-28T07:07:29.8598650Z ^[[36;1mgofmt_output=$(gofmt -l .)^[[0m
+lint	Check formatting	2026-08-28T07:07:29.8598988Z ^[[36;1mif [ -n "$gofmt_output" ]; then^[[0m
+lint	Check formatting	2026-08-28T07:07:29.8599413Z ^[[36;1m  echo "The following files are not formatted correctly:"^[[0m
+lint	Check formatting	2026-08-28T07:07:29.8599815Z ^[[36;1m  echo "$gofmt_output"^[[0m
+lint	Check formatting	2026-08-28T07:07:29.8600080Z ^[[36;1m  exit 1^[[0m
+lint	Check formatting	2026-08-28T07:07:29.8600305Z ^[[36;1mfi^[[0m
+lint	Check formatting	2026-08-28T07:07:29.8644747Z shell: /usr/bin/bash -e {0}
+lint	Check formatting	2026-08-28T07:07:29.8645056Z env:
+lint	Check formatting	2026-08-28T07:07:29.8647687Z   GITHUB_TOKEN: ***
+lint	Check formatting	2026-08-28T07:07:29.8647941Z   GOTOOLCHAIN: local
+lint	Check formatting	2026-08-28T07:07:29.8648179Z ##[endgroup]
+lint	Run go vet	﻿2026-08-28T07:07:29.8807622Z ##[group]Run go vet ./...
+lint	Run go vet	2026-08-28T07:07:29.8807916Z ^[[36;1mgo vet ./...^[[0m
+lint	Run go vet	2026-08-28T07:07:29.8844393Z shell: /usr/bin/bash -e {0}
+lint	Run go vet	2026-08-28T07:07:29.8844656Z env:
+lint	Run go vet	2026-08-28T07:07:29.8847204Z   GITHUB_TOKEN: ***
+lint	Run go vet	2026-08-28T07:07:29.8847454Z   GOTOOLCHAIN: local
+lint	Run go vet	2026-08-28T07:07:29.8847665Z ##[endgroup]
+lint	Post Setup Go	﻿2026-08-28T07:07:34.1811670Z Post job cleanup.
+lint	Post Setup Go	2026-08-28T07:07:34.2995081Z [command]/opt/hostedtoolcache/go/1.21.13/x64/bin/go env GOMODCACHE
+lint	Post Setup Go	2026-08-28T07:07:34.3040932Z [command]/opt/hostedtoolcache/go/1.21.13/x64/bin/go env GOCACHE
+lint	Post Setup Go	2026-08-28T07:07:34.3069325Z /home/runner/go/pkg/mod
+lint	Post Setup Go	2026-08-28T07:07:34.3090129Z /home/runner/.cache/go-build
+lint	Post Setup Go	2026-08-28T07:07:34.3096385Z [warning]Cache folder path is retrieved but doesn't exist on disk: /home/runner/go/pkg/mod
+lint	Post Setup Go	2026-08-28T07:07:34.3097752Z Primary key was not generated. Please check the log messages above for more errors or information
+lint	Post Run actions/checkout@v6	﻿2026-08-28T07:07:34.3282774Z Post job cleanup.
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4150913Z [command]/usr/bin/git version
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4196439Z git version 2.55.0
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4236992Z Temporarily overriding HOME='/home/runner/work/_temp/0248ac6d-23c1-42b2-a57d-380dc60cf5e9' before making global git config changes
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4238451Z Adding repository directory to the temporary git global config as a safe directory
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4243258Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4275306Z Removing SSH command configuration
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4282323Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4318204Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4594405Z Removing HTTP extra header
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4599592Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4635297Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4885209Z Removing includeIf entries pointing to credentials config files
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4894475Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4929510Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4932330Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4933517Z includeif.gitdir:/github/workspace/.git.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4934349Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4945362Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4978873Z /home/runner/work/_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.4997302Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.5047637Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.5078141Z /home/runner/work/_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.5094316Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.5153743Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.5188250Z /github/runner_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.5214578Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.5252565Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.5289475Z /github/runner_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.5301936Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.5350772Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:34.5595995Z Removing credentials config '/home/runner/work/_temp/git-credentials-de0fd2ab-c692-4f7a-9e57-d40b8ed93d8e.config'
+lint	Complete job	﻿2026-08-28T07:07:34.5754651Z Cleaning up orphan processes
+test	Set up job	﻿2026-08-28T07:07:41.5459474Z Current runner version: '2.336.0'
+test	Set up job	2026-08-28T07:07:41.5485755Z ##[group]Runner Image Provisioner
+test	Set up job	2026-08-28T07:07:41.5486711Z Hosted Compute Agent
+test	Set up job	2026-08-28T07:07:41.5487617Z Version: 20260819.586
+test	Set up job	2026-08-28T07:07:41.5488230Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+test	Set up job	2026-08-28T07:07:41.5489039Z Build Date: 2026-08-18T23:20:18Z
+test	Set up job	2026-08-28T07:07:41.5489718Z Worker ID: {34a91f87-b0bb-4d4a-a624-5546dfee970e}
+test	Set up job	2026-08-28T07:07:41.5490456Z Azure Region: westus2
+test	Set up job	2026-08-28T07:07:41.5491076Z ##[endgroup]
+test	Set up job	2026-08-28T07:07:41.5492607Z ##[group]Operating System
+test	Set up job	2026-08-28T07:07:41.5493339Z Ubuntu
+test	Set up job	2026-08-28T07:07:41.5493860Z 24.04.4
+test	Set up job	2026-08-28T07:07:41.5494358Z LTS
+test	Set up job	2026-08-28T07:07:41.5495005Z ##[endgroup]
+test	Set up job	2026-08-28T07:07:41.5495553Z ##[group]Runner Image
+test	Set up job	2026-08-28T07:07:41.5496197Z Image: ubuntu-24.04
+test	Set up job	2026-08-28T07:07:41.5496764Z Version: 20260823.283.1
+test	Set up job	2026-08-28T07:07:41.5498239Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+test	Set up job	2026-08-28T07:07:41.5500130Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+test	Set up job	2026-08-28T07:07:41.5501153Z ##[endgroup]
+test	Set up job	2026-08-28T07:07:41.5504227Z ##[group]GITHUB_TOKEN Permissions
+test	Set up job	2026-08-28T07:07:41.5506381Z Actions: write
+test	Set up job	2026-08-28T07:07:41.5507379Z ArtifactMetadata: write
+test	Set up job	2026-08-28T07:07:41.5508082Z Attestations: write
+test	Set up job	2026-08-28T07:07:41.5508677Z Checks: write
+test	Set up job	2026-08-28T07:07:41.5509234Z CodeQuality: write
+test	Set up job	2026-08-28T07:07:41.5509885Z Contents: write
+test	Set up job	2026-08-28T07:07:41.5510453Z CopilotRequests: write
+test	Set up job	2026-08-28T07:07:41.5511026Z Deployments: write
+test	Set up job	2026-08-28T07:07:41.5511669Z Discussions: write
+test	Set up job	2026-08-28T07:07:41.5512235Z Drives: write
+test	Set up job	2026-08-28T07:07:41.5512800Z Issues: write
+test	Set up job	2026-08-28T07:07:41.5513418Z Metadata: read
+test	Set up job	2026-08-28T07:07:41.5514032Z Models: read
+test	Set up job	2026-08-28T07:07:41.5514646Z Packages: write
+test	Set up job	2026-08-28T07:07:41.5515197Z Pages: write
+test	Set up job	2026-08-28T07:07:41.5515768Z PullRequests: write
+test	Set up job	2026-08-28T07:07:41.5516411Z RepositoryProjects: write
+test	Set up job	2026-08-28T07:07:41.5517217Z SecurityEvents: write
+test	Set up job	2026-08-28T07:07:41.5517858Z Statuses: write
+test	Set up job	2026-08-28T07:07:41.5518428Z VulnerabilityAlerts: read
+test	Set up job	2026-08-28T07:07:41.5519129Z ##[endgroup]
+test	Set up job	2026-08-28T07:07:41.5521167Z Secret source: Actions
+test	Set up job	2026-08-28T07:07:41.5522189Z Prepare workflow directory
+test	Set up job	2026-08-28T07:07:41.6062747Z Prepare all required actions
+test	Set up job	2026-08-28T07:07:41.6110921Z Getting action download info
+test	Set up job	2026-08-28T07:07:41.9580040Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+test	Set up job	2026-08-28T07:07:42.9637823Z Download action repository 'actions/setup-go@v6' (SHA:924ae3a1cded613372ab5595356fb5720e22ba16)
+test	Set up job	2026-08-28T07:07:43.2145899Z Download action repository 'codecov/codecov-action@v6' (SHA:fb8b3582c8e4def4969c97caa2f19720cb33a72f)
+test	Set up job	2026-08-28T07:07:43.5290988Z Getting action download info
+test	Set up job	2026-08-28T07:07:43.6669425Z Download action repository 'actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd' (SHA:ed597411d8f924073f98dfc5c65a23a2325f34cd)
+test	Set up job	2026-08-28T07:07:43.9836534Z Complete job name: test
+test	Run actions/checkout@v6	﻿2026-08-28T07:07:44.0686874Z ##[group]Run actions/checkout@v6
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0688565Z with:
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0689420Z   submodules: true
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0690435Z   repository: link-foundation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0699279Z   token: ***
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0700163Z   ssh-strict: true
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0701066Z   ssh-user: git
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0701996Z   persist-credentials: true
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0703006Z   clean: true
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0703928Z   sparse-checkout-cone-mode: true
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0705041Z   fetch-depth: 1
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0705951Z   fetch-tags: false
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0707085Z   show-progress: true
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0708019Z   lfs: false
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0708900Z   set-safe-directory: true
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0709968Z   allow-unsafe-pr-checkout: false
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0711310Z env:
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0719932Z   GITHUB_TOKEN: ***
+test	Run actions/checkout@v6	2026-08-28T07:07:44.0720852Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:44.1759942Z Syncing repository: link-foundation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:44.1763266Z ##[group]Getting Git version info
+test	Run actions/checkout@v6	2026-08-28T07:07:44.1764831Z Working directory is '/home/runner/work/links-notation/links-notation'
+test	Run actions/checkout@v6	2026-08-28T07:07:44.1767487Z [command]/usr/bin/git version
+test	Run actions/checkout@v6	2026-08-28T07:07:44.2782895Z git version 2.55.0
+test	Run actions/checkout@v6	2026-08-28T07:07:44.2810984Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:44.2827292Z Temporarily overriding HOME='/home/runner/work/_temp/32719524-690b-4661-86e0-ea5b6355c912' before making global git config changes
+test	Run actions/checkout@v6	2026-08-28T07:07:44.2832198Z Adding repository directory to the temporary git global config as a safe directory
+test	Run actions/checkout@v6	2026-08-28T07:07:44.2836419Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3052261Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3056876Z ##[group]Determining repository object format
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3060445Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3066546Z ##[group]Initializing the repository
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3069478Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3551001Z hint: Using 'master' as the name for the initial branch. This default branch name
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3553573Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3556115Z hint: to use in all of your new repositories, which will suppress this warning,
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3559275Z hint: call:
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3561078Z hint:
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3562408Z hint: 	git config --global init.defaultBranch <name>
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3564224Z hint:
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3566224Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3568579Z hint: 'development'. The just-created branch can be renamed via this command:
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3570211Z hint:
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3571161Z hint: 	git branch -m <name>
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3572401Z hint:
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3573858Z hint: Disable this message with "git config set advice.defaultBranchName false"
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3576185Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3580478Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3834575Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3837842Z ##[group]Disabling automatic garbage collection
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3839801Z [command]/usr/bin/git config --local gc.auto 0
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3872196Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3874313Z ##[group]Setting up auth
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3875558Z Removing SSH command configuration
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3878474Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Run actions/checkout@v6	2026-08-28T07:07:44.3914239Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Run actions/checkout@v6	2026-08-28T07:07:44.5619791Z Removing HTTP extra header
+test	Run actions/checkout@v6	2026-08-28T07:07:44.5628617Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Run actions/checkout@v6	2026-08-28T07:07:44.5666573Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Run actions/checkout@v6	2026-08-28T07:07:44.5884722Z Removing includeIf entries pointing to credentials config files
+test	Run actions/checkout@v6	2026-08-28T07:07:44.5891169Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Run actions/checkout@v6	2026-08-28T07:07:44.5927701Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Run actions/checkout@v6	2026-08-28T07:07:44.6166595Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	Run actions/checkout@v6	2026-08-28T07:07:44.6215977Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Run actions/checkout@v6	2026-08-28T07:07:44.6258146Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Run actions/checkout@v6	2026-08-28T07:07:44.6302901Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Run actions/checkout@v6	2026-08-28T07:07:44.6347618Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Run actions/checkout@v6	2026-08-28T07:07:44.6414793Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:44.6418333Z ##[group]Fetching the repository
+test	Run actions/checkout@v6	2026-08-28T07:07:44.6427385Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4958f3cf8012ba9e67f19309b9c58984f7ce106a:refs/remotes/origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3229671Z From https://github.com/link-foundation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3233108Z  * [new ref]         4958f3cf8012ba9e67f19309b9c58984f7ce106a -> origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3242832Z [command]/usr/bin/git branch --list --remote origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3271994Z   origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3282409Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3309698Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3322334Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3325093Z ##[group]Determining the checkout info
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3328509Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3330862Z [command]/usr/bin/git sparse-checkout disable
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3498584Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3534020Z ##[group]Checking out the ref
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3538672Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3805680Z Switched to a new branch 'main'
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3813078Z branch 'main' set up to track 'origin/main'.
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3822861Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3825562Z ##[group]Setting up auth for fetching submodules
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3831208Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3875844Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3913679Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+test	Run actions/checkout@v6	2026-08-28T07:07:45.3954459Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+test	Run actions/checkout@v6	2026-08-28T07:07:45.4001752Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+test	Run actions/checkout@v6	2026-08-28T07:07:45.4045492Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:45.4047915Z ##[group]Fetching submodules
+test	Run actions/checkout@v6	2026-08-28T07:07:45.4050983Z [command]/usr/bin/git submodule sync
+test	Run actions/checkout@v6	2026-08-28T07:07:45.4310734Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+test	Run actions/checkout@v6	2026-08-28T07:07:45.4605996Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+test	Run actions/checkout@v6	2026-08-28T07:07:45.4854433Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:45.4856013Z ##[group]Persisting credentials for submodules
+test	Run actions/checkout@v6	2026-08-28T07:07:45.4864280Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+test	Run actions/checkout@v6	2026-08-28T07:07:45.5118467Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Run actions/checkout@v6	2026-08-28T07:07:45.5369966Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+test	Run actions/checkout@v6	2026-08-28T07:07:45.5622863Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+test	Run actions/checkout@v6	2026-08-28T07:07:45.5899070Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:45.5936943Z [command]/usr/bin/git log -1 --format=%H
+test	Run actions/checkout@v6	2026-08-28T07:07:45.5966568Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+test	Setup Go	﻿2026-08-28T07:07:45.6236762Z ##[group]Run actions/setup-go@v6
+test	Setup Go	2026-08-28T07:07:45.6237392Z with:
+test	Setup Go	2026-08-28T07:07:45.6237642Z   go-version: 1.21
+test	Setup Go	2026-08-28T07:07:45.6237937Z   cache-dependency-path: go/go.sum
+test	Setup Go	2026-08-28T07:07:45.6238274Z   check-latest: false
+test	Setup Go	2026-08-28T07:07:45.6240788Z   token: ***
+test	Setup Go	2026-08-28T07:07:45.6241040Z   cache: true
+test	Setup Go	2026-08-28T07:07:45.6241284Z env:
+test	Setup Go	2026-08-28T07:07:45.6243756Z   GITHUB_TOKEN: ***
+test	Setup Go	2026-08-28T07:07:45.6244029Z ##[endgroup]
+test	Setup Go	2026-08-28T07:07:45.7475443Z Setup go version spec 1.21
+test	Setup Go	2026-08-28T07:07:45.8631736Z Attempting to download 1.21...
+test	Setup Go	2026-08-28T07:07:46.4505524Z matching 1.21...
+test	Setup Go	2026-08-28T07:07:46.4566388Z Acquiring 1.21.13 from https://github.com/actions/go-versions/releases/download/1.21.13-10277905115/go-1.21.13-linux-x64.tar.gz
+test	Setup Go	2026-08-28T07:07:46.9834665Z Extracting Go...
+test	Setup Go	2026-08-28T07:07:46.9940453Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/bb14cec5-59eb-4ec3-9b57-21d445750abe -f /home/runner/work/_temp/19442b28-e990-4813-913e-f67f5337121c
+test	Setup Go	2026-08-28T07:07:48.5354906Z Successfully extracted go to /home/runner/work/_temp/bb14cec5-59eb-4ec3-9b57-21d445750abe
+test	Setup Go	2026-08-28T07:07:48.5355629Z Adding to the cache ...
+test	Setup Go	2026-08-28T07:07:53.2791780Z Successfully cached go to /opt/hostedtoolcache/go/1.21.13/x64
+test	Setup Go	2026-08-28T07:07:53.2792902Z Added go to the path
+test	Setup Go	2026-08-28T07:07:53.2795707Z Successfully set up Go version 1.21
+test	Setup Go	2026-08-28T07:07:53.2975055Z [command]/opt/hostedtoolcache/go/1.21.13/x64/bin/go env GOMODCACHE
+test	Setup Go	2026-08-28T07:07:53.3008519Z [command]/opt/hostedtoolcache/go/1.21.13/x64/bin/go env GOCACHE
+test	Setup Go	2026-08-28T07:07:53.3042522Z /home/runner/go/pkg/mod
+test	Setup Go	2026-08-28T07:07:53.3054719Z /home/runner/.cache/go-build
+test	Setup Go	2026-08-28T07:07:53.3123789Z ##[warning]Restore cache failed: Some specified paths were not resolved, unable to cache dependencies.
+test	Setup Go	2026-08-28T07:07:53.3151270Z go version go1.21.13 linux/amd64
+test	Setup Go	2026-08-28T07:07:53.3151529Z 
+test	Setup Go	2026-08-28T07:07:53.3152001Z ##[group]go env
+test	Setup Go	2026-08-28T07:07:53.9392511Z GO111MODULE=''
+test	Setup Go	2026-08-28T07:07:53.9393069Z GOARCH='amd64'
+test	Setup Go	2026-08-28T07:07:53.9393462Z GOBIN=''
+test	Setup Go	2026-08-28T07:07:53.9393877Z GOCACHE='/home/runner/.cache/go-build'
+test	Setup Go	2026-08-28T07:07:53.9394436Z GOENV='/home/runner/.config/go/env'
+test	Setup Go	2026-08-28T07:07:53.9394909Z GOEXE=''
+test	Setup Go	2026-08-28T07:07:53.9395261Z GOEXPERIMENT=''
+test	Setup Go	2026-08-28T07:07:53.9395695Z GOFLAGS=''
+test	Setup Go	2026-08-28T07:07:53.9396185Z GOHOSTARCH='amd64'
+test	Setup Go	2026-08-28T07:07:53.9396668Z GOHOSTOS='linux'
+test	Setup Go	2026-08-28T07:07:53.9397311Z GOINSECURE=''
+test	Setup Go	2026-08-28T07:07:53.9397767Z GOMODCACHE='/home/runner/go/pkg/mod'
+test	Setup Go	2026-08-28T07:07:53.9398272Z GONOPROXY=''
+test	Setup Go	2026-08-28T07:07:53.9398664Z GONOSUMDB=''
+test	Setup Go	2026-08-28T07:07:53.9399104Z GOOS='linux'
+test	Setup Go	2026-08-28T07:07:53.9399432Z GOPATH='/home/runner/go'
+test	Setup Go	2026-08-28T07:07:53.9399847Z GOPRIVATE=''
+test	Setup Go	2026-08-28T07:07:53.9400332Z GOPROXY='https://proxy.golang.org,direct'
+test	Setup Go	2026-08-28T07:07:53.9400884Z GOROOT='/opt/hostedtoolcache/go/1.21.13/x64'
+test	Setup Go	2026-08-28T07:07:53.9401426Z GOSUMDB='sum.golang.org'
+test	Setup Go	2026-08-28T07:07:53.9401922Z GOTMPDIR=''
+test	Setup Go	2026-08-28T07:07:53.9402295Z GOTOOLCHAIN='local'
+test	Setup Go	2026-08-28T07:07:53.9402947Z GOTOOLDIR='/opt/hostedtoolcache/go/1.21.13/x64/pkg/tool/linux_amd64'
+test	Setup Go	2026-08-28T07:07:53.9403524Z GOVCS=''
+test	Setup Go	2026-08-28T07:07:53.9403836Z GOVERSION='go1.21.13'
+test	Setup Go	2026-08-28T07:07:53.9404208Z GCCGO='gccgo'
+test	Setup Go	2026-08-28T07:07:53.9404539Z GOAMD64='v1'
+test	Setup Go	2026-08-28T07:07:53.9404824Z AR='ar'
+test	Setup Go	2026-08-28T07:07:53.9405084Z CC='gcc'
+test	Setup Go	2026-08-28T07:07:53.9405355Z CXX='g++'
+test	Setup Go	2026-08-28T07:07:53.9405641Z CGO_ENABLED='1'
+test	Setup Go	2026-08-28T07:07:53.9405955Z GOMOD='/dev/null'
+test	Setup Go	2026-08-28T07:07:53.9406257Z GOWORK=''
+test	Setup Go	2026-08-28T07:07:53.9406548Z CGO_CFLAGS='-O2 -g'
+test	Setup Go	2026-08-28T07:07:53.9406862Z CGO_CPPFLAGS=''
+test	Setup Go	2026-08-28T07:07:53.9407686Z CGO_CXXFLAGS='-O2 -g'
+test	Setup Go	2026-08-28T07:07:53.9408033Z CGO_FFLAGS='-O2 -g'
+test	Setup Go	2026-08-28T07:07:53.9408365Z CGO_LDFLAGS='-O2 -g'
+test	Setup Go	2026-08-28T07:07:53.9408711Z PKG_CONFIG='pkg-config'
+test	Setup Go	2026-08-28T07:07:53.9409853Z GOGCCFLAGS='-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build989161177=/tmp/go-build -gno-record-gcc-switches'
+test	Setup Go	2026-08-28T07:07:53.9411109Z 
+test	Setup Go	2026-08-28T07:07:53.9411696Z ##[endgroup]
+test	Build	﻿2026-08-28T07:07:53.9639277Z ##[group]Run go build -v ./...
+test	Build	2026-08-28T07:07:53.9639621Z ^[[36;1mgo build -v ./...^[[0m
+test	Build	2026-08-28T07:07:53.9680215Z shell: /usr/bin/bash -e {0}
+test	Build	2026-08-28T07:07:53.9680480Z env:
+test	Build	2026-08-28T07:07:53.9682974Z   GITHUB_TOKEN: ***
+test	Build	2026-08-28T07:07:53.9683203Z   GOTOOLCHAIN: local
+test	Build	2026-08-28T07:07:53.9683421Z ##[endgroup]
+test	Build	2026-08-28T07:07:54.0138089Z internal/unsafeheader
+test	Build	2026-08-28T07:07:54.0139117Z internal/coverage/rtcov
+test	Build	2026-08-28T07:07:54.0139817Z internal/goarch
+test	Build	2026-08-28T07:07:54.0152956Z internal/cpu
+test	Build	2026-08-28T07:07:54.0253577Z internal/godebugs
+test	Build	2026-08-28T07:07:54.0278471Z internal/goexperiment
+test	Build	2026-08-28T07:07:54.0289323Z internal/abi
+test	Build	2026-08-28T07:07:54.0352444Z internal/goos
+test	Build	2026-08-28T07:07:54.0379991Z runtime/internal/atomic
+test	Build	2026-08-28T07:07:54.0451240Z runtime/internal/math
+test	Build	2026-08-28T07:07:54.0617905Z runtime/internal/sys
+test	Build	2026-08-28T07:07:54.0736149Z runtime/internal/syscall
+test	Build	2026-08-28T07:07:54.0799188Z internal/bytealg
+test	Build	2026-08-28T07:07:54.0814830Z internal/race
+test	Build	2026-08-28T07:07:54.0916016Z sync/atomic
+test	Build	2026-08-28T07:07:54.0918416Z unicode
+test	Build	2026-08-28T07:07:54.1466179Z unicode/utf8
+test	Build	2026-08-28T07:07:54.2348192Z runtime
+test	Build	2026-08-28T07:07:56.0122772Z internal/reflectlite
+test	Build	2026-08-28T07:07:56.0123609Z sync
+test	Build	2026-08-28T07:07:56.1392214Z errors
+test	Build	2026-08-28T07:07:56.1579596Z io
+test	Build	2026-08-28T07:07:56.1981772Z strings
+test	Build	2026-08-28T07:07:56.2826254Z github.com/link-foundation/links-notation/go
+test	Test	﻿2026-08-28T07:07:56.3461923Z ##[group]Run go test -v -race -coverprofile=coverage.out ./...
+test	Test	2026-08-28T07:07:56.3462451Z ^[[36;1mgo test -v -race -coverprofile=coverage.out ./...^[[0m
+test	Test	2026-08-28T07:07:56.3499242Z shell: /usr/bin/bash -e {0}
+test	Test	2026-08-28T07:07:56.3499494Z env:
+test	Test	2026-08-28T07:07:56.3502033Z   GITHUB_TOKEN: ***
+test	Test	2026-08-28T07:07:56.3502258Z   GOTOOLCHAIN: local
+test	Test	2026-08-28T07:07:56.3502469Z ##[endgroup]
+test	Test	2026-08-28T07:08:03.4809809Z === RUN   TestBareDelimiterPairIsTheEmptyReference
+test	Test	2026-08-28T07:08:03.4812344Z --- PASS: TestBareDelimiterPairIsTheEmptyReference (0.00s)
+test	Test	2026-08-28T07:08:03.4813380Z === RUN   TestEveryDelimiterStyleYieldsTheSameEmptyReference
+test	Test	2026-08-28T07:08:03.4817109Z --- PASS: TestEveryDelimiterStyleYieldsTheSameEmptyReference (0.00s)
+test	Test	2026-08-28T07:08:03.4818344Z === RUN   TestAdjacentEmptyReferencesStaySeparate
+test	Test	2026-08-28T07:08:03.4824646Z --- PASS: TestAdjacentEmptyReferencesStaySeparate (0.00s)
+test	Test	2026-08-28T07:08:03.4825703Z === RUN   TestNestedEmptyReferencesParse
+test	Test	2026-08-28T07:08:03.4841267Z --- PASS: TestNestedEmptyReferencesParse (0.00s)
+test	Test	2026-08-28T07:08:03.4842219Z === RUN   TestEmptyReferenceIsValidAsAnID
+test	Test	2026-08-28T07:08:03.4847390Z --- PASS: TestEmptyReferenceIsValidAsAnID (0.00s)
+test	Test	2026-08-28T07:08:03.4848416Z === RUN   TestNQuoteDelimitedBodiesAreUnchanged
+test	Test	2026-08-28T07:08:03.4853247Z --- PASS: TestNQuoteDelimitedBodiesAreUnchanged (0.00s)
+test	Test	2026-08-28T07:08:03.4854176Z === RUN   TestASingleSpaceStillReadsAsASpace
+test	Test	2026-08-28T07:08:03.4855464Z --- PASS: TestASingleSpaceStillReadsAsASpace (0.00s)
+test	Test	2026-08-28T07:08:03.4856199Z === RUN   TestEmptyReferenceSurvivesARoundTrip
+test	Test	2026-08-28T07:08:03.4871229Z --- PASS: TestEmptyReferenceSurvivesARoundTrip (0.00s)
+test	Test	2026-08-28T07:08:03.4873485Z === RUN   TestEmptyReferenceIsWrittenAsADelimiterPair
+test	Test	2026-08-28T07:08:03.4874336Z --- PASS: TestEmptyReferenceIsWrittenAsADelimiterPair (0.00s)
+test	Test	2026-08-28T07:08:03.4874984Z === RUN   TestIsRef
+test	Test	2026-08-28T07:08:03.4875516Z --- PASS: TestIsRef (0.00s)
+test	Test	2026-08-28T07:08:03.4875974Z === RUN   TestIsLink
+test	Test	2026-08-28T07:08:03.4876399Z --- PASS: TestIsLink (0.00s)
+test	Test	2026-08-28T07:08:03.4877030Z === RUN   TestEmptyLink
+test	Test	2026-08-28T07:08:03.4877656Z --- PASS: TestEmptyLink (0.00s)
+test	Test	2026-08-28T07:08:03.4878912Z === RUN   TestSimpleLink
+test	Test	2026-08-28T07:08:03.4879617Z --- PASS: TestSimpleLink (0.00s)
+test	Test	2026-08-28T07:08:03.4880021Z === RUN   TestLinkWithSourceTarget
+test	Test	2026-08-28T07:08:03.4881338Z --- PASS: TestLinkWithSourceTarget (0.00s)
+test	Test	2026-08-28T07:08:03.4881919Z === RUN   TestLinkWithSourceTypeTarget
+test	Test	2026-08-28T07:08:03.4884036Z --- PASS: TestLinkWithSourceTypeTarget (0.00s)
+test	Test	2026-08-28T07:08:03.4884487Z === RUN   TestSingleLineFormat
+test	Test	2026-08-28T07:08:03.4885796Z --- PASS: TestSingleLineFormat (0.00s)
+test	Test	2026-08-28T07:08:03.4886314Z === RUN   TestQuotedReferences
+test	Test	2026-08-28T07:08:03.4888104Z --- PASS: TestQuotedReferences (0.00s)
+test	Test	2026-08-28T07:08:03.4888657Z === RUN   TestIndentedIDSyntaxParsing
+test	Test	2026-08-28T07:08:03.4890705Z --- PASS: TestIndentedIDSyntaxParsing (0.00s)
+test	Test	2026-08-28T07:08:03.4891502Z === RUN   TestMultipleIndentedIDSyntaxParsing
+test	Test	2026-08-28T07:08:03.4894054Z --- PASS: TestMultipleIndentedIDSyntaxParsing (0.00s)
+test	Test	2026-08-28T07:08:03.4894729Z === RUN   TestSingleLinkTest
+test	Test	2026-08-28T07:08:03.4896121Z --- PASS: TestSingleLinkTest (0.00s)
+test	Test	2026-08-28T07:08:03.4896726Z === RUN   TestTripletSingleLinkTest
+test	Test	2026-08-28T07:08:03.4898669Z --- PASS: TestTripletSingleLinkTest (0.00s)
+test	Test	2026-08-28T07:08:03.4898985Z === RUN   TestBug1
+test	Test	2026-08-28T07:08:03.4900733Z --- PASS: TestBug1 (0.00s)
+test	Test	2026-08-28T07:08:03.4901009Z === RUN   TestQuotedReferencesTest
+test	Test	2026-08-28T07:08:03.4902538Z --- PASS: TestQuotedReferencesTest (0.00s)
+test	Test	2026-08-28T07:08:03.4903226Z === RUN   TestQuotedReferencesWithSpacesTest
+test	Test	2026-08-28T07:08:03.4904834Z --- PASS: TestQuotedReferencesWithSpacesTest (0.00s)
+test	Test	2026-08-28T07:08:03.4905604Z === RUN   TestParseSimpleReference
+test	Test	2026-08-28T07:08:03.4906315Z --- PASS: TestParseSimpleReference (0.00s)
+test	Test	2026-08-28T07:08:03.4907350Z === RUN   TestParseReferenceWithColonAndValues
+test	Test	2026-08-28T07:08:03.4917779Z --- PASS: TestParseReferenceWithColonAndValues (0.00s)
+test	Test	2026-08-28T07:08:03.4919041Z === RUN   TestParseMultilineLink
+test	Test	2026-08-28T07:08:03.4919789Z --- PASS: TestParseMultilineLink (0.00s)
+test	Test	2026-08-28T07:08:03.4920244Z === RUN   TestSingletLink
+test	Test	2026-08-28T07:08:03.4920622Z --- PASS: TestSingletLink (0.00s)
+test	Test	2026-08-28T07:08:03.4921007Z === RUN   TestValueLink
+test	Test	2026-08-28T07:08:03.4921362Z --- PASS: TestValueLink (0.00s)
+test	Test	2026-08-28T07:08:03.4922037Z === RUN   TestDoubleQuotedReferences
+test	Test	2026-08-28T07:08:03.4922729Z --- PASS: TestDoubleQuotedReferences (0.00s)
+test	Test	2026-08-28T07:08:03.4923292Z === RUN   TestSingleQuotedReferences
+test	Test	2026-08-28T07:08:03.4923865Z --- PASS: TestSingleQuotedReferences (0.00s)
+test	Test	2026-08-28T07:08:03.4924200Z === RUN   TestNestedLinks
+test	Test	2026-08-28T07:08:03.4925039Z --- PASS: TestNestedLinks (0.00s)
+test	Test	2026-08-28T07:08:03.4925621Z === RUN   TestSpecialCharactersInQuotes
+test	Test	2026-08-28T07:08:03.4931374Z --- PASS: TestSpecialCharactersInQuotes (0.00s)
+test	Test	2026-08-28T07:08:03.4935857Z === RUN   TestDeeplyNested
+test	Test	2026-08-28T07:08:03.4937016Z --- PASS: TestDeeplyNested (0.00s)
+test	Test	2026-08-28T07:08:03.4937833Z === RUN   TestHyphenatedIdentifiers
+test	Test	2026-08-28T07:08:03.4941142Z --- PASS: TestHyphenatedIdentifiers (0.00s)
+test	Test	2026-08-28T07:08:03.4942069Z === RUN   TestMultipleWordsInQuotes
+test	Test	2026-08-28T07:08:03.4944840Z --- PASS: TestMultipleWordsInQuotes (0.00s)
+test	Test	2026-08-28T07:08:03.4945602Z === RUN   TestSimpleSignificantWhitespace
+test	Test	2026-08-28T07:08:03.4958110Z --- PASS: TestSimpleSignificantWhitespace (0.00s)
+test	Test	2026-08-28T07:08:03.4958946Z === RUN   TestTwoSpacesSizedWhitespace
+test	Test	2026-08-28T07:08:03.4959539Z --- PASS: TestTwoSpacesSizedWhitespace (0.00s)
+test	Test	2026-08-28T07:08:03.4960091Z === RUN   TestParseNestedStructureWithIndentation
+test	Test	2026-08-28T07:08:03.4960540Z --- PASS: TestParseNestedStructureWithIndentation (0.00s)
+test	Test	2026-08-28T07:08:03.4960934Z === RUN   TestIndentationBasedChildren
+test	Test	2026-08-28T07:08:03.4961564Z --- PASS: TestIndentationBasedChildren (0.00s)
+test	Test	2026-08-28T07:08:03.4962136Z === RUN   TestComplexIndentation
+test	Test	2026-08-28T07:08:03.4962655Z --- PASS: TestComplexIndentation (0.00s)
+test	Test	2026-08-28T07:08:03.4962976Z === RUN   TestNestedLinksParser
+test	Test	2026-08-28T07:08:03.4964986Z --- PASS: TestNestedLinksParser (0.00s)
+test	Test	2026-08-28T07:08:03.4966134Z === RUN   TestThreeLevelNestingRoundtrip
+test	Test	2026-08-28T07:08:03.4968588Z --- PASS: TestThreeLevelNestingRoundtrip (0.00s)
+test	Test	2026-08-28T07:08:03.4969635Z === RUN   TestDeepNestedStructureRoundtrip
+test	Test	2026-08-28T07:08:03.4973825Z --- PASS: TestDeepNestedStructureRoundtrip (0.00s)
+test	Test	2026-08-28T07:08:03.4975226Z === RUN   TestMultipleNestedLinksRoundtrip
+test	Test	2026-08-28T07:08:03.4979105Z --- PASS: TestMultipleNestedLinksRoundtrip (0.00s)
+test	Test	2026-08-28T07:08:03.4979887Z === RUN   TestLinkEquality
+test	Test	2026-08-28T07:08:03.4980449Z --- PASS: TestLinkEquality (0.00s)
+test	Test	2026-08-28T07:08:03.4981078Z === RUN   TestLinkInequalityDifferentID
+test	Test	2026-08-28T07:08:03.4981653Z --- PASS: TestLinkInequalityDifferentID (0.00s)
+test	Test	2026-08-28T07:08:03.4982251Z === RUN   TestLinkInequalityDifferentValues
+test	Test	2026-08-28T07:08:03.4982869Z --- PASS: TestLinkInequalityDifferentValues (0.00s)
+test	Test	2026-08-28T07:08:03.4983522Z === RUN   TestLinkInequalityDifferentValueCount
+test	Test	2026-08-28T07:08:03.4984207Z --- PASS: TestLinkInequalityDifferentValueCount (0.00s)
+test	Test	2026-08-28T07:08:03.4985450Z === RUN   TestEmptyInput
+test	Test	2026-08-28T07:08:03.4985881Z --- PASS: TestEmptyInput (0.00s)
+test	Test	2026-08-28T07:08:03.4986363Z === RUN   TestWhitespaceOnlyInput
+test	Test	2026-08-28T07:08:03.4987005Z --- PASS: TestWhitespaceOnlyInput (0.00s)
+test	Test	2026-08-28T07:08:03.4987571Z === RUN   TestParseValuesOnly
+test	Test	2026-08-28T07:08:03.4988658Z --- PASS: TestParseValuesOnly (0.00s)
+test	Test	2026-08-28T07:08:03.4989186Z === RUN   TestMultilineLinksPreserved
+test	Test	2026-08-28T07:08:03.4991516Z --- PASS: TestMultilineLinksPreserved (0.00s)
+test	Test	2026-08-28T07:08:03.4992244Z === RUN   TestFormatConfigLessParentheses
+test	Test	2026-08-28T07:08:03.4992873Z --- PASS: TestFormatConfigLessParentheses (0.00s)
+test	Test	2026-08-28T07:08:03.4993452Z === RUN   TestFormatConfigDefault
+test	Test	2026-08-28T07:08:03.4993965Z --- PASS: TestFormatConfigDefault (0.00s)
+test	Test	2026-08-28T07:08:03.4994531Z === RUN   TestFormatConfigWithIndentString
+test	Test	2026-08-28T07:08:03.4995370Z --- PASS: TestFormatConfigWithIndentString (0.00s)
+test	Test	2026-08-28T07:08:03.4996020Z === RUN   TestFormatConfigWithIndentByRefCount
+test	Test	2026-08-28T07:08:03.4996708Z --- PASS: TestFormatConfigWithIndentByRefCount (0.00s)
+test	Test	2026-08-28T07:08:03.4997535Z === RUN   TestFormatConfigWithIndentByLength
+test	Test	2026-08-28T07:08:03.4998168Z --- PASS: TestFormatConfigWithIndentByLength (0.00s)
+test	Test	2026-08-28T07:08:03.4998671Z === RUN   TestDoubleQuotedString
+test	Test	2026-08-28T07:08:03.4999007Z --- PASS: TestDoubleQuotedString (0.00s)
+test	Test	2026-08-28T07:08:03.4999303Z === RUN   TestSingleQuotedString
+test	Test	2026-08-28T07:08:03.5001381Z --- PASS: TestSingleQuotedString (0.00s)
+test	Test	2026-08-28T07:08:03.5002050Z === RUN   TestBacktickQuotedString
+test	Test	2026-08-28T07:08:03.5002936Z --- PASS: TestBacktickQuotedString (0.00s)
+test	Test	2026-08-28T07:08:03.5003474Z === RUN   TestTripleQuotedString
+test	Test	2026-08-28T07:08:03.5005587Z --- PASS: TestTripleQuotedString (0.00s)
+test	Test	2026-08-28T07:08:03.5006150Z === RUN   TestEscapeReferenceWithSpace
+test	Test	2026-08-28T07:08:03.5007006Z --- PASS: TestEscapeReferenceWithSpace (0.00s)
+test	Test	2026-08-28T07:08:03.5008080Z === RUN   TestEscapeReferenceWithColon
+test	Test	2026-08-28T07:08:03.5008940Z --- PASS: TestEscapeReferenceWithColon (0.00s)
+test	Test	2026-08-28T07:08:03.5009552Z === RUN   TestEscapeReferenceWithDoubleQuote
+test	Test	2026-08-28T07:08:03.5010318Z --- PASS: TestEscapeReferenceWithDoubleQuote (0.00s)
+test	Test	2026-08-28T07:08:03.5011005Z === RUN   TestEscapeReferenceWithSingleQuote
+test	Test	2026-08-28T07:08:03.5011638Z --- PASS: TestEscapeReferenceWithSingleQuote (0.00s)
+test	Test	2026-08-28T07:08:03.5012265Z === RUN   TestEscapeReferenceSimple
+test	Test	2026-08-28T07:08:03.5012803Z --- PASS: TestEscapeReferenceSimple (0.00s)
+test	Test	2026-08-28T07:08:03.5013342Z === RUN   TestGroupConsecutiveLinks
+test	Test	2026-08-28T07:08:03.5013864Z --- PASS: TestGroupConsecutiveLinks (0.00s)
+test	Test	2026-08-28T07:08:03.5015771Z === RUN   TestNoGroupingDifferentIDs
+test	Test	2026-08-28T07:08:03.5016341Z --- PASS: TestNoGroupingDifferentIDs (0.00s)
+test	Test	2026-08-28T07:08:03.5017116Z === RUN   TestRoundtripSimple
+test	Test	2026-08-28T07:08:03.5020429Z --- PASS: TestRoundtripSimple (0.00s)
+test	Test	2026-08-28T07:08:03.5021351Z === RUN   TestMaxInputSize
+test	Test	2026-08-28T07:08:03.5021836Z --- PASS: TestMaxInputSize (0.00s)
+test	Test	2026-08-28T07:08:03.5022544Z === RUN   TestIndentedIDSyntaxBasic
+test	Test	2026-08-28T07:08:03.5023862Z --- PASS: TestIndentedIDSyntaxBasic (0.00s)
+test	Test	2026-08-28T07:08:03.5024517Z === RUN   TestIndentedIDSyntaxMultiple
+test	Test	2026-08-28T07:08:03.5026756Z --- PASS: TestIndentedIDSyntaxMultiple (0.00s)
+test	Test	2026-08-28T07:08:03.5027338Z === RUN   TestREADMEExample
+test	Test	2026-08-28T07:08:03.5029262Z --- PASS: TestREADMEExample (0.00s)
+test	Test	2026-08-28T07:08:03.5029956Z === RUN   TestREADMEDoublets
+test	Test	2026-08-28T07:08:03.5032720Z --- PASS: TestREADMEDoublets (0.00s)
+test	Test	2026-08-28T07:08:03.5033256Z === RUN   TestREADMETriplets
+test	Test	2026-08-28T07:08:03.5035815Z --- PASS: TestREADMETriplets (0.00s)
+test	Test	2026-08-28T07:08:03.5036490Z === RUN   TestMixedInlineAndIndented
+test	Test	2026-08-28T07:08:03.5038650Z --- PASS: TestMixedInlineAndIndented (0.00s)
+test	Test	2026-08-28T07:08:03.5039373Z === RUN   TestMultilineWithEmbeddedNewlines
+test	Test	2026-08-28T07:08:03.5040356Z --- PASS: TestMultilineWithEmbeddedNewlines (0.00s)
+test	Test	2026-08-28T07:08:03.5040970Z === RUN   TestNestedSelfReference
+test	Test	2026-08-28T07:08:03.5042917Z --- PASS: TestNestedSelfReference (0.00s)
+test	Test	2026-08-28T07:08:03.5043418Z === RUN   TestParenthesesReproduceRootIndentation
+test	Test	2026-08-28T07:08:03.5047243Z --- PASS: TestParenthesesReproduceRootIndentation (0.00s)
+test	Test	2026-08-28T07:08:03.5047982Z === RUN   TestParenthesesKeepRecordBoundaries
+test	Test	2026-08-28T07:08:03.5051550Z --- PASS: TestParenthesesKeepRecordBoundaries (0.00s)
+test	Test	2026-08-28T07:08:03.5052330Z === RUN   TestParenthesesKeepSeveralRecordsSeparate
+test	Test	2026-08-28T07:08:03.5055905Z --- PASS: TestParenthesesKeepSeveralRecordsSeparate (0.00s)
+test	Test	2026-08-28T07:08:03.5056660Z === RUN   TestParenthesesNestDeeply
+test	Test	2026-08-28T07:08:03.5060658Z --- PASS: TestParenthesesNestDeeply (0.00s)
+test	Test	2026-08-28T07:08:03.5061290Z === RUN   TestSingleLineParenthesesAreUnchanged
+test	Test	2026-08-28T07:08:03.5064620Z --- PASS: TestSingleLineParenthesesAreUnchanged (0.00s)
+test	Test	2026-08-28T07:08:03.5065368Z === RUN   TestParenthesesWithIndentedIDSyntax
+test	Test	2026-08-28T07:08:03.5066783Z --- PASS: TestParenthesesWithIndentedIDSyntax (0.00s)
+test	Test	2026-08-28T07:08:03.5067784Z === RUN   TestEmployeeRecordsKeepTheirFields
+test	Test	2026-08-28T07:08:03.5072688Z --- PASS: TestEmployeeRecordsKeepTheirFields (0.00s)
+test	Test	2026-08-28T07:08:03.5073285Z PASS
+test	Test	2026-08-28T07:08:03.5105139Z coverage: 77.5% of statements
+test	Test	2026-08-28T07:08:04.5161295Z ok  	github.com/link-foundation/links-notation/go	1.041s	coverage: 77.5% of statements
+test	Upload coverage	﻿2026-08-28T07:08:04.5728207Z ##[group]Run codecov/codecov-action@v6
+test	Upload coverage	2026-08-28T07:08:04.5728529Z with:
+test	Upload coverage	2026-08-28T07:08:04.5728728Z   files: go/coverage.out
+test	Upload coverage	2026-08-28T07:08:04.5728950Z   flags: go
+test	Upload coverage	2026-08-28T07:08:04.5729141Z   fail_ci_if_error: false
+test	Upload coverage	2026-08-28T07:08:04.5729376Z   disable_file_fixes: false
+test	Upload coverage	2026-08-28T07:08:04.5729607Z   disable_search: false
+test	Upload coverage	2026-08-28T07:08:04.5729835Z   disable_safe_directory: false
+test	Upload coverage	2026-08-28T07:08:04.5730079Z   disable_telem: false
+test	Upload coverage	2026-08-28T07:08:04.5730286Z   dry_run: false
+test	Upload coverage	2026-08-28T07:08:04.5730480Z   git_service: github
+test	Upload coverage	2026-08-28T07:08:04.5730691Z   gcov_executable: gcov
+test	Upload coverage	2026-08-28T07:08:04.5730923Z   handle_no_reports_found: false
+test	Upload coverage	2026-08-28T07:08:04.5731188Z   recurse_submodules: false
+test	Upload coverage	2026-08-28T07:08:04.5731428Z   run_command: upload-coverage
+test	Upload coverage	2026-08-28T07:08:04.5731671Z   skip_validation: false
+test	Upload coverage	2026-08-28T07:08:04.5731902Z   use_legacy_upload_endpoint: false
+test	Upload coverage	2026-08-28T07:08:04.5732147Z   use_oidc: false
+test	Upload coverage	2026-08-28T07:08:04.5732342Z   use_pypi: false
+test	Upload coverage	2026-08-28T07:08:04.5732530Z   verbose: false
+test	Upload coverage	2026-08-28T07:08:04.5732754Z   version: latest
+test	Upload coverage	2026-08-28T07:08:04.5732936Z env:
+test	Upload coverage	2026-08-28T07:08:04.5735589Z   GITHUB_TOKEN: ***
+test	Upload coverage	2026-08-28T07:08:04.5735821Z   GOTOOLCHAIN: local
+test	Upload coverage	2026-08-28T07:08:04.5736035Z ##[endgroup]
+test	Upload coverage	2026-08-28T07:08:04.5799895Z ##[start-action display=Check system dependencies;id=__codecov_codecov-action.__run]
+test	Upload coverage	2026-08-28T07:08:04.5822998Z ##[group]Run missing_deps=""
+test	Upload coverage	2026-08-28T07:08:04.5823290Z ^[[36;1mmissing_deps=""^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5823532Z ^[[36;1m^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5823766Z ^[[36;1m# Check for always-required commands^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5824076Z ^[[36;1mfor cmd in bash git curl; do^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5824526Z ^[[36;1m  if ! command -v "$cmd" >/dev/null 2>&1; then^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5824860Z ^[[36;1m    missing_deps="$missing_deps $cmd"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5825131Z ^[[36;1m  fi^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5825313Z ^[[36;1mdone^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5825494Z ^[[36;1m^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5825760Z ^[[36;1m# Check for gpg only if validation is not being skipped^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5826161Z ^[[36;1mif [ "$INPUT_SKIP_VALIDATION" != "true" ]; then^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5826510Z ^[[36;1m  if ! command -v gpg >/dev/null 2>&1; then^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5826828Z ^[[36;1m    missing_deps="$missing_deps gpg"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5827400Z ^[[36;1m  fi^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5827587Z ^[[36;1mfi^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5827765Z ^[[36;1m^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5827978Z ^[[36;1m# Report missing required dependencies^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5828284Z ^[[36;1mif [ -n "$missing_deps" ]; then^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5828690Z ^[[36;1m  echo "Error: The following required dependencies are missing:$missing_deps"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5829254Z ^[[36;1m  echo "Please install these dependencies before using this action."^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5829641Z ^[[36;1m  exit 1^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5829825Z ^[[36;1mfi^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5830000Z ^[[36;1m^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5830258Z ^[[36;1mecho "All required system dependencies are available."^[[0m
+test	Upload coverage	2026-08-28T07:08:04.5863905Z shell: /usr/bin/sh -e {0}
+test	Upload coverage	2026-08-28T07:08:04.5864153Z env:
+test	Upload coverage	2026-08-28T07:08:04.5866602Z   GITHUB_TOKEN: ***
+test	Upload coverage	2026-08-28T07:08:04.5866829Z   GOTOOLCHAIN: local
+test	Upload coverage	2026-08-28T07:08:04.5867351Z   INPUT_SKIP_VALIDATION: false
+test	Upload coverage	2026-08-28T07:08:04.5867597Z ##[endgroup]
+test	Upload coverage	2026-08-28T07:08:04.6266422Z All required system dependencies are available.
+test	Upload coverage	2026-08-28T07:08:04.6281133Z ##[end-action id=__codecov_codecov-action.__run;outcome=success;conclusion=success;duration_ms=48]
+test	Upload coverage	2026-08-28T07:08:04.6284294Z ##[start-action display=Action version;id=__codecov_codecov-action.__run_2]
+test	Upload coverage	2026-08-28T07:08:04.6299909Z ##[group]Run CC_ACTION_VERSION=$(cat ${GITHUB_ACTION_PATH}/src/version)
+test	Upload coverage	2026-08-28T07:08:04.6300406Z ^[[36;1mCC_ACTION_VERSION=$(cat ${GITHUB_ACTION_PATH}/src/version)^[[0m
+test	Upload coverage	2026-08-28T07:08:04.6300878Z ^[[36;1mecho -e "\033[0;32m==>\033[0m Running Action version $CC_ACTION_VERSION"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.6336381Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	Upload coverage	2026-08-28T07:08:04.6336729Z env:
+test	Upload coverage	2026-08-28T07:08:04.6339543Z   GITHUB_TOKEN: ***
+test	Upload coverage	2026-08-28T07:08:04.6339772Z   GOTOOLCHAIN: local
+test	Upload coverage	2026-08-28T07:08:04.6339985Z ##[endgroup]
+test	Upload coverage	2026-08-28T07:08:04.6408621Z ^[[0;32m==>^[[0m Running Action version 7.0.0
+test	Upload coverage	2026-08-28T07:08:04.6414571Z ##[end-action id=__codecov_codecov-action.__run_2;outcome=success;conclusion=success;duration_ms=12]
+test	Upload coverage	2026-08-28T07:08:04.6416587Z ##[start-action display=Set safe directory;id=__codecov_codecov-action.__run_3]
+test	Upload coverage	2026-08-28T07:08:04.6455137Z ##[group]Run git config --global --add safe.directory "/home/runner/work/links-notation/links-notation"
+test	Upload coverage	2026-08-28T07:08:04.6455844Z ^[[36;1mgit config --global --add safe.directory "/home/runner/work/links-notation/links-notation"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.6456434Z ^[[36;1mgit config --global --add safe.directory "$GITHUB_WORKSPACE"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.6490079Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	Upload coverage	2026-08-28T07:08:04.6490421Z env:
+test	Upload coverage	2026-08-28T07:08:04.6492908Z   GITHUB_TOKEN: ***
+test	Upload coverage	2026-08-28T07:08:04.6493131Z   GOTOOLCHAIN: local
+test	Upload coverage	2026-08-28T07:08:04.6493359Z ##[endgroup]
+test	Upload coverage	2026-08-28T07:08:04.6585840Z ##[end-action id=__codecov_codecov-action.__run_3;outcome=success;conclusion=success;duration_ms=16]
+test	Upload coverage	2026-08-28T07:08:04.6591122Z ##[start-action display=Set fork;id=__codecov_codecov-action.__run_4]
+test	Upload coverage	2026-08-28T07:08:04.6606193Z ##[group]Run CC_FORK="false"
+test	Upload coverage	2026-08-28T07:08:04.6606479Z ^[[36;1mCC_FORK="false"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.6607360Z ^[[36;1mif [ -n "$GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_FULL_NAME" ] && [ "$GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_FULL_NAME" != "$GITHUB_REPOSITORY" ];^[[0m
+test	Upload coverage	2026-08-28T07:08:04.6607963Z ^[[36;1mthen^[[0m
+test	Upload coverage	2026-08-28T07:08:04.6608206Z ^[[36;1m  echo -e "\033[0;32m==>\033[0m Fork detected"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.6608701Z ^[[36;1m  CC_FORK="true"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.6608918Z ^[[36;1mfi^[[0m
+test	Upload coverage	2026-08-28T07:08:04.6609140Z ^[[36;1mecho "CC_FORK=$CC_FORK" >> "$GITHUB_ENV"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.6642224Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	Upload coverage	2026-08-28T07:08:04.6642571Z env:
+test	Upload coverage	2026-08-28T07:08:04.6645107Z   GITHUB_TOKEN: ***
+test	Upload coverage	2026-08-28T07:08:04.6645337Z   GOTOOLCHAIN: local
+test	Upload coverage	2026-08-28T07:08:04.6645574Z   GITHUB_EVENT_PULL_REQUEST_HEAD_LABEL: 
+test	Upload coverage	2026-08-28T07:08:04.6645891Z   GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_FULL_NAME: 
+test	Upload coverage	2026-08-28T07:08:04.6646243Z   GITHUB_REPOSITORY: link-foundation/links-notation
+test	Upload coverage	2026-08-28T07:08:04.6646544Z ##[endgroup]
+test	Upload coverage	2026-08-28T07:08:04.6707893Z ##[end-action id=__codecov_codecov-action.__run_4;outcome=success;conclusion=success;duration_ms=11]
+test	Upload coverage	2026-08-28T07:08:04.6711142Z ##[start-action display=Get OIDC token;id=__codecov_codecov-action.oidc]
+test	Upload coverage	2026-08-28T07:08:04.6763386Z ##[group]Run actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+test	Upload coverage	2026-08-28T07:08:04.6763778Z with:
+test	Upload coverage	2026-08-28T07:08:04.6764375Z   script: if (process.env.CC_USE_OIDC === 'true' && process.env.CC_FORK != 'true') {
+test	Upload coverage	  const id_token = await core.getIDToken(process.env.CC_OIDC_AUDIENCE)
+test	Upload coverage	  return id_token
+test	Upload coverage	}
+test	Upload coverage	
+test	Upload coverage	2026-08-28T07:08:04.6767463Z   github-token: ***
+test	Upload coverage	2026-08-28T07:08:04.6767685Z   debug: false
+test	Upload coverage	2026-08-28T07:08:04.6767916Z   user-agent: actions/github-script
+test	Upload coverage	2026-08-28T07:08:04.6768185Z   result-encoding: json
+test	Upload coverage	2026-08-28T07:08:04.6768399Z   retries: 0
+test	Upload coverage	2026-08-28T07:08:04.6768638Z   retry-exempt-status-codes: 400,401,403,404,422
+test	Upload coverage	2026-08-28T07:08:04.6768926Z env:
+test	Upload coverage	2026-08-28T07:08:04.6771267Z   GITHUB_TOKEN: ***
+test	Upload coverage	2026-08-28T07:08:04.6771474Z   GOTOOLCHAIN: local
+test	Upload coverage	2026-08-28T07:08:04.6771679Z   CC_FORK: false
+test	Upload coverage	2026-08-28T07:08:04.6771902Z   CC_OIDC_AUDIENCE: https://codecov.io
+test	Upload coverage	2026-08-28T07:08:04.6772171Z   CC_USE_OIDC: false
+test	Upload coverage	2026-08-28T07:08:04.6772382Z ##[endgroup]
+test	Upload coverage	2026-08-28T07:08:04.7659919Z ##[end-action id=__codecov_codecov-action.oidc;outcome=success;conclusion=success;duration_ms=94]
+test	Upload coverage	2026-08-28T07:08:04.7670245Z ##[start-action display=Get and set token;id=__codecov_codecov-action.__run_5]
+test	Upload coverage	2026-08-28T07:08:04.7686620Z ##[group]Run if [ "$INPUT_USE_OIDC" == 'true' ] && [ "$CC_FORK" != 'true' ];
+test	Upload coverage	2026-08-28T07:08:04.7687416Z ^[[36;1mif [ "$INPUT_USE_OIDC" == 'true' ] && [ "$CC_FORK" != 'true' ];^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7687985Z ^[[36;1mthen^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7688249Z ^[[36;1m  echo "CC_TOKEN=$CC_OIDC_TOKEN" >> "$GITHUB_ENV"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7688593Z ^[[36;1melif [ -n "$INPUT_CODECOV_TOKEN" ];^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7688879Z ^[[36;1mthen^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7689130Z ^[[36;1m  echo -e "\033[0;32m==>\033[0m Token set from env"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7689511Z ^[[36;1m    echo "CC_TOKEN=$INPUT_CODECOV_TOKEN" >> "$GITHUB_ENV"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7689830Z ^[[36;1melse^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7690030Z ^[[36;1m  if [ -n "$INPUT_TOKEN" ];^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7690277Z ^[[36;1m  then^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7690532Z ^[[36;1m    echo -e "\033[0;32m==>\033[0m Token set from input"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7690912Z ^[[36;1m    CC_TOKEN=$(echo "$INPUT_TOKEN" | tr -d '\n')^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7691252Z ^[[36;1m    echo "CC_TOKEN=$CC_TOKEN" >> "$GITHUB_ENV"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7691539Z ^[[36;1m  fi^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7691720Z ^[[36;1mfi^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7728733Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	Upload coverage	2026-08-28T07:08:04.7729089Z env:
+test	Upload coverage	2026-08-28T07:08:04.7731561Z   GITHUB_TOKEN: ***
+test	Upload coverage	2026-08-28T07:08:04.7731787Z   GOTOOLCHAIN: local
+test	Upload coverage	2026-08-28T07:08:04.7732002Z   CC_FORK: false
+test	Upload coverage	2026-08-28T07:08:04.7732196Z   CC_OIDC_TOKEN: 
+test	Upload coverage	2026-08-28T07:08:04.7732421Z   CC_OIDC_AUDIENCE: https://codecov.io
+test	Upload coverage	2026-08-28T07:08:04.7732696Z   INPUT_USE_OIDC: false
+test	Upload coverage	2026-08-28T07:08:04.7732907Z   INPUT_TOKEN: 
+test	Upload coverage	2026-08-28T07:08:04.7733111Z   INPUT_CODECOV_TOKEN: 
+test	Upload coverage	2026-08-28T07:08:04.7733329Z ##[endgroup]
+test	Upload coverage	2026-08-28T07:08:04.7819774Z ##[end-action id=__codecov_codecov-action.__run_5;outcome=success;conclusion=success;duration_ms=14]
+test	Upload coverage	2026-08-28T07:08:04.7829203Z ##[start-action display=Override branch for forks;id=__codecov_codecov-action.__run_6]
+test	Upload coverage	2026-08-28T07:08:04.7879820Z ##[group]Run if [ -z "$CC_BRANCH" ] && [ -z "$CC_TOKEN" ] && [ "$CC_FORK" == 'true' ]
+test	Upload coverage	2026-08-28T07:08:04.7880492Z ^[[36;1mif [ -z "$CC_BRANCH" ] && [ -z "$CC_TOKEN" ] && [ "$CC_FORK" == 'true' ]^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7880869Z ^[[36;1mthen^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7881627Z ^[[36;1m  echo -e "\033[0;32m==>\033[0m Fork detected, setting branch to $GITHUB_EVENT_PULL_REQUEST_HEAD_LABEL"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7882226Z ^[[36;1m  TOKENLESS="$GITHUB_EVENT_PULL_REQUEST_HEAD_LABEL"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7882616Z ^[[36;1m  CC_BRANCH="$GITHUB_EVENT_PULL_REQUEST_HEAD_LABEL"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7882989Z ^[[36;1m  echo "TOKENLESS=$TOKENLESS" >> "$GITHUB_ENV"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7883285Z ^[[36;1mfi^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7883470Z ^[[36;1m^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7883699Z ^[[36;1mecho "CC_BRANCH=$CC_BRANCH" >> "$GITHUB_ENV"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.7920561Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	Upload coverage	2026-08-28T07:08:04.7920927Z env:
+test	Upload coverage	2026-08-28T07:08:04.7923458Z   GITHUB_TOKEN: ***
+test	Upload coverage	2026-08-28T07:08:04.7923685Z   GOTOOLCHAIN: local
+test	Upload coverage	2026-08-28T07:08:04.7923899Z   CC_FORK: false
+test	Upload coverage	2026-08-28T07:08:04.7924098Z   CC_BRANCH: 
+test	Upload coverage	2026-08-28T07:08:04.7924334Z   GITHUB_EVENT_PULL_REQUEST_HEAD_LABEL: 
+test	Upload coverage	2026-08-28T07:08:04.7924645Z   GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_FULL_NAME: 
+test	Upload coverage	2026-08-28T07:08:04.7924999Z   GITHUB_REPOSITORY: link-foundation/links-notation
+test	Upload coverage	2026-08-28T07:08:04.7925302Z ##[endgroup]
+test	Upload coverage	2026-08-28T07:08:04.7990464Z ##[end-action id=__codecov_codecov-action.__run_6;outcome=success;conclusion=success;duration_ms=15]
+test	Upload coverage	2026-08-28T07:08:04.7994831Z ##[start-action display=Override commits and pr for pull requests;id=__codecov_codecov-action.__run_7]
+test	Upload coverage	2026-08-28T07:08:04.8009910Z ##[group]Run if [ -z "$CC_SHA" ];
+test	Upload coverage	2026-08-28T07:08:04.8010202Z ^[[36;1mif [ -z "$CC_SHA" ];^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8010444Z ^[[36;1mthen^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8010698Z ^[[36;1m  CC_SHA="$GITHUB_EVENT_PULL_REQUEST_HEAD_SHA"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8011020Z ^[[36;1mfi^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8011268Z ^[[36;1mif [ -z "$CC_PR" ] && [ "$CC_FORK" == 'true' ];^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8011565Z ^[[36;1mthen^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8011773Z ^[[36;1m  CC_PR="$GITHUB_EVENT_NUMBER"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8012029Z ^[[36;1mfi^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8012210Z ^[[36;1m^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8012591Z ^[[36;1mecho "CC_SHA=$CC_SHA" >> "$GITHUB_ENV"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8012906Z ^[[36;1mecho "CC_PR=$CC_PR" >> "$GITHUB_ENV"^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8045934Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	Upload coverage	2026-08-28T07:08:04.8046278Z env:
+test	Upload coverage	2026-08-28T07:08:04.8049015Z   GITHUB_TOKEN: ***
+test	Upload coverage	2026-08-28T07:08:04.8049252Z   GOTOOLCHAIN: local
+test	Upload coverage	2026-08-28T07:08:04.8049469Z   CC_FORK: false
+test	Upload coverage	2026-08-28T07:08:04.8049663Z   CC_BRANCH: 
+test	Upload coverage	2026-08-28T07:08:04.8049846Z   CC_PR: 
+test	Upload coverage	2026-08-28T07:08:04.8050017Z   CC_SHA: 
+test	Upload coverage	2026-08-28T07:08:04.8050203Z   GITHUB_EVENT_NAME: push
+test	Upload coverage	2026-08-28T07:08:04.8050438Z   GITHUB_EVENT_NUMBER: 
+test	Upload coverage	2026-08-28T07:08:04.8050685Z   GITHUB_EVENT_PULL_REQUEST_HEAD_SHA: 
+test	Upload coverage	2026-08-28T07:08:04.8050947Z ##[endgroup]
+test	Upload coverage	2026-08-28T07:08:04.8111730Z ##[end-action id=__codecov_codecov-action.__run_7;outcome=success;conclusion=success;duration_ms=11]
+test	Upload coverage	2026-08-28T07:08:04.8121280Z ##[start-action display=Upload coverage to Codecov;id=__codecov_codecov-action.__run_8]
+test	Upload coverage	2026-08-28T07:08:04.8136102Z ##[group]Run ${GITHUB_ACTION_PATH}/dist/codecov.sh
+test	Upload coverage	2026-08-28T07:08:04.8136500Z ^[[36;1m${GITHUB_ACTION_PATH}/dist/codecov.sh^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8169319Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	Upload coverage	2026-08-28T07:08:04.8169661Z env:
+test	Upload coverage	2026-08-28T07:08:04.8172142Z   GITHUB_TOKEN: ***
+test	Upload coverage	2026-08-28T07:08:04.8172367Z   GOTOOLCHAIN: local
+test	Upload coverage	2026-08-28T07:08:04.8172581Z   CC_FORK: false
+test	Upload coverage	2026-08-28T07:08:04.8172770Z   CC_BRANCH: 
+test	Upload coverage	2026-08-28T07:08:04.8172958Z   CC_SHA: 
+test	Upload coverage	2026-08-28T07:08:04.8173129Z   CC_PR: 
+test	Upload coverage	2026-08-28T07:08:04.8173301Z   CC_BASE_SHA: 
+test	Upload coverage	2026-08-28T07:08:04.8173500Z   CC_BINARY: 
+test	Upload coverage	2026-08-28T07:08:04.8173689Z   CC_BUILD: 
+test	Upload coverage	2026-08-28T07:08:04.8174036Z   CC_BUILD_URL: 
+test	Upload coverage	2026-08-28T07:08:04.8174230Z   CC_CODE: 
+test	Upload coverage	2026-08-28T07:08:04.8174407Z   CC_DIR: 
+test	Upload coverage	2026-08-28T07:08:04.8174598Z   CC_DISABLE_FILE_FIXES: false
+test	Upload coverage	2026-08-28T07:08:04.8174844Z   CC_DISABLE_SEARCH: false
+test	Upload coverage	2026-08-28T07:08:04.8175076Z   CC_DISABLE_TELEM: false
+test	Upload coverage	2026-08-28T07:08:04.8175299Z   CC_DRY_RUN: false
+test	Upload coverage	2026-08-28T07:08:04.8175507Z   CC_ENTERPRISE_URL: 
+test	Upload coverage	2026-08-28T07:08:04.8175720Z   CC_ENV: 
+test	Upload coverage	2026-08-28T07:08:04.8175896Z   CC_EXCLUDES: 
+test	Upload coverage	2026-08-28T07:08:04.8176091Z   CC_FAIL_ON_ERROR: false
+test	Upload coverage	2026-08-28T07:08:04.8176319Z   CC_FILES: go/coverage.out
+test	Upload coverage	2026-08-28T07:08:04.8176542Z   CC_FLAGS: go
+test	Upload coverage	2026-08-28T07:08:04.8176730Z   CC_FORCE: 
+test	Upload coverage	2026-08-28T07:08:04.8177158Z   CC_GCOV_ARGS: 
+test	Upload coverage	2026-08-28T07:08:04.8177382Z   CC_GCOV_EXECUTABLE: gcov
+test	Upload coverage	2026-08-28T07:08:04.8177609Z   CC_GCOV_IGNORE: 
+test	Upload coverage	2026-08-28T07:08:04.8177808Z   CC_GCOV_INCLUDE: 
+test	Upload coverage	2026-08-28T07:08:04.8178020Z   CC_GIT_SERVICE: github
+test	Upload coverage	2026-08-28T07:08:04.8178266Z   CC_HANDLE_NO_REPORTS_FOUND: false
+test	Upload coverage	2026-08-28T07:08:04.8178523Z   CC_JOB_CODE: 
+test	Upload coverage	2026-08-28T07:08:04.8178721Z   CC_LEGACY: false
+test	Upload coverage	2026-08-28T07:08:04.8178910Z   CC_NAME: 
+test	Upload coverage	2026-08-28T07:08:04.8179095Z   CC_NETWORK_FILTER: 
+test	Upload coverage	2026-08-28T07:08:04.8179303Z   CC_NETWORK_PREFIX: 
+test	Upload coverage	2026-08-28T07:08:04.8179512Z   CC_NETWORK_ROOT_FOLDER: 
+test	Upload coverage	2026-08-28T07:08:04.8179722Z   CC_OS: 
+test	Upload coverage	2026-08-28T07:08:04.8179898Z   CC_PARENT_SHA: 
+test	Upload coverage	2026-08-28T07:08:04.8180090Z   CC_PLUGINS: 
+test	Upload coverage	2026-08-28T07:08:04.8180303Z   CC_RECURSE_SUBMODULES: false
+test	Upload coverage	2026-08-28T07:08:04.8180534Z   CC_REPORT_TYPE: 
+test	Upload coverage	2026-08-28T07:08:04.8180740Z   CC_RUN_CMD: upload-coverage
+test	Upload coverage	2026-08-28T07:08:04.8180974Z   CC_SERVICE: github
+test	Upload coverage	2026-08-28T07:08:04.8181188Z   CC_SKIP_VALIDATION: false
+test	Upload coverage	2026-08-28T07:08:04.8181405Z   CC_SLUG: 
+test	Upload coverage	2026-08-28T07:08:04.8181585Z   CC_SWIFT_PROJECT: 
+test	Upload coverage	2026-08-28T07:08:04.8181786Z   CC_USE_PYPI: false
+test	Upload coverage	2026-08-28T07:08:04.8181987Z   CC_VERBOSE: false
+test	Upload coverage	2026-08-28T07:08:04.8182183Z   CC_VERSION: latest
+test	Upload coverage	2026-08-28T07:08:04.8182377Z   CC_YML_PATH: 
+test	Upload coverage	2026-08-28T07:08:04.8182568Z ##[endgroup]
+test	Upload coverage	2026-08-28T07:08:04.8263726Z      _____          _
+test	Upload coverage	2026-08-28T07:08:04.8264195Z     / ____|        | |
+test	Upload coverage	2026-08-28T07:08:04.8264639Z    | |     ___   __| | ___  ___ _____   __
+test	Upload coverage	2026-08-28T07:08:04.8265070Z    | |    / _ \ / _` |/ _ \/ __/ _ \ \ / /
+test	Upload coverage	2026-08-28T07:08:04.8265384Z    | |___| (_) | (_| |  __/ (_| (_) \ V /
+test	Upload coverage	2026-08-28T07:08:04.8265703Z     \_____\___/ \__,_|\___|\___\___/ \_/
+test	Upload coverage	2026-08-28T07:08:04.8266704Z                            ^[[0;31m Wrapper-0.2.9^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8267384Z                            
+test	Upload coverage	2026-08-28T07:08:04.8321136Z ^[[0;32m==>^[[0m Detected ^[[0;36mlinux^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8322120Z ^[[0;32m ->^[[0m Downloading ^[[0;36mhttps://cli.codecov.io/latest/linux/codecov^[[0m
+test	Upload coverage	2026-08-28T07:08:04.8853315Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+test	Upload coverage	2026-08-28T07:08:04.8855117Z                                  Dload  Upload   Total   Spent    Left  Speed
+test	Upload coverage	2026-08-28T07:08:04.8855547Z 
+test	Upload coverage	2026-08-28T07:08:04.9729739Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+test	Upload coverage	2026-08-28T07:08:05.0642538Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+test	Upload coverage	2026-08-28T07:08:05.0678055Z 100  9.9M  100  9.9M    0     0  55.4M      0 --:--:-- --:--:-- --:--:-- 55.4M
+test	Upload coverage	2026-08-28T07:08:05.0679682Z ^[[0;32m==>^[[0m Finishing downloading ^[[0;36mlinux:latest^[[0m
+test	Upload coverage	2026-08-28T07:08:05.1264914Z       Version: ^[[0;36mv11.3.1^[[0m
+test	Upload coverage	2026-08-28T07:08:05.1265512Z  
+test	Upload coverage	2026-08-28T07:08:05.2504537Z gpg: directory '/home/runner/.gnupg' created
+test	Upload coverage	2026-08-28T07:08:05.2506169Z gpg: keybox '/home/runner/.gnupg/pubring.kbx' created
+test	Upload coverage	2026-08-28T07:08:05.4418070Z gpg: /home/runner/.gnupg/trustdb.gpg: trustdb created
+test	Upload coverage	2026-08-28T07:08:05.4419330Z gpg: key 806BB28AED779869: public key "Codecov Uploader (Codecov Uploader Verification Key) <security@codecov.io>" imported
+test	Upload coverage	2026-08-28T07:08:05.5395606Z gpg: Total number processed: 1
+test	Upload coverage	2026-08-28T07:08:05.5395982Z gpg:               imported: 1
+test	Upload coverage	2026-08-28T07:08:05.5403249Z ^[[0;32m==>^[[0m Verifying GPG signature integrity
+test	Upload coverage	2026-08-28T07:08:05.5404482Z ^[[0;32m ->^[[0m Downloading ^[[0;36mhttps://cli.codecov.io/latest/linux/codecov.SHA256SUM^[[0m
+test	Upload coverage	2026-08-28T07:08:05.5406869Z ^[[0;32m ->^[[0m Downloading ^[[0;36mhttps://cli.codecov.io/latest/linux/codecov.SHA256SUM.sig^[[0m
+test	Upload coverage	2026-08-28T07:08:05.5407651Z  
+test	Upload coverage	2026-08-28T07:08:05.6379522Z gpg: Signature made Thu Jul  9 01:37:57 2026 UTC
+test	Upload coverage	2026-08-28T07:08:05.6380421Z gpg:                using RSA key 27034E7FDB850E0BBC2C62FF806BB28AED779869
+test	Upload coverage	2026-08-28T07:08:05.6382070Z gpg: Good signature from "Codecov Uploader (Codecov Uploader Verification Key) <security@codecov.io>" [unknown]
+test	Upload coverage	2026-08-28T07:08:05.6382993Z gpg: WARNING: This key is not certified with a trusted signature!
+test	Upload coverage	2026-08-28T07:08:05.6383636Z gpg:          There is no indication that the signature belongs to the owner.
+test	Upload coverage	2026-08-28T07:08:05.6384300Z Primary key fingerprint: 2703 4E7F DB85 0E0B BC2C  62FF 806B B28A ED77 9869
+test	Upload coverage	2026-08-28T07:08:05.7156207Z codecov: OK
+test	Upload coverage	2026-08-28T07:08:05.7166956Z ^[[0;32m==>^[[0m CLI integrity verified
+test	Upload coverage	2026-08-28T07:08:05.7167484Z 
+test	Upload coverage	2026-08-28T07:08:05.7739811Z ^[[0;32m ->^[[0m Token length: 0
+test	Upload coverage	2026-08-28T07:08:05.7740738Z ^[[0;32m==>^[[0m Running upload-coverage
+test	Upload coverage	2026-08-28T07:08:05.7749496Z       ^[[0;36m./codecov  upload-coverage --git-service github --file go/coverage.out --flag go --gcov-executable gcov^[[0m
+test	Upload coverage	2026-08-28T07:08:06.1326738Z info - 2026-08-28 07:08:06,132 -- ci service found: github-actions
+test	Upload coverage	2026-08-28T07:08:06.1418000Z warning - 2026-08-28 07:08:06,141 -- No config file could be found. Ignoring config.
+test	Upload coverage	2026-08-28T07:08:06.1731177Z warning - 2026-08-28 07:08:06,172 -- xcrun is not installed or can't be found.
+test	Upload coverage	2026-08-28T07:08:06.1806704Z warning - 2026-08-28 07:08:06,180 -- No gcov data found.
+test	Upload coverage	2026-08-28T07:08:06.1810417Z warning - 2026-08-28 07:08:06,180 -- coverage.py is not installed or can't be found.
+test	Upload coverage	2026-08-28T07:08:06.2100863Z info - 2026-08-28 07:08:06,209 -- Found 2 coverage files to report
+test	Upload coverage	2026-08-28T07:08:06.2102170Z info - 2026-08-28 07:08:06,210 -- > /home/runner/work/links-notation/links-notation/experiments/test_coverage_data.json
+test	Upload coverage	2026-08-28T07:08:06.2103819Z info - 2026-08-28 07:08:06,210 -- > /home/runner/work/links-notation/links-notation/go/coverage.out
+test	Upload coverage	2026-08-28T07:08:06.6395465Z info - 2026-08-28 07:08:06,639 -- Upload queued for processing complete
+test	Upload coverage	2026-08-28T07:08:06.6396737Z error - 2026-08-28 07:08:06,639 -- Upload queued for processing failed: {"message":"Token required - not valid tokenless upload"}
+test	Upload coverage	2026-08-28T07:08:06.8075127Z ##[end-action id=__codecov_codecov-action.__run_8;outcome=success;conclusion=success;duration_ms=1995]
+test	Post Setup Go	﻿2026-08-28T07:08:06.8154455Z Post job cleanup.
+test	Post Setup Go	2026-08-28T07:08:06.9364309Z [command]/opt/hostedtoolcache/go/1.21.13/x64/bin/go env GOMODCACHE
+test	Post Setup Go	2026-08-28T07:08:06.9414108Z [command]/opt/hostedtoolcache/go/1.21.13/x64/bin/go env GOCACHE
+test	Post Setup Go	2026-08-28T07:08:06.9444161Z /home/runner/go/pkg/mod
+test	Post Setup Go	2026-08-28T07:08:06.9465896Z /home/runner/.cache/go-build
+test	Post Setup Go	2026-08-28T07:08:06.9472886Z [warning]Cache folder path is retrieved but doesn't exist on disk: /home/runner/go/pkg/mod
+test	Post Setup Go	2026-08-28T07:08:06.9474117Z Primary key was not generated. Please check the log messages above for more errors or information
+test	Post Run actions/checkout@v6	﻿2026-08-28T07:08:06.9640652Z Post job cleanup.
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.0521237Z [command]/usr/bin/git version
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.0564871Z git version 2.55.0
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.0600900Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/d984964b-3742-4001-833b-6e5fa85664c3/.gitconfig'
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.0612015Z Temporarily overriding HOME='/home/runner/work/_temp/d984964b-3742-4001-833b-6e5fa85664c3' before making global git config changes
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.0613822Z Adding repository directory to the temporary git global config as a safe directory
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.0619147Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.0652773Z Removing SSH command configuration
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.0660165Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.0696508Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.0974252Z Removing HTTP extra header
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.0980415Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1022920Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1335300Z Removing includeIf entries pointing to credentials config files
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1339700Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1384841Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1396085Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1397370Z includeif.gitdir:/github/workspace/.git.path
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1398586Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1401559Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1433635Z /home/runner/work/_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1458530Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1500489Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1535781Z /home/runner/work/_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1552393Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1608413Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1630108Z /github/runner_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1643240Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1686360Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1718076Z /github/runner_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1742065Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.1774452Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Post Run actions/checkout@v6	2026-08-28T07:08:07.2011467Z Removing credentials config '/home/runner/work/_temp/git-credentials-1b9a02b9-852b-4987-9fd0-c8bdd5ca7383.config'
+test	Complete job	﻿2026-08-28T07:08:07.2180228Z Cleaning up orphan processes
+publishRelease	Set up job	﻿2026-08-28T07:08:13.0195190Z Current runner version: '2.336.0'
+publishRelease	Set up job	2026-08-28T07:08:13.0224878Z ##[group]Runner Image Provisioner
+publishRelease	Set up job	2026-08-28T07:08:13.0225874Z Hosted Compute Agent
+publishRelease	Set up job	2026-08-28T07:08:13.0226511Z Version: 20260819.586
+publishRelease	Set up job	2026-08-28T07:08:13.0227176Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+publishRelease	Set up job	2026-08-28T07:08:13.0227996Z Build Date: 2026-08-18T23:20:18Z
+publishRelease	Set up job	2026-08-28T07:08:13.0228750Z Worker ID: {a54b0b8a-ab81-47b8-82cb-085de546a14d}
+publishRelease	Set up job	2026-08-28T07:08:13.0229488Z Azure Region: centralus
+publishRelease	Set up job	2026-08-28T07:08:13.0230167Z ##[endgroup]
+publishRelease	Set up job	2026-08-28T07:08:13.0231919Z ##[group]Operating System
+publishRelease	Set up job	2026-08-28T07:08:13.0232738Z Ubuntu
+publishRelease	Set up job	2026-08-28T07:08:13.0233342Z 24.04.4
+publishRelease	Set up job	2026-08-28T07:08:13.0233906Z LTS
+publishRelease	Set up job	2026-08-28T07:08:13.0234517Z ##[endgroup]
+publishRelease	Set up job	2026-08-28T07:08:13.0235120Z ##[group]Runner Image
+publishRelease	Set up job	2026-08-28T07:08:13.0235783Z Image: ubuntu-24.04
+publishRelease	Set up job	2026-08-28T07:08:13.0236424Z Version: 20260823.283.1
+publishRelease	Set up job	2026-08-28T07:08:13.0237506Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+publishRelease	Set up job	2026-08-28T07:08:13.0239330Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+publishRelease	Set up job	2026-08-28T07:08:13.0240493Z ##[endgroup]
+publishRelease	Set up job	2026-08-28T07:08:13.0243634Z ##[group]GITHUB_TOKEN Permissions
+publishRelease	Set up job	2026-08-28T07:08:13.0246138Z Actions: write
+publishRelease	Set up job	2026-08-28T07:08:13.0246795Z ArtifactMetadata: write
+publishRelease	Set up job	2026-08-28T07:08:13.0247412Z Attestations: write
+publishRelease	Set up job	2026-08-28T07:08:13.0248122Z Checks: write
+publishRelease	Set up job	2026-08-28T07:08:13.0248713Z CodeQuality: write
+publishRelease	Set up job	2026-08-28T07:08:13.0249338Z Contents: write
+publishRelease	Set up job	2026-08-28T07:08:13.0249951Z CopilotRequests: write
+publishRelease	Set up job	2026-08-28T07:08:13.0250729Z Deployments: write
+publishRelease	Set up job	2026-08-28T07:08:13.0251402Z Discussions: write
+publishRelease	Set up job	2026-08-28T07:08:13.0251995Z Drives: write
+publishRelease	Set up job	2026-08-28T07:08:13.0252628Z Issues: write
+publishRelease	Set up job	2026-08-28T07:08:13.0253206Z Metadata: read
+publishRelease	Set up job	2026-08-28T07:08:13.0253854Z Models: read
+publishRelease	Set up job	2026-08-28T07:08:13.0254506Z Packages: write
+publishRelease	Set up job	2026-08-28T07:08:13.0255084Z Pages: write
+publishRelease	Set up job	2026-08-28T07:08:13.0255630Z PullRequests: write
+publishRelease	Set up job	2026-08-28T07:08:13.0256310Z RepositoryProjects: write
+publishRelease	Set up job	2026-08-28T07:08:13.0256999Z SecurityEvents: write
+publishRelease	Set up job	2026-08-28T07:08:13.0257676Z Statuses: write
+publishRelease	Set up job	2026-08-28T07:08:13.0258325Z VulnerabilityAlerts: read
+publishRelease	Set up job	2026-08-28T07:08:13.0258934Z ##[endgroup]
+publishRelease	Set up job	2026-08-28T07:08:13.0261306Z Secret source: Actions
+publishRelease	Set up job	2026-08-28T07:08:13.0262648Z Prepare workflow directory
+publishRelease	Set up job	2026-08-28T07:08:13.0805091Z Prepare all required actions
+publishRelease	Set up job	2026-08-28T07:08:13.0853214Z Getting action download info
+publishRelease	Set up job	2026-08-28T07:08:13.3334471Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+publishRelease	Set up job	2026-08-28T07:08:13.6087588Z Complete job name: publishRelease
+publishRelease	Run actions/checkout@v6	﻿2026-08-28T07:08:13.6797940Z ##[group]Run actions/checkout@v6
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6798856Z with:
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6799303Z   submodules: true
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6799817Z   repository: link-foundation/links-notation
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6804306Z   token: ***
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6804769Z   ssh-strict: true
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6805234Z   ssh-user: git
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6805693Z   persist-credentials: true
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6806232Z   clean: true
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6806698Z   sparse-checkout-cone-mode: true
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6807237Z   fetch-depth: 1
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6807680Z   fetch-tags: false
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6808146Z   show-progress: true
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6808599Z   lfs: false
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6809120Z   set-safe-directory: true
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6809641Z   allow-unsafe-pr-checkout: false
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6810506Z env:
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6814514Z   GITHUB_TOKEN: ***
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.6814975Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.7928092Z Syncing repository: link-foundation/links-notation
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.7931167Z ##[group]Getting Git version info
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.7932424Z Working directory is '/home/runner/work/links-notation/links-notation'
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.7934227Z [command]/usr/bin/git version
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.8733072Z git version 2.55.0
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.8744550Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.8762715Z Temporarily overriding HOME='/home/runner/work/_temp/f9dd1a5b-ffbd-4c83-8262-abd8fe37ea86' before making global git config changes
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.8766015Z Adding repository directory to the temporary git global config as a safe directory
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.8772226Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.8835741Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.8840893Z ##[group]Determining repository object format
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.8842847Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.8843690Z ##[group]Initializing the repository
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.8847493Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9392640Z hint: Using 'master' as the name for the initial branch. This default branch name
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9395049Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9397130Z hint: to use in all of your new repositories, which will suppress this warning,
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9398732Z hint: call:
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9399809Z hint:
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9400871Z hint: 	git config --global init.defaultBranch <name>
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9401927Z hint:
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9402871Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9404353Z hint: 'development'. The just-created branch can be renamed via this command:
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9405157Z hint:
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9405636Z hint: 	git branch -m <name>
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9406350Z hint:
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9407548Z hint: Disable this message with "git config set advice.defaultBranchName false"
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9409486Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9413387Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9807339Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9809484Z ##[group]Disabling automatic garbage collection
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9812148Z [command]/usr/bin/git config --local gc.auto 0
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9858883Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9860126Z ##[group]Setting up auth
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9861335Z Removing SSH command configuration
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9871376Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:13.9928345Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.2434310Z Removing HTTP extra header
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.2443240Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.2512988Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.2766159Z Removing includeIf entries pointing to credentials config files
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.2773907Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.2815545Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.3066339Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.3254267Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.3735454Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.4203812Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.4264942Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.4305459Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.4306641Z ##[group]Fetching the repository
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:14.4315708Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4958f3cf8012ba9e67f19309b9c58984f7ce106a:refs/remotes/origin/main
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.6842287Z From https://github.com/link-foundation/links-notation
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.6844382Z  * [new ref]         4958f3cf8012ba9e67f19309b9c58984f7ce106a -> origin/main
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.6853495Z [command]/usr/bin/git branch --list --remote origin/main
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.6886135Z   origin/main
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.6894895Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.6924958Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.6929735Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.6931309Z ##[group]Determining the checkout info
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.6932609Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.6934997Z [command]/usr/bin/git sparse-checkout disable
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.6985988Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7022525Z ##[group]Checking out the ref
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7024045Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7292125Z Switched to a new branch 'main'
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7298926Z branch 'main' set up to track 'origin/main'.
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7304580Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7306703Z ##[group]Setting up auth for fetching submodules
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7311961Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7357454Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7393693Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7432366Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7478822Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7513772Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7516334Z ##[group]Fetching submodules
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7518153Z [command]/usr/bin/git submodule sync
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.7770620Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.8025809Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.8270921Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.8273595Z ##[group]Persisting credentials for submodules
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.8280954Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.8528391Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.8779541Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.9051406Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.9334846Z ##[endgroup]
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.9379203Z [command]/usr/bin/git log -1 --format=%H
+publishRelease	Run actions/checkout@v6	2026-08-28T07:08:15.9412868Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+publishRelease	Create Go module tag and GitHub release	﻿2026-08-28T07:08:15.9646211Z ##[group]Run PACKAGE_VERSION=$(cat VERSION)
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9647124Z ^[[36;1mPACKAGE_VERSION=$(cat VERSION)^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9647821Z ^[[36;1m# Go modules in the go/ subdirectory require tags in the form go/vX.Y.Z^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9648516Z ^[[36;1mTAG_NAME="go/v$PACKAGE_VERSION"^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9649113Z ^[[36;1mecho "Checking if release $TAG_NAME already exists"^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9649696Z ^[[36;1m^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9650182Z ^[[36;1mif gh release view "$TAG_NAME" >/dev/null 2>&1; then^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9650982Z ^[[36;1m  echo "Release $TAG_NAME already exists"^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9651515Z ^[[36;1melse^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9651957Z ^[[36;1m  gh release create "$TAG_NAME" \^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9652518Z ^[[36;1m    --title "[Go] $PACKAGE_VERSION" \^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9653399Z ^[[36;1m    --notes "Go module release. Install with: \`go get github.com/link-foundation/links-notation/go@v$PACKAGE_VERSION\`"^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9654248Z ^[[36;1mfi^[[0m
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9700163Z shell: /usr/bin/bash -e {0}
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9700993Z env:
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9704393Z   GITHUB_TOKEN: ***
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9704841Z ##[endgroup]
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:15.9804771Z Checking if release go/v0.15.0 already exists
+publishRelease	Create Go module tag and GitHub release	2026-08-28T07:08:17.2863743Z https://github.com/link-foundation/links-notation/releases/tag/go/v0.15.0
+publishRelease	Post Run actions/checkout@v6	﻿2026-08-28T07:08:17.3094066Z Post job cleanup.
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.3971980Z [command]/usr/bin/git version
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4016285Z git version 2.55.0
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4088296Z Temporarily overriding HOME='/home/runner/work/_temp/0a1c74a2-0ed4-41ba-b4cf-c7307dbae517' before making global git config changes
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4089748Z Adding repository directory to the temporary git global config as a safe directory
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4093842Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4134138Z Removing SSH command configuration
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4142450Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4186232Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4456683Z Removing HTTP extra header
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4464098Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4515772Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4783493Z Removing includeIf entries pointing to credentials config files
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4794796Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4828550Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4829945Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4831447Z includeif.gitdir:/github/workspace/.git.path
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4832384Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4840150Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4870956Z /home/runner/work/_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4884857Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4933564Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4979481Z /home/runner/work/_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.4993939Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.5047565Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.5078751Z /github/runner_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.5088357Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.5129137Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.5158137Z /github/runner_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.5167111Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.5207594Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+publishRelease	Post Run actions/checkout@v6	2026-08-28T07:08:17.5462056Z Removing credentials config '/home/runner/work/_temp/git-credentials-3e4efe5c-6a2c-490b-84bf-168ef3226d79.config'
+publishRelease	Complete job	﻿2026-08-28T07:08:17.5614776Z Cleaning up orphan processes
