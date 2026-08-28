@@ -1,0 +1,152 @@
+linkChecker	Check links with lychee	﻿2026-08-28T12:50:32.2262349Z ##[group]Run lycheeverse/lychee-action@v2
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2262623Z with:
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2263341Z   args: --no-progress --cache --max-cache-age 1d --max-retries 3 --timeout 30 --exclude-path docs/case-studies --exclude-path docs/website/dist --exclude-path js/node_modules --exclude-path docs/website/node_modules './**/*.md'
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2264375Z   fail: true
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2264557Z   jobSummary: true
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2264725Z   debug: false
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2264886Z   failIfEmpty: true
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2265052Z   format: markdown
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2265222Z   lycheeVersion: v0.24.2
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2265413Z   output: lychee/out.md
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2265588Z   checkbox: true
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2267834Z   token: ***
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2268018Z   workingDirectory: .
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2268197Z env:
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2268353Z   CI_VERBOSE: false
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2270309Z   GITHUB_TOKEN: ***
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2270480Z ##[endgroup]
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2327294Z ##[start-action display=Set up environment;id=__lycheeverse_lychee-action.__run]
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2369515Z ##[group]Run # Install into $RUNNER_TEMP (not $HOME) so the install path is stable
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2370356Z ^[[36;1m# Install into $RUNNER_TEMP (not $HOME) so the install path is stable^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2370782Z ^[[36;1m# across composite steps. On some runners $HOME is overridden per step^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2371177Z ^[[36;1m# (e.g. actions/checkout temporarily sets it), which made the PATH^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2371546Z ^[[36;1m# entry from one step and the install in another step diverge.^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2371866Z ^[[36;1mecho "$RUNNER_TEMP/lychee/bin" >> "$GITHUB_PATH"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2372154Z ^[[36;1mmkdir -p "$RUNNER_TEMP/lychee/bin"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2412454Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2412779Z env:
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2412966Z   CI_VERBOSE: false
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2415378Z   GITHUB_TOKEN: ***
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2415606Z ##[endgroup]
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2527724Z ##[end-action id=__lycheeverse_lychee-action.__run;outcome=success;conclusion=success;duration_ms=19]
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2532124Z ##[start-action display=Download and extract lychee in temp directory;id=__lycheeverse_lychee-action.lychee-setup]
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2552856Z ##[group]Run # Create a temporary directory for downloads and extraction
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2553302Z ^[[36;1m# Create a temporary directory for downloads and extraction^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2553876Z ^[[36;1mTEMP_DIR="${RUNNER_TEMP}/lychee-download"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2554160Z ^[[36;1mrm -rf "${TEMP_DIR}" && mkdir -p "${TEMP_DIR}"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2554408Z ^[[36;1mcd "${TEMP_DIR}"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2554588Z ^[[36;1m^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2554745Z ^[[36;1mARCH=$(uname -m)^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2554999Z ^[[36;1m# Determine filename and download URL based on version^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2555334Z ^[[36;1mif [[ "${LYCHEE_VERSION}" =~ ^v0\.0|^v0\.1[0-5]\. ]]; then^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2555709Z ^[[36;1m  FILENAME="lychee-${LYCHEE_VERSION}-${ARCH}-unknown-linux-gnu.tar.gz"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2556242Z ^[[36;1m  DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/download/${LYCHEE_VERSION}/${FILENAME}"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2556664Z ^[[36;1melse^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2556916Z ^[[36;1m  FILENAME="lychee-${ARCH}-unknown-linux-gnu.tar.gz"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2557287Z ^[[36;1m  if [[ "${LYCHEE_VERSION}" == 'nightly' ]]; then^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2557676Z ^[[36;1m    DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/download/nightly/${FILENAME}"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2558067Z ^[[36;1m  elif [[ "${LYCHEE_VERSION}" == 'latest' ]]; then^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2558452Z ^[[36;1m    DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/latest/download/${FILENAME}"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2558799Z ^[[36;1m  else^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2559153Z ^[[36;1m    DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/download/lychee-${LYCHEE_VERSION}/${FILENAME}"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2559776Z ^[[36;1m  fi^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2559932Z ^[[36;1mfi^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2560091Z ^[[36;1m^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2560284Z ^[[36;1mecho "Downloading from: ${DOWNLOAD_URL}"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2560534Z ^[[36;1mcurl -sfLO "${DOWNLOAD_URL}"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2560736Z ^[[36;1m^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2560898Z ^[[36;1mecho "Extracting ${FILENAME}"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2561126Z ^[[36;1mtar -xvzf "${FILENAME}"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2561336Z ^[[36;1mrm -rv "${FILENAME}"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2561519Z ^[[36;1m^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2561735Z ^[[36;1m# Detect if lychee binary is in a subfolder within the tar.gz^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2562029Z ^[[36;1mif ! [[ -f "${TEMP_DIR}/lychee" ]]; then^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2562343Z ^[[36;1m  TEMP_DIR="$(echo "${TEMP_DIR}"/lychee-*)"  # need `echo` to evaluate glob^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2562629Z ^[[36;1mfi^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2562803Z ^[[36;1mif ! [[ -f "${TEMP_DIR}/lychee" ]]; then^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2563141Z ^[[36;1m  echo "Cannot find lychee binary in $TEMP_DIR. Did the archive structure change?" >&2^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2563662Z ^[[36;1m  exit 1^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2563993Z ^[[36;1mfi^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2564144Z ^[[36;1m^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2564345Z ^[[36;1m# Output temp directory for use in later steps^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2564628Z ^[[36;1mecho "temp_dir=${TEMP_DIR}" >> $GITHUB_OUTPUT^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2602878Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2603206Z env:
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2603382Z   CI_VERBOSE: false
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2605843Z   GITHUB_TOKEN: ***
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2606036Z   LYCHEE_VERSION: v0.24.2
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2606227Z ##[endgroup]
+linkChecker	Check links with lychee	2026-08-28T12:50:32.2705801Z Downloading from: https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-gnu.tar.gz
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7045326Z Extracting lychee-x86_64-unknown-linux-gnu.tar.gz
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7072647Z lychee-x86_64-unknown-linux-gnu/
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7073615Z lychee-x86_64-unknown-linux-gnu/README.md
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7074181Z lychee-x86_64-unknown-linux-gnu/docs/
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7074767Z lychee-x86_64-unknown-linux-gnu/docs/lychee.1
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7075377Z lychee-x86_64-unknown-linux-gnu/docs/TROUBLESHOOTING.md
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7075974Z lychee-x86_64-unknown-linux-gnu/docs/PRE_COMMIT.md
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7076519Z lychee-x86_64-unknown-linux-gnu/complete/
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7077160Z lychee-x86_64-unknown-linux-gnu/complete/_lychee.ps1
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7077776Z lychee-x86_64-unknown-linux-gnu/complete/lychee.elv
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7078400Z lychee-x86_64-unknown-linux-gnu/complete/lychee.fish
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7078995Z lychee-x86_64-unknown-linux-gnu/complete/lychee.bash
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7079579Z lychee-x86_64-unknown-linux-gnu/complete/_lychee
+linkChecker	Check links with lychee	2026-08-28T12:50:32.7080125Z lychee-x86_64-unknown-linux-gnu/lychee
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8303100Z removed 'lychee-x86_64-unknown-linux-gnu.tar.gz'
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8332047Z ##[end-action id=__lycheeverse_lychee-action.lychee-setup;outcome=success;conclusion=success;duration_ms=579]
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8337090Z ##[start-action display=Install lychee;id=__lycheeverse_lychee-action.__run_2]
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8370856Z ##[group]Run # Install lychee from the temporary directory
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8371215Z ^[[36;1m# Install lychee from the temporary directory^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8371711Z ^[[36;1minstall -t "$RUNNER_TEMP/lychee/bin" -D "/home/runner/work/_temp/lychee-download/lychee-x86_64-unknown-linux-gnu/lychee"^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8406941Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8407246Z env:
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8407424Z   CI_VERBOSE: false
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8409617Z   GITHUB_TOKEN: ***
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8409807Z ##[endgroup]
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8551274Z ##[end-action id=__lycheeverse_lychee-action.__run_2;outcome=success;conclusion=success;duration_ms=21]
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8559745Z ##[start-action display=Run Lychee;id=__lycheeverse_lychee-action.run-lychee]
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8577398Z ##[group]Run /home/runner/work/_actions/lycheeverse/lychee-action/v2/entrypoint.sh
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8577876Z ^[[36;1m/home/runner/work/_actions/lycheeverse/lychee-action/v2/entrypoint.sh^[[0m
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8611955Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8612255Z env:
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8612427Z   CI_VERBOSE: false
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8614790Z   GITHUB_TOKEN: ***
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8616804Z   INPUT_TOKEN: ***
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8617479Z   INPUT_ARGS: --no-progress --cache --max-cache-age 1d --max-retries 3 --timeout 30 --exclude-path docs/case-studies --exclude-path docs/website/dist --exclude-path js/node_modules --exclude-path docs/website/node_modules './**/*.md'
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8618181Z   INPUT_DEBUG: false
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8618357Z   INPUT_FAIL: true
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8618530Z   INPUT_FAILIFEMPTY: true
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8618723Z   INPUT_FORMAT: markdown
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8618906Z   INPUT_JOBSUMMARY: true
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8619101Z   INPUT_CHECKBOX: true
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8619283Z   INPUT_OUTPUT: lychee/out.md
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8619922Z   SUMMARY_URL: https://github.com/link-foundation/links-notation/actions/runs/33172748012#summary-98853657524
+linkChecker	Check links with lychee	2026-08-28T12:50:32.8620322Z ##[endgroup]
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6439139Z Hint: Followed 11 redirects. You might want to consider replacing redirecting URLs with the resolved URLs. Use verbose mode (`-v`/`-vv`) to see redirection details.
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6530453Z # Summary
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6530687Z 
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6530808Z | Status         | Count |
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6531139Z |----------------|-------|
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6531725Z | 🔍 Total       | 1132  |
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6532046Z | 🔗 Unique      | 992   |
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6532400Z | ✅ Successful  | 1118  |
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6532818Z | ⏳ Timeouts    | 0     |
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6533278Z | 🔀 Redirected  | 11    |
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6533821Z | 👻 Excluded    | 9     |
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6534230Z | ❓ Unknown     | 0     |
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6534545Z | 🚫 Errors      | 5     |
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6534902Z | ⛔ Unsupported | 0     |
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6535066Z 
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6535165Z ## Errors per input
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6535297Z 
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6535483Z ### Errors in dev/log/issues/298/pulls/299/CI-CD-BEST-PRACTICES.md
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6535757Z 
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6536377Z * [ERROR] <file:///home/runner/work/links-notation/links-notation/dev/log/issues/298/pulls/299/BEST-PRACTICES.md> (at 437:3) | File not found. Check if file exists and path is correct
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6537739Z * [ERROR] <file:///home/runner/work/links-notation/links-notation/dev/log/issues/298/pulls/299/CI-CD-BEST-PRACTICES.hi.md> (at 1:102) | File not found. Check if file exists and path is correct
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6539091Z * [ERROR] <file:///home/runner/work/links-notation/links-notation/dev/log/issues/298/pulls/299/CI-CD-BEST-PRACTICES.ru.md> (at 1:137) | File not found. Check if file exists and path is correct
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6540502Z * [ERROR] <file:///home/runner/work/links-notation/links-notation/dev/log/issues/298/pulls/299/CI-CD-BEST-PRACTICES.zh.md> (at 1:67) | File not found. Check if file exists and path is correct
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6541796Z * [ERROR] <file:///home/runner/work/links-notation/links-notation/dev/log/issues/298/pulls/299/CONTRIBUTING.md> (at 436:3) | File not found. Check if file exists and path is correct
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6542400Z 
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6542409Z 
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6561410Z ##[notice]Summary report available at: https://github.com/link-foundation/links-notation/actions/runs/33172748012#summary-98853657524
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6629088Z ##[error]Process completed with exit code 2.
+linkChecker	Check links with lychee	2026-08-28T12:50:38.6647984Z ##[end-action id=__lycheeverse_lychee-action.run-lychee;outcome=failure;conclusion=failure;duration_ms=5808]

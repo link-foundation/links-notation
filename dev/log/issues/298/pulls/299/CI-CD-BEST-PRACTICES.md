@@ -1,4 +1,13 @@
-# CI/CD Best Practices for AI-Driven Development (languages: en • [zh](CI-CD-BEST-PRACTICES.zh.md) • [hi](CI-CD-BEST-PRACTICES.hi.md) • [ru](CI-CD-BEST-PRACTICES.ru.md))
+<!-- Verbatim copy of
+     https://github.com/link-assistant/hive-mind/blob/main/docs/CI-CD-BEST-PRACTICES.md
+     as read on 2026-08-28, kept here so the conformance review in
+     analysis/README.md is checked against a fixed text rather than a moving
+     upstream one. The only edit is that the repository-relative links below were
+     rewritten to absolute hive-mind URLs, because they do not resolve from this
+     directory. This is the same treatment the copy under
+     dev/log/issues/290/pulls/291/analysis/ received. -->
+
+# CI/CD Best Practices for AI-Driven Development (languages: en • [zh](https://github.com/link-assistant/hive-mind/blob/main/docs/CI-CD-BEST-PRACTICES.zh.md) • [hi](https://github.com/link-assistant/hive-mind/blob/main/docs/CI-CD-BEST-PRACTICES.hi.md) • [ru](https://github.com/link-assistant/hive-mind/blob/main/docs/CI-CD-BEST-PRACTICES.ru.md))
 
 This document describes CI/CD best practices that significantly improve the quality and reliability of AI-driven development workflows. When properly configured, Hive Mind AI solvers are forced to iterate with CI/CD checks until all tests pass, ensuring code quality meets the highest standards.
 
@@ -433,5 +442,5 @@ fix owner/repo --ci-cd --no-solve
 ## References
 
 - [Code Architecture Principles](https://github.com/link-foundation/code-architecture-principles)
-- [Contributing Guidelines](./CONTRIBUTING.md)
-- [Best Practices](./BEST-PRACTICES.md)
+- [Contributing Guidelines](https://github.com/link-assistant/hive-mind/blob/main/docs/CONTRIBUTING.md)
+- [Best Practices](https://github.com/link-assistant/hive-mind/blob/main/docs/BEST-PRACTICES.md)

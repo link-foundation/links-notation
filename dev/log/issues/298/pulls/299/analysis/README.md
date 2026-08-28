@@ -9,6 +9,22 @@ Evidence for this analysis is in the sibling folders:
 | `../templates/` | The seven pipeline templates' workflows, as downloaded |
 | `../CI-CD-BEST-PRACTICES.md` | The referenced best-practices document |
 
+Two edits were made to the collected evidence, both because a repository-wide
+check flagged them and both preserving the content:
+
+- `../CI-CD-BEST-PRACTICES.md` carries a provenance header and its five
+  repository-relative links were rewritten to absolute hive-mind URLs, since
+  they cannot resolve from this directory. This is the same treatment the copy
+  under `dev/log/issues/290/pulls/291/analysis/` received.
+- `../ci-logs/rust-33168552506-publishToCratesIO.log` had the UTF-8 BOM that
+  `gh run view --log` prepends stripped from byte 1, so it passes `bom-check`.
+  Nothing else in the file was touched.
+
+Both were caught by this PR's own CI run 33172747906 / 33172748012, whose logs
+are also in `../ci-logs/`. They are recorded here because they are exactly the
+kind of finding issue #298 asks for: the checks were right, the newly added
+files were wrong.
+
 ## 1. Timeline
 
 Everything below happened on one push to `main` (commit `2b829f3`, "Merge pull
