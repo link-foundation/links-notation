@@ -90,6 +90,29 @@ jobs:
           fail-on-severity: high
           comment-summary-in-pr: on-failure
 
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-secrets
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          # A secret is only removed once it is out of the history, so the
+          # scan needs the whole history, not just the tip.
+          fetch-depth: 0
+      - name: Scan the repository for verified secrets
+        uses: trufflesecurity/trufflehog@v3.97.1
+        with:
+          path: ./
+          # --results=verified only reports credentials that the issuing
+          # service confirmed are live, which is what makes this safe to fail
+          # the build on.
+          extra_args: --results=verified --no-update
+
   npmAudit:
     name: Audit npm lock (${{ matrix.directory }})
     runs-on: ubuntu-latest
