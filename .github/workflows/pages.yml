@@ -1,6 +1,9 @@
 name: pages
 
-on:
+# workflow_run is safe here: the triggering workflow is restricted to main, so
+# a fork pull request can never fire it, and this workflow checks out only the
+# default branch and never runs code from the triggering run.
+on: # zizmor: ignore[dangerous-triggers]
   push:
     branches: main
     paths:
@@ -10,6 +13,13 @@ on:
     paths:
       - 'docs/**'
       - '.github/workflows/pages.yml'
+  # csharp/scripts/publish-docs.sh pushes the DocFX site to the gh-pages
+  # branch. Rebuild the Pages artifact when it does, or the API reference
+  # would only reach the site the next time a docs/** file happens to change.
+  workflow_run:
+    workflows: [csharp]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
     inputs:
       verbose:
@@ -55,10 +65,11 @@ jobs:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           isDocsFilesChanged='false'
-          # workflow_dispatch has no diff to inspect. Without this the manual
-          # trigger this workflow advertises did nothing at all: every job was
-          # gated on a change list that is empty for a dispatch.
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          # workflow_dispatch and workflow_run have no diff to inspect. Without
+          # this the manual trigger this workflow advertises did nothing at
+          # all: every job was gated on a change list that is empty for a
+          # dispatch.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "workflow_run" ]; then
             isDocsFilesChanged='true'
           fi
           echo "Changed files: $ALL_CHANGED_FILES"
@@ -91,6 +102,36 @@ jobs:
         run: npm ci
       - name: Build website
         run: npm run build
+      # GitHub Pages serves the artifact uploaded below (the API reports
+      # "build_type": "workflow"), not the gh-pages branch, so the DocFX site
+      # that csharp/scripts/publish-docs.sh pushes to that branch was never
+      # reachable: every /csharp/ URL advertised by the READMEs returned 404.
+      # Overlaying the branch here gives the whole domain a single publisher.
+      - name: Overlay the documentation published to the gh-pages branch
+        working-directory: .
+        run: |
+          set -euo pipefail
+          if ! git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            echo "::warning::No gh-pages branch, publishing the website without the C# API reference"
+            exit 0
+          fi
+          # FETCH_HEAD rather than origin/gh-pages: fetching a single branch
+          # by name is not guaranteed to update the remote-tracking ref.
+          git fetch --depth 1 origin gh-pages
+          rm -rf gh-pages-content
+          mkdir gh-pages-content
+          git archive --format=tar FETCH_HEAD | tar -x -C gh-pages-content
+          # The branch carries a legacy landing page; the website owns the root.
+          rm -f gh-pages-content/index.html
+          cp -r gh-pages-content/. docs/website/dist/
+          rm -rf gh-pages-content
+          if [ ! -f docs/website/dist/csharp/index.html ]; then
+            echo "::warning::The gh-pages branch has no csharp/index.html, so the published site will not include the C# API reference"
+          fi
+          if [ "${CI_VERBOSE}" = "true" ]; then
+            find docs/website/dist -maxdepth 2 -type d -print
+          fi
+
       # Building on pull requests too means a broken site is caught in review
       # rather than on main, but only pushes to main upload and deploy.
       - name: Setup Pages
