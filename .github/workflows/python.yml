@@ -10,10 +10,20 @@ on:
     paths:
       - 'python/**'
       - '.github/workflows/python.yml'
+  workflow_dispatch:
+    inputs:
+      verbose:
+        description: 'Print extra diagnostics (never secret values)'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
 
 env:
-  PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
 
 defaults:
   run:
@@ -23,6 +33,9 @@ jobs:
   findChangedPythonFiles:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     outputs:
       isPythonFilesChanged: ${{ steps.setIsPythonFilesChangedOutput.outputs.isPythonFilesChanged }}
     steps:
@@ -34,12 +47,17 @@ jobs:
         uses: tj-actions/changed-files@v47
       - name: Set output isPythonFilesChanged
         id: setIsPythonFilesChangedOutput
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           isPythonFilesChanged='false'
-          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
-          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            if [[ $changedFile == python/*.py ]] || [[ $changedFile == python/pyproject.toml ]] || [[ $changedFile == python/setup.py ]] || [[ $changedFile == python/* ]] || [[ $changedFile == .github/workflows/python.yml ]]; then
-              echo "isPythonFilesChanged='true'"
+          # workflow_dispatch has no diff to inspect, so treat it as "changed".
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            isPythonFilesChanged='true'
+          fi
+          echo "Changed files: $ALL_CHANGED_FILES"
+          for changedFile in $ALL_CHANGED_FILES; do
+            if [[ $changedFile == python/* ]] || [[ $changedFile == .github/workflows/python.yml ]]; then
               isPythonFilesChanged='true'
               break
             fi
@@ -52,6 +70,9 @@ jobs:
     if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-lint
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -76,6 +97,9 @@ jobs:
     if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-test
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -90,14 +114,27 @@ jobs:
           pip install pytest pytest-timeout build twine
       - name: Build package
         run: python -m build
+      - name: Check package metadata
+        run: twine check dist/*
       - name: Run tests
         run: pytest -v
 
   publishToPyPI:
-    needs: [test, findChangedPythonFiles]
+    needs: [findChangedPythonFiles, test]
     if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    concurrency:
+      group: ${{ github.workflow }}-publish-pypi
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      # Required for PyPI trusted publishing.
+      id-token: write
+    outputs:
+      published: ${{ steps.publish.outputs.published }}
+      version: ${{ steps.version-check.outputs.version }}
+      name: ${{ steps.version-check.outputs.name }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -115,65 +152,86 @@ jobs:
       - name: Check if version already published
         id: version-check
         run: |
-          PACKAGE_VERSION=$(python -c "import tomli; f = open('pyproject.toml', 'rb'); data = tomli.load(f); print(data['project']['version'])" 2>/dev/null || grep "^version" pyproject.toml | sed 's/version = "\(.*\)"/\1/')
-          PACKAGE_NAME=$(python -c "import tomli; f = open('pyproject.toml', 'rb'); data = tomli.load(f); print(data['project']['name'])" 2>/dev/null || grep "^name" pyproject.toml | sed 's/name = "\(.*\)"/\1/')
+          set -euo pipefail
+          read -r PACKAGE_NAME PACKAGE_VERSION <<<"$(python -c "
+          import tomllib
+          with open('pyproject.toml','rb') as f:
+              p = tomllib.load(f)['project']
+          print(p['name'], p['version'])
+          ")"
+          echo "name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+          echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
           echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
 
-          # Check if version exists on PyPI
-          if pip index versions $PACKAGE_NAME 2>/dev/null | grep -q "$PACKAGE_VERSION"; then
+          # The JSON API is an exact lookup. The previous `pip index versions |
+          # grep` matched substrings, so 0.1.0 looked published once 0.1.0.1
+          # existed.
+          if curl -fsS "https://pypi.org/pypi/${PACKAGE_NAME}/${PACKAGE_VERSION}/json" >/dev/null 2>&1; then
             echo "Version $PACKAGE_VERSION already exists on PyPI"
             echo "should_publish=false" >> $GITHUB_OUTPUT
           else
             echo "Version $PACKAGE_VERSION does not exist on PyPI"
             echo "should_publish=true" >> $GITHUB_OUTPUT
           fi
+      # Trusted publishing when configured; an empty `password` makes the
+      # action fall back to OIDC, and PYPI_TOKEN is only the bootstrap.
       - name: Publish to PyPI
         if: steps.version-check.outputs.should_publish == 'true'
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: python/dist
+          password: ${{ secrets.PYPI_TOKEN }}
+      - name: Record publish outcome
+        id: publish
         run: |
-          twine upload dist/*
+          if [ "${{ steps.version-check.outputs.should_publish }}" = "true" ]; then
+            echo "published=true" >> $GITHUB_OUTPUT
+          else
+            echo "published=skipped" >> $GITHUB_OUTPUT
+            echo "::notice::Version ${{ steps.version-check.outputs.version }} is already on PyPI, nothing to publish"
+          fi
+      - name: Verify the package is really on PyPI
+        if: steps.publish.outputs.published == 'true'
+        env:
+          PACKAGE_NAME: ${{ steps.version-check.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 10); do
+            if curl -fsS "https://pypi.org/pypi/${PACKAGE_NAME}/${PACKAGE_VERSION}/json" >/dev/null 2>&1; then
+              echo "Verified ${PACKAGE_NAME}@${PACKAGE_VERSION} on PyPI (attempt ${attempt})"
+              exit 0
+            fi
+            echo "Not visible yet, retrying in 15s (attempt ${attempt}/10)"
+            sleep 15
+          done
+          echo "::error::${PACKAGE_NAME}@${PACKAGE_VERSION} did not appear on PyPI within 2.5 minutes"
+          exit 1
 
   publishRelease:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: [findChangedPythonFiles, publishToPyPI]
-    if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && needs.publishToPyPI.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    # See csharp.yml: gate on what was published, not on the job result.
+    if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && needs.publishToPyPI.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v6
         with:
           submodules: true
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.13'
-      - name: Check if GitHub release already exists
-        id: release-check
-        run: |
-          PACKAGE_VERSION=$(grep "^version" pyproject.toml | sed 's/version = "\(.*\)"/\1/')
-          TAG_NAME="python_$PACKAGE_VERSION"
-          echo "Checking if release $TAG_NAME already exists"
-
-          # Check if release exists
-          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
-            echo "Release $TAG_NAME already exists"
-            echo "should_create_release=false" >> $GITHUB_OUTPUT
-          else
-            echo "Release $TAG_NAME does not exist"
-            echo "should_create_release=true" >> $GITHUB_OUTPUT
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create GitHub release
-        if: steps.release-check.outputs.should_create_release == 'true'
-        run: |
-          PACKAGE_VERSION=$(grep "^version" pyproject.toml | sed 's/version = "\(.*\)"/\1/')
-          PACKAGE_NAME=$(grep "^name" pyproject.toml | sed 's/name = "\(.*\)"/\1/')
-
-          # Create release with consistent tag format: python_version
-          gh release create "python_${PACKAGE_VERSION}" \
-            --title "[Python] $PACKAGE_VERSION" \
-            --notes "https://pypi.org/project/$PACKAGE_NAME/"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE_NAME: ${{ needs.publishToPyPI.outputs.name }}
+          PACKAGE_VERSION: ${{ needs.publishToPyPI.outputs.version }}
+        run: |
+          set -euo pipefail
+          TAG="python_${PACKAGE_VERSION}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists"
+            exit 0
+          fi
+          gh release create "$TAG" \
+            --title "[Python] $PACKAGE_VERSION" \
+            --notes "https://pypi.org/project/$PACKAGE_NAME/$PACKAGE_VERSION/"
