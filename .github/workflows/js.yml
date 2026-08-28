@@ -10,10 +10,20 @@ on:
     paths:
       - 'js/**'
       - '.github/workflows/js.yml'
+  workflow_dispatch:
+    inputs:
+      verbose:
+        description: 'Print extra diagnostics (never secret values)'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
 
 env:
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
 
 defaults:
   run:
@@ -23,6 +33,9 @@ jobs:
   findChangedJsFiles:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     outputs:
       isJsFilesChanged: ${{ steps.setIsJsFilesChangedOutput.outputs.isJsFilesChanged }}
     steps:
@@ -34,12 +47,17 @@ jobs:
         uses: tj-actions/changed-files@v47
       - name: Set output isJsFilesChanged
         id: setIsJsFilesChangedOutput
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           isJsFilesChanged='false'
-          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
-          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            if [[ $changedFile == js/*.js ]] || [[ $changedFile == js/*.json ]] || [[ $changedFile == js/*.pegjs ]] || [[ $changedFile == js/* ]] || [[ $changedFile == .github/workflows/js.yml ]]; then
-              echo "isJsFilesChanged='true'"
+          # workflow_dispatch has no diff to inspect, so treat it as "changed".
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            isJsFilesChanged='true'
+          fi
+          echo "Changed files: $ALL_CHANGED_FILES"
+          for changedFile in $ALL_CHANGED_FILES; do
+            if [[ $changedFile == js/* ]] || [[ $changedFile == .github/workflows/js.yml ]]; then
               isJsFilesChanged='true'
               break
             fi
@@ -52,22 +70,9 @@ jobs:
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          submodules: true
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-      - name: Check formatting with Prettier
-        run: npx prettier --check .
-
-  lint:
-    needs: [findChangedJsFiles, format]
-    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-format
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -77,7 +82,30 @@ jobs:
         with:
           bun-version: latest
       - name: Install Dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
+      # Uses the pinned devDependency rather than `npx prettier`, which would
+      # silently resolve a different version on every run.
+      - name: Check formatting with Prettier
+        run: bun run format:check
+
+  lint:
+    needs: [findChangedJsFiles, format]
+    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-lint
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
       - name: Lint
         run: bun run lint
 
@@ -86,6 +114,9 @@ jobs:
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-test
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -95,17 +126,29 @@ jobs:
         with:
           bun-version: latest
       - name: Install Dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
       - name: Build
         run: bun run build
       - name: Test
         run: bun test
 
   publishToNpm:
-    needs: [test, findChangedJsFiles]
+    needs: [findChangedJsFiles, test]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    concurrency:
+      group: ${{ github.workflow }}-publish-npm
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      # Required for npm trusted publishing (OIDC). Harmless when the package
+      # is not configured for it; npm then falls back to NODE_AUTH_TOKEN.
+      id-token: write
+    outputs:
+      published: ${{ steps.publish.outputs.published }}
+      version: ${{ steps.version-check.outputs.version }}
+      name: ${{ steps.version-check.outputs.name }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -114,73 +157,108 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+      # npm itself does the publishing: trusted publishing needs npm >= 11.5.1,
+      # and setup-node writes the registry entry ~/.npmrc that npm reads.
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Upgrade npm for trusted publishing
+        run: npm install -g npm@latest
       - name: Install Dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
       - name: Build
         run: bun run build
       - name: Check if version already published
         id: version-check
         run: |
+          set -euo pipefail
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           PACKAGE_NAME=$(node -p "require('./package.json').name")
+          echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
+          echo "name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
           echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
-          
-          # Check if version exists on NPM
-          if npm view $PACKAGE_NAME@$PACKAGE_VERSION version 2>/dev/null; then
-            echo "Version $PACKAGE_VERSION already exists on NPM"
+
+          if npm view "$PACKAGE_NAME@$PACKAGE_VERSION" version >/dev/null 2>&1; then
+            echo "Version $PACKAGE_VERSION already exists on npm"
             echo "should_publish=false" >> $GITHUB_OUTPUT
           else
-            echo "Version $PACKAGE_VERSION does not exist on NPM"
+            echo "Version $PACKAGE_VERSION does not exist on npm"
             echo "should_publish=true" >> $GITHUB_OUTPUT
           fi
-      - name: Publish to NPM
-        if: steps.version-check.outputs.should_publish == 'true'
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          npm publish --access public
+      - name: Publish to npm
+        id: publish
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # Bootstrap fallback for as long as trusted publishing is not
+          # configured for this package on npmjs.com.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ "${{ steps.version-check.outputs.should_publish }}" != "true" ]; then
+            echo "published=skipped" >> $GITHUB_OUTPUT
+            echo "::notice::Version ${{ steps.version-check.outputs.version }} is already on npm, nothing to publish"
+            exit 0
+          fi
+
+          # Presence only, never the value.
+          if [ -n "$NODE_AUTH_TOKEN" ]; then
+            echo "npm credential: NPM_TOKEN present"
+          else
+            echo "npm credential: NPM_TOKEN absent, relying on OIDC trusted publishing"
+          fi
+
+          if ! npm publish --access public 2>&1 | tee publish.log; then
+            if grep -q 'ENEEDAUTH\|E401\|E403' publish.log; then
+              echo "::error::npm rejected the credentials. Either configure trusted publishing for ${{ steps.version-check.outputs.name }} on npmjs.com or set the NPM_TOKEN secret."
+            fi
+            echo "published=failed" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          echo "published=true" >> $GITHUB_OUTPUT
+      - name: Verify the package is really on npm
+        if: steps.publish.outputs.published == 'true'
+        env:
+          PACKAGE_NAME: ${{ steps.version-check.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 10); do
+            if curl -fsS "https://registry.npmjs.org/${PACKAGE_NAME}/${PACKAGE_VERSION}" >/dev/null 2>&1; then
+              echo "Verified ${PACKAGE_NAME}@${PACKAGE_VERSION} on npm (attempt ${attempt})"
+              exit 0
+            fi
+            echo "Not visible yet, retrying in 15s (attempt ${attempt}/10)"
+            sleep 15
+          done
+          echo "::error::${PACKAGE_NAME}@${PACKAGE_VERSION} did not appear on the npm registry within 2.5 minutes"
+          exit 1
 
   publishRelease:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: [findChangedJsFiles, publishToNpm]
-    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && needs.publishToNpm.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    # `result == 'success'` was true even when the publish step was skipped,
+    # so releases were cut for versions that were never pushed.
+    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && needs.publishToNpm.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v6
         with:
           submodules: true
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-      - name: Check if GitHub release already exists
-        id: release-check
-        run: |
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          TAG_NAME="js_$PACKAGE_VERSION"
-          echo "Checking if release $TAG_NAME already exists"
-
-          # Check if release exists
-          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
-            echo "Release $TAG_NAME already exists"
-            echo "should_create_release=false" >> $GITHUB_OUTPUT
-          else
-            echo "Release $TAG_NAME does not exist"
-            echo "should_create_release=true" >> $GITHUB_OUTPUT
-          fi
+      - name: Create GitHub release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create GitHub release
-        if: steps.release-check.outputs.should_create_release == 'true'
+          PACKAGE_VERSION: ${{ needs.publishToNpm.outputs.version }}
+          PACKAGE_NAME: ${{ needs.publishToNpm.outputs.name }}
         run: |
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          PACKAGE_NAME=$(node -p "require('./package.json').name")
-
-          # Create release with consistent tag format: js_version
-          gh release create "js_${PACKAGE_VERSION}" \
+          set -euo pipefail
+          TAG="js_${PACKAGE_VERSION}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists"
+            exit 0
+          fi
+          gh release create "$TAG" \
             --title "[JS] $PACKAGE_VERSION" \
             --notes "https://www.npmjs.com/package/$PACKAGE_NAME"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
