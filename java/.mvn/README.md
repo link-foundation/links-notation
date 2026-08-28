@@ -4,7 +4,7 @@
 [google-java-format](https://github.com/google/google-java-format) needs, because Spotless runs the
 formatter in-process and the formatter reads `javac`'s internal AST classes.
 
-Without these flags JDK 11 prints
+Without these flags an older JDK prints
 
 ```
 WARNING: An illegal reflective access operation has occurred
