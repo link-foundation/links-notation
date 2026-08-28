@@ -108,10 +108,16 @@ jobs:
         uses: trufflesecurity/trufflehog@v3.97.1
         with:
           path: ./
+          # The action ref pins the wrapper; this pins the scanner itself,
+          # which otherwise resolves to the `latest` image on every run.
+          version: 3.97.1
           # --results=verified only reports credentials that the issuing
           # service confirmed are live, which is what makes this safe to fail
-          # the build on.
-          extra_args: --results=verified --no-update
+          # the build on. Do not add --no-update here: the action already
+          # passes it, and trufflehog rejects a repeated flag outright
+          # ("flag 'no-update' cannot be repeated"), which is how the first
+          # run of this job failed.
+          extra_args: --results=verified
 
   npmAudit:
     name: Audit npm lock (${{ matrix.directory }})
