@@ -155,3 +155,36 @@ The through-line is the same one the previous two sequences share, applied to th
 work: **a check that is not actually running is indistinguishable from a check that passes.** F1 is
 the sharpest form of it — the local and CI invocations were spelled identically and did different
 amounts of work, because one of them was missing a dependency it degrades silently without.
+
+### The verification that closes it
+
+With F4–F6 fixed (`2537067`), all 12 runs are green again and the same full-text sweep was repeated
+over all 13 downloaded logs (3.0 MB):
+
+```
+$ grep -h "##\[warning\]\|##\[error\]" ci-logs/2537067/*.log | sort -u
+                                    # empty
+
+$ grep -h "##\[notice\]" ci-logs/2537067/*.log | sed 's/.*##\[/##[/' | sort -u
+##[notice]CODECOV_TOKEN is not configured, so coverage was not uploaded
+##[notice]Summary report available at: …/runs/33158680661#summary-98807559314
+```
+
+Both notices are intentional: the first is the step added by F4's fix, which exists precisely so the
+absence of coverage is stated out loud instead of being disguised as a successful upload; the second
+is the links workflow's own summary link.
+
+The three specific defects are confirmed gone at their source, not merely absent from the summary:
+
+| Finding | Evidence in `ci-logs/2537067/` |
+| --- | --- |
+| F3 | `grep -oh "^test ([0-9.]*)" php-*.log \| sort -u` → `test (8.1)`, `(8.2)`, `(8.3)`, `(8.4)` — all four legs ran to completion |
+| F4 / F5 | The `Upload coverage` step is skipped and `Note that coverage was not uploaded` emits the notice above; no `Pinging Codecov`, no `tokenless upload`, no `test_coverage_data.json` |
+| F6 | `grep -i "loaded as CommonJS\|CJS build" pages-*.log` → no match |
+
+Four lines matched the broader `::warning`/`::error` search, and all four are the runner echoing a
+step's *source* (`^[[36;1m echo "::error::…"`) inside its `##[group]Run` header rather than a
+message anyone emitted — the trufflehog same-commit guard, the BOM check's failure message, and the
+two gh-pages overlay guards in `pages.yml`. Distinguishing the echo of a guard from the firing of
+one is the last small version of the same lesson: read what the log *says happened*, not what it
+*contains*.
