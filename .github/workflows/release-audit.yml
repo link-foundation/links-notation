@@ -14,6 +14,7 @@ name: release-audit
 on:
   push:
     branches: main
+  pull_request:
   schedule:
     # Weekly, so drift introduced outside a push is still noticed.
     - cron: '17 6 * * 1'
@@ -33,6 +34,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Hard failure: reads only the working tree, so a disagreement between the
+  # implementations is always a defect and never a transient registry answer.
+  consistency:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Check that every implementation declares the same version
+        run: node scripts/version-consistency.mjs
+
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 10
