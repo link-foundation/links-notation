@@ -6,7 +6,7 @@ tasks:
     command: |
       echo "🔧 Testing C# implementation..."
       cd csharp
-      dotnet test -c Release -f net8
+      dotnet test -c Release
       echo "✅ C# tests completed"
       
   - name: Test JavaScript

@@ -10,7 +10,7 @@
       ],
       "dest": "obj/api",
       "filter": "filter.yml",
-      "properties": { "TargetFramework": "net8" }
+      "properties": { "TargetFramework": "net10.0" }
     }
   ],
   "build": {

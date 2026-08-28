@@ -143,7 +143,7 @@ var customParser = new Parser<Guid>();
 
 ## Зависимости
 
-- .NET 8.0
+- .NET 10.0
 - Microsoft.CSharp (4.7.0)
 - Pegasus (4.1.0)
 - Platform.Collections (0.3.2)

@@ -172,7 +172,7 @@ Note: C# formatting checks are integrated into the CI pipeline using
 
 ## Dependencies
 
-- .NET 8.0
+- .NET 10.0
 - Microsoft.CSharp (4.7.0)
 - Pegasus (4.1.0)
 - Platform.Collections (0.3.2)

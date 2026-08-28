@@ -6,7 +6,7 @@
     <AssemblyTitle>Link.Foundation.Links.Notation</AssemblyTitle>
     <VersionPrefix>0.15.0</VersionPrefix>
     <Authors>Konstantin Diachenko</Authors>
-    <TargetFramework>net8</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <PackageId>Link.Foundation.Links.Notation</PackageId>
     <PackageTags>Link.Foundation;Protocols.Lino;Lino;IListExtensions;Link;Parser</PackageTags>
     <PackageProjectUrl>https://link-foundation.github.io/links-notation</PackageProjectUrl>
@@ -41,7 +41,6 @@ Test cases suite is updated.</PackageReleaseNotes>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Pegasus" Version="4.1.0" />
     <PackageReference Include="Platform.Collections" Version="0.4.0" />
   </ItemGroup>
