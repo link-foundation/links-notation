@@ -71,10 +71,6 @@ func (p *Parser) Parse(input string) ([]*Link, error) {
 	return p.transformResult(rawResult), nil
 }
 
-// skipQuotedString skips over the quoted string starting at start.
-// Any number N of quotes opens and closes the string, 2*N quotes are an escaped
-// quote sequence. It returns the position right after the closing quotes, or -1
-// when text does not start a terminated quoted string.
 // isSubstantiveBody reports whether a body written between an even run of
 // delimiters is substantive: it holds at least one visible character and does
 // not straddle a parenthesis. An even run can always be read as delimiter pairs
