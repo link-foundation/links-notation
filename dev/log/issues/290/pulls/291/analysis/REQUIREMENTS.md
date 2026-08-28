@@ -103,8 +103,26 @@ Status: done — every workflow declares the `verbose` input and exports
 > when possible. Each report must contain reproducible examples, workarounds, and suggestions for
 > fixing the issue in code."
 
-Candidates and their reproducible examples are prepared in `UPSTREAM.md`. Status: done — the
-reports are written up there with reproduction steps, workarounds and suggested code changes.
+Candidates and their reproducible examples are prepared in `UPSTREAM.md`. Status: done — **ten
+issues filed**, each with evidence quoted from the source, a reproduction, a workaround and a diff:
+
+| Repository | Issue |
+| --- | --- |
+| `java-…-template` (concurrency, `always()`, verification) | [#5](https://github.com/link-foundation/java-ai-driven-development-pipeline-template/issues/5) |
+| `go-…-template` (concurrency, `always()`, permissions, verification) | [#5](https://github.com/link-foundation/go-ai-driven-development-pipeline-template/issues/5) |
+| `otac0n/Pegasus` (invalid generated `cref`) | [#137](https://github.com/otac0n/Pegasus/issues/137) |
+| `rust-…-template` | [#141](https://github.com/link-foundation/rust-ai-driven-development-pipeline-template/issues/141) |
+| `csharp-…-template` | [#49](https://github.com/link-foundation/csharp-ai-driven-development-pipeline-template/issues/49) |
+| `python-…-template` | [#62](https://github.com/link-foundation/python-ai-driven-development-pipeline-template/issues/62) |
+| `go-…-template` (Codecov) | [#6](https://github.com/link-foundation/go-ai-driven-development-pipeline-template/issues/6) |
+| `java-…-template` (Codecov) | [#6](https://github.com/link-foundation/java-ai-driven-development-pipeline-template/issues/6) |
+| `js-…-template` | [#145](https://github.com/link-foundation/js-ai-driven-development-pipeline-template/issues/145) |
+| `php-…-template` | [#3](https://github.com/link-foundation/php-ai-driven-development-pipeline-template/issues/3) |
+
+All seven templates are covered, which satisfies the issue's *"if the same issue is found in
+template report issue also in templates"*. See `UPSTREAM.md` Part 3 for the sweep methodology, the
+meta-finding (no template runs a workflow linter) and the closed-issue precedents each report
+cites.
 
 ## R9 — Apply each fix everywhere it applies
 

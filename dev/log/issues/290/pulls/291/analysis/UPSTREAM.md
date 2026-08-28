@@ -226,6 +226,71 @@ root cause A3), or add a `deploy` job plus a
 | U1 + U2 + U4 | `java-ai-driven-development-pipeline-template` | concurrency, `always()`, verification | <https://github.com/link-foundation/java-ai-driven-development-pipeline-template/issues/5> |
 | U1 + U2 + U3 + U4 | `go-ai-driven-development-pipeline-template` | concurrency, `always()`, permissions, verification | <https://github.com/link-foundation/go-ai-driven-development-pipeline-template/issues/5> |
 | U5 | `otac0n/Pegasus` | invalid generated `cref` | <https://github.com/otac0n/Pegasus/issues/137> |
+| U6 | `rust-…-template` | `printf` single quotes: `${DOCKERHUB_IMAGE}` never expanded (SC2016) | <https://github.com/link-foundation/rust-ai-driven-development-pipeline-template/issues/141> |
+| U7 | `csharp-…-template` | `${{ github.head_ref }}` interpolated into a `run:` body | <https://github.com/link-foundation/csharp-ai-driven-development-pipeline-template/issues/49> |
+| U8 | `python-…-template` | unsupported `queue: max` concurrency key | <https://github.com/link-foundation/python-ai-driven-development-pipeline-template/issues/62> |
+| U9 | `go-…-template` | Codecov upload can never succeed, hidden twice; `@v4` | <https://github.com/link-foundation/go-ai-driven-development-pipeline-template/issues/6> |
+| U10 | `java-…-template` | Codecov `fail_ci_if_error: false`, `@v4`, v3-era `file:` | <https://github.com/link-foundation/java-ai-driven-development-pipeline-template/issues/6> |
+| U11 | `js-…-template` | no workflow linter; SC2046, SC2034 | <https://github.com/link-foundation/js-ai-driven-development-pipeline-template/issues/145> |
+| U12 | `php-…-template` | no workflow linter (otherwise clean) | <https://github.com/link-foundation/php-ai-driven-development-pipeline-template/issues/3> |
+
+### U6–U12 — the cross-template `actionlint` + `shellcheck` sweep
+
+The issue requires that a defect also found in a template be reported there
+("if the same issue is found in template report issue also in templates"). All seven
+`link-foundation/<lang>-ai-driven-development-pipeline-template` repositories were cloned and linted
+with `actionlint 1.7.7` **with `shellcheck` on `PATH`**, producing 23 findings.
+
+**The meta-finding, which explains all 23.** No template runs `actionlint` or `zizmor` anywhere:
+
+```
+$ for d in rust js csharp python php java go; do
+    printf '%-8s %s\n' "$d" "$(grep -ril 'actionlint\|zizmor' $d/.github)"
+  done
+rust
+js
+csharp
+python
+php
+java
+go
+```
+
+Every issue therefore carries the same closing recommendation — add the `workflows` job this
+repository added in R1 — alongside its repository-specific findings.
+
+**Two linter traps worth recording, both hit during this sweep.**
+
+1. `actionlint` without `shellcheck` on `PATH` **silently skips every `run:` block and exits 0**.
+   That is finding F1 in `ROOT-CAUSES.md`: the local run was clean, the push then produced 62
+   findings. The Docker image bundles shellcheck, so `docker://rhysd/actionlint:1.7.7` does not
+   have this failure mode.
+2. `actionlint` requires a Git working tree, or it exits with *"no project was found in any parent
+   directories"*. Each downloaded template needed `git init -q` before it would lint.
+
+**What made each report land.** Five of the seven defects had already been fixed *elsewhere in the
+same template family*, which is the strongest possible evidence that they are defects rather than
+design choices, and each issue cites its precedent:
+
+| Reported | Precedent, already CLOSED |
+| --- | --- |
+| python `queue: max` | rust#113 and js#117, both *"Remove unsupported queue key from workflow concurrency blocks"* |
+| go and java Codecov gating | csharp#34 and python#27, both *"Gate Codecov upload to avoid hidden coverage failures"* |
+| go and java `@v4` | python#34, *"codecov/codecov-action pinned to deprecated @v4 (current is v7)"* |
+| csharp `github.head_ref` | js#115, which fixed exactly this interpolation |
+| rust `printf` quoting | the js template's equivalent step, which uses double quotes correctly |
+
+**Reproductions.** `experiments/upstream-templates/rust-manifest-printf-quoting.sh` demonstrates U6
+end to end; the go/java Codecov failure is reproduced from this repository's own green-run logs in
+`ci-logs/green-run-31ec6aa-findings.md` (finding F4).
+
+**Two findings deliberately *not* reported as defects.** The rust template's
+`desktop-release.yml` uses the runner labels `macos-15-intel` (line 54) and `windows-11-arm`
+(line 57), which actionlint 1.7.7 does not recognise. Those labels are real, so these are linter
+false positives; they are mentioned in rust#141 only so they are not mistaken for bugs once the
+check is added. Likewise csharp's two SC2193 findings are an artefact of actionlint substituting a
+placeholder for `${{ }}` — but the fix for the injection cures them anyway, so they are noted
+rather than argued.
 
 ### U5 — `otac0n/Pegasus`: the generated `Parse` documentation contains an invalid `cref`
 

@@ -137,11 +137,14 @@ jobs:
       # reported success, because fail_ci_if_error was false. The job has been
       # claiming to publish coverage while publishing none. Run the step only
       # when the secret exists, and let a real upload failure fail the job.
+      # This is the shape the csharp and python pipeline templates already use:
+      # gate on the secret, pass it explicitly, and fail loudly when an upload
+      # that should work does not.
       - name: Upload coverage
         if: env.CODECOV_TOKEN != ''
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ env.CODECOV_TOKEN }}
           files: go/coverage.out
           # `files` narrows what is uploaded but does not stop the CLI
           # searching the workspace: it also found and uploaded
