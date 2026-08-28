@@ -150,10 +150,17 @@ jobs:
       - name: Build
         run: cargo build --release
       # Exchanges the workflow's OIDC identity for a short-lived crates.io
-      # token. Returns an empty token when trusted publishing is not
-      # configured for the crate, which the publish step reports explicitly.
+      # token. Trusted publishing has to be registered on crates.io before it
+      # can be used; until that is done the action fails with
+      # "No Trusted Publishing config found" and, because it writes an
+      # `::error::` annotation, paints a red cross on a run that then publishes
+      # perfectly well through CARGO_TOKEN. Gating on an opt-in repository
+      # variable keeps that false positive out of the run summary. Set the
+      # `CRATES_IO_TRUSTED_PUBLISHING` variable to `true` after configuring
+      # https://crates.io/crates/links-notation/settings to switch over.
       - name: Authenticate to crates.io
         id: cratesio-auth
+        if: ${{ vars.CRATES_IO_TRUSTED_PUBLISHING == 'true' }}
         continue-on-error: true
         uses: rust-lang/crates-io-auth-action@v1
       - name: Publish to crates.io
@@ -165,6 +172,8 @@ jobs:
           CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
         run: |
           set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
 
           read_field() { grep "^$2 = " "$1" | head -1 | sed "s/$2 = \"\(.*\)\"/\1/"; }
           MACRO_VERSION=$(read_field links-notation-macro/Cargo.toml version)
@@ -209,14 +218,11 @@ jobs:
           if [ $MACRO_STATUS -eq 1 ]; then exit 1; fi
 
           if [ $MACRO_STATUS -eq 0 ]; then
-            for attempt in $(seq 1 20); do
-              if curl -fsS "https://crates.io/api/v1/crates/links-notation-macro/${MACRO_VERSION}" >/dev/null 2>&1; then
-                echo "links-notation-macro@${MACRO_VERSION} is visible in the index"
-                break
-              fi
-              echo "Waiting for the index to catch up (attempt ${attempt}/20)"
-              sleep 15
-            done
+            # The sparse index, not the JSON API, is what `cargo publish`
+            # resolves the dependency against, so that is what has to catch up.
+            if ! wait_for_crate_version links-notation-macro "$MACRO_VERSION" 20 15; then
+              echo "::warning::Continuing anyway; cargo will fail explicitly if the dependency is still unresolvable"
+            fi
           fi
 
           set +e
@@ -235,16 +241,14 @@ jobs:
           PACKAGE_VERSION: ${{ steps.publish.outputs.version }}
         run: |
           set -euo pipefail
-          for attempt in $(seq 1 20); do
-            if curl -fsS "https://crates.io/api/v1/crates/${PACKAGE_NAME}/${PACKAGE_VERSION}" >/dev/null 2>&1; then
-              echo "Verified ${PACKAGE_NAME}@${PACKAGE_VERSION} on crates.io (attempt ${attempt})"
-              exit 0
-            fi
-            echo "Not visible yet, retrying in 15s (attempt ${attempt}/20)"
-            sleep 15
-          done
-          echo "::error::${PACKAGE_NAME}@${PACKAGE_VERSION} did not appear on crates.io within 5 minutes"
-          exit 1
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          # Check the index first: it is the artifact consumers actually
+          # resolve against, and unlike the JSON API it is not rate limited.
+          wait_for_crate_version "$PACKAGE_NAME" "$PACKAGE_VERSION" 20 15
+          wait_for_registry \
+            "${PACKAGE_NAME}@${PACKAGE_VERSION} on crates.io" \
+            "https://crates.io/api/v1/crates/${PACKAGE_NAME}/${PACKAGE_VERSION}" 20 15
 
   publishRelease:
     runs-on: ubuntu-latest

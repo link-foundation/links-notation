@@ -150,6 +150,8 @@ jobs:
         id: version-check
         run: |
           set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
           PACKAGE_VERSION=$(sed -n 's|.*<VersionPrefix>\(.*\)</VersionPrefix>.*|\1|p' "$PROJECT_PATH")
           if [ -z "$PACKAGE_VERSION" ]; then
             echo "::error::Could not read <VersionPrefix> from $PROJECT_PATH"
@@ -161,7 +163,7 @@ jobs:
           echo "Package: $PACKAGE_ID@$PACKAGE_VERSION"
 
           # Flat-container URLs are lowercase-only.
-          if curl -fsS "https://api.nuget.org/v3-flatcontainer/$PACKAGE_ID_LOWER/$PACKAGE_VERSION/$PACKAGE_ID_LOWER.nuspec" > /dev/null 2>&1; then
+          if probe_registry "https://api.nuget.org/v3-flatcontainer/$PACKAGE_ID_LOWER/$PACKAGE_VERSION/$PACKAGE_ID_LOWER.nuspec"; then
             echo "Version $PACKAGE_VERSION already exists on NuGet.org"
             echo "should_publish=false" >> "$GITHUB_OUTPUT"
           else
@@ -207,18 +209,15 @@ jobs:
           PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
         run: |
           set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
           # NuGet.org indexes asynchronously; poll rather than assume success.
-          for attempt in $(seq 1 20); do
-            if curl -fsS "https://api.nuget.org/v3-flatcontainer/${PACKAGE_ID_LOWER}/index.json" \
-                 | grep -q "\"${PACKAGE_VERSION}\""; then
-              echo "Verified ${PACKAGE_ID}@${PACKAGE_VERSION} on NuGet.org (attempt ${attempt})"
-              exit 0
-            fi
-            echo "Not indexed yet, retrying in 30s (attempt ${attempt}/20)"
-            sleep 30
-          done
-          echo "::error::${PACKAGE_ID}@${PACKAGE_VERSION} did not appear on NuGet.org within 10 minutes"
-          exit 1
+          # The flat container exposes one document per package, so the body
+          # has to be matched -- a 200 only proves the package exists at all.
+          wait_for_registry_match \
+            "${PACKAGE_ID}@${PACKAGE_VERSION} on NuGet.org" \
+            "https://api.nuget.org/v3-flatcontainer/${PACKAGE_ID_LOWER}/index.json" \
+            "\"${PACKAGE_VERSION}\"" 20 30
 
   generatePdfWithCode:
     runs-on: ubuntu-latest
