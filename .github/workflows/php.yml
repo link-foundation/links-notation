@@ -98,7 +98,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-test
+      # The matrix value belongs in the group. Without it all four legs share
+      # one group and cancel each other, so a run reported on one PHP version
+      # while the other three were cancelled before their first step.
+      group: ${{ github.workflow }}-${{ github.ref }}-test-${{ matrix.php-version }}
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     strategy:
       fail-fast: false
