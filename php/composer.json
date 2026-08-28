@@ -5,7 +5,7 @@
     "keywords": ["links", "notation", "lino", "parser", "formatter", "links-platform"],
     "homepage": "https://github.com/link-foundation/links-notation",
     "license": "Unlicense",
-    "version": "0.15.0",
+    "version": "0.16.0",
     "authors": [
         {
             "name": "Link Foundation",
