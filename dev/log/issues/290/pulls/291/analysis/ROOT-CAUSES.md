@@ -412,6 +412,137 @@ pull requests, TruffleHog over the full history with `--results=verified`, and `
 
 ---
 
+## Class F — Found by the checks this pull request added, on their own first runs
+
+The `workflows` and `security` jobs did not exist before this branch. Their first run on the branch
+failed, and the `php` matrix defect below had been hiding in plain sight on `main` for as long as
+the matrix has existed. This class is the evidence that the new checks earn their place.
+
+### F1 🔴 62 shellcheck findings across every workflow, and the local check that missed them
+
+*Evidence:* run [33157275428](https://github.com/link-foundation/links-notation/actions/runs/33157275428),
+job `actionlint`.
+
+The very first run of the new `workflows` job reported 62 findings, dominated by **SC2086**
+(`echo "x=1" >> $GITHUB_OUTPUT` — an unquoted expansion that word-splits if the path ever contains a
+space), plus **SC2129** (a run of individual `>>` redirects that should be one `{ … } >> file`
+block in `java.yml`) and **SC2028** (`echo` in `bom-check.yml` printing `\xEF\xBB\xBF`, which `echo`
+is permitted to expand, so the hint it prints to the user could differ from the command they need
+to run).
+
+**Root cause of the finding:** never linted. Nothing in this repository had ever run shellcheck over
+a `run:` block.
+
+**Root cause of the false negative:** before pushing, a native `actionlint` binary was run locally
+over the same tree and exited `0`. actionlint does not implement shell linting itself — it shells
+out to `shellcheck`, and when `shellcheck` is not on `PATH` it **silently skips every shell check
+and exits clean**. There is no warning and no non-zero exit; a local check that looks identical to
+the CI job is simply not the same check. The CI job uses `docker://rhysd/actionlint:1.7.7`, whose
+image bundles shellcheck and pyflakes, which is why it saw all 62.
+
+**Fix (`0145b58`).** All 62 findings fixed — 56 quoted env-file redirects (`>> "$GITHUB_OUTPUT"`
+and the same for `$GITHUB_PATH`, `$GITHUB_ENV`, `$GITHUB_STEP_SUMMARY`), the `java.yml` block
+redirect, and `printf '%s\n'` in `bom-check.yml`. The trap itself is documented in a comment above
+the actionlint step in `workflows.yml`, so the next person who reproduces locally knows to put
+shellcheck on `PATH` first.
+
+### F2 🔴 The secret scan aborted before reading a single commit
+
+*Evidence:* run [33157275365](https://github.com/link-foundation/links-notation/actions/runs/33157275365),
+job `Secret scan`: `trufflehog: error: flag 'no-update' cannot be repeated, try --help`.
+
+**Root cause.** `trufflesecurity/trufflehog` is a composite action that already appends
+`--no-update`, `--fail` and `--github-actions` to the command line it builds. Passing `--no-update`
+again through `extra_args` produced a duplicate flag, and the trufflehog CLI rejects a repeated flag
+outright rather than ignoring it. The job failed in the CLI's argument parser, having scanned
+nothing.
+
+A second, quieter defect sat next to it: the action's `version` input defaults to `latest`, so the
+pinned action ref pinned the *wrapper* while the *scanner* floated. The obvious pin, `v3.97.1`, does
+not exist — the ghcr image tags carry no `v` prefix (`docker run ghcr.io/trufflesecurity/trufflehog:v3.97.1`
+answers `manifest unknown`), unlike the action ref of the same release.
+
+**Fix (`189a653`).** `extra_args` reduced to `--results=verified`, `version: 3.97.1` added, both
+with comments recording why. Verified afterwards on a real run: `chunks: 6381, bytes: 13768140,
+verified_secrets: 0`, exit 0.
+
+### F3 🟢 `php` reported on one version while claiming to test four
+
+*Evidence:* run [33157275418](https://github.com/link-foundation/links-notation/actions/runs/33157275418).
+Jobs `test (8.1)`, `test (8.2)` and `test (8.3)` were all cancelled at `2026-08-28T08:56:17Z` — the
+same second they started, having executed no steps — while `test (8.4)` ran to completion. The
+workflow was green.
+
+**Root cause.** The job-level concurrency group was matrix-blind:
+
+```yaml
+group: ${{ github.workflow }}-${{ github.ref }}-test
+```
+
+Every leg of the matrix evaluates that expression to the *same* string, so the four legs contend for
+one concurrency group and, with `cancel-in-progress` true off `main`, each new leg cancels the ones
+already running. Whichever leg starts last survives. Because a cancelled job does not fail its
+workflow, the run stays green and the summary still lists four legs — so the repository has been
+testing one PHP version, not four, for as long as this group has been in place.
+
+**Fix (`31ec6aa`).** `-${{ matrix.php-version }}` appended to the group. An `awk` sweep over every
+job in every workflow confirmed `php.yml` was the only place a matrix job shared one group; the
+matrix jobs in `security.yml` (`codeql`, `npmAudit`) already keyed on their matrix value.
+Verified on the next run: 8.1, 8.2, 8.3 and 8.4 all completed.
+
+### F4 🟢 Coverage has never been uploaded, and the step reported success anyway
+
+*Evidence:* `go` run 33157870713, step `Upload coverage`:
+
+```
+info  -- Upload queued for processing complete
+error -- Upload queued for processing failed: {"message":"Token required - not valid tokenless upload"}
+##[end-action ...;outcome=success;conclusion=success]
+```
+
+**Root cause.** Codecov requires an upload token; `gh api repos/link-foundation/links-notation/actions/secrets`
+lists only `DEPENDABOT_AUTO_MERGE_TOKEN`, `NUGET_TOKEN` and `PYPI_TOKEN`, so `CODECOV_TOKEN` does
+not exist and the upload cannot succeed. The step carried `fail_ci_if_error: false`, which turns
+that permanent failure into a green step. This is the same shape as A1–A4: a credential that is
+absent, and a job that reports success regardless.
+
+**Fix.** The step now runs only when the secret is configured (`if: env.CODECOV_TOKEN != ''`, with
+the secret exposed as job-level env because a step `if:` cannot read the `secrets` context), passes
+the token explicitly, and uses `fail_ci_if_error: true` so a genuine upload failure is visible. When
+the secret is absent the job emits `::notice::CODECOV_TOKEN is not configured, so coverage was not
+uploaded` instead of a failure it ignores. Adding the secret is a repository-settings action outside
+a pull request's reach; until it is added, the state is now stated rather than hidden.
+
+### F5 ⚠️ Codecov uploaded an unrelated experiment file under the `go` flag
+
+*Evidence:* the same step: `Found 2 coverage files to report` →
+`experiments/test_coverage_data.json` and `go/coverage.out`.
+
+**Root cause.** `files:` narrows what the action passes as `--file`, but it does not disable the
+CLI's workspace search, so anything that looks like a coverage report is picked up as well.
+`experiments/test_coverage_data.json` is a hand-written analysis artefact, not coverage, and it was
+being reported against the `go` flag.
+
+**Fix.** `disable_search: true`.
+
+### F6 ⚠️ The website build warned on every run
+
+*Evidence:* `pages` run 33157870661, step `Build website`:
+`(!) Your Vite config uses features that are unsupported by 'configLoader: native' … ESM syntax in a
+file loaded as CommonJS (vite.config.js:1:1)`.
+
+**Root cause.** `docs/website/vite.config.js` is ESM (`import { defineConfig } from "vite"`), but
+`docs/website/package.json` declared no `"type"`, so Node treats a `.js` file as CommonJS. Vite
+currently falls back to bundling the config, and warns that the loader it plans to make the default
+will not.
+
+**Fix.** `"type": "module"` in `docs/website/package.json`. The only other `.js` file in that
+directory, `script.js`, is already loaded by the browser as `<script type="module">` and uses no
+`require()`, so nothing else changes. `npm ci && npm run build` reproduces the warning before and
+builds clean after.
+
+---
+
 ## The single sentence version
 
 Six publish jobs were written independently, so the same condition — *"the credential for this

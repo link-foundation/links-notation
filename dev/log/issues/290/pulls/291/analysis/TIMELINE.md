@@ -131,3 +131,27 @@ page, a generator failure was invisible because nothing in CI ran the generator,
 advisory was invisible because nothing in CI ran an audit. This PR adds the missing checks —
 `links.yml`, `security.yml`, `workflows.yml` and the post-publish registry verification — so each of
 these classes fails loudly the next time it happens.
+
+## A third sequence, on this branch: what the new checks caught on their first run
+
+The checks above are not hypothetical. Their first execution on this branch, run against a tree that
+a native `actionlint` had already declared clean locally, produced three failures — and a full-text
+sweep of the green runs that followed produced three more findings that no annotation reported. All
+six are real defects. The sequence is worth recording because it is the direct evidence that the
+added coverage was warranted, and because of what the last row says about "green".
+
+| When (UTC) | Event | Consequence |
+| --- | --- | --- |
+| 2026-08-28 08:55 | Local `actionlint` over the whole tree exits `0` | Believed clean; pushed |
+| 2026-08-28 08:55:57 | `workflows` run 33157275428 fails with **62 shellcheck findings** | The local binary had no `shellcheck` on `PATH`, so it skipped every shell check and exited clean — a false negative in the verification step itself (F1) |
+| 2026-08-28 08:56:17 | `php` run 33157275418: `test (8.1)`, `(8.2)`, `(8.3)` cancelled the same second they started, `(8.4)` completes, run is **green** | A matrix-blind concurrency group; the repository had been testing one PHP version while reporting four (F3) |
+| 2026-08-28 08:58:06 | `security` run 33157275365 fails: `flag 'no-update' cannot be repeated` | The secret scan aborted in argument parsing, having read no commit (F2) |
+| 2026-08-28 09:04:37 | With F1–F3 fixed (`31ec6aa`), all 12 runs are green and PHP runs all four legs | An annotation sweep over all 61 jobs returns exactly one annotation, a `notice` from the links workflow — zero warnings, zero errors *in annotations* |
+| 2026-08-28 09:05:00 | …but `pages` run 33157870661 warns `ESM syntax in a file loaded as CommonJS (vite.config.js:1:1)` in its log | A warning on every website build, and a breakage waiting for the Vite major that makes `configLoader: 'native'` the default (F6) |
+| 2026-08-28 09:05:37 | …and `go` run 33157870713 logs `Upload queued for processing failed: {"message":"Token required - not valid tokenless upload"}` while the step ends `outcome=success` | Coverage has never reached Codecov; `fail_ci_if_error: false` hid it (F4). The same step also uploaded `experiments/test_coverage_data.json` under the `go` flag (F5) |
+| 2026-08-28, after 09:05 | The 12 green runs are downloaded in full and grepped for `warning`/`deprecat` | F4–F6 only exist in step output, not in annotations: a green run with zero annotations is still not the same as a clean run |
+
+The through-line is the same one the previous two sequences share, applied to this pull request's own
+work: **a check that is not actually running is indistinguishable from a check that passes.** F1 is
+the sharpest form of it — the local and CI invocations were spelled identically and did different
+amounts of work, because one of them was missing a dependency it degrades silently without.

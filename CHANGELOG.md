@@ -134,6 +134,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A live high-severity advisory in `js/package-lock.json`
   ([GHSA-mh99-v99m-4gvg](https://github.com/advisories/GHSA-mh99-v99m-4gvg))
   was resolved by matching the version `js/bun.lock` already carried ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- CI/CD: 62 shellcheck findings in `run:` blocks, mostly unquoted `>> $GITHUB_OUTPUT`
+  ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- CI/CD: the secret scan aborted in argument parsing (`flag 'no-update' cannot be repeated`) without
+  reading a single commit, and pinned the wrapper action while the scanner itself floated on
+  `latest` ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- CI/CD: the `php` test matrix cancelled itself. All four legs shared one concurrency group, so
+  three were cancelled the same second they started while the run stayed green: the repository had
+  been testing one PHP version and reporting four ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- Go: coverage was never uploaded. Codecov answered `Token required - not valid tokenless upload` on
+  every run and `fail_ci_if_error: false` reported the step as a success; the upload now runs only
+  when `CODECOV_TOKEN` is configured, fails loudly when it is, and no longer sweeps
+  `experiments/test_coverage_data.json` into the `go` flag ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- Docs website: `docs/website/package.json` declares `"type": "module"`, so the ESM `vite.config.js`
+  is no longer loaded as CommonJS and every build no longer warns ([#290](https://github.com/link-foundation/links-notation/issues/290))
 
 ## [0.11.2] - 2024-XX-XX
 
