@@ -41,6 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           fetch-depth: 0
       - name: Get changed files using defaults
         id: changed-files
@@ -76,6 +77,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -99,6 +101,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -120,6 +123,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -152,6 +156,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -164,8 +169,11 @@ jobs:
         with:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
+      # Node 22 bundles npm 10.x; trusted publishing (OIDC) needs >= 11.5.1.
+      # Pinned to the major rather than @latest so a future npm 12 cannot
+      # change publish behaviour without a commit here.
       - name: Upgrade npm for trusted publishing
-        run: npm install -g npm@latest
+        run: npm install -g npm@11
       - name: Install Dependencies
         run: bun install --frozen-lockfile
       - name: Build
@@ -246,6 +254,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Create GitHub release
         env:

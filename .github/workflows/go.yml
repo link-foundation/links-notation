@@ -41,6 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           fetch-depth: 0
       - name: Get changed files using defaults
         id: changed-files
@@ -76,6 +77,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup Go
         uses: actions/setup-go@v6
@@ -104,6 +106,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup Go
         uses: actions/setup-go@v6
@@ -134,6 +137,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Read the module version
         id: version-check

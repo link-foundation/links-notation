@@ -47,6 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           fetch-depth: 0
       - name: Get changed files using defaults
         id: changed-files
@@ -82,6 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v5
@@ -108,6 +110,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v5
@@ -137,6 +140,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v5
@@ -227,6 +231,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v5
@@ -262,6 +267,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Download PDF artifact
         uses: actions/download-artifact@v8
@@ -297,6 +303,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           submodules: true
       - name: Create GitHub release
         env:
