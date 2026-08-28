@@ -1,0 +1,17 @@
+33168552493|warning|.github|php: declared 0.16.0, but nothing is published on Packagist. The publish job for this language has never successfully released anything.
+33168552493|warning|.github|java: declared 0.16.0, but nothing is published on Maven Central. The publish job for this language has never successfully released anything.
+33168552493|warning|.github|go: declared 0.16.0, latest on proxy.golang.org is 0.15.0.
+33168552493|warning|.github|csharp: declared 0.16.0, latest on NuGet.org is 0.15.0.
+33168552493|warning|.github|rust: declared 0.16.0, latest on crates.io is 0.15.0.
+33168552493|warning|.github|python: declared 0.16.0, latest on PyPI is 0.15.0.
+33168552493|warning|.github|js: declared 0.16.0, latest on npm is 0.15.0.
+33168552483|notice|.github|Summary report available at: https://github.com/link-foundation/links-notation/actions/runs/33168552483#summary-98839751833
+33168552511|notice|.github|CODECOV_TOKEN is not configured, so coverage was not uploaded
+33168552472|warning|.github|link-foundation/links-notation is not registered on Packagist (repo.packagist.org returns 404). Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created.
+33168552529|warning|.github|Skipping Maven Central publishing: CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets are not configured. Generate a token at https://central.sonatype.com/account and add these repository secrets to enable publishing. No GitHub release will be created.
+33168552480|warning|.github|A new Trusted Publisher for the currently running publishing workflow can be created by accessing the following link(s) while logged-in as an owner of the package(s):
+33168552480|warning|.github|Trusted Publishers allows publishing packages to PyPI from automated environments like GitHub Actions without needing to use username/password combinations or API tokens to authenticate with PyPI. Read more: https://docs.pypi.org/trusted-publishers
+33168552480|warning|.github|The workflow was run with the 'attestations: true' input, but an explicit password was also set, disabling Trusted Publishing. As a result, the attestations input is ignored.
+33168552506|failure|.github|Process completed with exit code 1.
+33168552506|failure|.github|links-notation@0.16.0 did not appear on crates.io within 5 minutes
+33168552506|failure|.github|Failed to retrieve token from Cargo registry. Status: 400. Error: No Trusted Publishing config found for repository `link-foundation/links-notation`.
