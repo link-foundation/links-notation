@@ -187,6 +187,8 @@ jobs:
         id: version-check
         run: |
           set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
           PACKAGE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           PACKAGE_GROUP=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)
           PACKAGE_ARTIFACT=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
@@ -198,7 +200,7 @@ jobs:
           echo "Package: $PACKAGE_GROUP:$PACKAGE_ARTIFACT:$PACKAGE_VERSION"
 
           URL="https://repo1.maven.org/maven2/$(echo "$PACKAGE_GROUP" | tr '.' '/')/$PACKAGE_ARTIFACT/$PACKAGE_VERSION/"
-          if curl --head --silent --fail "$URL" > /dev/null 2>&1; then
+          if probe_registry "$URL"; then
             echo "Version $PACKAGE_VERSION already exists on Maven Central"
             echo "should_publish=false" >> "$GITHUB_OUTPUT"
           else
@@ -235,18 +237,13 @@ jobs:
           PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
         run: |
           set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
           GROUP_PATH=$(echo "$PACKAGE_GROUP" | tr '.' '/')
-          URL="https://repo1.maven.org/maven2/${GROUP_PATH}/${PACKAGE_ARTIFACT}/${PACKAGE_VERSION}/${PACKAGE_ARTIFACT}-${PACKAGE_VERSION}.pom"
-          for attempt in $(seq 1 30); do
-            if curl --head --silent --fail "$URL" > /dev/null 2>&1; then
-              echo "Verified ${PACKAGE_GROUP}:${PACKAGE_ARTIFACT}:${PACKAGE_VERSION} on Maven Central (attempt ${attempt})"
-              exit 0
-            fi
-            echo "Not synced yet, retrying in 30s (attempt ${attempt}/30)"
-            sleep 30
-          done
-          echo "::error::${PACKAGE_GROUP}:${PACKAGE_ARTIFACT}:${PACKAGE_VERSION} did not appear on Maven Central within 15 minutes"
-          exit 1
+          wait_for_registry \
+            "${PACKAGE_GROUP}:${PACKAGE_ARTIFACT}:${PACKAGE_VERSION} on Maven Central" \
+            "https://repo1.maven.org/maven2/${GROUP_PATH}/${PACKAGE_ARTIFACT}/${PACKAGE_VERSION}/${PACKAGE_ARTIFACT}-${PACKAGE_VERSION}.pom" \
+            30 30
 
   publishRelease:
     runs-on: ubuntu-latest

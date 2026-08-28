@@ -14,6 +14,16 @@ import { declaredVersions, match, read } from './declared-versions.mjs';
 
 const verbose = process.env.CI_VERBOSE === 'true';
 
+// On a pull request no publish job runs, so a bumped version being ahead of
+// the registry is the expected state and not drift worth annotating. The
+// workflow sets this to 'false' there and leaves it unset (meaning true)
+// everywhere else.
+const expectPublished = process.env.AUDIT_EXPECT_PUBLISHED !== 'false';
+
+// `::warning::` on a run where being ahead is expected is a false positive, so
+// the same finding is reported at the severity the context actually warrants.
+const report = (message) => console.log(expectPublished ? `::warning::${message}` : `::notice::${message}`);
+
 async function head(url) {
   const response = await fetch(url, { headers: { 'user-agent': 'links-notation-release-audit' } });
   if (verbose) console.log(`  GET ${url} -> ${response.status}`);
@@ -123,22 +133,26 @@ for (const language of languages) {
   }
 
   if (published === null) {
-    console.log(
-      `::warning::${language.name}: declared ${declared}, but nothing is published on ${language.registry}. ` +
+    report(
+      `${language.name}: declared ${declared}, but nothing is published on ${language.registry}. ` +
         `The publish job for this language has never successfully released anything.`,
     );
     drift += 1;
   } else if (published !== declared) {
-    console.log(
-      `::warning::${language.name}: declared ${declared}, latest on ${language.registry} is ${published}.`,
-    );
+    report(`${language.name}: declared ${declared}, latest on ${language.registry} is ${published}.`);
     drift += 1;
   } else {
     console.log(`${language.name}: ${declared} (in sync with ${language.registry})`);
   }
 }
 
-console.log(drift === 0 ? '\nAll implementations are in sync with their registries.' : `\n${drift} implementation(s) drifted.`);
+if (drift === 0) {
+  console.log('\nAll implementations are in sync with their registries.');
+} else if (expectPublished) {
+  console.log(`\n${drift} implementation(s) drifted.`);
+} else {
+  console.log(`\n${drift} implementation(s) are ahead of their registries, which is expected before the release runs.`);
+}
 // Drift is reported, not enforced: a version bump legitimately precedes the
 // release that publishes it.
 process.exit(0);

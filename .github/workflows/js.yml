@@ -237,16 +237,11 @@ jobs:
           PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
         run: |
           set -euo pipefail
-          for attempt in $(seq 1 10); do
-            if curl -fsS "https://registry.npmjs.org/${PACKAGE_NAME}/${PACKAGE_VERSION}" >/dev/null 2>&1; then
-              echo "Verified ${PACKAGE_NAME}@${PACKAGE_VERSION} on npm (attempt ${attempt})"
-              exit 0
-            fi
-            echo "Not visible yet, retrying in 15s (attempt ${attempt}/10)"
-            sleep 15
-          done
-          echo "::error::${PACKAGE_NAME}@${PACKAGE_VERSION} did not appear on the npm registry within 2.5 minutes"
-          exit 1
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          wait_for_registry \
+            "${PACKAGE_NAME}@${PACKAGE_VERSION} on npm" \
+            "https://registry.npmjs.org/${PACKAGE_NAME}/${PACKAGE_VERSION}" 10 15
 
   publishRelease:
     runs-on: ubuntu-latest

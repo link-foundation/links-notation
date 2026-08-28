@@ -157,6 +157,8 @@ jobs:
         id: version-check
         run: |
           set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
           read -r PACKAGE_NAME PACKAGE_VERSION <<<"$(python -c "
           import tomllib
           with open('pyproject.toml','rb') as f:
@@ -170,7 +172,7 @@ jobs:
           # The JSON API is an exact lookup. The previous `pip index versions |
           # grep` matched substrings, so 0.1.0 looked published once 0.1.0.1
           # existed.
-          if curl -fsS "https://pypi.org/pypi/${PACKAGE_NAME}/${PACKAGE_VERSION}/json" >/dev/null 2>&1; then
+          if probe_registry "https://pypi.org/pypi/${PACKAGE_NAME}/${PACKAGE_VERSION}/json"; then
             echo "Version $PACKAGE_VERSION already exists on PyPI"
             echo "should_publish=false" >> "$GITHUB_OUTPUT"
           else
@@ -179,12 +181,21 @@ jobs:
           fi
       # Trusted publishing when configured; an empty `password` makes the
       # action fall back to OIDC, and PYPI_TOKEN is only the bootstrap.
+      #
+      # The action defaults `attestations` to true, but attestations require
+      # trusted publishing, so passing a password made every release log
+      # "the attestations input is ignored" as a warning. The two settings are
+      # now driven by the same opt-in variable and can no longer contradict
+      # each other. Register the publisher at
+      # https://pypi.org/manage/project/links-notation/settings/publishing/
+      # and set the `PYPI_TRUSTED_PUBLISHING` repository variable to `true`.
       - name: Publish to PyPI
         if: steps.version-check.outputs.should_publish == 'true'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: python/dist
-          password: ${{ secrets.PYPI_TOKEN }}
+          password: ${{ vars.PYPI_TRUSTED_PUBLISHING == 'true' && '' || secrets.PYPI_TOKEN }}
+          attestations: ${{ vars.PYPI_TRUSTED_PUBLISHING == 'true' }}
       - name: Record publish outcome
         id: publish
         run: |
@@ -201,16 +212,11 @@ jobs:
           PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
         run: |
           set -euo pipefail
-          for attempt in $(seq 1 10); do
-            if curl -fsS "https://pypi.org/pypi/${PACKAGE_NAME}/${PACKAGE_VERSION}/json" >/dev/null 2>&1; then
-              echo "Verified ${PACKAGE_NAME}@${PACKAGE_VERSION} on PyPI (attempt ${attempt})"
-              exit 0
-            fi
-            echo "Not visible yet, retrying in 15s (attempt ${attempt}/10)"
-            sleep 15
-          done
-          echo "::error::${PACKAGE_NAME}@${PACKAGE_VERSION} did not appear on PyPI within 2.5 minutes"
-          exit 1
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          wait_for_registry \
+            "${PACKAGE_NAME}@${PACKAGE_VERSION} on PyPI" \
+            "https://pypi.org/pypi/${PACKAGE_NAME}/${PACKAGE_VERSION}/json" 10 15
 
   publishRelease:
     runs-on: ubuntu-latest

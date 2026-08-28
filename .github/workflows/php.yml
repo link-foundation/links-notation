@@ -150,6 +150,8 @@ jobs:
         id: version-check
         run: |
           set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
           PACKAGE_NAME=$(php -r 'echo json_decode(file_get_contents("composer.json"))->name;')
           PACKAGE_VERSION=$(php -r 'echo json_decode(file_get_contents("composer.json"))->version;')
           echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
@@ -159,7 +161,7 @@ jobs:
           # Distinguish "package is not on Packagist at all" from "this version
           # is not there yet". The old check collapsed both into should_publish
           # and then the update call quietly did nothing.
-          if ! METADATA=$(curl -fsS "https://repo.packagist.org/p2/${PACKAGE_NAME}.json" 2>/dev/null); then
+          if ! METADATA=$(fetch_registry "https://repo.packagist.org/p2/${PACKAGE_NAME}.json"); then
             echo "package_known=false" >> "$GITHUB_OUTPUT"
             echo "should_publish=true" >> "$GITHUB_OUTPUT"
             exit 0
@@ -217,18 +219,14 @@ jobs:
           PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
         run: |
           set -euo pipefail
-          # Packagist crawls asynchronously after the update call returns 202.
-          for attempt in $(seq 1 20); do
-            if curl -fsS "https://repo.packagist.org/p2/${PACKAGE_NAME}.json" \
-                 | grep -q "\"version\":\"${PACKAGE_VERSION}\""; then
-              echo "Verified ${PACKAGE_NAME}@${PACKAGE_VERSION} on Packagist (attempt ${attempt})"
-              exit 0
-            fi
-            echo "Not crawled yet, retrying in 30s (attempt ${attempt}/20)"
-            sleep 30
-          done
-          echo "::error::${PACKAGE_NAME}@${PACKAGE_VERSION} did not appear on Packagist within 10 minutes"
-          exit 1
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          # Packagist crawls asynchronously after the update call returns 202,
+          # and serves every version from one document, so match the body.
+          wait_for_registry_match \
+            "${PACKAGE_NAME}@${PACKAGE_VERSION} on Packagist" \
+            "https://repo.packagist.org/p2/${PACKAGE_NAME}.json" \
+            "\"version\":\"${PACKAGE_VERSION}\"" 20 30
 
   publishRelease:
     runs-on: ubuntu-latest

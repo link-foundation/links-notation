@@ -11,9 +11,11 @@ on:
     branches: main
     paths:
       - '.github/**'
+      - 'scripts/ci/**'
   pull_request:
     paths:
       - '.github/**'
+      - 'scripts/ci/**'
   workflow_dispatch:
 
 permissions:
@@ -39,6 +41,28 @@ jobs:
         uses: docker://rhysd/actionlint:1.7.7
         with:
           args: -color
+
+  ci-scripts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      # actionlint only reaches shell that is inlined in a `run:` block, so the
+      # shared helper the publish workflows source needs its own gate.
+      - name: Run shellcheck
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install --yes shellcheck
+          shellcheck -x scripts/ci/*.sh
+      # Guards the fix for issue #298: the registry probes have to send an
+      # identifying User-Agent, because crates.io answers 403 without one. The
+      # test runs against a local server, so it needs no network and cannot go
+      # flaky.
+      - name: Test the registry probe
+        run: bash scripts/ci/registry-probe.test.sh
 
   zizmor:
     runs-on: ubuntu-latest
