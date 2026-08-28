@@ -67,7 +67,7 @@ namespace Link.Foundation.Links.Notation.Tests
             // Simple reference creates a singlet link with null Id and one value
             Assert.Null(links[0].Id);
             Assert.NotNull(links[0].Values);
-            Assert.Single(links[0].Values);
+            Assert.Single(links[0].Values!);
             Assert.Equal("test", links[0].Values?[0].Id);
             Assert.Null(links[0].Values?[0].Values);
         }
@@ -118,7 +118,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.Null(result[0].Id);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("singlet", result[0].Values?[0].Id);
             Assert.Null(result[0].Values?[0].Values);
         }
@@ -274,7 +274,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.Null(result[0].Id);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("hello", result[0].Values?[0].Id);
         }
 
@@ -286,7 +286,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.Null(result[0].Id);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("hello world", result[0].Values?[0].Id);
         }
 
@@ -298,7 +298,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.Null(result[0].Id);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("singlet", result[0].Values?[0].Id);
             Assert.Null(result[0].Values?[0].Values);
         }
@@ -370,8 +370,8 @@ namespace Link.Foundation.Links.Notation.Tests
 
             Assert.NotEmpty(result);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
-            Assert.Equal("quoted value", result[0].Values[0].Id);
+            Assert.Single(result[0].Values!);
+            Assert.Equal("quoted value", result[0].Values![0].Id);
         }
 
         [Fact]
@@ -428,7 +428,7 @@ namespace Link.Foundation.Links.Notation.Tests
 
             Assert.Single(result);
             Assert.Equal("id", result[0].Id);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("value with spaces", result[0].Values?[0].Id);
         }
     }

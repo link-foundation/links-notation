@@ -38,8 +38,8 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Equal("(greeting: hello)", formatted);
             Assert.Single(result);
             Assert.Equal("greeting", result[0].Id);
-            Assert.Single(result[0].Values);
-            Assert.Equal("hello", result[0].Values[0].Id);
+            Assert.Single(result[0].Values!);
+            Assert.Equal("hello", result[0].Values![0].Id);
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Equal("(action: run fast now)", formatted);
             Assert.Single(result);
             Assert.Equal("action", result[0].Id);
-            Assert.Equal(3, result[0].Values.Count);
+            Assert.Equal(3, result[0].Values!.Count);
         }
 
         [Fact]
@@ -150,7 +150,8 @@ third value";
 
             Assert.Single(result);
             Assert.Equal("empty", result[0].Id);
-            Assert.True(result[0].Values == null || result[0].Values.Count == 0);
+            var emptyValues = result[0].Values;
+            Assert.True(emptyValues == null || emptyValues.Count == 0);
 
             var formatted = result.Format();
             Assert.Equal("(empty)", formatted);
@@ -195,7 +196,7 @@ third value";
 
             var rootLink = result[0];
             Assert.Equal("root", rootLink.Id);
-            Assert.Equal(2, rootLink.Values.Count);
+            Assert.Equal(2, rootLink.Values!.Count);
         }
     }
 }
