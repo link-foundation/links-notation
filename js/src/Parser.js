@@ -64,7 +64,11 @@ export class Parser {
     if (item.children && item.children.length > 0) {
       // Special case: If this is an ID with empty values but has children,
       // the children should become the values of the link (indented ID syntax)
-      if (item.id && (!item.values || item.values.length === 0)) {
+      if (
+        item.id !== undefined &&
+        item.id !== null &&
+        (!item.values || item.values.length === 0)
+      ) {
         const childValues = item.children.map((child) => {
           // For indented children, extract the actual reference from the child's values
           if (child.values && child.values.length === 1) {
@@ -185,12 +189,12 @@ export class Parser {
     // For items with values, create a link with those values
     if (item.values && Array.isArray(item.values)) {
       // Create a link with id (if present) and transformed values
-      const link = new Link(item.id || null, []);
+      const link = new Link(item.id ?? null, []);
       link.values = item.values.map((v) => this.transformLink(v));
       return link;
     }
 
     // Default case
-    return new Link(item.id || null, []);
+    return new Link(item.id ?? null, []);
   }
 }
