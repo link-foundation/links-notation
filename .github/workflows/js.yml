@@ -216,9 +216,15 @@ jobs:
             echo "npm credential: NPM_TOKEN absent, relying on OIDC trusted publishing"
           fi
 
-          if ! npm publish --access public 2>&1 | tee publish.log; then
-            if grep -q 'ENEEDAUTH\|E401\|E403' publish.log; then
+          # Keep the log outside the package directory: npm builds the tarball
+          # from the working tree, so a log written here ships inside it.
+          PUBLISH_LOG="$RUNNER_TEMP/publish.log"
+          if ! npm publish --access public 2>&1 | tee "$PUBLISH_LOG"; then
+            if grep -q 'ENEEDAUTH\|E401\|E403' "$PUBLISH_LOG"; then
               echo "::error::npm rejected the credentials. Either configure trusted publishing for ${{ steps.version-check.outputs.name }} on npmjs.com or set the NPM_TOKEN secret."
+            fi
+            if grep -q 'E422\|provenance' "$PUBLISH_LOG"; then
+              echo "::error::npm rejected the provenance attestation. Trusted publishing signs the package with this repository's identity, so package.json must carry a matching \"repository.url\" (https://github.com/${{ github.repository }})."
             fi
             echo "published=failed" >> "$GITHUB_OUTPUT"
             exit 1
