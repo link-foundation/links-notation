@@ -246,8 +246,39 @@ fn parse_multi_quote_string(
     }
 }
 
+/// A body written between an even run of delimiters is substantive when it
+/// holds at least one visible character and does not straddle a parenthesis.
+/// An even run can always be read as delimiter pairs enclosing nothing, so the
+/// n-quote reading is only taken when it carries something the pairs cannot.
+fn is_substantive_body(content: &str) -> bool {
+    let mut depth: isize = 0;
+    let mut has_visible = false;
+
+    for c in content.chars() {
+        match c {
+            '(' => depth += 1,
+            ')' => {
+                depth -= 1;
+                if depth < 0 {
+                    return false;
+                }
+            }
+            _ => {}
+        }
+        if !c.is_whitespace() {
+            has_visible = true;
+        }
+    }
+
+    has_visible && depth == 0
+}
+
 /// Parse a quoted string with dynamically detected quote count.
-/// Counts opening quotes and uses that count for parsing.
+///
+/// Counts opening quotes and uses that count for parsing. A run of an even
+/// number of delimiters that does not open a reference with a substantive body
+/// is the empty reference: the shortest reading, a bare delimiter pair
+/// enclosing nothing, wins over a longer n-quote delimiter.
 fn parse_dynamic_quote_string(input: &str, quote_char: char) -> IResult<&str, String> {
     // Count opening quotes
     let quote_count = input.chars().take_while(|&c| c == quote_char).count();
@@ -259,7 +290,22 @@ fn parse_dynamic_quote_string(input: &str, quote_char: char) -> IResult<&str, St
         )));
     }
 
-    parse_multi_quote_string(input, quote_char, quote_count)
+    let is_even_run = quote_count % 2 == 0;
+
+    if let Ok((rest, content)) = parse_multi_quote_string(input, quote_char, quote_count) {
+        if !is_even_run || is_substantive_body(&content) {
+            return Ok((rest, content));
+        }
+    }
+
+    if is_even_run {
+        return Ok((&input[quote_count * quote_char.len_utf8()..], String::new()));
+    }
+
+    Err(nom::Err::Error(nom::error::Error::new(
+        input,
+        nom::error::ErrorKind::Tag,
+    )))
 }
 
 fn double_quoted_dynamic(input: &str) -> IResult<&str, String> {

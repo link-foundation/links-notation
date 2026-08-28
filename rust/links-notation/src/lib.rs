@@ -348,11 +348,27 @@ impl<T: ToString + Clone> LiNo<T> {
 impl<T: ToString> fmt::Display for LiNo<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            LiNo::Ref(value) => write!(f, "{}", value.to_string()),
+            // The empty reference is written as a bare delimiter pair; writing it
+            // as nothing would drop it from the document.
+            LiNo::Ref(value) => {
+                let value = value.to_string();
+                if value.is_empty() {
+                    write!(f, "\"\"")
+                } else {
+                    write!(f, "{}", value)
+                }
+            }
             LiNo::Link { id, values } => {
                 let id_str = id
                     .as_ref()
-                    .map(|id| format!("{}: ", id.to_string()))
+                    .map(|id| {
+                        let id = id.to_string();
+                        if id.is_empty() {
+                            "\"\": ".to_string()
+                        } else {
+                            format!("{}: ", id)
+                        }
+                    })
                     .unwrap_or_default();
 
                 if f.alternate() {
@@ -743,8 +759,10 @@ fn group_consecutive_links(links: &[LiNo<String>]) -> Vec<LiNo<String>> {
 
 /// Escape a reference string by adding quotes if necessary.
 fn escape_reference(reference: &str) -> String {
-    if reference.is_empty() || reference.trim().is_empty() {
-        return String::new();
+    // The empty reference is written as a bare delimiter pair, so that it reads
+    // back as itself instead of disappearing from the document.
+    if reference.is_empty() {
+        return "\"\"".to_string();
     }
 
     let has_single_quote = reference.contains('\'');
