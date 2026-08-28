@@ -1,0 +1,52 @@
+name: release-audit
+
+# Compares the version declared in each language's source tree with the version
+# actually available on that language's registry.
+#
+# At the time this was added the audit reported: js declared 0.15.0 / npm
+# 0.13.0, csharp declared 0.15.0 / NuGet 0.13.0, java declared 0.3.0 with
+# nothing on Maven Central, php declared 0.2.0 with nothing on Packagist. All
+# four had green CI runs. The release jobs gated on
+# `needs.<publishJob>.result == 'success'`, which is also what a job reports
+# when its publish step did nothing, so a missing credential or a
+# never-evaluated `if:` looked exactly like a successful release.
+
+on:
+  push:
+    branches: main
+  schedule:
+    # Weekly, so drift introduced outside a push is still noticed.
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      verbose:
+        description: 'Print every registry request and its status code'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      # Drift is reported as annotations rather than enforced as a failure: a
+      # version bump legitimately lands before the release that publishes it.
+      - name: Audit declared versions against the registries
+        env:
+          CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+        run: node scripts/release-audit.mjs

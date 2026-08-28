@@ -1,0 +1,17 @@
+== crates.io links-notation
+0.15.0 ['0.15.0', '0.14.0', '0.13.0', '0.12.0', '0.11.2', '0.11.0', '0.9.0', '0.8.0']
+== PyPI links-notation
+0.15.0 ['0.10.0', '0.11.0', '0.11.2', '0.12.0', '0.13.0', '0.14.0', '0.15.0', '0.9.0']
+== Packagist
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import sys,json;d=json.load(sys.stdin);print([v['version'] for v in d['packages']['link-foundation/links-notation']][:8])
+                                                                        ~^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+== Maven Central
+[]
+== local versions ==
+version = "0.15.0"
+0.15.0
+    <version>0.3.0</version>
+    "version": "0.2.0",

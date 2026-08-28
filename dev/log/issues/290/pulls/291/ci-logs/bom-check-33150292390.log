@@ -1,0 +1,217 @@
+check-bom-consistency	Set up job	﻿2026-08-28T07:07:11.6346949Z Current runner version: '2.336.0'
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6381681Z ##[group]Runner Image Provisioner
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6383341Z Hosted Compute Agent
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6384438Z Version: 20260819.586
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6385513Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6386686Z Build Date: 2026-08-18T23:20:18Z
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6387764Z Worker ID: {2a562eb6-4053-4cb4-82c1-deff445e6f6d}
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6388942Z Azure Region: eastus
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6389813Z ##[endgroup]
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6392093Z ##[group]Operating System
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6393087Z Ubuntu
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6394201Z 24.04.4
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6395150Z LTS
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6395945Z ##[endgroup]
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6396888Z ##[group]Runner Image
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6398400Z Image: ubuntu-24.04
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6399261Z Version: 20260823.283.1
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6401122Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6404253Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6405850Z ##[endgroup]
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6411099Z ##[group]GITHUB_TOKEN Permissions
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6414465Z Actions: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6415601Z ArtifactMetadata: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6416544Z Attestations: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6417454Z Checks: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6418329Z CodeQuality: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6419202Z Contents: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6420148Z CopilotRequests: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6421057Z Deployments: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6421971Z Discussions: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6422944Z Drives: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6423939Z Issues: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6424950Z Metadata: read
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6425939Z Models: read
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6426832Z Packages: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6427735Z Pages: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6428572Z PullRequests: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6429620Z RepositoryProjects: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6430602Z SecurityEvents: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6431622Z Statuses: write
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6432495Z VulnerabilityAlerts: read
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6433400Z ##[endgroup]
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6436647Z Secret source: Actions
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6438192Z Prepare workflow directory
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6889467Z Prepare all required actions
+check-bom-consistency	Set up job	2026-08-28T07:07:11.6956766Z Getting action download info
+check-bom-consistency	Set up job	2026-08-28T07:07:11.8873723Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+check-bom-consistency	Set up job	2026-08-28T07:07:12.0833223Z Complete job name: check-bom-consistency
+check-bom-consistency	Run actions/checkout@v6	﻿2026-08-28T07:07:12.1652967Z ##[group]Run actions/checkout@v6
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1654043Z with:
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1654559Z   repository: link-foundation/links-notation
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1658802Z   token: ***
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1659264Z   ssh-strict: true
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1659719Z   ssh-user: git
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1660181Z   persist-credentials: true
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1660677Z   clean: true
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1661254Z   sparse-checkout-cone-mode: true
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1661786Z   fetch-depth: 1
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1662220Z   fetch-tags: false
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1662725Z   show-progress: true
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1663177Z   lfs: false
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1663736Z   submodules: false
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1664202Z   set-safe-directory: true
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1664714Z   allow-unsafe-pr-checkout: false
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.1665476Z ##[endgroup]
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2679577Z Syncing repository: link-foundation/links-notation
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2681509Z ##[group]Getting Git version info
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2682451Z Working directory is '/home/runner/work/links-notation/links-notation'
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2683938Z [command]/usr/bin/git version
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2749253Z git version 2.55.0
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2805041Z ##[endgroup]
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2825622Z Temporarily overriding HOME='/home/runner/work/_temp/6e5dfe45-699b-4e5e-903d-28ba6141993f' before making global git config changes
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2828214Z Adding repository directory to the temporary git global config as a safe directory
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2832077Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2885969Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2891334Z ##[group]Determining repository object format
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2893980Z ##[endgroup]
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2895230Z ##[group]Initializing the repository
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2899261Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2998277Z hint: Using 'master' as the name for the initial branch. This default branch name
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.2999890Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3001321Z hint: to use in all of your new repositories, which will suppress this warning,
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3002501Z hint: call:
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3003134Z hint:
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3004309Z hint: 	git config --global init.defaultBranch <name>
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3005268Z hint:
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3006151Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3007584Z hint: 'development'. The just-created branch can be renamed via this command:
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3008554Z hint:
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3008987Z hint: 	git branch -m <name>
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3009468Z hint:
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3010112Z hint: Disable this message with "git config set advice.defaultBranchName false"
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3011583Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3018232Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3067510Z ##[endgroup]
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3068667Z ##[group]Disabling automatic garbage collection
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3071547Z [command]/usr/bin/git config --local gc.auto 0
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3104324Z ##[endgroup]
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3105438Z ##[group]Setting up auth
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3112532Z Removing SSH command configuration
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3120272Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3151891Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3537260Z Removing HTTP extra header
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3546322Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3590413Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3834261Z Removing includeIf entries pointing to credentials config files
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3841498Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.3880413Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.4121607Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.4165216Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.4201706Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.4242736Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.4279847Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.4319322Z ##[endgroup]
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.4320098Z ##[group]Fetching the repository
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.4327921Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4958f3cf8012ba9e67f19309b9c58984f7ce106a:refs/remotes/origin/main
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8035194Z From https://github.com/link-foundation/links-notation
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8036405Z  * [new ref]         4958f3cf8012ba9e67f19309b9c58984f7ce106a -> origin/main
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8046319Z [command]/usr/bin/git branch --list --remote origin/main
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8076227Z   origin/main
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8084981Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8113858Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8118104Z ##[endgroup]
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8119200Z ##[group]Determining the checkout info
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8120599Z ##[endgroup]
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8123371Z [command]/usr/bin/git sparse-checkout disable
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8177821Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8210020Z ##[group]Checking out the ref
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8213843Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8485024Z Switched to a new branch 'main'
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8490833Z branch 'main' set up to track 'origin/main'.
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8498218Z ##[endgroup]
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8546821Z [command]/usr/bin/git log -1 --format=%H
+check-bom-consistency	Run actions/checkout@v6	2026-08-28T07:07:12.8576829Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+check-bom-consistency	Check for Unicode BOM in text files	﻿2026-08-28T07:07:12.8814823Z ##[group]Run echo "Checking for files with Unicode BOM..."
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8815856Z ^[[36;1mecho "Checking for files with Unicode BOM..."^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8816751Z ^[[36;1mecho "Repository standard: NO BOM (UTF-8 without BOM)"^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8817494Z ^[[36;1mecho ""^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8817987Z ^[[36;1m^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8818582Z ^[[36;1m# Find all text files that contain BOM (EF BB BF at start)^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8819537Z ^[[36;1m# Exclude binary files, .git directory, and common binary extensions^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8820346Z ^[[36;1mfiles_with_bom=""^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8820876Z ^[[36;1m^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8821390Z ^[[36;1mwhile IFS= read -r -d '' file; do^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8822152Z ^[[36;1m  # Check if file starts with UTF-8 BOM (EF BB BF)^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8823021Z ^[[36;1m  if head -c 3 "$file" | od -An -tx1 | grep -q "ef bb bf"; then^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8824075Z ^[[36;1m    files_with_bom="$files_with_bom$file"$'\n'^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8824747Z ^[[36;1m  fi^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8825293Z ^[[36;1mdone < <(find . -type f \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8825891Z ^[[36;1m  -not -path './.git/*' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8826494Z ^[[36;1m  -not -name '*.png' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8827061Z ^[[36;1m  -not -name '*.jpg' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8827630Z ^[[36;1m  -not -name '*.jpeg' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8828203Z ^[[36;1m  -not -name '*.gif' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8828760Z ^[[36;1m  -not -name '*.ico' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8829328Z ^[[36;1m  -not -name '*.woff' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8829905Z ^[[36;1m  -not -name '*.woff2' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8830479Z ^[[36;1m  -not -name '*.ttf' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8831035Z ^[[36;1m  -not -name '*.eot' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8831591Z ^[[36;1m  -not -name '*.pdf' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8832155Z ^[[36;1m  -not -name '*.zip' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8832729Z ^[[36;1m  -not -name '*.tar' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8833288Z ^[[36;1m  -not -name '*.gz' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8834089Z ^[[36;1m  -not -name '*.lock' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8834664Z ^[[36;1m  -print0)^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8835169Z ^[[36;1m^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8835658Z ^[[36;1mif [ -n "$files_with_bom" ]; then^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8836698Z ^[[36;1m  echo "ERROR: The following files contain Unicode BOM but should not:"^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8837532Z ^[[36;1m  echo "$files_with_bom"^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8838092Z ^[[36;1m  echo ""^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8838688Z ^[[36;1m  echo "To fix this, remove the BOM from these files."^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8839517Z ^[[36;1m  echo "You can use: sed -i '1s/^\xEF\xBB\xBF//' <filename>"^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8840375Z ^[[36;1m  echo "Or configure your editor to save files without BOM."^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8841095Z ^[[36;1m  exit 1^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8841573Z ^[[36;1melse^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8842194Z ^[[36;1m  echo "SUCCESS: All text files are consistent (no BOM found)."^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8842936Z ^[[36;1m  exit 0^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8843399Z ^[[36;1mfi^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8889654Z shell: /usr/bin/bash -e {0}
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8890323Z ##[endgroup]
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8979199Z Checking for files with Unicode BOM...
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8980408Z Repository standard: NO BOM (UTF-8 without BOM)
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:12.8981144Z 
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T07:07:13.5991055Z SUCCESS: All text files are consistent (no BOM found).
+check-bom-consistency	Post Run actions/checkout@v6	﻿2026-08-28T07:07:13.6333867Z Post job cleanup.
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.7242295Z [command]/usr/bin/git version
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.7283943Z git version 2.55.0
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.7333412Z Temporarily overriding HOME='/home/runner/work/_temp/6765401b-3fa5-4d86-b6f5-c0b53d14914f' before making global git config changes
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.7338915Z Adding repository directory to the temporary git global config as a safe directory
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.7344259Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.7374968Z Removing SSH command configuration
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.7381606Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.7432131Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.7708572Z Removing HTTP extra header
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.7717167Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.7759675Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8037482Z Removing includeIf entries pointing to credentials config files
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8040156Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8109974Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8112757Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8116057Z includeif.gitdir:/github/workspace/.git.path
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8118399Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8125589Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8154928Z /home/runner/work/_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8168497Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8219599Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8245813Z /home/runner/work/_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8261445Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8304337Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8334988Z /github/runner_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8344735Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8385605Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8413330Z /github/runner_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8427391Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8468203Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+check-bom-consistency	Post Run actions/checkout@v6	2026-08-28T07:07:13.8710524Z Removing credentials config '/home/runner/work/_temp/git-credentials-01c53c03-70a0-40de-8eac-5f40cc6888eb.config'
+check-bom-consistency	Complete job	﻿2026-08-28T07:07:13.8887028Z Cleaning up orphan processes

@@ -99,10 +99,14 @@ namespace Link.Foundation.Links.Notation
         /// </summary>
         private static string FormatIndented<TLinkAddress>(Link<TLinkAddress> link, FormatOptions options)
         {
+            // FormatIndented is only reached with a non-empty Values collection,
+            // but the nullable annotation on Link<T>.Values does not know that.
+            var values = link.Values ?? Array.Empty<Link<TLinkAddress>>();
+
             if (link.Id == null)
             {
                 // Values only - format each on separate line
-                var lines = link.Values.Select(v => options.IndentString + GetValueString(v));
+                var lines = values.Select(v => options.IndentString + GetValueString(v));
                 return string.Join(Environment.NewLine, lines);
             }
 
@@ -111,7 +115,7 @@ namespace Link.Foundation.Links.Notation
             var sb = new StringBuilder();
             sb.Append($"{idStr}:");
 
-            foreach (var v in link.Values)
+            foreach (var v in values)
             {
                 sb.Append(Environment.NewLine);
                 sb.Append(options.IndentString);
@@ -132,7 +136,7 @@ namespace Link.Foundation.Links.Notation
         /// <summary>
         /// Check if a string needs to be wrapped in parentheses.
         /// </summary>
-        private static bool NeedsParentheses(string s)
+        private static bool NeedsParentheses(string? s)
         {
             return s != null && (s.Contains(" ") || s.Contains(":") || s.Contains("(") || s.Contains(")"));
         }

@@ -1,0 +1,67 @@
+name: workflows
+
+# Static analysis of the workflows themselves. Nothing here has ever caught a
+# problem at review time before, which is how csharp.yml shipped three jobs
+# whose `if:` referenced a `needs.` job they did not depend on: the expression
+# always evaluated to empty, the jobs never ran, and the workflow stayed green.
+# actionlint catches exactly that class of mistake.
+
+on:
+  push:
+    branches: main
+    paths:
+      - '.github/**'
+  pull_request:
+    paths:
+      - '.github/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      # The Docker image bundles shellcheck and pyflakes, so this also lints
+      # every `run:` block. Reproduce locally with the image, or with a native
+      # actionlint that has shellcheck on PATH: without it, actionlint silently
+      # skips the shell checks and exits clean on scripts this job rejects.
+      - name: Run actionlint
+        uses: docker://rhysd/actionlint:1.7.7
+        with:
+          args: -color
+
+  zizmor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      # Required so zizmor can resolve the actions the workflows reference.
+      actions: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Install zizmor
+        run: pip install zizmor==1.29.0
+      # Fails on medium and above. The informational findings that remain are
+      # `template-injection` on this repository's own step outputs and
+      # `use-trusted-publishing` on the PyPI token, which is the documented
+      # bootstrap credential.
+      - name: Run zizmor
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: zizmor --no-progress --min-severity medium --config .github/zizmor.yml .github/workflows/

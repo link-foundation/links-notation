@@ -2,7 +2,7 @@
 
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/workflows/js/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=js) | [![Версия npm пакета и количество загрузок](https://img.shields.io/npm/v/links-notation?label=npm&style=flat)](https://www.npmjs.com/package/links-notation) | **[JavaScript](js/README.ru.md)** |
 |:-|-:|:-|
-| [![Состояние Actions](https://github.com/link-foundation/links-notation/workflows/rust/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=rust) | [![Версия Crates.io и количество загрузок](https://img.shields.io/crates/v/links-notation?label=crates.io&style=flat)](https://crates.io/crates/links-notation) | **[Rust](rust/README.ru.md)** |
+| [![Состояние Actions](https://github.com/link-foundation/links-notation/workflows/rust/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=rust) | [![Версия Crates.io и количество загрузок](https://img.shields.io/crates/v/links-notation?label=crates.io&style=flat)](https://crates.io/crates/links-notation) | **[Rust](rust/links-notation/README.ru.md)** |
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/workflows/csharp/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=csharp) | [![Версия NuGet пакета и количество загрузок](https://img.shields.io/nuget/v/Link.Foundation.Links.Notation?label=nuget&style=flat)](https://www.nuget.org/packages/Link.Foundation.Links.Notation) | **[C#](csharp/README.ru.md)** |
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/workflows/python/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=python) | [![Версия PyPI и количество загрузок](https://img.shields.io/pypi/v/links-notation?label=pypi&style=flat)](https://pypi.org/project/links-notation/) | **[Python](python/README.ru.md)** |
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/workflows/java/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=java) | [![Версия Maven Central](https://img.shields.io/maven-central/v/io.github.link-foundation/links-notation?label=maven&style=flat)](https://central.sonatype.com/artifact/io.github.link-foundation/links-notation) | **[Java](java/README.ru.md)** |
@@ -140,7 +140,7 @@ $links = $parser->parse("папа (любитМаму: любит маму)");
 - **[README C#](csharp/README.ru.md)** - Руководство по установке и использованию
 - **[README JavaScript](js/README.ru.md)** - Руководство для современной
   веб-разработки
-- **[README Rust](rust/README.ru.md)** - Руководство по
+- **[README Rust](rust/links-notation/README.ru.md)** - Руководство по
   высокопроизводительному парсингу
 - **[README Python](python/README.ru.md)** - Руководство по работе с пакетом Python
 - **[README Java](java/README.ru.md)** - Руководство по работе с пакетом Java/Maven

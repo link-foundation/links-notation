@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Links Notation (Lino) documentation website",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

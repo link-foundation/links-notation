@@ -348,3 +348,11 @@ php/vendor/
 php/composer.lock
 php/.phpunit.cache/
 php/.phpunit.result.cache
+
+# DocFX output
+_site/
+csharp/pdf-artifact/
+csharp/fvextra.sty
+
+# lychee link-checker cache (see .github/workflows/links.yml)
+.lycheecache

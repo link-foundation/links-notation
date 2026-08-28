@@ -61,7 +61,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.Null(result[0].Id);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("singlet", result[0].Values?[0].Id);
             Assert.Null(result[0].Values?[0].Values);
 
@@ -95,7 +95,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.Null(result[0].Id);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("1", result[0].Values?[0].Id);
             Assert.Null(result[0].Values?[0].Values);
 

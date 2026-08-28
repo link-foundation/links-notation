@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Link.Foundation's Platform.Protocols.Lino Class Library</Description>
+    <Description>Link.Foundation's Links Notation parser and formatter for .NET</Description>
     <Copyright>Konstantin Diachenko</Copyright>
     <AssemblyTitle>Link.Foundation.Links.Notation</AssemblyTitle>
     <VersionPrefix>0.15.0</VersionPrefix>
@@ -9,7 +9,6 @@
     <TargetFramework>net8</TargetFramework>
     <PackageId>Link.Foundation.Links.Notation</PackageId>
     <PackageTags>Link.Foundation;Protocols.Lino;Lino;IListExtensions;Link;Parser</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/link-foundation/Documentation/18469f4d033ee9a5b7b84caab9c585acab2ac519/doc/Avatar-rainbow-icon-64x64.png</PackageIconUrl>
     <PackageProjectUrl>https://link-foundation.github.io/links-notation</PackageProjectUrl>
     <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -27,6 +26,9 @@
 Test cases suite is updated.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
     <RootNamespace>Link.Foundation.Links.Notation</RootNamespace>
+    <!-- CS1584/CS1658: Pegasus 4.1.0 emits an invalid <see cref="IList{Link{string}}"/>
+         in the generated parser; nested braces are not valid cref syntax.
+         Tracked upstream, see experiments/cref-repro. -->
     <NoWarn>$(NoWarn);CS8981;CS1591;CS1584;CS1658</NoWarn>
   </PropertyGroup>
 

@@ -1,0 +1,142 @@
+name: security
+
+on:
+  push:
+    branches: main
+  pull_request:
+  # A dependency becomes vulnerable without anyone touching this repository,
+  # so the analysis also runs on a schedule.
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      verbose:
+        description: 'Print extra diagnostics (never secret values)'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+jobs:
+  codeql:
+    name: CodeQL (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-codeql-${{ matrix.language }}
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    permissions:
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        # `actions` covers the workflows themselves. CodeQL has no PHP
+        # extractor, so php/ is covered by PHPStan in php.yml instead.
+        include:
+          - language: actions
+            build-mode: none
+          - language: javascript-typescript
+            build-mode: none
+          - language: python
+            build-mode: none
+          - language: csharp
+            build-mode: none
+          - language: java-kotlin
+            build-mode: none
+          - language: rust
+            build-mode: none
+          # The Go extractor needs a real build; autobuild finds go/go.mod.
+          - language: go
+            build-mode: autobuild
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+      - name: Analyze
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: /language:${{ matrix.language }}
+
+  dependencyReview:
+    name: Dependency review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-dependency-review
+      cancel-in-progress: true
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Review dependency changes
+        uses: actions/dependency-review-action@v5
+        with:
+          fail-on-severity: high
+          comment-summary-in-pr: on-failure
+
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-secrets
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          # A secret is only removed once it is out of the history, so the
+          # scan needs the whole history, not just the tip.
+          fetch-depth: 0
+      - name: Scan the repository for verified secrets
+        uses: trufflesecurity/trufflehog@v3.97.1
+        with:
+          path: ./
+          # The action ref pins the wrapper; this pins the scanner itself,
+          # which otherwise resolves to the `latest` image on every run.
+          version: 3.97.1
+          # --results=verified only reports credentials that the issuing
+          # service confirmed are live, which is what makes this safe to fail
+          # the build on. Do not add --no-update here: the action already
+          # passes it, and trufflehog rejects a repeated flag outright
+          # ("flag 'no-update' cannot be repeated"), which is how the first
+          # run of this job failed.
+          extra_args: --results=verified
+
+  npmAudit:
+    name: Audit npm lock (${{ matrix.directory }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-npm-audit-${{ matrix.directory }}
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        directory: [js, docs/website]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Audit the committed lockfile
+        working-directory: ${{ matrix.directory }}
+        run: npm audit --package-lock-only --audit-level=high

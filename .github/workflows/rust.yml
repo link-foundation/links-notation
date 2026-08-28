@@ -10,10 +10,20 @@ on:
     paths:
       - 'rust/**'
       - '.github/workflows/rust.yml'
+  workflow_dispatch:
+    inputs:
+      verbose:
+        description: 'Print extra diagnostics (never secret values)'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
 
 env:
-  CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
 
 defaults:
   run:
@@ -23,28 +33,37 @@ jobs:
   findChangedRustFiles:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     outputs:
       isRustFilesChanged: ${{ steps.setIsRustFilesChangedOutput.outputs.isRustFilesChanged }}
     steps:
       - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           fetch-depth: 0
       - name: Get changed files using defaults
         id: changed-files
         uses: tj-actions/changed-files@v47
       - name: Set output isRustFilesChanged
         id: setIsRustFilesChangedOutput
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           isRustFilesChanged='false'
-          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
-          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            if [[ $changedFile == rust/*.rs ]] || [[ $changedFile == rust/Cargo.toml ]] || [[ $changedFile == rust/Cargo.lock ]] || [[ $changedFile == rust/* ]] || [[ $changedFile == .github/workflows/rust.yml ]]; then
-              echo "isRustFilesChanged='true'"
+          # workflow_dispatch has no diff to inspect, so treat it as "changed".
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            isRustFilesChanged='true'
+          fi
+          echo "Changed files: $ALL_CHANGED_FILES"
+          for changedFile in $ALL_CHANGED_FILES; do
+            if [[ $changedFile == rust/* ]] || [[ $changedFile == .github/workflows/rust.yml ]]; then
               isRustFilesChanged='true'
               break
             fi
           done
-          echo "isRustFilesChanged=${isRustFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isRustFilesChanged=${isRustFilesChanged}" >> "$GITHUB_OUTPUT"
           echo "isRustFilesChanged: ${isRustFilesChanged}"
 
   lint:
@@ -52,24 +71,26 @@ jobs:
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-lint
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
-      - name: Cache Cargo registry
-        uses: actions/cache@v5
+      # Replaces three hand-rolled actions/cache steps. Those keyed only on
+      # Cargo.lock, had no restore-keys (so any lockfile edit was a total
+      # miss), and cached `target` without the compiler version in the key,
+      # which silently poisons the cache across toolchain updates.
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
         with:
-          path: ~/.cargo/registry
-          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
-      - name: Cache Cargo index
-        uses: actions/cache@v5
-        with:
-          path: ~/.cargo/git
-          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
+          workspaces: rust
       - name: Check formatting
         run: cargo fmt --all -- --check
       - name: Run Clippy
@@ -80,157 +101,177 @@ jobs:
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-test
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
-      - name: Cache Cargo registry
-        uses: actions/cache@v5
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
         with:
-          path: ~/.cargo/registry
-          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
-      - name: Cache Cargo index
-        uses: actions/cache@v5
-        with:
-          path: ~/.cargo/git
-          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
-      - name: Cache Cargo build
-        uses: actions/cache@v5
-        with:
-          path: target
-          key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
+          workspaces: rust
       - name: Build
         run: cargo build --release
       - name: Test
         run: cargo test
 
   publishToCratesIO:
-    needs: [test, findChangedRustFiles]
+    needs: [findChangedRustFiles, test]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    concurrency:
+      group: ${{ github.workflow }}-publish-crates-io
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      # Required by rust-lang/crates-io-auth-action (RFC 3691 trusted publishing).
+      id-token: write
+    outputs:
+      published: ${{ steps.publish.outputs.published }}
+      version: ${{ steps.publish.outputs.version }}
+      name: ${{ steps.publish.outputs.name }}
     steps:
       - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
-      - name: Cache Cargo registry
-        uses: actions/cache@v5
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
         with:
-          path: ~/.cargo/registry
-          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
-      - name: Cache Cargo index
-        uses: actions/cache@v5
-        with:
-          path: ~/.cargo/git
-          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
-      - name: Cache Cargo build
-        uses: actions/cache@v5
-        with:
-          path: target
-          key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
+          workspaces: rust
       - name: Build
         run: cargo build --release
-      - name: Publish links-notation-macro to Crates.io
-        id: publish-macro-crate
+      # Exchanges the workflow's OIDC identity for a short-lived crates.io
+      # token. Returns an empty token when trusted publishing is not
+      # configured for the crate, which the publish step reports explicitly.
+      - name: Authenticate to crates.io
+        id: cratesio-auth
+        continue-on-error: true
+        uses: rust-lang/crates-io-auth-action@v1
+      - name: Publish to crates.io
+        id: publish
+        env:
+          # Prefer the short-lived OIDC token; fall back to the long-lived
+          # secret for as long as trusted publishing is not configured.
+          OIDC_TOKEN: ${{ steps.cratesio-auth.outputs.token }}
+          CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
         run: |
-          PACKAGE_VERSION=$(grep '^version = ' links-notation-macro/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
-          echo "Package: links-notation-macro@$PACKAGE_VERSION"
+          set -euo pipefail
 
-          # The main crate depends on links-notation-macro, so it must be published first
-          set +e  # Don't exit on error
-          cargo publish -p links-notation-macro --token ${{ secrets.CARGO_TOKEN }} --allow-dirty 2>&1 | tee macro_publish_output.txt
-          PUBLISH_EXIT_CODE=$?
-          set -e  # Re-enable exit on error
+          read_field() { grep "^$2 = " "$1" | head -1 | sed "s/$2 = \"\(.*\)\"/\1/"; }
+          MACRO_VERSION=$(read_field links-notation-macro/Cargo.toml version)
+          PACKAGE_NAME=$(read_field links-notation/Cargo.toml name)
+          PACKAGE_VERSION=$(read_field links-notation/Cargo.toml version)
+          echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
 
-          if [ $PUBLISH_EXIT_CODE -eq 0 ]; then
-            echo "✅ Successfully published links-notation-macro@$PACKAGE_VERSION to crates.io"
-          elif grep -q "already exists on crates.io index" macro_publish_output.txt; then
-            echo "ℹ️ links-notation-macro@$PACKAGE_VERSION already exists on crates.io - this is OK"
+          # The token never appears on the command line, where it would be
+          # visible to every other process on the runner via /proc.
+          export CARGO_REGISTRY_TOKEN="${OIDC_TOKEN:-$CARGO_TOKEN}"
+          if [ -n "${OIDC_TOKEN:-}" ]; then
+            echo "crates.io credential: trusted publishing (OIDC)"
+          elif [ -n "${CARGO_TOKEN:-}" ]; then
+            echo "crates.io credential: CARGO_TOKEN present"
           else
-            echo "❌ Failed to publish links-notation-macro"
-            cat macro_publish_output.txt
-            exit 1
+            echo "published=failed" >> "$GITHUB_OUTPUT"
+            echo "::warning::No crates.io credential (neither trusted publishing nor CARGO_TOKEN); skipping publish. No GitHub release will be created."
+            exit 0
           fi
-      - name: Publish to Crates.io (with version check)
-        id: publish-crate
+
+          publish_crate() {
+            local crate="$1" version="$2" log="$3"
+            if cargo publish -p "$crate" 2>&1 | tee "$log"; then
+              echo "Published ${crate}@${version}"
+              return 0
+            fi
+            if grep -q "already exists on crates.io index" "$log"; then
+              echo "${crate}@${version} is already on crates.io"
+              return 2
+            fi
+            echo "::error::Failed to publish ${crate}@${version}"
+            return 1
+          }
+
+          # The main crate depends on links-notation-macro, so that one has to
+          # land, and be visible in the index, first.
+          set +e
+          publish_crate links-notation-macro "$MACRO_VERSION" macro_publish.log
+          MACRO_STATUS=$?
+          set -e
+          if [ $MACRO_STATUS -eq 1 ]; then exit 1; fi
+
+          if [ $MACRO_STATUS -eq 0 ]; then
+            for attempt in $(seq 1 20); do
+              if curl -fsS "https://crates.io/api/v1/crates/links-notation-macro/${MACRO_VERSION}" >/dev/null 2>&1; then
+                echo "links-notation-macro@${MACRO_VERSION} is visible in the index"
+                break
+              fi
+              echo "Waiting for the index to catch up (attempt ${attempt}/20)"
+              sleep 15
+            done
+          fi
+
+          set +e
+          publish_crate "$PACKAGE_NAME" "$PACKAGE_VERSION" publish.log
+          STATUS=$?
+          set -e
+          case $STATUS in
+            0) echo "published=true" >> "$GITHUB_OUTPUT" ;;
+            2) echo "published=skipped" >> "$GITHUB_OUTPUT" ;;
+            *) echo "published=failed" >> "$GITHUB_OUTPUT"; exit 1 ;;
+          esac
+      - name: Verify the crate is really on crates.io
+        if: steps.publish.outputs.published == 'true'
+        env:
+          PACKAGE_NAME: ${{ steps.publish.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.publish.outputs.version }}
         run: |
-          PACKAGE_NAME=$(grep '^name = ' links-notation/Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/')
-          PACKAGE_VERSION=$(grep '^version = ' links-notation/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
-          echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
-
-          echo "=== Attempting to publish to crates.io ==="
-          
-          # Try to publish and capture the result
-          set +e  # Don't exit on error
-          cargo publish -p links-notation --token ${{ secrets.CARGO_TOKEN }} --allow-dirty 2>&1 | tee publish_output.txt
-          PUBLISH_EXIT_CODE=$?
-          set -e  # Re-enable exit on error
-          
-          if [ $PUBLISH_EXIT_CODE -eq 0 ]; then
-            echo "✅ Successfully published $PACKAGE_NAME@$PACKAGE_VERSION to crates.io"
-            echo "publish_result=success" >> $GITHUB_OUTPUT
-          elif grep -q "already exists on crates.io index" publish_output.txt; then
-            echo "ℹ️ Version $PACKAGE_VERSION already exists on crates.io - this is OK"
-            echo "publish_result=already_exists" >> $GITHUB_OUTPUT
-            exit 0  # Don't fail the workflow
-          else
-            echo "❌ Failed to publish for unknown reason"
-            cat publish_output.txt
-            echo "publish_result=failed" >> $GITHUB_OUTPUT
-            exit 1
-          fi
-      - name: Report publish status
-        if: always()
-        run: |
-          if [ "${{ steps.publish-crate.outputs.publish_result }}" = "success" ]; then
-            echo "✅ Package was successfully published"
-          elif [ "${{ steps.publish-crate.outputs.publish_result }}" = "already_exists" ]; then
-            echo "ℹ️ Package version already exists - no action needed"
-          else
-            echo "❌ Publishing failed - please check the logs"
-          fi
+          set -euo pipefail
+          for attempt in $(seq 1 20); do
+            if curl -fsS "https://crates.io/api/v1/crates/${PACKAGE_NAME}/${PACKAGE_VERSION}" >/dev/null 2>&1; then
+              echo "Verified ${PACKAGE_NAME}@${PACKAGE_VERSION} on crates.io (attempt ${attempt})"
+              exit 0
+            fi
+            echo "Not visible yet, retrying in 15s (attempt ${attempt}/20)"
+            sleep 15
+          done
+          echo "::error::${PACKAGE_NAME}@${PACKAGE_VERSION} did not appear on crates.io within 5 minutes"
+          exit 1
 
   publishRelease:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: [findChangedRustFiles, publishToCratesIO]
-    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && needs.publishToCratesIO.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    # See csharp.yml: `result == 'success'` is true for a job that published
+    # nothing, so the gate is the explicit `published` output instead.
+    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && needs.publishToCratesIO.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           submodules: true
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
-      - name: Check if GitHub release already exists
-        id: release-check
-        run: |
-          PACKAGE_VERSION=$(grep '^version = ' links-notation/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
-          TAG_NAME="rust_$PACKAGE_VERSION"
-          echo "Checking if release $TAG_NAME already exists"
-
-          # Check if release exists
-          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
-            echo "Release $TAG_NAME already exists"
-            echo "should_create_release=false" >> $GITHUB_OUTPUT
-          else
-            echo "Release $TAG_NAME does not exist"
-            echo "should_create_release=true" >> $GITHUB_OUTPUT
-          fi
+      - name: Create GitHub release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create GitHub release
-        if: steps.release-check.outputs.should_create_release == 'true'
+          PACKAGE_NAME: ${{ needs.publishToCratesIO.outputs.name }}
+          PACKAGE_VERSION: ${{ needs.publishToCratesIO.outputs.version }}
         run: |
-          PACKAGE_NAME=$(grep '^name = ' links-notation/Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/')
-          PACKAGE_VERSION=$(grep '^version = ' links-notation/Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
-
-          # Create release with consistent tag format: rust_version
-          gh release create "rust_${PACKAGE_VERSION}" \
+          set -euo pipefail
+          TAG="rust_${PACKAGE_VERSION}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists"
+            exit 0
+          fi
+          gh release create "$TAG" \
             --title "[Rust] $PACKAGE_VERSION" \
             --notes "https://crates.io/crates/$PACKAGE_NAME"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
