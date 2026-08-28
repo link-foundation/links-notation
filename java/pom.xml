@@ -37,8 +37,10 @@
     </scm>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <!-- release (rather than source/target) makes javac compile against the JDK 11 API,
+             which is what "supports Java 11" actually means and silences
+             "system modules path not set in conjunction with -source 11". -->
+        <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.14.4</junit.version>
     </properties>
@@ -59,8 +61,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.15.0</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <release>${maven.compiler.release}</release>
                 </configuration>
             </plugin>
             <plugin>
