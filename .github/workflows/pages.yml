@@ -6,15 +6,29 @@ on:
     paths:
       - 'docs/**'
       - '.github/workflows/pages.yml'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
+    inputs:
+      verbose:
+        description: 'Print extra diagnostics (never secret values)'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
+env:
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+# One deployment at a time, and never cancel one half-way: a cancelled
+# deploy-pages leaves the Pages site pointing at a partially uploaded
+# artifact.
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 defaults:
@@ -24,6 +38,7 @@ defaults:
 jobs:
   findChangedDocsFiles:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       isDocsFilesChanged: ${{ steps.setIsDocsFilesChangedOutput.outputs.isDocsFilesChanged }}
     steps:
@@ -35,12 +50,19 @@ jobs:
         uses: tj-actions/changed-files@v47
       - name: Set output isDocsFilesChanged
         id: setIsDocsFilesChangedOutput
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           isDocsFilesChanged='false'
-          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
-          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          # workflow_dispatch has no diff to inspect. Without this the manual
+          # trigger this workflow advertises did nothing at all: every job was
+          # gated on a change list that is empty for a dispatch.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            isDocsFilesChanged='true'
+          fi
+          echo "Changed files: $ALL_CHANGED_FILES"
+          for changedFile in $ALL_CHANGED_FILES; do
             if [[ $changedFile == docs/* ]] || [[ $changedFile == .github/workflows/pages.yml ]]; then
-              echo "isDocsFilesChanged='true'"
               isDocsFilesChanged='true'
               break
             fi
@@ -52,6 +74,7 @@ jobs:
     needs: [findChangedDocsFiles]
     if: ${{ needs.findChangedDocsFiles.outputs.isDocsFilesChanged == 'true' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
         with:
@@ -59,24 +82,35 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
           cache-dependency-path: docs/website/package-lock.json
       - name: Install dependencies
         run: npm ci
       - name: Build website
         run: npm run build
+      # Building on pull requests too means a broken site is caught in review
+      # rather than on main, but only pushes to main upload and deploy.
       - name: Setup Pages
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v6
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
         with:
           path: docs/website/dist
 
   deploy:
-    needs: [build, findChangedDocsFiles]
-    if: ${{ needs.findChangedDocsFiles.outputs.isDocsFilesChanged == 'true' }}
+    needs: [findChangedDocsFiles, build]
+    if: ${{ needs.findChangedDocsFiles.outputs.isDocsFilesChanged == 'true' && github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Least privilege: only this job needs to write to Pages and mint an OIDC
+    # token; the checkout/build jobs above run with contents: read.
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
