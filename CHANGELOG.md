@@ -29,6 +29,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pre-commit hooks configuration
 - Dependabot for automated dependency updates
 
+- CI/CD: a `workflows` check that runs actionlint and zizmor over
+  `.github/workflows/`, so a workflow defect is caught in review rather than on
+  the default branch ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- CI/CD: a `security` workflow carrying CodeQL analysis for every language the
+  extractors support, dependency review on pull requests, and a TruffleHog scan
+  of the history for live credentials ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- CI/CD: a `links` check over the repository's Markdown, with known false
+  positives listed in `.lycheeignore` ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- CI/CD: `scripts/release-audit.mjs`, which compares each language's declared
+  version against what the registry actually serves, so a silently failed
+  publish stops looking like a successful one ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- CI/CD: every workflow accepts a `verbose` input (default off) and exports
+  `CI_VERBOSE`, so extra diagnostics can be turned on for one run without
+  editing or committing anything ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- Publish steps verify the artefact after pushing it: npm, PyPI, crates.io,
+  NuGet, Maven Central, Packagist and proxy.golang.org are each polled for the
+  version just released, and the GitHub release is created only once the
+  registry confirms it ([#290](https://github.com/link-foundation/links-notation/issues/290))
+
 ### Changed
 - Grammar: a reference is a `delimited_reference` (`n_quoted_reference` or
   `empty_reference`) or a `simple_reference`; the three delimiters `"`, `'`
@@ -48,6 +67,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced C# `Equals()` method to properly compare anonymous links
 - Reduced excessive cloning in Rust implementation
 - Improved quote escaping to handle edge cases in JavaScript
+
+- CI/CD: npm, PyPI and crates.io publish through OIDC trusted publishing where
+  it is configured, falling back to the existing token secret until it is ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- CI/CD: per-job concurrency groups cancel superseded pull request runs but
+  never cancel a run on `main`, and publish jobs queue instead of cancelling so
+  a release is never interrupted half-way ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- CI/CD: workflow `permissions` are declared least-privilege, checkouts no
+  longer persist the job token, and `always()` was replaced by `!cancelled()`
+  where a cancelled run should not continue ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- C# packaging and DocFX configuration are vendored in the repository instead of
+  being fetched at run time ([#290](https://github.com/link-foundation/links-notation/issues/290))
 
 ### Fixed
 - A bare delimiter pair is now the empty reference in every implementation
@@ -80,6 +110,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI/CD: Standardized release tag format across all workflows
 - CI/CD: Added timeout-minutes to all workflow jobs
 - CI/CD: Updated all deprecated GitHub Actions
+
+- CI/CD: `workflow_dispatch` runs did nothing. Every job was gated on a changed
+  file list, which is empty for a manual trigger, so the manual run each
+  workflow advertised skipped its own work ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- CI/CD: the C# API reference was published to the `gh-pages` branch but never
+  reachable. Pages serves the uploaded artefact, not that branch, so every
+  `/csharp/` URL the READMEs advertise returned 404; the branch is now overlaid
+  onto the artefact ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- C#: all 56 nullable reference warnings ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- C#: a failure while building the documentation withheld an already published
+  release ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- Go: `setup-go` was told to cache a dependency file that does not exist, which
+  logged a restore failure on every run of both jobs ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- Rust: the Cargo cache keyed only on `Cargo.lock` with no restore keys and no
+  compiler version, so any lockfile edit was a total miss and a toolchain update
+  silently poisoned `target` ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- Java and PHP declared a version that did not match the rest of the repository ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- `scripts/` regenerated `TEST_CASE_COMPARISON.md` from a Rust test path that
+  the workspace restructure had moved, so the pre-commit hook had been failing
+  with ENOENT and the published counts were stale ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- Every link in `TEST_CASE_COMPARISON.md`, and several in the READMEs, was dead ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- A live high-severity advisory in `js/package-lock.json`
+  ([GHSA-mh99-v99m-4gvg](https://github.com/advisories/GHSA-mh99-v99m-4gvg))
+  was resolved by matching the version `js/bun.lock` already carried ([#290](https://github.com/link-foundation/links-notation/issues/290))
 
 ## [0.11.2] - 2024-XX-XX
 
