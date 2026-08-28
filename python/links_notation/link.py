@@ -89,8 +89,13 @@ class Link:
         Returns:
             Escaped reference with quotes if needed
         """
-        if not reference or not reference.strip():
+        if reference is None:
             return ""
+
+        # The empty reference is written as a bare delimiter pair, so that it
+        # reads back as itself instead of disappearing from the document.
+        if reference == "":
+            return '""'
 
         # Check if single quotes are needed
         needs_single_quotes = any(c in reference for c in [":", "(", ")", " ", "\t", "\n", "\r", '"'])

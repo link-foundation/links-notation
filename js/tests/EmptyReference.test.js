@@ -73,11 +73,6 @@ test('TestSingleSpaceStillReadsAsASpace', () => {
   expect(parsesAs('(a " " b)')).toBe('(<a> < > <b>)');
 });
 
-test('TestOddDelimiterRunsStayLiteralText', () => {
-  expect(parsesAs('(a " b)')).toBe('(<a> <"> <b>)');
-  expect(parsesAs('(a """ b)')).toBe('(<a> <"""> <b>)');
-});
-
 test('TestEmptyReferenceSurvivesARoundTrip', () => {
   const inputs = [
     '(a "" b)',

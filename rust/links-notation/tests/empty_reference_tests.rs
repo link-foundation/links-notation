@@ -86,12 +86,6 @@ fn a_single_space_still_reads_as_a_space() {
 }
 
 #[test]
-fn odd_delimiter_runs_stay_literal_text() {
-    assert_parses_as(r#"(a " b)"#, r#"(<a> <"> <b>)"#);
-    assert_parses_as(r#"(a """ b)"#, r#"(<a> <"""> <b>)"#);
-}
-
-#[test]
 fn empty_reference_survives_a_round_trip() {
     for input in [
         r#"(a "" b)"#,

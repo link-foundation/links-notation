@@ -276,8 +276,10 @@ func (l *Link) Equal(other *Link) bool {
 
 // escapeReference escapes a reference string by adding quotes if necessary.
 func escapeReference(reference string) string {
-	if reference == "" || strings.TrimSpace(reference) == "" {
-		return ""
+	// The empty reference is written as a bare delimiter pair, so that it reads
+	// back as itself instead of disappearing from the document.
+	if reference == "" {
+		return `""`
 	}
 
 	hasSingleQuote := strings.Contains(reference, "'")
