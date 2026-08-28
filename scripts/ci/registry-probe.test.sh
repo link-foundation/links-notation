@@ -51,7 +51,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         # This is the crates.io behaviour under test.
         if agent.startswith("curl/") or agent.startswith("python-requests/"):
             return self.respond(403, b'{"errors":[{"detail":"forbidden"}]}')
-        if self.path == "/index":
+        if self.path in ("/index", "/li/nk/links-notation"):
             return self.respond(200, INDEX)
         if self.path == "/ok":
             return self.respond(200, b'{"ok":true}')
@@ -116,6 +116,24 @@ if wait_for_registry_match "index" "${BASE}/index" '"vers":"9.9.9"' 1 0 > /dev/n
   no "a 200 with the wrong body must not count as success"
 else
   ok "a 200 without the version is a failure"
+fi
+
+echo "# crate_version_published matches the exact version in the index"
+if CRATES_INDEX_BASE="$BASE" crate_version_published links-notation 0.16.0; then
+  ok "a published version is detected"
+else
+  no "a published version was not detected"
+fi
+if CRATES_INDEX_BASE="$BASE" crate_version_published links-notation 0.16.1 2>/dev/null; then
+  no "an unpublished version must not be reported as published"
+else
+  ok "an unpublished version is not reported as published"
+fi
+# 0.1 is a prefix of 0.16.0, so a substring match would wrongly report it.
+if CRATES_INDEX_BASE="$BASE" crate_version_published links-notation 0.1 2>/dev/null; then
+  no "a version that is only a prefix of a real one must not match"
+else
+  ok "a prefix of a published version does not match"
 fi
 
 echo "# CI_VERBOSE is off by default"

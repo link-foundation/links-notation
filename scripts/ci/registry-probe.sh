@@ -28,6 +28,9 @@ set -uo pipefail
 # https://crates.io/data-access
 : "${REGISTRY_USER_AGENT:=links-notation-ci (+https://github.com/link-foundation/links-notation)}"
 
+# Overridable so the tests can point the index lookups at a local server.
+: "${CRATES_INDEX_BASE:=https://index.crates.io}"
+
 # Last status code observed by probe_registry, for callers that report it.
 REGISTRY_PROBE_STATUS=''
 
@@ -83,36 +86,44 @@ fetch_registry() {
 crates_index_url() {
   local name="$1"
   case ${#name} in
-    1) echo "https://index.crates.io/1/${name}" ;;
-    2) echo "https://index.crates.io/2/${name}" ;;
-    3) echo "https://index.crates.io/3/${name:0:1}/${name}" ;;
-    *) echo "https://index.crates.io/${name:0:2}/${name:2:2}/${name}" ;;
+    1) echo "${CRATES_INDEX_BASE}/1/${name}" ;;
+    2) echo "${CRATES_INDEX_BASE}/2/${name}" ;;
+    3) echo "${CRATES_INDEX_BASE}/3/${name:0:1}/${name}" ;;
+    *) echo "${CRATES_INDEX_BASE}/${name:0:2}/${name:2:2}/${name}" ;;
   esac
+}
+
+# A single index lookup: 0 when the exact version is listed. Used both to skip
+# a publish that would fail with "already exists" and as one attempt of the
+# wait loop below.
+crate_version_published() {
+  local name="$1" version="$2" url body
+  url=$(crates_index_url "$name")
+  body=$(
+    curl --silent --show-error --location --max-time 30 \
+      --retry 3 --retry-connrefused \
+      --user-agent "$REGISTRY_USER_AGENT" "$url" 2>/dev/null
+  ) || body=''
+  if [ "${CI_VERBOSE:-false}" = "true" ]; then
+    echo "  index ${url} has: $(printf '%s' "$body" | grep -o '"vers":"[^"]*"' | tr '\n' ' ')"
+  fi
+  printf '%s' "$body" | grep -qF "\"vers\":\"${version}\""
 }
 
 wait_for_crate_version() {
   local name="$1" version="$2" tries="${3:-20}" delay="${4:-15}"
-  local url body attempt
-  url=$(crates_index_url "$name")
+  local attempt
   for attempt in $(seq 1 "$tries"); do
-    body=$(
-      curl --silent --show-error --location --max-time 30 \
-        --retry 3 --retry-connrefused \
-        --user-agent "$REGISTRY_USER_AGENT" "$url" 2>/dev/null
-    ) || body=''
-    if printf '%s' "$body" | grep -qF "\"vers\":\"${version}\""; then
+    if crate_version_published "$name" "$version"; then
       echo "Verified ${name}@${version} in the crates.io index (attempt ${attempt}/${tries})"
       return 0
-    fi
-    if [ "${CI_VERBOSE:-false}" = "true" ]; then
-      echo "  index ${url} has: $(printf '%s' "$body" | grep -o '"vers":"[^"]*"' | tr '\n' ' ')"
     fi
     if [ "$attempt" -lt "$tries" ]; then
       echo "Not in the index yet (attempt ${attempt}/${tries}); retrying in ${delay}s"
       sleep "$delay"
     fi
   done
-  echo "::error::${name}@${version} did not appear in the crates.io index (${url}) after ${tries} attempts"
+  echo "::error::${name}@${version} did not appear in the crates.io index ($(crates_index_url "$name")) after ${tries} attempts"
   return 1
 }
 
