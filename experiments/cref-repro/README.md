@@ -6,13 +6,18 @@ Pegasus 4.1.0 documents the generated `Parse` method with
 /// <returns>The <see cref="IList{Link{string}}" /> parsed from <paramref name="subject" />.</returns>
 ```
 
-Nested braces are not valid `cref` syntax: the compiler reads `Link{string}` as a
-type parameter *declaration*, reports `CS1658`/`CS0081`, and writes the unresolved
-form `!:IList&lt;Link&lt;string&gt;&gt;` into the XML documentation file. DocFX then
-reports `InvalidCref` when it builds the API site.
+which is produced by
+[`Pegasus/Compiler/CodeGenerator/Grammar.weave`](https://github.com/otac0n/Pegasus/blob/master/Pegasus/Compiler/CodeGenerator/Grammar.weave)
+lines 103, 142 and 344:
 
-`C.cs` reproduces this in three lines, and shows that the documentation-ID form
-(`cref="T:System.Collections.Generic.IList{N.Link{System.String}}"`) binds cleanly.
+```
+{{= type.ToString().Replace("<", "{").Replace(">", "}") }}
+```
+
+The C# `cref` brace shorthand does not accept a type argument *list*; it accepts a
+type *parameter declaration* list, i.e. bare identifiers. Replacing `<`/`>` with
+`{`/`}` therefore only produces a valid `cref` for the narrow case of a single,
+unqualified, non-keyword identifier.
 
 ## Run
 
@@ -21,10 +26,24 @@ dotnet build
 grep cref bin/Debug/net8.0/p.xml
 ```
 
+## Measured on .NET SDK 8.0.128
+
+| `cref` written | Compiler | XML written |
+| --- | --- | --- |
+| `IList{Link{string}}` — what Pegasus emits | CS1584 + 2 × CS1658 | `!:IList&lt;Link&lt;string&gt;&gt;` |
+| `IList{Link{String}}` | CS1584 + CS1658 | `!:IList&lt;Link&lt;String&gt;&gt;` |
+| `IList{string}` | CS1584 + CS1658 | `!:IList&lt;string&gt;` |
+| `IList{System.String}` | CS1584 + CS1658 | `!:IList&lt;System.String&gt;` |
+| `IList{String}` | clean | `T:System.Collections.Generic.IList`1` (the *open* generic) |
+| `T:System.Collections.Generic.IList{N.Link{System.String}}` | clean | passed through verbatim |
+
+The `!:` prefix means "the compiler could not resolve this"; DocFX reports
+`InvalidCref` when it reads such an entry.
+
 ## Why it is not fixed in this repository
 
 The comment is emitted by the Pegasus code generator from `Parser.peg`; nothing in
 this repository controls its text. `CS1584`/`CS1658` are therefore suppressed in
 `csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj`, and
 the single remaining DocFX `InvalidCref` warning is expected until Pegasus emits a
-valid `cref`.
+valid `cref`. Reported upstream as otac0n/Pegasus#137.
