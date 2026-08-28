@@ -80,7 +80,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Setup Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version: '1.26'
           # This module has no dependencies: go/go.sum does not exist and
@@ -118,7 +118,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Setup Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version: '1.26'
           # This module has no dependencies: go/go.sum does not exist and
