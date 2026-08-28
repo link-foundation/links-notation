@@ -65,7 +65,14 @@ class LinkTest extends TestCase
     {
         $this->assertSame('0', Link::escapeReference('0'));
         $this->assertSame('', Link::escapeReference(null));
-        $this->assertSame('', Link::escapeReference('   '));
+        // A reference made of spaces is written as it is, so that it reads back
+        // as itself instead of disappearing from the document.
+        $this->assertSame("'   '", Link::escapeReference('   '));
+    }
+
+    public function testLinkEscapeReferenceWritesTheEmptyReferenceAsADelimiterPair(): void
+    {
+        $this->assertSame('""', Link::escapeReference(''));
     }
 
     public function testLinkSimplify(): void

@@ -1,5 +1,5 @@
 (grammar: links-notation
-  (version: 0.14.0)
+  (version: 0.15.0)
   (description: "Links Notation (Lino) grammar expressed in links-notation format")
 
   (document:
@@ -60,16 +60,31 @@
     (alternative nested_group reference))
 
   (reference:
-    (alternative double_quoted_reference single_quoted_reference simple_reference))
+    (alternative delimited_reference simple_reference))
 
   (simple_reference:
     (one_or_more reference_symbol))
 
-  (double_quoted_reference:
-    (sequence "\"" (zero_or_more (not "\"")) "\""))
+  (delimiter:
+    (alternative "\"" "'" "`"))
 
-  (single_quoted_reference:
-    (sequence "'" (zero_or_more (not "'")) "'"))
+  (delimiter_run:
+    (one_or_more delimiter))
+
+  (delimited_reference:
+    (alternative n_quoted_reference empty_reference))
+
+  (n_quoted_reference:
+    (sequence delimiter_run (zero_or_more any_char) delimiter_run)
+    (condition: "Both runs use the same delimiter and have the same length N")
+    (condition: "The closing run is not followed by another delimiter")
+    (condition: "A run of 2N delimiters in the body stands for N literal delimiters")
+    (condition: "When N is even the body holds at least one non-whitespace character and balanced parentheses"))
+
+  (empty_reference:
+    (one_or_more (sequence delimiter delimiter))
+    (condition: "The whole run uses the same delimiter")
+    (condition: "An even run that does not open an n_quoted_reference is the empty reference"))
 
   (reference_symbol:
     (not (alternative whitespace_char "(" ":" ")")))

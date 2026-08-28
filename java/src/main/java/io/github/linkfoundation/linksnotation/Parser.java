@@ -80,20 +80,63 @@ public class Parser {
   }
 
   /**
-   * Skip over the quoted string starting at start.
+   * Report whether a body written between an even run of delimiters is substantive.
+   *
+   * <p>A substantive body holds at least one visible character and does not straddle a parenthesis.
+   * An even run can always be read as delimiter pairs enclosing nothing, so the n-quote reading is
+   * only taken when it carries something the pairs cannot.
+   */
+  private static boolean isSubstantiveBody(String content) {
+    int depth = 0;
+    boolean hasVisible = false;
+
+    for (int i = 0; i < content.length(); i++) {
+      char c = content.charAt(i);
+      if (c == '(') {
+        depth++;
+      } else if (c == ')') {
+        depth--;
+        if (depth < 0) {
+          return false;
+        }
+      }
+      if (!Character.isWhitespace(c)) {
+        hasVisible = true;
+      }
+    }
+
+    return hasVisible && depth == 0;
+  }
+
+  /** The decoded value of a delimited reference and the position right after it. */
+  private static final class QuotedString {
+    final String value;
+    final int end;
+
+    QuotedString(String value, int end) {
+      this.value = value;
+      this.end = end;
+    }
+  }
+
+  /**
+   * Parse the delimited reference starting at start.
    *
    * <p>Any number N of quotes opens and closes the string, 2*N quotes are an escaped quote
-   * sequence. Returns the position right after the closing quotes, or -1 when text does not start a
-   * terminated quoted string.
+   * sequence. A run of an even number of delimiters that does not open a reference with a
+   * substantive body is the empty reference: the shortest reading, a bare delimiter pair enclosing
+   * nothing, wins over a longer n-quote delimiter.
+   *
+   * <p>Returns null when text does not start a delimited reference.
    */
-  private int skipQuotedString(String text, int start) {
+  private static QuotedString parseQuotedStringAt(String text, int start) {
     if (start >= text.length()) {
-      return -1;
+      return null;
     }
 
     char quoteChar = text.charAt(start);
     if (quoteChar != '"' && quoteChar != '\'' && quoteChar != '`') {
-      return -1;
+      return null;
     }
 
     int quoteCount = 0;
@@ -103,24 +146,45 @@ public class Parser {
       pos++;
     }
 
+    boolean isEvenRun = quoteCount % 2 == 0;
+    QuotedString emptyReference = isEvenRun ? new QuotedString("", start + quoteCount) : null;
+
     String openClose = repeatChar(quoteChar, quoteCount);
     String escapeSeq = repeatChar(quoteChar, quoteCount * 2);
+    StringBuilder content = new StringBuilder();
 
     while (pos < text.length()) {
       if (text.startsWith(escapeSeq, pos)) {
+        content.append(openClose);
         pos += escapeSeq.length();
         continue;
       }
       if (text.startsWith(openClose, pos)) {
         int afterClose = pos + quoteCount;
         if (afterClose >= text.length() || text.charAt(afterClose) != quoteChar) {
-          return afterClose;
+          String value = content.toString();
+          if (isEvenRun && !isSubstantiveBody(value)) {
+            return emptyReference;
+          }
+          return new QuotedString(value, afterClose);
         }
       }
+      content.append(text.charAt(pos));
       pos++;
     }
 
-    return -1;
+    return emptyReference;
+  }
+
+  /**
+   * Skip over the quoted string starting at start.
+   *
+   * <p>Returns the position right after the closing quotes, or -1 when text does not start a
+   * delimited reference.
+   */
+  private int skipQuotedString(String text, int start) {
+    QuotedString parsed = parseQuotedStringAt(text, start);
+    return parsed == null ? -1 : parsed.end;
   }
 
   /**
@@ -428,45 +492,10 @@ public class Parser {
       return new int[] {start};
     }
 
-    // Check if this starts with a multi-quote string
-    char[] quoteChars = {'"', '\'', '`'};
-    for (char quoteChar : quoteChars) {
-      if (text.charAt(start) == quoteChar) {
-        // Count opening quotes dynamically
-        int quoteCount = 0;
-        int pos = start;
-        while (pos < text.length() && text.charAt(pos) == quoteChar) {
-          quoteCount++;
-          pos++;
-        }
-
-        if (quoteCount >= 1) {
-          // Parse this multi-quote string
-          String openClose = repeatChar(quoteChar, quoteCount);
-          String escapeSeq = repeatChar(quoteChar, quoteCount * 2);
-
-          int innerPos = start + quoteCount;
-          while (innerPos < text.length()) {
-            // Check for escape sequence (2*N quotes)
-            if (text.substring(innerPos).startsWith(escapeSeq)) {
-              innerPos += escapeSeq.length();
-              continue;
-            }
-            // Check for closing quotes
-            if (text.substring(innerPos).startsWith(openClose)) {
-              int afterClosePos = innerPos + quoteCount;
-              // Make sure this is exactly N quotes (not more)
-              if (afterClosePos >= text.length() || text.charAt(afterClosePos) != quoteChar) {
-                // Found the end
-                return new int[] {afterClosePos};
-              }
-            }
-            innerPos++;
-          }
-          // No closing found, treat as regular text
-          break;
-        }
-      }
+    // Check if this starts with a delimited reference
+    QuotedString quoted = parseQuotedStringAt(text, start);
+    if (quoted != null) {
+      return new int[] {quoted.end};
     }
 
     // Check if this starts with a parenthesized expression
@@ -517,70 +546,16 @@ public class Parser {
   private String extractReference(String text) {
     text = text.trim();
 
-    // Try multi-quote strings
-    char[] quoteChars = {'"', '\'', '`'};
-    for (char quoteChar : quoteChars) {
-      if (!text.isEmpty() && text.charAt(0) == quoteChar) {
-        // Count opening quotes dynamically
-        int quoteCount = 0;
-        while (quoteCount < text.length() && text.charAt(quoteCount) == quoteChar) {
-          quoteCount++;
-        }
-
-        if (quoteCount >= 1 && text.length() > quoteCount) {
-          String result = parseMultiQuoteString(text, quoteChar, quoteCount);
-          if (result != null) {
-            return result;
-          }
-        }
-      }
+    QuotedString quoted = parseQuotedStringAt(text, 0);
+    if (quoted != null) {
+      return quoted.value;
     }
 
     // Unquoted
     return text;
   }
 
-  /** Parse a multi-quote string. */
-  private String parseMultiQuoteString(String text, char quoteChar, int quoteCount) {
-    String openClose = repeatChar(quoteChar, quoteCount);
-    String escapeSeq = repeatChar(quoteChar, quoteCount * 2);
-    String escapeVal = repeatChar(quoteChar, quoteCount);
-
-    // Check for opening quotes
-    if (!text.startsWith(openClose)) {
-      return null;
-    }
-
-    String remaining = text.substring(openClose.length());
-    StringBuilder content = new StringBuilder();
-
-    while (!remaining.isEmpty()) {
-      // Check for escape sequence (2*N quotes)
-      if (remaining.startsWith(escapeSeq)) {
-        content.append(escapeVal);
-        remaining = remaining.substring(escapeSeq.length());
-        continue;
-      }
-
-      // Check for closing quotes (N quotes not followed by more quotes)
-      if (remaining.startsWith(openClose)) {
-        String afterClose = remaining.substring(openClose.length());
-        // Make sure this is exactly N quotes (not more)
-        if (afterClose.isEmpty() || afterClose.charAt(0) != quoteChar) {
-          return content.toString();
-        }
-      }
-
-      // Take the next character
-      content.append(remaining.charAt(0));
-      remaining = remaining.substring(1);
-    }
-
-    // No closing quotes found
-    return null;
-  }
-
-  private String repeatChar(char c, int count) {
+  private static String repeatChar(char c, int count) {
     StringBuilder sb = new StringBuilder(count);
     for (int i = 0; i < count; i++) {
       sb.append(c);

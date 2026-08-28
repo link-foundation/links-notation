@@ -82,8 +82,14 @@ export class Link {
    * @returns {string} Escaped reference
    */
   static escapeReference(reference) {
-    if (!reference || reference.trim() === '') {
+    if (reference === null || reference === undefined) {
       return '';
+    }
+
+    // The empty reference is written as a bare delimiter pair, so that it reads
+    // back as itself instead of disappearing from the document.
+    if (reference === '') {
+      return '""';
     }
 
     const hasSingleQuote = reference.includes("'");

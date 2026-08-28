@@ -14,6 +14,85 @@ class ParseError(Exception):
     """Exception raised when parsing fails."""
 
 
+QUOTE_CHARS = ('"', "'", "`")
+
+
+def _is_substantive_body(content: str) -> bool:
+    """
+    Report whether a body written between an even run of delimiters is
+    substantive: it holds at least one visible character and does not straddle
+    a parenthesis. An even run can always be read as delimiter pairs enclosing
+    nothing, so the n-quote reading is only taken when it carries something the
+    pairs cannot.
+    """
+    depth = 0
+    has_visible = False
+
+    for char in content:
+        if char == "(":
+            depth += 1
+        elif char == ")":
+            depth -= 1
+            if depth < 0:
+                return False
+        if not char.isspace():
+            has_visible = True
+
+    return has_visible and depth == 0
+
+
+def _parse_quoted_string_at(text: str, start: int) -> Optional[tuple]:
+    """
+    Parse the delimited reference that starts at ``start``.
+
+    Any number N of quotes opens and closes the string, 2*N quotes are an
+    escaped quote sequence. A run of an even number of delimiters that does not
+    open a reference with a substantive body is the empty reference: the
+    shortest reading, a bare delimiter pair enclosing nothing, wins over a
+    longer n-quote delimiter.
+
+    Returns ``(value, end_position)`` where ``end_position`` is the position
+    right after the closing quotes, or ``None`` when ``text`` does not start a
+    delimited reference.
+    """
+    if start >= len(text):
+        return None
+
+    quote_char = text[start]
+    if quote_char not in QUOTE_CHARS:
+        return None
+
+    quote_count = 0
+    pos = start
+    while pos < len(text) and text[pos] == quote_char:
+        quote_count += 1
+        pos += 1
+
+    is_even_run = quote_count % 2 == 0
+    empty_reference = ("", start + quote_count) if is_even_run else None
+
+    open_close = quote_char * quote_count
+    escape_seq = quote_char * (quote_count * 2)
+    content = []
+
+    while pos < len(text):
+        if text.startswith(escape_seq, pos):
+            content.append(open_close)
+            pos += len(escape_seq)
+            continue
+        if text.startswith(open_close, pos):
+            after_close = pos + quote_count
+            if after_close >= len(text) or text[after_close] != quote_char:
+                value = "".join(content)
+                if is_even_run and not _is_substantive_body(value):
+                    return empty_reference
+                return (value, after_close)
+        content.append(text[pos])
+        pos += 1
+
+    return empty_reference
+
+
 class Parser:
     """
     Parser for Lino notation.
@@ -87,37 +166,11 @@ class Parser:
         """
         Skip over the quoted string starting at start.
 
-        Any number N of quotes opens and closes the string, 2*N quotes are an
-        escaped quote sequence. Returns the position right after the closing
-        quotes, or -1 when text does not start a terminated quoted string.
+        Returns the position right after the closing quotes, or -1 when text
+        does not start a terminated quoted string.
         """
-        if start >= len(text):
-            return -1
-
-        quote_char = text[start]
-        if quote_char not in ('"', "'", "`"):
-            return -1
-
-        quote_count = 0
-        pos = start
-        while pos < len(text) and text[pos] == quote_char:
-            quote_count += 1
-            pos += 1
-
-        open_close = quote_char * quote_count
-        escape_seq = quote_char * (quote_count * 2)
-
-        while pos < len(text):
-            if text.startswith(escape_seq, pos):
-                pos += len(escape_seq)
-                continue
-            if text.startswith(open_close, pos):
-                after_close = pos + quote_count
-                if after_close >= len(text) or text[after_close] != quote_char:
-                    return after_close
-            pos += 1
-
-        return -1
+        parsed = _parse_quoted_string_at(text, start)
+        return -1 if parsed is None else parsed[1]
 
     def _split_lines_respecting_quotes(self, text: str) -> List[str]:
         """
@@ -381,39 +434,12 @@ class Parser:
         if start >= len(text):
             return (start, "")
 
-        # Check if this starts with a multi-quote string (supports any N quotes)
-        for quote_char in ['"', "'", "`"]:
-            if text[start:].startswith(quote_char):
-                # Count opening quotes dynamically
-                quote_count = 0
-                pos = start
-                while pos < len(text) and text[pos] == quote_char:
-                    quote_count += 1
-                    pos += 1
-
-                if quote_count >= 1:
-                    # Parse this multi-quote string
-                    remaining = text[start:]
-                    open_close = quote_char * quote_count
-                    escape_seq = quote_char * (quote_count * 2)
-
-                    inner_pos = len(open_close)
-                    while inner_pos < len(remaining):
-                        # Check for escape sequence (2*N quotes)
-                        if remaining[inner_pos:].startswith(escape_seq):
-                            inner_pos += len(escape_seq)
-                            continue
-                        # Check for closing quotes
-                        if remaining[inner_pos:].startswith(open_close):
-                            after_close_pos = inner_pos + len(open_close)
-                            # Make sure this is exactly N quotes (not more)
-                            if after_close_pos >= len(remaining) or remaining[after_close_pos] != quote_char:
-                                # Found the end
-                                return (start + after_close_pos, remaining[:after_close_pos])
-                        inner_pos += 1
-
-                    # No closing found, treat as regular text
-                    break
+        # Check if this starts with a delimited reference (any N quotes, or a
+        # bare delimiter pair standing for the empty reference)
+        quoted = _parse_quoted_string_at(text, start)
+        if quoted is not None:
+            _, end = quoted
+            return (end, text[start:end])
 
         # Check if this starts with a parenthesized expression
         if text[start] == "(":
@@ -456,65 +482,13 @@ class Parser:
         """Extract reference, handling quoted strings with escaping support."""
         text = text.strip()
 
-        # Try multi-quote strings (supports any N quotes)
-        for quote_char in ['"', "'", "`"]:
-            if text.startswith(quote_char):
-                # Count opening quotes dynamically
-                quote_count = 0
-                while quote_count < len(text) and text[quote_count] == quote_char:
-                    quote_count += 1
-
-                if quote_count >= 1 and len(text) > quote_count:
-                    # Try to parse this multi-quote string
-                    result = self._parse_multi_quote_string(text, quote_char, quote_count)
-                    if result is not None:
-                        return result
+        # Try delimited references (any N quotes, or a bare delimiter pair)
+        quoted = _parse_quoted_string_at(text, 0)
+        if quoted is not None:
+            return quoted[0]
 
         # Unquoted
         return text
-
-    def _parse_multi_quote_string(self, text: str, quote_char: str, quote_count: int) -> Optional[str]:
-        """
-        Parse a multi-quote string.
-
-        For N quotes: opening = N quotes, closing = N quotes, escape = 2*N quotes -> N quotes
-        """
-        open_close = quote_char * quote_count
-        escape_seq = quote_char * (quote_count * 2)
-        escape_val = quote_char * quote_count
-
-        # Check for opening quotes
-        if not text.startswith(open_close):
-            return None
-
-        remaining = text[len(open_close) :]
-        content = ""
-
-        while remaining:
-            # Check for escape sequence (2*N quotes)
-            if remaining.startswith(escape_seq):
-                content += escape_val
-                remaining = remaining[len(escape_seq) :]
-                continue
-
-            # Check for closing quotes (N quotes not followed by more quotes)
-            if remaining.startswith(open_close):
-                after_close = remaining[len(open_close) :]
-                # Make sure this is exactly N quotes (not more)
-                if not after_close or not after_close.startswith(quote_char):
-                    # Closing found - but only if we consumed the entire text
-                    if not after_close.strip():
-                        return content
-                    else:
-                        # There's more text after closing, may not be valid
-                        return content
-
-            # Take the next character
-            content += remaining[0]
-            remaining = remaining[1:]
-
-        # No closing quotes found
-        return None
 
     def _transform_result(self, raw_result: List[Dict]) -> List[Link]:
         """Transform raw parse result into Link objects."""

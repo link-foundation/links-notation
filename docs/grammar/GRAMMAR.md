@@ -28,7 +28,7 @@ The following EBNF grammar formally defines the Links Notation syntax:
 
 ```ebnf
 (* Links Notation (Lino) Grammar - EBNF *)
-(* Version: 0.14.0 *)
+(* Version: 0.15.0 *)
 
 (* === Document Structure === *)
 document            = skip_empty_lines, links, whitespace, EOF
@@ -77,15 +77,32 @@ indented_id_link    = reference, horizontal_whitespace, ":", eol ;
 reference_or_link   = nested_group
                     | reference ;
 
-reference           = double_quoted_reference
-                    | single_quoted_reference
+reference           = delimited_reference
                     | simple_reference ;
 
 simple_reference    = reference_symbol, { reference_symbol } ;
 
-double_quoted_reference = '"', { any_char - '"' }, '"' ;
+(* The three delimiters behave identically; nothing else delimits *)
+delimiter           = '"' | "'" | "`" ;
 
-single_quoted_reference = "'", { any_char - "'" }, "'" ;
+delimiter_run       = delimiter, { delimiter } ;
+
+(* The n-quoted reading is tried first; when it does not apply, an even run
+   of delimiters is the empty reference *)
+delimited_reference = n_quoted_reference
+                    | empty_reference ;
+
+(* A run of N delimiters, a body, then a run of exactly N of the same
+   delimiter. Conditions: both runs use the same delimiter and have the same
+   length N; the closing run is not followed by another delimiter; a run of
+   2N delimiters in the body stands for N literal delimiters; and when N is
+   even the body is substantive, holding at least one non-whitespace
+   character with balanced parentheses *)
+n_quoted_reference  = delimiter_run, { any_char }, delimiter_run ;
+
+(* A bare delimiter pair is the empty reference, and so is any longer even
+   run of the same delimiter that does not open an n-quoted reference *)
+empty_reference     = delimiter, delimiter, { delimiter, delimiter } ;
 
 (* === Terminal Symbols === *)
 reference_symbol    = any_char - whitespace_char - "(" - ":" - ")" ;
@@ -195,17 +212,25 @@ grammar:
     (alternative nested_group reference)
 
   reference:
-    (alternative double_quoted_reference single_quoted_reference
-      simple_reference)
+    (alternative delimited_reference simple_reference)
 
   simple_reference:
     (one_or_more reference_symbol)
 
-  double_quoted_reference:
-    (sequence '"' (zero_or_more (not '"')) '"')
+  delimiter:
+    (alternative '"' "'" '`')
 
-  single_quoted_reference:
-    (sequence "'" (zero_or_more (not "'")) "'")
+  delimiter_run:
+    (one_or_more delimiter)
+
+  delimited_reference:
+    (alternative n_quoted_reference empty_reference)
+
+  n_quoted_reference:
+    (sequence delimiter_run (zero_or_more any_char) delimiter_run)
+
+  empty_reference:
+    (one_or_more (sequence delimiter delimiter))
 
   reference_symbol:
     (not (alternative whitespace_char "(" ":" ")"))
@@ -249,19 +274,58 @@ Document
 
 ### References
 
-References are the atomic building blocks of Links Notation. There are
-three types:
+References are the atomic building blocks of Links Notation. A reference is
+either simple or delimited:
 
-| Type          | Syntax       | Example         | Description                  |
-|---------------|--------------|-----------------|------------------------------|
-| Simple        | `identifier` | `papa`, `mama`  | Alphanumeric and special     |
-| Double-quoted | `"text"`     | `"hello world"` | Any characters except `"`    |
-| Single-quoted | `'text'`     | `'hello world'` | Any characters except `'`    |
+| Type      | Syntax       | Example         | Description                         |
+|-----------|--------------|-----------------|-------------------------------------|
+| Simple    | `identifier` | `papa`, `mama`  | Alphanumeric and special            |
+| Delimited | `"text"`     | `"hello world"` | Any text between matching runs      |
+| Empty     | `""`         | `("" 1)`        | A bare delimiter pair holds nothing |
 
 **Simple Reference Characters:**
 
 - Valid: Letters, digits, `-`, `_`, `.`, `!`, `?`, `@`, `#`, `$`, `%`, etc.
 - Invalid: Space, tab, newline, `(`, `:`, `)`
+
+**Delimiters:**
+
+The three delimiters `"`, `'` and `` ` `` behave identically, so `"text"`,
+`'text'` and `` `text` `` are the same reference. Nothing else delimits: `«`,
+`[`, `|` and the like are ordinary characters of a simple reference.
+
+**N-Quoted References:**
+
+A reference may open with a run of N identical delimiters and close with a run
+of exactly N of the same delimiter, which lets the body hold the delimiter
+itself:
+
+```lino
+(x "" " "")
+```
+
+reads as a single reference holding ` " `. Inside the body a run of 2N
+delimiters stands for N literal delimiters.
+
+**The Empty Reference:**
+
+The shortest reading wins: a bare delimiter pair is the empty reference, and so
+is any longer even run that does not open an n-quoted reference with a
+substantive body. A body is substantive when it holds at least one
+non-whitespace character and its parentheses are balanced.
+
+| Source        | Reads as                                 |
+|---------------|------------------------------------------|
+| `(a "" b)`    | `a`, the empty reference, `b`            |
+| `(a "" "" b)` | `a`, two empty references, `b`           |
+| `(a """" b)`  | `a`, one empty reference, `b`            |
+| `(a ""x"" b)` | `a`, `x` written with a 2-quote run, `b` |
+| `(a " " b)`   | `a`, a reference holding one space, `b`  |
+| `("" ("" 1))` | the empty reference linked to `("" 1)`   |
+
+The empty reference is a reference like any other: it can be a value, an
+identifier, and it nests. Formatters write it as `""` so it reads back as
+itself instead of disappearing from the document.
 
 ### Link Types
 
@@ -413,11 +477,11 @@ Both produce equivalent structures.
 
 ```text
               ┌─────────────────────────┐
-      ┌───────┤  double_quoted_ref      ├───────┐
+      ┌───────┤  n_quoted_reference     ├───────┐
       │       └─────────────────────────┘       │
       │                                         │
 ──────┼───────┌─────────────────────────┐───────┼──────▶
-      │       │  single_quoted_ref      │       │
+      │       │  empty_reference        │       │
       │       └─────────────────────────┘       │
       │                                         │
       │       ┌─────────────────────────┐       │
@@ -436,16 +500,32 @@ Both produce equivalent structures.
                         └──────────────────┘
 ```
 
-### Double-Quoted Reference
+### N-Quoted Reference
 
 ```text
-              ┌───┐   ┌──────────────┐   ┌───┐
-──────────────┤ " ├───┤  any char    ├───┤ " ├──────▶
-              └───┘   │  except "    │   └───┘
-                      └──────┬───────┘
-                             │     ▲
-                             └─────┘
+        ┌──────────────┐   ┌──────────────┐   ┌──────────────┐
+────────┤ N delimiters ├───┤   any char   ├───┤ N delimiters ├──────▶
+        └──────────────┘   └──────┬───────┘   └──────────────┘
+                               │     ▲
+                               └─────┘
 ```
+
+Both runs use the same delimiter and the same length N, and the closing run is
+not followed by another delimiter. A run of 2N delimiters inside the body
+stands for N literal delimiters.
+
+### Empty Reference
+
+```text
+              ┌───┐   ┌───┐
+──────────────┤ d ├───┤ d ├──────┬──────▶
+              └───┘   └───┘      │
+                ▲                │
+                └────────────────┘
+```
+
+An even run of the same delimiter `d` that does not open an n-quoted reference
+with a substantive body is the empty reference.
 
 ### Any Link
 
@@ -619,6 +699,9 @@ document:
 "full name": "John Doe"
 'greeting': 'Hello, World!'
 mixed: "can contain 'single' quotes" 'and "double" quotes'
+backtick: `also a delimiter`
+empty: ""
+(nested: ("" ("" 1)))
 ```
 
 ### Real-World Example
@@ -665,3 +748,7 @@ for valid input.
 |         | `multiline_value_link` and `multiline_values` replaced by   |
 |         | `nested_group` and `nested_group_body`; blank lines are     |
 |         | skipped between lines of a block                            |
+| 0.15.0  | A reference is `delimited_reference` (`n_quoted_reference`  |
+|         | or `empty_reference`) or `simple_reference`; a bare         |
+|         | delimiter pair is the empty reference, and all three        |
+|         | delimiters are documented                                   |

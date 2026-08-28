@@ -3,6 +3,7 @@ package lino
 import (
 	"errors"
 	"strings"
+	"unicode"
 )
 
 // ParseError is returned when parsing fails.
@@ -70,18 +71,51 @@ func (p *Parser) Parse(input string) ([]*Link, error) {
 	return p.transformResult(rawResult), nil
 }
 
-// skipQuotedString skips over the quoted string starting at start.
+// isSubstantiveBody reports whether a body written between an even run of
+// delimiters is substantive: it holds at least one visible character and does
+// not straddle a parenthesis. An even run can always be read as delimiter pairs
+// enclosing nothing, so the n-quote reading is only taken when it carries
+// something the pairs cannot.
+func isSubstantiveBody(content string) bool {
+	depth := 0
+	hasVisible := false
+
+	for _, c := range content {
+		switch c {
+		case '(':
+			depth++
+		case ')':
+			depth--
+			if depth < 0 {
+				return false
+			}
+		}
+		if !unicode.IsSpace(c) {
+			hasVisible = true
+		}
+	}
+
+	return hasVisible && depth == 0
+}
+
+// parseQuotedStringAt parses the delimited reference starting at start.
+//
 // Any number N of quotes opens and closes the string, 2*N quotes are an escaped
-// quote sequence. It returns the position right after the closing quotes, or -1
-// when text does not start a terminated quoted string.
-func (p *Parser) skipQuotedString(text string, start int) int {
+// quote sequence. A run of an even number of delimiters that does not open a
+// reference with a substantive body is the empty reference: the shortest
+// reading, a bare delimiter pair enclosing nothing, wins over a longer n-quote
+// delimiter.
+//
+// It returns the decoded value and the position right after the closing quotes,
+// or ok == false when text does not start a delimited reference.
+func parseQuotedStringAt(text string, start int) (value string, end int, ok bool) {
 	if start >= len(text) {
-		return -1
+		return "", 0, false
 	}
 
 	quoteChar := text[start]
 	if quoteChar != '"' && quoteChar != '\'' && quoteChar != '`' {
-		return -1
+		return "", 0, false
 	}
 
 	quoteCount := 0
@@ -91,24 +125,47 @@ func (p *Parser) skipQuotedString(text string, start int) int {
 		pos++
 	}
 
+	isEvenRun := quoteCount%2 == 0
 	openClose := strings.Repeat(string(quoteChar), quoteCount)
 	escapeSeq := strings.Repeat(string(quoteChar), quoteCount*2)
+	var content strings.Builder
 
 	for pos < len(text) {
 		if strings.HasPrefix(text[pos:], escapeSeq) {
+			content.WriteString(openClose)
 			pos += len(escapeSeq)
 			continue
 		}
 		if strings.HasPrefix(text[pos:], openClose) {
 			afterClose := pos + quoteCount
 			if afterClose >= len(text) || text[afterClose] != quoteChar {
-				return afterClose
+				body := content.String()
+				if isEvenRun && !isSubstantiveBody(body) {
+					return "", start + quoteCount, true
+				}
+				return body, afterClose, true
 			}
 		}
+		content.WriteByte(text[pos])
 		pos++
 	}
 
-	return -1
+	if isEvenRun {
+		return "", start + quoteCount, true
+	}
+
+	return "", 0, false
+}
+
+// skipQuotedString skips over the quoted string starting at start.
+// It returns the position right after the closing quotes, or -1 when text does
+// not start a terminated quoted string.
+func (p *Parser) skipQuotedString(text string, start int) int {
+	_, end, ok := parseQuotedStringAt(text, start)
+	if !ok {
+		return -1
+	}
+	return end
 }
 
 // findMatchingParen finds the parenthesis closing the one at start.
@@ -413,44 +470,10 @@ func (p *Parser) extractNextValue(text string, start int) (int, string) {
 		return start, ""
 	}
 
-	// Check if this starts with a multi-quote string
-	for _, quoteChar := range []byte{'"', '\'', '`'} {
-		if text[start] == quoteChar {
-			// Count opening quotes dynamically
-			quoteCount := 0
-			pos := start
-			for pos < len(text) && text[pos] == quoteChar {
-				quoteCount++
-				pos++
-			}
-
-			if quoteCount >= 1 {
-				remaining := text[start:]
-				openClose := strings.Repeat(string(quoteChar), quoteCount)
-				escapeSeq := strings.Repeat(string(quoteChar), quoteCount*2)
-
-				innerPos := len(openClose)
-				for innerPos < len(remaining) {
-					// Check for escape sequence (2*N quotes)
-					if strings.HasPrefix(remaining[innerPos:], escapeSeq) {
-						innerPos += len(escapeSeq)
-						continue
-					}
-					// Check for closing quotes
-					if strings.HasPrefix(remaining[innerPos:], openClose) {
-						afterClosePos := innerPos + len(openClose)
-						// Make sure this is exactly N quotes (not more)
-						if afterClosePos >= len(remaining) || remaining[afterClosePos] != quoteChar {
-							return start + afterClosePos, remaining[:afterClosePos]
-						}
-					}
-					innerPos++
-				}
-
-				// No closing found, treat as regular text
-				break
-			}
-		}
+	// Check if this starts with a delimited reference (any N quotes, or a bare
+	// delimiter pair standing for the empty reference)
+	if _, end, ok := parseQuotedStringAt(text, start); ok {
+		return end, text[start:end]
 	}
 
 	// Check if this starts with a parenthesized expression
@@ -507,67 +530,13 @@ func (p *Parser) parseValue(value string) *internalLink {
 func (p *Parser) extractReference(text string) string {
 	text = strings.TrimSpace(text)
 
-	// Try multi-quote strings
-	for _, quoteChar := range []byte{'"', '\'', '`'} {
-		if len(text) > 0 && text[0] == quoteChar {
-			// Count opening quotes dynamically
-			quoteCount := 0
-			for quoteCount < len(text) && text[quoteCount] == quoteChar {
-				quoteCount++
-			}
-
-			if quoteCount >= 1 && len(text) > quoteCount {
-				result := p.parseMultiQuoteString(text, quoteChar, quoteCount)
-				if result != nil {
-					return *result
-				}
-			}
-		}
+	// Try delimited references (any N quotes, or a bare delimiter pair)
+	if value, _, ok := parseQuotedStringAt(text, 0); ok {
+		return value
 	}
 
 	// Unquoted
 	return text
-}
-
-func (p *Parser) parseMultiQuoteString(text string, quoteChar byte, quoteCount int) *string {
-	openClose := strings.Repeat(string(quoteChar), quoteCount)
-	escapeSeq := strings.Repeat(string(quoteChar), quoteCount*2)
-	escapeVal := strings.Repeat(string(quoteChar), quoteCount)
-
-	// Check for opening quotes
-	if !strings.HasPrefix(text, openClose) {
-		return nil
-	}
-
-	remaining := text[len(openClose):]
-	var content strings.Builder
-
-	for len(remaining) > 0 {
-		// Check for escape sequence (2*N quotes)
-		if strings.HasPrefix(remaining, escapeSeq) {
-			content.WriteString(escapeVal)
-			remaining = remaining[len(escapeSeq):]
-			continue
-		}
-
-		// Check for closing quotes (N quotes not followed by more quotes)
-		if strings.HasPrefix(remaining, openClose) {
-			afterClose := remaining[len(openClose):]
-			// Make sure this is exactly N quotes (not more)
-			if afterClose == "" || afterClose[0] != quoteChar {
-				// Closing found
-				result := content.String()
-				return &result
-			}
-		}
-
-		// Take the next character
-		content.WriteByte(remaining[0])
-		remaining = remaining[1:]
-	}
-
-	// No closing quotes found
-	return nil
 }
 
 func (p *Parser) transformResult(rawResult []*internalLink) []*Link {
