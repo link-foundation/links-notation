@@ -264,7 +264,7 @@ echo Formatter::formatLinks($parser->parse($input));
 
 ## Требования
 
-- PHP 8.1 или новее
+- PHP 8.4 или новее
 - расширение `ext-mbstring`
 - Composer 2
 
