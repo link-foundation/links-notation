@@ -18,15 +18,13 @@ function render(node) {
   if (!node.values || node.values.length === 0) {
     return `<${node.id ?? ''}>`;
   }
-  const head = node.id === null || node.id === undefined ? '' : `<${node.id}>: `;
+  const head =
+    node.id === null || node.id === undefined ? '' : `<${node.id}>: `;
   return `(${head}${node.values.map(render).join(' ')})`;
 }
 
 function parsesAs(input) {
-  return parser
-    .parse(input)
-    .map(render)
-    .join('\n');
+  return parser.parse(input).map(render).join('\n');
 }
 
 test('TestBareDelimiterPairIsTheEmptyReference', () => {
@@ -64,7 +62,7 @@ test('TestNQuoteDelimitedBodiesAreUnchanged', () => {
   // A run that encloses a substantive body keeps its n-quote meaning.
   expect(parsesAs('(a ""x"" b)')).toBe('(<a> <x> <b>)');
   expect(parsesAs('(x "" " "")')).toBe('(<x> < " >)');
-  expect(parsesAs('(x \' " \')')).toBe('(<x> < " >)');
+  expect(parsesAs("(x ' \" ')")).toBe('(<x> < " >)');
   // An n-quote-delimited empty is still empty.
   expect(parsesAs('(a """" b)')).toBe('(<a> <> <b>)');
 });

@@ -21,7 +21,8 @@ function render(node) {
   if (!node.values || node.values.length === 0) {
     return `<${node.id ?? ''}>`;
   }
-  const head = node.id === null || node.id === undefined ? '' : `<${node.id}>: `;
+  const head =
+    node.id === null || node.id === undefined ? '' : `<${node.id}>: `;
   return `(${head}${node.values.map(render).join(' ')})`;
 }
 
@@ -29,9 +30,14 @@ console.log('Parsed as:   ', links.map(render).join('\n'));
 
 const formatted = formatLinks(links);
 console.log('Formatted:   ', formatted);
-console.log('Round trips: ', formatLinks(parser.parse(formatted)) === formatted);
+console.log(
+  'Round trips: ',
+  formatLinks(parser.parse(formatted)) === formatted
+);
 
 // A bare delimiter pair is one empty reference, and two in a row stay separate.
 for (const example of ['(a "" b)', '(a "" "" b)', '(a " " b)', '(a ""x"" b)']) {
-  console.log(`${example.padEnd(14)} => ${parser.parse(example).map(render).join(' ')}`);
+  console.log(
+    `${example.padEnd(14)} => ${parser.parse(example).map(render).join(' ')}`
+  );
 }
