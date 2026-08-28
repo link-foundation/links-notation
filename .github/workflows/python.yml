@@ -181,12 +181,21 @@ jobs:
           fi
       # Trusted publishing when configured; an empty `password` makes the
       # action fall back to OIDC, and PYPI_TOKEN is only the bootstrap.
+      #
+      # The action defaults `attestations` to true, but attestations require
+      # trusted publishing, so passing a password made every release log
+      # "the attestations input is ignored" as a warning. The two settings are
+      # now driven by the same opt-in variable and can no longer contradict
+      # each other. Register the publisher at
+      # https://pypi.org/manage/project/links-notation/settings/publishing/
+      # and set the `PYPI_TRUSTED_PUBLISHING` repository variable to `true`.
       - name: Publish to PyPI
         if: steps.version-check.outputs.should_publish == 'true'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: python/dist
-          password: ${{ secrets.PYPI_TOKEN }}
+          password: ${{ vars.PYPI_TRUSTED_PUBLISHING == 'true' && '' || secrets.PYPI_TOKEN }}
+          attestations: ${{ vars.PYPI_TRUSTED_PUBLISHING == 'true' }}
       - name: Record publish outcome
         id: publish
         run: |

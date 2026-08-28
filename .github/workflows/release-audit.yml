@@ -52,7 +52,12 @@ jobs:
 
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # The wait below can take up to 20 minutes on its own.
+    timeout-minutes: 35
+    permissions:
+      contents: read
+      # Required so `gh run list` can see this commit's other workflow runs.
+      actions: read
     steps:
       - uses: actions/checkout@v7
         with:
@@ -61,9 +66,46 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: '22'
+      # On a push the audit is triggered by the very commit whose publish
+      # workflows are still running, so without this wait it compares the
+      # just-bumped version against a registry that cannot possibly have it
+      # yet. Run 33168552493 finished 8 seconds after the push and reported all
+      # seven languages as drifted while rust was still publishing, six minutes
+      # from done. Every one of those warnings was noise.
+      - name: Wait for this commit's publish workflows
+        if: ${{ github.event_name == 'push' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 60); do
+            # This workflow is itself a run for this commit, so it has to be
+            # excluded or the wait can never finish.
+            PENDING=$(gh run list --commit "$GITHUB_SHA" --limit 100 \
+              --json name,status \
+              --jq '[.[] | select(.name != "release-audit")
+                         | select(.status != "completed")] | length')
+            if [ "$PENDING" -eq 0 ]; then
+              echo "All workflows for $GITHUB_SHA have completed (attempt ${attempt})"
+              exit 0
+            fi
+            if [ "${CI_VERBOSE:-false}" = "true" ]; then
+              gh run list --commit "$GITHUB_SHA" --limit 100 \
+                --json name,status,conclusion \
+                --jq '.[] | "  \(.name): \(.status) \(.conclusion // "")"'
+            fi
+            echo "${PENDING} workflow(s) still running (attempt ${attempt}/60); waiting 20s"
+            sleep 20
+          done
+          echo "::warning::Workflows for $GITHUB_SHA were still running after 20 minutes; the audit below may report releases that are still in flight"
       # Drift is reported as annotations rather than enforced as a failure: a
       # version bump legitimately lands before the release that publishes it.
       - name: Audit declared versions against the registries
         env:
           CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+          # On a pull request no publish job runs at all, so a bumped version
+          # being ahead of the registry is the expected state rather than
+          # drift. Reporting it as a warning there would flag every release PR.
+          AUDIT_EXPECT_PUBLISHED: ${{ github.event_name != 'pull_request' }}
         run: node scripts/release-audit.mjs
