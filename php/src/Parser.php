@@ -80,22 +80,60 @@ class Parser
     }
 
     /**
-     * Skip over the quoted string starting at $start.
+     * Report whether a body written between an even run of delimiters is
+     * substantive: it holds at least one visible character and does not
+     * straddle a parenthesis. An even run can always be read as delimiter pairs
+     * enclosing nothing, so the n-quote reading is only taken when it carries
+     * something the pairs cannot.
+     */
+    private function isSubstantiveBody(string $content): bool
+    {
+        $depth = 0;
+        $hasVisible = false;
+
+        $length = strlen($content);
+        for ($i = 0; $i < $length; $i++) {
+            $char = $content[$i];
+            if ($char === '(') {
+                $depth++;
+            } elseif ($char === ')') {
+                $depth--;
+                if ($depth < 0) {
+                    return false;
+                }
+            }
+            if (trim($char) !== '') {
+                $hasVisible = true;
+            }
+        }
+
+        return $hasVisible && $depth === 0;
+    }
+
+    /**
+     * Parse the delimited reference starting at $start.
      *
      * Any number N of quotes opens and closes the string, 2*N quotes are an
-     * escaped quote sequence. Returns the position right after the closing
-     * quotes, or -1 when text does not start a terminated quoted string.
+     * escaped quote sequence. A run of an even number of delimiters that does
+     * not open a reference with a substantive body is the empty reference: the
+     * shortest reading, a bare delimiter pair enclosing nothing, wins over a
+     * longer n-quote delimiter.
+     *
+     * @return array{0: string, 1: int}|null The decoded value and the position
+     *                                       right after the closing quotes, or
+     *                                       null when $text does not start a
+     *                                       delimited reference
      */
-    private function skipQuotedString(string $text, int $start): int
+    private function parseQuotedStringAt(string $text, int $start): ?array
     {
         $length = strlen($text);
         if ($start >= $length) {
-            return -1;
+            return null;
         }
 
         $quoteChar = $text[$start];
         if (!in_array($quoteChar, ['"', "'", '`'], true)) {
-            return -1;
+            return null;
         }
 
         $quoteCount = 0;
@@ -105,24 +143,47 @@ class Parser
             $pos++;
         }
 
+        $isEvenRun = $quoteCount % 2 === 0;
+        $emptyReference = $isEvenRun ? ['', $start + $quoteCount] : null;
+
         $openClose = str_repeat($quoteChar, $quoteCount);
         $escapeSequence = str_repeat($quoteChar, $quoteCount * 2);
+        $content = '';
 
         while ($pos < $length) {
             if (str_starts_with(substr($text, $pos), $escapeSequence)) {
+                $content .= $openClose;
                 $pos += strlen($escapeSequence);
                 continue;
             }
             if (str_starts_with(substr($text, $pos), $openClose)) {
                 $afterClose = $pos + $quoteCount;
                 if ($afterClose >= $length || $text[$afterClose] !== $quoteChar) {
-                    return $afterClose;
+                    if ($isEvenRun && !$this->isSubstantiveBody($content)) {
+                        return $emptyReference;
+                    }
+
+                    return [$content, $afterClose];
                 }
             }
+            $content .= $text[$pos];
             $pos++;
         }
 
-        return -1;
+        return $emptyReference;
+    }
+
+    /**
+     * Skip over the quoted string starting at $start.
+     *
+     * Returns the position right after the closing quotes, or -1 when text does
+     * not start a delimited reference.
+     */
+    private function skipQuotedString(string $text, int $start): int
+    {
+        $parsed = $this->parseQuotedStringAt($text, $start);
+
+        return $parsed === null ? -1 : $parsed[1];
     }
 
     /**
@@ -470,43 +531,12 @@ class Parser
             return [$start, ''];
         }
 
-        // Check if this starts with a multi-quote string (supports any N quotes)
-        $quoteChar = $text[$start];
-        if (in_array($quoteChar, ['"', "'", '`'], true)) {
-            // Count opening quotes dynamically
-            $quoteCount = 0;
-            $pos = $start;
-            while ($pos < $length && $text[$pos] === $quoteChar) {
-                $quoteCount++;
-                $pos++;
-            }
+        // Check if this starts with a delimited reference
+        $quoted = $this->parseQuotedStringAt($text, $start);
+        if ($quoted !== null) {
+            [, $end] = $quoted;
 
-            // Parse this multi-quote string
-            $remaining = substr($text, $start);
-            $openClose = str_repeat($quoteChar, $quoteCount);
-            $escapeSequence = str_repeat($quoteChar, $quoteCount * 2);
-            $remainingLength = strlen($remaining);
-
-            $innerPos = strlen($openClose);
-            while ($innerPos < $remainingLength) {
-                // Check for escape sequence (2*N quotes)
-                if (str_starts_with(substr($remaining, $innerPos), $escapeSequence)) {
-                    $innerPos += strlen($escapeSequence);
-                    continue;
-                }
-                // Check for closing quotes
-                if (str_starts_with(substr($remaining, $innerPos), $openClose)) {
-                    $afterClosePos = $innerPos + strlen($openClose);
-                    // Make sure this is exactly N quotes (not more)
-                    if ($afterClosePos >= $remainingLength || $remaining[$afterClosePos] !== $quoteChar) {
-                        // Found the end
-                        return [$start + $afterClosePos, substr($remaining, 0, $afterClosePos)];
-                    }
-                }
-                $innerPos++;
-            }
-
-            // No closing found, treat as regular text
+            return [$end, substr($text, $start, $end - $start)];
         }
 
         // Check if this starts with a parenthesized expression
@@ -565,74 +595,13 @@ class Parser
     {
         $text = trim($text);
 
-        // Try multi-quote strings (supports any N quotes)
-        foreach (['"', "'", '`'] as $quoteChar) {
-            if (str_starts_with($text, $quoteChar)) {
-                // Count opening quotes dynamically
-                $quoteCount = 0;
-                $length = strlen($text);
-                while ($quoteCount < $length && $text[$quoteCount] === $quoteChar) {
-                    $quoteCount++;
-                }
-
-                if ($length > $quoteCount) {
-                    // Try to parse this multi-quote string
-                    $result = $this->parseMultiQuoteString($text, $quoteChar, $quoteCount);
-                    if ($result !== null) {
-                        return $result;
-                    }
-                }
-            }
+        $quoted = $this->parseQuotedStringAt($text, 0);
+        if ($quoted !== null) {
+            return $quoted[0];
         }
 
         // Unquoted
         return $text;
-    }
-
-    /**
-     * Parse a multi-quote string.
-     *
-     * For N quotes: opening = N quotes, closing = N quotes, escape = 2*N quotes -> N quotes
-     */
-    private function parseMultiQuoteString(string $text, string $quoteChar, int $quoteCount): ?string
-    {
-        $openClose = str_repeat($quoteChar, $quoteCount);
-        $escapeSequence = str_repeat($quoteChar, $quoteCount * 2);
-        $escapeValue = str_repeat($quoteChar, $quoteCount);
-
-        // Check for opening quotes
-        if (!str_starts_with($text, $openClose)) {
-            return null;
-        }
-
-        $remaining = substr($text, strlen($openClose));
-        $content = '';
-
-        while ($remaining !== '') {
-            // Check for escape sequence (2*N quotes)
-            if (str_starts_with($remaining, $escapeSequence)) {
-                $content .= $escapeValue;
-                $remaining = substr($remaining, strlen($escapeSequence));
-                continue;
-            }
-
-            // Check for closing quotes (N quotes not followed by more quotes)
-            if (str_starts_with($remaining, $openClose)) {
-                $afterClose = substr($remaining, strlen($openClose));
-                // Make sure this is exactly N quotes (not more)
-                if ($afterClose === '' || !str_starts_with($afterClose, $quoteChar)) {
-                    // Closing found: the text after it, if any, is kept out of the reference
-                    return $content;
-                }
-            }
-
-            // Take the next character
-            $content .= $remaining[0];
-            $remaining = substr($remaining, 1);
-        }
-
-        // No closing quotes found
-        return null;
     }
 
     /**

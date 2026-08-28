@@ -120,8 +120,13 @@ class Link
      */
     public static function escapeReference(?string $reference): string
     {
-        if ($reference === null || trim($reference) === '') {
+        if ($reference === null) {
             return '';
+        }
+        // The empty reference is written as a bare delimiter pair, so that it
+        // reads back as itself instead of disappearing from the document.
+        if ($reference === '') {
+            return '""';
         }
 
         // Check if single quotes are needed
