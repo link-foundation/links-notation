@@ -178,10 +178,32 @@ var customParser = new Parser&lt;Guid&gt;();
 
 Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 </code></pre>
+<h3 id="комментарии">Комментарии</h3>
+<p><code>#</code> скрывает остаток строки, на которой стоит, поэтому документ может нести
+пояснения о самом себе:</p>
+<pre><code class="lang-lino"># машины, на которые идёт выкладка
+deploy: staging # пока только staging
+</code></pre>
+<p>К моменту чтения документа обоих комментариев уже нет, остаётся одна связь
+<code>(deploy: staging)</code>. <code>#</code> открывает комментарий только там, где могла бы
+начаться ссылка, поэтому <code>#</code> внутри токена (<code>issue#1047</code>) и <code>#</code> внутри ссылки
+в кавычках (<code>&quot;#&quot;</code>) остаются обычными символами.</p>
+<p>Форматтер соблюдает то же правило с другой стороны: ссылка, начинающаяся с <code>#</code>,
+записывается в кавычках (<code>'#tag'</code>), поэтому написанный им документ читается
+обратно как он сам.</p>
+<p>Комментарии включены по умолчанию, а парсеру можно велеть снова читать <code>#</code> как
+обычный символ - для документов, написанных до появления комментариев:</p>
+<pre><code class="lang-csharp">var links = new Parser().Parse(&quot;# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n&quot;);
+Console.WriteLine(links[0]); // (deploy: staging)
+
+var plain = new Parser(comments: false);
+Console.WriteLine(plain.Parse(&quot;# a b\n&quot;)[0]); // (# a b)
+</code></pre>
 <h2 id="справочник-api">Справочник API</h2>
 <h3 id="классы">Классы</h3>
 <ul>
-<li><strong>Parser&lt;TLinkAddress&gt;</strong>: Основной класс парсера для преобразования строк в связи</li>
+<li><strong>Parser&lt;TLinkAddress&gt;</strong>: Основной класс парсера для преобразования строк в связи
+(<code>new Parser(comments: false)</code> читает <code>#</code> как обычный символ)</li>
 <li><strong>Link&lt;TLinkAddress&gt;</strong>: Представляет одну связь с ID и значениями</li>
 <li><strong>LinksGroup&lt;TLinkAddress&gt;</strong>: Контейнер для группировки связанных связей</li>
 <li><strong>ParseException</strong>: Выбрасывается, когда документ не разбирается</li>
@@ -191,7 +213,7 @@ Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 перестал быть понятным, и цитирует сломанную строку с указателем под ней:</p>
 <pre><code class="lang-csharp">try
 {
-    new Parser().Parse(&quot;# ok line\n# break: two\nci_gate x\n&quot;);
+    new Parser().Parse(&quot;ci_gate x\nstage: rust: nextest\n&quot;);
 }
 catch (ParseException error)
 {
@@ -199,9 +221,9 @@ catch (ParseException error)
     Console.Error.WriteLine($&quot;{error.Line}:{error.Column} (смещение {error.Offset})&quot;);
 }
 </code></pre>
-<pre><code class="lang-text">Syntax error at line 2, column 8: unexpected &quot;:&quot;
-2 | # break: two
-  |        ^
+<pre><code class="lang-text">Syntax error at line 2, column 12: unexpected &quot;:&quot;
+2 | stage: rust: nextest
+  |            ^
 </code></pre>
 <p><code>ParseException</code> наследуется от <code>FormatException</code>, поэтому вызывающий код,
 который уже ловит <code>FormatException</code>, продолжает работать, и несет <code>Offset</code>,

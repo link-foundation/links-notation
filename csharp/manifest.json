@@ -32,6 +32,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Comments.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Comments.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Comments",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Comments.yml\" sourcestartlinenumber=\"1\">Comments, and the rule that decides where one starts.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Link.Foundation.Links.Notation.FormatConfig.yml",
       "output": {
         ".html": {

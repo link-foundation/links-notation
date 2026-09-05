@@ -178,10 +178,32 @@ collapses to a single link, so <code>(a b c)</code> is unchanged.</p>
 
 Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 </code></pre>
+<h3 id="comments">Comments</h3>
+<p>A <code>#</code> hides the rest of the line it stands on, so a document can carry prose
+about itself:</p>
+<pre><code class="lang-lino"># the machines this deploys to
+deploy: staging # only staging, for now
+</code></pre>
+<p>Both comments are gone by the time the document is read, leaving the single
+link <code>(deploy: staging)</code>. A <code>#</code> only opens a comment where a reference could
+begin, so a <code>#</code> inside a token (<code>issue#1047</code>) and a <code>#</code> inside a delimited
+reference (<code>&quot;#&quot;</code>) stay ordinary characters.</p>
+<p>A formatter keeps the same rule from the other side: a reference that begins
+with a <code>#</code> is written quoted (<code>'#tag'</code>), so a document it writes reads back as
+itself.</p>
+<p>Comments are on by default, and a parser can be told to read <code>#</code> as an ordinary
+character again, for documents written before comments existed:</p>
+<pre><code class="lang-csharp">var links = new Parser().Parse(&quot;# the machines this deploys to\ndeploy: staging # only staging, for now\n&quot;);
+Console.WriteLine(links[0]); // (deploy: staging)
+
+var plain = new Parser(comments: false);
+Console.WriteLine(plain.Parse(&quot;# a b\n&quot;)[0]); // (# a b)
+</code></pre>
 <h2 id="api-reference">API Reference</h2>
 <h3 id="classes">Classes</h3>
 <ul>
-<li><strong>Parser&lt;TLinkAddress&gt;</strong>: Main parser class for converting strings to links</li>
+<li><strong>Parser&lt;TLinkAddress&gt;</strong>: Main parser class for converting strings to links
+(<code>new Parser(comments: false)</code> reads <code>#</code> as an ordinary character)</li>
 <li><strong>Link&lt;TLinkAddress&gt;</strong>: Represents a single link with ID and values</li>
 <li><strong>LinksGroup&lt;TLinkAddress&gt;</strong>: Container for grouping related links</li>
 <li><strong>ParseException</strong>: Thrown when a document does not parse</li>
@@ -191,7 +213,7 @@ Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 making sense and quotes the offending line with a caret under it:</p>
 <pre><code class="lang-csharp">try
 {
-    new Parser().Parse(&quot;# ok line\n# break: two\nci_gate x\n&quot;);
+    new Parser().Parse(&quot;ci_gate x\nstage: rust: nextest\n&quot;);
 }
 catch (ParseException error)
 {
@@ -199,9 +221,9 @@ catch (ParseException error)
     Console.Error.WriteLine($&quot;{error.Line}:{error.Column} (offset {error.Offset})&quot;);
 }
 </code></pre>
-<pre><code class="lang-text">Syntax error at line 2, column 8: unexpected &quot;:&quot;
-2 | # break: two
-  |        ^
+<pre><code class="lang-text">Syntax error at line 2, column 12: unexpected &quot;:&quot;
+2 | stage: rust: nextest
+  |            ^
 </code></pre>
 <p><code>ParseException</code> derives from <code>FormatException</code>, so callers that already catch
 <code>FormatException</code> keep working, and carries <code>Offset</code>, <code>Line</code>, <code>Column</code>, <code>Found</code>,

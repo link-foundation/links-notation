@@ -7,6 +7,34 @@ references:
   commentId: N:Link.Foundation.Links.Notation
   fullName: Link.Foundation.Links.Notation
   nameWithType: Link.Foundation.Links.Notation
+- uid: Link.Foundation.Links.Notation.Comments
+  name: Comments
+  href: api/Link.Foundation.Links.Notation.Comments.html
+  commentId: T:Link.Foundation.Links.Notation.Comments
+  fullName: Link.Foundation.Links.Notation.Comments
+  nameWithType: Comments
+- uid: Link.Foundation.Links.Notation.Comments.Comment
+  name: Comment
+  href: api/Link.Foundation.Links.Notation.Comments.html#Link_Foundation_Links_Notation_Comments_Comment
+  commentId: F:Link.Foundation.Links.Notation.Comments.Comment
+  fullName: Link.Foundation.Links.Notation.Comments.Comment
+  nameWithType: Comments.Comment
+- uid: Link.Foundation.Links.Notation.Comments.StripComments(System.String)
+  name: StripComments(string)
+  href: api/Link.Foundation.Links.Notation.Comments.html#Link_Foundation_Links_Notation_Comments_StripComments_System_String_
+  commentId: M:Link.Foundation.Links.Notation.Comments.StripComments(System.String)
+  name.vb: StripComments(String)
+  fullName: Link.Foundation.Links.Notation.Comments.StripComments(string)
+  fullName.vb: Link.Foundation.Links.Notation.Comments.StripComments(String)
+  nameWithType: Comments.StripComments(string)
+  nameWithType.vb: Comments.StripComments(String)
+- uid: Link.Foundation.Links.Notation.Comments.StripComments*
+  name: StripComments
+  href: api/Link.Foundation.Links.Notation.Comments.html#Link_Foundation_Links_Notation_Comments_StripComments_
+  commentId: Overload:Link.Foundation.Links.Notation.Comments.StripComments
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Comments.StripComments
+  nameWithType: Comments.StripComments
 - uid: Link.Foundation.Links.Notation.FormatConfig
   name: FormatConfig
   href: api/Link.Foundation.Links.Notation.FormatConfig.html
@@ -920,6 +948,38 @@ references:
   commentId: T:Link.Foundation.Links.Notation.Parser
   fullName: Link.Foundation.Links.Notation.Parser
   nameWithType: Parser
+- uid: Link.Foundation.Links.Notation.Parser.#ctor(System.Boolean)
+  name: Parser(bool)
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser__ctor_System_Boolean_
+  commentId: M:Link.Foundation.Links.Notation.Parser.#ctor(System.Boolean)
+  name.vb: New(Boolean)
+  fullName: Link.Foundation.Links.Notation.Parser.Parser(bool)
+  fullName.vb: Link.Foundation.Links.Notation.Parser.New(Boolean)
+  nameWithType: Parser.Parser(bool)
+  nameWithType.vb: Parser.New(Boolean)
+- uid: Link.Foundation.Links.Notation.Parser.#ctor*
+  name: Parser
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser__ctor_
+  commentId: Overload:Link.Foundation.Links.Notation.Parser.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Link.Foundation.Links.Notation.Parser.Parser
+  fullName.vb: Link.Foundation.Links.Notation.Parser.New
+  nameWithType: Parser.Parser
+  nameWithType.vb: Parser.New
+- uid: Link.Foundation.Links.Notation.Parser.Comments
+  name: Comments
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_Comments
+  commentId: P:Link.Foundation.Links.Notation.Parser.Comments
+  fullName: Link.Foundation.Links.Notation.Parser.Comments
+  nameWithType: Parser.Comments
+- uid: Link.Foundation.Links.Notation.Parser.Comments*
+  name: Comments
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_Comments_
+  commentId: Overload:Link.Foundation.Links.Notation.Parser.Comments
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Parser.Comments
+  nameWithType: Parser.Comments
 - uid: Link.Foundation.Links.Notation.Parser.Parse(System.String,System.String)
   name: Parse(string, string?)
   href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_Parse_System_String_System_String_
