@@ -1,7 +1,12 @@
+pub mod comments;
 pub mod format_config;
 pub mod parser;
+pub mod parser_config;
 
+use comments::strip_comments;
 use format_config::FormatConfig;
+pub use parser_config::ParserConfig;
+use std::borrow::Cow;
 
 // Re-export the lino! macro when the macro feature is enabled
 #[cfg(feature = "macro")]
@@ -63,9 +68,9 @@ const ELLIPSIS: &str = "...";
 /// ```
 /// use links_notation::{parse_lino, ParseError};
 ///
-/// let error = parse_lino("# ok line\n# break: two\n").unwrap_err();
+/// let error = parse_lino("ci_gate x\nstage: rust: nextest\n").unwrap_err();
 /// let ParseError::SyntaxError(error) = error else { panic!("expected a syntax error") };
-/// assert_eq!((error.line, error.column), (2, 8));
+/// assert_eq!((error.line, error.column), (2, 12));
 /// assert_eq!(error.found, Some(':'));
 /// ```
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -782,7 +787,53 @@ fn flatten_link_recursive(
     }
 }
 
+/// The document as the parser reads it: with the comments blanked out when the
+/// configuration asks for comments, and untouched when it does not.
+///
+/// Blanking keeps every byte of the document where it was, so a position the
+/// parser reports is a position in the document the caller passed in.
+fn prepare<'a>(document: &'a str, config: &ParserConfig) -> Cow<'a, str> {
+    if config.comments {
+        Cow::Owned(strip_comments(document))
+    } else {
+        Cow::Borrowed(document)
+    }
+}
+
+/// Reads a document, with comments.
+///
+/// A `#` written where a line or a token starts opens a comment that runs to
+/// the end of the line; [`parse_lino_with_config`] reads a document without
+/// them.
+///
+/// # Examples
+/// ```
+/// use links_notation::parse_lino;
+///
+/// let parsed = parse_lino("# what the gate checks\nci_gate: rust\n").unwrap();
+/// assert_eq!(format!("{}", parsed), "((ci_gate: rust))");
+/// ```
 pub fn parse_lino(document: &str) -> Result<LiNo<String>, ParseError> {
+    parse_lino_with_config(document, &ParserConfig::default())
+}
+
+/// Reads a document the way `config` says to.
+///
+/// # Examples
+/// ```
+/// use links_notation::{parse_lino_with_config, ParserConfig};
+///
+/// let document = "# a: b";
+/// assert_eq!(
+///     format!("{}", parse_lino_with_config(document, &ParserConfig::new()).unwrap()),
+///     "()"
+/// );
+/// assert!(parse_lino_with_config(document, &ParserConfig::without_comments()).is_err());
+/// ```
+pub fn parse_lino_with_config(
+    document: &str,
+    config: &ParserConfig,
+) -> Result<LiNo<String>, ParseError> {
     // Handle empty or whitespace-only input by returning empty result
     if document.trim().is_empty() {
         return Ok(LiNo::Link {
@@ -791,7 +842,8 @@ pub fn parse_lino(document: &str) -> Result<LiNo<String>, ParseError> {
         });
     }
 
-    match parser::parse_document_with_diagnostics(document) {
+    let prepared = prepare(document, config);
+    match parser::parse_document_with_diagnostics(&prepared) {
         Ok(links) => {
             if links.is_empty() {
                 Ok(LiNo::Link {
@@ -813,12 +865,30 @@ pub fn parse_lino(document: &str) -> Result<LiNo<String>, ParseError> {
 
 // New function that matches C# and JS API - returns collection of links
 pub fn parse_lino_to_links(document: &str) -> Result<Vec<LiNo<String>>, ParseError> {
+    parse_lino_to_links_with_config(document, &ParserConfig::default())
+}
+
+/// Reads a document into a collection of links the way `config` says to.
+///
+/// # Examples
+/// ```
+/// use links_notation::{parse_lino_to_links_with_config, ParserConfig};
+///
+/// let links = parse_lino_to_links_with_config("a: b # why", &ParserConfig::new()).unwrap();
+/// assert_eq!(links.len(), 1);
+/// assert_eq!(format!("{}", links[0]), "(a: b)");
+/// ```
+pub fn parse_lino_to_links_with_config(
+    document: &str,
+    config: &ParserConfig,
+) -> Result<Vec<LiNo<String>>, ParseError> {
     // Handle empty or whitespace-only input by returning empty collection
     if document.trim().is_empty() {
         return Ok(vec![]);
     }
 
-    match parser::parse_document_with_diagnostics(document) {
+    let prepared = prepare(document, config);
+    match parser::parse_document_with_diagnostics(&prepared) {
         Ok(links) => {
             if links.is_empty() {
                 Ok(vec![])
