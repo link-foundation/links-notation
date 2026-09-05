@@ -184,7 +184,28 @@ Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 <li><strong>Parser&lt;TLinkAddress&gt;</strong>: Main parser class for converting strings to links</li>
 <li><strong>Link&lt;TLinkAddress&gt;</strong>: Represents a single link with ID and values</li>
 <li><strong>LinksGroup&lt;TLinkAddress&gt;</strong>: Container for grouping related links</li>
+<li><strong>ParseException</strong>: Thrown when a document does not parse</li>
 </ul>
+<h3 id="error-handling">Error Handling</h3>
+<p><code>Parse</code> throws a <code>ParseException</code> whose message says where the document stopped
+making sense and quotes the offending line with a caret under it:</p>
+<pre><code class="lang-csharp">try
+{
+    new Parser().Parse(&quot;# ok line\n# break: two\nci_gate x\n&quot;);
+}
+catch (ParseException error)
+{
+    Console.Error.WriteLine(error.Message);
+    Console.Error.WriteLine($&quot;{error.Line}:{error.Column} (offset {error.Offset})&quot;);
+}
+</code></pre>
+<pre><code class="lang-text">Syntax error at line 2, column 8: unexpected &quot;:&quot;
+2 | # break: two
+  |        ^
+</code></pre>
+<p><code>ParseException</code> derives from <code>FormatException</code>, so callers that already catch
+<code>FormatException</code> keep working, and carries <code>Offset</code>, <code>Line</code>, <code>Column</code>, <code>Found</code>,
+<code>LineText</code>, <code>Summary</code> and <code>Snippet</code> for callers that report errors themselves.</p>
 <h3 id="extension-methods">Extension Methods</h3>
 <ul>
 <li><strong>IListExtensions.Format()</strong>: Converts list of links back to string format</li>

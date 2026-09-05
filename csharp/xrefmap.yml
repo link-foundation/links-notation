@@ -798,6 +798,122 @@ references:
   fullName.vb: Link.Foundation.Links.Notation.LinksGroup(Of TLinkAddress).<>
   nameWithType: LinksGroup<TLinkAddress>.operator !=
   nameWithType.vb: LinksGroup(Of TLinkAddress).<>
+- uid: Link.Foundation.Links.Notation.ParseException
+  name: ParseException
+  href: api/Link.Foundation.Links.Notation.ParseException.html
+  commentId: T:Link.Foundation.Links.Notation.ParseException
+  fullName: Link.Foundation.Links.Notation.ParseException
+  nameWithType: ParseException
+- uid: Link.Foundation.Links.Notation.ParseException.#ctor(System.String,System.Int32,System.Exception)
+  name: ParseException(string, int, Exception?)
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException__ctor_System_String_System_Int32_System_Exception_
+  commentId: M:Link.Foundation.Links.Notation.ParseException.#ctor(System.String,System.Int32,System.Exception)
+  name.vb: New(String, Integer, Exception)
+  fullName: Link.Foundation.Links.Notation.ParseException.ParseException(string, int, System.Exception?)
+  fullName.vb: Link.Foundation.Links.Notation.ParseException.New(String, Integer, System.Exception)
+  nameWithType: ParseException.ParseException(string, int, Exception?)
+  nameWithType.vb: ParseException.New(String, Integer, Exception)
+- uid: Link.Foundation.Links.Notation.ParseException.#ctor*
+  name: ParseException
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException__ctor_
+  commentId: Overload:Link.Foundation.Links.Notation.ParseException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Link.Foundation.Links.Notation.ParseException.ParseException
+  fullName.vb: Link.Foundation.Links.Notation.ParseException.New
+  nameWithType: ParseException.ParseException
+  nameWithType.vb: ParseException.New
+- uid: Link.Foundation.Links.Notation.ParseException.Column
+  name: Column
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Column
+  commentId: P:Link.Foundation.Links.Notation.ParseException.Column
+  fullName: Link.Foundation.Links.Notation.ParseException.Column
+  nameWithType: ParseException.Column
+- uid: Link.Foundation.Links.Notation.ParseException.Column*
+  name: Column
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Column_
+  commentId: Overload:Link.Foundation.Links.Notation.ParseException.Column
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.ParseException.Column
+  nameWithType: ParseException.Column
+- uid: Link.Foundation.Links.Notation.ParseException.Found
+  name: Found
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Found
+  commentId: P:Link.Foundation.Links.Notation.ParseException.Found
+  fullName: Link.Foundation.Links.Notation.ParseException.Found
+  nameWithType: ParseException.Found
+- uid: Link.Foundation.Links.Notation.ParseException.Found*
+  name: Found
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Found_
+  commentId: Overload:Link.Foundation.Links.Notation.ParseException.Found
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.ParseException.Found
+  nameWithType: ParseException.Found
+- uid: Link.Foundation.Links.Notation.ParseException.Line
+  name: Line
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Line
+  commentId: P:Link.Foundation.Links.Notation.ParseException.Line
+  fullName: Link.Foundation.Links.Notation.ParseException.Line
+  nameWithType: ParseException.Line
+- uid: Link.Foundation.Links.Notation.ParseException.Line*
+  name: Line
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Line_
+  commentId: Overload:Link.Foundation.Links.Notation.ParseException.Line
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.ParseException.Line
+  nameWithType: ParseException.Line
+- uid: Link.Foundation.Links.Notation.ParseException.LineText
+  name: LineText
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_LineText
+  commentId: P:Link.Foundation.Links.Notation.ParseException.LineText
+  fullName: Link.Foundation.Links.Notation.ParseException.LineText
+  nameWithType: ParseException.LineText
+- uid: Link.Foundation.Links.Notation.ParseException.LineText*
+  name: LineText
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_LineText_
+  commentId: Overload:Link.Foundation.Links.Notation.ParseException.LineText
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.ParseException.LineText
+  nameWithType: ParseException.LineText
+- uid: Link.Foundation.Links.Notation.ParseException.Offset
+  name: Offset
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Offset
+  commentId: P:Link.Foundation.Links.Notation.ParseException.Offset
+  fullName: Link.Foundation.Links.Notation.ParseException.Offset
+  nameWithType: ParseException.Offset
+- uid: Link.Foundation.Links.Notation.ParseException.Offset*
+  name: Offset
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Offset_
+  commentId: Overload:Link.Foundation.Links.Notation.ParseException.Offset
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.ParseException.Offset
+  nameWithType: ParseException.Offset
+- uid: Link.Foundation.Links.Notation.ParseException.Snippet
+  name: Snippet
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Snippet
+  commentId: P:Link.Foundation.Links.Notation.ParseException.Snippet
+  fullName: Link.Foundation.Links.Notation.ParseException.Snippet
+  nameWithType: ParseException.Snippet
+- uid: Link.Foundation.Links.Notation.ParseException.Snippet*
+  name: Snippet
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Snippet_
+  commentId: Overload:Link.Foundation.Links.Notation.ParseException.Snippet
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.ParseException.Snippet
+  nameWithType: ParseException.Snippet
+- uid: Link.Foundation.Links.Notation.ParseException.Summary
+  name: Summary
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Summary
+  commentId: P:Link.Foundation.Links.Notation.ParseException.Summary
+  fullName: Link.Foundation.Links.Notation.ParseException.Summary
+  nameWithType: ParseException.Summary
+- uid: Link.Foundation.Links.Notation.ParseException.Summary*
+  name: Summary
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Summary_
+  commentId: Overload:Link.Foundation.Links.Notation.ParseException.Summary
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.ParseException.Summary
+  nameWithType: ParseException.Summary
 - uid: Link.Foundation.Links.Notation.Parser
   name: Parser
   href: api/Link.Foundation.Links.Notation.Parser.html
@@ -805,13 +921,13 @@ references:
   fullName: Link.Foundation.Links.Notation.Parser
   nameWithType: Parser
 - uid: Link.Foundation.Links.Notation.Parser.Parse(System.String,System.String)
-  name: Parse(string, string)
+  name: Parse(string, string?)
   href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_Parse_System_String_System_String_
   commentId: M:Link.Foundation.Links.Notation.Parser.Parse(System.String,System.String)
   name.vb: Parse(String, String)
-  fullName: Link.Foundation.Links.Notation.Parser.Parse(string, string)
+  fullName: Link.Foundation.Links.Notation.Parser.Parse(string, string?)
   fullName.vb: Link.Foundation.Links.Notation.Parser.Parse(String, String)
-  nameWithType: Parser.Parse(string, string)
+  nameWithType: Parser.Parse(string, string?)
   nameWithType.vb: Parser.Parse(String, String)
 - uid: Link.Foundation.Links.Notation.Parser.Parse*
   name: Parse

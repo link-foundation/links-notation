@@ -130,6 +130,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.ParseException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.ParseException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.ParseException",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.ParseException.yml\" sourcestartlinenumber=\"1\">The error raised when a document does not parse, carrying the position the parser\nstopped at.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Parser.yml",
       "output": {
         ".html": {
@@ -140,7 +154,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Link.Foundation.Links.Notation.Parser",
-      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Parser.yml\" sourcestartlinenumber=\"1\">Parses a string according to the rules of the <xref href=\"Link.Foundation.Links.Notation.Parser\" data-throw-if-not-resolved=\"false\"></xref> grammar.</p>\n"
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Parser.yml\" sourcestartlinenumber=\"1\">Parses Links Notation documents into links.</p>\n"
     },
     {
       "type": "ManagedReference",

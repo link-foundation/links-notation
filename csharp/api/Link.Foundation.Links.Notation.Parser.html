@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Parser | Link.Foundation.Links.Notation Library ">
     
-    <meta name="description" content="Parses a string according to the rules of the  grammar.">
+    <meta name="description" content="Parses Links Notation documents into links.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,7 @@
 
 
   <h1 id="Link_Foundation_Links_Notation_Parser" data-uid="Link.Foundation.Links.Notation.Parser" class="text-break">Class Parser</h1>
-  <div class="markdown level0 summary"><p>Parses a string according to the rules of the <a class="xref" href="Link.Foundation.Links.Notation.Parser.html">Parser</a> grammar.</p>
+  <div class="markdown level0 summary"><p>Parses Links Notation documents into links.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -119,18 +119,29 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class Parser</code></pre>
   </div>
+  <h5 id="Link_Foundation_Links_Notation_Parser_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The rules live in <code>Parser.peg</code> and are compiled into
+<span class="xref">Link.Foundation.Links.Notation.GeneratedParser</span>; this class runs them and, when a document does not
+parse, reports the position the parser stopped at instead of the bare
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.formatexception">FormatException</a> the generated parser raises.</p>
+</div>
   <h3 id="methods">Methods
 </h3>
-
-
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Parser_Parse_System_String_System_String_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Parser.Parse(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Parser.cs/#L27">View Source</a>
+  </span>
   <a id="Link_Foundation_Links_Notation_Parser_Parse_" data-uid="Link.Foundation.Links.Notation.Parser.Parse*"></a>
-  <h4 id="Link_Foundation_Links_Notation_Parser_Parse_System_String_System_String_" data-uid="Link.Foundation.Links.Notation.Parser.Parse(System.String,System.String)">Parse(string, string)</h4>
-  <div class="markdown level1 summary"><p>Parses a string according to the rules of the <a class="xref" href="Link.Foundation.Links.Notation.Parser.html">Parser</a> grammar.</p>
+  <h4 id="Link_Foundation_Links_Notation_Parser_Parse_System_String_System_String_" data-uid="Link.Foundation.Links.Notation.Parser.Parse(System.String,System.String)">Parse(string, string?)</h4>
+  <div class="markdown level1 summary"><p>Parses a Links Notation document.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IList&lt;Link&lt;string&gt;&gt; Parse(string subject, string fileName = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public IList&lt;Link&lt;string&gt;&gt; Parse(string subject, string? fileName = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -145,7 +156,7 @@
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
         <td><span class="parametername">subject</span></td>
-        <td><p>The parsing subject.</p>
+        <td><p>The document to parse.</p>
 </td>
       </tr>
       <tr>
@@ -167,7 +178,7 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;<a class="xref" href="Link.Foundation.Links.Notation.Link-1.html">Link</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</td>
-        <td><p>The IList&lt;Link&lt;string&gt;&gt; parsed from <code class="paramref">subject</code>.</p>
+        <td><p>The links the document holds.</p>
 </td>
       </tr>
     </tbody>
@@ -182,11 +193,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.formatexception">FormatException</a></td>
-        <td><pre><code> Thrown when parsing fails against &lt;code class=&quot;paramref&quot;&gt;subject&lt;/code&gt;.  The exception's 
-</code></pre>
-<pre><code class="lang-csharp">Data["cursor"]</code></pre>
-<p>will be set with the cursor where the fatal error occurred.</p>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.ParseException.html">ParseException</a></td>
+        <td><p>Thrown when the document does not parse. The exception carries the line, the
+column and the offending line of the position the parser stopped at.</p>
 </td>
       </tr>
     </tbody>
@@ -199,6 +208,12 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
+                  <li>
+                    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Parser.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Parser%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Parser.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
