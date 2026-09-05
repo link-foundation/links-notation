@@ -12,16 +12,16 @@ use crate::parser::quoted_reference_end;
 pub const COMMENT: char = '#';
 
 /// The characters a delimited reference can be written between.
-const QUOTES: [u8; 3] = [b'"', b'\'', b'`'];
+const QUOTES: [u8; 3] = *b"\"'`";
 
 /// What can stand before a delimited reference: the reference is the first
 /// thing on a line, follows a space, opens a group or follows a colon.
-const BEFORE_REFERENCE: [u8; 6] = [b' ', b'\t', b'\n', b'\r', b'(', b':'];
+const BEFORE_REFERENCE: [u8; 6] = *b" \t\n\r(:";
 
 /// What can stand before a comment: the comment is the first thing on a line,
 /// or it follows whitespace. A `#` inside a word is part of that word, so
 /// `issue#1047` is a reference and not the start of a comment.
-const BEFORE_COMMENT: [u8; 4] = [b' ', b'\t', b'\n', b'\r'];
+const BEFORE_COMMENT: [u8; 4] = *b" \t\n\r";
 
 /// Blanks out every comment in `document`, keeping every other byte where it
 /// was.
