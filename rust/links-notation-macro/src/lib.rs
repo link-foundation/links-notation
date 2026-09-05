@@ -65,7 +65,8 @@ use syn::{parse::Parse, parse::ParseStream, LitStr};
 /// The macro expands to code that:
 /// 1. Contains a compile-time validation check
 /// 2. Calls `parse_lino()` at runtime
-/// 3. Unwraps the result (safe because validation passed at compile time)
+/// 3. Unwraps the result, panicking with the position of the defect if the
+///    parser refuses the text after all
 #[proc_macro]
 pub fn lino(input: TokenStream) -> TokenStream {
     let input2: proc_macro2::TokenStream = input.into();
@@ -111,8 +112,14 @@ pub fn lino(input: TokenStream) -> TokenStream {
                 let _ = #lino_str;
             };
 
-            // Runtime parsing
-            links_notation::parse_lino(#lino_str).expect("lino! macro: validated at compile time but runtime parse failed")
+            // Runtime parsing. Compile-time validation only checks that
+            // parentheses and quotes balance, so the parser can still refuse
+            // the text; when it does, the panic says where it stopped rather
+            // than only that it did.
+            match links_notation::parse_lino(#lino_str) {
+                Ok(parsed) => parsed,
+                Err(error) => panic!("lino!: {error}"),
+            }
         }
     };
 

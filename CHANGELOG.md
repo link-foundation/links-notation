@@ -89,6 +89,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   NuGet, Maven Central, Packagist and proxy.golang.org are each polled for the
   version just released, and the GitHub release is created only once the
   registry confirms it ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- Rust: `ParseError::SyntaxError` carries where a document stopped parsing —
+  `offset`, `line`, `column`, `expected`, `found` and the offending line — and
+  `SyntaxError::summary()` and `SyntaxError::snippet()` render it. The crate
+  also exports `parse_document_with_diagnostics`, and
+  `cargo run --example parse_error_positions` prints what several broken
+  documents report ([#302](https://github.com/link-foundation/links-notation/issues/302))
+- JavaScript: `ParseError`, exported from the package, thrown by
+  `Parser.parse` when a document does not parse. It carries `offset`, `line`,
+  `column`, `found`, `lineText`, `snippet`, the generated parser's `location`
+  and the original error as `cause` ([#302](https://github.com/link-foundation/links-notation/issues/302))
+- C#: `ParseException`, thrown by `Parser.Parse`, carrying `Offset`, `Line`,
+  `Column`, `Found`, `LineText`, `Summary` and `Snippet`. The Pegasus grammar
+  turns on `@trace true` so `FurthestFailureTracer` can record the furthest
+  position any rule reached, which is the only position that says where a
+  backtracking parser gave up ([#302](https://github.com/link-foundation/links-notation/issues/302))
+- `experiments/issue-302/run.sh` asks all seven implementations about the same
+  five documents, four of which do not parse, and prints the answers next to
+  each other ([#302](https://github.com/link-foundation/links-notation/issues/302))
 
 ### Changed
 - Every manifest checked against what the registries publish today and updated:
@@ -143,6 +161,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   where a cancelled run should not continue ([#290](https://github.com/link-foundation/links-notation/issues/290))
 - C# packaging and DocFX configuration are vendored in the repository instead of
   being fetched at run time ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- Rust, JavaScript and C# report a failed parse the same way: a first line
+  saying the position and what was expected, then the offending line with a
+  caret under it. All three agree on the offset of every defect the comparison
+  script checks ([#302](https://github.com/link-foundation/links-notation/issues/302))
+- Rust: `lino!` used to panic with a fixed sentence that named neither the
+  reason nor the position when text that balances its parentheses is refused by
+  the parser at runtime; it now panics with the parse error ([#302](https://github.com/link-foundation/links-notation/issues/302))
+- C#: `Parser.Parse` throws `ParseException` rather than the generated parser's
+  `FormatException`. `ParseException` derives from `FormatException`, so callers
+  that catch the base type keep working ([#302](https://github.com/link-foundation/links-notation/issues/302))
 
 ### Fixed
 - Docs: nested contexts were described in the English READMEs and in the root
@@ -237,6 +265,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `experiments/test_coverage_data.json` into the `go` flag ([#290](https://github.com/link-foundation/links-notation/issues/290))
 - Docs website: `docs/website/package.json` declares `"type": "module"`, so the ESM `vite.config.js`
   is no longer loaded as CommonJS and every build no longer warns ([#290](https://github.com/link-foundation/links-notation/issues/290))
+- Rust: a failed parse printed the raw `nom` error —
+  `Error(Error { input: "<the whole rest of the document>", code: Eof })` —
+  which named no line, no column and nothing that was expected, and grew with
+  the size of the document. It now says
+  `line 2, column 8: expected "(", a reference or end of line, found ":"` and
+  quotes one line. The reported position is the furthest any alternative
+  reached, so it points at the defect rather than at the start of the line the
+  parser last accepted ([#302](https://github.com/link-foundation/links-notation/issues/302))
+- C#: a failed parse said `Failed to parse 'document'.` and pinned its cursor at
+  line 1, column 1, because the generated parser backtracks out of the start
+  rule before it throws. It now reports the position the document really stopped
+  at ([#302](https://github.com/link-foundation/links-notation/issues/302))
+- JavaScript: the generated parser reported the position on the error object but
+  not in the message, so a caller that printed the message lost it
+  ([#302](https://github.com/link-foundation/links-notation/issues/302))
 
 ## [0.11.2] - 2024-XX-XX
 

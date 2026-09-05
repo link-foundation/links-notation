@@ -573,19 +573,38 @@ pre-commit install
 
 ## Error Handling
 
-The parser returns descriptive error messages for:
-
-- Empty or whitespace-only input
-- Malformed syntax
-- Unclosed parentheses
-- Invalid characters
+A parse error says where the document stopped making sense. Printing it gives
+the line and the column, what could have stood there, and the offending line
+with a caret under it:
 
 ```rust
-match parse_lino("(invalid") {
+match parse_lino("# ok line\n# break: two\nci_gate x\n") {
     Ok(parsed) => println!("Parsed: {}", parsed),
-    Err(error) => eprintln!("Error: {}", error),
+    Err(error) => eprintln!("{}", error),
 }
 ```
+
+```text
+Syntax error at line 2, column 8: expected "(", a reference or end of line, found ":"
+2 | # break: two
+  |        ^
+```
+
+The same position is available as fields, for callers that report errors
+themselves rather than printing them:
+
+```rust
+use links_notation::{parse_lino, ParseError};
+
+if let Err(ParseError::SyntaxError(error)) = parse_lino("a: b: c") {
+    println!("{}:{} (byte offset {})", error.line, error.column, error.offset);
+    println!("expected {:?}, found {:?}", error.expected, error.found);
+}
+```
+
+`ParseError::EmptyInput` is returned for input that is empty or only
+whitespace. `cargo run --example parse_error_positions` prints what several
+broken documents report.
 
 ## Maintenance
 

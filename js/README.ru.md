@@ -198,11 +198,44 @@ console.log(formatLinks(links)); // (value ((id 1) (label one)))
 - `constructor(links)` - Создание новой группы
 - `format()` - Форматирование группы в строку
 
+#### `ParseError`
+
+Выбрасывается методом `parse(input)`, когда документ не разбирается. Сообщение
+говорит, где документ перестал быть понятным, и цитирует сломанную строку:
+
+```js
+import { Parser, ParseError } from 'links-notation';
+
+try {
+  new Parser().parse('# ok line\n# break: two\nci_gate x\n');
+} catch (error) {
+  console.error(error.message);
+  if (error instanceof ParseError) {
+    console.error(`${error.line}:${error.column} (смещение ${error.offset})`);
+  }
+}
+```
+
+```text
+Syntax error at line 2, column 8: Expected "(", [ \t], [\r\n], or [^ \t\n\r(:)] but ":" found.
+2 | # break: two
+  |        ^
+```
+
+- `offset` - Смещение сломанной позиции от начала документа
+- `line`, `column` - Где документ перестал разбираться, счет с 1
+- `found` - Найденный символ или `null` в конце документа
+- `lineText` - Сломанная строка, как она написана
+- `snippet` - Сломанная строка с указателем под нужным столбцом
+- `location` - Позиция в том виде, в каком ее сообщает сгенерированный парсер
+- `cause` - Ошибка, которую выбросил сгенерированный парсер
+
 ## Структура проекта
 
 - `src/grammar.pegjs` - Определение грамматики Peggy.js
 - `src/Link.js` - Структура данных связи
 - `src/LinksGroup.js` - Контейнер групп связей
+- `src/ParseError.js` - Ошибка разбора с позицией дефекта
 - `src/Parser.js` - Обертка парсера
 - `src/index.js` - Главная точка входа
 - `tests/` - Файлы тестов

@@ -1,4 +1,5 @@
 import { Link } from './Link.js';
+import { ParseError } from './ParseError.js';
 import * as parserModule from './parser-generated.js';
 
 export class Parser {
@@ -35,10 +36,13 @@ export class Parser {
       const rawResult = parserModule.parse(input);
       return this.transformResult(rawResult);
     } catch (error) {
-      // Preserve original error information
+      // A syntax error knows where it stopped; anything else is passed on with
+      // the original error kept as the cause.
+      if (error && error.location) {
+        throw new ParseError(input, error);
+      }
       const parseError = new Error(`Parse error: ${error.message}`);
       parseError.cause = error;
-      parseError.location = error.location;
       throw parseError;
     }
   }

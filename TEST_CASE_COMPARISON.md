@@ -19,9 +19,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
 | Python | 146 | 14 |
-| JavaScript | 204 | 16 |
-| Rust | 283 | 18 |
-| C# | 196 | 17 |
+| JavaScript | 214 | 17 |
+| Rust | 299 | 19 |
+| C# | 207 | 18 |
 | Go | 86 | 10 |
 | Java | 133 | 9 |
 | PHP | 183 | 16 |
@@ -473,6 +473,35 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 **Category totals:** Python: 2, JavaScript: 2, Rust: 2, C#: 2, Go: 0, Java: 0, PHP: 2
 
+## Parse Error Position
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
+|-----------|---|---|---|---|---|---|---|
+| a document that parses reports nothing | ❌ | [✅](js/tests/ParseErrorPosition.test.js#L107) | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L178) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ParseErrorPositionTests.cs#L134) | ❌ | ❌ | ❌ |
+| both entry points report the same position | ❌ | ❌ | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L155) | ❌ | ❌ | ❌ | ❌ |
+| column counts characters rather than bytes | ❌ | ❌ | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L167) | ❌ | ❌ | ❌ | ❌ |
+| does not mention the grammar internals test | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ParseErrorPositionTests.cs#L125) | ❌ | ❌ | ❌ |
+| error display starts with the position | ❌ | ❌ | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L136) | ❌ | ❌ | ❌ | ❌ |
+| keeps catching code that expects a format exception working test | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ParseErrorPositionTests.cs#L114) | ❌ | ❌ | ❌ |
+| message of a long line stays a message | ❌ | [✅](js/tests/ParseErrorPosition.test.js#L89) | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L119) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ParseErrorPositionTests.cs#L101) | ❌ | ❌ | ❌ |
+| message points a caret at the offending character test | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ParseErrorPositionTests.cs#L76) | ❌ | ❌ | ❌ |
+| message quotes one line rather than the rest of the document | ❌ | [✅](js/tests/ParseErrorPosition.test.js#L79) | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L105) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ParseErrorPositionTests.cs#L88) | ❌ | ❌ | ❌ |
+| message says where the document broke | ❌ | [✅](js/tests/ParseErrorPosition.test.js#L70) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| nom internals stay out of the message | ❌ | ❌ | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L146) | ❌ | ❌ | ❌ | ❌ |
+| offset agrees with the javascript port | ❌ | ❌ | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L29) | ❌ | ❌ | ❌ | ❌ |
+| offset agrees with the other implementations | ❌ | [✅](js/tests/ParseErrorPosition.test.js#L34) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/ParseErrorPositionTests.cs#L32) | ❌ | ❌ | ❌ |
+| points at the defect rather than at the line it starts on | ❌ | ❌ | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L39) | ❌ | ❌ | ❌ | ❌ |
+| reports an unmatched closing parenthesis | ❌ | [✅](js/tests/ParseErrorPosition.test.js#L61) | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L77) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ParseErrorPositionTests.cs#L65) | ❌ | ❌ | ❌ |
+| reports the end of the document when a group is never closed | ❌ | [✅](js/tests/ParseErrorPosition.test.js#L51) | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L65) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ParseErrorPositionTests.cs#L53) | ❌ | ❌ | ❌ |
+| reports the line a late defect is on | ❌ | [✅](js/tests/ParseErrorPosition.test.js#L43) | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L49) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ParseErrorPositionTests.cs#L43) | ❌ | ❌ | ❌ |
+| reports the line and column of the defect | ❌ | [✅](js/tests/ParseErrorPosition.test.js#L24) | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L18) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ParseErrorPositionTests.cs#L20) | ❌ | ❌ | ❌ |
+| says what could have stood there | ❌ | ❌ | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L58) | ❌ | ❌ | ❌ | ❌ |
+| snippet points a caret at the offending character | ❌ | ❌ | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L98) | ❌ | ❌ | ❌ | ❌ |
+| summary reads as a sentence | ❌ | ❌ | [✅](rust/links-notation/tests/parse_error_position_tests.rs#L88) | ❌ | ❌ | ❌ | ❌ |
+| the location the parser used to report is still there | ❌ | [✅](js/tests/ParseErrorPosition.test.js#L100) | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+**Category totals:** Python: 0, JavaScript: 10, Rust: 16, C#: 11, Go: 0, Java: 0, PHP: 0
+
 ## Single Line Parser
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
@@ -821,6 +850,30 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedlinknoid
 - nestedlinkwithquotedvalues
 
+**Parse Error Position** (22 missing):
+- adocumentthatparsesreportsnothing
+- bothentrypointsreportthesameposition
+- columncountscharactersratherthanbytes
+- doesnotmentionthegrammarinternals
+- errordisplaystartswiththeposition
+- keepscatchingcodethatexpectsaformatexceptionworking
+- messageofalonglinestaysamessage
+- messagepointsacaretattheoffendingcharacter
+- messagequotesonelineratherthantherestofthedocument
+- messagesayswherethedocumentbroke
+- nominternalsstayoutofthemessage
+- offsetagreeswiththejavascriptport
+- offsetagreeswiththeotherimplementations
+- pointsatthedefectratherthanatthelineitstartson
+- reportsanunmatchedclosingparenthesis
+- reportstheendofthedocumentwhenagroupisneverclosed
+- reportsthelinealatedefectison
+- reportsthelineandcolumnofthedefect
+- sayswhatcouldhavestoodthere
+- snippetpointsacaretattheoffendingcharacter
+- summaryreadsasasentence
+- thelocationtheparserusedtoreportisstillthere
+
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -878,7 +931,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 264 tests**
+**Total missing: 286 tests**
 
 ### JavaScript Missing Tests
 
@@ -1062,6 +1115,20 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedlinknoid
 - nestedlinkwithquotedvalues
 
+**Parse Error Position** (12 missing):
+- bothentrypointsreportthesameposition
+- columncountscharactersratherthanbytes
+- doesnotmentionthegrammarinternals
+- errordisplaystartswiththeposition
+- keepscatchingcodethatexpectsaformatexceptionworking
+- messagepointsacaretattheoffendingcharacter
+- nominternalsstayoutofthemessage
+- offsetagreeswiththejavascriptport
+- pointsatthedefectratherthanatthelineitstartson
+- sayswhatcouldhavestoodthere
+- snippetpointsacaretattheoffendingcharacter
+- summaryreadsasasentence
+
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -1119,7 +1186,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 207 tests**
+**Total missing: 219 tests**
 
 ### Rust Missing Tests
 
@@ -1265,6 +1332,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedlinknoid
 - nestedlinkwithquotedvalues
 
+**Parse Error Position** (6 missing):
+- doesnotmentionthegrammarinternals
+- keepscatchingcodethatexpectsaformatexceptionworking
+- messagepointsacaretattheoffendingcharacter
+- messagesayswherethedocumentbroke
+- offsetagreeswiththeotherimplementations
+- thelocationtheparserusedtoreportisstillthere
+
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -1275,7 +1350,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - namedtupletolink
 - tupletolink
 
-**Total missing: 128 tests**
+**Total missing: 134 tests**
 
 ### C# Missing Tests
 
@@ -1469,6 +1544,19 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedlinknoid
 - nestedlinkwithquotedvalues
 
+**Parse Error Position** (11 missing):
+- bothentrypointsreportthesameposition
+- columncountscharactersratherthanbytes
+- errordisplaystartswiththeposition
+- messagesayswherethedocumentbroke
+- nominternalsstayoutofthemessage
+- offsetagreeswiththejavascriptport
+- pointsatthedefectratherthanatthelineitstartson
+- sayswhatcouldhavestoodthere
+- snippetpointsacaretattheoffendingcharacter
+- summaryreadsasasentence
+- thelocationtheparserusedtoreportisstillthere
+
 **Single Line Parser** (3 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -1523,7 +1611,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 214 tests**
+**Total missing: 225 tests**
 
 ### Go Missing Tests
 
@@ -1806,6 +1894,30 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedselfreferencedobjectinpairvalue
 - selfreferenceasdirectchildworkscorrectly
 
+**Parse Error Position** (22 missing):
+- adocumentthatparsesreportsnothing
+- bothentrypointsreportthesameposition
+- columncountscharactersratherthanbytes
+- doesnotmentionthegrammarinternals
+- errordisplaystartswiththeposition
+- keepscatchingcodethatexpectsaformatexceptionworking
+- messageofalonglinestaysamessage
+- messagepointsacaretattheoffendingcharacter
+- messagequotesonelineratherthantherestofthedocument
+- messagesayswherethedocumentbroke
+- nominternalsstayoutofthemessage
+- offsetagreeswiththejavascriptport
+- offsetagreeswiththeotherimplementations
+- pointsatthedefectratherthanatthelineitstartson
+- reportsanunmatchedclosingparenthesis
+- reportstheendofthedocumentwhenagroupisneverclosed
+- reportsthelinealatedefectison
+- reportsthelineandcolumnofthedefect
+- sayswhatcouldhavestoodthere
+- snippetpointsacaretattheoffendingcharacter
+- summaryreadsasasentence
+- thelocationtheparserusedtoreportisstillthere
+
 **Single Line Parser** (26 missing):
 - bugtest 1
 - linkwithid
@@ -1885,7 +1997,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 320 tests**
+**Total missing: 342 tests**
 
 ### Java Missing Tests
 
@@ -2142,6 +2254,30 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedselfreferencedobjectinpairvalue
 - selfreferenceasdirectchildworkscorrectly
 
+**Parse Error Position** (22 missing):
+- adocumentthatparsesreportsnothing
+- bothentrypointsreportthesameposition
+- columncountscharactersratherthanbytes
+- doesnotmentionthegrammarinternals
+- errordisplaystartswiththeposition
+- keepscatchingcodethatexpectsaformatexceptionworking
+- messageofalonglinestaysamessage
+- messagepointsacaretattheoffendingcharacter
+- messagequotesonelineratherthantherestofthedocument
+- messagesayswherethedocumentbroke
+- nominternalsstayoutofthemessage
+- offsetagreeswiththejavascriptport
+- offsetagreeswiththeotherimplementations
+- pointsatthedefectratherthanatthelineitstartson
+- reportsanunmatchedclosingparenthesis
+- reportstheendofthedocumentwhenagroupisneverclosed
+- reportsthelinealatedefectison
+- reportsthelineandcolumnofthedefect
+- sayswhatcouldhavestoodthere
+- snippetpointsacaretattheoffendingcharacter
+- summaryreadsasasentence
+- thelocationtheparserusedtoreportisstillthere
+
 **Single Line Parser** (9 missing):
 - linkwithoutidmultiline
 - linkwithoutidsingleline
@@ -2204,7 +2340,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 277 tests**
+**Total missing: 299 tests**
 
 ### PHP Missing Tests
 
@@ -2396,6 +2532,30 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedlinknoid
 - nestedlinkwithquotedvalues
 
+**Parse Error Position** (22 missing):
+- adocumentthatparsesreportsnothing
+- bothentrypointsreportthesameposition
+- columncountscharactersratherthanbytes
+- doesnotmentionthegrammarinternals
+- errordisplaystartswiththeposition
+- keepscatchingcodethatexpectsaformatexceptionworking
+- messageofalonglinestaysamessage
+- messagepointsacaretattheoffendingcharacter
+- messagequotesonelineratherthantherestofthedocument
+- messagesayswherethedocumentbroke
+- nominternalsstayoutofthemessage
+- offsetagreeswiththejavascriptport
+- offsetagreeswiththeotherimplementations
+- pointsatthedefectratherthanatthelineitstartson
+- reportsanunmatchedclosingparenthesis
+- reportstheendofthedocumentwhenagroupisneverclosed
+- reportsthelinealatedefectison
+- reportsthelineandcolumnofthedefect
+- sayswhatcouldhavestoodthere
+- snippetpointsacaretattheoffendingcharacter
+- summaryreadsasasentence
+- thelocationtheparserusedtoreportisstillthere
+
 **Single Line Parser** (16 missing):
 - linkwithoutidmultiline
 - linkwithoutidsingleline
@@ -2465,5 +2625,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 227 tests**
+**Total missing: 249 tests**
 

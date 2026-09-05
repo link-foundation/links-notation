@@ -162,6 +162,34 @@ Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 - **Parser\<TLinkAddress\>**: Main parser class for converting strings to links
 - **Link\<TLinkAddress\>**: Represents a single link with ID and values
 - **LinksGroup\<TLinkAddress\>**: Container for grouping related links
+- **ParseException**: Thrown when a document does not parse
+
+### Error Handling
+
+`Parse` throws a `ParseException` whose message says where the document stopped
+making sense and quotes the offending line with a caret under it:
+
+```csharp
+try
+{
+    new Parser().Parse("# ok line\n# break: two\nci_gate x\n");
+}
+catch (ParseException error)
+{
+    Console.Error.WriteLine(error.Message);
+    Console.Error.WriteLine($"{error.Line}:{error.Column} (offset {error.Offset})");
+}
+```
+
+```text
+Syntax error at line 2, column 8: unexpected ":"
+2 | # break: two
+  |        ^
+```
+
+`ParseException` derives from `FormatException`, so callers that already catch
+`FormatException` keep working, and carries `Offset`, `Line`, `Column`, `Found`,
+`LineText`, `Summary` and `Snippet` for callers that report errors themselves.
 
 ### Extension Methods
 
