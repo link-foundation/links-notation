@@ -136,7 +136,7 @@ fn main() -> ExitCode {
     });
     files.push(GeneratedFile {
         path: root.join("BENCHMARK_RESULTS.md"),
-        contents: report::markdown(&results, env!("CARGO_PKG_VERSION")),
+        contents: report::markdown(&results, links_notation::VERSION),
     });
 
     if check {

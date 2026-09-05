@@ -9,6 +9,18 @@ pub use links_notation_macro::lino;
 use std::error::Error as StdError;
 use std::fmt;
 
+/// The version of this crate, taken from `Cargo.toml` at compile time.
+///
+/// A tool that reports which parser produced a result should read it from here
+/// rather than from its own package, which is how the benchmark report came to
+/// claim the version of the benchmark instead of the version of the parser.
+///
+/// # Examples
+/// ```
+/// assert!(!links_notation::VERSION.is_empty());
+/// ```
+pub const VERSION: &str = env!("CARGO_PKG_VERSION");
+
 /// Error type for Lino parsing
 #[derive(Debug)]
 pub enum ParseError {

@@ -58,6 +58,21 @@ CSV writes each field name once and nothing else, but it cannot carry nesting, c
 and cannot carry the key a table sits under. It is emitted only for genuinely tabular datasets and
 reported as a reference floor.
 
+## What the benchmark does not answer
+
+Stated here as plainly as the results are, because a size benchmark is easy to over-read:
+
+- **Whether a model reads the format correctly.** Fewer tokens is a cost, not a capability.
+  Picking a format for a task also needs an accuracy measurement against the models in
+  question, which needs paid inference and is deliberately not run here.
+- **Vocabularies outside OpenAI's.** Both encodings are OpenAI BPE, because those are the two
+  a tokenizer exists for in all seven implementations, and the seven-way agreement is what
+  keeps the numbers honest. Anthropic, Google and Meta models segment text differently, so the
+  percentages would move on them.
+- **The rest of the prompt.** Only the document is counted: no system prompt, no code fence,
+  no schema description, no instructions. Those cost the same whichever format they wrap.
+- **Speed and memory.** This is a size benchmark; parsing performance is a separate question.
+
 ## Running
 
 The Rust benchmark is the one that writes the documents and the report; the other six check it.
