@@ -4,7 +4,7 @@
     <Description>Link.Foundation's Links Notation parser and formatter for .NET</Description>
     <Copyright>Konstantin Diachenko</Copyright>
     <AssemblyTitle>Link.Foundation.Links.Notation</AssemblyTitle>
-    <VersionPrefix>0.16.1</VersionPrefix>
+    <VersionPrefix>0.17.0</VersionPrefix>
     <Authors>Konstantin Diachenko</Authors>
     <TargetFramework>net10.0</TargetFramework>
     <PackageId>Link.Foundation.Links.Notation</PackageId>
