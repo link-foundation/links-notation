@@ -124,11 +124,13 @@ pub fn markdown(results: &[DatasetResult], generated_at_version: &str) -> String
     let mut out = String::new();
 
     out.push_str("# Token efficiency benchmarks\n\n");
-    out.push_str(
+    let _ = writeln!(
+        out,
         "How much of a model's context each format spends on the same information. \
-         Links Notation is compared against JSON, YAML, XML and CSV over ten datasets \
+         Links Notation is compared against JSON, YAML, XML and CSV over {} datasets \
          that cover the shapes real payloads have: uniform records, semi-uniform records, \
-         nested records, deeply nested configuration, keyed maps and tuples.\n\n",
+         nested records, deeply nested configuration, keyed maps and tuples.\n",
+        results.len()
     );
     out.push_str(
         "> This file is generated. Run `cargo run -p links-notation-benchmark --release` \
@@ -149,7 +151,14 @@ pub fn markdown(results: &[DatasetResult], generated_at_version: &str) -> String
          - **Bytes** - the length of the UTF-8 text.\n\n",
     );
     out.push_str(
-        "Links Notation appears in three rows because a writer has a real choice to make.          **Links Notation** is what `lino-objects-codec` writes today: every string is quoted,          so a reader never has to know the resolution rules to tell text from a number.          **Links Notation (minimal quoting)** quotes a string only where writing it bare would          read back as something else, which is the rule YAML plain scalars follow and therefore          the like-for-like comparison against YAML. **Links Notation (single line)** is the          one-line form. All three decode back to the same value; the difference is how much          the writer pays for making the types obvious in the text.\n\n",
+        "Links Notation appears in three rows because a writer has a real choice to make. \
+         **Links Notation** is what `lino-objects-codec` writes today: every string is \
+         quoted, so a reader never has to know the resolution rules to tell text from a \
+         number. **Links Notation (minimal quoting)** quotes a string only where writing it \
+         bare would read back as something else, which is the rule YAML plain scalars follow \
+         and therefore the like-for-like comparison against YAML. **Links Notation (single \
+         line)** is the one-line form. All three decode back to the same value; the \
+         difference is how much the writer pays for making the types obvious in the text.\n\n",
     );
 
     out.push_str("## Totals across all datasets\n\n");
@@ -206,9 +215,11 @@ pub fn markdown(results: &[DatasetResult], generated_at_version: &str) -> String
          - **Checked by real libraries.** `benchmarks/tools/verify-representations.mjs` parses \
          the generated YAML and XML with established third-party parsers and compares the \
          result with the source dataset.\n\
-         - **Reproduced in every language.** The benchmarks in all seven supported languages \
-         re-encode the datasets and compare their output, byte for byte, with the files \
-         committed here, then re-count the tokens with their own tokenizer.\n\
+         - **Reproduced in every language.** All seven supported languages parse every \
+         generated Links Notation document with their own implementation and re-count every \
+         document with their own tokenizer, then fail unless every number matches the ones \
+         reported here. The seven results files under `benchmarks/results/` differ only in \
+         which language wrote them.\n\
          - **CSV is a floor, not a rival.** It cannot carry nesting, types or the key a table \
          sits under, so it is reported only for genuinely tabular datasets and only as a \
          reference.\n\n",
