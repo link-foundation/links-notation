@@ -81,9 +81,7 @@ def compare(results, reference):
             for key, value in metrics.items():
                 other = expected["formats"].get(fmt, {}).get(key)
                 if other != value:
-                    differences.append(
-                        f"{dataset['name']}/{fmt}/{key}: {value} here, {other} in Rust"
-                    )
+                    differences.append(f"{dataset['name']}/{fmt}/{key}: {value} here, {other} in Rust")
     return differences
 
 
