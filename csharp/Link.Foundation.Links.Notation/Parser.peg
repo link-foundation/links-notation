@@ -13,40 +13,10 @@
     private int _quoteLength;
 
     /// <summary>
-    /// A body written between an even run of delimiters is substantive when it
-    /// holds at least one visible character and does not straddle a parenthesis.
-    /// An even run can always be read as delimiter pairs enclosing nothing, so the
-    /// n-quote reading is only taken when it carries something the pairs cannot.
-    /// </summary>
-    private static bool IsSubstantiveBody(string content)
-    {
-        int depth = 0;
-        bool hasVisible = false;
-
-        foreach (var c in content)
-        {
-            if (c == '(')
-            {
-                depth++;
-            }
-            else if (c == ')')
-            {
-                depth--;
-                if (depth < 0) return false;
-            }
-
-            if (!char.IsWhiteSpace(c)) hasVisible = true;
-        }
-
-        return hasVisible && depth == 0;
-    }
-
-    /// <summary>
     /// Universal procedural parser for N-quote references (any N >= 1), reading
-    /// from the given position of the subject. A run of an even number of
-    /// delimiters that does not open a reference with a substantive body is the
-    /// empty reference: the shortest reading, a bare delimiter pair enclosing
-    /// nothing, wins over a longer n-quote delimiter.
+    /// from the given position of the subject. The reading itself lives in
+    /// <see cref="Quotes"/>, so blanking a comment reaches a reference exactly as
+    /// far as these rules do.
     /// Stores the result in _quoteValue and its length in _quoteLength.
     /// </summary>
     /// <param name="subject">The whole input being parsed</param>
@@ -58,65 +28,10 @@
         _quoteValue = null;
         _quoteLength = 0;
         if (subject == null || startPos >= subject.Length || subject[startPos] != quoteChar) return false;
+        if (!Quotes.TryParse(subject, startPos, out var value, out var length)) return false;
 
-        // Count opening quotes
-        int quoteCount = 0;
-        int pos = startPos;
-        while (pos < subject.Length && subject[pos] == quoteChar)
-        {
-            quoteCount++;
-            pos++;
-        }
-
-        bool isEvenRun = quoteCount % 2 == 0;
-
-        string openClose = new string(quoteChar, quoteCount);
-        string escapeSeq = new string(quoteChar, quoteCount * 2);
-
-        var content = new System.Text.StringBuilder();
-        while (pos < subject.Length)
-        {
-            // Check for escape sequence (2*N quotes)
-            if (pos + escapeSeq.Length <= subject.Length &&
-                string.CompareOrdinal(subject, pos, escapeSeq, 0, escapeSeq.Length) == 0)
-            {
-                content.Append(openClose); // 2*N quotes become N quotes
-                pos += escapeSeq.Length;
-                continue;
-            }
-
-            // Check for closing quotes (exactly N quotes, not more)
-            if (pos + quoteCount <= subject.Length &&
-                string.CompareOrdinal(subject, pos, openClose, 0, quoteCount) == 0)
-            {
-                int afterClose = pos + quoteCount;
-                if (afterClose >= subject.Length || subject[afterClose] != quoteChar)
-                {
-                    // Found valid closing
-                    if (isEvenRun && !IsSubstantiveBody(content.ToString()))
-                    {
-                        return SetEmptyReference(isEvenRun, quoteCount);
-                    }
-                    _quoteValue = content.ToString();
-                    _quoteLength = afterClose - startPos;
-                    return true;
-                }
-            }
-
-            // Take next character
-            content.Append(subject[pos]);
-            pos++;
-        }
-
-        // No valid closing found
-        return SetEmptyReference(isEvenRun, quoteCount);
-    }
-
-    private bool SetEmptyReference(bool isEvenRun, int quoteCount)
-    {
-        if (!isEvenRun) return false;
-        _quoteValue = string.Empty;
-        _quoteLength = quoteCount;
+        _quoteValue = value;
+        _quoteLength = length;
         return true;
     }
 
@@ -281,7 +196,13 @@ SET_BASE_INDENTATION = spaces:" "* #{ if ((int)state["BaseIndentation"] == -1) s
 PUSH_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] > (int)state["IndentationStack"].Peek() } #{ state["IndentationStack"].Push((int)state["NormalizedIndent"]); }
 POP_INDENTATION = #{ state["IndentationStack"].Pop(); }
 CHECK_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] >= (int)state["IndentationStack"].Peek() }
-eol = __ ("" [\r\n]+ / eof / nestedGroupEnd)
+eol = __ (lineBreaks / eof / nestedGroupEnd)
+
+// A line ends at the first line break, and the blank lines that follow it
+// belong to that ending: a line holding nothing but spaces or tabs separates
+// links exactly the way an empty line does. Blanking a comment leaves such a
+// line behind, so this is also what lets a comment stand on a line of its own.
+lineBreaks = "" [\r\n]+ ([ \t]+ [\r\n]+)*
 
 // Inside a parenthesized group the closing parenthesis terminates a line the
 // same way the end of the input does at the root.
