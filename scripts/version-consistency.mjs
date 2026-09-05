@@ -11,7 +11,54 @@
 // registry audit, this one is a hard failure: it reads only the working tree,
 // so it is deterministic and a disagreement is always a defect.
 
-import { declaredVersions } from './declared-versions.mjs';
+import { declaredVersions, read, match } from './declared-versions.mjs';
+
+// Versions typed by hand into installation snippets. A reader copies these
+// verbatim, so a stale one hands out a release sixteen minors old, which is
+// exactly what both Java READMEs (0.1.0) and both PHP ones ("^0.1") did while
+// every implementation declared 0.17.0. Checked here rather than corrected once
+// because a literal that nothing verifies drifts again on the next release.
+const documentedVersions = [
+  {
+    of: 'java',
+    file: 'java/README.md',
+    what: 'the Maven snippet',
+    re: /<artifactId>links-notation<\/artifactId>\s*<version>([^<]+)<\/version>/,
+  },
+  {
+    of: 'java',
+    file: 'java/README.md',
+    what: 'the Gradle snippet',
+    re: /io\.github\.link-foundation:links-notation:([^']+)'/,
+  },
+  {
+    of: 'java',
+    file: 'java/README.ru.md',
+    what: 'the Maven snippet',
+    re: /<artifactId>links-notation<\/artifactId>\s*<version>([^<]+)<\/version>/,
+  },
+  {
+    of: 'java',
+    file: 'java/README.ru.md',
+    what: 'the Gradle snippet',
+    re: /io\.github\.link-foundation:links-notation:([^']+)'/,
+  },
+  {
+    of: 'php',
+    file: 'php/README.md',
+    what: 'the composer.json snippet',
+    re: /"link-foundation\/links-notation":\s*"\^([^"]+)"/,
+    // A caret constraint pins major.minor, so it tracks 0.17.0 as "0.17".
+    expected: (version) => version.split('.').slice(0, 2).join('.'),
+  },
+  {
+    of: 'php',
+    file: 'php/README.ru.md',
+    what: 'the composer.json snippet',
+    re: /"link-foundation\/links-notation":\s*"\^([^"]+)"/,
+    expected: (version) => version.split('.').slice(0, 2).join('.'),
+  },
+];
 
 const declared = new Map();
 let failed = false;
@@ -42,6 +89,24 @@ if (byVersion.size > 1) {
   failed = true;
 } else if (!failed) {
   console.log(`\nAll ${declared.size} implementations declare ${[...byVersion.keys()][0]}.`);
+}
+
+for (const { of, file, what, re, expected } of documentedVersions) {
+  const version = declared.get(of);
+  if (version === undefined) continue; // its declared version already failed above
+  const want = expected ? expected(version) : version;
+  let found;
+  try {
+    found = match(read(file), re, `${what} in ${file}`);
+  } catch (error) {
+    console.log(`::error::${error.message}`);
+    failed = true;
+    continue;
+  }
+  if (found !== want) {
+    console.log(`::error::${file}: ${what} installs ${found}, but ${of} declares ${version}`);
+    failed = true;
+  }
 }
 
 process.exit(failed ? 1 : 0);

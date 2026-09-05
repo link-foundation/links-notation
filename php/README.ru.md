@@ -15,7 +15,7 @@ composer require link-foundation/links-notation
 ```json
 {
     "require": {
-        "link-foundation/links-notation": "^0.1"
+        "link-foundation/links-notation": "^0.17"
     }
 }
 ```

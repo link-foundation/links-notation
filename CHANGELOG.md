@@ -158,6 +158,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `js/package.json` declares Unlicense. The version line is gone rather than
   corrected, so there is nothing left to drift
   ([#209](https://github.com/link-foundation/links-notation/pull/210))
+- Docs: the Maven, Gradle and Composer installation snippets in the Java and PHP
+  READMEs pinned 0.1.0 and `^0.1`, sixteen minors behind the declared 0.17.0, so
+  a reader who copied them installed a 2025 release. `scripts/version-consistency.mjs`
+  now checks every documented install version against the version its
+  implementation declares, which is a hard failure in CI
+  ([#209](https://github.com/link-foundation/links-notation/pull/210))
 - Website: the header carried a hand-typed version literal alongside the one
   `script.js` writes from `js/package.json` at build time, which is how the page
   advertised v0.6.0 for ten minor releases
