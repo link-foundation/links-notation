@@ -208,6 +208,31 @@ List<Link> links = new Parser().parse(input);
 System.out.println(links.get(0).format(false)); // (value ((id 1) (label one)))
 ```
 
+### Комментарии
+
+`#` скрывает остаток строки, на которой стоит, поэтому документ может нести
+пояснения о самом себе:
+
+```lino
+# машины, на которые идёт выкладка
+deploy: staging # пока только staging
+```
+
+К моменту чтения документа обоих комментариев уже нет, остаётся одна связь
+`(deploy: staging)`. `#` открывает комментарий только там, где могла бы
+начаться ссылка, поэтому `#` внутри токена (`issue#1047`) и `#` внутри ссылки
+в кавычках (`"#"`) остаются обычными символами.
+
+Комментарии включены по умолчанию, а парсеру можно велеть снова читать `#` как
+обычный символ - для документов, написанных до появления комментариев:
+
+```java
+String document = "# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n";
+System.out.println(new Parser().parse(document).get(0).format(false)); // (deploy: staging)
+
+System.out.println(new Parser(false).parse("# a b\n").get(0).format(false)); // (# a b)
+```
+
 ## Справочник API
 
 ### Классы
@@ -218,6 +243,9 @@ System.out.println(links.get(0).format(false)); // (value ((id 1) (label one)))
 
 - `Parser()` - Создать парсер с настройками по умолчанию
 - `Parser(int maxInputSize, int maxDepth)` - Создать парсер с пользовательскими лимитами
+- `Parser(boolean comments)` - Создать парсер, читающий `#` как обычный символ,
+  если `comments` равно `false`
+- `Parser(int maxInputSize, int maxDepth, boolean comments)` - Создать парсер и с тем, и с другим
 - `parse(String input)` - Распарсить строку Lino и вернуть связи
 
 #### `Link`

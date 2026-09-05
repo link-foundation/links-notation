@@ -155,6 +155,25 @@ All seven implementations agree on this. `experiments/issue-282/parity` parses
 the document above with each of them and fails if any one reads it differently.
 The complete rules are in the [grammar](docs/grammar/GRAMMAR.md).
 
+#### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+That is the single link `(deploy: staging)`: both comments are gone by the time
+the document is read. A `#` only opens a comment where a reference could begin,
+so a `#` inside a token (`issue#1047`) and a `#` inside a delimited reference
+(`"#"`) stay ordinary characters.
+
+Comments are on by default in every implementation, and every parser can be
+told to read `#` as an ordinary character again for documents written before
+comments existed - see the parser options in the language READMEs.
+
 So that means that *this* text is also links notation. So most of the
 text in the world already may be parsed as links notation. That makes
 links notation the most easy an natural/intuitive/native one.

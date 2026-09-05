@@ -212,6 +212,36 @@ let links = parse_lino_to_links(input)?;
 println!("{}", format_links(&links)); // (value ((id 1) (label one)))
 ```
 
+### Комментарии
+
+`#` скрывает остаток строки, на которой стоит, поэтому документ может нести
+пояснения о самом себе:
+
+```lino
+# машины, на которые идёт выкладка
+deploy: staging # пока только staging
+```
+
+К моменту чтения документа обоих комментариев уже нет, остаётся одна связь
+`(deploy: staging)`. `#` открывает комментарий только там, где могла бы
+начаться ссылка, поэтому `#` внутри токена (`issue#1047`) и `#` внутри ссылки
+в кавычках (`"#"`) остаются обычными символами.
+
+Комментарии включены по умолчанию, а парсеру можно велеть снова читать `#` как
+обычный символ - для документов, написанных до появления комментариев:
+
+```rust
+use links_notation::{format_links, parse_lino_to_links, parse_lino_to_links_with_config, ParserConfig};
+
+let document = "# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n";
+let links = parse_lino_to_links(document)?;
+println!("{}", format_links(&links)); // (deploy: staging)
+
+let config = ParserConfig::without_comments();
+let links = parse_lino_to_links_with_config("# a b\n", &config)?;
+println!("{}", format_links(&links)); // (# a b)
+```
+
 ## Справочник API
 
 ### Перечисления
@@ -233,9 +263,24 @@ println!("{}", format_links(&links)); // (value ((id 1) (label one)))
 
 ### Функции
 
-#### `parse_lino(document: &str) -> Result<LiNo<String>, String>`
+#### `parse_lino(document: &str) -> Result<LiNo<String>, ParseError>`
 
 Парсит строку документа Links Notation и возвращает распарсенную структуру или ошибку.
+
+#### `parse_lino_with_config(document: &str, config: &ParserConfig) -> Result<LiNo<String>, ParseError>`
+
+Парсит так же, но с настроенным парсером. `parse_lino_to_links` и
+`parse_lino_to_links_with_config` — та же пара функций, возвращающая связи
+верхнего уровня, а не одну связь-документ.
+
+### Настройка
+
+#### `ParserConfig`
+
+- `comments: bool` — открывает ли `#` комментарий до конца строки
+  (по умолчанию `true`)
+- `ParserConfig::new()` — значения по умолчанию
+- `ParserConfig::without_comments()` — `#` как обычный символ
 
 ### Форматирование
 

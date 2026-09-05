@@ -155,11 +155,38 @@ var links = new Parser().Parse(@"value (
 Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 ```
 
+### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+Both comments are gone by the time the document is read, leaving the single
+link `(deploy: staging)`. A `#` only opens a comment where a reference could
+begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
+reference (`"#"`) stay ordinary characters.
+
+Comments are on by default, and a parser can be told to read `#` as an ordinary
+character again, for documents written before comments existed:
+
+```csharp
+var links = new Parser().Parse("# the machines this deploys to\ndeploy: staging # only staging, for now\n");
+Console.WriteLine(links[0]); // (deploy: staging)
+
+var plain = new Parser(comments: false);
+Console.WriteLine(plain.Parse("# a b\n")[0]); // (# a b)
+```
+
 ## API Reference
 
 ### Classes
 
 - **Parser\<TLinkAddress\>**: Main parser class for converting strings to links
+  (`new Parser(comments: false)` reads `#` as an ordinary character)
 - **Link\<TLinkAddress\>**: Represents a single link with ID and values
 - **LinksGroup\<TLinkAddress\>**: Container for grouping related links
 - **ParseException**: Thrown when a document does not parse

@@ -83,6 +83,8 @@ links = parser.parse(text)
 
 Основной класс парсера для Links Notation.
 
+- `__init__(..., comments: bool = True)`: создать парсер; при `comments=False`
+  `#` — обычный символ, а не начало комментария
 - `parse(input_text: str) -> List[Link]`: Парсинг текста Links Notation в объекты Link
 
 ### Link
@@ -157,6 +159,31 @@ text = """value (
   label "one"
 )"""
 print(format_links(parser.parse(text)))
+
+### Комментарии
+
+`#` скрывает остаток строки, на которой стоит, поэтому документ может нести
+пояснения о самом себе:
+
+```lino
+# машины, на которые идёт выкладка
+deploy: staging # пока только staging
+```
+
+К моменту чтения документа обоих комментариев уже нет, остаётся одна связь
+`(deploy: staging)`. `#` открывает комментарий только там, где могла бы
+начаться ссылка, поэтому `#` внутри токена (`issue#1047`) и `#` внутри ссылки
+в кавычках (`"#"`) остаются обычными символами.
+
+Комментарии включены по умолчанию, а парсеру можно велеть снова читать `#` как
+обычный символ - для документов, написанных до появления комментариев:
+
+```python
+document = "# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n"
+print(format_links(Parser().parse(document)))  # (deploy: staging)
+
+print(format_links(Parser(comments=False).parse("# a b\n")))  # (# a b)
+```
 # (value ((id 1) (label one)))
 ```
 
