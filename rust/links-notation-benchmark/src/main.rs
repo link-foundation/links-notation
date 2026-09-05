@@ -123,8 +123,11 @@ fn main() -> ExitCode {
         path: root.join("generated").join("index.json"),
         contents: format!(
             "{}\n",
-            serde_json::to_string_pretty(&serde_json::json!({ "representations": manifest }))
-                .expect("manifest serializes")
+            serde_json::to_string_pretty(&serde_json::json!({
+                "schema": RESULTS_SCHEMA,
+                "representations": manifest,
+            }))
+            .expect("manifest serializes")
         ),
     });
     files.push(GeneratedFile {

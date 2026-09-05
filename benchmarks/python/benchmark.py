@@ -1,260 +1,159 @@
 #!/usr/bin/env python3
-"""
-UTF-8 Character Count Benchmark for Links Notation vs JSON, YAML, and XML
+"""Python side of the Links Notation token efficiency benchmarks.
 
-This benchmark measures the UTF-8 character count efficiency of Links Notation
-compared to other popular data serialization formats.
+The Rust benchmark is the one that writes the documents and the report. Every
+other language answers the two questions that make those numbers portable
+rather than a property of one implementation:
+
+1. does this language's own ``links-notation`` parser accept the generated
+   Links Notation documents;
+2. does this language's own tokenizer count them the same way.
+
+It writes ``benchmarks/results/python.json`` and fails when a count differs
+from ``benchmarks/results/rust.json``.
+
+Usage: ``python3 benchmarks/python/benchmark.py [--check] [--verbose]``.
+With ``--check`` the results file is compared instead of written, which is what
+CI runs to catch a stale commit.
 """
 
 import json
 import os
 import sys
-from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Optional
+
+import tiktoken
+
+LANGUAGE = "python"
+BENCHMARKS = Path(__file__).resolve().parent.parent
+REPOSITORY = BENCHMARKS.parent
+
+# The benchmark measures the implementation in this repository, not whatever
+# happens to be installed.
+sys.path.insert(0, str(REPOSITORY / "python"))
+
+from links_notation import Parser  # noqa: E402
+
+O200K = tiktoken.get_encoding("o200k_base")
+CL100K = tiktoken.get_encoding("cl100k_base")
+
+METRIC_KEYS = ("tokens_o200k", "tokens_cl100k", "chars", "bytes")
 
 
-@dataclass
-class BenchmarkCase:
-    """Represents a single benchmark test case."""
-    name: str
-    description: str
-    lino: str
-    json_content: str
-    yaml: str
-    xml: str
+def read_text(path):
+    """The bytes of a file decoded as UTF-8, with no newline translation.
 
-
-@dataclass
-class BenchmarkResult:
-    """Represents the results of a single benchmark."""
-    name: str
-    description: str
-    lino_chars: int
-    json_chars: int
-    yaml_chars: int
-    xml_chars: int
-    lino_vs_json: float
-    lino_vs_yaml: float
-    lino_vs_xml: float
-
-
-@dataclass
-class AggregatedResults:
-    """Represents aggregated results across all benchmarks."""
-    total_lino_chars: int
-    total_json_chars: int
-    total_yaml_chars: int
-    total_xml_chars: int
-    avg_lino_vs_json: float
-    avg_lino_vs_yaml: float
-    avg_lino_vs_xml: float
-
-
-def count_utf8_chars(text: str) -> int:
-    """Count UTF-8 characters in a string.
-
-    In Python 3, len(str) already returns the number of Unicode code points,
-    which is what we want for UTF-8 character counting.
+    ``Path.read_text`` would turn the CRLF line endings RFC 4180 asks of CSV
+    into LF and quietly report a shorter document than every other language
+    measures.
     """
-    return len(text)
+    return (BENCHMARKS / path).read_bytes().decode("utf-8")
 
 
-def calculate_savings(lino_chars: int, other_chars: int) -> float:
-    """Calculate the percentage savings of Lino vs another format."""
-    if other_chars == 0:
-        return 0.0
-    return ((other_chars - lino_chars) / other_chars) * 100
+def read_json(path):
+    return json.loads(read_text(path))
 
 
-def find_data_dir() -> Optional[Path]:
-    """Find the data directory by checking multiple possible paths."""
-    script_dir = Path(__file__).parent
-    cwd = Path.cwd()
+def measure(text):
+    """The four measurements taken of every document.
 
-    possible_paths = [
-        script_dir / "../data",           # Running from benchmarks/python/
-        script_dir / "../../benchmarks/data",  # Running from repo root
-        cwd / "benchmarks/data",          # CWD is repo root
-        cwd / "../data",                  # CWD is benchmarks/
-        cwd / "data",                     # CWD is benchmarks/
-    ]
-
-    for path in possible_paths:
-        resolved = path.resolve()
-        if resolved.exists():
-            return resolved
-
-    return None
+    ``encode_ordinary`` is what counts data rather than a prompt: a document
+    that happens to contain ``<|endoftext|>`` is text, not a control token.
+    """
+    return {
+        "tokens_o200k": len(O200K.encode_ordinary(text)),
+        "tokens_cl100k": len(CL100K.encode_ordinary(text)),
+        "chars": len(text),
+        "bytes": len(text.encode("utf-8")),
+    }
 
 
-def find_output_dir() -> Path:
-    """Find the output directory for reports."""
-    script_dir = Path(__file__).parent
-    cwd = Path.cwd()
-
-    possible_paths = [
-        script_dir / "..",               # Running from benchmarks/python/
-        cwd / "benchmarks",              # CWD is repo root
-        cwd,                             # Fallback to current directory
-    ]
-
-    for path in possible_paths:
-        resolved = path.resolve()
-        if resolved.exists():
-            return resolved
-
-    return cwd
-
-
-def load_benchmark_cases(data_dir: Path) -> List[BenchmarkCase]:
-    """Load all benchmark test cases from the data directory."""
-    cases_config = [
-        ("employees", "Employee records with nested structure"),
-        ("simple_doublets", "Simple doublet links (2-tuples)"),
-        ("triplets", "Triplet relations (3-tuples)"),
-        ("nested_structure", "Deeply nested company structure"),
-        ("config", "Application configuration"),
-    ]
-
-    cases = []
-    for name, description in cases_config:
-        try:
-            lino = (data_dir / f"{name}.lino").read_text(encoding="utf-8")
-            json_content = (data_dir / f"{name}.json").read_text(encoding="utf-8")
-            yaml = (data_dir / f"{name}.yaml").read_text(encoding="utf-8")
-            xml = (data_dir / f"{name}.xml").read_text(encoding="utf-8")
-
-            cases.append(BenchmarkCase(
-                name=name,
-                description=description,
-                lino=lino,
-                json_content=json_content,
-                yaml=yaml,
-                xml=xml,
-            ))
-        except FileNotFoundError as e:
-            print(f"Warning: Could not load {name}: {e}", file=sys.stderr)
-
-    return cases
-
-
-def run_benchmark(case: BenchmarkCase) -> BenchmarkResult:
-    """Run the benchmark for a single test case."""
-    lino_chars = count_utf8_chars(case.lino)
-    json_chars = count_utf8_chars(case.json_content)
-    yaml_chars = count_utf8_chars(case.yaml)
-    xml_chars = count_utf8_chars(case.xml)
-
-    return BenchmarkResult(
-        name=case.name,
-        description=case.description,
-        lino_chars=lino_chars,
-        json_chars=json_chars,
-        yaml_chars=yaml_chars,
-        xml_chars=xml_chars,
-        lino_vs_json=calculate_savings(lino_chars, json_chars),
-        lino_vs_yaml=calculate_savings(lino_chars, yaml_chars),
-        lino_vs_xml=calculate_savings(lino_chars, xml_chars),
-    )
-
-
-def aggregate_results(results: List[BenchmarkResult]) -> AggregatedResults:
-    """Aggregate results across all benchmark cases."""
-    total_lino = sum(r.lino_chars for r in results)
-    total_json = sum(r.json_chars for r in results)
-    total_yaml = sum(r.yaml_chars for r in results)
-    total_xml = sum(r.xml_chars for r in results)
-
-    avg_vs_json = sum(r.lino_vs_json for r in results) / len(results)
-    avg_vs_yaml = sum(r.lino_vs_yaml for r in results) / len(results)
-    avg_vs_xml = sum(r.lino_vs_xml for r in results) / len(results)
-
-    return AggregatedResults(
-        total_lino_chars=total_lino,
-        total_json_chars=total_json,
-        total_yaml_chars=total_yaml,
-        total_xml_chars=total_xml,
-        avg_lino_vs_json=avg_vs_json,
-        avg_lino_vs_yaml=avg_vs_yaml,
-        avg_lino_vs_xml=avg_vs_xml,
-    )
+def compare(results, reference):
+    """Every measurement that differs from the reference results."""
+    differences = []
+    by_name = {dataset["name"]: dataset for dataset in reference["datasets"]}
+    for dataset in results["datasets"]:
+        expected = by_name.get(dataset["name"])
+        if expected is None:
+            differences.append(f"{dataset['name']}: missing from the Rust results")
+            continue
+        for fmt, metrics in dataset["formats"].items():
+            for key, value in metrics.items():
+                other = expected["formats"].get(fmt, {}).get(key)
+                if other != value:
+                    differences.append(
+                        f"{dataset['name']}/{fmt}/{key}: {value} here, {other} in Rust"
+                    )
+    return differences
 
 
 def main():
-    """Main function to run the benchmark."""
-    data_dir = find_data_dir()
-    if data_dir is None:
-        print("Error: Could not find benchmarks/data directory", file=sys.stderr)
-        print("Please run from the repository root or benchmarks directory", file=sys.stderr)
-        sys.exit(1)
+    verbose = "--verbose" in sys.argv or os.environ.get("CI_VERBOSE") == "true"
+    check = "--check" in sys.argv
 
-    print(f"Loading benchmark cases from {data_dir}...")
-    cases = load_benchmark_cases(data_dir)
+    index = read_json("generated/index.json")
+    parser = Parser()
+    datasets = []
+    totals = {}
 
-    if not cases:
-        print("Error: No benchmark cases found", file=sys.stderr)
-        sys.exit(1)
-
-    print(f"Running {len(cases)} benchmark cases...\n")
-
-    results = [run_benchmark(case) for case in cases]
-    aggregated = aggregate_results(results)
-
-    # Print summary to console
-    print("=== Links Notation Character Count Benchmark (Python) ===\n")
-    print("Summary:")
-    print(f"  Total Lino characters:  {aggregated.total_lino_chars}")
-    print(f"  Total JSON characters:  {aggregated.total_json_chars}")
-    print(f"  Total YAML characters:  {aggregated.total_yaml_chars}")
-    print(f"  Total XML characters:   {aggregated.total_xml_chars}")
-    print()
-    print("Average savings with Lino:")
-    print(f"  vs JSON: {aggregated.avg_lino_vs_json:.1f}% fewer characters")
-    print(f"  vs YAML: {aggregated.avg_lino_vs_yaml:.1f}% fewer characters")
-    print(f"  vs XML:  {aggregated.avg_lino_vs_xml:.1f}% fewer characters")
-    print()
-
-    # Generate JSON report
-    report = {
-        "language": "Python",
-        "summary": {
-            "total_lino_chars": aggregated.total_lino_chars,
-            "total_json_chars": aggregated.total_json_chars,
-            "total_yaml_chars": aggregated.total_yaml_chars,
-            "total_xml_chars": aggregated.total_xml_chars,
-            "avg_lino_vs_json": aggregated.avg_lino_vs_json,
-            "avg_lino_vs_yaml": aggregated.avg_lino_vs_yaml,
-            "avg_lino_vs_xml": aggregated.avg_lino_vs_xml,
-        },
-        "results": [
+    for entry in index["representations"]:
+        formats = {}
+        for fmt, path in entry["files"].items():
+            text = read_text(path)
+            if fmt.startswith("lino"):
+                # Parsing with this language's own implementation is the point:
+                # a document only counts if the notation is portable.
+                parser.parse(text)
+            metrics = measure(text)
+            formats[fmt] = metrics
+            running = totals.setdefault(fmt, {key: 0 for key in METRIC_KEYS})
+            for key in METRIC_KEYS:
+                running[key] += metrics[key]
+        if verbose:
+            print(f"{entry['dataset']}: measured {len(formats)} formats", file=sys.stderr)
+        datasets.append(
             {
-                "name": r.name,
-                "description": r.description,
-                "lino_chars": r.lino_chars,
-                "json_chars": r.json_chars,
-                "yaml_chars": r.yaml_chars,
-                "xml_chars": r.xml_chars,
-                "lino_vs_json": r.lino_vs_json,
-                "lino_vs_yaml": r.lino_vs_yaml,
-                "lino_vs_xml": r.lino_vs_xml,
+                "name": entry["dataset"],
+                "structure": entry["structure"],
+                "profile": entry["profile"],
+                "formats": dict(sorted(formats.items())),
             }
-            for r in results
-        ],
+        )
+
+    results = {
+        "schema": index.get("schema", 1),
+        "generator": LANGUAGE,
+        "tokenizers": {"primary": "o200k_base", "secondary": "cl100k_base"},
+        "datasets": datasets,
+        "totals": dict(sorted(totals.items())),
     }
 
-    output_dir = find_output_dir()
-    json_path = output_dir / "benchmark_results_python.json"
+    differences = compare(results, read_json("results/rust.json"))
+    if differences:
+        print(
+            f"{LANGUAGE}: {len(differences)} measurement(s) differ from the Rust results:",
+            file=sys.stderr,
+        )
+        for difference in differences[:20]:
+            print(f"  - {difference}", file=sys.stderr)
+        return 1
 
-    try:
-        with open(json_path, "w", encoding="utf-8") as f:
-            json.dump(report, f, indent=2)
-        print(f"JSON report written to {json_path}")
-    except IOError as e:
-        print(f"Warning: Could not write JSON report: {e}", file=sys.stderr)
+    text = json.dumps(results, indent=2, ensure_ascii=False) + "\n"
+    path = f"results/{LANGUAGE}.json"
+    if check:
+        if read_text(path) != text:
+            print(
+                f"{path} is out of date; run python3 benchmarks/python/benchmark.py",
+                file=sys.stderr,
+            )
+            return 1
+        print(f"{LANGUAGE}: {path} is up to date and agrees with the Rust results.")
+        return 0
 
-    print("\nBenchmark completed successfully!")
+    (BENCHMARKS / path).write_bytes(text.encode("utf-8"))
+    print(f"{LANGUAGE}: wrote {path}; every measurement agrees with the Rust results.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

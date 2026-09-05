@@ -1,292 +1,303 @@
-// UTF-8 Character Count Benchmark for Links Notation vs JSON, YAML, and XML
+// Command benchmark is the Go side of the Links Notation token efficiency
+// benchmarks.
 //
-// This benchmark measures the UTF-8 character count efficiency of Links Notation
-// compared to other popular data serialization formats.
+// The Rust benchmark is the one that writes the documents and the report. Every
+// other language answers the two questions that make those numbers portable
+// rather than a property of one implementation:
+//
+//  1. does this language's own links-notation parser accept the generated
+//     Links Notation documents;
+//  2. does this language's own tokenizer count them the same way.
+//
+// It writes benchmarks/results/go.json and fails when a count differs from
+// benchmarks/results/rust.json.
+//
+// Usage: go run . [--check] [--verbose] from benchmarks/go.
+// With --check the results file is compared instead of written, which is what
+// CI runs to catch a stale commit.
 package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"unicode/utf8"
+
+	lino "github.com/link-foundation/links-notation/go"
+	"github.com/pkoukk/tiktoken-go"
+	tiktokenLoader "github.com/pkoukk/tiktoken-go-loader"
 )
 
-// BenchmarkCase represents a single benchmark test case
-type BenchmarkCase struct {
-	Name        string
-	Description string
-	Lino        string
-	JSON        string
-	YAML        string
-	XML         string
+const language = "go"
+
+var metricKeys = [4]string{"tokens_o200k", "tokens_cl100k", "chars", "bytes"}
+
+// Metrics holds the four measurements taken of every document.
+type Metrics struct {
+	TokensO200k  int `json:"tokens_o200k"`
+	TokensCl100k int `json:"tokens_cl100k"`
+	Chars        int `json:"chars"`
+	Bytes        int `json:"bytes"`
 }
 
-// BenchmarkResult represents the results of a single benchmark
-type BenchmarkResult struct {
-	Name        string  `json:"name"`
-	Description string  `json:"description"`
-	LinoChars   int     `json:"lino_chars"`
-	JSONChars   int     `json:"json_chars"`
-	YAMLChars   int     `json:"yaml_chars"`
-	XMLChars    int     `json:"xml_chars"`
-	LinoVsJSON  float64 `json:"lino_vs_json"`
-	LinoVsYAML  float64 `json:"lino_vs_yaml"`
-	LinoVsXML   float64 `json:"lino_vs_xml"`
+func (m Metrics) get(key string) int {
+	switch key {
+	case "tokens_o200k":
+		return m.TokensO200k
+	case "tokens_cl100k":
+		return m.TokensCl100k
+	case "chars":
+		return m.Chars
+	}
+	return m.Bytes
 }
 
-// AggregatedResults represents aggregated results across all benchmarks
-type AggregatedResults struct {
-	TotalLinoChars int     `json:"total_lino_chars"`
-	TotalJSONChars int     `json:"total_json_chars"`
-	TotalYAMLChars int     `json:"total_yaml_chars"`
-	TotalXMLChars  int     `json:"total_xml_chars"`
-	AvgLinoVsJSON  float64 `json:"avg_lino_vs_json"`
-	AvgLinoVsYAML  float64 `json:"avg_lino_vs_yaml"`
-	AvgLinoVsXML   float64 `json:"avg_lino_vs_xml"`
+func (m *Metrics) add(other Metrics) {
+	m.TokensO200k += other.TokensO200k
+	m.TokensCl100k += other.TokensCl100k
+	m.Chars += other.Chars
+	m.Bytes += other.Bytes
 }
 
-// Report represents the full benchmark report
-type Report struct {
-	Language string             `json:"language"`
-	Summary  AggregatedResults  `json:"summary"`
-	Results  []BenchmarkResult  `json:"results"`
+// Representation is one dataset's entry in benchmarks/generated/index.json.
+type Representation struct {
+	Dataset   string            `json:"dataset"`
+	Structure string            `json:"structure"`
+	Profile   string            `json:"profile"`
+	Files     map[string]string `json:"files"`
 }
 
-// countUTF8Chars counts UTF-8 characters (runes) in a string
-func countUTF8Chars(s string) int {
-	return utf8.RuneCountInString(s)
+type index struct {
+	Schema          int              `json:"schema"`
+	Representations []Representation `json:"representations"`
 }
 
-// calculateSavings calculates the percentage savings of Lino vs another format
-func calculateSavings(linoChars, otherChars int) float64 {
-	if otherChars == 0 {
-		return 0.0
-	}
-	return (float64(otherChars-linoChars) / float64(otherChars)) * 100
+// DatasetResult is one dataset's entry in a results file.
+type DatasetResult struct {
+	Name      string             `json:"name"`
+	Structure string             `json:"structure"`
+	Profile   string             `json:"profile"`
+	Formats   map[string]Metrics `json:"formats"`
 }
 
-// findDataDir finds the data directory by checking multiple possible paths
-func findDataDir() string {
-	// Get executable directory
-	execPath, err := os.Executable()
-	execDir := ""
-	if err == nil {
-		execDir = filepath.Dir(execPath)
-	}
-
-	cwd, _ := os.Getwd()
-
-	possiblePaths := []string{
-		filepath.Join(execDir, "../data"),          // Running from benchmarks/go/
-		filepath.Join(execDir, "../../benchmarks/data"), // Running from deeper nested
-		filepath.Join(cwd, "benchmarks/data"),      // CWD is repo root
-		filepath.Join(cwd, "../data"),              // CWD is benchmarks/
-		filepath.Join(cwd, "data"),                 // CWD is benchmarks/
-		filepath.Join(cwd, "../../benchmarks/data"), // CWD is benchmarks/go/
-	}
-
-	for _, path := range possiblePaths {
-		absPath, err := filepath.Abs(path)
-		if err != nil {
-			continue
-		}
-		if info, err := os.Stat(absPath); err == nil && info.IsDir() {
-			return absPath
-		}
-	}
-
-	return ""
-}
-
-// findOutputDir finds the output directory for reports
-func findOutputDir() string {
-	execPath, err := os.Executable()
-	execDir := ""
-	if err == nil {
-		execDir = filepath.Dir(execPath)
-	}
-
-	cwd, _ := os.Getwd()
-
-	possiblePaths := []string{
-		filepath.Join(execDir, ".."),      // Running from benchmarks/go/
-		filepath.Join(cwd, "benchmarks"),  // CWD is repo root
-		cwd,                               // Fallback to current directory
-	}
-
-	for _, path := range possiblePaths {
-		absPath, err := filepath.Abs(path)
-		if err != nil {
-			continue
-		}
-		if info, err := os.Stat(absPath); err == nil && info.IsDir() {
-			return absPath
-		}
-	}
-
-	return cwd
-}
-
-// loadBenchmarkCases loads all benchmark test cases from the data directory
-func loadBenchmarkCases(dataDir string) []BenchmarkCase {
-	casesConfig := []struct {
-		name        string
-		description string
-	}{
-		{"employees", "Employee records with nested structure"},
-		{"simple_doublets", "Simple doublet links (2-tuples)"},
-		{"triplets", "Triplet relations (3-tuples)"},
-		{"nested_structure", "Deeply nested company structure"},
-		{"config", "Application configuration"},
-	}
-
-	var cases []BenchmarkCase
-
-	for _, cfg := range casesConfig {
-		lino, err := os.ReadFile(filepath.Join(dataDir, cfg.name+".lino"))
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: Could not load %s.lino: %v\n", cfg.name, err)
-			continue
-		}
-
-		jsonData, err := os.ReadFile(filepath.Join(dataDir, cfg.name+".json"))
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: Could not load %s.json: %v\n", cfg.name, err)
-			continue
-		}
-
-		yaml, err := os.ReadFile(filepath.Join(dataDir, cfg.name+".yaml"))
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: Could not load %s.yaml: %v\n", cfg.name, err)
-			continue
-		}
-
-		xml, err := os.ReadFile(filepath.Join(dataDir, cfg.name+".xml"))
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: Could not load %s.xml: %v\n", cfg.name, err)
-			continue
-		}
-
-		cases = append(cases, BenchmarkCase{
-			Name:        cfg.name,
-			Description: cfg.description,
-			Lino:        string(lino),
-			JSON:        string(jsonData),
-			YAML:        string(yaml),
-			XML:         string(xml),
-		})
-	}
-
-	return cases
-}
-
-// runBenchmark runs the benchmark for a single test case
-func runBenchmark(testCase BenchmarkCase) BenchmarkResult {
-	linoChars := countUTF8Chars(testCase.Lino)
-	jsonChars := countUTF8Chars(testCase.JSON)
-	yamlChars := countUTF8Chars(testCase.YAML)
-	xmlChars := countUTF8Chars(testCase.XML)
-
-	return BenchmarkResult{
-		Name:        testCase.Name,
-		Description: testCase.Description,
-		LinoChars:   linoChars,
-		JSONChars:   jsonChars,
-		YAMLChars:   yamlChars,
-		XMLChars:    xmlChars,
-		LinoVsJSON:  calculateSavings(linoChars, jsonChars),
-		LinoVsYAML:  calculateSavings(linoChars, yamlChars),
-		LinoVsXML:   calculateSavings(linoChars, xmlChars),
-	}
-}
-
-// aggregateResults aggregates results across all benchmark cases
-func aggregateResults(results []BenchmarkResult) AggregatedResults {
-	var totalLino, totalJSON, totalYAML, totalXML int
-	var sumVsJSON, sumVsYAML, sumVsXML float64
-
-	for _, r := range results {
-		totalLino += r.LinoChars
-		totalJSON += r.JSONChars
-		totalYAML += r.YAMLChars
-		totalXML += r.XMLChars
-		sumVsJSON += r.LinoVsJSON
-		sumVsYAML += r.LinoVsYAML
-		sumVsXML += r.LinoVsXML
-	}
-
-	n := float64(len(results))
-	return AggregatedResults{
-		TotalLinoChars: totalLino,
-		TotalJSONChars: totalJSON,
-		TotalYAMLChars: totalYAML,
-		TotalXMLChars:  totalXML,
-		AvgLinoVsJSON:  sumVsJSON / n,
-		AvgLinoVsYAML:  sumVsYAML / n,
-		AvgLinoVsXML:   sumVsXML / n,
-	}
+// Results is the whole results file, in the shape every language writes.
+type Results struct {
+	Schema     int                `json:"schema"`
+	Generator  string             `json:"generator"`
+	Tokenizers map[string]string  `json:"tokenizers"`
+	Datasets   []DatasetResult    `json:"datasets"`
+	Totals     map[string]Metrics `json:"totals"`
 }
 
 func main() {
-	dataDir := findDataDir()
-	if dataDir == "" {
-		fmt.Fprintln(os.Stderr, "Error: Could not find benchmarks/data directory")
-		fmt.Fprintln(os.Stderr, "Please run from the repository root or benchmarks directory")
+	check := flag.Bool("check", false, "compare the results file instead of writing it")
+	verbose := flag.Bool("verbose", false, "report progress per dataset")
+	flag.Parse()
+	if os.Getenv("CI_VERBOSE") == "true" {
+		*verbose = true
+	}
+
+	if err := run(*check, *verbose); err != nil {
+		fmt.Fprintf(os.Stderr, "%s: %v\n", language, err)
 		os.Exit(1)
 	}
+}
 
-	fmt.Printf("Loading benchmark cases from %s...\n", dataDir)
-	cases := loadBenchmarkCases(dataDir)
-
-	if len(cases) == 0 {
-		fmt.Fprintln(os.Stderr, "Error: No benchmark cases found")
-		os.Exit(1)
-	}
-
-	fmt.Printf("Running %d benchmark cases...\n\n", len(cases))
-
-	var results []BenchmarkResult
-	for _, testCase := range cases {
-		results = append(results, runBenchmark(testCase))
-	}
-	aggregated := aggregateResults(results)
-
-	// Print summary to console
-	fmt.Println("=== Links Notation Character Count Benchmark (Go) ===")
-	fmt.Println()
-	fmt.Println("Summary:")
-	fmt.Printf("  Total Lino characters:  %d\n", aggregated.TotalLinoChars)
-	fmt.Printf("  Total JSON characters:  %d\n", aggregated.TotalJSONChars)
-	fmt.Printf("  Total YAML characters:  %d\n", aggregated.TotalYAMLChars)
-	fmt.Printf("  Total XML characters:   %d\n", aggregated.TotalXMLChars)
-	fmt.Println()
-	fmt.Println("Average savings with Lino:")
-	fmt.Printf("  vs JSON: %.1f%% fewer characters\n", aggregated.AvgLinoVsJSON)
-	fmt.Printf("  vs YAML: %.1f%% fewer characters\n", aggregated.AvgLinoVsYAML)
-	fmt.Printf("  vs XML:  %.1f%% fewer characters\n", aggregated.AvgLinoVsXML)
-	fmt.Println()
-
-	// Generate JSON report
-	report := Report{
-		Language: "Go",
-		Summary:  aggregated,
-		Results:  results,
-	}
-
-	outputDir := findOutputDir()
-	jsonPath := filepath.Join(outputDir, "benchmark_results_go.json")
-
-	jsonData, err := json.MarshalIndent(report, "", "  ")
+func run(check, verbose bool) error {
+	root, err := benchmarksDirectory()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Warning: Could not marshal JSON report: %v\n", err)
-	} else {
-		if err := os.WriteFile(jsonPath, jsonData, 0644); err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: Could not write JSON report: %v\n", err)
-		} else {
-			fmt.Printf("JSON report written to %s\n", jsonPath)
+		return err
+	}
+
+	// The offline loader carries the encodings with the module, so the
+	// benchmark does not depend on a download to produce a number.
+	tiktoken.SetBpeLoader(tiktokenLoader.NewOfflineLoader())
+	o200k, err := tiktoken.GetEncoding("o200k_base")
+	if err != nil {
+		return fmt.Errorf("loading o200k_base: %w", err)
+	}
+	cl100k, err := tiktoken.GetEncoding("cl100k_base")
+	if err != nil {
+		return fmt.Errorf("loading cl100k_base: %w", err)
+	}
+
+	var generated index
+	if err := readJSON(root, "generated/index.json", &generated); err != nil {
+		return err
+	}
+
+	parser := lino.NewParser()
+	datasets := make([]DatasetResult, 0, len(generated.Representations))
+	totals := map[string]Metrics{}
+
+	for _, entry := range generated.Representations {
+		formats := map[string]Metrics{}
+		for _, format := range sortedKeys(entry.Files) {
+			text, err := readText(root, entry.Files[format])
+			if err != nil {
+				return err
+			}
+			if len(format) >= 4 && format[:4] == "lino" {
+				// Parsing with this language's own implementation is the
+				// point: a document only counts if the notation is portable.
+				if _, err := parser.Parse(text); err != nil {
+					return fmt.Errorf("parsing %s: %w", entry.Files[format], err)
+				}
+			}
+			metrics := Metrics{
+				TokensO200k:  len(o200k.Encode(text, nil, nil)),
+				TokensCl100k: len(cl100k.Encode(text, nil, nil)),
+				Chars:        utf8.RuneCountInString(text),
+				Bytes:        len(text),
+			}
+			formats[format] = metrics
+			running := totals[format]
+			running.add(metrics)
+			totals[format] = running
+		}
+		if verbose {
+			fmt.Fprintf(os.Stderr, "%s: measured %d formats\n", entry.Dataset, len(formats))
+		}
+		datasets = append(datasets, DatasetResult{
+			Name:      entry.Dataset,
+			Structure: entry.Structure,
+			Profile:   entry.Profile,
+			Formats:   formats,
+		})
+	}
+
+	results := Results{
+		Schema:     generated.Schema,
+		Generator:  language,
+		Tokenizers: map[string]string{"primary": "o200k_base", "secondary": "cl100k_base"},
+		Datasets:   datasets,
+		Totals:     totals,
+	}
+
+	var reference Results
+	if err := readJSON(root, "results/rust.json", &reference); err != nil {
+		return err
+	}
+	if differences := compare(results, reference); len(differences) > 0 {
+		fmt.Fprintf(os.Stderr, "%s: %d measurement(s) differ from the Rust results:\n", language, len(differences))
+		for i, difference := range differences {
+			if i == 20 {
+				break
+			}
+			fmt.Fprintf(os.Stderr, "  - %s\n", difference)
+		}
+		return fmt.Errorf("results do not agree with Rust")
+	}
+
+	encoded, err := json.MarshalIndent(results, "", "  ")
+	if err != nil {
+		return err
+	}
+	encoded = append(encoded, '\n')
+
+	path := fmt.Sprintf("results/%s.json", language)
+	if check {
+		existing, err := os.ReadFile(filepath.Join(root, path))
+		if err != nil || string(existing) != string(encoded) {
+			return fmt.Errorf("%s is out of date; run go run . from benchmarks/go", path)
+		}
+		fmt.Printf("%s: %s is up to date and agrees with the Rust results.\n", language, path)
+		return nil
+	}
+	if err := os.WriteFile(filepath.Join(root, path), encoded, 0o644); err != nil {
+		return err
+	}
+	fmt.Printf("%s: wrote %s; every measurement agrees with the Rust results.\n", language, path)
+	return nil
+}
+
+// compare reports every measurement that differs from the reference results.
+func compare(results, reference Results) []string {
+	differences := []string{}
+	byName := map[string]DatasetResult{}
+	for _, dataset := range reference.Datasets {
+		byName[dataset.Name] = dataset
+	}
+	for _, dataset := range results.Datasets {
+		expected, ok := byName[dataset.Name]
+		if !ok {
+			differences = append(differences, dataset.Name+": missing from the Rust results")
+			continue
+		}
+		for _, format := range sortedMetricKeys(dataset.Formats) {
+			for _, key := range metricKeys {
+				value := dataset.Formats[format].get(key)
+				other := expected.Formats[format].get(key)
+				if value != other {
+					differences = append(differences, fmt.Sprintf(
+						"%s/%s/%s: %d here, %d in Rust", dataset.Name, format, key, value, other))
+				}
+			}
 		}
 	}
+	return differences
+}
 
-	fmt.Println("\nBenchmark completed successfully!")
+// benchmarksDirectory finds the benchmarks directory from the working
+// directory, so the command runs from the repository root as well as from its
+// own directory.
+func benchmarksDirectory() (string, error) {
+	if fromEnvironment := os.Getenv("BENCHMARKS_DIR"); fromEnvironment != "" {
+		return fromEnvironment, nil
+	}
+	current, err := os.Getwd()
+	if err != nil {
+		return "", err
+	}
+	for {
+		candidate := filepath.Join(current, "benchmarks", "generated", "index.json")
+		if _, err := os.Stat(candidate); err == nil {
+			return filepath.Join(current, "benchmarks"), nil
+		}
+		if _, err := os.Stat(filepath.Join(current, "generated", "index.json")); err == nil {
+			return current, nil
+		}
+		parent := filepath.Dir(current)
+		if parent == current {
+			return "", fmt.Errorf("no benchmarks directory above the working directory")
+		}
+		current = parent
+	}
+}
+
+func readText(root, path string) (string, error) {
+	contents, err := os.ReadFile(filepath.Join(root, path))
+	if err != nil {
+		return "", err
+	}
+	return string(contents), nil
+}
+
+func readJSON(root, path string, target any) error {
+	contents, err := os.ReadFile(filepath.Join(root, path))
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(contents, target)
+}
+
+func sortedKeys(entries map[string]string) []string {
+	keys := make([]string, 0, len(entries))
+	for key := range entries {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+	return keys
+}
+
+func sortedMetricKeys(entries map[string]Metrics) []string {
+	keys := make([]string, 0, len(entries))
+	for key := range entries {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+	return keys
 }

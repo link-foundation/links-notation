@@ -1,225 +1,139 @@
 #!/usr/bin/env node
 /**
- * UTF-8 Character Count Benchmark for Links Notation vs JSON, YAML, and XML
+ * JavaScript side of the Links Notation token efficiency benchmarks.
  *
- * This benchmark measures the UTF-8 character count efficiency of Links Notation
- * compared to other popular data serialization formats.
+ * The Rust benchmark is the one that writes the documents and the report. Every
+ * other language answers the two questions that make those numbers portable
+ * rather than a property of one implementation:
+ *
+ * 1. does this language's own `links-notation` parser accept the generated
+ *    Links Notation documents;
+ * 2. does this language's own tokenizer count them the same way.
+ *
+ * It writes `benchmarks/results/js.json` and fails when a count differs from
+ * `benchmarks/results/rust.json`.
+ *
+ * Usage: `node benchmarks/js/benchmark.mjs [--check] [--verbose]`
+ * With `--check` the results file is compared instead of written, which is what
+ * CI runs to catch a stale commit.
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { Parser } from 'links-notation';
+import { encode as encodeO200k } from 'gpt-tokenizer/encoding/o200k_base';
+import { encode as encodeCl100k } from 'gpt-tokenizer/encoding/cl100k_base';
+
+const LANGUAGE = 'js';
+const BENCHMARKS = join(dirname(fileURLToPath(import.meta.url)), '..');
+
+const readText = (path) => readFileSync(join(BENCHMARKS, path), 'utf8');
+const readJson = (path) => JSON.parse(readText(path));
 
 /**
- * Count UTF-8 characters in a string
- * @param {string} str - Input string
- * @returns {number} Character count
+ * The four measurements taken of every document.
+ *
+ * `chars` counts Unicode scalar values rather than UTF-16 code units, so a
+ * character outside the basic plane counts once here and once in every other
+ * language.
  */
-function countUtf8Chars(str) {
-  // In JavaScript, string.length gives UTF-16 code units
-  // For proper UTF-8 character counting, we use the spread operator
-  return [...str].length;
-}
-
-/**
- * Calculate savings percentage
- * @param {number} linoChars - Links Notation character count
- * @param {number} otherChars - Other format character count
- * @returns {number} Savings percentage
- */
-function calculateSavings(linoChars, otherChars) {
-  if (otherChars === 0) return 0;
-  return ((otherChars - linoChars) / otherChars) * 100;
-}
-
-/**
- * Find the data directory by checking multiple possible paths
- * @returns {string|null} Path to data directory or null
- */
-function findDataDir() {
-  const possiblePaths = [
-    join(__dirname, '../data'),           // Running from benchmarks/js/
-    join(__dirname, '../../benchmarks/data'), // Running from repo root
-    join(process.cwd(), 'benchmarks/data'),   // CWD is repo root
-    join(process.cwd(), '../data'),           // CWD is benchmarks/
-    join(process.cwd(), 'data'),              // CWD is benchmarks/
-  ];
-
-  for (const path of possiblePaths) {
-    if (existsSync(path)) {
-      return path;
-    }
-  }
-  return null;
-}
-
-/**
- * Find the output directory for reports
- * @returns {string} Path to output directory
- */
-function findOutputDir() {
-  const possiblePaths = [
-    join(__dirname, '..'),                    // Running from benchmarks/js/
-    join(process.cwd(), 'benchmarks'),        // CWD is repo root
-    process.cwd(),                            // Fallback to current directory
-  ];
-
-  for (const path of possiblePaths) {
-    if (existsSync(path)) {
-      return path;
-    }
-  }
-  return process.cwd();
-}
-
-/**
- * Load all benchmark test cases
- * @param {string} dataDir - Path to data directory
- * @returns {Array} Array of benchmark cases
- */
-function loadBenchmarkCases(dataDir) {
-  const cases = [
-    { name: 'employees', description: 'Employee records with nested structure' },
-    { name: 'simple_doublets', description: 'Simple doublet links (2-tuples)' },
-    { name: 'triplets', description: 'Triplet relations (3-tuples)' },
-    { name: 'nested_structure', description: 'Deeply nested company structure' },
-    { name: 'config', description: 'Application configuration' },
-  ];
-
-  return cases.map(testCase => {
-    try {
-      const lino = readFileSync(join(dataDir, `${testCase.name}.lino`), 'utf-8');
-      const json = readFileSync(join(dataDir, `${testCase.name}.json`), 'utf-8');
-      const yaml = readFileSync(join(dataDir, `${testCase.name}.yaml`), 'utf-8');
-      const xml = readFileSync(join(dataDir, `${testCase.name}.xml`), 'utf-8');
-
-      return {
-        ...testCase,
-        lino,
-        json,
-        yaml,
-        xml,
-      };
-    } catch (error) {
-      console.warn(`Warning: Could not load ${testCase.name}: ${error.message}`);
-      return null;
-    }
-  }).filter(Boolean);
-}
-
-/**
- * Run benchmark for a single case
- * @param {Object} testCase - Benchmark case
- * @returns {Object} Benchmark result
- */
-function runBenchmark(testCase) {
-  const linoChars = countUtf8Chars(testCase.lino);
-  const jsonChars = countUtf8Chars(testCase.json);
-  const yamlChars = countUtf8Chars(testCase.yaml);
-  const xmlChars = countUtf8Chars(testCase.xml);
-
+function measure(text) {
   return {
-    name: testCase.name,
-    description: testCase.description,
-    lino_chars: linoChars,
-    json_chars: jsonChars,
-    yaml_chars: yamlChars,
-    xml_chars: xmlChars,
-    lino_vs_json: calculateSavings(linoChars, jsonChars),
-    lino_vs_yaml: calculateSavings(linoChars, yamlChars),
-    lino_vs_xml: calculateSavings(linoChars, xmlChars),
+    tokens_o200k: encodeO200k(text).length,
+    tokens_cl100k: encodeCl100k(text).length,
+    chars: [...text].length,
+    bytes: Buffer.byteLength(text, 'utf8'),
   };
 }
 
-/**
- * Aggregate results across all benchmark cases
- * @param {Array} results - Array of benchmark results
- * @returns {Object} Aggregated results
- */
-function aggregateResults(results) {
-  const totalLinoChars = results.reduce((sum, r) => sum + r.lino_chars, 0);
-  const totalJsonChars = results.reduce((sum, r) => sum + r.json_chars, 0);
-  const totalYamlChars = results.reduce((sum, r) => sum + r.yaml_chars, 0);
-  const totalXmlChars = results.reduce((sum, r) => sum + r.xml_chars, 0);
-
-  const avgLinoVsJson = results.reduce((sum, r) => sum + r.lino_vs_json, 0) / results.length;
-  const avgLinoVsYaml = results.reduce((sum, r) => sum + r.lino_vs_yaml, 0) / results.length;
-  const avgLinoVsXml = results.reduce((sum, r) => sum + r.lino_vs_xml, 0) / results.length;
-
-  return {
-    total_lino_chars: totalLinoChars,
-    total_json_chars: totalJsonChars,
-    total_yaml_chars: totalYamlChars,
-    total_xml_chars: totalXmlChars,
-    avg_lino_vs_json: avgLinoVsJson,
-    avg_lino_vs_yaml: avgLinoVsYaml,
-    avg_lino_vs_xml: avgLinoVsXml,
-  };
-}
-
-/**
- * Main function
- */
 function main() {
-  const dataDir = findDataDir();
-  if (!dataDir) {
-    console.error('Error: Could not find benchmarks/data directory');
-    console.error('Please run from the repository root or benchmarks directory');
-    process.exit(1);
+  const verbose = process.argv.includes('--verbose') || process.env.CI_VERBOSE === 'true';
+  const check = process.argv.includes('--check');
+
+  const index = readJson('generated/index.json');
+  const parser = new Parser();
+  const datasets = [];
+  const totals = {};
+
+  for (const entry of index.representations) {
+    const formats = {};
+    for (const [format, path] of Object.entries(entry.files)) {
+      const text = readText(path);
+      if (format.startsWith('lino')) {
+        // Parsing with this language's own implementation is the point: a
+        // document only counts if the notation is portable.
+        parser.parse(text);
+      }
+      const metrics = measure(text);
+      formats[format] = metrics;
+      totals[format] = totals[format] ?? { tokens_o200k: 0, tokens_cl100k: 0, chars: 0, bytes: 0 };
+      for (const key of Object.keys(metrics)) totals[format][key] += metrics[key];
+    }
+    if (verbose) console.error(`${entry.dataset}: measured ${Object.keys(formats).length} formats`);
+    datasets.push({
+      name: entry.dataset,
+      structure: entry.structure,
+      profile: entry.profile,
+      formats: sortKeys(formats),
+    });
   }
 
-  console.log(`Loading benchmark cases from ${dataDir}...`);
-  const cases = loadBenchmarkCases(dataDir);
-
-  if (cases.length === 0) {
-    console.error('Error: No benchmark cases found');
-    process.exit(1);
-  }
-
-  console.log(`Running ${cases.length} benchmark cases...\n`);
-
-  const results = cases.map(runBenchmark);
-  const aggregated = aggregateResults(results);
-
-  // Print summary to console
-  console.log('=== Links Notation Character Count Benchmark (JavaScript) ===\n');
-  console.log('Summary:');
-  console.log(`  Total Lino characters:  ${aggregated.total_lino_chars}`);
-  console.log(`  Total JSON characters:  ${aggregated.total_json_chars}`);
-  console.log(`  Total YAML characters:  ${aggregated.total_yaml_chars}`);
-  console.log(`  Total XML characters:   ${aggregated.total_xml_chars}`);
-  console.log();
-  console.log('Average savings with Lino:');
-  console.log(`  vs JSON: ${aggregated.avg_lino_vs_json.toFixed(1)}% fewer characters`);
-  console.log(`  vs YAML: ${aggregated.avg_lino_vs_yaml.toFixed(1)}% fewer characters`);
-  console.log(`  vs XML:  ${aggregated.avg_lino_vs_xml.toFixed(1)}% fewer characters`);
-  console.log();
-
-  // Generate JSON report
-  const report = {
-    language: 'JavaScript',
-    summary: aggregated,
-    results: results,
+  const results = {
+    schema: index.schema ?? 1,
+    generator: LANGUAGE,
+    tokenizers: { primary: 'o200k_base', secondary: 'cl100k_base' },
+    datasets,
+    totals: sortKeys(totals),
   };
 
-  const outputDir = findOutputDir();
-  const jsonPath = join(outputDir, 'benchmark_results_js.json');
-
-  try {
-    writeFileSync(jsonPath, JSON.stringify(report, null, 2));
-    console.log(`JSON report written to ${jsonPath}`);
-  } catch (error) {
-    console.warn(`Warning: Could not write JSON report: ${error.message}`);
+  const differences = compare(results, readJson('results/rust.json'));
+  if (differences.length > 0) {
+    console.error(`${LANGUAGE}: ${differences.length} measurement(s) differ from the Rust results:`);
+    for (const difference of differences.slice(0, 20)) console.error(`  - ${difference}`);
+    process.exit(1);
   }
 
-  console.log('\nBenchmark completed successfully!');
+  const text = `${JSON.stringify(results, null, 2)}\n`;
+  const path = `results/${LANGUAGE}.json`;
+  if (check) {
+    if (readText(path) !== text) {
+      console.error(`${path} is out of date; run node benchmarks/js/benchmark.mjs`);
+      process.exit(1);
+    }
+    console.log(`${LANGUAGE}: ${path} is up to date and agrees with the Rust results.`);
+    return;
+  }
+  writeFileSync(join(BENCHMARKS, path), text);
+  console.log(`${LANGUAGE}: wrote ${path}; every measurement agrees with the Rust results.`);
 }
 
-// Run main function
-main();
+/** Object keys in a fixed order, so the results file does not churn. */
+function sortKeys(object) {
+  return Object.fromEntries(Object.entries(object).sort(([a], [b]) => (a < b ? -1 : 1)));
+}
 
-// Export for testing
-export { countUtf8Chars, calculateSavings, runBenchmark, aggregateResults };
+/** Every measurement that differs from the reference results. */
+function compare(results, reference) {
+  const differences = [];
+  const byName = new Map(reference.datasets.map((dataset) => [dataset.name, dataset]));
+  for (const dataset of results.datasets) {
+    const expected = byName.get(dataset.name);
+    if (!expected) {
+      differences.push(`${dataset.name}: missing from the Rust results`);
+      continue;
+    }
+    for (const [format, metrics] of Object.entries(dataset.formats)) {
+      for (const [key, value] of Object.entries(metrics)) {
+        const other = expected.formats[format]?.[key];
+        if (other !== value) {
+          differences.push(`${dataset.name}/${format}/${key}: ${value} here, ${other} in Rust`);
+        }
+      }
+    }
+  }
+  return differences;
+}
+
+main();
