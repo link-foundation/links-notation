@@ -9,7 +9,7 @@
     "check": "node generate.mjs --check && python3 generate_comparison_svgs.py --check"
   },
   "dependencies": {
-    "lino-objects-codec": "^0.7.0",
+    "lino-objects-codec": "^0.8.0",
     "yaml": "^2.8.1"
   }
 }
