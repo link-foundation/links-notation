@@ -137,7 +137,7 @@ third value";
   mama";
 
             var parser = new Parser();
-            Assert.Throws<FormatException>(() => parser.Parse(input));
+            Assert.Throws<ParseException>(() => parser.Parse(input));
         }
 
         [Fact]
