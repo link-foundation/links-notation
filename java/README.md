@@ -283,5 +283,4 @@ mvn spotless:check
 
 - Group ID: `io.github.link-foundation`
 - Artifact ID: `links-notation`
-- Version: 0.1.0
-- License: Unlicense
+- License: Unlicense (see [LICENSE](../LICENSE))

@@ -301,5 +301,4 @@ Exception thrown when parsing fails.
 
 - Package: `link-foundation/links-notation`
 - Namespace: `LinkFoundation\LinksNotation`
-- Version: 0.1.0
-- License: Unlicense
+- License: Unlicense (see [LICENSE](../LICENSE))

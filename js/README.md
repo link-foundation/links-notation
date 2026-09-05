@@ -344,5 +344,4 @@ fail the format check.
 ## Package Information
 
 - Package: `links-notation`
-- Version: 0.1.0
-- License: MIT
+- License: Unlicense (see [LICENSE](../LICENSE))

@@ -184,7 +184,7 @@ value (
 - **[README Rust](rust/links-notation/README.ru.md)** - Руководство по
   высокопроизводительному парсингу
 - **[README Python](python/README.ru.md)** - Руководство по работе с пакетом Python
-- **[README Go](go/README.md)** - Руководство по работе с пакетом Go (на английском)
+- **[README Go](go/README.ru.md)** - Руководство по работе с пакетом Go
 - **[README Java](java/README.ru.md)** - Руководство по работе с пакетом Java/Maven
 - **[README PHP](php/README.ru.md)** - Руководство по работе с пакетом PHP/Composer
 

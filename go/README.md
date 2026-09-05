@@ -1,4 +1,4 @@
-# links-notation Go
+# Links Notation Parser for Go
 
 [![Actions Status](https://github.com/link-foundation/links-notation/workflows/go/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=go)
 [![Go Reference](https://pkg.go.dev/badge/github.com/link-foundation/links-notation/go.svg)](https://pkg.go.dev/github.com/link-foundation/links-notation/go)
@@ -44,7 +44,7 @@ func main() {
 - Quoted strings with special characters
 - Triple-quoted strings for embedded quotes
 - Configurable formatting with `FormatConfig`
-- Full compatibility with other language implementations (JS, Rust, C#, Python)
+- Full compatibility with the other six implementations (C#, JavaScript, Rust, Python, Java, PHP)
 
 ## API Reference
 
@@ -206,7 +206,8 @@ links, _ := lino.Parse("(a: (b: (c: (d: value))))")
 ### Custom Formatting
 
 ```go
-link := lino.NewLink(lino.StrPtr("id"), []*lino.Link{
+id := "id"
+link := lino.NewLink(&id, []*lino.Link{
     lino.NewRef("value1"),
     lino.NewRef("value2"),
 })
