@@ -107,8 +107,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `experiments/issue-302/run.sh` asks all seven implementations about the same
   five documents, four of which do not parse, and prints the answers next to
   each other ([#302](https://github.com/link-foundation/links-notation/issues/302))
+- Comments in every implementation (Rust, JavaScript, Python, Go, Java, C#,
+  PHP): a `#` written where a reference could begin hides the rest of the line
+  it stands on, so a document can carry prose about itself. Prose written after
+  a `#` used to parse by accident - `# a b` read as the link `(# a b)` - and
+  broke on a bare colon, so `# a: b` was a syntax error
+  ([#301](https://github.com/link-foundation/links-notation/issues/301))
+- A comment is blanked rather than cut out: each of its characters becomes a
+  space, so a parse error still reports the offset, line and column the
+  document was written at, and a line holding only a comment becomes
+  whitespace, which separates links the way an empty line does and does not end
+  an indented block, so a comment can stand between the children of a link
+  ([#301](https://github.com/link-foundation/links-notation/issues/301))
+- Comments are on by default and can be switched off, which reads `#` as an
+  ordinary character again for documents written before comments existed:
+  `ParserConfig::without_comments()` and `parse_lino_to_links_with_config` in
+  Rust, `new Parser({ comments: false })` in JavaScript, `Parser(comments=False)`
+  in Python, `Comments` on a `NewParser()` in Go, `new Parser(false)` in Java,
+  `new Parser(comments: false)` in C# and the third constructor argument in PHP
+  ([#301](https://github.com/link-foundation/links-notation/issues/301))
+- `experiments/issue-301/run.sh` asks all seven implementations what they do
+  with six documents containing a `#`, and prints the answers next to each
+  other; before this change they gave three different answers to the same
+  document ([#301](https://github.com/link-foundation/links-notation/issues/301))
+- The grammar documents describe comments: `comment` and `comment_start` rules
+  in `docs/grammar/links-notation.ebnf`, `docs/grammar/GRAMMAR.md` and
+  `docs/grammar/grammar.lino`, railroad diagrams in
+  `docs/grammar/syntax-diagrams.md`, and a `### Comments` section in all
+  sixteen READMEs ([#301](https://github.com/link-foundation/links-notation/issues/301))
 
 ### Changed
+- The broken-document sample in the READMEs of Rust, JavaScript and C# is
+  `ci_gate x\nstage: rust: nextest\n` instead of a document whose first two
+  lines began with a `#`; those lines are comments now, so the sample no longer
+  demonstrates what it claimed to
+  ([#301](https://github.com/link-foundation/links-notation/issues/301))
 - Every manifest checked against what the registries publish today and updated:
   npm `lino-objects-codec` 0.7 to 0.8, `csv-parse` 6 to 7 and `gpt-tokenizer` 3
   to 4; Go `regexp2` 1.10 to 1.12 and `uuid` 1.3 to 1.6; Maven compiler plugin
@@ -173,6 +206,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   that catch the base type keep working ([#302](https://github.com/link-foundation/links-notation/issues/302))
 
 ### Fixed
+- A reference that begins with a `#` is written quoted (`'#tag'`) by the
+  formatter of every implementation, so a document a formatter writes reads back
+  as itself. `(a #tag)` used to be written unquoted, and reading it back gave
+  `a` alone, a syntax error or a different link, depending on the language. A
+  `#` that cannot open a comment is still written as it stands (`issue#1047`)
+  ([#301](https://github.com/link-foundation/links-notation/issues/301))
 - Docs: nested contexts were described in the English READMEs and in the root
   Russian one, but in none of the per-language `README.ru.md` files, so a Russian
   reader of a language guide still got the old reading by omission. The section

@@ -15,7 +15,7 @@ composer require link-foundation/links-notation
 ```json
 {
     "require": {
-        "link-foundation/links-notation": "^0.18"
+        "link-foundation/links-notation": "^0.19"
     }
 }
 ```
@@ -219,6 +219,36 @@ LINO;
 echo Formatter::formatLinks($parser->parse($input)); // (value ((id 1) (label one)))
 ```
 
+### Комментарии
+
+`#` скрывает остаток строки, на которой стоит, поэтому документ может нести
+пояснения о самом себе:
+
+```lino
+# машины, на которые идёт выкладка
+deploy: staging # пока только staging
+```
+
+К моменту чтения документа обоих комментариев уже нет, остаётся одна связь
+`(deploy: staging)`. `#` открывает комментарий только там, где могла бы
+начаться ссылка, поэтому `#` внутри токена (`issue#1047`) и `#` внутри ссылки
+в кавычках (`"#"`) остаются обычными символами.
+
+Форматтер соблюдает то же правило с другой стороны: ссылка, начинающаяся с `#`,
+записывается в кавычках (`'#tag'`), поэтому написанный им документ читается
+обратно как он сам.
+
+Комментарии включены по умолчанию, а парсеру можно велеть снова читать `#` как
+обычный символ - для документов, написанных до появления комментариев:
+
+```php
+$document = "# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n";
+echo Formatter::formatLinks((new Parser())->parse($document)); // (deploy: staging)
+
+$plain = new Parser(10 * 1024 * 1024, 1000, false);
+echo Formatter::formatLinks($plain->parse("# a b\n")); // (# a b)
+```
+
 ### Строки с произвольным количеством кавычек
 
 Любое количество одинаковых символов кавычек (`'`, `"` или `` ` ``) открывает
@@ -239,7 +269,8 @@ echo Formatter::formatLinks($parser->parse($input)); // (value ((id 1) (label on
 
 Основной класс парсера, превращающий строки в связи.
 
-- `__construct(int $maxInputSize = 10485760, int $maxDepth = 1000)` — создать парсер с ограничениями
+- `__construct(int $maxInputSize = 10485760, int $maxDepth = 1000, bool $comments = true)` — создать
+  парсер с ограничениями и с комментариями `#`, если `$comments` не `false`
 - `parse(string $input): Link[]` — разобрать строку lino и вернуть связи
   - выбрасывает `InvalidArgumentException`, если вход больше `$maxInputSize`
   - выбрасывает `LinkFoundation\LinksNotation\ParseException`, если вход не удалось разобрать

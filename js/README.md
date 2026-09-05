@@ -252,6 +252,39 @@ const links = new Parser().parse(`value (
 console.log(formatLinks(links)); // (value ((id 1) (label one)))
 ```
 
+### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+Both comments are gone by the time the document is read, leaving the single
+link `(deploy: staging)`. A `#` only opens a comment where a reference could
+begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
+reference (`"#"`) stay ordinary characters.
+
+A formatter keeps the same rule from the other side: a reference that begins
+with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
+itself.
+
+Comments are on by default, and a parser can be told to read `#` as an ordinary
+character again, for documents written before comments existed:
+
+```javascript
+import { Parser, formatLinks } from 'links-notation';
+
+const document =
+  '# the machines this deploys to\ndeploy: staging # only staging, for now\n';
+console.log(formatLinks(new Parser().parse(document))); // (deploy: staging)
+
+const plain = new Parser({ comments: false });
+console.log(formatLinks(plain.parse('# a b\n'))); // (# a b)
+```
+
 ## API Reference
 
 ### Classes
@@ -260,6 +293,8 @@ console.log(formatLinks(links)); // (value ((id 1) (label one)))
 
 Main parser class for converting strings to links.
 
+- `constructor(options)` - Create a parser; `options.comments` set to `false`
+  reads `#` as an ordinary character instead of the start of a comment
 - `initialize()` - Initialize the parser (async)
 - `parse(input)` - Parse a Lino string and return links
 
@@ -288,7 +323,7 @@ where the document stopped making sense and quotes the offending line:
 import { Parser, ParseError } from 'links-notation';
 
 try {
-  new Parser().parse('# ok line\n# break: two\nci_gate x\n');
+  new Parser().parse('ci_gate x\nstage: rust: nextest\n');
 } catch (error) {
   console.error(error.message);
   if (error instanceof ParseError) {
@@ -298,9 +333,9 @@ try {
 ```
 
 ```text
-Syntax error at line 2, column 8: Expected "(", [ \t], [\r\n], or [^ \t\n\r(:)] but ":" found.
-2 | # break: two
-  |        ^
+Syntax error at line 2, column 12: Expected "(", [ \t], [\r\n], or [^ \t\n\r(:)] but ":" found.
+2 | stage: rust: nextest
+  |            ^
 ```
 
 - `offset` - Offset of the offending position from the start of the document

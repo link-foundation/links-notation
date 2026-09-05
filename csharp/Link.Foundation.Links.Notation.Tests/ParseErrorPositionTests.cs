@@ -19,24 +19,24 @@ namespace Link.Foundation.Links.Notation.Tests
         [Fact]
         public static void ReportsTheLineAndColumnOfTheDefectTest()
         {
-            // The example from the issue: the defect is the colon on line 2, and the
-            // two lines after it are fine.
-            var error = SyntaxError("# ok line\n# break: two\nci_gate x\n  stage rust");
+            // The example from the issue: the defect is the second colon on line 2,
+            // and the two lines after it are fine.
+            var error = SyntaxError("ci_gate x\nstage: rust: nextest\nnext stage\n  clippy");
 
             Assert.Equal(2, error.Line);
-            Assert.Equal(8, error.Column);
+            Assert.Equal(12, error.Column);
             Assert.Equal(':', error.Found);
         }
 
         [Fact]
         public static void OffsetAgreesWithTheOtherImplementationsTest()
         {
-            // JavaScript and Rust report offset 17, line 2, column 8 for this document.
-            var error = SyntaxError("# ok line\n# break: two\n");
+            // JavaScript and Rust report offset 21, line 2, column 12 for this document.
+            var error = SyntaxError("ci_gate x\nstage: rust: nextest\n");
 
-            Assert.Equal(17, error.Offset);
+            Assert.Equal(21, error.Offset);
             Assert.Equal(2, error.Line);
-            Assert.Equal(8, error.Column);
+            Assert.Equal(12, error.Column);
         }
 
         [Fact]
@@ -75,24 +75,24 @@ namespace Link.Foundation.Links.Notation.Tests
         [Fact]
         public static void MessagePointsACaretAtTheOffendingCharacterTest()
         {
-            var error = SyntaxError("# ok line\n# break: two\n");
+            var error = SyntaxError("ci_gate x\nstage: rust: nextest\n");
 
-            Assert.Equal("line 2, column 8: unexpected \":\"", error.Summary);
-            Assert.Equal("2 | # break: two\n  |        ^", error.Snippet);
+            Assert.Equal("line 2, column 12: unexpected \":\"", error.Summary);
+            Assert.Equal("2 | stage: rust: nextest\n  |            ^", error.Snippet);
             Assert.Equal(
-                "Syntax error at line 2, column 8: unexpected \":\"\n2 | # break: two\n  |        ^",
+                "Syntax error at line 2, column 12: unexpected \":\"\n2 | stage: rust: nextest\n  |            ^",
                 error.Message);
         }
 
         [Fact]
         public static void MessageQuotesOneLineRatherThanTheRestOfTheDocumentTest()
         {
-            var document = "# ok line\n# break: two\n"
+            var document = "ci_gate x\nstage: rust: nextest\n"
                 + string.Concat(System.Linq.Enumerable.Repeat("trailing line\n", 500));
 
             var error = SyntaxError(document);
 
-            Assert.Contains("line 2, column 8", error.Message);
+            Assert.Contains("line 2, column 12", error.Message);
             Assert.DoesNotContain("trailing line", error.Message);
             Assert.True(error.Message.Length < 200, $"message is {error.Message.Length} characters");
         }

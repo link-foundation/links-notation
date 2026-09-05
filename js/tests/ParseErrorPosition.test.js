@@ -22,22 +22,24 @@ function syntaxError(document) {
 }
 
 test('reports the line and column of the defect', () => {
-  // The example from the issue: the defect is the colon on line 2, and the
-  // two lines after it are fine.
-  const error = syntaxError('# ok line\n# break: two\nci_gate x\n  stage rust');
+  // The defect is the second colon on line 2, and the two lines after it are
+  // fine.
+  const error = syntaxError(
+    'ci_gate x\nstage: rust: nextest\nnext stage\n  clippy'
+  );
 
   expect(error.line).toBe(2);
-  expect(error.column).toBe(8);
+  expect(error.column).toBe(12);
   expect(error.found).toBe(':');
 });
 
 test('offset agrees with the other implementations', () => {
-  // Rust and C# report offset 17, line 2, column 8 for this document.
-  const error = syntaxError('# ok line\n# break: two\n');
+  // Rust and C# report offset 21, line 2, column 12 for this document.
+  const error = syntaxError('ci_gate x\nstage: rust: nextest\n');
 
-  expect(error.offset).toBe(17);
+  expect(error.offset).toBe(21);
   expect(error.line).toBe(2);
-  expect(error.column).toBe(8);
+  expect(error.column).toBe(12);
 });
 
 test('reports the line a late defect is on', () => {
@@ -68,20 +70,20 @@ test('reports an unmatched closing parenthesis', () => {
 });
 
 test('message says where the document broke', () => {
-  const error = syntaxError('# ok line\n# break: two\n');
+  const error = syntaxError('ci_gate x\nstage: rust: nextest\n');
 
-  expect(error.message.startsWith('Syntax error at line 2, column 8:')).toBe(
+  expect(error.message.startsWith('Syntax error at line 2, column 12:')).toBe(
     true
   );
-  expect(error.snippet).toBe('2 | # break: two\n  |        ^');
+  expect(error.snippet).toBe('2 | stage: rust: nextest\n  |            ^');
 });
 
 test('message quotes one line rather than the rest of the document', () => {
-  const document = `# ok line\n# break: two\n${'trailing line\n'.repeat(500)}`;
+  const document = `ci_gate x\nstage: rust: nextest\n${'trailing line\n'.repeat(500)}`;
 
   const error = syntaxError(document);
 
-  expect(error.message).toContain('line 2, column 8');
+  expect(error.message).toContain('line 2, column 12');
   expect(error.message).not.toContain('trailing line');
   expect(error.message.length).toBeLessThan(200);
 });

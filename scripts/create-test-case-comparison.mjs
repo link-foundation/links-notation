@@ -95,7 +95,10 @@ const LANGUAGES = [
       directory: 'python/tests',
       isTestFile: (file) => file.startsWith('test_') && file.endsWith('.py'),
       categoryOf: (file) => file.replace('test_', '').replace('.py', ''),
-      pattern: /^def (test_\w+)/gm,
+      // Python tests are written both as module-level functions and as methods
+      // of a `Test...` class; matching only the first kind hid whole files,
+      // such as the comment suite, from the comparison.
+      pattern: /^[ \t]*def (test_\w+)/gm,
       nameOf: (name) => name
     })
   },

@@ -155,6 +155,29 @@ All seven implementations agree on this. `experiments/issue-282/parity` parses
 the document above with each of them and fails if any one reads it differently.
 The complete rules are in the [grammar](docs/grammar/GRAMMAR.md).
 
+#### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+That is the single link `(deploy: staging)`: both comments are gone by the time
+the document is read. A `#` only opens a comment where a reference could begin,
+so a `#` inside a token (`issue#1047`) and a `#` inside a delimited reference
+(`"#"`) stay ordinary characters.
+
+A formatter keeps the same rule from the other side: a reference that begins
+with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
+itself.
+
+Comments are on by default in every implementation, and every parser can be
+told to read `#` as an ordinary character again for documents written before
+comments existed - see the parser options in the language READMEs.
+
 So that means that *this* text is also links notation. So most of the
 text in the world already may be parsed as links notation. That makes
 links notation the most easy an natural/intuitive/native one.
@@ -208,13 +231,13 @@ All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP)
 <!-- test-counts:start -->
 | Language | Tests | Test categories |
 | --- | --- | --- |
-| Python | 146 | 14 |
-| JavaScript | 214 | 17 |
-| Rust | 299 | 19 |
-| C# | 207 | 18 |
-| Go | 86 | 10 |
-| Java | 133 | 9 |
-| PHP | 183 | 16 |
+| Python | 215 | 17 |
+| JavaScript | 237 | 18 |
+| Rust | 322 | 20 |
+| C# | 229 | 19 |
+| Go | 107 | 11 |
+| Java | 154 | 10 |
+| PHP | 204 | 17 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files

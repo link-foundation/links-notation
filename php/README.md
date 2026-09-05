@@ -15,7 +15,7 @@ Or add the dependency to your `composer.json`:
 ```json
 {
     "require": {
-        "link-foundation/links-notation": "^0.18"
+        "link-foundation/links-notation": "^0.19"
     }
 }
 ```
@@ -219,6 +219,36 @@ LINO;
 echo Formatter::formatLinks($parser->parse($input)); // (value ((id 1) (label one)))
 ```
 
+### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+Both comments are gone by the time the document is read, leaving the single
+link `(deploy: staging)`. A `#` only opens a comment where a reference could
+begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
+reference (`"#"`) stay ordinary characters.
+
+A formatter keeps the same rule from the other side: a reference that begins
+with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
+itself.
+
+Comments are on by default, and a parser can be told to read `#` as an ordinary
+character again, for documents written before comments existed:
+
+```php
+$document = "# the machines this deploys to\ndeploy: staging # only staging, for now\n";
+echo Formatter::formatLinks((new Parser())->parse($document)); // (deploy: staging)
+
+$plain = new Parser(10 * 1024 * 1024, 1000, false);
+echo Formatter::formatLinks($plain->parse("# a b\n")); // (# a b)
+```
+
 ### Multi-Quote Strings
 
 Any number of identical quote characters (`'`, `"` or `` ` ``) opens a string,
@@ -239,7 +269,8 @@ escapes it.
 
 Main parser class for converting strings into links.
 
-- `__construct(int $maxInputSize = 10485760, int $maxDepth = 1000)` - create a parser with optional limits
+- `__construct(int $maxInputSize = 10485760, int $maxDepth = 1000, bool $comments = true)` - create a
+  parser with optional limits, and with `#` comments on unless `$comments` is `false`
 - `parse(string $input): Link[]` - parse a lino string and return the links
   - throws `InvalidArgumentException` when the input exceeds `$maxInputSize`
   - throws `LinkFoundation\LinksNotation\ParseException` when the input cannot be parsed

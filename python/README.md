@@ -83,6 +83,8 @@ links = parser.parse(text)
 
 The main parser class for Links Notation.
 
+- `__init__(..., comments: bool = True)`: Create a parser; with `comments=False`
+  a `#` is an ordinary character instead of the start of a comment
 - `parse(input_text: str) -> List[Link]`: Parse Links Notation text into Link objects
 
 ### Link
@@ -158,6 +160,35 @@ text = """value (
 )"""
 print(format_links(parser.parse(text)))
 # (value ((id 1) (label one)))
+```
+
+### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+Both comments are gone by the time the document is read, leaving the single
+link `(deploy: staging)`. A `#` only opens a comment where a reference could
+begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
+reference (`"#"`) stay ordinary characters.
+
+A formatter keeps the same rule from the other side: a reference that begins
+with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
+itself.
+
+Comments are on by default, and a parser can be told to read `#` as an ordinary
+character again, for documents written before comments existed:
+
+```python
+document = "# the machines this deploys to\ndeploy: staging # only staging, for now\n"
+print(format_links(Parser().parse(document)))  # (deploy: staging)
+
+print(format_links(Parser(comments=False).parse("# a b\n")))  # (# a b)
 ```
 
 ## Development

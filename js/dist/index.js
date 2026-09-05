@@ -320,6 +320,93 @@ function windowAround(lineText, column) {
   return [quoted, target - start + shift + 1];
 }
 
+// src/comments.js
+var COMMENT = "#";
+var QUOTES = ['"', "'", "`"];
+var BEFORE_REFERENCE = [" ", "\t", `
+`, "\r", "(", ":"];
+var BEFORE_COMMENT = [" ", "\t", `
+`, "\r"];
+function stripComments(document) {
+  let blanked = null;
+  let position = 0;
+  while (position < document.length) {
+    const character = document[position];
+    if (QUOTES.includes(character) && follows(document, position, BEFORE_REFERENCE)) {
+      const end = quotedReferenceEnd(document, position);
+      position = end === null ? position + 1 : end;
+      continue;
+    }
+    if (character === COMMENT && follows(document, position, BEFORE_COMMENT)) {
+      blanked = blanked ?? document.split("");
+      while (position < document.length && document[position] !== `
+` && document[position] !== "\r") {
+        blanked[position] = " ";
+        position++;
+      }
+      continue;
+    }
+    position++;
+  }
+  return blanked === null ? document : blanked.join("");
+}
+function follows(document, position, allowed) {
+  return position === 0 || allowed.includes(document[position - 1]);
+}
+function quotedReferenceEnd(document, start) {
+  const quote2 = document[start];
+  if (!QUOTES.includes(quote2)) {
+    return null;
+  }
+  let position = start;
+  while (position < document.length && document[position] === quote2) {
+    position++;
+  }
+  const count = position - start;
+  const isEvenRun = count % 2 === 0;
+  const emptyReference = isEvenRun ? start + count : null;
+  const closing = quote2.repeat(count);
+  const escape = quote2.repeat(count * 2);
+  let content = "";
+  while (position < document.length) {
+    if (document.startsWith(escape, position)) {
+      content += closing;
+      position += escape.length;
+      continue;
+    }
+    if (document.startsWith(closing, position)) {
+      const afterClosing = position + count;
+      if (afterClosing >= document.length || document[afterClosing] !== quote2) {
+        if (isEvenRun && !isSubstantiveBody(content)) {
+          return emptyReference;
+        }
+        return afterClosing;
+      }
+    }
+    content += document[position];
+    position++;
+  }
+  return emptyReference;
+}
+function isSubstantiveBody(content) {
+  let depth = 0;
+  let hasVisible = false;
+  for (const character of content) {
+    if (character === "(") {
+      depth++;
+    } else if (character === ")") {
+      depth--;
+      if (depth < 0) {
+        return false;
+      }
+    }
+    if (!/\s/.test(character)) {
+      hasVisible = true;
+    }
+  }
+  return hasVisible && depth === 0;
+}
+
 // src/parser-generated.js
 class peg$SyntaxError extends SyntaxError {
   constructor(message, expected, found, location) {
@@ -1751,35 +1838,10 @@ function peg$parse(input, options) {
     return s0;
   }
   function peg$parseeol() {
-    let s0, s1, s2, s3;
+    let s0, s1, s2;
     s0 = peg$currPos;
     s1 = peg$parse__();
-    s2 = [];
-    s3 = input.charAt(peg$currPos);
-    if (peg$r1.test(s3)) {
-      peg$currPos++;
-    } else {
-      s3 = peg$FAILED;
-      if (peg$silentFails === 0) {
-        peg$fail(peg$e1);
-      }
-    }
-    if (s3 !== peg$FAILED) {
-      while (s3 !== peg$FAILED) {
-        s2.push(s3);
-        s3 = input.charAt(peg$currPos);
-        if (peg$r1.test(s3)) {
-          peg$currPos++;
-        } else {
-          s3 = peg$FAILED;
-          if (peg$silentFails === 0) {
-            peg$fail(peg$e1);
-          }
-        }
-      }
-    } else {
-      s2 = peg$FAILED;
-    }
+    s2 = peg$parselineBreaks();
     if (s2 === peg$FAILED) {
       s2 = peg$parseeof();
       if (s2 === peg$FAILED) {
@@ -1787,6 +1849,178 @@ function peg$parse(input, options) {
       }
     }
     if (s2 !== peg$FAILED) {
+      s1 = [s1, s2];
+      s0 = s1;
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    return s0;
+  }
+  function peg$parselineBreaks() {
+    let s0, s1, s2, s3, s4, s5, s6;
+    s0 = peg$currPos;
+    s1 = [];
+    s2 = input.charAt(peg$currPos);
+    if (peg$r1.test(s2)) {
+      peg$currPos++;
+    } else {
+      s2 = peg$FAILED;
+      if (peg$silentFails === 0) {
+        peg$fail(peg$e1);
+      }
+    }
+    if (s2 !== peg$FAILED) {
+      while (s2 !== peg$FAILED) {
+        s1.push(s2);
+        s2 = input.charAt(peg$currPos);
+        if (peg$r1.test(s2)) {
+          peg$currPos++;
+        } else {
+          s2 = peg$FAILED;
+          if (peg$silentFails === 0) {
+            peg$fail(peg$e1);
+          }
+        }
+      }
+    } else {
+      s1 = peg$FAILED;
+    }
+    if (s1 !== peg$FAILED) {
+      s2 = [];
+      s3 = peg$currPos;
+      s4 = [];
+      s5 = input.charAt(peg$currPos);
+      if (peg$r0.test(s5)) {
+        peg$currPos++;
+      } else {
+        s5 = peg$FAILED;
+        if (peg$silentFails === 0) {
+          peg$fail(peg$e0);
+        }
+      }
+      if (s5 !== peg$FAILED) {
+        while (s5 !== peg$FAILED) {
+          s4.push(s5);
+          s5 = input.charAt(peg$currPos);
+          if (peg$r0.test(s5)) {
+            peg$currPos++;
+          } else {
+            s5 = peg$FAILED;
+            if (peg$silentFails === 0) {
+              peg$fail(peg$e0);
+            }
+          }
+        }
+      } else {
+        s4 = peg$FAILED;
+      }
+      if (s4 !== peg$FAILED) {
+        s5 = [];
+        s6 = input.charAt(peg$currPos);
+        if (peg$r1.test(s6)) {
+          peg$currPos++;
+        } else {
+          s6 = peg$FAILED;
+          if (peg$silentFails === 0) {
+            peg$fail(peg$e1);
+          }
+        }
+        if (s6 !== peg$FAILED) {
+          while (s6 !== peg$FAILED) {
+            s5.push(s6);
+            s6 = input.charAt(peg$currPos);
+            if (peg$r1.test(s6)) {
+              peg$currPos++;
+            } else {
+              s6 = peg$FAILED;
+              if (peg$silentFails === 0) {
+                peg$fail(peg$e1);
+              }
+            }
+          }
+        } else {
+          s5 = peg$FAILED;
+        }
+        if (s5 !== peg$FAILED) {
+          s4 = [s4, s5];
+          s3 = s4;
+        } else {
+          peg$currPos = s3;
+          s3 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s3;
+        s3 = peg$FAILED;
+      }
+      while (s3 !== peg$FAILED) {
+        s2.push(s3);
+        s3 = peg$currPos;
+        s4 = [];
+        s5 = input.charAt(peg$currPos);
+        if (peg$r0.test(s5)) {
+          peg$currPos++;
+        } else {
+          s5 = peg$FAILED;
+          if (peg$silentFails === 0) {
+            peg$fail(peg$e0);
+          }
+        }
+        if (s5 !== peg$FAILED) {
+          while (s5 !== peg$FAILED) {
+            s4.push(s5);
+            s5 = input.charAt(peg$currPos);
+            if (peg$r0.test(s5)) {
+              peg$currPos++;
+            } else {
+              s5 = peg$FAILED;
+              if (peg$silentFails === 0) {
+                peg$fail(peg$e0);
+              }
+            }
+          }
+        } else {
+          s4 = peg$FAILED;
+        }
+        if (s4 !== peg$FAILED) {
+          s5 = [];
+          s6 = input.charAt(peg$currPos);
+          if (peg$r1.test(s6)) {
+            peg$currPos++;
+          } else {
+            s6 = peg$FAILED;
+            if (peg$silentFails === 0) {
+              peg$fail(peg$e1);
+            }
+          }
+          if (s6 !== peg$FAILED) {
+            while (s6 !== peg$FAILED) {
+              s5.push(s6);
+              s6 = input.charAt(peg$currPos);
+              if (peg$r1.test(s6)) {
+                peg$currPos++;
+              } else {
+                s6 = peg$FAILED;
+                if (peg$silentFails === 0) {
+                  peg$fail(peg$e1);
+                }
+              }
+            }
+          } else {
+            s5 = peg$FAILED;
+          }
+          if (s5 !== peg$FAILED) {
+            s4 = [s4, s5];
+            s3 = s4;
+          } else {
+            peg$currPos = s3;
+            s3 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s3;
+          s3 = peg$FAILED;
+        }
+      }
       s1 = [s1, s2];
       s0 = s1;
     } else {
@@ -1974,7 +2208,7 @@ function peg$parse(input, options) {
   function getCurrentIndentation() {
     return indentationStack[indentationStack.length - 1];
   }
-  function isSubstantiveBody(content) {
+  function isSubstantiveBody2(content) {
     let depth = 0;
     let hasVisible = false;
     for (const c of content) {
@@ -2016,7 +2250,7 @@ function peg$parse(input, options) {
       if (inputStr.substr(pos, quoteCount) === closeSeq) {
         const afterClose = pos + quoteCount;
         if (afterClose >= inputStr.length || inputStr[afterClose] !== quoteChar) {
-          if (isEvenRun && !isSubstantiveBody(content)) {
+          if (isEvenRun && !isSubstantiveBody2(content)) {
             return emptyReference;
           }
           return {
@@ -2063,6 +2297,7 @@ class Parser {
   constructor(options = {}) {
     this.maxInputSize = options.maxInputSize || 10 * 1024 * 1024;
     this.maxDepth = options.maxDepth || 1000;
+    this.comments = options.comments ?? true;
   }
   parse(input) {
     if (typeof input !== "string") {
@@ -2071,8 +2306,9 @@ class Parser {
     if (input.length > this.maxInputSize) {
       throw new Error(`Input size exceeds maximum allowed size of ${this.maxInputSize} bytes`);
     }
+    const prepared = this.comments ? stripComments(input) : input;
     try {
-      const rawResult = peg$parse(input);
+      const rawResult = peg$parse(prepared);
       return this.transformResult(rawResult);
     } catch (error) {
       if (error && error.location) {
@@ -2212,6 +2448,7 @@ class FormatOptions {
 class FormatConfig extends FormatOptions {
 }
 export {
+  stripComments,
   formatLinks,
   Parser,
   ParseError,

@@ -41,6 +41,7 @@ func main() {
 - Parse Links Notation (Lino) into structured Link objects
 - Format Link objects back to Lino notation
 - Support for inline and indented syntax
+- `#` comments, on by default and switchable off
 - Quoted strings with special characters
 - Triple-quoted strings for embedded quotes
 - Configurable formatting with `FormatConfig`
@@ -86,6 +87,15 @@ func Parse(input string) ([]*Link, error)
 ```
 
 Parses Lino notation text into a slice of Link objects.
+
+#### NewParser
+
+```go
+func NewParser() *Parser
+```
+
+Creates a parser with the default limits and with `#` comments on. Setting
+`Comments` to `false` on it reads `#` as an ordinary character instead.
 
 #### Format
 
@@ -285,6 +295,39 @@ document := `value (
 
 links, _ := lino.Parse(document)
 fmt.Println(lino.Format(links)) // (value ((id 1) (label one)))
+```
+
+### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+Both comments are gone by the time the document is read, leaving the single
+link `(deploy: staging)`. A `#` only opens a comment where a reference could
+begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
+reference (`"#"`) stay ordinary characters.
+
+A formatter keeps the same rule from the other side: a reference that begins
+with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
+itself.
+
+Comments are on by default, and a parser can be told to read `#` as an ordinary
+character again, for documents written before comments existed:
+
+```go
+document := "# the machines this deploys to\ndeploy: staging # only staging, for now\n"
+links, _ := lino.Parse(document)
+fmt.Println(lino.Format(links)) // (deploy: staging)
+
+parser := lino.NewParser()
+parser.Comments = false
+plain, _ := parser.Parse("# a b\n")
+fmt.Println(lino.Format(plain)) // (# a b)
 ```
 
 ## Testing

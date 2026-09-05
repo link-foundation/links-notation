@@ -7,90 +7,13 @@ converting text into structured Link objects.
 
 from typing import Any, Dict, List, Optional
 
+from .comments import strip_comments
 from .link import Link
+from .quotes import _parse_quoted_string_at
 
 
 class ParseError(Exception):
     """Exception raised when parsing fails."""
-
-
-QUOTE_CHARS = ('"', "'", "`")
-
-
-def _is_substantive_body(content: str) -> bool:
-    """
-    Report whether a body written between an even run of delimiters is
-    substantive: it holds at least one visible character and does not straddle
-    a parenthesis. An even run can always be read as delimiter pairs enclosing
-    nothing, so the n-quote reading is only taken when it carries something the
-    pairs cannot.
-    """
-    depth = 0
-    has_visible = False
-
-    for char in content:
-        if char == "(":
-            depth += 1
-        elif char == ")":
-            depth -= 1
-            if depth < 0:
-                return False
-        if not char.isspace():
-            has_visible = True
-
-    return has_visible and depth == 0
-
-
-def _parse_quoted_string_at(text: str, start: int) -> Optional[tuple]:
-    """
-    Parse the delimited reference that starts at ``start``.
-
-    Any number N of quotes opens and closes the string, 2*N quotes are an
-    escaped quote sequence. A run of an even number of delimiters that does not
-    open a reference with a substantive body is the empty reference: the
-    shortest reading, a bare delimiter pair enclosing nothing, wins over a
-    longer n-quote delimiter.
-
-    Returns ``(value, end_position)`` where ``end_position`` is the position
-    right after the closing quotes, or ``None`` when ``text`` does not start a
-    delimited reference.
-    """
-    if start >= len(text):
-        return None
-
-    quote_char = text[start]
-    if quote_char not in QUOTE_CHARS:
-        return None
-
-    quote_count = 0
-    pos = start
-    while pos < len(text) and text[pos] == quote_char:
-        quote_count += 1
-        pos += 1
-
-    is_even_run = quote_count % 2 == 0
-    empty_reference = ("", start + quote_count) if is_even_run else None
-
-    open_close = quote_char * quote_count
-    escape_seq = quote_char * (quote_count * 2)
-    content = []
-
-    while pos < len(text):
-        if text.startswith(escape_seq, pos):
-            content.append(open_close)
-            pos += len(escape_seq)
-            continue
-        if text.startswith(open_close, pos):
-            after_close = pos + quote_count
-            if after_close >= len(text) or text[after_close] != quote_char:
-                value = "".join(content)
-                if is_even_run and not _is_substantive_body(value):
-                    return empty_reference
-                return (value, after_close)
-        content.append(text[pos])
-        pos += 1
-
-    return empty_reference
 
 
 class Parser:
@@ -100,13 +23,20 @@ class Parser:
     Handles both inline and indented syntax for defining links.
     """
 
-    def __init__(self, max_input_size: int = 10 * 1024 * 1024, max_depth: int = 1000):
+    def __init__(
+        self,
+        max_input_size: int = 10 * 1024 * 1024,
+        max_depth: int = 1000,
+        comments: bool = True,
+    ):
         """
         Initialize the parser.
 
         Args:
             max_input_size: Maximum input size in bytes (default: 10MB)
             max_depth: Maximum nesting depth (default: 1000)
+            comments: Whether ``#`` starts a comment that runs to the end of
+                its line; when False it is an ordinary character (default: True)
         """
         self.indentation_stack = [0]
         self.pos = 0
@@ -115,6 +45,7 @@ class Parser:
         self.base_indentation = None
         self.max_input_size = max_input_size
         self.max_depth = max_depth
+        self.comments = comments
 
     def parse(self, input_text: str) -> List[Link]:
         """
@@ -143,9 +74,13 @@ class Parser:
             if not input_text or not input_text.strip():
                 return []
 
-            self.text = input_text
+            # Comments are blanked rather than removed, so every character
+            # keeps the position it was written at.
+            prepared = strip_comments(input_text) if self.comments else input_text
+
+            self.text = prepared
             # Use smart line splitting that respects quoted strings
-            self.lines = self._split_lines_respecting_quotes(input_text)
+            self.lines = self._split_lines_respecting_quotes(prepared)
             self.pos = 0
             self.indentation_stack = [0]
             self.base_indentation = None
@@ -271,18 +206,29 @@ class Parser:
         child_indent = indent + 2  # Expect at least 2 spaces for child
 
         while self.pos < len(self.lines):
-            next_line = self.lines[self.pos]
+            # A line holding nothing does not close a block: the block goes on
+            # at the next line that holds something. Blanking a comment leaves
+            # such a line behind, so this is also what keeps a block together
+            # around a comment written inside it.
+            following = self.pos
+            while following < len(self.lines) and not self.lines[following].strip():
+                following += 1
+            if following >= len(self.lines):
+                break
+
+            next_line = self.lines[following]
             raw_next_indent = len(next_line) - len(next_line.lstrip(" "))
             # Normalize next line's indentation
             next_indent = max(0, raw_next_indent - (self.base_indentation or 0))
 
-            if next_line.strip() and next_indent > indent:
-                # This is a child
-                child = self._parse_element(child_indent if not children else indent + 2)
-                if child:
-                    children.append(child)
-            else:
+            if next_indent <= indent:
                 break
+
+            # This is a child
+            self.pos = following
+            child = self._parse_element(child_indent if not children else indent + 2)
+            if child:
+                children.append(child)
 
         if children:
             element["children"] = children

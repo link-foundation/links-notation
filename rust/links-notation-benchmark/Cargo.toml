@@ -12,7 +12,7 @@ name = "benchmark"
 path = "src/main.rs"
 
 [dependencies]
-links-notation = { version = "0.18.0", path = "../links-notation" }
+links-notation = { version = "0.19.0", path = "../links-notation" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0", features = ["preserve_order"] }
 tiktoken-rs = "0.12.0"

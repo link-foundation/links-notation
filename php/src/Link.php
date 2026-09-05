@@ -129,8 +129,10 @@ class Link
             return '""';
         }
 
-        // Check if single quotes are needed
-        $needsSingleQuotes = false;
+        // Check if single quotes are needed. A reference that begins with a "#"
+        // is quoted too, or it would read back as a comment; a "#" anywhere else
+        // is content (issue#1047), so only the first character matters.
+        $needsSingleQuotes = str_starts_with($reference, '#');
         foreach ([':', '(', ')', ' ', "\t", "\n", "\r", '"'] as $character) {
             if (str_contains($reference, $character)) {
                 $needsSingleQuotes = true;

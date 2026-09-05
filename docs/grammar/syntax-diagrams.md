@@ -5,7 +5,9 @@ Links Notation grammar.
 
 ## Document
 
-A document consists of links separated by whitespace.
+A document consists of links separated by whitespace. Comments are blanked
+before any of the rules below apply, so no diagram here ever sees a `#`
+comment.
 
 ```text
                           ┌───────────────────┐
@@ -24,6 +26,50 @@ Document ─────┬───────────┤ skip_empty_lines
               └──────────▶│       EOF         │
                           └───────────────────┘
 ```
+
+## Comments
+
+A `#` written where a reference could begin hides the rest of the line it
+stands on.
+
+```text
+              ┌───────────────┐     ┌─────────────────────────────┐
+comment ──────┤ comment_start ├──┬──┤ any character but a newline ├──┬──▶
+              └───────────────┘  │  └─────────────────────────────┘  │
+                                 │                 ▲                 │
+                                 │                 └─────────────────┘
+                                 │
+                                 └──────────────────────────────────────▶
+```
+
+A `#` opens a comment only at the start of the document or after a space, a
+tab or a newline, so a `#` inside a token (`issue#1047`) stays an ordinary
+character, as does a `#` inside a delimited reference (`"#"`).
+
+```text
+                      ┌─────────────────────┐   ┌─────┐
+comment_start ───┬────┤  start of document  ├───┤  #  ├───┬───▶
+                 │    └─────────────────────┘   └─────┘   │
+                 │    ┌─────────────────────┐   ┌─────┐   │
+                 └────┤  space, tab or a    ├───┤  #  ├───┘
+                      │  newline (\n, \r)   │   └─────┘
+                      └─────────────────────┘
+```
+
+A comment is blanked rather than removed: each of its characters becomes a
+space, so everything written after it keeps the offset, line and column it was
+written at, and a parse error still points at the right character.
+
+```text
+    Written:  stage: rust # the toolchain this job pins
+    Read:     stage: rust
+                          ^ from here to the end of the line: spaces
+```
+
+A line left holding nothing but spaces separates links the way an empty line
+does, and does not end an indented block, so a comment can stand between the
+children of a link.
+
 
 ## Links Block
 
@@ -302,6 +348,9 @@ symbol            ║  • Space ( )                          ║
                   ╚═══════════════════════════════════════╝
 ```
 
+A `#` is a valid reference symbol - `issue#1047` is one reference - but a `#`
+written where a reference could begin opens a comment instead.
+
 ## Indentation State Machine
 
 ```text
@@ -472,6 +521,7 @@ symbol            ║  • Space ( )                          ║
 │  │  `  - Backtick delimiter                                           ││
 │  │  "" - The empty reference (a bare delimiter pair)                  ││
 │  │  ␣  - Space (value separator, indentation)                         ││
+│  │  #  - Comment, until the end of the line it stands on              ││
 │  └────────────────────────────────────────────────────────────────────┘│
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘

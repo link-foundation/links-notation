@@ -16,30 +16,30 @@ fn syntax_error(document: &str) -> SyntaxError {
 
 #[test]
 fn test_reports_the_line_and_column_of_the_defect() {
-    // The example from the issue: the defect is the colon on line 2, and the
-    // two lines after it are fine.
-    let error = syntax_error("# ok line\n# break: two\nci_gate x\n  stage rust");
+    // The defect is the second colon on line 2, and the two lines after it are
+    // fine.
+    let error = syntax_error("ci_gate x\nstage: rust: nextest\nnext stage\n  clippy");
 
     assert_eq!(error.line, 2);
-    assert_eq!(error.column, 8);
+    assert_eq!(error.column, 12);
     assert_eq!(error.found, Some(':'));
 }
 
 #[test]
 fn test_offset_agrees_with_the_javascript_port() {
-    // JavaScript reports { offset: 17, line: 2, column: 8 } for this document.
-    let error = syntax_error("# ok line\n# break: two\n");
+    // JavaScript reports { offset: 21, line: 2, column: 12 } for this document.
+    let error = syntax_error("ci_gate x\nstage: rust: nextest\n");
 
-    assert_eq!(error.offset, 17);
+    assert_eq!(error.offset, 21);
     assert_eq!(error.line, 2);
-    assert_eq!(error.column, 8);
+    assert_eq!(error.column, 12);
 }
 
 #[test]
 fn test_points_at_the_defect_rather_than_at_the_line_it_starts_on() {
     // `nom` reports this failure at the start of line 2, because that is where
-    // the document last parsed cleanly. The defect is seven characters later.
-    let error = syntax_error("# ok line\n# break: two\n");
+    // the document last parsed cleanly. The defect is eleven characters later.
+    let error = syntax_error("ci_gate x\nstage: rust: nextest\n");
 
     assert_ne!(error.column, 1);
     assert_eq!(&error.line_text[error.column - 1..error.column], ":");
@@ -86,19 +86,22 @@ fn test_reports_an_unmatched_closing_parenthesis() {
 
 #[test]
 fn test_summary_reads_as_a_sentence() {
-    let error = syntax_error("# ok line\n# break: two\n");
+    let error = syntax_error("ci_gate x\nstage: rust: nextest\n");
 
     assert_eq!(
         error.summary(),
-        r#"line 2, column 8: expected "(", a reference or end of line, found ":""#
+        r#"line 2, column 12: expected "(", a reference or end of line, found ":""#
     );
 }
 
 #[test]
 fn test_snippet_points_a_caret_at_the_offending_character() {
-    let error = syntax_error("# ok line\n# break: two\n");
+    let error = syntax_error("ci_gate x\nstage: rust: nextest\n");
 
-    assert_eq!(error.snippet(), "2 | # break: two\n  |        ^");
+    assert_eq!(
+        error.snippet(),
+        "2 | stage: rust: nextest\n  |            ^"
+    );
 }
 
 #[test]
@@ -106,11 +109,11 @@ fn test_message_quotes_one_line_rather_than_the_rest_of_the_document() {
     // The whole complaint in #302: the message used to carry the entire
     // unconsumed remainder, so it grew with the size of the document.
     let tail = "trailing line\n".repeat(500);
-    let document = format!("# ok line\n# break: two\n{tail}");
+    let document = format!("ci_gate x\nstage: rust: nextest\n{tail}");
 
     let message = format!("{}", parse_lino(&document).unwrap_err());
 
-    assert!(message.contains("line 2, column 8"), "{message}");
+    assert!(message.contains("line 2, column 12"), "{message}");
     assert!(!message.contains("trailing line"), "{message}");
     assert!(message.len() < 200, "message is {} bytes", message.len());
 }
@@ -153,7 +156,7 @@ fn test_nom_internals_stay_out_of_the_message() {
 
 #[test]
 fn test_both_entry_points_report_the_same_position() {
-    let document = "# ok line\n# break: two\n";
+    let document = "ci_gate x\nstage: rust: nextest\n";
 
     let one = syntax_error(document);
     let Err(ParseError::SyntaxError(many)) = parse_lino_to_links(document) else {
