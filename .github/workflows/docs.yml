@@ -5,10 +5,32 @@ on:
     branches: main
     paths:
       - 'docs/comparison/**'
+      - 'scripts/create-test-case-comparison.mjs'
+      - 'TEST_CASE_COMPARISON.md'
+      - 'README.md'
+      - 'README.ru.md'
+      - 'python/tests/**'
+      - 'js/tests/**'
+      - 'rust/links-notation/tests/**'
+      - 'csharp/Link.Foundation.Links.Notation.Tests/**'
+      - 'go/*_test.go'
+      - 'java/src/test/**'
+      - 'php/tests/**'
       - '.github/workflows/docs.yml'
   pull_request:
     paths:
       - 'docs/comparison/**'
+      - 'scripts/create-test-case-comparison.mjs'
+      - 'TEST_CASE_COMPARISON.md'
+      - 'README.md'
+      - 'README.ru.md'
+      - 'python/tests/**'
+      - 'js/tests/**'
+      - 'rust/links-notation/tests/**'
+      - 'csharp/Link.Foundation.Links.Notation.Tests/**'
+      - 'go/*_test.go'
+      - 'java/src/test/**'
+      - 'php/tests/**'
       - '.github/workflows/docs.yml'
   workflow_dispatch:
     inputs:
@@ -63,3 +85,33 @@ jobs:
         run: |
           npm --prefix docs/comparison run generate
           git --no-pager diff -- docs/comparison
+
+  test-cases:
+    # TEST_CASE_COMPARISON.md says which of the seven implementations has which
+    # test. It is generated from the test files themselves, so a test added in
+    # one language and forgotten in the others shows up as a gap in the table
+    # rather than as a document that quietly went stale.
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-test-cases
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Check the test case comparison
+        run: |
+          set -euo pipefail
+          if [ "$CI_VERBOSE" = "true" ]; then set -x; fi
+          node scripts/create-test-case-comparison.mjs --check
+      - name: Show what drifted
+        # --check does not write, so regenerate to turn the failure into a diff
+        # the author can read and apply.
+        if: failure()
+        run: |
+          node scripts/create-test-case-comparison.mjs
+          git --no-pager diff -- TEST_CASE_COMPARISON.md

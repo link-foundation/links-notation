@@ -167,33 +167,48 @@ language-specific documentation:
 - **[Python README](python/README.md)** - Python package guide
 - **[Go README](go/README.md)** - Go package guide
 - **[Java README](java/README.md)** - Java/Maven package guide
+- **[PHP README](php/README.md)** - PHP/Composer package guide
 
 Additional resources:
 
-- [Test Case Comparison](TEST_CASE_COMPARISON.md) - Comprehensive test coverage comparison across all 6 language implementations
+- [Test Case Comparison](TEST_CASE_COMPARISON.md) - Test-by-test coverage comparison across all seven language implementations
 - [Links Theory 0.0.2](https://habr.com/en/articles/895896) - Theoretical
   foundation that Links Notation fully supports
 
 ## Test Coverage & Implementation Parity
 
-All six language implementations (C#, JavaScript, Rust, Python, Go, Java) maintain **equivalent core functionality** with comprehensive test coverage:
+All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP) maintain
+**equivalent core functionality**, and the overlap is verified test by test rather than asserted:
 
-- **Python**: 108 tests across 10 categories - All passing ✅
-- **JavaScript**: 109 tests across 11 categories - All passing ✅
-- **Rust**: 110 tests across 11 categories - All passing ✅
-- **C#**: 111 tests across 12 categories - All passing ✅
-- **Go**: 90+ tests across 10 categories - All passing ✅
-- **Java**: 117 tests across 7 categories - All passing ✅
+<!-- test-counts:start -->
+| Language | Tests | Test categories |
+| --- | --- | --- |
+| Python | 146 | 14 |
+| JavaScript | 204 | 16 |
+| Rust | 283 | 18 |
+| C# | 196 | 17 |
+| Go | 86 | 10 |
+| Java | 133 | 9 |
+| PHP | 183 | 16 |
+<!-- test-counts:end -->
 
-**90+ tests match identically** across all languages, verifying functional equivalence. See [TEST_CASE_COMPARISON.md](TEST_CASE_COMPARISON.md) for the complete cross-language test comparison with links to source code.
+The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files
+themselves and also produces [TEST_CASE_COMPARISON.md](TEST_CASE_COMPARISON.md) - the full matrix
+of which implementation has which test, each cell linking to the test. The `docs` workflow runs
+that script with `--check` on every pull request, so a test added in one language and forgotten in
+the others shows up as a gap in the matrix instead of as a README that quietly went stale. It used
+to be a hand-written list, and had drifted to six languages and six wrong counts.
 
 ### Known Implementation Differences
 
-Some language-specific features are documented as intentional:
+Some language-specific features are intentional:
 
-- **Python**: Does not implement `LinksGroup` or multiline quoted strings
-- **JS**: Does not implement Python's `FormatConfig` feature or tuple conversion
-- **C#**: Supports tuple conversion via implicit operators (C#-specific feature)
-- **Rust**: Supports tuple conversion via `From` trait implementations (Rust-specific feature)
+- **`LinksGroup`** - a parsed group of links kept as one object - exists in
+  [JavaScript](js/src/LinksGroup.js), [C#](csharp/Link.Foundation.Links.Notation/LinksGroup.cs) and
+  [Java](java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java). Python, Rust,
+  Go and PHP expose the same structure as nested `Link` values instead.
+- **Tuple conversion** - building a link from a language tuple - is offered where the language has
+  the syntax for it: [C#](csharp/Link.Foundation.Links.Notation/Link.cs) via implicit operators and
+  [Rust](rust/links-notation/src/lib.rs) via `From` implementations.
 
 These differences are by design and do not affect core parsing/formatting functionality.
