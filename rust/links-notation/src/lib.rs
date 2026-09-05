@@ -26,8 +26,8 @@ pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 pub enum ParseError {
     /// Input string is empty or contains only whitespace
     EmptyInput,
-    /// Syntax error during parsing
-    SyntaxError(String),
+    /// The document does not parse, and this is where it stopped
+    SyntaxError(SyntaxError),
     /// Internal parser error
     InternalError(String),
 }
@@ -36,13 +36,187 @@ impl fmt::Display for ParseError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             ParseError::EmptyInput => write!(f, "Empty input"),
-            ParseError::SyntaxError(msg) => write!(f, "Syntax error: {}", msg),
+            ParseError::SyntaxError(error) => write!(f, "Syntax error at {}", error),
             ParseError::InternalError(msg) => write!(f, "Internal error: {}", msg),
         }
     }
 }
 
 impl StdError for ParseError {}
+
+/// The number of characters of the offending line an error message quotes.
+///
+/// A message has to fit in a log line, and the whole point of quoting one line
+/// of context is that the message does not grow with the size of the document.
+const QUOTED_LINE_WIDTH: usize = 80;
+
+/// What a message writes in place of the part of a long line it left out.
+const ELLIPSIS: &str = "...";
+
+/// A syntax error, with the position in the document it was found at.
+///
+/// The position is the furthest one the parser reached, which is the character
+/// the document stops making sense at rather than the point the last
+/// alternative gave up on.
+///
+/// # Examples
+/// ```
+/// use links_notation::{parse_lino, ParseError};
+///
+/// let error = parse_lino("# ok line\n# break: two\n").unwrap_err();
+/// let ParseError::SyntaxError(error) = error else { panic!("expected a syntax error") };
+/// assert_eq!((error.line, error.column), (2, 8));
+/// assert_eq!(error.found, Some(':'));
+/// ```
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct SyntaxError {
+    /// Byte offset of the offending position from the start of the document.
+    pub offset: usize,
+    /// Line the offending position is on, counted from 1.
+    pub line: usize,
+    /// Column the offending position is at, in characters, counted from 1.
+    pub column: usize,
+    /// What could have continued the document at this position. Empty when the
+    /// parser stopped somewhere it names no expectation for.
+    pub expected: Vec<String>,
+    /// The character found instead, or `None` at the end of the document.
+    pub found: Option<char>,
+    /// The offending line, as written, without its line ending.
+    pub line_text: String,
+}
+
+impl SyntaxError {
+    /// The one-line summary: where the parser stopped, what could have stood
+    /// there and what does.
+    ///
+    /// # Examples
+    /// ```
+    /// use links_notation::{parse_lino, ParseError};
+    ///
+    /// let ParseError::SyntaxError(error) = parse_lino("a: b: c").unwrap_err() else {
+    ///     panic!("expected a syntax error")
+    /// };
+    /// assert_eq!(
+    ///     error.summary(),
+    ///     r#"line 1, column 5: expected "(", a reference or end of line, found ":""#
+    /// );
+    /// ```
+    pub fn summary(&self) -> String {
+        let found = match self.found {
+            Some(character) => format!("\"{}\"", character.escape_debug()),
+            None => "end of input".to_string(),
+        };
+        match join_alternatives(&self.expected) {
+            Some(expected) => format!(
+                "line {}, column {}: expected {}, found {}",
+                self.line, self.column, expected, found
+            ),
+            None => format!(
+                "line {}, column {}: unexpected {}",
+                self.line, self.column, found
+            ),
+        }
+    }
+
+    /// The offending line with a caret under the offending column, quoted the
+    /// way `rustc` quotes source.
+    ///
+    /// A long line is shown as a window around the caret, so the message stays
+    /// the same size whether the document has ten lines or fifteen hundred.
+    ///
+    /// # Examples
+    /// ```
+    /// use links_notation::{parse_lino, ParseError};
+    ///
+    /// let ParseError::SyntaxError(error) = parse_lino("a: b: c").unwrap_err() else {
+    ///     panic!("expected a syntax error")
+    /// };
+    /// assert_eq!(error.snippet(), "1 | a: b: c\n  |     ^");
+    /// ```
+    pub fn snippet(&self) -> String {
+        let (quoted, column) = quote_line(&self.line_text, self.column);
+        let number = self.line.to_string();
+        let gutter = " ".repeat(number.len());
+        format!(
+            "{} | {}\n{} | {}^",
+            number,
+            quoted,
+            gutter,
+            " ".repeat(column - 1)
+        )
+    }
+}
+
+impl fmt::Display for SyntaxError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}\n{}", self.summary(), self.snippet())
+    }
+}
+
+impl StdError for SyntaxError {}
+
+/// Writes alternatives the way prose does: `a`, `a or b`, `a, b or c`.
+fn join_alternatives(alternatives: &[String]) -> Option<String> {
+    match alternatives {
+        [] => None,
+        [only] => Some(only.clone()),
+        [rest @ .., last] => Some(format!("{} or {}", rest.join(", "), last)),
+    }
+}
+
+/// Cuts `line` down to a window around `column`, and says which column the
+/// offending character sits at in that window. Both columns count from 1.
+fn quote_line(line: &str, column: usize) -> (String, usize) {
+    let characters: Vec<char> = line.chars().collect();
+    if characters.len() <= QUOTED_LINE_WIDTH {
+        return (line.to_string(), column);
+    }
+
+    let target = column - 1;
+    let last_start = characters.len() - QUOTED_LINE_WIDTH;
+    let start = target.saturating_sub(QUOTED_LINE_WIDTH / 2).min(last_start);
+    let end = start + QUOTED_LINE_WIDTH;
+
+    let mut quoted = String::new();
+    if start > 0 {
+        quoted.push_str(ELLIPSIS);
+    }
+    quoted.extend(&characters[start..end]);
+    if end < characters.len() {
+        quoted.push_str(ELLIPSIS);
+    }
+
+    let shift = if start > 0 {
+        ELLIPSIS.chars().count()
+    } else {
+        0
+    };
+    (quoted, target - start + shift + 1)
+}
+
+/// Turns the position the parser stopped at into a line, a column and the line
+/// itself, so the message can point at the defect instead of quoting the rest
+/// of the document.
+fn locate(document: &str, failure: parser::ParseFailure) -> SyntaxError {
+    let offset = failure.offset.min(document.len());
+    let before = &document[..offset];
+    let line = before.matches('\n').count() + 1;
+    let line_start = before.rfind('\n').map_or(0, |position| position + 1);
+    let column = document[line_start..offset].chars().count() + 1;
+    let line_end = document[line_start..]
+        .find('\n')
+        .map_or(document.len(), |position| line_start + position);
+    let line_text = document[line_start..line_end].trim_end_matches('\r');
+
+    SyntaxError {
+        offset,
+        line,
+        column,
+        expected: failure.expected.iter().map(|s| s.to_string()).collect(),
+        found: document[offset..].chars().next(),
+        line_text: line_text.to_string(),
+    }
+}
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum LiNo<T> {
@@ -617,8 +791,8 @@ pub fn parse_lino(document: &str) -> Result<LiNo<String>, ParseError> {
         });
     }
 
-    match parser::parse_document(document) {
-        Ok((_, links)) => {
+    match parser::parse_document_with_diagnostics(document) {
+        Ok(links) => {
             if links.is_empty() {
                 Ok(LiNo::Link {
                     id: None,
@@ -633,7 +807,7 @@ pub fn parse_lino(document: &str) -> Result<LiNo<String>, ParseError> {
                 })
             }
         }
-        Err(e) => Err(ParseError::SyntaxError(format!("{:?}", e))),
+        Err(failure) => Err(ParseError::SyntaxError(locate(document, failure))),
     }
 }
 
@@ -644,8 +818,8 @@ pub fn parse_lino_to_links(document: &str) -> Result<Vec<LiNo<String>>, ParseErr
         return Ok(vec![]);
     }
 
-    match parser::parse_document(document) {
-        Ok((_, links)) => {
+    match parser::parse_document_with_diagnostics(document) {
+        Ok(links) => {
             if links.is_empty() {
                 Ok(vec![])
             } else {
@@ -654,7 +828,7 @@ pub fn parse_lino_to_links(document: &str) -> Result<Vec<LiNo<String>>, ParseErr
                 Ok(flattened)
             }
         }
-        Err(e) => Err(ParseError::SyntaxError(format!("{:?}", e))),
+        Err(failure) => Err(ParseError::SyntaxError(locate(document, failure))),
     }
 }
 

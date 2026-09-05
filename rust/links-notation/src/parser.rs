@@ -83,6 +83,39 @@ pub struct ParserState {
     indentation_stack: RefCell<Vec<usize>>,
     base_indentation: RefCell<Option<usize>>,
     nested_depth: RefCell<usize>,
+    furthest: RefCell<FurthestFailure>,
+}
+
+/// The furthest position any alternative reached before failing, and what could
+/// have continued the document there.
+///
+/// The parser backtracks, so the position the last alternative happens to fail
+/// at says little about where the document stops making sense: a defect in the
+/// middle of line two is reported by `nom` as "expected end of input" at the
+/// start of line two, because that is where the document last parsed cleanly.
+/// The furthest position reached is what a PEG parser points at, and it is what
+/// the JavaScript port reports.
+#[derive(Debug, Clone, Default)]
+struct FurthestFailure {
+    /// Address of the furthest failing position, as a pointer into the document
+    /// being parsed. Turned into an offset once the document is at hand again.
+    address: Option<usize>,
+    expected: Vec<&'static str>,
+}
+
+/// Where the parser stopped, and what it could have accepted there.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ParseFailure {
+    /// Byte offset into the document the parser stopped at.
+    pub offset: usize,
+    /// What could have continued the document at `offset`, in the wording used
+    /// by the error message. Empty when the failure came from a place that
+    /// names no expectation.
+    pub expected: Vec<&'static str>,
+    /// The `nom` error kind. An internal detail of this parser: it says which
+    /// combinator gave up, not what is wrong with the document, so it is kept
+    /// out of the error message and reachable only through `Debug`.
+    pub kind: Option<nom::error::ErrorKind>,
 }
 
 /// Indentation state of the context a parenthesized group was opened in.
@@ -103,6 +136,7 @@ impl ParserState {
             indentation_stack: RefCell::new(vec![0]),
             base_indentation: RefCell::new(None),
             nested_depth: RefCell::new(0),
+            furthest: RefCell::new(FurthestFailure::default()),
         }
     }
 
@@ -165,6 +199,71 @@ impl ParserState {
     pub fn is_inside_nested_context(&self) -> bool {
         *self.nested_depth.borrow() > 0
     }
+
+    /// Records that `what` could have continued the document at `at`, and that
+    /// nothing there did. Only the furthest such position is kept; every
+    /// expectation recorded at that same position is kept alongside it.
+    fn expected_at(&self, at: &str, what: &'static str) {
+        let address = at.as_ptr() as usize;
+        let mut furthest = self.furthest.borrow_mut();
+        match furthest.address {
+            Some(recorded) if recorded > address => {}
+            Some(recorded) if recorded == address => {
+                if !furthest.expected.contains(&what) {
+                    furthest.expected.push(what);
+                }
+            }
+            _ => {
+                furthest.address = Some(address);
+                furthest.expected = vec![what];
+            }
+        }
+    }
+
+    /// Turns everything recorded during a failed parse into a position in
+    /// `document`.
+    ///
+    /// `nom`'s own error position is the fallback and the floor: the parser
+    /// reached at least that far, whatever the tracked alternatives say.
+    fn failure(&self, document: &str, error: &nom::Err<nom::error::Error<&str>>) -> ParseFailure {
+        let base = document.as_ptr() as usize;
+        let (nom_offset, kind) = match error {
+            nom::Err::Error(e) | nom::Err::Failure(e) => (
+                (e.input.as_ptr() as usize).saturating_sub(base),
+                Some(e.code),
+            ),
+            nom::Err::Incomplete(_) => (document.len(), None),
+        };
+        let furthest = self.furthest.borrow();
+        let tracked = furthest
+            .address
+            .map(|address| address.saturating_sub(base))
+            .unwrap_or(0);
+        let offset = tracked.max(nom_offset).min(document.len());
+        let expected = if tracked == offset {
+            furthest.expected.clone()
+        } else {
+            // The tracked expectations belong to an earlier position, so they
+            // do not describe the place being reported.
+            Vec::new()
+        };
+        ParseFailure {
+            offset,
+            expected,
+            kind,
+        }
+    }
+}
+
+/// Fails the way `nom` does, after recording what was expected at `input`.
+fn expected<'a, T>(
+    input: &'a str,
+    state: &ParserState,
+    what: &'static str,
+    kind: nom::error::ErrorKind,
+) -> IResult<&'a str, T> {
+    state.expected_at(input, what);
+    Err(nom::Err::Error(nom::error::Error::new(input, kind)))
 }
 
 fn is_whitespace_char(c: char) -> bool {
@@ -320,25 +419,33 @@ fn backtick_quoted_dynamic(input: &str) -> IResult<&str, String> {
     parse_dynamic_quote_string(input, '`')
 }
 
-fn reference(input: &str) -> IResult<&str, String> {
+fn reference<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, String> {
     // Try quoted strings with dynamic quote detection (supports any N quotes)
     // Then fall back to simple unquoted reference
-    alt((
+    let parsed = alt((
         double_quoted_dynamic,
         single_quoted_dynamic,
         backtick_quoted_dynamic,
         simple_reference,
     ))
-    .parse(input)
+    .parse(input);
+    if parsed.is_err() {
+        state.expected_at(input, "a reference");
+    }
+    parsed
 }
 
 fn eol<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, &'a str> {
-    alt((
+    let parsed = alt((
         preceded(horizontal_whitespace, line_ending),
         preceded(horizontal_whitespace, eof),
         |i| nested_group_end(i, state),
     ))
-    .parse(input)
+    .parse(input);
+    if parsed.is_err() {
+        state.expected_at(input, "end of line");
+    }
+    parsed
 }
 
 /// Inside a parenthesized group the closing parenthesis ends the last line,
@@ -354,10 +461,7 @@ fn nested_group_end<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str,
     if rest.starts_with(')') {
         Ok((rest, ""))
     } else {
-        Err(nom::Err::Error(nom::error::Error::new(
-            input,
-            nom::error::ErrorKind::Char,
-        )))
+        expected(rest, state, "\")\"", nom::error::ErrorKind::Char)
     }
 }
 
@@ -381,7 +485,11 @@ fn strip_line_ending(input: &str) -> Option<&str> {
 }
 
 fn reference_or_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    alt((|i| nested_group(i, state), reference.map(Link::new_singlet))).parse(input)
+    alt((
+        |i| nested_group(i, state),
+        (|i| reference(i, state)).map(Link::new_singlet),
+    ))
+    .parse(input)
 }
 
 fn single_line_value_and_whitespace<'a>(
@@ -396,15 +504,31 @@ fn single_line_values<'a>(input: &'a str, state: &ParserState) -> IResult<&'a st
 }
 
 fn single_line_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    (
-        horizontal_whitespace,
-        reference,
-        horizontal_whitespace,
-        char(':'),
-        |i| single_line_values(i, state),
-    )
-        .map(|(_, id, _, _, values)| Link::new_link(Some(id), values))
-        .parse(input)
+    let (input, _) = horizontal_whitespace(input)?;
+    let (input, id) = reference(input, state)?;
+    let (input, _) = horizontal_whitespace(input)?;
+    let (input, _) = colon(input, state)?;
+    let (input, values) = single_line_values(input, state)?;
+    Ok((input, Link::new_link(Some(id), values)))
+}
+
+/// The colon that separates an identifier from its values.
+fn colon<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, char> {
+    character(':', input, state, "\":\"")
+}
+
+/// Matches one character, recording what was expected when it is not there.
+fn character<'a>(
+    wanted: char,
+    input: &'a str,
+    state: &ParserState,
+    what: &'static str,
+) -> IResult<&'a str, char> {
+    let parsed: IResult<&'a str, char> = char(wanted).parse(input);
+    match parsed {
+        Ok(parsed) => Ok(parsed),
+        Err(_) => expected(input, state, what, nom::error::ErrorKind::Char),
+    }
 }
 
 fn single_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
@@ -424,18 +548,18 @@ fn single_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'
 }
 
 fn indented_id_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    (reference, horizontal_whitespace, char(':'), |i| {
-        eol(i, state)
-    })
-        .map(|(id, _, _, _)| Link::new_indented_id(id))
-        .parse(input)
+    let (input, id) = reference(input, state)?;
+    let (input, _) = horizontal_whitespace(input)?;
+    let (input, _) = colon(input, state)?;
+    let (input, _) = eol(input, state)?;
+    Ok((input, Link::new_indented_id(id)))
 }
 
 /// A parenthesized group opens a nested context: its body starts fresh at
 /// indentation level zero and is parsed with the same rules as the root
 /// document, so indentation is structural inside parentheses as well.
 fn nested_group<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    let (body_input, _) = char('(').parse(input)?;
+    let (body_input, _) = character('(', input, state, "\"(\"")?;
     let saved = state.enter_nested_context();
     let result = nested_group_body(body_input, state);
     state.exit_nested_context(saved);
@@ -445,12 +569,17 @@ fn nested_group<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Lin
 fn nested_group_body<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     if let Ok((rest, body)) = links(skip_empty_lines(input), state) {
         let (rest, _) = whitespace(rest)?;
-        let (rest, _) = char(')').parse(rest)?;
+        let (rest, _) = closing_parenthesis(rest, state)?;
         return Ok((rest, Link::new_nested(body)));
     }
     let (rest, _) = whitespace(input)?;
-    let (rest, _) = char(')').parse(rest)?;
+    let (rest, _) = closing_parenthesis(rest, state)?;
     Ok((rest, Link::new_nested(vec![])))
+}
+
+/// The parenthesis that closes a group.
+fn closing_parenthesis<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, char> {
+    character(')', input, state, "\")\"")
 }
 
 fn single_line_any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
@@ -541,18 +670,39 @@ fn links<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>>
 
 pub fn parse_document(input: &str) -> IResult<&str, Vec<Link>> {
     let state = ParserState::new();
+    document(input, &state)
+}
 
+/// Parses a document and, when it does not parse, says where it stopped.
+///
+/// `parse_document` reports a failure the way `nom` does: with the whole
+/// unconsumed remainder of the input and the combinator that gave up. Neither
+/// tells a reader which line to look at, and the remainder grows with the size
+/// of the document. This is the entry point the library uses.
+pub fn parse_document_with_diagnostics(input: &str) -> Result<Vec<Link>, ParseFailure> {
+    let state = ParserState::new();
+    match document(input, &state) {
+        Ok((_, links)) => Ok(links),
+        Err(error) => Err(state.failure(input, &error)),
+    }
+}
+
+fn document<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>> {
     // Skip leading blank lines but preserve the line structure
-    let input = skip_empty_lines(input);
+    let document = skip_empty_lines(input);
 
     // Handle empty or whitespace-only documents
-    if input.trim().is_empty() {
+    if document.trim().is_empty() {
         return Ok(("", vec![]));
     }
 
-    let (input, result) = links(input, &state)?;
-    let (input, _) = whitespace(input)?;
-    let (input, _) = eof(input)?;
+    let (rest, result) = links(document, state)?;
+    let (rest, _) = whitespace(rest)?;
+    let end: IResult<&'a str, &'a str> = eof(rest);
+    let (rest, _) = match end {
+        Ok(parsed) => parsed,
+        Err(_) => return expected(rest, state, "end of input", nom::error::ErrorKind::Eof),
+    };
 
-    Ok((input, result))
+    Ok((rest, result))
 }
