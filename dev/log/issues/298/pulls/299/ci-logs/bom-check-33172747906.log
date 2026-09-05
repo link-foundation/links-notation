@@ -1,0 +1,61 @@
+check-bom-consistency	Check for Unicode BOM in text files	﻿2026-08-28T12:50:29.7738470Z ##[group]Run echo "Checking for files with Unicode BOM..."
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7739852Z ^[[36;1mecho "Checking for files with Unicode BOM..."^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7741091Z ^[[36;1mecho "Repository standard: NO BOM (UTF-8 without BOM)"^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7742160Z ^[[36;1mecho ""^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7742688Z ^[[36;1m^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7743462Z ^[[36;1m# Find all text files that contain BOM (EF BB BF at start)^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7744975Z ^[[36;1m# Exclude binary files, .git directory, and common binary extensions^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7746237Z ^[[36;1mfiles_with_bom=""^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7747184Z ^[[36;1m^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7747829Z ^[[36;1mwhile IFS= read -r -d '' file; do^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7748841Z ^[[36;1m  # Check if file starts with UTF-8 BOM (EF BB BF)^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7750073Z ^[[36;1m  if head -c 3 "$file" | od -An -tx1 | grep -q "ef bb bf"; then^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7751295Z ^[[36;1m    files_with_bom="$files_with_bom$file"$'\n'^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7752197Z ^[[36;1m  fi^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7752790Z ^[[36;1mdone < <(find . -type f \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7753545Z ^[[36;1m  -not -path './.git/*' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7754291Z ^[[36;1m  -not -name '*.png' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7754997Z ^[[36;1m  -not -name '*.jpg' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7755715Z ^[[36;1m  -not -name '*.jpeg' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7756435Z ^[[36;1m  -not -name '*.gif' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7757259Z ^[[36;1m  -not -name '*.ico' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7757980Z ^[[36;1m  -not -name '*.woff' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7758703Z ^[[36;1m  -not -name '*.woff2' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7759451Z ^[[36;1m  -not -name '*.ttf' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7760149Z ^[[36;1m  -not -name '*.eot' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7760852Z ^[[36;1m  -not -name '*.pdf' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7761550Z ^[[36;1m  -not -name '*.zip' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7762268Z ^[[36;1m  -not -name '*.tar' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7762971Z ^[[36;1m  -not -name '*.gz' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7763675Z ^[[36;1m  -not -name '*.lock' \^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7764380Z ^[[36;1m  -print0)^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7764940Z ^[[36;1m^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7765464Z ^[[36;1mif [ -n "$files_with_bom" ]; then^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7766710Z ^[[36;1m  echo "::error::The following files contain a Unicode BOM but should not"^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7768642Z ^[[36;1m  echo "ERROR: The following files contain Unicode BOM but should not:"^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7769909Z ^[[36;1m  echo "$files_with_bom"^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7770617Z ^[[36;1m  echo ""^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7771393Z ^[[36;1m  echo "To fix this, remove the BOM from these files."^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7772947Z ^[[36;1m  # printf, not echo: the point is to show the escape sequences^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7774280Z ^[[36;1m  # themselves, and echo is allowed to expand them.^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7775596Z ^[[36;1m  printf '%s\n' "You can use: sed -i '1s/^\xEF\xBB\xBF//' <filename>"^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7777130Z ^[[36;1m  echo "Or configure your editor to save files without BOM."^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7778213Z ^[[36;1m  exit 1^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7778735Z ^[[36;1melse^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7779565Z ^[[36;1m  echo "SUCCESS: All text files are consistent (no BOM found)."^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7780664Z ^[[36;1m  exit 0^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7781171Z ^[[36;1mfi^[[0m
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7828846Z shell: /usr/bin/bash -e {0}
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.7829602Z ##[endgroup]
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.8009888Z Checking for files with Unicode BOM...
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.8012057Z Repository standard: NO BOM (UTF-8 without BOM)
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:29.8013123Z 
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:30.8236450Z ##[error]The following files contain a Unicode BOM but should not
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:30.8244854Z ERROR: The following files contain Unicode BOM but should not:
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:30.8245970Z ./dev/log/issues/298/pulls/299/ci-logs/rust-33168552506-publishToCratesIO.log
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:30.8246700Z 
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:30.8246714Z 
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:30.8247356Z To fix this, remove the BOM from these files.
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:30.8248520Z You can use: sed -i '1s/^\xEF\xBB\xBF//' <filename>
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:30.8249914Z Or configure your editor to save files without BOM.
+check-bom-consistency	Check for Unicode BOM in text files	2026-08-28T12:50:30.8255414Z ##[error]Process completed with exit code 1.

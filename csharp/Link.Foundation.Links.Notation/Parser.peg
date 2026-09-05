@@ -3,151 +3,284 @@
 @using System.Linq
 @members
 {
-    // Field to store parsed multi-quote value
-    private string _multiQuoteValue;
+    // Value and length of the reference parsed by ParseQuotedStringAt.
+    private string _quoteValue;
+    private int _quoteLength;
 
     /// <summary>
-    /// Parse a multi-quote string dynamically for N >= 3 quotes.
-    /// Uses a universal procedural algorithm that handles any N.
-    /// Stores result in _multiQuoteValue field.
+    /// A body written between an even run of delimiters is substantive when it
+    /// holds at least one visible character and does not straddle a parenthesis.
+    /// An even run can always be read as delimiter pairs enclosing nothing, so the
+    /// n-quote reading is only taken when it carries something the pairs cannot.
     /// </summary>
-    /// <param name="input">The raw string including opening and closing quotes</param>
-    /// <param name="quoteChar">The quote character (", ', or `)</param>
-    /// <returns>True if parsing succeeded and the result matches the input length</returns>
-    private bool ParseMultiQuoteString(string input, char quoteChar)
+    private static bool IsSubstantiveBody(string content)
     {
-        _multiQuoteValue = null;
-        if (string.IsNullOrEmpty(input)) return false;
+        int depth = 0;
+        bool hasVisible = false;
+
+        foreach (var c in content)
+        {
+            if (c == '(')
+            {
+                depth++;
+            }
+            else if (c == ')')
+            {
+                depth--;
+                if (depth < 0) return false;
+            }
+
+            if (!char.IsWhiteSpace(c)) hasVisible = true;
+        }
+
+        return hasVisible && depth == 0;
+    }
+
+    /// <summary>
+    /// Universal procedural parser for N-quote references (any N >= 1), reading
+    /// from the given position of the subject. A run of an even number of
+    /// delimiters that does not open a reference with a substantive body is the
+    /// empty reference: the shortest reading, a bare delimiter pair enclosing
+    /// nothing, wins over a longer n-quote delimiter.
+    /// Stores the result in _quoteValue and its length in _quoteLength.
+    /// </summary>
+    /// <param name="subject">The whole input being parsed</param>
+    /// <param name="startPos">The position of the opening delimiter</param>
+    /// <param name="quoteChar">The delimiter character (", ', or `)</param>
+    /// <returns>True when a reference was read at that position</returns>
+    private bool ParseQuotedStringAt(string subject, int startPos, char quoteChar)
+    {
+        _quoteValue = null;
+        _quoteLength = 0;
+        if (subject == null || startPos >= subject.Length || subject[startPos] != quoteChar) return false;
 
         // Count opening quotes
         int quoteCount = 0;
-        while (quoteCount < input.Length && input[quoteCount] == quoteChar)
+        int pos = startPos;
+        while (pos < subject.Length && subject[pos] == quoteChar)
         {
             quoteCount++;
+            pos++;
         }
 
-        if (quoteCount < 3) return false; // Let explicit rules handle N=1 and N=2
+        bool isEvenRun = quoteCount % 2 == 0;
 
         string openClose = new string(quoteChar, quoteCount);
         string escapeSeq = new string(quoteChar, quoteCount * 2);
-        string escapeVal = new string(quoteChar, quoteCount);
 
-        int pos = quoteCount; // Start after opening quotes
         var content = new System.Text.StringBuilder();
-
-        while (pos < input.Length)
+        while (pos < subject.Length)
         {
             // Check for escape sequence (2*N quotes)
-            if (pos + escapeSeq.Length <= input.Length &&
-                input.Substring(pos, escapeSeq.Length) == escapeSeq)
+            if (pos + escapeSeq.Length <= subject.Length &&
+                string.CompareOrdinal(subject, pos, escapeSeq, 0, escapeSeq.Length) == 0)
             {
-                content.Append(escapeVal);
+                content.Append(openClose); // 2*N quotes become N quotes
                 pos += escapeSeq.Length;
                 continue;
             }
 
             // Check for closing quotes (exactly N quotes, not more)
-            if (pos + quoteCount <= input.Length &&
-                input.Substring(pos, quoteCount) == openClose)
+            if (pos + quoteCount <= subject.Length &&
+                string.CompareOrdinal(subject, pos, openClose, 0, quoteCount) == 0)
             {
-                // Make sure it's exactly N quotes (not followed by more of the same quote)
                 int afterClose = pos + quoteCount;
-                if (afterClose >= input.Length || input[afterClose] != quoteChar)
+                if (afterClose >= subject.Length || subject[afterClose] != quoteChar)
                 {
-                    // Found valid closing - check if we consumed the entire input
-                    if (afterClose == input.Length)
+                    // Found valid closing
+                    if (isEvenRun && !IsSubstantiveBody(content.ToString()))
                     {
-                        _multiQuoteValue = content.ToString();
-                        return true;
+                        return SetEmptyReference(isEvenRun, quoteCount);
                     }
-                    return false;
+                    _quoteValue = content.ToString();
+                    _quoteLength = afterClose - startPos;
+                    return true;
                 }
             }
 
             // Take next character
-            content.Append(input[pos]);
+            content.Append(subject[pos]);
             pos++;
         }
 
-        // No closing quotes found
-        return false;
+        // No valid closing found
+        return SetEmptyReference(isEvenRun, quoteCount);
+    }
+
+    private bool SetEmptyReference(bool isEvenRun, int quoteCount)
+    {
+        if (!isEvenRun) return false;
+        _quoteValue = string.Empty;
+        _quoteLength = quoteCount;
+        return true;
+    }
+
+    /// <summary>
+    /// Consumes one more character of the reference read by ParseQuotedStringAt.
+    /// </summary>
+    private bool ConsumeQuotedCharacter()
+    {
+        if (_quoteLength <= 1) return false;
+        _quoteLength--;
+        return true;
+    }
+
+    /// <summary>
+    /// Saved indentation context of an enclosing scope.
+    /// Every parenthesized group opens a nested context that starts fresh at
+    /// indentation level zero, so line breaks and indentation mean the same
+    /// thing at every depth.
+    /// </summary>
+    private sealed class IndentationContext
+    {
+        public IndentationContext(Stack<int> indentationStack, int baseIndentation, IndentationContext parent)
+        {
+            IndentationStack = indentationStack;
+            BaseIndentation = baseIndentation;
+            Parent = parent;
+        }
+
+        public Stack<int> IndentationStack { get; }
+
+        public int BaseIndentation { get; }
+
+        public IndentationContext Parent { get; }
+    }
+
+    /// <summary>
+    /// Start a fresh indentation context at the beginning of the document.
+    /// </summary>
+    private static void ResetState(Cursor state)
+    {
+        state["IndentationStack"] = NewIndentationStack();
+        state["BaseIndentation"] = -1;
+        state["NestedContext"] = null;
+    }
+
+    /// <summary>
+    /// Create an indentation stack that starts at level zero.
+    /// </summary>
+    private static Stack<int> NewIndentationStack()
+    {
+        var indentationStack = new Stack<int>();
+        indentationStack.Push(0);
+        return indentationStack;
+    }
+
+    /// <summary>
+    /// Save the current indentation context and start a fresh one, so that the
+    /// contents of a parenthesized group are read exactly like the root of the document.
+    /// </summary>
+    private static void EnterNestedContext(Cursor state)
+    {
+        state["NestedContext"] = new IndentationContext(
+            (Stack<int>)state["IndentationStack"],
+            (int)state["BaseIndentation"],
+            (IndentationContext)state["NestedContext"]);
+        state["IndentationStack"] = NewIndentationStack();
+        state["BaseIndentation"] = -1;
+    }
+
+    /// <summary>
+    /// Restore the indentation context that was saved when the group was opened.
+    /// </summary>
+    private static void ExitNestedContext(Cursor state)
+    {
+        var saved = (IndentationContext)state["NestedContext"];
+        if (saved != null)
+        {
+            state["IndentationStack"] = saved.IndentationStack;
+            state["BaseIndentation"] = saved.BaseIndentation;
+            state["NestedContext"] = saved.Parent;
+        }
+    }
+
+    /// <summary>
+    /// Check whether the parser is currently reading the contents of a parenthesized group.
+    /// </summary>
+    private static bool IsInsideNestedContext(Cursor state) => (IndentationContext)state["NestedContext"] != null;
+
+    /// <summary>
+    /// Turn the links of a nested (parenthesized) context into a single link.
+    /// The nested context is parsed with the same rules as the root, so it yields
+    /// a list of links; a single link is used as is, several links become the
+    /// values of one anonymous link.
+    /// </summary>
+    private static Link<string> NestedLink(IList<LinksGroup<string>> groups)
+    {
+        var links = groups.ToLinksList();
+        return links.Count == 1 ? links[0] : new Link<string>(links);
+    }
+
+    /// <summary>
+    /// Wrap a parenthesized group into a links group, remembering that it was written
+    /// with parentheses so that it keeps its own identifier and values.
+    /// </summary>
+    private static LinksGroup<string> ParenthesizedGroup(Link<string> link, IList<LinksGroup<string>> groups)
+    {
+        return new LinksGroup<string>(link, groups) { IsParenthesized = true };
     }
 }
-document <IList<Link<string>>> = #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = -1; } skipEmptyLines l:links _ eof { l.ToLinksList() } / #{ state["IndentationStack"] = new Stack<int>(); state["IndentationStack"].Push(0); state["BaseIndentation"] = -1; } _ eof { new List<Link<string>>() }
+document <IList<Link<string>>> = #{ ResetState(state); } skipEmptyLines l:links _ eof { l.ToLinksList() } / #{ ResetState(state); } _ eof { new List<Link<string>>() }
 skipEmptyLines = ([ \t]* [\r\n])*
 links <IList<LinksGroup<string>>> = fl:firstLine list:line* POP_INDENTATION { new List<LinksGroup<string>> { fl }.Concat(list).ToList() }
 firstLine <LinksGroup<string>> = SET_BASE_INDENTATION l:element { l }
 line <LinksGroup<string>> = CHECK_INDENTATION l:element { l }
-element <LinksGroup<string>> = e:anyLink PUSH_INDENTATION l:links { new LinksGroup<string>(e, l) } / e:anyLink { new LinksGroup<string>(e) }
+element <LinksGroup<string>> = e:nestedGroup eol PUSH_INDENTATION l:links { ParenthesizedGroup(e, l) }
+/ e:nestedGroup eol { ParenthesizedGroup(e, null) }
+/ e:anyLink PUSH_INDENTATION l:links { new LinksGroup<string>(e, l) }
+/ e:anyLink { new LinksGroup<string>(e) }
 referenceOrLink <Link<string>> = l:multiLineAnyLink { l } / i:reference { i }
 anyLink <Link<string>> = ml:multiLineAnyLink eol { ml } / il:indentedIdLink { il } / sl:singleLineAnyLink { sl }
-multiLineAnyLink <Link<string>> = multiLineValueLink / multiLineLink
+multiLineAnyLink <Link<string>> = nestedGroup
 singleLineAnyLink <Link<string>> = fl:singleLineLink eol { fl } / vl:singleLineValueLink eol { vl }
-multiLineValueAndWhitespace <Link<string>> = value:referenceOrLink _ { value }
-multiLineValues <IList<Link<string>>> = _ list:multiLineValueAndWhitespace* { list }
+
+// A parenthesized group opens a nested context that follows exactly the same
+// rules as the root of the document: line breaks separate links and
+// indentation nests them, starting fresh at indentation level zero.
+// A group that holds nothing but another group keeps its own parentheses,
+// so that "((a b))" stays distinct from "(a b)".
+nestedGroup <Link<string>> = "(" _ inner:nestedGroup _ ")" { new Link<string>(new List<Link<string>> { inner }) }
+/ "(" ENTER_NESTED_CONTEXT body:nestedGroupBody { body }
+
+nestedGroupBody <Link<string>> = skipEmptyLines l:links _ ")" EXIT_NESTED_CONTEXT { NestedLink(l) }
+/ _ ")" EXIT_NESTED_CONTEXT { new Link<string>(new List<Link<string>>()) }
+
+ENTER_NESTED_CONTEXT = #{ EnterNestedContext(state); }
+EXIT_NESTED_CONTEXT = #{ ExitNestedContext(state); }
+
 singleLineValueAndWhitespace <Link<string>> = __ value:referenceOrLink { value }
 singleLineValues <IList<Link<string>>> = list:singleLineValueAndWhitespace+ { list }
 singleLineLink <Link<string>> = __ id:(reference) __ ":" v:singleLineValues { new Link<string>(id, v) }
-multiLineLink <Link<string>> = "(" _ id:(reference) _ ":" v:multiLineValues _ ")" { new Link<string>(id, v) }
 singleLineValueLink <Link<string>> = v:singleLineValues { new Link<string>(v) }
-multiLineValueLink <Link<string>> = "(" v:multiLineValues _ ")" { new Link<string>(v) }
 indentedIdLink <Link<string>> = id:(reference) __ ":" eol { new Link<string>(id) }
 
-// Reference can be quoted (with any number of quotes) or simple unquoted
-// Order: high quotes (3+) first, then double quotes (2), then single quotes (1), then simple
-// This ordering ensures proper precedence for quote matching
-reference <string> = highQuotedReference / doubleQuotedReference / singleQuotedReference / simpleReference
+// Reference can be quoted (with any number of delimiters N >= 1) or simple unquoted
+// Universal approach: use procedural parsing for all delimiter styles and counts
+reference <string> = quotedReference / simpleReference
 
 simpleReference <string> = "" referenceSymbol+
 
-// High quote references (N >= 3) - use universal procedural parsing
-// Lookahead for 3+ quotes, then capture and validate with the procedural parser
-highQuotedReference <string> = &('"""' / "'''" / '```') raw:highQuoteCapture { raw }
+quotedReference <string> = doubleQuotedUniversal / singleQuotedUniversal / backtickQuotedUniversal
 
-highQuoteCapture <string> = raw:highQuoteDoubleRaw &{ ParseMultiQuoteString(raw, '"') } { _multiQuoteValue }
-/ raw:highQuoteSingleRaw &{ ParseMultiQuoteString(raw, '\'') } { _multiQuoteValue }
-/ raw:highQuoteBacktickRaw &{ ParseMultiQuoteString(raw, '`') } { _multiQuoteValue }
+// Peek at the subject, parse procedurally, then consume exactly as many
+// characters as the procedural parser reported.
+doubleQuotedUniversal <string> = &'"' &{ ParseQuotedStringAt(state.Subject, state.Location, '"') } consumeQuoted { _quoteValue }
+singleQuotedUniversal <string> = &"'" &{ ParseQuotedStringAt(state.Subject, state.Location, '\'') } consumeQuoted { _quoteValue }
+backtickQuotedUniversal <string> = &'`' &{ ParseQuotedStringAt(state.Subject, state.Location, '`') } consumeQuoted { _quoteValue }
 
-// Raw capture for high quotes - greedily match quotes and content
-highQuoteDoubleRaw <string> = "" ('"'+ highQuoteDoubleContent* '"'+)
-highQuoteSingleRaw <string> = "" ("'"+ highQuoteSingleContent* "'"+)
-highQuoteBacktickRaw <string> = "" ('`'+ highQuoteBacktickContent* '`'+)
-
-// Content for high quotes: any char OR quote sequences followed by non-quote
-highQuoteDoubleContent = [^"] / '"'+ &[^"]
-highQuoteSingleContent = [^'] / "'"+ &[^']
-highQuoteBacktickContent = [^`] / '`'+ &[^`]
-
-// Double quotes (N=2) - explicit PEG rules for proper escape handling
-doubleQuotedReference <string> = doubleDoubleQuote / doubleSingleQuote / doubleBacktickQuote
-
-doubleDoubleQuote <string> = '""' r:doubleDoubleContent* '""' { string.Join("", r) }
-doubleDoubleContent <string> = '""""' { "\"\"" } / !'""' c:. { c.ToString() }
-
-doubleSingleQuote <string> = "''" r:doubleSingleContent* "''" { string.Join("", r) }
-doubleSingleContent <string> = "''''" { "''" } / !"''" c:. { c.ToString() }
-
-doubleBacktickQuote <string> = '``' r:doubleBacktickContent* '``' { string.Join("", r) }
-doubleBacktickContent <string> = '````' { "``" } / !'``' c:. { c.ToString() }
-
-// Single quotes (N=1) - explicit PEG rules for proper disambiguation
-// These are needed because single-quoted strings on the same line must be correctly parsed
-singleQuotedReference <string> = singleDoubleQuote / singleSingleQuote / singleBacktickQuote
-
-singleDoubleQuote <string> = '"' r:singleDoubleContent* '"' { string.Join("", r) }
-singleDoubleContent <string> = '""' { "\"" } / c:[^"] { c.ToString() }
-
-singleSingleQuote <string> = "'" r:singleSingleContent* "'" { string.Join("", r) }
-singleSingleContent <string> = "''" { "'" } / c:[^'] { c.ToString() }
-
-singleBacktickQuote <string> = '`' r:singleBacktickContent* '`' { string.Join("", r) }
-singleBacktickContent <string> = '``' { "`" } / c:[^`] { c.ToString() }
+consumeQuoted = "" (. consumeQuotedMore*)
+consumeQuotedMore = &{ ConsumeQuotedCharacter() } .
 
 SET_BASE_INDENTATION = spaces:" "* #{ if ((int)state["BaseIndentation"] == -1) state["BaseIndentation"] = spaces.Count; }
 PUSH_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] > (int)state["IndentationStack"].Peek() } #{ state["IndentationStack"].Push((int)state["NormalizedIndent"]); }
 POP_INDENTATION = #{ state["IndentationStack"].Pop(); }
 CHECK_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] >= (int)state["IndentationStack"].Peek() }
-eol = __ ("" [\r\n]+ / eof)
+eol = __ ("" [\r\n]+ / eof / nestedGroupEnd)
+
+// Inside a parenthesized group the closing parenthesis terminates a line the
+// same way the end of the input does at the root.
+nestedGroupEnd = &{ IsInsideNestedContext(state) } &")"
 eof = !.
 __ = [ \t]*
 _ = whiteSpaceSymbol*

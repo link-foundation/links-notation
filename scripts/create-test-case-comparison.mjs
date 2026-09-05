@@ -135,7 +135,11 @@ function extractJavaScriptTests(baseDir) {
  */
 function extractRustTests(baseDir) {
   const tests = {};
-  const testDir = join(baseDir, 'rust', 'tests');
+  // The Rust code lives in a Cargo workspace: the integration tests are in
+  // rust/links-notation/tests, not rust/tests. Pointing at the old path made
+  // this script crash with ENOENT, and the pre-commit hook that runs it fails
+  // the commit when regeneration fails.
+  const testDir = join(baseDir, 'rust', 'links-notation', 'tests');
 
   const files = readdirSync(testDir).filter(f => f.endsWith('_tests.rs')).sort();
 
@@ -167,7 +171,7 @@ function extractRustTests(baseDir) {
         original: testName,
         originalName: originalTestName,
         normalized: normalizeTestName(testName),
-        file: `rust/tests/${testFile}`,
+        file: `rust/links-notation/tests/${testFile}`,
         line: lineNum
       });
     }
@@ -347,10 +351,12 @@ function createComparisonDocument(baseDir, outputFile) {
       const rustTest = rustTestMap.get(normalizedTestName);
       const csTest = csTestMap.get(normalizedTestName);
 
-      const pyStatus = pyTest ? `[✅](${pyTest.file}:${pyTest.line})` : "❌";
-      const jsStatus = jsTest ? `[✅](${jsTest.file}:${jsTest.line})` : "❌";
-      const rustStatus = rustTest ? `[✅](${rustTest.file}:${rustTest.line})` : "❌";
-      const csStatus = csTest ? `[✅](${csTest.file}:${csTest.line})` : "❌";
+      // `#L<line>` is the anchor GitHub understands; a bare `file:line`
+      // suffix is part of the path there, so every link 404s.
+      const pyStatus = pyTest ? `[✅](${pyTest.file}#L${pyTest.line})` : "❌";
+      const jsStatus = jsTest ? `[✅](${jsTest.file}#L${jsTest.line})` : "❌";
+      const rustStatus = rustTest ? `[✅](${rustTest.file}#L${rustTest.line})` : "❌";
+      const csStatus = csTest ? `[✅](${csTest.file}#L${csTest.line})` : "❌";
 
       content += `| ${displayName} | ${pyStatus} | ${jsStatus} | ${rustStatus} | ${csStatus} |\n`;
     }

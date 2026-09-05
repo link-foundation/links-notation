@@ -1,13 +1,14 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=77.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "links-notation"
-version = "0.13.0"
+version = "0.16.1"
 description = "Python implementation of the Links Notation parser"
 readme = "README.md"
-license = {text = "Unlicense"}
+license = "Unlicense"
+license-files = ["LICENSE"]
 authors = [
     {name = "Link.Foundation", email = "drakonard@gmail.com"}
 ]
@@ -15,7 +16,6 @@ keywords = ["lino", "parser", "links", "notation", "protocol"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: Public Domain",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -29,9 +29,9 @@ requires-python = ">=3.9"
 dependencies = []
 
 [project.optional-dependencies]
-test = ["pytest>=7.0", "pytest-timeout>=2.1"]
-lint = ["black>=24.1", "isort>=5.13", "flake8>=7.0"]
-dev = ["pytest>=7.0", "pytest-timeout>=2.1", "black>=24.1", "isort>=5.13", "flake8>=7.0"]
+test = ["pytest>=9.1", "pytest-timeout>=2.4"]
+lint = ["black>=26.5", "isort>=9.0", "flake8>=7.3"]
+dev = ["pytest>=9.1", "pytest-timeout>=2.4", "black>=26.5", "isort>=9.0", "flake8>=7.3"]
 
 [project.urls]
 Homepage = "https://github.com/link-foundation/links-notation"

@@ -15,6 +15,9 @@ pub struct Link {
     pub values: Vec<Link>,
     pub children: Vec<Link>,
     pub is_indented_id: bool,
+    /// Body of a parenthesized group, kept unflattened until the whole document
+    /// is transformed. `None` for every link that is not a parenthesized group.
+    pub nested: Option<Vec<Link>>,
 }
 
 impl Link {
@@ -24,6 +27,7 @@ impl Link {
             values: vec![],
             children: vec![],
             is_indented_id: false,
+            nested: None,
         }
     }
 
@@ -33,6 +37,7 @@ impl Link {
             values: vec![],
             children: vec![],
             is_indented_id: true,
+            nested: None,
         }
     }
 
@@ -42,6 +47,7 @@ impl Link {
             values,
             children: vec![],
             is_indented_id: false,
+            nested: None,
         }
     }
 
@@ -51,6 +57,19 @@ impl Link {
             values,
             children: vec![],
             is_indented_id: false,
+            nested: None,
+        }
+    }
+
+    /// Creates a link that stands for a parenthesized group, keeping the links
+    /// parsed inside the parentheses as they were written.
+    pub fn new_nested(body: Vec<Link>) -> Self {
+        Link {
+            id: None,
+            values: vec![],
+            children: vec![],
+            is_indented_id: false,
+            nested: Some(body),
         }
     }
 
@@ -63,6 +82,13 @@ impl Link {
 pub struct ParserState {
     indentation_stack: RefCell<Vec<usize>>,
     base_indentation: RefCell<Option<usize>>,
+    nested_depth: RefCell<usize>,
+}
+
+/// Indentation state of the context a parenthesized group was opened in.
+pub struct SavedContext {
+    indentation_stack: Vec<usize>,
+    base_indentation: Option<usize>,
 }
 
 impl Default for ParserState {
@@ -76,6 +102,7 @@ impl ParserState {
         ParserState {
             indentation_stack: RefCell::new(vec![0]),
             base_indentation: RefCell::new(None),
+            nested_depth: RefCell::new(0),
         }
     }
 
@@ -112,6 +139,31 @@ impl ParserState {
 
     pub fn check_indentation(&self, indent: usize) -> bool {
         indent >= self.current_indentation()
+    }
+
+    /// Opens a nested context: the group body starts fresh at indentation level
+    /// zero and follows the same rules as the root document.
+    pub fn enter_nested_context(&self) -> SavedContext {
+        let saved = SavedContext {
+            indentation_stack: self.indentation_stack.replace(vec![0]),
+            base_indentation: self.base_indentation.replace(None),
+        };
+        *self.nested_depth.borrow_mut() += 1;
+        saved
+    }
+
+    /// Restores the context the parenthesized group was opened in.
+    pub fn exit_nested_context(&self, saved: SavedContext) {
+        *self.indentation_stack.borrow_mut() = saved.indentation_stack;
+        *self.base_indentation.borrow_mut() = saved.base_indentation;
+        let mut depth = self.nested_depth.borrow_mut();
+        if *depth > 0 {
+            *depth -= 1;
+        }
+    }
+
+    pub fn is_inside_nested_context(&self) -> bool {
+        *self.nested_depth.borrow() > 0
     }
 }
 
@@ -194,8 +246,39 @@ fn parse_multi_quote_string(
     }
 }
 
+/// A body written between an even run of delimiters is substantive when it
+/// holds at least one visible character and does not straddle a parenthesis.
+/// An even run can always be read as delimiter pairs enclosing nothing, so the
+/// n-quote reading is only taken when it carries something the pairs cannot.
+fn is_substantive_body(content: &str) -> bool {
+    let mut depth: isize = 0;
+    let mut has_visible = false;
+
+    for c in content.chars() {
+        match c {
+            '(' => depth += 1,
+            ')' => {
+                depth -= 1;
+                if depth < 0 {
+                    return false;
+                }
+            }
+            _ => {}
+        }
+        if !c.is_whitespace() {
+            has_visible = true;
+        }
+    }
+
+    has_visible && depth == 0
+}
+
 /// Parse a quoted string with dynamically detected quote count.
-/// Counts opening quotes and uses that count for parsing.
+///
+/// Counts opening quotes and uses that count for parsing. A run of an even
+/// number of delimiters that does not open a reference with a substantive body
+/// is the empty reference: the shortest reading, a bare delimiter pair
+/// enclosing nothing, wins over a longer n-quote delimiter.
 fn parse_dynamic_quote_string(input: &str, quote_char: char) -> IResult<&str, String> {
     // Count opening quotes
     let quote_count = input.chars().take_while(|&c| c == quote_char).count();
@@ -207,7 +290,22 @@ fn parse_dynamic_quote_string(input: &str, quote_char: char) -> IResult<&str, St
         )));
     }
 
-    parse_multi_quote_string(input, quote_char, quote_count)
+    let is_even_run = quote_count % 2 == 0;
+
+    if let Ok((rest, content)) = parse_multi_quote_string(input, quote_char, quote_count) {
+        if !is_even_run || is_substantive_body(&content) {
+            return Ok((rest, content));
+        }
+    }
+
+    if is_even_run {
+        return Ok((&input[quote_count * quote_char.len_utf8()..], String::new()));
+    }
+
+    Err(nom::Err::Error(nom::error::Error::new(
+        input,
+        nom::error::ErrorKind::Tag,
+    )))
 }
 
 fn double_quoted_dynamic(input: &str) -> IResult<&str, String> {
@@ -234,35 +332,56 @@ fn reference(input: &str) -> IResult<&str, String> {
     .parse(input)
 }
 
-fn eol(input: &str) -> IResult<&str, &str> {
+fn eol<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, &'a str> {
     alt((
         preceded(horizontal_whitespace, line_ending),
         preceded(horizontal_whitespace, eof),
+        |i| nested_group_end(i, state),
     ))
     .parse(input)
+}
+
+/// Inside a parenthesized group the closing parenthesis ends the last line,
+/// just like a line break does at the root.
+fn nested_group_end<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, &'a str> {
+    if !state.is_inside_nested_context() {
+        return Err(nom::Err::Error(nom::error::Error::new(
+            input,
+            nom::error::ErrorKind::Verify,
+        )));
+    }
+    let (rest, _) = horizontal_whitespace(input)?;
+    if rest.starts_with(')') {
+        Ok((rest, ""))
+    } else {
+        Err(nom::Err::Error(nom::error::Error::new(
+            input,
+            nom::error::ErrorKind::Char,
+        )))
+    }
+}
+
+/// Skips the line breaks and blank lines that separate `(` from the first line
+/// of the group body.
+fn skip_empty_lines(input: &str) -> &str {
+    let mut rest = input;
+    loop {
+        let line_start = rest.trim_start_matches(is_horizontal_whitespace);
+        match strip_line_ending(line_start) {
+            Some(next) => rest = next,
+            None => return rest,
+        }
+    }
+}
+
+fn strip_line_ending(input: &str) -> Option<&str> {
+    input
+        .strip_prefix("\r\n")
+        .or_else(|| input.strip_prefix('\n'))
 }
 
 fn reference_or_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    alt((
-        |i| multi_line_any_link(i, state),
-        reference.map(Link::new_singlet),
-    ))
-    .parse(input)
-}
-
-fn multi_line_value_and_whitespace<'a>(
-    input: &'a str,
-    state: &ParserState,
-) -> IResult<&'a str, Link> {
-    terminated(|i| reference_or_link(i, state), whitespace).parse(input)
-}
-
-fn multi_line_values<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>> {
-    preceded(
-        whitespace,
-        many0(|i| multi_line_value_and_whitespace(i, state)),
-    )
-    .parse(input)
+    alt((|i| nested_group(i, state), reference.map(Link::new_singlet))).parse(input)
 }
 
 fn single_line_value_and_whitespace<'a>(
@@ -288,21 +407,6 @@ fn single_line_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str,
         .parse(input)
 }
 
-fn multi_line_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    (
-        char('('),
-        whitespace,
-        reference,
-        whitespace,
-        char(':'),
-        |i| multi_line_values(i, state),
-        whitespace,
-        char(')'),
-    )
-        .map(|(_, _, id, _, _, values, _, _)| Link::new_link(Some(id), values))
-        .parse(input)
-}
-
 fn single_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     (|i| single_line_values(i, state))
         .map(|values| {
@@ -319,52 +423,47 @@ fn single_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'
         .parse(input)
 }
 
-fn indented_id_link<'a>(input: &'a str, _state: &ParserState) -> IResult<&'a str, Link> {
-    (reference, horizontal_whitespace, char(':'), eol)
+fn indented_id_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
+    (reference, horizontal_whitespace, char(':'), |i| {
+        eol(i, state)
+    })
         .map(|(id, _, _, _)| Link::new_indented_id(id))
         .parse(input)
 }
 
-fn multi_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    (
-        char('('),
-        |i| multi_line_values(i, state),
-        whitespace,
-        char(')'),
-    )
-        .map(|(_, values, _, _)| {
-            if values.len() == 1
-                && values[0].id.is_some()
-                && values[0].values.is_empty()
-                && values[0].children.is_empty()
-            {
-                Link::new_singlet(values[0].id.clone().unwrap())
-            } else {
-                Link::new_value(values)
-            }
-        })
-        .parse(input)
+/// A parenthesized group opens a nested context: its body starts fresh at
+/// indentation level zero and is parsed with the same rules as the root
+/// document, so indentation is structural inside parentheses as well.
+fn nested_group<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
+    let (body_input, _) = char('(').parse(input)?;
+    let saved = state.enter_nested_context();
+    let result = nested_group_body(body_input, state);
+    state.exit_nested_context(saved);
+    result
 }
 
-fn multi_line_any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    alt((
-        |i| multi_line_value_link(i, state),
-        |i| multi_line_link(i, state),
-    ))
-    .parse(input)
+fn nested_group_body<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
+    if let Ok((rest, body)) = links(skip_empty_lines(input), state) {
+        let (rest, _) = whitespace(rest)?;
+        let (rest, _) = char(')').parse(rest)?;
+        return Ok((rest, Link::new_nested(body)));
+    }
+    let (rest, _) = whitespace(input)?;
+    let (rest, _) = char(')').parse(rest)?;
+    Ok((rest, Link::new_nested(vec![])))
 }
 
 fn single_line_any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     alt((
-        terminated(|i| single_line_link(i, state), eol),
-        terminated(|i| single_line_value_link(i, state), eol),
+        terminated(|i| single_line_link(i, state), |i| eol(i, state)),
+        terminated(|i| single_line_value_link(i, state), |i| eol(i, state)),
     ))
     .parse(input)
 }
 
 fn any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     alt((
-        terminated(|i| multi_line_any_link(i, state), eol),
+        terminated(|i| nested_group(i, state), |i| eol(i, state)),
         |i| indented_id_link(i, state),
         |i| single_line_any_link(i, state),
     ))
@@ -376,7 +475,7 @@ fn count_indentation(input: &str) -> IResult<&str, usize> {
 }
 
 fn push_indentation<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, ()> {
-    let (input, spaces) = count_indentation(input)?;
+    let (input, spaces) = count_indentation(skip_empty_lines(input))?;
     let normalized_spaces = state.normalize_indentation(spaces);
     let current = state.current_indentation();
 
@@ -417,14 +516,16 @@ fn element<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
 }
 
 fn first_line<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    // Set base indentation from the first line
-    let (_, spaces) = count_indentation(input)?;
+    // Set base indentation from the first line and consume it, so that the first
+    // line is parsed exactly like every following line.
+    let (input, spaces) = count_indentation(input)?;
     state.set_base_indentation(spaces);
     element(input, state)
 }
 
 fn line<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    preceded(|i| check_indentation(i, state), |i| element(i, state)).parse(input)
+    // Blank lines do not break a document, they are simply skipped
+    preceded(|i| check_indentation(i, state), |i| element(i, state)).parse(skip_empty_lines(input))
 }
 
 fn links<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>> {
@@ -441,8 +542,8 @@ fn links<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>>
 pub fn parse_document(input: &str) -> IResult<&str, Vec<Link>> {
     let state = ParserState::new();
 
-    // Skip leading whitespace but preserve the line structure
-    let input = input.trim_start_matches(['\n', '\r']);
+    // Skip leading blank lines but preserve the line structure
+    let input = skip_empty_lines(input);
 
     // Handle empty or whitespace-only documents
     if input.trim().is_empty() {

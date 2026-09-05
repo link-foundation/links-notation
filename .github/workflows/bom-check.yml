@@ -5,13 +5,23 @@ on:
     branches: main
   pull_request:
     branches: main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   check-bom-consistency:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Check for Unicode BOM in text files
         run: |
@@ -47,11 +57,14 @@ jobs:
             -print0)
 
           if [ -n "$files_with_bom" ]; then
+            echo "::error::The following files contain a Unicode BOM but should not"
             echo "ERROR: The following files contain Unicode BOM but should not:"
             echo "$files_with_bom"
             echo ""
             echo "To fix this, remove the BOM from these files."
-            echo "You can use: sed -i '1s/^\xEF\xBB\xBF//' <filename>"
+            # printf, not echo: the point is to show the escape sequences
+            # themselves, and echo is allowed to expand them.
+            printf '%s\n' "You can use: sed -i '1s/^\xEF\xBB\xBF//' <filename>"
             echo "Or configure your editor to save files without BOM."
             exit 1
           else

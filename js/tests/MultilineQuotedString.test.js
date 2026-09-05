@@ -18,16 +18,18 @@ as another reference'
   expect(result.length).toBeGreaterThan(0);
   expect(result.length).toBe(1);
 
+  // The two references sit on separate lines inside the parentheses, so the
+  // nested context turns each of them into its own link.
   const link = result[0];
   expect(link.id).toBe(null);
   expect(link.values).toBeTruthy();
   expect(link.values.length).toBe(2);
 
-  expect(link.values[0].id).toBe(`long
+  expect(link.values[0].values[0].id).toBe(`long
 string literal representing
 the reference`);
 
-  expect(link.values[1].id).toBe(`another
+  expect(link.values[1].values[0].id).toBe(`another
 long string literal
 as another reference`);
 });

@@ -1,0 +1,5 @@
+- name: Home
+  href: README.md
+- name: API Documentation
+  href: obj/api/
+  homepage: obj/api/Link.Foundation.Links.Notation.yml

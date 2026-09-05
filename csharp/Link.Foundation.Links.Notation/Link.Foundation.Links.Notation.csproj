@@ -1,15 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Link.Foundation's Platform.Protocols.Lino Class Library</Description>
+    <Description>Link.Foundation's Links Notation parser and formatter for .NET</Description>
     <Copyright>Konstantin Diachenko</Copyright>
     <AssemblyTitle>Link.Foundation.Links.Notation</AssemblyTitle>
-    <VersionPrefix>0.13.0</VersionPrefix>
+    <VersionPrefix>0.16.1</VersionPrefix>
     <Authors>Konstantin Diachenko</Authors>
-    <TargetFramework>net8</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <PackageId>Link.Foundation.Links.Notation</PackageId>
     <PackageTags>Link.Foundation;Protocols.Lino;Lino;IListExtensions;Link;Parser</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/link-foundation/Documentation/18469f4d033ee9a5b7b84caab9c585acab2ac519/doc/Avatar-rainbow-icon-64x64.png</PackageIconUrl>
     <PackageProjectUrl>https://link-foundation.github.io/links-notation</PackageProjectUrl>
     <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -27,19 +26,21 @@
 Test cases suite is updated.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
     <RootNamespace>Link.Foundation.Links.Notation</RootNamespace>
+    <!-- CS1584/CS1658: Pegasus 4.1.0 emits an invalid <see cref="IList{Link{string}}"/>
+         in the generated parser; nested braces are not valid cref syntax.
+         Tracked upstream, see experiments/cref-repro. -->
     <NoWarn>$(NoWarn);CS8981;CS1591;CS1584;CS1658</NoWarn>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4')) AND '$(MSBuildRuntimeType)' == 'Core' AND '$(OS)' != 'Windows_NT'">
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.400" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Pegasus" Version="4.1.0" />
     <PackageReference Include="Platform.Collections" Version="0.4.0" />
   </ItemGroup>

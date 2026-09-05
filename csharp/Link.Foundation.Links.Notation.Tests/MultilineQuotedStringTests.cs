@@ -28,13 +28,15 @@ as another reference'
             Assert.NotNull(link.Values);
             Assert.Equal(2, link.Values.Count);
 
+            // The two references sit on separate lines inside the parentheses, so the
+            // nested context turns each of them into its own link.
             Assert.Equal(@"long
 string literal representing
-the reference", link.Values[0].Id);
+the reference", link.Values![0].Values![0].Id);
 
             Assert.Equal(@"another
 long string literal
-as another reference", link.Values[1].Id);
+as another reference", link.Values![1].Values![0].Id);
         }
 
         [Fact]

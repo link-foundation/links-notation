@@ -298,6 +298,9 @@ paket-files/
 __pycache__/
 *.pyc
 
+# setuptools metadata, written by `pip install -e python/`
+*.egg-info/
+
 # Cake - Uncomment if you are using it
 # tools/**
 # !tools/packages.config
@@ -342,3 +345,25 @@ venv/
 
 # java
 java/target/
+
+# PHP
+php/vendor/
+php/composer.lock
+php/.phpunit.cache/
+php/.phpunit.result.cache
+
+# DocFX output
+_site/
+csharp/pdf-artifact/
+csharp/fvextra.sty
+
+# lychee link-checker cache (see .github/workflows/links.yml)
+.lycheecache
+
+# The development log is a deliverable, not build output. Several rules above
+# are meant for build artefacts but match it by accident: `[Ll]og/` matches the
+# `dev/log/` directory itself, and `*.log` matches the CI logs collected under
+# it. Without these two lines every `dev/log` file has to be force-added, which
+# is how it gets forgotten.
+!dev/log/
+!dev/log/**

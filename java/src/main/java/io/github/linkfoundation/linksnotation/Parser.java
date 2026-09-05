@@ -80,48 +80,186 @@ public class Parser {
   }
 
   /**
+   * Report whether a body written between an even run of delimiters is substantive.
+   *
+   * <p>A substantive body holds at least one visible character and does not straddle a parenthesis.
+   * An even run can always be read as delimiter pairs enclosing nothing, so the n-quote reading is
+   * only taken when it carries something the pairs cannot.
+   */
+  private static boolean isSubstantiveBody(String content) {
+    int depth = 0;
+    boolean hasVisible = false;
+
+    for (int i = 0; i < content.length(); i++) {
+      char c = content.charAt(i);
+      if (c == '(') {
+        depth++;
+      } else if (c == ')') {
+        depth--;
+        if (depth < 0) {
+          return false;
+        }
+      }
+      if (!Character.isWhitespace(c)) {
+        hasVisible = true;
+      }
+    }
+
+    return hasVisible && depth == 0;
+  }
+
+  /** The decoded value of a delimited reference and the position right after it. */
+  private static final class QuotedString {
+    final String value;
+    final int end;
+
+    QuotedString(String value, int end) {
+      this.value = value;
+      this.end = end;
+    }
+  }
+
+  /**
+   * Parse the delimited reference starting at start.
+   *
+   * <p>Any number N of quotes opens and closes the string, 2*N quotes are an escaped quote
+   * sequence. A run of an even number of delimiters that does not open a reference with a
+   * substantive body is the empty reference: the shortest reading, a bare delimiter pair enclosing
+   * nothing, wins over a longer n-quote delimiter.
+   *
+   * <p>Returns null when text does not start a delimited reference.
+   */
+  private static QuotedString parseQuotedStringAt(String text, int start) {
+    if (start >= text.length()) {
+      return null;
+    }
+
+    char quoteChar = text.charAt(start);
+    if (quoteChar != '"' && quoteChar != '\'' && quoteChar != '`') {
+      return null;
+    }
+
+    int quoteCount = 0;
+    int pos = start;
+    while (pos < text.length() && text.charAt(pos) == quoteChar) {
+      quoteCount++;
+      pos++;
+    }
+
+    boolean isEvenRun = quoteCount % 2 == 0;
+    QuotedString emptyReference = isEvenRun ? new QuotedString("", start + quoteCount) : null;
+
+    String openClose = repeatChar(quoteChar, quoteCount);
+    String escapeSeq = repeatChar(quoteChar, quoteCount * 2);
+    StringBuilder content = new StringBuilder();
+
+    while (pos < text.length()) {
+      if (text.startsWith(escapeSeq, pos)) {
+        content.append(openClose);
+        pos += escapeSeq.length();
+        continue;
+      }
+      if (text.startsWith(openClose, pos)) {
+        int afterClose = pos + quoteCount;
+        if (afterClose >= text.length() || text.charAt(afterClose) != quoteChar) {
+          String value = content.toString();
+          if (isEvenRun && !isSubstantiveBody(value)) {
+            return emptyReference;
+          }
+          return new QuotedString(value, afterClose);
+        }
+      }
+      content.append(text.charAt(pos));
+      pos++;
+    }
+
+    return emptyReference;
+  }
+
+  /**
+   * Skip over the quoted string starting at start.
+   *
+   * <p>Returns the position right after the closing quotes, or -1 when text does not start a
+   * delimited reference.
+   */
+  private int skipQuotedString(String text, int start) {
+    QuotedString parsed = parseQuotedStringAt(text, start);
+    return parsed == null ? -1 : parsed.end;
+  }
+
+  /**
+   * Find the parenthesis closing the one at start.
+   *
+   * <p>Quoted strings are skipped, so parentheses inside them are ignored. Returns -1 when the
+   * group is not closed.
+   */
+  private int findMatchingParen(String text, int start) {
+    int depth = 0;
+    int i = start;
+
+    while (i < text.length()) {
+      char c = text.charAt(i);
+      if (c == '"' || c == '\'' || c == '`') {
+        int end = skipQuotedString(text, i);
+        if (end > i) {
+          i = end;
+          continue;
+        }
+      } else if (c == '(') {
+        depth++;
+      } else if (c == ')') {
+        depth--;
+        if (depth == 0) {
+          return i;
+        }
+      }
+      i++;
+    }
+
+    return -1;
+  }
+
+  /**
    * Split text into lines, preserving newlines inside quoted strings and handling multiline
    * parenthesized expressions.
    */
   private List<String> splitLinesRespectingQuotes(String text) {
     List<String> result = new ArrayList<>();
     StringBuilder currentLine = new StringBuilder();
-    boolean inSingle = false;
-    boolean inDouble = false;
-    boolean inBacktick = false;
     int parenDepth = 0;
+    int i = 0;
 
-    for (int i = 0; i < text.length(); i++) {
+    while (i < text.length()) {
       char c = text.charAt(i);
 
-      // Handle quote toggling
-      if (c == '"' && !inSingle && !inBacktick) {
-        inDouble = !inDouble;
+      if (c == '"' || c == '\'' || c == '`') {
+        int end = skipQuotedString(text, i);
+        if (end > i) {
+          // A quoted string is opaque: newlines inside it are content
+          currentLine.append(text, i, end);
+          i = end;
+          continue;
+        }
         currentLine.append(c);
-      } else if (c == '\'' && !inDouble && !inBacktick) {
-        inSingle = !inSingle;
-        currentLine.append(c);
-      } else if (c == '`' && !inSingle && !inDouble) {
-        inBacktick = !inBacktick;
-        currentLine.append(c);
-      } else if (c == '(' && !inSingle && !inDouble && !inBacktick) {
+      } else if (c == '(') {
         parenDepth++;
         currentLine.append(c);
-      } else if (c == ')' && !inSingle && !inDouble && !inBacktick) {
+      } else if (c == ')') {
         parenDepth--;
         currentLine.append(c);
       } else if (c == '\n') {
-        if (inSingle || inDouble || inBacktick || parenDepth > 0) {
-          // Inside quotes or unclosed parens: preserve the newline
+        if (parenDepth > 0) {
+          // Inside unclosed parens: preserve the newline
           currentLine.append(c);
         } else {
-          // Outside quotes and parens balanced: this is a line break
           result.add(currentLine.toString());
           currentLine = new StringBuilder();
         }
       } else {
         currentLine.append(c);
       }
+
+      i++;
     }
 
     // Add the last line if non-empty
@@ -217,10 +355,9 @@ public class Parser {
   private Map<String, Object> parseLineContent(String content) throws ParseException {
     Map<String, Object> result = new HashMap<>();
 
-    // Try multiline link format: (id: values) or (values)
-    if (content.startsWith("(") && content.endsWith(")")) {
-      String inner = content.substring(1, content.length() - 1).trim();
-      return parseParenthesized(inner);
+    // A whole parenthesized group: (id: values), (values) or a nested document
+    if (content.startsWith("(") && findMatchingParen(content, 0) == content.length() - 1) {
+      return parseParenthesized(content.substring(1, content.length() - 1));
     }
 
     // Try indented ID syntax: id:
@@ -234,17 +371,15 @@ public class Parser {
     }
 
     // Try single-line link: id: values
-    if (content.contains(":") && !content.startsWith("\"") && !content.startsWith("'")) {
-      int colonPos = findColonOutsideQuotes(content);
-      if (colonPos >= 0) {
-        String idPart = content.substring(0, colonPos).trim();
-        String valuesPart = content.substring(colonPos + 1).trim();
-        String ref = extractReference(idPart);
-        List<Map<String, Object>> values = parseValues(valuesPart);
-        result.put("id", ref);
-        result.put("values", values);
-        return result;
-      }
+    int colonPos = findColonOutsideQuotes(content);
+    if (colonPos >= 0) {
+      String idPart = content.substring(0, colonPos).trim();
+      String valuesPart = content.substring(colonPos + 1).trim();
+      String ref = extractReference(idPart);
+      List<Map<String, Object>> values = parseValues(valuesPart);
+      result.put("id", ref);
+      result.put("values", values);
+      return result;
     }
 
     // Simple value list
@@ -253,51 +388,57 @@ public class Parser {
     return result;
   }
 
-  /** Parse content within parentheses. */
+  /**
+   * Parse the content of a parenthesized group.
+   *
+   * <p>The group opens a nested context that starts fresh at indentation level zero and follows
+   * exactly the rules used at the root of the document, so line breaks separate links and
+   * indentation nests them.
+   */
   private Map<String, Object> parseParenthesized(String inner) throws ParseException {
     Map<String, Object> result = new HashMap<>();
-
-    // Check for id: values format
-    int colonPos = findColonOutsideQuotes(inner);
-    if (colonPos >= 0) {
-      String idPart = inner.substring(0, colonPos).trim();
-      String valuesPart = inner.substring(colonPos + 1).trim();
-      String ref = extractReference(idPart);
-      List<Map<String, Object>> values = parseValues(valuesPart);
-      result.put("id", ref);
-      result.put("values", values);
-      return result;
-    }
-
-    // Just values
-    List<Map<String, Object>> values = parseValues(inner);
-    result.put("values", values);
+    result.put("nested", parseNestedDocument(inner));
     return result;
+  }
+
+  /** Parse the text of a parenthesized group as a document of its own. */
+  private List<Map<String, Object>> parseNestedDocument(String inner) throws ParseException {
+    List<String> savedLines = lines;
+    int savedPos = pos;
+    Integer savedBaseIndentation = baseIndentation;
+    try {
+      lines = splitLinesRespectingQuotes(inner);
+      pos = 0;
+      baseIndentation = null;
+      return parseDocument();
+    } finally {
+      lines = savedLines;
+      pos = savedPos;
+      baseIndentation = savedBaseIndentation;
+    }
   }
 
   /** Find position of colon that's not inside quotes or parentheses. */
   private int findColonOutsideQuotes(String text) {
-    boolean inSingle = false;
-    boolean inDouble = false;
-    boolean inBacktick = false;
     int parenDepth = 0;
+    int i = 0;
 
-    for (int i = 0; i < text.length(); i++) {
+    while (i < text.length()) {
       char c = text.charAt(i);
-
-      if (c == '\'' && !inDouble && !inBacktick) {
-        inSingle = !inSingle;
-      } else if (c == '"' && !inSingle && !inBacktick) {
-        inDouble = !inDouble;
-      } else if (c == '`' && !inSingle && !inDouble) {
-        inBacktick = !inBacktick;
-      } else if (c == '(' && !inSingle && !inDouble && !inBacktick) {
+      if (c == '"' || c == '\'' || c == '`') {
+        int end = skipQuotedString(text, i);
+        if (end > i) {
+          i = end;
+          continue;
+        }
+      } else if (c == '(') {
         parenDepth++;
-      } else if (c == ')' && !inSingle && !inDouble && !inBacktick) {
+      } else if (c == ')') {
         parenDepth--;
-      } else if (c == ':' && !inSingle && !inDouble && !inBacktick && parenDepth == 0) {
+      } else if (c == ':' && parenDepth == 0) {
         return i;
       }
+      i++;
     }
 
     return -1;
@@ -351,72 +492,16 @@ public class Parser {
       return new int[] {start};
     }
 
-    // Check if this starts with a multi-quote string
-    char[] quoteChars = {'"', '\'', '`'};
-    for (char quoteChar : quoteChars) {
-      if (text.charAt(start) == quoteChar) {
-        // Count opening quotes dynamically
-        int quoteCount = 0;
-        int pos = start;
-        while (pos < text.length() && text.charAt(pos) == quoteChar) {
-          quoteCount++;
-          pos++;
-        }
-
-        if (quoteCount >= 1) {
-          // Parse this multi-quote string
-          String openClose = repeatChar(quoteChar, quoteCount);
-          String escapeSeq = repeatChar(quoteChar, quoteCount * 2);
-
-          int innerPos = start + quoteCount;
-          while (innerPos < text.length()) {
-            // Check for escape sequence (2*N quotes)
-            if (text.substring(innerPos).startsWith(escapeSeq)) {
-              innerPos += escapeSeq.length();
-              continue;
-            }
-            // Check for closing quotes
-            if (text.substring(innerPos).startsWith(openClose)) {
-              int afterClosePos = innerPos + quoteCount;
-              // Make sure this is exactly N quotes (not more)
-              if (afterClosePos >= text.length() || text.charAt(afterClosePos) != quoteChar) {
-                // Found the end
-                return new int[] {afterClosePos};
-              }
-            }
-            innerPos++;
-          }
-          // No closing found, treat as regular text
-          break;
-        }
-      }
+    // Check if this starts with a delimited reference
+    QuotedString quoted = parseQuotedStringAt(text, start);
+    if (quoted != null) {
+      return new int[] {quoted.end};
     }
 
     // Check if this starts with a parenthesized expression
     if (text.charAt(start) == '(') {
-      int parenDepth = 1;
-      boolean inSingle = false;
-      boolean inDouble = false;
-      boolean inBacktick = false;
-      int i = start + 1;
-
-      while (i < text.length() && parenDepth > 0) {
-        char c = text.charAt(i);
-        if (c == '\'' && !inDouble && !inBacktick) {
-          inSingle = !inSingle;
-        } else if (c == '"' && !inSingle && !inBacktick) {
-          inDouble = !inDouble;
-        } else if (c == '`' && !inSingle && !inDouble) {
-          inBacktick = !inBacktick;
-        } else if (c == '(' && !inSingle && !inDouble && !inBacktick) {
-          parenDepth++;
-        } else if (c == ')' && !inSingle && !inDouble && !inBacktick) {
-          parenDepth--;
-        }
-        i++;
-      }
-
-      return new int[] {i};
+      int end = findMatchingParen(text, start);
+      return new int[] {end >= 0 ? end + 1 : text.length()};
     }
 
     // Regular value - read until space or end
@@ -447,9 +532,8 @@ public class Parser {
     Map<String, Object> result = new HashMap<>();
 
     // Nested link in parentheses
-    if (value.startsWith("(") && value.endsWith(")")) {
-      String inner = value.substring(1, value.length() - 1).trim();
-      return parseParenthesized(inner);
+    if (value.startsWith("(") && findMatchingParen(value, 0) == value.length() - 1) {
+      return parseParenthesized(value.substring(1, value.length() - 1));
     }
 
     // Simple reference
@@ -462,70 +546,16 @@ public class Parser {
   private String extractReference(String text) {
     text = text.trim();
 
-    // Try multi-quote strings
-    char[] quoteChars = {'"', '\'', '`'};
-    for (char quoteChar : quoteChars) {
-      if (!text.isEmpty() && text.charAt(0) == quoteChar) {
-        // Count opening quotes dynamically
-        int quoteCount = 0;
-        while (quoteCount < text.length() && text.charAt(quoteCount) == quoteChar) {
-          quoteCount++;
-        }
-
-        if (quoteCount >= 1 && text.length() > quoteCount) {
-          String result = parseMultiQuoteString(text, quoteChar, quoteCount);
-          if (result != null) {
-            return result;
-          }
-        }
-      }
+    QuotedString quoted = parseQuotedStringAt(text, 0);
+    if (quoted != null) {
+      return quoted.value;
     }
 
     // Unquoted
     return text;
   }
 
-  /** Parse a multi-quote string. */
-  private String parseMultiQuoteString(String text, char quoteChar, int quoteCount) {
-    String openClose = repeatChar(quoteChar, quoteCount);
-    String escapeSeq = repeatChar(quoteChar, quoteCount * 2);
-    String escapeVal = repeatChar(quoteChar, quoteCount);
-
-    // Check for opening quotes
-    if (!text.startsWith(openClose)) {
-      return null;
-    }
-
-    String remaining = text.substring(openClose.length());
-    StringBuilder content = new StringBuilder();
-
-    while (!remaining.isEmpty()) {
-      // Check for escape sequence (2*N quotes)
-      if (remaining.startsWith(escapeSeq)) {
-        content.append(escapeVal);
-        remaining = remaining.substring(escapeSeq.length());
-        continue;
-      }
-
-      // Check for closing quotes (N quotes not followed by more quotes)
-      if (remaining.startsWith(openClose)) {
-        String afterClose = remaining.substring(openClose.length());
-        // Make sure this is exactly N quotes (not more)
-        if (afterClose.isEmpty() || afterClose.charAt(0) != quoteChar) {
-          return content.toString();
-        }
-      }
-
-      // Take the next character
-      content.append(remaining.charAt(0));
-      remaining = remaining.substring(1);
-    }
-
-    // No closing quotes found
-    return null;
-  }
-
-  private String repeatChar(char c, int count) {
+  private static String repeatChar(char c, int count) {
     StringBuilder sb = new StringBuilder(count);
     for (int i = 0; i < count; i++) {
       sb.append(c);
@@ -647,11 +677,41 @@ public class Parser {
     return link;
   }
 
+  /**
+   * Transform the links of a nested (parenthesized) context into one Link.
+   *
+   * <p>The nested context is parsed with the same rules as the root, so it yields a list of links;
+   * a single link is used as is, several links become the values of one anonymous link. An already
+   * parenthesized single link keeps its own group, so {@code ((a b))} stays distinct from {@code (a
+   * b)}.
+   */
+  private Link transformNested(List<Map<String, Object>> nested) {
+    List<Link> nestedLinks = new ArrayList<>();
+    for (Map<String, Object> item : nested) {
+      if (item != null) {
+        collectLinks(item, new ArrayList<>(), nestedLinks);
+      }
+    }
+
+    boolean wrapsSingleGroup =
+        nested.size() == 1 && nested.get(0) != null && nested.get(0).containsKey("nested");
+    if (nestedLinks.size() == 1 && !wrapsSingleGroup) {
+      return nestedLinks.get(0);
+    }
+
+    return new Link(null, nestedLinks);
+  }
+
   /** Transform a parsed item into a Link object. */
   @SuppressWarnings("unchecked")
   private Link transformLink(Map<String, Object> item) {
     if (item == null) {
       return null;
+    }
+
+    // Parenthesized group parsed as a nested context
+    if (item.containsKey("nested")) {
+      return transformNested((List<Map<String, Object>>) item.get("nested"));
     }
 
     // Simple reference

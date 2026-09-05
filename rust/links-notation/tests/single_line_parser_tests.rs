@@ -295,28 +295,42 @@ fn test_quoted_reference() {
     assert_eq!(result.1[0].id, Some("hello world".to_string()));
 }
 
+/// A parenthesized group keeps the links written inside it until the whole
+/// document is transformed, so the group body is where its content lives.
+fn nested_body(link: &links_notation::parser::Link) -> &Vec<links_notation::parser::Link> {
+    link.nested
+        .as_ref()
+        .expect("expected a parenthesized group")
+}
+
 #[test]
 fn test_singlet_link_parser() {
     let result = parse_document("(singlet)").unwrap();
     assert_eq!(result.1.len(), 1);
-    assert_eq!(result.1[0].id, Some("singlet".to_string()));
-    assert_eq!(result.1[0].values.len(), 0);
-    assert_eq!(result.1[0].children.len(), 0);
+    let body = nested_body(&result.1[0]);
+    assert_eq!(body.len(), 1);
+    assert_eq!(body[0].id, Some("singlet".to_string()));
+    assert_eq!(body[0].values.len(), 0);
+    assert_eq!(body[0].children.len(), 0);
 }
 
 #[test]
 fn test_value_link_parser() {
     let result = parse_document("(a b c)").unwrap();
     assert_eq!(result.1.len(), 1);
-    assert_eq!(result.1[0].values.len(), 3);
+    let body = nested_body(&result.1[0]);
+    assert_eq!(body.len(), 1);
+    assert_eq!(body[0].values.len(), 3);
 }
 
 #[test]
 fn test_link_with_id() {
     let result = parse_document("(id: a b c)").unwrap();
     assert_eq!(result.1.len(), 1);
-    assert_eq!(result.1[0].id, Some("id".to_string()));
-    assert_eq!(result.1[0].values.len(), 3);
+    let body = nested_body(&result.1[0]);
+    assert_eq!(body.len(), 1);
+    assert_eq!(body[0].id, Some("id".to_string()));
+    assert_eq!(body[0].values.len(), 3);
 }
 
 #[test]

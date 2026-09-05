@@ -1,5 +1,5 @@
 (* Links Notation (Lino) Grammar - Extended Backus-Naur Form (EBNF) *)
-(* Version: 0.12.0 *)
+(* Version: 0.15.0 *)
 (* Repository: https://github.com/link-foundation/links-notation *)
 (* License: Unlicense *)
 
@@ -21,8 +21,9 @@ links               = first_line, { line } ;
 (* The first line sets the base indentation for the document *)
 first_line          = SET_BASE_INDENTATION, element ;
 
-(* Subsequent lines must respect the current indentation level *)
-line                = CHECK_INDENTATION, element ;
+(* Subsequent lines must respect the current indentation level.
+   Blank lines do not end a block, they are skipped. *)
+line                = skip_empty_lines, CHECK_INDENTATION, element ;
 
 (* An element is a link, optionally followed by indented children *)
 element             = any_link, PUSH_INDENTATION, links
@@ -33,31 +34,31 @@ element             = any_link, PUSH_INDENTATION, links
 (* ============================================================== *)
 
 (* Any type of link that can appear in the document *)
-any_link            = multiline_any_link, eol
+any_link            = nested_group, eol
                     | indented_id_link
                     | single_line_any_link ;
-
-(* Multiline links are enclosed in parentheses *)
-multiline_any_link  = multiline_value_link
-                    | multiline_link ;
 
 (* Single-line links end with end-of-line *)
 single_line_any_link = single_line_link, eol
                      | single_line_value_link, eol ;
 
 (* ============================================================== *)
-(*                  MULTILINE LINKS (PARENTHESIZED)                *)
+(*                 NESTED GROUPS (PARENTHESIZED)                   *)
 (* ============================================================== *)
 
-(* A named multiline link: (id: value1 value2 ...) *)
-multiline_link      = "(", whitespace, reference, whitespace, ":",
-                      multiline_values, whitespace, ")" ;
+(* A parenthesized group opens a nested context: its body starts fresh at
+   indentation level zero and is parsed with the same rules as the root
+   document, so indentation is structural inside parentheses as well. *)
+nested_group        = "(", ENTER_NESTED_CONTEXT, nested_group_body,
+                      EXIT_NESTED_CONTEXT ;
 
-(* An anonymous multiline link: (value1 value2 ...) *)
-multiline_value_link = "(", multiline_values, whitespace, ")" ;
+(* The body of a group is a document of its own, or nothing at all *)
+nested_group_body   = skip_empty_lines, links, whitespace, ")"
+                    | whitespace, ")" ;
 
-(* Values in a multiline context (can include newlines) *)
-multiline_values    = whitespace, { reference_or_link, whitespace } ;
+(* A group body that produces a single link collapses to that link, unless
+   the body is itself a single parenthesized group, which keeps ((a b))
+   different from (a b). This is a transformation rule, not a syntax rule. *)
 
 (* ============================================================== *)
 (*                      SINGLE-LINE LINKS                          *)
@@ -85,23 +86,43 @@ indented_id_link    = reference, horizontal_whitespace, ":", eol ;
 (*                       REFERENCE TYPES                           *)
 (* ============================================================== *)
 
-(* A reference can be a nested link or a simple reference *)
-reference_or_link   = multiline_any_link
+(* A reference can be a nested group or a simple reference *)
+reference_or_link   = nested_group
                     | reference ;
 
-(* A reference is either quoted or simple *)
-reference           = double_quoted_reference
-                    | single_quoted_reference
+(* A reference is either delimited or simple *)
+reference           = delimited_reference
                     | simple_reference ;
 
 (* An unquoted reference (alphanumeric and special chars) *)
 simple_reference    = reference_symbol, { reference_symbol } ;
 
-(* A double-quoted reference: "any text except double quote" *)
-double_quoted_reference = '"', { any_char - '"' }, '"' ;
+(* The three delimiters behave identically; nothing else delimits *)
+delimiter           = '"' | "'" | "`" ;
 
-(* A single-quoted reference: 'any text except single quote' *)
-single_quoted_reference = "'", { any_char - "'" }, "'" ;
+(* A run of one or more of the same delimiter *)
+delimiter_run       = delimiter, { delimiter } ;
+
+(* A delimited reference is either an n-quoted one or the empty reference.
+   The n-quoted reading is tried first; when it does not apply, an even run
+   of delimiters is the empty reference *)
+delimited_reference = n_quoted_reference
+                    | empty_reference ;
+
+(* A run of N delimiters, a body, then a run of exactly N of the same
+   delimiter. Inside the body a run of 2N delimiters stands for N literal
+   delimiters. N cannot be written in EBNF, so it is stated as a condition *)
+n_quoted_reference  = delimiter_run, { any_char }, delimiter_run ;
+(* Conditions: both runs use the same delimiter and have the same length N;
+   the closing run is not followed by another delimiter; and when N is even
+   the body is substantive, meaning it holds at least one non-whitespace
+   character and its parentheses are balanced *)
+
+(* A bare delimiter pair is the empty reference, and so is any longer even
+   run that does not open an n-quoted reference: the shortest reading wins,
+   so "" is one empty reference and "" "" is two of them *)
+empty_reference     = delimiter, delimiter, { delimiter, delimiter } ;
+(* Condition: the whole run uses the same delimiter *)
 
 (* ============================================================== *)
 (*                      TERMINAL SYMBOLS                           *)
@@ -123,8 +144,15 @@ whitespace          = { whitespace_char } ;
 (* Line endings (cross-platform) *)
 newline             = "\r\n" | "\n" | "\r" ;
 
-(* End of line (newline or end of file) *)
-eol                 = horizontal_whitespace, ( newline | EOF ) ;
+(* End of line (newline, end of file, or the end of a nested group) *)
+eol                 = horizontal_whitespace, ( newline | EOF )
+                    | nested_group_end ;
+
+(* Inside a parenthesized group the closing parenthesis ends the last line,
+   just like a line break does at the root. The parenthesis is not consumed,
+   nested_group_body consumes it. *)
+nested_group_end    = ? only inside a nested context ?,
+                      horizontal_whitespace, ? lookahead of ")" ? ;
 
 (* End of file marker *)
 EOF                 = ? end of input ? ;
@@ -150,6 +178,17 @@ PUSH_INDENTATION    = { " " } ;
 (* Verify current line's indentation is valid *)
 (* Condition: normalized_indent >= current_indentation *)
 CHECK_INDENTATION   = { " " } ;
+
+(* Open a nested context when "(" is read *)
+(* Action: save the indentation stack and base indentation, then reset them
+   to a fresh stack of [0] and no base indentation, and increment the
+   nested context depth *)
+ENTER_NESTED_CONTEXT = ;
+
+(* Close a nested context when the matching ")" is read *)
+(* Action: restore the saved indentation stack and base indentation, and
+   decrement the nested context depth *)
+EXIT_NESTED_CONTEXT = ;
 
 (* ============================================================== *)
 (*                      EBNF NOTATION LEGEND                       *)

@@ -61,7 +61,7 @@ element ───┤  any_link  ├───┬───────────
 
 ```text
              ┌───────────────────────┐   ┌───────┐
-    ┌────────┤ multiline_any_link    ├───┤  eol  ├────────┐
+    ┌────────┤     nested_group      ├───┤  eol  ├────────┐
     │        └───────────────────────┘   └───────┘        │
     │                                                     │
 ────┼────────┌───────────────────────┐────────────────────┼───────▶
@@ -75,21 +75,24 @@ element ───┤  any_link  ├───┬───────────
 
 ## Reference
 
-A reference can be quoted or unquoted.
+A reference is either delimited or simple.
 
 ```text
               ┌────────────────────────────┐
-     ┌────────┤  double_quoted_reference   ├────────┐
+     ┌────────┤    n_quoted_reference      ├────────┐
      │        └────────────────────────────┘        │
      │                                              │
 ─────┼────────┌────────────────────────────┐────────┼────▶
-     │        │  single_quoted_reference   │        │
+     │        │      empty_reference       │        │
      │        └────────────────────────────┘        │
      │                                              │
      │        ┌────────────────────────────┐        │
      └────────┤     simple_reference       ├────────┘
               └────────────────────────────┘
 ```
+
+The three delimiters `"`, `'` and `` ` `` behave identically, and the n-quoted
+reading is tried before the empty one.
 
 ## Simple Reference
 
@@ -104,60 +107,83 @@ simple_reference ──┤   reference_symbol   ├────┬────�
                               └────────────────┘
 ```
 
-## Double-Quoted Reference
+## N-Quoted Reference
+
+A run of N identical delimiters, a body, then a run of exactly N of the same
+delimiter that is not followed by another one. A run of 2N delimiters inside
+the body stands for N literal delimiters.
 
 ```text
-                      ┌─────┐   ┌─────────────────┐   ┌─────┐
-double_quoted_ref ────┤  "  ├───┤  any char ≠ "   ├───┤  "  ├───▶
-                      └─────┘   └────────┬────────┘   └─────┘
-                                         │      ▲
-                                         └──────┘
+                      ┌──────────────┐   ┌─────────────────┐   ┌──────────────┐
+n_quoted_ref ─────────┤ N delimiters ├───┤    any char     ├───┤ N delimiters ├───▶
+                      └──────────────┘   └────────┬────────┘   └──────────────┘
+                                                  │      ▲
+                                                  └──────┘
 ```
 
-## Single-Quoted Reference
+When N is even the body must be substantive: it holds at least one
+non-whitespace character and its parentheses are balanced. Otherwise the run
+reads as empty references instead.
+
+## Empty Reference
+
+An even run of the same delimiter that does not open an n-quoted reference:
+`""` is one empty reference, `"" ""` is two of them.
 
 ```text
-                      ┌─────┐   ┌─────────────────┐   ┌─────┐
-single_quoted_ref ────┤  '  ├───┤  any char ≠ '   ├───┤  '  ├───▶
-                      └─────┘   └────────┬────────┘   └─────┘
-                                         │      ▲
-                                         └──────┘
+                      ┌─────┐   ┌─────┐
+empty_reference ──────┤  d  ├───┤  d  ├──────┬─────▶
+                      └─────┘   └─────┘      │
+                         ▲                   │
+                         └───────────────────┘
 ```
 
-## Multiline Link (Named)
+## Nested Group (Parenthesized)
+
+A parenthesized group opens a nested context: the body starts fresh at
+indentation level zero and is parsed by `links`, exactly like the root
+document.
 
 ```text
-               ┌───┐   ┌─────┐   ┌───────────┐   ┌─────┐   ┌───┐
-multiline ─────┤ ( ├───┤  _  ├───┤ reference ├───┤  _  ├───┤ : ├───┐
-link           └───┘   └─────┘   └───────────┘   └─────┘   └───┘   │
-                                                                    │
-               ┌────────────────────────────────────────────────────┘
-               │
-               │  ┌─────────────────────┐   ┌─────┐   ┌───┐
-               └──┤  multiline_values   ├───┤  _  ├───┤ ) ├────────▶
-                  └─────────────────────┘   └─────┘   └───┘
+               ┌───┐   ┌──────────────────────┐
+nested_group ──┤ ( ├───┤ ENTER_NESTED_CONTEXT ├───┐
+               └───┘   └──────────────────────┘   │
+                                                  │
+    ┌─────────────────────────────────────────────┘
+    │
+    │   ┌───────────────────┐   ┌───────┐   ┌─────┐   ┌───┐
+    ├───┤ skip_empty_lines  ├───┤ links ├───┤  _  ├───┤ ) ├───┐
+    │   └───────────────────┘   └───────┘   └─────┘   └───┘   │
+    │                                                         │
+    │   ┌─────┐   ┌───┐                                       │
+    └───┤  _  ├───┤ ) ├───────────────────────────────────────┤
+        └─────┘   └───┘                                       │
+                                                              │
+        ┌──────────────────────┐                              │
+        │ EXIT_NESTED_CONTEXT  │◄─────────────────────────────┘
+        └───────────┬──────────┘
+                    │
+                    ▼
 
                (_ = whitespace, may include newlines)
 ```
 
-## Multiline Value Link (Anonymous)
+## Nested Group Collapse
+
+The body of a group is flattened the same way the root document is. A body
+that yields a single link collapses to that link, unless the body is itself
+a single parenthesized group.
 
 ```text
-                    ┌───┐   ┌─────────────────────┐   ┌─────┐   ┌───┐
-multiline ──────────┤ ( ├───┤  multiline_values   ├───┤  _  ├───┤ ) ├───▶
-value_link          └───┘   └─────────────────────┘   └─────┘   └───┘
-```
-
-## Multiline Values
-
-```text
-                   ┌─────┐       ┌───────────────────┐   ┌─────┐
-multiline ─────────┤  _  ├───┬───┤ reference_or_link ├───┤  _  ├───┬───▶
-values             └─────┘   │   └───────────────────┘   └─────┘   │
-                             │             ▲                       │
-                             │             └───────────────────────┘
-                             │
-                             └─────────────────────────────────────────▶
+    (a b c)          ─▶  one link with values a, b, c
+    (a: b c)         ─▶  link a with values b, c
+    ((a b))          ─▶  a link whose single value is the link (a b)
+    (                ─▶  one link holding the four links the same
+      a                  four lines produce at the root:
+        b                (a), (a b), (c), (c d)
+      c
+        d
+    )
 ```
 
 ## Single-Line Link (Named)
@@ -210,7 +236,7 @@ link                └───────────┘   └─────
 
 ```text
                     ┌───────────────────────┐
-     ┌──────────────┤  multiline_any_link   ├──────────────┐
+     ┌──────────────┤     nested_group      ├──────────────┐
      │              └───────────────────────┘              │
 ─────┤                                                     ├────────▶
      │              ┌───────────────────────┐              │
@@ -223,11 +249,26 @@ link                └───────────┘   └─────
 ```text
          ┌──────────────────────┐       ┌─────────────┐
  eol ────┤ horizontal_whitespace├───┬───┤   newline   ├───┬────────▶
-         └──────────────────────┘   │   └─────────────┘   │
-                                    │                     │
-                                    │   ┌─────────────┐   │
-                                    └───┤     EOF     ├───┘
-                                        └─────────────┘
+     │   └──────────────────────┘   │   └─────────────┘   │
+     │                              │                     │
+     │                              │   ┌─────────────┐   │
+     │                              └───┤     EOF     ├───┤
+     │                                  └─────────────┘   │
+     │   ┌──────────────────────┐                         │
+     └───┤   nested_group_end   ├─────────────────────────┘
+         └──────────────────────┘
+```
+
+Inside a parenthesized group the closing parenthesis ends the last line,
+just as a line break does at the root:
+
+```text
+                          ╔════════════════════════════════════╗
+                          ║ only while a group is open         ║
+nested_group_end ─────────╟────────────────────────────────────╢────▶
+                          ║ horizontal_whitespace, then ")"    ║
+                          ║ (the ")" is not consumed here)     ║
+                          ╚════════════════════════════════════╝
 ```
 
 ## Newline
@@ -275,6 +316,10 @@ symbol            ║  • Space ( )                          ║
     │  │ base_indent = null  │                                       │
     │  │ stack = [0]         │                                       │
     │  └──────────┬──────────┘                                       │
+    │             │  ▲                                               │
+    │             │  └── ENTER_NESTED_CONTEXT saves the current      │
+    │             │      state and restarts here; the matching       │
+    │             │      EXIT_NESTED_CONTEXT restores it             │
     │             │                                                  │
     │             ▼                                                  │
     │  ┌─────────────────────┐     ┌─────────────────────┐           │
@@ -381,6 +426,12 @@ symbol            ║  • Space ( )                          ║
 │  │                                                                     ││
 │  │  Anonymous:  papa loves mama         (single line, 3 values)       ││
 │  │              (papa loves mama)       (parenthesized, same meaning) ││
+│  │              (                       (parenthesized, structural    ││
+│  │                papa                   indentation: holds the four  ││
+│  │                  loves                links (papa), (papa loves),  ││
+│  │                mama                   (mama), (mama hates))        ││
+│  │                  hates                                             ││
+│  │              )                                                     ││
 │  │                                                                     ││
 │  │  Named:      family: papa mama       (id + values)                 ││
 │  │              (family: papa mama)     (parenthesized, same meaning) ││
@@ -395,6 +446,12 @@ symbol            ║  • Space ( )                          ║
 │  ┌────────────────────────────────────────────────────────────────────┐│
 │  │                                                                     ││
 │  │  Inline:     (outer: (inner: a b) c d)                             ││
+│  │                                                                     ││
+│  │  In group:   value (                 (records stay separate)       ││
+│  │                id "1" label "one"                                   ││
+│  │                id "2" label "two"                                   ││
+│  │              )                                                      ││
+│  │              ─▶ (value ((id 1 label one) (id 2 label two)))         ││
 │  │                                                                     ││
 │  │  Indented:   outer:                                                 ││
 │  │                inner:                                               ││
@@ -412,6 +469,8 @@ symbol            ║  • Space ( )                          ║
 │  │  :  - Separator between id and values                              ││
 │  │  "  - Double quote delimiter                                       ││
 │  │  '  - Single quote delimiter                                       ││
+│  │  `  - Backtick delimiter                                           ││
+│  │  "" - The empty reference (a bare delimiter pair)                  ││
 │  │  ␣  - Space (value separator, indentation)                         ││
 │  └────────────────────────────────────────────────────────────────────┘│
 │                                                                         │

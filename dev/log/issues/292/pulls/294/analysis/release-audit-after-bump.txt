@@ -1,0 +1,9 @@
+::warning::js: declared 0.16.0, latest on npm is 0.15.0.
+::warning::python: declared 0.16.0, latest on PyPI is 0.15.0.
+::warning::rust: declared 0.16.0, latest on crates.io is 0.15.0.
+::warning::csharp: declared 0.16.0, latest on NuGet.org is 0.15.0.
+::warning::go: declared 0.16.0, latest on proxy.golang.org is 0.15.0.
+::warning::java: declared 0.16.0, but nothing is published on Maven Central. The publish job for this language has never successfully released anything.
+::warning::php: declared 0.16.0, but nothing is published on Packagist. The publish job for this language has never successfully released anything.
+
+7 implementation(s) drifted.

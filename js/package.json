@@ -1,8 +1,9 @@
 {
   "name": "links-notation",
-  "version": "0.13.0",
+  "version": "0.16.1",
   "description": "Links Notation parser for JavaScript",
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "type": "module",
   "scripts": {
     "build": "bun run build:grammar && bun build src/index.js --outdir=dist --target=node",
@@ -10,7 +11,9 @@
     "test": "bun test",
     "test:watch": "bun test --watch",
     "lint": "eslint src/ tests/",
-    "lint:fix": "eslint src/ tests/ --fix"
+    "lint:fix": "eslint src/ tests/ --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "keywords": [
     "lino",
@@ -20,10 +23,19 @@
   ],
   "author": "",
   "license": "Unlicense",
-  "devDependencies": {
-    "bun-types": "^1.2.19",
-    "eslint": "^9.39.1",
-    "peggy": "^5.0.6"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/link-foundation/links-notation.git"
   },
-  "dependencies": {}
+  "bugs": {
+    "url": "https://github.com/link-foundation/links-notation/issues"
+  },
+  "homepage": "https://github.com/link-foundation/links-notation#readme",
+  "devDependencies": {
+    "bun-types": "^1.4.0",
+    "eslint": "^10.9.1",
+    "peggy": "^5.1.0",
+    "prettier": "^3.9.6",
+    "typescript": "^7.0.2"
+  }
 }

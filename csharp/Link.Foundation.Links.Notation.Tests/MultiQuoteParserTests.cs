@@ -10,7 +10,7 @@ namespace Link.Foundation.Links.Notation.Tests
         {
             if (result.Count == 1 && result[0].Id == null && result[0].Values?.Count == 1)
             {
-                return result[0].Values[0].Id;
+                return result[0].Values![0].Id;
             }
             return result.Count == 1 ? result[0].Id : null;
         }
@@ -42,7 +42,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var result = parser.Parse("(`line1\nline2`)");
             Assert.Single(result);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("line1\nline2", result[0].Values![0].Id);
         }
 
@@ -266,9 +266,9 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.NotNull(result[0].Values);
             Assert.Equal(3, result[0].Values!.Count);
-            Assert.Equal("double", result[0].Values[0].Id);
-            Assert.Equal("single", result[0].Values[1].Id);
-            Assert.Equal("backtick", result[0].Values[2].Id);
+            Assert.Equal("double", result[0].Values![0].Id);
+            Assert.Equal("single", result[0].Values![1].Id);
+            Assert.Equal("backtick", result[0].Values![2].Id);
         }
 
         [Fact]
@@ -325,7 +325,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var result = parser.Parse("(\"\"line1\nline2\"\")");
             Assert.Single(result);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("line1\nline2", result[0].Values![0].Id);
         }
 

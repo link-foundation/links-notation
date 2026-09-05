@@ -138,9 +138,15 @@ namespace Link.Foundation.Links.Notation
         /// <returns>The escaped reference string with appropriate quoting.</returns>
         public static string EscapeReference(string? reference)
         {
-            if (string.IsNullOrWhiteSpace(reference))
+            if (reference == null)
             {
                 return "";
+            }
+            // The empty reference is written as a bare delimiter pair, so that it reads
+            // back as itself instead of disappearing from the document.
+            if (reference.Length == 0)
+            {
+                return "\"\"";
             }
             if (
                     reference.Contains(":") ||

@@ -141,8 +141,13 @@ public class Link {
    * @return escaped reference
    */
   public static String escapeReference(String reference) {
-    if (reference == null || reference.trim().isEmpty()) {
+    if (reference == null) {
       return "";
+    }
+    // The empty reference is written as a bare delimiter pair, so that it reads back as itself
+    // instead of disappearing from the document.
+    if (reference.isEmpty()) {
+      return "\"\"";
     }
 
     boolean hasSingleQuote = reference.contains("'");

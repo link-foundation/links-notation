@@ -36,6 +36,20 @@ namespace Link.Foundation.Links.Notation
         }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this group was written as a parenthesized group.
+        /// A parenthesized group is a link in its own right, so it keeps its identifier and values
+        /// instead of being unwrapped when it is used as a child of the indented identifier syntax.
+        /// This is a parse-time hint and therefore takes no part in equality comparisons.
+        /// </summary>
+        internal bool IsParenthesized
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set;
+        }
+
+        /// <summary>
         /// Initializes a new links group with the specified link and nested groups.
         /// </summary>
         /// <param name="link">The primary link of this group.</param>
