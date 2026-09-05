@@ -370,3 +370,8 @@ csharp/fvextra.sty
 # is how it gets forgotten.
 !dev/log/
 !dev/log/**
+
+# The website is built by the pages workflow from docs/website; the committed
+# copy of its output only ever went stale, and the deployed site is built
+# fresh on every push.
+docs/website/dist/
