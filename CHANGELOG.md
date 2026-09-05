@@ -206,6 +206,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   that catch the base type keep working ([#302](https://github.com/link-foundation/links-notation/issues/302))
 
 ### Fixed
+- A reference that begins with a `#` is written quoted (`'#tag'`) by the
+  formatter of every implementation, so a document a formatter writes reads back
+  as itself. `(a #tag)` used to be written unquoted, and reading it back gave
+  `a` alone, a syntax error or a different link, depending on the language. A
+  `#` that cannot open a comment is still written as it stands (`issue#1047`)
+  ([#301](https://github.com/link-foundation/links-notation/issues/301))
 - Docs: nested contexts were described in the English READMEs and in the root
   Russian one, but in none of the per-language `README.ru.md` files, so a Russian
   reader of a language guide still got the old reading by omission. The section

@@ -382,6 +382,11 @@ parent
 
 reads as `parent` with the single child `child`.
 
+Writing a document follows the same rule from the other side: a reference that
+begins with a `#` is written quoted (`'#tag'`), so a document a formatter writes
+reads back as itself. A `#` that cannot open a comment needs no quotes, so
+`issue#1047` is written as it stands.
+
 Every implementation reads comments by default and can be told to read `#` as
 an ordinary character instead, for documents written before comments existed.
 

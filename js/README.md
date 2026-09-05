@@ -267,13 +267,18 @@ link `(deploy: staging)`. A `#` only opens a comment where a reference could
 begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
 reference (`"#"`) stay ordinary characters.
 
+A formatter keeps the same rule from the other side: a reference that begins
+with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
+itself.
+
 Comments are on by default, and a parser can be told to read `#` as an ordinary
 character again, for documents written before comments existed:
 
 ```javascript
 import { Parser, formatLinks } from 'links-notation';
 
-const document = '# the machines this deploys to\ndeploy: staging # only staging, for now\n';
+const document =
+  '# the machines this deploys to\ndeploy: staging # only staging, for now\n';
 console.log(formatLinks(new Parser().parse(document))); // (deploy: staging)
 
 const plain = new Parser({ comments: false });

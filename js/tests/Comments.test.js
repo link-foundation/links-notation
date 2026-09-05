@@ -7,7 +7,13 @@
 // written by one implementation reads the same in all of them.
 
 import { test, expect } from 'bun:test';
-import { Link, Parser, ParseError, formatLinks, stripComments } from '../src/index.js';
+import {
+  Link,
+  Parser,
+  ParseError,
+  formatLinks,
+  stripComments,
+} from '../src/index.js';
 
 const parser = new Parser();
 
@@ -139,7 +145,9 @@ test('blanking a comment keeps the length of the document', () => {
 
 test('a reference that begins with a hash is written quoted, so it reads back', () => {
   // Without the quotes the document would read as `a` followed by a comment.
-  const document = formatLinks([new Link(null, [new Link('a'), new Link('#tag')])]);
+  const document = formatLinks([
+    new Link(null, [new Link('a'), new Link('#tag')]),
+  ]);
 
   expect(document).toBe("(a '#tag')");
   expect(parser.parse(document).map(render).join('\n')).toBe('(<a> <#tag>)');

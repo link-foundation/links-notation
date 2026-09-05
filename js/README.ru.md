@@ -186,13 +186,18 @@ deploy: staging # пока только staging
 начаться ссылка, поэтому `#` внутри токена (`issue#1047`) и `#` внутри ссылки
 в кавычках (`"#"`) остаются обычными символами.
 
+Форматтер соблюдает то же правило с другой стороны: ссылка, начинающаяся с `#`,
+записывается в кавычках (`'#tag'`), поэтому написанный им документ читается
+обратно как он сам.
+
 Комментарии включены по умолчанию, а парсеру можно велеть снова читать `#` как
 обычный символ - для документов, написанных до появления комментариев:
 
 ```javascript
 import { Parser, formatLinks } from 'links-notation';
 
-const document = '# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n';
+const document =
+  '# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n';
 console.log(formatLinks(new Parser().parse(document))); // (deploy: staging)
 
 const plain = new Parser({ comments: false });
