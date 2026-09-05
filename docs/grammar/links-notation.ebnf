@@ -1,5 +1,5 @@
 (* Links Notation (Lino) Grammar - Extended Backus-Naur Form (EBNF) *)
-(* Version: 0.15.0 *)
+(* Version: 0.19.0 *)
 (* Repository: https://github.com/link-foundation/links-notation *)
 (* License: Unlicense *)
 
@@ -123,6 +123,27 @@ n_quoted_reference  = delimiter_run, { any_char }, delimiter_run ;
    so "" is one empty reference and "" "" is two of them *)
 empty_reference     = delimiter, delimiter, { delimiter, delimiter } ;
 (* Condition: the whole run uses the same delimiter *)
+
+(* ============================================================== *)
+(*                          COMMENTS                               *)
+(* ============================================================== *)
+
+(* A "#" written where a reference could begin opens a comment that runs to
+   the end of its line. Comments are taken out before the rules above are
+   applied: every character of a comment is replaced with a space, so what
+   follows keeps the position it was written at, and a line that held nothing
+   but a comment becomes a line of whitespace, which separates links the way
+   an empty line does and does not end an indented block.
+   Parsers read comments by default and can be told not to, in which case a
+   "#" is an ordinary reference_symbol everywhere. *)
+comment             = comment_start, { any_char - newline } ;
+
+(* A comment starts only at the start of the document or after a space, a tab
+   or a line break, so a "#" inside a token (issue#1047) is an ordinary
+   character, and a "#" inside a delimited reference belongs to that
+   reference *)
+comment_start       = ? start of document ?, "#"
+                    | whitespace_char, "#" ;
 
 (* ============================================================== *)
 (*                      TERMINAL SYMBOLS                           *)

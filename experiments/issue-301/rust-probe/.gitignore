@@ -1,0 +1,3 @@
+# Build output of the probe, and the lock file cargo writes next to it.
+/target
+/Cargo.lock

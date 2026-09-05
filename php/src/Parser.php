@@ -26,6 +26,9 @@ class Parser
     /** @var int Maximum nesting depth. */
     public int $maxDepth;
 
+    /** @var bool Whether `#` starts a comment. */
+    public bool $comments;
+
     /** @var int[] */
     private array $indentationStack = [0];
 
@@ -39,13 +42,19 @@ class Parser
     private ?int $baseIndentation = null;
 
     /**
-     * @param int $maxInputSize Maximum input size in bytes (default: 10MB)
-     * @param int $maxDepth     Maximum nesting depth (default: 1000)
+     * @param int  $maxInputSize Maximum input size in bytes (default: 10MB)
+     * @param int  $maxDepth     Maximum nesting depth (default: 1000)
+     * @param bool $comments     If false, read `#` as an ordinary character
+     *                           instead of the start of a comment (default: true)
      */
-    public function __construct(int $maxInputSize = 10 * 1024 * 1024, int $maxDepth = 1000)
-    {
+    public function __construct(
+        int $maxInputSize = 10 * 1024 * 1024,
+        int $maxDepth = 1000,
+        bool $comments = true
+    ) {
         $this->maxInputSize = $maxInputSize;
         $this->maxDepth = $maxDepth;
+        $this->comments = $comments;
     }
 
     /**
@@ -66,12 +75,16 @@ class Parser
             );
         }
 
-        if (trim($input) === '') {
+        // Comments are blanked rather than removed, so every character keeps the
+        // position it was written at.
+        $prepared = $this->comments ? Comments::stripComments($input) : $input;
+
+        if (trim($prepared) === '') {
             return [];
         }
 
         // Use smart line splitting that respects quoted strings
-        $this->lines = $this->splitLinesRespectingQuotes($input);
+        $this->lines = $this->splitLinesRespectingQuotes($prepared);
         $this->pos = 0;
         $this->indentationStack = [0];
         $this->baseIndentation = null;
@@ -86,7 +99,7 @@ class Parser
      * enclosing nothing, so the n-quote reading is only taken when it carries
      * something the pairs cannot.
      */
-    private function isSubstantiveBody(string $content): bool
+    private static function isSubstantiveBody(string $content): bool
     {
         $depth = 0;
         $hasVisible = false;
@@ -124,7 +137,7 @@ class Parser
      *                                       null when $text does not start a
      *                                       delimited reference
      */
-    private function parseQuotedStringAt(string $text, int $start): ?array
+    private static function parseQuotedStringAt(string $text, int $start): ?array
     {
         $length = strlen($text);
         if ($start >= $length) {
@@ -159,7 +172,7 @@ class Parser
             if (str_starts_with(substr($text, $pos), $openClose)) {
                 $afterClose = $pos + $quoteCount;
                 if ($afterClose >= $length || $text[$afterClose] !== $quoteChar) {
-                    if ($isEvenRun && !$this->isSubstantiveBody($content)) {
+                    if ($isEvenRun && !self::isSubstantiveBody($content)) {
                         return $emptyReference;
                     }
 
@@ -179,9 +192,21 @@ class Parser
      * Returns the position right after the closing quotes, or -1 when text does
      * not start a delimited reference.
      */
-    private function skipQuotedString(string $text, int $start): int
+    private static function skipQuotedString(string $text, int $start): int
     {
-        $parsed = $this->parseQuotedStringAt($text, $start);
+        return self::quotedReferenceEnd($text, $start);
+    }
+
+    /**
+     * Find where the delimited reference starting at $start ends.
+     *
+     * Returns the position right after the closing quotes, or -1 when $text
+     * does not start a delimited reference. Blanking comments reads this so
+     * that a `#` inside a delimited reference is left as the content it is.
+     */
+    public static function quotedReferenceEnd(string $text, int $start): int
+    {
+        $parsed = self::parseQuotedStringAt($text, $start);
 
         return $parsed === null ? -1 : $parsed[1];
     }
@@ -208,7 +233,7 @@ class Parser
             $char = $text[$i];
 
             if (in_array($char, ['"', "'", '`'], true)) {
-                $end = $this->skipQuotedString($text, $i);
+                $end = self::skipQuotedString($text, $i);
                 if ($end > $i) {
                     // A quoted string is opaque: newlines inside it are content
                     $currentLine .= substr($text, $i, $end - $i);
@@ -314,19 +339,32 @@ class Parser
         $childIndent = $indent + 2; // Expect at least 2 spaces for child
 
         while ($this->pos < count($this->lines)) {
-            $nextLine = $this->lines[$this->pos];
+            // A line holding nothing does not close a block: it is the next
+            // line that carries something which says whether the block goes on.
+            // Blanking a comment leaves such a line behind, so this is also
+            // what lets a comment stand on a line of its own inside a block.
+            $following = $this->pos;
+            while ($following < count($this->lines) && trim($this->lines[$following]) === '') {
+                $following++;
+            }
+            if ($following >= count($this->lines)) {
+                break;
+            }
+
+            $nextLine = $this->lines[$following];
             $rawNextIndent = strlen($nextLine) - strlen(ltrim($nextLine, ' '));
             // Normalize next line's indentation
             $nextIndent = max(0, $rawNextIndent - ($this->baseIndentation ?? 0));
 
-            if (trim($nextLine) !== '' && $nextIndent > $indent) {
-                // This is a child
-                $child = $this->parseElement($children ? $indent + 2 : $childIndent);
-                if ($child !== null) {
-                    $children[] = $child;
-                }
-            } else {
+            if ($nextIndent <= $indent) {
                 break;
+            }
+
+            // This is a child
+            $this->pos = $following;
+            $child = $this->parseElement($children ? $indent + 2 : $childIndent);
+            if ($child !== null) {
+                $children[] = $child;
             }
         }
 
@@ -424,7 +462,7 @@ class Parser
         while ($i < $length) {
             $char = $text[$i];
             if (in_array($char, ['"', "'", '`'], true)) {
-                $end = $this->skipQuotedString($text, $i);
+                $end = self::skipQuotedString($text, $i);
                 if ($end > $i) {
                     $i = $end;
                     continue;
@@ -460,7 +498,7 @@ class Parser
         while ($i < $length) {
             $char = $text[$i];
             if (in_array($char, ['"', "'", '`'], true)) {
-                $end = $this->skipQuotedString($text, $i);
+                $end = self::skipQuotedString($text, $i);
                 if ($end > $i) {
                     $i = $end;
                     continue;
@@ -532,7 +570,7 @@ class Parser
         }
 
         // Check if this starts with a delimited reference
-        $quoted = $this->parseQuotedStringAt($text, $start);
+        $quoted = self::parseQuotedStringAt($text, $start);
         if ($quoted !== null) {
             [, $end] = $quoted;
 
@@ -595,7 +633,7 @@ class Parser
     {
         $text = trim($text);
 
-        $quoted = $this->parseQuotedStringAt($text, 0);
+        $quoted = self::parseQuotedStringAt($text, 0);
         if ($quoted !== null) {
             return $quoted[0];
         }

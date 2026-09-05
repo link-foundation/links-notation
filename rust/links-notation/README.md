@@ -502,6 +502,40 @@ let links = parse_lino_to_links(input)?;
 println!("{}", format_links(&links)); // (value ((id 1) (label one)))
 ```
 
+### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+Both comments are gone by the time the document is read, leaving the single
+link `(deploy: staging)`. A `#` only opens a comment where a reference could
+begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
+reference (`"#"`) stay ordinary characters.
+
+A formatter keeps the same rule from the other side: a reference that begins
+with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
+itself.
+
+Comments are on by default, and a parser can be told to read `#` as an ordinary
+character again, for documents written before comments existed:
+
+```rust
+use links_notation::{format_links, parse_lino_to_links, parse_lino_to_links_with_config, ParserConfig};
+
+let document = "# the machines this deploys to\ndeploy: staging # only staging, for now\n";
+let links = parse_lino_to_links(document)?;
+println!("{}", format_links(&links)); // (deploy: staging)
+
+let config = ParserConfig::without_comments();
+let links = parse_lino_to_links_with_config("# a b\n", &config)?;
+println!("{}", format_links(&links)); // (# a b)
+```
+
 ## API Reference
 
 ### Enums
@@ -523,9 +557,24 @@ Represents either a Link or a Reference:
 
 ### Functions
 
-#### `parse_lino(document: &str) -> Result<LiNo<String>, String>`
+#### `parse_lino(document: &str) -> Result<LiNo<String>, ParseError>`
 
 Parses a Links Notation document string and returns the parsed structure or an error.
+
+#### `parse_lino_with_config(document: &str, config: &ParserConfig) -> Result<LiNo<String>, ParseError>`
+
+Parses the same way, with the parser configured. `parse_lino_to_links` and
+`parse_lino_to_links_with_config` are the same pair, returning the top-level
+links rather than one document link.
+
+### Configuration
+
+#### `ParserConfig`
+
+- `comments: bool` - Whether a `#` opens a comment that runs to the end of its
+  line (default: `true`)
+- `ParserConfig::new()` - The defaults
+- `ParserConfig::without_comments()` - `#` as an ordinary character
 
 ### Formatting
 
@@ -578,16 +627,16 @@ the line and the column, what could have stood there, and the offending line
 with a caret under it:
 
 ```rust
-match parse_lino("# ok line\n# break: two\nci_gate x\n") {
+match parse_lino("ci_gate x\nstage: rust: nextest\n") {
     Ok(parsed) => println!("Parsed: {}", parsed),
     Err(error) => eprintln!("{}", error),
 }
 ```
 
 ```text
-Syntax error at line 2, column 8: expected "(", a reference or end of line, found ":"
-2 | # break: two
-  |        ^
+Syntax error at line 2, column 12: expected "(", a reference or end of line, found ":"
+2 | stage: rust: nextest
+  |            ^
 ```
 
 The same position is available as fields, for callers that report errors

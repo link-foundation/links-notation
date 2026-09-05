@@ -116,6 +116,12 @@ export interface ParserOptions {
    * Maximum nesting depth (default: 1000)
    */
   maxDepth?: number;
+
+  /**
+   * If false, read `#` as an ordinary character instead of the start of a
+   * comment (default: true)
+   */
+  comments?: boolean;
 }
 
 /**
@@ -135,6 +141,11 @@ export class Parser {
   maxDepth: number;
 
   /**
+   * Whether `#` starts a comment that runs to the end of its line
+   */
+  comments: boolean;
+
+  /**
    * Create a new Parser instance
    * @param options - Parser options
    */
@@ -148,6 +159,14 @@ export class Parser {
    */
   parse(input: string): Link[];
 }
+
+/**
+ * Blank out every comment in a document, keeping its length so that every
+ * character stays at the offset it was written at.
+ * @param document - The document to read
+ * @returns The document, of the same length, without its comments
+ */
+export function stripComments(document: string): string;
 
 /**
  * The position a parse stopped at, as the generated parser reports it

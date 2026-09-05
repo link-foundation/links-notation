@@ -407,6 +407,22 @@ fn parse_dynamic_quote_string(input: &str, quote_char: char) -> IResult<&str, St
     )))
 }
 
+/// The offset just past the delimited reference that starts at `start`, or
+/// `None` when nothing that far into `document` opens one.
+///
+/// Comment stripping needs to know how far a delimited reference reaches so
+/// that a `#` written inside one stays content, and it has to agree with the
+/// parser about it, which is why it asks the parser rather than scanning again.
+pub fn quoted_reference_end(document: &str, start: usize) -> Option<usize> {
+    let rest = document.get(start..)?;
+    let quote = rest.chars().next()?;
+    if !matches!(quote, '"' | '\'' | '`') {
+        return None;
+    }
+    let (remaining, _) = parse_dynamic_quote_string(rest, quote).ok()?;
+    Some(document.len() - remaining.len())
+}
+
 fn double_quoted_dynamic(input: &str) -> IResult<&str, String> {
     parse_dynamic_quote_string(input, '"')
 }

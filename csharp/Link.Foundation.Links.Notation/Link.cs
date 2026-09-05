@@ -148,7 +148,11 @@ namespace Link.Foundation.Links.Notation
             {
                 return "\"\"";
             }
+            // A reference that begins with a "#" has to be quoted, or it would read
+            // back as a comment. A "#" anywhere else in a reference is content
+            // ("issue#1047"), so only the first character matters.
             if (
+                    reference.StartsWith("#") ||
                     reference.Contains(":") ||
                     reference.Contains("(") ||
                     reference.Contains(")") ||

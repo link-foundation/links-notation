@@ -264,7 +264,13 @@ PUSH_INDENTATION = spaces:" "* &{ return normalizeIndentation(spaces) > getCurre
 
 CHECK_INDENTATION = spaces:" "* &{ return checkIndentation(spaces); }
 
-eol = __ ([\r\n]+ / eof / nestedGroupEnd)
+eol = __ (lineBreaks / eof / nestedGroupEnd)
+
+// A line ends at the first line break, and the blank lines that follow it
+// belong to that ending: a line holding nothing but spaces or tabs separates
+// links exactly the way an empty line does. Blanking a comment leaves such a
+// line behind, so this is also what lets a comment stand on a line of its own.
+lineBreaks = [\r\n]+ ([ \t]+ [\r\n]+)*
 
 // Inside a parenthesised group the closing parenthesis terminates a line the
 // same way the end of the input does at the root.

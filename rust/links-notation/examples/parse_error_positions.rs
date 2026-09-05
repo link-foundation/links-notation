@@ -7,7 +7,7 @@ use links_notation::{parse_lino, ParseError};
 
 fn main() {
     let documents = [
-        "# ok line\n# break: two\nci_gate x\n  stage rust",
+        "ci_gate x\nstage: rust: nextest\nnext stage\n  clippy",
         "a: b: c",
         "a (b\n",
         "a b)\n",

@@ -95,7 +95,11 @@ export class Link {
     const hasSingleQuote = reference.includes("'");
     const hasDoubleQuote = reference.includes('"');
 
+    // A reference that begins with a `#` has to be quoted, or it would read
+    // back as a comment. A `#` anywhere else in a reference is content
+    // (`issue#1047`), so only the first character matters.
     const needsQuoting =
+      reference.startsWith('#') ||
       reference.includes(':') ||
       reference.includes('(') ||
       reference.includes(')') ||

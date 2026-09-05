@@ -155,11 +155,42 @@ var links = new Parser().Parse(@"value (
 Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 ```
 
+### Комментарии
+
+`#` скрывает остаток строки, на которой стоит, поэтому документ может нести
+пояснения о самом себе:
+
+```lino
+# машины, на которые идёт выкладка
+deploy: staging # пока только staging
+```
+
+К моменту чтения документа обоих комментариев уже нет, остаётся одна связь
+`(deploy: staging)`. `#` открывает комментарий только там, где могла бы
+начаться ссылка, поэтому `#` внутри токена (`issue#1047`) и `#` внутри ссылки
+в кавычках (`"#"`) остаются обычными символами.
+
+Форматтер соблюдает то же правило с другой стороны: ссылка, начинающаяся с `#`,
+записывается в кавычках (`'#tag'`), поэтому написанный им документ читается
+обратно как он сам.
+
+Комментарии включены по умолчанию, а парсеру можно велеть снова читать `#` как
+обычный символ - для документов, написанных до появления комментариев:
+
+```csharp
+var links = new Parser().Parse("# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n");
+Console.WriteLine(links[0]); // (deploy: staging)
+
+var plain = new Parser(comments: false);
+Console.WriteLine(plain.Parse("# a b\n")[0]); // (# a b)
+```
+
 ## Справочник API
 
 ### Классы
 
 - **Parser\<TLinkAddress\>**: Основной класс парсера для преобразования строк в связи
+  (`new Parser(comments: false)` читает `#` как обычный символ)
 - **Link\<TLinkAddress\>**: Представляет одну связь с ID и значениями
 - **LinksGroup\<TLinkAddress\>**: Контейнер для группировки связанных связей
 - **ParseException**: Выбрасывается, когда документ не разбирается
@@ -172,7 +203,7 @@ Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 ```csharp
 try
 {
-    new Parser().Parse("# ok line\n# break: two\nci_gate x\n");
+    new Parser().Parse("ci_gate x\nstage: rust: nextest\n");
 }
 catch (ParseException error)
 {
@@ -182,9 +213,9 @@ catch (ParseException error)
 ```
 
 ```text
-Syntax error at line 2, column 8: unexpected ":"
-2 | # break: two
-  |        ^
+Syntax error at line 2, column 12: unexpected ":"
+2 | stage: rust: nextest
+  |            ^
 ```
 
 `ParseException` наследуется от `FormatException`, поэтому вызывающий код,

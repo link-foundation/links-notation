@@ -212,6 +212,40 @@ let links = parse_lino_to_links(input)?;
 println!("{}", format_links(&links)); // (value ((id 1) (label one)))
 ```
 
+### Комментарии
+
+`#` скрывает остаток строки, на которой стоит, поэтому документ может нести
+пояснения о самом себе:
+
+```lino
+# машины, на которые идёт выкладка
+deploy: staging # пока только staging
+```
+
+К моменту чтения документа обоих комментариев уже нет, остаётся одна связь
+`(deploy: staging)`. `#` открывает комментарий только там, где могла бы
+начаться ссылка, поэтому `#` внутри токена (`issue#1047`) и `#` внутри ссылки
+в кавычках (`"#"`) остаются обычными символами.
+
+Форматтер соблюдает то же правило с другой стороны: ссылка, начинающаяся с `#`,
+записывается в кавычках (`'#tag'`), поэтому написанный им документ читается
+обратно как он сам.
+
+Комментарии включены по умолчанию, а парсеру можно велеть снова читать `#` как
+обычный символ - для документов, написанных до появления комментариев:
+
+```rust
+use links_notation::{format_links, parse_lino_to_links, parse_lino_to_links_with_config, ParserConfig};
+
+let document = "# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n";
+let links = parse_lino_to_links(document)?;
+println!("{}", format_links(&links)); // (deploy: staging)
+
+let config = ParserConfig::without_comments();
+let links = parse_lino_to_links_with_config("# a b\n", &config)?;
+println!("{}", format_links(&links)); // (# a b)
+```
+
 ## Справочник API
 
 ### Перечисления
@@ -233,9 +267,24 @@ println!("{}", format_links(&links)); // (value ((id 1) (label one)))
 
 ### Функции
 
-#### `parse_lino(document: &str) -> Result<LiNo<String>, String>`
+#### `parse_lino(document: &str) -> Result<LiNo<String>, ParseError>`
 
 Парсит строку документа Links Notation и возвращает распарсенную структуру или ошибку.
+
+#### `parse_lino_with_config(document: &str, config: &ParserConfig) -> Result<LiNo<String>, ParseError>`
+
+Парсит так же, но с настроенным парсером. `parse_lino_to_links` и
+`parse_lino_to_links_with_config` — та же пара функций, возвращающая связи
+верхнего уровня, а не одну связь-документ.
+
+### Настройка
+
+#### `ParserConfig`
+
+- `comments: bool` — открывает ли `#` комментарий до конца строки
+  (по умолчанию `true`)
+- `ParserConfig::new()` — значения по умолчанию
+- `ParserConfig::without_comments()` — `#` как обычный символ
 
 ### Форматирование
 
@@ -255,16 +304,16 @@ println!("{}", format_links(&links)); // (value ((id 1) (label one)))
 указателем под ней:
 
 ```rust
-match parse_lino("# ok line\n# break: two\nci_gate x\n") {
+match parse_lino("ci_gate x\nstage: rust: nextest\n") {
     Ok(parsed) => println!("Распарсено: {}", parsed),
     Err(error) => eprintln!("{}", error),
 }
 ```
 
 ```text
-Syntax error at line 2, column 8: expected "(", a reference or end of line, found ":"
-2 | # break: two
-  |        ^
+Syntax error at line 2, column 12: expected "(", a reference or end of line, found ":"
+2 | stage: rust: nextest
+  |            ^
 ```
 
 Та же позиция доступна в виде полей — для вызывающего кода, который сообщает об

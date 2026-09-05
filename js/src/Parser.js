@@ -1,5 +1,6 @@
 import { Link } from './Link.js';
 import { ParseError } from './ParseError.js';
+import { stripComments } from './comments.js';
 import * as parserModule from './parser-generated.js';
 
 export class Parser {
@@ -8,10 +9,12 @@ export class Parser {
    * @param {Object} options - Parser options
    * @param {number} options.maxInputSize - Maximum input size in bytes (default: 10MB)
    * @param {number} options.maxDepth - Maximum nesting depth (default: 1000)
+   * @param {boolean} options.comments - If false, read `#` as an ordinary character instead of the start of a comment (default: true)
    */
   constructor(options = {}) {
     this.maxInputSize = options.maxInputSize || 10 * 1024 * 1024; // 10MB default
     this.maxDepth = options.maxDepth || 1000;
+    this.comments = options.comments ?? true;
   }
 
   /**
@@ -32,8 +35,12 @@ export class Parser {
       );
     }
 
+    // Comments are blanked rather than removed, so a position reported for the
+    // prepared document is the same position in the document the caller wrote.
+    const prepared = this.comments ? stripComments(input) : input;
+
     try {
-      const rawResult = parserModule.parse(input);
+      const rawResult = parserModule.parse(prepared);
       return this.transformResult(rawResult);
     } catch (error) {
       // A syntax error knows where it stopped; anything else is passed on with

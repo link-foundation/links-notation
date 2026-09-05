@@ -171,6 +171,39 @@ const links = new Parser().parse(`value (
 console.log(formatLinks(links)); // (value ((id 1) (label one)))
 ```
 
+### Комментарии
+
+`#` скрывает остаток строки, на которой стоит, поэтому документ может нести
+пояснения о самом себе:
+
+```lino
+# машины, на которые идёт выкладка
+deploy: staging # пока только staging
+```
+
+К моменту чтения документа обоих комментариев уже нет, остаётся одна связь
+`(deploy: staging)`. `#` открывает комментарий только там, где могла бы
+начаться ссылка, поэтому `#` внутри токена (`issue#1047`) и `#` внутри ссылки
+в кавычках (`"#"`) остаются обычными символами.
+
+Форматтер соблюдает то же правило с другой стороны: ссылка, начинающаяся с `#`,
+записывается в кавычках (`'#tag'`), поэтому написанный им документ читается
+обратно как он сам.
+
+Комментарии включены по умолчанию, а парсеру можно велеть снова читать `#` как
+обычный символ - для документов, написанных до появления комментариев:
+
+```javascript
+import { Parser, formatLinks } from 'links-notation';
+
+const document =
+  '# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n';
+console.log(formatLinks(new Parser().parse(document))); // (deploy: staging)
+
+const plain = new Parser({ comments: false });
+console.log(formatLinks(plain.parse('# a b\n'))); // (# a b)
+```
+
 ## Справочник API
 
 ### Классы
@@ -179,6 +212,8 @@ console.log(formatLinks(links)); // (value ((id 1) (label one)))
 
 Основной класс парсера для преобразования строк в связи.
 
+- `constructor(options)` - Создать парсер; `options.comments` со значением
+  `false` читает `#` как обычный символ, а не как начало комментария
 - `initialize()` - Инициализация парсера (асинхронно)
 - `parse(input)` - Парсинг строки Lino и возвращение связей
 
@@ -207,7 +242,7 @@ console.log(formatLinks(links)); // (value ((id 1) (label one)))
 import { Parser, ParseError } from 'links-notation';
 
 try {
-  new Parser().parse('# ok line\n# break: two\nci_gate x\n');
+  new Parser().parse('ci_gate x\nstage: rust: nextest\n');
 } catch (error) {
   console.error(error.message);
   if (error instanceof ParseError) {
@@ -217,9 +252,9 @@ try {
 ```
 
 ```text
-Syntax error at line 2, column 8: Expected "(", [ \t], [\r\n], or [^ \t\n\r(:)] but ":" found.
-2 | # break: two
-  |        ^
+Syntax error at line 2, column 12: Expected "(", [ \t], [\r\n], or [^ \t\n\r(:)] but ":" found.
+2 | stage: rust: nextest
+  |            ^
 ```
 
 - `offset` - Смещение сломанной позиции от начала документа

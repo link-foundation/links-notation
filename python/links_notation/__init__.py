@@ -10,6 +10,7 @@ from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as _distribution_version
 from pathlib import Path
 
+from .comments import strip_comments
 from .format_config import FormatConfig
 from .formatter import format_links
 from .link import Link
@@ -44,4 +45,4 @@ def _read_version() -> str:
 
 __version__ = _read_version()
 
-__all__ = ["Link", "Parser", "format_links", "FormatConfig", "__version__"]
+__all__ = ["Link", "Parser", "format_links", "FormatConfig", "strip_comments", "__version__"]

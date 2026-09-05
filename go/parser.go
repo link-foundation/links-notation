@@ -21,6 +21,10 @@ type Parser struct {
 	MaxInputSize int
 	MaxDepth     int
 
+	// Comments tells whether # starts a comment that runs to the end of its
+	// line; when false it is an ordinary character.
+	Comments bool
+
 	// Internal state
 	text            string
 	lines           []string
@@ -34,6 +38,7 @@ func NewParser() *Parser {
 	return &Parser{
 		MaxInputSize: 10 * 1024 * 1024, // 10MB
 		MaxDepth:     1000,
+		Comments:     true,
 	}
 }
 
@@ -61,8 +66,15 @@ func (p *Parser) Parse(input string) ([]*Link, error) {
 		return nil, nil
 	}
 
-	p.text = input
-	p.lines = p.splitLinesRespectingQuotes(input)
+	// Comments are blanked rather than removed, so every byte keeps the
+	// position it was written at.
+	prepared := input
+	if p.Comments {
+		prepared = StripComments(input)
+	}
+
+	p.text = prepared
+	p.lines = p.splitLinesRespectingQuotes(prepared)
 	p.pos = 0
 	p.indentStack = []int{0}
 	p.baseIndentation = nil
@@ -306,24 +318,36 @@ func (p *Parser) parseElement(currentIndent int) *internalLink {
 	childIndent := indent + 2
 
 	for p.pos < len(p.lines) {
-		nextLine := p.lines[p.pos]
-		rawNextIndent := countLeadingSpaces(nextLine)
+		// A line holding nothing does not close a block: the block goes on at
+		// the next line that holds something. Blanking a comment leaves such a
+		// line behind, so this is also what keeps a block together around a
+		// comment written inside it.
+		following := p.pos
+		for following < len(p.lines) && strings.TrimSpace(p.lines[following]) == "" {
+			following++
+		}
+		if following >= len(p.lines) {
+			break
+		}
+
+		rawNextIndent := countLeadingSpaces(p.lines[following])
 		nextIndent := rawNextIndent - base
 		if nextIndent < 0 {
 			nextIndent = 0
 		}
 
-		if strings.TrimSpace(nextLine) != "" && nextIndent > indent {
-			childIndentToUse := childIndent
-			if len(children) > 0 {
-				childIndentToUse = indent + 2
-			}
-			child := p.parseElement(childIndentToUse)
-			if child != nil {
-				children = append(children, child)
-			}
-		} else {
+		if nextIndent <= indent {
 			break
+		}
+
+		childIndentToUse := childIndent
+		if len(children) > 0 {
+			childIndentToUse = indent + 2
+		}
+		p.pos = following
+		child := p.parseElement(childIndentToUse)
+		if child != nil {
+			children = append(children, child)
 		}
 	}
 
