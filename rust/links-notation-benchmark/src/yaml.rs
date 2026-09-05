@@ -128,13 +128,23 @@ fn is_plain_safe(value: &str) -> bool {
     !resolves_to_non_string(value)
 }
 
-/// Whether the YAML core schema reads this text as a null, a boolean or a
-/// number rather than as a string.
+/// Whether a YAML reader takes this text as a null, a boolean or a number
+/// rather than as a string.
+///
+/// The list covers the YAML 1.1 boolean spellings as well as the 1.2 core
+/// schema, because that is what the emitters in wide use write: PyYAML,
+/// SnakeYAML and js-yaml all quote `yes`, `no`, `on` and `off` so that a
+/// document survives a 1.1 reader. A baseline that left them plain would be
+/// two characters shorter and would come back from PyYAML as a boolean.
 fn resolves_to_non_string(value: &str) -> bool {
-    if matches!(
-        value,
-        "null" | "Null" | "NULL" | "~" | "true" | "True" | "TRUE" | "false" | "False" | "FALSE"
-    ) {
+    // YAML accepts each of these in lowercase, Capitalised and UPPERCASE.
+    const RESERVED: [&str; 8] = ["null", "true", "false", "yes", "no", "on", "off", "~"];
+    let lowercase = value.to_ascii_lowercase();
+    if RESERVED.contains(&lowercase.as_str())
+        && (value == lowercase
+            || value == lowercase.to_ascii_uppercase()
+            || value == capitalize(&lowercase))
+    {
         return true;
     }
     let core_number = value.strip_prefix(['+', '-']).unwrap_or(value);
@@ -146,6 +156,15 @@ fn resolves_to_non_string(value: &str) -> bool {
     }
     // The core schema also reads octal and hexadecimal integers.
     core_number.starts_with("0o") || core_number.starts_with("0x")
+}
+
+/// `null` -> `Null`, used to recognise the capitalised spellings YAML accepts.
+fn capitalize(value: &str) -> String {
+    let mut characters = value.chars();
+    match characters.next() {
+        Some(first) => first.to_uppercase().collect::<String>() + characters.as_str(),
+        None => String::new(),
+    }
 }
 
 fn escape_double_quoted(value: &str) -> String {
@@ -198,8 +217,19 @@ mod tests {
 
     #[test]
     fn leaves_dates_and_timestamps_plain() {
-        let value = json!({ "at": "2026-01-01T00:00:00Z", "on": "2026-01-01" });
-        assert_eq!(encode(&value), "at: 2026-01-01T00:00:00Z\non: 2026-01-01\n");
+        let value = json!({ "at": "2026-01-01T00:00:00Z", "day": "2026-01-01" });
+        assert_eq!(
+            encode(&value),
+            "at: 2026-01-01T00:00:00Z\nday: 2026-01-01\n"
+        );
+    }
+
+    #[test]
+    fn quotes_the_words_a_yaml_1_1_reader_takes_for_booleans() {
+        // The key `on` is the reason a GitHub Actions workflow can surprise its
+        // author, and it is why real emitters quote these words.
+        let value = json!({ "on": "yes", "Off": "NO", "note": "one" });
+        assert_eq!(encode(&value), "'on': 'yes'\n'Off': 'NO'\nnote: one\n");
     }
 
     #[test]

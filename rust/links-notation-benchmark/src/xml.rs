@@ -10,7 +10,9 @@
 //!   how XML expresses repetition without an extra container;
 //! * an array item that is itself an array, or an item of a root-level array,
 //!   is written as `<item>`, because it has no key to be named after;
-//! * `null` is the empty element `<key/>`.
+//! * `null`, an empty object and an empty array are the empty element `<key/>`;
+//!   an empty array keeps its element rather than disappearing, so the XML
+//!   carries the same keys as every other representation.
 //!
 //! The output is indented with two spaces, so it is compared against the other
 //! indented documents rather than against a minified one.
@@ -31,7 +33,9 @@ pub fn encode(value: &Value) -> String {
 /// Write an element for a value. An array repeats the element once per item.
 fn write_element(name: &str, value: &Value, level: usize, out: &mut String) {
     match value {
-        Value::Array(items) => {
+        // An empty array would repeat the element zero times and take the key
+        // out of the document, so it is written as one empty element instead.
+        Value::Array(items) if !items.is_empty() => {
             for item in items {
                 write_single(name, item, level, out);
             }
@@ -118,6 +122,12 @@ mod tests {
             encode(&value),
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root>\n  <item>\n    <item>a</item>\n    <item>b</item>\n  </item>\n  <item>\n    <item>c</item>\n    <item>d</item>\n  </item>\n</root>\n"
         );
+    }
+
+    #[test]
+    fn keeps_the_key_of_an_empty_array() {
+        let value = json!({ "tags": [] });
+        assert!(encode(&value).contains("<tags/>"));
     }
 
     #[test]

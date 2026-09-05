@@ -108,6 +108,21 @@
       }
     },
     {
+      "dataset": "sparse_records",
+      "description": "Uniform records with missing values, empty containers and text that looks typed",
+      "structure": "sparse",
+      "profile": "records",
+      "files": {
+        "json": "datasets/sparse_records.json",
+        "lino": "generated/sparse_records.lino",
+        "lino-min": "generated/sparse_records.min.lino",
+        "lino-line": "generated/sparse_records.line.lino",
+        "json-compact": "generated/sparse_records.min.json",
+        "yaml": "generated/sparse_records.yaml",
+        "xml": "generated/sparse_records.xml"
+      }
+    },
+    {
       "dataset": "doublets",
       "description": "Doublet links (2-tuples)",
       "structure": "tuples",

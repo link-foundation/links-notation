@@ -19,14 +19,14 @@ Links Notation appears in three rows because a writer has a real choice to make.
 
 | Format | Tokens (o200k) | Tokens (cl100k) | Characters | Bytes | vs JSON | vs JSON compact |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Links Notation | 8283 | 8305 | 28774 | 28774 | 23.7% | -23.7% |
-| Links Notation (minimal quoting) | 7661 | 7664 | 27668 | 27668 | 29.5% | -14.4% |
-| Links Notation (single line) | 8207 | 8229 | 22191 | 22191 | 24.4% | -22.6% |
-| JSON (indented) | 10860 | 10882 | 33943 | 33943 | 0.0% | -62.2% |
-| JSON (compact) | 6696 | 6598 | 21552 | 21552 | 38.3% | 0.0% |
-| YAML | 8252 | 8255 | 24146 | 24146 | 24.0% | -23.2% |
-| XML (indented) | 13724 | 13720 | 41464 | 41464 | -26.4% | -105.0% |
-| CSV (reference floor) * | 1528 | 1549 | 4394 | 4394 | 85.9% | 77.2% |
+| Links Notation | 9873 | 9919 | 34467 | 34568 | 23.5% | -23.4% |
+| Links Notation (minimal quoting) | 9205 | 9227 | 33239 | 33340 | 28.7% | -15.0% |
+| Links Notation (single line) | 9811 | 9857 | 26427 | 26528 | 24.0% | -22.6% |
+| JSON (indented) | 12914 | 12960 | 40428 | 40529 | 0.0% | -61.3% |
+| JSON (compact) | 8004 | 7906 | 25636 | 25737 | 38.0% | 0.0% |
+| YAML | 9831 | 9853 | 28847 | 28948 | 23.9% | -22.8% |
+| XML (indented) | 16028 | 16047 | 48500 | 48601 | -24.1% | -100.2% |
+| CSV (reference floor) * | 1528 | 1549 | 4394 | 4394 | 88.2% | 80.9% |
 
 \* Not available for every dataset in this group, so its total covers fewer datasets than the others.
 
@@ -79,6 +79,18 @@ Links Notation appears in three rows because a writer has a real choice to make.
 | JSON (compact) | 788 | 786 | 2515 | 2515 | 37.2% | 0.0% |
 | YAML | 954 | 951 | 2725 | 2725 | 23.9% | -21.1% |
 | XML (indented) | 1475 | 1474 | 4269 | 4269 | -17.6% | -87.2% |
+
+### Other (sparse_records)
+
+| Format | Tokens (o200k) | Tokens (cl100k) | Characters | Bytes | vs JSON | vs JSON compact |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Links Notation | 1590 | 1614 | 5693 | 5794 | 22.6% | -21.6% |
+| Links Notation (minimal quoting) | 1544 | 1563 | 5571 | 5672 | 24.8% | -18.0% |
+| Links Notation (single line) | 1604 | 1628 | 4236 | 4337 | 21.9% | -22.6% |
+| JSON (indented) | 2054 | 2078 | 6485 | 6586 | 0.0% | -57.0% |
+| JSON (compact) | 1308 | 1308 | 4084 | 4185 | 36.3% | 0.0% |
+| YAML | 1579 | 1598 | 4701 | 4802 | 23.1% | -20.7% |
+| XML (indented) | 2304 | 2327 | 7036 | 7137 | -12.2% | -76.1% |
 
 ### Tuples (doublets, triplets, sequences)
 
@@ -211,6 +223,20 @@ Deeply nested application configuration. Shape: Deeply nested. Source: [`dataset
 | JSON (compact) | 185 | 185 | 653 | 653 | 44.6% | 0.0% |
 | YAML | 232 | 232 | 824 | 824 | 30.5% | -25.4% |
 | XML (indented) | 410 | 409 | 1519 | 1519 | -22.8% | -121.6% |
+
+### sparse_records
+
+Uniform records with missing values, empty containers and text that looks typed. Shape: Other. Source: [`datasets/sparse_records.json`](datasets/sparse_records.json).
+
+| Format | Tokens (o200k) | Tokens (cl100k) | Characters | Bytes | vs JSON | vs JSON compact |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Links Notation | 1590 | 1614 | 5693 | 5794 | 22.6% | -21.6% |
+| Links Notation (minimal quoting) | 1544 | 1563 | 5571 | 5672 | 24.8% | -18.0% |
+| Links Notation (single line) | 1604 | 1628 | 4236 | 4337 | 21.9% | -22.6% |
+| JSON (indented) | 2054 | 2078 | 6485 | 6586 | 0.0% | -57.0% |
+| JSON (compact) | 1308 | 1308 | 4084 | 4185 | 36.3% | 0.0% |
+| YAML | 1579 | 1598 | 4701 | 4802 | 23.1% | -20.7% |
+| XML (indented) | 2304 | 2327 | 7036 | 7137 | -12.2% | -76.1% |
 
 ### doublets
 

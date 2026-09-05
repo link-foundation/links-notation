@@ -322,6 +322,48 @@ const DATASETS = [
     },
   },
   {
+    name: 'sparse_records',
+    description: 'Uniform records with missing values, empty containers and text that looks typed',
+    structure: 'sparse',
+    profile: 'records',
+    build(random) {
+      // Real payloads are not made of tidy values. This dataset is where the
+      // formats are asked what they do with an absent value, an empty
+      // container, an empty string, text outside ASCII, and text whose content
+      // reads as a number or a boolean - the cases where a writer that quotes
+      // too little silently changes the data.
+      const responses = [];
+      for (let i = 0; i < 18; i += 1) {
+        responses.push({
+          id: `resp-${1000 + i}`,
+          respondent: random.bool(0.75)
+            ? `${random.pick(FIRST_NAMES)} ${random.pick(LAST_NAMES)}`
+            : null,
+          locale: random.pick(['de-DE', 'pt-PT', 'ja-JP', 'en-CA', 'sw-KE', 'es-CO']),
+          comment: random.pick([
+            'sehr gut, aber die Latenz stört',
+            'a citação ficou perfeita',
+            '設定がわかりやすい',
+            '',
+            'works, though the docs are thin',
+          ]),
+          score: random.bool(0.8) ? random.int(1, 10) : null,
+          // Answers arrive as text even when they look like something else, so
+          // a format that resolves bare scalars has to quote all four of these.
+          answers: {
+            version: random.pick(['1.0', '2.10', '3.0.1']),
+            agreed: random.pick(['true', 'false', 'yes']),
+            postalCode: String(random.int(10000, 99999)),
+            reference: random.pick(['0012', '00.5', '1e3']),
+          },
+          tags: random.bool(0.4) ? [random.pick(['beta', 'survey', 'nps'])] : [],
+          followUp: random.bool(0.3) ? { at: isoTimestamp(i * 3600), owner: 'support' } : {},
+        });
+      }
+      return { responses };
+    },
+  },
+  {
     name: 'doublets',
     description: 'Doublet links (2-tuples)',
     structure: 'tuples',

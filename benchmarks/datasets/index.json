@@ -50,6 +50,13 @@
       "file": "deep_config.json"
     },
     {
+      "name": "sparse_records",
+      "description": "Uniform records with missing values, empty containers and text that looks typed",
+      "structure": "sparse",
+      "profile": "records",
+      "file": "sparse_records.json"
+    },
+    {
       "name": "doublets",
       "description": "Doublet links (2-tuples)",
       "structure": "tuples",
