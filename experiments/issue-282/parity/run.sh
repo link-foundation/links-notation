@@ -90,10 +90,19 @@ else
     skipped+=("Java (no javac/java)")
 fi
 
-if command -v dotnet > /dev/null 2>&1; then
-    report "C#" "$(dotnet run --project "$here/csharp/parity.csproj" | tail -n 1)"
-else
+# The library targets a recent .NET, and an older SDK fails the build with
+# NETSDK1045 rather than skipping, so ask the SDK what it can target before
+# running it - the same reason the PHP interpreter is chosen by version above.
+dotnet_required="$(sed -n 's/.*<TargetFramework>net\([0-9]*\)\..*/\1/p' "$here/csharp/parity.csproj")"
+if ! command -v dotnet > /dev/null 2>&1; then
     skipped+=("C# (no dotnet)")
+else
+    dotnet_newest="$(dotnet --list-sdks | sed -n 's/^\([0-9]*\)\..*/\1/p' | sort -n | tail -n 1)"
+    if [ -z "$dotnet_newest" ] || [ "$dotnet_newest" -lt "$dotnet_required" ]; then
+        skipped+=("C# (no SDK >= $dotnet_required)")
+    else
+        report "C#" "$(dotnet run --project "$here/csharp/parity.csproj" | tail -n 1)"
+    fi
 fi
 
 echo

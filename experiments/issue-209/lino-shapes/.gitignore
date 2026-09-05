@@ -1,0 +1,2 @@
+# Build output. Only the sources belong in the repository.
+target/
