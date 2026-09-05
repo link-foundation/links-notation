@@ -472,6 +472,36 @@ parent
     grandchild2
 ```
 
+### Multi-line Groups
+
+A parenthesized group opens a *nested context*: its body starts fresh at
+indentation level zero and follows the same rules as the root document, so a
+line break inside parentheses is structure rather than decoration.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+The document above parses to `(value ((id 1) (label one)))` - two children, each
+a link of its own - rather than to one flat list in which the boundary between
+`id` and `label` would be lost. A body that stays on a single line still
+collapses to a single link, so `(a b c)` is unchanged.
+
+```rust
+use links_notation::{format_links, parse_lino_to_links};
+
+let input = r#"value (
+  id "1"
+  label "one"
+)"#;
+
+let links = parse_lino_to_links(input)?;
+println!("{}", format_links(&links)); // (value ((id 1) (label one)))
+```
+
 ## API Reference
 
 ### Enums

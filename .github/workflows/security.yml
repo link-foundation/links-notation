@@ -129,7 +129,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        directory: [js, docs/website]
+        # Every directory with a committed lockfile. Missing one means its
+        # dependencies are never audited.
+        directory: [js, docs/website, docs/comparison, benchmarks/js, benchmarks/tools]
     steps:
       - uses: actions/checkout@v7
         with:

@@ -1,0 +1,26 @@
+id,name,email,department,role,salary,active,hiredOn
+1000,Hedy Rossum,hedy.rossum@example.com,operations,staff engineer,160000,false,2022-07-03
+1001,Bjarne Dijkstra,bjarne.dijkstra@example.com,support,manager,187000,true,2022-04-02
+1002,Dennis Liskov,dennis.liskov@example.com,engineering,staff engineer,182000,true,2022-02-24
+1003,Margaret Perlman,margaret.perlman@example.com,support,analyst,126000,true,2019-10-14
+1004,Radia Torvalds,radia.torvalds@example.com,research,senior engineer,184000,false,2019-03-03
+1005,Donald Bartik,donald.bartik@example.com,engineering,manager,178000,true,2020-11-05
+1006,Barbara Allen,barbara.allen@example.com,research,analyst,146000,true,2024-05-22
+1007,Barbara Knuth,barbara.knuth@example.com,support,manager,80000,true,2018-10-27
+1008,Donald Thompson,donald.thompson@example.com,engineering,analyst,167000,true,2025-04-19
+1009,Barbara Berners-Lee,barbara.bernerslee@example.com,design,analyst,77000,true,2022-12-08
+1010,Tim Lamarr,tim.lamarr@example.com,operations,analyst,186000,true,2021-03-17
+1011,Grace Borg,grace.borg@example.com,design,senior engineer,104000,true,2021-05-17
+1012,Edsger Hamilton,edsger.hamilton@example.com,support,staff engineer,70000,false,2021-06-21
+1013,Ken Rossum,ken.rossum@example.com,research,senior engineer,75000,true,2018-12-26
+1014,Tim Hamilton,tim.hamilton@example.com,support,engineer,187000,true,2020-03-11
+1015,Hedy Stroustrup,hedy.stroustrup@example.com,research,engineer,107000,true,2023-04-03
+1016,Bjarne Thompson,bjarne.thompson@example.com,research,senior engineer,129000,true,2021-08-08
+1017,Ada Thompson,ada.thompson@example.com,operations,senior engineer,150000,true,2020-11-24
+1018,Tim Stroustrup,tim.stroustrup@example.com,engineering,senior engineer,82000,true,2020-07-01
+1019,Margaret Ritchie,margaret.ritchie@example.com,engineering,analyst,62000,true,2021-06-26
+1020,Ada Torvalds,ada.torvalds@example.com,engineering,engineer,172000,true,2024-05-07
+1021,Alan Stroustrup,alan.stroustrup@example.com,research,staff engineer,79000,true,2024-09-30
+1022,Anita Stroustrup,anita.stroustrup@example.com,support,engineer,108000,true,2022-05-15
+1023,Grace Lovelace,grace.lovelace@example.com,operations,manager,118000,true,2017-11-26
+1024,Sophie Knuth,sophie.knuth@example.com,support,engineer,65000,true,2022-05-15

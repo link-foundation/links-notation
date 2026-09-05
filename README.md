@@ -132,6 +132,29 @@ This is equivalent to:
 (3: papa loves mama)
 ```
 
+#### Multi-line Groups
+
+A parenthesized group opens a *nested context*: its body starts fresh at
+indentation level zero and follows the same rules the root document does, so a
+line break inside parentheses is structure rather than decoration.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+This reads as `(value ((id 1) (label one)))` - two children, each a link of its
+own - and not as one flat list in which the boundary between `id` and `label`
+would be lost. Indentation works inside a group exactly as it does at the root,
+and a body that stays on a single line still collapses to a single link, so
+`(a b c)` is unchanged.
+
+All seven implementations agree on this. `experiments/issue-282/parity` parses
+the document above with each of them and fails if any one reads it differently.
+The complete rules are in the [grammar](docs/grammar/GRAMMAR.md).
+
 So that means that *this* text is also links notation. So most of the
 text in the world already may be parsed as links notation. That makes
 links notation the most easy an natural/intuitive/native one.
@@ -167,33 +190,50 @@ language-specific documentation:
 - **[Python README](python/README.md)** - Python package guide
 - **[Go README](go/README.md)** - Go package guide
 - **[Java README](java/README.md)** - Java/Maven package guide
+- **[PHP README](php/README.md)** - PHP/Composer package guide
 
 Additional resources:
 
-- [Test Case Comparison](TEST_CASE_COMPARISON.md) - Comprehensive test coverage comparison across all 6 language implementations
+- [Grammar](docs/grammar/GRAMMAR.md) - The notation in EBNF, with the indentation
+  and nested context rules spelled out ([syntax diagrams](docs/grammar/syntax-diagrams.md))
+- [Test Case Comparison](TEST_CASE_COMPARISON.md) - Test-by-test coverage comparison across all seven language implementations
 - [Links Theory 0.0.2](https://habr.com/en/articles/895896) - Theoretical
   foundation that Links Notation fully supports
 
 ## Test Coverage & Implementation Parity
 
-All six language implementations (C#, JavaScript, Rust, Python, Go, Java) maintain **equivalent core functionality** with comprehensive test coverage:
+All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP) maintain
+**equivalent core functionality**, and the overlap is verified test by test rather than asserted:
 
-- **Python**: 108 tests across 10 categories - All passing ✅
-- **JavaScript**: 109 tests across 11 categories - All passing ✅
-- **Rust**: 110 tests across 11 categories - All passing ✅
-- **C#**: 111 tests across 12 categories - All passing ✅
-- **Go**: 90+ tests across 10 categories - All passing ✅
-- **Java**: 117 tests across 7 categories - All passing ✅
+<!-- test-counts:start -->
+| Language | Tests | Test categories |
+| --- | --- | --- |
+| Python | 146 | 14 |
+| JavaScript | 204 | 16 |
+| Rust | 283 | 18 |
+| C# | 196 | 17 |
+| Go | 86 | 10 |
+| Java | 133 | 9 |
+| PHP | 183 | 16 |
+<!-- test-counts:end -->
 
-**90+ tests match identically** across all languages, verifying functional equivalence. See [TEST_CASE_COMPARISON.md](TEST_CASE_COMPARISON.md) for the complete cross-language test comparison with links to source code.
+The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files
+themselves and also produces [TEST_CASE_COMPARISON.md](TEST_CASE_COMPARISON.md) - the full matrix
+of which implementation has which test, each cell linking to the test. The `docs` workflow runs
+that script with `--check` on every pull request, so a test added in one language and forgotten in
+the others shows up as a gap in the matrix instead of as a README that quietly went stale. It used
+to be a hand-written list, and had drifted to six languages and six wrong counts.
 
 ### Known Implementation Differences
 
-Some language-specific features are documented as intentional:
+Some language-specific features are intentional:
 
-- **Python**: Does not implement `LinksGroup` or multiline quoted strings
-- **JS**: Does not implement Python's `FormatConfig` feature or tuple conversion
-- **C#**: Supports tuple conversion via implicit operators (C#-specific feature)
-- **Rust**: Supports tuple conversion via `From` trait implementations (Rust-specific feature)
+- **`LinksGroup`** - a parsed group of links kept as one object - exists in
+  [JavaScript](js/src/LinksGroup.js), [C#](csharp/Link.Foundation.Links.Notation/LinksGroup.cs) and
+  [Java](java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java). Python, Rust,
+  Go and PHP expose the same structure as nested `Link` values instead.
+- **Tuple conversion** - building a link from a language tuple - is offered where the language has
+  the syntax for it: [C#](csharp/Link.Foundation.Links.Notation/Link.cs) via implicit operators and
+  [Rust](rust/links-notation/src/lib.rs) via `From` implementations.
 
 These differences are by design and do not affect core parsing/formatting functionality.

@@ -8,6 +8,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Token efficiency benchmarks: `benchmarks/` measures what the same information
+  costs in a model's context window as Links Notation, JSON, YAML, XML and CSV
+  over 11 datasets covering uniform, semi-uniform, nested, deeply nested, keyed,
+  sparse and tuple shapes. Counts are real BPE tokens in both `o200k_base` and
+  `cl100k_base`, alongside characters and bytes, and the report is
+  [benchmarks/BENCHMARK_RESULTS.md](benchmarks/BENCHMARK_RESULTS.md)
+  ([#209](https://github.com/link-foundation/links-notation/issues/209))
+- Benchmarks: every representation is derived by the benchmark from one source
+  dataset, decoded back and compared with that dataset before a number is
+  reported, and re-read by third-party parsers (`yaml`, `fast-xml-parser`,
+  `csv-parse`, `lino-objects-codec`), so a format cannot win by carrying less
+  ([#209](https://github.com/link-foundation/links-notation/issues/209))
+- Benchmarks: all seven implementations count every generated document with
+  their own parser and their own tokenizer, and each fails unless every number
+  matches Rust's, which is what makes the published figures a property of the
+  notation rather than of one language
+  ([#209](https://github.com/link-foundation/links-notation/issues/209))
+- CI/CD: a `benchmarks` workflow that runs the whole chain on every pull request
+  that touches it and, on `main`, commits the regenerated documents, results and
+  report with `GITHUB_TOKEN` - only when the benchmark succeeded and only when
+  something changed ([#209](https://github.com/link-foundation/links-notation/issues/209))
+- Go: `README.ru.md`, the only implementation without one. `README.ru.md` used to
+  send a Russian reader to the English page with a note saying so
+  ([#209](https://github.com/link-foundation/links-notation/pull/210))
+- Go: `example_readme_test.go`, the documented snippets as runnable examples with
+  `// Output:` comments, so `go test` fails when the README and the package
+  disagree ([#209](https://github.com/link-foundation/links-notation/pull/210))
+- Rust: `links_notation::VERSION`, the crate's own version, so a tool reporting
+  which parser produced a result reads it from the parser. The benchmark report
+  used to print the benchmark crate's `0.1.0` while measuring `links-notation`
+  0.16.1 ([#209](https://github.com/link-foundation/links-notation/issues/209))
 - CI/CD: Dependabot covers every ecosystem in the repository. The `maven`,
   `composer` and `gomod` manifests were unwatched, so Java, PHP and Go were
   never offered updates ([#292](https://github.com/link-foundation/links-notation/issues/292))
@@ -22,14 +53,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   suite ported from Python, PSR-12 linting and a dedicated CI workflow
   ([#284](https://github.com/link-foundation/links-notation/issues/284))
 - Parentheses open a nested context in every implementation (JavaScript, Python,
-  Rust, Go, Java, C#): the body of `( )` starts fresh at indentation level zero
-  and follows the same rules as the root document, so indentation is structural
-  inside parentheses and parenthesised groups can express nested records
-  ([#282](https://github.com/link-foundation/links-notation/issues/282))
+  Rust, Go, Java, C#, PHP): the body of `( )` starts fresh at indentation level
+  zero and follows the same rules as the root document, so indentation is
+  structural inside parentheses and parenthesised groups can express nested
+  records ([#282](https://github.com/link-foundation/links-notation/issues/282))
 - Blank lines inside a block are skipped instead of ending it, at the root and
   inside parentheses alike
-- Tests covering nested indentation inside parentheses for all six
-  implementations
+- Tests covering nested indentation inside parentheses for all seven
+  implementations, and `experiments/issue-282/parity`, which parses one document
+  with all seven libraries at once and fails if any of them reads it differently
+  ([#282](https://github.com/link-foundation/links-notation/issues/282))
 - Comprehensive code quality improvements across all language implementations
 - Input validation and size limits for all parsers
 - Proper error types in Rust implementation
@@ -58,6 +91,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   registry confirms it ([#290](https://github.com/link-foundation/links-notation/issues/290))
 
 ### Changed
+- Every manifest checked against what the registries publish today and updated:
+  npm `lino-objects-codec` 0.7 to 0.8, `csv-parse` 6 to 7 and `gpt-tokenizer` 3
+  to 4; Go `regexp2` 1.10 to 1.12 and `uuid` 1.3 to 1.6; Maven compiler plugin
+  3.15 to 3.16, surefire 3.5.6 to 3.6.0 and spotless 3.10.1 to 3.10.2; NuGet
+  `Microsoft.ML.Tokenizers` 1.0.3 to 2.0.0, whose transitive
+  `Microsoft.Bcl.Memory` 9.0.4 carries GHSA-73j8-2gch-69rq and is therefore
+  pinned to the patched 10.x. Each bump was followed by the check that would
+  notice if it changed a result; none did
+  ([#209](https://github.com/link-foundation/links-notation/issues/209))
+- Benchmarks: the report states what it does not measure - model comprehension,
+  vocabularies outside OpenAI's, the prompt around the document, and speed - so
+  a token count is not read as a claim it does not support
+  ([#209](https://github.com/link-foundation/links-notation/issues/209))
 - Every language's dependencies updated to their current releases, including the
   major bumps: PHPUnit 10 to 13, PHP_CodeSniffer 3 to 4, xunit 2 to xunit.v3 4,
   JUnit 5 to 6, `maven.compiler.release` 11 to 21, Go 1.21 to 1.24 (CI on 1.26),
@@ -99,6 +145,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   being fetched at run time ([#290](https://github.com/link-foundation/links-notation/issues/290))
 
 ### Fixed
+- Docs: nested contexts were described in the English READMEs and in the root
+  Russian one, but in none of the per-language `README.ru.md` files, so a Russian
+  reader of a language guide still got the old reading by omission. The section
+  is now in all eight English READMEs and all eight Russian ones — the root plus
+  every implementation ([#282](https://github.com/link-foundation/links-notation/issues/282))
+- Go: the README documented a `lino.StrPtr` helper the package does not export,
+  so that snippet could not compile, and its feature list named four sibling
+  implementations when there are six
+  ([#209](https://github.com/link-foundation/links-notation/pull/210))
+- Docs: the JavaScript, Java and PHP package information sections advertised
+  version 0.1.0, six releases stale, and the JavaScript README claimed MIT while
+  `js/package.json` declares Unlicense. The version line is gone rather than
+  corrected, so there is nothing left to drift
+  ([#209](https://github.com/link-foundation/links-notation/pull/210))
+- Docs: the Maven, Gradle and Composer installation snippets in the Java and PHP
+  READMEs pinned 0.1.0 and `^0.1`, sixteen minors behind the declared 0.17.0, so
+  a reader who copied them installed a 2025 release. `scripts/version-consistency.mjs`
+  now checks every documented install version against the version its
+  implementation declares, which is a hard failure in CI
+  ([#209](https://github.com/link-foundation/links-notation/pull/210))
+- Website: the header carried a hand-typed version literal alongside the one
+  `script.js` writes from `js/package.json` at build time, which is how the page
+  advertised v0.6.0 for ten minor releases
+  ([#209](https://github.com/link-foundation/links-notation/pull/210))
 - A bare delimiter pair is now the empty reference in every implementation
   (JavaScript, Python, Rust, Go, Java, C#, PHP): `(a "" b)` holds an empty
   reference instead of the two-character text `""`, `(a "" "" b)` holds two

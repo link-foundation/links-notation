@@ -1,0 +1,362 @@
+{
+  "orders": [
+    {
+      "id": "ORD-2026-1000",
+      "placedAt": "2026-01-01T00:00:00Z",
+      "status": "delivered",
+      "customer": {
+        "id": 265,
+        "name": "Radia Stroustrup",
+        "email": "customer813@example.com"
+      },
+      "shipping": {
+        "street": "63 Cedar Street",
+        "city": "Bogota",
+        "country": "CO",
+        "postalCode": "76484"
+      },
+      "items": [
+        {
+          "sku": "SKU-81258",
+          "title": "mechanical keyboard",
+          "quantity": 1,
+          "unitPrice": 73.46
+        },
+        {
+          "sku": "SKU-17696",
+          "title": "ergonomic mouse",
+          "quantity": 2,
+          "unitPrice": 193.61
+        },
+        {
+          "sku": "SKU-83581",
+          "title": "laptop stand",
+          "quantity": 2,
+          "unitPrice": 414.84
+        },
+        {
+          "sku": "SKU-44519",
+          "title": "ultrawide monitor",
+          "quantity": 4,
+          "unitPrice": 357.89
+        }
+      ],
+      "total": 2721.92
+    },
+    {
+      "id": "ORD-2026-1001",
+      "placedAt": "2026-01-01T02:02:11Z",
+      "status": "pending",
+      "customer": {
+        "id": 825,
+        "name": "Barbara Berners-Lee",
+        "email": "customer475@example.com"
+      },
+      "shipping": {
+        "street": "1 Union Street",
+        "city": "Toronto",
+        "country": "CA",
+        "postalCode": "53823"
+      },
+      "items": [
+        {
+          "sku": "SKU-34488",
+          "title": "ergonomic mouse",
+          "quantity": 5,
+          "unitPrice": 41.98
+        },
+        {
+          "sku": "SKU-24750",
+          "title": "noise cancelling headset",
+          "quantity": 3,
+          "unitPrice": 339.33
+        },
+        {
+          "sku": "SKU-86946",
+          "title": "laptop stand",
+          "quantity": 5,
+          "unitPrice": 175.22
+        }
+      ],
+      "total": 2103.99
+    },
+    {
+      "id": "ORD-2026-1002",
+      "placedAt": "2026-01-01T04:04:22Z",
+      "status": "shipped",
+      "customer": {
+        "id": 357,
+        "name": "Anita Liskov",
+        "email": "customer932@example.com"
+      },
+      "shipping": {
+        "street": "161 Harbour Street",
+        "city": "Bogota",
+        "country": "CO",
+        "postalCode": "77119"
+      },
+      "items": [
+        {
+          "sku": "SKU-98064",
+          "title": "ergonomic mouse",
+          "quantity": 5,
+          "unitPrice": 321.89
+        }
+      ],
+      "total": 1609.45
+    },
+    {
+      "id": "ORD-2026-1003",
+      "placedAt": "2026-01-01T06:06:33Z",
+      "status": "shipped",
+      "customer": {
+        "id": 436,
+        "name": "Ada Liskov",
+        "email": "customer262@example.com"
+      },
+      "shipping": {
+        "street": "63 Harbour Street",
+        "city": "Lisbon",
+        "country": "PT",
+        "postalCode": "41008"
+      },
+      "items": [
+        {
+          "sku": "SKU-46243",
+          "title": "usb-c hub",
+          "quantity": 4,
+          "unitPrice": 255.35
+        },
+        {
+          "sku": "SKU-46069",
+          "title": "usb-c hub",
+          "quantity": 2,
+          "unitPrice": 296.52
+        },
+        {
+          "sku": "SKU-91952",
+          "title": "laptop stand",
+          "quantity": 3,
+          "unitPrice": 80.81
+        }
+      ],
+      "total": 1856.87
+    },
+    {
+      "id": "ORD-2026-1004",
+      "placedAt": "2026-01-01T08:08:44Z",
+      "status": "paid",
+      "customer": {
+        "id": 107,
+        "name": "Donald Johnson",
+        "email": "customer483@example.com"
+      },
+      "shipping": {
+        "street": "87 Cedar Street",
+        "city": "Toronto",
+        "country": "CA",
+        "postalCode": "81816"
+      },
+      "items": [
+        {
+          "sku": "SKU-95454",
+          "title": "ergonomic mouse",
+          "quantity": 5,
+          "unitPrice": 162.66
+        },
+        {
+          "sku": "SKU-65278",
+          "title": "webcam",
+          "quantity": 5,
+          "unitPrice": 443.9
+        },
+        {
+          "sku": "SKU-14618",
+          "title": "laptop stand",
+          "quantity": 4,
+          "unitPrice": 268.83
+        }
+      ],
+      "total": 4108.12
+    },
+    {
+      "id": "ORD-2026-1005",
+      "placedAt": "2026-01-01T10:10:55Z",
+      "status": "delivered",
+      "customer": {
+        "id": 698,
+        "name": "Sophie Borg",
+        "email": "customer843@example.com"
+      },
+      "shipping": {
+        "street": "73 Harbour Street",
+        "city": "Berlin",
+        "country": "DE",
+        "postalCode": "61644"
+      },
+      "items": [
+        {
+          "sku": "SKU-18344",
+          "title": "ultrawide monitor",
+          "quantity": 4,
+          "unitPrice": 408.5
+        },
+        {
+          "sku": "SKU-64705",
+          "title": "ultrawide monitor",
+          "quantity": 3,
+          "unitPrice": 121.53
+        },
+        {
+          "sku": "SKU-61204",
+          "title": "ergonomic mouse",
+          "quantity": 4,
+          "unitPrice": 438.62
+        },
+        {
+          "sku": "SKU-38264",
+          "title": "webcam",
+          "quantity": 3,
+          "unitPrice": 15.96
+        }
+      ],
+      "total": 3800.95
+    },
+    {
+      "id": "ORD-2026-1006",
+      "placedAt": "2026-01-01T12:13:06Z",
+      "status": "pending",
+      "customer": {
+        "id": 561,
+        "name": "Ada Allen",
+        "email": "customer855@example.com"
+      },
+      "shipping": {
+        "street": "58 Maple Street",
+        "city": "Berlin",
+        "country": "DE",
+        "postalCode": "75223"
+      },
+      "items": [
+        {
+          "sku": "SKU-37718",
+          "title": "laptop stand",
+          "quantity": 2,
+          "unitPrice": 176.31
+        }
+      ],
+      "total": 352.62
+    },
+    {
+      "id": "ORD-2026-1007",
+      "placedAt": "2026-01-01T14:15:17Z",
+      "status": "shipped",
+      "customer": {
+        "id": 606,
+        "name": "Katherine Bartik",
+        "email": "customer387@example.com"
+      },
+      "shipping": {
+        "street": "121 Union Street",
+        "city": "Berlin",
+        "country": "DE",
+        "postalCode": "74823"
+      },
+      "items": [
+        {
+          "sku": "SKU-20938",
+          "title": "desk lamp",
+          "quantity": 3,
+          "unitPrice": 236.12
+        },
+        {
+          "sku": "SKU-74530",
+          "title": "usb-c hub",
+          "quantity": 3,
+          "unitPrice": 215.09
+        },
+        {
+          "sku": "SKU-58080",
+          "title": "noise cancelling headset",
+          "quantity": 2,
+          "unitPrice": 139.51
+        }
+      ],
+      "total": 1632.65
+    },
+    {
+      "id": "ORD-2026-1008",
+      "placedAt": "2026-01-01T16:17:28Z",
+      "status": "pending",
+      "customer": {
+        "id": 492,
+        "name": "Donald Allen",
+        "email": "customer815@example.com"
+      },
+      "shipping": {
+        "street": "182 Harbour Street",
+        "city": "Lisbon",
+        "country": "PT",
+        "postalCode": "35923"
+      },
+      "items": [
+        {
+          "sku": "SKU-77909",
+          "title": "webcam",
+          "quantity": 2,
+          "unitPrice": 243.24
+        },
+        {
+          "sku": "SKU-69386",
+          "title": "laptop stand",
+          "quantity": 1,
+          "unitPrice": 27.19
+        },
+        {
+          "sku": "SKU-50891",
+          "title": "laptop stand",
+          "quantity": 1,
+          "unitPrice": 46.13
+        },
+        {
+          "sku": "SKU-13197",
+          "title": "usb-c hub",
+          "quantity": 3,
+          "unitPrice": 86.75
+        }
+      ],
+      "total": 820.05
+    },
+    {
+      "id": "ORD-2026-1009",
+      "placedAt": "2026-01-01T18:19:39Z",
+      "status": "shipped",
+      "customer": {
+        "id": 725,
+        "name": "Alan Johnson",
+        "email": "customer809@example.com"
+      },
+      "shipping": {
+        "street": "129 Cedar Street",
+        "city": "Bogota",
+        "country": "CO",
+        "postalCode": "87695"
+      },
+      "items": [
+        {
+          "sku": "SKU-25563",
+          "title": "laptop stand",
+          "quantity": 5,
+          "unitPrice": 141.48
+        },
+        {
+          "sku": "SKU-82614",
+          "title": "laptop stand",
+          "quantity": 2,
+          "unitPrice": 85.76
+        }
+      ],
+      "total": 878.92
+    }
+  ]
+}

@@ -128,6 +128,33 @@ mama has house
 (linksNotation supports (unlimited number (of references) in each link))
 ```
 
+### Multi-line Groups
+
+A parenthesized group opens a *nested context*: its body starts fresh at
+indentation level zero and follows the same rules as the root document, so a
+line break inside parentheses is structure rather than decoration.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+The document above parses to `(value ((id 1) (label one)))` - two children, each
+a link of its own - rather than to one flat list in which the boundary between
+`id` and `label` would be lost. A body that stays on a single line still
+collapses to a single link, so `(a b c)` is unchanged.
+
+```csharp
+var links = new Parser().Parse(@"value (
+  id ""1""
+  label ""one""
+)");
+
+Console.WriteLine(links[0]); // (value ((id 1) (label one)))
+```
+
 ## API Reference
 
 ### Classes

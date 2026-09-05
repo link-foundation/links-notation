@@ -1,0 +1,15 @@
+{
+  "name": "links-notation-comparison",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generates the format comparison shown in the README from a single JSON source",
+  "scripts": {
+    "generate": "node generate.mjs && python3 generate_comparison_svgs.py",
+    "check": "node generate.mjs --check && python3 generate_comparison_svgs.py --check"
+  },
+  "dependencies": {
+    "lino-objects-codec": "^0.8.0",
+    "yaml": "^2.8.1"
+  }
+}

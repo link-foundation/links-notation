@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <orders>
+    <id>ORD-2026-1000</id>
+    <placedAt>2026-01-01T00:00:00Z</placedAt>
+    <status>delivered</status>
+    <customer>
+      <id>265</id>
+      <name>Radia Stroustrup</name>
+      <email>customer813@example.com</email>
+    </customer>
+    <shipping>
+      <street>63 Cedar Street</street>
+      <city>Bogota</city>
+      <country>CO</country>
+      <postalCode>76484</postalCode>
+    </shipping>
+    <items>
+      <sku>SKU-81258</sku>
+      <title>mechanical keyboard</title>
+      <quantity>1</quantity>
+      <unitPrice>73.46</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-17696</sku>
+      <title>ergonomic mouse</title>
+      <quantity>2</quantity>
+      <unitPrice>193.61</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-83581</sku>
+      <title>laptop stand</title>
+      <quantity>2</quantity>
+      <unitPrice>414.84</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-44519</sku>
+      <title>ultrawide monitor</title>
+      <quantity>4</quantity>
+      <unitPrice>357.89</unitPrice>
+    </items>
+    <total>2721.92</total>
+  </orders>
+  <orders>
+    <id>ORD-2026-1001</id>
+    <placedAt>2026-01-01T02:02:11Z</placedAt>
+    <status>pending</status>
+    <customer>
+      <id>825</id>
+      <name>Barbara Berners-Lee</name>
+      <email>customer475@example.com</email>
+    </customer>
+    <shipping>
+      <street>1 Union Street</street>
+      <city>Toronto</city>
+      <country>CA</country>
+      <postalCode>53823</postalCode>
+    </shipping>
+    <items>
+      <sku>SKU-34488</sku>
+      <title>ergonomic mouse</title>
+      <quantity>5</quantity>
+      <unitPrice>41.98</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-24750</sku>
+      <title>noise cancelling headset</title>
+      <quantity>3</quantity>
+      <unitPrice>339.33</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-86946</sku>
+      <title>laptop stand</title>
+      <quantity>5</quantity>
+      <unitPrice>175.22</unitPrice>
+    </items>
+    <total>2103.99</total>
+  </orders>
+  <orders>
+    <id>ORD-2026-1002</id>
+    <placedAt>2026-01-01T04:04:22Z</placedAt>
+    <status>shipped</status>
+    <customer>
+      <id>357</id>
+      <name>Anita Liskov</name>
+      <email>customer932@example.com</email>
+    </customer>
+    <shipping>
+      <street>161 Harbour Street</street>
+      <city>Bogota</city>
+      <country>CO</country>
+      <postalCode>77119</postalCode>
+    </shipping>
+    <items>
+      <sku>SKU-98064</sku>
+      <title>ergonomic mouse</title>
+      <quantity>5</quantity>
+      <unitPrice>321.89</unitPrice>
+    </items>
+    <total>1609.45</total>
+  </orders>
+  <orders>
+    <id>ORD-2026-1003</id>
+    <placedAt>2026-01-01T06:06:33Z</placedAt>
+    <status>shipped</status>
+    <customer>
+      <id>436</id>
+      <name>Ada Liskov</name>
+      <email>customer262@example.com</email>
+    </customer>
+    <shipping>
+      <street>63 Harbour Street</street>
+      <city>Lisbon</city>
+      <country>PT</country>
+      <postalCode>41008</postalCode>
+    </shipping>
+    <items>
+      <sku>SKU-46243</sku>
+      <title>usb-c hub</title>
+      <quantity>4</quantity>
+      <unitPrice>255.35</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-46069</sku>
+      <title>usb-c hub</title>
+      <quantity>2</quantity>
+      <unitPrice>296.52</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-91952</sku>
+      <title>laptop stand</title>
+      <quantity>3</quantity>
+      <unitPrice>80.81</unitPrice>
+    </items>
+    <total>1856.87</total>
+  </orders>
+  <orders>
+    <id>ORD-2026-1004</id>
+    <placedAt>2026-01-01T08:08:44Z</placedAt>
+    <status>paid</status>
+    <customer>
+      <id>107</id>
+      <name>Donald Johnson</name>
+      <email>customer483@example.com</email>
+    </customer>
+    <shipping>
+      <street>87 Cedar Street</street>
+      <city>Toronto</city>
+      <country>CA</country>
+      <postalCode>81816</postalCode>
+    </shipping>
+    <items>
+      <sku>SKU-95454</sku>
+      <title>ergonomic mouse</title>
+      <quantity>5</quantity>
+      <unitPrice>162.66</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-65278</sku>
+      <title>webcam</title>
+      <quantity>5</quantity>
+      <unitPrice>443.9</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-14618</sku>
+      <title>laptop stand</title>
+      <quantity>4</quantity>
+      <unitPrice>268.83</unitPrice>
+    </items>
+    <total>4108.12</total>
+  </orders>
+  <orders>
+    <id>ORD-2026-1005</id>
+    <placedAt>2026-01-01T10:10:55Z</placedAt>
+    <status>delivered</status>
+    <customer>
+      <id>698</id>
+      <name>Sophie Borg</name>
+      <email>customer843@example.com</email>
+    </customer>
+    <shipping>
+      <street>73 Harbour Street</street>
+      <city>Berlin</city>
+      <country>DE</country>
+      <postalCode>61644</postalCode>
+    </shipping>
+    <items>
+      <sku>SKU-18344</sku>
+      <title>ultrawide monitor</title>
+      <quantity>4</quantity>
+      <unitPrice>408.5</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-64705</sku>
+      <title>ultrawide monitor</title>
+      <quantity>3</quantity>
+      <unitPrice>121.53</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-61204</sku>
+      <title>ergonomic mouse</title>
+      <quantity>4</quantity>
+      <unitPrice>438.62</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-38264</sku>
+      <title>webcam</title>
+      <quantity>3</quantity>
+      <unitPrice>15.96</unitPrice>
+    </items>
+    <total>3800.95</total>
+  </orders>
+  <orders>
+    <id>ORD-2026-1006</id>
+    <placedAt>2026-01-01T12:13:06Z</placedAt>
+    <status>pending</status>
+    <customer>
+      <id>561</id>
+      <name>Ada Allen</name>
+      <email>customer855@example.com</email>
+    </customer>
+    <shipping>
+      <street>58 Maple Street</street>
+      <city>Berlin</city>
+      <country>DE</country>
+      <postalCode>75223</postalCode>
+    </shipping>
+    <items>
+      <sku>SKU-37718</sku>
+      <title>laptop stand</title>
+      <quantity>2</quantity>
+      <unitPrice>176.31</unitPrice>
+    </items>
+    <total>352.62</total>
+  </orders>
+  <orders>
+    <id>ORD-2026-1007</id>
+    <placedAt>2026-01-01T14:15:17Z</placedAt>
+    <status>shipped</status>
+    <customer>
+      <id>606</id>
+      <name>Katherine Bartik</name>
+      <email>customer387@example.com</email>
+    </customer>
+    <shipping>
+      <street>121 Union Street</street>
+      <city>Berlin</city>
+      <country>DE</country>
+      <postalCode>74823</postalCode>
+    </shipping>
+    <items>
+      <sku>SKU-20938</sku>
+      <title>desk lamp</title>
+      <quantity>3</quantity>
+      <unitPrice>236.12</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-74530</sku>
+      <title>usb-c hub</title>
+      <quantity>3</quantity>
+      <unitPrice>215.09</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-58080</sku>
+      <title>noise cancelling headset</title>
+      <quantity>2</quantity>
+      <unitPrice>139.51</unitPrice>
+    </items>
+    <total>1632.65</total>
+  </orders>
+  <orders>
+    <id>ORD-2026-1008</id>
+    <placedAt>2026-01-01T16:17:28Z</placedAt>
+    <status>pending</status>
+    <customer>
+      <id>492</id>
+      <name>Donald Allen</name>
+      <email>customer815@example.com</email>
+    </customer>
+    <shipping>
+      <street>182 Harbour Street</street>
+      <city>Lisbon</city>
+      <country>PT</country>
+      <postalCode>35923</postalCode>
+    </shipping>
+    <items>
+      <sku>SKU-77909</sku>
+      <title>webcam</title>
+      <quantity>2</quantity>
+      <unitPrice>243.24</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-69386</sku>
+      <title>laptop stand</title>
+      <quantity>1</quantity>
+      <unitPrice>27.19</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-50891</sku>
+      <title>laptop stand</title>
+      <quantity>1</quantity>
+      <unitPrice>46.13</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-13197</sku>
+      <title>usb-c hub</title>
+      <quantity>3</quantity>
+      <unitPrice>86.75</unitPrice>
+    </items>
+    <total>820.05</total>
+  </orders>
+  <orders>
+    <id>ORD-2026-1009</id>
+    <placedAt>2026-01-01T18:19:39Z</placedAt>
+    <status>shipped</status>
+    <customer>
+      <id>725</id>
+      <name>Alan Johnson</name>
+      <email>customer809@example.com</email>
+    </customer>
+    <shipping>
+      <street>129 Cedar Street</street>
+      <city>Bogota</city>
+      <country>CO</country>
+      <postalCode>87695</postalCode>
+    </shipping>
+    <items>
+      <sku>SKU-25563</sku>
+      <title>laptop stand</title>
+      <quantity>5</quantity>
+      <unitPrice>141.48</unitPrice>
+    </items>
+    <items>
+      <sku>SKU-82614</sku>
+      <title>laptop stand</title>
+      <quantity>2</quantity>
+      <unitPrice>85.76</unitPrice>
+    </items>
+    <total>878.92</total>
+  </orders>
+</root>

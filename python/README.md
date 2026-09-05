@@ -133,6 +133,33 @@ text = '("has space": "value with: colon")'
 links = parser.parse(text)
 ```
 
+### Multi-line Groups
+
+A parenthesized group opens a *nested context*: its body starts fresh at
+indentation level zero and follows the same rules as the root document, so a
+line break inside parentheses is structure rather than decoration.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+The document above parses to `(value ((id 1) (label one)))` - two children, each
+a link of its own - rather than to one flat list in which the boundary between
+`id` and `label` would be lost. A body that stays on a single line still
+collapses to a single link, so `(a b c)` is unchanged.
+
+```python
+text = """value (
+  id "1"
+  label "one"
+)"""
+print(format_links(parser.parse(text)))
+# (value ((id 1) (label one)))
+```
+
 ## Development
 
 ### Running Tests

@@ -1,7 +1,19 @@
 #!/usr/bin/env python3
+"""Draws the format comparison picture the README shows.
+
+The four documents are read from the files next to this script, which
+`generate.mjs` writes from `comparison.json`. Nothing here is typed by hand:
+change the source data, run both generators, and the picture follows.
+
+Usage: `python3 docs/comparison/generate_comparison_svgs.py [--check]`. With
+`--check` the committed SVGs are compared instead of written.
+"""
 import re
+import sys
+from pathlib import Path
 
 CHAR_WIDTH = 8.4
+HERE = Path(__file__).resolve().parent
 
 def get_theme_colors(theme):
     if theme == 'light':
@@ -45,44 +57,32 @@ def get_theme_colors(theme):
         }
 
 def highlight_lino(line, colors):
+    """Colour one line of Links Notation.
+
+    The codec writes three kinds of line: a bare parenthesis, a key that opens
+    a group, and a key followed by a value that is either a quoted string or a
+    bare number.
+    """
     result = []
     indent = len(line) - len(line.lstrip(' '))
     result.append((' ' * indent, colors['text_color']))
 
     content = line.lstrip(' ')
 
-    if content in ('(', ')'):
-        result.append((content, colors['punctuation_color']))
-    elif content.endswith(':'):
-        result.append((content[:-1], colors['keyword_color']))
-        result.append((':', colors['punctuation_color']))
-    else:
-        paren_match = re.match(r'^([^(]+)(\(.+\))$', content)
-        if paren_match:
-            key = paren_match.group(1).rstrip()
-            value = paren_match.group(2)
-            result.append((key, colors['keyword_color']))
-            result.append((' ', colors['text_color']))
-            result.append(('(', colors['punctuation_color']))
-            result.append((value[1:-1], colors['string_color']))
-            result.append((')', colors['punctuation_color']))
-        elif content and content[0].isdigit() and content.split()[0].isdigit():
-            parts = content.split(None, 1)
-            result.append((parts[0], colors['number_color']))
-            if len(parts) > 1:
-                result.append((' ' + parts[1], colors['text_color']))
-        elif ' ' in content:
-            parts = content.split(None, 1)
-            if parts[1].isdigit():
-                result.append((parts[0], colors['keyword_color']))
-                result.append((' ', colors['text_color']))
-                result.append((parts[1], colors['number_color']))
-            else:
-                result.append((content, colors['keyword_color']))
+    for text in re.findall(r'"(?:[^"\\]|\\.)*"|[()]|[^\s()]+|\s+', content):
+        if text.startswith('"'):
+            result.append((text, colors['string_color']))
+        elif text in ('(', ')'):
+            result.append((text, colors['punctuation_color']))
+        elif text.isspace():
+            result.append((text, colors['text_color']))
+        elif re.fullmatch(r'-?\d+(?:\.\d+)?', text):
+            result.append((text, colors['number_color']))
         else:
-            result.append((content, colors['keyword_color']))
+            result.append((text, colors['keyword_color']))
 
     return result
+
 
 def highlight_yaml(line, colors):
     result = []
@@ -204,117 +204,55 @@ def render_line(tokens, x_start, y):
             x += len(text) * CHAR_WIDTH
     return ''.join(svg_parts)
 
-def render_format_box(format_name, box_x, box_y, lines, highlighter, colors, box_width, box_height, line_height, start_y, is_shared_border=False):
-    # Only render border if not shared, or render partial border for shared borders
-    if is_shared_border:
-        # For shared borders, only draw left and top borders
-        svg = f'  <line x1="{box_x}" y1="{box_y}" x2="{box_x + box_width}" y2="{box_y}" class="border-line"/>\n'
-        svg += f'  <line x1="{box_x}" y1="{box_y}" x2="{box_x}" y2="{box_y + box_height}" class="border-line"/>\n'
-    else:
-        svg = f'  <rect x="{box_x}" y="{box_y}" width="{box_width}" height="{box_height}" class="border"/>\n'
-
-    svg += f'  <text x="{box_x + box_width//2}" y="{box_y + 25}" text-anchor="middle" class="format-title">{format_name}</text>\n\n'
-
-    for i, line in enumerate(lines):
-        y = box_y + start_y - 50 + (i * line_height)
-        line_num = i + 1
-
-        svg += '  <text class="line-number">\n'
-        svg += f'    <tspan x="{box_x + 20}" y="{y}">{line_num}</tspan>\n'
-        svg += '  </text>\n'
-
-        tokens = highlighter(line, colors)
-        svg += '  <text xml:space="preserve">\n'
-        svg += f'    {render_line(tokens, box_x + 50, y)}\n'
-        svg += '  </text>\n\n'
-
-    return svg
-
 def get_format_data():
-    lino_lines = [
-        "empInfo",
-        "  employees:",
-        "    (",
-        "      name (James Kirk)",
-        "      age 40",
-        "    )",
-        "    (",
-        "      name (Jean-Luc Picard)",
-        "      age 45",
-        "    )",
-        "    (",
-        "      name (Wesley Crusher)",
-        "      age 27",
-        "    )"
-    ]
+    """Read the four documents, so the picture cannot drift from the files."""
+    def lines_of(name):
+        return (HERE / name).read_text(encoding='utf-8').rstrip('\n').split('\n')
 
-    yaml_lines = [
-        "empInfo:",
-        "  employees:",
-        "    - name: James Kirk",
-        "      age: 40",
-        "    - name: Jean-Luc Picard",
-        "      age: 45",
-        "    - name: Wesley Crusher",
-        "      age: 27"
-    ]
+    return (
+        lines_of('comparison.lino'),
+        lines_of('comparison.yaml'),
+        lines_of('comparison.json'),
+        lines_of('comparison.xml'),
+    )
 
-    json_lines = [
-        "{",
-        '  "empInfo": {',
-        '    "employees": [',
-        "      {",
-        '        "name": "James Kirk",',
-        '        "age": 40',
-        "      },",
-        "      {",
-        '        "name": "Jean-Luc Picard",',
-        '        "age": 45',
-        "      },",
-        "      {",
-        '        "name": "Wesley Crusher",',
-        '        "age": 27',
-        "      }",
-        "    ]",
-        "  }",
-        "}"
-    ]
 
-    xml_lines = [
-        "<empInfo>",
-        "  <employees>",
-        "    <employee>",
-        "      <name>James Kirk</name>",
-        "      <age>40</age>",
-        "    </employee>",
-        "    <employee>",
-        "      <name>Jean-Luc Picard</name>",
-        "      <age>45</age>",
-        "    </employee>",
-        "    <employee>",
-        "      <name>Wesley Crusher</name>",
-        "      <age>27</age>",
-        "    </employee>",
-        "  </employees>",
-        "</empInfo>"
-    ]
+LINE_HEIGHT = 20
+TITLE_HEIGHT = 45
+GUTTER = 50
+PADDING = 20
+MARGIN = 20
+GRID_TOP = 50
 
-    return lino_lines, yaml_lines, json_lines, xml_lines
+THEMES = {'light': 'comparison-light.svg',
+          'dark': 'comparison-dark.svg',
+          'universal': 'comparison.svg'}
+
 
 def create_svg_comparison(theme='light'):
     colors = get_theme_colors(theme)
     lino_lines, yaml_lines, json_lines, xml_lines = get_format_data()
 
-    # Calculate box dimensions based on content
-    box_width = 580
-    box_height = 420
-    line_height = 20
-    start_y = 95
+    boxes = [
+        ('LiNo', lino_lines, highlight_lino),
+        ('YAML', yaml_lines, highlight_yaml),
+        ('JSON', json_lines, highlight_json),
+        ('XML', xml_lines, highlight_xml),
+    ]
 
-    # Total dimensions with shared borders
-    margin = 20
-    total_width = margin + (box_width * 2) + margin
-    total_height = margin + 20 + (box_height * 2) + margin  # +20 for title
+    # The grid is sized from the documents, so a longer example widens the
+    # picture instead of spilling out of it.
+    widest = max(len(line) for _, lines, _ in boxes for line in lines)
+    tallest = max(len(lines) for _, lines, _ in boxes)
+    box_width = GUTTER + PADDING + int(widest * CHAR_WIDTH + 0.5) + PADDING
+    box_height = TITLE_HEIGHT + tallest * LINE_HEIGHT + PADDING
+
+    grid_x = MARGIN
+    grid_y = GRID_TOP
+    grid_width = box_width * 2
+    grid_height = box_height * 2
+    total_width = grid_width + MARGIN * 2
+    total_height = grid_y + grid_height + MARGIN
 
     svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {total_width} {total_height}" style="font-family: 'Courier New', monospace; font-size: 14px;">
   <defs>
@@ -330,66 +268,60 @@ def create_svg_comparison(theme='light'):
 
   <rect x="0" y="0" width="{total_width}" height="{total_height}" class="bg"/>
 
-  <text x="{total_width//2}" y="30" text-anchor="middle" class="title">Format Comparison: LiNo, YAML, JSON, XML</text>
+  <text x="{total_width // 2}" y="30" text-anchor="middle" class="title">Format Comparison: LiNo, YAML, JSON, XML</text>
 
 '''
 
-    # Draw outer border for the entire 2x2 grid
-    grid_x = margin
-    grid_y = 50
-    grid_width = box_width * 2
-    grid_height = box_height * 2
-
     svg += f'  <rect x="{grid_x}" y="{grid_y}" width="{grid_width}" height="{grid_height}" class="border"/>\n'
-
-    # Draw center vertical line
-    svg += f'  <line x1="{grid_x + box_width}" y1="{grid_y}" x2="{grid_x + box_width}" y2="{grid_y + grid_height}" class="border-line"/>\n'
-
-    # Draw center horizontal line
-    svg += f'  <line x1="{grid_x}" y1="{grid_y + box_height}" x2="{grid_x + grid_width}" y2="{grid_y + box_height}" class="border-line"/>\n'
-
+    svg += (f'  <line x1="{grid_x + box_width}" y1="{grid_y}" '
+            f'x2="{grid_x + box_width}" y2="{grid_y + grid_height}" class="border-line"/>\n')
+    svg += (f'  <line x1="{grid_x}" y1="{grid_y + box_height}" '
+            f'x2="{grid_x + grid_width}" y2="{grid_y + box_height}" class="border-line"/>\n')
     svg += '\n'
 
-    # Render boxes without their own borders (using the shared grid)
-    boxes = [
-        ("LiNo", grid_x, grid_y, lino_lines, highlight_lino),
-        ("YAML", grid_x + box_width, grid_y, yaml_lines, highlight_yaml),
-        ("JSON", grid_x, grid_y + box_height, json_lines, highlight_json),
-        ("XML", grid_x + box_width, grid_y + box_height, xml_lines, highlight_xml)
-    ]
+    for index, (format_name, lines, highlighter) in enumerate(boxes):
+        box_x = grid_x + (index % 2) * box_width
+        box_y = grid_y + (index // 2) * box_height
 
-    for format_name, box_x, box_y, lines, highlighter in boxes:
-        # Add title
-        svg += f'  <text x="{box_x + box_width//2}" y="{box_y + 25}" text-anchor="middle" class="format-title">{format_name}</text>\n\n'
+        svg += (f'  <text x="{box_x + box_width // 2}" y="{box_y + 25}" '
+                f'text-anchor="middle" class="format-title">{format_name}</text>\n\n')
 
-        # Add content
         for i, line in enumerate(lines):
-            y = box_y + start_y - 50 + (i * line_height)
-            line_num = i + 1
+            y = box_y + TITLE_HEIGHT + (i * LINE_HEIGHT)
 
             svg += '  <text class="line-number">\n'
-            svg += f'    <tspan x="{box_x + 20}" y="{y}">{line_num}</tspan>\n'
+            svg += f'    <tspan x="{box_x + PADDING}" y="{y}">{i + 1}</tspan>\n'
             svg += '  </text>\n'
 
-            tokens = highlighter(line, colors)
             svg += '  <text xml:space="preserve">\n'
-            svg += f'    {render_line(tokens, box_x + 50, y)}\n'
+            svg += f'    {render_line(highlighter(line, colors), box_x + GUTTER, y)}\n'
             svg += '  </text>\n\n'
 
-    svg += '</svg>\n'
+    return svg + '</svg>\n'
 
-    return svg
+
+def main(argv):
+    check = '--check' in argv[1:]
+    stale = []
+
+    for theme, filename in THEMES.items():
+        svg = create_svg_comparison(theme)
+        path = HERE / filename
+        if check:
+            current = path.read_text(encoding='utf-8') if path.exists() else None
+            if current != svg:
+                stale.append(filename)
+            continue
+        path.write_text(svg, encoding='utf-8')
+        print(f'Wrote {path.relative_to(HERE.parent.parent)}')
+
+    if check:
+        if stale:
+            print('Out of date, run generate_comparison_svgs.py: ' + ', '.join(stale))
+            return 1
+        print('The committed comparison SVGs match the documents')
+    return 0
+
 
 if __name__ == '__main__':
-    themes = ['light', 'dark', 'universal']
-
-    for theme in themes:
-        svg_content = create_svg_comparison(theme)
-        if theme == 'universal':
-            filename = 'comparison.svg'
-        else:
-            filename = f'comparison-{theme}.svg'
-
-        with open(filename, 'w') as f:
-            f.write(svg_content)
-        print(f'Created {filename}')
+    sys.exit(main(sys.argv))

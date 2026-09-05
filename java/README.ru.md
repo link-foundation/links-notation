@@ -12,7 +12,7 @@ Java-реализация парсера Links Notation.
 <dependency>
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.1.0</version>
+    <version>0.17.0</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ Java-реализация парсера Links Notation.
 Добавьте зависимость в ваш `build.gradle`:
 
 ```groovy
-implementation 'io.github.link-foundation:links-notation:0.1.0'
+implementation 'io.github.link-foundation:links-notation:0.17.0'
 ```
 
 ### Локальная разработка
@@ -178,6 +178,36 @@ parent
 (3: papa loves mama)
 ```
 
+### Многострочные группы
+
+Скобочная группа открывает *вложенный контекст*: её тело начинается заново с
+нулевого уровня отступа и подчиняется тем же правилам, что и корень документа,
+поэтому перенос строки внутри скобок — это структура, а не оформление.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+Документ выше разбирается в `(value ((id 1) (label one)))` — два потомка,
+каждый из которых сам является связью, — а не в один плоский список, в котором
+граница между `id` и `label` была бы потеряна. Тело, умещающееся в одну строку,
+по-прежнему сворачивается в одну связь, так что `(a b c)` не меняется.
+
+```java
+String input = """
+    value (
+      id "1"
+      label "one"
+    )
+    """;
+
+List<Link> links = new Parser().parse(input);
+System.out.println(links.get(0).format(false)); // (value ((id 1) (label one)))
+```
+
 ## Справочник API
 
 ### Классы
@@ -253,5 +283,4 @@ mvn spotless:check
 
 - Group ID: `io.github.link-foundation`
 - Artifact ID: `links-notation`
-- Версия: 0.1.0
-- Лицензия: Unlicense
+- Лицензия: Unlicense (см. [LICENSE](../LICENSE))

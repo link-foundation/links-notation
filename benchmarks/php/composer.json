@@ -1,0 +1,33 @@
+{
+    "name": "link-foundation/links-notation-benchmark",
+    "description": "PHP side of the Links Notation token efficiency benchmarks",
+    "type": "project",
+    "license": "Unlicense",
+    "require": {
+        "php": ">=8.4",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "link-foundation/links-notation": "*",
+        "yethee/tiktoken": "^1.1"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^4.0"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../php",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "scripts": {
+        "benchmark": "php benchmark.php",
+        "lint": "phpcs",
+        "lint:fix": "phpcbf"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

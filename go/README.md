@@ -1,4 +1,4 @@
-# links-notation Go
+# Links Notation Parser for Go
 
 [![Actions Status](https://github.com/link-foundation/links-notation/workflows/go/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=go)
 [![Go Reference](https://pkg.go.dev/badge/github.com/link-foundation/links-notation/go.svg)](https://pkg.go.dev/github.com/link-foundation/links-notation/go)
@@ -44,7 +44,7 @@ func main() {
 - Quoted strings with special characters
 - Triple-quoted strings for embedded quotes
 - Configurable formatting with `FormatConfig`
-- Full compatibility with other language implementations (JS, Rust, C#, Python)
+- Full compatibility with the other six implementations (C#, JavaScript, Rust, Python, Java, PHP)
 
 ## API Reference
 
@@ -206,7 +206,8 @@ links, _ := lino.Parse("(a: (b: (c: (d: value))))")
 ### Custom Formatting
 
 ```go
-link := lino.NewLink(lino.StrPtr("id"), []*lino.Link{
+id := "id"
+link := lino.NewLink(&id, []*lino.Link{
     lino.NewRef("value1"),
     lino.NewRef("value2"),
 })
@@ -257,6 +258,34 @@ I'm a friendly AI.
 ```
 
 Equivalent to: `(3: papa loves mama)`
+
+### Multi-line Groups
+
+A parenthesized group opens a *nested context*: its body starts fresh at
+indentation level zero and follows the same rules as the root document, so a
+line break inside parentheses is structure rather than decoration.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+The document above parses to `(value ((id 1) (label one)))` - two children, each
+a link of its own - rather than to one flat list in which the boundary between
+`id` and `label` would be lost. A body that stays on a single line still
+collapses to a single link, so `(a b c)` is unchanged.
+
+```go
+document := `value (
+  id "1"
+  label "one"
+)`
+
+links, _ := lino.Parse(document)
+fmt.Println(lino.Format(links)) // (value ((id 1) (label one)))
+```
 
 ## Testing
 

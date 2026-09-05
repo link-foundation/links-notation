@@ -7,18 +7,23 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lino">
-    <title>Links Notation (Lino) - Natural Data Format</title>
-    <meta name="description" content="Links Notation (Lino) - A natural, intuitive format for representing structured data as links between ~~entities~~ references to links.">
-    <link rel="icon" type="image/x-icon" href="/Protocols.Lino/favicon.ico">
-    <link rel="apple-touch-icon" href="/Protocols.Lino/favicon.svg">
-    <link rel="stylesheet" href="style.css">
+    <title>Links Notation - Natural Data Format</title>
+    <meta name="description" content="Links Notation - a natural, intuitive format for representing structured data as links between references to links. Seven implementations: JavaScript, Rust, C#, Python, Go, Java and PHP.">
+    <!-- Relative, so the icons resolve under whatever path Pages serves. -->
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="apple-touch-icon" href="./favicon.svg">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <header class="hero">
         <nav class="nav">
             <div class="nav-brand">
                 <h1>Links Notation</h1>
-                <span class="version">v0.6.0</span>
+                <!-- Filled in by script.js from the library's own package.json at build
+                     time. Left empty on purpose: a literal here is a second place the
+                     version can be wrong, which is how the page came to advertise v0.6.0
+                     for ten minor releases. -->
+                <span class="version" id="version"></span>
             </div>
             <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span class="nav-toggle-icon">☰</span>
@@ -31,7 +36,7 @@
                 <li><a href="https://github.com/link-foundation/links-notation" target="_blank" rel="noopener noreferrer">GitHub</a></li>
             </ul>
         </nav>
-        
+
         <div class="hero-content">
             <h1 class="hero-title">Links Notation</h1>
             <p class="hero-subtitle">A natural, intuitive format for representing structured data as links between <s>entities</s> references to links</p>
@@ -67,10 +72,10 @@
                         <p>Supports nested structures with indentation</p>
                     </div>
                 </div>
-                
+
                 <div class="comparison">
                     <img src="../comparison/comparison.svg"
-                         alt="Comparison of JSON, XML, and Lino formats"
+                         alt="The same three employee records written as Links Notation, YAML, JSON and XML"
                          class="comparison-image">
                 </div>
             </div>
@@ -101,6 +106,29 @@ mama has house
 (This is a linksNotation as well)</code></pre>
                     </div>
                     <div class="example-card">
+                        <h3>Nested contexts</h3>
+                        <p>A line break inside parentheses opens a context that follows the same indentation rules as the document root.</p>
+                        <pre><code>parent (
+  child
+  (grandchild one)
+  (grandchild two)
+)</code></pre>
+                    </div>
+                    <div class="example-card">
+                        <h3>Objects as notation</h3>
+                        <p>Because parentheses nest, <code>lino-objects-codec</code> writes any JSON value as readable notation and reads it back.</p>
+                        <pre><code id="codec-sample">(
+  empInfo (
+    employees (
+      (
+        name "James Kirk"
+        age 40
+      )
+    )
+  )
+)</code></pre>
+                    </div>
+                    <div class="example-card">
                         <h3>Complex Nesting</h3>
                         <pre><code>(linksNotation supports (unlimited number (of references) in each link))
 (sequence (of references) surrounded by parentheses is a link)</code></pre>
@@ -112,6 +140,7 @@ mama has house
         <section id="playground" class="section">
             <div class="container">
                 <h2>Interactive Playground</h2>
+                <p>Parsed in your browser by this repository's JavaScript implementation, not by an imitation of it.</p>
                 <div class="playground">
                     <div class="playground-input">
                         <h3>Input</h3>
@@ -130,61 +159,128 @@ daughter lovesMama</textarea>
 
         <section id="docs" class="section section-alt">
             <div class="container">
-                <h2>Documentation & APIs</h2>
+                <h2>Documentation &amp; APIs</h2>
                 <div class="docs-grid">
                     <div class="doc-card">
                         <h3>JavaScript</h3>
-                        <p>Modern web development with ES6+ support</p>
+                        <p>Modern web development with ES modules</p>
                         <div class="badges">
-                            <img src="https://img.shields.io/npm/v/@linksplatform/protocols-lino?label=npm&style=flat" alt="npm version">
+                            <img src="https://img.shields.io/npm/v/links-notation?label=npm&amp;style=flat" alt="npm version">
                         </div>
                         <div class="doc-links">
-                            <a href="js/README.md" class="btn btn-small">Guide</a>
-                            <a href="https://www.npmjs.com/package/@linksplatform/protocols-lino" class="btn btn-small">NPM</a>
-                        </div>
-                    </div>
-                    <div class="doc-card">
-                        <h3>C#</h3>
-                        <p>High-performance .NET implementation</p>
-                        <div class="badges">
-                            <img src="https://img.shields.io/nuget/v/Platform.Protocols.Lino?label=nuget&style=flat" alt="NuGet version">
-                        </div>
-                        <div class="doc-links">
-                            <a href="csharp/README.md" class="btn btn-small">Guide</a>
-                            <a href="https://linksplatform.github.io/Protocols.Lino/csharp/api/Platform.Protocols.Lino.html" class="btn btn-small">API</a>
+                            <a href="https://github.com/link-foundation/links-notation/blob/main/js/README.md" class="btn btn-small">Guide</a>
+                            <a href="https://www.npmjs.com/package/links-notation" class="btn btn-small">npm</a>
                         </div>
                     </div>
                     <div class="doc-card">
                         <h3>Rust</h3>
                         <p>Memory-safe and fast parsing</p>
                         <div class="badges">
-                            <img src="https://img.shields.io/crates/v/platform-lino?label=crates.io&style=flat" alt="Crates.io version">
+                            <img src="https://img.shields.io/crates/v/links-notation?label=crates.io&amp;style=flat" alt="Crates.io version">
                         </div>
                         <div class="doc-links">
-                            <a href="rust/README.md" class="btn btn-small">Guide</a>
-                            <a href="https://crates.io/crates/platform-lino" class="btn btn-small">Crates.io</a>
+                            <a href="https://github.com/link-foundation/links-notation/blob/main/rust/links-notation/README.md" class="btn btn-small">Guide</a>
+                            <a href="https://docs.rs/links-notation" class="btn btn-small">API</a>
+                        </div>
+                    </div>
+                    <div class="doc-card">
+                        <h3>C#</h3>
+                        <p>High-performance .NET implementation</p>
+                        <div class="badges">
+                            <img src="https://img.shields.io/nuget/v/Link.Foundation.Links.Notation?label=nuget&amp;style=flat" alt="NuGet version">
+                        </div>
+                        <div class="doc-links">
+                            <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/README.md" class="btn btn-small">Guide</a>
+                            <a href="./csharp/api/Link.Foundation.Links.Notation.html" class="btn btn-small">API</a>
+                        </div>
+                    </div>
+                    <div class="doc-card">
+                        <h3>Python</h3>
+                        <p>Typed parser for scripts and notebooks</p>
+                        <div class="badges">
+                            <img src="https://img.shields.io/pypi/v/links-notation?label=pypi&amp;style=flat" alt="PyPI version">
+                        </div>
+                        <div class="doc-links">
+                            <a href="https://github.com/link-foundation/links-notation/blob/main/python/README.md" class="btn btn-small">Guide</a>
+                            <a href="https://pypi.org/project/links-notation/" class="btn btn-small">PyPI</a>
+                        </div>
+                    </div>
+                    <div class="doc-card">
+                        <h3>Go</h3>
+                        <p>Zero-dependency package for services</p>
+                        <div class="badges">
+                            <img src="https://pkg.go.dev/badge/github.com/link-foundation/links-notation/go.svg" alt="Go reference">
+                        </div>
+                        <div class="doc-links">
+                            <a href="https://github.com/link-foundation/links-notation/blob/main/go/README.md" class="btn btn-small">Guide</a>
+                            <a href="https://pkg.go.dev/github.com/link-foundation/links-notation/go" class="btn btn-small">API</a>
+                        </div>
+                    </div>
+                    <div class="doc-card">
+                        <h3>Java</h3>
+                        <p>Published to Maven Central for the JVM</p>
+                        <div class="badges">
+                            <img src="https://img.shields.io/maven-central/v/io.github.link-foundation/links-notation?label=maven&amp;style=flat" alt="Maven Central version">
+                        </div>
+                        <div class="doc-links">
+                            <a href="https://github.com/link-foundation/links-notation/blob/main/java/README.md" class="btn btn-small">Guide</a>
+                            <a href="https://central.sonatype.com/artifact/io.github.link-foundation/links-notation" class="btn btn-small">Maven</a>
+                        </div>
+                    </div>
+                    <div class="doc-card">
+                        <h3>PHP</h3>
+                        <p>Composer package for web back ends</p>
+                        <div class="badges">
+                            <img src="https://img.shields.io/packagist/v/link-foundation/links-notation?label=packagist&amp;style=flat" alt="Packagist version">
+                        </div>
+                        <div class="doc-links">
+                            <a href="https://github.com/link-foundation/links-notation/blob/main/php/README.md" class="btn btn-small">Guide</a>
+                            <a href="https://packagist.org/packages/link-foundation/links-notation" class="btn btn-small">Packagist</a>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="quick-start">
                     <h3>Quick Start</h3>
                     <div class="code-examples">
                         <div class="code-example">
                             <h4>JavaScript</h4>
-                            <pre><code>import { Parser } from '@linksplatform/protocols-lino';
+                            <pre><code>import { Parser } from 'links-notation';
 const parser = new Parser();
 const links = parser.parse("papa (lovesMama: loves mama)");</code></pre>
                         </div>
                         <div class="code-example">
+                            <h4>Rust</h4>
+                            <pre><code>use links_notation::parse_lino;
+let links = parse_lino("papa (lovesMama: loves mama)").unwrap();</code></pre>
+                        </div>
+                        <div class="code-example">
                             <h4>C#</h4>
-                            <pre><code>var parser = new Platform.Protocols.Lino.Parser();
+                            <pre><code>var parser = new Link.Foundation.Links.Notation.Parser();
 var links = parser.Parse("papa (lovesMama: loves mama)");</code></pre>
                         </div>
                         <div class="code-example">
-                            <h4>Rust</h4>
-                            <pre><code>use lino::parse_lino;
-let links = parse_lino("papa (lovesMama: loves mama)").unwrap();</code></pre>
+                            <h4>Python</h4>
+                            <pre><code>from links_notation import Parser
+parser = Parser()
+links = parser.parse("papa (lovesMama: loves mama)")</code></pre>
+                        </div>
+                        <div class="code-example">
+                            <h4>Go</h4>
+                            <pre><code>import lino "github.com/link-foundation/links-notation/go"
+
+links, err := lino.Parse("papa (lovesMama: loves mama)")</code></pre>
+                        </div>
+                        <div class="code-example">
+                            <h4>Java</h4>
+                            <pre><code>var parser = new io.github.linkfoundation.linksnotation.Parser();
+var links = parser.parse("papa (lovesMama: loves mama)");</code></pre>
+                        </div>
+                        <div class="code-example">
+                            <h4>PHP</h4>
+                            <pre><code>use LinkFoundation\LinksNotation\Parser;
+
+$links = (new Parser())->parse('papa (lovesMama: loves mama)');</code></pre>
                         </div>
                     </div>
                 </div>
@@ -203,9 +299,10 @@ let links = parse_lino("papa (lovesMama: loves mama)").unwrap();</code></pre>
                     <h3>Resources</h3>
                     <ul>
                         <li><a href="https://github.com/link-foundation/links-notation">GitHub Repository</a></li>
+                        <li><a href="https://github.com/link-foundation/links-notation/blob/main/benchmarks/BENCHMARK_RESULTS.md">Token efficiency benchmarks</a></li>
                         <li><a href="https://link-foundation.github.io/Documentation/">Link Foundation Docs</a></li>
-                        <li><a href="https://link-foundation.github.io/links-notation/csharp/api/Link.Foundation.Links.Notation.html">C# API Documentation</a></li>
-                        <li><a href="https://link-foundation.github.io/links-notation/csharp/Link.Foundation.Links.Notation.pdf">PDF Documentation</a></li>
+                        <li><a href="./csharp/api/Link.Foundation.Links.Notation.html">C# API Documentation</a></li>
+                        <li><a href="./csharp/Link.Foundation.Links.Notation.pdf">PDF Documentation</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -218,11 +315,11 @@ let links = parse_lino("papa (lovesMama: loves mama)").unwrap();</code></pre>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Link Foundation. Licensed under <a href="https://github.com/link-foundation/links-notation/blob/main/LICENSE">Unlicense</a>.</p>
+                <p>&copy; Link Foundation. Licensed under <a href="https://github.com/link-foundation/links-notation/blob/main/LICENSE">Unlicense</a>.</p>
             </div>
         </div>
     </footer>
 
-    <script type="module" src="script.js"></script>
+    <script type="module" src="./script.js"></script>
 </body>
 </html>

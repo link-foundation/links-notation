@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "representations": [
+    {
+      "dataset": "employees",
+      "description": "Uniform employee records",
+      "structure": "uniform",
+      "profile": "records",
+      "files": {
+        "json": "datasets/employees.json",
+        "lino": "generated/employees.lino",
+        "lino-min": "generated/employees.min.lino",
+        "lino-line": "generated/employees.line.lino",
+        "json-compact": "generated/employees.min.json",
+        "yaml": "generated/employees.yaml",
+        "xml": "generated/employees.xml",
+        "csv": "generated/employees.csv"
+      }
+    },
+    {
+      "dataset": "analytics",
+      "description": "Time-series analytics data",
+      "structure": "uniform",
+      "profile": "records",
+      "files": {
+        "json": "datasets/analytics.json",
+        "lino": "generated/analytics.lino",
+        "lino-min": "generated/analytics.min.lino",
+        "lino-line": "generated/analytics.line.lino",
+        "json-compact": "generated/analytics.min.json",
+        "yaml": "generated/analytics.yaml",
+        "xml": "generated/analytics.xml"
+      }
+    },
+    {
+      "dataset": "repositories",
+      "description": "Repository listing with uniform fields",
+      "structure": "uniform",
+      "profile": "records",
+      "files": {
+        "json": "datasets/repositories.json",
+        "lino": "generated/repositories.lino",
+        "lino-min": "generated/repositories.min.lino",
+        "lino-line": "generated/repositories.line.lino",
+        "json-compact": "generated/repositories.min.json",
+        "yaml": "generated/repositories.yaml",
+        "xml": "generated/repositories.xml",
+        "csv": "generated/repositories.csv"
+      }
+    },
+    {
+      "dataset": "orders",
+      "description": "E-commerce orders with nested items and addresses",
+      "structure": "nested",
+      "profile": "records",
+      "files": {
+        "json": "datasets/orders.json",
+        "lino": "generated/orders.lino",
+        "lino-min": "generated/orders.min.lino",
+        "lino-line": "generated/orders.line.lino",
+        "json-compact": "generated/orders.min.json",
+        "yaml": "generated/orders.yaml",
+        "xml": "generated/orders.xml"
+      }
+    },
+    {
+      "dataset": "event_logs",
+      "description": "Semi-uniform event log records",
+      "structure": "semi-uniform",
+      "profile": "records",
+      "files": {
+        "json": "datasets/event_logs.json",
+        "lino": "generated/event_logs.lino",
+        "lino-min": "generated/event_logs.min.lino",
+        "lino-line": "generated/event_logs.line.lino",
+        "json-compact": "generated/event_logs.min.json",
+        "yaml": "generated/event_logs.yaml",
+        "xml": "generated/event_logs.xml"
+      }
+    },
+    {
+      "dataset": "feature_flags",
+      "description": "Feature flags keyed by name",
+      "structure": "keyed",
+      "profile": "records",
+      "files": {
+        "json": "datasets/feature_flags.json",
+        "lino": "generated/feature_flags.lino",
+        "lino-min": "generated/feature_flags.min.lino",
+        "lino-line": "generated/feature_flags.line.lino",
+        "json-compact": "generated/feature_flags.min.json",
+        "yaml": "generated/feature_flags.yaml",
+        "xml": "generated/feature_flags.xml"
+      }
+    },
+    {
+      "dataset": "deep_config",
+      "description": "Deeply nested application configuration",
+      "structure": "deeply-nested",
+      "profile": "records",
+      "files": {
+        "json": "datasets/deep_config.json",
+        "lino": "generated/deep_config.lino",
+        "lino-min": "generated/deep_config.min.lino",
+        "lino-line": "generated/deep_config.line.lino",
+        "json-compact": "generated/deep_config.min.json",
+        "yaml": "generated/deep_config.yaml",
+        "xml": "generated/deep_config.xml"
+      }
+    },
+    {
+      "dataset": "sparse_records",
+      "description": "Uniform records with missing values, empty containers and text that looks typed",
+      "structure": "sparse",
+      "profile": "records",
+      "files": {
+        "json": "datasets/sparse_records.json",
+        "lino": "generated/sparse_records.lino",
+        "lino-min": "generated/sparse_records.min.lino",
+        "lino-line": "generated/sparse_records.line.lino",
+        "json-compact": "generated/sparse_records.min.json",
+        "yaml": "generated/sparse_records.yaml",
+        "xml": "generated/sparse_records.xml"
+      }
+    },
+    {
+      "dataset": "doublets",
+      "description": "Doublet links (2-tuples)",
+      "structure": "tuples",
+      "profile": "tuples",
+      "files": {
+        "json": "datasets/doublets.json",
+        "lino": "generated/doublets.lino",
+        "lino-min": "generated/doublets.min.lino",
+        "lino-line": "generated/doublets.line.lino",
+        "json-compact": "generated/doublets.min.json",
+        "yaml": "generated/doublets.yaml",
+        "xml": "generated/doublets.xml",
+        "csv": "generated/doublets.csv"
+      }
+    },
+    {
+      "dataset": "triplets",
+      "description": "Triplet relations (3-tuples)",
+      "structure": "tuples",
+      "profile": "tuples",
+      "files": {
+        "json": "datasets/triplets.json",
+        "lino": "generated/triplets.lino",
+        "lino-min": "generated/triplets.min.lino",
+        "lino-line": "generated/triplets.line.lino",
+        "json-compact": "generated/triplets.min.json",
+        "yaml": "generated/triplets.yaml",
+        "xml": "generated/triplets.xml",
+        "csv": "generated/triplets.csv"
+      }
+    },
+    {
+      "dataset": "sequences",
+      "description": "Sequences of unlimited length (N-tuples)",
+      "structure": "tuples",
+      "profile": "tuples",
+      "files": {
+        "json": "datasets/sequences.json",
+        "lino": "generated/sequences.lino",
+        "lino-min": "generated/sequences.min.lino",
+        "lino-line": "generated/sequences.line.lino",
+        "json-compact": "generated/sequences.min.json",
+        "yaml": "generated/sequences.yaml",
+        "xml": "generated/sequences.xml"
+      }
+    }
+  ]
+}

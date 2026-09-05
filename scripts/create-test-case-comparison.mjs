@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 /**
- * Create a comprehensive test case comparison document across all 4 languages.
- * This script extracts test names from Python, JavaScript, Rust, and C# and creates
- * a markdown document showing which tests exist in each language.
+ * Build TEST_CASE_COMPARISON.md: which test exists in which of the seven
+ * supported languages, with a link to each one.
+ *
+ * The document is generated, never edited. Run it with `--check` to fail when
+ * the committed copy no longer matches the tests on disk, which is what CI and
+ * the pre-commit hook do.
  */
 
 import { readFileSync, readdirSync, writeFileSync } from 'fs';
@@ -34,34 +37,42 @@ function normalizeTestName(testName) {
     .trim();
 }
 
+/** Turn any of the naming conventions in use into the snake_case one. */
+function toSnakeCase(name) {
+  return name
+    .replace(/([A-Z])/g, (match, letter, offset) => (offset > 0 ? '_' : '') + letter.toLowerCase())
+    .replace(/[ -]/g, '_')
+    .toLowerCase();
+}
+
+/** Every test name is stored with a `test_` prefix, whatever the language writes. */
+function withTestPrefix(name) {
+  return name.startsWith('test_') ? name : `test_${name}`;
+}
+
 /**
- * Extract test names from Python test files.
+ * Collect the tests of one language.
+ *
+ * `pattern` must capture the test name in group 1; the link points at the line
+ * the name is on, not at the line the attribute above it is on.
  */
-function extractPythonTests(baseDir) {
+function scan({ baseDir, directory, isTestFile, categoryOf, pattern, nameOf }) {
   const tests = {};
-  const testDir = join(baseDir, 'python', 'tests');
 
-  const files = readdirSync(testDir).filter(f => f.startsWith('test_') && f.endsWith('.py')).sort();
+  for (const file of readdirSync(join(baseDir, directory)).filter(isTestFile).sort()) {
+    const content = readFileSync(join(baseDir, directory, file), 'utf8');
+    const category = categoryOf(file);
+    const collected = tests[category] ?? (tests[category] = []);
 
-  for (const testFile of files) {
-    // e.g., "test_api.py" -> "api"
-    const category = testFile.replace('test_', '').replace('.py', '');
-    const content = readFileSync(join(testDir, testFile), 'utf8');
-    const lines = content.split('\n');
-
-    // Find all test functions
-    const matches = content.matchAll(/^def (test_\w+)/gm);
-    tests[category] = [];
-    for (const match of matches) {
-      const testName = match[1];
-      // Find line number
-      const lineNum = lines.findIndex(line => line.includes(`def ${testName}`)) + 1;
-
-      tests[category].push({
-        original: testName,
-        normalized: normalizeTestName(testName),
-        file: `python/tests/${testFile}`,
-        line: lineNum
+    for (const match of content.matchAll(pattern)) {
+      const original = withTestPrefix(nameOf(match[1]));
+      const nameOffset = match.index + match[0].lastIndexOf(match[1]);
+      collected.push({
+        original,
+        originalName: match[1],
+        normalized: normalizeTestName(original),
+        file: `${directory}/${file}`,
+        line: content.slice(0, nameOffset).split('\n').length
       });
     }
   }
@@ -70,259 +81,216 @@ function extractPythonTests(baseDir) {
 }
 
 /**
- * Extract test names from JavaScript test files.
+ * The seven supported languages, in the order the columns appear.
+ *
+ * `flat` marks a language that does not keep one test file per category; see
+ * `placeFlatTests` for how its tests find a category.
  */
-function extractJavaScriptTests(baseDir) {
-  const tests = {};
-  const testDir = join(baseDir, 'js', 'tests');
+const LANGUAGES = [
+  {
+    key: 'python',
+    label: 'Python',
+    extract: (baseDir) => scan({
+      baseDir,
+      directory: 'python/tests',
+      isTestFile: (file) => file.startsWith('test_') && file.endsWith('.py'),
+      categoryOf: (file) => file.replace('test_', '').replace('.py', ''),
+      pattern: /^def (test_\w+)/gm,
+      nameOf: (name) => name
+    })
+  },
+  {
+    key: 'javascript',
+    label: 'JavaScript',
+    extract: (baseDir) => scan({
+      baseDir,
+      directory: 'js/tests',
+      isTestFile: (file) => file.endsWith('.test.js'),
+      categoryOf: (file) => toSnakeCase(file.replace('.test.js', '').replace('Tests', '')),
+      pattern: /(?:test|it)\(['"]([^'"]+)['"]/g,
+      nameOf: toSnakeCase
+    })
+  },
+  {
+    key: 'rust',
+    label: 'Rust',
+    // The Rust code lives in a Cargo workspace: the integration tests are in
+    // rust/links-notation/tests, not rust/tests. Pointing at the old path made
+    // this script crash with ENOENT, and the pre-commit hook that runs it fails
+    // the commit when regeneration fails.
+    extract: (baseDir) => scan({
+      baseDir,
+      directory: 'rust/links-notation/tests',
+      isTestFile: (file) => file.endsWith('_tests.rs'),
+      categoryOf: (file) => file.replace('_tests.rs', ''),
+      pattern: /#\[test\]\s*fn\s+(\w+)/g,
+      nameOf: (name) => name
+    })
+  },
+  {
+    key: 'csharp',
+    label: 'C#',
+    extract: (baseDir) => scan({
+      baseDir,
+      directory: 'csharp/Link.Foundation.Links.Notation.Tests',
+      isTestFile: (file) => file.endsWith('Tests.cs'),
+      categoryOf: (file) => toSnakeCase(file.replace('Tests.cs', '')),
+      pattern: /\[(?:Fact|Theory)\]\s*public\s+(?:static\s+)?(?:void|async\s+Task)\s+(\w+)/g,
+      nameOf: toSnakeCase
+    })
+  },
+  {
+    key: 'go',
+    label: 'Go',
+    // Go puts most of its tests in one file, so its column is filled in by
+    // matching test names rather than by file name.
+    flat: true,
+    extract: (baseDir) => scan({
+      baseDir,
+      directory: 'go',
+      isTestFile: (file) => file.endsWith('_test.go'),
+      categoryOf: (file) => file.replace('_test.go', ''),
+      pattern: /^func (Test\w+)\(/gm,
+      nameOf: toSnakeCase
+    })
+  },
+  {
+    key: 'java',
+    label: 'Java',
+    extract: (baseDir) => scan({
+      baseDir,
+      directory: 'java/src/test/java/io/github/linkfoundation/linksnotation',
+      isTestFile: (file) => file.endsWith('Test.java'),
+      categoryOf: (file) => toSnakeCase(file.replace('Test.java', '')),
+      pattern: /@Test\s+(?:public\s+|private\s+|protected\s+)?(?:void|[\w<>,\s]+)\s+(\w+)\s*\(/g,
+      nameOf: toSnakeCase
+    })
+  },
+  {
+    key: 'php',
+    label: 'PHP',
+    extract: (baseDir) => scan({
+      baseDir,
+      directory: 'php/tests',
+      isTestFile: (file) => file.endsWith('Test.php'),
+      categoryOf: (file) => toSnakeCase(file.replace('Test.php', '')),
+      pattern: /public function (test\w+)\s*\(/g,
+      nameOf: toSnakeCase
+    })
+  }
+];
 
-  const files = readdirSync(testDir).filter(f => f.endsWith('.test.js')).sort();
+/**
+ * File a flat language's tests under categories.
+ *
+ * A test is filed under every category that already knows a test by that name,
+ * because one Go function can be the counterpart of same-named tests in two
+ * categories. When no other language has the name, the file it lives in decides
+ * the category, so a test unique to that language is still listed.
+ */
+function placeFlatTests(tests, categoriesByName) {
+  const placed = {};
 
-  for (const testFile of files) {
-    // Convert filename to category, e.g., "ApiTests.test.js" -> "api"
-    let categoryName = testFile.replace('.test.js', '').replace('Tests', '');
-
-    // Convert to snake_case to match Python naming
-    const category = categoryName.replace(/([A-Z])/g, (match, p1, offset) =>
-      offset > 0 ? '_' + p1.toLowerCase() : p1.toLowerCase()
-    );
-
-    const content = readFileSync(join(testDir, testFile), 'utf8');
-    const lines = content.split('\n');
-
-    // Find all test cases: test('test_name', ...) or it('test_name', ...)
-    const regex = /(?:test|it)\(['"]([^'"]+)['"]/g;
-    let match;
-    tests[category] = [];
-
-    while ((match = regex.exec(content)) !== null) {
-      const originalTestName = match[1];
-      let testName = originalTestName;
-
-      // Convert PascalCase to snake_case first
-      // e.g., "EmptyLinkTest" -> "empty_link_test"
-      testName = testName.replace(/([A-Z])/g, (match, p1, offset) =>
-        offset > 0 ? '_' + p1.toLowerCase() : p1.toLowerCase()
-      );
-
-      // Convert spaces and hyphens to underscores
-      testName = testName.replace(/[ -]/g, '_').toLowerCase();
-
-      // Ensure it starts with test_
-      if (!testName.startsWith('test_')) {
-        testName = 'test_' + testName;
+  for (const [fileCategory, collected] of Object.entries(tests)) {
+    for (const test of collected) {
+      const categories = categoriesByName.get(test.normalized) ?? new Set([fileCategory]);
+      for (const category of categories) {
+        (placed[category] ?? (placed[category] = [])).push(test);
       }
-
-      // Find line number
-      const matchPos = match.index;
-      const lineNum = content.substring(0, matchPos).split('\n').length;
-
-      tests[category].push({
-        original: testName,
-        originalName: originalTestName,
-        normalized: normalizeTestName(testName),
-        file: `js/tests/${testFile}`,
-        line: lineNum
-      });
     }
   }
 
-  return tests;
+  return placed;
 }
 
-/**
- * Extract test names from Rust test files.
- */
-function extractRustTests(baseDir) {
-  const tests = {};
-  // The Rust code lives in a Cargo workspace: the integration tests are in
-  // rust/links-notation/tests, not rust/tests. Pointing at the old path made
-  // this script crash with ENOENT, and the pre-commit hook that runs it fails
-  // the commit when regeneration fails.
-  const testDir = join(baseDir, 'rust', 'links-notation', 'tests');
+/** Count the tests a language has, without counting one test twice. */
+function countTests(tests) {
+  const seen = new Set();
+  for (const collected of Object.values(tests)) {
+    for (const test of collected) {
+      seen.add(`${test.file}#${test.line}`);
+    }
+  }
+  return seen.size;
+}
 
-  const files = readdirSync(testDir).filter(f => f.endsWith('_tests.rs')).sort();
+function buildDocument(baseDir) {
+  const extracted = LANGUAGES.map((language) => ({ ...language, tests: language.extract(baseDir) }));
+  const structured = extracted.filter((language) => !language.flat);
 
-  for (const testFile of files) {
-    // e.g., "api_tests.rs" -> "api"
-    const category = testFile.replace('_tests.rs', '');
-
-    const content = readFileSync(join(testDir, testFile), 'utf8');
-    const lines = content.split('\n');
-
-    // Find all test functions marked with #[test]
-    const regex = /#\[test\]\s*fn\s+(\w+)/g;
-    let match;
-    tests[category] = [];
-
-    while ((match = regex.exec(content)) !== null) {
-      const originalTestName = match[1];
-      let testName = originalTestName;
-      // Ensure it starts with test_
-      if (!testName.startsWith('test_')) {
-        testName = 'test_' + testName;
+  // Which categories know a test by each name, decided by the languages that
+  // keep one test file per category.
+  const categoriesByName = new Map();
+  for (const language of structured) {
+    for (const [category, collected] of Object.entries(language.tests)) {
+      for (const test of collected) {
+        const categories = categoriesByName.get(test.normalized) ?? new Set();
+        categories.add(category);
+        categoriesByName.set(test.normalized, categories);
       }
-
-      // Find line number
-      const matchPos = match.index;
-      const lineNum = content.substring(0, matchPos).split('\n').length;
-
-      tests[category].push({
-        original: testName,
-        originalName: originalTestName,
-        normalized: normalizeTestName(testName),
-        file: `rust/links-notation/tests/${testFile}`,
-        line: lineNum
-      });
     }
   }
 
-  return tests;
-}
-
-/**
- * Extract test names from C# test files.
- */
-function extractCSharpTests(baseDir) {
-  const tests = {};
-  const testDir = join(baseDir, 'csharp', 'Link.Foundation.Links.Notation.Tests');
-
-  const files = readdirSync(testDir).filter(f => f.endsWith('Tests.cs')).sort();
-
-  for (const testFile of files) {
-    // e.g., "ApiTests.cs" -> "api"
-    let categoryName = testFile.replace('Tests.cs', '');
-
-    const category = categoryName.replace(/([A-Z])/g, (match, p1, offset) =>
-      offset > 0 ? '_' + p1.toLowerCase() : p1.toLowerCase()
-    );
-
-    const content = readFileSync(join(testDir, testFile), 'utf8');
-    const lines = content.split('\n');
-
-    // Find all test methods marked with [Fact] or [Theory]
-    const regex = /\[(?:Fact|Theory)\]\s*public\s+(?:static\s+)?(?:void|async\s+Task)\s+(\w+)/g;
-    let match;
-    tests[category] = [];
-
-    while ((match = regex.exec(content)) !== null) {
-      const originalTestName = match[1];
-      let testName = originalTestName;
-      // Convert to snake_case
-      testName = testName.replace(/([A-Z])/g, (match, p1, offset) =>
-        offset > 0 ? '_' + p1.toLowerCase() : p1.toLowerCase()
-      );
-      if (!testName.startsWith('test_')) {
-        testName = 'test_' + testName;
-      }
-
-      // Find line number
-      const matchPos = match.index;
-      const lineNum = content.substring(0, matchPos).split('\n').length;
-
-      tests[category].push({
-        original: testName,
-        originalName: originalTestName,
-        normalized: normalizeTestName(testName),
-        file: `csharp/Link.Foundation.Links.Notation.Tests/${testFile}`,
-        line: lineNum
-      });
+  for (const language of extracted) {
+    if (language.flat) {
+      language.tests = placeFlatTests(language.tests, categoriesByName);
     }
   }
 
-  return tests;
-}
-
-/**
- * Create a comprehensive markdown document comparing tests across languages.
- */
-function createComparisonDocument(baseDir, outputFile) {
-  console.log("Extracting tests from all languages...");
-
-  const pythonTests = extractPythonTests(baseDir);
-  const jsTests = extractJavaScriptTests(baseDir);
-  const rustTests = extractRustTests(baseDir);
-  const csharpTests = extractCSharpTests(baseDir);
-
-  // Get all unique categories
   const allCategories = [
-    ...new Set([
-      ...Object.keys(pythonTests),
-      ...Object.keys(jsTests),
-      ...Object.keys(rustTests),
-      ...Object.keys(csharpTests)
-    ])
+    ...new Set(extracted.flatMap((language) => Object.keys(language.tests)))
   ].sort();
 
-  // Get all unique NORMALIZED test names across all categories
-  // Also keep track of a "display name" from the first test we encounter
   const allTestsByCategory = {};
-  const testDisplayNames = {}; // Map from normalized name to display name
+  const testDisplayNames = {};
 
   for (const category of allCategories) {
     allTestsByCategory[category] = new Set();
-    if (!testDisplayNames[category]) {
-      testDisplayNames[category] = {};
-    }
+    testDisplayNames[category] = {};
 
-    // Process all tests and build both the set and display name mapping
-    const allTests = [
-      ...(pythonTests[category] || []),
-      ...(jsTests[category] || []),
-      ...(rustTests[category] || []),
-      ...(csharpTests[category] || [])
-    ];
-
-    for (const test of allTests) {
-      allTestsByCategory[category].add(test.normalized);
-      // Use the first original test name we encounter as the display name
-      if (!testDisplayNames[category][test.normalized]) {
-        // Prefer Python's snake_case naming for display
-        testDisplayNames[category][test.normalized] = test.original;
+    for (const language of extracted) {
+      for (const test of language.tests[category] ?? []) {
+        allTestsByCategory[category].add(test.normalized);
+        // The first language in column order that has the test names it.
+        if (!testDisplayNames[category][test.normalized]) {
+          testDisplayNames[category][test.normalized] = test.original;
+        }
       }
     }
   }
 
-  // Create markdown document
+  const labels = extracted.map((language) => language.label);
+
   let content = "# Comprehensive Test Case Comparison Across All Languages\n\n";
-  content += "This document provides a detailed comparison of test cases across Python, JavaScript, Rust, and C#.\n\n";
+  content += `This document provides a detailed comparison of test cases across ${
+    labels.slice(0, -1).join(', ')} and ${labels[labels.length - 1]}.\n\n`;
+  content += "> This file is generated by `scripts/create-test-case-comparison.mjs`. "
+    + "Run that script after adding or renaming a test; do not edit this file by hand.\n\n";
   content += "## Legend\n\n";
   content += "- ✅ Test exists in the language\n";
   content += "- ❌ Test is missing in the language\n";
   content += "- ⚠️ Test adapted/modified for language-specific behavior\n\n";
+  content += "Go keeps most of its tests in a single file rather than one file per category, "
+    + "so its tests are matched to the categories below by name.\n\n";
   content += "---\n\n";
-
-  // Summary statistics
-  const pythonTotal = Object.values(pythonTests).reduce((sum, arr) => sum + arr.length, 0);
-  const jsTotal = Object.values(jsTests).reduce((sum, arr) => sum + arr.length, 0);
-  const rustTotal = Object.values(rustTests).reduce((sum, arr) => sum + arr.length, 0);
-  const csharpTotal = Object.values(csharpTests).reduce((sum, arr) => sum + arr.length, 0);
-
-  const pythonCategories = Object.keys(pythonTests).filter(c => pythonTests[c].length > 0).length;
-  const jsCategories = Object.keys(jsTests).filter(c => jsTests[c].length > 0).length;
-  const rustCategories = Object.keys(rustTests).filter(c => rustTests[c].length > 0).length;
-  const csharpCategories = Object.keys(csharpTests).filter(c => csharpTests[c].length > 0).length;
 
   content += "## Summary Statistics\n\n";
-  content += "| Language   | Total Tests | Test Categories |\n";
-  content += "|------------|-------------|----------------|\n";
-  content += `| Python     | ${pythonTotal} | ${pythonCategories} |\n`;
-  content += `| JavaScript | ${jsTotal} | ${jsCategories} |\n`;
-  content += `| Rust       | ${rustTotal} | ${rustCategories} |\n`;
-  content += `| C#         | ${csharpTotal} | ${csharpCategories} |\n\n`;
+  content += "| Language | Total Tests | Test Categories |\n";
+  content += "|----------|-------------|----------------|\n";
+  for (const language of extracted) {
+    const categories = Object.values(language.tests).filter((collected) => collected.length > 0).length;
+    content += `| ${language.label} | ${countTests(language.tests)} | ${categories} |\n`;
+  }
+  content += "\n---\n\n";
 
-  content += "---\n\n";
-
-  // Detailed comparison by category
   for (const category of allCategories) {
-    const categoryDisplay = category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const categoryDisplay = category.replace(/_/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
     content += `## ${categoryDisplay}\n\n`;
 
-    // Create maps from normalized name to test object for easy lookup
-    const pyTestMap = new Map((pythonTests[category] || []).map(t => [t.normalized, t]));
-    const jsTestMap = new Map((jsTests[category] || []).map(t => [t.normalized, t]));
-    const rustTestMap = new Map((rustTests[category] || []).map(t => [t.normalized, t]));
-    const csTestMap = new Map((csharpTests[category] || []).map(t => [t.normalized, t]));
+    const byLanguage = extracted.map((language) => ({
+      label: language.label,
+      map: new Map((language.tests[category] ?? []).map((test) => [test.normalized, test]))
+    }));
 
     const allTests = Array.from(allTestsByCategory[category]).sort();
 
@@ -331,65 +299,46 @@ function createComparisonDocument(baseDir, outputFile) {
       continue;
     }
 
-    // Create a table
-    content += "| Test Name | Python | JavaScript | Rust | C# |\n";
-    content += "|-----------|--------|------------|------|----|\n";
+    content += `| Test Name | ${labels.join(' | ')} |\n`;
+    content += `|-----------|${labels.map(() => '---').join('|')}|\n`;
 
-    for (const normalizedTestName of allTests) {
-      // Get the original display name and format it nicely
-      const originalName = testDisplayNames[category][normalizedTestName] || normalizedTestName;
-
-      // Convert test_snake_case to readable format
-      let displayName = originalName
-        .replace(/^test_/, '')  // Remove 'test_' prefix
-        .replace(/_/g, ' ')     // Replace underscores with spaces
+    for (const normalized of allTests) {
+      const displayName = (testDisplayNames[category][normalized] || normalized)
+        .replace(/^test_/, '')
+        .replace(/_/g, ' ')
         .trim();
-
-      // Create links to actual test code
-      const pyTest = pyTestMap.get(normalizedTestName);
-      const jsTest = jsTestMap.get(normalizedTestName);
-      const rustTest = rustTestMap.get(normalizedTestName);
-      const csTest = csTestMap.get(normalizedTestName);
 
       // `#L<line>` is the anchor GitHub understands; a bare `file:line`
       // suffix is part of the path there, so every link 404s.
-      const pyStatus = pyTest ? `[✅](${pyTest.file}#L${pyTest.line})` : "❌";
-      const jsStatus = jsTest ? `[✅](${jsTest.file}#L${jsTest.line})` : "❌";
-      const rustStatus = rustTest ? `[✅](${rustTest.file}#L${rustTest.line})` : "❌";
-      const csStatus = csTest ? `[✅](${csTest.file}#L${csTest.line})` : "❌";
+      const cells = byLanguage.map(({ map }) => {
+        const test = map.get(normalized);
+        return test ? `[✅](${test.file}#L${test.line})` : '❌';
+      });
 
-      content += `| ${displayName} | ${pyStatus} | ${jsStatus} | ${rustStatus} | ${csStatus} |\n`;
+      content += `| ${displayName} | ${cells.join(' | ')} |\n`;
     }
 
-    // Category statistics
-    content += "\n";
-    content += `**Category totals:** Python: ${pyTestMap.size}, JavaScript: ${jsTestMap.size}, Rust: ${rustTestMap.size}, C#: ${csTestMap.size}\n\n`;
+    content += "\n**Category totals:** "
+      + byLanguage.map(({ label, map }) => `${label}: ${map.size}`).join(', ')
+      + "\n\n";
   }
 
-  // Missing tests summary
   content += "---\n\n";
   content += "## Missing Tests Summary\n\n";
 
-  for (const [langName, langTests] of [
-    ["Python", pythonTests],
-    ["JavaScript", jsTests],
-    ["Rust", rustTests],
-    ["C#", csharpTests]
-  ]) {
-    content += `### ${langName} Missing Tests\n\n`;
+  for (const language of extracted) {
+    content += `### ${language.label} Missing Tests\n\n`;
 
     let missingCount = 0;
     for (const category of allCategories) {
-      const allTests = allTestsByCategory[category];
-      const langCategoryTests = new Set((langTests[category] || []).map(t => t.normalized));
-      const missing = Array.from(allTests).filter(t => !langCategoryTests.has(t));
+      const known = new Set((language.tests[category] ?? []).map((test) => test.normalized));
+      const missing = Array.from(allTestsByCategory[category]).filter((name) => !known.has(name));
 
       if (missing.length > 0) {
         missingCount += missing.length;
-        const categoryDisplay = category.replace('test_', '').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        const categoryDisplay = category.replace('test_', '').replace(/_/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
         content += `**${categoryDisplay}** (${missing.length} missing):\n`;
         for (const test of missing.sort()) {
-          // Format test name with spaces between words
           const formattedTest = test
             .replace(/([a-z])([A-Z])/g, '$1 $2')
             .replace(/([a-z])(\d)/g, '$1 $2')
@@ -410,21 +359,87 @@ function createComparisonDocument(baseDir, outputFile) {
     }
   }
 
-  writeFileSync(outputFile, content, 'utf8');
-  console.log(`Comparison document created: ${outputFile}`);
-
-  // Print summary to console
-  console.log("\n" + "=".repeat(80));
-  console.log("SUMMARY");
-  console.log("=".repeat(80));
-  console.log(`Python:     ${pythonTotal.toString().padStart(3)} tests across ${pythonCategories.toString().padStart(2)} categories`);
-  console.log(`JavaScript: ${jsTotal.toString().padStart(3)} tests across ${jsCategories.toString().padStart(2)} categories`);
-  console.log(`Rust:       ${rustTotal.toString().padStart(3)} tests across ${rustCategories.toString().padStart(2)} categories`);
-  console.log(`C#:         ${csharpTotal.toString().padStart(3)} tests across ${csharpCategories.toString().padStart(2)} categories`);
-  console.log("=".repeat(80));
+  return { content, extracted };
 }
 
-// Main execution
+/**
+ * Replace the region between two markers in a file.
+ *
+ * The READMEs quote the test counts, and a quoted number is a number that goes
+ * stale: the English one had said six languages and six wrong counts for
+ * several releases. Now the counts live between markers and are written from
+ * the same reading of the test files as the comparison document.
+ */
+function replaceMarkedRegion(text, marker, replacement, file) {
+  const start = `<!-- ${marker}:start -->`;
+  const end = `<!-- ${marker}:end -->`;
+  const from = text.indexOf(start);
+  const to = text.indexOf(end);
+  if (from === -1 || to === -1) {
+    throw new Error(`${file} has no ${start} ... ${end} region`);
+  }
+  return text.slice(0, from + start.length) + '\n' + replacement + text.slice(to);
+}
+
+/** The counts table each README shows, with that README's own headings. */
+function countsTable(extracted, headings) {
+  let table = `| ${headings.join(' | ')} |\n`;
+  table += `|${headings.map(() => ' --- ').join('|')}|\n`;
+  for (const language of extracted) {
+    const categories = Object.values(language.tests).filter((collected) => collected.length > 0).length;
+    table += `| ${language.label} | ${countTests(language.tests)} | ${categories} |\n`;
+  }
+  return table;
+}
+
 const baseDir = join(__dirname, '..');
 const outputFile = join(baseDir, 'TEST_CASE_COMPARISON.md');
-createComparisonDocument(baseDir, outputFile);
+const check = process.argv.includes('--check');
+
+const { content, extracted } = buildDocument(baseDir);
+
+const generated = [
+  { file: outputFile, content },
+  ...[
+    { name: 'README.md', headings: ['Language', 'Tests', 'Test categories'] },
+    { name: 'README.ru.md', headings: ['Язык', 'Тестов', 'Категорий тестов'] }
+  ].map(({ name, headings }) => {
+    const path = join(baseDir, name);
+    return {
+      file: path,
+      content: replaceMarkedRegion(
+        readFileSync(path, 'utf8'),
+        'test-counts',
+        countsTable(extracted, headings),
+        name
+      )
+    };
+  })
+];
+
+const stale = generated.filter(({ file, content: expected }) => readFileSync(file, 'utf8') !== expected);
+
+if (check) {
+  if (stale.length > 0) {
+    const names = stale.map(({ file }) => file.slice(baseDir.length + 1)).join(', ');
+    console.error(`Out of date, run node scripts/create-test-case-comparison.mjs: ${names}`);
+    process.exit(1);
+  }
+  console.log('The generated test documents are up to date.');
+} else {
+  for (const { file, content: written } of generated) {
+    writeFileSync(file, written, 'utf8');
+  }
+  console.log(`Comparison document created: ${outputFile}`);
+}
+
+console.log("\n" + "=".repeat(80));
+console.log("SUMMARY");
+console.log("=".repeat(80));
+for (const language of extracted) {
+  const categories = Object.values(language.tests).filter((collected) => collected.length > 0).length;
+  console.log(
+    `${(language.label + ':').padEnd(12)} ${countTests(language.tests).toString().padStart(3)} tests across ${categories.toString().padStart(2)} categories`
+  );
+}
+console.log("=".repeat(80));

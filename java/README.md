@@ -12,7 +12,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.1.0</version>
+    <version>0.17.0</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ Add the dependency to your `pom.xml`:
 Add the dependency to your `build.gradle`:
 
 ```groovy
-implementation 'io.github.link-foundation:links-notation:0.1.0'
+implementation 'io.github.link-foundation:links-notation:0.17.0'
 ```
 
 ### Local Development Setup
@@ -178,6 +178,36 @@ This is equivalent to:
 (3: papa loves mama)
 ```
 
+### Multi-line Groups
+
+A parenthesized group opens a *nested context*: its body starts fresh at
+indentation level zero and follows the same rules as the root document, so a
+line break inside parentheses is structure rather than decoration.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+The document above parses to `(value ((id 1) (label one)))` - two children, each
+a link of its own - rather than to one flat list in which the boundary between
+`id` and `label` would be lost. A body that stays on a single line still
+collapses to a single link, so `(a b c)` is unchanged.
+
+```java
+String input = """
+    value (
+      id "1"
+      label "one"
+    )
+    """;
+
+List<Link> links = new Parser().parse(input);
+System.out.println(links.get(0).format(false)); // (value ((id 1) (label one)))
+```
+
 ## API Reference
 
 ### Classes
@@ -253,5 +283,4 @@ mvn spotless:check
 
 - Group ID: `io.github.link-foundation`
 - Artifact ID: `links-notation`
-- Version: 0.1.0
-- License: Unlicense
+- License: Unlicense (see [LICENSE](../LICENSE))

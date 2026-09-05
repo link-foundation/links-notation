@@ -1,11 +1,8 @@
 empInfo:
   employees:
-    - id: 1
-      name: James Kirk
+    - name: James Kirk
       age: 40
-    - id: 2
-      name: Jean-Luc Picard
+    - name: Jean-Luc Picard
       age: 45
-    - id: 3
-      name: Wesley Crusher
+    - name: Wesley Crusher
       age: 27

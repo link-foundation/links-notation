@@ -1,0 +1,14 @@
+{
+  "name": "links-notation-benchmark-js",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "JavaScript side of the Links Notation token efficiency benchmarks",
+  "scripts": {
+    "start": "node benchmark.mjs"
+  },
+  "dependencies": {
+    "gpt-tokenizer": "^4.0.0",
+    "links-notation": "file:../../js"
+  }
+}

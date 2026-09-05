@@ -1,0 +1,139 @@
+(
+  flags (
+    new_upload_0 (
+      enabled false
+      rollout (
+        percentage 84
+        cohort "early-access"
+      )
+      owner "engineering"
+      updatedOn "2025-12-13"
+    )
+    fast_parser_1 (
+      enabled false
+      rollout (
+        percentage 59
+        cohort "everyone"
+      )
+      owner "research"
+      updatedOn "2025-03-13"
+    )
+    beta_export_2 (
+      enabled false
+      rollout (
+        percentage 79
+        cohort "early-access"
+      )
+      owner "design"
+      updatedOn "2025-07-17"
+    )
+    new_search_3 (
+      enabled true
+      rollout (
+        percentage 96
+        cohort "everyone"
+      )
+      owner "research"
+      updatedOn "2024-12-19"
+    )
+    beta_search_4 (
+      enabled true
+      rollout (
+        percentage 88
+        cohort "everyone"
+      )
+      owner "engineering"
+      updatedOn "2024-12-28"
+    )
+    alt_parser_5 (
+      enabled true
+      rollout (
+        percentage 52
+        cohort "early-access"
+      )
+      owner "engineering"
+      updatedOn "2025-03-06"
+    )
+    new_render_6 (
+      enabled true
+      rollout (
+        percentage 64
+        cohort "everyone"
+      )
+      owner "design"
+      updatedOn "2025-11-10"
+    )
+    fast_upload_7 (
+      enabled true
+      rollout (
+        percentage 88
+        cohort "early-access"
+      )
+      owner "support"
+      updatedOn "2025-12-03"
+    )
+    safe_export_8 (
+      enabled true
+      rollout (
+        percentage 92
+        cohort "internal"
+      )
+      owner "research"
+      updatedOn "2025-03-11"
+    )
+    safe_search_9 (
+      enabled true
+      rollout (
+        percentage 39
+        cohort "everyone"
+      )
+      owner "design"
+      updatedOn "2025-12-21"
+    )
+    alt_search_10 (
+      enabled true
+      rollout (
+        percentage 88
+        cohort "early-access"
+      )
+      owner "design"
+      updatedOn "2025-12-13"
+    )
+    beta_parser_11 (
+      enabled true
+      rollout (
+        percentage 5
+        cohort "everyone"
+      )
+      owner "research"
+      updatedOn "2025-07-28"
+    )
+    beta_export_12 (
+      enabled false
+      rollout (
+        percentage 92
+        cohort "everyone"
+      )
+      owner "design"
+      updatedOn "2025-08-03"
+    )
+    new_render_13 (
+      enabled true
+      rollout (
+        percentage 68
+        cohort "everyone"
+      )
+      owner "engineering"
+      updatedOn "2025-07-31"
+    )
+    beta_search_14 (
+      enabled true
+      rollout (
+        percentage 85
+        cohort "early-access"
+      )
+      owner "engineering"
+      updatedOn "2025-06-03"
+    )
+  )
+)

@@ -1,18 +1,24 @@
 {
-  "name": "protocols-lino-website",
-  "version": "1.0.0",
-  "description": "Links Notation (Lino) documentation website",
+  "name": "links-notation-website",
+  "version": "0.17.0",
+  "description": "Links Notation documentation website",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "eslint": "^10.9.1",
     "vite": "^8.2.1"
   },
   "dependencies": {
-    "@linksplatform/protocols-lino": "^0.7.0"
+    "links-notation": "file:../../js",
+    "lino-objects-codec": "^0.8.0"
+  },
+  "overrides": {
+    "links-notation": "file:../../js"
   }
 }
