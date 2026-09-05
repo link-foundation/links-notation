@@ -279,11 +279,44 @@ Container for grouping related links.
 - `constructor(links)` - Create a new group
 - `format()` - Format the group as a string
 
+#### `ParseError`
+
+Thrown by `parse(input)` when the document does not parse. The message says
+where the document stopped making sense and quotes the offending line:
+
+```js
+import { Parser, ParseError } from 'links-notation';
+
+try {
+  new Parser().parse('# ok line\n# break: two\nci_gate x\n');
+} catch (error) {
+  console.error(error.message);
+  if (error instanceof ParseError) {
+    console.error(`${error.line}:${error.column} (offset ${error.offset})`);
+  }
+}
+```
+
+```text
+Syntax error at line 2, column 8: Expected "(", [ \t], [\r\n], or [^ \t\n\r(:)] but ":" found.
+2 | # break: two
+  |        ^
+```
+
+- `offset` - Offset of the offending position from the start of the document
+- `line`, `column` - Where the document stopped parsing, counted from 1
+- `found` - The character found instead, or `null` at the end of the document
+- `lineText` - The offending line, as written
+- `snippet` - The offending line with a caret under the offending column
+- `location` - The position as the generated parser reports it
+- `cause` - The error the generated parser threw
+
 ## Project Structure
 
 - `src/grammar.pegjs` - Peggy.js grammar definition
 - `src/Link.js` - Link data structure
 - `src/LinksGroup.js` - Links group container
+- `src/ParseError.js` - Parse error with the position of the defect
 - `src/Parser.js` - Parser wrapper
 - `src/index.js` - Main entry point
 - `tests/` - Test files

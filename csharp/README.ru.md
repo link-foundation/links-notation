@@ -162,6 +162,35 @@ Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 - **Parser\<TLinkAddress\>**: Основной класс парсера для преобразования строк в связи
 - **Link\<TLinkAddress\>**: Представляет одну связь с ID и значениями
 - **LinksGroup\<TLinkAddress\>**: Контейнер для группировки связанных связей
+- **ParseException**: Выбрасывается, когда документ не разбирается
+
+### Обработка ошибок
+
+`Parse` выбрасывает `ParseException`, сообщение которого говорит, где документ
+перестал быть понятным, и цитирует сломанную строку с указателем под ней:
+
+```csharp
+try
+{
+    new Parser().Parse("# ok line\n# break: two\nci_gate x\n");
+}
+catch (ParseException error)
+{
+    Console.Error.WriteLine(error.Message);
+    Console.Error.WriteLine($"{error.Line}:{error.Column} (смещение {error.Offset})");
+}
+```
+
+```text
+Syntax error at line 2, column 8: unexpected ":"
+2 | # break: two
+  |        ^
+```
+
+`ParseException` наследуется от `FormatException`, поэтому вызывающий код,
+который уже ловит `FormatException`, продолжает работать, и несет `Offset`,
+`Line`, `Column`, `Found`, `LineText`, `Summary` и `Snippet` для кода, который
+сообщает об ошибках сам.
 
 ### Методы расширения
 

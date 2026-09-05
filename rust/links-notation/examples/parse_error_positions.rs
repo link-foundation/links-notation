@@ -11,6 +11,7 @@ fn main() {
         "a: b: c",
         "a (b\n",
         "a b)\n",
+        ":",
     ];
 
     for document in documents {
