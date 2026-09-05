@@ -132,6 +132,29 @@ This is equivalent to:
 (3: papa loves mama)
 ```
 
+#### Multi-line Groups
+
+A parenthesized group opens a *nested context*: its body starts fresh at
+indentation level zero and follows the same rules the root document does, so a
+line break inside parentheses is structure rather than decoration.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+This reads as `(value ((id 1) (label one)))` - two children, each a link of its
+own - and not as one flat list in which the boundary between `id` and `label`
+would be lost. Indentation works inside a group exactly as it does at the root,
+and a body that stays on a single line still collapses to a single link, so
+`(a b c)` is unchanged.
+
+All seven implementations agree on this. `experiments/issue-282/parity` parses
+the document above with each of them and fails if any one reads it differently.
+The complete rules are in the [grammar](docs/grammar/GRAMMAR.md).
+
 So that means that *this* text is also links notation. So most of the
 text in the world already may be parsed as links notation. That makes
 links notation the most easy an natural/intuitive/native one.
@@ -171,6 +194,8 @@ language-specific documentation:
 
 Additional resources:
 
+- [Grammar](docs/grammar/GRAMMAR.md) - The notation in EBNF, with the indentation
+  and nested context rules spelled out ([syntax diagrams](docs/grammar/syntax-diagrams.md))
 - [Test Case Comparison](TEST_CASE_COMPARISON.md) - Test-by-test coverage comparison across all seven language implementations
 - [Links Theory 0.0.2](https://habr.com/en/articles/895896) - Theoretical
   foundation that Links Notation fully supports

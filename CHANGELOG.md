@@ -22,14 +22,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   suite ported from Python, PSR-12 linting and a dedicated CI workflow
   ([#284](https://github.com/link-foundation/links-notation/issues/284))
 - Parentheses open a nested context in every implementation (JavaScript, Python,
-  Rust, Go, Java, C#): the body of `( )` starts fresh at indentation level zero
-  and follows the same rules as the root document, so indentation is structural
-  inside parentheses and parenthesised groups can express nested records
-  ([#282](https://github.com/link-foundation/links-notation/issues/282))
+  Rust, Go, Java, C#, PHP): the body of `( )` starts fresh at indentation level
+  zero and follows the same rules as the root document, so indentation is
+  structural inside parentheses and parenthesised groups can express nested
+  records ([#282](https://github.com/link-foundation/links-notation/issues/282))
 - Blank lines inside a block are skipped instead of ending it, at the root and
   inside parentheses alike
-- Tests covering nested indentation inside parentheses for all six
-  implementations
+- Tests covering nested indentation inside parentheses for all seven
+  implementations, and `experiments/issue-282/parity`, which parses one document
+  with all seven libraries at once and fails if any of them reads it differently
+  ([#282](https://github.com/link-foundation/links-notation/issues/282))
 - Comprehensive code quality improvements across all language implementations
 - Input validation and size limits for all parsers
 - Proper error types in Rust implementation
