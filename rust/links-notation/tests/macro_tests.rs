@@ -589,4 +589,13 @@ mod macro_tests {
         // Unbalanced parentheses cannot even be parsed as Rust tokens,
         // so they would cause compile errors automatically
     }
+
+    #[test]
+    #[should_panic(expected = "lino!: Syntax error at line 1, column 5")]
+    fn test_runtime_failure_says_where_the_text_stopped_parsing() {
+        // Compile-time validation only checks that parentheses and quotes
+        // balance, so text like this reaches the parser and is refused there.
+        // The panic has to say where, the way a parse error does.
+        let _ = lino!("a: b: c");
+    }
 }

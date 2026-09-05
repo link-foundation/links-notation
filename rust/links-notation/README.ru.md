@@ -250,16 +250,35 @@ println!("{}", format_links(&links)); // (value ((id 1) (label one)))
 
 ## Обработка ошибок
 
-Парсер возвращает описательные сообщения об ошибках для:
-
-- Пустого ввода или ввода только из пробелов
-- Неправильного синтаксиса
-- Незакрытых скобок
-- Недопустимых символов
+Ошибка разбора сообщает, где документ перестал быть понятным. При выводе она
+показывает строку и столбец, что могло стоять на этом месте, и саму строку с
+указателем под ней:
 
 ```rust
-match parse_lino("(недопустимо") {
+match parse_lino("# ok line\n# break: two\nci_gate x\n") {
     Ok(parsed) => println!("Распарсено: {}", parsed),
-    Err(error) => eprintln!("Ошибка: {}", error),
+    Err(error) => eprintln!("{}", error),
 }
 ```
+
+```text
+Syntax error at line 2, column 8: expected "(", a reference or end of line, found ":"
+2 | # break: two
+  |        ^
+```
+
+Та же позиция доступна в виде полей — для вызывающего кода, который сообщает об
+ошибках сам, а не печатает их:
+
+```rust
+use links_notation::{parse_lino, ParseError};
+
+if let Err(ParseError::SyntaxError(error)) = parse_lino("a: b: c") {
+    println!("{}:{} (байтовое смещение {})", error.line, error.column, error.offset);
+    println!("ожидалось {:?}, найдено {:?}", error.expected, error.found);
+}
+```
+
+`ParseError::EmptyInput` возвращается для пустого ввода или ввода только из
+пробелов. `cargo run --example parse_error_positions` печатает то, что сообщают
+несколько сломанных документов.

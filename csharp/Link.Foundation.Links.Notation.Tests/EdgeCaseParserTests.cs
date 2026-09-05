@@ -11,7 +11,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var source = @":";
             var parser = new Parser();
             // Standalone ':' is now forbidden and should throw an exception
-            Assert.Throws<FormatException>(() => parser.Parse(source));
+            Assert.Throws<ParseException>(() => parser.Parse(source));
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var source = @"(:)";
             var parser = new Parser();
             // '(:)' is now forbidden and should throw an exception
-            Assert.Throws<FormatException>(() => parser.Parse(source));
+            Assert.Throws<ParseException>(() => parser.Parse(source));
         }
 
         [Fact]
@@ -49,11 +49,11 @@ namespace Link.Foundation.Links.Notation.Tests
 
             // Test link without id (single-line) - now forbidden
             input = ": value1 value2";
-            Assert.Throws<FormatException>(() => new Parser().Parse(input));
+            Assert.Throws<ParseException>(() => new Parser().Parse(input));
 
             // Test link without id (multi-line) - now forbidden
             input = "(: value1 value2)";
-            Assert.Throws<FormatException>(() => new Parser().Parse(input));
+            Assert.Throws<ParseException>(() => new Parser().Parse(input));
 
             // Test singlet link
             input = "(singlet)";
@@ -169,7 +169,7 @@ namespace Link.Foundation.Links.Notation.Tests
 
             // '(:)' is now forbidden
             input = "(:)";
-            Assert.Throws<FormatException>(() => new Parser().Parse(input));
+            Assert.Throws<ParseException>(() => new Parser().Parse(input));
 
             input = "(id:)";
             result = new Parser().Parse(input);
@@ -181,7 +181,7 @@ namespace Link.Foundation.Links.Notation.Tests
         {
             var input = "(invalid";
             // Unclosed parentheses should throw an exception
-            Assert.Throws<FormatException>(() => new Parser().Parse(input));
+            Assert.Throws<ParseException>(() => new Parser().Parse(input));
         }
     }
 }

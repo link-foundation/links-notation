@@ -1,5 +1,10 @@
 @namespace Link.Foundation.Links.Notation
-@classname Parser
+@classname GeneratedParser
+@accessibility internal
+// Tracing is what lets a failed parse report where it stopped: the rules backtrack,
+// so only the furthest position any rule reached says where the document stops making
+// sense. FurthestFailureTracer records it, Parser turns it into a ParseException.
+@trace true
 @using System.Linq
 @members
 {

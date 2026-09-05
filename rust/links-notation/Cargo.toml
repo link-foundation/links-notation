@@ -1,6 +1,6 @@
 [package]
 name = "links-notation"
-version = "0.17.0"
+version = "0.18.0"
 edition = "2021"
 description = "Rust implementation of the Links Notation parser"
 license = "Unlicense"
