@@ -158,6 +158,26 @@ mama has house
 (This is a linksNotation as well)
 (linksNotation supports (unlimited number (of references) in each link))
 </code></pre>
+<h3 id="multi-line-groups">Multi-line Groups</h3>
+<p>A parenthesized group opens a <em>nested context</em>: its body starts fresh at
+indentation level zero and follows the same rules as the root document, so a
+line break inside parentheses is structure rather than decoration.</p>
+<pre><code class="lang-lino">value (
+  id &quot;1&quot;
+  label &quot;one&quot;
+)
+</code></pre>
+<p>The document above parses to <code>(value ((id 1) (label one)))</code> - two children, each
+a link of its own - rather than to one flat list in which the boundary between
+<code>id</code> and <code>label</code> would be lost. A body that stays on a single line still
+collapses to a single link, so <code>(a b c)</code> is unchanged.</p>
+<pre><code class="lang-csharp">var links = new Parser().Parse(@&quot;value (
+  id &quot;&quot;1&quot;&quot;
+  label &quot;&quot;one&quot;&quot;
+)&quot;);
+
+Console.WriteLine(links[0]); // (value ((id 1) (label one)))
+</code></pre>
 <h2 id="api-reference">API Reference</h2>
 <h3 id="classes">Classes</h3>
 <ul>
