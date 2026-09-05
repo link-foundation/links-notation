@@ -159,6 +159,8 @@ text = """value (
   label "one"
 )"""
 print(format_links(parser.parse(text)))
+# (value ((id 1) (label one)))
+```
 
 ### Comments
 
@@ -183,8 +185,6 @@ document = "# the machines this deploys to\ndeploy: staging # only staging, for 
 print(format_links(Parser().parse(document)))  # (deploy: staging)
 
 print(format_links(Parser(comments=False).parse("# a b\n")))  # (# a b)
-```
-# (value ((id 1) (label one)))
 ```
 
 ## Development
