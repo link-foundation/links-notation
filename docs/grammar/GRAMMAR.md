@@ -21,6 +21,7 @@ structured data as links between references. The notation supports:
 - **Links**: Connections between references with optional identifiers
 - **Nesting**: Parenthesized expressions for inline nesting
 - **Indentation**: Hierarchical structure through indentation
+- **Comments**: `#` hides the rest of the line it stands on
 
 ## EBNF Grammar
 
@@ -28,7 +29,7 @@ The following EBNF grammar formally defines the Links Notation syntax:
 
 ```ebnf
 (* Links Notation (Lino) Grammar - EBNF *)
-(* Version: 0.15.0 *)
+(* Version: 0.19.0 *)
 
 (* === Document Structure === *)
 document            = skip_empty_lines, links, whitespace, EOF
@@ -44,6 +45,17 @@ line                = skip_empty_lines, CHECK_INDENTATION, element ;
 
 element             = any_link, PUSH_INDENTATION, links
                     | any_link ;
+
+(* === Comments === *)
+(* A comment is taken out before the rules above are applied: each of its
+   characters is replaced with a space, so what follows keeps the position it
+   was written at, and a line that held only a comment becomes whitespace *)
+comment             = comment_start, { any_char - newline } ;
+
+(* Only a "#" at the start of the document or after a space, a tab or a line
+   break opens a comment *)
+comment_start       = ? start of document ?, "#"
+                    | whitespace_char, "#" ;
 
 (* === Link Types === *)
 any_link            = nested_group, eol
@@ -214,6 +226,14 @@ grammar:
   reference:
     (alternative delimited_reference simple_reference)
 
+  comment:
+    (sequence comment_start (zero_or_more (not newline)))
+
+  comment_start:
+    (alternative:
+      (sequence start_of_document "#")
+      (sequence whitespace_char "#"))
+
   simple_reference:
     (one_or_more reference_symbol)
 
@@ -287,6 +307,9 @@ either simple or delimited:
 
 - Valid: Letters, digits, `-`, `_`, `.`, `!`, `?`, `@`, `#`, `$`, `%`, etc.
 - Invalid: Space, tab, newline, `(`, `:`, `)`
+- A `#` is valid inside a reference (`issue#1047`) but opens a comment where a
+  reference could begin, so a reference cannot start with one unless it is
+  delimited (`"#"`)
 
 **Delimiters:**
 
@@ -326,6 +349,41 @@ non-whitespace character and its parentheses are balanced.
 The empty reference is a reference like any other: it can be a value, an
 identifier, and it nests. Formatters write it as `""` so it reads back as
 itself instead of disappearing from the document.
+
+### Comments
+
+A `#` hides the rest of the line it stands on:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+The document above is the single link `(deploy: staging)`.
+
+A comment opens only where a reference could begin - at the start of the
+document or after a space, a tab or a line break - so a `#` inside a token
+(`issue#1047`) and a `#` inside a delimited reference (`"#"`) are ordinary
+characters.
+
+Comments are taken out before the rest of the grammar is applied, by replacing
+each of their characters with a space rather than by cutting them out. Two
+things follow. A position reported for a document is the position in the
+document as it was written, so a parse error still points at the column it
+broke at. And a line that held nothing but a comment becomes a line of
+whitespace, which separates links the way an empty line does and does not end
+an indented block, so a comment can stand on a line of its own inside one:
+
+```lino
+parent
+  # what the child is for
+  child
+```
+
+reads as `parent` with the single child `child`.
+
+Every implementation reads comments by default and can be told to read `#` as
+an ordinary character instead, for documents written before comments existed.
 
 ### Link Types
 
@@ -752,3 +810,6 @@ for valid input.
 |         | or `empty_reference`) or `simple_reference`; a bare         |
 |         | delimiter pair is the empty reference, and all three        |
 |         | delimiters are documented                                   |
+| 0.19.0  | A `#` written where a reference could begin opens a comment |
+|         | that runs to the end of its line; comments are blanked      |
+|         | before parsing and can be switched off                      |

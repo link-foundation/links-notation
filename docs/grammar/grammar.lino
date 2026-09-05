@@ -1,5 +1,5 @@
 (grammar: links-notation
-  (version: 0.15.0)
+  (version: 0.19.0)
   (description: "Links Notation (Lino) grammar expressed in links-notation format")
 
   (document:
@@ -62,6 +62,16 @@
   (reference:
     (alternative delimited_reference simple_reference))
 
+  (comment:
+    (sequence comment_start (zero_or_more (not newline)))
+    (condition: "Blanked before parsing: every character becomes a space")
+    (condition: "Read by default, and switchable off in every parser"))
+
+  (comment_start:
+    (alternative:
+      (sequence start_of_document "#")
+      (sequence whitespace_char "#")))
+
   (simple_reference:
     (one_or_more reference_symbol))
 
@@ -117,6 +127,7 @@
     (one_or_more: "Repetition - one or more occurrences")
     (optional: "Optional - zero or one occurrence")
     (not: "Negation - character class exclusion")
+    (start_of_document: "Holds only before the first character of the document")
     (lookahead: "Match without consuming input"))
 
   (indentation_control:
