@@ -578,16 +578,16 @@ the line and the column, what could have stood there, and the offending line
 with a caret under it:
 
 ```rust
-match parse_lino("# ok line\n# break: two\nci_gate x\n") {
+match parse_lino("ci_gate x\nstage: rust: nextest\n") {
     Ok(parsed) => println!("Parsed: {}", parsed),
     Err(error) => eprintln!("{}", error),
 }
 ```
 
 ```text
-Syntax error at line 2, column 8: expected "(", a reference or end of line, found ":"
-2 | # break: two
-  |        ^
+Syntax error at line 2, column 12: expected "(", a reference or end of line, found ":"
+2 | stage: rust: nextest
+  |            ^
 ```
 
 The same position is available as fields, for callers that report errors

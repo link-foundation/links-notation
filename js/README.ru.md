@@ -207,7 +207,7 @@ console.log(formatLinks(links)); // (value ((id 1) (label one)))
 import { Parser, ParseError } from 'links-notation';
 
 try {
-  new Parser().parse('# ok line\n# break: two\nci_gate x\n');
+  new Parser().parse('ci_gate x\nstage: rust: nextest\n');
 } catch (error) {
   console.error(error.message);
   if (error instanceof ParseError) {
@@ -217,9 +217,9 @@ try {
 ```
 
 ```text
-Syntax error at line 2, column 8: Expected "(", [ \t], [\r\n], or [^ \t\n\r(:)] but ":" found.
-2 | # break: two
-  |        ^
+Syntax error at line 2, column 12: Expected "(", [ \t], [\r\n], or [^ \t\n\r(:)] but ":" found.
+2 | stage: rust: nextest
+  |            ^
 ```
 
 - `offset` - Смещение сломанной позиции от начала документа

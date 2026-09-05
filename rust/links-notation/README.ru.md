@@ -255,16 +255,16 @@ println!("{}", format_links(&links)); // (value ((id 1) (label one)))
 указателем под ней:
 
 ```rust
-match parse_lino("# ok line\n# break: two\nci_gate x\n") {
+match parse_lino("ci_gate x\nstage: rust: nextest\n") {
     Ok(parsed) => println!("Распарсено: {}", parsed),
     Err(error) => eprintln!("{}", error),
 }
 ```
 
 ```text
-Syntax error at line 2, column 8: expected "(", a reference or end of line, found ":"
-2 | # break: two
-  |        ^
+Syntax error at line 2, column 12: expected "(", a reference or end of line, found ":"
+2 | stage: rust: nextest
+  |            ^
 ```
 
 Та же позиция доступна в виде полей — для вызывающего кода, который сообщает об

@@ -172,7 +172,7 @@ making sense and quotes the offending line with a caret under it:
 ```csharp
 try
 {
-    new Parser().Parse("# ok line\n# break: two\nci_gate x\n");
+    new Parser().Parse("ci_gate x\nstage: rust: nextest\n");
 }
 catch (ParseException error)
 {
@@ -182,9 +182,9 @@ catch (ParseException error)
 ```
 
 ```text
-Syntax error at line 2, column 8: unexpected ":"
-2 | # break: two
-  |        ^
+Syntax error at line 2, column 12: unexpected ":"
+2 | stage: rust: nextest
+  |            ^
 ```
 
 `ParseException` derives from `FormatException`, so callers that already catch
