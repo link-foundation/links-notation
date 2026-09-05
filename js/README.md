@@ -225,7 +225,7 @@ parent
 
 ### Multi-line Groups
 
-A parenthesized group opens a *nested context*: its body starts fresh at
+A parenthesized group opens a _nested context_: its body starts fresh at
 indentation level zero and follows the same rules as the root document, so a
 line break inside parentheses is structure rather than decoration.
 
