@@ -345,10 +345,13 @@ venv/
 
 # java
 java/target/
+benchmarks/java/target/
 
 # PHP
 php/vendor/
 php/composer.lock
+benchmarks/php/vendor/
+benchmarks/php/composer.lock
 php/.phpunit.cache/
 php/.phpunit.result.cache
 

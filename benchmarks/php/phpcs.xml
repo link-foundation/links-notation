@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="links-notation-benchmark">
+    <description>PSR-12 coding standard for the PHP side of the benchmarks.</description>
+
+    <file>benchmark.php</file>
+
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <rule ref="PSR12">
+        <!-- benchmark.php is a command, so it necessarily both declares its
+             helpers and runs them; that is the one thing this rule forbids. -->
+        <exclude name="PSR1.Files.SideEffects"/>
+    </rule>
+
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="120"/>
+        </properties>
+    </rule>
+</ruleset>

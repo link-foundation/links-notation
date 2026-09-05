@@ -1,0 +1,623 @@
+{
+  "schema": 1,
+  "generator": "php",
+  "tokenizers": {
+    "primary": "o200k_base",
+    "secondary": "cl100k_base"
+  },
+  "datasets": [
+    {
+      "name": "employees",
+      "structure": "uniform",
+      "profile": "records",
+      "formats": {
+        "csv": {
+          "tokens_o200k": 794,
+          "tokens_cl100k": 789,
+          "chars": 2323,
+          "bytes": 2323
+        },
+        "json": {
+          "tokens_o200k": 1949,
+          "tokens_cl100k": 1949,
+          "chars": 6119,
+          "bytes": 6119
+        },
+        "json-compact": {
+          "tokens_o200k": 1270,
+          "tokens_cl100k": 1269,
+          "chars": 4261,
+          "bytes": 4261
+        },
+        "lino": {
+          "tokens_o200k": 1522,
+          "tokens_cl100k": 1522,
+          "chars": 5317,
+          "bytes": 5317
+        },
+        "lino-line": {
+          "tokens_o200k": 1520,
+          "tokens_cl100k": 1520,
+          "chars": 4339,
+          "bytes": 4339
+        },
+        "lino-min": {
+          "tokens_o200k": 1445,
+          "tokens_cl100k": 1441,
+          "chars": 5137,
+          "bytes": 5137
+        },
+        "xml": {
+          "tokens_o200k": 2303,
+          "tokens_cl100k": 2298,
+          "chars": 7024,
+          "bytes": 7024
+        },
+        "yaml": {
+          "tokens_o200k": 1520,
+          "tokens_cl100k": 1512,
+          "chars": 4556,
+          "bytes": 4556
+        }
+      }
+    },
+    {
+      "name": "analytics",
+      "structure": "uniform",
+      "profile": "records",
+      "formats": {
+        "json": {
+          "tokens_o200k": 1607,
+          "tokens_cl100k": 1607,
+          "chars": 4501,
+          "bytes": 4501
+        },
+        "json-compact": {
+          "tokens_o200k": 1030,
+          "tokens_cl100k": 1029,
+          "chars": 2989,
+          "bytes": 2989
+        },
+        "lino": {
+          "tokens_o200k": 1273,
+          "tokens_cl100k": 1273,
+          "chars": 3895,
+          "bytes": 3895
+        },
+        "lino-line": {
+          "tokens_o200k": 1270,
+          "tokens_cl100k": 1270,
+          "chars": 3082,
+          "bytes": 3082
+        },
+        "lino-min": {
+          "tokens_o200k": 1272,
+          "tokens_cl100k": 1272,
+          "chars": 3833,
+          "bytes": 3833
+        },
+        "xml": {
+          "tokens_o200k": 2040,
+          "tokens_cl100k": 2039,
+          "chars": 5946,
+          "bytes": 5946
+        },
+        "yaml": {
+          "tokens_o200k": 1327,
+          "tokens_cl100k": 1327,
+          "chars": 3311,
+          "bytes": 3311
+        }
+      }
+    },
+    {
+      "name": "repositories",
+      "structure": "uniform",
+      "profile": "records",
+      "formats": {
+        "csv": {
+          "tokens_o200k": 494,
+          "tokens_cl100k": 494,
+          "chars": 1327,
+          "bytes": 1327
+        },
+        "json": {
+          "tokens_o200k": 1424,
+          "tokens_cl100k": 1427,
+          "chars": 4359,
+          "bytes": 4359
+        },
+        "json-compact": {
+          "tokens_o200k": 880,
+          "tokens_cl100k": 882,
+          "chars": 2871,
+          "bytes": 2871
+        },
+        "lino": {
+          "tokens_o200k": 1062,
+          "tokens_cl100k": 1065,
+          "chars": 3717,
+          "bytes": 3717
+        },
+        "lino-line": {
+          "tokens_o200k": 1079,
+          "tokens_cl100k": 1082,
+          "chars": 2934,
+          "bytes": 2934
+        },
+        "lino-min": {
+          "tokens_o200k": 968,
+          "tokens_cl100k": 969,
+          "chars": 3557,
+          "bytes": 3557
+        },
+        "xml": {
+          "tokens_o200k": 1707,
+          "tokens_cl100k": 1702,
+          "chars": 5286,
+          "bytes": 5286
+        },
+        "yaml": {
+          "tokens_o200k": 1063,
+          "tokens_cl100k": 1064,
+          "chars": 3146,
+          "bytes": 3146
+        }
+      }
+    },
+    {
+      "name": "orders",
+      "structure": "nested",
+      "profile": "records",
+      "formats": {
+        "json": {
+          "tokens_o200k": 2474,
+          "tokens_cl100k": 2480,
+          "chars": 8299,
+          "bytes": 8299
+        },
+        "json-compact": {
+          "tokens_o200k": 1542,
+          "tokens_cl100k": 1517,
+          "chars": 4873,
+          "bytes": 4873
+        },
+        "lino": {
+          "tokens_o200k": 1968,
+          "tokens_cl100k": 1974,
+          "chars": 7319,
+          "bytes": 7319
+        },
+        "lino-line": {
+          "tokens_o200k": 1897,
+          "tokens_cl100k": 1903,
+          "chars": 5050,
+          "bytes": 5050
+        },
+        "lino-min": {
+          "tokens_o200k": 1876,
+          "tokens_cl100k": 1877,
+          "chars": 7157,
+          "bytes": 7157
+        },
+        "xml": {
+          "tokens_o200k": 2855,
+          "tokens_cl100k": 2861,
+          "chars": 8722,
+          "bytes": 8722
+        },
+        "yaml": {
+          "tokens_o200k": 1863,
+          "tokens_cl100k": 1862,
+          "chars": 5804,
+          "bytes": 5804
+        }
+      }
+    },
+    {
+      "name": "event_logs",
+      "structure": "semi-uniform",
+      "profile": "records",
+      "formats": {
+        "json": {
+          "tokens_o200k": 1254,
+          "tokens_cl100k": 1254,
+          "chars": 3895,
+          "bytes": 3895
+        },
+        "json-compact": {
+          "tokens_o200k": 788,
+          "tokens_cl100k": 786,
+          "chars": 2515,
+          "bytes": 2515
+        },
+        "lino": {
+          "tokens_o200k": 1022,
+          "tokens_cl100k": 1022,
+          "chars": 3433,
+          "bytes": 3433
+        },
+        "lino-line": {
+          "tokens_o200k": 965,
+          "tokens_cl100k": 965,
+          "chars": 2599,
+          "bytes": 2599
+        },
+        "lino-min": {
+          "tokens_o200k": 952,
+          "tokens_cl100k": 949,
+          "chars": 3311,
+          "bytes": 3311
+        },
+        "xml": {
+          "tokens_o200k": 1475,
+          "tokens_cl100k": 1474,
+          "chars": 4269,
+          "bytes": 4269
+        },
+        "yaml": {
+          "tokens_o200k": 954,
+          "tokens_cl100k": 951,
+          "chars": 2725,
+          "bytes": 2725
+        }
+      }
+    },
+    {
+      "name": "feature_flags",
+      "structure": "keyed",
+      "profile": "records",
+      "formats": {
+        "json": {
+          "tokens_o200k": 900,
+          "tokens_cl100k": 900,
+          "chars": 2975,
+          "bytes": 2975
+        },
+        "json-compact": {
+          "tokens_o200k": 564,
+          "tokens_cl100k": 535,
+          "chars": 1917,
+          "bytes": 1917
+        },
+        "lino": {
+          "tokens_o200k": 658,
+          "tokens_cl100k": 658,
+          "chars": 2583,
+          "bytes": 2583
+        },
+        "lino-line": {
+          "tokens_o200k": 689,
+          "tokens_cl100k": 689,
+          "chars": 2013,
+          "bytes": 2013
+        },
+        "lino-min": {
+          "tokens_o200k": 628,
+          "tokens_cl100k": 628,
+          "chars": 2493,
+          "bytes": 2493
+        },
+        "xml": {
+          "tokens_o200k": 1115,
+          "tokens_cl100k": 1114,
+          "chars": 3764,
+          "bytes": 3764
+        },
+        "yaml": {
+          "tokens_o200k": 638,
+          "tokens_cl100k": 638,
+          "chars": 2107,
+          "bytes": 2107
+        }
+      }
+    },
+    {
+      "name": "deep_config",
+      "structure": "deeply-nested",
+      "profile": "records",
+      "formats": {
+        "json": {
+          "tokens_o200k": 334,
+          "tokens_cl100k": 334,
+          "chars": 1199,
+          "bytes": 1199
+        },
+        "json-compact": {
+          "tokens_o200k": 185,
+          "tokens_cl100k": 185,
+          "chars": 653,
+          "bytes": 653
+        },
+        "lino": {
+          "tokens_o200k": 244,
+          "tokens_cl100k": 244,
+          "chars": 1043,
+          "bytes": 1043
+        },
+        "lino-line": {
+          "tokens_o200k": 253,
+          "tokens_cl100k": 253,
+          "chars": 701,
+          "bytes": 701
+        },
+        "lino-min": {
+          "tokens_o200k": 237,
+          "tokens_cl100k": 237,
+          "chars": 1029,
+          "bytes": 1029
+        },
+        "xml": {
+          "tokens_o200k": 410,
+          "tokens_cl100k": 409,
+          "chars": 1519,
+          "bytes": 1519
+        },
+        "yaml": {
+          "tokens_o200k": 232,
+          "tokens_cl100k": 232,
+          "chars": 824,
+          "bytes": 824
+        }
+      }
+    },
+    {
+      "name": "sparse_records",
+      "structure": "sparse",
+      "profile": "records",
+      "formats": {
+        "json": {
+          "tokens_o200k": 2054,
+          "tokens_cl100k": 2078,
+          "chars": 6485,
+          "bytes": 6586
+        },
+        "json-compact": {
+          "tokens_o200k": 1308,
+          "tokens_cl100k": 1308,
+          "chars": 4084,
+          "bytes": 4185
+        },
+        "lino": {
+          "tokens_o200k": 1590,
+          "tokens_cl100k": 1614,
+          "chars": 5693,
+          "bytes": 5794
+        },
+        "lino-line": {
+          "tokens_o200k": 1604,
+          "tokens_cl100k": 1628,
+          "chars": 4236,
+          "bytes": 4337
+        },
+        "lino-min": {
+          "tokens_o200k": 1544,
+          "tokens_cl100k": 1563,
+          "chars": 5571,
+          "bytes": 5672
+        },
+        "xml": {
+          "tokens_o200k": 2304,
+          "tokens_cl100k": 2327,
+          "chars": 7036,
+          "bytes": 7137
+        },
+        "yaml": {
+          "tokens_o200k": 1579,
+          "tokens_cl100k": 1598,
+          "chars": 4701,
+          "bytes": 4802
+        }
+      }
+    },
+    {
+      "name": "doublets",
+      "structure": "tuples",
+      "profile": "tuples",
+      "formats": {
+        "csv": {
+          "tokens_o200k": 117,
+          "tokens_cl100k": 137,
+          "chars": 344,
+          "bytes": 344
+        },
+        "json": {
+          "tokens_o200k": 289,
+          "tokens_cl100k": 299,
+          "chars": 767,
+          "bytes": 767
+        },
+        "json-compact": {
+          "tokens_o200k": 149,
+          "tokens_cl100k": 139,
+          "chars": 446,
+          "bytes": 446
+        },
+        "lino": {
+          "tokens_o200k": 167,
+          "tokens_cl100k": 177,
+          "chars": 444,
+          "bytes": 444
+        },
+        "lino-line": {
+          "tokens_o200k": 167,
+          "tokens_cl100k": 177,
+          "chars": 446,
+          "bytes": 446
+        },
+        "lino-min": {
+          "tokens_o200k": 111,
+          "tokens_cl100k": 121,
+          "chars": 364,
+          "bytes": 364
+        },
+        "xml": {
+          "tokens_o200k": 545,
+          "tokens_cl100k": 551,
+          "chars": 1438,
+          "bytes": 1438
+        },
+        "yaml": {
+          "tokens_o200k": 183,
+          "tokens_cl100k": 195,
+          "chars": 484,
+          "bytes": 484
+        }
+      }
+    },
+    {
+      "name": "triplets",
+      "structure": "tuples",
+      "profile": "tuples",
+      "formats": {
+        "csv": {
+          "tokens_o200k": 123,
+          "tokens_cl100k": 129,
+          "chars": 400,
+          "bytes": 400
+        },
+        "json": {
+          "tokens_o200k": 331,
+          "tokens_cl100k": 334,
+          "chars": 963,
+          "bytes": 963
+        },
+        "json-compact": {
+          "tokens_o200k": 151,
+          "tokens_cl100k": 134,
+          "chars": 542,
+          "bytes": 542
+        },
+        "lino": {
+          "tokens_o200k": 189,
+          "tokens_cl100k": 192,
+          "chars": 540,
+          "bytes": 540
+        },
+        "lino-line": {
+          "tokens_o200k": 189,
+          "tokens_cl100k": 192,
+          "chars": 542,
+          "bytes": 542
+        },
+        "lino-min": {
+          "tokens_o200k": 94,
+          "tokens_cl100k": 91,
+          "chars": 420,
+          "bytes": 420
+        },
+        "xml": {
+          "tokens_o200k": 670,
+          "tokens_cl100k": 669,
+          "chars": 1834,
+          "bytes": 1834
+        },
+        "yaml": {
+          "tokens_o200k": 240,
+          "tokens_cl100k": 242,
+          "chars": 620,
+          "bytes": 620
+        }
+      }
+    },
+    {
+      "name": "sequences",
+      "structure": "tuples",
+      "profile": "tuples",
+      "formats": {
+        "json": {
+          "tokens_o200k": 298,
+          "tokens_cl100k": 298,
+          "chars": 866,
+          "bytes": 866
+        },
+        "json-compact": {
+          "tokens_o200k": 137,
+          "tokens_cl100k": 122,
+          "chars": 485,
+          "bytes": 485
+        },
+        "lino": {
+          "tokens_o200k": 178,
+          "tokens_cl100k": 178,
+          "chars": 483,
+          "bytes": 483
+        },
+        "lino-line": {
+          "tokens_o200k": 178,
+          "tokens_cl100k": 178,
+          "chars": 485,
+          "bytes": 485
+        },
+        "lino-min": {
+          "tokens_o200k": 78,
+          "tokens_cl100k": 79,
+          "chars": 367,
+          "bytes": 367
+        },
+        "xml": {
+          "tokens_o200k": 604,
+          "tokens_cl100k": 603,
+          "chars": 1662,
+          "bytes": 1662
+        },
+        "yaml": {
+          "tokens_o200k": 232,
+          "tokens_cl100k": 232,
+          "chars": 569,
+          "bytes": 569
+        }
+      }
+    }
+  ],
+  "totals": {
+    "csv": {
+      "tokens_o200k": 1528,
+      "tokens_cl100k": 1549,
+      "chars": 4394,
+      "bytes": 4394
+    },
+    "json": {
+      "tokens_o200k": 12914,
+      "tokens_cl100k": 12960,
+      "chars": 40428,
+      "bytes": 40529
+    },
+    "json-compact": {
+      "tokens_o200k": 8004,
+      "tokens_cl100k": 7906,
+      "chars": 25636,
+      "bytes": 25737
+    },
+    "lino": {
+      "tokens_o200k": 9873,
+      "tokens_cl100k": 9919,
+      "chars": 34467,
+      "bytes": 34568
+    },
+    "lino-line": {
+      "tokens_o200k": 9811,
+      "tokens_cl100k": 9857,
+      "chars": 26427,
+      "bytes": 26528
+    },
+    "lino-min": {
+      "tokens_o200k": 9205,
+      "tokens_cl100k": 9227,
+      "chars": 33239,
+      "bytes": 33340
+    },
+    "xml": {
+      "tokens_o200k": 16028,
+      "tokens_cl100k": 16047,
+      "chars": 48500,
+      "bytes": 48601
+    },
+    "yaml": {
+      "tokens_o200k": 9831,
+      "tokens_cl100k": 9853,
+      "chars": 28847,
+      "bytes": 28948
+    }
+  }
+}

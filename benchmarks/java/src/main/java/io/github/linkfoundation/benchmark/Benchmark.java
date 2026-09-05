@@ -2,270 +2,252 @@ package io.github.linkfoundation.benchmark;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.knuddels.jtokkit.Encodings;
+import com.knuddels.jtokkit.api.Encoding;
+import com.knuddels.jtokkit.api.EncodingRegistry;
+import com.knuddels.jtokkit.api.EncodingType;
+import io.github.linkfoundation.linksnotation.Parser;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
- * UTF-8 Character Count Benchmark for Links Notation vs JSON, YAML, and XML
+ * Java side of the Links Notation token efficiency benchmarks.
  *
- * This benchmark measures the UTF-8 character count efficiency of Links Notation
- * compared to other popular data serialization formats.
+ * <p>The Rust benchmark is the one that writes the documents and the report. Every other language
+ * answers the two questions that make those numbers portable rather than a property of one
+ * implementation:
+ *
+ * <ol>
+ *   <li>does this language's own links-notation parser accept the generated Links Notation
+ *       documents;
+ *   <li>does this language's own tokenizer count them the same way.
+ * </ol>
+ *
+ * <p>It writes {@code benchmarks/results/java.json} and fails when a count differs from {@code
+ * benchmarks/results/rust.json}.
+ *
+ * <p>Usage: {@code mvn -q exec:java -Dexec.args="--check --verbose"} from {@code benchmarks/java}.
+ * With {@code --check} the results file is compared instead of written, which is what CI runs to
+ * catch a stale commit.
  */
-public class Benchmark {
+public final class Benchmark {
 
-    /**
-     * Represents a single benchmark test case.
-     */
-    record BenchmarkCase(
-            String name,
-            String description,
-            String lino,
-            String json,
-            String yaml,
-            String xml
-    ) {}
+  private static final String LANGUAGE = "java";
 
-    /**
-     * Represents the results of a single benchmark.
-     */
-    record BenchmarkResult(
-            String name,
-            String description,
-            int lino_chars,
-            int json_chars,
-            int yaml_chars,
-            int xml_chars,
-            double lino_vs_json,
-            double lino_vs_yaml,
-            double lino_vs_xml
-    ) {}
+  /** The order the measurements are reported in, shared by every language. */
+  private static final List<String> METRIC_KEYS =
+      List.of("tokens_o200k", "tokens_cl100k", "chars", "bytes");
 
-    /**
-     * Represents aggregated results across all benchmarks.
-     */
-    record AggregatedResults(
-            int total_lino_chars,
-            int total_json_chars,
-            int total_yaml_chars,
-            int total_xml_chars,
-            double avg_lino_vs_json,
-            double avg_lino_vs_yaml,
-            double avg_lino_vs_xml
-    ) {}
+  private Benchmark() {}
 
-    /**
-     * Represents the full benchmark report.
-     */
-    record Report(
-            String language,
-            AggregatedResults summary,
-            List<BenchmarkResult> results
-    ) {}
-
-    /**
-     * Count UTF-8 characters in a string.
-     * In Java, we use codePointCount to get the number of Unicode code points.
-     */
-    public static int countUtf8Chars(String text) {
-        return text.codePointCount(0, text.length());
+  public static void main(String[] arguments) {
+    boolean check = List.of(arguments).contains("--check");
+    boolean verbose =
+        List.of(arguments).contains("--verbose") || "true".equals(System.getenv("CI_VERBOSE"));
+    try {
+      run(check, verbose);
+    } catch (Exception failure) {
+      System.err.println(LANGUAGE + ": " + failure.getMessage());
+      System.exit(1);
     }
+  }
 
-    /**
-     * Calculate the percentage savings of Lino vs another format.
-     */
-    public static double calculateSavings(int linoChars, int otherChars) {
-        if (otherChars == 0) return 0.0;
-        return ((double)(otherChars - linoChars) / otherChars) * 100;
-    }
+  private static void run(boolean check, boolean verbose) throws Exception {
+    Path root = benchmarksDirectory();
+    Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
-    /**
-     * Find the data directory by checking multiple possible paths.
-     */
-    public static Path findDataDir() {
-        Path cwd = Paths.get(System.getProperty("user.dir"));
+    EncodingRegistry registry = Encodings.newDefaultEncodingRegistry();
+    Encoding o200k = registry.getEncoding(EncodingType.O200K_BASE);
+    Encoding cl100k = registry.getEncoding(EncodingType.CL100K_BASE);
 
-        List<Path> possiblePaths = List.of(
-                cwd.resolve("benchmarks/data"),          // CWD is repo root
-                cwd.resolve("../data"),                  // CWD is benchmarks/
-                cwd.resolve("data"),                     // CWD is benchmarks/
-                cwd.resolve("../../benchmarks/data"),    // CWD is benchmarks/java/
-                cwd.resolve("../../../benchmarks/data")  // CWD is benchmarks/java/target/
-        );
+    JsonObject index = gson.fromJson(readText(root, "generated/index.json"), JsonObject.class);
+    Parser parser = new Parser();
 
-        for (Path path : possiblePaths) {
-            Path resolved = path.toAbsolutePath().normalize();
-            if (Files.isDirectory(resolved)) {
-                return resolved;
-            }
+    JsonArray datasets = new JsonArray();
+    Map<String, Map<String, Integer>> totals = new TreeMap<>();
+
+    for (JsonElement element : index.getAsJsonArray("representations")) {
+      JsonObject entry = element.getAsJsonObject();
+      JsonObject files = entry.getAsJsonObject("files");
+      Map<String, JsonObject> formats = new TreeMap<>();
+
+      for (String format : new TreeMap<>(files.asMap()).keySet()) {
+        String path = files.get(format).getAsString();
+        String text = readText(root, path);
+        if (format.startsWith("lino")) {
+          // Parsing with this language's own implementation is the
+          // point: a document only counts if the notation is portable.
+          parser.parse(text);
         }
-
-        return null;
-    }
-
-    /**
-     * Find the output directory for reports.
-     */
-    public static Path findOutputDir() {
-        Path cwd = Paths.get(System.getProperty("user.dir"));
-
-        List<Path> possiblePaths = List.of(
-                cwd.resolve("benchmarks"),   // CWD is repo root
-                cwd.resolve(".."),           // CWD is benchmarks/java/
-                cwd                          // Fallback to current directory
-        );
-
-        for (Path path : possiblePaths) {
-            Path resolved = path.toAbsolutePath().normalize();
-            if (Files.isDirectory(resolved)) {
-                return resolved;
-            }
+        Map<String, Integer> metrics = measure(text, o200k, cl100k);
+        formats.put(format, toJson(metrics));
+        Map<String, Integer> running = totals.computeIfAbsent(format, key -> zeroed());
+        for (String key : METRIC_KEYS) {
+          running.put(key, running.get(key) + metrics.get(key));
         }
+      }
 
-        return cwd;
+      if (verbose) {
+        System.err.println(
+            entry.get("dataset").getAsString() + ": measured " + formats.size() + " formats");
+      }
+
+      JsonObject dataset = new JsonObject();
+      dataset.addProperty("name", entry.get("dataset").getAsString());
+      dataset.addProperty("structure", entry.get("structure").getAsString());
+      dataset.addProperty("profile", entry.get("profile").getAsString());
+      JsonObject byFormat = new JsonObject();
+      formats.forEach(byFormat::add);
+      dataset.add("formats", byFormat);
+      datasets.add(dataset);
     }
 
-    /**
-     * Load a file as a UTF-8 string.
-     */
-    private static String readFile(Path path) throws IOException {
-        return Files.readString(path, StandardCharsets.UTF_8);
+    JsonObject tokenizers = new JsonObject();
+    tokenizers.addProperty("primary", "o200k_base");
+    tokenizers.addProperty("secondary", "cl100k_base");
+
+    JsonObject results = new JsonObject();
+    results.addProperty("schema", index.get("schema").getAsInt());
+    results.addProperty("generator", LANGUAGE);
+    results.add("tokenizers", tokenizers);
+    results.add("datasets", datasets);
+    JsonObject totalsJson = new JsonObject();
+    totals.forEach((format, metrics) -> totalsJson.add(format, toJson(metrics)));
+    results.add("totals", totalsJson);
+
+    JsonObject reference = gson.fromJson(readText(root, "results/rust.json"), JsonObject.class);
+    List<String> differences = compare(results, reference);
+    if (!differences.isEmpty()) {
+      System.err.println(
+          LANGUAGE + ": " + differences.size() + " measurement(s) differ from the Rust results:");
+      differences.stream().limit(20).forEach(line -> System.err.println("  - " + line));
+      throw new IllegalStateException("results do not agree with Rust");
     }
 
-    /**
-     * Load all benchmark test cases from the data directory.
-     */
-    public static List<BenchmarkCase> loadBenchmarkCases(Path dataDir) {
-        record CaseConfig(String name, String description) {}
+    String text = gson.toJson(results) + "\n";
+    String path = "results/" + LANGUAGE + ".json";
+    if (check) {
+      if (!text.equals(readText(root, path))) {
+        throw new IllegalStateException(
+            path + " is out of date; run mvn exec:java from benchmarks/java");
+      }
+      System.out.println(
+          LANGUAGE + ": " + path + " is up to date and agrees with the Rust results.");
+      return;
+    }
+    Files.write(root.resolve(path), text.getBytes(StandardCharsets.UTF_8));
+    System.out.println(
+        LANGUAGE + ": wrote " + path + "; every measurement agrees with the Rust results.");
+  }
 
-        List<CaseConfig> casesConfig = List.of(
-                new CaseConfig("employees", "Employee records with nested structure"),
-                new CaseConfig("simple_doublets", "Simple doublet links (2-tuples)"),
-                new CaseConfig("triplets", "Triplet relations (3-tuples)"),
-                new CaseConfig("nested_structure", "Deeply nested company structure"),
-                new CaseConfig("config", "Application configuration")
-        );
+  /**
+   * The four measurements taken of every document.
+   *
+   * <p>{@code chars} counts code points rather than {@code char} values, so a character outside the
+   * basic plane counts once here and once in every other language. {@code countTokensOrdinary}
+   * treats a sequence such as {@code <|endoftext|>} as text, which is what data read from a file
+   * is.
+   */
+  private static Map<String, Integer> measure(String text, Encoding o200k, Encoding cl100k) {
+    Map<String, Integer> metrics = new LinkedHashMap<>();
+    metrics.put("tokens_o200k", o200k.countTokensOrdinary(text));
+    metrics.put("tokens_cl100k", cl100k.countTokensOrdinary(text));
+    metrics.put("chars", text.codePointCount(0, text.length()));
+    metrics.put("bytes", text.getBytes(StandardCharsets.UTF_8).length);
+    return metrics;
+  }
 
-        List<BenchmarkCase> cases = new ArrayList<>();
+  private static Map<String, Integer> zeroed() {
+    Map<String, Integer> metrics = new LinkedHashMap<>();
+    METRIC_KEYS.forEach(key -> metrics.put(key, 0));
+    return metrics;
+  }
 
-        for (CaseConfig cfg : casesConfig) {
-            try {
-                String lino = readFile(dataDir.resolve(cfg.name + ".lino"));
-                String json = readFile(dataDir.resolve(cfg.name + ".json"));
-                String yaml = readFile(dataDir.resolve(cfg.name + ".yaml"));
-                String xml = readFile(dataDir.resolve(cfg.name + ".xml"));
+  private static JsonObject toJson(Map<String, Integer> metrics) {
+    JsonObject object = new JsonObject();
+    METRIC_KEYS.forEach(key -> object.addProperty(key, metrics.get(key)));
+    return object;
+  }
 
-                cases.add(new BenchmarkCase(cfg.name, cfg.description, lino, json, yaml, xml));
-            } catch (IOException e) {
-                System.err.println("Warning: Could not load " + cfg.name + ": " + e.getMessage());
-            }
+  /** Every measurement that differs from the reference results. */
+  private static List<String> compare(JsonObject results, JsonObject reference) {
+    Map<String, JsonObject> byName = new LinkedHashMap<>();
+    for (JsonElement element : reference.getAsJsonArray("datasets")) {
+      JsonObject dataset = element.getAsJsonObject();
+      byName.put(dataset.get("name").getAsString(), dataset);
+    }
+    List<String> differences = new ArrayList<>();
+    for (JsonElement element : results.getAsJsonArray("datasets")) {
+      JsonObject dataset = element.getAsJsonObject();
+      String name = dataset.get("name").getAsString();
+      JsonObject expected = byName.get(name);
+      if (expected == null) {
+        differences.add(name + ": missing from the Rust results");
+        continue;
+      }
+      JsonObject expectedFormats = expected.getAsJsonObject("formats");
+      for (Map.Entry<String, JsonElement> entry : dataset.getAsJsonObject("formats").entrySet()) {
+        JsonObject other = expectedFormats.getAsJsonObject(entry.getKey());
+        for (String key : METRIC_KEYS) {
+          int value = entry.getValue().getAsJsonObject().get(key).getAsInt();
+          Integer reported = other == null ? null : other.get(key).getAsInt();
+          if (reported == null || reported != value) {
+            differences.add(
+                name
+                    + "/"
+                    + entry.getKey()
+                    + "/"
+                    + key
+                    + ": "
+                    + value
+                    + " here, "
+                    + reported
+                    + " in Rust");
+          }
         }
-
-        return cases;
+      }
     }
+    return differences;
+  }
 
-    /**
-     * Run the benchmark for a single test case.
-     */
-    public static BenchmarkResult runBenchmark(BenchmarkCase testCase) {
-        int linoChars = countUtf8Chars(testCase.lino);
-        int jsonChars = countUtf8Chars(testCase.json);
-        int yamlChars = countUtf8Chars(testCase.yaml);
-        int xmlChars = countUtf8Chars(testCase.xml);
-
-        return new BenchmarkResult(
-                testCase.name,
-                testCase.description,
-                linoChars,
-                jsonChars,
-                yamlChars,
-                xmlChars,
-                calculateSavings(linoChars, jsonChars),
-                calculateSavings(linoChars, yamlChars),
-                calculateSavings(linoChars, xmlChars)
-        );
+  /**
+   * The benchmarks directory, found from the working directory so the command runs from the
+   * repository root as well as from its own directory.
+   */
+  private static Path benchmarksDirectory() {
+    String fromEnvironment = System.getenv("BENCHMARKS_DIR");
+    if (fromEnvironment != null && !fromEnvironment.isEmpty()) {
+      return Paths.get(fromEnvironment);
     }
-
-    /**
-     * Aggregate results across all benchmark cases.
-     */
-    public static AggregatedResults aggregateResults(List<BenchmarkResult> results) {
-        int totalLino = results.stream().mapToInt(BenchmarkResult::lino_chars).sum();
-        int totalJson = results.stream().mapToInt(BenchmarkResult::json_chars).sum();
-        int totalYaml = results.stream().mapToInt(BenchmarkResult::yaml_chars).sum();
-        int totalXml = results.stream().mapToInt(BenchmarkResult::xml_chars).sum();
-
-        double avgVsJson = results.stream().mapToDouble(BenchmarkResult::lino_vs_json).average().orElse(0);
-        double avgVsYaml = results.stream().mapToDouble(BenchmarkResult::lino_vs_yaml).average().orElse(0);
-        double avgVsXml = results.stream().mapToDouble(BenchmarkResult::lino_vs_xml).average().orElse(0);
-
-        return new AggregatedResults(
-                totalLino,
-                totalJson,
-                totalYaml,
-                totalXml,
-                avgVsJson,
-                avgVsYaml,
-                avgVsXml
-        );
+    Path current = Paths.get("").toAbsolutePath();
+    while (current != null) {
+      if (Files.exists(current.resolve("benchmarks/generated/index.json"))) {
+        return current.resolve("benchmarks");
+      }
+      if (Files.exists(current.resolve("generated/index.json"))) {
+        return current;
+      }
+      current = current.getParent();
     }
+    throw new IllegalStateException("no benchmarks directory above the working directory");
+  }
 
-    public static void main(String[] args) {
-        Path dataDir = findDataDir();
-        if (dataDir == null) {
-            System.err.println("Error: Could not find benchmarks/data directory");
-            System.err.println("Please run from the repository root or benchmarks directory");
-            System.exit(1);
-        }
-
-        System.out.println("Loading benchmark cases from " + dataDir + "...");
-        List<BenchmarkCase> cases = loadBenchmarkCases(dataDir);
-
-        if (cases.isEmpty()) {
-            System.err.println("Error: No benchmark cases found");
-            System.exit(1);
-        }
-
-        System.out.println("Running " + cases.size() + " benchmark cases...\n");
-
-        List<BenchmarkResult> results = cases.stream()
-                .map(Benchmark::runBenchmark)
-                .toList();
-        AggregatedResults aggregated = aggregateResults(results);
-
-        // Print summary to console
-        System.out.println("=== Links Notation Character Count Benchmark (Java) ===\n");
-        System.out.println("Summary:");
-        System.out.println("  Total Lino characters:  " + aggregated.total_lino_chars());
-        System.out.println("  Total JSON characters:  " + aggregated.total_json_chars());
-        System.out.println("  Total YAML characters:  " + aggregated.total_yaml_chars());
-        System.out.println("  Total XML characters:   " + aggregated.total_xml_chars());
-        System.out.println();
-        System.out.println("Average savings with Lino:");
-        System.out.printf("  vs JSON: %.1f%% fewer characters%n", aggregated.avg_lino_vs_json());
-        System.out.printf("  vs YAML: %.1f%% fewer characters%n", aggregated.avg_lino_vs_yaml());
-        System.out.printf("  vs XML:  %.1f%% fewer characters%n", aggregated.avg_lino_vs_xml());
-        System.out.println();
-
-        // Generate JSON report
-        Report report = new Report("Java", aggregated, results);
-
-        Path outputDir = findOutputDir();
-        Path jsonPath = outputDir.resolve("benchmark_results_java.json");
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try {
-            Files.writeString(jsonPath, gson.toJson(report), StandardCharsets.UTF_8);
-            System.out.println("JSON report written to " + jsonPath);
-        } catch (IOException e) {
-            System.err.println("Warning: Could not write JSON report: " + e.getMessage());
-        }
-
-        System.out.println("\nBenchmark completed successfully!");
-    }
+  /**
+   * The bytes of a file decoded as UTF-8, with no newline translation, so the CRLF line endings RFC
+   * 4180 asks of CSV are counted rather than collapsed.
+   */
+  private static String readText(Path root, String path) throws IOException {
+    return new String(Files.readAllBytes(root.resolve(path)), StandardCharsets.UTF_8);
+  }
 }

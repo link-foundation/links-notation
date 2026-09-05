@@ -10,19 +10,32 @@
     <packaging>jar</packaging>
 
     <name>Links Notation Benchmark</name>
-    <description>UTF-8 Character Count Benchmark for Links Notation vs JSON, YAML, and XML</description>
+    <description>Java side of the Links Notation token efficiency benchmarks</description>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <!-- The library is built for Java 21, so the benchmark that measures it is too. -->
+        <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
         <dependency>
+            <!-- The parser under measurement, built from ../../java by `mvn install`. -->
+            <groupId>io.github.link-foundation</groupId>
+            <artifactId>links-notation</artifactId>
+            <version>0.16.1</version>
+        </dependency>
+        <dependency>
+            <!-- JTokkit carries the BPE ranks with the jar, so counting a token
+                 never depends on a download. -->
+            <groupId>com.knuddels</groupId>
+            <artifactId>jtokkit</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.10.1</version>
+            <version>2.14.0</version>
         </dependency>
     </dependencies>
 
@@ -30,8 +43,16 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.15.0</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.5.1</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -43,9 +64,23 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.6.3</version>
                 <configuration>
                     <mainClass>io.github.linkfoundation.benchmark.Benchmark</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- The same formatter the library uses, so both are read alike. -->
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <java>
+                        <googleJavaFormat>
+                            <version>1.36.1</version>
+                            <style>GOOGLE</style>
+                        </googleJavaFormat>
+                    </java>
                 </configuration>
             </plugin>
         </plugins>
