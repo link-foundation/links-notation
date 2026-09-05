@@ -145,10 +145,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   being fetched at run time ([#290](https://github.com/link-foundation/links-notation/issues/290))
 
 ### Fixed
-- Docs: the six per-language `README.ru.md` files did not describe nested
-  contexts. The section was added to the nine English READMEs and to the root
-  Russian one, so a Russian reader of a language guide still got the old reading
-  by omission ([#282](https://github.com/link-foundation/links-notation/issues/282))
+- Docs: nested contexts were described in the English READMEs and in the root
+  Russian one, but in none of the per-language `README.ru.md` files, so a Russian
+  reader of a language guide still got the old reading by omission. The section
+  is now in all eight English READMEs and all eight Russian ones — the root plus
+  every implementation ([#282](https://github.com/link-foundation/links-notation/issues/282))
 - Go: the README documented a `lino.StrPtr` helper the package does not export,
   so that snippet could not compile, and its feature list named four sibling
   implementations when there are six
