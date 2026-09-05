@@ -1,0 +1,65 @@
+name: docs
+
+on:
+  push:
+    branches: main
+    paths:
+      - 'docs/comparison/**'
+      - '.github/workflows/docs.yml'
+  pull_request:
+    paths:
+      - 'docs/comparison/**'
+      - '.github/workflows/docs.yml'
+  workflow_dispatch:
+    inputs:
+      verbose:
+        description: 'Print extra diagnostics (never secret values)'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+jobs:
+  comparison:
+    # The format comparison in the README is generated from
+    # docs/comparison/comparison.json. This job proves it: it regenerates the
+    # documents and the SVGs and fails if the committed ones differ, which is
+    # what stopped the YAML from quietly growing fields no other document had.
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-comparison
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: docs/comparison/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Install the generator dependencies
+        working-directory: docs/comparison
+        run: npm ci
+      - name: Check the generated documents and pictures
+        working-directory: docs/comparison
+        run: |
+          set -euo pipefail
+          if [ "$CI_VERBOSE" = "true" ]; then set -x; fi
+          npm run check
+      - name: Show what drifted
+        # --check does not write, so regenerate to turn the failure into a diff
+        # the author can read and apply.
+        if: failure()
+        run: |
+          npm --prefix docs/comparison run generate
+          git --no-pager diff -- docs/comparison

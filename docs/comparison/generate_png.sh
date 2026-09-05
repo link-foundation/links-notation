@@ -22,7 +22,9 @@ convert_svg_to_png() {
         inkscape "$SVG_FILE" --export-filename="$PNG_FILE" --export-dpi=150
     elif command -v rsvg-convert &> /dev/null; then
         echo "Using rsvg-convert to convert $SVG_FILE to PNG..."
-        rsvg-convert -w 1800 -h 1200 "$SVG_FILE" -o "$PNG_FILE"
+        # --zoom keeps the aspect ratio, so the picture cannot be stretched
+        # when the generator resizes the grid to fit a longer example.
+        rsvg-convert --zoom 2 "$SVG_FILE" -o "$PNG_FILE"
     elif command -v convert &> /dev/null; then
         echo "Using ImageMagick to convert $SVG_FILE to PNG..."
         if [[ "$SVG_FILE" == *"dark"* ]]; then
