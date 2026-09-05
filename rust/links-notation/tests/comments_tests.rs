@@ -6,6 +6,7 @@
 //! is shared with the JavaScript, Python, C#, Go, Java and PHP suites, so a
 //! document written by one implementation reads the same in all of them.
 
+use links_notation::comments::strip_comments;
 use links_notation::format_config::FormatConfig;
 use links_notation::{
     format_links_with_config, parse_lino, parse_lino_to_links, parse_lino_to_links_with_config,
@@ -118,7 +119,7 @@ fn a_hash_inside_a_multiline_delimited_reference_is_content() {
 }
 
 #[test]
-fn comments_can_be_turned_off() {
+fn a_parser_without_comments_keeps_the_hash() {
     let config = ParserConfig::without_comments();
     let links = parse_lino_to_links_with_config("# a b\n", &config).expect("parses");
 
@@ -184,4 +185,12 @@ fn a_hash_that_cannot_open_a_comment_is_left_unquoted() {
     assert_eq!(quoted("issue#1047"), "(issue#1047)");
     assert_eq!(quoted("#"), "('#')");
     assert_eq!(quoted("#ff0000"), "('#ff0000')");
+}
+
+#[test]
+fn blanking_a_comment_keeps_the_length_of_the_document() {
+    assert_eq!(strip_comments("a: b # why\n"), "a: b      \n");
+    assert_eq!(strip_comments("\"# kept\"\n"), "\"# kept\"\n");
+    assert_eq!(strip_comments("issue#1047\n"), "issue#1047\n");
+    assert_eq!(strip_comments("# why\n"), "     \n");
 }

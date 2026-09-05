@@ -167,7 +167,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void ACommentBeforeADefectKeepsThePositionItReports()
+        public static void ACommentDoesNotMoveThePositionALaterErrorIsReportedAt()
         {
             var error = Assert.Throws<ParseException>(
                 () => new Parser().Parse("# a comment\nstage: rust: nextest\n"));

@@ -103,7 +103,7 @@ test('a hash inside a multiline delimited reference is content', () => {
   expect(parsesAs('"a # b\nc" d\n')).toBe('(<a # b\nc> <d>)');
 });
 
-test('comments can be turned off', () => {
+test('a parser without comments keeps the hash', () => {
   const plain = new Parser({ comments: false });
 
   expect(plain.parse('# a b\n').map(render).join('\n')).toBe('(<#> <a> <b>)');
@@ -143,7 +143,7 @@ test('blanking a comment keeps the length of the document', () => {
   expect(stripComments('a: b\n').length).toBe(5);
 });
 
-test('a reference that begins with a hash is written quoted, so it reads back', () => {
+test('a reference that begins with a hash is written quoted', () => {
   // Without the quotes the document would read as `a` followed by a comment.
   const document = formatLinks([
     new Link(null, [new Link('a'), new Link('#tag')]),
