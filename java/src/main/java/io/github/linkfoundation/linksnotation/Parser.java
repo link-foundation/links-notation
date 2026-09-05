@@ -26,6 +26,7 @@ public class Parser {
 
   private final int maxInputSize;
   private final int maxDepth;
+  private final boolean comments;
 
   private String text;
   private List<String> lines;
@@ -38,14 +39,37 @@ public class Parser {
   }
 
   /**
-   * Creates a parser with custom options.
+   * Creates a parser that reads comments.
    *
    * @param maxInputSize maximum input size in bytes
    * @param maxDepth maximum nesting depth
    */
   public Parser(int maxInputSize, int maxDepth) {
+    this(maxInputSize, maxDepth, true);
+  }
+
+  /**
+   * Creates a parser with default limits that reads {@code #} the way the flag asks.
+   *
+   * @param comments if false, read {@code #} as an ordinary character instead of the start of a
+   *     comment
+   */
+  public Parser(boolean comments) {
+    this(DEFAULT_MAX_INPUT_SIZE, DEFAULT_MAX_DEPTH, comments);
+  }
+
+  /**
+   * Creates a parser with custom options.
+   *
+   * @param maxInputSize maximum input size in bytes
+   * @param maxDepth maximum nesting depth
+   * @param comments if false, read {@code #} as an ordinary character instead of the start of a
+   *     comment
+   */
+  public Parser(int maxInputSize, int maxDepth, boolean comments) {
     this.maxInputSize = maxInputSize;
     this.maxDepth = maxDepth;
+    this.comments = comments;
   }
 
   /**
@@ -66,12 +90,16 @@ public class Parser {
           "Input size exceeds maximum allowed size of " + maxInputSize + " bytes");
     }
 
-    if (input.trim().isEmpty()) {
+    // Comments are blanked rather than removed, so every character keeps the
+    // position it was written at.
+    String prepared = comments ? Comments.stripComments(input) : input;
+
+    if (prepared.trim().isEmpty()) {
       return new ArrayList<>();
     }
 
-    this.text = input;
-    this.lines = splitLinesRespectingQuotes(input);
+    this.text = prepared;
+    this.lines = splitLinesRespectingQuotes(prepared);
     this.pos = 0;
     this.baseIndentation = null;
 
@@ -183,6 +211,17 @@ public class Parser {
    * delimited reference.
    */
   private int skipQuotedString(String text, int start) {
+    return quotedReferenceEnd(text, start);
+  }
+
+  /**
+   * Find where the delimited reference starting at start ends.
+   *
+   * <p>Returns the position right after the closing quotes, or -1 when text does not start a
+   * delimited reference. Blanking comments reads this so that a {@code #} inside a delimited
+   * reference is left as the content it is.
+   */
+  static int quotedReferenceEnd(String text, int start) {
     QuotedString parsed = parseQuotedStringAt(text, start);
     return parsed == null ? -1 : parsed.end;
   }
@@ -328,19 +367,32 @@ public class Parser {
     int childIndent = indent + 2; // Expect at least 2 spaces for child
 
     while (pos < lines.size()) {
-      String nextLine = lines.get(pos);
+      // A line holding nothing does not close a block: it is the next line that
+      // carries something which says whether the block goes on. Blanking a
+      // comment leaves such a line behind, so this is also what lets a comment
+      // stand on a line of its own inside an indented block.
+      int following = pos;
+      while (following < lines.size() && lines.get(following).trim().isEmpty()) {
+        following++;
+      }
+      if (following >= lines.size()) {
+        break;
+      }
+
+      String nextLine = lines.get(following);
       int rawNextIndent = nextLine.length() - nextLine.stripLeading().length();
       // Normalize next line's indentation
       int nextIndent = Math.max(0, rawNextIndent - (baseIndentation != null ? baseIndentation : 0));
 
-      if (!nextLine.trim().isEmpty() && nextIndent > indent) {
-        // This is a child
-        Map<String, Object> child = parseElement(children.isEmpty() ? childIndent : indent + 2);
-        if (child != null) {
-          children.add(child);
-        }
-      } else {
+      if (nextIndent <= indent) {
         break;
+      }
+
+      // This is a child
+      pos = following;
+      Map<String, Object> child = parseElement(children.isEmpty() ? childIndent : indent + 2);
+      if (child != null) {
+        children.add(child);
       }
     }
 
