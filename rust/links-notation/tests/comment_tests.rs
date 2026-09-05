@@ -150,3 +150,10 @@ fn a_comment_does_not_move_the_position_a_later_error_is_reported_at() {
         "{error}"
     );
 }
+
+#[test]
+fn a_line_of_spaces_separates_links_the_way_an_empty_line_does() {
+    // Blanking a comment leaves a line of spaces behind, so such a line has to
+    // read as a blank line.
+    assert_eq!(rendered("a\n   \nb\n"), rendered("a\n\nb\n"));
+}
