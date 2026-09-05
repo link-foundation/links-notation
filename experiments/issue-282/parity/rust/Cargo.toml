@@ -1,0 +1,12 @@
+# Kept out of the workspace on purpose: this is an experiment, not something the
+# published crate should build or depend on.
+[package]
+name = "issue-282-parity"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+links-notation = { path = "../../../../rust/links-notation" }
