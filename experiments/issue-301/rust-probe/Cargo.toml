@@ -1,0 +1,11 @@
+[package]
+name = "probe"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+# Its own workspace, so the crate under test stays out of this probe's build.
+[workspace]
+
+[dependencies]
+links-notation = { path = "../../../rust/links-notation" }
