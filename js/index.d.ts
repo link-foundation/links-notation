@@ -144,9 +144,60 @@ export class Parser {
    * Parse Lino notation text into Link objects
    * @param input - The Lino notation text to parse
    * @returns Array of parsed Link objects
-   * @throws {Error} If parsing fails
+   * @throws {ParseError} If the text does not parse
    */
   parse(input: string): Link[];
+}
+
+/**
+ * The position a parse stopped at, as the generated parser reports it
+ */
+export interface ParseErrorLocation {
+  start: { offset: number; line: number; column: number };
+  end: { offset: number; line: number; column: number };
+}
+
+/**
+ * The error thrown when a document does not parse
+ *
+ * The message says where the document stopped making sense and quotes the
+ * offending line with a caret under it.
+ */
+export class ParseError extends Error {
+  /**
+   * Offset of the offending position from the start of the document
+   */
+  offset: number;
+
+  /**
+   * Line the offending position is on, counted from 1
+   */
+  line: number;
+
+  /**
+   * Column the offending position is at, counted from 1
+   */
+  column: number;
+
+  /**
+   * The character found instead, or null at the end of the document
+   */
+  found: string | null;
+
+  /**
+   * The offending line, as written, without its line ending
+   */
+  lineText: string;
+
+  /**
+   * The offending line with a caret under the offending column
+   */
+  snippet: string;
+
+  /**
+   * The position the generated parser reported
+   */
+  location: ParseErrorLocation;
 }
 
 /**
