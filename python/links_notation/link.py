@@ -97,8 +97,12 @@ class Link:
         if reference == "":
             return '""'
 
-        # Check if single quotes are needed
-        needs_single_quotes = any(c in reference for c in [":", "(", ")", " ", "\t", "\n", "\r", '"'])
+        # Check if single quotes are needed. A reference that begins with a "#"
+        # is quoted too, or it would read back as a comment; a "#" anywhere else
+        # is content ("issue#1047"), so only the first character matters.
+        needs_single_quotes = reference.startswith("#") or any(
+            c in reference for c in [":", "(", ")", " ", "\t", "\n", "\r", '"']
+        )
 
         if needs_single_quotes:
             return f"'{reference}'"

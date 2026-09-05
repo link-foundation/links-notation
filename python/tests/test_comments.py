@@ -9,7 +9,7 @@ shared with the Rust, JavaScript, Go, C#, Java and PHP suites, so a document
 written by one implementation reads the same in all of them.
 """
 
-from links_notation import Parser, strip_comments
+from links_notation import Link, Parser, format_links, strip_comments
 
 
 def render(node):
@@ -106,3 +106,19 @@ class TestBlankingKeepsPositions:
         assert strip_comments("a: b # why\n") == "a: b      \n"
         assert strip_comments('"# kept"\n') == '"# kept"\n'
         assert strip_comments("issue#1047\n") == "issue#1047\n"
+
+
+class TestFormattingAReferenceThatBeginsWithAHash:
+    """A formatter has to write what the parser reads back."""
+
+    def test_a_reference_that_begins_with_a_hash_is_written_quoted(self):
+        # Without the quotes the document would read as ``a`` followed by a comment.
+        document = format_links([Link(None, [Link("a"), Link("#tag")])])
+
+        assert document == "(a '#tag')"
+        assert rendered(document) == "(<a> <#tag>)"
+
+    def test_a_hash_that_cannot_open_a_comment_is_left_unquoted(self):
+        assert Link.escape_reference("issue#1047") == "issue#1047"
+        assert Link.escape_reference("#") == "'#'"
+        assert Link.escape_reference("#ff0000") == "'#ff0000'"

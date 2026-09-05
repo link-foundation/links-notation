@@ -140,3 +140,28 @@ func TestBlankingACommentKeepsTheLengthOfTheDocument(t *testing.T) {
 		}
 	}
 }
+
+func TestAReferenceThatBeginsWithAHashIsWrittenQuoted(t *testing.T) {
+	// Without the quotes the document would read as `a` followed by a comment.
+	document := Format([]*Link{NewLink(nil, []*Link{NewRef("a"), NewRef("#tag")})})
+
+	if document != "(a '#tag')" {
+		t.Errorf("expected %q, got %q", "(a '#tag')", document)
+	}
+	if got := rendered(t, document); got != "(<a> <#tag>)" {
+		t.Errorf("expected %q, got %q", "(<a> <#tag>)", got)
+	}
+}
+
+func TestAHashThatCannotOpenACommentIsLeftUnquoted(t *testing.T) {
+	cases := map[string]string{
+		"issue#1047": "issue#1047",
+		"#":          "'#'",
+		"#ff0000":    "'#ff0000'",
+	}
+	for reference, expected := range cases {
+		if got := escapeReference(reference); got != expected {
+			t.Errorf("escapeReference(%q) = %q, want %q", reference, got, expected)
+		}
+	}
+}

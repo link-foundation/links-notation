@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace LinkFoundation\LinksNotation\Tests;
 
 use LinkFoundation\LinksNotation\Comments;
+use LinkFoundation\LinksNotation\Formatter;
 use LinkFoundation\LinksNotation\Link;
 use LinkFoundation\LinksNotation\Parser;
 use PHPUnit\Framework\TestCase;
@@ -170,5 +171,21 @@ class CommentsTest extends TestCase
         $this->assertSame("\"# kept\"\n", Comments::stripComments("\"# kept\"\n"));
         $this->assertSame("issue#1047\n", Comments::stripComments("issue#1047\n"));
         $this->assertSame("     \n", Comments::stripComments("# why\n"));
+    }
+
+    public function testAReferenceThatBeginsWithAHashIsWrittenQuoted(): void
+    {
+        // Without the quotes the document would read as `a` followed by a comment.
+        $document = Formatter::formatLinks([new Link(null, [new Link('a'), new Link('#tag')])]);
+
+        $this->assertSame("(a '#tag')", $document);
+        $this->assertSame('(<a> <#tag>)', $this->rendered($document));
+    }
+
+    public function testAHashThatCannotOpenACommentIsLeftUnquoted(): void
+    {
+        $this->assertSame('issue#1047', Link::escapeReference('issue#1047'));
+        $this->assertSame("'#'", Link::escapeReference('#'));
+        $this->assertSame("'#ff0000'", Link::escapeReference('#ff0000'));
     }
 }

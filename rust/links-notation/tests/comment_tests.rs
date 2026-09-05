@@ -6,8 +6,10 @@
 //! is shared with the JavaScript, Python, C#, Go, Java and PHP suites, so a
 //! document written by one implementation reads the same in all of them.
 
+use links_notation::format_config::FormatConfig;
 use links_notation::{
-    parse_lino, parse_lino_to_links, parse_lino_to_links_with_config, LiNo, ParserConfig,
+    format_links_with_config, parse_lino, parse_lino_to_links, parse_lino_to_links_with_config,
+    LiNo, ParserConfig,
 };
 
 /// Render a parsed node unambiguously: every reference is wrapped in angle
@@ -156,4 +158,30 @@ fn a_line_of_spaces_separates_links_the_way_an_empty_line_does() {
     // Blanking a comment leaves a line of spaces behind, so such a line has to
     // read as a blank line.
     assert_eq!(rendered("a\n   \nb\n"), rendered("a\n\nb\n"));
+}
+
+/// Writes a document the way a caller that keeps the default formatting does.
+fn written(links: &[LiNo<String>]) -> String {
+    format_links_with_config(links, &FormatConfig::default())
+}
+
+#[test]
+fn a_reference_that_begins_with_a_hash_is_written_quoted() {
+    // Without the quotes the document would read as `a` followed by a comment.
+    let document = written(&[LiNo::Link {
+        id: None,
+        values: vec![LiNo::Ref("a".to_string()), LiNo::Ref("#tag".to_string())],
+    }]);
+
+    assert_eq!(document, "(a '#tag')");
+    assert_eq!(rendered(&document), "(<a> <#tag>)");
+}
+
+#[test]
+fn a_hash_that_cannot_open_a_comment_is_left_unquoted() {
+    let quoted = |reference: &str| written(&[LiNo::Ref(reference.to_string())]);
+
+    assert_eq!(quoted("issue#1047"), "(issue#1047)");
+    assert_eq!(quoted("#"), "('#')");
+    assert_eq!(quoted("#ff0000"), "('#ff0000')");
 }

@@ -7,7 +7,7 @@
 // written by one implementation reads the same in all of them.
 
 import { test, expect } from 'bun:test';
-import { Parser, ParseError, stripComments } from '../src/index.js';
+import { Link, Parser, ParseError, formatLinks, stripComments } from '../src/index.js';
 
 const parser = new Parser();
 
@@ -135,4 +135,18 @@ test('blanking a comment keeps the length of the document', () => {
   expect(stripComments('"# kept"\n')).toBe('"# kept"\n');
   expect(stripComments('issue#1047\n')).toBe('issue#1047\n');
   expect(stripComments('a: b\n').length).toBe(5);
+});
+
+test('a reference that begins with a hash is written quoted, so it reads back', () => {
+  // Without the quotes the document would read as `a` followed by a comment.
+  const document = formatLinks([new Link(null, [new Link('a'), new Link('#tag')])]);
+
+  expect(document).toBe("(a '#tag')");
+  expect(parser.parse(document).map(render).join('\n')).toBe('(<a> <#tag>)');
+});
+
+test('a hash that cannot open a comment is left unquoted', () => {
+  expect(Link.escapeReference('issue#1047')).toBe('issue#1047');
+  expect(Link.escapeReference('#')).toBe("'#'");
+  expect(Link.escapeReference('#ff0000')).toBe("'#ff0000'");
 });

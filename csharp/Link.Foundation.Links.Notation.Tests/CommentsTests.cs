@@ -175,5 +175,23 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Equal(2, error.Line);
             Assert.Equal(12, error.Column);
         }
+
+        [Fact]
+        public static void AReferenceThatBeginsWithAHashIsWrittenQuoted()
+        {
+            // Without the quotes the document would read as `a` followed by a comment.
+            var document = new Link<string>(new Link<string>("a"), new Link<string>("#tag")).ToString();
+
+            Assert.Equal("(a '#tag')", document);
+            Assert.Equal("(<a> <#tag>)", Rendered(document));
+        }
+
+        [Fact]
+        public static void AHashThatCannotOpenACommentIsLeftUnquoted()
+        {
+            Assert.Equal("issue#1047", Link<string>.EscapeReference("issue#1047"));
+            Assert.Equal("'#'", Link<string>.EscapeReference("#"));
+            Assert.Equal("'#ff0000'", Link<string>.EscapeReference("#ff0000"));
+        }
     }
 }

@@ -153,4 +153,21 @@ class CommentsTest {
     assertEquals("issue#1047\n", Comments.stripComments("issue#1047\n"));
     assertTrue(Comments.stripComments("# why\n").startsWith("     "));
   }
+
+  @Test
+  void aReferenceThatBeginsWithAHashIsWrittenQuoted() throws ParseException {
+    // Without the quotes the document would read as `a` followed by a comment.
+    String document =
+        Link.formatLinks(List.of(new Link(null, List.of(new Link("a"), new Link("#tag")))));
+
+    assertEquals("(a '#tag')", document);
+    assertEquals("(<a> <#tag>)", rendered(document));
+  }
+
+  @Test
+  void aHashThatCannotOpenACommentIsLeftUnquoted() {
+    assertEquals("issue#1047", Link.escapeReference("issue#1047"));
+    assertEquals("'#'", Link.escapeReference("#"));
+    assertEquals("'#ff0000'", Link.escapeReference("#ff0000"));
+  }
 }

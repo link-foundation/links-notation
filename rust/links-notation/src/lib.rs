@@ -1024,7 +1024,11 @@ fn escape_reference(reference: &str) -> String {
     let has_single_quote = reference.contains('\'');
     let has_double_quote = reference.contains('"');
 
-    let needs_quoting = reference.contains(':')
+    // A reference that begins with a `#` has to be quoted, or it would read back
+    // as a comment. A `#` anywhere else in a reference is content
+    // (`issue#1047`), so only the first character matters.
+    let needs_quoting = reference.starts_with('#')
+        || reference.contains(':')
         || reference.contains('(')
         || reference.contains(')')
         || reference.contains(' ')
