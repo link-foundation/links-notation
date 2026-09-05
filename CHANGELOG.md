@@ -29,6 +29,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   that touches it and, on `main`, commits the regenerated documents, results and
   report with `GITHUB_TOKEN` - only when the benchmark succeeded and only when
   something changed ([#209](https://github.com/link-foundation/links-notation/issues/209))
+- Go: `README.ru.md`, the only implementation without one. `README.ru.md` used to
+  send a Russian reader to the English page with a note saying so
+  ([#209](https://github.com/link-foundation/links-notation/pull/210))
+- Go: `example_readme_test.go`, the documented snippets as runnable examples with
+  `// Output:` comments, so `go test` fails when the README and the package
+  disagree ([#209](https://github.com/link-foundation/links-notation/pull/210))
 - Rust: `links_notation::VERSION`, the crate's own version, so a tool reporting
   which parser produced a result reads it from the parser. The benchmark report
   used to print the benchmark crate's `0.1.0` while measuring `links-notation`
@@ -139,6 +145,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   being fetched at run time ([#290](https://github.com/link-foundation/links-notation/issues/290))
 
 ### Fixed
+- Docs: the six per-language `README.ru.md` files did not describe nested
+  contexts. The section was added to the nine English READMEs and to the root
+  Russian one, so a Russian reader of a language guide still got the old reading
+  by omission ([#282](https://github.com/link-foundation/links-notation/issues/282))
+- Go: the README documented a `lino.StrPtr` helper the package does not export,
+  so that snippet could not compile, and its feature list named four sibling
+  implementations when there are six
+  ([#209](https://github.com/link-foundation/links-notation/pull/210))
+- Docs: the JavaScript, Java and PHP package information sections advertised
+  version 0.1.0, six releases stale, and the JavaScript README claimed MIT while
+  `js/package.json` declares Unlicense. The version line is gone rather than
+  corrected, so there is nothing left to drift
+  ([#209](https://github.com/link-foundation/links-notation/pull/210))
+- Website: the header carried a hand-typed version literal alongside the one
+  `script.js` writes from `js/package.json` at build time, which is how the page
+  advertised v0.6.0 for ten minor releases
+  ([#209](https://github.com/link-foundation/links-notation/pull/210))
 - A bare delimiter pair is now the empty reference in every implementation
   (JavaScript, Python, Rust, Go, Java, C#, PHP): `(a "" b)` holds an empty
   reference instead of the two-character text `""`, `(a "" "" b)` holds two
