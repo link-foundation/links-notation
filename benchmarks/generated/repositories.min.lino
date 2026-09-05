@@ -1,0 +1,204 @@
+(
+  repositories (
+    (
+      rank 1
+      name links-engine-0
+      owner linksplatform
+      stars 3727
+      forks 2529
+      language Go
+      license BSD-3-Clause
+      archived false
+    )
+    (
+      rank 2
+      name deep-kit-1
+      owner deep-foundation
+      stars 19709
+      forks 373
+      language C#
+      license Unlicense
+      archived false
+    )
+    (
+      rank 3
+      name net-engine-2
+      owner deep-foundation
+      stars 38433
+      forks 1074
+      language Go
+      license Unlicense
+      archived false
+    )
+    (
+      rank 4
+      name net-engine-3
+      owner deep-foundation
+      stars 15097
+      forks 2513
+      language C#
+      license Unlicense
+      archived false
+    )
+    (
+      rank 5
+      name links-kit-4
+      owner linksplatform
+      stars 3896
+      forks 1330
+      language TypeScript
+      license MPL-2.0
+      archived false
+    )
+    (
+      rank 6
+      name graph-notation-5
+      owner linksplatform
+      stars 5233
+      forks 206
+      language Rust
+      license MPL-2.0
+      archived true
+    )
+    (
+      rank 7
+      name net-kit-6
+      owner deep-foundation
+      stars 42890
+      forks 324
+      language TypeScript
+      license BSD-3-Clause
+      archived false
+    )
+    (
+      rank 8
+      name deep-notation-7
+      owner linksplatform
+      stars 17338
+      forks 1526
+      language Java
+      license MIT
+      archived false
+    )
+    (
+      rank 9
+      name deep-store-8
+      owner link-foundation
+      stars 32397
+      forks 884
+      language C#
+      license Unlicense
+      archived false
+    )
+    (
+      rank 10
+      name lino-codec-9
+      owner deep-foundation
+      stars 15054
+      forks 2362
+      language C#
+      license MPL-2.0
+      archived false
+    )
+    (
+      rank 11
+      name lino-notation-10
+      owner link-foundation
+      stars 46782
+      forks 3776
+      language Go
+      license Apache-2.0
+      archived false
+    )
+    (
+      rank 12
+      name deep-store-11
+      owner link-foundation
+      stars 21386
+      forks 2102
+      language TypeScript
+      license Unlicense
+      archived false
+    )
+    (
+      rank 13
+      name net-store-12
+      owner link-foundation
+      stars 22441
+      forks 1992
+      language PHP
+      license Unlicense
+      archived false
+    )
+    (
+      rank 14
+      name links-kit-13
+      owner deep-foundation
+      stars 9599
+      forks 1134
+      language Python
+      license Unlicense
+      archived false
+    )
+    (
+      rank 15
+      name net-kit-14
+      owner deep-foundation
+      stars 40875
+      forks 1573
+      language PHP
+      license MPL-2.0
+      archived false
+    )
+    (
+      rank 16
+      name lino-kit-15
+      owner deep-foundation
+      stars 33399
+      forks 1480
+      language Rust
+      license MIT
+      archived false
+    )
+    (
+      rank 17
+      name lino-notation-16
+      owner linksplatform
+      stars 36038
+      forks 74
+      language Java
+      license MPL-2.0
+      archived false
+    )
+    (
+      rank 18
+      name lino-kit-17
+      owner linksplatform
+      stars 24012
+      forks 391
+      language Java
+      license BSD-3-Clause
+      archived false
+    )
+    (
+      rank 19
+      name graph-store-18
+      owner linksplatform
+      stars 21513
+      forks 1401
+      language TypeScript
+      license MIT
+      archived true
+    )
+    (
+      rank 20
+      name links-notation-19
+      owner deep-foundation
+      stars 38679
+      forks 1255
+      language Rust
+      license Apache-2.0
+      archived false
+    )
+  )
+)

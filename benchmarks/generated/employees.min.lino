@@ -1,0 +1,254 @@
+(
+  employees (
+    (
+      id 1000
+      name "Hedy Rossum"
+      email hedy.rossum@example.com
+      department operations
+      role "staff engineer"
+      salary 160000
+      active false
+      hiredOn 2022-07-03
+    )
+    (
+      id 1001
+      name "Bjarne Dijkstra"
+      email bjarne.dijkstra@example.com
+      department support
+      role manager
+      salary 187000
+      active true
+      hiredOn 2022-04-02
+    )
+    (
+      id 1002
+      name "Dennis Liskov"
+      email dennis.liskov@example.com
+      department engineering
+      role "staff engineer"
+      salary 182000
+      active true
+      hiredOn 2022-02-24
+    )
+    (
+      id 1003
+      name "Margaret Perlman"
+      email margaret.perlman@example.com
+      department support
+      role analyst
+      salary 126000
+      active true
+      hiredOn 2019-10-14
+    )
+    (
+      id 1004
+      name "Radia Torvalds"
+      email radia.torvalds@example.com
+      department research
+      role "senior engineer"
+      salary 184000
+      active false
+      hiredOn 2019-03-03
+    )
+    (
+      id 1005
+      name "Donald Bartik"
+      email donald.bartik@example.com
+      department engineering
+      role manager
+      salary 178000
+      active true
+      hiredOn 2020-11-05
+    )
+    (
+      id 1006
+      name "Barbara Allen"
+      email barbara.allen@example.com
+      department research
+      role analyst
+      salary 146000
+      active true
+      hiredOn 2024-05-22
+    )
+    (
+      id 1007
+      name "Barbara Knuth"
+      email barbara.knuth@example.com
+      department support
+      role manager
+      salary 80000
+      active true
+      hiredOn 2018-10-27
+    )
+    (
+      id 1008
+      name "Donald Thompson"
+      email donald.thompson@example.com
+      department engineering
+      role analyst
+      salary 167000
+      active true
+      hiredOn 2025-04-19
+    )
+    (
+      id 1009
+      name "Barbara Berners-Lee"
+      email barbara.bernerslee@example.com
+      department design
+      role analyst
+      salary 77000
+      active true
+      hiredOn 2022-12-08
+    )
+    (
+      id 1010
+      name "Tim Lamarr"
+      email tim.lamarr@example.com
+      department operations
+      role analyst
+      salary 186000
+      active true
+      hiredOn 2021-03-17
+    )
+    (
+      id 1011
+      name "Grace Borg"
+      email grace.borg@example.com
+      department design
+      role "senior engineer"
+      salary 104000
+      active true
+      hiredOn 2021-05-17
+    )
+    (
+      id 1012
+      name "Edsger Hamilton"
+      email edsger.hamilton@example.com
+      department support
+      role "staff engineer"
+      salary 70000
+      active false
+      hiredOn 2021-06-21
+    )
+    (
+      id 1013
+      name "Ken Rossum"
+      email ken.rossum@example.com
+      department research
+      role "senior engineer"
+      salary 75000
+      active true
+      hiredOn 2018-12-26
+    )
+    (
+      id 1014
+      name "Tim Hamilton"
+      email tim.hamilton@example.com
+      department support
+      role engineer
+      salary 187000
+      active true
+      hiredOn 2020-03-11
+    )
+    (
+      id 1015
+      name "Hedy Stroustrup"
+      email hedy.stroustrup@example.com
+      department research
+      role engineer
+      salary 107000
+      active true
+      hiredOn 2023-04-03
+    )
+    (
+      id 1016
+      name "Bjarne Thompson"
+      email bjarne.thompson@example.com
+      department research
+      role "senior engineer"
+      salary 129000
+      active true
+      hiredOn 2021-08-08
+    )
+    (
+      id 1017
+      name "Ada Thompson"
+      email ada.thompson@example.com
+      department operations
+      role "senior engineer"
+      salary 150000
+      active true
+      hiredOn 2020-11-24
+    )
+    (
+      id 1018
+      name "Tim Stroustrup"
+      email tim.stroustrup@example.com
+      department engineering
+      role "senior engineer"
+      salary 82000
+      active true
+      hiredOn 2020-07-01
+    )
+    (
+      id 1019
+      name "Margaret Ritchie"
+      email margaret.ritchie@example.com
+      department engineering
+      role analyst
+      salary 62000
+      active true
+      hiredOn 2021-06-26
+    )
+    (
+      id 1020
+      name "Ada Torvalds"
+      email ada.torvalds@example.com
+      department engineering
+      role engineer
+      salary 172000
+      active true
+      hiredOn 2024-05-07
+    )
+    (
+      id 1021
+      name "Alan Stroustrup"
+      email alan.stroustrup@example.com
+      department research
+      role "staff engineer"
+      salary 79000
+      active true
+      hiredOn 2024-09-30
+    )
+    (
+      id 1022
+      name "Anita Stroustrup"
+      email anita.stroustrup@example.com
+      department support
+      role engineer
+      salary 108000
+      active true
+      hiredOn 2022-05-15
+    )
+    (
+      id 1023
+      name "Grace Lovelace"
+      email grace.lovelace@example.com
+      department operations
+      role manager
+      salary 118000
+      active true
+      hiredOn 2017-11-26
+    )
+    (
+      id 1024
+      name "Sophie Knuth"
+      email sophie.knuth@example.com
+      department support
+      role engineer
+      salary 65000
+      active true
+      hiredOn 2022-05-15
+    )
+  )
+)

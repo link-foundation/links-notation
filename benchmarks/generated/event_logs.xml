@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <events>
+    <at>2026-01-01T00:00:00Z</at>
+    <level>warn</level>
+    <service>gateway</service>
+    <message>connection reset by peer</message>
+    <tags>canary</tags>
+    <tags>us</tags>
+  </events>
+  <events>
+    <at>2026-01-01T00:00:43Z</at>
+    <level>debug</level>
+    <service>scheduler</service>
+    <message>cache miss</message>
+    <durationMs>4177</durationMs>
+    <error>
+      <kind>parse</kind>
+      <retryable>true</retryable>
+    </error>
+  </events>
+  <events>
+    <at>2026-01-01T00:01:26Z</at>
+    <level>debug</level>
+    <service>gateway</service>
+    <message>cache miss</message>
+  </events>
+  <events>
+    <at>2026-01-01T00:02:09Z</at>
+    <level>debug</level>
+    <service>notifier</service>
+    <message>retry scheduled</message>
+    <error>
+      <kind>timeout</kind>
+      <retryable>true</retryable>
+    </error>
+  </events>
+  <events>
+    <at>2026-01-01T00:02:52Z</at>
+    <level>error</level>
+    <service>indexer</service>
+    <message>parse completed</message>
+    <error>
+      <kind>io</kind>
+      <retryable>false</retryable>
+    </error>
+    <tags>canary</tags>
+    <tags>apac</tags>
+  </events>
+  <events>
+    <at>2026-01-01T00:03:35Z</at>
+    <level>debug</level>
+    <service>indexer</service>
+    <message>cache miss</message>
+    <durationMs>880</durationMs>
+    <tags>prod</tags>
+    <tags>us</tags>
+  </events>
+  <events>
+    <at>2026-01-01T00:04:18Z</at>
+    <level>error</level>
+    <service>notifier</service>
+    <message>connection reset by peer</message>
+    <error>
+      <kind>conflict</kind>
+      <retryable>true</retryable>
+    </error>
+  </events>
+  <events>
+    <at>2026-01-01T00:05:01Z</at>
+    <level>debug</level>
+    <service>scheduler</service>
+    <message>cache miss</message>
+  </events>
+  <events>
+    <at>2026-01-01T00:05:44Z</at>
+    <level>debug</level>
+    <service>notifier</service>
+    <message>request accepted</message>
+    <durationMs>2729</durationMs>
+    <error>
+      <kind>timeout</kind>
+      <retryable>false</retryable>
+    </error>
+    <tags>canary</tags>
+    <tags>eu</tags>
+  </events>
+  <events>
+    <at>2026-01-01T00:06:27Z</at>
+    <level>debug</level>
+    <service>notifier</service>
+    <message>request accepted</message>
+    <durationMs>3323</durationMs>
+  </events>
+  <events>
+    <at>2026-01-01T00:07:10Z</at>
+    <level>error</level>
+    <service>notifier</service>
+    <message>connection reset by peer</message>
+    <error>
+      <kind>conflict</kind>
+      <retryable>true</retryable>
+    </error>
+  </events>
+  <events>
+    <at>2026-01-01T00:07:53Z</at>
+    <level>warn</level>
+    <service>parser</service>
+    <message>request accepted</message>
+  </events>
+  <events>
+    <at>2026-01-01T00:08:36Z</at>
+    <level>info</level>
+    <service>scheduler</service>
+    <message>connection reset by peer</message>
+    <durationMs>3191</durationMs>
+  </events>
+  <events>
+    <at>2026-01-01T00:09:19Z</at>
+    <level>debug</level>
+    <service>notifier</service>
+    <message>retry scheduled</message>
+  </events>
+  <events>
+    <at>2026-01-01T00:10:02Z</at>
+    <level>info</level>
+    <service>scheduler</service>
+    <message>cache miss</message>
+    <durationMs>962</durationMs>
+  </events>
+  <events>
+    <at>2026-01-01T00:10:45Z</at>
+    <level>debug</level>
+    <service>parser</service>
+    <message>connection reset by peer</message>
+    <tags>canary</tags>
+    <tags>apac</tags>
+  </events>
+  <events>
+    <at>2026-01-01T00:11:28Z</at>
+    <level>info</level>
+    <service>scheduler</service>
+    <message>retry scheduled</message>
+  </events>
+  <events>
+    <at>2026-01-01T00:12:11Z</at>
+    <level>error</level>
+    <service>parser</service>
+    <message>parse completed</message>
+    <durationMs>3002</durationMs>
+    <error>
+      <kind>io</kind>
+      <retryable>true</retryable>
+    </error>
+  </events>
+  <events>
+    <at>2026-01-01T00:12:54Z</at>
+    <level>warn</level>
+    <service>indexer</service>
+    <message>parse completed</message>
+    <tags>canary</tags>
+    <tags>apac</tags>
+  </events>
+  <events>
+    <at>2026-01-01T00:13:37Z</at>
+    <level>warn</level>
+    <service>notifier</service>
+    <message>request accepted</message>
+    <tags>canary</tags>
+    <tags>apac</tags>
+  </events>
+</root>

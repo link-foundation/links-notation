@@ -1,391 +1,454 @@
-//! UTF-8 Character Count Benchmark for Links Notation vs JSON, YAML, and XML
+//! Token efficiency benchmarks for Links Notation.
 //!
-//! This benchmark measures the UTF-8 character count efficiency of Links Notation
-//! compared to other popular data serialization formats.
+//! The benchmark answers one question: how much of a model's context does the
+//! same information cost in Links Notation, JSON, YAML, XML and CSV?
+//!
+//! It is a generator as much as a measurement. `benchmarks/datasets/` holds the
+//! data, and this program derives every other representation from it, checks
+//! that the derived documents still hold the same value, measures them, and
+//! writes both a Markdown report and a machine-readable result file. The
+//! benchmarks written in the other supported languages read the files it wrote
+//! and have to arrive at the same numbers.
+//!
+//! ```text
+//! cargo run -p links-notation-benchmark --release            # regenerate
+//! cargo run -p links-notation-benchmark --release -- --check  # fail on drift
+//! ```
 
+mod csv;
+mod lino;
+mod metrics;
+mod report;
+mod xml;
+mod yaml;
+
+use metrics::{measure, Metrics};
 use serde::Serialize;
+use serde_json::{Map, Value};
+use std::collections::BTreeMap;
+use std::env;
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
+use std::process::ExitCode;
 
-/// Represents a single benchmark test case with all format representations
+/// Every format the report knows, in the order the tables show them.
+pub const FORMATS: [&str; 8] = [
+    "lino",
+    "lino-min",
+    "lino-line",
+    "json",
+    "json-compact",
+    "yaml",
+    "xml",
+    "csv",
+];
+
+/// Version of the result file's schema, so a language reading it can tell that
+/// it is reading a shape it understands.
+const RESULTS_SCHEMA: u32 = 1;
+
+/// One dataset as `benchmarks/datasets/index.json` describes it.
 #[derive(Debug, Clone)]
-struct BenchmarkCase {
+struct Dataset {
     name: String,
     description: String,
-    lino: String,
-    json: String,
-    yaml: String,
-    xml: String,
+    structure: String,
+    profile: String,
+    value: Value,
 }
 
-/// Represents the character count results for a benchmark case
-#[derive(Debug, Clone, Serialize)]
-struct BenchmarkResult {
-    name: String,
-    description: String,
-    lino_chars: usize,
-    json_chars: usize,
-    yaml_chars: usize,
-    xml_chars: usize,
-    lino_vs_json: f64,
-    lino_vs_yaml: f64,
-    lino_vs_xml: f64,
+/// One dataset's measured formats.
+#[derive(Debug, Clone)]
+pub struct DatasetResult {
+    pub name: String,
+    pub description: String,
+    pub structure: String,
+    pub profile: String,
+    pub formats: BTreeMap<String, Metrics>,
 }
 
-/// Represents aggregated results across all benchmark cases
-#[derive(Debug, Clone, Serialize)]
-struct AggregatedResults {
-    total_lino_chars: usize,
-    total_json_chars: usize,
-    total_yaml_chars: usize,
-    total_xml_chars: usize,
-    avg_lino_vs_json: f64,
-    avg_lino_vs_yaml: f64,
-    avg_lino_vs_xml: f64,
+/// A file this run produces, kept in memory so `--check` can compare without
+/// writing anything.
+struct GeneratedFile {
+    path: PathBuf,
+    contents: String,
 }
 
-fn count_utf8_chars(s: &str) -> usize {
-    s.chars().count()
-}
+fn main() -> ExitCode {
+    let check = env::args().any(|argument| argument == "--check");
+    let verbose = env::args().any(|argument| argument == "--verbose")
+        || env::var("CI_VERBOSE").is_ok_and(|value| value == "true" || value == "1");
 
-fn calculate_savings(lino_chars: usize, other_chars: usize) -> f64 {
-    if other_chars == 0 {
-        0.0
-    } else {
-        ((other_chars as f64 - lino_chars as f64) / other_chars as f64) * 100.0
-    }
-}
-
-fn load_benchmark_cases(data_dir: &Path) -> Vec<BenchmarkCase> {
-    let cases = vec![
-        ("employees", "Employee records with nested structure"),
-        ("simple_doublets", "Simple doublet links (2-tuples)"),
-        ("triplets", "Triplet relations (3-tuples)"),
-        ("nested_structure", "Deeply nested company structure"),
-        ("config", "Application configuration"),
-    ];
-
-    cases
-        .into_iter()
-        .filter_map(|(name, desc)| {
-            let lino_path = data_dir.join(format!("{}.lino", name));
-            let json_path = data_dir.join(format!("{}.json", name));
-            let yaml_path = data_dir.join(format!("{}.yaml", name));
-            let xml_path = data_dir.join(format!("{}.xml", name));
-
-            let lino = fs::read_to_string(&lino_path).ok()?;
-            let json = fs::read_to_string(&json_path).ok()?;
-            let yaml = fs::read_to_string(&yaml_path).ok()?;
-            let xml = fs::read_to_string(&xml_path).ok()?;
-
-            Some(BenchmarkCase {
-                name: name.to_string(),
-                description: desc.to_string(),
-                lino,
-                json,
-                yaml,
-                xml,
-            })
-        })
-        .collect()
-}
-
-fn run_benchmark(case: &BenchmarkCase) -> BenchmarkResult {
-    let lino_chars = count_utf8_chars(&case.lino);
-    let json_chars = count_utf8_chars(&case.json);
-    let yaml_chars = count_utf8_chars(&case.yaml);
-    let xml_chars = count_utf8_chars(&case.xml);
-
-    BenchmarkResult {
-        name: case.name.clone(),
-        description: case.description.clone(),
-        lino_chars,
-        json_chars,
-        yaml_chars,
-        xml_chars,
-        lino_vs_json: calculate_savings(lino_chars, json_chars),
-        lino_vs_yaml: calculate_savings(lino_chars, yaml_chars),
-        lino_vs_xml: calculate_savings(lino_chars, xml_chars),
-    }
-}
-
-fn aggregate_results(results: &[BenchmarkResult]) -> AggregatedResults {
-    let total_lino_chars: usize = results.iter().map(|r| r.lino_chars).sum();
-    let total_json_chars: usize = results.iter().map(|r| r.json_chars).sum();
-    let total_yaml_chars: usize = results.iter().map(|r| r.yaml_chars).sum();
-    let total_xml_chars: usize = results.iter().map(|r| r.xml_chars).sum();
-
-    let avg_lino_vs_json: f64 =
-        results.iter().map(|r| r.lino_vs_json).sum::<f64>() / results.len() as f64;
-    let avg_lino_vs_yaml: f64 =
-        results.iter().map(|r| r.lino_vs_yaml).sum::<f64>() / results.len() as f64;
-    let avg_lino_vs_xml: f64 =
-        results.iter().map(|r| r.lino_vs_xml).sum::<f64>() / results.len() as f64;
-
-    AggregatedResults {
-        total_lino_chars,
-        total_json_chars,
-        total_yaml_chars,
-        total_xml_chars,
-        avg_lino_vs_json,
-        avg_lino_vs_yaml,
-        avg_lino_vs_xml,
-    }
-}
-
-fn generate_markdown_report(results: &[BenchmarkResult], aggregated: &AggregatedResults) -> String {
-    let mut md = String::new();
-
-    md.push_str("# Links Notation Character Count Benchmark\n\n");
-    md.push_str("This benchmark compares the UTF-8 character count of Links Notation (lino) against JSON, YAML, and XML.\n\n");
-    md.push_str("## Summary\n\n");
-    md.push_str("| Format | Total Characters | vs Lino |\n");
-    md.push_str("|--------|------------------|----------|\n");
-    md.push_str(&format!(
-        "| **Lino** | **{}** | - |\n",
-        aggregated.total_lino_chars
-    ));
-    md.push_str(&format!(
-        "| JSON | {} | +{:.1}% |\n",
-        aggregated.total_json_chars,
-        ((aggregated.total_json_chars as f64 / aggregated.total_lino_chars as f64) - 1.0) * 100.0
-    ));
-    md.push_str(&format!(
-        "| YAML | {} | +{:.1}% |\n",
-        aggregated.total_yaml_chars,
-        ((aggregated.total_yaml_chars as f64 / aggregated.total_lino_chars as f64) - 1.0) * 100.0
-    ));
-    md.push_str(&format!(
-        "| XML | {} | +{:.1}% |\n",
-        aggregated.total_xml_chars,
-        ((aggregated.total_xml_chars as f64 / aggregated.total_lino_chars as f64) - 1.0) * 100.0
-    ));
-
-    md.push_str("\n## Average Savings with Lino\n\n");
-    md.push_str(&format!(
-        "- **vs JSON**: {:.1}% fewer characters\n",
-        aggregated.avg_lino_vs_json
-    ));
-    md.push_str(&format!(
-        "- **vs YAML**: {:.1}% fewer characters\n",
-        aggregated.avg_lino_vs_yaml
-    ));
-    md.push_str(&format!(
-        "- **vs XML**: {:.1}% fewer characters\n",
-        aggregated.avg_lino_vs_xml
-    ));
-
-    md.push_str("\n## Detailed Results\n\n");
-    md.push_str("| Test Case | Description | Lino | JSON | YAML | XML | Lino vs JSON | Lino vs YAML | Lino vs XML |\n");
-    md.push_str("|-----------|-------------|------|------|------|-----|--------------|--------------|-------------|\n");
-
-    for result in results {
-        md.push_str(&format!(
-            "| {} | {} | {} | {} | {} | {} | {:.1}% | {:.1}% | {:.1}% |\n",
-            result.name,
-            result.description,
-            result.lino_chars,
-            result.json_chars,
-            result.yaml_chars,
-            result.xml_chars,
-            result.lino_vs_json,
-            result.lino_vs_yaml,
-            result.lino_vs_xml
-        ));
-    }
-
-    md.push_str("\n## Test Cases\n\n");
-
-    for result in results {
-        md.push_str(&format!("### {}\n\n", result.name));
-        md.push_str(&format!("{}\n\n", result.description));
-        md.push_str(&format!(
-            "| Format | Characters |\n|--------|------------|\n| Lino | {} |\n| JSON | {} |\n| YAML | {} |\n| XML | {} |\n\n",
-            result.lino_chars, result.json_chars, result.yaml_chars, result.xml_chars
-        ));
-    }
-
-    md.push_str("## Methodology\n\n");
-    md.push_str("This benchmark counts UTF-8 characters (not bytes) in equivalent data representations across all formats.\n");
-    md.push_str("The \"savings\" percentage indicates how much smaller the Lino representation is compared to each format.\n\n");
-    md.push_str("A positive savings percentage means Lino uses fewer characters.\n\n");
-    md.push_str("---\n\n");
-    md.push_str("*Generated automatically by links-notation-benchmark*\n");
-
-    md
-}
-
-fn generate_json_report(results: &[BenchmarkResult], aggregated: &AggregatedResults) -> String {
-    #[derive(Serialize)]
-    struct Report {
-        summary: AggregatedResults,
-        results: Vec<BenchmarkResult>,
-    }
-
-    let report = Report {
-        summary: aggregated.clone(),
-        results: results.to_vec(),
-    };
-
-    serde_json::to_string_pretty(&report).unwrap_or_default()
-}
-
-fn main() {
-    // Determine the data directory - try multiple possible locations
-    let possible_paths = [
-        "benchmarks/data",          // Running from repo root
-        "../benchmarks/data",       // Running from rust/
-        "../../benchmarks/data",    // Running from rust/links-notation-benchmark/
-        "../../../benchmarks/data", // Running from rust/links-notation-benchmark/src/
-    ];
-
-    let data_dir = possible_paths
-        .iter()
-        .find(|p| Path::new(p).exists())
-        .map(Path::new);
-
-    let data_dir = match data_dir {
-        Some(path) => path,
+    let root = match locate_benchmarks_directory() {
+        Some(root) => root,
         None => {
-            eprintln!("Error: Could not find benchmarks/data directory");
-            eprintln!("Searched in: {:?}", possible_paths);
-            eprintln!("Please run from the repository root");
-            std::process::exit(1);
+            eprintln!(
+                "error: could not find the benchmarks directory; run this from the repository \
+                 or set BENCHMARKS_DIR"
+            );
+            return ExitCode::FAILURE;
+        }
+    };
+    if verbose {
+        eprintln!("benchmarks directory: {}", root.display());
+    }
+
+    let datasets = match load_datasets(&root) {
+        Ok(datasets) => datasets,
+        Err(message) => {
+            eprintln!("error: {message}");
+            return ExitCode::FAILURE;
         }
     };
 
-    println!("Loading benchmark cases from {:?}...", data_dir);
-    let cases = load_benchmark_cases(data_dir);
+    let mut files: Vec<GeneratedFile> = Vec::new();
+    let mut results: Vec<DatasetResult> = Vec::new();
+    let mut manifest = Vec::new();
 
-    if cases.is_empty() {
-        eprintln!("Error: No benchmark cases found in {:?}", data_dir);
-        std::process::exit(1);
+    for dataset in &datasets {
+        match run_dataset(&root, dataset, verbose) {
+            Ok((result, generated, entry)) => {
+                results.push(result);
+                files.extend(generated);
+                manifest.push(entry);
+            }
+            Err(message) => {
+                eprintln!("error: dataset '{}': {message}", dataset.name);
+                return ExitCode::FAILURE;
+            }
+        }
     }
 
-    println!("Running {} benchmark cases...\n", cases.len());
+    files.push(GeneratedFile {
+        path: root.join("generated").join("index.json"),
+        contents: format!(
+            "{}\n",
+            serde_json::to_string_pretty(&serde_json::json!({ "representations": manifest }))
+                .expect("manifest serializes")
+        ),
+    });
+    files.push(GeneratedFile {
+        path: root.join("results").join("rust.json"),
+        contents: results_json(&results),
+    });
+    files.push(GeneratedFile {
+        path: root.join("BENCHMARK_RESULTS.md"),
+        contents: report::markdown(&results, env!("CARGO_PKG_VERSION")),
+    });
 
-    let results: Vec<BenchmarkResult> = cases.iter().map(run_benchmark).collect();
-    let aggregated = aggregate_results(&results);
-
-    // Print summary to console
-    println!("=== Links Notation Character Count Benchmark ===\n");
-    println!("Summary:");
-    println!("  Total Lino characters:  {}", aggregated.total_lino_chars);
-    println!("  Total JSON characters:  {}", aggregated.total_json_chars);
-    println!("  Total YAML characters:  {}", aggregated.total_yaml_chars);
-    println!("  Total XML characters:   {}", aggregated.total_xml_chars);
-    println!();
-    println!("Average savings with Lino:");
-    println!(
-        "  vs JSON: {:.1}% fewer characters",
-        aggregated.avg_lino_vs_json
-    );
-    println!(
-        "  vs YAML: {:.1}% fewer characters",
-        aggregated.avg_lino_vs_yaml
-    );
-    println!(
-        "  vs XML:  {:.1}% fewer characters",
-        aggregated.avg_lino_vs_xml
-    );
-    println!();
-
-    // Generate reports
-    let markdown_report = generate_markdown_report(&results, &aggregated);
-    let json_report = generate_json_report(&results, &aggregated);
-
-    // Determine output directory using the same search logic
-    let output_possible_paths = [
-        "benchmarks",       // Running from repo root
-        "../benchmarks",    // Running from rust/
-        "../../benchmarks", // Running from rust/links-notation-benchmark/
-    ];
-
-    let output_dir = output_possible_paths
-        .iter()
-        .find(|p| Path::new(p).exists())
-        .map(|p| Path::new(*p))
-        .unwrap_or(Path::new("."));
-
-    // Write markdown report
-    let md_path = output_dir.join("BENCHMARK_RESULTS.md");
-    if let Err(e) = fs::write(&md_path, &markdown_report) {
-        eprintln!(
-            "Warning: Could not write markdown report to {:?}: {}",
-            md_path, e
-        );
-    } else {
-        println!("Markdown report written to {:?}", md_path);
+    if check {
+        return match compare(&files) {
+            Ok(()) => {
+                println!(
+                    "All {} generated files match this run's output.",
+                    files.len()
+                );
+                ExitCode::SUCCESS
+            }
+            Err(differences) => {
+                eprintln!("Generated files differ from this run's output:");
+                for path in differences {
+                    eprintln!("  - {}", path.display());
+                }
+                eprintln!("Run: cargo run -p links-notation-benchmark --release");
+                ExitCode::FAILURE
+            }
+        };
     }
 
-    // Write JSON report
-    let json_path = output_dir.join("benchmark_results.json");
-    if let Err(e) = fs::write(&json_path, &json_report) {
-        eprintln!(
-            "Warning: Could not write JSON report to {:?}: {}",
-            json_path, e
-        );
-    } else {
-        println!("JSON report written to {:?}", json_path);
+    for file in &files {
+        if let Some(parent) = file.path.parent() {
+            if let Err(error) = fs::create_dir_all(parent) {
+                eprintln!("error: cannot create {}: {error}", parent.display());
+                return ExitCode::FAILURE;
+            }
+        }
+        if let Err(error) = fs::write(&file.path, &file.contents) {
+            eprintln!("error: cannot write {}: {error}", file.path.display());
+            return ExitCode::FAILURE;
+        }
     }
 
-    println!("\nBenchmark completed successfully!");
+    print_summary(&results);
+    println!("Wrote {} files under {}", files.len(), root.display());
+    ExitCode::SUCCESS
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+/// Build, validate and measure every representation of one dataset.
+#[allow(clippy::type_complexity)]
+fn run_dataset(
+    root: &Path,
+    dataset: &Dataset,
+    verbose: bool,
+) -> Result<(DatasetResult, Vec<GeneratedFile>, Value), String> {
+    let source_path = format!("datasets/{}.json", dataset.name);
+    let pretty_json = format!(
+        "{}\n",
+        serde_json::to_string_pretty(&dataset.value).map_err(|error| error.to_string())?
+    );
 
-    #[test]
-    fn test_count_utf8_chars() {
-        assert_eq!(count_utf8_chars("hello"), 5);
-        assert_eq!(count_utf8_chars("hello world"), 11);
-        assert_eq!(count_utf8_chars(""), 0);
-        // Test with unicode characters
-        assert_eq!(count_utf8_chars("привет"), 6);
-        assert_eq!(count_utf8_chars("你好"), 2);
-        assert_eq!(count_utf8_chars("🎉"), 1);
+    let lino_document = lino::encode_document(&dataset.value, lino::Quoting::Always);
+    let lino_minimal = lino::encode_document(&dataset.value, lino::Quoting::Minimal);
+    let lino_line = lino::encode_line(&dataset.value);
+    let compact_json = serde_json::to_string(&dataset.value).map_err(|error| error.to_string())?;
+    let yaml_document = yaml::encode(&dataset.value);
+    let xml_document = xml::encode(&dataset.value);
+    let csv_document = csv::encode(&dataset.value);
+
+    validate(
+        dataset,
+        &[
+            ("indented", &lino_document),
+            ("minimally quoted", &lino_minimal),
+            ("single-line", &lino_line),
+        ],
+        &compact_json,
+    )?;
+    if verbose {
+        eprintln!(
+            "{}: validated, {} bytes of lino",
+            dataset.name,
+            lino_document.len()
+        );
     }
 
-    #[test]
-    fn test_calculate_savings() {
-        assert_eq!(calculate_savings(100, 200), 50.0);
-        assert_eq!(calculate_savings(50, 100), 50.0);
-        assert_eq!(calculate_savings(100, 100), 0.0);
-        assert_eq!(calculate_savings(0, 0), 0.0);
+    let mut files = Vec::new();
+    let mut formats: BTreeMap<String, Metrics> = BTreeMap::new();
+    let mut paths: Map<String, Value> = Map::new();
+
+    // The indented JSON is the dataset file itself, so it is measured where it
+    // already lives instead of being written a second time.
+    if pretty_json != read_text(&root.join(&source_path))? {
+        return Err(format!(
+            "datasets/{}.json is not the 2-space indented form of its own value; \
+             run node benchmarks/tools/generate-datasets.mjs",
+            dataset.name
+        ));
+    }
+    formats.insert("json".to_string(), measure(&pretty_json));
+    paths.insert("json".to_string(), Value::String(source_path));
+
+    let mut emit = |format: &str, extension: &str, contents: String| {
+        let relative = format!("generated/{}{}", dataset.name, extension);
+        formats.insert(format.to_string(), measure(&contents));
+        paths.insert(format.to_string(), Value::String(relative.clone()));
+        files.push(GeneratedFile {
+            path: root.join(&relative),
+            contents,
+        });
+    };
+
+    emit("lino", ".lino", format!("{lino_document}\n"));
+    emit("lino-min", ".min.lino", format!("{lino_minimal}\n"));
+    emit("lino-line", ".line.lino", format!("{lino_line}\n"));
+    emit("json-compact", ".min.json", format!("{compact_json}\n"));
+    emit("yaml", ".yaml", yaml_document);
+    emit("xml", ".xml", xml_document);
+    if let Some(document) = csv_document {
+        emit("csv", ".csv", document);
     }
 
-    #[test]
-    fn test_aggregate_results() {
-        let results = vec![
-            BenchmarkResult {
-                name: "test1".to_string(),
-                description: "Test 1".to_string(),
-                lino_chars: 100,
-                json_chars: 150,
-                yaml_chars: 120,
-                xml_chars: 200,
-                lino_vs_json: 33.33,
-                lino_vs_yaml: 16.67,
-                lino_vs_xml: 50.0,
-            },
-            BenchmarkResult {
-                name: "test2".to_string(),
-                description: "Test 2".to_string(),
-                lino_chars: 50,
-                json_chars: 80,
-                yaml_chars: 60,
-                xml_chars: 100,
-                lino_vs_json: 37.5,
-                lino_vs_yaml: 16.67,
-                lino_vs_xml: 50.0,
-            },
-        ];
+    let entry = serde_json::json!({
+        "dataset": dataset.name,
+        "description": dataset.description,
+        "structure": dataset.structure,
+        "profile": dataset.profile,
+        "files": Value::Object(paths),
+    });
 
-        let aggregated = aggregate_results(&results);
-        assert_eq!(aggregated.total_lino_chars, 150);
-        assert_eq!(aggregated.total_json_chars, 230);
-        assert_eq!(aggregated.total_yaml_chars, 180);
-        assert_eq!(aggregated.total_xml_chars, 300);
+    Ok((
+        DatasetResult {
+            name: dataset.name.clone(),
+            description: dataset.description.clone(),
+            structure: dataset.structure.clone(),
+            profile: dataset.profile.clone(),
+            formats,
+        },
+        files,
+        entry,
+    ))
+}
+
+/// Refuse to report a number for a document that does not hold the same value
+/// it was built from, or that the notation's own parser does not accept.
+///
+/// This is what makes the comparison fair rather than flattering: a writer can
+/// always make a document shorter by leaving something out, so every Links
+/// Notation document the benchmark measures has to survive a round trip through
+/// the reader before its size is allowed to count.
+fn validate(
+    dataset: &Dataset,
+    lino_documents: &[(&str, &str)],
+    compact_json: &str,
+) -> Result<(), String> {
+    for (label, document) in lino_documents {
+        links_notation::parse_lino(document).map_err(|error| {
+            format!("the links-notation parser rejects the {label} document: {error}")
+        })?;
+        if lino::decode(document)? != dataset.value {
+            return Err(format!(
+                "the {label} Links Notation document does not decode back to its source value"
+            ));
+        }
     }
+
+    let reparsed: Value = serde_json::from_str(compact_json).map_err(|error| error.to_string())?;
+    if reparsed != dataset.value {
+        return Err(
+            "the compact JSON document does not parse back to its source value".to_string(),
+        );
+    }
+
+    Ok(())
+}
+
+fn results_json(results: &[DatasetResult]) -> String {
+    #[derive(Serialize)]
+    struct Output<'a> {
+        schema: u32,
+        generator: &'a str,
+        tokenizers: BTreeMap<&'a str, &'a str>,
+        datasets: Vec<DatasetOutput<'a>>,
+        totals: BTreeMap<&'a str, Metrics>,
+    }
+
+    #[derive(Serialize)]
+    struct DatasetOutput<'a> {
+        name: &'a str,
+        structure: &'a str,
+        profile: &'a str,
+        formats: &'a BTreeMap<String, Metrics>,
+    }
+
+    let mut tokenizers = BTreeMap::new();
+    tokenizers.insert("primary", "o200k_base");
+    tokenizers.insert("secondary", "cl100k_base");
+
+    let mut totals = BTreeMap::new();
+    for format in FORMATS {
+        if let Some(metrics) = report::total(results, format) {
+            totals.insert(format, metrics);
+        }
+    }
+
+    let output = Output {
+        schema: RESULTS_SCHEMA,
+        generator: "rust",
+        tokenizers,
+        datasets: results
+            .iter()
+            .map(|result| DatasetOutput {
+                name: &result.name,
+                structure: &result.structure,
+                profile: &result.profile,
+                formats: &result.formats,
+            })
+            .collect(),
+        totals,
+    };
+
+    format!(
+        "{}\n",
+        serde_json::to_string_pretty(&output).expect("results serialize")
+    )
+}
+
+fn print_summary(results: &[DatasetResult]) {
+    println!(
+        "Totals across {} datasets (tokens, o200k_base):",
+        results.len()
+    );
+    let baseline = report::total(results, report::BASELINE);
+    for format in FORMATS {
+        let Some(metrics) = report::total(results, format) else {
+            continue;
+        };
+        let against = baseline
+            .map(|base| {
+                format!(
+                    "{:>6.1}% vs JSON",
+                    metrics::savings(metrics.tokens_o200k, base.tokens_o200k)
+                )
+            })
+            .unwrap_or_default();
+        println!("  {:<14} {:>8}   {against}", format, metrics.tokens_o200k);
+    }
+}
+
+fn compare(files: &[GeneratedFile]) -> Result<(), Vec<PathBuf>> {
+    let differences: Vec<PathBuf> = files
+        .iter()
+        .filter(|file| {
+            fs::read_to_string(&file.path).ok().as_deref() != Some(file.contents.as_str())
+        })
+        .map(|file| file.path.clone())
+        .collect();
+    if differences.is_empty() {
+        Ok(())
+    } else {
+        Err(differences)
+    }
+}
+
+fn load_datasets(root: &Path) -> Result<Vec<Dataset>, String> {
+    let index_path = root.join("datasets").join("index.json");
+    let index: Value = serde_json::from_str(&read_text(&index_path)?)
+        .map_err(|error| format!("{}: {error}", index_path.display()))?;
+    let entries = index
+        .get("datasets")
+        .and_then(Value::as_array)
+        .ok_or_else(|| format!("{}: expected a 'datasets' array", index_path.display()))?;
+
+    let mut datasets = Vec::with_capacity(entries.len());
+    for entry in entries {
+        let field = |name: &str| -> Result<String, String> {
+            entry
+                .get(name)
+                .and_then(Value::as_str)
+                .map(str::to_string)
+                .ok_or_else(|| format!("{}: a dataset entry has no '{name}'", index_path.display()))
+        };
+        let name = field("name")?;
+        let file = field("file")?;
+        let value: Value = serde_json::from_str(&read_text(&root.join("datasets").join(&file))?)
+            .map_err(|error| format!("datasets/{file}: {error}"))?;
+        datasets.push(Dataset {
+            name,
+            description: field("description")?,
+            structure: field("structure")?,
+            profile: field("profile")?,
+            value,
+        });
+    }
+    Ok(datasets)
+}
+
+fn read_text(path: &Path) -> Result<String, String> {
+    fs::read_to_string(path).map_err(|error| format!("{}: {error}", path.display()))
+}
+
+/// Find `benchmarks/` by walking up from the current directory, so the binary
+/// works from the repository root, from `rust/`, or from wherever CI runs it.
+fn locate_benchmarks_directory() -> Option<PathBuf> {
+    if let Ok(explicit) = env::var("BENCHMARKS_DIR") {
+        let path = PathBuf::from(explicit);
+        return path
+            .join("datasets")
+            .join("index.json")
+            .exists()
+            .then_some(path);
+    }
+    let mut starts = vec![env::current_dir().ok()?];
+    starts.push(PathBuf::from(env!("CARGO_MANIFEST_DIR")));
+    for start in starts {
+        let mut directory = Some(start.as_path());
+        while let Some(current) = directory {
+            let candidate = current.join("benchmarks");
+            if candidate.join("datasets").join("index.json").exists() {
+                return Some(candidate);
+            }
+            directory = current.parent();
+        }
+    }
+    None
 }

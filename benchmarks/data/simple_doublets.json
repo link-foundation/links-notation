@@ -1,7 +1,0 @@
-{
-  "links": [
-    { "from": "papa", "to": "loves mama" },
-    { "from": "son", "to": "loves mama" },
-    { "from": "daughter", "to": "loves mama" }
-  ]
-}
