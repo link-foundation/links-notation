@@ -20,7 +20,7 @@
     <!-- Microsoft.NET.Test.Sdk, xunit.runner.visualstudio and coverlet.collector
          are all VSTest components; under Microsoft.Testing.Platform xunit.v3
          provides the runner and none of them are used. -->
-    <PackageReference Include="xunit.v3" Version="4.0.0" />
+    <PackageReference Include="xunit.v3" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
