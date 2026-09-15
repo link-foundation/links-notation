@@ -219,6 +219,25 @@ let quoted = r#"("quoted id": "value with spaces")"#;
 let parsed = parse_lino(quoted)?;
 ```
 
+### Streaming Parsing
+
+`StreamParser` accepts arbitrary chunks and invokes callbacks only for complete
+top-level records. Disable collection for bounded-memory callback use.
+
+```rust
+use links_notation::StreamParser;
+
+let mut stream = StreamParser::new();
+stream.set_collect(false).on_link(|link| println!("{link}"));
+stream.write("profile:\n  name Ada\n")?;
+stream.write("next link")?;
+stream.finish()?;
+```
+
+`StreamParser::parse_chunks(chunks)` returns a lazy `Iterator`. The parser also
+provides position, drain, reset, and maximum-buffer controls. See the
+[runnable example](examples/streaming_parser.rs).
+
 ## Tuple Conversion
 
 The library supports ergonomic conversion from Rust tuples to Links Notation, similar to C#'s tuple conversion feature. This allows you to create links using native Rust tuple syntax.

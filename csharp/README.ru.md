@@ -101,6 +101,22 @@ var numericLinks = parser.Parse("(1: 2 3)");
 var customParser = new Parser<Guid>();
 ```
 
+### Потоковый разбор
+
+`StreamParser` принимает произвольные порции и вызывает событие `LinkParsed`
+только для завершённых связей верхнего уровня. Отключите накопление для
+обработки событий с ограниченной памятью.
+
+```csharp
+var stream = new StreamParser { Collect = false };
+stream.LinkParsed += Console.WriteLine;
+stream.Write("профиль:\n  имя Ада\n");
+stream.Finish("следующая связь");
+```
+
+`ParseChunks` и `ParseChunksAsync` предоставляют нативные перечислители. Также
+доступны `Position`, `Drain`, `Reset` и `MaxBufferSize`.
+
 ## Примеры синтаксиса
 
 ### Дуплеты (2-кортежи)

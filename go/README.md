@@ -47,6 +47,23 @@ func main() {
 - Configurable formatting with `FormatConfig`
 - Full compatibility with the other six implementations (C#, JavaScript, Rust, Python, Java, PHP)
 
+## Streaming Parsing
+
+`StreamParser` accepts arbitrary string or byte chunks and emits complete
+top-level records through returned slices or `OnLink`. Disable collection when
+the callback should retain only the unresolved record.
+
+```go
+stream := lino.NewStreamParser()
+stream.Collect = false
+stream.OnLink = func(link *lino.Link) { fmt.Println(link) }
+stream.Feed("profile:\n  name Ada\n")
+stream.Finish("next link")
+```
+
+It also implements `io.Writer`; `ParseChunks` exposes a lazy `iter.Seq2`.
+`Position`, `Drain`, `Reset`, and `MaxBufferSize` support long-lived streams.
+
 ## API Reference
 
 ### Types

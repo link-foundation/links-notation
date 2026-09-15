@@ -158,7 +158,7 @@ The `StreamParser` allows you to parse Links Notation incrementally, processing 
 ```javascript
 import { StreamParser } from 'links-notation';
 
-const parser = new StreamParser();
+const parser = new StreamParser({ collect: false, maxBufferSize: 1024 * 1024 });
 
 // Listen for parsed links
 parser.on('link', (link) => {
@@ -177,12 +177,14 @@ parser.write('papa (lovesMama: loves mama)\n');
 parser.write('son lovesMama\n');
 parser.write('daughter lovesMama\n');
 
-// Finish parsing and get all links
-const links = parser.end();
-console.log('Total links:', links.length);
+// Finish the last record. Links are not retained when collection is disabled.
+parser.end();
 ```
 
-See the [streaming parser example](../examples/js_streaming_parser.js) for more use cases including TCP stream simulation and memory-efficient processing of large datasets.
+`StreamParser.parse(chunks)` and `StreamParser.parseAsync(chunks)` expose native
+sync and async iterables. The parser also provides `position()`, `drain()`,
+`reset()`, and a maximum unresolved-record size. See the
+[streaming parser example](../examples/js_streaming_parser.js).
 
 ### TypeScript Usage Examples
 

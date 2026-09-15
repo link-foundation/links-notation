@@ -12,6 +12,7 @@ class StreamParserTest {
   private static final String DOCUMENT =
       """
       first loves data
+      # streamed comment
       profile:
         name Ada
         note "line one
@@ -25,7 +26,7 @@ class StreamParserTest {
   }
 
   @Test
-  void matchesCanonicalParserOneCharacterAtATime() throws Exception {
+  void matchesCanonicalParserOneSymbolAtATime() throws Exception {
     StreamParser stream = new StreamParser();
     DOCUMENT.chars().forEachOrdered(character -> write(stream, Character.toString(character)));
 
@@ -33,7 +34,7 @@ class StreamParserTest {
   }
 
   @Test
-  void emitsOnlyCompleteRecordsToConsumer() throws Exception {
+  void emitsOnlyCompleteRecords() throws Exception {
     List<Link> seen = new ArrayList<>();
     StreamParser stream = new StreamParser().onLink(seen::add);
 
@@ -72,13 +73,21 @@ class StreamParserTest {
   }
 
   @Test
-  void providesAJavaStreamAdapter() {
+  void providesLazyAdapters() {
     List<String> links =
         StreamParser.parseChunks(Arrays.asList("one link\n", "two link"))
             .map(Link::toString)
             .toList();
 
     assertEquals(List.of("(one link)", "(two link)"), links);
+  }
+
+  @Test
+  void rejectsWritesAfterFinish() throws Exception {
+    StreamParser stream = new StreamParser();
+    stream.finish("one");
+
+    assertThrows(IllegalStateException.class, () -> stream.write("two"));
   }
 
   private static void write(StreamParser parser, String chunk) {

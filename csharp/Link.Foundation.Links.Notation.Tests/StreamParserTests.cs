@@ -10,6 +10,7 @@ namespace Link.Foundation.Links.Notation.Tests
     {
         private const string Document =
             "first loves data\n" +
+            "# streamed comment\n" +
             "profile:\n" +
             "  name Ada\n" +
             "  note \"line one\nline two\"\n" +
@@ -20,7 +21,7 @@ namespace Link.Foundation.Links.Notation.Tests
             links.Select(link => link.ToString()).ToArray();
 
         [Fact]
-        public static void MatchesCanonicalParserOneCharacterAtATime()
+        public static void MatchesCanonicalParserOneSymbolAtATime()
         {
             var stream = new StreamParser();
             foreach (var character in Document)
@@ -32,7 +33,7 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void EmitsOnlyCompleteRecordsThroughTheEvent()
+        public static void EmitsOnlyCompleteRecords()
         {
             var seen = new List<Link<string>>();
             var stream = new StreamParser();
@@ -76,11 +77,20 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void ProvidesAnEnumerableAdapter()
+        public static void ProvidesLazyAdapters()
         {
             var actual = StreamParser.ParseChunks(new[] { "one link\n", "two link" });
 
             Assert.Equal(new[] { "(one link)", "(two link)" }, Render(actual));
+        }
+
+        [Fact]
+        public static void RejectsWritesAfterFinish()
+        {
+            var stream = new StreamParser();
+            stream.Finish("one");
+
+            Assert.Throws<InvalidOperationException>(() => stream.Write("two"));
         }
 
         [Fact]

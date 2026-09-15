@@ -14,6 +14,7 @@ use PHPUnit\Framework\TestCase;
 class StreamParserTest extends TestCase
 {
     private const DOCUMENT = "first loves data\n"
+        . "# streamed comment\n"
         . "profile:\n"
         . "  name Ada\n"
         . "  note \"line one\nline two\"\n"
@@ -26,7 +27,7 @@ class StreamParserTest extends TestCase
         return array_map(static fn (Link $link): string => (string) $link, $links);
     }
 
-    public function testMatchesCanonicalParserOneByteAtATime(): void
+    public function testMatchesCanonicalParserOneSymbolAtATime(): void
     {
         $stream = new StreamParser();
         for ($index = 0; $index < strlen(self::DOCUMENT); $index++) {
@@ -36,7 +37,7 @@ class StreamParserTest extends TestCase
         $this->assertSame($this->render((new Parser())->parse(self::DOCUMENT)), $this->render($stream->finish()));
     }
 
-    public function testEmitsOnlyCompleteRecordsToCallback(): void
+    public function testEmitsOnlyCompleteRecords(): void
     {
         $seen = [];
         $stream = (new StreamParser())->onLink(static function (Link $link) use (&$seen): void {
@@ -83,7 +84,7 @@ class StreamParserTest extends TestCase
         $stream->write('123456789');
     }
 
-    public function testProvidesAGeneratorAdapter(): void
+    public function testProvidesLazyAdapters(): void
     {
         $actual = iterator_to_array(StreamParser::parseChunks(["one link\n", 'two link']));
 

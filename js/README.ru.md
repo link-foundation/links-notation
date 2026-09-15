@@ -105,6 +105,27 @@ const group = new LinksGroup(parsed);
 console.log(group.format());
 ```
 
+### Потоковый парсер
+
+`StreamParser` принимает произвольные порции данных и отправляет события только
+для завершённых связей верхнего уровня. Отключите накопление для обработки с
+ограниченной памятью.
+
+```javascript
+import { StreamParser } from 'links-notation';
+
+const stream = new StreamParser({ collect: false, maxBufferSize: 1024 * 1024 });
+stream.on('link', (link) => console.log(link.toString()));
+stream.on('error', (error) => console.error(error));
+stream.write('профиль:\n  имя Ада\n');
+stream.end('следующая связь');
+```
+
+`StreamParser.parse(chunks)` и `StreamParser.parseAsync(chunks)` предоставляют
+нативные синхронные и асинхронные итераторы. Также доступны `position()`,
+`drain()`, `reset()` и ограничение размера незавершённой записи. См.
+[исполняемый пример](../examples/js_streaming_parser.js).
+
 ## Примеры синтаксиса
 
 ### Дуплеты (2-кортежи)

@@ -5,6 +5,7 @@ import pytest
 from links_notation import Parser, StreamParser, format_links, parse_async_chunks, parse_chunks
 
 DOCUMENT = """first loves data
+# streamed comment
 profile:
   name Ada
   note "line one
@@ -18,7 +19,7 @@ def rendered(links):
     return format_links(links)
 
 
-def test_stream_parser_matches_the_canonical_parser_symbol_by_symbol():
+def test_matches_canonical_parser_one_symbol_at_a_time():
     stream = StreamParser()
     for character in DOCUMENT:
         stream.write(character)
@@ -26,7 +27,7 @@ def test_stream_parser_matches_the_canonical_parser_symbol_by_symbol():
     assert rendered(stream.finish()) == rendered(Parser().parse(DOCUMENT))
 
 
-def test_stream_parser_emits_only_complete_records():
+def test_emits_only_complete_records():
     seen = []
     stream = StreamParser(on_link=seen.append)
 
@@ -37,7 +38,7 @@ def test_stream_parser_emits_only_complete_records():
     assert seen == emitted
 
 
-def test_stream_parser_supports_line_chunks_final_record_and_position():
+def test_supports_line_chunks_final_record_and_position():
     stream = StreamParser()
     for line in DOCUMENT.splitlines(keepends=True):
         stream.write(line)
@@ -47,7 +48,7 @@ def test_stream_parser_supports_line_chunks_final_record_and_position():
     assert stream.position.line == DOCUMENT.count("\n") + 1
 
 
-def test_stream_parser_can_disable_collection_drain_reset_and_bound_the_record():
+def test_supports_drain_reset_and_bounded_memory():
     stream = StreamParser(collect=False, max_buffer_size=8)
     seen = []
     stream.on_link = seen.append
@@ -62,7 +63,7 @@ def test_stream_parser_can_disable_collection_drain_reset_and_bound_the_record()
         stream.write("123456789")
 
 
-def test_stream_parser_has_sync_and_async_iterators():
+def test_provides_lazy_adapters():
     assert [str(link) for link in parse_chunks(["one link\n", "two link"])] == ["(one link)", "(two link)"]
 
     async def chunks():
@@ -75,7 +76,7 @@ def test_stream_parser_has_sync_and_async_iterators():
     assert asyncio.run(collect()) == ["(one link)", "(two link)"]
 
 
-def test_stream_parser_rejects_writes_after_finish():
+def test_rejects_writes_after_finish():
     stream = StreamParser()
     stream.finish("one")
     with pytest.raises(RuntimeError, match="after finish"):

@@ -7,6 +7,7 @@ import {
 } from '../src/index.js';
 
 const document = `first loves data
+# streamed comment
 profile:
   name Ada
   note "line one
@@ -18,7 +19,7 @@ last sees first`;
 const formatted = (links) => formatLinks(links);
 
 describe('StreamParser', () => {
-  test('matches the canonical parser when fed one symbol at a time', () => {
+  test('matches canonical parser one symbol at a time', () => {
     const stream = new StreamParser();
     for (const character of document) stream.write(character);
 
@@ -27,7 +28,7 @@ describe('StreamParser', () => {
     );
   });
 
-  test('matches the canonical parser when fed one line at a time', () => {
+  test('supports line chunks final record and position', () => {
     const stream = new StreamParser();
     for (const line of document.match(/.*(?:\n|$)/g).filter(Boolean)) {
       stream.write(line);
@@ -36,6 +37,8 @@ describe('StreamParser', () => {
     expect(formatted(stream.end())).toBe(
       formatted(new Parser().parse(document))
     );
+    expect(stream.position().offset).toBe(document.length);
+    expect(stream.position().buffered).toBe(0);
   });
 
   test('emits a record as soon as the next top-level record starts', () => {
@@ -48,7 +51,7 @@ describe('StreamParser', () => {
     expect(seen).toEqual(['(first loves data)']);
   });
 
-  test('does not emit an indented record before its children arrive', () => {
+  test('emits only complete records', () => {
     const stream = new StreamParser();
     const seen = [];
     stream.on('link', (link) => seen.push(link));
@@ -105,7 +108,7 @@ describe('StreamParser', () => {
     expect(seen).toEqual(['(one link)', '(two link)']);
   });
 
-  test('drains retained output and can be reset', () => {
+  test('supports drain reset and bounded memory', () => {
     const stream = new StreamParser();
     stream.write('one link\nt');
     expect(stream.drain().map(String)).toEqual(['(one link)']);
@@ -113,9 +116,13 @@ describe('StreamParser', () => {
 
     stream.reset().write('fresh record');
     expect(stream.end().map(String)).toEqual(['(fresh record)']);
+
+    const bounded = new StreamParser({ maxBufferSize: 4 });
+    bounded.on('error', () => {});
+    expect(() => bounded.write('12345')).toThrow(RangeError);
   });
 
-  test('offers synchronous and asynchronous iterable adapters', async () => {
+  test('provides lazy adapters', async () => {
     expect(
       [...StreamParser.parse(['one link\n', 'two link'])].map(String)
     ).toEqual(['(one link)', '(two link)']);
@@ -136,10 +143,13 @@ describe('StreamParser', () => {
     stream.on('error', () => {});
     for (let index = 0; index < 100; index++) stream.write(`a${index}\n`);
     expect(stream.end().map(String)).toEqual(['(a99)']);
+  });
 
-    const tooLarge = new StreamParser({ maxBufferSize: 4 });
-    tooLarge.on('error', () => {});
-    expect(() => tooLarge.write('12345')).toThrow(RangeError);
+  test('rejects writes after finish', () => {
+    const stream = new StreamParser();
+    stream.end('one');
+    stream.on('error', () => {});
+    expect(() => stream.write('two')).toThrow('after end');
   });
 
   test('tracks the absolute stream position', () => {

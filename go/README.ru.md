@@ -47,6 +47,23 @@ func main() {
 - Настраиваемое форматирование через `FormatConfig`
 - Полная совместимость с остальными шестью реализациями
 
+## Потоковый разбор
+
+`StreamParser` принимает произвольные строковые или байтовые порции и выдаёт
+завершённые связи верхнего уровня через возвращаемые срезы или `OnLink`.
+Отключите накопление, чтобы callback хранил только незавершённую запись.
+
+```go
+stream := lino.NewStreamParser()
+stream.Collect = false
+stream.OnLink = func(link *lino.Link) { fmt.Println(link) }
+stream.Feed("профиль:\n  имя Ада\n")
+stream.Finish("следующая связь")
+```
+
+Парсер реализует `io.Writer`, а `ParseChunks` предоставляет ленивый `iter.Seq2`.
+Для долгоживущих потоков доступны `Position`, `Drain`, `Reset` и `MaxBufferSize`.
+
 ## Справочник API
 
 ### Типы

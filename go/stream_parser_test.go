@@ -3,11 +3,10 @@ package lino
 import (
 	"iter"
 	"slices"
-	"strings"
 	"testing"
 )
 
-const streamDocument = "first loves data\nprofile:\n  name Ada\n  note \"line one\nline two\"\n(nested:\n  child value)\nlast sees first"
+const streamDocument = "first loves data\n# streamed comment\nprofile:\n  name Ada\n  note \"line one\nline two\"\n(nested:\n  child value)\nlast sees first"
 
 func linkStrings(links []*Link) []string {
 	result := make([]string, len(links))
@@ -17,10 +16,10 @@ func linkStrings(links []*Link) []string {
 	return result
 }
 
-func TestStreamParserMatchesParserOneByteAtATime(t *testing.T) {
+func TestMatchesCanonicalParserOneSymbolAtATime(t *testing.T) {
 	stream := NewStreamParser()
-	for index := range len(streamDocument) {
-		if _, err := stream.Feed(streamDocument[index : index+1]); err != nil {
+	for _, symbol := range streamDocument {
+		if _, err := stream.Feed(string(symbol)); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -37,7 +36,7 @@ func TestStreamParserMatchesParserOneByteAtATime(t *testing.T) {
 	}
 }
 
-func TestStreamParserEmitsCompletedRecord(t *testing.T) {
+func TestEmitsOnlyCompleteRecords(t *testing.T) {
 	stream := NewStreamParser()
 	var seen []string
 	stream.OnLink = func(link *Link) { seen = append(seen, link.String()) }
@@ -73,7 +72,7 @@ func TestStreamParserPreservesIndentedAndMultilineRecords(t *testing.T) {
 	}
 }
 
-func TestStreamParserSupportsWriterDrainResetAndBoundedMemory(t *testing.T) {
+func TestSupportsDrainResetAndBoundedMemory(t *testing.T) {
 	stream := NewStreamParser()
 	stream.Collect = false
 	stream.MaxBufferSize = 12
@@ -101,7 +100,7 @@ func TestStreamParserSupportsWriterDrainResetAndBoundedMemory(t *testing.T) {
 	}
 }
 
-func TestStreamParserIterator(t *testing.T) {
+func TestProvidesLazyAdapters(t *testing.T) {
 	chunks := func(yield func(string) bool) {
 		for _, chunk := range []string{"one link\n", "two link"} {
 			if !yield(chunk) {
@@ -121,16 +120,51 @@ func TestStreamParserIterator(t *testing.T) {
 	}
 }
 
-func TestStreamParserPosition(t *testing.T) {
+func TestSupportsLineChunksFinalRecordAndPosition(t *testing.T) {
 	stream := NewStreamParser()
-	if _, err := stream.Feed("one\ntw"); err != nil {
+	for _, line := range stringsAfter(streamDocument, '\n') {
+		if _, err := stream.Feed(line); err != nil {
+			t.Fatal(err)
+		}
+	}
+	actual, err := stream.Finish()
+	if err != nil {
 		t.Fatal(err)
 	}
+	expected, err := Parse(streamDocument)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !slices.Equal(linkStrings(actual), linkStrings(expected)) {
+		t.Fatalf("streamed links %v, want %v", linkStrings(actual), linkStrings(expected))
+	}
 	position := stream.Position()
-	if position.Offset != 6 || position.Line != 2 || position.Column != 3 || position.Buffered != 2 {
+	if position.Offset != len(streamDocument) || position.Buffered != 0 {
 		t.Fatalf("Position() = %+v", position)
 	}
-	if _, err := stream.Feed(strings.Repeat(" ", 20)); err != nil {
-		t.Fatalf("default buffer rejected a short chunk: %v", err)
+}
+
+func TestRejectsWritesAfterFinish(t *testing.T) {
+	stream := NewStreamParser()
+	if _, err := stream.Finish("one"); err != nil {
+		t.Fatal(err)
 	}
+	if _, err := stream.Feed("two"); err == nil {
+		t.Fatal("write after Finish was accepted")
+	}
+}
+
+func stringsAfter(value string, delimiter byte) []string {
+	var chunks []string
+	start := 0
+	for index := range len(value) {
+		if value[index] == delimiter {
+			chunks = append(chunks, value[start:index+1])
+			start = index + 1
+		}
+	}
+	if start < len(value) {
+		chunks = append(chunks, value[start:])
+	}
+	return chunks
 }

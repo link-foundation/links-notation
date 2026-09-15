@@ -12,7 +12,7 @@ Java-реализация парсера Links Notation.
 <dependency>
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.19.0</version>
+    <version>0.20.0</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ Java-реализация парсера Links Notation.
 Добавьте зависимость в ваш `build.gradle`:
 
 ```groovy
-implementation 'io.github.link-foundation:links-notation:0.19.0'
+implementation 'io.github.link-foundation:links-notation:0.20.0'
 ```
 
 ### Локальная разработка
@@ -125,6 +125,23 @@ List<Link> parsed = parser.parse(input);
 LinksGroup group = new LinksGroup(parsed);
 System.out.println(group.format());
 ```
+
+### Потоковый разбор
+
+`StreamParser` принимает произвольные порции и вызывает `Consumer<Link>` только
+для завершённых связей верхнего уровня. Отключите накопление для обработки с
+ограниченной памятью.
+
+```java
+StreamParser stream = new StreamParser()
+    .collect(false)
+    .onLink(System.out::println);
+stream.write("профиль:\n  имя Ада\n");
+stream.finish("следующая связь");
+```
+
+`StreamParser.parseChunks(chunks)` предоставляет ленивый `Stream<Link>`. На
+самом парсере также доступны позиция, drain, reset и ограничение буфера.
 
 ## Примеры синтаксиса
 

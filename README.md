@@ -198,6 +198,30 @@ The notation uses two core concepts:
 - **References**: Points to other links (like variables or identifiers)
 - **Links**: Connect references together with optional identifiers
 
+## Streaming
+
+Every maintained implementation can parse arbitrary chunks incrementally,
+including one-symbol and one-line chunks. A stream emits a top-level record only
+after its indented children, multiline quoted references, and parenthesized
+contexts are complete. The canonical parser validates each completed record, so
+streaming and whole-document parsing have the same syntax and output.
+
+| Language | Push API | Lazy/native adapter |
+| --- | --- | --- |
+| C# | `LinkParsed` event | `IEnumerable` / `IAsyncEnumerable` |
+| JavaScript | `link`, `error`, and `end` events | sync / async iterables |
+| Rust | link and error callbacks | `Iterator` |
+| Python | link callback | generator / async generator |
+| Go | callback and `io.Writer` | `iter.Seq2` |
+| Java | `Consumer<Link>` | `Stream<Link>` |
+| PHP | callable | `Generator` |
+
+All variants expose write/feed and finish operations, absolute position
+tracking, reset/drain controls, and an unresolved-record size limit. Collection
+is enabled by default; disable it when callbacks or lazy iteration should keep
+memory bounded. See the [cross-language parity experiment](experiments/issue-197/README.md)
+and each language README for runnable examples.
+
 ## Documentation
 
 For detailed implementation guides and API references, see the
@@ -231,13 +255,13 @@ All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP)
 <!-- test-counts:start -->
 | Language | Tests | Test categories |
 | --- | --- | --- |
-| Python | 215 | 17 |
-| JavaScript | 237 | 18 |
-| Rust | 322 | 20 |
-| C# | 229 | 19 |
-| Go | 107 | 11 |
-| Java | 154 | 10 |
-| PHP | 204 | 17 |
+| Python | 221 | 18 |
+| JavaScript | 250 | 19 |
+| Rust | 328 | 21 |
+| C# | 236 | 20 |
+| Go | 114 | 12 |
+| Java | 160 | 11 |
+| PHP | 210 | 18 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files

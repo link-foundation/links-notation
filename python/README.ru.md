@@ -77,6 +77,26 @@ links = parser.parse(text)
 # Результат: (3: папа любит маму)
 ```
 
+### Потоковый разбор
+
+`StreamParser` принимает произвольные порции данных и выдаёт только завершённые
+связи верхнего уровня. Установите `collect=False`, чтобы callback или генератор
+работал с ограниченной памятью.
+
+```python
+from links_notation import StreamParser, parse_chunks
+
+stream = StreamParser(on_link=print, collect=False)
+stream.write("профиль:\n  имя Ада\n")
+stream.finish("следующая связь")
+
+for link in parse_chunks(["одна свя", "зь\nвторая связь"]):
+    print(link)
+```
+
+`parse_async_chunks` предоставляет асинхронный генератор. Также доступны
+`position`, `drain()`, `reset()` и ограничение размера буфера.
+
 ## Справочник API
 
 ### Parser

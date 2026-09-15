@@ -15,7 +15,7 @@ composer require link-foundation/links-notation
 ```json
 {
     "require": {
-        "link-foundation/links-notation": "^0.19"
+        "link-foundation/links-notation": "^0.20"
     }
 }
 ```
@@ -137,6 +137,26 @@ LINO;
 
 echo Formatter::formatLinks($parser->parse($input));
 ```
+
+### Потоковый разбор
+
+`StreamParser` принимает произвольные порции и вызывает callback только для
+завершённых связей верхнего уровня. Установите `collect: false` для обработки с
+ограниченной памятью.
+
+```php
+use LinkFoundation\LinksNotation\StreamParser;
+
+$stream = new StreamParser(
+    onLink: static fn ($link) => print "$link\n",
+    collect: false,
+);
+$stream->write("профиль:\n  имя Ада\n");
+$stream->finish('следующая связь');
+```
+
+`StreamParser::parseChunks($chunks)` возвращает ленивый `Generator`; также
+доступны позиция, drain, reset и ограничение буфера.
 
 ## Примеры синтаксиса
 

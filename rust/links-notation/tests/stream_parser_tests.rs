@@ -2,6 +2,7 @@ use links_notation::{format_links, parse_lino_to_links, StreamParser};
 use std::sync::{Arc, Mutex};
 
 const DOCUMENT: &str = "first loves data\n\
+# streamed comment\n\
 profile:\n\
   name Ada\n\
   note \"line one\nline two\"\n\
@@ -9,7 +10,7 @@ profile:\n\
 last sees first";
 
 #[test]
-fn matches_the_canonical_parser_one_character_at_a_time() {
+fn matches_canonical_parser_one_symbol_at_a_time() {
     let mut stream = StreamParser::new();
     for character in DOCUMENT.chars() {
         stream.write(&character.to_string()).unwrap();
@@ -22,7 +23,7 @@ fn matches_the_canonical_parser_one_character_at_a_time() {
 }
 
 #[test]
-fn emits_only_complete_records_to_the_callback() {
+fn emits_only_complete_records() {
     let seen = Arc::new(Mutex::new(Vec::new()));
     let callback_seen = Arc::clone(&seen);
     let mut stream = StreamParser::new();
@@ -74,10 +75,19 @@ fn supports_drain_reset_and_bounded_memory() {
 }
 
 #[test]
-fn provides_an_iterator_adapter() {
+fn provides_lazy_adapters() {
     let actual = StreamParser::parse_chunks(["one link\n", "two link"])
         .map(|link| link.unwrap().to_string())
         .collect::<Vec<_>>();
 
     assert_eq!(actual, vec!["(one link)", "(two link)"]);
+}
+
+#[test]
+fn rejects_writes_after_finish() {
+    let mut stream = StreamParser::new();
+    stream.write("one").unwrap();
+    stream.finish().unwrap();
+
+    assert!(stream.write("two").is_err());
 }
