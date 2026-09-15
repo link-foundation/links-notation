@@ -141,6 +141,17 @@ var numericLinks = parser.Parse(&quot;(1: 2 3)&quot;);
 // Работа с пользовательскими типами адресов
 var customParser = new Parser&lt;Guid&gt;();
 </code></pre>
+<h3 id="потоковый-разбор">Потоковый разбор</h3>
+<p><code>StreamParser</code> принимает произвольные порции и вызывает событие <code>LinkParsed</code>
+только для завершённых связей верхнего уровня. Отключите накопление для
+обработки событий с ограниченной памятью.</p>
+<pre><code class="lang-csharp">var stream = new StreamParser { Collect = false };
+stream.LinkParsed += Console.WriteLine;
+stream.Write(&quot;профиль:\n  имя Ада\n&quot;);
+stream.Finish(&quot;следующая связь&quot;);
+</code></pre>
+<p><code>ParseChunks</code> и <code>ParseChunksAsync</code> предоставляют нативные перечислители. Также
+доступны <code>Position</code>, <code>Drain</code>, <code>Reset</code> и <code>MaxBufferSize</code>.</p>
 <h2 id="примеры-синтаксиса">Примеры синтаксиса</h2>
 <h3 id="дуплеты-2-кортежи">Дуплеты (2-кортежи)</h3>
 <pre><code class="lang-lino">папа (любитМаму: любит маму)

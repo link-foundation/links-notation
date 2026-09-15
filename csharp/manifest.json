@@ -172,6 +172,48 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.StreamParseException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.StreamParseException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.StreamParseException",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.StreamParseException.yml\" sourcestartlinenumber=\"1\">A parser error located relative to the complete input stream.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.StreamParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.StreamParser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.StreamParser",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.StreamParser.yml\" sourcestartlinenumber=\"1\">Incrementally emits complete top-level Links Notation records.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.StreamPosition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.StreamPosition.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.StreamPosition",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.StreamPosition.yml\" sourcestartlinenumber=\"1\">An absolute stream position and the unresolved record size.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Link.Foundation.Links.Notation._-1.yml",
       "output": {
         ".html": {

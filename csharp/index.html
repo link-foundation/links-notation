@@ -141,6 +141,16 @@ var numericLinks = parser.Parse(&quot;(1: 2 3)&quot;);
 // Working with custom address types
 var customParser = new Parser&lt;Guid&gt;();
 </code></pre>
+<h3 id="streaming-parsing">Streaming Parsing</h3>
+<p><code>StreamParser</code> accepts arbitrary chunks and raises <code>LinkParsed</code> only for
+complete top-level records. Disable collection for bounded-memory event use.</p>
+<pre><code class="lang-csharp">var stream = new StreamParser { Collect = false };
+stream.LinkParsed += Console.WriteLine;
+stream.Write(&quot;profile:\n  name Ada\n&quot;);
+stream.Finish(&quot;next link&quot;);
+</code></pre>
+<p><code>ParseChunks</code> and <code>ParseChunksAsync</code> expose native enumerable adapters. The
+parser also provides <code>Position</code>, <code>Drain</code>, <code>Reset</code>, and <code>MaxBufferSize</code>.</p>
 <h2 id="syntax-examples">Syntax Examples</h2>
 <h3 id="doublets-2-tuple">Doublets (2-tuple)</h3>
 <pre><code class="lang-lino">papa (lovesMama: loves mama)
