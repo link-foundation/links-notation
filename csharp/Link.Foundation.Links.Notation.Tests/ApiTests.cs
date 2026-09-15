@@ -22,7 +22,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var values = new List<Link<string>> { new Link<string>("child", null) };
             var link = new Link<string>("id", values);
             Assert.Equal("id", link.Id);
-            Assert.Single(link.Values);
+            Assert.Single(link.Values!);
             Assert.Equal("child", link.Values?[0].Id);
         }
 
@@ -42,7 +42,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var values = new List<Link<string>> { new Link<string>("child", null) };
             var link = new Link<string>("id", values);
             Assert.Equal("id", link.Id);
-            Assert.Single(link.Values);
+            Assert.Single(link.Values!);
             Assert.Equal("child", link.Values?[0].Id);
         }
 

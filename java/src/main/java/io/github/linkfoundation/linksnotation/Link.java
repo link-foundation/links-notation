@@ -141,15 +141,24 @@ public class Link {
    * @return escaped reference
    */
   public static String escapeReference(String reference) {
-    if (reference == null || reference.trim().isEmpty()) {
+    if (reference == null) {
       return "";
+    }
+    // The empty reference is written as a bare delimiter pair, so that it reads back as itself
+    // instead of disappearing from the document.
+    if (reference.isEmpty()) {
+      return "\"\"";
     }
 
     boolean hasSingleQuote = reference.contains("'");
     boolean hasDoubleQuote = reference.contains("\"");
 
+    // A reference that begins with a "#" has to be quoted, or it would read back as a comment. A
+    // "#" anywhere else in a reference is content (issue#1047), so only the first character
+    // matters.
     boolean needsQuoting =
-        reference.contains(":")
+        reference.startsWith("#")
+            || reference.contains(":")
             || reference.contains("(")
             || reference.contains(")")
             || reference.contains(" ")

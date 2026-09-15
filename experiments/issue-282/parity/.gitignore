@@ -1,0 +1,5 @@
+# Build output of the seven checks. Only the sources belong in the repository.
+target/
+bin/
+obj/
+*.class

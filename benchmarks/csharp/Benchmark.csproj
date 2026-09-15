@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>LinksNotation.Benchmark</RootNamespace>
+    <AssemblyName>LinksNotation.Benchmark</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- The parser under measurement. -->
+    <ProjectReference Include="../../csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The data packages carry the BPE ranks with the build, so counting a
+         token never depends on a download. -->
+    <PackageReference Include="Microsoft.ML.Tokenizers" Version="2.0.0" />
+    <PackageReference Include="Microsoft.ML.Tokenizers.Data.O200kBase" Version="2.0.0" />
+    <PackageReference Include="Microsoft.ML.Tokenizers.Data.Cl100kBase" Version="2.0.0" />
+    <!-- Microsoft.ML.Tokenizers 2.0.0 asks for Microsoft.Bcl.Memory 9.0.4, which
+         carries GHSA-73j8-2gch-69rq (denial of service, patched in 9.0.14).
+         This project targets net10.0, so it takes the 10.x line, which is
+         patched from 10.0.4 on. -->
+    <PackageReference Include="Microsoft.Bcl.Memory" Version="10.0.11" />
+  </ItemGroup>
+
+</Project>

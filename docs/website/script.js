@@ -1,287 +1,160 @@
 "use strict";
 
-// Links Notation Interactive Parser
-class LinoParser {
-    constructor() {
-        this.inputElement = document.getElementById("input");
-        this.outputElement = document.getElementById("output");
-        this.parseBtn = document.getElementById("parse-btn");
-        this.parseTimeout = null;
-        this.initializePlayground();
+// The playground runs this repository's parser. It used to run a
+// three-hundred-line hand-rolled imitation that lived only in this file, so
+// the site could disagree with the library it documents - and did: it still
+// reported version 0.6.0 and knew nothing about the nested contexts that
+// parentheses opened in 0.16.
+import { Parser, formatLinks } from "links-notation";
+import { decode, encode } from "lino-objects-codec";
+
+const parser = new Parser();
+
+/** Turn a parsed Link into plain data, so JSON.stringify shows the shape. */
+function toPlain(link) {
+    const plain = {};
+    if (link.id !== null && link.id !== undefined) {
+        plain.id = link.id;
+    }
+    if (link.values && link.values.length > 0) {
+        plain.values = link.values.map(toPlain);
+    }
+    return plain;
+}
+
+/**
+ * Not every document is an object graph: `papa (lovesMama: loves mama)` is a
+ * link, not a record. Asking the codec anyway can produce something that looks
+ * like an answer but is not one, so the result is only shown when re-encoding
+ * it reproduces the document. Anything else is reported as "not an object
+ * graph" rather than presented as a reading.
+ */
+function asObject(text) {
+    let value;
+    try {
+        value = decode({ notation: text });
+    } catch (error) {
+        return `Not an object graph: ${error.message}`;
+    }
+    let roundTrip;
+    try {
+        roundTrip = encode({ obj: value });
+    } catch (error) {
+        return `Not an object graph: it does not encode back (${error.message})`;
+    }
+    if (roundTrip.trim() !== text.trim()) {
+        return "Not an object graph: the codec reads notation it wrote itself, "
+            + "and re-encoding this document does not reproduce it.";
+    }
+    return JSON.stringify(value, null, 2);
+}
+
+function panel(title, body) {
+    return `${title}\n${"-".repeat(title.length)}\n${body}\n`;
+}
+
+function render(text) {
+    const links = parser.parse(text);
+    return [
+        panel(`Parsed structure (${links.length} top-level ${links.length === 1 ? "link" : "links"})`,
+            JSON.stringify(links.map(toPlain), null, 2)),
+        panel("Formatted back to notation", formatLinks(links)),
+        panel("Read as JSON by lino-objects-codec", asObject(text))
+    ].join("\n");
+}
+
+function initializePlayground() {
+    const input = document.getElementById("input");
+    const output = document.getElementById("output");
+    const parseButton = document.getElementById("parse-btn");
+
+    if (!input || !output) {
+        return;
     }
 
-    initializePlayground() {
-        if (!this.parseBtn || !this.inputElement || !this.outputElement) {
-            return;
-        }
+    let timer = null;
 
-        this.parseBtn.addEventListener("click", () => {
-            this.parseInput();
-        });
-
-        this.inputElement.addEventListener("input", () => {
-            clearTimeout(this.parseTimeout);
-            this.parseTimeout = setTimeout(() => {
-                this.parseInput();
-            }, 300);
-        });
-
-        this.parseInput();
-    }
-
-    parseInput() {
-        if (!this.inputElement || !this.outputElement) {
-            return;
-        }
-
-        const text = this.inputElement.value.trim();
+    const run = () => {
+        const text = input.value.trim();
         if (!text) {
-            this.outputElement.textContent = "Enter some Links Notation to see the parsed result...";
+            output.textContent = "Enter some Links Notation to see the parsed result...";
             return;
         }
-
-        this.parseAndDisplay(text);
-    }
-
-    parseAndDisplay(text) {
         try {
-            const links = this.parseLinksNotation(text);
-            this.outputElement.textContent = JSON.stringify(links, null, 2);
+            output.textContent = render(text);
         } catch (error) {
-            this.outputElement.textContent = `Parse Error: ${error.message}`;
+            output.textContent = `Parse error: ${error.message}`;
         }
-    }
+    };
 
-    parseLinksNotation(text) {
-        const lines = text.split("\n").filter((line) => line.trim());
-        const links = [];
+    parseButton?.addEventListener("click", run);
+    input.addEventListener("input", () => {
+        clearTimeout(timer);
+        timer = setTimeout(run, 300);
+    });
 
-        for (let i = 0; i < lines.length; i++) {
-            const line = lines[i].trim();
-            if (!line) {
-                continue;
-            }
+    run();
+}
 
-            const link = this.parseLine(line, i);
-            if (link) {
-                links.push(link);
-            }
-        }
-
-        return {
-            type: "links-notation",
-            version: "0.6.0",
-            links,
-            totalLinks: links.length
-        };
-    }
-
-    parseLine(line, index) {
-        // Remove parentheses if they wrap the entire line
-        const trimmed = line.trim();
-        let content = trimmed;
-        let isWrapped = false;
-        
-        if (trimmed.startsWith("(") && trimmed.endsWith(")")) {
-            content = trimmed.slice(1, -1);
-            isWrapped = true;
-        }
-        
-        // Simple parsing logic
-        const parts = this.tokenize(content);
-        
-        return {
-            id: `link_${index}`,
-            original: line,
-            wrapped: isWrapped,
-            references: parts,
-            type: this.determineType(parts)
-        };
-    }
-
-    tokenize(content) {
-        const tokens = [];
-        let current = "";
-        let inParens = 0;
-        let inQuotes = false;
-
-        for (let i = 0; i < content.length; i++) {
-            const char = content[i];
-            const prevChar = i > 0 && i - 1 >= 0 ? content[i - 1] : null;
-
-            if (this.isQuoteToggle(char, prevChar)) {
-                inQuotes = !inQuotes;
-                current += char;
-                continue;
-            }
-            if (inQuotes) {
-                current += char;
-                continue;
-            }
-            const state = this.processChar(char, current, inParens, tokens);
-            current = state.current;
-            inParens = state.inParens;
-        }
-
-        this.addTokenIfValid(current, tokens);
-        return tokens;
-    }
-
-    isQuoteToggle(char, prevChar) {
-        return char === "\"" && prevChar !== "\\";
-    }
-
-    processChar(char, current, inParens, tokens) {
-        if (char === "(") return this.handleOpenParen(current, inParens, tokens);
-        if (char === ")") return this.handleCloseParen(current, inParens, tokens);
-        if (this.isWhitespace(char) && inParens === 0) return this.handleWhitespace(current, inParens, tokens);
-        return { current: current + char, inParens };
-    }
-
-    handleOpenParen(current, inParens, tokens) {
-        this.addTokenIfValid(current, tokens);
-        return { current: "(", inParens: inParens + 1 };
-    }
-
-    handleCloseParen(current, inParens, tokens) {
-        const newParens = inParens - 1;
-        const newCurrent = current + ")";
-        if (newParens === 0) {
-            this.addTokenIfValid(newCurrent, tokens);
-            return { current: "", inParens: newParens };
-        }
-        return { current: newCurrent, inParens: newParens };
-    }
-
-    handleWhitespace(current, inParens, tokens) {
-        this.addTokenIfValid(current, tokens);
-        return { current: "", inParens };
-    }
-
-    isWhitespace(char) {
-        return char === " " || char === "\t";
-    }
-
-    addTokenIfValid(text, tokens) {
-        const trimmed = text.trim();
-        if (trimmed) {
-            tokens.push(this.createToken(trimmed));
-        }
-    }
-
-    createToken(text) {
-        if (this.isLabeledReference(text)) {
-            return this.createLabeledReference(text);
-        }
-
-        if (this.isNestedLink(text)) {
-            return this.createNestedLink(text);
-        }
-
-        return this.createSimpleReference(text);
-    }
-
-    isLabeledReference(text) {
-        const colonIndex = text.indexOf(":");
-        return colonIndex > 0 && colonIndex < text.length - 1;
-    }
-
-    createLabeledReference(text) {
-        const colonIndex = text.indexOf(":");
-        return {
-            type: "labeled-reference",
-            label: text.substring(0, colonIndex).trim(),
-            value: text.substring(colonIndex + 1).trim(),
-            original: text
-        };
-    }
-
-    isNestedLink(text) {
-        return text.startsWith("(") && text.endsWith(")");
-    }
-
-    createNestedLink(text) {
-        const content = text.slice(1, -1);
-        return {
-            type: "nested-link",
-            content,
-            references: this.tokenize(content),
-            original: text
-        };
-    }
-
-    createSimpleReference(text) {
-        return {
-            type: "reference",
-            value: text,
-            original: text
-        };
-    }
-
-    determineType(references) {
-        const types = ["empty", "singleton", "doublet", "triplet"];
-        if (references.length < types.length) {
-            return types[references.length];
-        }
-        return `${references.length}-tuple`;
+/** Show the version of the library this page was built against. */
+function initializeVersion() {
+    const target = document.getElementById("version");
+    if (target) {
+        target.textContent = `v${__LIBRARY_VERSION__}`;
     }
 }
 
-// Smooth scrolling for navigation links
-document.addEventListener("DOMContentLoaded", () => {
-    // Initialize parser
-    const parser = new LinoParser();
-    // Prevent unused variable warning
-    void parser;
+/** Fill in the sample the "JSON to notation" card shows, from the codec. */
+function initializeCodecSample() {
+    const target = document.getElementById("codec-sample");
+    if (!target) {
+        return;
+    }
+    const object = { empInfo: { employees: [{ name: "James Kirk", age: 40 }] } };
+    target.textContent = encode({ obj: object }).trimEnd();
+}
 
-    // Mobile navigation toggle
+function initializeNavigation() {
     const navToggle = document.querySelector(".nav-toggle");
     const navLinks = document.querySelector(".nav-links");
 
-    if (navToggle && navLinks) {
-        navToggle.addEventListener("click", () => {
-            const isExpanded = navToggle.getAttribute("aria-expanded") === "true";
-            navToggle.setAttribute("aria-expanded", !isExpanded);
-            navLinks.classList.toggle("active");
-        });
-
-        // Close mobile menu when clicking on a link
-        navLinks.querySelectorAll("a").forEach((link) => {
-            link.addEventListener("click", () => {
-                navLinks.classList.remove("active");
-                navToggle.setAttribute("aria-expanded", "false");
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener("click", (e) => {
-            if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                navLinks.classList.remove("active");
-                navToggle.setAttribute("aria-expanded", "false");
-            }
-        });
+    if (!navToggle || !navLinks) {
+        return;
     }
 
-    // Smooth scrolling for anchor links
+    const close = () => {
+        navLinks.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
+    };
+
+    navToggle.addEventListener("click", () => {
+        const isExpanded = navToggle.getAttribute("aria-expanded") === "true";
+        navToggle.setAttribute("aria-expanded", String(!isExpanded));
+        navLinks.classList.toggle("active");
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", close));
+
+    document.addEventListener("click", (event) => {
+        if (!navToggle.contains(event.target) && !navLinks.contains(event.target)) {
+            close();
+        }
+    });
+}
+
+function initializeSmoothScrolling() {
     document.querySelectorAll("a[href^=\"#\"]").forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute("href"));
+        anchor.addEventListener("click", (event) => {
+            const target = document.querySelector(anchor.getAttribute("href"));
             if (target) {
-                target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
+                event.preventDefault();
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         });
     });
+}
 
-    // Add animation on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
+function initializeScrollAnimation() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -289,13 +162,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 entry.target.style.transform = "translateY(0)";
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
-    // Observe elements for animation
-    document.querySelectorAll(".feature, .example-card, .doc-card").forEach((el) => {
-        el.style.opacity = "0";
-        el.style.transform = "translateY(20px)";
-        el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-        observer.observe(el);
+    document.querySelectorAll(".feature, .example-card, .doc-card").forEach((element) => {
+        element.style.opacity = "0";
+        element.style.transform = "translateY(20px)";
+        element.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        observer.observe(element);
     });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    initializeVersion();
+    initializePlayground();
+    initializeCodecSample();
+    initializeNavigation();
+    initializeSmoothScrolling();
+    initializeScrollAnimation();
 });

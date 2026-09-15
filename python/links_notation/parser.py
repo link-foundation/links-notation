@@ -7,7 +7,9 @@ converting text into structured Link objects.
 
 from typing import Any, Dict, List, Optional
 
+from .comments import strip_comments
 from .link import Link
+from .quotes import _parse_quoted_string_at
 
 
 class ParseError(Exception):
@@ -21,13 +23,20 @@ class Parser:
     Handles both inline and indented syntax for defining links.
     """
 
-    def __init__(self, max_input_size: int = 10 * 1024 * 1024, max_depth: int = 1000):
+    def __init__(
+        self,
+        max_input_size: int = 10 * 1024 * 1024,
+        max_depth: int = 1000,
+        comments: bool = True,
+    ):
         """
         Initialize the parser.
 
         Args:
             max_input_size: Maximum input size in bytes (default: 10MB)
             max_depth: Maximum nesting depth (default: 1000)
+            comments: Whether ``#`` starts a comment that runs to the end of
+                its line; when False it is an ordinary character (default: True)
         """
         self.indentation_stack = [0]
         self.pos = 0
@@ -36,6 +45,7 @@ class Parser:
         self.base_indentation = None
         self.max_input_size = max_input_size
         self.max_depth = max_depth
+        self.comments = comments
 
     def parse(self, input_text: str) -> List[Link]:
         """
@@ -64,9 +74,13 @@ class Parser:
             if not input_text or not input_text.strip():
                 return []
 
-            self.text = input_text
+            # Comments are blanked rather than removed, so every character
+            # keeps the position it was written at.
+            prepared = strip_comments(input_text) if self.comments else input_text
+
+            self.text = prepared
             # Use smart line splitting that respects quoted strings
-            self.lines = self._split_lines_respecting_quotes(input_text)
+            self.lines = self._split_lines_respecting_quotes(prepared)
             self.pos = 0
             self.indentation_stack = [0]
             self.base_indentation = None
@@ -83,6 +97,16 @@ class Parser:
             # Catch specific parsing-related exceptions
             raise ParseError(f"Parse error: {str(e)}") from e
 
+    def _skip_quoted_string(self, text: str, start: int) -> int:
+        """
+        Skip over the quoted string starting at start.
+
+        Returns the position right after the closing quotes, or -1 when text
+        does not start a terminated quoted string.
+        """
+        parsed = _parse_quoted_string_at(text, start)
+        return -1 if parsed is None else parsed[1]
+
     def _split_lines_respecting_quotes(self, text: str) -> List[str]:
         """
         Split text into lines, but preserve newlines inside quoted strings
@@ -94,37 +118,32 @@ class Parser:
         """
         lines = []
         current_line = ""
-        in_single = False
-        in_double = False
-        in_backtick = False
         paren_depth = 0
         i = 0
 
         while i < len(text):
             char = text[i]
 
-            # Handle quote toggling
-            if char == '"' and not in_single and not in_backtick:
-                in_double = not in_double
+            if char in ('"', "'", "`"):
+                end = self._skip_quoted_string(text, i)
+                if end > i:
+                    # A quoted string is opaque: newlines inside it are content
+                    current_line += text[i:end]
+                    i = end
+                    continue
                 current_line += char
-            elif char == "'" and not in_double and not in_backtick:
-                in_single = not in_single
-                current_line += char
-            elif char == "`" and not in_single and not in_double:
-                in_backtick = not in_backtick
-                current_line += char
-            elif char == "(" and not in_single and not in_double and not in_backtick:
+            elif char == "(":
                 paren_depth += 1
                 current_line += char
-            elif char == ")" and not in_single and not in_double and not in_backtick:
+            elif char == ")":
                 paren_depth -= 1
                 current_line += char
             elif char == "\n":
-                if in_single or in_double or in_backtick or paren_depth > 0:
-                    # Inside quotes or unclosed parens: preserve the newline
+                if paren_depth > 0:
+                    # Inside unclosed parens: preserve the newline
                     current_line += char
                 else:
-                    # Outside quotes and parens balanced: this is a line break
+                    # Parentheses balanced: this is a line break
                     lines.append(current_line)
                     current_line = ""
             else:
@@ -187,18 +206,29 @@ class Parser:
         child_indent = indent + 2  # Expect at least 2 spaces for child
 
         while self.pos < len(self.lines):
-            next_line = self.lines[self.pos]
+            # A line holding nothing does not close a block: the block goes on
+            # at the next line that holds something. Blanking a comment leaves
+            # such a line behind, so this is also what keeps a block together
+            # around a comment written inside it.
+            following = self.pos
+            while following < len(self.lines) and not self.lines[following].strip():
+                following += 1
+            if following >= len(self.lines):
+                break
+
+            next_line = self.lines[following]
             raw_next_indent = len(next_line) - len(next_line.lstrip(" "))
             # Normalize next line's indentation
             next_indent = max(0, raw_next_indent - (self.base_indentation or 0))
 
-            if next_line.strip() and next_indent > indent:
-                # This is a child
-                child = self._parse_element(child_indent if not children else indent + 2)
-                if child:
-                    children.append(child)
-            else:
+            if next_indent <= indent:
                 break
+
+            # This is a child
+            self.pos = following
+            child = self._parse_element(child_indent if not children else indent + 2)
+            if child:
+                children.append(child)
 
         if children:
             element["children"] = children
@@ -207,10 +237,9 @@ class Parser:
 
     def _parse_line_content(self, content: str) -> Dict:
         """Parse the content of a single line."""
-        # Try multiline link format: (id: values) or (values)
-        if content.startswith("(") and content.endswith(")"):
-            inner = content[1:-1].strip()
-            return self._parse_parenthesized(inner)
+        # A whole parenthesized group: (id: values), (values) or a nested document
+        if content.startswith("(") and self._find_matching_paren(content, 0) == len(content) - 1:
+            return self._parse_parenthesized(content[1:-1])
 
         # Try indented ID syntax: id:
         if content.endswith(":"):
@@ -219,33 +248,72 @@ class Parser:
             return {"id": ref, "values": [], "is_indented_id": True}
 
         # Try single-line link: id: values
-        if ":" in content and not (content.startswith('"') or content.startswith("'")):
-            parts = content.split(":", 1)
-            if len(parts) == 2:
-                id_part = parts[0].strip()
-                values_part = parts[1].strip()
-                ref = self._extract_reference(id_part)
-                values = self._parse_values(values_part)
-                return {"id": ref, "values": values}
+        colon_pos = self._find_colon_outside_quotes(content)
+        if colon_pos >= 0:
+            id_part = content[:colon_pos].strip()
+            values_part = content[colon_pos + 1 :].strip()
+            ref = self._extract_reference(id_part)
+            values = self._parse_values(values_part)
+            return {"id": ref, "values": values}
 
         # Simple value list
         values = self._parse_values(content)
         return {"values": values}
 
     def _parse_parenthesized(self, inner: str) -> Dict:
-        """Parse content within parentheses."""
-        # Check for id: values format
-        colon_pos = self._find_colon_outside_quotes(inner)
-        if colon_pos >= 0:
-            id_part = inner[:colon_pos].strip()
-            values_part = inner[colon_pos + 1 :].strip()
-            ref = self._extract_reference(id_part)
-            values = self._parse_values(values_part)
-            return {"id": ref, "values": values}
+        """
+        Parse the content of a parenthesized group.
 
-        # Just values
-        values = self._parse_values(inner)
-        return {"values": values}
+        The group opens a nested context that starts fresh at indentation level
+        zero and follows exactly the rules used at the root of the document, so
+        line breaks separate links and indentation nests them.
+        """
+        return {"nested": self._parse_nested_document(inner)}
+
+    def _parse_nested_document(self, inner: str) -> List[Dict]:
+        """Parse the text of a parenthesized group as a document of its own."""
+        saved_lines = self.lines
+        saved_pos = self.pos
+        saved_base_indentation = self.base_indentation
+        saved_indentation_stack = self.indentation_stack
+        try:
+            self.lines = self._split_lines_respecting_quotes(inner)
+            self.pos = 0
+            self.base_indentation = None
+            self.indentation_stack = [0]
+            return self._parse_document()
+        finally:
+            self.lines = saved_lines
+            self.pos = saved_pos
+            self.base_indentation = saved_base_indentation
+            self.indentation_stack = saved_indentation_stack
+
+    def _find_matching_paren(self, text: str, start: int) -> int:
+        """
+        Find the position of the parenthesis closing the one at start.
+
+        Quoted strings are skipped, so parentheses inside them are ignored.
+        Returns -1 when the group is not closed.
+        """
+        depth = 0
+        i = start
+
+        while i < len(text):
+            char = text[i]
+            if char in ('"', "'", "`"):
+                end = self._skip_quoted_string(text, i)
+                if end > i:
+                    i = end
+                    continue
+            elif char == "(":
+                depth += 1
+            elif char == ")":
+                depth -= 1
+                if depth == 0:
+                    return i
+            i += 1
+
+        return -1
 
     def _find_colon_outside_quotes(self, text: str) -> int:
         """
@@ -256,25 +324,24 @@ class Parser:
         The colon after obj_1 should NOT be found as a top-level colon
         because it's inside the second parenthesized expression.
         """
-        in_single = False
-        in_double = False
-        in_backtick = False
         paren_depth = 0
+        i = 0
 
-        for i, char in enumerate(text):
-            if char == "'" and not in_double and not in_backtick:
-                in_single = not in_single
-            elif char == '"' and not in_single and not in_backtick:
-                in_double = not in_double
-            elif char == "`" and not in_single and not in_double:
-                in_backtick = not in_backtick
-            elif char == "(" and not in_single and not in_double and not in_backtick:
+        while i < len(text):
+            char = text[i]
+            if char in ('"', "'", "`"):
+                end = self._skip_quoted_string(text, i)
+                if end > i:
+                    i = end
+                    continue
+            elif char == "(":
                 paren_depth += 1
-            elif char == ")" and not in_single and not in_double and not in_backtick:
+            elif char == ")":
                 paren_depth -= 1
-            elif char == ":" and not in_single and not in_double and not in_backtick and paren_depth == 0:
+            elif char == ":" and paren_depth == 0:
                 # Only return colon if it's outside quotes AND at parenthesis depth 0
                 return i
+            i += 1
 
         return -1
 
@@ -313,63 +380,19 @@ class Parser:
         if start >= len(text):
             return (start, "")
 
-        # Check if this starts with a multi-quote string (supports any N quotes)
-        for quote_char in ['"', "'", "`"]:
-            if text[start:].startswith(quote_char):
-                # Count opening quotes dynamically
-                quote_count = 0
-                pos = start
-                while pos < len(text) and text[pos] == quote_char:
-                    quote_count += 1
-                    pos += 1
-
-                if quote_count >= 1:
-                    # Parse this multi-quote string
-                    remaining = text[start:]
-                    open_close = quote_char * quote_count
-                    escape_seq = quote_char * (quote_count * 2)
-
-                    inner_pos = len(open_close)
-                    while inner_pos < len(remaining):
-                        # Check for escape sequence (2*N quotes)
-                        if remaining[inner_pos:].startswith(escape_seq):
-                            inner_pos += len(escape_seq)
-                            continue
-                        # Check for closing quotes
-                        if remaining[inner_pos:].startswith(open_close):
-                            after_close_pos = inner_pos + len(open_close)
-                            # Make sure this is exactly N quotes (not more)
-                            if after_close_pos >= len(remaining) or remaining[after_close_pos] != quote_char:
-                                # Found the end
-                                return (start + after_close_pos, remaining[:after_close_pos])
-                        inner_pos += 1
-
-                    # No closing found, treat as regular text
-                    break
+        # Check if this starts with a delimited reference (any N quotes, or a
+        # bare delimiter pair standing for the empty reference)
+        quoted = _parse_quoted_string_at(text, start)
+        if quoted is not None:
+            _, end = quoted
+            return (end, text[start:end])
 
         # Check if this starts with a parenthesized expression
         if text[start] == "(":
-            paren_depth = 1
-            in_single = False
-            in_double = False
-            in_backtick = False
-            i = start + 1
-
-            while i < len(text) and paren_depth > 0:
-                char = text[i]
-                if char == "'" and not in_double and not in_backtick:
-                    in_single = not in_single
-                elif char == '"' and not in_single and not in_backtick:
-                    in_double = not in_double
-                elif char == "`" and not in_single and not in_double:
-                    in_backtick = not in_backtick
-                elif char == "(" and not in_single and not in_double and not in_backtick:
-                    paren_depth += 1
-                elif char == ")" and not in_single and not in_double and not in_backtick:
-                    paren_depth -= 1
-                i += 1
-
-            return (i, text[start:i])
+            end = self._find_matching_paren(text, start)
+            if end >= 0:
+                return (end + 1, text[start : end + 1])
+            return (len(text), text[start:])
 
         # Regular value - read until space or end
         in_single = False
@@ -394,9 +417,8 @@ class Parser:
     def _parse_value(self, value: str) -> Dict:
         """Parse a single value (could be a reference or nested link)."""
         # Nested link in parentheses
-        if value.startswith("(") and value.endswith(")"):
-            inner = value[1:-1].strip()
-            return self._parse_parenthesized(inner)
+        if value.startswith("(") and self._find_matching_paren(value, 0) == len(value) - 1:
+            return self._parse_parenthesized(value[1:-1])
 
         # Simple reference
         ref = self._extract_reference(value)
@@ -406,65 +428,13 @@ class Parser:
         """Extract reference, handling quoted strings with escaping support."""
         text = text.strip()
 
-        # Try multi-quote strings (supports any N quotes)
-        for quote_char in ['"', "'", "`"]:
-            if text.startswith(quote_char):
-                # Count opening quotes dynamically
-                quote_count = 0
-                while quote_count < len(text) and text[quote_count] == quote_char:
-                    quote_count += 1
-
-                if quote_count >= 1 and len(text) > quote_count:
-                    # Try to parse this multi-quote string
-                    result = self._parse_multi_quote_string(text, quote_char, quote_count)
-                    if result is not None:
-                        return result
+        # Try delimited references (any N quotes, or a bare delimiter pair)
+        quoted = _parse_quoted_string_at(text, 0)
+        if quoted is not None:
+            return quoted[0]
 
         # Unquoted
         return text
-
-    def _parse_multi_quote_string(self, text: str, quote_char: str, quote_count: int) -> Optional[str]:
-        """
-        Parse a multi-quote string.
-
-        For N quotes: opening = N quotes, closing = N quotes, escape = 2*N quotes -> N quotes
-        """
-        open_close = quote_char * quote_count
-        escape_seq = quote_char * (quote_count * 2)
-        escape_val = quote_char * quote_count
-
-        # Check for opening quotes
-        if not text.startswith(open_close):
-            return None
-
-        remaining = text[len(open_close) :]
-        content = ""
-
-        while remaining:
-            # Check for escape sequence (2*N quotes)
-            if remaining.startswith(escape_seq):
-                content += escape_val
-                remaining = remaining[len(escape_seq) :]
-                continue
-
-            # Check for closing quotes (N quotes not followed by more quotes)
-            if remaining.startswith(open_close):
-                after_close = remaining[len(open_close) :]
-                # Make sure this is exactly N quotes (not more)
-                if not after_close or not after_close.startswith(quote_char):
-                    # Closing found - but only if we consumed the entire text
-                    if not after_close.strip():
-                        return content
-                    else:
-                        # There's more text after closing, may not be valid
-                        return content
-
-            # Take the next character
-            content += remaining[0]
-            remaining = remaining[1:]
-
-        # No closing quotes found
-        return None
 
     def _transform_result(self, raw_result: List[Dict]) -> List[Link]:
         """Transform raw parse result into Link objects."""
@@ -563,6 +533,10 @@ class Parser:
         if not isinstance(item, dict):
             return Link(str(item))
 
+        # Parenthesized group parsed as a nested context
+        if "nested" in item:
+            return self._transform_nested(item["nested"])
+
         # Simple reference
         if "id" in item and "values" not in item:
             return Link(item["id"])
@@ -575,3 +549,23 @@ class Parser:
 
         # Default
         return Link(item.get("id"))
+
+    def _transform_nested(self, nested: List[Dict]) -> Link:
+        """
+        Transform the links of a nested (parenthesized) context into one Link.
+
+        The nested context is parsed with the same rules as the root, so it
+        yields a list of links; a single link is used as is, several links
+        become the values of one anonymous link. An already parenthesized single
+        link keeps its own group, so ``((a b))`` stays distinct from ``(a b)``.
+        """
+        nested_links: List[Link] = []
+        for item in nested:
+            if item is not None:
+                self._collect_links(item, [], nested_links)
+
+        wraps_single_group = len(nested) == 1 and isinstance(nested[0], dict) and "nested" in nested[0]
+        if len(nested_links) == 1 and not wraps_single_group:
+            return nested_links[0]
+
+        return Link(None, nested_links)

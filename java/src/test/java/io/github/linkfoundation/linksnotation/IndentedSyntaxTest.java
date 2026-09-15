@@ -64,16 +64,18 @@ class IndentedSyntaxTest {
 
   @Test
   void testMixedIndentedAndInline() throws ParseException {
-    // When a parenthesized link is used as a child in indented syntax,
-    // the innermost value is extracted as the value (consistent with Python)
+    // A parenthesized link used as a child in indented syntax keeps its own
+    // identifier, exactly like the same group written at the root
+    // (consistent with JavaScript, Python and Go)
     String input = "parent:\n  (child: value)";
     List<Link> result = parser.parse(input);
     assertEquals(1, result.size());
     assertEquals("parent", result.get(0).getId());
     assertEquals(1, result.get(0).getValues().size());
-    // The child is the innermost reference "value"
     Link childLink = result.get(0).getValues().get(0);
-    assertEquals("value", childLink.getId());
+    assertEquals("child", childLink.getId());
+    assertEquals(1, childLink.getValues().size());
+    assertEquals("value", childLink.getValues().get(0).getId());
   }
 
   @Test

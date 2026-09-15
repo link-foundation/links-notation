@@ -7,6 +7,9 @@ export default [
             ecmaVersion: 2022,
             sourceType: "module",
             globals: {
+                // vite.config.js runs in Node, index.html's script in the browser.
+                URL: "readonly",
+                process: "readonly",
                 document: "readonly",
                 window: "readonly",
                 console: "readonly",
@@ -16,7 +19,9 @@ export default [
                 clearInterval: "readonly",
                 fetch: "readonly",
                 IntersectionObserver: "readonly",
-                MutationObserver: "readonly"
+                MutationObserver: "readonly",
+                // Replaced at build time by vite.config.js.
+                __LIBRARY_VERSION__: "readonly"
             }
         },
         rules: {

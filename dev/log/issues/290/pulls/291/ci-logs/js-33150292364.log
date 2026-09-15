@@ -1,0 +1,1669 @@
+findChangedJsFiles	Set up job	﻿2026-08-28T07:07:12.4875711Z Current runner version: '2.336.0'
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4902273Z ##[group]Runner Image Provisioner
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4903149Z Hosted Compute Agent
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4903723Z Version: 20260819.586
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4904453Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4905253Z Build Date: 2026-08-18T23:20:18Z
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4906038Z Worker ID: {df5e1d6f-bdd4-4f88-b4fe-c54d2bc0a18c}
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4907158Z Azure Region: westus
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4907780Z ##[endgroup]
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4909609Z ##[group]Operating System
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4910305Z Ubuntu
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4910886Z 24.04.4
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4911410Z LTS
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4911912Z ##[endgroup]
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4912507Z ##[group]Runner Image
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4913182Z Image: ubuntu-24.04
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4913775Z Version: 20260823.283.1
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4914917Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4917109Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4918112Z ##[endgroup]
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4921223Z ##[group]GITHUB_TOKEN Permissions
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4923359Z Actions: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4924067Z ArtifactMetadata: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4924740Z Attestations: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4925418Z Checks: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4926035Z CodeQuality: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4926815Z Contents: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4927430Z CopilotRequests: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4928071Z Deployments: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4928625Z Discussions: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4929220Z Drives: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4929741Z Issues: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4930255Z Metadata: read
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4931003Z Models: read
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4931531Z Packages: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4932120Z Pages: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4932659Z PullRequests: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4933224Z RepositoryProjects: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4933953Z SecurityEvents: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4934528Z Statuses: write
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4935113Z VulnerabilityAlerts: read
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4935723Z ##[endgroup]
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4938031Z Secret source: Actions
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.4939266Z Prepare workflow directory
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.5489559Z Prepare all required actions
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.5537054Z Getting action download info
+findChangedJsFiles	Set up job	2026-08-28T07:07:12.8838661Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+findChangedJsFiles	Set up job	2026-08-28T07:07:13.0150748Z Download action repository 'tj-actions/changed-files@v47' (SHA:24d32ffd492484c1d75e0c0b894501ddb9d30d62)
+findChangedJsFiles	Set up job	2026-08-28T07:07:13.5468403Z Complete job name: findChangedJsFiles
+findChangedJsFiles	Run actions/checkout@v6	﻿2026-08-28T07:07:13.6162954Z ##[group]Run actions/checkout@v6
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6163843Z with:
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6164278Z   fetch-depth: 0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6164776Z   repository: link-foundation/links-notation
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6168626Z   token: ***
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6169059Z   ssh-strict: true
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6169527Z   ssh-user: git
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6169970Z   persist-credentials: true
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6170459Z   clean: true
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6170899Z   sparse-checkout-cone-mode: true
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6171413Z   fetch-tags: false
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6171855Z   show-progress: true
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6172291Z   lfs: false
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6172698Z   submodules: false
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6173140Z   set-safe-directory: true
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6173643Z   allow-unsafe-pr-checkout: false
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6174398Z env:
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6174817Z   NPM_TOKEN: 
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6178460Z   GITHUB_TOKEN: ***
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.6178905Z ##[endgroup]
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7187848Z Syncing repository: link-foundation/links-notation
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7189800Z ##[group]Getting Git version info
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7190616Z Working directory is '/home/runner/work/links-notation/links-notation'
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7191673Z [command]/usr/bin/git version
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7271995Z git version 2.55.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7307413Z ##[endgroup]
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7314880Z Temporarily overriding HOME='/home/runner/work/_temp/01c53662-cadf-40c2-b258-f78a48e85204' before making global git config changes
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7317643Z Adding repository directory to the temporary git global config as a safe directory
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7321576Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7375644Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7381332Z ##[group]Determining repository object format
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7383752Z ##[endgroup]
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7384701Z ##[group]Initializing the repository
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7389343Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7484231Z hint: Using 'master' as the name for the initial branch. This default branch name
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7485552Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7486855Z hint: to use in all of your new repositories, which will suppress this warning,
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7487647Z hint: call:
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7488060Z hint:
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7488577Z hint: 	git config --global init.defaultBranch <name>
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7489203Z hint:
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7489787Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7490715Z hint: 'development'. The just-created branch can be renamed via this command:
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7491872Z hint:
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7492657Z hint: 	git branch -m <name>
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7493482Z hint:
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7494447Z hint: Disable this message with "git config set advice.defaultBranchName false"
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7496091Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7501756Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7546603Z ##[endgroup]
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7547471Z ##[group]Disabling automatic garbage collection
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7551432Z [command]/usr/bin/git config --local gc.auto 0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7581561Z ##[endgroup]
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7582544Z ##[group]Setting up auth
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7583434Z Removing SSH command configuration
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7590424Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7622956Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7978533Z Removing HTTP extra header
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.7988221Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8028996Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8274170Z Removing includeIf entries pointing to credentials config files
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8281305Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8318283Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8547160Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8588268Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8626084Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8665912Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8738294Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8769715Z ##[endgroup]
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8771092Z ##[group]Fetching the repository
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.8779732Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8805637Z From https://github.com/link-foundation/links-notation
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8807857Z  * [new branch]      claude/code-review-and-issues-01CuJmcRr2phiQJAnhoqeEY5 -> origin/claude/code-review-and-issues-01CuJmcRr2phiQJAnhoqeEY5
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8810027Z  * [new branch]      claude/review-test-coverage-011UTL6DkCfp7LuwpUZj9HyC -> origin/claude/review-test-coverage-011UTL6DkCfp7LuwpUZj9HyC
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8811479Z  * [new branch]      claude/review-test-standards-01GsYvAqSF7k3oxTeEwYsX9W -> origin/claude/review-test-standards-01GsYvAqSF7k3oxTeEwYsX9W
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8812494Z  * [new branch]      dependabot/add-v2-config-file -> origin/dependabot/add-v2-config-file
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8813904Z  * [new branch]      dependabot/github_actions/actions/checkout-7 -> origin/dependabot/github_actions/actions/checkout-7
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8814984Z  * [new branch]      dependabot/github_actions/actions/setup-dotnet-6 -> origin/dependabot/github_actions/actions/setup-dotnet-6
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8816065Z  * [new branch]      dependabot/github_actions/actions/setup-node-7 -> origin/dependabot/github_actions/actions/setup-node-7
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8817681Z  * [new branch]      dependabot/github_actions/actions/upload-pages-artifact-5 -> origin/dependabot/github_actions/actions/upload-pages-artifact-5
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8819037Z  * [new branch]      dependabot/github_actions/dependabot/fetch-metadata-3 -> origin/dependabot/github_actions/dependabot/fetch-metadata-3
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8820675Z  * [new branch]      dependabot/nuget/csharp/Link.Foundation.Links.Notation.Tests/xunit.runner.visualstudio-4.0.0 -> origin/dependabot/nuget/csharp/Link.Foundation.Links.Notation.Tests/xunit.runner.visualstudio-4.0.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8822212Z  * [new branch]      draft/update           -> origin/draft/update
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8822948Z  * [new branch]      fix-cicd-publishing    -> origin/fix-cicd-publishing
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8823625Z  * [new branch]      gh-pages               -> origin/gh-pages
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8824540Z  * [new branch]      issue-101-5db7b374     -> origin/issue-101-5db7b374
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8825201Z  * [new branch]      issue-103-604d0cc9     -> origin/issue-103-604d0cc9
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8825837Z  * [new branch]      issue-105-b29688eb     -> origin/issue-105-b29688eb
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8826794Z  * [new branch]      issue-107-516f1733     -> origin/issue-107-516f1733
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8827480Z  * [new branch]      issue-109-d76b5c33     -> origin/issue-109-d76b5c33
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8828119Z  * [new branch]      issue-110-ec5b7eeb     -> origin/issue-110-ec5b7eeb
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8828779Z  * [new branch]      issue-111-8aef2f31     -> origin/issue-111-8aef2f31
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8829619Z  * [new branch]      issue-115-e9580372     -> origin/issue-115-e9580372
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8830394Z  * [new branch]      issue-117-e66fa934     -> origin/issue-117-e66fa934
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8831143Z  * [new branch]      issue-119-69bab4a2     -> origin/issue-119-69bab4a2
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8831966Z  * [new branch]      issue-121-0287f55a     -> origin/issue-121-0287f55a
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8832720Z  * [new branch]      issue-123-656309e4     -> origin/issue-123-656309e4
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8833670Z  * [new branch]      issue-125-79dfb0d1     -> origin/issue-125-79dfb0d1
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8834414Z  * [new branch]      issue-125-ee879ed7     -> origin/issue-125-ee879ed7
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8835164Z  * [new branch]      issue-125-f3a03b7d     -> origin/issue-125-f3a03b7d
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8835981Z  * [new branch]      issue-129-04c8c0a5     -> origin/issue-129-04c8c0a5
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8837046Z  * [new branch]      issue-131-fc081b5b     -> origin/issue-131-fc081b5b
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8837797Z  * [new branch]      issue-133-629cdf98     -> origin/issue-133-629cdf98
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8838538Z  * [new branch]      issue-135-00fb7516     -> origin/issue-135-00fb7516
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8839284Z  * [new branch]      issue-138-9d33fad1     -> origin/issue-138-9d33fad1
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8840053Z  * [new branch]      issue-140-28a755bca96b -> origin/issue-140-28a755bca96b
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8840828Z  * [new branch]      issue-142-23f307922307 -> origin/issue-142-23f307922307
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8841607Z  * [new branch]      issue-143-71fa1d3dc218 -> origin/issue-143-71fa1d3dc218
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8842377Z  * [new branch]      issue-144-f281d2df737c -> origin/issue-144-f281d2df737c
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8843154Z  * [new branch]      issue-146-52f1d9a571ed -> origin/issue-146-52f1d9a571ed
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8843936Z  * [new branch]      issue-148-6ee2ca2dbea2 -> origin/issue-148-6ee2ca2dbea2
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8844715Z  * [new branch]      issue-155-7899dac8e6ec -> origin/issue-155-7899dac8e6ec
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8845487Z  * [new branch]      issue-158-fb24e781ad8d -> origin/issue-158-fb24e781ad8d
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8846265Z  * [new branch]      issue-164-2e5b1c046253 -> origin/issue-164-2e5b1c046253
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8847226Z  * [new branch]      issue-165-a26029ce2e34 -> origin/issue-165-a26029ce2e34
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8847967Z  * [new branch]      issue-166-0169a4dd2a40 -> origin/issue-166-0169a4dd2a40
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8848691Z  * [new branch]      issue-184-e00f7290354f -> origin/issue-184-e00f7290354f
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8849463Z  * [new branch]      issue-188-09a2f723ae76 -> origin/issue-188-09a2f723ae76
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8850189Z  * [new branch]      issue-189-7e97f19d7811 -> origin/issue-189-7e97f19d7811
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8850917Z  * [new branch]      issue-192-3568aae3e63c -> origin/issue-192-3568aae3e63c
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8851638Z  * [new branch]      issue-197-0f9688b95d4f -> origin/issue-197-0f9688b95d4f
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8852604Z  * [new branch]      issue-197-93f74116bd61 -> origin/issue-197-93f74116bd61
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8853486Z  * [new branch]      issue-198-ef3a7c229ad3 -> origin/issue-198-ef3a7c229ad3
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8854226Z  * [new branch]      issue-200-432e1145db9f -> origin/issue-200-432e1145db9f
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8855125Z  * [new branch]      issue-201-5c2770ec8b03 -> origin/issue-201-5c2770ec8b03
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8855846Z  * [new branch]      issue-209-8128719f23bf -> origin/issue-209-8128719f23bf
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8856785Z  * [new branch]      issue-21-66d67e65      -> origin/issue-21-66d67e65
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8857533Z  * [new branch]      issue-217-c1c06cbe0168 -> origin/issue-217-c1c06cbe0168
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8858240Z  * [new branch]      issue-23-cfc667a8      -> origin/issue-23-cfc667a8
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8858941Z  * [new branch]      issue-282-c154325b4497 -> origin/issue-282-c154325b4497
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8859676Z  * [new branch]      issue-284-ed60ce81c8a6 -> origin/issue-284-ed60ce81c8a6
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8860426Z  * [new branch]      issue-288-cc91e23553e8 -> origin/issue-288-cc91e23553e8
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8861148Z  * [new branch]      issue-52-4a282d24      -> origin/issue-52-4a282d24
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8861891Z  * [new branch]      issue-53-12d80c86      -> origin/issue-53-12d80c86
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8862588Z  * [new branch]      issue-53-1bd6f8d5      -> origin/issue-53-1bd6f8d5
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8863284Z  * [new branch]      issue-53-4d399364      -> origin/issue-53-4d399364
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8863986Z  * [new branch]      issue-55-353ece6e      -> origin/issue-55-353ece6e
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8865173Z  * [new branch]      issue-55-deaa6f4c      -> origin/issue-55-deaa6f4c
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8934923Z  * [new branch]      issue-62-8dc57ee4      -> origin/issue-62-8dc57ee4
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8936600Z  * [new branch]      issue-62-9aaf7516      -> origin/issue-62-9aaf7516
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8937850Z  * [new branch]      issue-62-ba398481      -> origin/issue-62-ba398481
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8938860Z  * [new branch]      issue-63-2062e7bf      -> origin/issue-63-2062e7bf
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8939597Z  * [new branch]      issue-63-fe0edcdd      -> origin/issue-63-fe0edcdd
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8940321Z  * [new branch]      issue-68-00e93de8      -> origin/issue-68-00e93de8
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8941517Z  * [new branch]      issue-68-08c66206      -> origin/issue-68-08c66206
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8942665Z  * [new branch]      issue-68-38c3f25f      -> origin/issue-68-38c3f25f
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8943781Z  * [new branch]      issue-68-c3ec7178      -> origin/issue-68-c3ec7178
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8945051Z  * [new branch]      issue-69-1ad2dc0a      -> origin/issue-69-1ad2dc0a
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8946174Z  * [new branch]      issue-69-909b524a      -> origin/issue-69-909b524a
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8947851Z  * [new branch]      issue-81-b7913964      -> origin/issue-81-b7913964
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8949097Z  * [new branch]      issue-87-3609cfa2      -> origin/issue-87-3609cfa2
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8950469Z  * [new branch]      issue-90-8b6fbd3d      -> origin/issue-90-8b6fbd3d
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8951785Z  * [new branch]      issue-91-1bc78531      -> origin/issue-91-1bc78531
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8953080Z  * [new branch]      issue-99-0e526c7c      -> origin/issue-99-0e526c7c
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8954308Z  * [new branch]      main                   -> origin/main
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8955502Z  * [new branch]      master                 -> origin/master
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8956930Z  * [new branch]      segment                -> origin/segment
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8958220Z  * [new branch]      update-all-deps        -> origin/update-all-deps
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8959538Z  * [new branch]      update-java-deps       -> origin/update-java-deps
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8960674Z  * [new tag]         0.0.1                  -> 0.0.1
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8961752Z  * [new tag]         0.0.2                  -> 0.0.2
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8962801Z  * [new tag]         0.1.0                  -> 0.1.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8963871Z  * [new tag]         0.10.0_python          -> 0.10.0_python
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8964992Z  * [new tag]         0.11.0_csharp          -> 0.11.0_csharp
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8966083Z  * [new tag]         0.11.0_js              -> 0.11.0_js
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8967445Z  * [new tag]         0.11.0_python          -> 0.11.0_python
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8968908Z  * [new tag]         0.11.0_rust            -> 0.11.0_rust
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8970037Z  * [new tag]         0.11.1_csharp          -> 0.11.1_csharp
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8971126Z  * [new tag]         0.11.2_csharp          -> 0.11.2_csharp
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8972179Z  * [new tag]         0.11.2_js              -> 0.11.2_js
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8973178Z  * [new tag]         0.11.2_python          -> 0.11.2_python
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8974472Z  * [new tag]         0.11.2_rust            -> 0.11.2_rust
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8975488Z  * [new tag]         0.12.0_csharp          -> 0.12.0_csharp
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8976774Z  * [new tag]         0.13.0_csharp          -> 0.13.0_csharp
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8977799Z  * [new tag]         0.2.0                  -> 0.2.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8978817Z  * [new tag]         0.2.1                  -> 0.2.1
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8979829Z  * [new tag]         0.2.2                  -> 0.2.2
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8980872Z  * [new tag]         0.2.3                  -> 0.2.3
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8981874Z  * [new tag]         0.3.0                  -> 0.3.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8982856Z  * [new tag]         0.4.0                  -> 0.4.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8983899Z  * [new tag]         0.7.0_csharp           -> 0.7.0_csharp
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8985266Z  * [new tag]         0.7.0_js               -> 0.7.0_js
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8986281Z  * [new tag]         0.7.0_rust             -> 0.7.0_rust
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8987749Z  * [new tag]         0.8.0_js               -> 0.8.0_js
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8988809Z  * [new tag]         0.8.0_rust             -> 0.8.0_rust
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8989903Z  * [new tag]         0.9.0_csharp           -> 0.9.0_csharp
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8990986Z  * [new tag]         0.9.0_js               -> 0.9.0_js
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8992032Z  * [new tag]         0.9.0_python           -> 0.9.0_python
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8993142Z  * [new tag]         0.9.0_rust             -> 0.9.0_rust
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8994287Z  * [new tag]         csharp_0.4.0           -> csharp_0.4.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8995398Z  * [new tag]         csharp_0.4.1           -> csharp_0.4.1
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8996757Z  * [new tag]         csharp_0.4.2           -> csharp_0.4.2
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8997843Z  * [new tag]         csharp_0.4.3           -> csharp_0.4.3
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.8998906Z  * [new tag]         csharp_0.4.4           -> csharp_0.4.4
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9000010Z  * [new tag]         csharp_0.4.5           -> csharp_0.4.5
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9001089Z  * [new tag]         csharp_0.4.6           -> csharp_0.4.6
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9002213Z  * [new tag]         csharp_0.5.0           -> csharp_0.5.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9003320Z  * [new tag]         csharp_0.6.0           -> csharp_0.6.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9004454Z  * [new tag]         go/v0.13.0             -> go/v0.13.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9005536Z  * [new tag]         go/v0.14.0             -> go/v0.14.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9006865Z  * [new tag]         js_0.1.0               -> js_0.1.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9007956Z  * [new tag]         js_0.11.2              -> js_0.11.2
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9008983Z  * [new tag]         js_0.12.0              -> js_0.12.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9010032Z  * [new tag]         js_0.13.0              -> js_0.13.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9011244Z  * [new tag]         js_0.2.0               -> js_0.2.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9012284Z  * [new tag]         js_0.6.0               -> js_0.6.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9013336Z  * [new tag]         php_0.1.0              -> php_0.1.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9014404Z  * [new tag]         python_0.11.2          -> python_0.11.2
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9015465Z  * [new tag]         python_0.12.0          -> python_0.12.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9016899Z  * [new tag]         python_0.13.0          -> python_0.13.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9018068Z  * [new tag]         python_0.14.0          -> python_0.14.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9019152Z  * [new tag]         rust_0.11.2            -> rust_0.11.2
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9020225Z  * [new tag]         rust_0.12.0            -> rust_0.12.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9021619Z  * [new tag]         rust_0.13.0            -> rust_0.13.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9022672Z  * [new tag]         rust_0.14.0            -> rust_0.14.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9023757Z  * [new tag]         rust_0.2.0             -> rust_0.2.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9024811Z  * [new tag]         rust_0.6.0             -> rust_0.6.0
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9027606Z [command]/usr/bin/git branch --list --remote origin/main
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9028651Z   origin/main
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9030519Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9031639Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9034004Z ##[endgroup]
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9035341Z ##[group]Determining the checkout info
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9037022Z ##[endgroup]
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9037899Z [command]/usr/bin/git sparse-checkout disable
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9040256Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9043004Z ##[group]Checking out the ref
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9044259Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9295647Z Switched to a new branch 'main'
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9300134Z branch 'main' set up to track 'origin/main'.
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9309305Z ##[endgroup]
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9358899Z [command]/usr/bin/git log -1 --format=%H
+findChangedJsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.9387106Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+findChangedJsFiles	Get changed files using defaults	﻿2026-08-28T07:07:14.9818552Z ##[group]Run tj-actions/changed-files@v47
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9819143Z with:
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9819537Z   separator:  
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9819968Z   include_all_old_new_renamed_files: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9820467Z   old_new_separator: ,
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9820904Z   old_new_files_separator:  
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9821370Z   files_from_source_file_separator: 
+findChangedJsFiles	Get changed files using defaults	
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9821847Z   files_separator: 
+findChangedJsFiles	Get changed files using defaults	
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9822288Z   files_yaml_from_source_file_separator: 
+findChangedJsFiles	Get changed files using defaults	
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9822832Z   files_ignore_yaml_from_source_file_separator: 
+findChangedJsFiles	Get changed files using defaults	
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9823359Z   files_ignore_separator: 
+findChangedJsFiles	Get changed files using defaults	
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9823827Z   files_ignore_from_source_file_separator: 
+findChangedJsFiles	Get changed files using defaults	
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9824319Z   path: .
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9824702Z   quotepath: true
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9825137Z   diff_relative: true
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9825562Z   dir_names: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9825986Z   dir_names_exclude_current_dir: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9826656Z   dir_names_include_files_separator: 
+findChangedJsFiles	Get changed files using defaults	
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9827282Z   dir_names_deleted_files_include_only_deleted_dirs: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9827815Z   json: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9828205Z   escape_json: true
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9828615Z   safe_output: true
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9829012Z   fetch_depth: 25
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9829422Z   skip_initial_fetch: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9829888Z   fetch_additional_submodule_history: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9830391Z   since_last_remote_commit: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9830861Z   write_output_files: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9831314Z   output_dir: .github/outputs
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9831806Z   output_renamed_files_as_deleted_and_added: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9832337Z   recover_deleted_files: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9832793Z   recover_files_separator: 
+findChangedJsFiles	Get changed files using defaults	
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9833284Z   recover_files_ignore_separator: 
+findChangedJsFiles	Get changed files using defaults	
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9836042Z   token: ***
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9836598Z   api_url: https://api.github.com
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9837084Z   use_rest_api: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9837513Z   fail_on_initial_diff_error: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9837988Z   fail_on_submodule_diff_error: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9838468Z   negation_patterns_first: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9838897Z   matrix: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9839288Z   exclude_submodules: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9839727Z   fetch_missing_history_max_retries: 20
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9840204Z   use_posix_path_separator: false
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9840634Z   tags_pattern: *
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9841007Z env:
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9841357Z   NPM_TOKEN: 
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9844020Z   GITHUB_TOKEN: ***
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:14.9844418Z ##[endgroup]
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:15.0844994Z ##[group]changed-files
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:15.0971311Z Using local .git directory
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:15.1490656Z Running on a push event...
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:15.1772855Z Retrieving changes between 96878c375041d3c3bbbd9f2ffe5664d2f7d72dc5 (main) → 4958f3cf8012ba9e67f19309b9c58984f7ce106a (main)
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:15.1832148Z All Done!
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:15.1833285Z ##[endgroup]
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:15.1834539Z ##[group]changed-files-all
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:15.1896889Z All Done!
+findChangedJsFiles	Get changed files using defaults	2026-08-28T07:07:15.1897963Z ##[endgroup]
+findChangedJsFiles	Set output isJsFilesChanged	﻿2026-08-28T07:07:15.2101908Z ##[group]Run isJsFilesChanged='false'
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2102567Z ^[[36;1misJsFilesChanged='false'^[[0m
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2110343Z ^[[36;1mecho "Changed files: .gitkeep csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs experiments/issue-288/csharp/GroundTruth.csproj experiments/issue-288/csharp/Program.cs experiments/issue-288/go/go.mod experiments/issue-288/go/main.go experiments/issue-288/ground_truth.mjs experiments/issue-288/ground_truth.py experiments/issue-288/ground_truth.rs experiments/issue-288/java/GroundTruth.java experiments/issue-288/php/ground_truth.php experiments/issue-288/roundtrip.rs go/empty_reference_test.go java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java js/examples/empty_reference.js js/tests/EmptyReference.test.js php/tests/EmptyReferenceTest.php python/tests/test_empty_reference.py rust/links-notation/tests/empty_reference_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/Link.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/lino.go go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Link.java java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/MultiQuoteParserTest.java js/bun.lock js/package-lock.json js/package.json js/src/Link.js js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js php/composer.json php/src/Link.php php/src/Parser.php php/tests/LinkTest.php python/links_notation/link.py python/links_notation/parser.py python/pyproject.toml rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/tuple_tests.rs"^[[0m
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2125495Z ^[[36;1mfor changedFile in .gitkeep csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs experiments/issue-288/csharp/GroundTruth.csproj experiments/issue-288/csharp/Program.cs experiments/issue-288/go/go.mod experiments/issue-288/go/main.go experiments/issue-288/ground_truth.mjs experiments/issue-288/ground_truth.py experiments/issue-288/ground_truth.rs experiments/issue-288/java/GroundTruth.java experiments/issue-288/php/ground_truth.php experiments/issue-288/roundtrip.rs go/empty_reference_test.go java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java js/examples/empty_reference.js js/tests/EmptyReference.test.js php/tests/EmptyReferenceTest.php python/tests/test_empty_reference.py rust/links-notation/tests/empty_reference_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/Link.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/lino.go go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Link.java java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/MultiQuoteParserTest.java js/bun.lock js/package-lock.json js/package.json js/src/Link.js js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js php/composer.json php/src/Link.php php/src/Parser.php php/tests/LinkTest.php python/links_notation/link.py python/links_notation/parser.py python/pyproject.toml rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/tuple_tests.rs; do^[[0m
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2133925Z ^[[36;1m  if [[ $changedFile == js/*.js ]] || [[ $changedFile == js/*.json ]] || [[ $changedFile == js/*.pegjs ]] || [[ $changedFile == js/* ]] || [[ $changedFile == .github/workflows/js.yml ]]; then^[[0m
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2134865Z ^[[36;1m    echo "isJsFilesChanged='true'"^[[0m
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2135372Z ^[[36;1m    isJsFilesChanged='true'^[[0m
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2136013Z ^[[36;1m    break^[[0m
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2136539Z ^[[36;1m  fi^[[0m
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2136913Z ^[[36;1mdone^[[0m
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2137409Z ^[[36;1mecho "isJsFilesChanged=${isJsFilesChanged}" >> $GITHUB_OUTPUT^[[0m
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2138044Z ^[[36;1mecho "isJsFilesChanged: ${isJsFilesChanged}"^[[0m
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2178743Z shell: /usr/bin/bash -e {0}
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2179213Z env:
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2179575Z   NPM_TOKEN: 
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2182365Z   GITHUB_TOKEN: ***
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2182757Z ##[endgroup]
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2272414Z Changed files: .gitkeep csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs experiments/issue-288/csharp/GroundTruth.csproj experiments/issue-288/csharp/Program.cs experiments/issue-288/go/go.mod experiments/issue-288/go/main.go experiments/issue-288/ground_truth.mjs experiments/issue-288/ground_truth.py experiments/issue-288/ground_truth.rs experiments/issue-288/java/GroundTruth.java experiments/issue-288/php/ground_truth.php experiments/issue-288/roundtrip.rs go/empty_reference_test.go java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java js/examples/empty_reference.js js/tests/EmptyReference.test.js php/tests/EmptyReferenceTest.php python/tests/test_empty_reference.py rust/links-notation/tests/empty_reference_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/Link.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/lino.go go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Link.java java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/MultiQuoteParserTest.java js/bun.lock js/package-lock.json js/package.json js/src/Link.js js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js php/composer.json php/src/Link.php php/src/Parser.php php/tests/LinkTest.php python/links_notation/link.py python/links_notation/parser.py python/pyproject.toml rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/tuple_tests.rs
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2280726Z isJsFilesChanged='true'
+findChangedJsFiles	Set output isJsFilesChanged	2026-08-28T07:07:15.2281163Z isJsFilesChanged: true
+findChangedJsFiles	Post Run actions/checkout@v6	﻿2026-08-28T07:07:15.2412798Z Post job cleanup.
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3265763Z [command]/usr/bin/git version
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3310541Z git version 2.55.0
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3350350Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/5211979a-2e09-4a86-98d1-c5cb6c7c8897/.gitconfig'
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3361770Z Temporarily overriding HOME='/home/runner/work/_temp/5211979a-2e09-4a86-98d1-c5cb6c7c8897' before making global git config changes
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3363550Z Adding repository directory to the temporary git global config as a safe directory
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3367414Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3399103Z Removing SSH command configuration
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3406656Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3444355Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3694255Z Removing HTTP extra header
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3702650Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3733043Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.3996202Z Removing includeIf entries pointing to credentials config files
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4007992Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4036528Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4038346Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4039947Z includeif.gitdir:/github/workspace/.git.path
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4041204Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4049196Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4077511Z /home/runner/work/_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4090444Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4133204Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4160103Z /home/runner/work/_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4174396Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4213238Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4240219Z /github/runner_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4258051Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4300984Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4325994Z /github/runner_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4335746Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4374042Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+findChangedJsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:15.4599699Z Removing credentials config '/home/runner/work/_temp/git-credentials-e568ff8b-abe0-4adf-9107-36a1611608a5.config'
+findChangedJsFiles	Complete job	﻿2026-08-28T07:07:15.4737037Z Evaluate and set job outputs
+findChangedJsFiles	Complete job	2026-08-28T07:07:15.4742755Z Set output 'isJsFilesChanged'
+findChangedJsFiles	Complete job	2026-08-28T07:07:15.4745072Z Cleaning up orphan processes
+format	Set up job	﻿2026-08-28T07:07:21.8922751Z Current runner version: '2.336.0'
+format	Set up job	2026-08-28T07:07:21.8943756Z ##[group]Runner Image Provisioner
+format	Set up job	2026-08-28T07:07:21.8944719Z Hosted Compute Agent
+format	Set up job	2026-08-28T07:07:21.8945308Z Version: 20260819.586
+format	Set up job	2026-08-28T07:07:21.8945950Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+format	Set up job	2026-08-28T07:07:21.8946677Z Build Date: 2026-08-18T23:20:18Z
+format	Set up job	2026-08-28T07:07:21.8947264Z Worker ID: {cf4e7770-662b-4ce2-b411-dd9fe7e2cbbb}
+format	Set up job	2026-08-28T07:07:21.8947825Z Azure Region: centralus
+format	Set up job	2026-08-28T07:07:21.8948398Z ##[endgroup]
+format	Set up job	2026-08-28T07:07:21.8950276Z ##[group]Operating System
+format	Set up job	2026-08-28T07:07:21.8950986Z Ubuntu
+format	Set up job	2026-08-28T07:07:21.8951516Z 24.04.4
+format	Set up job	2026-08-28T07:07:21.8952083Z LTS
+format	Set up job	2026-08-28T07:07:21.8952597Z ##[endgroup]
+format	Set up job	2026-08-28T07:07:21.8953090Z ##[group]Runner Image
+format	Set up job	2026-08-28T07:07:21.8953612Z Image: ubuntu-24.04
+format	Set up job	2026-08-28T07:07:21.8954205Z Version: 20260823.283.1
+format	Set up job	2026-08-28T07:07:21.8955312Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+format	Set up job	2026-08-28T07:07:21.8956833Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+format	Set up job	2026-08-28T07:07:21.8957715Z ##[endgroup]
+format	Set up job	2026-08-28T07:07:21.8960529Z ##[group]GITHUB_TOKEN Permissions
+format	Set up job	2026-08-28T07:07:21.8962747Z Actions: write
+format	Set up job	2026-08-28T07:07:21.8963295Z ArtifactMetadata: write
+format	Set up job	2026-08-28T07:07:21.8963884Z Attestations: write
+format	Set up job	2026-08-28T07:07:21.8964449Z Checks: write
+format	Set up job	2026-08-28T07:07:21.8964946Z CodeQuality: write
+format	Set up job	2026-08-28T07:07:21.8965406Z Contents: write
+format	Set up job	2026-08-28T07:07:21.8965813Z CopilotRequests: write
+format	Set up job	2026-08-28T07:07:21.8966306Z Deployments: write
+format	Set up job	2026-08-28T07:07:21.8966750Z Discussions: write
+format	Set up job	2026-08-28T07:07:21.8967211Z Drives: write
+format	Set up job	2026-08-28T07:07:21.8967651Z Issues: write
+format	Set up job	2026-08-28T07:07:21.8968056Z Metadata: read
+format	Set up job	2026-08-28T07:07:21.8968532Z Models: read
+format	Set up job	2026-08-28T07:07:21.8968972Z Packages: write
+format	Set up job	2026-08-28T07:07:21.8969539Z Pages: write
+format	Set up job	2026-08-28T07:07:21.8969947Z PullRequests: write
+format	Set up job	2026-08-28T07:07:21.8970412Z RepositoryProjects: write
+format	Set up job	2026-08-28T07:07:21.8970938Z SecurityEvents: write
+format	Set up job	2026-08-28T07:07:21.8971373Z Statuses: write
+format	Set up job	2026-08-28T07:07:21.8971844Z VulnerabilityAlerts: read
+format	Set up job	2026-08-28T07:07:21.8972320Z ##[endgroup]
+format	Set up job	2026-08-28T07:07:21.8973984Z Secret source: Actions
+format	Set up job	2026-08-28T07:07:21.8974681Z Prepare workflow directory
+format	Set up job	2026-08-28T07:07:21.9338639Z Prepare all required actions
+format	Set up job	2026-08-28T07:07:21.9375459Z Getting action download info
+format	Set up job	2026-08-28T07:07:22.1660286Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+format	Set up job	2026-08-28T07:07:22.4187588Z Download action repository 'oven-sh/setup-bun@v2' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+format	Set up job	2026-08-28T07:07:22.9012751Z Complete job name: format
+format	Run actions/checkout@v6	﻿2026-08-28T07:07:22.9565072Z ##[group]Run actions/checkout@v6
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9566185Z with:
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9566803Z   submodules: true
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9567564Z   repository: link-foundation/links-notation
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9573999Z   token: ***
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9574656Z   ssh-strict: true
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9575430Z   ssh-user: git
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9576107Z   persist-credentials: true
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9576828Z   clean: true
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9577505Z   sparse-checkout-cone-mode: true
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9578317Z   fetch-depth: 1
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9578977Z   fetch-tags: false
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9579776Z   show-progress: true
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9580755Z   lfs: false
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9581455Z   set-safe-directory: true
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9582223Z   allow-unsafe-pr-checkout: false
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9583377Z env:
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9583975Z   NPM_TOKEN: 
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9590443Z   GITHUB_TOKEN: ***
+format	Run actions/checkout@v6	2026-08-28T07:07:22.9591165Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0343080Z Syncing repository: link-foundation/links-notation
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0346205Z ##[group]Getting Git version info
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0347819Z Working directory is '/home/runner/work/links-notation/links-notation'
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0349741Z [command]/usr/bin/git version
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0564668Z git version 2.55.0
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0610098Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0618101Z Temporarily overriding HOME='/home/runner/work/_temp/fcd32e2c-173e-4409-98a2-cafd907c322d' before making global git config changes
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0621383Z Adding repository directory to the temporary git global config as a safe directory
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0624196Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0642452Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0646344Z ##[group]Determining repository object format
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0649266Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0651734Z ##[group]Initializing the repository
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0653829Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0879709Z hint: Using 'master' as the name for the initial branch. This default branch name
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0881534Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0883141Z hint: to use in all of your new repositories, which will suppress this warning,
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0884203Z hint: call:
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0884847Z hint:
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0885712Z hint: 	git config --global init.defaultBranch <name>
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0886565Z hint:
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0887597Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0888970Z hint: 'development'. The just-created branch can be renamed via this command:
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0890333Z hint:
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0890988Z hint: 	git branch -m <name>
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0891714Z hint:
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0892891Z hint: Disable this message with "git config set advice.defaultBranchName false"
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0894892Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0898494Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0926968Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0928348Z ##[group]Disabling automatic garbage collection
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0930488Z [command]/usr/bin/git config --local gc.auto 0
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0955909Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0957232Z ##[group]Setting up auth
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0958162Z Removing SSH command configuration
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0961135Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+format	Run actions/checkout@v6	2026-08-28T07:07:23.0985905Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+format	Run actions/checkout@v6	2026-08-28T07:07:23.1512415Z Removing HTTP extra header
+format	Run actions/checkout@v6	2026-08-28T07:07:23.1518502Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+format	Run actions/checkout@v6	2026-08-28T07:07:23.1541537Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+format	Run actions/checkout@v6	2026-08-28T07:07:23.1674674Z Removing includeIf entries pointing to credentials config files
+format	Run actions/checkout@v6	2026-08-28T07:07:23.1679570Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+format	Run actions/checkout@v6	2026-08-28T07:07:23.1702155Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+format	Run actions/checkout@v6	2026-08-28T07:07:23.1839228Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+format	Run actions/checkout@v6	2026-08-28T07:07:23.1866747Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Run actions/checkout@v6	2026-08-28T07:07:23.1887606Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Run actions/checkout@v6	2026-08-28T07:07:23.1909723Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Run actions/checkout@v6	2026-08-28T07:07:23.2021675Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Run actions/checkout@v6	2026-08-28T07:07:23.2049712Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:23.2051125Z ##[group]Fetching the repository
+format	Run actions/checkout@v6	2026-08-28T07:07:23.2054517Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4958f3cf8012ba9e67f19309b9c58984f7ce106a:refs/remotes/origin/main
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9524822Z From https://github.com/link-foundation/links-notation
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9525385Z  * [new ref]         4958f3cf8012ba9e67f19309b9c58984f7ce106a -> origin/main
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9538283Z [command]/usr/bin/git branch --list --remote origin/main
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9560189Z   origin/main
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9567958Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9589955Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9593292Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9595495Z ##[group]Determining the checkout info
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9596879Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9598130Z [command]/usr/bin/git sparse-checkout disable
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9630329Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9648813Z ##[group]Checking out the ref
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9651470Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9808542Z Switched to a new branch 'main'
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9812382Z branch 'main' set up to track 'origin/main'.
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9815611Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9816388Z ##[group]Setting up auth for fetching submodules
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9820505Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9845139Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9864842Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9889857Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9910783Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9930445Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9931108Z ##[group]Fetching submodules
+format	Run actions/checkout@v6	2026-08-28T07:07:23.9932500Z [command]/usr/bin/git submodule sync
+format	Run actions/checkout@v6	2026-08-28T07:07:24.0074709Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+format	Run actions/checkout@v6	2026-08-28T07:07:24.0279875Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+format	Run actions/checkout@v6	2026-08-28T07:07:24.0411935Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:24.0412593Z ##[group]Persisting credentials for submodules
+format	Run actions/checkout@v6	2026-08-28T07:07:24.0417012Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+format	Run actions/checkout@v6	2026-08-28T07:07:24.0553035Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+format	Run actions/checkout@v6	2026-08-28T07:07:24.0692706Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+format	Run actions/checkout@v6	2026-08-28T07:07:24.0827859Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+format	Run actions/checkout@v6	2026-08-28T07:07:24.0972417Z ##[endgroup]
+format	Run actions/checkout@v6	2026-08-28T07:07:24.0998196Z [command]/usr/bin/git log -1 --format=%H
+format	Run actions/checkout@v6	2026-08-28T07:07:24.1014740Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+format	Setup Bun	﻿2026-08-28T07:07:24.1213983Z ##[group]Run oven-sh/setup-bun@v2
+format	Setup Bun	2026-08-28T07:07:24.1214303Z with:
+format	Setup Bun	2026-08-28T07:07:24.1214574Z   bun-version: latest
+format	Setup Bun	2026-08-28T07:07:24.1214839Z   no-cache: false
+format	Setup Bun	2026-08-28T07:07:24.1217157Z   token: ***
+format	Setup Bun	2026-08-28T07:07:24.1217497Z env:
+format	Setup Bun	2026-08-28T07:07:24.1217763Z   NPM_TOKEN: 
+format	Setup Bun	2026-08-28T07:07:24.1219922Z   GITHUB_TOKEN: ***
+format	Setup Bun	2026-08-28T07:07:24.1220242Z ##[endgroup]
+format	Setup Bun	2026-08-28T07:07:24.6157711Z Downloading a new version of Bun: https://github.com/oven-sh/bun/releases/download/bun-v1.4.0/bun-linux-x64.zip
+format	Setup Bun	2026-08-28T07:07:24.9691413Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/451f2dec-9721-4332-8f68-54ae44514b48.zip
+format	Setup Bun	2026-08-28T07:07:25.4913627Z [command]/home/runner/.bun/bin/bun --revision
+format	Setup Bun	2026-08-28T07:07:25.4948486Z 1.4.0+34cbb9a40
+format	Check formatting with Prettier	﻿2026-08-28T07:07:25.5065271Z ##[group]Run npx prettier --check .
+format	Check formatting with Prettier	2026-08-28T07:07:25.5065798Z ^[[36;1mnpx prettier --check .^[[0m
+format	Check formatting with Prettier	2026-08-28T07:07:25.5092783Z shell: /usr/bin/bash -e {0}
+format	Check formatting with Prettier	2026-08-28T07:07:25.5093131Z env:
+format	Check formatting with Prettier	2026-08-28T07:07:25.5093411Z   NPM_TOKEN: 
+format	Check formatting with Prettier	2026-08-28T07:07:25.5095328Z   GITHUB_TOKEN: ***
+format	Check formatting with Prettier	2026-08-28T07:07:25.5095563Z ##[endgroup]
+format	Check formatting with Prettier	2026-08-28T07:07:40.6458060Z npm warn exec The following package was not found and will be installed: prettier@3.9.6
+format	Check formatting with Prettier	2026-08-28T07:07:40.9898365Z Checking formatting...
+format	Check formatting with Prettier	2026-08-28T07:07:41.4214611Z All matched files use Prettier code style!
+format	Post Setup Bun	﻿2026-08-28T07:07:41.4576824Z Post job cleanup.
+format	Post Run actions/checkout@v6	﻿2026-08-28T07:07:41.5872041Z Post job cleanup.
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.6555198Z [command]/usr/bin/git version
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.6586144Z git version 2.55.0
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.6615252Z Temporarily overriding HOME='/home/runner/work/_temp/e9e38871-0cc1-49ce-99cc-87465fa0e31d' before making global git config changes
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.6616107Z Adding repository directory to the temporary git global config as a safe directory
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.6621147Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.6645483Z Removing SSH command configuration
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.6651182Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.6676146Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.6856685Z Removing HTTP extra header
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.6861272Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.6885813Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7054543Z Removing includeIf entries pointing to credentials config files
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7058526Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7077752Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7078446Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7079028Z includeif.gitdir:/github/workspace/.git.path
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7079612Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7085267Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7102007Z /home/runner/work/_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7111227Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7137020Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7153319Z /home/runner/work/_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7160887Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7185115Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7201096Z /github/runner_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7209683Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7268624Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7289681Z /github/runner_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7304648Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7322094Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+format	Post Run actions/checkout@v6	2026-08-28T07:07:41.7460863Z Removing credentials config '/home/runner/work/_temp/git-credentials-e70f06ef-d94f-4d3b-9578-ad646ccdd446.config'
+format	Complete job	﻿2026-08-28T07:07:41.7576717Z Cleaning up orphan processes
+lint	Set up job	﻿2026-08-28T07:07:46.1292261Z Current runner version: '2.336.0'
+lint	Set up job	2026-08-28T07:07:46.1332032Z ##[group]Runner Image Provisioner
+lint	Set up job	2026-08-28T07:07:46.1333904Z Hosted Compute Agent
+lint	Set up job	2026-08-28T07:07:46.1335008Z Version: 20260819.586
+lint	Set up job	2026-08-28T07:07:46.1336632Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+lint	Set up job	2026-08-28T07:07:46.1338096Z Build Date: 2026-08-18T23:20:18Z
+lint	Set up job	2026-08-28T07:07:46.1339482Z Worker ID: {776c43f4-46b0-4191-964a-8589b001c170}
+lint	Set up job	2026-08-28T07:07:46.1340803Z Azure Region: eastus
+lint	Set up job	2026-08-28T07:07:46.1341843Z ##[endgroup]
+lint	Set up job	2026-08-28T07:07:46.1344390Z ##[group]Operating System
+lint	Set up job	2026-08-28T07:07:46.1345548Z Ubuntu
+lint	Set up job	2026-08-28T07:07:46.1346786Z 24.04.4
+lint	Set up job	2026-08-28T07:07:46.1347749Z LTS
+lint	Set up job	2026-08-28T07:07:46.1348819Z ##[endgroup]
+lint	Set up job	2026-08-28T07:07:46.1349857Z ##[group]Runner Image
+lint	Set up job	2026-08-28T07:07:46.1351168Z Image: ubuntu-24.04
+lint	Set up job	2026-08-28T07:07:46.1352358Z Version: 20260823.283.1
+lint	Set up job	2026-08-28T07:07:46.1354376Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+lint	Set up job	2026-08-28T07:07:46.1357928Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+lint	Set up job	2026-08-28T07:07:46.1359858Z ##[endgroup]
+lint	Set up job	2026-08-28T07:07:46.1365757Z ##[group]GITHUB_TOKEN Permissions
+lint	Set up job	2026-08-28T07:07:46.1369773Z Actions: write
+lint	Set up job	2026-08-28T07:07:46.1370886Z ArtifactMetadata: write
+lint	Set up job	2026-08-28T07:07:46.1372114Z Attestations: write
+lint	Set up job	2026-08-28T07:07:46.1373166Z Checks: write
+lint	Set up job	2026-08-28T07:07:46.1374155Z CodeQuality: write
+lint	Set up job	2026-08-28T07:07:46.1375310Z Contents: write
+lint	Set up job	2026-08-28T07:07:46.1376542Z CopilotRequests: write
+lint	Set up job	2026-08-28T07:07:46.1377636Z Deployments: write
+lint	Set up job	2026-08-28T07:07:46.1378652Z Discussions: write
+lint	Set up job	2026-08-28T07:07:46.1379700Z Drives: write
+lint	Set up job	2026-08-28T07:07:46.1380657Z Issues: write
+lint	Set up job	2026-08-28T07:07:46.1381594Z Metadata: read
+lint	Set up job	2026-08-28T07:07:46.1382937Z Models: read
+lint	Set up job	2026-08-28T07:07:46.1383981Z Packages: write
+lint	Set up job	2026-08-28T07:07:46.1385064Z Pages: write
+lint	Set up job	2026-08-28T07:07:46.1386321Z PullRequests: write
+lint	Set up job	2026-08-28T07:07:46.1387434Z RepositoryProjects: write
+lint	Set up job	2026-08-28T07:07:46.1388805Z SecurityEvents: write
+lint	Set up job	2026-08-28T07:07:46.1389861Z Statuses: write
+lint	Set up job	2026-08-28T07:07:46.1391014Z VulnerabilityAlerts: read
+lint	Set up job	2026-08-28T07:07:46.1392122Z ##[endgroup]
+lint	Set up job	2026-08-28T07:07:46.1395203Z Secret source: Actions
+lint	Set up job	2026-08-28T07:07:46.1397728Z Prepare workflow directory
+lint	Set up job	2026-08-28T07:07:46.2209477Z Prepare all required actions
+lint	Set up job	2026-08-28T07:07:46.2289361Z Getting action download info
+lint	Set up job	2026-08-28T07:07:46.3875078Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+lint	Set up job	2026-08-28T07:07:46.5250977Z Download action repository 'oven-sh/setup-bun@v2' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+lint	Set up job	2026-08-28T07:07:46.7522335Z Complete job name: lint
+lint	Run actions/checkout@v6	﻿2026-08-28T07:07:46.8224382Z ##[group]Run actions/checkout@v6
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8225359Z with:
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8225801Z   submodules: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8226564Z   repository: link-foundation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8230639Z   token: ***
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8231093Z   ssh-strict: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8231571Z   ssh-user: git
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8232024Z   persist-credentials: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8232525Z   clean: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8232981Z   sparse-checkout-cone-mode: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8233521Z   fetch-depth: 1
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8233972Z   fetch-tags: false
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8234426Z   show-progress: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8234889Z   lfs: false
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8235328Z   set-safe-directory: true
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8235862Z   allow-unsafe-pr-checkout: false
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8237131Z env:
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8237577Z   NPM_TOKEN: 
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8241451Z   GITHUB_TOKEN: ***
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.8241912Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9214123Z Syncing repository: link-foundation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9217518Z ##[group]Getting Git version info
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9218975Z Working directory is '/home/runner/work/links-notation/links-notation'
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9220868Z [command]/usr/bin/git version
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9259491Z git version 2.55.0
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9314998Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9331300Z Temporarily overriding HOME='/home/runner/work/_temp/9a150771-10ef-4acd-b761-39e3c69200b3' before making global git config changes
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9348345Z Adding repository directory to the temporary git global config as a safe directory
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9350457Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9396689Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9420627Z ##[group]Determining repository object format
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9423259Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9424413Z ##[group]Initializing the repository
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9435224Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9530740Z hint: Using 'master' as the name for the initial branch. This default branch name
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9532593Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9535296Z hint: to use in all of your new repositories, which will suppress this warning,
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9536815Z hint: call:
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9537253Z hint:
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9537781Z hint: 	git config --global init.defaultBranch <name>
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9538409Z hint:
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9539358Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9540581Z hint: 'development'. The just-created branch can be renamed via this command:
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9541350Z hint:
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9541769Z hint: 	git branch -m <name>
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9542293Z hint:
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9542932Z hint: Disable this message with "git config set advice.defaultBranchName false"
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9544224Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9547107Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9594828Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9595650Z ##[group]Disabling automatic garbage collection
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9599585Z [command]/usr/bin/git config --local gc.auto 0
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9642073Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9643692Z ##[group]Setting up auth
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9644614Z Removing SSH command configuration
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9646173Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+lint	Run actions/checkout@v6	2026-08-28T07:07:46.9678519Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0042190Z Removing HTTP extra header
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0045507Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0082700Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0320077Z Removing includeIf entries pointing to credentials config files
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0327244Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0365732Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0613299Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0641369Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0678853Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0717350Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0754589Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0795341Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0797212Z ##[group]Fetching the repository
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.0804744Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4958f3cf8012ba9e67f19309b9c58984f7ce106a:refs/remotes/origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4215459Z From https://github.com/link-foundation/links-notation
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4217403Z  * [new ref]         4958f3cf8012ba9e67f19309b9c58984f7ce106a -> origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4228138Z [command]/usr/bin/git branch --list --remote origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4257266Z   origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4267801Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4294909Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4300419Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4301909Z ##[group]Determining the checkout info
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4303636Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4305090Z [command]/usr/bin/git sparse-checkout disable
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4355059Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4387637Z ##[group]Checking out the ref
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4391461Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4655962Z Switched to a new branch 'main'
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4661833Z branch 'main' set up to track 'origin/main'.
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4669266Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4674974Z ##[group]Setting up auth for fetching submodules
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4678849Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4718854Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4752286Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4788432Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4831152Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4863068Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4865011Z ##[group]Fetching submodules
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.4866735Z [command]/usr/bin/git submodule sync
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.5096527Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.5332589Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.5556666Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.5557940Z ##[group]Persisting credentials for submodules
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.5564435Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.5798062Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.6029339Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.6262595Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.6542818Z ##[endgroup]
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.6579135Z [command]/usr/bin/git log -1 --format=%H
+lint	Run actions/checkout@v6	2026-08-28T07:07:47.6610201Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+lint	Setup Bun	﻿2026-08-28T07:07:47.6932361Z ##[group]Run oven-sh/setup-bun@v2
+lint	Setup Bun	2026-08-28T07:07:47.6933170Z with:
+lint	Setup Bun	2026-08-28T07:07:47.6933713Z   bun-version: latest
+lint	Setup Bun	2026-08-28T07:07:47.7006738Z   no-cache: false
+lint	Setup Bun	2026-08-28T07:07:47.7012535Z   token: ***
+lint	Setup Bun	2026-08-28T07:07:47.7013091Z env:
+lint	Setup Bun	2026-08-28T07:07:47.7013610Z   NPM_TOKEN: 
+lint	Setup Bun	2026-08-28T07:07:47.7019376Z   GITHUB_TOKEN: ***
+lint	Setup Bun	2026-08-28T07:07:47.7020051Z ##[endgroup]
+lint	Setup Bun	2026-08-28T07:07:48.1907457Z Downloading a new version of Bun: https://github.com/oven-sh/bun/releases/download/bun-v1.4.0/bun-linux-x64.zip
+lint	Setup Bun	2026-08-28T07:07:48.4567207Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/19829d8a-c87d-4ac6-84ca-b31f1e03cb60.zip
+lint	Setup Bun	2026-08-28T07:07:49.0675111Z [command]/home/runner/.bun/bin/bun --revision
+lint	Setup Bun	2026-08-28T07:07:49.0727749Z 1.4.0+34cbb9a40
+lint	Install Dependencies	﻿2026-08-28T07:07:49.0896480Z ##[group]Run bun install
+lint	Install Dependencies	2026-08-28T07:07:49.0896857Z ^[[36;1mbun install^[[0m
+lint	Install Dependencies	2026-08-28T07:07:49.0939654Z shell: /usr/bin/bash -e {0}
+lint	Install Dependencies	2026-08-28T07:07:49.0939974Z env:
+lint	Install Dependencies	2026-08-28T07:07:49.0940173Z   NPM_TOKEN: 
+lint	Install Dependencies	2026-08-28T07:07:49.0942976Z   GITHUB_TOKEN: ***
+lint	Install Dependencies	2026-08-28T07:07:49.0943205Z ##[endgroup]
+lint	Install Dependencies	2026-08-28T07:07:49.1042095Z bun install v1.4.0 (34cbb9a40)
+lint	Install Dependencies	2026-08-28T07:07:49.3406397Z 
+lint	Install Dependencies	2026-08-28T07:07:49.3406602Z + bun-types@1.3.14
+lint	Install Dependencies	2026-08-28T07:07:49.3407133Z + eslint@10.8.1
+lint	Install Dependencies	2026-08-28T07:07:49.3407401Z + peggy@5.1.0
+lint	Install Dependencies	2026-08-28T07:07:49.3407637Z + typescript@7.0.2
+lint	Install Dependencies	2026-08-28T07:07:49.3407769Z 
+lint	Install Dependencies	2026-08-28T07:07:49.3407889Z 78 packages installed [237.00ms]
+lint	Lint	﻿2026-08-28T07:07:49.3478725Z ##[group]Run bun run lint
+lint	Lint	2026-08-28T07:07:49.3479048Z ^[[36;1mbun run lint^[[0m
+lint	Lint	2026-08-28T07:07:49.3518126Z shell: /usr/bin/bash -e {0}
+lint	Lint	2026-08-28T07:07:49.3518408Z env:
+lint	Lint	2026-08-28T07:07:49.3518603Z   NPM_TOKEN: 
+lint	Lint	2026-08-28T07:07:49.3521220Z   GITHUB_TOKEN: ***
+lint	Lint	2026-08-28T07:07:49.3521454Z ##[endgroup]
+lint	Lint	2026-08-28T07:07:49.3601879Z $ eslint src/ tests/
+lint	Post Setup Bun	﻿2026-08-28T07:07:50.0050512Z Post job cleanup.
+lint	Post Run actions/checkout@v6	﻿2026-08-28T07:07:50.1898432Z Post job cleanup.
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.2761749Z [command]/usr/bin/git version
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.2805251Z git version 2.55.0
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.2846629Z Temporarily overriding HOME='/home/runner/work/_temp/c5e3f47e-d4b9-4278-935e-b51280c96ee8' before making global git config changes
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.2848072Z Adding repository directory to the temporary git global config as a safe directory
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.2852312Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.2886438Z Removing SSH command configuration
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.2893885Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.2931398Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3246854Z Removing HTTP extra header
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3252964Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3328642Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3596522Z Removing includeIf entries pointing to credentials config files
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3604910Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3637337Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3646293Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3650350Z includeif.gitdir:/github/workspace/.git.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3651684Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3654149Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3676694Z /home/runner/work/_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3693069Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3742981Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3787024Z /home/runner/work/_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3798927Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3860074Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3899356Z /github/runner_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3957778Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3967943Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3981716Z /github/runner_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.3991641Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.4035423Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+lint	Post Run actions/checkout@v6	2026-08-28T07:07:50.4261838Z Removing credentials config '/home/runner/work/_temp/git-credentials-f2543c8b-bcb8-424d-885d-499fb3d2d12b.config'
+lint	Complete job	﻿2026-08-28T07:07:50.4404005Z Cleaning up orphan processes
+test	Set up job	﻿2026-08-28T07:07:54.5379424Z Current runner version: '2.336.0'
+test	Set up job	2026-08-28T07:07:54.5408419Z ##[group]Runner Image Provisioner
+test	Set up job	2026-08-28T07:07:54.5409437Z Hosted Compute Agent
+test	Set up job	2026-08-28T07:07:54.5410231Z Version: 20260819.586
+test	Set up job	2026-08-28T07:07:54.5411029Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+test	Set up job	2026-08-28T07:07:54.5411969Z Build Date: 2026-08-18T23:20:18Z
+test	Set up job	2026-08-28T07:07:54.5412936Z Worker ID: {ac417f1c-10e6-4121-895b-460757e2975f}
+test	Set up job	2026-08-28T07:07:54.5413839Z Azure Region: eastus
+test	Set up job	2026-08-28T07:07:54.5414611Z ##[endgroup]
+test	Set up job	2026-08-28T07:07:54.5416235Z ##[group]Operating System
+test	Set up job	2026-08-28T07:07:54.5416993Z Ubuntu
+test	Set up job	2026-08-28T07:07:54.5417743Z 24.04.4
+test	Set up job	2026-08-28T07:07:54.5418553Z LTS
+test	Set up job	2026-08-28T07:07:54.5419221Z ##[endgroup]
+test	Set up job	2026-08-28T07:07:54.5419902Z ##[group]Runner Image
+test	Set up job	2026-08-28T07:07:54.5420649Z Image: ubuntu-24.04
+test	Set up job	2026-08-28T07:07:54.5421425Z Version: 20260823.283.1
+test	Set up job	2026-08-28T07:07:54.5422761Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+test	Set up job	2026-08-28T07:07:54.5425052Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+test	Set up job	2026-08-28T07:07:54.5426300Z ##[endgroup]
+test	Set up job	2026-08-28T07:07:54.5430603Z ##[group]GITHUB_TOKEN Permissions
+test	Set up job	2026-08-28T07:07:54.5433138Z Actions: write
+test	Set up job	2026-08-28T07:07:54.5434012Z ArtifactMetadata: write
+test	Set up job	2026-08-28T07:07:54.5434816Z Attestations: write
+test	Set up job	2026-08-28T07:07:54.5435694Z Checks: write
+test	Set up job	2026-08-28T07:07:54.5436416Z CodeQuality: write
+test	Set up job	2026-08-28T07:07:54.5437115Z Contents: write
+test	Set up job	2026-08-28T07:07:54.5437909Z CopilotRequests: write
+test	Set up job	2026-08-28T07:07:54.5438957Z Deployments: write
+test	Set up job	2026-08-28T07:07:54.5439717Z Discussions: write
+test	Set up job	2026-08-28T07:07:54.5440400Z Drives: write
+test	Set up job	2026-08-28T07:07:54.5441049Z Issues: write
+test	Set up job	2026-08-28T07:07:54.5441782Z Metadata: read
+test	Set up job	2026-08-28T07:07:54.5442574Z Models: read
+test	Set up job	2026-08-28T07:07:54.5443228Z Packages: write
+test	Set up job	2026-08-28T07:07:54.5444018Z Pages: write
+test	Set up job	2026-08-28T07:07:54.5444678Z PullRequests: write
+test	Set up job	2026-08-28T07:07:54.5445569Z RepositoryProjects: write
+test	Set up job	2026-08-28T07:07:54.5446365Z SecurityEvents: write
+test	Set up job	2026-08-28T07:07:54.5447041Z Statuses: write
+test	Set up job	2026-08-28T07:07:54.5447823Z VulnerabilityAlerts: read
+test	Set up job	2026-08-28T07:07:54.5448669Z ##[endgroup]
+test	Set up job	2026-08-28T07:07:54.5451032Z Secret source: Actions
+test	Set up job	2026-08-28T07:07:54.5452719Z Prepare workflow directory
+test	Set up job	2026-08-28T07:07:54.6025081Z Prepare all required actions
+test	Set up job	2026-08-28T07:07:54.6081350Z Getting action download info
+test	Set up job	2026-08-28T07:07:54.7754872Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+test	Set up job	2026-08-28T07:07:55.0352162Z Download action repository 'oven-sh/setup-bun@v2' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+test	Set up job	2026-08-28T07:07:55.2250984Z Complete job name: test
+test	Run actions/checkout@v6	﻿2026-08-28T07:07:55.2781504Z ##[group]Run actions/checkout@v6
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2782175Z with:
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2782518Z   submodules: true
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2782920Z   repository: link-foundation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2786163Z   token: ***
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2786513Z   ssh-strict: true
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2786885Z   ssh-user: git
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2787233Z   persist-credentials: true
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2787615Z   clean: true
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2787970Z   sparse-checkout-cone-mode: true
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2788532Z   fetch-depth: 1
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2788877Z   fetch-tags: false
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2789223Z   show-progress: true
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2789571Z   lfs: false
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2789901Z   set-safe-directory: true
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2790293Z   allow-unsafe-pr-checkout: false
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2790846Z env:
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2791162Z   NPM_TOKEN: 
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2794266Z   GITHUB_TOKEN: ***
+test	Run actions/checkout@v6	2026-08-28T07:07:55.2794628Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3628068Z Syncing repository: link-foundation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3630454Z ##[group]Getting Git version info
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3631411Z Working directory is '/home/runner/work/links-notation/links-notation'
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3632719Z [command]/usr/bin/git version
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3812862Z git version 2.55.0
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3831503Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3843534Z Temporarily overriding HOME='/home/runner/work/_temp/0bb6267f-e582-4123-8ea9-1c73a36d2eea' before making global git config changes
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3845283Z Adding repository directory to the temporary git global config as a safe directory
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3848494Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3898836Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3902805Z ##[group]Determining repository object format
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3908365Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3909935Z ##[group]Initializing the repository
+test	Run actions/checkout@v6	2026-08-28T07:07:55.3910875Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4001753Z hint: Using 'master' as the name for the initial branch. This default branch name
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4003064Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4003849Z hint: to use in all of your new repositories, which will suppress this warning,
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4004444Z hint: call:
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4004769Z hint:
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4005190Z hint: 	git config --global init.defaultBranch <name>
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4005677Z hint:
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4006131Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4006844Z hint: 'development'. The just-created branch can be renamed via this command:
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4007415Z hint:
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4007742Z hint: 	git branch -m <name>
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4008109Z hint:
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4008944Z hint: Disable this message with "git config set advice.defaultBranchName false"
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4011562Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4021602Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4072773Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4073560Z ##[group]Disabling automatic garbage collection
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4075803Z [command]/usr/bin/git config --local gc.auto 0
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4102509Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4103275Z ##[group]Setting up auth
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4103737Z Removing SSH command configuration
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4109657Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4139936Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4453001Z Removing HTTP extra header
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4458945Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4491717Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4676676Z Removing includeIf entries pointing to credentials config files
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4681354Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4711119Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4936178Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4947651Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Run actions/checkout@v6	2026-08-28T07:07:55.4979143Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Run actions/checkout@v6	2026-08-28T07:07:55.5014870Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Run actions/checkout@v6	2026-08-28T07:07:55.5046296Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Run actions/checkout@v6	2026-08-28T07:07:55.5095709Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:55.5096887Z ##[group]Fetching the repository
+test	Run actions/checkout@v6	2026-08-28T07:07:55.5099555Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4958f3cf8012ba9e67f19309b9c58984f7ce106a:refs/remotes/origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9414623Z From https://github.com/link-foundation/links-notation
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9416501Z  * [new ref]         4958f3cf8012ba9e67f19309b9c58984f7ce106a -> origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9423166Z [command]/usr/bin/git branch --list --remote origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9447249Z   origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9454178Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9476956Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9480550Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9481615Z ##[group]Determining the checkout info
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9482868Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9485091Z [command]/usr/bin/git sparse-checkout disable
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9528750Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9556287Z ##[group]Checking out the ref
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9557495Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9766853Z Switched to a new branch 'main'
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9771747Z branch 'main' set up to track 'origin/main'.
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9779451Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9781672Z ##[group]Setting up auth for fetching submodules
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9785348Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9817587Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9845370Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9874704Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9910705Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9937053Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9939034Z ##[group]Fetching submodules
+test	Run actions/checkout@v6	2026-08-28T07:07:55.9940285Z [command]/usr/bin/git submodule sync
+test	Run actions/checkout@v6	2026-08-28T07:07:56.0137584Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+test	Run actions/checkout@v6	2026-08-28T07:07:56.0340149Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+test	Run actions/checkout@v6	2026-08-28T07:07:56.0530939Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:56.0533164Z ##[group]Persisting credentials for submodules
+test	Run actions/checkout@v6	2026-08-28T07:07:56.0538034Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+test	Run actions/checkout@v6	2026-08-28T07:07:56.0733337Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Run actions/checkout@v6	2026-08-28T07:07:56.0931905Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+test	Run actions/checkout@v6	2026-08-28T07:07:56.1126522Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+test	Run actions/checkout@v6	2026-08-28T07:07:56.1325757Z ##[endgroup]
+test	Run actions/checkout@v6	2026-08-28T07:07:56.1361664Z [command]/usr/bin/git log -1 --format=%H
+test	Run actions/checkout@v6	2026-08-28T07:07:56.1385224Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+test	Setup Bun	﻿2026-08-28T07:07:56.1722881Z ##[group]Run oven-sh/setup-bun@v2
+test	Setup Bun	2026-08-28T07:07:56.1724192Z with:
+test	Setup Bun	2026-08-28T07:07:56.1725179Z   bun-version: latest
+test	Setup Bun	2026-08-28T07:07:56.1726301Z   no-cache: false
+test	Setup Bun	2026-08-28T07:07:56.1733507Z   token: ***
+test	Setup Bun	2026-08-28T07:07:56.1734258Z env:
+test	Setup Bun	2026-08-28T07:07:56.1734942Z   NPM_TOKEN: 
+test	Setup Bun	2026-08-28T07:07:56.1741578Z   GITHUB_TOKEN: ***
+test	Setup Bun	2026-08-28T07:07:56.1742328Z ##[endgroup]
+test	Setup Bun	2026-08-28T07:07:56.6420391Z Downloading a new version of Bun: https://github.com/oven-sh/bun/releases/download/bun-v1.4.0/bun-linux-x64.zip
+test	Setup Bun	2026-08-28T07:07:56.7923163Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/45b8f479-2db3-4c1f-943e-64a8b7aad8bf.zip
+test	Setup Bun	2026-08-28T07:07:57.6258982Z [command]/home/runner/.bun/bin/bun --revision
+test	Setup Bun	2026-08-28T07:07:57.6299052Z 1.4.0+34cbb9a40
+test	Install Dependencies	﻿2026-08-28T07:07:57.6427521Z ##[group]Run bun install
+test	Install Dependencies	2026-08-28T07:07:57.6427868Z ^[[36;1mbun install^[[0m
+test	Install Dependencies	2026-08-28T07:07:57.6466673Z shell: /usr/bin/bash -e {0}
+test	Install Dependencies	2026-08-28T07:07:57.6466939Z env:
+test	Install Dependencies	2026-08-28T07:07:57.6467105Z   NPM_TOKEN: 
+test	Install Dependencies	2026-08-28T07:07:57.6469555Z   GITHUB_TOKEN: ***
+test	Install Dependencies	2026-08-28T07:07:57.6469749Z ##[endgroup]
+test	Install Dependencies	2026-08-28T07:07:57.6554023Z bun install v1.4.0 (34cbb9a40)
+test	Install Dependencies	2026-08-28T07:07:57.8407097Z 
+test	Install Dependencies	2026-08-28T07:07:57.8408892Z + bun-types@1.3.14
+test	Install Dependencies	2026-08-28T07:07:57.8409180Z + eslint@10.8.1
+test	Install Dependencies	2026-08-28T07:07:57.8409533Z + peggy@5.1.0
+test	Install Dependencies	2026-08-28T07:07:57.8409727Z + typescript@7.0.2
+test	Install Dependencies	2026-08-28T07:07:57.8409850Z 
+test	Install Dependencies	2026-08-28T07:07:57.8410017Z 78 packages installed [186.00ms]
+test	Build	﻿2026-08-28T07:07:57.8473123Z ##[group]Run bun run build
+test	Build	2026-08-28T07:07:57.8473367Z ^[[36;1mbun run build^[[0m
+test	Build	2026-08-28T07:07:57.8507788Z shell: /usr/bin/bash -e {0}
+test	Build	2026-08-28T07:07:57.8508014Z env:
+test	Build	2026-08-28T07:07:57.8508177Z   NPM_TOKEN: 
+test	Build	2026-08-28T07:07:57.8510590Z   GITHUB_TOKEN: ***
+test	Build	2026-08-28T07:07:57.8510784Z ##[endgroup]
+test	Build	2026-08-28T07:07:57.8578668Z $ bun run build:grammar && bun build src/index.js --outdir=dist --target=node
+test	Build	2026-08-28T07:07:57.8608610Z $ peggy --format es -o src/parser-generated.js src/grammar.pegjs
+test	Build	2026-08-28T07:07:58.1659273Z Bundled 7 modules in 7ms
+test	Build	2026-08-28T07:07:58.1660076Z 
+test	Build	2026-08-28T07:07:58.1660353Z   index.js  56.42 KB  (entry point)
+test	Build	2026-08-28T07:07:58.1660610Z 
+test	Test	﻿2026-08-28T07:07:58.1696587Z ##[group]Run bun test
+test	Test	2026-08-28T07:07:58.1696805Z ^[[36;1mbun test^[[0m
+test	Test	2026-08-28T07:07:58.1731074Z shell: /usr/bin/bash -e {0}
+test	Test	2026-08-28T07:07:58.1731300Z env:
+test	Test	2026-08-28T07:07:58.1731463Z   NPM_TOKEN: 
+test	Test	2026-08-28T07:07:58.1733623Z   GITHUB_TOKEN: ***
+test	Test	2026-08-28T07:07:58.1733813Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.1795469Z bun test v1.4.0 (34cbb9a40)
+test	Test	2026-08-28T07:07:58.1825240Z 
+test	Test	2026-08-28T07:07:58.1825836Z ##[group]tests/MultilineParser.test.js:
+test	Test	2026-08-28T07:07:58.1887698Z (pass) Two links [2.34ms]
+test	Test	2026-08-28T07:07:58.1903641Z (pass) Parse and stringify [0.90ms]
+test	Test	2026-08-28T07:07:58.1908920Z (pass) Parse and stringify test 2 [0.46ms]
+test	Test	2026-08-28T07:07:58.1909649Z (pass) Parse and stringify with less parentheses [0.36ms]
+test	Test	2026-08-28T07:07:58.1911112Z (pass) Duplicate identifiers [0.24ms]
+test	Test	2026-08-28T07:07:58.1928218Z (pass) Test complex structure [0.49ms]
+test	Test	2026-08-28T07:07:58.1929003Z (pass) Test mixed formats [0.27ms]
+test	Test	2026-08-28T07:07:58.1929601Z (pass) Test multiline with id [0.07ms]
+test	Test	2026-08-28T07:07:58.1930313Z (pass) Test multiple top level elements [0.12ms]
+test	Test	2026-08-28T07:07:58.1931019Z (pass) Test multiline simple links [0.11ms]
+test	Test	2026-08-28T07:07:58.1931563Z (pass) Test indented children [0.06ms]
+test	Test	2026-08-28T07:07:58.1931949Z 
+test	Test	2026-08-28T07:07:58.1932472Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.1932772Z 
+test	Test	2026-08-28T07:07:58.1933285Z ##[group]tests/MultilineQuotedString.test.js:
+test	Test	2026-08-28T07:07:58.1933958Z (pass) TestMultilineDoubleQuotedReference [1.11ms]
+test	Test	2026-08-28T07:07:58.1934590Z (pass) TestSimpleMultilineDoubleQuoted [0.17ms]
+test	Test	2026-08-28T07:07:58.1936002Z (pass) TestSimpleMultilineSingleQuoted [0.18ms]
+test	Test	2026-08-28T07:07:58.1937985Z (pass) TestMultilineQuotedAsId [0.18ms]
+test	Test	2026-08-28T07:07:58.1938443Z 
+test	Test	2026-08-28T07:07:58.1944104Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.1944747Z 
+test	Test	2026-08-28T07:07:58.1945267Z ##[group]tests/ApiTests.test.js:
+test	Test	2026-08-28T07:07:58.1951082Z (pass) test_is_ref [0.04ms]
+test	Test	2026-08-28T07:07:58.1951529Z (pass) test_is_link [0.03ms]
+test	Test	2026-08-28T07:07:58.1951945Z (pass) test_is_ref equivalent [0.01ms]
+test	Test	2026-08-28T07:07:58.1952408Z (pass) test_is_link equivalent [0.02ms]
+test	Test	2026-08-28T07:07:58.1952849Z (pass) test_empty_link [0.02ms]
+test	Test	2026-08-28T07:07:58.1953299Z (pass) test_simple_link [0.13ms]
+test	Test	2026-08-28T07:07:58.1953779Z (pass) test_link_with_source_target [0.10ms]
+test	Test	2026-08-28T07:07:58.1954649Z (pass) test_link_with_source_type_target [0.09ms]
+test	Test	2026-08-28T07:07:58.1955684Z (pass) test_single_line_format [0.10ms]
+test	Test	2026-08-28T07:07:58.1963063Z (pass) test_quoted_references [0.17ms]
+test	Test	2026-08-28T07:07:58.1963680Z (pass) test_quoted_references_parsing [0.20ms]
+test	Test	2026-08-28T07:07:58.1964467Z (pass) test_indented_id_syntax_parsing [0.20ms]
+test	Test	2026-08-28T07:07:58.1965194Z (pass) test_indented_id_syntax_roundtrip [0.31ms]
+test	Test	2026-08-28T07:07:58.1972374Z (pass) test_multiple_indented_id_syntax_parsing [0.23ms]
+test	Test	2026-08-28T07:07:58.1973001Z (pass) test_multiple_indented_id_syntax_roundtrip [0.15ms]
+test	Test	2026-08-28T07:07:58.1973395Z 
+test	Test	2026-08-28T07:07:58.1974376Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.1974534Z 
+test	Test	2026-08-28T07:07:58.1975099Z ##[group]tests/IndentedIdSyntax.test.js:
+test	Test	2026-08-28T07:07:58.1975483Z (pass) Basic indented ID syntax [0.23ms]
+test	Test	2026-08-28T07:07:58.1975771Z (pass) Indented ID syntax with single value [0.11ms]
+test	Test	2026-08-28T07:07:58.1976726Z (pass) Indented ID syntax with multiple values [0.11ms]
+test	Test	2026-08-28T07:07:58.1977794Z (pass) Indented ID syntax with numeric ID [0.11ms]
+test	Test	2026-08-28T07:07:58.1979315Z (pass) Indented ID syntax with quoted ID [0.12ms]
+test	Test	2026-08-28T07:07:58.1985053Z (pass) Multiple indented ID links [0.14ms]
+test	Test	2026-08-28T07:07:58.1985734Z (pass) Mixed indented and regular syntax [0.16ms]
+test	Test	2026-08-28T07:07:58.1992086Z (pass) Unsupported colon-only syntax should fail [0.91ms]
+test	Test	2026-08-28T07:07:58.1993223Z (pass) Indented ID with deeper nesting [0.15ms]
+test	Test	2026-08-28T07:07:58.1994052Z (pass) Empty indented ID should work [0.08ms]
+test	Test	2026-08-28T07:07:58.1999026Z (pass) Equivalence test comprehensive [0.37ms]
+test	Test	2026-08-28T07:07:58.1999534Z 
+test	Test	2026-08-28T07:07:58.2000214Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2000654Z 
+test	Test	2026-08-28T07:07:58.2001524Z ##[group]tests/IndentationConsistency.test.js:
+test	Test	2026-08-28T07:07:58.2004838Z (pass) Indentation Consistency Tests (Issue #135) > Leading spaces vs no leading spaces [0.35ms]
+test	Test	2026-08-28T07:07:58.2011169Z (pass) Indentation Consistency Tests (Issue #135) > two spaces vs four spaces indentation [0.56ms]
+test	Test	2026-08-28T07:07:58.2012858Z (pass) Indentation Consistency Tests (Issue #135) > simple two vs four spaces indentation [0.18ms]
+test	Test	2026-08-28T07:07:58.2014256Z (pass) Indentation Consistency Tests (Issue #135) > three level nesting with different indentation [0.18ms]
+test	Test	2026-08-28T07:07:58.2014805Z 
+test	Test	2026-08-28T07:07:58.2021180Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2021373Z 
+test	Test	2026-08-28T07:07:58.2021714Z ##[group]tests/NestedSelfReference.test.js:
+test	Test	2026-08-28T07:07:58.2044764Z (pass) Nested self-referenced object in pair value [2.52ms]
+test	Test	2026-08-28T07:07:58.2047909Z (pass) Self-reference as direct child works correctly [0.33ms]
+test	Test	2026-08-28T07:07:58.2048414Z 
+test	Test	2026-08-28T07:07:58.2048781Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2048927Z 
+test	Test	2026-08-28T07:07:58.2049290Z ##[group]tests/NestedIndentation.test.js:
+test	Test	2026-08-28T07:07:58.2053360Z (pass) TestParenthesesReproduceRootIndentation [0.22ms]
+test	Test	2026-08-28T07:07:58.2055579Z (pass) TestParenthesesKeepRecordBoundaries [0.22ms]
+test	Test	2026-08-28T07:07:58.2057744Z (pass) TestParenthesesKeepSeveralRecordsSeparate [0.22ms]
+test	Test	2026-08-28T07:07:58.2069120Z (pass) TestParenthesesNestDeeply [0.19ms]
+test	Test	2026-08-28T07:07:58.2069886Z (pass) TestSingleLineParenthesesAreUnchanged [0.29ms]
+test	Test	2026-08-28T07:07:58.2070602Z (pass) TestParenthesesWithIndentedIdSyntax [0.07ms]
+test	Test	2026-08-28T07:07:58.2071258Z (pass) TestEmployeeRecordsKeepTheirFields [0.26ms]
+test	Test	2026-08-28T07:07:58.2071744Z 
+test	Test	2026-08-28T07:07:58.2072270Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2072615Z 
+test	Test	2026-08-28T07:07:58.2073131Z ##[group]tests/SingleLineParser.test.js:
+test	Test	2026-08-28T07:07:58.2076154Z (pass) Single link [0.10ms]
+test	Test	2026-08-28T07:07:58.2098734Z (pass) Triplet single link [0.09ms]
+test	Test	2026-08-28T07:07:58.2111985Z (pass) Bug test 1 [0.07ms]
+test	Test	2026-08-28T07:07:58.2114462Z (pass) Quoted references [0.10ms]
+test	Test	2026-08-28T07:07:58.2114988Z (pass) Quoted references with spaces [0.10ms]
+test	Test	2026-08-28T07:07:58.2115616Z (pass) Parse simple reference [0.06ms]
+test	Test	2026-08-28T07:07:58.2116293Z (pass) Parse reference with colon and values [0.05ms]
+test	Test	2026-08-28T07:07:58.2117603Z (pass) Parse multiline link [0.07ms]
+test	Test	2026-08-28T07:07:58.2118022Z (pass) Parse quoted references [0.11ms]
+test	Test	2026-08-28T07:07:58.2118664Z (pass) Parse values only [0.19ms]
+test	Test	2026-08-28T07:07:58.2119181Z (pass) Test single-line link with id [0.06ms]
+test	Test	2026-08-28T07:07:58.2119587Z (pass) Test multi-line link with id [0.05ms]
+test	Test	2026-08-28T07:07:58.2119977Z (pass) Test link without id (single-line) [0.17ms]
+test	Test	2026-08-28T07:07:58.2120379Z (pass) Test link without id (multi-line) [0.51ms]
+test	Test	2026-08-28T07:07:58.2120767Z (pass) Test singlet link [0.11ms]
+test	Test	2026-08-28T07:07:58.2121111Z (pass) Test value link [0.06ms]
+test	Test	2026-08-28T07:07:58.2121475Z (pass) Parse quoted references values only [0.07ms]
+test	Test	2026-08-28T07:07:58.2121867Z (pass) Test quoted references [0.09ms]
+test	Test	2026-08-28T07:07:58.2122247Z (pass) Test single-quoted references [0.07ms]
+test	Test	2026-08-28T07:07:58.2122619Z (pass) Test nested links [0.09ms]
+test	Test	2026-08-28T07:07:58.2122997Z (pass) Test special characters in quotes [0.21ms]
+test	Test	2026-08-28T07:07:58.2123373Z (pass) Test deeply nested [0.51ms]
+test	Test	2026-08-28T07:07:58.2123736Z (pass) Test hyphenated identifiers [0.07ms]
+test	Test	2026-08-28T07:07:58.2124115Z (pass) Test multiple words in quotes [0.09ms]
+test	Test	2026-08-28T07:07:58.2124479Z (pass) Test simple ref [0.05ms]
+test	Test	2026-08-28T07:07:58.2124857Z (pass) Test simple reference (parser) [0.05ms]
+test	Test	2026-08-28T07:07:58.2125251Z (pass) Test quoted reference (parser) [0.06ms]
+test	Test	2026-08-28T07:07:58.2125630Z (pass) Test singlet link (parser) [0.08ms]
+test	Test	2026-08-28T07:07:58.2125996Z (pass) Test value link (parser) [0.07ms]
+test	Test	2026-08-28T07:07:58.2126407Z (pass) Multiline without id [0.38ms]
+test	Test	2026-08-28T07:07:58.2126779Z (pass) Parse values only standalone colon [0.15ms]
+test	Test	2026-08-28T07:07:58.2127187Z (pass) Quoted references with spaces in link [0.09ms]
+test	Test	2026-08-28T07:07:58.2127763Z (pass) Single line without id [0.09ms]
+test	Test	2026-08-28T07:07:58.2128123Z (pass) Link with id [0.07ms]
+test	Test	2026-08-28T07:07:58.2128781Z (pass) Quoted reference [0.06ms]
+test	Test	2026-08-28T07:07:58.2129180Z (pass) Quoted references with special chars [0.10ms]
+test	Test	2026-08-28T07:07:58.2129556Z (pass) Simple reference [0.05ms]
+test	Test	2026-08-28T07:07:58.2129883Z (pass) Single line link [0.04ms]
+test	Test	2026-08-28T07:07:58.2130139Z (pass) Single line with id [0.04ms]
+test	Test	2026-08-28T07:07:58.2130286Z 
+test	Test	2026-08-28T07:07:58.2130523Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2130616Z 
+test	Test	2026-08-28T07:07:58.2130844Z ##[group]tests/EdgeCaseParser.test.js:
+test	Test	2026-08-28T07:07:58.2131075Z (pass) Empty link [0.10ms]
+test	Test	2026-08-28T07:07:58.2131290Z (pass) Empty link with parentheses [0.04ms]
+test	Test	2026-08-28T07:07:58.2131721Z (pass) Empty link with empty self reference [0.21ms]
+test	Test	2026-08-28T07:07:58.2135284Z (pass) All features [0.60ms]
+test	Test	2026-08-28T07:07:58.2135628Z (pass) Empty document [0.04ms]
+test	Test	2026-08-28T07:07:58.2149142Z (pass) Whitespace only [0.04ms]
+test	Test	2026-08-28T07:07:58.2149463Z (pass) Empty links [0.32ms]
+test	Test	2026-08-28T07:07:58.2149677Z (pass) Singlet links [0.18ms]
+test	Test	2026-08-28T07:07:58.2149877Z (pass) Invalid input [0.43ms]
+test	Test	2026-08-28T07:07:58.2150041Z 
+test	Test	2026-08-28T07:07:58.2150286Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2150498Z 
+test	Test	2026-08-28T07:07:58.2150703Z ##[group]tests/NestedParser.test.js:
+test	Test	2026-08-28T07:07:58.2159054Z (pass) SignificantWhitespaceTest [0.36ms]
+test	Test	2026-08-28T07:07:58.2165399Z (pass) SimpleSignificantWhitespaceTest [0.07ms]
+test	Test	2026-08-28T07:07:58.2165688Z (pass) TwoSpacesSizedWhitespaceTest [0.04ms]
+test	Test	2026-08-28T07:07:58.2165963Z (pass) Parse nested structure with indentation [0.05ms]
+test	Test	2026-08-28T07:07:58.2166378Z (pass) Indentation consistency [0.04ms]
+test	Test	2026-08-28T07:07:58.2166792Z (pass) Indentation-based children [0.05ms]
+test	Test	2026-08-28T07:07:58.2167380Z (pass) Complex indentation [0.04ms]
+test	Test	2026-08-28T07:07:58.2167798Z (pass) Nested links [0.10ms]
+test	Test	2026-08-28T07:07:58.2168198Z (pass) Indentation parser [0.09ms]
+test	Test	2026-08-28T07:07:58.2168777Z (pass) Nested indentation parser [0.08ms]
+test	Test	2026-08-28T07:07:58.2169235Z (pass) Three level nesting roundtrip [0.15ms]
+test	Test	2026-08-28T07:07:58.2169685Z (pass) Deep nested structure roundtrip [0.16ms]
+test	Test	2026-08-28T07:07:58.2170145Z (pass) Multiple nested links roundtrip [0.09ms]
+test	Test	2026-08-28T07:07:58.2170460Z 
+test	Test	2026-08-28T07:07:58.2170896Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2171048Z 
+test	Test	2026-08-28T07:07:58.2171334Z ##[group]tests/LinksGroup.test.js:
+test	Test	2026-08-28T07:07:58.2171658Z (pass) LinksGroup constructor [0.05ms]
+test	Test	2026-08-28T07:07:58.2171996Z (pass) LinksGroup toList flattens structure [0.06ms]
+test	Test	2026-08-28T07:07:58.2172257Z (pass) LinksGroup toString [0.06ms]
+test	Test	2026-08-28T07:07:58.2172623Z (pass) LinksGroup constructor equivalent test [0.03ms]
+test	Test	2026-08-28T07:07:58.2173034Z (pass) LinksGroup append to links list test [0.02ms]
+test	Test	2026-08-28T07:07:58.2173294Z 
+test	Test	2026-08-28T07:07:58.2173600Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2173740Z 
+test	Test	2026-08-28T07:07:58.2174030Z ##[group]tests/Link.test.js:
+test	Test	2026-08-28T07:07:58.2174375Z (pass) Link constructor with id only [0.04ms]
+test	Test	2026-08-28T07:07:58.2174776Z (pass) Link constructor with id and values [0.03ms]
+test	Test	2026-08-28T07:07:58.2175166Z (pass) Link toString with id only [0.02ms]
+test	Test	2026-08-28T07:07:58.2175548Z (pass) Link toString with values only [0.02ms]
+test	Test	2026-08-28T07:07:58.2175928Z (pass) Link toString with id and values [0.01ms]
+test	Test	2026-08-28T07:07:58.2176302Z (pass) Link escapeReference simple
+test	Test	2026-08-28T07:07:58.2176706Z (pass) Link escapeReference with special characters [0.03ms]
+test	Test	2026-08-28T07:07:58.2177122Z (pass) Link simplify [0.04ms]
+test	Test	2026-08-28T07:07:58.2177428Z (pass) Link combine [0.04ms]
+test	Test	2026-08-28T07:07:58.2177718Z (pass) Link equals [0.06ms]
+test	Test	2026-08-28T07:07:58.2177896Z 
+test	Test	2026-08-28T07:07:58.2178178Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2178477Z 
+test	Test	2026-08-28T07:07:58.2178794Z ##[group]tests/MultiQuoteParser.test.js:
+test	Test	2026-08-28T07:07:58.2186306Z (pass) TestBacktickQuotedReference [0.24ms]
+test	Test	2026-08-28T07:07:58.2189029Z (pass) TestBacktickQuotedWithSpaces [0.10ms]
+test	Test	2026-08-28T07:07:58.2189499Z (pass) TestBacktickQuotedMultiline [0.13ms]
+test	Test	2026-08-28T07:07:58.2190294Z (pass) TestBacktickQuotedWithEscapedBacktick [0.13ms]
+test	Test	2026-08-28T07:07:58.2191121Z (pass) TestSingleQuoteWithEscapedSingleQuote [0.09ms]
+test	Test	2026-08-28T07:07:58.2191828Z (pass) TestDoubleQuoteWithEscapedDoubleQuote [0.08ms]
+test	Test	2026-08-28T07:07:58.2193545Z (pass) TestDoubleDoubleQuotes [0.19ms]
+test	Test	2026-08-28T07:07:58.2194574Z (pass) TestDoubleDoubleQuotesWithSingleQuoteInside [0.10ms]
+test	Test	2026-08-28T07:07:58.2196105Z (pass) TestDoubleDoubleQuotesWithEscape [0.15ms]
+test	Test	2026-08-28T07:07:58.2196816Z (pass) TestDoubleSingleQuotes [0.07ms]
+test	Test	2026-08-28T07:07:58.2197394Z (pass) TestDoubleSingleQuotesWithSingleQuoteInside [0.05ms]
+test	Test	2026-08-28T07:07:58.2197871Z (pass) TestDoubleSingleQuotesWithEscape [0.05ms]
+test	Test	2026-08-28T07:07:58.2198996Z (pass) TestDoubleBacktickQuotes [0.10ms]
+test	Test	2026-08-28T07:07:58.2199666Z (pass) TestDoubleBacktickQuotesWithBacktickInside [0.06ms]
+test	Test	2026-08-28T07:07:58.2200292Z (pass) TestDoubleBacktickQuotesWithEscape [0.06ms]
+test	Test	2026-08-28T07:07:58.2200750Z (pass) TestTripleDoubleQuotes [0.04ms]
+test	Test	2026-08-28T07:07:58.2201310Z (pass) TestTripleDoubleQuotesWithDoubleQuoteInside [0.05ms]
+test	Test	2026-08-28T07:07:58.2202174Z (pass) TestTripleDoubleQuotesWithEscape [0.07ms]
+test	Test	2026-08-28T07:07:58.2202669Z (pass) TestTripleSingleQuotes [0.05ms]
+test	Test	2026-08-28T07:07:58.2203363Z (pass) TestTripleSingleQuotesWithDoubleQuoteInside [0.06ms]
+test	Test	2026-08-28T07:07:58.2204216Z (pass) TestTripleSingleQuotesWithEscape [0.08ms]
+test	Test	2026-08-28T07:07:58.2204938Z (pass) TestTripleBacktickQuotes [0.07ms]
+test	Test	2026-08-28T07:07:58.2205778Z (pass) TestTripleBacktickQuotesWithDoubleBacktickInside [0.06ms]
+test	Test	2026-08-28T07:07:58.2206596Z (pass) TestTripleBacktickQuotesWithEscape [0.09ms]
+test	Test	2026-08-28T07:07:58.2207521Z (pass) TestQuadrupleDoubleQuotes [0.08ms]
+test	Test	2026-08-28T07:07:58.2208228Z (pass) TestQuadrupleDoubleQuotesWithTripleQuoteInside [0.07ms]
+test	Test	2026-08-28T07:07:58.2209471Z (pass) TestQuadrupleDoubleQuotesWithEscape [0.11ms]
+test	Test	2026-08-28T07:07:58.2210412Z (pass) TestQuadrupleSingleQuotes [0.09ms]
+test	Test	2026-08-28T07:07:58.2211571Z (pass) TestQuadrupleBacktickQuotes [0.10ms]
+test	Test	2026-08-28T07:07:58.2212180Z (pass) TestQuintupleDoubleQuotes [0.07ms]
+test	Test	2026-08-28T07:07:58.2213288Z (pass) TestQuintupleDoubleQuotesWithQuadQuoteInside [0.08ms]
+test	Test	2026-08-28T07:07:58.2219119Z (pass) TestQuintupleDoubleQuotesWithEscape [0.09ms]
+test	Test	2026-08-28T07:07:58.2219441Z (pass) TestQuintupleSingleQuotes [0.07ms]
+test	Test	2026-08-28T07:07:58.2219700Z (pass) TestQuintupleBacktickQuotes [0.07ms]
+test	Test	2026-08-28T07:07:58.2220043Z (pass) TestMixedQuotesInLink [0.08ms]
+test	Test	2026-08-28T07:07:58.2220316Z (pass) TestBacktickAsIdInLink [0.05ms]
+test	Test	2026-08-28T07:07:58.2220546Z (pass) TestCodeBlockLikeContent [0.05ms]
+test	Test	2026-08-28T07:07:58.2229947Z (pass) TestNestedQuotesInMarkdown [1.19ms]
+test	Test	2026-08-28T07:07:58.2230586Z (pass) TestSQLWithQuotes [0.13ms]
+test	Test	2026-08-28T07:07:58.2231257Z (pass) TestJSONStringWithQuotes [0.06ms]
+test	Test	2026-08-28T07:07:58.2231927Z (pass) TestEmptySingleQuotedReference [0.05ms]
+test	Test	2026-08-28T07:07:58.2235587Z (pass) TestWhitespacePreservedInQuotes [0.06ms]
+test	Test	2026-08-28T07:07:58.2236018Z (pass) TestMultilineInDoubleDoubleQuotes [0.10ms]
+test	Test	2026-08-28T07:07:58.2236424Z (pass) TestUnlimitedQuotes6 [0.05ms]
+test	Test	2026-08-28T07:07:58.2236778Z (pass) TestUnlimitedQuotes10 [0.07ms]
+test	Test	2026-08-28T07:07:58.2237197Z (pass) TestUnlimitedQuotes6WithInnerQuotes [0.10ms]
+test	Test	2026-08-28T07:07:58.2237599Z (pass) TestUnlimitedSingleQuotes7 [0.07ms]
+test	Test	2026-08-28T07:07:58.2238090Z (pass) TestUnlimitedBackticks8 [0.07ms]
+test	Test	2026-08-28T07:07:58.2238630Z 
+test	Test	2026-08-28T07:07:58.2239220Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2239403Z 
+test	Test	2026-08-28T07:07:58.2239840Z ##[group]tests/FormatConfig.test.js:
+test	Test	2026-08-28T07:07:58.2245856Z (pass) Format config basic [0.04ms]
+test	Test	2026-08-28T07:07:58.2246629Z (pass) Format with line length limit [0.10ms]
+test	Test	2026-08-28T07:07:58.2247236Z (pass) Format with max inline refs [0.05ms]
+test	Test	2026-08-28T07:07:58.2249181Z (pass) Format with consecutive grouping [0.19ms]
+test	Test	2026-08-28T07:07:58.2249660Z (pass) Format config less parentheses [0.04ms]
+test	Test	2026-08-28T07:07:58.2258975Z (pass) Format config custom indent [0.04ms]
+test	Test	2026-08-28T07:07:58.2259663Z (pass) Roundtrip with line length formatting [0.08ms]
+test	Test	2026-08-28T07:07:58.2260360Z (pass) Should indent by length [0.03ms]
+test	Test	2026-08-28T07:07:58.2260732Z (pass) Should indent by ref count [0.02ms]
+test	Test	2026-08-28T07:07:58.2260978Z 
+test	Test	2026-08-28T07:07:58.2261319Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2261471Z 
+test	Test	2026-08-28T07:07:58.2261795Z ##[group]tests/EmptyReference.test.js:
+test	Test	2026-08-28T07:07:58.2262271Z (pass) TestBareDelimiterPairIsTheEmptyReference [0.09ms]
+test	Test	2026-08-28T07:07:58.2262857Z (pass) TestEveryDelimiterStyleYieldsTheSameEmptyReference [0.12ms]
+test	Test	2026-08-28T07:07:58.2263463Z (pass) TestAdjacentEmptyReferencesStaySeparate [0.20ms]
+test	Test	2026-08-28T07:07:58.2264228Z (pass) TestNestedEmptyReferencesParse [0.54ms]
+test	Test	2026-08-28T07:07:58.2267151Z (pass) TestEmptyReferenceIsValidAsAnId [0.30ms]
+test	Test	2026-08-28T07:07:58.2268571Z (pass) TestNQuoteDelimitedBodiesAreUnchanged [0.14ms]
+test	Test	2026-08-28T07:07:58.2279076Z (pass) TestSingleSpaceStillReadsAsASpace [0.06ms]
+test	Test	2026-08-28T07:07:58.2279807Z (pass) TestEmptyReferenceSurvivesARoundTrip [0.62ms]
+test	Test	2026-08-28T07:07:58.2280672Z (pass) TestEmptyReferenceIsWrittenAsADelimiterPair [0.03ms]
+test	Test	2026-08-28T07:07:58.2281242Z 
+test	Test	2026-08-28T07:07:58.2281761Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2282118Z 
+test	Test	2026-08-28T07:07:58.2282662Z ##[group]tests/MixedIndentationModes.test.js:
+test	Test	2026-08-28T07:07:58.2283314Z (pass) Hero example mixed modes [0.31ms]
+test	Test	2026-08-28T07:07:58.2286977Z (pass) Hero example alternative format [0.45ms]
+test	Test	2026-08-28T07:07:58.2294376Z (pass) Hero example equivalence [0.67ms]
+test	Test	2026-08-28T07:07:58.2295046Z (pass) Set context without colon [0.07ms]
+test	Test	2026-08-28T07:07:58.2295724Z (pass) Sequence context with colon [0.08ms]
+test	Test	2026-08-28T07:07:58.2297513Z (pass) Sequence context with complex values [0.20ms]
+test	Test	2026-08-28T07:07:58.2299164Z (pass) Nested set and sequence contexts [0.15ms]
+test	Test	2026-08-28T07:07:58.2300401Z (pass) Deeply nested mixed modes [0.11ms]
+test	Test	2026-08-28T07:07:58.2300658Z 
+test	Test	2026-08-28T07:07:58.2301590Z ##[endgroup]
+test	Test	2026-08-28T07:07:58.2301833Z 
+test	Test	2026-08-28T07:07:58.2302095Z  204 pass
+test	Test	2026-08-28T07:07:58.2302272Z  0 fail
+test	Test	2026-08-28T07:07:58.2302431Z  557 expect() calls
+test	Test	2026-08-28T07:07:58.2302623Z Ran 204 tests across 16 files. [50.00ms]
+test	Post Setup Bun	﻿2026-08-28T07:07:58.2399451Z Post job cleanup.
+test	Post Run actions/checkout@v6	﻿2026-08-28T07:07:58.3817121Z Post job cleanup.
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.4495088Z [command]/usr/bin/git version
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.4529473Z git version 2.55.0
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.4560724Z Temporarily overriding HOME='/home/runner/work/_temp/a74b241f-2c18-474b-b02c-92c08ccd2a65' before making global git config changes
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.4562137Z Adding repository directory to the temporary git global config as a safe directory
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.4565103Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.4593945Z Removing SSH command configuration
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.4600166Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.4630514Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.4836713Z Removing HTTP extra header
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.4841267Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.4872456Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5078680Z Removing includeIf entries pointing to credentials config files
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5085029Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5111918Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5112798Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5113552Z includeif.gitdir:/github/workspace/.git.path
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5114152Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5120067Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5142982Z /home/runner/work/_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5152709Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5188491Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5215239Z /home/runner/work/_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5225246Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5289646Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5311974Z /github/runner_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5318430Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5348154Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5369500Z /github/runner_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.5376984Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.7450155Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Post Run actions/checkout@v6	2026-08-28T07:07:58.7661104Z Removing credentials config '/home/runner/work/_temp/git-credentials-d914c3ef-b4e1-4ab9-b13b-bb44760f0ce5.config'
+test	Complete job	﻿2026-08-28T07:07:58.7814233Z Cleaning up orphan processes
+publishToNpm	Set up job	﻿2026-08-28T07:08:03.9044447Z Current runner version: '2.336.0'
+publishToNpm	Set up job	2026-08-28T07:08:03.9072042Z ##[group]Runner Image Provisioner
+publishToNpm	Set up job	2026-08-28T07:08:03.9073024Z Hosted Compute Agent
+publishToNpm	Set up job	2026-08-28T07:08:03.9073712Z Version: 20260819.586
+publishToNpm	Set up job	2026-08-28T07:08:03.9074405Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+publishToNpm	Set up job	2026-08-28T07:08:03.9075118Z Build Date: 2026-08-18T23:20:18Z
+publishToNpm	Set up job	2026-08-28T07:08:03.9075877Z Worker ID: {a476f03a-9667-4a3e-9611-8977ab101db0}
+publishToNpm	Set up job	2026-08-28T07:08:03.9076600Z Azure Region: westus
+publishToNpm	Set up job	2026-08-28T07:08:03.9077290Z ##[endgroup]
+publishToNpm	Set up job	2026-08-28T07:08:03.9078882Z ##[group]Operating System
+publishToNpm	Set up job	2026-08-28T07:08:03.9079543Z Ubuntu
+publishToNpm	Set up job	2026-08-28T07:08:03.9080147Z 24.04.4
+publishToNpm	Set up job	2026-08-28T07:08:03.9080709Z LTS
+publishToNpm	Set up job	2026-08-28T07:08:03.9081638Z ##[endgroup]
+publishToNpm	Set up job	2026-08-28T07:08:03.9082315Z ##[group]Runner Image
+publishToNpm	Set up job	2026-08-28T07:08:03.9082931Z Image: ubuntu-24.04
+publishToNpm	Set up job	2026-08-28T07:08:03.9083556Z Version: 20260823.283.1
+publishToNpm	Set up job	2026-08-28T07:08:03.9084638Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+publishToNpm	Set up job	2026-08-28T07:08:03.9086483Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+publishToNpm	Set up job	2026-08-28T07:08:03.9087463Z ##[endgroup]
+publishToNpm	Set up job	2026-08-28T07:08:03.9090608Z ##[group]GITHUB_TOKEN Permissions
+publishToNpm	Set up job	2026-08-28T07:08:03.9093197Z Actions: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9093985Z ArtifactMetadata: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9094615Z Attestations: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9095225Z Checks: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9095803Z CodeQuality: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9096362Z Contents: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9097012Z CopilotRequests: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9097602Z Deployments: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9098146Z Discussions: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9098775Z Drives: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9099343Z Issues: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9099949Z Metadata: read
+publishToNpm	Set up job	2026-08-28T07:08:03.9100569Z Models: read
+publishToNpm	Set up job	2026-08-28T07:08:03.9101099Z Packages: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9102207Z Pages: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9102776Z PullRequests: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9103436Z RepositoryProjects: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9104119Z SecurityEvents: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9104700Z Statuses: write
+publishToNpm	Set up job	2026-08-28T07:08:03.9105346Z VulnerabilityAlerts: read
+publishToNpm	Set up job	2026-08-28T07:08:03.9105946Z ##[endgroup]
+publishToNpm	Set up job	2026-08-28T07:08:03.9108234Z Secret source: Actions
+publishToNpm	Set up job	2026-08-28T07:08:03.9109328Z Prepare workflow directory
+publishToNpm	Set up job	2026-08-28T07:08:03.9673550Z Prepare all required actions
+publishToNpm	Set up job	2026-08-28T07:08:03.9723343Z Getting action download info
+publishToNpm	Set up job	2026-08-28T07:08:04.3130019Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+publishToNpm	Set up job	2026-08-28T07:08:04.4194294Z Download action repository 'oven-sh/setup-bun@v2' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+publishToNpm	Set up job	2026-08-28T07:08:04.8918167Z Complete job name: publishToNpm
+publishToNpm	Run actions/checkout@v6	﻿2026-08-28T07:08:04.9675891Z ##[group]Run actions/checkout@v6
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9676929Z with:
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9677410Z   submodules: true
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9677960Z   repository: link-foundation/links-notation
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9682381Z   token: ***
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9682872Z   ssh-strict: true
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9683379Z   ssh-user: git
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9683889Z   persist-credentials: true
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9684429Z   clean: true
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9684916Z   sparse-checkout-cone-mode: true
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9685488Z   fetch-depth: 1
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9685963Z   fetch-tags: false
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9686454Z   show-progress: true
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9686939Z   lfs: false
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9687434Z   set-safe-directory: true
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9687990Z   allow-unsafe-pr-checkout: false
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9688818Z env:
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9689279Z   NPM_TOKEN: 
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9693478Z   GITHUB_TOKEN: ***
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:04.9693981Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0717626Z Syncing repository: link-foundation/links-notation
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0721796Z ##[group]Getting Git version info
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0723429Z Working directory is '/home/runner/work/links-notation/links-notation'
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0725202Z [command]/usr/bin/git version
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0790269Z git version 2.55.0
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0816378Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0832799Z Temporarily overriding HOME='/home/runner/work/_temp/40c49837-bc49-40d5-adc9-d000c9781c7e' before making global git config changes
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0835835Z Adding repository directory to the temporary git global config as a safe directory
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0839460Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0897751Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0902910Z ##[group]Determining repository object format
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0905804Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0907329Z ##[group]Initializing the repository
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.0912231Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1019747Z hint: Using 'master' as the name for the initial branch. This default branch name
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1021120Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1022547Z hint: to use in all of your new repositories, which will suppress this warning,
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1023369Z hint: call:
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1023834Z hint:
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1024410Z hint: 	git config --global init.defaultBranch <name>
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1025071Z hint:
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1025698Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1026730Z hint: 'development'. The just-created branch can be renamed via this command:
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1027535Z hint:
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1028000Z hint: 	git branch -m <name>
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1028534Z hint:
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1029217Z hint: Disable this message with "git config set advice.defaultBranchName false"
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1036988Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1048931Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1135694Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1137236Z ##[group]Disabling automatic garbage collection
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1140151Z [command]/usr/bin/git config --local gc.auto 0
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1176779Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1178469Z ##[group]Setting up auth
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1179617Z Removing SSH command configuration
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1186173Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1221838Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1584570Z Removing HTTP extra header
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1593934Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1632933Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1858129Z Removing includeIf entries pointing to credentials config files
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1865159Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.1901982Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.2129691Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.2171054Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.2206610Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.2244919Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.2287200Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.2316288Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.2317168Z ##[group]Fetching the repository
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.2325333Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4958f3cf8012ba9e67f19309b9c58984f7ce106a:refs/remotes/origin/main
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8568477Z From https://github.com/link-foundation/links-notation
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8570534Z  * [new ref]         4958f3cf8012ba9e67f19309b9c58984f7ce106a -> origin/main
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8577508Z [command]/usr/bin/git branch --list --remote origin/main
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8605925Z   origin/main
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8614035Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8640784Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8645915Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8647122Z ##[group]Determining the checkout info
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8648515Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8652210Z [command]/usr/bin/git sparse-checkout disable
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8712908Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8736505Z ##[group]Checking out the ref
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.8739092Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9015648Z Switched to a new branch 'main'
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9022729Z branch 'main' set up to track 'origin/main'.
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9036376Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9039366Z ##[group]Setting up auth for fetching submodules
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9045022Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9084412Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9119712Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9158311Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9201885Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9233996Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9236691Z ##[group]Fetching submodules
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9238564Z [command]/usr/bin/git submodule sync
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9467781Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9715332Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9972247Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9974116Z ##[group]Persisting credentials for submodules
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:05.9983885Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:06.0259808Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:06.0497080Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:06.0732355Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:06.0972354Z ##[endgroup]
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:06.1015510Z [command]/usr/bin/git log -1 --format=%H
+publishToNpm	Run actions/checkout@v6	2026-08-28T07:08:06.1044129Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+publishToNpm	Setup Bun	﻿2026-08-28T07:08:06.1484807Z ##[group]Run oven-sh/setup-bun@v2
+publishToNpm	Setup Bun	2026-08-28T07:08:06.1486020Z with:
+publishToNpm	Setup Bun	2026-08-28T07:08:06.1486871Z   bun-version: latest
+publishToNpm	Setup Bun	2026-08-28T07:08:06.1487843Z   no-cache: false
+publishToNpm	Setup Bun	2026-08-28T07:08:06.1497756Z   token: ***
+publishToNpm	Setup Bun	2026-08-28T07:08:06.1498649Z env:
+publishToNpm	Setup Bun	2026-08-28T07:08:06.1499459Z   NPM_TOKEN: 
+publishToNpm	Setup Bun	2026-08-28T07:08:06.1509121Z   GITHUB_TOKEN: ***
+publishToNpm	Setup Bun	2026-08-28T07:08:06.1510059Z ##[endgroup]
+publishToNpm	Setup Bun	2026-08-28T07:08:06.7753701Z Downloading a new version of Bun: https://github.com/oven-sh/bun/releases/download/bun-v1.4.0/bun-linux-x64.zip
+publishToNpm	Setup Bun	2026-08-28T07:08:07.1182352Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/5ca1aece-bc4a-46ae-bebd-54b65b543931.zip
+publishToNpm	Setup Bun	2026-08-28T07:08:07.7262604Z [command]/home/runner/.bun/bin/bun --revision
+publishToNpm	Setup Bun	2026-08-28T07:08:07.7314026Z 1.4.0+34cbb9a40
+publishToNpm	Install Dependencies	﻿2026-08-28T07:08:07.7474032Z ##[group]Run bun install
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.7474362Z ^[[36;1mbun install^[[0m
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.7517655Z shell: /usr/bin/bash -e {0}
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.7517954Z env:
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.7518143Z   NPM_TOKEN: 
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.7520640Z   GITHUB_TOKEN: ***
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.7520863Z ##[endgroup]
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.7620775Z bun install v1.4.0 (34cbb9a40)
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.9762556Z 
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.9763440Z + bun-types@1.3.14
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.9764177Z + eslint@10.8.1
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.9764558Z + peggy@5.1.0
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.9764908Z + typescript@7.0.2
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.9765127Z 
+publishToNpm	Install Dependencies	2026-08-28T07:08:07.9765243Z 78 packages installed [214.00ms]
+publishToNpm	Build	﻿2026-08-28T07:08:07.9855607Z ##[group]Run bun run build
+publishToNpm	Build	2026-08-28T07:08:07.9855923Z ^[[36;1mbun run build^[[0m
+publishToNpm	Build	2026-08-28T07:08:07.9895215Z shell: /usr/bin/bash -e {0}
+publishToNpm	Build	2026-08-28T07:08:07.9895494Z env:
+publishToNpm	Build	2026-08-28T07:08:07.9895683Z   NPM_TOKEN: 
+publishToNpm	Build	2026-08-28T07:08:07.9898185Z   GITHUB_TOKEN: ***
+publishToNpm	Build	2026-08-28T07:08:07.9898403Z ##[endgroup]
+publishToNpm	Build	2026-08-28T07:08:07.9978195Z $ bun run build:grammar && bun build src/index.js --outdir=dist --target=node
+publishToNpm	Build	2026-08-28T07:08:08.0015456Z $ peggy --format es -o src/parser-generated.js src/grammar.pegjs
+publishToNpm	Build	2026-08-28T07:08:08.2850181Z Bundled 7 modules in 6ms
+publishToNpm	Build	2026-08-28T07:08:08.2850574Z 
+publishToNpm	Build	2026-08-28T07:08:08.2850714Z   index.js  56.42 KB  (entry point)
+publishToNpm	Build	2026-08-28T07:08:08.2850917Z 
+publishToNpm	Check if version already published	﻿2026-08-28T07:08:08.2894447Z ##[group]Run PACKAGE_VERSION=$(node -p "require('./package.json').version")
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2895035Z ^[[36;1mPACKAGE_VERSION=$(node -p "require('./package.json').version")^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2895508Z ^[[36;1mPACKAGE_NAME=$(node -p "require('./package.json').name")^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2895903Z ^[[36;1mecho "Package: $PACKAGE_NAME@$PACKAGE_VERSION"^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2896206Z ^[[36;1m^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2896405Z ^[[36;1m# Check if version exists on NPM^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2896790Z ^[[36;1mif npm view $PACKAGE_NAME@$PACKAGE_VERSION version 2>/dev/null; then^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2897235Z ^[[36;1m  echo "Version $PACKAGE_VERSION already exists on NPM"^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2897607Z ^[[36;1m  echo "should_publish=false" >> $GITHUB_OUTPUT^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2897915Z ^[[36;1melse^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2898172Z ^[[36;1m  echo "Version $PACKAGE_VERSION does not exist on NPM"^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2898533Z ^[[36;1m  echo "should_publish=true" >> $GITHUB_OUTPUT^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2898853Z ^[[36;1mfi^[[0m
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2935594Z shell: /usr/bin/bash -e {0}
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2935847Z env:
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2936033Z   NPM_TOKEN: 
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2938510Z   GITHUB_TOKEN: ***
+publishToNpm	Check if version already published	2026-08-28T07:08:08.2938736Z ##[endgroup]
+publishToNpm	Check if version already published	2026-08-28T07:08:08.3576032Z Package: links-notation@0.15.0
+publishToNpm	Check if version already published	2026-08-28T07:08:09.0479963Z Version 0.15.0 does not exist on NPM
+publishToNpm	Publish to NPM	﻿2026-08-28T07:08:09.0553893Z ##[group]Run echo "//registry.npmjs.org/:_authToken=" > ~/.npmrc
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.0554384Z ^[[36;1mecho "//registry.npmjs.org/:_authToken=" > ~/.npmrc^[[0m
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.0554746Z ^[[36;1mnpm publish --access public^[[0m
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.0591689Z shell: /usr/bin/bash -e {0}
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.0591946Z env:
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.0592137Z   NPM_TOKEN: 
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.0594948Z   GITHUB_TOKEN: ***
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.0595178Z ##[endgroup]
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6260095Z npm notice
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6263638Z npm notice 📦  links-notation@0.15.0
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6264247Z npm notice Tarball Contents
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6266725Z npm notice 634B .eslintrc.json
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6267296Z npm notice 57B .prettierignore
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6267793Z npm notice 52B .prettierrc
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6268280Z npm notice 5.4kB README.md
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6268738Z npm notice 4.6kB README.ru.md
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6269188Z npm notice 21.0kB bun.lock
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6269617Z npm notice 56.4kB dist/index.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6270168Z npm notice 829B eslint.config.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6270683Z npm notice 355B examples/debug_indentation.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6271612Z npm notice 1.4kB examples/empty_reference.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6272247Z npm notice 795B examples/test_leading_spaces.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6272912Z npm notice 2.5kB examples/typescript-example.ts
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6273523Z npm notice 7.4kB index.d.ts
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6273978Z npm notice 769B package.json
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6274446Z npm notice 730B src/FormatConfig.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6274964Z npm notice 2.2kB src/FormatOptions.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6275481Z npm notice 8.9kB src/grammar.pegjs
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6275962Z npm notice 233B src/index.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6276383Z npm notice 13.9kB src/Link.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6276828Z npm notice 642B src/LinksGroup.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6277352Z npm notice 44.0kB src/parser-generated.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6277885Z npm notice 6.6kB src/Parser.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6278387Z npm notice 5.0kB tests/ApiTests.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6279031Z npm notice 4.9kB tests/EdgeCaseParser.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6279619Z npm notice 3.3kB tests/EmptyReference.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6280185Z npm notice 3.9kB tests/FormatConfig.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6280812Z npm notice 3.3kB tests/IndentationConsistency.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6281748Z npm notice 4.1kB tests/IndentedIdSyntax.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6282360Z npm notice 2.3kB tests/Link.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6282878Z npm notice 2.2kB tests/LinksGroup.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6283517Z npm notice 4.1kB tests/MixedIndentationModes.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6284224Z npm notice 3.1kB tests/MultilineParser.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6284893Z npm notice 2.0kB tests/MultilineQuotedString.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6285602Z npm notice 14.7kB tests/MultiQuoteParser.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6286238Z npm notice 2.6kB tests/NestedIndentation.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6286841Z npm notice 5.1kB tests/NestedParser.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6287472Z npm notice 4.2kB tests/NestedSelfReference.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6288120Z npm notice 9.6kB tests/SingleLineParser.test.js
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6288693Z npm notice 314B tsconfig.json
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6289143Z npm notice Tarball Details
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6289582Z npm notice name: links-notation
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6290028Z npm notice version: 0.15.0
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6290521Z npm notice filename: links-notation-0.15.0.tgz
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6290997Z npm notice package size: 54.6 kB
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6291894Z npm notice unpacked size: 254.0 kB
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6292488Z npm notice shasum: a7b69ef5eb7b19c25de4470b2cd1f1374fe58069
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6293227Z npm notice integrity: sha512-CD8KnwXESIgHC[...]erSmbQDrNqKdQ==
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6293876Z npm notice total files: 39
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6294282Z npm notice
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6305316Z npm error code ENEEDAUTH
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6306178Z npm error need auth This command requires you to be logged in to https://registry.npmjs.org/
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6307731Z npm error need auth You need to authorize this machine using `npm adduser`
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6316686Z npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-08-28T07_08_09_115Z-debug-0.log
+publishToNpm	Publish to NPM	2026-08-28T07:08:09.6514693Z ##[error]Process completed with exit code 1.
+publishToNpm	Post Run actions/checkout@v6	﻿2026-08-28T07:08:09.6649494Z Post job cleanup.
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.7507604Z [command]/usr/bin/git version
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.7553047Z git version 2.55.0
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.7600520Z Temporarily overriding HOME='/home/runner/work/_temp/0c157dd6-3105-43fc-9a35-eaa6cc8aa5f8' before making global git config changes
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.7602280Z Adding repository directory to the temporary git global config as a safe directory
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.7607297Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.7640432Z Removing SSH command configuration
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.7648372Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.7685432Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.7931856Z Removing HTTP extra header
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.7938842Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.7982249Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8238777Z Removing includeIf entries pointing to credentials config files
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8247543Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8282040Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8283279Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8284441Z includeif.gitdir:/github/workspace/.git.path
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8285450Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8296348Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8355637Z /home/runner/work/_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8368027Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8417664Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8452849Z /home/runner/work/_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8465008Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8506013Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8534493Z /github/runner_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8544518Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8585907Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8611745Z /github/runner_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8622677Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8660470Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+publishToNpm	Post Run actions/checkout@v6	2026-08-28T07:08:09.8888572Z Removing credentials config '/home/runner/work/_temp/git-credentials-7d5cac25-a7c2-4da0-9e3e-16a6a1a57b1b.config'
+publishToNpm	Complete job	﻿2026-08-28T07:08:09.9027622Z Cleaning up orphan processes

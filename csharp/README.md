@@ -128,13 +128,99 @@ mama has house
 (linksNotation supports (unlimited number (of references) in each link))
 ```
 
+### Multi-line Groups
+
+A parenthesized group opens a *nested context*: its body starts fresh at
+indentation level zero and follows the same rules as the root document, so a
+line break inside parentheses is structure rather than decoration.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+The document above parses to `(value ((id 1) (label one)))` - two children, each
+a link of its own - rather than to one flat list in which the boundary between
+`id` and `label` would be lost. A body that stays on a single line still
+collapses to a single link, so `(a b c)` is unchanged.
+
+```csharp
+var links = new Parser().Parse(@"value (
+  id ""1""
+  label ""one""
+)");
+
+Console.WriteLine(links[0]); // (value ((id 1) (label one)))
+```
+
+### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+Both comments are gone by the time the document is read, leaving the single
+link `(deploy: staging)`. A `#` only opens a comment where a reference could
+begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
+reference (`"#"`) stay ordinary characters.
+
+A formatter keeps the same rule from the other side: a reference that begins
+with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
+itself.
+
+Comments are on by default, and a parser can be told to read `#` as an ordinary
+character again, for documents written before comments existed:
+
+```csharp
+var links = new Parser().Parse("# the machines this deploys to\ndeploy: staging # only staging, for now\n");
+Console.WriteLine(links[0]); // (deploy: staging)
+
+var plain = new Parser(comments: false);
+Console.WriteLine(plain.Parse("# a b\n")[0]); // (# a b)
+```
+
 ## API Reference
 
 ### Classes
 
 - **Parser\<TLinkAddress\>**: Main parser class for converting strings to links
+  (`new Parser(comments: false)` reads `#` as an ordinary character)
 - **Link\<TLinkAddress\>**: Represents a single link with ID and values
 - **LinksGroup\<TLinkAddress\>**: Container for grouping related links
+- **ParseException**: Thrown when a document does not parse
+
+### Error Handling
+
+`Parse` throws a `ParseException` whose message says where the document stopped
+making sense and quotes the offending line with a caret under it:
+
+```csharp
+try
+{
+    new Parser().Parse("ci_gate x\nstage: rust: nextest\n");
+}
+catch (ParseException error)
+{
+    Console.Error.WriteLine(error.Message);
+    Console.Error.WriteLine($"{error.Line}:{error.Column} (offset {error.Offset})");
+}
+```
+
+```text
+Syntax error at line 2, column 12: unexpected ":"
+2 | stage: rust: nextest
+  |            ^
+```
+
+`ParseException` derives from `FormatException`, so callers that already catch
+`FormatException` keep working, and carries `Offset`, `Line`, `Column`, `Found`,
+`LineText`, `Summary` and `Snippet` for callers that report errors themselves.
 
 ### Extension Methods
 
@@ -172,7 +258,7 @@ Note: C# formatting checks are integrated into the CI pipeline using
 
 ## Dependencies
 
-- .NET 8.0
+- .NET 10.0
 - Microsoft.CSharp (4.7.0)
 - Pegasus (4.1.0)
 - Platform.Collections (0.3.2)

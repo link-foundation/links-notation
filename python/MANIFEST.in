@@ -1,3 +1,4 @@
 include README.md
+include README.ru.md
 include LICENSE
-recursive-include platform_lino *.py
+recursive-include links_notation *.py

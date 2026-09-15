@@ -1,0 +1,42 @@
+name: Workflows
+
+# GitHub Actions ignores unknown workflow keys instead of rejecting them, so a
+# typo such as `queue: max` inside a `concurrency:` block silently does nothing
+# (issue #62). actionlint validates the schema and, through shellcheck, every
+# `run:` block as well.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '.github/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  actionlint:
+    name: Lint Workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
+      cancel-in-progress: true
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+
+      # The Docker image bundles shellcheck and pyflakes, so this lints every
+      # `run:` block too. A native actionlint binary without shellcheck on
+      # PATH silently skips the shell checks and still exits 0 -- worth knowing
+      # before trying to reproduce a finding locally.
+      - name: Lint workflow files
+        uses: docker://rhysd/actionlint:1.7.7
+        with:
+          args: -color

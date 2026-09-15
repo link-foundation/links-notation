@@ -1,0 +1,45 @@
+publishToCratesIO	Verify the crate is really on crates.io	﻿2026-08-28T11:50:09.7026208Z ##[group]Run set -euo pipefail
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7026571Z ^[[36;1mset -euo pipefail^[[0m
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7026902Z ^[[36;1mfor attempt in $(seq 1 20); do^[[0m
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7027435Z ^[[36;1m  if curl -fsS "https://crates.io/api/v1/crates/${PACKAGE_NAME}/${PACKAGE_VERSION}" >/dev/null 2>&1; then^[[0m
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7028142Z ^[[36;1m    echo "Verified ${PACKAGE_NAME}@${PACKAGE_VERSION} on crates.io (attempt ${attempt})"^[[0m
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7028591Z ^[[36;1m    exit 0^[[0m
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7028821Z ^[[36;1m  fi^[[0m
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7029464Z ^[[36;1m  echo "Not visible yet, retrying in 15s (attempt ${attempt}/20)"^[[0m
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7029844Z ^[[36;1m  sleep 15^[[0m
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7030063Z ^[[36;1mdone^[[0m
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7030465Z ^[[36;1mecho "::error::${PACKAGE_NAME}@${PACKAGE_VERSION} did not appear on crates.io within 5 minutes"^[[0m
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7030922Z ^[[36;1mexit 1^[[0m
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7067047Z shell: /usr/bin/bash -e {0}
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7067311Z env:
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7070645Z   GITHUB_TOKEN: ***
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7070902Z   CI_VERBOSE: false
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7071129Z   CARGO_HOME: /home/runner/.cargo
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7071395Z   CARGO_INCREMENTAL: 0
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7071620Z   CARGO_TERM_COLOR: always
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7071856Z   CACHE_ON_FAILURE: false
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7072105Z   PACKAGE_NAME: links-notation
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7072357Z   PACKAGE_VERSION: 0.16.0
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7072586Z ##[endgroup]
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:09.7617783Z Not visible yet, retrying in 15s (attempt 1/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:24.8094806Z Not visible yet, retrying in 15s (attempt 2/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:39.8551976Z Not visible yet, retrying in 15s (attempt 3/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:50:54.9000478Z Not visible yet, retrying in 15s (attempt 4/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:51:09.9637544Z Not visible yet, retrying in 15s (attempt 5/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:51:25.0148386Z Not visible yet, retrying in 15s (attempt 6/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:51:40.0593201Z Not visible yet, retrying in 15s (attempt 7/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:51:55.1045223Z Not visible yet, retrying in 15s (attempt 8/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:52:10.1636203Z Not visible yet, retrying in 15s (attempt 9/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:52:25.2064098Z Not visible yet, retrying in 15s (attempt 10/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:52:40.4184624Z Not visible yet, retrying in 15s (attempt 11/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:52:55.4649465Z Not visible yet, retrying in 15s (attempt 12/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:53:10.5174684Z Not visible yet, retrying in 15s (attempt 13/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:53:25.5640997Z Not visible yet, retrying in 15s (attempt 14/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:53:40.6338362Z Not visible yet, retrying in 15s (attempt 15/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:53:55.6793835Z Not visible yet, retrying in 15s (attempt 16/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:54:10.7474875Z Not visible yet, retrying in 15s (attempt 17/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:54:25.7940404Z Not visible yet, retrying in 15s (attempt 18/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:54:40.8498536Z Not visible yet, retrying in 15s (attempt 19/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:54:55.8946448Z Not visible yet, retrying in 15s (attempt 20/20)
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:55:10.8969926Z ##[error]links-notation@0.16.0 did not appear on crates.io within 5 minutes
+publishToCratesIO	Verify the crate is really on crates.io	2026-08-28T11:55:10.8973343Z ##[error]Process completed with exit code 1.

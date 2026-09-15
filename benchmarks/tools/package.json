@@ -1,0 +1,17 @@
+{
+  "name": "links-notation-benchmark-tools",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Dataset generator and third-party verification for the Links Notation token benchmarks",
+  "scripts": {
+    "generate": "node generate-datasets.mjs",
+    "check": "node generate-datasets.mjs --check && node verify-representations.mjs"
+  },
+  "dependencies": {
+    "csv-parse": "^7.0.2",
+    "fast-xml-parser": "^5.3.0",
+    "lino-objects-codec": "^0.8.0",
+    "yaml": "^2.8.1"
+  }
+}

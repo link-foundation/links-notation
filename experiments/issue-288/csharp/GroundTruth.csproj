@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8</TargetFramework>
+    <Nullable>disable</Nullable>
+    <AssemblyName>GroundTruth</AssemblyName>
+    <RootNamespace>GroundTruth</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj" />
+  </ItemGroup>
+</Project>

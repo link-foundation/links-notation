@@ -1,4 +1,6 @@
 import { Link } from './Link.js';
+import { ParseError } from './ParseError.js';
+import { stripComments } from './comments.js';
 import * as parserModule from './parser-generated.js';
 
 export class Parser {
@@ -7,10 +9,12 @@ export class Parser {
    * @param {Object} options - Parser options
    * @param {number} options.maxInputSize - Maximum input size in bytes (default: 10MB)
    * @param {number} options.maxDepth - Maximum nesting depth (default: 1000)
+   * @param {boolean} options.comments - If false, read `#` as an ordinary character instead of the start of a comment (default: true)
    */
   constructor(options = {}) {
     this.maxInputSize = options.maxInputSize || 10 * 1024 * 1024; // 10MB default
     this.maxDepth = options.maxDepth || 1000;
+    this.comments = options.comments ?? true;
   }
 
   /**
@@ -31,14 +35,21 @@ export class Parser {
       );
     }
 
+    // Comments are blanked rather than removed, so a position reported for the
+    // prepared document is the same position in the document the caller wrote.
+    const prepared = this.comments ? stripComments(input) : input;
+
     try {
-      const rawResult = parserModule.parse(input);
+      const rawResult = parserModule.parse(prepared);
       return this.transformResult(rawResult);
     } catch (error) {
-      // Preserve original error information
+      // A syntax error knows where it stopped; anything else is passed on with
+      // the original error kept as the cause.
+      if (error && error.location) {
+        throw new ParseError(input, error);
+      }
       const parseError = new Error(`Parse error: ${error.message}`);
       parseError.cause = error;
-      parseError.location = error.location;
       throw parseError;
     }
   }
@@ -64,7 +75,11 @@ export class Parser {
     if (item.children && item.children.length > 0) {
       // Special case: If this is an ID with empty values but has children,
       // the children should become the values of the link (indented ID syntax)
-      if (item.id && (!item.values || item.values.length === 0)) {
+      if (
+        item.id !== undefined &&
+        item.id !== null &&
+        (!item.values || item.values.length === 0)
+      ) {
         const childValues = item.children.map((child) => {
           // For indented children, extract the actual reference from the child's values
           if (child.values && child.values.length === 1) {
@@ -136,6 +151,30 @@ export class Parser {
   }
 
   /**
+   * Transform the links of a nested (parenthesised) context into a single Link.
+   * The nested context is parsed with the same rules as the root, so it yields
+   * a list of links; a single link is used as is, several links become the
+   * values of one anonymous link. An already parenthesised single link keeps
+   * its own group so that `((a b))` stays distinct from `(a b)`.
+   * @param {Array} nested - Raw items parsed inside the parentheses
+   * @returns {Link} The link representing the parenthesised group
+   */
+  transformNested(nested) {
+    const nestedLinks = [];
+    for (const item of nested) {
+      if (item !== null && item !== undefined) {
+        this.collectLinks(item, [], nestedLinks);
+      }
+    }
+    const wrapsSingleGroup =
+      nested.length === 1 && nested[0] && nested[0].nested !== undefined;
+    if (nestedLinks.length === 1 && !wrapsSingleGroup) {
+      return nestedLinks[0];
+    }
+    return new Link(null, nestedLinks);
+  }
+
+  /**
    * Transform a parsed item into a Link object
    * @param {*} item - The item to transform
    * @returns {Link|null} The transformed Link or null
@@ -148,6 +187,11 @@ export class Parser {
       return item;
     }
 
+    // Parenthesised group parsed as a nested context
+    if (item.nested !== undefined) {
+      return this.transformNested(item.nested);
+    }
+
     // Handle simple reference objects like {id: 'a'}
     if (item.id !== undefined && !item.values && !item.children) {
       return new Link(item.id);
@@ -156,12 +200,12 @@ export class Parser {
     // For items with values, create a link with those values
     if (item.values && Array.isArray(item.values)) {
       // Create a link with id (if present) and transformed values
-      const link = new Link(item.id || null, []);
+      const link = new Link(item.id ?? null, []);
       link.values = item.values.map((v) => this.transformLink(v));
       return link;
     }
 
     // Default case
-    return new Link(item.id || null, []);
+    return new Link(item.id ?? null, []);
   }
 }

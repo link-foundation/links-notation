@@ -1,0 +1,43 @@
+service:
+  name: links-notation-gateway
+  version: 0.17.0
+  runtime:
+    workers: 6
+    limits:
+      memoryMb: 806
+      cpuMillis: 3746
+      requests:
+        perMinute: 3600
+        burst: 185
+        shed:
+          enabled: true
+          strategy: oldest-first
+          thresholds:
+            queueDepth: 382
+            latencyMs: 1408
+  storage:
+    driver: postgres
+    endpoint:
+      host: db.internal.example.com
+      port: 5432
+      tls:
+        enabled: true
+        minVersion: '1.3'
+        verify:
+          hostname: true
+          chain: true
+    pool:
+      min: 3
+      max: 46
+      idleSeconds: 150
+  telemetry:
+    logs:
+      level: info
+      format: json
+      sampleRate: 0.17
+    traces:
+      enabled: true
+      sampleRate: 0.65
+    metrics:
+      enabled: true
+      intervalSeconds: 51

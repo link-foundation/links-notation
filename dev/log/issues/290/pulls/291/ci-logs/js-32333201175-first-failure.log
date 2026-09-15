@@ -1,0 +1,1651 @@
+findChangedJsFiles	UNKNOWN STEP	﻿2026-08-20T04:48:10.3218602Z Current runner version: '2.336.0'
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3242907Z ##[group]Runner Image Provisioner
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3244159Z Hosted Compute Agent
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3244807Z Version: 20260729.566
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3245496Z Commit: cf7153fe6e25b664e8693c24944bf2b00355d109
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3246267Z Build Date: 2026-07-29T19:17:02Z
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3246964Z Worker ID: {fff18581-5f0b-4047-b859-642d12753a81}
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3247735Z Azure Region: westus
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3248319Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3249913Z ##[group]Operating System
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3250576Z Ubuntu
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3251100Z 24.04.4
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3251707Z LTS
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3252271Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3252811Z ##[group]Runner Image
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3253524Z Image: ubuntu-24.04
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3254333Z Version: 20260816.277.1
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3255660Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260816.277/images/ubuntu/Ubuntu2404-Readme.md
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3257235Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260816.277
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3258295Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3261353Z ##[group]GITHUB_TOKEN Permissions
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3264010Z Actions: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3264668Z ArtifactMetadata: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3265382Z Attestations: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3265972Z Checks: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3266519Z CodeQuality: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3267147Z Contents: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3267750Z CopilotRequests: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3268415Z Deployments: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3268984Z Discussions: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3269516Z Drives: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3270142Z Issues: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3270673Z Metadata: read
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3271342Z Models: read
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3271958Z Packages: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3272512Z Pages: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3273171Z PullRequests: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3274010Z RepositoryProjects: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3274691Z SecurityEvents: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3275311Z Statuses: write
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3275875Z VulnerabilityAlerts: read
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3276548Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3278574Z Secret source: Actions
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3279729Z Prepare workflow directory
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3824343Z Prepare all required actions
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.3872223Z Getting action download info
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.7184314Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:10.8628094Z Download action repository 'tj-actions/changed-files@v47' (SHA:24d32ffd492484c1d75e0c0b894501ddb9d30d62)
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.3419146Z Complete job name: findChangedJsFiles
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4123812Z ##[group]Run actions/checkout@v6
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4124741Z with:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4125181Z   fetch-depth: 0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4125699Z   repository: link-foundation/links-notation
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4129758Z   token: ***
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4130196Z   ssh-strict: true
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4130666Z   ssh-user: git
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4131123Z   persist-credentials: true
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4131629Z   clean: true
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4132098Z   sparse-checkout-cone-mode: true
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4132642Z   fetch-tags: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4133097Z   show-progress: true
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4133559Z   lfs: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4134411Z   submodules: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4134880Z   set-safe-directory: true
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4135399Z   allow-unsafe-pr-checkout: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4136235Z env:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4136658Z   NPM_TOKEN: 
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4140611Z   GITHUB_TOKEN: ***
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.4141067Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5144429Z Syncing repository: link-foundation/links-notation
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5146919Z ##[group]Getting Git version info
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5147745Z Working directory is '/home/runner/work/links-notation/links-notation'
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5148837Z [command]/usr/bin/git version
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5219997Z git version 2.55.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5263455Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5272676Z Temporarily overriding HOME='/home/runner/work/_temp/88c98d32-59d8-4120-9c70-edcbf9f63c2a' before making global git config changes
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5275482Z Adding repository directory to the temporary git global config as a safe directory
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5277508Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5333154Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5337040Z ##[group]Determining repository object format
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5339316Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5340537Z ##[group]Initializing the repository
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5344471Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5448951Z hint: Using 'master' as the name for the initial branch. This default branch name
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5450044Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5451044Z hint: to use in all of your new repositories, which will suppress this warning,
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5452369Z hint: call:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5453164Z hint:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5454318Z hint: 	git config --global init.defaultBranch <name>
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5455209Z hint:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5456180Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5457175Z hint: 'development'. The just-created branch can be renamed via this command:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5458466Z hint:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5459131Z hint: 	git branch -m <name>
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5459728Z hint:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5460389Z hint: Disable this message with "git config set advice.defaultBranchName false"
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5461511Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5466164Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5521589Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5522967Z ##[group]Disabling automatic garbage collection
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5526724Z [command]/usr/bin/git config --local gc.auto 0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5559494Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5560934Z ##[group]Setting up auth
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5561897Z Removing SSH command configuration
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5568340Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5604481Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.5991566Z Removing HTTP extra header
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6000169Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6041408Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6259325Z Removing includeIf entries pointing to credentials config files
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6267354Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6304059Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6564089Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6606362Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6639136Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6678418Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6715017Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6751939Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6753320Z ##[group]Fetching the repository
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:11.6761478Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8204468Z From https://github.com/link-foundation/links-notation
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8207465Z  * [new branch]      claude/code-review-and-issues-01CuJmcRr2phiQJAnhoqeEY5 -> origin/claude/code-review-and-issues-01CuJmcRr2phiQJAnhoqeEY5
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8211092Z  * [new branch]      claude/review-test-coverage-011UTL6DkCfp7LuwpUZj9HyC -> origin/claude/review-test-coverage-011UTL6DkCfp7LuwpUZj9HyC
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8214338Z  * [new branch]      claude/review-test-standards-01GsYvAqSF7k3oxTeEwYsX9W -> origin/claude/review-test-standards-01GsYvAqSF7k3oxTeEwYsX9W
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8216795Z  * [new branch]      dependabot/add-v2-config-file -> origin/dependabot/add-v2-config-file
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8218858Z  * [new branch]      dependabot/github_actions/actions/checkout-7 -> origin/dependabot/github_actions/actions/checkout-7
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8221281Z  * [new branch]      dependabot/github_actions/actions/setup-dotnet-6 -> origin/dependabot/github_actions/actions/setup-dotnet-6
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8224046Z  * [new branch]      dependabot/github_actions/actions/setup-node-7 -> origin/dependabot/github_actions/actions/setup-node-7
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8226615Z  * [new branch]      dependabot/github_actions/actions/upload-pages-artifact-5 -> origin/dependabot/github_actions/actions/upload-pages-artifact-5
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8229145Z  * [new branch]      dependabot/github_actions/dependabot/fetch-metadata-3 -> origin/dependabot/github_actions/dependabot/fetch-metadata-3
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8232412Z  * [new branch]      dependabot/nuget/csharp/Link.Foundation.Links.Notation.Tests/xunit.runner.visualstudio-4.0.0 -> origin/dependabot/nuget/csharp/Link.Foundation.Links.Notation.Tests/xunit.runner.visualstudio-4.0.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8234992Z  * [new branch]      draft/update           -> origin/draft/update
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8236371Z  * [new branch]      fix-cicd-publishing    -> origin/fix-cicd-publishing
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8237986Z  * [new branch]      gh-pages               -> origin/gh-pages
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8239363Z  * [new branch]      issue-101-5db7b374     -> origin/issue-101-5db7b374
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8240698Z  * [new branch]      issue-103-604d0cc9     -> origin/issue-103-604d0cc9
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8242056Z  * [new branch]      issue-105-b29688eb     -> origin/issue-105-b29688eb
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8243379Z  * [new branch]      issue-107-516f1733     -> origin/issue-107-516f1733
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8244971Z  * [new branch]      issue-109-d76b5c33     -> origin/issue-109-d76b5c33
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8246287Z  * [new branch]      issue-110-ec5b7eeb     -> origin/issue-110-ec5b7eeb
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8247635Z  * [new branch]      issue-111-8aef2f31     -> origin/issue-111-8aef2f31
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8249108Z  * [new branch]      issue-115-e9580372     -> origin/issue-115-e9580372
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8250588Z  * [new branch]      issue-117-e66fa934     -> origin/issue-117-e66fa934
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8252073Z  * [new branch]      issue-119-69bab4a2     -> origin/issue-119-69bab4a2
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8253532Z  * [new branch]      issue-121-0287f55a     -> origin/issue-121-0287f55a
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8255193Z  * [new branch]      issue-123-656309e4     -> origin/issue-123-656309e4
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8256855Z  * [new branch]      issue-125-79dfb0d1     -> origin/issue-125-79dfb0d1
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8258283Z  * [new branch]      issue-125-ee879ed7     -> origin/issue-125-ee879ed7
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8259792Z  * [new branch]      issue-125-f3a03b7d     -> origin/issue-125-f3a03b7d
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8261405Z  * [new branch]      issue-129-04c8c0a5     -> origin/issue-129-04c8c0a5
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8262893Z  * [new branch]      issue-131-fc081b5b     -> origin/issue-131-fc081b5b
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8264601Z  * [new branch]      issue-133-629cdf98     -> origin/issue-133-629cdf98
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8266050Z  * [new branch]      issue-135-00fb7516     -> origin/issue-135-00fb7516
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8267639Z  * [new branch]      issue-138-9d33fad1     -> origin/issue-138-9d33fad1
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8269122Z  * [new branch]      issue-140-28a755bca96b -> origin/issue-140-28a755bca96b
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8270598Z  * [new branch]      issue-142-23f307922307 -> origin/issue-142-23f307922307
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8272124Z  * [new branch]      issue-143-71fa1d3dc218 -> origin/issue-143-71fa1d3dc218
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8273793Z  * [new branch]      issue-144-f281d2df737c -> origin/issue-144-f281d2df737c
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8275380Z  * [new branch]      issue-146-52f1d9a571ed -> origin/issue-146-52f1d9a571ed
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8276877Z  * [new branch]      issue-148-6ee2ca2dbea2 -> origin/issue-148-6ee2ca2dbea2
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8278355Z  * [new branch]      issue-155-7899dac8e6ec -> origin/issue-155-7899dac8e6ec
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8279826Z  * [new branch]      issue-158-fb24e781ad8d -> origin/issue-158-fb24e781ad8d
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8281315Z  * [new branch]      issue-164-2e5b1c046253 -> origin/issue-164-2e5b1c046253
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8282732Z  * [new branch]      issue-165-a26029ce2e34 -> origin/issue-165-a26029ce2e34
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8284658Z  * [new branch]      issue-166-0169a4dd2a40 -> origin/issue-166-0169a4dd2a40
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8286020Z  * [new branch]      issue-184-e00f7290354f -> origin/issue-184-e00f7290354f
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8286900Z  * [new branch]      issue-188-09a2f723ae76 -> origin/issue-188-09a2f723ae76
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8287627Z  * [new branch]      issue-189-7e97f19d7811 -> origin/issue-189-7e97f19d7811
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8288365Z  * [new branch]      issue-192-3568aae3e63c -> origin/issue-192-3568aae3e63c
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8289085Z  * [new branch]      issue-197-0f9688b95d4f -> origin/issue-197-0f9688b95d4f
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8289798Z  * [new branch]      issue-197-93f74116bd61 -> origin/issue-197-93f74116bd61
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8290528Z  * [new branch]      issue-198-ef3a7c229ad3 -> origin/issue-198-ef3a7c229ad3
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8291442Z  * [new branch]      issue-200-432e1145db9f -> origin/issue-200-432e1145db9f
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8292178Z  * [new branch]      issue-201-5c2770ec8b03 -> origin/issue-201-5c2770ec8b03
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8292899Z  * [new branch]      issue-209-8128719f23bf -> origin/issue-209-8128719f23bf
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8293852Z  * [new branch]      issue-21-66d67e65      -> origin/issue-21-66d67e65
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8294612Z  * [new branch]      issue-217-c1c06cbe0168 -> origin/issue-217-c1c06cbe0168
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8295328Z  * [new branch]      issue-23-cfc667a8      -> origin/issue-23-cfc667a8
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8296058Z  * [new branch]      issue-282-c154325b4497 -> origin/issue-282-c154325b4497
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8296801Z  * [new branch]      issue-52-4a282d24      -> origin/issue-52-4a282d24
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8297505Z  * [new branch]      issue-53-12d80c86      -> origin/issue-53-12d80c86
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8298189Z  * [new branch]      issue-53-1bd6f8d5      -> origin/issue-53-1bd6f8d5
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8298882Z  * [new branch]      issue-53-4d399364      -> origin/issue-53-4d399364
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8299575Z  * [new branch]      issue-55-353ece6e      -> origin/issue-55-353ece6e
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8300257Z  * [new branch]      issue-55-deaa6f4c      -> origin/issue-55-deaa6f4c
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8373899Z  * [new branch]      issue-62-8dc57ee4      -> origin/issue-62-8dc57ee4
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8375594Z  * [new branch]      issue-62-9aaf7516      -> origin/issue-62-9aaf7516
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8376703Z  * [new branch]      issue-62-ba398481      -> origin/issue-62-ba398481
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8377808Z  * [new branch]      issue-63-2062e7bf      -> origin/issue-63-2062e7bf
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8379168Z  * [new branch]      issue-63-fe0edcdd      -> origin/issue-63-fe0edcdd
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8380350Z  * [new branch]      issue-68-00e93de8      -> origin/issue-68-00e93de8
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8381476Z  * [new branch]      issue-68-08c66206      -> origin/issue-68-08c66206
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8382817Z  * [new branch]      issue-68-38c3f25f      -> origin/issue-68-38c3f25f
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8384384Z  * [new branch]      issue-68-c3ec7178      -> origin/issue-68-c3ec7178
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8385709Z  * [new branch]      issue-69-1ad2dc0a      -> origin/issue-69-1ad2dc0a
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8387045Z  * [new branch]      issue-69-909b524a      -> origin/issue-69-909b524a
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8388380Z  * [new branch]      issue-81-b7913964      -> origin/issue-81-b7913964
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8389716Z  * [new branch]      issue-87-3609cfa2      -> origin/issue-87-3609cfa2
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8391103Z  * [new branch]      issue-90-8b6fbd3d      -> origin/issue-90-8b6fbd3d
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8392496Z  * [new branch]      issue-91-1bc78531      -> origin/issue-91-1bc78531
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8394230Z  * [new branch]      issue-99-0e526c7c      -> origin/issue-99-0e526c7c
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8394951Z  * [new branch]      main                   -> origin/main
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8395580Z  * [new branch]      master                 -> origin/master
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8396404Z  * [new branch]      segment                -> origin/segment
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8397091Z  * [new branch]      update-all-deps        -> origin/update-all-deps
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8397799Z  * [new branch]      update-java-deps       -> origin/update-java-deps
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8398419Z  * [new tag]         0.0.1                  -> 0.0.1
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8398950Z  * [new tag]         0.0.2                  -> 0.0.2
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8399462Z  * [new tag]         0.1.0                  -> 0.1.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8399999Z  * [new tag]         0.10.0_python          -> 0.10.0_python
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8401036Z  * [new tag]         0.11.0_csharp          -> 0.11.0_csharp
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8402087Z  * [new tag]         0.11.0_js              -> 0.11.0_js
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8403114Z  * [new tag]         0.11.0_python          -> 0.11.0_python
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8404620Z  * [new tag]         0.11.0_rust            -> 0.11.0_rust
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8405980Z  * [new tag]         0.11.1_csharp          -> 0.11.1_csharp
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8407042Z  * [new tag]         0.11.2_csharp          -> 0.11.2_csharp
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8407713Z  * [new tag]         0.11.2_js              -> 0.11.2_js
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8408284Z  * [new tag]         0.11.2_python          -> 0.11.2_python
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8408953Z  * [new tag]         0.11.2_rust            -> 0.11.2_rust
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8409647Z  * [new tag]         0.12.0_csharp          -> 0.12.0_csharp
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8410206Z  * [new tag]         0.13.0_csharp          -> 0.13.0_csharp
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8410749Z  * [new tag]         0.2.0                  -> 0.2.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8411276Z  * [new tag]         0.2.1                  -> 0.2.1
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8411791Z  * [new tag]         0.2.2                  -> 0.2.2
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8412309Z  * [new tag]         0.2.3                  -> 0.2.3
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8412849Z  * [new tag]         0.3.0                  -> 0.3.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8413382Z  * [new tag]         0.4.0                  -> 0.4.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8414216Z  * [new tag]         0.7.0_csharp           -> 0.7.0_csharp
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8414770Z  * [new tag]         0.7.0_js               -> 0.7.0_js
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8415306Z  * [new tag]         0.7.0_rust             -> 0.7.0_rust
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8416017Z  * [new tag]         0.8.0_js               -> 0.8.0_js
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8416543Z  * [new tag]         0.8.0_rust             -> 0.8.0_rust
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8417078Z  * [new tag]         0.9.0_csharp           -> 0.9.0_csharp
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8417617Z  * [new tag]         0.9.0_js               -> 0.9.0_js
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8418147Z  * [new tag]         0.9.0_python           -> 0.9.0_python
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8418692Z  * [new tag]         0.9.0_rust             -> 0.9.0_rust
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8419235Z  * [new tag]         csharp_0.4.0           -> csharp_0.4.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8419791Z  * [new tag]         csharp_0.4.1           -> csharp_0.4.1
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8420347Z  * [new tag]         csharp_0.4.2           -> csharp_0.4.2
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8420900Z  * [new tag]         csharp_0.4.3           -> csharp_0.4.3
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8421446Z  * [new tag]         csharp_0.4.4           -> csharp_0.4.4
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8422001Z  * [new tag]         csharp_0.4.5           -> csharp_0.4.5
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8422559Z  * [new tag]         csharp_0.4.6           -> csharp_0.4.6
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8423106Z  * [new tag]         csharp_0.5.0           -> csharp_0.5.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8423886Z  * [new tag]         csharp_0.6.0           -> csharp_0.6.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8424473Z  * [new tag]         go/v0.13.0             -> go/v0.13.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8425011Z  * [new tag]         js_0.1.0               -> js_0.1.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8425537Z  * [new tag]         js_0.11.2              -> js_0.11.2
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8426066Z  * [new tag]         js_0.12.0              -> js_0.12.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8426606Z  * [new tag]         js_0.13.0              -> js_0.13.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8427132Z  * [new tag]         js_0.2.0               -> js_0.2.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8427660Z  * [new tag]         js_0.6.0               -> js_0.6.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8428201Z  * [new tag]         python_0.11.2          -> python_0.11.2
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8428769Z  * [new tag]         python_0.12.0          -> python_0.12.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8429337Z  * [new tag]         python_0.13.0          -> python_0.13.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8429881Z  * [new tag]         rust_0.11.2            -> rust_0.11.2
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8430416Z  * [new tag]         rust_0.12.0            -> rust_0.12.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8430971Z  * [new tag]         rust_0.13.0            -> rust_0.13.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8431514Z  * [new tag]         rust_0.2.0             -> rust_0.2.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8432054Z  * [new tag]         rust_0.6.0             -> rust_0.6.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8433312Z [command]/usr/bin/git branch --list --remote origin/main
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8434076Z   origin/main
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8435262Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8435931Z b5b8e5c5ac82fa857a65625eedf863b7d004ef06
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8437218Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8437899Z ##[group]Determining the checkout info
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8438624Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8439067Z [command]/usr/bin/git sparse-checkout disable
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8440215Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8441566Z ##[group]Checking out the ref
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8442202Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8667186Z Switched to a new branch 'main'
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8672323Z branch 'main' set up to track 'origin/main'.
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8680277Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8722883Z [command]/usr/bin/git log -1 --format=%H
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.8749781Z b5b8e5c5ac82fa857a65625eedf863b7d004ef06
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9172374Z ##[group]Run tj-actions/changed-files@v47
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9172922Z with:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9173318Z   separator:  
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9173942Z   include_all_old_new_renamed_files: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9174437Z   old_new_separator: ,
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9174885Z   old_new_files_separator:  
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9175555Z   files_from_source_file_separator: 
+findChangedJsFiles	UNKNOWN STEP	
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9176049Z   files_separator: 
+findChangedJsFiles	UNKNOWN STEP	
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9176504Z   files_yaml_from_source_file_separator: 
+findChangedJsFiles	UNKNOWN STEP	
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9177044Z   files_ignore_yaml_from_source_file_separator: 
+findChangedJsFiles	UNKNOWN STEP	
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9177581Z   files_ignore_separator: 
+findChangedJsFiles	UNKNOWN STEP	
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9178065Z   files_ignore_from_source_file_separator: 
+findChangedJsFiles	UNKNOWN STEP	
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9178555Z   path: .
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9178940Z   quotepath: true
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9179346Z   diff_relative: true
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9179759Z   dir_names: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9180194Z   dir_names_exclude_current_dir: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9180735Z   dir_names_include_files_separator: 
+findChangedJsFiles	UNKNOWN STEP	
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9181295Z   dir_names_deleted_files_include_only_deleted_dirs: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9181823Z   json: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9182236Z   escape_json: true
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9182643Z   safe_output: true
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9183052Z   fetch_depth: 25
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9183462Z   skip_initial_fetch: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9184078Z   fetch_additional_submodule_history: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9184596Z   since_last_remote_commit: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9185067Z   write_output_files: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9185532Z   output_dir: .github/outputs
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9186027Z   output_renamed_files_as_deleted_and_added: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9186569Z   recover_deleted_files: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9187040Z   recover_files_separator: 
+findChangedJsFiles	UNKNOWN STEP	
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9187512Z   recover_files_ignore_separator: 
+findChangedJsFiles	UNKNOWN STEP	
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9190913Z   token: ***
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9191364Z   api_url: https://api.github.com
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9191849Z   use_rest_api: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9192313Z   fail_on_initial_diff_error: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9192804Z   fail_on_submodule_diff_error: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9193296Z   negation_patterns_first: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9193932Z   matrix: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9194353Z   exclude_submodules: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9194813Z   fetch_missing_history_max_retries: 20
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9195301Z   use_posix_path_separator: false
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9195738Z   tags_pattern: *
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9196121Z env:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9196480Z   NPM_TOKEN: 
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9199712Z   GITHUB_TOKEN: ***
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:12.9200120Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.0224049Z ##[group]changed-files
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.0361711Z Using local .git directory
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.0863923Z Running on a push event...
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1163352Z Retrieving changes between aac599088b1247d09fe35978cb35280a13ed29ee (main) → b5b8e5c5ac82fa857a65625eedf863b7d004ef06 (main)
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1218978Z All Done!
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1220259Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1221266Z ##[group]changed-files-all
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1267026Z All Done!
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1268083Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1499079Z ##[group]Run isJsFilesChanged='false'
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1499725Z ^[[36;1misJsFilesChanged='false'^[[0m
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1506035Z ^[[36;1mecho "Changed files: csharp/Link.Foundation.Links.Notation.Tests/NestedIndentationTests.cs experiments/issue-282/README.md experiments/issue-282/repro.js go/nested_indentation_test.go java/src/test/java/io/github/linkfoundation/linksnotation/NestedIndentationTest.java js/tests/NestedIndentation.test.js python/tests/test_nested_indentation.py rust/links-notation/tests/nested_indentation_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation.Tests/MultilineQuotedStringTests.cs csharp/Link.Foundation.Links.Notation/ILinksGroupListExtensions.cs csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/LinksGroup.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/IndentedSyntaxTest.java js/package.json js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js js/tests/MultilineQuotedString.test.js python/links_notation/parser.py python/pyproject.toml python/tests/test_multiline_quoted_string.py rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/single_line_parser_tests.rs"^[[0m
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1518378Z ^[[36;1mfor changedFile in csharp/Link.Foundation.Links.Notation.Tests/NestedIndentationTests.cs experiments/issue-282/README.md experiments/issue-282/repro.js go/nested_indentation_test.go java/src/test/java/io/github/linkfoundation/linksnotation/NestedIndentationTest.java js/tests/NestedIndentation.test.js python/tests/test_nested_indentation.py rust/links-notation/tests/nested_indentation_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation.Tests/MultilineQuotedStringTests.cs csharp/Link.Foundation.Links.Notation/ILinksGroupListExtensions.cs csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/LinksGroup.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/IndentedSyntaxTest.java js/package.json js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js js/tests/MultilineQuotedString.test.js python/links_notation/parser.py python/pyproject.toml python/tests/test_multiline_quoted_string.py rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/single_line_parser_tests.rs; do^[[0m
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1525282Z ^[[36;1m  if [[ $changedFile == js/*.js ]] || [[ $changedFile == js/*.json ]] || [[ $changedFile == js/*.pegjs ]] || [[ $changedFile == js/* ]] || [[ $changedFile == .github/workflows/js.yml ]]; then^[[0m
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1526220Z ^[[36;1m    echo "isJsFilesChanged='true'"^[[0m
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1526720Z ^[[36;1m    isJsFilesChanged='true'^[[0m
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1527165Z ^[[36;1m    break^[[0m
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1527546Z ^[[36;1m  fi^[[0m
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1527905Z ^[[36;1mdone^[[0m
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1528402Z ^[[36;1mecho "isJsFilesChanged=${isJsFilesChanged}" >> $GITHUB_OUTPUT^[[0m
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1529042Z ^[[36;1mecho "isJsFilesChanged: ${isJsFilesChanged}"^[[0m
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1570467Z shell: /usr/bin/bash -e {0}
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1570932Z env:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1571303Z   NPM_TOKEN: 
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1575084Z   GITHUB_TOKEN: ***
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1575505Z ##[endgroup]
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1664723Z Changed files: csharp/Link.Foundation.Links.Notation.Tests/NestedIndentationTests.cs experiments/issue-282/README.md experiments/issue-282/repro.js go/nested_indentation_test.go java/src/test/java/io/github/linkfoundation/linksnotation/NestedIndentationTest.java js/tests/NestedIndentation.test.js python/tests/test_nested_indentation.py rust/links-notation/tests/nested_indentation_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation.Tests/MultilineQuotedStringTests.cs csharp/Link.Foundation.Links.Notation/ILinksGroupListExtensions.cs csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/LinksGroup.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/IndentedSyntaxTest.java js/package.json js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js js/tests/MultilineQuotedString.test.js python/links_notation/parser.py python/pyproject.toml python/tests/test_multiline_quoted_string.py rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/single_line_parser_tests.rs
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1671151Z isJsFilesChanged='true'
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1671616Z isJsFilesChanged: true
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.1805624Z Post job cleanup.
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.2656141Z [command]/usr/bin/git version
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.2698225Z git version 2.55.0
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.2735308Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/d11fde4d-6a1f-4331-bffa-01de8c7eb973/.gitconfig'
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.2746959Z Temporarily overriding HOME='/home/runner/work/_temp/d11fde4d-6a1f-4331-bffa-01de8c7eb973' before making global git config changes
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.2749099Z Adding repository directory to the temporary git global config as a safe directory
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.2751545Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.2784768Z Removing SSH command configuration
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.2791705Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.2831014Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3078247Z Removing HTTP extra header
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3085595Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3122384Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3370708Z Removing includeIf entries pointing to credentials config files
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3384917Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3411665Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3412891Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3414475Z includeif.gitdir:/github/workspace/.git.path
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3415636Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3435288Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3464998Z /home/runner/work/_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3505898Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3511749Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3542355Z /home/runner/work/_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3559228Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3599915Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3625472Z /github/runner_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3634756Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3671639Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3700181Z /github/runner_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3709102Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3749912Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.3979243Z Removing credentials config '/home/runner/work/_temp/git-credentials-99c98e3e-bfee-453e-842f-086e6d839b0f.config'
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.4150689Z Evaluate and set job outputs
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.4157322Z Set output 'isJsFilesChanged'
+findChangedJsFiles	UNKNOWN STEP	2026-08-20T04:48:13.4159769Z Cleaning up orphan processes
+format	UNKNOWN STEP	﻿2026-08-20T04:48:18.8729885Z Current runner version: '2.336.0'
+format	UNKNOWN STEP	2026-08-20T04:48:18.8756495Z ##[group]Runner Image Provisioner
+format	UNKNOWN STEP	2026-08-20T04:48:18.8757435Z Hosted Compute Agent
+format	UNKNOWN STEP	2026-08-20T04:48:18.8758031Z Version: 20260729.566
+format	UNKNOWN STEP	2026-08-20T04:48:18.8758666Z Commit: cf7153fe6e25b664e8693c24944bf2b00355d109
+format	UNKNOWN STEP	2026-08-20T04:48:18.8759517Z Build Date: 2026-07-29T19:17:02Z
+format	UNKNOWN STEP	2026-08-20T04:48:18.8760232Z Worker ID: {2358f65a-0460-456d-9b52-115d526d5646}
+format	UNKNOWN STEP	2026-08-20T04:48:18.8761205Z Azure Region: eastus
+format	UNKNOWN STEP	2026-08-20T04:48:18.8761802Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:18.8763369Z ##[group]Operating System
+format	UNKNOWN STEP	2026-08-20T04:48:18.8764106Z Ubuntu
+format	UNKNOWN STEP	2026-08-20T04:48:18.8764655Z 24.04.4
+format	UNKNOWN STEP	2026-08-20T04:48:18.8765195Z LTS
+format	UNKNOWN STEP	2026-08-20T04:48:18.8765729Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:18.8766276Z ##[group]Runner Image
+format	UNKNOWN STEP	2026-08-20T04:48:18.8766969Z Image: ubuntu-24.04
+format	UNKNOWN STEP	2026-08-20T04:48:18.8767572Z Version: 20260810.271.1
+format	UNKNOWN STEP	2026-08-20T04:48:18.8768852Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260810.271/images/ubuntu/Ubuntu2404-Readme.md
+format	UNKNOWN STEP	2026-08-20T04:48:18.8770416Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260810.271
+format	UNKNOWN STEP	2026-08-20T04:48:18.8771687Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:18.8774776Z ##[group]GITHUB_TOKEN Permissions
+format	UNKNOWN STEP	2026-08-20T04:48:18.8777807Z Actions: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8778429Z ArtifactMetadata: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8779216Z Attestations: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8779811Z Checks: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8780489Z CodeQuality: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8781516Z Contents: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8782109Z CopilotRequests: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8782785Z Deployments: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8783380Z Discussions: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8783961Z Drives: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8784516Z Issues: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8785057Z Metadata: read
+format	UNKNOWN STEP	2026-08-20T04:48:18.8785793Z Models: read
+format	UNKNOWN STEP	2026-08-20T04:48:18.8786390Z Packages: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8786970Z Pages: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8787530Z PullRequests: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8788123Z RepositoryProjects: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8788796Z SecurityEvents: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8789402Z Statuses: write
+format	UNKNOWN STEP	2026-08-20T04:48:18.8789960Z VulnerabilityAlerts: read
+format	UNKNOWN STEP	2026-08-20T04:48:18.8790644Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:18.8792969Z Secret source: Actions
+format	UNKNOWN STEP	2026-08-20T04:48:18.8794201Z Prepare workflow directory
+format	UNKNOWN STEP	2026-08-20T04:48:18.9328296Z Prepare all required actions
+format	UNKNOWN STEP	2026-08-20T04:48:18.9377839Z Getting action download info
+format	UNKNOWN STEP	2026-08-20T04:48:19.2635865Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+format	UNKNOWN STEP	2026-08-20T04:48:19.3912742Z Download action repository 'oven-sh/setup-bun@v2' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+format	UNKNOWN STEP	2026-08-20T04:48:19.5970731Z Complete job name: format
+format	UNKNOWN STEP	2026-08-20T04:48:19.6717148Z ##[group]Run actions/checkout@v6
+format	UNKNOWN STEP	2026-08-20T04:48:19.6718265Z with:
+format	UNKNOWN STEP	2026-08-20T04:48:19.6718761Z   submodules: true
+format	UNKNOWN STEP	2026-08-20T04:48:19.6719332Z   repository: link-foundation/links-notation
+format	UNKNOWN STEP	2026-08-20T04:48:19.6723549Z   token: ***
+format	UNKNOWN STEP	2026-08-20T04:48:19.6724072Z   ssh-strict: true
+format	UNKNOWN STEP	2026-08-20T04:48:19.6724606Z   ssh-user: git
+format	UNKNOWN STEP	2026-08-20T04:48:19.6725117Z   persist-credentials: true
+format	UNKNOWN STEP	2026-08-20T04:48:19.6725658Z   clean: true
+format	UNKNOWN STEP	2026-08-20T04:48:19.6726158Z   sparse-checkout-cone-mode: true
+format	UNKNOWN STEP	2026-08-20T04:48:19.6726744Z   fetch-depth: 1
+format	UNKNOWN STEP	2026-08-20T04:48:19.6727233Z   fetch-tags: false
+format	UNKNOWN STEP	2026-08-20T04:48:19.6727747Z   show-progress: true
+format	UNKNOWN STEP	2026-08-20T04:48:19.6728243Z   lfs: false
+format	UNKNOWN STEP	2026-08-20T04:48:19.6728716Z   set-safe-directory: true
+format	UNKNOWN STEP	2026-08-20T04:48:19.6729284Z   allow-unsafe-pr-checkout: false
+format	UNKNOWN STEP	2026-08-20T04:48:19.6730450Z env:
+format	UNKNOWN STEP	2026-08-20T04:48:19.6731408Z   NPM_TOKEN: 
+format	UNKNOWN STEP	2026-08-20T04:48:19.6735404Z   GITHUB_TOKEN: ***
+format	UNKNOWN STEP	2026-08-20T04:48:19.6735921Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:19.7798726Z Syncing repository: link-foundation/links-notation
+format	UNKNOWN STEP	2026-08-20T04:48:19.7801881Z ##[group]Getting Git version info
+format	UNKNOWN STEP	2026-08-20T04:48:19.7803306Z Working directory is '/home/runner/work/links-notation/links-notation'
+format	UNKNOWN STEP	2026-08-20T04:48:19.7805256Z [command]/usr/bin/git version
+format	UNKNOWN STEP	2026-08-20T04:48:19.7853773Z git version 2.54.0
+format	UNKNOWN STEP	2026-08-20T04:48:19.7877789Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:19.7892655Z Temporarily overriding HOME='/home/runner/work/_temp/19775b83-e04e-4be3-9dec-e7e6c3a85cd9' before making global git config changes
+format	UNKNOWN STEP	2026-08-20T04:48:19.7895271Z Adding repository directory to the temporary git global config as a safe directory
+format	UNKNOWN STEP	2026-08-20T04:48:19.7897605Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+format	UNKNOWN STEP	2026-08-20T04:48:19.7958634Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+format	UNKNOWN STEP	2026-08-20T04:48:19.7962741Z ##[group]Determining repository object format
+format	UNKNOWN STEP	2026-08-20T04:48:19.7965084Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:19.7966431Z ##[group]Initializing the repository
+format	UNKNOWN STEP	2026-08-20T04:48:19.7969675Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+format	UNKNOWN STEP	2026-08-20T04:48:19.8084960Z hint: Using 'master' as the name for the initial branch. This default branch name
+format	UNKNOWN STEP	2026-08-20T04:48:19.8086919Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+format	UNKNOWN STEP	2026-08-20T04:48:19.8089546Z hint: to use in all of your new repositories, which will suppress this warning,
+format	UNKNOWN STEP	2026-08-20T04:48:19.8091156Z hint: call:
+format	UNKNOWN STEP	2026-08-20T04:48:19.8091918Z hint:
+format	UNKNOWN STEP	2026-08-20T04:48:19.8092884Z hint: 	git config --global init.defaultBranch <name>
+format	UNKNOWN STEP	2026-08-20T04:48:19.8094039Z hint:
+format	UNKNOWN STEP	2026-08-20T04:48:19.8095115Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+format	UNKNOWN STEP	2026-08-20T04:48:19.8096848Z hint: 'development'. The just-created branch can be renamed via this command:
+format	UNKNOWN STEP	2026-08-20T04:48:19.8098179Z hint:
+format	UNKNOWN STEP	2026-08-20T04:48:19.8099111Z hint: 	git branch -m <name>
+format	UNKNOWN STEP	2026-08-20T04:48:19.8099954Z hint:
+format	UNKNOWN STEP	2026-08-20T04:48:19.8101429Z hint: Disable this message with "git config set advice.defaultBranchName false"
+format	UNKNOWN STEP	2026-08-20T04:48:19.8103494Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+format	UNKNOWN STEP	2026-08-20T04:48:19.8107018Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+format	UNKNOWN STEP	2026-08-20T04:48:19.8154817Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:19.8156469Z ##[group]Disabling automatic garbage collection
+format	UNKNOWN STEP	2026-08-20T04:48:19.8158777Z [command]/usr/bin/git config --local gc.auto 0
+format	UNKNOWN STEP	2026-08-20T04:48:19.8192844Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:19.8194452Z ##[group]Setting up auth
+format	UNKNOWN STEP	2026-08-20T04:48:19.8195707Z Removing SSH command configuration
+format	UNKNOWN STEP	2026-08-20T04:48:19.8199394Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+format	UNKNOWN STEP	2026-08-20T04:48:19.8237902Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+format	UNKNOWN STEP	2026-08-20T04:48:19.8687471Z Removing HTTP extra header
+format	UNKNOWN STEP	2026-08-20T04:48:19.8696001Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+format	UNKNOWN STEP	2026-08-20T04:48:19.8744160Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+format	UNKNOWN STEP	2026-08-20T04:48:19.8994943Z Removing includeIf entries pointing to credentials config files
+format	UNKNOWN STEP	2026-08-20T04:48:19.9003806Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+format	UNKNOWN STEP	2026-08-20T04:48:19.9043221Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+format	UNKNOWN STEP	2026-08-20T04:48:19.9317184Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+format	UNKNOWN STEP	2026-08-20T04:48:19.9367350Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:19.9412986Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:19.9461226Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:19.9496755Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:19.9535695Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:19.9537621Z ##[group]Fetching the repository
+format	UNKNOWN STEP	2026-08-20T04:48:19.9555081Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5b8e5c5ac82fa857a65625eedf863b7d004ef06:refs/remotes/origin/main
+format	UNKNOWN STEP	2026-08-20T04:48:20.2537123Z From https://github.com/link-foundation/links-notation
+format	UNKNOWN STEP	2026-08-20T04:48:20.2539030Z  * [new ref]         b5b8e5c5ac82fa857a65625eedf863b7d004ef06 -> origin/main
+format	UNKNOWN STEP	2026-08-20T04:48:20.2580722Z [command]/usr/bin/git branch --list --remote origin/main
+format	UNKNOWN STEP	2026-08-20T04:48:20.2611512Z   origin/main
+format	UNKNOWN STEP	2026-08-20T04:48:20.2619336Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+format	UNKNOWN STEP	2026-08-20T04:48:20.2647656Z b5b8e5c5ac82fa857a65625eedf863b7d004ef06
+format	UNKNOWN STEP	2026-08-20T04:48:20.2654528Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:20.2656617Z ##[group]Determining the checkout info
+format	UNKNOWN STEP	2026-08-20T04:48:20.2659030Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:20.2660667Z [command]/usr/bin/git sparse-checkout disable
+format	UNKNOWN STEP	2026-08-20T04:48:20.2707842Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+format	UNKNOWN STEP	2026-08-20T04:48:20.2737896Z ##[group]Checking out the ref
+format	UNKNOWN STEP	2026-08-20T04:48:20.2743116Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+format	UNKNOWN STEP	2026-08-20T04:48:20.2973092Z Switched to a new branch 'main'
+format	UNKNOWN STEP	2026-08-20T04:48:20.2976230Z branch 'main' set up to track 'origin/main'.
+format	UNKNOWN STEP	2026-08-20T04:48:20.2985181Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:20.2987405Z ##[group]Setting up auth for fetching submodules
+format	UNKNOWN STEP	2026-08-20T04:48:20.2991339Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+format	UNKNOWN STEP	2026-08-20T04:48:20.3031133Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:20.3063446Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+format	UNKNOWN STEP	2026-08-20T04:48:20.3099656Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+format	UNKNOWN STEP	2026-08-20T04:48:20.3140029Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+format	UNKNOWN STEP	2026-08-20T04:48:20.3173453Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:20.3176919Z ##[group]Fetching submodules
+format	UNKNOWN STEP	2026-08-20T04:48:20.3179339Z [command]/usr/bin/git submodule sync
+format	UNKNOWN STEP	2026-08-20T04:48:20.3406549Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+format	UNKNOWN STEP	2026-08-20T04:48:20.3639693Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+format	UNKNOWN STEP	2026-08-20T04:48:20.3863601Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:20.3867093Z ##[group]Persisting credentials for submodules
+format	UNKNOWN STEP	2026-08-20T04:48:20.3872051Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+format	UNKNOWN STEP	2026-08-20T04:48:20.4106417Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+format	UNKNOWN STEP	2026-08-20T04:48:20.4336473Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+format	UNKNOWN STEP	2026-08-20T04:48:20.4569081Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+format	UNKNOWN STEP	2026-08-20T04:48:20.4841704Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:20.4876295Z [command]/usr/bin/git log -1 --format=%H
+format	UNKNOWN STEP	2026-08-20T04:48:20.4907809Z b5b8e5c5ac82fa857a65625eedf863b7d004ef06
+format	UNKNOWN STEP	2026-08-20T04:48:20.5269039Z ##[group]Run oven-sh/setup-bun@v2
+format	UNKNOWN STEP	2026-08-20T04:48:20.5270218Z with:
+format	UNKNOWN STEP	2026-08-20T04:48:20.5271361Z   bun-version: latest
+format	UNKNOWN STEP	2026-08-20T04:48:20.5272367Z   no-cache: false
+format	UNKNOWN STEP	2026-08-20T04:48:20.5282185Z   token: ***
+format	UNKNOWN STEP	2026-08-20T04:48:20.5283066Z env:
+format	UNKNOWN STEP	2026-08-20T04:48:20.5283889Z   NPM_TOKEN: 
+format	UNKNOWN STEP	2026-08-20T04:48:20.5293588Z   GITHUB_TOKEN: ***
+format	UNKNOWN STEP	2026-08-20T04:48:20.5294539Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:21.0357999Z Downloading a new version of Bun: https://github.com/oven-sh/bun/releases/download/bun-v1.3.14/bun-linux-x64.zip
+format	UNKNOWN STEP	2026-08-20T04:48:21.2507631Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/90003922-36c2-4b7e-a43f-6842701620c2.zip
+format	UNKNOWN STEP	2026-08-20T04:48:21.9262334Z [command]/home/runner/.bun/bin/bun --revision
+format	UNKNOWN STEP	2026-08-20T04:48:21.9313085Z 1.3.14+0d9b296af
+format	UNKNOWN STEP	2026-08-20T04:48:21.9514433Z ##[group]Run npx prettier --check .
+format	UNKNOWN STEP	2026-08-20T04:48:21.9514917Z ^[[36;1mnpx prettier --check .^[[0m
+format	UNKNOWN STEP	2026-08-20T04:48:21.9558870Z shell: /usr/bin/bash -e {0}
+format	UNKNOWN STEP	2026-08-20T04:48:21.9559229Z env:
+format	UNKNOWN STEP	2026-08-20T04:48:21.9559473Z   NPM_TOKEN: 
+format	UNKNOWN STEP	2026-08-20T04:48:21.9562593Z   GITHUB_TOKEN: ***
+format	UNKNOWN STEP	2026-08-20T04:48:21.9562889Z ##[endgroup]
+format	UNKNOWN STEP	2026-08-20T04:48:25.7311361Z npm warn exec The following package was not found and will be installed: prettier@3.9.6
+format	UNKNOWN STEP	2026-08-20T04:48:26.0761490Z Checking formatting...
+format	UNKNOWN STEP	2026-08-20T04:48:26.7584295Z All matched files use Prettier code style!
+format	UNKNOWN STEP	2026-08-20T04:48:26.8260087Z Post job cleanup.
+format	UNKNOWN STEP	2026-08-20T04:48:27.0059595Z Post job cleanup.
+format	UNKNOWN STEP	2026-08-20T04:48:27.0928106Z [command]/usr/bin/git version
+format	UNKNOWN STEP	2026-08-20T04:48:27.0969143Z git version 2.54.0
+format	UNKNOWN STEP	2026-08-20T04:48:27.1012087Z Temporarily overriding HOME='/home/runner/work/_temp/726f0066-82ca-4b0b-84dd-a15c5e6977b1' before making global git config changes
+format	UNKNOWN STEP	2026-08-20T04:48:27.1013471Z Adding repository directory to the temporary git global config as a safe directory
+format	UNKNOWN STEP	2026-08-20T04:48:27.1018068Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+format	UNKNOWN STEP	2026-08-20T04:48:27.1052226Z Removing SSH command configuration
+format	UNKNOWN STEP	2026-08-20T04:48:27.1060082Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+format	UNKNOWN STEP	2026-08-20T04:48:27.1097658Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+format	UNKNOWN STEP	2026-08-20T04:48:27.1409755Z Removing HTTP extra header
+format	UNKNOWN STEP	2026-08-20T04:48:27.1411375Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+format	UNKNOWN STEP	2026-08-20T04:48:27.1465400Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+format	UNKNOWN STEP	2026-08-20T04:48:27.1706603Z Removing includeIf entries pointing to credentials config files
+format	UNKNOWN STEP	2026-08-20T04:48:27.1715314Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+format	UNKNOWN STEP	2026-08-20T04:48:27.1749353Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+format	UNKNOWN STEP	2026-08-20T04:48:27.1750655Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+format	UNKNOWN STEP	2026-08-20T04:48:27.1752200Z includeif.gitdir:/github/workspace/.git.path
+format	UNKNOWN STEP	2026-08-20T04:48:27.1753090Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+format	UNKNOWN STEP	2026-08-20T04:48:27.1760529Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+format	UNKNOWN STEP	2026-08-20T04:48:27.1786073Z /home/runner/work/_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:27.1799891Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:27.1843980Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+format	UNKNOWN STEP	2026-08-20T04:48:27.1873762Z /home/runner/work/_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:27.1885410Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:27.1932056Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+format	UNKNOWN STEP	2026-08-20T04:48:27.1947814Z /github/runner_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:27.1957821Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:27.1998145Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+format	UNKNOWN STEP	2026-08-20T04:48:27.2023895Z /github/runner_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:27.2033818Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config
+format	UNKNOWN STEP	2026-08-20T04:48:27.2073908Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+format	UNKNOWN STEP	2026-08-20T04:48:27.2324754Z Removing credentials config '/home/runner/work/_temp/git-credentials-1d89c03d-3559-422c-a488-2671a6b8a39e.config'
+format	UNKNOWN STEP	2026-08-20T04:48:27.2473249Z Cleaning up orphan processes
+lint	UNKNOWN STEP	﻿2026-08-20T04:48:31.4898488Z Current runner version: '2.336.0'
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4919408Z ##[group]Runner Image Provisioner
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4920123Z Hosted Compute Agent
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4920660Z Version: 20260729.566
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4921489Z Commit: cf7153fe6e25b664e8693c24944bf2b00355d109
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4922116Z Build Date: 2026-07-29T19:17:02Z
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4922730Z Worker ID: {c0555526-c9b4-426b-bcc0-4afa63f43b6e}
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4923337Z Azure Region: westcentralus
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4923859Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4925053Z ##[group]Operating System
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4925569Z Ubuntu
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4925995Z 24.04.4
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4926504Z LTS
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4927001Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4927494Z ##[group]Runner Image
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4927998Z Image: ubuntu-24.04
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4928459Z Version: 20260816.277.1
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4929538Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260816.277/images/ubuntu/Ubuntu2404-Readme.md
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4930816Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260816.277
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4931757Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4934231Z ##[group]GITHUB_TOKEN Permissions
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4936164Z Actions: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4936783Z ArtifactMetadata: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4937311Z Attestations: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4937780Z Checks: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4938294Z CodeQuality: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4938799Z Contents: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4939250Z CopilotRequests: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4939791Z Deployments: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4940259Z Discussions: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4940741Z Drives: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4941330Z Issues: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4941825Z Metadata: read
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4942396Z Models: read
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4942849Z Packages: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4943331Z Pages: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4943826Z PullRequests: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4944319Z RepositoryProjects: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4944872Z SecurityEvents: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4945350Z Statuses: write
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4945803Z VulnerabilityAlerts: read
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4946412Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4948090Z Secret source: Actions
+lint	UNKNOWN STEP	2026-08-20T04:48:31.4948971Z Prepare workflow directory
+lint	UNKNOWN STEP	2026-08-20T04:48:31.5380239Z Prepare all required actions
+lint	UNKNOWN STEP	2026-08-20T04:48:31.5419492Z Getting action download info
+lint	UNKNOWN STEP	2026-08-20T04:48:31.8588349Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+lint	UNKNOWN STEP	2026-08-20T04:48:32.0552705Z Download action repository 'oven-sh/setup-bun@v2' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9159618Z Complete job name: lint
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9733173Z ##[group]Run actions/checkout@v6
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9733874Z with:
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9734219Z   submodules: true
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9734616Z   repository: link-foundation/links-notation
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9737666Z   token: ***
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9738017Z   ssh-strict: true
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9738393Z   ssh-user: git
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9738758Z   persist-credentials: true
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9739145Z   clean: true
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9739498Z   sparse-checkout-cone-mode: true
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9739910Z   fetch-depth: 1
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9740252Z   fetch-tags: false
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9740608Z   show-progress: true
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9740977Z   lfs: false
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9741542Z   set-safe-directory: true
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9741964Z   allow-unsafe-pr-checkout: false
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9742579Z env:
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9742901Z   NPM_TOKEN: 
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9745762Z   GITHUB_TOKEN: ***
+lint	UNKNOWN STEP	2026-08-20T04:48:32.9746120Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0547104Z Syncing repository: link-foundation/links-notation
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0548672Z ##[group]Getting Git version info
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0549307Z Working directory is '/home/runner/work/links-notation/links-notation'
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0550230Z [command]/usr/bin/git version
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0619203Z git version 2.55.0
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0642362Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0661730Z Temporarily overriding HOME='/home/runner/work/_temp/14753bb3-c43d-4efc-a65d-3fe426f69040' before making global git config changes
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0663693Z Adding repository directory to the temporary git global config as a safe directory
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0668266Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0892536Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0894788Z ##[group]Determining repository object format
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0896310Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0897482Z ##[group]Initializing the repository
+lint	UNKNOWN STEP	2026-08-20T04:48:33.0898633Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1242104Z hint: Using 'master' as the name for the initial branch. This default branch name
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1244799Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1246371Z hint: to use in all of your new repositories, which will suppress this warning,
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1247196Z hint: call:
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1247534Z hint:
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1248001Z hint: 	git config --global init.defaultBranch <name>
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1248499Z hint:
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1248965Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1249701Z hint: 'development'. The just-created branch can be renamed via this command:
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1250271Z hint:
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1250602Z hint: 	git branch -m <name>
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1250984Z hint:
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1252133Z hint: Disable this message with "git config set advice.defaultBranchName false"
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1253433Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1255285Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1408701Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1409596Z ##[group]Disabling automatic garbage collection
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1412366Z [command]/usr/bin/git config --local gc.auto 0
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1493615Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1494224Z ##[group]Setting up auth
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1494662Z Removing SSH command configuration
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1496145Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1528664Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1810405Z Removing HTTP extra header
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1815592Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+lint	UNKNOWN STEP	2026-08-20T04:48:33.1846623Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+lint	UNKNOWN STEP	2026-08-20T04:48:33.2033481Z Removing includeIf entries pointing to credentials config files
+lint	UNKNOWN STEP	2026-08-20T04:48:33.2038658Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+lint	UNKNOWN STEP	2026-08-20T04:48:33.2068434Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+lint	UNKNOWN STEP	2026-08-20T04:48:33.2265461Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+lint	UNKNOWN STEP	2026-08-20T04:48:33.2373346Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:33.2430358Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:33.2591835Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:33.2833329Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:33.2868456Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:33.2869084Z ##[group]Fetching the repository
+lint	UNKNOWN STEP	2026-08-20T04:48:33.2876915Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5b8e5c5ac82fa857a65625eedf863b7d004ef06:refs/remotes/origin/main
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4177601Z From https://github.com/link-foundation/links-notation
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4180128Z  * [new ref]         b5b8e5c5ac82fa857a65625eedf863b7d004ef06 -> origin/main
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4186346Z [command]/usr/bin/git branch --list --remote origin/main
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4212083Z   origin/main
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4218737Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4243593Z b5b8e5c5ac82fa857a65625eedf863b7d004ef06
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4247569Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4248651Z ##[group]Determining the checkout info
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4249864Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4251291Z [command]/usr/bin/git sparse-checkout disable
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4552471Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4607899Z ##[group]Checking out the ref
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4621692Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4845484Z Switched to a new branch 'main'
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4849359Z branch 'main' set up to track 'origin/main'.
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4856301Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4857921Z ##[group]Setting up auth for fetching submodules
+lint	UNKNOWN STEP	2026-08-20T04:48:34.4861592Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+lint	UNKNOWN STEP	2026-08-20T04:48:34.5242140Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:34.5269561Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+lint	UNKNOWN STEP	2026-08-20T04:48:34.5302073Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+lint	UNKNOWN STEP	2026-08-20T04:48:34.5472103Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+lint	UNKNOWN STEP	2026-08-20T04:48:34.5508104Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:34.5510443Z ##[group]Fetching submodules
+lint	UNKNOWN STEP	2026-08-20T04:48:34.5512369Z [command]/usr/bin/git submodule sync
+lint	UNKNOWN STEP	2026-08-20T04:48:34.5708032Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+lint	UNKNOWN STEP	2026-08-20T04:48:34.5968169Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+lint	UNKNOWN STEP	2026-08-20T04:48:34.6160030Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:34.6161739Z ##[group]Persisting credentials for submodules
+lint	UNKNOWN STEP	2026-08-20T04:48:34.6167176Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+lint	UNKNOWN STEP	2026-08-20T04:48:34.6377716Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+lint	UNKNOWN STEP	2026-08-20T04:48:34.6577855Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+lint	UNKNOWN STEP	2026-08-20T04:48:34.6772781Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+lint	UNKNOWN STEP	2026-08-20T04:48:34.6976865Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:34.7014457Z [command]/usr/bin/git log -1 --format=%H
+lint	UNKNOWN STEP	2026-08-20T04:48:34.7038827Z b5b8e5c5ac82fa857a65625eedf863b7d004ef06
+lint	UNKNOWN STEP	2026-08-20T04:48:34.7328883Z ##[group]Run oven-sh/setup-bun@v2
+lint	UNKNOWN STEP	2026-08-20T04:48:34.7329756Z with:
+lint	UNKNOWN STEP	2026-08-20T04:48:34.7330409Z   bun-version: latest
+lint	UNKNOWN STEP	2026-08-20T04:48:34.7394487Z   no-cache: false
+lint	UNKNOWN STEP	2026-08-20T04:48:34.7401595Z   token: ***
+lint	UNKNOWN STEP	2026-08-20T04:48:34.7402272Z env:
+lint	UNKNOWN STEP	2026-08-20T04:48:34.7402903Z   NPM_TOKEN: 
+lint	UNKNOWN STEP	2026-08-20T04:48:34.7409732Z   GITHUB_TOKEN: ***
+lint	UNKNOWN STEP	2026-08-20T04:48:34.7410453Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:35.4529355Z Downloading a new version of Bun: https://github.com/oven-sh/bun/releases/download/bun-v1.3.14/bun-linux-x64.zip
+lint	UNKNOWN STEP	2026-08-20T04:48:35.9966623Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/5978d7b6-a1c6-4563-872d-56bf4cd14dcf.zip
+lint	UNKNOWN STEP	2026-08-20T04:48:36.5826555Z [command]/home/runner/.bun/bin/bun --revision
+lint	UNKNOWN STEP	2026-08-20T04:48:36.5874959Z 1.3.14+0d9b296af
+lint	UNKNOWN STEP	2026-08-20T04:48:36.6023932Z ##[group]Run bun install
+lint	UNKNOWN STEP	2026-08-20T04:48:36.6024199Z ^[[36;1mbun install^[[0m
+lint	UNKNOWN STEP	2026-08-20T04:48:36.6062410Z shell: /usr/bin/bash -e {0}
+lint	UNKNOWN STEP	2026-08-20T04:48:36.6062656Z env:
+lint	UNKNOWN STEP	2026-08-20T04:48:36.6062829Z   NPM_TOKEN: 
+lint	UNKNOWN STEP	2026-08-20T04:48:36.6064724Z   GITHUB_TOKEN: ***
+lint	UNKNOWN STEP	2026-08-20T04:48:36.6064909Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:36.6152999Z bun install v1.3.14 (0d9b296a)
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9686424Z Saved lockfile
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9686653Z 
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9686905Z + bun-types@1.3.14
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9687388Z + eslint@10.8.1
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9687796Z + peggy@5.1.0
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9688084Z + typescript@7.0.2
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9688259Z 
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9688385Z 78 packages installed [354.00ms]
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9749954Z ##[group]Run bun run lint
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9750199Z ^[[36;1mbun run lint^[[0m
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9782717Z shell: /usr/bin/bash -e {0}
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9782941Z env:
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9783109Z   NPM_TOKEN: 
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9784992Z   GITHUB_TOKEN: ***
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9785178Z ##[endgroup]
+lint	UNKNOWN STEP	2026-08-20T04:48:36.9850841Z $ eslint src/ tests/
+lint	UNKNOWN STEP	2026-08-20T04:48:37.4730929Z Post job cleanup.
+lint	UNKNOWN STEP	2026-08-20T04:48:37.6127527Z Post job cleanup.
+lint	UNKNOWN STEP	2026-08-20T04:48:37.6835848Z [command]/usr/bin/git version
+lint	UNKNOWN STEP	2026-08-20T04:48:37.6870608Z git version 2.55.0
+lint	UNKNOWN STEP	2026-08-20T04:48:37.6933369Z Temporarily overriding HOME='/home/runner/work/_temp/d4970c6d-c586-48ea-9b86-866de5bba71e' before making global git config changes
+lint	UNKNOWN STEP	2026-08-20T04:48:37.6934459Z Adding repository directory to the temporary git global config as a safe directory
+lint	UNKNOWN STEP	2026-08-20T04:48:37.6937287Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+lint	UNKNOWN STEP	2026-08-20T04:48:37.6966717Z Removing SSH command configuration
+lint	UNKNOWN STEP	2026-08-20T04:48:37.6972180Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7003410Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7225019Z Removing HTTP extra header
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7230751Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7261908Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7467671Z Removing includeIf entries pointing to credentials config files
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7474516Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7499716Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7500676Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7501667Z includeif.gitdir:/github/workspace/.git.path
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7502392Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7508695Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7530388Z /home/runner/work/_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7541789Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7573196Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7596605Z /home/runner/work/_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7605697Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7640664Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7665723Z /github/runner_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7674078Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7707908Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7729784Z /github/runner_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7736849Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7769631Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+lint	UNKNOWN STEP	2026-08-20T04:48:37.7959222Z Removing credentials config '/home/runner/work/_temp/git-credentials-e807f139-dd11-4da1-8920-dde275e2fb6e.config'
+lint	UNKNOWN STEP	2026-08-20T04:48:37.8079569Z Cleaning up orphan processes
+test	UNKNOWN STEP	﻿2026-08-20T04:48:43.7226884Z Current runner version: '2.336.0'
+test	UNKNOWN STEP	2026-08-20T04:48:43.7252511Z ##[group]Runner Image Provisioner
+test	UNKNOWN STEP	2026-08-20T04:48:43.7253384Z Hosted Compute Agent
+test	UNKNOWN STEP	2026-08-20T04:48:43.7253947Z Version: 20260729.566
+test	UNKNOWN STEP	2026-08-20T04:48:43.7254544Z Commit: cf7153fe6e25b664e8693c24944bf2b00355d109
+test	UNKNOWN STEP	2026-08-20T04:48:43.7255273Z Build Date: 2026-07-29T19:17:02Z
+test	UNKNOWN STEP	2026-08-20T04:48:43.7256315Z Worker ID: {9974bbb4-b1a8-4c42-9042-7fc012e8c9a9}
+test	UNKNOWN STEP	2026-08-20T04:48:43.7256991Z Azure Region: centralus
+test	UNKNOWN STEP	2026-08-20T04:48:43.7257585Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:43.7259603Z ##[group]Operating System
+test	UNKNOWN STEP	2026-08-20T04:48:43.7260268Z Ubuntu
+test	UNKNOWN STEP	2026-08-20T04:48:43.7260769Z 24.04.4
+test	UNKNOWN STEP	2026-08-20T04:48:43.7261231Z LTS
+test	UNKNOWN STEP	2026-08-20T04:48:43.7261736Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:43.7262243Z ##[group]Runner Image
+test	UNKNOWN STEP	2026-08-20T04:48:43.7262812Z Image: ubuntu-24.04
+test	UNKNOWN STEP	2026-08-20T04:48:43.7263368Z Version: 20260816.277.1
+test	UNKNOWN STEP	2026-08-20T04:48:43.7264615Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260816.277/images/ubuntu/Ubuntu2404-Readme.md
+test	UNKNOWN STEP	2026-08-20T04:48:43.7266531Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260816.277
+test	UNKNOWN STEP	2026-08-20T04:48:43.7267469Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:43.7270584Z ##[group]GITHUB_TOKEN Permissions
+test	UNKNOWN STEP	2026-08-20T04:48:43.7273074Z Actions: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7273654Z ArtifactMetadata: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7274202Z Attestations: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7274782Z Checks: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7275289Z CodeQuality: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7275980Z Contents: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7276541Z CopilotRequests: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7277118Z Deployments: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7277711Z Discussions: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7278230Z Drives: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7278748Z Issues: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7279264Z Metadata: read
+test	UNKNOWN STEP	2026-08-20T04:48:43.7279856Z Models: read
+test	UNKNOWN STEP	2026-08-20T04:48:43.7280390Z Packages: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7280897Z Pages: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7281438Z PullRequests: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7282010Z RepositoryProjects: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7282651Z SecurityEvents: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7283220Z Statuses: write
+test	UNKNOWN STEP	2026-08-20T04:48:43.7283751Z VulnerabilityAlerts: read
+test	UNKNOWN STEP	2026-08-20T04:48:43.7284293Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:43.7286667Z Secret source: Actions
+test	UNKNOWN STEP	2026-08-20T04:48:43.7287926Z Prepare workflow directory
+test	UNKNOWN STEP	2026-08-20T04:48:43.7803199Z Prepare all required actions
+test	UNKNOWN STEP	2026-08-20T04:48:43.7851212Z Getting action download info
+test	UNKNOWN STEP	2026-08-20T04:48:44.0418941Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+test	UNKNOWN STEP	2026-08-20T04:48:44.1392305Z Download action repository 'oven-sh/setup-bun@v2' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+test	UNKNOWN STEP	2026-08-20T04:48:44.6735055Z Complete job name: test
+test	UNKNOWN STEP	2026-08-20T04:48:44.7478126Z ##[group]Run actions/checkout@v6
+test	UNKNOWN STEP	2026-08-20T04:48:44.7478971Z with:
+test	UNKNOWN STEP	2026-08-20T04:48:44.7479383Z   submodules: true
+test	UNKNOWN STEP	2026-08-20T04:48:44.7479884Z   repository: link-foundation/links-notation
+test	UNKNOWN STEP	2026-08-20T04:48:44.7483845Z   token: ***
+test	UNKNOWN STEP	2026-08-20T04:48:44.7484256Z   ssh-strict: true
+test	UNKNOWN STEP	2026-08-20T04:48:44.7484697Z   ssh-user: git
+test	UNKNOWN STEP	2026-08-20T04:48:44.7485127Z   persist-credentials: true
+test	UNKNOWN STEP	2026-08-20T04:48:44.7485846Z   clean: true
+test	UNKNOWN STEP	2026-08-20T04:48:44.7486281Z   sparse-checkout-cone-mode: true
+test	UNKNOWN STEP	2026-08-20T04:48:44.7486788Z   fetch-depth: 1
+test	UNKNOWN STEP	2026-08-20T04:48:44.7487196Z   fetch-tags: false
+test	UNKNOWN STEP	2026-08-20T04:48:44.7487617Z   show-progress: true
+test	UNKNOWN STEP	2026-08-20T04:48:44.7488051Z   lfs: false
+test	UNKNOWN STEP	2026-08-20T04:48:44.7488450Z   set-safe-directory: true
+test	UNKNOWN STEP	2026-08-20T04:48:44.7488955Z   allow-unsafe-pr-checkout: false
+test	UNKNOWN STEP	2026-08-20T04:48:44.7489730Z env:
+test	UNKNOWN STEP	2026-08-20T04:48:44.7490111Z   NPM_TOKEN: 
+test	UNKNOWN STEP	2026-08-20T04:48:44.7493852Z   GITHUB_TOKEN: ***
+test	UNKNOWN STEP	2026-08-20T04:48:44.7494288Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:44.8454263Z Syncing repository: link-foundation/links-notation
+test	UNKNOWN STEP	2026-08-20T04:48:44.8456543Z ##[group]Getting Git version info
+test	UNKNOWN STEP	2026-08-20T04:48:44.8457386Z Working directory is '/home/runner/work/links-notation/links-notation'
+test	UNKNOWN STEP	2026-08-20T04:48:44.8490262Z [command]/usr/bin/git version
+test	UNKNOWN STEP	2026-08-20T04:48:44.8603431Z git version 2.55.0
+test	UNKNOWN STEP	2026-08-20T04:48:44.8634137Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:44.8652687Z Temporarily overriding HOME='/home/runner/work/_temp/2c7eb4d8-29d2-48f9-a3cb-fd957d028f97' before making global git config changes
+test	UNKNOWN STEP	2026-08-20T04:48:44.8654118Z Adding repository directory to the temporary git global config as a safe directory
+test	UNKNOWN STEP	2026-08-20T04:48:44.8658687Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+test	UNKNOWN STEP	2026-08-20T04:48:44.8711519Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+test	UNKNOWN STEP	2026-08-20T04:48:44.8715879Z ##[group]Determining repository object format
+test	UNKNOWN STEP	2026-08-20T04:48:44.8718412Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:44.8719454Z ##[group]Initializing the repository
+test	UNKNOWN STEP	2026-08-20T04:48:44.8723940Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+test	UNKNOWN STEP	2026-08-20T04:48:44.8820559Z hint: Using 'master' as the name for the initial branch. This default branch name
+test	UNKNOWN STEP	2026-08-20T04:48:44.8822835Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+test	UNKNOWN STEP	2026-08-20T04:48:44.8824844Z hint: to use in all of your new repositories, which will suppress this warning,
+test	UNKNOWN STEP	2026-08-20T04:48:44.8826544Z hint: call:
+test	UNKNOWN STEP	2026-08-20T04:48:44.8827474Z hint:
+test	UNKNOWN STEP	2026-08-20T04:48:44.8828577Z hint: 	git config --global init.defaultBranch <name>
+test	UNKNOWN STEP	2026-08-20T04:48:44.8829879Z hint:
+test	UNKNOWN STEP	2026-08-20T04:48:44.8831140Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+test	UNKNOWN STEP	2026-08-20T04:48:44.8833085Z hint: 'development'. The just-created branch can be renamed via this command:
+test	UNKNOWN STEP	2026-08-20T04:48:44.8834702Z hint:
+test	UNKNOWN STEP	2026-08-20T04:48:44.8835678Z hint: 	git branch -m <name>
+test	UNKNOWN STEP	2026-08-20T04:48:44.8836680Z hint:
+test	UNKNOWN STEP	2026-08-20T04:48:44.8838034Z hint: Disable this message with "git config set advice.defaultBranchName false"
+test	UNKNOWN STEP	2026-08-20T04:48:44.8840450Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+test	UNKNOWN STEP	2026-08-20T04:48:44.8844124Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+test	UNKNOWN STEP	2026-08-20T04:48:44.8873743Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:44.8875124Z ##[group]Disabling automatic garbage collection
+test	UNKNOWN STEP	2026-08-20T04:48:44.8878304Z [command]/usr/bin/git config --local gc.auto 0
+test	UNKNOWN STEP	2026-08-20T04:48:44.8903310Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:44.8904599Z ##[group]Setting up auth
+test	UNKNOWN STEP	2026-08-20T04:48:44.8905839Z Removing SSH command configuration
+test	UNKNOWN STEP	2026-08-20T04:48:44.8911261Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	UNKNOWN STEP	2026-08-20T04:48:44.8939048Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	UNKNOWN STEP	2026-08-20T04:48:44.9251411Z Removing HTTP extra header
+test	UNKNOWN STEP	2026-08-20T04:48:44.9260044Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	UNKNOWN STEP	2026-08-20T04:48:44.9291960Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	UNKNOWN STEP	2026-08-20T04:48:44.9480687Z Removing includeIf entries pointing to credentials config files
+test	UNKNOWN STEP	2026-08-20T04:48:44.9487308Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	UNKNOWN STEP	2026-08-20T04:48:44.9516161Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	UNKNOWN STEP	2026-08-20T04:48:44.9691734Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	UNKNOWN STEP	2026-08-20T04:48:44.9724723Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:44.9753754Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:44.9783926Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:44.9810792Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:44.9839554Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:44.9840329Z ##[group]Fetching the repository
+test	UNKNOWN STEP	2026-08-20T04:48:44.9847555Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5b8e5c5ac82fa857a65625eedf863b7d004ef06:refs/remotes/origin/main
+test	UNKNOWN STEP	2026-08-20T04:48:45.4987397Z From https://github.com/link-foundation/links-notation
+test	UNKNOWN STEP	2026-08-20T04:48:45.4989874Z  * [new ref]         b5b8e5c5ac82fa857a65625eedf863b7d004ef06 -> origin/main
+test	UNKNOWN STEP	2026-08-20T04:48:45.4996436Z [command]/usr/bin/git branch --list --remote origin/main
+test	UNKNOWN STEP	2026-08-20T04:48:45.5018477Z   origin/main
+test	UNKNOWN STEP	2026-08-20T04:48:45.5024998Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+test	UNKNOWN STEP	2026-08-20T04:48:45.5046382Z b5b8e5c5ac82fa857a65625eedf863b7d004ef06
+test	UNKNOWN STEP	2026-08-20T04:48:45.5050147Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:45.5051495Z ##[group]Determining the checkout info
+test	UNKNOWN STEP	2026-08-20T04:48:45.5053055Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:45.5054383Z [command]/usr/bin/git sparse-checkout disable
+test	UNKNOWN STEP	2026-08-20T04:48:45.5095075Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+test	UNKNOWN STEP	2026-08-20T04:48:45.5118736Z ##[group]Checking out the ref
+test	UNKNOWN STEP	2026-08-20T04:48:45.5121079Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+test	UNKNOWN STEP	2026-08-20T04:48:45.5294702Z Switched to a new branch 'main'
+test	UNKNOWN STEP	2026-08-20T04:48:45.5299319Z branch 'main' set up to track 'origin/main'.
+test	UNKNOWN STEP	2026-08-20T04:48:45.5307142Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:45.5309353Z ##[group]Setting up auth for fetching submodules
+test	UNKNOWN STEP	2026-08-20T04:48:45.5313599Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	UNKNOWN STEP	2026-08-20T04:48:45.5347286Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:45.5372210Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+test	UNKNOWN STEP	2026-08-20T04:48:45.5400113Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+test	UNKNOWN STEP	2026-08-20T04:48:45.5431488Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+test	UNKNOWN STEP	2026-08-20T04:48:45.5458735Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:45.5461921Z ##[group]Fetching submodules
+test	UNKNOWN STEP	2026-08-20T04:48:45.5464198Z [command]/usr/bin/git submodule sync
+test	UNKNOWN STEP	2026-08-20T04:48:45.5643375Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+test	UNKNOWN STEP	2026-08-20T04:48:45.5826329Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+test	UNKNOWN STEP	2026-08-20T04:48:45.5999653Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:45.6002191Z ##[group]Persisting credentials for submodules
+test	UNKNOWN STEP	2026-08-20T04:48:45.6007131Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+test	UNKNOWN STEP	2026-08-20T04:48:45.6181172Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	UNKNOWN STEP	2026-08-20T04:48:45.6361219Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+test	UNKNOWN STEP	2026-08-20T04:48:45.6538441Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+test	UNKNOWN STEP	2026-08-20T04:48:45.6720381Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:45.6751188Z [command]/usr/bin/git log -1 --format=%H
+test	UNKNOWN STEP	2026-08-20T04:48:45.6770928Z b5b8e5c5ac82fa857a65625eedf863b7d004ef06
+test	UNKNOWN STEP	2026-08-20T04:48:45.7089546Z ##[group]Run oven-sh/setup-bun@v2
+test	UNKNOWN STEP	2026-08-20T04:48:45.7090653Z with:
+test	UNKNOWN STEP	2026-08-20T04:48:45.7091456Z   bun-version: latest
+test	UNKNOWN STEP	2026-08-20T04:48:45.7092356Z   no-cache: false
+test	UNKNOWN STEP	2026-08-20T04:48:45.7100723Z   token: ***
+test	UNKNOWN STEP	2026-08-20T04:48:45.7101550Z env:
+test	UNKNOWN STEP	2026-08-20T04:48:45.7102336Z   NPM_TOKEN: 
+test	UNKNOWN STEP	2026-08-20T04:48:45.7110436Z   GITHUB_TOKEN: ***
+test	UNKNOWN STEP	2026-08-20T04:48:45.7111317Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:46.2822230Z Downloading a new version of Bun: https://github.com/oven-sh/bun/releases/download/bun-v1.3.14/bun-linux-x64.zip
+test	UNKNOWN STEP	2026-08-20T04:48:46.6728077Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/56b09446-4e9a-4cdc-b798-0cc32b0e6524.zip
+test	UNKNOWN STEP	2026-08-20T04:48:47.3693892Z [command]/home/runner/.bun/bin/bun --revision
+test	UNKNOWN STEP	2026-08-20T04:48:47.3735509Z 1.3.14+0d9b296af
+test	UNKNOWN STEP	2026-08-20T04:48:47.3880159Z ##[group]Run bun install
+test	UNKNOWN STEP	2026-08-20T04:48:47.3880549Z ^[[36;1mbun install^[[0m
+test	UNKNOWN STEP	2026-08-20T04:48:47.3910698Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2026-08-20T04:48:47.3911057Z env:
+test	UNKNOWN STEP	2026-08-20T04:48:47.3911300Z   NPM_TOKEN: 
+test	UNKNOWN STEP	2026-08-20T04:48:47.3913853Z   GITHUB_TOKEN: ***
+test	UNKNOWN STEP	2026-08-20T04:48:47.3914113Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:47.4000969Z bun install v1.3.14 (0d9b296a)
+test	UNKNOWN STEP	2026-08-20T04:48:47.6282558Z Saved lockfile
+test	UNKNOWN STEP	2026-08-20T04:48:47.6282904Z 
+test	UNKNOWN STEP	2026-08-20T04:48:47.6283566Z + bun-types@1.3.14
+test	UNKNOWN STEP	2026-08-20T04:48:47.6284240Z + eslint@10.8.1
+test	UNKNOWN STEP	2026-08-20T04:48:47.6284842Z + peggy@5.1.0
+test	UNKNOWN STEP	2026-08-20T04:48:47.6285564Z + typescript@7.0.2
+test	UNKNOWN STEP	2026-08-20T04:48:47.6286076Z 
+test	UNKNOWN STEP	2026-08-20T04:48:47.6286438Z 78 packages installed [229.00ms]
+test	UNKNOWN STEP	2026-08-20T04:48:47.6348320Z ##[group]Run bun run build
+test	UNKNOWN STEP	2026-08-20T04:48:47.6348621Z ^[[36;1mbun run build^[[0m
+test	UNKNOWN STEP	2026-08-20T04:48:47.6374981Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2026-08-20T04:48:47.6375267Z env:
+test	UNKNOWN STEP	2026-08-20T04:48:47.6375707Z   NPM_TOKEN: 
+test	UNKNOWN STEP	2026-08-20T04:48:47.6378403Z   GITHUB_TOKEN: ***
+test	UNKNOWN STEP	2026-08-20T04:48:47.6378628Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:47.6442418Z $ bun run build:grammar && bun build src/index.js --outdir=dist --target=node
+test	UNKNOWN STEP	2026-08-20T04:48:47.6469418Z $ peggy --format es -o src/parser-generated.js src/grammar.pegjs
+test	UNKNOWN STEP	2026-08-20T04:48:48.2258042Z Bundled 7 modules in 6ms
+test	UNKNOWN STEP	2026-08-20T04:48:48.2258351Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2258479Z   index.js  55.70 KB  (entry point)
+test	UNKNOWN STEP	2026-08-20T04:48:48.2258659Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2305626Z ##[group]Run bun test
+test	UNKNOWN STEP	2026-08-20T04:48:48.2305914Z ^[[36;1mbun test^[[0m
+test	UNKNOWN STEP	2026-08-20T04:48:48.2327640Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2026-08-20T04:48:48.2327935Z env:
+test	UNKNOWN STEP	2026-08-20T04:48:48.2328130Z   NPM_TOKEN: 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2330479Z   GITHUB_TOKEN: ***
+test	UNKNOWN STEP	2026-08-20T04:48:48.2330709Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2383923Z bun test v1.3.14 (0d9b296a)
+test	UNKNOWN STEP	2026-08-20T04:48:48.2486621Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2488032Z ##[group]tests/MultilineParser.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.2582371Z (pass) Two links [3.99ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2600360Z (pass) Parse and stringify [1.35ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2609860Z (pass) Parse and stringify test 2 [0.95ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2619561Z (pass) Parse and stringify with less parentheses [0.69ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2621446Z (pass) Duplicate identifiers [0.32ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2641837Z (pass) Test complex structure [1.14ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2642670Z (pass) Test mixed formats [0.45ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2643454Z (pass) Test multiline with id [0.17ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2644197Z (pass) Test multiple top level elements [0.19ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2644977Z (pass) Test multiline simple links [0.24ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2646229Z (pass) Test indented children [0.15ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2646630Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2647186Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2647402Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2647911Z ##[group]tests/MultilineQuotedString.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.2683933Z (pass) TestMultilineDoubleQuotedReference [2.16ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2697057Z (pass) TestSimpleMultilineDoubleQuoted [0.27ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2698302Z (pass) TestSimpleMultilineSingleQuoted [0.22ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2699100Z (pass) TestMultilineQuotedAsId [0.24ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2699606Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2700816Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2701236Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2701877Z ##[group]tests/ApiTests.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.2721529Z (pass) test_is_ref [0.05ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2726370Z (pass) test_is_link [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2727263Z (pass) test_is_ref equivalent [0.04ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2744904Z (pass) test_is_link equivalent [0.04ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2750950Z (pass) test_empty_link [0.03ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2751691Z (pass) test_simple_link [0.15ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2752394Z (pass) test_link_with_source_target [0.07ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2753106Z (pass) test_link_with_source_type_target [0.15ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2753885Z (pass) test_single_line_format [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2754569Z (pass) test_quoted_references [0.27ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2755245Z (pass) test_quoted_references_parsing [0.22ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2756087Z (pass) test_indented_id_syntax_parsing [0.27ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2756814Z (pass) test_indented_id_syntax_roundtrip [0.47ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2757705Z (pass) test_multiple_indented_id_syntax_parsing [0.36ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2758564Z (pass) test_multiple_indented_id_syntax_roundtrip [0.24ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2759179Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2759871Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2760029Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2760358Z ##[group]tests/IndentedIdSyntax.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.2763275Z (pass) Basic indented ID syntax [0.28ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2764231Z (pass) Indented ID syntax with single value [0.13ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2782504Z (pass) Indented ID syntax with multiple values [0.14ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2783545Z (pass) Indented ID syntax with numeric ID [0.16ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2784303Z (pass) Indented ID syntax with quoted ID [0.13ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2785049Z (pass) Multiple indented ID links [0.17ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2785911Z (pass) Mixed indented and regular syntax [0.22ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2793902Z (pass) Unsupported colon-only syntax should fail [2.05ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2795790Z (pass) Indented ID with deeper nesting [0.20ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2796778Z (pass) Empty indented ID should work [0.14ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2802759Z (pass) Equivalence test comprehensive [0.55ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2805911Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2806687Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2807127Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2807489Z ##[group]tests/IndentationConsistency.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.2821232Z (pass) Indentation Consistency Tests (Issue #135) > Leading spaces vs no leading spaces [0.52ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2836882Z (pass) Indentation Consistency Tests (Issue #135) > two spaces vs four spaces indentation [0.73ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2837735Z (pass) Indentation Consistency Tests (Issue #135) > simple two vs four spaces indentation [0.23ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2839079Z (pass) Indentation Consistency Tests (Issue #135) > three level nesting with different indentation [0.23ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2839738Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2840078Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2840344Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2840812Z ##[group]tests/NestedSelfReference.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.2877124Z (pass) Nested self-referenced object in pair value [3.36ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2884187Z (pass) Self-reference as direct child works correctly [0.42ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2884769Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2885115Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2885267Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2885694Z ##[group]tests/NestedIndentation.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.2890847Z (pass) TestParenthesesReproduceRootIndentation [0.24ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2892960Z (pass) TestParenthesesKeepRecordBoundaries [0.24ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2912961Z (pass) TestParenthesesKeepSeveralRecordsSeparate [0.27ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2914572Z (pass) TestParenthesesNestDeeply [0.25ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2915313Z (pass) TestSingleLineParenthesesAreUnchanged [0.43ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2916149Z (pass) TestParenthesesWithIndentedIdSyntax [0.10ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2916790Z (pass) TestEmployeeRecordsKeepTheirFields [0.37ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2917284Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2917617Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2918214Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.2918799Z ##[group]tests/SingleLineParser.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.2927263Z (pass) Single link [0.14ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2928101Z (pass) Triplet single link [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2928681Z (pass) Bug test 1 [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2930047Z (pass) Quoted references [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2931122Z (pass) Quoted references with spaces [0.10ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2931903Z (pass) Parse simple reference [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2932600Z (pass) Parse reference with colon and values [0.06ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2966168Z (pass) Parse multiline link [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2966831Z (pass) Parse quoted references [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2967374Z (pass) Parse values only [0.29ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2979094Z (pass) Test single-line link with id [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2981298Z (pass) Test multi-line link with id [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2982110Z (pass) Test link without id (single-line) [0.30ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2982835Z (pass) Test link without id (multi-line) [0.69ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2983613Z (pass) Test singlet link [0.13ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2984209Z (pass) Test value link [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2984849Z (pass) Parse quoted references values only [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2985754Z (pass) Test quoted references [0.14ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2986441Z (pass) Test single-quoted references [0.10ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2987105Z (pass) Test nested links [0.13ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2987730Z (pass) Test special characters in quotes [0.16ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2988463Z (pass) Test deeply nested [0.33ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2989122Z (pass) Test hyphenated identifiers [0.05ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2989760Z (pass) Test multiple words in quotes [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2990405Z (pass) Test simple ref [0.03ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2991012Z (pass) Test simple reference (parser) [0.04ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2991703Z (pass) Test quoted reference (parser) [0.04ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2992360Z (pass) Test singlet link (parser) [0.06ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2992983Z (pass) Test value link (parser) [0.07ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2993715Z (pass) Multiline without id [0.55ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2994425Z (pass) Parse values only standalone colon [0.23ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2995658Z (pass) Quoted references with spaces in link [0.13ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2996454Z (pass) Single line without id [0.14ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2997110Z (pass) Link with id [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2997710Z (pass) Quoted reference [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2998405Z (pass) Quoted references with special chars [0.17ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2999111Z (pass) Simple reference [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.2999748Z (pass) Single line link [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3000396Z (pass) Single line with id [0.06ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3000883Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3002518Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3002934Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3003597Z ##[group]tests/EdgeCaseParser.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.3004414Z (pass) Empty link [0.21ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3004767Z (pass) Empty link with parentheses [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3005128Z (pass) Empty link with empty self reference [0.39ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3012486Z (pass) All features [0.89ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3013247Z (pass) Empty document [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3014051Z (pass) Whitespace only [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3019475Z (pass) Empty links [0.52ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3031577Z (pass) Singlet links [0.37ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3033882Z (pass) Invalid input [1.07ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3034471Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3035277Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3035654Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3035948Z ##[group]tests/NestedParser.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.3049117Z (pass) SignificantWhitespaceTest [0.55ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3053202Z (pass) SimpleSignificantWhitespaceTest [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3054083Z (pass) TwoSpacesSizedWhitespaceTest [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3054863Z (pass) Parse nested structure with indentation [0.13ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3056151Z (pass) Indentation consistency [0.07ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3057294Z (pass) Indentation-based children [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3057972Z (pass) Complex indentation [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3058638Z (pass) Nested links [0.24ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3059268Z (pass) Indentation parser [0.21ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3060089Z (pass) Nested indentation parser [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3061958Z (pass) Three level nesting roundtrip [0.17ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3065930Z (pass) Deep nested structure roundtrip [0.33ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3067358Z (pass) Multiple nested links roundtrip [0.20ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3067990Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3068709Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3068884Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3069178Z ##[group]tests/LinksGroup.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.3086380Z (pass) LinksGroup constructor [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3087152Z (pass) LinksGroup toList flattens structure [0.16ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3087899Z (pass) LinksGroup toString [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3088461Z (pass) LinksGroup constructor equivalent test [0.07ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3089099Z (pass) LinksGroup append to links list test [0.05ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3089482Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3089915Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3090052Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3090307Z ##[group]tests/Link.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.3094422Z (pass) Link constructor with id only [0.03ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3094917Z (pass) Link constructor with id and values [0.03ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3095321Z (pass) Link toString with id only [0.05ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3095980Z (pass) Link toString with values only [0.03ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3096345Z (pass) Link toString with id and values [0.04ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3096699Z (pass) Link escapeReference simple [0.02ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3097127Z (pass) Link escapeReference with special characters [0.04ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3097481Z (pass) Link simplify [0.07ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3097837Z (pass) Link combine [0.06ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3099097Z (pass) Link equals [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3099419Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3099915Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3100359Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3101002Z ##[group]tests/MultiQuoteParser.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.3116098Z (pass) TestBacktickQuotedReference [0.38ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3117020Z (pass) TestBacktickQuotedWithSpaces [0.17ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3119781Z (pass) TestBacktickQuotedMultiline [0.23ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3121137Z (pass) TestBacktickQuotedWithEscapedBacktick [0.15ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3122241Z (pass) TestSingleQuoteWithEscapedSingleQuote [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3123551Z (pass) TestDoubleQuoteWithEscapedDoubleQuote [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3124563Z (pass) TestDoubleDoubleQuotes [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3125840Z (pass) TestDoubleDoubleQuotesWithSingleQuoteInside [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3126887Z (pass) TestDoubleDoubleQuotesWithEscape [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3127989Z (pass) TestDoubleSingleQuotes [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3129063Z (pass) TestDoubleSingleQuotesWithSingleQuoteInside [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3130184Z (pass) TestDoubleSingleQuotesWithEscape [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3131862Z (pass) TestDoubleBacktickQuotes [0.16ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3133206Z (pass) TestDoubleBacktickQuotesWithBacktickInside [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3134454Z (pass) TestDoubleBacktickQuotesWithEscape [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3135681Z (pass) TestTripleDoubleQuotes [0.10ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3136841Z (pass) TestTripleDoubleQuotesWithDoubleQuoteInside [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3137903Z (pass) TestTripleDoubleQuotesWithEscape [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3138909Z (pass) TestTripleSingleQuotes [0.10ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3140100Z (pass) TestTripleSingleQuotesWithDoubleQuoteInside [0.10ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3141164Z (pass) TestTripleSingleQuotesWithEscape [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3142307Z (pass) TestTripleBacktickQuotes [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3143618Z (pass) TestTripleBacktickQuotesWithDoubleBacktickInside [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3144872Z (pass) TestTripleBacktickQuotesWithEscape [0.13ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3146136Z (pass) TestQuadrupleDoubleQuotes [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3147383Z (pass) TestQuadrupleDoubleQuotesWithTripleQuoteInside [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3148500Z (pass) TestQuadrupleDoubleQuotesWithEscape [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3149708Z (pass) TestQuadrupleSingleQuotes [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3156133Z (pass) TestQuadrupleBacktickQuotes [0.13ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3156707Z (pass) TestQuintupleDoubleQuotes [0.10ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3157367Z (pass) TestQuintupleDoubleQuotesWithQuadQuoteInside [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3158061Z (pass) TestQuintupleDoubleQuotesWithEscape [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3158637Z (pass) TestQuintupleSingleQuotes [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3159377Z (pass) TestQuintupleBacktickQuotes [0.15ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3163435Z (pass) TestMixedQuotesInLink [0.18ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3163994Z (pass) TestBacktickAsIdInLink [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3164498Z (pass) TestCodeBlockLikeContent [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3165003Z (pass) TestNestedQuotesInMarkdown [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3165941Z (pass) TestSQLWithQuotes [0.18ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3166551Z (pass) TestJSONStringWithQuotes [0.13ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3167216Z (pass) TestEmptySingleQuotedReference [0.11ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3167906Z (pass) TestWhitespacePreservedInQuotes [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3168605Z (pass) TestMultilineInDoubleDoubleQuotes [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3169273Z (pass) TestUnlimitedQuotes6 [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3169830Z (pass) TestUnlimitedQuotes10 [0.10ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3171202Z (pass) TestUnlimitedQuotes6WithInnerQuotes [0.12ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3172112Z (pass) TestUnlimitedSingleQuotes7 [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3173044Z (pass) TestUnlimitedBackticks8 [0.09ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3173347Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3173845Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3174222Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3174837Z ##[group]tests/FormatConfig.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.3187148Z (pass) Format config basic [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3188306Z (pass) Format with line length limit [0.16ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3189064Z (pass) Format with max inline refs [0.08ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3191473Z (pass) Format with consecutive grouping [0.19ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3192508Z (pass) Format config less parentheses [0.05ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3193474Z (pass) Format config custom indent [0.06ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3194373Z (pass) Roundtrip with line length formatting [0.16ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3195221Z (pass) Should indent by length [0.06ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3196133Z (pass) Should indent by ref count [0.04ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3196667Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3197582Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3197746Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3198044Z ##[group]tests/MixedIndentationModes.test.js:
+test	UNKNOWN STEP	2026-08-20T04:48:48.3210954Z (pass) Hero example mixed modes [0.37ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3217371Z (pass) Hero example alternative format [0.83ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3224918Z (pass) Hero example equivalence [0.85ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3228681Z (pass) Set context without colon [0.13ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3229407Z (pass) Sequence context with colon [0.14ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3230810Z (pass) Sequence context with complex values [0.33ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3233387Z (pass) Nested set and sequence contexts [0.22ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3235316Z (pass) Deeply nested mixed modes [0.17ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3235773Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3249564Z ##[endgroup]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3249834Z 
+test	UNKNOWN STEP	2026-08-20T04:48:48.3250019Z  195 pass
+test	UNKNOWN STEP	2026-08-20T04:48:48.3250253Z  0 fail
+test	UNKNOWN STEP	2026-08-20T04:48:48.3250445Z  530 expect() calls
+test	UNKNOWN STEP	2026-08-20T04:48:48.3250824Z Ran 195 tests across 15 files. [85.00ms]
+test	UNKNOWN STEP	2026-08-20T04:48:48.3340655Z Post job cleanup.
+test	UNKNOWN STEP	2026-08-20T04:48:48.5006786Z Post job cleanup.
+test	UNKNOWN STEP	2026-08-20T04:48:48.5880556Z [command]/usr/bin/git version
+test	UNKNOWN STEP	2026-08-20T04:48:48.5918293Z git version 2.55.0
+test	UNKNOWN STEP	2026-08-20T04:48:48.5989787Z Temporarily overriding HOME='/home/runner/work/_temp/419a0fb7-bf64-4acc-bab1-31d0d760867a' before making global git config changes
+test	UNKNOWN STEP	2026-08-20T04:48:48.5991605Z Adding repository directory to the temporary git global config as a safe directory
+test	UNKNOWN STEP	2026-08-20T04:48:48.5996451Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+test	UNKNOWN STEP	2026-08-20T04:48:48.6026266Z Removing SSH command configuration
+test	UNKNOWN STEP	2026-08-20T04:48:48.6033716Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	UNKNOWN STEP	2026-08-20T04:48:48.6067973Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	UNKNOWN STEP	2026-08-20T04:48:48.6279854Z Removing HTTP extra header
+test	UNKNOWN STEP	2026-08-20T04:48:48.6286799Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	UNKNOWN STEP	2026-08-20T04:48:48.6330693Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	UNKNOWN STEP	2026-08-20T04:48:48.6571532Z Removing includeIf entries pointing to credentials config files
+test	UNKNOWN STEP	2026-08-20T04:48:48.6586481Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	UNKNOWN STEP	2026-08-20T04:48:48.6596699Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+test	UNKNOWN STEP	2026-08-20T04:48:48.6597868Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+test	UNKNOWN STEP	2026-08-20T04:48:48.6598836Z includeif.gitdir:/github/workspace/.git.path
+test	UNKNOWN STEP	2026-08-20T04:48:48.6599596Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+test	UNKNOWN STEP	2026-08-20T04:48:48.6609039Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+test	UNKNOWN STEP	2026-08-20T04:48:48.6636672Z /home/runner/work/_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:48.6722141Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:48.6753458Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+test	UNKNOWN STEP	2026-08-20T04:48:48.6755212Z /home/runner/work/_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:48.6758516Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:48.6795819Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+test	UNKNOWN STEP	2026-08-20T04:48:48.6813111Z /github/runner_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:48.6826257Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:48.6868781Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+test	UNKNOWN STEP	2026-08-20T04:48:48.6907914Z /github/runner_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:48.6913375Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config
+test	UNKNOWN STEP	2026-08-20T04:48:48.6959981Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	UNKNOWN STEP	2026-08-20T04:48:48.7219866Z Removing credentials config '/home/runner/work/_temp/git-credentials-22cbab84-dbb3-44db-b9b5-43b70b8c63da.config'
+test	UNKNOWN STEP	2026-08-20T04:48:48.7383680Z Cleaning up orphan processes
+publishToNpm	UNKNOWN STEP	﻿2026-08-20T04:48:53.8300887Z Current runner version: '2.336.0'
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8319131Z ##[group]Runner Image Provisioner
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8319831Z Hosted Compute Agent
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8320387Z Version: 20260729.566
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8320895Z Commit: cf7153fe6e25b664e8693c24944bf2b00355d109
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8321383Z Build Date: 2026-07-29T19:17:02Z
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8321811Z Worker ID: {2083ee60-43f4-4e17-a211-db582b6ddfb5}
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8322211Z Azure Region: westus3
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8322566Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8323442Z ##[group]Operating System
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8323797Z Ubuntu
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8324139Z 24.04.4
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8324441Z LTS
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8324762Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8325169Z ##[group]Runner Image
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8325518Z Image: ubuntu-24.04
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8325867Z Version: 20260810.271.1
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8326769Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260810.271/images/ubuntu/Ubuntu2404-Readme.md
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8327627Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260810.271
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8328158Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8329829Z ##[group]GITHUB_TOKEN Permissions
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8331317Z Actions: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8331707Z ArtifactMetadata: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8332055Z Attestations: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8332371Z Checks: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8332737Z CodeQuality: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8333098Z Contents: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8333447Z CopilotRequests: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8333816Z Deployments: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8334130Z Discussions: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8334491Z Drives: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8334829Z Issues: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8335159Z Metadata: read
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8335530Z Models: read
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8335841Z Packages: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8336301Z Pages: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8336642Z PullRequests: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8337030Z RepositoryProjects: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8337602Z SecurityEvents: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8338102Z Statuses: write
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8338485Z VulnerabilityAlerts: read
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8338856Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8340207Z Secret source: Actions
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8340871Z Prepare workflow directory
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8706407Z Prepare all required actions
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:53.8741934Z Getting action download info
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:54.1538666Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:54.6625875Z Download action repository 'oven-sh/setup-bun@v2' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.2933432Z Complete job name: publishToNpm
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3366962Z ##[group]Run actions/checkout@v6
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3367406Z with:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3367652Z   submodules: true
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3367946Z   repository: link-foundation/links-notation
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3370139Z   token: ***
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3370384Z   ssh-strict: true
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3370657Z   ssh-user: git
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3370921Z   persist-credentials: true
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3371203Z   clean: true
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3371460Z   sparse-checkout-cone-mode: true
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3371759Z   fetch-depth: 1
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3372011Z   fetch-tags: false
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3372267Z   show-progress: true
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3372543Z   lfs: false
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3372799Z   set-safe-directory: true
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3373092Z   allow-unsafe-pr-checkout: false
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3373455Z env:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3373687Z   NPM_TOKEN: 
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3375835Z   GITHUB_TOKEN: ***
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.3376176Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4020308Z Syncing repository: link-foundation/links-notation
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4022089Z ##[group]Getting Git version info
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4022842Z Working directory is '/home/runner/work/links-notation/links-notation'
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4023827Z [command]/usr/bin/git version
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4098038Z git version 2.54.0
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4113818Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4124465Z Temporarily overriding HOME='/home/runner/work/_temp/aa02d61d-094e-4f5c-b77a-c35423b5dc0f' before making global git config changes
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4125912Z Adding repository directory to the temporary git global config as a safe directory
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4128250Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4161498Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4164577Z ##[group]Determining repository object format
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4166095Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4166816Z ##[group]Initializing the repository
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4169120Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4236131Z hint: Using 'master' as the name for the initial branch. This default branch name
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4237239Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4238394Z hint: to use in all of your new repositories, which will suppress this warning,
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4239289Z hint: call:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4239830Z hint:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4240510Z hint: 	git config --global init.defaultBranch <name>
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4241266Z hint:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4242004Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4243069Z hint: 'development'. The just-created branch can be renamed via this command:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4244611Z hint:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4245209Z hint: 	git branch -m <name>
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4245840Z hint:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4246774Z hint: Disable this message with "git config set advice.defaultBranchName false"
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4248066Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4250422Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4273414Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4274350Z ##[group]Disabling automatic garbage collection
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4275914Z [command]/usr/bin/git config --local gc.auto 0
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4307179Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4308059Z ##[group]Setting up auth
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4308774Z Removing SSH command configuration
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4313065Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4341852Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4589102Z Removing HTTP extra header
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4594230Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4623389Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4826219Z Removing includeIf entries pointing to credentials config files
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4831110Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.4859738Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.5038992Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.5070791Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.5098054Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.5123809Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.5151867Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.5177278Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.5177990Z ##[group]Fetching the repository
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:55.5183571Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5b8e5c5ac82fa857a65625eedf863b7d004ef06:refs/remotes/origin/main
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.4974865Z From https://github.com/link-foundation/links-notation
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.4976220Z  * [new ref]         b5b8e5c5ac82fa857a65625eedf863b7d004ef06 -> origin/main
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.4998165Z [command]/usr/bin/git branch --list --remote origin/main
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.5020320Z   origin/main
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.5025770Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.5046799Z b5b8e5c5ac82fa857a65625eedf863b7d004ef06
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.5050139Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.5051254Z ##[group]Determining the checkout info
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.5052212Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.5052954Z [command]/usr/bin/git sparse-checkout disable
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.5172736Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.5199189Z ##[group]Checking out the ref
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.5200309Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.6884562Z Switched to a new branch 'main'
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.6893003Z branch 'main' set up to track 'origin/main'.
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.6911361Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.6912484Z ##[group]Setting up auth for fetching submodules
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.6915787Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.6966203Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.6992118Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.7021033Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.7112243Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.7182991Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.7185535Z ##[group]Fetching submodules
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.7194967Z [command]/usr/bin/git submodule sync
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.7491952Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.7666600Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.7838524Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.7839528Z ##[group]Persisting credentials for submodules
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.7844031Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8013458Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8195084Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8366315Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8540458Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8572799Z [command]/usr/bin/git log -1 --format=%H
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8594470Z b5b8e5c5ac82fa857a65625eedf863b7d004ef06
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8884073Z ##[group]Run oven-sh/setup-bun@v2
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8884711Z with:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8885134Z   bun-version: latest
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8885624Z   no-cache: false
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8891117Z   token: ***
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8891550Z env:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8891955Z   NPM_TOKEN: 
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8897383Z   GITHUB_TOKEN: ***
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:56.8897858Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:57.4179612Z Downloading a new version of Bun: https://github.com/oven-sh/bun/releases/download/bun-v1.3.14/bun-linux-x64.zip
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:57.8307930Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/5c9219c3-02e1-4310-a1fa-f9738a55102e.zip
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.3597338Z [command]/home/runner/.bun/bin/bun --revision
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.3642257Z 1.3.14+0d9b296af
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.3782138Z ##[group]Run bun install
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.3782345Z ^[[36;1mbun install^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.3818536Z shell: /usr/bin/bash -e {0}
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.3818702Z env:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.3818814Z   NPM_TOKEN: 
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.3820266Z   GITHUB_TOKEN: ***
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.3820386Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.3902619Z bun install v1.3.14 (0d9b296a)
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6477181Z Saved lockfile
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6477390Z 
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6477508Z + bun-types@1.3.14
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6477706Z + eslint@10.8.1
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6477875Z + peggy@5.1.0
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6478038Z + typescript@7.0.2
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6478148Z 
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6478237Z 78 packages installed [258.00ms]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6533783Z ##[group]Run bun run build
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6533962Z ^[[36;1mbun run build^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6565179Z shell: /usr/bin/bash -e {0}
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6565322Z env:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6565436Z   NPM_TOKEN: 
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6567078Z   GITHUB_TOKEN: ***
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6567200Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6634142Z $ bun run build:grammar && bun build src/index.js --outdir=dist --target=node
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:58.6658527Z $ peggy --format es -o src/parser-generated.js src/grammar.pegjs
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.0971024Z Bundled 7 modules in 4ms
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.0971697Z 
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.0971926Z   index.js  55.70 KB  (entry point)
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.0972247Z 
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1002161Z ##[group]Run PACKAGE_VERSION=$(node -p "require('./package.json').version")
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1002493Z ^[[36;1mPACKAGE_VERSION=$(node -p "require('./package.json').version")^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1002733Z ^[[36;1mPACKAGE_NAME=$(node -p "require('./package.json').name")^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1002939Z ^[[36;1mecho "Package: $PACKAGE_NAME@$PACKAGE_VERSION"^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1003097Z ^[[36;1m^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1003210Z ^[[36;1m# Check if version exists on NPM^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1003409Z ^[[36;1mif npm view $PACKAGE_NAME@$PACKAGE_VERSION version 2>/dev/null; then^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1003641Z ^[[36;1m  echo "Version $PACKAGE_VERSION already exists on NPM"^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1003835Z ^[[36;1m  echo "should_publish=false" >> $GITHUB_OUTPUT^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1004005Z ^[[36;1melse^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1004143Z ^[[36;1m  echo "Version $PACKAGE_VERSION does not exist on NPM"^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1004346Z ^[[36;1m  echo "should_publish=true" >> $GITHUB_OUTPUT^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1004498Z ^[[36;1mfi^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1033214Z shell: /usr/bin/bash -e {0}
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1033345Z env:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1033446Z   NPM_TOKEN: 
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1034857Z   GITHUB_TOKEN: ***
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1034972Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:48:59.1422278Z Package: links-notation@0.14.0
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:02.0560555Z Version 0.14.0 does not exist on NPM
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:02.0612449Z ##[group]Run echo "//registry.npmjs.org/:_authToken=" > ~/.npmrc
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:02.0612700Z ^[[36;1mecho "//registry.npmjs.org/:_authToken=" > ~/.npmrc^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:02.0612887Z ^[[36;1mnpm publish --access public^[[0m
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:02.0642509Z shell: /usr/bin/bash -e {0}
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:02.0642638Z env:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:02.0642864Z   NPM_TOKEN: 
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:02.0644294Z   GITHUB_TOKEN: ***
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:02.0644406Z ##[endgroup]
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0956753Z npm notice
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0957799Z npm notice 📦  links-notation@0.14.0
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0958174Z npm notice Tarball Contents
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0959137Z npm notice 634B .eslintrc.json
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0959393Z npm notice 57B .prettierignore
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0959674Z npm notice 52B .prettierrc
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0959871Z npm notice 5.4kB README.md
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0960143Z npm notice 4.6kB README.ru.md
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0960356Z npm notice 21.0kB bun.lock
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0960726Z npm notice 55.7kB dist/index.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0961024Z npm notice 829B eslint.config.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0961322Z npm notice 355B examples/debug_indentation.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0961657Z npm notice 795B examples/test_leading_spaces.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0961961Z npm notice 2.5kB examples/typescript-example.ts
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0962252Z npm notice 7.4kB index.d.ts
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0962492Z npm notice 769B package.json
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0962698Z npm notice 730B src/FormatConfig.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0962971Z npm notice 2.2kB src/FormatOptions.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0963201Z npm notice 7.7kB src/grammar.pegjs
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0963458Z npm notice 233B src/index.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0963669Z npm notice 13.7kB src/Link.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0963908Z npm notice 642B src/LinksGroup.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0964137Z npm notice 42.8kB src/parser-generated.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0964416Z npm notice 6.6kB src/Parser.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0964636Z npm notice 5.0kB tests/ApiTests.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0964916Z npm notice 4.9kB tests/EdgeCaseParser.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0965194Z npm notice 3.9kB tests/FormatConfig.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0965497Z npm notice 3.3kB tests/IndentationConsistency.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0965823Z npm notice 4.1kB tests/IndentedIdSyntax.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0966472Z npm notice 2.3kB tests/Link.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0966990Z npm notice 2.2kB tests/LinksGroup.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0967300Z npm notice 4.1kB tests/MixedIndentationModes.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0967591Z npm notice 3.1kB tests/MultilineParser.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0967874Z npm notice 2.0kB tests/MultilineQuotedString.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0968155Z npm notice 14.7kB tests/MultiQuoteParser.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0968425Z npm notice 2.6kB tests/NestedIndentation.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0968682Z npm notice 5.1kB tests/NestedParser.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0968952Z npm notice 4.2kB tests/NestedSelfReference.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0969232Z npm notice 9.6kB tests/SingleLineParser.test.js
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0969466Z npm notice 314B tsconfig.json
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0969690Z npm notice Tarball Details
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0969910Z npm notice name: links-notation
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0970114Z npm notice version: 0.14.0
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0970331Z npm notice filename: links-notation-0.14.0.tgz
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0970582Z npm notice package size: 52.0 kB
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0970794Z npm notice unpacked size: 246.0 kB
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0971051Z npm notice shasum: a19da8d504c0e833f6c2238bed590f628b8f9222
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0971405Z npm notice integrity: sha512-KQaQ9eW9YvrZ8[...]CHQJytcHreCCQ==
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0971700Z npm notice total files: 37
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0971882Z npm notice
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0988496Z npm error code ENEEDAUTH
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0988998Z npm error need auth This command requires you to be logged in to https://registry.npmjs.org/
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0989530Z npm error need auth You need to authorize this machine using `npm adduser`
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.0994898Z npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-08-20T04_49_02_100Z-debug-0.log
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.1158565Z ##[error]Process completed with exit code 1.
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.1237333Z Post job cleanup.
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.1793745Z [command]/usr/bin/git version
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.1819754Z git version 2.54.0
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.1844414Z Temporarily overriding HOME='/home/runner/work/_temp/e97f0788-7883-462b-9767-f93b200d1f53' before making global git config changes
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.1845113Z Adding repository directory to the temporary git global config as a safe directory
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.1847528Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.1891118Z Removing SSH command configuration
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.1892717Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.1920996Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2107204Z Removing HTTP extra header
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2111547Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2155800Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2342451Z Removing includeIf entries pointing to credentials config files
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2348732Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2372332Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2372854Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2373131Z includeif.gitdir:/github/workspace/.git.path
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2373338Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2380425Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2402238Z /home/runner/work/_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2410837Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2441839Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2463139Z /home/runner/work/_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2469785Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2498587Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2519053Z /github/runner_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2524519Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2551306Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2571210Z /github/runner_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2577030Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2606257Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2782543Z Removing credentials config '/home/runner/work/_temp/git-credentials-418ed6aa-8c7c-4863-8e46-195859743d14.config'
+publishToNpm	UNKNOWN STEP	2026-08-20T04:49:03.2895094Z Cleaning up orphan processes

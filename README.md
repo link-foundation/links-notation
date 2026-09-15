@@ -1,12 +1,13 @@
 # [links-notation](https://github.com/link-foundation/links-notation) (languages: en • [ru](README.ru.md))
 
-| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/js/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=js)         |                                                               [![npm Version and Downloads count](https://img.shields.io/npm/v/links-notation?label=npm&style=flat)](https://www.npmjs.com/package/links-notation) | **[JavaScript](js/README.md)** |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------- |
-| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/rust/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=rust)     |                                                     [![Crates.io Version and Downloads count](https://img.shields.io/crates/v/links-notation?label=crates.io&style=flat)](https://crates.io/crates/links-notation) | **[Rust](rust/README.md)**     |
-| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/csharp/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=csharp) |                        [![NuGet Version and Downloads count](https://img.shields.io/nuget/v/Link.Foundation.Links.Notation?label=nuget&style=flat)](https://www.nuget.org/packages/Link.Foundation.Links.Notation) | **[C#](csharp/README.md)**     |
-| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/python/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=python) |                                                                [![PyPI Version and Downloads count](https://img.shields.io/pypi/v/links-notation?label=pypi&style=flat)](https://pypi.org/project/links-notation/) | **[Python](python/README.md)** |
-| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/go/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=go)         |                                                      [![Go Reference](https://pkg.go.dev/badge/github.com/link-foundation/links-notation/go.svg)](https://pkg.go.dev/github.com/link-foundation/links-notation/go) | **[Go](go/README.md)**         |
-| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/java/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=java)     | [![Maven Central Version](https://img.shields.io/maven-central/v/io.github.link-foundation/links-notation?label=maven&style=flat)](https://central.sonatype.com/artifact/io.github.link-foundation/links-notation) | **[Java](java/README.md)**     |
+| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/js/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=js) | [![npm Version and Downloads count](https://img.shields.io/npm/v/links-notation?label=npm&style=flat)](https://www.npmjs.com/package/links-notation) | **[JavaScript](js/README.md)** |
+|:-|-:|:-|
+| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/rust/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=rust) | [![Crates.io Version and Downloads count](https://img.shields.io/crates/v/links-notation?label=crates.io&style=flat)](https://crates.io/crates/links-notation) | **[Rust](rust/links-notation/README.md)** |
+| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/csharp/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=csharp) | [![NuGet Version and Downloads count](https://img.shields.io/nuget/v/Link.Foundation.Links.Notation?label=nuget&style=flat)](https://www.nuget.org/packages/Link.Foundation.Links.Notation) | **[C#](csharp/README.md)** |
+| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/python/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=python) | [![PyPI Version and Downloads count](https://img.shields.io/pypi/v/links-notation?label=pypi&style=flat)](https://pypi.org/project/links-notation/) | **[Python](python/README.md)** |
+| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/go/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=go) | [![Go Reference](https://pkg.go.dev/badge/github.com/link-foundation/links-notation/go.svg)](https://pkg.go.dev/github.com/link-foundation/links-notation/go) | **[Go](go/README.md)** |
+| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/java/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=java) | [![Maven Central Version](https://img.shields.io/maven-central/v/io.github.link-foundation/links-notation?label=maven&style=flat)](https://central.sonatype.com/artifact/io.github.link-foundation/links-notation) | **[Java](java/README.md)** |
+| [![Actions Status](https://github.com/link-foundation/links-notation/workflows/php/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=php) | [![Packagist Version and Downloads count](https://img.shields.io/packagist/v/link-foundation/links-notation?label=packagist&style=flat)](https://packagist.org/packages/link-foundation/links-notation) | **[PHP](php/README.md)** |
 
 [![Gitpod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/link-foundation/links-notation)
 [![Open in GitHub Codespaces](https://img.shields.io/badge/GitHub%20Codespaces-Open-181717?logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=link-foundation/links-notation)
@@ -73,6 +74,14 @@ Parser parser = new Parser();
 List<Link> links = parser.parse("papa (lovesMama: loves mama)");
 ```
 
+### PHP
+
+```php
+use LinkFoundation\LinksNotation\Parser;
+$parser = new Parser();
+$links = $parser->parse("papa (lovesMama: loves mama)");
+```
+
 ## Examples
 
 ### Links notation (lino)
@@ -123,7 +132,53 @@ This is equivalent to:
 (3: papa loves mama)
 ```
 
-So that means that _this_ text is also links notation. So most of the
+#### Multi-line Groups
+
+A parenthesized group opens a *nested context*: its body starts fresh at
+indentation level zero and follows the same rules the root document does, so a
+line break inside parentheses is structure rather than decoration.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+This reads as `(value ((id 1) (label one)))` - two children, each a link of its
+own - and not as one flat list in which the boundary between `id` and `label`
+would be lost. Indentation works inside a group exactly as it does at the root,
+and a body that stays on a single line still collapses to a single link, so
+`(a b c)` is unchanged.
+
+All seven implementations agree on this. `experiments/issue-282/parity` parses
+the document above with each of them and fails if any one reads it differently.
+The complete rules are in the [grammar](docs/grammar/GRAMMAR.md).
+
+#### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+That is the single link `(deploy: staging)`: both comments are gone by the time
+the document is read. A `#` only opens a comment where a reference could begin,
+so a `#` inside a token (`issue#1047`) and a `#` inside a delimited reference
+(`"#"`) stay ordinary characters.
+
+A formatter keeps the same rule from the other side: a reference that begins
+with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
+itself.
+
+Comments are on by default in every implementation, and every parser can be
+told to read `#` as an ordinary character again for documents written before
+comments existed - see the parser options in the language READMEs.
+
+So that means that *this* text is also links notation. So most of the
 text in the world already may be parsed as links notation. That makes
 links notation the most easy an natural/intuitive/native one.
 
@@ -150,40 +205,58 @@ language-specific documentation:
 
 - **[C# Documentation](https://link-foundation.github.io/links-notation/csharp/api/Link.Foundation.Links.Notation.html)**
   \- Complete API reference
+- **[PDF Documentation](https://link-foundation.github.io/links-notation/csharp/Link.Foundation.Links.Notation.pdf)**
+  \- Complete reference for offline reading
 - **[C# README](csharp/README.md)** - Installation and usage guide
 - **[JavaScript README](js/README.md)** - Modern web development guide
-- **[Rust README](rust/README.md)** - High-performance parsing guide
+- **[Rust README](rust/links-notation/README.md)** - High-performance parsing guide
 - **[Python README](python/README.md)** - Python package guide
 - **[Go README](go/README.md)** - Go package guide
 - **[Java README](java/README.md)** - Java/Maven package guide
+- **[PHP README](php/README.md)** - PHP/Composer package guide
 
 Additional resources:
 
-- [Test Case Comparison](TEST_CASE_COMPARISON.md) - Comprehensive test coverage comparison across all 6 language implementations
-- [PDF Documentation](https://link-foundation.github.io/links-notation/csharp/Link.Foundation.Links.Notation.pdf)
-  \- Complete reference for offline reading
+- [Grammar](docs/grammar/GRAMMAR.md) - The notation in EBNF, with the indentation
+  and nested context rules spelled out ([syntax diagrams](docs/grammar/syntax-diagrams.md))
+- [Test Case Comparison](TEST_CASE_COMPARISON.md) - Test-by-test coverage comparison across all seven language implementations
 - [Links Theory 0.0.2](https://habr.com/en/articles/895896) - Theoretical
   foundation that Links Notation fully supports
 
 ## Test Coverage & Implementation Parity
 
-All six language implementations (C#, JavaScript, Rust, Python, Go, Java) maintain **equivalent core functionality** with comprehensive test coverage:
+All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP) maintain
+**equivalent core functionality**, and the overlap is verified test by test rather than asserted:
 
-- **Python**: 108 tests across 10 categories - All passing ✅
-- **JavaScript**: 109 tests across 11 categories - All passing ✅
-- **Rust**: 110 tests across 11 categories - All passing ✅
-- **C#**: 111 tests across 12 categories - All passing ✅
-- **Go**: 90+ tests across 10 categories - All passing ✅
-- **Java**: 117 tests across 7 categories - All passing ✅
+<!-- test-counts:start -->
+| Language | Tests | Test categories |
+| --- | --- | --- |
+| Python | 215 | 17 |
+| JavaScript | 237 | 18 |
+| Rust | 322 | 20 |
+| C# | 229 | 19 |
+| Go | 107 | 11 |
+| Java | 154 | 10 |
+| PHP | 204 | 17 |
+<!-- test-counts:end -->
 
-**90+ tests match identically** across all languages, verifying functional equivalence. See [TEST_CASE_COMPARISON.md](TEST_CASE_COMPARISON.md) for the complete cross-language test comparison with links to source code.
+The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files
+themselves and also produces [TEST_CASE_COMPARISON.md](TEST_CASE_COMPARISON.md) - the full matrix
+of which implementation has which test, each cell linking to the test. The `docs` workflow runs
+that script with `--check` on every pull request, so a test added in one language and forgotten in
+the others shows up as a gap in the matrix instead of as a README that quietly went stale. It used
+to be a hand-written list, and had drifted to six languages and six wrong counts.
 
 ### Known Implementation Differences
 
-Some language-specific features are documented as intentional:
+Some language-specific features are intentional:
 
-- **Python**: Does not implement `LinksGroup` or multiline quoted strings
-- **JS/Rust/C#**: Do not implement Python's `FormatConfig` feature
-- **C# Only**: Supports tuple conversion (C#-specific feature)
+- **`LinksGroup`** - a parsed group of links kept as one object - exists in
+  [JavaScript](js/src/LinksGroup.js), [C#](csharp/Link.Foundation.Links.Notation/LinksGroup.cs) and
+  [Java](java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java). Python, Rust,
+  Go and PHP expose the same structure as nested `Link` values instead.
+- **Tuple conversion** - building a link from a language tuple - is offered where the language has
+  the syntax for it: [C#](csharp/Link.Foundation.Links.Notation/Link.cs) via implicit operators and
+  [Rust](rust/links-notation/src/lib.rs) via `From` implementations.
 
 These differences are by design and do not affect core parsing/formatting functionality.

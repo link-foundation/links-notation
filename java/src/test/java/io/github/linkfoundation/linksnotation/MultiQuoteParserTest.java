@@ -127,19 +127,19 @@ class MultiQuoteParserTest {
 
   @Test
   void testEmptyQuotes() throws ParseException {
-    // Empty quotes are treated as literal strings (consistent with Python)
+    // A bare delimiter pair is the empty reference
     String input = "''";
     List<Link> result = parser.parse(input);
     assertEquals(1, result.size());
-    assertEquals("''", result.get(0).getValues().get(0).getId());
+    assertEquals("", result.get(0).getValues().get(0).getId());
   }
 
   @Test
   void testEmptyDoubleQuotes() throws ParseException {
-    // Empty quotes are treated as literal strings (consistent with Python)
+    // A bare delimiter pair is the empty reference
     String input = "\"\"";
     List<Link> result = parser.parse(input);
     assertEquals(1, result.size());
-    assertEquals("\"\"", result.get(0).getValues().get(0).getId());
+    assertEquals("", result.get(0).getValues().get(0).getId());
   }
 }

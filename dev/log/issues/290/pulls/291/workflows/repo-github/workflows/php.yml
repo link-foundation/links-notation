@@ -1,0 +1,185 @@
+name: php
+
+on:
+  push:
+    branches: main
+    paths:
+      - 'php/**'
+      - '.github/workflows/php.yml'
+  pull_request:
+    paths:
+      - 'php/**'
+      - '.github/workflows/php.yml'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+defaults:
+  run:
+    working-directory: php
+
+jobs:
+  findChangedPhpFiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      isPhpFilesChanged: ${{ steps.setIsPhpFilesChangedOutput.outputs.isPhpFilesChanged }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+      - name: Set output isPhpFilesChanged
+        id: setIsPhpFilesChangedOutput
+        run: |
+          isPhpFilesChanged='false'
+          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ $changedFile == php/*.php ]] || [[ $changedFile == php/composer.json ]] || [[ $changedFile == php/* ]] || [[ $changedFile == .github/workflows/php.yml ]]; then
+              echo "isPhpFilesChanged='true'"
+              isPhpFilesChanged='true'
+              break
+            fi
+          done
+          echo "isPhpFilesChanged=${isPhpFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isPhpFilesChanged: ${isPhpFilesChanged}"
+
+  lint:
+    needs: [findChangedPhpFiles]
+    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Set up PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring
+          tools: composer:v2
+      - name: Validate composer.json
+        run: composer validate --strict --no-check-version
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+      - name: Check coding standard with PHP_CodeSniffer
+        run: composer run-script lint
+
+  test:
+    needs: [findChangedPhpFiles, lint]
+    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.1', '8.2', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Set up PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring
+          tools: composer:v2
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+      - name: Run tests
+        run: composer run-script test
+
+  publishToPackagist:
+    needs: [test, findChangedPhpFiles]
+    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      published: ${{ steps.version-check.outputs.should_publish }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring
+          tools: composer:v2
+      - name: Check if version already published
+        id: version-check
+        run: |
+          PACKAGE_NAME=$(php -r 'echo json_decode(file_get_contents("composer.json"))->name;')
+          PACKAGE_VERSION=$(php -r 'echo json_decode(file_get_contents("composer.json"))->version;')
+          echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
+
+          # Packagist serves all published versions of a package as JSON
+          if curl -sf "https://repo.packagist.org/p2/${PACKAGE_NAME}.json" | grep -q "\"version\":\"${PACKAGE_VERSION}\""; then
+            echo "Version $PACKAGE_VERSION already exists on Packagist"
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "Version $PACKAGE_VERSION does not exist on Packagist"
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Notify Packagist about the new version
+        if: steps.version-check.outputs.should_publish == 'true'
+        env:
+          PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
+          PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+          REPOSITORY_URL: https://github.com/${{ github.repository }}
+        run: |
+          # Packagist builds the package straight from this repository, so publishing
+          # only means asking it to re-read the repository once the new version is on main.
+          if [ -z "$PACKAGIST_TOKEN" ] || [ -z "$PACKAGIST_USERNAME" ]; then
+            echo "PACKAGIST_USERNAME/PACKAGIST_TOKEN are not configured, skipping Packagist update"
+            exit 0
+          fi
+          curl -sf -XPOST -H'content-type:application/json' \
+            "https://packagist.org/api/update-package?username=${PACKAGIST_USERNAME}&apiToken=${PACKAGIST_TOKEN}" \
+            -d"{\"repository\":{\"url\":\"${REPOSITORY_URL}\"}}"
+
+  publishRelease:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [findChangedPhpFiles, publishToPackagist]
+    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' && needs.publishToPackagist.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring
+      - name: Check if GitHub release already exists
+        id: release-check
+        run: |
+          PACKAGE_VERSION=$(php -r 'echo json_decode(file_get_contents("composer.json"))->version;')
+          TAG_NAME="php_$PACKAGE_VERSION"
+          echo "Checking if release $TAG_NAME already exists"
+
+          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Release $TAG_NAME already exists"
+            echo "should_create_release=false" >> $GITHUB_OUTPUT
+          else
+            echo "Release $TAG_NAME does not exist"
+            echo "should_create_release=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GitHub release
+        if: steps.release-check.outputs.should_create_release == 'true'
+        run: |
+          PACKAGE_VERSION=$(php -r 'echo json_decode(file_get_contents("composer.json"))->version;')
+          PACKAGE_NAME=$(php -r 'echo json_decode(file_get_contents("composer.json"))->name;')
+
+          # Create release with consistent tag format: php_version
+          gh release create "php_${PACKAGE_VERSION}" \
+            --title "[PHP] $PACKAGE_VERSION" \
+            --notes "https://packagist.org/packages/$PACKAGE_NAME"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

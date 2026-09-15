@@ -1,0 +1,154 @@
+update-go_modules-graph	Set up job	﻿2026-08-28T07:07:16.3792262Z Current runner version: '2.336.0'
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3819240Z ##[group]Runner Image Provisioner
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3820207Z Hosted Compute Agent
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3821008Z Version: 20260819.586
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3821682Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3822490Z Build Date: 2026-08-18T23:20:18Z
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3823253Z Worker ID: {e5534934-2815-4c0c-8c13-56785299d1fc}
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3824049Z Azure Region: westus2
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3824676Z ##[endgroup]
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3826241Z ##[group]Operating System
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3827033Z Ubuntu
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3827875Z 24.04.4
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3828560Z LTS
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3829125Z ##[endgroup]
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3829704Z ##[group]Runner Image
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3830488Z Image: ubuntu-24.04
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3831099Z Version: 20260823.283.1
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3832274Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3834066Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3835201Z ##[endgroup]
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3836518Z ##[group]GITHUB_TOKEN Permissions
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3839068Z Contents: read
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3840173Z Metadata: read
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3840879Z Packages: read
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3841499Z ##[endgroup]
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3843711Z Secret source: None
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.3844888Z Prepare workflow directory
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.4188773Z Prepare all required actions
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.4239332Z Getting action download info
+update-go_modules-graph	Set up job	2026-08-28T07:07:16.7853676Z Download action repository 'github/dependabot-action@main' (SHA:4136362d1f18d11898a40eeb1c97bf11816b7488)
+update-go_modules-graph	Set up job	2026-08-28T07:07:17.2521759Z Complete job name: update-go_modules-graph
+update-go_modules-graph	Create job directory	﻿2026-08-28T07:07:17.3441544Z ##[group]Run mkdir -p  ./dependabot-job-1543940948-1787900830
+update-go_modules-graph	Create job directory	2026-08-28T07:07:17.3442500Z ^[[36;1mmkdir -p  ./dependabot-job-1543940948-1787900830^[[0m
+update-go_modules-graph	Create job directory	2026-08-28T07:07:17.3495915Z shell: /usr/bin/bash -e {0}
+update-go_modules-graph	Create job directory	2026-08-28T07:07:17.3498010Z ##[endgroup]
+update-go_modules-graph	Run Dependabot	﻿2026-08-28T07:07:17.3843192Z ##[group]Run github/dependabot-action@main
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:17.3843900Z env:
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:17.3844359Z   DEPENDABOT_DISABLE_CLEANUP: 1
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:17.3845134Z   DEPENDABOT_ENABLE_CONNECTIVITY_CHECK: 0
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:17.3849536Z   GITHUB_TOKEN: ***
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:17.3850548Z   GITHUB_DEPENDABOT_JOB_TOKEN: ***
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:17.3851486Z   GITHUB_DEPENDABOT_CRED_TOKEN: ***
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:17.3852113Z   GITHUB_REGISTRIES_PROXY: ***
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:17.3852651Z ##[endgroup]
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:17.5641754Z 🤖 ~ starting update ~
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:17.5663604Z Fetching job details
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:19.1409767Z ##[group]Pulling updater images
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:19.1478225Z Pulling image ghcr.io/dependabot/dependabot-updater-gomod:42dadd3758278db4dbd61059f05971499eca773f (attempt 1)...
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:19.3941551Z Successfully sent metric (dependabot.action.ghcr_image_pull) to remote API endpoint
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:31.2401395Z Pulled image ghcr.io/dependabot/dependabot-updater-gomod:42dadd3758278db4dbd61059f05971499eca773f
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:31.2414802Z Pulling image ghcr.io/dependabot/proxy:v2.0.20260824182655@sha256:af4698219a8c8fef7fa39d2e2864a5f45ba7841730422ff4f6e7397818bd254c (attempt 1)...
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:31.4808663Z Successfully sent metric (dependabot.action.ghcr_image_pull) to remote API endpoint
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:32.1513800Z Pulled image ghcr.io/dependabot/proxy:v2.0.20260824182655@sha256:af4698219a8c8fef7fa39d2e2864a5f45ba7841730422ff4f6e7397818bd254c
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:32.3310368Z ##[endgroup]
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:32.3311159Z Starting update process
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:32.3312309Z Created proxy container: 0f8ab57a4d5828804170fd6ea8b8cf457be136121fea96141cf82fb8597afd20
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:32.9057002Z   proxy | 2026/08/28 07:07:32 proxy starting, commit: 8581295948faefa37c4016131beff6b128b161fa
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:32.9062343Z   proxy | 2026/08/28 07:07:32 Listening (:1080)
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:33.1024924Z Created container: 83c49e2aa47686f739924de83df9cd0a647e1ff5f6b8a8f63aa06534b4f45aaa
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:33.2112795Z Started container 83c49e2aa47686f739924de83df9cd0a647e1ff5f6b8a8f63aa06534b4f45aaa
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:33.2977108Z updater | Updating certificates in /etc/ssl/certs...
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:34.3393512Z updater | rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:34.3501227Z updater | 1 added, 0 removed; done.
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:34.3528462Z updater | Running hooks in /etc/ca-certificates/update.d...
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:34.3529819Z updater | done.
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:34.6416419Z updater | fetch_files command is no longer used directly
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:37.4277607Z updater | 2026/08/28 07:07:37 INFO <job_1543940948> Starting job processing
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:37.4291950Z updater | 2026/08/28 07:07:37 INFO <job_1543940948> Job definition: {"job":{"command":"graph","allowed-updates":[{"dependency-type":"direct","update-type":"all"}],"commit-message-options":{"prefix":null,"prefix-development":null,"include-scope":null},"credentials-metadata":[{"type":"git_source","host":"github.com"}],"debug":null,"dependencies":null,"dependency-groups":[],"dependency-group-to-refresh":null,"existing-pull-requests":[],"existing-group-pull-requests":[],"experiments":{"record-ecosystem-versions":true,"record-update-job-unknown-error":true,"azure-registry-backup":true,"enable-enhanced-error-details-for-updater":true,"gradle-lockfile-updater":true,"blocked-versions":true,"workflow-job-summary":true,"async-retry":true,"enable-npmrc-credential-generation":true,"proxy-read-only-git-credentials":true,"maven-wrapper-updater":true,"prioritize-scm-source":true,"goprivate":""},"ignore-conditions":[],"lockfile-only":false,"package-manager":"go_modules","requirements-update-strategy":null,"reject-external-code":false,"security-advisories":[],"security-updates-only":false,"source":{"provider":"github","repo":"link-foundation/links-notation","branch":null,"api-endpoint":"https://api.github.com/","hostname":"github.com","directories":["/experiments/issue-288/go"]},"updating-a-pull-request":false,"update-subdependencies":false,"vendor-dependencies":false,"enable-beta-ecosystems":false,"repo-private":false,"multi-ecosystem-update":false,"exclude-paths":[]}}
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:37.5756186Z   proxy | 2026/08/28 07:07:37 [002] GET https://github.com:443/link-foundation/links-notation.git/info/refs?service=git-upload-pack
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:37.5757104Z 2026/08/28 07:07:37 [002] * authenticating git server request (host: github.com)
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:37.7316708Z   proxy | 2026/08/28 07:07:37 [002] 200 https://github.com:443/link-foundation/links-notation.git/info/refs?service=git-upload-pack
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:37.9920406Z updater | 2026/08/28 07:07:37 INFO <job_1543940948> Started process PID: 1000 with command: {} git clone --no-tags --depth 1 --recurse-submodules --shallow-submodules https://github.com/link-foundation/links-notation /home/dependabot/dependabot-updater/repo {}
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:38.8020482Z   proxy | 2026/08/28 07:07:38 [004] GET https://github.com:443/link-foundation/links-notation/info/refs?service=git-upload-pack
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:38.9561381Z 2026/08/28 07:07:38 [004] * authenticating git server request (host: github.com)
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:38.9562812Z   proxy | 2026/08/28 07:07:38 [004] 200 https://github.com:443/link-foundation/links-notation/info/refs?service=git-upload-pack
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:38.9589547Z   proxy | 2026/08/28 07:07:38 [005] POST https://github.com:443/link-foundation/links-notation/git-upload-pack
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:38.9591094Z 2026/08/28 07:07:38 [005] * authenticating git server request (host: github.com)
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.1483489Z   proxy | 2026/08/28 07:07:39 [005] 200 https://github.com:443/link-foundation/links-notation/git-upload-pack
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.1743874Z   proxy | 2026/08/28 07:07:39 [006] POST https://github.com:443/link-foundation/links-notation/git-upload-pack
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.1745028Z 2026/08/28 07:07:39 [006] * authenticating git server request (host: github.com)
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.3882598Z   proxy | 2026/08/28 07:07:39 [006] 200 https://github.com:443/link-foundation/links-notation/git-upload-pack
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.5964893Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Process PID: 1000 completed with status: pid 1000 exit 0
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.5966226Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Total execution time: 1.6 seconds
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.5977045Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Started process PID: 1043 with command: {} git -C /home/dependabot/dependabot-updater/repo ls-files --stage {}
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.6571710Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Process PID: 1043 completed with status: pid 1043 exit 0
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.6572950Z 2026/08/28 07:07:39 INFO <job_1543940948> Total execution time: 0.06 seconds
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.7089213Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Started process PID: 1137 with command: {} git rev-parse HEAD {}
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.7180438Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Process PID: 1137 completed with status: pid 1137 exit 0
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.7181749Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Total execution time: 0.01 seconds
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.7716827Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Started process PID: 1233 with command: {} git reset HEAD --hard {}
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.8148740Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Process PID: 1233 completed with status: pid 1233 exit 0
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.8150002Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Total execution time: 0.04 seconds
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.8155586Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Started process PID: 1241 with command: {} git clean -fx {}
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.8214502Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Process PID: 1241 completed with status: pid 1241 exit 0
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.8215608Z updater | 2026/08/28 07:07:39 INFO <job_1543940948> Total execution time: 0.01 seconds
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:39.9294621Z   proxy | 2026/08/28 07:07:39 [008] POST /update_jobs/1543940948/record_ecosystem_versions
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.2049717Z   proxy | 2026/08/28 07:07:40 [008] 204 /update_jobs/1543940948/record_ecosystem_versions
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.2054944Z updater | 2026/08/28 07:07:40 INFO <job_1543940948> Base commit SHA: 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.2055651Z 2026/08/28 07:07:40 INFO <job_1543940948> Finished job processing
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.2069464Z updater | 2026/08/28 07:07:40 INFO <job_1543940948> Starting job processing
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.2592544Z updater | 2026/08/28 07:07:40 INFO <job_1543940948> Started process PID: 1335 with command: {} git symbolic-ref --short refs/remotes/origin/HEAD {}
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.2633858Z updater | 2026/08/28 07:07:40 INFO <job_1543940948> Process PID: 1335 completed with status: pid 1335 exit 0
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.2635113Z 2026/08/28 07:07:40 INFO <job_1543940948> Total execution time: 0.0 seconds
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.2663848Z updater | 2026/08/28 07:07:40 INFO <job_1543940948> Started process PID: 1342 with command: {} git reset HEAD --hard {}
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.2948750Z updater | 2026/08/28 07:07:40 INFO <job_1543940948> Process PID: 1342 completed with status: pid 1342 exit 0
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.2949884Z updater | 2026/08/28 07:07:40 INFO <job_1543940948> Total execution time: 0.03 seconds
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.2954536Z updater | 2026/08/28 07:07:40 INFO <job_1543940948> Started process PID: 1349 with command: {} git clean -fx {}
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3045076Z updater | 2026/08/28 07:07:40 INFO <job_1543940948> Process PID: 1349 completed with status: pid 1349 exit 0
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3046128Z updater | 2026/08/28 07:07:40 INFO <job_1543940948> Total execution time: 0.01 seconds
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3445677Z updater | 2026/08/28 07:07:40 INFO <job_1543940948> Dependency submission payload:
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3446470Z {
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3446693Z   "version": 1,
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3447108Z   "sha": "4958f3cf8012ba9e67f19309b9c58984f7ce106a",
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3448333Z   "ref": "refs/heads/main",
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3448746Z   "job": {
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3449284Z     "correlator": "dependabot-go_modules-experiments-issue-288-go",
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3449945Z     "id": "1543940948"
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3450313Z   },
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3450626Z   "detector": {
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3450990Z     "name": "dependabot",
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3451517Z     "version": "0.393.0-42dadd3758278db4dbd61059f05971499eca773f",
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3452164Z     "url": "https://github.com/dependabot/dependabot-core"
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3452537Z   },
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3452743Z   "manifests": {
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3452994Z     "/experiments/issue-288/go/go.mod": {
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3453337Z       "name": "/experiments/issue-288/go/go.mod",
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3453741Z       "file": {
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3454118Z         "source_location": "experiments/issue-288/go/go.mod"
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3454650Z       },
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3455001Z       "metadata": {
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3455313Z         "ecosystem": "golang",
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3455651Z         "blob_oid": "be43d693476ac4ab028bbfa74acc88c60ca19e1e"
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3456016Z       },
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3456240Z       "resolved": {}
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3456462Z     }
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3456645Z   },
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3456883Z   "metadata": {
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3457438Z     "status": "ok",
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3460926Z     "scanned_manifest_path": "golang::/experiments/issue-288/go"
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3461318Z   }
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.3461507Z }
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.4263019Z   proxy | 2026/08/28 07:07:40 [010] POST /update_jobs/1543940948/create_dependency_submission
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.7311548Z   proxy | 2026/08/28 07:07:40 [010] 204 /update_jobs/1543940948/create_dependency_submission
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:40.8143142Z   proxy | 2026/08/28 07:07:40 [012] PATCH /update_jobs/1543940948/mark_as_processed
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:41.0062781Z   proxy | 2026/08/28 07:07:41 [012] 204 /update_jobs/1543940948/mark_as_processed
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:41.0069122Z updater | 2026/08/28 07:07:41 INFO <job_1543940948> Finished job processing
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:41.0076482Z updater | 2026/08/28 07:07:41 INFO Workflow summary written to /home/dependabot/dependabot-updater/output/summary.md
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:41.1379912Z Job summary written to GITHUB_STEP_SUMMARY
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:41.2406463Z Cleaned up container 83c49e2aa47686f739924de83df9cd0a647e1ff5f6b8a8f63aa06534b4f45aaa
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:41.2498000Z   proxy | 2026/08/28 07:07:41 0/7 calls cached (0%)
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:41.2499045Z 2026/08/28 07:07:41 Posting metrics to remote API endpoint
+update-go_modules-graph	Run Dependabot	2026-08-28T07:07:41.4602570Z 🤖 ~ finished ~
+update-go_modules-graph	Post Run Dependabot	﻿2026-08-28T07:07:41.4758037Z Post job cleanup.
+update-go_modules-graph	Complete job	﻿2026-08-28T07:07:41.6171234Z Cleaning up orphan processes

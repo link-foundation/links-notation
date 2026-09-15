@@ -293,6 +293,7 @@ body {
 }
 
 .example-card {
+    min-width: 0;
     background: var(--bg-primary);
     padding: 1.5rem;
     border-radius: 0.75rem;
@@ -383,6 +384,7 @@ body {
 }
 
 .doc-card {
+    min-width: 0;
     background: var(--bg-primary);
     padding: 1.5rem;
     border-radius: 0.75rem;
@@ -437,6 +439,14 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
+}
+
+.code-example {
+    /* A grid item is min-width: auto by default, so a long line inside the
+       <pre> below widens its column past 1fr and pushes the last column out of
+       the container. This became visible when Quick Start grew from three
+       languages to seven. */
+    min-width: 0;
 }
 
 .code-example h4 {

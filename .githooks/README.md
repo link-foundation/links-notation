@@ -22,11 +22,17 @@ git config core.hooksPath .githooks
 
 Automatically regenerates `TEST_CASE_COMPARISON.md` when test files are modified.
 
-**Triggers when:**
-- Any Python test file (`*/tests/*.py`) is staged
-- Any JavaScript test file (`*/tests/*.js`) is staged
-- Any Rust test file (`*/tests/*.rs`) is staged
-- Any C# test file (`*/tests/*.cs`) is staged
+**Triggers when:** a test file of any supported language is staged:
+
+| Language | Path |
+|----------|------|
+| Python | `python/tests/*.py` |
+| JavaScript | `js/tests/*.test.js` |
+| Rust | `rust/links-notation/tests/*.rs` |
+| C# | `csharp/Link.Foundation.Links.Notation.Tests/*.cs` |
+| Go | `go/*_test.go` |
+| Java | `java/src/test/**/*.java` |
+| PHP | `php/tests/*.php` |
 
 **What it does:**
 1. Detects that test files have been modified
@@ -36,6 +42,11 @@ Automatically regenerates `TEST_CASE_COMPARISON.md` when test files are modified
 
 **Why this is important:**
 The test comparison document provides a comprehensive overview of test parity across all language implementations. Keeping it up-to-date ensures developers can always see the current state of test coverage.
+
+The hook is a convenience, not the guarantee: the `docs` workflow runs
+`node scripts/create-test-case-comparison.mjs --check` on every pull request
+that touches a test, so a stale document fails CI whether or not the hook is
+installed.
 
 ## Bypassing Hooks
 

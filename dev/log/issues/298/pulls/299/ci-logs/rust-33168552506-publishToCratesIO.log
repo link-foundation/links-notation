@@ -1,0 +1,612 @@
+2026-08-28T11:49:47.3653029Z Current runner version: '2.336.0'
+2026-08-28T11:49:47.3679778Z ##[group]Runner Image Provisioner
+2026-08-28T11:49:47.3680885Z Hosted Compute Agent
+2026-08-28T11:49:47.3681559Z Version: 20260819.586
+2026-08-28T11:49:47.3682314Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+2026-08-28T11:49:47.3683165Z Build Date: 2026-08-18T23:20:18Z
+2026-08-28T11:49:47.3683924Z Worker ID: {44f5a7b2-9297-4887-a4ff-dd2b838c5f0b}
+2026-08-28T11:49:47.3684789Z Azure Region: westus
+2026-08-28T11:49:47.3685426Z ##[endgroup]
+2026-08-28T11:49:47.3687075Z ##[group]Operating System
+2026-08-28T11:49:47.3687798Z Ubuntu
+2026-08-28T11:49:47.3688331Z 24.04.4
+2026-08-28T11:49:47.3688904Z LTS
+2026-08-28T11:49:47.3689771Z ##[endgroup]
+2026-08-28T11:49:47.3690478Z ##[group]Runner Image
+2026-08-28T11:49:47.3691198Z Image: ubuntu-24.04
+2026-08-28T11:49:47.3691845Z Version: 20260823.283.1
+2026-08-28T11:49:47.3693237Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+2026-08-28T11:49:47.3694903Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+2026-08-28T11:49:47.3695999Z ##[endgroup]
+2026-08-28T11:49:47.3697225Z ##[group]GITHUB_TOKEN Permissions
+2026-08-28T11:49:47.3700017Z Contents: read
+2026-08-28T11:49:47.3700749Z Metadata: read
+2026-08-28T11:49:47.3701540Z ##[endgroup]
+2026-08-28T11:49:47.3703753Z Secret source: Actions
+2026-08-28T11:49:47.3705096Z Prepare workflow directory
+2026-08-28T11:49:47.4283820Z Prepare all required actions
+2026-08-28T11:49:47.4331904Z Getting action download info
+2026-08-28T11:49:47.7997139Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-08-28T11:49:47.9180400Z Download action repository 'dtolnay/rust-toolchain@stable' (SHA:4360b52568e2003a75bf9bc1d59f33a8e3fc893c)
+2026-08-28T11:49:48.1376511Z Download action repository 'Swatinem/rust-cache@v2' (SHA:6323deb102c322ba6fcbdcafc7e3dddab59af2b6)
+2026-08-28T11:49:48.5438980Z Download action repository 'rust-lang/crates-io-auth-action@v1' (SHA:c6f97d42243bad5fab37ca0427f495c86d5b1a18)
+2026-08-28T11:49:48.9507110Z Complete job name: publishToCratesIO
+2026-08-28T11:49:49.0385421Z ##[group]Run actions/checkout@v7
+2026-08-28T11:49:49.0387032Z with:
+2026-08-28T11:49:49.0388078Z   persist-credentials: false
+2026-08-28T11:49:49.0389492Z   submodules: true
+2026-08-28T11:49:49.0390644Z   repository: link-foundation/links-notation
+2026-08-28T11:49:49.0400519Z   token: ***
+2026-08-28T11:49:49.0401495Z   ssh-strict: true
+2026-08-28T11:49:49.0402519Z   ssh-user: git
+2026-08-28T11:49:49.0403476Z   clean: true
+2026-08-28T11:49:49.0404546Z   sparse-checkout-cone-mode: true
+2026-08-28T11:49:49.0405748Z   fetch-depth: 1
+2026-08-28T11:49:49.0406742Z   fetch-tags: false
+2026-08-28T11:49:49.0407763Z   show-progress: true
+2026-08-28T11:49:49.0408808Z   lfs: false
+2026-08-28T11:49:49.0409968Z   set-safe-directory: true
+2026-08-28T11:49:49.0411145Z   allow-unsafe-pr-checkout: false
+2026-08-28T11:49:49.0412635Z env:
+2026-08-28T11:49:49.0422298Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:49.0423320Z   CI_VERBOSE: false
+2026-08-28T11:49:49.0424322Z ##[endgroup]
+2026-08-28T11:49:49.1481809Z Syncing repository: link-foundation/links-notation
+2026-08-28T11:49:49.1486600Z ##[group]Getting Git version info
+2026-08-28T11:49:49.1489648Z Working directory is '/home/runner/work/links-notation/links-notation'
+2026-08-28T11:49:49.1493551Z [command]/usr/bin/git version
+2026-08-28T11:49:49.1558169Z git version 2.55.0
+2026-08-28T11:49:49.1631650Z ##[endgroup]
+2026-08-28T11:49:49.1639953Z Temporarily overriding HOME='/home/runner/work/_temp/470ce371-7a3e-4201-b88e-730fb838ab60' before making global git config changes
+2026-08-28T11:49:49.1643515Z Adding repository directory to the temporary git global config as a safe directory
+2026-08-28T11:49:49.1647246Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+2026-08-28T11:49:49.1657909Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+2026-08-28T11:49:49.1663197Z ##[group]Determining repository object format
+2026-08-28T11:49:49.1666742Z ##[endgroup]
+2026-08-28T11:49:49.1669809Z ##[group]Initializing the repository
+2026-08-28T11:49:49.1671714Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+2026-08-28T11:49:49.1781935Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-08-28T11:49:49.1785673Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-08-28T11:49:49.1789748Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-08-28T11:49:49.1792715Z hint: call:
+2026-08-28T11:49:49.1794225Z hint:
+2026-08-28T11:49:49.1796231Z hint: 	git config --global init.defaultBranch <name>
+2026-08-28T11:49:49.1798639Z hint:
+2026-08-28T11:49:49.1801177Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-08-28T11:49:49.1804694Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-08-28T11:49:49.1807417Z hint:
+2026-08-28T11:49:49.1809521Z hint: 	git branch -m <name>
+2026-08-28T11:49:49.1810901Z hint:
+2026-08-28T11:49:49.1812283Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-08-28T11:49:49.1814671Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+2026-08-28T11:49:49.1819962Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+2026-08-28T11:49:49.1858594Z ##[endgroup]
+2026-08-28T11:49:49.1862145Z ##[group]Disabling automatic garbage collection
+2026-08-28T11:49:49.1865019Z [command]/usr/bin/git config --local gc.auto 0
+2026-08-28T11:49:49.1901658Z ##[endgroup]
+2026-08-28T11:49:49.1904257Z ##[group]Setting up auth
+2026-08-28T11:49:49.1906296Z Removing SSH command configuration
+2026-08-28T11:49:49.1909302Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-08-28T11:49:49.1947559Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-08-28T11:49:49.2321611Z Removing HTTP extra header
+2026-08-28T11:49:49.2324872Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-08-28T11:49:49.2368991Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-08-28T11:49:49.2593110Z Removing includeIf entries pointing to credentials config files
+2026-08-28T11:49:49.2606002Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-08-28T11:49:49.2644701Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-08-28T11:49:49.2876889Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-08-28T11:49:49.2919584Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config
+2026-08-28T11:49:49.2954907Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config
+2026-08-28T11:49:49.2993390Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config
+2026-08-28T11:49:49.3031741Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config
+2026-08-28T11:49:49.3063812Z ##[endgroup]
+2026-08-28T11:49:49.3065564Z ##[group]Fetching the repository
+2026-08-28T11:49:49.3070907Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2b829f37b8369ff5a4b5114923eae4d49f03c78d:refs/remotes/origin/main
+2026-08-28T11:49:49.9307999Z From https://github.com/link-foundation/links-notation
+2026-08-28T11:49:49.9311010Z  * [new ref]         2b829f37b8369ff5a4b5114923eae4d49f03c78d -> origin/main
+2026-08-28T11:49:49.9319527Z [command]/usr/bin/git branch --list --remote origin/main
+2026-08-28T11:49:49.9351115Z   origin/main
+2026-08-28T11:49:49.9361546Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-08-28T11:49:49.9390519Z 2b829f37b8369ff5a4b5114923eae4d49f03c78d
+2026-08-28T11:49:49.9396153Z ##[endgroup]
+2026-08-28T11:49:49.9397649Z ##[group]Determining the checkout info
+2026-08-28T11:49:49.9399671Z ##[endgroup]
+2026-08-28T11:49:49.9403734Z [command]/usr/bin/git sparse-checkout disable
+2026-08-28T11:49:49.9462825Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-08-28T11:49:49.9498405Z ##[group]Checking out the ref
+2026-08-28T11:49:49.9501792Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-08-28T11:49:49.9962572Z Switched to a new branch 'main'
+2026-08-28T11:49:49.9972794Z branch 'main' set up to track 'origin/main'.
+2026-08-28T11:49:49.9980835Z ##[endgroup]
+2026-08-28T11:49:49.9983268Z ##[group]Setting up auth for fetching submodules
+2026-08-28T11:49:49.9990175Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-08-28T11:49:50.0041145Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config
+2026-08-28T11:49:50.0078724Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+2026-08-28T11:49:50.0122629Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+2026-08-28T11:49:50.0160579Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+2026-08-28T11:49:50.0195394Z ##[endgroup]
+2026-08-28T11:49:50.0196866Z ##[group]Fetching submodules
+2026-08-28T11:49:50.0199826Z [command]/usr/bin/git submodule sync
+2026-08-28T11:49:50.0465793Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+2026-08-28T11:49:50.0730815Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+2026-08-28T11:49:50.0963570Z ##[endgroup]
+2026-08-28T11:49:50.1010399Z [command]/usr/bin/git log -1 --format=%H
+2026-08-28T11:49:50.1044561Z 2b829f37b8369ff5a4b5114923eae4d49f03c78d
+2026-08-28T11:49:50.1054694Z ##[group]Removing auth
+2026-08-28T11:49:50.1055383Z Removing SSH command configuration
+2026-08-28T11:49:50.1059826Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-08-28T11:49:50.1096704Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-08-28T11:49:50.1367330Z Removing HTTP extra header
+2026-08-28T11:49:50.1368048Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-08-28T11:49:50.1418896Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-08-28T11:49:50.1654955Z Removing includeIf entries pointing to credentials config files
+2026-08-28T11:49:50.1658165Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-08-28T11:49:50.1691441Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+2026-08-28T11:49:50.1692338Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+2026-08-28T11:49:50.1693498Z includeif.gitdir:/github/workspace/.git.path
+2026-08-28T11:49:50.1694011Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-08-28T11:49:50.1701092Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+2026-08-28T11:49:50.1728532Z /home/runner/work/_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config
+2026-08-28T11:49:50.1739840Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-55a39926\-baa1\-4a6f\-844d\-ff2094c42b53\.config
+2026-08-28T11:49:50.1781410Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+2026-08-28T11:49:50.1812109Z /home/runner/work/_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config
+2026-08-28T11:49:50.1820225Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-55a39926\-baa1\-4a6f\-844d\-ff2094c42b53\.config
+2026-08-28T11:49:50.1858283Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-08-28T11:49:50.1885665Z /github/runner_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config
+2026-08-28T11:49:50.1893145Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-55a39926\-baa1\-4a6f\-844d\-ff2094c42b53\.config
+2026-08-28T11:49:50.1930324Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-08-28T11:49:50.1959306Z /github/runner_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config
+2026-08-28T11:49:50.1966462Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-55a39926\-baa1\-4a6f\-844d\-ff2094c42b53\.config
+2026-08-28T11:49:50.2003089Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-08-28T11:49:50.2232827Z Removing credentials config '/home/runner/work/_temp/git-credentials-55a39926-baa1-4a6f-844d-ff2094c42b53.config'
+2026-08-28T11:49:50.2242109Z ##[endgroup]
+2026-08-28T11:49:50.2582566Z ##[group]Run dtolnay/rust-toolchain@stable
+2026-08-28T11:49:50.2583012Z with:
+2026-08-28T11:49:50.2583291Z   toolchain: stable
+2026-08-28T11:49:50.2583586Z env:
+2026-08-28T11:49:50.2586595Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.2586919Z   CI_VERBOSE: false
+2026-08-28T11:49:50.2587207Z ##[endgroup]
+2026-08-28T11:49:50.2652914Z ##[start-action display=Parse toolchain version;id=__dtolnay_rust-toolchain.parse]
+2026-08-28T11:49:50.2713943Z ##[group]Run if [[ -z $toolchain ]]; then
+2026-08-28T11:49:50.2714500Z [36;1mif [[ -z $toolchain ]]; then[0m
+2026-08-28T11:49:50.2715211Z [36;1m  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070[0m
+2026-08-28T11:49:50.2715975Z [36;1m  echo "'toolchain' is a required input" >&2[0m
+2026-08-28T11:49:50.2716408Z [36;1m  exit 1[0m
+2026-08-28T11:49:50.2716873Z [36;1melif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then[0m
+2026-08-28T11:49:50.2717475Z [36;1m  if [[ Linux == macOS ]]; then[0m
+2026-08-28T11:49:50.2718166Z [36;1m    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT[0m
+2026-08-28T11:49:50.2718841Z [36;1m  else[0m
+2026-08-28T11:49:50.2719587Z [36;1m    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT[0m
+2026-08-28T11:49:50.2720211Z [36;1m  fi[0m
+2026-08-28T11:49:50.2720692Z [36;1melif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then[0m
+2026-08-28T11:49:50.2721379Z [36;1m  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT[0m
+2026-08-28T11:49:50.2722213Z [36;1melif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then[0m
+2026-08-28T11:49:50.2722917Z [36;1m  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT[0m
+2026-08-28T11:49:50.2723584Z [36;1melse[0m
+2026-08-28T11:49:50.2723973Z [36;1m  echo "toolchain=$toolchain" >> $GITHUB_OUTPUT[0m
+2026-08-28T11:49:50.2724405Z [36;1mfi[0m
+2026-08-28T11:49:50.2767489Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.2767992Z env:
+2026-08-28T11:49:50.2771353Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.2771705Z   CI_VERBOSE: false
+2026-08-28T11:49:50.2772029Z   toolchain: stable
+2026-08-28T11:49:50.2772356Z ##[endgroup]
+2026-08-28T11:49:50.2889754Z ##[end-action id=__dtolnay_rust-toolchain.parse;outcome=success;conclusion=success;duration_ms=23]
+2026-08-28T11:49:50.2896784Z ##[start-action display=Construct rustup command line;id=__dtolnay_rust-toolchain.flags]
+2026-08-28T11:49:50.2928092Z ##[group]Run echo "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT
+2026-08-28T11:49:50.2928923Z [36;1mecho "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT[0m
+2026-08-28T11:49:50.2930013Z [36;1mecho "components=$(for c in ${components//,/ }; do echo -n ' --component' $c; done)" >> $GITHUB_OUTPUT[0m
+2026-08-28T11:49:50.2930670Z [36;1mecho "downgrade=" >> $GITHUB_OUTPUT[0m
+2026-08-28T11:49:50.2968103Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.2968582Z env:
+2026-08-28T11:49:50.2971765Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.2972123Z   CI_VERBOSE: false
+2026-08-28T11:49:50.2972445Z   targets: 
+2026-08-28T11:49:50.2972744Z   components: 
+2026-08-28T11:49:50.2973058Z ##[endgroup]
+2026-08-28T11:49:50.3048787Z ##[end-action id=__dtolnay_rust-toolchain.flags;outcome=success;conclusion=success;duration_ms=15]
+2026-08-28T11:49:50.3052044Z ##[start-action display=Set $CARGO_HOME;id=__dtolnay_rust-toolchain.__run]
+2026-08-28T11:49:50.3077361Z ##[group]Run echo CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV
+2026-08-28T11:49:50.3078010Z [36;1mecho CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV[0m
+2026-08-28T11:49:50.3115334Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.3116021Z env:
+2026-08-28T11:49:50.3119342Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.3119713Z   CI_VERBOSE: false
+2026-08-28T11:49:50.3120042Z ##[endgroup]
+2026-08-28T11:49:50.3191212Z ##[end-action id=__dtolnay_rust-toolchain.__run;outcome=success;conclusion=success;duration_ms=13]
+2026-08-28T11:49:50.3194017Z ##[start-action display=Install rustup if needed;id=__dtolnay_rust-toolchain.__run_2]
+2026-08-28T11:49:50.3224668Z ##[group]Run if ! command -v rustup &>/dev/null; then
+2026-08-28T11:49:50.3225177Z [36;1mif ! command -v rustup &>/dev/null; then[0m
+2026-08-28T11:49:50.3226123Z [36;1m  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://sh.rustup.rs | sh -s -- --default-toolchain none -y[0m
+2026-08-28T11:49:50.3227088Z [36;1m  echo "$CARGO_HOME/bin" >> $GITHUB_PATH[0m
+2026-08-28T11:49:50.3227489Z [36;1mfi[0m
+2026-08-28T11:49:50.3266655Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.3267127Z env:
+2026-08-28T11:49:50.3270577Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.3270935Z   CI_VERBOSE: false
+2026-08-28T11:49:50.3271271Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:49:50.3271633Z ##[endgroup]
+2026-08-28T11:49:50.3341288Z ##[end-action id=__dtolnay_rust-toolchain.__run_2;outcome=success;conclusion=success;duration_ms=14]
+2026-08-28T11:49:50.3344123Z ##[start-action display=Install rustup if needed on windows;id=__dtolnay_rust-toolchain.__run_3]
+2026-08-28T11:49:50.3352603Z ##[end-action id=__dtolnay_rust-toolchain.__run_3;outcome=skipped;conclusion=skipped;duration_ms=0]
+2026-08-28T11:49:50.3365014Z ##[start-action display=rustup toolchain install stable;id=__dtolnay_rust-toolchain.__run_4]
+2026-08-28T11:49:50.3477483Z ##[group]Run rustup toolchain install stable --profile minimal --no-self-update
+2026-08-28T11:49:50.3478818Z [36;1mrustup toolchain install stable --profile minimal --no-self-update[0m
+2026-08-28T11:49:50.3521226Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.3521719Z env:
+2026-08-28T11:49:50.3524773Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.3525106Z   CI_VERBOSE: false
+2026-08-28T11:49:50.3525441Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:49:50.3525821Z   RUSTUP_PERMIT_COPY_RENAME: 1
+2026-08-28T11:49:50.3526177Z ##[endgroup]
+2026-08-28T11:49:50.5613749Z info: syncing channel updates for stable-x86_64-unknown-linux-gnu
+2026-08-28T11:49:50.6382308Z 
+2026-08-28T11:49:50.6468163Z   stable-x86_64-unknown-linux-gnu unchanged - rustc 1.98.0 (88d9e12ae 2026-08-18)
+2026-08-28T11:49:50.6468769Z 
+2026-08-28T11:49:50.6501024Z ##[end-action id=__dtolnay_rust-toolchain.__run_4;outcome=success;conclusion=success;duration_ms=313]
+2026-08-28T11:49:50.6507424Z ##[start-action display=rustup default stable;id=__dtolnay_rust-toolchain.__run_5]
+2026-08-28T11:49:50.6537024Z ##[group]Run rustup default stable
+2026-08-28T11:49:50.6537446Z [36;1mrustup default stable[0m
+2026-08-28T11:49:50.6580117Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.6580670Z env:
+2026-08-28T11:49:50.6583794Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.6584129Z   CI_VERBOSE: false
+2026-08-28T11:49:50.6584470Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:49:50.6584828Z ##[endgroup]
+2026-08-28T11:49:50.6705548Z info: using existing install for stable-x86_64-unknown-linux-gnu
+2026-08-28T11:49:50.6713832Z info: default toolchain set to stable-x86_64-unknown-linux-gnu
+2026-08-28T11:49:50.6714261Z 
+2026-08-28T11:49:50.6795800Z   stable-x86_64-unknown-linux-gnu unchanged - rustc 1.98.0 (88d9e12ae 2026-08-18)
+2026-08-28T11:49:50.6796559Z 
+2026-08-28T11:49:50.6813154Z ##[end-action id=__dtolnay_rust-toolchain.__run_5;outcome=success;conclusion=success;duration_ms=30]
+2026-08-28T11:49:50.6816324Z ##[start-action display=Create cachekey;id=__dtolnay_rust-toolchain.rustc-version]
+2026-08-28T11:49:50.6845809Z ##[group]Run DATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
+2026-08-28T11:49:50.6847050Z [36;1mDATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')[0m
+2026-08-28T11:49:50.6847878Z [36;1mHASH=$(rustc +stable --version --verbose | sed -ne 's/^commit-hash: //p')[0m
+2026-08-28T11:49:50.6848536Z [36;1mecho "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT[0m
+2026-08-28T11:49:50.6890668Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.6891143Z env:
+2026-08-28T11:49:50.6894163Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.6894496Z   CI_VERBOSE: false
+2026-08-28T11:49:50.6894885Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:49:50.6895272Z ##[endgroup]
+2026-08-28T11:49:50.7286991Z ##[end-action id=__dtolnay_rust-toolchain.rustc-version;outcome=success;conclusion=success;duration_ms=46]
+2026-08-28T11:49:50.7290713Z ##[start-action display=Disable incremental compilation;id=__dtolnay_rust-toolchain.__run_6]
+2026-08-28T11:49:50.7317653Z ##[group]Run if [ -z "${CARGO_INCREMENTAL+set}" ]; then
+2026-08-28T11:49:50.7318199Z [36;1mif [ -z "${CARGO_INCREMENTAL+set}" ]; then[0m
+2026-08-28T11:49:50.7318672Z [36;1m  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV[0m
+2026-08-28T11:49:50.7319360Z [36;1mfi[0m
+2026-08-28T11:49:50.7361574Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.7362114Z env:
+2026-08-28T11:49:50.7365149Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.7365492Z   CI_VERBOSE: false
+2026-08-28T11:49:50.7365834Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:49:50.7366208Z ##[endgroup]
+2026-08-28T11:49:50.7437074Z ##[end-action id=__dtolnay_rust-toolchain.__run_6;outcome=success;conclusion=success;duration_ms=14]
+2026-08-28T11:49:50.7440451Z ##[start-action display=Enable colors in Cargo output;id=__dtolnay_rust-toolchain.__run_7]
+2026-08-28T11:49:50.7468582Z ##[group]Run if [ -z "${CARGO_TERM_COLOR+set}" ]; then
+2026-08-28T11:49:50.7469396Z [36;1mif [ -z "${CARGO_TERM_COLOR+set}" ]; then[0m
+2026-08-28T11:49:50.7469890Z [36;1m  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV[0m
+2026-08-28T11:49:50.7470314Z [36;1mfi[0m
+2026-08-28T11:49:50.7511045Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.7511514Z env:
+2026-08-28T11:49:50.7514524Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.7514852Z   CI_VERBOSE: false
+2026-08-28T11:49:50.7515188Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:49:50.7515556Z   CARGO_INCREMENTAL: 0
+2026-08-28T11:49:50.7515885Z ##[endgroup]
+2026-08-28T11:49:50.7585857Z ##[end-action id=__dtolnay_rust-toolchain.__run_7;outcome=success;conclusion=success;duration_ms=14]
+2026-08-28T11:49:50.7588639Z ##[start-action display=Enable Cargo sparse registry;id=__dtolnay_rust-toolchain.__run_8]
+2026-08-28T11:49:50.7616521Z ##[group]Run # implemented in 1.66, stabilized in 1.68, made default in 1.70
+2026-08-28T11:49:50.7617163Z [36;1m# implemented in 1.66, stabilized in 1.68, made default in 1.70[0m
+2026-08-28T11:49:50.7618047Z [36;1mif [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol ]; then[0m
+2026-08-28T11:49:50.7618927Z [36;1m  if rustc +stable --version --verbose | grep -q '^release: 1\.6[89]\.'; then[0m
+2026-08-28T11:49:50.7620145Z [36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true[0m
+2026-08-28T11:49:50.7620840Z [36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV[0m
+2026-08-28T11:49:50.7621482Z [36;1m  elif rustc +stable --version --verbose | grep -q '^release: 1\.6[67]\.'; then[0m
+2026-08-28T11:49:50.7622220Z [36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true[0m
+2026-08-28T11:49:50.7622895Z [36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV[0m
+2026-08-28T11:49:50.7623359Z [36;1m  fi[0m
+2026-08-28T11:49:50.7623650Z [36;1mfi[0m
+2026-08-28T11:49:50.7663638Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.7664099Z env:
+2026-08-28T11:49:50.7667192Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.7667695Z   CI_VERBOSE: false
+2026-08-28T11:49:50.7668033Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:49:50.7668396Z   CARGO_INCREMENTAL: 0
+2026-08-28T11:49:50.7668738Z   CARGO_TERM_COLOR: always
+2026-08-28T11:49:50.7669365Z ##[endgroup]
+2026-08-28T11:49:50.8020469Z ##[end-action id=__dtolnay_rust-toolchain.__run_8;outcome=success;conclusion=success;duration_ms=43]
+2026-08-28T11:49:50.8023869Z ##[start-action display=Work around spurious network errors in curl 8.0;id=__dtolnay_rust-toolchain.__run_9]
+2026-08-28T11:49:50.8053113Z ##[group]Run # https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation
+2026-08-28T11:49:50.8054051Z [36;1m# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation[0m
+2026-08-28T11:49:50.8054801Z [36;1mif rustc +stable --version --verbose | grep -q '^release: 1\.7[01]\.'; then[0m
+2026-08-28T11:49:50.8055399Z [36;1m  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV[0m
+2026-08-28T11:49:50.8055824Z [36;1mfi[0m
+2026-08-28T11:49:50.8097650Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.8098114Z env:
+2026-08-28T11:49:50.8101490Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.8101831Z   CI_VERBOSE: false
+2026-08-28T11:49:50.8102163Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:49:50.8102530Z   CARGO_INCREMENTAL: 0
+2026-08-28T11:49:50.8102860Z   CARGO_TERM_COLOR: always
+2026-08-28T11:49:50.8103186Z ##[endgroup]
+2026-08-28T11:49:50.8311121Z ##[end-action id=__dtolnay_rust-toolchain.__run_9;outcome=success;conclusion=success;duration_ms=28]
+2026-08-28T11:49:50.8315804Z ##[start-action display=rustc +stable --version --verbose;id=__dtolnay_rust-toolchain.__run_10]
+2026-08-28T11:49:50.8343169Z ##[group]Run rustc +stable --version --verbose
+2026-08-28T11:49:50.8343634Z [36;1mrustc +stable --version --verbose[0m
+2026-08-28T11:49:50.8383544Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-08-28T11:49:50.8384008Z env:
+2026-08-28T11:49:50.8387283Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.8387643Z   CI_VERBOSE: false
+2026-08-28T11:49:50.8387985Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:49:50.8388348Z   CARGO_INCREMENTAL: 0
+2026-08-28T11:49:50.8388691Z   CARGO_TERM_COLOR: always
+2026-08-28T11:49:50.8389474Z ##[endgroup]
+2026-08-28T11:49:50.8572772Z rustc 1.98.0 (88d9e12ae 2026-08-18)
+2026-08-28T11:49:50.8573738Z binary: rustc
+2026-08-28T11:49:50.8574289Z commit-hash: 88d9e12ae178fab0fb5cc050a94da85685d449ea
+2026-08-28T11:49:50.8574862Z commit-date: 2026-08-18
+2026-08-28T11:49:50.8575399Z host: x86_64-unknown-linux-gnu
+2026-08-28T11:49:50.8576250Z release: 1.98.0
+2026-08-28T11:49:50.8576977Z LLVM version: 22.1.8
+2026-08-28T11:49:50.8597175Z ##[end-action id=__dtolnay_rust-toolchain.__run_10;outcome=success;conclusion=success;duration_ms=28]
+2026-08-28T11:49:50.8740559Z ##[group]Run Swatinem/rust-cache@v2
+2026-08-28T11:49:50.8741000Z with:
+2026-08-28T11:49:50.8741294Z   workspaces: rust
+2026-08-28T11:49:50.8741611Z   prefix-key: v0-rust
+2026-08-28T11:49:50.8741949Z   add-job-id-key: true
+2026-08-28T11:49:50.8742300Z   add-rust-environment-hash-key: true
+2026-08-28T11:49:50.8742683Z   cache-targets: true
+2026-08-28T11:49:50.8743022Z   cache-all-crates: false
+2026-08-28T11:49:50.8743379Z   cache-workspace-crates: false
+2026-08-28T11:49:50.8743727Z   save-if: true
+2026-08-28T11:49:50.8744037Z   cache-provider: github
+2026-08-28T11:49:50.8744365Z   cache-bin: true
+2026-08-28T11:49:50.8744665Z   lookup-only: false
+2026-08-28T11:49:50.8744972Z   cmd-format: {0}
+2026-08-28T11:49:50.8745262Z env:
+2026-08-28T11:49:50.8748327Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:50.8748648Z   CI_VERBOSE: false
+2026-08-28T11:49:50.8749242Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:49:50.8749674Z   CARGO_INCREMENTAL: 0
+2026-08-28T11:49:50.8750056Z   CARGO_TERM_COLOR: always
+2026-08-28T11:49:50.8750386Z ##[endgroup]
+2026-08-28T11:49:52.1708796Z ##[group]Cache Configuration
+2026-08-28T11:49:52.1709461Z Cache Provider:
+2026-08-28T11:49:52.1709954Z     github
+2026-08-28T11:49:52.1710304Z Workspaces:
+2026-08-28T11:49:52.1710801Z     /home/runner/work/links-notation/links-notation/rust
+2026-08-28T11:49:52.1711354Z Cache Paths:
+2026-08-28T11:49:52.1711721Z     /home/runner/.cargo/bin
+2026-08-28T11:49:52.1712198Z     /home/runner/.cargo/.crates.toml
+2026-08-28T11:49:52.1712730Z     /home/runner/.cargo/.crates2.json
+2026-08-28T11:49:52.1713204Z     /home/runner/.cargo/registry
+2026-08-28T11:49:52.1713645Z     /home/runner/.cargo/git
+2026-08-28T11:49:52.1714202Z     /home/runner/work/links-notation/links-notation/rust/target
+2026-08-28T11:49:52.1714791Z Restore Key:
+2026-08-28T11:49:52.1715240Z     v0-rust-publishToCratesIO-Linux-x64-0b9fd15e
+2026-08-28T11:49:52.1715820Z Cache Key:
+2026-08-28T11:49:52.1716337Z     v0-rust-publishToCratesIO-Linux-x64-0b9fd15e-2cd05178
+2026-08-28T11:49:52.1716935Z .. Prefix:
+2026-08-28T11:49:52.1717329Z   - v0-rust-publishToCratesIO-Linux-x64
+2026-08-28T11:49:52.1717910Z .. Environment considered:
+2026-08-28T11:49:52.1718217Z   - Rust Versions:
+2026-08-28T11:49:52.1718595Z     - 1.98.0 x86_64-unknown-linux-gnu 88d9e12ae178fab0fb5cc050a94da85685d449ea
+2026-08-28T11:49:52.1719303Z   - CARGO_HOME
+2026-08-28T11:49:52.1719634Z   - CARGO_INCREMENTAL
+2026-08-28T11:49:52.1719885Z   - CARGO_TERM_COLOR
+2026-08-28T11:49:52.1720129Z .. Lockfiles considered:
+2026-08-28T11:49:52.1720588Z   - /home/runner/work/links-notation/links-notation/rust/links-notation-macro/Cargo.toml
+2026-08-28T11:49:52.1721274Z   - /home/runner/work/links-notation/links-notation/rust/links-notation/Cargo.toml
+2026-08-28T11:49:52.1721972Z ##[endgroup]
+2026-08-28T11:49:52.1722161Z 
+2026-08-28T11:49:52.1722298Z ... Restoring cache ...
+2026-08-28T11:49:52.4201150Z Cache hit for: v0-rust-publishToCratesIO-Linux-x64-0b9fd15e-2cd05178
+2026-08-28T11:49:53.6824112Z Received 632057 of 9020665 (7.0%), 0.6 MBs/sec
+2026-08-28T11:49:53.8205105Z Received 9020665 of 9020665 (100.0%), 7.6 MBs/sec
+2026-08-28T11:49:53.8205780Z Cache Size: ~9 MB (9020665 B)
+2026-08-28T11:49:53.8238686Z [command]/usr/bin/tar -xf /home/runner/work/_temp/563948bf-c720-428f-8d5e-73d49e99a8f8/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+2026-08-28T11:49:53.8820213Z Cache restored successfully
+2026-08-28T11:49:53.8827348Z Restored from cache key "v0-rust-publishToCratesIO-Linux-x64-0b9fd15e-2cd05178" full match: true.
+2026-08-28T11:49:53.8930373Z ##[group]Run cargo build --release
+2026-08-28T11:49:53.8930718Z [36;1mcargo build --release[0m
+2026-08-28T11:49:53.8967238Z shell: /usr/bin/bash -e {0}
+2026-08-28T11:49:53.8967518Z env:
+2026-08-28T11:49:53.8970664Z   GITHUB_TOKEN: ***
+2026-08-28T11:49:53.8970917Z   CI_VERBOSE: false
+2026-08-28T11:49:53.8971165Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:49:53.8971425Z   CARGO_INCREMENTAL: 0
+2026-08-28T11:49:53.8971648Z   CARGO_TERM_COLOR: always
+2026-08-28T11:49:53.8971890Z   CACHE_ON_FAILURE: false
+2026-08-28T11:49:53.8972115Z ##[endgroup]
+2026-08-28T11:49:54.3096433Z [1m[92m    Updating[0m crates.io index
+2026-08-28T11:49:54.5237956Z [1m[92m     Locking[0m 6 packages to latest compatible versions
+2026-08-28T11:49:54.6702072Z [1m[92m   Compiling[0m links-notation-macro v0.1.0 (/home/runner/work/links-notation/links-notation/rust/links-notation-macro)
+2026-08-28T11:50:00.8996160Z [1m[92m   Compiling[0m links-notation v0.16.0 (/home/runner/work/links-notation/links-notation/rust/links-notation)
+2026-08-28T11:50:02.6976138Z [1m[92m    Finished[0m `release` profile [optimized] target(s) in 8.78s
+2026-08-28T11:50:02.7168703Z ##[group]Run rust-lang/crates-io-auth-action@v1
+2026-08-28T11:50:02.7169348Z with:
+2026-08-28T11:50:02.7169570Z   url: https://crates.io
+2026-08-28T11:50:02.7169830Z env:
+2026-08-28T11:50:02.7172661Z   GITHUB_TOKEN: ***
+2026-08-28T11:50:02.7172892Z   CI_VERBOSE: false
+2026-08-28T11:50:02.7173124Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:50:02.7173387Z   CARGO_INCREMENTAL: 0
+2026-08-28T11:50:02.7173615Z   CARGO_TERM_COLOR: always
+2026-08-28T11:50:02.7173855Z   CACHE_ON_FAILURE: false
+2026-08-28T11:50:02.7174081Z ##[endgroup]
+2026-08-28T11:50:02.7941333Z Retrieving GitHub Actions JWT token with audience: crates.io
+2026-08-28T11:50:03.0376617Z Retrieved JWT token successfully
+2026-08-28T11:50:03.0377719Z Requesting token from: https://crates.io/api/v1/trusted_publishing/tokens. User agent: crates-io-auth-action/1.0.1
+2026-08-28T11:50:03.1683205Z ##[error]Failed to retrieve token from Cargo registry. Status: 400. Error: No Trusted Publishing config found for repository `link-foundation/links-notation`.
+2026-08-28T11:50:03.2117635Z ##[group]Run set -euo pipefail
+2026-08-28T11:50:03.2118041Z [36;1mset -euo pipefail[0m
+2026-08-28T11:50:03.2118296Z [36;1m[0m
+2026-08-28T11:50:03.2118628Z [36;1mread_field() { grep "^$2 = " "$1" | head -1 | sed "s/$2 = \"\(.*\)\"/\1/"; }[0m
+2026-08-28T11:50:03.2119510Z [36;1mMACRO_VERSION=$(read_field links-notation-macro/Cargo.toml version)[0m
+2026-08-28T11:50:03.2120016Z [36;1mPACKAGE_NAME=$(read_field links-notation/Cargo.toml name)[0m
+2026-08-28T11:50:03.2120474Z [36;1mPACKAGE_VERSION=$(read_field links-notation/Cargo.toml version)[0m
+2026-08-28T11:50:03.2120904Z [36;1mecho "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"[0m
+2026-08-28T11:50:03.2121283Z [36;1mecho "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"[0m
+2026-08-28T11:50:03.2121611Z [36;1m[0m
+2026-08-28T11:50:03.2121929Z [36;1m# The token never appears on the command line, where it would be[0m
+2026-08-28T11:50:03.2122387Z [36;1m# visible to every other process on the runner via /proc.[0m
+2026-08-28T11:50:03.2122858Z [36;1mexport CARGO_REGISTRY_TOKEN="${OIDC_TOKEN:-$CARGO_TOKEN}"[0m
+2026-08-28T11:50:03.2123230Z [36;1mif [ -n "${OIDC_TOKEN:-}" ]; then[0m
+2026-08-28T11:50:03.2123781Z [36;1m  echo "crates.io credential: trusted publishing (OIDC)"[0m
+2026-08-28T11:50:03.2124149Z [36;1melif [ -n "${CARGO_TOKEN:-}" ]; then[0m
+2026-08-28T11:50:03.2124508Z [36;1m  echo "crates.io credential: CARGO_TOKEN present"[0m
+2026-08-28T11:50:03.2124840Z [36;1melse[0m
+2026-08-28T11:50:03.2125091Z [36;1m  echo "published=failed" >> "$GITHUB_OUTPUT"[0m
+2026-08-28T11:50:03.2125765Z [36;1m  echo "::warning::No crates.io credential (neither trusted publishing nor CARGO_TOKEN); skipping publish. No GitHub release will be created."[0m
+2026-08-28T11:50:03.2126384Z [36;1m  exit 0[0m
+2026-08-28T11:50:03.2126587Z [36;1mfi[0m
+2026-08-28T11:50:03.2126782Z [36;1m[0m
+2026-08-28T11:50:03.2126980Z [36;1mpublish_crate() {[0m
+2026-08-28T11:50:03.2127248Z [36;1m  local crate="$1" version="$2" log="$3"[0m
+2026-08-28T11:50:03.2127619Z [36;1m  if cargo publish -p "$crate" 2>&1 | tee "$log"; then[0m
+2026-08-28T11:50:03.2127976Z [36;1m    echo "Published ${crate}@${version}"[0m
+2026-08-28T11:50:03.2128274Z [36;1m    return 0[0m
+2026-08-28T11:50:03.2128485Z [36;1m  fi[0m
+2026-08-28T11:50:03.2128768Z [36;1m  if grep -q "already exists on crates.io index" "$log"; then[0m
+2026-08-28T11:50:03.2129482Z [36;1m    echo "${crate}@${version} is already on crates.io"[0m
+2026-08-28T11:50:03.2129817Z [36;1m    return 2[0m
+2026-08-28T11:50:03.2130029Z [36;1m  fi[0m
+2026-08-28T11:50:03.2130316Z [36;1m  echo "::error::Failed to publish ${crate}@${version}"[0m
+2026-08-28T11:50:03.2130651Z [36;1m  return 1[0m
+2026-08-28T11:50:03.2130863Z [36;1m}[0m
+2026-08-28T11:50:03.2131050Z [36;1m[0m
+2026-08-28T11:50:03.2131357Z [36;1m# The main crate depends on links-notation-macro, so that one has to[0m
+2026-08-28T11:50:03.2131793Z [36;1m# land, and be visible in the index, first.[0m
+2026-08-28T11:50:03.2132089Z [36;1mset +e[0m
+2026-08-28T11:50:03.2132435Z [36;1mpublish_crate links-notation-macro "$MACRO_VERSION" macro_publish.log[0m
+2026-08-28T11:50:03.2132848Z [36;1mMACRO_STATUS=$?[0m
+2026-08-28T11:50:03.2133085Z [36;1mset -e[0m
+2026-08-28T11:50:03.2133333Z [36;1mif [ $MACRO_STATUS -eq 1 ]; then exit 1; fi[0m
+2026-08-28T11:50:03.2133623Z [36;1m[0m
+2026-08-28T11:50:03.2133825Z [36;1mif [ $MACRO_STATUS -eq 0 ]; then[0m
+2026-08-28T11:50:03.2134116Z [36;1m  for attempt in $(seq 1 20); do[0m
+2026-08-28T11:50:03.2134666Z [36;1m    if curl -fsS "https://crates.io/api/v1/crates/links-notation-macro/${MACRO_VERSION}" >/dev/null 2>&1; then[0m
+2026-08-28T11:50:03.2135350Z [36;1m      echo "links-notation-macro@${MACRO_VERSION} is visible in the index"[0m
+2026-08-28T11:50:03.2135750Z [36;1m      break[0m
+2026-08-28T11:50:03.2135964Z [36;1m    fi[0m
+2026-08-28T11:50:03.2136289Z [36;1m    echo "Waiting for the index to catch up (attempt ${attempt}/20)"[0m
+2026-08-28T11:50:03.2136664Z [36;1m    sleep 15[0m
+2026-08-28T11:50:03.2137051Z [36;1m  done[0m
+2026-08-28T11:50:03.2137266Z [36;1mfi[0m
+2026-08-28T11:50:03.2137458Z [36;1m[0m
+2026-08-28T11:50:03.2137644Z [36;1mset +e[0m
+2026-08-28T11:50:03.2137971Z [36;1mpublish_crate "$PACKAGE_NAME" "$PACKAGE_VERSION" publish.log[0m
+2026-08-28T11:50:03.2138349Z [36;1mSTATUS=$?[0m
+2026-08-28T11:50:03.2138566Z [36;1mset -e[0m
+2026-08-28T11:50:03.2138770Z [36;1mcase $STATUS in[0m
+2026-08-28T11:50:03.2139317Z [36;1m  0) echo "published=true" >> "$GITHUB_OUTPUT" ;;[0m
+2026-08-28T11:50:03.2139722Z [36;1m  2) echo "published=skipped" >> "$GITHUB_OUTPUT" ;;[0m
+2026-08-28T11:50:03.2140123Z [36;1m  *) echo "published=failed" >> "$GITHUB_OUTPUT"; exit 1 ;;[0m
+2026-08-28T11:50:03.2140458Z [36;1mesac[0m
+2026-08-28T11:50:03.2176144Z shell: /usr/bin/bash -e {0}
+2026-08-28T11:50:03.2176419Z env:
+2026-08-28T11:50:03.2179482Z   GITHUB_TOKEN: ***
+2026-08-28T11:50:03.2179730Z   CI_VERBOSE: false
+2026-08-28T11:50:03.2179969Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:50:03.2180244Z   CARGO_INCREMENTAL: 0
+2026-08-28T11:50:03.2180483Z   CARGO_TERM_COLOR: always
+2026-08-28T11:50:03.2180727Z   CACHE_ON_FAILURE: false
+2026-08-28T11:50:03.2180952Z   OIDC_TOKEN: 
+2026-08-28T11:50:03.2181386Z   CARGO_TOKEN: ***
+2026-08-28T11:50:03.2181599Z ##[endgroup]
+2026-08-28T11:50:03.2308506Z crates.io credential: CARGO_TOKEN present
+2026-08-28T11:50:03.2591713Z [1m[92m    Updating[0m crates.io index
+2026-08-28T11:50:03.3076685Z [1m[91merror[0m: crate links-notation-macro@0.1.0 already exists on crates.io index
+2026-08-28T11:50:03.3109455Z links-notation-macro@0.1.0 is already on crates.io
+2026-08-28T11:50:03.3283292Z [1m[92m    Updating[0m crates.io index
+2026-08-28T11:50:03.6020062Z [1m[92m   Packaging[0m links-notation v0.16.0 (/home/runner/work/links-notation/links-notation/rust/links-notation)
+2026-08-28T11:50:03.6033457Z [1m[92m    Updating[0m crates.io index
+2026-08-28T11:50:03.6216013Z [1m[92m    Packaged[0m 30 files, 254.0KiB (41.2KiB compressed)
+2026-08-28T11:50:03.6217132Z [1m[92m   Verifying[0m links-notation v0.16.0 (/home/runner/work/links-notation/links-notation/rust/links-notation)
+2026-08-28T11:50:03.6267028Z [1m[92m Downloading[0m crates ...
+2026-08-28T11:50:03.6809320Z [1m[92m  Downloaded[0m links-notation-macro v0.1.0
+2026-08-28T11:50:03.6864543Z [1m[92m   Compiling[0m proc-macro2 v1.0.107
+2026-08-28T11:50:03.6872264Z [1m[92m   Compiling[0m unicode-ident v1.0.24
+2026-08-28T11:50:03.6873863Z [1m[92m   Compiling[0m quote v1.0.47
+2026-08-28T11:50:03.6875011Z [1m[92m   Compiling[0m memchr v2.8.3
+2026-08-28T11:50:04.1551883Z [1m[92m   Compiling[0m nom v8.0.0
+2026-08-28T11:50:05.0041650Z [1m[92m   Compiling[0m syn v3.0.4
+2026-08-28T11:50:07.2394554Z [1m[92m   Compiling[0m links-notation-macro v0.1.0
+2026-08-28T11:50:07.4595748Z [1m[92m   Compiling[0m links-notation v0.16.0 (/home/runner/work/links-notation/links-notation/rust/target/package/links-notation-0.16.0)
+2026-08-28T11:50:07.8948025Z [1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 4.57s
+2026-08-28T11:50:07.8960054Z [1m[92m   Uploading[0m links-notation v0.16.0 (/home/runner/work/links-notation/links-notation/rust/links-notation)
+2026-08-28T11:50:08.6497339Z [1m[92m    Uploaded[0m links-notation v0.16.0 to registry `crates-io`
+2026-08-28T11:50:08.6500222Z [1m[92mnote[0m: waiting for links-notation v0.16.0 to be available at registry `crates-io`
+2026-08-28T11:50:08.6501365Z [1m[96mhelp[0m: you may press ctrl-c to skip waiting; the crate should be available shortly
+2026-08-28T11:50:09.6925722Z [1m[92m   Published[0m links-notation v0.16.0 at registry `crates-io`
+2026-08-28T11:50:09.6972581Z Published links-notation@0.16.0
+2026-08-28T11:50:09.7026217Z ##[group]Run set -euo pipefail
+2026-08-28T11:50:09.7026574Z [36;1mset -euo pipefail[0m
+2026-08-28T11:50:09.7026905Z [36;1mfor attempt in $(seq 1 20); do[0m
+2026-08-28T11:50:09.7027437Z [36;1m  if curl -fsS "https://crates.io/api/v1/crates/${PACKAGE_NAME}/${PACKAGE_VERSION}" >/dev/null 2>&1; then[0m
+2026-08-28T11:50:09.7028145Z [36;1m    echo "Verified ${PACKAGE_NAME}@${PACKAGE_VERSION} on crates.io (attempt ${attempt})"[0m
+2026-08-28T11:50:09.7028593Z [36;1m    exit 0[0m
+2026-08-28T11:50:09.7028824Z [36;1m  fi[0m
+2026-08-28T11:50:09.7029469Z [36;1m  echo "Not visible yet, retrying in 15s (attempt ${attempt}/20)"[0m
+2026-08-28T11:50:09.7029846Z [36;1m  sleep 15[0m
+2026-08-28T11:50:09.7030065Z [36;1mdone[0m
+2026-08-28T11:50:09.7030467Z [36;1mecho "::error::${PACKAGE_NAME}@${PACKAGE_VERSION} did not appear on crates.io within 5 minutes"[0m
+2026-08-28T11:50:09.7030924Z [36;1mexit 1[0m
+2026-08-28T11:50:09.7067054Z shell: /usr/bin/bash -e {0}
+2026-08-28T11:50:09.7067348Z env:
+2026-08-28T11:50:09.7070657Z   GITHUB_TOKEN: ***
+2026-08-28T11:50:09.7070904Z   CI_VERBOSE: false
+2026-08-28T11:50:09.7071131Z   CARGO_HOME: /home/runner/.cargo
+2026-08-28T11:50:09.7071397Z   CARGO_INCREMENTAL: 0
+2026-08-28T11:50:09.7071622Z   CARGO_TERM_COLOR: always
+2026-08-28T11:50:09.7071858Z   CACHE_ON_FAILURE: false
+2026-08-28T11:50:09.7072107Z   PACKAGE_NAME: links-notation
+2026-08-28T11:50:09.7072359Z   PACKAGE_VERSION: 0.16.0
+2026-08-28T11:50:09.7072589Z ##[endgroup]
+2026-08-28T11:50:09.7617806Z Not visible yet, retrying in 15s (attempt 1/20)
+2026-08-28T11:50:24.8094849Z Not visible yet, retrying in 15s (attempt 2/20)
+2026-08-28T11:50:39.8552015Z Not visible yet, retrying in 15s (attempt 3/20)
+2026-08-28T11:50:54.9000517Z Not visible yet, retrying in 15s (attempt 4/20)
+2026-08-28T11:51:09.9637594Z Not visible yet, retrying in 15s (attempt 5/20)
+2026-08-28T11:51:25.0148472Z Not visible yet, retrying in 15s (attempt 6/20)
+2026-08-28T11:51:40.0593280Z Not visible yet, retrying in 15s (attempt 7/20)
+2026-08-28T11:51:55.1045271Z Not visible yet, retrying in 15s (attempt 8/20)
+2026-08-28T11:52:10.1636246Z Not visible yet, retrying in 15s (attempt 9/20)
+2026-08-28T11:52:25.2064152Z Not visible yet, retrying in 15s (attempt 10/20)
+2026-08-28T11:52:40.4184660Z Not visible yet, retrying in 15s (attempt 11/20)
+2026-08-28T11:52:55.4649509Z Not visible yet, retrying in 15s (attempt 12/20)
+2026-08-28T11:53:10.5174718Z Not visible yet, retrying in 15s (attempt 13/20)
+2026-08-28T11:53:25.5641034Z Not visible yet, retrying in 15s (attempt 14/20)
+2026-08-28T11:53:40.6338419Z Not visible yet, retrying in 15s (attempt 15/20)
+2026-08-28T11:53:55.6793895Z Not visible yet, retrying in 15s (attempt 16/20)
+2026-08-28T11:54:10.7474938Z Not visible yet, retrying in 15s (attempt 17/20)
+2026-08-28T11:54:25.7940489Z Not visible yet, retrying in 15s (attempt 18/20)
+2026-08-28T11:54:40.8498593Z Not visible yet, retrying in 15s (attempt 19/20)
+2026-08-28T11:54:55.8946488Z Not visible yet, retrying in 15s (attempt 20/20)
+2026-08-28T11:55:10.8969972Z ##[error]links-notation@0.16.0 did not appear on crates.io within 5 minutes
+2026-08-28T11:55:10.8973351Z ##[error]Process completed with exit code 1.
+2026-08-28T11:55:10.9035792Z Post job cleanup.
+2026-08-28T11:55:10.9811693Z No token to revoke
+2026-08-28T11:55:10.9972723Z Post job cleanup.
+2026-08-28T11:55:11.0856094Z [command]/usr/bin/git version
+2026-08-28T11:55:11.0915233Z git version 2.55.0
+2026-08-28T11:55:11.0960100Z Temporarily overriding HOME='/home/runner/work/_temp/fb22e297-d34b-41e7-9ebf-29ba2028a7bd' before making global git config changes
+2026-08-28T11:55:11.0961504Z Adding repository directory to the temporary git global config as a safe directory
+2026-08-28T11:55:11.0967723Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+2026-08-28T11:55:11.1000874Z Removing SSH command configuration
+2026-08-28T11:55:11.1007895Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-08-28T11:55:11.1045221Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-08-28T11:55:11.1301024Z Removing HTTP extra header
+2026-08-28T11:55:11.1307163Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-08-28T11:55:11.1349263Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-08-28T11:55:11.1607181Z Removing includeIf entries pointing to credentials config files
+2026-08-28T11:55:11.1616284Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-08-28T11:55:11.1656431Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-08-28T11:55:11.2148275Z Evaluate and set job outputs
+2026-08-28T11:55:11.2155621Z Set output 'published'
+2026-08-28T11:55:11.2158773Z Set output 'version'
+2026-08-28T11:55:11.2160082Z Set output 'name'
+2026-08-28T11:55:11.2161188Z Cleaning up orphan processes

@@ -104,7 +104,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var group = new LinksGroup<string>(groupElement, childGroups);
 
             Assert.Equal("group", group.Link.Id);
-            Assert.Equal(3, group.Groups.Count);
+            Assert.Equal(3, group.Groups!.Count);
             Assert.Equal(root, group.Groups[0].Link);
         }
     }

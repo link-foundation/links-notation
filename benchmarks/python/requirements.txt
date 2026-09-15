@@ -1,0 +1,3 @@
+# Python side of the Links Notation token efficiency benchmarks.
+# tiktoken is the reference implementation of the encodings the report names.
+tiktoken>=0.14.0

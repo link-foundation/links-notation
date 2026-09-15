@@ -1,0 +1,312 @@
+(
+  responses (
+    (
+      id resp-1000
+      respondent "Dennis Johnson"
+      locale en-CA
+      comment "a citação ficou perfeita"
+      score 3
+      answers (
+        version "2.10"
+        agreed yes
+        postalCode "79348"
+        reference "1e3"
+      )
+      tags ()
+      followUp (
+      )
+    )
+    (
+      id resp-1001
+      respondent "Katherine Allen"
+      locale ja-JP
+      comment "works, though the docs are thin"
+      score null
+      answers (
+        version "1.0"
+        agreed "false"
+        postalCode "99359"
+        reference "0012"
+      )
+      tags ()
+      followUp (
+        at "2026-01-01T01:00:00Z"
+        owner support
+      )
+    )
+    (
+      id resp-1002
+      respondent "Frances Dijkstra"
+      locale ja-JP
+      comment "a citação ficou perfeita"
+      score null
+      answers (
+        version 3.0.1
+        agreed yes
+        postalCode "67823"
+        reference "00.5"
+      )
+      tags ()
+      followUp (
+        at "2026-01-01T02:00:00Z"
+        owner support
+      )
+    )
+    (
+      id resp-1003
+      respondent "Sophie Turing"
+      locale es-CO
+      comment ""
+      score 3
+      answers (
+        version "2.10"
+        agreed "false"
+        postalCode "93397"
+        reference "1e3"
+      )
+      tags ()
+      followUp (
+      )
+    )
+    (
+      id resp-1004
+      respondent "Sophie Lamarr"
+      locale sw-KE
+      comment ""
+      score 5
+      answers (
+        version 3.0.1
+        agreed yes
+        postalCode "41611"
+        reference "00.5"
+      )
+      tags ()
+      followUp (
+      )
+    )
+    (
+      id resp-1005
+      respondent "Tim Knuth"
+      locale sw-KE
+      comment ""
+      score 1
+      answers (
+        version 3.0.1
+        agreed "false"
+        postalCode "98821"
+        reference "1e3"
+      )
+      tags ()
+      followUp (
+      )
+    )
+    (
+      id resp-1006
+      respondent "Guido Stroustrup"
+      locale en-CA
+      comment "a citação ficou perfeita"
+      score 3
+      answers (
+        version "1.0"
+        agreed "false"
+        postalCode "42086"
+        reference "0012"
+      )
+      tags ()
+      followUp (
+      )
+    )
+    (
+      id resp-1007
+      respondent "Jean Wilson"
+      locale pt-PT
+      comment 設定がわかりやすい
+      score 10
+      answers (
+        version "2.10"
+        agreed "true"
+        postalCode "85055"
+        reference "0012"
+      )
+      tags ()
+      followUp (
+      )
+    )
+    (
+      id resp-1008
+      respondent "Frances Berners-Lee"
+      locale ja-JP
+      comment "sehr gut, aber die Latenz stört"
+      score null
+      answers (
+        version "1.0"
+        agreed "false"
+        postalCode "21760"
+        reference "0012"
+      )
+      tags (
+        beta
+      )
+      followUp (
+      )
+    )
+    (
+      id resp-1009
+      respondent "Radia Torvalds"
+      locale pt-PT
+      comment "works, though the docs are thin"
+      score 4
+      answers (
+        version "2.10"
+        agreed "false"
+        postalCode "61346"
+        reference "00.5"
+      )
+      tags ()
+      followUp (
+      )
+    )
+    (
+      id resp-1010
+      respondent "Tim Allen"
+      locale ja-JP
+      comment 設定がわかりやすい
+      score 8
+      answers (
+        version "1.0"
+        agreed yes
+        postalCode "73995"
+        reference "0012"
+      )
+      tags (
+        nps
+      )
+      followUp (
+        at "2026-01-01T10:00:00Z"
+        owner support
+      )
+    )
+    (
+      id resp-1011
+      respondent null
+      locale ja-JP
+      comment 設定がわかりやすい
+      score 10
+      answers (
+        version 3.0.1
+        agreed "false"
+        postalCode "27811"
+        reference "00.5"
+      )
+      tags ()
+      followUp (
+      )
+    )
+    (
+      id resp-1012
+      respondent null
+      locale de-DE
+      comment "works, though the docs are thin"
+      score 6
+      answers (
+        version "2.10"
+        agreed "false"
+        postalCode "15143"
+        reference "0012"
+      )
+      tags (
+        beta
+      )
+      followUp (
+      )
+    )
+    (
+      id resp-1013
+      respondent "Sophie Torvalds"
+      locale sw-KE
+      comment ""
+      score 10
+      answers (
+        version "1.0"
+        agreed "false"
+        postalCode "50423"
+        reference "0012"
+      )
+      tags ()
+      followUp (
+        at "2026-01-01T13:00:00Z"
+        owner support
+      )
+    )
+    (
+      id resp-1014
+      respondent "Frances Perlman"
+      locale es-CO
+      comment 設定がわかりやすい
+      score 8
+      answers (
+        version "2.10"
+        agreed "true"
+        postalCode "94172"
+        reference "00.5"
+      )
+      tags ()
+      followUp (
+      )
+    )
+    (
+      id resp-1015
+      respondent null
+      locale de-DE
+      comment 設定がわかりやすい
+      score 4
+      answers (
+        version "1.0"
+        agreed yes
+        postalCode "80417"
+        reference "0012"
+      )
+      tags (
+        nps
+      )
+      followUp (
+        at "2026-01-01T15:00:00Z"
+        owner support
+      )
+    )
+    (
+      id resp-1016
+      respondent "Ken Stroustrup"
+      locale sw-KE
+      comment "a citação ficou perfeita"
+      score 3
+      answers (
+        version "2.10"
+        agreed "true"
+        postalCode "38315"
+        reference "1e3"
+      )
+      tags ()
+      followUp (
+      )
+    )
+    (
+      id resp-1017
+      respondent null
+      locale es-CO
+      comment "a citação ficou perfeita"
+      score 10
+      answers (
+        version 3.0.1
+        agreed "false"
+        postalCode "12841"
+        reference "00.5"
+      )
+      tags (
+        beta
+      )
+      followUp (
+      )
+    )
+  )
+)

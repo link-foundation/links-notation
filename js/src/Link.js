@@ -82,14 +82,24 @@ export class Link {
    * @returns {string} Escaped reference
    */
   static escapeReference(reference) {
-    if (!reference || reference.trim() === '') {
+    if (reference === null || reference === undefined) {
       return '';
+    }
+
+    // The empty reference is written as a bare delimiter pair, so that it reads
+    // back as itself instead of disappearing from the document.
+    if (reference === '') {
+      return '""';
     }
 
     const hasSingleQuote = reference.includes("'");
     const hasDoubleQuote = reference.includes('"');
 
+    // A reference that begins with a `#` has to be quoted, or it would read
+    // back as a comment. A `#` anywhere else in a reference is content
+    // (`issue#1047`), so only the first character matters.
     const needsQuoting =
+      reference.startsWith('#') ||
       reference.includes(':') ||
       reference.includes('(') ||
       reference.includes(')') ||

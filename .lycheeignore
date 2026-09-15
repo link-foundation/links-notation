@@ -1,0 +1,11 @@
+# Hosts that reject requests coming from data-centre IP ranges. Both open fine
+# in a browser, so a CI failure here would only ever be a false positive.
+^https://www\.npmjs\.com/
+^https://stackoverflow\.com/
+
+# The C# API reference lives on the gh-pages branch, but GitHub Pages serves
+# the artifact uploaded by .github/workflows/pages.yml, so everything under
+# /csharp/ currently returns 404. The `pages` workflow now overlays the branch
+# content onto the uploaded site; remove these two lines after the first
+# deployment from main that includes that change.
+^https://link-foundation\.github\.io/links-notation/csharp/

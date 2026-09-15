@@ -1,0 +1,739 @@
+findChangedDocsFiles	Set up job	﻿2026-08-28T07:07:11.9114099Z Current runner version: '2.336.0'
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9133111Z ##[group]Runner Image Provisioner
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9134268Z Hosted Compute Agent
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9134780Z Version: 20260819.586
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9135321Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9135939Z Build Date: 2026-08-18T23:20:18Z
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9136549Z Worker ID: {5d02a2be-a067-4705-b66c-c015f5a2a824}
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9137176Z Azure Region: centralus
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9137656Z ##[endgroup]
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9138732Z ##[group]Operating System
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9139301Z Ubuntu
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9139737Z 24.04.4
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9140257Z LTS
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9140713Z ##[endgroup]
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9141155Z ##[group]Runner Image
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9141662Z Image: ubuntu-24.04
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9142127Z Version: 20260823.283.1
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9143048Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9144880Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9145707Z ##[endgroup]
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9146700Z ##[group]GITHUB_TOKEN Permissions
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9148437Z Contents: read
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9148924Z Metadata: read
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9149399Z Pages: write
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9149967Z ##[endgroup]
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9151590Z Secret source: Actions
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9152452Z Prepare workflow directory
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9473155Z Prepare all required actions
+findChangedDocsFiles	Set up job	2026-08-28T07:07:11.9513821Z Getting action download info
+findChangedDocsFiles	Set up job	2026-08-28T07:07:12.1814855Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+findChangedDocsFiles	Set up job	2026-08-28T07:07:12.2512584Z Download action repository 'tj-actions/changed-files@v47' (SHA:24d32ffd492484c1d75e0c0b894501ddb9d30d62)
+findChangedDocsFiles	Set up job	2026-08-28T07:07:12.8061327Z Complete job name: findChangedDocsFiles
+findChangedDocsFiles	Run actions/checkout@v6	﻿2026-08-28T07:07:12.8643456Z ##[group]Run actions/checkout@v6
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8644392Z with:
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8644863Z   fetch-depth: 0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8645449Z   repository: link-foundation/links-notation
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8649065Z   token: ***
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8649624Z   ssh-strict: true
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8650119Z   ssh-user: git
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8650607Z   persist-credentials: true
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8651170Z   clean: true
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8651665Z   sparse-checkout-cone-mode: true
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8652231Z   fetch-tags: false
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8652746Z   show-progress: true
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8653239Z   lfs: false
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8653860Z   submodules: false
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8654390Z   set-safe-directory: true
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8654965Z   allow-unsafe-pr-checkout: false
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.8655721Z ##[endgroup]
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9532101Z Syncing repository: link-foundation/links-notation
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9535122Z ##[group]Getting Git version info
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9536438Z Working directory is '/home/runner/work/links-notation/links-notation'
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9538426Z [command]/usr/bin/git version
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9614742Z git version 2.55.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9637657Z ##[endgroup]
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9646806Z Temporarily overriding HOME='/home/runner/work/_temp/6b54506c-d89c-4588-ba3b-a3f26674b00d' before making global git config changes
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9648979Z Adding repository directory to the temporary git global config as a safe directory
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9650854Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9702929Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9725072Z ##[group]Determining repository object format
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9735133Z ##[endgroup]
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9755416Z ##[group]Initializing the repository
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9757115Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9874394Z hint: Using 'master' as the name for the initial branch. This default branch name
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9875754Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9878998Z hint: to use in all of your new repositories, which will suppress this warning,
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9881417Z hint: call:
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9882827Z hint:
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9883824Z hint: 	git config --global init.defaultBranch <name>
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9884519Z hint:
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9885179Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9886096Z hint: 'development'. The just-created branch can be renamed via this command:
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9886891Z hint:
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9887377Z hint: 	git branch -m <name>
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9887940Z hint:
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9888589Z hint: Disable this message with "git config set advice.defaultBranchName false"
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9892388Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9902801Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9972003Z ##[endgroup]
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9972953Z ##[group]Disabling automatic garbage collection
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:12.9975902Z [command]/usr/bin/git config --local gc.auto 0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0009470Z ##[endgroup]
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0010967Z ##[group]Setting up auth
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0011937Z Removing SSH command configuration
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0015957Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0044768Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0324959Z Removing HTTP extra header
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0330795Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0356924Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0510078Z Removing includeIf entries pointing to credentials config files
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0515468Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0539012Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0695012Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0724203Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0746703Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0771760Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0793089Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0815829Z ##[endgroup]
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0817185Z ##[group]Fetching the repository
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:13.0823047Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3307691Z From https://github.com/link-foundation/links-notation
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3311803Z  * [new branch]      claude/code-review-and-issues-01CuJmcRr2phiQJAnhoqeEY5 -> origin/claude/code-review-and-issues-01CuJmcRr2phiQJAnhoqeEY5
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3317113Z  * [new branch]      claude/review-test-coverage-011UTL6DkCfp7LuwpUZj9HyC -> origin/claude/review-test-coverage-011UTL6DkCfp7LuwpUZj9HyC
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3321921Z  * [new branch]      claude/review-test-standards-01GsYvAqSF7k3oxTeEwYsX9W -> origin/claude/review-test-standards-01GsYvAqSF7k3oxTeEwYsX9W
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3326147Z  * [new branch]      dependabot/add-v2-config-file -> origin/dependabot/add-v2-config-file
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3328793Z  * [new branch]      dependabot/github_actions/actions/checkout-7 -> origin/dependabot/github_actions/actions/checkout-7
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3332375Z  * [new branch]      dependabot/github_actions/actions/setup-dotnet-6 -> origin/dependabot/github_actions/actions/setup-dotnet-6
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3335931Z  * [new branch]      dependabot/github_actions/actions/setup-node-7 -> origin/dependabot/github_actions/actions/setup-node-7
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3339741Z  * [new branch]      dependabot/github_actions/actions/upload-pages-artifact-5 -> origin/dependabot/github_actions/actions/upload-pages-artifact-5
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3344116Z  * [new branch]      dependabot/github_actions/dependabot/fetch-metadata-3 -> origin/dependabot/github_actions/dependabot/fetch-metadata-3
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3351306Z  * [new branch]      dependabot/nuget/csharp/Link.Foundation.Links.Notation.Tests/xunit.runner.visualstudio-4.0.0 -> origin/dependabot/nuget/csharp/Link.Foundation.Links.Notation.Tests/xunit.runner.visualstudio-4.0.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3357120Z  * [new branch]      draft/update           -> origin/draft/update
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3359802Z  * [new branch]      fix-cicd-publishing    -> origin/fix-cicd-publishing
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3361978Z  * [new branch]      gh-pages               -> origin/gh-pages
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3364052Z  * [new branch]      issue-101-5db7b374     -> origin/issue-101-5db7b374
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3366569Z  * [new branch]      issue-103-604d0cc9     -> origin/issue-103-604d0cc9
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3368538Z  * [new branch]      issue-105-b29688eb     -> origin/issue-105-b29688eb
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3370315Z  * [new branch]      issue-107-516f1733     -> origin/issue-107-516f1733
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3372035Z  * [new branch]      issue-109-d76b5c33     -> origin/issue-109-d76b5c33
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3374531Z  * [new branch]      issue-110-ec5b7eeb     -> origin/issue-110-ec5b7eeb
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3377097Z  * [new branch]      issue-111-8aef2f31     -> origin/issue-111-8aef2f31
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3379588Z  * [new branch]      issue-115-e9580372     -> origin/issue-115-e9580372
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3382434Z  * [new branch]      issue-117-e66fa934     -> origin/issue-117-e66fa934
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3385266Z  * [new branch]      issue-119-69bab4a2     -> origin/issue-119-69bab4a2
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3388001Z  * [new branch]      issue-121-0287f55a     -> origin/issue-121-0287f55a
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3390635Z  * [new branch]      issue-123-656309e4     -> origin/issue-123-656309e4
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3392632Z  * [new branch]      issue-125-79dfb0d1     -> origin/issue-125-79dfb0d1
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3395406Z  * [new branch]      issue-125-ee879ed7     -> origin/issue-125-ee879ed7
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3397584Z  * [new branch]      issue-125-f3a03b7d     -> origin/issue-125-f3a03b7d
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3399743Z  * [new branch]      issue-129-04c8c0a5     -> origin/issue-129-04c8c0a5
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3402200Z  * [new branch]      issue-131-fc081b5b     -> origin/issue-131-fc081b5b
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3404372Z  * [new branch]      issue-133-629cdf98     -> origin/issue-133-629cdf98
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3406357Z  * [new branch]      issue-135-00fb7516     -> origin/issue-135-00fb7516
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3408358Z  * [new branch]      issue-138-9d33fad1     -> origin/issue-138-9d33fad1
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3410523Z  * [new branch]      issue-140-28a755bca96b -> origin/issue-140-28a755bca96b
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3413141Z  * [new branch]      issue-142-23f307922307 -> origin/issue-142-23f307922307
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3415982Z  * [new branch]      issue-143-71fa1d3dc218 -> origin/issue-143-71fa1d3dc218
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3419029Z  * [new branch]      issue-144-f281d2df737c -> origin/issue-144-f281d2df737c
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3421932Z  * [new branch]      issue-146-52f1d9a571ed -> origin/issue-146-52f1d9a571ed
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3425034Z  * [new branch]      issue-148-6ee2ca2dbea2 -> origin/issue-148-6ee2ca2dbea2
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3427998Z  * [new branch]      issue-155-7899dac8e6ec -> origin/issue-155-7899dac8e6ec
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3430131Z  * [new branch]      issue-158-fb24e781ad8d -> origin/issue-158-fb24e781ad8d
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3432624Z  * [new branch]      issue-164-2e5b1c046253 -> origin/issue-164-2e5b1c046253
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3435049Z  * [new branch]      issue-165-a26029ce2e34 -> origin/issue-165-a26029ce2e34
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3437027Z  * [new branch]      issue-166-0169a4dd2a40 -> origin/issue-166-0169a4dd2a40
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3439144Z  * [new branch]      issue-184-e00f7290354f -> origin/issue-184-e00f7290354f
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3441768Z  * [new branch]      issue-188-09a2f723ae76 -> origin/issue-188-09a2f723ae76
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3444737Z  * [new branch]      issue-189-7e97f19d7811 -> origin/issue-189-7e97f19d7811
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3447534Z  * [new branch]      issue-192-3568aae3e63c -> origin/issue-192-3568aae3e63c
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3450274Z  * [new branch]      issue-197-0f9688b95d4f -> origin/issue-197-0f9688b95d4f
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3453124Z  * [new branch]      issue-197-93f74116bd61 -> origin/issue-197-93f74116bd61
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3455345Z  * [new branch]      issue-198-ef3a7c229ad3 -> origin/issue-198-ef3a7c229ad3
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3457553Z  * [new branch]      issue-200-432e1145db9f -> origin/issue-200-432e1145db9f
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3460051Z  * [new branch]      issue-201-5c2770ec8b03 -> origin/issue-201-5c2770ec8b03
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3462294Z  * [new branch]      issue-209-8128719f23bf -> origin/issue-209-8128719f23bf
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3464419Z  * [new branch]      issue-21-66d67e65      -> origin/issue-21-66d67e65
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3466351Z  * [new branch]      issue-217-c1c06cbe0168 -> origin/issue-217-c1c06cbe0168
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3468291Z  * [new branch]      issue-23-cfc667a8      -> origin/issue-23-cfc667a8
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3470216Z  * [new branch]      issue-282-c154325b4497 -> origin/issue-282-c154325b4497
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3472193Z  * [new branch]      issue-284-ed60ce81c8a6 -> origin/issue-284-ed60ce81c8a6
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3474336Z  * [new branch]      issue-288-cc91e23553e8 -> origin/issue-288-cc91e23553e8
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3476302Z  * [new branch]      issue-52-4a282d24      -> origin/issue-52-4a282d24
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3478149Z  * [new branch]      issue-53-12d80c86      -> origin/issue-53-12d80c86
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3479929Z  * [new branch]      issue-53-1bd6f8d5      -> origin/issue-53-1bd6f8d5
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3481788Z  * [new branch]      issue-53-4d399364      -> origin/issue-53-4d399364
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3483866Z  * [new branch]      issue-55-353ece6e      -> origin/issue-55-353ece6e
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3485754Z  * [new branch]      issue-55-deaa6f4c      -> origin/issue-55-deaa6f4c
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3487603Z  * [new branch]      issue-62-8dc57ee4      -> origin/issue-62-8dc57ee4
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3489415Z  * [new branch]      issue-62-9aaf7516      -> origin/issue-62-9aaf7516
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3491227Z  * [new branch]      issue-62-ba398481      -> origin/issue-62-ba398481
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3493076Z  * [new branch]      issue-63-2062e7bf      -> origin/issue-63-2062e7bf
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3495027Z  * [new branch]      issue-63-fe0edcdd      -> origin/issue-63-fe0edcdd
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3496931Z  * [new branch]      issue-68-00e93de8      -> origin/issue-68-00e93de8
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3498709Z  * [new branch]      issue-68-08c66206      -> origin/issue-68-08c66206
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3500492Z  * [new branch]      issue-68-38c3f25f      -> origin/issue-68-38c3f25f
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3502459Z  * [new branch]      issue-68-c3ec7178      -> origin/issue-68-c3ec7178
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3504396Z  * [new branch]      issue-69-1ad2dc0a      -> origin/issue-69-1ad2dc0a
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3506212Z  * [new branch]      issue-69-909b524a      -> origin/issue-69-909b524a
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3508021Z  * [new branch]      issue-81-b7913964      -> origin/issue-81-b7913964
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3509817Z  * [new branch]      issue-87-3609cfa2      -> origin/issue-87-3609cfa2
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3511626Z  * [new branch]      issue-90-8b6fbd3d      -> origin/issue-90-8b6fbd3d
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3513563Z  * [new branch]      issue-91-1bc78531      -> origin/issue-91-1bc78531
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3515845Z  * [new branch]      issue-99-0e526c7c      -> origin/issue-99-0e526c7c
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3517584Z  * [new branch]      main                   -> origin/main
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3519155Z  * [new branch]      master                 -> origin/master
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3520734Z  * [new branch]      segment                -> origin/segment
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3522444Z  * [new branch]      update-all-deps        -> origin/update-all-deps
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3524342Z  * [new branch]      update-java-deps       -> origin/update-java-deps
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3525889Z  * [new tag]         0.0.1                  -> 0.0.1
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3527204Z  * [new tag]         0.0.2                  -> 0.0.2
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3528535Z  * [new tag]         0.1.0                  -> 0.1.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3529910Z  * [new tag]         0.10.0_python          -> 0.10.0_python
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3531361Z  * [new tag]         0.11.0_csharp          -> 0.11.0_csharp
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3532816Z  * [new tag]         0.11.0_js              -> 0.11.0_js
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3534405Z  * [new tag]         0.11.0_python          -> 0.11.0_python
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3535848Z  * [new tag]         0.11.0_rust            -> 0.11.0_rust
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3537433Z  * [new tag]         0.11.1_csharp          -> 0.11.1_csharp
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3538919Z  * [new tag]         0.11.2_csharp          -> 0.11.2_csharp
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3540343Z  * [new tag]         0.11.2_js              -> 0.11.2_js
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3541771Z  * [new tag]         0.11.2_python          -> 0.11.2_python
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3543187Z  * [new tag]         0.11.2_rust            -> 0.11.2_rust
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3544751Z  * [new tag]         0.12.0_csharp          -> 0.12.0_csharp
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3546219Z  * [new tag]         0.13.0_csharp          -> 0.13.0_csharp
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3547606Z  * [new tag]         0.2.0                  -> 0.2.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3548921Z  * [new tag]         0.2.1                  -> 0.2.1
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3550238Z  * [new tag]         0.2.2                  -> 0.2.2
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3551574Z  * [new tag]         0.2.3                  -> 0.2.3
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3552870Z  * [new tag]         0.3.0                  -> 0.3.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3554342Z  * [new tag]         0.4.0                  -> 0.4.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3555725Z  * [new tag]         0.7.0_csharp           -> 0.7.0_csharp
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3557154Z  * [new tag]         0.7.0_js               -> 0.7.0_js
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3558540Z  * [new tag]         0.7.0_rust             -> 0.7.0_rust
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3559888Z  * [new tag]         0.8.0_js               -> 0.8.0_js
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3561251Z  * [new tag]         0.8.0_rust             -> 0.8.0_rust
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3562635Z  * [new tag]         0.9.0_csharp           -> 0.9.0_csharp
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3564127Z  * [new tag]         0.9.0_js               -> 0.9.0_js
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3565535Z  * [new tag]         0.9.0_python           -> 0.9.0_python
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3566916Z  * [new tag]         0.9.0_rust             -> 0.9.0_rust
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3568339Z  * [new tag]         csharp_0.4.0           -> csharp_0.4.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3569746Z  * [new tag]         csharp_0.4.1           -> csharp_0.4.1
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3571244Z  * [new tag]         csharp_0.4.2           -> csharp_0.4.2
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3572695Z  * [new tag]         csharp_0.4.3           -> csharp_0.4.3
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3574239Z  * [new tag]         csharp_0.4.4           -> csharp_0.4.4
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3575693Z  * [new tag]         csharp_0.4.5           -> csharp_0.4.5
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3577119Z  * [new tag]         csharp_0.4.6           -> csharp_0.4.6
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3578526Z  * [new tag]         csharp_0.5.0           -> csharp_0.5.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3579989Z  * [new tag]         csharp_0.6.0           -> csharp_0.6.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3581381Z  * [new tag]         go/v0.13.0             -> go/v0.13.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3582726Z  * [new tag]         go/v0.14.0             -> go/v0.14.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3584214Z  * [new tag]         js_0.1.0               -> js_0.1.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3585532Z  * [new tag]         js_0.11.2              -> js_0.11.2
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3586912Z  * [new tag]         js_0.12.0              -> js_0.12.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3588277Z  * [new tag]         js_0.13.0              -> js_0.13.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3589576Z  * [new tag]         js_0.2.0               -> js_0.2.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3590941Z  * [new tag]         js_0.6.0               -> js_0.6.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3592271Z  * [new tag]         php_0.1.0              -> php_0.1.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3593892Z  * [new tag]         python_0.11.2          -> python_0.11.2
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3595347Z  * [new tag]         python_0.12.0          -> python_0.12.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3596738Z  * [new tag]         python_0.13.0          -> python_0.13.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3598192Z  * [new tag]         python_0.14.0          -> python_0.14.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3599598Z  * [new tag]         rust_0.11.2            -> rust_0.11.2
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3601040Z  * [new tag]         rust_0.12.0            -> rust_0.12.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3602407Z  * [new tag]         rust_0.13.0            -> rust_0.13.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3603973Z  * [new tag]         rust_0.14.0            -> rust_0.14.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3605372Z  * [new tag]         rust_0.2.0             -> rust_0.2.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3606749Z  * [new tag]         rust_0.6.0             -> rust_0.6.0
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3609822Z [command]/usr/bin/git branch --list --remote origin/main
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3611145Z   origin/main
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3613564Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3614937Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3617705Z ##[endgroup]
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3619234Z ##[group]Determining the checkout info
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3620889Z ##[endgroup]
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3621875Z [command]/usr/bin/git sparse-checkout disable
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3625069Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3628291Z ##[group]Checking out the ref
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3629820Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3640949Z Switched to a new branch 'main'
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3644426Z branch 'main' set up to track 'origin/main'.
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3650650Z ##[endgroup]
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3682737Z [command]/usr/bin/git log -1 --format=%H
+findChangedDocsFiles	Run actions/checkout@v6	2026-08-28T07:07:14.3702251Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+findChangedDocsFiles	Get changed files using defaults	﻿2026-08-28T07:07:14.4247634Z ##[group]Run tj-actions/changed-files@v47
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4248706Z with:
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4249534Z   separator:  
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4250446Z   include_all_old_new_renamed_files: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4251512Z   old_new_separator: ,
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4252433Z   old_new_files_separator:  
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4253608Z   files_from_source_file_separator: 
+findChangedDocsFiles	Get changed files using defaults	
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4254749Z   files_separator: 
+findChangedDocsFiles	Get changed files using defaults	
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4255722Z   files_yaml_from_source_file_separator: 
+findChangedDocsFiles	Get changed files using defaults	
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4256912Z   files_ignore_yaml_from_source_file_separator: 
+findChangedDocsFiles	Get changed files using defaults	
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4258114Z   files_ignore_separator: 
+findChangedDocsFiles	Get changed files using defaults	
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4259330Z   files_ignore_from_source_file_separator: 
+findChangedDocsFiles	Get changed files using defaults	
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4260601Z   path: .
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4261395Z   quotepath: true
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4262253Z   diff_relative: true
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4263155Z   dir_names: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4264163Z   dir_names_exclude_current_dir: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4265306Z   dir_names_include_files_separator: 
+findChangedDocsFiles	Get changed files using defaults	
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4266603Z   dir_names_deleted_files_include_only_deleted_dirs: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4267831Z   json: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4268649Z   escape_json: true
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4269485Z   safe_output: true
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4270374Z   fetch_depth: 25
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4271226Z   skip_initial_fetch: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4272245Z   fetch_additional_submodule_history: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4273432Z   since_last_remote_commit: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4274448Z   write_output_files: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4275427Z   output_dir: .github/outputs
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4276526Z   output_renamed_files_as_deleted_and_added: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4277792Z   recover_deleted_files: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4278786Z   recover_files_separator: 
+findChangedDocsFiles	Get changed files using defaults	
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4279803Z   recover_files_ignore_separator: 
+findChangedDocsFiles	Get changed files using defaults	
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4287131Z   token: ***
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4288076Z   api_url: https://api.github.com
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4289072Z   use_rest_api: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4290009Z   fail_on_initial_diff_error: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4291055Z   fail_on_submodule_diff_error: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4292098Z   negation_patterns_first: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4293046Z   matrix: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4294062Z   exclude_submodules: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4295054Z   fetch_missing_history_max_retries: 20
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4296116Z   use_posix_path_separator: false
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4297116Z   tags_pattern: *
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.4297916Z ##[endgroup]
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.5194454Z ##[group]changed-files
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.5300196Z Using local .git directory
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.5642128Z Running on a push event...
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.5831541Z Retrieving changes between 96878c375041d3c3bbbd9f2ffe5664d2f7d72dc5 (main) → 4958f3cf8012ba9e67f19309b9c58984f7ce106a (main)
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.5900594Z All Done!
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.5902970Z ##[endgroup]
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.5905372Z ##[group]changed-files-all
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.5939726Z All Done!
+findChangedDocsFiles	Get changed files using defaults	2026-08-28T07:07:14.5942014Z ##[endgroup]
+findChangedDocsFiles	Set output isDocsFilesChanged	﻿2026-08-28T07:07:14.6118919Z ##[group]Run isDocsFilesChanged='false'
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6120281Z ^[[36;1misDocsFilesChanged='false'^[[0m
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6138855Z ^[[36;1mecho "Changed files: .gitkeep csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs experiments/issue-288/csharp/GroundTruth.csproj experiments/issue-288/csharp/Program.cs experiments/issue-288/go/go.mod experiments/issue-288/go/main.go experiments/issue-288/ground_truth.mjs experiments/issue-288/ground_truth.py experiments/issue-288/ground_truth.rs experiments/issue-288/java/GroundTruth.java experiments/issue-288/php/ground_truth.php experiments/issue-288/roundtrip.rs go/empty_reference_test.go java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java js/examples/empty_reference.js js/tests/EmptyReference.test.js php/tests/EmptyReferenceTest.php python/tests/test_empty_reference.py rust/links-notation/tests/empty_reference_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/Link.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/lino.go go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Link.java java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/MultiQuoteParserTest.java js/bun.lock js/package-lock.json js/package.json js/src/Link.js js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js php/composer.json php/src/Link.php php/src/Parser.php php/tests/LinkTest.php python/links_notation/link.py python/links_notation/parser.py python/pyproject.toml rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/tuple_tests.rs"^[[0m
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6175947Z ^[[36;1mfor changedFile in .gitkeep csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs experiments/issue-288/csharp/GroundTruth.csproj experiments/issue-288/csharp/Program.cs experiments/issue-288/go/go.mod experiments/issue-288/go/main.go experiments/issue-288/ground_truth.mjs experiments/issue-288/ground_truth.py experiments/issue-288/ground_truth.rs experiments/issue-288/java/GroundTruth.java experiments/issue-288/php/ground_truth.php experiments/issue-288/roundtrip.rs go/empty_reference_test.go java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java js/examples/empty_reference.js js/tests/EmptyReference.test.js php/tests/EmptyReferenceTest.php python/tests/test_empty_reference.py rust/links-notation/tests/empty_reference_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/Link.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/lino.go go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Link.java java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/MultiQuoteParserTest.java js/bun.lock js/package-lock.json js/package.json js/src/Link.js js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js php/composer.json php/src/Link.php php/src/Parser.php php/tests/LinkTest.php python/links_notation/link.py python/links_notation/parser.py python/pyproject.toml rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/tuple_tests.rs; do^[[0m
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6195415Z ^[[36;1m  if [[ $changedFile == docs/* ]] || [[ $changedFile == .github/workflows/pages.yml ]]; then^[[0m
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6196938Z ^[[36;1m    echo "isDocsFilesChanged='true'"^[[0m
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6198090Z ^[[36;1m    isDocsFilesChanged='true'^[[0m
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6199087Z ^[[36;1m    break^[[0m
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6200032Z ^[[36;1m  fi^[[0m
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6200819Z ^[[36;1mdone^[[0m
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6201974Z ^[[36;1mecho "isDocsFilesChanged=${isDocsFilesChanged}" >> $GITHUB_OUTPUT^[[0m
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6203597Z ^[[36;1mecho "isDocsFilesChanged: ${isDocsFilesChanged}"^[[0m
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6232625Z shell: /usr/bin/bash -e {0}
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6233858Z ##[endgroup]
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6323016Z Changed files: .gitkeep csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs experiments/issue-288/csharp/GroundTruth.csproj experiments/issue-288/csharp/Program.cs experiments/issue-288/go/go.mod experiments/issue-288/go/main.go experiments/issue-288/ground_truth.mjs experiments/issue-288/ground_truth.py experiments/issue-288/ground_truth.rs experiments/issue-288/java/GroundTruth.java experiments/issue-288/php/ground_truth.php experiments/issue-288/roundtrip.rs go/empty_reference_test.go java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java js/examples/empty_reference.js js/tests/EmptyReference.test.js php/tests/EmptyReferenceTest.php python/tests/test_empty_reference.py rust/links-notation/tests/empty_reference_tests.rs CHANGELOG.md csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/Link.Foundation.Links.Notation/Link.cs csharp/Link.Foundation.Links.Notation/Parser.peg docs/grammar/GRAMMAR.md docs/grammar/grammar.lino docs/grammar/links-notation.ebnf docs/grammar/syntax-diagrams.md go/VERSION go/lino.go go/parser.go java/pom.xml java/src/main/java/io/github/linkfoundation/linksnotation/Link.java java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java java/src/test/java/io/github/linkfoundation/linksnotation/MultiQuoteParserTest.java js/bun.lock js/package-lock.json js/package.json js/src/Link.js js/src/Parser.js js/src/grammar.pegjs js/src/parser-generated.js php/composer.json php/src/Link.php php/src/Parser.php php/tests/LinkTest.php python/links_notation/link.py python/links_notation/parser.py python/pyproject.toml rust/links-notation/Cargo.toml rust/links-notation/src/lib.rs rust/links-notation/src/parser.rs rust/links-notation/tests/tuple_tests.rs
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6342402Z isDocsFilesChanged='true'
+findChangedDocsFiles	Set output isDocsFilesChanged	2026-08-28T07:07:14.6343486Z isDocsFilesChanged: true
+findChangedDocsFiles	Post Run actions/checkout@v6	﻿2026-08-28T07:07:14.6541175Z Post job cleanup.
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7294901Z [command]/usr/bin/git version
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7313658Z git version 2.55.0
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7339646Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/1fb396ad-1d1f-441a-b1b8-8c4b8e67a44f/.gitconfig'
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7348270Z Temporarily overriding HOME='/home/runner/work/_temp/1fb396ad-1d1f-441a-b1b8-8c4b8e67a44f' before making global git config changes
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7352673Z Adding repository directory to the temporary git global config as a safe directory
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7357063Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7374476Z Removing SSH command configuration
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7379654Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7412085Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7585044Z Removing HTTP extra header
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7586950Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7647004Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7811026Z Removing includeIf entries pointing to credentials config files
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7814202Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7836687Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7844414Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7847803Z includeif.gitdir:/github/workspace/.git.path
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7851577Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7857825Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7862995Z /home/runner/work/_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7873951Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7907184Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7923903Z /home/runner/work/_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7930821Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7949967Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7971292Z /github/runner_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7980345Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.7996570Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.8020382Z /github/runner_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.8026773Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.8049331Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+findChangedDocsFiles	Post Run actions/checkout@v6	2026-08-28T07:07:14.8208927Z Removing credentials config '/home/runner/work/_temp/git-credentials-7f31123c-8614-4df9-88c6-bd12b2945b07.config'
+findChangedDocsFiles	Complete job	﻿2026-08-28T07:07:14.8337067Z Evaluate and set job outputs
+findChangedDocsFiles	Complete job	2026-08-28T07:07:14.8344844Z Set output 'isDocsFilesChanged'
+findChangedDocsFiles	Complete job	2026-08-28T07:07:14.8347703Z Cleaning up orphan processes
+build	Set up job	﻿2026-08-28T07:07:19.8809749Z Current runner version: '2.336.0'
+build	Set up job	2026-08-28T07:07:19.8834161Z ##[group]Runner Image Provisioner
+build	Set up job	2026-08-28T07:07:19.8835378Z Hosted Compute Agent
+build	Set up job	2026-08-28T07:07:19.8836001Z Version: 20260819.586
+build	Set up job	2026-08-28T07:07:19.8836650Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+build	Set up job	2026-08-28T07:07:19.8837460Z Build Date: 2026-08-18T23:20:18Z
+build	Set up job	2026-08-28T07:07:19.8838428Z Worker ID: {74c1fdef-8456-427c-848d-fd3b85235855}
+build	Set up job	2026-08-28T07:07:19.8839300Z Azure Region: westus2
+build	Set up job	2026-08-28T07:07:19.8839937Z ##[endgroup]
+build	Set up job	2026-08-28T07:07:19.8841462Z ##[group]Operating System
+build	Set up job	2026-08-28T07:07:19.8842256Z Ubuntu
+build	Set up job	2026-08-28T07:07:19.8842845Z 24.04.4
+build	Set up job	2026-08-28T07:07:19.8843403Z LTS
+build	Set up job	2026-08-28T07:07:19.8843966Z ##[endgroup]
+build	Set up job	2026-08-28T07:07:19.8844539Z ##[group]Runner Image
+build	Set up job	2026-08-28T07:07:19.8845208Z Image: ubuntu-24.04
+build	Set up job	2026-08-28T07:07:19.8845824Z Version: 20260823.283.1
+build	Set up job	2026-08-28T07:07:19.8846875Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+build	Set up job	2026-08-28T07:07:19.8849088Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+build	Set up job	2026-08-28T07:07:19.8850149Z ##[endgroup]
+build	Set up job	2026-08-28T07:07:19.8851422Z ##[group]GITHUB_TOKEN Permissions
+build	Set up job	2026-08-28T07:07:19.8853610Z Contents: read
+build	Set up job	2026-08-28T07:07:19.8854311Z Metadata: read
+build	Set up job	2026-08-28T07:07:19.8854897Z Pages: write
+build	Set up job	2026-08-28T07:07:19.8855600Z ##[endgroup]
+build	Set up job	2026-08-28T07:07:19.8858001Z Secret source: Actions
+build	Set up job	2026-08-28T07:07:19.8859209Z Prepare workflow directory
+build	Set up job	2026-08-28T07:07:19.9310018Z Prepare all required actions
+build	Set up job	2026-08-28T07:07:19.9358181Z Getting action download info
+build	Set up job	2026-08-28T07:07:20.3216568Z Download action repository 'actions/checkout@v6' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+build	Set up job	2026-08-28T07:07:20.4260064Z Download action repository 'actions/setup-node@v6' (SHA:249970729cb0ef3589644e2896645e5dc5ba9c38)
+build	Set up job	2026-08-28T07:07:20.5117273Z Download action repository 'actions/configure-pages@v6' (SHA:45bfe0192ca1faeb007ade9deae92b16b8254a0d)
+build	Set up job	2026-08-28T07:07:20.7634496Z Download action repository 'actions/upload-pages-artifact@v4' (SHA:7b1f4a764d45c48632c6b24a0339c27f5614fb0b)
+build	Set up job	2026-08-28T07:07:21.0244674Z Getting action download info
+build	Set up job	2026-08-28T07:07:21.1768691Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+build	Set up job	2026-08-28T07:07:21.3275298Z Complete job name: build
+build	Run actions/checkout@v6	﻿2026-08-28T07:07:21.4207423Z ##[group]Run actions/checkout@v6
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4209127Z with:
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4210010Z   submodules: true
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4211042Z   repository: link-foundation/links-notation
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4220410Z   token: ***
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4221306Z   ssh-strict: true
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4222257Z   ssh-user: git
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4223212Z   persist-credentials: true
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4224247Z   clean: true
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4225185Z   sparse-checkout-cone-mode: true
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4226292Z   fetch-depth: 1
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4227205Z   fetch-tags: false
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4228289Z   show-progress: true
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4229249Z   lfs: false
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4230146Z   set-safe-directory: true
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4231219Z   allow-unsafe-pr-checkout: false
+build	Run actions/checkout@v6	2026-08-28T07:07:21.4232606Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5256848Z Syncing repository: link-foundation/links-notation
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5261468Z ##[group]Getting Git version info
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5264075Z Working directory is '/home/runner/work/links-notation/links-notation'
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5268039Z [command]/usr/bin/git version
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5307986Z git version 2.55.0
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5331682Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5346750Z Temporarily overriding HOME='/home/runner/work/_temp/cc538b5a-d900-4f82-89ec-078b86567564' before making global git config changes
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5352006Z Adding repository directory to the temporary git global config as a safe directory
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5356395Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5403882Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5408445Z ##[group]Determining repository object format
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5411678Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5414270Z ##[group]Initializing the repository
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5417164Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5518080Z hint: Using 'master' as the name for the initial branch. This default branch name
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5521194Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5525545Z hint: to use in all of your new repositories, which will suppress this warning,
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5529125Z hint: call:
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5530924Z hint:
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5533177Z hint: 	git config --global init.defaultBranch <name>
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5535893Z hint:
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5538586Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5542236Z hint: 'development'. The just-created branch can be renamed via this command:
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5544237Z hint:
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5545884Z hint: 	git branch -m <name>
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5547397Z hint:
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5549963Z hint: Disable this message with "git config set advice.defaultBranchName false"
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5552259Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5556044Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5655493Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5658648Z ##[group]Disabling automatic garbage collection
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5660981Z [command]/usr/bin/git config --local gc.auto 0
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5664442Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5667043Z ##[group]Setting up auth
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5669189Z Removing SSH command configuration
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5672040Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	Run actions/checkout@v6	2026-08-28T07:07:21.5680995Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6071588Z Removing HTTP extra header
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6075770Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6111731Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6354625Z Removing includeIf entries pointing to credentials config files
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6361249Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6400641Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6632701Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6675940Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6711672Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6748787Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6783109Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6845961Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6848232Z ##[group]Fetching the repository
+build	Run actions/checkout@v6	2026-08-28T07:07:21.6853842Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4958f3cf8012ba9e67f19309b9c58984f7ce106a:refs/remotes/origin/main
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1632554Z From https://github.com/link-foundation/links-notation
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1635907Z  * [new ref]         4958f3cf8012ba9e67f19309b9c58984f7ce106a -> origin/main
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1645355Z [command]/usr/bin/git branch --list --remote origin/main
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1675171Z   origin/main
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1685956Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1713009Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1717961Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1719381Z ##[group]Determining the checkout info
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1720860Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1724257Z [command]/usr/bin/git sparse-checkout disable
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1776185Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1807860Z ##[group]Checking out the ref
+build	Run actions/checkout@v6	2026-08-28T07:07:22.1810560Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2096117Z Switched to a new branch 'main'
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2102098Z branch 'main' set up to track 'origin/main'.
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2109860Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2111219Z ##[group]Setting up auth for fetching submodules
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2115405Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2157179Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2191370Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2233616Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2270128Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2303032Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2304629Z ##[group]Fetching submodules
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2306727Z [command]/usr/bin/git submodule sync
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2541792Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+build	Run actions/checkout@v6	2026-08-28T07:07:22.2794106Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+build	Run actions/checkout@v6	2026-08-28T07:07:22.3023788Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:22.3028494Z ##[group]Persisting credentials for submodules
+build	Run actions/checkout@v6	2026-08-28T07:07:22.3034750Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+build	Run actions/checkout@v6	2026-08-28T07:07:22.3272403Z [command]/usr/bin/git submodule foreach git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	Run actions/checkout@v6	2026-08-28T07:07:22.3508525Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+build	Run actions/checkout@v6	2026-08-28T07:07:22.3738930Z [command]/usr/bin/git submodule foreach git config --local --add 'url.https://github.com/.insteadOf' 'org-176174013@github.com:'
+build	Run actions/checkout@v6	2026-08-28T07:07:22.3974851Z ##[endgroup]
+build	Run actions/checkout@v6	2026-08-28T07:07:22.4016329Z [command]/usr/bin/git log -1 --format=%H
+build	Run actions/checkout@v6	2026-08-28T07:07:22.4044075Z 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+build	Setup Node.js	﻿2026-08-28T07:07:22.4360615Z ##[group]Run actions/setup-node@v6
+build	Setup Node.js	2026-08-28T07:07:22.4361567Z with:
+build	Setup Node.js	2026-08-28T07:07:22.4362262Z   node-version: 20
+build	Setup Node.js	2026-08-28T07:07:22.4363002Z   cache: npm
+build	Setup Node.js	2026-08-28T07:07:22.4363906Z   cache-dependency-path: docs/website/package-lock.json
+build	Setup Node.js	2026-08-28T07:07:22.4364988Z   check-latest: false
+build	Setup Node.js	2026-08-28T07:07:22.4372519Z   token: ***
+build	Setup Node.js	2026-08-28T07:07:22.4373491Z   package-manager-cache: true
+build	Setup Node.js	2026-08-28T07:07:22.4374345Z ##[endgroup]
+build	Setup Node.js	2026-08-28T07:07:22.5809208Z Attempting to download 20...
+build	Setup Node.js	2026-08-28T07:07:23.2974244Z Acquiring 20.20.2 - x64 from https://github.com/actions/node-versions/releases/download/20.20.2-23521894959/node-20.20.2-linux-x64.tar.gz
+build	Setup Node.js	2026-08-28T07:07:23.7060322Z Extracting ...
+build	Setup Node.js	2026-08-28T07:07:23.7160164Z [command]/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/1fd6a62a-38e0-4322-9c97-69acd3e74052 -f /home/runner/work/_temp/3ef49e6a-6e47-4661-a2b0-b04d00f1d1af
+build	Setup Node.js	2026-08-28T07:07:24.7183146Z Adding to the cache ...
+build	Setup Node.js	2026-08-28T07:07:26.5891464Z ##[group]Environment details
+build	Setup Node.js	2026-08-28T07:07:26.8166597Z node: v20.20.2
+build	Setup Node.js	2026-08-28T07:07:26.8167247Z npm: 10.8.2
+build	Setup Node.js	2026-08-28T07:07:26.8167964Z yarn: 1.22.22
+build	Setup Node.js	2026-08-28T07:07:26.8168925Z ##[endgroup]
+build	Setup Node.js	2026-08-28T07:07:26.8189458Z [command]/opt/hostedtoolcache/node/20.20.2/x64/bin/npm config get cache
+build	Setup Node.js	2026-08-28T07:07:26.9226589Z /home/runner/.npm
+build	Setup Node.js	2026-08-28T07:07:27.1750257Z npm cache is not found
+build	Install dependencies	﻿2026-08-28T07:07:27.1925852Z ##[group]Run npm ci
+build	Install dependencies	2026-08-28T07:07:27.1926212Z ^[[36;1mnpm ci^[[0m
+build	Install dependencies	2026-08-28T07:07:27.1969673Z shell: /usr/bin/bash -e {0}
+build	Install dependencies	2026-08-28T07:07:27.1970043Z ##[endgroup]
+build	Install dependencies	2026-08-28T07:07:28.4161264Z 
+build	Install dependencies	2026-08-28T07:07:28.4167871Z added 18 packages, and audited 19 packages in 1s
+build	Install dependencies	2026-08-28T07:07:28.4168317Z 
+build	Install dependencies	2026-08-28T07:07:28.4168582Z 9 packages are looking for funding
+build	Install dependencies	2026-08-28T07:07:28.4169050Z   run `npm fund` for details
+build	Install dependencies	2026-08-28T07:07:28.4170553Z 
+build	Install dependencies	2026-08-28T07:07:28.4170902Z found 0 vulnerabilities
+build	Build website	﻿2026-08-28T07:07:28.4303043Z ##[group]Run npm run build
+build	Build website	2026-08-28T07:07:28.4303345Z ^[[36;1mnpm run build^[[0m
+build	Build website	2026-08-28T07:07:28.4343714Z shell: /usr/bin/bash -e {0}
+build	Build website	2026-08-28T07:07:28.4343987Z ##[endgroup]
+build	Build website	2026-08-28T07:07:28.5484726Z 
+build	Build website	2026-08-28T07:07:28.5485154Z > protocols-lino-website@1.0.0 build
+build	Build website	2026-08-28T07:07:28.5485594Z > vite build
+build	Build website	2026-08-28T07:07:28.5485763Z 
+build	Build website	2026-08-28T07:07:28.7581103Z ^[[33m(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+build	Build website	2026-08-28T07:07:28.7582676Z   - ESM syntax in a file loaded as CommonJS (vite.config.js:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+build	Build website	2026-08-28T07:07:28.7583830Z Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.^[[39m
+build	Build website	2026-08-28T07:07:28.7768424Z ^[[36mvite v8.2.1 ^[[32mbuilding client environment for production...^[[36m^[[39m
+build	Build website	2026-08-28T07:07:28.7870464Z ^[[2K
+build	Build website	2026-08-28T07:07:28.8271322Z transforming...✓ 5 modules transformed.
+build	Build website	2026-08-28T07:07:28.8386619Z rendering chunks...
+build	Build website	2026-08-28T07:07:28.8447020Z computing gzip size...
+build	Build website	2026-08-28T07:07:28.8449196Z dist/index.html                      11.01 kB │ gzip: 2.46 kB
+build	Build website	2026-08-28T07:07:28.8450054Z dist/assets/comparison-uG3iBHKH.svg  21.06 kB │ gzip: 2.27 kB
+build	Build website	2026-08-28T07:07:28.8450638Z dist/assets/index-D5gZCvsp.css        9.00 kB │ gzip: 2.28 kB
+build	Build website	2026-08-28T07:07:28.8451188Z dist/assets/index-D2aDGG3B.js         4.90 kB │ gzip: 1.91 kB
+build	Build website	2026-08-28T07:07:28.8451443Z 
+build	Build website	2026-08-28T07:07:28.8452685Z ^[[32m✓ built in 68ms^[[39m
+build	Setup Pages	﻿2026-08-28T07:07:28.8628251Z ##[group]Run actions/configure-pages@v6
+build	Setup Pages	2026-08-28T07:07:28.8628580Z with:
+build	Setup Pages	2026-08-28T07:07:28.8630894Z   token: ***
+build	Setup Pages	2026-08-28T07:07:28.8631100Z   enablement: false
+build	Setup Pages	2026-08-28T07:07:28.8631311Z ##[endgroup]
+build	Upload artifact	﻿2026-08-28T07:07:29.1807192Z ##[group]Run actions/upload-pages-artifact@v4
+build	Upload artifact	2026-08-28T07:07:29.1807529Z with:
+build	Upload artifact	2026-08-28T07:07:29.1808339Z   path: docs/website/dist
+build	Upload artifact	2026-08-28T07:07:29.1808723Z   name: github-pages
+build	Upload artifact	2026-08-28T07:07:29.1808985Z   retention-days: 1
+build	Upload artifact	2026-08-28T07:07:29.1809190Z env:
+build	Upload artifact	2026-08-28T07:07:29.1809363Z   GITHUB_PAGES: true
+build	Upload artifact	2026-08-28T07:07:29.1809564Z ##[endgroup]
+build	Upload artifact	2026-08-28T07:07:29.1868088Z ##[start-action display=Archive artifact;id=__actions_upload-pages-artifact.__run]
+build	Upload artifact	2026-08-28T07:07:29.1892716Z ##[group]Run echo ::group::Archive artifact
+build	Upload artifact	2026-08-28T07:07:29.1893044Z ^[[36;1mecho ::group::Archive artifact^[[0m
+build	Upload artifact	2026-08-28T07:07:29.1893481Z ^[[36;1mtar \^[[0m
+build	Upload artifact	2026-08-28T07:07:29.1893720Z ^[[36;1m  --dereference --hard-dereference \^[[0m
+build	Upload artifact	2026-08-28T07:07:29.1894031Z ^[[36;1m  --directory "$INPUT_PATH" \^[[0m
+build	Upload artifact	2026-08-28T07:07:29.1894332Z ^[[36;1m  -cvf "$RUNNER_TEMP/artifact.tar" \^[[0m
+build	Upload artifact	2026-08-28T07:07:29.1894616Z ^[[36;1m  --exclude=.git \^[[0m
+build	Upload artifact	2026-08-28T07:07:29.1894857Z ^[[36;1m  --exclude=.github \^[[0m
+build	Upload artifact	2026-08-28T07:07:29.1895131Z ^[[36;1m  --exclude=".[^/]*" \^[[0m
+build	Upload artifact	2026-08-28T07:07:29.1895363Z ^[[36;1m  .^[[0m
+build	Upload artifact	2026-08-28T07:07:29.1895559Z ^[[36;1mecho ::endgroup::^[[0m
+build	Upload artifact	2026-08-28T07:07:29.1928831Z shell: /usr/bin/sh -e {0}
+build	Upload artifact	2026-08-28T07:07:29.1929076Z env:
+build	Upload artifact	2026-08-28T07:07:29.1929266Z   GITHUB_PAGES: true
+build	Upload artifact	2026-08-28T07:07:29.1929496Z   INPUT_PATH: docs/website/dist
+build	Upload artifact	2026-08-28T07:07:29.1929740Z ##[endgroup]
+build	Upload artifact	2026-08-28T07:07:29.1976860Z ##[group]Archive artifact
+build	Upload artifact	2026-08-28T07:07:29.1989536Z ./
+build	Upload artifact	2026-08-28T07:07:29.1989938Z ./index.html
+build	Upload artifact	2026-08-28T07:07:29.1990994Z ./assets/
+build	Upload artifact	2026-08-28T07:07:29.1991403Z ./assets/index-D5gZCvsp.css
+build	Upload artifact	2026-08-28T07:07:29.1991874Z ./assets/index-D2aDGG3B.js
+build	Upload artifact	2026-08-28T07:07:29.1992282Z ./assets/comparison-uG3iBHKH.svg
+build	Upload artifact	2026-08-28T07:07:29.1993301Z ##[endgroup]
+build	Upload artifact	2026-08-28T07:07:29.2004370Z ##[end-action id=__actions_upload-pages-artifact.__run;outcome=success;conclusion=success;duration_ms=13]
+build	Upload artifact	2026-08-28T07:07:29.2007324Z ##[start-action display=Archive artifact;id=__actions_upload-pages-artifact.__run_2]
+build	Upload artifact	2026-08-28T07:07:29.2012889Z ##[end-action id=__actions_upload-pages-artifact.__run_2;outcome=skipped;conclusion=skipped;duration_ms=0]
+build	Upload artifact	2026-08-28T07:07:29.2015660Z ##[start-action display=Archive artifact;id=__actions_upload-pages-artifact.__run_3]
+build	Upload artifact	2026-08-28T07:07:29.2019580Z ##[end-action id=__actions_upload-pages-artifact.__run_3;outcome=skipped;conclusion=skipped;duration_ms=0]
+build	Upload artifact	2026-08-28T07:07:29.2021524Z ##[start-action display=Upload artifact;id=__actions_upload-pages-artifact.upload-artifact]
+build	Upload artifact	2026-08-28T07:07:29.2086722Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+build	Upload artifact	2026-08-28T07:07:29.2088481Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+build	Upload artifact	2026-08-28T07:07:29.2088867Z with:
+build	Upload artifact	2026-08-28T07:07:29.2089068Z   name: github-pages
+build	Upload artifact	2026-08-28T07:07:29.2089321Z   path: /home/runner/work/_temp/artifact.tar
+build	Upload artifact	2026-08-28T07:07:29.2089594Z   retention-days: 1
+build	Upload artifact	2026-08-28T07:07:29.2089802Z   if-no-files-found: error
+build	Upload artifact	2026-08-28T07:07:29.2090029Z   compression-level: 6
+build	Upload artifact	2026-08-28T07:07:29.2090239Z   overwrite: false
+build	Upload artifact	2026-08-28T07:07:29.2090449Z   include-hidden-files: false
+build	Upload artifact	2026-08-28T07:07:29.2090674Z env:
+build	Upload artifact	2026-08-28T07:07:29.2090855Z   GITHUB_PAGES: true
+build	Upload artifact	2026-08-28T07:07:29.2091050Z ##[endgroup]
+build	Upload artifact	2026-08-28T07:07:29.3735088Z (node:2576) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+build	Upload artifact	2026-08-28T07:07:29.3735997Z (Use `node --trace-deprecation ...` to show where the warning was created)
+build	Upload artifact	2026-08-28T07:07:29.3781570Z With the provided path, there will be 1 file uploaded
+build	Upload artifact	2026-08-28T07:07:29.3788746Z Artifact name is valid!
+build	Upload artifact	2026-08-28T07:07:29.3789302Z Root directory input is valid!
+build	Upload artifact	2026-08-28T07:07:29.8068504Z Beginning upload of artifact content to blob storage
+build	Upload artifact	2026-08-28T07:07:29.8286580Z (node:2576) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+build	Upload artifact	2026-08-28T07:07:30.1372244Z Uploaded bytes 9258
+build	Upload artifact	2026-08-28T07:07:30.2317247Z Finished uploading artifact content to blob storage!
+build	Upload artifact	2026-08-28T07:07:30.2319715Z SHA256 digest of uploaded artifact zip is 628bc8446f38c2851ed53b7ce91b2d40a0335ee590787e18cc3fc4dad9aec5e8
+build	Upload artifact	2026-08-28T07:07:30.2321307Z Finalizing artifact upload
+build	Upload artifact	2026-08-28T07:07:30.5071904Z Artifact github-pages.zip successfully finalized. Artifact ID 9677417080
+build	Upload artifact	2026-08-28T07:07:30.5073599Z Artifact github-pages has been successfully uploaded! Final size is 9258 bytes. Artifact ID is 9677417080
+build	Upload artifact	2026-08-28T07:07:30.5081108Z Artifact download URL: https://github.com/link-foundation/links-notation/actions/runs/33150292341/artifacts/9677417080
+build	Upload artifact	2026-08-28T07:07:30.5182507Z ##[end-action id=__actions_upload-pages-artifact.upload-artifact;outcome=success;conclusion=success;duration_ms=1315]
+build	Post Setup Node.js	﻿2026-08-28T07:07:30.5272889Z Post job cleanup.
+build	Post Setup Node.js	2026-08-28T07:07:30.6620270Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/links-notation/links-notation --files-from manifest.txt --use-compress-program zstdmt
+build	Post Setup Node.js	2026-08-28T07:07:31.9873437Z Sent 19726336 of 24637960 (80.1%), 18.8 MBs/sec
+build	Post Setup Node.js	2026-08-28T07:07:32.2411470Z Sent 24637960 of 24637960 (100.0%), 18.7 MBs/sec
+build	Post Setup Node.js	2026-08-28T07:07:32.5464174Z Cache saved with the key: node-cache-Linux-x64-npm-72a372533540ae6375e0286c50397936a2573d562474f0c2bafd609eb596d7c2
+build	Post Run actions/checkout@v6	﻿2026-08-28T07:07:32.5605532Z Post job cleanup.
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.6453006Z [command]/usr/bin/git version
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.6497149Z git version 2.55.0
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.6540448Z Temporarily overriding HOME='/home/runner/work/_temp/88115635-cadc-40ed-9904-02a2905cdd79' before making global git config changes
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.6541950Z Adding repository directory to the temporary git global config as a safe directory
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.6548447Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.6580027Z Removing SSH command configuration
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.6587289Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.6624464Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.6876279Z Removing HTTP extra header
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.6883091Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.6923468Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7165899Z Removing includeIf entries pointing to credentials config files
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7176436Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7208036Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7209114Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7209885Z includeif.gitdir:/github/workspace/.git.path
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7210515Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7219603Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7246190Z /home/runner/work/_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7259802Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7306110Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7344116Z /home/runner/work/_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7356370Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7395707Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7422277Z /github/runner_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7432681Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7480213Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7508438Z /github/runner_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7517980Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7566059Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	Post Run actions/checkout@v6	2026-08-28T07:07:32.7805227Z Removing credentials config '/home/runner/work/_temp/git-credentials-746c289a-99db-4ba8-8d4b-d159d0659ef0.config'
+build	Complete job	﻿2026-08-28T07:07:32.7949958Z Cleaning up orphan processes
+build	Complete job	2026-08-28T07:07:32.8216100Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+deploy	Set up job	﻿2026-08-28T07:07:39.1629898Z Current runner version: '2.336.0'
+deploy	Set up job	2026-08-28T07:07:39.1665560Z ##[group]Runner Image Provisioner
+deploy	Set up job	2026-08-28T07:07:39.1667314Z Hosted Compute Agent
+deploy	Set up job	2026-08-28T07:07:39.1668218Z Version: 20260819.586
+deploy	Set up job	2026-08-28T07:07:39.1669207Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+deploy	Set up job	2026-08-28T07:07:39.1670429Z Build Date: 2026-08-18T23:20:18Z
+deploy	Set up job	2026-08-28T07:07:39.1671488Z Worker ID: {5baafd6a-112d-4665-8fe6-afcb7838c93d}
+deploy	Set up job	2026-08-28T07:07:39.1672652Z Azure Region: eastus2
+deploy	Set up job	2026-08-28T07:07:39.1673550Z ##[endgroup]
+deploy	Set up job	2026-08-28T07:07:39.1675603Z ##[group]Operating System
+deploy	Set up job	2026-08-28T07:07:39.1676896Z Ubuntu
+deploy	Set up job	2026-08-28T07:07:39.1677690Z 24.04.4
+deploy	Set up job	2026-08-28T07:07:39.1678586Z LTS
+deploy	Set up job	2026-08-28T07:07:39.1679425Z ##[endgroup]
+deploy	Set up job	2026-08-28T07:07:39.1680288Z ##[group]Runner Image
+deploy	Set up job	2026-08-28T07:07:39.1681288Z Image: ubuntu-24.04
+deploy	Set up job	2026-08-28T07:07:39.1682139Z Version: 20260823.283.1
+deploy	Set up job	2026-08-28T07:07:39.1683908Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+deploy	Set up job	2026-08-28T07:07:39.1687035Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+deploy	Set up job	2026-08-28T07:07:39.1688684Z ##[endgroup]
+deploy	Set up job	2026-08-28T07:07:39.1690700Z ##[group]GITHUB_TOKEN Permissions
+deploy	Set up job	2026-08-28T07:07:39.1693521Z Contents: read
+deploy	Set up job	2026-08-28T07:07:39.1694447Z Metadata: read
+deploy	Set up job	2026-08-28T07:07:39.1695407Z Pages: write
+deploy	Set up job	2026-08-28T07:07:39.1696437Z ##[endgroup]
+deploy	Set up job	2026-08-28T07:07:39.1699325Z Secret source: Actions
+deploy	Set up job	2026-08-28T07:07:39.1700898Z Prepare workflow directory
+deploy	Set up job	2026-08-28T07:07:39.2236864Z Prepare all required actions
+deploy	Set up job	2026-08-28T07:07:39.2303286Z Getting action download info
+deploy	Set up job	2026-08-28T07:07:39.4051113Z Download action repository 'actions/deploy-pages@v5' (SHA:cd2ce8fcbc39b97be8ca5fce6e763baed58fa128)
+deploy	Set up job	2026-08-28T07:07:39.8110564Z Complete job name: deploy
+deploy	Deploy to GitHub Pages	﻿2026-08-28T07:07:39.8788501Z ##[group]Run actions/deploy-pages@v5
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:39.8789375Z with:
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:39.8793492Z   token: ***
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:39.8793940Z   timeout: 600000
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:39.8794387Z   error_count: 10
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:39.8794867Z   reporting_interval: 5000
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:39.8795378Z   artifact_name: github-pages
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:39.8796150Z   preview: false
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:39.8796784Z ##[endgroup]
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:40.0743781Z (node:2106) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:40.0746540Z (Use `node --trace-deprecation ...` to show where the warning was created)
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:40.1680101Z Fetching artifact metadata for "github-pages" in this workflow run
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:40.2451867Z Found 1 artifact(s)
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:40.2466266Z Creating Pages deployment with payload:
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:40.2467508Z {
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:40.2468364Z 	"artifact_id": 9677417080,
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:40.2469631Z 	"pages_build_version": "4958f3cf8012ba9e67f19309b9c58984f7ce106a",
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:40.2563157Z 	"oidc_token": "***"
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:40.2564221Z }
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:40.5006495Z Created deployment for 4958f3cf8012ba9e67f19309b9c58984f7ce106a, ID: 4958f3cf8012ba9e67f19309b9c58984f7ce106a
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:45.5022968Z Getting Pages deployment status...
+deploy	Deploy to GitHub Pages	2026-08-28T07:07:45.6386564Z Reported success!
+deploy	Complete job	﻿2026-08-28T07:07:45.6716805Z Evaluate and set environment url
+deploy	Complete job	2026-08-28T07:07:45.6722744Z Evaluated environment url: https://link-foundation.github.io/links-notation/
+deploy	Complete job	2026-08-28T07:07:45.6724002Z Cleaning up orphan processes

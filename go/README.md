@@ -1,4 +1,4 @@
-# links-notation Go
+# Links Notation Parser for Go
 
 [![Actions Status](https://github.com/link-foundation/links-notation/workflows/go/badge.svg)](https://github.com/link-foundation/links-notation/actions?workflow=go)
 [![Go Reference](https://pkg.go.dev/badge/github.com/link-foundation/links-notation/go.svg)](https://pkg.go.dev/github.com/link-foundation/links-notation/go)
@@ -41,10 +41,11 @@ func main() {
 - Parse Links Notation (Lino) into structured Link objects
 - Format Link objects back to Lino notation
 - Support for inline and indented syntax
+- `#` comments, on by default and switchable off
 - Quoted strings with special characters
 - Triple-quoted strings for embedded quotes
 - Configurable formatting with `FormatConfig`
-- Full compatibility with other language implementations (JS, Rust, C#, Python)
+- Full compatibility with the other six implementations (C#, JavaScript, Rust, Python, Java, PHP)
 
 ## API Reference
 
@@ -86,6 +87,15 @@ func Parse(input string) ([]*Link, error)
 ```
 
 Parses Lino notation text into a slice of Link objects.
+
+#### NewParser
+
+```go
+func NewParser() *Parser
+```
+
+Creates a parser with the default limits and with `#` comments on. Setting
+`Comments` to `false` on it reads `#` as an ordinary character instead.
 
 #### Format
 
@@ -206,7 +216,8 @@ links, _ := lino.Parse("(a: (b: (c: (d: value))))")
 ### Custom Formatting
 
 ```go
-link := lino.NewLink(lino.StrPtr("id"), []*lino.Link{
+id := "id"
+link := lino.NewLink(&id, []*lino.Link{
     lino.NewRef("value1"),
     lino.NewRef("value2"),
 })
@@ -257,6 +268,67 @@ I'm a friendly AI.
 ```
 
 Equivalent to: `(3: papa loves mama)`
+
+### Multi-line Groups
+
+A parenthesized group opens a *nested context*: its body starts fresh at
+indentation level zero and follows the same rules as the root document, so a
+line break inside parentheses is structure rather than decoration.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+The document above parses to `(value ((id 1) (label one)))` - two children, each
+a link of its own - rather than to one flat list in which the boundary between
+`id` and `label` would be lost. A body that stays on a single line still
+collapses to a single link, so `(a b c)` is unchanged.
+
+```go
+document := `value (
+  id "1"
+  label "one"
+)`
+
+links, _ := lino.Parse(document)
+fmt.Println(lino.Format(links)) // (value ((id 1) (label one)))
+```
+
+### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+Both comments are gone by the time the document is read, leaving the single
+link `(deploy: staging)`. A `#` only opens a comment where a reference could
+begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
+reference (`"#"`) stay ordinary characters.
+
+A formatter keeps the same rule from the other side: a reference that begins
+with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
+itself.
+
+Comments are on by default, and a parser can be told to read `#` as an ordinary
+character again, for documents written before comments existed:
+
+```go
+document := "# the machines this deploys to\ndeploy: staging # only staging, for now\n"
+links, _ := lino.Parse(document)
+fmt.Println(lino.Format(links)) // (deploy: staging)
+
+parser := lino.NewParser()
+parser.Comments = false
+plain, _ := parser.Parse("# a b\n")
+fmt.Println(lino.Format(plain)) // (# a b)
+```
 
 ## Testing
 

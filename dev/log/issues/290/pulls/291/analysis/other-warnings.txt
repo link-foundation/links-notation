@@ -1,0 +1,78 @@
+#### bom-check-33150292390.log
+hint: to use in all of your new repositories, which will suppress this warning,
+#### csharp-33150292349.log
+    56 Warning(s)
+  if-no-files-found: warn
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:2487) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+Generating output file document.ind....done (42 lines written, 0 warnings).
+LaTeX Warning: You have requested, on input line 33, version
+Warning:  no %%Page comments generated.
+^[[38;5;11m    3 warning(s)^[[0m
+^[[38;5;11m/home/runner/work/links-notation/links-notation/csharp/toc.yml(0,1): warning InvalidFileLink: Invalid file link:(~/api/Platform.links-notation.html).^[[0m
+^[[38;5;11mBuild succeeded with warning.^[[0m
+^[[38;5;11mwarning: InvalidCref: Invalid cref value "!:IList<Link<string>>" found in XML documentation comment for Parse defined in /home/runner/work/links-notation/links-notation/csharp/Link.Foundation.Links.Notation/obj/Release/net8/Parser.peg.g.cs Line 263.^[[0m
+hint: to use in all of your new repositories, which will suppress this warning,
+update-binfmts: warning: /usr/share/binfmts/cli: no executable /usr/bin/cli found, but continuing anyway as you request
+update-binfmts: warning: llvm-16-runtime.binfmt already enabled in kernel.
+update-binfmts: warning: llvm-17-runtime.binfmt already enabled in kernel.
+update-binfmts: warning: llvm-18-runtime.binfmt already enabled in kernel.
+update-binfmts: warning: python3.12 already enabled in kernel.
+#### go-33150292405.log
+[command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/b8e60dba-5ce1-4311-b310-0e4c58682584 -f /home/runner/work/_temp/4c6a2db9-8e97-42c8-bcd3-7f716211f085
+[command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/bb14cec5-59eb-4ec3-9b57-21d445750abe -f /home/runner/work/_temp/19442b28-e990-4813-913e-f67f5337121c
+[warning]Cache folder path is retrieved but doesn't exist on disk: /home/runner/go/pkg/mod
+gpg: WARNING: This key is not certified with a trusted signature!
+hint: to use in all of your new repositories, which will suppress this warning,
+warning - 2026-08-28 07:08:06,141 -- No config file could be found. Ignoring config.
+warning - 2026-08-28 07:08:06,172 -- xcrun is not installed or can't be found.
+warning - 2026-08-28 07:08:06,180 -- No gcov data found.
+warning - 2026-08-28 07:08:06,180 -- coverage.py is not installed or can't be found.
+#### graph-update-33150294985.log
+updater | rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+#### java-33150292367.log
+WARNING: All illegal access operations will be denied in a future release
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.google.googlejavaformat.java.JavacTokens$CommentSavingTokenizer (file:/home/runner/.m2/repository/com/google/googlejavaformat/google-java-format/1.19.2/google-java-format-1.19.2.jar) to field com.sun.tools.javac.parser.JavaTokenizer.reader
+WARNING: Please consider reporting this to the maintainers of com.google.googlejavaformat.java.JavacTokens$CommentSavingTokenizer
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+[WARNING] system modules path not set in conjunction with -source 11
+^[[36;1m  echo "::warning::Skipping Maven Central publishing: CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets are not configured. Generate a token at https://central.sonatype.com/account and add these repository secrets to enable publishing."^[[0m
+hint: to use in all of your new repositories, which will suppress this warning,
+#### js-33150292364.log
+hint: to use in all of your new repositories, which will suppress this warning,
+npm warn exec The following package was not found and will be installed: prettier@3.9.6
+#### pages-33150292341.log
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:2106) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(node:2576) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(node:2576) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.^[[39m
+[command]/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/1fd6a62a-38e0-4322-9c97-69acd3e74052 -f /home/runner/work/_temp/3ef49e6a-6e47-4661-a2b0-b04d00f1d1af
+hint: to use in all of your new repositories, which will suppress this warning,
+#### php-33150292369.log
+hint: to use in all of your new repositories, which will suppress this warning,
+#### python-33150292416.log
+        By 2027-Feb-18, you need to update your project and remove deprecated calls
+/tmp/build-env-27t4e__w/lib/python3.13/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+/tmp/build-env-27t4e__w/lib/python3.13/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+/tmp/build-env-27t4e__w/lib/python3.13/site-packages/setuptools/dist.py:765: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+/tmp/build-env-ac1h4bgd/lib/python3.13/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+/tmp/build-env-ac1h4bgd/lib/python3.13/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+/tmp/build-env-ac1h4bgd/lib/python3.13/site-packages/setuptools/dist.py:765: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+/tmp/build-env-ecywder7/lib/python3.13/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+/tmp/build-env-ecywder7/lib/python3.13/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+/tmp/build-env-ecywder7/lib/python3.13/site-packages/setuptools/dist.py:765: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+/tmp/build-env-hucysybz/lib/python3.13/site-packages/setuptools/config/_apply_pyprojecttoml.py:61: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+/tmp/build-env-hucysybz/lib/python3.13/site-packages/setuptools/config/_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+/tmp/build-env-hucysybz/lib/python3.13/site-packages/setuptools/dist.py:765: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+hint: to use in all of your new repositories, which will suppress this warning,
+warning: no files found matching '*.py' under directory 'platform_lino'
+warning: no files found matching 'LICENSE'
+#### rust-33150292344.log
+##[group]Run cargo clippy --all-targets --all-features -- -D warnings
+[warning]Path Validation Error: Path(s) specified in the action for caching do(es) not exist, hence no cache is being saved.
+^[[1m^[[33mwarning^[[0m: `cargo publish --token` is deprecated in favor of using `cargo login` and environment variables
+^[[36;1mcargo clippy --all-targets --all-features -- -D warnings^[[0m
+hint: to use in all of your new repositories, which will suppress this warning,

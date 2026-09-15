@@ -10,8 +10,12 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Check if any test files are being committed
-test_files_changed=$(git diff --cached --name-only | grep -E 'tests?/.*\.(py|js|rs|cs)$')
+# Check if any test files are being committed. All seven supported languages
+# count: the pattern used to list four, so a test added in Go, Java or PHP left
+# the comparison document stale. Go keeps its tests next to the code rather
+# than under tests/, hence the second alternative.
+test_files_changed=$(git diff --cached --name-only \
+    | grep -E '(tests?/.*\.(py|js|rs|cs|java|php)|go/[^/]*_test\.go)$')
 
 if [ -n "$test_files_changed" ]; then
     echo -e "${YELLOW}Test files modified, regenerating TEST_CASE_COMPARISON.md...${NC}"

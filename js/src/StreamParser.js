@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import { Link } from './Link.js';
+import { Parser } from './Parser.js';
 import * as parserModule from './parser-generated.js';
 
 /**
@@ -39,6 +40,7 @@ export class StreamParser extends EventEmitter {
    */
   constructor(options = {}) {
     super();
+    this.parser = new Parser(options);
     this.buffer = '';
     this.maxInputSize = options.maxInputSize || 10 * 1024 * 1024; // 10MB default
     this.maxDepth = options.maxDepth || 1000;
@@ -167,15 +169,7 @@ export class StreamParser extends EventEmitter {
    * @returns {Link[]} Array of Link objects
    */
   _transformResult(rawResult) {
-    const links = [];
-    const items = Array.isArray(rawResult) ? rawResult : [rawResult];
-
-    for (const item of items) {
-      if (item !== null && item !== undefined) {
-        this._collectLinks(item, [], links);
-      }
-    }
-    return links;
+    return this.parser.transformResult(rawResult);
   }
 
   /**

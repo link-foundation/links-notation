@@ -67,7 +67,7 @@ namespace Link.Foundation.Links.Notation.Tests
             // Simple reference creates a singlet link with null Id and one value
             Assert.Null(links[0].Id);
             Assert.NotNull(links[0].Values);
-            Assert.Single(links[0].Values);
+            Assert.Single(links[0].Values!);
             Assert.Equal("test", links[0].Values?[0].Id);
             Assert.Null(links[0].Values?[0].Values);
         }
@@ -106,7 +106,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var source = ": value1 value2";
             var parser = new Parser();
             // Standalone ':' is now forbidden and should throw an exception
-            Assert.Throws<FormatException>(() => parser.Parse(source));
+            Assert.Throws<ParseException>(() => parser.Parse(source));
         }
 
         [Fact]
@@ -118,7 +118,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.Null(result[0].Id);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("singlet", result[0].Values?[0].Id);
             Assert.Null(result[0].Values?[0].Values);
         }
@@ -232,7 +232,7 @@ namespace Link.Foundation.Links.Notation.Tests
         {
             // Test link without id (single-line) - now forbidden
             var input = ": value1 value2";
-            Assert.Throws<FormatException>(() => new Parser().Parse(input));
+            Assert.Throws<ParseException>(() => new Parser().Parse(input));
         }
 
         [Fact]
@@ -240,7 +240,7 @@ namespace Link.Foundation.Links.Notation.Tests
         {
             // Test link without id (multi-line) - now forbidden
             var input = "(: value1 value2)";
-            Assert.Throws<FormatException>(() => new Parser().Parse(input));
+            Assert.Throws<ParseException>(() => new Parser().Parse(input));
         }
 
         [Fact]
@@ -263,7 +263,7 @@ namespace Link.Foundation.Links.Notation.Tests
         public static void LinkWithoutIdMultiLineTest()
         {
             var input = "(: value1 value2)";
-            Assert.Throws<FormatException>(() => new Parser().Parse(input));
+            Assert.Throws<ParseException>(() => new Parser().Parse(input));
         }
 
         [Fact]
@@ -274,7 +274,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.Null(result[0].Id);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("hello", result[0].Values?[0].Id);
         }
 
@@ -286,7 +286,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.Null(result[0].Id);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("hello world", result[0].Values?[0].Id);
         }
 
@@ -298,7 +298,7 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Single(result);
             Assert.Null(result[0].Id);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("singlet", result[0].Values?[0].Id);
             Assert.Null(result[0].Values?[0].Values);
         }
@@ -334,7 +334,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
 
             // C# parser forbids this syntax (like JS/Rust)
-            Assert.Throws<FormatException>(() => parser.Parse(input));
+            Assert.Throws<ParseException>(() => parser.Parse(input));
         }
 
         [Fact]
@@ -370,8 +370,8 @@ namespace Link.Foundation.Links.Notation.Tests
 
             Assert.NotEmpty(result);
             Assert.NotNull(result[0].Values);
-            Assert.Single(result[0].Values);
-            Assert.Equal("quoted value", result[0].Values[0].Id);
+            Assert.Single(result[0].Values!);
+            Assert.Equal("quoted value", result[0].Values![0].Id);
         }
 
         [Fact]
@@ -416,7 +416,7 @@ namespace Link.Foundation.Links.Notation.Tests
             var parser = new Parser();
 
             // C# parser forbids this syntax (like JS/Rust)
-            Assert.Throws<FormatException>(() => parser.Parse(input));
+            Assert.Throws<ParseException>(() => parser.Parse(input));
         }
 
         [Fact]
@@ -428,7 +428,7 @@ namespace Link.Foundation.Links.Notation.Tests
 
             Assert.Single(result);
             Assert.Equal("id", result[0].Id);
-            Assert.Single(result[0].Values);
+            Assert.Single(result[0].Values!);
             Assert.Equal("value with spaces", result[0].Values?[0].Id);
         }
     }

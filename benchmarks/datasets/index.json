@@ -1,0 +1,81 @@
+{
+  "datasets": [
+    {
+      "name": "employees",
+      "description": "Uniform employee records",
+      "structure": "uniform",
+      "profile": "records",
+      "file": "employees.json"
+    },
+    {
+      "name": "analytics",
+      "description": "Time-series analytics data",
+      "structure": "uniform",
+      "profile": "records",
+      "file": "analytics.json"
+    },
+    {
+      "name": "repositories",
+      "description": "Repository listing with uniform fields",
+      "structure": "uniform",
+      "profile": "records",
+      "file": "repositories.json"
+    },
+    {
+      "name": "orders",
+      "description": "E-commerce orders with nested items and addresses",
+      "structure": "nested",
+      "profile": "records",
+      "file": "orders.json"
+    },
+    {
+      "name": "event_logs",
+      "description": "Semi-uniform event log records",
+      "structure": "semi-uniform",
+      "profile": "records",
+      "file": "event_logs.json"
+    },
+    {
+      "name": "feature_flags",
+      "description": "Feature flags keyed by name",
+      "structure": "keyed",
+      "profile": "records",
+      "file": "feature_flags.json"
+    },
+    {
+      "name": "deep_config",
+      "description": "Deeply nested application configuration",
+      "structure": "deeply-nested",
+      "profile": "records",
+      "file": "deep_config.json"
+    },
+    {
+      "name": "sparse_records",
+      "description": "Uniform records with missing values, empty containers and text that looks typed",
+      "structure": "sparse",
+      "profile": "records",
+      "file": "sparse_records.json"
+    },
+    {
+      "name": "doublets",
+      "description": "Doublet links (2-tuples)",
+      "structure": "tuples",
+      "profile": "tuples",
+      "file": "doublets.json"
+    },
+    {
+      "name": "triplets",
+      "description": "Triplet relations (3-tuples)",
+      "structure": "tuples",
+      "profile": "tuples",
+      "file": "triplets.json"
+    },
+    {
+      "name": "sequences",
+      "description": "Sequences of unlimited length (N-tuples)",
+      "structure": "tuples",
+      "profile": "tuples",
+      "file": "sequences.json"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# zizmor configuration
+#
+# `unpinned-uses` defaults to a blanket hash-pin policy. This repository, and
+# the link-foundation pipeline templates it follows, pin actions to release
+# tags instead, so the policy is relaxed to `ref-pin`: a tag or SHA is
+# required, a mutable branch name is not accepted. Dependabot keeps the tags
+# current (see .github/dependabot.yml), which is what mitigated
+# CVE-2025-30066 (tj-actions/changed-files) here.
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        "*": ref-pin

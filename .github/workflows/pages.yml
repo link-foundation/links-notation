@@ -1,20 +1,44 @@
 name: pages
 
-on:
+# workflow_run is safe here: the triggering workflow is restricted to main, so
+# a fork pull request can never fire it, and this workflow checks out only the
+# default branch and never runs code from the triggering run.
+on: # zizmor: ignore[dangerous-triggers]
   push:
     branches: main
     paths:
       - 'docs/**'
       - '.github/workflows/pages.yml'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
+  # csharp/scripts/publish-docs.sh pushes the DocFX site to the gh-pages
+  # branch. Rebuild the Pages artifact when it does, or the API reference
+  # would only reach the site the next time a docs/** file happens to change.
+  workflow_run:
+    workflows: [csharp]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
+    inputs:
+      verbose:
+        description: 'Print extra diagnostics (never secret values)'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
+env:
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+# One deployment at a time, and never cancel one half-way: a cancelled
+# deploy-pages leaves the Pages site pointing at a partially uploaded
+# artifact.
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 defaults:
@@ -24,63 +48,116 @@ defaults:
 jobs:
   findChangedDocsFiles:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       isDocsFilesChanged: ${{ steps.setIsDocsFilesChangedOutput.outputs.isDocsFilesChanged }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           fetch-depth: 0
       - name: Get changed files using defaults
         id: changed-files
         uses: tj-actions/changed-files@v47
       - name: Set output isDocsFilesChanged
         id: setIsDocsFilesChangedOutput
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           isDocsFilesChanged='false'
-          echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
-          for changedFile in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          # workflow_dispatch and workflow_run have no diff to inspect. Without
+          # this the manual trigger this workflow advertises did nothing at
+          # all: every job was gated on a change list that is empty for a
+          # dispatch.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "workflow_run" ]; then
+            isDocsFilesChanged='true'
+          fi
+          echo "Changed files: $ALL_CHANGED_FILES"
+          for changedFile in $ALL_CHANGED_FILES; do
             if [[ $changedFile == docs/* ]] || [[ $changedFile == .github/workflows/pages.yml ]]; then
-              echo "isDocsFilesChanged='true'"
               isDocsFilesChanged='true'
               break
             fi
           done
-          echo "isDocsFilesChanged=${isDocsFilesChanged}" >> $GITHUB_OUTPUT
+          echo "isDocsFilesChanged=${isDocsFilesChanged}" >> "$GITHUB_OUTPUT"
           echo "isDocsFilesChanged: ${isDocsFilesChanged}"
 
   build:
     needs: [findChangedDocsFiles]
     if: ${{ needs.findChangedDocsFiles.outputs.isDocsFilesChanged == 'true' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
+          persist-credentials: false
           submodules: true
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
           cache-dependency-path: docs/website/package-lock.json
       - name: Install dependencies
         run: npm ci
       - name: Build website
         run: npm run build
+      # GitHub Pages serves the artifact uploaded below (the API reports
+      # "build_type": "workflow"), not the gh-pages branch, so the DocFX site
+      # that csharp/scripts/publish-docs.sh pushes to that branch was never
+      # reachable: every /csharp/ URL advertised by the READMEs returned 404.
+      # Overlaying the branch here gives the whole domain a single publisher.
+      - name: Overlay the documentation published to the gh-pages branch
+        working-directory: .
+        run: |
+          set -euo pipefail
+          if ! git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            echo "::warning::No gh-pages branch, publishing the website without the C# API reference"
+            exit 0
+          fi
+          # FETCH_HEAD rather than origin/gh-pages: fetching a single branch
+          # by name is not guaranteed to update the remote-tracking ref.
+          git fetch --depth 1 origin gh-pages
+          rm -rf gh-pages-content
+          mkdir gh-pages-content
+          git archive --format=tar FETCH_HEAD | tar -x -C gh-pages-content
+          # The branch carries a legacy landing page; the website owns the root.
+          rm -f gh-pages-content/index.html
+          cp -r gh-pages-content/. docs/website/dist/
+          rm -rf gh-pages-content
+          if [ ! -f docs/website/dist/csharp/index.html ]; then
+            echo "::warning::The gh-pages branch has no csharp/index.html, so the published site will not include the C# API reference"
+          fi
+          if [ "${CI_VERBOSE}" = "true" ]; then
+            find docs/website/dist -maxdepth 2 -type d -print
+          fi
+
+      # Building on pull requests too means a broken site is caught in review
+      # rather than on main, but only pushes to main upload and deploy.
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v6
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
         with:
           path: docs/website/dist
 
   deploy:
-    needs: [build, findChangedDocsFiles]
-    if: ${{ needs.findChangedDocsFiles.outputs.isDocsFilesChanged == 'true' }}
+    needs: [findChangedDocsFiles, build]
+    if: ${{ needs.findChangedDocsFiles.outputs.isDocsFilesChanged == 'true' && github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Least privilege: only this job needs to write to Pages and mint an OIDC
+    # token; the checkout/build jobs above run with contents: read.
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,258 @@
+name: php
+
+on:
+  push:
+    branches: main
+    paths:
+      - 'php/**'
+      - '.github/workflows/php.yml'
+  pull_request:
+    paths:
+      - 'php/**'
+      - '.github/workflows/php.yml'
+  workflow_dispatch:
+    inputs:
+      verbose:
+        description: 'Print extra diagnostics (never secret values)'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+defaults:
+  run:
+    working-directory: php
+
+jobs:
+  findChangedPhpFiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    outputs:
+      isPhpFilesChanged: ${{ steps.setIsPhpFilesChangedOutput.outputs.isPhpFilesChanged }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+      - name: Set output isPhpFilesChanged
+        id: setIsPhpFilesChangedOutput
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          isPhpFilesChanged='false'
+          # workflow_dispatch has no diff to inspect, so treat it as "changed".
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            isPhpFilesChanged='true'
+          fi
+          echo "Changed files: $ALL_CHANGED_FILES"
+          for changedFile in $ALL_CHANGED_FILES; do
+            if [[ $changedFile == php/* ]] || [[ $changedFile == .github/workflows/php.yml ]]; then
+              isPhpFilesChanged='true'
+              break
+            fi
+          done
+          echo "isPhpFilesChanged=${isPhpFilesChanged}" >> "$GITHUB_OUTPUT"
+          echo "isPhpFilesChanged: ${isPhpFilesChanged}"
+
+  lint:
+    needs: [findChangedPhpFiles]
+    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-lint
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Set up PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring
+          tools: composer:v2
+      - name: Validate composer.json
+        run: composer validate --strict --no-check-version
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+      - name: Check coding standard with PHP_CodeSniffer
+        run: composer run-script lint
+
+  test:
+    needs: [findChangedPhpFiles, lint]
+    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      # The matrix value belongs in the group. Without it all four legs share
+      # one group and cancel each other, so a run reported on one PHP version
+      # while the other three were cancelled before their first step.
+      group: ${{ github.workflow }}-${{ github.ref }}-test-${{ matrix.php-version }}
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.4', '8.5']
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Set up PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring
+          tools: composer:v2
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+      - name: Run tests
+        run: composer run-script test
+
+  publishToPackagist:
+    needs: [findChangedPhpFiles, test]
+    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: ${{ github.workflow }}-publish-packagist
+      cancel-in-progress: false
+    outputs:
+      published: ${{ steps.publish.outputs.published }}
+      version: ${{ steps.version-check.outputs.version }}
+      name: ${{ steps.version-check.outputs.name }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring
+          tools: composer:v2
+      - name: Check if version already published
+        id: version-check
+        run: |
+          set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          PACKAGE_NAME=$(php -r 'echo json_decode(file_get_contents("composer.json"))->name;')
+          PACKAGE_VERSION=$(php -r 'echo json_decode(file_get_contents("composer.json"))->version;')
+          echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
+
+          # Distinguish "package is not on Packagist at all" from "this version
+          # is not there yet". The old check collapsed both into should_publish
+          # and then the update call quietly did nothing.
+          if ! METADATA=$(fetch_registry "https://repo.packagist.org/p2/${PACKAGE_NAME}.json"); then
+            echo "package_known=false" >> "$GITHUB_OUTPUT"
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "package_known=true" >> "$GITHUB_OUTPUT"
+
+          if printf '%s' "$METADATA" | grep -q "\"version\":\"${PACKAGE_VERSION}\""; then
+            echo "Version $PACKAGE_VERSION already exists on Packagist"
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Version $PACKAGE_VERSION does not exist on Packagist"
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Notify Packagist about the new version
+        id: publish
+        env:
+          PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
+          PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+          REPOSITORY_URL: https://github.com/${{ github.repository }}
+          PACKAGE_NAME: ${{ steps.version-check.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+        run: |
+          set -euo pipefail
+          if [ "${{ steps.version-check.outputs.should_publish }}" != "true" ]; then
+            echo "published=skipped" >> "$GITHUB_OUTPUT"
+            echo "::notice::Version ${PACKAGE_VERSION} is already on Packagist, nothing to publish"
+            exit 0
+          fi
+
+          # Packagist has no OIDC trusted publishing and it builds the package
+          # straight from this repository, so "publishing" is asking it to
+          # re-read the repository. That only works once the package has been
+          # submitted at https://packagist.org/packages/submit.
+          if [ "${{ steps.version-check.outputs.package_known }}" != "true" ]; then
+            echo "published=failed" >> "$GITHUB_OUTPUT"
+            echo "::warning::${PACKAGE_NAME} is not registered on Packagist (repo.packagist.org returns 404). Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created."
+            exit 0
+          fi
+
+          if [ -z "$PACKAGIST_TOKEN" ] || [ -z "$PACKAGIST_USERNAME" ]; then
+            echo "published=failed" >> "$GITHUB_OUTPUT"
+            echo "::warning::PACKAGIST_USERNAME/PACKAGIST_TOKEN are not configured; skipping the Packagist update. No PHP release will be created."
+            exit 0
+          fi
+          echo "Packagist credentials: present"
+
+          curl -fsS -XPOST -H'content-type:application/json' \
+            "https://packagist.org/api/update-package?username=${PACKAGIST_USERNAME}&apiToken=${PACKAGIST_TOKEN}" \
+            -d"{\"repository\":{\"url\":\"${REPOSITORY_URL}\"}}"
+          echo "published=true" >> "$GITHUB_OUTPUT"
+      - name: Verify the version is really on Packagist
+        if: steps.publish.outputs.published == 'true'
+        env:
+          PACKAGE_NAME: ${{ steps.version-check.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+        run: |
+          set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          # Packagist crawls asynchronously after the update call returns 202,
+          # and serves every version from one document, so match the body.
+          wait_for_registry_match \
+            "${PACKAGE_NAME}@${PACKAGE_VERSION} on Packagist" \
+            "https://repo.packagist.org/p2/${PACKAGE_NAME}.json" \
+            "\"version\":\"${PACKAGE_VERSION}\"" 20 30
+
+  publishRelease:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [findChangedPhpFiles, publishToPackagist]
+    # See csharp.yml: gate on what was published, not on the job result.
+    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' && needs.publishToPackagist.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE_NAME: ${{ needs.publishToPackagist.outputs.name }}
+          PACKAGE_VERSION: ${{ needs.publishToPackagist.outputs.version }}
+        run: |
+          set -euo pipefail
+          TAG="php_${PACKAGE_VERSION}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists"
+            exit 0
+          fi
+          gh release create "$TAG" \
+            --title "[PHP] $PACKAGE_VERSION" \
+            --notes "https://packagist.org/packages/$PACKAGE_NAME"

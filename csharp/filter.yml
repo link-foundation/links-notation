@@ -1,0 +1,4 @@
+apiRules:
+  # Tests are not part of the published API surface.
+  - exclude:
+      uidRegex: (Tests|Benchmarks)(\.[A-Za-z]+)?$

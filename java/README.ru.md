@@ -12,7 +12,7 @@ Java-реализация парсера Links Notation.
 <dependency>
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.1.0</version>
+    <version>0.19.0</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ Java-реализация парсера Links Notation.
 Добавьте зависимость в ваш `build.gradle`:
 
 ```groovy
-implementation 'io.github.link-foundation:links-notation:0.1.0'
+implementation 'io.github.link-foundation:links-notation:0.19.0'
 ```
 
 ### Локальная разработка
@@ -178,6 +178,65 @@ parent
 (3: papa loves mama)
 ```
 
+### Многострочные группы
+
+Скобочная группа открывает *вложенный контекст*: её тело начинается заново с
+нулевого уровня отступа и подчиняется тем же правилам, что и корень документа,
+поэтому перенос строки внутри скобок — это структура, а не оформление.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+Документ выше разбирается в `(value ((id 1) (label one)))` — два потомка,
+каждый из которых сам является связью, — а не в один плоский список, в котором
+граница между `id` и `label` была бы потеряна. Тело, умещающееся в одну строку,
+по-прежнему сворачивается в одну связь, так что `(a b c)` не меняется.
+
+```java
+String input = """
+    value (
+      id "1"
+      label "one"
+    )
+    """;
+
+List<Link> links = new Parser().parse(input);
+System.out.println(links.get(0).format(false)); // (value ((id 1) (label one)))
+```
+
+### Комментарии
+
+`#` скрывает остаток строки, на которой стоит, поэтому документ может нести
+пояснения о самом себе:
+
+```lino
+# машины, на которые идёт выкладка
+deploy: staging # пока только staging
+```
+
+К моменту чтения документа обоих комментариев уже нет, остаётся одна связь
+`(deploy: staging)`. `#` открывает комментарий только там, где могла бы
+начаться ссылка, поэтому `#` внутри токена (`issue#1047`) и `#` внутри ссылки
+в кавычках (`"#"`) остаются обычными символами.
+
+Форматтер соблюдает то же правило с другой стороны: ссылка, начинающаяся с `#`,
+записывается в кавычках (`'#tag'`), поэтому написанный им документ читается
+обратно как он сам.
+
+Комментарии включены по умолчанию, а парсеру можно велеть снова читать `#` как
+обычный символ - для документов, написанных до появления комментариев:
+
+```java
+String document = "# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n";
+System.out.println(new Parser().parse(document).get(0).format(false)); // (deploy: staging)
+
+System.out.println(new Parser(false).parse("# a b\n").get(0).format(false)); // (# a b)
+```
+
 ## Справочник API
 
 ### Классы
@@ -188,6 +247,9 @@ parent
 
 - `Parser()` - Создать парсер с настройками по умолчанию
 - `Parser(int maxInputSize, int maxDepth)` - Создать парсер с пользовательскими лимитами
+- `Parser(boolean comments)` - Создать парсер, читающий `#` как обычный символ,
+  если `comments` равно `false`
+- `Parser(int maxInputSize, int maxDepth, boolean comments)` - Создать парсер и с тем, и с другим
 - `parse(String input)` - Распарсить строку Lino и вернуть связи
 
 #### `Link`
@@ -246,12 +308,11 @@ mvn spotless:check
 
 ## Требования
 
-- Java 11 или выше
+- Java 21 или выше
 - Maven 3.6+
 
 ## Информация о пакете
 
 - Group ID: `io.github.link-foundation`
 - Artifact ID: `links-notation`
-- Версия: 0.1.0
-- Лицензия: Unlicense
+- Лицензия: Unlicense (см. [LICENSE](../LICENSE))

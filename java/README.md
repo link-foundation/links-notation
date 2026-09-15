@@ -12,7 +12,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.1.0</version>
+    <version>0.19.0</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ Add the dependency to your `pom.xml`:
 Add the dependency to your `build.gradle`:
 
 ```groovy
-implementation 'io.github.link-foundation:links-notation:0.1.0'
+implementation 'io.github.link-foundation:links-notation:0.19.0'
 ```
 
 ### Local Development Setup
@@ -178,6 +178,65 @@ This is equivalent to:
 (3: papa loves mama)
 ```
 
+### Multi-line Groups
+
+A parenthesized group opens a *nested context*: its body starts fresh at
+indentation level zero and follows the same rules as the root document, so a
+line break inside parentheses is structure rather than decoration.
+
+```lino
+value (
+  id "1"
+  label "one"
+)
+```
+
+The document above parses to `(value ((id 1) (label one)))` - two children, each
+a link of its own - rather than to one flat list in which the boundary between
+`id` and `label` would be lost. A body that stays on a single line still
+collapses to a single link, so `(a b c)` is unchanged.
+
+```java
+String input = """
+    value (
+      id "1"
+      label "one"
+    )
+    """;
+
+List<Link> links = new Parser().parse(input);
+System.out.println(links.get(0).format(false)); // (value ((id 1) (label one)))
+```
+
+### Comments
+
+A `#` hides the rest of the line it stands on, so a document can carry prose
+about itself:
+
+```lino
+# the machines this deploys to
+deploy: staging # only staging, for now
+```
+
+Both comments are gone by the time the document is read, leaving the single
+link `(deploy: staging)`. A `#` only opens a comment where a reference could
+begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
+reference (`"#"`) stay ordinary characters.
+
+A formatter keeps the same rule from the other side: a reference that begins
+with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
+itself.
+
+Comments are on by default, and a parser can be told to read `#` as an ordinary
+character again, for documents written before comments existed:
+
+```java
+String document = "# the machines this deploys to\ndeploy: staging # only staging, for now\n";
+System.out.println(new Parser().parse(document).get(0).format(false)); // (deploy: staging)
+
+System.out.println(new Parser(false).parse("# a b\n").get(0).format(false)); // (# a b)
+```
+
 ## API Reference
 
 ### Classes
@@ -188,6 +247,9 @@ Main parser class for converting strings to links.
 
 - `Parser()` - Create a new parser with default options
 - `Parser(int maxInputSize, int maxDepth)` - Create a parser with custom limits
+- `Parser(boolean comments)` - Create a parser that reads `#` as an ordinary
+  character when `comments` is `false`
+- `Parser(int maxInputSize, int maxDepth, boolean comments)` - Create a parser with both
 - `parse(String input)` - Parse a Lino string and return links
 
 #### `Link`
@@ -246,12 +308,11 @@ mvn spotless:check
 
 ## Requirements
 
-- Java 11 or higher
+- Java 21 or higher
 - Maven 3.6+
 
 ## Package Information
 
 - Group ID: `io.github.link-foundation`
 - Artifact ID: `links-notation`
-- Version: 0.1.0
-- License: Unlicense
+- License: Unlicense (see [LICENSE](../LICENSE))
