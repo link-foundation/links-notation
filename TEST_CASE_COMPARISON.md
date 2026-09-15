@@ -18,13 +18,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 215 | 17 |
-| JavaScript | 237 | 18 |
-| Rust | 322 | 20 |
-| C# | 229 | 19 |
-| Go | 107 | 11 |
-| Java | 154 | 10 |
-| PHP | 204 | 17 |
+| Python | 221 | 18 |
+| JavaScript | 250 | 19 |
+| Rust | 328 | 21 |
+| C# | 236 | 20 |
+| Go | 114 | 12 |
+| Java | 160 | 11 |
+| PHP | 210 | 18 |
 
 ---
 
@@ -582,6 +582,28 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 **Category totals:** Python: 38, JavaScript: 38, Rust: 38, C#: 39, Go: 16, Java: 33, PHP: 26
 
+## Stream Parser
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
+|-----------|---|---|---|---|---|---|---|
+| accepts a final record without a newline | ❌ | [✅](js/tests/StreamParser.test.js#L79) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| can avoid retaining output for bounded memory event processing | ❌ | [✅](js/tests/StreamParser.test.js#L101) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| does not split multiline quotes or parenthesized contexts | ❌ | [✅](js/tests/StreamParser.test.js#L68) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| emits a record as soon as the next top level record starts | ❌ | [✅](js/tests/StreamParser.test.js#L44) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| emits only complete records | [✅](python/tests/test_stream_parser.py#L30) | [✅](js/tests/StreamParser.test.js#L54) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L26) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L36) | [✅](go/stream_parser_test.go#L39) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L37) | [✅](php/tests/StreamParserTest.php#L40) |
+| limits only the unresolved record, not total stream size | ❌ | [✅](js/tests/StreamParser.test.js#L141) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| matches canonical parser one symbol at a time | [✅](python/tests/test_stream_parser.py#L22) | [✅](js/tests/StreamParser.test.js#L22) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L13) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L24) | [✅](go/stream_parser_test.go#L19) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L29) | [✅](php/tests/StreamParserTest.php#L30) |
+| provides an async enumerable adapter | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L97) | ❌ | ❌ | ❌ |
+| provides lazy adapters | [✅](python/tests/test_stream_parser.py#L66) | [✅](js/tests/StreamParser.test.js#L125) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L78) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L80) | [✅](go/stream_parser_test.go#L103) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L76) | [✅](php/tests/StreamParserTest.php#L87) |
+| rejects writes after finish | [✅](python/tests/test_stream_parser.py#L79) | [✅](js/tests/StreamParser.test.js#L148) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L87) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L88) | [✅](go/stream_parser_test.go#L147) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L86) | [✅](php/tests/StreamParserTest.php#L94) |
+| reports positions relative to the whole stream | ❌ | [✅](js/tests/StreamParser.test.js#L85) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| stream parser preserves indented and multiline records | ❌ | ❌ | ❌ | ❌ | [✅](go/stream_parser_test.go#L56) | ❌ | ❌ |
+| supports drain reset and bounded memory | [✅](python/tests/test_stream_parser.py#L51) | [✅](js/tests/StreamParser.test.js#L111) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L58) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L64) | [✅](go/stream_parser_test.go#L75) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L61) | [✅](php/tests/StreamParserTest.php#L66) |
+| supports line chunks final record and position | [✅](python/tests/test_stream_parser.py#L41) | [✅](js/tests/StreamParser.test.js#L31) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L43) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L50) | [✅](go/stream_parser_test.go#L123) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L49) | [✅](php/tests/StreamParserTest.php#L54) |
+| tracks the absolute stream position | ❌ | [✅](js/tests/StreamParser.test.js#L155) | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+**Category totals:** Python: 6, JavaScript: 13, Rust: 6, C#: 7, Go: 7, Java: 6, PHP: 6
+
 ## Tuple
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
@@ -868,6 +890,17 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singlelinewithidfield
 - valuesonlyinparentheses
 
+**Stream Parser** (9 missing):
+- acceptsafinalrecordwithoutanewline
+- canavoidretainingoutputforboundedmemoryeventprocessing
+- doesnotsplitmultilinequotesorparenthesizedcontexts
+- emitsarecordassoonasthenexttoplevelrecordstarts
+- limitsonlytheunresolvedrecord,nottotalstreamsize
+- providesanasyncenumerableadapter
+- reportspositionsrelativetothewholestream
+- streamparserpreservesindentedandmultilinerecords
+- trackstheabsolutestreamposition
+
 **Tuple** (49 missing):
 - anonymouslinkfromthreelino
 - anonymouslinkfromtwolino
@@ -919,7 +952,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 241 tests**
+**Total missing: 250 tests**
 
 ### JavaScript Missing Tests
 
@@ -1124,6 +1157,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singlelinewithidfield
 - valuesonlyinparentheses
 
+**Stream Parser** (2 missing):
+- providesanasyncenumerableadapter
+- streamparserpreservesindentedandmultilinerecords
+
 **Tuple** (49 missing):
 - anonymouslinkfromthreelino
 - anonymouslinkfromtwolino
@@ -1175,7 +1212,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 220 tests**
+**Total missing: 222 tests**
 
 ### Rust Missing Tests
 
@@ -1336,11 +1373,22 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singlelinewithidfield
 - valuesonlyinparentheses
 
+**Stream Parser** (9 missing):
+- acceptsafinalrecordwithoutanewline
+- canavoidretainingoutputforboundedmemoryeventprocessing
+- doesnotsplitmultilinequotesorparenthesizedcontexts
+- emitsarecordassoonasthenexttoplevelrecordstarts
+- limitsonlytheunresolvedrecord,nottotalstreamsize
+- providesanasyncenumerableadapter
+- reportspositionsrelativetothewholestream
+- streamparserpreservesindentedandmultilinerecords
+- trackstheabsolutestreamposition
+
 **Tuple** (2 missing):
 - namedtupletolink
 - tupletolink
 
-**Total missing: 135 tests**
+**Total missing: 144 tests**
 
 ### C# Missing Tests
 
@@ -1556,6 +1604,16 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - quotedreferencesinlink
 - singlelinewithidfield
 
+**Stream Parser** (8 missing):
+- acceptsafinalrecordwithoutanewline
+- canavoidretainingoutputforboundedmemoryeventprocessing
+- doesnotsplitmultilinequotesorparenthesizedcontexts
+- emitsarecordassoonasthenexttoplevelrecordstarts
+- limitsonlytheunresolvedrecord,nottotalstreamsize
+- reportspositionsrelativetothewholestream
+- streamparserpreservesindentedandmultilinerecords
+- trackstheabsolutestreamposition
+
 **Tuple** (47 missing):
 - anonymouslinkfromthreelino
 - anonymouslinkfromtwolino
@@ -1605,7 +1663,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 227 tests**
+**Total missing: 235 tests**
 
 ### Go Missing Tests
 
@@ -1945,6 +2003,16 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - valuelinkparser
 - valuesonlyinparentheses
 
+**Stream Parser** (8 missing):
+- acceptsafinalrecordwithoutanewline
+- canavoidretainingoutputforboundedmemoryeventprocessing
+- doesnotsplitmultilinequotesorparenthesizedcontexts
+- emitsarecordassoonasthenexttoplevelrecordstarts
+- limitsonlytheunresolvedrecord,nottotalstreamsize
+- providesanasyncenumerableadapter
+- reportspositionsrelativetothewholestream
+- trackstheabsolutestreamposition
+
 **Tuple** (49 missing):
 - anonymouslinkfromthreelino
 - anonymouslinkfromtwolino
@@ -1996,7 +2064,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 345 tests**
+**Total missing: 353 tests**
 
 ### Java Missing Tests
 
@@ -2293,6 +2361,17 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singlelinelinkwithid
 - valuesonlyinparentheses
 
+**Stream Parser** (9 missing):
+- acceptsafinalrecordwithoutanewline
+- canavoidretainingoutputforboundedmemoryeventprocessing
+- doesnotsplitmultilinequotesorparenthesizedcontexts
+- emitsarecordassoonasthenexttoplevelrecordstarts
+- limitsonlytheunresolvedrecord,nottotalstreamsize
+- providesanasyncenumerableadapter
+- reportspositionsrelativetothewholestream
+- streamparserpreservesindentedandmultilinerecords
+- trackstheabsolutestreamposition
+
 **Tuple** (49 missing):
 - anonymouslinkfromthreelino
 - anonymouslinkfromtwolino
@@ -2344,7 +2423,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 302 tests**
+**Total missing: 311 tests**
 
 ### PHP Missing Tests
 
@@ -2583,6 +2662,17 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singletlinkparser
 - valuesonlyinparentheses
 
+**Stream Parser** (9 missing):
+- acceptsafinalrecordwithoutanewline
+- canavoidretainingoutputforboundedmemoryeventprocessing
+- doesnotsplitmultilinequotesorparenthesizedcontexts
+- emitsarecordassoonasthenexttoplevelrecordstarts
+- limitsonlytheunresolvedrecord,nottotalstreamsize
+- providesanasyncenumerableadapter
+- reportspositionsrelativetothewholestream
+- streamparserpreservesindentedandmultilinerecords
+- trackstheabsolutestreamposition
+
 **Tuple** (49 missing):
 - anonymouslinkfromthreelino
 - anonymouslinkfromtwolino
@@ -2634,5 +2724,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 252 tests**
+**Total missing: 261 tests**
 

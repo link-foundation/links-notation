@@ -160,6 +160,82 @@ export class Parser {
   parse(input: string): Link[];
 }
 
+/** Options for incremental parsing. */
+export interface StreamParserOptions extends ParserOptions {
+  /** Canonical parser instance to use for completed records. */
+  parser?: Parser;
+
+  /** Largest unresolved record retained in memory (default: 10MB). */
+  maxBufferSize?: number;
+
+  /** Retain emitted links for end() and drain() (default: true). */
+  collect?: boolean;
+}
+
+/** Position immediately after the last character written. */
+export interface StreamPosition {
+  offset: number;
+  line: number;
+  column: number;
+  buffered: number;
+}
+
+/** Canonical parse error translated to coordinates in the complete stream. */
+export class StreamParseError extends Error {
+  cause: Error;
+  offset: number;
+  line: number;
+  column: number;
+  found: string | null;
+  lineText: string;
+  snippet: string;
+}
+
+/** Incrementally emits complete top-level Links Notation records. */
+export class StreamParser {
+  parser: Parser;
+  comments: boolean;
+  maxBufferSize: number;
+  collect: boolean;
+
+  constructor(options?: StreamParserOptions);
+
+  /** Feed a chunk and return links made complete by it. */
+  write(chunk: string): Link[];
+
+  /** Finish the stream, optionally after consuming one final chunk. */
+  end(chunk?: string): Link[];
+
+  /** Return and forget retained links. */
+  drain(): Link[];
+
+  /** Reuse this parser while preserving its options and listeners. */
+  reset(): this;
+
+  /** Return the absolute stream position and unresolved buffer size. */
+  position(): StreamPosition;
+
+  on(event: 'link', listener: (link: Link) => void): this;
+  on(event: 'end', listener: (links: Link[]) => void): this;
+  on(event: 'error', listener: (error: Error) => void): this;
+  once(event: 'link', listener: (link: Link) => void): this;
+  once(event: 'end', listener: (links: Link[]) => void): this;
+  once(event: 'error', listener: (error: Error) => void): this;
+  off(event: string, listener: (...arguments_: any[]) => void): this;
+
+  /** Lazily parse a synchronous iterable of chunks. */
+  static parse(
+    chunks: Iterable<string>,
+    options?: StreamParserOptions
+  ): IterableIterator<Link>;
+
+  /** Lazily parse an asynchronous iterable of chunks. */
+  static parseAsync(
+    chunks: AsyncIterable<string> | Iterable<string>,
+    options?: StreamParserOptions
+  ): AsyncIterableIterator<Link>;
+}
+
 /**
  * Blank out every comment in a document, keeping its length so that every
  * character stays at the offset it was written at.

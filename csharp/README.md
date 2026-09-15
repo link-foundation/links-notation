@@ -101,6 +101,21 @@ var numericLinks = parser.Parse("(1: 2 3)");
 var customParser = new Parser<Guid>();
 ```
 
+### Streaming Parsing
+
+`StreamParser` accepts arbitrary chunks and raises `LinkParsed` only for
+complete top-level records. Disable collection for bounded-memory event use.
+
+```csharp
+var stream = new StreamParser { Collect = false };
+stream.LinkParsed += Console.WriteLine;
+stream.Write("profile:\n  name Ada\n");
+stream.Finish("next link");
+```
+
+`ParseChunks` and `ParseChunksAsync` expose native enumerable adapters. The
+parser also provides `Position`, `Drain`, `Reset`, and `MaxBufferSize`.
+
 ## Syntax Examples
 
 ### Doublets (2-tuple)

@@ -145,6 +145,26 @@ let quoted = r#"("идентификатор с пробелами": "значе
 let parsed = parse_lino(quoted)?;
 ```
 
+### Потоковый разбор
+
+`StreamParser` принимает произвольные порции и вызывает callback-и только для
+завершённых связей верхнего уровня. Отключите накопление для обработки с
+ограниченной памятью.
+
+```rust
+use links_notation::StreamParser;
+
+let mut stream = StreamParser::new();
+stream.set_collect(false).on_link(|link| println!("{link}"));
+stream.write("профиль:\n  имя Ада\n")?;
+stream.write("следующая связь")?;
+stream.finish()?;
+```
+
+`StreamParser::parse_chunks(chunks)` возвращает ленивый `Iterator`. Также
+доступны позиция, drain, reset и ограничение буфера. См.
+[исполняемый пример](examples/streaming_parser.rs).
+
 ## Примеры синтаксиса
 
 ### Дуплеты (2-кортежи)

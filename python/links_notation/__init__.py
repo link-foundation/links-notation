@@ -15,6 +15,7 @@ from .format_config import FormatConfig
 from .formatter import format_links
 from .link import Link
 from .parser import Parser
+from .stream_parser import StreamParseError, StreamParser, StreamPosition, parse_async_chunks, parse_chunks
 
 
 def _read_version() -> str:
@@ -45,4 +46,16 @@ def _read_version() -> str:
 
 __version__ = _read_version()
 
-__all__ = ["Link", "Parser", "format_links", "FormatConfig", "strip_comments", "__version__"]
+__all__ = [
+    "Link",
+    "Parser",
+    "StreamParseError",
+    "StreamParser",
+    "StreamPosition",
+    "format_links",
+    "parse_async_chunks",
+    "parse_chunks",
+    "FormatConfig",
+    "strip_comments",
+    "__version__",
+]

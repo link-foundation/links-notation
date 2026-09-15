@@ -12,7 +12,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.19.0</version>
+    <version>0.20.0</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ Add the dependency to your `pom.xml`:
 Add the dependency to your `build.gradle`:
 
 ```groovy
-implementation 'io.github.link-foundation:links-notation:0.19.0'
+implementation 'io.github.link-foundation:links-notation:0.20.0'
 ```
 
 ### Local Development Setup
@@ -125,6 +125,22 @@ List<Link> parsed = parser.parse(input);
 LinksGroup group = new LinksGroup(parsed);
 System.out.println(group.format());
 ```
+
+### Streaming Parsing
+
+`StreamParser` accepts arbitrary chunks and calls a `Consumer<Link>` only for
+complete top-level records. Disable collection for bounded-memory processing.
+
+```java
+StreamParser stream = new StreamParser()
+    .collect(false)
+    .onLink(System.out::println);
+stream.write("profile:\n  name Ada\n");
+stream.finish("next link");
+```
+
+`StreamParser.parseChunks(chunks)` supplies a lazy `Stream<Link>`. Position,
+drain, reset, and maximum-buffer controls are available on the parser itself.
 
 ## Syntax Examples
 

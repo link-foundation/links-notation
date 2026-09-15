@@ -2,11 +2,15 @@ pub mod comments;
 pub mod format_config;
 pub mod parser;
 pub mod parser_config;
+pub mod stream_parser;
 
 use comments::strip_comments;
 use format_config::FormatConfig;
 pub use parser_config::ParserConfig;
 use std::borrow::Cow;
+pub use stream_parser::{
+    ErrorLocation, StreamIterator, StreamParseError, StreamParser, StreamPosition,
+};
 
 // Re-export the lino! macro when the macro feature is enabled
 #[cfg(feature = "macro")]

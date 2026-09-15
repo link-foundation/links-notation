@@ -44,7 +44,7 @@ class Link {
     }
     const hasSingleQuote = reference.includes("'");
     const hasDoubleQuote = reference.includes('"');
-    const needsQuoting = reference.includes(":") || reference.includes("(") || reference.includes(")") || reference.includes(" ") || reference.includes("\t") || reference.includes(`
+    const needsQuoting = reference.startsWith("#") || reference.includes(":") || reference.includes("(") || reference.includes(")") || reference.includes(" ") || reference.includes("\t") || reference.includes(`
 `) || reference.includes("\r") || hasDoubleQuote || hasSingleQuote;
     if (hasSingleQuote && hasDoubleQuote) {
       return `'${reference.replace(/'/g, "\\'")}'`;
@@ -149,13 +149,13 @@ class Link {
     if (options.shouldIndentByRefCount(this.values.length)) {
       shouldIndent = true;
     } else {
-      const valuesStr2 = this.values.map((v) => this.formatValue(v)).join(" ");
+      const valuesStr = this.values.map((v) => this.formatValue(v)).join(" ");
       let testLine;
       if (this.id !== null) {
-        const idStr2 = Link.escapeReference(this.id);
-        testLine = options.lessParentheses ? `${idStr2}: ${valuesStr2}` : `(${idStr2}: ${valuesStr2})`;
+        const idStr = Link.escapeReference(this.id);
+        testLine = options.lessParentheses ? `${idStr}: ${valuesStr}` : `(${idStr}: ${valuesStr})`;
       } else {
-        testLine = options.lessParentheses ? valuesStr2 : `(${valuesStr2})`;
+        testLine = options.lessParentheses ? valuesStr : `(${valuesStr})`;
       }
       if (options.shouldIndentByLength(testLine)) {
         shouldIndent = true;
@@ -181,8 +181,8 @@ class Link {
   }
   _formatIndented(options) {
     if (this.id === null) {
-      const lines2 = this.values.map((v) => options.indentString + this.formatValue(v));
-      return lines2.join(`
+      const lines = this.values.map((v) => options.indentString + this.formatValue(v));
+      return lines.join(`
 `);
     }
     const idStr = Link.escapeReference(this.id);
@@ -354,19 +354,19 @@ function follows(document, position, allowed) {
   return position === 0 || allowed.includes(document[position - 1]);
 }
 function quotedReferenceEnd(document, start) {
-  const quote2 = document[start];
-  if (!QUOTES.includes(quote2)) {
+  const quote = document[start];
+  if (!QUOTES.includes(quote)) {
     return null;
   }
   let position = start;
-  while (position < document.length && document[position] === quote2) {
+  while (position < document.length && document[position] === quote) {
     position++;
   }
   const count = position - start;
   const isEvenRun = count % 2 === 0;
   const emptyReference = isEvenRun ? start + count : null;
-  const closing = quote2.repeat(count);
-  const escape = quote2.repeat(count * 2);
+  const closing = quote.repeat(count);
+  const escape = quote.repeat(count * 2);
   let content = "";
   while (position < document.length) {
     if (document.startsWith(escape, position)) {
@@ -376,7 +376,7 @@ function quotedReferenceEnd(document, start) {
     }
     if (document.startsWith(closing, position)) {
       const afterClosing = position + count;
-      if (afterClosing >= document.length || document[afterClosing] !== quote2) {
+      if (afterClosing >= document.length || document[afterClosing] !== quote) {
         if (isEvenRun && !isSubstantiveBody(content)) {
           return emptyReference;
         }
@@ -420,7 +420,7 @@ class peg$SyntaxError extends SyntaxError {
     let str = "Error: " + this.message;
     if (this.location) {
       let src = null;
-      const st = sources.find((s2) => s2.source === this.location.source);
+      const st = sources.find((s) => s.source === this.location.source);
       if (st) {
         src = st.text.split(/\r\n|\n|\r/g);
       }
@@ -483,8 +483,8 @@ class peg$SyntaxError extends SyntaxError {
     function describeExpectation(expectation) {
       return DESCRIBE_EXPECTATION_FNS[expectation.type](expectation);
     }
-    function describeExpected(expected2) {
-      const descriptions = expected2.map(describeExpectation);
+    function describeExpected(expected) {
+      const descriptions = expected.map(describeExpectation);
       descriptions.sort();
       if (descriptions.length > 0) {
         let j = 1;
@@ -505,8 +505,8 @@ class peg$SyntaxError extends SyntaxError {
           return descriptions.slice(0, -1).join(", ") + ", or " + descriptions[descriptions.length - 1];
       }
     }
-    function describeFound(found2) {
-      return found2 ? '"' + literalEscape(found2) + '"' : "end of input";
+    function describeFound(found) {
+      return found ? '"' + literalEscape(found) + '"' : "end of input";
     }
     return "Expected " + describeExpected(expected) + " but " + describeFound(found) + " found.";
   }
@@ -735,13 +735,13 @@ function peg$parse(input, options) {
   function location() {
     return peg$computeLocation(peg$savedPos, peg$currPos);
   }
-  function expected(description, location2) {
-    location2 = location2 !== undefined ? location2 : peg$computeLocation(peg$savedPos, peg$currPos);
-    throw peg$buildStructuredError([peg$otherExpectation(description)], input.substring(peg$savedPos, peg$currPos), location2);
+  function expected(description, location) {
+    location = location !== undefined ? location : peg$computeLocation(peg$savedPos, peg$currPos);
+    throw peg$buildStructuredError([peg$otherExpectation(description)], input.substring(peg$savedPos, peg$currPos), location);
   }
-  function error(message, location2) {
-    location2 = location2 !== undefined ? location2 : peg$computeLocation(peg$savedPos, peg$currPos);
-    throw peg$buildSimpleError(message, location2);
+  function error(message, location) {
+    location = location !== undefined ? location : peg$computeLocation(peg$savedPos, peg$currPos);
+    throw peg$buildSimpleError(message, location);
   }
   function peg$getUnicode(pos = peg$currPos) {
     const cp = input.codePointAt(pos);
@@ -750,8 +750,8 @@ function peg$parse(input, options) {
     }
     return String.fromCodePoint(cp);
   }
-  function peg$literalExpectation(text2, ignoreCase) {
-    return { type: "literal", text: text2, ignoreCase };
+  function peg$literalExpectation(text, ignoreCase) {
+    return { type: "literal", text, ignoreCase };
   }
   function peg$classExpectation(parts, inverted, ignoreCase, unicode) {
     return { type: "class", parts, inverted, ignoreCase, unicode };
@@ -795,7 +795,7 @@ function peg$parse(input, options) {
       return details;
     }
   }
-  function peg$computeLocation(startPos, endPos, offset2) {
+  function peg$computeLocation(startPos, endPos, offset) {
     const startPosDetails = peg$computePosDetails(startPos);
     const endPosDetails = peg$computePosDetails(endPos);
     const res = {
@@ -811,13 +811,13 @@ function peg$parse(input, options) {
         column: endPosDetails.column
       }
     };
-    if (offset2 && peg$source && typeof peg$source.offset === "function") {
+    if (offset && peg$source && typeof peg$source.offset === "function") {
       res.start = peg$source.offset(res.start);
       res.end = peg$source.offset(res.end);
     }
     return res;
   }
-  function peg$fail(expected2) {
+  function peg$fail(expected) {
     if (peg$currPos < peg$maxFailPos) {
       return;
     }
@@ -825,13 +825,13 @@ function peg$parse(input, options) {
       peg$maxFailPos = peg$currPos;
       peg$maxFailExpected = [];
     }
-    peg$maxFailExpected.push(expected2);
+    peg$maxFailExpected.push(expected);
   }
-  function peg$buildSimpleError(message, location2) {
-    return new peg$SyntaxError(message, null, null, location2);
+  function peg$buildSimpleError(message, location) {
+    return new peg$SyntaxError(message, null, null, location);
   }
-  function peg$buildStructuredError(expected2, found, location2) {
-    return new peg$SyntaxError(peg$SyntaxError.buildMessage(expected2, found), expected2, found, location2);
+  function peg$buildStructuredError(expected, found, location) {
+    return new peg$SyntaxError(peg$SyntaxError.buildMessage(expected, found), expected, found, location);
   }
   function peg$parsedocument() {
     let s0, s1, s2, s3, s4, s5;
@@ -2208,7 +2208,7 @@ function peg$parse(input, options) {
   function getCurrentIndentation() {
     return indentationStack[indentationStack.length - 1];
   }
-  function isSubstantiveBody2(content) {
+  function isSubstantiveBody(content) {
     let depth = 0;
     let hasVisible = false;
     for (const c of content) {
@@ -2250,7 +2250,7 @@ function peg$parse(input, options) {
       if (inputStr.substr(pos, quoteCount) === closeSeq) {
         const afterClose = pos + quoteCount;
         if (afterClose >= inputStr.length || inputStr[afterClose] !== quoteChar) {
-          if (isEvenRun && !isSubstantiveBody2(content)) {
+          if (isEvenRun && !isSubstantiveBody(content)) {
             return emptyReference;
           }
           return {
@@ -2375,9 +2375,9 @@ class Parser {
     if (pathElements.length === 0)
       return current;
     if (pathElements.length === 1) {
-      const combined2 = new Link(null, [pathElements[0], current]);
-      combined2._isFromPathCombination = true;
-      return combined2;
+      const combined = new Link(null, [pathElements[0], current]);
+      combined._isFromPathCombination = true;
+      return combined;
     }
     const parentPath = pathElements.slice(0, -1);
     const lastElement = pathElements[pathElements.length - 1];
@@ -2419,6 +2419,222 @@ class Parser {
     return new Link(item.id ?? null, []);
   }
 }
+// src/StreamParser.js
+import { EventEmitter } from "events";
+var DEFAULT_MAX_BUFFER_SIZE = 10 * 1024 * 1024;
+
+class StreamParseError extends Error {
+  constructor(error, startOffset, startLine) {
+    const localOffset = error?.offset ?? 0;
+    const localLine = error?.line ?? 1;
+    const column = error?.column ?? 1;
+    const line = startLine + localLine - 1;
+    super(`Stream parse error at line ${line}, column ${column}: ${error.message}`);
+    this.name = "StreamParseError";
+    this.cause = error;
+    this.offset = startOffset + localOffset;
+    this.line = line;
+    this.column = column;
+    this.found = error?.found ?? null;
+    this.lineText = error?.lineText ?? "";
+    this.snippet = error?.snippet ?? "";
+  }
+}
+
+class StreamParser extends EventEmitter {
+  constructor(options = {}) {
+    super();
+    this.parser = options.parser ?? new Parser(options);
+    this.comments = options.comments ?? this.parser.comments ?? true;
+    this.maxBufferSize = options.maxBufferSize ?? options.maxInputSize ?? DEFAULT_MAX_BUFFER_SIZE;
+    this.collect = options.collect ?? true;
+    this.reset();
+  }
+  write(chunk) {
+    if (typeof chunk !== "string") {
+      return this._fail(new TypeError("Input must be a string"));
+    }
+    if (this.ended) {
+      return this._fail(new Error("Cannot write after end()"));
+    }
+    const emitted = [];
+    for (let index = 0;index < chunk.length; index++) {
+      const character = chunk[index];
+      this.currentLine += character;
+      this.offset += 1;
+      if (character === `
+`) {
+        this.buffer += this.currentLine;
+        this.currentLine = "";
+        this.lineClassified = false;
+        this.line += 1;
+        this.column = 1;
+      } else {
+        if (!this.lineClassified && character !== " " && character !== "\t" && character !== "\r") {
+          this.lineClassified = true;
+          const isComment = this.comments && character === "#";
+          if (!isComment) {
+            const indentation = leadingSpaces(this.currentLine);
+            this._startContentLine(indentation, emitted);
+          }
+        }
+        this.column += 1;
+      }
+      if (this.buffer.length + this.currentLine.length > this.maxBufferSize) {
+        return this._fail(new RangeError(`Buffered record exceeds maximum size of ${this.maxBufferSize} characters`));
+      }
+    }
+    return emitted;
+  }
+  end(chunk = "") {
+    const emitted = chunk === "" ? [] : this.write(chunk);
+    if (this.ended) {
+      return this.collect ? [...this.links] : emitted;
+    }
+    const document = this.buffer + this.currentLine;
+    if (document.length > 0) {
+      let links;
+      try {
+        links = this.parser.parse(document);
+      } catch (error) {
+        const streamError = new StreamParseError(error, this.segmentOffset, this.segmentLine);
+        return this._fail(streamError);
+      }
+      this._publish(links, emitted);
+      this._advanceSegment(document);
+    }
+    this.buffer = "";
+    this.currentLine = "";
+    this.baseIndentation = null;
+    this.ended = true;
+    const result = this.collect ? [...this.links] : emitted;
+    this.emit("end", result);
+    return result;
+  }
+  drain() {
+    const links = this.links;
+    this.links = [];
+    return links;
+  }
+  reset() {
+    this.buffer = "";
+    this.currentLine = "";
+    this.baseIndentation = null;
+    this.lineClassified = false;
+    this.links = [];
+    this.offset = 0;
+    this.line = 1;
+    this.column = 1;
+    this.segmentOffset = 0;
+    this.segmentLine = 1;
+    this.ended = false;
+    return this;
+  }
+  position() {
+    return {
+      offset: this.offset,
+      line: this.line,
+      column: this.column,
+      buffered: this.buffer.length + this.currentLine.length
+    };
+  }
+  static *parse(chunks, options = {}) {
+    const parser = new StreamParser({ ...options, collect: false });
+    for (const chunk of chunks) {
+      yield* parser.write(chunk);
+    }
+    yield* parser.end();
+  }
+  static async* parseAsync(chunks, options = {}) {
+    const parser = new StreamParser({ ...options, collect: false });
+    for await (const chunk of chunks) {
+      yield* parser.write(chunk);
+    }
+    yield* parser.end();
+  }
+  _startContentLine(indentation, emitted) {
+    if (this.buffer.length > 0 && this.baseIndentation !== null && indentation <= this.baseIndentation && structurallyComplete(this.buffer, this.comments)) {
+      let links;
+      try {
+        links = this.parser.parse(this.buffer);
+      } catch {
+        links = null;
+      }
+      if (links !== null) {
+        this._publish(links, emitted);
+        this._advanceSegment(this.buffer);
+        this.buffer = "";
+        this.baseIndentation = null;
+      }
+    }
+    if (this.baseIndentation === null) {
+      this.baseIndentation = indentation;
+    }
+  }
+  _publish(links, emitted) {
+    for (const link of links) {
+      emitted.push(link);
+      if (this.collect)
+        this.links.push(link);
+      this.emit("link", link);
+    }
+  }
+  _advanceSegment(document) {
+    this.segmentOffset += document.length;
+    this.segmentLine += countNewlines(document);
+  }
+  _fail(error) {
+    this.emit("error", error);
+    throw error;
+  }
+}
+function leadingSpaces(line) {
+  let indentation = 0;
+  while (line[indentation] === " ")
+    indentation += 1;
+  return indentation;
+}
+function countNewlines(value) {
+  let count = 0;
+  for (const character of value) {
+    if (character === `
+`)
+      count += 1;
+  }
+  return count;
+}
+function structurallyComplete(document, comments) {
+  const quotes = ['"', "'", "`"];
+  const beforeReference = [" ", "\t", `
+`, "\r", "(", ":"];
+  const beforeComment = [" ", "\t", `
+`, "\r"];
+  let depth = 0;
+  for (let position = 0;position < document.length; position++) {
+    const character = document[position];
+    const previous = position === 0 ? null : document[position - 1];
+    if (quotes.includes(character) && (previous === null || beforeReference.includes(previous))) {
+      const end = quotedReferenceEnd(document, position);
+      if (end === null)
+        return false;
+      position = end - 1;
+      continue;
+    }
+    if (comments && character === "#" && (previous === null || beforeComment.includes(previous))) {
+      const newline = document.indexOf(`
+`, position);
+      if (newline === -1)
+        return true;
+      position = newline;
+      continue;
+    }
+    if (character === "(")
+      depth += 1;
+    if (character === ")")
+      depth -= 1;
+  }
+  return depth === 0;
+}
 // src/FormatOptions.js
 class FormatOptions {
   constructor(options = {}) {
@@ -2448,12 +2664,14 @@ class FormatOptions {
 class FormatConfig extends FormatOptions {
 }
 export {
-  stripComments,
-  formatLinks,
-  Parser,
-  ParseError,
-  LinksGroup,
-  Link,
+  FormatConfig,
   FormatOptions,
-  FormatConfig
+  Link,
+  LinksGroup,
+  ParseError,
+  Parser,
+  StreamParseError,
+  StreamParser,
+  formatLinks,
+  stripComments
 };

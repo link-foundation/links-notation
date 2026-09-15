@@ -77,6 +77,25 @@ links = parser.parse(text)
 # Produces: (3: papa loves mama)
 ```
 
+### Streaming Parsing
+
+`StreamParser` accepts arbitrary chunks and emits only complete top-level
+records. Set `collect=False` for bounded-memory callback or generator use.
+
+```python
+from links_notation import StreamParser, parse_chunks
+
+stream = StreamParser(on_link=print, collect=False)
+stream.write("profile:\n  name Ada\n")
+stream.finish("next link")
+
+for link in parse_chunks(["one li", "nk\ntwo link"]):
+    print(link)
+```
+
+`parse_async_chunks` provides the equivalent native async generator. The
+stream also exposes `position`, `drain()`, `reset()`, and a buffer-size limit.
+
 ## API Reference
 
 ### Parser

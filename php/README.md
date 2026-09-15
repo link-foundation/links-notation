@@ -15,7 +15,7 @@ Or add the dependency to your `composer.json`:
 ```json
 {
     "require": {
-        "link-foundation/links-notation": "^0.19"
+        "link-foundation/links-notation": "^0.20"
     }
 }
 ```
@@ -137,6 +137,25 @@ LINO;
 
 echo Formatter::formatLinks($parser->parse($input));
 ```
+
+### Streaming Parsing
+
+`StreamParser` accepts arbitrary chunks and invokes a callback only for complete
+top-level records. Set `collect: false` for bounded-memory processing.
+
+```php
+use LinkFoundation\LinksNotation\StreamParser;
+
+$stream = new StreamParser(
+    onLink: static fn ($link) => print "$link\n",
+    collect: false,
+);
+$stream->write("profile:\n  name Ada\n");
+$stream->finish('next link');
+```
+
+`StreamParser::parseChunks($chunks)` returns a lazy `Generator`; position,
+drain, reset, and maximum-buffer controls are also available.
 
 ## Syntax Examples
 

@@ -72,6 +72,16 @@ public class Parser {
     this.comments = comments;
   }
 
+  /** Return the maximum document size accepted by this parser. */
+  public int getMaxInputSize() {
+    return maxInputSize;
+  }
+
+  /** Return whether {@code #} starts comments. */
+  public boolean isCommentsEnabled() {
+    return comments;
+  }
+
   /**
    * Parse Lino notation text into a list of Link objects.
    *

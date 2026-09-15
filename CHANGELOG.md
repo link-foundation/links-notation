@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
+- Streaming parsers in C#, JavaScript, Rust, Python, Go, Java, and PHP with
+  arbitrary symbol/line chunks, push callbacks or events, native lazy adapters,
+  absolute positions, reset/drain controls, final-record flushing, and bounded
+  unresolved-record buffers
+  ([#197](https://github.com/link-foundation/links-notation/issues/197))
+- Cross-language streaming contract tests and an executable parity experiment.
+  Each implementation compares symbol-by-symbol and line-by-line streaming with
+  its canonical parser across indentation, multiline quotes, nested parentheses,
+  comments, and input without a trailing newline
+  ([#203](https://github.com/link-foundation/links-notation/pull/203))
 - Token efficiency benchmarks: `benchmarks/` measures what the same information
   costs in a model's context window as Links Notation, JSON, YAML, XML and CSV
   over 11 datasets covering uniform, semi-uniform, nested, deeply nested, keyed,

@@ -4,7 +4,7 @@
     <Description>Link.Foundation's Links Notation parser and formatter for .NET</Description>
     <Copyright>Konstantin Diachenko</Copyright>
     <AssemblyTitle>Link.Foundation.Links.Notation</AssemblyTitle>
-    <VersionPrefix>0.19.0</VersionPrefix>
+    <VersionPrefix>0.20.0</VersionPrefix>
     <Authors>Konstantin Diachenko</Authors>
     <TargetFramework>net10.0</TargetFramework>
     <PackageId>Link.Foundation.Links.Notation</PackageId>
@@ -22,8 +22,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <LangVersion>latest</LangVersion>
-    <PackageReleaseNotes>Bug fixes.
-Test cases suite is updated.</PackageReleaseNotes>
+    <PackageReleaseNotes>Add incremental StreamParser APIs with events and lazy enumerable adapters.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
     <RootNamespace>Link.Foundation.Links.Notation</RootNamespace>
     <!-- CS1584/CS1658: Pegasus 4.1.0 emits an invalid <see cref="IList{Link{string}}"/>
