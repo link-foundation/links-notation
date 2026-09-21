@@ -105,7 +105,7 @@ jobs:
           # scan needs the whole history, not just the tip.
           fetch-depth: 0
       - name: Scan the repository for verified secrets
-        uses: trufflesecurity/trufflehog@v3.97.4
+        uses: trufflesecurity/trufflehog@v3.97.5
         with:
           path: ./
           # The action ref pins the wrapper; this pins the scanner itself,
