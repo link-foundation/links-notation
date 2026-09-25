@@ -267,6 +267,19 @@ Main parser class for converting strings to links.
   character when `comments` is `false`
 - `Parser(int maxInputSize, int maxDepth, boolean comments)` - Create a parser with both
 - `parse(String input)` - Parse a Lino string and return links
+- `getMaxDepth()` - How deep links may nest
+- `Parser.DEFAULT_MAX_DEPTH` - The default `maxDepth`, 64, the same in every
+  implementation
+
+`maxInputSize` is the largest document accepted, in characters (default:
+`10 * 1024 * 1024`).
+
+`maxDepth` is how deep links may nest (default: 64). Every parenthesized group
+and every indentation level is one level, and the lines of a document start at
+level 0, so with `maxDepth` 1 `(a)` is accepted while `((a))`, `(a (b))` and a
+group on an indented line are refused. A document nested deeper is refused
+with a `NestingTooDeepException` rather than recursed into until the stack
+runs out.
 
 #### `Link`
 
@@ -298,12 +311,38 @@ Container for grouping related links.
 
 Exception thrown when parsing fails.
 
+#### `NestingTooDeepException`
+
+A `ParseException` thrown when a document nests links deeper than `maxDepth`.
+It points at the group or the line that is one level too deep:
+
+```text
+Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
+1 | ((((a))))
+  |    ^
+```
+
+- `getMaxDepth()` - The deepest nesting the parser accepts
+- `getLine()`, `getColumn()` - Where the offending group or line starts,
+  counted from 1
+- `getOffset()` - The same position as a character offset from the start of
+  the document
+- `getLineText()` - The offending line, as written
+- `getSummary()` - The first line of the message, without `Nesting too deep at`
+- `getSnippet()` - The offending line with a caret under the offending column
+
+`StreamParser` reports the same error as a `StreamParseException` whose cause
+is the `NestingTooDeepException` and whose line, column and offset are counted
+from the start of the stream.
+
 ## Project Structure
 
 - `src/main/java/io/github/linkfoundation/linksnotation/Link.java` - Link data structure
 - `src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java` - Links group container
 - `src/main/java/io/github/linkfoundation/linksnotation/Parser.java` - Parser implementation
 - `src/main/java/io/github/linkfoundation/linksnotation/ParseException.java` - Parse exception
+- `src/main/java/io/github/linkfoundation/linksnotation/NestingTooDeepException.java` - Nesting
+  too deep exception
 - `src/test/java/` - Test files
 
 ## Maintenance

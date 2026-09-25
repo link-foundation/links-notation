@@ -268,6 +268,19 @@ System.out.println(new Parser(false).parse("# a b\n").get(0).format(false)); // 
   если `comments` равно `false`
 - `Parser(int maxInputSize, int maxDepth, boolean comments)` - Создать парсер и с тем, и с другим
 - `parse(String input)` - Распарсить строку Lino и вернуть связи
+- `getMaxDepth()` - Насколько глубоко могут быть вложены связи
+- `Parser.DEFAULT_MAX_DEPTH` - Значение `maxDepth` по умолчанию, 64, одинаковое
+  во всех реализациях
+
+`maxInputSize` - наибольший принимаемый документ в символах (по умолчанию:
+`10 * 1024 * 1024`).
+
+`maxDepth` - насколько глубоко могут быть вложены связи (по умолчанию: 64).
+Каждая группа в скобках и каждый уровень отступа - это один уровень, а строки
+документа начинаются с уровня 0, поэтому при `maxDepth`, равном 1, `(a)`
+принимается, а `((a))`, `(a (b))` и группа на строке с отступом отклоняются.
+Документ с более глубокой вложенностью отклоняется с
+`NestingTooDeepException`, а не разбирается рекурсивно, пока не кончится стек.
 
 #### `Link`
 
@@ -299,12 +312,38 @@ System.out.println(new Parser(false).parse("# a b\n").get(0).format(false)); // 
 
 Исключение, выбрасываемое при ошибке парсинга.
 
+#### `NestingTooDeepException`
+
+Наследник `ParseException`, который выбрасывается, когда связи в документе
+вложены глубже `maxDepth`. Он указывает на группу или строку, которая на один
+уровень глубже допустимого:
+
+```text
+Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
+1 | ((((a))))
+  |    ^
+```
+
+- `getMaxDepth()` - Наибольшая вложенность, которую принимает парсер
+- `getLine()`, `getColumn()` - Где начинается слишком глубокая группа или
+  строка, считая с 1
+- `getOffset()` - Та же позиция в виде смещения в символах от начала документа
+- `getLineText()` - Строка с ошибкой в том виде, в каком она написана
+- `getSummary()` - Первая строка сообщения без `Nesting too deep at`
+- `getSnippet()` - Строка с указателем под нужным столбцом
+
+`StreamParser` сообщает о той же ошибке через исключение `StreamParseException`,
+причиной которого является `NestingTooDeepException`, а строка, столбец и
+смещение отсчитываются от начала потока.
+
 ## Структура проекта
 
 - `src/main/java/io/github/linkfoundation/linksnotation/Link.java` - Структура данных Link
 - `src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java` - Контейнер группы связей
 - `src/main/java/io/github/linkfoundation/linksnotation/Parser.java` - Реализация парсера
 - `src/main/java/io/github/linkfoundation/linksnotation/ParseException.java` - Исключение парсинга
+- `src/main/java/io/github/linkfoundation/linksnotation/NestingTooDeepException.java` - Исключение
+  слишком глубокой вложенности
 - `src/test/java/` - Тестовые файлы
 
 ## Поддержка

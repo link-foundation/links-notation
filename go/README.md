@@ -114,6 +114,11 @@ func NewParser() *Parser
 Creates a parser with the default limits and with `#` comments on. Setting
 `Comments` to `false` on it reads `#` as an ordinary character instead.
 
+- `MaxInputSize` - The largest document accepted, in bytes (default: 10 MB)
+- `MaxDepth` - How deep links may nest (default: `DefaultMaxDepth`, which is
+  64); see [Nesting Depth](#nesting-depth)
+- `Comments` - Whether `#` starts a comment (default: `true`)
+
 #### Format
 
 ```go
@@ -346,6 +351,49 @@ parser.Comments = false
 plain, _ := parser.Parse("# a b\n")
 fmt.Println(lino.Format(plain)) // (# a b)
 ```
+
+### Nesting Depth
+
+Every parenthesized group and every indentation level is one level of nesting;
+the lines of a document are at level 0, and indentation inside a group counts on
+top of the group's own level. The parser recurses once per level, so it refuses
+a document nested deeper than `MaxDepth` (default: `DefaultMaxDepth`, which is
+64) with an error instead of recursing until the goroutine stack is exhausted,
+which would end the whole process.
+
+The error is a `*ParseError` that `errors.Is` matches against
+`ErrNestingTooDeep`. It points at the group or the line that is one level too
+deep:
+
+- `MaxDepth` - The deepest nesting allowed, when the document is nested deeper;
+  `0` for any other error
+- `Pos` - Byte offset of the offending position from the start of the document
+- `Line`, `Column` - Where the offending position is, counted from 1
+- `LineText` - The offending line, as written
+- `Summary()` and `Snippet()` - The first line of the message, and the offending
+  line with a caret under the offending column
+
+```go
+parser := lino.NewParser()
+parser.MaxDepth = 3
+_, err := parser.Parse("((((a))))")
+
+var parseError *lino.ParseError
+if errors.Is(err, lino.ErrNestingTooDeep) && errors.As(err, &parseError) {
+    fmt.Println(parseError.Line, parseError.Column) // 1 4
+    fmt.Println(err)
+}
+```
+
+```text
+Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
+1 | ((((a))))
+  |    ^
+```
+
+A `StreamParser` uses the limit of the parser it is created with, and wraps the
+error in a `*StreamParseError` whose `Line`, `Column` and `Offset` count from
+the start of the stream.
 
 ## Testing
 

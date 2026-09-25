@@ -46,6 +46,65 @@
     }
 
     /// <summary>
+    /// How deep links may nest before the document is refused; see <see cref="Parser.MaxDepth"/>.
+    /// </summary>
+    public int MaxDepth { get; set; } = Parser.DefaultMaxDepth;
+
+    /// <summary>
+    /// Raised by the rules when the document nests deeper than <see cref="MaxDepth"/>;
+    /// <see cref="Parser"/> turns it into a <see cref="ParseException"/>.
+    /// </summary>
+    internal sealed class NestingTooDeepException : Exception
+    {
+        public NestingTooDeepException(int offset, int maxDepth)
+            : base($"nesting depth exceeds the maximum of {maxDepth}")
+        {
+            Offset = offset;
+            MaxDepth = maxDepth;
+        }
+
+        /// <summary>Offset of the group or the line that is one level too deep.</summary>
+        public int Offset { get; }
+
+        /// <summary>The deepest nesting allowed.</summary>
+        public int MaxDepth { get; }
+    }
+
+    /// <summary>
+    /// The indentation levels of the current context, innermost first.
+    /// </summary>
+    /// <remarks>
+    /// The levels never change once made: pushing a level makes a new list, and the
+    /// cursor's state only ever points at one. The cursor is what the generated parser
+    /// puts back when an alternative fails, so a failed alternative takes the levels it
+    /// pushed with it, and the depth of the lines after it is not thrown off.
+    /// </remarks>
+    private sealed class IndentationLevels
+    {
+        public static readonly IndentationLevels Root = new IndentationLevels(0, null);
+
+        private IndentationLevels(int level, IndentationLevels enclosing)
+        {
+            Level = level;
+            Enclosing = enclosing;
+            Depth = enclosing == null ? 0 : enclosing.Depth + 1;
+        }
+
+        /// <summary>The indentation of the innermost level, in spaces.</summary>
+        public int Level { get; }
+
+        /// <summary>The levels around the innermost one.</summary>
+        public IndentationLevels Enclosing { get; }
+
+        /// <summary>How many levels are pushed on top of level zero.</summary>
+        public int Depth { get; }
+
+        public IndentationLevels Push(int level) => new IndentationLevels(level, this);
+
+        public IndentationLevels Pop() => Enclosing ?? this;
+    }
+
+    /// <summary>
     /// Saved indentation context of an enclosing scope.
     /// Every parenthesized group opens a nested context that starts fresh at
     /// indentation level zero, so line breaks and indentation mean the same
@@ -53,16 +112,19 @@
     /// </summary>
     private sealed class IndentationContext
     {
-        public IndentationContext(Stack<int> indentationStack, int baseIndentation, IndentationContext parent)
+        public IndentationContext(IndentationLevels indentation, int baseIndentation, int contextDepth, IndentationContext parent)
         {
-            IndentationStack = indentationStack;
+            Indentation = indentation;
             BaseIndentation = baseIndentation;
+            ContextDepth = contextDepth;
             Parent = parent;
         }
 
-        public Stack<int> IndentationStack { get; }
+        public IndentationLevels Indentation { get; }
 
         public int BaseIndentation { get; }
+
+        public int ContextDepth { get; }
 
         public IndentationContext Parent { get; }
     }
@@ -72,33 +134,28 @@
     /// </summary>
     private static void ResetState(Cursor state)
     {
-        state["IndentationStack"] = NewIndentationStack();
+        state["Indentation"] = IndentationLevels.Root;
         state["BaseIndentation"] = -1;
+        state["ContextDepth"] = 0;
         state["NestedContext"] = null;
-    }
-
-    /// <summary>
-    /// Create an indentation stack that starts at level zero.
-    /// </summary>
-    private static Stack<int> NewIndentationStack()
-    {
-        var indentationStack = new Stack<int>();
-        indentationStack.Push(0);
-        return indentationStack;
     }
 
     /// <summary>
     /// Save the current indentation context and start a fresh one, so that the
     /// contents of a parenthesized group are read exactly like the root of the document.
+    /// The lines of the group are one level deeper than the line the group is on.
     /// </summary>
     private static void EnterNestedContext(Cursor state)
     {
+        var depth = Depth(state) + 1;
         state["NestedContext"] = new IndentationContext(
-            (Stack<int>)state["IndentationStack"],
+            (IndentationLevels)state["Indentation"],
             (int)state["BaseIndentation"],
+            (int)state["ContextDepth"],
             (IndentationContext)state["NestedContext"]);
-        state["IndentationStack"] = NewIndentationStack();
+        state["Indentation"] = IndentationLevels.Root;
         state["BaseIndentation"] = -1;
+        state["ContextDepth"] = depth;
     }
 
     /// <summary>
@@ -109,10 +166,57 @@
         var saved = (IndentationContext)state["NestedContext"];
         if (saved != null)
         {
-            state["IndentationStack"] = saved.IndentationStack;
+            state["Indentation"] = saved.Indentation;
             state["BaseIndentation"] = saved.BaseIndentation;
+            state["ContextDepth"] = saved.ContextDepth;
             state["NestedContext"] = saved.Parent;
         }
+    }
+
+    /// <summary>
+    /// The indentation, in spaces and relative to the base indentation of the current
+    /// context, of a line that starts with <paramref name="spaces"/> spaces.
+    /// </summary>
+    private static int NormalizedIndentation(Cursor state, int spaces)
+    {
+        var baseIndentation = (int)state["BaseIndentation"];
+        return Math.Max(0, spaces - (baseIndentation == -1 ? 0 : baseIndentation));
+    }
+
+    /// <summary>
+    /// The indentation of the innermost level of the current context, in spaces.
+    /// </summary>
+    private static int CurrentIndentation(Cursor state) => ((IndentationLevels)state["Indentation"]).Level;
+
+    /// <summary>
+    /// Nesting depth of the line being read: every enclosing parenthesized group and
+    /// every indentation level counts as one, and the lines of a document are at level 0.
+    /// </summary>
+    private static int Depth(Cursor state) => (int)state["ContextDepth"] + ((IndentationLevels)state["Indentation"]).Depth;
+
+    /// <summary>
+    /// Refuses a group that opens at the current position when it would be nested deeper
+    /// than <see cref="MaxDepth"/>.
+    /// </summary>
+    private bool WithinGroupDepth(Cursor state) => WithinDepth(Depth(state) + 1, state.Location);
+
+    /// <summary>
+    /// Refuses the line that starts at <paramref name="start"/> when it is nested deeper
+    /// than <see cref="MaxDepth"/>. Only a line that parsed is checked, so spaces indented
+    /// past the limit with nothing after them are still read as the whitespace they are.
+    /// </summary>
+    private bool WithinLineDepth(Cursor state, int start) => WithinDepth(Depth(state), start);
+
+    /// <summary>
+    /// Every level of nesting is a level of recursion, and running out of stack ends the
+    /// process where no caller can catch it, so links nested too deeply are refused for good:
+    /// the error is thrown rather than returned as a failed match, and no alternative is
+    /// tried in its place.
+    /// </summary>
+    private bool WithinDepth(int depth, int offset)
+    {
+        if (depth <= MaxDepth) return true;
+        throw new NestingTooDeepException(offset, MaxDepth);
     }
 
     /// <summary>
@@ -146,10 +250,12 @@ skipEmptyLines = ([ \t]* [\r\n])*
 links <IList<LinksGroup<string>>> = fl:firstLine list:line* POP_INDENTATION { new List<LinksGroup<string>> { fl }.Concat(list).ToList() }
 firstLine <LinksGroup<string>> = SET_BASE_INDENTATION l:element { l }
 line <LinksGroup<string>> = CHECK_INDENTATION l:element { l }
-element <LinksGroup<string>> = e:nestedGroup eol PUSH_INDENTATION l:links { ParenthesizedGroup(e, l) }
-/ e:nestedGroup eol { ParenthesizedGroup(e, null) }
-/ e:anyLink PUSH_INDENTATION l:links { new LinksGroup<string>(e, l) }
-/ e:anyLink { new LinksGroup<string>(e) }
+// A line is checked for depth once its link has parsed, and only then are the lines
+// indented under it read.
+element <LinksGroup<string>> = s:here e:nestedGroup eol &{ WithinLineDepth(state, s) } c:children { ParenthesizedGroup(e, c) }
+/ s:here e:anyLink &{ WithinLineDepth(state, s) } c:children { new LinksGroup<string>(e, c) }
+children <IList<LinksGroup<string>>> = PUSH_INDENTATION l:links { l } / "" { null }
+here <int> = "" { state.Location }
 referenceOrLink <Link<string>> = l:multiLineAnyLink { l } / i:reference { i }
 anyLink <Link<string>> = ml:multiLineAnyLink eol { ml } / il:indentedIdLink { il } / sl:singleLineAnyLink { sl }
 multiLineAnyLink <Link<string>> = nestedGroup
@@ -160,7 +266,10 @@ singleLineAnyLink <Link<string>> = fl:singleLineLink eol { fl } / vl:singleLineV
 // indentation nests them, starting fresh at indentation level zero.
 // A group that holds nothing but another group keeps its own parentheses,
 // so that "((a b))" stays distinct from "(a b)".
-nestedGroup <Link<string>> = "(" _ inner:nestedGroup _ ")" { new Link<string>(new List<Link<string>> { inner }) }
+// Every group is one level deeper than the line it is on, and a group that would be
+// nested too deeply is refused at its opening parenthesis.
+nestedGroup <Link<string>> = &"(" &{ WithinGroupDepth(state) } g:parenthesizedGroup { g }
+parenthesizedGroup <Link<string>> = "(" ENTER_NESTED_CONTEXT _ inner:nestedGroup _ ")" EXIT_NESTED_CONTEXT { new Link<string>(new List<Link<string>> { inner }) }
 / "(" ENTER_NESTED_CONTEXT body:nestedGroupBody { body }
 
 nestedGroupBody <Link<string>> = skipEmptyLines l:links _ ")" EXIT_NESTED_CONTEXT { NestedLink(l) }
@@ -193,9 +302,9 @@ consumeQuoted = "" (. consumeQuotedMore*)
 consumeQuotedMore = &{ ConsumeQuotedCharacter() } .
 
 SET_BASE_INDENTATION = spaces:" "* #{ if ((int)state["BaseIndentation"] == -1) state["BaseIndentation"] = spaces.Count; }
-PUSH_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] > (int)state["IndentationStack"].Peek() } #{ state["IndentationStack"].Push((int)state["NormalizedIndent"]); }
-POP_INDENTATION = #{ state["IndentationStack"].Pop(); }
-CHECK_INDENTATION = spaces:" "* #{ state["NormalizedIndent"] = spaces.Count - ((int)state["BaseIndentation"] == -1 ? 0 : (int)state["BaseIndentation"]); if ((int)state["NormalizedIndent"] < 0) state["NormalizedIndent"] = 0; } &{ (int)state["NormalizedIndent"] >= (int)state["IndentationStack"].Peek() }
+PUSH_INDENTATION = spaces:" "* &{ NormalizedIndentation(state, spaces.Count) > CurrentIndentation(state) } #{ state["Indentation"] = ((IndentationLevels)state["Indentation"]).Push(NormalizedIndentation(state, spaces.Count)); }
+POP_INDENTATION = #{ state["Indentation"] = ((IndentationLevels)state["Indentation"]).Pop(); }
+CHECK_INDENTATION = spaces:" "* &{ NormalizedIndentation(state, spaces.Count) >= CurrentIndentation(state) }
 eol = __ (lineBreaks / eof / nestedGroupEnd)
 
 // A line ends at the first line break, and the blank lines that follow it
