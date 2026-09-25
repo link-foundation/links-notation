@@ -1,0 +1,12 @@
+[package]
+name = "issue-314-rust-differential"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+# Point this at another checkout (for example a worktree of `main`) to compare
+# two versions of the parser on the same documents.
+links-notation = { path = "../../../rust/links-notation" }

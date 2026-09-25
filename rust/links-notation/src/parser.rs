@@ -8,6 +8,7 @@ use nom::{
     IResult, Parser,
 };
 use std::cell::RefCell;
+use std::collections::HashMap;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Link {
@@ -84,7 +85,18 @@ pub struct ParserState {
     base_indentation: RefCell<Option<usize>>,
     nested_depth: RefCell<usize>,
     furthest: RefCell<FurthestFailure>,
+    unreadable_lines: RefCell<HashMap<LineKey, LineFailure>>,
 }
+
+/// Where a line starts, as an address into the document, and whether it is
+/// inside a parenthesized group. Reading a line depends on nothing else: a group
+/// starts a fresh indentation context, and indentation only decides which lines
+/// become children, so a line that could not be read once never can be.
+type LineKey = (usize, bool);
+
+/// How far past the start of an unreadable line the parser failed, and the
+/// `nom` error kind it failed with.
+type LineFailure = (usize, nom::error::ErrorKind);
 
 /// The furthest position any alternative reached before failing, and what could
 /// have continued the document there.
@@ -137,6 +149,7 @@ impl ParserState {
             base_indentation: RefCell::new(None),
             nested_depth: RefCell::new(0),
             furthest: RefCell::new(FurthestFailure::default()),
+            unreadable_lines: RefCell::new(HashMap::new()),
         }
     }
 
@@ -597,13 +610,65 @@ fn single_line_any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a 
     .parse(input)
 }
 
+/// Reads one line, or fails at once when the line was already found unreadable.
+///
+/// A line that does not parse as the first child of the line above it is tried
+/// again as a sibling at every enclosing indentation level. When the line holds
+/// a group, each of those attempts reads the whole group again, so without this
+/// the work doubles with every indented level (issue #314).
 fn any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    alt((
-        terminated(|i| nested_group(i, state), |i| eol(i, state)),
-        |i| indented_id_link(i, state),
-        |i| single_line_any_link(i, state),
-    ))
-    .parse(input)
+    let key = (input.as_ptr() as usize, state.is_inside_nested_context());
+    if let Some(&(offset, kind)) = state.unreadable_lines.borrow().get(&key) {
+        return Err(nom::Err::Error(nom::error::Error::new(
+            &input[offset..],
+            kind,
+        )));
+    }
+    let parsed = read_any_link(input, state);
+    if let Err(nom::Err::Error(error)) = &parsed {
+        let offset = error.input.as_ptr() as usize - input.as_ptr() as usize;
+        state
+            .unreadable_lines
+            .borrow_mut()
+            .insert(key, (offset, error.code));
+    }
+    parsed
+}
+
+/// A line that starts with a parenthesized group reads that group once and then
+/// branches on what follows it: the end of the line makes the group the whole
+/// link, and more values make it the first value of a value link.
+///
+/// Every other alternative would have to read the group again, which doubles
+/// the work at each level of nesting and makes a few dozen bytes take seconds
+/// ([#314](https://github.com/link-foundation/links-notation/issues/314)).
+fn read_any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
+    let (rest, group) = match nested_group(input, state) {
+        Ok(parsed) => parsed,
+        // Neither an indented ID nor a single-line link can start with a
+        // parenthesis, and a value link would begin with this same group, so
+        // nothing else can read a line that opens one. Report it the way the
+        // single-line value link does, as a missing reference.
+        Err(_) if input.starts_with('(') => {
+            return reference(input, state).map(|(rest, id)| (rest, Link::new_singlet(id)))
+        }
+        Err(_) => {
+            return alt((
+                |i| indented_id_link(i, state),
+                |i| single_line_any_link(i, state),
+            ))
+            .parse(input)
+        }
+    };
+    if let Ok((rest, _)) = eol(rest, state) {
+        return Ok((rest, group));
+    }
+    let (rest, more) = many0(|i| single_line_value_and_whitespace(i, state)).parse(rest)?;
+    let (rest, _) = eol(rest, state)?;
+    let mut values = Vec::with_capacity(more.len() + 1);
+    values.push(group);
+    values.extend(more);
+    Ok((rest, Link::new_value(values)))
 }
 
 fn count_indentation(input: &str) -> IResult<&str, usize> {
