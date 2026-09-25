@@ -18,13 +18,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 221 | 18 |
-| JavaScript | 250 | 19 |
-| Rust | 328 | 21 |
-| C# | 236 | 20 |
-| Go | 114 | 12 |
-| Java | 160 | 11 |
-| PHP | 210 | 18 |
+| Python | 222 | 19 |
+| JavaScript | 251 | 20 |
+| Rust | 329 | 22 |
+| C# | 237 | 21 |
+| Go | 115 | 13 |
+| Java | 161 | 12 |
+| PHP | 211 | 19 |
 
 ---
 
@@ -167,15 +167,23 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 **Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4, Go: 0, Java: 0, PHP: 4
 
+## Indented Id Nested Values
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
+|-----------|---|---|---|---|---|---|---|
+| indented id retains nested values | [✅](python/tests/test_indented_id_nested_values.py#L30) | [✅](js/tests/IndentedIdNestedValues.test.js#L32) | [✅](rust/links-notation/tests/indented_id_nested_values_tests.rs#L4) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdNestedValuesTests.cs#L8) | [✅](go/indented_id_nested_values_test.go#L5) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/IndentedIdNestedValuesTest.java#L9) | [✅](php/tests/IndentedIdNestedValuesTest.php#L13) |
+
+**Category totals:** Python: 1, JavaScript: 1, Rust: 1, C#: 1, Go: 1, Java: 1, PHP: 1
+
 ## Indented Id Syntax
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
 |-----------|---|---|---|---|---|---|---|
 | basic indented id syntax | [✅](python/tests/test_indented_id_syntax.py#L8) | [✅](js/tests/IndentedIdSyntax.test.js#L7) | [✅](rust/links-notation/tests/indented_id_syntax_tests.rs#L8) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs#L9) | ❌ | ❌ | [✅](php/tests/IndentedIdSyntaxTest.php#L40) |
 | empty indented id should work | [✅](python/tests/test_indented_id_syntax.py#L147) | [✅](js/tests/IndentedIdSyntax.test.js#L136) | [✅](rust/links-notation/tests/indented_id_syntax_tests.rs#L65) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs#L144) | ❌ | ❌ | ❌ |
-| empty indented id works | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/IndentedIdSyntaxTest.php#L120) |
-| equivalence comprehensive | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/IndentedIdSyntaxTest.php#L130) |
-| equivalence test comprehensive | [✅](python/tests/test_indented_id_syntax.py#L160) | [✅](js/tests/IndentedIdSyntax.test.js#L148) | [✅](rust/links-notation/tests/indented_id_syntax_tests.rs#L121) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs#L161) | ❌ | ❌ | ❌ |
+| empty indented id works | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/IndentedIdSyntaxTest.php#L121) |
+| equivalence comprehensive | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/IndentedIdSyntaxTest.php#L131) |
+| equivalence test comprehensive | [✅](python/tests/test_indented_id_syntax.py#L160) | [✅](js/tests/IndentedIdSyntax.test.js#L148) | [✅](rust/links-notation/tests/indented_id_syntax_tests.rs#L122) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs#L161) | ❌ | ❌ | ❌ |
 | indented id syntax with multiple values | [✅](python/tests/test_indented_id_syntax.py#L43) | [✅](js/tests/IndentedIdSyntax.test.js#L40) | [✅](rust/links-notation/tests/indented_id_syntax_tests.rs#L39) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs#L46) | ❌ | ❌ | [✅](php/tests/IndentedIdSyntaxTest.php#L62) |
 | indented id syntax with numeric id | [✅](python/tests/test_indented_id_syntax.py#L59) | [✅](js/tests/IndentedIdSyntax.test.js#L55) | [✅](rust/links-notation/tests/indented_id_syntax_tests.rs#L48) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs#L64) | ❌ | ❌ | [✅](php/tests/IndentedIdSyntaxTest.php#L72) |
 | indented id syntax with quoted id | [✅](python/tests/test_indented_id_syntax.py#L72) | [✅](js/tests/IndentedIdSyntax.test.js#L67) | [✅](rust/links-notation/tests/indented_id_syntax_tests.rs#L75) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentedIdSyntaxTests.cs#L79) | ❌ | ❌ | [✅](php/tests/IndentedIdSyntaxTest.php#L78) |

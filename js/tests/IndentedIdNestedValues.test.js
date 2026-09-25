@@ -29,11 +29,10 @@ const cases = [
   ],
 ];
 
-test.each(cases)(
-  'indented ID retains nested values: %s',
-  (source, expected) => {
+test('indented ID retains nested values', () => {
+  for (const [source, expected] of cases) {
     const parser = new Parser();
     expect(formatLinks(parser.parse(source))).toBe(expected);
     expect(parser.parse(source)).toEqual(parser.parse(expected));
   }
-);
+});
