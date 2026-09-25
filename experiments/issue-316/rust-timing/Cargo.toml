@@ -1,0 +1,12 @@
+[package]
+name = "issue-316-rust-timing"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+links-notation = { path = "../../../rust/links-notation" }
+# The release before the fix, to compare readings against.
+links-notation-before = { package = "links-notation", version = "=0.21.1", default-features = false }

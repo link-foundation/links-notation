@@ -341,73 +341,124 @@ function windowAround(lineText, column) {
   return [quoted, target - start + shift + 1];
 }
 
-// src/comments.js
-var COMMENT = "#";
+// src/quotes.js
 var QUOTES = ['"', "'", "`"];
-var BEFORE_REFERENCE = [" ", "\t", `
-`, "\r", "(", ":"];
-var BEFORE_COMMENT = [" ", "\t", `
-`, "\r"];
-function stripComments(document) {
-  let blanked = null;
-  let position = 0;
-  while (position < document.length) {
-    const character = document[position];
-    if (QUOTES.includes(character) && follows(document, position, BEFORE_REFERENCE)) {
-      const end = quotedReferenceEnd(document, position);
-      position = end === null ? position + 1 : end;
-      continue;
-    }
-    if (character === COMMENT && follows(document, position, BEFORE_COMMENT)) {
-      blanked = blanked ?? document.split("");
-      while (position < document.length && document[position] !== `
-` && document[position] !== "\r") {
-        blanked[position] = " ";
-        position++;
-      }
-      continue;
-    }
-    position++;
+
+class DelimitedReferences {
+  constructor(document) {
+    this.document = document;
+    this.runsByQuote = new Map;
+    this.readings = new Map;
   }
-  return blanked === null ? document : blanked.join("");
-}
-function follows(document, position, allowed) {
-  return position === 0 || allowed.includes(document[position - 1]);
-}
-function quotedReferenceEnd(document, start) {
-  const quote = document[start];
-  if (!QUOTES.includes(quote)) {
-    return null;
-  }
-  let position = start;
-  while (position < document.length && document[position] === quote) {
-    position++;
-  }
-  const count = position - start;
-  const isEvenRun = count % 2 === 0;
-  const emptyReference = isEvenRun ? start + count : null;
-  const closing = quote.repeat(count);
-  const escape = quote.repeat(count * 2);
-  let content = "";
-  while (position < document.length) {
-    if (document.startsWith(escape, position)) {
-      content += closing;
-      position += escape.length;
-      continue;
+  readAt(start) {
+    if (!this.readings.has(start)) {
+      this.readings.set(start, this.#read(start));
     }
-    if (document.startsWith(closing, position)) {
-      const afterClosing = position + count;
-      if (afterClosing >= document.length || document[afterClosing] !== quote) {
-        if (isEvenRun && !isSubstantiveBody(content)) {
-          return emptyReference;
-        }
-        return afterClosing;
+    return this.readings.get(start);
+  }
+  endAt(start) {
+    const reading = this.readAt(start);
+    return reading === null ? null : start + reading.length;
+  }
+  #read(start) {
+    const document = this.document;
+    const quote = document[start];
+    if (!QUOTES.includes(quote)) {
+      return null;
+    }
+    const runs = this.#runsOf(quote);
+    const opening = runs.indexOf(start);
+    const count = runs.end(opening) - start;
+    let closing = opening + 1;
+    while (closing < runs.count) {
+      const length = runs.lengths[closing];
+      if (length < count) {
+        closing = runs.nextLonger[closing];
+      } else if (Math.floor(length / count) % 2 === 1) {
+        break;
+      } else {
+        closing++;
       }
     }
-    content += document[position];
-    position++;
+    const end = closing < runs.count ? runs.end(closing) : null;
+    return reading(document, start, quote, count, end);
   }
-  return emptyReference;
+  #runsOf(quote) {
+    if (!this.runsByQuote.has(quote)) {
+      this.runsByQuote.set(quote, new DelimiterRuns(this.document, quote));
+    }
+    return this.runsByQuote.get(quote);
+  }
+}
+function reading(document, start, quote, count, end) {
+  const emptyReference = count % 2 === 0 ? { value: "", length: count } : null;
+  if (end === null) {
+    return emptyReference;
+  }
+  const parts = [];
+  let position = start + count;
+  let run = document.indexOf(quote, position);
+  while (run !== -1 && run < end) {
+    const length = runLength(document, run, quote);
+    const escaped = Math.floor(length / (2 * count)) * count;
+    const closes = run + length === end ? count : 0;
+    parts.push(document.slice(position, run));
+    parts.push(quote.repeat(length - escaped - closes));
+    position = run + length;
+    run = document.indexOf(quote, position);
+  }
+  const value = parts.join("");
+  if (emptyReference !== null && !isSubstantiveBody(value)) {
+    return emptyReference;
+  }
+  return { value, length: end - start };
+}
+function runLength(text, start, quote) {
+  let end = start;
+  while (end < text.length && text[end] === quote) {
+    end++;
+  }
+  return end - start;
+}
+
+class DelimiterRuns {
+  constructor(document, quote) {
+    this.starts = [];
+    this.lengths = [];
+    let position = document.indexOf(quote);
+    while (position !== -1) {
+      const length = runLength(document, position, quote);
+      this.starts.push(position);
+      this.lengths.push(length);
+      position = document.indexOf(quote, position + length);
+    }
+    this.count = this.starts.length;
+    this.nextLonger = new Array(this.count);
+    const longer = [];
+    for (let run = this.count - 1;run >= 0; run--) {
+      while (longer.length > 0 && this.lengths[longer[longer.length - 1]] <= this.lengths[run]) {
+        longer.pop();
+      }
+      this.nextLonger[run] = longer.length > 0 ? longer[longer.length - 1] : this.count;
+      longer.push(run);
+    }
+  }
+  end(run) {
+    return this.starts[run] + this.lengths[run];
+  }
+  indexOf(position) {
+    let low = 0;
+    let high = this.count - 1;
+    while (low < high) {
+      const middle = low + high + 1 >> 1;
+      if (this.starts[middle] <= position) {
+        low = middle;
+      } else {
+        high = middle - 1;
+      }
+    }
+    return low;
+  }
 }
 function isSubstantiveBody(content) {
   let depth = 0;
@@ -426,6 +477,40 @@ function isSubstantiveBody(content) {
     }
   }
   return hasVisible && depth === 0;
+}
+
+// src/comments.js
+var COMMENT = "#";
+var BEFORE_REFERENCE = [" ", "\t", `
+`, "\r", "(", ":"];
+var BEFORE_COMMENT = [" ", "\t", `
+`, "\r"];
+function stripComments(document) {
+  let blanked = null;
+  let position = 0;
+  const references = new DelimitedReferences(document);
+  while (position < document.length) {
+    const character = document[position];
+    if (QUOTES.includes(character) && follows(document, position, BEFORE_REFERENCE)) {
+      const end = references.endAt(position);
+      position = end === null ? position + 1 : end;
+      continue;
+    }
+    if (character === COMMENT && follows(document, position, BEFORE_COMMENT)) {
+      blanked = blanked ?? document.split("");
+      while (position < document.length && document[position] !== `
+` && document[position] !== "\r") {
+        blanked[position] = " ";
+        position++;
+      }
+      continue;
+    }
+    position++;
+  }
+  return blanked === null ? document : blanked.join("");
+}
+function follows(document, position, allowed) {
+  return position === 0 || allowed.includes(document[position - 1]);
 }
 
 // src/parser-generated.js
@@ -2406,61 +2491,12 @@ function peg$parse(input, options) {
   function getCurrentIndentation() {
     return indentationStack[indentationStack.length - 1];
   }
-  function isSubstantiveBody(content) {
-    let depth = 0;
-    let hasVisible = false;
-    for (const c of content) {
-      if (c === "(") {
-        depth++;
-      } else if (c === ")") {
-        depth--;
-        if (depth < 0) {
-          return false;
-        }
-      }
-      if (!/[ \t\n\r]/.test(c)) {
-        hasVisible = true;
-      }
-    }
-    return hasVisible && depth === 0;
-  }
+  const delimitedReferences = new DelimitedReferences(input);
   function parseQuotedStringAt(inputStr, startPos, quoteChar) {
     if (startPos >= inputStr.length || inputStr[startPos] !== quoteChar) {
       return null;
     }
-    let quoteCount = 0;
-    let pos = startPos;
-    while (pos < inputStr.length && inputStr[pos] === quoteChar) {
-      quoteCount++;
-      pos++;
-    }
-    const isEvenRun = quoteCount % 2 === 0;
-    const emptyReference = isEvenRun ? { value: "", length: quoteCount } : null;
-    const closeSeq = quoteChar.repeat(quoteCount);
-    const escapeSeq = quoteChar.repeat(quoteCount * 2);
-    let content = "";
-    while (pos < inputStr.length) {
-      if (inputStr.substr(pos, escapeSeq.length) === escapeSeq) {
-        content += closeSeq;
-        pos += escapeSeq.length;
-        continue;
-      }
-      if (inputStr.substr(pos, quoteCount) === closeSeq) {
-        const afterClose = pos + quoteCount;
-        if (afterClose >= inputStr.length || inputStr[afterClose] !== quoteChar) {
-          if (isEvenRun && !isSubstantiveBody(content)) {
-            return emptyReference;
-          }
-          return {
-            value: content,
-            length: afterClose - startPos
-          };
-        }
-      }
-      content += inputStr[pos];
-      pos++;
-    }
-    return emptyReference;
+    return delimitedReferences.readAt(startPos);
   }
   let parsedValue = null;
   let parsedLength = 0;
@@ -2819,12 +2855,13 @@ function structurallyComplete(document, comments) {
 `, "\r", "(", ":"];
   const beforeComment = [" ", "\t", `
 `, "\r"];
+  const references = new DelimitedReferences(document);
   let depth = 0;
   for (let position = 0;position < document.length; position++) {
     const character = document[position];
     const previous = position === 0 ? null : document[position - 1];
     if (quotes.includes(character) && (previous === null || beforeReference.includes(previous))) {
-      const end = quotedReferenceEnd(document, position);
+      const end = references.endAt(position);
       if (end === null)
         return false;
       position = end - 1;

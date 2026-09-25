@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import { Parser } from './Parser.js';
-import { quotedReferenceEnd } from './comments.js';
+import { DelimitedReferences } from './quotes.js';
 
 const DEFAULT_MAX_BUFFER_SIZE = 10 * 1024 * 1024;
 
@@ -249,6 +249,7 @@ function structurallyComplete(document, comments) {
   const quotes = ['"', "'", '`'];
   const beforeReference = [' ', '\t', '\n', '\r', '(', ':'];
   const beforeComment = [' ', '\t', '\n', '\r'];
+  const references = new DelimitedReferences(document);
   let depth = 0;
 
   for (let position = 0; position < document.length; position++) {
@@ -259,7 +260,7 @@ function structurallyComplete(document, comments) {
       quotes.includes(character) &&
       (previous === null || beforeReference.includes(previous))
     ) {
-      const end = quotedReferenceEnd(document, position);
+      const end = references.endAt(position);
       if (end === null) return false;
       position = end - 1;
       continue;
