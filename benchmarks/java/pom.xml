@@ -23,7 +23,7 @@
             <!-- The parser under measurement, built from ../../java by `mvn install`. -->
             <groupId>io.github.link-foundation</groupId>
             <artifactId>links-notation</artifactId>
-            <version>0.21.2</version>
+            <version>0.21.3</version>
         </dependency>
         <dependency>
             <!-- JTokkit carries the BPE ranks with the jar, so counting a token

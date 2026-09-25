@@ -7,7 +7,7 @@ name = "issue-316-rust-timing"
 version = "0.0.0"
 dependencies = [
  "links-notation 0.21.1",
- "links-notation 0.21.2",
+ "links-notation 0.21.3",
 ]
 
 [[package]]
@@ -21,7 +21,7 @@ dependencies = [
 
 [[package]]
 name = "links-notation"
-version = "0.21.2"
+version = "0.21.3"
 dependencies = [
  "links-notation-macro",
  "nom",

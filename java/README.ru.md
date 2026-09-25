@@ -12,7 +12,7 @@ Java-реализация парсера Links Notation.
 <dependency>
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.21.2</version>
+    <version>0.21.3</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ Java-реализация парсера Links Notation.
 Добавьте зависимость в ваш `build.gradle`:
 
 ```groovy
-implementation 'io.github.link-foundation:links-notation:0.21.2'
+implementation 'io.github.link-foundation:links-notation:0.21.3'
 ```
 
 ### Локальная разработка
