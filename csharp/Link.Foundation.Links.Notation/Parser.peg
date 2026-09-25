@@ -124,10 +124,16 @@
     /// Turn the links of a nested (parenthesized) context into a single link.
     /// The nested context is parsed with the same rules as the root, so it yields
     /// a list of links; a single link is used as is, several links become the
-    /// values of one anonymous link.
+    /// values of one anonymous link. A group that holds nothing but another
+    /// group keeps the parentheses of both, so that "((a b))" stays distinct
+    /// from "(a b)".
     /// </summary>
     private static Link<string> NestedLink(IList<LinksGroup<string>> groups)
     {
+        if (groups.Count == 1 && groups[0].IsParenthesized && groups[0].Groups == null)
+        {
+            return new Link<string>(new List<Link<string>> { groups[0].Link });
+        }
         var links = groups.ToLinksList();
         return links.Count == 1 ? links[0] : new Link<string>(links);
     }
@@ -140,18 +146,63 @@
     {
         return new LinksGroup<string>(link, groups) { IsParenthesized = true };
     }
+
+    /// <summary>
+    /// Attach the links indented under a line, if any, to the link read from it.
+    /// </summary>
+    private static LinksGroup<string> WithChildren(LinksGroup<string> line, IList<IList<LinksGroup<string>>> children)
+    {
+        var groups = children.Count == 0 ? null : children[0];
+        return line.IsParenthesized ? ParenthesizedGroup(line.Link, groups) : new LinksGroup<string>(line.Link, groups);
+    }
+
+    /// <summary>
+    /// Lines already found unreadable, keyed by where they start and whether they
+    /// are inside a parenthesized group. Reading a line depends on nothing else: a
+    /// group starts a fresh indentation context, and indentation only decides
+    /// which lines become children, so a line that could not be read once never
+    /// can be. A line that does not parse as the first child of the line above it
+    /// is tried again as a sibling at every enclosing indentation level, and
+    /// without this each of those attempts would read the whole line again.
+    /// </summary>
+    private readonly HashSet<(int Location, bool Nested)> _unreadableLines = new HashSet<(int Location, bool Nested)>();
+
+    private bool IsUnreadableLine(Cursor state) => _unreadableLines.Contains((state.Location, IsInsideNestedContext(state)));
+
+    /// <summary>
+    /// Remember that the line starting at the cursor could not be read.
+    /// </summary>
+    /// <returns>Always false, so the alternative that calls it never matches.</returns>
+    private bool MarkUnreadableLine(Cursor state)
+    {
+        _unreadableLines.Add((state.Location, IsInsideNestedContext(state)));
+        return false;
+    }
 }
 document <IList<Link<string>>> = #{ ResetState(state); } skipEmptyLines l:links _ eof { l.ToLinksList() } / #{ ResetState(state); } _ eof { new List<Link<string>>() }
 skipEmptyLines = ([ \t]* [\r\n])*
 links <IList<LinksGroup<string>>> = fl:firstLine list:line* POP_INDENTATION { new List<LinksGroup<string>> { fl }.Concat(list).ToList() }
 firstLine <LinksGroup<string>> = SET_BASE_INDENTATION l:element { l }
 line <LinksGroup<string>> = CHECK_INDENTATION l:element { l }
-element <LinksGroup<string>> = e:nestedGroup eol PUSH_INDENTATION l:links { ParenthesizedGroup(e, l) }
-/ e:nestedGroup eol { ParenthesizedGroup(e, null) }
-/ e:anyLink PUSH_INDENTATION l:links { new LinksGroup<string>(e, l) }
-/ e:anyLink { new LinksGroup<string>(e) }
+// A line is read once, whether or not indented children follow it: reading it
+// again after looking for children multiplied the work at every level of nesting.
+element <LinksGroup<string>> = &{ !IsUnreadableLine(state) } e:anyLink l:indentedLinks? { WithChildren(e, l) }
+// Remember that this line could not be read. The predicate always fails.
+/ &{ MarkUnreadableLine(state) } { default(LinksGroup<string>) }
+indentedLinks <IList<LinksGroup<string>>> = PUSH_INDENTATION l:links { l }
 referenceOrLink <Link<string>> = l:multiLineAnyLink { l } / i:reference { i }
-anyLink <Link<string>> = ml:multiLineAnyLink eol { ml } / il:indentedIdLink { il } / sl:singleLineAnyLink { sl }
+
+// A line that starts with a parenthesized group reads that group once and then
+// branches on what follows it: the end of the line makes the group the whole
+// link, and more values make it the first value of a value link. Neither an
+// indented ID nor a single-line link can start with a parenthesis, so nothing
+// else is tried for such a line; trying them read the group again, multiplying
+// the work at every level of nesting.
+anyLink <LinksGroup<string>> = &"(" g:nestedGroup rest:groupLinkRest { rest == null ? ParenthesizedGroup(g, null) : new LinksGroup<string>(new Link<string>(new List<Link<string>> { g }.Concat(rest).ToList())) }
+/ !"(" il:indentedIdLink { new LinksGroup<string>(il) }
+/ !"(" sl:singleLineAnyLink { new LinksGroup<string>(sl) }
+groupLinkRest <IList<Link<string>>> = eol { null }
+/ l:singleLineValueAndWhitespace* eol { l }
 multiLineAnyLink <Link<string>> = nestedGroup
 singleLineAnyLink <Link<string>> = fl:singleLineLink eol { fl } / vl:singleLineValueLink eol { vl }
 
@@ -159,9 +210,8 @@ singleLineAnyLink <Link<string>> = fl:singleLineLink eol { fl } / vl:singleLineV
 // rules as the root of the document: line breaks separate links and
 // indentation nests them, starting fresh at indentation level zero.
 // A group that holds nothing but another group keeps its own parentheses,
-// so that "((a b))" stays distinct from "(a b)".
-nestedGroup <Link<string>> = "(" _ inner:nestedGroup _ ")" { new Link<string>(new List<Link<string>> { inner }) }
-/ "(" ENTER_NESTED_CONTEXT body:nestedGroupBody { body }
+// so that "((a b))" stays distinct from "(a b)" (see NestedLink).
+nestedGroup <Link<string>> = "(" ENTER_NESTED_CONTEXT body:nestedGroupBody { body }
 
 nestedGroupBody <Link<string>> = skipEmptyLines l:links _ ")" EXIT_NESTED_CONTEXT { NestedLink(l) }
 / _ ")" EXIT_NESTED_CONTEXT { new Link<string>(new List<Link<string>>()) }
