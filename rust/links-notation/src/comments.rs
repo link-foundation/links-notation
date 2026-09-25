@@ -6,13 +6,10 @@
 //! the notation itself stays exactly as it was and a position reported by the
 //! parser still points at the same character of the document the caller wrote.
 
-use crate::parser::quoted_reference_end;
+use crate::quotes::{DelimitedReferences, QUOTES};
 
 /// The character that opens a comment.
 pub const COMMENT: char = '#';
-
-/// The characters a delimited reference can be written between.
-const QUOTES: [u8; 3] = *b"\"'`";
 
 /// What can stand before a delimited reference: the reference is the first
 /// thing on a line, follows a space, opens a group or follows a colon.
@@ -43,13 +40,14 @@ const BEFORE_COMMENT: [u8; 4] = *b" \t\n\r";
 /// ```
 pub fn strip_comments(document: &str) -> String {
     let mut bytes = document.as_bytes().to_vec();
+    let references = DelimitedReferences::new(document);
     let mut position = 0;
 
     while position < bytes.len() {
         let byte = bytes[position];
 
         if QUOTES.contains(&byte) && follows(&bytes, position, &BEFORE_REFERENCE) {
-            match quoted_reference_end(document, position) {
+            match references.end_at(document, position) {
                 Some(end) => position = end,
                 None => position += 1,
             }

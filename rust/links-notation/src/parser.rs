@@ -1,3 +1,4 @@
+use crate::quotes::{read_reference, DelimitedReferences, Reading};
 use nom::{
     branch::alt,
     bytes::complete::{tag, take_while, take_while1},
@@ -7,7 +8,7 @@ use nom::{
     sequence::{preceded, terminated},
     IResult, Parser,
 };
-use std::cell::RefCell;
+use std::cell::{OnceCell, RefCell};
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Link {
@@ -84,6 +85,8 @@ pub struct ParserState {
     base_indentation: RefCell<Option<usize>>,
     nested_depth: RefCell<usize>,
     furthest: RefCell<FurthestFailure>,
+    /// The delimited references of the document being parsed.
+    references: OnceCell<DelimitedReferences>,
 }
 
 /// The furthest position any alternative reached before failing, and what could
@@ -137,6 +140,7 @@ impl ParserState {
             base_indentation: RefCell::new(None),
             nested_depth: RefCell::new(0),
             furthest: RefCell::new(FurthestFailure::default()),
+            references: OnceCell::new(),
         }
     }
 
@@ -292,159 +296,37 @@ fn simple_reference(input: &str) -> IResult<&str, String> {
         .parse(input)
 }
 
-/// Parse a multi-quote string with a given quote character and count.
-/// For N quotes: opening = N quotes, closing = N quotes, escape = 2*N quotes -> N quotes
-fn parse_multi_quote_string(
-    input: &str,
-    quote_char: char,
-    quote_count: usize,
-) -> IResult<&str, String> {
-    let open_close = quote_char.to_string().repeat(quote_count);
-    let escape_seq = quote_char.to_string().repeat(quote_count * 2);
-    let escape_val = quote_char.to_string().repeat(quote_count);
-
-    // Check for opening quotes
-    if !input.starts_with(&open_close) {
-        return Err(nom::Err::Error(nom::error::Error::new(
-            input,
-            nom::error::ErrorKind::Tag,
-        )));
-    }
-
-    let mut remaining = &input[open_close.len()..];
-    let mut content = String::new();
-
-    loop {
-        if remaining.is_empty() {
-            return Err(nom::Err::Error(nom::error::Error::new(
-                input,
-                nom::error::ErrorKind::Tag,
-            )));
-        }
-
-        // Check for escape sequence (2*N quotes)
-        if remaining.starts_with(&escape_seq) {
-            content.push_str(&escape_val);
-            remaining = &remaining[escape_seq.len()..];
-            continue;
-        }
-
-        // Check for closing quotes (N quotes not followed by more quotes)
-        if remaining.starts_with(&open_close) {
-            let after_close = &remaining[open_close.len()..];
-            // Make sure this is exactly N quotes (not more)
-            if after_close.is_empty() || !after_close.starts_with(quote_char) {
-                return Ok((after_close, content));
-            }
-        }
-
-        // Take the next character
-        let c = remaining.chars().next().unwrap();
-        content.push(c);
-        remaining = &remaining[c.len_utf8()..];
-    }
-}
-
-/// A body written between an even run of delimiters is substantive when it
-/// holds at least one visible character and does not straddle a parenthesis.
-/// An even run can always be read as delimiter pairs enclosing nothing, so the
-/// n-quote reading is only taken when it carries something the pairs cannot.
-fn is_substantive_body(content: &str) -> bool {
-    let mut depth: isize = 0;
-    let mut has_visible = false;
-
-    for c in content.chars() {
-        match c {
-            '(' => depth += 1,
-            ')' => {
-                depth -= 1;
-                if depth < 0 {
-                    return false;
-                }
-            }
-            _ => {}
-        }
-        if !is_whitespace_char(c) {
-            has_visible = true;
-        }
-    }
-
-    has_visible && depth == 0
-}
-
-/// Parse a quoted string with dynamically detected quote count.
-///
-/// Counts opening quotes and uses that count for parsing. A run of an even
-/// number of delimiters that does not open a reference with a substantive body
-/// is the empty reference: the shortest reading, a bare delimiter pair
-/// enclosing nothing, wins over a longer n-quote delimiter.
-fn parse_dynamic_quote_string(input: &str, quote_char: char) -> IResult<&str, String> {
-    // Count opening quotes
-    let quote_count = input.chars().take_while(|&c| c == quote_char).count();
-
-    if quote_count == 0 {
-        return Err(nom::Err::Error(nom::error::Error::new(
-            input,
-            nom::error::ErrorKind::Tag,
-        )));
-    }
-
-    let is_even_run = quote_count % 2 == 0;
-
-    if let Ok((rest, content)) = parse_multi_quote_string(input, quote_char, quote_count) {
-        if !is_even_run || is_substantive_body(&content) {
-            return Ok((rest, content));
-        }
-    }
-
-    if is_even_run {
-        return Ok((&input[quote_count * quote_char.len_utf8()..], String::new()));
-    }
-
-    Err(nom::Err::Error(nom::error::Error::new(
-        input,
-        nom::error::ErrorKind::Tag,
-    )))
-}
-
 /// The offset just past the delimited reference that starts at `start`, or
 /// `None` when nothing that far into `document` opens one.
 ///
 /// Comment stripping needs to know how far a delimited reference reaches so
 /// that a `#` written inside one stays content, and it has to agree with the
-/// parser about it, which is why it asks the parser rather than scanning again.
+/// parser about it, which is why both read references the same way.
 pub fn quoted_reference_end(document: &str, start: usize) -> Option<usize> {
-    let rest = document.get(start..)?;
-    let quote = rest.chars().next()?;
-    if !matches!(quote, '"' | '\'' | '`') {
-        return None;
+    let reading = read_reference(document.get(start..)?)?;
+    Some(start + reading.length)
+}
+
+/// A delimited reference with any number of delimiters. A run of an even
+/// number of delimiters that does not open a reference with a substantive body
+/// is the empty reference.
+fn delimited_reference<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, String> {
+    let references = state
+        .references
+        .get_or_init(|| DelimitedReferences::new(input));
+    match references.read(input) {
+        Some(Reading { value, length }) => Ok((&input[length..], value)),
+        None => Err(nom::Err::Error(nom::error::Error::new(
+            input,
+            nom::error::ErrorKind::Tag,
+        ))),
     }
-    let (remaining, _) = parse_dynamic_quote_string(rest, quote).ok()?;
-    Some(document.len() - remaining.len())
-}
-
-fn double_quoted_dynamic(input: &str) -> IResult<&str, String> {
-    parse_dynamic_quote_string(input, '"')
-}
-
-fn single_quoted_dynamic(input: &str) -> IResult<&str, String> {
-    parse_dynamic_quote_string(input, '\'')
-}
-
-fn backtick_quoted_dynamic(input: &str) -> IResult<&str, String> {
-    parse_dynamic_quote_string(input, '`')
 }
 
 fn reference<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, String> {
     // Try quoted strings with dynamic quote detection (supports any N quotes)
     // Then fall back to simple unquoted reference
-    let parsed = alt((
-        double_quoted_dynamic,
-        single_quoted_dynamic,
-        backtick_quoted_dynamic,
-        simple_reference,
-    ))
-    .parse(input);
+    let parsed = alt((|i| delimited_reference(i, state), simple_reference)).parse(input);
     if parsed.is_err() {
         state.expected_at(input, "a reference");
     }
@@ -699,6 +581,12 @@ pub fn parse_document_with_diagnostics(input: &str) -> Result<Vec<Link>, ParseFa
 }
 
 fn document<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>> {
+    // Every reference is read from a part of this document, so the runs of
+    // delimiters are listed from all of it.
+    state
+        .references
+        .get_or_init(|| DelimitedReferences::new(input));
+
     // Skip leading blank lines but preserve the line structure
     let document = skip_empty_lines(input);
 

@@ -6,7 +6,8 @@ version = 4
 name = "issue-316-rust-timing"
 version = "0.0.0"
 dependencies = [
- "links-notation",
+ "links-notation 0.21.1",
+ "links-notation 0.21.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -14,6 +15,15 @@ name = "links-notation"
 version = "0.21.1"
 dependencies = [
  "links-notation-macro",
+ "nom",
+]
+
+[[package]]
+name = "links-notation"
+version = "0.21.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d4a91351f2718ee9cfd649058c67057074bd17d6c045711a4807afa99166c339"
+dependencies = [
  "nom",
 ]
 

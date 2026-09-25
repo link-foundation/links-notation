@@ -2,6 +2,7 @@ pub mod comments;
 pub mod format_config;
 pub mod parser;
 pub mod parser_config;
+mod quotes;
 pub mod stream_parser;
 
 use comments::strip_comments;

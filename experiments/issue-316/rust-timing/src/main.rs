@@ -6,7 +6,12 @@ use std::time::Instant;
 
 fn wide_quote(size: usize) -> String {
     let width = size / 4;
-    format!("{} a {} {}", "'".repeat(width + 1), "'".repeat(width - 4), "x".repeat(2 * width))
+    format!(
+        "{} a {} {}",
+        "'".repeat(width + 1),
+        "'".repeat(width - 4),
+        "x".repeat(2 * width)
+    )
 }
 
 fn narrowing_unclosed(size: usize) -> String {
@@ -35,8 +40,15 @@ fn closed_wide_over_quotes(size: usize) -> String {
 }
 
 fn main() {
-    let sizes: Vec<usize> = std::env::args().skip(1).map(|s| s.parse().unwrap()).collect();
-    let sizes = if sizes.is_empty() { vec![100_000, 250_000, 500_000, 1_000_000] } else { sizes };
+    let sizes: Vec<usize> = std::env::args()
+        .skip(1)
+        .map(|s| s.parse().unwrap())
+        .collect();
+    let sizes = if sizes.is_empty() {
+        vec![100_000, 250_000, 500_000, 1_000_000]
+    } else {
+        sizes
+    };
     let shapes: [(&str, fn(usize) -> String); 3] = [
         ("wide quote over a long run", wide_quote),
         ("narrowing unclosed quotes", narrowing_unclosed),
@@ -52,7 +64,11 @@ fn main() {
             let t = Instant::now();
             let outcome = parse_lino_to_links(&source).map(|l| l.len());
             let ms = t.elapsed().as_secs_f64() * 1000.0;
-            println!("  {}B: {ms:.0} ms (strip {strip:.0} ms, {:?})", source.len(), outcome.map_err(|_| "error"));
+            println!(
+                "  {}B: {ms:.0} ms (strip {strip:.0} ms, {:?})",
+                source.len(),
+                outcome.map_err(|_| "error")
+            );
         }
     }
 }
