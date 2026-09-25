@@ -1,6 +1,6 @@
 //! Incremental parsing for long-lived Links Notation streams.
 
-use crate::parser::quoted_reference_end;
+use crate::quotes::DelimitedReferences;
 use crate::{parse_lino_to_links_with_config, LiNo, ParseError, ParserConfig};
 use std::collections::VecDeque;
 use std::fmt;
@@ -427,6 +427,7 @@ fn follows(document: &[u8], position: usize, allowed: &[u8]) -> bool {
 
 fn structurally_complete(document: &str, comments: bool) -> bool {
     let bytes = document.as_bytes();
+    let references = DelimitedReferences::new(document);
     let mut position = 0;
     let mut depth = 0_isize;
 
@@ -436,7 +437,7 @@ fn structurally_complete(document: &str, comments: bool) -> bool {
             .next()
             .expect("position is a character boundary");
         if matches!(character, '"' | '\'' | '`') && follows(bytes, position, BEFORE_REFERENCE) {
-            let Some(end) = quoted_reference_end(document, position) else {
+            let Some(end) = references.end_at(document, position) else {
                 return false;
             };
             position = end;

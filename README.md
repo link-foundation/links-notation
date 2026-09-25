@@ -256,8 +256,8 @@ All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP)
 | Language | Tests | Test categories |
 | --- | --- | --- |
 | Python | 222 | 19 |
-| JavaScript | 257 | 21 |
-| Rust | 335 | 23 |
+| JavaScript | 266 | 22 |
+| Rust | 344 | 24 |
 | C# | 237 | 21 |
 | Go | 115 | 13 |
 | Java | 161 | 12 |
