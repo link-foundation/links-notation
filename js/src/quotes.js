@@ -73,8 +73,6 @@ export class DelimitedReferences {
     const runs = this.#runsOf(quote);
     const opening = runs.indexOf(start);
     const count = runs.end(opening) - start;
-    const emptyReference =
-      count % 2 === 0 ? { value: '', length: count } : null;
 
     // The first run after the opening one that closes the reference.
     let closing = opening + 1;
@@ -88,26 +86,8 @@ export class DelimitedReferences {
         closing++;
       }
     }
-    if (closing >= runs.count) {
-      return emptyReference;
-    }
-
-    const parts = [];
-    let position = runs.end(opening);
-    for (let run = opening + 1; run <= closing; run++) {
-      const length = runs.lengths[run];
-      const escaped = Math.floor(length / (2 * count)) * count;
-      const closes = run === closing ? count : 0;
-      parts.push(document.slice(position, runs.starts[run]));
-      parts.push(quote.repeat(length - escaped - closes));
-      position = runs.end(run);
-    }
-    const value = parts.join('');
-
-    if (emptyReference !== null && !isSubstantiveBody(value)) {
-      return emptyReference;
-    }
-    return { value, length: position - start };
+    const end = closing < runs.count ? runs.end(closing) : null;
+    return reading(document, start, quote, count, end);
   }
 
   #runsOf(quote) {
@@ -116,6 +96,74 @@ export class DelimitedReferences {
     }
     return this.runsByQuote.get(quote);
   }
+}
+
+/**
+ * The reference opened at `start`, read without a list of runs: for a single
+ * reference that is as quick, since it is read once.
+ * @param {string} document - The document being read
+ * @param {number} start - Position of the opening delimiter
+ * @returns {{value: string, length: number}|null} What the reference holds
+ *   and how many characters it takes, or null when nothing opens there
+ */
+export function readReference(document, start) {
+  const quote = document[start];
+  if (!QUOTES.includes(quote)) {
+    return null;
+  }
+  const count = runLength(document, start, quote);
+
+  let end = null;
+  let position = document.indexOf(quote, start + count);
+  while (position !== -1) {
+    const length = runLength(document, position, quote);
+    if (length >= count && Math.floor(length / count) % 2 === 1) {
+      end = position + length;
+      break;
+    }
+    position = document.indexOf(quote, position + length);
+  }
+  return reading(document, start, quote, count, end);
+}
+
+/**
+ * The reading of a reference opened by `count` delimiters at `start`, closed
+ * by the run that ends at `end` when there is one.
+ */
+function reading(document, start, quote, count, end) {
+  const emptyReference = count % 2 === 0 ? { value: '', length: count } : null;
+  if (end === null) {
+    return emptyReference;
+  }
+
+  const parts = [];
+  let position = start + count;
+  let run = document.indexOf(quote, position);
+  while (run !== -1 && run < end) {
+    const length = runLength(document, run, quote);
+    const escaped = Math.floor(length / (2 * count)) * count;
+    // The closing run is the last one of the body.
+    const closes = run + length === end ? count : 0;
+    parts.push(document.slice(position, run));
+    parts.push(quote.repeat(length - escaped - closes));
+    position = run + length;
+    run = document.indexOf(quote, position);
+  }
+  const value = parts.join('');
+
+  if (emptyReference !== null && !isSubstantiveBody(value)) {
+    return emptyReference;
+  }
+  return { value, length: end - start };
+}
+
+/** The number of `quote` delimiters in a row from `start` of `text`. */
+function runLength(text, start, quote) {
+  let end = start;
+  while (end < text.length && text[end] === quote) {
+    end++;
+  }
+  return end - start;
 }
 
 /**
@@ -129,13 +177,10 @@ class DelimiterRuns {
 
     let position = document.indexOf(quote);
     while (position !== -1) {
-      let end = position + 1;
-      while (end < document.length && document[end] === quote) {
-        end++;
-      }
+      const length = runLength(document, position, quote);
       this.starts.push(position);
-      this.lengths.push(end - position);
-      position = document.indexOf(quote, end);
+      this.lengths.push(length);
+      position = document.indexOf(quote, position + length);
     }
     this.count = this.starts.length;
 

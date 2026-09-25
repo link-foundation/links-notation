@@ -4,8 +4,8 @@
 // Compares, on random quote-heavy documents,
 //   - the generated parser before the change (git show <base>:js/src/parser-generated.js)
 //     with the one in the working tree, and
-//   - quotedReferenceEnd / stripComments before and DelimitedReferences /
-//     stripComments after.
+//   - quotedReferenceEnd / stripComments before and DelimitedReferences,
+//     quotedReferenceEnd and stripComments after.
 // Usage: node experiments/issue-316/differential-fuzz.mjs [iterations] [base]
 import { execSync } from 'node:child_process';
 import { mkdtempSync, writeFileSync } from 'node:fs';
@@ -74,7 +74,12 @@ for (let i = 0; i < iterations; i++) {
   }
   const references = new DelimitedReferences(text);
   for (let start = 0; start < text.length; start++) {
-    if (beforeComments.quotedReferenceEnd(text, start) !== references.endAt(start)) {
+    const end = beforeComments.quotedReferenceEnd(text, start);
+    if (end !== references.endAt(start)) {
+      mismatches++;
+      console.log('DelimitedReferences mismatch', JSON.stringify(text), start);
+    }
+    if (end !== currentComments.quotedReferenceEnd(text, start)) {
       mismatches++;
       console.log('quotedReferenceEnd mismatch', JSON.stringify(text), start);
     }

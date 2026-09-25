@@ -12,7 +12,7 @@
  * the reader can see.
  */
 
-import { DelimitedReferences, QUOTES } from './quotes.js';
+import { DelimitedReferences, QUOTES, readReference } from './quotes.js';
 
 /** The character that starts a comment. */
 export const COMMENT = '#';
@@ -80,4 +80,21 @@ export function stripComments(document) {
  */
 function follows(document, position, allowed) {
   return position === 0 || allowed.includes(document[position - 1]);
+}
+
+/**
+ * The position just past the delimited reference that starts at `start`, or
+ * `null` when nothing there opens one.
+ *
+ * This follows the same rules as the `parseQuotedStringAt` of the grammar: a
+ * run of N delimiters closes at the next run of exactly N, a run of 2N is that
+ * delimiter escaped, and an even run that encloses nothing substantive is the
+ * empty reference.
+ * @param {string} document - The document being read
+ * @param {number} start - Position of the opening delimiter
+ * @returns {number|null} The position just past the reference
+ */
+export function quotedReferenceEnd(document, start) {
+  const reading = readReference(document, start);
+  return reading === null ? null : start + reading.length;
 }
