@@ -79,10 +79,27 @@ impl Link {
     }
 }
 
+/// How deep links may nest when nothing says otherwise.
+///
+/// Every level of nesting is a level of recursion, so the limit is what keeps a
+/// deeply nested document from overflowing the stack, which aborts the process
+/// instead of returning an error. It is set well below what fits: in a debug
+/// build a group written where a value goes, as in `(a (a (a b)))`, costs about
+/// 24 KB of stack a level, so a spawned thread's 2 MiB holds only 86 of them.
+/// The same limit applies in every Links Notation implementation.
+pub const DEFAULT_MAX_DEPTH: usize = 64;
+
 pub struct ParserState {
     indentation_stack: RefCell<Vec<usize>>,
     base_indentation: RefCell<Option<usize>>,
     nested_depth: RefCell<usize>,
+    /// Nesting depth of the level-zero lines of the current context: the number
+    /// of groups and indentation levels that enclose it.
+    context_depth: RefCell<usize>,
+    max_depth: usize,
+    /// Where the document first nested deeper than `max_depth`, as an address
+    /// into the document being parsed.
+    too_deep: RefCell<Option<usize>>,
     furthest: RefCell<FurthestFailure>,
 }
 
@@ -116,12 +133,16 @@ pub struct ParseFailure {
     /// combinator gave up, not what is wrong with the document, so it is kept
     /// out of the error message and reachable only through `Debug`.
     pub kind: Option<nom::error::ErrorKind>,
+    /// The maximum nesting depth when the document nests deeper than it, which
+    /// `offset` then points at; `None` for every other failure.
+    pub max_depth_exceeded: Option<usize>,
 }
 
 /// Indentation state of the context a parenthesized group was opened in.
 pub struct SavedContext {
     indentation_stack: Vec<usize>,
     base_indentation: Option<usize>,
+    context_depth: usize,
 }
 
 impl Default for ParserState {
@@ -132,10 +153,18 @@ impl Default for ParserState {
 
 impl ParserState {
     pub fn new() -> Self {
+        Self::with_max_depth(DEFAULT_MAX_DEPTH)
+    }
+
+    /// A parser state that refuses links nested deeper than `max_depth`.
+    pub fn with_max_depth(max_depth: usize) -> Self {
         ParserState {
             indentation_stack: RefCell::new(vec![0]),
             base_indentation: RefCell::new(None),
             nested_depth: RefCell::new(0),
+            context_depth: RefCell::new(0),
+            max_depth,
+            too_deep: RefCell::new(None),
             furthest: RefCell::new(FurthestFailure::default()),
         }
     }
@@ -178,9 +207,11 @@ impl ParserState {
     /// Opens a nested context: the group body starts fresh at indentation level
     /// zero and follows the same rules as the root document.
     pub fn enter_nested_context(&self) -> SavedContext {
+        let depth = self.depth() + 1;
         let saved = SavedContext {
             indentation_stack: self.indentation_stack.replace(vec![0]),
             base_indentation: self.base_indentation.replace(None),
+            context_depth: self.context_depth.replace(depth),
         };
         *self.nested_depth.borrow_mut() += 1;
         saved
@@ -190,6 +221,7 @@ impl ParserState {
     pub fn exit_nested_context(&self, saved: SavedContext) {
         *self.indentation_stack.borrow_mut() = saved.indentation_stack;
         *self.base_indentation.borrow_mut() = saved.base_indentation;
+        *self.context_depth.borrow_mut() = saved.context_depth;
         let mut depth = self.nested_depth.borrow_mut();
         if *depth > 0 {
             *depth -= 1;
@@ -198,6 +230,28 @@ impl ParserState {
 
     pub fn is_inside_nested_context(&self) -> bool {
         *self.nested_depth.borrow() > 0
+    }
+
+    /// Nesting depth of the line being parsed: every enclosing parenthesized
+    /// group and every indentation level counts as one.
+    pub fn depth(&self) -> usize {
+        *self.context_depth.borrow() + self.indentation_stack.borrow().len() - 1
+    }
+
+    /// Fails for good when `depth` is deeper than the parser allows, so that
+    /// no alternative goes on to recurse any further. `at` is where the level
+    /// that is one too deep opens.
+    fn check_depth<'a>(&self, at: &'a str, depth: usize) -> IResult<&'a str, ()> {
+        if depth <= self.max_depth {
+            return Ok((at, ()));
+        }
+        self.too_deep
+            .borrow_mut()
+            .get_or_insert(at.as_ptr() as usize);
+        Err(nom::Err::Failure(nom::error::Error::new(
+            at,
+            nom::error::ErrorKind::TooLarge,
+        )))
     }
 
     /// Records that `what` could have continued the document at `at`, and that
@@ -234,6 +288,14 @@ impl ParserState {
             ),
             nom::Err::Incomplete(_) => (document.len(), None),
         };
+        if let Some(address) = *self.too_deep.borrow() {
+            return ParseFailure {
+                offset: address.saturating_sub(base).min(document.len()),
+                expected: Vec::new(),
+                kind,
+                max_depth_exceeded: Some(self.max_depth),
+            };
+        }
         let furthest = self.furthest.borrow();
         let tracked = furthest
             .address
@@ -251,6 +313,7 @@ impl ParserState {
             offset,
             expected,
             kind,
+            max_depth_exceeded: None,
         }
     }
 }
@@ -567,6 +630,7 @@ fn indented_id_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str,
 /// document, so indentation is structural inside parentheses as well.
 fn nested_group<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     let (body_input, _) = character('(', input, state, "\"(\"")?;
+    state.check_depth(input, state.depth() + 1)?;
     let saved = state.enter_nested_context();
     let result = nested_group_body(body_input, state);
     state.exit_nested_context(saved);
@@ -574,10 +638,14 @@ fn nested_group<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Lin
 }
 
 fn nested_group_body<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    if let Ok((rest, body)) = links(skip_empty_lines(input), state) {
-        let (rest, _) = whitespace(rest)?;
-        let (rest, _) = closing_parenthesis(rest, state)?;
-        return Ok((rest, Link::new_nested(body)));
+    match links(skip_empty_lines(input), state) {
+        Ok((rest, body)) => {
+            let (rest, _) = whitespace(rest)?;
+            let (rest, _) = closing_parenthesis(rest, state)?;
+            return Ok((rest, Link::new_nested(body)));
+        }
+        Err(failure @ nom::Err::Failure(_)) => return Err(failure),
+        Err(_) => {}
     }
     let (rest, _) = whitespace(input)?;
     let (rest, _) = closing_parenthesis(rest, state)?;
@@ -641,12 +709,18 @@ fn check_indentation<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str
 }
 
 fn element<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
+    let start = input;
     let (input, link) = any_link(input, state)?;
+    // Only a line that parsed counts, so trailing spaces indented past the limit
+    // are still read as the whitespace they are.
+    state.check_depth(start, state.depth())?;
 
     let indentation = state.indentation_stack.borrow().clone();
     if let Ok((child_input, _)) = push_indentation(input, state) {
-        if let Ok((rest, children)) = links(child_input, state) {
-            return Ok((rest, link.with_children(children)));
+        match links(child_input, state) {
+            Ok((rest, children)) => return Ok((rest, link.with_children(children))),
+            Err(failure @ nom::Err::Failure(_)) => return Err(failure),
+            Err(_) => {}
         }
         // No child line followed the indentation. Backtrack to the link so
         // the document can consume the remaining spaces as whitespace.
@@ -691,7 +765,17 @@ pub fn parse_document(input: &str) -> IResult<&str, Vec<Link>> {
 /// tells a reader which line to look at, and the remainder grows with the size
 /// of the document. This is the entry point the library uses.
 pub fn parse_document_with_diagnostics(input: &str) -> Result<Vec<Link>, ParseFailure> {
-    let state = ParserState::new();
+    parse_document_with_max_depth(input, DEFAULT_MAX_DEPTH)
+}
+
+/// Parses a document the way [`parse_document_with_diagnostics`] does, refusing
+/// links nested deeper than `max_depth`. Every parenthesized group and every
+/// indentation level is one level of nesting.
+pub fn parse_document_with_max_depth(
+    input: &str,
+    max_depth: usize,
+) -> Result<Vec<Link>, ParseFailure> {
+    let state = ParserState::with_max_depth(max_depth);
     match document(input, &state) {
         Ok((_, links)) => Ok(links),
         Err(error) => Err(state.failure(input, &error)),
