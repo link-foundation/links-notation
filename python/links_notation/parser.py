@@ -462,13 +462,7 @@ class Parser:
 
         # Special case: indented ID syntax (id: followed by children)
         if item.get("is_indented_id") and item.get("id") and not item.get("values") and children:
-            child_values = []
-            for child in children:
-                # Extract the reference from child's values
-                if child.get("values") and len(child["values"]) == 1:
-                    child_values.append(self._transform_link(child["values"][0]))
-                else:
-                    child_values.append(self._transform_link(child))
+            child_values = [self._transform_indented_value(child) for child in children]
 
             link_with_children = {"id": item["id"], "values": child_values}
             current_link = self._transform_link(link_with_children)
@@ -502,6 +496,22 @@ class Parser:
                 result.append(current_link)
             else:
                 result.append(self._combine_path_elements(parent_path, current_link))
+
+    def _transform_indented_value(self, item: Dict) -> Link:
+        """Keep a child line's name and recursively attach its indented lines."""
+        children = item.get("children", [])
+        if children and item.get("id") is not None and not item.get("values"):
+            return Link(item["id"], [self._transform_indented_value(child) for child in children])
+
+        current = self._transform_link(item)
+        if children:
+            return Link(
+                current.id,
+                current.values + [self._transform_indented_value(child) for child in children],
+            )
+        if item.get("id") is None and "nested" not in item and len(current.values) == 1:
+            return current.values[0]
+        return current
 
     def _combine_path_elements(self, path_elements: List[Link], current: Link) -> Link:
         """Combine path elements into a single link."""

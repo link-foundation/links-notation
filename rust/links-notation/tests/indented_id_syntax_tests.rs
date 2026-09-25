@@ -111,10 +111,11 @@ mod tests {
         let input = "root:\n  child1\n  child2\n    grandchild";
         let result = parse_lino_to_links(input).unwrap();
 
-        assert!(!result.is_empty());
-        // The root should exist
-        let formatted = format!("{}", result[0]);
-        assert!(formatted.contains("root"));
+        assert_eq!(result.len(), 1);
+        assert_eq!(
+            format!("{}", result[0]),
+            "(root: child1 (child2 grandchild))"
+        );
     }
 
     #[test]

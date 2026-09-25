@@ -102,7 +102,20 @@ namespace Link.Foundation.Links.Notation
                 }
                 return new Link<TLinkAddress>(link.Id, childValues);
             }
-            else if (!group.IsParenthesized && link.Values != null && link.Values.Count == 1)
+            else if (groups != null && groups.Count > 0)
+            {
+                var values = new List<Link<TLinkAddress>>();
+                if (link.Values != null)
+                {
+                    values.AddRange(link.Values);
+                }
+                for (int i = 0; i < groups.Count; i++)
+                {
+                    values.Add(TransformIndentedIdLink(groups[i]));
+                }
+                return new Link<TLinkAddress>(link.Id, values);
+            }
+            else if (!group.IsParenthesized && link.Id == null && link.Values != null && link.Values.Count == 1)
             {
                 return link.Values[0];
             }

@@ -123,7 +123,6 @@ test('Indented ID with deeper nesting', () => {
   child2
     grandchild`;
 
-  // This should work but the grandchild will be processed as a separate nested structure
   const result = parser.parse(input);
   expect(result.length).toBeGreaterThan(0);
 
@@ -131,6 +130,7 @@ test('Indented ID with deeper nesting', () => {
   const rootLink = result[0];
   expect(rootLink.id).toBe('root');
   expect(rootLink.values.length).toBe(2);
+  expect(formatLinks(result)).toBe('(root: child1 (child2 grandchild))');
 });
 
 test('Empty indented ID should work', () => {

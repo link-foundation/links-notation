@@ -678,41 +678,8 @@ fn flatten_link_recursive(
         && link.values.is_empty()
         && !link.children.is_empty()
     {
-        let child_values: Vec<LiNo<String>> = link
-            .children
-            .iter()
-            .map(|child| {
-                // For indented children, if they have single values, extract them
-                if child.values.len() == 1
-                    && child.values[0].values.is_empty()
-                    && child.values[0].children.is_empty()
-                {
-                    // Use if let to safely extract the ID instead of unwrap()
-                    if let Some(ref id) = child.values[0].id {
-                        LiNo::Ref(id.clone())
-                    } else {
-                        // If no ID, create an empty link
-                        parser::Link {
-                            id: child.id.clone(),
-                            values: child.values.clone(),
-                            children: vec![],
-                            is_indented_id: false,
-                            nested: child.nested.clone(),
-                        }
-                        .into()
-                    }
-                } else {
-                    parser::Link {
-                        id: child.id.clone(),
-                        values: child.values.clone(),
-                        children: vec![],
-                        is_indented_id: false,
-                        nested: child.nested.clone(),
-                    }
-                    .into()
-                }
-            })
-            .collect();
+        let child_values: Vec<LiNo<String>> =
+            link.children.iter().map(transform_indented_value).collect();
 
         let current = LiNo::Link {
             id: link.id.clone(),
@@ -807,6 +774,56 @@ fn flatten_link_recursive(
     // Process children
     for child in &link.children {
         flatten_link_recursive(child, Some(&combined), result);
+    }
+}
+
+// Convert a child line and all its descendants into one value of an indented ID.
+fn transform_indented_value(link: &parser::Link) -> LiNo<String> {
+    let children: Vec<_> = link.children.iter().map(transform_indented_value).collect();
+    if !children.is_empty() && link.is_indented_id && link.id.is_some() && link.values.is_empty() {
+        return LiNo::Link {
+            id: link.id.clone(),
+            values: children,
+        };
+    }
+    let current = if let Some(body) = &link.nested {
+        transform_nested(body)
+    } else {
+        parser::Link {
+            id: link.id.clone(),
+            values: link.values.clone(),
+            children: vec![],
+            is_indented_id: false,
+            nested: None,
+        }
+        .into()
+    };
+
+    if !children.is_empty() {
+        match current {
+            LiNo::Link { id, mut values } => {
+                values.extend(children);
+                LiNo::Link { id, values }
+            }
+            LiNo::Ref(id) => {
+                if link.nested.is_some() {
+                    return LiNo::Link {
+                        id: Some(id),
+                        values: children,
+                    };
+                }
+                let mut values = vec![LiNo::Ref(id)];
+                values.extend(children);
+                LiNo::Link { id: None, values }
+            }
+        }
+    } else if link.id.is_none() && link.nested.is_none() && link.values.len() == 1 {
+        match current {
+            LiNo::Link { id: None, values } => values.into_iter().next().unwrap(),
+            value => value,
+        }
+    } else {
+        current
     }
 }
 

@@ -134,7 +134,6 @@ def test_indented_id_with_deeper_nesting():
   child2
     grandchild"""
 
-    # This should work but the grandchild will be processed as a separate nested structure
     result = parser.parse(input_text)
     assert len(result) > 0
 
@@ -142,6 +141,7 @@ def test_indented_id_with_deeper_nesting():
     root_link = result[0]
     assert root_link.id == "root"
     assert len(root_link.values) == 2
+    assert format_links(result) == "(root: child1 (child2 grandchild))"
 
 
 def test_empty_indented_id_should_work():

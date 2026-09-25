@@ -29,7 +29,7 @@ The following EBNF grammar formally defines the Links Notation syntax:
 
 ```ebnf
 (* Links Notation (Lino) Grammar - EBNF *)
-(* Version: 0.21.0 *)
+(* Version: 0.21.1 *)
 
 (* === Document Structure === *)
 document            = skip_empty_lines, links, whitespace, EOF
@@ -514,6 +514,22 @@ outer:
 
 Both produce equivalent structures.
 
+Each line beneath an indented ID becomes one of its values. A named line keeps
+its name, so `file: path` is the value `(file: path)`. A nested indented ID
+recursively gathers its own lines before it becomes a value.
+
+A bare value may also have indented lines. They form an anonymous nested link
+with that value first. For example:
+
+```lino
+root:
+  child1
+  child2
+    grandchild
+```
+
+is equivalent to `(root: child1 (child2 grandchild))`.
+
 ## Syntax Diagrams
 
 ### Document
@@ -821,3 +837,5 @@ for valid input.
 | 0.21.0  | A singlet is an anonymous link with one reference value;     |
 |         | CR is a line break, and only space, tab, LF and CR are       |
 |         | whitespace when parsing a document or an even quote body    |
+| 0.21.1  | Names and nested values below indented IDs are preserved;     |
+|         | a bare value with indented children forms an anonymous link  |

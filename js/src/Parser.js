@@ -80,13 +80,9 @@ export class Parser {
         item.id !== null &&
         (!item.values || item.values.length === 0)
       ) {
-        const childValues = item.children.map((child) => {
-          // For indented children, extract the actual reference from the child's values
-          if (child.values && child.values.length === 1) {
-            return this.transformLink(child.values[0]);
-          }
-          return this.transformLink(child);
-        });
+        const childValues = item.children.map((child) =>
+          this.transformIndentedValue(child)
+        );
         const linkWithChildren = {
           id: item.id,
           values: childValues,
@@ -126,6 +122,34 @@ export class Parser {
         result.push(this.combinePathElements(parentPath, currentLink));
       }
     }
+  }
+
+  // A line below an indented ID is a value in its own right. Bare single
+  // references unwrap, but named links and descendants keep their structure.
+  transformIndentedValue(item) {
+    const children = item.children || [];
+    if (children.length && item.id != null && !item.values?.length) {
+      return new Link(
+        item.id,
+        children.map((child) => this.transformIndentedValue(child))
+      );
+    }
+
+    const current = this.transformLink(item);
+    if (children.length) {
+      return new Link(current.id, [
+        ...current.values,
+        ...children.map((child) => this.transformIndentedValue(child)),
+      ]);
+    }
+    if (
+      item.id == null &&
+      item.nested === undefined &&
+      current.values.length === 1
+    ) {
+      return current.values[0];
+    }
+    return current;
   }
 
   combinePathElements(pathElements, current) {

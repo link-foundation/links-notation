@@ -115,6 +115,7 @@ class IndentedIdSyntaxTest extends TestCase
         $rootLink = $result[0];
         $this->assertSame('root', $rootLink->id);
         $this->assertCount(2, $rootLink->values);
+        $this->assertSame('(root: child1 (child2 grandchild))', Formatter::formatLinks($result));
     }
 
     public function testEmptyIndentedIdWorks(): void

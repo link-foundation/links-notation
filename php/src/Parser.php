@@ -682,15 +682,7 @@ class Parser
             && $children;
 
         if ($isIndentedId) {
-            $childValues = [];
-            foreach ($children as $child) {
-                // Extract the reference from child's values
-                if (isset($child['values']) && count($child['values']) === 1) {
-                    $childValues[] = $this->transformLink($child['values'][0]);
-                } else {
-                    $childValues[] = $this->transformLink($child);
-                }
-            }
+            $childValues = array_map([$this, 'transformIndentedValue'], $children);
 
             $currentLink = new Link($id, $childValues);
             $result[] = $parentPath ? $this->combinePathElements($parentPath, $currentLink) : $currentLink;
@@ -710,6 +702,25 @@ class Parser
                 $this->collectLinks($child, $newPath, $result);
             }
         }
+    }
+
+    /** @param array<string, mixed> $item */
+    private function transformIndentedValue(array $item): Link
+    {
+        $children = $item['children'] ?? [];
+        if ($children && isset($item['id']) && !($item['values'] ?? [])) {
+            return new Link($item['id'], array_map([$this, 'transformIndentedValue'], $children));
+        }
+
+        $current = $this->transformLink($item);
+        if ($children) {
+            $values = array_merge($current->values, array_map([$this, 'transformIndentedValue'], $children));
+            return new Link($current->id, $values);
+        }
+        if (!isset($item['id']) && !array_key_exists('nested', $item) && count($current->values) === 1) {
+            return $current->values[0];
+        }
+        return $current;
     }
 
     /**

@@ -586,12 +586,7 @@ func (p *Parser) collectLinks(item *internalLink, parentPath []*Link, result *[]
 	if item.isIndentedID && item.id != nil && len(item.values) == 0 && len(children) > 0 {
 		var childValues []*Link
 		for _, child := range children {
-			// Extract the reference from child's values
-			if len(child.values) == 1 {
-				childValues = append(childValues, p.transformLink(child.values[0]))
-			} else {
-				childValues = append(childValues, p.transformLink(child))
-			}
+			childValues = append(childValues, p.transformIndentedValue(child))
 		}
 
 		currentLink := &Link{ID: item.id, Values: childValues}
@@ -631,6 +626,31 @@ func (p *Parser) collectLinks(item *internalLink, parentPath []*Link, result *[]
 	} else {
 		*result = append(*result, p.combinePathElements(parentPath, currentLink))
 	}
+}
+
+// transformIndentedValue turns one child line and its descendants into a value.
+func (p *Parser) transformIndentedValue(item *internalLink) *Link {
+	children := item.children
+	if len(children) > 0 && item.id != nil && len(item.values) == 0 {
+		values := make([]*Link, 0, len(children))
+		for _, child := range children {
+			values = append(values, p.transformIndentedValue(child))
+		}
+		return &Link{ID: item.id, Values: values}
+	}
+
+	current := p.transformLink(item)
+	if len(children) > 0 {
+		values := append([]*Link{}, current.Values...)
+		for _, child := range children {
+			values = append(values, p.transformIndentedValue(child))
+		}
+		return &Link{ID: current.ID, Values: values}
+	}
+	if item.id == nil && !item.isNested && len(current.Values) == 1 {
+		return current.Values[0]
+	}
+	return current
 }
 
 func (p *Parser) combinePathElements(pathElements []*Link, current *Link) *Link {
