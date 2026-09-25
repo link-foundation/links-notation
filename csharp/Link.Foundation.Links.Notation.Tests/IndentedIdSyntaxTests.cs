@@ -197,6 +197,7 @@ third value";
             var rootLink = result[0];
             Assert.Equal("root", rootLink.Id);
             Assert.Equal(2, rootLink.Values!.Count);
+            Assert.Equal("(root: child1 (child2 grandchild))", result.Format());
         }
     }
 }

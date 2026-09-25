@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Preserve names and nested values below indented IDs in all seven parsers.
+  A bare value with indented children now forms an anonymous nested link,
+  so `root` over `child2` over `grandchild` keeps all three references
+  ([#313](https://github.com/link-foundation/links-notation/issues/313)).
+
 ### Added
 
 - Streaming parsers in C#, JavaScript, Rust, Python, Go, Java, and PHP with

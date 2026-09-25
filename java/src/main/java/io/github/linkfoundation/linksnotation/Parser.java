@@ -657,13 +657,7 @@ public class Parser {
 
       List<Link> childValues = new ArrayList<>();
       for (Map<String, Object> child : children) {
-        List<Map<String, Object>> childVals =
-            (List<Map<String, Object>>) child.getOrDefault("values", new ArrayList<>());
-        if (childVals.size() == 1) {
-          childValues.add(transformLink(childVals.get(0)));
-        } else {
-          childValues.add(transformLink(child));
-        }
+        childValues.add(transformIndentedValue(child));
       }
 
       Map<String, Object> linkWithChildren = new HashMap<>();
@@ -706,6 +700,35 @@ public class Parser {
         result.add(combinePathElements(parentPath, currentLink));
       }
     }
+  }
+
+  /** Convert a child line and its descendants to a value of an indented ID. */
+  @SuppressWarnings("unchecked")
+  private Link transformIndentedValue(Map<String, Object> item) {
+    List<Map<String, Object>> children =
+        (List<Map<String, Object>>) item.getOrDefault("children", new ArrayList<>());
+    if (!children.isEmpty()
+        && item.get("id") != null
+        && ((List<?>) item.getOrDefault("values", new ArrayList<>())).isEmpty()) {
+      List<Link> values = new ArrayList<>();
+      for (Map<String, Object> child : children) {
+        values.add(transformIndentedValue(child));
+      }
+      return new Link((String) item.get("id"), values);
+    }
+
+    Link current = transformLink(item);
+    if (!children.isEmpty()) {
+      List<Link> values = new ArrayList<>(current.getValues());
+      for (Map<String, Object> child : children) {
+        values.add(transformIndentedValue(child));
+      }
+      return new Link(current.getId(), values);
+    }
+    if (item.get("id") == null && !item.containsKey("nested") && current.getValues().size() == 1) {
+      return current.getValues().get(0);
+    }
+    return current;
   }
 
   /** Combine path elements into a single link. */

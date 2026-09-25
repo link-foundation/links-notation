@@ -514,6 +514,22 @@ outer:
 
 Both produce equivalent structures.
 
+Each line beneath an indented ID becomes one of its values. A named line keeps
+its name, so `file: path` is the value `(file: path)`. A nested indented ID
+recursively gathers its own lines before it becomes a value.
+
+A bare value may also have indented lines. They form an anonymous nested link
+with that value first. For example:
+
+```lino
+root:
+  child1
+  child2
+    grandchild
+```
+
+is equivalent to `(root: child1 (child2 grandchild))`.
+
 ## Syntax Diagrams
 
 ### Document
