@@ -1,26 +1,11 @@
 use links_notation::{parse_lino, LiNo};
 
-// Helper to extract the single reference from a parsed result
+// Helper to extract the single reference from a parsed singlet link, with
+// parse_lino's outer document link around it.
 fn get_single_ref_id(lino: &LiNo<String>) -> Option<&String> {
     match lino {
         LiNo::Ref(id) => Some(id),
-        LiNo::Link { id: None, values } if values.len() == 1 => {
-            if let LiNo::Ref(id) = &values[0] {
-                Some(id)
-            } else if let LiNo::Link {
-                id: Some(ref_id),
-                values: inner_values,
-            } = &values[0]
-            {
-                if inner_values.is_empty() {
-                    Some(ref_id)
-                } else {
-                    None
-                }
-            } else {
-                None
-            }
-        }
+        LiNo::Link { id: None, values } if values.len() == 1 => get_single_ref_id(&values[0]),
         LiNo::Link {
             id: Some(ref_id),
             values,

@@ -55,6 +55,15 @@ fn test_reports_the_line_a_late_defect_is_on() {
 }
 
 #[test]
+fn test_lone_cr_counts_as_one_line_break_in_diagnostics() {
+    let error = syntax_error("a\rb: c: d");
+
+    assert_eq!(error.line, 2);
+    assert_eq!(error.column, 5);
+    assert_eq!(error.line_text, "b: c: d");
+}
+
+#[test]
 fn test_says_what_could_have_stood_there() {
     let error = syntax_error("a: b: c");
 

@@ -224,6 +224,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   that catch the base type keep working ([#302](https://github.com/link-foundation/links-notation/issues/302))
 
 ### Fixed
+- JavaScript and Rust now agree on lone CR line breaks, Unicode references and
+  even quote bodies, trailing indentation, and singlet links. A line of one
+  reference is an anonymous link holding that reference in both parsers
+  ([#312](https://github.com/link-foundation/links-notation/issues/312)).
 - A reference that begins with a `#` is written quoted (`'#tag'`) by the
   formatter of every implementation, so a document a formatter writes reads back
   as itself. `(a #tag)` used to be written unquoted, and reading it back gave

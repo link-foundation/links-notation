@@ -285,14 +285,16 @@ fn test_multiple_words_in_quotes() {
 fn test_simple_reference() {
     let result = parse_document("hello").unwrap();
     assert_eq!(result.1.len(), 1);
-    assert_eq!(result.1[0].id, Some("hello".to_string()));
+    assert_eq!(result.1[0].id, None);
+    assert_eq!(result.1[0].values[0].id, Some("hello".to_string()));
 }
 
 #[test]
 fn test_quoted_reference() {
     let result = parse_document("\"hello world\"").unwrap();
     assert_eq!(result.1.len(), 1);
-    assert_eq!(result.1[0].id, Some("hello world".to_string()));
+    assert_eq!(result.1[0].id, None);
+    assert_eq!(result.1[0].values[0].id, Some("hello world".to_string()));
 }
 
 /// A parenthesized group keeps the links written inside it until the whole
@@ -309,8 +311,9 @@ fn test_singlet_link_parser() {
     assert_eq!(result.1.len(), 1);
     let body = nested_body(&result.1[0]);
     assert_eq!(body.len(), 1);
-    assert_eq!(body[0].id, Some("singlet".to_string()));
-    assert_eq!(body[0].values.len(), 0);
+    assert_eq!(body[0].id, None);
+    assert_eq!(body[0].values.len(), 1);
+    assert_eq!(body[0].values[0].id, Some("singlet".to_string()));
     assert_eq!(body[0].children.len(), 0);
 }
 

@@ -85,7 +85,7 @@ fn a_comment_line_inside_an_indented_block_is_skipped() {
 
 #[test]
 fn a_comment_line_inside_a_group_is_skipped() {
-    assert_parses_as("(\n  a\n  # why\n  b\n)\n", "(<a> <b>)");
+    assert_parses_as("(\n  a\n  # why\n  b\n)\n", "((<a>) (<b>))");
 }
 
 #[test]
@@ -95,7 +95,7 @@ fn a_document_of_comments_alone_holds_no_links() {
 
 #[test]
 fn a_hash_inside_a_token_is_an_ordinary_character() {
-    assert_parses_as("issue#1047\n", "<issue#1047>");
+    assert_parses_as("issue#1047\n", "(<issue#1047>)");
 }
 
 #[test]
@@ -110,7 +110,7 @@ fn a_hash_inside_a_delimited_reference_is_content() {
 
 #[test]
 fn a_comment_may_follow_a_delimited_reference() {
-    assert_parses_as("\"a\" # why\n", "<a>");
+    assert_parses_as("\"a\" # why\n", "(<a>)");
 }
 
 #[test]

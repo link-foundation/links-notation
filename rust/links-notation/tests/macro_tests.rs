@@ -9,13 +9,18 @@ mod macro_tests {
     #[test]
     fn test_simple_reference() {
         let result = lino!("simple");
-        // The macro should parse "simple" as a single reference
+        // The macro wraps the singlet link in a document link.
         match result {
             LiNo::Link { id: None, values } => {
                 assert_eq!(values.len(), 1);
                 match &values[0] {
-                    LiNo::Ref(r) => assert_eq!(r, "simple"),
-                    _ => panic!("Expected a reference"),
+                    LiNo::Link {
+                        id: None,
+                        values: inner,
+                    } => {
+                        assert_eq!(inner, &vec![LiNo::Ref("simple".to_string())]);
+                    }
+                    _ => panic!("Expected a singlet link"),
                 }
             }
             _ => panic!("Expected a link with values"),
@@ -270,13 +275,18 @@ mod macro_tests {
     #[test]
     fn test_direct_simple_reference() {
         let result = lino!(simple);
-        // The macro should parse "simple" as a single reference
+        // The macro wraps the singlet link in a document link.
         match result {
             LiNo::Link { id: None, values } => {
                 assert_eq!(values.len(), 1);
                 match &values[0] {
-                    LiNo::Ref(r) => assert_eq!(r, "simple"),
-                    _ => panic!("Expected a reference"),
+                    LiNo::Link {
+                        id: None,
+                        values: inner,
+                    } => {
+                        assert_eq!(inner, &vec![LiNo::Ref("simple".to_string())]);
+                    }
+                    _ => panic!("Expected a singlet link"),
                 }
             }
             _ => panic!("Expected a link with values"),
