@@ -19,7 +19,8 @@ export class ParseError extends Error {
    * @param {Error} error - The error the generated parser threw
    */
   constructor(input, error) {
-    const start = error?.location?.start ?? { offset: 0, line: 1, column: 1 };
+    const start = positionAt(input, error?.location?.start?.offset ?? 0);
+    const end = positionAt(input, error?.location?.end?.offset ?? start.offset);
     const lineText = lineAt(input, start.offset);
     const summary = `line ${start.line}, column ${start.column}: ${error.message}`;
     const snippet = quote(start.line, lineText, start.column);
@@ -29,7 +30,7 @@ export class ParseError extends Error {
     /** @type {Error} The error the generated parser threw */
     this.cause = error;
     /** @type {{start: {offset: number, line: number, column: number}}} */
-    this.location = error.location;
+    this.location = { ...error.location, start, end };
     /** @type {number} Offset of the offending position from the start of the document */
     this.offset = start.offset;
     /** @type {number} Line the offending position is on, counted from 1 */
@@ -53,10 +54,37 @@ export class ParseError extends Error {
  */
 function lineAt(input, offset) {
   const at = Math.max(0, Math.min(offset, input.length));
-  const start = input.lastIndexOf('\n', at - 1) + 1;
-  const end = input.indexOf('\n', start);
-  const line = input.slice(start, end === -1 ? input.length : end);
-  return line.endsWith('\r') ? line.slice(0, -1) : line;
+  const before = input.slice(0, at);
+  const start =
+    Math.max(before.lastIndexOf('\n'), before.lastIndexOf('\r')) + 1;
+  const end = input.slice(start).search(/[\r\n]/);
+  return input.slice(start, end === -1 ? input.length : start + end);
+}
+
+/**
+ * Count CR, LF and CRLF as line breaks, as the grammar does. Peggy's error
+ * location counts a lone CR as an ordinary character.
+ * @param {string} input - The document being parsed
+ * @param {number} offset - Offset of the position
+ * @returns {{offset: number, line: number, column: number}} The position
+ */
+function positionAt(input, offset) {
+  const at = Math.max(0, Math.min(offset, input.length));
+  let line = 1;
+  let column = 1;
+  for (let index = 0; index < at; index++) {
+    if (input[index] === '\r') {
+      line++;
+      column = 1;
+      if (input[index + 1] === '\n' && index + 1 < at) index++;
+    } else if (input[index] === '\n') {
+      line++;
+      column = 1;
+    } else {
+      column++;
+    }
+  }
+  return { offset: at, line, column };
 }
 
 /**

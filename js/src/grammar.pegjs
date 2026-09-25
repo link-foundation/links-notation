@@ -83,7 +83,7 @@
           return false;
         }
       }
-      if (!/\s/.test(c)) {
+      if (!/[ \t\n\r]/.test(c)) {
         hasVisible = true;
       }
     }

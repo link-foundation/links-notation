@@ -275,7 +275,8 @@ var ELLIPSIS = "...";
 
 class ParseError extends Error {
   constructor(input, error) {
-    const start = error?.location?.start ?? { offset: 0, line: 1, column: 1 };
+    const start = positionAt(input, error?.location?.start?.offset ?? 0);
+    const end = positionAt(input, error?.location?.end?.offset ?? start.offset);
     const lineText = lineAt(input, start.offset);
     const summary = `line ${start.line}, column ${start.column}: ${error.message}`;
     const snippet = quote(start.line, lineText, start.column);
@@ -283,7 +284,7 @@ class ParseError extends Error {
 ${snippet}`);
     this.name = "ParseError";
     this.cause = error;
-    this.location = error.location;
+    this.location = { ...error.location, start, end };
     this.offset = start.offset;
     this.line = start.line;
     this.column = start.column;
@@ -294,12 +295,32 @@ ${snippet}`);
 }
 function lineAt(input, offset) {
   const at = Math.max(0, Math.min(offset, input.length));
-  const start = input.lastIndexOf(`
-`, at - 1) + 1;
-  const end = input.indexOf(`
-`, start);
-  const line = input.slice(start, end === -1 ? input.length : end);
-  return line.endsWith("\r") ? line.slice(0, -1) : line;
+  const before = input.slice(0, at);
+  const start = Math.max(before.lastIndexOf(`
+`), before.lastIndexOf("\r")) + 1;
+  const end = input.slice(start).search(/[\r\n]/);
+  return input.slice(start, end === -1 ? input.length : start + end);
+}
+function positionAt(input, offset) {
+  const at = Math.max(0, Math.min(offset, input.length));
+  let line = 1;
+  let column = 1;
+  for (let index = 0;index < at; index++) {
+    if (input[index] === "\r") {
+      line++;
+      column = 1;
+      if (input[index + 1] === `
+` && index + 1 < at)
+        index++;
+    } else if (input[index] === `
+`) {
+      line++;
+      column = 1;
+    } else {
+      column++;
+    }
+  }
+  return { offset: at, line, column };
 }
 function quote(number, lineText, column) {
   const [quoted, at] = windowAround(lineText, column);
@@ -400,7 +421,7 @@ function isSubstantiveBody(content) {
         return false;
       }
     }
-    if (!/\s/.test(character)) {
+    if (!/[ \t\n\r]/.test(character)) {
       hasVisible = true;
     }
   }
@@ -2220,7 +2241,7 @@ function peg$parse(input, options) {
           return false;
         }
       }
-      if (!/\s/.test(c)) {
+      if (!/[ \t\n\r]/.test(c)) {
         hasVisible = true;
       }
     }

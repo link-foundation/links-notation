@@ -155,7 +155,7 @@ function isSubstantiveBody(content) {
         return false;
       }
     }
-    if (!/\s/.test(character)) {
+    if (!/[ \t\n\r]/.test(character)) {
       hasVisible = true;
     }
   }

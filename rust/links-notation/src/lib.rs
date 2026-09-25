@@ -208,14 +208,33 @@ fn quote_line(line: &str, column: usize) -> (String, usize) {
 /// of the document.
 fn locate(document: &str, failure: parser::ParseFailure) -> SyntaxError {
     let offset = failure.offset.min(document.len());
-    let before = &document[..offset];
-    let line = before.matches('\n').count() + 1;
-    let line_start = before.rfind('\n').map_or(0, |position| position + 1);
+    let mut line = 1;
+    let mut line_start = 0;
+    let bytes = document.as_bytes();
+    let mut cursor = 0;
+    while cursor < offset {
+        match bytes[cursor] {
+            b'\r' => {
+                line += 1;
+                cursor += 1;
+                if cursor < offset && bytes[cursor] == b'\n' {
+                    cursor += 1;
+                }
+                line_start = cursor;
+            }
+            b'\n' => {
+                line += 1;
+                cursor += 1;
+                line_start = cursor;
+            }
+            _ => cursor += 1,
+        }
+    }
     let column = document[line_start..offset].chars().count() + 1;
     let line_end = document[line_start..]
-        .find('\n')
+        .find(['\r', '\n'])
         .map_or(document.len(), |position| line_start + position);
-    let line_text = document[line_start..line_end].trim_end_matches('\r');
+    let line_text = &document[line_start..line_end];
 
     SyntaxError {
         offset,
@@ -839,7 +858,7 @@ pub fn parse_lino_with_config(
     config: &ParserConfig,
 ) -> Result<LiNo<String>, ParseError> {
     // Handle empty or whitespace-only input by returning empty result
-    if document.trim().is_empty() {
+    if document.trim_matches(parser::is_whitespace_char).is_empty() {
         return Ok(LiNo::Link {
             id: None,
             values: vec![],
@@ -887,7 +906,7 @@ pub fn parse_lino_to_links_with_config(
     config: &ParserConfig,
 ) -> Result<Vec<LiNo<String>>, ParseError> {
     // Handle empty or whitespace-only input by returning empty collection
-    if document.trim().is_empty() {
+    if document.trim_matches(parser::is_whitespace_char).is_empty() {
         return Ok(vec![]);
     }
 

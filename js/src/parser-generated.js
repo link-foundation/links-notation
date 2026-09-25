@@ -1881,7 +1881,7 @@ function peg$parse(input, options) {
           return false;
         }
       }
-      if (!/\s/.test(c)) {
+      if (!/[ \t\n\r]/.test(c)) {
         hasVisible = true;
       }
     }
