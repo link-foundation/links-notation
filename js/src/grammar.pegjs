@@ -5,16 +5,24 @@
   // group opens a nested context that starts fresh at indentation level zero,
   // so line breaks and indentation mean the same thing at every depth.
   let contextStack = [];
+  // How deeply the current context is nested: the enclosing groups and the
+  // indentation levels around them. Every level is a level of recursion, so
+  // links nested deeper than maxDepth are refused rather than recursed into
+  // until the stack overflows.
+  let contextDepth = 0;
+  const maxDepth = options.maxDepth ?? Infinity;
 
   function resetState() {
     indentationStack = [0];
     baseIndentation = null;
     contextStack = [];
+    contextDepth = 0;
     return true;
   }
 
   function enterNestedContext() {
-    contextStack.push({ indentationStack, baseIndentation });
+    contextStack.push({ indentationStack, baseIndentation, contextDepth });
+    contextDepth = depth() + 1;
     indentationStack = [0];
     baseIndentation = null;
     return true;
@@ -25,8 +33,30 @@
     if (saved) {
       indentationStack = saved.indentationStack;
       baseIndentation = saved.baseIndentation;
+      contextDepth = saved.contextDepth;
     }
     return true;
+  }
+
+  // The nesting depth of the line being read: every enclosing group and every
+  // indentation level is one level, and the lines of a document are at level 0.
+  function depth() {
+    return contextDepth + indentationStack.length - 1;
+  }
+
+  // Refuses links at the given depth when it is deeper than maxDepth. The error
+  // is thrown rather than returned as a failed match, so no alternative is
+  // tried in its place, and says where the nesting got too deep.
+  function checkDepth(levels, where) {
+    if (levels <= maxDepth) {
+      return true;
+    }
+    try {
+      error(`nesting depth exceeds the maximum of ${maxDepth}`, where);
+    } catch (tooDeep) {
+      tooDeep.maxDepth = maxDepth;
+      throw tooDeep;
+    }
   }
 
   function isInsideNestedContext() {
@@ -60,6 +90,11 @@
   function checkIndentation(spaces) {
     const normalized = normalizeIndentation(spaces);
     return normalized >= indentationStack[indentationStack.length - 1];
+  }
+
+  function restoreIndentation(saved) {
+    indentationStack = saved;
+    return true;
   }
 
   function getCurrentIndentation() {
@@ -165,10 +200,14 @@ firstLine = SET_BASE_INDENTATION l:element { return l; }
 
 line = CHECK_INDENTATION l:element { return l; }
 
-element = e:anyLink PUSH_INDENTATION l:links {
-    return Object.assign({}, e, { children: l });
+// Only a line that parsed counts towards the depth, so trailing spaces indented
+// past the limit are still read as the whitespace they are. When no child line
+// follows the indentation, the indentation is put back the way it was.
+element = start:HERE e:anyLink &{ return checkDepth(depth(), start); }
+  saved:SAVE_INDENTATION children:(PUSH_INDENTATION l:links { return l; })?
+  &{ return children !== null || restoreIndentation(saved); } {
+    return children === null ? e : Object.assign({}, e, { children });
   }
-  / e:anyLink { return e; }
 
 referenceOrLink = l:multiLineAnyLink { return l; } / i:reference { return { id: i }; }
 
@@ -182,15 +221,19 @@ singleLineAnyLink = fl:singleLineLink eol { return fl; }
 // A parenthesised group opens a nested context that follows exactly the same
 // rules as the root of the document: line breaks separate links and
 // indentation nests them, starting fresh at indentation level zero.
-nestedGroup = "(" ENTER_NESTED_CONTEXT body:nestedGroupBody {
-    exitNestedContext();
-    return body;
-  }
+// The enclosing context is restored whether or not the group parses.
+nestedGroup = start:HERE "(" &{ return checkDepth(depth() + 1, start); }
+  ENTER_NESTED_CONTEXT body:nestedGroupBody? EXIT_NESTED_CONTEXT
+  &{ return body !== null; } { return body; }
 
 nestedGroupBody = skipEmptyLines l:links _ ")" { return { nested: l }; }
   / _ ")" { return { nested: [] }; }
 
 ENTER_NESTED_CONTEXT = &{ return enterNestedContext(); }
+
+EXIT_NESTED_CONTEXT = &{ return exitNestedContext(); }
+
+HERE = "" { return location(); }
 
 singleLineValueAndWhitespace = __ value:referenceOrLink { return value; }
 
@@ -257,6 +300,8 @@ backtickQuotedUniversal = &'`' &{
 
 consumeBacktick = c:. cs:consumeBacktickMore* { return [c].concat(cs).join(''); }
 consumeBacktickMore = &{ return parsedLength > 1 && (parsedLength--, true); } c:. { return c; }
+
+SAVE_INDENTATION = "" { return indentationStack.slice(); }
 
 SET_BASE_INDENTATION = spaces:" "* { setBaseIndentation(spaces); }
 
