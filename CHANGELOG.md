@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Read delimited references a run of delimiters at a time in the JavaScript
+  and Rust parsers. A reference that opens with a wide run of quotes, or many
+  references that never close, took quadratic time; parsing, comment stripping
+  and streaming such documents now take time linear in their length
+  ([#316](https://github.com/link-foundation/links-notation/issues/316)).
 - Preserve names and nested values below indented IDs in all seven parsers.
   A bare value with indented children now forms an anonymous nested link,
   so `root` over `child2` over `grandchild` keeps all three references
