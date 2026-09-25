@@ -592,8 +592,11 @@ links rather than one document link.
 
 - `comments: bool` - Whether a `#` opens a comment that runs to the end of its
   line (default: `true`)
+- `max_depth: usize` - How deep links may nest: every parenthesized group and
+  every indentation level is one level (default: `DEFAULT_MAX_DEPTH`, 64)
 - `ParserConfig::new()` - The defaults
 - `ParserConfig::without_comments()` - `#` as an ordinary character
+- `ParserConfig::new().with_max_depth(n)` - Refuse links nested deeper than `n`
 
 ### Formatting
 
@@ -668,6 +671,15 @@ if let Err(ParseError::SyntaxError(error)) = parse_lino("a: b: c") {
     println!("{}:{} (byte offset {})", error.line, error.column, error.offset);
     println!("expected {:?}, found {:?}", error.expected, error.found);
 }
+```
+
+`ParseError::NestingTooDeep` is returned for links nested deeper than
+`ParserConfig::max_depth`, at the group or the line that is one level too deep.
+The parser recurses once per level, so the limit is what turns a document that
+would overflow the stack, and abort the process, into an error:
+
+```text
+Nesting too deep at line 1, column 65: nesting depth exceeds the maximum of 64
 ```
 
 `ParseError::EmptyInput` is returned for input that is empty or only
