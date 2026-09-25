@@ -85,7 +85,7 @@ import { Parser, Link, FormatOptions } from 'links-notation';
 // TypeScript provides full type checking and autocomplete
 const parser = new Parser({
   maxInputSize: 10 * 1024 * 1024,
-  maxDepth: 1000,
+  maxDepth: 64,
 });
 
 const links: Link[] = parser.parse('(source: type target)');
@@ -200,7 +200,7 @@ import {
 // Create parser with options
 const parser = new Parser({
   maxInputSize: 5 * 1024 * 1024,
-  maxDepth: 500,
+  maxDepth: 32,
 });
 
 // Parse with full type safety
@@ -334,6 +334,11 @@ Main parser class for converting strings to links.
 
 - `constructor(options)` - Create a parser; `options.comments` set to `false`
   reads `#` as an ordinary character instead of the start of a comment
+  - `options.maxInputSize` - Maximum input size in bytes (default: 10MB)
+  - `options.maxDepth` - How deep links may nest (default: `DEFAULT_MAX_DEPTH`,
+    64). Every parenthesized group and every indentation level is one level,
+    and a document nested deeper is refused with a `ParseError` rather than
+    recursed into until the stack runs out
 - `initialize()` - Initialize the parser (async)
 - `parse(input)` - Parse a Lino string and return links
 
@@ -359,7 +364,7 @@ EventEmitter-based streaming parser for incremental parsing.
 
 - `constructor(options)` - Create a new streaming parser
   - `options.maxInputSize` - Maximum input size in bytes (default: 10MB)
-  - `options.maxDepth` - Maximum nesting depth (default: 1000)
+  - `options.maxDepth` - How deep links may nest (default: 64)
 - `write(chunk)` - Feed a chunk of data to the parser
 - `end()` - Finish parsing and return all parsed links
 - `position()` - Get current parsing position (line, column, offset)
@@ -397,6 +402,17 @@ Syntax error at line 2, column 12: Expected "(", [ \t], [\r\n], or [^ \t\n\r(:)]
 - `snippet` - The offending line with a caret under the offending column
 - `location` - The position as the generated parser reports it
 - `cause` - The error the generated parser threw
+- `maxDepth` - The deepest nesting allowed, when the document is nested deeper;
+  `null` for any other error
+
+A document nested deeper than `maxDepth` is refused at the group or the line
+that is one level too deep:
+
+```text
+Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
+1 | ((((a))))
+  |    ^
+```
 
 ## Project Structure
 

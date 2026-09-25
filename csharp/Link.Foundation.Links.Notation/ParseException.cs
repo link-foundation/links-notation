@@ -12,6 +12,9 @@ namespace Link.Foundation.Links.Notation
     /// document stops making sense at rather than the point the last alternative gave up
     /// on. It derives from <see cref="FormatException"/>, the exception the generated
     /// parser raised on its own, so code that catches that keeps working.
+    /// A document nested deeper than <see cref="Parser.MaxDepth"/> is refused with this
+    /// exception too; then <see cref="MaxDepth"/> says how deep the nesting may go, and the
+    /// position is the group or the line that is one level too deep.
     /// </remarks>
     public class ParseException : FormatException
     {
@@ -28,18 +31,32 @@ namespace Link.Foundation.Links.Notation
         /// <param name="offset">Offset of the position the parser stopped at.</param>
         /// <param name="innerException">The error the generated parser raised, if any.</param>
         public ParseException(string subject, int offset, Exception? innerException = null)
-            : this(Locate(subject ?? string.Empty, offset), innerException)
+            : this(Locate(subject ?? string.Empty, offset), null, innerException)
         {
         }
 
-        private ParseException(Position position, Exception? innerException)
-            : base(Describe(position), innerException)
+        /// <summary>
+        /// Creates an exception saying that <paramref name="subject"/> nests deeper than
+        /// <paramref name="maxDepth"/> at <paramref name="offset"/>.
+        /// </summary>
+        /// <param name="subject">The document that nests too deeply.</param>
+        /// <param name="offset">Offset of the group or the line that is one level too deep.</param>
+        /// <param name="maxDepth">The deepest nesting allowed.</param>
+        /// <param name="innerException">The error the parser raised, if any.</param>
+        public ParseException(string subject, int offset, int maxDepth, Exception? innerException = null)
+            : this(Locate(subject ?? string.Empty, offset), maxDepth, innerException)
+        {
+        }
+
+        private ParseException(Position position, int? maxDepth, Exception? innerException)
+            : base(Describe(position, maxDepth), innerException)
         {
             Offset = position.Offset;
             Line = position.Line;
             Column = position.Column;
             Found = position.Found;
             LineText = position.LineText;
+            MaxDepth = maxDepth;
         }
 
         /// <summary>Offset of the offending position from the start of the document.</summary>
@@ -57,8 +74,17 @@ namespace Link.Foundation.Links.Notation
         /// <summary>The offending line, as written, without its line ending.</summary>
         public string LineText { get; }
 
-        /// <summary>The one-line summary: where the parser stopped and what stands there.</summary>
-        public string Summary => Summarize(new Position(Offset, Line, Column, Found, LineText));
+        /// <summary>
+        /// The deepest nesting allowed, when the document is nested deeper than that;
+        /// <see langword="null"/> for any other error.
+        /// </summary>
+        public int? MaxDepth { get; }
+
+        /// <summary>
+        /// The one-line summary: where the parser stopped and what stands there, or that the
+        /// nesting is too deep there.
+        /// </summary>
+        public string Summary => Summarize(new Position(Offset, Line, Column, Found, LineText), MaxDepth);
 
         /// <summary>
         /// The offending line with a caret under the offending column, quoted the way a
@@ -76,11 +102,15 @@ namespace Link.Foundation.Links.Notation
             string LineText);
 
         /// <summary>The message the exception carries: the summary and the quoted line.</summary>
-        private static string Describe(Position position) =>
-            $"Syntax error at {Summarize(position)}\n{Quote(position)}";
+        private static string Describe(Position position, int? maxDepth) =>
+            $"{(maxDepth.HasValue ? "Nesting too deep" : "Syntax error")} at {Summarize(position, maxDepth)}\n{Quote(position)}";
 
-        private static string Summarize(Position position)
+        private static string Summarize(Position position, int? maxDepth)
         {
+            if (maxDepth.HasValue)
+            {
+                return $"line {position.Line}, column {position.Column}: nesting depth exceeds the maximum of {maxDepth.Value}";
+            }
             var found = position.Found.HasValue
                 ? $"\"{Escape(position.Found.Value)}\""
                 : "end of input";

@@ -37,6 +37,9 @@ pub enum ParseError {
     EmptyInput,
     /// The document does not parse, and this is where it stopped
     SyntaxError(SyntaxError),
+    /// The document nests links deeper than [`ParserConfig::max_depth`], and
+    /// this is where the level that is one too deep opens
+    NestingTooDeep(NestingTooDeep),
     /// Internal parser error
     InternalError(String),
 }
@@ -46,6 +49,7 @@ impl fmt::Display for ParseError {
         match self {
             ParseError::EmptyInput => write!(f, "Empty input"),
             ParseError::SyntaxError(error) => write!(f, "Syntax error at {}", error),
+            ParseError::NestingTooDeep(error) => write!(f, "Nesting too deep at {}", error),
             ParseError::InternalError(msg) => write!(f, "Internal error: {}", msg),
         }
     }
@@ -143,16 +147,7 @@ impl SyntaxError {
     /// assert_eq!(error.snippet(), "1 | a: b: c\n  |     ^");
     /// ```
     pub fn snippet(&self) -> String {
-        let (quoted, column) = quote_line(&self.line_text, self.column);
-        let number = self.line.to_string();
-        let gutter = " ".repeat(number.len());
-        format!(
-            "{} | {}\n{} | {}^",
-            number,
-            quoted,
-            gutter,
-            " ".repeat(column - 1)
-        )
+        snippet(self.line, &self.line_text, self.column)
     }
 }
 
@@ -163,6 +158,80 @@ impl fmt::Display for SyntaxError {
 }
 
 impl StdError for SyntaxError {}
+
+/// A document that nests links deeper than the parser allows, with the position
+/// of the level that is one too deep.
+///
+/// Every parenthesized group and every indentation level is one level of
+/// nesting. The parser recurses once per level, so the limit is what turns a
+/// document that would overflow the stack, and abort the process, into an error.
+///
+/// # Examples
+/// ```
+/// use links_notation::{parse_lino_with_config, ParseError, ParserConfig};
+///
+/// let config = ParserConfig::new().with_max_depth(1);
+/// assert!(parse_lino_with_config("(a (b))", &config).is_err());
+/// let Err(ParseError::NestingTooDeep(error)) = parse_lino_with_config("((a))", &config) else {
+///     panic!("expected the nesting to be too deep")
+/// };
+/// assert_eq!((error.max_depth, error.line, error.column), (1, 1, 2));
+/// assert_eq!(
+///     error.to_string(),
+///     "line 1, column 2: nesting depth exceeds the maximum of 1\n1 | ((a))\n  |  ^"
+/// );
+/// ```
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct NestingTooDeep {
+    /// The deepest nesting the parser was configured to accept.
+    pub max_depth: usize,
+    /// Byte offset of the offending position from the start of the document.
+    pub offset: usize,
+    /// Line the offending position is on, counted from 1.
+    pub line: usize,
+    /// Column the offending position is at, in characters, counted from 1.
+    pub column: usize,
+    /// The offending line, as written, without its line ending.
+    pub line_text: String,
+}
+
+impl NestingTooDeep {
+    /// The one-line summary: where the nesting got too deep and how deep it may go.
+    pub fn summary(&self) -> String {
+        format!(
+            "line {}, column {}: nesting depth exceeds the maximum of {}",
+            self.line, self.column, self.max_depth
+        )
+    }
+
+    /// The offending line with a caret under the offending column.
+    pub fn snippet(&self) -> String {
+        snippet(self.line, &self.line_text, self.column)
+    }
+}
+
+impl fmt::Display for NestingTooDeep {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}\n{}", self.summary(), self.snippet())
+    }
+}
+
+impl StdError for NestingTooDeep {}
+
+/// Quotes line `number` with a caret under `column`, the way `rustc` quotes
+/// source.
+fn snippet(number: usize, line_text: &str, column: usize) -> String {
+    let (quoted, column) = quote_line(line_text, column);
+    let number = number.to_string();
+    let gutter = " ".repeat(number.len());
+    format!(
+        "{} | {}\n{} | {}^",
+        number,
+        quoted,
+        gutter,
+        " ".repeat(column - 1)
+    )
+}
 
 /// Writes alternatives the way prose does: `a`, `a or b`, `a, b or c`.
 fn join_alternatives(alternatives: &[String]) -> Option<String> {
@@ -243,6 +312,22 @@ fn locate(document: &str, failure: parser::ParseFailure) -> SyntaxError {
         expected: failure.expected.iter().map(|s| s.to_string()).collect(),
         found: document[offset..].chars().next(),
         line_text: line_text.to_string(),
+    }
+}
+
+/// Turns a failed parse into the error the caller sees.
+fn parse_error(document: &str, failure: parser::ParseFailure) -> ParseError {
+    let max_depth = failure.max_depth_exceeded;
+    let located = locate(document, failure);
+    match max_depth {
+        Some(max_depth) => ParseError::NestingTooDeep(NestingTooDeep {
+            max_depth,
+            offset: located.offset,
+            line: located.line,
+            column: located.column,
+            line_text: located.line_text,
+        }),
+        None => ParseError::SyntaxError(located),
     }
 }
 
@@ -883,7 +968,7 @@ pub fn parse_lino_with_config(
     }
 
     let prepared = prepare(document, config);
-    match parser::parse_document_with_diagnostics(&prepared) {
+    match parser::parse_document_with_max_depth(&prepared, config.max_depth) {
         Ok(links) => {
             if links.is_empty() {
                 Ok(LiNo::Link {
@@ -899,7 +984,7 @@ pub fn parse_lino_with_config(
                 })
             }
         }
-        Err(failure) => Err(ParseError::SyntaxError(locate(document, failure))),
+        Err(failure) => Err(parse_error(document, failure)),
     }
 }
 
@@ -928,7 +1013,7 @@ pub fn parse_lino_to_links_with_config(
     }
 
     let prepared = prepare(document, config);
-    match parser::parse_document_with_diagnostics(&prepared) {
+    match parser::parse_document_with_max_depth(&prepared, config.max_depth) {
         Ok(links) => {
             if links.is_empty() {
                 Ok(vec![])
@@ -938,7 +1023,7 @@ pub fn parse_lino_to_links_with_config(
                 Ok(flattened)
             }
         }
-        Err(failure) => Err(ParseError::SyntaxError(locate(document, failure))),
+        Err(failure) => Err(parse_error(document, failure)),
     }
 }
 

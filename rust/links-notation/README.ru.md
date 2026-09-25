@@ -303,8 +303,12 @@ println!("{}", format_links(&links)); // (# a b)
 
 - `comments: bool` — открывает ли `#` комментарий до конца строки
   (по умолчанию `true`)
+- `max_depth: usize` — насколько глубоко могут быть вложены связи: каждая
+  группа в скобках и каждый уровень отступа — это один уровень
+  (по умолчанию `DEFAULT_MAX_DEPTH`, 64)
 - `ParserConfig::new()` — значения по умолчанию
 - `ParserConfig::without_comments()` — `#` как обычный символ
+- `ParserConfig::new().with_max_depth(n)` — отклонять связи, вложенные глубже `n`
 
 ### Форматирование
 
@@ -346,6 +350,16 @@ if let Err(ParseError::SyntaxError(error)) = parse_lino("a: b: c") {
     println!("{}:{} (байтовое смещение {})", error.line, error.column, error.offset);
     println!("ожидалось {:?}, найдено {:?}", error.expected, error.found);
 }
+```
+
+`ParseError::NestingTooDeep` возвращается для связей, вложенных глубже
+`ParserConfig::max_depth`, на той группе или строке, которая на один уровень
+глубже допустимого. Парсер уходит в рекурсию на каждом уровне, поэтому именно
+ограничение превращает документ, который переполнил бы стек и аварийно завершил
+процесс, в ошибку:
+
+```text
+Nesting too deep at line 1, column 65: nesting depth exceeds the maximum of 64
 ```
 
 `ParseError::EmptyInput` возвращается для пустого ввода или ввода только из

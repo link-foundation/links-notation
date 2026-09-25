@@ -5,15 +5,136 @@ This module provides parsing functionality for Links Notation (Lino),
 converting text into structured Link objects.
 """
 
-from typing import Any, Dict, List, Optional
+import re
+from typing import Any, Dict, List, Optional, Tuple
 
 from .comments import strip_comments
 from .link import Link
 from .quotes import _parse_quoted_string_at
 
 
+#: How deep links may nest unless a parser is told otherwise: every
+#: parenthesized group and every indentation level is one level, and the lines
+#: of a document are at level 0. Every implementation shares this default.
+DEFAULT_MAX_DEPTH = 64
+
+#: The number of characters a quoted line is cut down to.
+_QUOTED_LINE_WIDTH = 80
+
+#: What a message writes in place of the part of a long line it left out.
+_ELLIPSIS = "..."
+
+
+#: The characters that can end a line or open a quoted string.
+_LINE_BREAK_OR_QUOTE = re.compile("[\n\"'`]")
+
+#: The characters that can separate an id from its values or open a quoted string.
+_COLON_OR_QUOTE = re.compile("[:\"'`]")
+
+#: A run of opening parentheses, a run of closing ones, or a character that can
+#: open a quoted string.
+_PAREN_RUN_OR_QUOTE = re.compile("\\(+|\\)+|[\"'`]")
+
+
 class ParseError(Exception):
-    """Exception raised when parsing fails."""
+    """
+    Exception raised when parsing fails.
+
+    An error that points at a place in the document carries that place:
+    ``offset`` (characters from the start of the document), ``line`` and
+    ``column`` (both counted from 1), and ``line_text`` (the offending line as
+    written, without its line ending); for any other error they are None.
+
+    A document nested deeper than the parser's ``max_depth`` is refused with
+    this error too; then ``max_depth`` says how deep the nesting may go. It is
+    None for any other error.
+    """
+
+    def __init__(
+        self,
+        message: str = "",
+        *,
+        offset: Optional[int] = None,
+        line: Optional[int] = None,
+        column: Optional[int] = None,
+        line_text: Optional[str] = None,
+        max_depth: Optional[int] = None,
+    ):
+        super().__init__(message)
+        self.offset = offset
+        self.line = line
+        self.column = column
+        self.line_text = line_text
+        self.max_depth = max_depth
+
+    @classmethod
+    def nesting_too_deep(cls, document: str, offset: int, max_depth: int) -> "ParseError":
+        """The error for a document nested deeper than ``max_depth`` at ``offset``."""
+        line, column, line_text = _locate(document, offset)
+        summary = f"line {line}, column {column}: nesting depth exceeds the maximum of {max_depth}"
+        return cls(
+            f"Nesting too deep at {summary}\n{_quote(line, line_text, column)}",
+            offset=offset,
+            line=line,
+            column=column,
+            line_text=line_text,
+            max_depth=max_depth,
+        )
+
+
+def _locate(document: str, offset: int) -> Tuple[int, int, str]:
+    """
+    The line and column ``offset`` falls on, both counted from 1, and that line
+    without its line ending. CR, LF and CRLF all end a line.
+    """
+    offset = max(0, min(offset, len(document)))
+    line = 1
+    line_start = 0
+    cursor = 0
+    while cursor < offset:
+        character = document[cursor]
+        cursor += 1
+        if character == "\r":
+            line += 1
+            if cursor < offset and document[cursor] == "\n":
+                cursor += 1
+            line_start = cursor
+        elif character == "\n":
+            line += 1
+            line_start = cursor
+    line_end = len(document)
+    for ending in ("\r", "\n"):
+        found = document.find(ending, line_start)
+        if 0 <= found < line_end:
+            line_end = found
+    return line, offset - line_start + 1, document[line_start:line_end]
+
+
+def _quote(number: int, line_text: str, column: int) -> str:
+    """
+    The offending line with a caret under the offending column, quoted the way
+    a compiler quotes source. A long line is shown as a window around the caret.
+    """
+    quoted, column = _window_around(line_text, column)
+    gutter = " " * len(str(number))
+    return f"{number} | {quoted}\n{gutter} | {' ' * (column - 1)}^"
+
+
+def _window_around(line_text: str, column: int) -> Tuple[str, int]:
+    """
+    Cut a line down to a window around ``column``, and say which column the
+    offending character sits at in that window. Both columns count from 1.
+    """
+    if len(line_text) <= _QUOTED_LINE_WIDTH:
+        return line_text, column
+
+    target = column - 1
+    last_start = len(line_text) - _QUOTED_LINE_WIDTH
+    start = min(max(target - _QUOTED_LINE_WIDTH // 2, 0), last_start)
+    end = start + _QUOTED_LINE_WIDTH
+    quoted = (_ELLIPSIS if start > 0 else "") + line_text[start:end] + (_ELLIPSIS if end < len(line_text) else "")
+    shift = len(_ELLIPSIS) if start > 0 else 0
+    return quoted, target - start + shift + 1
 
 
 class Parser:
@@ -26,7 +147,7 @@ class Parser:
     def __init__(
         self,
         max_input_size: int = 10 * 1024 * 1024,
-        max_depth: int = 1000,
+        max_depth: int = DEFAULT_MAX_DEPTH,
         comments: bool = True,
     ):
         """
@@ -34,7 +155,10 @@ class Parser:
 
         Args:
             max_input_size: Maximum input size in bytes (default: 10MB)
-            max_depth: Maximum nesting depth (default: 1000)
+            max_depth: How deep links may nest (default: 64). Every
+                parenthesized group and every indentation level is one level,
+                and the lines of a document are at level 0; a document nested
+                deeper is refused with a ParseError whose ``max_depth`` is set
             comments: Whether ``#`` starts a comment that runs to the end of
                 its line; when False it is an ordinary character (default: True)
         """
@@ -42,7 +166,15 @@ class Parser:
         self.pos = 0
         self.text = ""
         self.lines = []
+        self.line_offsets: List[int] = []
         self.base_indentation = None
+        # The document as written, for quoting the offending line in an error
+        self.source = ""
+        # Depth of the lines at level 0 of the context being parsed: the number
+        # of parenthesized groups around it
+        self.context_depth = 0
+        # Depth of the line being parsed
+        self.depth = 0
         self.max_input_size = max_input_size
         self.max_depth = max_depth
         self.comments = comments
@@ -58,7 +190,8 @@ class Parser:
             List of parsed Link objects
 
         Raises:
-            ParseError: If parsing fails
+            ParseError: If parsing fails, including when the document nests
+                links deeper than ``max_depth``
             TypeError: If input is not a string
             ValueError: If input exceeds maximum size
         """
@@ -79,11 +212,14 @@ class Parser:
             prepared = strip_comments(input_text) if self.comments else input_text
 
             self.text = prepared
+            self.source = input_text
             # Use smart line splitting that respects quoted strings
-            self.lines = self._split_lines_respecting_quotes(prepared)
+            self.lines, self.line_offsets = self._split_lines_respecting_quotes(prepared, 0)
             self.pos = 0
             self.indentation_stack = [0]
             self.base_indentation = None
+            self.context_depth = 0
+            self.depth = 0
 
             raw_result = self._parse_document()
             return self._transform_result(raw_result)
@@ -96,6 +232,13 @@ class Parser:
         except (KeyError, IndexError, AttributeError) as e:
             # Catch specific parsing-related exceptions
             raise ParseError(f"Parse error: {str(e)}") from e
+        except RecursionError:
+            # Only reachable with a max_depth set higher than Python's recursion
+            # limit allows; the default is far below it.
+            raise ParseError(
+                "Parse error: the document is nested too deeply for Python's recursion limit; "
+                f"lower max_depth (currently {self.max_depth}) to refuse it with a located error"
+            ) from None
 
     def _skip_quoted_string(self, text: str, start: int) -> int:
         """
@@ -107,7 +250,7 @@ class Parser:
         parsed = _parse_quoted_string_at(text, start)
         return -1 if parsed is None else parsed[1]
 
-    def _split_lines_respecting_quotes(self, text: str) -> List[str]:
+    def _split_lines_respecting_quotes(self, text: str, base: int) -> Tuple[List[str], List[int]]:
         """
         Split text into lines, but preserve newlines inside quoted strings
         and handle multiline parenthesized expressions.
@@ -115,47 +258,47 @@ class Parser:
         Quoted strings can span multiple lines, and newlines within them
         should be preserved as part of the string value. Also, parenthesized
         expressions that span multiple lines are kept together.
+
+        Returns the lines and where each of them starts in the document, given
+        that text starts at ``base``.
         """
         lines = []
-        current_line = ""
+        offsets = []
+        line_start = 0
+        # Parentheses are counted in bulk between the characters that matter
+        # here, so a long run of them costs one pass in C rather than a Python
+        # step per character.
         paren_depth = 0
-        i = 0
+        counted = 0
+        position = 0
 
-        while i < len(text):
-            char = text[i]
+        while True:
+            found = _LINE_BREAK_OR_QUOTE.search(text, position)
+            if found is None:
+                break
+            i = found.start()
+            paren_depth += text.count("(", counted, i) - text.count(")", counted, i)
 
-            if char in ('"', "'", "`"):
-                end = self._skip_quoted_string(text, i)
-                if end > i:
-                    # A quoted string is opaque: newlines inside it are content
-                    current_line += text[i:end]
-                    i = end
-                    continue
-                current_line += char
-            elif char == "(":
-                paren_depth += 1
-                current_line += char
-            elif char == ")":
-                paren_depth -= 1
-                current_line += char
-            elif char == "\n":
-                if paren_depth > 0:
-                    # Inside unclosed parens: preserve the newline
-                    current_line += char
-                else:
-                    # Parentheses balanced: this is a line break
-                    lines.append(current_line)
-                    current_line = ""
+            if text[i] == "\n":
+                # Inside unclosed parens the newline is preserved; with the
+                # parentheses balanced it is a line break
+                if paren_depth <= 0:
+                    lines.append(text[line_start:i])
+                    offsets.append(base + line_start)
+                    line_start = i + 1
+                position = i + 1
             else:
-                current_line += char
-
-            i += 1
+                # A quoted string is opaque: newlines inside it are content
+                end = self._skip_quoted_string(text, i)
+                position = end if end > i else i + 1
+            counted = position
 
         # Add the last line if non-empty
-        if current_line:
-            lines.append(current_line)
+        if line_start < len(text):
+            lines.append(text[line_start:])
+            offsets.append(base + line_start)
 
-        return lines
+        return lines, offsets
 
     def _parse_document(self) -> List[Dict]:
         """Parse the entire document."""
@@ -165,7 +308,7 @@ class Parser:
         while self.pos < len(self.lines):
             line = self.lines[self.pos]
             if line.strip():  # Skip empty lines
-                element = self._parse_element(0)
+                element = self._parse_element(0, 0)
                 if element:
                     links.append(element)
             else:
@@ -173,8 +316,13 @@ class Parser:
 
         return links
 
-    def _parse_element(self, current_indent: int) -> Optional[Dict]:
-        """Parse a single element (link or reference) at given indentation."""
+    def _parse_element(self, current_indent: int, level: int) -> Optional[Dict]:
+        """
+        Parse a single element (link or reference) at given indentation.
+
+        ``level`` is the number of indentation levels the element sits at in
+        the context being parsed.
+        """
         if self.pos >= len(self.lines):
             return None
 
@@ -196,14 +344,18 @@ class Parser:
             self.pos += 1
             return None
 
+        content_offset = self.line_offsets[self.pos] + len(line) - len(line.lstrip())
         self.pos += 1
 
         # Try to parse the line
-        element = self._parse_line_content(content)
+        line_depth = self.context_depth + level
+        self.depth = line_depth
+        element = self._parse_line_content(content, content_offset)
+        # Only a line that parsed counts, as in the other implementations
+        self._check_depth(line_depth, content_offset)
 
         # Check for children (indented lines that follow)
         children = []
-        child_indent = indent + 2  # Expect at least 2 spaces for child
 
         while self.pos < len(self.lines):
             # A line holding nothing does not close a block: the block goes on
@@ -226,7 +378,9 @@ class Parser:
 
             # This is a child
             self.pos = following
-            child = self._parse_element(child_indent if not children else indent + 2)
+            # A child only has to be indented deeper than its parent; asking
+            # for more left a line indented by a single space unread forever.
+            child = self._parse_element(indent + 1, level + 1)
             if child:
                 children.append(child)
 
@@ -235,11 +389,19 @@ class Parser:
 
         return element
 
-    def _parse_line_content(self, content: str) -> Dict:
-        """Parse the content of a single line."""
+    def _check_depth(self, depth: int, offset: int) -> None:
+        """
+        Refuse, for good, links at ``depth`` when that is deeper than the
+        parser allows. ``offset`` is where the level that is too deep opens.
+        """
+        if depth > self.max_depth:
+            raise ParseError.nesting_too_deep(self.source, offset, self.max_depth)
+
+    def _parse_line_content(self, content: str, offset: int) -> Dict:
+        """Parse the content of a single line, which starts at ``offset``."""
         # A whole parenthesized group: (id: values), (values) or a nested document
         if content.startswith("(") and self._find_matching_paren(content, 0) == len(content) - 1:
-            return self._parse_parenthesized(content[1:-1])
+            return self._parse_parenthesized(content[1:-1], offset)
 
         # Try indented ID syntax: id:
         if content.endswith(":"):
@@ -251,69 +413,92 @@ class Parser:
         colon_pos = self._find_colon_outside_quotes(content)
         if colon_pos >= 0:
             id_part = content[:colon_pos].strip()
-            values_part = content[colon_pos + 1 :].strip()
+            after_colon = content[colon_pos + 1 :]
+            values_part = after_colon.strip()
+            values_offset = offset + colon_pos + 1 + len(after_colon) - len(after_colon.lstrip())
             ref = self._extract_reference(id_part)
-            values = self._parse_values(values_part)
+            values = self._parse_values(values_part, values_offset)
             return {"id": ref, "values": values}
 
         # Simple value list
-        values = self._parse_values(content)
+        values = self._parse_values(content, offset)
         return {"values": values}
 
-    def _parse_parenthesized(self, inner: str) -> Dict:
+    def _parse_parenthesized(self, inner: str, offset: int) -> Dict:
         """
-        Parse the content of a parenthesized group.
+        Parse the content of a parenthesized group opened at ``offset``.
 
         The group opens a nested context that starts fresh at indentation level
         zero and follows exactly the rules used at the root of the document, so
-        line breaks separate links and indentation nests them.
+        line breaks separate links and indentation nests them. The group is one
+        level deeper than the line it is written on.
         """
-        return {"nested": self._parse_nested_document(inner)}
+        self._check_depth(self.depth + 1, offset)
+        return {"nested": self._parse_nested_document(inner, offset + 1)}
 
-    def _parse_nested_document(self, inner: str) -> List[Dict]:
-        """Parse the text of a parenthesized group as a document of its own."""
+    def _parse_nested_document(self, inner: str, offset: int) -> List[Dict]:
+        """
+        Parse the text of a parenthesized group, which starts at ``offset``,
+        as a document of its own.
+        """
         saved_lines = self.lines
+        saved_line_offsets = self.line_offsets
         saved_pos = self.pos
         saved_base_indentation = self.base_indentation
         saved_indentation_stack = self.indentation_stack
+        saved_context_depth = self.context_depth
+        saved_depth = self.depth
         try:
-            self.lines = self._split_lines_respecting_quotes(inner)
+            self.lines, self.line_offsets = self._split_lines_respecting_quotes(inner, offset)
             self.pos = 0
             self.base_indentation = None
             self.indentation_stack = [0]
+            self.context_depth = self.depth + 1
             return self._parse_document()
         finally:
             self.lines = saved_lines
+            self.line_offsets = saved_line_offsets
             self.pos = saved_pos
             self.base_indentation = saved_base_indentation
             self.indentation_stack = saved_indentation_stack
+            self.context_depth = saved_context_depth
+            self.depth = saved_depth
 
     def _find_matching_paren(self, text: str, start: int) -> int:
         """
         Find the position of the parenthesis closing the one at start.
 
         Quoted strings are skipped, so parentheses inside them are ignored.
-        Returns -1 when the group is not closed.
+        Returns -1 when the group is not closed, or when start is not at an
+        opening parenthesis.
+
+        A run of parentheses is taken in one step, so the parentheses deeply
+        nested groups begin and end with cost a step per run rather than one
+        per character: every group is scanned once for each group around it.
         """
+        if not text.startswith("(", start):
+            return -1
+
         depth = 0
-        i = start
+        position = start
 
-        while i < len(text):
-            char = text[i]
-            if char in ('"', "'", "`"):
-                end = self._skip_quoted_string(text, i)
-                if end > i:
-                    i = end
-                    continue
-            elif char == "(":
-                depth += 1
-            elif char == ")":
-                depth -= 1
-                if depth == 0:
-                    return i
-            i += 1
-
-        return -1
+        while True:
+            for found in _PAREN_RUN_OR_QUOTE.finditer(text, position):
+                run_start, run_end = found.span()
+                char = text[run_start]
+                if char == "(":
+                    depth += run_end - run_start
+                elif char == ")":
+                    if run_end - run_start >= depth:
+                        return run_start + depth - 1
+                    depth -= run_end - run_start
+                else:
+                    end = self._skip_quoted_string(text, run_start)
+                    if end > run_start:
+                        position = end
+                        break
+            else:
+                return -1
 
     def _find_colon_outside_quotes(self, text: str) -> int:
         """
@@ -325,28 +510,28 @@ class Parser:
         because it's inside the second parenthesized expression.
         """
         paren_depth = 0
-        i = 0
+        counted = 0
+        position = 0
 
-        while i < len(text):
-            char = text[i]
-            if char in ('"', "'", "`"):
+        while True:
+            found = _COLON_OR_QUOTE.search(text, position)
+            if found is None:
+                return -1
+            i = found.start()
+            paren_depth += text.count("(", counted, i) - text.count(")", counted, i)
+
+            if text[i] == ":":
+                if paren_depth == 0:
+                    # Only return colon if it's outside quotes AND at parenthesis depth 0
+                    return i
+                position = i + 1
+            else:
                 end = self._skip_quoted_string(text, i)
-                if end > i:
-                    i = end
-                    continue
-            elif char == "(":
-                paren_depth += 1
-            elif char == ")":
-                paren_depth -= 1
-            elif char == ":" and paren_depth == 0:
-                # Only return colon if it's outside quotes AND at parenthesis depth 0
-                return i
-            i += 1
+                position = end if end > i else i + 1
+            counted = position
 
-        return -1
-
-    def _parse_values(self, text: str) -> List[Dict]:
-        """Parse a space-separated list of values."""
+    def _parse_values(self, text: str, offset: int) -> List[Dict]:
+        """Parse a space-separated list of values, which starts at ``offset``."""
         if not text:
             return []
 
@@ -363,7 +548,7 @@ class Parser:
             # Try to extract the next value
             value_end, value_text = self._extract_next_value(text, i)
             if value_text and value_text.strip():
-                values.append(self._parse_value(value_text))
+                values.append(self._parse_value(value_text, offset + i))
             if value_end == i:
                 # No progress made - skip this character to avoid infinite loop
                 i += 1
@@ -414,11 +599,11 @@ class Parser:
 
         return (i, text[start:i])
 
-    def _parse_value(self, value: str) -> Dict:
-        """Parse a single value (could be a reference or nested link)."""
+    def _parse_value(self, value: str, offset: int) -> Dict:
+        """Parse a single value (could be a reference or nested link) starting at ``offset``."""
         # Nested link in parentheses
         if value.startswith("(") and self._find_matching_paren(value, 0) == len(value) - 1:
-            return self._parse_parenthesized(value[1:-1])
+            return self._parse_parenthesized(value[1:-1], offset)
 
         # Simple reference
         ref = self._extract_reference(value)
