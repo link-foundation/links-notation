@@ -29,7 +29,7 @@ The following EBNF grammar formally defines the Links Notation syntax:
 
 ```ebnf
 (* Links Notation (Lino) Grammar - EBNF *)
-(* Version: 0.19.0 *)
+(* Version: 0.21.0 *)
 
 (* === Document Structure === *)
 document            = skip_empty_lines, links, whitespace, EOF
@@ -684,7 +684,7 @@ with a substantive body is the empty reference.
 hello
 ```
 
-**Parse result:** One link with id `"hello"` and no values.
+**Parse result:** One anonymous link with a single reference value `"hello"`.
 
 #### Doublet (2-tuple)
 
@@ -818,3 +818,6 @@ for valid input.
 | 0.19.0  | A `#` written where a reference could begin opens a comment |
 |         | that runs to the end of its line; comments are blanked      |
 |         | before parsing and can be switched off                      |
+| 0.21.0  | A singlet is an anonymous link with one reference value;     |
+|         | CR is a line break, and only space, tab, LF and CR are       |
+|         | whitespace when parsing a document or an even quote body    |

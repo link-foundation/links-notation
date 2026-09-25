@@ -1,6 +1,6 @@
 use nom::{
     branch::alt,
-    bytes::complete::{take_while, take_while1},
+    bytes::complete::{tag, take_while, take_while1},
     character::complete::{char, line_ending},
     combinator::eof,
     multi::{many0, many1},
@@ -266,7 +266,7 @@ fn expected<'a, T>(
     Err(nom::Err::Error(nom::error::Error::new(input, kind)))
 }
 
-fn is_whitespace_char(c: char) -> bool {
+pub(crate) fn is_whitespace_char(c: char) -> bool {
     c == ' ' || c == '\t' || c == '\n' || c == '\r'
 }
 
@@ -364,7 +364,7 @@ fn is_substantive_body(content: &str) -> bool {
             }
             _ => {}
         }
-        if !c.is_whitespace() {
+        if !is_whitespace_char(c) {
             has_visible = true;
         }
     }
@@ -453,7 +453,7 @@ fn reference<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, String
 
 fn eol<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, &'a str> {
     let parsed = alt((
-        preceded(horizontal_whitespace, line_ending),
+        preceded(horizontal_whitespace, alt((line_ending, tag("\r")))),
         preceded(horizontal_whitespace, eof),
         |i| nested_group_end(i, state),
     ))
@@ -498,6 +498,7 @@ fn strip_line_ending(input: &str) -> Option<&str> {
     input
         .strip_prefix("\r\n")
         .or_else(|| input.strip_prefix('\n'))
+        .or_else(|| input.strip_prefix('\r'))
 }
 
 fn reference_or_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
@@ -549,17 +550,7 @@ fn character<'a>(
 
 fn single_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     (|i| single_line_values(i, state))
-        .map(|values| {
-            if values.len() == 1
-                && values[0].id.is_some()
-                && values[0].values.is_empty()
-                && values[0].children.is_empty()
-            {
-                Link::new_singlet(values[0].id.clone().unwrap())
-            } else {
-                Link::new_value(values)
-            }
-        })
+        .map(Link::new_value)
         .parse(input)
 }
 
@@ -652,12 +643,16 @@ fn check_indentation<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str
 fn element<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     let (input, link) = any_link(input, state)?;
 
-    if let Ok((input, _)) = push_indentation(input, state) {
-        let (input, children) = links(input, state)?;
-        Ok((input, link.with_children(children)))
-    } else {
-        Ok((input, link))
+    let indentation = state.indentation_stack.borrow().clone();
+    if let Ok((child_input, _)) = push_indentation(input, state) {
+        if let Ok((rest, children)) = links(child_input, state) {
+            return Ok((rest, link.with_children(children)));
+        }
+        // No child line followed the indentation. Backtrack to the link so
+        // the document can consume the remaining spaces as whitespace.
+        state.indentation_stack.replace(indentation);
     }
+    Ok((input, link))
 }
 
 fn first_line<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
@@ -708,7 +703,7 @@ fn document<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Lin
     let document = skip_empty_lines(input);
 
     // Handle empty or whitespace-only documents
-    if document.trim().is_empty() {
+    if document.trim_matches(is_whitespace_char).is_empty() {
         return Ok(("", vec![]));
     }
 

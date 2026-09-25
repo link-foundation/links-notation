@@ -50,6 +50,14 @@ test('reports the line a late defect is on', () => {
   expect(error.lineText).toBe('e: f: g');
 });
 
+test('lone CR counts as one line break in diagnostics', () => {
+  const error = syntaxError('a\rb: c: d');
+
+  expect(error.line).toBe(2);
+  expect(error.column).toBe(5);
+  expect(error.lineText).toBe('b: c: d');
+});
+
 test('reports the end of the document when a group is never closed', () => {
   const error = syntaxError('a (b\n');
 

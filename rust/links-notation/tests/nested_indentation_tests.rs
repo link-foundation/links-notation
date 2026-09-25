@@ -6,10 +6,6 @@
 //! parentheses too: a parenthesized group opens a nested context that starts
 //! fresh at indentation level zero and follows exactly the root's rules.
 //!
-//! Note: this implementation formats a lone reference as `a`, while the other
-//! implementations format it as `(a)`. That difference is older than this
-//! suite and is unrelated to indentation, so the expectations below keep it.
-
 use links_notation::{format_links, parse_lino_to_links};
 
 fn format_source(source: &str) -> String {
@@ -24,13 +20,13 @@ fn assert_format(source: &str, expected: &str) {
 
 #[test]
 fn parentheses_reproduce_root_indentation() {
-    assert_format("a\n  b\nc\n  d", "a\n((a) (b))\nc\n((c) (d))");
+    assert_format("a\n  b\nc\n  d", "(a)\n((a) (b))\n(c)\n((c) (d))");
 
     // The same lines inside parentheses keep the same structure, nested under
     // the link the group belongs to.
     assert_format(
         "array (\n  a\n    b\n  c\n    d\n)",
-        "(array (a ((a) (b)) c ((c) (d))))",
+        "(array ((a) ((a) (b)) (c) ((c) (d))))",
     );
 }
 
@@ -92,12 +88,12 @@ fn parentheses_with_indented_id_syntax() {
 
 #[test]
 fn blank_lines_inside_parentheses_are_skipped() {
-    assert_format("(\n  a\n\n  b\n)", "(a b)");
+    assert_format("(\n  a\n\n  b\n)", "((a) (b))");
 }
 
 #[test]
 fn employee_records_keep_their_fields() {
     let source = "empInfo\n  employees:\n    (\n      name (James Kirk)\n      age 40\n    )\n    (\n      name (Jean-Luc Picard)\n      age 45\n    )";
-    let expected = "empInfo\n((empInfo) (employees: ((name (James Kirk)) (age 40)) ((name (Jean-Luc Picard)) (age 45))))";
+    let expected = "(empInfo)\n((empInfo) (employees: ((name (James Kirk)) (age 40)) ((name (Jean-Luc Picard)) (age 45))))";
     assert_format(source, expected);
 }
