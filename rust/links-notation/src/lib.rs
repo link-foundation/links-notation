@@ -643,8 +643,11 @@ impl From<parser::Link> for LiNo<String> {
 // the root, so it is flattened the same way. A body that produces a single link
 // collapses to that link, unless the body is a single parenthesized group, which
 // keeps `((a b))` different from `(a b)`.
+//
+// The body is borrowed, not copied: copying it at every level would copy the
+// levels below once per level above them, which is quadratic in the nesting.
 fn transform_nested(body: &[parser::Link]) -> LiNo<String> {
-    let links = flatten_links(body.to_vec());
+    let links = flatten_links(body);
     let wraps_single_group =
         body.len() == 1 && body[0].nested.is_some() && body[0].children.is_empty();
     if links.len() == 1 && !wraps_single_group {
@@ -657,11 +660,11 @@ fn transform_nested(body: &[parser::Link]) -> LiNo<String> {
 }
 
 // Helper function to flatten indented structures according to Lino spec
-fn flatten_links(links: Vec<parser::Link>) -> Vec<LiNo<String>> {
+fn flatten_links(links: &[parser::Link]) -> Vec<LiNo<String>> {
     let mut result = vec![];
 
     for link in links {
-        flatten_link_recursive(&link, None, &mut result);
+        flatten_link_recursive(link, None, &mut result);
     }
 
     result
@@ -722,23 +725,9 @@ fn flatten_link_recursive(
             }
         }
     } else {
-        let values: Vec<LiNo<String>> = link
-            .values
-            .iter()
-            .map(|v| {
-                parser::Link {
-                    id: v.id.clone(),
-                    values: v.values.clone(),
-                    children: vec![],
-                    is_indented_id: false,
-                    nested: v.nested.clone(),
-                }
-                .into()
-            })
-            .collect();
         LiNo::Link {
             id: link.id.clone(),
-            values,
+            values: link.values.iter().map(transform_value).collect(),
         }
     };
 
@@ -754,12 +743,12 @@ fn flatten_link_recursive(
         };
 
         // Wrap current in parentheses if it's a reference
-        let wrapped_current = match &current {
+        let wrapped_current = match current {
             LiNo::Ref(ref_id) => LiNo::Link {
                 id: None,
-                values: vec![LiNo::Ref(ref_id.clone())],
+                values: vec![LiNo::Ref(ref_id)],
             },
-            link => link.clone(),
+            link => link,
         };
 
         LiNo::Link {
@@ -767,14 +756,41 @@ fn flatten_link_recursive(
             values: vec![wrapped_parent, wrapped_current],
         }
     } else {
-        current.clone()
+        current
     };
 
+    // Only a link with children needs a copy: each child repeats it as its
+    // parent. Copying it regardless would copy every nested group once per
+    // level above it.
+    if link.children.is_empty() {
+        result.push(combined);
+        return;
+    }
     result.push(combined.clone());
 
     // Process children
     for child in &link.children {
         flatten_link_recursive(child, Some(&combined), result);
+    }
+}
+
+// Convert a link without its indented children, borrowing the parsed tree.
+fn transform_value(link: &parser::Link) -> LiNo<String> {
+    if let Some(body) = &link.nested {
+        return transform_nested(body);
+    }
+    if link.values.is_empty() {
+        return match &link.id {
+            Some(id) => LiNo::Ref(id.clone()),
+            None => LiNo::Link {
+                id: None,
+                values: vec![],
+            },
+        };
+    }
+    LiNo::Link {
+        id: link.id.clone(),
+        values: link.values.iter().map(transform_value).collect(),
     }
 }
 
@@ -787,18 +803,7 @@ fn transform_indented_value(link: &parser::Link) -> LiNo<String> {
             values: children,
         };
     }
-    let current = if let Some(body) = &link.nested {
-        transform_nested(body)
-    } else {
-        parser::Link {
-            id: link.id.clone(),
-            values: link.values.clone(),
-            children: vec![],
-            is_indented_id: false,
-            nested: None,
-        }
-        .into()
-    };
+    let current = transform_value(link);
 
     if !children.is_empty() {
         match current {
@@ -893,7 +898,7 @@ pub fn parse_lino_with_config(
                 })
             } else {
                 // Flatten the indented structure according to Lino spec
-                let flattened = flatten_links(links);
+                let flattened = flatten_links(&links);
                 Ok(LiNo::Link {
                     id: None,
                     values: flattened,
@@ -935,7 +940,7 @@ pub fn parse_lino_to_links_with_config(
                 Ok(vec![])
             } else {
                 // Flatten the indented structure according to Lino spec
-                let flattened = flatten_links(links);
+                let flattened = flatten_links(&links);
                 Ok(flattened)
             }
         }

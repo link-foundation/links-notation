@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Read nested groups in time linear in the document in the JavaScript, Rust
+  and C# parsers. Each line is now read once whether or not indented children
+  follow it, and a line that could not be read is not read again, so a group
+  followed by values, an unclosed group or unclosed groups on indented lines no
+  longer take time exponential in the nesting depth. Rust's
+  `parse_lino_to_links` no longer copies every level of a nested document,
+  which took quadratic time
+  ([#314](https://github.com/link-foundation/links-notation/issues/314)).
 - Read delimited references a run of delimiters at a time in the JavaScript
   and Rust parsers. A reference that opens with a wide run of quotes, or many
   references that never close, took quadratic time; parsing, comment stripping

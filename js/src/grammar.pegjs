@@ -9,12 +9,25 @@
   // group opens a nested context that starts fresh at indentation level zero,
   // so line breaks and indentation mean the same thing at every depth.
   let contextStack = [];
+  // Lines already found unreadable, keyed by where they start and whether they
+  // are inside a parenthesised group. Reading a line depends on nothing else: a
+  // group starts a fresh indentation context, and indentation only decides
+  // which lines become children, so a line that could not be read once never
+  // can be. A line that does not parse as the first child of the line above it
+  // is tried again as a sibling at every enclosing indentation level, and
+  // without this each of those attempts would read the whole line again.
+  let unreadableLines = new Set();
 
   function resetState() {
     indentationStack = [0];
     baseIndentation = null;
     contextStack = [];
+    unreadableLines = new Set();
     return true;
+  }
+
+  function lineKey(position) {
+    return contextStack.length > 0 ? -1 - position : position;
   }
 
   function enterNestedContext() {
@@ -100,14 +113,39 @@ firstLine = SET_BASE_INDENTATION l:element { return l; }
 
 line = CHECK_INDENTATION l:element { return l; }
 
-element = e:anyLink PUSH_INDENTATION l:links {
+// A line is read once, whether or not indented children follow it: reading it
+// again after looking for children doubled the work at every level of nesting.
+element = &{ return !unreadableLines.has(lineKey(offset())); }
+    e:anyLink saved:SAVE_INDENTATION l:(PUSH_INDENTATION @links)? {
+    if (l === null) {
+      // No child line followed the indentation. Forget what looking for one
+      // pushed, so the next line is compared with this line's indentation.
+      indentationStack = saved;
+      return e;
+    }
     return Object.assign({}, e, { children: l });
   }
-  / e:anyLink { return e; }
+  // Remember that this line could not be read. The predicate always fails, so
+  // the "." is never reached; it only tells Peggy that this alternative cannot
+  // succeed without consuming input.
+  / &{ unreadableLines.add(lineKey(offset())); return false; } .
 
 referenceOrLink = l:multiLineAnyLink { return l; } / i:reference { return { id: i }; }
 
-anyLink = ml:multiLineAnyLink eol { return ml; } / il:indentedIdLink { return il; } / sl:singleLineAnyLink { return sl; }
+// A line that starts with a parenthesised group reads that group once and then
+// branches on what follows it: the end of the line makes the group the whole
+// link, and more values make it the first value of a value link. Neither an
+// indented ID nor a single-line link can start with a parenthesis, so nothing
+// else is tried for such a line; trying them read the group again, doubling
+// the work at every level of nesting.
+anyLink = &"(" @groupLink / !"(" @(indentedIdLink / singleLineAnyLink)
+
+groupLink = g:multiLineAnyLink rest:groupLinkRest {
+    return rest === null ? g : { values: [g].concat(rest) };
+  }
+
+groupLinkRest = eol { return null; }
+  / @singleLineValueAndWhitespace* eol
 
 multiLineAnyLink = nestedGroup
 
@@ -121,6 +159,9 @@ nestedGroup = "(" ENTER_NESTED_CONTEXT body:nestedGroupBody {
     exitNestedContext();
     return body;
   }
+  // The group was opened but its body did not parse: restore the context it
+  // was opened in before failing, just as a parsed group does.
+  / "(" &{ exitNestedContext(); return false; }
 
 nestedGroupBody = skipEmptyLines l:links _ ")" { return { nested: l }; }
   / _ ")" { return { nested: [] }; }
@@ -192,6 +233,8 @@ backtickQuotedUniversal = &'`' &{
 
 consumeBacktick = c:. cs:consumeBacktickMore* { return [c].concat(cs).join(''); }
 consumeBacktickMore = &{ return parsedLength > 1 && (parsedLength--, true); } c:. { return c; }
+
+SAVE_INDENTATION = "" { return indentationStack.slice(); }
 
 SET_BASE_INDENTATION = spaces:" "* { setBaseIndentation(spaces); }
 

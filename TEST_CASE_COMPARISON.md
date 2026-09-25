@@ -19,9 +19,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
 | Python | 222 | 19 |
-| JavaScript | 266 | 22 |
-| Rust | 344 | 24 |
-| C# | 237 | 21 |
+| JavaScript | 267 | 23 |
+| Rust | 351 | 25 |
+| C# | 243 | 22 |
 | Go | 115 | 13 |
 | Java | 161 | 12 |
 | PHP | 211 | 19 |
@@ -540,6 +540,20 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 **Category totals:** Python: 2, JavaScript: 2, Rust: 2, C#: 2, Go: 0, Java: 0, PHP: 2
 
+## Nesting Depth
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
+|-----------|---|---|---|---|---|---|---|
+| closed groups read in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L60) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L63) | ❌ | ❌ | ❌ |
+| group followed by values keeps its structure | ❌ | [✅](js/tests/NestingDepth.test.js#L111) | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L112) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L96) | ❌ | ❌ | ❌ |
+| parse lino to links does not copy each level | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L92) | ❌ | ❌ | ❌ | ❌ |
+| unclosed groups fail in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L76) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L77) | ❌ | ❌ | ❌ |
+| unclosed groups on indented lines fail in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L83) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L83) | ❌ | ❌ | ❌ |
+| values after groups read in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L68) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L70) | ❌ | ❌ | ❌ |
+| values after very deep groups read in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L102) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L89) | ❌ | ❌ | ❌ |
+
+**Category totals:** Python: 0, JavaScript: 1, Rust: 7, C#: 6, Go: 0, Java: 0, PHP: 0
+
 ## Parse Error Position
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
@@ -915,6 +929,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedlinknoid
 - nestedlinkwithquotedvalues
 
+**Nesting Depth** (7 missing):
+- closedgroupsreadinlineartime
+- groupfollowedbyvalueskeepsitsstructure
+- parselinotolinksdoesnotcopyeachlevel
+- unclosedgroupsfailinlineartime
+- unclosedgroupsonindentedlinesfailinlineartime
+- valuesaftergroupsreadinlineartime
+- valuesafterverydeepgroupsreadinlineartime
+
 **Parse Error Position** (23 missing):
 - adocumentthatparsesreportsnothing
 - bothentrypointsreportthesameposition
@@ -1008,7 +1031,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 265 tests**
+**Total missing: 272 tests**
 
 ### JavaScript Missing Tests
 
@@ -1193,6 +1216,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedlinknoid
 - nestedlinkwithquotedvalues
 
+**Nesting Depth** (6 missing):
+- closedgroupsreadinlineartime
+- parselinotolinksdoesnotcopyeachlevel
+- unclosedgroupsfailinlineartime
+- unclosedgroupsonindentedlinesfailinlineartime
+- valuesaftergroupsreadinlineartime
+- valuesafterverydeepgroupsreadinlineartime
+
 **Parse Error Position** (12 missing):
 - bothentrypointsreportthesameposition
 - columncountscharactersratherthanbytes
@@ -1268,7 +1299,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 222 tests**
+**Total missing: 228 tests**
 
 ### Rust Missing Tests
 
@@ -1660,6 +1691,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedlinknoid
 - nestedlinkwithquotedvalues
 
+**Nesting Depth** (1 missing):
+- parselinotolinksdoesnotcopyeachlevel
+
 **Parse Error Position** (12 missing):
 - bothentrypointsreportthesameposition
 - columncountscharactersratherthanbytes
@@ -1738,7 +1772,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 250 tests**
+**Total missing: 251 tests**
 
 ### Go Missing Tests
 
@@ -2044,6 +2078,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedselfreferencedobjectinpairvalue
 - selfreferenceasdirectchildworkscorrectly
 
+**Nesting Depth** (7 missing):
+- closedgroupsreadinlineartime
+- groupfollowedbyvalueskeepsitsstructure
+- parselinotolinksdoesnotcopyeachlevel
+- unclosedgroupsfailinlineartime
+- unclosedgroupsonindentedlinesfailinlineartime
+- valuesaftergroupsreadinlineartime
+- valuesafterverydeepgroupsreadinlineartime
+
 **Parse Error Position** (23 missing):
 - adocumentthatparsesreportsnothing
 - bothentrypointsreportthesameposition
@@ -2158,7 +2201,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 368 tests**
+**Total missing: 375 tests**
 
 ### Java Missing Tests
 
@@ -2438,6 +2481,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedselfreferencedobjectinpairvalue
 - selfreferenceasdirectchildworkscorrectly
 
+**Nesting Depth** (7 missing):
+- closedgroupsreadinlineartime
+- groupfollowedbyvalueskeepsitsstructure
+- parselinotolinksdoesnotcopyeachlevel
+- unclosedgroupsfailinlineartime
+- unclosedgroupsonindentedlinesfailinlineartime
+- valuesaftergroupsreadinlineartime
+- valuesafterverydeepgroupsreadinlineartime
+
 **Parse Error Position** (23 missing):
 - adocumentthatparsesreportsnothing
 - bothentrypointsreportthesameposition
@@ -2536,7 +2588,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 326 tests**
+**Total missing: 333 tests**
 
 ### PHP Missing Tests
 
@@ -2751,6 +2803,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedlinknoid
 - nestedlinkwithquotedvalues
 
+**Nesting Depth** (7 missing):
+- closedgroupsreadinlineartime
+- groupfollowedbyvalueskeepsitsstructure
+- parselinotolinksdoesnotcopyeachlevel
+- unclosedgroupsfailinlineartime
+- unclosedgroupsonindentedlinesfailinlineartime
+- valuesaftergroupsreadinlineartime
+- valuesafterverydeepgroupsreadinlineartime
+
 **Parse Error Position** (23 missing):
 - adocumentthatparsesreportsnothing
 - bothentrypointsreportthesameposition
@@ -2856,5 +2917,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 276 tests**
+**Total missing: 283 tests**
 
