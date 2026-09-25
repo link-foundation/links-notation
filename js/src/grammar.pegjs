@@ -1,3 +1,7 @@
+{{
+  import { DelimitedReferences } from './quotes.js';
+}}
+
 {
   let indentationStack = [0];
   let baseIndentation = null;
@@ -66,87 +70,18 @@
     return indentationStack[indentationStack.length - 1];
   }
 
-  // A body written between an even run of delimiters is substantive when it
-  // holds at least one visible character and does not straddle a parenthesis.
-  // An even run can always be read as delimiter pairs enclosing nothing, so the
-  // n-quote reading is only taken when it carries something the pairs cannot.
-  function isSubstantiveBody(content) {
-    let depth = 0;
-    let hasVisible = false;
-
-    for (const c of content) {
-      if (c === '(') {
-        depth++;
-      } else if (c === ')') {
-        depth--;
-        if (depth < 0) {
-          return false;
-        }
-      }
-      if (!/[ \t\n\r]/.test(c)) {
-        hasVisible = true;
-      }
-    }
-
-    return hasVisible && depth === 0;
-  }
+  // Delimited references of this document, each read once however many
+  // alternatives ask for it (see quotes.js for how a reference is read)
+  const delimitedReferences = new DelimitedReferences(input);
 
   // Universal procedural parser for N-quote strings (any N >= 1)
   // Parses from the given position in the input string
-  // A run of an even number of delimiters that does not open a reference with a
-  // substantive body is the empty reference: the shortest reading, a bare
-  // delimiter pair enclosing nothing, wins over a longer n-quote delimiter.
   // Returns { value, length } or null
   function parseQuotedStringAt(inputStr, startPos, quoteChar) {
     if (startPos >= inputStr.length || inputStr[startPos] !== quoteChar) {
       return null;
     }
-
-    // Count opening quotes
-    let quoteCount = 0;
-    let pos = startPos;
-    while (pos < inputStr.length && inputStr[pos] === quoteChar) {
-      quoteCount++;
-      pos++;
-    }
-
-    const isEvenRun = quoteCount % 2 === 0;
-    const emptyReference = isEvenRun ? { value: '', length: quoteCount } : null;
-
-    const closeSeq = quoteChar.repeat(quoteCount);
-    const escapeSeq = quoteChar.repeat(quoteCount * 2);
-
-    let content = '';
-    while (pos < inputStr.length) {
-      // Check for escape sequence (2*N quotes)
-      if (inputStr.substr(pos, escapeSeq.length) === escapeSeq) {
-        content += closeSeq; // 2*N quotes become N quotes
-        pos += escapeSeq.length;
-        continue;
-      }
-
-      // Check for closing sequence (exactly N quotes)
-      if (inputStr.substr(pos, quoteCount) === closeSeq) {
-        // Verify it's exactly N quotes (not followed by more of same char)
-        const afterClose = pos + quoteCount;
-        if (afterClose >= inputStr.length || inputStr[afterClose] !== quoteChar) {
-          // Found valid closing
-          if (isEvenRun && !isSubstantiveBody(content)) {
-            return emptyReference;
-          }
-          return {
-            value: content,
-            length: afterClose - startPos
-          };
-        }
-      }
-
-      // Add character to content
-      content += inputStr[pos];
-      pos++;
-    }
-
-    return emptyReference; // No valid closing found
+    return delimitedReferences.readAt(startPos);
   }
 
   // Global state for passing parsed values between predicate and action

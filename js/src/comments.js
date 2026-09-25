@@ -12,11 +12,10 @@
  * the reader can see.
  */
 
+import { DelimitedReferences, QUOTES } from './quotes.js';
+
 /** The character that starts a comment. */
 export const COMMENT = '#';
-
-/** The delimiters a reference can be written between. */
-const QUOTES = ['"', "'", '`'];
 
 /** What a delimited reference may start after. */
 const BEFORE_REFERENCE = [' ', '\t', '\n', '\r', '(', ':'];
@@ -38,6 +37,7 @@ export function stripComments(document) {
   // parse error reports are both counted in.
   let blanked = null;
   let position = 0;
+  const references = new DelimitedReferences(document);
 
   while (position < document.length) {
     const character = document[position];
@@ -46,7 +46,7 @@ export function stripComments(document) {
       QUOTES.includes(character) &&
       follows(document, position, BEFORE_REFERENCE)
     ) {
-      const end = quotedReferenceEnd(document, position);
+      const end = references.endAt(position);
       position = end === null ? position + 1 : end;
       continue;
     }
@@ -80,85 +80,4 @@ export function stripComments(document) {
  */
 function follows(document, position, allowed) {
   return position === 0 || allowed.includes(document[position - 1]);
-}
-
-/**
- * The position just past the delimited reference that starts at `start`, or
- * `null` when nothing there opens one.
- *
- * This follows the same rules as the `parseQuotedStringAt` of the grammar: a
- * run of N delimiters closes at the next run of exactly N, a run of 2N is that
- * delimiter escaped, and an even run that encloses nothing substantive is the
- * empty reference.
- * @param {string} document - The document being read
- * @param {number} start - Position of the opening delimiter
- * @returns {number|null} The position just past the reference
- */
-export function quotedReferenceEnd(document, start) {
-  const quote = document[start];
-  if (!QUOTES.includes(quote)) {
-    return null;
-  }
-
-  let position = start;
-  while (position < document.length && document[position] === quote) {
-    position++;
-  }
-  const count = position - start;
-  const isEvenRun = count % 2 === 0;
-  const emptyReference = isEvenRun ? start + count : null;
-
-  const closing = quote.repeat(count);
-  const escape = quote.repeat(count * 2);
-  let content = '';
-
-  while (position < document.length) {
-    if (document.startsWith(escape, position)) {
-      content += closing;
-      position += escape.length;
-      continue;
-    }
-
-    if (document.startsWith(closing, position)) {
-      const afterClosing = position + count;
-      if (afterClosing >= document.length || document[afterClosing] !== quote) {
-        if (isEvenRun && !isSubstantiveBody(content)) {
-          return emptyReference;
-        }
-        return afterClosing;
-      }
-    }
-
-    content += document[position];
-    position++;
-  }
-
-  return emptyReference;
-}
-
-/**
- * Whether a body written between an even run of delimiters carries something a
- * pair of delimiters enclosing nothing cannot.
- * @param {string} content - The body between the delimiters
- * @returns {boolean} True when the n-quote reading is the one to take
- */
-function isSubstantiveBody(content) {
-  let depth = 0;
-  let hasVisible = false;
-
-  for (const character of content) {
-    if (character === '(') {
-      depth++;
-    } else if (character === ')') {
-      depth--;
-      if (depth < 0) {
-        return false;
-      }
-    }
-    if (!/[ \t\n\r]/.test(character)) {
-      hasVisible = true;
-    }
-  }
-
-  return hasVisible && depth === 0;
 }

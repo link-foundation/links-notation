@@ -1,0 +1,10 @@
+[package]
+name = "issue-316-rust-timing"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+links-notation = { path = "../../../rust/links-notation" }
