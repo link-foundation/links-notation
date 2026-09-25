@@ -125,7 +125,8 @@ for (const [name, make] of Object.entries(shapes)) {
 test(
   'a stream of wide quotes is read within the time bound',
   () => {
-    const source = shapes['closed wide quote over quotes'](SIZE);
+    // The second line is what makes the stream ask whether the first is complete.
+    const source = `${shapes['closed wide quote over quotes'](SIZE)}\nb`;
     const links = [];
     const { elapsed } = timed(() => {
       const stream = new StreamParser();
@@ -133,7 +134,7 @@ test(
       stream.write(source);
       stream.end();
     });
-    expect(links.length).toBe(1);
+    expect(links.length).toBe(2);
     expect(elapsed).toBeLessThan(BOUND_MS);
   },
   TIMEOUT_MS
