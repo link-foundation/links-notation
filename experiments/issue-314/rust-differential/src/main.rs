@@ -1,5 +1,6 @@
-//! Reads JSON-free input: one document per line of stdin, with `\n` written as
-//! `\\n`, and prints what `parse_lino_to_links` and `parse_document` make of it.
+//! Reads one document per line of stdin, with line breaks written as `\n` (as
+//! printed by `random-documents.mjs`), and prints what `parse_lino_to_links`
+//! and `parse_document` make of it.
 //! Build it against two versions of the parser and diff the outputs.
 use links_notation::parse_lino_to_links;
 use links_notation::parser::parse_document;

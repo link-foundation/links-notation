@@ -1,6 +1,8 @@
 // Prints random small documents, one per line with line breaks written as \n,
 // for comparing two versions of a parser on the same inputs.
-// Usage: node random-documents.mjs [count] [seed]
+// Usage: node random-documents.mjs [count] [seed] [indented]
+// With "indented", line breaks are mostly followed by indentation, so most
+// documents have indented children.
 const count = Number(process.argv[2] ?? 20000);
 let seed = Number(process.argv[3] ?? 314);
 const random = () => {
@@ -8,6 +10,9 @@ const random = () => {
   return seed / 2147483648;
 };
 const pieces = ['(', ')', 'a', 'b', ':', ' ', '  ', '\n', '"', "'", 'c d', '(a)', ': ', '\t'];
+if (process.argv[4] === 'indented') {
+  pieces.push('\n ', '\n  ', '\n    ', '\n  ', '\n    ', 'a b', 'a:', '(a\n  b)');
+}
 for (let i = 0; i < count; i++) {
   const length = 1 + Math.floor(random() * 16);
   let document = '';
