@@ -102,9 +102,42 @@ stream also exposes `position`, `drain()`, `reset()`, and a buffer-size limit.
 
 The main parser class for Links Notation.
 
-- `__init__(..., comments: bool = True)`: Create a parser; with `comments=False`
-  a `#` is an ordinary character instead of the start of a comment
-- `parse(input_text: str) -> List[Link]`: Parse Links Notation text into Link objects
+- `__init__(max_input_size: int = 10 * 1024 * 1024, max_depth: int = DEFAULT_MAX_DEPTH, comments: bool = True)`:
+  Create a parser; with `comments=False` a `#` is an ordinary character instead
+  of the start of a comment
+- `parse(input_text: str) -> List[Link]`: Parse Links Notation text into Link
+  objects; raises `ParseError` when the text does not parse or nests links
+  deeper than `max_depth`
+- `DEFAULT_MAX_DEPTH`: The default `max_depth`, 64, the same in every
+  implementation
+
+`max_depth` is how deep links may nest (default: 64). Every parenthesized group
+and every indentation level is one level, and the lines of a document start at
+level 0, so with `max_depth=1` `(a)` is accepted while `((a))`, `(a (b))` and a
+group on an indented line are refused. A document nested deeper is refused with
+a `ParseError` rather than recursed into until Python's recursion limit is hit.
+
+### ParseError
+
+Raised when parsing fails. When a document nests links deeper than
+`max_depth`, it points at the group or the line that is one level too deep:
+
+```text
+Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
+1 | ((((a))))
+  |    ^
+```
+
+- `max_depth`: The deepest nesting the parser accepts, when the document nests
+  deeper; `None` for any other error
+- `line`, `column`: Where the offending group or line starts, counted from 1
+- `offset`: The same position as a character offset from the start of the
+  document
+- `line_text`: The offending line, as written
+
+`StreamParser` reports the same error as a `StreamParseError` whose `error` is
+the `ParseError` and whose `line`, `column` and `offset` are counted from the
+start of the stream.
 
 ### Link
 
