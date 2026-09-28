@@ -12,7 +12,6 @@ from .comments import strip_comments
 from .link import Link
 from .quotes import _parse_quoted_string_at
 
-
 #: How deep links may nest unless a parser is told otherwise: every
 #: parenthesized group and every indentation level is one level, and the lines
 #: of a document are at level 0. Every implementation shares this default.
