@@ -18,10 +18,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   document nested deeper is refused at the group or the line that is one level
   too deep: `Nesting too deep at line 1, column 65: nesting depth exceeds the
   maximum of 64`. Rust adds `ParserConfig::max_depth`,
-  `ParserConfig::with_max_depth` and `ParseError::NestingTooDeep`, and C# adds
-  a `maxDepth` parser option
+  `ParserConfig::with_max_depth` and `ParseError::NestingTooDeep`, C# adds
+  a `maxDepth` parser option, and the Python and PHP parse errors now carry
+  the offset, line, column, offending line and `max_depth` of the error
   ([#315](https://github.com/link-foundation/links-notation/issues/315)).
-
+- Read a child indented by a single space in the PHP parser, which never
+  returned on `a` followed by ` b`, and load PHP's `StreamParseException`,
+  which redeclared `Exception::$line` and so ended the process with a fatal
+  error the first time a stream failed to parse. Its position is now read
+  with `getOffset()`, `getLineNumber()` and `getColumn()`
+  ([#315](https://github.com/link-foundation/links-notation/issues/315)).
 - Read nested groups in time linear in the document in the JavaScript, Rust
   and C# parsers. Each line is now read once whether or not indented children
   follow it, and a line that could not be read is not read again, so a group
