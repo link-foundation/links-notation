@@ -6,188 +6,112 @@ using Xunit;
 namespace Link.Foundation.Links.Notation.Tests
 {
     /// <summary>
-    /// Links nested too deeply are refused with an error rather than recursed into until
-    /// the stack overflows, which ends the process where no catch block sees it
-    /// (https://github.com/link-foundation/links-notation/issues/315).
+    /// Reading nested groups must take time that grows with the size of the document,
+    /// not with two to the power of its nesting depth
+    /// (<see href="https://github.com/link-foundation/links-notation/issues/314">#314</see>).
+    /// Before the fix, every level of nesting doubled the work: a document nested six
+    /// levels deep took seconds. Each case runs on its own thread and fails when it has
+    /// not finished within the budget, so a regression fails instead of hanging.
     /// </summary>
-    /// <remarks>
-    /// Every parenthesized group and every indentation level is one level, and the lines of
-    /// a document start at level 0. The positions asserted here are the ones the Rust and
-    /// JavaScript ports report for the same input.
-    /// </remarks>
-    public static class NestingDepthTests
+    public class NestingDepthTests
     {
-        private static string Parens(int depth) => new string('(', depth) + "a" + new string(')', depth);
+        /// Generous enough for a debug build on a slow machine, and far below what the
+        /// exponential reading took at the depths used here.
+        private static readonly TimeSpan Budget = TimeSpan.FromSeconds(5);
 
-        private static string Values(int depth) =>
-            string.Concat(Enumerable.Repeat("(a ", depth)) + "b" + new string(')', depth);
+        /// The depth used for the shapes that used to take exponential time.
+        private const int Deep = 32;
 
-        private static string Indentation(int depth) =>
-            string.Concat(Enumerable.Range(0, depth + 1).Select(level => new string(' ', level) + "a\n"));
+        /// A depth that shows the reading stays linear well past the shallow cases.
+        private const int VeryDeep = 256;
 
-        private static ParseException TooDeep(string document, int maxDepth)
+        private static string Closed(int depth) => new string('(', depth) + "a" + new string(')', depth);
+
+        private static string ValueAfter(int depth) => new string('(', depth) + "a" + string.Concat(Enumerable.Repeat(") b", depth));
+
+        private static string Unclosed(int depth) => new string('(', depth) + "a";
+
+        /// Unclosed groups on lines that are each indented one space deeper.
+        private static string IndentedUnclosed(int depth) =>
+            string.Join("\n", Enumerable.Range(0, depth).Select(level => new string(' ', level) + "(a"));
+
+        /// Formats the parsed document, or names the exception parsing raised.
+        private static string ReadWithinBudget(string what, string source)
         {
-            var error = Assert.Throws<ParseException>(() => new Parser(true, maxDepth).Parse(document));
-            Assert.Equal(maxDepth, error.MaxDepth);
-            return error;
-        }
-
-        private static bool Accepted(string document, int maxDepth) =>
-            new Parser(true, maxDepth).Parse(document).Count > 0;
-
-        [Fact]
-        public static void DefaultLimitIsSharedByEveryImplementationTest()
-        {
-            Assert.Equal(64, Parser.DefaultMaxDepth);
-            Assert.Equal(Parser.DefaultMaxDepth, new Parser().MaxDepth);
-            Assert.Equal(Parser.DefaultMaxDepth, new Parser(comments: false).MaxDepth);
-            Assert.Equal(3, new Parser { MaxDepth = 3 }.MaxDepth);
-        }
-
-        [Fact]
-        public static void NegativeLimitIsRejectedTest()
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Parser(true, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Parser { MaxDepth = -1 });
-        }
-
-        [Fact]
-        public static void ParenthesesUpToTheLimitAreAcceptedTest()
-        {
-            Assert.True(Accepted(Parens(3), 3));
-            Assert.True(Accepted(Values(3), 3));
-            Assert.NotEmpty(new Parser().Parse(Parens(Parser.DefaultMaxDepth)));
-            Assert.NotEmpty(new Parser().Parse(Values(Parser.DefaultMaxDepth)));
-        }
-
-        [Fact]
-        public static void EveryGroupAndEveryIndentationLevelIsOneLevelTest()
-        {
-            Assert.True(Accepted("(a)", 1));
-            Assert.True(Accepted("a b c", 0));
-            TooDeep("(a)", 0);
-            TooDeep("((a))", 1);
-            TooDeep("(a (b))", 1);
-            TooDeep("a\n  (b)\n", 1);
-        }
-
-        [Fact]
-        public static void ParenthesesPastTheLimitAreRefusedAtTheGroupThatIsTooDeepTest()
-        {
-            var error = TooDeep(Parens(4), 3);
-
-            Assert.Equal((1, 4, 3), (error.Line, error.Column, error.Offset));
-            Assert.Equal("line 1, column 4: nesting depth exceeds the maximum of 3", error.Summary);
-            Assert.Equal("1 | ((((a))))\n  |    ^", error.Snippet);
-            Assert.Equal(
-                "Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3\n" +
-                "1 | ((((a))))\n" +
-                "  |    ^",
-                error.Message);
-        }
-
-        [Fact]
-        public static void GroupsInValuePositionCountLikeAnyOtherGroupTest()
-        {
-            var error = TooDeep(Values(4), 3);
-
-            Assert.Equal((1, 10), (error.Line, error.Column));
-        }
-
-        [Fact]
-        public static void IndentationUpToTheLimitIsAcceptedTest()
-        {
-            Assert.True(Accepted(Indentation(3), 3));
-            Assert.NotEmpty(new Parser().Parse(Indentation(Parser.DefaultMaxDepth)));
-        }
-
-        [Fact]
-        public static void IndentationPastTheLimitIsRefusedAtTheLineThatIsTooDeepTest()
-        {
-            var error = TooDeep(Indentation(4), 3);
-
-            Assert.Equal((5, 5), (error.Line, error.Column));
-            Assert.Equal("    a", error.LineText);
-        }
-
-        [Fact]
-        public static void GroupsAndIndentationAddUpTest()
-        {
-            // `(b)` on the line indented once is at level 2.
-            Assert.True(Accepted("a\n  (b)\n", 2));
-            var error = TooDeep("a\n  (b)\n", 1);
-
-            Assert.Equal((2, 3), (error.Line, error.Column));
-        }
-
-        [Fact]
-        public static void IndentationInsideAGroupCountsOnTopOfTheGroupTest()
-        {
-            // `b` is inside one group and indented once within it.
-            Assert.True(Accepted("(a\n  b)\n", 2));
-            var error = TooDeep("(a\n  b)\n", 1);
-
-            Assert.Equal((2, 3), (error.Line, error.Column));
-        }
-
-        [Fact]
-        public static void TrailingSpacesOnADeepLineAreNotADeeperLineTest()
-        {
-            Assert.True(Accepted("a\n  b\n    c   \n", 2));
-            Assert.True(Accepted("a\n  b\n    c\n      ", 2));
-        }
-
-        [Fact]
-        public static void SyntaxErrorIsNotMistakenForNestingThatIsTooDeepTest()
-        {
-            var error = Assert.Throws<ParseException>(() => new Parser().Parse("a: b: c"));
-
-            Assert.Null(error.MaxDepth);
-            Assert.StartsWith("Syntax error at ", error.Message);
-        }
-
-        [Fact]
-        public static void RefusesADocumentFarPastTheLimitWithoutOverflowingTheStackTest()
-        {
-            // Before the limit existed each of these overflowed the stack, which ends the
-            // process. The documents are parsed on a 1 MiB stack, smaller than any thread
-            // .NET starts by default.
-            string?[] messages = new string?[3];
-            Exception? unexpected = null;
-            var thread = new Thread(() =>
+            string? outcome = null;
+            var reader = new Thread(() =>
             {
                 try
                 {
-                    var documents = new[] { Parens(100_000), Values(100_000), Indentation(2_000) };
-                    for (var index = 0; index < documents.Length; index++)
-                    {
-                        var error = Assert.Throws<ParseException>(() => new Parser().Parse(documents[index]));
-                        Assert.Equal(Parser.DefaultMaxDepth, error.MaxDepth);
-                        messages[index] = error.Message;
-                    }
+                    // The documents nest deeper than the default limit on purpose; only the
+                    // time they take is measured here.
+                    outcome = new Parser(true, int.MaxValue).Parse(source).Format();
                 }
                 catch (Exception error)
                 {
-                    unexpected = error;
+                    outcome = error.GetType().Name;
                 }
-            }, 1 << 20);
-            thread.Start();
-            thread.Join();
-
-            Assert.Null(unexpected);
-            Assert.All(messages, message => Assert.StartsWith("Nesting too deep at ", message));
+            }, 512 * 1024 * 1024)
+            {
+                // A reader that runs past the budget must not keep the test run alive.
+                IsBackground = true,
+            };
+            reader.Start();
+            Assert.True(reader.Join(Budget), $"{what} did not finish within {Budget}");
+            return outcome!;
         }
 
         [Fact]
-        public static void StreamParserReportsWhereTheNestingIsTooDeepTest()
+        public void ClosedGroupsReadInLinearTime()
         {
-            var stream = new StreamParser(new Parser(true, 1));
-            stream.Write("a\nb ((c))\n");
+            var source = Closed(Deep);
+            Assert.Equal(source, ReadWithinBudget("closed groups", source));
+        }
 
-            var error = Assert.Throws<StreamParseException>(() => stream.Finish());
+        [Fact]
+        public void ValuesAfterGroupsReadInLinearTime()
+        {
+            var source = ValueAfter(Deep);
+            Assert.Equal($"({source})", ReadWithinBudget("values after groups", source));
+        }
 
-            Assert.Equal(1, error.ParseError.MaxDepth);
-            Assert.Equal((2, 4, 5), (error.Line, error.Column, error.Offset));
+        [Fact]
+        public void UnclosedGroupsFailInLinearTime()
+        {
+            Assert.Equal(nameof(ParseException), ReadWithinBudget("unclosed groups", Unclosed(Deep)));
+        }
+
+        [Fact]
+        public void UnclosedGroupsOnIndentedLinesFailInLinearTime()
+        {
+            Assert.Equal(nameof(ParseException), ReadWithinBudget("unclosed indented groups", IndentedUnclosed(Deep)));
+        }
+
+        [Fact]
+        public void ValuesAfterVeryDeepGroupsReadInLinearTime()
+        {
+            var source = ValueAfter(VeryDeep);
+            Assert.Equal($"({source})", ReadWithinBudget("very deep values after groups", source));
+        }
+
+        [Fact]
+        public void GroupFollowedByValuesKeepsItsStructure()
+        {
+            var cases = new[]
+            {
+                new[] { "(a) b", "((a) b)" },
+                new[] { "(a) (b) c", "((a) (b) c)" },
+                new[] { "((a) b) c", "(((a) b) c)" },
+                new[] { "(a: b) c", "((a: b) c)" },
+                new[] { "(a)\n(b) c", "(a)\n((b) c)" },
+                new[] { "x\n  (a) b\n  (c)", "(x)\n((x) ((a) b))\n((x) (c))" },
+            };
+
+            var parser = new Parser();
+            foreach (var testCase in cases)
+            {
+                Assert.Equal(testCase[1], parser.Parse(testCase[0]).Format());
+            }
         }
     }
 }

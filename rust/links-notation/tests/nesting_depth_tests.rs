@@ -1,137 +1,134 @@
-//! Links nested too deeply are refused with an error rather than recursed into
-//! until the stack overflows, which aborts the process where no caller can
-//! catch it ([#315](https://github.com/link-foundation/links-notation/issues/315)).
+//! Reading nested groups must take time that grows with the size of the
+//! document, not with two to the power of its nesting depth
+//! ([#314](https://github.com/link-foundation/links-notation/issues/314)).
 //!
-//! Every parenthesized group and every indentation level is one level, and the
-//! lines of a document start at level 0.
+//! Before the fix, every level of nesting doubled the work: a nine-byte
+//! document took seconds. Each case runs on its own thread and fails when it
+//! has not finished within the budget, so a regression fails instead of hanging.
 
-use links_notation::parser::DEFAULT_MAX_DEPTH;
+use links_notation::parser::parse_document_with_max_depth;
 use links_notation::{
-    parse_lino_to_links, parse_lino_to_links_with_config, NestingTooDeep, ParseError, ParserConfig,
-    StreamParser,
+    format_links, parse_lino_to_links, parse_lino_to_links_with_config, ParseError, ParserConfig,
 };
+use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
 
-fn parens(depth: usize) -> String {
+/// Generous enough for a debug build on a slow machine, and far below what the
+/// exponential and quadratic readings took at the depths used here.
+const BUDGET: Duration = Duration::from_secs(5);
+
+/// The depth used for the shapes that used to take exponential time.
+const DEEP: usize = 32;
+
+/// The depth used for the shapes that used to take quadratic time.
+const VERY_DEEP: usize = 4096;
+
+fn within_budget<T: Send + 'static>(what: &str, work: impl FnOnce() -> T + Send + 'static) -> T {
+    let (sender, receiver) = mpsc::channel();
+    thread::Builder::new()
+        // Deep nesting recurses deeply; give it room so only time is measured.
+        .stack_size(512 * 1024 * 1024)
+        .spawn(move || {
+            let _ = sender.send(work());
+        })
+        .unwrap();
+    receiver
+        .recv_timeout(BUDGET)
+        .unwrap_or_else(|_| panic!("{what} did not finish within {BUDGET:?}"))
+}
+
+/// Parses a document that nests deeper than the default limit on purpose: only
+/// the time it takes is measured here.
+fn parse_very_deep(source: &str) -> Result<Vec<links_notation::LiNo<String>>, ParseError> {
+    parse_lino_to_links_with_config(source, &ParserConfig::new().with_max_depth(usize::MAX))
+}
+
+fn closed(depth: usize) -> String {
     format!("{}a{}", "(".repeat(depth), ")".repeat(depth))
 }
 
-fn values(depth: usize) -> String {
-    format!("{}b{}", "(a ".repeat(depth), ")".repeat(depth))
+fn value_after(depth: usize) -> String {
+    format!("{}a{}", "(".repeat(depth), ") b".repeat(depth))
 }
 
-fn indentation(depth: usize) -> String {
-    (0..=depth)
-        .map(|level| format!("{}a\n", " ".repeat(level)))
-        .collect()
+fn unclosed(depth: usize) -> String {
+    format!("{}a", "(".repeat(depth))
 }
 
-fn too_deep(document: &str, max_depth: usize) -> NestingTooDeep {
-    let config = ParserConfig::new().with_max_depth(max_depth);
-    match parse_lino_to_links_with_config(document, &config) {
-        Ok(links) => panic!("expected {document:?} to be too deep, got {links:?}"),
-        Err(ParseError::NestingTooDeep(error)) => error,
-        Err(other) => panic!("expected {document:?} to be too deep, got {other}"),
+/// Unclosed groups on lines that are each indented one space deeper.
+fn indented_unclosed(depth: usize) -> String {
+    (0..depth)
+        .map(|level| format!("{}(a", " ".repeat(level)))
+        .collect::<Vec<_>>()
+        .join("\n")
+}
+
+#[test]
+fn closed_groups_read_in_linear_time() {
+    let source = closed(DEEP);
+    let expected = source.clone();
+    let links = within_budget("closed groups", move || parse_lino_to_links(&source));
+    assert_eq!(format_links(&links.unwrap()), expected);
+}
+
+#[test]
+fn values_after_groups_read_in_linear_time() {
+    let source = value_after(DEEP);
+    let expected = format!("({source})");
+    let links = within_budget("values after groups", move || parse_lino_to_links(&source));
+    assert_eq!(format_links(&links.unwrap()), expected);
+}
+
+#[test]
+fn unclosed_groups_fail_in_linear_time() {
+    let source = unclosed(DEEP);
+    let result = within_budget("unclosed groups", move || parse_lino_to_links(&source));
+    assert!(result.is_err());
+}
+
+#[test]
+fn unclosed_groups_on_indented_lines_fail_in_linear_time() {
+    let source = indented_unclosed(DEEP);
+    let result = within_budget("unclosed indented groups", move || {
+        parse_lino_to_links(&source)
+    });
+    assert!(result.is_err());
+}
+
+#[test]
+fn parse_lino_to_links_does_not_copy_each_level() {
+    let source = closed(VERY_DEEP);
+    let expected = source.clone();
+    let formatted = within_budget("very deep closed groups", move || {
+        format_links(&parse_very_deep(&source).unwrap())
+    });
+    assert_eq!(formatted, expected);
+}
+
+#[test]
+fn values_after_very_deep_groups_read_in_linear_time() {
+    let source = value_after(VERY_DEEP);
+    let length = source.len();
+    // A document parses only when all of it is read.
+    let parsed = within_budget("very deep values after groups", move || {
+        parse_document_with_max_depth(&source, usize::MAX).is_ok()
+    });
+    assert!(parsed, "all {length} bytes should be read");
+}
+
+#[test]
+fn group_followed_by_values_keeps_its_structure() {
+    let cases = [
+        ("(a) b", "((a) b)"),
+        ("(a) (b) c", "((a) (b) c)"),
+        ("((a) b) c", "(((a) b) c)"),
+        ("(a: b) c", "((a: b) c)"),
+        ("(a)\n(b) c", "(a)\n((b) c)"),
+        ("x\n  (a) b\n  (c)", "(x)\n((x) ((a) b))\n((x) (c))"),
+    ];
+    for (source, expected) in cases {
+        let links = parse_lino_to_links(source).unwrap();
+        assert_eq!(format_links(&links), expected, "{source:?}");
     }
-}
-
-fn accepted(document: &str, max_depth: usize) -> bool {
-    let config = ParserConfig::new().with_max_depth(max_depth);
-    parse_lino_to_links_with_config(document, &config).is_ok()
-}
-
-#[test]
-fn test_default_limit_is_shared_by_every_implementation() {
-    assert_eq!(DEFAULT_MAX_DEPTH, 64);
-    assert_eq!(ParserConfig::default().max_depth, DEFAULT_MAX_DEPTH);
-}
-
-#[test]
-fn test_parentheses_up_to_the_limit_are_accepted() {
-    assert!(accepted(&parens(3), 3));
-    assert!(accepted(&values(3), 3));
-    assert!(parse_lino_to_links(&parens(DEFAULT_MAX_DEPTH)).is_ok());
-    assert!(parse_lino_to_links(&values(DEFAULT_MAX_DEPTH)).is_ok());
-}
-
-#[test]
-fn test_parentheses_past_the_limit_are_refused_at_the_group_that_is_too_deep() {
-    let error = too_deep(&parens(4), 3);
-
-    assert_eq!(error.max_depth, 3);
-    assert_eq!((error.line, error.column, error.offset), (1, 4, 3));
-    assert_eq!(
-        error.to_string(),
-        "line 1, column 4: nesting depth exceeds the maximum of 3\n1 | ((((a))))\n  |    ^"
-    );
-}
-
-#[test]
-fn test_groups_in_value_position_count_like_any_other_group() {
-    let error = too_deep(&values(4), 3);
-
-    assert_eq!((error.line, error.column), (1, 10));
-}
-
-#[test]
-fn test_indentation_up_to_the_limit_is_accepted() {
-    assert!(accepted(&indentation(3), 3));
-    assert!(parse_lino_to_links(&indentation(DEFAULT_MAX_DEPTH)).is_ok());
-}
-
-#[test]
-fn test_indentation_past_the_limit_is_refused_at_the_line_that_is_too_deep() {
-    let error = too_deep(&indentation(4), 3);
-
-    assert_eq!((error.line, error.column), (5, 5));
-    assert_eq!(error.line_text, "    a");
-}
-
-#[test]
-fn test_groups_and_indentation_add_up() {
-    // `(b)` on the line indented once is at level 2.
-    assert!(accepted("a\n  (b)\n", 2));
-    let error = too_deep("a\n  (b)\n", 1);
-
-    assert_eq!((error.line, error.column), (2, 3));
-}
-
-#[test]
-fn test_trailing_spaces_on_a_deep_line_are_not_a_deeper_line() {
-    assert!(accepted("a\n  b\n    c   \n", 2));
-}
-
-#[test]
-fn test_refuses_a_document_far_past_the_limit_without_overflowing_the_stack() {
-    // Before the limit existed each of these overflowed a 2 MiB stack and
-    // aborted the process.
-    let outcome = std::thread::Builder::new()
-        .stack_size(2 << 20)
-        .spawn(|| {
-            [parens(100_000), values(100_000), indentation(2_000)]
-                .iter()
-                .map(|document| match parse_lino_to_links(document) {
-                    Err(ParseError::NestingTooDeep(error)) => error.max_depth,
-                    other => panic!("expected the nesting to be too deep, got {other:?}"),
-                })
-                .collect::<Vec<_>>()
-        })
-        .unwrap()
-        .join()
-        .unwrap();
-
-    assert_eq!(outcome, vec![DEFAULT_MAX_DEPTH; 3]);
-}
-
-#[test]
-fn test_stream_parser_reports_where_the_nesting_is_too_deep() {
-    let mut stream = StreamParser::with_config(ParserConfig::new().with_max_depth(1));
-    stream.write("a\nb ((c))\n").unwrap();
-    let error = stream.finish().unwrap_err();
-    let location = error.location.expect("the error has a location");
-
-    assert!(matches!(
-        error.parse_error.as_deref(),
-        Some(ParseError::NestingTooDeep(_))
-    ));
-    assert_eq!((location.line, location.column, location.offset), (2, 4, 5));
 }

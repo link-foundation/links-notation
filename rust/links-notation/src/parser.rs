@@ -1,3 +1,4 @@
+use crate::quotes::{read_reference, DelimitedReferences, Reading};
 use nom::{
     branch::alt,
     bytes::complete::{tag, take_while, take_while1},
@@ -7,7 +8,8 @@ use nom::{
     sequence::{preceded, terminated},
     IResult, Parser,
 };
-use std::cell::RefCell;
+use std::cell::{OnceCell, RefCell};
+use std::collections::HashMap;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Link {
@@ -101,7 +103,20 @@ pub struct ParserState {
     /// into the document being parsed.
     too_deep: RefCell<Option<usize>>,
     furthest: RefCell<FurthestFailure>,
+    unreadable_lines: RefCell<HashMap<LineKey, LineFailure>>,
+    /// The delimited references of the document being parsed.
+    references: OnceCell<DelimitedReferences>,
 }
+
+/// Where a line starts, as an address into the document, and whether it is
+/// inside a parenthesized group. Reading a line depends on nothing else: a group
+/// starts a fresh indentation context, and indentation only decides which lines
+/// become children, so a line that could not be read once never can be.
+type LineKey = (usize, bool);
+
+/// How far past the start of an unreadable line the parser failed, and the
+/// `nom` error kind it failed with.
+type LineFailure = (usize, nom::error::ErrorKind);
 
 /// The furthest position any alternative reached before failing, and what could
 /// have continued the document there.
@@ -166,6 +181,8 @@ impl ParserState {
             max_depth,
             too_deep: RefCell::new(None),
             furthest: RefCell::new(FurthestFailure::default()),
+            unreadable_lines: RefCell::new(HashMap::new()),
+            references: OnceCell::new(),
         }
     }
 
@@ -355,159 +372,37 @@ fn simple_reference(input: &str) -> IResult<&str, String> {
         .parse(input)
 }
 
-/// Parse a multi-quote string with a given quote character and count.
-/// For N quotes: opening = N quotes, closing = N quotes, escape = 2*N quotes -> N quotes
-fn parse_multi_quote_string(
-    input: &str,
-    quote_char: char,
-    quote_count: usize,
-) -> IResult<&str, String> {
-    let open_close = quote_char.to_string().repeat(quote_count);
-    let escape_seq = quote_char.to_string().repeat(quote_count * 2);
-    let escape_val = quote_char.to_string().repeat(quote_count);
-
-    // Check for opening quotes
-    if !input.starts_with(&open_close) {
-        return Err(nom::Err::Error(nom::error::Error::new(
-            input,
-            nom::error::ErrorKind::Tag,
-        )));
-    }
-
-    let mut remaining = &input[open_close.len()..];
-    let mut content = String::new();
-
-    loop {
-        if remaining.is_empty() {
-            return Err(nom::Err::Error(nom::error::Error::new(
-                input,
-                nom::error::ErrorKind::Tag,
-            )));
-        }
-
-        // Check for escape sequence (2*N quotes)
-        if remaining.starts_with(&escape_seq) {
-            content.push_str(&escape_val);
-            remaining = &remaining[escape_seq.len()..];
-            continue;
-        }
-
-        // Check for closing quotes (N quotes not followed by more quotes)
-        if remaining.starts_with(&open_close) {
-            let after_close = &remaining[open_close.len()..];
-            // Make sure this is exactly N quotes (not more)
-            if after_close.is_empty() || !after_close.starts_with(quote_char) {
-                return Ok((after_close, content));
-            }
-        }
-
-        // Take the next character
-        let c = remaining.chars().next().unwrap();
-        content.push(c);
-        remaining = &remaining[c.len_utf8()..];
-    }
-}
-
-/// A body written between an even run of delimiters is substantive when it
-/// holds at least one visible character and does not straddle a parenthesis.
-/// An even run can always be read as delimiter pairs enclosing nothing, so the
-/// n-quote reading is only taken when it carries something the pairs cannot.
-fn is_substantive_body(content: &str) -> bool {
-    let mut depth: isize = 0;
-    let mut has_visible = false;
-
-    for c in content.chars() {
-        match c {
-            '(' => depth += 1,
-            ')' => {
-                depth -= 1;
-                if depth < 0 {
-                    return false;
-                }
-            }
-            _ => {}
-        }
-        if !is_whitespace_char(c) {
-            has_visible = true;
-        }
-    }
-
-    has_visible && depth == 0
-}
-
-/// Parse a quoted string with dynamically detected quote count.
-///
-/// Counts opening quotes and uses that count for parsing. A run of an even
-/// number of delimiters that does not open a reference with a substantive body
-/// is the empty reference: the shortest reading, a bare delimiter pair
-/// enclosing nothing, wins over a longer n-quote delimiter.
-fn parse_dynamic_quote_string(input: &str, quote_char: char) -> IResult<&str, String> {
-    // Count opening quotes
-    let quote_count = input.chars().take_while(|&c| c == quote_char).count();
-
-    if quote_count == 0 {
-        return Err(nom::Err::Error(nom::error::Error::new(
-            input,
-            nom::error::ErrorKind::Tag,
-        )));
-    }
-
-    let is_even_run = quote_count % 2 == 0;
-
-    if let Ok((rest, content)) = parse_multi_quote_string(input, quote_char, quote_count) {
-        if !is_even_run || is_substantive_body(&content) {
-            return Ok((rest, content));
-        }
-    }
-
-    if is_even_run {
-        return Ok((&input[quote_count * quote_char.len_utf8()..], String::new()));
-    }
-
-    Err(nom::Err::Error(nom::error::Error::new(
-        input,
-        nom::error::ErrorKind::Tag,
-    )))
-}
-
 /// The offset just past the delimited reference that starts at `start`, or
 /// `None` when nothing that far into `document` opens one.
 ///
 /// Comment stripping needs to know how far a delimited reference reaches so
 /// that a `#` written inside one stays content, and it has to agree with the
-/// parser about it, which is why it asks the parser rather than scanning again.
+/// parser about it, which is why both read references the same way.
 pub fn quoted_reference_end(document: &str, start: usize) -> Option<usize> {
-    let rest = document.get(start..)?;
-    let quote = rest.chars().next()?;
-    if !matches!(quote, '"' | '\'' | '`') {
-        return None;
+    let reading = read_reference(document.get(start..)?)?;
+    Some(start + reading.length)
+}
+
+/// A delimited reference with any number of delimiters. A run of an even
+/// number of delimiters that does not open a reference with a substantive body
+/// is the empty reference.
+fn delimited_reference<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, String> {
+    let references = state
+        .references
+        .get_or_init(|| DelimitedReferences::new(input));
+    match references.read(input) {
+        Some(Reading { value, length }) => Ok((&input[length..], value)),
+        None => Err(nom::Err::Error(nom::error::Error::new(
+            input,
+            nom::error::ErrorKind::Tag,
+        ))),
     }
-    let (remaining, _) = parse_dynamic_quote_string(rest, quote).ok()?;
-    Some(document.len() - remaining.len())
-}
-
-fn double_quoted_dynamic(input: &str) -> IResult<&str, String> {
-    parse_dynamic_quote_string(input, '"')
-}
-
-fn single_quoted_dynamic(input: &str) -> IResult<&str, String> {
-    parse_dynamic_quote_string(input, '\'')
-}
-
-fn backtick_quoted_dynamic(input: &str) -> IResult<&str, String> {
-    parse_dynamic_quote_string(input, '`')
 }
 
 fn reference<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, String> {
     // Try quoted strings with dynamic quote detection (supports any N quotes)
     // Then fall back to simple unquoted reference
-    let parsed = alt((
-        double_quoted_dynamic,
-        single_quoted_dynamic,
-        backtick_quoted_dynamic,
-        simple_reference,
-    ))
-    .parse(input);
+    let parsed = alt((|i| delimited_reference(i, state), simple_reference)).parse(input);
     if parsed.is_err() {
         state.expected_at(input, "a reference");
     }
@@ -665,13 +560,65 @@ fn single_line_any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a 
     .parse(input)
 }
 
+/// Reads one line, or fails at once when the line was already found unreadable.
+///
+/// A line that does not parse as the first child of the line above it is tried
+/// again as a sibling at every enclosing indentation level. When the line holds
+/// a group, each of those attempts reads the whole group again, so without this
+/// the work doubles with every indented level (issue #314).
 fn any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    alt((
-        terminated(|i| nested_group(i, state), |i| eol(i, state)),
-        |i| indented_id_link(i, state),
-        |i| single_line_any_link(i, state),
-    ))
-    .parse(input)
+    let key = (input.as_ptr() as usize, state.is_inside_nested_context());
+    if let Some(&(offset, kind)) = state.unreadable_lines.borrow().get(&key) {
+        return Err(nom::Err::Error(nom::error::Error::new(
+            &input[offset..],
+            kind,
+        )));
+    }
+    let parsed = read_any_link(input, state);
+    if let Err(nom::Err::Error(error)) = &parsed {
+        let offset = error.input.as_ptr() as usize - input.as_ptr() as usize;
+        state
+            .unreadable_lines
+            .borrow_mut()
+            .insert(key, (offset, error.code));
+    }
+    parsed
+}
+
+/// A line that starts with a parenthesized group reads that group once and then
+/// branches on what follows it: the end of the line makes the group the whole
+/// link, and more values make it the first value of a value link.
+///
+/// Every other alternative would have to read the group again, which doubles
+/// the work at each level of nesting and makes a few dozen bytes take seconds
+/// ([#314](https://github.com/link-foundation/links-notation/issues/314)).
+fn read_any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
+    let (rest, group) = match nested_group(input, state) {
+        Ok(parsed) => parsed,
+        // Neither an indented ID nor a single-line link can start with a
+        // parenthesis, and a value link would begin with this same group, so
+        // nothing else can read a line that opens one. Report it the way the
+        // single-line value link does, as a missing reference.
+        Err(_) if input.starts_with('(') => {
+            return reference(input, state).map(|(rest, id)| (rest, Link::new_singlet(id)))
+        }
+        Err(_) => {
+            return alt((
+                |i| indented_id_link(i, state),
+                |i| single_line_any_link(i, state),
+            ))
+            .parse(input)
+        }
+    };
+    if let Ok((rest, _)) = eol(rest, state) {
+        return Ok((rest, group));
+    }
+    let (rest, more) = many0(|i| single_line_value_and_whitespace(i, state)).parse(rest)?;
+    let (rest, _) = eol(rest, state)?;
+    let mut values = Vec::with_capacity(more.len() + 1);
+    values.push(group);
+    values.extend(more);
+    Ok((rest, Link::new_value(values)))
 }
 
 fn count_indentation(input: &str) -> IResult<&str, usize> {
@@ -783,6 +730,12 @@ pub fn parse_document_with_max_depth(
 }
 
 fn document<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>> {
+    // Every reference is read from a part of this document, so the runs of
+    // delimiters are listed from all of it.
+    state
+        .references
+        .get_or_init(|| DelimitedReferences::new(input));
+
     // Skip leading blank lines but preserve the line structure
     let document = skip_empty_lines(input);
 

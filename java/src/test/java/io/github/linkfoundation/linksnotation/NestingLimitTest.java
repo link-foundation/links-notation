@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * document start at level 0. The positions asserted here are the ones the Rust port reports for the
  * same input.
  */
-public class NestingDepthTest {
+public class NestingLimitTest {
 
   private static String parens(int depth) {
     return "(".repeat(depth) + "a" + ")".repeat(depth);

@@ -1,3 +1,7 @@
+{{
+  import { DelimitedReferences } from './quotes.js';
+}}
+
 {
   let indentationStack = [0];
   let baseIndentation = null;
@@ -11,13 +15,26 @@
   // until the stack overflows.
   let contextDepth = 0;
   const maxDepth = options.maxDepth ?? Infinity;
+  // Lines already found unreadable, keyed by where they start and whether they
+  // are inside a parenthesised group. Reading a line depends on nothing else: a
+  // group starts a fresh indentation context, and indentation only decides
+  // which lines become children, so a line that could not be read once never
+  // can be. A line that does not parse as the first child of the line above it
+  // is tried again as a sibling at every enclosing indentation level, and
+  // without this each of those attempts would read the whole line again.
+  let unreadableLines = new Set();
 
   function resetState() {
     indentationStack = [0];
     baseIndentation = null;
     contextStack = [];
     contextDepth = 0;
+    unreadableLines = new Set();
     return true;
+  }
+
+  function lineKey(position) {
+    return contextStack.length > 0 ? -1 - position : position;
   }
 
   function enterNestedContext() {
@@ -92,96 +109,22 @@
     return normalized >= indentationStack[indentationStack.length - 1];
   }
 
-  function restoreIndentation(saved) {
-    indentationStack = saved;
-    return true;
-  }
-
   function getCurrentIndentation() {
     return indentationStack[indentationStack.length - 1];
   }
 
-  // A body written between an even run of delimiters is substantive when it
-  // holds at least one visible character and does not straddle a parenthesis.
-  // An even run can always be read as delimiter pairs enclosing nothing, so the
-  // n-quote reading is only taken when it carries something the pairs cannot.
-  function isSubstantiveBody(content) {
-    let depth = 0;
-    let hasVisible = false;
-
-    for (const c of content) {
-      if (c === '(') {
-        depth++;
-      } else if (c === ')') {
-        depth--;
-        if (depth < 0) {
-          return false;
-        }
-      }
-      if (!/[ \t\n\r]/.test(c)) {
-        hasVisible = true;
-      }
-    }
-
-    return hasVisible && depth === 0;
-  }
+  // Delimited references of this document, each read once however many
+  // alternatives ask for it (see quotes.js for how a reference is read)
+  const delimitedReferences = new DelimitedReferences(input);
 
   // Universal procedural parser for N-quote strings (any N >= 1)
   // Parses from the given position in the input string
-  // A run of an even number of delimiters that does not open a reference with a
-  // substantive body is the empty reference: the shortest reading, a bare
-  // delimiter pair enclosing nothing, wins over a longer n-quote delimiter.
   // Returns { value, length } or null
   function parseQuotedStringAt(inputStr, startPos, quoteChar) {
     if (startPos >= inputStr.length || inputStr[startPos] !== quoteChar) {
       return null;
     }
-
-    // Count opening quotes
-    let quoteCount = 0;
-    let pos = startPos;
-    while (pos < inputStr.length && inputStr[pos] === quoteChar) {
-      quoteCount++;
-      pos++;
-    }
-
-    const isEvenRun = quoteCount % 2 === 0;
-    const emptyReference = isEvenRun ? { value: '', length: quoteCount } : null;
-
-    const closeSeq = quoteChar.repeat(quoteCount);
-    const escapeSeq = quoteChar.repeat(quoteCount * 2);
-
-    let content = '';
-    while (pos < inputStr.length) {
-      // Check for escape sequence (2*N quotes)
-      if (inputStr.substr(pos, escapeSeq.length) === escapeSeq) {
-        content += closeSeq; // 2*N quotes become N quotes
-        pos += escapeSeq.length;
-        continue;
-      }
-
-      // Check for closing sequence (exactly N quotes)
-      if (inputStr.substr(pos, quoteCount) === closeSeq) {
-        // Verify it's exactly N quotes (not followed by more of same char)
-        const afterClose = pos + quoteCount;
-        if (afterClose >= inputStr.length || inputStr[afterClose] !== quoteChar) {
-          // Found valid closing
-          if (isEvenRun && !isSubstantiveBody(content)) {
-            return emptyReference;
-          }
-          return {
-            value: content,
-            length: afterClose - startPos
-          };
-        }
-      }
-
-      // Add character to content
-      content += inputStr[pos];
-      pos++;
-    }
-
-    return emptyReference; // No valid closing found
+    return delimitedReferences.readAt(startPos);
   }
 
   // Global state for passing parsed values between predicate and action
@@ -200,18 +143,42 @@ firstLine = SET_BASE_INDENTATION l:element { return l; }
 
 line = CHECK_INDENTATION l:element { return l; }
 
+// A line is read once, whether or not indented children follow it: reading it
+// again after looking for children doubled the work at every level of nesting.
 // Only a line that parsed counts towards the depth, so trailing spaces indented
-// past the limit are still read as the whitespace they are. When no child line
-// follows the indentation, the indentation is put back the way it was.
-element = start:HERE e:anyLink &{ return checkDepth(depth(), start); }
-  saved:SAVE_INDENTATION children:(PUSH_INDENTATION l:links { return l; })?
-  &{ return children !== null || restoreIndentation(saved); } {
-    return children === null ? e : Object.assign({}, e, { children });
+// past the limit are still read as the whitespace they are.
+element = &{ return !unreadableLines.has(lineKey(offset())); }
+    start:HERE e:anyLink &{ return checkDepth(depth(), start); }
+    saved:SAVE_INDENTATION l:(PUSH_INDENTATION @links)? {
+    if (l === null) {
+      // No child line followed the indentation. Forget what looking for one
+      // pushed, so the next line is compared with this line's indentation.
+      indentationStack = saved;
+      return e;
+    }
+    return Object.assign({}, e, { children: l });
   }
+  // Remember that this line could not be read. The predicate always fails, so
+  // the "." is never reached; it only tells Peggy that this alternative cannot
+  // succeed without consuming input.
+  / &{ unreadableLines.add(lineKey(offset())); return false; } .
 
 referenceOrLink = l:multiLineAnyLink { return l; } / i:reference { return { id: i }; }
 
-anyLink = ml:multiLineAnyLink eol { return ml; } / il:indentedIdLink { return il; } / sl:singleLineAnyLink { return sl; }
+// A line that starts with a parenthesised group reads that group once and then
+// branches on what follows it: the end of the line makes the group the whole
+// link, and more values make it the first value of a value link. Neither an
+// indented ID nor a single-line link can start with a parenthesis, so nothing
+// else is tried for such a line; trying them read the group again, doubling
+// the work at every level of nesting.
+anyLink = &"(" @groupLink / !"(" @(indentedIdLink / singleLineAnyLink)
+
+groupLink = g:multiLineAnyLink rest:groupLinkRest {
+    return rest === null ? g : { values: [g].concat(rest) };
+  }
+
+groupLinkRest = eol { return null; }
+  / @singleLineValueAndWhitespace* eol
 
 multiLineAnyLink = nestedGroup
 
@@ -221,18 +188,21 @@ singleLineAnyLink = fl:singleLineLink eol { return fl; }
 // A parenthesised group opens a nested context that follows exactly the same
 // rules as the root of the document: line breaks separate links and
 // indentation nests them, starting fresh at indentation level zero.
-// The enclosing context is restored whether or not the group parses.
 nestedGroup = start:HERE "(" &{ return checkDepth(depth() + 1, start); }
-  ENTER_NESTED_CONTEXT body:nestedGroupBody? EXIT_NESTED_CONTEXT
-  &{ return body !== null; } { return body; }
+    ENTER_NESTED_CONTEXT body:nestedGroupBody {
+    exitNestedContext();
+    return body;
+  }
+  // The group was opened but its body did not parse: restore the context it
+  // was opened in before failing, just as a parsed group does.
+  / "(" &{ exitNestedContext(); return false; }
 
 nestedGroupBody = skipEmptyLines l:links _ ")" { return { nested: l }; }
   / _ ")" { return { nested: [] }; }
 
 ENTER_NESTED_CONTEXT = &{ return enterNestedContext(); }
 
-EXIT_NESTED_CONTEXT = &{ return exitNestedContext(); }
-
+// Where the parser is, to say where nesting got too deep.
 HERE = "" { return location(); }
 
 singleLineValueAndWhitespace = __ value:referenceOrLink { return value; }
