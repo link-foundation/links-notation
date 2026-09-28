@@ -255,13 +255,13 @@ deploy: staging # пока только staging
 <!-- test-counts:start -->
 | Язык | Тестов | Категорий тестов |
 | --- | --- | --- |
-| Python | 222 | 19 |
-| JavaScript | 267 | 23 |
-| Rust | 351 | 25 |
-| C# | 243 | 22 |
-| Go | 115 | 13 |
-| Java | 161 | 12 |
-| PHP | 211 | 19 |
+| Python | 235 | 20 |
+| JavaScript | 278 | 24 |
+| Rust | 361 | 26 |
+| C# | 257 | 23 |
+| Go | 129 | 14 |
+| Java | 174 | 13 |
+| PHP | 224 | 20 |
 <!-- test-counts:end -->
 
 Таблицу записывает `scripts/create-test-case-comparison.mjs`: он читает сами файлы тестов

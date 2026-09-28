@@ -18,13 +18,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 222 | 19 |
-| JavaScript | 267 | 23 |
-| Rust | 351 | 25 |
-| C# | 243 | 22 |
-| Go | 115 | 13 |
-| Java | 161 | 12 |
-| PHP | 211 | 19 |
+| Python | 235 | 20 |
+| JavaScript | 278 | 24 |
+| Rust | 361 | 26 |
+| C# | 257 | 23 |
+| Go | 129 | 14 |
+| Java | 174 | 13 |
+| PHP | 224 | 20 |
 
 ---
 
@@ -544,15 +544,49 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
 |-----------|---|---|---|---|---|---|---|
-| closed groups read in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L60) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L63) | ❌ | ❌ | ❌ |
-| group followed by values keeps its structure | ❌ | [✅](js/tests/NestingDepth.test.js#L111) | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L112) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L96) | ❌ | ❌ | ❌ |
-| parse lino to links does not copy each level | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L92) | ❌ | ❌ | ❌ | ❌ |
-| unclosed groups fail in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L76) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L77) | ❌ | ❌ | ❌ |
-| unclosed groups on indented lines fail in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L83) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L83) | ❌ | ❌ | ❌ |
-| values after groups read in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L68) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L70) | ❌ | ❌ | ❌ |
-| values after very deep groups read in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L102) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L89) | ❌ | ❌ | ❌ |
+| closed groups read in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L68) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L65) | ❌ | ❌ | ❌ |
+| group followed by values keeps its structure | ❌ | [✅](js/tests/NestingDepth.test.js#L111) | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L121) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L98) | ❌ | ❌ | ❌ |
+| parse lino to links does not copy each level | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L100) | ❌ | ❌ | ❌ | ❌ |
+| unclosed groups fail in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L84) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L79) | ❌ | ❌ | ❌ |
+| unclosed groups on indented lines fail in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L91) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L85) | ❌ | ❌ | ❌ |
+| values after groups read in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L76) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L72) | ❌ | ❌ | ❌ |
+| values after very deep groups read in linear time | ❌ | ❌ | [✅](rust/links-notation/tests/nesting_depth_tests.rs#L110) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingDepthTests.cs#L91) | ❌ | ❌ | ❌ |
 
 **Category totals:** Python: 0, JavaScript: 1, Rust: 7, C#: 6, Go: 0, Java: 0, PHP: 0
+
+## Nesting Limit
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
+|-----------|---|---|---|---|---|---|---|
+| a group that failed leaves the parser usable | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L174) | ❌ |
+| a syntax error is not mistaken for nesting that is too deep | ❌ | [✅](js/tests/NestingLimit.test.js#L95) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| default limit is shared by every implementation | [✅](python/tests/test_nesting_limit.py#L41) | ❌ | [✅](rust/links-notation/tests/nesting_limit_tests.rs#L43) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L39) | [✅](go/nesting_limit_test.go#L57) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L57) | [✅](php/tests/NestingLimitTest.php#L62) |
+| every group and every indentation level is one level test | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L64) | ❌ | ❌ | ❌ |
+| groups and indentation add up | [✅](python/tests/test_nesting_limit.py#L80) | [✅](js/tests/NestingLimit.test.js#L83) | [✅](rust/links-notation/tests/nesting_limit_tests.rs#L90) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L114) | [✅](go/nesting_limit_test.go#L131) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L115) | [✅](php/tests/NestingLimitTest.php#L109) |
+| groups in value position count like any other group | [✅](python/tests/test_nesting_limit.py#L62) | [✅](js/tests/NestingLimit.test.js#L65) | [✅](rust/links-notation/tests/nesting_limit_tests.rs#L69) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L90) | [✅](go/nesting_limit_test.go#L103) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L94) | [✅](php/tests/NestingLimitTest.php#L88) |
+| indentation by single spaces nests | ❌ | ❌ | ❌ | ❌ | [✅](go/nesting_limit_test.go#L154) | ❌ | [✅](php/tests/NestingLimitTest.php#L126) |
+| indentation inside a group counts on top of the group test | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L124) | ❌ | ❌ | ❌ |
+| indentation past the limit is refused at the line that is too deep | [✅](python/tests/test_nesting_limit.py#L73) | [✅](js/tests/NestingLimit.test.js#L76) | [✅](rust/links-notation/tests/nesting_limit_tests.rs#L82) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L105) | [✅](go/nesting_limit_test.go#L120) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L107) | [✅](php/tests/NestingLimitTest.php#L101) |
+| indentation up to the limit is accepted | [✅](python/tests/test_nesting_limit.py#L68) | [✅](js/tests/NestingLimit.test.js#L71) | [✅](rust/links-notation/tests/nesting_limit_tests.rs#L76) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L98) | [✅](go/nesting_limit_test.go#L111) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L101) | [✅](php/tests/NestingLimitTest.php#L95) |
+| limit of one | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L124) | ❌ |
+| limit of one allows one group | [✅](python/tests/test_nesting_limit.py#L88) | ❌ | ❌ | ❌ | [✅](go/nesting_limit_test.go#L143) | ❌ | [✅](php/tests/NestingLimitTest.php#L118) |
+| limit past the recursion limit is an error rather than a crash | [✅](python/tests/test_nesting_limit.py#L99) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| negative limit is rejected test | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L48) | ❌ | ❌ | ❌ |
+| other errors are not nesting too deep | ❌ | ❌ | ❌ | ❌ | [✅](go/nesting_limit_test.go#L178) | ❌ | ❌ |
+| parentheses past the limit are refused at the group that is too deep | [✅](python/tests/test_nesting_limit.py#L53) | [✅](js/tests/NestingLimit.test.js#L54) | [✅](rust/links-notation/tests/nesting_limit_tests.rs#L57) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L75) | [✅](go/nesting_limit_test.go#L81) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L72) | [✅](php/tests/NestingLimitTest.php#L75) |
+| parentheses up to the limit are accepted | [✅](python/tests/test_nesting_limit.py#L47) | [✅](js/tests/NestingLimit.test.js#L49) | [✅](rust/links-notation/tests/nesting_limit_tests.rs#L49) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L55) | [✅](go/nesting_limit_test.go#L66) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L64) | [✅](php/tests/NestingLimitTest.php#L68) |
+| parser is reusable after refusing a document | [✅](python/tests/test_nesting_limit.py#L108) | ❌ | ❌ | ❌ | [✅](go/nesting_limit_test.go#L187) | ❌ | [✅](php/tests/NestingLimitTest.php#L137) |
+| refuses a document far past the limit instead of overflowing the stack | ❌ | [✅](js/tests/NestingLimit.test.js#L106) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| refuses a document far past the limit without exhausting the stack | ❌ | ❌ | ❌ | ❌ | [✅](go/nesting_limit_test.go#L201) | ❌ | ❌ |
+| refuses a document far past the limit without overflowing the stack | [✅](python/tests/test_nesting_limit.py#L118) | ❌ | [✅](rust/links-notation/tests/nesting_limit_tests.rs#L104) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L150) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L137) | [✅](php/tests/NestingLimitTest.php#L151) |
+| stream parser reports where the nesting is too deep | [✅](python/tests/test_nesting_limit.py#L128) | ❌ | [✅](rust/links-notation/tests/nesting_limit_tests.rs#L126) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L182) | [✅](go/nesting_limit_test.go#L223) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L182) | [✅](php/tests/NestingLimitTest.php#L160) |
+| syntax error is not mistaken for nesting that is too deep test | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L141) | ❌ | ❌ | ❌ |
+| the default limit is shared by every implementation | ❌ | [✅](js/tests/NestingLimit.test.js#L44) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| the refusal is a parse exception | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L87) | ❌ |
+| the stream parser reports where the nesting is too deep | ❌ | [✅](js/tests/NestingLimit.test.js#L118) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| trailing spaces on a deep line are not a deeper line | [✅](python/tests/test_nesting_limit.py#L95) | [✅](js/tests/NestingLimit.test.js#L91) | [✅](rust/links-notation/tests/nesting_limit_tests.rs#L99) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs#L134) | [✅](go/nesting_limit_test.go#L172) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java#L132) | [✅](php/tests/NestingLimitTest.php#L132) |
+
+**Category totals:** Python: 13, JavaScript: 11, Rust: 10, C#: 14, Go: 14, Java: 13, PHP: 13
 
 ## Parse Error Position
 
@@ -938,6 +972,22 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - valuesaftergroupsreadinlineartime
 - valuesafterverydeepgroupsreadinlineartime
 
+**Nesting Limit** (14 missing):
+- agroupthatfailedleavestheparserusable
+- asyntaxerrorisnotmistakenfornestingthatistoodeep
+- everygroupandeveryindentationlevelisonelevel
+- indentationbysinglespacesnests
+- indentationinsideagroupcountsontopofthegroup
+- limitofone
+- negativelimitisrejected
+- othererrorsarenotnestingtoodeep
+- refusesadocumentfarpastthelimitinsteadofoverflowingthestack
+- refusesadocumentfarpastthelimitwithoutexhaustingthestack
+- syntaxerrorisnotmistakenfornestingthatistoodeep
+- thedefaultlimitissharedbyeveryimplementation
+- therefusalisaparseexception
+- thestreamparserreportswherethenestingistoodeep
+
 **Parse Error Position** (23 missing):
 - adocumentthatparsesreportsnothing
 - bothentrypointsreportthesameposition
@@ -1031,7 +1081,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 272 tests**
+**Total missing: 286 tests**
 
 ### JavaScript Missing Tests
 
@@ -1224,6 +1274,24 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - valuesaftergroupsreadinlineartime
 - valuesafterverydeepgroupsreadinlineartime
 
+**Nesting Limit** (16 missing):
+- agroupthatfailedleavestheparserusable
+- defaultlimitissharedbyeveryimplementation
+- everygroupandeveryindentationlevelisonelevel
+- indentationbysinglespacesnests
+- indentationinsideagroupcountsontopofthegroup
+- limitofone
+- limitofoneallowsonegroup
+- limitpasttherecursionlimitisanerrorratherthanacrash
+- negativelimitisrejected
+- othererrorsarenotnestingtoodeep
+- parserisreusableafterrefusingadocument
+- refusesadocumentfarpastthelimitwithoutexhaustingthestack
+- refusesadocumentfarpastthelimitwithoutoverflowingthestack
+- streamparserreportswherethenestingistoodeep
+- syntaxerrorisnotmistakenfornestingthatistoodeep
+- therefusalisaparseexception
+
 **Parse Error Position** (12 missing):
 - bothentrypointsreportthesameposition
 - columncountscharactersratherthanbytes
@@ -1299,7 +1367,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 228 tests**
+**Total missing: 244 tests**
 
 ### Rust Missing Tests
 
@@ -1446,6 +1514,25 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nestedlinknoid
 - nestedlinkwithquotedvalues
 
+**Nesting Limit** (17 missing):
+- agroupthatfailedleavestheparserusable
+- asyntaxerrorisnotmistakenfornestingthatistoodeep
+- everygroupandeveryindentationlevelisonelevel
+- indentationbysinglespacesnests
+- indentationinsideagroupcountsontopofthegroup
+- limitofone
+- limitofoneallowsonegroup
+- limitpasttherecursionlimitisanerrorratherthanacrash
+- negativelimitisrejected
+- othererrorsarenotnestingtoodeep
+- parserisreusableafterrefusingadocument
+- refusesadocumentfarpastthelimitinsteadofoverflowingthestack
+- refusesadocumentfarpastthelimitwithoutexhaustingthestack
+- syntaxerrorisnotmistakenfornestingthatistoodeep
+- thedefaultlimitissharedbyeveryimplementation
+- therefusalisaparseexception
+- thestreamparserreportswherethenestingistoodeep
+
 **Parse Error Position** (6 missing):
 - doesnotmentionthegrammarinternals
 - keepscatchingcodethatexpectsaformatexceptionworking
@@ -1475,7 +1562,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - namedtupletolink
 - tupletolink
 
-**Total missing: 144 tests**
+**Total missing: 161 tests**
 
 ### C# Missing Tests
 
@@ -1694,6 +1781,21 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Nesting Depth** (1 missing):
 - parselinotolinksdoesnotcopyeachlevel
 
+**Nesting Limit** (13 missing):
+- agroupthatfailedleavestheparserusable
+- asyntaxerrorisnotmistakenfornestingthatistoodeep
+- indentationbysinglespacesnests
+- limitofone
+- limitofoneallowsonegroup
+- limitpasttherecursionlimitisanerrorratherthanacrash
+- othererrorsarenotnestingtoodeep
+- parserisreusableafterrefusingadocument
+- refusesadocumentfarpastthelimitinsteadofoverflowingthestack
+- refusesadocumentfarpastthelimitwithoutexhaustingthestack
+- thedefaultlimitissharedbyeveryimplementation
+- therefusalisaparseexception
+- thestreamparserreportswherethenestingistoodeep
+
 **Parse Error Position** (12 missing):
 - bothentrypointsreportthesameposition
 - columncountscharactersratherthanbytes
@@ -1772,7 +1874,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 251 tests**
+**Total missing: 264 tests**
 
 ### Go Missing Tests
 
@@ -2087,6 +2189,21 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - valuesaftergroupsreadinlineartime
 - valuesafterverydeepgroupsreadinlineartime
 
+**Nesting Limit** (13 missing):
+- agroupthatfailedleavestheparserusable
+- asyntaxerrorisnotmistakenfornestingthatistoodeep
+- everygroupandeveryindentationlevelisonelevel
+- indentationinsideagroupcountsontopofthegroup
+- limitofone
+- limitpasttherecursionlimitisanerrorratherthanacrash
+- negativelimitisrejected
+- refusesadocumentfarpastthelimitinsteadofoverflowingthestack
+- refusesadocumentfarpastthelimitwithoutoverflowingthestack
+- syntaxerrorisnotmistakenfornestingthatistoodeep
+- thedefaultlimitissharedbyeveryimplementation
+- therefusalisaparseexception
+- thestreamparserreportswherethenestingistoodeep
+
 **Parse Error Position** (23 missing):
 - adocumentthatparsesreportsnothing
 - bothentrypointsreportthesameposition
@@ -2201,7 +2318,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 375 tests**
+**Total missing: 388 tests**
 
 ### Java Missing Tests
 
@@ -2490,6 +2607,22 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - valuesaftergroupsreadinlineartime
 - valuesafterverydeepgroupsreadinlineartime
 
+**Nesting Limit** (14 missing):
+- asyntaxerrorisnotmistakenfornestingthatistoodeep
+- everygroupandeveryindentationlevelisonelevel
+- indentationbysinglespacesnests
+- indentationinsideagroupcountsontopofthegroup
+- limitofoneallowsonegroup
+- limitpasttherecursionlimitisanerrorratherthanacrash
+- negativelimitisrejected
+- othererrorsarenotnestingtoodeep
+- parserisreusableafterrefusingadocument
+- refusesadocumentfarpastthelimitinsteadofoverflowingthestack
+- refusesadocumentfarpastthelimitwithoutexhaustingthestack
+- syntaxerrorisnotmistakenfornestingthatistoodeep
+- thedefaultlimitissharedbyeveryimplementation
+- thestreamparserreportswherethenestingistoodeep
+
 **Parse Error Position** (23 missing):
 - adocumentthatparsesreportsnothing
 - bothentrypointsreportthesameposition
@@ -2588,7 +2721,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 333 tests**
+**Total missing: 347 tests**
 
 ### PHP Missing Tests
 
@@ -2812,6 +2945,22 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - valuesaftergroupsreadinlineartime
 - valuesafterverydeepgroupsreadinlineartime
 
+**Nesting Limit** (14 missing):
+- agroupthatfailedleavestheparserusable
+- asyntaxerrorisnotmistakenfornestingthatistoodeep
+- everygroupandeveryindentationlevelisonelevel
+- indentationinsideagroupcountsontopofthegroup
+- limitofone
+- limitpasttherecursionlimitisanerrorratherthanacrash
+- negativelimitisrejected
+- othererrorsarenotnestingtoodeep
+- refusesadocumentfarpastthelimitinsteadofoverflowingthestack
+- refusesadocumentfarpastthelimitwithoutexhaustingthestack
+- syntaxerrorisnotmistakenfornestingthatistoodeep
+- thedefaultlimitissharedbyeveryimplementation
+- therefusalisaparseexception
+- thestreamparserreportswherethenestingistoodeep
+
 **Parse Error Position** (23 missing):
 - adocumentthatparsesreportsnothing
 - bothentrypointsreportthesameposition
@@ -2917,5 +3066,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 283 tests**
+**Total missing: 297 tests**
 
