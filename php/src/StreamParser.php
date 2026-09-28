@@ -121,7 +121,7 @@ class StreamParser
             try {
                 $links = $this->parser->parse($document);
             } catch (ParseException $error) {
-                throw new StreamParseException($error, $this->segmentOffset, $this->segmentLine, 1);
+                throw $this->streamError($error);
             }
             $this->publish($links, $emitted);
             $this->advanceSegment($document);
@@ -215,6 +215,24 @@ class StreamParser
         if ($this->baseIndentation === null) {
             $this->baseIndentation = $indentation;
         }
+    }
+
+    /** Locate an exception the parser threw for the buffered record within the stream. */
+    private function streamError(ParseException $error): StreamParseException
+    {
+        $offset = $error->getOffset();
+        $line = $error->getLineNumber();
+        $column = $error->getColumn();
+        if ($offset === null || $line === null || $column === null) {
+            return new StreamParseException($error, $this->segmentOffset, $this->segmentLine, 1);
+        }
+
+        return new StreamParseException(
+            $error,
+            $this->segmentOffset + $offset,
+            $this->segmentLine + $line - 1,
+            $column
+        );
     }
 
     /** @param Link[] $links @param Link[] $emitted */

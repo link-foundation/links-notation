@@ -50,13 +50,23 @@ class ParseException extends Exception
         $summary = "line {$line}, column {$column}: nesting depth exceeds the maximum of {$maxDepth}";
 
         $error = new self("Nesting too deep at {$summary}\n" . self::quote($line, $lineText, $column));
-        $error->documentOffset = $offset;
-        $error->documentLine = $line;
-        $error->documentColumn = $column;
-        $error->lineText = $lineText;
-        $error->maxDepth = $maxDepth;
+        $error->setPosition($offset, $line, $column, $lineText, $maxDepth);
 
         return $error;
+    }
+
+    /**
+     * Say where the offending position is: at byte $offset, on line $line at
+     * $column, which reads $lineText; $maxDepth is set when the document is
+     * nested too deeply.
+     */
+    protected function setPosition(int $offset, int $line, int $column, ?string $lineText, ?int $maxDepth): void
+    {
+        $this->documentOffset = $offset;
+        $this->documentLine = $line;
+        $this->documentColumn = $column;
+        $this->lineText = $lineText;
+        $this->maxDepth = $maxDepth;
     }
 
     /** Byte offset of the offending position from the start of the document, when known. */
