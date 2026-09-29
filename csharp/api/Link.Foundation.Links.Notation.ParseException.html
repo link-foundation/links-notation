@@ -161,7 +161,10 @@ stopped at.</p>
   <div class="markdown level0 remarks"><p>The position is the furthest one the parser reached, which is the character the
 document stops making sense at rather than the point the last alternative gave up
 on. It derives from <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.formatexception">FormatException</a>, the exception the generated
-parser raised on its own, so code that catches that keeps working.</p>
+parser raised on its own, so code that catches that keeps working.
+A document nested deeper than <a class="xref" href="Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_MaxDepth">MaxDepth</a> is refused with this
+exception too; then <a class="xref" href="Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_MaxDepth">MaxDepth</a> says how deep the nesting may go, and the
+position is the group or the line that is one level too deep.</p>
 </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -170,7 +173,7 @@ parser raised on its own, so code that catches that keeps working.</p>
     <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_ParseException__ctor_System_String_System_Int32_System_Exception_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.ParseException.%23ctor(System.String%2CSystem.Int32%2CSystem.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L30">View Source</a>
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L33">View Source</a>
   </span>
   <a id="Link_Foundation_Links_Notation_ParseException__ctor_" data-uid="Link.Foundation.Links.Notation.ParseException.#ctor*"></a>
   <h4 id="Link_Foundation_Links_Notation_ParseException__ctor_System_String_System_Int32_System_Exception_" data-uid="Link.Foundation.Links.Notation.ParseException.#ctor(System.String,System.Int32,System.Exception)">ParseException(string, int, Exception?)</h4>
@@ -211,6 +214,59 @@ parser raised on its own, so code that catches that keeps working.</p>
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_ParseException__ctor_System_String_System_Int32_System_Int32_System_Exception_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.ParseException.%23ctor(System.String%2CSystem.Int32%2CSystem.Int32%2CSystem.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L46">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_ParseException__ctor_" data-uid="Link.Foundation.Links.Notation.ParseException.#ctor*"></a>
+  <h4 id="Link_Foundation_Links_Notation_ParseException__ctor_System_String_System_Int32_System_Int32_System_Exception_" data-uid="Link.Foundation.Links.Notation.ParseException.#ctor(System.String,System.Int32,System.Int32,System.Exception)">ParseException(string, int, int, Exception?)</h4>
+  <div class="markdown level1 summary"><p>Creates an exception saying that <code class="paramref">subject</code> nests deeper than
+<code class="paramref">maxDepth</code> at <code class="paramref">offset</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ParseException(string subject, int offset, int maxDepth, Exception? innerException = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">subject</span></td>
+        <td><p>The document that nests too deeply.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">offset</span></td>
+        <td><p>Offset of the group or the line that is one level too deep.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">maxDepth</span></td>
+        <td><p>The deepest nesting allowed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><span class="parametername">innerException</span></td>
+        <td><p>The error the parser raised, if any.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="properties">Properties
 </h3>
   <span class="small pull-right mobile-hide">
@@ -218,7 +274,7 @@ parser raised on its own, so code that catches that keeps working.</p>
     <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_ParseException_Column.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.ParseException.Column%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L52">View Source</a>
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L69">View Source</a>
   </span>
   <a id="Link_Foundation_Links_Notation_ParseException_Column_" data-uid="Link.Foundation.Links.Notation.ParseException.Column*"></a>
   <h4 id="Link_Foundation_Links_Notation_ParseException_Column" data-uid="Link.Foundation.Links.Notation.ParseException.Column">Column</h4>
@@ -249,7 +305,7 @@ parser raised on its own, so code that catches that keeps working.</p>
     <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_ParseException_Found.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.ParseException.Found%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L55">View Source</a>
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L72">View Source</a>
   </span>
   <a id="Link_Foundation_Links_Notation_ParseException_Found_" data-uid="Link.Foundation.Links.Notation.ParseException.Found*"></a>
   <h4 id="Link_Foundation_Links_Notation_ParseException_Found" data-uid="Link.Foundation.Links.Notation.ParseException.Found">Found</h4>
@@ -280,7 +336,7 @@ parser raised on its own, so code that catches that keeps working.</p>
     <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_ParseException_Line.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.ParseException.Line%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L49">View Source</a>
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L66">View Source</a>
   </span>
   <a id="Link_Foundation_Links_Notation_ParseException_Line_" data-uid="Link.Foundation.Links.Notation.ParseException.Line*"></a>
   <h4 id="Link_Foundation_Links_Notation_ParseException_Line" data-uid="Link.Foundation.Links.Notation.ParseException.Line">Line</h4>
@@ -311,7 +367,7 @@ parser raised on its own, so code that catches that keeps working.</p>
     <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_ParseException_LineText.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.ParseException.LineText%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L58">View Source</a>
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L75">View Source</a>
   </span>
   <a id="Link_Foundation_Links_Notation_ParseException_LineText_" data-uid="Link.Foundation.Links.Notation.ParseException.LineText*"></a>
   <h4 id="Link_Foundation_Links_Notation_ParseException_LineText" data-uid="Link.Foundation.Links.Notation.ParseException.LineText">LineText</h4>
@@ -339,10 +395,42 @@ parser raised on its own, so code that catches that keeps working.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_ParseException_MaxDepth.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.ParseException.MaxDepth%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L81">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_ParseException_MaxDepth_" data-uid="Link.Foundation.Links.Notation.ParseException.MaxDepth*"></a>
+  <h4 id="Link_Foundation_Links_Notation_ParseException_MaxDepth" data-uid="Link.Foundation.Links.Notation.ParseException.MaxDepth">MaxDepth</h4>
+  <div class="markdown level1 summary"><p>The deepest nesting allowed, when the document is nested deeper than that;
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> for any other error.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxDepth { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_ParseException_Offset.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.ParseException.Offset%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L46">View Source</a>
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L63">View Source</a>
   </span>
   <a id="Link_Foundation_Links_Notation_ParseException_Offset_" data-uid="Link.Foundation.Links.Notation.ParseException.Offset*"></a>
   <h4 id="Link_Foundation_Links_Notation_ParseException_Offset" data-uid="Link.Foundation.Links.Notation.ParseException.Offset">Offset</h4>
@@ -373,7 +461,7 @@ parser raised on its own, so code that catches that keeps working.</p>
     <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_ParseException_Snippet.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.ParseException.Snippet%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L68">View Source</a>
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L94">View Source</a>
   </span>
   <a id="Link_Foundation_Links_Notation_ParseException_Snippet_" data-uid="Link.Foundation.Links.Notation.ParseException.Snippet*"></a>
   <h4 id="Link_Foundation_Links_Notation_ParseException_Snippet" data-uid="Link.Foundation.Links.Notation.ParseException.Snippet">Snippet</h4>
@@ -406,11 +494,12 @@ message stays the same size whether the document has ten lines or fifteen hundre
     <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_ParseException_Summary.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.ParseException.Summary%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L61">View Source</a>
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L87">View Source</a>
   </span>
   <a id="Link_Foundation_Links_Notation_ParseException_Summary_" data-uid="Link.Foundation.Links.Notation.ParseException.Summary*"></a>
   <h4 id="Link_Foundation_Links_Notation_ParseException_Summary" data-uid="Link.Foundation.Links.Notation.ParseException.Summary">Summary</h4>
-  <div class="markdown level1 summary"><p>The one-line summary: where the parser stopped and what stands there.</p>
+  <div class="markdown level1 summary"><p>The one-line summary: where the parser stopped and what stands there, or that the
+nesting is too deep there.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -448,7 +537,7 @@ message stays the same size whether the document has ten lines or fifteen hundre
                     <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_ParseException.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.ParseException%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L16" class="contribution-link">View Source</a>
+                    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/ParseException.cs/#L19" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

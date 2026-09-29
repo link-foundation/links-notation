@@ -238,6 +238,22 @@ catch (ParseException error)
 <p><code>ParseException</code> derives from <code>FormatException</code>, so callers that already catch
 <code>FormatException</code> keep working, and carries <code>Offset</code>, <code>Line</code>, <code>Column</code>, <code>Found</code>,
 <code>LineText</code>, <code>Summary</code> and <code>Snippet</code> for callers that report errors themselves.</p>
+<h3 id="nesting-limit">Nesting Limit</h3>
+<p><code>Parser.MaxDepth</code> is how deep links may nest (default: <code>Parser.DefaultMaxDepth</code>,
+64, the same in every implementation). Every parenthesized group and every
+indentation level is one level, and the lines of a document start at level 0,
+so with <code>new Parser(comments: true, maxDepth: 1)</code> <code>(a)</code> is accepted while
+<code>((a))</code>, <code>(a (b))</code> and a group on an indented line are refused. A document
+nested deeper is refused with a <code>ParseException</code> whose <code>MaxDepth</code> is set, rather
+than recursed into until the stack runs out, and which points at the group or
+the line that is one level too deep:</p>
+<pre><code class="lang-text">Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
+1 | ((((a))))
+  |    ^
+</code></pre>
+<p><code>MaxDepth</code> is <code>null</code> for any other error. <code>StreamParser</code> reports the same error
+as a <code>StreamParseException</code> whose <code>ParseError</code> is the <code>ParseException</code> and whose
+<code>Line</code>, <code>Column</code> and <code>Offset</code> are counted from the start of the stream.</p>
 <h3 id="extension-methods">Extension Methods</h3>
 <ul>
 <li><strong>IListExtensions.Format()</strong>: Converts list of links back to string format</li>

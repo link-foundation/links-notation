@@ -841,6 +841,15 @@ references:
   fullName.vb: Link.Foundation.Links.Notation.ParseException.New(String, Integer, System.Exception)
   nameWithType: ParseException.ParseException(string, int, Exception?)
   nameWithType.vb: ParseException.New(String, Integer, Exception)
+- uid: Link.Foundation.Links.Notation.ParseException.#ctor(System.String,System.Int32,System.Int32,System.Exception)
+  name: ParseException(string, int, int, Exception?)
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException__ctor_System_String_System_Int32_System_Int32_System_Exception_
+  commentId: M:Link.Foundation.Links.Notation.ParseException.#ctor(System.String,System.Int32,System.Int32,System.Exception)
+  name.vb: New(String, Integer, Integer, Exception)
+  fullName: Link.Foundation.Links.Notation.ParseException.ParseException(string, int, int, System.Exception?)
+  fullName.vb: Link.Foundation.Links.Notation.ParseException.New(String, Integer, Integer, System.Exception)
+  nameWithType: ParseException.ParseException(string, int, int, Exception?)
+  nameWithType.vb: ParseException.New(String, Integer, Integer, Exception)
 - uid: Link.Foundation.Links.Notation.ParseException.#ctor*
   name: ParseException
   href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException__ctor_
@@ -903,6 +912,19 @@ references:
   isSpec: "True"
   fullName: Link.Foundation.Links.Notation.ParseException.LineText
   nameWithType: ParseException.LineText
+- uid: Link.Foundation.Links.Notation.ParseException.MaxDepth
+  name: MaxDepth
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_MaxDepth
+  commentId: P:Link.Foundation.Links.Notation.ParseException.MaxDepth
+  fullName: Link.Foundation.Links.Notation.ParseException.MaxDepth
+  nameWithType: ParseException.MaxDepth
+- uid: Link.Foundation.Links.Notation.ParseException.MaxDepth*
+  name: MaxDepth
+  href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_MaxDepth_
+  commentId: Overload:Link.Foundation.Links.Notation.ParseException.MaxDepth
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.ParseException.MaxDepth
+  nameWithType: ParseException.MaxDepth
 - uid: Link.Foundation.Links.Notation.ParseException.Offset
   name: Offset
   href: api/Link.Foundation.Links.Notation.ParseException.html#Link_Foundation_Links_Notation_ParseException_Offset
@@ -957,6 +979,15 @@ references:
   fullName.vb: Link.Foundation.Links.Notation.Parser.New(Boolean)
   nameWithType: Parser.Parser(bool)
   nameWithType.vb: Parser.New(Boolean)
+- uid: Link.Foundation.Links.Notation.Parser.#ctor(System.Boolean,System.Int32)
+  name: Parser(bool, int)
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser__ctor_System_Boolean_System_Int32_
+  commentId: M:Link.Foundation.Links.Notation.Parser.#ctor(System.Boolean,System.Int32)
+  name.vb: New(Boolean, Integer)
+  fullName: Link.Foundation.Links.Notation.Parser.Parser(bool, int)
+  fullName.vb: Link.Foundation.Links.Notation.Parser.New(Boolean, Integer)
+  nameWithType: Parser.Parser(bool, int)
+  nameWithType.vb: Parser.New(Boolean, Integer)
 - uid: Link.Foundation.Links.Notation.Parser.#ctor*
   name: Parser
   href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser__ctor_
@@ -980,6 +1011,25 @@ references:
   isSpec: "True"
   fullName: Link.Foundation.Links.Notation.Parser.Comments
   nameWithType: Parser.Comments
+- uid: Link.Foundation.Links.Notation.Parser.DefaultMaxDepth
+  name: DefaultMaxDepth
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_DefaultMaxDepth
+  commentId: F:Link.Foundation.Links.Notation.Parser.DefaultMaxDepth
+  fullName: Link.Foundation.Links.Notation.Parser.DefaultMaxDepth
+  nameWithType: Parser.DefaultMaxDepth
+- uid: Link.Foundation.Links.Notation.Parser.MaxDepth
+  name: MaxDepth
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_MaxDepth
+  commentId: P:Link.Foundation.Links.Notation.Parser.MaxDepth
+  fullName: Link.Foundation.Links.Notation.Parser.MaxDepth
+  nameWithType: Parser.MaxDepth
+- uid: Link.Foundation.Links.Notation.Parser.MaxDepth*
+  name: MaxDepth
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_MaxDepth_
+  commentId: Overload:Link.Foundation.Links.Notation.Parser.MaxDepth
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Parser.MaxDepth
+  nameWithType: Parser.MaxDepth
 - uid: Link.Foundation.Links.Notation.Parser.Parse(System.String,System.String)
   name: Parse(string, string?)
   href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_Parse_System_String_System_String_

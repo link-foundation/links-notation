@@ -240,6 +240,23 @@ catch (ParseException error)
 который уже ловит <code>FormatException</code>, продолжает работать, и несет <code>Offset</code>,
 <code>Line</code>, <code>Column</code>, <code>Found</code>, <code>LineText</code>, <code>Summary</code> и <code>Snippet</code> для кода, который
 сообщает об ошибках сам.</p>
+<h3 id="ограничение-вложенности">Ограничение вложенности</h3>
+<p><code>Parser.MaxDepth</code> — насколько глубоко могут вкладываться связи (по умолчанию
+<code>Parser.DefaultMaxDepth</code>, 64, одинаковое во всех реализациях). Каждая группа
+в скобках и каждый уровень отступа — это один уровень, а строки документа
+находятся на уровне 0, поэтому с <code>new Parser(comments: true, maxDepth: 1)</code>
+<code>(a)</code> принимается, а <code>((a))</code>, <code>(a (b))</code> и группа на строке с отступом
+отклоняются. Документ с более глубокой вложенностью отклоняется с
+<code>ParseException</code>, у которого задан <code>MaxDepth</code>, а не разбирается рекурсивно,
+пока не кончится стек, и исключение указывает на группу или строку, которая на
+уровень глубже допустимого:</p>
+<pre><code class="lang-text">Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
+1 | ((((a))))
+  |    ^
+</code></pre>
+<p>Для любой другой ошибки <code>MaxDepth</code> равен <code>null</code>. <code>StreamParser</code> сообщает о той
+же ошибке через <code>StreamParseException</code>, у которого <code>ParseError</code> — это
+<code>ParseException</code>, а <code>Line</code>, <code>Column</code> и <code>Offset</code> отсчитываются от начала потока.</p>
 <h3 id="методы-расширения">Методы расширения</h3>
 <ul>
 <li><strong>IListExtensions.Format()</strong>: Преобразует список связей обратно в строковый формат</li>
