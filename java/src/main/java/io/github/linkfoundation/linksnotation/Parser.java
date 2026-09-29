@@ -22,14 +22,24 @@ import java.util.Map;
 public class Parser {
 
   private static final int DEFAULT_MAX_INPUT_SIZE = 10 * 1024 * 1024; // 10MB
-  private static final int DEFAULT_MAX_DEPTH = 1000;
+
+  /**
+   * How deep links may nest when nothing says otherwise.
+   *
+   * <p>Every parenthesized group and every indentation level is one level of nesting, and every
+   * level is a level of recursion in the parser, so the limit is what keeps a deeply nested
+   * document from overflowing the stack. It is set well below what fits in a small thread stack.
+   * The same limit applies in every Links Notation implementation.
+   */
+  public static final int DEFAULT_MAX_DEPTH = 64;
 
   private final int maxInputSize;
   private final int maxDepth;
   private final boolean comments;
 
-  private String text;
+  private String source;
   private List<String> lines;
+  private List<Integer> lineOffsets;
   private int pos;
   private Integer baseIndentation;
 
@@ -42,7 +52,9 @@ public class Parser {
    * Creates a parser that reads comments.
    *
    * @param maxInputSize maximum input size in bytes
-   * @param maxDepth maximum nesting depth
+   * @param maxDepth how deep links may nest: every parenthesized group and every indentation level
+   *     is one level, and a document nested deeper is refused with a {@link
+   *     NestingTooDeepException}
    */
   public Parser(int maxInputSize, int maxDepth) {
     this(maxInputSize, maxDepth, true);
@@ -62,7 +74,9 @@ public class Parser {
    * Creates a parser with custom options.
    *
    * @param maxInputSize maximum input size in bytes
-   * @param maxDepth maximum nesting depth
+   * @param maxDepth how deep links may nest: every parenthesized group and every indentation level
+   *     is one level, and a document nested deeper is refused with a {@link
+   *     NestingTooDeepException}
    * @param comments if false, read {@code #} as an ordinary character instead of the start of a
    *     comment
    */
@@ -77,6 +91,11 @@ public class Parser {
     return maxInputSize;
   }
 
+  /** Return how deep links may nest before the document is refused. */
+  public int getMaxDepth() {
+    return maxDepth;
+  }
+
   /** Return whether {@code #} starts comments. */
   public boolean isCommentsEnabled() {
     return comments;
@@ -88,6 +107,7 @@ public class Parser {
    * @param input text in Lino notation
    * @return list of parsed Link objects
    * @throws ParseException if parsing fails
+   * @throws NestingTooDeepException if links nest deeper than the maximum depth
    * @throws IllegalArgumentException if input is null or exceeds maximum size
    */
   public List<Link> parse(String input) throws ParseException {
@@ -108,13 +128,21 @@ public class Parser {
       return new ArrayList<>();
     }
 
-    this.text = prepared;
-    this.lines = splitLinesRespectingQuotes(prepared);
+    this.source = input;
+    this.lines = new ArrayList<>();
+    this.lineOffsets = new ArrayList<>();
+    splitLinesRespectingQuotes(prepared, 0, lines, lineOffsets);
     this.pos = 0;
     this.baseIndentation = null;
 
-    List<Map<String, Object>> rawResult = parseDocument();
-    return transformResult(rawResult);
+    try {
+      List<Map<String, Object>> rawResult = parseDocument(0);
+      return transformResult(rawResult);
+    } finally {
+      this.source = null;
+      this.lines = null;
+      this.lineOffsets = null;
+    }
   }
 
   /**
@@ -220,7 +248,7 @@ public class Parser {
    * <p>Returns the position right after the closing quotes, or -1 when text does not start a
    * delimited reference.
    */
-  private int skipQuotedString(String text, int start) {
+  private static int skipQuotedString(String text, int start) {
     return quotedReferenceEnd(text, start);
   }
 
@@ -271,10 +299,14 @@ public class Parser {
   /**
    * Split text into lines, preserving newlines inside quoted strings and handling multiline
    * parenthesized expressions.
+   *
+   * <p>Each line goes to {@code result}, and where it starts in the document, {@code textOffset}
+   * being where {@code text} starts, goes to {@code offsets}.
    */
-  private List<String> splitLinesRespectingQuotes(String text) {
-    List<String> result = new ArrayList<>();
+  private static void splitLinesRespectingQuotes(
+      String text, int textOffset, List<String> result, List<Integer> offsets) {
     StringBuilder currentLine = new StringBuilder();
+    int lineStart = 0;
     int parenDepth = 0;
     int i = 0;
 
@@ -302,7 +334,9 @@ public class Parser {
           currentLine.append(c);
         } else {
           result.add(currentLine.toString());
+          offsets.add(textOffset + lineStart);
           currentLine = new StringBuilder();
+          lineStart = i + 1;
         }
       } else {
         currentLine.append(c);
@@ -314,20 +348,24 @@ public class Parser {
     // Add the last line if non-empty
     if (currentLine.length() > 0) {
       result.add(currentLine.toString());
+      offsets.add(textOffset + lineStart);
     }
-
-    return result;
   }
 
-  /** Parse the entire document. */
-  private List<Map<String, Object>> parseDocument() throws ParseException {
+  /**
+   * Parse the entire document, or the body of a group.
+   *
+   * @param depth nesting depth of the lines at indentation level zero: the number of groups that
+   *     enclose them
+   */
+  private List<Map<String, Object>> parseDocument(int depth) throws ParseException {
     pos = 0;
     List<Map<String, Object>> links = new ArrayList<>();
 
     while (pos < lines.size()) {
       String line = lines.get(pos);
       if (!line.trim().isEmpty()) {
-        Map<String, Object> element = parseElement(0);
+        Map<String, Object> element = parseElement(0, depth);
         if (element != null) {
           links.add(element);
         }
@@ -339,9 +377,14 @@ public class Parser {
     return links;
   }
 
-  /** Parse a single element at given indentation. */
+  /**
+   * Parse a single element at given indentation.
+   *
+   * @param depth nesting depth of the line: every enclosing group and every indentation level
+   *     counts as one
+   */
   @SuppressWarnings("unchecked")
-  private Map<String, Object> parseElement(int currentIndent) throws ParseException {
+  private Map<String, Object> parseElement(int currentIndent, int depth) throws ParseException {
     if (pos >= lines.size()) {
       return null;
     }
@@ -367,14 +410,17 @@ public class Parser {
       return null;
     }
 
+    int contentOffset = lineOffsets.get(pos) + leadingTrimmed(line);
     pos++;
 
     // Try to parse the line
-    Map<String, Object> element = parseLineContent(content);
+    Map<String, Object> element = parseLineContent(content, contentOffset, depth);
+    // Only a line that parsed counts, so a group too deep on it is reported at
+    // the group, the way the other implementations report it.
+    checkDepth(depth, contentOffset);
 
     // Check for children (indented lines that follow)
     List<Map<String, Object>> children = new ArrayList<>();
-    int childIndent = indent + 2; // Expect at least 2 spaces for child
 
     while (pos < lines.size()) {
       // A line holding nothing does not close a block: it is the next line that
@@ -398,9 +444,10 @@ public class Parser {
         break;
       }
 
-      // This is a child
+      // This is a child: any line indented further than this one is, however
+      // many spaces further it goes, and it is one level deeper.
       pos = following;
-      Map<String, Object> child = parseElement(children.isEmpty() ? childIndent : indent + 2);
+      Map<String, Object> child = parseElement(indent + 1, depth + 1);
       if (child != null) {
         children.add(child);
       }
@@ -413,13 +460,19 @@ public class Parser {
     return element;
   }
 
-  /** Parse the content of a single line. */
-  private Map<String, Object> parseLineContent(String content) throws ParseException {
+  /**
+   * Parse the content of a single line.
+   *
+   * @param offset where the content starts in the document
+   * @param depth nesting depth of the line
+   */
+  private Map<String, Object> parseLineContent(String content, int offset, int depth)
+      throws ParseException {
     Map<String, Object> result = new HashMap<>();
 
     // A whole parenthesized group: (id: values), (values) or a nested document
     if (content.startsWith("(") && findMatchingParen(content, 0) == content.length() - 1) {
-      return parseParenthesized(content.substring(1, content.length() - 1));
+      return parseParenthesized(content.substring(1, content.length() - 1), offset, depth);
     }
 
     // Try indented ID syntax: id:
@@ -436,16 +489,18 @@ public class Parser {
     int colonPos = findColonOutsideQuotes(content);
     if (colonPos >= 0) {
       String idPart = content.substring(0, colonPos).trim();
-      String valuesPart = content.substring(colonPos + 1).trim();
+      String afterColon = content.substring(colonPos + 1);
+      String valuesPart = afterColon.trim();
+      int valuesOffset = offset + colonPos + 1 + leadingTrimmed(afterColon);
       String ref = extractReference(idPart);
-      List<Map<String, Object>> values = parseValues(valuesPart);
+      List<Map<String, Object>> values = parseValues(valuesPart, valuesOffset, depth);
       result.put("id", ref);
       result.put("values", values);
       return result;
     }
 
     // Simple value list
-    List<Map<String, Object>> values = parseValues(content);
+    List<Map<String, Object>> values = parseValues(content, offset, depth);
     result.put("values", values);
     return result;
   }
@@ -455,29 +510,70 @@ public class Parser {
    *
    * <p>The group opens a nested context that starts fresh at indentation level zero and follows
    * exactly the rules used at the root of the document, so line breaks separate links and
-   * indentation nests them.
+   * indentation nests them. The group is one level deeper than the line it is written on.
+   *
+   * @param inner the text between the parentheses
+   * @param open where the opening parenthesis is in the document
+   * @param depth nesting depth of the line the group is written on
    */
-  private Map<String, Object> parseParenthesized(String inner) throws ParseException {
+  private Map<String, Object> parseParenthesized(String inner, int open, int depth)
+      throws ParseException {
+    int groupDepth = depth + 1;
+    checkDepth(groupDepth, open);
     Map<String, Object> result = new HashMap<>();
-    result.put("nested", parseNestedDocument(inner));
+    result.put("nested", parseNestedDocument(inner, open + 1, groupDepth));
     return result;
   }
 
-  /** Parse the text of a parenthesized group as a document of its own. */
-  private List<Map<String, Object>> parseNestedDocument(String inner) throws ParseException {
+  /**
+   * Parse the text of a parenthesized group as a document of its own.
+   *
+   * @param inner the text between the parentheses
+   * @param offset where {@code inner} starts in the document
+   * @param depth nesting depth of the group
+   */
+  private List<Map<String, Object>> parseNestedDocument(String inner, int offset, int depth)
+      throws ParseException {
     List<String> savedLines = lines;
+    List<Integer> savedLineOffsets = lineOffsets;
     int savedPos = pos;
     Integer savedBaseIndentation = baseIndentation;
     try {
-      lines = splitLinesRespectingQuotes(inner);
+      lines = new ArrayList<>();
+      lineOffsets = new ArrayList<>();
+      splitLinesRespectingQuotes(inner, offset, lines, lineOffsets);
       pos = 0;
       baseIndentation = null;
-      return parseDocument();
+      return parseDocument(depth);
     } finally {
       lines = savedLines;
+      lineOffsets = savedLineOffsets;
       pos = savedPos;
       baseIndentation = savedBaseIndentation;
     }
+  }
+
+  /**
+   * Refuse a level of nesting deeper than the parser allows.
+   *
+   * <p>The refusal is final: the parser does not try another reading, which could recurse further.
+   *
+   * @param depth nesting depth of the group or line
+   * @param at where the group or line starts in the document
+   */
+  private void checkDepth(int depth, int at) throws NestingTooDeepException {
+    if (depth > maxDepth) {
+      throw NestingTooDeepException.at(source, at, maxDepth);
+    }
+  }
+
+  /** Count the characters {@link String#trim()} removes from the start of {@code text}. */
+  private static int leadingTrimmed(String text) {
+    int count = 0;
+    while (count < text.length() && text.charAt(count) <= ' ') {
+      count++;
+    }
+    return count;
   }
 
   /** Find position of colon that's not inside quotes or parentheses. */
@@ -506,8 +602,14 @@ public class Parser {
     return -1;
   }
 
-  /** Parse a space-separated list of values. */
-  private List<Map<String, Object>> parseValues(String text) throws ParseException {
+  /**
+   * Parse a space-separated list of values.
+   *
+   * @param offset where {@code text} starts in the document
+   * @param depth nesting depth of the line the values are written on
+   */
+  private List<Map<String, Object>> parseValues(String text, int offset, int depth)
+      throws ParseException {
     if (text == null || text.isEmpty()) {
       return new ArrayList<>();
     }
@@ -530,7 +632,7 @@ public class Parser {
       String valueText = text.substring(i, valueEnd);
 
       if (!valueText.trim().isEmpty()) {
-        values.add(parseValue(valueText));
+        values.add(parseValue(valueText, offset + i, depth));
       }
 
       if (valueEnd == i) {
@@ -589,13 +691,19 @@ public class Parser {
     return new int[] {i};
   }
 
-  /** Parse a single value (could be a reference or nested link). */
-  private Map<String, Object> parseValue(String value) throws ParseException {
+  /**
+   * Parse a single value (could be a reference or nested link).
+   *
+   * @param offset where {@code value} starts in the document
+   * @param depth nesting depth of the line the value is written on
+   */
+  private Map<String, Object> parseValue(String value, int offset, int depth)
+      throws ParseException {
     Map<String, Object> result = new HashMap<>();
 
     // Nested link in parentheses
     if (value.startsWith("(") && findMatchingParen(value, 0) == value.length() - 1) {
-      return parseParenthesized(value.substring(1, value.length() - 1));
+      return parseParenthesized(value.substring(1, value.length() - 1), offset, depth);
     }
 
     // Simple reference

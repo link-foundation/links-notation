@@ -43,7 +43,9 @@ namespace Link.Foundation.Links.Notation.Tests
             {
                 try
                 {
-                    outcome = new Parser().Parse(source).Format();
+                    // The documents nest deeper than the default limit on purpose; only the
+                    // time they take is measured here.
+                    outcome = new Parser(true, int.MaxValue).Parse(source).Format();
                 }
                 catch (Exception error)
                 {

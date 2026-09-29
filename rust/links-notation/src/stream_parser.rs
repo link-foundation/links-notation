@@ -352,6 +352,12 @@ impl StreamParser {
                 offset: self.segment_offset + syntax.offset,
                 buffered: self.buffer.len() + self.current_line.len(),
             },
+            ParseError::NestingTooDeep(nesting) => StreamPosition {
+                line: self.segment_line + nesting.line - 1,
+                column: nesting.column,
+                offset: self.segment_offset + nesting.offset,
+                buffered: self.buffer.len() + self.current_line.len(),
+            },
             _ => StreamPosition {
                 line: self.segment_line,
                 column: 1,

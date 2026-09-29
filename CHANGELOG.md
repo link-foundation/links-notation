@@ -9,6 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Refuse links nested too deeply with a parse error instead of recursing until
+  the stack overflows. Every parser recursed once per parenthesized group and
+  per indentation level with nothing bounding it, so `(` repeated 100 000 times
+  aborted the Rust and C# processes, where no caller can catch it, and ran the
+  others out of stack. JavaScript, Python, Go, Java and PHP documented and
+  stored a `maxDepth` that nothing read. Every parser now enforces it, and a
+  document nested deeper is refused at the group or the line that is one level
+  too deep: `Nesting too deep at line 1, column 65: nesting depth exceeds the
+  maximum of 64`. Rust adds `ParserConfig::max_depth`,
+  `ParserConfig::with_max_depth` and `ParseError::NestingTooDeep`, C# adds
+  a `maxDepth` parser option, and the Python and PHP parse errors now carry
+  the offset, line, column, offending line and `max_depth` of the error
+  ([#315](https://github.com/link-foundation/links-notation/issues/315)).
+- Read a child indented by a single space in the PHP parser, which never
+  returned on `a` followed by ` b`, and load PHP's `StreamParseException`,
+  which redeclared `Exception::$line` and so ended the process with a fatal
+  error the first time a stream failed to parse. Its position is now read
+  with `getOffset()`, `getLineNumber()` and `getColumn()`
+  ([#315](https://github.com/link-foundation/links-notation/issues/315)).
 - Read nested groups in time linear in the document in the JavaScript, Rust
   and C# parsers. Each line is now read once whether or not indented children
   follow it, and a line that could not be read is not read again, so a group
@@ -26,6 +45,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   A bare value with indented children now forms an anonymous nested link,
   so `root` over `child2` over `grandchild` keeps all three references
   ([#313](https://github.com/link-foundation/links-notation/issues/313)).
+
+### Changed
+
+- The default nesting limit is 64 in every implementation, down from the
+  documented 1000 that was never enforced. 64 is what fits everywhere: a group
+  written as a value costs a debug Rust build about 24 KB of stack, so a 2 MiB
+  thread holds 86 levels, and Python's default recursion limit gives out
+  between 128 and 200. Pass a larger `maxDepth` to read deeper documents on a
+  larger stack
+  ([#315](https://github.com/link-foundation/links-notation/issues/315)).
 
 ### Added
 

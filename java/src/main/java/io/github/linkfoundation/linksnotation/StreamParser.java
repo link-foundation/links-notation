@@ -132,7 +132,7 @@ public final class StreamParser {
       try {
         parsed = parser.parse(document);
       } catch (ParseException error) {
-        throw new StreamParseException(error, segmentOffset, segmentLine, 1);
+        throw StreamParseException.locate(error, segmentOffset, segmentLine);
       }
       publish(parsed, emitted);
       advanceSegment(document);

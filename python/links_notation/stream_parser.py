@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import AsyncIterable, AsyncIterator, Callable, Iterable, Iterator, List, Optional
 
 from .link import Link
-from .parser import ParseError, Parser
+from .parser import DEFAULT_MAX_DEPTH, ParseError, Parser
 from .quotes import QUOTE_CHARS, _parse_quoted_string_at
 
 
@@ -19,14 +19,22 @@ class StreamPosition:
 
 
 class StreamParseError(ParseError):
-    """A canonical parse error located within the complete stream."""
+    """A canonical parse error located within the complete stream.
+
+    ``error`` is the error the parser raised for the buffered record;
+    ``offset``, ``line`` and ``column`` locate it within the complete stream.
+    """
 
     def __init__(self, error: Exception, offset: int, line: int, column: int):
-        super().__init__(f"Stream parse error at line {line}, column {column}: {error}")
+        super().__init__(
+            f"Stream parse error at line {line}, column {column}: {error}",
+            offset=offset,
+            line=line,
+            column=column,
+            line_text=getattr(error, "line_text", None),
+            max_depth=getattr(error, "max_depth", None),
+        )
         self.error = error
-        self.offset = offset
-        self.line = line
-        self.column = column
 
 
 class StreamParser:
@@ -45,8 +53,9 @@ class StreamParser:
         collect: bool = True,
         max_buffer_size: Optional[int] = None,
         comments: bool = True,
+        max_depth: int = DEFAULT_MAX_DEPTH,
     ):
-        self.parser = parser or Parser(comments=comments)
+        self.parser = parser or Parser(comments=comments, max_depth=max_depth)
         self.on_link = on_link
         self.collect = collect
         self.max_buffer_size = self.parser.max_input_size if max_buffer_size is None else max_buffer_size
@@ -95,7 +104,7 @@ class StreamParser:
             try:
                 links = self.parser.parse(document)
             except Exception as error:
-                raise StreamParseError(error, self._segment_offset, self._segment_line, 1) from error
+                raise self._stream_error(error) from error
             self._publish(links, emitted)
             self._advance_segment(document)
 
@@ -163,6 +172,15 @@ class StreamParser:
                 self._links.append(link)
             if self.on_link is not None:
                 self.on_link(link)
+
+    def _stream_error(self, error: Exception) -> StreamParseError:
+        """Locate an error the parser raised for the buffered record within the stream."""
+        line = getattr(error, "line", None)
+        column = getattr(error, "column", None)
+        offset = getattr(error, "offset", None)
+        if line is None or column is None or offset is None:
+            return StreamParseError(error, self._segment_offset, self._segment_line, 1)
+        return StreamParseError(error, self._segment_offset + offset, self._segment_line + line - 1, column)
 
     def _advance_segment(self, document: str) -> None:
         self._segment_offset += len(document)

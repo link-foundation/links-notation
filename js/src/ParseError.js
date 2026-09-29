@@ -12,6 +12,9 @@ const ELLIPSIS = '...';
  * message it writes says what it expected without saying where. This error puts
  * the line and the column in the message as well, and quotes the offending line
  * with a caret under it, the way the Rust and C# ports do.
+ *
+ * A document nested deeper than the parser's maxDepth is refused with this
+ * error too; then maxDepth says how deep the nesting may go.
  */
 export class ParseError extends Error {
   /**
@@ -24,7 +27,9 @@ export class ParseError extends Error {
     const lineText = lineAt(input, start.offset);
     const summary = `line ${start.line}, column ${start.column}: ${error.message}`;
     const snippet = quote(start.line, lineText, start.column);
-    super(`Syntax error at ${summary}\n${snippet}`);
+    const maxDepth = error?.maxDepth ?? null;
+    const kind = maxDepth === null ? 'Syntax error' : 'Nesting too deep';
+    super(`${kind} at ${summary}\n${snippet}`);
 
     this.name = 'ParseError';
     /** @type {Error} The error the generated parser threw */
@@ -43,6 +48,8 @@ export class ParseError extends Error {
     this.lineText = lineText;
     /** @type {string} The offending line with a caret under the offending column */
     this.snippet = snippet;
+    /** @type {number|null} The deepest nesting allowed, when the document is nested deeper; null for any other error */
+    this.maxDepth = maxDepth;
   }
 }
 

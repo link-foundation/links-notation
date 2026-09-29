@@ -106,6 +106,12 @@ export class Link {
 /**
  * Parser options for configuring the parser behavior
  */
+/**
+ * How deep links may nest when nothing says otherwise (64). The same limit
+ * applies in every Links Notation implementation.
+ */
+export const DEFAULT_MAX_DEPTH: number;
+
 export interface ParserOptions {
   /**
    * Maximum input size in bytes (default: 10MB)
@@ -113,7 +119,9 @@ export interface ParserOptions {
   maxInputSize?: number;
 
   /**
-   * Maximum nesting depth (default: 1000)
+   * How deep links may nest: every parenthesized group and every indentation
+   * level is one level. A document nested deeper is refused with a ParseError
+   * whose maxDepth is set (default: 64)
    */
   maxDepth?: number;
 
@@ -293,6 +301,12 @@ export class ParseError extends Error {
    * The position the generated parser reported
    */
   location: ParseErrorLocation;
+
+  /**
+   * The deepest nesting allowed, when the document is nested deeper than
+   * that; null for any other error
+   */
+  maxDepth: number | null;
 }
 
 /**

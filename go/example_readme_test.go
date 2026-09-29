@@ -1,6 +1,9 @@
 package lino
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 // The examples in README.md and README.ru.md, kept as runnable examples so the
 // documented output is checked by `go test` rather than trusted. A snippet that
@@ -72,4 +75,23 @@ func ExampleLink_FormatWithConfig() {
 	//   value1
 	//   value2
 	//   value3
+}
+
+// A document nested deeper than MaxDepth is refused at the group that is one
+// level too deep, instead of being recursed into until the stack runs out.
+func ExampleParser_maxDepth() {
+	parser := NewParser()
+	parser.MaxDepth = 3
+	_, err := parser.Parse("((((a))))")
+
+	var parseError *ParseError
+	if errors.Is(err, ErrNestingTooDeep) && errors.As(err, &parseError) {
+		fmt.Println(parseError.Line, parseError.Column)
+		fmt.Println(err)
+	}
+	// Output:
+	// 1 4
+	// Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
+	// 1 | ((((a))))
+	//   |    ^
 }

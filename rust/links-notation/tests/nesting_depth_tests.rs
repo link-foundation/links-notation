@@ -6,8 +6,10 @@
 //! document took seconds. Each case runs on its own thread and fails when it
 //! has not finished within the budget, so a regression fails instead of hanging.
 
-use links_notation::parser::parse_document;
-use links_notation::{format_links, parse_lino_to_links};
+use links_notation::parser::parse_document_with_max_depth;
+use links_notation::{
+    format_links, parse_lino_to_links, parse_lino_to_links_with_config, ParseError, ParserConfig,
+};
 use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
@@ -34,6 +36,12 @@ fn within_budget<T: Send + 'static>(what: &str, work: impl FnOnce() -> T + Send 
     receiver
         .recv_timeout(BUDGET)
         .unwrap_or_else(|_| panic!("{what} did not finish within {BUDGET:?}"))
+}
+
+/// Parses a document that nests deeper than the default limit on purpose: only
+/// the time it takes is measured here.
+fn parse_very_deep(source: &str) -> Result<Vec<links_notation::LiNo<String>>, ParseError> {
+    parse_lino_to_links_with_config(source, &ParserConfig::new().with_max_depth(usize::MAX))
 }
 
 fn closed(depth: usize) -> String {
@@ -93,7 +101,7 @@ fn parse_lino_to_links_does_not_copy_each_level() {
     let source = closed(VERY_DEEP);
     let expected = source.clone();
     let formatted = within_budget("very deep closed groups", move || {
-        format_links(&parse_lino_to_links(&source).unwrap())
+        format_links(&parse_very_deep(&source).unwrap())
     });
     assert_eq!(formatted, expected);
 }
@@ -102,10 +110,11 @@ fn parse_lino_to_links_does_not_copy_each_level() {
 fn values_after_very_deep_groups_read_in_linear_time() {
     let source = value_after(VERY_DEEP);
     let length = source.len();
-    let rest = within_budget("very deep values after groups", move || {
-        parse_document(&source).ok().map(|(rest, _)| rest.len())
+    // A document parses only when all of it is read.
+    let parsed = within_budget("very deep values after groups", move || {
+        parse_document_with_max_depth(&source, usize::MAX).is_ok()
     });
-    assert_eq!(rest, Some(0), "all {length} bytes should be read");
+    assert!(parsed, "all {length} bytes should be read");
 }
 
 #[test]

@@ -15,7 +15,7 @@ composer require link-foundation/links-notation
 ```json
 {
     "require": {
-        "link-foundation/links-notation": "^0.21"
+        "link-foundation/links-notation": "^0.22"
     }
 }
 ```
@@ -265,7 +265,7 @@ deploy: staging # пока только staging
 $document = "# машины, на которые идёт выкладка\ndeploy: staging # пока только staging\n";
 echo Formatter::formatLinks((new Parser())->parse($document)); // (deploy: staging)
 
-$plain = new Parser(10 * 1024 * 1024, 1000, false);
+$plain = new Parser(comments: false);
 echo Formatter::formatLinks($plain->parse("# a b\n")); // (# a b)
 ```
 
@@ -289,11 +289,20 @@ echo Formatter::formatLinks($plain->parse("# a b\n")); // (# a b)
 
 Основной класс парсера, превращающий строки в связи.
 
-- `__construct(int $maxInputSize = 10485760, int $maxDepth = 1000, bool $comments = true)` — создать
+- `__construct(int $maxInputSize = 10485760, int $maxDepth = Parser::DEFAULT_MAX_DEPTH, bool $comments = true)` — создать
   парсер с ограничениями и с комментариями `#`, если `$comments` не `false`
 - `parse(string $input): Link[]` — разобрать строку lino и вернуть связи
   - выбрасывает `InvalidArgumentException`, если вход больше `$maxInputSize`
   - выбрасывает `LinkFoundation\LinksNotation\ParseException`, если вход не удалось разобрать
+    или связи в нем вложены глубже `$maxDepth`
+- `Parser::DEFAULT_MAX_DEPTH` — значение `$maxDepth` по умолчанию, 64, одинаковое во всех реализациях
+
+`$maxDepth` — насколько глубоко могут вкладываться связи (по умолчанию 64).
+Каждая группа в скобках и каждый уровень отступа — это один уровень, а строки
+документа находятся на уровне 0, поэтому при `maxDepth: 1` `(a)` принимается,
+а `((a))`, `(a (b))` и группа на строке с отступом отклоняются. Документ с более
+глубокой вложенностью отклоняется с `ParseException`, а не разбирается
+рекурсивно, пока у PHP не кончится память.
 
 #### `LinkFoundation\LinksNotation\Link`
 
@@ -331,7 +340,27 @@ echo Formatter::formatLinks($plain->parse("# a b\n")); // (# a b)
 
 #### `LinkFoundation\LinksNotation\ParseException`
 
-Исключение, выбрасываемое при ошибке разбора.
+Исключение, выбрасываемое при ошибке разбора. Когда связи в документе вложены
+глубже `$maxDepth`, оно указывает на группу или строку, которая на уровень
+глубже допустимого:
+
+```text
+Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
+1 | ((((a))))
+  |    ^
+```
+
+- `getMaxDepth(): ?int` — наибольшая допустимая глубина вложенности, если
+  документ вложен глубже; `null` для любой другой ошибки
+- `getLineNumber(): ?int`, `getColumn(): ?int` — где начинается группа или
+  строка, считая с 1
+- `getOffset(): ?int` — та же позиция как смещение в байтах от начала документа
+- `getLineText(): ?string` — строка с ошибкой в том виде, в каком она написана
+- `getSnippet(): ?string` — строка с ошибкой и указателем под столбцом ошибки
+
+`StreamParser` сообщает о той же ошибке через `StreamParseException`, у которого
+`parseError` — это `ParseException`, а строка, столбец и смещение отсчитываются
+от начала потока.
 
 ## Структура проекта
 

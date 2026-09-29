@@ -20,10 +20,21 @@ use InvalidArgumentException;
  */
 class Parser
 {
+    /**
+     * How deep links may nest unless a parser is told otherwise: every
+     * parenthesized group and every indentation level is one level, and the
+     * lines of a document are at level 0. Every implementation shares this
+     * default.
+     */
+    public const DEFAULT_MAX_DEPTH = 64;
+
     /** @var int Maximum input size in bytes. */
     public int $maxInputSize;
 
-    /** @var int Maximum nesting depth. */
+    /**
+     * @var int How deep links may nest; a document nested deeper is refused
+     *          with a ParseException whose getMaxDepth() is set.
+     */
     public int $maxDepth;
 
     /** @var bool Whether `#` starts a comment. */
@@ -38,18 +49,38 @@ class Parser
     /** @var string[] Lines of the document being parsed. */
     private array $lines = [];
 
+    /** @var int[] Where each of the lines starts in the document. */
+    private array $lineOffsets = [];
+
+    /** @var string The document as written, for quoting the offending line in an error. */
+    private string $source = '';
+
+    /**
+     * @var int Depth of the lines at level 0 of the context being parsed: the
+     *          number of parenthesized groups around it.
+     */
+    private int $contextDepth = 0;
+
+    /** @var int Depth of the line being parsed. */
+    private int $depth = 0;
+
     /** @var int|null Indentation of the first content line. */
     private ?int $baseIndentation = null;
 
     /**
      * @param int  $maxInputSize Maximum input size in bytes (default: 10MB)
-     * @param int  $maxDepth     Maximum nesting depth (default: 1000)
+     * @param int  $maxDepth     How deep links may nest (default: 64). Every
+     *                           parenthesized group and every indentation
+     *                           level is one level, and the lines of a
+     *                           document are at level 0; a document nested
+     *                           deeper is refused with a ParseException whose
+     *                           getMaxDepth() is set
      * @param bool $comments     If false, read `#` as an ordinary character
      *                           instead of the start of a comment (default: true)
      */
     public function __construct(
         int $maxInputSize = 10 * 1024 * 1024,
-        int $maxDepth = 1000,
+        int $maxDepth = self::DEFAULT_MAX_DEPTH,
         bool $comments = true
     ) {
         $this->maxInputSize = $maxInputSize;
@@ -64,7 +95,9 @@ class Parser
      * @return Link[] List of parsed links
      *
      * @throws InvalidArgumentException If input exceeds maximum size
-     * @throws ParseException           If parsing fails
+     * @throws ParseException           If parsing fails, including when the
+     *                                  document nests links deeper than
+     *                                  maxDepth
      */
     public function parse(string $input): array
     {
@@ -84,10 +117,13 @@ class Parser
         }
 
         // Use smart line splitting that respects quoted strings
-        $this->lines = $this->splitLinesRespectingQuotes($prepared);
+        $this->source = $input;
+        [$this->lines, $this->lineOffsets] = $this->splitLinesRespectingQuotes($prepared, 0);
         $this->pos = 0;
         $this->indentationStack = [0];
         $this->baseIndentation = null;
+        $this->contextDepth = 0;
+        $this->depth = 0;
 
         return $this->transformResult($this->parseDocument());
     }
@@ -219,56 +255,60 @@ class Parser
      * should be preserved as part of the string value. Also, parenthesized
      * expressions that span multiple lines are kept together.
      *
-     * @return string[]
+     * @return array{0: string[], 1: int[]} The lines and where each of them
+     *                                      starts in the document, given that
+     *                                      $text starts at $base
      */
-    private function splitLinesRespectingQuotes(string $text): array
+    private function splitLinesRespectingQuotes(string $text, int $base): array
     {
         $lines = [];
-        $currentLine = '';
+        $offsets = [];
+        $lineStart = 0;
         $parenDepth = 0;
         $i = 0;
         $length = strlen($text);
 
         while ($i < $length) {
+            // Nothing between here and the next of these characters matters,
+            // and a run of parentheses is counted in one step.
+            $i += strcspn($text, "\"'`()\n", $i);
+            if ($i >= $length) {
+                break;
+            }
             $char = $text[$i];
 
-            if (in_array($char, ['"', "'", '`'], true)) {
+            if ($char === '(' || $char === ')') {
+                $run = strspn($text, $char, $i);
+                $parenDepth += $char === '(' ? $run : -$run;
+                $i += $run;
+                continue;
+            } elseif ($char === "\n") {
+                // Inside unclosed parens the newline is preserved; with the
+                // parentheses balanced it is a line break
+                if ($parenDepth <= 0) {
+                    $lines[] = substr($text, $lineStart, $i - $lineStart);
+                    $offsets[] = $base + $lineStart;
+                    $lineStart = $i + 1;
+                }
+            } else {
                 $end = self::skipQuotedString($text, $i);
                 if ($end > $i) {
                     // A quoted string is opaque: newlines inside it are content
-                    $currentLine .= substr($text, $i, $end - $i);
                     $i = $end;
                     continue;
                 }
-                $currentLine .= $char;
-            } elseif ($char === '(') {
-                $parenDepth++;
-                $currentLine .= $char;
-            } elseif ($char === ')') {
-                $parenDepth--;
-                $currentLine .= $char;
-            } elseif ($char === "\n") {
-                if ($parenDepth > 0) {
-                    // Inside unclosed parens: preserve the newline
-                    $currentLine .= $char;
-                } else {
-                    // Parentheses balanced: this is a line break
-                    $lines[] = $currentLine;
-                    $currentLine = '';
-                }
-            } else {
-                $currentLine .= $char;
             }
 
             $i++;
         }
 
         // Add the last line if non-empty
-        if ($currentLine !== '') {
-            $lines[] = $currentLine;
+        if ($lineStart < $length) {
+            $lines[] = substr($text, $lineStart);
+            $offsets[] = $base + $lineStart;
         }
 
-        return $lines;
+        return [$lines, $offsets];
     }
 
     /**
@@ -284,7 +324,7 @@ class Parser
         while ($this->pos < count($this->lines)) {
             if (trim($this->lines[$this->pos]) !== '') {
                 // Skip empty lines
-                $element = $this->parseElement(0);
+                $element = $this->parseElement(0, 0);
                 if ($element !== null) {
                     $links[] = $element;
                 }
@@ -299,9 +339,12 @@ class Parser
     /**
      * Parse a single element (link or reference) at given indentation.
      *
+     * $level is the number of indentation levels the element sits at in the
+     * context being parsed.
+     *
      * @return array<string, mixed>|null
      */
-    private function parseElement(int $currentIndent): ?array
+    private function parseElement(int $currentIndent, int $level): ?array
     {
         if ($this->pos >= count($this->lines)) {
             return null;
@@ -329,14 +372,18 @@ class Parser
             return null;
         }
 
+        $contentOffset = $this->lineOffsets[$this->pos] + strlen($line) - strlen(ltrim($line));
         $this->pos++;
 
         // Try to parse the line
-        $element = $this->parseLineContent($content);
+        $lineDepth = $this->contextDepth + $level;
+        $this->depth = $lineDepth;
+        $element = $this->parseLineContent($content, $contentOffset);
+        // Only a line that parsed counts, as in the other implementations
+        $this->checkDepth($lineDepth, $contentOffset);
 
         // Check for children (indented lines that follow)
         $children = [];
-        $childIndent = $indent + 2; // Expect at least 2 spaces for child
 
         while ($this->pos < count($this->lines)) {
             // A line holding nothing does not close a block: it is the next
@@ -362,7 +409,9 @@ class Parser
 
             // This is a child
             $this->pos = $following;
-            $child = $this->parseElement($children ? $indent + 2 : $childIndent);
+            // A child only has to be indented deeper than its parent; asking
+            // for more left a line indented by a single space unread forever.
+            $child = $this->parseElement($indent + 1, $level + 1);
             if ($child !== null) {
                 $children[] = $child;
             }
@@ -376,15 +425,28 @@ class Parser
     }
 
     /**
-     * Parse the content of a single line.
+     * Refuse, for good, links at $depth when that is deeper than the parser
+     * allows. $offset is where the level that is too deep opens.
+     *
+     * @throws ParseException If $depth is deeper than maxDepth
+     */
+    private function checkDepth(int $depth, int $offset): void
+    {
+        if ($depth > $this->maxDepth) {
+            throw ParseException::nestingTooDeep($this->source, $offset, $this->maxDepth);
+        }
+    }
+
+    /**
+     * Parse the content of a single line, which starts at $offset.
      *
      * @return array<string, mixed>
      */
-    private function parseLineContent(string $content): array
+    private function parseLineContent(string $content, int $offset): array
     {
         // A whole parenthesized group: (id: values), (values) or a nested document
         if (str_starts_with($content, '(') && $this->findMatchingParen($content, 0) === strlen($content) - 1) {
-            return $this->parseParenthesized(substr($content, 1, -1));
+            return $this->parseParenthesized(substr($content, 1, -1), $offset);
         }
 
         // Try indented id syntax: id:
@@ -398,52 +460,68 @@ class Parser
         $colonPos = $this->findColonOutsideQuotes($content);
         if ($colonPos >= 0) {
             $idPart = trim(substr($content, 0, $colonPos));
-            $valuesPart = trim(substr($content, $colonPos + 1));
+            $afterColon = substr($content, $colonPos + 1);
+            $valuesPart = trim($afterColon);
+            $valuesOffset = $offset + $colonPos + 1 + strlen($afterColon) - strlen(ltrim($afterColon));
 
-            return ['id' => $this->extractReference($idPart), 'values' => $this->parseValues($valuesPart)];
+            return [
+                'id' => $this->extractReference($idPart),
+                'values' => $this->parseValues($valuesPart, $valuesOffset),
+            ];
         }
 
         // Simple value list
-        return ['values' => $this->parseValues($content)];
+        return ['values' => $this->parseValues($content, $offset)];
     }
 
     /**
-     * Parse the content of a parenthesized group.
+     * Parse the content of a parenthesized group opened at $offset.
      *
      * The group opens a nested context that starts fresh at indentation level
      * zero and follows exactly the rules used at the root of the document, so
-     * line breaks separate links and indentation nests them.
+     * line breaks separate links and indentation nests them. The group is one
+     * level deeper than the line it is written on.
      *
      * @return array<string, mixed>
      */
-    private function parseParenthesized(string $inner): array
+    private function parseParenthesized(string $inner, int $offset): array
     {
-        return ['nested' => $this->parseNestedDocument($inner)];
+        $this->checkDepth($this->depth + 1, $offset);
+
+        return ['nested' => $this->parseNestedDocument($inner, $offset + 1)];
     }
 
     /**
-     * Parse the text of a parenthesized group as a document of its own.
+     * Parse the text of a parenthesized group, which starts at $offset, as a
+     * document of its own.
      *
      * @return array<int, array<string, mixed>>
      */
-    private function parseNestedDocument(string $inner): array
+    private function parseNestedDocument(string $inner, int $offset): array
     {
         $savedLines = $this->lines;
+        $savedLineOffsets = $this->lineOffsets;
         $savedPos = $this->pos;
         $savedBaseIndentation = $this->baseIndentation;
         $savedIndentationStack = $this->indentationStack;
+        $savedContextDepth = $this->contextDepth;
+        $savedDepth = $this->depth;
         try {
-            $this->lines = $this->splitLinesRespectingQuotes($inner);
+            [$this->lines, $this->lineOffsets] = $this->splitLinesRespectingQuotes($inner, $offset);
             $this->pos = 0;
             $this->baseIndentation = null;
             $this->indentationStack = [0];
+            $this->contextDepth = $this->depth + 1;
 
             return $this->parseDocument();
         } finally {
             $this->lines = $savedLines;
+            $this->lineOffsets = $savedLineOffsets;
             $this->pos = $savedPos;
             $this->baseIndentation = $savedBaseIndentation;
             $this->indentationStack = $savedIndentationStack;
+            $this->contextDepth = $savedContextDepth;
+            $this->depth = $savedDepth;
         }
     }
 
@@ -451,28 +529,45 @@ class Parser
      * Find the position of the parenthesis closing the one at $start.
      *
      * Quoted strings are skipped, so parentheses inside them are ignored.
-     * Returns -1 when the group is not closed.
+     * Returns -1 when the group is not closed, or when $start is not at an
+     * opening parenthesis.
      */
     private function findMatchingParen(string $text, int $start): int
     {
+        if (($text[$start] ?? '') !== '(') {
+            return -1;
+        }
+
         $depth = 0;
         $i = $start;
         $length = strlen($text);
 
         while ($i < $length) {
+            $i += strcspn($text, "\"'`()", $i);
+            if ($i >= $length) {
+                break;
+            }
             $char = $text[$i];
-            if (in_array($char, ['"', "'", '`'], true)) {
+            // A run of parentheses is taken in one step, so the parentheses
+            // deeply nested groups begin and end with cost a step per run.
+            if ($char === '(') {
+                $run = strspn($text, '(', $i);
+                $depth += $run;
+                $i += $run;
+                continue;
+            } elseif ($char === ')') {
+                $run = strspn($text, ')', $i);
+                if ($run >= $depth) {
+                    return $i + $depth - 1;
+                }
+                $depth -= $run;
+                $i += $run;
+                continue;
+            } else {
                 $end = self::skipQuotedString($text, $i);
                 if ($end > $i) {
                     $i = $end;
                     continue;
-                }
-            } elseif ($char === '(') {
-                $depth++;
-            } elseif ($char === ')') {
-                $depth--;
-                if ($depth === 0) {
-                    return $i;
                 }
             }
             $i++;
@@ -518,11 +613,11 @@ class Parser
     }
 
     /**
-     * Parse a space-separated list of values.
+     * Parse a space-separated list of values, which starts at $offset.
      *
      * @return array<int, array<string, mixed>>
      */
-    private function parseValues(string $text): array
+    private function parseValues(string $text, int $offset): array
     {
         if ($text === '') {
             return [];
@@ -544,7 +639,7 @@ class Parser
             // Try to extract the next value
             [$valueEnd, $valueText] = $this->extractNextValue($text, $i);
             if ($valueText !== '' && trim($valueText) !== '') {
-                $values[] = $this->parseValue($valueText);
+                $values[] = $this->parseValue($valueText, $offset + $i);
             }
             if ($valueEnd === $i) {
                 // No progress made - skip this character to avoid infinite loop
@@ -611,15 +706,16 @@ class Parser
     }
 
     /**
-     * Parse a single value (could be a reference or nested link).
+     * Parse a single value (could be a reference or nested link) starting at
+     * $offset.
      *
      * @return array<string, mixed>
      */
-    private function parseValue(string $value): array
+    private function parseValue(string $value, int $offset): array
     {
         // Nested link in parentheses
         if (str_starts_with($value, '(') && $this->findMatchingParen($value, 0) === strlen($value) - 1) {
-            return $this->parseParenthesized(substr($value, 1, -1));
+            return $this->parseParenthesized(substr($value, 1, -1), $offset);
         }
 
         // Simple reference

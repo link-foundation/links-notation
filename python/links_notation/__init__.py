@@ -14,7 +14,7 @@ from .comments import strip_comments
 from .format_config import FormatConfig
 from .formatter import format_links
 from .link import Link
-from .parser import Parser
+from .parser import DEFAULT_MAX_DEPTH, ParseError, Parser
 from .stream_parser import StreamParseError, StreamParser, StreamPosition, parse_async_chunks, parse_chunks
 
 
@@ -47,7 +47,9 @@ def _read_version() -> str:
 __version__ = _read_version()
 
 __all__ = [
+    "DEFAULT_MAX_DEPTH",
     "Link",
+    "ParseError",
     "Parser",
     "StreamParseError",
     "StreamParser",

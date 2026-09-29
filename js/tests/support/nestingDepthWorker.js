@@ -4,7 +4,9 @@ import { parentPort } from 'node:worker_threads';
 import { Parser } from '../../src/Parser.js';
 import { formatLinks } from '../../src/Link.js';
 
-const parser = new Parser();
+// The documents nest deeper than the default limit on purpose; only the time
+// they take is measured here.
+const parser = new Parser({ maxDepth: Infinity });
 
 parentPort.on('message', (source) => {
   try {

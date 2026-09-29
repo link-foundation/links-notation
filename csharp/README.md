@@ -237,6 +237,27 @@ Syntax error at line 2, column 12: unexpected ":"
 `FormatException` keep working, and carries `Offset`, `Line`, `Column`, `Found`,
 `LineText`, `Summary` and `Snippet` for callers that report errors themselves.
 
+### Nesting Limit
+
+`Parser.MaxDepth` is how deep links may nest (default: `Parser.DefaultMaxDepth`,
+64, the same in every implementation). Every parenthesized group and every
+indentation level is one level, and the lines of a document start at level 0,
+so with `new Parser(comments: true, maxDepth: 1)` `(a)` is accepted while
+`((a))`, `(a (b))` and a group on an indented line are refused. A document
+nested deeper is refused with a `ParseException` whose `MaxDepth` is set, rather
+than recursed into until the stack runs out, and which points at the group or
+the line that is one level too deep:
+
+```text
+Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
+1 | ((((a))))
+  |    ^
+```
+
+`MaxDepth` is `null` for any other error. `StreamParser` reports the same error
+as a `StreamParseException` whose `ParseError` is the `ParseException` and whose
+`Line`, `Column` and `Offset` are counted from the start of the stream.
+
 ### Extension Methods
 
 - **IListExtensions.Format()**: Converts list of links back to string format

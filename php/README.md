@@ -15,7 +15,7 @@ Or add the dependency to your `composer.json`:
 ```json
 {
     "require": {
-        "link-foundation/links-notation": "^0.21"
+        "link-foundation/links-notation": "^0.22"
     }
 }
 ```
@@ -264,7 +264,7 @@ character again, for documents written before comments existed:
 $document = "# the machines this deploys to\ndeploy: staging # only staging, for now\n";
 echo Formatter::formatLinks((new Parser())->parse($document)); // (deploy: staging)
 
-$plain = new Parser(10 * 1024 * 1024, 1000, false);
+$plain = new Parser(comments: false);
 echo Formatter::formatLinks($plain->parse("# a b\n")); // (# a b)
 ```
 
@@ -288,11 +288,19 @@ escapes it.
 
 Main parser class for converting strings into links.
 
-- `__construct(int $maxInputSize = 10485760, int $maxDepth = 1000, bool $comments = true)` - create a
+- `__construct(int $maxInputSize = 10485760, int $maxDepth = Parser::DEFAULT_MAX_DEPTH, bool $comments = true)` - create a
   parser with optional limits, and with `#` comments on unless `$comments` is `false`
 - `parse(string $input): Link[]` - parse a lino string and return the links
   - throws `InvalidArgumentException` when the input exceeds `$maxInputSize`
-  - throws `LinkFoundation\LinksNotation\ParseException` when the input cannot be parsed
+  - throws `LinkFoundation\LinksNotation\ParseException` when the input cannot be parsed,
+    or nests links deeper than `$maxDepth`
+- `Parser::DEFAULT_MAX_DEPTH` - the default `$maxDepth`, 64, the same in every implementation
+
+`$maxDepth` is how deep links may nest (default: 64). Every parenthesized group
+and every indentation level is one level, and the lines of a document start at
+level 0, so with `maxDepth: 1` `(a)` is accepted while `((a))`, `(a (b))` and a
+group on an indented line are refused. A document nested deeper is refused with
+a `ParseException` rather than recursed into until PHP runs out of memory.
 
 #### `LinkFoundation\LinksNotation\Link`
 
@@ -330,7 +338,28 @@ Formatting options.
 
 #### `LinkFoundation\LinksNotation\ParseException`
 
-Exception thrown when parsing fails.
+Exception thrown when parsing fails. When a document nests links deeper than
+`$maxDepth`, it points at the group or the line that is one level too deep:
+
+```text
+Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
+1 | ((((a))))
+  |    ^
+```
+
+- `getMaxDepth(): ?int` - the deepest nesting the parser accepts, when the
+  document nests deeper; `null` for any other error
+- `getLineNumber(): ?int`, `getColumn(): ?int` - where the offending group or
+  line starts, counted from 1
+- `getOffset(): ?int` - the same position as a byte offset from the start of the
+  document
+- `getLineText(): ?string` - the offending line, as written
+- `getSnippet(): ?string` - the offending line with a caret under the offending
+  column
+
+`StreamParser` reports the same error as a `StreamParseException` whose
+`parseError` is the `ParseException` and whose line, column and offset are
+counted from the start of the stream.
 
 ## Project Structure
 
