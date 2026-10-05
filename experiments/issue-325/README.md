@@ -43,6 +43,13 @@ with `cargo run -p links-notation-benchmark --release` changed only the report's
 parser version from 0.22.0 to 0.23.0. Its `--check` mode then passed; the
 datasets, generated documents and measured results were already current.
 
+The next benchmark run `37299899525` passed regeneration and six language
+checks, but Java failed dependency resolution at log lines 2045–2047: its
+benchmark still requested 0.22.0 while CI installed the new 0.23.0 library.
+The version-consistency check now also checks Java and Rust benchmark parser
+dependencies. It failed on the stale Java dependency before updating it to
+0.23.0, then passed after the update.
+
 Validation commands:
 
 ```sh
