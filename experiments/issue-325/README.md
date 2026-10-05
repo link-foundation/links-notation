@@ -37,6 +37,12 @@ audits. The preserved log identifies `brace-expansion@5.0.9` at lines 2190–219
 and 4064–4069. Updating that transitive dependency to 5.0.12 in both npm locks
 and the JS Bun lock removes the advisories without changing direct dependencies.
 
+The first completed feature run `37299445325` passed all 34 benchmark tests
+but failed the generated-output drift check at log line 1089. Regenerating
+with `cargo run -p links-notation-benchmark --release` changed only the report's
+parser version from 0.22.0 to 0.23.0. Its `--check` mode then passed; the
+datasets, generated documents and measured results were already current.
+
 Validation commands:
 
 ```sh
