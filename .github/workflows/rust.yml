@@ -5,10 +5,12 @@ on:
     branches: main
     paths:
       - 'rust/**'
+      - 'docs/protocol/**'
       - '.github/workflows/rust.yml'
   pull_request:
     paths:
       - 'rust/**'
+      - 'docs/protocol/**'
       - '.github/workflows/rust.yml'
   workflow_dispatch:
     inputs:
@@ -58,7 +60,7 @@ jobs:
           fi
           echo "Changed files: $ALL_CHANGED_FILES"
           for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == rust/* ]] || [[ $changedFile == .github/workflows/rust.yml ]]; then
+            if [[ $changedFile == rust/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == .github/workflows/rust.yml ]]; then
               isRustFilesChanged='true'
               break
             fi

@@ -257,8 +257,8 @@ All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP)
 | --- | --- | --- |
 | Python | 235 | 20 |
 | JavaScript | 278 | 24 |
-| Rust | 361 | 26 |
-| C# | 257 | 23 |
+| Rust | 394 | 27 |
+| C# | 288 | 25 |
 | Go | 129 | 14 |
 | Java | 174 | 13 |
 | PHP | 224 | 20 |
@@ -284,3 +284,11 @@ Some language-specific features are intentional:
   [Rust](rust/links-notation/src/lib.rs) via `From` implementations.
 
 These differences are by design and do not affect core parsing/formatting functionality.
+
+## Binary links notation
+
+The [version 1 specification](docs/protocol/binary-links-notation.md) defines
+shared packets and a LiNo document mapping. Rust and C# provide codecs beside
+their text parsers; both check the same [golden vectors](docs/protocol/binary-links-notation-vectors.txt).
+See the [cross-language example](examples/binary/README.md) for encoding options
+and byte-for-byte interoperability.

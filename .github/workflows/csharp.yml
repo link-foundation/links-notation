@@ -5,10 +5,14 @@ on:
     branches: main
     paths:
       - 'csharp/**'
+      - 'docs/protocol/**'
+      - 'examples/binary/**'
       - '.github/workflows/csharp.yml'
   pull_request:
     paths:
       - 'csharp/**'
+      - 'docs/protocol/**'
+      - 'examples/binary/**'
       - '.github/workflows/csharp.yml'
   workflow_dispatch:
     inputs:
@@ -64,7 +68,7 @@ jobs:
           fi
           echo "Changed files: $ALL_CHANGED_FILES"
           for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == csharp/* ]] || [[ $changedFile == .github/workflows/csharp.yml ]]; then
+            if [[ $changedFile == csharp/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == examples/binary/* ]] || [[ $changedFile == .github/workflows/csharp.yml ]]; then
               isCsFilesChanged='true'
               break
             fi
@@ -124,6 +128,14 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Test
         run: dotnet test --configuration Release --no-build
+      - name: Setup Rust for binary interoperability checks
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+      - name: Compare Rust and C# binary codecs
+        run: bash ../examples/binary/run-interop.sh
 
   pushToNuget:
     runs-on: ubuntu-latest

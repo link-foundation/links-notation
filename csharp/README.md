@@ -325,3 +325,9 @@ fail the format check.
 
 For complete API documentation, visit:
 [Link.Foundation.Links.Notation Documentation](https://link-foundation.github.io/links-notation/csharp/api/Link.Foundation.Links.Notation.html)
+
+## Binary links notation
+
+Version 1 codecs support raw packets and the marker-point LiNo mapping. See the
+[shared specification](../docs/protocol/binary-links-notation.md) and
+[cross-language example](../examples/binary/README.md) for APIs and options.
