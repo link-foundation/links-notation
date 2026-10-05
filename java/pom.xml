@@ -6,7 +6,7 @@
 
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.22.0</version>
+    <version>0.23.0</version>
     <packaging>jar</packaging>
 
     <name>Links Notation</name>
