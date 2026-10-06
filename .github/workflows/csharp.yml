@@ -235,7 +235,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: [findChangedCsFiles, test]
-    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    # Builds on pull requests too: only main used to run it, so a test string
+    # pdfLaTeX cannot typeset passed review and broke the main branch (#330).
+    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-pdf
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
@@ -252,6 +254,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive texlive-lang-cyrillic texlive-latex-extra python3-pygments ghostscript python-is-python3
+      - name: Check the listing only contains characters LaTeX can typeset
+        run: python3 ../experiments/issue-330/test_pdf_unicode.py
       - name: Generate PDF with code
         run: |
           if [ "$CI_VERBOSE" = "true" ]; then set -x; fi
