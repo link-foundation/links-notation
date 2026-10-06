@@ -227,16 +227,21 @@ sign or leading zeros except `0`. Other strings, including `007`, negative or
 fractional numbers, and values above `u64::MAX`, use the String marker. With
 external references on, numbers above `2⁶³−1` fall back to Number/unary links.
 Strings consist of Unicode scalar values, rather than UTF-8 bytes or UTF-16
-code units; invalid surrogate code units are unencodable in C#.
+code units; invalid Unicode strings are rejected by the document encoders.
 
 For link-cli compatibility, the binary text helpers canonicalize parsed groups:
 `a` and `(a)` become a reference, while `((a))` becomes a one-element list.
-Rust uses `binary::parse_document`; C# uses `LinoFormat.ParseDocument`.
+Rust uses `binary::parse_document`; C# uses `LinoFormat.ParseDocument`. The other
+ports provide the same canonicalization through their codec parse helpers.
 The low-level mapping and `BinaryLinoCodec.Encode` / `encode` accept the native
 parser model directly and preserve its groups. They never canonicalize inputs.
-IDs without values survive binary round trips; the text parser currently reads
-`(a:)` as a reference, so such manually constructed models cannot round trip
-through text. Quoting and layout of the original text are not stored.
+The mapping can represent IDs without values. Rust and C# models distinguish
+these from references and preserve them in binary. The other native models
+represent an ID with no children as a reference, matching their text parsers;
+`(a:)` is also read as a reference. Quoting, comments, layout and formatting-only
+parser metadata are not stored. A binary round trip preserves the semantic
+native model, including identifiers, empty references, groups, Unicode and
+noncanonical numeric strings. It does not preserve the original text spelling.
 
 ### 7.2 Example
 
@@ -292,8 +297,9 @@ The LiNo mapping also requires that:
 The codecs check limits for both byte input and manually constructed packets.
 String limits count repeated references each time they appear in the decoded
 model, including numeric references formatted as decimal text.
-The encoders refuse native models deeper than 64 nodes before entering recursive
-encoding, and bound them to 2²² nodes. Decode depth can be configured; raising it
+The encoders validate native models before entering recursive encoding.
+The defaults allow depth 64 and 2²² nodes. All five budgets apply to encoding
+and decoding and can be configured on the codec. Raising the depth limit
 requires adequate stack space. Raw packet readers are iterative and have no
 LiNo depth constraint. `unlimited` / `Unlimited` is for trusted input only.
 
@@ -330,8 +336,40 @@ possible future mapping after their semantics and vectors are agreed.
 Rust exports `links_notation::binary::{BinaryLinoCodec, BinaryLinoOptions,
 LinksPacket, ArityRange, DecodeLimits}`. C# exports the corresponding types in
 `Link.Foundation.Links.Notation.Binary`, with `LinoMapping` and `LinoFormat`
-providing document and text helpers. Binary support initially ships in these
-two ports; the other text parsers are unchanged.
+providing document and text helpers. Every supported language implements the
+same packet grammar, marker mapping, deterministic packing and golden vectors.
+
+| Language | Codec and packet entry points | Integer representation |
+|---|---|---|
+| Rust | `links_notation::binary` | `u64` |
+| C# | `Link.Foundation.Links.Notation.Binary` | `ulong` |
+| JavaScript / TypeScript | exports from `links-notation` | `bigint`; unsafe numeric inputs are rejected |
+| Python | `links_notation.binary` (also re-exported by `links_notation`) | `int` constrained to unsigned 64-bit |
+| Go | `lino.NewBinaryLinoCodec`, `LinksPacket`, `ReadPacket` | `uint64` |
+| Java | `BinaryLinoCodec` and its public nested `Packet`, `Options`, `Limits`, `Reference`, `Section`, `ArityRange` types | `BigInteger` constrained to unsigned 64-bit |
+| PHP | `LinkFoundation\LinksNotation\Binary` | decimal strings, using integer arithmetic without floats or an extension dependency |
+
+Raw packet APIs expose sections, gaps, arity ranges, widths, internal and external
+references. They can read consecutive packets without consuming the next packet
+and distinguish clean EOF from truncation. JavaScript supplies a `PacketReader`
+with an offset over `Uint8Array`; the other ports accept their native stream
+interfaces. Complete-byte-array decoders reject trailing bytes. Encoding options
+are independent; the defaults use internal references, doublets and uniform
+widths. Decoding reads options from the packet, regardless of codec encoding
+settings. `of_packet` / `ofPacket` / `OfPacket` / `OptionsOfPacket` infer compatible
+options from a raw packet; re-encoding preserves semantics, not an arbitrary
+original section layout.
+
+`DecodeLimits` (Java: `Limits`) also bounds **encoding**, including native models
+passed directly to the codec. Every port defaults to 2²² links, 2²⁴ references,
+2²² expanded model nodes, 64 MiB of expanded UTF-8 string content, and depth 64.
+Identifiers count as a model node when encoded as an identified group. Limits
+are caller-configurable, including an explicit unlimited factory for trusted
+input. Increasing depth still depends on the host runtime's available stack.
+No process environment, global mutable switch or transport configuration is
+needed. Normal text parser configuration remains available: pass its resulting
+native `Link` model directly to binary encoding. Canonical parse helpers in
+JavaScript, Python, Java and PHP also accept a caller-supplied parser.
 
 ```rust
 use links_notation::binary::{parse_document, BinaryLinoCodec, BinaryLinoOptions};
@@ -365,7 +403,9 @@ state order is width ascending, fixed before variable; equal costs keep the
 first state and continue an existing section. Packed output wins only if its
 actual byte length is strictly smaller than uniform output.
 
-The Rust `binary_notation_tests` and C# `BinaryLinksNotationTests` both load this
-one vector file. Run `cargo test` in `rust/` and `dotnet test` in `csharp/`.
-[`examples/binary/`](../../examples/binary/README.md) demonstrates a byte-for-byte
-comparison of the two ports for all twelve option combinations.
+Each language's binary tests load this one vector file. They also round trip
+native parser models under all twelve option combinations, enforce caller limits,
+and cover malformed packets. Run the normal language test suite to include them.
+[`examples/binary/`](../../examples/binary/README.md) compares all seven ports
+byte for byte for all twelve option combinations; CI runs this check separately
+from the language unit suites.

@@ -255,13 +255,13 @@ All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP)
 <!-- test-counts:start -->
 | Language | Tests | Test categories |
 | --- | --- | --- |
-| Python | 235 | 20 |
-| JavaScript | 278 | 24 |
-| Rust | 394 | 27 |
-| C# | 288 | 25 |
-| Go | 129 | 14 |
-| Java | 174 | 13 |
-| PHP | 224 | 20 |
+| Python | 239 | 21 |
+| JavaScript | 284 | 25 |
+| Rust | 395 | 27 |
+| C# | 289 | 25 |
+| Go | 133 | 15 |
+| Java | 179 | 14 |
+| PHP | 229 | 21 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files
@@ -288,7 +288,7 @@ These differences are by design and do not affect core parsing/formatting functi
 ## Binary links notation
 
 The [version 1 specification](docs/protocol/binary-links-notation.md) defines
-shared packets and a LiNo document mapping. Rust and C# provide codecs beside
-their text parsers; both check the same [golden vectors](docs/protocol/binary-links-notation-vectors.txt).
+shared packets and a LiNo document mapping. JavaScript, Python, Rust, C#, Go,
+Java and PHP provide codecs beside their text parsers; all check the same [golden vectors](docs/protocol/binary-links-notation-vectors.txt).
 See the [cross-language example](examples/binary/README.md) for encoding options
 and byte-for-byte interoperability.

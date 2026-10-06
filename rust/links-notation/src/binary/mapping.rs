@@ -98,6 +98,15 @@ pub fn encode_document(
     document: &[LiNo<String>],
     options: BinaryLinoOptions,
 ) -> BinaryResult<LinksPacket> {
+    encode_document_with_limits(document, options, &DecodeLimits::default())
+}
+
+/// Converts a native model into a packet using caller-selected work budgets.
+pub fn encode_document_with_limits(
+    document: &[LiNo<String>],
+    options: BinaryLinoOptions,
+    limits: &DecodeLimits,
+) -> BinaryResult<LinksPacket> {
     options.arity.validate().map_err(BinaryError::Unencodable)?;
     if !options.arity.contains(2) {
         return Err(BinaryError::Unencodable(format!(
@@ -106,9 +115,9 @@ pub fn encode_document(
         )));
     }
     // Check the model iteratively before entering the recursive encoder.
-    let limits = DecodeLimits::default();
     let mut pending: Vec<_> = document.iter().map(|link| (link, 0)).collect();
     let mut budget = limits.max_nodes;
+    let mut strings_left = limits.max_string_bytes;
     while let Some((link, depth)) = pending.pop() {
         if depth >= limits.max_depth {
             return Err(BinaryError::Unencodable(format!(
@@ -119,8 +128,22 @@ pub fn encode_document(
         budget = budget
             .checked_sub(1)
             .ok_or_else(|| BinaryError::Unencodable("too many LiNo nodes".into()))?;
-        if let LiNo::Link { values, .. } = link {
-            pending.extend(values.iter().map(|value| (value, depth + 1)));
+        let text = match link {
+            LiNo::Ref(text) => Some(text),
+            LiNo::Link { id, values } => {
+                pending.extend(values.iter().map(|value| (value, depth + 1)));
+                if id.is_some() {
+                    budget = budget
+                        .checked_sub(1)
+                        .ok_or_else(|| BinaryError::Unencodable("too many LiNo nodes".into()))?;
+                }
+                id.as_ref()
+            }
+        };
+        if let Some(text) = text {
+            strings_left = strings_left
+                .checked_sub(text.len())
+                .ok_or_else(|| BinaryError::Unencodable("too many string bytes".into()))?;
         }
     }
     let mut encoder = Encoder::new(options);
@@ -131,7 +154,17 @@ pub fn encode_document(
             .collect::<Vec<_>>();
         encoder.list(items);
     }
-    encoder.finish()
+    let packet = encoder.finish()?;
+    if packet.sections.len() as u64 > limits.max_links || packet.link_count() > limits.max_links {
+        return Err(BinaryError::Unencodable("too many packet links".into()));
+    }
+    let mut references_left = limits.max_references;
+    for (_, link) in packet.links() {
+        references_left = references_left
+            .checked_sub(link.len() as u64)
+            .ok_or_else(|| BinaryError::Unencodable("too many packet references".into()))?;
+    }
+    Ok(packet)
 }
 
 /// Converts a packet back into a document.

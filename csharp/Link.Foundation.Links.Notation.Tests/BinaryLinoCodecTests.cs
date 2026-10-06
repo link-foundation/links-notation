@@ -12,6 +12,28 @@ namespace Link.Foundation.Links.Notation.Tests.Binary;
 /// <summary>Binary and text LiNo protocol codecs (issue #105).</summary>
 public sealed class BinaryLinoCodecTests
 {
+    [Fact]
+    public void EncoderUsesConfiguredLimits()
+    {
+        var document = new[] { new LinoLink("abcdef", new[] { new LinoLink("value") }) };
+        foreach (var limits in new[]
+        {
+            new DecodeLimits { MaxNodes = 1 },
+            new DecodeLimits { MaxStringBytes = 2 },
+            new DecodeLimits { MaxDepth = 1 },
+            new DecodeLimits { MaxLinks = 1 },
+            new DecodeLimits { MaxReferences = 1 },
+        })
+        {
+            Assert.Throws<BinaryNotationException>(() => new BinaryLinoCodec { Limits = limits }.Encode(document));
+        }
+        var deep = new LinoLink("a");
+        for (var index = 0; index < 70; index++) deep = new LinoLink(null, new[] { deep });
+        var model = new[] { deep };
+        var codec = new BinaryLinoCodec { Limits = new DecodeLimits { MaxDepth = 80 } };
+        Assert.Equal(model, codec.Decode(codec.Encode(model)));
+    }
+
     internal static readonly string[] Corpus =
     {
         "() ((1 1))",

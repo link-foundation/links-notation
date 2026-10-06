@@ -4,16 +4,10 @@ use links_notation::binary::{
 };
 
 fn main() -> BinaryResult<()> {
-    let corpus = [
-        "",
-        "() ((1 1))",
-        "(child: father mother)",
-        "('😀' 007 18446744073709551615)",
-        "'#tag'\n((a))",
-        "(70000 1)",
-    ];
-    for text in corpus {
-        let document = parse_document(text)?;
+    let corpus = include_str!("../../../examples/binary/corpus.txt");
+    for source in corpus.split_terminator('\n') {
+        let text = source.replace("\\n", "\n");
+        let document = parse_document(&text)?;
         for external_references in [false, true] {
             for arity in [
                 ArityRange::DOUBLETS,

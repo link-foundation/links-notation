@@ -41,6 +41,12 @@ public sealed record DecodeLimits
     /// <summary>Maximum LiNo nesting depth.</summary>
     public int MaxDepth { get; init; } = 64;
 
+    internal void Validate()
+    {
+        if (MaxNodes < 0 || MaxStringBytes < 0 || MaxDepth < 0)
+            throw new ArgumentOutOfRangeException(nameof(DecodeLimits), "Limits must be non-negative.");
+    }
+
     /// <summary>The default limits.</summary>
     public static DecodeLimits Default { get; } = new();
 
@@ -468,6 +474,7 @@ public sealed class LinksPacket
     {
         ArgumentNullException.ThrowIfNull(reader);
         limits ??= DecodeLimits.Default;
+        limits.Validate();
         var first = reader.ReadByte();
         if (first < 0)
         {

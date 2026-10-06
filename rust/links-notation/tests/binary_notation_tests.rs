@@ -8,6 +8,7 @@ use links_notation::binary::{
     ArityRange, BinaryError, BinaryLinoCodec, BinaryLinoOptions, DecodeLimits, LinksPacket,
     Reference, Section,
 };
+use links_notation::LiNo;
 use std::io::{self, Cursor, Read};
 
 const CORPUS: &[&str] = &[
@@ -1043,4 +1044,60 @@ fn ids_do_not_add_an_extra_model_nesting_level() {
             document
         );
     }
+}
+
+#[test]
+fn codec_encoder_uses_configured_limits() {
+    let document = vec![LiNo::Link {
+        id: Some("abcdef".into()),
+        values: vec![LiNo::Ref("value".into())],
+    }];
+    for limits in [
+        DecodeLimits {
+            max_nodes: 1,
+            ..DecodeLimits::default()
+        },
+        DecodeLimits {
+            max_string_bytes: 2,
+            ..DecodeLimits::default()
+        },
+        DecodeLimits {
+            max_depth: 1,
+            ..DecodeLimits::default()
+        },
+        DecodeLimits {
+            max_links: 1,
+            ..DecodeLimits::default()
+        },
+        DecodeLimits {
+            max_references: 1,
+            ..DecodeLimits::default()
+        },
+    ] {
+        assert!(BinaryLinoCodec {
+            limits,
+            ..BinaryLinoCodec::new()
+        }
+        .encode(&document)
+        .is_err());
+    }
+    let mut deep = LiNo::Ref("a".into());
+    for _ in 0..70 {
+        deep = LiNo::Link {
+            id: None,
+            values: vec![deep],
+        };
+    }
+    let document = vec![deep];
+    let codec = BinaryLinoCodec {
+        limits: DecodeLimits {
+            max_depth: 80,
+            ..DecodeLimits::default()
+        },
+        ..BinaryLinoCodec::new()
+    };
+    assert_eq!(
+        codec.decode(&codec.encode(&document).unwrap()).unwrap(),
+        document
+    );
 }

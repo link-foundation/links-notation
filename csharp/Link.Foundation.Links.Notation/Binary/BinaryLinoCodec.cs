@@ -13,11 +13,11 @@ public sealed record BinaryLinoCodec
     /// <summary>Options used when writing.</summary>
     public BinaryLinoOptions Options { get; init; }
 
-    /// <summary>Limits applied when reading.</summary>
+    /// <summary>Limits applied when reading and writing.</summary>
     public DecodeLimits Limits { get; init; } = DecodeLimits.Default;
 
     /// <summary>Encodes the supplied model without canonicalizing its groups.</summary>
-    public byte[] Encode(IReadOnlyList<LinoLink> document) => LinoMapping.EncodeDocument(document, Options).ToBytes();
+    public byte[] Encode(IReadOnlyList<LinoLink> document) => LinoMapping.EncodeDocument(document, Options, Limits).ToBytes();
 
     /// <summary>Decodes exactly one complete packet, rejecting trailing bytes.</summary>
     public IReadOnlyList<LinoLink> Decode(byte[] bytes) =>

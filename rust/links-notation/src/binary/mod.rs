@@ -19,7 +19,9 @@ pub mod packet;
 
 pub use error::{BinaryError, BinaryResult};
 pub use format::{canonical, format_document, format_link, format_reference, parse_document};
-pub use mapping::{decode_document, encode_document, BinaryLinoOptions, LinoDocument};
+pub use mapping::{
+    decode_document, encode_document, encode_document_with_limits, BinaryLinoOptions, LinoDocument,
+};
 pub use packet::{ArityRange, DecodeLimits, LinksPacket, Reference, Section};
 
 /// Convenience codec for complete LiNo packets.
@@ -43,7 +45,7 @@ impl BinaryLinoCodec {
 
     /// Encodes the supplied model without canonicalizing its groups.
     pub fn encode(&self, document: &[crate::LiNo<String>]) -> BinaryResult<Vec<u8>> {
-        encode_document(document, self.options)?.to_bytes()
+        encode_document_with_limits(document, self.options, &self.limits)?.to_bytes()
     }
 
     /// Decodes exactly one complete packet, rejecting trailing bytes.

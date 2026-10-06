@@ -1,16 +1,9 @@
 using Link.Foundation.Links.Notation.Binary;
 
-var corpus = new[]
+var corpus = File.ReadAllText("examples/binary/corpus.txt").TrimEnd('\n').Split('\n');
+foreach (var source in corpus)
 {
-    "",
-    "() ((1 1))",
-    "(child: father mother)",
-    "('😀' 007 18446744073709551615)",
-    "'#tag'\n((a))",
-    "(70000 1)",
-};
-foreach (var text in corpus)
-{
+    var text = source.Replace("\\n", "\n");
     var document = LinoFormat.ParseDocument(text);
     foreach (var externalReferences in new[] { false, true })
     {

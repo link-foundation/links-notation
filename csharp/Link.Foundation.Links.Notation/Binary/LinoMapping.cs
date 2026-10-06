@@ -100,7 +100,7 @@ public readonly record struct BinaryLinoOptions
 public static class LinoMapping
 {
     /// <summary>Converts a document into a packet.</summary>
-    public static LinksPacket EncodeDocument(IReadOnlyList<LinoLink> document, BinaryLinoOptions options = default)
+    public static LinksPacket EncodeDocument(IReadOnlyList<LinoLink> document, BinaryLinoOptions options = default, DecodeLimits? limits = null)
     {
         ArgumentNullException.ThrowIfNull(document);
         if (options.Arity.Problem() is { } problem)
@@ -112,9 +112,11 @@ public static class LinoMapping
             throw BinaryNotationException.Unencodable($"arity {options.Arity} does not include doublets (2)");
         }
         // Check the model iteratively before entering the recursive encoder.
-        var limits = DecodeLimits.Default;
+        limits ??= DecodeLimits.Default;
+        limits.Validate();
         var pending = new Stack<(LinoLink Link, int Depth)>(document.Select(link => (link, 0)));
         var budget = limits.MaxNodes;
+        var stringsLeft = limits.MaxStringBytes;
         while (pending.TryPop(out var item))
         {
             if (item.Depth >= limits.MaxDepth)
@@ -124,6 +126,14 @@ public static class LinoMapping
             if (--budget < 0)
             {
                 throw BinaryNotationException.Unencodable("too many LiNo nodes");
+            }
+            if (item.Link.Id is { } text)
+            {
+                if (item.Link.Values is not null && --budget < 0)
+                    throw BinaryNotationException.Unencodable("too many LiNo nodes");
+                var bytes = Encoding.UTF8.GetByteCount(text);
+                if (bytes > stringsLeft) throw BinaryNotationException.Unencodable("too many string bytes");
+                stringsLeft -= bytes;
             }
             if (item.Link.Values is { } children)
             {
@@ -138,7 +148,16 @@ public static class LinoMapping
         {
             encoder.List(document.Select(encoder.Encode).ToList());
         }
-        return encoder.Finish();
+        var packet = encoder.Finish();
+        if ((ulong)packet.Sections.Count > limits.MaxLinks || packet.LinkCount > limits.MaxLinks)
+            throw BinaryNotationException.Unencodable("too many packet links");
+        var referencesLeft = limits.MaxReferences;
+        foreach (var (_, link) in packet.Links())
+        {
+            if ((ulong)link.Length > referencesLeft) throw BinaryNotationException.Unencodable("too many packet references");
+            referencesLeft -= (ulong)link.Length;
+        }
+        return packet;
     }
 
     /// <summary>Converts a packet back into a document.</summary>
@@ -146,6 +165,7 @@ public static class LinoMapping
     {
         ArgumentNullException.ThrowIfNull(packet);
         limits ??= DecodeLimits.Default;
+        limits.Validate();
         var decoder = new Decoder(packet, limits);
         if (decoder.LinkCount == 0)
         {
