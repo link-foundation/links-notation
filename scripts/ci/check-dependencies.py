@@ -147,9 +147,9 @@ def manifests(root=ROOT):
     found = []
 
     def add(path, ecosystem, name, declared, literal=None):
-        if not isinstance(declared, str) or declared.startswith(
-            ("file:", "workspace:", "path:", "git", "http")
-        ):
+        if not isinstance(declared, str):
+            raise ValueError(f"unpinned dependency: {path}: {name}")
+        if declared.startswith(("file:", "workspace:", "path:", "git", "http")):
             return
         found.append(Dependency(path, ecosystem, name, declared, literal or declared))
 
@@ -227,17 +227,28 @@ def manifests(root=ROOT):
                                 add(path, "cargo", name, requirement)
             elif path.name == "requirements.txt":
                 for line in path.read_text().splitlines():
-                    match = re.fullmatch(r"([\w.-]+)([><=~!].*)", line.strip())
-                    if match:
-                        if "python_version < '3.10'" in match[2]:
-                            # setuptools 84 dropped Python 3.9. The compatibility
-                            # floor is checked against the latest 3.9 release.
-                            add(path, "pypi-py39", match[1], match[2])
-                        else:
-                            add(path, "pypi", match[1], match[2])
+                    requirement = line.partition("#")[0].strip()
+                    if not requirement:
+                        continue
+                    match = re.fullmatch(
+                        r"([\w.-]+)(?:\[[^]]+\])?([><=~!].*)", requirement
+                    )
+                    if not match:
+                        raise ValueError(f"unpinned dependency: {path}: {requirement}")
+                    if "python_version < '3.10'" in match[2]:
+                        # setuptools 84 dropped Python 3.9. The compatibility
+                        # floor is checked against the latest 3.9 release.
+                        add(path, "pypi-py39", match[1], match[2])
+                    else:
+                        add(path, "pypi", match[1], match[2])
             elif path.suffix == ".csproj":
                 for element in ET.fromstring(path.read_text()).iter("PackageReference"):
-                    add(path, "nuget", element.get("Include"), element.get("Version"))
+                    add(
+                        path,
+                        "nuget",
+                        element.get("Include"),
+                        element.get("Version") or element.findtext("Version"),
+                    )
             elif path.name == "pom.xml":
                 ns = {"m": "http://maven.apache.org/POM/4.0.0"}
                 tree = ET.fromstring(path.read_text())

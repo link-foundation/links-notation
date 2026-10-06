@@ -129,4 +129,6 @@ and compare identical bytes and canonical text in 300 option/corpus cases.
 An offline dependency regression also reproduced a gate bypass: wildcard
 declarations were skipped, and excluding constraints could be mistaken for a
 current version. The scanner now includes unversioned declarations and requires
-an explicit inclusive minimum. All nine offline gate tests pass.
+an explicit inclusive minimum. A follow-up test also caught unpinned Python
+requirements and NuGet references being skipped; these now fail explicitly.
+All ten offline gate tests pass.

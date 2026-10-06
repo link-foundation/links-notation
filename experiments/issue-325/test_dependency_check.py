@@ -21,6 +21,25 @@ SPEC.loader.exec_module(CHECK)
 
 
 class DependencyCheckTests(unittest.TestCase):
+    def test_unpinned_manifest_requirements_are_rejected(self):
+        for folder, filename, source in (
+            ("python", "requirements.txt", "demo\n"),
+            (
+                "csharp",
+                "Demo.csproj",
+                '<Project><PackageReference Include="Demo" /></Project>',
+            ),
+        ):
+            with (
+                self.subTest(filename=filename),
+                tempfile.TemporaryDirectory() as temporary,
+            ):
+                root = Path(temporary)
+                (root / folder).mkdir()
+                (root / folder / filename).write_text(source)
+                with self.assertRaisesRegex(ValueError, "unpinned dependency"):
+                    CHECK.manifests(root)
+
     def test_unversioned_dependencies_and_excluding_constraints_cannot_bypass_gate(
         self,
     ):
