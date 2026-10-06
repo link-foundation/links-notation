@@ -105,12 +105,12 @@ jobs:
           # scan needs the whole history, not just the tip.
           fetch-depth: 0
       - name: Scan the repository for verified secrets
-        uses: trufflesecurity/trufflehog@v3.98.0
+        uses: trufflesecurity/trufflehog@v3.99.0
         with:
           path: ./
           # The action ref pins the wrapper; this pins the scanner itself,
           # which otherwise resolves to the `latest` image on every run.
-          version: 3.97.1
+          version: 3.99.0
           # --results=verified only reports credentials that the issuing
           # service confirmed are live, which is what makes this safe to fail
           # the build on. Do not add --no-update here: the action already

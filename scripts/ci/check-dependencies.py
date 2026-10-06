@@ -35,6 +35,10 @@ ACTIVE = (
     "examples",
     "scripts/ci",
 )
+# Actions that download a separately released tool and pin it with an input.
+# A stale input is as outdated as a stale action ref, but it is not part of
+# the `uses:` line, so it is listed here explicitly.
+TOOL_INPUTS = {"trufflesecurity/trufflehog": "version"}
 STABLE = re.compile(r"^v?(\d+(?:\.\d+)*)(?:\.RELEASE)?$")
 
 
@@ -107,7 +111,7 @@ def latest(ecosystem, name):
             get("https://repo.maven.apache.org/maven2/" + path + "/maven-metadata.xml")
         )
         return newest(v.text for v in data.findall("./versioning/versions/version"))
-    if ecosystem == "github":
+    if ecosystem in {"github", "github-input"}:
         # gh handles authentication and pagination without exposing credentials.
         result = subprocess.run(
             ["gh", "api", "repos/" + name + "/tags", "--paginate", "--jq", ".[].name"],
@@ -319,6 +323,16 @@ def manifests(root=ROOT):
             add(
                 path, "github", repo.split("/")[0] + "/" + repo.split("/")[1], reference
             )
+        for step in re.split(r"\n\s*- ", path.read_text()):
+            action = re.search(r"uses:\s*([\w.-]+/[\w.-]+)@", step)
+            if action and action[1] in TOOL_INPUTS:
+                pin = re.search(
+                    r"^\s+" + TOOL_INPUTS[action[1]] + r":\s*['\"]?([^\s'\"#]+)",
+                    step,
+                    re.M,
+                )
+                if pin:
+                    add(path, "github-input", action[1], pin[1])
         for match in re.finditer(
             r"npm install -g ([\w.-]+)@([^\s]+)", path.read_text()
         ):
@@ -338,8 +352,10 @@ def manifests(root=ROOT):
 
 
 def registry_literal(dependency, release):
-    if dependency.ecosystem == "github" and dependency.name == "rhysd/actionlint":
-        # The Docker image tag omits the GitHub release tag's leading v.
+    if dependency.ecosystem == "github-input" or (
+        dependency.ecosystem == "github" and dependency.name == "rhysd/actionlint"
+    ):
+        # Docker image tags and tool inputs omit the release tag's leading v.
         return release.removeprefix("v")
     return release
 
@@ -391,6 +407,18 @@ def update(dependency, release):
                 lambda m: m[1] + replacement,
                 source,
             )
+    elif dependency.ecosystem == "github-input":
+        source = re.sub(
+            r"(uses:\s*"
+            + name
+            + r"@[^\n]*\n(?:[ \t]+(?!- )[^\n]*\n)*?[ \t]+"
+            + TOOL_INPUTS[dependency.name]
+            + r":\s*['\"]?)"
+            + re.escape(original)
+            + r"(?=['\"\s]|$)",
+            lambda m: m[1] + registry_literal(dependency, release),
+            source,
+        )
     elif dependency.ecosystem == "npm":
         source = re.sub(
             r"(npm install -g " + name + r"@)" + re.escape(original) + r"(?=\s|$)",

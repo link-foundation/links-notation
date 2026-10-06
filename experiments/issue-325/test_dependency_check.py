@@ -81,6 +81,46 @@ class DependencyCheckTests(unittest.TestCase):
                 workflow.read_text(), "- uses: shivammathur/setup-php@2.37.2\n"
             )
 
+    def test_action_tool_input_is_checked_and_updated(self):
+        # Issue #330: trufflehog's scanner pin (`version:`) went stale while
+        # only the action ref was compared against the latest release.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / ".github/workflows").mkdir(parents=True)
+            workflow = root / ".github/workflows/security.yml"
+            workflow.write_text(
+                "steps:\n"
+                "  - name: Scan\n"
+                "    uses: trufflesecurity/trufflehog@v3.99.0\n"
+                "    with:\n"
+                "      path: ./\n"
+                "      # pins the scanner\n"
+                "      version: 3.97.1\n"
+                "  - uses: actions/setup-node@v7.0.0\n"
+                "    with:\n"
+                "      version: 1.0.0\n"
+            )
+            pins = [
+                (d.ecosystem, d.name, d.literal)
+                for d in CHECK.manifests(root)
+                if d.ecosystem == "github-input"
+            ]
+            self.assertEqual(
+                pins, [("github-input", "trufflesecurity/trufflehog", "3.97.1")]
+            )
+            dependency = CHECK.Dependency(
+                workflow,
+                "github-input",
+                "trufflesecurity/trufflehog",
+                "3.97.1",
+                "3.97.1",
+            )
+            CHECK.update(dependency, "v3.99.0")
+            text = workflow.read_text()
+            self.assertIn("      version: 3.99.0\n", text)
+            self.assertIn("trufflehog@v3.99.0\n", text)
+            self.assertIn("      version: 1.0.0\n", text)
+
     def test_stable_versions_ignore_prereleases_and_sort_numerically(self):
         self.assertEqual(
             CHECK.newest(["v1.9.0", "v1.10.0", "2.0.0-rc1", "stable"]), "1.10.0"
