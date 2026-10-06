@@ -45,6 +45,11 @@ jobs:
       - uses: actions/setup-go@v7.0.0
         with:
           go-version-file: go/go.mod
+          # The module has no dependencies (no go.sum), so the default cache
+          # only produced "Restore cache failed: Dependencies file is not
+          # found" on every run (issue #330). go.yml disables it for the same
+          # reason.
+          cache: false
       - uses: actions/setup-java@v6.0.1
         with:
           distribution: temurin

@@ -181,10 +181,13 @@ jobs:
           distribution: 'temurin'
           cache: maven
           server-id: central
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
+          # setup-java v6 deprecated the unsuffixed names and warned about each
+          # of them on every publish run (issue #330). Same values: these name
+          # the environment variables that hold the secrets.
+          server-username-env-var: MAVEN_USERNAME
+          server-password-env-var: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+          gpg-passphrase-env-var: MAVEN_GPG_PASSPHRASE
       - name: Check if version already published
         id: version-check
         run: |
