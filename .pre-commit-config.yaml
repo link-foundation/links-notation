@@ -14,7 +14,7 @@ repos:
 
   # JavaScript/TypeScript
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v10.9.1
+    rev: v10.12.0
     hooks:
       - id: eslint
         files: \.(js|ts)$
@@ -24,20 +24,20 @@ repos:
 
   # Python
   - repo: https://github.com/psf/black
-    rev: 26.5.1
+    rev: 26.10.0
     hooks:
       - id: black
         language_version: python3
         files: \.py$
 
   - repo: https://github.com/PyCQA/isort
-    rev: 9.0.1
+    rev: 9.0.2
     hooks:
       - id: isort
         files: \.py$
 
   - repo: https://github.com/PyCQA/flake8
-    rev: 7.3.0
+    rev: 7.4.1
     hooks:
       - id: flake8
         files: \.py$

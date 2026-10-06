@@ -1,0 +1,1132 @@
+//! Shared binary links notation conformance tests, adapted from link-cli.
+
+use links_notation::binary::packet::{
+    address_tier, decode_external, encode_external, external_capacity, internal_capacity,
+};
+use links_notation::binary::{
+    decode_document, encode_document, format_document, format_reference, parse_document,
+    ArityRange, BinaryError, BinaryLinoCodec, BinaryLinoOptions, DecodeLimits, LinksPacket,
+    Reference, Section,
+};
+use links_notation::LiNo;
+use std::io::{self, Cursor, Read};
+
+#[test]
+fn string_budget_stops_before_later_scalars() {
+    let packet = LinksPacket::pack(
+        true,
+        &[
+            (
+                6,
+                vec![
+                    Reference::Internal(3),
+                    Reference::External(97),
+                    Reference::External(98),
+                    Reference::External(0xd800),
+                ],
+            ),
+            (7, vec![Reference::Internal(6)]),
+        ],
+        true,
+    )
+    .unwrap();
+    let limits = DecodeLimits {
+        max_string_bytes: 1,
+        ..DecodeLimits::default()
+    };
+    assert!(matches!(
+        decode_document(&packet, &limits),
+        Err(BinaryError::LimitExceeded(_))
+    ));
+}
+
+const CORPUS: &[&str] = &[
+    "() ((1 1))",
+    "((1: 1 1)) ((1: 1 2))",
+    "((1 1)) ()",
+    "((1: 1 1)) ()",
+    "(($i: $s $t)) (($i: $s $t))",
+    "((($index: $source $target)) (($index: $target $source)))",
+    "(a b c d)",
+    "(name: 'with space' \"it's\")",
+    "((a))",
+    "(((a)))",
+    "(a (b c) ((d)))",
+    "1\n2\n3",
+    "hello",
+    "😀 привет 世界",
+    "0",
+    "007",
+    "9223372036854775807",
+    "9223372036854775808",
+    "18446744073709551615",
+    "18446744073709551616",
+    "'multi\nline'",
+    ".dot",
+    "'a''b\"c`d'",
+    "(1: (2: 3 4) 5)",
+    "() ()",
+    "(* *)",
+    "(type: type type)",
+];
+
+fn hex(bytes: &[u8]) -> String {
+    bytes
+        .iter()
+        .map(|byte| format!("{byte:02x}"))
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
+fn unhex(text: &str) -> Vec<u8> {
+    text.split_whitespace()
+        .map(|byte| u8::from_str_radix(byte, 16).unwrap())
+        .collect()
+}
+
+fn references_option(field: &str) -> bool {
+    match field {
+        "plain" => false,
+        "external" => true,
+        other => panic!("unknown references option {other:?}"),
+    }
+}
+
+fn widths_option(field: &str) -> bool {
+    match field {
+        "uniform" => false,
+        "packed" => true,
+        other => panic!("unknown widths option {other:?}"),
+    }
+}
+
+/// `address:reference reference…` separated by `;`, `#v` being external.
+fn parse_links(text: &str) -> Vec<(u64, Vec<Reference>)> {
+    text.split(';')
+        .map(|link| {
+            let (address, references) = link.split_once(':').unwrap();
+            let references = references
+                .split(' ')
+                .map(|reference| match reference.strip_prefix('#') {
+                    Some(value) => Reference::External(value.parse().unwrap()),
+                    None => Reference::Internal(reference.parse().unwrap()),
+                })
+                .collect();
+            (address.parse().unwrap(), references)
+        })
+        .collect()
+}
+
+/// The golden vectors shared with the C# test suite: both implementations
+/// must write and read exactly these bytes.
+fn golden_vectors() -> impl Iterator<Item = Vec<&'static str>> {
+    include_str!("../../../docs/protocol/binary-links-notation-vectors.txt")
+        .lines()
+        .filter(|line| !line.is_empty() && !line.starts_with('#'))
+        .map(|line| line.split('\t').collect())
+}
+
+#[test]
+fn golden_documents_are_stable() {
+    let mut checked = 0;
+    for fields in golden_vectors().filter(|fields| fields[0] == "document") {
+        let [_, text, references, arity, widths, expected] = fields[..] else {
+            panic!("bad document vector {fields:?}");
+        };
+        let text = text.replace("\\n", "\n");
+        let options = BinaryLinoOptions {
+            external_references: references_option(references),
+            arity: arity.parse().unwrap(),
+            packed_widths: widths_option(widths),
+        };
+        let document = parse_document(&text).unwrap();
+        let binary = BinaryLinoCodec::with_options(options);
+        assert_eq!(
+            hex(&binary.encode(&document).unwrap()),
+            expected,
+            "{text:?} with {options:?}"
+        );
+        assert_eq!(binary.decode(&unhex(expected)).unwrap(), document);
+        checked += 1;
+    }
+    assert!(checked >= 80, "only {checked} document vectors");
+}
+
+#[test]
+fn golden_packets_are_stable() {
+    let mut checked = 0;
+    for fields in golden_vectors().filter(|fields| fields[0] == "links") {
+        let [_, links, references, widths, expected] = fields[..] else {
+            panic!("bad links vector {fields:?}");
+        };
+        let links = parse_links(links);
+        let packet =
+            LinksPacket::pack(references_option(references), &links, widths_option(widths))
+                .unwrap();
+        assert_eq!(hex(&packet.to_bytes().unwrap()), expected, "{links:?}");
+        let read = LinksPacket::from_bytes(&unhex(expected), &DecodeLimits::default()).unwrap();
+        assert_eq!(read, packet);
+        let read_links = read
+            .links()
+            .map(|(address, link)| (address, link.to_vec()))
+            .collect::<Vec<_>>();
+        assert_eq!(read_links, links);
+        checked += 1;
+    }
+    assert!(checked >= 10, "only {checked} links vectors");
+}
+
+#[test]
+fn every_option_set_round_trips_the_corpus() {
+    for text in CORPUS {
+        let document = parse_document(text).unwrap();
+        for options in binary_options() {
+            let binary = BinaryLinoCodec::with_options(options);
+            let bytes = binary.encode(&document).unwrap();
+            assert!((0x10..=0x1F).contains(&bytes[0]));
+            assert_eq!(
+                binary.decode(&bytes).unwrap(),
+                document,
+                "{text:?} with {options:?}"
+            );
+        }
+    }
+}
+
+#[test]
+fn canonical_text_round_trips_the_corpus() {
+    for text in CORPUS {
+        let document = parse_document(text).unwrap();
+        let canonical = format_document(&document);
+        assert_eq!(
+            parse_document(&canonical).unwrap(),
+            document,
+            "{text:?} → {canonical:?}"
+        );
+    }
+    assert_eq!(
+        format_document(&parse_document("(()((1 1)))").unwrap()),
+        "() ((1 1))"
+    );
+    assert_eq!(
+        format_document(&parse_document("((1: 1 1)) ((1: 1 2))").unwrap()),
+        "((1: 1 1)) ((1: 1 2))"
+    );
+    let empty_named_link = links_notation::LiNo::Link {
+        id: Some("a".to_string()),
+        values: vec![],
+    };
+    // Only a binary message carries an id without values; links-notation reads its text back as the reference.
+    assert_eq!(format_document(&[empty_named_link]), "(a:)");
+    assert_eq!(
+        parse_document("(a:)").unwrap(),
+        vec![links_notation::LiNo::Ref("a".to_string())]
+    );
+}
+
+#[test]
+fn references_are_quoted_only_when_needed() {
+    assert_eq!(format_reference("plain"), "plain");
+    assert_eq!(format_reference("$x"), "$x");
+    assert_eq!(format_reference(""), "''");
+    assert_eq!(format_reference("a b"), "'a b'");
+    assert_eq!(format_reference("it's"), "\"it's\"");
+    assert_eq!(format_reference("'\""), "`'\"`");
+    assert_eq!(format_reference("'\"`"), "\"\"\"'\"`\"\"\"");
+    for reference in [
+        "",
+        "a b",
+        "a:b",
+        "(x)",
+        "it's",
+        "'\"",
+        "'\"`",
+        "tab\there",
+        "a\nb",
+        "'x",
+        "x'",
+        "'",
+        "''",
+        "'''",
+        "\"'`x`'\"",
+        "a''''b\"\"`",
+        "`'\"\"\"'''``",
+        "(a) ''",
+    ] {
+        let document = parse_document(&format_reference(reference)).unwrap();
+        assert_eq!(format_document(&document), format_reference(reference));
+        assert_eq!(
+            document,
+            vec![links_notation::LiNo::Ref(reference.to_string())]
+        );
+    }
+}
+
+#[test]
+fn width_tiers_follow_the_number_of_links() {
+    assert_eq!(address_tier(0, false).unwrap(), 1);
+    assert_eq!(address_tier(255, false).unwrap(), 1);
+    assert_eq!(address_tier(256, false).unwrap(), 2);
+    assert_eq!(address_tier(65_535, false).unwrap(), 2);
+    assert_eq!(address_tier(65_536, false).unwrap(), 4);
+    assert_eq!(address_tier(u64::from(u32::MAX), false).unwrap(), 4);
+    assert_eq!(address_tier(u64::from(u32::MAX) + 1, false).unwrap(), 8);
+    // External references take the top bit, halving every range.
+    assert_eq!(address_tier(127, true).unwrap(), 1);
+    assert_eq!(address_tier(128, true).unwrap(), 2);
+    assert_eq!(address_tier(32_767, true).unwrap(), 2);
+    assert_eq!(address_tier(32_768, true).unwrap(), 4);
+    assert_eq!(address_tier(u64::MAX, false).unwrap(), 8);
+    // No width holds an internal address in the external half.
+    assert!(matches!(
+        address_tier(1 << 63, true),
+        Err(BinaryError::Unencodable(_))
+    ));
+    assert_eq!(internal_capacity(8, false), u64::MAX);
+    assert_eq!(internal_capacity(8, true), i64::MAX as u64);
+    assert_eq!(external_capacity(1), 127);
+}
+
+#[test]
+fn external_references_match_platform_data_hybrid() {
+    for width in [1u8, 2, 4, 8] {
+        for value in [0, 1, 2, 100, external_capacity(width)] {
+            let raw = encode_external(value, width);
+            assert_eq!(
+                decode_external(raw, width),
+                Some(value),
+                "{value} @ {width}"
+            );
+        }
+        assert_eq!(decode_external(internal_capacity(width, true), width), None);
+    }
+    assert_eq!(encode_external(1, 1), 0xFF);
+    assert_eq!(encode_external(0, 1), 0x80);
+}
+
+fn many_links(count: usize) -> String {
+    // Distinct pairs of distinct names keep every link unique.
+    (0..count)
+        .map(|index| format!("(n{index} m{index})"))
+        .collect::<Vec<_>>()
+        .join("\n")
+}
+
+fn section_widths(packet: &LinksPacket) -> Vec<u8> {
+    packet
+        .sections
+        .iter()
+        .map(|section| section.width)
+        .collect()
+}
+
+#[test]
+fn uniform_widths_grow_past_256_addresses_and_packed_widths_stay_small() {
+    let document = parse_document(&many_links(3)).unwrap();
+    let small = encode_document(&document, BinaryLinoOptions::default()).unwrap();
+    assert_eq!(section_widths(&small), [1]);
+
+    let document = parse_document(&many_links(400)).unwrap();
+    let uniform = encode_document(&document, BinaryLinoOptions::default()).unwrap();
+    assert_eq!(section_widths(&uniform), [2]);
+    let uniform_bytes = uniform.to_bytes().unwrap();
+    let header = 1 + 2; // header byte + two-byte LEB128 count
+    assert_eq!(
+        uniform_bytes.len() as u64,
+        header + uniform.link_count() * 2 * 2
+    );
+
+    let packed = encode_document(
+        &document,
+        BinaryLinoOptions::default().with_packed_widths(true),
+    )
+    .unwrap();
+    assert_eq!(section_widths(&packed)[0], 1);
+    assert!(section_widths(&packed).contains(&2));
+    let packed_bytes = packed.to_bytes().unwrap();
+    assert!(packed_bytes.len() < uniform_bytes.len());
+    let limits = DecodeLimits::default();
+    for bytes in [uniform_bytes, packed_bytes] {
+        let packet = LinksPacket::from_bytes(&bytes, &limits).unwrap();
+        assert_eq!(decode_document(&packet, &limits).unwrap(), document);
+    }
+}
+
+#[test]
+fn packed_widths_never_take_more_bytes_than_uniform_ones() {
+    let mut corpus = CORPUS
+        .iter()
+        .map(|text| text.to_string())
+        .collect::<Vec<_>>();
+    corpus.push(many_links(200));
+    corpus.push("(1000 1)".into());
+    for text in &corpus {
+        let document = parse_document(text).unwrap();
+        for options in binary_options()
+            .into_iter()
+            .filter(|options| options.packed_widths)
+        {
+            let packed = encode_document(&document, options).unwrap();
+            let uniform = encode_document(&document, options.with_packed_widths(false)).unwrap();
+            assert!(
+                packed.to_bytes().unwrap().len() <= uniform.to_bytes().unwrap().len(),
+                "{text:?} with {options:?}"
+            );
+        }
+    }
+}
+
+#[test]
+fn large_external_values_widen_only_their_section() {
+    let options = BinaryLinoOptions::default()
+        .with_external_references(true)
+        .with_packed_widths(true);
+    let packet = encode_document(&parse_document("(100 1)").unwrap(), options).unwrap();
+    assert_eq!(section_widths(&packet), [1]);
+    let packet = encode_document(&parse_document("(70000 1)").unwrap(), options).unwrap();
+    assert_eq!(section_widths(&packet), [4, 1]);
+    // Beyond 63 bits the number falls back to in-band unary links.
+    let packet =
+        encode_document(&parse_document("18446744073709551615").unwrap(), options).unwrap();
+    assert!(packet.link_count() > 60);
+}
+
+#[test]
+fn arity_options_choose_doublets_triplets_or_any_length() {
+    let document = parse_document("(a b c)\n(d e)").unwrap();
+    let arities = |arity: ArityRange| {
+        let options = BinaryLinoOptions::default()
+            .with_external_references(true)
+            .with_arity(arity);
+        let packet = encode_document(&document, options).unwrap();
+        assert_eq!(
+            BinaryLinoCodec::new()
+                .decode(&packet.to_bytes().unwrap())
+                .unwrap(),
+            document
+        );
+        packet
+            .links()
+            .map(|(_, link)| link.len())
+            .collect::<Vec<_>>()
+    };
+    assert!(arities(ArityRange::DOUBLETS)
+        .iter()
+        .all(|&length| length == 2));
+    // `(a b c)` is one triplet; the strings `(String code point)` stay doublets.
+    let triplets = arities(ArityRange::between(2, 3));
+    assert_eq!(triplets.iter().filter(|&&length| length == 3).count(), 1);
+    assert!(triplets.iter().all(|&length| length == 2 || length == 3));
+    assert_eq!(arities(ArityRange::at_least(1)), triplets);
+    // Only any length turns a one-item list, here the root, into one link.
+    let single = parse_document("a").unwrap();
+    let options = BinaryLinoOptions::default().with_external_references(true);
+    let lengths = |options: BinaryLinoOptions| {
+        let packet = encode_document(&single, options).unwrap();
+        packet
+            .links()
+            .map(|(_, link)| link.len())
+            .collect::<Vec<_>>()
+    };
+    assert_eq!(lengths(options), [2, 2, 2, 2]);
+    assert_eq!(
+        lengths(options.with_arity(ArityRange::at_least(1))),
+        [2, 2, 1]
+    );
+    // Long lists only become single links when the range allows their length.
+    let long = parse_document("(a b c d e f g h)").unwrap();
+    for (arity, single_link) in [
+        (ArityRange::between(2, 3), false),
+        (ArityRange::between(2, 8), true),
+        (ArityRange::at_least(2), true),
+    ] {
+        let options = BinaryLinoOptions::default()
+            .with_external_references(true)
+            .with_arity(arity);
+        let packet = encode_document(&long, options).unwrap();
+        let longest = packet.links().map(|(_, link)| link.len()).max().unwrap();
+        assert_eq!(longest == 8, single_link, "{arity}");
+    }
+}
+
+#[test]
+fn arities_without_doublets_are_unencodable() {
+    for arity in [
+        ArityRange::exactly(3),
+        ArityRange::exactly(1),
+        ArityRange::at_least(3),
+    ] {
+        assert!(matches!(
+            encode_document(
+                &parse_document("(a b)").unwrap(),
+                BinaryLinoOptions::default().with_arity(arity)
+            ),
+            Err(BinaryError::Unencodable(_))
+        ));
+    }
+}
+
+#[test]
+fn arity_ranges_parse_and_display() {
+    for (text, range) in [
+        ("2", ArityRange::DOUBLETS),
+        ("2..3", ArityRange::between(2, 3)),
+        ("1..", ArityRange::at_least(1)),
+        ("3..3", ArityRange::exactly(3)),
+    ] {
+        assert_eq!(text.parse::<ArityRange>(), Ok(range));
+    }
+    assert_eq!(ArityRange::between(3, 3).to_string(), "3");
+    assert_eq!(ArityRange::between(2, 3).to_string(), "2..3");
+    assert_eq!(ArityRange::at_least(1).to_string(), "1..");
+    assert_eq!(ArityRange::default(), ArityRange::DOUBLETS);
+    for invalid in ["", "0", "0..2", "3..2", "a", "1..b", "..3", "-1", " 2"] {
+        assert!(invalid.parse::<ArityRange>().is_err(), "{invalid:?}");
+    }
+    assert!(ArityRange::at_least(2).contains(1_000));
+    assert!(!ArityRange::between(2, 3).contains(4));
+    assert!(ArityRange::exactly(2).is_fixed() && !ArityRange::at_least(2).is_fixed());
+}
+
+#[test]
+fn reply_options_follow_the_received_packet() {
+    let document = parse_document("(a b c) 70000").unwrap();
+    let options = BinaryLinoOptions::default()
+        .with_external_references(true)
+        .with_arity(ArityRange::between(2, 3))
+        .with_packed_widths(true);
+    let packet = encode_document(&document, options).unwrap();
+    assert_eq!(BinaryLinoOptions::of_packet(&packet), options);
+    let packet = encode_document(&document, BinaryLinoOptions::default()).unwrap();
+    assert_eq!(
+        BinaryLinoOptions::of_packet(&packet),
+        BinaryLinoOptions::default()
+    );
+}
+
+#[test]
+fn hand_built_packets_decode() {
+    // One doublet (One One) is 2^1 in unary, so `(Number 7)` is the number 2.
+    let links = [(1, 1), (2, 6), (7, 0), (4, 8)]
+        .map(|(source, target)| vec![Reference::Internal(source), Reference::Internal(target)]);
+    let packet = LinksPacket {
+        external_references: false,
+        sections: vec![Section {
+            gap: 5,
+            arity: ArityRange::DOUBLETS,
+            width: 1,
+            links: links.to_vec(),
+        }],
+    };
+    let bytes = packet.to_bytes().unwrap();
+    assert_eq!(hex(&bytes), "10 04 01 01 02 06 07 00 04 08");
+    let protocol = BinaryLinoCodec::new();
+    assert_eq!(format_document(&protocol.decode(&bytes).unwrap()), "2");
+
+    // The same links as a variable section of width 2 use the explicit layout.
+    let packet = LinksPacket {
+        sections: vec![Section {
+            arity: ArityRange::at_least(1),
+            width: 2,
+            ..packet.sections[0].clone()
+        }],
+        ..packet
+    };
+    let bytes = packet.to_bytes().unwrap();
+    assert_eq!(
+        hex(&bytes),
+        "12 01 1d 05 00 04 01 01 00 01 00 01 02 00 06 00 01 07 00 00 00 01 04 00 08 00"
+    );
+    assert_eq!(format_document(&protocol.decode(&bytes).unwrap()), "2");
+}
+
+#[test]
+fn packing_rejects_links_it_cannot_lay_out() {
+    let unencodable = |links: &[(u64, Vec<Reference>)], external_references: bool| {
+        assert!(
+            matches!(
+                LinksPacket::pack(external_references, links, true),
+                Err(BinaryError::Unencodable(_))
+            ),
+            "{links:?}"
+        );
+    };
+    let link = |references: &[u64]| {
+        references
+            .iter()
+            .copied()
+            .map(Reference::Internal)
+            .collect()
+    };
+    unencodable(&[(0, link(&[1]))], false); // address 0 is null
+    unencodable(&[(2, link(&[1])), (1, link(&[1]))], false); // descending
+    unencodable(&[(2, link(&[1])), (2, link(&[1]))], false); // repeated
+    unencodable(&[(1, Vec::new())], false); // no references
+    unencodable(&[(1, vec![Reference::External(1)])], false);
+    unencodable(&[(1, vec![Reference::External(1 << 63)])], true);
+    unencodable(&[(1, link(&[1 << 63]))], true); // the top bit marks externals
+    assert!(LinksPacket::pack(false, &[(1, link(&[u64::MAX]))], true).is_ok());
+}
+
+#[test]
+fn writing_rejects_sections_that_do_not_hold_their_links() {
+    let section = |arity: ArityRange, width: u8, links: Vec<Vec<Reference>>| LinksPacket {
+        external_references: false,
+        sections: vec![Section {
+            gap: 0,
+            arity,
+            width,
+            links,
+        }],
+    };
+    let unencodable = |packet: LinksPacket| {
+        assert!(
+            matches!(packet.to_bytes(), Err(BinaryError::Unencodable(_))),
+            "{packet:?}"
+        );
+    };
+    let pair = vec![Reference::Internal(1), Reference::Internal(1)];
+    unencodable(section(ArityRange::exactly(3), 1, vec![pair.clone()]));
+    unencodable(section(ArityRange::exactly(0), 1, Vec::new()));
+    unencodable(section(ArityRange::between(3, 2), 1, Vec::new()));
+    unencodable(section(ArityRange::exactly(1 << 62), 1, Vec::new()));
+    unencodable(section(ArityRange::DOUBLETS, 3, vec![pair.clone()]));
+    unencodable(section(
+        ArityRange::DOUBLETS,
+        1,
+        vec![vec![Reference::Internal(256), Reference::NULL]],
+    ));
+    let mut gaps = section(ArityRange::DOUBLETS, 1, vec![pair]);
+    gaps.sections[0].gap = u64::MAX;
+    unencodable(gaps);
+}
+
+fn expect_error(bytes: &[u8], limits: DecodeLimits) -> BinaryError {
+    let protocol = BinaryLinoCodec {
+        limits,
+        ..BinaryLinoCodec::default()
+    };
+    protocol.decode(bytes).expect_err("must be rejected")
+}
+
+/// Asserts that `bytes` is rejected as malformed because of `detail`.
+fn assert_malformed(bytes: &[u8], detail: &str) {
+    match expect_error(bytes, DecodeLimits::default()) {
+        BinaryError::Malformed(message) => {
+            assert_eq!(message, detail, "{}", hex(bytes))
+        }
+        other => panic!("{}: {other}", hex(bytes)),
+    }
+}
+
+#[test]
+fn malformed_packets_are_rejected() {
+    // Each case names the exact problem, so none passes for another reason.
+    for (bytes, detail) in [
+        ("", "empty input"),
+        ("20 00", "unsupported binary header byte 0x20"),
+        ("10 01 06 00", "link 6 refers to Internal(6), which is not an earlier link"),
+        ("10 01 07 00", "link 6 refers to Internal(7), which is not an earlier link"),
+        ("10 02 00", "unexpected end of packet"),
+        ("10 00 00", "trailing bytes after the packet"),
+        // A tenth byte above 1, then an eleventh byte.
+        (
+            "10 ff ff ff ff ff ff ff ff ff 7f",
+            "LEB128 value overflows 64 bits",
+        ),
+        (
+            "10 80 80 80 80 80 80 80 80 80 81",
+            "LEB128 value overflows 64 bits",
+        ),
+        ("10 01 01 01", "the root link is not a list"),
+        // The chain ends in marker 2, not null.
+        ("10 02 00 02 04 06", "broken element chain"),
+        ("10 01 04 02", "broken element chain"),
+        ("10 02 02 00 04 06", "marker 2 used as a value"),
+        (
+            "10 03 01 00 06 00 04 07",
+            "marker 1 cannot start a typed value",
+        ),
+        // (Number) alone.
+        (
+            "12 02 14 05 01 20 02 02 06 00 04 07",
+            "a number needs exactly one value",
+        ),
+        ("10 03 05 00 06 00 04 07", "an identified link needs an id"),
+        // (Number 3): marker 3 is no number.
+        ("10 03 02 03 06 00 04 07", "expected a unary number"),
+        // (Number 6) where link 6 is (5 5), not a unary number.
+        (
+            "10 05 05 05 06 00 02 07 08 00 04 09",
+            "expected a unary number",
+        ),
+        // The id is ().
+        (
+            "10 04 00 00 05 06 07 00 04 08",
+            "a link id must be a reference",
+        ),
+        (
+            "16 00",
+            "the explicit layout keeps the header width bits clear",
+        ),
+        ("12 01 04 05 00", "arity must be at least 1"),
+        // A link of 6 in a section of arity 1..2.
+        (
+            "12 01 18 01 01 05 00",
+            "link length outside the section arity 1..2",
+        ),
+        (
+            "12 01 f8 ff ff ff ff ff ff ff ff 01 ff ff ff ff ff ff ff ff ff 01 00",
+            "arity range overflows 64 bits",
+        ),
+        // The gap, then the count.
+        (
+            "12 01 24 ff ff ff ff ff ff ff ff ff 01 01",
+            "addresses overflow 64 bits",
+        ),
+        (
+            "12 01 20 ff ff ff ff ff ff ff ff ff 01",
+            "addresses overflow 64 bits",
+        ),
+        (
+            "12 01 24 06 01 01 01",
+            "a LiNo packet stores its links contiguously from address 6, found link 7 where 6 belongs",
+        ),
+        // A hole.
+        (
+            "12 02 24 05 01 24 01 01 01 01 04 06",
+            "a LiNo packet stores its links contiguously from address 6, found link 8 where 7 belongs",
+        ),
+    ] {
+        assert_malformed(&unhex(bytes), detail);
+    }
+}
+
+#[test]
+fn invalid_code_points_are_rejected() {
+    // (String (0x110000)) is not a valid code point.
+    let links = [
+        vec![Reference::External(0x11_0000), Reference::NULL],
+        vec![Reference::Internal(3), Reference::Internal(6)],
+        vec![Reference::Internal(7), Reference::NULL],
+        vec![Reference::Internal(4), Reference::Internal(8)],
+    ];
+    let links = (6..).zip(links).collect::<Vec<_>>();
+    assert_malformed(
+        &LinksPacket::pack(true, &links, false)
+            .unwrap()
+            .to_bytes()
+            .unwrap(),
+        "invalid code point 1114112",
+    );
+}
+
+#[test]
+fn hostile_packets_hit_limits() {
+    let limited = |bytes: &[u8], limits: DecodeLimits| {
+        assert!(
+            matches!(expect_error(bytes, limits), BinaryError::LimitExceeded(_)),
+            "{}",
+            hex(bytes)
+        );
+    };
+    let few_links = DecodeLimits {
+        max_links: 8,
+        ..DecodeLimits::default()
+    };
+    limited(&[0x10, 0x09], few_links);
+    limited(&[0x12, 0x09], few_links); // more sections than links allowed
+    limited(&[0x12, 0x02, 0x20, 0x05, 0x20, 0x05], few_links); // 10 in all
+    let few_references = DecodeLimits {
+        max_references: 5,
+        ..DecodeLimits::default()
+    };
+    limited(&[0x10, 0x03, 1, 1, 1, 1, 1, 1], few_references);
+    limited(&[0x12, 0x01, 0x18, 0x00, 0x01, 0x05], few_references); // one link of 6
+
+    // A doubling chain `d(k) = (d(k-1) d(k-1))` expands to 2^k nodes.
+    let mut links = vec![vec![Reference::NULL, Reference::NULL]];
+    for address in 6..60u64 {
+        links.push(vec![
+            Reference::Internal(address),
+            Reference::Internal(address),
+        ]);
+    }
+    let last = 5 + links.len() as u64;
+    links.push(vec![Reference::Internal(last), Reference::NULL]);
+    links.push(vec![Reference::Internal(4), Reference::Internal(last + 1)]);
+    let links = (6..).zip(links).collect::<Vec<_>>();
+    let bomb = LinksPacket::pack(false, &links, false).unwrap();
+    let small_budget = DecodeLimits {
+        max_nodes: 1 << 12,
+        ..DecodeLimits::default()
+    };
+    let limit = |bytes: &[u8], limits| expect_error(bytes, limits).to_string();
+    assert_eq!(
+        limit(&bomb.to_bytes().unwrap(), small_budget),
+        "limit exceeded: too many LiNo nodes"
+    );
+
+    let deep = format!("{}x{}", "(y ".repeat(40), ")".repeat(40));
+    let bytes = BinaryLinoCodec::new()
+        .encode(&parse_document(&deep).unwrap())
+        .unwrap();
+    let shallow = DecodeLimits {
+        max_depth: 10,
+        ..DecodeLimits::default()
+    };
+    assert_eq!(
+        limit(&bytes, shallow),
+        "limit exceeded: nesting deeper than 10"
+    );
+
+    let three_links = BinaryLinoCodec::new()
+        .encode(&parse_document("a b c").unwrap())
+        .unwrap();
+    let two_nodes = DecodeLimits {
+        max_nodes: 2,
+        ..DecodeLimits::default()
+    };
+    assert_eq!(
+        limit(&three_links, two_nodes),
+        "limit exceeded: chain too long"
+    );
+    assert!(DecodeLimits::unlimited().max_links == u64::MAX);
+}
+
+/// Fails once with `kind`, then reads `bytes`.
+struct Hiccup {
+    kind: Option<io::ErrorKind>,
+    bytes: Cursor<&'static [u8]>,
+}
+
+impl Hiccup {
+    fn new(kind: io::ErrorKind, bytes: &'static [u8]) -> Self {
+        Self {
+            kind: Some(kind),
+            bytes: Cursor::new(bytes),
+        }
+    }
+}
+
+impl Read for Hiccup {
+    fn read(&mut self, buffer: &mut [u8]) -> io::Result<usize> {
+        match self.kind.take() {
+            Some(kind) => Err(kind.into()),
+            None => self.bytes.read(buffer),
+        }
+    }
+}
+
+#[test]
+fn stream_failures_are_io_errors_and_interruptions_are_retried() {
+    let limits = DecodeLimits::default();
+    let read = |reader: &mut dyn Read| LinksPacket::read_from(reader, &limits);
+
+    let packet = read(&mut Hiccup::new(io::ErrorKind::Interrupted, &[0x10, 0x00]));
+    assert_eq!(packet.unwrap().unwrap().links().count(), 0);
+    // Before the header, then inside the packet.
+    let reset = io::ErrorKind::ConnectionReset;
+    assert!(matches!(
+        read(&mut Hiccup::new(reset, &[])),
+        Err(BinaryError::Io(_))
+    ));
+    assert!(matches!(
+        read(&mut [0x10u8].chain(Hiccup::new(reset, &[]))),
+        Err(BinaryError::Io(_))
+    ));
+}
+
+#[test]
+fn every_short_reference_over_delimiters_round_trips() {
+    let alphabet = ['\'', '"', '`', 'a', ' ', '(', ')', ':'];
+    let mut stack = vec![String::new()];
+    while let Some(reference) = stack.pop() {
+        if !reference.is_empty() {
+            let text = format_reference(&reference);
+            let document = parse_document(&text)
+                .unwrap_or_else(|error| panic!("{reference:?} as {text:?}: {error}"));
+            assert_eq!(
+                document,
+                vec![links_notation::LiNo::Ref(reference.clone())],
+                "{reference:?} as {text:?}"
+            );
+        }
+        if reference.chars().count() < 5 {
+            for character in alphabet {
+                stack.push(format!("{reference}{character}"));
+            }
+        }
+    }
+}
+
+fn binary_options() -> Vec<BinaryLinoOptions> {
+    let mut options = Vec::new();
+    for external_references in [false, true] {
+        for arity in [
+            ArityRange::DOUBLETS,
+            ArityRange::between(2, 3),
+            ArityRange::at_least(1),
+        ] {
+            for packed_widths in [false, true] {
+                options.push(BinaryLinoOptions {
+                    external_references,
+                    arity,
+                    packed_widths,
+                });
+            }
+        }
+    }
+    options
+}
+
+#[test]
+fn comment_references_survive_binary_and_text_round_trips() {
+    for reference in ["#", "#tag", "# with space", "issue#1047"] {
+        let document = vec![links_notation::LiNo::Ref(reference.into())];
+        let codec = BinaryLinoCodec::new();
+        let decoded = codec.decode(&codec.encode(&document).unwrap()).unwrap();
+        assert_eq!(decoded, document);
+        assert_eq!(
+            parse_document(&format_document(&decoded)).unwrap(),
+            document
+        );
+    }
+}
+
+#[test]
+fn text_helpers_preserve_unicode_whitespace_references() {
+    for reference in ["\u{00a0}", "\u{2003}", "\u{2028}"] {
+        let document = vec![links_notation::LiNo::Ref(reference.into())];
+        assert_eq!(parse_document(reference).unwrap(), document);
+        assert_eq!(
+            parse_document(&format_document(&document)).unwrap(),
+            document
+        );
+    }
+}
+
+#[test]
+fn native_parser_groups_round_trip_without_canonicalization() {
+    for text in CORPUS {
+        let document = links_notation::parse_lino_to_links(text).unwrap();
+        for options in binary_options() {
+            let codec = BinaryLinoCodec::with_options(options);
+            assert_eq!(
+                codec.decode(&codec.encode(&document).unwrap()).unwrap(),
+                document
+            );
+        }
+    }
+}
+
+#[test]
+fn stream_packets_are_read_one_at_a_time_and_truncation_is_rejected() {
+    let bytes = BinaryLinoCodec::new()
+        .encode(&parse_document("(a b)").unwrap())
+        .unwrap();
+    for end in 0..bytes.len() {
+        assert!(LinksPacket::from_bytes(&bytes[..end], &DecodeLimits::default()).is_err());
+    }
+    let mut stream = Cursor::new([bytes.as_slice(), bytes.as_slice()].concat());
+    for _ in 0..2 {
+        assert!(
+            LinksPacket::read_from(&mut stream, &DecodeLimits::default())
+                .unwrap()
+                .is_some()
+        );
+    }
+    assert!(
+        LinksPacket::read_from(&mut stream, &DecodeLimits::default())
+            .unwrap()
+            .is_none()
+    );
+}
+
+#[test]
+fn in_memory_packets_obey_limits() {
+    let packet = encode_document(
+        &parse_document("(a b)").unwrap(),
+        BinaryLinoOptions::default(),
+    )
+    .unwrap();
+    for limits in [
+        DecodeLimits {
+            max_links: 0,
+            ..DecodeLimits::default()
+        },
+        DecodeLimits {
+            max_references: 0,
+            ..DecodeLimits::default()
+        },
+    ] {
+        assert!(matches!(
+            decode_document(&packet, &limits),
+            Err(BinaryError::LimitExceeded(_))
+        ));
+    }
+}
+
+#[test]
+fn in_memory_packets_reject_invalid_wire_shapes() {
+    let valid = LinksPacket::pack(true, &[(6, vec![Reference::External(3)])], false).unwrap();
+    let mut invalid_external = valid.clone();
+    invalid_external.external_references = false;
+    let mut invalid_width = valid.clone();
+    invalid_width.sections[0].width = 3;
+    let mut invalid_arity = valid;
+    invalid_arity.sections[0].arity = ArityRange::DOUBLETS;
+    for packet in [invalid_external, invalid_width, invalid_arity] {
+        assert!(matches!(
+            decode_document(&packet, &DecodeLimits::default()),
+            Err(BinaryError::Malformed(_))
+        ));
+    }
+}
+
+#[test]
+fn compact_address_overflow_is_rejected_before_reading_links() {
+    let mut bytes = vec![0x10];
+    links_notation::binary::packet::write_leb128(&mut bytes, u64::MAX);
+    assert!(
+        matches!(LinksPacket::from_bytes(&bytes, &DecodeLimits::unlimited()), Err(BinaryError::Malformed(detail)) if detail.contains("addresses overflow"))
+    );
+}
+
+#[test]
+fn repeated_references_obey_a_total_utf8_expansion_budget() {
+    for reference in ["😀", "12"] {
+        let document = vec![links_notation::LiNo::Ref(reference.into()); 2];
+        for options in binary_options() {
+            let packet = encode_document(&document, options).unwrap();
+            let mut limits = DecodeLimits {
+                max_string_bytes: reference.len() * 2,
+                ..DecodeLimits::default()
+            };
+            assert_eq!(decode_document(&packet, &limits).unwrap(), document);
+            limits.max_string_bytes -= 1;
+            assert!(matches!(
+                decode_document(&packet, &limits),
+                Err(BinaryError::LimitExceeded(_))
+            ));
+        }
+    }
+}
+
+#[test]
+fn invalid_encoder_models_and_address_overflow_are_errors() {
+    let options = BinaryLinoOptions::default().with_arity(ArityRange::between(0, 2));
+    assert!(matches!(
+        encode_document(&[], options),
+        Err(BinaryError::Unencodable(_))
+    ));
+    assert!(matches!(
+        LinksPacket::pack(false, &[(u64::MAX, vec![Reference::NULL])], false),
+        Err(BinaryError::Unencodable(_))
+    ));
+    let mut link = links_notation::LiNo::Ref("a".into());
+    for _ in 0..DecodeLimits::default().max_depth {
+        link = links_notation::LiNo::Link {
+            id: None,
+            values: vec![link],
+        };
+    }
+    assert!(matches!(
+        encode_document(&[link], BinaryLinoOptions::default()),
+        Err(BinaryError::Unencodable(_))
+    ));
+}
+
+#[test]
+fn default_depth_limit_rejects_a_bounded_deep_packet() {
+    let mut links = vec![(6, vec![Reference::NULL, Reference::NULL])];
+    for address in 7..80 {
+        links.push((
+            address,
+            vec![Reference::Internal(address - 1), Reference::NULL],
+        ));
+    }
+    let packet = LinksPacket::pack(false, &links, false).unwrap();
+    assert!(matches!(
+        decode_document(&packet, &DecodeLimits::default()),
+        Err(BinaryError::LimitExceeded(_))
+    ));
+}
+
+#[test]
+fn ids_do_not_add_an_extra_model_nesting_level() {
+    let mut link = links_notation::LiNo::Link {
+        id: Some("id".into()),
+        values: vec![],
+    };
+    for _ in 1..DecodeLimits::default().max_depth {
+        link = links_notation::LiNo::Link {
+            id: None,
+            values: vec![link],
+        };
+    }
+    let document = vec![link];
+    for options in binary_options() {
+        let codec = BinaryLinoCodec::with_options(options);
+        assert_eq!(
+            codec.decode(&codec.encode(&document).unwrap()).unwrap(),
+            document
+        );
+    }
+}
+
+#[test]
+fn codec_encoder_uses_configured_limits() {
+    let document = vec![LiNo::Link {
+        id: Some("abcdef".into()),
+        values: vec![LiNo::Ref("value".into())],
+    }];
+    for limits in [
+        DecodeLimits {
+            max_nodes: 1,
+            ..DecodeLimits::default()
+        },
+        DecodeLimits {
+            max_string_bytes: 2,
+            ..DecodeLimits::default()
+        },
+        DecodeLimits {
+            max_depth: 1,
+            ..DecodeLimits::default()
+        },
+        DecodeLimits {
+            max_links: 1,
+            ..DecodeLimits::default()
+        },
+        DecodeLimits {
+            max_references: 1,
+            ..DecodeLimits::default()
+        },
+    ] {
+        assert!(BinaryLinoCodec {
+            limits,
+            ..BinaryLinoCodec::new()
+        }
+        .encode(&document)
+        .is_err());
+    }
+    let mut deep = LiNo::Ref("a".into());
+    for _ in 0..70 {
+        deep = LiNo::Link {
+            id: None,
+            values: vec![deep],
+        };
+    }
+    let document = vec![deep];
+    let codec = BinaryLinoCodec {
+        limits: DecodeLimits {
+            max_depth: 80,
+            ..DecodeLimits::default()
+        },
+        ..BinaryLinoCodec::new()
+    };
+    assert_eq!(
+        codec.decode(&codec.encode(&document).unwrap()).unwrap(),
+        document
+    );
+}

@@ -713,3 +713,9 @@ cargo clippy
 
 These checks are also enforced in CI. Pull requests with formatting issues will
 fail the format check.
+
+## Binary links notation
+
+`links_notation::binary` provides version 1 packet and LiNo document codecs.
+See the [shared specification](../../docs/protocol/binary-links-notation.md) and
+[cross-language example](../../examples/binary/README.md) for APIs and options.

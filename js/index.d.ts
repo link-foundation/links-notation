@@ -470,3 +470,94 @@ export function formatLinks(
   links: Link[],
   lessParentheses?: boolean | FormatOptions | FormatConfig
 ): string;
+
+/** Binary links notation v1: bigint preserves unsigned 64-bit references. */
+export class External {
+  value: bigint;
+  constructor(value: bigint | number);
+}
+export class ArityRange {
+  min: bigint;
+  max: bigint | null;
+  constructor(min?: bigint | number, max?: bigint | number | null);
+  contains(length: bigint | number): boolean;
+  readonly fixed: boolean;
+  static parse(text: string): ArityRange;
+}
+export interface BinaryLimits {
+  maxLinks: number;
+  maxReferences: number;
+  maxNodes: number;
+  maxStringBytes: number;
+  maxDepth: number;
+}
+export class DecodeLimits implements BinaryLimits {
+  maxLinks: number;
+  maxReferences: number;
+  maxNodes: number;
+  maxStringBytes: number;
+  maxDepth: number;
+  constructor(values?: Partial<BinaryLimits>);
+  static unlimited(): DecodeLimits;
+}
+export class BinaryLinoOptions {
+  externalReferences: boolean;
+  arity: ArityRange;
+  packedWidths: boolean;
+  constructor(
+    externalReferences?: boolean,
+    arity?: ArityRange,
+    packedWidths?: boolean
+  );
+  static ofPacket(packet: LinksPacket): BinaryLinoOptions;
+}
+export type PacketReference = bigint | number | External;
+export type AddressedLink = [bigint | number, PacketReference[]];
+export class Section {
+  gap: bigint;
+  arity: ArityRange;
+  width: number;
+  links: PacketReference[][];
+  constructor(
+    gap: bigint | number,
+    arity: ArityRange,
+    width: number,
+    links: PacketReference[][]
+  );
+}
+export class PacketReader {
+  bytes: Uint8Array;
+  offset: number;
+  constructor(bytes: Uint8Array, offset?: number);
+  read(limits?: DecodeLimits): LinksPacket | null;
+}
+export class LinksPacket {
+  externalReferences: boolean;
+  sections: Section[];
+  constructor(externalReferences?: boolean, sections?: Section[]);
+  links(): [bigint, (bigint | External)[]][];
+  validate(limits?: DecodeLimits): this;
+  toBytes(limits?: DecodeLimits): Uint8Array;
+  static fromBytes(bytes: Uint8Array, limits?: DecodeLimits): LinksPacket;
+  static parseLinks(text: string): [bigint, (bigint | External)[]][];
+  static pack(
+    externalReferences: boolean,
+    links: AddressedLink[],
+    packedWidths?: boolean
+  ): LinksPacket;
+}
+export class BinaryLinoCodec {
+  options: BinaryLinoOptions;
+  limits: DecodeLimits;
+  constructor(options?: BinaryLinoOptions, limits?: DecodeLimits);
+  encodePacket(document: Link[]): LinksPacket;
+  encode(document: Link[]): Uint8Array;
+  decodePacket(packet: LinksPacket): Link[];
+  decode(bytes: Uint8Array): Link[];
+  parseDocument(text: string, parser?: Parser): Link[];
+  formatDocument(document: Link[]): string;
+  encodeText(text: string, parser?: Parser): Uint8Array;
+  decodeText(bytes: Uint8Array): string;
+}
+export function formatBinaryDocument(document: Link[]): string;
+export function formatBinaryReference(reference: string): string;

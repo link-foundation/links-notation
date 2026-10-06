@@ -384,6 +384,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   not in the message, so a caller that printed the message lost it
   ([#302](https://github.com/link-foundation/links-notation/issues/302))
 
+## [0.23.0] - 2026-10-06
+
+### Added
+
+- Shared binary links notation version 1 specification and 96 golden vectors.
+- Packet codecs and marker-point LiNo mapping in all seven languages, compatible with
+  link-cli, with arity ranges, external references and packed widths.
+- Seven-language binary interoperability CI, native-model round trips, packet streams,
+  malformed-input checks and configurable expansion/depth limits.
+- Daily stable-dependency check for all active manifests and GitHub Actions,
+  with daily Dependabot updates for packages, benchmarks and documentation tools.
+
+### Fixed
+
+- Preserve `#` and Unicode whitespace references in binary text helpers.
+- Enforce caller resource limits during Rust and C# encoding as well as decoding.
+- Update direct dependencies and actions to their latest stable releases.
+- Refresh vulnerable `brace-expansion` entries in the JS and website lockfiles.
+
 ## [0.11.2] - 2024-XX-XX
 
 ### Added

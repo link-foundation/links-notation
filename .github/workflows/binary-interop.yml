@@ -1,0 +1,60 @@
+name: binary interoperability
+
+on:
+  pull_request:
+    paths:
+      - 'rust/**'
+      - 'csharp/**'
+      - 'js/**'
+      - 'python/**'
+      - 'go/**'
+      - 'java/**'
+      - 'php/**'
+      - 'docs/protocol/**'
+      - 'examples/binary/**'
+      - '.github/workflows/binary-interop.yml'
+  push:
+    branches: main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  seven-languages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-dotnet@v6.0.0
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: go/go.mod
+      - uses: actions/setup-java@v6.0.1
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: shivammathur/setup-php@2.37.2
+        with:
+          php-version: '8.4'
+          extensions: mbstring
+          tools: composer
+      - name: Install PHP autoloader
+        run: composer install --working-dir=php --no-dev --no-interaction
+      - name: Compare bytes and decoded text in all seven languages
+        run: bash examples/binary/run-interop.sh

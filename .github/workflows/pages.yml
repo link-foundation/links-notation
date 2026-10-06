@@ -52,13 +52,13 @@ jobs:
     outputs:
       isDocsFilesChanged: ${{ steps.setIsDocsFilesChangedOutput.outputs.isDocsFilesChanged }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
       - name: Get changed files using defaults
         id: changed-files
-        uses: tj-actions/changed-files@v47
+        uses: tj-actions/changed-files@v47.0.6
       - name: Set output isDocsFilesChanged
         id: setIsDocsFilesChangedOutput
         env:
@@ -88,12 +88,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.0.0
         with:
           node-version: '22'
           cache: 'npm'
@@ -136,10 +136,10 @@ jobs:
       # rather than on main, but only pushes to main upload and deploy.
       - name: Setup Pages
         if: github.event_name != 'pull_request'
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@v6.0.0
       - name: Upload artifact
         if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: docs/website/dist
 
@@ -160,4 +160,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v5.0.1

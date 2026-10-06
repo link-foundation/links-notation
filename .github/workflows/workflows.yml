@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       # The Docker image bundles shellcheck and pyflakes, so this also lints
@@ -38,7 +38,7 @@ jobs:
       # actionlint that has shellcheck on PATH: without it, actionlint silently
       # skips the shell checks and exits clean on scripts this job rejects.
       - name: Run actionlint
-        uses: docker://rhysd/actionlint:1.7.7
+        uses: docker://rhysd/actionlint:1.7.12
         with:
           args: -color
 
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       # actionlint only reaches shell that is inlined in a `run:` block, so the
@@ -72,15 +72,15 @@ jobs:
       # Required so zizmor can resolve the actions the workflows reference.
       actions: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.13'
       - name: Install zizmor
-        run: pip install zizmor==1.29.0
+        run: pip install -r scripts/ci/requirements.txt
       # Fails on medium and above. The informational findings that remain are
       # `template-injection` on this repository's own step outputs and
       # `use-trusted-publishing` on the PyPI token, which is the documented

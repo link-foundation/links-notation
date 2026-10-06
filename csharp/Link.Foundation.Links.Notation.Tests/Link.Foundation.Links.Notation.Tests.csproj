@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Link.Foundation.Links.Notation\Link.Foundation.Links.Notation.csproj" />
+    <None Include="../../docs/protocol/binary-links-notation-vectors.txt" Link="Protocol/binary-links-notation-vectors.txt" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

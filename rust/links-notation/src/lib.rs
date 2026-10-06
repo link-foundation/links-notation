@@ -1,3 +1,4 @@
+pub mod binary;
 pub mod comments;
 pub mod format_config;
 pub mod parser;

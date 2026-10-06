@@ -1,10 +1,13 @@
 [build-system]
-requires = ["setuptools>=77.0"]
+requires = [
+    "setuptools>=84.0.0; python_version >= '3.10'",
+    "setuptools>=82.0.1; python_version < '3.10'",
+]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "links-notation"
-version = "0.22.0"
+version = "0.23.0"
 description = "Python implementation of the Links Notation parser"
 readme = "README.md"
 license = "Unlicense"
@@ -29,9 +32,9 @@ requires-python = ">=3.9"
 dependencies = []
 
 [project.optional-dependencies]
-test = ["pytest>=9.1", "pytest-timeout>=2.4"]
-lint = ["black>=26.5", "isort>=9.0", "flake8>=7.3"]
-dev = ["pytest>=9.1", "pytest-timeout>=2.4", "black>=26.5", "isort>=9.0", "flake8>=7.3"]
+test = ["pytest>=9.1.1", "pytest-timeout>=2.4.0"]
+lint = ["black>=26.10.0", "isort>=9.0.2", "flake8>=7.4.1"]
+dev = ["pytest>=9.1.1", "pytest-timeout>=2.4.0", "black>=26.10.0", "isort>=9.0.2", "flake8>=7.4.1"]
 
 [project.urls]
 Homepage = "https://github.com/link-foundation/links-notation"

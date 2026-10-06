@@ -1,6 +1,6 @@
 [package]
 name = "links-notation"
-version = "0.22.0"
+version = "0.23.0"
 edition = "2021"
 description = "Rust implementation of the Links Notation parser"
 license = "Unlicense"
@@ -13,7 +13,7 @@ name = "links_notation"
 path = "src/lib.rs"
 
 [dependencies]
-nom = "8.0"
+nom = "8.0.0"
 links-notation-macro = { path = "../links-notation-macro", version = "0.1.0", optional = true }
 
 [features]

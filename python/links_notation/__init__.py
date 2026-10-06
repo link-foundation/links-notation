@@ -10,6 +10,17 @@ from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as _distribution_version
 from pathlib import Path
 
+from .binary import (
+    ArityRange,
+    BinaryLinoCodec,
+    BinaryLinoOptions,
+    DecodeLimits,
+    External,
+    LinksPacket,
+    Section,
+)
+from .binary import format_document as format_binary_document
+from .binary import format_reference as format_binary_reference
 from .comments import strip_comments
 from .format_config import FormatConfig
 from .formatter import format_links
@@ -47,6 +58,15 @@ def _read_version() -> str:
 __version__ = _read_version()
 
 __all__ = [
+    "ArityRange",
+    "BinaryLinoCodec",
+    "BinaryLinoOptions",
+    "DecodeLimits",
+    "External",
+    "LinksPacket",
+    "Section",
+    "format_binary_document",
+    "format_binary_reference",
     "DEFAULT_MAX_DEPTH",
     "Link",
     "ParseError",

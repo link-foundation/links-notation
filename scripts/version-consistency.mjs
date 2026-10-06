@@ -18,7 +18,21 @@ import { declaredVersions, read, match } from './declared-versions.mjs';
 // exactly what both Java READMEs (0.1.0) and both PHP ones ("^0.1") did while
 // every implementation declared 0.17.0. Checked here rather than corrected once
 // because a literal that nothing verifies drifts again on the next release.
-const documentedVersions = [
+// Benchmark dependencies must measure the working-tree release too. Otherwise
+// the Java benchmark requests an older artifact instead of the one CI installs.
+const versionReferences = [
+  {
+    of: 'java',
+    file: 'benchmarks/java/pom.xml',
+    what: 'the parser dependency',
+    re: /<artifactId>links-notation<\/artifactId>\s*<version>([^<]+)<\/version>/,
+  },
+  {
+    of: 'rust',
+    file: 'rust/links-notation-benchmark/Cargo.toml',
+    what: 'the parser dependency',
+    re: /links-notation\s*=\s*\{\s*version\s*=\s*"([^"]+)"/,
+  },
   {
     of: 'java',
     file: 'java/README.md',
@@ -91,7 +105,7 @@ if (byVersion.size > 1) {
   console.log(`\nAll ${declared.size} implementations declare ${[...byVersion.keys()][0]}.`);
 }
 
-for (const { of, file, what, re, expected } of documentedVersions) {
+for (const { of, file, what, re, expected } of versionReferences) {
   const version = declared.get(of);
   if (version === undefined) continue; // its declared version already failed above
   const want = expected ? expected(version) : version;
@@ -104,7 +118,7 @@ for (const { of, file, what, re, expected } of documentedVersions) {
     continue;
   }
   if (found !== want) {
-    console.log(`::error::${file}: ${what} installs ${found}, but ${of} declares ${version}`);
+    console.log(`::error::${file}: ${what} uses ${found}, but ${of} declares ${version}`);
     failed = true;
   }
 }
