@@ -139,7 +139,8 @@ jobs:
 
   pushToNuget:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # Must outlast the 20 minute registry wait below plus the build.
+    timeout-minutes: 35
     needs: [findChangedCsFiles, test]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     concurrency:
@@ -226,10 +227,13 @@ jobs:
           # NuGet.org indexes asynchronously; poll rather than assume success.
           # The flat container exposes one document per package, so the body
           # has to be matched -- a 200 only proves the package exists at all.
+          # 0.23.0 took 7 minutes, most of the old 10 minute window, and
+          # NuGet.org validation can take longer (issue #330). 40 x 30s = 20
+          # minutes.
           wait_for_registry_match \
             "${PACKAGE_ID}@${PACKAGE_VERSION} on NuGet.org" \
             "https://api.nuget.org/v3-flatcontainer/${PACKAGE_ID_LOWER}/index.json" \
-            "\"${PACKAGE_VERSION}\"" 20 30
+            "\"${PACKAGE_VERSION}\"" 40 30
 
   generatePdfWithCode:
     runs-on: ubuntu-latest
@@ -314,7 +318,11 @@ jobs:
     # Gate on what actually happened, not on the job result: a job that skipped
     # its publish step (missing credential, or nothing new to push) still
     # reports `success`, which is how green runs shipped no package at all.
-    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && needs.pushToNuget.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    # `skipped` means the version is already on the registry: the release step
+    # is idempotent, so this backfills a release that an earlier run published
+    # but never tagged (its verify step timed out, say; issue #330). Missing
+    # credentials report `failed` and still withhold the release.
+    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && (needs.pushToNuget.outputs.published == 'true' || needs.pushToNuget.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:

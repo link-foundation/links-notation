@@ -252,7 +252,7 @@ jobs:
     timeout-minutes: 10
     needs: [findChangedJavaFiles, publishToMavenCentral]
     # See csharp.yml: gate on what was published, not on the job result.
-    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && needs.publishToMavenCentral.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && (needs.publishToMavenCentral.outputs.published == 'true' || needs.publishToMavenCentral.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:

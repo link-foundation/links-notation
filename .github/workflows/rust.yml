@@ -267,7 +267,7 @@ jobs:
     needs: [findChangedRustFiles, publishToCratesIO]
     # See csharp.yml: `result == 'success'` is true for a job that published
     # nothing, so the gate is the explicit `published` output instead.
-    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && needs.publishToCratesIO.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && (needs.publishToCratesIO.outputs.published == 'true' || needs.publishToCratesIO.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:

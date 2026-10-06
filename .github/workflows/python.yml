@@ -128,7 +128,8 @@ jobs:
     needs: [findChangedPythonFiles, test]
     if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # Must outlast the 10 minute registry wait below plus the build.
+    timeout-minutes: 25
     concurrency:
       group: ${{ github.workflow }}-publish-pypi
       cancel-in-progress: false
@@ -216,16 +217,18 @@ jobs:
           set -euo pipefail
           # shellcheck source=scripts/ci/registry-probe.sh
           . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          # 0.23.0 took over a minute to appear, half of the old 150
+          # second window (issue #330). 40 x 15s = 10 minutes.
           wait_for_registry \
             "${PACKAGE_NAME}@${PACKAGE_VERSION} on PyPI" \
-            "https://pypi.org/pypi/${PACKAGE_NAME}/${PACKAGE_VERSION}/json" 10 15
+            "https://pypi.org/pypi/${PACKAGE_NAME}/${PACKAGE_VERSION}/json" 40 15
 
   publishRelease:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: [findChangedPythonFiles, publishToPyPI]
     # See csharp.yml: gate on what was published, not on the job result.
-    if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && needs.publishToPyPI.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && (needs.publishToPyPI.outputs.published == 'true' || needs.publishToPyPI.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:

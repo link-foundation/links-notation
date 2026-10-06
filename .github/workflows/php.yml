@@ -235,7 +235,7 @@ jobs:
     timeout-minutes: 10
     needs: [findChangedPhpFiles, publishToPackagist]
     # See csharp.yml: gate on what was published, not on the job result.
-    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' && needs.publishToPackagist.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' && (needs.publishToPackagist.outputs.published == 'true' || needs.publishToPackagist.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:
