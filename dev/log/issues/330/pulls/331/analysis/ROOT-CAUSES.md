@@ -22,20 +22,40 @@ inventory, and `warnings.txt` holds the log-only warnings. The findings fall int
   (`docs/comparison`, `benchmarks/js`, `benchmarks/tools`) do not contain `brace-expansion`.
 - **Classification:** true positive. No change to the gate was needed.
 
-### E2. lychee rate-limited by github.com
+### E2. lychee: github.com rate limiting, and 5xx answers that are never retried
 
 - **Run:** links 37329071552 (schedule, 2026-10-05). 2068 links checked, 2052 successful,
-  7 errors, all 429 or 502 from `github.com/link-foundation/links-notation/actions?workflow=...`
-  badge targets in `README*.md` and `go/README*.md`. A 503 came from codefactor.io.
-- **Root cause:** lychee's defaults are 10 concurrent requests per host, 50 ms apart. That burst
-  trips GitHub's secondary rate limit for unauthenticated HTML pages. The pages exist, so this
-  was a **false positive**. lychee printed the fix itself: a `[hosts."github.com"]` section.
-- **Fix (`9a02947`):** `lychee.toml` sets `concurrency = 2` and `request_interval = "1s"` for
-  `github.com`, and accepts `429` after lychee's own retries. The same commit drops a stale
-  `.lycheeignore` entry for the C# Pages site, which serves 200 now, so the exclusion only hid
-  regressions. It also replaces two redirecting URLs with their targets.
-- **Templates:** rust, csharp and php have the same defect. js and python are partly affected.
-  See `../templates/COMPARISON.md` Q4.
+  7 errors:
+  - 3 from `github.com/link-foundation/links-notation/actions?workflow=...` badge targets: one
+    `429` and two `502`;
+  - 4 `503`s from `www.codefactor.io` badge links in `README.md` and `README.ru.md`.
+
+  The links runs before (`36501019166`) and after (`37486124238`) passed, and every one of these
+  URLs answers 200 now. This was a **false positive**.
+- **Root cause, part 1:** lychee's defaults are 10 concurrent requests per host, 50 ms apart.
+  That burst trips GitHub's secondary rate limit for unauthenticated HTML pages. lychee printed
+  the fix itself: a `[hosts."github.com"]` section.
+- **Root cause, part 2:** lychee never retries a 5xx answer, whatever `--max-retries` says. A
+  rejected status reaches the retry loop as `ErrorKind::RejectedStatusCode`, and
+  `ErrorKind::should_retry` (`lychee-lib/src/retry.rs`) only matches `429`. The
+  `is_server_error()` branch only applies to transport-level `reqwest` errors. So one short
+  outage of any linked host fails the run. Measured with
+  `experiments/issue-330/lychee-5xx-retry.sh`: a 503 link gets exactly one request under
+  `--max-retries 3`. The same cause was found independently in a comment on
+  lycheeverse/lychee#2193.
+- **Fix, part 1 (`9a02947`):** `lychee.toml` sets `concurrency = 2` and `request_interval = "1s"`
+  for `github.com`, and accepts `429` after lychee's own retries. The same commit:
+  - drops a stale `.lycheeignore` entry for the C# Pages site, which serves 200 now, so the
+    exclusion only hid regressions;
+  - replaces two redirecting URLs with their targets.
+- **Fix, part 2 (`c04967e`):** when lychee fails, `links.yml` waits 120 s and runs it again with
+  the same arguments. lychee never caches an error (`lychee-bin/src/cache.rs`), so with
+  `--cache` the second pass re-requests only the failed links, and a dead link still fails it.
+  The experiment shows both halves: the recovered link passes, and the 404 does not.
+- **Templates:** rust, csharp and php have both defects. Their recheck scripts treat every failure
+  that carries a status code as final. The original reports covered the 429 part, and a
+  correction comment on each added the 5xx part. js and python already retry 429 and 5xx in their
+  recheck scripts. See `../templates/COMPARISON.md` Q4.
 
 ### E3. dependency freshness: trufflehog released
 

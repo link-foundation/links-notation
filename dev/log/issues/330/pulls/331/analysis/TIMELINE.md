@@ -10,7 +10,7 @@ the full logs are in `../ci-logs/<workflow>-<id>.log`.
 | 2026-09-29 00:01 | `7cbc162` (merge of PR #319) becomes the tip of `main`; it stays the tip for a week. | `git log` |
 | 2026-09-29 23:45 | GitHub publishes three advisories against `brace-expansion` 4.0.0–5.0.11: GHSA-qhr7-859c-m2p7 (high), GHSA-6j4f-fj2g-mc7p (high), GHSA-q2hr-2g5m-vwhr (medium). | `gh api /advisories/<id>` |
 | 2026-10-05 14:15 | Scheduled **security** run 37323195458 fails: `npm audit --package-lock-only --audit-level=high` in `js` and `docs/website`. Nothing in the repository changed; the advisory did. | `security-37323195458.log` |
-| 2026-10-05 14:58 | Scheduled **links** run 37329071552 fails: 2068 links, 7 errors, every one a 429 or 502 from `github.com/.../actions?workflow=...` badge links. lychee itself prints the hint to add a `[hosts."github.com"]` section. | `links-37329071552.log` |
+| 2026-10-05 14:58 | Scheduled **links** run 37329071552 fails: 2068 links, 7 errors. Three come from `github.com/.../actions?workflow=...` badge links (one 429, two 502), and four are `503`s from codefactor.io badges. lychee itself prints the hint to add a `[hosts."github.com"]` section. It never retried the 5xx answers. | `links-37329071552.log` |
 | 2026-10-05 17:39 | trufflehog v3.98.0 released. | GitHub releases API |
 | 2026-10-05 22:44–22:45 | Dependabot PRs #327 (eslint) and #328 (`brace-expansion` 5.0.12 in `docs/website`) merged. | `gh pr list --state merged` |
 | 2026-10-06 11:57 | trufflehog v3.98.1 released. | GitHub releases API |
@@ -54,6 +54,8 @@ the full logs are in `../ci-logs/<workflow>-<id>.log`.
 | `bf9ccdc` | All runners pinned to `ubuntu-24.04`, with a guard against `-latest`. |
 | `bb1b7fe` | CodeQL configuration excluding `experiments/`, `dev/log/`, `benchmarks/java`. |
 | `1ebcb5c` | rust publish job deletes `target/package` before rust-cache saves, removing the four ENOENT error annotations. |
+| `91fb37c` | This case study. |
+| `c04967e` | links: when lychee fails, wait 120 s and check again, because lychee never retries a 5xx answer. |
 
 The CI runs on `bb1b7fe` confirm the CodeQL change: the Rust "no manifest found" warnings and the
 Java "POM ... is missing" warning are gone, and the C# extractor restores 7 projects instead of 18

@@ -5,3 +5,6 @@ csharp https://github.com/link-foundation/csharp-ai-driven-development-pipeline-
 php https://github.com/link-foundation/php-ai-driven-development-pipeline-template/issues/18
 java https://github.com/link-foundation/java-ai-driven-development-pipeline-template/issues/12
 go https://github.com/link-foundation/go-ai-driven-development-pipeline-template/issues/11
+rust-comment https://github.com/link-foundation/rust-ai-driven-development-pipeline-template/issues/187#issuecomment-6026216947
+csharp-comment https://github.com/link-foundation/csharp-ai-driven-development-pipeline-template/issues/68#issuecomment-6026217327
+php-comment https://github.com/link-foundation/php-ai-driven-development-pipeline-template/issues/18#issuecomment-6026217636

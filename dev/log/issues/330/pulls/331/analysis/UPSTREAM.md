@@ -17,6 +17,16 @@ reproduction, a workaround and a proposed code change. The bodies are in `../ups
 | java | [java-ai-driven-development-pipeline-template#12](https://github.com/link-foundation/java-ai-driven-development-pipeline-template/issues/12) | A failed release is never retried: the tag is pushed before the GitHub release, and nothing self-heals. `ubuntu-latest`. Outdated pins. |
 | go | [go-ai-driven-development-pipeline-template#11](https://github.com/link-foundation/go-ai-driven-development-pipeline-template/issues/11) | Same as java. |
 
+The rust, csharp and php reports originally said all seven failed links were github.com. Four were
+codefactor.io 503s, and lychee never retries a 5xx. A correction comment with the reproduction and
+the second-pass fix was added to each:
+
+- [rust#187 comment](https://github.com/link-foundation/rust-ai-driven-development-pipeline-template/issues/187#issuecomment-6026216947)
+- [csharp#68 comment](https://github.com/link-foundation/csharp-ai-driven-development-pipeline-template/issues/68#issuecomment-6026217327)
+- [php#18 comment](https://github.com/link-foundation/php-ai-driven-development-pipeline-template/issues/18#issuecomment-6026217636)
+
+The comment body is in `../upstream/lychee-5xx-correction.md`.
+
 Defects found here but **not** reported to templates, because no template has them:
 
 - The C# PDF's pdfLaTeX Unicode failure. The csharp template has no PDF job.
@@ -32,6 +42,7 @@ links are recorded so the workarounds can be removed once upstream ships a fix.
 | Finding | Upstream | State on 2026-10-06 | Local handling |
 | --- | --- | --- | --- |
 | P1: rust-cache reports un-awaited `ENOENT` rejections as errors | [Swatinem/rust-cache#193](https://github.com/Swatinem/rust-cache/issues/193), fix in [Swatinem/rust-cache#387](https://github.com/Swatinem/rust-cache/pull/387) | both open | `rm -rf target/package` before the post step (`1ebcb5c`) |
+| E2: lychee never retries a rejected 5xx answer | [lycheeverse/lychee#2193](https://github.com/lycheeverse/lychee/issues/2193), [diagnosis comment](https://github.com/lycheeverse/lychee/issues/2193#issuecomment-4939349025) | open; the commenter asked the maintainers which direction to take | a second lychee pass after 120 s (`c04967e`) |
 | W5: CodeQL C# `No NuGet feeds are reachable` | [github/codeql#22766](https://github.com/github/codeql/issues/22766) | open | none; informational |
 | W6: `DEP0005 Buffer()` in `actions/download-artifact` | [actions/download-artifact#484](https://github.com/actions/download-artifact/issues/484), [#381](https://github.com/actions/download-artifact/issues/381), [actions/toolkit#2003](https://github.com/actions/toolkit/issues/2003), [mhr3/unzip-stream#38](https://github.com/mhr3/unzip-stream/issues/38), [#55](https://github.com/mhr3/unzip-stream/issues/55) | open | none; the action is already at its latest release |
 | W7: `DEP0040 punycode` in `actions/deploy-pages` | [actions/deploy-pages#434](https://github.com/actions/deploy-pages/issues/434), [#413](https://github.com/actions/deploy-pages/issues/413), [actions/toolkit#2173](https://github.com/actions/toolkit/issues/2173) | open | none; the action is already at its latest release |

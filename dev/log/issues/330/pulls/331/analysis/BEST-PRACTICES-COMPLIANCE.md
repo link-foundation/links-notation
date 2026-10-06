@@ -22,7 +22,7 @@ changed in this pull request.
 | 9 | Release automation | **Fixed here** | Verify windows sized from measured registry delays (`5187c7e`). Releases backfilled on `published=skipped`, and the audit detects missing releases (`f2165be`). This closes the "published but never released" hole. |
 | 10 | Concurrency control | Compliant | Per-job groups that cancel superseded runs except on `main`. Publish jobs use `cancel-in-progress: false`. |
 | 11 | Secrets detection | **Fixed here** | trufflehog `--results=verified`. The scanner image itself is now pinned and tracked (`ed6272d`); before, it ran `latest`. |
-| 12 | Documentation validation | **Fixed here** | lychee no longer fails on GitHub's rate limiting (`9a02947`). The C# code PDF builds again and is checked on pull requests (`8790d23`). |
+| 12 | Documentation validation | **Fixed here** | lychee no longer fails on GitHub's rate limiting (`9a02947`), and failed links get one more check after a pause, because lychee never retries a 5xx (`c04967e`). The C# code PDF builds again and is checked on pull requests (`8790d23`). |
 | 13 | Native runners per architecture | Not applicable | No container images. |
 | 14 | Lint the workflows | Compliant (extended) | actionlint as the Docker image (shellcheck included), zizmor at medium, and now the runner-pin guard. |
 | 15 | Audit the dependency tree | Compliant for npm, partial otherwise | `npm audit --package-lock-only --audit-level=high` on a schedule over all five lockfiles. It is what caught E1. Other ecosystems rely on Dependabot security alerts, which are enabled (`GET /vulnerability-alerts` → 204, 0 open alerts). A scheduled `cargo audit`, `pip-audit`, `govulncheck` or `composer audit` would be the next step. |
@@ -37,7 +37,7 @@ From `../templates/COMPARISON.md`, "Good practices in templates that links-notat
 | Credential preflight (`preflight-credentials.*`) | rust, js, csharp, python, php | Principle 16 above. |
 | Smoke test of the published package before the GitHub release | js, rust, csharp, python | The verify step already polls the registry until the exact version is served. An install test would need a consumer project per language for little extra signal. |
 | Publish/verify separation with long backoff (`publish-retry.mjs`) | js | Adopted in substance: links-notation never republishes after a verification miss. It reports `published=skipped` on the next run and backfills the release (N1). The fixed-interval windows are now sized from measured delays (E5). |
-| Re-check of broken links (`recheck-broken-links.*`) | js, python, others | Covered by lychee's own retries plus `accept = 429` and the per-host limit (E2). A second pass would add a script for the same effect. |
+| Re-check of broken links (`recheck-broken-links.*`) | js, python, others | Adopted in substance (`c04967e`): when lychee fails, a second lychee run after 120 s. lychee does not cache errors, so it only re-requests the failures; no extra script is needed. |
 | Pipeline status gate (`check-pipeline-status.sh`) | several | Branch protection is configured outside the repository; it cannot be verified or changed from a pull request. |
 | Changesets or changelog fragments | all | Principle 6 above. |
 | Fresh-merge simulation (`simulate-fresh-merge.sh`) | js | Principle 7 above. |

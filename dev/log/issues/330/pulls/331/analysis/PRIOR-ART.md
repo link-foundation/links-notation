@@ -20,7 +20,9 @@ changesets, release-please, action pinning and harden-runner, which are not repe
 | --- | --- | --- |
 | lychee's own hint in the failing run | "You might be able to work around this by adding `[hosts."github.com"]` to the TOML config to adjust the `concurrency` and `request_interval` values." | **Adopted** in `lychee.toml`. |
 | [`lychee.example.toml`](https://github.com/lycheeverse/lychee/blob/master/lychee.example.toml) | Documents the per-host `[hosts."<name>"]` tables and `accept` status ranges. | `concurrency = 2`, `request_interval = "1s"` for github.com, and `accept = ["200..=299", "429"]`. |
-| js and python templates `recheck-broken-links.*` | A second pass that retries 429s and 5xx with backoff. | Not adopted: lychee's own retries plus the per-host limit made the run green. |
+| [`lychee-lib/src/retry.rs`](https://github.com/lycheeverse/lychee/blob/master/lychee-lib/src/retry.rs) | `ErrorKind::should_retry` matches only `RejectedStatusCode(429)`, so a 5xx answer is never retried. Diagnosed independently in a comment on [lycheeverse/lychee#2193](https://github.com/lycheeverse/lychee/issues/2193), which is open. | Workaround in `links.yml`; see the next two rows. |
+| [`lychee-bin/src/cache.rs`](https://github.com/lycheeverse/lychee/blob/master/lychee-bin/src/cache.rs) | "Do not serialize errors to disk. We always want to recheck failing links." | A second `--cache` run in the same job only re-requests the failures. |
+| js and python templates `recheck-broken-links.*` | A second pass that retries 429s and 5xx with backoff. | **Adopted** as a second lychee run after 120 s (`c04967e`). It needs no script, because of the cache behaviour above. |
 
 ## Static analysis scoping (W4)
 
