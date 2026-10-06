@@ -1,0 +1,16 @@
+# lychee reads this file automatically (its default --config is lychee.toml in
+# the working directory); the links workflow passes everything else as args.
+#
+# The scheduled run of 2026-10-05 failed on rate limiting, not on dead links:
+# github.com answered 429/502 to the burst of /actions?workflow=... badge links
+# and lychee itself suggested a [hosts."github.com"] section (issue #330).
+
+# A 429 says "slow down", not "this page does not exist". lychee still retries
+# it with backoff first.
+accept = ["200..=299", "429"]
+
+[hosts."github.com"]
+# The default is 10 parallel requests 50ms apart, which is what tripped the
+# secondary rate limit on unauthenticated HTML pages.
+concurrency = 2
+request_interval = "1s"

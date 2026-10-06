@@ -1,0 +1,131 @@
+name: Workflows
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '.github/**'
+  workflow_dispatch:
+
+# Least-privilege default; these jobs only read the checked-out tree.
+permissions:
+  contents: read
+
+# actions/checkout runs git init before a workflow step can configure Git.
+env:
+  GIT_CONFIG_COUNT: '1'
+  GIT_CONFIG_KEY_0: init.defaultBranch
+  GIT_CONFIG_VALUE_0: main
+
+jobs:
+  actionlint:
+    name: actionlint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      # The Docker image bundles shellcheck and pyflakes, so this also lints
+      # every `run:` block. A native actionlint binary without shellcheck on
+      # PATH silently skips those checks and exits 0. Reproduce locally with:
+      # docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:1.7.12 -color
+      #
+      # 1.7.12 (issue #5) adds the `glob` check for `paths:` filters that can
+      # never match and knows the modern hosted runner labels, so real labels
+      # are no longer reported as unknown.
+      #
+      # Pinned by digest because a mutable tag of a repository we do not
+      # control is arbitrary code execution in any job that holds credentials
+      # (the same reasoning as the `'*': hash-pin` policy in .github/zizmor.yml;
+      # the `unpinned-images` audit that would flag this is Pedantic-persona and
+      # runs in the zizmor job below). Re-resolve when bumping:
+      #   docker pull rhysd/actionlint:<tag> &&
+      #   docker inspect --format='{{index .RepoDigests 0}}' rhysd/actionlint:<tag>
+      - name: Lint workflow files
+        uses: docker://rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 # v1.7.12
+        with:
+          args: -color
+
+  zizmor:
+    name: zizmor
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      # Annotations work in forks where GitHub Advanced Security and code
+      # scanning may not be enabled, while still making findings fail loudly.
+      #
+      # `version` is named rather than left at the default, because the
+      # action's `latest` entry is its own frozen table (v0.6.2 -> zizmor
+      # 1.29.0), not the latest zizmor. Naming the version keeps the next bump
+      # a visible line in the diff rather than a side effect of bumping the
+      # action, and documents exactly which analyser reproduces a finding
+      # (issue #6).
+      - name: Audit workflow files
+        uses: zizmorcore/zizmor-action@v0.6.2
+        with:
+          advanced-security: false
+          annotations: true
+          config: .github/zizmor.yml
+          inputs: .github
+          min-confidence: medium
+          version: 1.29.0
+
+      # The step above runs the default (regular) persona, which is the right
+      # default: pedantic surfaces dozens of stylistic findings. But the audits
+      # that cover container image references (`unpinned-images` among them)
+      # are Pedantic-only, so the `'*': hash-pin` policy declared in
+      # .github/zizmor.yml is not enforced against `uses: docker://` or
+      # `container:` references by the regular pass. Narrowing this second pass
+      # to high severity *and* high confidence keeps that enforcement without
+      # importing the noise. Measured: after the digest pin above it reports
+      # nothing, and stays silent until someone reintroduces a mutable image
+      # reference (issue #5).
+      - name: Audit for pedantic-only high-severity findings
+        timeout-minutes: 5
+        run: |
+          pipx run zizmor==1.29.0 --config .github/zizmor.yml \
+            --persona pedantic --min-severity high --min-confidence high \
+            .github
+
+  # === PIPELINE STATUS ===
+  # GitHub reports jobs killed by timeout-minutes as cancelled. Observe every
+  # job so a timeout on main becomes a visible failure instead of a grey run,
+  # while a run superseded by a newer commit is recognised as expected churn
+  # (issue #9).
+  pipeline-status:
+    name: Pipeline Status
+    needs:
+      - actionlint
+      - zizmor
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Check aggregate pipeline status
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BRANCH_REF: ${{ github.head_ref || github.ref_name }}
+          GIT_REMOTE: ${{ github.event.pull_request.head.repo.clone_url || 'origin' }}
+        run: bash scripts/check-pipeline-status.sh

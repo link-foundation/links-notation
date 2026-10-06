@@ -244,7 +244,7 @@ Additional resources:
 - [Grammar](docs/grammar/GRAMMAR.md) - The notation in EBNF, with the indentation
   and nested context rules spelled out ([syntax diagrams](docs/grammar/syntax-diagrams.md))
 - [Test Case Comparison](TEST_CASE_COMPARISON.md) - Test-by-test coverage comparison across all seven language implementations
-- [Links Theory 0.0.2](https://habr.com/en/articles/895896) - Theoretical
+- [Links Theory 0.0.2](https://habr.com/en/articles/895896/) - Theoretical
   foundation that Links Notation fully supports
 
 ## Test Coverage & Implementation Parity

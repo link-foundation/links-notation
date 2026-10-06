@@ -1,0 +1,423 @@
+consistency	Set up job	﻿2026-10-06T20:54:17.0121734Z Current runner version: '2.337.0'
+consistency	Set up job	2026-10-06T20:54:17.0149176Z ##[group]Runner Image Provisioner
+consistency	Set up job	2026-10-06T20:54:17.0150161Z Hosted Compute Agent
+consistency	Set up job	2026-10-06T20:54:17.0150781Z Version: 20260901.588
+consistency	Set up job	2026-10-06T20:54:17.0151393Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+consistency	Set up job	2026-10-06T20:54:17.0152221Z Build Date: 2026-09-01T19:56:44Z
+consistency	Set up job	2026-10-06T20:54:17.0152893Z Worker ID: {edaee160-d43f-4b0e-96e4-5976b9074a50}
+consistency	Set up job	2026-10-06T20:54:17.0153663Z Azure Region: westcentralus
+consistency	Set up job	2026-10-06T20:54:17.0154303Z ##[endgroup]
+consistency	Set up job	2026-10-06T20:54:17.0156158Z ##[group]Operating System
+consistency	Set up job	2026-10-06T20:54:17.0156914Z Ubuntu
+consistency	Set up job	2026-10-06T20:54:17.0157430Z 24.04.5
+consistency	Set up job	2026-10-06T20:54:17.0157970Z LTS
+consistency	Set up job	2026-10-06T20:54:17.0158527Z ##[endgroup]
+consistency	Set up job	2026-10-06T20:54:17.0159077Z ##[group]Runner Image
+consistency	Set up job	2026-10-06T20:54:17.0159773Z Image: ubuntu-24.04
+consistency	Set up job	2026-10-06T20:54:17.0160338Z Version: 20260927.320.1
+consistency	Set up job	2026-10-06T20:54:17.0161459Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+consistency	Set up job	2026-10-06T20:54:17.0163233Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+consistency	Set up job	2026-10-06T20:54:17.0164727Z ##[endgroup]
+consistency	Set up job	2026-10-06T20:54:17.0165973Z ##[group]GITHUB_TOKEN Permissions
+consistency	Set up job	2026-10-06T20:54:17.0168303Z Contents: read
+consistency	Set up job	2026-10-06T20:54:17.0168921Z Metadata: read
+consistency	Set up job	2026-10-06T20:54:17.0169528Z ##[endgroup]
+consistency	Set up job	2026-10-06T20:54:17.0172026Z Secret source: Actions
+consistency	Set up job	2026-10-06T20:54:17.0173669Z Cache mode: write
+consistency	Set up job	2026-10-06T20:54:17.0175205Z Prepare workflow directory
+consistency	Set up job	2026-10-06T20:54:17.0530133Z Prepare all required actions
+consistency	Set up job	2026-10-06T20:54:17.0580233Z Getting action download info
+consistency	Set up job	2026-10-06T20:54:17.4072766Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+consistency	Set up job	2026-10-06T20:54:17.5066580Z Download action repository 'actions/setup-node@v7.0.0' (SHA:820762786026740c76f36085b0efc47a31fe5020)
+consistency	Set up job	2026-10-06T20:54:17.6964369Z Complete job name: consistency
+consistency	Run actions/checkout@v7.0.1	﻿2026-10-06T20:54:17.7766198Z ##[group]Run actions/checkout@v7.0.1
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7767221Z with:
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7767682Z   persist-credentials: false
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7768261Z   repository: link-foundation/links-notation
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7772443Z   token: ***
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7772895Z   ssh-strict: true
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7773352Z   ssh-user: git
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7773780Z   clean: true
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7774227Z   sparse-checkout-cone-mode: true
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7774759Z   fetch-depth: 1
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7775218Z   fetch-tags: false
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7775963Z   show-progress: true
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7776426Z   lfs: false
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7776842Z   submodules: false
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7777297Z   set-safe-directory: true
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7777807Z   allow-unsafe-pr-checkout: false
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.7778586Z ##[endgroup]
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.8820117Z Syncing repository: link-foundation/links-notation
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.8823896Z ##[group]Getting Git version info
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.8825180Z Working directory is '/home/runner/work/links-notation/links-notation'
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.8827560Z [command]/usr/bin/git version
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.8883866Z git version 2.55.0
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.8913795Z ##[endgroup]
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.8922748Z Temporarily overriding HOME='/home/runner/work/_temp/658f6f97-827c-4c50-9544-c28a0db0a178' before making global git config changes
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.8925584Z Adding repository directory to the temporary git global config as a safe directory
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.8928130Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.8990650Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.8999995Z ##[group]Determining repository object format
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9001766Z ##[endgroup]
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9002712Z ##[group]Initializing the repository
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9007615Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9147385Z hint: Using 'master' as the name for the initial branch. This default branch name
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9151672Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9153525Z hint: to use in all of your new repositories, which will suppress this warning,
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9154551Z hint: call:
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9155387Z hint:
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9156748Z hint: 	git config --global init.defaultBranch <name>
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9157647Z hint:
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9158249Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9159183Z hint: 'development'. The just-created branch can be renamed via this command:
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9159920Z hint:
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9160333Z hint: 	git branch -m <name>
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9160809Z hint:
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9161431Z hint: Disable this message with "git config set advice.defaultBranchName false"
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9162981Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9165358Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9217540Z ##[endgroup]
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9218466Z ##[group]Disabling automatic garbage collection
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9221551Z [command]/usr/bin/git config --local gc.auto 0
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9259806Z ##[endgroup]
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9260877Z ##[group]Setting up auth
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9261716Z Removing SSH command configuration
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9267833Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9307017Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9699619Z Removing HTTP extra header
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9706772Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.9749632Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0059111Z Removing includeIf entries pointing to credentials config files
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0060909Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0099975Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0344375Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-1922d2b7-387b-49d1-8dfd-449140008da2.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0391477Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-1922d2b7-387b-49d1-8dfd-449140008da2.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0429087Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-1922d2b7-387b-49d1-8dfd-449140008da2.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0472749Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-1922d2b7-387b-49d1-8dfd-449140008da2.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0519368Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-1922d2b7-387b-49d1-8dfd-449140008da2.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0556431Z ##[endgroup]
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0557943Z ##[group]Fetching the repository
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0564567Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0585fcf597b922f8921fd31fcdf1dee6e4a6646b:refs/remotes/origin/main
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1868848Z From https://github.com/link-foundation/links-notation
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1871554Z  * [new ref]         0585fcf597b922f8921fd31fcdf1dee6e4a6646b -> origin/main
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1893026Z [command]/usr/bin/git branch --list --remote origin/main
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1916356Z   origin/main
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1925980Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1955390Z 0585fcf597b922f8921fd31fcdf1dee6e4a6646b
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1960641Z ##[endgroup]
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1961865Z ##[group]Determining the checkout info
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1963319Z ##[endgroup]
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1966658Z [command]/usr/bin/git sparse-checkout disable
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2026315Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2064948Z ##[group]Checking out the ref
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2071006Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2827076Z Switched to a new branch 'main'
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2836756Z branch 'main' set up to track 'origin/main'.
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2844404Z ##[endgroup]
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2897758Z [command]/usr/bin/git log -1 --format=%H
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2929525Z 0585fcf597b922f8921fd31fcdf1dee6e4a6646b
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2939114Z ##[group]Removing auth
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2942962Z Removing SSH command configuration
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2944808Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2987410Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3231023Z Removing HTTP extra header
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3234724Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3279740Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3520268Z Removing includeIf entries pointing to credentials config files
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3524645Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3560219Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3565207Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3569133Z includeif.gitdir:/github/workspace/.git.path
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3572037Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3579018Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3604106Z /home/runner/work/_temp/git-credentials-1922d2b7-387b-49d1-8dfd-449140008da2.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3618473Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-1922d2b7\-387b\-49d1\-8dfd\-449140008da2\.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3659516Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3727073Z /home/runner/work/_temp/git-credentials-1922d2b7-387b-49d1-8dfd-449140008da2.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3739417Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-1922d2b7\-387b\-49d1\-8dfd\-449140008da2\.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3785918Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3837688Z /github/runner_temp/git-credentials-1922d2b7-387b-49d1-8dfd-449140008da2.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3891871Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-1922d2b7\-387b\-49d1\-8dfd\-449140008da2\.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3914751Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3950396Z /github/runner_temp/git-credentials-1922d2b7-387b-49d1-8dfd-449140008da2.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.3962061Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-1922d2b7\-387b\-49d1\-8dfd\-449140008da2\.config
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.4005594Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.4239770Z Removing credentials config '/home/runner/work/_temp/git-credentials-1922d2b7-387b-49d1-8dfd-449140008da2.config'
+consistency	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.4249587Z ##[endgroup]
+consistency	Setup Node.js	﻿2026-10-06T20:54:19.4624520Z ##[group]Run actions/setup-node@v7.0.0
+consistency	Setup Node.js	2026-10-06T20:54:19.4626196Z with:
+consistency	Setup Node.js	2026-10-06T20:54:19.4627094Z   node-version: 22
+consistency	Setup Node.js	2026-10-06T20:54:19.4628103Z   check-latest: false
+consistency	Setup Node.js	2026-10-06T20:54:19.4638725Z   token: ***
+consistency	Setup Node.js	2026-10-06T20:54:19.4639732Z   package-manager-cache: true
+consistency	Setup Node.js	2026-10-06T20:54:19.4640850Z ##[endgroup]
+consistency	Setup Node.js	2026-10-06T20:54:19.6003119Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+consistency	Setup Node.js	2026-10-06T20:54:19.6016821Z ##[group]Environment details
+consistency	Setup Node.js	2026-10-06T20:54:20.0241084Z node: v22.23.3
+consistency	Setup Node.js	2026-10-06T20:54:20.0242167Z npm: 10.9.9
+consistency	Setup Node.js	2026-10-06T20:54:20.0242458Z yarn: 1.22.22
+consistency	Setup Node.js	2026-10-06T20:54:20.0243316Z ##[endgroup]
+consistency	Check that every implementation declares the same version	﻿2026-10-06T20:54:20.0382295Z ##[group]Run node scripts/version-consistency.mjs
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.0382900Z ^[[36;1mnode scripts/version-consistency.mjs^[[0m
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.0667726Z shell: /usr/bin/bash -e {0}
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.0668241Z ##[endgroup]
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.1122087Z js: 0.23.0
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.1123026Z python: 0.23.0
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.1123554Z rust: 0.23.0
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.1124119Z csharp: 0.23.0
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.1124690Z go: 0.23.0
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.1125243Z java: 0.23.0
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.1126012Z php: 0.23.0
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.1126379Z 
+consistency	Check that every implementation declares the same version	2026-10-06T20:54:20.1126860Z All 7 implementations declare 0.23.0.
+consistency	Post Setup Node.js	﻿2026-10-06T20:54:20.1277217Z Post job cleanup.
+consistency	Post Run actions/checkout@v7.0.1	﻿2026-10-06T20:54:20.2608889Z Post job cleanup.
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.3550230Z [command]/usr/bin/git version
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.3599307Z git version 2.55.0
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.3653742Z Temporarily overriding HOME='/home/runner/work/_temp/b91f7c42-c7d5-4b11-9c4a-5a214780d44f' before making global git config changes
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.3655396Z Adding repository directory to the temporary git global config as a safe directory
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.3661119Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.3699670Z Removing SSH command configuration
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.3707396Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.3744454Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.4009192Z Removing HTTP extra header
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.4015628Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.4057158Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.4320592Z Removing includeIf entries pointing to credentials config files
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.4328414Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+consistency	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:20.4372375Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+consistency	Complete job	﻿2026-10-06T20:54:20.4776075Z Cleaning up orphan processes
+audit	Set up job	﻿2026-10-06T20:54:45.2617218Z Current runner version: '2.337.0'
+audit	Set up job	2026-10-06T20:54:45.2642028Z ##[group]Runner Image Provisioner
+audit	Set up job	2026-10-06T20:54:45.2643028Z Hosted Compute Agent
+audit	Set up job	2026-10-06T20:54:45.2643616Z Version: 20261002.596
+audit	Set up job	2026-10-06T20:54:45.2644265Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+audit	Set up job	2026-10-06T20:54:45.2644991Z Build Date: 2026-10-02T22:28:27Z
+audit	Set up job	2026-10-06T20:54:45.2645661Z Worker ID: {f767a890-5970-43ef-a42d-465e6db39ed2}
+audit	Set up job	2026-10-06T20:54:45.2646433Z Region: westus3
+audit	Set up job	2026-10-06T20:54:45.2646975Z Cloud: Azure
+audit	Set up job	2026-10-06T20:54:45.2647510Z ##[endgroup]
+audit	Set up job	2026-10-06T20:54:45.2648768Z ##[group]Operating System
+audit	Set up job	2026-10-06T20:54:45.2649377Z Ubuntu
+audit	Set up job	2026-10-06T20:54:45.2650276Z 24.04.5
+audit	Set up job	2026-10-06T20:54:45.2650945Z LTS
+audit	Set up job	2026-10-06T20:54:45.2651471Z ##[endgroup]
+audit	Set up job	2026-10-06T20:54:45.2652051Z ##[group]Runner Image
+audit	Set up job	2026-10-06T20:54:45.2652659Z Image: ubuntu-24.04
+audit	Set up job	2026-10-06T20:54:45.2653292Z Version: 20261004.327.1
+audit	Set up job	2026-10-06T20:54:45.2654393Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+audit	Set up job	2026-10-06T20:54:45.2656064Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+audit	Set up job	2026-10-06T20:54:45.2657000Z ##[endgroup]
+audit	Set up job	2026-10-06T20:54:45.2658261Z ##[group]GITHUB_TOKEN Permissions
+audit	Set up job	2026-10-06T20:54:45.2660555Z Actions: read
+audit	Set up job	2026-10-06T20:54:45.2661531Z Contents: read
+audit	Set up job	2026-10-06T20:54:45.2662128Z Metadata: read
+audit	Set up job	2026-10-06T20:54:45.2662687Z ##[endgroup]
+audit	Set up job	2026-10-06T20:54:45.2664776Z Secret source: Actions
+audit	Set up job	2026-10-06T20:54:45.2665663Z Cache mode: write
+audit	Set up job	2026-10-06T20:54:45.2666360Z Prepare workflow directory
+audit	Set up job	2026-10-06T20:54:45.2975119Z Prepare all required actions
+audit	Set up job	2026-10-06T20:54:45.3042674Z Getting action download info
+audit	Set up job	2026-10-06T20:54:45.6306036Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+audit	Set up job	2026-10-06T20:54:45.7150630Z Download action repository 'actions/setup-node@v7.0.0' (SHA:820762786026740c76f36085b0efc47a31fe5020)
+audit	Set up job	2026-10-06T20:54:45.9143825Z Complete job name: audit
+audit	Run actions/checkout@v7.0.1	﻿2026-10-06T20:54:45.9816148Z ##[group]Run actions/checkout@v7.0.1
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9817019Z with:
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9817603Z   persist-credentials: false
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9818243Z   repository: link-foundation/links-notation
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9822318Z   token: ***
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9822863Z   ssh-strict: true
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9823385Z   ssh-user: git
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9823912Z   clean: true
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9824446Z   sparse-checkout-cone-mode: true
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9825054Z   fetch-depth: 1
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9825601Z   fetch-tags: false
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9826126Z   show-progress: true
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9826656Z   lfs: false
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9827365Z   submodules: false
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9827938Z   set-safe-directory: true
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9828550Z   allow-unsafe-pr-checkout: false
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:45.9829302Z ##[endgroup]
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0824403Z Syncing repository: link-foundation/links-notation
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0827242Z ##[group]Getting Git version info
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0828266Z Working directory is '/home/runner/work/links-notation/links-notation'
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0829599Z [command]/usr/bin/git version
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0885906Z git version 2.55.0
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0903518Z ##[endgroup]
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0913446Z Temporarily overriding HOME='/home/runner/work/_temp/1c634179-20d9-4b41-8137-9b81519358ab' before making global git config changes
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0916751Z Adding repository directory to the temporary git global config as a safe directory
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0922868Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0968086Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0971443Z ##[group]Determining repository object format
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0972813Z ##[endgroup]
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0973715Z ##[group]Initializing the repository
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.0977862Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1064622Z hint: Using 'master' as the name for the initial branch. This default branch name
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1068949Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1070619Z hint: to use in all of your new repositories, which will suppress this warning,
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1071937Z hint: call:
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1072642Z hint:
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1073491Z hint: 	git config --global init.defaultBranch <name>
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1074443Z hint:
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1075396Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1076702Z hint: 'development'. The just-created branch can be renamed via this command:
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1077797Z hint:
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1078523Z hint: 	git branch -m <name>
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1079246Z hint:
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1080213Z hint: Disable this message with "git config set advice.defaultBranchName false"
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1081838Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1084606Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1126382Z ##[endgroup]
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1127306Z ##[group]Disabling automatic garbage collection
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1130462Z [command]/usr/bin/git config --local gc.auto 0
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1161033Z ##[endgroup]
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1162862Z ##[group]Setting up auth
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1164184Z Removing SSH command configuration
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1167218Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1195854Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1499418Z Removing HTTP extra header
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1505393Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1533659Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1729915Z Removing includeIf entries pointing to credentials config files
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1734120Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1760654Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1949528Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-8a5fd476-e4f9-4471-9409-2009f01672a1.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.1980750Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-8a5fd476-e4f9-4471-9409-2009f01672a1.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.2036608Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-8a5fd476-e4f9-4471-9409-2009f01672a1.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.2066899Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-8a5fd476-e4f9-4471-9409-2009f01672a1.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.2094892Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-8a5fd476-e4f9-4471-9409-2009f01672a1.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.2119251Z ##[endgroup]
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.2120187Z ##[group]Fetching the repository
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:46.2125627Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0585fcf597b922f8921fd31fcdf1dee6e4a6646b:refs/remotes/origin/main
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.4964357Z From https://github.com/link-foundation/links-notation
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.4966770Z  * [new ref]         0585fcf597b922f8921fd31fcdf1dee6e4a6646b -> origin/main
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.4973936Z [command]/usr/bin/git branch --list --remote origin/main
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5001339Z   origin/main
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5014443Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5031598Z 0585fcf597b922f8921fd31fcdf1dee6e4a6646b
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5035882Z ##[endgroup]
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5037640Z ##[group]Determining the checkout info
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5039575Z ##[endgroup]
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5041076Z [command]/usr/bin/git sparse-checkout disable
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5115472Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5143887Z ##[group]Checking out the ref
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5148691Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5794530Z Switched to a new branch 'main'
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5801510Z branch 'main' set up to track 'origin/main'.
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5812859Z ##[endgroup]
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5849592Z [command]/usr/bin/git log -1 --format=%H
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5873111Z 0585fcf597b922f8921fd31fcdf1dee6e4a6646b
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5883521Z ##[group]Removing auth
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5884961Z Removing SSH command configuration
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5888007Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.5919024Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6100585Z Removing HTTP extra header
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6103190Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6130742Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6311085Z Removing includeIf entries pointing to credentials config files
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6314002Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6335680Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6339290Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6342553Z includeif.gitdir:/github/workspace/.git.path
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6344797Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6350278Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6362907Z /home/runner/work/_temp/git-credentials-8a5fd476-e4f9-4471-9409-2009f01672a1.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6373655Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-8a5fd476\-e4f9\-4471\-9409\-2009f01672a1\.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6402853Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6429010Z /home/runner/work/_temp/git-credentials-8a5fd476-e4f9-4471-9409-2009f01672a1.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6439208Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-8a5fd476\-e4f9\-4471\-9409\-2009f01672a1\.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6474052Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6532972Z /github/runner_temp/git-credentials-8a5fd476-e4f9-4471-9409-2009f01672a1.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6558823Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-8a5fd476\-e4f9\-4471\-9409\-2009f01672a1\.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6581436Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6599471Z /github/runner_temp/git-credentials-8a5fd476-e4f9-4471-9409-2009f01672a1.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6607257Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-8a5fd476\-e4f9\-4471\-9409\-2009f01672a1\.config
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6637533Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6817538Z Removing credentials config '/home/runner/work/_temp/git-credentials-8a5fd476-e4f9-4471-9409-2009f01672a1.config'
+audit	Run actions/checkout@v7.0.1	2026-10-06T20:54:47.6824134Z ##[endgroup]
+audit	Setup Node.js	﻿2026-10-06T20:54:47.7167380Z ##[group]Run actions/setup-node@v7.0.0
+audit	Setup Node.js	2026-10-06T20:54:47.7168756Z with:
+audit	Setup Node.js	2026-10-06T20:54:47.7169757Z   node-version: 22
+audit	Setup Node.js	2026-10-06T20:54:47.7170979Z   check-latest: false
+audit	Setup Node.js	2026-10-06T20:54:47.7180345Z   token: ***
+audit	Setup Node.js	2026-10-06T20:54:47.7181530Z   package-manager-cache: true
+audit	Setup Node.js	2026-10-06T20:54:47.7182771Z ##[endgroup]
+audit	Setup Node.js	2026-10-06T20:54:47.8416095Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+audit	Setup Node.js	2026-10-06T20:54:47.8418631Z ##[group]Environment details
+audit	Setup Node.js	2026-10-06T20:54:48.1927943Z node: v22.23.3
+audit	Setup Node.js	2026-10-06T20:54:48.1928868Z npm: 10.9.9
+audit	Setup Node.js	2026-10-06T20:54:48.1929217Z yarn: 1.22.22
+audit	Setup Node.js	2026-10-06T20:54:48.1930152Z ##[endgroup]
+audit	Wait for this commit's publish workflows	﻿2026-10-06T20:54:48.2066085Z ##[group]Run set -euo pipefail
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2066732Z ^[[36;1mset -euo pipefail^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2067194Z ^[[36;1mfor attempt in $(seq 1 60); do^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2067730Z ^[[36;1m  # This workflow is itself a run for this commit, so it has to be^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2068282Z ^[[36;1m  # excluded or the wait can never finish.^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2068871Z ^[[36;1m  PENDING=$(gh run list --commit "$GITHUB_SHA" --limit 100 \^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2069424Z ^[[36;1m    --json name,status \^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2069877Z ^[[36;1m    --jq '[.[] | select(.name != "release-audit")^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2070379Z ^[[36;1m               | select(.status != "completed")] | length')^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2071060Z ^[[36;1m  if [ "$PENDING" -eq 0 ]; then^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2071637Z ^[[36;1m    echo "All workflows for $GITHUB_SHA have completed (attempt ${attempt})"^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2072196Z ^[[36;1m    exit 0^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2072557Z ^[[36;1m  fi^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2073015Z ^[[36;1m  if [ "${CI_VERBOSE:-false}" = "true" ]; then^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2073556Z ^[[36;1m    gh run list --commit "$GITHUB_SHA" --limit 100 \^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2074121Z ^[[36;1m      --json name,status,conclusion \^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2074643Z ^[[36;1m      --jq '.[] | "  \(.name): \(.status) \(.conclusion // "")"'^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2075120Z ^[[36;1m  fi^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2075609Z ^[[36;1m  echo "${PENDING} workflow(s) still running (attempt ${attempt}/60); waiting 20s"^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2076122Z ^[[36;1m  sleep 20^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2076521Z ^[[36;1mdone^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2077189Z ^[[36;1mecho "::warning::Workflows for $GITHUB_SHA were still running after 20 minutes; the audit below may report releases that are still in flight"^[[0m
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2262335Z shell: /usr/bin/bash -e {0}
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2262943Z env:
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2265650Z   GH_TOKEN: ***
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2266040Z   CI_VERBOSE: false
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:48.2266461Z ##[endgroup]
+audit	Wait for this commit's publish workflows	2026-10-06T20:54:49.1228738Z 2 workflow(s) still running (attempt 1/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:55:09.8528514Z 2 workflow(s) still running (attempt 2/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:55:30.5728012Z 2 workflow(s) still running (attempt 3/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:55:51.2876644Z 1 workflow(s) still running (attempt 4/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:56:12.0011362Z 1 workflow(s) still running (attempt 5/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:56:32.6598166Z 1 workflow(s) still running (attempt 6/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:56:53.3342397Z 1 workflow(s) still running (attempt 7/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:57:14.0681938Z 1 workflow(s) still running (attempt 8/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:57:34.7659963Z 1 workflow(s) still running (attempt 9/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:57:55.4773839Z 1 workflow(s) still running (attempt 10/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:58:16.1103401Z 1 workflow(s) still running (attempt 11/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:58:36.8693623Z 1 workflow(s) still running (attempt 12/60); waiting 20s
+audit	Wait for this commit's publish workflows	2026-10-06T20:58:57.6101074Z All workflows for 0585fcf597b922f8921fd31fcdf1dee6e4a6646b have completed (attempt 13)
+audit	Audit declared versions against the registries	﻿2026-10-06T20:58:57.6159749Z ##[group]Run node scripts/release-audit.mjs
+audit	Audit declared versions against the registries	2026-10-06T20:58:57.6160261Z ^[[36;1mnode scripts/release-audit.mjs^[[0m
+audit	Audit declared versions against the registries	2026-10-06T20:58:57.6204988Z shell: /usr/bin/bash -e {0}
+audit	Audit declared versions against the registries	2026-10-06T20:58:57.6205473Z env:
+audit	Audit declared versions against the registries	2026-10-06T20:58:57.6205783Z   CI_VERBOSE: false
+audit	Audit declared versions against the registries	2026-10-06T20:58:57.6206113Z   AUDIT_EXPECT_PUBLISHED: true
+audit	Audit declared versions against the registries	2026-10-06T20:58:57.6206476Z ##[endgroup]
+audit	Audit declared versions against the registries	2026-10-06T20:58:57.8241785Z js: 0.23.0 (in sync with npm)
+audit	Audit declared versions against the registries	2026-10-06T20:58:57.9062549Z python: 0.23.0 (in sync with PyPI)
+audit	Audit declared versions against the registries	2026-10-06T20:58:58.2341060Z rust: 0.23.0 (in sync with crates.io)
+audit	Audit declared versions against the registries	2026-10-06T20:58:58.3208084Z csharp: 0.23.0 (in sync with NuGet.org)
+audit	Audit declared versions against the registries	2026-10-06T20:58:59.5581075Z go: 0.23.0 (in sync with proxy.golang.org)
+audit	Audit declared versions against the registries	2026-10-06T20:58:59.6784736Z ##[warning]java: declared 0.23.0, but nothing is published on Maven Central. The publish job for this language has never successfully released anything.
+audit	Audit declared versions against the registries	2026-10-06T20:59:00.2062198Z ##[warning]php: declared 0.23.0, but nothing is published on Packagist. The publish job for this language has never successfully released anything.
+audit	Audit declared versions against the registries	2026-10-06T20:59:00.2063960Z 
+audit	Audit declared versions against the registries	2026-10-06T20:59:00.2064252Z 2 implementation(s) drifted.
+audit	Post Setup Node.js	﻿2026-10-06T20:59:00.2245051Z Post job cleanup.
+audit	Post Run actions/checkout@v7.0.1	﻿2026-10-06T20:59:00.3551897Z Post job cleanup.
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4399383Z [command]/usr/bin/git version
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4437198Z git version 2.55.0
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4476533Z Temporarily overriding HOME='/home/runner/work/_temp/7101db8c-fd3d-4af4-9f52-1e389c9bb0ce' before making global git config changes
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4477955Z Adding repository directory to the temporary git global config as a safe directory
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4482256Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4510066Z Removing SSH command configuration
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4516401Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4547251Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4748224Z Removing HTTP extra header
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4753565Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4783003Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4975427Z Removing includeIf entries pointing to credentials config files
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.4979259Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+audit	Post Run actions/checkout@v7.0.1	2026-10-06T20:59:00.5007157Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+audit	Complete job	﻿2026-10-06T20:59:00.5393539Z Cleaning up orphan processes

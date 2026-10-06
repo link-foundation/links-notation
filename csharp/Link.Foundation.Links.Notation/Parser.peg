@@ -293,8 +293,12 @@ line <LinksGroup<string>> = CHECK_INDENTATION l:element { l }
 // A line is checked for depth once its link has parsed, and only then are the lines
 // indented under it read.
 element <LinksGroup<string>> = &{ !IsUnreadableLine(state) } s:here e:anyLink &{ WithinLineDepth(state, s) } l:indentedLinks? { WithChildren(e, l) }
-// Remember that this line could not be read. The predicate always fails.
-/ &{ MarkUnreadableLine(state) } { default(LinksGroup<string>) }
+// Remember that this line could not be read. The predicate always fails, so
+// the `.` after it is never reached; it only tells Pegasus that this
+// alternative consumes input. Without it Pegasus treated `element` as possibly
+// zero-width and warned (PEG0021 on `line*`, PEG0022 on `indentedLinks?`) on
+// every build (issue #330).
+/ &{ MarkUnreadableLine(state) } . { default(LinksGroup<string>) }
 indentedLinks <IList<LinksGroup<string>>> = PUSH_INDENTATION l:links { l }
 here <int> = "" { state.Location }
 referenceOrLink <Link<string>> = l:multiLineAnyLink { l } / i:reference { i }

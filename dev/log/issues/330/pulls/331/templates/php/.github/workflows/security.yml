@@ -1,0 +1,127 @@
+name: Security
+
+# Continuous security auditing of the resolved dependency set, the workflow
+# files themselves, and every dependency change a pull request proposes.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Weekly, Monday mornings UTC, so a newly published advisory cannot sit
+    # unnoticed for longer than seven days even when nothing else runs.
+    - cron: '0 6 * * 1'
+
+# Never cancel an in-progress run on main; do cancel superseded PR runs.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-audit:
+    name: Audit Resolved Composer Dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2
+
+      - name: Resolve the dependency set
+        # The template ships without composer.lock on purpose (consumers
+        # resolve their own), so this job resolves one first: auditing the
+        # freshly locked set is what a consumer installing today would get,
+        # not a stale lock inherited from the template.
+        run: composer update --no-interaction --prefer-dist --no-progress
+
+      - name: Audit dependencies against the PHP security advisories database
+        # --locked audits the resolved lock file; --abandoned=fail turns "this
+        # package was abandoned by its maintainer" into a hard failure too.
+        run: composer audit --locked --abandoned=fail
+
+  codeql:
+    name: CodeQL (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        # CodeQL has no PHP analyser, so the source cannot be scanned here
+        # (PHPStan and php-cs-fixer carry that load in the release pipeline);
+        # `actions` scans this repository's own workflow files, which is
+        # where a template's real attack surface lives.
+        language: [actions]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v4
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v4
+
+  dependency-review:
+    name: Dependency Review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Review dependency changes
+        uses: actions/dependency-review-action@v5
+        with:
+          fail-on-severity: high
+          comment-summary-in-pr: on-failure
+
+  # === PIPELINE STATUS ===
+  # GitHub reports jobs killed by timeout-minutes as cancelled. Observe every
+  # job so a timeout on main becomes a visible failure instead of a grey run,
+  # while a run superseded by a newer commit is recognised as expected churn
+  # (issue #9).
+  pipeline-status:
+    name: Pipeline Status
+    needs:
+      - dependency-audit
+      - codeql
+      - dependency-review
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check aggregate pipeline status
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BRANCH_REF: ${{ github.head_ref || github.ref_name }}
+          GIT_REMOTE: ${{ github.event.pull_request.head.repo.clone_url || 'origin' }}
+        run: bash scripts/check-pipeline-status.sh

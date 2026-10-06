@@ -1,0 +1,45 @@
+name: Workflow checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/**'
+      - 'scripts/**'
+  pull_request:
+    paths:
+      - '.github/**'
+      - 'scripts/**'
+
+permissions:
+  contents: read
+
+jobs:
+  workflows:
+    name: Lint and test workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-workflows
+      cancel-in-progress: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Test workflow policy
+        run: bun test ./scripts
+
+      # The container bundles ShellCheck, so run blocks are checked as well.
+      # actionlint 1.7.12 predates GitHub's `concurrency.queue` key. Keep the
+      # suppression narrow so every other workflow/schema diagnostic fails CI.
+      - name: Run actionlint
+        uses: docker://rhysd/actionlint:1.7.12
+        with:
+          args: -color -ignore queue

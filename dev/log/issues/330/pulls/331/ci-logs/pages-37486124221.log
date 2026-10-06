@@ -1,0 +1,922 @@
+findChangedDocsFiles	UNKNOWN STEP	﻿2026-10-06T15:17:38.5979666Z Current runner version: '2.337.0'
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6015748Z ##[group]Runner Image Provisioner
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6017254Z Hosted Compute Agent
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6018229Z Version: 20260901.588
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6019783Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6021179Z Build Date: 2026-09-01T19:56:44Z
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6022286Z Worker ID: {9e2d3164-b8b4-402f-a909-a87d480d4a80}
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6023658Z Azure Region: eastus
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6024631Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6027024Z ##[group]Operating System
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6028072Z Ubuntu
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6029168Z 24.04.5
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6030168Z LTS
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6031071Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6032039Z ##[group]Runner Image
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6033126Z Image: ubuntu-24.04
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6034187Z Version: 20260927.320.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6036375Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6039389Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6041094Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6043075Z ##[group]GITHUB_TOKEN Permissions
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6045911Z Contents: read
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6046952Z Metadata: read
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6047910Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6051290Z Secret source: Actions
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6052912Z Cache mode: write
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6054083Z Prepare workflow directory
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6906352Z Prepare all required actions
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.6986264Z Getting action download info
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:38.9667148Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.0892458Z Download action repository 'tj-actions/changed-files@v47.0.6' (SHA:9426d40962ed5378910ee2e21d5f8c6fcbf2dd96)
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.3819212Z Complete job name: findChangedDocsFiles
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4554836Z ##[group]Run actions/checkout@v7.0.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4555798Z with:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4556314Z   persist-credentials: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4556836Z   fetch-depth: 0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4557325Z   repository: link-foundation/links-notation
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4561550Z   token: ***
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4562002Z   ssh-strict: true
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4562436Z   ssh-user: git
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4562852Z   clean: true
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4563346Z   sparse-checkout-cone-mode: true
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4563881Z   fetch-tags: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4564328Z   show-progress: true
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4564770Z   lfs: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4565188Z   submodules: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4565637Z   set-safe-directory: true
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4566146Z   allow-unsafe-pr-checkout: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4566969Z env:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4567384Z   CI_VERBOSE: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.4567819Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5639762Z Syncing repository: link-foundation/links-notation
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5642717Z ##[group]Getting Git version info
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5644028Z Working directory is '/home/runner/work/links-notation/links-notation'
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5645808Z [command]/usr/bin/git version
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5754148Z git version 2.55.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5781475Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5797752Z Temporarily overriding HOME='/home/runner/work/_temp/2134392b-2e48-49bf-82ec-0da0718c257d' before making global git config changes
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5799988Z Adding repository directory to the temporary git global config as a safe directory
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5805880Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5863953Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5869264Z ##[group]Determining repository object format
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5871073Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5872024Z ##[group]Initializing the repository
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.5877097Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6007152Z hint: Using 'master' as the name for the initial branch. This default branch name
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6009880Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6011884Z hint: to use in all of your new repositories, which will suppress this warning,
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6013567Z hint: call:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6014477Z hint:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6015563Z hint: 	git config --global init.defaultBranch <name>
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6016806Z hint:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6018079Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6020253Z hint: 'development'. The just-created branch can be renamed via this command:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6022924Z hint:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6024028Z hint: 	git branch -m <name>
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6024993Z hint:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6026216Z hint: Disable this message with "git config set advice.defaultBranchName false"
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6028330Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6035036Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6080897Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6082412Z ##[group]Disabling automatic garbage collection
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6085088Z [command]/usr/bin/git config --local gc.auto 0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6126872Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6128775Z ##[group]Setting up auth
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6130130Z Removing SSH command configuration
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6135540Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6174552Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6608658Z Removing HTTP extra header
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6617533Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6700994Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6978566Z Removing includeIf entries pointing to credentials config files
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.6980288Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.7023313Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.7278927Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-35855294-2f6f-4dd3-a5da-db7a6f6d510c.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.7326841Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-35855294-2f6f-4dd3-a5da-db7a6f6d510c.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.7365806Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-35855294-2f6f-4dd3-a5da-db7a6f6d510c.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.7409933Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-35855294-2f6f-4dd3-a5da-db7a6f6d510c.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.7448624Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-35855294-2f6f-4dd3-a5da-db7a6f6d510c.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.7482673Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.7483470Z ##[group]Fetching the repository
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:39.7490334Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5423598Z From https://github.com/link-foundation/links-notation
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5426423Z  * [new branch]      claude/code-review-and-issues-01CuJmcRr2phiQJAnhoqeEY5 -> origin/claude/code-review-and-issues-01CuJmcRr2phiQJAnhoqeEY5
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5430462Z  * [new branch]      claude/review-test-coverage-011UTL6DkCfp7LuwpUZj9HyC -> origin/claude/review-test-coverage-011UTL6DkCfp7LuwpUZj9HyC
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5433581Z  * [new branch]      claude/review-test-standards-01GsYvAqSF7k3oxTeEwYsX9W -> origin/claude/review-test-standards-01GsYvAqSF7k3oxTeEwYsX9W
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5436084Z  * [new branch]      dependabot/add-v2-config-file -> origin/dependabot/add-v2-config-file
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5438781Z  * [new branch]      dependabot/npm_and_yarn/js/brace-expansion-5.0.12 -> origin/dependabot/npm_and_yarn/js/brace-expansion-5.0.12
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5441013Z  * [new branch]      draft/update           -> origin/draft/update
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5442654Z  * [new branch]      fix-cicd-publishing    -> origin/fix-cicd-publishing
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5444199Z  * [new branch]      gh-pages               -> origin/gh-pages
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5445696Z  * [new branch]      issue-101-5db7b374     -> origin/issue-101-5db7b374
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5447607Z  * [new branch]      issue-103-604d0cc9     -> origin/issue-103-604d0cc9
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5449538Z  * [new branch]      issue-105-b29688eb     -> origin/issue-105-b29688eb
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5451116Z  * [new branch]      issue-107-516f1733     -> origin/issue-107-516f1733
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5452640Z  * [new branch]      issue-109-d76b5c33     -> origin/issue-109-d76b5c33
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5454300Z  * [new branch]      issue-110-ec5b7eeb     -> origin/issue-110-ec5b7eeb
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5455958Z  * [new branch]      issue-111-8aef2f31     -> origin/issue-111-8aef2f31
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5457519Z  * [new branch]      issue-115-e9580372     -> origin/issue-115-e9580372
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5459693Z  * [new branch]      issue-117-e66fa934     -> origin/issue-117-e66fa934
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5461265Z  * [new branch]      issue-119-69bab4a2     -> origin/issue-119-69bab4a2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5462804Z  * [new branch]      issue-121-0287f55a     -> origin/issue-121-0287f55a
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5464297Z  * [new branch]      issue-123-656309e4     -> origin/issue-123-656309e4
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5465873Z  * [new branch]      issue-125-79dfb0d1     -> origin/issue-125-79dfb0d1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5467393Z  * [new branch]      issue-125-ee879ed7     -> origin/issue-125-ee879ed7
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5469271Z  * [new branch]      issue-125-f3a03b7d     -> origin/issue-125-f3a03b7d
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5470815Z  * [new branch]      issue-129-04c8c0a5     -> origin/issue-129-04c8c0a5
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5472481Z  * [new branch]      issue-131-fc081b5b     -> origin/issue-131-fc081b5b
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5474007Z  * [new branch]      issue-133-629cdf98     -> origin/issue-133-629cdf98
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5475502Z  * [new branch]      issue-135-00fb7516     -> origin/issue-135-00fb7516
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5477015Z  * [new branch]      issue-138-9d33fad1     -> origin/issue-138-9d33fad1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5478961Z  * [new branch]      issue-140-28a755bca96b -> origin/issue-140-28a755bca96b
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5480978Z  * [new branch]      issue-142-23f307922307 -> origin/issue-142-23f307922307
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5482563Z  * [new branch]      issue-143-71fa1d3dc218 -> origin/issue-143-71fa1d3dc218
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5484292Z  * [new branch]      issue-144-f281d2df737c -> origin/issue-144-f281d2df737c
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5485893Z  * [new branch]      issue-146-52f1d9a571ed -> origin/issue-146-52f1d9a571ed
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5487528Z  * [new branch]      issue-148-6ee2ca2dbea2 -> origin/issue-148-6ee2ca2dbea2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5489439Z  * [new branch]      issue-155-7899dac8e6ec -> origin/issue-155-7899dac8e6ec
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5491083Z  * [new branch]      issue-158-fb24e781ad8d -> origin/issue-158-fb24e781ad8d
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5492705Z  * [new branch]      issue-164-2e5b1c046253 -> origin/issue-164-2e5b1c046253
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5494603Z  * [new branch]      issue-165-a26029ce2e34 -> origin/issue-165-a26029ce2e34
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5496157Z  * [new branch]      issue-166-0169a4dd2a40 -> origin/issue-166-0169a4dd2a40
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5497740Z  * [new branch]      issue-184-e00f7290354f -> origin/issue-184-e00f7290354f
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5499627Z  * [new branch]      issue-188-09a2f723ae76 -> origin/issue-188-09a2f723ae76
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5501430Z  * [new branch]      issue-189-7e97f19d7811 -> origin/issue-189-7e97f19d7811
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5503156Z  * [new branch]      issue-192-3568aae3e63c -> origin/issue-192-3568aae3e63c
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5505113Z  * [new branch]      issue-197-0f9688b95d4f -> origin/issue-197-0f9688b95d4f
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5506717Z  * [new branch]      issue-197-93f74116bd61 -> origin/issue-197-93f74116bd61
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5508900Z  * [new branch]      issue-198-ef3a7c229ad3 -> origin/issue-198-ef3a7c229ad3
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5510629Z  * [new branch]      issue-200-432e1145db9f -> origin/issue-200-432e1145db9f
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5512261Z  * [new branch]      issue-201-5c2770ec8b03 -> origin/issue-201-5c2770ec8b03
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5513863Z  * [new branch]      issue-209-8128719f23bf -> origin/issue-209-8128719f23bf
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5515583Z  * [new branch]      issue-21-66d67e65      -> origin/issue-21-66d67e65
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5517222Z  * [new branch]      issue-217-c1c06cbe0168 -> origin/issue-217-c1c06cbe0168
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5519196Z  * [new branch]      issue-23-cfc667a8      -> origin/issue-23-cfc667a8
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5520857Z  * [new branch]      issue-282-c154325b4497 -> origin/issue-282-c154325b4497
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5522509Z  * [new branch]      issue-284-ed60ce81c8a6 -> origin/issue-284-ed60ce81c8a6
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5524120Z  * [new branch]      issue-288-cc91e23553e8 -> origin/issue-288-cc91e23553e8
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5526043Z  * [new branch]      issue-290-642ff58c1ef8 -> origin/issue-290-642ff58c1ef8
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5527782Z  * [new branch]      issue-292-a602b59a2375 -> origin/issue-292-a602b59a2375
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5529787Z  * [new branch]      issue-298-d29274924d59 -> origin/issue-298-d29274924d59
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5531591Z  * [new branch]      issue-301-6d74023563c6 -> origin/issue-301-6d74023563c6
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5533313Z  * [new branch]      issue-302-ab4ea4d5b342 -> origin/issue-302-ab4ea4d5b342
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5535021Z  * [new branch]      issue-312-a4fa3ba23e94 -> origin/issue-312-a4fa3ba23e94
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5536708Z  * [new branch]      issue-313-725d694e123e -> origin/issue-313-725d694e123e
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5538741Z  * [new branch]      issue-314-4ffe0d012be2 -> origin/issue-314-4ffe0d012be2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5540594Z  * [new branch]      issue-315-447472a7bcaf -> origin/issue-315-447472a7bcaf
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5542353Z  * [new branch]      issue-316-740a8a1134b5 -> origin/issue-316-740a8a1134b5
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5544274Z  * [new branch]      issue-325-206f2007c19e -> origin/issue-325-206f2007c19e
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5546017Z  * [new branch]      issue-52-4a282d24      -> origin/issue-52-4a282d24
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5547621Z  * [new branch]      issue-53-12d80c86      -> origin/issue-53-12d80c86
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5549470Z  * [new branch]      issue-53-1bd6f8d5      -> origin/issue-53-1bd6f8d5
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5627704Z  * [new branch]      issue-53-4d399364      -> origin/issue-53-4d399364
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5629832Z  * [new branch]      issue-55-353ece6e      -> origin/issue-55-353ece6e
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5631255Z  * [new branch]      issue-55-deaa6f4c      -> origin/issue-55-deaa6f4c
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5632630Z  * [new branch]      issue-62-8dc57ee4      -> origin/issue-62-8dc57ee4
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5634617Z  * [new branch]      issue-62-9aaf7516      -> origin/issue-62-9aaf7516
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5636309Z  * [new branch]      issue-62-ba398481      -> origin/issue-62-ba398481
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5637798Z  * [new branch]      issue-63-2062e7bf      -> origin/issue-63-2062e7bf
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5640019Z  * [new branch]      issue-63-fe0edcdd      -> origin/issue-63-fe0edcdd
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5641479Z  * [new branch]      issue-68-00e93de8      -> origin/issue-68-00e93de8
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5642953Z  * [new branch]      issue-68-08c66206      -> origin/issue-68-08c66206
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5644420Z  * [new branch]      issue-68-38c3f25f      -> origin/issue-68-38c3f25f
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5645922Z  * [new branch]      issue-68-c3ec7178      -> origin/issue-68-c3ec7178
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5647401Z  * [new branch]      issue-69-1ad2dc0a      -> origin/issue-69-1ad2dc0a
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5649171Z  * [new branch]      issue-69-909b524a      -> origin/issue-69-909b524a
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5650808Z  * [new branch]      issue-81-b7913964      -> origin/issue-81-b7913964
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5652454Z  * [new branch]      issue-87-3609cfa2      -> origin/issue-87-3609cfa2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5654002Z  * [new branch]      issue-90-8b6fbd3d      -> origin/issue-90-8b6fbd3d
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5655337Z  * [new branch]      issue-91-1bc78531      -> origin/issue-91-1bc78531
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5656337Z  * [new branch]      issue-99-0e526c7c      -> origin/issue-99-0e526c7c
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5657180Z  * [new branch]      main                   -> origin/main
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5657922Z  * [new branch]      master                 -> origin/master
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5659220Z  * [new branch]      segment                -> origin/segment
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5660056Z  * [new branch]      update-all-deps        -> origin/update-all-deps
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5660931Z  * [new branch]      update-java-deps       -> origin/update-java-deps
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5661693Z  * [new tag]         0.0.1                  -> 0.0.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5662360Z  * [new tag]         0.0.2                  -> 0.0.2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5663095Z  * [new tag]         0.1.0                  -> 0.1.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5664119Z  * [new tag]         0.10.0_python          -> 0.10.0_python
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5664891Z  * [new tag]         0.11.0_csharp          -> 0.11.0_csharp
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5665594Z  * [new tag]         0.11.0_js              -> 0.11.0_js
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5666295Z  * [new tag]         0.11.0_python          -> 0.11.0_python
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5666999Z  * [new tag]         0.11.0_rust            -> 0.11.0_rust
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5667695Z  * [new tag]         0.11.1_csharp          -> 0.11.1_csharp
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5668687Z  * [new tag]         0.11.2_csharp          -> 0.11.2_csharp
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5669425Z  * [new tag]         0.11.2_js              -> 0.11.2_js
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5670126Z  * [new tag]         0.11.2_python          -> 0.11.2_python
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5670835Z  * [new tag]         0.11.2_rust            -> 0.11.2_rust
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5671534Z  * [new tag]         0.12.0_csharp          -> 0.12.0_csharp
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5672276Z  * [new tag]         0.13.0_csharp          -> 0.13.0_csharp
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5672955Z  * [new tag]         0.2.0                  -> 0.2.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5673624Z  * [new tag]         0.2.1                  -> 0.2.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5674312Z  * [new tag]         0.2.2                  -> 0.2.2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5674966Z  * [new tag]         0.2.3                  -> 0.2.3
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5675617Z  * [new tag]         0.3.0                  -> 0.3.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5676270Z  * [new tag]         0.4.0                  -> 0.4.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5676953Z  * [new tag]         0.7.0_csharp           -> 0.7.0_csharp
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5677638Z  * [new tag]         0.7.0_js               -> 0.7.0_js
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5678312Z  * [new tag]         0.7.0_rust             -> 0.7.0_rust
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5679227Z  * [new tag]         0.8.0_js               -> 0.8.0_js
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5679909Z  * [new tag]         0.8.0_rust             -> 0.8.0_rust
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5680607Z  * [new tag]         0.9.0_csharp           -> 0.9.0_csharp
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5681297Z  * [new tag]         0.9.0_js               -> 0.9.0_js
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5682149Z  * [new tag]         0.9.0_python           -> 0.9.0_python
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5682840Z  * [new tag]         0.9.0_rust             -> 0.9.0_rust
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5683579Z  * [new tag]         csharp_0.15.0          -> csharp_0.15.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5684306Z  * [new tag]         csharp_0.16.0          -> csharp_0.16.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5685031Z  * [new tag]         csharp_0.16.1          -> csharp_0.16.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5685750Z  * [new tag]         csharp_0.17.0          -> csharp_0.17.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5686455Z  * [new tag]         csharp_0.18.0          -> csharp_0.18.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5687168Z  * [new tag]         csharp_0.19.0          -> csharp_0.19.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5687879Z  * [new tag]         csharp_0.20.0          -> csharp_0.20.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5688852Z  * [new tag]         csharp_0.21.0          -> csharp_0.21.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5689599Z  * [new tag]         csharp_0.21.1          -> csharp_0.21.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5690316Z  * [new tag]         csharp_0.21.2          -> csharp_0.21.2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5691042Z  * [new tag]         csharp_0.21.3          -> csharp_0.21.3
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5691761Z  * [new tag]         csharp_0.22.0          -> csharp_0.22.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5692466Z  * [new tag]         csharp_0.4.0           -> csharp_0.4.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5693174Z  * [new tag]         csharp_0.4.1           -> csharp_0.4.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5693886Z  * [new tag]         csharp_0.4.2           -> csharp_0.4.2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5694586Z  * [new tag]         csharp_0.4.3           -> csharp_0.4.3
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5695275Z  * [new tag]         csharp_0.4.4           -> csharp_0.4.4
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5695962Z  * [new tag]         csharp_0.4.5           -> csharp_0.4.5
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5696655Z  * [new tag]         csharp_0.4.6           -> csharp_0.4.6
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5697362Z  * [new tag]         csharp_0.5.0           -> csharp_0.5.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5698213Z  * [new tag]         csharp_0.6.0           -> csharp_0.6.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5699543Z  * [new tag]         go/v0.13.0             -> go/v0.13.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5700262Z  * [new tag]         go/v0.14.0             -> go/v0.14.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5700946Z  * [new tag]         go/v0.15.0             -> go/v0.15.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5701633Z  * [new tag]         go/v0.16.0             -> go/v0.16.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5702334Z  * [new tag]         go/v0.16.1             -> go/v0.16.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5703005Z  * [new tag]         go/v0.17.0             -> go/v0.17.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5703701Z  * [new tag]         go/v0.18.0             -> go/v0.18.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5704374Z  * [new tag]         go/v0.19.0             -> go/v0.19.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5705054Z  * [new tag]         go/v0.20.0             -> go/v0.20.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5705739Z  * [new tag]         go/v0.21.0             -> go/v0.21.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5706461Z  * [new tag]         go/v0.21.1             -> go/v0.21.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5707147Z  * [new tag]         go/v0.21.2             -> go/v0.21.2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5707831Z  * [new tag]         go/v0.21.3             -> go/v0.21.3
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5708893Z  * [new tag]         go/v0.22.0             -> go/v0.22.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5709626Z  * [new tag]         js_0.1.0               -> js_0.1.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5710306Z  * [new tag]         js_0.11.2              -> js_0.11.2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5710986Z  * [new tag]         js_0.12.0              -> js_0.12.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5711663Z  * [new tag]         js_0.13.0              -> js_0.13.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5712342Z  * [new tag]         js_0.15.0              -> js_0.15.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5713021Z  * [new tag]         js_0.16.0              -> js_0.16.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5713703Z  * [new tag]         js_0.16.1              -> js_0.16.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5714387Z  * [new tag]         js_0.17.0              -> js_0.17.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5715070Z  * [new tag]         js_0.18.0              -> js_0.18.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5715742Z  * [new tag]         js_0.19.0              -> js_0.19.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5716608Z  * [new tag]         js_0.2.0               -> js_0.2.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5717278Z  * [new tag]         js_0.20.0              -> js_0.20.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5717957Z  * [new tag]         js_0.21.1              -> js_0.21.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5718936Z  * [new tag]         js_0.21.2              -> js_0.21.2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5719630Z  * [new tag]         js_0.21.3              -> js_0.21.3
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5720305Z  * [new tag]         js_0.22.0              -> js_0.22.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5720970Z  * [new tag]         js_0.6.0               -> js_0.6.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5721641Z  * [new tag]         php_0.1.0              -> php_0.1.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5722323Z  * [new tag]         php_0.2.0              -> php_0.2.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5723028Z  * [new tag]         python_0.11.2          -> python_0.11.2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5723768Z  * [new tag]         python_0.12.0          -> python_0.12.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5724487Z  * [new tag]         python_0.13.0          -> python_0.13.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5725204Z  * [new tag]         python_0.14.0          -> python_0.14.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5725914Z  * [new tag]         python_0.15.0          -> python_0.15.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5726619Z  * [new tag]         python_0.16.0          -> python_0.16.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5727338Z  * [new tag]         python_0.16.1          -> python_0.16.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5728054Z  * [new tag]         python_0.17.0          -> python_0.17.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5728937Z  * [new tag]         python_0.18.0          -> python_0.18.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5729664Z  * [new tag]         python_0.19.0          -> python_0.19.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5730371Z  * [new tag]         python_0.20.0          -> python_0.20.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5731078Z  * [new tag]         python_0.21.0          -> python_0.21.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5731947Z  * [new tag]         python_0.21.1          -> python_0.21.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5732677Z  * [new tag]         python_0.21.2          -> python_0.21.2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5733402Z  * [new tag]         python_0.21.3          -> python_0.21.3
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5734161Z  * [new tag]         python_0.22.0          -> python_0.22.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5734865Z  * [new tag]         rust_0.11.2            -> rust_0.11.2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5735551Z  * [new tag]         rust_0.12.0            -> rust_0.12.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5736250Z  * [new tag]         rust_0.13.0            -> rust_0.13.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5736942Z  * [new tag]         rust_0.14.0            -> rust_0.14.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5737624Z  * [new tag]         rust_0.15.0            -> rust_0.15.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5738565Z  * [new tag]         rust_0.16.1            -> rust_0.16.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5739308Z  * [new tag]         rust_0.17.0            -> rust_0.17.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5740001Z  * [new tag]         rust_0.18.0            -> rust_0.18.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5740696Z  * [new tag]         rust_0.19.0            -> rust_0.19.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5741387Z  * [new tag]         rust_0.2.0             -> rust_0.2.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5742062Z  * [new tag]         rust_0.20.0            -> rust_0.20.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5742729Z  * [new tag]         rust_0.21.0            -> rust_0.21.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5743403Z  * [new tag]         rust_0.21.1            -> rust_0.21.1
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5744106Z  * [new tag]         rust_0.21.2            -> rust_0.21.2
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5744782Z  * [new tag]         rust_0.21.3            -> rust_0.21.3
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5745461Z  * [new tag]         rust_0.22.0            -> rust_0.22.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5746138Z  * [new tag]         rust_0.6.0             -> rust_0.6.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5747730Z [command]/usr/bin/git branch --list --remote origin/main
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5748767Z   origin/main
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5749887Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5750595Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5751980Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5752924Z ##[group]Determining the checkout info
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5753746Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5754252Z [command]/usr/bin/git sparse-checkout disable
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5755646Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5757238Z ##[group]Checking out the ref
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.5758044Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6469093Z Switched to a new branch 'main'
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6473200Z branch 'main' set up to track 'origin/main'.
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6486485Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6538755Z [command]/usr/bin/git log -1 --format=%H
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6569731Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6580205Z ##[group]Removing auth
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6581108Z Removing SSH command configuration
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6585687Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6627113Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6864677Z Removing HTTP extra header
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6868743Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.6907589Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7141805Z Removing includeIf entries pointing to credentials config files
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7145055Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7178296Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7181109Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7182704Z includeif.gitdir:/github/workspace/.git.path
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7183991Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7191127Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7219547Z /home/runner/work/_temp/git-credentials-35855294-2f6f-4dd3-a5da-db7a6f6d510c.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7234020Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-35855294\-2f6f\-4dd3\-a5da\-db7a6f6d510c\.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7278319Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7309660Z /home/runner/work/_temp/git-credentials-35855294-2f6f-4dd3-a5da-db7a6f6d510c.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7319601Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-35855294\-2f6f\-4dd3\-a5da\-db7a6f6d510c\.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7361159Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7441333Z /github/runner_temp/git-credentials-35855294-2f6f-4dd3-a5da-db7a6f6d510c.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7483551Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-35855294\-2f6f\-4dd3\-a5da\-db7a6f6d510c\.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7526301Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7555247Z /github/runner_temp/git-credentials-35855294-2f6f-4dd3-a5da-db7a6f6d510c.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7564906Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-35855294\-2f6f\-4dd3\-a5da\-db7a6f6d510c\.config
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7605148Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7841812Z Removing credentials config '/home/runner/work/_temp/git-credentials-35855294-2f6f-4dd3-a5da-db7a6f6d510c.config'
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.7854292Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8308941Z ##[group]Run tj-actions/changed-files@v47.0.6
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8309686Z with:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8310158Z   separator:  
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8310684Z   include_all_old_new_renamed_files: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8311306Z   old_new_separator: ,
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8311839Z   old_new_files_separator:  
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8312419Z   files_from_source_file_separator: 
+findChangedDocsFiles	UNKNOWN STEP	
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8313020Z   files_separator: 
+findChangedDocsFiles	UNKNOWN STEP	
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8313568Z   files_yaml_from_source_file_separator: 
+findChangedDocsFiles	UNKNOWN STEP	
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8314247Z   files_ignore_yaml_from_source_file_separator: 
+findChangedDocsFiles	UNKNOWN STEP	
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8314950Z   files_ignore_separator: 
+findChangedDocsFiles	UNKNOWN STEP	
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8315548Z   files_ignore_from_source_file_separator: 
+findChangedDocsFiles	UNKNOWN STEP	
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8316152Z   path: .
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8316603Z   quotepath: true
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8317383Z   diff_relative: true
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8318174Z   dir_names: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8319199Z   dir_names_exclude_current_dir: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8319911Z   dir_names_include_files_separator: 
+findChangedDocsFiles	UNKNOWN STEP	
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8320619Z   dir_names_deleted_files_include_only_deleted_dirs: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8321290Z   json: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8321760Z   escape_json: true
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8322242Z   safe_output: true
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8322712Z   fetch_depth: 25
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8323227Z   skip_initial_fetch: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8323831Z   fetch_additional_submodule_history: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8324464Z   since_last_remote_commit: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8325031Z   write_output_files: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8325617Z   output_dir: .github/outputs
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8326236Z   output_renamed_files_as_deleted_and_added: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8326899Z   recover_deleted_files: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8327456Z   recover_files_separator: 
+findChangedDocsFiles	UNKNOWN STEP	
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8328026Z   recover_files_ignore_separator: 
+findChangedDocsFiles	UNKNOWN STEP	
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8332232Z   token: ***
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8332759Z   api_url: https://api.github.com
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8333350Z   use_rest_api: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8333865Z   fail_on_initial_diff_error: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8334465Z   fail_on_submodule_diff_error: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8335057Z   negation_patterns_first: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8335592Z   matrix: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8336068Z   exclude_submodules: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8336599Z   exclude_symlinks: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8337116Z   skip_same_sha: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8337638Z   fetch_missing_history_max_retries: 20
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8338259Z   use_posix_path_separator: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8338954Z   tags_pattern: *
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8339435Z env:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8339866Z   CI_VERBOSE: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.8340410Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.9448722Z ##[group]changed-files
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:40.9581645Z Using local .git directory
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0104851Z Running on a push event...
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0439848Z Retrieving changes between eaa5e264a917973216dad95fb9f8e58fea5f513f (main) → b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a (main)
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0509415Z All Done!
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0510593Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0511911Z ##[group]changed-files-all
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0568173Z All Done!
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0569536Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0756791Z ##[group]Run isDocsFilesChanged='false'
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0757540Z ^[[36;1misDocsFilesChanged='false'^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0758649Z ^[[36;1m# workflow_dispatch and workflow_run have no diff to inspect. Without^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0759648Z ^[[36;1m# this the manual trigger this workflow advertises did nothing at^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0760771Z ^[[36;1m# all: every job was gated on a change list that is empty for a^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0761480Z ^[[36;1m# dispatch.^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0762143Z ^[[36;1mif [ "push" = "workflow_dispatch" ] || [ "push" = "workflow_run" ]; then^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0762911Z ^[[36;1m  isDocsFilesChanged='true'^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0763443Z ^[[36;1mfi^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0763915Z ^[[36;1mecho "Changed files: $ALL_CHANGED_FILES"^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0764582Z ^[[36;1mfor changedFile in $ALL_CHANGED_FILES; do^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0765493Z ^[[36;1m  if [[ $changedFile == docs/* ]] || [[ $changedFile == .github/workflows/pages.yml ]]; then^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0766341Z ^[[36;1m    isDocsFilesChanged='true'^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0766875Z ^[[36;1m    break^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0767291Z ^[[36;1m  fi^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0767688Z ^[[36;1mdone^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0768596Z ^[[36;1mecho "isDocsFilesChanged=${isDocsFilesChanged}" >> "$GITHUB_OUTPUT"^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.0769497Z ^[[36;1mecho "isDocsFilesChanged: ${isDocsFilesChanged}"^[[0m
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.1066451Z shell: /usr/bin/bash -e {0}
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.1067012Z env:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.1067435Z   CI_VERBOSE: false
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.1093724Z   ALL_CHANGED_FILES: .github/workflows/binary-interop.yml .github/workflows/dependencies.yml csharp/Link.Foundation.Links.Notation.Tests/BinaryLinksNotationTests.cs csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs csharp/Link.Foundation.Links.Notation/Binary/BinaryLinoCodec.cs csharp/Link.Foundation.Links.Notation/Binary/BinaryNotationException.cs csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs csharp/Link.Foundation.Links.Notation/Binary/LinoFormat.cs csharp/Link.Foundation.Links.Notation/Binary/LinoMapping.cs csharp/Link.Foundation.Links.Notation/Binary/PacketReader.cs csharp/Link.Foundation.Links.Notation/Binary/SectionPlanner.cs docs/protocol/binary-links-notation-vectors.txt docs/protocol/binary-links-notation.md examples/binary/README.md examples/binary/corpus.txt examples/binary/csharp/BinaryExample.csproj examples/binary/csharp/Program.cs examples/binary/java/BinaryExample.java examples/binary/js.mjs examples/binary/php.php examples/binary/python.py examples/binary/run-interop.sh examples/binary/typescript.ts experiments/issue-325/FormatterProbe.java experiments/issue-325/README.md experiments/issue-325/fetch-upstream.py experiments/issue-325/port-codecs.py experiments/issue-325/port-tests.py experiments/issue-325/test_dependency_check.py go/binary.go go/binary_test.go go/examples/binary/main.go java/format.sh java/src/main/java/io/github/linkfoundation/linksnotation/BinaryLinoCodec.java java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java js/src/Binary.js js/tests/Binary.test.js php/src/Binary/ArityRange.php php/src/Binary/BinaryLinoCodec.php php/src/Binary/DecodeLimits.php php/src/Binary/Decoder.php php/src/Binary/Encoder.php php/src/Binary/LinksPacket.php php/src/Binary/Options.php php/src/Binary/PacketReader.php php/src/Binary/Reference.php php/src/Binary/Section.php php/src/Binary/UInt64.php php/tests/BinaryTest.php python/links_notation/binary.py python/tests/test_binary.py rust/links-notation/examples/binary_lino.rs rust/links-notation/src/binary/error.rs rust/links-notation/src/binary/format.rs rust/links-notation/src/binary/mapping.rs rust/links-notation/src/binary/mod.rs rust/links-notation/src/binary/packet.rs rust/links-notation/tests/binary_notation_tests.rs scripts/ci/check-dependencies.py scripts/ci/check-npm-locks.mjs scripts/ci/requirements.txt .github/dependabot.yml .github/workflows/AutoMerge.yml .github/workflows/benchmarks.yml .github/workflows/bom-check.yml .github/workflows/csharp.yml .github/workflows/docs.yml .github/workflows/go.yml .github/workflows/java.yml .github/workflows/js.yml .github/workflows/links.yml .github/workflows/pages.yml .github/workflows/php.yml .github/workflows/python.yml .github/workflows/release-audit.yml .github/workflows/rust.yml .github/workflows/security.yml .github/workflows/workflows.yml .pre-commit-config.yaml CHANGELOG.md README.md README.ru.md TEST_CASE_COMPARISON.md benchmarks/BENCHMARK_RESULTS.md benchmarks/csharp/Benchmark.csproj benchmarks/java/pom.xml benchmarks/js/package-lock.json benchmarks/php/composer.json benchmarks/tools/package-lock.json benchmarks/tools/package.json csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/README.md docs/comparison/package-lock.json docs/comparison/package.json docs/website/package-lock.json docs/website/package.json go/VERSION java/README.md java/README.ru.md java/pom.xml java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java js/bun.lock js/dist/index.js js/index.d.ts js/package-lock.json js/package.json js/src/index.js php/README.md php/README.ru.md php/composer.json python/links_notation/__init__.py python/pyproject.toml rust/links-notation-benchmark/Cargo.toml rust/links-notation-macro/Cargo.toml rust/links-notation/Cargo.toml rust/links-notation/README.md rust/links-notation/src/lib.rs scripts/version-consistency.mjs
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.1119812Z ##[endgroup]
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.1267344Z Changed files: .github/workflows/binary-interop.yml .github/workflows/dependencies.yml csharp/Link.Foundation.Links.Notation.Tests/BinaryLinksNotationTests.cs csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs csharp/Link.Foundation.Links.Notation/Binary/BinaryLinoCodec.cs csharp/Link.Foundation.Links.Notation/Binary/BinaryNotationException.cs csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs csharp/Link.Foundation.Links.Notation/Binary/LinoFormat.cs csharp/Link.Foundation.Links.Notation/Binary/LinoMapping.cs csharp/Link.Foundation.Links.Notation/Binary/PacketReader.cs csharp/Link.Foundation.Links.Notation/Binary/SectionPlanner.cs docs/protocol/binary-links-notation-vectors.txt docs/protocol/binary-links-notation.md examples/binary/README.md examples/binary/corpus.txt examples/binary/csharp/BinaryExample.csproj examples/binary/csharp/Program.cs examples/binary/java/BinaryExample.java examples/binary/js.mjs examples/binary/php.php examples/binary/python.py examples/binary/run-interop.sh examples/binary/typescript.ts experiments/issue-325/FormatterProbe.java experiments/issue-325/README.md experiments/issue-325/fetch-upstream.py experiments/issue-325/port-codecs.py experiments/issue-325/port-tests.py experiments/issue-325/test_dependency_check.py go/binary.go go/binary_test.go go/examples/binary/main.go java/format.sh java/src/main/java/io/github/linkfoundation/linksnotation/BinaryLinoCodec.java java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java js/src/Binary.js js/tests/Binary.test.js php/src/Binary/ArityRange.php php/src/Binary/BinaryLinoCodec.php php/src/Binary/DecodeLimits.php php/src/Binary/Decoder.php php/src/Binary/Encoder.php php/src/Binary/LinksPacket.php php/src/Binary/Options.php php/src/Binary/PacketReader.php php/src/Binary/Reference.php php/src/Binary/Section.php php/src/Binary/UInt64.php php/tests/BinaryTest.php python/links_notation/binary.py python/tests/test_binary.py rust/links-notation/examples/binary_lino.rs rust/links-notation/src/binary/error.rs rust/links-notation/src/binary/format.rs rust/links-notation/src/binary/mapping.rs rust/links-notation/src/binary/mod.rs rust/links-notation/src/binary/packet.rs rust/links-notation/tests/binary_notation_tests.rs scripts/ci/check-dependencies.py scripts/ci/check-npm-locks.mjs scripts/ci/requirements.txt .github/dependabot.yml .github/workflows/AutoMerge.yml .github/workflows/benchmarks.yml .github/workflows/bom-check.yml .github/workflows/csharp.yml .github/workflows/docs.yml .github/workflows/go.yml .github/workflows/java.yml .github/workflows/js.yml .github/workflows/links.yml .github/workflows/pages.yml .github/workflows/php.yml .github/workflows/python.yml .github/workflows/release-audit.yml .github/workflows/rust.yml .github/workflows/security.yml .github/workflows/workflows.yml .pre-commit-config.yaml CHANGELOG.md README.md README.ru.md TEST_CASE_COMPARISON.md benchmarks/BENCHMARK_RESULTS.md benchmarks/csharp/Benchmark.csproj benchmarks/java/pom.xml benchmarks/js/package-lock.json benchmarks/php/composer.json benchmarks/tools/package-lock.json benchmarks/tools/package.json csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj csharp/README.md docs/comparison/package-lock.json docs/comparison/package.json docs/website/package-lock.json docs/website/package.json go/VERSION java/README.md java/README.ru.md java/pom.xml java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java js/bun.lock js/dist/index.js js/index.d.ts js/package-lock.json js/package.json js/src/index.js php/README.md php/README.ru.md php/composer.json python/links_notation/__init__.py python/pyproject.toml rust/links-notation-benchmark/Cargo.toml rust/links-notation-macro/Cargo.toml rust/links-notation/Cargo.toml rust/links-notation/README.md rust/links-notation/src/lib.rs scripts/version-consistency.mjs
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.1293294Z isDocsFilesChanged: true
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.1453254Z Post job cleanup.
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2382708Z [command]/usr/bin/git version
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2439679Z git version 2.55.0
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2472704Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/244c9df4-9749-4ef6-bec8-eb867ee295fe/.gitconfig'
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2485375Z Temporarily overriding HOME='/home/runner/work/_temp/244c9df4-9749-4ef6-bec8-eb867ee295fe' before making global git config changes
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2488067Z Adding repository directory to the temporary git global config as a safe directory
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2491367Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2529962Z Removing SSH command configuration
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2536626Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2587484Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2861183Z Removing HTTP extra header
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2880223Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.2964760Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.3191388Z Removing includeIf entries pointing to credentials config files
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.3199105Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.3243333Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.3699472Z Evaluate and set job outputs
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.3707440Z Set output 'isDocsFilesChanged'
+findChangedDocsFiles	UNKNOWN STEP	2026-10-06T15:17:41.3711260Z Cleaning up orphan processes
+build	UNKNOWN STEP	﻿2026-10-06T15:18:16.3049694Z Current runner version: '2.337.0'
+build	UNKNOWN STEP	2026-10-06T15:18:16.3074431Z ##[group]Runner Image Provisioner
+build	UNKNOWN STEP	2026-10-06T15:18:16.3075713Z Hosted Compute Agent
+build	UNKNOWN STEP	2026-10-06T15:18:16.3076360Z Version: 20260901.588
+build	UNKNOWN STEP	2026-10-06T15:18:16.3077061Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+build	UNKNOWN STEP	2026-10-06T15:18:16.3077858Z Build Date: 2026-09-01T19:56:44Z
+build	UNKNOWN STEP	2026-10-06T15:18:16.3078561Z Worker ID: {32cfca31-18fd-40e2-b537-ae06ab287c07}
+build	UNKNOWN STEP	2026-10-06T15:18:16.3079334Z Azure Region: westus2
+build	UNKNOWN STEP	2026-10-06T15:18:16.3079992Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:16.3082031Z ##[group]Operating System
+build	UNKNOWN STEP	2026-10-06T15:18:16.3082748Z Ubuntu
+build	UNKNOWN STEP	2026-10-06T15:18:16.3083273Z 24.04.5
+build	UNKNOWN STEP	2026-10-06T15:18:16.3083877Z LTS
+build	UNKNOWN STEP	2026-10-06T15:18:16.3084496Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:16.3085049Z ##[group]Runner Image
+build	UNKNOWN STEP	2026-10-06T15:18:16.3086324Z Image: ubuntu-24.04
+build	UNKNOWN STEP	2026-10-06T15:18:16.3086931Z Version: 20260927.320.1
+build	UNKNOWN STEP	2026-10-06T15:18:16.3088280Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+build	UNKNOWN STEP	2026-10-06T15:18:16.3089868Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+build	UNKNOWN STEP	2026-10-06T15:18:16.3090919Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:16.3092025Z ##[group]GITHUB_TOKEN Permissions
+build	UNKNOWN STEP	2026-10-06T15:18:16.3094214Z Contents: read
+build	UNKNOWN STEP	2026-10-06T15:18:16.3094880Z Metadata: read
+build	UNKNOWN STEP	2026-10-06T15:18:16.3095855Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:16.3097988Z Secret source: Actions
+build	UNKNOWN STEP	2026-10-06T15:18:16.3099008Z Cache mode: write
+build	UNKNOWN STEP	2026-10-06T15:18:16.3100013Z Prepare workflow directory
+build	UNKNOWN STEP	2026-10-06T15:18:16.3679142Z Prepare all required actions
+build	UNKNOWN STEP	2026-10-06T15:18:16.3729331Z Getting action download info
+build	UNKNOWN STEP	2026-10-06T15:18:16.7709386Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+build	UNKNOWN STEP	2026-10-06T15:18:16.8633640Z Download action repository 'actions/setup-node@v7.0.0' (SHA:820762786026740c76f36085b0efc47a31fe5020)
+build	UNKNOWN STEP	2026-10-06T15:18:16.9443233Z Download action repository 'actions/configure-pages@v6.0.0' (SHA:45bfe0192ca1faeb007ade9deae92b16b8254a0d)
+build	UNKNOWN STEP	2026-10-06T15:18:17.2559836Z Download action repository 'actions/upload-pages-artifact@v5.0.0' (SHA:fc324d3547104276b827a68afc52ff2a11cc49c9)
+build	UNKNOWN STEP	2026-10-06T15:18:17.5076981Z Getting action download info
+build	UNKNOWN STEP	2026-10-06T15:18:17.7067356Z Download action repository 'actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f' (SHA:bbbca2ddaa5d8feaa63e36b76fdaad77386f024f)
+build	UNKNOWN STEP	2026-10-06T15:18:17.8918367Z Complete job name: build
+build	UNKNOWN STEP	2026-10-06T15:18:17.9773412Z ##[group]Run actions/checkout@v7.0.1
+build	UNKNOWN STEP	2026-10-06T15:18:17.9774815Z with:
+build	UNKNOWN STEP	2026-10-06T15:18:17.9775879Z   persist-credentials: false
+build	UNKNOWN STEP	2026-10-06T15:18:17.9776807Z   submodules: true
+build	UNKNOWN STEP	2026-10-06T15:18:17.9777698Z   repository: link-foundation/links-notation
+build	UNKNOWN STEP	2026-10-06T15:18:17.9787548Z   token: ***
+build	UNKNOWN STEP	2026-10-06T15:18:17.9788381Z   ssh-strict: true
+build	UNKNOWN STEP	2026-10-06T15:18:17.9789173Z   ssh-user: git
+build	UNKNOWN STEP	2026-10-06T15:18:17.9789922Z   clean: true
+build	UNKNOWN STEP	2026-10-06T15:18:17.9790722Z   sparse-checkout-cone-mode: true
+build	UNKNOWN STEP	2026-10-06T15:18:17.9791686Z   fetch-depth: 1
+build	UNKNOWN STEP	2026-10-06T15:18:17.9792458Z   fetch-tags: false
+build	UNKNOWN STEP	2026-10-06T15:18:17.9793292Z   show-progress: true
+build	UNKNOWN STEP	2026-10-06T15:18:17.9794099Z   lfs: false
+build	UNKNOWN STEP	2026-10-06T15:18:17.9794849Z   set-safe-directory: true
+build	UNKNOWN STEP	2026-10-06T15:18:17.9795943Z   allow-unsafe-pr-checkout: false
+build	UNKNOWN STEP	2026-10-06T15:18:17.9797212Z env:
+build	UNKNOWN STEP	2026-10-06T15:18:17.9797931Z   CI_VERBOSE: false
+build	UNKNOWN STEP	2026-10-06T15:18:17.9798717Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:18.0841857Z Syncing repository: link-foundation/links-notation
+build	UNKNOWN STEP	2026-10-06T15:18:18.0844648Z ##[group]Getting Git version info
+build	UNKNOWN STEP	2026-10-06T15:18:18.0847211Z Working directory is '/home/runner/work/links-notation/links-notation'
+build	UNKNOWN STEP	2026-10-06T15:18:18.0850143Z [command]/usr/bin/git version
+build	UNKNOWN STEP	2026-10-06T15:18:18.0936380Z git version 2.55.0
+build	UNKNOWN STEP	2026-10-06T15:18:18.0966171Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:18.0977509Z Temporarily overriding HOME='/home/runner/work/_temp/d90d2f62-10d1-4852-86b0-c3b5195facef' before making global git config changes
+build	UNKNOWN STEP	2026-10-06T15:18:18.0982915Z Adding repository directory to the temporary git global config as a safe directory
+build	UNKNOWN STEP	2026-10-06T15:18:18.0989911Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+build	UNKNOWN STEP	2026-10-06T15:18:18.1036937Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+build	UNKNOWN STEP	2026-10-06T15:18:18.1040617Z ##[group]Determining repository object format
+build	UNKNOWN STEP	2026-10-06T15:18:18.1043414Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:18.1045893Z ##[group]Initializing the repository
+build	UNKNOWN STEP	2026-10-06T15:18:18.1048668Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+build	UNKNOWN STEP	2026-10-06T15:18:18.1184318Z hint: Using 'master' as the name for the initial branch. This default branch name
+build	UNKNOWN STEP	2026-10-06T15:18:18.1188238Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+build	UNKNOWN STEP	2026-10-06T15:18:18.1190280Z hint: to use in all of your new repositories, which will suppress this warning,
+build	UNKNOWN STEP	2026-10-06T15:18:18.1274011Z hint: call:
+build	UNKNOWN STEP	2026-10-06T15:18:18.1275676Z hint:
+build	UNKNOWN STEP	2026-10-06T15:18:18.1277388Z hint: 	git config --global init.defaultBranch <name>
+build	UNKNOWN STEP	2026-10-06T15:18:18.1279429Z hint:
+build	UNKNOWN STEP	2026-10-06T15:18:18.1281234Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+build	UNKNOWN STEP	2026-10-06T15:18:18.1284357Z hint: 'development'. The just-created branch can be renamed via this command:
+build	UNKNOWN STEP	2026-10-06T15:18:18.1287339Z hint:
+build	UNKNOWN STEP	2026-10-06T15:18:18.1288731Z hint: 	git branch -m <name>
+build	UNKNOWN STEP	2026-10-06T15:18:18.1290172Z hint:
+build	UNKNOWN STEP	2026-10-06T15:18:18.1292114Z hint: Disable this message with "git config set advice.defaultBranchName false"
+build	UNKNOWN STEP	2026-10-06T15:18:18.1301470Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+build	UNKNOWN STEP	2026-10-06T15:18:18.1306565Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+build	UNKNOWN STEP	2026-10-06T15:18:18.1310668Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:18.1312400Z ##[group]Disabling automatic garbage collection
+build	UNKNOWN STEP	2026-10-06T15:18:18.1313934Z [command]/usr/bin/git config --local gc.auto 0
+build	UNKNOWN STEP	2026-10-06T15:18:18.1318410Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:18.1321178Z ##[group]Setting up auth
+build	UNKNOWN STEP	2026-10-06T15:18:18.1323156Z Removing SSH command configuration
+build	UNKNOWN STEP	2026-10-06T15:18:18.1327637Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	UNKNOWN STEP	2026-10-06T15:18:18.1354683Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	UNKNOWN STEP	2026-10-06T15:18:18.1728653Z Removing HTTP extra header
+build	UNKNOWN STEP	2026-10-06T15:18:18.1735432Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	UNKNOWN STEP	2026-10-06T15:18:18.1778137Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	UNKNOWN STEP	2026-10-06T15:18:18.2012534Z Removing includeIf entries pointing to credentials config files
+build	UNKNOWN STEP	2026-10-06T15:18:18.2017878Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	UNKNOWN STEP	2026-10-06T15:18:18.2054729Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	UNKNOWN STEP	2026-10-06T15:18:18.2285962Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+build	UNKNOWN STEP	2026-10-06T15:18:18.2325900Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config
+build	UNKNOWN STEP	2026-10-06T15:18:18.2362875Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config
+build	UNKNOWN STEP	2026-10-06T15:18:18.2399881Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config
+build	UNKNOWN STEP	2026-10-06T15:18:18.2435782Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config
+build	UNKNOWN STEP	2026-10-06T15:18:18.2467274Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:18.2468673Z ##[group]Fetching the repository
+build	UNKNOWN STEP	2026-10-06T15:18:18.2473922Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a:refs/remotes/origin/main
+build	UNKNOWN STEP	2026-10-06T15:18:19.0173355Z From https://github.com/link-foundation/links-notation
+build	UNKNOWN STEP	2026-10-06T15:18:19.0174161Z  * [new ref]         b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a -> origin/main
+build	UNKNOWN STEP	2026-10-06T15:18:19.0181970Z [command]/usr/bin/git branch --list --remote origin/main
+build	UNKNOWN STEP	2026-10-06T15:18:19.0211690Z   origin/main
+build	UNKNOWN STEP	2026-10-06T15:18:19.0219581Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+build	UNKNOWN STEP	2026-10-06T15:18:19.0246026Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+build	UNKNOWN STEP	2026-10-06T15:18:19.0250702Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:19.0251794Z ##[group]Determining the checkout info
+build	UNKNOWN STEP	2026-10-06T15:18:19.0252992Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:19.0256827Z [command]/usr/bin/git sparse-checkout disable
+build	UNKNOWN STEP	2026-10-06T15:18:19.0315810Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+build	UNKNOWN STEP	2026-10-06T15:18:19.0350226Z ##[group]Checking out the ref
+build	UNKNOWN STEP	2026-10-06T15:18:19.0355035Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+build	UNKNOWN STEP	2026-10-06T15:18:19.1109453Z Switched to a new branch 'main'
+build	UNKNOWN STEP	2026-10-06T15:18:19.1113426Z branch 'main' set up to track 'origin/main'.
+build	UNKNOWN STEP	2026-10-06T15:18:19.1123792Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:19.1124620Z ##[group]Setting up auth for fetching submodules
+build	UNKNOWN STEP	2026-10-06T15:18:19.1129894Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+build	UNKNOWN STEP	2026-10-06T15:18:19.1175554Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config
+build	UNKNOWN STEP	2026-10-06T15:18:19.1212552Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+build	UNKNOWN STEP	2026-10-06T15:18:19.1250291Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+build	UNKNOWN STEP	2026-10-06T15:18:19.1290777Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+build	UNKNOWN STEP	2026-10-06T15:18:19.1323696Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:19.1324772Z ##[group]Fetching submodules
+build	UNKNOWN STEP	2026-10-06T15:18:19.1327255Z [command]/usr/bin/git submodule sync
+build	UNKNOWN STEP	2026-10-06T15:18:19.1566591Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+build	UNKNOWN STEP	2026-10-06T15:18:19.1831184Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+build	UNKNOWN STEP	2026-10-06T15:18:19.2063464Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:19.2109819Z [command]/usr/bin/git log -1 --format=%H
+build	UNKNOWN STEP	2026-10-06T15:18:19.2141906Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+build	UNKNOWN STEP	2026-10-06T15:18:19.2150893Z ##[group]Removing auth
+build	UNKNOWN STEP	2026-10-06T15:18:19.2151790Z Removing SSH command configuration
+build	UNKNOWN STEP	2026-10-06T15:18:19.2154904Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	UNKNOWN STEP	2026-10-06T15:18:19.2190144Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	UNKNOWN STEP	2026-10-06T15:18:19.2424279Z Removing HTTP extra header
+build	UNKNOWN STEP	2026-10-06T15:18:19.2426179Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	UNKNOWN STEP	2026-10-06T15:18:19.2465536Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	UNKNOWN STEP	2026-10-06T15:18:19.2692132Z Removing includeIf entries pointing to credentials config files
+build	UNKNOWN STEP	2026-10-06T15:18:19.2694962Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	UNKNOWN STEP	2026-10-06T15:18:19.2727146Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+build	UNKNOWN STEP	2026-10-06T15:18:19.2728629Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+build	UNKNOWN STEP	2026-10-06T15:18:19.2729497Z includeif.gitdir:/github/workspace/.git.path
+build	UNKNOWN STEP	2026-10-06T15:18:19.2730186Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+build	UNKNOWN STEP	2026-10-06T15:18:19.2736647Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+build	UNKNOWN STEP	2026-10-06T15:18:19.2763515Z /home/runner/work/_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config
+build	UNKNOWN STEP	2026-10-06T15:18:19.2772968Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-679ec06e\-ca7e\-421f\-844f\-513a13ac5367\.config
+build	UNKNOWN STEP	2026-10-06T15:18:19.2812098Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+build	UNKNOWN STEP	2026-10-06T15:18:19.2842507Z /home/runner/work/_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config
+build	UNKNOWN STEP	2026-10-06T15:18:19.2850041Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-679ec06e\-ca7e\-421f\-844f\-513a13ac5367\.config
+build	UNKNOWN STEP	2026-10-06T15:18:19.2887059Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+build	UNKNOWN STEP	2026-10-06T15:18:19.2913423Z /github/runner_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config
+build	UNKNOWN STEP	2026-10-06T15:18:19.2922025Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-679ec06e\-ca7e\-421f\-844f\-513a13ac5367\.config
+build	UNKNOWN STEP	2026-10-06T15:18:19.2962796Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+build	UNKNOWN STEP	2026-10-06T15:18:19.2990783Z /github/runner_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config
+build	UNKNOWN STEP	2026-10-06T15:18:19.3000073Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-679ec06e\-ca7e\-421f\-844f\-513a13ac5367\.config
+build	UNKNOWN STEP	2026-10-06T15:18:19.3037575Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	UNKNOWN STEP	2026-10-06T15:18:19.3260648Z Removing credentials config '/home/runner/work/_temp/git-credentials-679ec06e-ca7e-421f-844f-513a13ac5367.config'
+build	UNKNOWN STEP	2026-10-06T15:18:19.3269423Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:19.3509992Z ##[group]Run actions/setup-node@v7.0.0
+build	UNKNOWN STEP	2026-10-06T15:18:19.3510483Z with:
+build	UNKNOWN STEP	2026-10-06T15:18:19.3510853Z   node-version: 22
+build	UNKNOWN STEP	2026-10-06T15:18:19.3511223Z   cache: npm
+build	UNKNOWN STEP	2026-10-06T15:18:19.3511673Z   cache-dependency-path: docs/website/package-lock.json
+build	UNKNOWN STEP	2026-10-06T15:18:19.3512190Z   check-latest: false
+build	UNKNOWN STEP	2026-10-06T15:18:19.3515482Z   token: ***
+build	UNKNOWN STEP	2026-10-06T15:18:19.3515890Z   package-manager-cache: true
+build	UNKNOWN STEP	2026-10-06T15:18:19.3516329Z env:
+build	UNKNOWN STEP	2026-10-06T15:18:19.3516697Z   CI_VERBOSE: false
+build	UNKNOWN STEP	2026-10-06T15:18:19.3517104Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:19.4780551Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+build	UNKNOWN STEP	2026-10-06T15:18:19.4782342Z ##[group]Environment details
+build	UNKNOWN STEP	2026-10-06T15:18:19.9068736Z node: v22.23.3
+build	UNKNOWN STEP	2026-10-06T15:18:19.9070621Z npm: 10.9.9
+build	UNKNOWN STEP	2026-10-06T15:18:19.9071775Z yarn: 1.22.22
+build	UNKNOWN STEP	2026-10-06T15:18:19.9073589Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:19.9093206Z [command]/opt/hostedtoolcache/node/22.23.3/x64/bin/npm config get cache
+build	UNKNOWN STEP	2026-10-06T15:18:20.0314208Z /home/runner/.npm
+build	UNKNOWN STEP	2026-10-06T15:18:20.3106839Z npm cache is not found
+build	UNKNOWN STEP	2026-10-06T15:18:20.3242019Z ##[group]Run npm ci
+build	UNKNOWN STEP	2026-10-06T15:18:20.3242565Z ^[[36;1mnpm ci^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:20.3529879Z shell: /usr/bin/bash -e {0}
+build	UNKNOWN STEP	2026-10-06T15:18:20.3530413Z env:
+build	UNKNOWN STEP	2026-10-06T15:18:20.3530810Z   CI_VERBOSE: false
+build	UNKNOWN STEP	2026-10-06T15:18:20.3531231Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:22.3385399Z 
+build	UNKNOWN STEP	2026-10-06T15:18:22.3394530Z added 94 packages, and audited 96 packages in 2s
+build	UNKNOWN STEP	2026-10-06T15:18:22.3395653Z 
+build	UNKNOWN STEP	2026-10-06T15:18:22.3396141Z 24 packages are looking for funding
+build	UNKNOWN STEP	2026-10-06T15:18:22.3396690Z   run `npm fund` for details
+build	UNKNOWN STEP	2026-10-06T15:18:22.3396900Z 
+build	UNKNOWN STEP	2026-10-06T15:18:22.3397054Z found 0 vulnerabilities
+build	UNKNOWN STEP	2026-10-06T15:18:22.3846014Z ##[group]Run npm run build
+build	UNKNOWN STEP	2026-10-06T15:18:22.3846374Z ^[[36;1mnpm run build^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:22.3911453Z shell: /usr/bin/bash -e {0}
+build	UNKNOWN STEP	2026-10-06T15:18:22.3911746Z env:
+build	UNKNOWN STEP	2026-10-06T15:18:22.3911945Z   CI_VERBOSE: false
+build	UNKNOWN STEP	2026-10-06T15:18:22.3912181Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:22.4942342Z 
+build	UNKNOWN STEP	2026-10-06T15:18:22.4943158Z > links-notation-website@0.23.0 build
+build	UNKNOWN STEP	2026-10-06T15:18:22.4943882Z > vite build
+build	UNKNOWN STEP	2026-10-06T15:18:22.4944143Z 
+build	UNKNOWN STEP	2026-10-06T15:18:22.9322656Z ^[[36mvite v8.3.3 ^[[32mbuilding client environment for production...^[[36m^[[39m
+build	UNKNOWN STEP	2026-10-06T15:18:22.9430544Z transforming...
+build	UNKNOWN STEP	2026-10-06T15:18:22.9889187Z ^[[33m[plugin rolldown:vite-resolve] Module "events" has been externalized for browser compatibility, imported by "/home/runner/work/links-notation/links-notation/js/dist/index.js". See https://vite.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.^[[39m
+build	UNKNOWN STEP	2026-10-06T15:18:22.9891611Z ✓ 13 modules transformed.
+build	UNKNOWN STEP	2026-10-06T15:18:23.0001137Z rendering chunks...
+build	UNKNOWN STEP	2026-10-06T15:18:23.0129253Z computing gzip size...
+build	UNKNOWN STEP	2026-10-06T15:18:23.0136532Z dist/assets/favicon-B57UUxEo.svg      0.32 kB │ gzip:  0.19 kB
+build	UNKNOWN STEP	2026-10-06T15:18:23.0137421Z dist/assets/favicon-CM1ZMvyJ.ico      1.43 kB
+build	UNKNOWN STEP	2026-10-06T15:18:23.0138466Z dist/index.html                      16.73 kB │ gzip:  3.40 kB
+build	UNKNOWN STEP	2026-10-06T15:18:23.0139512Z dist/assets/comparison-CXaoCTF0.svg  21.92 kB │ gzip:  2.35 kB
+build	UNKNOWN STEP	2026-10-06T15:18:23.0140531Z dist/assets/index-C0CJS3Y1.css        9.05 kB │ gzip:  2.29 kB
+build	UNKNOWN STEP	2026-10-06T15:18:23.0141529Z dist/assets/index-Da58XGsz.js        41.11 kB │ gzip: 12.91 kB
+build	UNKNOWN STEP	2026-10-06T15:18:23.0142052Z 
+build	UNKNOWN STEP	2026-10-06T15:18:23.0150819Z ^[[32m✓ built in 81ms^[[39m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0373158Z ##[group]Run set -euo pipefail
+build	UNKNOWN STEP	2026-10-06T15:18:23.0373544Z ^[[36;1mset -euo pipefail^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0373942Z ^[[36;1mif ! git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0374560Z ^[[36;1m  echo "::warning::No gh-pages branch, publishing the website without the C# API reference"^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0375012Z ^[[36;1m  exit 0^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0375492Z ^[[36;1mfi^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0375814Z ^[[36;1m# FETCH_HEAD rather than origin/gh-pages: fetching a single branch^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0376299Z ^[[36;1m# by name is not guaranteed to update the remote-tracking ref.^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0376687Z ^[[36;1mgit fetch --depth 1 origin gh-pages^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0376987Z ^[[36;1mrm -rf gh-pages-content^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0377251Z ^[[36;1mmkdir gh-pages-content^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0377604Z ^[[36;1mgit archive --format=tar FETCH_HEAD | tar -x -C gh-pages-content^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0378136Z ^[[36;1m# The branch carries a legacy landing page; the website owns the root.^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0378558Z ^[[36;1mrm -f gh-pages-content/index.html^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0378887Z ^[[36;1mcp -r gh-pages-content/. docs/website/dist/^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0379203Z ^[[36;1mrm -rf gh-pages-content^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0379516Z ^[[36;1mif [ ! -f docs/website/dist/csharp/index.html ]; then^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0380140Z ^[[36;1m  echo "::warning::The gh-pages branch has no csharp/index.html, so the published site will not include the C# API reference"^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0380685Z ^[[36;1mfi^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0380899Z ^[[36;1mif [ "${CI_VERBOSE}" = "true" ]; then^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0381247Z ^[[36;1m  find docs/website/dist -maxdepth 2 -type d -print^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0381558Z ^[[36;1mfi^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:23.0443871Z shell: /usr/bin/bash -e {0}
+build	UNKNOWN STEP	2026-10-06T15:18:23.0444122Z env:
+build	UNKNOWN STEP	2026-10-06T15:18:23.0444310Z   CI_VERBOSE: false
+build	UNKNOWN STEP	2026-10-06T15:18:23.0444526Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:24.1575416Z From https://github.com/link-foundation/links-notation
+build	UNKNOWN STEP	2026-10-06T15:18:24.1576203Z  * branch            gh-pages   -> FETCH_HEAD
+build	UNKNOWN STEP	2026-10-06T15:18:24.1576621Z  * [new branch]      gh-pages   -> origin/gh-pages
+build	UNKNOWN STEP	2026-10-06T15:18:24.2151733Z ##[group]Run actions/configure-pages@v6.0.0
+build	UNKNOWN STEP	2026-10-06T15:18:24.2152075Z with:
+build	UNKNOWN STEP	2026-10-06T15:18:24.2154730Z   token: ***
+build	UNKNOWN STEP	2026-10-06T15:18:24.2154950Z   enablement: false
+build	UNKNOWN STEP	2026-10-06T15:18:24.2155484Z env:
+build	UNKNOWN STEP	2026-10-06T15:18:24.2155683Z   CI_VERBOSE: false
+build	UNKNOWN STEP	2026-10-06T15:18:24.2155890Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:24.5817959Z ##[group]Run actions/upload-pages-artifact@v5.0.0
+build	UNKNOWN STEP	2026-10-06T15:18:24.5818306Z with:
+build	UNKNOWN STEP	2026-10-06T15:18:24.5818504Z   path: docs/website/dist
+build	UNKNOWN STEP	2026-10-06T15:18:24.5818739Z   name: github-pages
+build	UNKNOWN STEP	2026-10-06T15:18:24.5818958Z   retention-days: 1
+build	UNKNOWN STEP	2026-10-06T15:18:24.5819175Z   include-hidden-files: false
+build	UNKNOWN STEP	2026-10-06T15:18:24.5819401Z env:
+build	UNKNOWN STEP	2026-10-06T15:18:24.5819589Z   CI_VERBOSE: false
+build	UNKNOWN STEP	2026-10-06T15:18:24.5819790Z   GITHUB_PAGES: true
+build	UNKNOWN STEP	2026-10-06T15:18:24.5819992Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:24.5879993Z ##[start-action display=Archive artifact;id=__actions_upload-pages-artifact.__run]
+build	UNKNOWN STEP	2026-10-06T15:18:24.5922651Z ##[group]Run echo ::group::Archive artifact
+build	UNKNOWN STEP	2026-10-06T15:18:24.5922989Z ^[[36;1mecho ::group::Archive artifact^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:24.5923256Z ^[[36;1mtar \^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:24.5923494Z ^[[36;1m  --dereference --hard-dereference \^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:24.5923805Z ^[[36;1m  --directory "$INPUT_PATH" \^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:24.5924142Z ^[[36;1m  -cvf "$RUNNER_TEMP/artifact.tar" \^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:24.5924432Z ^[[36;1m  --exclude=.git \^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:24.5924677Z ^[[36;1m  --exclude=.github \^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:24.5924913Z ^[[36;1m  --exclude=.[^/]* \^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:24.5925457Z ^[[36;1m  .^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:24.5925661Z ^[[36;1mecho ::endgroup::^[[0m
+build	UNKNOWN STEP	2026-10-06T15:18:24.5951621Z shell: /usr/bin/sh -e {0}
+build	UNKNOWN STEP	2026-10-06T15:18:24.5951868Z env:
+build	UNKNOWN STEP	2026-10-06T15:18:24.5952057Z   CI_VERBOSE: false
+build	UNKNOWN STEP	2026-10-06T15:18:24.5952275Z   GITHUB_PAGES: true
+build	UNKNOWN STEP	2026-10-06T15:18:24.5952497Z   INPUT_PATH: docs/website/dist
+build	UNKNOWN STEP	2026-10-06T15:18:24.5952739Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:24.5993940Z ##[group]Archive artifact
+build	UNKNOWN STEP	2026-10-06T15:18:24.6007504Z ./
+build	UNKNOWN STEP	2026-10-06T15:18:24.6007765Z ./csharp/
+build	UNKNOWN STEP	2026-10-06T15:18:24.6008128Z ./csharp/manifest.json
+build	UNKNOWN STEP	2026-10-06T15:18:24.6008402Z ./csharp/index.json
+build	UNKNOWN STEP	2026-10-06T15:18:24.6009093Z ./csharp/logo.svg
+build	UNKNOWN STEP	2026-10-06T15:18:24.6009448Z ./csharp/README.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6009920Z ./csharp/search-stopwords.json
+build	UNKNOWN STEP	2026-10-06T15:18:24.6010201Z ./csharp/toc.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6010446Z ./csharp/xrefmap.yml
+build	UNKNOWN STEP	2026-10-06T15:18:24.6011400Z ./csharp/toc.json
+build	UNKNOWN STEP	2026-10-06T15:18:24.6011696Z ./csharp/README.ru.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6012120Z ./csharp/index.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6012373Z ./csharp/favicon.ico
+build	UNKNOWN STEP	2026-10-06T15:18:24.6013837Z ./csharp/Link.Foundation.Links.Notation.pdf
+build	UNKNOWN STEP	2026-10-06T15:18:24.6019292Z ./csharp/styles/
+build	UNKNOWN STEP	2026-10-06T15:18:24.6019870Z ./csharp/styles/glyphicons-halflings-regular-W4DYDFZM.woff2
+build	UNKNOWN STEP	2026-10-06T15:18:24.6020405Z ./csharp/styles/glyphicons-halflings-regular-QXYEM3FU.svg
+build	UNKNOWN STEP	2026-10-06T15:18:24.6021099Z ./csharp/styles/glyphicons-halflings-regular-ACNUA6UY.ttf
+build	UNKNOWN STEP	2026-10-06T15:18:24.6021736Z ./csharp/styles/search-worker.min.js.map
+build	UNKNOWN STEP	2026-10-06T15:18:24.6023517Z ./csharp/styles/docfx.css
+build	UNKNOWN STEP	2026-10-06T15:18:24.6023881Z ./csharp/styles/docfx.js
+build	UNKNOWN STEP	2026-10-06T15:18:24.6024708Z ./csharp/styles/glyphicons-halflings-regular-PIHUWCJO.eot
+build	UNKNOWN STEP	2026-10-06T15:18:24.6025452Z ./csharp/styles/main.js
+build	UNKNOWN STEP	2026-10-06T15:18:24.6025780Z ./csharp/styles/docfx.vendor.min.js.map
+build	UNKNOWN STEP	2026-10-06T15:18:24.6049962Z ./csharp/styles/docfx.vendor.min.css
+build	UNKNOWN STEP	2026-10-06T15:18:24.6051401Z ./csharp/styles/docfx.vendor.min.css.map
+build	UNKNOWN STEP	2026-10-06T15:18:24.6055339Z ./csharp/styles/main.css
+build	UNKNOWN STEP	2026-10-06T15:18:24.6055722Z ./csharp/styles/search-worker.min.js
+build	UNKNOWN STEP	2026-10-06T15:18:24.6056316Z ./csharp/styles/glyphicons-halflings-regular-JOUF32XT.woff
+build	UNKNOWN STEP	2026-10-06T15:18:24.6056790Z ./csharp/styles/docfx.vendor.min.js
+build	UNKNOWN STEP	2026-10-06T15:18:24.6067101Z ./csharp/api/
+build	UNKNOWN STEP	2026-10-06T15:18:24.6067683Z ./csharp/api/Link.Foundation.Links.Notation.StreamParseException.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6068483Z ./csharp/api/Link.Foundation.Links.Notation.LinksGroup-1.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6069258Z ./csharp/api/toc.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6069729Z ./csharp/api/Link.Foundation.Links.Notation.Link-1.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6070430Z ./csharp/api/Link.Foundation.Links.Notation.FormatConfig.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6071322Z ./csharp/api/Link.Foundation.Links.Notation.ParseException.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6072297Z ./csharp/api/Link.Foundation.Links.Notation.Parser.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6072806Z ./csharp/api/toc.json
+build	UNKNOWN STEP	2026-10-06T15:18:24.6073402Z ./csharp/api/Link.Foundation.Links.Notation.FormatOptions.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6074179Z ./csharp/api/Link.Foundation.Links.Notation.StreamPosition.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6074934Z ./csharp/api/Link.Foundation.Links.Notation.ILinksGroupListExtensions.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6076037Z ./csharp/api/Link.Foundation.Links.Notation.IListExtensions.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6076835Z ./csharp/api/Link.Foundation.Links.Notation.LinkFormatExtensions.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6077421Z ./csharp/api/Link.Foundation.Links.Notation.StreamParser.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6077915Z ./csharp/api/Link.Foundation.Links.Notation.id-1.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6078337Z ./csharp/api/Link.Foundation.Links.Notation.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6078818Z ./csharp/api/Link.Foundation.Links.Notation.Comments.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6079603Z ./csharp/api/Link.Foundation.Links.Notation._-1.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6080187Z ./assets/
+build	UNKNOWN STEP	2026-10-06T15:18:24.6080588Z ./assets/index-C0CJS3Y1.css
+build	UNKNOWN STEP	2026-10-06T15:18:24.6081106Z ./assets/favicon-CM1ZMvyJ.ico
+build	UNKNOWN STEP	2026-10-06T15:18:24.6081546Z ./assets/comparison-CXaoCTF0.svg
+build	UNKNOWN STEP	2026-10-06T15:18:24.6082023Z ./assets/index-Da58XGsz.js
+build	UNKNOWN STEP	2026-10-06T15:18:24.6082297Z ./assets/favicon-B57UUxEo.svg
+build	UNKNOWN STEP	2026-10-06T15:18:24.6082544Z ./index.html
+build	UNKNOWN STEP	2026-10-06T15:18:24.6082966Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:24.6093852Z ##[end-action id=__actions_upload-pages-artifact.__run;outcome=success;conclusion=success;duration_ms=21]
+build	UNKNOWN STEP	2026-10-06T15:18:24.6097902Z ##[start-action display=Archive artifact;id=__actions_upload-pages-artifact.__run_2]
+build	UNKNOWN STEP	2026-10-06T15:18:24.6103417Z ##[end-action id=__actions_upload-pages-artifact.__run_2;outcome=skipped;conclusion=skipped;duration_ms=0]
+build	UNKNOWN STEP	2026-10-06T15:18:24.6106638Z ##[start-action display=Archive artifact;id=__actions_upload-pages-artifact.__run_3]
+build	UNKNOWN STEP	2026-10-06T15:18:24.6110306Z ##[end-action id=__actions_upload-pages-artifact.__run_3;outcome=skipped;conclusion=skipped;duration_ms=0]
+build	UNKNOWN STEP	2026-10-06T15:18:24.6112278Z ##[start-action display=Upload artifact;id=__actions_upload-pages-artifact.upload-artifact]
+build	UNKNOWN STEP	2026-10-06T15:18:24.6149050Z ##[group]Run actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
+build	UNKNOWN STEP	2026-10-06T15:18:24.6149460Z with:
+build	UNKNOWN STEP	2026-10-06T15:18:24.6149656Z   name: github-pages
+build	UNKNOWN STEP	2026-10-06T15:18:24.6149903Z   path: /home/runner/work/_temp/artifact.tar
+build	UNKNOWN STEP	2026-10-06T15:18:24.6150190Z   retention-days: 1
+build	UNKNOWN STEP	2026-10-06T15:18:24.6150423Z   if-no-files-found: error
+build	UNKNOWN STEP	2026-10-06T15:18:24.6150675Z   compression-level: 6
+build	UNKNOWN STEP	2026-10-06T15:18:24.6150898Z   overwrite: false
+build	UNKNOWN STEP	2026-10-06T15:18:24.6151121Z   include-hidden-files: false
+build	UNKNOWN STEP	2026-10-06T15:18:24.6151360Z   archive: true
+build	UNKNOWN STEP	2026-10-06T15:18:24.6151551Z env:
+build	UNKNOWN STEP	2026-10-06T15:18:24.6151731Z   CI_VERBOSE: false
+build	UNKNOWN STEP	2026-10-06T15:18:24.6151929Z   GITHUB_PAGES: true
+build	UNKNOWN STEP	2026-10-06T15:18:24.6152129Z ##[endgroup]
+build	UNKNOWN STEP	2026-10-06T15:18:24.7588632Z With the provided path, there will be 1 file uploaded
+build	UNKNOWN STEP	2026-10-06T15:18:24.7596313Z Artifact name is valid!
+build	UNKNOWN STEP	2026-10-06T15:18:24.7626672Z Root directory input is valid!
+build	UNKNOWN STEP	2026-10-06T15:18:25.2009384Z Uploading artifact: github-pages.zip
+build	UNKNOWN STEP	2026-10-06T15:18:25.2066563Z Beginning upload of artifact content to blob storage
+build	UNKNOWN STEP	2026-10-06T15:18:26.2102546Z Uploaded bytes 1882745
+build	UNKNOWN STEP	2026-10-06T15:18:26.2870129Z Finished uploading artifact content to blob storage!
+build	UNKNOWN STEP	2026-10-06T15:18:26.2871689Z SHA256 digest of uploaded artifact is c4600953577c7ef1ae8e5c4a94cf7c121264498d469c227acdfed3ae4a5150d8
+build	UNKNOWN STEP	2026-10-06T15:18:26.2872926Z Finalizing artifact upload
+build	UNKNOWN STEP	2026-10-06T15:18:26.7006425Z Artifact github-pages successfully finalized. Artifact ID 11423087951
+build	UNKNOWN STEP	2026-10-06T15:18:26.7008312Z Artifact github-pages has been successfully uploaded! Final size is 1882745 bytes. Artifact ID is 11423087951
+build	UNKNOWN STEP	2026-10-06T15:18:26.7010304Z Artifact download URL: https://github.com/link-foundation/links-notation/actions/runs/37486124221/artifacts/11423087951
+build	UNKNOWN STEP	2026-10-06T15:18:26.7097856Z ##[end-action id=__actions_upload-pages-artifact.upload-artifact;outcome=success;conclusion=success;duration_ms=2098]
+build	UNKNOWN STEP	2026-10-06T15:18:26.7190084Z Post job cleanup.
+build	UNKNOWN STEP	2026-10-06T15:18:26.8543756Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/links-notation/links-notation --files-from manifest.txt --use-compress-program zstdmt
+build	UNKNOWN STEP	2026-10-06T15:18:28.2186761Z Sent 15523930 of 15523930 (100.0%), 14.8 MBs/sec
+build	UNKNOWN STEP	2026-10-06T15:18:28.6735811Z Cache saved with the key: node-cache-Linux-x64-npm-c16fa6829c418aaab305e0600b7b21e2f5aa1ee280b5e75479b20dcf7e7c9144
+build	UNKNOWN STEP	2026-10-06T15:18:28.6871789Z Post job cleanup.
+build	UNKNOWN STEP	2026-10-06T15:18:28.7732524Z [command]/usr/bin/git version
+build	UNKNOWN STEP	2026-10-06T15:18:28.7783725Z git version 2.55.0
+build	UNKNOWN STEP	2026-10-06T15:18:28.7826783Z Temporarily overriding HOME='/home/runner/work/_temp/4772bb99-c186-4bee-9016-c7547f02c5ce' before making global git config changes
+build	UNKNOWN STEP	2026-10-06T15:18:28.7828416Z Adding repository directory to the temporary git global config as a safe directory
+build	UNKNOWN STEP	2026-10-06T15:18:28.7831681Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+build	UNKNOWN STEP	2026-10-06T15:18:28.7866523Z Removing SSH command configuration
+build	UNKNOWN STEP	2026-10-06T15:18:28.7873535Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	UNKNOWN STEP	2026-10-06T15:18:28.7910693Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	UNKNOWN STEP	2026-10-06T15:18:28.8151009Z Removing HTTP extra header
+build	UNKNOWN STEP	2026-10-06T15:18:28.8156889Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	UNKNOWN STEP	2026-10-06T15:18:28.8197614Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	UNKNOWN STEP	2026-10-06T15:18:28.8482758Z Removing includeIf entries pointing to credentials config files
+build	UNKNOWN STEP	2026-10-06T15:18:28.8491008Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build	UNKNOWN STEP	2026-10-06T15:18:28.8529974Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build	UNKNOWN STEP	2026-10-06T15:18:28.9063644Z Cleaning up orphan processes
+deploy	UNKNOWN STEP	﻿2026-10-06T15:18:42.5592443Z Current runner version: '2.337.0'
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5617305Z ##[group]Runner Image Provisioner
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5618264Z Hosted Compute Agent
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5618855Z Version: 20260901.588
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5619623Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5620382Z Build Date: 2026-09-01T19:56:44Z
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5621088Z Worker ID: {f15b4939-ba8e-4a71-b5a3-1a46ba63b92c}
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5622251Z Azure Region: canadaeast
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5622860Z ##[endgroup]
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5625121Z ##[group]Operating System
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5625796Z Ubuntu
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5626318Z 24.04.5
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5626880Z LTS
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5627397Z ##[endgroup]
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5627969Z ##[group]Runner Image
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5628635Z Image: ubuntu-24.04
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5629219Z Version: 20260927.320.1
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5630519Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5632353Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5633425Z ##[endgroup]
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5634599Z ##[group]GITHUB_TOKEN Permissions
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5636832Z Contents: read
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5637481Z Metadata: read
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5638187Z Pages: write
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5638784Z ##[endgroup]
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5640796Z Secret source: Actions
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5642312Z Cache mode: write
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.5643303Z Prepare workflow directory
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.6209602Z Prepare all required actions
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.6258722Z Getting action download info
+deploy	UNKNOWN STEP	2026-10-06T15:18:42.9604011Z Download action repository 'actions/deploy-pages@v5.0.1' (SHA:368f82528645a54fb793d4d04e342629a3f51346)
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6273573Z Complete job name: deploy
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6948567Z ##[group]Run actions/deploy-pages@v5.0.1
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6949606Z with:
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6954056Z   token: ***
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6954573Z   timeout: 600000
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6955055Z   error_count: 10
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6955546Z   reporting_interval: 5000
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6956105Z   artifact_name: github-pages
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6956658Z   preview: false
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6957405Z env:
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6957875Z   CI_VERBOSE: false
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.6958372Z ##[endgroup]
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.8935108Z (node:2189) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+deploy	UNKNOWN STEP	2026-10-06T15:18:43.8937131Z (Use `node --trace-deprecation ...` to show where the warning was created)
+deploy	UNKNOWN STEP	2026-10-06T15:18:44.0402414Z Fetching artifact metadata for "github-pages" in this workflow run
+deploy	UNKNOWN STEP	2026-10-06T15:18:44.1999319Z Found 1 artifact(s)
+deploy	UNKNOWN STEP	2026-10-06T15:18:44.2014268Z Creating Pages deployment with payload:
+deploy	UNKNOWN STEP	2026-10-06T15:18:44.2015766Z {
+deploy	UNKNOWN STEP	2026-10-06T15:18:44.2016892Z 	"artifact_id": 11423087951,
+deploy	UNKNOWN STEP	2026-10-06T15:18:44.2018437Z 	"pages_build_version": "b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a",
+deploy	UNKNOWN STEP	2026-10-06T15:18:44.2124767Z 	"oidc_token": "***"
+deploy	UNKNOWN STEP	2026-10-06T15:18:44.2125913Z }
+deploy	UNKNOWN STEP	2026-10-06T15:18:44.7184054Z Created deployment for b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a, ID: b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+deploy	UNKNOWN STEP	2026-10-06T15:18:48.9307763Z Getting Pages deployment status...
+deploy	UNKNOWN STEP	2026-10-06T15:18:49.0704482Z Reported success!
+deploy	UNKNOWN STEP	2026-10-06T15:18:49.0959703Z Evaluate and set environment url
+deploy	UNKNOWN STEP	2026-10-06T15:18:49.0965557Z Evaluated environment url: https://link-foundation.github.io/links-notation/
+deploy	UNKNOWN STEP	2026-10-06T15:18:49.0966646Z Cleaning up orphan processes

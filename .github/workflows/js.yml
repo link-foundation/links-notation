@@ -33,7 +33,7 @@ defaults:
 
 jobs:
   findChangedJsFiles:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -71,7 +71,7 @@ jobs:
   format:
     needs: [findChangedJsFiles]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-format
@@ -95,7 +95,7 @@ jobs:
   lint:
     needs: [findChangedJsFiles, format]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -117,7 +117,7 @@ jobs:
   test:
     needs: [findChangedJsFiles, format, lint]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-test
@@ -143,8 +143,9 @@ jobs:
   publishToNpm:
     needs: [findChangedJsFiles, test]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+    runs-on: ubuntu-24.04
+    # Must outlast the 20 minute registry wait below plus the build.
+    timeout-minutes: 35
     concurrency:
       group: ${{ github.workflow }}-publish-npm
       cancel-in-progress: false
@@ -243,17 +244,26 @@ jobs:
           set -euo pipefail
           # shellcheck source=scripts/ci/registry-probe.sh
           . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          # npm scans every new version for malware before serving it, which
+          # "typically takes around five minutes" and can take "15 minutes or
+          # more" (https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/).
+          # 0.23.0 took 4m09s, so the old 150 second window failed a publish
+          # that had succeeded (issue #330). 80 x 15s = 20 minutes.
           wait_for_registry \
             "${PACKAGE_NAME}@${PACKAGE_VERSION} on npm" \
-            "https://registry.npmjs.org/${PACKAGE_NAME}/${PACKAGE_VERSION}" 10 15
+            "https://registry.npmjs.org/${PACKAGE_NAME}/${PACKAGE_VERSION}" 80 15
 
   publishRelease:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     needs: [findChangedJsFiles, publishToNpm]
     # `result == 'success'` was true even when the publish step was skipped,
-    # so releases were cut for versions that were never pushed.
-    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && needs.publishToNpm.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    # so releases were cut for versions that were never pushed. `skipped`
+    # (already on npm) is included so a release that an earlier run failed to
+    # create is backfilled: js_0.23.0 was published, but npm's publish-time
+    # malware scan kept it invisible past the verify window, the job failed,
+    # and every later run skipped the release (issue #330). See csharp.yml.
+    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && (needs.publishToNpm.outputs.published == 'true' || needs.publishToNpm.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:

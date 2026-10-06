@@ -1,0 +1,207 @@
+update-pip-graph	UNKNOWN STEP	﻿2026-10-06T15:17:27.6538875Z Current runner version: '2.337.0'
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6573067Z ##[group]Runner Image Provisioner
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6574480Z Hosted Compute Agent
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6575650Z Version: 20260901.588
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6576883Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6578161Z Build Date: 2026-09-01T19:56:44Z
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6579492Z Worker ID: {d64794b5-7b2d-4005-a153-564518c44151}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6580995Z Azure Region: eastus2
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6582203Z ##[endgroup]
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6584893Z ##[group]Operating System
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6586094Z Ubuntu
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6587101Z 24.04.5
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6587935Z LTS
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6588995Z ##[endgroup]
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6590566Z ##[group]Runner Image
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6591716Z Image: ubuntu-24.04
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6592724Z Version: 20260927.320.1
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6595066Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6598608Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6600688Z ##[endgroup]
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6602902Z ##[group]GITHUB_TOKEN Permissions
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6605868Z Contents: read
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6607048Z Metadata: read
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6608045Z Packages: read
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6609055Z ##[endgroup]
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6612448Z Secret source: None
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6614093Z Cache mode: read
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.6615770Z Prepare workflow directory
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.7097133Z Prepare all required actions
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.7168512Z Getting action download info
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:27.9799081Z Download action repository 'github/dependabot-action@main' (SHA:9fa58cb8de8341935663f2b037b083c097127823)
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.3086815Z Complete job name: update-pip-graph
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.3893472Z ##[group]Run mkdir -p  ./dependabot-job-1613279791-1791299810
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.3894424Z ^[[36;1mmkdir -p  ./dependabot-job-1613279791-1791299810^[[0m
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.4134266Z shell: /usr/bin/bash -e {0}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.4135235Z ##[endgroup]
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.4470044Z ##[group]Run github/dependabot-action@main
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.4470902Z env:
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.4471480Z   DEPENDABOT_DISABLE_CLEANUP: 1
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.4472277Z   DEPENDABOT_ENABLE_CONNECTIVITY_CHECK: 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.4477058Z   GITHUB_TOKEN: ***
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.4478025Z   GITHUB_DEPENDABOT_JOB_TOKEN: ***
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.4478957Z   GITHUB_DEPENDABOT_CRED_TOKEN: ***
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.4479569Z   GITHUB_REGISTRIES_PROXY: ***
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.4480356Z ##[endgroup]
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.6280817Z 🤖 ~ starting update ~
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.6301252Z Fetching job details
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.9560306Z ##[group]Pulling updater images
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:28.9617191Z Pulling image ghcr.io/dependabot/dependabot-updater-pip:9c06d60057ba9e7e79210e6618f932a28cf6a158 (attempt 1)...
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:29.0260118Z Successfully sent metric (dependabot.action.ghcr_image_pull) to remote API endpoint
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:52.3879585Z Pulled image ghcr.io/dependabot/dependabot-updater-pip:9c06d60057ba9e7e79210e6618f932a28cf6a158
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:52.3891247Z Pulling image ghcr.io/dependabot/proxy:v2.0.20261006025532@sha256:7d98805c343b2b1701b7aeebb57230e8baca4961850299e4bfb748761c8f720c (attempt 1)...
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:52.4636657Z Successfully sent metric (dependabot.action.ghcr_image_pull) to remote API endpoint
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:52.9086433Z Pulled image ghcr.io/dependabot/proxy:v2.0.20261006025532@sha256:7d98805c343b2b1701b7aeebb57230e8baca4961850299e4bfb748761c8f720c
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:52.9089100Z ##[endgroup]
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:52.9090061Z Starting update process
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:53.0546391Z Created proxy container: 808d1d532f0178564f97dcfd895bfe0e81b624dccb18b51fe92efa945bf54431
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:53.3000516Z   proxy | 2026/10/06 15:17:53 proxy starting, commit: 65abe27f97dca7631e77e82bf225da5bc43d8067
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:53.3011263Z   proxy | 2026/10/06 15:17:53 Listening (:1080)
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:53.5060700Z Created container: 6dca026f584f9833dd1442a0041214e98d6034d84237970ac4ad35827ec5e0da
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:53.6104082Z Started container 6dca026f584f9833dd1442a0041214e98d6034d84237970ac4ad35827ec5e0da
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:53.6466714Z updater | Updating certificates in /etc/ssl/certs...
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:54.2239530Z updater | rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:54.2290716Z updater | 1 added, 0 removed; done.
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:54.2291623Z Running hooks in /etc/ca-certificates/update.d...
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:54.2315559Z updater | done.
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:54.5055074Z updater | fetch_files command is no longer used directly
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:56.5143565Z updater | 2026/10/06 15:17:56 INFO <job_1613279791> Starting job processing
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:56.5168363Z updater | 2026/10/06 15:17:56 INFO <job_1613279791> Job definition: {"job":{"command":"graph","allowed-updates":[{"dependency-type":"direct","update-type":"all"}],"commit-message-options":{"prefix":"chore(deps)","prefix-development":null,"include-scope":null},"credentials-metadata":[{"type":"git_source","host":"github.com"}],"debug":null,"dependencies":null,"dependency-groups":[],"dependency-group-to-refresh":null,"existing-pull-requests":[],"existing-group-pull-requests":[],"experiments":{"record-ecosystem-versions":true,"record-update-job-unknown-error":true,"azure-registry-backup":true,"automatic-github-packages-auth":true,"blocked-versions":true,"workflow-job-summary":true,"async-retry":true,"enable-npmrc-credential-generation":true,"proxy-read-only-git-credentials":true,"proxy-egress-observe":true,"proxy-egress-enforce":true,"maven-wrapper-updater":true,"prioritize-scm-source":true,"enable-yarn-berry-conflicting-dependencies":true},"ignore-conditions":[],"lockfile-only":false,"package-manager":"pip","requirements-update-strategy":null,"reject-external-code":false,"security-advisories":[],"security-updates-only":false,"source":{"provider":"github","repo":"link-foundation/links-notation","branch":null,"api-endpoint":"https://api.github.com/","hostname":"github.com","directories":["/python"]},"updating-a-pull-request":false,"update-subdependencies":false,"vendor-dependencies":false,"enable-beta-ecosystems":false,"repo-private":false,"multi-ecosystem-update":false,"exclude-paths":null}}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:56.6785538Z   proxy | 2026/10/06 15:17:56 [002] GET https://github.com:443/link-foundation/links-notation.git/info/refs?service=git-upload-pack
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:56.6786472Z   proxy | 2026/10/06 15:17:56 [002] * authenticating git server request (host: github.com)
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:56.7923918Z   proxy | 2026/10/06 15:17:56 [002] 200 https://github.com:443/link-foundation/links-notation.git/info/refs?service=git-upload-pack
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:56.8866678Z updater | 2026/10/06 15:17:56 INFO <job_1613279791> Started process PID: 1001 with command: {} git clone --no-tags --depth 1 --recurse-submodules --shallow-submodules https://github.com/link-foundation/links-notation /home/dependabot/dependabot-updater/repo {}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:56.9321884Z   proxy | 2026/10/06 15:17:56 [004] GET https://github.com:443/link-foundation/links-notation/info/refs?service=git-upload-pack
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:56.9322755Z   proxy | 2026/10/06 15:17:56 [004] * authenticating git server request (host: github.com)
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.0141640Z   proxy | 2026/10/06 15:17:57 [004] 200 https://github.com:443/link-foundation/links-notation/info/refs?service=git-upload-pack
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.0152452Z   proxy | 2026/10/06 15:17:57 [005] POST https://github.com:443/link-foundation/links-notation/git-upload-pack
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.0154057Z 2026/10/06 15:17:57 [005] * authenticating git server request (host: github.com)
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.0942922Z   proxy | 2026/10/06 15:17:57 [005] 200 https://github.com:443/link-foundation/links-notation/git-upload-pack
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.0973912Z   proxy | 2026/10/06 15:17:57 [006] POST https://github.com:443/link-foundation/links-notation/git-upload-pack
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.0975440Z   proxy | 2026/10/06 15:17:57 [006] * authenticating git server request (host: github.com)
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.3289144Z   proxy | 2026/10/06 15:17:57 [006] 200 https://github.com:443/link-foundation/links-notation/git-upload-pack
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.7314965Z updater | 2026/10/06 15:17:57 INFO <job_1613279791> Process PID: 1001 completed with status: pid 1001 exit 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.7316109Z updater | 2026/10/06 15:17:57 INFO <job_1613279791> Total execution time: 0.85 seconds
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.7324593Z updater | 2026/10/06 15:17:57 INFO <job_1613279791> Started process PID: 1044 with command: {} git -C /home/dependabot/dependabot-updater/repo ls-files --stage {}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.7402217Z updater | 2026/10/06 15:17:57 INFO <job_1613279791> Process PID: 1044 completed with status: pid 1044 exit 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.7403334Z 2026/10/06 15:17:57 INFO <job_1613279791> Total execution time: 0.01 seconds
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.7955154Z updater | 2026/10/06 15:17:57 INFO <job_1613279791> Started process PID: 1141 with command: {} git rev-parse HEAD {}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.7991072Z updater | 2026/10/06 15:17:57 INFO <job_1613279791> Process PID: 1141 completed with status: pid 1141 exit 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.7992173Z 2026/10/06 15:17:57 INFO <job_1613279791> Total execution time: 0.0 seconds
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.8570637Z updater | 2026/10/06 15:17:57 INFO <job_1613279791> DEBUG filter_excluded: entries=10, exclude_paths=[]
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.8577163Z updater | 2026/10/06 15:17:57 INFO <job_1613279791> DEBUG filter_excluded: entries=9, exclude_paths=[]
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.8584513Z updater | 2026/10/06 15:17:57 INFO <job_1613279791> DEBUG filter_excluded: entries=22, exclude_paths=[]
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:57.9231495Z updater | 2026/10/06 15:17:57 INFO <job_1613279791> Dependabot is using Python version '3.10.20'.
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.0714071Z   proxy | 2026/10/06 15:17:58 [008] POST /update_jobs/1613279791/record_ecosystem_versions
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.1461197Z   proxy | 2026/10/06 15:17:58 [008] 204 /update_jobs/1613279791/record_ecosystem_versions
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.1463074Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Base commit SHA: b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.1464113Z 2026/10/06 15:17:58 INFO <job_1613279791> Finished job processing
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.1478418Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Starting job processing
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.2059281Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Started process PID: 1323 with command: {} git symbolic-ref --short refs/remotes/origin/HEAD {}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.2093719Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Process PID: 1323 completed with status: pid 1323 exit 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.2094367Z 2026/10/06 15:17:58 INFO <job_1613279791> Total execution time: 0.0 seconds
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.2118401Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Started process PID: 1330 with command: {} pyenv versions {}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.2584477Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Process PID: 1330 completed with status: pid 1330 exit 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.2585570Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Total execution time: 0.05 seconds
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.3061784Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Started process PID: 1374 with command: {} tar -axf /usr/local/.pyenv/versions/3.10.20.tar.zst -C /usr/local/.pyenv/versions {}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.8592636Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Process PID: 1374 completed with status: pid 1374 exit 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.8594247Z 2026/10/06 15:17:58 INFO <job_1613279791> Total execution time: 0.55 seconds
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.8608254Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Started process PID: 1379 with command: {} pyenv local 3.10 {}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.8980293Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Process PID: 1379 completed with status: pid 1379 exit 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.8981428Z 2026/10/06 15:17:58 INFO <job_1613279791> Total execution time: 0.04 seconds
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:58.9001087Z updater | 2026/10/06 15:17:58 INFO <job_1613279791> Started process PID: 1423 with command: {} pyenv exec pip --version {}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:59.6672926Z updater | 2026/10/06 15:17:59 INFO <job_1613279791> Process PID: 1423 completed with status: pid 1423 exit 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:59.6673793Z 2026/10/06 15:17:59 INFO <job_1613279791> Total execution time: 0.77 seconds
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:59.6675517Z updater | 2026/10/06 15:17:59 INFO <job_1613279791> Package manager pip, Info : pip 26.2.1 from /usr/local/.pyenv/versions/3.10.20/lib/python3.10/site-packages/pip (python 3.10)
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:59.6676624Z 
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:59.6692481Z updater | 2026/10/06 15:17:59 INFO <job_1613279791> Started process PID: 1553 with command: {} pyenv exec python --version {}
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:59.7737703Z updater | 2026/10/06 15:17:59 INFO <job_1613279791> Process PID: 1553 completed with status: pid 1553 exit 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:59.7739232Z 2026/10/06 15:17:59 INFO <job_1613279791> Total execution time: 0.11 seconds
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:17:59.8088114Z updater | 2026/10/06 15:17:59 INFO <job_1613279791> Started process PID: 1662 with command: pyenv exec python3 /opt/python/run.py
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:01.7297770Z updater | 2026/10/06 15:18:01 INFO <job_1613279791> Process PID: 1662 completed with status: pid 1662 exit 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:01.7298488Z 2026/10/06 15:18:01 INFO <job_1613279791> Total execution time: 1.92 seconds
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:01.7361759Z updater | 2026/10/06 15:18:01 INFO <job_1613279791> Started process PID: 1772 with command: pyenv exec python3 /opt/python/run.py
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5450082Z updater | 2026/10/06 15:18:02 INFO <job_1613279791> Process PID: 1772 completed with status: pid 1772 exit 0
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5450818Z 2026/10/06 15:18:02 INFO <job_1613279791> Total execution time: 0.81 seconds
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5508811Z updater | 2026/10/06 15:18:02 INFO <job_1613279791> Dependency submission payload:
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5509912Z {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5510239Z   "version": 1,
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5510663Z   "sha": "b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5511225Z   "ref": "refs/heads/main",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5511600Z   "job": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5512417Z     "correlator": "dependabot-pip-python",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5512943Z     "id": "1613279791"
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5513330Z   },
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5513821Z   "detector": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5514210Z     "name": "dependabot",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5514740Z     "version": "0.399.0-9c06d60057ba9e7e79210e6618f932a28cf6a158",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5515447Z     "url": "https://github.com/dependabot/dependabot-core"
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5516021Z   },
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5516338Z   "manifests": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5516707Z     "/python/pyproject.toml": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5517142Z       "name": "/python/pyproject.toml",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5517584Z       "file": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5518013Z         "source_location": "python/pyproject.toml"
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5518514Z       },
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5518825Z       "metadata": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5519179Z         "ecosystem": "pypi",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5519917Z         "blob_oid": "70b762ef238d2502c915cfabdd3ce325afebdb3e"
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5520442Z       },
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5520763Z       "resolved": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5521141Z         "pkg:pypi/pytest": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5521575Z           "package_url": "pkg:pypi/pytest",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5522075Z           "relationship": "direct",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5522523Z           "scope": "development",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5522967Z           "dependencies": []
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5523359Z         },
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5523729Z         "pkg:pypi/pytest-timeout": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5524341Z           "package_url": "pkg:pypi/pytest-timeout",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5524835Z           "relationship": "direct",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5525226Z           "scope": "development",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5525606Z           "dependencies": []
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5525975Z         },
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5526308Z         "pkg:pypi/black": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5526739Z           "package_url": "pkg:pypi/black",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5527501Z           "relationship": "direct",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5527976Z           "scope": "development",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5528412Z           "dependencies": []
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5528800Z         },
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5529131Z         "pkg:pypi/isort": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5529568Z           "package_url": "pkg:pypi/isort",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5530327Z           "relationship": "direct",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5530871Z           "scope": "development",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5531317Z           "dependencies": []
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5531695Z         },
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5532028Z         "pkg:pypi/flake8": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5532476Z           "package_url": "pkg:pypi/flake8",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5532966Z           "relationship": "direct",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5533406Z           "scope": "development",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5533841Z           "dependencies": []
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5534229Z         },
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5534580Z         "pkg:pypi/setuptools": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5535059Z           "package_url": "pkg:pypi/setuptools",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5535586Z           "relationship": "direct",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5536039Z           "scope": "development",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5536480Z           "dependencies": []
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5536894Z         }
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5537198Z       }
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5537487Z     }
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5537789Z   },
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5538094Z   "metadata": {
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5538441Z     "status": "ok",
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5544503Z     "scanned_manifest_path": "pypi::/python"
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5545031Z   }
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5545336Z }
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.5976650Z   proxy | 2026/10/06 15:18:02 [010] POST /update_jobs/1613279791/create_dependency_submission
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.8877653Z   proxy | 2026/10/06 15:18:02 [010] 204 /update_jobs/1613279791/create_dependency_submission
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:02.9707611Z   proxy | 2026/10/06 15:18:02 [012] PATCH /update_jobs/1613279791/mark_as_processed
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:03.0253412Z   proxy | 2026/10/06 15:18:03 [012] 204 /update_jobs/1613279791/mark_as_processed
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:03.0260986Z updater | 2026/10/06 15:18:03 INFO <job_1613279791> Finished job processing
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:03.0266277Z updater | 2026/10/06 15:18:03 INFO Workflow summary written to /home/dependabot/dependabot-updater/output/summary.md
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:03.1534237Z Job summary written to GITHUB_STEP_SUMMARY
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:04.0015216Z Cleaned up container 6dca026f584f9833dd1442a0041214e98d6034d84237970ac4ad35827ec5e0da
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:04.0134268Z   proxy | 2026/10/06 15:18:04 0/7 calls cached (0%)
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:04.0135205Z   proxy | 2026/10/06 15:18:04 Posting metrics to remote API endpoint
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:04.2118474Z 🤖 ~ finished ~
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:04.2283024Z Post job cleanup.
+update-pip-graph	UNKNOWN STEP	2026-10-06T15:18:04.3730432Z Cleaning up orphan processes

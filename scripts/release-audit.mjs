@@ -9,6 +9,11 @@
 // releases for packages that were never pushed, and nothing noticed the drift.
 // Run it locally with `node scripts/release-audit.mjs`; CI runs it from
 // .github/workflows/release-audit.yml and annotates every mismatch.
+//
+// A version that is on its registry also has to have its GitHub release. The
+// npm verify step once timed out on a publish that had succeeded, so
+// js_0.23.0 was never created while every row here read "in sync"
+// (issue #330).
 
 import { declaredVersions, match, read } from './declared-versions.mjs';
 
@@ -24,10 +29,27 @@ const expectPublished = process.env.AUDIT_EXPECT_PUBLISHED !== 'false';
 // the same finding is reported at the severity the context actually warrants.
 const report = (message) => console.log(expectPublished ? `::warning::${message}` : `::notice::${message}`);
 
-async function head(url) {
-  const response = await fetch(url, { headers: { 'user-agent': 'links-notation-release-audit' } });
+async function head(url, headers = {}) {
+  const response = await fetch(url, { headers: { 'user-agent': 'links-notation-release-audit', ...headers } });
   if (verbose) console.log(`  GET ${url} -> ${response.status}`);
   return response;
+}
+
+const repository = process.env.GITHUB_REPOSITORY || 'link-foundation/links-notation';
+const githubToken = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
+
+// Tag names as the publishRelease jobs create them; Go modules in a
+// subdirectory need `go/vX.Y.Z`.
+const releaseTag = (language, version) => (language === 'go' ? `go/v${version}` : `${language}_${version}`);
+
+// true, false, or null when GitHub could not be asked (rate limit, outage).
+async function releaseExists(tag) {
+  const headers = { accept: 'application/vnd.github+json' };
+  if (githubToken) headers.authorization = `Bearer ${githubToken}`;
+  const r = await head(`https://api.github.com/repos/${repository}/releases/tags/${encodeURIComponent(tag)}`, headers);
+  if (r.ok) return true;
+  if (r.status === 404) return false;
+  return null;
 }
 
 const languages = [
@@ -142,7 +164,26 @@ for (const language of languages) {
     report(`${language.name}: declared ${declared}, latest on ${language.registry} is ${published}.`);
     drift += 1;
   } else {
-    console.log(`${language.name}: ${declared} (in sync with ${language.registry})`);
+    const tag = releaseTag(language.name, declared);
+    let exists;
+    try {
+      exists = await releaseExists(tag);
+    } catch (error) {
+      exists = null;
+      if (verbose) console.log(`  ${error.message}`);
+    }
+    if (exists === false) {
+      // Never expected: the publish already happened, so on a pull request
+      // this is just as wrong as on main.
+      console.log(
+        `::warning::${language.name}: ${declared} is on ${language.registry}, but the GitHub release ${tag} is missing. ` +
+          `The next ${language.name} run on main backfills it, or create it with \`gh release create ${tag}\`.`,
+      );
+      drift += 1;
+    } else {
+      if (exists === null) console.log(`::notice::${language.name}: could not check the GitHub release ${tag}`);
+      console.log(`${language.name}: ${declared} (in sync with ${language.registry})`);
+    }
   }
 }
 

@@ -1,0 +1,654 @@
+seven-languages	Set up job	﻿2026-10-06T20:54:16.7892641Z Current runner version: '2.337.0'
+seven-languages	Set up job	2026-10-06T20:54:16.7927439Z ##[group]Runner Image Provisioner
+seven-languages	Set up job	2026-10-06T20:54:16.7929115Z Hosted Compute Agent
+seven-languages	Set up job	2026-10-06T20:54:16.7930091Z Version: 20260901.588
+seven-languages	Set up job	2026-10-06T20:54:16.7931933Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+seven-languages	Set up job	2026-10-06T20:54:16.7933212Z Build Date: 2026-09-01T19:56:44Z
+seven-languages	Set up job	2026-10-06T20:54:16.7934328Z Worker ID: {5f5ec2f3-d229-4af5-af9b-298fe48c1c8e}
+seven-languages	Set up job	2026-10-06T20:54:16.7935605Z Azure Region: eastus
+seven-languages	Set up job	2026-10-06T20:54:16.7936594Z ##[endgroup]
+seven-languages	Set up job	2026-10-06T20:54:16.7938896Z ##[group]Operating System
+seven-languages	Set up job	2026-10-06T20:54:16.7940025Z Ubuntu
+seven-languages	Set up job	2026-10-06T20:54:16.7940998Z 24.04.5
+seven-languages	Set up job	2026-10-06T20:54:16.7942083Z LTS
+seven-languages	Set up job	2026-10-06T20:54:16.7942926Z ##[endgroup]
+seven-languages	Set up job	2026-10-06T20:54:16.7944008Z ##[group]Runner Image
+seven-languages	Set up job	2026-10-06T20:54:16.7944987Z Image: ubuntu-24.04
+seven-languages	Set up job	2026-10-06T20:54:16.7945864Z Version: 20260927.320.1
+seven-languages	Set up job	2026-10-06T20:54:16.7947741Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+seven-languages	Set up job	2026-10-06T20:54:16.7950901Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+seven-languages	Set up job	2026-10-06T20:54:16.7952839Z ##[endgroup]
+seven-languages	Set up job	2026-10-06T20:54:16.7954815Z ##[group]GITHUB_TOKEN Permissions
+seven-languages	Set up job	2026-10-06T20:54:16.7957672Z Contents: read
+seven-languages	Set up job	2026-10-06T20:54:16.7958748Z Metadata: read
+seven-languages	Set up job	2026-10-06T20:54:16.7959624Z ##[endgroup]
+seven-languages	Set up job	2026-10-06T20:54:16.7962941Z Secret source: Actions
+seven-languages	Set up job	2026-10-06T20:54:16.7964661Z Cache mode: write
+seven-languages	Set up job	2026-10-06T20:54:16.7966313Z Prepare workflow directory
+seven-languages	Set up job	2026-10-06T20:54:16.8384803Z Prepare all required actions
+seven-languages	Set up job	2026-10-06T20:54:16.8432501Z Getting action download info
+seven-languages	Set up job	2026-10-06T20:54:17.1173263Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+seven-languages	Set up job	2026-10-06T20:54:17.2055157Z Download action repository 'dtolnay/rust-toolchain@stable' (SHA:89b12181fb390509a0842a86cc55eeb8eb928c1d)
+seven-languages	Set up job	2026-10-06T20:54:17.3045454Z Download action repository 'actions/setup-dotnet@v6.0.0' (SHA:a98b56852c35b8e3190ac28c8c2271da59106c68)
+seven-languages	Set up job	2026-10-06T20:54:17.4976226Z Download action repository 'actions/setup-node@v7.0.0' (SHA:820762786026740c76f36085b0efc47a31fe5020)
+seven-languages	Set up job	2026-10-06T20:54:17.5832649Z Download action repository 'actions/setup-python@v7.0.0' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+seven-languages	Set up job	2026-10-06T20:54:17.6535650Z Download action repository 'actions/setup-go@v7.0.0' (SHA:b7ad1dad31e06c5925ef5d2fc7ad053ef454303e)
+seven-languages	Set up job	2026-10-06T20:54:17.8263909Z Download action repository 'actions/setup-java@v6.0.1' (SHA:de7274f081f381c8f8158605e0321c36c376e2e6)
+seven-languages	Set up job	2026-10-06T20:54:18.1233584Z Download action repository 'shivammathur/setup-php@2.37.2' (SHA:f3e473d116dcccaddc5834248c87452386958240)
+seven-languages	Set up job	2026-10-06T20:54:18.4108566Z Complete job name: seven-languages
+seven-languages	Run actions/checkout@v7.0.1	﻿2026-10-06T20:54:18.4988035Z ##[group]Run actions/checkout@v7.0.1
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4988993Z with:
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4989468Z   persist-credentials: false
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4990041Z   repository: link-foundation/links-notation
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4994277Z   token: ***
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4994733Z   ssh-strict: true
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4995200Z   ssh-user: git
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4995628Z   clean: true
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4996070Z   sparse-checkout-cone-mode: true
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4996592Z   fetch-depth: 1
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4997028Z   fetch-tags: false
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4997478Z   show-progress: true
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4997934Z   lfs: false
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4998362Z   submodules: false
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4998818Z   set-safe-directory: true
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.4999324Z   allow-unsafe-pr-checkout: false
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.5000129Z ##[endgroup]
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6017506Z Syncing repository: link-foundation/links-notation
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6021095Z ##[group]Getting Git version info
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6022926Z Working directory is '/home/runner/work/links-notation/links-notation'
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6024939Z [command]/usr/bin/git version
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6046210Z git version 2.55.0
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6068481Z ##[endgroup]
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6079763Z Temporarily overriding HOME='/home/runner/work/_temp/bb4c36f5-3947-40dc-885a-81f9605f29c3' before making global git config changes
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6082853Z Adding repository directory to the temporary git global config as a safe directory
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6086140Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6144077Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6146853Z ##[group]Determining repository object format
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6148860Z ##[endgroup]
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6150493Z ##[group]Initializing the repository
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6152503Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6239295Z hint: Using 'master' as the name for the initial branch. This default branch name
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6241389Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6243011Z hint: to use in all of your new repositories, which will suppress this warning,
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6244464Z hint: call:
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6245225Z hint:
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6246405Z hint: 	git config --global init.defaultBranch <name>
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6247904Z hint:
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6249189Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6250987Z hint: 'development'. The just-created branch can be renamed via this command:
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6252736Z hint:
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6254000Z hint: 	git branch -m <name>
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6255109Z hint:
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6256516Z hint: Disable this message with "git config set advice.defaultBranchName false"
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6258644Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6263007Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6301488Z ##[endgroup]
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6303050Z ##[group]Disabling automatic garbage collection
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6304534Z [command]/usr/bin/git config --local gc.auto 0
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6336051Z ##[endgroup]
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6337869Z ##[group]Setting up auth
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6338865Z Removing SSH command configuration
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6343528Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6385403Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6720466Z Removing HTTP extra header
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6726943Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.6769071Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.7004633Z Removing includeIf entries pointing to credentials config files
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.7009304Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.7051573Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.7277083Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-d202622a-808e-4029-9a5d-7662cadf0a33.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.7318250Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-d202622a-808e-4029-9a5d-7662cadf0a33.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.7353499Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-d202622a-808e-4029-9a5d-7662cadf0a33.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.7388722Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-d202622a-808e-4029-9a5d-7662cadf0a33.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.7426358Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-d202622a-808e-4029-9a5d-7662cadf0a33.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.7462581Z ##[endgroup]
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.7464095Z ##[group]Fetching the repository
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.7470160Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0585fcf597b922f8921fd31fcdf1dee6e4a6646b:refs/remotes/origin/main
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0244085Z From https://github.com/link-foundation/links-notation
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0245859Z  * [new ref]         0585fcf597b922f8921fd31fcdf1dee6e4a6646b -> origin/main
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0254692Z [command]/usr/bin/git branch --list --remote origin/main
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0284466Z   origin/main
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0293456Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0318988Z 0585fcf597b922f8921fd31fcdf1dee6e4a6646b
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0323791Z ##[endgroup]
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0325025Z ##[group]Determining the checkout info
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0326372Z ##[endgroup]
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0328103Z [command]/usr/bin/git sparse-checkout disable
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0377944Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0412989Z ##[group]Checking out the ref
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.0416272Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1233134Z Switched to a new branch 'main'
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1236134Z branch 'main' set up to track 'origin/main'.
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1247619Z ##[endgroup]
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1298107Z [command]/usr/bin/git log -1 --format=%H
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1328895Z 0585fcf597b922f8921fd31fcdf1dee6e4a6646b
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1338991Z ##[group]Removing auth
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1340024Z Removing SSH command configuration
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1344235Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1385262Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1612793Z Removing HTTP extra header
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1616096Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1650669Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1872194Z Removing includeIf entries pointing to credentials config files
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1875920Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1904151Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1906544Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1908458Z includeif.gitdir:/github/workspace/.git.path
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1909919Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1914669Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1938994Z /home/runner/work/_temp/git-credentials-d202622a-808e-4029-9a5d-7662cadf0a33.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1949712Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-d202622a\-808e\-4029\-9a5d\-7662cadf0a33\.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.1986736Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2019147Z /home/runner/work/_temp/git-credentials-d202622a-808e-4029-9a5d-7662cadf0a33.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2029825Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-d202622a\-808e\-4029\-9a5d\-7662cadf0a33\.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2065855Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2100880Z /github/runner_temp/git-credentials-d202622a-808e-4029-9a5d-7662cadf0a33.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2138290Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-d202622a\-808e\-4029\-9a5d\-7662cadf0a33\.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2190142Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2215394Z /github/runner_temp/git-credentials-d202622a-808e-4029-9a5d-7662cadf0a33.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2223291Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-d202622a\-808e\-4029\-9a5d\-7662cadf0a33\.config
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2260643Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2483465Z Removing credentials config '/home/runner/work/_temp/git-credentials-d202622a-808e-4029-9a5d-7662cadf0a33.config'
+seven-languages	Run actions/checkout@v7.0.1	2026-10-06T20:54:19.2490309Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	﻿2026-10-06T20:54:19.3112546Z ##[group]Run dtolnay/rust-toolchain@stable
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3113773Z with:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3114595Z   toolchain: stable
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3115488Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3203802Z ##[start-action display=Parse toolchain version;id=__dtolnay_rust-toolchain.parse]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3281373Z ##[group]Run if [[ -z $toolchain ]]; then
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3282679Z ^[[36;1mif [[ -z $toolchain ]]; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3284791Z ^[[36;1m  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3287491Z ^[[36;1m  echo "'toolchain' is a required input" >&2^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3288688Z ^[[36;1m  exit 1^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3289970Z ^[[36;1melif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3291720Z ^[[36;1m  if [[ Linux == macOS ]]; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3293680Z ^[[36;1m    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3295707Z ^[[36;1m  else^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3297260Z ^[[36;1m    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3299031Z ^[[36;1m  fi^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3300202Z ^[[36;1melif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3302379Z ^[[36;1m  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3304150Z ^[[36;1melif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3306148Z ^[[36;1m  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3308055Z ^[[36;1melse^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3309041Z ^[[36;1m  echo "toolchain=$toolchain" >> $GITHUB_OUTPUT^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3310241Z ^[[36;1mfi^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3566454Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3567949Z env:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3568805Z   toolchain: stable
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3569733Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3721919Z ##[end-action id=__dtolnay_rust-toolchain.parse;outcome=success;conclusion=success;duration_ms=51]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3739136Z ##[start-action display=Construct rustup command line;id=__dtolnay_rust-toolchain.flags]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3790493Z ##[group]Run echo "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3793033Z ^[[36;1mecho "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3795336Z ^[[36;1mecho "components=$(for c in ${components//,/ }; do echo -n ' --component' $c; done)" >> $GITHUB_OUTPUT^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3797159Z ^[[36;1mecho "downgrade=" >> $GITHUB_OUTPUT^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3856885Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3858123Z env:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3858860Z   targets: 
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3859621Z   components: 
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3860399Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.3994943Z ##[end-action id=__dtolnay_rust-toolchain.flags;outcome=success;conclusion=success;duration_ms=25]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4000998Z ##[start-action display=Set $CARGO_HOME;id=__dtolnay_rust-toolchain.__run]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4044240Z ##[group]Run echo CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4045929Z ^[[36;1mecho CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4103985Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4105252Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4207652Z ##[end-action id=__dtolnay_rust-toolchain.__run;outcome=success;conclusion=success;duration_ms=20]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4213957Z ##[start-action display=Install rustup if needed;id=__dtolnay_rust-toolchain.__run_2]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4263796Z ##[group]Run if ! command -v rustup &>/dev/null; then
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4265321Z ^[[36;1mif ! command -v rustup &>/dev/null; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4267915Z ^[[36;1m  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://sh.rustup.rs | sh -s -- --default-toolchain none -y^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4270506Z ^[[36;1m  echo "$CARGO_HOME/bin" >> $GITHUB_PATH^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4271852Z ^[[36;1mfi^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4329000Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4330227Z env:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4330977Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4332233Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4433308Z ##[end-action id=__dtolnay_rust-toolchain.__run_2;outcome=success;conclusion=success;duration_ms=21]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4439644Z ##[start-action display=Install rustup if needed on windows;id=__dtolnay_rust-toolchain.__run_3]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4454675Z ##[end-action id=__dtolnay_rust-toolchain.__run_3;outcome=skipped;conclusion=skipped;duration_ms=0]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4470908Z ##[start-action display=rustup toolchain install stable;id=__dtolnay_rust-toolchain.__run_4]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4512619Z ##[group]Run log=$(mktemp)
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4513542Z ^[[36;1mlog=$(mktemp)^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4514421Z ^[[36;1mtrap 'rm -f "$log"' EXIT^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4515405Z ^[[36;1mfor attempt in 1 2 3 4 5; do^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4517303Z ^[[36;1m  if rustup toolchain install stable --profile minimal --no-self-update --force-non-host 2>&1 | tee "$log"; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4519198Z ^[[36;1m    break^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4520067Z ^[[36;1m  else^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4520853Z ^[[36;1m    status=$?^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4521954Z ^[[36;1m  fi^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4523027Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' "$log" \^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4525050Z ^[[36;1m      || ! grep -Fq 'this is likely due to an ongoing update of the official release server' "$log"; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4526752Z ^[[36;1m    exit "$status"^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4527641Z ^[[36;1m  fi^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4528952Z ^[[36;1m  echo "Retrying rustup toolchain install in 30 seconds (retry $attempt of 4)" >&2^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4530507Z ^[[36;1m  sleep 30^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4531564Z ^[[36;1mdone^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4589934Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4591349Z env:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4592297Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4593284Z   RUSTUP_PERMIT_COPY_RENAME: 1
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.4594192Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.7079511Z info: syncing channel updates for stable-x86_64-unknown-linux-gnu
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.8141062Z info: latest update on 2026-10-01 for version 1.99.0 (b940084d7 2026-09-28)
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.8275751Z info: removing previous version of component rustfmt
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.8340070Z info: removing previous version of component clippy
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.8351806Z info: removing previous version of component cargo
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.8667879Z info: removing previous version of component rust-std
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.8764627Z info: removing previous version of component rustc
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:19.8859682Z info: downloading 5 components
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.2678357Z 
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.2746994Z   stable-x86_64-unknown-linux-gnu updated - rustc 1.99.0 (b940084d7 2026-09-28) (from rustc 1.98.1 (48a229cea 2026-09-01))
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.2748058Z 
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.2833304Z ##[end-action id=__dtolnay_rust-toolchain.__run_4;outcome=success;conclusion=success;duration_ms=9836]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.2842006Z ##[start-action display=rustup default stable;id=__dtolnay_rust-toolchain.__run_5]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.2869882Z ##[group]Run rustup default stable --force-non-host
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.2870339Z ^[[36;1mrustup default stable --force-non-host^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.2936468Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.2936918Z env:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.2937185Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.2937523Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3062278Z info: using existing install for stable-x86_64-unknown-linux-gnu
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3068297Z info: default toolchain set to stable-x86_64-unknown-linux-gnu
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3068853Z 
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3132085Z   stable-x86_64-unknown-linux-gnu unchanged - rustc 1.99.0 (b940084d7 2026-09-28)
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3132709Z 
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3152357Z ##[end-action id=__dtolnay_rust-toolchain.__run_5;outcome=success;conclusion=success;duration_ms=30]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3155829Z ##[start-action display=Create cachekey;id=__dtolnay_rust-toolchain.rustc-version]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3182518Z ##[group]Run DATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3183432Z ^[[36;1mDATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3184151Z ^[[36;1mHASH=$(rustc +stable --version --verbose | sed -ne 's/^commit-hash: //p')^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3184743Z ^[[36;1mecho "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3249851Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3250253Z env:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3250504Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3250801Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3584260Z ##[end-action id=__dtolnay_rust-toolchain.rustc-version;outcome=success;conclusion=success;duration_ms=42]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3587383Z ##[start-action display=Disable incremental compilation;id=__dtolnay_rust-toolchain.__run_6]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3612210Z ##[group]Run if [ -z "${CARGO_INCREMENTAL+set}" ]; then
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3612704Z ^[[36;1mif [ -z "${CARGO_INCREMENTAL+set}" ]; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3613105Z ^[[36;1m  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3613432Z ^[[36;1mfi^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3681976Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3682406Z env:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3682701Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3682999Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3773447Z ##[end-action id=__dtolnay_rust-toolchain.__run_6;outcome=success;conclusion=success;duration_ms=18]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3775889Z ##[start-action display=Enable colors in Cargo output;id=__dtolnay_rust-toolchain.__run_7]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3800068Z ##[group]Run if [ -z "${CARGO_TERM_COLOR+set}" ]; then
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3800497Z ^[[36;1mif [ -z "${CARGO_TERM_COLOR+set}" ]; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3800878Z ^[[36;1m  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3801512Z ^[[36;1mfi^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3863022Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3863429Z env:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3863675Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3863977Z   CARGO_INCREMENTAL: 0
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3864233Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3950721Z ##[end-action id=__dtolnay_rust-toolchain.__run_7;outcome=success;conclusion=success;duration_ms=17]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3953531Z ##[start-action display=Enable Cargo sparse registry;id=__dtolnay_rust-toolchain.__run_8]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3977873Z ##[group]Run # implemented in 1.66, stabilized in 1.68, made default in 1.70
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3978450Z ^[[36;1m# implemented in 1.66, stabilized in 1.68, made default in 1.70^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3979225Z ^[[36;1mif [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol ]; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3980002Z ^[[36;1m  if rustc +stable --version --verbose | grep -q '^release: 1\.6[89]\.'; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3980628Z ^[[36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3981524Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3982098Z ^[[36;1m  elif rustc +stable --version --verbose | grep -q '^release: 1\.6[67]\.'; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3982922Z ^[[36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3983500Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3983894Z ^[[36;1m  fi^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.3984129Z ^[[36;1mfi^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4045363Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4045771Z env:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4046021Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4046330Z   CARGO_INCREMENTAL: 0
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4046595Z   CARGO_TERM_COLOR: always
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4046869Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4354162Z ##[end-action id=__dtolnay_rust-toolchain.__run_8;outcome=success;conclusion=success;duration_ms=39]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4357594Z ##[start-action display=Work around spurious network errors in curl 8.0;id=__dtolnay_rust-toolchain.__run_9]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4396117Z ##[group]Run # https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4396981Z ^[[36;1m# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4397657Z ^[[36;1mif rustc +stable --version --verbose | grep -q '^release: 1\.7[01]\.'; then^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4398171Z ^[[36;1m  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4398551Z ^[[36;1mfi^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4469309Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4469744Z env:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4470007Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4470323Z   CARGO_INCREMENTAL: 0
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4470605Z   CARGO_TERM_COLOR: always
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4470888Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4673080Z ##[end-action id=__dtolnay_rust-toolchain.__run_9;outcome=success;conclusion=success;duration_ms=31]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4678137Z ##[start-action display=rustc +stable --version --verbose;id=__dtolnay_rust-toolchain.__run_10]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4703921Z ##[group]Run rustc +stable --version --verbose
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4704329Z ^[[36;1mrustc +stable --version --verbose^[[0m
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4770951Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4771630Z env:
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4771896Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4772206Z   CARGO_INCREMENTAL: 0
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4772680Z   CARGO_TERM_COLOR: always
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4772955Z ##[endgroup]
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4964823Z rustc 1.99.0 (b940084d7 2026-09-28)
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4965994Z binary: rustc
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4966727Z commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4967970Z commit-date: 2026-09-28
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4968897Z host: x86_64-unknown-linux-gnu
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4969835Z release: 1.99.0
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4970618Z LLVM version: 23.1.1
+seven-languages	Run dtolnay/rust-toolchain@stable	2026-10-06T20:54:29.4986069Z ##[end-action id=__dtolnay_rust-toolchain.__run_10;outcome=success;conclusion=success;duration_ms=30]
+seven-languages	Run actions/setup-dotnet@v6.0.0	﻿2026-10-06T20:54:29.5104224Z ##[group]Run actions/setup-dotnet@v6.0.0
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:29.5104647Z with:
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:29.5104898Z   dotnet-version: 10.0.x
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:29.5105174Z   cache: false
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:29.5105415Z env:
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:29.5105659Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:29.5105956Z   CARGO_INCREMENTAL: 0
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:29.5106227Z   CARGO_TERM_COLOR: always
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:29.5106529Z ##[endgroup]
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:29.6421020Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6.0.0/externals/install-dotnet.sh --skip-non-versioned-files --runtime dotnet --channel LTS
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:29.8792157Z dotnet-install: .NET Core Runtime with version '10.0.12' is already installed.
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:29.8818792Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6.0.0/externals/install-dotnet.sh --skip-non-versioned-files --channel 10.0
+seven-languages	Run actions/setup-dotnet@v6.0.0	2026-10-06T20:54:30.0297535Z dotnet-install: .NET Core SDK with version '10.0.401' is already installed.
+seven-languages	Run actions/setup-node@v7.0.0	﻿2026-10-06T20:54:30.0477893Z ##[group]Run actions/setup-node@v7.0.0
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.0478208Z with:
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.0478398Z   node-version: 24
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.0478602Z   check-latest: false
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.0480972Z   token: ***
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.0481479Z   package-manager-cache: true
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.0481728Z env:
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.0481925Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.0482189Z   CARGO_INCREMENTAL: 0
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.0482406Z   CARGO_TERM_COLOR: always
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.0482637Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.0482869Z ##[endgroup]
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.1726184Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.1728288Z ##[group]Environment details
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.5519739Z node: v24.21.0
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.5520206Z npm: 11.19.0
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.5520530Z yarn: 1.22.22
+seven-languages	Run actions/setup-node@v7.0.0	2026-10-06T20:54:30.5521418Z ##[endgroup]
+seven-languages	Run actions/setup-python@v7.0.0	﻿2026-10-06T20:54:30.5676998Z ##[group]Run actions/setup-python@v7.0.0
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5677308Z with:
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5677507Z   python-version: 3.13
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5677730Z   check-latest: false
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5680104Z   token: ***
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5680323Z   update-environment: true
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5680566Z   allow-prereleases: false
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5680803Z   freethreaded: false
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5681012Z env:
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5681522Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5681814Z   CARGO_INCREMENTAL: 0
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5682039Z   CARGO_TERM_COLOR: always
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5682272Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.5682511Z ##[endgroup]
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.6861831Z ##[group]Installed versions
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.6949256Z Successfully set up CPython (3.13.15)
+seven-languages	Run actions/setup-python@v7.0.0	2026-10-06T20:54:30.6950267Z ##[endgroup]
+seven-languages	Run actions/setup-go@v7.0.0	﻿2026-10-06T20:54:30.7110371Z ##[group]Run actions/setup-go@v7.0.0
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7110844Z with:
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7111580Z   go-version-file: go/go.mod
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7112083Z   check-latest: false
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7116685Z   token: ***
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7117159Z   cache: true
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7149966Z env:
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7150366Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7150823Z   CARGO_INCREMENTAL: 0
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7151460Z   CARGO_TERM_COLOR: always
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7151869Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7152404Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7153506Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7154220Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7154854Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7155516Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7156159Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.7156741Z ##[endgroup]
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.8360322Z Setup go version spec 1.24
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.8405284Z Found in cache @ /opt/hostedtoolcache/go/1.24.13/x64
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.8406248Z Added go to the path
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:30.8409477Z Successfully set up Go version 1.24
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.2710815Z [command]/opt/hostedtoolcache/go/1.24.13/x64/bin/go env GOMODCACHE
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.2747815Z [command]/opt/hostedtoolcache/go/1.24.13/x64/bin/go env GOCACHE
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.2795236Z /home/runner/go/pkg/mod
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.2848721Z /home/runner/.cache/go-build
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.2877099Z ##[warning]Restore cache failed: Dependencies file is not found in /home/runner/work/links-notation/links-notation. Supported file pattern: go.mod
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.2887877Z go version go1.24.13 linux/amd64
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.2888095Z 
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.2888371Z ##[group]go env
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4229057Z AR='ar'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4229606Z CC='gcc'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4230080Z CGO_CFLAGS='-O2 -g'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4230466Z CGO_CPPFLAGS=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4230912Z CGO_CXXFLAGS='-O2 -g'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4231532Z CGO_ENABLED='1'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4231918Z CGO_FFLAGS='-O2 -g'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4232319Z CGO_LDFLAGS='-O2 -g'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4232666Z CXX='g++'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4232983Z GCCGO='gccgo'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4233374Z GO111MODULE=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4233709Z GOAMD64='v1'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4234025Z GOARCH='amd64'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4234365Z GOAUTH='netrc'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4234670Z GOBIN=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4235128Z GOCACHE='/home/runner/.cache/go-build'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4235625Z GOCACHEPROG=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4235953Z GODEBUG=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4236408Z GOENV='/home/runner/.config/go/env'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4236852Z GOEXE=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4237174Z GOEXPERIMENT=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4237514Z GOFIPS140='off'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4237733Z GOFLAGS=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4238770Z GOGCCFLAGS='-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build3014913901=/tmp/go-build -gno-record-gcc-switches'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4240049Z GOHOSTARCH='amd64'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4240417Z GOHOSTOS='linux'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4240750Z GOINSECURE=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4241122Z GOMOD='/dev/null'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4242047Z GOMODCACHE='/home/runner/go/pkg/mod'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4242500Z GONOPROXY=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4242842Z GONOSUMDB=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4243180Z GOOS='linux'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4243585Z GOPATH='/home/runner/go'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4243980Z GOPRIVATE=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4244556Z GOPROXY='https://proxy.golang.org,direct'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4245270Z GOROOT='/opt/hostedtoolcache/go/1.24.13/x64'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4245845Z GOSUMDB='sum.golang.org'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4246276Z GOTELEMETRY='local'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4246796Z GOTELEMETRYDIR='/home/runner/.config/go/telemetry'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4247254Z GOTMPDIR=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4247654Z GOTOOLCHAIN='local'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4248647Z GOTOOLDIR='/opt/hostedtoolcache/go/1.24.13/x64/pkg/tool/linux_amd64'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4249200Z GOVCS=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4249544Z GOVERSION='go1.24.13'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4249865Z GOWORK=''
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4250223Z PKG_CONFIG='pkg-config'
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4250441Z 
+seven-languages	Run actions/setup-go@v7.0.0	2026-10-06T20:54:32.4250903Z ##[endgroup]
+seven-languages	Run actions/setup-java@v6.0.1	﻿2026-10-06T20:54:32.4444504Z ##[group]Run actions/setup-java@v6.0.1
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4444812Z with:
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4445012Z   distribution: temurin
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4445233Z   java-version: 21
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4445440Z   java-package: jdk
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4445818Z   check-latest: false
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4446029Z   force-download: false
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4446238Z   set-default: true
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4446434Z   server-id: github
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4446660Z   mvn-repositories-include-central: true
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4446973Z   mvn-repositories-prioritize-central: true
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4447272Z   overwrite-settings: true
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4447508Z   cache-read-only: false
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4447727Z   job-status: success
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4450035Z   token: ***
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4450252Z   show-download-progress: false
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4450509Z   problem-matcher: true
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4450721Z env:
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4450922Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4451360Z   CARGO_INCREMENTAL: 0
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4451618Z   CARGO_TERM_COLOR: always
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4451850Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4452147Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4452569Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4452985Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4453356Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4453740Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4454116Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4454437Z   GOTOOLCHAIN: local
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.4454643Z ##[endgroup]
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5175096Z ##[group]Installed distributions
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5267878Z Resolved Java 21.0.12+1 from tool-cache
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5268719Z Setting Java 21.0.12+1 as the default
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5276501Z 
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5276910Z Java configuration:
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5277564Z   Distribution: temurin
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5278253Z   Version: 21.0.12+1
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5279317Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5279861Z 
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5280432Z ##[endgroup]
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5298369Z Creating settings.xml with server-id: github
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5304780Z Creating toolchains.xml for JDK version 21 from temurin
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5308327Z Writing to /home/runner/.m2/settings.xml
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5319312Z Writing to /home/runner/.m2/toolchains.xml
+seven-languages	Run actions/setup-java@v6.0.1	2026-10-06T20:54:32.5328025Z Configured MAVEN_ARGS to include -ntp to suppress Maven transfer progress logs. Set 'show-download-progress: true' to keep the download progress output.
+seven-languages	Run shivammathur/setup-php@2.37.2	﻿2026-10-06T20:54:32.5470166Z ##[group]Run shivammathur/setup-php@2.37.2
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5470486Z with:
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5470684Z   php-version: 8.4
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5470895Z   extensions: mbstring
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5471383Z   tools: composer
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5471669Z   ini-file: production
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5474038Z   github-token: ***
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5474251Z env:
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5474446Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5474700Z   CARGO_INCREMENTAL: 0
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5474938Z   CARGO_TERM_COLOR: always
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5475174Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5475480Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5475918Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5476337Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5476714Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5477097Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5477515Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5477843Z   GOTOOLCHAIN: local
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5478152Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5478627Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5479004Z   MAVEN_ARGS: -ntp
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5479407Z ##[endgroup]
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.5924518Z [command]/usr/bin/bash /home/runner/work/_actions/shivammathur/setup-php/2.37.2/src/scripts/run.sh
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.6335615Z 
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:32.6336568Z ^[[90;1m==> ^[[0m^[[37;1mSetup PHP^[[0m
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:37.5073865Z ^[[32;1m✓ ^[[0m^[[34;1mPHP ^[[0m^[[90;1mInstalled PHP 8.4.26^[[0m
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:37.5074589Z 
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:37.5075091Z ^[[90;1m==> ^[[0m^[[37;1mSetup Extensions^[[0m
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:37.5594039Z ^[[32;1m✓ ^[[0m^[[34;1mmbstring ^[[0m^[[90;1mEnabled^[[0m
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:37.5595214Z 
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:37.5595974Z ^[[90;1m==> ^[[0m^[[37;1mSetup Tools^[[0m
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:37.8134128Z ^[[32;1m✓ ^[[0m^[[34;1mcomposer ^[[0m^[[90;1mAdded composer 2.10.3^[[0m
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:37.8134887Z 
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:37.8135667Z ^[[90;1m==> ^[[0m^[[37;1mSponsor setup-php^[[0m
+seven-languages	Run shivammathur/setup-php@2.37.2	2026-10-06T20:54:37.8136447Z ^[[32;1m✓ ^[[0m^[[34;1msetup-php ^[[0m^[[90;1mhttps://setup-php.com/sponsor^[[0m
+seven-languages	Install PHP autoloader	﻿2026-10-06T20:54:37.8298057Z ##[group]Run composer install --working-dir=php --no-dev --no-interaction
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8298670Z ^[[36;1mcomposer install --working-dir=php --no-dev --no-interaction^[[0m
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8373248Z shell: /usr/bin/bash -e {0}
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8373512Z env:
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8373722Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8373995Z   CARGO_INCREMENTAL: 0
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8374224Z   CARGO_TERM_COLOR: always
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8374468Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8374790Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8375270Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8375726Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8376130Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8376534Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8376946Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8377329Z   GOTOOLCHAIN: local
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8377671Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8378194Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8378608Z   MAVEN_ARGS: -ntp
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8378833Z   COMPOSER_PROCESS_TIMEOUT: 0
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8379090Z   COMPOSER_NO_INTERACTION: 1
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8379329Z   COMPOSER_NO_AUDIT: 1
+seven-languages	Install PHP autoloader	2026-10-06T20:54:37.8379549Z ##[endgroup]
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.0262487Z No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.0265175Z Loading composer repositories with package information
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4305073Z Updating dependencies
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4369741Z Lock file operations: 28 installs, 0 updates, 0 removals
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4380999Z   - Locking myclabs/deep-copy (1.14.0)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4381969Z   - Locking nikic/php-parser (v5.9.0)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4382483Z   - Locking phar-io/manifest (2.0.4)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4382944Z   - Locking phar-io/version (3.2.1)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4383475Z   - Locking phpunit/php-code-coverage (14.4.1)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4383983Z   - Locking phpunit/php-file-iterator (7.0.2)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4384407Z   - Locking phpunit/php-invoker (7.0.0)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4384822Z   - Locking phpunit/php-text-template (6.0.1)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4385224Z   - Locking phpunit/php-timer (9.0.0)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4385816Z   - Locking phpunit/phpunit (13.4.1)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4386197Z   - Locking sebastian/cli-parser (5.0.1)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4386580Z   - Locking sebastian/comparator (8.4.0)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4386951Z   - Locking sebastian/complexity (6.0.0)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4387358Z   - Locking sebastian/diff (9.0.1)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4387721Z   - Locking sebastian/environment (9.3.3)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4388101Z   - Locking sebastian/exporter (8.2.1)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4388481Z   - Locking sebastian/file-filter (1.0.0)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4389094Z   - Locking sebastian/git-state (1.0.0)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4389542Z   - Locking sebastian/global-state (9.0.1)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4389934Z   - Locking sebastian/lines-of-code (5.0.2)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4390353Z   - Locking sebastian/object-enumerator (8.1.0)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4390775Z   - Locking sebastian/object-reflector (6.1.0)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4391672Z   - Locking sebastian/recursion-context (8.0.1)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4392129Z   - Locking sebastian/type (7.0.2)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4392504Z   - Locking sebastian/version (7.0.1)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4392904Z   - Locking squizlabs/php_codesniffer (4.0.4)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4393334Z   - Locking staabm/side-effects-detector (1.0.5)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4393729Z   - Locking theseer/tokenizer (2.0.1)
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4394042Z Writing lock file
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4394360Z Installing dependencies from lock file
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4394736Z Nothing to install, update or remove
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4422345Z 1 package suggestions were added by new dependencies, use `composer suggest` to see details.
+seven-languages	Install PHP autoloader	2026-10-06T20:54:38.4426367Z Generating autoload files
+seven-languages	Compare bytes and decoded text in all seven languages	﻿2026-10-06T20:54:38.4659549Z ##[group]Run bash examples/binary/run-interop.sh
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4659938Z ^[[36;1mbash examples/binary/run-interop.sh^[[0m
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4723932Z shell: /usr/bin/bash -e {0}
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4724182Z env:
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4724380Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4724637Z   CARGO_INCREMENTAL: 0
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4724854Z   CARGO_TERM_COLOR: always
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4725086Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4725395Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4725840Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4726275Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4726669Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4727070Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4727465Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4727821Z   GOTOOLCHAIN: local
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4728129Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4728605Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4728983Z   MAVEN_ARGS: -ntp
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4729200Z   COMPOSER_PROCESS_TIMEOUT: 0
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4729456Z   COMPOSER_NO_INTERACTION: 1
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4729682Z   COMPOSER_NO_AUDIT: 1
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:54:38.4729894Z ##[endgroup]
+seven-languages	Compare bytes and decoded text in all seven languages	2026-10-06T20:55:26.9504615Z Rust and csharp python js php go java produced identical bytes and decoded text for all 300 cases.
+seven-languages	Post Run actions/setup-java@v6.0.1	﻿2026-10-06T20:55:26.9635258Z Post job cleanup.
+seven-languages	Post Run actions/setup-go@v7.0.0	﻿2026-10-06T20:55:27.0472272Z Post job cleanup.
+seven-languages	Post Run actions/setup-go@v7.0.0	2026-10-06T20:55:27.1721491Z [command]/opt/hostedtoolcache/go/1.24.13/x64/bin/go env GOMODCACHE
+seven-languages	Post Run actions/setup-go@v7.0.0	2026-10-06T20:55:27.1789616Z [command]/opt/hostedtoolcache/go/1.24.13/x64/bin/go env GOCACHE
+seven-languages	Post Run actions/setup-go@v7.0.0	2026-10-06T20:55:27.1833248Z /home/runner/go/pkg/mod
+seven-languages	Post Run actions/setup-go@v7.0.0	2026-10-06T20:55:27.1842101Z /home/runner/.cache/go-build
+seven-languages	Post Run actions/setup-go@v7.0.0	2026-10-06T20:55:27.1849879Z [warning]Cache folder path is retrieved but doesn't exist on disk: /home/runner/go/pkg/mod
+seven-languages	Post Run actions/setup-go@v7.0.0	2026-10-06T20:55:27.1850983Z Primary key was not generated. Please check the log messages above for more errors or information
+seven-languages	Post Run actions/setup-python@v7.0.0	﻿2026-10-06T20:55:27.2019522Z Post job cleanup.
+seven-languages	Post Run actions/setup-node@v7.0.0	﻿2026-10-06T20:55:27.3414282Z Post job cleanup.
+seven-languages	Post Run actions/setup-dotnet@v6.0.0	﻿2026-10-06T20:55:27.4963785Z Post job cleanup.
+seven-languages	Post Run actions/checkout@v7.0.1	﻿2026-10-06T20:55:27.6244854Z Post job cleanup.
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.7213131Z [command]/usr/bin/git version
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.7286970Z git version 2.55.0
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.7340644Z Temporarily overriding HOME='/home/runner/work/_temp/c42f2934-e073-401b-8091-41955133b1f3' before making global git config changes
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.7342673Z Adding repository directory to the temporary git global config as a safe directory
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.7348703Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.7396198Z Removing SSH command configuration
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.7407716Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.7462004Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.7792865Z Removing HTTP extra header
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.7801418Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.7877994Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.8142113Z Removing includeIf entries pointing to credentials config files
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.8150073Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+seven-languages	Post Run actions/checkout@v7.0.1	2026-10-06T20:55:27.8193347Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+seven-languages	Complete job	﻿2026-10-06T20:55:27.8598816Z Cleaning up orphan processes
+seven-languages	Complete job	2026-10-06T20:55:27.8944824Z Terminate orphan process: pid (3400) (VBCSCompiler)

@@ -1,0 +1,226 @@
+latest-stable	Set up job	﻿2026-10-06T20:54:16.4320713Z Current runner version: '2.337.0'
+latest-stable	Set up job	2026-10-06T20:54:16.4357990Z ##[group]Runner Image Provisioner
+latest-stable	Set up job	2026-10-06T20:54:16.4359384Z Hosted Compute Agent
+latest-stable	Set up job	2026-10-06T20:54:16.4360552Z Version: 20260901.588
+latest-stable	Set up job	2026-10-06T20:54:16.4361588Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+latest-stable	Set up job	2026-10-06T20:54:16.4363346Z Build Date: 2026-09-01T19:56:44Z
+latest-stable	Set up job	2026-10-06T20:54:16.4364826Z Worker ID: {e5c60f3f-9cdd-4a4e-a157-06db056d068b}
+latest-stable	Set up job	2026-10-06T20:54:16.4366008Z Azure Region: eastus
+latest-stable	Set up job	2026-10-06T20:54:16.4367109Z ##[endgroup]
+latest-stable	Set up job	2026-10-06T20:54:16.4369276Z ##[group]Operating System
+latest-stable	Set up job	2026-10-06T20:54:16.4370440Z Ubuntu
+latest-stable	Set up job	2026-10-06T20:54:16.4371335Z 24.04.5
+latest-stable	Set up job	2026-10-06T20:54:16.4372183Z LTS
+latest-stable	Set up job	2026-10-06T20:54:16.4373163Z ##[endgroup]
+latest-stable	Set up job	2026-10-06T20:54:16.4374365Z ##[group]Runner Image
+latest-stable	Set up job	2026-10-06T20:54:16.4375421Z Image: ubuntu-24.04
+latest-stable	Set up job	2026-10-06T20:54:16.4376391Z Version: 20260927.320.1
+latest-stable	Set up job	2026-10-06T20:54:16.4378258Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+latest-stable	Set up job	2026-10-06T20:54:16.4381332Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+latest-stable	Set up job	2026-10-06T20:54:16.4383148Z ##[endgroup]
+latest-stable	Set up job	2026-10-06T20:54:16.4385246Z ##[group]GITHUB_TOKEN Permissions
+latest-stable	Set up job	2026-10-06T20:54:16.4388327Z Contents: read
+latest-stable	Set up job	2026-10-06T20:54:16.4389294Z Metadata: read
+latest-stable	Set up job	2026-10-06T20:54:16.4390291Z ##[endgroup]
+latest-stable	Set up job	2026-10-06T20:54:16.4393177Z Secret source: Actions
+latest-stable	Set up job	2026-10-06T20:54:16.4395083Z Cache mode: write
+latest-stable	Set up job	2026-10-06T20:54:16.4396511Z Prepare workflow directory
+latest-stable	Set up job	2026-10-06T20:54:16.4868137Z Prepare all required actions
+latest-stable	Set up job	2026-10-06T20:54:16.4939042Z Getting action download info
+latest-stable	Set up job	2026-10-06T20:54:16.7262409Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+latest-stable	Set up job	2026-10-06T20:54:16.8181312Z Download action repository 'actions/setup-python@v7.0.0' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+latest-stable	Set up job	2026-10-06T20:54:16.8936591Z Download action repository 'actions/setup-node@v7.0.0' (SHA:820762786026740c76f36085b0efc47a31fe5020)
+latest-stable	Set up job	2026-10-06T20:54:16.9796351Z Download action repository 'oven-sh/setup-bun@v2.2.0' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+latest-stable	Set up job	2026-10-06T20:54:17.1090766Z Download action repository 'actions/upload-artifact@v7.0.1' (SHA:043fb46d1a93c77aae656e7c1c64a875d1fc6a0a)
+latest-stable	Set up job	2026-10-06T20:54:17.2897573Z Complete job name: latest-stable
+latest-stable	Run actions/checkout@v7.0.1	﻿2026-10-06T20:54:17.3676812Z ##[group]Run actions/checkout@v7.0.1
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3677739Z with:
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3678193Z   persist-credentials: false
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3678767Z   repository: link-foundation/links-notation
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3682852Z   token: ***
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3683289Z   ssh-strict: true
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3684018Z   ssh-user: git
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3684445Z   clean: true
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3684902Z   sparse-checkout-cone-mode: true
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3685431Z   fetch-depth: 1
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3685878Z   fetch-tags: false
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3686333Z   show-progress: true
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3686786Z   lfs: false
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3687209Z   submodules: false
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3687680Z   set-safe-directory: true
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3688250Z   allow-unsafe-pr-checkout: false
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.3689043Z ##[endgroup]
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4770941Z Syncing repository: link-foundation/links-notation
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4774308Z ##[group]Getting Git version info
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4775764Z Working directory is '/home/runner/work/links-notation/links-notation'
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4778132Z [command]/usr/bin/git version
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4886234Z git version 2.55.0
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4908159Z ##[endgroup]
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4922082Z Temporarily overriding HOME='/home/runner/work/_temp/37d98b01-67ee-49f5-93b7-1159e1bd53ec' before making global git config changes
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4925032Z Adding repository directory to the temporary git global config as a safe directory
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4929789Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4987699Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4991873Z ##[group]Determining repository object format
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4993927Z ##[endgroup]
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4995253Z ##[group]Initializing the repository
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.4999649Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5144144Z hint: Using 'master' as the name for the initial branch. This default branch name
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5146002Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5147275Z hint: to use in all of your new repositories, which will suppress this warning,
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5148602Z hint: call:
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5149220Z hint:
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5149918Z hint: 	git config --global init.defaultBranch <name>
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5150725Z hint:
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5151803Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5152941Z hint: 'development'. The just-created branch can be renamed via this command:
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5154514Z hint:
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5155123Z hint: 	git branch -m <name>
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5155913Z hint:
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5156648Z hint: Disable this message with "git config set advice.defaultBranchName false"
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5157910Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5162095Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5221158Z ##[endgroup]
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5222093Z ##[group]Disabling automatic garbage collection
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5224925Z [command]/usr/bin/git config --local gc.auto 0
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5262523Z ##[endgroup]
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5264262Z ##[group]Setting up auth
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5265200Z Removing SSH command configuration
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5268729Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5312477Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5746859Z Removing HTTP extra header
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5753837Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.5792991Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.6012926Z Removing includeIf entries pointing to credentials config files
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.6018401Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.6054504Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.6286681Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-f5e14a62-36f4-4bbf-aa16-ab33028d1ad2.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.6327712Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-f5e14a62-36f4-4bbf-aa16-ab33028d1ad2.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.6364270Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-f5e14a62-36f4-4bbf-aa16-ab33028d1ad2.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.6405147Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-f5e14a62-36f4-4bbf-aa16-ab33028d1ad2.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.6441825Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-f5e14a62-36f4-4bbf-aa16-ab33028d1ad2.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.6476038Z ##[endgroup]
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.6476836Z ##[group]Fetching the repository
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:17.6482468Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0585fcf597b922f8921fd31fcdf1dee6e4a6646b:refs/remotes/origin/main
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0731298Z From https://github.com/link-foundation/links-notation
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0734349Z  * [new ref]         0585fcf597b922f8921fd31fcdf1dee6e4a6646b -> origin/main
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0740073Z [command]/usr/bin/git branch --list --remote origin/main
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0771092Z   origin/main
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0779464Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0805344Z 0585fcf597b922f8921fd31fcdf1dee6e4a6646b
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0811103Z ##[endgroup]
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0812875Z ##[group]Determining the checkout info
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0815263Z ##[endgroup]
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0816218Z [command]/usr/bin/git sparse-checkout disable
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0873752Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0911522Z ##[group]Checking out the ref
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.0913080Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.1663751Z Switched to a new branch 'main'
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.1669801Z branch 'main' set up to track 'origin/main'.
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.1681124Z ##[endgroup]
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.1730531Z [command]/usr/bin/git log -1 --format=%H
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.1761026Z 0585fcf597b922f8921fd31fcdf1dee6e4a6646b
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.1770661Z ##[group]Removing auth
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.1771867Z Removing SSH command configuration
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.1774817Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.1815805Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2044401Z Removing HTTP extra header
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2047675Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2088808Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2312528Z Removing includeIf entries pointing to credentials config files
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2315914Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2345570Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2348459Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2350665Z includeif.gitdir:/github/workspace/.git.path
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2352653Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2357202Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2381701Z /home/runner/work/_temp/git-credentials-f5e14a62-36f4-4bbf-aa16-ab33028d1ad2.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2392499Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-f5e14a62\-36f4\-4bbf\-aa16\-ab33028d1ad2\.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2432282Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2462030Z /home/runner/work/_temp/git-credentials-f5e14a62-36f4-4bbf-aa16-ab33028d1ad2.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2472355Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-f5e14a62\-36f4\-4bbf\-aa16\-ab33028d1ad2\.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2515224Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2545934Z /github/runner_temp/git-credentials-f5e14a62-36f4-4bbf-aa16-ab33028d1ad2.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2591535Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-f5e14a62\-36f4\-4bbf\-aa16\-ab33028d1ad2\.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2644881Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2671584Z /github/runner_temp/git-credentials-f5e14a62-36f4-4bbf-aa16-ab33028d1ad2.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2680339Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-f5e14a62\-36f4\-4bbf\-aa16\-ab33028d1ad2\.config
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2719091Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2962824Z Removing credentials config '/home/runner/work/_temp/git-credentials-f5e14a62-36f4-4bbf-aa16-ab33028d1ad2.config'
+latest-stable	Run actions/checkout@v7.0.1	2026-10-06T20:54:18.2975700Z ##[endgroup]
+latest-stable	Run actions/setup-python@v7.0.0	﻿2026-10-06T20:54:18.3248571Z ##[group]Run actions/setup-python@v7.0.0
+latest-stable	Run actions/setup-python@v7.0.0	2026-10-06T20:54:18.3249156Z with:
+latest-stable	Run actions/setup-python@v7.0.0	2026-10-06T20:54:18.3249581Z   python-version: 3.13
+latest-stable	Run actions/setup-python@v7.0.0	2026-10-06T20:54:18.3250030Z   check-latest: false
+latest-stable	Run actions/setup-python@v7.0.0	2026-10-06T20:54:18.3253212Z   token: ***
+latest-stable	Run actions/setup-python@v7.0.0	2026-10-06T20:54:18.3253849Z   update-environment: true
+latest-stable	Run actions/setup-python@v7.0.0	2026-10-06T20:54:18.3254345Z   allow-prereleases: false
+latest-stable	Run actions/setup-python@v7.0.0	2026-10-06T20:54:18.3254809Z   freethreaded: false
+latest-stable	Run actions/setup-python@v7.0.0	2026-10-06T20:54:18.3255248Z ##[endgroup]
+latest-stable	Run actions/setup-python@v7.0.0	2026-10-06T20:54:18.4431166Z ##[group]Installed versions
+latest-stable	Run actions/setup-python@v7.0.0	2026-10-06T20:54:18.4511627Z Successfully set up CPython (3.13.15)
+latest-stable	Run actions/setup-python@v7.0.0	2026-10-06T20:54:18.4513078Z ##[endgroup]
+latest-stable	Test the dependency checker without network access	﻿2026-10-06T20:54:18.4678076Z ##[group]Run python experiments/issue-325/test_dependency_check.py
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:18.4678990Z ^[[36;1mpython experiments/issue-325/test_dependency_check.py^[[0m
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:18.5066987Z shell: /usr/bin/bash -e {0}
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:18.5067727Z env:
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:18.5068431Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:18.5069539Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:18.5070595Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:18.5071338Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:18.5072085Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:18.5072848Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:18.5073705Z ##[endgroup]
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:19.2796982Z ..........
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:19.2798409Z ----------------------------------------------------------------------
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:19.2799094Z Ran 10 tests in 0.012s
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:19.2799462Z 
+latest-stable	Test the dependency checker without network access	2026-10-06T20:54:19.2799619Z OK
+latest-stable	Require current stable dependencies and actions	﻿2026-10-06T20:54:19.3019971Z ##[group]Run python scripts/ci/check-dependencies.py
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:19.3020509Z ^[[36;1mpython scripts/ci/check-dependencies.py^[[0m
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:19.3087686Z shell: /usr/bin/bash -e {0}
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:19.3088017Z env:
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:19.3088352Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:19.3088891Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:19.3089411Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:19.3089884Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:19.3090350Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:19.3090826Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:19.3094196Z   GH_TOKEN: ***
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:19.3094498Z ##[endgroup]
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:22.7754142Z OUTDATED .github/workflows/security.yml: trufflesecurity/trufflehog v3.98.0 -> v3.99.0
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:22.7755168Z Checked 151 declarations, 92 published packages/actions.
+latest-stable	Require current stable dependencies and actions	2026-10-06T20:54:22.7938398Z ##[error]Process completed with exit code 1.
+latest-stable	Preserve dependency resolution evidence	﻿2026-10-06T20:54:22.8042221Z ##[group]Run actions/upload-artifact@v7.0.1
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8042563Z with:
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8042775Z   name: dependency-check-logs
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8043047Z   path: ci-logs/dependencies/
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8043302Z   if-no-files-found: ignore
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8043820Z   compression-level: 6
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8044043Z   overwrite: false
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8044258Z   include-hidden-files: false
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8044504Z   archive: true
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8044704Z env:
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8044969Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8045442Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8045868Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8046257Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8046643Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8047046Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.8047410Z ##[endgroup]
+latest-stable	Preserve dependency resolution evidence	2026-10-06T20:54:22.9435979Z No files were found with the provided path: ci-logs/dependencies/. No artifacts will be uploaded.
+latest-stable	Post Run actions/checkout@v7.0.1	﻿2026-10-06T20:54:22.9717205Z Post job cleanup.
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.0607195Z [command]/usr/bin/git version
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.0659052Z git version 2.55.0
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.0698980Z Temporarily overriding HOME='/home/runner/work/_temp/fa120c3c-d77a-48f1-a97e-a85c8539279b' before making global git config changes
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.0700449Z Adding repository directory to the temporary git global config as a safe directory
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.0705329Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.0742891Z Removing SSH command configuration
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.0746625Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.0782856Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.1035507Z Removing HTTP extra header
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.1042656Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.1085381Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.1346415Z Removing includeIf entries pointing to credentials config files
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.1362449Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+latest-stable	Post Run actions/checkout@v7.0.1	2026-10-06T20:54:23.1391260Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+latest-stable	Complete job	﻿2026-10-06T20:54:23.1788456Z Cleaning up orphan processes

@@ -41,7 +41,7 @@ defaults:
 
 jobs:
   findChangedCsFiles:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -79,7 +79,7 @@ jobs:
   lint:
     needs: [findChangedCsFiles]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -106,7 +106,7 @@ jobs:
   test:
     needs: [findChangedCsFiles, lint]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-test
@@ -138,8 +138,9 @@ jobs:
         run: bash ../examples/binary/run-interop.sh --rust-csharp-only
 
   pushToNuget:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+    runs-on: ubuntu-24.04
+    # Must outlast the 20 minute registry wait below plus the build.
+    timeout-minutes: 35
     needs: [findChangedCsFiles, test]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     concurrency:
@@ -226,19 +227,26 @@ jobs:
           # NuGet.org indexes asynchronously; poll rather than assume success.
           # The flat container exposes one document per package, so the body
           # has to be matched -- a 200 only proves the package exists at all.
+          # 0.23.0 took 7 minutes, most of the old 10 minute window, and
+          # NuGet.org validation can take longer (issue #330). 40 x 30s = 20
+          # minutes.
           wait_for_registry_match \
             "${PACKAGE_ID}@${PACKAGE_VERSION} on NuGet.org" \
             "https://api.nuget.org/v3-flatcontainer/${PACKAGE_ID_LOWER}/index.json" \
-            "\"${PACKAGE_VERSION}\"" 20 30
+            "\"${PACKAGE_VERSION}\"" 40 30
 
   generatePdfWithCode:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     needs: [findChangedCsFiles, test]
-    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    # Builds on pull requests too: only main used to run it, so a test string
+    # pdfLaTeX cannot typeset passed review and broke the main branch (#330).
+    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-pdf
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    env:
+      PDF_APT_PACKAGES: texlive texlive-lang-cyrillic texlive-latex-extra python3-pygments ghostscript python-is-python3
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -248,10 +256,29 @@ jobs:
         uses: actions/setup-dotnet@v6.0.0
         with:
           dotnet-version: '10.0.x'
+      # These packages are 293 MB. On 2026-10-06 the runner's apt mirror served
+      # them at 223 kB/s, so the download took 22 of the job's 30 minutes
+      # instead of the usual 1.5 (issue #330). Keeping the .deb files in the
+      # Actions cache stops a slow mirror from timing the job out. Only the .deb
+      # files are cached: apt's lock file is root-only, so it cannot be saved.
+      - name: Cache the packages for PDF generation
+        uses: actions/cache@v6.1.0
+        with:
+          path: ~/apt-archives/*.deb
+          key: ${{ runner.os }}-ubuntu-24.04-apt-${{ env.PDF_APT_PACKAGES }}
       - name: Install dependencies for PDF generation
         run: |
+          mkdir -p ~/apt-archives/partial
           sudo apt-get update
-          sudo apt-get install -y texlive texlive-lang-cyrillic texlive-latex-extra python3-pygments ghostscript python-is-python3
+          # The download runs as root because the _apt sandbox user cannot
+          # write to a directory in the runner's home.
+          # shellcheck disable=SC2086 # the package list is split on purpose
+          sudo apt-get install -y \
+            -o Dir::Cache::Archives="$HOME/apt-archives" \
+            -o APT::Sandbox::User=root \
+            $PDF_APT_PACKAGES
+      - name: Check the listing only contains characters LaTeX can typeset
+        run: python3 ../experiments/issue-330/test_pdf_unicode.py
       - name: Generate PDF with code
         run: |
           if [ "$CI_VERBOSE" = "true" ]; then set -x; fi
@@ -264,7 +291,7 @@ jobs:
           retention-days: 1
 
   publishDocumentation:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     needs: [findChangedCsFiles, test, generatePdfWithCode]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
@@ -302,7 +329,7 @@ jobs:
           bash scripts/publish-docs.sh
 
   publishRelease:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     # Deliberately not `needs: publishDocumentation`: a DocFX failure must not
     # withhold the release for a package that is already on NuGet.org.
@@ -310,7 +337,11 @@ jobs:
     # Gate on what actually happened, not on the job result: a job that skipped
     # its publish step (missing credential, or nothing new to push) still
     # reports `success`, which is how green runs shipped no package at all.
-    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && needs.pushToNuget.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    # `skipped` means the version is already on the registry: the release step
+    # is idempotent, so this backfills a release that an earlier run published
+    # but never tagged (its verify step timed out, say; issue #330). Missing
+    # credentials report `failed` and still withhold the release.
+    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && (needs.pushToNuget.outputs.published == 'true' || needs.pushToNuget.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:

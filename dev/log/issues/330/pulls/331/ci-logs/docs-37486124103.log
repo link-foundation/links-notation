@@ -1,0 +1,447 @@
+comparison	UNKNOWN STEP	﻿2026-10-06T15:17:03.0878483Z Current runner version: '2.337.0'
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0905062Z ##[group]Runner Image Provisioner
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0905992Z Hosted Compute Agent
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0906816Z Version: 20260901.588
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0907607Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0908409Z Build Date: 2026-09-01T19:56:44Z
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0909126Z Worker ID: {9ff8edcb-f419-465a-80a0-ac8fc8ee0045}
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0910280Z Azure Region: westus
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0910948Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0912944Z ##[group]Operating System
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0913602Z Ubuntu
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0914230Z 24.04.5
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0914751Z LTS
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0915349Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0915935Z ##[group]Runner Image
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0916515Z Image: ubuntu-24.04
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0917152Z Version: 20260927.320.1
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0918425Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0920372Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0921357Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0922537Z ##[group]GITHUB_TOKEN Permissions
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0924757Z Contents: read
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0925497Z Metadata: read
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0926103Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0928314Z Secret source: Actions
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0929321Z Cache mode: write
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.0930591Z Prepare workflow directory
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.2800653Z Prepare all required actions
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.2848202Z Getting action download info
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.6731169Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.7690777Z Download action repository 'actions/setup-node@v7.0.0' (SHA:820762786026740c76f36085b0efc47a31fe5020)
+comparison	UNKNOWN STEP	2026-10-06T15:17:03.8494197Z Download action repository 'actions/setup-python@v7.0.0' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.1460791Z Complete job name: comparison
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5027243Z ##[group]Run actions/checkout@v7.0.1
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5028288Z with:
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5028799Z   persist-credentials: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5029615Z   repository: link-foundation/links-notation
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5034036Z   token: ***
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5034529Z   ssh-strict: true
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5035022Z   ssh-user: git
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5035494Z   clean: true
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5035991Z   sparse-checkout-cone-mode: true
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5036570Z   fetch-depth: 1
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5037052Z   fetch-tags: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5037548Z   show-progress: true
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5038073Z   lfs: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5038545Z   submodules: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5039054Z   set-safe-directory: true
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5039789Z   allow-unsafe-pr-checkout: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5040649Z env:
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5041120Z   CI_VERBOSE: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.5041607Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6101094Z Syncing repository: link-foundation/links-notation
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6103381Z ##[group]Getting Git version info
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6104300Z Working directory is '/home/runner/work/links-notation/links-notation'
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6105580Z [command]/usr/bin/git version
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6215949Z git version 2.55.0
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6232234Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6242149Z Temporarily overriding HOME='/home/runner/work/_temp/e30970d7-e47a-40b5-8f24-40d179d78c39' before making global git config changes
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6244933Z Adding repository directory to the temporary git global config as a safe directory
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6247392Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6301886Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6305739Z ##[group]Determining repository object format
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6307619Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6309809Z ##[group]Initializing the repository
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6312637Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6425590Z hint: Using 'master' as the name for the initial branch. This default branch name
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6427597Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6430285Z hint: to use in all of your new repositories, which will suppress this warning,
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6431674Z hint: call:
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6432434Z hint:
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6433507Z hint: 	git config --global init.defaultBranch <name>
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6434669Z hint:
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6435721Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6437439Z hint: 'development'. The just-created branch can be renamed via this command:
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6438957Z hint:
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6439996Z hint: 	git branch -m <name>
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6440891Z hint:
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6442128Z hint: Disable this message with "git config set advice.defaultBranchName false"
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6443853Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6446057Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6496462Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6498034Z ##[group]Disabling automatic garbage collection
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6500746Z [command]/usr/bin/git config --local gc.auto 0
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6541128Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6543004Z ##[group]Setting up auth
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6544056Z Removing SSH command configuration
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6547435Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6585523Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6967906Z Removing HTTP extra header
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.6970480Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7007767Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7235384Z Removing includeIf entries pointing to credentials config files
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7240940Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7280031Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7517125Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-1218304c-5206-4eed-a6e7-ac7dea904842.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7560477Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-1218304c-5206-4eed-a6e7-ac7dea904842.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7598932Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-1218304c-5206-4eed-a6e7-ac7dea904842.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7640312Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-1218304c-5206-4eed-a6e7-ac7dea904842.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7680308Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-1218304c-5206-4eed-a6e7-ac7dea904842.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7727108Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7729031Z ##[group]Fetching the repository
+comparison	UNKNOWN STEP	2026-10-06T15:17:04.7730905Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a:refs/remotes/origin/main
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4300760Z From https://github.com/link-foundation/links-notation
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4302458Z  * [new ref]         b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a -> origin/main
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4320368Z [command]/usr/bin/git branch --list --remote origin/main
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4343325Z   origin/main
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4352419Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4381068Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4386053Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4387378Z ##[group]Determining the checkout info
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4389735Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4391004Z [command]/usr/bin/git sparse-checkout disable
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4448370Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4484748Z ##[group]Checking out the ref
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.4488737Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5254504Z Switched to a new branch 'main'
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5261349Z branch 'main' set up to track 'origin/main'.
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5273887Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5323121Z [command]/usr/bin/git log -1 --format=%H
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5354677Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5363821Z ##[group]Removing auth
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5365019Z Removing SSH command configuration
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5367399Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5406997Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5639260Z Removing HTTP extra header
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5643338Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5684258Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5907211Z Removing includeIf entries pointing to credentials config files
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5911321Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5943081Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5946260Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5948618Z includeif.gitdir:/github/workspace/.git.path
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5951954Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5961011Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5980017Z /home/runner/work/_temp/git-credentials-1218304c-5206-4eed-a6e7-ac7dea904842.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.5990889Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-1218304c\-5206\-4eed\-a6e7\-ac7dea904842\.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6030674Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6058652Z /home/runner/work/_temp/git-credentials-1218304c-5206-4eed-a6e7-ac7dea904842.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6068303Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-1218304c\-5206\-4eed\-a6e7\-ac7dea904842\.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6107838Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6165566Z /github/runner_temp/git-credentials-1218304c-5206-4eed-a6e7-ac7dea904842.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6213274Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-1218304c\-5206\-4eed\-a6e7\-ac7dea904842\.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6258073Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6285036Z /github/runner_temp/git-credentials-1218304c-5206-4eed-a6e7-ac7dea904842.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6293727Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-1218304c\-5206\-4eed\-a6e7\-ac7dea904842\.config
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6335306Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6565305Z Removing credentials config '/home/runner/work/_temp/git-credentials-1218304c-5206-4eed-a6e7-ac7dea904842.config'
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.6574297Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.8705855Z ##[group]Run actions/setup-node@v7.0.0
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.8707186Z with:
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.8708082Z   node-version: 22
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.8709058Z   cache: npm
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.8710462Z   cache-dependency-path: docs/comparison/package-lock.json
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.8711968Z   check-latest: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.8722470Z   token: ***
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.8723480Z   package-manager-cache: true
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.8724591Z env:
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.8725481Z   CI_VERBOSE: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:05.8726434Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:06.0041304Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+comparison	UNKNOWN STEP	2026-10-06T15:17:06.0044679Z ##[group]Environment details
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.1546243Z node: v22.23.3
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.1546666Z npm: 10.9.9
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.1546919Z yarn: 1.22.22
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.1547950Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.1567421Z [command]/opt/hostedtoolcache/node/22.23.3/x64/bin/npm config get cache
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.5288900Z /home/runner/.npm
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8042869Z npm cache is not found
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8675762Z ##[group]Run actions/setup-python@v7.0.0
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8676117Z with:
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8676331Z   python-version: 3.13
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8676569Z   check-latest: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8679689Z   token: ***
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8679931Z   update-environment: true
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8680282Z   allow-prereleases: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8680737Z   freethreaded: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8680978Z env:
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8681168Z   CI_VERBOSE: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.8681380Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:09.9960746Z ##[group]Installed versions
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0042070Z Successfully set up CPython (3.13.15)
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0043182Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0405207Z ##[group]Run npm ci
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0405572Z ^[[36;1mnpm ci^[[0m
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0948509Z shell: /usr/bin/bash -e {0}
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0948891Z env:
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0949154Z   CI_VERBOSE: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0949836Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0950418Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0950957Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0951481Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0952008Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0952490Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+comparison	UNKNOWN STEP	2026-10-06T15:17:10.0952900Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.4847519Z 
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.4848368Z added 3 packages, and audited 4 packages in 2s
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.4848858Z 
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.4849160Z 1 package is looking for funding
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.4850069Z   run `npm fund` for details
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.4870020Z 
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.4870525Z found 0 vulnerabilities
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5437315Z ##[group]Run set -euo pipefail
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5437686Z ^[[36;1mset -euo pipefail^[[0m
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5438212Z ^[[36;1mif [ "$CI_VERBOSE" = "true" ]; then set -x; fi^[[0m
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5438530Z ^[[36;1mnpm run check^[[0m
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5506068Z shell: /usr/bin/bash -e {0}
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5506324Z env:
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5506515Z   CI_VERBOSE: false
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5506847Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5507296Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5507734Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5508126Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5508527Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5508905Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.5509221Z ##[endgroup]
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.6593863Z 
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.6594743Z > links-notation-comparison@0.0.0 check
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.6595828Z > node generate.mjs --check && python3 generate_comparison_svgs.py --check
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.6596505Z 
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.7618665Z comparison.lino: up to date
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.7621553Z comparison.yaml: up to date
+comparison	UNKNOWN STEP	2026-10-06T15:17:12.7622175Z comparison.xml: up to date
+comparison	UNKNOWN STEP	2026-10-06T15:17:13.2805326Z The committed comparison SVGs match the documents
+comparison	UNKNOWN STEP	2026-10-06T15:17:13.3558353Z Post job cleanup.
+comparison	UNKNOWN STEP	2026-10-06T15:17:13.5356884Z Post job cleanup.
+comparison	UNKNOWN STEP	2026-10-06T15:17:13.6707479Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/links-notation/links-notation --files-from manifest.txt --use-compress-program zstdmt
+comparison	UNKNOWN STEP	2026-10-06T15:17:14.5280690Z Sent 245634 of 245634 (100.0%), 0.4 MBs/sec
+comparison	UNKNOWN STEP	2026-10-06T15:17:14.8376729Z Cache saved with the key: node-cache-Linux-x64-npm-0380d5033448d6feaf4134dbacfcc8d3c6664edfbf50356b33b689923a3fbc79
+comparison	UNKNOWN STEP	2026-10-06T15:17:14.9222479Z Post job cleanup.
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0091368Z [command]/usr/bin/git version
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0143523Z git version 2.55.0
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0184166Z Temporarily overriding HOME='/home/runner/work/_temp/c6e5ac19-5b1e-4010-a333-d96972193014' before making global git config changes
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0185807Z Adding repository directory to the temporary git global config as a safe directory
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0190812Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0224724Z Removing SSH command configuration
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0232334Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0269246Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0541728Z Removing HTTP extra header
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0546159Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0602116Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0954282Z Removing includeIf entries pointing to credentials config files
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.0982933Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.1039346Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+comparison	UNKNOWN STEP	2026-10-06T15:17:15.1476268Z Cleaning up orphan processes
+test-cases	UNKNOWN STEP	﻿2026-10-06T15:17:02.2960271Z Current runner version: '2.337.0'
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2988041Z ##[group]Runner Image Provisioner
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2989036Z Hosted Compute Agent
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2989689Z Version: 20261002.596
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2990315Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2991094Z Build Date: 2026-10-02T22:28:27Z
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2991780Z Worker ID: {e8f9af77-f0ac-497c-a742-f1a048084ba3}
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2992464Z Region: eastus
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2993137Z Cloud: Azure
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2993685Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2995901Z ##[group]Operating System
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2996683Z Ubuntu
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2997422Z 24.04.5
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2998054Z LTS
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2998597Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2999292Z ##[group]Runner Image
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.2999891Z Image: ubuntu-24.04
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.3000535Z Version: 20261004.327.1
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.3001878Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.3003535Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.3004534Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.3005761Z ##[group]GITHUB_TOKEN Permissions
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.3008506Z Contents: read
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.3009226Z Metadata: read
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.3009815Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.3012133Z Secret source: Actions
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.3013313Z Cache mode: write
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.3014281Z Prepare workflow directory
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.4883280Z Prepare all required actions
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.4933175Z Getting action download info
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.6826339Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+test-cases	UNKNOWN STEP	2026-10-06T15:17:02.7868213Z Download action repository 'actions/setup-node@v7.0.0' (SHA:820762786026740c76f36085b0efc47a31fe5020)
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.0450899Z Complete job name: test-cases
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3941201Z ##[group]Run actions/checkout@v7.0.1
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3942148Z with:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3942603Z   persist-credentials: false
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3943164Z   repository: link-foundation/links-notation
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3947481Z   token: ***
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3947919Z   ssh-strict: true
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3948351Z   ssh-user: git
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3948767Z   clean: true
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3949206Z   sparse-checkout-cone-mode: true
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3949713Z   fetch-depth: 1
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3950139Z   fetch-tags: false
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3950599Z   show-progress: true
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3951049Z   lfs: false
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3951454Z   submodules: false
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3951909Z   set-safe-directory: true
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3952419Z   allow-unsafe-pr-checkout: false
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3953187Z env:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3953589Z   CI_VERBOSE: false
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.3954021Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5086443Z Syncing repository: link-foundation/links-notation
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5089174Z ##[group]Getting Git version info
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5090052Z Working directory is '/home/runner/work/links-notation/links-notation'
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5091143Z [command]/usr/bin/git version
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5215732Z git version 2.55.0
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5245885Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5262122Z Temporarily overriding HOME='/home/runner/work/_temp/65f7b33d-3201-40a6-a442-d94d0c48c8cd' before making global git config changes
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5264560Z Adding repository directory to the temporary git global config as a safe directory
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5271713Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5339151Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5347157Z ##[group]Determining repository object format
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5349243Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5350420Z ##[group]Initializing the repository
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5354764Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5513999Z hint: Using 'master' as the name for the initial branch. This default branch name
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5525237Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5526603Z hint: to use in all of your new repositories, which will suppress this warning,
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5528058Z hint: call:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5528820Z hint:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5529742Z hint: 	git config --global init.defaultBranch <name>
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5530755Z hint:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5531625Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5532954Z hint: 'development'. The just-created branch can be renamed via this command:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5534167Z hint:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5534824Z hint: 	git branch -m <name>
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5535563Z hint:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5536550Z hint: Disable this message with "git config set advice.defaultBranchName false"
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5538925Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5540851Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5592945Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5594265Z ##[group]Disabling automatic garbage collection
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5605968Z [command]/usr/bin/git config --local gc.auto 0
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5640692Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5642069Z ##[group]Setting up auth
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5643035Z Removing SSH command configuration
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5652232Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.5701568Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6136744Z Removing HTTP extra header
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6144375Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6183246Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6405898Z Removing includeIf entries pointing to credentials config files
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6412146Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6451568Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6686088Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-fd96bc76-ca4a-4c70-844a-17ac94df9a24.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6733144Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-fd96bc76-ca4a-4c70-844a-17ac94df9a24.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6771853Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-fd96bc76-ca4a-4c70-844a-17ac94df9a24.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6813745Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-fd96bc76-ca4a-4c70-844a-17ac94df9a24.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6852579Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-fd96bc76-ca4a-4c70-844a-17ac94df9a24.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6887241Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6888056Z ##[group]Fetching the repository
+test-cases	UNKNOWN STEP	2026-10-06T15:17:03.6896612Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a:refs/remotes/origin/main
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1669623Z From https://github.com/link-foundation/links-notation
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1672959Z  * [new ref]         b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a -> origin/main
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1687111Z [command]/usr/bin/git branch --list --remote origin/main
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1723159Z   origin/main
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1732997Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1763224Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1769247Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1770994Z ##[group]Determining the checkout info
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1772902Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1774537Z [command]/usr/bin/git sparse-checkout disable
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1839102Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1884906Z ##[group]Checking out the ref
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.1888122Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.2651385Z Switched to a new branch 'main'
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.2655315Z branch 'main' set up to track 'origin/main'.
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.2667771Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.2722636Z [command]/usr/bin/git log -1 --format=%H
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.2755249Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.2766024Z ##[group]Removing auth
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.2768080Z Removing SSH command configuration
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.2771206Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.2815132Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3064029Z Removing HTTP extra header
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3068570Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3113299Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3355469Z Removing includeIf entries pointing to credentials config files
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3359302Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3395202Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3399059Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3401397Z includeif.gitdir:/github/workspace/.git.path
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3403525Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3408251Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3435499Z /home/runner/work/_temp/git-credentials-fd96bc76-ca4a-4c70-844a-17ac94df9a24.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3450489Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-fd96bc76\-ca4a\-4c70\-844a\-17ac94df9a24\.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3493229Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3525166Z /home/runner/work/_temp/git-credentials-fd96bc76-ca4a-4c70-844a-17ac94df9a24.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3535325Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-fd96bc76\-ca4a\-4c70\-844a\-17ac94df9a24\.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3576186Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3645345Z /github/runner_temp/git-credentials-fd96bc76-ca4a-4c70-844a-17ac94df9a24.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3670955Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-fd96bc76\-ca4a\-4c70\-844a\-17ac94df9a24\.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3708172Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3735103Z /github/runner_temp/git-credentials-fd96bc76-ca4a-4c70-844a-17ac94df9a24.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3745627Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-fd96bc76\-ca4a\-4c70\-844a\-17ac94df9a24\.config
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.3787486Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.4034279Z Removing credentials config '/home/runner/work/_temp/git-credentials-fd96bc76-ca4a-4c70-844a-17ac94df9a24.config'
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.4046562Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.6309296Z ##[group]Run actions/setup-node@v7.0.0
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.6309856Z with:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.6310227Z   node-version: 22
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.6310623Z   check-latest: false
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.6313855Z   token: ***
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.6314267Z   package-manager-cache: true
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.6314694Z env:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.6315050Z   CI_VERBOSE: false
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.6315427Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.7610338Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+test-cases	UNKNOWN STEP	2026-10-06T15:17:04.7625362Z ##[group]Environment details
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.1968966Z node: v22.23.3
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.1970786Z npm: 10.9.9
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.1971445Z yarn: 1.22.22
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.1973030Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.3050401Z ##[group]Run set -euo pipefail
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.3050911Z ^[[36;1mset -euo pipefail^[[0m
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.3051292Z ^[[36;1mif [ "$CI_VERBOSE" = "true" ]; then set -x; fi^[[0m
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.3051773Z ^[[36;1mnode scripts/create-test-case-comparison.mjs --check^[[0m
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.3360726Z shell: /usr/bin/bash -e {0}
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.3361303Z env:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.3361697Z   CI_VERBOSE: false
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.3362120Z ##[endgroup]
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4187355Z The generated test documents are up to date.
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4188314Z 
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4188924Z ================================================================================
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4189667Z SUMMARY
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4190381Z ================================================================================
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4191303Z Python:      240 tests across 21 categories
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4192104Z JavaScript:  285 tests across 25 categories
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4193106Z Rust:        396 tests across 27 categories
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4198246Z C#:          290 tests across 25 categories
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4198942Z Go:          134 tests across 15 categories
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4199471Z Java:        180 tests across 14 categories
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4200050Z PHP:         230 tests across 21 categories
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.4200760Z ================================================================================
+test-cases	UNKNOWN STEP	2026-10-06T15:17:05.7532428Z Post job cleanup.
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.2725745Z Post job cleanup.
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.3708384Z [command]/usr/bin/git version
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.3739169Z git version 2.55.0
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.3902375Z Temporarily overriding HOME='/home/runner/work/_temp/60a87207-6cc4-4ef8-ad61-be10f41bf9a4' before making global git config changes
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.3928603Z Adding repository directory to the temporary git global config as a safe directory
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.3989771Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.4008973Z Removing SSH command configuration
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.4010340Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.4013348Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.4190718Z Removing HTTP extra header
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.4200869Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.4272762Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.4584965Z Removing includeIf entries pointing to credentials config files
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.4586585Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.4616649Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test-cases	UNKNOWN STEP	2026-10-06T15:17:06.5022638Z Cleaning up orphan processes

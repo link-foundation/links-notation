@@ -33,7 +33,7 @@ defaults:
 
 jobs:
   findChangedPhpFiles:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -71,7 +71,7 @@ jobs:
   lint:
     needs: [findChangedPhpFiles]
     if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -97,7 +97,7 @@ jobs:
   test:
     needs: [findChangedPhpFiles, lint]
     if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       # The matrix value belongs in the group. Without it all four legs share
@@ -128,7 +128,7 @@ jobs:
   publishToPackagist:
     needs: [findChangedPhpFiles, test]
     if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-publish-packagist
@@ -231,11 +231,11 @@ jobs:
             "\"version\":\"${PACKAGE_VERSION}\"" 20 30
 
   publishRelease:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     needs: [findChangedPhpFiles, publishToPackagist]
     # See csharp.yml: gate on what was published, not on the job result.
-    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' && needs.publishToPackagist.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' && (needs.publishToPackagist.outputs.published == 'true' || needs.publishToPackagist.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:

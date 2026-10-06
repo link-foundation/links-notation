@@ -33,7 +33,7 @@ defaults:
 
 jobs:
   findChangedJavaFiles:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -71,7 +71,7 @@ jobs:
   build:
     needs: [findChangedJavaFiles]
     if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-build
@@ -93,7 +93,7 @@ jobs:
   test:
     needs: [findChangedJavaFiles, build]
     if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-test-${{ matrix.java }}
@@ -119,7 +119,7 @@ jobs:
   format:
     needs: [findChangedJavaFiles]
     if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-format
@@ -141,7 +141,7 @@ jobs:
   publishToMavenCentral:
     needs: [findChangedJavaFiles, test, format]
     if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     concurrency:
       group: ${{ github.workflow }}-publish-maven-central
@@ -181,10 +181,13 @@ jobs:
           distribution: 'temurin'
           cache: maven
           server-id: central
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
+          # setup-java v6 deprecated the unsuffixed names and warned about each
+          # of them on every publish run (issue #330). Same values: these name
+          # the environment variables that hold the secrets.
+          server-username-env-var: MAVEN_USERNAME
+          server-password-env-var: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+          gpg-passphrase-env-var: MAVEN_GPG_PASSPHRASE
       - name: Check if version already published
         id: version-check
         run: |
@@ -248,11 +251,11 @@ jobs:
             30 30
 
   publishRelease:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     needs: [findChangedJavaFiles, publishToMavenCentral]
     # See csharp.yml: gate on what was published, not on the job result.
-    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && needs.publishToMavenCentral.outputs.published == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && (needs.publishToMavenCentral.outputs.published == 'true' || needs.publishToMavenCentral.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:

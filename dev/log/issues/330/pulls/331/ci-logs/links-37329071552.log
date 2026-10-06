@@ -1,0 +1,341 @@
+linkChecker	UNKNOWN STEP	﻿2026-10-05T14:58:38.5103003Z Current runner version: '2.337.0'
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5139862Z ##[group]Runner Image Provisioner
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5141344Z Hosted Compute Agent
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5142440Z Version: 20260901.588
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5143714Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5145064Z Build Date: 2026-09-01T19:56:44Z
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5146269Z Worker ID: {ae1f236a-c7e7-4182-934c-2904895d8796}
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5147732Z Azure Region: eastus2
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5148844Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5151369Z ##[group]Operating System
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5152633Z Ubuntu
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5153568Z 24.04.5
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5154531Z LTS
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5155528Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5156551Z ##[group]Runner Image
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5157875Z Image: ubuntu-24.04
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5158936Z Version: 20260927.320.1
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5161590Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5164383Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5166305Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5168313Z ##[group]GITHUB_TOKEN Permissions
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5171855Z Contents: read
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5172833Z Metadata: read
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5173869Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5176989Z Secret source: Actions
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5178988Z Cache mode: write
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5180749Z Prepare workflow directory
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.5971103Z Prepare all required actions
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.6045102Z Getting action download info
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.8607746Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:38.9592759Z Download action repository 'lycheeverse/lychee-action@v2' (SHA:e7477775783ea5526144ba13e8db5eec57747ce8)
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2005174Z Complete job name: linkChecker
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2712474Z ##[group]Run actions/checkout@v7
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2713443Z with:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2713908Z   persist-credentials: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2714427Z   submodules: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2714930Z   repository: link-foundation/links-notation
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2718783Z   token: ***
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2719235Z   ssh-strict: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2720219Z   ssh-user: git
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2720666Z   clean: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2721129Z   sparse-checkout-cone-mode: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2721680Z   fetch-depth: 1
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2722122Z   fetch-tags: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2722577Z   show-progress: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2723035Z   lfs: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2723474Z   set-safe-directory: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2723992Z   allow-unsafe-pr-checkout: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2724836Z env:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2725265Z   CI_VERBOSE: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.2725705Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3737396Z Syncing repository: link-foundation/links-notation
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3740478Z ##[group]Getting Git version info
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3741381Z Working directory is '/home/runner/work/links-notation/links-notation'
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3742547Z [command]/usr/bin/git version
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3828628Z git version 2.55.0
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3853725Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3879574Z Temporarily overriding HOME='/home/runner/work/_temp/13e35e90-e51d-4a18-a49c-f9805b4b4091' before making global git config changes
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3881980Z Adding repository directory to the temporary git global config as a safe directory
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3883648Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3927787Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3931567Z ##[group]Determining repository object format
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3933317Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3934134Z ##[group]Initializing the repository
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.3938975Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4027664Z hint: Using 'master' as the name for the initial branch. This default branch name
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4028857Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4030229Z hint: to use in all of your new repositories, which will suppress this warning,
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4031042Z hint: call:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4031475Z hint:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4032022Z hint: 	git config --global init.defaultBranch <name>
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4032685Z hint:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4033317Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4034288Z hint: 'development'. The just-created branch can be renamed via this command:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4035057Z hint:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4035481Z hint: 	git branch -m <name>
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4035969Z hint:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4036654Z hint: Disable this message with "git config set advice.defaultBranchName false"
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4042777Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4052514Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4106007Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4106855Z ##[group]Disabling automatic garbage collection
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4109700Z [command]/usr/bin/git config --local gc.auto 0
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4142938Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4143888Z ##[group]Setting up auth
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4144445Z Removing SSH command configuration
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4151122Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4186785Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4563477Z Removing HTTP extra header
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4570378Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4609227Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4857879Z Removing includeIf entries pointing to credentials config files
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4864317Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.4902055Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.5145062Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.5190806Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.5229229Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.5276256Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.5320734Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.5357211Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.5357957Z ##[group]Fetching the repository
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.5368107Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +7cbc162d2b939b7caff5ac51fbd780bc9c7e04ca:refs/remotes/origin/main
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.9935808Z From https://github.com/link-foundation/links-notation
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.9938621Z  * [new ref]         7cbc162d2b939b7caff5ac51fbd780bc9c7e04ca -> origin/main
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.9942916Z [command]/usr/bin/git branch --list --remote origin/main
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.9971434Z   origin/main
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:39.9980138Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0006400Z 7cbc162d2b939b7caff5ac51fbd780bc9c7e04ca
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0011340Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0012463Z ##[group]Determining the checkout info
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0014053Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0015334Z [command]/usr/bin/git sparse-checkout disable
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0066624Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0100917Z ##[group]Checking out the ref
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0104245Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0808202Z Switched to a new branch 'main'
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0812264Z branch 'main' set up to track 'origin/main'.
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0824007Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0825859Z ##[group]Setting up auth for fetching submodules
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0832904Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0881126Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0917404Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.0959979Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1001003Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1038074Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1041401Z ##[group]Fetching submodules
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1043436Z [command]/usr/bin/git submodule sync
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1280342Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1528481Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1763665Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1810547Z [command]/usr/bin/git log -1 --format=%H
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1851633Z 7cbc162d2b939b7caff5ac51fbd780bc9c7e04ca
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1862084Z ##[group]Removing auth
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1863740Z Removing SSH command configuration
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1867647Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.1908876Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2229324Z Removing HTTP extra header
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2230842Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2285486Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2517651Z Removing includeIf entries pointing to credentials config files
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2521103Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2553765Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2555053Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2555881Z includeif.gitdir:/github/workspace/.git.path
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2556740Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2563106Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2590574Z /home/runner/work/_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2601326Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-08cccecb\-765a\-4926\-8773\-b4c22a5382c7\.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2642713Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2677534Z /home/runner/work/_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2687791Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-08cccecb\-765a\-4926\-8773\-b4c22a5382c7\.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2730969Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2760434Z /github/runner_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2767991Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-08cccecb\-765a\-4926\-8773\-b4c22a5382c7\.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2810767Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2838581Z /github/runner_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2845528Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-08cccecb\-765a\-4926\-8773\-b4c22a5382c7\.config
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.2884839Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3119769Z Removing credentials config '/home/runner/work/_temp/git-credentials-08cccecb-765a-4926-8773-b4c22a5382c7.config'
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3130755Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3450537Z ##[group]Run lycheeverse/lychee-action@v2
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3451080Z with:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3452204Z   args: --no-progress --cache --max-cache-age 1d --max-retries 3 --timeout 30 --exclude-path docs/case-studies --exclude-path docs/website/dist --exclude-path js/node_modules --exclude-path docs/website/node_modules './**/*.md'
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3453343Z   fail: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3453708Z   jobSummary: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3454078Z   debug: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3454452Z   failIfEmpty: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3454830Z   format: markdown
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3455207Z   lycheeVersion: v0.24.2
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3455618Z   output: lychee/out.md
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3456001Z   checkbox: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3458814Z   token: ***
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3459198Z   workingDirectory: .
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3459831Z env:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3460185Z   CI_VERBOSE: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3462990Z   GITHUB_TOKEN: ***
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3463380Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3603666Z ##[start-action display=Set up environment;id=__lycheeverse_lychee-action.__run]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3649291Z ##[group]Run # Install into $RUNNER_TEMP (not $HOME) so the install path is stable
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3650387Z ^[[36;1m# Install into $RUNNER_TEMP (not $HOME) so the install path is stable^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3651138Z ^[[36;1m# across composite steps. On some runners $HOME is overridden per step^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3651876Z ^[[36;1m# (e.g. actions/checkout temporarily sets it), which made the PATH^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3652567Z ^[[36;1m# entry from one step and the install in another step diverge.^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3653199Z ^[[36;1mecho "$RUNNER_TEMP/lychee/bin" >> "$GITHUB_PATH"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3653736Z ^[[36;1mmkdir -p "$RUNNER_TEMP/lychee/bin"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3912082Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3913021Z env:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3913421Z   CI_VERBOSE: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3916799Z   GITHUB_TOKEN: ***
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.3917209Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4066199Z ##[end-action id=__lycheeverse_lychee-action.__run;outcome=success;conclusion=success;duration_ms=46]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4072540Z ##[start-action display=Download and extract lychee in temp directory;id=__lycheeverse_lychee-action.lychee-setup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4097735Z ##[group]Run # Create a temporary directory for downloads and extraction
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4098513Z ^[[36;1m# Create a temporary directory for downloads and extraction^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4099128Z ^[[36;1mTEMP_DIR="${RUNNER_TEMP}/lychee-download"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4100063Z ^[[36;1mrm -rf "${TEMP_DIR}" && mkdir -p "${TEMP_DIR}"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4100594Z ^[[36;1mcd "${TEMP_DIR}"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4101004Z ^[[36;1m^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4101387Z ^[[36;1mARCH=$(uname -m)^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4101901Z ^[[36;1m# Determine filename and download URL based on version^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4102572Z ^[[36;1mif [[ "${LYCHEE_VERSION}" =~ ^v0\.0|^v0\.1[0-5]\. ]]; then^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4103259Z ^[[36;1m  FILENAME="lychee-${LYCHEE_VERSION}-${ARCH}-unknown-linux-gnu.tar.gz"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4104197Z ^[[36;1m  DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/download/${LYCHEE_VERSION}/${FILENAME}"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4104929Z ^[[36;1melse^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4105408Z ^[[36;1m  FILENAME="lychee-${ARCH}-unknown-linux-gnu.tar.gz"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4106050Z ^[[36;1m  if [[ "${LYCHEE_VERSION}" == 'nightly' ]]; then^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4106792Z ^[[36;1m    DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/download/nightly/${FILENAME}"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4107542Z ^[[36;1m  elif [[ "${LYCHEE_VERSION}" == 'latest' ]]; then^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4108276Z ^[[36;1m    DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/latest/download/${FILENAME}"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4108951Z ^[[36;1m  else^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4110012Z ^[[36;1m    DOWNLOAD_URL="https://github.com/lycheeverse/lychee/releases/download/lychee-${LYCHEE_VERSION}/${FILENAME}"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4110785Z ^[[36;1m  fi^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4111162Z ^[[36;1mfi^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4111534Z ^[[36;1m^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4111949Z ^[[36;1mecho "Downloading from: ${DOWNLOAD_URL}"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4112476Z ^[[36;1mcurl -sfLO "${DOWNLOAD_URL}"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4112926Z ^[[36;1m^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4113421Z ^[[36;1mecho "Extracting ${FILENAME}"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4113897Z ^[[36;1mtar -xvzf "${FILENAME}"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4114352Z ^[[36;1mrm -rv "${FILENAME}"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4114768Z ^[[36;1m^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4115239Z ^[[36;1m# Detect if lychee binary is in a subfolder within the tar.gz^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4115853Z ^[[36;1mif ! [[ -f "${TEMP_DIR}/lychee" ]]; then^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4116479Z ^[[36;1m  TEMP_DIR="$(echo "${TEMP_DIR}"/lychee-*)"  # need `echo` to evaluate glob^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4117082Z ^[[36;1mfi^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4117496Z ^[[36;1mif ! [[ -f "${TEMP_DIR}/lychee" ]]; then^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4118180Z ^[[36;1m  echo "Cannot find lychee binary in $TEMP_DIR. Did the archive structure change?" >&2^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4118827Z ^[[36;1m  exit 1^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4119215Z ^[[36;1mfi^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4119742Z ^[[36;1m^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4120175Z ^[[36;1m# Output temp directory for use in later steps^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4120754Z ^[[36;1mecho "temp_dir=${TEMP_DIR}" >> $GITHUB_OUTPUT^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4188426Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4189021Z env:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4189624Z   CI_VERBOSE: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4192647Z   GITHUB_TOKEN: ***
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4193072Z   LYCHEE_VERSION: v0.24.2
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4193504Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.4326452Z Downloading from: https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-gnu.tar.gz
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5938090Z Extracting lychee-x86_64-unknown-linux-gnu.tar.gz
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5966493Z lychee-x86_64-unknown-linux-gnu/
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5967616Z lychee-x86_64-unknown-linux-gnu/README.md
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5969742Z lychee-x86_64-unknown-linux-gnu/docs/
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5970747Z lychee-x86_64-unknown-linux-gnu/docs/lychee.1
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5971909Z lychee-x86_64-unknown-linux-gnu/docs/TROUBLESHOOTING.md
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5972883Z lychee-x86_64-unknown-linux-gnu/docs/PRE_COMMIT.md
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5973850Z lychee-x86_64-unknown-linux-gnu/complete/
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5974795Z lychee-x86_64-unknown-linux-gnu/complete/_lychee.ps1
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5975456Z lychee-x86_64-unknown-linux-gnu/complete/lychee.elv
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5976031Z lychee-x86_64-unknown-linux-gnu/complete/lychee.fish
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5976618Z lychee-x86_64-unknown-linux-gnu/complete/lychee.bash
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5977194Z lychee-x86_64-unknown-linux-gnu/complete/_lychee
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.5977744Z lychee-x86_64-unknown-linux-gnu/lychee
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7397385Z removed 'lychee-x86_64-unknown-linux-gnu.tar.gz'
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7433043Z ##[end-action id=__lycheeverse_lychee-action.lychee-setup;outcome=success;conclusion=success;duration_ms=335]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7439960Z ##[start-action display=Install lychee;id=__lycheeverse_lychee-action.__run_2]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7484982Z ##[group]Run # Install lychee from the temporary directory
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7485627Z ^[[36;1m# Install lychee from the temporary directory^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7486480Z ^[[36;1minstall -t "$RUNNER_TEMP/lychee/bin" -D "/home/runner/work/_temp/lychee-download/lychee-x86_64-unknown-linux-gnu/lychee"^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7554411Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7555010Z env:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7555403Z   CI_VERBOSE: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7558458Z   GITHUB_TOKEN: ***
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7558874Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7748698Z ##[end-action id=__lycheeverse_lychee-action.__run_2;outcome=success;conclusion=success;duration_ms=30]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7760279Z ##[start-action display=Run Lychee;id=__lycheeverse_lychee-action.run-lychee]
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7786168Z ##[group]Run /home/runner/work/_actions/lycheeverse/lychee-action/v2/entrypoint.sh
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7786969Z ^[[36;1m/home/runner/work/_actions/lycheeverse/lychee-action/v2/entrypoint.sh^[[0m
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7855698Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7856311Z env:
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7856693Z   CI_VERBOSE: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7860078Z   GITHUB_TOKEN: ***
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7862906Z   INPUT_TOKEN: ***
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7864041Z   INPUT_ARGS: --no-progress --cache --max-cache-age 1d --max-retries 3 --timeout 30 --exclude-path docs/case-studies --exclude-path docs/website/dist --exclude-path js/node_modules --exclude-path docs/website/node_modules './**/*.md'
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7865235Z   INPUT_DEBUG: false
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7865629Z   INPUT_FAIL: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7866071Z   INPUT_FAILIFEMPTY: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7866490Z   INPUT_FORMAT: markdown
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7866927Z   INPUT_JOBSUMMARY: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7867338Z   INPUT_CHECKBOX: true
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7867742Z   INPUT_OUTPUT: lychee/out.md
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7868466Z   SUMMARY_URL: https://github.com/link-foundation/links-notation/actions/runs/37329071552#summary-111827199536
+linkChecker	UNKNOWN STEP	2026-10-05T14:58:40.7869177Z ##[endgroup]
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3863673Z Hint: Encountered rate limit responses. You might be able to work around this by adding `[hosts."github.com"]` to the TOML config to adjust the `concurrency` and `request_interval` values.
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3865396Z Hint: Followed 11 redirects. You might want to consider replacing redirecting URLs with the resolved URLs. Use verbose mode (`-v`/`-vv`) to see redirection details.
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3866769Z Hint: You can configure accepted/rejected response codes with `-a` or `--accept`
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3964835Z # Summary
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3965682Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3965869Z | Status         | Count |
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3966356Z |----------------|-------|
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3967068Z | 🔍 Total       | 2068  |
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3967542Z | 🔗 Unique      | 1857  |
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3968050Z | ✅ Successful  | 2052  |
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3968544Z | ⏳ Timeouts    | 0     |
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3969036Z | 🔀 Redirected  | 11    |
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3969772Z | 👻 Excluded    | 9     |
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3970280Z | ❓ Unknown     | 0     |
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3970770Z | 🚫 Errors      | 7     |
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3971383Z | ⛔ Unsupported | 0     |
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3971671Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3971844Z ## Errors per input
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3972094Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3972289Z ### Errors in go/README.md
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3972593Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3973404Z * [502] <https://github.com/link-foundation/links-notation/actions?workflow=go> (at 3:1) | Rejected status code: 502 Bad Gateway
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3974339Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3974567Z ### Errors in go/README.ru.md
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3974864Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3975584Z * [502] <https://github.com/link-foundation/links-notation/actions?workflow=go> (at 3:1) | Rejected status code: 502 Bad Gateway
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3976185Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3976300Z ### Errors in README.md
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3976472Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3977057Z * [429] <https://github.com/link-foundation/links-notation/actions?workflow=go> (at 8:3) | Rejected status code: 429 Too Many Requests
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3978246Z * [503] <https://www.codefactor.io/repository/github/link-foundation/links-notation> (at 16:1) | Rejected status code: 503 Service Unavailable
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3979807Z * [503] <https://www.codefactor.io/repository/github/link-foundation/links-notation/badge> (at 16:2) | Rejected status code: 503 Service Unavailable
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3980536Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3980655Z ### Errors in README.ru.md
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3980812Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3981448Z * [503] <https://www.codefactor.io/repository/github/link-foundation/links-notation> (at 15:1) | Rejected status code: 503 Service Unavailable
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3982439Z * [503] <https://www.codefactor.io/repository/github/link-foundation/links-notation/badge> (at 15:2) | Rejected status code: 503 Service Unavailable
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3982976Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.3983008Z 
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.4005801Z ##[notice]Summary report available at: https://github.com/link-foundation/links-notation/actions/runs/37329071552#summary-111827199536
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.4008246Z ##[error]Process completed with exit code 2.
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.4030174Z ##[end-action id=__lycheeverse_lychee-action.run-lychee;outcome=failure;conclusion=failure;duration_ms=89626]
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.4203478Z Post job cleanup.
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5087466Z [command]/usr/bin/git version
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5133313Z git version 2.55.0
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5178525Z Temporarily overriding HOME='/home/runner/work/_temp/30f819a9-e8de-453f-8cbc-fb8050c5e35f' before making global git config changes
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5180088Z Adding repository directory to the temporary git global config as a safe directory
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5184033Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5219149Z Removing SSH command configuration
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5226714Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5266054Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5529147Z Removing HTTP extra header
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5546307Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5574441Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5825831Z Removing includeIf entries pointing to credentials config files
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5834859Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.5876518Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+linkChecker	UNKNOWN STEP	2026-10-05T15:00:10.6412645Z Cleaning up orphan processes
