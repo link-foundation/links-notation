@@ -260,6 +260,16 @@ jobs:
           wait_for_registry \
             "${PACKAGE_NAME}@${PACKAGE_VERSION} on crates.io" \
             "https://crates.io/api/v1/crates/${PACKAGE_NAME}/${PACKAGE_VERSION}" 20 15
+      # `cargo publish` unpacks each crate, its tests/ folder included, under
+      # target/package. rust-cache's post step treats every directory named
+      # `tests` as a profile and probes tests/target and tests/trybuild
+      # without awaiting the result, so the missing folders became four
+      # `ENOENT` error annotations on a green job (issue #330,
+      # https://github.com/Swatinem/rust-cache/issues/193). The unpacked copy
+      # is never reused, so it does not belong in the cache either.
+      # Reproduce with experiments/issue-330/rust-cache-enoent.sh.
+      - name: Drop the unpacked crates before the cache is saved
+        run: rm -rf target/package
 
   publishRelease:
     runs-on: ubuntu-24.04
