@@ -245,6 +245,8 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-pdf
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    env:
+      PDF_APT_PACKAGES: texlive texlive-lang-cyrillic texlive-latex-extra python3-pygments ghostscript python-is-python3
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -254,10 +256,27 @@ jobs:
         uses: actions/setup-dotnet@v6.0.0
         with:
           dotnet-version: '10.0.x'
+      # These packages are 293 MB. On 2026-10-06 the runner's apt mirror served
+      # them at 223 kB/s, so the download took 22 of the job's 30 minutes
+      # instead of the usual 1.5 (issue #330). Keeping the .deb files in the
+      # Actions cache stops a slow mirror from timing the job out. Only the .deb
+      # files are cached: apt's lock file is root-only, so it cannot be saved.
+      - name: Cache the packages for PDF generation
+        uses: actions/cache@v6.1.0
+        with:
+          path: ~/apt-archives/*.deb
+          key: ${{ runner.os }}-ubuntu-24.04-apt-${{ env.PDF_APT_PACKAGES }}
       - name: Install dependencies for PDF generation
         run: |
+          mkdir -p ~/apt-archives/partial
           sudo apt-get update
-          sudo apt-get install -y texlive texlive-lang-cyrillic texlive-latex-extra python3-pygments ghostscript python-is-python3
+          # The download runs as root because the _apt sandbox user cannot
+          # write to a directory in the runner's home.
+          # shellcheck disable=SC2086 # the package list is split on purpose
+          sudo apt-get install -y \
+            -o Dir::Cache::Archives="$HOME/apt-archives" \
+            -o APT::Sandbox::User=root \
+            $PDF_APT_PACKAGES
       - name: Check the listing only contains characters LaTeX can typeset
         run: python3 ../experiments/issue-330/test_pdf_unicode.py
       - name: Generate PDF with code
