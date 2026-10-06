@@ -162,6 +162,7 @@ Covered under E4: the defect that broke `main` was only reachable after merge.
 | W7 | `DEP0040 The punycode module is deprecated` in Pages deployment | `actions/deploy-pages` v5.0.1 → `tr46` 0.0.3 | Upstream only, already tracked: actions/deploy-pages#434 and #413, actions/toolkit#2173 |
 | W8 | `hint: Using 'master' as the name for the initial branch` | `git init` inside `actions/checkout` and the CodeQL action. Informational. | none needed |
 | W9 | Runners on `ubuntu-latest` | Not a warning yet, but a latent false positive: the alias moves without a diff in this repository. | `bf9ccdc`: 67 labels pinned to `ubuntu-24.04`, and a guard in `workflows.yml` |
+| W10 | CodeQL on this pull request only: `Cannot retrieve the full diff because there are too many (300) changed files in the pull request.` (`ci-logs/security-37537892762-5dddf32.log`) | The CodeQL action reads the pull request's changed files to limit alerts to the diff, and the API returns at most 300. This pull request changes 373 files, 340 of them this evidence folder. On `bb1b7fe`, before the folder was committed, it logged `Persisted 112 diff range(s) across 31 file(s)` and no warning. The action then falls back to a full analysis (`Reverting overlay database mode to none`), so no alert is lost; only the diff-informed speed-up is. | none: it is specific to this pull request's size, and `paths-ignore` does not change the file count. Shrinking the evidence would go against the issue's request to keep every log here. |
 
 ## Notices that need a maintainer, not code
 
