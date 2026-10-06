@@ -137,8 +137,10 @@ class Dependency:
 
     @property
     def floor(self):
-        match = re.search(r"\d+(?:\.\d+)*", self.declared)
-        return match[0] if match else ""
+        match = re.match(
+            r"^(?:\^|~=?|>=|==|=)?v?(\d+(?:\.\d+)*)(?=$|[^\d.])", self.declared
+        )
+        return match[1] if match else ""
 
 
 def manifests(root=ROOT):
@@ -149,10 +151,7 @@ def manifests(root=ROOT):
             ("file:", "workspace:", "path:", "git", "http")
         ):
             return
-        if re.search(r"\d", declared):
-            found.append(
-                Dependency(path, ecosystem, name, declared, literal or declared)
-            )
+        found.append(Dependency(path, ecosystem, name, declared, literal or declared))
 
     for folder in ACTIVE:
         directory = root / folder
@@ -339,6 +338,8 @@ def update(dependency, release):
     source = path.read_text()
     original = dependency.literal
     replacement = re.sub(r"\d+(?:\.\d+)*", release, original, count=1)
+    if not dependency.floor:
+        replacement = release
     name = re.escape(dependency.name)
     if path.name in {"package.json", "composer.json"}:
         data = json.loads(source)

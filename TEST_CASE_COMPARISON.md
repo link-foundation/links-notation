@@ -80,16 +80,16 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | binary string budget stops before later scalars | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L12) | ❌ | ❌ |
 | binary text quotes every  unicode grammar whitespace character | ❌ | [✅](js/tests/Binary.test.js#L15) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | configurable limits apply in both directions; reject malformed packets | ❌ | [✅](js/tests/Binary.test.js#L111) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| limits and malformed | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L84) | [✅](php/tests/BinaryTest.php#L97) |
+| limits and malformed | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L85) | [✅](php/tests/BinaryTest.php#L97) |
 | limits and malformed packets | [✅](python/tests/test_binary.py#L67) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | native text model round trip | [✅](python/tests/test_binary.py#L58) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| native text models | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L57) | [✅](php/tests/BinaryTest.php#L65) |
+| native text models | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L58) | [✅](php/tests/BinaryTest.php#L65) |
 | packet cursor boundaries, uint64, truncation and configurable depth | ❌ | [✅](js/tests/Binary.test.js#L139) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | packet stream boundaries uint64 and every truncated prefix | [✅](python/tests/test_binary.py#L86) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| packet streams uint64 and truncation | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L105) | ❌ |
+| packet streams uint64 and truncation | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L106) | ❌ |
 | packet streams uint64 truncation and depth | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/BinaryTest.php#L129) |
 | shared binary golden vectors | ❌ | [✅](js/tests/Binary.test.js#L42) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| shared vectors | [✅](python/tests/test_binary.py#L17) | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L30) | [✅](php/tests/BinaryTest.php#L37) |
+| shared vectors | [✅](python/tests/test_binary.py#L17) | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L31) | [✅](php/tests/BinaryTest.php#L37) |
 | string budget stops before later scalars | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L12) | [✅](php/tests/BinaryTest.php#L18) |
 | string budget stops decoding before later scalars | [✅](python/tests/test_binary.py#L11) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | string decoding stops at the  u t f 8 budget before reading later scalars | ❌ | [✅](js/tests/Binary.test.js#L30) | ❌ | ❌ | ❌ | ❌ | ❌ |

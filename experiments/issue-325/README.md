@@ -125,3 +125,8 @@ loss for Python's U+001C–U+001F whitespace and JavaScript's U+FEFF whitespace
 when they are emitted bare. Every formatter now quotes the union of the native
 grammars' whitespace characters. All seven programs preserve the text model
 and compare identical bytes and canonical text in 300 option/corpus cases.
+
+An offline dependency regression also reproduced a gate bypass: wildcard
+declarations were skipped, and excluding constraints could be mistaken for a
+current version. The scanner now includes unversioned declarations and requires
+an explicit inclusive minimum. All nine offline gate tests pass.

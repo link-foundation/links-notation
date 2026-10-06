@@ -21,6 +21,27 @@ SPEC.loader.exec_module(CHECK)
 
 
 class DependencyCheckTests(unittest.TestCase):
+    def test_unversioned_dependencies_and_excluding_constraints_cannot_bypass_gate(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "js").mkdir()
+            (root / "js/package.json").write_text(
+                json.dumps({"dependencies": {"demo": "*"}})
+            )
+            self.assertEqual([d.name for d in CHECK.manifests(root)], ["demo"])
+        for requirement in ("*", ">2.0.0", "<2.0.0", "!=2.0.0"):
+            dependency = CHECK.Dependency(
+                CHECK.ROOT / "js/package.json", "npm", "demo", requirement, requirement
+            )
+            self.assertEqual(dependency.floor, "")
+        for requirement in ("^2.0.0", ">=2.0.0", "==2.0.0", "2.0.0"):
+            dependency = CHECK.Dependency(
+                CHECK.ROOT / "js/package.json", "npm", "demo", requirement, requirement
+            )
+            self.assertEqual(dependency.floor, "2.0.0")
+
     def test_github_preserves_real_tag_spelling(self):
         with patch.object(
             CHECK.subprocess,
