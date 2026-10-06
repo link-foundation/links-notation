@@ -1,0 +1,748 @@
+actionlint	UNKNOWN STEP	﻿2026-10-06T15:16:56.2192652Z Current runner version: '2.337.0'
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2219035Z ##[group]Runner Image Provisioner
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2220163Z Hosted Compute Agent
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2220892Z Version: 20261002.596
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2221549Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2222313Z Build Date: 2026-10-02T22:28:27Z
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2223087Z Worker ID: {1244f64d-a3b1-4a5b-a474-320fb8a9db9d}
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2223796Z Region: eastus
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2224409Z Cloud: Azure
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2224963Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2226588Z ##[group]Operating System
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2227341Z Ubuntu
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2227873Z 24.04.5
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2228399Z LTS
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2228981Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2229913Z ##[group]Runner Image
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2230576Z Image: ubuntu-24.04
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2231159Z Version: 20261004.327.1
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2232519Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2234103Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2235133Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2236267Z ##[group]GITHUB_TOKEN Permissions
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2238287Z Contents: read
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2238917Z Metadata: read
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2239742Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2241983Z Secret source: Actions
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2242983Z Cache mode: write
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2243802Z Prepare workflow directory
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2592697Z Prepare all required actions
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.2643519Z Getting action download info
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.5005065Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.6813914Z Complete job name: actionlint
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.7306188Z ##[group]Pull down action image 'rhysd/actionlint:1.7.12'
+actionlint	UNKNOWN STEP	2026-10-06T15:16:56.7421253Z ##[command]/usr/bin/docker pull rhysd/actionlint:1.7.12
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.0641552Z 1.7.12: Pulling from rhysd/actionlint
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.1360793Z 589002ba0eae: Pulling fs layer
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.1361935Z c09af8888d6a: Pulling fs layer
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.1362716Z 4ccd7d76ca98: Pulling fs layer
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.1363528Z b6b4b7b0e257: Pulling fs layer
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.1364208Z b6b4b7b0e257: Waiting
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.1858192Z c09af8888d6a: Verifying Checksum
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.1859534Z c09af8888d6a: Download complete
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.1946447Z 589002ba0eae: Verifying Checksum
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.1948075Z 589002ba0eae: Download complete
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.1950645Z 4ccd7d76ca98: Verifying Checksum
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.1951959Z 4ccd7d76ca98: Download complete
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.3030522Z b6b4b7b0e257: Verifying Checksum
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.3032256Z b6b4b7b0e257: Download complete
+actionlint	UNKNOWN STEP	2026-10-06T15:16:57.3354792Z 589002ba0eae: Pull complete
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.0834984Z c09af8888d6a: Pull complete
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.1554072Z 4ccd7d76ca98: Pull complete
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.6924524Z b6b4b7b0e257: Pull complete
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.6980752Z Digest: sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.6998613Z Status: Downloaded newer image for rhysd/actionlint:1.7.12
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7011242Z docker.io/rhysd/actionlint:1.7.12
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7053855Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7382680Z ##[group]Run actions/checkout@v7.0.1
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7383344Z with:
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7383625Z   persist-credentials: false
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7383973Z   repository: link-foundation/links-notation
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7386931Z   token: ***
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7387201Z   ssh-strict: true
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7387459Z   ssh-user: git
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7387732Z   clean: true
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7388045Z   sparse-checkout-cone-mode: true
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7388356Z   fetch-depth: 1
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7388605Z   fetch-tags: false
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7388869Z   show-progress: true
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7389129Z   lfs: false
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7389852Z   submodules: false
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7390130Z   set-safe-directory: true
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7390441Z   allow-unsafe-pr-checkout: false
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.7391049Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8374306Z Syncing repository: link-foundation/links-notation
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8375918Z ##[group]Getting Git version info
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8376525Z Working directory is '/home/runner/work/links-notation/links-notation'
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8377224Z [command]/usr/bin/git version
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8466065Z git version 2.55.0
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8488679Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8501367Z Temporarily overriding HOME='/home/runner/work/_temp/3e9441ed-6428-4227-82be-0f2a44c332eb' before making global git config changes
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8507702Z Adding repository directory to the temporary git global config as a safe directory
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8517485Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8558908Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8562785Z ##[group]Determining repository object format
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8564244Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8565275Z ##[group]Initializing the repository
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8568648Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8679635Z hint: Using 'master' as the name for the initial branch. This default branch name
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8680850Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8681842Z hint: to use in all of your new repositories, which will suppress this warning,
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8682600Z hint: call:
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8682997Z hint:
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8683602Z hint: 	git config --global init.defaultBranch <name>
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8684222Z hint:
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8684807Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8685751Z hint: 'development'. The just-created branch can be renamed via this command:
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8686541Z hint:
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8686965Z hint: 	git branch -m <name>
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8687424Z hint:
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8688082Z hint: Disable this message with "git config set advice.defaultBranchName false"
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8689472Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8695000Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8758230Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8759574Z ##[group]Disabling automatic garbage collection
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8760495Z [command]/usr/bin/git config --local gc.auto 0
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8795225Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8796051Z ##[group]Setting up auth
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8796928Z Removing SSH command configuration
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8803224Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.8840090Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9208359Z Removing HTTP extra header
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9220920Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9256540Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9477515Z Removing includeIf entries pointing to credentials config files
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9483937Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9522090Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9750152Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-c05d6672-7e8e-48f1-bcb8-e371b337494a.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9791344Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-c05d6672-7e8e-48f1-bcb8-e371b337494a.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9827287Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-c05d6672-7e8e-48f1-bcb8-e371b337494a.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9867121Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-c05d6672-7e8e-48f1-bcb8-e371b337494a.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9904061Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-c05d6672-7e8e-48f1-bcb8-e371b337494a.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9935517Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9936301Z ##[group]Fetching the repository
+actionlint	UNKNOWN STEP	2026-10-06T15:17:00.9943400Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a:refs/remotes/origin/main
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2790298Z From https://github.com/link-foundation/links-notation
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2791382Z  * [new ref]         b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a -> origin/main
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2800705Z [command]/usr/bin/git branch --list --remote origin/main
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2833685Z   origin/main
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2842496Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2872450Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2882159Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2882945Z ##[group]Determining the checkout info
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2883880Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2884422Z [command]/usr/bin/git sparse-checkout disable
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2941646Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2979674Z ##[group]Checking out the ref
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.2984196Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.3745769Z Switched to a new branch 'main'
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.3753501Z branch 'main' set up to track 'origin/main'.
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.3763800Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.3814199Z [command]/usr/bin/git log -1 --format=%H
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.3846786Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.3860812Z ##[group]Removing auth
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.3861318Z Removing SSH command configuration
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.3862054Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.3901140Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4148706Z Removing HTTP extra header
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4152075Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4192563Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4416568Z Removing includeIf entries pointing to credentials config files
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4420518Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4452967Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4453881Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4454394Z includeif.gitdir:/github/workspace/.git.path
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4454774Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4462347Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4489159Z /home/runner/work/_temp/git-credentials-c05d6672-7e8e-48f1-bcb8-e371b337494a.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4498661Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-c05d6672\-7e8e\-48f1\-bcb8\-e371b337494a\.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4558344Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4584511Z /home/runner/work/_temp/git-credentials-c05d6672-7e8e-48f1-bcb8-e371b337494a.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4592473Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-c05d6672\-7e8e\-48f1\-bcb8\-e371b337494a\.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4634108Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4680550Z /github/runner_temp/git-credentials-c05d6672-7e8e-48f1-bcb8-e371b337494a.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4684016Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-c05d6672\-7e8e\-48f1\-bcb8\-e371b337494a\.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4745914Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4773977Z /github/runner_temp/git-credentials-c05d6672-7e8e-48f1-bcb8-e371b337494a.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4781153Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-c05d6672\-7e8e\-48f1\-bcb8\-e371b337494a\.config
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.4818802Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.5038872Z Removing credentials config '/home/runner/work/_temp/git-credentials-c05d6672-7e8e-48f1-bcb8-e371b337494a.config'
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.5049904Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.5227815Z ##[group]Run docker://rhysd/actionlint:1.7.12
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.5228156Z with:
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.5228367Z   args: -color
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.5228568Z ##[endgroup]
+actionlint	UNKNOWN STEP	2026-10-06T15:17:01.5320031Z ##[command]/usr/bin/docker run --name rhysdactionlint1712_b8c5fa --label 4c8e53 --workdir /github/workspace --rm -e "INPUT_ARGS" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "GITHUB_ARTIFACTS" -e "GITHUB_ARTIFACTS_LIST" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_RESULTS_URL" -e "ACTIONS_CACHE_MODE" -e "ACTIONS_ORCHESTRATION_ID" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp":"/github/runner_temp" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/links-notation/links-notation":"/github/workspace" rhysd/actionlint:1.7.12 -color
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.2428609Z Post job cleanup.
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3251035Z [command]/usr/bin/git version
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3295997Z git version 2.55.0
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3342830Z Temporarily overriding HOME='/home/runner/work/_temp/dfa425c2-b40e-4c1a-b252-21ce0f0d6d1b' before making global git config changes
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3344177Z Adding repository directory to the temporary git global config as a safe directory
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3347972Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3382287Z Removing SSH command configuration
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3389085Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3426314Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3666573Z Removing HTTP extra header
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3672831Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3717205Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3973112Z Removing includeIf entries pointing to credentials config files
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.3979452Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.4019601Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+actionlint	UNKNOWN STEP	2026-10-06T15:17:03.4420824Z Cleaning up orphan processes
+ci-scripts	UNKNOWN STEP	﻿2026-10-06T15:16:53.6280162Z Current runner version: '2.337.0'
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6302337Z ##[group]Runner Image Provisioner
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6303108Z Hosted Compute Agent
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6303593Z Version: 20260901.588
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6304098Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6304816Z Build Date: 2026-09-01T19:56:44Z
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6305362Z Worker ID: {899d92f4-704b-4175-94a9-175c9bca8c03}
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6305990Z Azure Region: westus3
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6306477Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6307625Z ##[group]Operating System
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6308226Z Ubuntu
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6308667Z 24.04.5
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6309122Z LTS
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6309565Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6310031Z ##[group]Runner Image
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6310633Z Image: ubuntu-24.04
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6311248Z Version: 20260927.320.1
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6312320Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6313545Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6314382Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6315269Z ##[group]GITHUB_TOKEN Permissions
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6317086Z Contents: read
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6317579Z Metadata: read
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6318121Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6319931Z Secret source: Actions
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6320772Z Cache mode: write
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6321701Z Prepare workflow directory
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6608129Z Prepare all required actions
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.6662007Z Getting action download info
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:53.9836989Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5276374Z Complete job name: ci-scripts
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5905221Z ##[group]Run actions/checkout@v7.0.1
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5906007Z with:
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5906404Z   persist-credentials: false
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5906906Z   repository: link-foundation/links-notation
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5910536Z   token: ***
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5911038Z   ssh-strict: true
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5911432Z   ssh-user: git
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5911817Z   clean: true
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5912213Z   sparse-checkout-cone-mode: true
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5912677Z   fetch-depth: 1
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5913063Z   fetch-tags: false
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5913469Z   show-progress: true
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5913864Z   lfs: false
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5914242Z   submodules: false
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5914656Z   set-safe-directory: true
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5915111Z   allow-unsafe-pr-checkout: false
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.5915754Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6750481Z Syncing repository: link-foundation/links-notation
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6752996Z ##[group]Getting Git version info
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6754188Z Working directory is '/home/runner/work/links-notation/links-notation'
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6755804Z [command]/usr/bin/git version
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6860356Z git version 2.55.0
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6880593Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6893633Z Temporarily overriding HOME='/home/runner/work/_temp/11c7f84c-7acb-490e-bd93-a0bf0733dc9a' before making global git config changes
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6896201Z Adding repository directory to the temporary git global config as a safe directory
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6901380Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6952389Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6955446Z ##[group]Determining repository object format
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6957110Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6958441Z ##[group]Initializing the repository
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.6962875Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7054476Z hint: Using 'master' as the name for the initial branch. This default branch name
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7068034Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7070040Z hint: to use in all of your new repositories, which will suppress this warning,
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7071505Z hint: call:
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7072189Z hint:
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7072794Z hint: 	git config --global init.defaultBranch <name>
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7073467Z hint:
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7074491Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7075988Z hint: 'development'. The just-created branch can be renamed via this command:
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7077185Z hint:
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7077937Z hint: 	git branch -m <name>
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7078755Z hint:
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7079762Z hint: Disable this message with "git config set advice.defaultBranchName false"
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7081771Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7084893Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7132525Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7133992Z ##[group]Disabling automatic garbage collection
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7135225Z [command]/usr/bin/git config --local gc.auto 0
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7176047Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7177300Z ##[group]Setting up auth
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7178225Z Removing SSH command configuration
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7183816Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7226382Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7568935Z Removing HTTP extra header
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7575011Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7607524Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7794151Z Removing includeIf entries pointing to credentials config files
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7798945Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.7833069Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.8031237Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-72188c6a-f62d-4727-a84e-30924bb85ed2.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.8067860Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-72188c6a-f62d-4727-a84e-30924bb85ed2.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.8099444Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-72188c6a-f62d-4727-a84e-30924bb85ed2.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.8132421Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-72188c6a-f62d-4727-a84e-30924bb85ed2.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.8164312Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-72188c6a-f62d-4727-a84e-30924bb85ed2.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.8193565Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.8194632Z ##[group]Fetching the repository
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:54.8200117Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a:refs/remotes/origin/main
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3219779Z From https://github.com/link-foundation/links-notation
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3221177Z  * [new ref]         b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a -> origin/main
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3226661Z [command]/usr/bin/git branch --list --remote origin/main
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3255178Z   origin/main
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3262837Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3287994Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3291957Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3292675Z ##[group]Determining the checkout info
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3293444Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3296614Z [command]/usr/bin/git sparse-checkout disable
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3448225Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3478736Z ##[group]Checking out the ref
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.3482101Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4087513Z Switched to a new branch 'main'
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4092262Z branch 'main' set up to track 'origin/main'.
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4101459Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4145718Z [command]/usr/bin/git log -1 --format=%H
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4174544Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4182317Z ##[group]Removing auth
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4182973Z Removing SSH command configuration
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4185709Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4217711Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4420416Z Removing HTTP extra header
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4424023Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4455928Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4652425Z Removing includeIf entries pointing to credentials config files
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4653356Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4679529Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4680305Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4681130Z includeif.gitdir:/github/workspace/.git.path
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4681687Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4687035Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4711349Z /home/runner/work/_temp/git-credentials-72188c6a-f62d-4727-a84e-30924bb85ed2.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4720779Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-72188c6a\-f62d\-4727\-a84e\-30924bb85ed2\.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4754702Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4778007Z /home/runner/work/_temp/git-credentials-72188c6a-f62d-4727-a84e-30924bb85ed2.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4788633Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-72188c6a\-f62d\-4727\-a84e\-30924bb85ed2\.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4822480Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4871935Z /github/runner_temp/git-credentials-72188c6a-f62d-4727-a84e-30924bb85ed2.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4883684Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-72188c6a\-f62d\-4727\-a84e\-30924bb85ed2\.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4932256Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4956648Z /github/runner_temp/git-credentials-72188c6a-f62d-4727-a84e-30924bb85ed2.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4963304Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-72188c6a\-f62d\-4727\-a84e\-30924bb85ed2\.config
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.4997979Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.5196693Z Removing credentials config '/home/runner/work/_temp/git-credentials-72188c6a-f62d-4727-a84e-30924bb85ed2.config'
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.5205611Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.5386695Z ##[group]Run set -euo pipefail
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.5387158Z ^[[36;1mset -euo pipefail^[[0m
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.5387516Z ^[[36;1msudo apt-get update^[[0m
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.5387893Z ^[[36;1msudo apt-get install --yes shellcheck^[[0m
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.5388310Z ^[[36;1mshellcheck -x scripts/ci/*.sh^[[0m
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.5723630Z shell: /usr/bin/bash -e {0}
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.5724091Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.6338926Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.6632580Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.6662549Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.6686615Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.6702543Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.6777350Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.7693885Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1374 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.7820990Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [306 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.7837116Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.7849718Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1700 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.7921849Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [341 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.7947211Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.7972534Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1730 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.8054715Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [396 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.8082629Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [13.3 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.8094694Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.8682757Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5764 B]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.8692322Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.8869176Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1072 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.8935001Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [222 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.8961935Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.4 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.8967342Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1216 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.9011029Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [244 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.9025216Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.9041524Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1566 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.9130049Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [361 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.9412540Z Get:27 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [515 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.9590293Z Get:28 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.6 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:16:56.9633156Z Get:29 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [458 kB]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:05.5027330Z Fetched 12.6 MB in 1s (10.9 MB/s)
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:06.1486211Z Reading package lists...
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:06.2809007Z Reading package lists...
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:06.4864159Z Building dependency tree...
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:06.4870696Z Reading state information...
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:06.7012922Z shellcheck is already the newest version (0.9.0-1).
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:06.7013652Z 0 upgraded, 0 newly installed, 0 to remove and 29 not upgraded.
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.5576453Z ##[group]Run bash scripts/ci/registry-probe.test.sh
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.5633629Z ^[[36;1mbash scripts/ci/registry-probe.test.sh^[[0m
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.5690393Z shell: /usr/bin/bash -e {0}
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.5690611Z ##[endgroup]
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.8465056Z # the server reproduces the crates.io behaviour
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.9211264Z   ok - a default curl User-Agent is rejected with 403
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.9211806Z # probe_registry sends an identifying User-Agent (issue #298)
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.9273705Z   ok - probe_registry succeeds where a bare curl gets 403
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.9274045Z   ok - the status code is recorded
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.9274316Z # probe_registry reports failure without masking the cause
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.9328958Z   ok - a 404 is reported as failure
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.9329239Z   ok - the failing status code is preserved
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.9329703Z # fetch_registry returns the body on stdout only
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:07.9612713Z   ok - the body is returned verbatim
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0198046Z   ok - verbose diagnostics do not corrupt the body
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0198641Z # wait_for_registry gives up with an actionable message
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0339178Z   ok - a missing package fails the step
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0355415Z   ok - the final status code reaches the log
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0370421Z   ok - the failure is annotated
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0371189Z # wait_for_registry_match inspects the body, not just the status
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0451463Z   ok - a version present in the body is found
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0527825Z   ok - a 200 without the version is a failure
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0528426Z # crate_version_published matches the exact version in the index
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0601060Z   ok - a published version is detected
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0676441Z   ok - an unpublished version is not reported as published
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0749461Z   ok - a prefix of a published version does not match
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0749956Z # CI_VERBOSE is off by default
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0807289Z   ok - nothing is printed unless asked
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0878049Z   ok - CI_VERBOSE=true prints the status code
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0878440Z # crates.io sparse-index paths follow the cargo layout
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0882931Z   ok - 1-character crate
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0887398Z   ok - 2-character crate
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0891912Z   ok - 3-character crate
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0896461Z   ok - longer crate
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0896639Z 
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.0896773Z passed: 21, failed: 0
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.1001324Z Post job cleanup.
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.1695257Z [command]/usr/bin/git version
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.1732052Z git version 2.55.0
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.1765882Z Temporarily overriding HOME='/home/runner/work/_temp/cfe019ba-fb93-4672-a36f-b719a670502f' before making global git config changes
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.1766854Z Adding repository directory to the temporary git global config as a safe directory
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.1769975Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.1802125Z Removing SSH command configuration
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.1803316Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.1834988Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.2063856Z Removing HTTP extra header
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.2064978Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.2094753Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.2300481Z Removing includeIf entries pointing to credentials config files
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.2307142Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.2342243Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+ci-scripts	UNKNOWN STEP	2026-10-06T15:17:08.2682893Z Cleaning up orphan processes
+zizmor	UNKNOWN STEP	﻿2026-10-06T15:16:52.9526243Z Current runner version: '2.337.0'
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9545852Z ##[group]Runner Image Provisioner
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9546545Z Hosted Compute Agent
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9546939Z Version: 20260901.588
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9547396Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9547869Z Build Date: 2026-09-01T19:56:44Z
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9548322Z Worker ID: {58d01603-37eb-4785-abfa-b843f456bf1e}
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9548970Z Azure Region: centralus
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9549342Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9550397Z ##[group]Operating System
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9550831Z Ubuntu
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9551193Z 24.04.5
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9551541Z LTS
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9551896Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9552256Z ##[group]Runner Image
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9552673Z Image: ubuntu-24.04
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9553061Z Version: 20260927.320.1
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9553924Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9554832Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9555487Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9556250Z ##[group]GITHUB_TOKEN Permissions
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9557568Z Actions: read
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9557929Z Contents: read
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9558318Z Metadata: read
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9558885Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9560324Z Secret source: Actions
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9561015Z Cache mode: write
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9561470Z Prepare workflow directory
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9820158Z Prepare all required actions
+zizmor	UNKNOWN STEP	2026-10-06T15:16:52.9855750Z Getting action download info
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.2739310Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.3666826Z Download action repository 'actions/setup-python@v7.0.0' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8151283Z Complete job name: zizmor
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8680112Z ##[group]Run actions/checkout@v7.0.1
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8680648Z with:
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8680913Z   persist-credentials: false
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8681236Z   repository: link-foundation/links-notation
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8683486Z   token: ***
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8683737Z   ssh-strict: true
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8683995Z   ssh-user: git
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8684244Z   clean: true
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8684508Z   sparse-checkout-cone-mode: true
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8684812Z   fetch-depth: 1
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8685064Z   fetch-tags: false
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8685328Z   show-progress: true
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8685590Z   lfs: false
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8685837Z   submodules: false
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8686119Z   set-safe-directory: true
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8686416Z   allow-unsafe-pr-checkout: false
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.8686790Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9443185Z Syncing repository: link-foundation/links-notation
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9444966Z ##[group]Getting Git version info
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9445764Z Working directory is '/home/runner/work/links-notation/links-notation'
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9446832Z [command]/usr/bin/git version
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9534267Z git version 2.55.0
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9549065Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9558482Z Temporarily overriding HOME='/home/runner/work/_temp/604be4bb-92f2-48fe-8040-ea9725fab1cd' before making global git config changes
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9560090Z Adding repository directory to the temporary git global config as a safe directory
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9562886Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9693478Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9697828Z ##[group]Determining repository object format
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9698759Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9699372Z ##[group]Initializing the repository
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9705809Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9991075Z hint: Using 'master' as the name for the initial branch. This default branch name
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9992520Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9993502Z hint: to use in all of your new repositories, which will suppress this warning,
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9994278Z hint: call:
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9994721Z hint:
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9995298Z hint: 	git config --global init.defaultBranch <name>
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9995945Z hint:
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9996558Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9997514Z hint: 'development'. The just-created branch can be renamed via this command:
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9998279Z hint:
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9998870Z hint: 	git branch -m <name>
+zizmor	UNKNOWN STEP	2026-10-06T15:16:53.9999379Z hint:
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.0000019Z hint: Disable this message with "git config set advice.defaultBranchName false"
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.0001347Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.0008112Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.1165634Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.1166160Z ##[group]Disabling automatic garbage collection
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.1168764Z [command]/usr/bin/git config --local gc.auto 0
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.1764457Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.1765445Z ##[group]Setting up auth
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.1766090Z Removing SSH command configuration
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.1776245Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.1817728Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.2121092Z Removing HTTP extra header
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.2126354Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.2159326Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.2372098Z Removing includeIf entries pointing to credentials config files
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.2386822Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.2423596Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.2639839Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-c6319b00-2689-480a-af0e-ad6bbdb412f8.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.2739988Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-c6319b00-2689-480a-af0e-ad6bbdb412f8.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.2877916Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-c6319b00-2689-480a-af0e-ad6bbdb412f8.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.2995895Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-c6319b00-2689-480a-af0e-ad6bbdb412f8.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.3102761Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-c6319b00-2689-480a-af0e-ad6bbdb412f8.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.3337156Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.3337676Z ##[group]Fetching the repository
+zizmor	UNKNOWN STEP	2026-10-06T15:16:54.3347998Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a:refs/remotes/origin/main
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.2965778Z From https://github.com/link-foundation/links-notation
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.2967097Z  * [new ref]         b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a -> origin/main
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.2979696Z [command]/usr/bin/git branch --list --remote origin/main
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.3003884Z   origin/main
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.3012173Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.3040341Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.3043389Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.3044156Z ##[group]Determining the checkout info
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.3045588Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.3050833Z [command]/usr/bin/git sparse-checkout disable
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.3213293Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.3295116Z ##[group]Checking out the ref
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.3299179Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.4686682Z Switched to a new branch 'main'
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.4690226Z branch 'main' set up to track 'origin/main'.
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.4701663Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.4747147Z [command]/usr/bin/git log -1 --format=%H
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.4775770Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.4786983Z ##[group]Removing auth
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.4787666Z Removing SSH command configuration
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.4790032Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.4826275Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5018303Z Removing HTTP extra header
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5020369Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5053966Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5246470Z Removing includeIf entries pointing to credentials config files
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5248234Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5291397Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5293538Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5295187Z includeif.gitdir:/github/workspace/.git.path
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5296380Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5299974Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5325860Z /home/runner/work/_temp/git-credentials-c6319b00-2689-480a-af0e-ad6bbdb412f8.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5335850Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-c6319b00\-2689\-480a\-af0e\-ad6bbdb412f8\.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5602366Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5632027Z /home/runner/work/_temp/git-credentials-c6319b00-2689-480a-af0e-ad6bbdb412f8.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.5640894Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-c6319b00\-2689\-480a\-af0e\-ad6bbdb412f8\.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.6139187Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.6221339Z /github/runner_temp/git-credentials-c6319b00-2689-480a-af0e-ad6bbdb412f8.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.6228913Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-c6319b00\-2689\-480a\-af0e\-ad6bbdb412f8\.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.6511763Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.6542833Z /github/runner_temp/git-credentials-c6319b00-2689-480a-af0e-ad6bbdb412f8.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.6551370Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-c6319b00\-2689\-480a\-af0e\-ad6bbdb412f8\.config
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7522568Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7703336Z Removing credentials config '/home/runner/work/_temp/git-credentials-c6319b00-2689-480a-af0e-ad6bbdb412f8.config'
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7711990Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7980670Z ##[group]Run actions/setup-python@v7.0.0
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7981084Z with:
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7981392Z   python-version: 3.13
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7981709Z   check-latest: false
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7983679Z   token: ***
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7983955Z   update-environment: true
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7984259Z   allow-prereleases: false
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7984549Z   freethreaded: false
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.7984822Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.8862123Z ##[group]Installed versions
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.8925541Z Successfully set up CPython (3.13.15)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.8926795Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.9086613Z ##[group]Run pip install -r scripts/ci/requirements.txt
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.9087303Z ^[[36;1mpip install -r scripts/ci/requirements.txt^[[0m
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.9896875Z shell: /usr/bin/bash -e {0}
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.9897319Z env:
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.9897675Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.9898150Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.9898804Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.9899273Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.9899663Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.9900055Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+zizmor	UNKNOWN STEP	2026-10-06T15:16:55.9900407Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:16:58.7579649Z Collecting build>=1.6.1 (from -r scripts/ci/requirements.txt (line 2))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:58.8462426Z   Downloading build-1.6.1-py3-none-any.whl.metadata (5.6 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:58.8711932Z Collecting twine>=7.0.0 (from -r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:58.8845918Z   Downloading twine-7.0.0-py3-none-any.whl.metadata (3.5 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:58.9395043Z Collecting zizmor==1.30.1 (from -r scripts/ci/requirements.txt (line 4))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:58.9530764Z   Downloading zizmor-1.30.1-py3-none-manylinux_2_28_x86_64.whl.metadata (4.6 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:58.9883603Z Collecting packaging>=24.0 (from build>=1.6.1->-r scripts/ci/requirements.txt (line 2))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.0013600Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.0173196Z Collecting pyproject_hooks (from build>=1.6.1->-r scripts/ci/requirements.txt (line 2))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.0301259Z   Downloading pyproject_hooks-1.3.3-py3-none-any.whl.metadata (1.3 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.0488500Z Collecting readme-renderer>=35.0 (from twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.0622385Z   Downloading readme_renderer-46.0-py3-none-any.whl.metadata (3.0 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.0850005Z Collecting requests>=2.20 (from twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.0983158Z   Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.1163606Z Collecting requests-toolbelt!=0.9.0,>=0.8.0 (from twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.1300257Z   Downloading requests_toolbelt-1.0.0-py2.py3-none-any.whl.metadata (14 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.1531702Z Collecting urllib3>=1.26.0 (from twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.1662537Z   Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.1996080Z Collecting keyring>=21.2.0 (from twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.2127521Z   Downloading keyring-25.7.0-py3-none-any.whl.metadata (21 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.2343858Z Collecting rfc3986>=1.4.0 (from twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.2473922Z   Downloading rfc3986-2.0.0-py2.py3-none-any.whl.metadata (6.6 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.2734594Z Collecting rich>=14.3.3 (from twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.2866456Z   Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.3059784Z Collecting id (from twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.3191317Z   Downloading id-1.6.1-py3-none-any.whl.metadata (5.1 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.3381068Z Collecting SecretStorage>=3.2 (from keyring>=21.2.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.3516598Z   Downloading secretstorage-3.5.0-py3-none-any.whl.metadata (4.0 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.3701827Z Collecting jeepney>=0.4.2 (from keyring>=21.2.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.3839588Z   Downloading jeepney-0.9.0-py3-none-any.whl.metadata (1.2 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.4137165Z Collecting jaraco.classes (from keyring>=21.2.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.4269137Z   Downloading jaraco.classes-3.4.0-py3-none-any.whl.metadata (2.6 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.4468261Z Collecting jaraco.functools (from keyring>=21.2.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.4600679Z   Downloading jaraco_functools-4.6.0-py3-none-any.whl.metadata (2.9 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.4810941Z Collecting jaraco.context (from keyring>=21.2.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.4944215Z   Downloading jaraco_context-6.1.2-py3-none-any.whl.metadata (4.2 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.5275892Z Collecting nh3>=0.2.14 (from readme-renderer>=35.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.5409282Z   Downloading nh3-0.3.7-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.0 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.5706309Z Collecting docutils>=0.21.2 (from readme-renderer>=35.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.5846016Z   Downloading docutils-0.23-py3-none-any.whl.metadata (15 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.6063111Z Collecting Pygments>=2.5.1 (from readme-renderer>=35.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.6195899Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.7185358Z Collecting charset_normalizer<4,>=2 (from requests>=2.20->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.7321785Z   Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.7569566Z Collecting idna<4,>=2.5 (from requests>=2.20->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.7701391Z   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.7926611Z Collecting certifi>=2023.5.7 (from requests>=2.20->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.8057305Z   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.8345181Z Collecting markdown-it-py>=2.2.0 (from rich>=14.3.3->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.8483113Z   Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.8684449Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=14.3.3->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:16:59.8817107Z   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.0010244Z Collecting cryptography>=2.0 (from SecretStorage>=3.2->keyring>=21.2.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.0140466Z   Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.4 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.0971946Z Collecting cffi>=2.0.0 (from cryptography>=2.0->SecretStorage>=3.2->keyring>=21.2.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.1109896Z   Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.1284726Z Collecting pycparser (from cffi>=2.0.0->cryptography>=2.0->SecretStorage>=3.2->keyring>=21.2.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.1421712Z   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.1629351Z Collecting more-itertools (from jaraco.classes->keyring>=21.2.0->twine>=7.0.0->-r scripts/ci/requirements.txt (line 3))
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.1759055Z   Downloading more_itertools-11.1.0-py3-none-any.whl.metadata (41 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.1944821Z Downloading zizmor-1.30.1-py3-none-manylinux_2_28_x86_64.whl (9.5 MB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.3843419Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.5/9.5 MB 56.8 MB/s  0:00:00
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.3988399Z Downloading build-1.6.1-py3-none-any.whl (31 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.4142718Z Downloading twine-7.0.0-py3-none-any.whl (43 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.4295470Z Downloading keyring-25.7.0-py3-none-any.whl (39 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.4461443Z Downloading jeepney-0.9.0-py3-none-any.whl (49 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.4616672Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.4772922Z Downloading readme_renderer-46.0-py3-none-any.whl (14 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.5075409Z Downloading docutils-0.23-py3-none-any.whl (634 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.5122582Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 634.7/634.7 kB 129.4 MB/s  0:00:00
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.5276803Z Downloading nh3-0.3.7-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (832 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.5333878Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 832.2/832.2 kB 183.5 MB/s  0:00:00
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.5504668Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.5852044Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 30.7 MB/s  0:00:00
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.6515365Z Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.7812038Z Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (254 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.7964059Z Downloading idna-3.20-py3-none-any.whl (69 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.8118061Z Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.8271310Z Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.8439501Z Downloading requests_toolbelt-1.0.0-py2.py3-none-any.whl (54 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.8612691Z Downloading rfc3986-2.0.0-py2.py3-none-any.whl (31 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.8837309Z Downloading rich-15.0.0-py3-none-any.whl (310 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.8999126Z Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.9153510Z Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.9350935Z Downloading secretstorage-3.5.0-py3-none-any.whl (15 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:00.9500976Z Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl (4.8 MB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:01.0032514Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 88.0 MB/s  0:00:00
+zizmor	UNKNOWN STEP	2026-10-06T15:17:01.0166990Z Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:01.3759557Z Downloading id-1.6.1-py3-none-any.whl (14 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:01.3906945Z Downloading jaraco.classes-3.4.0-py3-none-any.whl (6.8 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:01.4060869Z Downloading jaraco_context-6.1.2-py3-none-any.whl (7.9 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:01.4208336Z Downloading jaraco_functools-4.6.0-py3-none-any.whl (11 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:01.4364944Z Downloading more_itertools-11.1.0-py3-none-any.whl (72 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:01.4539628Z Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:01.4696337Z Downloading pyproject_hooks-1.3.3-py3-none-any.whl (10 kB)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:01.6677027Z Installing collected packages: zizmor, urllib3, rfc3986, pyproject_hooks, Pygments, pycparser, packaging, nh3, more-itertools, mdurl, jeepney, jaraco.context, idna, docutils, charset_normalizer, certifi, requests, readme-renderer, markdown-it-py, jaraco.functools, jaraco.classes, id, cffi, build, rich, requests-toolbelt, cryptography, SecretStorage, keyring, twine
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.3151731Z 
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.3173323Z Successfully installed Pygments-2.21.0 SecretStorage-3.5.0 build-1.6.1 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.2 cryptography-50.0.2 docutils-0.23 id-1.6.1 idna-3.20 jaraco.classes-3.4.0 jaraco.context-6.1.2 jaraco.functools-4.6.0 jeepney-0.9.0 keyring-25.7.0 markdown-it-py-4.2.0 mdurl-0.1.2 more-itertools-11.1.0 nh3-0.3.7 packaging-26.3 pycparser-3.0 pyproject_hooks-1.3.3 readme-renderer-46.0 requests-2.34.2 requests-toolbelt-1.0.0 rfc3986-2.0.0 rich-15.0.0 twine-7.0.0 urllib3-2.8.0 zizmor-1.30.1
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4357059Z ##[group]Run zizmor --no-progress --min-severity medium --config .github/zizmor.yml .github/workflows/
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4357504Z ^[[36;1mzizmor --no-progress --min-severity medium --config .github/zizmor.yml .github/workflows/^[[0m
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4416580Z shell: /usr/bin/bash -e {0}
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4416757Z env:
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4416924Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4417179Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4417419Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4417640Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4417859Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4418082Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4419931Z   GH_TOKEN: ***
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4420057Z ##[endgroup]
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.4524030Z ^[[32m INFO^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 zizmor v1.30.1
+zizmor	UNKNOWN STEP	2026-10-06T15:17:03.8602420Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/AutoMerge.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:05.4658378Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/benchmarks.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:05.4677714Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/binary-interop.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:05.4686214Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/bom-check.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:05.4746537Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/csharp.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:05.6591936Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/dependencies.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:05.6606949Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/docs.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:05.8566957Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/go.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:05.8617070Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/java.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:05.8662176Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/js.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:06.1189485Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/links.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:06.5132492Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/pages.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:06.5173600Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/php.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:06.6888741Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/python.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:06.6903594Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/release-audit.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:06.9466839Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/rust.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.3912575Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/security.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.3924594Z ^[[32m INFO^[[0m ^[[1maudit^[[0m^[[2m:^[[0m ^[[2mzizmor^[[0m^[[2m:^[[0m 🌈 completed .github/workflows/workflows.yml
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.3925077Z ^[[32mNo findings to report. Good job!^[[39m (^[[1m^[[93m16^[[39m ignored, ^[[93m122^[[39m suppressed^[[0m)
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.4041012Z Post job cleanup.
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.5047604Z Post job cleanup.
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.5699436Z [command]/usr/bin/git version
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.5743524Z git version 2.55.0
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.5771031Z Temporarily overriding HOME='/home/runner/work/_temp/7d64cebc-3546-4c7a-9563-45aa25d94b36' before making global git config changes
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.5771770Z Adding repository directory to the temporary git global config as a safe directory
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.5775249Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.5807283Z Removing SSH command configuration
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.5812891Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.5844423Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.6061111Z Removing HTTP extra header
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.6066137Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.6098416Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.6306459Z Removing includeIf entries pointing to credentials config files
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.6325623Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.6345404Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+zizmor	UNKNOWN STEP	2026-10-06T15:17:07.6666626Z Cleaning up orphan processes

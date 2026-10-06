@@ -1,0 +1,133 @@
+name: Broken Link Checker
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.md'
+      - '**.html'
+      - '.github/workflows/links.yml'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '**.md'
+      - '**.html'
+      - '.github/workflows/links.yml'
+  workflow_dispatch:
+
+# The link checker only reads the tree and talks to external URL hosts; the
+# token gets nothing beyond read. Without this block every job would inherit
+# the repository's default token permissions (zizmor excessive-permissions,
+# CodeQL "workflow does not contain permissions").
+permissions:
+  contents: read
+
+jobs:
+  link-checker:
+    name: Check Links
+    runs-on: ubuntu-latest
+    # Typical run: <1min with the lychee cache. 10min prevents slow external
+    # hosts or Wayback Machine probes from hanging the workflow.
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Check links with lychee
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # The case-studies directory holds research copied from sibling repos
+          # whose relative links resolve there, not here; exclude it.
+          args: >-
+            --verbose
+            --no-progress
+            --cache
+            --max-cache-age 1d
+            --max-retries 3
+            --timeout 30
+            --exclude-path docs/case-studies
+            './**/*.md'
+            './**/*.html'
+          fail: false
+          output: lychee/out.md
+          jobSummary: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Re-check links that never got an answer
+        # --max-retries never retries a failure during the connect phase
+        # (lycheeverse/lychee#2297), so a healthy URL behind a connection
+        # reset is reported broken without one retry. Ask those URLs again
+        # outside lychee. A failure carrying a status code is a host's
+        # answer and stays final (issue #12).
+        if: steps.lychee.outputs.exit_code != 0
+        id: recheck
+        env:
+          LYCHEE_OUTPUT: lychee/out.md
+          RECOVERED_OUTPUT: lychee/recovered.txt
+        run: php scripts/recheck-broken-links.php
+
+      - name: Check broken links against the Web Archive
+        # `!= 'true'`, never `== 'false'`: a skipped re-check leaves the
+        # output empty, and only the != form fails safe.
+        if: >-
+          steps.lychee.outputs.exit_code != 0 &&
+          steps.recheck.outputs.all_recovered != 'true'
+        id: webarchive
+        env:
+          LYCHEE_OUTPUT: lychee/out.md
+          RECOVERED_URLS: lychee/recovered.txt
+        run: php scripts/check-web-archive.php
+
+      - name: Fail if broken links found and no web archive fallback
+        if: >-
+          always() &&
+          steps.lychee.outputs.exit_code != 0 &&
+          steps.recheck.outputs.all_recovered != 'true'
+        run: |
+          echo "::error::Broken links were detected with no Web Archive fallback available."
+          echo ""
+          echo "How to fix:"
+          echo "  1. Review the 'Check links with lychee' step above for the full list."
+          echo "  2. For links with a '::notice::' annotation, a Web Archive copy exists —"
+          echo "     replace the broken link with the suggested archive.org URL."
+          echo "  3. Otherwise update the URL, remove the link, or add it to .lycheeignore."
+          echo ""
+          echo "Report location: lychee/out.md"
+          exit 1
+
+  # === PIPELINE STATUS ===
+  # GitHub reports jobs killed by timeout-minutes as cancelled. Observe every
+  # job so a timeout on main becomes a visible failure instead of a grey run,
+  # while a run superseded by a newer commit is recognised as expected churn
+  # (issue #9).
+  pipeline-status:
+    name: Pipeline Status
+    needs:
+      - link-checker
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check aggregate pipeline status
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BRANCH_REF: ${{ github.head_ref || github.ref_name }}
+          GIT_REMOTE: ${{ github.event.pull_request.head.repo.clone_url || 'origin' }}
+        run: bash scripts/check-pipeline-status.sh

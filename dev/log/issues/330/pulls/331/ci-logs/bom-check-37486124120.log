@@ -1,0 +1,214 @@
+check-bom-consistency	UNKNOWN STEP	﻿2026-10-06T15:16:52.8890862Z Current runner version: '2.337.0'
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8917683Z ##[group]Runner Image Provisioner
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8918712Z Hosted Compute Agent
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8919335Z Version: 20260901.588
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8920083Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8920878Z Build Date: 2026-09-01T19:56:44Z
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8921598Z Worker ID: {11669ddc-a049-4ab2-b09f-689c8b8aa8bd}
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8922403Z Azure Region: northcentralus
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8923100Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8924541Z ##[group]Operating System
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8925301Z Ubuntu
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8926142Z 24.04.5
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8926763Z LTS
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8927315Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8927916Z ##[group]Runner Image
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8928609Z Image: ubuntu-24.04
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8929270Z Version: 20260927.320.1
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8930675Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8932282Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8933379Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8934541Z ##[group]GITHUB_TOKEN Permissions
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8936868Z Contents: read
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8937510Z Metadata: read
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8938283Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8940479Z Secret source: Actions
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8941516Z Cache mode: write
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.8942331Z Prepare workflow directory
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.9286324Z Prepare all required actions
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:52.9334927Z Getting action download info
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.1899152Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4207629Z Complete job name: check-bom-consistency
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4958737Z ##[group]Run actions/checkout@v7.0.1
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4959594Z with:
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4960059Z   persist-credentials: false
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4960643Z   repository: link-foundation/links-notation
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4964911Z   token: ***
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4965378Z   ssh-strict: true
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4965995Z   ssh-user: git
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4966443Z   clean: true
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4966906Z   sparse-checkout-cone-mode: true
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4967445Z   fetch-depth: 1
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4967898Z   fetch-tags: false
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4968384Z   show-progress: true
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4968846Z   lfs: false
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4969268Z   submodules: false
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4969727Z   set-safe-directory: true
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4970245Z   allow-unsafe-pr-checkout: false
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.4970977Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.5973748Z Syncing repository: link-foundation/links-notation
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.5976641Z ##[group]Getting Git version info
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.5977889Z Working directory is '/home/runner/work/links-notation/links-notation'
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.5979566Z [command]/usr/bin/git version
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6044322Z git version 2.55.0
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6065595Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6087401Z Temporarily overriding HOME='/home/runner/work/_temp/5b110f1f-e677-424b-95b9-463643f6cf0c' before making global git config changes
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6088818Z Adding repository directory to the temporary git global config as a safe directory
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6090743Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6138105Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6143198Z ##[group]Determining repository object format
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6145131Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6146422Z ##[group]Initializing the repository
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6150726Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6258040Z hint: Using 'master' as the name for the initial branch. This default branch name
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6260121Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6262255Z hint: to use in all of your new repositories, which will suppress this warning,
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6263465Z hint: call:
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6264217Z hint:
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6265441Z hint: 	git config --global init.defaultBranch <name>
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6266876Z hint:
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6268241Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6269837Z hint: 'development'. The just-created branch can be renamed via this command:
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6271004Z hint:
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6271646Z hint: 	git branch -m <name>
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6272407Z hint:
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6273399Z hint: Disable this message with "git config set advice.defaultBranchName false"
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6275168Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6278212Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6324206Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6325454Z ##[group]Disabling automatic garbage collection
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6328514Z [command]/usr/bin/git config --local gc.auto 0
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6368206Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6369079Z ##[group]Setting up auth
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6369921Z Removing SSH command configuration
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6371275Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6407387Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6792872Z Removing HTTP extra header
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6800753Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.6838584Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.7076071Z Removing includeIf entries pointing to credentials config files
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.7080643Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.7120332Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.7370757Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-088a5d85-5001-418e-aca8-d60aac88203f.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.7412309Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-088a5d85-5001-418e-aca8-d60aac88203f.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.7452075Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-088a5d85-5001-418e-aca8-d60aac88203f.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.7492382Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-088a5d85-5001-418e-aca8-d60aac88203f.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.7531517Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-088a5d85-5001-418e-aca8-d60aac88203f.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.7566096Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.7567246Z ##[group]Fetching the repository
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:53.7573964Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a:refs/remotes/origin/main
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4413200Z From https://github.com/link-foundation/links-notation
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4414340Z  * [new ref]         b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a -> origin/main
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4422137Z [command]/usr/bin/git branch --list --remote origin/main
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4453361Z   origin/main
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4461080Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4489434Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4493988Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4495168Z ##[group]Determining the checkout info
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4496533Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4498032Z [command]/usr/bin/git sparse-checkout disable
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4553224Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4588713Z ##[group]Checking out the ref
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.4592390Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5418987Z Switched to a new branch 'main'
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5421967Z branch 'main' set up to track 'origin/main'.
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5433255Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5484084Z [command]/usr/bin/git log -1 --format=%H
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5517407Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5526507Z ##[group]Removing auth
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5527471Z Removing SSH command configuration
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5530136Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5570716Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5816879Z Removing HTTP extra header
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5820212Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.5858809Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6097931Z Removing includeIf entries pointing to credentials config files
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6100544Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6134425Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6137456Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6139807Z includeif.gitdir:/github/workspace/.git.path
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6141902Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6153551Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6174192Z /home/runner/work/_temp/git-credentials-088a5d85-5001-418e-aca8-d60aac88203f.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6187192Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-088a5d85\-5001\-418e\-aca8\-d60aac88203f\.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6227222Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6290166Z /home/runner/work/_temp/git-credentials-088a5d85-5001-418e-aca8-d60aac88203f.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6301305Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-088a5d85\-5001\-418e\-aca8\-d60aac88203f\.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6345642Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6408546Z /github/runner_temp/git-credentials-088a5d85-5001-418e-aca8-d60aac88203f.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6421595Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-088a5d85\-5001\-418e\-aca8\-d60aac88203f\.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6483355Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6515353Z /github/runner_temp/git-credentials-088a5d85-5001-418e-aca8-d60aac88203f.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6523225Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-088a5d85\-5001\-418e\-aca8\-d60aac88203f\.config
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6562807Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6808743Z Removing credentials config '/home/runner/work/_temp/git-credentials-088a5d85-5001-418e-aca8-d60aac88203f.config'
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.6818184Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7067092Z ##[group]Run echo "Checking for files with Unicode BOM..."
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7068873Z ^[[36;1mecho "Checking for files with Unicode BOM..."^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7070576Z ^[[36;1mecho "Repository standard: NO BOM (UTF-8 without BOM)"^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7072116Z ^[[36;1mecho ""^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7073030Z ^[[36;1m^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7074213Z ^[[36;1m# Find all text files that contain BOM (EF BB BF at start)^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7076312Z ^[[36;1m# Exclude binary files, .git directory, and common binary extensions^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7078022Z ^[[36;1mfiles_with_bom=""^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7079064Z ^[[36;1m^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7080014Z ^[[36;1mwhile IFS= read -r -d '' file; do^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7081444Z ^[[36;1m  # Check if file starts with UTF-8 BOM (EF BB BF)^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7083138Z ^[[36;1m  if head -c 3 "$file" | od -An -tx1 | grep -q "ef bb bf"; then^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7084805Z ^[[36;1m    files_with_bom="$files_with_bom$file"$'\n'^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7086304Z ^[[36;1m  fi^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7087229Z ^[[36;1mdone < <(find . -type f \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7088384Z ^[[36;1m  -not -path './.git/*' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7089531Z ^[[36;1m  -not -name '*.png' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7090646Z ^[[36;1m  -not -name '*.jpg' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7091773Z ^[[36;1m  -not -name '*.jpeg' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7092884Z ^[[36;1m  -not -name '*.gif' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7093978Z ^[[36;1m  -not -name '*.ico' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7095080Z ^[[36;1m  -not -name '*.woff' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7096340Z ^[[36;1m  -not -name '*.woff2' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7097460Z ^[[36;1m  -not -name '*.ttf' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7098552Z ^[[36;1m  -not -name '*.eot' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7099648Z ^[[36;1m  -not -name '*.pdf' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7100748Z ^[[36;1m  -not -name '*.zip' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7101852Z ^[[36;1m  -not -name '*.tar' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7102958Z ^[[36;1m  -not -name '*.gz' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7104064Z ^[[36;1m  -not -name '*.lock' \^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7105158Z ^[[36;1m  -print0)^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7106174Z ^[[36;1m^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7107082Z ^[[36;1mif [ -n "$files_with_bom" ]; then^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7108764Z ^[[36;1m  echo "::error::The following files contain a Unicode BOM but should not"^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7110918Z ^[[36;1m  echo "ERROR: The following files contain Unicode BOM but should not:"^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7112586Z ^[[36;1m  echo "$files_with_bom"^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7113672Z ^[[36;1m  echo ""^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7114832Z ^[[36;1m  echo "To fix this, remove the BOM from these files."^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7117103Z ^[[36;1m  # printf, not echo: the point is to show the escape sequences^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7118878Z ^[[36;1m  # themselves, and echo is allowed to expand them.^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7120661Z ^[[36;1m  printf '%s\n' "You can use: sed -i '1s/^\xEF\xBB\xBF//' <filename>"^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7122569Z ^[[36;1m  echo "Or configure your editor to save files without BOM."^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7124055Z ^[[36;1m  exit 1^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7124941Z ^[[36;1melse^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7126312Z ^[[36;1m  echo "SUCCESS: All text files are consistent (no BOM found)."^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7127838Z ^[[36;1m  exit 0^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7128976Z ^[[36;1mfi^[[0m
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7378980Z shell: /usr/bin/bash -e {0}
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7380079Z ##[endgroup]
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7506087Z Checking for files with Unicode BOM...
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7507988Z Repository standard: NO BOM (UTF-8 without BOM)
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:54.7509287Z 
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.5020415Z SUCCESS: All text files are consistent (no BOM found).
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.5241024Z Post job cleanup.
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6144279Z [command]/usr/bin/git version
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6188413Z git version 2.55.0
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6237020Z Temporarily overriding HOME='/home/runner/work/_temp/eb440c08-a74e-46de-8d47-3693f82dae13' before making global git config changes
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6238448Z Adding repository directory to the temporary git global config as a safe directory
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6241410Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6277198Z Removing SSH command configuration
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6293418Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6331654Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6636411Z Removing HTTP extra header
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6637508Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6670911Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6949753Z Removing includeIf entries pointing to credentials config files
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6950765Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.6995064Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+check-bom-consistency	UNKNOWN STEP	2026-10-06T15:16:56.7414537Z Cleaning up orphan processes

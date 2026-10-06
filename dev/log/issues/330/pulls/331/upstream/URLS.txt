@@ -1,0 +1,7 @@
+js https://github.com/link-foundation/js-ai-driven-development-pipeline-template/issues/211
+python https://github.com/link-foundation/python-ai-driven-development-pipeline-template/issues/96
+rust https://github.com/link-foundation/rust-ai-driven-development-pipeline-template/issues/187
+csharp https://github.com/link-foundation/csharp-ai-driven-development-pipeline-template/issues/68
+php https://github.com/link-foundation/php-ai-driven-development-pipeline-template/issues/18
+java https://github.com/link-foundation/java-ai-driven-development-pipeline-template/issues/12
+go https://github.com/link-foundation/go-ai-driven-development-pipeline-template/issues/11

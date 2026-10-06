@@ -1,0 +1,33 @@
+1 benchmarks-37486124136: ##[warning]/home/runner/work/links-notation/links-notation/csharp/Link.Foundation.Links.Notation/Parser.peg(288,59): warning PEG0021: Repetition of a zero-width expressio
+1 benchmarks-37486124136: ##[warning]/home/runner/work/links-notation/links-notation/csharp/Link.Foundation.Links.Notation/Parser.peg(295,125): warning PEG0022: Repetition of a zero-width expressi
+1 binary-interoperability-37486124566: ##[warning]Restore cache failed: Dependencies file is not found in /home/runner/work/links-notation/links-notation. Supported file pattern: go.mod
+1 binary-interoperability-37529950273: ##[warning]Restore cache failed: Dependencies file is not found in /home/runner/work/links-notation/links-notation. Supported file pattern: go.mod
+1 csharp-37486124083: ##[error]Process completed with exit code 1.
+3 csharp-37486124083: ##[warning]/home/runner/work/links-notation/links-notation/csharp/Link.Foundation.Links.Notation/Parser.peg(288,59): warning PEG0021: Repetition of a zero-width expressio
+3 csharp-37486124083: ##[warning]/home/runner/work/links-notation/links-notation/csharp/Link.Foundation.Links.Notation/Parser.peg(295,125): warning PEG0022: Repetition of a zero-width expressi
+1 dependency-freshness-37486124184: ##[error]Process completed with exit code 1.
+1 dependency-freshness-37529950144: ##[error]Process completed with exit code 1.
+1 go-37486124189: ##[notice]CODECOV_TOKEN is not configured, so coverage was not uploaded
+1 java-37486124101: ##[warning]Skipping Maven Central publishing: CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets are not configured. Generate a token at https://
+1 java-37486124101: ##[warning]The 'gpg-passphrase' input is deprecated and may be removed in a future release. Please use 'gpg-passphrase-env-var' instead.
+1 java-37486124101: ##[warning]The 'server-password' input is deprecated and may be removed in a future release. Please use 'server-password-env-var' instead.
+1 java-37486124101: ##[warning]The 'server-username' input is deprecated and may be removed in a future release. Please use 'server-username-env-var' instead.
+1 js-37486124040: ##[error]Process completed with exit code 1.
+1 js-37486124040: ##[error]links-notation@0.23.0 on npm was not visible at https://registry.npmjs.org/links-notation/0.23.0 after 10 attempts (last status: HTTP 404)
+1 links-37329071552: ##[error]Process completed with exit code 2.
+1 links-37329071552: ##[notice]Summary report available at: https://github.com/link-foundation/links-notation/actions/runs/37329071552#summary-111827199536
+1 links-37486124238: ##[notice]Summary report available at: https://github.com/link-foundation/links-notation/actions/runs/37486124238#summary-112346455481
+1 php-37486124007: ##[warning]link-foundation/links-notation is not registered on Packagist (repo.packagist.org returns 404). Submit it once at https://packagist.org/packages/submit; until
+1 python-37486124196: ##[warning]A new Trusted Publisher for the currently running publishing workflow can be created by accessing the following link(s) while logged-in as an owner of the pack
+1 python-37486124196: ##[warning]Trusted Publishers allows publishing packages to PyPI from automated environments like GitHub Actions without needing to use username/password combinations or
+1 release-audit-37325889385: ##[warning]java: declared 0.22.0, but nothing is published on Maven Central. The publish job for this language has never successfully released anything.
+1 release-audit-37325889385: ##[warning]php: declared 0.22.0, but nothing is published on Packagist. The publish job for this language has never successfully released anything.
+1 release-audit-37486124279: ##[warning]java: declared 0.23.0, but nothing is published on Maven Central. The publish job for this language has never successfully released anything.
+1 release-audit-37486124279: ##[warning]php: declared 0.23.0, but nothing is published on Packagist. The publish job for this language has never successfully released anything.
+1 release-audit-37529950165: ##[warning]java: declared 0.23.0, but nothing is published on Maven Central. The publish job for this language has never successfully released anything.
+1 release-audit-37529950165: ##[warning]php: declared 0.23.0, but nothing is published on Packagist. The publish job for this language has never successfully released anything.
+1 rust-37486124161: ##[error]ENOENT: no such file or directory, opendir '/home/runner/work/links-notation/links-notation/rust/target/package/links-notation-0.23.0/tests/target'
+1 rust-37486124161: ##[error]ENOENT: no such file or directory, opendir '/home/runner/work/links-notation/links-notation/rust/target/package/links-notation-0.23.0/tests/trybuild'
+1 rust-37486124161: ##[error]Error: ENOENT: no such file or directory, opendir '/home/runner/work/links-notation/links-notation/rust/target/package/links-notation-0.23.0/tests/target'
+1 rust-37486124161: ##[error]Error: ENOENT: no such file or directory, opendir '/home/runner/work/links-notation/links-notation/rust/target/package/links-notation-0.23.0/tests/trybuild'
+2 security-37323195458: ##[error]Process completed with exit code 1.

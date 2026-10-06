@@ -1,0 +1,654 @@
+seven-languages	UNKNOWN STEP	﻿2026-10-06T15:17:13.9341486Z Current runner version: '2.337.0'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9364200Z ##[group]Runner Image Provisioner
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9364950Z Hosted Compute Agent
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9365416Z Version: 20260901.588
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9366028Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9366617Z Build Date: 2026-09-01T19:56:44Z
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9367232Z Worker ID: {2141e80e-03f2-453c-836f-eb9c68311900}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9367822Z Azure Region: eastus
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9368307Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9369466Z ##[group]Operating System
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9369970Z Ubuntu
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9370441Z 24.04.5
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9370880Z LTS
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9371307Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9371970Z ##[group]Runner Image
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9372474Z Image: ubuntu-24.04
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9372931Z Version: 20260927.320.1
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9374064Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9375357Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9376159Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9377126Z ##[group]GITHUB_TOKEN Permissions
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9379023Z Contents: read
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9379625Z Metadata: read
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9380097Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9382025Z Secret source: Actions
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9382958Z Cache mode: write
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:13.9383840Z Prepare workflow directory
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:14.0015084Z Prepare all required actions
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:14.0073727Z Getting action download info
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:14.2490382Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:14.6732447Z Download action repository 'dtolnay/rust-toolchain@stable' (SHA:89b12181fb390509a0842a86cc55eeb8eb928c1d)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:15.3406265Z Download action repository 'actions/setup-dotnet@v6.0.0' (SHA:a98b56852c35b8e3190ac28c8c2271da59106c68)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:15.9772492Z Download action repository 'actions/setup-node@v7.0.0' (SHA:820762786026740c76f36085b0efc47a31fe5020)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:16.0980184Z Download action repository 'actions/setup-python@v7.0.0' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:16.2129451Z Download action repository 'actions/setup-go@v7.0.0' (SHA:b7ad1dad31e06c5925ef5d2fc7ad053ef454303e)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:16.4435824Z Download action repository 'actions/setup-java@v6.0.1' (SHA:de7274f081f381c8f8158605e0321c36c376e2e6)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:16.8550813Z Download action repository 'shivammathur/setup-php@2.37.2' (SHA:f3e473d116dcccaddc5834248c87452386958240)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.0753402Z Complete job name: seven-languages
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1405944Z ##[group]Run actions/checkout@v7.0.1
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1406393Z with:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1406588Z   persist-credentials: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1406829Z   repository: link-foundation/links-notation
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1409119Z   token: ***
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1409299Z   ssh-strict: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1409497Z   ssh-user: git
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1409678Z   clean: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1409856Z   sparse-checkout-cone-mode: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1410063Z   fetch-depth: 1
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1410229Z   fetch-tags: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1410400Z   show-progress: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1410570Z   lfs: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1410731Z   submodules: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1410903Z   set-safe-directory: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1411100Z   allow-unsafe-pr-checkout: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.1411488Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2223596Z Syncing repository: link-foundation/links-notation
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2225153Z ##[group]Getting Git version info
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2225758Z Working directory is '/home/runner/work/links-notation/links-notation'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2226545Z [command]/usr/bin/git version
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2274999Z git version 2.55.0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2290536Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2298904Z Temporarily overriding HOME='/home/runner/work/_temp/bcd9abda-53cc-4641-b290-c556bddcd41d' before making global git config changes
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2300280Z Adding repository directory to the temporary git global config as a safe directory
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2304400Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2343257Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2345953Z ##[group]Determining repository object format
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2347222Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2347778Z ##[group]Initializing the repository
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2350854Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2442088Z hint: Using 'master' as the name for the initial branch. This default branch name
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2442863Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2443416Z hint: to use in all of your new repositories, which will suppress this warning,
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2443758Z hint: call:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2443918Z hint:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2444185Z hint: 	git config --global init.defaultBranch <name>
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2444453Z hint:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2444704Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2445092Z hint: 'development'. The just-created branch can be renamed via this command:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2445399Z hint:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2445569Z hint: 	git branch -m <name>
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2445761Z hint:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2446013Z hint: Disable this message with "git config set advice.defaultBranchName false"
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2450300Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2458802Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2498256Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2498754Z ##[group]Disabling automatic garbage collection
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2502115Z [command]/usr/bin/git config --local gc.auto 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2562262Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2563094Z ##[group]Setting up auth
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2563454Z Removing SSH command configuration
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2565430Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2593804Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2909580Z Removing HTTP extra header
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2915100Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.2945545Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.3132517Z Removing includeIf entries pointing to credentials config files
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.3136661Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.3165647Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.3359459Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-ee3b38cc-1e41-42da-bfe5-1459461c46d1.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.3393993Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-ee3b38cc-1e41-42da-bfe5-1459461c46d1.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.3425702Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-ee3b38cc-1e41-42da-bfe5-1459461c46d1.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.3504706Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-ee3b38cc-1e41-42da-bfe5-1459461c46d1.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.3539657Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-ee3b38cc-1e41-42da-bfe5-1459461c46d1.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.3683427Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.3683974Z ##[group]Fetching the repository
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:17.3689552Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a:refs/remotes/origin/main
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9004582Z From https://github.com/link-foundation/links-notation
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9005352Z  * [new ref]         b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a -> origin/main
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9013294Z [command]/usr/bin/git branch --list --remote origin/main
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9038780Z   origin/main
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9046530Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9071116Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9081203Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9081679Z ##[group]Determining the checkout info
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9082670Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9082990Z [command]/usr/bin/git sparse-checkout disable
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9130126Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9161889Z ##[group]Checking out the ref
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9166819Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9761594Z Switched to a new branch 'main'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9803395Z branch 'main' set up to track 'origin/main'.
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9812513Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9857552Z [command]/usr/bin/git log -1 --format=%H
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9885132Z b5af6508eff2e1ce59b04725ab3f3779d9bf0f1a
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9892579Z ##[group]Removing auth
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9892968Z Removing SSH command configuration
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9896736Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:18.9953223Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0127962Z Removing HTTP extra header
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0130529Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0165171Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0357719Z Removing includeIf entries pointing to credentials config files
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0360430Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0386381Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0387341Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0388212Z includeif.gitdir:/github/workspace/.git.path
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0388982Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0403650Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0426884Z /home/runner/work/_temp/git-credentials-ee3b38cc-1e41-42da-bfe5-1459461c46d1.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0434541Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-ee3b38cc\-1e41\-42da\-bfe5\-1459461c46d1\.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0470178Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0493107Z /home/runner/work/_temp/git-credentials-ee3b38cc-1e41-42da-bfe5-1459461c46d1.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0500651Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-ee3b38cc\-1e41\-42da\-bfe5\-1459461c46d1\.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0535030Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0559671Z /github/runner_temp/git-credentials-ee3b38cc-1e41-42da-bfe5-1459461c46d1.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0567076Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-ee3b38cc\-1e41\-42da\-bfe5\-1459461c46d1\.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0601901Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0624139Z /github/runner_temp/git-credentials-ee3b38cc-1e41-42da-bfe5-1459461c46d1.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0629399Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-ee3b38cc\-1e41\-42da\-bfe5\-1459461c46d1\.config
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0662336Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0847486Z Removing credentials config '/home/runner/work/_temp/git-credentials-ee3b38cc-1e41-42da-bfe5-1459461c46d1.config'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.0855296Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1115260Z ##[group]Run dtolnay/rust-toolchain@stable
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1115502Z with:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1115663Z   toolchain: stable
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1115837Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1168963Z ##[start-action display=Parse toolchain version;id=__dtolnay_rust-toolchain.parse]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1213995Z ##[group]Run if [[ -z $toolchain ]]; then
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1214315Z ^[[36;1mif [[ -z $toolchain ]]; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1214750Z ^[[36;1m  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1215187Z ^[[36;1m  echo "'toolchain' is a required input" >&2^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1215420Z ^[[36;1m  exit 1^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1215688Z ^[[36;1melif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1216008Z ^[[36;1m  if [[ Linux == macOS ]]; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1216469Z ^[[36;1m    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1216864Z ^[[36;1m  else^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1217175Z ^[[36;1m    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1217533Z ^[[36;1m  fi^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1217779Z ^[[36;1melif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1218188Z ^[[36;1m  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1218534Z ^[[36;1melif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1218928Z ^[[36;1m  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1219444Z ^[[36;1melse^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1219653Z ^[[36;1m  echo "toolchain=$toolchain" >> $GITHUB_OUTPUT^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1219885Z ^[[36;1mfi^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1415602Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1415894Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1416061Z   toolchain: stable
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1416246Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1532543Z ##[end-action id=__dtolnay_rust-toolchain.parse;outcome=success;conclusion=success;duration_ms=36]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1542597Z ##[start-action display=Construct rustup command line;id=__dtolnay_rust-toolchain.flags]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1590178Z ##[group]Run echo "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1590782Z ^[[36;1mecho "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1591297Z ^[[36;1mecho "components=$(for c in ${components//,/ }; do echo -n ' --component' $c; done)" >> $GITHUB_OUTPUT^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1591677Z ^[[36;1mecho "downgrade=" >> $GITHUB_OUTPUT^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1644772Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1645057Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1645227Z   targets: 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1645388Z   components: 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1645549Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1731434Z ##[end-action id=__dtolnay_rust-toolchain.flags;outcome=success;conclusion=success;duration_ms=18]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1733573Z ##[start-action display=Set $CARGO_HOME;id=__dtolnay_rust-toolchain.__run]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1751007Z ##[group]Run echo CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1751382Z ^[[36;1mecho CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1802949Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1803225Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1877484Z ##[end-action id=__dtolnay_rust-toolchain.__run;outcome=success;conclusion=success;duration_ms=14]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1879249Z ##[start-action display=Install rustup if needed;id=__dtolnay_rust-toolchain.__run_2]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1901003Z ##[group]Run if ! command -v rustup &>/dev/null; then
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1901305Z ^[[36;1mif ! command -v rustup &>/dev/null; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1902091Z ^[[36;1m  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://sh.rustup.rs | sh -s -- --default-toolchain none -y^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1902684Z ^[[36;1m  echo "$CARGO_HOME/bin" >> $GITHUB_PATH^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1902925Z ^[[36;1mfi^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1951976Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1952241Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1952411Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.1952616Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2022243Z ##[end-action id=__dtolnay_rust-toolchain.__run_2;outcome=success;conclusion=success;duration_ms=14]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2024082Z ##[start-action display=Install rustup if needed on windows;id=__dtolnay_rust-toolchain.__run_3]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2029038Z ##[end-action id=__dtolnay_rust-toolchain.__run_3;outcome=skipped;conclusion=skipped;duration_ms=0]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2038075Z ##[start-action display=rustup toolchain install stable;id=__dtolnay_rust-toolchain.__run_4]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2055184Z ##[group]Run log=$(mktemp)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2055405Z ^[[36;1mlog=$(mktemp)^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2055599Z ^[[36;1mtrap 'rm -f "$log"' EXIT^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2055812Z ^[[36;1mfor attempt in 1 2 3 4 5; do^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2056242Z ^[[36;1m  if rustup toolchain install stable --profile minimal --no-self-update --force-non-host 2>&1 | tee "$log"; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2056643Z ^[[36;1m    break^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2056810Z ^[[36;1m  else^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2056972Z ^[[36;1m    status=$?^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2057146Z ^[[36;1m  fi^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2057381Z ^[[36;1m  if [[ $attempt == 5 ]] || ! grep -Fq 'checksum failed for ' "$log" \^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2057814Z ^[[36;1m      || ! grep -Fq 'this is likely due to an ongoing update of the official release server' "$log"; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2058176Z ^[[36;1m    exit "$status"^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2058361Z ^[[36;1m  fi^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2058650Z ^[[36;1m  echo "Retrying rustup toolchain install in 30 seconds (retry $attempt of 4)" >&2^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2058982Z ^[[36;1m  sleep 30^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2059150Z ^[[36;1mdone^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2108527Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2108800Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2109111Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2109333Z   RUSTUP_PERMIT_COPY_RENAME: 1
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.2109527Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.4545728Z info: syncing channel updates for stable-x86_64-unknown-linux-gnu
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.7031040Z info: latest update on 2026-10-01 for version 1.99.0 (b940084d7 2026-09-28)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.7398778Z info: removing previous version of component rustfmt
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.7412379Z info: removing previous version of component clippy
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.7422181Z info: removing previous version of component cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.7458497Z info: removing previous version of component rust-std
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.7498276Z info: removing previous version of component rustc
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:19.7537506Z info: downloading 5 components
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5400880Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5463931Z   stable-x86_64-unknown-linux-gnu updated - rustc 1.99.0 (b940084d7 2026-09-28) (from rustc 1.98.1 (48a229cea 2026-09-01))
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5464372Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5555037Z ##[end-action id=__dtolnay_rust-toolchain.__run_4;outcome=success;conclusion=success;duration_ms=8351]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5562030Z ##[start-action display=rustup default stable;id=__dtolnay_rust-toolchain.__run_5]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5578721Z ##[group]Run rustup default stable --force-non-host
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5579032Z ^[[36;1mrustup default stable --force-non-host^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5634422Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5634693Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5634865Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5635249Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.5795160Z info: using existing install for stable-x86_64-unknown-linux-gnu
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6688376Z info: default toolchain set to stable-x86_64-unknown-linux-gnu
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6688722Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6747573Z   stable-x86_64-unknown-linux-gnu unchanged - rustc 1.99.0 (b940084d7 2026-09-28)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6747853Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6764601Z ##[end-action id=__dtolnay_rust-toolchain.__run_5;outcome=success;conclusion=success;duration_ms=120]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6766826Z ##[start-action display=Create cachekey;id=__dtolnay_rust-toolchain.rustc-version]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6783815Z ##[group]Run DATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6784469Z ^[[36;1mDATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6785006Z ^[[36;1mHASH=$(rustc +stable --version --verbose | sed -ne 's/^commit-hash: //p')^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6785397Z ^[[36;1mecho "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6840332Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6840600Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6840769Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.6840974Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7158835Z ##[end-action id=__dtolnay_rust-toolchain.rustc-version;outcome=success;conclusion=success;duration_ms=39]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7161008Z ##[start-action display=Disable incremental compilation;id=__dtolnay_rust-toolchain.__run_6]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7177022Z ##[group]Run if [ -z "${CARGO_INCREMENTAL+set}" ]; then
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7177331Z ^[[36;1mif [ -z "${CARGO_INCREMENTAL+set}" ]; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7177592Z ^[[36;1m  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7177814Z ^[[36;1mfi^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7233758Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7234068Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7234242Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7234453Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7416831Z ##[end-action id=__dtolnay_rust-toolchain.__run_6;outcome=success;conclusion=success;duration_ms=25]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7418723Z ##[start-action display=Enable colors in Cargo output;id=__dtolnay_rust-toolchain.__run_7]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7924884Z ##[group]Run if [ -z "${CARGO_TERM_COLOR+set}" ]; then
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7925375Z ^[[36;1mif [ -z "${CARGO_TERM_COLOR+set}" ]; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7925811Z ^[[36;1m  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.7926194Z ^[[36;1mfi^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8003696Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8004141Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8004408Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8004743Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8005037Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8503349Z ##[end-action id=__dtolnay_rust-toolchain.__run_7;outcome=success;conclusion=success;duration_ms=108]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8506230Z ##[start-action display=Enable Cargo sparse registry;id=__dtolnay_rust-toolchain.__run_8]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8561956Z ##[group]Run # implemented in 1.66, stabilized in 1.68, made default in 1.70
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8562415Z ^[[36;1m# implemented in 1.66, stabilized in 1.68, made default in 1.70^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8562982Z ^[[36;1mif [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol ]; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8563581Z ^[[36;1m  if rustc +stable --version --verbose | grep -q '^release: 1\.6[89]\.'; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8564037Z ^[[36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8564472Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8565041Z ^[[36;1m  elif rustc +stable --version --verbose | grep -q '^release: 1\.6[67]\.'; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8565498Z ^[[36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8565899Z ^[[36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8566175Z ^[[36;1m  fi^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8566340Z ^[[36;1mfi^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8619303Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8619574Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8619745Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8619951Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8620137Z   CARGO_TERM_COLOR: always
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.8620319Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9053620Z ##[end-action id=__dtolnay_rust-toolchain.__run_8;outcome=success;conclusion=success;duration_ms=54]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9056633Z ##[start-action display=Work around spurious network errors in curl 8.0;id=__dtolnay_rust-toolchain.__run_9]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9173120Z ##[group]Run # https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9174068Z ^[[36;1m# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9174851Z ^[[36;1mif rustc +stable --version --verbose | grep -q '^release: 1\.7[01]\.'; then^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9175444Z ^[[36;1m  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9175857Z ^[[36;1mfi^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9252683Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9253127Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9253389Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9253717Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9254011Z   CARGO_TERM_COLOR: always
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9254301Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9490188Z ##[end-action id=__dtolnay_rust-toolchain.__run_9;outcome=success;conclusion=success;duration_ms=43]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9493841Z ##[start-action display=rustc +stable --version --verbose;id=__dtolnay_rust-toolchain.__run_10]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9529243Z ##[group]Run rustc +stable --version --verbose
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9529527Z ^[[36;1mrustc +stable --version --verbose^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9583219Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9583491Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9583663Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9583923Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9584266Z   CARGO_TERM_COLOR: always
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:27.9584454Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0004331Z rustc 1.99.0 (b940084d7 2026-09-28)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0004781Z binary: rustc
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0005182Z commit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0005616Z commit-date: 2026-09-28
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0005832Z host: x86_64-unknown-linux-gnu
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0006032Z release: 1.99.0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0006576Z LLVM version: 23.1.1
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0017334Z ##[end-action id=__dtolnay_rust-toolchain.__run_10;outcome=success;conclusion=success;duration_ms=52]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0148952Z ##[group]Run actions/setup-dotnet@v6.0.0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0149182Z with:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0149352Z   dotnet-version: 10.0.x
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0149543Z   cache: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0149701Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0149864Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0150071Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0150256Z   CARGO_TERM_COLOR: always
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.0150459Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.1191260Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6.0.0/externals/install-dotnet.sh --skip-non-versioned-files --runtime dotnet --channel LTS
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.3126214Z dotnet-install: .NET Core Runtime with version '10.0.12' is already installed.
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.3145679Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6.0.0/externals/install-dotnet.sh --skip-non-versioned-files --channel 10.0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.4867279Z dotnet-install: .NET Core SDK with version '10.0.401' is already installed.
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5005043Z ##[group]Run actions/setup-node@v7.0.0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5005294Z with:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5005464Z   node-version: 24
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5005641Z   check-latest: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5007864Z   token: ***
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5008054Z   package-manager-cache: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5008263Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5008431Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5008662Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5008847Z   CARGO_TERM_COLOR: always
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5009043Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.5009239Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.6011222Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:28.6012651Z ##[group]Environment details
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1470693Z node: v24.21.0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1470943Z npm: 11.19.0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1471115Z yarn: 1.22.22
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1472192Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1935540Z ##[group]Run actions/setup-python@v7.0.0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1935781Z with:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1935950Z   python-version: 3.13
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1936137Z   check-latest: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1938318Z   token: ***
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1938495Z   update-environment: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1938703Z   allow-prereleases: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1938890Z   freethreaded: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1939059Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1939226Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1939469Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1939655Z   CARGO_TERM_COLOR: always
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1939848Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.1940048Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.2857994Z ##[group]Installed versions
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3401678Z Successfully set up CPython (3.13.15)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3402497Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3556505Z ##[group]Run actions/setup-go@v7.0.0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3556743Z with:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3556910Z   go-version-file: go/go.mod
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3557109Z   check-latest: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3559295Z   token: ***
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3559459Z   cache: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3559617Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3559784Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3560000Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3560179Z   CARGO_TERM_COLOR: always
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3560372Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3560623Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3561128Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3561486Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3562080Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3562387Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3562733Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.3562995Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.4555538Z Setup go version spec 1.24
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.4774988Z Found in cache @ /opt/hostedtoolcache/go/1.24.13/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.4775897Z Added go to the path
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.4778386Z Successfully set up Go version 1.24
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.5215083Z [command]/opt/hostedtoolcache/go/1.24.13/x64/bin/go env GOMODCACHE
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.5250488Z [command]/opt/hostedtoolcache/go/1.24.13/x64/bin/go env GOCACHE
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.5280565Z /home/runner/go/pkg/mod
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.5326764Z /home/runner/.cache/go-build
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.5401259Z ##[warning]Restore cache failed: Dependencies file is not found in /home/runner/work/links-notation/links-notation. Supported file pattern: go.mod
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.5412505Z go version go1.24.13 linux/amd64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.5412755Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.5413079Z ##[group]go env
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8844711Z AR='ar'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8845105Z CC='gcc'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8845500Z CGO_CFLAGS='-O2 -g'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8845836Z CGO_CPPFLAGS=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8846165Z CGO_CXXFLAGS='-O2 -g'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8846521Z CGO_ENABLED='1'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8846881Z CGO_FFLAGS='-O2 -g'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8847226Z CGO_LDFLAGS='-O2 -g'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8847864Z CXX='g++'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8848403Z GCCGO='gccgo'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8848755Z GO111MODULE=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8849459Z GOAMD64='v1'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8849764Z GOARCH='amd64'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8850084Z GOAUTH='netrc'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8850352Z GOBIN=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8850812Z GOCACHE='/home/runner/.cache/go-build'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8851207Z GOCACHEPROG=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8851508Z GODEBUG=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8852117Z GOENV='/home/runner/.config/go/env'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8852515Z GOEXE=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8852780Z GOEXPERIMENT=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8853084Z GOFIPS140='off'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8853361Z GOFLAGS=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8854729Z GOGCCFLAGS='-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build1659994101=/tmp/go-build -gno-record-gcc-switches'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8855739Z GOHOSTARCH='amd64'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8856081Z GOHOSTOS='linux'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8856376Z GOINSECURE=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8856785Z GOMOD='/dev/null'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8857262Z GOMODCACHE='/home/runner/go/pkg/mod'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8857755Z GONOPROXY=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8858062Z GONOSUMDB=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8858340Z GOOS='linux'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8858705Z GOPATH='/home/runner/go'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8859118Z GOPRIVATE=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8859616Z GOPROXY='https://proxy.golang.org,direct'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8860223Z GOROOT='/opt/hostedtoolcache/go/1.24.13/x64'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8860689Z GOSUMDB='sum.golang.org'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8861104Z GOTELEMETRY='local'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8861612Z GOTELEMETRYDIR='/home/runner/.config/go/telemetry'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8862251Z GOTMPDIR=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8862920Z GOTOOLCHAIN='local'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8863612Z GOTOOLDIR='/opt/hostedtoolcache/go/1.24.13/x64/pkg/tool/linux_amd64'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8864121Z GOVCS=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8864470Z GOVERSION='go1.24.13'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8864801Z GOWORK=''
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8865144Z PKG_CONFIG='pkg-config'
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8865361Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.8865822Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9004736Z ##[group]Run actions/setup-java@v6.0.1
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9004966Z with:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9005134Z   distribution: temurin
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9005320Z   java-version: 21
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9005492Z   java-package: jdk
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9005814Z   check-latest: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9005994Z   force-download: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9006171Z   set-default: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9006337Z   server-id: github
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9006533Z   mvn-repositories-include-central: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9006786Z   mvn-repositories-prioritize-central: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9007024Z   overwrite-settings: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9007218Z   cache-read-only: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9007402Z   job-status: success
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9009549Z   token: ***
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9009736Z   show-download-progress: false
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9009942Z   problem-matcher: true
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9010116Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9010280Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9010511Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9010693Z   CARGO_TERM_COLOR: always
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9010883Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9011132Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9011469Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9011965Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9012304Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9012594Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9012896Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9013157Z   GOTOOLCHAIN: local
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9013333Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9580397Z ##[group]Installed distributions
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9690336Z Resolved Java 21.0.12+1 from tool-cache
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9690835Z Setting Java 21.0.12+1 as the default
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9696436Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9696666Z Java configuration:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9697010Z   Distribution: temurin
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9697341Z   Version: 21.0.12+1
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9697904Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9698281Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9698579Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9712840Z Creating settings.xml with server-id: github
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9717289Z Creating toolchains.xml for JDK version 21 from temurin
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9719915Z Writing to /home/runner/.m2/settings.xml
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9727465Z Writing to /home/runner/.m2/toolchains.xml
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9733634Z Configured MAVEN_ARGS to include -ntp to suppress Maven transfer progress logs. Set 'show-download-progress: true' to keep the download progress output.
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9864692Z ##[group]Run shivammathur/setup-php@2.37.2
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9864937Z with:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9865104Z   php-version: 8.4
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9865282Z   extensions: mbstring
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9865457Z   tools: composer
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9865624Z   ini-file: production
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9867801Z   github-token: ***
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9867978Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9868144Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9868373Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9868560Z   CARGO_TERM_COLOR: always
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9868753Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9869002Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9869352Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9869678Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9869985Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9870305Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9870606Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9870864Z   GOTOOLCHAIN: local
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9871114Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9871479Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9871942Z   MAVEN_ARGS: -ntp
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:29.9872356Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:30.0226849Z [command]/usr/bin/bash /home/runner/work/_actions/shivammathur/setup-php/2.37.2/src/scripts/run.sh
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:30.0565750Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:30.0566730Z ^[[90;1m==> ^[[0m^[[37;1mSetup PHP^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.4700976Z ^[[32;1m✓ ^[[0m^[[34;1mPHP ^[[0m^[[90;1mInstalled PHP 8.4.26^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.4701338Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.4702004Z ^[[90;1m==> ^[[0m^[[37;1mSetup Extensions^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.5129268Z ^[[32;1m✓ ^[[0m^[[34;1mmbstring ^[[0m^[[90;1mEnabled^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.5129785Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.5130352Z ^[[90;1m==> ^[[0m^[[37;1mSetup Tools^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7358771Z ^[[32;1m✓ ^[[0m^[[34;1mcomposer ^[[0m^[[90;1mAdded composer 2.10.3^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7359435Z 
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7360001Z ^[[90;1m==> ^[[0m^[[37;1mSponsor setup-php^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7360885Z ^[[32;1m✓ ^[[0m^[[34;1msetup-php ^[[0m^[[90;1mhttps://setup-php.com/sponsor^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7489290Z ##[group]Run composer install --working-dir=php --no-dev --no-interaction
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7489752Z ^[[36;1mcomposer install --working-dir=php --no-dev --no-interaction^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7557940Z shell: /usr/bin/bash -e {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7558151Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7558327Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7558544Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7558735Z   CARGO_TERM_COLOR: always
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7558935Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7559192Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7559537Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7559876Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7570982Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7571335Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7571671Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7572106Z   GOTOOLCHAIN: local
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7572370Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7572739Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7573030Z   MAVEN_ARGS: -ntp
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7573210Z   COMPOSER_PROCESS_TIMEOUT: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7573411Z   COMPOSER_NO_INTERACTION: 1
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7573602Z   COMPOSER_NO_AUDIT: 1
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.7573781Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.9108525Z No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:33.9110585Z Loading composer repositories with package information
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1460495Z Updating dependencies
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1510334Z Lock file operations: 28 installs, 0 updates, 0 removals
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1510988Z   - Locking myclabs/deep-copy (1.14.0)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1511440Z   - Locking nikic/php-parser (v5.9.0)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1512063Z   - Locking phar-io/manifest (2.0.4)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1512500Z   - Locking phar-io/version (3.2.1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1513077Z   - Locking phpunit/php-code-coverage (14.4.1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1513619Z   - Locking phpunit/php-file-iterator (7.0.2)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1514116Z   - Locking phpunit/php-invoker (7.0.0)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1514616Z   - Locking phpunit/php-text-template (6.0.1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1515105Z   - Locking phpunit/php-timer (9.0.0)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1515564Z   - Locking phpunit/phpunit (13.4.1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1516015Z   - Locking sebastian/cli-parser (5.0.1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1516497Z   - Locking sebastian/comparator (8.4.0)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1516853Z   - Locking sebastian/complexity (6.0.0)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1517131Z   - Locking sebastian/diff (9.0.1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1517422Z   - Locking sebastian/environment (9.3.3)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1517721Z   - Locking sebastian/exporter (8.2.1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1518017Z   - Locking sebastian/file-filter (1.0.0)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1518669Z   - Locking sebastian/git-state (1.0.0)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1519127Z   - Locking sebastian/global-state (9.0.1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1519629Z   - Locking sebastian/lines-of-code (5.0.2)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1520139Z   - Locking sebastian/object-enumerator (8.1.0)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1520583Z   - Locking sebastian/object-reflector (6.1.0)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1520907Z   - Locking sebastian/recursion-context (8.0.1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1521202Z   - Locking sebastian/type (7.0.2)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1521481Z   - Locking sebastian/version (7.0.1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1521929Z   - Locking squizlabs/php_codesniffer (4.0.4)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1522288Z   - Locking staabm/side-effects-detector (1.0.5)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1522598Z   - Locking theseer/tokenizer (2.0.1)
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1522851Z Writing lock file
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1523117Z Installing dependencies from lock file
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1524114Z Nothing to install, update or remove
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1544088Z 1 package suggestions were added by new dependencies, use `composer suggest` to see details.
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1546362Z Generating autoload files
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1748646Z ##[group]Run bash examples/binary/run-interop.sh
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1748950Z ^[[36;1mbash examples/binary/run-interop.sh^[[0m
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1807370Z shell: /usr/bin/bash -e {0}
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1807575Z env:
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1807752Z   CARGO_HOME: /home/runner/.cargo
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1807968Z   CARGO_INCREMENTAL: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1808157Z   CARGO_TERM_COLOR: always
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1808352Z   DOTNET_ROOT: /usr/share/dotnet
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1808605Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1808955Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1809283Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1809598Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1809906Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1810262Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1810522Z   GOTOOLCHAIN: local
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1810777Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1811155Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1811454Z   MAVEN_ARGS: -ntp
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1811637Z   COMPOSER_PROCESS_TIMEOUT: 0
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1811994Z   COMPOSER_NO_INTERACTION: 1
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1812185Z   COMPOSER_NO_AUDIT: 1
+seven-languages	UNKNOWN STEP	2026-10-06T15:17:34.1812362Z ##[endgroup]
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.0508463Z Rust and csharp python js php go java produced identical bytes and decoded text for all 300 cases.
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.0612491Z Post job cleanup.
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.1284504Z Post job cleanup.
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.2243604Z [command]/opt/hostedtoolcache/go/1.24.13/x64/bin/go env GOMODCACHE
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.2281547Z [command]/opt/hostedtoolcache/go/1.24.13/x64/bin/go env GOCACHE
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.2306222Z /home/runner/go/pkg/mod
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.2319766Z /home/runner/.cache/go-build
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.2328311Z [warning]Cache folder path is retrieved but doesn't exist on disk: /home/runner/go/pkg/mod
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.2329531Z Primary key was not generated. Please check the log messages above for more errors or information
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.2442678Z Post job cleanup.
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.3519280Z Post job cleanup.
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.4522698Z Post job cleanup.
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.5571592Z Post job cleanup.
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6308295Z [command]/usr/bin/git version
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6352276Z git version 2.55.0
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6381245Z Temporarily overriding HOME='/home/runner/work/_temp/9fcaa861-d01b-44e9-8a9c-b90903479412' before making global git config changes
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6382641Z Adding repository directory to the temporary git global config as a safe directory
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6385348Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6413388Z Removing SSH command configuration
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6418800Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6449300Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6659766Z Removing HTTP extra header
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6665752Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6696629Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6915026Z Removing includeIf entries pointing to credentials config files
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6920658Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.6954698Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.7289629Z Cleaning up orphan processes
+seven-languages	UNKNOWN STEP	2026-10-06T15:18:05.7566015Z Terminate orphan process: pid (3146) (VBCSCompiler)
