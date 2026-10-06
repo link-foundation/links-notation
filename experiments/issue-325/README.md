@@ -106,3 +106,9 @@ while modern Python builds use the current release. Registry errors fail CI.
 Daily Dependabot checks propose updates for every supported ecosystem and active
 directory. The freshness workflow runs on every PR and daily; branch protection
 must require its check to enforce this policy before merging.
+
+The first continuation CI runs failed during action download, before any PHP
+tests: `binary-interop-37446166924.log:30` and `php-37446166638.log:512` could not
+resolve `shivammathur/setup-php@v2.37.2`. Its actual stable tag is `2.37.2`.
+The checker now preserves exact registry tag spelling, checks it in addition to
+the numeric version, and has an offline regression for this case.

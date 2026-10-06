@@ -49,7 +49,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - uses: shivammathur/setup-php@v2.37.2
+      - uses: shivammathur/setup-php@2.37.2
         with:
           php-version: '8.4'
           extensions: mbstring

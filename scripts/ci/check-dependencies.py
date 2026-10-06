@@ -51,7 +51,10 @@ def newest(versions):
 
 
 def get(url):
-    headers = {"User-Agent": "links-notation-dependency-check", "Accept": "application/json"}
+    headers = {
+        "User-Agent": "links-notation-dependency-check",
+        "Accept": "application/json",
+    }
     if url.startswith("https://api.github.com/") and os.environ.get("GH_TOKEN"):
         headers["Authorization"] = "Bearer " + os.environ["GH_TOKEN"]
     request = urllib.request.Request(url, headers=headers)
@@ -68,7 +71,11 @@ def latest(ecosystem, name):
         data = json.loads(get("https://pypi.org/pypi/" + encoded + "/json"))
         versions = []
         for version, files in data["releases"].items():
-            if not version_key(version) or not files or all(f.get("yanked") for f in files):
+            if (
+                not version_key(version)
+                or not files
+                or all(f.get("yanked") for f in files)
+            ):
                 continue
             requirement = files[0].get("requires_python") or ""
             minimum = re.search(r">=\s*(3\.\d+)", requirement)
@@ -77,12 +84,18 @@ def latest(ecosystem, name):
             versions.append(version)
         return newest(versions)
     if ecosystem == "pypi":
-        return json.loads(get("https://pypi.org/pypi/" + encoded + "/json"))["info"]["version"]
+        return json.loads(get("https://pypi.org/pypi/" + encoded + "/json"))["info"][
+            "version"
+        ]
     if ecosystem == "cargo":
         data = json.loads(get("https://crates.io/api/v1/crates/" + encoded))
         return newest(v["num"] for v in data["versions"] if not v["yanked"])
     if ecosystem == "nuget":
-        data = json.loads(get("https://api.nuget.org/v3-flatcontainer/" + name.lower() + "/index.json"))
+        data = json.loads(
+            get(
+                "https://api.nuget.org/v3-flatcontainer/" + name.lower() + "/index.json"
+            )
+        )
         return newest(data["versions"])
     if ecosystem == "composer":
         data = json.loads(get("https://repo.packagist.org/p2/" + name + ".json"))
@@ -90,7 +103,9 @@ def latest(ecosystem, name):
     if ecosystem == "maven":
         group, artifact = name.split(":")
         path = group.replace(".", "/") + "/" + artifact
-        data = ET.fromstring(get("https://repo.maven.apache.org/maven2/" + path + "/maven-metadata.xml"))
+        data = ET.fromstring(
+            get("https://repo.maven.apache.org/maven2/" + path + "/maven-metadata.xml")
+        )
         return newest(v.text for v in data.findall("./versioning/versions/version"))
     if ecosystem == "github":
         # gh handles authentication and pagination without exposing credentials.
@@ -100,10 +115,15 @@ def latest(ecosystem, name):
             capture_output=True,
             text=True,
         )
-        return newest(result.stdout.splitlines())
+        tags = [tag for tag in result.stdout.splitlines() if version_key(tag)]
+        if not tags:
+            raise ValueError("registry returned no stable tags")
+        return max(tags, key=version_key)
     if ecosystem == "go":
         escaped = "".join("!" + c.lower() if c.isupper() else c for c in name)
-        return json.loads(get("https://proxy.golang.org/" + escaped + "/@latest"))["Version"].removeprefix("v")
+        return json.loads(get("https://proxy.golang.org/" + escaped + "/@latest"))[
+            "Version"
+        ].removeprefix("v")
     raise ValueError("unsupported ecosystem: " + ecosystem)
 
 
@@ -125,36 +145,63 @@ def manifests(root=ROOT):
     found = []
 
     def add(path, ecosystem, name, declared, literal=None):
-        if not isinstance(declared, str) or declared.startswith(("file:", "workspace:", "path:", "git", "http")):
+        if not isinstance(declared, str) or declared.startswith(
+            ("file:", "workspace:", "path:", "git", "http")
+        ):
             return
         if re.search(r"\d", declared):
-            found.append(Dependency(path, ecosystem, name, declared, literal or declared))
+            found.append(
+                Dependency(path, ecosystem, name, declared, literal or declared)
+            )
 
     for folder in ACTIVE:
         directory = root / folder
         for path in directory.rglob("*"):
             if not path.is_file() or any(
-                p in {"node_modules", "vendor", "target", "bin", "obj", ".venv", "dist", "generated"}
+                p
+                in {
+                    "node_modules",
+                    "vendor",
+                    "target",
+                    "bin",
+                    "obj",
+                    ".venv",
+                    "dist",
+                    "generated",
+                }
                 for p in path.relative_to(directory).parts
             ):
                 continue
             if path.name == "package.json":
                 data = json.loads(path.read_text())
-                for section in ("dependencies", "devDependencies", "optionalDependencies", "overrides"):
+                for section in (
+                    "dependencies",
+                    "devDependencies",
+                    "optionalDependencies",
+                    "overrides",
+                ):
                     for name, requirement in data.get(section, {}).items():
                         add(path, "npm", name, requirement)
             elif path.name in {"pyproject.toml", "Cargo.toml"}:
                 data = tomllib.loads(path.read_text())
                 if path.name == "pyproject.toml":
-                    requirements = data.get("build-system", {}).get("requires", []) + data.get("project", {}).get(
-                        "dependencies", []
-                    )
-                    for items in data.get("project", {}).get("optional-dependencies", {}).values():
+                    requirements = data.get("build-system", {}).get(
+                        "requires", []
+                    ) + data.get("project", {}).get("dependencies", [])
+                    for items in (
+                        data.get("project", {})
+                        .get("optional-dependencies", {})
+                        .values()
+                    ):
                         requirements += items
                     for requirement in requirements:
-                        match = re.fullmatch(r"([\w.-]+)(?:\[[^]]+\])?([><=~!].*)", requirement)
+                        match = re.fullmatch(
+                            r"([\w.-]+)(?:\[[^]]+\])?([><=~!].*)", requirement
+                        )
                         if not match:
-                            raise ValueError(f"unsupported dependency requirement: {path}: {requirement}")
+                            raise ValueError(
+                                f"unsupported dependency requirement: {path}: {requirement}"
+                            )
                         if "python_version < '3.10'" in match[2]:
                             # setuptools 84 dropped Python 3.9. The compatibility
                             # floor is checked against the latest 3.9 release.
@@ -162,12 +209,21 @@ def manifests(root=ROOT):
                         else:
                             add(path, "pypi", match[1], match[2])
                 else:
-                    for section in ("dependencies", "dev-dependencies", "build-dependencies"):
+                    for section in (
+                        "dependencies",
+                        "dev-dependencies",
+                        "build-dependencies",
+                    ):
                         for name, requirement in data.get(section, {}).items():
                             if isinstance(requirement, dict):
                                 if "path" in requirement:
                                     continue
-                                add(path, "cargo", requirement.get("package", name), requirement.get("version"))
+                                add(
+                                    path,
+                                    "cargo",
+                                    requirement.get("package", name),
+                                    requirement.get("version"),
+                                )
                             else:
                                 add(path, "cargo", name, requirement)
             elif path.name == "requirements.txt":
@@ -187,7 +243,11 @@ def manifests(root=ROOT):
                 ns = {"m": "http://maven.apache.org/POM/4.0.0"}
                 tree = ET.fromstring(path.read_text())
                 properties = tree.find("m:properties", ns)
-                props = {} if properties is None else {p.tag.split("}")[-1]: p.text for p in properties}
+                props = (
+                    {}
+                    if properties is None
+                    else {p.tag.split("}")[-1]: p.text for p in properties}
+                )
                 for kind in ("dependency", "plugin"):
                     for element in tree.findall(".//m:" + kind, ns):
                         name = (
@@ -204,40 +264,74 @@ def manifests(root=ROOT):
                             path,
                             "maven",
                             name,
-                            props.get(requirement[2:-1], requirement) if requirement.startswith("${") else requirement,
+                            (
+                                props.get(requirement[2:-1], requirement)
+                                if requirement.startswith("${")
+                                else requirement
+                            ),
                         )
                 for element in tree.findall(".//m:googleJavaFormat/m:version", ns):
-                    add(path, "maven", "com.google.googlejavaformat:google-java-format", element.text)
+                    add(
+                        path,
+                        "maven",
+                        "com.google.googlejavaformat:google-java-format",
+                        element.text,
+                    )
             elif path.name == "composer.json":
                 data = json.loads(path.read_text())
                 local = {"link-foundation/links-notation"}
                 for section in ("require", "require-dev"):
                     for name, requirement in data.get(section, {}).items():
-                        if name != "php" and not name.startswith("ext-") and name not in local:
+                        if (
+                            name != "php"
+                            and not name.startswith("ext-")
+                            and name not in local
+                        ):
                             add(path, "composer", name, requirement)
             elif path.name == "go.mod":
-                for match in re.finditer(r"^\s*([\w./!~-]+)\s+(v\d+\.\d+\.\d+)\b", path.read_text(), re.M):
-                    if re.search(r"replace\s+" + re.escape(match[1]) + r"\s*=>\s*\.", path.read_text()):
+                for match in re.finditer(
+                    r"^\s*([\w./!~-]+)\s+(v\d+\.\d+\.\d+)\b", path.read_text(), re.M
+                ):
+                    if re.search(
+                        r"replace\s+" + re.escape(match[1]) + r"\s*=>\s*\.",
+                        path.read_text(),
+                    ):
                         continue
                     add(path, "go", match[1], match[2])
     for path in (root / ".github/workflows").glob("*.yml"):
-        for match in re.finditer(r"uses:\s*([\w.-]+/[\w./-]+)@([^\s#]+)", path.read_text()):
+        for match in re.finditer(
+            r"uses:\s*([\w.-]+/[\w./-]+)@([^\s#]+)", path.read_text()
+        ):
             repo, reference = match.groups()
             if reference == "stable":
                 # rust-toolchain's stable branch follows the current Rust compiler.
                 continue
-            add(path, "github", repo.split("/")[0] + "/" + repo.split("/")[1], reference)
-        for match in re.finditer(r"npm install -g ([\w.-]+)@([^\s]+)", path.read_text()):
+            add(
+                path, "github", repo.split("/")[0] + "/" + repo.split("/")[1], reference
+            )
+        for match in re.finditer(
+            r"npm install -g ([\w.-]+)@([^\s]+)", path.read_text()
+        ):
             add(path, "npm", match[1], match[2])
-        for match in re.finditer(r"docker://rhysd/actionlint:([^\s]+)", path.read_text()):
+        for match in re.finditer(
+            r"docker://rhysd/actionlint:([^\s]+)", path.read_text()
+        ):
             add(path, "github", "rhysd/actionlint", match[1])
     precommit = root / ".pre-commit-config.yaml"
     if precommit.exists():
         for match in re.finditer(
-            r"repo:\s*https://github.com/([\w.-]+/[\w.-]+)\s+rev:\s*([^\s]+)", precommit.read_text()
+            r"repo:\s*https://github.com/([\w.-]+/[\w.-]+)\s+rev:\s*([^\s]+)",
+            precommit.read_text(),
         ):
             add(precommit, "github", match[1], match[2])
     return list(dict.fromkeys(found))
+
+
+def registry_literal(dependency, release):
+    if dependency.ecosystem == "github" and dependency.name == "rhysd/actionlint":
+        # The Docker image tag omits the GitHub release tag's leading v.
+        return release.removeprefix("v")
+    return release
 
 
 def update(dependency, release):
@@ -258,19 +352,27 @@ def update(dependency, release):
         ):
             if data.get(section, {}).get(dependency.name) == original:
                 data[section][dependency.name] = replacement
-        path.write_text(json.dumps(data, indent=4 if path.name == "composer.json" else 2) + "\n")
+        path.write_text(
+            json.dumps(data, indent=4 if path.name == "composer.json" else 2) + "\n"
+        )
         return
     if dependency.ecosystem == "github":
-        if original.startswith("release/v"):
-            replacement = "v" + release
+        replacement = registry_literal(dependency, release)
         if path.name == ".pre-commit-config.yaml":
             source = re.sub(
-                r"(repo:\s*https://github.com/" + name + r"\s+rev:\s*)" + re.escape(original) + r"(?=\s|$)",
+                r"(repo:\s*https://github.com/"
+                + name
+                + r"\s+rev:\s*)"
+                + re.escape(original)
+                + r"(?=\s|$)",
                 lambda m: m[1] + replacement,
                 source,
             )
         elif dependency.name == "rhysd/actionlint":
-            source = source.replace("docker://rhysd/actionlint:" + original, "docker://rhysd/actionlint:" + replacement)
+            source = source.replace(
+                "docker://rhysd/actionlint:" + original,
+                "docker://rhysd/actionlint:" + replacement,
+            )
         else:
             source = re.sub(
                 r"(" + name + r"(?:/[\w./-]+)?@)" + re.escape(original) + r"(?=\s|$)",
@@ -279,10 +381,16 @@ def update(dependency, release):
             )
     elif dependency.ecosystem == "npm":
         source = re.sub(
-            r"(npm install -g " + name + r"@)" + re.escape(original) + r"(?=\s|$)", lambda m: m[1] + replacement, source
+            r"(npm install -g " + name + r"@)" + re.escape(original) + r"(?=\s|$)",
+            lambda m: m[1] + replacement,
+            source,
         )
     elif dependency.ecosystem in {"pypi", "pypi-py39", "go"}:
-        source = re.sub(r"(" + name + r"(?:\[[^]]+\])?)" + re.escape(original), lambda m: m[1] + replacement, source)
+        source = re.sub(
+            r"(" + name + r"(?:\[[^]]+\])?)" + re.escape(original),
+            lambda m: m[1] + replacement,
+            source,
+        )
     elif dependency.ecosystem == "cargo":
         source = re.sub(
             r"(^\s*" + name + r"\s*=.*?\")" + re.escape(original) + r"\"",
@@ -292,7 +400,11 @@ def update(dependency, release):
         )
     elif dependency.ecosystem == "nuget":
         source = re.sub(
-            r"(<PackageReference\s+Include=\"" + name + r"\"\s+Version=\")" + re.escape(original) + r"\"",
+            r"(<PackageReference\s+Include=\""
+            + name
+            + r"\"\s+Version=\")"
+            + re.escape(original)
+            + r"\"",
             lambda m: m[1] + replacement + '"',
             source,
         )
@@ -300,7 +412,9 @@ def update(dependency, release):
         group, artifact = dependency.name.split(":")
         if artifact == "google-java-format":
             source = re.sub(
-                r"(<googleJavaFormat>\s*<version>)" + re.escape(original) + "</version>",
+                r"(<googleJavaFormat>\s*<version>)"
+                + re.escape(original)
+                + "</version>",
                 lambda m: m[1] + replacement + "</version>",
                 source,
             )
@@ -322,16 +436,22 @@ def update(dependency, release):
                     source,
                 )
             else:
-                source = re.sub(pattern, lambda m: m[1] + replacement + "</version>", source)
+                source = re.sub(
+                    pattern, lambda m: m[1] + replacement + "</version>", source
+                )
     path.write_text(source)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--update", action="store_true", help="raise manifest version floors to current stable releases"
+        "--update",
+        action="store_true",
+        help="raise manifest version floors to current stable releases",
     )
-    parser.add_argument("--snapshot", type=Path, help="save registry responses for review")
+    parser.add_argument(
+        "--snapshot", type=Path, help="save registry responses for review"
+    )
     args = parser.parse_args()
     dependencies = manifests()
     keys = sorted({(d.ecosystem, d.name) for d in dependencies})
@@ -350,19 +470,29 @@ def main():
             else:
                 releases[key] = release
     if args.snapshot:
-        args.snapshot.write_text(json.dumps({f"{e}:{n}": v for (e, n), v in releases.items()}, indent=2) + "\n")
+        args.snapshot.write_text(
+            json.dumps({f"{e}:{n}": v for (e, n), v in releases.items()}, indent=2)
+            + "\n"
+        )
     failures = len(keys) - len(releases)
     for dependency in dependencies:
         release = releases.get((dependency.ecosystem, dependency.name))
         if release is None:
             continue
-        if version_key(dependency.floor) != version_key(release):
-            print(f"OUTDATED {dependency.path.relative_to(ROOT)}: {dependency.name} {dependency.declared} -> {release}")
+        if version_key(dependency.floor) != version_key(release) or (
+            dependency.ecosystem == "github"
+            and dependency.literal != registry_literal(dependency, release)
+        ):
+            print(
+                f"OUTDATED {dependency.path.relative_to(ROOT)}: {dependency.name} {dependency.declared} -> {release}"
+            )
             if args.update:
                 update(dependency, release)
             else:
                 failures += 1
-    print(f"Checked {len(dependencies)} declarations, {len(keys)} published packages/actions.")
+    print(
+        f"Checked {len(dependencies)} declarations, {len(keys)} published packages/actions."
+    )
     if args.update:
         print("Regenerate lockfiles and run tests before committing the updates.")
     return bool(failures)

@@ -82,7 +82,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Set up PHP 8.4
-        uses: shivammathur/setup-php@v2.37.2
+        uses: shivammathur/setup-php@2.37.2
         with:
           php-version: '8.4'
           extensions: mbstring
@@ -115,7 +115,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Set up PHP ${{ matrix.php-version }}
-        uses: shivammathur/setup-php@v2.37.2
+        uses: shivammathur/setup-php@2.37.2
         with:
           php-version: ${{ matrix.php-version }}
           extensions: mbstring
@@ -143,7 +143,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Set up PHP
-        uses: shivammathur/setup-php@v2.37.2
+        uses: shivammathur/setup-php@2.37.2
         with:
           php-version: '8.4'
           extensions: mbstring

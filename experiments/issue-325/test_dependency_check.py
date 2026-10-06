@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 SPEC = importlib.util.spec_from_file_location(
@@ -20,6 +21,26 @@ SPEC.loader.exec_module(CHECK)
 
 
 class DependencyCheckTests(unittest.TestCase):
+    def test_github_preserves_real_tag_spelling(self):
+        with patch.object(
+            CHECK.subprocess,
+            "run",
+            return_value=SimpleNamespace(stdout="v2\n2.37.2\n2.40.0-beta\n"),
+        ):
+            self.assertEqual(CHECK.latest("github", "shivammathur/setup-php"), "2.37.2")
+        with tempfile.TemporaryDirectory() as temporary:
+            workflow = Path(temporary) / "php.yml"
+            workflow.write_text("- uses: shivammathur/setup-php@v2.37.2\n")
+            CHECK.update(
+                CHECK.Dependency(
+                    workflow, "github", "shivammathur/setup-php", "v2.37.2", "v2.37.2"
+                ),
+                "2.37.2",
+            )
+            self.assertEqual(
+                workflow.read_text(), "- uses: shivammathur/setup-php@2.37.2\n"
+            )
+
     def test_stable_versions_ignore_prereleases_and_sort_numerically(self):
         self.assertEqual(
             CHECK.newest(["v1.9.0", "v1.10.0", "2.0.0-rc1", "stable"]), "1.10.0"
