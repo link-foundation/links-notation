@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class PacketReader | Link.Foundation.Links.Notation Library </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class PacketReader | Link.Foundation.Links.Notation Library ">
+    
+    <meta name="description" content="A buffered reader for consecutive binary packets. Reuse it across reads so bytes buffered from the following packet remain available.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader">
+
+
+
+  <h1 id="Link_Foundation_Links_Notation_Binary_PacketReader" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader" class="text-break">Class PacketReader</h1>
+  <div class="markdown level0 summary"><p>A buffered reader for consecutive binary packets. Reuse it across reads
+so bytes buffered from the following packet remain available.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">PacketReader</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <span class="xref">Link</span>.<span class="xref">Foundation</span>.<span class="xref">Links</span>.<a class="xref" href="Link.Foundation.Links.Notation.html">Notation</a>.<a class="xref" href="Link.Foundation.Links.Notation.Binary.html">Binary</a></h6>
+  <h6><strong>Assembly</strong>: Link.Foundation.Links.Notation.dll</h6>
+  <h5 id="Link_Foundation_Links_Notation_Binary_PacketReader_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class PacketReader</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_PacketReader__ctor_System_IO_Stream_System_Int32_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.PacketReader.%23ctor(System.IO.Stream%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/PacketReader.cs/#L18">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_PacketReader__ctor_" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.#ctor*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_PacketReader__ctor_System_IO_Stream_System_Int32_" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.#ctor(System.IO.Stream,System.Int32)">PacketReader(Stream, int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PacketReader(Stream stream, int bufferSize = 8192)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></td>
+        <td><span class="parametername">stream</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">bufferSize</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_PacketReader_AtEnd.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.PacketReader.AtEnd%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/PacketReader.cs/#L36">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_PacketReader_AtEnd_" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.AtEnd*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_PacketReader_AtEnd" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.AtEnd">AtEnd</h4>
+  <div class="markdown level1 summary"><p>True when every byte of the stream has been consumed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AtEnd { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_PacketReader_FromBytes_System_Byte___.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.PacketReader.FromBytes(System.Byte%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/PacketReader.cs/#L27">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_PacketReader_FromBytes_" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.FromBytes*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_PacketReader_FromBytes_System_Byte___" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.FromBytes(System.Byte[])">FromBytes(byte[])</h4>
+  <div class="markdown level1 summary"><p>Wraps a byte array, e.g. a whole encoded message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static PacketReader FromBytes(byte[] bytes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><span class="parametername">bytes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.PacketReader.html">PacketReader</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_PacketReader_PeekByte.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.PacketReader.PeekByte%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/PacketReader.cs/#L30">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_PacketReader_PeekByte_" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.PeekByte*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_PacketReader_PeekByte" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.PeekByte">PeekByte()</h4>
+  <div class="markdown level1 summary"><p>The next byte without consuming it, or -1 at the end of the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int PeekByte()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_PacketReader_ReadByte.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.PacketReader.ReadByte%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/PacketReader.cs/#L33">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_PacketReader_ReadByte_" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.ReadByte*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_PacketReader_ReadByte" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.ReadByte">ReadByte()</h4>
+  <div class="markdown level1 summary"><p>The next byte, or -1 at the end of the stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int ReadByte()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_PacketReader_ReadExactly_System_Span_System_Byte__.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.PacketReader.ReadExactly(System.Span%7BSystem.Byte%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/PacketReader.cs/#L39">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_PacketReader_ReadExactly_" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.ReadExactly*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_PacketReader_ReadExactly_System_Span_System_Byte__" data-uid="Link.Foundation.Links.Notation.Binary.PacketReader.ReadExactly(System.Span{System.Byte})">ReadExactly(Span&lt;byte&gt;)</h4>
+  <div class="markdown level1 summary"><p>Fills <code class="paramref">destination</code>; a short stream is a malformed message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ReadExactly(Span&lt;byte&gt; destination)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</td>
+        <td><span class="parametername">destination</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_PacketReader.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.PacketReader%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/PacketReader.cs/#L11" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

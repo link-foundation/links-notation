@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Struct ArityRange | Link.Foundation.Links.Notation Library </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Struct ArityRange | Link.Foundation.Links.Notation Library ">
+    
+    <meta name="description" content="How many references the links of a  hold: Min..=Max, where a null  means no upper bound.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange">
+
+
+
+  <h1 id="Link_Foundation_Links_Notation_Binary_ArityRange" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange" class="text-break">Struct ArityRange</h1>
+  <div class="markdown level0 summary"><p>How many references the links of a <a class="xref" href="Link.Foundation.Links.Notation.Binary.Section.html">Section</a> hold:
+<code>Min..=Max</code>, where a null <a class="xref" href="Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Max">Max</a> means no upper bound.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Link.Foundation.Links.Notation.Binary.ArityRange.html">ArityRange</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <span class="xref">Link</span>.<span class="xref">Foundation</span>.<span class="xref">Links</span>.<a class="xref" href="Link.Foundation.Links.Notation.html">Notation</a>.<a class="xref" href="Link.Foundation.Links.Notation.Binary.html">Binary</a></h6>
+  <h6><strong>Assembly</strong>: Link.Foundation.Links.Notation.dll</h6>
+  <h5 id="Link_Foundation_Links_Notation_Binary_ArityRange_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly record struct ArityRange : IEquatable&lt;ArityRange&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange__ctor_System_UInt64_System_Nullable_System_UInt64__.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.%23ctor(System.UInt64%2CSystem.Nullable%7BSystem.UInt64%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L16">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange__ctor_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.#ctor*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange__ctor_System_UInt64_System_Nullable_System_UInt64__" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.#ctor(System.UInt64,System.Nullable{System.UInt64})">ArityRange(ulong, ulong?)</h4>
+  <div class="markdown level1 summary"><p>How many references the links of a <a class="xref" href="Link.Foundation.Links.Notation.Binary.Section.html">Section</a> hold:
+<code>Min..=Max</code>, where a null <a class="xref" href="Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Max">Max</a> means no upper bound.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ArityRange(ulong Min, ulong? Max)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><span class="parametername">Min</span></td>
+        <td><p>Fewest references in a link, at least 1.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a>?</td>
+        <td><span class="parametername">Max</span></td>
+        <td><p>Most references in a link, null for no limit.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_MaxMin.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.MaxMin%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L19">View Source</a>
+  </span>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_MaxMin" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.MaxMin">MaxMin</h4>
+  <div class="markdown level1 summary"><p>The largest minimum arity a section shape can hold.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const ulong MaxMin = 1152921504606846975</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_Doublets.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.Doublets%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L22">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_Doublets_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Doublets*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_Doublets" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Doublets">Doublets</h4>
+  <div class="markdown level1 summary"><p>Links of exactly two references.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ArityRange Doublets { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.ArityRange.html">ArityRange</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_IsFixed.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.IsFixed%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L37">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_IsFixed_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.IsFixed*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_IsFixed" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.IsFixed">IsFixed</h4>
+  <div class="markdown level1 summary"><p>True when every link has the same number of references, so links need no length prefix.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsFixed { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_Max.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.Max%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L16">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_Max_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Max*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_Max" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Max">Max</h4>
+  <div class="markdown level1 summary"><p>Most references in a link, null for no limit.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ulong? Max { get; init; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a>?</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_Min.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.Min%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L16">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_Min_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Min*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_Min" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Min">Min</h4>
+  <div class="markdown level1 summary"><p>Fewest references in a link, at least 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ulong Min { get; init; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_AtLeast_System_UInt64_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.AtLeast(System.UInt64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L28">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_AtLeast_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.AtLeast*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_AtLeast_System_UInt64_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.AtLeast(System.UInt64)">AtLeast(ulong)</h4>
+  <div class="markdown level1 summary"><p>Links of at least <code class="paramref">min</code> references.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ArityRange AtLeast(ulong min)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><span class="parametername">min</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.ArityRange.html">ArityRange</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_Between_System_UInt64_System_UInt64_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.Between(System.UInt64%2CSystem.UInt64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L31">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_Between_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Between*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_Between_System_UInt64_System_UInt64_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Between(System.UInt64,System.UInt64)">Between(ulong, ulong)</h4>
+  <div class="markdown level1 summary"><p>Links of <code>min..=max</code> references.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ArityRange Between(ulong min, ulong max)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><span class="parametername">min</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><span class="parametername">max</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.ArityRange.html">ArityRange</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_Contains_System_UInt64_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.Contains(System.UInt64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L34">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_Contains_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Contains*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_Contains_System_UInt64_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Contains(System.UInt64)">Contains(ulong)</h4>
+  <div class="markdown level1 summary"><p>True when a link of <code class="paramref">length</code> references fits the range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Contains(ulong length)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><span class="parametername">length</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_Exactly_System_UInt64_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.Exactly(System.UInt64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L25">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_Exactly_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Exactly*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_Exactly_System_UInt64_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Exactly(System.UInt64)">Exactly(ulong)</h4>
+  <div class="markdown level1 summary"><p>Links of exactly <code class="paramref">arity</code> references.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ArityRange Exactly(ulong arity)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><span class="parametername">arity</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.ArityRange.html">ArityRange</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_Parse_System_String_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.Parse(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L97">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_Parse_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Parse*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_Parse_System_String_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.Parse(System.String)">Parse(string)</h4>
+  <div class="markdown level1 summary"><p>Parses <code>n</code>, <code>min..max</code> (inclusive) or <code>min..</code> (no maximum).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ArityRange Parse(string text)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.ArityRange.html">ArityRange</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.formatexception">FormatException</a></td>
+        <td><p>The text is not a usable arity range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_ToString.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.ToString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L88">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_ToString_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.ToString*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_ToString" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Formats the range as <code>n</code>, <code>min..max</code> or <code>min..</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_TryParse_System_String_Link_Foundation_Links_Notation_Binary_ArityRange__.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(System.String%2CLink.Foundation.Links.Notation.Binary.ArityRange%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L101">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_TryParse_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.TryParse*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_TryParse_System_String_Link_Foundation_Links_Notation_Binary_ArityRange__" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(System.String,Link.Foundation.Links.Notation.Binary.ArityRange@)">TryParse(string?, out ArityRange)</h4>
+  <div class="markdown level1 summary"><p>Parses <code>n</code>, <code>min..max</code> (inclusive) or <code>min..</code> (no maximum).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryParse(string? text, out ArityRange range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.ArityRange.html">ArityRange</a></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange_TryParse_System_String_Link_Foundation_Links_Notation_Binary_ArityRange__System_String__.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(System.String%2CLink.Foundation.Links.Notation.Binary.ArityRange%40%2CSystem.String%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L105">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_ArityRange_TryParse_" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.TryParse*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_ArityRange_TryParse_System_String_Link_Foundation_Links_Notation_Binary_ArityRange__System_String__" data-uid="Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(System.String,Link.Foundation.Links.Notation.Binary.ArityRange@,System.String@)">TryParse(string?, out ArityRange, out string?)</h4>
+  <div class="markdown level1 summary"><p>Parses an arity range, explaining in <code class="paramref">error</code> why it failed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryParse(string? text, out ArityRange range, out string? error)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.ArityRange.html">ArityRange</a></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">error</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable&lt;T&gt;</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_ArityRange.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.ArityRange%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs/#L16" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

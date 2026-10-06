@@ -7,6 +7,1384 @@ references:
   commentId: N:Link.Foundation.Links.Notation
   fullName: Link.Foundation.Links.Notation
   nameWithType: Link.Foundation.Links.Notation
+- uid: Link.Foundation.Links.Notation.Binary
+  name: Link.Foundation.Links.Notation.Binary
+  href: api/Link.Foundation.Links.Notation.Binary.html
+  commentId: N:Link.Foundation.Links.Notation.Binary
+  fullName: Link.Foundation.Links.Notation.Binary
+  nameWithType: Link.Foundation.Links.Notation.Binary
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange
+  name: ArityRange
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.ArityRange
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange
+  nameWithType: ArityRange
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.#ctor(System.UInt64,System.Nullable{System.UInt64})
+  name: ArityRange(ulong, ulong?)
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange__ctor_System_UInt64_System_Nullable_System_UInt64__
+  commentId: M:Link.Foundation.Links.Notation.Binary.ArityRange.#ctor(System.UInt64,System.Nullable{System.UInt64})
+  name.vb: New(ULong, ULong?)
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.ArityRange(ulong, ulong?)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.ArityRange.New(ULong, ULong?)
+  nameWithType: ArityRange.ArityRange(ulong, ulong?)
+  nameWithType.vb: ArityRange.New(ULong, ULong?)
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.#ctor*
+  name: ArityRange
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange__ctor_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.ArityRange
+  fullName.vb: Link.Foundation.Links.Notation.Binary.ArityRange.New
+  nameWithType: ArityRange.ArityRange
+  nameWithType.vb: ArityRange.New
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.AtLeast(System.UInt64)
+  name: AtLeast(ulong)
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_AtLeast_System_UInt64_
+  commentId: M:Link.Foundation.Links.Notation.Binary.ArityRange.AtLeast(System.UInt64)
+  name.vb: AtLeast(ULong)
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.AtLeast(ulong)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.ArityRange.AtLeast(ULong)
+  nameWithType: ArityRange.AtLeast(ulong)
+  nameWithType.vb: ArityRange.AtLeast(ULong)
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.AtLeast*
+  name: AtLeast
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_AtLeast_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.AtLeast
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.AtLeast
+  nameWithType: ArityRange.AtLeast
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Between(System.UInt64,System.UInt64)
+  name: Between(ulong, ulong)
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Between_System_UInt64_System_UInt64_
+  commentId: M:Link.Foundation.Links.Notation.Binary.ArityRange.Between(System.UInt64,System.UInt64)
+  name.vb: Between(ULong, ULong)
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Between(ulong, ulong)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.ArityRange.Between(ULong, ULong)
+  nameWithType: ArityRange.Between(ulong, ulong)
+  nameWithType.vb: ArityRange.Between(ULong, ULong)
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Between*
+  name: Between
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Between_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.Between
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Between
+  nameWithType: ArityRange.Between
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Contains(System.UInt64)
+  name: Contains(ulong)
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Contains_System_UInt64_
+  commentId: M:Link.Foundation.Links.Notation.Binary.ArityRange.Contains(System.UInt64)
+  name.vb: Contains(ULong)
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Contains(ulong)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.ArityRange.Contains(ULong)
+  nameWithType: ArityRange.Contains(ulong)
+  nameWithType.vb: ArityRange.Contains(ULong)
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Contains*
+  name: Contains
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Contains_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.Contains
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Contains
+  nameWithType: ArityRange.Contains
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Doublets
+  name: Doublets
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Doublets
+  commentId: P:Link.Foundation.Links.Notation.Binary.ArityRange.Doublets
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Doublets
+  nameWithType: ArityRange.Doublets
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Doublets*
+  name: Doublets
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Doublets_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.Doublets
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Doublets
+  nameWithType: ArityRange.Doublets
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Exactly(System.UInt64)
+  name: Exactly(ulong)
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Exactly_System_UInt64_
+  commentId: M:Link.Foundation.Links.Notation.Binary.ArityRange.Exactly(System.UInt64)
+  name.vb: Exactly(ULong)
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Exactly(ulong)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.ArityRange.Exactly(ULong)
+  nameWithType: ArityRange.Exactly(ulong)
+  nameWithType.vb: ArityRange.Exactly(ULong)
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Exactly*
+  name: Exactly
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Exactly_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.Exactly
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Exactly
+  nameWithType: ArityRange.Exactly
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.IsFixed
+  name: IsFixed
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_IsFixed
+  commentId: P:Link.Foundation.Links.Notation.Binary.ArityRange.IsFixed
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.IsFixed
+  nameWithType: ArityRange.IsFixed
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.IsFixed*
+  name: IsFixed
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_IsFixed_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.IsFixed
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.IsFixed
+  nameWithType: ArityRange.IsFixed
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Max
+  name: Max
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Max
+  commentId: P:Link.Foundation.Links.Notation.Binary.ArityRange.Max
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Max
+  nameWithType: ArityRange.Max
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Max*
+  name: Max
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Max_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.Max
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Max
+  nameWithType: ArityRange.Max
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.MaxMin
+  name: MaxMin
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_MaxMin
+  commentId: F:Link.Foundation.Links.Notation.Binary.ArityRange.MaxMin
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.MaxMin
+  nameWithType: ArityRange.MaxMin
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Min
+  name: Min
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Min
+  commentId: P:Link.Foundation.Links.Notation.Binary.ArityRange.Min
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Min
+  nameWithType: ArityRange.Min
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Min*
+  name: Min
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Min_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.Min
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Min
+  nameWithType: ArityRange.Min
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Parse(System.String)
+  name: Parse(string)
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Parse_System_String_
+  commentId: M:Link.Foundation.Links.Notation.Binary.ArityRange.Parse(System.String)
+  name.vb: Parse(String)
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Parse(string)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.ArityRange.Parse(String)
+  nameWithType: ArityRange.Parse(string)
+  nameWithType.vb: ArityRange.Parse(String)
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.Parse*
+  name: Parse
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_Parse_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.Parse
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.Parse
+  nameWithType: ArityRange.Parse
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.ToString
+  name: ToString()
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_ToString
+  commentId: M:Link.Foundation.Links.Notation.Binary.ArityRange.ToString
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.ToString()
+  nameWithType: ArityRange.ToString()
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.ToString*
+  name: ToString
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_ToString_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.ToString
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.ToString
+  nameWithType: ArityRange.ToString
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(System.String,Link.Foundation.Links.Notation.Binary.ArityRange@)
+  name: TryParse(string?, out ArityRange)
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_TryParse_System_String_Link_Foundation_Links_Notation_Binary_ArityRange__
+  commentId: M:Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(System.String,Link.Foundation.Links.Notation.Binary.ArityRange@)
+  name.vb: TryParse(String, ArityRange)
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(string?, out Link.Foundation.Links.Notation.Binary.ArityRange)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(String, Link.Foundation.Links.Notation.Binary.ArityRange)
+  nameWithType: ArityRange.TryParse(string?, out ArityRange)
+  nameWithType.vb: ArityRange.TryParse(String, ArityRange)
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(System.String,Link.Foundation.Links.Notation.Binary.ArityRange@,System.String@)
+  name: TryParse(string?, out ArityRange, out string?)
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_TryParse_System_String_Link_Foundation_Links_Notation_Binary_ArityRange__System_String__
+  commentId: M:Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(System.String,Link.Foundation.Links.Notation.Binary.ArityRange@,System.String@)
+  name.vb: TryParse(String, ArityRange, String)
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(string?, out Link.Foundation.Links.Notation.Binary.ArityRange, out string?)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.ArityRange.TryParse(String, Link.Foundation.Links.Notation.Binary.ArityRange, String)
+  nameWithType: ArityRange.TryParse(string?, out ArityRange, out string?)
+  nameWithType.vb: ArityRange.TryParse(String, ArityRange, String)
+- uid: Link.Foundation.Links.Notation.Binary.ArityRange.TryParse*
+  name: TryParse
+  href: api/Link.Foundation.Links.Notation.Binary.ArityRange.html#Link_Foundation_Links_Notation_Binary_ArityRange_TryParse_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.ArityRange.TryParse
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.ArityRange.TryParse
+  nameWithType: ArityRange.TryParse
+- uid: Link.Foundation.Links.Notation.Binary.BinaryErrorKind
+  name: BinaryErrorKind
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryErrorKind.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.BinaryErrorKind
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryErrorKind
+  nameWithType: BinaryErrorKind
+- uid: Link.Foundation.Links.Notation.Binary.BinaryErrorKind.InvalidLino
+  name: InvalidLino
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryErrorKind.html#Link_Foundation_Links_Notation_Binary_BinaryErrorKind_InvalidLino
+  commentId: F:Link.Foundation.Links.Notation.Binary.BinaryErrorKind.InvalidLino
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryErrorKind.InvalidLino
+  nameWithType: BinaryErrorKind.InvalidLino
+- uid: Link.Foundation.Links.Notation.Binary.BinaryErrorKind.Io
+  name: Io
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryErrorKind.html#Link_Foundation_Links_Notation_Binary_BinaryErrorKind_Io
+  commentId: F:Link.Foundation.Links.Notation.Binary.BinaryErrorKind.Io
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryErrorKind.Io
+  nameWithType: BinaryErrorKind.Io
+- uid: Link.Foundation.Links.Notation.Binary.BinaryErrorKind.LimitExceeded
+  name: LimitExceeded
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryErrorKind.html#Link_Foundation_Links_Notation_Binary_BinaryErrorKind_LimitExceeded
+  commentId: F:Link.Foundation.Links.Notation.Binary.BinaryErrorKind.LimitExceeded
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryErrorKind.LimitExceeded
+  nameWithType: BinaryErrorKind.LimitExceeded
+- uid: Link.Foundation.Links.Notation.Binary.BinaryErrorKind.Malformed
+  name: Malformed
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryErrorKind.html#Link_Foundation_Links_Notation_Binary_BinaryErrorKind_Malformed
+  commentId: F:Link.Foundation.Links.Notation.Binary.BinaryErrorKind.Malformed
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryErrorKind.Malformed
+  nameWithType: BinaryErrorKind.Malformed
+- uid: Link.Foundation.Links.Notation.Binary.BinaryErrorKind.Unencodable
+  name: Unencodable
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryErrorKind.html#Link_Foundation_Links_Notation_Binary_BinaryErrorKind_Unencodable
+  commentId: F:Link.Foundation.Links.Notation.Binary.BinaryErrorKind.Unencodable
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryErrorKind.Unencodable
+  nameWithType: BinaryErrorKind.Unencodable
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec
+  name: BinaryLinoCodec
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec
+  nameWithType: BinaryLinoCodec
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.#ctor
+  name: BinaryLinoCodec()
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html#Link_Foundation_Links_Notation_Binary_BinaryLinoCodec__ctor
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.#ctor
+  name.vb: New()
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.BinaryLinoCodec()
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.New()
+  nameWithType: BinaryLinoCodec.BinaryLinoCodec()
+  nameWithType.vb: BinaryLinoCodec.New()
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.#ctor(Link.Foundation.Links.Notation.Binary.BinaryLinoOptions)
+  name: BinaryLinoCodec(BinaryLinoOptions)
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html#Link_Foundation_Links_Notation_Binary_BinaryLinoCodec__ctor_Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.#ctor(Link.Foundation.Links.Notation.Binary.BinaryLinoOptions)
+  name.vb: New(BinaryLinoOptions)
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.BinaryLinoCodec(Link.Foundation.Links.Notation.Binary.BinaryLinoOptions)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.New(Link.Foundation.Links.Notation.Binary.BinaryLinoOptions)
+  nameWithType: BinaryLinoCodec.BinaryLinoCodec(BinaryLinoOptions)
+  nameWithType.vb: BinaryLinoCodec.New(BinaryLinoOptions)
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.#ctor*
+  name: BinaryLinoCodec
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html#Link_Foundation_Links_Notation_Binary_BinaryLinoCodec__ctor_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.BinaryLinoCodec
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.New
+  nameWithType: BinaryLinoCodec.BinaryLinoCodec
+  nameWithType.vb: BinaryLinoCodec.New
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Decode(System.Byte[])
+  name: Decode(byte[])
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html#Link_Foundation_Links_Notation_Binary_BinaryLinoCodec_Decode_System_Byte___
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Decode(System.Byte[])
+  name.vb: Decode(Byte())
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Decode(byte[])
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Decode(Byte())
+  nameWithType: BinaryLinoCodec.Decode(byte[])
+  nameWithType.vb: BinaryLinoCodec.Decode(Byte())
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Decode*
+  name: Decode
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html#Link_Foundation_Links_Notation_Binary_BinaryLinoCodec_Decode_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Decode
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Decode
+  nameWithType: BinaryLinoCodec.Decode
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Encode(System.Collections.Generic.IReadOnlyList{Link.Foundation.Links.Notation.Link{System.String}})
+  name: Encode(IReadOnlyList<Link<string>>)
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html#Link_Foundation_Links_Notation_Binary_BinaryLinoCodec_Encode_System_Collections_Generic_IReadOnlyList_Link_Foundation_Links_Notation_Link_System_String___
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Encode(System.Collections.Generic.IReadOnlyList{Link.Foundation.Links.Notation.Link{System.String}})
+  name.vb: Encode(IReadOnlyList(Of Link(Of String)))
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Encode(System.Collections.Generic.IReadOnlyList<Link.Foundation.Links.Notation.Link<string>>)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Encode(System.Collections.Generic.IReadOnlyList(Of Link.Foundation.Links.Notation.Link(Of String)))
+  nameWithType: BinaryLinoCodec.Encode(IReadOnlyList<Link<string>>)
+  nameWithType.vb: BinaryLinoCodec.Encode(IReadOnlyList(Of Link(Of String)))
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Encode*
+  name: Encode
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html#Link_Foundation_Links_Notation_Binary_BinaryLinoCodec_Encode_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Encode
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Encode
+  nameWithType: BinaryLinoCodec.Encode
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Limits
+  name: Limits
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html#Link_Foundation_Links_Notation_Binary_BinaryLinoCodec_Limits
+  commentId: P:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Limits
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Limits
+  nameWithType: BinaryLinoCodec.Limits
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Limits*
+  name: Limits
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html#Link_Foundation_Links_Notation_Binary_BinaryLinoCodec_Limits_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Limits
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Limits
+  nameWithType: BinaryLinoCodec.Limits
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Options
+  name: Options
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html#Link_Foundation_Links_Notation_Binary_BinaryLinoCodec_Options
+  commentId: P:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Options
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Options
+  nameWithType: BinaryLinoCodec.Options
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Options*
+  name: Options
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html#Link_Foundation_Links_Notation_Binary_BinaryLinoCodec_Options_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Options
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.Options
+  nameWithType: BinaryLinoCodec.Options
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions
+  name: BinaryLinoOptions
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions
+  nameWithType: BinaryLinoOptions
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.Arity
+  name: Arity
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_Arity
+  commentId: P:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.Arity
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.Arity
+  nameWithType: BinaryLinoOptions.Arity
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.Arity*
+  name: Arity
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_Arity_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.Arity
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.Arity
+  nameWithType: BinaryLinoOptions.Arity
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ExternalReferences
+  name: ExternalReferences
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_ExternalReferences
+  commentId: P:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ExternalReferences
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ExternalReferences
+  nameWithType: BinaryLinoOptions.ExternalReferences
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ExternalReferences*
+  name: ExternalReferences
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_ExternalReferences_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ExternalReferences
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ExternalReferences
+  nameWithType: BinaryLinoOptions.ExternalReferences
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.OfPacket(Link.Foundation.Links.Notation.Binary.LinksPacket)
+  name: OfPacket(LinksPacket)
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_OfPacket_Link_Foundation_Links_Notation_Binary_LinksPacket_
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.OfPacket(Link.Foundation.Links.Notation.Binary.LinksPacket)
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.OfPacket(Link.Foundation.Links.Notation.Binary.LinksPacket)
+  nameWithType: BinaryLinoOptions.OfPacket(LinksPacket)
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.OfPacket*
+  name: OfPacket
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_OfPacket_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.OfPacket
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.OfPacket
+  nameWithType: BinaryLinoOptions.OfPacket
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.PackedWidths
+  name: PackedWidths
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_PackedWidths
+  commentId: P:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.PackedWidths
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.PackedWidths
+  nameWithType: BinaryLinoOptions.PackedWidths
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.PackedWidths*
+  name: PackedWidths
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_PackedWidths_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.PackedWidths
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.PackedWidths
+  nameWithType: BinaryLinoOptions.PackedWidths
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ToString
+  name: ToString()
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_ToString
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ToString
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ToString()
+  nameWithType: BinaryLinoOptions.ToString()
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ToString*
+  name: ToString
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_ToString_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ToString
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.ToString
+  nameWithType: BinaryLinoOptions.ToString
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithArity(Link.Foundation.Links.Notation.Binary.ArityRange)
+  name: WithArity(ArityRange)
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_WithArity_Link_Foundation_Links_Notation_Binary_ArityRange_
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithArity(Link.Foundation.Links.Notation.Binary.ArityRange)
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithArity(Link.Foundation.Links.Notation.Binary.ArityRange)
+  nameWithType: BinaryLinoOptions.WithArity(ArityRange)
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithArity*
+  name: WithArity
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_WithArity_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithArity
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithArity
+  nameWithType: BinaryLinoOptions.WithArity
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithExternalReferences(System.Boolean)
+  name: WithExternalReferences(bool)
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_WithExternalReferences_System_Boolean_
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithExternalReferences(System.Boolean)
+  name.vb: WithExternalReferences(Boolean)
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithExternalReferences(bool)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithExternalReferences(Boolean)
+  nameWithType: BinaryLinoOptions.WithExternalReferences(bool)
+  nameWithType.vb: BinaryLinoOptions.WithExternalReferences(Boolean)
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithExternalReferences*
+  name: WithExternalReferences
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_WithExternalReferences_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithExternalReferences
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithExternalReferences
+  nameWithType: BinaryLinoOptions.WithExternalReferences
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithPackedWidths(System.Boolean)
+  name: WithPackedWidths(bool)
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_WithPackedWidths_System_Boolean_
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithPackedWidths(System.Boolean)
+  name.vb: WithPackedWidths(Boolean)
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithPackedWidths(bool)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithPackedWidths(Boolean)
+  nameWithType: BinaryLinoOptions.WithPackedWidths(bool)
+  nameWithType.vb: BinaryLinoOptions.WithPackedWidths(Boolean)
+- uid: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithPackedWidths*
+  name: WithPackedWidths
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html#Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_WithPackedWidths_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithPackedWidths
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.WithPackedWidths
+  nameWithType: BinaryLinoOptions.WithPackedWidths
+- uid: Link.Foundation.Links.Notation.Binary.BinaryNotationException
+  name: BinaryNotationException
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.BinaryNotationException
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryNotationException
+  nameWithType: BinaryNotationException
+- uid: Link.Foundation.Links.Notation.Binary.BinaryNotationException.#ctor
+  name: BinaryNotationException()
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.html#Link_Foundation_Links_Notation_Binary_BinaryNotationException__ctor
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryNotationException.#ctor
+  name.vb: New()
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryNotationException.BinaryNotationException()
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryNotationException.New()
+  nameWithType: BinaryNotationException.BinaryNotationException()
+  nameWithType.vb: BinaryNotationException.New()
+- uid: Link.Foundation.Links.Notation.Binary.BinaryNotationException.#ctor(Link.Foundation.Links.Notation.Binary.BinaryErrorKind,System.String,System.Exception)
+  name: BinaryNotationException(BinaryErrorKind, string, Exception?)
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.html#Link_Foundation_Links_Notation_Binary_BinaryNotationException__ctor_Link_Foundation_Links_Notation_Binary_BinaryErrorKind_System_String_System_Exception_
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryNotationException.#ctor(Link.Foundation.Links.Notation.Binary.BinaryErrorKind,System.String,System.Exception)
+  name.vb: New(BinaryErrorKind, String, Exception)
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryNotationException.BinaryNotationException(Link.Foundation.Links.Notation.Binary.BinaryErrorKind, string, System.Exception?)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryNotationException.New(Link.Foundation.Links.Notation.Binary.BinaryErrorKind, String, System.Exception)
+  nameWithType: BinaryNotationException.BinaryNotationException(BinaryErrorKind, string, Exception?)
+  nameWithType.vb: BinaryNotationException.New(BinaryErrorKind, String, Exception)
+- uid: Link.Foundation.Links.Notation.Binary.BinaryNotationException.#ctor(System.String)
+  name: BinaryNotationException(string)
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.html#Link_Foundation_Links_Notation_Binary_BinaryNotationException__ctor_System_String_
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryNotationException.#ctor(System.String)
+  name.vb: New(String)
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryNotationException.BinaryNotationException(string)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryNotationException.New(String)
+  nameWithType: BinaryNotationException.BinaryNotationException(string)
+  nameWithType.vb: BinaryNotationException.New(String)
+- uid: Link.Foundation.Links.Notation.Binary.BinaryNotationException.#ctor(System.String,System.Exception)
+  name: BinaryNotationException(string, Exception)
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.html#Link_Foundation_Links_Notation_Binary_BinaryNotationException__ctor_System_String_System_Exception_
+  commentId: M:Link.Foundation.Links.Notation.Binary.BinaryNotationException.#ctor(System.String,System.Exception)
+  name.vb: New(String, Exception)
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryNotationException.BinaryNotationException(string, System.Exception)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryNotationException.New(String, System.Exception)
+  nameWithType: BinaryNotationException.BinaryNotationException(string, Exception)
+  nameWithType.vb: BinaryNotationException.New(String, Exception)
+- uid: Link.Foundation.Links.Notation.Binary.BinaryNotationException.#ctor*
+  name: BinaryNotationException
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.html#Link_Foundation_Links_Notation_Binary_BinaryNotationException__ctor_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryNotationException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryNotationException.BinaryNotationException
+  fullName.vb: Link.Foundation.Links.Notation.Binary.BinaryNotationException.New
+  nameWithType: BinaryNotationException.BinaryNotationException
+  nameWithType.vb: BinaryNotationException.New
+- uid: Link.Foundation.Links.Notation.Binary.BinaryNotationException.Detail
+  name: Detail
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.html#Link_Foundation_Links_Notation_Binary_BinaryNotationException_Detail
+  commentId: P:Link.Foundation.Links.Notation.Binary.BinaryNotationException.Detail
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryNotationException.Detail
+  nameWithType: BinaryNotationException.Detail
+- uid: Link.Foundation.Links.Notation.Binary.BinaryNotationException.Detail*
+  name: Detail
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.html#Link_Foundation_Links_Notation_Binary_BinaryNotationException_Detail_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryNotationException.Detail
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryNotationException.Detail
+  nameWithType: BinaryNotationException.Detail
+- uid: Link.Foundation.Links.Notation.Binary.BinaryNotationException.Kind
+  name: Kind
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.html#Link_Foundation_Links_Notation_Binary_BinaryNotationException_Kind
+  commentId: P:Link.Foundation.Links.Notation.Binary.BinaryNotationException.Kind
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryNotationException.Kind
+  nameWithType: BinaryNotationException.Kind
+- uid: Link.Foundation.Links.Notation.Binary.BinaryNotationException.Kind*
+  name: Kind
+  href: api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.html#Link_Foundation_Links_Notation_Binary_BinaryNotationException_Kind_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.BinaryNotationException.Kind
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.BinaryNotationException.Kind
+  nameWithType: BinaryNotationException.Kind
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits
+  name: DecodeLimits
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.DecodeLimits
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits
+  nameWithType: DecodeLimits
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.Default
+  name: Default
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_Default
+  commentId: P:Link.Foundation.Links.Notation.Binary.DecodeLimits.Default
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.Default
+  nameWithType: DecodeLimits.Default
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.Default*
+  name: Default
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_Default_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.DecodeLimits.Default
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.Default
+  nameWithType: DecodeLimits.Default
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxDepth
+  name: MaxDepth
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_MaxDepth
+  commentId: P:Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxDepth
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxDepth
+  nameWithType: DecodeLimits.MaxDepth
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxDepth*
+  name: MaxDepth
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_MaxDepth_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxDepth
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxDepth
+  nameWithType: DecodeLimits.MaxDepth
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxLinks
+  name: MaxLinks
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_MaxLinks
+  commentId: P:Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxLinks
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxLinks
+  nameWithType: DecodeLimits.MaxLinks
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxLinks*
+  name: MaxLinks
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_MaxLinks_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxLinks
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxLinks
+  nameWithType: DecodeLimits.MaxLinks
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxNodes
+  name: MaxNodes
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_MaxNodes
+  commentId: P:Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxNodes
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxNodes
+  nameWithType: DecodeLimits.MaxNodes
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxNodes*
+  name: MaxNodes
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_MaxNodes_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxNodes
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxNodes
+  nameWithType: DecodeLimits.MaxNodes
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxReferences
+  name: MaxReferences
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_MaxReferences
+  commentId: P:Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxReferences
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxReferences
+  nameWithType: DecodeLimits.MaxReferences
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxReferences*
+  name: MaxReferences
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_MaxReferences_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxReferences
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxReferences
+  nameWithType: DecodeLimits.MaxReferences
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxStringBytes
+  name: MaxStringBytes
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_MaxStringBytes
+  commentId: P:Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxStringBytes
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxStringBytes
+  nameWithType: DecodeLimits.MaxStringBytes
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxStringBytes*
+  name: MaxStringBytes
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_MaxStringBytes_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxStringBytes
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.MaxStringBytes
+  nameWithType: DecodeLimits.MaxStringBytes
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.Unlimited
+  name: Unlimited
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_Unlimited
+  commentId: P:Link.Foundation.Links.Notation.Binary.DecodeLimits.Unlimited
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.Unlimited
+  nameWithType: DecodeLimits.Unlimited
+- uid: Link.Foundation.Links.Notation.Binary.DecodeLimits.Unlimited*
+  name: Unlimited
+  href: api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html#Link_Foundation_Links_Notation_Binary_DecodeLimits_Unlimited_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.DecodeLimits.Unlimited
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.DecodeLimits.Unlimited
+  nameWithType: DecodeLimits.Unlimited
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket
+  name: LinksPacket
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.LinksPacket
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket
+  nameWithType: LinksPacket
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.#ctor(System.Boolean)
+  name: LinksPacket(bool)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket__ctor_System_Boolean_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.#ctor(System.Boolean)
+  name.vb: New(Boolean)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.LinksPacket(bool)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.New(Boolean)
+  nameWithType: LinksPacket.LinksPacket(bool)
+  nameWithType.vb: LinksPacket.New(Boolean)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.#ctor*
+  name: LinksPacket
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket__ctor_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.LinksPacket
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.New
+  nameWithType: LinksPacket.LinksPacket
+  nameWithType.vb: LinksPacket.New
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.AddressTier(System.UInt64,System.Boolean)
+  name: AddressTier(ulong, bool)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_AddressTier_System_UInt64_System_Boolean_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.AddressTier(System.UInt64,System.Boolean)
+  name.vb: AddressTier(ULong, Boolean)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.AddressTier(ulong, bool)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.AddressTier(ULong, Boolean)
+  nameWithType: LinksPacket.AddressTier(ulong, bool)
+  nameWithType.vb: LinksPacket.AddressTier(ULong, Boolean)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.AddressTier*
+  name: AddressTier
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_AddressTier_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.AddressTier
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.AddressTier
+  nameWithType: LinksPacket.AddressTier
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.BinaryVersion1
+  name: BinaryVersion1
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_BinaryVersion1
+  commentId: F:Link.Foundation.Links.Notation.Binary.LinksPacket.BinaryVersion1
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.BinaryVersion1
+  nameWithType: LinksPacket.BinaryVersion1
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.EncodeExternal(System.UInt64,System.Byte)
+  name: EncodeExternal(ulong, byte)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_EncodeExternal_System_UInt64_System_Byte_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.EncodeExternal(System.UInt64,System.Byte)
+  name.vb: EncodeExternal(ULong, Byte)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.EncodeExternal(ulong, byte)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.EncodeExternal(ULong, Byte)
+  nameWithType: LinksPacket.EncodeExternal(ulong, byte)
+  nameWithType.vb: LinksPacket.EncodeExternal(ULong, Byte)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.EncodeExternal*
+  name: EncodeExternal
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_EncodeExternal_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.EncodeExternal
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.EncodeExternal
+  nameWithType: LinksPacket.EncodeExternal
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalCapacity(System.Byte)
+  name: ExternalCapacity(byte)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ExternalCapacity_System_Byte_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalCapacity(System.Byte)
+  name.vb: ExternalCapacity(Byte)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalCapacity(byte)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalCapacity(Byte)
+  nameWithType: LinksPacket.ExternalCapacity(byte)
+  nameWithType.vb: LinksPacket.ExternalCapacity(Byte)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalCapacity*
+  name: ExternalCapacity
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ExternalCapacity_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalCapacity
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalCapacity
+  nameWithType: LinksPacket.ExternalCapacity
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalReferences
+  name: ExternalReferences
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ExternalReferences
+  commentId: P:Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalReferences
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalReferences
+  nameWithType: LinksPacket.ExternalReferences
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalReferences*
+  name: ExternalReferences
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ExternalReferences_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalReferences
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalReferences
+  nameWithType: LinksPacket.ExternalReferences
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.FirstLinkAddress
+  name: FirstLinkAddress
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_FirstLinkAddress
+  commentId: F:Link.Foundation.Links.Notation.Binary.LinksPacket.FirstLinkAddress
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.FirstLinkAddress
+  nameWithType: LinksPacket.FirstLinkAddress
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.FromBytes(System.Byte[],Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  name: FromBytes(byte[], DecodeLimits?)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_FromBytes_System_Byte___Link_Foundation_Links_Notation_Binary_DecodeLimits_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.FromBytes(System.Byte[],Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  name.vb: FromBytes(Byte(), DecodeLimits)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.FromBytes(byte[], Link.Foundation.Links.Notation.Binary.DecodeLimits?)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.FromBytes(Byte(), Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  nameWithType: LinksPacket.FromBytes(byte[], DecodeLimits?)
+  nameWithType.vb: LinksPacket.FromBytes(Byte(), DecodeLimits)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.FromBytes*
+  name: FromBytes
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_FromBytes_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.FromBytes
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.FromBytes
+  nameWithType: LinksPacket.FromBytes
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.Identified
+  name: Identified
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_Identified
+  commentId: F:Link.Foundation.Links.Notation.Binary.LinksPacket.Identified
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.Identified
+  nameWithType: LinksPacket.Identified
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.InternalCapacity(System.Byte,System.Boolean)
+  name: InternalCapacity(byte, bool)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_InternalCapacity_System_Byte_System_Boolean_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.InternalCapacity(System.Byte,System.Boolean)
+  name.vb: InternalCapacity(Byte, Boolean)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.InternalCapacity(byte, bool)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.InternalCapacity(Byte, Boolean)
+  nameWithType: LinksPacket.InternalCapacity(byte, bool)
+  nameWithType.vb: LinksPacket.InternalCapacity(Byte, Boolean)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.InternalCapacity*
+  name: InternalCapacity
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_InternalCapacity_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.InternalCapacity
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.InternalCapacity
+  nameWithType: LinksPacket.InternalCapacity
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.LinkCount
+  name: LinkCount
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_LinkCount
+  commentId: P:Link.Foundation.Links.Notation.Binary.LinksPacket.LinkCount
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.LinkCount
+  nameWithType: LinksPacket.LinkCount
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.LinkCount*
+  name: LinkCount
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_LinkCount_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.LinkCount
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.LinkCount
+  nameWithType: LinksPacket.LinkCount
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.Links
+  name: Links()
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_Links
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.Links
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.Links()
+  nameWithType: LinksPacket.Links()
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.Links*
+  name: Links
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_Links_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.Links
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.Links
+  nameWithType: LinksPacket.Links
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.List
+  name: List
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_List
+  commentId: F:Link.Foundation.Links.Notation.Binary.LinksPacket.List
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.List
+  nameWithType: LinksPacket.List
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.NullAddress
+  name: NullAddress
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_NullAddress
+  commentId: F:Link.Foundation.Links.Notation.Binary.LinksPacket.NullAddress
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.NullAddress
+  nameWithType: LinksPacket.NullAddress
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.Number
+  name: Number
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_Number
+  commentId: F:Link.Foundation.Links.Notation.Binary.LinksPacket.Number
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.Number
+  nameWithType: LinksPacket.Number
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.One
+  name: One
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_One
+  commentId: F:Link.Foundation.Links.Notation.Binary.LinksPacket.One
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.One
+  nameWithType: LinksPacket.One
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.Pack(System.Boolean,System.Collections.Generic.IReadOnlyList{System.ValueTuple{System.UInt64,Link.Foundation.Links.Notation.Binary.PacketReference[]}},System.Boolean)
+  name: Pack(bool, IReadOnlyList<(ulong Address, PacketReference[] References)>, bool)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_Pack_System_Boolean_System_Collections_Generic_IReadOnlyList_System_ValueTuple_System_UInt64_Link_Foundation_Links_Notation_Binary_PacketReference_____System_Boolean_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.Pack(System.Boolean,System.Collections.Generic.IReadOnlyList{System.ValueTuple{System.UInt64,Link.Foundation.Links.Notation.Binary.PacketReference[]}},System.Boolean)
+  name.vb: Pack(Boolean, IReadOnlyList(Of (Address As ULong, References As PacketReference())), Boolean)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.Pack(bool, System.Collections.Generic.IReadOnlyList<(ulong Address, Link.Foundation.Links.Notation.Binary.PacketReference[] References)>, bool)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.Pack(Boolean, System.Collections.Generic.IReadOnlyList(Of (Address As ULong, References As Link.Foundation.Links.Notation.Binary.PacketReference())), Boolean)
+  nameWithType: LinksPacket.Pack(bool, IReadOnlyList<(ulong Address, PacketReference[] References)>, bool)
+  nameWithType.vb: LinksPacket.Pack(Boolean, IReadOnlyList(Of (Address As ULong, References As PacketReference())), Boolean)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.Pack*
+  name: Pack
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_Pack_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.Pack
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.Pack
+  nameWithType: LinksPacket.Pack
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ReadFrom(Link.Foundation.Links.Notation.Binary.PacketReader,Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  name: ReadFrom(PacketReader, DecodeLimits?)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ReadFrom_Link_Foundation_Links_Notation_Binary_PacketReader_Link_Foundation_Links_Notation_Binary_DecodeLimits_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.ReadFrom(Link.Foundation.Links.Notation.Binary.PacketReader,Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  name.vb: ReadFrom(PacketReader, DecodeLimits)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ReadFrom(Link.Foundation.Links.Notation.Binary.PacketReader, Link.Foundation.Links.Notation.Binary.DecodeLimits?)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.ReadFrom(Link.Foundation.Links.Notation.Binary.PacketReader, Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  nameWithType: LinksPacket.ReadFrom(PacketReader, DecodeLimits?)
+  nameWithType.vb: LinksPacket.ReadFrom(PacketReader, DecodeLimits)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ReadFrom*
+  name: ReadFrom
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ReadFrom_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.ReadFrom
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ReadFrom
+  nameWithType: LinksPacket.ReadFrom
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ReadLeb128(Link.Foundation.Links.Notation.Binary.PacketReader)
+  name: ReadLeb128(PacketReader)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ReadLeb128_Link_Foundation_Links_Notation_Binary_PacketReader_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.ReadLeb128(Link.Foundation.Links.Notation.Binary.PacketReader)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ReadLeb128(Link.Foundation.Links.Notation.Binary.PacketReader)
+  nameWithType: LinksPacket.ReadLeb128(PacketReader)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ReadLeb128*
+  name: ReadLeb128
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ReadLeb128_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.ReadLeb128
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ReadLeb128
+  nameWithType: LinksPacket.ReadLeb128
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ReferenceWidth(Link.Foundation.Links.Notation.Binary.PacketReference,System.Boolean)
+  name: ReferenceWidth(PacketReference, bool)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ReferenceWidth_Link_Foundation_Links_Notation_Binary_PacketReference_System_Boolean_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.ReferenceWidth(Link.Foundation.Links.Notation.Binary.PacketReference,System.Boolean)
+  name.vb: ReferenceWidth(PacketReference, Boolean)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ReferenceWidth(Link.Foundation.Links.Notation.Binary.PacketReference, bool)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.ReferenceWidth(Link.Foundation.Links.Notation.Binary.PacketReference, Boolean)
+  nameWithType: LinksPacket.ReferenceWidth(PacketReference, bool)
+  nameWithType.vb: LinksPacket.ReferenceWidth(PacketReference, Boolean)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ReferenceWidth*
+  name: ReferenceWidth
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ReferenceWidth_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.ReferenceWidth
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ReferenceWidth
+  nameWithType: LinksPacket.ReferenceWidth
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.Sections
+  name: Sections
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_Sections
+  commentId: P:Link.Foundation.Links.Notation.Binary.LinksPacket.Sections
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.Sections
+  nameWithType: LinksPacket.Sections
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.Sections*
+  name: Sections
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_Sections_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.Sections
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.Sections
+  nameWithType: LinksPacket.Sections
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.String
+  name: String
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_String
+  commentId: F:Link.Foundation.Links.Notation.Binary.LinksPacket.String
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.String
+  nameWithType: LinksPacket.String
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ToBytes
+  name: ToBytes()
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ToBytes
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.ToBytes
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ToBytes()
+  nameWithType: LinksPacket.ToBytes()
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.ToBytes*
+  name: ToBytes
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_ToBytes_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.ToBytes
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.ToBytes
+  nameWithType: LinksPacket.ToBytes
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.TryDecodeExternal(System.UInt64,System.Byte,System.UInt64@)
+  name: TryDecodeExternal(ulong, byte, out ulong)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_TryDecodeExternal_System_UInt64_System_Byte_System_UInt64__
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.TryDecodeExternal(System.UInt64,System.Byte,System.UInt64@)
+  name.vb: TryDecodeExternal(ULong, Byte, ULong)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.TryDecodeExternal(ulong, byte, out ulong)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.TryDecodeExternal(ULong, Byte, ULong)
+  nameWithType: LinksPacket.TryDecodeExternal(ulong, byte, out ulong)
+  nameWithType.vb: LinksPacket.TryDecodeExternal(ULong, Byte, ULong)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.TryDecodeExternal*
+  name: TryDecodeExternal
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_TryDecodeExternal_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.TryDecodeExternal
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.TryDecodeExternal
+  nameWithType: LinksPacket.TryDecodeExternal
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.Widths
+  name: Widths
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_Widths
+  commentId: P:Link.Foundation.Links.Notation.Binary.LinksPacket.Widths
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.Widths
+  nameWithType: LinksPacket.Widths
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.Widths*
+  name: Widths
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_Widths_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.Widths
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.Widths
+  nameWithType: LinksPacket.Widths
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.WriteLeb128(System.Collections.Generic.List{System.Byte},System.UInt64)
+  name: WriteLeb128(List<byte>, ulong)
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_WriteLeb128_System_Collections_Generic_List_System_Byte__System_UInt64_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinksPacket.WriteLeb128(System.Collections.Generic.List{System.Byte},System.UInt64)
+  name.vb: WriteLeb128(List(Of Byte), ULong)
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.WriteLeb128(System.Collections.Generic.List<byte>, ulong)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinksPacket.WriteLeb128(System.Collections.Generic.List(Of Byte), ULong)
+  nameWithType: LinksPacket.WriteLeb128(List<byte>, ulong)
+  nameWithType.vb: LinksPacket.WriteLeb128(List(Of Byte), ULong)
+- uid: Link.Foundation.Links.Notation.Binary.LinksPacket.WriteLeb128*
+  name: WriteLeb128
+  href: api/Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_WriteLeb128_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinksPacket.WriteLeb128
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinksPacket.WriteLeb128
+  nameWithType: LinksPacket.WriteLeb128
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat
+  name: LinoFormat
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.LinoFormat
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat
+  nameWithType: LinoFormat
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.Canonical(Link.Foundation.Links.Notation.Link{System.String})
+  name: Canonical(Link<string>)
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_Canonical_Link_Foundation_Links_Notation_Link_System_String__
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinoFormat.Canonical(Link.Foundation.Links.Notation.Link{System.String})
+  name.vb: Canonical(Link(Of String))
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.Canonical(Link.Foundation.Links.Notation.Link<string>)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinoFormat.Canonical(Link.Foundation.Links.Notation.Link(Of String))
+  nameWithType: LinoFormat.Canonical(Link<string>)
+  nameWithType.vb: LinoFormat.Canonical(Link(Of String))
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.Canonical*
+  name: Canonical
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_Canonical_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinoFormat.Canonical
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.Canonical
+  nameWithType: LinoFormat.Canonical
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatDocument(System.Collections.Generic.IEnumerable{Link.Foundation.Links.Notation.Link{System.String}})
+  name: FormatDocument(IEnumerable<Link<string>>)
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_FormatDocument_System_Collections_Generic_IEnumerable_Link_Foundation_Links_Notation_Link_System_String___
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinoFormat.FormatDocument(System.Collections.Generic.IEnumerable{Link.Foundation.Links.Notation.Link{System.String}})
+  name.vb: FormatDocument(IEnumerable(Of Link(Of String)))
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatDocument(System.Collections.Generic.IEnumerable<Link.Foundation.Links.Notation.Link<string>>)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatDocument(System.Collections.Generic.IEnumerable(Of Link.Foundation.Links.Notation.Link(Of String)))
+  nameWithType: LinoFormat.FormatDocument(IEnumerable<Link<string>>)
+  nameWithType.vb: LinoFormat.FormatDocument(IEnumerable(Of Link(Of String)))
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatDocument*
+  name: FormatDocument
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_FormatDocument_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinoFormat.FormatDocument
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatDocument
+  nameWithType: LinoFormat.FormatDocument
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatLink(Link.Foundation.Links.Notation.Link{System.String})
+  name: FormatLink(Link<string>)
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_FormatLink_Link_Foundation_Links_Notation_Link_System_String__
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinoFormat.FormatLink(Link.Foundation.Links.Notation.Link{System.String})
+  name.vb: FormatLink(Link(Of String))
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatLink(Link.Foundation.Links.Notation.Link<string>)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatLink(Link.Foundation.Links.Notation.Link(Of String))
+  nameWithType: LinoFormat.FormatLink(Link<string>)
+  nameWithType.vb: LinoFormat.FormatLink(Link(Of String))
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatLink*
+  name: FormatLink
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_FormatLink_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinoFormat.FormatLink
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatLink
+  nameWithType: LinoFormat.FormatLink
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatReference(System.String)
+  name: FormatReference(string)
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_FormatReference_System_String_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinoFormat.FormatReference(System.String)
+  name.vb: FormatReference(String)
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatReference(string)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatReference(String)
+  nameWithType: LinoFormat.FormatReference(string)
+  nameWithType.vb: LinoFormat.FormatReference(String)
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatReference*
+  name: FormatReference
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_FormatReference_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinoFormat.FormatReference
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.FormatReference
+  nameWithType: LinoFormat.FormatReference
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.Link(System.String,System.Collections.Generic.IList{Link.Foundation.Links.Notation.Link{System.String}})
+  name: Link(string?, IList<Link<string>>)
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_Link_System_String_System_Collections_Generic_IList_Link_Foundation_Links_Notation_Link_System_String___
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinoFormat.Link(System.String,System.Collections.Generic.IList{Link.Foundation.Links.Notation.Link{System.String}})
+  name.vb: Link(String, IList(Of Link(Of String)))
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.Link(string?, System.Collections.Generic.IList<Link.Foundation.Links.Notation.Link<string>>)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinoFormat.Link(String, System.Collections.Generic.IList(Of Link.Foundation.Links.Notation.Link(Of String)))
+  nameWithType: LinoFormat.Link(string?, IList<Link<string>>)
+  nameWithType.vb: LinoFormat.Link(String, IList(Of Link(Of String)))
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.Link*
+  name: Link
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_Link_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinoFormat.Link
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.Link
+  nameWithType: LinoFormat.Link
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.ParseDocument(System.String)
+  name: ParseDocument(string)
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_ParseDocument_System_String_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinoFormat.ParseDocument(System.String)
+  name.vb: ParseDocument(String)
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.ParseDocument(string)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinoFormat.ParseDocument(String)
+  nameWithType: LinoFormat.ParseDocument(string)
+  nameWithType.vb: LinoFormat.ParseDocument(String)
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.ParseDocument*
+  name: ParseDocument
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_ParseDocument_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinoFormat.ParseDocument
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.ParseDocument
+  nameWithType: LinoFormat.ParseDocument
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.Reference(System.String)
+  name: Reference(string)
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_Reference_System_String_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinoFormat.Reference(System.String)
+  name.vb: Reference(String)
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.Reference(string)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinoFormat.Reference(String)
+  nameWithType: LinoFormat.Reference(string)
+  nameWithType.vb: LinoFormat.Reference(String)
+- uid: Link.Foundation.Links.Notation.Binary.LinoFormat.Reference*
+  name: Reference
+  href: api/Link.Foundation.Links.Notation.Binary.LinoFormat.html#Link_Foundation_Links_Notation_Binary_LinoFormat_Reference_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinoFormat.Reference
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinoFormat.Reference
+  nameWithType: LinoFormat.Reference
+- uid: Link.Foundation.Links.Notation.Binary.LinoMapping
+  name: LinoMapping
+  href: api/Link.Foundation.Links.Notation.Binary.LinoMapping.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.LinoMapping
+  fullName: Link.Foundation.Links.Notation.Binary.LinoMapping
+  nameWithType: LinoMapping
+- uid: Link.Foundation.Links.Notation.Binary.LinoMapping.DecodeDocument(Link.Foundation.Links.Notation.Binary.LinksPacket,Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  name: DecodeDocument(LinksPacket, DecodeLimits?)
+  href: api/Link.Foundation.Links.Notation.Binary.LinoMapping.html#Link_Foundation_Links_Notation_Binary_LinoMapping_DecodeDocument_Link_Foundation_Links_Notation_Binary_LinksPacket_Link_Foundation_Links_Notation_Binary_DecodeLimits_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinoMapping.DecodeDocument(Link.Foundation.Links.Notation.Binary.LinksPacket,Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  name.vb: DecodeDocument(LinksPacket, DecodeLimits)
+  fullName: Link.Foundation.Links.Notation.Binary.LinoMapping.DecodeDocument(Link.Foundation.Links.Notation.Binary.LinksPacket, Link.Foundation.Links.Notation.Binary.DecodeLimits?)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinoMapping.DecodeDocument(Link.Foundation.Links.Notation.Binary.LinksPacket, Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  nameWithType: LinoMapping.DecodeDocument(LinksPacket, DecodeLimits?)
+  nameWithType.vb: LinoMapping.DecodeDocument(LinksPacket, DecodeLimits)
+- uid: Link.Foundation.Links.Notation.Binary.LinoMapping.DecodeDocument*
+  name: DecodeDocument
+  href: api/Link.Foundation.Links.Notation.Binary.LinoMapping.html#Link_Foundation_Links_Notation_Binary_LinoMapping_DecodeDocument_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinoMapping.DecodeDocument
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinoMapping.DecodeDocument
+  nameWithType: LinoMapping.DecodeDocument
+- uid: Link.Foundation.Links.Notation.Binary.LinoMapping.EncodeDocument(System.Collections.Generic.IReadOnlyList{Link.Foundation.Links.Notation.Link{System.String}},Link.Foundation.Links.Notation.Binary.BinaryLinoOptions,Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  name: EncodeDocument(IReadOnlyList<Link<string>>, BinaryLinoOptions, DecodeLimits?)
+  href: api/Link.Foundation.Links.Notation.Binary.LinoMapping.html#Link_Foundation_Links_Notation_Binary_LinoMapping_EncodeDocument_System_Collections_Generic_IReadOnlyList_Link_Foundation_Links_Notation_Link_System_String___Link_Foundation_Links_Notation_Binary_BinaryLinoOptions_Link_Foundation_Links_Notation_Binary_DecodeLimits_
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinoMapping.EncodeDocument(System.Collections.Generic.IReadOnlyList{Link.Foundation.Links.Notation.Link{System.String}},Link.Foundation.Links.Notation.Binary.BinaryLinoOptions,Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  name.vb: EncodeDocument(IReadOnlyList(Of Link(Of String)), BinaryLinoOptions, DecodeLimits)
+  fullName: Link.Foundation.Links.Notation.Binary.LinoMapping.EncodeDocument(System.Collections.Generic.IReadOnlyList<Link.Foundation.Links.Notation.Link<string>>, Link.Foundation.Links.Notation.Binary.BinaryLinoOptions, Link.Foundation.Links.Notation.Binary.DecodeLimits?)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinoMapping.EncodeDocument(System.Collections.Generic.IReadOnlyList(Of Link.Foundation.Links.Notation.Link(Of String)), Link.Foundation.Links.Notation.Binary.BinaryLinoOptions, Link.Foundation.Links.Notation.Binary.DecodeLimits)
+  nameWithType: LinoMapping.EncodeDocument(IReadOnlyList<Link<string>>, BinaryLinoOptions, DecodeLimits?)
+  nameWithType.vb: LinoMapping.EncodeDocument(IReadOnlyList(Of Link(Of String)), BinaryLinoOptions, DecodeLimits)
+- uid: Link.Foundation.Links.Notation.Binary.LinoMapping.EncodeDocument*
+  name: EncodeDocument
+  href: api/Link.Foundation.Links.Notation.Binary.LinoMapping.html#Link_Foundation_Links_Notation_Binary_LinoMapping_EncodeDocument_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinoMapping.EncodeDocument
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinoMapping.EncodeDocument
+  nameWithType: LinoMapping.EncodeDocument
+- uid: Link.Foundation.Links.Notation.Binary.LinoMapping.TryParseCanonicalNumber(System.String,System.UInt64@)
+  name: TryParseCanonicalNumber(string, out ulong)
+  href: api/Link.Foundation.Links.Notation.Binary.LinoMapping.html#Link_Foundation_Links_Notation_Binary_LinoMapping_TryParseCanonicalNumber_System_String_System_UInt64__
+  commentId: M:Link.Foundation.Links.Notation.Binary.LinoMapping.TryParseCanonicalNumber(System.String,System.UInt64@)
+  name.vb: TryParseCanonicalNumber(String, ULong)
+  fullName: Link.Foundation.Links.Notation.Binary.LinoMapping.TryParseCanonicalNumber(string, out ulong)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.LinoMapping.TryParseCanonicalNumber(String, ULong)
+  nameWithType: LinoMapping.TryParseCanonicalNumber(string, out ulong)
+  nameWithType.vb: LinoMapping.TryParseCanonicalNumber(String, ULong)
+- uid: Link.Foundation.Links.Notation.Binary.LinoMapping.TryParseCanonicalNumber*
+  name: TryParseCanonicalNumber
+  href: api/Link.Foundation.Links.Notation.Binary.LinoMapping.html#Link_Foundation_Links_Notation_Binary_LinoMapping_TryParseCanonicalNumber_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.LinoMapping.TryParseCanonicalNumber
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.LinoMapping.TryParseCanonicalNumber
+  nameWithType: LinoMapping.TryParseCanonicalNumber
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader
+  name: PacketReader
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.PacketReader
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader
+  nameWithType: PacketReader
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.#ctor(System.IO.Stream,System.Int32)
+  name: PacketReader(Stream, int)
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader__ctor_System_IO_Stream_System_Int32_
+  commentId: M:Link.Foundation.Links.Notation.Binary.PacketReader.#ctor(System.IO.Stream,System.Int32)
+  name.vb: New(Stream, Integer)
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.PacketReader(System.IO.Stream, int)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.PacketReader.New(System.IO.Stream, Integer)
+  nameWithType: PacketReader.PacketReader(Stream, int)
+  nameWithType.vb: PacketReader.New(Stream, Integer)
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.#ctor*
+  name: PacketReader
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader__ctor_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReader.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.PacketReader
+  fullName.vb: Link.Foundation.Links.Notation.Binary.PacketReader.New
+  nameWithType: PacketReader.PacketReader
+  nameWithType.vb: PacketReader.New
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.AtEnd
+  name: AtEnd
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader_AtEnd
+  commentId: P:Link.Foundation.Links.Notation.Binary.PacketReader.AtEnd
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.AtEnd
+  nameWithType: PacketReader.AtEnd
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.AtEnd*
+  name: AtEnd
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader_AtEnd_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReader.AtEnd
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.AtEnd
+  nameWithType: PacketReader.AtEnd
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.FromBytes(System.Byte[])
+  name: FromBytes(byte[])
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader_FromBytes_System_Byte___
+  commentId: M:Link.Foundation.Links.Notation.Binary.PacketReader.FromBytes(System.Byte[])
+  name.vb: FromBytes(Byte())
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.FromBytes(byte[])
+  fullName.vb: Link.Foundation.Links.Notation.Binary.PacketReader.FromBytes(Byte())
+  nameWithType: PacketReader.FromBytes(byte[])
+  nameWithType.vb: PacketReader.FromBytes(Byte())
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.FromBytes*
+  name: FromBytes
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader_FromBytes_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReader.FromBytes
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.FromBytes
+  nameWithType: PacketReader.FromBytes
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.PeekByte
+  name: PeekByte()
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader_PeekByte
+  commentId: M:Link.Foundation.Links.Notation.Binary.PacketReader.PeekByte
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.PeekByte()
+  nameWithType: PacketReader.PeekByte()
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.PeekByte*
+  name: PeekByte
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader_PeekByte_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReader.PeekByte
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.PeekByte
+  nameWithType: PacketReader.PeekByte
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.ReadByte
+  name: ReadByte()
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader_ReadByte
+  commentId: M:Link.Foundation.Links.Notation.Binary.PacketReader.ReadByte
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.ReadByte()
+  nameWithType: PacketReader.ReadByte()
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.ReadByte*
+  name: ReadByte
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader_ReadByte_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReader.ReadByte
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.ReadByte
+  nameWithType: PacketReader.ReadByte
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.ReadExactly(System.Span{System.Byte})
+  name: ReadExactly(Span<byte>)
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader_ReadExactly_System_Span_System_Byte__
+  commentId: M:Link.Foundation.Links.Notation.Binary.PacketReader.ReadExactly(System.Span{System.Byte})
+  name.vb: ReadExactly(Span(Of Byte))
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.ReadExactly(System.Span<byte>)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.PacketReader.ReadExactly(System.Span(Of Byte))
+  nameWithType: PacketReader.ReadExactly(Span<byte>)
+  nameWithType.vb: PacketReader.ReadExactly(Span(Of Byte))
+- uid: Link.Foundation.Links.Notation.Binary.PacketReader.ReadExactly*
+  name: ReadExactly
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReader.html#Link_Foundation_Links_Notation_Binary_PacketReader_ReadExactly_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReader.ReadExactly
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReader.ReadExactly
+  nameWithType: PacketReader.ReadExactly
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference
+  name: PacketReference
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.PacketReference
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference
+  nameWithType: PacketReference
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.#ctor(System.Boolean,System.UInt64)
+  name: PacketReference(bool, ulong)
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference__ctor_System_Boolean_System_UInt64_
+  commentId: M:Link.Foundation.Links.Notation.Binary.PacketReference.#ctor(System.Boolean,System.UInt64)
+  name.vb: New(Boolean, ULong)
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.PacketReference(bool, ulong)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.PacketReference.New(Boolean, ULong)
+  nameWithType: PacketReference.PacketReference(bool, ulong)
+  nameWithType.vb: PacketReference.New(Boolean, ULong)
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.#ctor*
+  name: PacketReference
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference__ctor_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReference.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.PacketReference
+  fullName.vb: Link.Foundation.Links.Notation.Binary.PacketReference.New
+  nameWithType: PacketReference.PacketReference
+  nameWithType.vb: PacketReference.New
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.External(System.UInt64)
+  name: External(ulong)
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference_External_System_UInt64_
+  commentId: M:Link.Foundation.Links.Notation.Binary.PacketReference.External(System.UInt64)
+  name.vb: External(ULong)
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.External(ulong)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.PacketReference.External(ULong)
+  nameWithType: PacketReference.External(ulong)
+  nameWithType.vb: PacketReference.External(ULong)
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.External*
+  name: External
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference_External_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReference.External
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.External
+  nameWithType: PacketReference.External
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.Internal(System.UInt64)
+  name: Internal(ulong)
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference_Internal_System_UInt64_
+  commentId: M:Link.Foundation.Links.Notation.Binary.PacketReference.Internal(System.UInt64)
+  name.vb: Internal(ULong)
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.Internal(ulong)
+  fullName.vb: Link.Foundation.Links.Notation.Binary.PacketReference.Internal(ULong)
+  nameWithType: PacketReference.Internal(ulong)
+  nameWithType.vb: PacketReference.Internal(ULong)
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.Internal*
+  name: Internal
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference_Internal_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReference.Internal
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.Internal
+  nameWithType: PacketReference.Internal
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.IsExternal
+  name: IsExternal
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference_IsExternal
+  commentId: P:Link.Foundation.Links.Notation.Binary.PacketReference.IsExternal
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.IsExternal
+  nameWithType: PacketReference.IsExternal
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.IsExternal*
+  name: IsExternal
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference_IsExternal_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReference.IsExternal
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.IsExternal
+  nameWithType: PacketReference.IsExternal
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.Null
+  name: "Null"
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference_Null
+  commentId: F:Link.Foundation.Links.Notation.Binary.PacketReference.Null
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.Null
+  nameWithType: PacketReference.Null
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.ToString
+  name: ToString()
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference_ToString
+  commentId: M:Link.Foundation.Links.Notation.Binary.PacketReference.ToString
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.ToString()
+  nameWithType: PacketReference.ToString()
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.ToString*
+  name: ToString
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference_ToString_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReference.ToString
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.ToString
+  nameWithType: PacketReference.ToString
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.Value
+  name: Value
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference_Value
+  commentId: P:Link.Foundation.Links.Notation.Binary.PacketReference.Value
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.Value
+  nameWithType: PacketReference.Value
+- uid: Link.Foundation.Links.Notation.Binary.PacketReference.Value*
+  name: Value
+  href: api/Link.Foundation.Links.Notation.Binary.PacketReference.html#Link_Foundation_Links_Notation_Binary_PacketReference_Value_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.PacketReference.Value
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.PacketReference.Value
+  nameWithType: PacketReference.Value
+- uid: Link.Foundation.Links.Notation.Binary.Section
+  name: Section
+  href: api/Link.Foundation.Links.Notation.Binary.Section.html
+  commentId: T:Link.Foundation.Links.Notation.Binary.Section
+  fullName: Link.Foundation.Links.Notation.Binary.Section
+  nameWithType: Section
+- uid: Link.Foundation.Links.Notation.Binary.Section.Arity
+  name: Arity
+  href: api/Link.Foundation.Links.Notation.Binary.Section.html#Link_Foundation_Links_Notation_Binary_Section_Arity
+  commentId: P:Link.Foundation.Links.Notation.Binary.Section.Arity
+  fullName: Link.Foundation.Links.Notation.Binary.Section.Arity
+  nameWithType: Section.Arity
+- uid: Link.Foundation.Links.Notation.Binary.Section.Arity*
+  name: Arity
+  href: api/Link.Foundation.Links.Notation.Binary.Section.html#Link_Foundation_Links_Notation_Binary_Section_Arity_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.Section.Arity
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.Section.Arity
+  nameWithType: Section.Arity
+- uid: Link.Foundation.Links.Notation.Binary.Section.Gap
+  name: Gap
+  href: api/Link.Foundation.Links.Notation.Binary.Section.html#Link_Foundation_Links_Notation_Binary_Section_Gap
+  commentId: P:Link.Foundation.Links.Notation.Binary.Section.Gap
+  fullName: Link.Foundation.Links.Notation.Binary.Section.Gap
+  nameWithType: Section.Gap
+- uid: Link.Foundation.Links.Notation.Binary.Section.Gap*
+  name: Gap
+  href: api/Link.Foundation.Links.Notation.Binary.Section.html#Link_Foundation_Links_Notation_Binary_Section_Gap_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.Section.Gap
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.Section.Gap
+  nameWithType: Section.Gap
+- uid: Link.Foundation.Links.Notation.Binary.Section.Links
+  name: Links
+  href: api/Link.Foundation.Links.Notation.Binary.Section.html#Link_Foundation_Links_Notation_Binary_Section_Links
+  commentId: P:Link.Foundation.Links.Notation.Binary.Section.Links
+  fullName: Link.Foundation.Links.Notation.Binary.Section.Links
+  nameWithType: Section.Links
+- uid: Link.Foundation.Links.Notation.Binary.Section.Links*
+  name: Links
+  href: api/Link.Foundation.Links.Notation.Binary.Section.html#Link_Foundation_Links_Notation_Binary_Section_Links_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.Section.Links
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.Section.Links
+  nameWithType: Section.Links
+- uid: Link.Foundation.Links.Notation.Binary.Section.Width
+  name: Width
+  href: api/Link.Foundation.Links.Notation.Binary.Section.html#Link_Foundation_Links_Notation_Binary_Section_Width
+  commentId: P:Link.Foundation.Links.Notation.Binary.Section.Width
+  fullName: Link.Foundation.Links.Notation.Binary.Section.Width
+  nameWithType: Section.Width
+- uid: Link.Foundation.Links.Notation.Binary.Section.Width*
+  name: Width
+  href: api/Link.Foundation.Links.Notation.Binary.Section.html#Link_Foundation_Links_Notation_Binary_Section_Width_
+  commentId: Overload:Link.Foundation.Links.Notation.Binary.Section.Width
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Binary.Section.Width
+  nameWithType: Section.Width
 - uid: Link.Foundation.Links.Notation.Comments
   name: Comments
   href: api/Link.Foundation.Links.Notation.Comments.html

@@ -33,6 +33,188 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.ArityRange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.ArityRange.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.ArityRange",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.ArityRange.yml\" sourcestartlinenumber=\"1\">How many references the links of a <xref href=\"Link.Foundation.Links.Notation.Binary.Section\" data-throw-if-not-resolved=\"false\"></xref> hold:\n<code>Min..=Max</code>, where a null <xref href=\"Link.Foundation.Links.Notation.Binary.ArityRange.Max\" data-throw-if-not-resolved=\"false\"></xref> means no upper bound.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.BinaryErrorKind.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.BinaryErrorKind.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.BinaryErrorKind",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.BinaryErrorKind.yml\" sourcestartlinenumber=\"1\">What went wrong while encoding, decoding or exchanging a LiNo message.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.BinaryLinoCodec",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.BinaryLinoCodec.yml\" sourcestartlinenumber=\"1\">Convenience codec for complete LiNo packets.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.BinaryLinoOptions",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.BinaryLinoOptions.yml\" sourcestartlinenumber=\"1\">Optional features of the binary LiNo protocol. Every feature is off by\ndefault; each one can be switched on independently, like stacking a decorator.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.BinaryNotationException",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.BinaryNotationException.yml\" sourcestartlinenumber=\"1\">Raised by the binary links notation codecs.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.DecodeLimits.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.DecodeLimits.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.DecodeLimits",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.DecodeLimits.yml\" sourcestartlinenumber=\"1\">Safety limits applied while decoding untrusted input.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.LinksPacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.LinksPacket.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.LinksPacket",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.LinksPacket.yml\" sourcestartlinenumber=\"1\">Binary links notation: a self-delimiting packet of links.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.LinoFormat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.LinoFormat.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.LinoFormat",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.LinoFormat.yml\" sourcestartlinenumber=\"1\">Canonical LiNo text for documents, shared by every protocol.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.LinoMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.LinoMapping.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.LinoMapping",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.LinoMapping.yml\" sourcestartlinenumber=\"1\">Lossless mapping between LiNo documents and <xref href=\"Link.Foundation.Links.Notation.Binary.LinksPacket\" data-throw-if-not-resolved=\"false\"></xref>s,\nbyte-for-byte compatible with the Rust port.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.PacketReader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.PacketReader.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.PacketReader",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.PacketReader.yml\" sourcestartlinenumber=\"1\">A buffered reader for consecutive binary packets. Reuse it across reads\nso bytes buffered from the following packet remain available.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.PacketReference.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.PacketReference.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.PacketReference",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.PacketReference.yml\" sourcestartlinenumber=\"1\">One reference inside a <xref href=\"Link.Foundation.Links.Notation.Binary.LinksPacket\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.Section.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.Section.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary.Section",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.Binary.Section.yml\" sourcestartlinenumber=\"1\">A run of links at consecutive addresses sharing an arity range and a reference width.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Binary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.Binary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.Binary",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Link.Foundation.Links.Notation.Comments.yml",
       "output": {
         ".html": {

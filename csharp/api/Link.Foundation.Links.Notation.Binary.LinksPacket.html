@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class LinksPacket | Link.Foundation.Links.Notation Library </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class LinksPacket | Link.Foundation.Links.Notation Library ">
+    
+    <meta name="description" content="Binary links notation: a self-delimiting packet of links.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket">
+
+
+
+  <h1 id="Link_Foundation_Links_Notation_Binary_LinksPacket" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket" class="text-break">Class LinksPacket</h1>
+  <div class="markdown level0 summary"><p>Binary links notation: a self-delimiting packet of links.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">LinksPacket</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <span class="xref">Link</span>.<span class="xref">Foundation</span>.<span class="xref">Links</span>.<a class="xref" href="Link.Foundation.Links.Notation.html">Notation</a>.<a class="xref" href="Link.Foundation.Links.Notation.Binary.html">Binary</a></h6>
+  <h6><strong>Assembly</strong>: Link.Foundation.Links.Notation.dll</h6>
+  <h5 id="Link_Foundation_Links_Notation_Binary_LinksPacket_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class LinksPacket</code></pre>
+  </div>
+  <h5 id="Link_Foundation_Links_Notation_Binary_LinksPacket_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>A packet stores links, each a tuple of one or more references, at
+implicit consecutive addresses. It knows nothing about LiNo; the LiNo
+protocol (<a class="xref" href="Link.Foundation.Links.Notation.Binary.LinoMapping.html">LinoMapping</a>) is one use of it.</p>
+<pre><code class="lang-csharp">byte 0     0x10 | flags      high nibble 1 = format version 1
+                             bit 0     external references (Hybrid encoding)
+                             bit 1     explicit layout
+                             bits 2-3  log2 of the width (compact layout only)
+
+compact layout (bit 1 clear): one section of doublets right after the markers
+LEB128     N                 number of links, each `source target`
+
+explicit layout (bit 1 set):
+LEB128     S                 number of sections, then S section headers:
+LEB128     shape             bits 0-1  log2 of the reference width in bytes
+                             bit 2     a gap follows
+                             bit 3     variable arity (else every link
+                                       holds exactly min_arity references)
+                             bits 4+   min_arity, at least 1
+LEB128     gap               addresses skipped before the section (if bit 2)
+LEB128     extra_arity       0 = no maximum, else max - min (if bit 3)
+LEB128     count             number of links in the section
+
+links, section by section; a link in a variable-arity section starts
+with LEB128 (length - min_arity); every reference is `width` bytes,
+little-endian</code></pre>
+<p>Address 0 is null. The first section starts at <code>1 + gap</code> and every
+other section at <code>previous end + gap</code>, so gaps leave holes. The
+compact layout is exactly one section with gap 5 (the LiNo marker points
+1..5), arity 2 and the header width. Each section has its own width: the
+narrowest of 1, 2, 4 and 8 bytes that holds every reference in it;
+<a class="xref" href="Link.Foundation.Links.Notation.Binary.LinksPacket.html#Link_Foundation_Links_Notation_Binary_LinksPacket_Pack_System_Boolean_System_Collections_Generic_IReadOnlyList_System_ValueTuple_System_UInt64_Link_Foundation_Links_Notation_Binary_PacketReference_____System_Boolean_">Pack(bool, IReadOnlyList&lt;(ulong Address, PacketReference[] References)&gt;, bool)</a> chooses the sections. With external references
+enabled the top bit of a reference marks it as external, exactly like
+<code>Platform.Data.Hybrid&lt;T&gt;</code>, which halves every internal range.
+The byte layout is identical to the Rust <code>links_notation::binary::LinksPacket</code>.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket__ctor_System_Boolean_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.%23ctor(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L212">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket__ctor_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.#ctor*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket__ctor_System_Boolean_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.#ctor(System.Boolean)">LinksPacket(bool)</h4>
+  <div class="markdown level1 summary"><p>An empty packet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinksPacket(bool externalReferences = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">externalReferences</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_BinaryVersion1.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.BinaryVersion1%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L176">View Source</a>
+  </span>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_BinaryVersion1" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.BinaryVersion1">BinaryVersion1</h4>
+  <div class="markdown level1 summary"><p>The high nibble of the header byte; text never starts with 0x10..0x1F.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const byte BinaryVersion1 = 16</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_FirstLinkAddress.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.FirstLinkAddress%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L191">View Source</a>
+  </span>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_FirstLinkAddress" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.FirstLinkAddress">FirstLinkAddress</h4>
+  <div class="markdown level1 summary"><p>Address of the first link after the marker points.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const ulong FirstLinkAddress = 6</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_Identified.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.Identified%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L189">View Source</a>
+  </span>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_Identified" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.Identified">Identified</h4>
+  <div class="markdown level1 summary"><p>Marker 5: (Identified id values…) is a link with an id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const ulong Identified = 5</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_List.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.List%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L187">View Source</a>
+  </span>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_List" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.List">List</h4>
+  <div class="markdown level1 summary"><p>Marker 4: (List elements…) is a list of links.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const ulong List = 4</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_NullAddress.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.NullAddress%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L179">View Source</a>
+  </span>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_NullAddress" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.NullAddress">NullAddress</h4>
+  <div class="markdown level1 summary"><p>Null link address.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const ulong NullAddress = 0</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_Number.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.Number%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L183">View Source</a>
+  </span>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_Number" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.Number">Number</h4>
+  <div class="markdown level1 summary"><p>Marker 2: (Number unary) is a non-negative integer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const ulong Number = 2</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_One.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.One%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L181">View Source</a>
+  </span>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_One" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.One">One</h4>
+  <div class="markdown level1 summary"><p>Marker 1: the unary one; 2^k = (2^(k-1) 2^(k-1)).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const ulong One = 1</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_String.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.String%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L185">View Source</a>
+  </span>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_String" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.String">String</h4>
+  <div class="markdown level1 summary"><p>Marker 3: (String code points…) is a Unicode string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const ulong String = 3</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_ExternalReferences.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalReferences%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L215">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_ExternalReferences_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalReferences*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_ExternalReferences" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalReferences">ExternalReferences</h4>
+  <div class="markdown level1 summary"><p>Header bit 0: references may be external (Hybrid encoding).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ExternalReferences { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_LinkCount.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.LinkCount%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L378">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_LinkCount_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.LinkCount*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_LinkCount" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.LinkCount">LinkCount</h4>
+  <div class="markdown level1 summary"><p>The number of links in the packet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ulong LinkCount { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_Sections.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.Sections%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L218">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_Sections_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.Sections*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_Sections" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.Sections">Sections</h4>
+  <div class="markdown level1 summary"><p>The links, section by section.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Section&gt; Sections { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Link.Foundation.Links.Notation.Binary.Section.html">Section</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_Widths.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.Widths%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L209">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_Widths_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.Widths*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_Widths" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.Widths">Widths</h4>
+  <div class="markdown level1 summary"><p>The reference widths, in bytes, that a packet may use.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IReadOnlyList&lt;byte&gt; Widths { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_AddressTier_System_UInt64_System_Boolean_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.AddressTier(System.UInt64%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L231">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_AddressTier_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.AddressTier*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_AddressTier_System_UInt64_System_Boolean_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.AddressTier(System.UInt64,System.Boolean)">AddressTier(ulong, bool)</h4>
+  <div class="markdown level1 summary"><p>The narrowest width able to hold the internal address.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte AddressTier(ulong address, bool externalReferences)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><span class="parametername">address</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">externalReferences</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_EncodeExternal_System_UInt64_System_Byte_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.EncodeExternal(System.UInt64%2CSystem.Byte)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L246">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_EncodeExternal_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.EncodeExternal*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_EncodeExternal_System_UInt64_System_Byte_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.EncodeExternal(System.UInt64,System.Byte)">EncodeExternal(ulong, byte)</h4>
+  <div class="markdown level1 summary"><p>Encodes an external value at <code class="paramref">width</code> the way Hybrid&lt;T&gt; does.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ulong EncodeExternal(ulong value, byte width)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_ExternalCapacity_System_Byte_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalCapacity(System.Byte)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L228">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_ExternalCapacity_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalCapacity*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_ExternalCapacity_System_Byte_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ExternalCapacity(System.Byte)">ExternalCapacity(byte)</h4>
+  <div class="markdown level1 summary"><p>Largest external value that fits in <code class="paramref">width</code> bytes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ulong ExternalCapacity(byte width)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_FromBytes_System_Byte___Link_Foundation_Links_Notation_Binary_DecodeLimits_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.FromBytes(System.Byte%5B%5D%2CLink.Foundation.Links.Notation.Binary.DecodeLimits)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L461">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_FromBytes_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.FromBytes*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_FromBytes_System_Byte___Link_Foundation_Links_Notation_Binary_DecodeLimits_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.FromBytes(System.Byte[],Link.Foundation.Links.Notation.Binary.DecodeLimits)">FromBytes(byte[], DecodeLimits?)</h4>
+  <div class="markdown level1 summary"><p>Parses a complete packet; trailing bytes are an error.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static LinksPacket FromBytes(byte[] bytes, DecodeLimits? limits = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><span class="parametername">bytes</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.DecodeLimits.html">DecodeLimits</a></td>
+        <td><span class="parametername">limits</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.LinksPacket.html">LinksPacket</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_InternalCapacity_System_Byte_System_Boolean_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.InternalCapacity(System.Byte%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L221">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_InternalCapacity_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.InternalCapacity*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_InternalCapacity_System_Byte_System_Boolean_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.InternalCapacity(System.Byte,System.Boolean)">InternalCapacity(byte, bool)</h4>
+  <div class="markdown level1 summary"><p>Largest internal address that fits in <code class="paramref">width</code> bytes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ulong InternalCapacity(byte width, bool externalReferences)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">externalReferences</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_Links.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.Links%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L360">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_Links_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.Links*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_Links" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.Links">Links()</h4>
+  <div class="markdown level1 summary"><p>Every link with its address, in address order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;(ulong Address, PacketReference[] References)&gt; Links()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;(<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.uint64,link.foundation.links.notation.binary.packetreference[]-.address">Address</a>, <a class="xref" href="Link.Foundation.Links.Notation.Binary.PacketReference.html">PacketReference</a>[] <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.uint64,link.foundation.links.notation.binary.packetreference[]-.references">References</a>)&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_Pack_System_Boolean_System_Collections_Generic_IReadOnlyList_System_ValueTuple_System_UInt64_Link_Foundation_Links_Notation_Binary_PacketReference_____System_Boolean_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.Pack(System.Boolean%2CSystem.Collections.Generic.IReadOnlyList%7BSystem.ValueTuple%7BSystem.UInt64%2CLink.Foundation.Links.Notation.Binary.PacketReference%5B%5D%7D%7D%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L307">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_Pack_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.Pack*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_Pack_System_Boolean_System_Collections_Generic_IReadOnlyList_System_ValueTuple_System_UInt64_Link_Foundation_Links_Notation_Binary_PacketReference_____System_Boolean_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.Pack(System.Boolean,System.Collections.Generic.IReadOnlyList{System.ValueTuple{System.UInt64,Link.Foundation.Links.Notation.Binary.PacketReference[]}},System.Boolean)">Pack(bool, IReadOnlyList&lt;(ulong Address, PacketReference[] References)&gt;, bool)</h4>
+  <div class="markdown level1 summary"><p>Lays out <code class="paramref">links</code> — addresses with their references, in
+ascending address order — using the version 1 section planner.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static LinksPacket Pack(bool externalReferences, IReadOnlyList&lt;(ulong Address, PacketReference[] References)&gt; links, bool packedWidths)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">externalReferences</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;(<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.uint64,link.foundation.links.notation.binary.packetreference[]-.address">Address</a>, <a class="xref" href="Link.Foundation.Links.Notation.Binary.PacketReference.html">PacketReference</a>[] <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-system.uint64,link.foundation.links.notation.binary.packetreference[]-.references">References</a>)&gt;</td>
+        <td><span class="parametername">links</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">packedWidths</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.LinksPacket.html">LinksPacket</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Link_Foundation_Links_Notation_Binary_LinksPacket_Pack_System_Boolean_System_Collections_Generic_IReadOnlyList_System_ValueTuple_System_UInt64_Link_Foundation_Links_Notation_Binary_PacketReference_____System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Holes between addresses start new sections. Without
+<code class="paramref">packedWidths</code> every section uses the width of the
+widest reference, so all references have the same size. With it each
+section gets the narrowest width its links need and sections split
+wherever that saves bytes; the result is never larger than the uniform one.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_ReadFrom_Link_Foundation_Links_Notation_Binary_PacketReader_Link_Foundation_Links_Notation_Binary_DecodeLimits_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.ReadFrom(Link.Foundation.Links.Notation.Binary.PacketReader%2CLink.Foundation.Links.Notation.Binary.DecodeLimits)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L473">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_ReadFrom_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ReadFrom*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_ReadFrom_Link_Foundation_Links_Notation_Binary_PacketReader_Link_Foundation_Links_Notation_Binary_DecodeLimits_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ReadFrom(Link.Foundation.Links.Notation.Binary.PacketReader,Link.Foundation.Links.Notation.Binary.DecodeLimits)">ReadFrom(PacketReader, DecodeLimits?)</h4>
+  <div class="markdown level1 summary"><p>Reads one packet; null on a clean end of stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static LinksPacket? ReadFrom(PacketReader reader, DecodeLimits? limits = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.PacketReader.html">PacketReader</a></td>
+        <td><span class="parametername">reader</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.DecodeLimits.html">DecodeLimits</a></td>
+        <td><span class="parametername">limits</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.LinksPacket.html">LinksPacket</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_ReadLeb128_Link_Foundation_Links_Notation_Binary_PacketReader_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.ReadLeb128(Link.Foundation.Links.Notation.Binary.PacketReader)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L610">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_ReadLeb128_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ReadLeb128*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_ReadLeb128_Link_Foundation_Links_Notation_Binary_PacketReader_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ReadLeb128(Link.Foundation.Links.Notation.Binary.PacketReader)">ReadLeb128(PacketReader)</h4>
+  <div class="markdown level1 summary"><p>Reads an unsigned LEB128 value of at most 64 bits.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ulong ReadLeb128(PacketReader reader)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.PacketReader.html">PacketReader</a></td>
+        <td><span class="parametername">reader</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_ReferenceWidth_Link_Foundation_Links_Notation_Binary_PacketReference_System_Boolean_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.ReferenceWidth(Link.Foundation.Links.Notation.Binary.PacketReference%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L276">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_ReferenceWidth_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ReferenceWidth*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_ReferenceWidth_Link_Foundation_Links_Notation_Binary_PacketReference_System_Boolean_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ReferenceWidth(Link.Foundation.Links.Notation.Binary.PacketReference,System.Boolean)">ReferenceWidth(PacketReference, bool)</h4>
+  <div class="markdown level1 summary"><p>The narrowest width able to hold <code class="paramref">reference</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte ReferenceWidth(PacketReference reference, bool externalReferences)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.Binary.PacketReference.html">PacketReference</a></td>
+        <td><span class="parametername">reference</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">externalReferences</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_ToBytes.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.ToBytes%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L410">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_ToBytes_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ToBytes*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_ToBytes" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.ToBytes">ToBytes()</h4>
+  <div class="markdown level1 summary"><p>Serializes the packet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] ToBytes()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_TryDecodeExternal_System_UInt64_System_Byte_System_UInt64__.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.TryDecodeExternal(System.UInt64%2CSystem.Byte%2CSystem.UInt64%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L250">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_TryDecodeExternal_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.TryDecodeExternal*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_TryDecodeExternal_System_UInt64_System_Byte_System_UInt64__" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.TryDecodeExternal(System.UInt64,System.Byte,System.UInt64@)">TryDecodeExternal(ulong, byte, out ulong)</h4>
+  <div class="markdown level1 summary"><p>Decodes a raw value; returns true and the value for externals.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryDecodeExternal(ulong raw, byte width, out ulong value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><span class="parametername">raw</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket_WriteLeb128_System_Collections_Generic_List_System_Byte__System_UInt64_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket.WriteLeb128(System.Collections.Generic.List%7BSystem.Byte%7D%2CSystem.UInt64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L593">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Binary_LinksPacket_WriteLeb128_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.WriteLeb128*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Binary_LinksPacket_WriteLeb128_System_Collections_Generic_List_System_Byte__System_UInt64_" data-uid="Link.Foundation.Links.Notation.Binary.LinksPacket.WriteLeb128(System.Collections.Generic.List{System.Byte},System.UInt64)">WriteLeb128(List&lt;byte&gt;, ulong)</h4>
+  <div class="markdown level1 summary"><p>Appends <code class="paramref">value</code> as unsigned LEB128.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void WriteLeb128(List&lt;byte&gt; output, ulong value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</td>
+        <td><span class="parametername">output</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Binary_LinksPacket.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Binary.LinksPacket%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs/#L173" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
