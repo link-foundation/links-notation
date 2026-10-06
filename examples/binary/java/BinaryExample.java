@@ -18,10 +18,12 @@ class BinaryExample {
             byte[] data = codec.encode(document);
             var decoded = codec.decode(data);
             if (!document.equals(decoded)) throw new IllegalStateException("Document changed");
+            var formatted = BinaryLinoCodec.formatDocument(decoded);
+            if (!document.equals(codec.parseDocument(formatted))) throw new IllegalStateException("Text model changed");
             System.out.println(
                 HexFormat.ofDelimiter(" ").formatHex(data)
                     + "\t"
-                    + BinaryLinoCodec.formatDocument(decoded).replace("\n", "\\n"));
+                    + formatted.replace("\n", "\\n"));
           }
     }
   }

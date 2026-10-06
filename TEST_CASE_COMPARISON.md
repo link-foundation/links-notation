@@ -18,13 +18,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 239 | 21 |
-| JavaScript | 284 | 25 |
-| Rust | 395 | 27 |
-| C# | 289 | 25 |
-| Go | 133 | 15 |
-| Java | 179 | 14 |
-| PHP | 229 | 21 |
+| Python | 240 | 21 |
+| JavaScript | 285 | 25 |
+| Rust | 396 | 27 |
+| C# | 290 | 25 |
+| Go | 134 | 15 |
+| Java | 180 | 14 |
+| PHP | 230 | 21 |
 
 ---
 
@@ -72,27 +72,31 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
 |-----------|---|---|---|---|---|---|---|
-| all native text models survive all binary options | ❌ | [✅](js/tests/Binary.test.js#L62) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| binary limits and malformed | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L121) | ❌ | ❌ |
-| binary native models | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L93) | ❌ | ❌ |
-| binary shared vectors | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L12) | ❌ | ❌ |
-| binary streams uint64 truncation and depth | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L159) | ❌ | ❌ |
+| all native text models survive all binary options | ❌ | [✅](js/tests/Binary.test.js#L83) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| binary limits and malformed | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L134) | ❌ | ❌ |
+| binary native models | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L106) | ❌ | ❌ |
+| binary shared vectors | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L25) | ❌ | ❌ |
+| binary streams uint64 truncation and depth | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L172) | ❌ | ❌ |
+| binary string budget stops before later scalars | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L12) | ❌ | ❌ |
 | binary text quotes every  unicode grammar whitespace character | ❌ | [✅](js/tests/Binary.test.js#L15) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| configurable limits apply in both directions; reject malformed packets | ❌ | [✅](js/tests/Binary.test.js#L90) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| limits and malformed | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L72) | [✅](php/tests/BinaryTest.php#L85) |
-| limits and malformed packets | [✅](python/tests/test_binary.py#L61) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| native text model round trip | [✅](python/tests/test_binary.py#L52) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| native text models | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L45) | [✅](php/tests/BinaryTest.php#L53) |
-| packet cursor boundaries, uint64, truncation and configurable depth | ❌ | [✅](js/tests/Binary.test.js#L118) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| packet stream boundaries uint64 and every truncated prefix | [✅](python/tests/test_binary.py#L80) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| packet streams uint64 and truncation | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L93) | ❌ |
-| packet streams uint64 truncation and depth | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/BinaryTest.php#L117) |
-| shared binary golden vectors | ❌ | [✅](js/tests/Binary.test.js#L21) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| shared vectors | [✅](python/tests/test_binary.py#L11) | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L18) | [✅](php/tests/BinaryTest.php#L25) |
-| \t | ❌ | [✅](js/tests/Binary.test.js#L31) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| unicode whitespace is quoted | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L12) | [✅](php/tests/BinaryTest.php#L18) |
+| configurable limits apply in both directions; reject malformed packets | ❌ | [✅](js/tests/Binary.test.js#L111) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| limits and malformed | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L84) | [✅](php/tests/BinaryTest.php#L97) |
+| limits and malformed packets | [✅](python/tests/test_binary.py#L67) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| native text model round trip | [✅](python/tests/test_binary.py#L58) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| native text models | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L57) | [✅](php/tests/BinaryTest.php#L65) |
+| packet cursor boundaries, uint64, truncation and configurable depth | ❌ | [✅](js/tests/Binary.test.js#L139) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| packet stream boundaries uint64 and every truncated prefix | [✅](python/tests/test_binary.py#L86) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| packet streams uint64 and truncation | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L105) | ❌ |
+| packet streams uint64 truncation and depth | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/BinaryTest.php#L129) |
+| shared binary golden vectors | ❌ | [✅](js/tests/Binary.test.js#L42) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| shared vectors | [✅](python/tests/test_binary.py#L17) | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L30) | [✅](php/tests/BinaryTest.php#L37) |
+| string budget stops before later scalars | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L12) | [✅](php/tests/BinaryTest.php#L18) |
+| string budget stops decoding before later scalars | [✅](python/tests/test_binary.py#L11) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| string decoding stops at the  u t f 8 budget before reading later scalars | ❌ | [✅](js/tests/Binary.test.js#L30) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| \t | ❌ | [✅](js/tests/Binary.test.js#L52) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| unicode whitespace is quoted | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L24) | [✅](php/tests/BinaryTest.php#L26) |
 
-**Category totals:** Python: 4, JavaScript: 6, Rust: 0, C#: 0, Go: 4, Java: 5, PHP: 5
+**Category totals:** Python: 5, JavaScript: 7, Rust: 0, C#: 0, Go: 5, Java: 6, PHP: 6
 
 ## Binary Links Notation
 
@@ -135,51 +139,53 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | parsed documents match the rust model | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs#L122) | ❌ | ❌ | ❌ |
 | references are quoted only when needed | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs#L138) | ❌ | ❌ | ❌ |
 | repeated references obey a total utf8 expansion budget | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs#L295) | ❌ | ❌ | ❌ |
-| stream packets are read one at a time and truncation is rejected | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs#L311) | ❌ | ❌ | ❌ |
+| stream packets are read one at a time and truncation is rejected | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs#L319) | ❌ | ❌ | ❌ |
+| string budget stops before later scalars | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs#L311) | ❌ | ❌ | ❌ |
 | text helpers preserve unicode whitespace references | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs#L200) | ❌ | ❌ | ❌ |
 
-**Category totals:** Python: 0, JavaScript: 0, Rust: 0, C#: 16, Go: 0, Java: 0, PHP: 0
+**Category totals:** Python: 0, JavaScript: 0, Rust: 0, C#: 17, Go: 0, Java: 0, PHP: 0
 
 ## Binary Notation
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
 |-----------|---|---|---|---|---|---|---|
-| arities without doublets are unencodable | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L424) | ❌ | ❌ | ❌ | ❌ |
-| arity options choose doublets triplets or any length | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L366) | ❌ | ❌ | ❌ | ❌ |
-| arity ranges parse and display | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L441) | ❌ | ❌ | ❌ | ❌ |
-| canonical text round trips the corpus | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L168) | ❌ | ❌ | ❌ | ❌ |
-| codec encoder uses configured limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1050) | ❌ | ❌ | ❌ | ❌ |
-| comment references survive binary and text round trips | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L855) | ❌ | ❌ | ❌ | ❌ |
-| compact address overflow is rejected before reading links | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L959) | ❌ | ❌ | ❌ | ❌ |
-| default depth limit rejects a bounded deep packet | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1012) | ❌ | ❌ | ❌ | ❌ |
-| every option set round trips the corpus | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L151) | ❌ | ❌ | ❌ | ❌ |
-| every short reference over delimiters round trips | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L812) | ❌ | ❌ | ❌ | ❌ |
-| external references match platform data hybrid | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L262) | ❌ | ❌ | ❌ | ❌ |
-| golden documents are stable | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L101) | ❌ | ❌ | ❌ | ❌ |
-| golden packets are stable | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L127) | ❌ | ❌ | ❌ | ❌ |
-| hand built packets decode | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L479) | ❌ | ❌ | ❌ | ❌ |
-| hostile packets hit limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L696) | ❌ | ❌ | ❌ | ❌ |
-| ids do not add an extra model nesting level | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1028) | ❌ | ❌ | ❌ | ❌ |
-| in memory packets obey limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L918) | ❌ | ❌ | ❌ | ❌ |
-| in memory packets reject invalid wire shapes | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L942) | ❌ | ❌ | ❌ | ❌ |
-| invalid code points are rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L677) | ❌ | ❌ | ❌ | ❌ |
-| invalid encoder models and address overflow are errors | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L988) | ❌ | ❌ | ❌ | ❌ |
-| large external values widen only their section | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L351) | ❌ | ❌ | ❌ | ❌ |
-| malformed packets are rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L594) | ❌ | ❌ | ❌ | ❌ |
-| native parser groups round trip without canonicalization | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L881) | ❌ | ❌ | ❌ | ❌ |
-| packed widths never take more bytes than uniform ones | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L327) | ❌ | ❌ | ❌ | ❌ |
-| packing rejects links it cannot lay out | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L515) | ❌ | ❌ | ❌ | ❌ |
-| references are quoted only when needed | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L199) | ❌ | ❌ | ❌ | ❌ |
-| repeated references obey a total utf8 expansion budget | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L968) | ❌ | ❌ | ❌ | ❌ |
-| reply options follow the received packet | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L463) | ❌ | ❌ | ❌ | ❌ |
-| stream failures are io errors and interruptions are retried | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L793) | ❌ | ❌ | ❌ | ❌ |
-| stream packets are read one at a time and truncation is rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L895) | ❌ | ❌ | ❌ | ❌ |
-| text helpers preserve unicode whitespace references | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L869) | ❌ | ❌ | ❌ | ❌ |
-| uniform widths grow past 256 addresses and packed widths stay small | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L295) | ❌ | ❌ | ❌ | ❌ |
-| width tiers follow the number of links | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L237) | ❌ | ❌ | ❌ | ❌ |
-| writing rejects sections that do not hold their links | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L543) | ❌ | ❌ | ❌ | ❌ |
+| arities without doublets are unencodable | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L453) | ❌ | ❌ | ❌ | ❌ |
+| arity options choose doublets triplets or any length | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L395) | ❌ | ❌ | ❌ | ❌ |
+| arity ranges parse and display | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L470) | ❌ | ❌ | ❌ | ❌ |
+| canonical text round trips the corpus | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L197) | ❌ | ❌ | ❌ | ❌ |
+| codec encoder uses configured limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1079) | ❌ | ❌ | ❌ | ❌ |
+| comment references survive binary and text round trips | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L884) | ❌ | ❌ | ❌ | ❌ |
+| compact address overflow is rejected before reading links | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L988) | ❌ | ❌ | ❌ | ❌ |
+| default depth limit rejects a bounded deep packet | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1041) | ❌ | ❌ | ❌ | ❌ |
+| every option set round trips the corpus | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L180) | ❌ | ❌ | ❌ | ❌ |
+| every short reference over delimiters round trips | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L841) | ❌ | ❌ | ❌ | ❌ |
+| external references match platform data hybrid | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L291) | ❌ | ❌ | ❌ | ❌ |
+| golden documents are stable | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L130) | ❌ | ❌ | ❌ | ❌ |
+| golden packets are stable | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L156) | ❌ | ❌ | ❌ | ❌ |
+| hand built packets decode | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L508) | ❌ | ❌ | ❌ | ❌ |
+| hostile packets hit limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L725) | ❌ | ❌ | ❌ | ❌ |
+| ids do not add an extra model nesting level | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1057) | ❌ | ❌ | ❌ | ❌ |
+| in memory packets obey limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L947) | ❌ | ❌ | ❌ | ❌ |
+| in memory packets reject invalid wire shapes | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L971) | ❌ | ❌ | ❌ | ❌ |
+| invalid code points are rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L706) | ❌ | ❌ | ❌ | ❌ |
+| invalid encoder models and address overflow are errors | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1017) | ❌ | ❌ | ❌ | ❌ |
+| large external values widen only their section | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L380) | ❌ | ❌ | ❌ | ❌ |
+| malformed packets are rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L623) | ❌ | ❌ | ❌ | ❌ |
+| native parser groups round trip without canonicalization | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L910) | ❌ | ❌ | ❌ | ❌ |
+| packed widths never take more bytes than uniform ones | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L356) | ❌ | ❌ | ❌ | ❌ |
+| packing rejects links it cannot lay out | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L544) | ❌ | ❌ | ❌ | ❌ |
+| references are quoted only when needed | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L228) | ❌ | ❌ | ❌ | ❌ |
+| repeated references obey a total utf8 expansion budget | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L997) | ❌ | ❌ | ❌ | ❌ |
+| reply options follow the received packet | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L492) | ❌ | ❌ | ❌ | ❌ |
+| stream failures are io errors and interruptions are retried | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L822) | ❌ | ❌ | ❌ | ❌ |
+| stream packets are read one at a time and truncation is rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L924) | ❌ | ❌ | ❌ | ❌ |
+| string budget stops before later scalars | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L15) | ❌ | ❌ | ❌ | ❌ |
+| text helpers preserve unicode whitespace references | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L898) | ❌ | ❌ | ❌ | ❌ |
+| uniform widths grow past 256 addresses and packed widths stay small | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L324) | ❌ | ❌ | ❌ | ❌ |
+| width tiers follow the number of links | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L266) | ❌ | ❌ | ❌ | ❌ |
+| writing rejects sections that do not hold their links | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L572) | ❌ | ❌ | ❌ | ❌ |
 
-**Category totals:** Python: 0, JavaScript: 0, Rust: 34, C#: 0, Go: 0, Java: 0, PHP: 0
+**Category totals:** Python: 0, JavaScript: 0, Rust: 35, C#: 0, Go: 0, Java: 0, PHP: 0
 
 ## Comments
 
@@ -884,12 +890,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (15 missing):
+**Binary** (18 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
 - binarysharedvectors
 - binarystreamsuint 64 truncationanddepth
+- binarystringbudgetstopsbeforelaterscalars
 - binarytextquoteseveryunicodegrammarwhitespacecharacter
 - configurablelimitsapplyinbothdirections;rejectmalformedpackets
 - limitsandmalformed
@@ -898,6 +905,8 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - packetstreamsuint 64 andtruncation
 - packetstreamsuint 64 truncationanddepth
 - sharedbinarygoldenvectors
+- stringbudgetstopsbeforelaterscalars
+- stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
 - t
 - unicodewhitespaceisquoted
 
@@ -919,7 +928,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
 
-**Binary Lino Codec** (16 missing):
+**Binary Lino Codec** (17 missing):
 - canonicaltextroundtripsthecorpus
 - commentreferencessurvivebinaryandtextroundtrips
 - compactaddressoverflowisrejectedbeforereadinglinks
@@ -935,9 +944,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - referencesarequotedonlywhenneeded
 - repeatedreferencesobeyatotalutf 8 expansionbudget
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 
-**Binary Notation** (34 missing):
+**Binary Notation** (35 missing):
 - aritieswithoutdoubletsareunencodable
 - arityoptionschoosedoubletstripletsoranylength
 - arityrangesparseanddisplay
@@ -968,6 +978,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - replyoptionsfollowthereceivedpacket
 - streamfailuresareioerrorsandinterruptionsareretried
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 - uniformwidthsgrowpast 256 addressesandpackedwidthsstaysmall
 - widthtiersfollowthenumberoflinks
@@ -1283,7 +1294,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 367 tests**
+**Total missing: 372 tests**
 
 ### JavaScript Missing Tests
 
@@ -1307,11 +1318,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (13 missing):
+**Binary** (16 missing):
 - binarylimitsandmalformed
 - binarynativemodels
 - binarysharedvectors
 - binarystreamsuint 64 truncationanddepth
+- binarystringbudgetstopsbeforelaterscalars
 - limitsandmalformed
 - limitsandmalformedpackets
 - nativetextmodelroundtrip
@@ -1320,6 +1332,8 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - packetstreamsuint 64 andtruncation
 - packetstreamsuint 64 truncationanddepth
 - sharedvectors
+- stringbudgetstopsbeforelaterscalars
+- stringbudgetstopsdecodingbeforelaterscalars
 - unicodewhitespaceisquoted
 
 **Binary Links Notation** (16 missing):
@@ -1340,7 +1354,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
 
-**Binary Lino Codec** (16 missing):
+**Binary Lino Codec** (17 missing):
 - canonicaltextroundtripsthecorpus
 - commentreferencessurvivebinaryandtextroundtrips
 - compactaddressoverflowisrejectedbeforereadinglinks
@@ -1356,9 +1370,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - referencesarequotedonlywhenneeded
 - repeatedreferencesobeyatotalutf 8 expansionbudget
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 
-**Binary Notation** (34 missing):
+**Binary Notation** (35 missing):
 - aritieswithoutdoubletsareunencodable
 - arityoptionschoosedoubletstripletsoranylength
 - arityrangesparseanddisplay
@@ -1389,6 +1404,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - replyoptionsfollowthereceivedpacket
 - streamfailuresareioerrorsandinterruptionsareretried
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 - uniformwidthsgrowpast 256 addressesandpackedwidthsstaysmall
 - widthtiersfollowthenumberoflinks
@@ -1656,7 +1672,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 323 tests**
+**Total missing: 328 tests**
 
 ### Rust Missing Tests
 
@@ -1680,12 +1696,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (19 missing):
+**Binary** (23 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
 - binarysharedvectors
 - binarystreamsuint 64 truncationanddepth
+- binarystringbudgetstopsbeforelaterscalars
 - binarytextquoteseveryunicodegrammarwhitespacecharacter
 - configurablelimitsapplyinbothdirections;rejectmalformedpackets
 - limitsandmalformed
@@ -1698,6 +1715,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - packetstreamsuint 64 truncationanddepth
 - sharedbinarygoldenvectors
 - sharedvectors
+- stringbudgetstopsbeforelaterscalars
+- stringbudgetstopsdecodingbeforelaterscalars
+- stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
 - t
 - unicodewhitespaceisquoted
 
@@ -1719,7 +1739,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
 
-**Binary Lino Codec** (16 missing):
+**Binary Lino Codec** (17 missing):
 - canonicaltextroundtripsthecorpus
 - commentreferencessurvivebinaryandtextroundtrips
 - compactaddressoverflowisrejectedbeforereadinglinks
@@ -1735,6 +1755,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - referencesarequotedonlywhenneeded
 - repeatedreferencesobeyatotalutf 8 expansionbudget
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 
 **Empty Reference** (2 missing):
@@ -1908,7 +1929,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - namedtupletolink
 - tupletolink
 
-**Total missing: 212 tests**
+**Total missing: 217 tests**
 
 ### C# Missing Tests
 
@@ -1932,12 +1953,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (19 missing):
+**Binary** (23 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
 - binarysharedvectors
 - binarystreamsuint 64 truncationanddepth
+- binarystringbudgetstopsbeforelaterscalars
 - binarytextquoteseveryunicodegrammarwhitespacecharacter
 - configurablelimitsapplyinbothdirections;rejectmalformedpackets
 - limitsandmalformed
@@ -1950,10 +1972,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - packetstreamsuint 64 truncationanddepth
 - sharedbinarygoldenvectors
 - sharedvectors
+- stringbudgetstopsbeforelaterscalars
+- stringbudgetstopsdecodingbeforelaterscalars
+- stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
 - t
 - unicodewhitespaceisquoted
 
-**Binary Notation** (34 missing):
+**Binary Notation** (35 missing):
 - aritieswithoutdoubletsareunencodable
 - arityoptionschoosedoubletstripletsoranylength
 - arityrangesparseanddisplay
@@ -1984,6 +2009,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - replyoptionsfollowthereceivedpacket
 - streamfailuresareioerrorsandinterruptionsareretried
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 - uniformwidthsgrowpast 256 addressesandpackedwidthsstaysmall
 - widthtiersfollowthenumberoflinks
@@ -2277,7 +2303,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 317 tests**
+**Total missing: 322 tests**
 
 ### Go Missing Tests
 
@@ -2303,7 +2329,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (15 missing):
+**Binary** (18 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarytextquoteseveryunicodegrammarwhitespacecharacter
 - configurablelimitsapplyinbothdirections;rejectmalformedpackets
@@ -2317,6 +2343,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - packetstreamsuint 64 truncationanddepth
 - sharedbinarygoldenvectors
 - sharedvectors
+- stringbudgetstopsbeforelaterscalars
+- stringbudgetstopsdecodingbeforelaterscalars
+- stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
 - t
 - unicodewhitespaceisquoted
 
@@ -2338,7 +2367,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
 
-**Binary Lino Codec** (16 missing):
+**Binary Lino Codec** (17 missing):
 - canonicaltextroundtripsthecorpus
 - commentreferencessurvivebinaryandtextroundtrips
 - compactaddressoverflowisrejectedbeforereadinglinks
@@ -2354,9 +2383,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - referencesarequotedonlywhenneeded
 - repeatedreferencesobeyatotalutf 8 expansionbudget
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 
-**Binary Notation** (34 missing):
+**Binary Notation** (35 missing):
 - aritieswithoutdoubletsareunencodable
 - arityoptionschoosedoubletstripletsoranylength
 - arityrangesparseanddisplay
@@ -2387,6 +2417,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - replyoptionsfollowthereceivedpacket
 - streamfailuresareioerrorsandinterruptionsareretried
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 - uniformwidthsgrowpast 256 addressesandpackedwidthsstaysmall
 - widthtiersfollowthenumberoflinks
@@ -2810,7 +2841,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 469 tests**
+**Total missing: 474 tests**
 
 ### Java Missing Tests
 
@@ -2832,12 +2863,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - simplelink
 - singlelineformat
 
-**Binary** (14 missing):
+**Binary** (17 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
 - binarysharedvectors
 - binarystreamsuint 64 truncationanddepth
+- binarystringbudgetstopsbeforelaterscalars
 - binarytextquoteseveryunicodegrammarwhitespacecharacter
 - configurablelimitsapplyinbothdirections;rejectmalformedpackets
 - limitsandmalformedpackets
@@ -2846,6 +2878,8 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - packetstreamboundariesuint 64 andeverytruncatedprefix
 - packetstreamsuint 64 truncationanddepth
 - sharedbinarygoldenvectors
+- stringbudgetstopsdecodingbeforelaterscalars
+- stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
 - t
 
 **Binary Links Notation** (16 missing):
@@ -2866,7 +2900,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
 
-**Binary Lino Codec** (16 missing):
+**Binary Lino Codec** (17 missing):
 - canonicaltextroundtripsthecorpus
 - commentreferencessurvivebinaryandtextroundtrips
 - compactaddressoverflowisrejectedbeforereadinglinks
@@ -2882,9 +2916,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - referencesarequotedonlywhenneeded
 - repeatedreferencesobeyatotalutf 8 expansionbudget
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 
-**Binary Notation** (34 missing):
+**Binary Notation** (35 missing):
 - aritieswithoutdoubletsareunencodable
 - arityoptionschoosedoubletstripletsoranylength
 - arityrangesparseanddisplay
@@ -2915,6 +2950,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - replyoptionsfollowthereceivedpacket
 - streamfailuresareioerrorsandinterruptionsareretried
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 - uniformwidthsgrowpast 256 addressesandpackedwidthsstaysmall
 - widthtiersfollowthenumberoflinks
@@ -3301,7 +3337,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 427 tests**
+**Total missing: 432 tests**
 
 ### PHP Missing Tests
 
@@ -3326,12 +3362,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (14 missing):
+**Binary** (17 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
 - binarysharedvectors
 - binarystreamsuint 64 truncationanddepth
+- binarystringbudgetstopsbeforelaterscalars
 - binarytextquoteseveryunicodegrammarwhitespacecharacter
 - configurablelimitsapplyinbothdirections;rejectmalformedpackets
 - limitsandmalformedpackets
@@ -3340,6 +3377,8 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - packetstreamboundariesuint 64 andeverytruncatedprefix
 - packetstreamsuint 64 andtruncation
 - sharedbinarygoldenvectors
+- stringbudgetstopsdecodingbeforelaterscalars
+- stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
 - t
 
 **Binary Links Notation** (16 missing):
@@ -3360,7 +3399,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
 
-**Binary Lino Codec** (16 missing):
+**Binary Lino Codec** (17 missing):
 - canonicaltextroundtripsthecorpus
 - commentreferencessurvivebinaryandtextroundtrips
 - compactaddressoverflowisrejectedbeforereadinglinks
@@ -3376,9 +3415,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - referencesarequotedonlywhenneeded
 - repeatedreferencesobeyatotalutf 8 expansionbudget
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 
-**Binary Notation** (34 missing):
+**Binary Notation** (35 missing):
 - aritieswithoutdoubletsareunencodable
 - arityoptionschoosedoubletstripletsoranylength
 - arityrangesparseanddisplay
@@ -3409,6 +3449,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - replyoptionsfollowthereceivedpacket
 - streamfailuresareioerrorsandinterruptionsareretried
 - streampacketsarereadoneatatimeandtruncationisrejected
+- stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 - uniformwidthsgrowpast 256 addressesandpackedwidthsstaysmall
 - widthtiersfollowthenumberoflinks
@@ -3734,5 +3775,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 377 tests**
+**Total missing: 382 tests**
 

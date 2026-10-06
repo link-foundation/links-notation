@@ -9,8 +9,21 @@ import org.junit.jupiter.api.Test;
 
 class BinaryTest {
   @Test
+  void stringBudgetStopsBeforeLaterScalars() {
+    var codec = new BinaryLinoCodec(new Options(), new Limits(100, 100, 100, 1, 64));
+    var error =
+        assertThrows(
+            IllegalArgumentException.class,
+            () ->
+                codec.decode(
+                    HexFormat.of().parseHex("13024605011001030000009fffffff9effffff0028ffff06")));
+    assertTrue(error.getMessage().contains("string budget exceeded"));
+  }
+
+  @Test
   void unicodeWhitespaceIsQuoted() {
-    for (String text : List.of("\u0085", "x\u00a0y", "x\u2028y"))
+    for (String text :
+        List.of("\u0085", "x\u00a0y", "x\u2028y", "\u001c", "\u001d", "\u001e", "\u001f", "\ufeff"))
       assertEquals("'" + text + "'", BinaryLinoCodec.formatReference(text));
   }
 

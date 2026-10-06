@@ -523,9 +523,15 @@ class _Decoder:
                 _require(len(elements) == 1, "number needs one value")
                 return self.text(str(self.number(elements[0])))
             if marker == 3:
-                points = [self.number(e) for e in elements]
-                _require(all(p <= 0x10FFFF and not 0xD800 <= p <= 0xDFFF for p in points), "invalid Unicode scalar")
-                return self.text("".join(chr(p) for p in points))
+                chars, byte_count = [], 0
+                for e in elements:
+                    p = self.number(e)
+                    _require(p <= 0x10FFFF and not 0xD800 <= p <= 0xDFFF, "invalid Unicode scalar")
+                    size = 1 if p <= 0x7F else 2 if p <= 0x7FF else 3 if p <= 0xFFFF else 4
+                    _require(size <= self.strings - byte_count, "too many expanded string bytes")
+                    byte_count += size
+                    chars.append(chr(p))
+                return self.text("".join(chars))
             if marker == 5:
                 _require(elements, "identified link needs id")
                 identifier = self.decode(elements[0], depth)
@@ -555,11 +561,7 @@ def _canonical(node):
 
 
 def format_reference(text):
-    if (
-        text
-        and not text.startswith("#")
-        and not any((c.isspace() and not "\x1c" <= c <= "\x1f") or c in "():\"'`" for c in text)
-    ):
+    if text and not text.startswith("#") and not any(c.isspace() or c in "\ufeff():\"'`" for c in text):
         return text
     choices = []
     for quote in "'\"`":

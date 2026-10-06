@@ -36,10 +36,21 @@ func main() {
 						}
 					}
 					parts := make([]string, len(data))
+					formatted := lino.FormatBinaryDocument(decoded)
+					reparsed, err := codec.ParseDocument(formatted)
+					check(err)
+					if len(document) != len(reparsed) {
+						panic("Text model changed")
+					}
+					for i, node := range document {
+						if !node.Equal(reparsed[i]) {
+							panic("Text model changed")
+						}
+					}
 					for i, b := range data {
 						parts[i] = fmt.Sprintf("%02x", b)
 					}
-					fmt.Printf("%s\t%s\n", strings.Join(parts, " "), strings.ReplaceAll(lino.FormatBinaryDocument(decoded), "\n", `\n`))
+					fmt.Printf("%s\t%s\n", strings.Join(parts, " "), strings.ReplaceAll(formatted, "\n", `\n`))
 				}
 			}
 		}

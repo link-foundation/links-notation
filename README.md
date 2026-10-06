@@ -255,13 +255,13 @@ All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP)
 <!-- test-counts:start -->
 | Language | Tests | Test categories |
 | --- | --- | --- |
-| Python | 239 | 21 |
-| JavaScript | 284 | 25 |
-| Rust | 395 | 27 |
-| C# | 289 | 25 |
-| Go | 133 | 15 |
-| Java | 179 | 14 |
-| PHP | 229 | 21 |
+| Python | 240 | 21 |
+| JavaScript | 285 | 25 |
+| Rust | 396 | 27 |
+| C# | 290 | 25 |
+| Go | 134 | 15 |
+| Java | 180 | 14 |
+| PHP | 230 | 21 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files

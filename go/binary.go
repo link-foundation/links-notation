@@ -808,6 +808,7 @@ func (d *binaryDecoder) decode(r Reference, depth uint64) *Link {
 			for _, e := range elements {
 				p := d.number(e)
 				demand(p <= utf8.MaxRune && !(p >= 0xd800 && p <= 0xdfff), "invalid Unicode scalar")
+				demand(uint64(utf8.RuneLen(rune(p))) <= d.strings-uint64(text.Len()), "string budget exceeded")
 				text.WriteRune(rune(p))
 			}
 			return d.text(text.String())
@@ -941,7 +942,9 @@ func (c *BinaryLinoCodec) ParseDocument(text string) ([]*Link, error) {
 	return document, nil
 }
 func FormatBinaryReference(text string) string {
-	needs := text == "" || strings.HasPrefix(text, "#") || strings.IndexFunc(text, func(r rune) bool { return unicode.IsSpace(r) || strings.ContainsRune("():\"'`", r) }) >= 0
+	needs := text == "" || strings.HasPrefix(text, "#") || strings.IndexFunc(text, func(r rune) bool {
+		return unicode.IsSpace(r) || r >= 0x1c && r <= 0x1f || r == 0xfeff || strings.ContainsRune("():\"'`", r)
+	}) >= 0
 	if !needs {
 		return text
 	}

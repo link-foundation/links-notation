@@ -518,7 +518,8 @@ public static class LinoMapping
                     }
                     return ReferenceText(Number(elements[0]).ToString(CultureInfo.InvariantCulture));
                 case LinksPacket.String:
-                    var text = new StringBuilder(elements.Count);
+                    var text = new StringBuilder((int)Math.Min(elements.Count, _stringBytesLeft));
+                    long byteCount = 0;
                     foreach (var element in elements)
                     {
                         var codePoint = Number(element);
@@ -526,7 +527,13 @@ public static class LinoMapping
                         {
                             throw BinaryNotationException.Malformed($"invalid code point {codePoint}");
                         }
-                        text.Append(new Rune((int)codePoint).ToString());
+                        var rune = new Rune((int)codePoint);
+                        if (rune.Utf8SequenceLength > _stringBytesLeft - byteCount)
+                        {
+                            throw BinaryNotationException.Limit("too many expanded string bytes");
+                        }
+                        byteCount += rune.Utf8SequenceLength;
+                        text.Append(rune.ToString());
                     }
                     return ReferenceText(text.ToString());
                 case LinksPacket.List:

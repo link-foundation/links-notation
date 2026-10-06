@@ -9,6 +9,19 @@ import (
 	"testing"
 )
 
+func TestBinaryStringBudgetStopsBeforeLaterScalars(t *testing.T) {
+	data, err := hex.DecodeString("13024605011001030000009fffffff9effffff0028ffff06")
+	if err != nil {
+		t.Fatal(err)
+	}
+	codec := NewBinaryLinoCodec()
+	codec.Limits.MaxStringBytes = 1
+	_, err = codec.Decode(data)
+	if err == nil || !strings.Contains(err.Error(), "string budget exceeded") {
+		t.Fatalf("expected early string limit, got %v", err)
+	}
+}
+
 func TestBinarySharedVectors(t *testing.T) {
 	data, err := os.ReadFile("../docs/protocol/binary-links-notation-vectors.txt")
 	if err != nil {

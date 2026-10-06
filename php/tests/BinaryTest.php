@@ -15,9 +15,21 @@ use PHPUnit\Framework\TestCase;
 
 class BinaryTest extends TestCase
 {
+    public function testStringBudgetStopsBeforeLaterScalars(): void
+    {
+        $codec = new BinaryLinoCodec(limits: new DecodeLimits(maxStringBytes: 1));
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("string budget exceeded");
+        $codec->decode(hex2bin("13024605011001030000009fffffff9effffff0028ffff06"));
+    }
+
     public function testUnicodeWhitespaceIsQuoted(): void
     {
-        foreach (["\u{0085}", "x\u{00a0}y", "x\u{2028}y"] as $text) {
+        $references = [
+            "\u{0085}", "x\u{00a0}y", "x\u{2028}y",
+            "\u{001c}", "\u{001d}", "\u{001e}", "\u{001f}", "\u{feff}",
+        ];
+        foreach ($references as $text) {
             self::assertSame("'" . $text . "'", BinaryLinoCodec::formatReference($text));
         }
     }

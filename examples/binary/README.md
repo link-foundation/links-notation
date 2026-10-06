@@ -8,11 +8,11 @@ composer install --working-dir=php --no-dev
 bash examples/binary/run-interop.sh
 ```
 
-All seven programs encode twenty documents from `corpus.txt` with all twelve combinations of external
+All seven programs encode twenty-five documents from `corpus.txt` with all twelve combinations of external
 references, arity (`2`, `2..3`, `1..`) and packed widths. Each decodes its bytes
-and checks the original document. The script compares all 240 hexadecimal packets
+and checks the original document, then reparses its canonical text. The script compares all 300 hexadecimal packets
 and their decoded text across languages, covering empty documents, names,
-Unicode whitespace, unsigned 64-bit numbers, comments, indentation, mixed quotes,
+Unicode whitespace and parser-specific separators, unsigned 64-bit numbers, comments, indentation, mixed quotes,
 empty identifiers and groups.
 
 The default run requires all seven runtimes. `--rust-csharp-only` runs the

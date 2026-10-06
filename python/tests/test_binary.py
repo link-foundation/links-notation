@@ -8,6 +8,12 @@ from links_notation import Link, Parser
 from links_notation.binary import ArityRange, BinaryLinoCodec, BinaryLinoOptions, DecodeLimits, LinksPacket
 
 
+def test_string_budget_stops_decoding_before_later_scalars():
+    data = bytes.fromhex("13024605011001030000009fffffff9effffff0028ffff06")
+    with pytest.raises(ValueError, match="string bytes"):
+        BinaryLinoCodec(limits=DecodeLimits(max_string_bytes=1)).decode(data)
+
+
 def test_shared_vectors():
     count = 0
     for line in (

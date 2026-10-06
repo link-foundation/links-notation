@@ -105,6 +105,8 @@ final class Decoder
                             !(UInt64::compare($point, "55296") >= 0 && UInt64::compare($point, "57343") <= 0),
                         "invalid Unicode scalar",
                     );
+                    $size = (int) $point <= 0x7f ? 1 : ((int) $point <= 0x7ff ? 2 : ((int) $point <= 0xffff ? 3 : 4));
+                    UInt64::require($size <= $this->strings - strlen($text), "string budget exceeded");
                     $text .= mb_chr((int) $point, "UTF-8");
                 }
                 return $this->text($text);

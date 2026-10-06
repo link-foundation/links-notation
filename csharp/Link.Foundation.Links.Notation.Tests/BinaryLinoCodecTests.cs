@@ -308,6 +308,14 @@ public sealed class BinaryLinoCodecTests
     }
 
     [Fact]
+    public void StringBudgetStopsBeforeLaterScalars()
+    {
+        var bytes = Convert.FromHexString("13024605011001030000009fffffff9effffff0028ffff06");
+        var codec = new BinaryLinoCodec { Limits = new DecodeLimits { MaxStringBytes = 1 } };
+        Assert.Equal(BinaryErrorKind.LimitExceeded, Assert.Throws<BinaryNotationException>(() => codec.Decode(bytes)).Kind);
+    }
+
+    [Fact]
     public void StreamPacketsAreReadOneAtATimeAndTruncationIsRejected()
     {
         var bytes = new BinaryLinoCodec().Encode(Parse("(a b)"));

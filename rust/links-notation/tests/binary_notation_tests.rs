@@ -11,6 +11,35 @@ use links_notation::binary::{
 use links_notation::LiNo;
 use std::io::{self, Cursor, Read};
 
+#[test]
+fn string_budget_stops_before_later_scalars() {
+    let packet = LinksPacket::pack(
+        true,
+        &[
+            (
+                6,
+                vec![
+                    Reference::Internal(3),
+                    Reference::External(97),
+                    Reference::External(98),
+                    Reference::External(0xd800),
+                ],
+            ),
+            (7, vec![Reference::Internal(6)]),
+        ],
+        true,
+    )
+    .unwrap();
+    let limits = DecodeLimits {
+        max_string_bytes: 1,
+        ..DecodeLimits::default()
+    };
+    assert!(matches!(
+        decode_document(&packet, &limits),
+        Err(BinaryError::LimitExceeded(_))
+    ));
+}
+
 const CORPUS: &[&str] = &[
     "() ((1 1))",
     "((1: 1 1)) ((1: 1 2))",

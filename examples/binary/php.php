@@ -26,7 +26,17 @@ foreach ($corpus as $source) {
                         throw new RuntimeException('Document changed');
                     }
                 }
-                echo implode(' ', str_split(bin2hex($data), 2)), "\t", str_replace("\n", '\\n', $codec->formatDocument($decoded)), "\n";
+                $formatted = $codec->formatDocument($decoded);
+                $reparsed = $codec->parseDocument($formatted);
+                if (count($document) !== count($reparsed)) {
+                    throw new RuntimeException('Text model changed');
+                }
+                foreach ($document as $i => $node) {
+                    if (!$node->equals($reparsed[$i])) {
+                        throw new RuntimeException('Text model changed');
+                    }
+                }
+                echo implode(' ', str_split(bin2hex($data), 2)), "\t", str_replace("\n", '\\n', $formatted), "\n";
             }
         }
     }

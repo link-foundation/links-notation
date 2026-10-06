@@ -112,3 +112,16 @@ tests: `binary-interop-37446166924.log:30` and `php-37446166638.log:512` could n
 resolve `shivammathur/setup-php@v2.37.2`. Its actual stable tag is `2.37.2`.
 The checker now preserves exact registry tag spelling, checks it in addition to
 the numeric version, and has an offline regression for this case.
+
+Review also found that all seven decoders built an entire string before checking
+its remaining UTF-8 budget. A two-link packet encodes `a`, `b`, then an invalid
+scalar; with a one-byte string budget it previously reached the third scalar
+instead of stopping at `b`. The new tests fail before the fix and now require an
+early limit error. String builders check each scalar's byte count before append,
+and preallocation respects the remaining budget.
+
+The shared corpus also checks parsing the formatted result. It reproduces data
+loss for Python's U+001C–U+001F whitespace and JavaScript's U+FEFF whitespace
+when they are emitted bare. Every formatter now quotes the union of the native
+grammars' whitespace characters. All seven programs preserve the text model
+and compare identical bytes and canonical text in 300 option/corpus cases.

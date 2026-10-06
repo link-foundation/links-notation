@@ -684,12 +684,17 @@ public final class BinaryLinoCodec {
         }
         if (marker == 3) {
           var text = new StringBuilder();
+          long byteCount = 0;
           for (var e : elements) {
             BigInteger p = number(e);
             require(
                 p.compareTo(bi(0x10ffff)) <= 0
                     && !(p.compareTo(bi(0xd800)) >= 0 && p.compareTo(bi(0xdfff)) <= 0),
                 "invalid Unicode scalar");
+            int point = p.intValue();
+            int size = point <= 0x7f ? 1 : point <= 0x7ff ? 2 : point <= 0xffff ? 3 : 4;
+            require(size <= strings - byteCount, "string budget exceeded");
+            byteCount += size;
             text.appendCodePoint(p.intValue());
           }
           return text(text.toString());
@@ -821,7 +826,8 @@ public final class BinaryLinoCodec {
             .noneMatch(
                 c ->
                     c == 0x85
-                        || (Character.isWhitespace(c) && (c < 0x1c || c > 0x1f))
+                        || Character.isWhitespace(c)
+                        || c == 0xfeff
                         || Character.isSpaceChar(c)
                         || "():\"'`".indexOf(c) >= 0)) return text;
     char chosen = 0;

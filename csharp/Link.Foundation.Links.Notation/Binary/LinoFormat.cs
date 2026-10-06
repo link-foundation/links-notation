@@ -117,7 +117,7 @@ public static class LinoFormat
         ArgumentNullException.ThrowIfNull(reference);
         var needsQuotes = reference.Length == 0
             || reference.StartsWith('#')
-            || reference.Any(character => char.IsWhiteSpace(character) || character is '(' or ')' or ':' or '\'' or '"' or '`');
+            || reference.Any(character => char.IsWhiteSpace(character) || character is >= '\u001c' and <= '\u001f' or '\ufeff' or '(' or ')' or ':' or '\'' or '"' or '`');
         if (!needsQuotes)
         {
             return reference;

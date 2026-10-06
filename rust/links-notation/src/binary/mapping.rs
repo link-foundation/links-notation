@@ -512,7 +512,8 @@ impl<'a> Decoder<'a> {
                 _ => Err(BinaryError::malformed("a number needs exactly one value")),
             },
             STRING => {
-                let mut text = String::with_capacity(elements.len());
+                let mut text =
+                    String::with_capacity(elements.len().min(self.string_bytes_left.get()));
                 for &element in elements {
                     let code_point = self.number(element)?;
                     let character = u32::try_from(code_point)
@@ -521,6 +522,13 @@ impl<'a> Decoder<'a> {
                         .ok_or_else(|| {
                             BinaryError::malformed(format!("invalid code point {code_point}"))
                         })?;
+                    if character.len_utf8()
+                        > self.string_bytes_left.get().saturating_sub(text.len())
+                    {
+                        return Err(BinaryError::LimitExceeded(
+                            "too many expanded string bytes".into(),
+                        ));
+                    }
                     text.push(character);
                 }
                 self.reference_text(text)

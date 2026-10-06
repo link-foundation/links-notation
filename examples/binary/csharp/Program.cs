@@ -24,7 +24,12 @@ foreach (var source in corpus)
                     throw new InvalidOperationException("Document changed in binary round trip");
                 }
                 var hex = string.Join(" ", bytes.Select(value => value.ToString("x2")));
-                Console.WriteLine($"{hex}\t{LinoFormat.FormatDocument(decoded).Replace("\n", "\\n")}");
+                var formatted = LinoFormat.FormatDocument(decoded);
+                if (!document.SequenceEqual(LinoFormat.ParseDocument(formatted)))
+                {
+                    throw new InvalidOperationException("Document changed in text round trip");
+                }
+                Console.WriteLine($"{hex}\t{formatted.Replace("\n", "\\n")}");
             }
         }
     }

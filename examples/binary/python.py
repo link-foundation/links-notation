@@ -14,4 +14,6 @@ for source in CORPUS:
                 data = codec.encode(document)
                 decoded = codec.decode(data)
                 assert decoded == document
-                print(data.hex(" ") + "\t" + codec.format_document(decoded).replace("\n", "\\n"))
+                formatted = codec.format_document(decoded)
+                assert codec.parse_document(formatted) == document
+                print(data.hex(" ") + "\t" + formatted.replace("\n", "\\n"))

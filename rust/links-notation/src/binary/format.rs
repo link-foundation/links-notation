@@ -102,7 +102,11 @@ pub fn format_reference(reference: &str) -> String {
     let needs_quotes = reference.is_empty()
         || reference.starts_with('#')
         || reference.chars().any(|character| {
-            character.is_whitespace() || matches!(character, '(' | ')' | ':' | '\'' | '"' | '`')
+            character.is_whitespace()
+                || matches!(
+                    character,
+                    '\u{1c}'..='\u{1f}' | '\u{feff}' | '(' | ')' | ':' | '\'' | '"' | '`'
+                )
         });
     if !needs_quotes {
         return reference.to_string();

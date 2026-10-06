@@ -3441,11 +3441,16 @@ class Decoder {
         return this.text(String(this.number(elements[0])));
       }
       if (marker === 3) {
-        const chars = elements.map((e) => {
+        const chars = [];
+        let byteCount = 0;
+        for (const e of elements) {
           const p = this.number(e);
           requireValue(p <= 0x10ffffn && !(p >= 0xd800n && p <= 0xdfffn), "invalid Unicode scalar");
-          return String.fromCodePoint(Number(p));
-        });
+          const size = p <= 0x7fn ? 1 : p <= 0x7ffn ? 2 : p <= 0xffffn ? 3 : 4;
+          requireValue(size <= this.strings - byteCount, "string budget exceeded");
+          byteCount += size;
+          chars.push(String.fromCodePoint(Number(p)));
+        }
         return this.text(chars.join(""));
       }
       if (marker === 5) {
@@ -3479,7 +3484,7 @@ function canonical(node) {
   return new Link(node.id, node.values.map(canonical));
 }
 function formatBinaryReference(text) {
-  if (text && !text.startsWith("#") && !/[\p{White_Space}():"'`]/u.test(text))
+  if (text && !text.startsWith("#") && !/[\p{White_Space}\u001c-\u001f\ufeff():"'`]/u.test(text))
     return text;
   let choice = null;
   for (const quote of ["'", '"', "`"])

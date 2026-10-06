@@ -23,12 +23,14 @@ fn main() -> BinaryResult<()> {
                     let bytes = codec.encode(&document)?;
                     let decoded = codec.decode(&bytes)?;
                     assert_eq!(decoded, document);
+                    let formatted = format_document(&decoded);
+                    assert_eq!(parse_document(&formatted)?, document);
                     let hex = bytes
                         .iter()
                         .map(|byte| format!("{byte:02x}"))
                         .collect::<Vec<_>>()
                         .join(" ");
-                    println!("{hex}\t{}", format_document(&decoded).replace('\n', "\\n"));
+                    println!("{hex}\t{}", formatted.replace('\n', "\\n"));
                 }
             }
         }

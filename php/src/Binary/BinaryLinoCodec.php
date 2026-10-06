@@ -77,7 +77,7 @@ final readonly class BinaryLinoCodec
     }
     public static function formatReference(string $text): string
     {
-        $needsQuotes = '/[\p{Z}\x{0085}\x{0009}-\x{000d}():"\'`]/u';
+        $needsQuotes = '/[\p{Z}\x{0085}\x{0009}-\x{000d}\x{001c}-\x{001f}\x{feff}():"\'`]/u';
         if ($text !== "" && !str_starts_with($text, "#") && preg_match($needsQuotes, $text) === 0) {
             return $text;
         }

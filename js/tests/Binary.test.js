@@ -13,9 +13,30 @@ import {
 } from '../src/index.js';
 
 test('binary text quotes every Unicode grammar whitespace character', () => {
-  for (const text of ['\u0085', 'x\u00a0y', 'x\u2028y']) {
+  for (const text of [
+    '\u0085',
+    'x\u00a0y',
+    'x\u2028y',
+    '\u001c',
+    '\u001d',
+    '\u001e',
+    '\u001f',
+    '\ufeff',
+  ]) {
     expect(formatBinaryReference(text)).toBe("'" + text + "'");
   }
+});
+
+test('string decoding stops at the UTF-8 budget before reading later scalars', () => {
+  const bytes = Buffer.from(
+    '13024605011001030000009fffffff9effffff0028ffff06',
+    'hex'
+  );
+  const codec = new BinaryLinoCodec(
+    undefined,
+    new DecodeLimits({ maxStringBytes: 1 })
+  );
+  expect(() => codec.decode(bytes)).toThrow('string budget exceeded');
 });
 
 test('shared binary golden vectors', () => {

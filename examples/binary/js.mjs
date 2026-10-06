@@ -9,6 +9,9 @@ for (const source of corpus) {
     const data = codec.encode(document);
     const decoded = codec.decode(data);
     if (!document.every((n, i) => n.equals(decoded[i])) || document.length !== decoded.length) throw new Error('Document changed');
-    console.log([...data].map(b => b.toString(16).padStart(2, '0')).join(' ') + '\t' + codec.formatDocument(decoded).replaceAll('\n', '\\n'));
+    const formatted = codec.formatDocument(decoded);
+    const reparsed = codec.parseDocument(formatted);
+    if (reparsed.length !== document.length || !document.every((n, i) => n.equals(reparsed[i]))) throw new Error('Text model changed');
+    console.log([...data].map(b => b.toString(16).padStart(2, '0')).join(' ') + '\t' + formatted.replaceAll('\n', '\\n'));
   }
 }
