@@ -107,10 +107,8 @@
                 <version>3.10.3</version>
                 <configuration>
                     <java>
-                        <googleJavaFormat>
-                            <version>1.36.1</version>
-                            <style>GOOGLE</style>
-                        </googleJavaFormat>
+                        <trimTrailingWhitespace/>
+                        <endWithNewline/>
                     </java>
                 </configuration>
             </plugin>
@@ -118,6 +116,28 @@
     </build>
 
     <profiles>
+        <!-- Spotless 3.10.3 calls Style.valueOf(), removed by google-java-format
+             1.37.0. format.sh runs the current formatter CLI instead. The
+             dependency is confined to this tooling profile, not the library. -->
+        <profile>
+            <id>format</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.google.googlejavaformat</groupId>
+                    <artifactId>google-java-format</artifactId>
+                    <version>1.37.0</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.11.0</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>release</id>
             <build>

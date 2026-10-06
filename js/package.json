@@ -32,10 +32,10 @@
   },
   "homepage": "https://github.com/link-foundation/links-notation#readme",
   "devDependencies": {
-    "bun-types": "^1.4.0",
-    "eslint": "^10.9.1",
+    "bun-types": "^1.4.2",
+    "eslint": "^10.12.0",
     "peggy": "^5.1.0",
-    "prettier": "^3.9.6",
+    "prettier": "^3.9.9",
     "typescript": "^7.0.2"
   }
 }

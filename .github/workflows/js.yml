@@ -5,10 +5,12 @@ on:
     branches: main
     paths:
       - 'js/**'
+      - 'docs/protocol/**'
       - '.github/workflows/js.yml'
   pull_request:
     paths:
       - 'js/**'
+      - 'docs/protocol/**'
       - '.github/workflows/js.yml'
   workflow_dispatch:
     inputs:
@@ -39,13 +41,13 @@ jobs:
     outputs:
       isJsFilesChanged: ${{ steps.setIsJsFilesChangedOutput.outputs.isJsFilesChanged }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
       - name: Get changed files using defaults
         id: changed-files
-        uses: tj-actions/changed-files@v47
+        uses: tj-actions/changed-files@v47.0.6
       - name: Set output isJsFilesChanged
         id: setIsJsFilesChangedOutput
         env:
@@ -58,7 +60,7 @@ jobs:
           fi
           echo "Changed files: $ALL_CHANGED_FILES"
           for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == js/* ]] || [[ $changedFile == .github/workflows/js.yml ]]; then
+            if [[ $changedFile == js/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == .github/workflows/js.yml ]]; then
               isJsFilesChanged='true'
               break
             fi
@@ -75,12 +77,12 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-format
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
           bun-version: latest
       - name: Install Dependencies
@@ -99,12 +101,12 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
           bun-version: latest
       - name: Install Dependencies
@@ -121,12 +123,12 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-test
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
           bun-version: latest
       - name: Install Dependencies
@@ -135,6 +137,8 @@ jobs:
         run: bun run build
       - name: Test
         run: bun test
+      - name: Check binary API TypeScript declarations
+        run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/binary/typescript.ts
 
   publishToNpm:
     needs: [findChangedJsFiles, test]
@@ -154,18 +158,18 @@ jobs:
       version: ${{ steps.version-check.outputs.version }}
       name: ${{ steps.version-check.outputs.name }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
           bun-version: latest
       # npm itself does the publishing: trusted publishing needs npm >= 11.5.1,
       # and setup-node writes the registry entry ~/.npmrc that npm reads.
       - name: Setup Node
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.0.0
         with:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
@@ -173,7 +177,7 @@ jobs:
       # Pinned to the major rather than @latest so a future npm 12 cannot
       # change publish behaviour without a commit here.
       - name: Upgrade npm for trusted publishing
-        run: npm install -g npm@11
+        run: npm install -g npm@12.2.0
       - name: Install Dependencies
         run: bun install --frozen-lockfile
       - name: Build
@@ -253,7 +257,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true

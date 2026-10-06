@@ -1,0 +1,49 @@
+name: dependency freshness
+
+on:
+  pull_request:
+  push:
+    branches: main
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  latest-stable:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.13'
+      - name: Test the dependency checker without network access
+        run: python experiments/issue-325/test_dependency_check.py
+      - name: Require current stable dependencies and actions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/ci/check-dependencies.py
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '24'
+      - uses: oven-sh/setup-bun@v2.2.0
+        with:
+          bun-version: latest
+      - name: Require current compatible transitive npm dependencies and both JS locks
+        run: node scripts/ci/check-npm-locks.mjs
+      - name: Preserve dependency resolution evidence
+        if: failure()
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: dependency-check-logs
+          path: ci-logs/dependencies/
+          if-no-files-found: ignore

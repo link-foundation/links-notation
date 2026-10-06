@@ -25,7 +25,7 @@
          carries GHSA-73j8-2gch-69rq (denial of service, patched in 9.0.14).
          This project targets net10.0, so it takes the 10.x line, which is
          patched from 10.0.4 on. -->
-    <PackageReference Include="Microsoft.Bcl.Memory" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Bcl.Memory" Version="10.0.12" />
   </ItemGroup>
 
 </Project>

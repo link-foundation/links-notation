@@ -5,10 +5,12 @@ on:
     branches: main
     paths:
       - 'php/**'
+      - 'docs/protocol/**'
       - '.github/workflows/php.yml'
   pull_request:
     paths:
       - 'php/**'
+      - 'docs/protocol/**'
       - '.github/workflows/php.yml'
   workflow_dispatch:
     inputs:
@@ -39,13 +41,13 @@ jobs:
     outputs:
       isPhpFilesChanged: ${{ steps.setIsPhpFilesChangedOutput.outputs.isPhpFilesChanged }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v47
+        uses: tj-actions/changed-files@v47.0.6
       - name: Set output isPhpFilesChanged
         id: setIsPhpFilesChangedOutput
         env:
@@ -58,7 +60,7 @@ jobs:
           fi
           echo "Changed files: $ALL_CHANGED_FILES"
           for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == php/* ]] || [[ $changedFile == .github/workflows/php.yml ]]; then
+            if [[ $changedFile == php/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == .github/workflows/php.yml ]]; then
               isPhpFilesChanged='true'
               break
             fi
@@ -75,12 +77,12 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Set up PHP 8.4
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@v2.37.2
         with:
           php-version: '8.4'
           extensions: mbstring
@@ -108,12 +110,12 @@ jobs:
       matrix:
         php-version: ['8.4', '8.5']
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Set up PHP ${{ matrix.php-version }}
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@v2.37.2
         with:
           php-version: ${{ matrix.php-version }}
           extensions: mbstring
@@ -136,12 +138,12 @@ jobs:
       version: ${{ steps.version-check.outputs.version }}
       name: ${{ steps.version-check.outputs.name }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Set up PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@v2.37.2
         with:
           php-version: '8.4'
           extensions: mbstring
@@ -237,7 +239,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true

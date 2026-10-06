@@ -5,10 +5,12 @@ on:
     branches: main
     paths:
       - 'python/**'
+      - 'docs/protocol/**'
       - '.github/workflows/python.yml'
   pull_request:
     paths:
       - 'python/**'
+      - 'docs/protocol/**'
       - '.github/workflows/python.yml'
   workflow_dispatch:
     inputs:
@@ -39,13 +41,13 @@ jobs:
     outputs:
       isPythonFilesChanged: ${{ steps.setIsPythonFilesChangedOutput.outputs.isPythonFilesChanged }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v47
+        uses: tj-actions/changed-files@v47.0.6
       - name: Set output isPythonFilesChanged
         id: setIsPythonFilesChangedOutput
         env:
@@ -58,7 +60,7 @@ jobs:
           fi
           echo "Changed files: $ALL_CHANGED_FILES"
           for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == python/* ]] || [[ $changedFile == .github/workflows/python.yml ]]; then
+            if [[ $changedFile == python/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == .github/workflows/python.yml ]]; then
               isPythonFilesChanged='true'
               break
             fi
@@ -75,12 +77,12 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Set up Python 3.13
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.13'
       - name: Install linting tools
@@ -103,12 +105,12 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-test
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Set up Python 3.13
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.13'
       - name: Install dependencies
@@ -139,12 +141,12 @@ jobs:
       version: ${{ steps.version-check.outputs.version }}
       name: ${{ steps.version-check.outputs.name }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.13'
       - name: Install dependencies
@@ -191,7 +193,7 @@ jobs:
       # and set the `PYPI_TRUSTED_PUBLISHING` repository variable to `true`.
       - name: Publish to PyPI
         if: steps.version-check.outputs.should_publish == 'true'
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@v1.14.2
         with:
           packages-dir: python/dist
           password: ${{ vars.PYPI_TRUSTED_PUBLISHING == 'true' && '' || secrets.PYPI_TOKEN }}
@@ -227,7 +229,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true

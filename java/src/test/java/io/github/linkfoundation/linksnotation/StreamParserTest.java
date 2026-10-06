@@ -19,7 +19,8 @@ class StreamParserTest {
       line two"
       (nested:
         child value)
-      last sees first""";
+      last sees first\
+      """;
 
   private static List<String> render(List<Link> links) {
     return links.stream().map(Link::toString).toList();

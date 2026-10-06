@@ -58,15 +58,15 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-comparison
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7.0.0
         with:
           node-version: '22'
           cache: npm
           cache-dependency-path: docs/comparison/package-lock.json
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.13'
       - name: Install the generator dependencies
@@ -97,10 +97,10 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-test-cases
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7.0.0
         with:
           node-version: '22'
       - name: Check the test case comparison

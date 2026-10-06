@@ -1,0 +1,4 @@
+# Shared build and workflow validation tools; checked against PyPI daily.
+build>=1.6.1
+twine>=7.0.0
+zizmor==1.30.1

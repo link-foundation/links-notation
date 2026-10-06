@@ -13,6 +13,6 @@ path = "src/main.rs"
 
 [dependencies]
 links-notation = { version = "0.23.0", path = "../links-notation" }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = { version = "1.0", features = ["preserve_order"] }
-tiktoken-rs = "0.12.0"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = { version = "1.0.151", features = ["preserve_order"] }
+tiktoken-rs = "0.12.1"

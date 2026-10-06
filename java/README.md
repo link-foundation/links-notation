@@ -39,6 +39,8 @@ Build the project:
 
 ```bash
 mvn clean compile
+# Check Google Java formatting with the current formatter CLI:
+bash format.sh --check
 ```
 
 ## Test
@@ -349,15 +351,17 @@ from the start of the stream.
 
 ### Code Formatting
 
-This project uses Google Java Format via Spotless:
+This project runs the latest Google Java Format CLI. Spotless separately checks
+whitespace. Its current adapter calls an API removed in formatter 1.37.0.
 
 ```bash
-mvn spotless:apply
+bash format.sh --write
 ```
 
 Check formatting:
 
 ```bash
+bash format.sh --check
 mvn spotless:check
 ```
 

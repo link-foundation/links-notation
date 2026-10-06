@@ -55,17 +55,17 @@ jobs:
           - language: go
             build-mode: autobuild
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
+        uses: github/codeql-action/init@v4.38.2
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
       - name: Analyze
-        uses: github/codeql-action/analyze@v4
+        uses: github/codeql-action/analyze@v4.38.2
         with:
           category: /language:${{ matrix.language }}
 
@@ -81,11 +81,11 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       - name: Review dependency changes
-        uses: actions/dependency-review-action@v5
+        uses: actions/dependency-review-action@v5.0.0
         with:
           fail-on-severity: high
           comment-summary-in-pr: on-failure
@@ -98,14 +98,14 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-secrets
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           # A secret is only removed once it is out of the history, so the
           # scan needs the whole history, not just the tip.
           fetch-depth: 0
       - name: Scan the repository for verified secrets
-        uses: trufflesecurity/trufflehog@v3.97.9
+        uses: trufflesecurity/trufflehog@v3.98.0
         with:
           path: ./
           # The action ref pins the wrapper; this pins the scanner itself,
@@ -133,10 +133,10 @@ jobs:
         # dependencies are never audited.
         directory: [js, docs/website, docs/comparison, benchmarks/js, benchmarks/tools]
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7.0.0
         with:
           node-version: '22'
       - name: Audit the committed lockfile

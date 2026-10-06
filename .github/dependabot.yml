@@ -2,10 +2,9 @@ version: 2
 updates:
   # JavaScript dependencies
   - package-ecosystem: "npm"
-    directory: "/js"
+    directories: ["/js", "/docs/website", "/docs/comparison", "/benchmarks/js", "/benchmarks/tools"]
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "daily"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
@@ -15,10 +14,9 @@ updates:
 
   # Python dependencies
   - package-ecosystem: "pip"
-    directory: "/python"
+    directories: ["/python", "/benchmarks/python", "/scripts/ci"]
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "daily"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
@@ -30,8 +28,7 @@ updates:
   - package-ecosystem: "cargo"
     directory: "/rust"
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "daily"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
@@ -41,10 +38,9 @@ updates:
 
   # C# dependencies
   - package-ecosystem: "nuget"
-    directory: "/csharp"
+    directories: ["/csharp", "/benchmarks/csharp"]
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "daily"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
@@ -54,10 +50,9 @@ updates:
 
   # Java dependencies
   - package-ecosystem: "maven"
-    directory: "/java"
+    directories: ["/java", "/benchmarks/java"]
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "daily"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
@@ -67,10 +62,9 @@ updates:
 
   # PHP dependencies
   - package-ecosystem: "composer"
-    directory: "/php"
+    directories: ["/php", "/benchmarks/php"]
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "daily"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
@@ -81,10 +75,9 @@ updates:
   # Go dependencies (the module has none today; this keeps the go directive and
   # any future require block from going stale)
   - package-ecosystem: "gomod"
-    directory: "/go"
+    directories: ["/go", "/benchmarks/go"]
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "daily"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
@@ -96,8 +89,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "daily"
     open-pull-requests-limit: 5
     labels:
       - "dependencies"

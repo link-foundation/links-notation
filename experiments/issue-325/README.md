@@ -66,3 +66,43 @@ combinations (72 cases), and runs in C# CI. Edits to the shared spec or vectors
 trigger both language workflows. The other language suites, website build and
 lint, comparison generation, and dependency audits are checked for the
 synchronized 0.23.0 release preparation.
+
+## Continuation checks
+
+Before the five new ports, their binary tests fail on the missing exported
+codec/module/class. The new shared-vector tests reproduce that missing API,
+then require all 96 canonical packets byte for byte. Native-model tests encode
+the normal text parser result under all twelve option combinations, preserving
+semantic group/identifier/reference equality.
+
+Rust's `codec_encoder_uses_configured_limits` and C#'s
+`EncoderUsesConfiguredLimits` failed because encoding ignored the codec's limits.
+They now reject each exceeded budget and successfully round trip depth 70 when
+configured for depth 80. All deliberate depth probes are bounded to 70 groups.
+
+Run `python3 experiments/issue-325/test_dependency_check.py` for offline tests
+of stable-version selection, active manifest scope, targeted edits, Maven
+properties and visible registry errors. Run
+`python3 scripts/ci/check-dependencies.py` for fresh registry checks. Add
+`--update` to update direct manifest floors, then refresh lockfiles and run tests.
+`node scripts/ci/check-npm-locks.mjs` checks compatible transitive npm updates
+and validates both committed JavaScript locks. These commands preserve failure
+logs in `ci-logs/dependencies/`.
+
+`FormatterProbe.java` reproduces the google-java-format 1.37.0 / Spotless 3.10.3
+adapter incompatibility when both libraries are on its classpath: the adapter
+calls the removed `JavaFormatterOptions.Style.valueOf(String)` method.
+`java/format.sh` invokes the latest formatter CLI directly and keeps the
+formatter out of the published library's dependencies.
+
+The freshness policy covers active packages, benchmarks, documentation tools,
+examples, CI tooling, pre-commit hooks and GitHub Actions. Archived experiments,
+case studies and `dev/log` snapshots retain their historical dependencies.
+Direct dependencies use the latest stable release (including major upgrades).
+Third-party transitive dependencies use their newest upstream-compatible
+versions; forcing incompatible majors through upstream constraints is outside
+this policy. Python 3.9 source installs use the newest compatible setuptools,
+while modern Python builds use the current release. Registry errors fail CI.
+Daily Dependabot checks propose updates for every supported ecosystem and active
+directory. The freshness workflow runs on every PR and daily; branch protection
+must require its check to enforce this policy before merging.

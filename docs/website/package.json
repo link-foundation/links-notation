@@ -11,8 +11,8 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "eslint": "^10.9.1",
-    "vite": "^8.2.1"
+    "eslint": "^10.12.0",
+    "vite": "^8.3.3"
   },
   "dependencies": {
     "links-notation": "file:../../js",

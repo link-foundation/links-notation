@@ -37,12 +37,12 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-link-checker
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
       - name: Check links with lychee
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@v2.9.0
         with:
           # docs/case-studies quotes documents from other repositories, and
           # docs/website/dist is generated output whose asset URLs are only
