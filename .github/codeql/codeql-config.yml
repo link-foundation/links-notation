@@ -1,0 +1,18 @@
+name: links-notation CodeQL config
+
+# Without this, CodeQL scanned every file in the checkout (issue #330):
+# - experiments/ holds throwaway probes. The C# extractor restored a dozen
+#   unrelated .csproj files there, and the Rust extractor warned about
+#   manifests it could not place.
+# - dev/log/ holds copies of other repositories' CI files that this
+#   repository does not run, collected as evidence for issues. The Rust
+#   extractor warned "no manifest found" for three of them.
+# - benchmarks/java depends on the library by coordinates and only builds
+#   after `mvn install` of java/ (see benchmarks.yml). Buildless extraction
+#   cannot do that, so it tried Maven Central and reported a missing jar on
+#   every run. The library's own sources are scanned under java/.
+# Only build-mode none honours these paths; the Go build is limited by go.mod.
+paths-ignore:
+  - experiments
+  - dev/log
+  - benchmarks/java
