@@ -33,7 +33,7 @@ defaults:
 
 jobs:
   findChangedGoFiles:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -71,7 +71,7 @@ jobs:
   lint:
     needs: [findChangedGoFiles]
     if: ${{ needs.findChangedGoFiles.outputs.isGoFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -105,7 +105,7 @@ jobs:
   test:
     needs: [findChangedGoFiles, lint]
     if: ${{ needs.findChangedGoFiles.outputs.isGoFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-test
@@ -159,7 +159,7 @@ jobs:
         run: echo "::notice::CODECOV_TOKEN is not configured, so coverage was not uploaded"
 
   publishRelease:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     needs: [findChangedGoFiles, test]
     if: ${{ needs.findChangedGoFiles.outputs.isGoFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}

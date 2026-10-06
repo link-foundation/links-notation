@@ -52,7 +52,7 @@ jobs:
     # docs/comparison/comparison.json. This job proves it: it regenerates the
     # documents and the SVGs and fails if the committed ones differ, which is
     # what stopped the YAML from quietly growing fields no other document had.
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-comparison
@@ -91,7 +91,7 @@ jobs:
     # test. It is generated from the test files themselves, so a test added in
     # one language and forgotten in the others shows up as a gap in the table
     # rather than as a document that quietly went stale.
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-test-cases

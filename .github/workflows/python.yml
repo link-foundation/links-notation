@@ -33,7 +33,7 @@ defaults:
 
 jobs:
   findChangedPythonFiles:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -71,7 +71,7 @@ jobs:
   lint:
     needs: [findChangedPythonFiles]
     if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -99,7 +99,7 @@ jobs:
   test:
     needs: [findChangedPythonFiles, lint]
     if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-test
@@ -127,7 +127,7 @@ jobs:
   publishToPyPI:
     needs: [findChangedPythonFiles, test]
     if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Must outlast the 10 minute registry wait below plus the build.
     timeout-minutes: 25
     concurrency:
@@ -224,7 +224,7 @@ jobs:
             "https://pypi.org/pypi/${PACKAGE_NAME}/${PACKAGE_VERSION}/json" 40 15
 
   publishRelease:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     needs: [findChangedPythonFiles, publishToPyPI]
     # See csharp.yml: gate on what was published, not on the job result.

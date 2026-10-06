@@ -27,7 +27,7 @@ concurrency:
 
 jobs:
   actionlint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7.0.1
@@ -43,7 +43,7 @@ jobs:
           args: -color
 
   ci-scripts:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7.0.1
@@ -65,7 +65,7 @@ jobs:
         run: bash scripts/ci/registry-probe.test.sh
 
   zizmor:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: read
@@ -89,3 +89,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: zizmor --no-progress --min-severity medium --config .github/zizmor.yml .github/workflows/
+      # `ubuntu-latest` moves to a new Ubuntu release without a diff in this
+      # repository, so a toolchain break would look like flaky CI. Upgrading the
+      # pinned label is a deliberate, reviewable commit (issue #330).
+      - name: Check that hosted runners are pinned
+        run: |
+          set -euo pipefail
+          if grep -nE '^\s*(runs-on:|os:|-)\s.*(ubuntu|windows|macos)-latest' .github/workflows/*.yml; then
+            echo "::error::Pin hosted runners to an explicit image such as ubuntu-24.04 instead of a -latest alias"
+            exit 1
+          fi

@@ -37,7 +37,7 @@ jobs:
   # Hard failure: reads only the working tree, so a disagreement between the
   # implementations is always a defect and never a transient registry answer.
   consistency:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7.0.1
@@ -51,7 +51,7 @@ jobs:
         run: node scripts/version-consistency.mjs
 
   audit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # The wait below can take up to 20 minutes on its own.
     timeout-minutes: 35
     permissions:

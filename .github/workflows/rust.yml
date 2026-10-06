@@ -33,7 +33,7 @@ defaults:
 
 jobs:
   findChangedRustFiles:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -71,7 +71,7 @@ jobs:
   lint:
     needs: [findChangedRustFiles]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -101,7 +101,7 @@ jobs:
   test:
     needs: [findChangedRustFiles, lint]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-test
@@ -125,7 +125,7 @@ jobs:
   publishToCratesIO:
     needs: [findChangedRustFiles, test]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-publish-crates-io
@@ -262,7 +262,7 @@ jobs:
             "https://crates.io/api/v1/crates/${PACKAGE_NAME}/${PACKAGE_VERSION}" 20 15
 
   publishRelease:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     needs: [findChangedRustFiles, publishToCratesIO]
     # See csharp.yml: `result == 'success'` is true for a job that published

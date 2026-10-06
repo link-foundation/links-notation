@@ -28,7 +28,7 @@ env:
 
 jobs:
   findChangedBenchmarkFiles:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -70,7 +70,7 @@ jobs:
   benchmark:
     needs: [findChangedBenchmarkFiles]
     if: ${{ needs.findChangedBenchmarkFiles.outputs.isBenchmarkFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-benchmark
@@ -130,7 +130,7 @@ jobs:
   datasets:
     needs: [findChangedBenchmarkFiles, benchmark]
     if: ${{ needs.findChangedBenchmarkFiles.outputs.isBenchmarkFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-datasets
@@ -161,7 +161,7 @@ jobs:
   javascript:
     needs: [findChangedBenchmarkFiles, benchmark]
     if: ${{ needs.findChangedBenchmarkFiles.outputs.isBenchmarkFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-javascript
@@ -197,7 +197,7 @@ jobs:
   python:
     needs: [findChangedBenchmarkFiles, benchmark]
     if: ${{ needs.findChangedBenchmarkFiles.outputs.isBenchmarkFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-python
@@ -247,7 +247,7 @@ jobs:
   csharp:
     needs: [findChangedBenchmarkFiles, benchmark]
     if: ${{ needs.findChangedBenchmarkFiles.outputs.isBenchmarkFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-csharp
@@ -278,7 +278,7 @@ jobs:
   go:
     needs: [findChangedBenchmarkFiles, benchmark]
     if: ${{ needs.findChangedBenchmarkFiles.outputs.isBenchmarkFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-go
@@ -311,7 +311,7 @@ jobs:
   java:
     needs: [findChangedBenchmarkFiles, benchmark]
     if: ${{ needs.findChangedBenchmarkFiles.outputs.isBenchmarkFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-java
@@ -350,7 +350,7 @@ jobs:
   php:
     needs: [findChangedBenchmarkFiles, benchmark]
     if: ${{ needs.findChangedBenchmarkFiles.outputs.isBenchmarkFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-php
@@ -403,7 +403,7 @@ jobs:
   publish:
     needs: [findChangedBenchmarkFiles, benchmark, datasets, javascript, python, csharp, go, java, php]
     if: ${{ needs.findChangedBenchmarkFiles.outputs.isBenchmarkFilesChanged == 'true' && needs.benchmark.outputs.changed == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: write

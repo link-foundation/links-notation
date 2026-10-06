@@ -47,7 +47,7 @@ defaults:
 
 jobs:
   findChangedDocsFiles:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     outputs:
       isDocsFilesChanged: ${{ steps.setIsDocsFilesChangedOutput.outputs.isDocsFilesChanged }}
@@ -85,7 +85,7 @@ jobs:
   build:
     needs: [findChangedDocsFiles]
     if: ${{ needs.findChangedDocsFiles.outputs.isDocsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7.0.1
@@ -146,7 +146,7 @@ jobs:
   deploy:
     needs: [findChangedDocsFiles, build]
     if: ${{ needs.findChangedDocsFiles.outputs.isDocsFilesChanged == 'true' && github.event_name != 'pull_request' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     # Least privilege: only this job needs to write to Pages and mint an OIDC
     # token; the checkout/build jobs above run with contents: read.

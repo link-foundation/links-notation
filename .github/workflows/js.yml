@@ -33,7 +33,7 @@ defaults:
 
 jobs:
   findChangedJsFiles:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -71,7 +71,7 @@ jobs:
   format:
     needs: [findChangedJsFiles]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-format
@@ -95,7 +95,7 @@ jobs:
   lint:
     needs: [findChangedJsFiles, format]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -117,7 +117,7 @@ jobs:
   test:
     needs: [findChangedJsFiles, format, lint]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-test
@@ -143,7 +143,7 @@ jobs:
   publishToNpm:
     needs: [findChangedJsFiles, test]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Must outlast the 20 minute registry wait below plus the build.
     timeout-minutes: 35
     concurrency:
@@ -254,7 +254,7 @@ jobs:
             "https://registry.npmjs.org/${PACKAGE_NAME}/${PACKAGE_VERSION}" 80 15
 
   publishRelease:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     needs: [findChangedJsFiles, publishToNpm]
     # `result == 'success'` was true even when the publish step was skipped,

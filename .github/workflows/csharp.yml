@@ -41,7 +41,7 @@ defaults:
 
 jobs:
   findChangedCsFiles:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -79,7 +79,7 @@ jobs:
   lint:
     needs: [findChangedCsFiles]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -106,7 +106,7 @@ jobs:
   test:
     needs: [findChangedCsFiles, lint]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-test
@@ -138,7 +138,7 @@ jobs:
         run: bash ../examples/binary/run-interop.sh --rust-csharp-only
 
   pushToNuget:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Must outlast the 20 minute registry wait below plus the build.
     timeout-minutes: 35
     needs: [findChangedCsFiles, test]
@@ -236,7 +236,7 @@ jobs:
             "\"${PACKAGE_VERSION}\"" 40 30
 
   generatePdfWithCode:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     needs: [findChangedCsFiles, test]
     # Builds on pull requests too: only main used to run it, so a test string
@@ -272,7 +272,7 @@ jobs:
           retention-days: 1
 
   publishDocumentation:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     needs: [findChangedCsFiles, test, generatePdfWithCode]
     if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
@@ -310,7 +310,7 @@ jobs:
           bash scripts/publish-docs.sh
 
   publishRelease:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     # Deliberately not `needs: publishDocumentation`: a DocFX failure must not
     # withhold the release for a package that is already on NuGet.org.
