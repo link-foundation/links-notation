@@ -268,7 +268,7 @@ python -m build
 
 This project uses [Black](https://github.com/psf/black) for code formatting,
 [isort](https://pycqa.github.io/isort/) for import sorting, and
-[flake8](https://flake8.pycqa.org/) for linting.
+[flake8](https://flake8.pycqa.org/en/latest/) for linting.
 
 Install linting tools:
 
