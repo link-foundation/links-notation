@@ -51,12 +51,22 @@ python3 scripts/ci/check-dependencies.py
 node scripts/ci/check-npm-locks.mjs
 python3 experiments/issue-325/test_dependency_check.py
 python3 experiments/issue-330/test_pdf_unicode.py
+python3 experiments/issue-332/test_test_comparison.py
 ```
 
 The cross-language check compares 1,392 packets and their canonical text
 (116 documents times twelve encoding options). Local logs are kept under
 `ci-logs/`, including the pre-fix failures. The prepared branch's dependency
-workflow, run 37849367937 at head 791f6d9, already failed: lines 209–230 of
+workflow, run 37849367937 at head 791f6d9, already failed: lines 203–225 of
 `ci-logs/dependencies-37849367937.log` identify stale codec/Vite requirements and
 GitHub Actions pins. The separate dependency maintenance change updates those
 requirements and lockfiles; its live freshness check validates 153 declarations.
+
+The first implementation run additionally exposed the current Spotless plugin
+version in both Maven projects (dependency run 37852934850, lines 203–204),
+and a stale benchmark report version (benchmark run 37852934726, lines
+1004–1017). Updating the plugin and regenerating the report resolves the
+reported causes. The generated test comparison also mistook JavaScript
+`split(...)` for `it(...)` and omitted C# facts with timeout arguments. An
+isolated reproducing extraction test now covers both declarations, and the
+documentation workflow runs it before checking the generated matrix.
