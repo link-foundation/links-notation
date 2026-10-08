@@ -1,7 +1,8 @@
 [package]
 name = "links-notation-macro"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
+rust-version = "1.87"
 description = "Procedural macro for Links Notation compile-time parsing"
 license = "Unlicense"
 repository = "https://github.com/link-foundation/links-notation"
