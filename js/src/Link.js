@@ -1,3 +1,5 @@
+import { escapeReference, unescapeReference } from './references.js';
+
 export class Link {
   /**
    * Create a new Link
@@ -79,60 +81,16 @@ export class Link {
   /**
    * Escape a reference string by adding quotes if necessary
    * @param {string} reference - The reference to escape
+   * @param {{minimal?: boolean}} options - Allow plain-text document lines
    * @returns {string} Escaped reference
    */
-  static escapeReference(reference) {
-    if (reference === null || reference === undefined) {
-      return '';
-    }
+  static escapeReference(reference, options = {}) {
+    return escapeReference(reference, options);
+  }
 
-    // The empty reference is written as a bare delimiter pair, so that it reads
-    // back as itself instead of disappearing from the document.
-    if (reference === '') {
-      return '""';
-    }
-
-    const hasSingleQuote = reference.includes("'");
-    const hasDoubleQuote = reference.includes('"');
-
-    // A reference that begins with a `#` has to be quoted, or it would read
-    // back as a comment. A `#` anywhere else in a reference is content
-    // (`issue#1047`), so only the first character matters.
-    const needsQuoting =
-      reference.startsWith('#') ||
-      reference.includes(':') ||
-      reference.includes('(') ||
-      reference.includes(')') ||
-      reference.includes(' ') ||
-      reference.includes('\t') ||
-      reference.includes('\n') ||
-      reference.includes('\r') ||
-      hasDoubleQuote ||
-      hasSingleQuote;
-
-    // Handle edge case: reference contains both single and double quotes
-    if (hasSingleQuote && hasDoubleQuote) {
-      // Escape single quotes and wrap in single quotes
-      return `'${reference.replace(/'/g, "\\'")}'`;
-    }
-
-    // Prefer single quotes if double quotes are present
-    if (hasDoubleQuote) {
-      return `'${reference}'`;
-    }
-
-    // Use double quotes if single quotes are present
-    if (hasSingleQuote) {
-      return `"${reference}"`;
-    }
-
-    // Use single quotes for special characters
-    if (needsQuoting) {
-      return `'${reference}'`;
-    }
-
-    // No quoting needed
-    return reference;
+  /** Decode an escaped reference, rather than an already parsed Link ID. */
+  static unescapeReference(reference) {
+    return unescapeReference(reference);
   }
 
   /**

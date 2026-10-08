@@ -19,7 +19,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
 | Python | 240 | 21 |
-| JavaScript | 285 | 25 |
+| JavaScript | 297 | 26 |
 | Rust | 396 | 27 |
 | C# | 290 | 25 |
 | Go | 134 | 15 |
@@ -285,6 +285,25 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | two spaces vs four spaces indentation | [✅](python/tests/test_indentation_consistency.py#L37) | [✅](js/tests/IndentationConsistency.test.js#L39) | [✅](rust/links-notation/tests/indentation_consistency_tests.rs#L39) | [✅](csharp/Link.Foundation.Links.Notation.Tests/IndentationConsistencyTests.cs#L39) | ❌ | ❌ | [✅](php/tests/IndentationConsistencyTest.php#L44) |
 
 **Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4, Go: 0, Java: 0, PHP: 4
+
+## Indented Document
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
+|-----------|---|---|---|---|---|---|---|
+| document helpers reject deeper or named value structures instead of losing data | ❌ | [✅](js/tests/IndentedDocument.test.js#L156) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| document parsing respects comments and existing parser options | ❌ | [✅](js/tests/IndentedDocument.test.js#L174) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| empty text, exact whitespace, comments, quotes, and multiline text survive | ❌ | [✅](js/tests/IndentedDocument.test.js#L106) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| format the issue document with two space indentation and a final newline | ❌ | [✅](js/tests/IndentedDocument.test.js#L91) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| groups retain named and nested links and share parser diagnostics | ❌ | [✅](js/tests/IndentedDocument.test.js#L39) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| minimal escaping leaves ordinary prose unquoted | ❌ | [✅](js/tests/IndentedDocument.test.js#L13) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| mixed quotes round trip through the existing  link formatter | ❌ | [✅](js/tests/IndentedDocument.test.js#L6) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| multiple child lines have explicit array or joined text behavior | ❌ | [✅](js/tests/IndentedDocument.test.js#L72) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| one element arrays normalize to strings and unanswered parents remain distinct | ❌ | [✅](js/tests/IndentedDocument.test.js#L183) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| parse the issue document without inspecting private path flags | ❌ | [✅](js/tests/IndentedDocument.test.js#L58) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| public groups preserve immediate children and deeper indentation | ❌ | [✅](js/tests/IndentedDocument.test.js#L22) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| unescaping uses the grammar and never decodes already parsed  i ds again | ❌ | [✅](js/tests/IndentedDocument.test.js#L141) | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+**Category totals:** Python: 0, JavaScript: 12, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0
 
 ## Indented Id Nested Values
 
@@ -1001,6 +1020,20 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - formatroundtripwithconfigintegration
 - formatsinglerefwithconfig
 
+**Indented Document** (12 missing):
+- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
+- documentparsingrespectscommentsandexistingparseroptions
+- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
+- formattheissuedocumentwithtwospaceindentationandafinalnewline
+- groupsretainnamedandnestedlinksandshareparserdiagnostics
+- minimalescapingleavesordinaryproseunquoted
+- mixedquotesroundtripthroughtheexistinglinkformatter
+- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
+- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
+- parsetheissuedocumentwithoutinspectingprivatepathflags
+- publicgroupspreserveimmediatechildrenanddeeperindentation
+- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
+
 **Indented Id Syntax** (3 missing):
 - emptyindentedidworks
 - equivalencecomprehensive
@@ -1294,7 +1327,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 372 tests**
+**Total missing: 384 tests**
 
 ### JavaScript Missing Tests
 
@@ -1762,6 +1795,20 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - nquotedelimitedemptyisstillempty
 - singlespacestillreadsasaspace
 
+**Indented Document** (12 missing):
+- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
+- documentparsingrespectscommentsandexistingparseroptions
+- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
+- formattheissuedocumentwithtwospaceindentationandafinalnewline
+- groupsretainnamedandnestedlinksandshareparserdiagnostics
+- minimalescapingleavesordinaryproseunquoted
+- mixedquotesroundtripthroughtheexistinglinkformatter
+- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
+- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
+- parsetheissuedocumentwithoutinspectingprivatepathflags
+- publicgroupspreserveimmediatechildrenanddeeperindentation
+- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
+
 **Indented Id Syntax** (3 missing):
 - emptyindentedidworks
 - equivalencecomprehensive
@@ -1929,7 +1976,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - namedtupletolink
 - tupletolink
 
-**Total missing: 217 tests**
+**Total missing: 229 tests**
 
 ### C# Missing Tests
 
@@ -2031,6 +2078,20 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - formatlinkwithmaxinlinerefsintegration
 - formatroundtripwithconfigintegration
 - formatsinglerefwithconfig
+
+**Indented Document** (12 missing):
+- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
+- documentparsingrespectscommentsandexistingparseroptions
+- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
+- formattheissuedocumentwithtwospaceindentationandafinalnewline
+- groupsretainnamedandnestedlinksandshareparserdiagnostics
+- minimalescapingleavesordinaryproseunquoted
+- mixedquotesroundtripthroughtheexistinglinkformatter
+- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
+- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
+- parsetheissuedocumentwithoutinspectingprivatepathflags
+- publicgroupspreserveimmediatechildrenanddeeperindentation
+- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
 
 **Indented Id Syntax** (3 missing):
 - emptyindentedidworks
@@ -2303,7 +2364,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 322 tests**
+**Total missing: 334 tests**
 
 ### Go Missing Tests
 
@@ -2464,6 +2525,20 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - simpletwovsfourspacesindentation
 - threelevelnestingwithdifferentindentation
 - twospacesvsfourspacesindentation
+
+**Indented Document** (12 missing):
+- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
+- documentparsingrespectscommentsandexistingparseroptions
+- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
+- formattheissuedocumentwithtwospaceindentationandafinalnewline
+- groupsretainnamedandnestedlinksandshareparserdiagnostics
+- minimalescapingleavesordinaryproseunquoted
+- mixedquotesroundtripthroughtheexistinglinkformatter
+- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
+- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
+- parsetheissuedocumentwithoutinspectingprivatepathflags
+- publicgroupspreserveimmediatechildrenanddeeperindentation
+- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
 
 **Indented Id Syntax** (14 missing):
 - basicindentedidsyntax
@@ -2841,7 +2916,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 474 tests**
+**Total missing: 486 tests**
 
 ### Java Missing Tests
 
@@ -2999,6 +3074,20 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - simpletwovsfourspacesindentation
 - threelevelnestingwithdifferentindentation
 - twospacesvsfourspacesindentation
+
+**Indented Document** (12 missing):
+- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
+- documentparsingrespectscommentsandexistingparseroptions
+- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
+- formattheissuedocumentwithtwospaceindentationandafinalnewline
+- groupsretainnamedandnestedlinksandshareparserdiagnostics
+- minimalescapingleavesordinaryproseunquoted
+- mixedquotesroundtripthroughtheexistinglinkformatter
+- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
+- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
+- parsetheissuedocumentwithoutinspectingprivatepathflags
+- publicgroupspreserveimmediatechildrenanddeeperindentation
+- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
 
 **Indented Id Syntax** (14 missing):
 - basicindentedidsyntax
@@ -3337,7 +3426,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 432 tests**
+**Total missing: 444 tests**
 
 ### PHP Missing Tests
 
@@ -3472,6 +3561,20 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - formatlinkwithmaxinlinerefsintegration
 - formatroundtripwithconfigintegration
 - formatsinglerefwithconfig
+
+**Indented Document** (12 missing):
+- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
+- documentparsingrespectscommentsandexistingparseroptions
+- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
+- formattheissuedocumentwithtwospaceindentationandafinalnewline
+- groupsretainnamedandnestedlinksandshareparserdiagnostics
+- minimalescapingleavesordinaryproseunquoted
+- mixedquotesroundtripthroughtheexistinglinkformatter
+- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
+- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
+- parsetheissuedocumentwithoutinspectingprivatepathflags
+- publicgroupspreserveimmediatechildrenanddeeperindentation
+- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
 
 **Indented Id Syntax** (3 missing):
 - emptyindentedidshouldwork
@@ -3775,5 +3878,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 382 tests**
+**Total missing: 394 tests**
 

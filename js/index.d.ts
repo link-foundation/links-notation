@@ -100,8 +100,28 @@ export class Link {
    * @param reference - The reference to escape
    * @returns Escaped reference
    */
-  static escapeReference(reference: string): string;
+  static escapeReference(
+    reference: string,
+    options?: EscapeReferenceOptions
+  ): string;
+
+  /** Decode one escaped reference. Link IDs returned by a parser are already decoded. */
+  static unescapeReference(reference: string): string;
 }
+
+export interface EscapeReferenceOptions {
+  /** Leave ordinary single-space prose unquoted for use on document lines. */
+  minimal?: boolean;
+}
+
+/** Quote a reference with doubled delimiter escapes. Spaces are quoted by default. */
+export function escapeReference(
+  reference: string,
+  options?: EscapeReferenceOptions
+): string;
+
+/** Decode a complete escaped reference, including n-quote references. */
+export function unescapeReference(reference: string): string;
 
 /**
  * Parser options for configuring the parser behavior
@@ -166,7 +186,39 @@ export class Parser {
    * @throws {ParseError} If the text does not parse
    */
   parse(input: string): Link[];
+
+  /** Read the indentation tree without expanding it into path combinations. */
+  parseGroups(input: string): IndentedGroup[];
 }
+
+/** A parsed line and the immediately indented lines below it. */
+export interface IndentedGroup extends LinksGroup {
+  element: Link;
+  children: IndentedGroup[];
+}
+
+export interface IndentedDocumentOptions extends ParserOptions {
+  /** Multiple children become an array (default) or text joined with newlines. */
+  multipleValues?: 'array' | 'join';
+}
+
+/**
+ * Read parent/children text. Repeated parents accumulate children in order.
+ * No children yields [], one yields a string, multiple yield an array by default.
+ * Named links with values and grandchildren are rejected.
+ */
+export function parseIndentedDocument(
+  input: string,
+  options?: IndentedDocumentOptions
+): Map<string, string | string[]>;
+
+/**
+ * Write minimally quoted text with two-space indentation and a final newline.
+ * Multiline strings remain one quoted reference; array entries become children.
+ */
+export function formatIndentedDocument(
+  entries: ReadonlyMap<string, string | string[]>
+): string;
 
 /** Options for incremental parsing. */
 export interface StreamParserOptions extends ParserOptions {

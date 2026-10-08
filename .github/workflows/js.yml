@@ -139,6 +139,8 @@ jobs:
         run: bun test
       - name: Check binary API TypeScript declarations
         run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/binary/typescript.ts
+      - name: Check indented document API TypeScript declarations
+        run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/js_indented_document.ts
 
   publishToNpm:
     needs: [findChangedJsFiles, test]
@@ -170,7 +172,7 @@ jobs:
       # npm itself does the publishing: trusted publishing needs npm >= 11.5.1,
       # and setup-node writes the registry entry ~/.npmrc that npm reads.
       - name: Setup Node
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
