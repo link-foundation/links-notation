@@ -22,7 +22,6 @@ namespace Link.Foundation.Links.Notation.Binary;
 /// </remarks>
 public static class LinoFormat
 {
-    private static readonly char[] Quotes = { '\'', '"', '`' };
 
     /// <summary>A reference: a link without values.</summary>
     public static LinoLink Reference(string text) => new(text);
@@ -112,32 +111,5 @@ public static class LinoFormat
     /// more than the longest run of that quote inside, and odd, because an
     /// even delimiter run may be read as an empty reference.
     /// </remarks>
-    public static string FormatReference(string reference)
-    {
-        ArgumentNullException.ThrowIfNull(reference);
-        var needsQuotes = reference.Length == 0
-            || reference.StartsWith('#')
-            || reference.Any(character => char.IsWhiteSpace(character) || character is >= '\u001c' and <= '\u001f' or '\ufeff' or '(' or ')' or ':' or '\'' or '"' or '`');
-        if (!needsQuotes)
-        {
-            return reference;
-        }
-        var (quote, count) = Quotes
-            .Where(quote => reference.Length == 0 || reference[0] != quote)
-            .Select(quote => (Quote: quote, Count: (LongestRun(reference, quote) + 1) | 1))
-            .MinBy(candidate => candidate.Count);
-        var delimiter = new string(quote, count);
-        return $"{delimiter}{reference}{delimiter}";
-    }
-
-    private static int LongestRun(string text, char quote)
-    {
-        var (longest, current) = (0, 0);
-        foreach (var character in text)
-        {
-            current = character == quote ? current + 1 : 0;
-            longest = Math.Max(longest, current);
-        }
-        return longest;
-    }
+    public static string FormatReference(string reference) => ReferenceLiteral.Format(reference);
 }

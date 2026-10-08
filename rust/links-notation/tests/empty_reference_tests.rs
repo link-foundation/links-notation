@@ -103,7 +103,7 @@ fn empty_reference_survives_a_round_trip() {
 }
 
 #[test]
-fn empty_reference_is_written_as_a_delimiter_pair() {
+fn empty_reference_is_written_as_a_versioned_literal() {
     let links = parse_lino_to_links(r#"(a "" b)"#).expect("parses");
-    assert_eq!(format_links(&links), r#"(a "" b)"#);
+    assert_eq!(format_links(&links), "(a ~1{} b)");
 }

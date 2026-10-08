@@ -405,3 +405,6 @@ go test -v
 ## License
 
 [Unlicense](../LICENSE)
+
+Exact Unicode identifiers and values round-trip with the [reference literal contract](../docs/protocol/reference-literals.md)
+introduced in 0.24.0, including mixed quotes, empty strings, controls and multiline text.

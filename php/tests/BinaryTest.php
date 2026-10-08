@@ -30,7 +30,10 @@ class BinaryTest extends TestCase
             "\u{001c}", "\u{001d}", "\u{001e}", "\u{001f}", "\u{feff}",
         ];
         foreach ($references as $text) {
-            self::assertSame("'" . $text . "'", BinaryLinoCodec::formatReference($text));
+            self::assertEquals(
+                [new Link("root", [new Link($text)])],
+                (new Parser())->parse("(root: " . BinaryLinoCodec::formatReference($text) . ")")
+            );
         }
     }
 

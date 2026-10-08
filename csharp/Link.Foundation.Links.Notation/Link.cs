@@ -142,37 +142,7 @@ namespace Link.Foundation.Links.Notation
             {
                 return "";
             }
-            // The empty reference is written as a bare delimiter pair, so that it reads
-            // back as itself instead of disappearing from the document.
-            if (reference.Length == 0)
-            {
-                return "\"\"";
-            }
-            // A reference that begins with a "#" has to be quoted, or it would read
-            // back as a comment. A "#" anywhere else in a reference is content
-            // ("issue#1047"), so only the first character matters.
-            if (
-                    reference.StartsWith("#") ||
-                    reference.Contains(":") ||
-                    reference.Contains("(") ||
-                    reference.Contains(")") ||
-                    reference.Contains(" ") ||
-                    reference.Contains("\t") ||
-                    reference.Contains("\n") ||
-                    reference.Contains("\r") ||
-                    reference.Contains("\"")
-                )
-            {
-                return $"'{reference}'";
-            }
-            else if (reference.Contains("'"))
-            {
-                return $"\"{reference}\"";
-            }
-            else
-            {
-                return reference;
-            }
+            return ReferenceLiteral.Format(reference);
         }
 
         /// <summary>

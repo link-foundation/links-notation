@@ -77,30 +77,7 @@ final readonly class BinaryLinoCodec
     }
     public static function formatReference(string $text): string
     {
-        $needsQuotes = '/[\p{Z}\x{0085}\x{0009}-\x{000d}\x{001c}-\x{001f}\x{feff}():"\'`]/u';
-        if ($text !== "" && !str_starts_with($text, "#") && preg_match($needsQuotes, $text) === 0) {
-            return $text;
-        }
-        $chosen = "";
-        $count = PHP_INT_MAX;
-        foreach (["'", '"', "`"] as $quote) {
-            if (str_starts_with($text, $quote)) {
-                continue;
-            }
-            $longest = 0;
-            $run = 0;
-            for ($i = 0; $i < strlen($text); $i++) {
-                $run = $text[$i] === $quote ? $run + 1 : 0;
-                $longest = max($longest, $run);
-            }
-            $n = ($longest + 1) | 1;
-            if ($n < $count) {
-                $chosen = $quote;
-                $count = $n;
-            }
-        }
-        $delimiter = str_repeat($chosen, $count);
-        return $delimiter . $text . $delimiter;
+        return \LinkFoundation\LinksNotation\ReferenceLiteral::format($text);
     }
     private static function formatLink(Link $node, bool $top = false): string
     {

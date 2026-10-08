@@ -1,5 +1,6 @@
 /** Binary links notation v1. Packet and document layers share no transport. */
 import { Link } from './Link.js';
+import { formatReference } from './ReferenceLiteral.js';
 import { Parser } from './Parser.js';
 
 const U64 = (1n << 64n) - 1n;
@@ -695,26 +696,7 @@ function canonical(node) {
   return new Link(node.id, node.values.map(canonical));
 }
 export function formatBinaryReference(text) {
-  if (
-    text &&
-    !text.startsWith('#') &&
-    !/[\p{White_Space}\u001c-\u001f\ufeff():"'`]/u.test(text)
-  )
-    return text;
-  let choice = null;
-  for (const quote of ["'", '"', '`'])
-    if (!text.startsWith(quote)) {
-      let longest = 0,
-        run = 0;
-      for (const c of text) {
-        run = c === quote ? run + 1 : 0;
-        longest = Math.max(longest, run);
-      }
-      const count = (longest + 1) | 1;
-      if (choice === null || count < choice.count) choice = { quote, count };
-    }
-  const delimiter = choice.quote.repeat(choice.count);
-  return delimiter + text + delimiter;
+  return formatReference(text);
 }
 export function formatBinaryDocument(document) {
   function nested(node, top = false) {

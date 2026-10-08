@@ -113,7 +113,7 @@ class EmptyReferenceTest {
   }
 
   @Test
-  void emptyReferenceIsWrittenAsADelimiterPair() throws ParseException {
-    assertEquals("(a \"\" b)", Link.formatLinks(parser.parse("(a \"\" b)")));
+  void emptyReferenceIsWrittenAsAVersionedLiteral() throws ParseException {
+    assertEquals("(a ~1{} b)", Link.formatLinks(parser.parse("(a \"\" b)")));
   }
 }

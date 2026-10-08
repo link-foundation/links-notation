@@ -561,3 +561,8 @@ export class BinaryLinoCodec {
 }
 export function formatBinaryDocument(document: Link[]): string;
 export function formatBinaryReference(reference: string): string;
+
+/** Encode exact Unicode as a version 1 UTF-8 hex literal (~1{...}). Throws on unpaired surrogates. */
+export function encodeReferenceLiteral(text: string): string;
+/** Decode a complete literal. Throws on malformed hex, UTF-8, or unsupported versions. */
+export function decodeReferenceLiteral(literal: string): string;

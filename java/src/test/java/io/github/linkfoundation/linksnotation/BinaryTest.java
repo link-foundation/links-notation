@@ -21,10 +21,12 @@ class BinaryTest {
   }
 
   @Test
-  void unicodeWhitespaceIsQuoted() {
+  void unicodeWhitespaceIsQuoted() throws Exception {
     for (String text :
         List.of("\u0085", "x\u00a0y", "x\u2028y", "\u001c", "\u001d", "\u001e", "\u001f", "\ufeff"))
-      assertEquals("'" + text + "'", BinaryLinoCodec.formatReference(text));
+      assertEquals(
+          List.of(new Link("root", List.of(new Link(text)))),
+          new Parser().parse("(root: " + BinaryLinoCodec.formatReference(text) + ")"));
   }
 
   @Test

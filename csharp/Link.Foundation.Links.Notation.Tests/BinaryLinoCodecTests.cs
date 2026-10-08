@@ -139,7 +139,7 @@ public sealed class BinaryLinoCodecTests
     {
         Assert.Equal("plain", LinoFormat.FormatReference("plain"));
         Assert.Equal("$x", LinoFormat.FormatReference("$x"));
-        Assert.Equal("''", LinoFormat.FormatReference(""));
+        Assert.Equal("~1{}", LinoFormat.FormatReference(""));
         Assert.Equal("'a b'", LinoFormat.FormatReference("a b"));
         Assert.Equal("\"it's\"", LinoFormat.FormatReference("it's"));
         Assert.Equal("`'\"`", LinoFormat.FormatReference("'\""));

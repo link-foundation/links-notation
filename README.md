@@ -255,13 +255,13 @@ All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP)
 <!-- test-counts:start -->
 | Language | Tests | Test categories |
 | --- | --- | --- |
-| Python | 240 | 21 |
-| JavaScript | 285 | 25 |
-| Rust | 396 | 27 |
-| C# | 290 | 25 |
-| Go | 134 | 15 |
-| Java | 180 | 14 |
-| PHP | 230 | 21 |
+| Python | 244 | 22 |
+| JavaScript | 288 | 26 |
+| Rust | 400 | 28 |
+| C# | 294 | 26 |
+| Go | 138 | 16 |
+| Java | 184 | 15 |
+| PHP | 234 | 22 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files
@@ -292,3 +292,6 @@ shared packets and a LiNo document mapping. JavaScript, Python, Rust, C#, Go,
 Java and PHP provide codecs beside their text parsers; all check the same [golden vectors](docs/protocol/binary-links-notation-vectors.txt).
 See the [cross-language example](examples/binary/README.md) for encoding options
 and byte-for-byte interoperability.
+
+Exact Unicode identifiers and values round-trip with the [reference literal contract](docs/protocol/reference-literals.md)
+introduced in 0.24.0, including mixed quotes, empty strings, controls and multiline text.
