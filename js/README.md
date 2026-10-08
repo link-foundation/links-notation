@@ -147,6 +147,85 @@ const group = new LinksGroup(parsed);
 console.log(group.format());
 ```
 
+### Indented Text Documents
+
+Use `parseIndentedDocument` and `formatIndentedDocument` for text parents and
+their answers or options:
+
+```javascript
+import { parseIndentedDocument, formatIndentedDocument } from 'links-notation';
+
+const input = `What is your experience?
+  I have worked with JavaScript
+'Question with "quotes": and colon'
+  Answer
+Skills
+  JavaScript
+  Python
+`;
+const answers = parseIndentedDocument(input);
+console.log(answers.get('What is your experience?'));
+// I have worked with JavaScript
+console.log(answers.get('Skills')); // ['JavaScript', 'Python']
+console.log(formatIndentedDocument(answers));
+```
+
+A parent with no children maps to `[]`, one child maps to a string, and multiple
+children map to an array. Repeated parent lines accumulate children in order.
+To read multiple child lines as multiline text, pass
+`{ multipleValues: 'join' }`. These helpers accept the same parsing options as
+`Parser`, including `comments`, `maxInputSize`, and `maxDepth`.
+
+The formatter uses two spaces of indentation and adds a final newline to a
+nonempty document. Ordinary single-space prose stays unquoted. Quotes are
+escaped by doubling the enclosing delimiter. Structural characters, comment
+starts, reserved literal prefixes, and significant whitespace are quoted.
+Empty strings and control characters use the versioned reference literals
+introduced in 0.24.0. A multiline string is encoded as one reference with its
+exact line endings; an array is written as separate child references. Parsed
+IDs are already unescaped.
+
+The text format does not distinguish a one-element array from a single string;
+both read back as a string. Use a multiline string to distinguish one
+multiline answer from several options. The helpers reject grandchildren and
+named links with values instead of discarding their structure.
+
+For arbitrary indentation trees, `Parser.parseGroups(input)` returns existing
+`LinksGroup` instances. Each group's `element` is the `Link` on that line, and
+`children` contains its immediately indented groups. Parenthesized values retain
+their usual `Link` structure:
+
+```javascript
+import { Parser } from 'links-notation';
+
+const [group] = new Parser().parseGroups('Question\n  Answer\n    Detail');
+console.log(group.element.getValuesString()); // Question
+console.log(group.children[0].element.getValuesString()); // Answer
+console.log(group.children[0].children[0].element.getValuesString()); // Detail
+```
+
+`Parser.parse()` continues to return the existing list of links and expanded
+paths. `parseGroups()` preserves indentation even for the `name:` syntax.
+
+`escapeReference` and `unescapeReference` are exported functions and static
+methods on `Link`. Use minimal mode only for whole text lines; default escaping
+still quotes spaces so references can be used inside tuples:
+
+```javascript
+import { Link, escapeReference, unescapeReference } from 'links-notation';
+
+Link.escapeReference('plain text'); // "'plain text'"
+escapeReference('plain text', { minimal: true }); // 'plain text'
+unescapeReference("'it''s ready'"); // "it's ready"
+```
+
+`unescapeReference` decodes a complete serialized reference, including n-quote
+delimiters, doubled escapes, and versioned literals. It rejects incomplete
+quoted input and malformed literals, and preserves literal backslashes. Do not
+call it on already decoded `Link.id` values.
+
+See the [Q&A document example](../examples/js_indented_document.js).
+
 ### Streaming Parser (for Large Messages)
 
 The `StreamParser` allows you to parse Links Notation incrementally, processing data as it arrives without loading the entire message into memory. This is ideal for:
@@ -341,6 +420,7 @@ Main parser class for converting strings to links.
     recursed into until the stack runs out
 - `initialize()` - Initialize the parser (async)
 - `parse(input)` - Parse a Lino string and return links
+- `parseGroups(input)` - Read an indentation tree as `LinksGroup` instances
 
 #### `Link`
 
@@ -350,6 +430,9 @@ Represents a single link with ID and values.
 - `toString()` - Convert link to string format
 - `id` - Link identifier
 - `values` - Array of child values/links
+- `escapeReference(reference, options)` - Quote a reference; `minimal: true`
+  allows ordinary prose on a text document line
+- `unescapeReference(reference)` - Decode a complete serialized reference
 
 #### `LinksGroup`
 

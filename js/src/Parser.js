@@ -1,4 +1,5 @@
 import { Link } from './Link.js';
+import { LinksGroup } from './LinksGroup.js';
 import { ParseError } from './ParseError.js';
 import { stripComments } from './comments.js';
 import * as parserModule from './parser-generated.js';
@@ -31,6 +32,30 @@ export class Parser {
    * @throws {Error} If parsing fails
    */
   parse(input) {
+    return this._parse(input, (raw) => this.transformResult(raw));
+  }
+
+  /**
+   * Read the indentation tree before it is expanded into path combinations.
+   * Each group's element is the Link on that line; its children are groups
+   * for the immediately indented lines. Parenthesized values remain Links.
+   * @param {string} input - The Lino document
+   * @returns {LinksGroup[]}
+   */
+  parseGroups(input) {
+    return this._parse(input, (raw) =>
+      raw.map((item) => this._transformGroup(item))
+    );
+  }
+
+  _transformGroup(item) {
+    return new LinksGroup(
+      this.transformLink(item),
+      (item.children || []).map((child) => this._transformGroup(child))
+    );
+  }
+
+  _parse(input, transform) {
     // Validate input
     if (typeof input !== 'string') {
       throw new TypeError('Input must be a string');
@@ -50,7 +75,7 @@ export class Parser {
       const rawResult = parserModule.parse(prepared, {
         maxDepth: this.maxDepth,
       });
-      return this.transformResult(rawResult);
+      return transform(rawResult);
     } catch (error) {
       // A syntax error knows where it stopped; anything else is passed on with
       // the original error kept as the cause.

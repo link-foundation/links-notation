@@ -1,4 +1,4 @@
-import { formatReference } from './ReferenceLiteral.js';
+import { escapeReference, unescapeReference } from './references.js';
 
 export class Link {
   /**
@@ -81,14 +81,16 @@ export class Link {
   /**
    * Escape a reference string by adding quotes if necessary
    * @param {string} reference - The reference to escape
+   * @param {{minimal?: boolean}} options - Allow plain-text document lines
    * @returns {string} Escaped reference
    */
-  static escapeReference(reference) {
-    if (reference === null || reference === undefined) {
-      return '';
-    }
+  static escapeReference(reference, options = {}) {
+    return escapeReference(reference, options);
+  }
 
-    return formatReference(reference);
+  /** Decode an escaped reference, rather than an already parsed Link ID. */
+  static unescapeReference(reference) {
+    return unescapeReference(reference);
   }
 
   /**

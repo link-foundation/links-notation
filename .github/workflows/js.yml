@@ -139,6 +139,8 @@ jobs:
         run: bun test
       - name: Check binary API TypeScript declarations
         run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/binary/typescript.ts
+      - name: Check indented document API TypeScript declarations
+        run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/js_indented_document.ts
 
   publishToNpm:
     needs: [findChangedJsFiles, test]
