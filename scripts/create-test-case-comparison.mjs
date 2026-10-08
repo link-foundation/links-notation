@@ -110,7 +110,7 @@ const LANGUAGES = [
       directory: 'js/tests',
       isTestFile: (file) => file.endsWith('.test.js'),
       categoryOf: (file) => toSnakeCase(file.replace('.test.js', '').replace('Tests', '')),
-      pattern: /(?:test|it)\(['"]([^'"]+)['"]/g,
+      pattern: /(?<![\w.])(?:test|it)\(['"]([^'"]+)['"]/g,
       nameOf: toSnakeCase
     })
   },
@@ -138,7 +138,7 @@ const LANGUAGES = [
       directory: 'csharp/Link.Foundation.Links.Notation.Tests',
       isTestFile: (file) => file.endsWith('Tests.cs'),
       categoryOf: (file) => toSnakeCase(file.replace('Tests.cs', '')),
-      pattern: /\[(?:Fact|Theory)\]\s*public\s+(?:static\s+)?(?:void|async\s+Task)\s+(\w+)/g,
+      pattern: /\[(?:Fact|Theory)(?:\([^\]]*\))?\]\s*public\s+(?:static\s+)?(?:void|async\s+Task)\s+(\w+)/g,
       nameOf: toSnakeCase
     })
   },

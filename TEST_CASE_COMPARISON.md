@@ -19,9 +19,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
 | Python | 244 | 22 |
-| JavaScript | 291 | 26 |
+| JavaScript | 288 | 26 |
 | Rust | 400 | 28 |
-| C# | 293 | 26 |
+| C# | 294 | 26 |
 | Go | 138 | 16 |
 | Java | 184 | 15 |
 | PHP | 234 | 22 |
@@ -93,10 +93,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | string budget stops before later scalars | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L12) | [✅](php/tests/BinaryTest.php#L18) |
 | string budget stops decoding before later scalars | [✅](python/tests/test_binary.py#L11) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | string decoding stops at the  u t f 8 budget before reading later scalars | ❌ | [✅](js/tests/Binary.test.js#L32) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| \t | ❌ | [✅](js/tests/Binary.test.js#L54) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | unicode whitespace is quoted | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L24) | [✅](php/tests/BinaryTest.php#L26) |
 
-**Category totals:** Python: 5, JavaScript: 7, Rust: 0, C#: 0, Go: 5, Java: 6, PHP: 6
+**Category totals:** Python: 5, JavaScript: 6, Rust: 0, C#: 0, Go: 5, Java: 6, PHP: 6
 
 ## Binary Links Notation
 
@@ -741,13 +740,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
 |-----------|---|---|---|---|---|---|---|
-| binary reference fidelity | [✅](python/tests/test_reference_fidelity.py#L49) | [✅](js/tests/ReferenceFidelity.test.js#L68) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L95) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L54) | [✅](go/reference_fidelity_test.go#L83) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L67) | [✅](php/tests/ReferenceFidelityTest.php#L60) |
-| malformed reference literals are rejected | [✅](python/tests/test_reference_fidelity.py#L58) | [✅](js/tests/ReferenceFidelity.test.js#L80) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L112) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L67) | [✅](go/reference_fidelity_test.go#L105) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L78) | [✅](php/tests/ReferenceFidelityTest.php#L71) |
-| \n | ❌ | [✅](js/tests/ReferenceFidelity.test.js#L89) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| binary reference fidelity | [✅](python/tests/test_reference_fidelity.py#L49) | [✅](js/tests/ReferenceFidelity.test.js#L68) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L95) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L54) | [✅](go/reference_fidelity_test.go#L85) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L67) | [✅](php/tests/ReferenceFidelityTest.php#L60) |
+| malformed reference literals are rejected | [✅](python/tests/test_reference_fidelity.py#L58) | [✅](js/tests/ReferenceFidelity.test.js#L80) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L112) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L67) | [✅](go/reference_fidelity_test.go#L110) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L78) | [✅](php/tests/ReferenceFidelityTest.php#L71) |
 | native reference fidelity | [✅](python/tests/test_reference_fidelity.py#L24) | [✅](js/tests/ReferenceFidelity.test.js#L27) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L28) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L19) | [✅](go/reference_fidelity_test.go#L34) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L28) | [✅](php/tests/ReferenceFidelityTest.php#L26) |
-| reference literals at every chunk split | [✅](python/tests/test_reference_fidelity.py#L31) | [✅](js/tests/ReferenceFidelity.test.js#L44) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L62) | ❌ | [✅](go/reference_fidelity_test.go#L51) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L42) | [✅](php/tests/ReferenceFidelityTest.php#L36) |
+| reference literals at every chunk split | [✅](python/tests/test_reference_fidelity.py#L31) | [✅](js/tests/ReferenceFidelity.test.js#L44) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L62) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L31) | [✅](go/reference_fidelity_test.go#L51) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L42) | [✅](php/tests/ReferenceFidelityTest.php#L36) |
 
-**Category totals:** Python: 4, JavaScript: 5, Rust: 4, C#: 3, Go: 4, Java: 4, PHP: 4
+**Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4, Go: 4, Java: 4, PHP: 4
 
 ## Single Line Parser
 
@@ -902,7 +900,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (18 missing):
+**Binary** (17 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
@@ -919,7 +917,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedbinarygoldenvectors
 - stringbudgetstopsbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 - unicodewhitespaceisquoted
 
 **Binary Links Notation** (16 missing):
@@ -1238,9 +1235,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - summaryreadsasasentence
 - thelocationtheparserusedtoreportisstillthere
 
-**Reference Fidelity** (1 missing):
-- n
-
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -1309,7 +1303,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 373 tests**
+**Total missing: 371 tests**
 
 ### JavaScript Missing Tests
 
@@ -1711,7 +1705,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (23 missing):
+**Binary** (22 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
@@ -1733,7 +1727,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - stringbudgetstopsbeforelaterscalars
 - stringbudgetstopsdecodingbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 - unicodewhitespaceisquoted
 
 **Binary Links Notation** (16 missing):
@@ -1923,9 +1916,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - offsetagreeswiththeotherimplementations
 - thelocationtheparserusedtoreportisstillthere
 
-**Reference Fidelity** (1 missing):
-- n
-
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -1947,7 +1937,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - namedtupletolink
 - tupletolink
 
-**Total missing: 218 tests**
+**Total missing: 216 tests**
 
 ### C# Missing Tests
 
@@ -1971,7 +1961,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (23 missing):
+**Binary** (22 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
@@ -1993,7 +1983,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - stringbudgetstopsbeforelaterscalars
 - stringbudgetstopsdecodingbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 - unicodewhitespaceisquoted
 
 **Binary Notation** (35 missing):
@@ -2257,10 +2246,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - summaryreadsasasentence
 - thelocationtheparserusedtoreportisstillthere
 
-**Reference Fidelity** (2 missing):
-- n
-- referenceliteralsateverychunksplit
-
 **Single Line Parser** (3 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -2325,7 +2310,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 324 tests**
+**Total missing: 321 tests**
 
 ### Go Missing Tests
 
@@ -2351,7 +2336,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (18 missing):
+**Binary** (17 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarytextquoteseveryunicodegrammarwhitespacecharacter
 - configurablelimitsapplyinbothdirections;rejectmalformedpackets
@@ -2368,7 +2353,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - stringbudgetstopsbeforelaterscalars
 - stringbudgetstopsdecodingbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 - unicodewhitespaceisquoted
 
 **Binary Links Notation** (16 missing):
@@ -2774,9 +2758,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - summaryreadsasasentence
 - thelocationtheparserusedtoreportisstillthere
 
-**Reference Fidelity** (1 missing):
-- n
-
 **Single Line Parser** (26 missing):
 - bugtest 1
 - linkwithid
@@ -2866,7 +2847,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 475 tests**
+**Total missing: 473 tests**
 
 ### Java Missing Tests
 
@@ -2888,7 +2869,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - simplelink
 - singlelineformat
 
-**Binary** (17 missing):
+**Binary** (16 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
@@ -2905,7 +2886,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedbinarygoldenvectors
 - stringbudgetstopsdecodingbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 
 **Binary Links Notation** (16 missing):
 - aritieswithoutdoubletsareunencodable
@@ -3289,9 +3269,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - summaryreadsasasentence
 - thelocationtheparserusedtoreportisstillthere
 
-**Reference Fidelity** (1 missing):
-- n
-
 **Single Line Parser** (9 missing):
 - linkwithoutidmultiline
 - linkwithoutidsingleline
@@ -3365,7 +3342,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 433 tests**
+**Total missing: 431 tests**
 
 ### PHP Missing Tests
 
@@ -3390,7 +3367,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (17 missing):
+**Binary** (16 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
@@ -3407,7 +3384,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedbinarygoldenvectors
 - stringbudgetstopsdecodingbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 
 **Binary Links Notation** (16 missing):
 - aritieswithoutdoubletsareunencodable
@@ -3723,9 +3699,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - summaryreadsasasentence
 - thelocationtheparserusedtoreportisstillthere
 
-**Reference Fidelity** (1 missing):
-- n
-
 **Single Line Parser** (16 missing):
 - linkwithoutidmultiline
 - linkwithoutidsingleline
@@ -3806,5 +3779,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 383 tests**
+**Total missing: 381 tests**
 

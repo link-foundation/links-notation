@@ -41,7 +41,7 @@ func TestNativeReferenceFidelity(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			if *parsed[0].ID != reference || *parsed[0].Values[0].ID != reference || *parsed[0].Values[1].Values[0].ID != reference {
+			if len(parsed) != len(original) || !parsed[0].Equal(original[0]) {
 				t.Fatalf("reference %q changed", reference)
 			}
 		}
@@ -60,6 +60,8 @@ func TestReferenceLiteralsAtEveryChunkSplit(t *testing.T) {
 		}
 		for _, literal := range []string{escapeReference(reference), FormatBinaryReference(reference), encoded} {
 			text := "(root: " + literal + ")\n(" + literal + ": fixture)"
+			root := "root"
+			expected := []*Link{NewLink(&root, []*Link{NewRef(reference)}), NewLink(&reference, []*Link{NewRef("fixture")})}
 			for split := 0; split <= len(text); split++ {
 				stream := NewStreamParser()
 				if _, err := stream.Feed(text[:split]); err != nil {
@@ -72,7 +74,7 @@ func TestReferenceLiteralsAtEveryChunkSplit(t *testing.T) {
 				if err != nil {
 					t.Fatal(err)
 				}
-				if len(parsed) != 2 || len(parsed[0].Values) != 1 || *parsed[0].Values[0].ID != reference || parsed[1].ID == nil || *parsed[1].ID != reference {
+				if len(parsed) != len(expected) || !parsed[0].Equal(expected[0]) || !parsed[1].Equal(expected[1]) {
 					t.Fatalf("reference %q changed at split %d", reference, split)
 				}
 			}
@@ -92,11 +94,14 @@ func TestBinaryReferenceFidelity(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
+		if len(decoded) != len(original) || !decoded[0].Equal(original[0]) {
+			t.Fatalf("binary codec changed reference %q", reference)
+		}
 		parsed, err := Parse(FormatBinaryDocument(decoded))
 		if err != nil {
 			t.Fatal(err)
 		}
-		if len(parsed) != 1 || parsed[0].ID == nil || *parsed[0].ID != reference || len(parsed[0].Values) != 1 || *parsed[0].Values[0].ID != reference {
+		if len(parsed) != len(original) || !parsed[0].Equal(original[0]) {
 			t.Fatalf("reference %q changed", reference)
 		}
 	}
