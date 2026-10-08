@@ -9,11 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- JavaScript reference formatting now doubles enclosing quotes instead of
-  inserting a backslash that the parser treats literally. References with
-  mixed quotes, leading quotes, or backtick delimiters round-trip correctly
-  ([#333](https://github.com/link-foundation/links-notation/issues/333)).
-
 - Refuse links nested too deeply with a parse error instead of recursing until
   the stack overflows. Every parser recursed once per parenthesized group and
   per indentation level with nothing bounding it, so `(` repeated 100 000 times
@@ -62,14 +57,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   ([#315](https://github.com/link-foundation/links-notation/issues/315)).
 
 ### Added
-
-- JavaScript `Parser.parseGroups()` exposes the indentation tree through
-  `LinksGroup` instances. `parseIndentedDocument()` and
-  `formatIndentedDocument()` read and write parent/children text maps with
-  minimal quoting, multiline references, and an explicit array or joined-text
-  policy. Public `escapeReference()` and `unescapeReference()` helpers are also
-  available as static `Link` methods
-  ([#333](https://github.com/link-foundation/links-notation/issues/333)).
 
 - Streaming parsers in C#, JavaScript, Rust, Python, Go, Java, and PHP with
   arbitrary symbol/line chunks, push callbacks or events, native lazy adapters,
@@ -396,6 +383,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - JavaScript: the generated parser reported the position on the error object but
   not in the message, so a caller that printed the message lost it
   ([#302](https://github.com/link-foundation/links-notation/issues/302))
+
+## [0.25.0] - 2026-10-08
+
+### Added
+
+- JavaScript `Parser.parseGroups()` exposes the indentation tree through
+  `LinksGroup` instances. `parseIndentedDocument()` and
+  `formatIndentedDocument()` read and write parent/children text maps with
+  minimal quoting, multiline references, and an explicit array or joined-text
+  policy. Public `escapeReference()` and `unescapeReference()` helpers are also
+  available as static `Link` methods
+  ([#333](https://github.com/link-foundation/links-notation/issues/333)).
+
+## [0.24.0] - 2026-10-08
+
+### Fixed
+
+- Preserve exact Unicode identifiers and values through native formatting,
+  parsing, streaming and binary text output in all seven bindings. Mixed quote
+  delimiters now use the existing n-quote grammar without invented backslash
+  escapes; Rust display output quotes references too ([#332](https://github.com/link-foundation/links-notation/issues/332)).
+
+### Added
+
+- Version 1 UTF-8 hex reference literals (`~1{...}`) and public encode/decode
+  helpers in every binding. Empty strings, C0 controls and DEL use these literals
+  automatically. Malformed hex, UTF-8 and unsupported versions are rejected.
+
+### Changed
+
+- Reserve `~[0-9]+{` at reference boundaries. Quote existing names with that
+  prefix when upgrading readers to 0.24.0; older readers cannot decode literals.
+  Legacy quoted references and binary version 1 packet bytes remain compatible.
+  See the [literal contract](docs/protocol/reference-literals.md).
 
 ## [0.23.0] - 2026-10-06
 

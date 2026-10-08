@@ -178,13 +178,15 @@ To read multiple child lines as multiline text, pass
 
 The formatter uses two spaces of indentation and adds a final newline to a
 nonempty document. Ordinary single-space prose stays unquoted. Quotes are
-escaped by doubling the enclosing delimiter. Empty strings, structural
-characters, comment starts, and significant whitespace are quoted. A multiline
-string is written as one quoted reference with actual line breaks; an array is
-written as separate child references. Parsed IDs are already unescaped.
+escaped by doubling the enclosing delimiter. Structural characters, comment
+starts, reserved literal prefixes, and significant whitespace are quoted.
+Empty strings and control characters use the versioned reference literals
+introduced in 0.24.0. A multiline string is encoded as one reference with its
+exact line endings; an array is written as separate child references. Parsed
+IDs are already unescaped.
 
 The text format does not distinguish a one-element array from a single string;
-both read back as a string. Use a quoted multiline string to distinguish one
+both read back as a string. Use a multiline string to distinguish one
 multiline answer from several options. The helpers reject grandchildren and
 named links with values instead of discarding their structure.
 
@@ -218,8 +220,9 @@ unescapeReference("'it''s ready'"); // "it's ready"
 ```
 
 `unescapeReference` decodes a complete serialized reference, including n-quote
-delimiters and doubled escapes, and rejects incomplete quoted input. It preserves
-literal backslashes. Do not call it on already decoded `Link.id` values.
+delimiters, doubled escapes, and versioned literals. It rejects incomplete
+quoted input and malformed literals, and preserves literal backslashes. Do not
+call it on already decoded `Link.id` values.
 
 See the [Q&A document example](../examples/js_indented_document.js).
 
@@ -561,3 +564,6 @@ fail the format check.
 
 - Package: `links-notation`
 - License: Unlicense (see [LICENSE](../LICENSE))
+
+Exact Unicode identifiers and values round-trip with the [reference literal contract](../docs/protocol/reference-literals.md)
+introduced in 0.24.0, including mixed quotes, empty strings, controls and multiline text.

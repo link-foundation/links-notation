@@ -1,4 +1,9 @@
 import { QUOTES, readReference } from './quotes.js';
+import {
+  decodeReferenceLiteral,
+  formatReference,
+  hasReferenceLiteralPrefix,
+} from './ReferenceLiteral.js';
 
 /**
  * Quote one reference. Minimal mode allows ordinary single-space prose on a
@@ -9,16 +14,20 @@ import { QUOTES, readReference } from './quotes.js';
  */
 export function escapeReference(reference, { minimal = false } = {}) {
   if (reference === null || reference === undefined) return '';
-  if (typeof reference !== 'string') {
-    throw new TypeError('Reference must be a string');
+  if (typeof reference !== 'string' || !reference.isWellFormed()) {
+    throw new TypeError('Reference must be well-formed Unicode text');
   }
-  if (reference === '') return '""';
+  // Keep ordinary Link formatting identical to binary text formatting. The
+  // versioned literal also preserves empty strings and control characters in
+  // minimal document lines, including exact line endings.
+  if (!minimal || !reference || /[\u0000-\u001f\u007f]/u.test(reference)) {
+    return formatReference(reference);
+  }
 
   const needsQuoting =
-    /[:()'"`\t\n\r]/.test(reference) ||
-    (minimal
-      ? /(^ | $| {2,}|(^| )#)/.test(reference)
-      : reference.includes(' ') || reference.startsWith('#'));
+    /(^| )~[0-9]+\{/.test(reference) ||
+    /[:()'"`]|(?! )[\p{White_Space}\ufeff]/u.test(reference) ||
+    /(^ | $| {2,}|(^| )#)/.test(reference);
   if (!needsQuoting) return reference;
 
   const singleQuotes = reference.split("'").length - 1;
@@ -41,6 +50,9 @@ export function escapeReference(reference, { minimal = false } = {}) {
 export function unescapeReference(reference) {
   if (typeof reference !== 'string') {
     throw new TypeError('Reference must be a string');
+  }
+  if (hasReferenceLiteralPrefix(reference)) {
+    return decodeReferenceLiteral(reference);
   }
   if (!QUOTES.includes(reference[0])) return reference;
   const reading = readReference(reference, 0);

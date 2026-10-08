@@ -14,9 +14,10 @@ delimiters, so parsing the formatted Link truncated the reference to
 with exactly that mismatch. The new APIs were also absent: the initial run of
 `js/tests/IndentedDocument.test.js` reported ten failures.
 
-`references.js` uses the existing quote reader to decode serialized references
-and writes doubled escapes. Choosing a delimiter different from the first
-content character avoids extending the opening quote run accidentally. Minimal
+Minimal escaping in `references.js` uses the existing quote reader to decode
+serialized references and writes doubled escapes. Choosing a delimiter
+different from the first content character avoids extending the opening quote
+run accidentally. Minimal
 mode quotes comment starts and significant whitespace, but leaves ordinary
 single-space prose unquoted. Link IDs are not unescaped again after parsing.
 
@@ -36,7 +37,7 @@ The runnable consumer example is `examples/js_indented_document.js`; TypeScript
 declarations are checked in CI using `examples/js_indented_document.ts`.
 
 Scope: JavaScript, the language used by the issue's consumer. Release metadata
-is synchronized to 0.24.0 across all seven implementations because the
+is synchronized to 0.25.0 across all seven implementations because the
 repository's mandatory version-consistency check requires it. A one-element
 array reads back as a string because the text syntax cannot distinguish them.
 Multiple children default to an array; joining them as multiline text requires
@@ -58,3 +59,17 @@ showed one changed line in `benchmarks/BENCHMARK_RESULTS.md`; lines 1019–1020
 reported stale output. Regenerating the report updates its embedded library
 version from 0.23.0 to 0.24.0. The generator's subsequent `--check` verified all
 73 generated files without drift.
+
+During final review, main merged #335 with the lossless reference literal
+extension in 0.24.0. This branch merges that change and retains its canonical
+encoder for default Link formatting. Minimal mode also uses its literals for
+empty/control strings and quotes reserved prefixes and Unicode whitespace;
+`unescapeReference()` decodes complete literals. Two additional regression tests
+failed before this integration (`~1{61}` was left unquoted and `~1{}` was not
+decoded). They now cover the shared 91-reference Unicode corpus, malformed
+literals, reserved-prefix text, and rejecting unpaired surrogates. An additional
+case reproduced `text ~1{61} after` becoming `text a after`: minimal mode must
+quote reserved prefixes at every word boundary, including the middle of prose.
+The new API
+therefore prepares the next minor release, 0.25.0. The benchmark report is
+regenerated once more for that version.

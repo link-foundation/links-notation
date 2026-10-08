@@ -26,6 +26,7 @@ from .format_config import FormatConfig
 from .formatter import format_links
 from .link import Link
 from .parser import DEFAULT_MAX_DEPTH, ParseError, Parser
+from .reference_literal import decode_reference_literal, encode_reference_literal
 from .stream_parser import StreamParseError, StreamParser, StreamPosition, parse_async_chunks, parse_chunks
 
 
@@ -58,6 +59,8 @@ def _read_version() -> str:
 __version__ = _read_version()
 
 __all__ = [
+    "decode_reference_literal",
+    "encode_reference_literal",
     "ArityRange",
     "BinaryLinoCodec",
     "BinaryLinoOptions",

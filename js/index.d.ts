@@ -114,13 +114,13 @@ export interface EscapeReferenceOptions {
   minimal?: boolean;
 }
 
-/** Quote a reference with doubled delimiter escapes. Spaces are quoted by default. */
+/** Escape a reference. Minimal mode doubles enclosing quotes; default formatting uses n-quotes. */
 export function escapeReference(
   reference: string,
   options?: EscapeReferenceOptions
 ): string;
 
-/** Decode a complete escaped reference, including n-quote references. */
+/** Decode a complete escaped reference, including n-quotes and versioned literals. */
 export function unescapeReference(reference: string): string;
 
 /**
@@ -214,7 +214,7 @@ export function parseIndentedDocument(
 
 /**
  * Write minimally quoted text with two-space indentation and a final newline.
- * Multiline strings remain one quoted reference; array entries become children.
+ * Multiline strings remain one encoded reference; array entries become children.
  */
 export function formatIndentedDocument(
   entries: ReadonlyMap<string, string | string[]>
@@ -613,3 +613,8 @@ export class BinaryLinoCodec {
 }
 export function formatBinaryDocument(document: Link[]): string;
 export function formatBinaryReference(reference: string): string;
+
+/** Encode exact Unicode as a version 1 UTF-8 hex literal (~1{...}). Throws on unpaired surrogates. */
+export function encodeReferenceLiteral(text: string): string;
+/** Decode a complete literal. Throws on malformed hex, UTF-8, or unsupported versions. */
+export function decodeReferenceLiteral(literal: string): string;

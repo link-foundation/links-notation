@@ -116,13 +116,12 @@ fn link_escape_reference_simple_test() {
 
 #[test]
 fn link_escape_reference_with_special_characters_test() {
-    // In Rust implementation, special character handling would be in the parser
-    // These tests verify basic string handling
+    // Display output must quote references containing grammar characters.
     let ref_space = LiNo::Ref("has space".to_string());
-    assert_eq!(ref_space.to_string(), "has space");
+    assert_eq!(ref_space.to_string(), "'has space'");
 
     let ref_colon = LiNo::Ref("has:colon".to_string());
-    assert_eq!(ref_colon.to_string(), "has:colon");
+    assert_eq!(ref_colon.to_string(), "'has:colon'");
 }
 
 #[test]

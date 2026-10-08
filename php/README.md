@@ -15,7 +15,7 @@ Or add the dependency to your `composer.json`:
 ```json
 {
     "require": {
-        "link-foundation/links-notation": "^0.24"
+        "link-foundation/links-notation": "^0.25"
     }
 }
 ```
@@ -381,3 +381,6 @@ counted from the start of the stream.
 - Package: `link-foundation/links-notation`
 - Namespace: `LinkFoundation\LinksNotation`
 - License: Unlicense (see [LICENSE](../LICENSE))
+
+Exact Unicode identifiers and values round-trip with the [reference literal contract](../docs/protocol/reference-literals.md)
+introduced in 0.24.0, including mixed quotes, empty strings, controls and multiline text.

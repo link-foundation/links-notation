@@ -59,7 +59,7 @@ export function parseIndentedDocument(input, options = {}) {
 
 /**
  * Write a text Map using minimal quoting and two-space child indentation.
- * Multiline strings are quoted as one reference; array entries are separate
+ * Multiline strings are encoded as one reference; array entries are separate
  * children. Nonempty output ends with a newline.
  * @param {Map<string, string|string[]>} entries
  * @returns {string}

@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { test, expect } from 'bun:test';
 import * as lino from '../src/index.js';
 
@@ -8,6 +9,9 @@ test('mixed quotes round-trip through the existing Link formatter', () => {
   const formatted = new Link(text).toString();
   expect(new Parser().parse(formatted)[0].values[0].id).toBe(text);
   expect(formatted).not.toContain("\\'");
+  expect(lino.escapeReference(text, { minimal: true })).toBe(
+    "'He said \"it''s ready\"'"
+  );
 });
 
 test('minimal escaping leaves ordinary prose unquoted', () => {
@@ -198,4 +202,55 @@ test('one-element arrays normalize to strings and unanswered parents remain dist
   expect(() =>
     lino.formatIndentedDocument(new Map([['Question', Array(1)]]))
   ).toThrow(TypeError);
+});
+
+test('document helpers preserve the shared Unicode reference corpus and reserved prefixes', () => {
+  const references = readFileSync(
+    new globalThis.URL(
+      '../../docs/protocol/reference-literals.txt',
+      import.meta.url
+    ),
+    'utf8'
+  )
+    .trim()
+    .split('\n')
+    .filter((line) => !line.startsWith('#'))
+    .map((hex) =>
+      hex === '-' ? '' : Buffer.from(hex, 'hex').toString('utf8')
+    );
+  for (const text of [
+    ...references,
+    '~1{61}',
+    '~2{00}',
+    '~1{invalid}',
+    'text ~1{61} after',
+    'text ~2{00}',
+    'text ~1{invalid}',
+  ]) {
+    expect(lino.escapeReference(text)).toBe(lino.formatBinaryReference(text));
+    expect(lino.unescapeReference(lino.escapeReference(text))).toBe(text);
+    expect(
+      lino.unescapeReference(lino.escapeReference(text, { minimal: true }))
+    ).toBe(text);
+    const entries = new Map([[text, text]]);
+    expect(
+      lino.parseIndentedDocument(lino.formatIndentedDocument(entries))
+    ).toEqual(entries);
+  }
+});
+
+test('unescaping decodes versioned literals without decoding parsed document IDs twice', () => {
+  expect(lino.unescapeReference('~1{}')).toBe('');
+  expect(Link.unescapeReference('~1{00}')).toBe('\0');
+  expect(lino.unescapeReference('~1{C3A9}')).toBe('é');
+  for (const literal of ['~2{61}', '~1{0}', '~1{gg}', '~1{ff}']) {
+    expect(() => lino.unescapeReference(literal)).toThrow();
+  }
+  const entries = new Map([['~1{61}', '~1{62}']]);
+  expect(
+    lino.parseIndentedDocument(lino.formatIndentedDocument(entries))
+  ).toEqual(entries);
+  expect(() => lino.escapeReference('\ud800', { minimal: true })).toThrow(
+    TypeError
+  );
 });

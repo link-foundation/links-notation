@@ -86,6 +86,6 @@ test('TestEmptyReferenceSurvivesARoundTrip', () => {
   }
 });
 
-test('TestEmptyReferenceIsWrittenAsADelimiterPair', () => {
-  expect(formatLinks(parser.parse('(a "" b)'))).toBe('(a "" b)');
+test('TestEmptyReferenceIsWrittenAsAVersionedLiteral', () => {
+  expect(formatLinks(parser.parse('(a "" b)'))).toBe('(a ~1{} b)');
 });

@@ -276,51 +276,7 @@ func (l *Link) Equal(other *Link) bool {
 
 // escapeReference escapes a reference string by adding quotes if necessary.
 func escapeReference(reference string) string {
-	// The empty reference is written as a bare delimiter pair, so that it reads
-	// back as itself instead of disappearing from the document.
-	if reference == "" {
-		return `""`
-	}
-
-	hasSingleQuote := strings.Contains(reference, "'")
-	hasDoubleQuote := strings.Contains(reference, "\"")
-
-	// A reference that begins with a "#" has to be quoted, or it would read back
-	// as a comment. A "#" anywhere else in a reference is content
-	// (issue#1047), so only the first character matters.
-	needsQuoting := strings.HasPrefix(reference, "#") ||
-		strings.Contains(reference, ":") ||
-		strings.Contains(reference, "(") ||
-		strings.Contains(reference, ")") ||
-		strings.Contains(reference, " ") ||
-		strings.Contains(reference, "\t") ||
-		strings.Contains(reference, "\n") ||
-		strings.Contains(reference, "\r") ||
-		hasDoubleQuote ||
-		hasSingleQuote
-
-	// Handle edge case: reference contains both single and double quotes
-	if hasSingleQuote && hasDoubleQuote {
-		return "'" + strings.ReplaceAll(reference, "'", "\\'") + "'"
-	}
-
-	// Prefer single quotes if double quotes are present
-	if hasDoubleQuote {
-		return "'" + reference + "'"
-	}
-
-	// Use double quotes if single quotes are present
-	if hasSingleQuote {
-		return "\"" + reference + "\""
-	}
-
-	// Use single quotes for special characters
-	if needsQuoting {
-		return "'" + reference + "'"
-	}
-
-	// No quoting needed
-	return reference
+	return formatReference(reference)
 }
 
 // needsParentheses checks if a string needs to be wrapped in parentheses.

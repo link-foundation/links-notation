@@ -331,3 +331,6 @@ For complete API documentation, visit:
 Version 1 codecs support raw packets and the marker-point LiNo mapping. See the
 [shared specification](../docs/protocol/binary-links-notation.md) and
 [cross-language example](../examples/binary/README.md) for APIs and options.
+
+Exact Unicode identifiers and values round-trip with the [reference literal contract](../docs/protocol/reference-literals.md)
+introduced in 0.24.0, including mixed quotes, empty strings, controls and multiline text.

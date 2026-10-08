@@ -252,6 +252,10 @@ func (p *Parser) Parse(input string) ([]*Link, error) {
 func (p *Parser) parseRoot() (result []*internalLink, err error) {
 	defer func() {
 		if recovered := recover(); recovered != nil {
+			if literal, ok := recovered.(referenceLiteralError); ok {
+				result, err = nil, literal.err
+				return
+			}
 			refusal, ok := recovered.(nestingTooDeep)
 			if !ok {
 				panic(recovered)
@@ -787,6 +791,13 @@ func (p *Parser) parseValue(value string, offset int) *internalLink {
 
 func (p *Parser) extractReference(text string) string {
 	text = strings.TrimSpace(text)
+	if literalPrefix.MatchString(text) {
+		value, err := DecodeReferenceLiteral(text)
+		if err != nil {
+			panic(referenceLiteralError{err})
+		}
+		return value
+	}
 
 	// Try delimited references (any N quotes, or a bare delimiter pair)
 	if value, _, ok := parseQuotedStringAt(text, 0); ok {
