@@ -32,7 +32,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/ci/check-dependencies.py
-      - uses: actions/setup-node@v7.0.0
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: '24'
       - uses: oven-sh/setup-bun@v2.2.0
@@ -42,7 +42,7 @@ jobs:
         run: node scripts/ci/check-npm-locks.mjs
       - name: Preserve dependency resolution evidence
         if: failure()
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: dependency-check-logs
           path: ci-logs/dependencies/

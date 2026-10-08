@@ -60,13 +60,13 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4.38.2
+        uses: github/codeql-action/init@v4.38.3
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
           config-file: ./.github/codeql/codeql-config.yml
       - name: Analyze
-        uses: github/codeql-action/analyze@v4.38.2
+        uses: github/codeql-action/analyze@v4.38.3
         with:
           category: /language:${{ matrix.language }}
 
@@ -106,12 +106,12 @@ jobs:
           # scan needs the whole history, not just the tip.
           fetch-depth: 0
       - name: Scan the repository for verified secrets
-        uses: trufflesecurity/trufflehog@v3.99.0
+        uses: trufflesecurity/trufflehog@v3.99.2
         with:
           path: ./
           # The action ref pins the wrapper; this pins the scanner itself,
           # which otherwise resolves to the `latest` image on every run.
-          version: 3.99.0
+          version: 3.99.2
           # --results=verified only reports credentials that the issuing
           # service confirmed are live, which is what makes this safe to fail
           # the build on. Do not add --no-update here: the action already
@@ -137,7 +137,7 @@ jobs:
       - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v7.0.0
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
       - name: Audit the committed lockfile

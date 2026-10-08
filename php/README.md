@@ -15,7 +15,7 @@ Or add the dependency to your `composer.json`:
 ```json
 {
     "require": {
-        "link-foundation/links-notation": "^0.23"
+        "link-foundation/links-notation": "^0.24"
     }
 }
 ```

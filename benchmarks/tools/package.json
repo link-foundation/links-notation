@@ -11,7 +11,7 @@
   "dependencies": {
     "csv-parse": "^7.0.3",
     "fast-xml-parser": "^5.11.2",
-    "lino-objects-codec": "^0.8.0",
+    "lino-objects-codec": "^0.9.0",
     "yaml": "^2.9.1"
   }
 }
