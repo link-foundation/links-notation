@@ -715,6 +715,7 @@ public class Parser {
   /** Extract reference, handling quoted strings with escaping support. */
   private String extractReference(String text) {
     text = text.trim();
+    if (ReferenceLiteral.hasPrefix(text)) return ReferenceLiteral.decode(text);
 
     QuotedString quoted = parseQuotedStringAt(text, 0);
     if (quoted != null) {

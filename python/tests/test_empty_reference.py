@@ -76,8 +76,8 @@ class TestNQuoteMeaningsSurvive:
 class TestEmptyReferenceFormatting:
     """The empty reference is written so that it reads back as itself."""
 
-    def test_empty_reference_is_written_as_a_delimiter_pair(self):
-        assert format_links(Parser().parse('(a "" b)')) == '(a "" b)'
+    def test_empty_reference_is_written_as_a_versioned_literal(self):
+        assert format_links(Parser().parse('(a "" b)')) == "(a ~1{} b)"
 
     def test_empty_reference_survives_a_round_trip(self):
         for source in [

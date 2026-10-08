@@ -1,8 +1,7 @@
 //! Canonical LiNo text for documents, shared by every protocol.
 //!
-//! `links_notation::format_links` does not quote references that contain
-//! spaces or other delimiters, so it cannot be used to put a decoded binary
-//! message back on the wire. This formatter guarantees that
+//! Native and binary text formatting share a lossless reference encoder.
+//! This canonical group formatter guarantees that
 //! `parse(format(document)) == document` for every parsed document, which is
 //! what makes the text and binary protocols interchangeable.
 
@@ -99,34 +98,5 @@ fn join_values(values: &[LiNo<String>]) -> String {
 /// than the longest run of that quote inside, and odd, because an even
 /// delimiter run may be read as an empty reference.
 pub fn format_reference(reference: &str) -> String {
-    let needs_quotes = reference.is_empty()
-        || reference.starts_with('#')
-        || reference.chars().any(|character| {
-            character.is_whitespace()
-                || matches!(
-                    character,
-                    '\u{1c}'..='\u{1f}' | '\u{feff}' | '(' | ')' | ':' | '\'' | '"' | '`'
-                )
-        });
-    if !needs_quotes {
-        return reference.to_string();
-    }
-    let first = reference.chars().next();
-    let (quote, count) = ['\'', '"', '`']
-        .into_iter()
-        .filter(|&quote| first != Some(quote))
-        .map(|quote| (quote, (longest_run(reference, quote) + 1) | 1))
-        .min_by_key(|&(_, count)| count)
-        .expect("a reference starts with at most one of three quote characters");
-    let delimiter = quote.to_string().repeat(count);
-    format!("{delimiter}{reference}{delimiter}")
-}
-
-fn longest_run(text: &str, quote: char) -> usize {
-    let (mut longest, mut current) = (0, 0);
-    for character in text.chars() {
-        current = if character == quote { current + 1 } else { 0 };
-        longest = longest.max(current);
-    }
-    longest
+    crate::reference_literal::format_reference(reference)
 }

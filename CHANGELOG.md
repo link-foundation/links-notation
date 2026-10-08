@@ -389,6 +389,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   not in the message, so a caller that printed the message lost it
   ([#302](https://github.com/link-foundation/links-notation/issues/302))
 
+## [0.24.0] - 2026-10-08
+
+### Fixed
+
+- Preserve exact Unicode identifiers and values through native formatting,
+  parsing, streaming and binary text output in all seven bindings. Mixed quote
+  delimiters now use the existing n-quote grammar without invented backslash
+  escapes; Rust display output quotes references too ([#332](https://github.com/link-foundation/links-notation/issues/332)).
+
+### Added
+
+- Version 1 UTF-8 hex reference literals (`~1{...}`) and public encode/decode
+  helpers in every binding. Empty strings, C0 controls and DEL use these literals
+  automatically. Malformed hex, UTF-8 and unsupported versions are rejected.
+
+### Changed
+
+- Reserve `~[0-9]+{` at reference boundaries. Quote existing names with that
+  prefix when upgrading readers to 0.24.0; older readers cannot decode literals.
+  Legacy quoted references and binary version 1 packet bytes remain compatible.
+  See the [literal contract](docs/protocol/reference-literals.md).
+
 ## [0.23.0] - 2026-10-06
 
 ### Added

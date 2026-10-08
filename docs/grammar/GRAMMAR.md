@@ -23,13 +23,17 @@ structured data as links between references. The notation supports:
 - **Indentation**: Hierarchical structure through indentation
 - **Comments**: `#` hides the rest of the line it stands on
 
+Exact Unicode references can use [version 1 UTF-8 hex literals](../protocol/reference-literals.md),
+introduced in 0.24.0. The prefix `~[0-9]+{` is reserved at reference
+boundaries; quote an existing reference with that spelling.
+
 ## EBNF Grammar
 
 The following EBNF grammar formally defines the Links Notation syntax:
 
 ```ebnf
 (* Links Notation (Lino) Grammar - EBNF *)
-(* Version: 0.21.1 *)
+(* Version: 0.24.0 *)
 
 (* === Document Structure === *)
 document            = skip_empty_lines, links, whitespace, EOF
@@ -89,10 +93,16 @@ indented_id_link    = reference, horizontal_whitespace, ":", eol ;
 reference_or_link   = nested_group
                     | reference ;
 
-reference           = delimited_reference
+reference           = reference_literal
+                    | delimited_reference
                     | simple_reference ;
 
+(* A simple reference cannot start with the reserved prefix ~[0-9]+{. *)
 simple_reference    = reference_symbol, { reference_symbol } ;
+
+(* Decode the hex as strict UTF-8; reject malformed or unknown versions. *)
+reference_literal   = "~1{", { hex_digit, hex_digit }, "}" ;
+hex_digit           = "0".."9" | "a".."f" | "A".."F" ;
 
 (* The three delimiters behave identically; nothing else delimits *)
 delimiter           = '"' | "'" | "`" ;

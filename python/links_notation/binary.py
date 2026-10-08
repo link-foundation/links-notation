@@ -12,6 +12,7 @@ from typing import Optional
 
 from .link import Link
 from .parser import Parser
+from .reference_literal import format_reference
 
 U64 = (1 << 64) - 1
 WIDTHS = (1, 2, 4, 8)
@@ -558,20 +559,6 @@ def _canonical(node):
     if node.id is None and len(node.values) == 1 and node.values[0].id is not None and not node.values[0].values:
         return node.values[0]
     return Link(node.id, [_canonical(v) for v in node.values])
-
-
-def format_reference(text):
-    if text and not text.startswith("#") and not any(c.isspace() or c in "\ufeff():\"'`" for c in text):
-        return text
-    choices = []
-    for quote in "'\"`":
-        if text.startswith(quote):
-            continue
-        longest = max([len(m.group()) for m in re.finditer(re.escape(quote) + "+", text)] or [0])
-        choices.append(((longest + 1) | 1, quote))
-    count, quote = min(choices, key=lambda item: item[0])
-    delimiter = quote * count
-    return delimiter + text + delimiter
 
 
 def format_document(document):

@@ -120,10 +120,10 @@ namespace Link.Foundation.Links.Notation.Tests
         }
 
         [Fact]
-        public static void EmptyReferenceIsWrittenAsADelimiterPair()
+        public static void EmptyReferenceIsWrittenAsAVersionedLiteral()
         {
             var links = (IList<Link<string>>)new Parser().Parse("(a \"\" b)");
-            Assert.Equal("(a \"\" b)", links.Format());
+            Assert.Equal("(a ~1{} b)", links.Format());
         }
     }
 }

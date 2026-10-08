@@ -70,9 +70,9 @@ class LinkTest extends TestCase
         $this->assertSame("'   '", Link::escapeReference('   '));
     }
 
-    public function testLinkEscapeReferenceWritesTheEmptyReferenceAsADelimiterPair(): void
+    public function testLinkEscapeReferenceWritesTheEmptyReferenceAsAVersionedLiteral(): void
     {
-        $this->assertSame('""', Link::escapeReference(''));
+        $this->assertSame('~1{}', Link::escapeReference(''));
     }
 
     public function testLinkSimplify(): void

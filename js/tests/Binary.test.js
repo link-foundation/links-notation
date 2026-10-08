@@ -23,7 +23,9 @@ test('binary text quotes every Unicode grammar whitespace character', () => {
     '\u001f',
     '\ufeff',
   ]) {
-    expect(formatBinaryReference(text)).toBe("'" + text + "'");
+    expect(
+      new Parser().parse(`(root: ${formatBinaryReference(text)})`)
+    ).toEqual([new Link('root', [new Link(text)])]);
   }
 });
 

@@ -18,13 +18,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 240 | 21 |
-| JavaScript | 285 | 25 |
-| Rust | 396 | 27 |
-| C# | 290 | 25 |
-| Go | 134 | 15 |
-| Java | 180 | 14 |
-| PHP | 230 | 21 |
+| Python | 244 | 22 |
+| JavaScript | 288 | 26 |
+| Rust | 400 | 28 |
+| C# | 294 | 26 |
+| Go | 138 | 16 |
+| Java | 184 | 15 |
+| PHP | 234 | 22 |
 
 ---
 
@@ -72,31 +72,30 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
 |-----------|---|---|---|---|---|---|---|
-| all native text models survive all binary options | ❌ | [✅](js/tests/Binary.test.js#L83) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| all native text models survive all binary options | ❌ | [✅](js/tests/Binary.test.js#L85) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | binary limits and malformed | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L134) | ❌ | ❌ |
 | binary native models | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L106) | ❌ | ❌ |
 | binary shared vectors | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L25) | ❌ | ❌ |
 | binary streams uint64 truncation and depth | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L172) | ❌ | ❌ |
 | binary string budget stops before later scalars | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L12) | ❌ | ❌ |
 | binary text quotes every  unicode grammar whitespace character | ❌ | [✅](js/tests/Binary.test.js#L15) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| configurable limits apply in both directions; reject malformed packets | ❌ | [✅](js/tests/Binary.test.js#L111) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| limits and malformed | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L85) | [✅](php/tests/BinaryTest.php#L97) |
+| configurable limits apply in both directions; reject malformed packets | ❌ | [✅](js/tests/Binary.test.js#L113) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| limits and malformed | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L87) | [✅](php/tests/BinaryTest.php#L100) |
 | limits and malformed packets | [✅](python/tests/test_binary.py#L67) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | native text model round trip | [✅](python/tests/test_binary.py#L58) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| native text models | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L58) | [✅](php/tests/BinaryTest.php#L65) |
-| packet cursor boundaries, uint64, truncation and configurable depth | ❌ | [✅](js/tests/Binary.test.js#L139) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| native text models | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L60) | [✅](php/tests/BinaryTest.php#L68) |
+| packet cursor boundaries, uint64, truncation and configurable depth | ❌ | [✅](js/tests/Binary.test.js#L141) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | packet stream boundaries uint64 and every truncated prefix | [✅](python/tests/test_binary.py#L86) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| packet streams uint64 and truncation | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L106) | ❌ |
-| packet streams uint64 truncation and depth | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/BinaryTest.php#L129) |
-| shared binary golden vectors | ❌ | [✅](js/tests/Binary.test.js#L42) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| shared vectors | [✅](python/tests/test_binary.py#L17) | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L31) | [✅](php/tests/BinaryTest.php#L37) |
+| packet streams uint64 and truncation | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L108) | ❌ |
+| packet streams uint64 truncation and depth | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/BinaryTest.php#L132) |
+| shared binary golden vectors | ❌ | [✅](js/tests/Binary.test.js#L44) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| shared vectors | [✅](python/tests/test_binary.py#L17) | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L33) | [✅](php/tests/BinaryTest.php#L40) |
 | string budget stops before later scalars | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L12) | [✅](php/tests/BinaryTest.php#L18) |
 | string budget stops decoding before later scalars | [✅](python/tests/test_binary.py#L11) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| string decoding stops at the  u t f 8 budget before reading later scalars | ❌ | [✅](js/tests/Binary.test.js#L30) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| \t | ❌ | [✅](js/tests/Binary.test.js#L52) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| string decoding stops at the  u t f 8 budget before reading later scalars | ❌ | [✅](js/tests/Binary.test.js#L32) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | unicode whitespace is quoted | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L24) | [✅](php/tests/BinaryTest.php#L26) |
 
-**Category totals:** Python: 5, JavaScript: 7, Rust: 0, C#: 0, Go: 5, Java: 6, PHP: 6
+**Category totals:** Python: 5, JavaScript: 6, Rust: 0, C#: 0, Go: 5, Java: 6, PHP: 6
 
 ## Binary Links Notation
 
@@ -241,7 +240,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | a single space still reads as a space | [✅](python/tests/test_empty_reference.py#L72) | ❌ | [✅](rust/links-notation/tests/empty_reference_tests.rs#L84) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs#L98) | [✅](go/empty_reference_test.go#L94) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java#L100) | [✅](php/tests/EmptyReferenceTest.php#L107) |
 | bare delimiter pair is the empty reference | [✅](python/tests/test_empty_reference.py#L34) | [✅](js/tests/EmptyReference.test.js#L30) | [✅](rust/links-notation/tests/empty_reference_tests.rs#L38) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs#L46) | [✅](go/empty_reference_test.go#L54) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java#L54) | [✅](php/tests/EmptyReferenceTest.php#L61) |
 | empty reference is valid as an id | [✅](python/tests/test_empty_reference.py#L56) | [✅](js/tests/EmptyReference.test.js#L56) | [✅](rust/links-notation/tests/empty_reference_tests.rs#L68) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs#L80) | [✅](go/empty_reference_test.go#L80) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java#L84) | [✅](php/tests/EmptyReferenceTest.php#L91) |
-| empty reference is written as a delimiter pair | [✅](python/tests/test_empty_reference.py#L79) | [✅](js/tests/EmptyReference.test.js#L89) | [✅](rust/links-notation/tests/empty_reference_tests.rs#L106) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs#L123) | [✅](go/empty_reference_test.go#L122) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java#L116) | [✅](php/tests/EmptyReferenceTest.php#L128) |
+| empty reference is written as a versioned literal | [✅](python/tests/test_empty_reference.py#L79) | [✅](js/tests/EmptyReference.test.js#L89) | [✅](rust/links-notation/tests/empty_reference_tests.rs#L106) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs#L123) | [✅](go/empty_reference_test.go#L122) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java#L116) | [✅](php/tests/EmptyReferenceTest.php#L128) |
 | empty reference survives a round trip | [✅](python/tests/test_empty_reference.py#L82) | [✅](js/tests/EmptyReference.test.js#L74) | [✅](rust/links-notation/tests/empty_reference_tests.rs#L89) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs#L104) | [✅](go/empty_reference_test.go#L98) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java#L105) | [✅](php/tests/EmptyReferenceTest.php#L112) |
 | every delimiter style yields the same empty reference | [✅](python/tests/test_empty_reference.py#L37) | [✅](js/tests/EmptyReference.test.js#L34) | [✅](rust/links-notation/tests/empty_reference_tests.rs#L43) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs#L52) | [✅](go/empty_reference_test.go#L58) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java#L59) | [✅](php/tests/EmptyReferenceTest.php#L66) |
 | nested empty references parse | [✅](python/tests/test_empty_reference.py#L48) | [✅](js/tests/EmptyReference.test.js#L47) | [✅](rust/links-notation/tests/empty_reference_tests.rs#L58) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EmptyReferenceTests.cs#L69) | [✅](go/empty_reference_test.go#L71) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/EmptyReferenceTest.java#L74) | [✅](php/tests/EmptyReferenceTest.php#L81) |
@@ -392,8 +391,8 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | link escape reference keeps zero | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/LinkTest.php#L64) |
 | link escape reference simple | [✅](python/tests/test_link.py#L40) | [✅](js/tests/Link.test.js#L33) | [✅](rust/links-notation/tests/link_tests.rs#L109) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs#L74) | ❌ | ❌ | [✅](php/tests/LinkTest.php#L50) |
 | link escape reference with special characters | [✅](python/tests/test_link.py#L45) | [✅](js/tests/Link.test.js#L37) | [✅](rust/links-notation/tests/link_tests.rs#L118) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs#L81) | ❌ | ❌ | [✅](php/tests/LinkTest.php#L55) |
-| link escape reference writes the empty reference as a delimiter pair | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/LinkTest.php#L73) |
-| link simplify | [✅](python/tests/test_link.py#L54) | [✅](js/tests/Link.test.js#L45) | [✅](rust/links-notation/tests/link_tests.rs#L129) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs#L92) | ❌ | ❌ | [✅](php/tests/LinkTest.php#L78) |
+| link escape reference writes the empty reference as a versioned literal | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/LinkTest.php#L73) |
+| link simplify | [✅](python/tests/test_link.py#L54) | [✅](js/tests/Link.test.js#L45) | [✅](rust/links-notation/tests/link_tests.rs#L128) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs#L92) | ❌ | ❌ | [✅](php/tests/LinkTest.php#L78) |
 | link tostring with id and values | [✅](python/tests/test_link.py#L34) | [✅](js/tests/Link.test.js#L28) | [✅](rust/links-notation/tests/link_tests.rs#L59) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs#L42) | ❌ | ❌ | [✅](php/tests/LinkTest.php#L44) |
 | link tostring with id only | [✅](python/tests/test_link.py#L22) | [✅](js/tests/Link.test.js#L18) | [✅](rust/links-notation/tests/link_tests.rs#L40) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs#L27) | ❌ | ❌ | [✅](php/tests/LinkTest.php#L32) |
 | link tostring with values only | [✅](python/tests/test_link.py#L28) | [✅](js/tests/Link.test.js#L23) | [✅](rust/links-notation/tests/link_tests.rs#L49) | [✅](csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs#L34) | ❌ | ❌ | [✅](php/tests/LinkTest.php#L38) |
@@ -737,6 +736,17 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 **Category totals:** Python: 0, JavaScript: 11, Rust: 17, C#: 11, Go: 0, Java: 0, PHP: 0
 
+## Reference Fidelity
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
+|-----------|---|---|---|---|---|---|---|
+| binary reference fidelity | [✅](python/tests/test_reference_fidelity.py#L49) | [✅](js/tests/ReferenceFidelity.test.js#L68) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L95) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L54) | [✅](go/reference_fidelity_test.go#L85) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L67) | [✅](php/tests/ReferenceFidelityTest.php#L60) |
+| malformed reference literals are rejected | [✅](python/tests/test_reference_fidelity.py#L58) | [✅](js/tests/ReferenceFidelity.test.js#L80) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L112) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L67) | [✅](go/reference_fidelity_test.go#L110) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L78) | [✅](php/tests/ReferenceFidelityTest.php#L71) |
+| native reference fidelity | [✅](python/tests/test_reference_fidelity.py#L24) | [✅](js/tests/ReferenceFidelity.test.js#L27) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L28) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L19) | [✅](go/reference_fidelity_test.go#L34) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L28) | [✅](php/tests/ReferenceFidelityTest.php#L26) |
+| reference literals at every chunk split | [✅](python/tests/test_reference_fidelity.py#L31) | [✅](js/tests/ReferenceFidelity.test.js#L44) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L62) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L31) | [✅](go/reference_fidelity_test.go#L51) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L42) | [✅](php/tests/ReferenceFidelityTest.php#L36) |
+
+**Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4, Go: 4, Java: 4, PHP: 4
+
 ## Single Line Parser
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
@@ -817,39 +827,39 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | complex example matching csharp | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L67) | ❌ | ❌ | ❌ | ❌ |
 | empty string tuple | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L141) | ❌ | ❌ | ❌ | ❌ |
 | four lino anonymous link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L106) | ❌ | ❌ | ❌ | ❌ |
-| lino anonymous static method | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L504) | ❌ | ❌ | ❌ | ❌ |
-| lino builder anonymous | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L419) | ❌ | ❌ | ❌ | ❌ |
-| lino builder basic | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L408) | ❌ | ❌ | ❌ | ❌ |
-| lino builder chaining | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L473) | ❌ | ❌ | ❌ | ❌ |
-| lino builder large link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L459) | ❌ | ❌ | ❌ | ❌ |
-| lino builder linos batch | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L448) | ❌ | ❌ | ❌ | ❌ |
-| lino builder values batch | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L438) | ❌ | ❌ | ❌ | ❌ |
-| lino builder with lino | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L426) | ❌ | ❌ | ❌ | ❌ |
-| lino new arbitrary size | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L524) | ❌ | ❌ | ❌ | ❌ |
-| lino new static method | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L496) | ❌ | ❌ | ❌ | ❌ |
-| lino reference static method | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L516) | ❌ | ❌ | ❌ | ❌ |
+| lino anonymous static method | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L503) | ❌ | ❌ | ❌ | ❌ |
+| lino builder anonymous | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L418) | ❌ | ❌ | ❌ | ❌ |
+| lino builder basic | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L407) | ❌ | ❌ | ❌ | ❌ |
+| lino builder chaining | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L472) | ❌ | ❌ | ❌ | ❌ |
+| lino builder large link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L458) | ❌ | ❌ | ❌ | ❌ |
+| lino builder linos batch | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L447) | ❌ | ❌ | ❌ | ❌ |
+| lino builder values batch | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L437) | ❌ | ❌ | ❌ | ❌ |
+| lino builder with lino | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L425) | ❌ | ❌ | ❌ | ❌ |
+| lino new arbitrary size | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L523) | ❌ | ❌ | ❌ | ❌ |
+| lino new static method | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L495) | ❌ | ❌ | ❌ | ❌ |
+| lino reference static method | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L515) | ❌ | ❌ | ❌ | ❌ |
 | named tuple to link test | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/TupleTests.cs#L34) | ❌ | ❌ | ❌ |
 | nested links with tuples | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L59) | ❌ | ❌ | ❌ | ❌ |
-| tuple 10 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L231) | ❌ | ❌ | ❌ | ❌ |
-| tuple 11 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L238) | ❌ | ❌ | ❌ | ❌ |
-| tuple 12 elements lino | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L261) | ❌ | ❌ | ❌ | ❌ |
-| tuple 12 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L248) | ❌ | ❌ | ❌ | ❌ |
+| tuple 10 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L230) | ❌ | ❌ | ❌ | ❌ |
+| tuple 11 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L237) | ❌ | ❌ | ❌ | ❌ |
+| tuple 12 elements lino | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L260) | ❌ | ❌ | ❌ | ❌ |
+| tuple 12 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L247) | ❌ | ❌ | ❌ | ❌ |
 | tuple 3 elements | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L18) | ❌ | ❌ | ❌ | ❌ |
 | tuple 4 elements | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L25) | ❌ | ❌ | ❌ | ❌ |
-| tuple 5 elements lino | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L191) | ❌ | ❌ | ❌ | ❌ |
-| tuple 5 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L170) | ❌ | ❌ | ❌ | ❌ |
-| tuple 5 elements string | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L177) | ❌ | ❌ | ❌ | ❌ |
-| tuple 6 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L203) | ❌ | ❌ | ❌ | ❌ |
-| tuple 7 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L210) | ❌ | ❌ | ❌ | ❌ |
-| tuple 8 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L217) | ❌ | ❌ | ❌ | ❌ |
-| tuple 9 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L224) | ❌ | ❌ | ❌ | ❌ |
+| tuple 5 elements lino | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L190) | ❌ | ❌ | ❌ | ❌ |
+| tuple 5 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L169) | ❌ | ❌ | ❌ | ❌ |
+| tuple 5 elements string | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L176) | ❌ | ❌ | ❌ | ❌ |
+| tuple 6 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L202) | ❌ | ❌ | ❌ | ❌ |
+| tuple 7 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L209) | ❌ | ❌ | ❌ | ❌ |
+| tuple 8 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L216) | ❌ | ❌ | ❌ | ❌ |
+| tuple 9 elements str | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L223) | ❌ | ❌ | ❌ | ❌ |
 | tuple collection format | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L117) | ❌ | ❌ | ❌ | ❌ |
-| tuple ergonomics | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L151) | ❌ | ❌ | ❌ | ❌ |
-| tuple id vec lino named link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L358) | ❌ | ❌ | ❌ | ❌ |
-| tuple id vec string named link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L350) | ❌ | ❌ | ❌ | ❌ |
-| tuple id vec str named link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L342) | ❌ | ❌ | ❌ | ❌ |
-| tuple large with nested links | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L295) | ❌ | ❌ | ❌ | ❌ |
-| tuple large with str lino mixed | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L280) | ❌ | ❌ | ❌ | ❌ |
+| tuple ergonomics | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L150) | ❌ | ❌ | ❌ | ❌ |
+| tuple id vec lino named link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L357) | ❌ | ❌ | ❌ | ❌ |
+| tuple id vec string named link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L349) | ❌ | ❌ | ❌ | ❌ |
+| tuple id vec str named link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L341) | ❌ | ❌ | ❌ | ❌ |
+| tuple large with nested links | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L294) | ❌ | ❌ | ❌ | ❌ |
+| tuple large with str lino mixed | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L279) | ❌ | ❌ | ❌ | ❌ |
 | tuple to link test | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/TupleTests.cs#L12) | ❌ | ❌ | ❌ |
 | tuple to link basic | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L4) | ❌ | ❌ | ❌ | ❌ |
 | tuple to link with owned strings | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L11) | ❌ | ❌ | ❌ | ❌ |
@@ -857,10 +867,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | tuple with mixed lino types | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L89) | ❌ | ❌ | ❌ | ❌ |
 | tuple with nested link values | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L98) | ❌ | ❌ | ❌ | ❌ |
 | tuple with special characters | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L130) | ❌ | ❌ | ❌ | ❌ |
-| vec large arbitrary size | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L367) | ❌ | ❌ | ❌ | ❌ |
-| vec lino to anonymous link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L330) | ❌ | ❌ | ❌ | ❌ |
-| vec string to anonymous link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L322) | ❌ | ❌ | ❌ | ❌ |
-| vec str to anonymous link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L314) | ❌ | ❌ | ❌ | ❌ |
+| vec large arbitrary size | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L366) | ❌ | ❌ | ❌ | ❌ |
+| vec lino to anonymous link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L329) | ❌ | ❌ | ❌ | ❌ |
+| vec string to anonymous link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L321) | ❌ | ❌ | ❌ | ❌ |
+| vec str to anonymous link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L313) | ❌ | ❌ | ❌ | ❌ |
 
 **Category totals:** Python: 0, JavaScript: 0, Rust: 47, C#: 2, Go: 0, Java: 0, PHP: 0
 
@@ -890,7 +900,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (18 missing):
+**Binary** (17 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
@@ -907,7 +917,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedbinarygoldenvectors
 - stringbudgetstopsbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 - unicodewhitespaceisquoted
 
 **Binary Links Notation** (16 missing):
@@ -1059,7 +1068,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - inequalitydifferentid
 - inequalitydifferentvalues
 - linkescapereferencekeepszero
-- linkescapereferencewritestheemptyreferenceasadelimiterpair
+- linkescapereferencewritestheemptyreferenceasaversionedliteral
 - simplify
 - tolinkoridstring
 
@@ -1294,7 +1303,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 372 tests**
+**Total missing: 371 tests**
 
 ### JavaScript Missing Tests
 
@@ -1464,7 +1473,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - inequalitydifferentid
 - inequalitydifferentvalues
 - linkescapereferencekeepszero
-- linkescapereferencewritestheemptyreferenceasadelimiterpair
+- linkescapereferencewritestheemptyreferenceasaversionedliteral
 - simplify
 - tolinkoridstring
 
@@ -1696,7 +1705,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (23 missing):
+**Binary** (22 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
@@ -1718,7 +1727,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - stringbudgetstopsbeforelaterscalars
 - stringbudgetstopsdecodingbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 - unicodewhitespaceisquoted
 
 **Binary Links Notation** (16 missing):
@@ -1802,7 +1810,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - inequalitydifferentid
 - inequalitydifferentvalues
 - linkescapereferencekeepszero
-- linkescapereferencewritestheemptyreferenceasadelimiterpair
+- linkescapereferencewritestheemptyreferenceasaversionedliteral
 - simplify
 - tolinkoridstring
 
@@ -1929,7 +1937,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - namedtupletolink
 - tupletolink
 
-**Total missing: 217 tests**
+**Total missing: 216 tests**
 
 ### C# Missing Tests
 
@@ -1953,7 +1961,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (23 missing):
+**Binary** (22 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
@@ -1975,7 +1983,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - stringbudgetstopsbeforelaterscalars
 - stringbudgetstopsdecodingbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 - unicodewhitespaceisquoted
 
 **Binary Notation** (35 missing):
@@ -2090,7 +2097,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - inequalitydifferentid
 - inequalitydifferentvalues
 - linkescapereferencekeepszero
-- linkescapereferencewritestheemptyreferenceasadelimiterpair
+- linkescapereferencewritestheemptyreferenceasaversionedliteral
 - simplify
 - tolinkoridstring
 
@@ -2303,7 +2310,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 322 tests**
+**Total missing: 321 tests**
 
 ### Go Missing Tests
 
@@ -2329,7 +2336,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (18 missing):
+**Binary** (17 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarytextquoteseveryunicodegrammarwhitespacecharacter
 - configurablelimitsapplyinbothdirections;rejectmalformedpackets
@@ -2346,7 +2353,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - stringbudgetstopsbeforelaterscalars
 - stringbudgetstopsdecodingbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 - unicodewhitespaceisquoted
 
 **Binary Links Notation** (16 missing):
@@ -2535,7 +2541,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - linkescapereferencekeepszero
 - linkescapereferencesimple
 - linkescapereferencewithspecialcharacters
-- linkescapereferencewritestheemptyreferenceasadelimiterpair
+- linkescapereferencewritestheemptyreferenceasaversionedliteral
 - linksimplify
 - linktostringwithidandvalues
 - linktostringwithidonly
@@ -2841,7 +2847,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 474 tests**
+**Total missing: 473 tests**
 
 ### Java Missing Tests
 
@@ -2863,7 +2869,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - simplelink
 - singlelineformat
 
-**Binary** (17 missing):
+**Binary** (16 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
@@ -2880,7 +2886,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedbinarygoldenvectors
 - stringbudgetstopsdecodingbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 
 **Binary Links Notation** (16 missing):
 - aritieswithoutdoubletsareunencodable
@@ -3042,7 +3047,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - linkescapereferencekeepszero
 - linkescapereferencesimple
 - linkescapereferencewithspecialcharacters
-- linkescapereferencewritestheemptyreferenceasadelimiterpair
+- linkescapereferencewritestheemptyreferenceasaversionedliteral
 - linksimplify
 - linktostringwithidandvalues
 - linktostringwithidonly
@@ -3337,7 +3342,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 432 tests**
+**Total missing: 431 tests**
 
 ### PHP Missing Tests
 
@@ -3362,7 +3367,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
-**Binary** (17 missing):
+**Binary** (16 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
 - binarynativemodels
@@ -3379,7 +3384,6 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedbinarygoldenvectors
 - stringbudgetstopsdecodingbeforelaterscalars
 - stringdecodingstopsattheutf 8 budgetbeforereadinglaterscalars
-- t
 
 **Binary Links Notation** (16 missing):
 - aritieswithoutdoubletsareunencodable
@@ -3775,5 +3779,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 382 tests**
+**Total missing: 381 tests**
 

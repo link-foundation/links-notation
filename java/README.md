@@ -12,7 +12,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.23.1</version>
+    <version>0.24.1</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ Add the dependency to your `pom.xml`:
 Add the dependency to your `build.gradle`:
 
 ```groovy
-implementation 'io.github.link-foundation:links-notation:0.23.1'
+implementation 'io.github.link-foundation:links-notation:0.24.1'
 ```
 
 ### Local Development Setup
@@ -375,3 +375,6 @@ mvn spotless:check
 - Group ID: `io.github.link-foundation`
 - Artifact ID: `links-notation`
 - License: Unlicense (see [LICENSE](../LICENSE))
+
+Exact Unicode identifiers and values round-trip with the [reference literal contract](../docs/protocol/reference-literals.md)
+introduced in 0.24.0, including mixed quotes, empty strings, controls and multiline text.

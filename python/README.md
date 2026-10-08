@@ -316,3 +316,6 @@ This project is released into the public domain under the [Unlicense](../LICENSE
 - [Main Repository](https://github.com/link-foundation/links-notation)
 - [PyPI Package](https://pypi.org/project/links-notation/)
 - [Documentation](https://link-foundation.github.io/links-notation/)
+
+Exact Unicode identifiers and values round-trip with the [reference literal contract](../docs/protocol/reference-literals.md)
+introduced in 0.24.0, including mixed quotes, empty strings, controls and multiline text.

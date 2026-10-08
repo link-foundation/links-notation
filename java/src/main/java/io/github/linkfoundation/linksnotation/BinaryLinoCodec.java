@@ -820,33 +820,7 @@ public final class BinaryLinoCodec {
   }
 
   public static String formatReference(String text) {
-    if (!text.isEmpty()
-        && !text.startsWith("#")
-        && text.codePoints()
-            .noneMatch(
-                c ->
-                    c == 0x85
-                        || Character.isWhitespace(c)
-                        || c == 0xfeff
-                        || Character.isSpaceChar(c)
-                        || "():\"'`".indexOf(c) >= 0)) return text;
-    char chosen = 0;
-    int count = Integer.MAX_VALUE;
-    for (char quote : new char[] {'\'', '"', '`'}) {
-      if (!text.isEmpty() && text.charAt(0) == quote) continue;
-      int longest = 0, run = 0;
-      for (int i = 0; i < text.length(); i++) {
-        run = text.charAt(i) == quote ? run + 1 : 0;
-        longest = Math.max(longest, run);
-      }
-      int n = (longest + 1) | 1;
-      if (n < count) {
-        chosen = quote;
-        count = n;
-      }
-    }
-    String delimiter = String.valueOf(chosen).repeat(count);
-    return delimiter + text + delimiter;
+    return ReferenceLiteral.format(text);
   }
 
   private static String formatLink(Link n, boolean top) {

@@ -340,9 +340,13 @@ indentedIdLink <Link<string>> = id:(reference) __ ":" eol { new Link<string>(id)
 
 // Reference can be quoted (with any number of delimiters N >= 1) or simple unquoted
 // Universal approach: use procedural parsing for all delimiter styles and counts
-reference <string> = quotedReference / simpleReference
+reference <string> = literalReference / quotedReference / simpleReference
 
-simpleReference <string> = "" referenceSymbol+
+literalReference <string> = &'~' &{
+    ReferenceLiteral.TryRead(state.Subject, state.Location, out _quoteValue, out _quoteLength)
+} consumeQuoted { _quoteValue }
+
+simpleReference <string> = &{ !ReferenceLiteral.HasPrefix(state.Subject, state.Location) } "" referenceSymbol+
 
 quotedReference <string> = doubleQuotedUniversal / singleQuotedUniversal / backtickQuotedUniversal
 

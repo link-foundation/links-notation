@@ -10,7 +10,6 @@ import (
 	"math"
 	"strconv"
 	"strings"
-	"unicode"
 	"unicode/utf8"
 )
 
@@ -942,35 +941,7 @@ func (c *BinaryLinoCodec) ParseDocument(text string) ([]*Link, error) {
 	return document, nil
 }
 func FormatBinaryReference(text string) string {
-	needs := text == "" || strings.HasPrefix(text, "#") || strings.IndexFunc(text, func(r rune) bool {
-		return unicode.IsSpace(r) || r >= 0x1c && r <= 0x1f || r == 0xfeff || strings.ContainsRune("():\"'`", r)
-	}) >= 0
-	if !needs {
-		return text
-	}
-	chosen, count := rune(0), int(math.MaxInt)
-	for _, q := range []rune{'\'', '"', '`'} {
-		if strings.HasPrefix(text, string(q)) {
-			continue
-		}
-		longest, run := 0, 0
-		for _, r := range text {
-			if r == q {
-				run++
-			} else {
-				run = 0
-			}
-			if run > longest {
-				longest = run
-			}
-		}
-		n := (longest + 1) | 1
-		if n < count {
-			chosen, count = q, n
-		}
-	}
-	delimiter := strings.Repeat(string(chosen), count)
-	return delimiter + text + delimiter
+	return formatReference(text)
 }
 func FormatBinaryDocument(document []*Link) string {
 	var nested func(*Link, bool) string

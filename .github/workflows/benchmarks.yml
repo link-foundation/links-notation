@@ -115,7 +115,7 @@ jobs:
           echo "::error::The committed benchmark output is stale. Run 'cargo run -p links-notation-benchmark --release' from rust/ and commit benchmarks/."
           exit 1
       - name: Upload the benchmark output
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: benchmark-output
           path: |
@@ -141,12 +141,12 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Download the benchmark output
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: benchmark-output
           path: benchmarks
       - name: Setup Node.js
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
           cache: 'npm'
@@ -172,12 +172,12 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Download the benchmark output
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: benchmark-output
           path: benchmarks
       - name: Setup Node.js
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
           cache: 'npm'
@@ -188,7 +188,7 @@ jobs:
       - name: Parse and count in JavaScript
         run: node benchmarks/js/benchmark.mjs
       - name: Upload the JavaScript result
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: results-js
           path: benchmarks/results/js.json
@@ -212,7 +212,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Download the benchmark output
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: benchmark-output
           path: benchmarks
@@ -238,7 +238,7 @@ jobs:
           mkdir -p "$TIKTOKEN_CACHE_DIR"
           python3 benchmarks/python/benchmark.py
       - name: Upload the Python result
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: results-python
           path: benchmarks/results/python.json
@@ -258,7 +258,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Download the benchmark output
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: benchmark-output
           path: benchmarks
@@ -269,7 +269,7 @@ jobs:
       - name: Parse and count in C#
         run: dotnet run --project benchmarks/csharp -c Release
       - name: Upload the C# result
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: results-csharp
           path: benchmarks/results/csharp.json
@@ -289,7 +289,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Download the benchmark output
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: benchmark-output
           path: benchmarks
@@ -302,7 +302,7 @@ jobs:
         working-directory: benchmarks/go
         run: go run .
       - name: Upload the Go result
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: results-go
           path: benchmarks/results/go.json
@@ -322,7 +322,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Download the benchmark output
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: benchmark-output
           path: benchmarks
@@ -341,7 +341,7 @@ jobs:
         working-directory: benchmarks/java
         run: mvn -B -q compile exec:java
       - name: Upload the Java result
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: results-java
           path: benchmarks/results/java.json
@@ -365,12 +365,12 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Download the benchmark output
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: benchmark-output
           path: benchmarks
       - name: Set up PHP 8.4
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: '8.4'
           extensions: mbstring
@@ -392,7 +392,7 @@ jobs:
           mkdir -p "$TIKTOKEN_CACHE_DIR"
           php benchmark.php
       - name: Upload the PHP result
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: results-php
           path: benchmarks/results/php.json
@@ -418,12 +418,12 @@ jobs:
           submodules: true
           ref: main
       - name: Download the benchmark output
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: benchmark-output
           path: benchmarks
       - name: Download every language result
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           pattern: results-*
           merge-multiple: true
