@@ -2424,6 +2424,44 @@ references:
   isSpec: "True"
   fullName: Link.Foundation.Links.Notation.Parser.Parse
   nameWithType: Parser.Parse
+- uid: Link.Foundation.Links.Notation.ReferenceLiteral
+  name: ReferenceLiteral
+  href: api/Link.Foundation.Links.Notation.ReferenceLiteral.html
+  commentId: T:Link.Foundation.Links.Notation.ReferenceLiteral
+  fullName: Link.Foundation.Links.Notation.ReferenceLiteral
+  nameWithType: ReferenceLiteral
+- uid: Link.Foundation.Links.Notation.ReferenceLiteral.Decode(System.String)
+  name: Decode(string)
+  href: api/Link.Foundation.Links.Notation.ReferenceLiteral.html#Link_Foundation_Links_Notation_ReferenceLiteral_Decode_System_String_
+  commentId: M:Link.Foundation.Links.Notation.ReferenceLiteral.Decode(System.String)
+  name.vb: Decode(String)
+  fullName: Link.Foundation.Links.Notation.ReferenceLiteral.Decode(string)
+  fullName.vb: Link.Foundation.Links.Notation.ReferenceLiteral.Decode(String)
+  nameWithType: ReferenceLiteral.Decode(string)
+  nameWithType.vb: ReferenceLiteral.Decode(String)
+- uid: Link.Foundation.Links.Notation.ReferenceLiteral.Decode*
+  name: Decode
+  href: api/Link.Foundation.Links.Notation.ReferenceLiteral.html#Link_Foundation_Links_Notation_ReferenceLiteral_Decode_
+  commentId: Overload:Link.Foundation.Links.Notation.ReferenceLiteral.Decode
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.ReferenceLiteral.Decode
+  nameWithType: ReferenceLiteral.Decode
+- uid: Link.Foundation.Links.Notation.ReferenceLiteral.Encode(System.String)
+  name: Encode(string)
+  href: api/Link.Foundation.Links.Notation.ReferenceLiteral.html#Link_Foundation_Links_Notation_ReferenceLiteral_Encode_System_String_
+  commentId: M:Link.Foundation.Links.Notation.ReferenceLiteral.Encode(System.String)
+  name.vb: Encode(String)
+  fullName: Link.Foundation.Links.Notation.ReferenceLiteral.Encode(string)
+  fullName.vb: Link.Foundation.Links.Notation.ReferenceLiteral.Encode(String)
+  nameWithType: ReferenceLiteral.Encode(string)
+  nameWithType.vb: ReferenceLiteral.Encode(String)
+- uid: Link.Foundation.Links.Notation.ReferenceLiteral.Encode*
+  name: Encode
+  href: api/Link.Foundation.Links.Notation.ReferenceLiteral.html#Link_Foundation_Links_Notation_ReferenceLiteral_Encode_
+  commentId: Overload:Link.Foundation.Links.Notation.ReferenceLiteral.Encode
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.ReferenceLiteral.Encode
+  nameWithType: ReferenceLiteral.Encode
 - uid: Link.Foundation.Links.Notation.StreamParseException
   name: StreamParseException
   href: api/Link.Foundation.Links.Notation.StreamParseException.html
