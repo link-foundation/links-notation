@@ -1,4 +1,9 @@
 export { Link, formatLinks } from './Link.js';
+export { escapeReference, unescapeReference } from './references.js';
+export {
+  parseIndentedDocument,
+  formatIndentedDocument,
+} from './IndentedDocument.js';
 export {
   encodeReferenceLiteral,
   decodeReferenceLiteral,

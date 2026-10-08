@@ -384,6 +384,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   not in the message, so a caller that printed the message lost it
   ([#302](https://github.com/link-foundation/links-notation/issues/302))
 
+## [0.25.0] - 2026-10-08
+
+### Added
+
+- JavaScript `Parser.parseGroups()` exposes the indentation tree through
+  `LinksGroup` instances. `parseIndentedDocument()` and
+  `formatIndentedDocument()` read and write parent/children text maps with
+  minimal quoting, multiline references, and an explicit array or joined-text
+  policy. Public `escapeReference()` and `unescapeReference()` helpers are also
+  available as static `Link` methods
+  ([#333](https://github.com/link-foundation/links-notation/issues/333)).
+
 ## [0.24.0] - 2026-10-08
 
 ### Fixed
