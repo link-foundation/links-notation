@@ -144,53 +144,7 @@ public class Link {
     if (reference == null) {
       return "";
     }
-    // The empty reference is written as a bare delimiter pair, so that it reads back as itself
-    // instead of disappearing from the document.
-    if (reference.isEmpty()) {
-      return "\"\"";
-    }
-
-    boolean hasSingleQuote = reference.contains("'");
-    boolean hasDoubleQuote = reference.contains("\"");
-
-    // A reference that begins with a "#" has to be quoted, or it would read back as a comment. A
-    // "#" anywhere else in a reference is content (issue#1047), so only the first character
-    // matters.
-    boolean needsQuoting =
-        reference.startsWith("#")
-            || reference.contains(":")
-            || reference.contains("(")
-            || reference.contains(")")
-            || reference.contains(" ")
-            || reference.contains("\t")
-            || reference.contains("\n")
-            || reference.contains("\r")
-            || hasDoubleQuote
-            || hasSingleQuote;
-
-    // Handle edge case: reference contains both single and double quotes
-    if (hasSingleQuote && hasDoubleQuote) {
-      // Escape single quotes and wrap in single quotes
-      return "'" + reference.replace("'", "\\'") + "'";
-    }
-
-    // Prefer single quotes if double quotes are present
-    if (hasDoubleQuote) {
-      return "'" + reference + "'";
-    }
-
-    // Use double quotes if single quotes are present
-    if (hasSingleQuote) {
-      return "\"" + reference + "\"";
-    }
-
-    // Use single quotes for special characters
-    if (needsQuoting) {
-      return "'" + reference + "'";
-    }
-
-    // No quoting needed
-    return reference;
+    return ReferenceLiteral.format(reference);
   }
 
   /**

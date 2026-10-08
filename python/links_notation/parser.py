@@ -11,6 +11,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from .comments import strip_comments
 from .link import Link
 from .quotes import _parse_quoted_string_at
+from .reference_literal import decode_reference_literal
 
 #: How deep links may nest unless a parser is told otherwise: every
 #: parenthesized group and every indentation level is one level, and the lines
@@ -612,6 +613,9 @@ class Parser:
         """Extract reference, handling quoted strings with escaping support."""
         text = text.strip()
 
+        if re.match(r"~[0-9]+\{", text):
+            return decode_reference_literal(text)
+
         # Try delimited references (any N quotes, or a bare delimiter pair)
         quoted = _parse_quoted_string_at(text, 0)
         if quoted is not None:
@@ -645,7 +649,7 @@ class Parser:
         children = item.get("children", [])
 
         # Special case: indented ID syntax (id: followed by children)
-        if item.get("is_indented_id") and item.get("id") and not item.get("values") and children:
+        if item.get("is_indented_id") and item.get("id") is not None and not item.get("values") and children:
             child_values = [self._transform_indented_value(child) for child in children]
 
             link_with_children = {"id": item["id"], "values": child_values}

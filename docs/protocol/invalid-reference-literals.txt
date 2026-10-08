@@ -1,0 +1,14 @@
+# Reserved literals that must be refused by every decoder and parser.
+~2{61}
+~01{61}
+~1{0}
+~1{gg}
+~1{ff}
+~1{c0af}
+~1{eda080}
+~1{f4908080}
+~1{e282}
+~1{80}
+~1{61,62}
+~1{
+~1{61

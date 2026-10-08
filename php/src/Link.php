@@ -123,31 +123,7 @@ class Link
         if ($reference === null) {
             return '';
         }
-        // The empty reference is written as a bare delimiter pair, so that it
-        // reads back as itself instead of disappearing from the document.
-        if ($reference === '') {
-            return '""';
-        }
-
-        // Check if single quotes are needed. A reference that begins with a "#"
-        // is quoted too, or it would read back as a comment; a "#" anywhere else
-        // is content (issue#1047), so only the first character matters.
-        $needsSingleQuotes = str_starts_with($reference, '#');
-        foreach ([':', '(', ')', ' ', "\t", "\n", "\r", '"'] as $character) {
-            if (str_contains($reference, $character)) {
-                $needsSingleQuotes = true;
-                break;
-            }
-        }
-
-        if ($needsSingleQuotes) {
-            return "'" . $reference . "'";
-        }
-        if (str_contains($reference, "'")) {
-            return '"' . $reference . '"';
-        }
-
-        return $reference;
+        return ReferenceLiteral::format($reference);
     }
 
     /**

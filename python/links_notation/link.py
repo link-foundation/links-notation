@@ -4,6 +4,8 @@ Link class representing a Lino link with optional ID and values.
 
 from typing import TYPE_CHECKING, List, Optional, Union
 
+from .reference_literal import format_reference
+
 if TYPE_CHECKING:
     from .format_config import FormatConfig
 
@@ -92,24 +94,7 @@ class Link:
         if reference is None:
             return ""
 
-        # The empty reference is written as a bare delimiter pair, so that it
-        # reads back as itself instead of disappearing from the document.
-        if reference == "":
-            return '""'
-
-        # Check if single quotes are needed. A reference that begins with a "#"
-        # is quoted too, or it would read back as a comment; a "#" anywhere else
-        # is content ("issue#1047"), so only the first character matters.
-        needs_single_quotes = reference.startswith("#") or any(
-            c in reference for c in [":", "(", ")", " ", "\t", "\n", "\r", '"']
-        )
-
-        if needs_single_quotes:
-            return f"'{reference}'"
-        elif "'" in reference:
-            return f'"{reference}"'
-        else:
-            return reference
+        return format_reference(reference)
 
     def to_link_or_id_string(self) -> str:
         """Convert to string, using just ID if no values, otherwise full format."""

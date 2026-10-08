@@ -400,6 +400,19 @@ fn delimited_reference<'a>(input: &'a str, state: &ParserState) -> IResult<&'a s
 }
 
 fn reference<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, String> {
+    if let Some(prefix) = crate::reference_literal::prefix_end(input) {
+        if let Some(closing) = input[prefix..].find('}') {
+            let length = prefix + closing + 1;
+            if let Ok(value) = crate::decode_reference_literal(&input[..length]) {
+                return Ok((&input[length..], value));
+            }
+        }
+        state.expected_at(input, "a valid version 1 reference literal");
+        return Err(nom::Err::Failure(nom::error::Error::new(
+            input,
+            nom::error::ErrorKind::Tag,
+        )));
+    }
     // Try quoted strings with dynamic quote detection (supports any N quotes)
     // Then fall back to simple unquoted reference
     let parsed = alt((|i| delimited_reference(i, state), simple_reference)).parse(input);

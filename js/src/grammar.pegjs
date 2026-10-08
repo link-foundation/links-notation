@@ -1,5 +1,6 @@
 {{
   import { DelimitedReferences } from './quotes.js';
+  import { decodeReferenceLiteral, hasReferenceLiteralPrefix } from './ReferenceLiteral.js';
 }}
 
 {
@@ -217,9 +218,18 @@ indentedIdLink = id:reference __ ":" eol { return { id: id, values: [] }; }
 
 // Reference can be quoted (with any number of quotes N >= 1) or simple unquoted
 // Universal approach: use procedural parsing for all quote types and counts
-reference = quotedReference / simpleReference
+reference = referenceLiteral / quotedReference / simpleReference
 
-simpleReference = chars:referenceSymbol+ { return chars.join(''); }
+// Versioned literals reserve ~<version>{<UTF-8 hex>} at a reference boundary.
+// A malformed reserved token must fail rather than fall back to a bare name.
+referenceLiteral = &'~' &{
+  return hasReferenceLiteralPrefix(input, offset());
+} literal:$('~' [0-9]+ '{' [^} \t\r\n()]* '}') {
+  return decodeReferenceLiteral(literal);
+}
+
+simpleReference = &{ return !hasReferenceLiteralPrefix(input, offset()); }
+ chars:referenceSymbol+ { return chars.join(''); }
 
 // Universal quoted reference - handles any N quotes for all quote types
 // Uses procedural parsing with input/offset() for clean, simple logic

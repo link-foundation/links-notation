@@ -119,12 +119,12 @@ func TestEmptyReferenceSurvivesARoundTrip(t *testing.T) {
 	}
 }
 
-func TestEmptyReferenceIsWrittenAsADelimiterPair(t *testing.T) {
+func TestEmptyReferenceIsWrittenAsAVersionedLiteral(t *testing.T) {
 	links, err := Parse(`(a "" b)`)
 	if err != nil {
 		t.Fatalf("Failed to parse: %v", err)
 	}
-	if formatted := Format(links); formatted != `(a "" b)` {
-		t.Errorf("expected %q, got %q", `(a "" b)`, formatted)
+	if formatted := Format(links); formatted != `(a ~1{} b)` {
+		t.Errorf("expected %q, got %q", `(a ~1{} b)`, formatted)
 	}
 }

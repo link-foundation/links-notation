@@ -125,8 +125,8 @@ class EmptyReferenceTest extends TestCase
         }
     }
 
-    public function testEmptyReferenceIsWrittenAsADelimiterPair(): void
+    public function testEmptyReferenceIsWrittenAsAVersionedLiteral(): void
     {
-        $this->assertSame('(a "" b)', Formatter::formatLinks($this->parser->parse('(a "" b)')));
+        $this->assertSame('(a ~1{} b)', Formatter::formatLinks($this->parser->parse('(a "" b)')));
     }
 }

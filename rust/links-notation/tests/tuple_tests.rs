@@ -142,9 +142,8 @@ fn test_empty_string_tuple() {
     // Test tuple with empty strings
     let link: LiNo<String> = ("", "").into();
     let result = format!("{}", link);
-    // The empty reference is written as a bare delimiter pair, so the link reads
-    // back as itself instead of losing its id and value.
-    assert_eq!(result, "(\"\": \"\")");
+    // Versioned empty literals avoid a quote pair spanning the id and value.
+    assert_eq!(result, "(~1{}: ~1{})");
 }
 
 #[test]

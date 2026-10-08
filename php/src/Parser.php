@@ -728,6 +728,9 @@ class Parser
     private function extractReference(string $text): string
     {
         $text = trim($text);
+        if (ReferenceLiteral::hasPrefix($text)) {
+            return ReferenceLiteral::decode($text);
+        }
 
         $quoted = self::parseQuotedStringAt($text, 0);
         if ($quoted !== null) {
@@ -773,7 +776,6 @@ class Parser
         // Special case: indented id syntax (id: followed by children)
         $isIndentedId = ($item['is_indented_id'] ?? false)
             && $id !== null
-            && $id !== ''
             && !($item['values'] ?? [])
             && $children;
 

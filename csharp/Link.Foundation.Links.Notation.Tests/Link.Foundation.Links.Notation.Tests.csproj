@@ -26,6 +26,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Link.Foundation.Links.Notation\Link.Foundation.Links.Notation.csproj" />
     <None Include="../../docs/protocol/binary-links-notation-vectors.txt" Link="Protocol/binary-links-notation-vectors.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../docs/protocol/invalid-reference-literals.txt" Link="Protocol/invalid-reference-literals.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../docs/protocol/reference-literals.txt" Link="Protocol/reference-literals.txt" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

@@ -46,7 +46,7 @@ impl ParserConfig {
     /// use links_notation::{parse_lino_with_config, ParserConfig};
     ///
     /// let parsed = parse_lino_with_config("# a b", &ParserConfig::without_comments()).unwrap();
-    /// assert_eq!(format!("{}", parsed), "((# a b))");
+    /// assert_eq!(format!("{}", parsed), "(('#' a b))");
     /// ```
     pub fn without_comments() -> Self {
         Self::with_comments(false)
