@@ -50,3 +50,11 @@ log listed stale Spotless, lino-objects-codec, Vite, and GitHub Actions versions
 Those declarations and the affected npm locks were refreshed without changing
 the freshness policy. Local command output and downloaded CI logs are kept in
 `ci-logs/` for review.
+
+On head `b84905a`, the benchmark job in run
+[37854026043](https://github.com/link-foundation/links-notation/actions/runs/37854026043)
+failed its generated-file drift check. Lines 1006–1007 of the preserved log
+showed one changed line in `benchmarks/BENCHMARK_RESULTS.md`; lines 1019–1020
+reported stale output. Regenerating the report updates its embedded library
+version from 0.23.0 to 0.24.0. The generator's subsequent `--check` verified all
+73 generated files without drift.
