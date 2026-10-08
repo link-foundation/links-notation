@@ -6,11 +6,13 @@ on:
     paths:
       - 'rust/**'
       - 'docs/protocol/**'
+      - 'experiments/issue-334/**'
       - '.github/workflows/rust.yml'
   pull_request:
     paths:
       - 'rust/**'
       - 'docs/protocol/**'
+      - 'experiments/issue-334/**'
       - '.github/workflows/rust.yml'
   workflow_dispatch:
     inputs:
@@ -60,7 +62,7 @@ jobs:
           fi
           echo "Changed files: $ALL_CHANGED_FILES"
           for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == rust/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == .github/workflows/rust.yml ]]; then
+            if [[ $changedFile == rust/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == experiments/issue-334/* ]] || [[ $changedFile == .github/workflows/rust.yml ]]; then
               isRustFilesChanged='true'
               break
             fi
@@ -99,12 +101,17 @@ jobs:
         run: cargo clippy --all-targets --all-features -- -D warnings
 
   test:
+    name: test (${{ matrix.toolchain }})
     needs: [findChangedRustFiles, lint]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        toolchain: [stable, '1.87.0']
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-test
+      group: ${{ github.workflow }}-${{ github.ref }}-test-${{ matrix.toolchain }}
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v7.0.1
@@ -113,6 +120,8 @@ jobs:
           submodules: true
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: ${{ matrix.toolchain }}
       - name: Cache Cargo
         uses: Swatinem/rust-cache@v2.9.2
         with:
@@ -121,9 +130,30 @@ jobs:
         run: cargo build --release
       - name: Test
         run: cargo test
+      - name: Test without the optional macro
+        run: cargo test -p links-notation --no-default-features
+
+  msrv-rejection:
+    needs: [findChangedRustFiles]
+    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-msrv-rejection
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Setup Rust below the MSRV
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.86.0'
+      - name: Verify Cargo reports the required Rust version
+        run: bash ../experiments/issue-334/check-msrv.sh
 
   publishToCratesIO:
-    needs: [findChangedRustFiles, test]
+    needs: [findChangedRustFiles, test, msrv-rejection]
     if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20

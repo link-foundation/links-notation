@@ -5,13 +5,16 @@ library.
 
 ## Installation
 
+The minimum supported Rust version (MSRV) is **1.87**, including the optional
+`links-notation-macro` crate. CI builds and tests on Rust 1.87 and stable.
+
 Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
 links-notation = { path = "." }  # For local development
 # Or from a registry:
-# links-notation = "0.9.0"
+# links-notation = "0.25.1"
 ```
 
 ### From Source

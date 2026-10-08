@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Declare Rust 1.87 as the minimum supported version for `links-notation` and
+  `links-notation-macro`, so Cargo reports the required compiler version before
+  compilation and MSRV-aware resolvers can select compatible releases. Test
+  Rust 1.87 and stable in CI, including builds without the optional macro
+  ([#334](https://github.com/link-foundation/links-notation/issues/334)).
 - Refuse links nested too deeply with a parse error instead of recursing until
   the stack overflows. Every parser recursed once per parenthesized group and
   per indentation level with nothing bounding it, so `(` repeated 100 000 times
