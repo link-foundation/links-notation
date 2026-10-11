@@ -9,6 +9,7 @@ registry dependencies. Registry errors fail the check rather than hide updates.
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -29,6 +30,7 @@ ACTIVE = (
     "java",
     "php",
     "go",
+    "cpp",
     "benchmarks",
     "docs/website",
     "docs/comparison",
@@ -54,10 +56,10 @@ def newest(versions):
     return max(stable, key=version_key).removeprefix("v")
 
 
-def get(url):
+def get(url, accept="application/json"):
     headers = {
         "User-Agent": "links-notation-dependency-check",
-        "Accept": "application/json",
+        "Accept": accept,
     }
     if url.startswith("https://api.github.com/") and os.environ.get("GH_TOKEN"):
         headers["Authorization"] = "Bearer " + os.environ["GH_TOKEN"]
@@ -171,6 +173,7 @@ def manifests(root=ROOT):
                     ".venv",
                     "dist",
                     "generated",
+                    "_deps",
                 }
                 for p in path.relative_to(directory).parts
             ):
@@ -312,6 +315,13 @@ def manifests(root=ROOT):
                     ):
                         continue
                     add(path, "go", match[1], match[2])
+            elif path.name == "CMakeLists.txt":
+                # FetchContent pins a GitHub release archive by tag and hash.
+                for match in re.finditer(
+                    r"URL\s+https://github\.com/([\w.-]+/[\w.-]+)/releases/download/([^/\s]+)/",
+                    path.read_text(),
+                ):
+                    add(path, "github", match[1], match[2])
     for path in (root / ".github/workflows").glob("*.yml"):
         for match in re.finditer(
             r"uses:\s*([\w.-]+/[\w./-]+)@([^\s#]+)", path.read_text()
@@ -394,6 +404,25 @@ def update(dependency, release):
                 + re.escape(original)
                 + r"(?=\s|$)",
                 lambda m: m[1] + replacement,
+                source,
+            )
+        elif path.name == "CMakeLists.txt":
+
+            def pin(match):
+                # The archive name repeats the version and its hash changes.
+                url = match[1].replace(
+                    original.removeprefix("v"), replacement.removeprefix("v")
+                )
+                digest = hashlib.sha256(get(url, accept="*/*")).hexdigest()
+                return "URL " + url + match[2] + digest
+
+            source = re.sub(
+                r"URL\s+(https://github\.com/"
+                + name
+                + r"/releases/download/"
+                + re.escape(original)
+                + r"/\S+)(\s+URL_HASH\s+SHA256=)[0-9a-fA-F]{64}",
+                pin,
                 source,
             )
         elif dependency.name == "rhysd/actionlint":
