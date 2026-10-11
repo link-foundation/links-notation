@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <cstdlib>
 #include <iostream>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -49,6 +50,30 @@ int main() {
   const std::vector<LinksGroup> groups = Parser().parse_groups("parent\n  child");
   expect("groups", std::to_string(groups.size()) + " group, " + std::to_string(groups[0].children.size()) + " child",
          "1 group, 1 child");
+
+  // Comments: on by default, and off for documents written before them.
+  expect("comments", format_links(parse("# the machines this deploys to\ndeploy: staging # only staging, for now\n")),
+         "(deploy: staging)");
+  ParserOptions plain_options;
+  plain_options.comments = false;
+  expect("comments off", format_links(Parser(plain_options).parse("# a b\n")), "('#' a b)");
+
+  // Nesting depth: a document nested too deep is an error, not a stack overflow.
+  ParserOptions shallow;
+  shallow.max_depth = 3;
+  try {
+    Parser(shallow).parse("((((a))))");
+    expect("nesting depth", "parsed", "an error");
+  } catch (const ParseError& error) {
+    expect("nesting depth", error.what(),
+           "Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3\n1 | ((((a))))\n  |    ^");
+  }
+
+  // Lazy reading: links come out of a sequence of chunks one at a time.
+  ChunkedLinks chunked = parse_chunks(std::vector<std::string>{"a b\nc", " d\n"});
+  std::string lazily;
+  while (std::optional<Link> link = chunked.next()) lazily += link->format();
+  expect("parse_chunks", lazily, "(a b)(c d)");
 
   // Binary Links Notation: the same document as bytes, and back.
   const BinaryLinoCodec codec;
