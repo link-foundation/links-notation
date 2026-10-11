@@ -50,6 +50,8 @@ jobs:
     uses: ./.github/workflows/go.yml
     with:
       verbose: ${{ inputs.verbose || false }}
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   csharp:
     needs: [js]

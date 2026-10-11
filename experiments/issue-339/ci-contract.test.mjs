@@ -196,3 +196,13 @@ test("a bare Composer command in another workflow requires JS", () =>
       };
     }),
   ).not.toEqual([]));
+
+test("Go coverage keeps its optional repository credential", () => {
+  const workflows = readWorkflows();
+  const token = workflows["go.yml"].jobs.test.env.CODECOV_TOKEN;
+  expect(token).toBe("${{ secrets.CODECOV_TOKEN }}");
+  expect(workflows["go.yml"].on.workflow_call.secrets?.CODECOV_TOKEN).toEqual({
+    required: false,
+  });
+  expect(workflows["js.yml"].jobs.go.secrets?.CODECOV_TOKEN).toBe(token);
+});
