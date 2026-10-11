@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "links-notation": "file:../../js",
-    "lino-objects-codec": "^0.9.0"
+    "lino-objects-codec": "^0.9.1"
   },
   "overrides": {
     "links-notation": "file:../../js"

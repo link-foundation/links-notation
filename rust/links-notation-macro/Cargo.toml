@@ -11,6 +11,6 @@ repository = "https://github.com/link-foundation/links-notation"
 proc-macro = true
 
 [dependencies]
-syn = { version = "3.0.7", features = ["full", "extra-traits"] }
+syn = { version = "3.0.8", features = ["full", "extra-traits"] }
 quote = "1.0.47"
 proc-macro2 = "1.0.107"
