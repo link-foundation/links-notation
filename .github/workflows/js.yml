@@ -1,290 +1,225 @@
-name: js
+name: CI
 
 on:
   push:
-    branches: main
-    paths:
-      - 'js/**'
-      - 'docs/protocol/**'
-      - '.github/workflows/js.yml'
+    branches: [main]
   pull_request:
-    paths:
-      - 'js/**'
-      - 'docs/protocol/**'
-      - '.github/workflows/js.yml'
+  schedule:
+    - cron: '0 6 * * 1'
   workflow_dispatch:
     inputs:
       verbose:
         description: 'Print extra diagnostics (never secret values)'
         type: boolean
-        required: false
         default: false
 
 permissions:
   contents: read
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
-
-defaults:
-  run:
-    working-directory: js
+# One commit range at a time; drafting agents never push during a run.
+concurrency:
+  group: ci-${{ github.head_ref || github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  findChangedJsFiles:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
-    outputs:
-      isJsFilesChanged: ${{ steps.setIsJsFilesChangedOutput.outputs.isJsFilesChanged }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - name: Get changed files using defaults
-        id: changed-files
-        uses: tj-actions/changed-files@v47.0.6
-      - name: Set output isJsFilesChanged
-        id: setIsJsFilesChangedOutput
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: |
-          isJsFilesChanged='false'
-          # workflow_dispatch has no diff to inspect, so treat it as "changed".
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            isJsFilesChanged='true'
-          fi
-          echo "Changed files: $ALL_CHANGED_FILES"
-          for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == js/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == .github/workflows/js.yml ]]; then
-              isJsFilesChanged='true'
-              break
-            fi
-          done
-          echo "isJsFilesChanged=${isJsFilesChanged}" >> "$GITHUB_OUTPUT"
-          echo "isJsFilesChanged: ${isJsFilesChanged}"
-
-  format:
-    needs: [findChangedJsFiles]
-    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-format
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          submodules: true
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2.2.0
-        with:
-          bun-version: latest
-      - name: Install Dependencies
-        run: bun install --frozen-lockfile
-      # Uses the pinned devDependency rather than `npx prettier`, which would
-      # silently resolve a different version on every run.
-      - name: Check formatting with Prettier
-        run: bun run format:check
-
-  lint:
-    needs: [findChangedJsFiles, format]
-    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-lint
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          submodules: true
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2.2.0
-        with:
-          bun-version: latest
-      - name: Install Dependencies
-        run: bun install --frozen-lockfile
-      - name: Lint
-        run: bun run lint
-
-  test:
-    needs: [findChangedJsFiles, format, lint]
-    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-test
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          submodules: true
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2.2.0
-        with:
-          bun-version: latest
-      - name: Install Dependencies
-        run: bun install --frozen-lockfile
-      - name: Build
-        run: bun run build
-      - name: Test
-        run: bun test
-      - name: Check binary API TypeScript declarations
-        run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/binary/typescript.ts
-      - name: Check indented document API TypeScript declarations
-        run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/js_indented_document.ts
-
-  publishToNpm:
-    needs: [findChangedJsFiles, test]
-    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-24.04
-    # Must outlast the 20 minute registry wait below plus the build.
-    timeout-minutes: 35
-    concurrency:
-      group: ${{ github.workflow }}-publish-npm
-      cancel-in-progress: false
-    permissions:
-      contents: read
-      # Required for npm trusted publishing (OIDC). Harmless when the package
-      # is not configured for it; npm then falls back to NODE_AUTH_TOKEN.
-      id-token: write
-    outputs:
-      published: ${{ steps.publish.outputs.published }}
-      version: ${{ steps.version-check.outputs.version }}
-      name: ${{ steps.version-check.outputs.name }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          submodules: true
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2.2.0
-        with:
-          bun-version: latest
-      # npm itself does the publishing: trusted publishing needs npm >= 11.5.1,
-      # and setup-node writes the registry entry ~/.npmrc that npm reads.
-      - name: Setup Node
-        uses: actions/setup-node@v7.1.0
-        with:
-          node-version: '22'
-          registry-url: 'https://registry.npmjs.org'
-      # Node 22 bundles npm 10.x; trusted publishing (OIDC) needs >= 11.5.1.
-      # Pinned to the major rather than @latest so a future npm 12 cannot
-      # change publish behaviour without a commit here.
-      - name: Upgrade npm for trusted publishing
-        run: npm install -g npm@12.2.0
-      - name: Install Dependencies
-        run: bun install --frozen-lockfile
-      - name: Build
-        run: bun run build
-      - name: Check if version already published
-        id: version-check
-        run: |
-          set -euo pipefail
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          PACKAGE_NAME=$(node -p "require('./package.json').name")
-          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
-          echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
-          echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
-
-          if npm view "$PACKAGE_NAME@$PACKAGE_VERSION" version >/dev/null 2>&1; then
-            echo "Version $PACKAGE_VERSION already exists on npm"
-            echo "should_publish=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "Version $PACKAGE_VERSION does not exist on npm"
-            echo "should_publish=true" >> "$GITHUB_OUTPUT"
-          fi
-      - name: Publish to npm
-        id: publish
-        env:
-          # Bootstrap fallback for as long as trusted publishing is not
-          # configured for this package on npmjs.com.
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          set -euo pipefail
-          if [ "${{ steps.version-check.outputs.should_publish }}" != "true" ]; then
-            echo "published=skipped" >> "$GITHUB_OUTPUT"
-            echo "::notice::Version ${{ steps.version-check.outputs.version }} is already on npm, nothing to publish"
-            exit 0
-          fi
-
-          # Presence only, never the value.
-          if [ -n "$NODE_AUTH_TOKEN" ]; then
-            echo "npm credential: NPM_TOKEN present"
-          else
-            echo "npm credential: NPM_TOKEN absent, relying on OIDC trusted publishing"
-          fi
-
-          # Keep the log outside the package directory: npm builds the tarball
-          # from the working tree, so a log written here ships inside it.
-          PUBLISH_LOG="$RUNNER_TEMP/publish.log"
-          if ! npm publish --access public 2>&1 | tee "$PUBLISH_LOG"; then
-            if grep -q 'ENEEDAUTH\|E401\|E403' "$PUBLISH_LOG"; then
-              echo "::error::npm rejected the credentials. Either configure trusted publishing for ${{ steps.version-check.outputs.name }} on npmjs.com or set the NPM_TOKEN secret."
-            fi
-            if grep -q 'E422\|provenance' "$PUBLISH_LOG"; then
-              echo "::error::npm rejected the provenance attestation. Trusted publishing signs the package with this repository's identity, so package.json must carry a matching \"repository.url\" (https://github.com/${{ github.repository }})."
-            fi
-            echo "published=failed" >> "$GITHUB_OUTPUT"
-            exit 1
-          fi
-          echo "published=true" >> "$GITHUB_OUTPUT"
-      - name: Verify the package is really on npm
-        if: steps.publish.outputs.published == 'true'
-        env:
-          PACKAGE_NAME: ${{ steps.version-check.outputs.name }}
-          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
-        run: |
-          set -euo pipefail
-          # shellcheck source=scripts/ci/registry-probe.sh
-          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
-          # npm scans every new version for malware before serving it, which
-          # "typically takes around five minutes" and can take "15 minutes or
-          # more" (https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/).
-          # 0.23.0 took 4m09s, so the old 150 second window failed a publish
-          # that had succeeded (issue #330). 80 x 15s = 20 minutes.
-          wait_for_registry \
-            "${PACKAGE_NAME}@${PACKAGE_VERSION} on npm" \
-            "https://registry.npmjs.org/${PACKAGE_NAME}/${PACKAGE_VERSION}" 80 15
-
-  publishRelease:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    needs: [findChangedJsFiles, publishToNpm]
-    # `result == 'success'` was true even when the publish step was skipped,
-    # so releases were cut for versions that were never pushed. `skipped`
-    # (already on npm) is included so a release that an earlier run failed to
-    # create is backfilled: js_0.23.0 was published, but npm's publish-time
-    # malware scan kept it invisible past the verify window, the job failed,
-    # and every later run skipped the release (issue #330). See csharp.yml.
-    if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && (needs.publishToNpm.outputs.published == 'true' || needs.publishToNpm.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+  js:
+    uses: ./.github/workflows/javascript.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     permissions:
       contents: write
+      id-token: write
+
+  rust:
+    needs: [js]
+    uses: ./.github/workflows/rust.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    secrets:
+      CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
+    permissions:
+      contents: write
+      id-token: write
+
+  python:
+    needs: [js]
+    uses: ./.github/workflows/python.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    secrets:
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+    permissions:
+      contents: write
+      id-token: write
+
+  java:
+    needs: [js]
+    uses: ./.github/workflows/java.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    secrets:
+      CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+      CENTRAL_TOKEN: ${{ secrets.CENTRAL_TOKEN }}
+      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+    permissions:
+      contents: write
+      id-token: write
+
+  go:
+    needs: [js]
+    uses: ./.github/workflows/go.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    permissions:
+      contents: write
+      id-token: write
+
+  csharp:
+    needs: [js]
+    uses: ./.github/workflows/csharp.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    secrets:
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+    permissions:
+      contents: write
+      id-token: write
+
+  php:
+    needs: [js]
+    uses: ./.github/workflows/php.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    secrets:
+      PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
+      PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+    permissions:
+      contents: write
+      id-token: write
+
+  binary_interop:
+    needs: [js]
+    uses: ./.github/workflows/binary-interop.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+
+  benchmarks:
+    needs: [js]
+    uses: ./.github/workflows/benchmarks.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+
+  security:
+    needs: [js]
+    uses: ./.github/workflows/security.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    permissions:
+      contents: write
+      security-events: write
+      pull-requests: write
+
+  docs:
+    needs: [js]
+    uses: ./.github/workflows/docs.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+
+  release_audit:
+    needs: [js, rust, python, java, go, csharp, php]
+    if: ${{ always() && needs.js.result == 'success' }}
+    uses: ./.github/workflows/release-audit.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+
+  js_check:
+    name: JavaScript
+    needs: [js]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          submodules: true
-      - name: Create GitHub release
+      - name: Require a successful stage
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PACKAGE_VERSION: ${{ needs.publishToNpm.outputs.version }}
-          PACKAGE_NAME: ${{ needs.publishToNpm.outputs.name }}
-        run: |
-          set -euo pipefail
-          TAG="js_${PACKAGE_VERSION}"
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            echo "Release $TAG already exists"
-            exit 0
-          fi
-          gh release create "$TAG" \
-            --title "[JS] $PACKAGE_VERSION" \
-            --notes "https://www.npmjs.com/package/$PACKAGE_NAME"
+          STAGE_RESULT: ${{ needs.js.result }}
+        run: test "$STAGE_RESULT" = success
+
+  rust_check:
+    name: Rust
+    needs: [rust]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require a successful stage
+        env:
+          STAGE_RESULT: ${{ needs.rust.result }}
+        run: test "$STAGE_RESULT" = success
+
+  python_check:
+    name: Python
+    needs: [python]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require a successful stage
+        env:
+          STAGE_RESULT: ${{ needs.python.result }}
+        run: test "$STAGE_RESULT" = success
+
+  java_check:
+    name: Java
+    needs: [java]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require a successful stage
+        env:
+          STAGE_RESULT: ${{ needs.java.result }}
+        run: test "$STAGE_RESULT" = success
+
+  go_check:
+    name: Go
+    needs: [go]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require a successful stage
+        env:
+          STAGE_RESULT: ${{ needs.go.result }}
+        run: test "$STAGE_RESULT" = success
+
+  csharp_check:
+    name: CSharp
+    needs: [csharp]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require a successful stage
+        env:
+          STAGE_RESULT: ${{ needs.csharp.result }}
+        run: test "$STAGE_RESULT" = success
+
+  php_check:
+    name: PHP
+    needs: [php]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require a successful stage
+        env:
+          STAGE_RESULT: ${{ needs.php.result }}
+        run: test "$STAGE_RESULT" = success

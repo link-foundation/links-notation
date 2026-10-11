@@ -1,28 +1,20 @@
 name: binary interoperability
 
 on:
-  pull_request:
-    paths:
-      - 'rust/**'
-      - 'csharp/**'
-      - 'js/**'
-      - 'python/**'
-      - 'go/**'
-      - 'java/**'
-      - 'php/**'
-      - 'docs/protocol/**'
-      - 'examples/binary/**'
-      - '.github/workflows/binary-interop.yml'
-  push:
-    branches: main
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      verbose:
+        description: 'Print extra diagnostics (never secret values)'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+  group: ci-binary-interop-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   seven-languages:

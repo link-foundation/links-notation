@@ -1,18 +1,7 @@
 name: benchmarks
 
 on:
-  push:
-    branches: main
-    paths:
-      - 'benchmarks/**'
-      - 'rust/links-notation-benchmark/**'
-      - '.github/workflows/benchmarks.yml'
-  pull_request:
-    paths:
-      - 'benchmarks/**'
-      - 'rust/links-notation-benchmark/**'
-      - '.github/workflows/benchmarks.yml'
-  workflow_dispatch:
+  workflow_call:
     inputs:
       verbose:
         description: 'Print extra diagnostics (never secret values)'
@@ -31,8 +20,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-benchmarks-${{ github.ref }}-detect-changes
+      cancel-in-progress: false
     outputs:
       isBenchmarkFilesChanged: ${{ steps.setIsBenchmarkFilesChangedOutput.outputs.isBenchmarkFilesChanged }}
     steps:
@@ -73,8 +62,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-benchmark
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-benchmarks-${{ github.ref }}-benchmark
+      cancel-in-progress: false
     outputs:
       changed: ${{ steps.regenerate.outputs.changed }}
     steps:
@@ -133,8 +122,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-datasets
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-benchmarks-${{ github.ref }}-datasets
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -164,8 +153,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-javascript
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-benchmarks-${{ github.ref }}-javascript
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -200,8 +189,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-python
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-benchmarks-${{ github.ref }}-python
+      cancel-in-progress: false
     env:
       # tiktoken downloads its vocabulary instead of shipping it, so give it a
       # cache to download into once.
@@ -250,8 +239,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-csharp
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-benchmarks-${{ github.ref }}-csharp
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -281,8 +270,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-go
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-benchmarks-${{ github.ref }}-go
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -314,8 +303,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-java
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-benchmarks-${{ github.ref }}-java
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -353,8 +342,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-php
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-benchmarks-${{ github.ref }}-php
+      cancel-in-progress: false
     env:
       # yethee/tiktoken is the one tokenizer here that downloads its vocabulary
       # instead of shipping it, so give it a cache to download into once.
@@ -407,16 +396,18 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: write
+      pull-requests: write
+      actions: write
     # Two runs pushing to main would race for the same head.
     concurrency:
-      group: ${{ github.workflow }}-publish
+      group: ci-benchmarks-publish
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           submodules: true
-          ref: main
+          ref: ${{ github.sha }}
       - name: Download the benchmark output
         uses: actions/download-artifact@v8.0.2
         with:
@@ -428,7 +419,7 @@ jobs:
           pattern: results-*
           merge-multiple: true
           path: benchmarks/results
-      - name: Commit the regenerated benchmarks
+      - name: Propose the regenerated benchmarks
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_SHA: ${{ github.sha }}
@@ -443,7 +434,16 @@ jobs:
             exit 0
           fi
           git --no-pager diff --cached --stat
-          # [skip ci]: the push would otherwise retrigger this workflow, which
-          # would regenerate identical files and stop there anyway.
-          git commit -m "Update benchmark results for ${COMMIT_SHA} [skip ci]"
-          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
+          git commit -m "Update benchmark results for ${COMMIT_SHA}"
+          BENCHMARK_BRANCH="automation/benchmarks-${COMMIT_SHA}"
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${BENCHMARK_BRANCH}"
+          # Main's required checks apply to generated changes too. A repository
+          # may disallow Actions-created PRs; that is a visible configuration
+          # error rather than silently bypassing main's ruleset.
+          gh pr create --base main --head "$BENCHMARK_BRANCH" \
+            --title "Update benchmark results for ${COMMIT_SHA}" \
+            --body "Generated and verified by the gated CI run for ${COMMIT_SHA}. All seven implementations agreed on the results."
+          # Explicit dispatch works with GITHUB_TOKEN and attaches the required
+          # stage checks to the generated commit, without relying on bot PR
+          # events that can be suppressed or require manual approval.
+          gh workflow run js.yml --ref "$BENCHMARK_BRANCH"

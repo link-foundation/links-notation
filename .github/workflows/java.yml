@@ -1,24 +1,22 @@
 name: java
 
 on:
-  push:
-    branches: main
-    paths:
-      - 'java/**'
-      - 'docs/protocol/**'
-      - '.github/workflows/java.yml'
-  pull_request:
-    paths:
-      - 'java/**'
-      - 'docs/protocol/**'
-      - '.github/workflows/java.yml'
-  workflow_dispatch:
+  workflow_call:
     inputs:
       verbose:
         description: 'Print extra diagnostics (never secret values)'
         type: boolean
         required: false
         default: false
+    secrets:
+      CENTRAL_USERNAME:
+        required: false
+      CENTRAL_TOKEN:
+        required: false
+      GPG_PRIVATE_KEY:
+        required: false
+      GPG_PASSPHRASE:
+        required: false
 
 permissions:
   contents: read
@@ -32,50 +30,12 @@ defaults:
     working-directory: java
 
 jobs:
-  findChangedJavaFiles:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
-    outputs:
-      isJavaFilesChanged: ${{ steps.setIsJavaFilesChangedOutput.outputs.isJavaFilesChanged }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - name: Get changed files using defaults
-        id: changed-files
-        uses: tj-actions/changed-files@v47.0.6
-      - name: Set output isJavaFilesChanged
-        id: setIsJavaFilesChangedOutput
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: |
-          isJavaFilesChanged='false'
-          # workflow_dispatch has no diff to inspect, so treat it as "changed".
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            isJavaFilesChanged='true'
-          fi
-          echo "Changed files: $ALL_CHANGED_FILES"
-          for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == java/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == .github/workflows/java.yml ]]; then
-              isJavaFilesChanged='true'
-              break
-            fi
-          done
-          echo "isJavaFilesChanged=${isJavaFilesChanged}" >> "$GITHUB_OUTPUT"
-          echo "isJavaFilesChanged: ${isJavaFilesChanged}"
-
   build:
-    needs: [findChangedJavaFiles]
-    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-build
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-java-${{ github.ref }}-build
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -91,13 +51,12 @@ jobs:
         run: mvn -B compile --file pom.xml
 
   test:
-    needs: [findChangedJavaFiles, build]
-    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' }}
+    needs: [build]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-test-${{ matrix.java }}
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-java-${{ github.ref }}-test-${{ matrix.java }}
+      cancel-in-progress: false
     strategy:
       fail-fast: false
       matrix:
@@ -117,13 +76,11 @@ jobs:
         run: mvn -B test --file pom.xml
 
   format:
-    needs: [findChangedJavaFiles]
-    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-format
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-java-${{ github.ref }}-format
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -139,12 +96,12 @@ jobs:
         run: bash format.sh --check && mvn -B spotless:check --file pom.xml
 
   publishToMavenCentral:
-    needs: [findChangedJavaFiles, test, format]
-    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: [test, format]
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 70
     concurrency:
-      group: ${{ github.workflow }}-publish-maven-central
+      group: ci-java-publish-maven-central
       cancel-in-progress: false
     outputs:
       published: ${{ steps.publish.outputs.published }}
@@ -156,24 +113,6 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      # Maven Central has no OIDC trusted publishing (unlike npm, PyPI and
-      # crates.io), so the long-lived Portal token and GPG key are the only
-      # option. They are read through `env` rather than interpolated into the
-      # script body, where the values would end up in the runner's shell.
-      - name: Check publishing credentials
-        id: creds
-        env:
-          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
-          CENTRAL_TOKEN: ${{ secrets.CENTRAL_TOKEN }}
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-        run: |
-          if [ -n "$CENTRAL_USERNAME" ] && [ -n "$CENTRAL_TOKEN" ] && [ -n "$GPG_PRIVATE_KEY" ]; then
-            echo "have_creds=true" >> "$GITHUB_OUTPUT"
-            echo "Maven Central credentials: present"
-          else
-            echo "have_creds=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::Skipping Maven Central publishing: CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets are not configured. Generate a token at https://central.sonatype.com/account and add these repository secrets to enable publishing. No GitHub release will be created."
-          fi
       - name: Set up JDK 21
         uses: actions/setup-java@v6.0.1
         with:
@@ -204,7 +143,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
           echo "Package: $PACKAGE_GROUP:$PACKAGE_ARTIFACT:$PACKAGE_VERSION"
 
-          URL="https://repo1.maven.org/maven2/$(echo "$PACKAGE_GROUP" | tr '.' '/')/$PACKAGE_ARTIFACT/$PACKAGE_VERSION/"
+          URL="https://repo1.maven.org/maven2/$(echo "$PACKAGE_GROUP" | tr '.' '/')/$PACKAGE_ARTIFACT/$PACKAGE_VERSION/$PACKAGE_ARTIFACT-$PACKAGE_VERSION.pom"
           if probe_registry "$URL"; then
             echo "Version $PACKAGE_VERSION already exists on Maven Central"
             echo "should_publish=false" >> "$GITHUB_OUTPUT"
@@ -215,27 +154,28 @@ jobs:
       - name: Publish to Maven Central
         id: publish
         env:
+          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          CENTRAL_TOKEN: ${{ secrets.CENTRAL_TOKEN }}
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           MAVEN_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           set -euo pipefail
-          if [ "${{ steps.creds.outputs.have_creds }}" != "true" ]; then
-            echo "published=failed" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
           if [ "${{ steps.version-check.outputs.should_publish }}" != "true" ]; then
             echo "published=skipped" >> "$GITHUB_OUTPUT"
             echo "::notice::Version ${{ steps.version-check.outputs.version }} is already on Maven Central, nothing to publish"
             exit 0
           fi
+          bash "$GITHUB_WORKSPACE/scripts/ci/require-java-credentials.sh"
           mvn -B deploy -Prelease --file pom.xml
           echo "published=true" >> "$GITHUB_OUTPUT"
       # `autoPublish` hands the bundle to the Portal, which validates and
       # syncs it asynchronously, so a successful `mvn deploy` is not yet a
       # published artifact. Nothing is released until it is really there.
       - name: Verify the artifact is really on Maven Central
-        if: steps.publish.outputs.published == 'true'
+        if: steps.publish.outputs.published == 'true' || steps.publish.outputs.published == 'skipped'
         env:
           PACKAGE_GROUP: ${{ steps.version-check.outputs.group }}
           PACKAGE_ARTIFACT: ${{ steps.version-check.outputs.artifact }}
@@ -245,6 +185,8 @@ jobs:
           # shellcheck source=scripts/ci/registry-probe.sh
           . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
           GROUP_PATH=$(echo "$PACKAGE_GROUP" | tr '.' '/')
+          wait_for_registry "Maven Central namespace ${PACKAGE_GROUP}" \
+            "https://repo1.maven.org/maven2/${GROUP_PATH}/" 30 30
           wait_for_registry \
             "${PACKAGE_GROUP}:${PACKAGE_ARTIFACT}:${PACKAGE_VERSION} on Maven Central" \
             "https://repo1.maven.org/maven2/${GROUP_PATH}/${PACKAGE_ARTIFACT}/${PACKAGE_VERSION}/${PACKAGE_ARTIFACT}-${PACKAGE_VERSION}.pom" \
@@ -253,9 +195,9 @@ jobs:
   publishRelease:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    needs: [findChangedJavaFiles, publishToMavenCentral]
+    needs: [publishToMavenCentral]
     # See csharp.yml: gate on what was published, not on the job result.
-    if: ${{ needs.findChangedJavaFiles.outputs.isJavaFilesChanged == 'true' && (needs.publishToMavenCentral.outputs.published == 'true' || needs.publishToMavenCentral.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ (needs.publishToMavenCentral.outputs.published == 'true' || needs.publishToMavenCentral.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:
@@ -269,6 +211,7 @@ jobs:
       - name: Create GitHub release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_SHA: ${{ github.sha }}
           PACKAGE_GROUP: ${{ needs.publishToMavenCentral.outputs.group }}
           PACKAGE_ARTIFACT: ${{ needs.publishToMavenCentral.outputs.artifact }}
           PACKAGE_VERSION: ${{ needs.publishToMavenCentral.outputs.version }}
@@ -280,5 +223,6 @@ jobs:
             exit 0
           fi
           gh release create "$TAG" \
+            --target "$RELEASE_SHA" \
             --title "[Java] $PACKAGE_VERSION" \
             --notes "https://central.sonatype.com/artifact/$PACKAGE_GROUP/$PACKAGE_ARTIFACT/$PACKAGE_VERSION"

@@ -1,29 +1,19 @@
 name: csharp
 
 on:
-  push:
-    branches: main
-    paths:
-      - 'csharp/**'
-      - 'docs/protocol/**'
-      - 'examples/binary/**'
-      - '.github/workflows/csharp.yml'
-  pull_request:
-    paths:
-      - 'csharp/**'
-      - 'docs/protocol/**'
-      - 'examples/binary/**'
-      - '.github/workflows/csharp.yml'
-  workflow_dispatch:
+  workflow_call:
     inputs:
       verbose:
         description: 'Print extra diagnostics (never secret values)'
         type: boolean
         required: false
         default: false
+    secrets:
+      NUGET_API_KEY:
+        required: false
+      NUGET_TOKEN:
+        required: false
 
-# Least privilege by default; the two jobs that write to the repository
-# raise it to `contents: write` for themselves only.
 permissions:
   contents: read
 
@@ -40,50 +30,12 @@ defaults:
     working-directory: csharp
 
 jobs:
-  findChangedCsFiles:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
-    outputs:
-      isCsFilesChanged: ${{ steps.setIsCsFilesChangedOutput.outputs.isCsFilesChanged }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - name: Get changed files using defaults
-        id: changed-files
-        uses: tj-actions/changed-files@v47.0.6
-      - name: Set output isCsFilesChanged
-        id: setIsCsFilesChangedOutput
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: |
-          isCsFilesChanged='false'
-          # workflow_dispatch has no diff to inspect, so treat it as "changed".
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            isCsFilesChanged='true'
-          fi
-          echo "Changed files: $ALL_CHANGED_FILES"
-          for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == csharp/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == examples/binary/* ]] || [[ $changedFile == .github/workflows/csharp.yml ]]; then
-              isCsFilesChanged='true'
-              break
-            fi
-          done
-          echo "isCsFilesChanged=${isCsFilesChanged}" >> "$GITHUB_OUTPUT"
-          echo "isCsFilesChanged: ${isCsFilesChanged}"
-
   lint:
-    needs: [findChangedCsFiles]
-    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-lint
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-csharp-${{ github.ref }}-lint
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -104,13 +56,12 @@ jobs:
           fi
 
   test:
-    needs: [findChangedCsFiles, lint]
-    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}
+    needs: [lint]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-test
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-csharp-${{ github.ref }}-test
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -141,10 +92,10 @@ jobs:
     runs-on: ubuntu-24.04
     # Must outlast the 20 minute registry wait below plus the build.
     timeout-minutes: 35
-    needs: [findChangedCsFiles, test]
-    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: [test]
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     concurrency:
-      group: ${{ github.workflow }}-publish-nuget
+      group: ci-csharp-publish-nuget
       cancel-in-progress: false
     outputs:
       # 'true' published now, 'skipped' nothing to do, 'failed' credential missing.
@@ -205,8 +156,8 @@ jobs:
           # Report presence, never the value.
           if [ -z "$API_KEY" ]; then
             echo "published=failed" >> "$GITHUB_OUTPUT"
-            echo "::warning::Neither NUGET_API_KEY nor NUGET_TOKEN is configured; skipping the NuGet push. No GitHub release will be created."
-            exit 0
+            echo "::error::Neither NUGET_API_KEY nor NUGET_TOKEN is configured; skipping the NuGet push. No GitHub release will be created."
+            exit 1
           fi
           echo "NuGet credential: present"
 
@@ -238,13 +189,12 @@ jobs:
   generatePdfWithCode:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
-    needs: [findChangedCsFiles, test]
+    needs: [test]
     # Builds on pull requests too: only main used to run it, so a test string
     # pdfLaTeX cannot typeset passed review and broke the main branch (#330).
-    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' }}
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-pdf
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-csharp-${{ github.ref }}-pdf
+      cancel-in-progress: false
     env:
       PDF_APT_PACKAGES: texlive texlive-lang-cyrillic texlive-latex-extra python3-pygments ghostscript python-is-python3
     steps:
@@ -293,14 +243,14 @@ jobs:
   publishDocumentation:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
-    needs: [findChangedCsFiles, test, generatePdfWithCode]
-    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: [test, generatePdfWithCode]
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     # Pushing to gh-pages is a write to this repository.
     permissions:
       contents: write
     # gh-pages has a single head; two concurrent deploys would race.
     concurrency:
-      group: ${{ github.workflow }}-gh-pages
+      group: ci-csharp-gh-pages
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
@@ -333,7 +283,7 @@ jobs:
     timeout-minutes: 10
     # Deliberately not `needs: publishDocumentation`: a DocFX failure must not
     # withhold the release for a package that is already on NuGet.org.
-    needs: [findChangedCsFiles, pushToNuget]
+    needs: [pushToNuget]
     # Gate on what actually happened, not on the job result: a job that skipped
     # its publish step (missing credential, or nothing new to push) still
     # reports `success`, which is how green runs shipped no package at all.
@@ -341,7 +291,7 @@ jobs:
     # is idempotent, so this backfills a release that an earlier run published
     # but never tagged (its verify step timed out, say; issue #330). Missing
     # credentials report `failed` and still withhold the release.
-    if: ${{ needs.findChangedCsFiles.outputs.isCsFilesChanged == 'true' && (needs.pushToNuget.outputs.published == 'true' || needs.pushToNuget.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ (needs.pushToNuget.outputs.published == 'true' || needs.pushToNuget.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:
@@ -352,6 +302,7 @@ jobs:
       - name: Create GitHub release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_SHA: ${{ github.sha }}
           PACKAGE_VERSION: ${{ needs.pushToNuget.outputs.version }}
         run: |
           set -euo pipefail
@@ -363,6 +314,7 @@ jobs:
           fi
           RELEASE_NOTES=$(sed -n 's|.*<PackageReleaseNotes>\(.*\)|\1|p' "$PROJECT_PATH" | head -1)
           gh release create "$TAG" \
+            --target "$RELEASE_SHA" \
             --title "[C#] $PACKAGE_VERSION" \
             --notes "https://www.nuget.org/packages/${PACKAGE_ID}/${PACKAGE_VERSION}
 

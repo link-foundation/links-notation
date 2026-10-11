@@ -1,31 +1,25 @@
 name: rust
 
 on:
-  push:
-    branches: main
-    paths:
-      - 'rust/**'
-      - 'docs/protocol/**'
-      - 'experiments/issue-334/**'
-      - '.github/workflows/rust.yml'
-  pull_request:
-    paths:
-      - 'rust/**'
-      - 'docs/protocol/**'
-      - 'experiments/issue-334/**'
-      - '.github/workflows/rust.yml'
-  workflow_dispatch:
+  workflow_call:
     inputs:
       verbose:
         description: 'Print extra diagnostics (never secret values)'
         type: boolean
         required: false
         default: false
+    secrets:
+      CARGO_TOKEN:
+        required: false
 
 permissions:
   contents: read
 
 env:
+  CARGO_INCREMENTAL: '0'
+  CARGO_BUILD_JOBS: '2'
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
 
@@ -34,50 +28,12 @@ defaults:
     working-directory: rust
 
 jobs:
-  findChangedRustFiles:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
-    outputs:
-      isRustFilesChanged: ${{ steps.setIsRustFilesChangedOutput.outputs.isRustFilesChanged }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - name: Get changed files using defaults
-        id: changed-files
-        uses: tj-actions/changed-files@v47.0.6
-      - name: Set output isRustFilesChanged
-        id: setIsRustFilesChangedOutput
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: |
-          isRustFilesChanged='false'
-          # workflow_dispatch has no diff to inspect, so treat it as "changed".
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            isRustFilesChanged='true'
-          fi
-          echo "Changed files: $ALL_CHANGED_FILES"
-          for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == rust/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == experiments/issue-334/* ]] || [[ $changedFile == .github/workflows/rust.yml ]]; then
-              isRustFilesChanged='true'
-              break
-            fi
-          done
-          echo "isRustFilesChanged=${isRustFilesChanged}" >> "$GITHUB_OUTPUT"
-          echo "isRustFilesChanged: ${isRustFilesChanged}"
-
   lint:
-    needs: [findChangedRustFiles]
-    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-lint
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-rust-${{ github.ref }}-lint
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -102,8 +58,7 @@ jobs:
 
   test:
     name: test (${{ matrix.toolchain }})
-    needs: [findChangedRustFiles, lint]
-    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
+    needs: [lint]
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     strategy:
@@ -111,8 +66,8 @@ jobs:
       matrix:
         toolchain: [stable, '1.87.0']
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-test-${{ matrix.toolchain }}
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-rust-${{ github.ref }}-test-${{ matrix.toolchain }}
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -134,13 +89,11 @@ jobs:
         run: cargo test -p links-notation --no-default-features
 
   msrv-rejection:
-    needs: [findChangedRustFiles]
-    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-msrv-rejection
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-rust-${{ github.ref }}-msrv-rejection
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -153,12 +106,12 @@ jobs:
         run: bash ../experiments/issue-334/check-msrv.sh
 
   publishToCratesIO:
-    needs: [findChangedRustFiles, test, msrv-rejection]
-    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: [test, msrv-rejection]
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
-      group: ${{ github.workflow }}-publish-crates-io
+      group: ci-rust-publish-crates-io
       cancel-in-progress: false
     permissions:
       contents: read
@@ -214,6 +167,12 @@ jobs:
           echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
           echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
 
+          if crate_version_published links-notation-macro "$MACRO_VERSION" && crate_version_published "$PACKAGE_NAME" "$PACKAGE_VERSION"; then
+            echo "published=skipped" >> "$GITHUB_OUTPUT"
+            echo "Both exact crate versions are already published"
+            exit 0
+          fi
+
           # The token never appears on the command line, where it would be
           # visible to every other process on the runner via /proc.
           export CARGO_REGISTRY_TOKEN="${OIDC_TOKEN:-$CARGO_TOKEN}"
@@ -223,8 +182,8 @@ jobs:
             echo "crates.io credential: CARGO_TOKEN present"
           else
             echo "published=failed" >> "$GITHUB_OUTPUT"
-            echo "::warning::No crates.io credential (neither trusted publishing nor CARGO_TOKEN); skipping publish. No GitHub release will be created."
-            exit 0
+            echo "::error::No crates.io credential (neither trusted publishing nor CARGO_TOKEN). No GitHub release will be created."
+            exit 1
           fi
 
           publish_crate() {
@@ -304,10 +263,10 @@ jobs:
   publishRelease:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    needs: [findChangedRustFiles, publishToCratesIO]
+    needs: [publishToCratesIO]
     # See csharp.yml: `result == 'success'` is true for a job that published
     # nothing, so the gate is the explicit `published` output instead.
-    if: ${{ needs.findChangedRustFiles.outputs.isRustFilesChanged == 'true' && (needs.publishToCratesIO.outputs.published == 'true' || needs.publishToCratesIO.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ (needs.publishToCratesIO.outputs.published == 'true' || needs.publishToCratesIO.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:
@@ -318,6 +277,7 @@ jobs:
       - name: Create GitHub release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_SHA: ${{ github.sha }}
           PACKAGE_NAME: ${{ needs.publishToCratesIO.outputs.name }}
           PACKAGE_VERSION: ${{ needs.publishToCratesIO.outputs.version }}
         run: |
@@ -328,5 +288,6 @@ jobs:
             exit 0
           fi
           gh release create "$TAG" \
+            --target "$RELEASE_SHA" \
             --title "[Rust] $PACKAGE_VERSION" \
             --notes "https://crates.io/crates/$PACKAGE_NAME"

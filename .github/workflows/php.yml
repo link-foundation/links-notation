@@ -1,24 +1,18 @@
 name: php
 
 on:
-  push:
-    branches: main
-    paths:
-      - 'php/**'
-      - 'docs/protocol/**'
-      - '.github/workflows/php.yml'
-  pull_request:
-    paths:
-      - 'php/**'
-      - 'docs/protocol/**'
-      - '.github/workflows/php.yml'
-  workflow_dispatch:
+  workflow_call:
     inputs:
       verbose:
         description: 'Print extra diagnostics (never secret values)'
         type: boolean
         required: false
         default: false
+    secrets:
+      PACKAGIST_USERNAME:
+        required: false
+      PACKAGIST_TOKEN:
+        required: false
 
 permissions:
   contents: read
@@ -32,50 +26,12 @@ defaults:
     working-directory: php
 
 jobs:
-  findChangedPhpFiles:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
-    outputs:
-      isPhpFilesChanged: ${{ steps.setIsPhpFilesChangedOutput.outputs.isPhpFilesChanged }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v47.0.6
-      - name: Set output isPhpFilesChanged
-        id: setIsPhpFilesChangedOutput
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: |
-          isPhpFilesChanged='false'
-          # workflow_dispatch has no diff to inspect, so treat it as "changed".
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            isPhpFilesChanged='true'
-          fi
-          echo "Changed files: $ALL_CHANGED_FILES"
-          for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == php/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == .github/workflows/php.yml ]]; then
-              isPhpFilesChanged='true'
-              break
-            fi
-          done
-          echo "isPhpFilesChanged=${isPhpFilesChanged}" >> "$GITHUB_OUTPUT"
-          echo "isPhpFilesChanged: ${isPhpFilesChanged}"
-
   lint:
-    needs: [findChangedPhpFiles]
-    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-lint
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-php-${{ github.ref }}-lint
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -95,16 +51,15 @@ jobs:
         run: composer run-script lint
 
   test:
-    needs: [findChangedPhpFiles, lint]
-    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' }}
+    needs: [lint]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       # The matrix value belongs in the group. Without it all four legs share
       # one group and cancel each other, so a run reported on one PHP version
       # while the other three were cancelled before their first step.
-      group: ${{ github.workflow }}-${{ github.ref }}-test-${{ matrix.php-version }}
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-php-${{ github.ref }}-test-${{ matrix.php-version }}
+      cancel-in-progress: false
     strategy:
       fail-fast: false
       matrix:
@@ -126,12 +81,12 @@ jobs:
         run: composer run-script test
 
   publishToPackagist:
-    needs: [findChangedPhpFiles, test]
-    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: [test]
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-publish-packagist
+      group: ci-php-publish-packagist
       cancel-in-progress: false
     outputs:
       published: ${{ steps.publish.outputs.published }}
@@ -199,14 +154,14 @@ jobs:
           # submitted at https://packagist.org/packages/submit.
           if [ "${{ steps.version-check.outputs.package_known }}" != "true" ]; then
             echo "published=failed" >> "$GITHUB_OUTPUT"
-            echo "::warning::${PACKAGE_NAME} is not registered on Packagist (repo.packagist.org returns 404). Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created."
-            exit 0
+            echo "::error::${PACKAGE_NAME} is not registered on Packagist (repo.packagist.org returns 404). Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created."
+            exit 1
           fi
 
           if [ -z "$PACKAGIST_TOKEN" ] || [ -z "$PACKAGIST_USERNAME" ]; then
             echo "published=failed" >> "$GITHUB_OUTPUT"
-            echo "::warning::PACKAGIST_USERNAME/PACKAGIST_TOKEN are not configured; skipping the Packagist update. No PHP release will be created."
-            exit 0
+            echo "::error::PACKAGIST_USERNAME/PACKAGIST_TOKEN are not configured; skipping the Packagist update. No PHP release will be created."
+            exit 1
           fi
           echo "Packagist credentials: present"
 
@@ -233,9 +188,9 @@ jobs:
   publishRelease:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    needs: [findChangedPhpFiles, publishToPackagist]
+    needs: [publishToPackagist]
     # See csharp.yml: gate on what was published, not on the job result.
-    if: ${{ needs.findChangedPhpFiles.outputs.isPhpFilesChanged == 'true' && (needs.publishToPackagist.outputs.published == 'true' || needs.publishToPackagist.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ (needs.publishToPackagist.outputs.published == 'true' || needs.publishToPackagist.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:
@@ -246,6 +201,7 @@ jobs:
       - name: Create GitHub release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_SHA: ${{ github.sha }}
           PACKAGE_NAME: ${{ needs.publishToPackagist.outputs.name }}
           PACKAGE_VERSION: ${{ needs.publishToPackagist.outputs.version }}
         run: |
@@ -256,5 +212,6 @@ jobs:
             exit 0
           fi
           gh release create "$TAG" \
+            --target "$RELEASE_SHA" \
             --title "[PHP] $PACKAGE_VERSION" \
             --notes "https://packagist.org/packages/$PACKAGE_NAME"

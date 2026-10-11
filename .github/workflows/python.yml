@@ -1,24 +1,16 @@
 name: python
 
 on:
-  push:
-    branches: main
-    paths:
-      - 'python/**'
-      - 'docs/protocol/**'
-      - '.github/workflows/python.yml'
-  pull_request:
-    paths:
-      - 'python/**'
-      - 'docs/protocol/**'
-      - '.github/workflows/python.yml'
-  workflow_dispatch:
+  workflow_call:
     inputs:
       verbose:
         description: 'Print extra diagnostics (never secret values)'
         type: boolean
         required: false
         default: false
+    secrets:
+      PYPI_TOKEN:
+        required: false
 
 permissions:
   contents: read
@@ -32,50 +24,12 @@ defaults:
     working-directory: python
 
 jobs:
-  findChangedPythonFiles:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
-    outputs:
-      isPythonFilesChanged: ${{ steps.setIsPythonFilesChangedOutput.outputs.isPythonFilesChanged }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v47.0.6
-      - name: Set output isPythonFilesChanged
-        id: setIsPythonFilesChangedOutput
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: |
-          isPythonFilesChanged='false'
-          # workflow_dispatch has no diff to inspect, so treat it as "changed".
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            isPythonFilesChanged='true'
-          fi
-          echo "Changed files: $ALL_CHANGED_FILES"
-          for changedFile in $ALL_CHANGED_FILES; do
-            if [[ $changedFile == python/* ]] || [[ $changedFile == docs/protocol/* ]] || [[ $changedFile == .github/workflows/python.yml ]]; then
-              isPythonFilesChanged='true'
-              break
-            fi
-          done
-          echo "isPythonFilesChanged=${isPythonFilesChanged}" >> "$GITHUB_OUTPUT"
-          echo "isPythonFilesChanged: ${isPythonFilesChanged}"
-
   lint:
-    needs: [findChangedPythonFiles]
-    if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-lint
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-python-${{ github.ref }}-lint
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -97,13 +51,12 @@ jobs:
         run: flake8 --max-line-length=120
 
   test:
-    needs: [findChangedPythonFiles, lint]
-    if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' }}
+    needs: [lint]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-test
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-python-${{ github.ref }}-test
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -125,13 +78,13 @@ jobs:
         run: pytest -v
 
   publishToPyPI:
-    needs: [findChangedPythonFiles, test]
-    if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: [test]
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-24.04
     # Must outlast the 10 minute registry wait below plus the build.
     timeout-minutes: 25
     concurrency:
-      group: ${{ github.workflow }}-publish-pypi
+      group: ci-python-publish-pypi
       cancel-in-progress: false
     permissions:
       contents: read
@@ -226,9 +179,9 @@ jobs:
   publishRelease:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
-    needs: [findChangedPythonFiles, publishToPyPI]
+    needs: [publishToPyPI]
     # See csharp.yml: gate on what was published, not on the job result.
-    if: ${{ needs.findChangedPythonFiles.outputs.isPythonFilesChanged == 'true' && (needs.publishToPyPI.outputs.published == 'true' || needs.publishToPyPI.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ (needs.publishToPyPI.outputs.published == 'true' || needs.publishToPyPI.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     permissions:
       contents: write
     steps:
@@ -239,6 +192,7 @@ jobs:
       - name: Create GitHub release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_SHA: ${{ github.sha }}
           PACKAGE_NAME: ${{ needs.publishToPyPI.outputs.name }}
           PACKAGE_VERSION: ${{ needs.publishToPyPI.outputs.version }}
         run: |
@@ -249,5 +203,6 @@ jobs:
             exit 0
           fi
           gh release create "$TAG" \
+            --target "$RELEASE_SHA" \
             --title "[Python] $PACKAGE_VERSION" \
             --notes "https://pypi.org/project/$PACKAGE_NAME/$PACKAGE_VERSION/"
