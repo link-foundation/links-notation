@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  seven-languages:
+  eight-languages:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -51,7 +51,8 @@ jobs:
           php-version: '8.4'
           extensions: mbstring
           tools: composer
+      # CMake and GCC come with the runner image and build the C++ example.
       - name: Install PHP autoloader
         run: composer install --working-dir=php --no-dev --no-interaction
-      - name: Compare bytes and decoded text in all seven languages
+      - name: Compare bytes and decoded text in all eight languages
         run: bash examples/binary/run-interop.sh

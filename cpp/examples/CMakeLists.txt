@@ -7,7 +7,12 @@ foreach(source ${LINKS_NOTATION_EXAMPLE_SOURCES})
     target_compile_options(${name} PRIVATE /utf-8)
   endif()
   if(LINKS_NOTATION_BUILD_TESTS)
-    # Each example checks what it prints, so running it is a test.
-    add_test(NAME example_${name} COMMAND ${name})
+    # Each example checks what it prints, so running it is a test. The binary
+    # example reads the corpus that every language's binary example shares.
+    if(name STREQUAL "binary_lino")
+      add_test(NAME example_${name} COMMAND ${name} "${PROJECT_SOURCE_DIR}/../examples/binary/corpus.txt")
+    else()
+      add_test(NAME example_${name} COMMAND ${name})
+    endif()
   endif()
 endforeach()

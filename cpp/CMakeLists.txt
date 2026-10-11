@@ -103,11 +103,16 @@ install(FILES
   "${CMAKE_CURRENT_BINARY_DIR}/links_notationConfigVersion.cmake"
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/links_notation)
 
+# Enabled first: the examples register themselves as tests, and add_test is
+# ignored in directories added before enable_testing.
+if(LINKS_NOTATION_BUILD_TESTS)
+  enable_testing()
+endif()
+
 if(LINKS_NOTATION_BUILD_EXAMPLES)
   add_subdirectory(examples)
 endif()
 
 if(LINKS_NOTATION_BUILD_TESTS)
-  enable_testing()
   add_subdirectory(tests)
 endif()
