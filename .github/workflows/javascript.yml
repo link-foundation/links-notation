@@ -108,6 +108,8 @@ jobs:
           bun test experiments/issue-339/ci-contract.test.mjs
           node scripts/ci/check-parity.mjs
           node scripts/version-consistency.mjs
+          node scripts/ci/php-distribution.mjs
           node --test experiments/issue-339/parity-contract.test.mjs
           node --test experiments/issue-339/release-audit.test.mjs
+          node --test experiments/issue-339/php-distribution.test.mjs
           python3 experiments/issue-339/test_workflow_contract.py

@@ -33,6 +33,8 @@ node scripts/ci/check-parity.mjs
 node --test experiments/issue-339/parity-contract.test.mjs experiments/issue-339/release-audit.test.mjs
 python3 experiments/issue-339/test_workflow_contract.py
 node scripts/version-consistency.mjs
+node scripts/ci/php-distribution.mjs
+node --test experiments/issue-339/php-distribution.test.mjs
 python3 experiments/issue-332/test_test_comparison.py
 node scripts/create-test-case-comparison.mjs --check
 ```
@@ -47,7 +49,11 @@ For native checks use the commands in the reusable workflows: `pytest` and
 Black/isort/flake8 for Python, `go test ./...` and `go vet ./...` for Go,
 `mvn test`, `bash format.sh --check` and `mvn spotless:check` for Java,
 `dotnet test --configuration Release` and `dotnet format --verify-no-changes`
-for C#, and `composer run-script test` / `lint` for PHP. Workflow changes also
+for C#, and `composer run-script test` / `lint` for PHP. PHP distribution changes
+also require `python3 experiments/issue-339/test_php_distribution.py` from the
+root, using PHP 8.4+ and Composer. Refresh root metadata after changing
+`php/composer.json` with `node scripts/ci/php-distribution.mjs --write`.
+Workflow changes also
 require actionlint with shellcheck on PATH, `shellcheck -x scripts/ci/*.sh`,
 `bash scripts/ci/registry-probe.test.sh`, and the zizmor command in
 `.github/workflows/workflows.yml`. After adding tests, regenerate the comparison

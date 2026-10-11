@@ -74,3 +74,5 @@ jobs:
         run: composer install --prefer-dist --no-progress
       - name: Run tests
         run: composer run-script test
+      - name: Verify tagged monorepo installation and autoloading
+        run: python3 ../experiments/issue-339/test_php_distribution.py

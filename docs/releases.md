@@ -46,8 +46,25 @@ the case study records provider setup as an unresolved delivery requirement. Do
 not invent a token, create an unverified release, or substitute a GitHub asset
 for Maven Central/Packagist publication.
 
-After provider setup, rerun the main CI run. Existing exact versions are
-verified and reused, failed providers retry, and missing GitHub releases are
+PHP's root `composer.json` is the distribution descriptor: its autoload paths
+point to `php/src/`, and Composer infers versions from tags. Development metadata
+stays in `php/composer.json`. The JS gate checks that runtime metadata matches;
+refresh it with `node scripts/ci/php-distribution.mjs --write`. Native PHP CI
+installs a tagged temporary monorepo without external registries and exercises
+the installed parser through Composer's autoloader.
+
+After the root descriptor is on main, submit this repository once to Packagist
+and configure its two credentials. A dev-only registration is sufficient. The
+publisher creates a bare `VERSION` tag at the gated SHA before the update call,
+then verifies the stable version and creates the existing `php_VERSION` GitHub
+release. An existing Composer tag at another commit fails; bump the version
+instead of changing an immutable tag. `php_VERSION` alone is not a Composer
+version tag. See
+[Packagist's requirements](https://packagist.org/about) and
+[Composer version tags](https://getcomposer.org/doc/articles/versions.md).
+
+After provider setup, rerun the main CI run. Existing versions
+are verified and reused, failed providers retry, and missing GitHub releases are
 backfilled. The final audit checks exact npm/PyPI/crates metadata, NuGet package
 content availability, Go module info, the Java POM/namespace, and Packagist
 version metadata. Any mismatch or missing release is an error. Preserve the
