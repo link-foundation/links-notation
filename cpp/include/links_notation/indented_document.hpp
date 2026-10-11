@@ -33,9 +33,7 @@ struct IndentedEntry {
   std::string parent;
   std::vector<std::string> values;
 
-  bool operator==(const IndentedEntry& other) const {
-    return parent == other.parent && values == other.values;
-  }
+  bool operator==(const IndentedEntry& other) const { return parent == other.parent && values == other.values; }
   bool operator!=(const IndentedEntry& other) const { return !(*this == other); }
 };
 

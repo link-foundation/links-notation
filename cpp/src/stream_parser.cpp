@@ -123,8 +123,8 @@ std::vector<Link> StreamParser::write(std::string_view chunk) {
     }
 
     if (buffer_.size() + current_line_.size() > max_buffer_size_) {
-      fail(StreamParseError(
-          "buffered record exceeds maximum size of " + std::to_string(max_buffer_size_) + " bytes", position()));
+      fail(StreamParseError("buffered record exceeds maximum size of " + std::to_string(max_buffer_size_) + " bytes",
+                            position()));
     }
   }
   return emitted;
@@ -215,8 +215,7 @@ void StreamParser::fail(const StreamParseError& error) {
   throw error;
 }
 
-ChunkedLinks::ChunkedLinks(ChunkSource source, ParserOptions options)
-    : source_(std::move(source)), parser_(options) {
+ChunkedLinks::ChunkedLinks(ChunkSource source, ParserOptions options) : source_(std::move(source)), parser_(options) {
   parser_.set_collect(false);
 }
 

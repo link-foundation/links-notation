@@ -59,31 +59,38 @@ TEST(MultiQuoteParserTests, TestBacktickQuotedMultiline) {
 }
 
 TEST(MultiQuoteParserTests, TestBacktickQuotedWithEscapedBacktick) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("`text with `` escaped backtick`")), std::optional<std::string>("text with ` escaped backtick"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("`text with `` escaped backtick`")),
+            std::optional<std::string>("text with ` escaped backtick"));
 }
 
 TEST(MultiQuoteParserTests, TestSingleQuoteWithEscapedSingleQuote) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("'text with '' escaped quote'")), std::optional<std::string>("text with ' escaped quote"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("'text with '' escaped quote'")),
+            std::optional<std::string>("text with ' escaped quote"));
 }
 
 TEST(MultiQuoteParserTests, TestDoubleQuoteWithEscapedDoubleQuote) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"text with \"\" escaped quote\"")), std::optional<std::string>("text with \" escaped quote"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"text with \"\" escaped quote\"")),
+            std::optional<std::string>("text with \" escaped quote"));
 }
 
 TEST(MultiQuoteParserTests, TestDoubleDoubleQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"double double quotes\"\"")), std::optional<std::string>("double double quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"double double quotes\"\"")),
+            std::optional<std::string>("double double quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestDoubleDoubleQuotesWithSingleQuoteInside) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"text with \" inside\"\"")), std::optional<std::string>("text with \" inside"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"text with \" inside\"\"")),
+            std::optional<std::string>("text with \" inside"));
 }
 
 TEST(MultiQuoteParserTests, TestDoubleDoubleQuotesWithEscape) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"text with \"\"\"\" escaped double\"\"")), std::optional<std::string>("text with \"\" escaped double"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"text with \"\"\"\" escaped double\"\"")),
+            std::optional<std::string>("text with \"\" escaped double"));
 }
 
 TEST(MultiQuoteParserTests, TestDoubleSingleQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("''double single quotes''")), std::optional<std::string>("double single quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("''double single quotes''")),
+            std::optional<std::string>("double single quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestDoubleSingleQuotesWithSingleQuoteInside) {
@@ -91,11 +98,13 @@ TEST(MultiQuoteParserTests, TestDoubleSingleQuotesWithSingleQuoteInside) {
 }
 
 TEST(MultiQuoteParserTests, TestDoubleSingleQuotesWithEscape) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("''text with '''' escaped single''")), std::optional<std::string>("text with '' escaped single"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("''text with '''' escaped single''")),
+            std::optional<std::string>("text with '' escaped single"));
 }
 
 TEST(MultiQuoteParserTests, TestDoubleBacktickQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("``double backtick quotes``")), std::optional<std::string>("double backtick quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("``double backtick quotes``")),
+            std::optional<std::string>("double backtick quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestDoubleBacktickQuotesWithBacktickInside) {
@@ -103,75 +112,93 @@ TEST(MultiQuoteParserTests, TestDoubleBacktickQuotesWithBacktickInside) {
 }
 
 TEST(MultiQuoteParserTests, TestDoubleBacktickQuotesWithEscape) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("``text with ```` escaped backtick``")), std::optional<std::string>("text with `` escaped backtick"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("``text with ```` escaped backtick``")),
+            std::optional<std::string>("text with `` escaped backtick"));
 }
 
 TEST(MultiQuoteParserTests, TestTripleDoubleQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"triple double quotes\"\"\"")), std::optional<std::string>("triple double quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"triple double quotes\"\"\"")),
+            std::optional<std::string>("triple double quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestTripleDoubleQuotesWithDoubleQuoteInside) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"text with \"\" inside\"\"\"")), std::optional<std::string>("text with \"\" inside"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"text with \"\" inside\"\"\"")),
+            std::optional<std::string>("text with \"\" inside"));
 }
 
 TEST(MultiQuoteParserTests, TestTripleDoubleQuotesWithEscape) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"text with \"\"\"\"\"\" escaped triple\"\"\"")), std::optional<std::string>("text with \"\"\" escaped triple"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"text with \"\"\"\"\"\" escaped triple\"\"\"")),
+            std::optional<std::string>("text with \"\"\" escaped triple"));
 }
 
 TEST(MultiQuoteParserTests, TestTripleSingleQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("'''triple single quotes'''")), std::optional<std::string>("triple single quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("'''triple single quotes'''")),
+            std::optional<std::string>("triple single quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestTripleSingleQuotesWithDoubleQuoteInside) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("'''text with '' inside'''")), std::optional<std::string>("text with '' inside"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("'''text with '' inside'''")),
+            std::optional<std::string>("text with '' inside"));
 }
 
 TEST(MultiQuoteParserTests, TestTripleSingleQuotesWithEscape) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("'''text with '''''' escaped triple'''")), std::optional<std::string>("text with ''' escaped triple"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("'''text with '''''' escaped triple'''")),
+            std::optional<std::string>("text with ''' escaped triple"));
 }
 
 TEST(MultiQuoteParserTests, TestTripleBacktickQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("```triple backtick quotes```")), std::optional<std::string>("triple backtick quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("```triple backtick quotes```")),
+            std::optional<std::string>("triple backtick quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestTripleBacktickQuotesWithDoubleBacktickInside) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("```text with `` inside```")), std::optional<std::string>("text with `` inside"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("```text with `` inside```")),
+            std::optional<std::string>("text with `` inside"));
 }
 
 TEST(MultiQuoteParserTests, TestTripleBacktickQuotesWithEscape) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("```text with `````` escaped triple```")), std::optional<std::string>("text with ``` escaped triple"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("```text with `````` escaped triple```")),
+            std::optional<std::string>("text with ``` escaped triple"));
 }
 
 TEST(MultiQuoteParserTests, TestQuadrupleDoubleQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"quadruple double quotes\"\"\"\"")), std::optional<std::string>("quadruple double quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"quadruple double quotes\"\"\"\"")),
+            std::optional<std::string>("quadruple double quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestQuadrupleDoubleQuotesWithTripleQuoteInside) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"text with \"\"\" inside\"\"\"\"")), std::optional<std::string>("text with \"\"\" inside"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"text with \"\"\" inside\"\"\"\"")),
+            std::optional<std::string>("text with \"\"\" inside"));
 }
 
 TEST(MultiQuoteParserTests, TestQuadrupleSingleQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("''''quadruple single quotes''''")), std::optional<std::string>("quadruple single quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("''''quadruple single quotes''''")),
+            std::optional<std::string>("quadruple single quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestQuadrupleBacktickQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("````quadruple backtick quotes````")), std::optional<std::string>("quadruple backtick quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("````quadruple backtick quotes````")),
+            std::optional<std::string>("quadruple backtick quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestQuintupleDoubleQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"\"quintuple double quotes\"\"\"\"\"")), std::optional<std::string>("quintuple double quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"\"quintuple double quotes\"\"\"\"\"")),
+            std::optional<std::string>("quintuple double quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestQuintupleDoubleQuotesWithQuadQuoteInside) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"\"text with \"\"\"\" inside\"\"\"\"\"")), std::optional<std::string>("text with \"\"\"\" inside"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"\"text with \"\"\"\" inside\"\"\"\"\"")),
+            std::optional<std::string>("text with \"\"\"\" inside"));
 }
 
 TEST(MultiQuoteParserTests, TestQuintupleSingleQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("'''''quintuple single quotes'''''")), std::optional<std::string>("quintuple single quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("'''''quintuple single quotes'''''")),
+            std::optional<std::string>("quintuple single quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestQuintupleBacktickQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("`````quintuple backtick quotes`````")), std::optional<std::string>("quintuple backtick quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("`````quintuple backtick quotes`````")),
+            std::optional<std::string>("quintuple backtick quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestMixedQuotesInLink) {
@@ -206,11 +233,13 @@ TEST(MultiQuoteParserTests, TestCodeBlockLikeContent) {
 }
 
 TEST(MultiQuoteParserTests, TestNestedQuotesInMarkdown) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("``Use `code` in markdown``")), std::optional<std::string>("Use `code` in markdown"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("``Use `code` in markdown``")),
+            std::optional<std::string>("Use `code` in markdown"));
 }
 
 TEST(MultiQuoteParserTests, TestJsonStringWithQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"{ \"key\": \"value\"}\"\"")), std::optional<std::string>("{ \"key\": \"value\"}"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"{ \"key\": \"value\"}\"\"")),
+            std::optional<std::string>("{ \"key\": \"value\"}"));
 }
 
 TEST(MultiQuoteParserTests, TestWhitespacePreservedInQuotes) {
@@ -232,17 +261,21 @@ TEST(MultiQuoteParserTests, TestUnlimitedQuotes6) {
 }
 
 TEST(MultiQuoteParserTests, TestUnlimitedQuotes10) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"\"\"\"\"\"\"very deeply quoted\"\"\"\"\"\"\"\"\"\"")), std::optional<std::string>("very deeply quoted"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"\"\"\"\"\"\"very deeply quoted\"\"\"\"\"\"\"\"\"\"")),
+            std::optional<std::string>("very deeply quoted"));
 }
 
 TEST(MultiQuoteParserTests, TestUnlimitedQuotes6WithInnerQuotes) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"\"\"hello with \"\"\"\"\" five quotes inside\"\"\"\"\"\"")), std::optional<std::string>("hello with \"\"\"\"\" five quotes inside"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("\"\"\"\"\"\"hello with \"\"\"\"\" five quotes inside\"\"\"\"\"\"")),
+            std::optional<std::string>("hello with \"\"\"\"\" five quotes inside"));
 }
 
 TEST(MultiQuoteParserTests, TestUnlimitedSingleQuotes7) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("'''''''seven single quotes'''''''")), std::optional<std::string>("seven single quotes"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("'''''''seven single quotes'''''''")),
+            std::optional<std::string>("seven single quotes"));
 }
 
 TEST(MultiQuoteParserTests, TestUnlimitedBackticks8) {
-  EXPECT_EQ(get_single_ref_id(parse_lino("````````eight backticks````````")), std::optional<std::string>("eight backticks"));
+  EXPECT_EQ(get_single_ref_id(parse_lino("````````eight backticks````````")),
+            std::optional<std::string>("eight backticks"));
 }

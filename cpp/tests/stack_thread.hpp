@@ -57,8 +57,8 @@ inline void* stack_thread_entry(void* argument) {
 inline void run_on_stack(std::size_t stack_size, const std::function<void()>& work) {
   detail::StackThreadState state{&work, nullptr};
 #ifdef _WIN32
-  HANDLE thread = CreateThread(nullptr, stack_size, detail::stack_thread_entry, &state,
-                               STACK_SIZE_PARAM_IS_A_RESERVATION, nullptr);
+  HANDLE thread =
+      CreateThread(nullptr, stack_size, detail::stack_thread_entry, &state, STACK_SIZE_PARAM_IS_A_RESERVATION, nullptr);
   if (thread == nullptr) throw std::runtime_error("cannot start a thread");
   WaitForSingleObject(thread, INFINITE);
   CloseHandle(thread);

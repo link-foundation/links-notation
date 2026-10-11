@@ -43,9 +43,7 @@ struct PacketLink {
   std::uint64_t address = 0;
   std::vector<Reference> references;
 
-  bool operator==(const PacketLink& other) const {
-    return address == other.address && references == other.references;
-  }
+  bool operator==(const PacketLink& other) const { return address == other.address && references == other.references; }
   bool operator!=(const PacketLink& other) const { return !(*this == other); }
 };
 
@@ -141,8 +139,7 @@ struct BinaryLinoOptions {
 class BinaryLinoCodec {
  public:
   BinaryLinoCodec() = default;
-  explicit BinaryLinoCodec(BinaryLinoOptions options, DecodeLimits limits = {})
-      : options(options), limits(limits) {}
+  explicit BinaryLinoCodec(BinaryLinoOptions options, DecodeLimits limits = {}) : options(options), limits(limits) {}
 
   BinaryLinoOptions options;
   DecodeLimits limits;

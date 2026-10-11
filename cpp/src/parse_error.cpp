@@ -37,8 +37,7 @@ std::pair<std::string, std::size_t> quote_line(const std::string& line, std::siz
 
   const std::size_t target = column - 1;
   const std::size_t last_start = characters.size() - quoted_line_width;
-  const std::size_t start =
-      std::min(target > quoted_line_width / 2 ? target - quoted_line_width / 2 : 0, last_start);
+  const std::size_t start = std::min(target > quoted_line_width / 2 ? target - quoted_line_width / 2 : 0, last_start);
   const std::size_t end = start + quoted_line_width;
 
   std::string quoted;
@@ -52,8 +51,8 @@ std::pair<std::string, std::size_t> quote_line(const std::string& line, std::siz
   return {quoted, target - start + shift + 1};
 }
 
-std::string summary_of(std::size_t line, std::size_t column, const std::vector<std::string>& expected,
-                       bool has_found, char32_t found_code_point, std::optional<std::size_t> max_depth) {
+std::string summary_of(std::size_t line, std::size_t column, const std::vector<std::string>& expected, bool has_found,
+                       char32_t found_code_point, std::optional<std::size_t> max_depth) {
   const std::string position = "line " + std::to_string(line) + ", column " + std::to_string(column) + ": ";
   if (max_depth) return position + "nesting depth exceeds the maximum of " + std::to_string(*max_depth);
   const std::string found = has_found ? "\"" + detail::escape_debug(found_code_point) + "\"" : "end of input";
@@ -101,7 +100,7 @@ ParseError::Location ParseError::locate(const std::string& document, std::size_t
     found = document.substr(offset, decoded.length);
     found_code_point = decoded.code_point;
   }
-  return Location{offset, line, column, std::move(found), document.substr(line_start, line_end - line_start),
+  return Location{offset,          line, column, std::move(found), document.substr(line_start, line_end - line_start),
                   found_code_point};
 }
 

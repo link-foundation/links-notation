@@ -63,8 +63,7 @@ std::optional<Decoded> decode_strict_at(std::string_view text, std::size_t posit
     if (!is_continuation(next)) return std::nullopt;
     code_point = (code_point << 6U) | (next & 0x3FU);
   }
-  if (code_point < minimum || code_point > 0x10FFFF ||
-      (code_point >= 0xD800 && code_point <= 0xDFFF)) {
+  if (code_point < minimum || code_point > 0x10FFFF || (code_point >= 0xD800 && code_point <= 0xDFFF)) {
     return std::nullopt;
   }
   return Decoded{code_point, length};
@@ -114,10 +113,9 @@ std::size_t count_code_points(std::string_view text) {
 }
 
 bool is_white_space(char32_t code_point) {
-  return (code_point >= 0x09 && code_point <= 0x0D) || code_point == 0x20 || code_point == 0x85 ||
-         code_point == 0xA0 || code_point == 0x1680 || (code_point >= 0x2000 && code_point <= 0x200A) ||
-         code_point == 0x2028 || code_point == 0x2029 || code_point == 0x202F || code_point == 0x205F ||
-         code_point == 0x3000;
+  return (code_point >= 0x09 && code_point <= 0x0D) || code_point == 0x20 || code_point == 0x85 || code_point == 0xA0 ||
+         code_point == 0x1680 || (code_point >= 0x2000 && code_point <= 0x200A) || code_point == 0x2028 ||
+         code_point == 0x2029 || code_point == 0x202F || code_point == 0x205F || code_point == 0x3000;
 }
 
 bool has_control_character(std::string_view text) {

@@ -63,13 +63,9 @@ TEST(NestedIndentationTests, SingleLineParenthesesAreUnchanged) {
   expect_format("()", "()");
 }
 
-TEST(NestedIndentationTests, ParenthesesWithIndentedIdSyntax) {
-  expect_format("(\n  a:\n    b\n    c\n)", "(a: b c)");
-}
+TEST(NestedIndentationTests, ParenthesesWithIndentedIdSyntax) { expect_format("(\n  a:\n    b\n    c\n)", "(a: b c)"); }
 
-TEST(NestedIndentationTests, BlankLinesInsideParenthesesAreSkipped) {
-  expect_format("(\n  a\n\n  b\n)", "((a) (b))");
-}
+TEST(NestedIndentationTests, BlankLinesInsideParenthesesAreSkipped) { expect_format("(\n  a\n\n  b\n)", "((a) (b))"); }
 
 TEST(NestedIndentationTests, EmployeeRecordsKeepTheirFields) {
   const std::string source =

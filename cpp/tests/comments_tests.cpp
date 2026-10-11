@@ -78,13 +78,9 @@ TEST(CommentsTests, ACommentLineInsideAGroupIsSkipped) {
 
 TEST(CommentsTests, ADocumentOfCommentsAloneHoldsNoLinks) { expect_parses_as("# one\n# two\n", ""); }
 
-TEST(CommentsTests, AHashInsideATokenIsAnOrdinaryCharacter) {
-  expect_parses_as("issue#1047\n", "(<issue#1047>)");
-}
+TEST(CommentsTests, AHashInsideATokenIsAnOrdinaryCharacter) { expect_parses_as("issue#1047\n", "(<issue#1047>)"); }
 
-TEST(CommentsTests, AHashThatOpensATokenIsAnOrdinaryCharacter) {
-  expect_parses_as("a: b#c\n", "(<a>: <b#c>)");
-}
+TEST(CommentsTests, AHashThatOpensATokenIsAnOrdinaryCharacter) { expect_parses_as("a: b#c\n", "(<a>: <b#c>)"); }
 
 TEST(CommentsTests, AHashInsideADelimitedReferenceIsContent) {
   expect_parses_as("\"# not a comment\" a\n", "(<# not a comment> <a>)");

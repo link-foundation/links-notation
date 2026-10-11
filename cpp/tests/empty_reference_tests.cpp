@@ -34,9 +34,7 @@ std::string rendered(const std::string& input) {
 
 }  // namespace
 
-TEST(EmptyReferenceTests, BareDelimiterPairIsTheEmptyReference) {
-  EXPECT_EQ(rendered(R"((a "" b))"), "(<a> <> <b>)");
-}
+TEST(EmptyReferenceTests, BareDelimiterPairIsTheEmptyReference) { EXPECT_EQ(rendered(R"((a "" b))"), "(<a> <> <b>)"); }
 
 TEST(EmptyReferenceTests, EveryDelimiterStyleYieldsTheSameEmptyReference) {
   EXPECT_EQ(rendered(R"((a "" b))"), "(<a> <> <b>)");
@@ -74,9 +72,7 @@ TEST(EmptyReferenceTests, NQuoteDelimitedBodiesAreUnchanged) {
   EXPECT_EQ(rendered(R"((a """" b))"), "(<a> <> <b>)");
 }
 
-TEST(EmptyReferenceTests, ASingleSpaceStillReadsAsASpace) {
-  EXPECT_EQ(rendered(R"((a " " b))"), "(<a> < > <b>)");
-}
+TEST(EmptyReferenceTests, ASingleSpaceStillReadsAsASpace) { EXPECT_EQ(rendered(R"((a " " b))"), "(<a> < > <b>)"); }
 
 TEST(EmptyReferenceTests, EmptyReferenceSurvivesARoundTrip) {
   for (const std::string input :

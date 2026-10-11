@@ -42,7 +42,8 @@ TEST(SharedTextParityTests, SharedTextParity) {
     StreamParser stream;
     for (std::size_t position = 0; position < input.size();) {
       std::size_t length = 1;
-      while (position + length < input.size() && (static_cast<unsigned char>(input[position + length]) & 0xC0) == 0x80) {
+      while (position + length < input.size() &&
+             (static_cast<unsigned char>(input[position + length]) & 0xC0) == 0x80) {
         ++length;
       }
       stream.write(std::string_view(input).substr(position, length));

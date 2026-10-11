@@ -44,7 +44,8 @@ TEST(IndentationConsistencyTests, TestTwoSpacesVsFourSpacesIndentation) {
       "TELEGRAM_BOT_TOKEN: '849...355:AAG...rgk_YZk...aPU'\nTELEGRAM_ALLOWED_CHATS:\n    -1002975819706\n    "
       "-1002861722681\nTELEGRAM_HIVE_OVERRIDES:\n    --all-issues\n    --once\n    --auto-fork\n    "
       "--skip-issues-with-prs\n    --attach-logs\n    --verbose\n    --no-tool-check\nTELEGRAM_SOLVE_OVERRIDES:\n    "
-      "--auto-fork\n    --auto-continue\n    --attach-logs\n    --verbose\n    --no-tool-check\nTELEGRAM_BOT_VERBOSE: true";
+      "--auto-fork\n    --auto-continue\n    --attach-logs\n    --verbose\n    --no-tool-check\nTELEGRAM_BOT_VERBOSE: "
+      "true";
   expect_same_formatting(two_spaces, four_spaces);
 }
 

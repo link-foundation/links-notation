@@ -22,7 +22,9 @@ std::vector<std::string> fixtures() {
 }
 
 /// A link with an id and values.
-Link link(const std::string& id, std::vector<Link> values) { return Link(std::optional<std::string>(id), std::move(values)); }
+Link link(const std::string& id, std::vector<Link> values) {
+  return Link(std::optional<std::string>(id), std::move(values));
+}
 
 }  // namespace
 

@@ -115,8 +115,7 @@ void validate(const LinksPacket& packet, const DecodeLimits& limits) {
       references = add(references, link.size());
       demand(references <= limits.max_references, "too many references");
       for (const Reference& reference : link) {
-        demand(reference_width(reference, packet.external_references) <= section.width,
-               "reference outside width");
+        demand(reference_width(reference, packet.external_references) <= section.width, "reference outside width");
       }
     }
   }
@@ -139,8 +138,8 @@ std::vector<std::uint8_t> packet_bytes(const LinksPacket& packet, const DecodeLi
   bool compact = packet.sections.empty();
   if (packet.sections.size() == 1) {
     const Section& section = packet.sections[0];
-    compact = section.gap == 5 && section.arity.normalized().min == 2 && section.arity.is_fixed() &&
-              !section.links.empty();
+    compact =
+        section.gap == 5 && section.arity.normalized().min == 2 && section.arity.is_fixed() && !section.links.empty();
   }
   if (compact) {
     std::uint8_t width = 1;
@@ -399,9 +398,7 @@ struct Node {
   char kind;
   u64 value;
 
-  bool operator<(const Node& other) const {
-    return kind != other.kind ? kind < other.kind : value < other.value;
-  }
+  bool operator<(const Node& other) const { return kind != other.kind ? kind < other.kind : value < other.value; }
 };
 
 class Encoder {
@@ -610,8 +607,7 @@ class Decoder {
           std::string value;
           for (const Reference& element : elements) {
             const u64 code_point = number(element);
-            demand(code_point <= 0x10FFFF && !(code_point >= 0xD800 && code_point <= 0xDFFF),
-                   "invalid Unicode scalar");
+            demand(code_point <= 0x10FFFF && !(code_point >= 0xD800 && code_point <= 0xDFFF), "invalid Unicode scalar");
             const std::size_t length = code_point < 0x80 ? 1 : code_point < 0x800 ? 2 : code_point < 0x10000 ? 3 : 4;
             demand(length <= strings_ - value.size(), "string budget exceeded");
             detail::append_utf8(value, static_cast<char32_t>(code_point));
@@ -736,6 +732,9 @@ std::optional<LinksPacket> LinksPacket::read_from(std::istream& in, const Decode
   return read_packet(
       [&in](std::uint8_t& byte) {
         const auto character = in.get();
+        // A stream that failed to read is not one that ended: istream::get
+        // swallows the exception and sets badbit.
+        demand(!in.bad(), "read failed");
         if (character == std::istream::traits_type::eof()) return false;
         byte = static_cast<std::uint8_t>(character);
         return true;

@@ -35,8 +35,7 @@ bool is_substantive_body(std::string_view content) {
 
 // The reading of a reference opened by `count` delimiters at the start of
 // `rest`, closed by the run that ends at `end` when there is one.
-std::optional<Reading> reading(std::string_view rest, char quote, std::size_t count,
-                               std::optional<std::size_t> end) {
+std::optional<Reading> reading(std::string_view rest, char quote, std::size_t count, std::optional<std::size_t> end) {
   std::optional<Reading> empty_reference;
   if (count % 2 == 0) empty_reference = Reading{std::string(), count};
   if (!end) return empty_reference;

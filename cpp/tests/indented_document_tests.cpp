@@ -103,11 +103,26 @@ TEST(IndentedDocumentTests, FormatTheIssueDocumentWithTwoSpaceIndentationAndAFin
 }
 
 TEST(IndentedDocumentTests, EmptyTextExactWhitespaceCommentsQuotesAndMultilineTextSurvive) {
-  for (const std::string text : {"", " ", "  leading", "trailing  ", "two  spaces", "a\tb", "# question",
-                                 "text # literal", "issue#333", "Question: (details)", "`backticks`",
-                                 "\"double\" and 'single'", "'starts with both \"quotes\"",
-                                 "\"starts with both 'quotes'", "ends with both '\"", "repeated ''' and \"\"\"",
-                                 "literal \\n and \\'", "line one\n  line two", "carriage\rreturn", "Windows\r\nline",
+  for (const std::string text : {"",
+                                 " ",
+                                 "  leading",
+                                 "trailing  ",
+                                 "two  spaces",
+                                 "a\tb",
+                                 "# question",
+                                 "text # literal",
+                                 "issue#333",
+                                 "Question: (details)",
+                                 "`backticks`",
+                                 "\"double\" and 'single'",
+                                 "'starts with both \"quotes\"",
+                                 "\"starts with both 'quotes'",
+                                 "ends with both '\"",
+                                 "repeated ''' and \"\"\"",
+                                 "literal \\n and \\'",
+                                 "line one\n  line two",
+                                 "carriage\rreturn",
+                                 "Windows\r\nline",
                                  "Привет 🌍"}) {
     const std::string escaped = escape_reference(text, true);
     EXPECT_EQ(unescape_reference(escaped), text) << escaped;

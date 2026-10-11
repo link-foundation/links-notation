@@ -98,8 +98,7 @@ TEST(NestingDepthTests, ClosedGroupsReadInLinearTime) {
 
 TEST(NestingDepthTests, ValuesAfterGroupsReadInLinearTime) {
   const std::string source = value_after(deep);
-  const std::string formatted =
-      within_budget("values after groups", [source] { return format_links(parse(source)); });
+  const std::string formatted = within_budget("values after groups", [source] { return format_links(parse(source)); });
   EXPECT_EQ(formatted, "(" + source + ")");
 }
 
@@ -137,12 +136,9 @@ TEST(NestingDepthTests, ValuesAfterVeryDeepGroupsReadInLinearTime) {
 
 TEST(NestingDepthTests, GroupFollowedByValuesKeepsItsStructure) {
   const std::vector<std::pair<std::string, std::string>> cases = {
-      {"(a) b", "((a) b)"},
-      {"(a) (b) c", "((a) (b) c)"},
-      {"((a) b) c", "(((a) b) c)"},
-      {"(a: b) c", "((a: b) c)"},
-      {"(a)\n(b) c", "(a)\n((b) c)"},
-      {"x\n  (a) b\n  (c)", "(x)\n((x) ((a) b))\n((x) (c))"},
+      {"(a) b", "((a) b)"},           {"(a) (b) c", "((a) (b) c)"},
+      {"((a) b) c", "(((a) b) c)"},   {"(a: b) c", "((a: b) c)"},
+      {"(a)\n(b) c", "(a)\n((b) c)"}, {"x\n  (a) b\n  (c)", "(x)\n((x) ((a) b))\n((x) (c))"},
   };
   for (const auto& [source, expected] : cases) {
     EXPECT_EQ(format_links(parse(source)), expected) << source;

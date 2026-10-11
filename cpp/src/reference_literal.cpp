@@ -75,8 +75,8 @@ std::string format_reference(std::string_view text) {
   for (std::size_t position = 0; !needs_quoting && position < text.size();) {
     const auto decoded = detail::decode_at(text, position);
     const char32_t c = decoded.code_point;
-    needs_quoting = detail::is_white_space(c) || c == 0xFEFF || c == '(' || c == ')' || c == ':' ||
-                    c == '\'' || c == '"' || c == '`';
+    needs_quoting = detail::is_white_space(c) || c == 0xFEFF || c == '(' || c == ')' || c == ':' || c == '\'' ||
+                    c == '"' || c == '`';
     position += decoded.length;
   }
   if (!needs_quoting) return std::string(text);

@@ -136,9 +136,7 @@ bool Link::equals(const Link& other) const {
   return true;
 }
 
-bool Link::needs_parentheses(std::string_view id) {
-  return id.find_first_of(" :()") != std::string_view::npos;
-}
+bool Link::needs_parentheses(std::string_view id) { return id.find_first_of(" :()") != std::string_view::npos; }
 
 std::string Link::format_value(const Link& value) const {
   // Values of a link combined from an indented path keep their parentheses.

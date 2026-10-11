@@ -1,7 +1,8 @@
+#include "links_notation/references.hpp"
+
 #include <cstddef>
 #include <stdexcept>
 
-#include "links_notation/references.hpp"
 #include "quotes.hpp"
 #include "unicode.hpp"
 
@@ -21,8 +22,7 @@ std::size_t count_of(std::string_view text, char character) {
 bool needs_minimal_quoting(std::string_view reference) {
   // A literal prefix at the start of a word, as /(^| )~[0-9]+\{/ finds it.
   for (std::size_t position = 0; position < reference.size(); ++position) {
-    if ((position == 0 || reference[position - 1] == ' ') &&
-        has_reference_literal_prefix(reference.substr(position))) {
+    if ((position == 0 || reference[position - 1] == ' ') && has_reference_literal_prefix(reference.substr(position))) {
       return true;
     }
   }

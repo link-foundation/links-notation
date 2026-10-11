@@ -50,9 +50,7 @@ Link parse_root(const std::string& source) { return Link(std::nullopt, parse(sou
 
 std::string format_links_multiline(const Link& lino) { return format_lino_multiline(lino, false); }
 
-std::string format_links_multiline_with_less_parentheses(const Link& lino) {
-  return format_lino_multiline(lino, true);
-}
+std::string format_links_multiline_with_less_parentheses(const Link& lino) { return format_lino_multiline(lino, true); }
 
 // Each value of the root on its own line, references in parentheses.
 std::string format_alternate(const Link& root) {
@@ -73,8 +71,7 @@ TEST(MultilineParserTests, TwoLinksTest) {
 }
 
 TEST(MultilineParserTests, ParseAndStringifyTest) {
-  const std::string source =
-      "(papa (lovesMama: loves mama))\n(son lovesMama)\n(daughter lovesMama)\n(all (love mama))";
+  const std::string source = "(papa (lovesMama: loves mama))\n(son lovesMama)\n(daughter lovesMama)\n(all (love mama))";
   EXPECT_EQ(source, format_links_multiline(parse_root(source)));
 }
 

@@ -24,8 +24,7 @@ class Link {
   /// A reference.
   explicit Link(std::string id) : id(std::move(id)) {}
   /// A link with an optional id and its values.
-  Link(std::optional<std::string> id, std::vector<Link> values)
-      : id(std::move(id)), values(std::move(values)) {}
+  Link(std::optional<std::string> id, std::vector<Link> values) : id(std::move(id)), values(std::move(values)) {}
 
   std::optional<std::string> id;
   std::vector<Link> values;
