@@ -8,7 +8,7 @@ import { pathToFileURL } from "node:url";
 const languageNames = ["rust", "python", "java", "go", "csharp", "php"];
 const languageAction = /(?:rust-toolchain|setup-(?:dotnet|java|go|php))/;
 const languageRun =
-  /\b(?:cargo|dotnet|mvn|php|pytest|go\s+(?:test|build|run|vet))\b|(?:python\/|python[23]?\s+-m\s+(?:pytest|unittest|build))/;
+  /\b(?:cargo|dotnet|mvn|php|composer|pytest|go\s+(?:test|build|run|vet))\b|(?:python\/|python[23]?\s+-m\s+(?:pytest|unittest|build))/;
 const nativeDirectory = /^(?:\.\/)?(?:rust|python|java|go|csharp|php)(?:\/|$)/;
 
 export function checkGate(workflows) {
@@ -145,6 +145,9 @@ export function checkGate(workflows) {
         languageNames.some((language) => file === `${language}.yml`) ||
         languageAction.test(body) ||
         languageRun.test(commands) ||
+        nativeDirectory.test(
+          document.defaults?.run?.["working-directory"] ?? "",
+        ) ||
         nativeDirectory.test(job.defaults?.run?.["working-directory"] ?? "") ||
         (job.steps ?? []).some((step) =>
           nativeDirectory.test(step["working-directory"] ?? ""),

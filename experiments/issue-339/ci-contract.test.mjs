@@ -176,3 +176,23 @@ test("provider failures cannot skip the final release audit", () =>
       delete w["js.yml"].jobs.release_audit.if;
     }),
   ).not.toEqual([]));
+
+test("workflow defaults cannot hide a native working directory", () =>
+  expect(
+    mutate((w) => {
+      w["escape.yml"] = {
+        on: { push: {} },
+        defaults: { run: { "working-directory": "python" } },
+        jobs: { probe: { steps: [{ run: "python3 run_tests.py" }] } },
+      };
+    }),
+  ).not.toEqual([]));
+test("a bare Composer command in another workflow requires JS", () =>
+  expect(
+    mutate((w) => {
+      w["escape.yml"] = {
+        on: { push: {} },
+        jobs: { probe: { steps: [{ run: "composer test" }] } },
+      };
+    }),
+  ).not.toEqual([]));
