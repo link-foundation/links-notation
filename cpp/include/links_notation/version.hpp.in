@@ -1,10 +1,12 @@
 #ifndef LINKS_NOTATION_VERSION_HPP
 #define LINKS_NOTATION_VERSION_HPP
 
+// clang-format off: CMake replaces the @-delimited placeholders.
 #define LINKS_NOTATION_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
 #define LINKS_NOTATION_VERSION_MINOR @PROJECT_VERSION_MINOR@
 #define LINKS_NOTATION_VERSION_PATCH @PROJECT_VERSION_PATCH@
 #define LINKS_NOTATION_VERSION_STRING "@PROJECT_VERSION@"
+// clang-format on
 
 namespace links_notation {
 
