@@ -14,6 +14,7 @@ export const languages = [
   "go",
   "csharp",
   "php",
+  "cpp",
 ];
 const sourceRoots = {
   js: ["js/src"],
@@ -23,6 +24,7 @@ const sourceRoots = {
   go: ["go"],
   csharp: ["csharp/Link.Foundation.Links.Notation"],
   php: ["php/src"],
+  cpp: ["cpp/include", "cpp/src"],
 };
 
 export function sourceInventory(language) {
@@ -36,7 +38,7 @@ export function sourceInventory(language) {
       const path = join(directory, entry.name);
       if (entry.isDirectory()) visit(path);
       else if (
-        /\.(?:js|ts|rs|py|java|go|cs|peg|pegjs|php)$/.test(path) &&
+        /\.(?:js|ts|rs|py|java|go|cs|peg|pegjs|php|cpp|hpp|hpp\.in)$/.test(path) &&
         !/_test\.go$/.test(path)
       )
         files.push(relative(root, path));
@@ -59,7 +61,7 @@ export function checkParity(manifest, cases = fixtures, options = {}) {
   const fail = (message) => errors.push(message);
   if (manifest.schemaVersion !== 1) fail("unknown parity schemaVersion");
   if (JSON.stringify(manifest.languages) !== JSON.stringify(languages))
-    fail("all seven languages must be listed");
+    fail("all eight languages must be listed");
   if (!Array.isArray(manifest.features) || !manifest.features.length)
     return [...errors, "features must not be empty"];
   const featureIds = new Set();
@@ -141,7 +143,7 @@ export function checkParity(manifest, cases = fixtures, options = {}) {
     if (!featureIds.has(fixture.feature))
       fail(`${fixture.id}: untracked feature ${fixture.feature}`);
   // A source change requires reviewing the manifest, even if it adds no export.
-  // Hashes cannot prove semantics; the seven native suites prove fixture parity.
+  // Hashes cannot prove semantics; the eight native suites prove fixture parity.
   if (options.checkSources !== false)
     for (const language of languages) {
       if (

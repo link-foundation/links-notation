@@ -58,3 +58,9 @@ test("missing evidence is rejected", () =>
     }).length,
     0,
   ));
+test("a feature without a C++ row fails the gate", () =>
+  assert.ok(
+    mutate((m) => {
+      delete m.features[0].implementations.cpp;
+    }).some((error) => error.endsWith("missing cpp")),
+  ));
