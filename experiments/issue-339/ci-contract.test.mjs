@@ -106,3 +106,30 @@ test("one failed JS check cannot skip another mandatory check", () =>
       w["javascript.yml"].jobs.test.needs = ["lint"];
     }),
   ).not.toEqual([]));
+
+test("Python test commands in another workflow require JS", () => {
+  for (const run of ["pytest", "python3 -m pytest", "python -m pytest"]) {
+    expect(
+      mutate((w) => {
+        w["escape.yml"] = {
+          on: { push: {} },
+          jobs: { probe: { steps: [{ run }] } },
+        };
+      }),
+    ).not.toEqual([]);
+  }
+});
+test("a native working directory cannot hide a language job", () =>
+  expect(
+    mutate((w) => {
+      w["escape.yml"] = {
+        on: { push: {} },
+        jobs: {
+          probe: {
+            defaults: { run: { "working-directory": "python" } },
+            steps: [{ run: "python3 run_tests.py" }],
+          },
+        },
+      };
+    }),
+  ).not.toEqual([]));
