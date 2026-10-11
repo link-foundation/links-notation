@@ -32,15 +32,18 @@
       scripts.
 - [x] Configure and verify main's required-check ruleset after final check names
       are concrete.
-- [ ] Wait for active runs before pushing; push only `issue-339-12b617cefd5b`;
+- [x] Wait for active runs before pushing; push only `issue-339-12b617cefd5b`;
       collect every failure from the latest SHA before any subsequent push.
-- [ ] Download and inspect fresh failing CI logs, fix actual failures, and wait
+- [x] Download and inspect fresh failing CI logs, fix actual failures, and wait
       for completed checks.
-- [ ] Record before/after run counts, runner minutes, time to first green,
+- [x] Record before/after run counts, runner minutes, time to first green,
       per-language results, and limitations without invented measurements.
-- [ ] Merge current default branch into the PR branch if needed, review the
-      complete PR diff for regressions, update PR title/body, mark PR 341 ready,
-      and verify clean git status.
+- [x] Confirm current default branch is included, review the complete PR diff
+      for regressions, update the reviewable PR title/body, and commit all work.
+
+The final head must finish CI before PR 341 is marked ready. That last status
+change and final clean-tree verification are recorded on the linked PR; the
+measurement snapshot stops at the first fully green implementation commit.
 
 All work is tracked in PR
 <https://github.com/link-foundation/links-notation/pull/341>.

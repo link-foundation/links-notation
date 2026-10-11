@@ -1,0 +1,12 @@
+{
+  "run": 38101530465,
+  "sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+  "logs": [
+    {
+      "zip_entry": "0_latest-stable.txt",
+      "file": "run-38101530465-0_latest-stable.log.gz",
+      "bytes": 23045,
+      "sha256": "29af9d4819176917cd1eb52225728490c616ab5798cf0658a041dfcb97dd7e9e"
+    }
+  ]
+}

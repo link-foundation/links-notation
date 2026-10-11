@@ -27,7 +27,7 @@ prepared branch: `d99f425353e7ac56dc6bdb6631ac0877214b4a1e`.
 
 | Issue requirement                                              | Reviewable implementation / evidence                                                                                                                                                                                                             |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| R1: Same-commit JS gate; no failed/cancelled/skipped JS bypass | Six reusable-only language workflows; `needs: [js]` in entry; 22 workflow regressions in `experiments/issue-339/ci-contract.test.mjs`.                                                                                                           |
+| R1: Same-commit JS gate; no failed/cancelled/skipped JS bypass | Six reusable-only language workflows; `needs: [js]` in entry; 24 workflow regressions in `experiments/issue-339/ci-contract.test.mjs`.                                                                                                           |
 | R2: Always run JS lint/test/parity                             | Unfiltered PR/main entry; unconditional format/lint/test/parity jobs; generated Peggy source comparison.                                                                                                                                         |
 | R3: Reject ungated non-JS workflows                            | `scripts/ci/check-js-gate.mjs` parses every workflow, checks reusable callers, toolchain jobs, conditions, checkout refs, and concurrency. Includes security/binary/benchmarks/docs.                                                             |
 | R4: Manifest and shared text corpus in seven libraries         | `parity/language-features.json`, `parity/text-fixtures.json`, generated TSV, native parsing/formatting/round-trip/stream tests. Missing binding/evidence/fixture/inventory fails the checker.                                                    |
@@ -36,7 +36,7 @@ prepared branch: `d99f425353e7ac56dc6bdb6631ac0877214b4a1e`.
 | R7: Disposition of PRs 204/185/170/167/80/76                   | `decisions/pr-*.md`, closure comments and after-state snapshots. Underlying feature issues remain open.                                                                                                                                          |
 | R8: Main ruleset and branch concurrency                        | `.github/main-ruleset.json`; entry and gated jobs use `cancel-in-progress: false`. Active ruleset 24860631 and enforced branch rules are saved under `data/`.                                                                                    |
 | R9: Single-push protocol and minimal local load                | Three root documents plus the 2 GiB Rust target budget helper; experiments kept in `experiments/issue-339/`.                                                                                                                                     |
-| R10: Case study, per-language CI, before/after measurements    | This document, raw compressed logs/API data, local verification, and `measure_ci.py`. Post-push measurements are updated after completed checks.                                                                                                 |
+| R10: Case study, per-language CI, before/after measurements    | This document, raw compressed logs/API data, local verification, and `measure_ci.py`. Completed CI snapshot: 19 runs, 75.700 runner wall minutes, 65.950 minutes to first seven-language green.                                                  |
 
 <!-- markdownlint-enable MD013 -->
 
@@ -112,11 +112,11 @@ time, not summed runner time.
 
 <!-- markdownlint-disable MD013 -->
 
-| Comparison                           | Runs across PR branch      | Native workflow runs    | Runner wall minutes       | First seven-language green |
-| ------------------------------------ | -------------------------- | ----------------------- | ------------------------- | -------------------------- |
-| Before: PR 335, three tested commits | 41                         | 14                      | 68.450                    | 42.167 minutes             |
-| Before: PR 336, three tested commits | 41                         | 14                      | 65.600                    | 12.783 minutes             |
-| After: PR 341                        | Updated after completed CI | Unified CI run per push | Measured after completion | Measured after completion  |
+| Comparison                           | Runs across PR branch | Native workflow runs  | Runner wall minutes | First seven-language green |
+| ------------------------------------ | --------------------- | --------------------- | ------------------- | -------------------------- |
+| Before: PR 335, three PR heads | 41                    | 14                    | 68.450              | 42.167 minutes             |
+| Before: PR 336, three PR heads | 41                    | 14                    | 65.600              | 12.783 minutes             |
+| After: PR 341, three PR heads  | 19                    | 2 unified native runs | 75.700              | 65.950 minutes             |
 
 <!-- markdownlint-enable MD013 -->
 
@@ -126,6 +126,19 @@ seven-language validation and serial JS startup. These are different PRs, so
 their total minutes are observational data, not a controlled speedup claim. The
 structural comparison is seven separately triggered language workflows versus
 one coordinated workflow; unrelated freshness/link/BOM checks remain.
+
+The after snapshot ends at 2026-10-11 01:25:26 UTC, the first fully green
+implementation commit `e0326ca6a705689d15b83fa5c3d337e0e7a64df4`. Its seven
+workflow runs consumed 31.267 runner wall minutes and completed in 4.533 elapsed
+minutes. The prepared branch's five infrastructure-only runs consumed 10.550
+runner minutes; the first implementation batch, including its link retry,
+consumed 33.883. From the first implementation push at 00:58:28 to first green
+was 26.967 minutes. The 65.950-minute branch metric also includes the initial
+38.983-minute implementation gap. Total runner time increased relative to the
+comparison PRs; this is not a measured speedup. `pr-341-metrics.json` contains
+per-commit totals and the corresponding paginated run/job data. The final
+hardening/evidence commit is verified separately through the PR's latest checks;
+it does not retroactively alter this first-green measurement snapshot.
 
 ## Registry evidence and recovery
 
@@ -249,14 +262,15 @@ SHA. Most files are raw evidence, and no implementation files were deleted.
 Main's active [ruleset 24860631](https://github.com/link-foundation/links-notation/rules/24860631)
 requires `JavaScript`, `Rust`, `Python`, `Java`, `Go`, `CSharp`, and `PHP`
 from GitHub Actions integration 15368. Their actual check names and successful
-head SHA were verified before activation. Readback confirms strict checks,
+seven-language summary results were verified before activation. Readback
+confirms strict checks,
 PR-only changes, deletion/force-push protection, and no bypass actors; snapshots
 are `main-ruleset-created.json`, `main-ruleset-readback.json`, and
 `main-enforced-rules.json`.
 
 Review also reproduced two static-guard gaps: bare `pytest` / `python3 -m
 pytest`, and language commands hidden by a native working directory. Both
-mutation tests failed before the fix and pass afterward; the guard now has 22
+mutation tests failed before the fix and pass afterward; the guard now has 24
 regressions. No parser or formatter behavior was changed. The link-check
 workaround follows [Lychee's own troubleshooting guidance](https://lychee.cli.rs/troubleshooting/redirects/)
 and per-host header configuration. No external software defect was established.
@@ -273,4 +287,50 @@ dependencies and C# PDF/DocFX coverage remain intact. Native tests receive no
 provider credentials. The final audit explicitly waits for release completion
 and still runs after a provider failure. Three mutation checks reject a removed
 native prerequisite, publication moved into a native stage, and a skipped final
-audit. All 22 workflow regressions and four Python checks pass locally.
+audit. All 24 workflow regressions and four Python checks pass locally.
+
+## First fully green implementation batch
+
+All seven workflow runs for commit `e0326ca6a705689d15b83fa5c3d337e0e7a64df4`
+completed before another push. Unified CI
+[38101530910](https://github.com/link-foundation/links-notation/actions/runs/38101530910)
+finished successfully at 01:25:26 UTC: 57 executed jobs passed, two main-only
+jobs were skipped as intended on a PR. All 57 complete job logs, SHA-checked
+metadata, and SHA-256 log indices are retained under `data/run-38101530910-*`.
+The other executed workflows' full logs are also retained. The standalone
+auto-merge workflow is intentionally skipped for this draft feature PR.
+
+<!-- markdownlint-disable MD013 -->
+
+| Required summary | CI execution                                                                                   | Result  |
+| ---------------- | ---------------------------------------------------------------------------------------------- | ------- |
+| JavaScript       | Bun; 308 native tests, format/lint/build, 22 workflow regressions at this commit               | Success |
+| Rust             | Stable and 1.87.0 workspace/no-default tests, Clippy, rustfmt, 1.86.0 rejection, target budget | Success |
+| Python           | Python 3.13; 272 passed, 1 skipped, Black/isort/flake8                                         | Success |
+| Java             | JDK 21 and 25; 185 passed on each, formatter and Spotless                                      | Success |
+| Go               | Go 1.26; full tests and vet, race detection, 87.7% coverage                                    | Success |
+| CSharp           | .NET 10; 321 tests, formatting, PDF artifact generation                                        | Success |
+| PHP              | PHP 8.4 and 8.5; 235 tests / 15107 assertions on each, PHPCS                                   | Success |
+
+<!-- markdownlint-enable MD013 -->
+
+Every binding exercised all fourteen text fixtures. Binary interop, all seven
+benchmark bindings and dataset checks, documentation generation, all seven
+CodeQL targets, secret scan, dependency audits/review, workflow analysis,
+freshness, pages build, BOM and links also passed. The exact-version release
+audit correctly reports 0.25.2 absent as PR notices, with zero delivery errors;
+publishers do not run on PRs. These results prove validation, not publication.
+
+GitHub's 300-file diff limit also produces CodeQL PR-diff warnings; the full
+analyses and SARIF uploads succeeded. Go reports the pre-existing missing
+`CODECOV_TOKEN`; the tests still generated the coverage report, but external
+coverage upload remains unconfigured. These existing limits are recorded rather
+than mistaken for failures or silently removed checks.
+
+Final guard review added failing reproductions for workflow-level native
+working-directory defaults and bare Composer commands. The guard now inspects
+both global and job/step directories and recognizes Composer. Before output is
+`data/local-checks/guard-workflow-defaults-before.log.gz` (22 pass, two fail);
+after output records all 24 regressions passing. No library behavior changed.
+Provider configuration was rechecked after green CI: the same three secret
+names remain, variables are empty, and actual R6 delivery remains blocked.

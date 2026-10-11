@@ -1,0 +1,46 @@
+{
+  "pr": 341,
+  "branch": "issue-339-12b617cefd5b",
+  "runs": 19,
+  "pull_request_commits": 3,
+  "native_workflow_runs": 2,
+  "runner_wall_minutes": 75.7,
+  "first_run": "2026-10-11T00:19:29+00:00",
+  "first_green": "2026-10-11T01:25:26+00:00",
+  "first_green_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+  "time_to_first_green_minutes": 65.95,
+  "conclusions": {
+    "failure": 2,
+    "skipped": 3,
+    "success": 14
+  },
+  "per_commit": [
+    {
+      "sha": "97414a829ef77902dcfcc1a0cf21b0311edd4d71",
+      "runs": 7,
+      "first_run": "2026-10-11T00:58:28+00:00",
+      "last_run_update": "2026-10-11T01:09:35+00:00",
+      "elapsed_minutes": 11.117,
+      "runner_wall_minutes": 33.883,
+      "all_completed": true
+    },
+    {
+      "sha": "d99f425353e7ac56dc6bdb6631ac0877214b4a1e",
+      "runs": 5,
+      "first_run": "2026-10-11T00:19:29+00:00",
+      "last_run_update": "2026-10-11T00:22:08+00:00",
+      "elapsed_minutes": 2.65,
+      "runner_wall_minutes": 10.55,
+      "all_completed": true
+    },
+    {
+      "sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+      "runs": 7,
+      "first_run": "2026-10-11T01:20:54+00:00",
+      "last_run_update": "2026-10-11T01:25:26+00:00",
+      "elapsed_minutes": 4.533,
+      "runner_wall_minutes": 31.267,
+      "all_completed": true
+    }
+  ]
+}

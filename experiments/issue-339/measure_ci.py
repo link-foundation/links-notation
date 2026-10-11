@@ -28,6 +28,17 @@ def stamp(value):
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
+def runner_minutes(group):
+    return sum(
+        max(0, (stamp(job["completed_at"]) - stamp(job["started_at"])).total_seconds())
+        / 60
+        for job in group
+        if job.get("started_at")
+        and job.get("completed_at")
+        and job["conclusion"] != "skipped"
+    )
+
+
 def jobs(run):
     pages = gh_api(f"actions/runs/{run['id']}/jobs?filter=all&per_page=100")
     result = [job for page in pages for job in page["jobs"]]
@@ -44,15 +55,7 @@ def collect(number, branch):
     with ThreadPoolExecutor(max_workers=3) as pool:
         all_jobs = list(pool.map(jobs, runs))
     jobs_by_run = {run["id"]: group for run, group in zip(runs, all_jobs)}
-    minutes = sum(
-        max(0, (stamp(job["completed_at"]) - stamp(job["started_at"])).total_seconds())
-        / 60
-        for group in all_jobs
-        for job in group
-        if job.get("started_at")
-        and job.get("completed_at")
-        and job["conclusion"] != "skipped"
-    )
+    minutes = sum(runner_minutes(group) for group in all_jobs)
     commits = {}
     for run in runs:
         if run["event"] == "pull_request":
@@ -85,6 +88,24 @@ def collect(number, branch):
         default=None,
     )
     first_green = min(greens, default=None)
+    per_commit = []
+    for sha in sorted({run["head_sha"] for run in runs}):
+        group = [run for run in runs if run["head_sha"] == sha]
+        start = min(stamp(run["created_at"]) for run in group)
+        end = max(stamp(run["updated_at"]) for run in group)
+        per_commit.append(
+            {
+                "sha": sha,
+                "runs": len(group),
+                "first_run": start.isoformat(),
+                "last_run_update": end.isoformat(),
+                "elapsed_minutes": round((end - start).total_seconds() / 60, 3),
+                "runner_wall_minutes": round(
+                    sum(runner_minutes(jobs_by_run[run["id"]]) for run in group), 3
+                ),
+                "all_completed": all(run["status"] == "completed" for run in group),
+            }
+        )
     result = {
         "pr": number,
         "branch": branch,
@@ -106,6 +127,7 @@ def collect(number, branch):
             value: sum((run["conclusion"] or "pending") == value for run in runs)
             for value in sorted({run["conclusion"] or "pending" for run in runs})
         },
+        "per_commit": per_commit,
     }
     (ROOT / f"pr-{number}-metrics.json").write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps(result), flush=True)

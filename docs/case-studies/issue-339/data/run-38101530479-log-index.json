@@ -1,0 +1,12 @@
+{
+  "run": 38101530479,
+  "sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+  "logs": [
+    {
+      "zip_entry": "0_check-bom-consistency.txt",
+      "file": "run-38101530479-0_check-bom-consistency.log.gz",
+      "bytes": 19418,
+      "sha256": "cad694aed2ab39713a72ac653ba69bfd9a64fe9275ebec70ee54e0595a506cf9"
+    }
+  ]
+}

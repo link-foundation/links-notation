@@ -1,0 +1,18 @@
+{
+  "run": 38101530462,
+  "sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+  "logs": [
+    {
+      "zip_entry": "1_build.txt",
+      "file": "run-38101530462-1_build.log.gz",
+      "bytes": 24153,
+      "sha256": "75708fc9b3c3693f4defb8e6cf2aba1021e444fed777fb1f81166297e4babfc9"
+    },
+    {
+      "zip_entry": "2_findChangedDocsFiles.txt",
+      "file": "run-38101530462-2_findChangedDocsFiles.log.gz",
+      "bytes": 128629,
+      "sha256": "c8a9677e743ec27f06c597ce86d7ab0a27611f1f30f96e8dbf03d898e843f827"
+    }
+  ]
+}

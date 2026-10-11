@@ -1,0 +1,5282 @@
+[
+  {
+    "id": 114358268686,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEizDg",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358268686",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358268686",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:20:55Z",
+    "started_at": "2026-10-11T01:20:58Z",
+    "completed_at": "2026-10-11T01:21:08Z",
+    "name": "js / parity",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:20:59Z",
+        "completed_at": "2026-10-11T01:21:00Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:00Z",
+        "completed_at": "2026-10-11T01:21:01Z"
+      },
+      {
+        "name": "Run oven-sh/setup-bun@v2.2.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:01Z",
+        "completed_at": "2026-10-11T01:21:03Z"
+      },
+      {
+        "name": "Check every CI entry point and parity contract",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:03Z",
+        "completed_at": "2026-10-11T01:21:04Z"
+      },
+      {
+        "name": "Post Run oven-sh/setup-bun@v2.2.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:04Z",
+        "completed_at": "2026-10-11T01:21:05Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:05Z",
+        "completed_at": "2026-10-11T01:21:05Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:05Z",
+        "completed_at": "2026-10-11T01:21:05Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358268686",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102299,
+    "runner_name": "GitHub Actions 1000102299",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358268852,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEiztA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358268852",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358268852",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:20:56Z",
+    "started_at": "2026-10-11T01:20:57Z",
+    "completed_at": "2026-10-11T01:21:05Z",
+    "name": "js / format",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:20:58Z",
+        "completed_at": "2026-10-11T01:20:58Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:20:58Z",
+        "completed_at": "2026-10-11T01:21:00Z"
+      },
+      {
+        "name": "Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:00Z",
+        "completed_at": "2026-10-11T01:21:01Z"
+      },
+      {
+        "name": "Install Dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:01Z",
+        "completed_at": "2026-10-11T01:21:02Z"
+      },
+      {
+        "name": "Check formatting with Prettier",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:02Z",
+        "completed_at": "2026-10-11T01:21:03Z"
+      },
+      {
+        "name": "Post Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:03Z",
+        "completed_at": "2026-10-11T01:21:03Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-11T01:21:03Z",
+        "completed_at": "2026-10-11T01:21:04Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:21:04Z",
+        "completed_at": "2026-10-11T01:21:04Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358268852",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102300,
+    "runner_name": "GitHub Actions 1000102300",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358268944,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEi0EA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358268944",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358268944",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:20:56Z",
+    "started_at": "2026-10-11T01:20:57Z",
+    "completed_at": "2026-10-11T01:21:05Z",
+    "name": "js / lint",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:20:58Z",
+        "completed_at": "2026-10-11T01:20:59Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:20:59Z",
+        "completed_at": "2026-10-11T01:21:00Z"
+      },
+      {
+        "name": "Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:00Z",
+        "completed_at": "2026-10-11T01:21:02Z"
+      },
+      {
+        "name": "Install Dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:02Z",
+        "completed_at": "2026-10-11T01:21:02Z"
+      },
+      {
+        "name": "Lint",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:02Z",
+        "completed_at": "2026-10-11T01:21:03Z"
+      },
+      {
+        "name": "Post Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:03Z",
+        "completed_at": "2026-10-11T01:21:03Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-11T01:21:03Z",
+        "completed_at": "2026-10-11T01:21:03Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:21:03Z",
+        "completed_at": "2026-10-11T01:21:03Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358268944",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102301,
+    "runner_name": "GitHub Actions 1000102301",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358268984,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEi0OA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358268984",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358268984",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:20:56Z",
+    "started_at": "2026-10-11T01:20:58Z",
+    "completed_at": "2026-10-11T01:21:10Z",
+    "name": "js / test",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:20:59Z",
+        "completed_at": "2026-10-11T01:21:00Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:00Z",
+        "completed_at": "2026-10-11T01:21:02Z"
+      },
+      {
+        "name": "Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:02Z",
+        "completed_at": "2026-10-11T01:21:03Z"
+      },
+      {
+        "name": "Install Dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:03Z",
+        "completed_at": "2026-10-11T01:21:04Z"
+      },
+      {
+        "name": "Build",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:04Z",
+        "completed_at": "2026-10-11T01:21:04Z"
+      },
+      {
+        "name": "Verify generated parser matches its grammar",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:04Z",
+        "completed_at": "2026-10-11T01:21:04Z"
+      },
+      {
+        "name": "Test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:04Z",
+        "completed_at": "2026-10-11T01:21:06Z"
+      },
+      {
+        "name": "Check binary API TypeScript declarations",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:06Z",
+        "completed_at": "2026-10-11T01:21:06Z"
+      },
+      {
+        "name": "Check indented document API TypeScript declarations",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:06Z",
+        "completed_at": "2026-10-11T01:21:06Z"
+      },
+      {
+        "name": "Post Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-10-11T01:21:06Z",
+        "completed_at": "2026-10-11T01:21:06Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-10-11T01:21:06Z",
+        "completed_at": "2026-10-11T01:21:07Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-10-11T01:21:07Z",
+        "completed_at": "2026-10-11T01:21:07Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358268984",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102302,
+    "runner_name": "GitHub Actions 1000102302",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310024,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElUiA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310024",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310024",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:12Z",
+    "completed_at": "2026-10-11T01:21:15Z",
+    "name": "JavaScript",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:13Z",
+        "completed_at": "2026-10-11T01:21:13Z"
+      },
+      {
+        "name": "Require a successful stage",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:13Z",
+        "completed_at": "2026-10-11T01:21:13Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:13Z",
+        "completed_at": "2026-10-11T01:21:13Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310024",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102304,
+    "runner_name": "GitHub Actions 1000102304",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310268,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElVfA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310268",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310268",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:12Z",
+    "completed_at": "2026-10-11T01:21:30Z",
+    "name": "go / lint",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:13Z",
+        "completed_at": "2026-10-11T01:21:14Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:16Z"
+      },
+      {
+        "name": "Setup Go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:16Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Check formatting",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Run go vet",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      },
+      {
+        "name": "Post Setup Go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:28Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-11T01:21:28Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:21:28Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310268",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102305,
+    "runner_name": "GitHub Actions 1000102305",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310332,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElVvA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310332",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310332",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:12Z",
+    "completed_at": "2026-10-11T01:21:27Z",
+    "name": "php / lint",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:13Z",
+        "completed_at": "2026-10-11T01:21:14Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:15Z"
+      },
+      {
+        "name": "Set up PHP 8.4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:15Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Validate composer.json",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:23Z"
+      },
+      {
+        "name": "Check coding standard with PHP_CodeSniffer",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:23Z",
+        "completed_at": "2026-10-11T01:21:26Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-11T01:21:26Z",
+        "completed_at": "2026-10-11T01:21:26Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:21:26Z",
+        "completed_at": "2026-10-11T01:21:26Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310332",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102308,
+    "runner_name": "GitHub Actions 1000102308",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310357,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElV1Q",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310357",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310357",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:12Z",
+    "completed_at": "2026-10-11T01:21:25Z",
+    "name": "rust / lint",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:13Z",
+        "completed_at": "2026-10-11T01:21:14Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:16Z"
+      },
+      {
+        "name": "Setup Rust",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:16Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Cache Cargo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Check formatting",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Run Clippy",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:23Z"
+      },
+      {
+        "name": "Post Cache Cargo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:21:23Z",
+        "completed_at": "2026-10-11T01:21:23Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-11T01:21:23Z",
+        "completed_at": "2026-10-11T01:21:23Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:21:23Z",
+        "completed_at": "2026-10-11T01:21:23Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310357",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102306,
+    "runner_name": "GitHub Actions 1000102306",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310382,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElV7g",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310382",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310382",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:13Z",
+    "completed_at": "2026-10-11T01:21:24Z",
+    "name": "python / lint",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:14Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:16Z"
+      },
+      {
+        "name": "Set up Python 3.13",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:16Z",
+        "completed_at": "2026-10-11T01:21:16Z"
+      },
+      {
+        "name": "Install linting tools",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:16Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Check formatting with Black",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Check import sorting with isort",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Lint with flake8",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:21Z"
+      },
+      {
+        "name": "Post Set up Python 3.13",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:21:21Z",
+        "completed_at": "2026-10-11T01:21:21Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-11T01:21:21Z",
+        "completed_at": "2026-10-11T01:21:21Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T01:21:21Z",
+        "completed_at": "2026-10-11T01:21:21Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310382",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102309,
+    "runner_name": "GitHub Actions 1000102309",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310409,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWCQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310409",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310409",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:13Z",
+    "completed_at": "2026-10-11T01:21:32Z",
+    "name": "java / build",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:15Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:15Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Build with Maven",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:29Z"
+      },
+      {
+        "name": "Post Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:29Z",
+        "completed_at": "2026-10-11T01:21:29Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:29Z",
+        "completed_at": "2026-10-11T01:21:29Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:29Z",
+        "completed_at": "2026-10-11T01:21:29Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310409",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102307,
+    "runner_name": "GitHub Actions 1000102307",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310430,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWHg",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310430",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310430",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:13Z",
+    "completed_at": "2026-10-11T01:21:46Z",
+    "name": "csharp / lint",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:15Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:15Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Setup .NET SDK",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Restore Dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      },
+      {
+        "name": "Check formatting",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:28Z",
+        "completed_at": "2026-10-11T01:21:44Z"
+      },
+      {
+        "name": "Post Setup .NET SDK",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:44Z",
+        "completed_at": "2026-10-11T01:21:44Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-11T01:21:44Z",
+        "completed_at": "2026-10-11T01:21:45Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:21:45Z",
+        "completed_at": "2026-10-11T01:21:45Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310430",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102310,
+    "runner_name": "GitHub Actions 1000102310",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310442,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWKg",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310442",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310442",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:13Z",
+    "completed_at": "2026-10-11T01:21:28Z",
+    "name": "rust / msrv-rejection",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:15Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:15Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Setup Rust below the MSRV",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:25Z"
+      },
+      {
+        "name": "Verify Cargo reports the required Rust version",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:25Z",
+        "completed_at": "2026-10-11T01:21:26Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:26Z",
+        "completed_at": "2026-10-11T01:21:26Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:26Z",
+        "completed_at": "2026-10-11T01:21:26Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310442",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102317,
+    "runner_name": "GitHub Actions 1000102317",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310508,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWbA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310508",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310508",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:13Z",
+    "completed_at": "2026-10-11T01:21:21Z",
+    "name": "docs / test-cases",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:15Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:15Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Test comparison extraction",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Check the test case comparison",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Show what drifted",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310508",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102312,
+    "runner_name": "GitHub Actions 1000102312",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310512,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWcA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310512",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310512",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:13Z",
+    "completed_at": "2026-10-11T01:22:18Z",
+    "name": "binary_interop / seven-languages",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:16Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:16Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Run dtolnay/rust-toolchain@stable",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Run actions/setup-dotnet@v6.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Run actions/setup-python@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:21Z"
+      },
+      {
+        "name": "Run actions/setup-go@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:21Z",
+        "completed_at": "2026-10-11T01:21:22Z"
+      },
+      {
+        "name": "Run actions/setup-java@v6.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:22Z",
+        "completed_at": "2026-10-11T01:21:22Z"
+      },
+      {
+        "name": "Run shivammathur/setup-php@2.40.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:22Z",
+        "completed_at": "2026-10-11T01:21:27Z"
+      },
+      {
+        "name": "Install PHP autoloader",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-11T01:21:27Z",
+        "completed_at": "2026-10-11T01:21:27Z"
+      },
+      {
+        "name": "Compare bytes and decoded text in all seven languages",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:21:27Z",
+        "completed_at": "2026-10-11T01:22:13Z"
+      },
+      {
+        "name": "Post Run actions/setup-java@v6.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-10-11T01:22:13Z",
+        "completed_at": "2026-10-11T01:22:13Z"
+      },
+      {
+        "name": "Post Run actions/setup-go@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-10-11T01:22:13Z",
+        "completed_at": "2026-10-11T01:22:13Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-10-11T01:22:13Z",
+        "completed_at": "2026-10-11T01:22:13Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20,
+        "started_at": "2026-10-11T01:22:13Z",
+        "completed_at": "2026-10-11T01:22:14Z"
+      },
+      {
+        "name": "Post Run actions/setup-dotnet@v6.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21,
+        "started_at": "2026-10-11T01:22:14Z",
+        "completed_at": "2026-10-11T01:22:14Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 22,
+        "started_at": "2026-10-11T01:22:14Z",
+        "completed_at": "2026-10-11T01:22:14Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 23,
+        "started_at": "2026-10-11T01:22:14Z",
+        "completed_at": "2026-10-11T01:22:14Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310512",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102313,
+    "runner_name": "GitHub Actions 1000102313",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310517,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWdQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310517",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310517",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:13Z",
+    "completed_at": "2026-10-11T01:21:36Z",
+    "name": "java / format",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:15Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:15Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Check Google Java formatting and whitespace",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:33Z"
+      },
+      {
+        "name": "Post Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:33Z",
+        "completed_at": "2026-10-11T01:21:33Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:33Z",
+        "completed_at": "2026-10-11T01:21:33Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:33Z",
+        "completed_at": "2026-10-11T01:21:33Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310517",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102314,
+    "runner_name": "GitHub Actions 1000102314",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310541,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWjQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310541",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310541",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:12Z",
+    "completed_at": "2026-10-11T01:21:24Z",
+    "name": "security / Dependency review",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:13Z",
+        "completed_at": "2026-10-11T01:21:14Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:16Z"
+      },
+      {
+        "name": "Review dependency changes",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:16Z",
+        "completed_at": "2026-10-11T01:21:22Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:22Z",
+        "completed_at": "2026-10-11T01:21:22Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:22Z",
+        "completed_at": "2026-10-11T01:21:22Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310541",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102311,
+    "runner_name": "GitHub Actions 1000102311",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310551,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWlw",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310551",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310551",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:13Z",
+    "completed_at": "2026-10-11T01:21:20Z",
+    "name": "benchmarks / findChangedBenchmarkFiles",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:15Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:15Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Get changed files using defaults",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Set output isBenchmarkFilesChanged",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310551",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102316,
+    "runner_name": "GitHub Actions 1000102316",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310561,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWoQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310561",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310561",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:14Z",
+    "completed_at": "2026-10-11T01:21:22Z",
+    "name": "docs / comparison",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:15Z",
+        "completed_at": "2026-10-11T01:21:16Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:16Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Run actions/setup-python@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Install the generator dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Check the generated documents and pictures",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Show what drifted",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T01:21:20Z",
+        "completed_at": "2026-10-11T01:21:20Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310561",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102319,
+    "runner_name": "GitHub Actions 1000102319",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310579,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWsw",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310579",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310579",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:17Z",
+    "completed_at": "2026-10-11T01:21:37Z",
+    "name": "security / Secret scan",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:21Z"
+      },
+      {
+        "name": "Scan the repository for verified secrets",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:21Z",
+        "completed_at": "2026-10-11T01:21:34Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:34Z",
+        "completed_at": "2026-10-11T01:21:35Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:35Z",
+        "completed_at": "2026-10-11T01:21:35Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310579",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102321,
+    "runner_name": "GitHub Actions 1000102321",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310580,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWtA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310580",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310580",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:12Z",
+    "completed_at": "2026-10-11T01:21:21Z",
+    "name": "security / Audit npm lock (js)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:13Z",
+        "completed_at": "2026-10-11T01:21:14Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Audit the committed lockfile",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310580",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102315,
+    "runner_name": "GitHub Actions 1000102315",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310585,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWuQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310585",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310585",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:13Z",
+    "completed_at": "2026-10-11T01:21:21Z",
+    "name": "security / Audit npm lock (benchmarks/js)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:14Z",
+        "completed_at": "2026-10-11T01:21:15Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:15Z",
+        "completed_at": "2026-10-11T01:21:17Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:17Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Audit the committed lockfile",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310585",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102318,
+    "runner_name": "GitHub Actions 1000102318",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310601,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWyQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310601",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310601",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:14Z",
+    "completed_at": "2026-10-11T01:21:22Z",
+    "name": "security / Audit npm lock (benchmarks/tools)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:15Z",
+        "completed_at": "2026-10-11T01:21:16Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:16Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:18Z"
+      },
+      {
+        "name": "Audit the committed lockfile",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:18Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:19Z",
+        "completed_at": "2026-10-11T01:21:19Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310601",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102320,
+    "runner_name": "GitHub Actions 1000102320",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310607,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElWzw",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310607",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310607",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:20Z",
+    "completed_at": "2026-10-11T01:21:30Z",
+    "name": "security / Audit npm lock (docs/comparison)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:21Z",
+        "completed_at": "2026-10-11T01:21:22Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:22Z",
+        "completed_at": "2026-10-11T01:21:23Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:23Z",
+        "completed_at": "2026-10-11T01:21:26Z"
+      },
+      {
+        "name": "Audit the committed lockfile",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:26Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:28Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:28Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:28Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310607",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102322,
+    "runner_name": "GitHub Actions 1000102322",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310651,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElW-w",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310651",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310651",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:22Z",
+    "completed_at": "2026-10-11T01:21:32Z",
+    "name": "security / Audit npm lock (docs/website)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:23Z",
+        "completed_at": "2026-10-11T01:21:25Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:25Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:28Z",
+        "completed_at": "2026-10-11T01:21:29Z"
+      },
+      {
+        "name": "Audit the committed lockfile",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:29Z",
+        "completed_at": "2026-10-11T01:21:30Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:30Z",
+        "completed_at": "2026-10-11T01:21:30Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:30Z",
+        "completed_at": "2026-10-11T01:21:31Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:31Z",
+        "completed_at": "2026-10-11T01:21:31Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310651",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102323,
+    "runner_name": "GitHub Actions 1000102323",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310667,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElXCw",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310667",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310667",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:23Z",
+    "completed_at": "2026-10-11T01:22:06Z",
+    "name": "security / CodeQL (actions)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:23Z",
+        "completed_at": "2026-10-11T01:21:24Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:24Z",
+        "completed_at": "2026-10-11T01:21:26Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:26Z",
+        "completed_at": "2026-10-11T01:21:40Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:40Z",
+        "completed_at": "2026-10-11T01:22:03Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:03Z",
+        "completed_at": "2026-10-11T01:22:04Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:04Z",
+        "completed_at": "2026-10-11T01:22:04Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:22:04Z",
+        "completed_at": "2026-10-11T01:22:05Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:22:05Z",
+        "completed_at": "2026-10-11T01:22:05Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310667",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102324,
+    "runner_name": "GitHub Actions 1000102324",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310689,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElXIQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310689",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310689",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:25Z",
+    "completed_at": "2026-10-11T01:22:17Z",
+    "name": "security / CodeQL (python)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:26Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:28Z",
+        "completed_at": "2026-10-11T01:21:30Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:30Z",
+        "completed_at": "2026-10-11T01:21:48Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:48Z",
+        "completed_at": "2026-10-11T01:22:14Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:14Z",
+        "completed_at": "2026-10-11T01:22:14Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:14Z",
+        "completed_at": "2026-10-11T01:22:15Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:22:15Z",
+        "completed_at": "2026-10-11T01:22:15Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:22:15Z",
+        "completed_at": "2026-10-11T01:22:15Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310689",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102329,
+    "runner_name": "GitHub Actions 1000102329",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310705,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElXMQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310705",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310705",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:24Z",
+    "completed_at": "2026-10-11T01:22:31Z",
+    "name": "security / CodeQL (go)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:25Z",
+        "completed_at": "2026-10-11T01:21:26Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:26Z",
+        "completed_at": "2026-10-11T01:21:27Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:27Z",
+        "completed_at": "2026-10-11T01:21:44Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:44Z",
+        "completed_at": "2026-10-11T01:22:27Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:27Z",
+        "completed_at": "2026-10-11T01:22:27Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:27Z",
+        "completed_at": "2026-10-11T01:22:28Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:22:28Z",
+        "completed_at": "2026-10-11T01:22:28Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:22:28Z",
+        "completed_at": "2026-10-11T01:22:28Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310705",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102327,
+    "runner_name": "GitHub Actions 1000102327",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310711,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElXNw",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310711",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310711",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:22Z",
+    "completed_at": "2026-10-11T01:23:09Z",
+    "name": "security / CodeQL (csharp)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:23Z",
+        "completed_at": "2026-10-11T01:21:25Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:25Z",
+        "completed_at": "2026-10-11T01:21:26Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:26Z",
+        "completed_at": "2026-10-11T01:21:42Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:42Z",
+        "completed_at": "2026-10-11T01:23:07Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:23:07Z",
+        "completed_at": "2026-10-11T01:23:07Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:23:07Z",
+        "completed_at": "2026-10-11T01:23:08Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:23:08Z",
+        "completed_at": "2026-10-11T01:23:08Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:23:08Z",
+        "completed_at": "2026-10-11T01:23:08Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310711",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102325,
+    "runner_name": "GitHub Actions 1000102325",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310752,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElXYA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310752",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310752",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:25Z",
+    "completed_at": "2026-10-11T01:23:56Z",
+    "name": "security / CodeQL (rust)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:26Z",
+        "completed_at": "2026-10-11T01:21:27Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:27Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:28Z",
+        "completed_at": "2026-10-11T01:21:43Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:43Z",
+        "completed_at": "2026-10-11T01:23:53Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:23:53Z",
+        "completed_at": "2026-10-11T01:23:54Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:23:54Z",
+        "completed_at": "2026-10-11T01:23:54Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:23:54Z",
+        "completed_at": "2026-10-11T01:23:55Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:23:55Z",
+        "completed_at": "2026-10-11T01:23:55Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310752",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102330,
+    "runner_name": "GitHub Actions 1000102330",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310759,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElXZw",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310759",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310759",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:22Z",
+    "completed_at": "2026-10-11T01:22:21Z",
+    "name": "security / CodeQL (java-kotlin)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:23Z",
+        "completed_at": "2026-10-11T01:21:24Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:24Z",
+        "completed_at": "2026-10-11T01:21:25Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:25Z",
+        "completed_at": "2026-10-11T01:21:40Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:40Z",
+        "completed_at": "2026-10-11T01:22:18Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:18Z",
+        "completed_at": "2026-10-11T01:22:19Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:19Z",
+        "completed_at": "2026-10-11T01:22:19Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:22:19Z",
+        "completed_at": "2026-10-11T01:22:19Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:22:19Z",
+        "completed_at": "2026-10-11T01:22:19Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310759",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102326,
+    "runner_name": "GitHub Actions 1000102326",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358310764,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoElXbA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358310764",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358310764",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:11Z",
+    "started_at": "2026-10-11T01:21:24Z",
+    "completed_at": "2026-10-11T01:22:24Z",
+    "name": "security / CodeQL (javascript-typescript)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:24Z",
+        "completed_at": "2026-10-11T01:21:26Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:26Z",
+        "completed_at": "2026-10-11T01:21:28Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:28Z",
+        "completed_at": "2026-10-11T01:21:46Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:46Z",
+        "completed_at": "2026-10-11T01:22:20Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:20Z",
+        "completed_at": "2026-10-11T01:22:21Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:21Z",
+        "completed_at": "2026-10-11T01:22:21Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:22:21Z",
+        "completed_at": "2026-10-11T01:22:22Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:22:22Z",
+        "completed_at": "2026-10-11T01:22:22Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358310764",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102328,
+    "runner_name": "GitHub Actions 1000102328",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358337022,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEm9_g",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358337022",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358337022",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:21Z",
+    "started_at": "2026-10-11T01:21:27Z",
+    "completed_at": "2026-10-11T01:21:55Z",
+    "name": "benchmarks / benchmark",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:27Z",
+        "completed_at": "2026-10-11T01:21:29Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:29Z",
+        "completed_at": "2026-10-11T01:21:31Z"
+      },
+      {
+        "name": "Setup Rust",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:31Z",
+        "completed_at": "2026-10-11T01:21:33Z"
+      },
+      {
+        "name": "Cache Cargo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:33Z",
+        "completed_at": "2026-10-11T01:21:35Z"
+      },
+      {
+        "name": "Test the benchmark",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:35Z",
+        "completed_at": "2026-10-11T01:21:42Z"
+      },
+      {
+        "name": "Regenerate the documents and the report",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:42Z",
+        "completed_at": "2026-10-11T01:21:48Z"
+      },
+      {
+        "name": "Fail on drift in a pull request",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:48Z",
+        "completed_at": "2026-10-11T01:21:48Z"
+      },
+      {
+        "name": "Upload the benchmark output",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:48Z",
+        "completed_at": "2026-10-11T01:21:49Z"
+      },
+      {
+        "name": "Post Cache Cargo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T01:21:50Z",
+        "completed_at": "2026-10-11T01:21:53Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-10-11T01:21:53Z",
+        "completed_at": "2026-10-11T01:21:53Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-10-11T01:21:53Z",
+        "completed_at": "2026-10-11T01:21:53Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358337022",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102331,
+    "runner_name": "GitHub Actions 1000102331",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358346250,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEniCg",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358346250",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358346250",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:24Z",
+    "started_at": "2026-10-11T01:21:29Z",
+    "completed_at": "2026-10-11T01:21:49Z",
+    "name": "python / test",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:29Z",
+        "completed_at": "2026-10-11T01:21:30Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:30Z",
+        "completed_at": "2026-10-11T01:21:33Z"
+      },
+      {
+        "name": "Set up Python 3.13",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:33Z",
+        "completed_at": "2026-10-11T01:21:33Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:33Z",
+        "completed_at": "2026-10-11T01:21:42Z"
+      },
+      {
+        "name": "Build package",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:42Z",
+        "completed_at": "2026-10-11T01:21:44Z"
+      },
+      {
+        "name": "Check package metadata",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:44Z",
+        "completed_at": "2026-10-11T01:21:45Z"
+      },
+      {
+        "name": "Run tests",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:45Z",
+        "completed_at": "2026-10-11T01:21:47Z"
+      },
+      {
+        "name": "Post Set up Python 3.13",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:21:47Z",
+        "completed_at": "2026-10-11T01:21:47Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-11T01:21:47Z",
+        "completed_at": "2026-10-11T01:21:47Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T01:21:47Z",
+        "completed_at": "2026-10-11T01:21:47Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358346250",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102333,
+    "runner_name": "GitHub Actions 1000102333",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358350014,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEnwvg",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358350014",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358350014",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:25Z",
+    "started_at": "2026-10-11T01:21:28Z",
+    "completed_at": "2026-10-11T01:22:12Z",
+    "name": "rust / test (1.87.0)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:29Z",
+        "completed_at": "2026-10-11T01:21:31Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:31Z",
+        "completed_at": "2026-10-11T01:21:32Z"
+      },
+      {
+        "name": "Setup Rust",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:32Z",
+        "completed_at": "2026-10-11T01:21:41Z"
+      },
+      {
+        "name": "Cache Cargo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:41Z",
+        "completed_at": "2026-10-11T01:21:44Z"
+      },
+      {
+        "name": "Build",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:44Z",
+        "completed_at": "2026-10-11T01:21:50Z"
+      },
+      {
+        "name": "Test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:50Z",
+        "completed_at": "2026-10-11T01:22:00Z"
+      },
+      {
+        "name": "Test without the optional macro",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:00Z",
+        "completed_at": "2026-10-11T01:22:09Z"
+      },
+      {
+        "name": "Post Cache Cargo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:22:09Z",
+        "completed_at": "2026-10-11T01:22:09Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-11T01:22:09Z",
+        "completed_at": "2026-10-11T01:22:09Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T01:22:09Z",
+        "completed_at": "2026-10-11T01:22:09Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358350014",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102332,
+    "runner_name": "GitHub Actions 1000102332",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358350046,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEnw3g",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358350046",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358350046",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:25Z",
+    "started_at": "2026-10-11T01:21:31Z",
+    "completed_at": "2026-10-11T01:21:52Z",
+    "name": "rust / test (stable)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:32Z",
+        "completed_at": "2026-10-11T01:21:33Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:33Z",
+        "completed_at": "2026-10-11T01:21:35Z"
+      },
+      {
+        "name": "Setup Rust",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:35Z",
+        "completed_at": "2026-10-11T01:21:35Z"
+      },
+      {
+        "name": "Cache Cargo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:35Z",
+        "completed_at": "2026-10-11T01:21:37Z"
+      },
+      {
+        "name": "Build",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:37Z",
+        "completed_at": "2026-10-11T01:21:41Z"
+      },
+      {
+        "name": "Test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:21:41Z",
+        "completed_at": "2026-10-11T01:21:46Z"
+      },
+      {
+        "name": "Test without the optional macro",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:46Z",
+        "completed_at": "2026-10-11T01:21:50Z"
+      },
+      {
+        "name": "Post Cache Cargo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:21:50Z",
+        "completed_at": "2026-10-11T01:21:51Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-11T01:21:51Z",
+        "completed_at": "2026-10-11T01:21:51Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T01:21:51Z",
+        "completed_at": "2026-10-11T01:21:51Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358350046",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102335,
+    "runner_name": "GitHub Actions 1000102335",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358355946,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEoH6g",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358355946",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358355946",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:28Z",
+    "started_at": "2026-10-11T01:21:30Z",
+    "completed_at": "2026-10-11T01:22:00Z",
+    "name": "php / test (8.4)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:31Z",
+        "completed_at": "2026-10-11T01:21:32Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:32Z",
+        "completed_at": "2026-10-11T01:21:33Z"
+      },
+      {
+        "name": "Set up PHP 8.4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:33Z",
+        "completed_at": "2026-10-11T01:21:39Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:39Z",
+        "completed_at": "2026-10-11T01:21:43Z"
+      },
+      {
+        "name": "Run tests",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:43Z",
+        "completed_at": "2026-10-11T01:21:58Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-11T01:21:58Z",
+        "completed_at": "2026-10-11T01:21:58Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:21:58Z",
+        "completed_at": "2026-10-11T01:21:58Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358355946",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102334,
+    "runner_name": "GitHub Actions 1000102334",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358355981,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEoIDQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358355981",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358355981",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:28Z",
+    "started_at": "2026-10-11T01:21:31Z",
+    "completed_at": "2026-10-11T01:21:58Z",
+    "name": "php / test (8.5)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:32Z",
+        "completed_at": "2026-10-11T01:21:32Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:33Z",
+        "completed_at": "2026-10-11T01:21:34Z"
+      },
+      {
+        "name": "Set up PHP 8.5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:34Z",
+        "completed_at": "2026-10-11T01:21:39Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:39Z",
+        "completed_at": "2026-10-11T01:21:41Z"
+      },
+      {
+        "name": "Run tests",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:41Z",
+        "completed_at": "2026-10-11T01:21:56Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-11T01:21:56Z",
+        "completed_at": "2026-10-11T01:21:57Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:21:57Z",
+        "completed_at": "2026-10-11T01:21:57Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358355981",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102336,
+    "runner_name": "GitHub Actions 1000102336",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358362292,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEogtA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358362292",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358362292",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:30Z",
+    "started_at": "2026-10-11T01:21:33Z",
+    "completed_at": "2026-10-11T01:22:43Z",
+    "name": "go / test",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:34Z",
+        "completed_at": "2026-10-11T01:21:35Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:35Z",
+        "completed_at": "2026-10-11T01:21:36Z"
+      },
+      {
+        "name": "Setup Go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:36Z",
+        "completed_at": "2026-10-11T01:21:37Z"
+      },
+      {
+        "name": "Build",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:37Z",
+        "completed_at": "2026-10-11T01:21:46Z"
+      },
+      {
+        "name": "Test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:21:46Z",
+        "completed_at": "2026-10-11T01:22:41Z"
+      },
+      {
+        "name": "Upload coverage",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:41Z",
+        "completed_at": "2026-10-11T01:22:41Z"
+      },
+      {
+        "name": "Note that coverage was not uploaded",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:41Z",
+        "completed_at": "2026-10-11T01:22:41Z"
+      },
+      {
+        "name": "Post Setup Go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:22:41Z",
+        "completed_at": "2026-10-11T01:22:41Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-11T01:22:41Z",
+        "completed_at": "2026-10-11T01:22:41Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T01:22:41Z",
+        "completed_at": "2026-10-11T01:22:41Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358362292",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102337,
+    "runner_name": "GitHub Actions 1000102337",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358367241,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEo0CQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358367241",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358367241",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:32Z",
+    "started_at": "2026-10-11T01:21:34Z",
+    "completed_at": "2026-10-11T01:21:51Z",
+    "name": "java / test (25)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:34Z",
+        "completed_at": "2026-10-11T01:21:35Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:35Z",
+        "completed_at": "2026-10-11T01:21:37Z"
+      },
+      {
+        "name": "Set up JDK 25",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:37Z",
+        "completed_at": "2026-10-11T01:21:38Z"
+      },
+      {
+        "name": "Test with Maven",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:38Z",
+        "completed_at": "2026-10-11T01:21:50Z"
+      },
+      {
+        "name": "Post Set up JDK 25",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:50Z",
+        "completed_at": "2026-10-11T01:21:50Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:50Z",
+        "completed_at": "2026-10-11T01:21:50Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:50Z",
+        "completed_at": "2026-10-11T01:21:50Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358367241",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102338,
+    "runner_name": "GitHub Actions 1000102338",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358367288,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEo0OA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358367288",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358367288",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:32Z",
+    "started_at": "2026-10-11T01:21:37Z",
+    "completed_at": "2026-10-11T01:21:57Z",
+    "name": "java / test (21)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:38Z",
+        "completed_at": "2026-10-11T01:21:40Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:40Z",
+        "completed_at": "2026-10-11T01:21:42Z"
+      },
+      {
+        "name": "Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:42Z",
+        "completed_at": "2026-10-11T01:21:44Z"
+      },
+      {
+        "name": "Test with Maven",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:44Z",
+        "completed_at": "2026-10-11T01:21:55Z"
+      },
+      {
+        "name": "Post Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:21:55Z",
+        "completed_at": "2026-10-11T01:21:55Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:21:55Z",
+        "completed_at": "2026-10-11T01:21:55Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:21:55Z",
+        "completed_at": "2026-10-11T01:21:55Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358367288",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102339,
+    "runner_name": "GitHub Actions 1000102339",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358406868,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoErO1A",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358406868",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358406868",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:47Z",
+    "started_at": "2026-10-11T01:21:48Z",
+    "completed_at": "2026-10-11T01:22:36Z",
+    "name": "csharp / test",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:49Z",
+        "completed_at": "2026-10-11T01:21:51Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:51Z",
+        "completed_at": "2026-10-11T01:21:52Z"
+      },
+      {
+        "name": "Setup .NET SDK",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:52Z",
+        "completed_at": "2026-10-11T01:21:53Z"
+      },
+      {
+        "name": "Restore Dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:21:53Z",
+        "completed_at": "2026-10-11T01:22:01Z"
+      },
+      {
+        "name": "Build",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:22:01Z",
+        "completed_at": "2026-10-11T01:22:10Z"
+      },
+      {
+        "name": "Test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:10Z",
+        "completed_at": "2026-10-11T01:22:15Z"
+      },
+      {
+        "name": "Setup Rust for binary interoperability checks",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:15Z",
+        "completed_at": "2026-10-11T01:22:17Z"
+      },
+      {
+        "name": "Cache Cargo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:22:17Z",
+        "completed_at": "2026-10-11T01:22:19Z"
+      },
+      {
+        "name": "Compare Rust and C# binary codecs",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:22:19Z",
+        "completed_at": "2026-10-11T01:22:33Z"
+      },
+      {
+        "name": "Post Cache Cargo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-10-11T01:22:33Z",
+        "completed_at": "2026-10-11T01:22:33Z"
+      },
+      {
+        "name": "Post Setup .NET SDK",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-10-11T01:22:33Z",
+        "completed_at": "2026-10-11T01:22:33Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-10-11T01:22:33Z",
+        "completed_at": "2026-10-11T01:22:34Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-10-11T01:22:34Z",
+        "completed_at": "2026-10-11T01:22:34Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358406868",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102340,
+    "runner_name": "GitHub Actions 1000102340",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358414883,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEruIw",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358414883",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358414883",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:50Z",
+    "started_at": "2026-10-11T01:21:51Z",
+    "completed_at": "2026-10-11T01:21:55Z",
+    "name": "Python",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:52Z",
+        "completed_at": "2026-10-11T01:21:52Z"
+      },
+      {
+        "name": "Require a successful stage",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:52Z",
+        "completed_at": "2026-10-11T01:21:53Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:21:53Z",
+        "completed_at": "2026-10-11T01:21:53Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358414883",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102341,
+    "runner_name": "GitHub Actions 1000102341",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358429580,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEsnjA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358429580",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358429580",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:55Z",
+    "started_at": "2026-10-11T01:21:57Z",
+    "completed_at": "2026-10-11T01:22:21Z",
+    "name": "benchmarks / php",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:58Z",
+        "completed_at": "2026-10-11T01:22:00Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:22:00Z",
+        "completed_at": "2026-10-11T01:22:02Z"
+      },
+      {
+        "name": "Download the benchmark output",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:02Z",
+        "completed_at": "2026-10-11T01:22:03Z"
+      },
+      {
+        "name": "Set up PHP 8.4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:22:03Z",
+        "completed_at": "2026-10-11T01:22:10Z"
+      },
+      {
+        "name": "Cache the tiktoken vocabularies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:22:10Z",
+        "completed_at": "2026-10-11T01:22:12Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:12Z",
+        "completed_at": "2026-10-11T01:22:14Z"
+      },
+      {
+        "name": "Check coding standard with PHP_CodeSniffer",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:14Z",
+        "completed_at": "2026-10-11T01:22:14Z"
+      },
+      {
+        "name": "Parse and count in PHP",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:22:14Z",
+        "completed_at": "2026-10-11T01:22:16Z"
+      },
+      {
+        "name": "Upload the PHP result",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:22:16Z",
+        "completed_at": "2026-10-11T01:22:18Z"
+      },
+      {
+        "name": "Post Cache the tiktoken vocabularies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-10-11T01:22:18Z",
+        "completed_at": "2026-10-11T01:22:18Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-10-11T01:22:18Z",
+        "completed_at": "2026-10-11T01:22:18Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-10-11T01:22:18Z",
+        "completed_at": "2026-10-11T01:22:18Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358429580",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102346,
+    "runner_name": "GitHub Actions 1000102346",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358429610,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEsnqg",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358429610",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358429610",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:55Z",
+    "started_at": "2026-10-11T01:21:57Z",
+    "completed_at": "2026-10-11T01:22:18Z",
+    "name": "benchmarks / csharp",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:57Z",
+        "completed_at": "2026-10-11T01:21:58Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:58Z",
+        "completed_at": "2026-10-11T01:22:00Z"
+      },
+      {
+        "name": "Download the benchmark output",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:00Z",
+        "completed_at": "2026-10-11T01:22:00Z"
+      },
+      {
+        "name": "Setup .NET SDK",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:22:00Z",
+        "completed_at": "2026-10-11T01:22:01Z"
+      },
+      {
+        "name": "Parse and count in C#",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:22:01Z",
+        "completed_at": "2026-10-11T01:22:15Z"
+      },
+      {
+        "name": "Upload the C# result",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:15Z",
+        "completed_at": "2026-10-11T01:22:16Z"
+      },
+      {
+        "name": "Post Setup .NET SDK",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:22:16Z",
+        "completed_at": "2026-10-11T01:22:16Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-11T01:22:16Z",
+        "completed_at": "2026-10-11T01:22:16Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:22:16Z",
+        "completed_at": "2026-10-11T01:22:16Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358429610",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102343,
+    "runner_name": "GitHub Actions 1000102343",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358429615,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEsnrw",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358429615",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358429615",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:55Z",
+    "started_at": "2026-10-11T01:21:57Z",
+    "completed_at": "2026-10-11T01:22:06Z",
+    "name": "benchmarks / javascript",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:57Z",
+        "completed_at": "2026-10-11T01:21:59Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:59Z",
+        "completed_at": "2026-10-11T01:22:00Z"
+      },
+      {
+        "name": "Download the benchmark output",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:00Z",
+        "completed_at": "2026-10-11T01:22:01Z"
+      },
+      {
+        "name": "Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:22:01Z",
+        "completed_at": "2026-10-11T01:22:01Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:22:01Z",
+        "completed_at": "2026-10-11T01:22:03Z"
+      },
+      {
+        "name": "Parse and count in JavaScript",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:03Z",
+        "completed_at": "2026-10-11T01:22:03Z"
+      },
+      {
+        "name": "Upload the JavaScript result",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:03Z",
+        "completed_at": "2026-10-11T01:22:04Z"
+      },
+      {
+        "name": "Post Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:22:04Z",
+        "completed_at": "2026-10-11T01:22:05Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-11T01:22:05Z",
+        "completed_at": "2026-10-11T01:22:05Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T01:22:05Z",
+        "completed_at": "2026-10-11T01:22:05Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358429615",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102342,
+    "runner_name": "GitHub Actions 1000102342",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358429620,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEsntA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358429620",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358429620",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:55Z",
+    "started_at": "2026-10-11T01:21:57Z",
+    "completed_at": "2026-10-11T01:22:33Z",
+    "name": "benchmarks / java",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:58Z",
+        "completed_at": "2026-10-11T01:22:00Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:22:00Z",
+        "completed_at": "2026-10-11T01:22:02Z"
+      },
+      {
+        "name": "Download the benchmark output",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:02Z",
+        "completed_at": "2026-10-11T01:22:03Z"
+      },
+      {
+        "name": "Setup Java",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:22:03Z",
+        "completed_at": "2026-10-11T01:22:06Z"
+      },
+      {
+        "name": "Install the library into the local Maven repository",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:22:06Z",
+        "completed_at": "2026-10-11T01:22:23Z"
+      },
+      {
+        "name": "Parse and count in Java",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:23Z",
+        "completed_at": "2026-10-11T01:22:29Z"
+      },
+      {
+        "name": "Upload the Java result",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:29Z",
+        "completed_at": "2026-10-11T01:22:30Z"
+      },
+      {
+        "name": "Post Setup Java",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:22:30Z",
+        "completed_at": "2026-10-11T01:22:30Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-11T01:22:30Z",
+        "completed_at": "2026-10-11T01:22:30Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T01:22:30Z",
+        "completed_at": "2026-10-11T01:22:30Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358429620",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102344,
+    "runner_name": "GitHub Actions 1000102344",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358429652,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEsn1A",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358429652",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358429652",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:55Z",
+    "started_at": "2026-10-11T01:21:57Z",
+    "completed_at": "2026-10-11T01:22:11Z",
+    "name": "benchmarks / go",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:57Z",
+        "completed_at": "2026-10-11T01:21:59Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:21:59Z",
+        "completed_at": "2026-10-11T01:22:01Z"
+      },
+      {
+        "name": "Download the benchmark output",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:01Z",
+        "completed_at": "2026-10-11T01:22:01Z"
+      },
+      {
+        "name": "Setup Go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:22:01Z",
+        "completed_at": "2026-10-11T01:22:03Z"
+      },
+      {
+        "name": "Parse and count in Go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:22:03Z",
+        "completed_at": "2026-10-11T01:22:08Z"
+      },
+      {
+        "name": "Upload the Go result",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:08Z",
+        "completed_at": "2026-10-11T01:22:09Z"
+      },
+      {
+        "name": "Post Setup Go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:22:09Z",
+        "completed_at": "2026-10-11T01:22:09Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-11T01:22:09Z",
+        "completed_at": "2026-10-11T01:22:10Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:22:10Z",
+        "completed_at": "2026-10-11T01:22:10Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358429652",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102345,
+    "runner_name": "GitHub Actions 1000102345",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358429669,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEsn5Q",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358429669",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358429669",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:55Z",
+    "started_at": "2026-10-11T01:21:59Z",
+    "completed_at": "2026-10-11T01:22:11Z",
+    "name": "benchmarks / datasets",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:22:00Z",
+        "completed_at": "2026-10-11T01:22:02Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:22:02Z",
+        "completed_at": "2026-10-11T01:22:04Z"
+      },
+      {
+        "name": "Download the benchmark output",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:04Z",
+        "completed_at": "2026-10-11T01:22:05Z"
+      },
+      {
+        "name": "Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:22:05Z",
+        "completed_at": "2026-10-11T01:22:06Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:22:06Z",
+        "completed_at": "2026-10-11T01:22:07Z"
+      },
+      {
+        "name": "Check the datasets and verify every generated document",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:07Z",
+        "completed_at": "2026-10-11T01:22:08Z"
+      },
+      {
+        "name": "Post Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:22:08Z",
+        "completed_at": "2026-10-11T01:22:09Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-11T01:22:09Z",
+        "completed_at": "2026-10-11T01:22:09Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-11T01:22:09Z",
+        "completed_at": "2026-10-11T01:22:09Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358429669",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102348,
+    "runner_name": "GitHub Actions 1000102348",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358429695,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEsn_w",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358429695",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358429695",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:55Z",
+    "started_at": "2026-10-11T01:21:58Z",
+    "completed_at": "2026-10-11T01:22:09Z",
+    "name": "benchmarks / python",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:21:59Z",
+        "completed_at": "2026-10-11T01:22:00Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:22:00Z",
+        "completed_at": "2026-10-11T01:22:02Z"
+      },
+      {
+        "name": "Download the benchmark output",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:02Z",
+        "completed_at": "2026-10-11T01:22:02Z"
+      },
+      {
+        "name": "Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:22:02Z",
+        "completed_at": "2026-10-11T01:22:03Z"
+      },
+      {
+        "name": "Cache the tiktoken vocabularies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:22:03Z",
+        "completed_at": "2026-10-11T01:22:03Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:22:03Z",
+        "completed_at": "2026-10-11T01:22:06Z"
+      },
+      {
+        "name": "Parse and count in Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:22:06Z",
+        "completed_at": "2026-10-11T01:22:06Z"
+      },
+      {
+        "name": "Upload the Python result",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:22:06Z",
+        "completed_at": "2026-10-11T01:22:07Z"
+      },
+      {
+        "name": "Post Cache the tiktoken vocabularies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-11T01:22:07Z",
+        "completed_at": "2026-10-11T01:22:07Z"
+      },
+      {
+        "name": "Post Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T01:22:07Z",
+        "completed_at": "2026-10-11T01:22:07Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-10-11T01:22:07Z",
+        "completed_at": "2026-10-11T01:22:07Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-10-11T01:22:07Z",
+        "completed_at": "2026-10-11T01:22:07Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358429695",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102347,
+    "runner_name": "GitHub Actions 1000102347",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358434849,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEs8IQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358434849",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358434849",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:21:57Z",
+    "started_at": "2026-10-11T01:22:02Z",
+    "completed_at": "2026-10-11T01:22:05Z",
+    "name": "Java",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:22:03Z",
+        "completed_at": "2026-10-11T01:22:03Z"
+      },
+      {
+        "name": "Require a successful stage",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:22:03Z",
+        "completed_at": "2026-10-11T01:22:03Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:03Z",
+        "completed_at": "2026-10-11T01:22:03Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358434849",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102349,
+    "runner_name": "GitHub Actions 1000102349",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358444146,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEtgcg",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358444146",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358444146",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:22:01Z",
+    "started_at": "2026-10-11T01:22:07Z",
+    "completed_at": "2026-10-11T01:22:10Z",
+    "name": "PHP",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:22:07Z",
+        "completed_at": "2026-10-11T01:22:07Z"
+      },
+      {
+        "name": "Require a successful stage",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:22:07Z",
+        "completed_at": "2026-10-11T01:22:07Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:07Z",
+        "completed_at": "2026-10-11T01:22:08Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358444146",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102350,
+    "runner_name": "GitHub Actions 1000102350",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358474620,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEvXfA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358474620",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358474620",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:22:12Z",
+    "started_at": "2026-10-11T01:22:14Z",
+    "completed_at": "2026-10-11T01:22:17Z",
+    "name": "Rust",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:22:15Z",
+        "completed_at": "2026-10-11T01:22:15Z"
+      },
+      {
+        "name": "Require a successful stage",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:22:15Z",
+        "completed_at": "2026-10-11T01:22:15Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:15Z",
+        "completed_at": "2026-10-11T01:22:15Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358474620",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102351,
+    "runner_name": "GitHub Actions 1000102351",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358535669,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEzF9Q",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358535669",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358535669",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-11T01:22:34Z",
+    "started_at": "2026-10-11T01:22:34Z",
+    "completed_at": "2026-10-11T01:22:33Z",
+    "name": "benchmarks / publish",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358535669",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 114358543489,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoEzkgQ",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358543489",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358543489",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:22:36Z",
+    "started_at": "2026-10-11T01:22:38Z",
+    "completed_at": "2026-10-11T01:25:15Z",
+    "name": "csharp / generatePdfWithCode",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:22:39Z",
+        "completed_at": "2026-10-11T01:22:41Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:22:41Z",
+        "completed_at": "2026-10-11T01:22:44Z"
+      },
+      {
+        "name": "Setup .NET SDK",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:44Z",
+        "completed_at": "2026-10-11T01:22:44Z"
+      },
+      {
+        "name": "Cache the packages for PDF generation",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:22:44Z",
+        "completed_at": "2026-10-11T01:22:48Z"
+      },
+      {
+        "name": "Install dependencies for PDF generation",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:22:48Z",
+        "completed_at": "2026-10-11T01:23:52Z"
+      },
+      {
+        "name": "Check the listing only contains characters LaTeX can typeset",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T01:23:52Z",
+        "completed_at": "2026-10-11T01:23:52Z"
+      },
+      {
+        "name": "Generate PDF with code",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:23:52Z",
+        "completed_at": "2026-10-11T01:25:10Z"
+      },
+      {
+        "name": "Upload PDF artifact",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:25:10Z",
+        "completed_at": "2026-10-11T01:25:12Z"
+      },
+      {
+        "name": "Post Cache the packages for PDF generation",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-11T01:25:12Z",
+        "completed_at": "2026-10-11T01:25:12Z"
+      },
+      {
+        "name": "Post Setup .NET SDK",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T01:25:12Z",
+        "completed_at": "2026-10-11T01:25:12Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-10-11T01:25:12Z",
+        "completed_at": "2026-10-11T01:25:12Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-10-11T01:25:12Z",
+        "completed_at": "2026-10-11T01:25:12Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358543489",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102352,
+    "runner_name": "GitHub Actions 1000102352",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114358562662,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoE0vZg",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114358562662",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114358562662",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:22:43Z",
+    "started_at": "2026-10-11T01:22:45Z",
+    "completed_at": "2026-10-11T01:22:48Z",
+    "name": "Go",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:22:46Z",
+        "completed_at": "2026-10-11T01:22:46Z"
+      },
+      {
+        "name": "Require a successful stage",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:22:46Z",
+        "completed_at": "2026-10-11T01:22:46Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:22:46Z",
+        "completed_at": "2026-10-11T01:22:46Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114358562662",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102353,
+    "runner_name": "GitHub Actions 1000102353",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114359002260,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoFPklA",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114359002260",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114359002260",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:25:15Z",
+    "started_at": "2026-10-11T01:25:17Z",
+    "completed_at": "2026-10-11T01:25:20Z",
+    "name": "CSharp",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:25:18Z",
+        "completed_at": "2026-10-11T01:25:18Z"
+      },
+      {
+        "name": "Require a successful stage",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:25:18Z",
+        "completed_at": "2026-10-11T01:25:18Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:25:18Z",
+        "completed_at": "2026-10-11T01:25:18Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114359002260",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102354,
+    "runner_name": "GitHub Actions 1000102354",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114359002706,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoFPmUg",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114359002706",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114359002706",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:25:15Z",
+    "started_at": "2026-10-11T01:25:17Z",
+    "completed_at": "2026-10-11T01:25:25Z",
+    "name": "release_audit / audit",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:25:18Z",
+        "completed_at": "2026-10-11T01:25:19Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:25:19Z",
+        "completed_at": "2026-10-11T01:25:20Z"
+      },
+      {
+        "name": "Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:25:20Z",
+        "completed_at": "2026-10-11T01:25:21Z"
+      },
+      {
+        "name": "Audit declared versions against the registries",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:25:21Z",
+        "completed_at": "2026-10-11T01:25:22Z"
+      },
+      {
+        "name": "Preserve exact registry responses",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:25:22Z",
+        "completed_at": "2026-10-11T01:25:23Z"
+      },
+      {
+        "name": "Post Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:25:23Z",
+        "completed_at": "2026-10-11T01:25:23Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-11T01:25:23Z",
+        "completed_at": "2026-10-11T01:25:23Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:25:23Z",
+        "completed_at": "2026-10-11T01:25:23Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114359002706",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102355,
+    "runner_name": "GitHub Actions 1000102355",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114359002739,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoFPmcw",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114359002739",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114359002739",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:25:15Z",
+    "started_at": "2026-10-11T01:25:17Z",
+    "completed_at": "2026-10-11T01:25:25Z",
+    "name": "release_audit / consistency",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:25:18Z",
+        "completed_at": "2026-10-11T01:25:19Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:25:19Z",
+        "completed_at": "2026-10-11T01:25:22Z"
+      },
+      {
+        "name": "Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:25:22Z",
+        "completed_at": "2026-10-11T01:25:22Z"
+      },
+      {
+        "name": "Check that every implementation declares the same version",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:25:22Z",
+        "completed_at": "2026-10-11T01:25:22Z"
+      },
+      {
+        "name": "Post Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T01:25:22Z",
+        "completed_at": "2026-10-11T01:25:22Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T01:25:22Z",
+        "completed_at": "2026-10-11T01:25:22Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T01:25:22Z",
+        "completed_at": "2026-10-11T01:25:22Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114359002739",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102356,
+    "runner_name": "GitHub Actions 1000102356",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114359002853,
+    "run_id": 38101530910,
+    "workflow_name": "CI",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38101530910",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoFPm5Q",
+    "head_sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114359002853",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38101530910/job/114359002853",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-11T01:25:16Z",
+    "started_at": "2026-10-11T01:25:16Z",
+    "completed_at": "2026-10-11T01:25:15Z",
+    "name": "release",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114359002853",
+    "labels": [],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  }
+]
