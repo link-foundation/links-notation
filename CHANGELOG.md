@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add C++ as the eighth binding, with full feature parity and a GitHub-release
+  source archive for CMake. Prepare 0.26.0; see
+  [the release fragment](changelog.d/340.md) and
+  [issue 340](https://github.com/link-foundation/links-notation/issues/340).
+
 ### Fixed
 
 - Require successful same-commit JavaScript checks before every language stage,

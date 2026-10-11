@@ -1,6 +1,6 @@
 [package]
 name = "links-notation"
-version = "0.25.2"
+version = "0.26.0"
 edition = "2021"
 rust-version = "1.87"
 description = "Rust implementation of the Links Notation parser"
