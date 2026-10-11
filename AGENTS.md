@@ -2,7 +2,7 @@
 
 Read `CONTRIBUTING.md`, `parity/README.md`, and `docs/releases.md` before
 changing shared behavior or CI. JS is the reference implementation: write the
-failing JS test first, then port the shared contract with seven-language
+failing JS test first, then port the shared contract with eight-language
 evidence. Document intentional API differences; never claim the hand-written
 ports are generated. Source inventory refresh requires reviewing feature
 coverage.

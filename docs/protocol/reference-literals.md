@@ -1,7 +1,7 @@
 # Lossless reference literals, version 1
 
-Starting with Links Notation 0.24.0, all seven bindings support an explicit
-UTF-8 literal for any reference identifier or value:
+Starting with Links Notation 0.24.0, every binding (C++ from its first release)
+supports an explicit UTF-8 literal for any reference identifier or value:
 
 ```ebnf
 reference_literal = "~1{", { hex_digit, hex_digit }, "}" ;
@@ -86,4 +86,4 @@ literal, stream and binary round trips. The shared exact-reference corpus is
 [invalid-reference-literals.txt](invalid-reference-literals.txt). Every binding
 tests identifiers, nested values, both encodings, every two-chunk split, and
 binary decoding against these fixtures. The binary interoperability example
-also compares identical bytes and formatted text across all seven bindings.
+also compares identical bytes and formatted text across all eight bindings.

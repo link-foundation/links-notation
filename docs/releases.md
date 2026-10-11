@@ -1,12 +1,12 @@
 # Release setup and recovery
 
 The CI entry is `js.yml`, and every called workflow uses the caller's commit.
-The main-only `release.yml` call waits for all seven native language stages.
-It then calls the seven `publish-*.yml` workflows. A final audit waits
+The main-only `release.yml` call waits for all eight native language stages.
+It then calls the eight `publish-*.yml` workflows. A final audit waits
 for all providers, including failures, then checks exact versions and GitHub
 releases. Pull requests expect their new version to be absent and never publish.
 HTTP/authentication/transport errors still fail PR audits. A successful release
-requires all seven registries; green tests alone do not prove delivery.
+requires all eight registries; green tests alone do not prove delivery.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -19,12 +19,20 @@ requires all seven registries; green tests alone do not prove delivery.
 | Go       | Git tag in the module's subdirectory                           | Workflow `GITHUB_TOKEN`; `go/vVERSION` tag at the gated SHA                         |
 | C#       | NuGet package API key                                          | `NUGET_API_KEY` or existing `NUGET_TOKEN`                                           |
 | PHP      | Packagist package submission and update API                    | Submit package once, then `PACKAGIST_USERNAME`, `PACKAGIST_TOKEN`                   |
+| C++      | GitHub release `cpp_VERSION` with the CMake source archive     | Workflow `GITHUB_TOKEN`; no registry account                                        |
 
 <!-- markdownlint-enable MD013 -->
 
 Register provider identities against the **caller** `js.yml`. Local reusable
 calls preserve the commit, but npm and PyPI publisher configuration must still
 match the calling workflow. Secrets are passed explicitly to their own callee.
+
+C++ has no central package registry. `publish-cpp.yml` archives `cpp/` with
+`git archive` at the gated SHA, attaches `links-notation-cpp-VERSION.tar.gz` and
+its SHA-256 file to the `cpp_VERSION` GitHub release, then downloads the archive
+again, checks the hash, and builds and tests `cpp/tests/consumer` against it. The
+final audit treats that asset as the C++ registry entry; consumers fetch it with
+CMake's `FetchContent`.
 
 Java uses `central-publishing-maven-plugin` with `autoPublish=true` and
 `waitUntil=published`; setup-java imports the signing key and supplies server
