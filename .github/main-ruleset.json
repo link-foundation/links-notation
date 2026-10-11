@@ -34,7 +34,8 @@
           {"context": "Java", "integration_id": 15368},
           {"context": "Go", "integration_id": 15368},
           {"context": "CSharp", "integration_id": 15368},
-          {"context": "PHP", "integration_id": 15368}
+          {"context": "PHP", "integration_id": 15368},
+          {"context": "Cpp", "integration_id": 15368}
         ]
       }
     }

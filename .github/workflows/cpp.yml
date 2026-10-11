@@ -1,0 +1,126 @@
+name: cpp
+
+on:
+  workflow_call:
+    inputs:
+      verbose:
+        description: "Print extra diagnostics (never secret values)"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+defaults:
+  run:
+    working-directory: cpp
+    shell: bash
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: ci-cpp-${{ github.ref }}-lint
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      # clang-format's output changes between releases, so the exact version
+      # in cpp/tools/requirements.txt is installed rather than the runner's.
+      - name: Install clang-format
+        run: pip install -r tools/requirements.txt
+      - name: Check formatting
+        run: git ls-files -z '*.cpp' '*.hpp' '*.hpp.in' | xargs -0 clang-format --dry-run --Werror
+
+  test:
+    name: test (${{ matrix.name }})
+    needs: [lint]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: gcc
+            os: ubuntu-24.04
+            cxx: g++
+          - name: clang
+            os: ubuntu-24.04
+            cxx: clang++
+          - name: msvc
+            os: windows-2025
+          - name: apple-clang
+            os: macos-15
+    concurrency:
+      group: ci-cpp-${{ github.ref }}-test-${{ matrix.name }}
+      cancel-in-progress: false
+    env:
+      # Empty on Windows and macOS, where CMake picks MSVC and Apple Clang.
+      CXX: ${{ matrix.cxx }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      # Warnings fail the build. RelWithDebInfo keeps the timing tests'
+      # budgets meaningful while still giving readable failure traces.
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLINKS_NOTATION_WARNINGS_AS_ERRORS=ON
+      - name: Build
+        run: cmake --build build --config RelWithDebInfo --parallel
+      - name: Test
+        run: ctest --test-dir build --build-config RelWithDebInfo --output-on-failure --parallel 4
+      # Downstream projects either find an installed package or add the
+      # sources (FetchContent); the in-tree tests exercise neither.
+      - name: Install and consume the package
+        run: |
+          set -euo pipefail
+          cmake --install build --config RelWithDebInfo --prefix "$RUNNER_TEMP/links-notation"
+          cmake -S tests/consumer -B "$RUNNER_TEMP/installed" -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DCMAKE_PREFIX_PATH:PATH="$RUNNER_TEMP/links-notation"
+          cmake --build "$RUNNER_TEMP/installed" --config RelWithDebInfo
+          ctest --test-dir "$RUNNER_TEMP/installed" --build-config RelWithDebInfo --output-on-failure
+      - name: Consume the sources
+        run: |
+          set -euo pipefail
+          cmake -S tests/consumer -B "$RUNNER_TEMP/sources" -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DLINKS_NOTATION_SOURCE_DIR:PATH="$GITHUB_WORKSPACE/cpp"
+          cmake --build "$RUNNER_TEMP/sources" --config RelWithDebInfo
+          ctest --test-dir "$RUNNER_TEMP/sources" --build-config RelWithDebInfo --output-on-failure
+
+  sanitizers:
+    needs: [lint]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    concurrency:
+      group: ci-cpp-${{ github.ref }}-sanitizers
+      cancel-in-progress: false
+    env:
+      CXX: clang++
+      ASAN_OPTIONS: detect_leaks=1:strict_string_checks=1
+      UBSAN_OPTIONS: print_stacktrace=1
+      # Sanitized Debug builds run the issue-316 inputs about three times slower
+      # than the 2s bound allows; the regressions it guards took far longer.
+      LINKS_NOTATION_TIME_SCALE: "4"
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Configure
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DLINKS_NOTATION_WARNINGS_AS_ERRORS=ON \
+            "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer" \
+            -DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined
+      - name: Build
+        run: cmake --build build --parallel
+      - name: Test
+        run: ctest --test-dir build --output-on-failure --parallel 4

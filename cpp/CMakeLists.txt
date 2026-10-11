@@ -17,7 +17,14 @@ else()
   set(LINKS_NOTATION_IS_TOP_LEVEL OFF)
 endif()
 
-option(LINKS_NOTATION_BUILD_TESTS "Build the GoogleTest suites" ${LINKS_NOTATION_IS_TOP_LEVEL})
+# The suites read the shared fixtures in the repository's parity/ and docs/
+# folders, which a release archive of cpp/ alone does not contain.
+if(LINKS_NOTATION_IS_TOP_LEVEL AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../parity/language-features.json")
+  set(LINKS_NOTATION_TESTS_DEFAULT ON)
+else()
+  set(LINKS_NOTATION_TESTS_DEFAULT OFF)
+endif()
+option(LINKS_NOTATION_BUILD_TESTS "Build the GoogleTest suites" ${LINKS_NOTATION_TESTS_DEFAULT})
 option(LINKS_NOTATION_BUILD_EXAMPLES "Build the examples" ${LINKS_NOTATION_IS_TOP_LEVEL})
 option(LINKS_NOTATION_WARNINGS_AS_ERRORS "Treat compiler warnings as errors" OFF)
 
@@ -25,6 +32,10 @@ configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/links_notation/version.hpp.in"
   "${CMAKE_CURRENT_BINARY_DIR}/generated/links_notation/version.hpp"
   @ONLY)
+
+# Included before the target is declared: its INSTALL_INTERFACE include
+# directory reads CMAKE_INSTALL_INCLUDEDIR, which is empty until then.
+include(GNUInstallDirs)
 
 add_library(links_notation
   src/binary.cpp
@@ -66,7 +77,6 @@ else()
   endif()
 endif()
 
-include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
 install(TARGETS links_notation

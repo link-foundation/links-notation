@@ -5,11 +5,11 @@ import { readFileSync, readdirSync } from "node:fs";
 import { YAML } from "bun";
 import { pathToFileURL } from "node:url";
 
-const languageNames = ["rust", "python", "java", "go", "csharp", "php"];
+const languageNames = ["rust", "python", "java", "go", "csharp", "php", "cpp"];
 const languageAction = /(?:rust-toolchain|setup-(?:dotnet|java|go|php))/;
 const languageRun =
-  /\b(?:cargo|dotnet|mvn|php|composer|pytest|go\s+(?:test|build|run|vet))\b|(?:python\/|python[23]?\s+-m\s+(?:pytest|unittest|build))/;
-const nativeDirectory = /^(?:\.\/)?(?:rust|python|java|go|csharp|php)(?:\/|$)/;
+  /\b(?:cargo|dotnet|mvn|php|composer|pytest|cmake|ctest|go\s+(?:test|build|run|vet))\b|(?:python\/|python[23]?\s+-m\s+(?:pytest|unittest|build))/;
+const nativeDirectory = /^(?:\.\/)?(?:rust|python|java|go|csharp|php|cpp)(?:\/|$)/;
 
 export function checkGate(workflows) {
   const errors = [];
@@ -59,7 +59,7 @@ export function checkGate(workflows) {
     release.if !==
       "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}"
   )
-    fail("Publication must wait for all seven native stages on main pushes");
+    fail("Publication must wait for all eight native stages on main pushes");
   if (
     !entry.jobs?.release_audit?.needs?.includes("release") ||
     entry.jobs.release_audit.if !==
@@ -117,7 +117,7 @@ export function checkGate(workflows) {
       if (
         job.concurrency?.["cancel-in-progress"] !== undefined &&
         job.concurrency["cancel-in-progress"] !== false &&
-        /^(?:javascript|rust|python|java|go|csharp|php|publish-.+)\.yml$/.test(
+        /^(?:javascript|rust|python|java|go|csharp|php|cpp|publish-.+)\.yml$/.test(
           file,
         )
       )

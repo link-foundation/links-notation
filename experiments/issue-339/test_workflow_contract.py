@@ -10,7 +10,16 @@ class WorkflowContract(unittest.TestCase):
     maxDiff = 1000
 
     def test_language_workflows_are_reusable_only(self):
-        for language in ("javascript", "rust", "python", "java", "go", "csharp", "php"):
+        for language in (
+            "javascript",
+            "rust",
+            "python",
+            "java",
+            "go",
+            "csharp",
+            "php",
+            "cpp",
+        ):
             with self.subTest(language=language):
                 text = (ROOT / f".github/workflows/{language}.yml").read_text()
                 trigger = text.split("on:", 1)[1].split("permissions:", 1)[0]

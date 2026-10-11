@@ -34,4 +34,5 @@ export const declaredVersions = {
       'java version',
     ),
   php: () => JSON.parse(read('php/composer.json')).version,
+  cpp: () => read('cpp/VERSION').trim(),
 };

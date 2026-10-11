@@ -1,0 +1,107 @@
+name: publish-cpp
+
+on:
+  workflow_call:
+    inputs:
+      verbose:
+        description: "Print extra diagnostics (never secret values)"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+defaults:
+  run:
+    working-directory: cpp
+
+jobs:
+  publishRelease:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    concurrency:
+      group: ci-cpp-publish-cpp
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Read the library version
+        id: version-check
+        run: |
+          set -euo pipefail
+          PACKAGE_VERSION=$(tr -d '[:space:]' < VERSION)
+          if [ -z "$PACKAGE_VERSION" ]; then
+            echo "::error::cpp/VERSION is empty"
+            exit 1
+          fi
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "asset=links-notation-cpp-$PACKAGE_VERSION.tar.gz" >> "$GITHUB_OUTPUT"
+          echo "Library: links-notation-cpp $PACKAGE_VERSION"
+      # C++ has no central registry. The release asset is the distribution: a
+      # source archive of cpp/ that CMake's FetchContent downloads by URL and
+      # hash, or that installs with `cmake --install`.
+      - name: Archive the sources
+        env:
+          ASSET: ${{ steps.version-check.outputs.asset }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+        run: |
+          set -euo pipefail
+          git archive --format=tar.gz --prefix="links-notation-cpp-${PACKAGE_VERSION}/" \
+            --output="$RUNNER_TEMP/$ASSET" HEAD:cpp
+          (cd "$RUNNER_TEMP" && sha256sum "$ASSET" | tee "$ASSET.sha256")
+      - name: Create the GitHub release
+        id: publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_SHA: ${{ github.sha }}
+          ASSET: ${{ steps.version-check.outputs.asset }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+        run: |
+          set -euo pipefail
+          TAG="cpp_${PACKAGE_VERSION}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            # A release from an earlier run keeps its archive: the version is
+            # immutable. Only a missing archive is backfilled, from this commit.
+            if gh release view "$TAG" --json assets --jq '.assets[].name' | grep -qxF "$ASSET"; then
+              echo "Release $TAG already has $ASSET"
+              echo "published=skipped" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            gh release upload "$TAG" "$RUNNER_TEMP/$ASSET" "$RUNNER_TEMP/$ASSET.sha256"
+          else
+            gh release create "$TAG" \
+              --target "$RELEASE_SHA" \
+              --title "[C++] $PACKAGE_VERSION" \
+              --notes "C++17 library release. Add it to a CMake project with \`FetchContent_Declare(links_notation URL https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/${ASSET})\` and link \`links_notation::links_notation\`." \
+              "$RUNNER_TEMP/$ASSET" "$RUNNER_TEMP/$ASSET.sha256"
+          fi
+          echo "published=true" >> "$GITHUB_OUTPUT"
+      - name: Verify the archive builds for a consumer
+        if: steps.publish.outputs.published == 'true'
+        env:
+          ASSET: ${{ steps.version-check.outputs.asset }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+        run: |
+          set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/cpp_${PACKAGE_VERSION}/${ASSET}"
+          wait_for_registry "$ASSET on GitHub Releases" "$URL" 20 15
+          mkdir "$RUNNER_TEMP/download"
+          curl --fail --silent --show-error --location --output "$RUNNER_TEMP/download/$ASSET" "$URL"
+          (cd "$RUNNER_TEMP/download" && cp "$RUNNER_TEMP/$ASSET.sha256" . && sha256sum --check "$ASSET.sha256")
+          tar -xzf "$RUNNER_TEMP/download/$ASSET" -C "$RUNNER_TEMP/download"
+          cmake -S tests/consumer -B "$RUNNER_TEMP/consumer" \
+            -DLINKS_NOTATION_SOURCE_DIR="$RUNNER_TEMP/download/links-notation-cpp-${PACKAGE_VERSION}"
+          cmake --build "$RUNNER_TEMP/consumer" --parallel
+          ctest --test-dir "$RUNNER_TEMP/consumer" --output-on-failure

@@ -25,7 +25,7 @@ namespace {
 
 // Generous enough for a debug build on a slow machine, and far below what the
 // exponential and quadratic readings took at the depths used here.
-constexpr std::chrono::seconds budget(5);
+const std::chrono::seconds budget = std::chrono::seconds(5) * time_scale();
 
 // The depth used for the shapes that used to take exponential time.
 constexpr std::size_t deep = 32;
@@ -44,7 +44,7 @@ auto within_budget(const std::string& what, Work work) -> std::invoke_result_t<W
   // Deep nesting recurses deeply; give it room so only time is measured.
   std::thread([task] { run_on_stack(std::size_t{512} << 20, [&task] { (*task)(); }); }).detach();
   if (future.wait_for(budget) != std::future_status::ready) {
-    throw std::runtime_error(what + " did not finish within 5s");
+    throw std::runtime_error(what + " did not finish within " + std::to_string(budget.count()) + "s");
   }
   return future.get();
 }

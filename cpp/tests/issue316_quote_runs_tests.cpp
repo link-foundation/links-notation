@@ -19,7 +19,7 @@ namespace {
 
 using Duration = std::chrono::steady_clock::duration;
 
-const Duration bound = std::chrono::seconds(2);
+const Duration bound = std::chrono::seconds(2) * time_scale();
 constexpr std::size_t size = 1000000;
 // Shapes that end in a long list of short references: reading those is most
 // of the time the parser takes on them, fixed or not, so they are kept smaller.
