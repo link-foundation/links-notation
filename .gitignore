@@ -378,3 +378,7 @@ csharp/fvextra.sty
 # copy of its output only ever went stale, and the deployed site is built
 # fresh on every push.
 docs/website/dist/
+
+# C++ build trees
+cpp/build/
+cpp/out/

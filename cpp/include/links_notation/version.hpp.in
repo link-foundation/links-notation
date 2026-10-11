@@ -1,0 +1,16 @@
+#ifndef LINKS_NOTATION_VERSION_HPP
+#define LINKS_NOTATION_VERSION_HPP
+
+#define LINKS_NOTATION_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define LINKS_NOTATION_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define LINKS_NOTATION_VERSION_PATCH @PROJECT_VERSION_PATCH@
+#define LINKS_NOTATION_VERSION_STRING "@PROJECT_VERSION@"
+
+namespace links_notation {
+
+/// The library version, read from cpp/VERSION when the build is configured.
+inline constexpr const char* version = LINKS_NOTATION_VERSION_STRING;
+
+}  // namespace links_notation
+
+#endif  // LINKS_NOTATION_VERSION_HPP

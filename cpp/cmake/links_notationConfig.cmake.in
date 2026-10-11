@@ -1,0 +1,4 @@
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/links_notation_targets.cmake")
+check_required_components(links_notation)
