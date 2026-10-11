@@ -5,7 +5,7 @@ import subprocess
 
 URLS = [
     "https://github.com/link-assistant/hive-mind/blob/main/docs/BEST-PRACTICES.md",
-    "https://github.com/link-foundation/links-notation/blob/main/CONTRIBUTING.md",
+    "https://github.com/link-foundation/links-notation/blob/main/README.md",
     "https://github.com/link-foundation/links-notation/blob/main/issue-339-does-not-exist.md",
 ]
 
