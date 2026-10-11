@@ -27,7 +27,7 @@ prepared branch: `d99f425353e7ac56dc6bdb6631ac0877214b4a1e`.
 
 | Issue requirement                                              | Reviewable implementation / evidence                                                                                                                                                                                                             |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| R1: Same-commit JS gate; no failed/cancelled/skipped JS bypass | Six reusable-only language workflows; `needs: [js]` in entry; 24 workflow regressions in `experiments/issue-339/ci-contract.test.mjs`.                                                                                                           |
+| R1: Same-commit JS gate; no failed/cancelled/skipped JS bypass | Six reusable-only language workflows; `needs: [js]` in entry; 25 workflow regressions in `experiments/issue-339/ci-contract.test.mjs`.                                                                                                           |
 | R2: Always run JS lint/test/parity                             | Unfiltered PR/main entry; unconditional format/lint/test/parity jobs; generated Peggy source comparison.                                                                                                                                         |
 | R3: Reject ungated non-JS workflows                            | `scripts/ci/check-js-gate.mjs` parses every workflow, checks reusable callers, toolchain jobs, conditions, checkout refs, and concurrency. Includes security/binary/benchmarks/docs.                                                             |
 | R4: Manifest and shared text corpus in seven libraries         | `parity/language-features.json`, `parity/text-fixtures.json`, generated TSV, native parsing/formatting/round-trip/stream tests. Missing binding/evidence/fixture/inventory fails the checker.                                                    |
@@ -112,8 +112,8 @@ time, not summed runner time.
 
 <!-- markdownlint-disable MD013 -->
 
-| Comparison                           | Runs across PR branch | Native workflow runs  | Runner wall minutes | First seven-language green |
-| ------------------------------------ | --------------------- | --------------------- | ------------------- | -------------------------- |
+| Comparison                     | Runs across PR branch | Native workflow runs  | Runner wall minutes | First seven-language green |
+| ------------------------------ | --------------------- | --------------------- | ------------------- | -------------------------- |
 | Before: PR 335, three PR heads | 41                    | 14                    | 68.450              | 42.167 minutes             |
 | Before: PR 336, three PR heads | 41                    | 14                    | 65.600              | 12.783 minutes             |
 | After: PR 341, three PR heads  | 19                    | 2 unified native runs | 75.700              | 65.950 minutes             |
@@ -137,8 +137,16 @@ was 26.967 minutes. The 65.950-minute branch metric also includes the initial
 38.983-minute implementation gap. Total runner time increased relative to the
 comparison PRs; this is not a measured speedup. `pr-341-metrics.json` contains
 per-commit totals and the corresponding paginated run/job data. The final
-hardening/evidence commit is verified separately through the PR's latest checks;
-it does not retroactively alter this first-green measurement snapshot.
+hardening/evidence commits are verified separately through the PR's latest
+checks; they do not retroactively alter this first-green measurement snapshot.
+The linked PR records final total run counts and runner time, including these
+follow-ups. Collect a fresh complete-branch snapshot without overwriting the
+archived first-green evidence with
+
+```sh
+python3 experiments/issue-339/measure_ci.py 341 issue-339-12b617cefd5b \
+  --output-dir ci-logs/final-metrics
+```
 
 ## Registry evidence and recovery
 
@@ -160,8 +168,10 @@ green publication or a completed registry requirement.
 After the verified Central namespace and four Java secrets are configured, merge
 through the required checks and run main CI. The Central plugin waits for
 publication, both public URLs must return 200, and only then is `[Java]` created
-at the gated SHA. Register Packagist and configure its update credentials for
-PHP; configure crates.io publishing before releasing the bumped Rust crate.
+at the gated SHA. The root Composer descriptor and version-tag step now provide
+the PHP distribution layout. Register this repository on Packagist after merge
+and configure its update credentials;
+configure crates.io publishing before releasing the bumped Rust crate.
 Reruns verify existing exact versions and backfill missing GitHub releases. The
 final audit reports every provider failure even when another publisher failed.
 See [release setup](../../releases.md) for the concrete configuration contract.
@@ -183,11 +193,13 @@ See [release setup](../../releases.md) for the concrete configuration contract.
 
 <!-- markdownlint-enable MD013 -->
 
-No reproducible defect in an external project was found. Missing provider setup
-is repository configuration, not a Sonatype defect. Existing
+Missing provider setup is repository configuration, not a Sonatype defect.
+Existing
 [npm/documentation issue 1755](https://github.com/npm/documentation/issues/1755)
 already tracks reusable-workflow documentation; opening a duplicate without an
-independent reproduction would misreport the investigation.
+independent reproduction would misreport the investigation. The later link
+investigation did reproduce Lychee's HTTP-status retry behavior and reported
+the evidence on its existing upstream issue, as detailed below.
 
 ## Stale PR decisions and evidence retention
 
@@ -270,10 +282,11 @@ are `main-ruleset-created.json`, `main-ruleset-readback.json`, and
 
 Review also reproduced two static-guard gaps: bare `pytest` / `python3 -m
 pytest`, and language commands hidden by a native working directory. Both
-mutation tests failed before the fix and pass afterward; the guard now has 24
+mutation tests failed before the fix and pass afterward; the guard now has 25
 regressions. No parser or formatter behavior was changed. The link-check
 workaround follows [Lychee's own troubleshooting guidance](https://lychee.cli.rs/troubleshooting/redirects/)
-and per-host header configuration. No external software defect was established.
+and per-host header configuration. Its limits and the upstream retry behavior
+were investigated after the later recurrence described below.
 
 ## Publication barrier review
 
@@ -284,10 +297,10 @@ regression failed because the entry had no all-language release prerequisite
 seven reusable `publish-*.yml` files called by `release.yml`; its entry needs all
 seven native stages and runs only on main pushes. Provider-to-GitHub-release
 dependencies and C# PDF/DocFX coverage remain intact. Native tests receive no
-provider credentials. The final audit explicitly waits for release completion
+publication credentials. The final audit explicitly waits for release completion
 and still runs after a provider failure. Three mutation checks reject a removed
 native prerequisite, publication moved into a native stage, and a skipped final
-audit. All 24 workflow regressions and four Python checks pass locally.
+audit. All 25 workflow regressions and four Python checks pass locally.
 
 ## First fully green implementation batch
 
@@ -334,3 +347,70 @@ both global and job/step directories and recognizes Composer. Before output is
 after output records all 24 regressions passing. No library behavior changed.
 Provider configuration was rechecked after green CI: the same three secret
 names remain, variables are empty, and actual R6 delivery remains blocked.
+
+Coverage review found Go's optional `CODECOV_TOKEN` was referenced by the test
+job but not declared or forwarded by the new reusable caller. A failing
+regression reproduced the missing declaration. The callee now declares the
+optional secret and `js.yml` forwards it explicitly, preserving the existing
+coverage-upload capability when configured. Current repository configuration
+still lacks that token, so the documented notice remains expected. All 25
+workflow regressions pass locally; before/after logs are preserved as
+`data/local-checks/go-coverage-*.log.gz`.
+
+The final provider review identified an additional PHP setup requirement:
+`php/composer.json` is not repository-root metadata, and the publisher updates
+the monorepo URL. Public Packagist's
+[documented repository requirement](https://packagist.org/about) and
+[monorepo explanation](https://blog.packagist.com/installing-composer-packages-from-monorepos/)
+confirm it cannot index that subdirectory directly. The existing
+[upstream request #472](https://github.com/composer/packagist/issues/472)
+covers subdirectory support; this is a documented limitation, so no duplicate
+issue was opened.
+
+The minimal Composer installation regression failed before the fix with
+“No valid composer.json was found in any branch or tag.” Root `composer.json`
+now derives runtime metadata from the native descriptor and prefixes its
+autoload paths with `php/`; versions come from Git tags. The publisher creates
+a bare `VERSION` tag at the gated SHA after provider preflight, preserving the
+existing `php_VERSION` GitHub release convention. Ten JS regressions cover
+metadata, exact tag matching, annotated tags, immutable source commits, dev-only
+registration, version normalization, and outage failures. The JS gate runs
+these checks; PHP 8.4/8.5 CI installs a minimal tagged repository without network
+registries and verifies the installed parser via Composer's autoloader.
+Before/after logs are retained under `data/local-checks/php-distribution-*`.
+Actual Packagist registration and credentials remain unavailable; the exact
+version audit will fail on main until actual delivery exists. No remote version
+tag or PHP release was created during PR validation.
+
+The third push, `301578b6af829d475321deec399992210259905e`, passed unified CI
+(`38102050448`) and every other executing workflow except links. Links run
+`38102050110` failed twice on GitHub HTML file 503s: attempt one had 21
+occurrences across 13 distinct URLs; attempt two ended with seven occurrences.
+Both complete logs and matching SHA metadata are preserved as
+`data/links-38102050110-attempt-*`. Attempt-one log lines 524–568 and attempt-two
+lines 515–527 list the actual errors. Both attempts finished before the next
+push; no library failure was hidden or attributed to a different commit.
+
+The user-agent workaround was insufficient: a fresh probe returned 503 with
+both agents. `probe_github_blob_content.py` then verified every one of the 13
+equivalent raw files returned 200 while a missing-file control returned 404.
+Lychee's [supported remapping](https://lychee.cli.rs/guides/cli/#--remap) now
+checks GitHub file content at the same owner/repository/ref/path, preserving
+readable documentation links. Other GitHub URL types retain their own checks.
+Three local server regressions failed before configuration and pass afterward;
+the links workflow runs them using the same installed Lychee binary. They
+verify capture substitution, narrow URL matching, and a real 404 failure.
+The local cached crawl checked 2,331 links with zero errors and three existing
+exclusions; the raw-content probe made fresh requests for the 13 failures.
+Before/after and crawl logs are preserved in `data/local-checks/`.
+
+The finite `probe_lychee_retry.py` confirmed `--max-retries 3` makes only one
+request to a 503-then-200 endpoint, while a second invocation succeeds and a
+persistent 404 still fails. Pinned 0.24.2 source and a search of upstream issues
+confirm the distinction between actual rejected status codes and transport
+errors. The [existing upstream discussion](https://github.com/lycheeverse/lychee/issues/2193)
+already covers this classification; the
+[evidence report](https://github.com/lycheeverse/lychee/issues/2193#issuecomment-6104315167)
+adds the standalone reproduction, real CI failures, verified workarounds, and
+suggested regression cases. No duplicate issue or unverified GitHub root cause
+was asserted.

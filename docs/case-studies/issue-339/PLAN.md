@@ -36,6 +36,12 @@
       collect every failure from the latest SHA before any subsequent push.
 - [x] Download and inspect fresh failing CI logs, fix actual failures, and wait
       for completed checks.
+- [x] Preserve optional Go coverage credentials, reproduce GitHub HTML 503s
+      with bounded probes, validate the raw-content remap, and contribute the
+      finite retry reproduction to the existing upstream discussion.
+- [x] Reproduce PHP distribution discovery failure, add root Composer metadata
+      and same-commit version tags, and verify actual offline installation and
+      autoloading with regression coverage.
 - [x] Record before/after run counts, runner minutes, time to first green,
       per-language results, and limitations without invented measurements.
 - [x] Confirm current default branch is included, review the complete PR diff

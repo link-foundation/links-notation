@@ -137,5 +137,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("number", type=int)
     parser.add_argument("branch")
+    parser.add_argument("--output-dir", type=Path, default=ROOT)
     args = parser.parse_args()
+    ROOT = args.output_dir
+    ROOT.mkdir(parents=True, exist_ok=True)
     collect(args.number, args.branch)
