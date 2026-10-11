@@ -72,6 +72,33 @@ const versionReferences = [
     re: /"link-foundation\/links-notation":\s*"\^([^"]+)"/,
     expected: (version) => version.split('.').slice(0, 2).join('.'),
   },
+  {
+    of: 'cpp',
+    file: 'cpp/README.md',
+    what: 'the FetchContent URL',
+    // The tag and the archive name must name the same release.
+    re: /releases\/download\/cpp_([^/]+)\/links-notation-cpp-\1\.tar\.gz/,
+  },
+  {
+    of: 'cpp',
+    file: 'cpp/README.md',
+    what: 'the find_package call',
+    re: /find_package\(links_notation ([^ ]+) REQUIRED/,
+    expected: (version) => version.split('.').slice(0, 2).join('.'),
+  },
+  {
+    of: 'cpp',
+    file: 'cpp/README.ru.md',
+    what: 'the FetchContent URL',
+    re: /releases\/download\/cpp_([^/]+)\/links-notation-cpp-\1\.tar\.gz/,
+  },
+  {
+    of: 'cpp',
+    file: 'cpp/README.ru.md',
+    what: 'the find_package call',
+    re: /find_package\(links_notation ([^ ]+) REQUIRED/,
+    expected: (version) => version.split('.').slice(0, 2).join('.'),
+  },
 ];
 
 const declared = new Map();
