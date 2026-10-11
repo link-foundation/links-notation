@@ -6,7 +6,7 @@
 
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.25.1</version>
+    <version>0.25.2</version>
     <packaging>jar</packaging>
 
     <name>Links Notation</name>
@@ -164,6 +164,7 @@
                         <configuration>
                             <publishingServerId>central</publishingServerId>
                             <autoPublish>true</autoPublish>
+                            <waitUntil>published</waitUntil>
                         </configuration>
                     </plugin>
                 </plugins>

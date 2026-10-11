@@ -3,6 +3,8 @@ repos:
     rev: v6.0.0
     hooks:
       - id: trailing-whitespace
+        # Four TSV columns must preserve empty input/tree/format fields.
+        exclude: ^parity/text-vectors\.tsv$
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
@@ -24,7 +26,7 @@ repos:
 
   # Python
   - repo: https://github.com/psf/black
-    rev: 26.10.0
+    rev: 26.10.1
     hooks:
       - id: black
         language_version: python3

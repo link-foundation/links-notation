@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "links-notation"
-version = "0.25.1"
+version = "0.25.2"
 description = "Python implementation of the Links Notation parser"
 readme = "README.md"
 license = "Unlicense"
@@ -33,8 +33,8 @@ dependencies = []
 
 [project.optional-dependencies]
 test = ["pytest>=9.1.1", "pytest-timeout>=2.4.0"]
-lint = ["black>=26.10.0", "isort>=9.0.2", "flake8>=7.4.1"]
-dev = ["pytest>=9.1.1", "pytest-timeout>=2.4.0", "black>=26.10.0", "isort>=9.0.2", "flake8>=7.4.1"]
+lint = ["black>=26.10.1", "isort>=9.0.2", "flake8>=7.4.1"]
+dev = ["pytest>=9.1.1", "pytest-timeout>=2.4.0", "black>=26.10.1", "isort>=9.0.2", "flake8>=7.4.1"]
 
 [project.urls]
 Homepage = "https://github.com/link-foundation/links-notation"
