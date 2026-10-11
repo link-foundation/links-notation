@@ -266,6 +266,7 @@ All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP)
 | Go | 139 | 17 |
 | Java | 185 | 16 |
 | PHP | 235 | 23 |
+| C++ | 345 | 28 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files

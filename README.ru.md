@@ -262,6 +262,7 @@ deploy: staging # пока только staging
 | Go | 139 | 17 |
 | Java | 185 | 16 |
 | PHP | 235 | 23 |
+| C++ | 345 | 28 |
 <!-- test-counts:end -->
 
 Таблицу записывает `scripts/create-test-case-comparison.mjs`: он читает сами файлы тестов
