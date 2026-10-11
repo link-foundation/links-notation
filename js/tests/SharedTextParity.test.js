@@ -12,14 +12,16 @@ const fixtures = JSON.parse(
 const tree = (links) =>
   links.map((link) => ({ id: link.id, values: tree(link.values) }));
 
-for (const fixture of fixtures) {
-  test(`shared text parity: ${fixture.id}`, () => {
+test('shared text parity', () => {
+  for (const fixture of fixtures) {
     const parsed = new Parser().parse(fixture.input);
-    expect(tree(parsed)).toEqual(fixture.expected);
-    expect(formatLinks(parsed)).toBe(fixture.format);
-    expect(tree(new Parser().parse(fixture.format))).toEqual(fixture.expected);
+    expect(tree(parsed), fixture.id).toEqual(fixture.expected);
+    expect(formatLinks(parsed), fixture.id).toBe(fixture.format);
+    expect(tree(new Parser().parse(fixture.format)), fixture.id).toEqual(
+      fixture.expected
+    );
     const stream = new StreamParser();
     for (const character of fixture.input) stream.write(character);
-    expect(tree(stream.end())).toEqual(fixture.expected);
-  });
-}
+    expect(tree(stream.end()), fixture.id).toEqual(fixture.expected);
+  }
+});
