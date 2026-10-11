@@ -1,0 +1,172 @@
+name: publish-js
+
+on:
+  workflow_call:
+    inputs:
+      verbose:
+        description: "Print extra diagnostics (never secret values)"
+        type: boolean
+        required: false
+        default: false
+    secrets:
+      NPM_TOKEN:
+        required: false
+
+permissions:
+  contents: read
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+defaults:
+  run:
+    working-directory: js
+
+jobs:
+  publishToNpm:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-24.04
+    # Must outlast the 20 minute registry wait below plus the build.
+    timeout-minutes: 35
+    concurrency:
+      group: ci-js-publish-npm
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      # Required for npm trusted publishing (OIDC). Harmless when the package
+      # is not configured for it; npm then falls back to NODE_AUTH_TOKEN.
+      id-token: write
+    outputs:
+      published: ${{ steps.publish.outputs.published }}
+      version: ${{ steps.version-check.outputs.version }}
+      name: ${{ steps.version-check.outputs.name }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2.2.0
+        with:
+          bun-version: latest
+      # npm itself does the publishing: trusted publishing needs npm >= 11.5.1,
+      # and setup-node writes the registry entry ~/.npmrc that npm reads.
+      - name: Setup Node
+        uses: actions/setup-node@v7.1.0
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+      # Node 22 bundles npm 10.x; trusted publishing (OIDC) needs >= 11.5.1.
+      # Pin the exact CLI version so publish behaviour changes are reviewed.
+      - name: Upgrade npm for trusted publishing
+        run: npm install -g npm@12.2.0
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+      - name: Build
+        run: bun run build
+      - name: Check if version already published
+        id: version-check
+        run: |
+          set -euo pipefail
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
+          echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
+
+          if npm view "$PACKAGE_NAME@$PACKAGE_VERSION" version >/dev/null 2>&1; then
+            echo "Version $PACKAGE_VERSION already exists on npm"
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Version $PACKAGE_VERSION does not exist on npm"
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish to npm
+        id: publish
+        env:
+          # Bootstrap fallback for as long as trusted publishing is not
+          # configured for this package on npmjs.com.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ "${{ steps.version-check.outputs.should_publish }}" != "true" ]; then
+            echo "published=skipped" >> "$GITHUB_OUTPUT"
+            echo "::notice::Version ${{ steps.version-check.outputs.version }} is already on npm, nothing to publish"
+            exit 0
+          fi
+
+          # Presence only, never the value.
+          if [ -n "$NODE_AUTH_TOKEN" ]; then
+            echo "npm credential: NPM_TOKEN present"
+          else
+            echo "npm credential: NPM_TOKEN absent, relying on OIDC trusted publishing"
+          fi
+
+          # Keep the log outside the package directory: npm builds the tarball
+          # from the working tree, so a log written here ships inside it.
+          PUBLISH_LOG="$RUNNER_TEMP/publish.log"
+          if ! npm publish --access public 2>&1 | tee "$PUBLISH_LOG"; then
+            if grep -q 'ENEEDAUTH\|E401\|E403' "$PUBLISH_LOG"; then
+              echo "::error::npm rejected the credentials. Either configure trusted publishing for ${{ steps.version-check.outputs.name }} on npmjs.com or set the NPM_TOKEN secret."
+            fi
+            if grep -q 'E422\|provenance' "$PUBLISH_LOG"; then
+              echo "::error::npm rejected the provenance attestation. Trusted publishing signs the package with this repository's identity, so package.json must carry a matching \"repository.url\" (https://github.com/${{ github.repository }})."
+            fi
+            echo "published=failed" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          echo "published=true" >> "$GITHUB_OUTPUT"
+      - name: Verify the package is really on npm
+        if: steps.publish.outputs.published == 'true'
+        env:
+          PACKAGE_NAME: ${{ steps.version-check.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+        run: |
+          set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          # npm scans every new version for malware before serving it, which
+          # "typically takes around five minutes" and can take "15 minutes or
+          # more" (https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/).
+          # 0.23.0 took 4m09s, so the old 150 second window failed a publish
+          # that had succeeded (issue #330). 80 x 15s = 20 minutes.
+          wait_for_registry \
+            "${PACKAGE_NAME}@${PACKAGE_VERSION} on npm" \
+            "https://registry.npmjs.org/${PACKAGE_NAME}/${PACKAGE_VERSION}" 80 15
+
+  publishRelease:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    needs: [publishToNpm]
+    # `result == 'success'` was true even when the publish step was skipped,
+    # so releases were cut for versions that were never pushed. `skipped`
+    # (already on npm) is included so a release that an earlier run failed to
+    # create is backfilled: js_0.23.0 was published, but npm's publish-time
+    # malware scan kept it invisible past the verify window, the job failed,
+    # and every later run skipped the release (issue #330). See csharp.yml.
+    if: ${{ (needs.publishToNpm.outputs.published == 'true' || needs.publishToNpm.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE_VERSION: ${{ needs.publishToNpm.outputs.version }}
+          PACKAGE_NAME: ${{ needs.publishToNpm.outputs.name }}
+          RELEASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          TAG="js_${PACKAGE_VERSION}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists"
+            exit 0
+          fi
+          gh release create "$TAG" \
+            --target "$RELEASE_SHA" \
+            --title "[JS] $PACKAGE_VERSION" \
+            --notes "https://www.npmjs.com/package/$PACKAGE_NAME"

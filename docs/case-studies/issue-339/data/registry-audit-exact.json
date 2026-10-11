@@ -1,0 +1,124 @@
+{
+  "failures": 2,
+  "findings": [
+    {
+      "language": "js",
+      "registry": "npm",
+      "version": "0.25.1",
+      "requests": [
+        {
+          "url": "https://registry.npmjs.org/links-notation/0.25.1",
+          "status": 200
+        },
+        {
+          "url": "https://api.github.com/repos/link-foundation/links-notation/releases/tags/js_0.25.1",
+          "status": 200
+        }
+      ],
+      "published": true,
+      "release": true
+    },
+    {
+      "language": "python",
+      "registry": "PyPI",
+      "version": "0.25.1",
+      "requests": [
+        {
+          "url": "https://pypi.org/pypi/links-notation/0.25.1/json",
+          "status": 200
+        },
+        {
+          "url": "https://api.github.com/repos/link-foundation/links-notation/releases/tags/python_0.25.1",
+          "status": 200
+        }
+      ],
+      "published": true,
+      "release": true
+    },
+    {
+      "language": "rust",
+      "registry": "crates.io",
+      "version": "0.25.1",
+      "requests": [
+        {
+          "url": "https://crates.io/api/v1/crates/links-notation/0.25.1",
+          "status": 200
+        },
+        {
+          "url": "https://api.github.com/repos/link-foundation/links-notation/releases/tags/rust_0.25.1",
+          "status": 200
+        }
+      ],
+      "published": true,
+      "release": true
+    },
+    {
+      "language": "csharp",
+      "registry": "NuGet",
+      "version": "0.25.1",
+      "requests": [
+        {
+          "url": "https://api.nuget.org/v3-flatcontainer/link.foundation.links.notation/index.json",
+          "status": 200
+        },
+        {
+          "url": "https://api.nuget.org/v3-flatcontainer/link.foundation.links.notation/0.25.1/link.foundation.links.notation.0.25.1.nupkg",
+          "status": 200
+        },
+        {
+          "url": "https://api.github.com/repos/link-foundation/links-notation/releases/tags/csharp_0.25.1",
+          "status": 200
+        }
+      ],
+      "published": true,
+      "release": true
+    },
+    {
+      "language": "go",
+      "registry": "Go proxy",
+      "version": "0.25.1",
+      "requests": [
+        {
+          "url": "https://proxy.golang.org/github.com/link-foundation/links-notation/go/@v/v0.25.1.info",
+          "status": 200
+        },
+        {
+          "url": "https://api.github.com/repos/link-foundation/links-notation/releases/tags/go%2Fv0.25.1",
+          "status": 200
+        }
+      ],
+      "published": true,
+      "release": true
+    },
+    {
+      "language": "java",
+      "registry": "Maven Central",
+      "version": "0.25.1",
+      "requests": [
+        {
+          "url": "https://repo1.maven.org/maven2/io/github/link-foundation/links-notation/0.25.1/links-notation-0.25.1.pom",
+          "status": 404
+        },
+        {
+          "url": "https://repo1.maven.org/maven2/io/github/link-foundation/",
+          "status": 404
+        }
+      ],
+      "published": false,
+      "release": false
+    },
+    {
+      "language": "php",
+      "registry": "Packagist",
+      "version": "0.25.1",
+      "requests": [
+        {
+          "url": "https://repo.packagist.org/p2/link-foundation/links-notation.json",
+          "status": 404
+        }
+      ],
+      "published": false,
+      "release": false
+    }
+  ]
+}

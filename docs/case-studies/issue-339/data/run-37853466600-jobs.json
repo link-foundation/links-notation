@@ -1,0 +1,305 @@
+[
+  {
+    "id": 113571926328,
+    "run_id": 37853466600,
+    "workflow_name": "go",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466600",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoROA",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571926328",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466600/job/113571926328",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:20Z",
+    "started_at": "2026-10-08T22:26:22Z",
+    "completed_at": "2026-10-08T22:26:30Z",
+    "name": "findChangedGoFiles",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:26:23Z",
+        "completed_at": "2026-10-08T22:26:25Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:26:25Z",
+        "completed_at": "2026-10-08T22:26:27Z"
+      },
+      {
+        "name": "Get changed files using defaults",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:26:27Z",
+        "completed_at": "2026-10-08T22:26:27Z"
+      },
+      {
+        "name": "Set output isGoFilesChanged",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:26:27Z",
+        "completed_at": "2026-10-08T22:26:27Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:26:27Z",
+        "completed_at": "2026-10-08T22:26:27Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:26:27Z",
+        "completed_at": "2026-10-08T22:26:27Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571926328",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096836,
+    "runner_name": "GitHub Actions 1000096836",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571984245,
+    "run_id": 37853466600,
+    "workflow_name": "go",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466600",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWrzdQ",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571984245",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466600/job/113571984245",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:30Z",
+    "started_at": "2026-10-08T22:26:34Z",
+    "completed_at": "2026-10-08T22:26:55Z",
+    "name": "lint",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:26:35Z",
+        "completed_at": "2026-10-08T22:26:36Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:26:36Z",
+        "completed_at": "2026-10-08T22:26:38Z"
+      },
+      {
+        "name": "Setup Go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:26:38Z",
+        "completed_at": "2026-10-08T22:26:39Z"
+      },
+      {
+        "name": "Check formatting",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:26:39Z",
+        "completed_at": "2026-10-08T22:26:40Z"
+      },
+      {
+        "name": "Run go vet",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:26:40Z",
+        "completed_at": "2026-10-08T22:26:53Z"
+      },
+      {
+        "name": "Post Setup Go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:26:53Z",
+        "completed_at": "2026-10-08T22:26:53Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-08T22:26:53Z",
+        "completed_at": "2026-10-08T22:26:53Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-08T22:26:53Z",
+        "completed_at": "2026-10-08T22:26:53Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571984245",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096851,
+    "runner_name": "GitHub Actions 1000096851",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113572124724,
+    "run_id": 37853466600,
+    "workflow_name": "go",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466600",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacW0YNA",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113572124724",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466600/job/113572124724",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:55Z",
+    "started_at": "2026-10-08T22:27:41Z",
+    "completed_at": "2026-10-08T22:28:50Z",
+    "name": "test",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:27:42Z",
+        "completed_at": "2026-10-08T22:27:43Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:27:43Z",
+        "completed_at": "2026-10-08T22:27:44Z"
+      },
+      {
+        "name": "Setup Go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:27:44Z",
+        "completed_at": "2026-10-08T22:27:46Z"
+      },
+      {
+        "name": "Build",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:27:46Z",
+        "completed_at": "2026-10-08T22:27:54Z"
+      },
+      {
+        "name": "Test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:27:54Z",
+        "completed_at": "2026-10-08T22:28:48Z"
+      },
+      {
+        "name": "Upload coverage",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 6,
+        "started_at": "2026-10-08T22:28:48Z",
+        "completed_at": "2026-10-08T22:28:48Z"
+      },
+      {
+        "name": "Note that coverage was not uploaded",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:28:48Z",
+        "completed_at": "2026-10-08T22:28:48Z"
+      },
+      {
+        "name": "Post Setup Go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-08T22:28:48Z",
+        "completed_at": "2026-10-08T22:28:48Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-08T22:28:48Z",
+        "completed_at": "2026-10-08T22:28:48Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-08T22:28:48Z",
+        "completed_at": "2026-10-08T22:28:48Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113572124724",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096901,
+    "runner_name": "GitHub Actions 1000096901",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113572786508,
+    "run_id": 37853466600,
+    "workflow_name": "go",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466600",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacXcxTA",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113572786508",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466600/job/113572786508",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:28:50Z",
+    "started_at": "2026-10-08T22:28:50Z",
+    "completed_at": "2026-10-08T22:28:50Z",
+    "name": "publishRelease",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113572786508",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  }
+]

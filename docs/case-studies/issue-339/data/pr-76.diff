@@ -1,0 +1,894 @@
+diff --git a/js/src/Link.js b/js/src/Link.js
+index 172913c0..8691663a 100644
+--- a/js/src/Link.js
++++ b/js/src/Link.js
+@@ -77,7 +77,7 @@ export class Link {
+   }
+ 
+   
+-  format(lessParentheses = false, isCompoundValue = false) {
++  format(lessParentheses = false, isCompoundValue = false, arrowMode = false) {
+     // Empty link
+     if (this.id === null && (!this.values || this.values.length === 0)) {
+       return lessParentheses ? '' : '()';
+@@ -94,10 +94,17 @@ export class Link {
+     }
+     
+     // Format values recursively  
+-    const valuesStr = this.values.map(v => this.formatValue(v)).join(' ');
++    const valuesStr = this.values.map(v => this.formatValue(v, arrowMode)).join(' ');
+     
+     // Link with values only (null id)
+     if (this.id === null) {
++      // Arrow mode formatting for directional links
++      if (arrowMode && this.values && this.values.length === 2) {
++        const left = this.formatValue(this.values[0], arrowMode);
++        const right = this.formatValue(this.values[1], arrowMode);
++        return `${left} → ${right}`;
++      }
++      
+       // For lessParentheses mode with simple values, don't wrap the whole thing
+       if (lessParentheses) {
+         // Check if all values are simple (no nested values)
+@@ -121,7 +128,7 @@ export class Link {
+     return lessParentheses && !this.needsParentheses(this.id) ? withColon : `(${withColon})`;
+   }
+   
+-  formatValue(value) {
++  formatValue(value, arrowMode = false) {
+     if (!value.format) {
+       return Link.escapeReference(value.id || '');
+     }
+@@ -132,7 +139,7 @@ export class Link {
+     
+     // For compound links from paths, format values with parentheses
+     if (isCompoundFromPaths) {
+-      return value.format(false, true);
++      return value.format(false, true, arrowMode);
+     }
+     
+     // Simple link with just an ID - don't wrap in parentheses when used as a value
+@@ -141,7 +148,7 @@ export class Link {
+     }
+     
+     // Complex value with its own structure - format it normally with parentheses
+-    return value.format(false, false);
++    return value.format(false, false, arrowMode);
+   }
+   
+   needsParentheses(str) {
+@@ -149,7 +156,7 @@ export class Link {
+   }
+ }
+ 
+-export function formatLinks(links, lessParentheses = false) {
++export function formatLinks(links, lessParentheses = false, arrowMode = false) {
+   if (!links || links.length === 0) return '';
+-  return links.map(link => link.format(lessParentheses)).join('\n');
++  return links.map(link => link.format(lessParentheses, false, arrowMode)).join('\n');
+ }
+\ No newline at end of file
+diff --git a/js/src/grammar.pegjs b/js/src/grammar.pegjs
+index b313eeb9..8c1d06df 100644
+--- a/js/src/grammar.pegjs
++++ b/js/src/grammar.pegjs
+@@ -38,10 +38,22 @@ referenceOrLink = l:multiLineAnyLink { return l; } / i:reference { return { id:
+ 
+ anyLink = ml:multiLineAnyLink eol { return ml; } / sl:singleLineAnyLink { return sl; }
+ 
+-multiLineAnyLink = multiLineValueLink / multiLineLink
++multiLineAnyLink = multiLineValueLink / multiLineLink / multiLineArrowLink
++
++// Multiline arrow syntax support
++multiLineArrowLink = "(" _ left:referenceOrLink __ arrow:("←" / "→") __ right:referenceOrLink _ ")" {
++    if (arrow === "←") {
++        // left ← right means right points to left
++        return { values: [right, left] };
++    } else {
++        // left → right means left points to right  
++        return { values: [left, right] };
++    }
++}
+ 
+ singleLineAnyLink = fl:singleLineLink eol { return fl; }
+   / vl:singleLineValueLink eol { return vl; }
++  / al:arrowLink eol { return al; }
+ 
+ multiLineValueAndWhitespace = value:referenceOrLink _ { return value; }
+ 
+@@ -51,6 +63,17 @@ singleLineValueAndWhitespace = __ value:referenceOrLink { return value; }
+ 
+ singleLineValues = list:singleLineValueAndWhitespace+ { return list; }
+ 
++// Arrow syntax support for directional links
++arrowLink = left:referenceOrLink __ arrow:("←" / "→") __ right:referenceOrLink {
++    if (arrow === "←") {
++        // left ← right means right points to left
++        return { values: [right, left] };
++    } else {
++        // left → right means left points to right  
++        return { values: [left, right] };
++    }
++}
++
+ singleLineLink = __ id:reference __ ":" v:singleLineValues { return { id: id, values: v }; }
+ 
+ multiLineLink = "(" _ id:reference _ ":" v:multiLineValues _ ")" { return { id: id, values: v }; }
+@@ -81,4 +104,4 @@ _ = whiteSpaceSymbol*
+ 
+ whiteSpaceSymbol = [ \t\n\r]
+ 
+-referenceSymbol = [^ \t\n\r(:)]
+\ No newline at end of file
++referenceSymbol = [^ \t\n\r(:)←→]
+\ No newline at end of file
+diff --git a/js/src/parser-generated.js b/js/src/parser-generated.js
+index 40ea078b..6dc64a93 100644
+--- a/js/src/parser-generated.js
++++ b/js/src/parser-generated.js
+@@ -164,33 +164,35 @@ function peg$parse(input, options) {
+   };
+   let peg$startRuleFunction = peg$parsedocument;
+ 
+-  const peg$c0 = ":";
+-  const peg$c1 = "(";
+-  const peg$c2 = ")";
++  const peg$c0 = "(";
++  const peg$c1 = ")";
++  const peg$c2 = ":";
+   const peg$c3 = "\"";
+   const peg$c4 = "'";
+   const peg$c5 = " ";
+ 
+-  const peg$r0 = /^[^"]/;
+-  const peg$r1 = /^[^']/;
+-  const peg$r2 = /^[\r\n]/;
+-  const peg$r3 = /^[ \t]/;
+-  const peg$r4 = /^[ \t\n\r]/;
+-  const peg$r5 = /^[^ \t\n\r(:)]/;
++  const peg$r0 = /^[\u2190\u2192]/;
++  const peg$r1 = /^[^"]/;
++  const peg$r2 = /^[^']/;
++  const peg$r3 = /^[\r\n]/;
++  const peg$r4 = /^[ \t]/;
++  const peg$r5 = /^[ \t\n\r]/;
++  const peg$r6 = /^[^ \t\n\r(:)\u2190\u2192]/;
+ 
+-  const peg$e0 = peg$literalExpectation(":", false);
+-  const peg$e1 = peg$literalExpectation("(", false);
++  const peg$e0 = peg$literalExpectation("(", false);
++  const peg$e1 = peg$classExpectation(["\u2190", "\u2192"], false, false, false);
+   const peg$e2 = peg$literalExpectation(")", false);
+-  const peg$e3 = peg$literalExpectation("\"", false);
+-  const peg$e4 = peg$classExpectation(["\""], true, false, false);
+-  const peg$e5 = peg$literalExpectation("'", false);
+-  const peg$e6 = peg$classExpectation(["'"], true, false, false);
+-  const peg$e7 = peg$literalExpectation(" ", false);
+-  const peg$e8 = peg$classExpectation(["\r", "\n"], false, false, false);
+-  const peg$e9 = peg$anyExpectation();
+-  const peg$e10 = peg$classExpectation([" ", "\t"], false, false, false);
+-  const peg$e11 = peg$classExpectation([" ", "\t", "\n", "\r"], false, false, false);
+-  const peg$e12 = peg$classExpectation([" ", "\t", "\n", "\r", "(", ":", ")"], true, false, false);
++  const peg$e3 = peg$literalExpectation(":", false);
++  const peg$e4 = peg$literalExpectation("\"", false);
++  const peg$e5 = peg$classExpectation(["\""], true, false, false);
++  const peg$e6 = peg$literalExpectation("'", false);
++  const peg$e7 = peg$classExpectation(["'"], true, false, false);
++  const peg$e8 = peg$literalExpectation(" ", false);
++  const peg$e9 = peg$classExpectation(["\r", "\n"], false, false, false);
++  const peg$e10 = peg$anyExpectation();
++  const peg$e11 = peg$classExpectation([" ", "\t"], false, false, false);
++  const peg$e12 = peg$classExpectation([" ", "\t", "\n", "\r"], false, false, false);
++  const peg$e13 = peg$classExpectation([" ", "\t", "\n", "\r", "(", ":", ")", "\u2190", "\u2192"], true, false, false);
+ 
+   function peg$f0(links) {    return links;  }
+   function peg$f1() {    return [];  }
+@@ -205,22 +207,41 @@ function peg$parse(input, options) {
+   function peg$f8(i) {    return { id: i };  }
+   function peg$f9(ml) {    return ml;  }
+   function peg$f10(sl) {    return sl;  }
+-  function peg$f11(fl) {    return fl;  }
+-  function peg$f12(vl) {    return vl;  }
+-  function peg$f13(value) {    return value;  }
+-  function peg$f14(list) {    return list;  }
++  function peg$f11(left, arrow, right) {
++    if (arrow === "←") {
++        // left ← right means right points to left
++        return { values: [right, left] };
++    } else {
++        // left → right means left points to right  
++        return { values: [left, right] };
++    }
++  }
++  function peg$f12(fl) {    return fl;  }
++  function peg$f13(vl) {    return vl;  }
++  function peg$f14(al) {    return al;  }
+   function peg$f15(value) {    return value;  }
+   function peg$f16(list) {    return list;  }
+-  function peg$f17(id, v) {    return { id: id, values: v };  }
+-  function peg$f18(id, v) {    return { id: id, values: v };  }
+-  function peg$f19(v) {    return { values: v };  }
+-  function peg$f20(v) {    return { values: v };  }
+-  function peg$f21(chars) {    return chars.join('');  }
+-  function peg$f22(r) {    return r.join('');  }
+-  function peg$f23(r) {    return r.join('');  }
+-  function peg$f24(spaces) {    return spaces.length > getCurrentIndentation();  }
+-  function peg$f25(spaces) {    pushIndentation(spaces);  }
+-  function peg$f26(spaces) {    return checkIndentation(spaces);  }
++  function peg$f17(value) {    return value;  }
++  function peg$f18(list) {    return list;  }
++  function peg$f19(left, arrow, right) {
++    if (arrow === "←") {
++        // left ← right means right points to left
++        return { values: [right, left] };
++    } else {
++        // left → right means left points to right  
++        return { values: [left, right] };
++    }
++  }
++  function peg$f20(id, v) {    return { id: id, values: v };  }
++  function peg$f21(id, v) {    return { id: id, values: v };  }
++  function peg$f22(v) {    return { values: v };  }
++  function peg$f23(v) {    return { values: v };  }
++  function peg$f24(chars) {    return chars.join('');  }
++  function peg$f25(r) {    return r.join('');  }
++  function peg$f26(r) {    return r.join('');  }
++  function peg$f27(spaces) {    return spaces.length > getCurrentIndentation();  }
++  function peg$f28(spaces) {    pushIndentation(spaces);  }
++  function peg$f29(spaces) {    return checkIndentation(spaces);  }
+   let peg$currPos = options.peg$currPos | 0;
+   let peg$savedPos = peg$currPos;
+   const peg$posDetailsCache = [{ line: 1, column: 1 }];
+@@ -581,6 +602,71 @@ function peg$parse(input, options) {
+     s0 = peg$parsemultiLineValueLink();
+     if (s0 === peg$FAILED) {
+       s0 = peg$parsemultiLineLink();
++      if (s0 === peg$FAILED) {
++        s0 = peg$parsemultiLineArrowLink();
++      }
++    }
++
++    return s0;
++  }
++
++  function peg$parsemultiLineArrowLink() {
++    let s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
++
++    s0 = peg$currPos;
++    if (input.charCodeAt(peg$currPos) === 40) {
++      s1 = peg$c0;
++      peg$currPos++;
++    } else {
++      s1 = peg$FAILED;
++      if (peg$silentFails === 0) { peg$fail(peg$e0); }
++    }
++    if (s1 !== peg$FAILED) {
++      s2 = peg$parse_();
++      s3 = peg$parsereferenceOrLink();
++      if (s3 !== peg$FAILED) {
++        s4 = peg$parse__();
++        s5 = input.charAt(peg$currPos);
++        if (peg$r0.test(s5)) {
++          peg$currPos++;
++        } else {
++          s5 = peg$FAILED;
++          if (peg$silentFails === 0) { peg$fail(peg$e1); }
++        }
++        if (s5 !== peg$FAILED) {
++          s6 = peg$parse__();
++          s7 = peg$parsereferenceOrLink();
++          if (s7 !== peg$FAILED) {
++            s8 = peg$parse_();
++            if (input.charCodeAt(peg$currPos) === 41) {
++              s9 = peg$c1;
++              peg$currPos++;
++            } else {
++              s9 = peg$FAILED;
++              if (peg$silentFails === 0) { peg$fail(peg$e2); }
++            }
++            if (s9 !== peg$FAILED) {
++              peg$savedPos = s0;
++              s0 = peg$f11(s3, s5, s7);
++            } else {
++              peg$currPos = s0;
++              s0 = peg$FAILED;
++            }
++          } else {
++            peg$currPos = s0;
++            s0 = peg$FAILED;
++          }
++        } else {
++          peg$currPos = s0;
++          s0 = peg$FAILED;
++        }
++      } else {
++        peg$currPos = s0;
++        s0 = peg$FAILED;
++      }
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+ 
+     return s0;
+@@ -595,7 +681,7 @@ function peg$parse(input, options) {
+       s2 = peg$parseeol();
+       if (s2 !== peg$FAILED) {
+         peg$savedPos = s0;
+-        s0 = peg$f11(s1);
++        s0 = peg$f12(s1);
+       } else {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+@@ -611,7 +697,7 @@ function peg$parse(input, options) {
+         s2 = peg$parseeol();
+         if (s2 !== peg$FAILED) {
+           peg$savedPos = s0;
+-          s0 = peg$f12(s1);
++          s0 = peg$f13(s1);
+         } else {
+           peg$currPos = s0;
+           s0 = peg$FAILED;
+@@ -620,6 +706,23 @@ function peg$parse(input, options) {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
++      if (s0 === peg$FAILED) {
++        s0 = peg$currPos;
++        s1 = peg$parsearrowLink();
++        if (s1 !== peg$FAILED) {
++          s2 = peg$parseeol();
++          if (s2 !== peg$FAILED) {
++            peg$savedPos = s0;
++            s0 = peg$f14(s1);
++          } else {
++            peg$currPos = s0;
++            s0 = peg$FAILED;
++          }
++        } else {
++          peg$currPos = s0;
++          s0 = peg$FAILED;
++        }
++      }
+     }
+ 
+     return s0;
+@@ -633,7 +736,7 @@ function peg$parse(input, options) {
+     if (s1 !== peg$FAILED) {
+       s2 = peg$parse_();
+       peg$savedPos = s0;
+-      s0 = peg$f13(s1);
++      s0 = peg$f15(s1);
+     } else {
+       peg$currPos = s0;
+       s0 = peg$FAILED;
+@@ -654,7 +757,7 @@ function peg$parse(input, options) {
+       s3 = peg$parsemultiLineValueAndWhitespace();
+     }
+     peg$savedPos = s0;
+-    s0 = peg$f14(s2);
++    s0 = peg$f16(s2);
+ 
+     return s0;
+   }
+@@ -667,7 +770,7 @@ function peg$parse(input, options) {
+     s2 = peg$parsereferenceOrLink();
+     if (s2 !== peg$FAILED) {
+       peg$savedPos = s0;
+-      s0 = peg$f15(s2);
++      s0 = peg$f17(s2);
+     } else {
+       peg$currPos = s0;
+       s0 = peg$FAILED;
+@@ -692,13 +795,49 @@ function peg$parse(input, options) {
+     }
+     if (s1 !== peg$FAILED) {
+       peg$savedPos = s0;
+-      s1 = peg$f16(s1);
++      s1 = peg$f18(s1);
+     }
+     s0 = s1;
+ 
+     return s0;
+   }
+ 
++  function peg$parsearrowLink() {
++    let s0, s1, s2, s3, s4, s5;
++
++    s0 = peg$currPos;
++    s1 = peg$parsereferenceOrLink();
++    if (s1 !== peg$FAILED) {
++      s2 = peg$parse__();
++      s3 = input.charAt(peg$currPos);
++      if (peg$r0.test(s3)) {
++        peg$currPos++;
++      } else {
++        s3 = peg$FAILED;
++        if (peg$silentFails === 0) { peg$fail(peg$e1); }
++      }
++      if (s3 !== peg$FAILED) {
++        s4 = peg$parse__();
++        s5 = peg$parsereferenceOrLink();
++        if (s5 !== peg$FAILED) {
++          peg$savedPos = s0;
++          s0 = peg$f19(s1, s3, s5);
++        } else {
++          peg$currPos = s0;
++          s0 = peg$FAILED;
++        }
++      } else {
++        peg$currPos = s0;
++        s0 = peg$FAILED;
++      }
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
++    }
++
++    return s0;
++  }
++
+   function peg$parsesingleLineLink() {
+     let s0, s1, s2, s3, s4, s5;
+ 
+@@ -708,17 +847,17 @@ function peg$parse(input, options) {
+     if (s2 !== peg$FAILED) {
+       s3 = peg$parse__();
+       if (input.charCodeAt(peg$currPos) === 58) {
+-        s4 = peg$c0;
++        s4 = peg$c2;
+         peg$currPos++;
+       } else {
+         s4 = peg$FAILED;
+-        if (peg$silentFails === 0) { peg$fail(peg$e0); }
++        if (peg$silentFails === 0) { peg$fail(peg$e3); }
+       }
+       if (s4 !== peg$FAILED) {
+         s5 = peg$parsesingleLineValues();
+         if (s5 !== peg$FAILED) {
+           peg$savedPos = s0;
+-          s0 = peg$f17(s2, s5);
++          s0 = peg$f20(s2, s5);
+         } else {
+           peg$currPos = s0;
+           s0 = peg$FAILED;
+@@ -740,11 +879,11 @@ function peg$parse(input, options) {
+ 
+     s0 = peg$currPos;
+     if (input.charCodeAt(peg$currPos) === 40) {
+-      s1 = peg$c1;
++      s1 = peg$c0;
+       peg$currPos++;
+     } else {
+       s1 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e1); }
++      if (peg$silentFails === 0) { peg$fail(peg$e0); }
+     }
+     if (s1 !== peg$FAILED) {
+       s2 = peg$parse_();
+@@ -752,17 +891,17 @@ function peg$parse(input, options) {
+       if (s3 !== peg$FAILED) {
+         s4 = peg$parse_();
+         if (input.charCodeAt(peg$currPos) === 58) {
+-          s5 = peg$c0;
++          s5 = peg$c2;
+           peg$currPos++;
+         } else {
+           s5 = peg$FAILED;
+-          if (peg$silentFails === 0) { peg$fail(peg$e0); }
++          if (peg$silentFails === 0) { peg$fail(peg$e3); }
+         }
+         if (s5 !== peg$FAILED) {
+           s6 = peg$parsemultiLineValues();
+           s7 = peg$parse_();
+           if (input.charCodeAt(peg$currPos) === 41) {
+-            s8 = peg$c2;
++            s8 = peg$c1;
+             peg$currPos++;
+           } else {
+             s8 = peg$FAILED;
+@@ -770,7 +909,7 @@ function peg$parse(input, options) {
+           }
+           if (s8 !== peg$FAILED) {
+             peg$savedPos = s0;
+-            s0 = peg$f18(s3, s6);
++            s0 = peg$f21(s3, s6);
+           } else {
+             peg$currPos = s0;
+             s0 = peg$FAILED;
+@@ -798,7 +937,7 @@ function peg$parse(input, options) {
+     s1 = peg$parsesingleLineValues();
+     if (s1 !== peg$FAILED) {
+       peg$savedPos = s0;
+-      s1 = peg$f19(s1);
++      s1 = peg$f22(s1);
+     }
+     s0 = s1;
+ 
+@@ -810,17 +949,17 @@ function peg$parse(input, options) {
+ 
+     s0 = peg$currPos;
+     if (input.charCodeAt(peg$currPos) === 40) {
+-      s1 = peg$c1;
++      s1 = peg$c0;
+       peg$currPos++;
+     } else {
+       s1 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e1); }
++      if (peg$silentFails === 0) { peg$fail(peg$e0); }
+     }
+     if (s1 !== peg$FAILED) {
+       s2 = peg$parsemultiLineValues();
+       s3 = peg$parse_();
+       if (input.charCodeAt(peg$currPos) === 41) {
+-        s4 = peg$c2;
++        s4 = peg$c1;
+         peg$currPos++;
+       } else {
+         s4 = peg$FAILED;
+@@ -828,7 +967,7 @@ function peg$parse(input, options) {
+       }
+       if (s4 !== peg$FAILED) {
+         peg$savedPos = s0;
+-        s0 = peg$f20(s2);
++        s0 = peg$f23(s2);
+       } else {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+@@ -871,7 +1010,7 @@ function peg$parse(input, options) {
+     }
+     if (s1 !== peg$FAILED) {
+       peg$savedPos = s0;
+-      s1 = peg$f21(s1);
++      s1 = peg$f24(s1);
+     }
+     s0 = s1;
+ 
+@@ -887,26 +1026,26 @@ function peg$parse(input, options) {
+       peg$currPos++;
+     } else {
+       s1 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e3); }
++      if (peg$silentFails === 0) { peg$fail(peg$e4); }
+     }
+     if (s1 !== peg$FAILED) {
+       s2 = [];
+       s3 = input.charAt(peg$currPos);
+-      if (peg$r0.test(s3)) {
++      if (peg$r1.test(s3)) {
+         peg$currPos++;
+       } else {
+         s3 = peg$FAILED;
+-        if (peg$silentFails === 0) { peg$fail(peg$e4); }
++        if (peg$silentFails === 0) { peg$fail(peg$e5); }
+       }
+       if (s3 !== peg$FAILED) {
+         while (s3 !== peg$FAILED) {
+           s2.push(s3);
+           s3 = input.charAt(peg$currPos);
+-          if (peg$r0.test(s3)) {
++          if (peg$r1.test(s3)) {
+             peg$currPos++;
+           } else {
+             s3 = peg$FAILED;
+-            if (peg$silentFails === 0) { peg$fail(peg$e4); }
++            if (peg$silentFails === 0) { peg$fail(peg$e5); }
+           }
+         }
+       } else {
+@@ -918,11 +1057,11 @@ function peg$parse(input, options) {
+           peg$currPos++;
+         } else {
+           s3 = peg$FAILED;
+-          if (peg$silentFails === 0) { peg$fail(peg$e3); }
++          if (peg$silentFails === 0) { peg$fail(peg$e4); }
+         }
+         if (s3 !== peg$FAILED) {
+           peg$savedPos = s0;
+-          s0 = peg$f22(s2);
++          s0 = peg$f25(s2);
+         } else {
+           peg$currPos = s0;
+           s0 = peg$FAILED;
+@@ -948,26 +1087,26 @@ function peg$parse(input, options) {
+       peg$currPos++;
+     } else {
+       s1 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e5); }
++      if (peg$silentFails === 0) { peg$fail(peg$e6); }
+     }
+     if (s1 !== peg$FAILED) {
+       s2 = [];
+       s3 = input.charAt(peg$currPos);
+-      if (peg$r1.test(s3)) {
++      if (peg$r2.test(s3)) {
+         peg$currPos++;
+       } else {
+         s3 = peg$FAILED;
+-        if (peg$silentFails === 0) { peg$fail(peg$e6); }
++        if (peg$silentFails === 0) { peg$fail(peg$e7); }
+       }
+       if (s3 !== peg$FAILED) {
+         while (s3 !== peg$FAILED) {
+           s2.push(s3);
+           s3 = input.charAt(peg$currPos);
+-          if (peg$r1.test(s3)) {
++          if (peg$r2.test(s3)) {
+             peg$currPos++;
+           } else {
+             s3 = peg$FAILED;
+-            if (peg$silentFails === 0) { peg$fail(peg$e6); }
++            if (peg$silentFails === 0) { peg$fail(peg$e7); }
+           }
+         }
+       } else {
+@@ -979,11 +1118,11 @@ function peg$parse(input, options) {
+           peg$currPos++;
+         } else {
+           s3 = peg$FAILED;
+-          if (peg$silentFails === 0) { peg$fail(peg$e5); }
++          if (peg$silentFails === 0) { peg$fail(peg$e6); }
+         }
+         if (s3 !== peg$FAILED) {
+           peg$savedPos = s0;
+-          s0 = peg$f23(s2);
++          s0 = peg$f26(s2);
+         } else {
+           peg$currPos = s0;
+           s0 = peg$FAILED;
+@@ -1010,7 +1149,7 @@ function peg$parse(input, options) {
+       peg$currPos++;
+     } else {
+       s2 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e7); }
++      if (peg$silentFails === 0) { peg$fail(peg$e8); }
+     }
+     while (s2 !== peg$FAILED) {
+       s1.push(s2);
+@@ -1019,11 +1158,11 @@ function peg$parse(input, options) {
+         peg$currPos++;
+       } else {
+         s2 = peg$FAILED;
+-        if (peg$silentFails === 0) { peg$fail(peg$e7); }
++        if (peg$silentFails === 0) { peg$fail(peg$e8); }
+       }
+     }
+     peg$savedPos = peg$currPos;
+-    s2 = peg$f24(s1);
++    s2 = peg$f27(s1);
+     if (s2) {
+       s2 = undefined;
+     } else {
+@@ -1031,7 +1170,7 @@ function peg$parse(input, options) {
+     }
+     if (s2 !== peg$FAILED) {
+       peg$savedPos = s0;
+-      s0 = peg$f25(s1);
++      s0 = peg$f28(s1);
+     } else {
+       peg$currPos = s0;
+       s0 = peg$FAILED;
+@@ -1050,7 +1189,7 @@ function peg$parse(input, options) {
+       peg$currPos++;
+     } else {
+       s2 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e7); }
++      if (peg$silentFails === 0) { peg$fail(peg$e8); }
+     }
+     while (s2 !== peg$FAILED) {
+       s1.push(s2);
+@@ -1059,11 +1198,11 @@ function peg$parse(input, options) {
+         peg$currPos++;
+       } else {
+         s2 = peg$FAILED;
+-        if (peg$silentFails === 0) { peg$fail(peg$e7); }
++        if (peg$silentFails === 0) { peg$fail(peg$e8); }
+       }
+     }
+     peg$savedPos = peg$currPos;
+-    s2 = peg$f26(s1);
++    s2 = peg$f29(s1);
+     if (s2) {
+       s2 = undefined;
+     } else {
+@@ -1087,21 +1226,21 @@ function peg$parse(input, options) {
+     s1 = peg$parse__();
+     s2 = [];
+     s3 = input.charAt(peg$currPos);
+-    if (peg$r2.test(s3)) {
++    if (peg$r3.test(s3)) {
+       peg$currPos++;
+     } else {
+       s3 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e8); }
++      if (peg$silentFails === 0) { peg$fail(peg$e9); }
+     }
+     if (s3 !== peg$FAILED) {
+       while (s3 !== peg$FAILED) {
+         s2.push(s3);
+         s3 = input.charAt(peg$currPos);
+-        if (peg$r2.test(s3)) {
++        if (peg$r3.test(s3)) {
+           peg$currPos++;
+         } else {
+           s3 = peg$FAILED;
+-          if (peg$silentFails === 0) { peg$fail(peg$e8); }
++          if (peg$silentFails === 0) { peg$fail(peg$e9); }
+         }
+       }
+     } else {
+@@ -1131,7 +1270,7 @@ function peg$parse(input, options) {
+       peg$currPos++;
+     } else {
+       s1 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e9); }
++      if (peg$silentFails === 0) { peg$fail(peg$e10); }
+     }
+     peg$silentFails--;
+     if (s1 === peg$FAILED) {
+@@ -1149,20 +1288,20 @@ function peg$parse(input, options) {
+ 
+     s0 = [];
+     s1 = input.charAt(peg$currPos);
+-    if (peg$r3.test(s1)) {
++    if (peg$r4.test(s1)) {
+       peg$currPos++;
+     } else {
+       s1 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e10); }
++      if (peg$silentFails === 0) { peg$fail(peg$e11); }
+     }
+     while (s1 !== peg$FAILED) {
+       s0.push(s1);
+       s1 = input.charAt(peg$currPos);
+-      if (peg$r3.test(s1)) {
++      if (peg$r4.test(s1)) {
+         peg$currPos++;
+       } else {
+         s1 = peg$FAILED;
+-        if (peg$silentFails === 0) { peg$fail(peg$e10); }
++        if (peg$silentFails === 0) { peg$fail(peg$e11); }
+       }
+     }
+ 
+@@ -1186,11 +1325,11 @@ function peg$parse(input, options) {
+     let s0;
+ 
+     s0 = input.charAt(peg$currPos);
+-    if (peg$r4.test(s0)) {
++    if (peg$r5.test(s0)) {
+       peg$currPos++;
+     } else {
+       s0 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e11); }
++      if (peg$silentFails === 0) { peg$fail(peg$e12); }
+     }
+ 
+     return s0;
+@@ -1200,11 +1339,11 @@ function peg$parse(input, options) {
+     let s0;
+ 
+     s0 = input.charAt(peg$currPos);
+-    if (peg$r5.test(s0)) {
++    if (peg$r6.test(s0)) {
+       peg$currPos++;
+     } else {
+       s0 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e12); }
++      if (peg$silentFails === 0) { peg$fail(peg$e13); }
+     }
+ 
+     return s0;
+diff --git a/js/tests/ArrowSyntax.test.js b/js/tests/ArrowSyntax.test.js
+new file mode 100644
+index 00000000..ac74da9f
+--- /dev/null
++++ b/js/tests/ArrowSyntax.test.js
+@@ -0,0 +1,106 @@
++import { test, expect } from 'bun:test';
++import { Parser } from '../src/Parser.js';
++import { Link } from '../src/Link.js';
++
++const parser = new Parser();
++
++test('test_arrow_left_to_right_syntax', () => {
++  const input = '1 → 2';
++  const parsed = parser.parse(input);
++  
++  // Should parse as (1 2) - left points to right
++  expect(parsed.length).toBe(1);
++  expect(parsed[0].id).toBe(null);
++  expect(parsed[0].values.length).toBe(2);
++  expect(parsed[0].values[0].id).toBe('1');
++  expect(parsed[0].values[1].id).toBe('2');
++});
++
++test('test_arrow_right_to_left_syntax', () => {
++  const input = '2 ← 1';
++  const parsed = parser.parse(input);
++  
++  // Should parse as (1 2) - right points to left becomes left points to right
++  expect(parsed.length).toBe(1);
++  expect(parsed[0].id).toBe(null);
++  expect(parsed[0].values.length).toBe(2);
++  expect(parsed[0].values[0].id).toBe('1');
++  expect(parsed[0].values[1].id).toBe('2');
++});
++
++test('test_multiline_arrow_syntax', () => {
++  const input = '(1 → 2)';
++  const parsed = parser.parse(input);
++  
++  // Should parse as (1 2)
++  expect(parsed.length).toBe(1);
++  expect(parsed[0].id).toBe(null);
++  expect(parsed[0].values.length).toBe(2);
++  expect(parsed[0].values[0].id).toBe('1');
++  expect(parsed[0].values[1].id).toBe('2');
++});
++
++test('test_multiline_arrow_left_syntax', () => {
++  const input = '(2 ← 1)';
++  const parsed = parser.parse(input);
++  
++  // Should parse as (1 2) - 2 ← 1 means 1 points to 2
++  expect(parsed.length).toBe(1);
++  expect(parsed[0].id).toBe(null);
++  expect(parsed[0].values.length).toBe(2);
++  expect(parsed[0].values[0].id).toBe('1');
++  expect(parsed[0].values[1].id).toBe('2');
++});
++
++test('test_arrow_formatting_mode', () => {
++  // Create a link programmatically and test arrow formatting
++  const link = new Link(null, [new Link('1'), new Link('2')]);
++  
++  // Standard formatting
++  const standard = link.format();
++  expect(standard).toBe('(1 2)');
++  
++  // Arrow formatting mode
++  const arrow = link.format(false, false, true);
++  expect(arrow).toBe('1 → 2');
++});
++
++test('test_equivalence_of_expressions', () => {
++  // Test that (2 ← 1) = (1 → 2) = (2 1) according to issue description
++  const leftArrow = parser.parse('2 ← 1')[0];
++  const rightArrow = parser.parse('1 → 2')[0];
++  const standard = parser.parse('(1 2)')[0];
++  
++  // All should result in the same structure: values [1, 2]
++  expect(leftArrow.values[0].id).toBe('1');
++  expect(leftArrow.values[1].id).toBe('2');
++  
++  expect(rightArrow.values[0].id).toBe('1');
++  expect(rightArrow.values[1].id).toBe('2');
++  
++  expect(standard.values[0].id).toBe('1');
++  expect(standard.values[1].id).toBe('2');
++});
++
++test('test_quoted_references_with_arrows', () => {
++  const input = '"hello world" → "foo bar"';
++  const parsed = parser.parse(input);
++  
++  expect(parsed.length).toBe(1);
++  expect(parsed[0].values[0].id).toBe('hello world');
++  expect(parsed[0].values[1].id).toBe('foo bar');
++});
++
++test('test_mixed_arrow_and_standard_syntax', () => {
++  // Test that arrow links can be used as components in larger expressions
++  const arrowLink = new Link(null, [new Link('source'), new Link('target')]);
++  const mixedLink = new Link('relationship', [arrowLink]);
++  
++  // Test standard formatting
++  const standard = mixedLink.format();
++  expect(standard).toBe('(relationship: (source target))');
++  
++  // Test arrow formatting
++  const arrow = mixedLink.format(false, false, true);
++  expect(arrow).toBe('(relationship: source → target)');
++});
+\ No newline at end of file

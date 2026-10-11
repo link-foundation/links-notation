@@ -1,0 +1,46 @@
+[
+  {
+    "run": 19804336496,
+    "unavailable": "failed to get run log: log not found"
+  },
+  {
+    "run": 19804336497,
+    "unavailable": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/links-notation/actions/runs/19804336497/logs)"
+  },
+  {
+    "run": 19804336498,
+    "unavailable": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/links-notation/actions/runs/19804336498/logs)"
+  },
+  {
+    "run": 19804336504,
+    "unavailable": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/links-notation/actions/runs/19804336504/logs)"
+  },
+  {
+    "run": 19804336500,
+    "unavailable": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/links-notation/actions/runs/19804336500/logs)"
+  },
+  {
+    "run": 19804318940,
+    "unavailable": "failed to get run log: log not found"
+  },
+  {
+    "run": 19804318929,
+    "unavailable": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/links-notation/actions/runs/19804318929/logs)"
+  },
+  {
+    "run": 19804318969,
+    "unavailable": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/links-notation/actions/runs/19804318969/logs)"
+  },
+  {
+    "run": 19804318932,
+    "unavailable": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/links-notation/actions/runs/19804318932/logs)"
+  },
+  {
+    "run": 19804318945,
+    "unavailable": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/links-notation/actions/runs/19804318945/logs)"
+  },
+  {
+    "run": 19804225353,
+    "unavailable": "failed to get run log: log not found"
+  }
+]

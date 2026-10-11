@@ -4,23 +4,25 @@ on:
   push:
     branches: main
     paths:
-      - '**.md'
-      - '.lycheeignore'
-      - 'lychee.toml'
-      - '.github/workflows/links.yml'
+      - "**.md"
+      - ".lycheeignore"
+      - "lychee.toml"
+      - ".github/workflows/links.yml"
+      - "experiments/issue-339/test_github_blob_remap.py"
   pull_request:
     paths:
-      - '**.md'
-      - '.lycheeignore'
-      - 'lychee.toml'
-      - '.github/workflows/links.yml'
+      - "**.md"
+      - ".lycheeignore"
+      - "lychee.toml"
+      - ".github/workflows/links.yml"
+      - "experiments/issue-339/test_github_blob_remap.py"
   # Links rot without anyone touching the repository, so check them weekly too.
   schedule:
-    - cron: '23 6 * * 1'
+    - cron: "23 6 * * 1"
   workflow_dispatch:
     inputs:
       verbose:
-        description: 'Print extra diagnostics (never secret values)'
+        description: "Print extra diagnostics (never secret values)"
         type: boolean
         required: false
         default: false
@@ -49,6 +51,7 @@ jobs:
         --exclude-path docs/website/dist
         --exclude-path js/node_modules
         --exclude-path docs/website/node_modules
+        --exclude-path lychee
         './**/*.md'
     steps:
       - uses: actions/checkout@v7.0.1
@@ -71,8 +74,13 @@ jobs:
           args: ${{ env.LYCHEE_ARGS }}
           fail: false
           jobSummary: true
+          debug: ${{ inputs.verbose || false }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify GitHub file remapping and missing-file failures
+        run: >-
+          python3 experiments/issue-339/test_github_blob_remap.py
+          --lychee "$RUNNER_TEMP/lychee/bin/lychee"
       # lychee retries a 429 but never a 5xx answer: a rejected status code only
       # counts as retryable when it is 429 (ErrorKind::should_retry in
       # lychee-lib/src/retry.rs). So a short outage failed the scheduled run of
@@ -91,5 +99,6 @@ jobs:
           args: ${{ env.LYCHEE_ARGS }}
           fail: true
           jobSummary: true
+          debug: ${{ inputs.verbose || false }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

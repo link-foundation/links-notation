@@ -1,0 +1,29 @@
+[
+  {
+    "id": 113558169792,
+    "run_id": 37849367817,
+    "workflow_name": "auto-merge",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37849367817",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacJgowA",
+    "head_sha": "791f6d9cb6c3cfb3507e317ee45b8775d4f4f9ae",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113558169792",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37849367817/job/113558169792",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T21:48:52Z",
+    "started_at": "2026-10-08T21:48:52Z",
+    "completed_at": "2026-10-08T21:48:51Z",
+    "name": "auto-merge",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113558169792",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  }
+]

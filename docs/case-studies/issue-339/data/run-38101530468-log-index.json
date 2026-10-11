@@ -1,0 +1,24 @@
+{
+  "run": 38101530468,
+  "sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+  "logs": [
+    {
+      "zip_entry": "0_zizmor.txt",
+      "file": "run-38101530468-0_zizmor.log.gz",
+      "bytes": 34947,
+      "sha256": "ca131d4831529a0ca7d4a3adb5cfe65458e72d0dd2c6d4cb27e305d19a10223c"
+    },
+    {
+      "zip_entry": "1_ci-scripts.txt",
+      "file": "run-38101530468-1_ci-scripts.log.gz",
+      "bytes": 22158,
+      "sha256": "3be1f7cea43900170c8c964b9ba1c2f6f9afbd09d78d8fdc4d64b901759209e1"
+    },
+    {
+      "zip_entry": "2_actionlint.txt",
+      "file": "run-38101530468-2_actionlint.log.gz",
+      "bytes": 19154,
+      "sha256": "05b6e87f5597865fae0d5a0f74d152e4dcc7cafd4129d0cea447a2ee6fd36a90"
+    }
+  ]
+}

@@ -1,38 +1,7 @@
 name: docs
 
 on:
-  push:
-    branches: main
-    paths:
-      - 'docs/comparison/**'
-      - 'scripts/create-test-case-comparison.mjs'
-      - 'TEST_CASE_COMPARISON.md'
-      - 'README.md'
-      - 'README.ru.md'
-      - 'python/tests/**'
-      - 'js/tests/**'
-      - 'rust/links-notation/tests/**'
-      - 'csharp/Link.Foundation.Links.Notation.Tests/**'
-      - 'go/*_test.go'
-      - 'java/src/test/**'
-      - 'php/tests/**'
-      - '.github/workflows/docs.yml'
-  pull_request:
-    paths:
-      - 'docs/comparison/**'
-      - 'scripts/create-test-case-comparison.mjs'
-      - 'TEST_CASE_COMPARISON.md'
-      - 'README.md'
-      - 'README.ru.md'
-      - 'python/tests/**'
-      - 'js/tests/**'
-      - 'rust/links-notation/tests/**'
-      - 'csharp/Link.Foundation.Links.Notation.Tests/**'
-      - 'go/*_test.go'
-      - 'java/src/test/**'
-      - 'php/tests/**'
-      - '.github/workflows/docs.yml'
-  workflow_dispatch:
+  workflow_call:
     inputs:
       verbose:
         description: 'Print extra diagnostics (never secret values)'
@@ -55,8 +24,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-comparison
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-docs-${{ github.ref }}-comparison
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -94,8 +63,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-test-cases
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-docs-${{ github.ref }}-test-cases
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:

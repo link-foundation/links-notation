@@ -1,0 +1,174 @@
+[
+  {
+    "id": 113577283189,
+    "run_id": 37855105681,
+    "workflow_name": "binary interoperability",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105681",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacbvOdQ",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577283189",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105681/job/113577283189",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:42:04Z",
+    "started_at": "2026-10-08T22:42:06Z",
+    "completed_at": "2026-10-08T22:42:54Z",
+    "name": "seven-languages",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:42:06Z",
+        "completed_at": "2026-10-08T22:42:11Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:42:11Z",
+        "completed_at": "2026-10-08T22:42:13Z"
+      },
+      {
+        "name": "Run dtolnay/rust-toolchain@stable",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:42:13Z",
+        "completed_at": "2026-10-08T22:42:13Z"
+      },
+      {
+        "name": "Run actions/setup-dotnet@v6.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:42:13Z",
+        "completed_at": "2026-10-08T22:42:14Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:42:14Z",
+        "completed_at": "2026-10-08T22:42:14Z"
+      },
+      {
+        "name": "Run actions/setup-python@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:42:14Z",
+        "completed_at": "2026-10-08T22:42:14Z"
+      },
+      {
+        "name": "Run actions/setup-go@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:42:14Z",
+        "completed_at": "2026-10-08T22:42:16Z"
+      },
+      {
+        "name": "Run actions/setup-java@v6.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:42:16Z",
+        "completed_at": "2026-10-08T22:42:16Z"
+      },
+      {
+        "name": "Run shivammathur/setup-php@2.40.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:42:16Z",
+        "completed_at": "2026-10-08T22:42:19Z"
+      },
+      {
+        "name": "Install PHP autoloader",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-08T22:42:19Z",
+        "completed_at": "2026-10-08T22:42:19Z"
+      },
+      {
+        "name": "Compare bytes and decoded text in all seven languages",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-08T22:42:19Z",
+        "completed_at": "2026-10-08T22:42:50Z"
+      },
+      {
+        "name": "Post Run actions/setup-java@v6.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-10-08T22:42:50Z",
+        "completed_at": "2026-10-08T22:42:50Z"
+      },
+      {
+        "name": "Post Run actions/setup-go@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-10-08T22:42:50Z",
+        "completed_at": "2026-10-08T22:42:50Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-10-08T22:42:50Z",
+        "completed_at": "2026-10-08T22:42:50Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20,
+        "started_at": "2026-10-08T22:42:50Z",
+        "completed_at": "2026-10-08T22:42:50Z"
+      },
+      {
+        "name": "Post Run actions/setup-dotnet@v6.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21,
+        "started_at": "2026-10-08T22:42:50Z",
+        "completed_at": "2026-10-08T22:42:50Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 22,
+        "started_at": "2026-10-08T22:42:50Z",
+        "completed_at": "2026-10-08T22:42:50Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 23,
+        "started_at": "2026-10-08T22:42:50Z",
+        "completed_at": "2026-10-08T22:42:51Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577283189",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000097158,
+    "runner_name": "GitHub Actions 1000097158",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

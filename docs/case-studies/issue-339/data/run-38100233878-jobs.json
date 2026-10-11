@@ -1,0 +1,221 @@
+[
+  {
+    "id": 114354485628,
+    "run_id": 38100233878,
+    "workflow_name": "pages",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38100233878",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoA75fA",
+    "head_sha": "97414a829ef77902dcfcc1a0cf21b0311edd4d71",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114354485628",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38100233878/job/114354485628",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T00:58:28Z",
+    "started_at": "2026-10-11T00:58:31Z",
+    "completed_at": "2026-10-11T00:58:39Z",
+    "name": "findChangedDocsFiles",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T00:58:31Z",
+        "completed_at": "2026-10-11T00:58:33Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T00:58:33Z",
+        "completed_at": "2026-10-11T00:58:35Z"
+      },
+      {
+        "name": "Get changed files using defaults",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T00:58:35Z",
+        "completed_at": "2026-10-11T00:58:35Z"
+      },
+      {
+        "name": "Set output isDocsFilesChanged",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T00:58:35Z",
+        "completed_at": "2026-10-11T00:58:35Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T00:58:35Z",
+        "completed_at": "2026-10-11T00:58:36Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T00:58:36Z",
+        "completed_at": "2026-10-11T00:58:36Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114354485628",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102234,
+    "runner_name": "GitHub Actions 1000102234",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114354515312,
+    "run_id": 38100233878,
+    "workflow_name": "pages",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38100233878",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoA9tcA",
+    "head_sha": "97414a829ef77902dcfcc1a0cf21b0311edd4d71",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114354515312",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38100233878/job/114354515312",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T00:58:39Z",
+    "started_at": "2026-10-11T00:58:41Z",
+    "completed_at": "2026-10-11T00:58:55Z",
+    "name": "build",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T00:58:41Z",
+        "completed_at": "2026-10-11T00:58:45Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T00:58:45Z",
+        "completed_at": "2026-10-11T00:58:47Z"
+      },
+      {
+        "name": "Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T00:58:47Z",
+        "completed_at": "2026-10-11T00:58:48Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T00:58:48Z",
+        "completed_at": "2026-10-11T00:58:49Z"
+      },
+      {
+        "name": "Build website",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T00:58:49Z",
+        "completed_at": "2026-10-11T00:58:49Z"
+      },
+      {
+        "name": "Overlay the documentation published to the gh-pages branch",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-11T00:58:49Z",
+        "completed_at": "2026-10-11T00:58:51Z"
+      },
+      {
+        "name": "Setup Pages",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 7,
+        "started_at": "2026-10-11T00:58:51Z",
+        "completed_at": "2026-10-11T00:58:51Z"
+      },
+      {
+        "name": "Upload artifact",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 8,
+        "started_at": "2026-10-11T00:58:51Z",
+        "completed_at": "2026-10-11T00:58:51Z"
+      },
+      {
+        "name": "Post Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-11T00:58:51Z",
+        "completed_at": "2026-10-11T00:58:52Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-10-11T00:58:52Z",
+        "completed_at": "2026-10-11T00:58:53Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-10-11T00:58:53Z",
+        "completed_at": "2026-10-11T00:58:53Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114354515312",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102243,
+    "runner_name": "GitHub Actions 1000102243",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114354561329,
+    "run_id": 38100233878,
+    "workflow_name": "pages",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38100233878",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoBAhMQ",
+    "head_sha": "97414a829ef77902dcfcc1a0cf21b0311edd4d71",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114354561329",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38100233878/job/114354561329",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-11T00:58:55Z",
+    "started_at": "2026-10-11T00:58:55Z",
+    "completed_at": "2026-10-11T00:58:55Z",
+    "name": "deploy",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114354561329",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  }
+]

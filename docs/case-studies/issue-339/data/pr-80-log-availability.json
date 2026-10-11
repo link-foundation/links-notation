@@ -1,0 +1,14 @@
+[
+  {
+    "run": 17610796470,
+    "unavailable": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/links-notation/actions/runs/17610796470/logs)"
+  },
+  {
+    "run": 17610495854,
+    "unavailable": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/links-notation/actions/runs/17610495854/logs)"
+  },
+  {
+    "run": 17610493957,
+    "unavailable": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/link-foundation/links-notation/actions/runs/17610493957/logs)"
+  }
+]

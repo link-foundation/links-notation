@@ -17,7 +17,7 @@ on: # zizmor: ignore[dangerous-triggers]
   # branch. Rebuild the Pages artifact when it does, or the API reference
   # would only reach the site the next time a docs/** file happens to change.
   workflow_run:
-    workflows: [csharp]
+    workflows: [CI]
     types: [completed]
     branches: [main]
   workflow_dispatch:

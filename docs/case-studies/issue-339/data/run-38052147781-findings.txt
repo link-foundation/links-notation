@@ -1,0 +1,6 @@
+191: latest-stable	UNKNOWN STEP	2026-10-10T12:29:44.0970108Z OUTDATED js/package.json: bun-types ^1.4.2 -> 1.4.3
+192: latest-stable	UNKNOWN STEP	2026-10-10T12:29:44.0970908Z OUTDATED js/package.json: prettier ^3.9.9 -> 3.9.10
+193: latest-stable	UNKNOWN STEP	2026-10-10T12:29:44.0972016Z OUTDATED python/pyproject.toml: black >=26.10.0 -> 26.10.1
+194: latest-stable	UNKNOWN STEP	2026-10-10T12:29:44.0972907Z OUTDATED rust/links-notation-macro/Cargo.toml: syn 3.0.6 -> 3.0.7
+195: latest-stable	UNKNOWN STEP	2026-10-10T12:29:44.0973584Z OUTDATED .pre-commit-config.yaml: psf/black 26.10.0 -> 26.10.1
+197: latest-stable	UNKNOWN STEP	2026-10-10T12:29:44.1162875Z ##[error]Process completed with exit code 1.

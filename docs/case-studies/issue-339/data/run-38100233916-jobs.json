@@ -1,0 +1,170 @@
+[
+  {
+    "id": 114354485723,
+    "run_id": 38100233916,
+    "workflow_name": "links",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38100233916",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaoA752w",
+    "head_sha": "97414a829ef77902dcfcc1a0cf21b0311edd4d71",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114354485723",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38100233916/job/114354485723",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-10-11T00:58:28Z",
+    "started_at": "2026-10-11T00:58:30Z",
+    "completed_at": "2026-10-11T01:02:59Z",
+    "name": "linkChecker",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T00:58:31Z",
+        "completed_at": "2026-10-11T00:58:32Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T00:58:32Z",
+        "completed_at": "2026-10-11T00:58:35Z"
+      },
+      {
+        "name": "Check links with lychee",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T00:58:35Z",
+        "completed_at": "2026-10-11T01:00:37Z"
+      },
+      {
+        "name": "Wait before re-checking the failed links",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:00:37Z",
+        "completed_at": "2026-10-11T01:02:37Z"
+      },
+      {
+        "name": "Re-check the failed links",
+        "status": "completed",
+        "conclusion": "failure",
+        "number": 5,
+        "started_at": "2026-10-11T01:02:37Z",
+        "completed_at": "2026-10-11T01:02:56Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-11T01:02:56Z",
+        "completed_at": "2026-10-11T01:02:57Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:02:57Z",
+        "completed_at": "2026-10-11T01:02:57Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114354485723",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102237,
+    "runner_name": "GitHub Actions 1000102237",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114355686774,
+    "run_id": 38100233916,
+    "workflow_name": "links",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38100233916",
+    "run_attempt": 2,
+    "node_id": "CR_kwDODRLdSM8AAAAaoCFNdg",
+    "head_sha": "97414a829ef77902dcfcc1a0cf21b0311edd4d71",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114355686774",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38100233916/job/114355686774",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:05:23Z",
+    "started_at": "2026-10-11T01:05:26Z",
+    "completed_at": "2026-10-11T01:09:34Z",
+    "name": "linkChecker",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T01:05:26Z",
+        "completed_at": "2026-10-11T01:05:28Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T01:05:28Z",
+        "completed_at": "2026-10-11T01:05:30Z"
+      },
+      {
+        "name": "Check links with lychee",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T01:05:30Z",
+        "completed_at": "2026-10-11T01:07:29Z"
+      },
+      {
+        "name": "Wait before re-checking the failed links",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T01:07:29Z",
+        "completed_at": "2026-10-11T01:09:29Z"
+      },
+      {
+        "name": "Re-check the failed links",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T01:09:29Z",
+        "completed_at": "2026-10-11T01:09:32Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-11T01:09:32Z",
+        "completed_at": "2026-10-11T01:09:32Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T01:09:32Z",
+        "completed_at": "2026-10-11T01:09:32Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114355686774",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000102291,
+    "runner_name": "GitHub Actions 1000102291",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

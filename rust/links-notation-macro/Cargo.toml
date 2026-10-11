@@ -1,6 +1,6 @@
 [package]
 name = "links-notation-macro"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 rust-version = "1.87"
 description = "Procedural macro for Links Notation compile-time parsing"
@@ -11,6 +11,6 @@ repository = "https://github.com/link-foundation/links-notation"
 proc-macro = true
 
 [dependencies]
-syn = { version = "3.0.6", features = ["full", "extra-traits"] }
+syn = { version = "3.0.7", features = ["full", "extra-traits"] }
 quote = "1.0.47"
 proc-macro2 = "1.0.107"

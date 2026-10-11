@@ -1,0 +1,150 @@
+name: publish-php
+
+on:
+  workflow_call:
+    inputs:
+      verbose:
+        description: "Print extra diagnostics (never secret values)"
+        type: boolean
+        required: false
+        default: false
+    secrets:
+      PACKAGIST_USERNAME:
+        required: false
+      PACKAGIST_TOKEN:
+        required: false
+
+permissions:
+  contents: read
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+defaults:
+  run:
+    working-directory: php
+
+jobs:
+  publishToPackagist:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    concurrency:
+      group: ci-php-publish-packagist
+      cancel-in-progress: false
+    outputs:
+      published: ${{ steps.publish.outputs.published }}
+      version: ${{ steps.version-check.outputs.version }}
+      name: ${{ steps.version-check.outputs.name }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Set up PHP
+        uses: shivammathur/setup-php@2.40.0
+        with:
+          php-version: "8.4"
+          extensions: mbstring
+          tools: composer:v2
+      - name: Check if version already published
+        id: version-check
+        run: |
+          set -euo pipefail
+          PACKAGE_NAME=$(php -r 'echo json_decode(file_get_contents("composer.json"))->name;')
+          PACKAGE_VERSION=$(php -r 'echo json_decode(file_get_contents("composer.json"))->version;')
+          echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Package: $PACKAGE_NAME@$PACKAGE_VERSION"
+
+          node ../scripts/ci/php-distribution.mjs
+          export PACKAGE_NAME PACKAGE_VERSION
+          node ../scripts/ci/packagist-status.mjs
+      - name: Notify Packagist about the new version
+        id: publish
+        env:
+          PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
+          PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+          REPOSITORY_URL: https://github.com/${{ github.repository }}
+          PACKAGE_NAME: ${{ steps.version-check.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+          RELEASE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [ "${{ steps.version-check.outputs.should_publish }}" != "true" ]; then
+            echo "published=skipped" >> "$GITHUB_OUTPUT"
+            echo "::notice::Version ${PACKAGE_VERSION} is already on Packagist, nothing to publish"
+            exit 0
+          fi
+
+          # Packagist has no OIDC trusted publishing and it builds the package
+          # straight from this repository, so "publishing" is asking it to
+          # re-read the repository. That only works once the package has been
+          # submitted at https://packagist.org/packages/submit.
+          if [ "${{ steps.version-check.outputs.package_known }}" != "true" ]; then
+            echo "published=failed" >> "$GITHUB_OUTPUT"
+            echo "::error::${PACKAGE_NAME} is not registered on Packagist. Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created."
+            exit 1
+          fi
+
+          if [ -z "$PACKAGIST_TOKEN" ] || [ -z "$PACKAGIST_USERNAME" ]; then
+            echo "published=failed" >> "$GITHUB_OUTPUT"
+            echo "::error::PACKAGIST_USERNAME/PACKAGIST_TOKEN are not configured; skipping the Packagist update. No PHP release will be created."
+            exit 1
+          fi
+          echo "Packagist credentials: present"
+
+          node ../scripts/ci/ensure-php-version-tag.mjs
+          curl -fsS -XPOST -H'content-type:application/json' \
+            "https://packagist.org/api/update-package?username=${PACKAGIST_USERNAME}&apiToken=${PACKAGIST_TOKEN}" \
+            -d"{\"repository\":{\"url\":\"${REPOSITORY_URL}\"}}"
+          echo "published=true" >> "$GITHUB_OUTPUT"
+      - name: Verify the version is really on Packagist
+        if: steps.publish.outputs.published == 'true'
+        env:
+          PACKAGE_NAME: ${{ steps.version-check.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+        run: |
+          set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          # Packagist crawls asynchronously after the update call returns 202,
+          # and serves every version from one document, so match the body.
+          wait_for_registry_match \
+            "${PACKAGE_NAME}@${PACKAGE_VERSION} on Packagist" \
+            "https://repo.packagist.org/p2/${PACKAGE_NAME}.json" \
+            "\"version\":\"${PACKAGE_VERSION}\"" 20 30
+
+  publishRelease:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    needs: [publishToPackagist]
+    # See csharp.yml: gate on what was published, not on the job result.
+    if: ${{ (needs.publishToPackagist.outputs.published == 'true' || needs.publishToPackagist.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_SHA: ${{ github.sha }}
+          PACKAGE_NAME: ${{ needs.publishToPackagist.outputs.name }}
+          PACKAGE_VERSION: ${{ needs.publishToPackagist.outputs.version }}
+        run: |
+          set -euo pipefail
+          TAG="php_${PACKAGE_VERSION}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists"
+            exit 0
+          fi
+          gh release create "$TAG" \
+            --target "$RELEASE_SHA" \
+            --title "[PHP] $PACKAGE_VERSION" \
+            --notes "https://packagist.org/packages/$PACKAGE_NAME"

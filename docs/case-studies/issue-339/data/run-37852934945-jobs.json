@@ -1,0 +1,392 @@
+[
+  {
+    "id": 113570183589,
+    "run_id": 37852934945,
+    "workflow_name": "php",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934945",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacU95pQ",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570183589",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934945/job/113570183589",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:21:20Z",
+    "started_at": "2026-10-08T22:21:33Z",
+    "completed_at": "2026-10-08T22:21:43Z",
+    "name": "findChangedPhpFiles",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:21:33Z",
+        "completed_at": "2026-10-08T22:21:35Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:21:35Z",
+        "completed_at": "2026-10-08T22:21:40Z"
+      },
+      {
+        "name": "Get changed files",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:21:40Z",
+        "completed_at": "2026-10-08T22:21:40Z"
+      },
+      {
+        "name": "Set output isPhpFilesChanged",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:21:40Z",
+        "completed_at": "2026-10-08T22:21:40Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:21:40Z",
+        "completed_at": "2026-10-08T22:21:41Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:21:41Z",
+        "completed_at": "2026-10-08T22:21:41Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570183589",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096755,
+    "runner_name": "GitHub Actions 1000096755",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113570320519,
+    "run_id": 37852934945,
+    "workflow_name": "php",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934945",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVGQhw",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570320519",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934945/job/113570320519",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:21:44Z",
+    "started_at": "2026-10-08T22:21:49Z",
+    "completed_at": "2026-10-08T22:22:04Z",
+    "name": "lint",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:21:50Z",
+        "completed_at": "2026-10-08T22:21:50Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:21:50Z",
+        "completed_at": "2026-10-08T22:21:52Z"
+      },
+      {
+        "name": "Set up PHP 8.4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:21:52Z",
+        "completed_at": "2026-10-08T22:21:56Z"
+      },
+      {
+        "name": "Validate composer.json",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:21:56Z",
+        "completed_at": "2026-10-08T22:21:56Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:21:56Z",
+        "completed_at": "2026-10-08T22:21:59Z"
+      },
+      {
+        "name": "Check coding standard with PHP_CodeSniffer",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:21:59Z",
+        "completed_at": "2026-10-08T22:22:02Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-08T22:22:02Z",
+        "completed_at": "2026-10-08T22:22:02Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-08T22:22:02Z",
+        "completed_at": "2026-10-08T22:22:02Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570320519",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096771,
+    "runner_name": "GitHub Actions 1000096771",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113570438929,
+    "run_id": 37852934945,
+    "workflow_name": "php",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934945",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVNfEQ",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570438929",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934945/job/113570438929",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:22:05Z",
+    "started_at": "2026-10-08T22:22:06Z",
+    "completed_at": "2026-10-08T22:22:30Z",
+    "name": "test (8.5)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:22:07Z",
+        "completed_at": "2026-10-08T22:22:08Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:22:08Z",
+        "completed_at": "2026-10-08T22:22:10Z"
+      },
+      {
+        "name": "Set up PHP 8.5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:22:10Z",
+        "completed_at": "2026-10-08T22:22:14Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:22:14Z",
+        "completed_at": "2026-10-08T22:22:17Z"
+      },
+      {
+        "name": "Run tests",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:22:17Z",
+        "completed_at": "2026-10-08T22:22:28Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-08T22:22:28Z",
+        "completed_at": "2026-10-08T22:22:28Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-08T22:22:28Z",
+        "completed_at": "2026-10-08T22:22:28Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570438929",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096777,
+    "runner_name": "GitHub Actions 1000096777",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113570439054,
+    "run_id": 37852934945,
+    "workflow_name": "php",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934945",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVNfjg",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570439054",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934945/job/113570439054",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:22:05Z",
+    "started_at": "2026-10-08T22:22:06Z",
+    "completed_at": "2026-10-08T22:22:35Z",
+    "name": "test (8.4)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:22:07Z",
+        "completed_at": "2026-10-08T22:22:08Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:22:08Z",
+        "completed_at": "2026-10-08T22:22:10Z"
+      },
+      {
+        "name": "Set up PHP 8.4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:22:10Z",
+        "completed_at": "2026-10-08T22:22:15Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:22:15Z",
+        "completed_at": "2026-10-08T22:22:18Z"
+      },
+      {
+        "name": "Run tests",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:22:18Z",
+        "completed_at": "2026-10-08T22:22:33Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-08T22:22:33Z",
+        "completed_at": "2026-10-08T22:22:33Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-08T22:22:33Z",
+        "completed_at": "2026-10-08T22:22:33Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570439054",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096778,
+    "runner_name": "GitHub Actions 1000096778",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113570619662,
+    "run_id": 37852934945,
+    "workflow_name": "php",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934945",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVYhDg",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570619662",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934945/job/113570619662",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:22:36Z",
+    "started_at": "2026-10-08T22:22:36Z",
+    "completed_at": "2026-10-08T22:22:35Z",
+    "name": "publishToPackagist",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570619662",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 113570620647,
+    "run_id": 37852934945,
+    "workflow_name": "php",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934945",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVYk5w",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570620647",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934945/job/113570620647",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:22:36Z",
+    "started_at": "2026-10-08T22:22:36Z",
+    "completed_at": "2026-10-08T22:22:36Z",
+    "name": "publishRelease",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570620647",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  }
+]

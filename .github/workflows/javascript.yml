@@ -1,0 +1,115 @@
+name: js
+
+on:
+  workflow_call:
+    inputs:
+      verbose:
+        description: "Print extra diagnostics (never secret values)"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+defaults:
+  run:
+    working-directory: js
+
+jobs:
+  format:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: ci-js-${{ github.ref }}-format
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2.2.0
+        with:
+          bun-version: latest
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+      # Uses the pinned devDependency rather than `npx prettier`, which would
+      # silently resolve a different version on every run.
+      - name: Check formatting with Prettier
+        run: bun run format:check
+
+  lint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: ci-js-${{ github.ref }}-lint
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2.2.0
+        with:
+          bun-version: latest
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+      - name: Lint
+        run: bun run lint
+
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    concurrency:
+      group: ci-js-${{ github.ref }}-test
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2.2.0
+        with:
+          bun-version: latest
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+      - name: Build
+        run: bun run build
+      - name: Verify generated parser matches its grammar
+        run: git diff --exit-code -- src/parser-generated.js
+      - name: Test
+        run: bun test
+      - name: Check binary API TypeScript declarations
+        run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/binary/typescript.ts
+      - name: Check indented document API TypeScript declarations
+        run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/js_indented_document.ts
+
+  parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@v2.2.0
+        with:
+          bun-version: latest
+      - name: Check every CI entry point and parity contract
+        working-directory: .
+        run: |
+          bun scripts/ci/check-js-gate.mjs
+          bun test experiments/issue-339/ci-contract.test.mjs
+          node scripts/ci/check-parity.mjs
+          node scripts/version-consistency.mjs
+          node scripts/ci/php-distribution.mjs
+          node --test experiments/issue-339/parity-contract.test.mjs
+          node --test experiments/issue-339/release-audit.test.mjs
+          node --test experiments/issue-339/php-distribution.test.mjs
+          python3 experiments/issue-339/test_workflow_contract.py

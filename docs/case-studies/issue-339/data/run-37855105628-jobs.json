@@ -1,0 +1,468 @@
+[
+  {
+    "id": 113577283127,
+    "run_id": 37855105628,
+    "workflow_name": "java",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105628",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacbvONw",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577283127",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105628/job/113577283127",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:42:04Z",
+    "started_at": "2026-10-08T22:42:06Z",
+    "completed_at": "2026-10-08T22:42:11Z",
+    "name": "findChangedJavaFiles",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:42:06Z",
+        "completed_at": "2026-10-08T22:42:07Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:42:07Z",
+        "completed_at": "2026-10-08T22:42:09Z"
+      },
+      {
+        "name": "Get changed files using defaults",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:42:09Z",
+        "completed_at": "2026-10-08T22:42:09Z"
+      },
+      {
+        "name": "Set output isJavaFilesChanged",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:42:09Z",
+        "completed_at": "2026-10-08T22:42:09Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:42:09Z",
+        "completed_at": "2026-10-08T22:42:10Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:42:10Z",
+        "completed_at": "2026-10-08T22:42:10Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577283127",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000097160,
+    "runner_name": "GitHub Actions 1000097160",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113577323877,
+    "run_id": 37855105628,
+    "workflow_name": "java",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105628",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacbxtZQ",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577323877",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105628/job/113577323877",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:42:11Z",
+    "started_at": "2026-10-08T22:42:34Z",
+    "completed_at": "2026-10-08T22:43:02Z",
+    "name": "format",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:42:35Z",
+        "completed_at": "2026-10-08T22:42:36Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:42:36Z",
+        "completed_at": "2026-10-08T22:42:38Z"
+      },
+      {
+        "name": "Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:42:38Z",
+        "completed_at": "2026-10-08T22:42:39Z"
+      },
+      {
+        "name": "Check Google Java formatting and whitespace",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:42:39Z",
+        "completed_at": "2026-10-08T22:42:59Z"
+      },
+      {
+        "name": "Post Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:42:59Z",
+        "completed_at": "2026-10-08T22:43:00Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:43:00Z",
+        "completed_at": "2026-10-08T22:43:00Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:43:00Z",
+        "completed_at": "2026-10-08T22:43:00Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577323877",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000097188,
+    "runner_name": "GitHub Actions 1000097188",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113577323932,
+    "run_id": 37855105628,
+    "workflow_name": "java",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105628",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacbxtnA",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577323932",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105628/job/113577323932",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:42:11Z",
+    "started_at": "2026-10-08T22:42:41Z",
+    "completed_at": "2026-10-08T22:43:01Z",
+    "name": "build",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:42:42Z",
+        "completed_at": "2026-10-08T22:42:43Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:42:43Z",
+        "completed_at": "2026-10-08T22:42:46Z"
+      },
+      {
+        "name": "Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:42:46Z",
+        "completed_at": "2026-10-08T22:42:46Z"
+      },
+      {
+        "name": "Build with Maven",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:42:46Z",
+        "completed_at": "2026-10-08T22:42:58Z"
+      },
+      {
+        "name": "Post Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:42:58Z",
+        "completed_at": "2026-10-08T22:42:59Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:42:59Z",
+        "completed_at": "2026-10-08T22:42:59Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:42:59Z",
+        "completed_at": "2026-10-08T22:42:59Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577323932",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000097193,
+    "runner_name": "GitHub Actions 1000097193",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113577606370,
+    "run_id": 37855105628,
+    "workflow_name": "java",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105628",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaccC84g",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577606370",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105628/job/113577606370",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:43:02Z",
+    "started_at": "2026-10-08T22:43:19Z",
+    "completed_at": "2026-10-08T22:43:42Z",
+    "name": "test (25)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:43:20Z",
+        "completed_at": "2026-10-08T22:43:22Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:43:22Z",
+        "completed_at": "2026-10-08T22:43:25Z"
+      },
+      {
+        "name": "Set up JDK 25",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:43:25Z",
+        "completed_at": "2026-10-08T22:43:26Z"
+      },
+      {
+        "name": "Test with Maven",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:43:26Z",
+        "completed_at": "2026-10-08T22:43:39Z"
+      },
+      {
+        "name": "Post Set up JDK 25",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:43:39Z",
+        "completed_at": "2026-10-08T22:43:40Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:43:40Z",
+        "completed_at": "2026-10-08T22:43:40Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:43:40Z",
+        "completed_at": "2026-10-08T22:43:40Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577606370",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000097210,
+    "runner_name": "GitHub Actions 1000097210",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113577606505,
+    "run_id": 37855105628,
+    "workflow_name": "java",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105628",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaccC9aQ",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577606505",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105628/job/113577606505",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:43:02Z",
+    "started_at": "2026-10-08T22:43:27Z",
+    "completed_at": "2026-10-08T22:44:08Z",
+    "name": "test (21)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:43:28Z",
+        "completed_at": "2026-10-08T22:43:29Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:43:29Z",
+        "completed_at": "2026-10-08T22:43:31Z"
+      },
+      {
+        "name": "Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:43:31Z",
+        "completed_at": "2026-10-08T22:43:32Z"
+      },
+      {
+        "name": "Test with Maven",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:43:32Z",
+        "completed_at": "2026-10-08T22:44:05Z"
+      },
+      {
+        "name": "Post Set up JDK 21",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:44:05Z",
+        "completed_at": "2026-10-08T22:44:05Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:44:05Z",
+        "completed_at": "2026-10-08T22:44:06Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:44:06Z",
+        "completed_at": "2026-10-08T22:44:06Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577606505",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000097217,
+    "runner_name": "GitHub Actions 1000097217",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113577971923,
+    "run_id": 37855105628,
+    "workflow_name": "java",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105628",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaccZQ0w",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577971923",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105628/job/113577971923",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:44:08Z",
+    "started_at": "2026-10-08T22:44:08Z",
+    "completed_at": "2026-10-08T22:44:08Z",
+    "name": "publishToMavenCentral",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577971923",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 113577972439,
+    "run_id": 37855105628,
+    "workflow_name": "java",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105628",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaccZS1w",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577972439",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105628/job/113577972439",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:44:08Z",
+    "started_at": "2026-10-08T22:44:08Z",
+    "completed_at": "2026-10-08T22:44:08Z",
+    "name": "publishRelease",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577972439",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  }
+]

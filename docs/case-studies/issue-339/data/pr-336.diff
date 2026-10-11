@@ -1,0 +1,1967 @@
+diff --git a/.github/workflows/js.yml b/.github/workflows/js.yml
+index 4c62af35..2146213a 100644
+--- a/.github/workflows/js.yml
++++ b/.github/workflows/js.yml
+@@ -139,6 +139,8 @@ jobs:
+         run: bun test
+       - name: Check binary API TypeScript declarations
+         run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/binary/typescript.ts
++      - name: Check indented document API TypeScript declarations
++        run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/js_indented_document.ts
+ 
+   publishToNpm:
+     needs: [findChangedJsFiles, test]
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 4351ab5a..d43f0f7a 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -384,6 +384,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
+   not in the message, so a caller that printed the message lost it
+   ([#302](https://github.com/link-foundation/links-notation/issues/302))
+ 
++## [0.25.0] - 2026-10-08
++
++### Added
++
++- JavaScript `Parser.parseGroups()` exposes the indentation tree through
++  `LinksGroup` instances. `parseIndentedDocument()` and
++  `formatIndentedDocument()` read and write parent/children text maps with
++  minimal quoting, multiline references, and an explicit array or joined-text
++  policy. Public `escapeReference()` and `unescapeReference()` helpers are also
++  available as static `Link` methods
++  ([#333](https://github.com/link-foundation/links-notation/issues/333)).
++
+ ## [0.24.0] - 2026-10-08
+ 
+ ### Fixed
+diff --git a/README.md b/README.md
+index 53b0add0..68119e84 100644
+--- a/README.md
++++ b/README.md
+@@ -256,7 +256,7 @@ All seven language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP)
+ | Language | Tests | Test categories |
+ | --- | --- | --- |
+ | Python | 244 | 22 |
+-| JavaScript | 288 | 26 |
++| JavaScript | 302 | 27 |
+ | Rust | 400 | 28 |
+ | C# | 294 | 26 |
+ | Go | 138 | 16 |
+diff --git a/README.ru.md b/README.ru.md
+index 2e72c073..6f15c6f7 100644
+--- a/README.ru.md
++++ b/README.ru.md
+@@ -256,7 +256,7 @@ deploy: staging # пока только staging
+ | Язык | Тестов | Категорий тестов |
+ | --- | --- | --- |
+ | Python | 244 | 22 |
+-| JavaScript | 288 | 26 |
++| JavaScript | 302 | 27 |
+ | Rust | 400 | 28 |
+ | C# | 294 | 26 |
+ | Go | 138 | 16 |
+diff --git a/TEST_CASE_COMPARISON.md b/TEST_CASE_COMPARISON.md
+index 0427a8d7..f104f756 100644
+--- a/TEST_CASE_COMPARISON.md
++++ b/TEST_CASE_COMPARISON.md
+@@ -19,7 +19,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ | Language | Total Tests | Test Categories |
+ |----------|-------------|----------------|
+ | Python | 244 | 22 |
+-| JavaScript | 288 | 26 |
++| JavaScript | 302 | 27 |
+ | Rust | 400 | 28 |
+ | C# | 294 | 26 |
+ | Go | 138 | 16 |
+@@ -285,6 +285,27 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ 
+ **Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4, Go: 0, Java: 0, PHP: 4
+ 
++## Indented Document
++
++| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
++|-----------|---|---|---|---|---|---|---|
++| document helpers preserve the shared  unicode reference corpus and reserved prefixes | ❌ | [✅](js/tests/IndentedDocument.test.js#L207) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| document helpers reject deeper or named value structures instead of losing data | ❌ | [✅](js/tests/IndentedDocument.test.js#L160) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| document parsing respects comments and existing parser options | ❌ | [✅](js/tests/IndentedDocument.test.js#L178) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| empty text, exact whitespace, comments, quotes, and multiline text survive | ❌ | [✅](js/tests/IndentedDocument.test.js#L110) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| format the issue document with two space indentation and a final newline | ❌ | [✅](js/tests/IndentedDocument.test.js#L95) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| groups retain named and nested links and share parser diagnostics | ❌ | [✅](js/tests/IndentedDocument.test.js#L43) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| minimal escaping leaves ordinary prose unquoted | ❌ | [✅](js/tests/IndentedDocument.test.js#L17) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| mixed quotes round trip through the existing  link formatter | ❌ | [✅](js/tests/IndentedDocument.test.js#L7) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| multiple child lines have explicit array or joined text behavior | ❌ | [✅](js/tests/IndentedDocument.test.js#L76) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| one element arrays normalize to strings and unanswered parents remain distinct | ❌ | [✅](js/tests/IndentedDocument.test.js#L187) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| parse the issue document without inspecting private path flags | ❌ | [✅](js/tests/IndentedDocument.test.js#L62) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| public groups preserve immediate children and deeper indentation | ❌ | [✅](js/tests/IndentedDocument.test.js#L26) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| unescaping decodes versioned literals without decoding parsed document  i ds twice | ❌ | [✅](js/tests/IndentedDocument.test.js#L242) | ❌ | ❌ | ❌ | ❌ | ❌ |
++| unescaping uses the grammar and never decodes already parsed  i ds again | ❌ | [✅](js/tests/IndentedDocument.test.js#L145) | ❌ | ❌ | ❌ | ❌ | ❌ |
++
++**Category totals:** Python: 0, JavaScript: 14, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0
++
+ ## Indented Id Nested Values
+ 
+ | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
+@@ -1010,6 +1031,22 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - formatroundtripwithconfigintegration
+ - formatsinglerefwithconfig
+ 
++**Indented Document** (14 missing):
++- documenthelperspreservethesharedunicodereferencecorpusandreservedprefixes
++- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
++- documentparsingrespectscommentsandexistingparseroptions
++- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
++- formattheissuedocumentwithtwospaceindentationandafinalnewline
++- groupsretainnamedandnestedlinksandshareparserdiagnostics
++- minimalescapingleavesordinaryproseunquoted
++- mixedquotesroundtripthroughtheexistinglinkformatter
++- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
++- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
++- parsetheissuedocumentwithoutinspectingprivatepathflags
++- publicgroupspreserveimmediatechildrenanddeeperindentation
++- unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
++- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
++
+ **Indented Id Syntax** (3 missing):
+ - emptyindentedidworks
+ - equivalencecomprehensive
+@@ -1303,7 +1340,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - vecstringtoanonymouslink
+ - vecstrtoanonymouslink
+ 
+-**Total missing: 371 tests**
++**Total missing: 385 tests**
+ 
+ ### JavaScript Missing Tests
+ 
+@@ -1770,6 +1807,22 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - nquotedelimitedemptyisstillempty
+ - singlespacestillreadsasaspace
+ 
++**Indented Document** (14 missing):
++- documenthelperspreservethesharedunicodereferencecorpusandreservedprefixes
++- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
++- documentparsingrespectscommentsandexistingparseroptions
++- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
++- formattheissuedocumentwithtwospaceindentationandafinalnewline
++- groupsretainnamedandnestedlinksandshareparserdiagnostics
++- minimalescapingleavesordinaryproseunquoted
++- mixedquotesroundtripthroughtheexistinglinkformatter
++- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
++- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
++- parsetheissuedocumentwithoutinspectingprivatepathflags
++- publicgroupspreserveimmediatechildrenanddeeperindentation
++- unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
++- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
++
+ **Indented Id Syntax** (3 missing):
+ - emptyindentedidworks
+ - equivalencecomprehensive
+@@ -1937,7 +1990,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - namedtupletolink
+ - tupletolink
+ 
+-**Total missing: 216 tests**
++**Total missing: 230 tests**
+ 
+ ### C# Missing Tests
+ 
+@@ -2039,6 +2092,22 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - formatroundtripwithconfigintegration
+ - formatsinglerefwithconfig
+ 
++**Indented Document** (14 missing):
++- documenthelperspreservethesharedunicodereferencecorpusandreservedprefixes
++- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
++- documentparsingrespectscommentsandexistingparseroptions
++- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
++- formattheissuedocumentwithtwospaceindentationandafinalnewline
++- groupsretainnamedandnestedlinksandshareparserdiagnostics
++- minimalescapingleavesordinaryproseunquoted
++- mixedquotesroundtripthroughtheexistinglinkformatter
++- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
++- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
++- parsetheissuedocumentwithoutinspectingprivatepathflags
++- publicgroupspreserveimmediatechildrenanddeeperindentation
++- unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
++- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
++
+ **Indented Id Syntax** (3 missing):
+ - emptyindentedidworks
+ - equivalencecomprehensive
+@@ -2310,7 +2379,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - vecstringtoanonymouslink
+ - vecstrtoanonymouslink
+ 
+-**Total missing: 321 tests**
++**Total missing: 335 tests**
+ 
+ ### Go Missing Tests
+ 
+@@ -2471,6 +2540,22 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - threelevelnestingwithdifferentindentation
+ - twospacesvsfourspacesindentation
+ 
++**Indented Document** (14 missing):
++- documenthelperspreservethesharedunicodereferencecorpusandreservedprefixes
++- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
++- documentparsingrespectscommentsandexistingparseroptions
++- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
++- formattheissuedocumentwithtwospaceindentationandafinalnewline
++- groupsretainnamedandnestedlinksandshareparserdiagnostics
++- minimalescapingleavesordinaryproseunquoted
++- mixedquotesroundtripthroughtheexistinglinkformatter
++- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
++- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
++- parsetheissuedocumentwithoutinspectingprivatepathflags
++- publicgroupspreserveimmediatechildrenanddeeperindentation
++- unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
++- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
++
+ **Indented Id Syntax** (14 missing):
+ - basicindentedidsyntax
+ - emptyindentedidshouldwork
+@@ -2847,7 +2932,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - vecstringtoanonymouslink
+ - vecstrtoanonymouslink
+ 
+-**Total missing: 473 tests**
++**Total missing: 487 tests**
+ 
+ ### Java Missing Tests
+ 
+@@ -3005,6 +3090,22 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - threelevelnestingwithdifferentindentation
+ - twospacesvsfourspacesindentation
+ 
++**Indented Document** (14 missing):
++- documenthelperspreservethesharedunicodereferencecorpusandreservedprefixes
++- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
++- documentparsingrespectscommentsandexistingparseroptions
++- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
++- formattheissuedocumentwithtwospaceindentationandafinalnewline
++- groupsretainnamedandnestedlinksandshareparserdiagnostics
++- minimalescapingleavesordinaryproseunquoted
++- mixedquotesroundtripthroughtheexistinglinkformatter
++- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
++- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
++- parsetheissuedocumentwithoutinspectingprivatepathflags
++- publicgroupspreserveimmediatechildrenanddeeperindentation
++- unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
++- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
++
+ **Indented Id Syntax** (14 missing):
+ - basicindentedidsyntax
+ - emptyindentedidshouldwork
+@@ -3342,7 +3443,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - vecstringtoanonymouslink
+ - vecstrtoanonymouslink
+ 
+-**Total missing: 431 tests**
++**Total missing: 445 tests**
+ 
+ ### PHP Missing Tests
+ 
+@@ -3477,6 +3578,22 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - formatroundtripwithconfigintegration
+ - formatsinglerefwithconfig
+ 
++**Indented Document** (14 missing):
++- documenthelperspreservethesharedunicodereferencecorpusandreservedprefixes
++- documenthelpersrejectdeeperornamedvaluestructuresinsteadoflosingdata
++- documentparsingrespectscommentsandexistingparseroptions
++- emptytext,exactwhitespace,comments,quotes,andmultilinetextsurvive
++- formattheissuedocumentwithtwospaceindentationandafinalnewline
++- groupsretainnamedandnestedlinksandshareparserdiagnostics
++- minimalescapingleavesordinaryproseunquoted
++- mixedquotesroundtripthroughtheexistinglinkformatter
++- multiplechildlineshaveexplicitarrayorjoinedtextbehavior
++- oneelementarraysnormalizetostringsandunansweredparentsremaindistinct
++- parsetheissuedocumentwithoutinspectingprivatepathflags
++- publicgroupspreserveimmediatechildrenanddeeperindentation
++- unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
++- unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
++
+ **Indented Id Syntax** (3 missing):
+ - emptyindentedidshouldwork
+ - equivalencetestcomprehensive
+@@ -3779,5 +3896,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
+ - vecstringtoanonymouslink
+ - vecstrtoanonymouslink
+ 
+-**Total missing: 381 tests**
++**Total missing: 395 tests**
+ 
+diff --git a/benchmarks/BENCHMARK_RESULTS.md b/benchmarks/BENCHMARK_RESULTS.md
+index 29905520..c96f67a3 100644
+--- a/benchmarks/BENCHMARK_RESULTS.md
++++ b/benchmarks/BENCHMARK_RESULTS.md
+@@ -298,4 +298,4 @@ Sequences of unlimited length (N-tuples). Shape: Tuples. Source: [`datasets/sequ
+ - **The rest of the prompt.** Only the document is counted: no system prompt, no code fence, no schema description and no instructions. Those add a cost every format pays alike.
+ - **Speed and memory.** This is a size benchmark. How fast each format parses is a separate question with a separate answer.
+ 
+-Generated by `links-notation-benchmark` against `links-notation` 0.24.0.
++Generated by `links-notation-benchmark` against `links-notation` 0.25.0.
+diff --git a/benchmarks/java/pom.xml b/benchmarks/java/pom.xml
+index a8f89d35..28bd4989 100644
+--- a/benchmarks/java/pom.xml
++++ b/benchmarks/java/pom.xml
+@@ -23,7 +23,7 @@
+             <!-- The parser under measurement, built from ../../java by `mvn install`. -->
+             <groupId>io.github.link-foundation</groupId>
+             <artifactId>links-notation</artifactId>
+-            <version>0.24.0</version>
++            <version>0.25.0</version>
+         </dependency>
+         <dependency>
+             <!-- JTokkit carries the BPE ranks with the jar, so counting a token
+diff --git a/csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj b/csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
+index f4261901..286351ef 100644
+--- a/csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
++++ b/csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
+@@ -4,7 +4,7 @@
+     <Description>Link.Foundation's Links Notation parser and formatter for .NET</Description>
+     <Copyright>Konstantin Diachenko</Copyright>
+     <AssemblyTitle>Link.Foundation.Links.Notation</AssemblyTitle>
+-    <VersionPrefix>0.24.0</VersionPrefix>
++    <VersionPrefix>0.25.0</VersionPrefix>
+     <Authors>Konstantin Diachenko</Authors>
+     <TargetFramework>net10.0</TargetFramework>
+     <PackageId>Link.Foundation.Links.Notation</PackageId>
+diff --git a/docs/website/package-lock.json b/docs/website/package-lock.json
+index fc5f5987..5fbe90c0 100644
+--- a/docs/website/package-lock.json
++++ b/docs/website/package-lock.json
+@@ -18,7 +18,7 @@
+     },
+     "../../js": {
+       "name": "links-notation",
+-      "version": "0.24.0",
++      "version": "0.25.0",
+       "license": "Unlicense",
+       "devDependencies": {
+         "bun-types": "^1.4.2",
+diff --git a/examples/js_indented_document.js b/examples/js_indented_document.js
+new file mode 100644
+index 00000000..b7dd712c
+--- /dev/null
++++ b/examples/js_indented_document.js
+@@ -0,0 +1,17 @@
++// Run from the repository root: node examples/js_indented_document.js
++import assert from "node:assert/strict";
++import {
++  parseIndentedDocument,
++  formatIndentedDocument,
++} from "../js/src/index.js";
++
++const answers = new Map([
++  ["What is your experience?", "I have worked with JavaScript"],
++  ['Question with "quotes": and colon', "It's ready for review"],
++  ["Skills", ["JavaScript", "Python"]],
++  ["Tell us more", "First paragraph\nSecond paragraph"],
++]);
++
++const document = formatIndentedDocument(answers);
++assert.deepEqual(parseIndentedDocument(document), answers);
++console.log(document);
+diff --git a/examples/js_indented_document.ts b/examples/js_indented_document.ts
+new file mode 100644
+index 00000000..a2009b51
+--- /dev/null
++++ b/examples/js_indented_document.ts
+@@ -0,0 +1,37 @@
++import {
++  Parser,
++  Link,
++  IndentedGroup,
++  IndentedDocumentOptions,
++  EscapeReferenceOptions,
++  escapeReference,
++  unescapeReference,
++  parseIndentedDocument,
++  formatIndentedDocument,
++} from "../js";
++
++const entries = new Map<string, string | string[]>([
++  ["Question", "Answer"],
++  ["Skills", ["JavaScript", "Python"]],
++]);
++const document: string = formatIndentedDocument(entries);
++const options: IndentedDocumentOptions = {
++  multipleValues: "join",
++  maxDepth: 2,
++};
++const parsed: Map<string, string | string[]> = parseIndentedDocument(
++  document,
++  options,
++);
++const groups: IndentedGroup[] = new Parser().parseGroups(document);
++const element: Link = groups[0].children[0].element;
++const escaping: EscapeReferenceOptions = { minimal: true };
++const escaped: string = escapeReference(element.getValuesString(), escaping);
++const unescaped: string = unescapeReference(escaped);
++const staticEscaped: string = Link.escapeReference(unescaped, escaping);
++console.log(parsed, Link.unescapeReference(staticEscaped));
++
++// @ts-expect-error only the two documented multiple-value policies are allowed
++parseIndentedDocument(document, { multipleValues: "guess" });
++// @ts-expect-error document values are text or arrays of text
++formatIndentedDocument(new Map([["Question", 42]]));
+diff --git a/experiments/issue-333/README.md b/experiments/issue-333/README.md
+new file mode 100644
+index 00000000..cf9481bf
+--- /dev/null
++++ b/experiments/issue-333/README.md
+@@ -0,0 +1,75 @@
++# Indented document API investigation (#333)
++
++The linked Q&A consumer reconstructed immediate children from the parser's
++private `_isFromPathCombination` marker and implemented its own escaping,
++unescaping, and array-versus-text heuristics. The grammar already retains an
++indentation tree; `Parser.collectLinks()` expands it into paths. The new
++`parseGroups()` exposes that tree as existing `LinksGroup` objects before this
++expansion, while sharing validation, depth limits, comment handling, and errors.
++
++The original `Link.escapeReference()` wrote `He said "it's ready"` with a
++backslash before the apostrophe. The quote reader recognizes doubled enclosing
++delimiters, so parsing the formatted Link truncated the reference to
++`He said "it\`. The regression test was run before implementation and failed
++with exactly that mismatch. The new APIs were also absent: the initial run of
++`js/tests/IndentedDocument.test.js` reported ten failures.
++
++Minimal escaping in `references.js` uses the existing quote reader to decode
++serialized references and writes doubled escapes. Choosing a delimiter
++different from the first content character avoids extending the opening quote
++run accidentally. Minimal
++mode quotes comment starts and significant whitespace, but leaves ordinary
++single-space prose unquoted. Link IDs are not unescaped again after parsing.
++
++Run the finite exhaustive probe (2,380 strings of length zero through three):
++
++```sh
++node --max-old-space-size=256 experiments/issue-333/reference-roundtrip.mjs
++node --max-old-space-size=256 experiments/issue-333/reference-roundtrip.mjs --built
++```
++
++It checks serialized-reference decoding, ordinary parser round trips, and text
++Map round trips over letters, all quote styles, whitespace, comments, structural
++characters, and backslashes. The JavaScript unit suite covers the issue's full
++document, nested groups, explicit array/join policies, duplicate parents,
++multiline and Unicode text, empty values, invalid structures, and parser limits.
++The runnable consumer example is `examples/js_indented_document.js`; TypeScript
++declarations are checked in CI using `examples/js_indented_document.ts`.
++
++Scope: JavaScript, the language used by the issue's consumer. Release metadata
++is synchronized to 0.25.0 across all seven implementations because the
++repository's mandatory version-consistency check requires it. A one-element
++array reads back as a string because the text syntax cannot distinguish them.
++Multiple children default to an array; joining them as multiline text requires
++the explicit `multipleValues: 'join'` option.
++
++The initial PR also failed dependency freshness before any implementation:
++run [37853190544](https://github.com/link-foundation/links-notation/actions/runs/37853190544)
++at 2026-10-08 22:23:45 UTC, head
++`a2daba237e1440cc36d55e843077197d0eec2d63`. Lines 203–227 of its preserved
++log listed stale Spotless, lino-objects-codec, Vite, and GitHub Actions versions.
++Those declarations and the affected npm locks were refreshed without changing
++the freshness policy. Local command output and downloaded CI logs are kept in
++`ci-logs/` for review.
++
++On head `b84905a`, the benchmark job in run
++[37854026043](https://github.com/link-foundation/links-notation/actions/runs/37854026043)
++failed its generated-file drift check. Lines 1006–1007 of the preserved log
++showed one changed line in `benchmarks/BENCHMARK_RESULTS.md`; lines 1019–1020
++reported stale output. Regenerating the report updates its embedded library
++version from 0.23.0 to 0.24.0. The generator's subsequent `--check` verified all
++73 generated files without drift.
++
++During final review, main merged #335 with the lossless reference literal
++extension in 0.24.0. This branch merges that change and retains its canonical
++encoder for default Link formatting. Minimal mode also uses its literals for
++empty/control strings and quotes reserved prefixes and Unicode whitespace;
++`unescapeReference()` decodes complete literals. Two additional regression tests
++failed before this integration (`~1{61}` was left unquoted and `~1{}` was not
++decoded). They now cover the shared 91-reference Unicode corpus, malformed
++literals, reserved-prefix text, and rejecting unpaired surrogates. An additional
++case reproduced `text ~1{61} after` becoming `text a after`: minimal mode must
++quote reserved prefixes at every word boundary, including the middle of prose.
++The new API
++therefore prepares the next minor release, 0.25.0. The benchmark report is
++regenerated once more for that version.
+diff --git a/experiments/issue-333/reference-roundtrip.mjs b/experiments/issue-333/reference-roundtrip.mjs
+new file mode 100644
+index 00000000..269b22f1
+--- /dev/null
++++ b/experiments/issue-333/reference-roundtrip.mjs
+@@ -0,0 +1,55 @@
++// A finite exhaustive probe: strings up to length three over syntax characters.
++// Run: node --max-old-space-size=256 experiments/issue-333/reference-roundtrip.mjs
++import assert from "node:assert/strict";
++const {
++  Parser,
++  escapeReference,
++  unescapeReference,
++  formatIndentedDocument,
++  parseIndentedDocument,
++} = await import(
++  process.argv.includes('--built')
++    ? '../../js/dist/index.js'
++    : '../../js/src/index.js'
++);
++
++const alphabet = [
++  "a",
++  " ",
++  "'",
++  '"',
++  "`",
++  "#",
++  ":",
++  "(",
++  ")",
++  "\n",
++  "\t",
++  "\r",
++  "\\",
++];
++const parser = new Parser();
++let checked = 0;
++function check(text) {
++  const escaped = escapeReference(text);
++  assert.equal(unescapeReference(escaped), text, JSON.stringify(text));
++  assert.equal(
++    parser.parse(escaped)[0].values[0].id,
++    text,
++    JSON.stringify(text),
++  );
++  const entries = new Map([[text, text]]);
++  assert.deepEqual(
++    parseIndentedDocument(formatIndentedDocument(entries)),
++    entries,
++  );
++  checked++;
++}
++function enumerate(prefix, remaining) {
++  check(prefix);
++  if (remaining === 0) return;
++  for (const character of alphabet)
++    enumerate(prefix + character, remaining - 1);
++}
++enumerate("", 3);
++console.log(`Verified ${checked} reference and document round trips.`);
+diff --git a/go/VERSION b/go/VERSION
+index 2094a100..d21d277b 100644
+--- a/go/VERSION
++++ b/go/VERSION
+@@ -1 +1 @@
+-0.24.0
++0.25.0
+diff --git a/java/README.md b/java/README.md
+index 427d6be5..f91f3e38 100644
+--- a/java/README.md
++++ b/java/README.md
+@@ -12,7 +12,7 @@ Add the dependency to your `pom.xml`:
+ <dependency>
+     <groupId>io.github.link-foundation</groupId>
+     <artifactId>links-notation</artifactId>
+-    <version>0.24.0</version>
++    <version>0.25.0</version>
+ </dependency>
+ ```
+ 
+@@ -21,7 +21,7 @@ Add the dependency to your `pom.xml`:
+ Add the dependency to your `build.gradle`:
+ 
+ ```groovy
+-implementation 'io.github.link-foundation:links-notation:0.24.0'
++implementation 'io.github.link-foundation:links-notation:0.25.0'
+ ```
+ 
+ ### Local Development Setup
+diff --git a/java/README.ru.md b/java/README.ru.md
+index 10037736..5c49b16d 100644
+--- a/java/README.ru.md
++++ b/java/README.ru.md
+@@ -12,7 +12,7 @@ Java-реализация парсера Links Notation.
+ <dependency>
+     <groupId>io.github.link-foundation</groupId>
+     <artifactId>links-notation</artifactId>
+-    <version>0.24.0</version>
++    <version>0.25.0</version>
+ </dependency>
+ ```
+ 
+@@ -21,7 +21,7 @@ Java-реализация парсера Links Notation.
+ Добавьте зависимость в ваш `build.gradle`:
+ 
+ ```groovy
+-implementation 'io.github.link-foundation:links-notation:0.24.0'
++implementation 'io.github.link-foundation:links-notation:0.25.0'
+ ```
+ 
+ ### Локальная разработка
+diff --git a/java/pom.xml b/java/pom.xml
+index 6250bfc9..65007547 100644
+--- a/java/pom.xml
++++ b/java/pom.xml
+@@ -6,7 +6,7 @@
+ 
+     <groupId>io.github.link-foundation</groupId>
+     <artifactId>links-notation</artifactId>
+-    <version>0.24.0</version>
++    <version>0.25.0</version>
+     <packaging>jar</packaging>
+ 
+     <name>Links Notation</name>
+diff --git a/js/README.md b/js/README.md
+index d091300e..07e5916f 100644
+--- a/js/README.md
++++ b/js/README.md
+@@ -147,6 +147,85 @@ const group = new LinksGroup(parsed);
+ console.log(group.format());
+ ```
+ 
++### Indented Text Documents
++
++Use `parseIndentedDocument` and `formatIndentedDocument` for text parents and
++their answers or options:
++
++```javascript
++import { parseIndentedDocument, formatIndentedDocument } from 'links-notation';
++
++const input = `What is your experience?
++  I have worked with JavaScript
++'Question with "quotes": and colon'
++  Answer
++Skills
++  JavaScript
++  Python
++`;
++const answers = parseIndentedDocument(input);
++console.log(answers.get('What is your experience?'));
++// I have worked with JavaScript
++console.log(answers.get('Skills')); // ['JavaScript', 'Python']
++console.log(formatIndentedDocument(answers));
++```
++
++A parent with no children maps to `[]`, one child maps to a string, and multiple
++children map to an array. Repeated parent lines accumulate children in order.
++To read multiple child lines as multiline text, pass
++`{ multipleValues: 'join' }`. These helpers accept the same parsing options as
++`Parser`, including `comments`, `maxInputSize`, and `maxDepth`.
++
++The formatter uses two spaces of indentation and adds a final newline to a
++nonempty document. Ordinary single-space prose stays unquoted. Quotes are
++escaped by doubling the enclosing delimiter. Structural characters, comment
++starts, reserved literal prefixes, and significant whitespace are quoted.
++Empty strings and control characters use the versioned reference literals
++introduced in 0.24.0. A multiline string is encoded as one reference with its
++exact line endings; an array is written as separate child references. Parsed
++IDs are already unescaped.
++
++The text format does not distinguish a one-element array from a single string;
++both read back as a string. Use a multiline string to distinguish one
++multiline answer from several options. The helpers reject grandchildren and
++named links with values instead of discarding their structure.
++
++For arbitrary indentation trees, `Parser.parseGroups(input)` returns existing
++`LinksGroup` instances. Each group's `element` is the `Link` on that line, and
++`children` contains its immediately indented groups. Parenthesized values retain
++their usual `Link` structure:
++
++```javascript
++import { Parser } from 'links-notation';
++
++const [group] = new Parser().parseGroups('Question\n  Answer\n    Detail');
++console.log(group.element.getValuesString()); // Question
++console.log(group.children[0].element.getValuesString()); // Answer
++console.log(group.children[0].children[0].element.getValuesString()); // Detail
++```
++
++`Parser.parse()` continues to return the existing list of links and expanded
++paths. `parseGroups()` preserves indentation even for the `name:` syntax.
++
++`escapeReference` and `unescapeReference` are exported functions and static
++methods on `Link`. Use minimal mode only for whole text lines; default escaping
++still quotes spaces so references can be used inside tuples:
++
++```javascript
++import { Link, escapeReference, unescapeReference } from 'links-notation';
++
++Link.escapeReference('plain text'); // "'plain text'"
++escapeReference('plain text', { minimal: true }); // 'plain text'
++unescapeReference("'it''s ready'"); // "it's ready"
++```
++
++`unescapeReference` decodes a complete serialized reference, including n-quote
++delimiters, doubled escapes, and versioned literals. It rejects incomplete
++quoted input and malformed literals, and preserves literal backslashes. Do not
++call it on already decoded `Link.id` values.
++
++See the [Q&A document example](../examples/js_indented_document.js).
++
+ ### Streaming Parser (for Large Messages)
+ 
+ The `StreamParser` allows you to parse Links Notation incrementally, processing data as it arrives without loading the entire message into memory. This is ideal for:
+@@ -341,6 +420,7 @@ Main parser class for converting strings to links.
+     recursed into until the stack runs out
+ - `initialize()` - Initialize the parser (async)
+ - `parse(input)` - Parse a Lino string and return links
++- `parseGroups(input)` - Read an indentation tree as `LinksGroup` instances
+ 
+ #### `Link`
+ 
+@@ -350,6 +430,9 @@ Represents a single link with ID and values.
+ - `toString()` - Convert link to string format
+ - `id` - Link identifier
+ - `values` - Array of child values/links
++- `escapeReference(reference, options)` - Quote a reference; `minimal: true`
++  allows ordinary prose on a text document line
++- `unescapeReference(reference)` - Decode a complete serialized reference
+ 
+ #### `LinksGroup`
+ 
+diff --git a/js/README.ru.md b/js/README.ru.md
+index c02d6f91..adec7b3e 100644
+--- a/js/README.ru.md
++++ b/js/README.ru.md
+@@ -3,6 +3,54 @@
+ Реализация парсера протокола Lino для JavaScript с использованием Bun и
+ генератора парсеров Peggy.js.
+ 
++## Документы с отступами
++
++`parseIndentedDocument()` и `formatIndentedDocument()` преобразуют текстовые
++родительские строки и их дочерние строки в `Map<string, string | string[]>`:
++
++```javascript
++import { parseIndentedDocument, formatIndentedDocument } from 'links-notation';
++
++const answers = parseIndentedDocument(`Ваш опыт?
++  JavaScript
++Навыки
++  JavaScript
++  Python
++`);
++console.log(answers.get('Ваш опыт?')); // 'JavaScript'
++console.log(answers.get('Навыки')); // ['JavaScript', 'Python']
++console.log(formatIndentedDocument(answers));
++```
++
++Без дочерних строк значение равно `[]`, с одной строкой — строке, с несколькими
++— массиву. Повторяющиеся родительские строки объединяют дочерние значения в
++порядке документа. Опция `{ multipleValues: 'join' }` объединяет несколько
++значений через перевод строки. Поддерживаются опции `Parser`: `comments`,
++`maxInputSize` и `maxDepth`. Вложенность глубже одного дочернего уровня и
++именованные ссылки со значениями отклоняются.
++
++Форматирование использует два пробела для отступа и завершающий перевод строки.
++Обычный текст с одиночными пробелами остаётся без кавычек; специальные символы,
++значимые пробелы и зарезервированные префиксы литералов заключаются в кавычки.
++Кавычки экранируются удвоением. Пустые строки и управляющие символы используют
++версионированные литералы, введённые в 0.24.0. Массив из одного элемента при
++чтении становится строкой. Многострочная строка сохраняется одной ссылкой с
++точными переводами строк, а элементы массива записываются отдельными дочерними
++строками.
++
++`Parser.parseGroups()` возвращает дерево существующих объектов `LinksGroup`:
++`element` содержит ссылку текущей строки, а `children` — группы непосредственно
++вложенных строк. Поведение `Parser.parse()` сохраняется.
++
++Функции `escapeReference()` и `unescapeReference()` экспортируются из пакета и
++доступны как статические методы `Link`. Опция `{ minimal: true }` разрешает
++обычные пробелы при экранировании целой текстовой строки. По умолчанию пробелы
++по-прежнему заключаются в кавычки. `unescapeReference()` принимает целую
++сериализованную ссылку, включая версионированные литералы; значения `Link.id`
++уже декодированы.
++
++См. [пример базы вопросов и ответов](../examples/js_indented_document.js).
++
+ ## Установка
+ 
+ ### Использование Bun (рекомендуется)
+diff --git a/js/dist/index.js b/js/dist/index.js
+index 1e18af3e..727ddb0c 100644
+--- a/js/dist/index.js
++++ b/js/dist/index.js
+@@ -1,3 +1,159 @@
++// src/quotes.js
++var QUOTES = ['"', "'", "`"];
++
++class DelimitedReferences {
++  constructor(document) {
++    this.document = document;
++    this.runsByQuote = new Map;
++    this.readings = new Map;
++  }
++  readAt(start) {
++    if (!this.readings.has(start)) {
++      this.readings.set(start, this.#read(start));
++    }
++    return this.readings.get(start);
++  }
++  endAt(start) {
++    const reading = this.readAt(start);
++    return reading === null ? null : start + reading.length;
++  }
++  #read(start) {
++    const document = this.document;
++    const quote = document[start];
++    if (!QUOTES.includes(quote)) {
++      return null;
++    }
++    const runs = this.#runsOf(quote);
++    const opening = runs.indexOf(start);
++    const count = runs.end(opening) - start;
++    let closing = opening + 1;
++    while (closing < runs.count) {
++      const length = runs.lengths[closing];
++      if (length < count) {
++        closing = runs.nextLonger[closing];
++      } else if (Math.floor(length / count) % 2 === 1) {
++        break;
++      } else {
++        closing++;
++      }
++    }
++    const end = closing < runs.count ? runs.end(closing) : null;
++    return reading(document, start, quote, count, end);
++  }
++  #runsOf(quote) {
++    if (!this.runsByQuote.has(quote)) {
++      this.runsByQuote.set(quote, new DelimiterRuns(this.document, quote));
++    }
++    return this.runsByQuote.get(quote);
++  }
++}
++function readReference(document, start) {
++  const quote = document[start];
++  if (!QUOTES.includes(quote)) {
++    return null;
++  }
++  const count = runLength(document, start, quote);
++  let end = null;
++  let position = document.indexOf(quote, start + count);
++  while (position !== -1) {
++    const length = runLength(document, position, quote);
++    if (length >= count && Math.floor(length / count) % 2 === 1) {
++      end = position + length;
++      break;
++    }
++    position = document.indexOf(quote, position + length);
++  }
++  return reading(document, start, quote, count, end);
++}
++function reading(document, start, quote, count, end) {
++  const emptyReference = count % 2 === 0 ? { value: "", length: count } : null;
++  if (end === null) {
++    return emptyReference;
++  }
++  const parts = [];
++  let position = start + count;
++  let run = document.indexOf(quote, position);
++  while (run !== -1 && run < end) {
++    const length = runLength(document, run, quote);
++    const escaped = Math.floor(length / (2 * count)) * count;
++    const closes = run + length === end ? count : 0;
++    parts.push(document.slice(position, run));
++    parts.push(quote.repeat(length - escaped - closes));
++    position = run + length;
++    run = document.indexOf(quote, position);
++  }
++  const value = parts.join("");
++  if (emptyReference !== null && !isSubstantiveBody(value)) {
++    return emptyReference;
++  }
++  return { value, length: end - start };
++}
++function runLength(text, start, quote) {
++  let end = start;
++  while (end < text.length && text[end] === quote) {
++    end++;
++  }
++  return end - start;
++}
++
++class DelimiterRuns {
++  constructor(document, quote) {
++    this.starts = [];
++    this.lengths = [];
++    let position = document.indexOf(quote);
++    while (position !== -1) {
++      const length = runLength(document, position, quote);
++      this.starts.push(position);
++      this.lengths.push(length);
++      position = document.indexOf(quote, position + length);
++    }
++    this.count = this.starts.length;
++    this.nextLonger = new Array(this.count);
++    const longer = [];
++    for (let run = this.count - 1;run >= 0; run--) {
++      while (longer.length > 0 && this.lengths[longer[longer.length - 1]] <= this.lengths[run]) {
++        longer.pop();
++      }
++      this.nextLonger[run] = longer.length > 0 ? longer[longer.length - 1] : this.count;
++      longer.push(run);
++    }
++  }
++  end(run) {
++    return this.starts[run] + this.lengths[run];
++  }
++  indexOf(position) {
++    let low = 0;
++    let high = this.count - 1;
++    while (low < high) {
++      const middle = low + high + 1 >> 1;
++      if (this.starts[middle] <= position) {
++        low = middle;
++      } else {
++        high = middle - 1;
++      }
++    }
++    return low;
++  }
++}
++function isSubstantiveBody(content) {
++  let depth = 0;
++  let hasVisible = false;
++  for (const character of content) {
++    if (character === "(") {
++      depth++;
++    } else if (character === ")") {
++      depth--;
++      if (depth < 0) {
++        return false;
++      }
++    }
++    if (!/[ \t\n\r]/.test(character)) {
++      hasVisible = true;
++    }
++  }
++  return hasVisible && depth === 0;
++}
++
+ // src/ReferenceLiteral.js
+ function hasReferenceLiteralPrefix(text, start = 0) {
+   return /^~[0-9]+\{/.test(text.slice(start));
+@@ -44,6 +200,42 @@ function formatReference(text) {
+   return delimiter + text + delimiter;
+ }
+ 
++// src/references.js
++function escapeReference(reference, { minimal = false } = {}) {
++  if (reference === null || reference === undefined)
++    return "";
++  if (typeof reference !== "string" || !reference.isWellFormed()) {
++    throw new TypeError("Reference must be well-formed Unicode text");
++  }
++  if (!minimal || !reference || /[\u0000-\u001f\u007f]/u.test(reference)) {
++    return formatReference(reference);
++  }
++  const needsQuoting = /(^| )~[0-9]+\{/.test(reference) || /[:()'"`]|(?! )[\p{White_Space}\ufeff]/u.test(reference) || /(^ | $| {2,}|(^| )#)/.test(reference);
++  if (!needsQuoting)
++    return reference;
++  const singleQuotes = reference.split("'").length - 1;
++  const doubleQuotes = reference.split('"').length - 1;
++  let quote = singleQuotes <= doubleQuotes ? "'" : '"';
++  if (reference.startsWith(quote))
++    quote = quote === "'" ? '"' : "'";
++  return quote + reference.replaceAll(quote, quote + quote) + quote;
++}
++function unescapeReference(reference) {
++  if (typeof reference !== "string") {
++    throw new TypeError("Reference must be a string");
++  }
++  if (hasReferenceLiteralPrefix(reference)) {
++    return decodeReferenceLiteral(reference);
++  }
++  if (!QUOTES.includes(reference[0]))
++    return reference;
++  const reading = readReference(reference, 0);
++  if (reading === null || reading.length !== reference.length) {
++    throw new SyntaxError("Expected one complete quoted reference");
++  }
++  return reading.value;
++}
++
+ // src/Link.js
+ class Link {
+   constructor(id = null, values = null) {
+@@ -81,11 +273,11 @@ class Link {
+   static getValueString(value) {
+     return value && typeof value.toLinkOrIdString === "function" ? value.toLinkOrIdString() : String(value);
+   }
+-  static escapeReference(reference) {
+-    if (reference === null || reference === undefined) {
+-      return "";
+-    }
+-    return formatReference(reference);
++  static escapeReference(reference, options = {}) {
++    return escapeReference(reference, options);
++  }
++  static unescapeReference(reference) {
++    return unescapeReference(reference);
+   }
+   toLinkOrIdString() {
+     if (!this.values || this.values.length === 0) {
+@@ -296,6 +488,7 @@ class LinksGroup {
+     return list.map((item) => `(${item.id || item})`).join(" ");
+   }
+ }
++
+ // src/ParseError.js
+ var QUOTED_LINE_WIDTH = 80;
+ var ELLIPSIS = "...";
+@@ -371,144 +564,6 @@ function windowAround(lineText, column) {
+   return [quoted, target - start + shift + 1];
+ }
+ 
+-// src/quotes.js
+-var QUOTES = ['"', "'", "`"];
+-
+-class DelimitedReferences {
+-  constructor(document) {
+-    this.document = document;
+-    this.runsByQuote = new Map;
+-    this.readings = new Map;
+-  }
+-  readAt(start) {
+-    if (!this.readings.has(start)) {
+-      this.readings.set(start, this.#read(start));
+-    }
+-    return this.readings.get(start);
+-  }
+-  endAt(start) {
+-    const reading = this.readAt(start);
+-    return reading === null ? null : start + reading.length;
+-  }
+-  #read(start) {
+-    const document = this.document;
+-    const quote = document[start];
+-    if (!QUOTES.includes(quote)) {
+-      return null;
+-    }
+-    const runs = this.#runsOf(quote);
+-    const opening = runs.indexOf(start);
+-    const count = runs.end(opening) - start;
+-    let closing = opening + 1;
+-    while (closing < runs.count) {
+-      const length = runs.lengths[closing];
+-      if (length < count) {
+-        closing = runs.nextLonger[closing];
+-      } else if (Math.floor(length / count) % 2 === 1) {
+-        break;
+-      } else {
+-        closing++;
+-      }
+-    }
+-    const end = closing < runs.count ? runs.end(closing) : null;
+-    return reading(document, start, quote, count, end);
+-  }
+-  #runsOf(quote) {
+-    if (!this.runsByQuote.has(quote)) {
+-      this.runsByQuote.set(quote, new DelimiterRuns(this.document, quote));
+-    }
+-    return this.runsByQuote.get(quote);
+-  }
+-}
+-function reading(document, start, quote, count, end) {
+-  const emptyReference = count % 2 === 0 ? { value: "", length: count } : null;
+-  if (end === null) {
+-    return emptyReference;
+-  }
+-  const parts = [];
+-  let position = start + count;
+-  let run = document.indexOf(quote, position);
+-  while (run !== -1 && run < end) {
+-    const length = runLength(document, run, quote);
+-    const escaped = Math.floor(length / (2 * count)) * count;
+-    const closes = run + length === end ? count : 0;
+-    parts.push(document.slice(position, run));
+-    parts.push(quote.repeat(length - escaped - closes));
+-    position = run + length;
+-    run = document.indexOf(quote, position);
+-  }
+-  const value = parts.join("");
+-  if (emptyReference !== null && !isSubstantiveBody(value)) {
+-    return emptyReference;
+-  }
+-  return { value, length: end - start };
+-}
+-function runLength(text, start, quote) {
+-  let end = start;
+-  while (end < text.length && text[end] === quote) {
+-    end++;
+-  }
+-  return end - start;
+-}
+-
+-class DelimiterRuns {
+-  constructor(document, quote) {
+-    this.starts = [];
+-    this.lengths = [];
+-    let position = document.indexOf(quote);
+-    while (position !== -1) {
+-      const length = runLength(document, position, quote);
+-      this.starts.push(position);
+-      this.lengths.push(length);
+-      position = document.indexOf(quote, position + length);
+-    }
+-    this.count = this.starts.length;
+-    this.nextLonger = new Array(this.count);
+-    const longer = [];
+-    for (let run = this.count - 1;run >= 0; run--) {
+-      while (longer.length > 0 && this.lengths[longer[longer.length - 1]] <= this.lengths[run]) {
+-        longer.pop();
+-      }
+-      this.nextLonger[run] = longer.length > 0 ? longer[longer.length - 1] : this.count;
+-      longer.push(run);
+-    }
+-  }
+-  end(run) {
+-    return this.starts[run] + this.lengths[run];
+-  }
+-  indexOf(position) {
+-    let low = 0;
+-    let high = this.count - 1;
+-    while (low < high) {
+-      const middle = low + high + 1 >> 1;
+-      if (this.starts[middle] <= position) {
+-        low = middle;
+-      } else {
+-        high = middle - 1;
+-      }
+-    }
+-    return low;
+-  }
+-}
+-function isSubstantiveBody(content) {
+-  let depth = 0;
+-  let hasVisible = false;
+-  for (const character of content) {
+-    if (character === "(") {
+-      depth++;
+-    } else if (character === ")") {
+-      depth--;
+-      if (depth < 0) {
+-        return false;
+-      }
+-    }
+-    if (!/[ \t\n\r]/.test(character)) {
+-      hasVisible = true;
+-    }
+-  }
+-  return hasVisible && depth === 0;
+-}
+-
+ // src/comments.js
+ var COMMENT = "#";
+ var BEFORE_REFERENCE = [" ", "\t", `
+@@ -2817,6 +2872,15 @@ class Parser {
+     this.comments = options.comments ?? true;
+   }
+   parse(input) {
++    return this._parse(input, (raw) => this.transformResult(raw));
++  }
++  parseGroups(input) {
++    return this._parse(input, (raw) => raw.map((item) => this._transformGroup(item)));
++  }
++  _transformGroup(item) {
++    return new LinksGroup(this.transformLink(item), (item.children || []).map((child) => this._transformGroup(child)));
++  }
++  _parse(input, transform) {
+     if (typeof input !== "string") {
+       throw new TypeError("Input must be a string");
+     }
+@@ -2828,7 +2892,7 @@ class Parser {
+       const rawResult = peg$parse(prepared, {
+         maxDepth: this.maxDepth
+       });
+-      return this.transformResult(rawResult);
++      return transform(rawResult);
+     } catch (error) {
+       if (error && error.location) {
+         throw new ParseError(input, error);
+@@ -2950,6 +3014,64 @@ class Parser {
+     return new Link(item.id ?? null, []);
+   }
+ }
++
++// src/IndentedDocument.js
++function lineText(link) {
++  if (link.id !== null && link.values.length === 0)
++    return link.id;
++  if (link.id === null && link.values.length > 0 && link.values.every((value) => value.id !== null && value.values.length === 0)) {
++    return link.values.map((value) => value.id).join(" ");
++  }
++  throw new TypeError("Indented document lines must contain only text references");
++}
++function parseIndentedDocument(input, options = {}) {
++  const { multipleValues = "array" } = options;
++  if (multipleValues !== "array" && multipleValues !== "join") {
++    throw new TypeError('multipleValues must be "array" or "join"');
++  }
++  const groups = new Parser(options).parseGroups(input);
++  const collected = new Map;
++  for (const group of groups) {
++    const parent = lineText(group.element);
++    const values = collected.get(parent) ?? [];
++    for (const child of group.children) {
++      if (child.children.length > 0) {
++        throw new TypeError("Indented documents support only immediate children");
++      }
++      values.push(lineText(child.element));
++    }
++    collected.set(parent, values);
++  }
++  return new Map([...collected].map(([parent, values]) => [
++    parent,
++    values.length === 1 ? values[0] : values.length > 1 && multipleValues === "join" ? values.join(`
++`) : values
++  ]));
++}
++function formatIndentedDocument(entries) {
++  if (!(entries instanceof Map)) {
++    throw new TypeError("Indented document entries must be a Map");
++  }
++  const lines = [];
++  for (const [parent, value] of entries) {
++    if (typeof parent !== "string") {
++      throw new TypeError("Indented document parents must be strings");
++    }
++    const values = Array.isArray(value) ? value : [value];
++    for (const child of values) {
++      if (typeof child !== "string") {
++        throw new TypeError("Indented document children must be strings");
++      }
++    }
++    lines.push(escapeReference(parent, { minimal: true }));
++    for (const child of values) {
++      lines.push("  " + escapeReference(child, { minimal: true }));
++    }
++  }
++  return lines.length > 0 ? lines.join(`
++`) + `
++` : "";
++}
+ // src/StreamParser.js
+ import { EventEmitter } from "events";
+ var DEFAULT_MAX_BUFFER_SIZE = 10 * 1024 * 1024;
+@@ -3783,8 +3905,12 @@ export {
+   StreamParser,
+   decodeReferenceLiteral,
+   encodeReferenceLiteral,
++  escapeReference,
+   formatBinaryDocument,
+   formatBinaryReference,
++  formatIndentedDocument,
+   formatLinks,
+-  stripComments
++  parseIndentedDocument,
++  stripComments,
++  unescapeReference
+ };
+diff --git a/js/index.d.ts b/js/index.d.ts
+index 09c308be..673aeb49 100644
+--- a/js/index.d.ts
++++ b/js/index.d.ts
+@@ -100,9 +100,29 @@ export class Link {
+    * @param reference - The reference to escape
+    * @returns Escaped reference
+    */
+-  static escapeReference(reference: string): string;
++  static escapeReference(
++    reference: string,
++    options?: EscapeReferenceOptions
++  ): string;
++
++  /** Decode one escaped reference. Link IDs returned by a parser are already decoded. */
++  static unescapeReference(reference: string): string;
+ }
+ 
++export interface EscapeReferenceOptions {
++  /** Leave ordinary single-space prose unquoted for use on document lines. */
++  minimal?: boolean;
++}
++
++/** Escape a reference. Minimal mode doubles enclosing quotes; default formatting uses n-quotes. */
++export function escapeReference(
++  reference: string,
++  options?: EscapeReferenceOptions
++): string;
++
++/** Decode a complete escaped reference, including n-quotes and versioned literals. */
++export function unescapeReference(reference: string): string;
++
+ /**
+  * Parser options for configuring the parser behavior
+  */
+@@ -166,8 +186,40 @@ export class Parser {
+    * @throws {ParseError} If the text does not parse
+    */
+   parse(input: string): Link[];
++
++  /** Read the indentation tree without expanding it into path combinations. */
++  parseGroups(input: string): IndentedGroup[];
++}
++
++/** A parsed line and the immediately indented lines below it. */
++export interface IndentedGroup extends LinksGroup {
++  element: Link;
++  children: IndentedGroup[];
+ }
+ 
++export interface IndentedDocumentOptions extends ParserOptions {
++  /** Multiple children become an array (default) or text joined with newlines. */
++  multipleValues?: 'array' | 'join';
++}
++
++/**
++ * Read parent/children text. Repeated parents accumulate children in order.
++ * No children yields [], one yields a string, multiple yield an array by default.
++ * Named links with values and grandchildren are rejected.
++ */
++export function parseIndentedDocument(
++  input: string,
++  options?: IndentedDocumentOptions
++): Map<string, string | string[]>;
++
++/**
++ * Write minimally quoted text with two-space indentation and a final newline.
++ * Multiline strings remain one encoded reference; array entries become children.
++ */
++export function formatIndentedDocument(
++  entries: ReadonlyMap<string, string | string[]>
++): string;
++
+ /** Options for incremental parsing. */
+ export interface StreamParserOptions extends ParserOptions {
+   /** Canonical parser instance to use for completed records. */
+diff --git a/js/package-lock.json b/js/package-lock.json
+index 207a9420..dbe0893e 100644
+--- a/js/package-lock.json
++++ b/js/package-lock.json
+@@ -1,12 +1,12 @@
+ {
+   "name": "links-notation",
+-  "version": "0.24.0",
++  "version": "0.25.0",
+   "lockfileVersion": 3,
+   "requires": true,
+   "packages": {
+     "": {
+       "name": "links-notation",
+-      "version": "0.24.0",
++      "version": "0.25.0",
+       "license": "Unlicense",
+       "devDependencies": {
+         "bun-types": "^1.4.2",
+diff --git a/js/package.json b/js/package.json
+index b46af763..11b29a19 100644
+--- a/js/package.json
++++ b/js/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "links-notation",
+-  "version": "0.24.0",
++  "version": "0.25.0",
+   "description": "Links Notation parser for JavaScript",
+   "main": "dist/index.js",
+   "types": "index.d.ts",
+diff --git a/js/src/IndentedDocument.js b/js/src/IndentedDocument.js
+new file mode 100644
+index 00000000..21aafe01
+--- /dev/null
++++ b/js/src/IndentedDocument.js
+@@ -0,0 +1,88 @@
++import { Parser } from './Parser.js';
++import { escapeReference } from './references.js';
++
++// A text line can be a single quoted reference or a flat list of words. Named
++// links and nested values have more structure than this document format holds.
++function lineText(link) {
++  if (link.id !== null && link.values.length === 0) return link.id;
++  if (
++    link.id === null &&
++    link.values.length > 0 &&
++    link.values.every((value) => value.id !== null && value.values.length === 0)
++  ) {
++    return link.values.map((value) => value.id).join(' ');
++  }
++  throw new TypeError(
++    'Indented document lines must contain only text references'
++  );
++}
++
++/**
++ * Read text parents and their immediate text children into a Map. Repeated
++ * parents accumulate children in document order. Zero children yields [], one
++ * yields a string, and multiple yield an array (or joined text when requested).
++ * @param {string} input
++ * @param {Object} options - Parser options plus multipleValues: 'array' | 'join'
++ * @returns {Map<string, string|string[]>}
++ */
++export function parseIndentedDocument(input, options = {}) {
++  const { multipleValues = 'array' } = options;
++  if (multipleValues !== 'array' && multipleValues !== 'join') {
++    throw new TypeError('multipleValues must be "array" or "join"');
++  }
++  const groups = new Parser(options).parseGroups(input);
++  const collected = new Map();
++  for (const group of groups) {
++    const parent = lineText(group.element);
++    const values = collected.get(parent) ?? [];
++    for (const child of group.children) {
++      if (child.children.length > 0) {
++        throw new TypeError(
++          'Indented documents support only immediate children'
++        );
++      }
++      values.push(lineText(child.element));
++    }
++    collected.set(parent, values);
++  }
++  return new Map(
++    [...collected].map(([parent, values]) => [
++      parent,
++      values.length === 1
++        ? values[0]
++        : values.length > 1 && multipleValues === 'join'
++          ? values.join('\n')
++          : values,
++    ])
++  );
++}
++
++/**
++ * Write a text Map using minimal quoting and two-space child indentation.
++ * Multiline strings are encoded as one reference; array entries are separate
++ * children. Nonempty output ends with a newline.
++ * @param {Map<string, string|string[]>} entries
++ * @returns {string}
++ */
++export function formatIndentedDocument(entries) {
++  if (!(entries instanceof Map)) {
++    throw new TypeError('Indented document entries must be a Map');
++  }
++  const lines = [];
++  for (const [parent, value] of entries) {
++    if (typeof parent !== 'string') {
++      throw new TypeError('Indented document parents must be strings');
++    }
++    const values = Array.isArray(value) ? value : [value];
++    for (const child of values) {
++      if (typeof child !== 'string') {
++        throw new TypeError('Indented document children must be strings');
++      }
++    }
++    lines.push(escapeReference(parent, { minimal: true }));
++    for (const child of values) {
++      lines.push('  ' + escapeReference(child, { minimal: true }));
++    }
++  }
++  return lines.length > 0 ? lines.join('\n') + '\n' : '';
++}
+diff --git a/js/src/Link.js b/js/src/Link.js
+index 4793221e..f969050b 100644
+--- a/js/src/Link.js
++++ b/js/src/Link.js
+@@ -1,4 +1,4 @@
+-import { formatReference } from './ReferenceLiteral.js';
++import { escapeReference, unescapeReference } from './references.js';
+ 
+ export class Link {
+   /**
+@@ -81,14 +81,16 @@ export class Link {
+   /**
+    * Escape a reference string by adding quotes if necessary
+    * @param {string} reference - The reference to escape
++   * @param {{minimal?: boolean}} options - Allow plain-text document lines
+    * @returns {string} Escaped reference
+    */
+-  static escapeReference(reference) {
+-    if (reference === null || reference === undefined) {
+-      return '';
+-    }
++  static escapeReference(reference, options = {}) {
++    return escapeReference(reference, options);
++  }
+ 
+-    return formatReference(reference);
++  /** Decode an escaped reference, rather than an already parsed Link ID. */
++  static unescapeReference(reference) {
++    return unescapeReference(reference);
+   }
+ 
+   /**
+diff --git a/js/src/Parser.js b/js/src/Parser.js
+index a682fa7e..e859b46b 100644
+--- a/js/src/Parser.js
++++ b/js/src/Parser.js
+@@ -1,4 +1,5 @@
+ import { Link } from './Link.js';
++import { LinksGroup } from './LinksGroup.js';
+ import { ParseError } from './ParseError.js';
+ import { stripComments } from './comments.js';
+ import * as parserModule from './parser-generated.js';
+@@ -31,6 +32,30 @@ export class Parser {
+    * @throws {Error} If parsing fails
+    */
+   parse(input) {
++    return this._parse(input, (raw) => this.transformResult(raw));
++  }
++
++  /**
++   * Read the indentation tree before it is expanded into path combinations.
++   * Each group's element is the Link on that line; its children are groups
++   * for the immediately indented lines. Parenthesized values remain Links.
++   * @param {string} input - The Lino document
++   * @returns {LinksGroup[]}
++   */
++  parseGroups(input) {
++    return this._parse(input, (raw) =>
++      raw.map((item) => this._transformGroup(item))
++    );
++  }
++
++  _transformGroup(item) {
++    return new LinksGroup(
++      this.transformLink(item),
++      (item.children || []).map((child) => this._transformGroup(child))
++    );
++  }
++
++  _parse(input, transform) {
+     // Validate input
+     if (typeof input !== 'string') {
+       throw new TypeError('Input must be a string');
+@@ -50,7 +75,7 @@ export class Parser {
+       const rawResult = parserModule.parse(prepared, {
+         maxDepth: this.maxDepth,
+       });
+-      return this.transformResult(rawResult);
++      return transform(rawResult);
+     } catch (error) {
+       // A syntax error knows where it stopped; anything else is passed on with
+       // the original error kept as the cause.
+diff --git a/js/src/index.js b/js/src/index.js
+index c8d626c1..c8125a35 100644
+--- a/js/src/index.js
++++ b/js/src/index.js
+@@ -1,4 +1,9 @@
+ export { Link, formatLinks } from './Link.js';
++export { escapeReference, unescapeReference } from './references.js';
++export {
++  parseIndentedDocument,
++  formatIndentedDocument,
++} from './IndentedDocument.js';
+ export {
+   encodeReferenceLiteral,
+   decodeReferenceLiteral,
+diff --git a/js/src/references.js b/js/src/references.js
+new file mode 100644
+index 00000000..6bb7eb92
+--- /dev/null
++++ b/js/src/references.js
+@@ -0,0 +1,63 @@
++import { QUOTES, readReference } from './quotes.js';
++import {
++  decodeReferenceLiteral,
++  formatReference,
++  hasReferenceLiteralPrefix,
++} from './ReferenceLiteral.js';
++
++/**
++ * Quote one reference. Minimal mode allows ordinary single-space prose on a
++ * document line; token formatting still quotes spaces by default.
++ * @param {string|null|undefined} reference
++ * @param {{minimal?: boolean}} options
++ * @returns {string}
++ */
++export function escapeReference(reference, { minimal = false } = {}) {
++  if (reference === null || reference === undefined) return '';
++  if (typeof reference !== 'string' || !reference.isWellFormed()) {
++    throw new TypeError('Reference must be well-formed Unicode text');
++  }
++  // Keep ordinary Link formatting identical to binary text formatting. The
++  // versioned literal also preserves empty strings and control characters in
++  // minimal document lines, including exact line endings.
++  if (!minimal || !reference || /[\u0000-\u001f\u007f]/u.test(reference)) {
++    return formatReference(reference);
++  }
++
++  const needsQuoting =
++    /(^| )~[0-9]+\{/.test(reference) ||
++    /[:()'"`]|(?! )[\p{White_Space}\ufeff]/u.test(reference) ||
++    /(^ | $| {2,}|(^| )#)/.test(reference);
++  if (!needsQuoting) return reference;
++
++  const singleQuotes = reference.split("'").length - 1;
++  const doubleQuotes = reference.split('"').length - 1;
++  let quote = singleQuotes <= doubleQuotes ? "'" : '"';
++
++  // The opening delimiter must be a run of exactly one quote. Choosing the
++  // other wrapper keeps a leading content quote from extending that run.
++  if (reference.startsWith(quote)) quote = quote === "'" ? '"' : "'";
++  return quote + reference.replaceAll(quote, quote + quote) + quote;
++}
++
++/**
++ * Decode a complete, escaped reference using the parser's delimiter rules.
++ * Plain text is returned unchanged. Parsed Link IDs are already decoded and
++ * should not be passed through this function a second time.
++ * @param {string} reference
++ * @returns {string}
++ */
++export function unescapeReference(reference) {
++  if (typeof reference !== 'string') {
++    throw new TypeError('Reference must be a string');
++  }
++  if (hasReferenceLiteralPrefix(reference)) {
++    return decodeReferenceLiteral(reference);
++  }
++  if (!QUOTES.includes(reference[0])) return reference;
++  const reading = readReference(reference, 0);
++  if (reading === null || reading.length !== reference.length) {
++    throw new SyntaxError('Expected one complete quoted reference');
++  }
++  return reading.value;
++}
+diff --git a/js/tests/IndentedDocument.test.js b/js/tests/IndentedDocument.test.js
+new file mode 100644
+index 00000000..87300cee
+--- /dev/null
++++ b/js/tests/IndentedDocument.test.js
+@@ -0,0 +1,256 @@
++import { readFileSync } from 'node:fs';
++import { test, expect } from 'bun:test';
++import * as lino from '../src/index.js';
++
++const { Link, LinksGroup, Parser, ParseError } = lino;
++
++test('mixed quotes round-trip through the existing Link formatter', () => {
++  const text = 'He said "it\'s ready"';
++  const formatted = new Link(text).toString();
++  expect(new Parser().parse(formatted)[0].values[0].id).toBe(text);
++  expect(formatted).not.toContain("\\'");
++  expect(lino.escapeReference(text, { minimal: true })).toBe(
++    "'He said \"it''s ready\"'"
++  );
++});
++
++test('minimal escaping leaves ordinary prose unquoted', () => {
++  expect(
++    Link.escapeReference('What is your experience?', { minimal: true })
++  ).toBe('What is your experience?');
++  expect(Link.escapeReference('What is your experience?')).toBe(
++    "'What is your experience?'"
++  );
++});
++
++test('public groups preserve immediate children and deeper indentation', () => {
++  const groups = new Parser().parseGroups(
++    'What is your experience?\n  JavaScript\n  Python\n    Django\nOther question\n  Answer'
++  );
++  expect(groups).toHaveLength(2);
++  expect(groups[0]).toBeInstanceOf(LinksGroup);
++  expect(groups[0].element.values.map((value) => value.id)).toEqual([
++    'What',
++    'is',
++    'your',
++    'experience?',
++  ]);
++  expect(groups[0].children).toHaveLength(2);
++  expect(groups[0].children[1].children[0].element.values[0].id).toBe('Django');
++  expect(groups[1].children[0].element.values[0].id).toBe('Answer');
++});
++
++test('groups retain named and nested links and share parser diagnostics', () => {
++  const parser = new Parser();
++  const [root] = parser.parseGroups(
++    'root:\n  child: (one two)\n  branch\n    leaf'
++  );
++  expect(root.element.id).toBe('root');
++  expect(root.element.values).toEqual([]);
++  expect(root.children[0].element.toString()).toBe('(child: (one two))');
++  expect(root.children[1].children).toHaveLength(1);
++  expect(() => parser.parseGroups('root: child: value')).toThrow(ParseError);
++  expect(() =>
++    new Parser({ maxDepth: 0 }).parseGroups('root\n  child')
++  ).toThrow(ParseError);
++  expect(() => new Parser({ maxInputSize: 2 }).parseGroups('root')).toThrow(
++    'Input size exceeds'
++  );
++  expect(() => parser.parseGroups(null)).toThrow(TypeError);
++});
++
++test('parse the issue document without inspecting private path flags', () => {
++  const input = `What is your experience?
++  I have worked with JavaScript
++'Question with "quotes": and colon'
++  Answer
++`;
++  expect(lino.parseIndentedDocument(input)).toEqual(
++    new Map([
++      ['What is your experience?', 'I have worked with JavaScript'],
++      ['Question with "quotes": and colon', 'Answer'],
++    ])
++  );
++});
++
++test('multiple child lines have explicit array or joined-text behavior', () => {
++  const input = 'Skills\n  JavaScript\n  Python\nUnanswered\nSkills\n  Go';
++  expect(lino.parseIndentedDocument(input)).toEqual(
++    new Map([
++      ['Skills', ['JavaScript', 'Python', 'Go']],
++      ['Unanswered', []],
++    ])
++  );
++  expect(lino.parseIndentedDocument(input, { multipleValues: 'join' })).toEqual(
++    new Map([
++      ['Skills', 'JavaScript\nPython\nGo'],
++      ['Unanswered', []],
++    ])
++  );
++  expect(() =>
++    lino.parseIndentedDocument(input, { multipleValues: 'guess' })
++  ).toThrow(TypeError);
++});
++
++test('format the issue document with two-space indentation and a final newline', () => {
++  const entries = new Map([
++    ['What is your experience?', 'I have worked with JavaScript'],
++    ['Skills', ['JavaScript', 'Python']],
++  ]);
++  expect(lino.formatIndentedDocument(entries)).toBe(
++    'What is your experience?\n  I have worked with JavaScript\nSkills\n  JavaScript\n  Python\n'
++  );
++  expect(
++    lino.parseIndentedDocument(lino.formatIndentedDocument(entries))
++  ).toEqual(entries);
++  expect(lino.formatIndentedDocument(new Map())).toBe('');
++  expect(lino.parseIndentedDocument('')).toEqual(new Map());
++});
++
++test('empty text, exact whitespace, comments, quotes, and multiline text survive', () => {
++  const references = [
++    '',
++    ' ',
++    '  leading',
++    'trailing  ',
++    'two  spaces',
++    'a\tb',
++    '# question',
++    'text # literal',
++    'issue#333',
++    'Question: (details)',
++    '`backticks`',
++    '"double" and \'single\'',
++    '\'starts with both "quotes"',
++    "\"starts with both 'quotes'",
++    'ends with both \'"',
++    'repeated \'\'\' and """',
++    "literal \\n and \\'",
++    'line one\n  line two',
++    'carriage\rreturn',
++    'Windows\r\nline',
++    'Привет 🌍',
++  ];
++  for (const text of references) {
++    const escaped = lino.escapeReference(text, { minimal: true });
++    expect(lino.unescapeReference(escaped)).toBe(text);
++    expect(Link.unescapeReference(escaped)).toBe(text);
++    const entries = new Map([[text, text]]);
++    expect(
++      lino.parseIndentedDocument(lino.formatIndentedDocument(entries))
++    ).toEqual(entries);
++  }
++});
++
++test('unescaping uses the grammar and never decodes already parsed IDs again', () => {
++  expect(lino.unescapeReference('"He said ""hello"""')).toBe('He said "hello"');
++  expect(lino.unescapeReference("'it''s ready'")).toBe("it's ready");
++  expect(lino.unescapeReference('``text with ` inside``')).toBe(
++    'text with ` inside'
++  );
++  expect(lino.unescapeReference('plain text')).toBe('plain text');
++  expect(lino.unescapeReference('literal \\n')).toBe('literal \\n');
++  expect(() => lino.unescapeReference('"unfinished')).toThrow(SyntaxError);
++  expect(() => lino.unescapeReference('"value" extra')).toThrow(SyntaxError);
++  expect(lino.parseIndentedDocument('Question\n  "two \'\' quotes"')).toEqual(
++    new Map([['Question', "two '' quotes"]])
++  );
++});
++
++test('document helpers reject deeper or named value structures instead of losing data', () => {
++  expect(() =>
++    lino.parseIndentedDocument('Question\n  Answer\n    Detail')
++  ).toThrow(TypeError);
++  expect(() => lino.parseIndentedDocument('Question\n  answer: value')).toThrow(
++    TypeError
++  );
++  expect(() =>
++    lino.formatIndentedDocument(new Map([['Question', 42]]))
++  ).toThrow(TypeError);
++  expect(() => lino.formatIndentedDocument(new Map([[42, 'Answer']]))).toThrow(
++    TypeError
++  );
++  expect(() =>
++    lino.formatIndentedDocument(new Map([['Question', ['ok', null]]]))
++  ).toThrow(TypeError);
++});
++
++test('document parsing respects comments and existing parser options', () => {
++  expect(
++    lino.parseIndentedDocument('# comment\nQuestion\n  Answer # comment')
++  ).toEqual(new Map([['Question', 'Answer']]));
++  expect(
++    lino.parseIndentedDocument('# question\n  Answer', { comments: false })
++  ).toEqual(new Map([['# question', 'Answer']]));
++});
++
++test('one-element arrays normalize to strings and unanswered parents remain distinct', () => {
++  const entries = new Map([
++    ['One option', ['only']],
++    ['No options', []],
++    ['Empty answer', ''],
++  ]);
++  expect(
++    lino.parseIndentedDocument(lino.formatIndentedDocument(entries))
++  ).toEqual(
++    new Map([
++      ['One option', 'only'],
++      ['No options', []],
++      ['Empty answer', ''],
++    ])
++  );
++  expect(() =>
++    lino.formatIndentedDocument(new Map([['Question', Array(1)]]))
++  ).toThrow(TypeError);
++});
++
++test('document helpers preserve the shared Unicode reference corpus and reserved prefixes', () => {
++  const references = readFileSync(
++    new globalThis.URL(
++      '../../docs/protocol/reference-literals.txt',
++      import.meta.url
++    ),
++    'utf8'
++  )
++    .trim()
++    .split('\n')
++    .filter((line) => !line.startsWith('#'))
++    .map((hex) =>
++      hex === '-' ? '' : Buffer.from(hex, 'hex').toString('utf8')
++    );
++  for (const text of [
++    ...references,
++    '~1{61}',
++    '~2{00}',
++    '~1{invalid}',
++    'text ~1{61} after',
++    'text ~2{00}',
++    'text ~1{invalid}',
++  ]) {
++    expect(lino.escapeReference(text)).toBe(lino.formatBinaryReference(text));
++    expect(lino.unescapeReference(lino.escapeReference(text))).toBe(text);
++    expect(
++      lino.unescapeReference(lino.escapeReference(text, { minimal: true }))
++    ).toBe(text);
++    const entries = new Map([[text, text]]);
++    expect(
++      lino.parseIndentedDocument(lino.formatIndentedDocument(entries))
++    ).toEqual(entries);
++  }
++});
++
++test('unescaping decodes versioned literals without decoding parsed document IDs twice', () => {
++  expect(lino.unescapeReference('~1{}')).toBe('');
++  expect(Link.unescapeReference('~1{00}')).toBe('\0');
++  expect(lino.unescapeReference('~1{C3A9}')).toBe('é');
++  for (const literal of ['~2{61}', '~1{0}', '~1{gg}', '~1{ff}']) {
++    expect(() => lino.unescapeReference(literal)).toThrow();
++  }
++  const entries = new Map([['~1{61}', '~1{62}']]);
++  expect(
++    lino.parseIndentedDocument(lino.formatIndentedDocument(entries))
++  ).toEqual(entries);
++  expect(() => lino.escapeReference('\ud800', { minimal: true })).toThrow(
++    TypeError
++  );
++});
+diff --git a/php/README.md b/php/README.md
+index d27cce49..bf412776 100644
+--- a/php/README.md
++++ b/php/README.md
+@@ -15,7 +15,7 @@ Or add the dependency to your `composer.json`:
+ ```json
+ {
+     "require": {
+-        "link-foundation/links-notation": "^0.24"
++        "link-foundation/links-notation": "^0.25"
+     }
+ }
+ ```
+diff --git a/php/README.ru.md b/php/README.ru.md
+index 8129b589..39fcbd4a 100644
+--- a/php/README.ru.md
++++ b/php/README.ru.md
+@@ -15,7 +15,7 @@ composer require link-foundation/links-notation
+ ```json
+ {
+     "require": {
+-        "link-foundation/links-notation": "^0.24"
++        "link-foundation/links-notation": "^0.25"
+     }
+ }
+ ```
+diff --git a/php/composer.json b/php/composer.json
+index 3ab1d2c3..94970a09 100644
+--- a/php/composer.json
++++ b/php/composer.json
+@@ -12,7 +12,7 @@
+     ],
+     "homepage": "https://github.com/link-foundation/links-notation",
+     "license": "Unlicense",
+-    "version": "0.24.0",
++    "version": "0.25.0",
+     "authors": [
+         {
+             "name": "Link Foundation",
+diff --git a/python/pyproject.toml b/python/pyproject.toml
+index 9f77317d..63e56868 100644
+--- a/python/pyproject.toml
++++ b/python/pyproject.toml
+@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
+ 
+ [project]
+ name = "links-notation"
+-version = "0.24.0"
++version = "0.25.0"
+ description = "Python implementation of the Links Notation parser"
+ readme = "README.md"
+ license = "Unlicense"
+diff --git a/rust/links-notation-benchmark/Cargo.toml b/rust/links-notation-benchmark/Cargo.toml
+index 3623c8e7..406873b6 100644
+--- a/rust/links-notation-benchmark/Cargo.toml
++++ b/rust/links-notation-benchmark/Cargo.toml
+@@ -12,7 +12,7 @@ name = "benchmark"
+ path = "src/main.rs"
+ 
+ [dependencies]
+-links-notation = { version = "0.24.0", path = "../links-notation" }
++links-notation = { version = "0.25.0", path = "../links-notation" }
+ serde = { version = "1.0.229", features = ["derive"] }
+ serde_json = { version = "1.0.151", features = ["preserve_order"] }
+ tiktoken-rs = "0.12.1"
+diff --git a/rust/links-notation/Cargo.toml b/rust/links-notation/Cargo.toml
+index 38732304..a7d33994 100644
+--- a/rust/links-notation/Cargo.toml
++++ b/rust/links-notation/Cargo.toml
+@@ -1,6 +1,6 @@
+ [package]
+ name = "links-notation"
+-version = "0.24.0"
++version = "0.25.0"
+ edition = "2021"
+ description = "Rust implementation of the Links Notation parser"
+ license = "Unlicense"

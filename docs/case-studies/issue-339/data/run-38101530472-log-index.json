@@ -1,0 +1,12 @@
+{
+  "run": 38101530472,
+  "sha": "e0326ca6a705689d15b83fa5c3d337e0e7a64df4",
+  "logs": [
+    {
+      "zip_entry": "0_linkChecker.txt",
+      "file": "run-38101530472-0_linkChecker.log.gz",
+      "bytes": 42608,
+      "sha256": "ed961b5eb88e4402081a5e00fbb8dec51ff7c597cdf38534f86bea53e1b5c10c"
+    }
+  ]
+}

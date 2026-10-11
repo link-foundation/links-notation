@@ -1,0 +1,4693 @@
+diff --git a/experiments/test_hyphenated_words.js b/experiments/test_hyphenated_words.js
+new file mode 100644
+index 00000000..b0ba221c
+--- /dev/null
++++ b/experiments/test_hyphenated_words.js
+@@ -0,0 +1,34 @@
++/**
++ * Test hyphenated words are preserved in parsing
++ */
++import { Parser } from '../js/src/Parser.js';
++import { formatLinks } from '../js/src/Link.js';
++
++const parser = new Parser();
++
++const testCases = [
++  // Hyphenated names
++  'Jean-Luc Picard',
++  'conan-center-index',
++  'a-b-c-d',
++
++  // Math between digits (should tokenize)
++  '1-2',
++  '10-20',
++  'a1-b2', // Mixed - should not tokenize because there's a letter on each side
++
++  // Variable-like names
++  'my-var-name',
++  'test-case-1',
++];
++
++console.log('=== Hyphenated Word Tests ===\n');
++
++for (const input of testCases) {
++  const links = parser.parse(input);
++  const formatted = formatLinks(links);
++  console.log(`Input:     "${input}"`);
++  console.log(`Values:    ${links[0]?.values?.map(v => v.id).join(' | ') || 'none'}`);
++  console.log(`Formatted: "${formatted}"`);
++  console.log('---');
++}
+diff --git a/experiments/test_punctuation_current.js b/experiments/test_punctuation_current.js
+new file mode 100644
+index 00000000..7db1d181
+--- /dev/null
++++ b/experiments/test_punctuation_current.js
+@@ -0,0 +1,53 @@
++/**
++ * Experiment to understand current behavior with punctuation and math symbols
++ */
++import { Parser } from '../js/src/Parser.js';
++import { formatLinks } from '../js/src/Link.js';
++
++const parser = new Parser();
++
++// Test cases from the issue
++const testCases = [
++  // Punctuation tests
++  '1, 2 and 3',
++  '1,2,3',
++  '1. 2. 3.',
++  '1.2.3',
++  'hello, world',
++
++  // Math symbol tests
++  '1+1',
++  '1 + 1',
++  '1+1,1/1,1*1',
++  '1 + 1 , 1 / 1 , 1 * 1',
++  'x+y=z',
++  'a-b',
++
++  // Other punctuation
++  'hello;world',
++  'hello!world',
++  'hello?world',
++
++  // Already quoted versions
++  '"1,"',
++  '"1."',
++  '"1,2,3"',
++];
++
++console.log('=== Current Parsing Behavior ===\n');
++
++for (const input of testCases) {
++  try {
++    const links = parser.parse(input);
++    const formatted = formatLinks(links);
++    console.log(`Input:     "${input}"`);
++    console.log(`Parsed:    ${JSON.stringify(links, null, 2)}`);
++    console.log(`Formatted: "${formatted}"`);
++    console.log(`Values:    ${links[0]?.values?.map(v => v.id).join(' | ') || 'none'}`);
++    console.log('---');
++  } catch (e) {
++    console.log(`Input:     "${input}"`);
++    console.log(`Error:     ${e.message}`);
++    console.log('---');
++  }
++}
+diff --git a/experiments/test_punctuation_new.js b/experiments/test_punctuation_new.js
+new file mode 100644
+index 00000000..e69e15f6
+--- /dev/null
++++ b/experiments/test_punctuation_new.js
+@@ -0,0 +1,77 @@
++/**
++ * Experiment to test the new punctuation and math symbol tokenization behavior
++ */
++import { Parser } from '../js/src/Parser.js';
++import { formatLinks } from '../js/src/Link.js';
++import { FormatOptions } from '../js/src/FormatOptions.js';
++
++// Create parsers with different settings
++const parserWithTokenization = new Parser({ tokenizeSymbols: true });
++const parserWithoutTokenization = new Parser({ tokenizeSymbols: false });
++
++// Test cases from the issue
++const testCases = [
++  // From issue description
++  '1, 2 and 3',
++  '1,2,3',
++  '1+1,1/1,1*1',
++
++  // Additional punctuation tests
++  'hello, world',
++  '1. 2. 3.',
++  '1.2.3',
++
++  // Math tests
++  '1+1',
++  '1 + 1',
++  'x+y=z',
++  'a-b',
++
++  // Quoted strings should preserve punctuation
++  '"1,"',
++  '"1."',
++  '"1,2,3"',
++  '"hello, world"',
++
++  // Mixed
++  'test "1,2,3" more',
++];
++
++console.log('=== New Parsing Behavior (with tokenization) ===\n');
++
++for (const input of testCases) {
++  try {
++    const links = parserWithTokenization.parse(input);
++    const formatted = formatLinks(links);
++    const compactOptions = new FormatOptions({ compactSymbols: true });
++    const compactFormatted = formatLinks(links, compactOptions);
++
++    console.log(`Input:     "${input}"`);
++    console.log(`Values:    ${links[0]?.values?.map(v => v.id).join(' | ') || 'none'}`);
++    console.log(`Formatted: "${formatted}"`);
++    console.log(`Compact:   "${compactFormatted}"`);
++    console.log('---');
++  } catch (e) {
++    console.log(`Input:     "${input}"`);
++    console.log(`Error:     ${e.message}`);
++    console.log('---');
++  }
++}
++
++console.log('\n=== Without Tokenization (backwards compatible) ===\n');
++
++for (const input of ['1,2,3', '1+1', 'hello, world']) {
++  try {
++    const links = parserWithoutTokenization.parse(input);
++    const formatted = formatLinks(links);
++
++    console.log(`Input:     "${input}"`);
++    console.log(`Values:    ${links[0]?.values?.map(v => v.id).join(' | ') || 'none'}`);
++    console.log(`Formatted: "${formatted}"`);
++    console.log('---');
++  } catch (e) {
++    console.log(`Input:     "${input}"`);
++    console.log(`Error:     ${e.message}`);
++    console.log('---');
++  }
++}
+diff --git a/js/dist/index.js b/js/dist/index.js
+index 797cf8b2..621872b9 100644
+--- a/js/dist/index.js
++++ b/js/dist/index.js
+@@ -1,381 +1,662 @@
+-var __create = Object.create;
+-var __getProtoOf = Object.getPrototypeOf;
+-var __defProp = Object.defineProperty;
+-var __getOwnPropNames = Object.getOwnPropertyNames;
+-var __hasOwnProp = Object.prototype.hasOwnProperty;
+-var __toESM = (mod, isNodeMode, target) => {
+-  target = mod != null ? __create(__getProtoOf(mod)) : {};
+-  const to = isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target;
+-  for (let key of __getOwnPropNames(mod))
+-    if (!__hasOwnProp.call(to, key))
+-      __defProp(to, key, {
+-        get: () => mod[key],
+-        enumerable: true
+-      });
+-  return to;
+-};
+-var __commonJS = (cb, mod) => () => (mod || cb((mod = { exports: {} }).exports, mod), mod.exports);
+-
+-// src/parser-generated.js
+-var require_parser_generated = __commonJS((exports, module) => {
+-  class peg$SyntaxError extends SyntaxError {
+-    constructor(message, expected, found, location) {
+-      super(message);
+-      this.expected = expected;
+-      this.found = found;
+-      this.location = location;
+-      this.name = "SyntaxError";
+-    }
+-    format(sources) {
+-      let str = "Error: " + this.message;
+-      if (this.location) {
+-        let src = null;
+-        const st = sources.find((s2) => s2.source === this.location.source);
+-        if (st) {
+-          src = st.text.split(/\r\n|\n|\r/g);
+-        }
+-        const s = this.location.start;
+-        const offset_s = this.location.source && typeof this.location.source.offset === "function" ? this.location.source.offset(s) : s;
+-        const loc = this.location.source + ":" + offset_s.line + ":" + offset_s.column;
+-        if (src) {
+-          const e = this.location.end;
+-          const filler = "".padEnd(offset_s.line.toString().length, " ");
+-          const line = src[s.line - 1];
+-          const last = s.line === e.line ? e.column : line.length + 1;
+-          const hatLen = last - s.column || 1;
+-          str += `
+- --> ` + loc + `
+-` + filler + ` |
+-` + offset_s.line + " | " + line + `
+-` + filler + " | " + "".padEnd(s.column - 1, " ") + "".padEnd(hatLen, "^");
+-        } else {
+-          str += `
+- at ` + loc;
+-        }
+-      }
+-      return str;
+-    }
+-    static buildMessage(expected, found) {
+-      function hex(ch) {
+-        return ch.codePointAt(0).toString(16).toUpperCase();
+-      }
+-      const nonPrintable = Object.prototype.hasOwnProperty.call(RegExp.prototype, "unicode") ? new RegExp("[\\p{C}\\p{Mn}\\p{Mc}]", "gu") : null;
+-      function unicodeEscape(s) {
+-        if (nonPrintable) {
+-          return s.replace(nonPrintable, (ch) => "\\u{" + hex(ch) + "}");
+-        }
+-        return s;
+-      }
+-      function literalEscape(s) {
+-        return unicodeEscape(s.replace(/\\/g, "\\\\").replace(/"/g, "\\\"").replace(/\0/g, "\\0").replace(/\t/g, "\\t").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/[\x00-\x0F]/g, (ch) => "\\x0" + hex(ch)).replace(/[\x10-\x1F\x7F-\x9F]/g, (ch) => "\\x" + hex(ch)));
+-      }
+-      function classEscape(s) {
+-        return unicodeEscape(s.replace(/\\/g, "\\\\").replace(/\]/g, "\\]").replace(/\^/g, "\\^").replace(/-/g, "\\-").replace(/\0/g, "\\0").replace(/\t/g, "\\t").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/[\x00-\x0F]/g, (ch) => "\\x0" + hex(ch)).replace(/[\x10-\x1F\x7F-\x9F]/g, (ch) => "\\x" + hex(ch)));
+-      }
+-      const DESCRIBE_EXPECTATION_FNS = {
+-        literal(expectation) {
+-          return '"' + literalEscape(expectation.text) + '"';
+-        },
+-        class(expectation) {
+-          const escapedParts = expectation.parts.map((part) => Array.isArray(part) ? classEscape(part[0]) + "-" + classEscape(part[1]) : classEscape(part));
+-          return "[" + (expectation.inverted ? "^" : "") + escapedParts.join("") + "]" + (expectation.unicode ? "u" : "");
+-        },
+-        any() {
+-          return "any character";
+-        },
+-        end() {
+-          return "end of input";
+-        },
+-        other(expectation) {
+-          return expectation.description;
+-        }
+-      };
+-      function describeExpectation(expectation) {
+-        return DESCRIBE_EXPECTATION_FNS[expectation.type](expectation);
+-      }
+-      function describeExpected(expected2) {
+-        const descriptions = expected2.map(describeExpectation);
+-        descriptions.sort();
+-        if (descriptions.length > 0) {
+-          let j = 1;
+-          for (let i = 1;i < descriptions.length; i++) {
+-            if (descriptions[i - 1] !== descriptions[i]) {
+-              descriptions[j] = descriptions[i];
+-              j++;
+-            }
+-          }
+-          descriptions.length = j;
+-        }
+-        switch (descriptions.length) {
+-          case 1:
+-            return descriptions[0];
+-          case 2:
+-            return descriptions[0] + " or " + descriptions[1];
+-          default:
+-            return descriptions.slice(0, -1).join(", ") + ", or " + descriptions[descriptions.length - 1];
+-        }
+-      }
+-      function describeFound(found2) {
+-        return found2 ? '"' + literalEscape(found2) + '"' : "end of input";
++// src/Link.js
++class Link {
++  constructor(id = null, values = null) {
++    this.id = id;
++    if (values !== null && values !== undefined) {
++      if (!Array.isArray(values)) {
++        throw new TypeError("values must be an array or null");
+       }
+-      return "Expected " + describeExpected(expected) + " but " + describeFound(found) + " found.";
++      this.values = values;
++    } else {
++      this.values = [];
+     }
+   }
+-  function peg$parse(input, options) {
+-    options = options !== undefined ? options : {};
+-    const peg$FAILED = {};
+-    const peg$source = options.grammarSource;
+-    const peg$startRuleFunctions = {
+-      document: peg$parsedocument
+-    };
+-    let peg$startRuleFunction = peg$parsedocument;
+-    const peg$c0 = ":";
+-    const peg$c1 = "(";
+-    const peg$c2 = ")";
+-    const peg$c3 = '"';
+-    const peg$c4 = "'";
+-    const peg$c5 = " ";
+-    const peg$r0 = /^[^"]/;
+-    const peg$r1 = /^[^']/;
+-    const peg$r2 = /^[\r\n]/;
+-    const peg$r3 = /^[ \t]/;
+-    const peg$r4 = /^[ \t\n\r]/;
+-    const peg$r5 = /^[^ \t\n\r(:)]/;
+-    const peg$e0 = peg$literalExpectation(":", false);
+-    const peg$e1 = peg$literalExpectation("(", false);
+-    const peg$e2 = peg$literalExpectation(")", false);
+-    const peg$e3 = peg$literalExpectation('"', false);
+-    const peg$e4 = peg$classExpectation(['"'], true, false, false);
+-    const peg$e5 = peg$literalExpectation("'", false);
+-    const peg$e6 = peg$classExpectation(["'"], true, false, false);
+-    const peg$e7 = peg$literalExpectation(" ", false);
+-    const peg$e8 = peg$classExpectation(["\r", `
+-`], false, false, false);
+-    const peg$e9 = peg$anyExpectation();
+-    const peg$e10 = peg$classExpectation([" ", "\t"], false, false, false);
+-    const peg$e11 = peg$classExpectation([" ", "\t", `
+-`, "\r"], false, false, false);
+-    const peg$e12 = peg$classExpectation([" ", "\t", `
+-`, "\r", "(", ":", ")"], true, false, false);
+-    function peg$f0(links) {
+-      return links;
+-    }
+-    function peg$f1() {
+-      return [];
+-    }
+-    function peg$f2(fl, list) {
+-      popIndentation();
+-      return [fl].concat(list || []);
+-    }
+-    function peg$f3(l) {
+-      return l;
+-    }
+-    function peg$f4(l) {
+-      return l;
+-    }
+-    function peg$f5(e, l) {
+-      return { id: e.id, values: e.values, children: l };
+-    }
+-    function peg$f6(e) {
+-      return e;
+-    }
+-    function peg$f7(l) {
+-      return l;
+-    }
+-    function peg$f8(i) {
+-      return { id: i };
++  toString() {
++    return this.format(false);
++  }
++  getValuesString() {
++    return !this.values || this.values.length === 0 ? "" : this.values.map((v) => Link.getValueString(v)).join(" ");
++  }
++  simplify() {
++    if (!this.values || this.values.length === 0) {
++      return this;
++    } else if (this.values.length === 1) {
++      return this.values[0];
++    } else {
++      const newValues = this.values.map((v) => {
++        return v && typeof v.simplify === "function" ? v.simplify() : v;
++      });
++      return new Link(this.id, newValues);
+     }
+-    function peg$f9(ml) {
+-      return ml;
++  }
++  combine(other) {
++    return new Link(null, [this, other]);
++  }
++  static getValueString(value) {
++    return value && typeof value.toLinkOrIdString === "function" ? value.toLinkOrIdString() : String(value);
++  }
++  static escapeReference(reference) {
++    if (!reference || reference.trim() === "") {
++      return "";
+     }
+-    function peg$f10(sl) {
+-      return sl;
++    const hasSingleQuote = reference.includes("'");
++    const hasDoubleQuote = reference.includes('"');
++    const needsQuoting = reference.includes(":") || reference.includes("(") || reference.includes(")") || reference.includes(" ") || reference.includes("\t") || reference.includes(`
++`) || reference.includes("\r") || hasDoubleQuote || hasSingleQuote;
++    if (hasSingleQuote && hasDoubleQuote) {
++      return `'${reference.replace(/'/g, "\\'")}'`;
+     }
+-    function peg$f11(fl) {
+-      return fl;
++    if (hasDoubleQuote) {
++      return `'${reference}'`;
+     }
+-    function peg$f12(vl) {
+-      return vl;
++    if (hasSingleQuote) {
++      return `"${reference}"`;
+     }
+-    function peg$f13(value) {
+-      return value;
++    if (needsQuoting) {
++      return `'${reference}'`;
+     }
+-    function peg$f14(list) {
+-      return list;
++    return reference;
++  }
++  toLinkOrIdString() {
++    if (!this.values || this.values.length === 0) {
++      return this.id === null ? "" : Link.escapeReference(this.id);
+     }
+-    function peg$f15(value) {
+-      return value;
++    return this.toString();
++  }
++  equals(other) {
++    if (!(other instanceof Link))
++      return false;
++    if (this.id !== other.id)
++      return false;
++    const thisValues = this.values || [];
++    const otherValues = other.values || [];
++    if (thisValues.length !== otherValues.length)
++      return false;
++    for (let i = 0;i < thisValues.length; i++) {
++      if (thisValues[i] && typeof thisValues[i].equals === "function") {
++        if (!thisValues[i].equals(otherValues[i])) {
++          return false;
++        }
++      } else {
++        if (thisValues[i] !== otherValues[i]) {
++          return false;
++        }
++      }
+     }
+-    function peg$f16(list) {
+-      return list;
++    return true;
++  }
++  format(lessParentheses = false, isCompoundValue = false) {
++    if (lessParentheses && typeof lessParentheses === "object" && (lessParentheses.constructor.name === "FormatOptions" || lessParentheses.constructor.name === "FormatConfig")) {
++      return this._formatWithOptions(lessParentheses, isCompoundValue);
+     }
+-    function peg$f17(id, v) {
+-      return { id, values: v };
++    if (this.id === null && (!this.values || this.values.length === 0)) {
++      return lessParentheses ? "" : "()";
+     }
+-    function peg$f18(id, v) {
+-      return { id, values: v };
++    if (!this.values || this.values.length === 0) {
++      const escapedId = Link.escapeReference(this.id);
++      if (isCompoundValue) {
++        return `(${escapedId})`;
++      }
++      return lessParentheses && !this.needsParentheses(this.id) ? escapedId : `(${escapedId})`;
+     }
+-    function peg$f19(v) {
+-      return { values: v };
++    const valuesStr = this.values.map((v) => this.formatValue(v)).join(" ");
++    if (this.id === null) {
++      if (lessParentheses) {
++        const allSimple = this.values.every((v) => !v.values || v.values.length === 0);
++        if (allSimple) {
++          const simpleValuesStr = this.values.map((v) => Link.escapeReference(v.id)).join(" ");
++          return simpleValuesStr;
++        }
++        return valuesStr;
++      }
++      return `(${valuesStr})`;
+     }
+-    function peg$f20(v) {
+-      return { values: v };
++    const idStr = Link.escapeReference(this.id);
++    const withColon = `${idStr}: ${valuesStr}`;
++    return lessParentheses && !this.needsParentheses(this.id) ? withColon : `(${withColon})`;
++  }
++  formatValue(value) {
++    if (!value || !value.format) {
++      return Link.escapeReference(value && value.id || "");
+     }
+-    function peg$f21(chars) {
+-      return chars.join("");
++    const isCompoundFromPaths = this._isFromPathCombination === true;
++    if (isCompoundFromPaths) {
++      return value.format(false, true);
+     }
+-    function peg$f22(r) {
+-      return r.join("");
++    if (!value.values || value.values.length === 0) {
++      return Link.escapeReference(value.id);
+     }
+-    function peg$f23(r) {
+-      return r.join("");
++    return value.format(false, false);
++  }
++  needsParentheses(str) {
++    return str && (str.includes(" ") || str.includes(":") || str.includes("(") || str.includes(")"));
++  }
++  _formatWithOptions(options, isCompoundValue = false) {
++    if (this.id === null && (!this.values || this.values.length === 0)) {
++      return options.lessParentheses ? "" : "()";
+     }
+-    function peg$f24(spaces) {
+-      return spaces.length > getCurrentIndentation();
++    if (!this.values || this.values.length === 0) {
++      const escapedId = Link.escapeReference(this.id);
++      if (isCompoundValue) {
++        return `(${escapedId})`;
++      }
++      return options.lessParentheses && !this.needsParentheses(this.id) ? escapedId : `(${escapedId})`;
+     }
+-    function peg$f25(spaces) {
+-      pushIndentation(spaces);
++    let shouldIndent = false;
++    if (options.shouldIndentByRefCount(this.values.length)) {
++      shouldIndent = true;
++    } else {
++      const valuesStr2 = this.values.map((v) => this.formatValue(v)).join(" ");
++      let testLine;
++      if (this.id !== null) {
++        const idStr2 = Link.escapeReference(this.id);
++        testLine = options.lessParentheses ? `${idStr2}: ${valuesStr2}` : `(${idStr2}: ${valuesStr2})`;
++      } else {
++        testLine = options.lessParentheses ? valuesStr2 : `(${valuesStr2})`;
++      }
++      if (options.shouldIndentByLength(testLine)) {
++        shouldIndent = true;
++      }
+     }
+-    function peg$f26(spaces) {
+-      return checkIndentation(spaces);
++    if (shouldIndent && options.preferInline === false) {
++      return this._formatIndented(options);
+     }
+-    let peg$currPos = options.peg$currPos | 0;
+-    let peg$savedPos = peg$currPos;
+-    const peg$posDetailsCache = [{ line: 1, column: 1 }];
+-    let peg$maxFailPos = peg$currPos;
+-    let peg$maxFailExpected = options.peg$maxFailExpected || [];
+-    let peg$silentFails = options.peg$silentFails | 0;
+-    let peg$result;
+-    if (options.startRule) {
+-      if (!(options.startRule in peg$startRuleFunctions)) {
+-        throw new Error(`Can't start parsing from rule "` + options.startRule + '".');
++    const valuesStr = this.values.map((v) => this.formatValue(v)).join(" ");
++    if (this.id === null) {
++      if (options.lessParentheses) {
++        const allSimple = this.values.every((v) => !v.values || v.values.length === 0);
++        if (allSimple) {
++          return this.values.map((v) => Link.escapeReference(v.id)).join(" ");
++        }
++        return valuesStr;
+       }
+-      peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
++      return `(${valuesStr})`;
+     }
+-    function text() {
+-      return input.substring(peg$savedPos, peg$currPos);
+-    }
+-    function offset() {
+-      return peg$savedPos;
++    const idStr = Link.escapeReference(this.id);
++    const withColon = `${idStr}: ${valuesStr}`;
++    return options.lessParentheses && !this.needsParentheses(this.id) ? withColon : `(${withColon})`;
++  }
++  _formatIndented(options) {
++    if (this.id === null) {
++      const lines2 = this.values.map((v) => options.indentString + this.formatValue(v));
++      return lines2.join(`
++`);
+     }
+-    function range() {
+-      return {
+-        source: peg$source,
+-        start: peg$savedPos,
+-        end: peg$currPos
+-      };
++    const idStr = Link.escapeReference(this.id);
++    const lines = [`${idStr}:`];
++    for (const v of this.values) {
++      lines.push(options.indentString + this.formatValue(v));
+     }
+-    function location() {
+-      return peg$computeLocation(peg$savedPos, peg$currPos);
++    return lines.join(`
++`);
++  }
++}
++function _groupConsecutiveLinks(links) {
++  if (!links || links.length === 0) {
++    return links;
++  }
++  const grouped = [];
++  let i = 0;
++  while (i < links.length) {
++    const current = links[i];
++    if (current.id !== null && current.values && current.values.length > 0) {
++      const sameIdValues = [...current.values];
++      let j = i + 1;
++      while (j < links.length) {
++        const nextLink = links[j];
++        if (nextLink.id === current.id && nextLink.values && nextLink.values.length > 0) {
++          sameIdValues.push(...nextLink.values);
++          j++;
++        } else {
++          break;
++        }
++      }
++      if (j > i + 1) {
++        const groupedLink = new Link(current.id, sameIdValues);
++        grouped.push(groupedLink);
++        i = j;
++        continue;
++      }
+     }
+-    function expected(description, location2) {
+-      location2 = location2 !== undefined ? location2 : peg$computeLocation(peg$savedPos, peg$currPos);
+-      throw peg$buildStructuredError([peg$otherExpectation(description)], input.substring(peg$savedPos, peg$currPos), location2);
++    grouped.push(current);
++    i++;
++  }
++  return grouped;
++}
++function formatLinks(links, lessParentheses = false) {
++  if (!links || links.length === 0)
++    return "";
++  if (lessParentheses && typeof lessParentheses === "object" && (lessParentheses.constructor.name === "FormatOptions" || lessParentheses.constructor.name === "FormatConfig")) {
++    const options = lessParentheses;
++    let linksToFormat = links;
++    if (options.groupConsecutive) {
++      linksToFormat = _groupConsecutiveLinks(links);
+     }
+-    function error(message, location2) {
+-      location2 = location2 !== undefined ? location2 : peg$computeLocation(peg$savedPos, peg$currPos);
+-      throw peg$buildSimpleError(message, location2);
++    let result = linksToFormat.map((link) => link.format(options)).join(`
++`);
++    if (options.compactSymbols && typeof options.compactOutput === "function") {
++      result = options.compactOutput(result);
+     }
+-    function peg$getUnicode(pos = peg$currPos) {
+-      const cp = input.codePointAt(pos);
+-      if (cp === undefined) {
+-        return "";
++    return result;
++  }
++  return links.map((link) => link.format(lessParentheses)).join(`
++`);
++}
++// src/LinksGroup.js
++class LinksGroup {
++  constructor(element, children = []) {
++    this.element = element;
++    this.children = children;
++  }
++  toList() {
++    const result = [];
++    this._appendToList(result);
++    return result;
++  }
++  _appendToList(list) {
++    list.push(this.element);
++    if (this.children && this.children.length > 0) {
++      for (const child of this.children) {
++        if (child instanceof LinksGroup) {
++          child._appendToList(list);
++        } else {
++          list.push(child);
++        }
+       }
+-      return String.fromCodePoint(cp);
+     }
+-    function peg$literalExpectation(text2, ignoreCase) {
+-      return { type: "literal", text: text2, ignoreCase };
+-    }
+-    function peg$classExpectation(parts, inverted, ignoreCase, unicode) {
+-      return { type: "class", parts, inverted, ignoreCase, unicode };
++  }
++  toString() {
++    const list = this.toList();
++    return list.map((item) => `(${item.id || item})`).join(" ");
++  }
++}
++// src/parser-generated.js
++class peg$SyntaxError extends SyntaxError {
++  constructor(message, expected, found, location) {
++    super(message);
++    this.expected = expected;
++    this.found = found;
++    this.location = location;
++    this.name = "SyntaxError";
++  }
++  format(sources) {
++    let str = "Error: " + this.message;
++    if (this.location) {
++      let src = null;
++      const st = sources.find((s2) => s2.source === this.location.source);
++      if (st) {
++        src = st.text.split(/\r\n|\n|\r/g);
++      }
++      const s = this.location.start;
++      const offset_s = this.location.source && typeof this.location.source.offset === "function" ? this.location.source.offset(s) : s;
++      const loc = this.location.source + ":" + offset_s.line + ":" + offset_s.column;
++      if (src) {
++        const e = this.location.end;
++        const filler = "".padEnd(offset_s.line.toString().length, " ");
++        const line = src[s.line - 1];
++        const last = s.line === e.line ? e.column : line.length + 1;
++        const hatLen = last - s.column || 1;
++        str += `
++ --> ` + loc + `
++` + filler + ` |
++` + offset_s.line + " | " + line + `
++` + filler + " | " + "".padEnd(s.column - 1, " ") + "".padEnd(hatLen, "^");
++      } else {
++        str += `
++ at ` + loc;
++      }
+     }
+-    function peg$anyExpectation() {
+-      return { type: "any" };
++    return str;
++  }
++  static buildMessage(expected, found) {
++    function hex(ch) {
++      return ch.codePointAt(0).toString(16).toUpperCase();
++    }
++    const nonPrintable = Object.prototype.hasOwnProperty.call(RegExp.prototype, "unicode") ? new RegExp("[\\p{C}\\p{Mn}\\p{Mc}]", "gu") : null;
++    function unicodeEscape(s) {
++      if (nonPrintable) {
++        return s.replace(nonPrintable, (ch) => "\\u{" + hex(ch) + "}");
++      }
++      return s;
++    }
++    function literalEscape(s) {
++      return unicodeEscape(s.replace(/\\/g, "\\\\").replace(/"/g, "\\\"").replace(/\0/g, "\\0").replace(/\t/g, "\\t").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/[\x00-\x0F]/g, (ch) => "\\x0" + hex(ch)).replace(/[\x10-\x1F\x7F-\x9F]/g, (ch) => "\\x" + hex(ch)));
++    }
++    function classEscape(s) {
++      return unicodeEscape(s.replace(/\\/g, "\\\\").replace(/\]/g, "\\]").replace(/\^/g, "\\^").replace(/-/g, "\\-").replace(/\0/g, "\\0").replace(/\t/g, "\\t").replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/[\x00-\x0F]/g, (ch) => "\\x0" + hex(ch)).replace(/[\x10-\x1F\x7F-\x9F]/g, (ch) => "\\x" + hex(ch)));
++    }
++    const DESCRIBE_EXPECTATION_FNS = {
++      literal(expectation) {
++        return '"' + literalEscape(expectation.text) + '"';
++      },
++      class(expectation) {
++        const escapedParts = expectation.parts.map((part) => Array.isArray(part) ? classEscape(part[0]) + "-" + classEscape(part[1]) : classEscape(part));
++        return "[" + (expectation.inverted ? "^" : "") + escapedParts.join("") + "]" + (expectation.unicode ? "u" : "");
++      },
++      any() {
++        return "any character";
++      },
++      end() {
++        return "end of input";
++      },
++      other(expectation) {
++        return expectation.description;
++      }
++    };
++    function describeExpectation(expectation) {
++      return DESCRIBE_EXPECTATION_FNS[expectation.type](expectation);
++    }
++    function describeExpected(expected2) {
++      const descriptions = expected2.map(describeExpectation);
++      descriptions.sort();
++      if (descriptions.length > 0) {
++        let j = 1;
++        for (let i = 1;i < descriptions.length; i++) {
++          if (descriptions[i - 1] !== descriptions[i]) {
++            descriptions[j] = descriptions[i];
++            j++;
++          }
++        }
++        descriptions.length = j;
++      }
++      switch (descriptions.length) {
++        case 1:
++          return descriptions[0];
++        case 2:
++          return descriptions[0] + " or " + descriptions[1];
++        default:
++          return descriptions.slice(0, -1).join(", ") + ", or " + descriptions[descriptions.length - 1];
++      }
+     }
+-    function peg$endExpectation() {
+-      return { type: "end" };
++    function describeFound(found2) {
++      return found2 ? '"' + literalEscape(found2) + '"' : "end of input";
+     }
+-    function peg$otherExpectation(description) {
+-      return { type: "other", description };
++    return "Expected " + describeExpected(expected) + " but " + describeFound(found) + " found.";
++  }
++}
++function peg$parse(input, options) {
++  options = options !== undefined ? options : {};
++  const peg$FAILED = {};
++  const peg$source = options.grammarSource;
++  const peg$startRuleFunctions = {
++    document: peg$parsedocument
++  };
++  let peg$startRuleFunction = peg$parsedocument;
++  const peg$c0 = ":";
++  const peg$c1 = "(";
++  const peg$c2 = ")";
++  const peg$c3 = '"';
++  const peg$c4 = "'";
++  const peg$c5 = " ";
++  const peg$r0 = /^[ \t]/;
++  const peg$r1 = /^[\r\n]/;
++  const peg$r2 = /^[^"]/;
++  const peg$r3 = /^[^']/;
++  const peg$r4 = /^[ \t\n\r]/;
++  const peg$r5 = /^[^ \t\n\r(:)]/;
++  const peg$e0 = peg$classExpectation([" ", "\t"], false, false, false);
++  const peg$e1 = peg$classExpectation(["\r", `
++`], false, false, false);
++  const peg$e2 = peg$literalExpectation(":", false);
++  const peg$e3 = peg$literalExpectation("(", false);
++  const peg$e4 = peg$literalExpectation(")", false);
++  const peg$e5 = peg$literalExpectation('"', false);
++  const peg$e6 = peg$classExpectation(['"'], true, false, false);
++  const peg$e7 = peg$literalExpectation("'", false);
++  const peg$e8 = peg$classExpectation(["'"], true, false, false);
++  const peg$e9 = peg$literalExpectation(" ", false);
++  const peg$e10 = peg$anyExpectation();
++  const peg$e11 = peg$classExpectation([" ", "\t", `
++`, "\r"], false, false, false);
++  const peg$e12 = peg$classExpectation([" ", "\t", `
++`, "\r", "(", ":", ")"], true, false, false);
++  function peg$f0() {
++    indentationStack = [0];
++    baseIndentation = null;
++    return true;
++  }
++  function peg$f1(links) {
++    return links;
++  }
++  function peg$f2() {
++    indentationStack = [0];
++    baseIndentation = null;
++    return true;
++  }
++  function peg$f3() {
++    return [];
++  }
++  function peg$f4(fl, list) {
++    popIndentation();
++    return [fl].concat(list || []);
++  }
++  function peg$f5(l) {
++    return l;
++  }
++  function peg$f6(l) {
++    return l;
++  }
++  function peg$f7(e, l) {
++    return { id: e.id, values: e.values, children: l };
++  }
++  function peg$f8(e) {
++    return e;
++  }
++  function peg$f9(l) {
++    return l;
++  }
++  function peg$f10(i) {
++    return { id: i };
++  }
++  function peg$f11(ml) {
++    return ml;
++  }
++  function peg$f12(il) {
++    return il;
++  }
++  function peg$f13(sl) {
++    return sl;
++  }
++  function peg$f14(fl) {
++    return fl;
++  }
++  function peg$f15(vl) {
++    return vl;
++  }
++  function peg$f16(value) {
++    return value;
++  }
++  function peg$f17(list) {
++    return list;
++  }
++  function peg$f18(value) {
++    return value;
++  }
++  function peg$f19(list) {
++    return list;
++  }
++  function peg$f20(id, v) {
++    return { id, values: v };
++  }
++  function peg$f21(id, v) {
++    return { id, values: v };
++  }
++  function peg$f22(v) {
++    return { values: v };
++  }
++  function peg$f23(v) {
++    return { values: v };
++  }
++  function peg$f24(id) {
++    return { id, values: [] };
++  }
++  function peg$f25(chars) {
++    return chars.join("");
++  }
++  function peg$f26(r) {
++    return r.join("");
++  }
++  function peg$f27(r) {
++    return r.join("");
++  }
++  function peg$f28(spaces) {
++    setBaseIndentation(spaces);
++  }
++  function peg$f29(spaces) {
++    return normalizeIndentation(spaces) > getCurrentIndentation();
++  }
++  function peg$f30(spaces) {
++    pushIndentation(spaces);
++  }
++  function peg$f31(spaces) {
++    return checkIndentation(spaces);
++  }
++  let peg$currPos = options.peg$currPos | 0;
++  let peg$savedPos = peg$currPos;
++  const peg$posDetailsCache = [{ line: 1, column: 1 }];
++  let peg$maxFailPos = peg$currPos;
++  let peg$maxFailExpected = options.peg$maxFailExpected || [];
++  let peg$silentFails = options.peg$silentFails | 0;
++  let peg$result;
++  if (options.startRule) {
++    if (!(options.startRule in peg$startRuleFunctions)) {
++      throw new Error(`Can't start parsing from rule "` + options.startRule + '".');
++    }
++    peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
++  }
++  function text() {
++    return input.substring(peg$savedPos, peg$currPos);
++  }
++  function offset() {
++    return peg$savedPos;
++  }
++  function range() {
++    return {
++      source: peg$source,
++      start: peg$savedPos,
++      end: peg$currPos
++    };
++  }
++  function location() {
++    return peg$computeLocation(peg$savedPos, peg$currPos);
++  }
++  function expected(description, location2) {
++    location2 = location2 !== undefined ? location2 : peg$computeLocation(peg$savedPos, peg$currPos);
++    throw peg$buildStructuredError([peg$otherExpectation(description)], input.substring(peg$savedPos, peg$currPos), location2);
++  }
++  function error(message, location2) {
++    location2 = location2 !== undefined ? location2 : peg$computeLocation(peg$savedPos, peg$currPos);
++    throw peg$buildSimpleError(message, location2);
++  }
++  function peg$getUnicode(pos = peg$currPos) {
++    const cp = input.codePointAt(pos);
++    if (cp === undefined) {
++      return "";
+     }
+-    function peg$computePosDetails(pos) {
+-      let details = peg$posDetailsCache[pos];
+-      let p;
+-      if (details) {
+-        return details;
++    return String.fromCodePoint(cp);
++  }
++  function peg$literalExpectation(text2, ignoreCase) {
++    return { type: "literal", text: text2, ignoreCase };
++  }
++  function peg$classExpectation(parts, inverted, ignoreCase, unicode) {
++    return { type: "class", parts, inverted, ignoreCase, unicode };
++  }
++  function peg$anyExpectation() {
++    return { type: "any" };
++  }
++  function peg$endExpectation() {
++    return { type: "end" };
++  }
++  function peg$otherExpectation(description) {
++    return { type: "other", description };
++  }
++  function peg$computePosDetails(pos) {
++    let details = peg$posDetailsCache[pos];
++    let p;
++    if (details) {
++      return details;
++    } else {
++      if (pos >= peg$posDetailsCache.length) {
++        p = peg$posDetailsCache.length - 1;
+       } else {
+-        if (pos >= peg$posDetailsCache.length) {
+-          p = peg$posDetailsCache.length - 1;
++        p = pos;
++        while (!peg$posDetailsCache[--p]) {}
++      }
++      details = peg$posDetailsCache[p];
++      details = {
++        line: details.line,
++        column: details.column
++      };
++      while (p < pos) {
++        if (input.charCodeAt(p) === 10) {
++          details.line++;
++          details.column = 1;
+         } else {
+-          p = pos;
+-          while (!peg$posDetailsCache[--p]) {}
++          details.column++;
+         }
+-        details = peg$posDetailsCache[p];
+-        details = {
+-          line: details.line,
+-          column: details.column
+-        };
+-        while (p < pos) {
+-          if (input.charCodeAt(p) === 10) {
+-            details.line++;
+-            details.column = 1;
+-          } else {
+-            details.column++;
+-          }
+-          p++;
+-        }
+-        peg$posDetailsCache[pos] = details;
+-        return details;
+-      }
+-    }
+-    function peg$computeLocation(startPos, endPos, offset2) {
+-      const startPosDetails = peg$computePosDetails(startPos);
+-      const endPosDetails = peg$computePosDetails(endPos);
+-      const res = {
+-        source: peg$source,
+-        start: {
+-          offset: startPos,
+-          line: startPosDetails.line,
+-          column: startPosDetails.column
+-        },
+-        end: {
+-          offset: endPos,
+-          line: endPosDetails.line,
+-          column: endPosDetails.column
+-        }
+-      };
+-      if (offset2 && peg$source && typeof peg$source.offset === "function") {
+-        res.start = peg$source.offset(res.start);
+-        res.end = peg$source.offset(res.end);
++        p++;
+       }
+-      return res;
++      peg$posDetailsCache[pos] = details;
++      return details;
+     }
+-    function peg$fail(expected2) {
+-      if (peg$currPos < peg$maxFailPos) {
+-        return;
+-      }
+-      if (peg$currPos > peg$maxFailPos) {
+-        peg$maxFailPos = peg$currPos;
+-        peg$maxFailExpected = [];
++  }
++  function peg$computeLocation(startPos, endPos, offset2) {
++    const startPosDetails = peg$computePosDetails(startPos);
++    const endPosDetails = peg$computePosDetails(endPos);
++    const res = {
++      source: peg$source,
++      start: {
++        offset: startPos,
++        line: startPosDetails.line,
++        column: startPosDetails.column
++      },
++      end: {
++        offset: endPos,
++        line: endPosDetails.line,
++        column: endPosDetails.column
+       }
+-      peg$maxFailExpected.push(expected2);
++    };
++    if (offset2 && peg$source && typeof peg$source.offset === "function") {
++      res.start = peg$source.offset(res.start);
++      res.end = peg$source.offset(res.end);
+     }
+-    function peg$buildSimpleError(message, location2) {
+-      return new peg$SyntaxError(message, null, null, location2);
++    return res;
++  }
++  function peg$fail(expected2) {
++    if (peg$currPos < peg$maxFailPos) {
++      return;
+     }
+-    function peg$buildStructuredError(expected2, found, location2) {
+-      return new peg$SyntaxError(peg$SyntaxError.buildMessage(expected2, found), expected2, found, location2);
++    if (peg$currPos > peg$maxFailPos) {
++      peg$maxFailPos = peg$currPos;
++      peg$maxFailExpected = [];
+     }
+-    function peg$parsedocument() {
+-      let s0, s1, s2, s3;
+-      s0 = peg$currPos;
+-      s1 = peg$parse_();
+-      s2 = peg$parselinks();
+-      if (s2 !== peg$FAILED) {
+-        s3 = peg$parseeof();
+-        if (s3 !== peg$FAILED) {
++    peg$maxFailExpected.push(expected2);
++  }
++  function peg$buildSimpleError(message, location2) {
++    return new peg$SyntaxError(message, null, null, location2);
++  }
++  function peg$buildStructuredError(expected2, found, location2) {
++    return new peg$SyntaxError(peg$SyntaxError.buildMessage(expected2, found), expected2, found, location2);
++  }
++  function peg$parsedocument() {
++    let s0, s1, s2, s3, s4, s5;
++    s0 = peg$currPos;
++    peg$savedPos = peg$currPos;
++    s1 = peg$f0();
++    if (s1) {
++      s1 = undefined;
++    } else {
++      s1 = peg$FAILED;
++    }
++    if (s1 !== peg$FAILED) {
++      s2 = peg$parseskipEmptyLines();
++      s3 = peg$parselinks();
++      if (s3 !== peg$FAILED) {
++        s4 = peg$parse_();
++        s5 = peg$parseeof();
++        if (s5 !== peg$FAILED) {
+           peg$savedPos = s0;
+-          s0 = peg$f0(s2);
++          s0 = peg$f1(s3);
+         } else {
+           peg$currPos = s0;
+           s0 = peg$FAILED;
+@@ -384,59 +665,25 @@ var require_parser_generated = __commonJS((exports, module) => {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      if (s0 === peg$FAILED) {
+-        s0 = peg$currPos;
+-        s1 = peg$parse_();
+-        s2 = peg$parseeof();
+-        if (s2 !== peg$FAILED) {
+-          peg$savedPos = s0;
+-          s0 = peg$f1();
+-        } else {
+-          peg$currPos = s0;
+-          s0 = peg$FAILED;
+-        }
+-      }
+-      return s0;
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function peg$parselinks() {
+-      let s0, s1, s2, s3;
++    if (s0 === peg$FAILED) {
+       s0 = peg$currPos;
+-      s1 = peg$parsefirstLine();
+-      if (s1 !== peg$FAILED) {
+-        s2 = [];
+-        s3 = peg$parseline();
+-        while (s3 !== peg$FAILED) {
+-          s2.push(s3);
+-          s3 = peg$parseline();
+-        }
+-        peg$savedPos = s0;
+-        s0 = peg$f2(s1, s2);
++      peg$savedPos = peg$currPos;
++      s1 = peg$f2();
++      if (s1) {
++        s1 = undefined;
+       } else {
+-        peg$currPos = s0;
+-        s0 = peg$FAILED;
++        s1 = peg$FAILED;
+       }
+-      return s0;
+-    }
+-    function peg$parsefirstLine() {
+-      let s0, s1;
+-      s0 = peg$currPos;
+-      s1 = peg$parseelement();
+       if (s1 !== peg$FAILED) {
+-        peg$savedPos = s0;
+-        s1 = peg$f3(s1);
+-      }
+-      s0 = s1;
+-      return s0;
+-    }
+-    function peg$parseline() {
+-      let s0, s1, s2;
+-      s0 = peg$currPos;
+-      s1 = peg$parseCHECK_INDENTATION();
+-      if (s1 !== peg$FAILED) {
+-        s2 = peg$parseelement();
+-        if (s2 !== peg$FAILED) {
++        s2 = peg$parse_();
++        s3 = peg$parseeof();
++        if (s3 !== peg$FAILED) {
+           peg$savedPos = s0;
+-          s0 = peg$f4(s2);
++          s0 = peg$f3();
+         } else {
+           peg$currPos = s0;
+           s0 = peg$FAILED;
+@@ -445,280 +692,271 @@ var require_parser_generated = __commonJS((exports, module) => {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      return s0;
+     }
+-    function peg$parseelement() {
+-      let s0, s1, s2, s3;
+-      s0 = peg$currPos;
+-      s1 = peg$parseanyLink();
+-      if (s1 !== peg$FAILED) {
+-        s2 = peg$parsePUSH_INDENTATION();
+-        if (s2 !== peg$FAILED) {
+-          s3 = peg$parselinks();
+-          if (s3 !== peg$FAILED) {
+-            peg$savedPos = s0;
+-            s0 = peg$f5(s1, s3);
+-          } else {
+-            peg$currPos = s0;
+-            s0 = peg$FAILED;
+-          }
+-        } else {
+-          peg$currPos = s0;
+-          s0 = peg$FAILED;
+-        }
+-      } else {
+-        peg$currPos = s0;
+-        s0 = peg$FAILED;
++    return s0;
++  }
++  function peg$parseskipEmptyLines() {
++    let s0, s1, s2, s3;
++    s0 = [];
++    s1 = peg$currPos;
++    s2 = [];
++    s3 = input.charAt(peg$currPos);
++    if (peg$r0.test(s3)) {
++      peg$currPos++;
++    } else {
++      s3 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e0);
+       }
+-      if (s0 === peg$FAILED) {
+-        s0 = peg$currPos;
+-        s1 = peg$parseanyLink();
+-        if (s1 !== peg$FAILED) {
+-          peg$savedPos = s0;
+-          s1 = peg$f6(s1);
++    }
++    while (s3 !== peg$FAILED) {
++      s2.push(s3);
++      s3 = input.charAt(peg$currPos);
++      if (peg$r0.test(s3)) {
++        peg$currPos++;
++      } else {
++        s3 = peg$FAILED;
++        if (peg$silentFails === 0) {
++          peg$fail(peg$e0);
+         }
+-        s0 = s1;
+       }
+-      return s0;
+     }
+-    function peg$parsereferenceOrLink() {
+-      let s0, s1;
+-      s0 = peg$currPos;
+-      s1 = peg$parsemultiLineAnyLink();
+-      if (s1 !== peg$FAILED) {
+-        peg$savedPos = s0;
+-        s1 = peg$f7(s1);
++    s3 = input.charAt(peg$currPos);
++    if (peg$r1.test(s3)) {
++      peg$currPos++;
++    } else {
++      s3 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e1);
+       }
+-      s0 = s1;
+-      if (s0 === peg$FAILED) {
+-        s0 = peg$currPos;
+-        s1 = peg$parsereference();
+-        if (s1 !== peg$FAILED) {
+-          peg$savedPos = s0;
+-          s1 = peg$f8(s1);
++    }
++    if (s3 !== peg$FAILED) {
++      s2 = [s2, s3];
++      s1 = s2;
++    } else {
++      peg$currPos = s1;
++      s1 = peg$FAILED;
++    }
++    while (s1 !== peg$FAILED) {
++      s0.push(s1);
++      s1 = peg$currPos;
++      s2 = [];
++      s3 = input.charAt(peg$currPos);
++      if (peg$r0.test(s3)) {
++        peg$currPos++;
++      } else {
++        s3 = peg$FAILED;
++        if (peg$silentFails === 0) {
++          peg$fail(peg$e0);
+         }
+-        s0 = s1;
+       }
+-      return s0;
+-    }
+-    function peg$parseanyLink() {
+-      let s0, s1, s2;
+-      s0 = peg$currPos;
+-      s1 = peg$parsemultiLineAnyLink();
+-      if (s1 !== peg$FAILED) {
+-        s2 = peg$parseeol();
+-        if (s2 !== peg$FAILED) {
+-          peg$savedPos = s0;
+-          s0 = peg$f9(s1);
++      while (s3 !== peg$FAILED) {
++        s2.push(s3);
++        s3 = input.charAt(peg$currPos);
++        if (peg$r0.test(s3)) {
++          peg$currPos++;
+         } else {
+-          peg$currPos = s0;
+-          s0 = peg$FAILED;
++          s3 = peg$FAILED;
++          if (peg$silentFails === 0) {
++            peg$fail(peg$e0);
++          }
+         }
+-      } else {
+-        peg$currPos = s0;
+-        s0 = peg$FAILED;
+       }
+-      if (s0 === peg$FAILED) {
+-        s0 = peg$currPos;
+-        s1 = peg$parsesingleLineAnyLink();
+-        if (s1 !== peg$FAILED) {
+-          peg$savedPos = s0;
+-          s1 = peg$f10(s1);
++      s3 = input.charAt(peg$currPos);
++      if (peg$r1.test(s3)) {
++        peg$currPos++;
++      } else {
++        s3 = peg$FAILED;
++        if (peg$silentFails === 0) {
++          peg$fail(peg$e1);
+         }
+-        s0 = s1;
+       }
+-      return s0;
++      if (s3 !== peg$FAILED) {
++        s2 = [s2, s3];
++        s1 = s2;
++      } else {
++        peg$currPos = s1;
++        s1 = peg$FAILED;
++      }
+     }
+-    function peg$parsemultiLineAnyLink() {
+-      let s0;
+-      s0 = peg$parsemultiLineValueLink();
+-      if (s0 === peg$FAILED) {
+-        s0 = peg$parsemultiLineLink();
++    return s0;
++  }
++  function peg$parselinks() {
++    let s0, s1, s2, s3;
++    s0 = peg$currPos;
++    s1 = peg$parsefirstLine();
++    if (s1 !== peg$FAILED) {
++      s2 = [];
++      s3 = peg$parseline();
++      while (s3 !== peg$FAILED) {
++        s2.push(s3);
++        s3 = peg$parseline();
+       }
+-      return s0;
++      peg$savedPos = s0;
++      s0 = peg$f4(s1, s2);
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function peg$parsesingleLineAnyLink() {
+-      let s0, s1, s2;
+-      s0 = peg$currPos;
+-      s1 = peg$parsesingleLineLink();
+-      if (s1 !== peg$FAILED) {
+-        s2 = peg$parseeol();
+-        if (s2 !== peg$FAILED) {
+-          peg$savedPos = s0;
+-          s0 = peg$f11(s1);
+-        } else {
+-          peg$currPos = s0;
+-          s0 = peg$FAILED;
+-        }
++    return s0;
++  }
++  function peg$parsefirstLine() {
++    let s0, s1, s2;
++    s0 = peg$currPos;
++    s1 = peg$parseSET_BASE_INDENTATION();
++    s2 = peg$parseelement();
++    if (s2 !== peg$FAILED) {
++      peg$savedPos = s0;
++      s0 = peg$f5(s2);
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
++    }
++    return s0;
++  }
++  function peg$parseline() {
++    let s0, s1, s2;
++    s0 = peg$currPos;
++    s1 = peg$parseCHECK_INDENTATION();
++    if (s1 !== peg$FAILED) {
++      s2 = peg$parseelement();
++      if (s2 !== peg$FAILED) {
++        peg$savedPos = s0;
++        s0 = peg$f6(s2);
+       } else {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      if (s0 === peg$FAILED) {
+-        s0 = peg$currPos;
+-        s1 = peg$parsesingleLineValueLink();
+-        if (s1 !== peg$FAILED) {
+-          s2 = peg$parseeol();
+-          if (s2 !== peg$FAILED) {
+-            peg$savedPos = s0;
+-            s0 = peg$f12(s1);
+-          } else {
+-            peg$currPos = s0;
+-            s0 = peg$FAILED;
+-          }
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
++    }
++    return s0;
++  }
++  function peg$parseelement() {
++    let s0, s1, s2, s3;
++    s0 = peg$currPos;
++    s1 = peg$parseanyLink();
++    if (s1 !== peg$FAILED) {
++      s2 = peg$parsePUSH_INDENTATION();
++      if (s2 !== peg$FAILED) {
++        s3 = peg$parselinks();
++        if (s3 !== peg$FAILED) {
++          peg$savedPos = s0;
++          s0 = peg$f7(s1, s3);
+         } else {
+           peg$currPos = s0;
+           s0 = peg$FAILED;
+         }
+-      }
+-      return s0;
+-    }
+-    function peg$parsemultiLineValueAndWhitespace() {
+-      let s0, s1, s2;
+-      s0 = peg$currPos;
+-      s1 = peg$parsereferenceOrLink();
+-      if (s1 !== peg$FAILED) {
+-        s2 = peg$parse_();
+-        peg$savedPos = s0;
+-        s0 = peg$f13(s1);
+       } else {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      return s0;
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function peg$parsemultiLineValues() {
+-      let s0, s1, s2, s3;
++    if (s0 === peg$FAILED) {
+       s0 = peg$currPos;
+-      s1 = peg$parse_();
+-      s2 = [];
+-      s3 = peg$parsemultiLineValueAndWhitespace();
+-      while (s3 !== peg$FAILED) {
+-        s2.push(s3);
+-        s3 = peg$parsemultiLineValueAndWhitespace();
++      s1 = peg$parseanyLink();
++      if (s1 !== peg$FAILED) {
++        peg$savedPos = s0;
++        s1 = peg$f8(s1);
+       }
++      s0 = s1;
++    }
++    return s0;
++  }
++  function peg$parsereferenceOrLink() {
++    let s0, s1;
++    s0 = peg$currPos;
++    s1 = peg$parsemultiLineAnyLink();
++    if (s1 !== peg$FAILED) {
+       peg$savedPos = s0;
+-      s0 = peg$f14(s2);
+-      return s0;
++      s1 = peg$f9(s1);
+     }
+-    function peg$parsesingleLineValueAndWhitespace() {
+-      let s0, s1, s2;
++    s0 = s1;
++    if (s0 === peg$FAILED) {
+       s0 = peg$currPos;
+-      s1 = peg$parse__();
+-      s2 = peg$parsereferenceOrLink();
++      s1 = peg$parsereference();
++      if (s1 !== peg$FAILED) {
++        peg$savedPos = s0;
++        s1 = peg$f10(s1);
++      }
++      s0 = s1;
++    }
++    return s0;
++  }
++  function peg$parseanyLink() {
++    let s0, s1, s2;
++    s0 = peg$currPos;
++    s1 = peg$parsemultiLineAnyLink();
++    if (s1 !== peg$FAILED) {
++      s2 = peg$parseeol();
+       if (s2 !== peg$FAILED) {
+         peg$savedPos = s0;
+-        s0 = peg$f15(s2);
++        s0 = peg$f11(s1);
+       } else {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      return s0;
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function peg$parsesingleLineValues() {
+-      let s0, s1, s2;
++    if (s0 === peg$FAILED) {
+       s0 = peg$currPos;
+-      s1 = [];
+-      s2 = peg$parsesingleLineValueAndWhitespace();
+-      if (s2 !== peg$FAILED) {
+-        while (s2 !== peg$FAILED) {
+-          s1.push(s2);
+-          s2 = peg$parsesingleLineValueAndWhitespace();
+-        }
+-      } else {
+-        s1 = peg$FAILED;
+-      }
++      s1 = peg$parseindentedIdLink();
+       if (s1 !== peg$FAILED) {
+         peg$savedPos = s0;
+-        s1 = peg$f16(s1);
++        s1 = peg$f12(s1);
+       }
+       s0 = s1;
+-      return s0;
++      if (s0 === peg$FAILED) {
++        s0 = peg$currPos;
++        s1 = peg$parsesingleLineAnyLink();
++        if (s1 !== peg$FAILED) {
++          peg$savedPos = s0;
++          s1 = peg$f13(s1);
++        }
++        s0 = s1;
++      }
+     }
+-    function peg$parsesingleLineLink() {
+-      let s0, s1, s2, s3, s4, s5;
+-      s0 = peg$currPos;
+-      s1 = peg$parse__();
+-      s2 = peg$parsereference();
++    return s0;
++  }
++  function peg$parsemultiLineAnyLink() {
++    let s0;
++    s0 = peg$parsemultiLineValueLink();
++    if (s0 === peg$FAILED) {
++      s0 = peg$parsemultiLineLink();
++    }
++    return s0;
++  }
++  function peg$parsesingleLineAnyLink() {
++    let s0, s1, s2;
++    s0 = peg$currPos;
++    s1 = peg$parsesingleLineLink();
++    if (s1 !== peg$FAILED) {
++      s2 = peg$parseeol();
+       if (s2 !== peg$FAILED) {
+-        s3 = peg$parse__();
+-        if (input.charCodeAt(peg$currPos) === 58) {
+-          s4 = peg$c0;
+-          peg$currPos++;
+-        } else {
+-          s4 = peg$FAILED;
+-          if (peg$silentFails === 0) {
+-            peg$fail(peg$e0);
+-          }
+-        }
+-        if (s4 !== peg$FAILED) {
+-          s5 = peg$parsesingleLineValues();
+-          if (s5 !== peg$FAILED) {
+-            peg$savedPos = s0;
+-            s0 = peg$f17(s2, s5);
+-          } else {
+-            peg$currPos = s0;
+-            s0 = peg$FAILED;
+-          }
+-        } else {
+-          peg$currPos = s0;
+-          s0 = peg$FAILED;
+-        }
++        peg$savedPos = s0;
++        s0 = peg$f14(s1);
+       } else {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      return s0;
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function peg$parsemultiLineLink() {
+-      let s0, s1, s2, s3, s4, s5, s6, s7, s8;
++    if (s0 === peg$FAILED) {
+       s0 = peg$currPos;
+-      if (input.charCodeAt(peg$currPos) === 40) {
+-        s1 = peg$c1;
+-        peg$currPos++;
+-      } else {
+-        s1 = peg$FAILED;
+-        if (peg$silentFails === 0) {
+-          peg$fail(peg$e1);
+-        }
+-      }
++      s1 = peg$parsesingleLineValueLink();
+       if (s1 !== peg$FAILED) {
+-        s2 = peg$parse_();
+-        s3 = peg$parsereference();
+-        if (s3 !== peg$FAILED) {
+-          s4 = peg$parse_();
+-          if (input.charCodeAt(peg$currPos) === 58) {
+-            s5 = peg$c0;
+-            peg$currPos++;
+-          } else {
+-            s5 = peg$FAILED;
+-            if (peg$silentFails === 0) {
+-              peg$fail(peg$e0);
+-            }
+-          }
+-          if (s5 !== peg$FAILED) {
+-            s6 = peg$parsemultiLineValues();
+-            s7 = peg$parse_();
+-            if (input.charCodeAt(peg$currPos) === 41) {
+-              s8 = peg$c2;
+-              peg$currPos++;
+-            } else {
+-              s8 = peg$FAILED;
+-              if (peg$silentFails === 0) {
+-                peg$fail(peg$e2);
+-              }
+-            }
+-            if (s8 !== peg$FAILED) {
+-              peg$savedPos = s0;
+-              s0 = peg$f18(s3, s6);
+-            } else {
+-              peg$currPos = s0;
+-              s0 = peg$FAILED;
+-            }
+-          } else {
+-            peg$currPos = s0;
+-            s0 = peg$FAILED;
+-          }
++        s2 = peg$parseeol();
++        if (s2 !== peg$FAILED) {
++          peg$savedPos = s0;
++          s0 = peg$f15(s1);
+         } else {
+           peg$currPos = s0;
+           s0 = peg$FAILED;
+@@ -727,46 +965,92 @@ var require_parser_generated = __commonJS((exports, module) => {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      return s0;
+     }
+-    function peg$parsesingleLineValueLink() {
+-      let s0, s1;
+-      s0 = peg$currPos;
+-      s1 = peg$parsesingleLineValues();
+-      if (s1 !== peg$FAILED) {
+-        peg$savedPos = s0;
+-        s1 = peg$f19(s1);
++    return s0;
++  }
++  function peg$parsemultiLineValueAndWhitespace() {
++    let s0, s1, s2;
++    s0 = peg$currPos;
++    s1 = peg$parsereferenceOrLink();
++    if (s1 !== peg$FAILED) {
++      s2 = peg$parse_();
++      peg$savedPos = s0;
++      s0 = peg$f16(s1);
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
++    }
++    return s0;
++  }
++  function peg$parsemultiLineValues() {
++    let s0, s1, s2, s3;
++    s0 = peg$currPos;
++    s1 = peg$parse_();
++    s2 = [];
++    s3 = peg$parsemultiLineValueAndWhitespace();
++    while (s3 !== peg$FAILED) {
++      s2.push(s3);
++      s3 = peg$parsemultiLineValueAndWhitespace();
++    }
++    peg$savedPos = s0;
++    s0 = peg$f17(s2);
++    return s0;
++  }
++  function peg$parsesingleLineValueAndWhitespace() {
++    let s0, s1, s2;
++    s0 = peg$currPos;
++    s1 = peg$parse__();
++    s2 = peg$parsereferenceOrLink();
++    if (s2 !== peg$FAILED) {
++      peg$savedPos = s0;
++      s0 = peg$f18(s2);
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
++    }
++    return s0;
++  }
++  function peg$parsesingleLineValues() {
++    let s0, s1, s2;
++    s0 = peg$currPos;
++    s1 = [];
++    s2 = peg$parsesingleLineValueAndWhitespace();
++    if (s2 !== peg$FAILED) {
++      while (s2 !== peg$FAILED) {
++        s1.push(s2);
++        s2 = peg$parsesingleLineValueAndWhitespace();
+       }
+-      s0 = s1;
+-      return s0;
++    } else {
++      s1 = peg$FAILED;
+     }
+-    function peg$parsemultiLineValueLink() {
+-      let s0, s1, s2, s3, s4;
+-      s0 = peg$currPos;
+-      if (input.charCodeAt(peg$currPos) === 40) {
+-        s1 = peg$c1;
++    if (s1 !== peg$FAILED) {
++      peg$savedPos = s0;
++      s1 = peg$f19(s1);
++    }
++    s0 = s1;
++    return s0;
++  }
++  function peg$parsesingleLineLink() {
++    let s0, s1, s2, s3, s4, s5;
++    s0 = peg$currPos;
++    s1 = peg$parse__();
++    s2 = peg$parsereference();
++    if (s2 !== peg$FAILED) {
++      s3 = peg$parse__();
++      if (input.charCodeAt(peg$currPos) === 58) {
++        s4 = peg$c0;
+         peg$currPos++;
+       } else {
+-        s1 = peg$FAILED;
++        s4 = peg$FAILED;
+         if (peg$silentFails === 0) {
+-          peg$fail(peg$e1);
++          peg$fail(peg$e2);
+         }
+       }
+-      if (s1 !== peg$FAILED) {
+-        s2 = peg$parsemultiLineValues();
+-        s3 = peg$parse_();
+-        if (input.charCodeAt(peg$currPos) === 41) {
+-          s4 = peg$c2;
+-          peg$currPos++;
+-        } else {
+-          s4 = peg$FAILED;
+-          if (peg$silentFails === 0) {
+-            peg$fail(peg$e2);
+-          }
+-        }
+-        if (s4 !== peg$FAILED) {
++      if (s4 !== peg$FAILED) {
++        s5 = peg$parsesingleLineValues();
++        if (s5 !== peg$FAILED) {
+           peg$savedPos = s0;
+-          s0 = peg$f20(s2);
++          s0 = peg$f20(s2, s5);
+         } else {
+           peg$currPos = s0;
+           s0 = peg$FAILED;
+@@ -775,91 +1059,53 @@ var require_parser_generated = __commonJS((exports, module) => {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      return s0;
+-    }
+-    function peg$parsereference() {
+-      let s0;
+-      s0 = peg$parsedoubleQuotedReference();
+-      if (s0 === peg$FAILED) {
+-        s0 = peg$parsesingleQuotedReference();
+-        if (s0 === peg$FAILED) {
+-          s0 = peg$parsesimpleReference();
+-        }
+-      }
+-      return s0;
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function peg$parsesimpleReference() {
+-      let s0, s1, s2;
+-      s0 = peg$currPos;
+-      s1 = [];
+-      s2 = peg$parsereferenceSymbol();
+-      if (s2 !== peg$FAILED) {
+-        while (s2 !== peg$FAILED) {
+-          s1.push(s2);
+-          s2 = peg$parsereferenceSymbol();
+-        }
+-      } else {
+-        s1 = peg$FAILED;
+-      }
+-      if (s1 !== peg$FAILED) {
+-        peg$savedPos = s0;
+-        s1 = peg$f21(s1);
++    return s0;
++  }
++  function peg$parsemultiLineLink() {
++    let s0, s1, s2, s3, s4, s5, s6, s7, s8;
++    s0 = peg$currPos;
++    if (input.charCodeAt(peg$currPos) === 40) {
++      s1 = peg$c1;
++      peg$currPos++;
++    } else {
++      s1 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e3);
+       }
+-      s0 = s1;
+-      return s0;
+     }
+-    function peg$parsedoubleQuotedReference() {
+-      let s0, s1, s2, s3;
+-      s0 = peg$currPos;
+-      if (input.charCodeAt(peg$currPos) === 34) {
+-        s1 = peg$c3;
+-        peg$currPos++;
+-      } else {
+-        s1 = peg$FAILED;
+-        if (peg$silentFails === 0) {
+-          peg$fail(peg$e3);
+-        }
+-      }
+-      if (s1 !== peg$FAILED) {
+-        s2 = [];
+-        s3 = input.charAt(peg$currPos);
+-        if (peg$r0.test(s3)) {
++    if (s1 !== peg$FAILED) {
++      s2 = peg$parse_();
++      s3 = peg$parsereference();
++      if (s3 !== peg$FAILED) {
++        s4 = peg$parse_();
++        if (input.charCodeAt(peg$currPos) === 58) {
++          s5 = peg$c0;
+           peg$currPos++;
+         } else {
+-          s3 = peg$FAILED;
++          s5 = peg$FAILED;
+           if (peg$silentFails === 0) {
+-            peg$fail(peg$e4);
+-          }
+-        }
+-        if (s3 !== peg$FAILED) {
+-          while (s3 !== peg$FAILED) {
+-            s2.push(s3);
+-            s3 = input.charAt(peg$currPos);
+-            if (peg$r0.test(s3)) {
+-              peg$currPos++;
+-            } else {
+-              s3 = peg$FAILED;
+-              if (peg$silentFails === 0) {
+-                peg$fail(peg$e4);
+-              }
+-            }
++            peg$fail(peg$e2);
+           }
+-        } else {
+-          s2 = peg$FAILED;
+         }
+-        if (s2 !== peg$FAILED) {
+-          if (input.charCodeAt(peg$currPos) === 34) {
+-            s3 = peg$c3;
++        if (s5 !== peg$FAILED) {
++          s6 = peg$parsemultiLineValues();
++          s7 = peg$parse_();
++          if (input.charCodeAt(peg$currPos) === 41) {
++            s8 = peg$c2;
+             peg$currPos++;
+           } else {
+-            s3 = peg$FAILED;
++            s8 = peg$FAILED;
+             if (peg$silentFails === 0) {
+-              peg$fail(peg$e3);
++              peg$fail(peg$e4);
+             }
+           }
+-          if (s3 !== peg$FAILED) {
++          if (s8 !== peg$FAILED) {
+             peg$savedPos = s0;
+-            s0 = peg$f22(s2);
++            s0 = peg$f21(s3, s6);
+           } else {
+             peg$currPos = s0;
+             s0 = peg$FAILED;
+@@ -872,163 +1118,207 @@ var require_parser_generated = __commonJS((exports, module) => {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      return s0;
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function peg$parsesingleQuotedReference() {
+-      let s0, s1, s2, s3;
+-      s0 = peg$currPos;
+-      if (input.charCodeAt(peg$currPos) === 39) {
+-        s1 = peg$c4;
++    return s0;
++  }
++  function peg$parsesingleLineValueLink() {
++    let s0, s1;
++    s0 = peg$currPos;
++    s1 = peg$parsesingleLineValues();
++    if (s1 !== peg$FAILED) {
++      peg$savedPos = s0;
++      s1 = peg$f22(s1);
++    }
++    s0 = s1;
++    return s0;
++  }
++  function peg$parsemultiLineValueLink() {
++    let s0, s1, s2, s3, s4;
++    s0 = peg$currPos;
++    if (input.charCodeAt(peg$currPos) === 40) {
++      s1 = peg$c1;
++      peg$currPos++;
++    } else {
++      s1 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e3);
++      }
++    }
++    if (s1 !== peg$FAILED) {
++      s2 = peg$parsemultiLineValues();
++      s3 = peg$parse_();
++      if (input.charCodeAt(peg$currPos) === 41) {
++        s4 = peg$c2;
+         peg$currPos++;
+       } else {
+-        s1 = peg$FAILED;
++        s4 = peg$FAILED;
+         if (peg$silentFails === 0) {
+-          peg$fail(peg$e5);
++          peg$fail(peg$e4);
+         }
+       }
+-      if (s1 !== peg$FAILED) {
+-        s2 = [];
+-        s3 = input.charAt(peg$currPos);
+-        if (peg$r1.test(s3)) {
+-          peg$currPos++;
+-        } else {
+-          s3 = peg$FAILED;
+-          if (peg$silentFails === 0) {
+-            peg$fail(peg$e6);
+-          }
+-        }
+-        if (s3 !== peg$FAILED) {
+-          while (s3 !== peg$FAILED) {
+-            s2.push(s3);
+-            s3 = input.charAt(peg$currPos);
+-            if (peg$r1.test(s3)) {
+-              peg$currPos++;
+-            } else {
+-              s3 = peg$FAILED;
+-              if (peg$silentFails === 0) {
+-                peg$fail(peg$e6);
+-              }
+-            }
+-          }
+-        } else {
+-          s2 = peg$FAILED;
+-        }
+-        if (s2 !== peg$FAILED) {
+-          if (input.charCodeAt(peg$currPos) === 39) {
+-            s3 = peg$c4;
+-            peg$currPos++;
+-          } else {
+-            s3 = peg$FAILED;
+-            if (peg$silentFails === 0) {
+-              peg$fail(peg$e5);
+-            }
+-          }
+-          if (s3 !== peg$FAILED) {
+-            peg$savedPos = s0;
+-            s0 = peg$f23(s2);
+-          } else {
+-            peg$currPos = s0;
+-            s0 = peg$FAILED;
+-          }
+-        } else {
+-          peg$currPos = s0;
+-          s0 = peg$FAILED;
+-        }
++      if (s4 !== peg$FAILED) {
++        peg$savedPos = s0;
++        s0 = peg$f23(s2);
+       } else {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      return s0;
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function peg$parsePUSH_INDENTATION() {
+-      let s0, s1, s2;
+-      s0 = peg$currPos;
+-      s1 = [];
+-      if (input.charCodeAt(peg$currPos) === 32) {
+-        s2 = peg$c5;
++    return s0;
++  }
++  function peg$parseindentedIdLink() {
++    let s0, s1, s2, s3, s4;
++    s0 = peg$currPos;
++    s1 = peg$parsereference();
++    if (s1 !== peg$FAILED) {
++      s2 = peg$parse__();
++      if (input.charCodeAt(peg$currPos) === 58) {
++        s3 = peg$c0;
+         peg$currPos++;
+       } else {
+-        s2 = peg$FAILED;
++        s3 = peg$FAILED;
+         if (peg$silentFails === 0) {
+-          peg$fail(peg$e7);
++          peg$fail(peg$e2);
+         }
+       }
+-      while (s2 !== peg$FAILED) {
+-        s1.push(s2);
+-        if (input.charCodeAt(peg$currPos) === 32) {
+-          s2 = peg$c5;
+-          peg$currPos++;
++      if (s3 !== peg$FAILED) {
++        s4 = peg$parseeol();
++        if (s4 !== peg$FAILED) {
++          peg$savedPos = s0;
++          s0 = peg$f24(s1);
+         } else {
+-          s2 = peg$FAILED;
+-          if (peg$silentFails === 0) {
+-            peg$fail(peg$e7);
+-          }
++          peg$currPos = s0;
++          s0 = peg$FAILED;
+         }
+-      }
+-      peg$savedPos = peg$currPos;
+-      s2 = peg$f24(s1);
+-      if (s2) {
+-        s2 = undefined;
+-      } else {
+-        s2 = peg$FAILED;
+-      }
+-      if (s2 !== peg$FAILED) {
+-        peg$savedPos = s0;
+-        s0 = peg$f25(s1);
+       } else {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      return s0;
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function peg$parseCHECK_INDENTATION() {
+-      let s0, s1, s2;
+-      s0 = peg$currPos;
+-      s1 = [];
+-      if (input.charCodeAt(peg$currPos) === 32) {
+-        s2 = peg$c5;
++    return s0;
++  }
++  function peg$parsereference() {
++    let s0;
++    s0 = peg$parsedoubleQuotedReference();
++    if (s0 === peg$FAILED) {
++      s0 = peg$parsesingleQuotedReference();
++      if (s0 === peg$FAILED) {
++        s0 = peg$parsesimpleReference();
++      }
++    }
++    return s0;
++  }
++  function peg$parsesimpleReference() {
++    let s0, s1, s2;
++    s0 = peg$currPos;
++    s1 = [];
++    s2 = peg$parsereferenceSymbol();
++    if (s2 !== peg$FAILED) {
++      while (s2 !== peg$FAILED) {
++        s1.push(s2);
++        s2 = peg$parsereferenceSymbol();
++      }
++    } else {
++      s1 = peg$FAILED;
++    }
++    if (s1 !== peg$FAILED) {
++      peg$savedPos = s0;
++      s1 = peg$f25(s1);
++    }
++    s0 = s1;
++    return s0;
++  }
++  function peg$parsedoubleQuotedReference() {
++    let s0, s1, s2, s3;
++    s0 = peg$currPos;
++    if (input.charCodeAt(peg$currPos) === 34) {
++      s1 = peg$c3;
++      peg$currPos++;
++    } else {
++      s1 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e5);
++      }
++    }
++    if (s1 !== peg$FAILED) {
++      s2 = [];
++      s3 = input.charAt(peg$currPos);
++      if (peg$r2.test(s3)) {
+         peg$currPos++;
++      } else {
++        s3 = peg$FAILED;
++        if (peg$silentFails === 0) {
++          peg$fail(peg$e6);
++        }
++      }
++      if (s3 !== peg$FAILED) {
++        while (s3 !== peg$FAILED) {
++          s2.push(s3);
++          s3 = input.charAt(peg$currPos);
++          if (peg$r2.test(s3)) {
++            peg$currPos++;
++          } else {
++            s3 = peg$FAILED;
++            if (peg$silentFails === 0) {
++              peg$fail(peg$e6);
++            }
++          }
++        }
+       } else {
+         s2 = peg$FAILED;
+-        if (peg$silentFails === 0) {
+-          peg$fail(peg$e7);
+-        }
+       }
+-      while (s2 !== peg$FAILED) {
+-        s1.push(s2);
+-        if (input.charCodeAt(peg$currPos) === 32) {
+-          s2 = peg$c5;
++      if (s2 !== peg$FAILED) {
++        if (input.charCodeAt(peg$currPos) === 34) {
++          s3 = peg$c3;
+           peg$currPos++;
+         } else {
+-          s2 = peg$FAILED;
++          s3 = peg$FAILED;
+           if (peg$silentFails === 0) {
+-            peg$fail(peg$e7);
++            peg$fail(peg$e5);
+           }
+         }
+-      }
+-      peg$savedPos = peg$currPos;
+-      s2 = peg$f26(s1);
+-      if (s2) {
+-        s2 = undefined;
+-      } else {
+-        s2 = peg$FAILED;
+-      }
+-      if (s2 !== peg$FAILED) {
+-        s1 = [s1, s2];
+-        s0 = s1;
++        if (s3 !== peg$FAILED) {
++          peg$savedPos = s0;
++          s0 = peg$f26(s2);
++        } else {
++          peg$currPos = s0;
++          s0 = peg$FAILED;
++        }
+       } else {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      return s0;
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function peg$parseeol() {
+-      let s0, s1, s2, s3;
+-      s0 = peg$currPos;
+-      s1 = peg$parse__();
++    return s0;
++  }
++  function peg$parsesingleQuotedReference() {
++    let s0, s1, s2, s3;
++    s0 = peg$currPos;
++    if (input.charCodeAt(peg$currPos) === 39) {
++      s1 = peg$c4;
++      peg$currPos++;
++    } else {
++      s1 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e7);
++      }
++    }
++    if (s1 !== peg$FAILED) {
+       s2 = [];
+       s3 = input.charAt(peg$currPos);
+-      if (peg$r2.test(s3)) {
++      if (peg$r3.test(s3)) {
+         peg$currPos++;
+       } else {
+         s3 = peg$FAILED;
+@@ -1040,7 +1330,7 @@ var require_parser_generated = __commonJS((exports, module) => {
+         while (s3 !== peg$FAILED) {
+           s2.push(s3);
+           s3 = input.charAt(peg$currPos);
+-          if (peg$r2.test(s3)) {
++          if (peg$r3.test(s3)) {
+             peg$currPos++;
+           } else {
+             s3 = peg$FAILED;
+@@ -1052,318 +1342,474 @@ var require_parser_generated = __commonJS((exports, module) => {
+       } else {
+         s2 = peg$FAILED;
+       }
+-      if (s2 === peg$FAILED) {
+-        s2 = peg$parseeof();
+-      }
+       if (s2 !== peg$FAILED) {
+-        s1 = [s1, s2];
+-        s0 = s1;
++        if (input.charCodeAt(peg$currPos) === 39) {
++          s3 = peg$c4;
++          peg$currPos++;
++        } else {
++          s3 = peg$FAILED;
++          if (peg$silentFails === 0) {
++            peg$fail(peg$e7);
++          }
++        }
++        if (s3 !== peg$FAILED) {
++          peg$savedPos = s0;
++          s0 = peg$f27(s2);
++        } else {
++          peg$currPos = s0;
++          s0 = peg$FAILED;
++        }
+       } else {
+         peg$currPos = s0;
+         s0 = peg$FAILED;
+       }
+-      return s0;
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function peg$parseeof() {
+-      let s0, s1;
+-      s0 = peg$currPos;
+-      peg$silentFails++;
+-      if (input.length > peg$currPos) {
+-        s1 = input.charAt(peg$currPos);
++    return s0;
++  }
++  function peg$parseSET_BASE_INDENTATION() {
++    let s0, s1, s2;
++    s0 = peg$currPos;
++    s1 = [];
++    if (input.charCodeAt(peg$currPos) === 32) {
++      s2 = peg$c5;
++      peg$currPos++;
++    } else {
++      s2 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e9);
++      }
++    }
++    while (s2 !== peg$FAILED) {
++      s1.push(s2);
++      if (input.charCodeAt(peg$currPos) === 32) {
++        s2 = peg$c5;
+         peg$currPos++;
+       } else {
+-        s1 = peg$FAILED;
++        s2 = peg$FAILED;
+         if (peg$silentFails === 0) {
+           peg$fail(peg$e9);
+         }
+       }
+-      peg$silentFails--;
+-      if (s1 === peg$FAILED) {
+-        s0 = undefined;
+-      } else {
+-        peg$currPos = s0;
+-        s0 = peg$FAILED;
++    }
++    peg$savedPos = s0;
++    s1 = peg$f28(s1);
++    s0 = s1;
++    return s0;
++  }
++  function peg$parsePUSH_INDENTATION() {
++    let s0, s1, s2;
++    s0 = peg$currPos;
++    s1 = [];
++    if (input.charCodeAt(peg$currPos) === 32) {
++      s2 = peg$c5;
++      peg$currPos++;
++    } else {
++      s2 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e9);
+       }
+-      return s0;
+     }
+-    function peg$parse__() {
+-      let s0, s1;
+-      s0 = [];
+-      s1 = input.charAt(peg$currPos);
+-      if (peg$r3.test(s1)) {
++    while (s2 !== peg$FAILED) {
++      s1.push(s2);
++      if (input.charCodeAt(peg$currPos) === 32) {
++        s2 = peg$c5;
+         peg$currPos++;
+       } else {
+-        s1 = peg$FAILED;
++        s2 = peg$FAILED;
+         if (peg$silentFails === 0) {
+-          peg$fail(peg$e10);
+-        }
+-      }
+-      while (s1 !== peg$FAILED) {
+-        s0.push(s1);
+-        s1 = input.charAt(peg$currPos);
+-        if (peg$r3.test(s1)) {
+-          peg$currPos++;
+-        } else {
+-          s1 = peg$FAILED;
+-          if (peg$silentFails === 0) {
+-            peg$fail(peg$e10);
+-          }
++          peg$fail(peg$e9);
+         }
+       }
+-      return s0;
+     }
+-    function peg$parse_() {
+-      let s0, s1;
+-      s0 = [];
+-      s1 = peg$parsewhiteSpaceSymbol();
+-      while (s1 !== peg$FAILED) {
+-        s0.push(s1);
+-        s1 = peg$parsewhiteSpaceSymbol();
+-      }
+-      return s0;
++    peg$savedPos = peg$currPos;
++    s2 = peg$f29(s1);
++    if (s2) {
++      s2 = undefined;
++    } else {
++      s2 = peg$FAILED;
+     }
+-    function peg$parsewhiteSpaceSymbol() {
+-      let s0;
+-      s0 = input.charAt(peg$currPos);
+-      if (peg$r4.test(s0)) {
+-        peg$currPos++;
+-      } else {
+-        s0 = peg$FAILED;
+-        if (peg$silentFails === 0) {
+-          peg$fail(peg$e11);
+-        }
++    if (s2 !== peg$FAILED) {
++      peg$savedPos = s0;
++      s0 = peg$f30(s1);
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
++    }
++    return s0;
++  }
++  function peg$parseCHECK_INDENTATION() {
++    let s0, s1, s2;
++    s0 = peg$currPos;
++    s1 = [];
++    if (input.charCodeAt(peg$currPos) === 32) {
++      s2 = peg$c5;
++      peg$currPos++;
++    } else {
++      s2 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e9);
+       }
+-      return s0;
+     }
+-    function peg$parsereferenceSymbol() {
+-      let s0;
+-      s0 = input.charAt(peg$currPos);
+-      if (peg$r5.test(s0)) {
++    while (s2 !== peg$FAILED) {
++      s1.push(s2);
++      if (input.charCodeAt(peg$currPos) === 32) {
++        s2 = peg$c5;
+         peg$currPos++;
+       } else {
+-        s0 = peg$FAILED;
++        s2 = peg$FAILED;
+         if (peg$silentFails === 0) {
+-          peg$fail(peg$e12);
++          peg$fail(peg$e9);
+         }
+       }
+-      return s0;
+     }
+-    let indentationStack = [0];
+-    function pushIndentation(spaces) {
+-      indentationStack.push(spaces.length);
+-    }
+-    function popIndentation() {
+-      if (indentationStack.length > 1) {
+-        indentationStack.pop();
+-      }
++    peg$savedPos = peg$currPos;
++    s2 = peg$f31(s1);
++    if (s2) {
++      s2 = undefined;
++    } else {
++      s2 = peg$FAILED;
+     }
+-    function checkIndentation(spaces) {
+-      return spaces.length >= indentationStack[indentationStack.length - 1];
++    if (s2 !== peg$FAILED) {
++      s1 = [s1, s2];
++      s0 = s1;
++    } else {
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
+-    function getCurrentIndentation() {
+-      return indentationStack[indentationStack.length - 1];
++    return s0;
++  }
++  function peg$parseeol() {
++    let s0, s1, s2, s3;
++    s0 = peg$currPos;
++    s1 = peg$parse__();
++    s2 = [];
++    s3 = input.charAt(peg$currPos);
++    if (peg$r1.test(s3)) {
++      peg$currPos++;
++    } else {
++      s3 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e1);
++      }
+     }
+-    peg$result = peg$startRuleFunction();
+-    const peg$success = peg$result !== peg$FAILED && peg$currPos === input.length;
+-    function peg$throw() {
+-      if (peg$result !== peg$FAILED && peg$currPos < input.length) {
+-        peg$fail(peg$endExpectation());
++    if (s3 !== peg$FAILED) {
++      while (s3 !== peg$FAILED) {
++        s2.push(s3);
++        s3 = input.charAt(peg$currPos);
++        if (peg$r1.test(s3)) {
++          peg$currPos++;
++        } else {
++          s3 = peg$FAILED;
++          if (peg$silentFails === 0) {
++            peg$fail(peg$e1);
++          }
++        }
+       }
+-      throw peg$buildStructuredError(peg$maxFailExpected, peg$maxFailPos < input.length ? peg$getUnicode(peg$maxFailPos) : null, peg$maxFailPos < input.length ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1) : peg$computeLocation(peg$maxFailPos, peg$maxFailPos));
++    } else {
++      s2 = peg$FAILED;
+     }
+-    if (options.peg$library) {
+-      return {
+-        peg$result,
+-        peg$currPos,
+-        peg$FAILED,
+-        peg$maxFailExpected,
+-        peg$maxFailPos,
+-        peg$success,
+-        peg$throw: peg$success ? undefined : peg$throw
+-      };
++    if (s2 === peg$FAILED) {
++      s2 = peg$parseeof();
+     }
+-    if (peg$success) {
+-      return peg$result;
++    if (s2 !== peg$FAILED) {
++      s1 = [s1, s2];
++      s0 = s1;
+     } else {
+-      peg$throw();
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
++    return s0;
+   }
+-  module.exports = {
+-    StartRules: ["document"],
+-    SyntaxError: peg$SyntaxError,
+-    parse: peg$parse
+-  };
+-});
+-
+-// src/Link.js
+-class Link {
+-  constructor(id = null, values = null) {
+-    this.id = id;
+-    this.values = values || [];
+-  }
+-  toString() {
+-    return this.format(false);
+-  }
+-  getValuesString() {
+-    return !this.values || this.values.length === 0 ? "" : this.values.map((v) => Link.getValueString(v)).join(" ");
+-  }
+-  simplify() {
+-    if (!this.values || this.values.length === 0) {
+-      return this;
+-    } else if (this.values.length === 1) {
+-      return this.values[0];
++  function peg$parseeof() {
++    let s0, s1;
++    s0 = peg$currPos;
++    peg$silentFails++;
++    if (input.length > peg$currPos) {
++      s1 = input.charAt(peg$currPos);
++      peg$currPos++;
+     } else {
+-      const newValues = this.values.map((v) => v.simplify());
+-      return new Link(this.id, newValues);
+-    }
+-  }
+-  combine(other) {
+-    return new Link(null, [this, other]);
+-  }
+-  static getValueString(value) {
+-    return value.toLinkOrIdString();
+-  }
+-  static escapeReference(reference) {
+-    if (!reference || reference.trim() === "") {
+-      return "";
++      s1 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e10);
++      }
+     }
+-    const needsSingleQuotes = reference.includes(":") || reference.includes("(") || reference.includes(")") || reference.includes(" ") || reference.includes("\t") || reference.includes(`
+-`) || reference.includes("\r") || reference.includes('"');
+-    if (needsSingleQuotes) {
+-      return `'${reference}'`;
+-    } else if (reference.includes("'")) {
+-      return `"${reference}"`;
++    peg$silentFails--;
++    if (s1 === peg$FAILED) {
++      s0 = undefined;
+     } else {
+-      return reference;
++      peg$currPos = s0;
++      s0 = peg$FAILED;
+     }
++    return s0;
+   }
+-  toLinkOrIdString() {
+-    if (!this.values || this.values.length === 0) {
+-      return this.id === null ? "" : Link.escapeReference(this.id);
++  function peg$parse__() {
++    let s0, s1;
++    s0 = [];
++    s1 = input.charAt(peg$currPos);
++    if (peg$r0.test(s1)) {
++      peg$currPos++;
++    } else {
++      s1 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e0);
++      }
+     }
+-    return this.toString();
+-  }
+-  equals(other) {
+-    if (!(other instanceof Link))
+-      return false;
+-    if (this.id !== other.id)
+-      return false;
+-    if (this.values.length !== other.values.length)
+-      return false;
+-    for (let i = 0;i < this.values.length; i++) {
+-      if (!this.values[i].equals(other.values[i])) {
+-        return false;
++    while (s1 !== peg$FAILED) {
++      s0.push(s1);
++      s1 = input.charAt(peg$currPos);
++      if (peg$r0.test(s1)) {
++        peg$currPos++;
++      } else {
++        s1 = peg$FAILED;
++        if (peg$silentFails === 0) {
++          peg$fail(peg$e0);
++        }
+       }
+     }
+-    return true;
++    return s0;
+   }
+-  format(lessParentheses = false) {
+-    if (this.id === null && (!this.values || this.values.length === 0)) {
+-      return lessParentheses ? "" : "()";
++  function peg$parse_() {
++    let s0, s1;
++    s0 = [];
++    s1 = peg$parsewhiteSpaceSymbol();
++    while (s1 !== peg$FAILED) {
++      s0.push(s1);
++      s1 = peg$parsewhiteSpaceSymbol();
+     }
+-    if (!this.values || this.values.length === 0) {
+-      const escapedId = Link.escapeReference(this.id);
+-      return lessParentheses && !this.needsParentheses(this.id) ? escapedId : `(${escapedId})`;
++    return s0;
++  }
++  function peg$parsewhiteSpaceSymbol() {
++    let s0;
++    s0 = input.charAt(peg$currPos);
++    if (peg$r4.test(s0)) {
++      peg$currPos++;
++    } else {
++      s0 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e11);
++      }
+     }
+-    const valuesStr = this.values.map((v) => this.formatValue(v)).join(" ");
+-    if (this.id === null) {
+-      return lessParentheses ? valuesStr : `(${valuesStr})`;
++    return s0;
++  }
++  function peg$parsereferenceSymbol() {
++    let s0;
++    s0 = input.charAt(peg$currPos);
++    if (peg$r5.test(s0)) {
++      peg$currPos++;
++    } else {
++      s0 = peg$FAILED;
++      if (peg$silentFails === 0) {
++        peg$fail(peg$e12);
++      }
+     }
+-    const idStr = Link.escapeReference(this.id);
+-    const withColon = `${idStr}: ${valuesStr}`;
+-    return lessParentheses && !this.needsParentheses(this.id) ? withColon : `(${withColon})`;
++    return s0;
+   }
+-  formatValue(value) {
+-    if (!value.format) {
+-      return Link.escapeReference(value.id || "");
++  let indentationStack = [0];
++  let baseIndentation = null;
++  function setBaseIndentation(spaces) {
++    if (baseIndentation === null) {
++      baseIndentation = spaces.length;
+     }
+-    if (!value.values || value.values.length === 0) {
+-      return Link.escapeReference(value.id);
++  }
++  function normalizeIndentation(spaces) {
++    if (baseIndentation === null) {
++      return spaces.length;
+     }
+-    return value.format(false);
++    return Math.max(0, spaces.length - baseIndentation);
+   }
+-  needsParentheses(str) {
+-    return str && (str.includes(" ") || str.includes(":") || str.includes("(") || str.includes(")"));
++  function pushIndentation(spaces) {
++    const normalized = normalizeIndentation(spaces);
++    indentationStack.push(normalized);
+   }
+-}
+-function formatLinks(links, lessParentheses = false) {
+-  if (!links || links.length === 0)
+-    return "";
+-  return links.map((link) => link.format(lessParentheses)).join(`
+-`);
+-}
+-// src/LinksGroup.js
+-class LinksGroup {
+-  constructor(element, children = []) {
+-    this.element = element;
+-    this.children = children || [];
++  function popIndentation() {
++    if (indentationStack.length > 1) {
++      indentationStack.pop();
++    }
+   }
+-  toList() {
+-    const result = [];
+-    this.collectLinks(result);
+-    return result;
++  function checkIndentation(spaces) {
++    const normalized = normalizeIndentation(spaces);
++    return normalized >= indentationStack[indentationStack.length - 1];
+   }
+-  collectLinks(result) {
+-    if (this.element) {
+-      result.push(this.element);
+-    }
+-    for (const child of this.children) {
+-      if (child instanceof LinksGroup) {
+-        child.collectLinks(result);
+-      } else if (child) {
+-        result.push(child);
+-      }
+-    }
++  function getCurrentIndentation() {
++    return indentationStack[indentationStack.length - 1];
+   }
+-  toString() {
+-    let str = this.element ? this.element.toString() : "";
+-    if (this.children && this.children.length > 0) {
+-      const childrenStr = this.children.map((c) => c.toString()).join(`
+-`);
+-      str += `
+-` + childrenStr;
++  peg$result = peg$startRuleFunction();
++  const peg$success = peg$result !== peg$FAILED && peg$currPos === input.length;
++  function peg$throw() {
++    if (peg$result !== peg$FAILED && peg$currPos < input.length) {
++      peg$fail(peg$endExpectation());
+     }
+-    return str;
++    throw peg$buildStructuredError(peg$maxFailExpected, peg$maxFailPos < input.length ? peg$getUnicode(peg$maxFailPos) : null, peg$maxFailPos < input.length ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1) : peg$computeLocation(peg$maxFailPos, peg$maxFailPos));
++  }
++  if (options.peg$library) {
++    return {
++      peg$result,
++      peg$currPos,
++      peg$FAILED,
++      peg$maxFailExpected,
++      peg$maxFailPos,
++      peg$success,
++      peg$throw: peg$success ? undefined : peg$throw
++    };
++  }
++  if (peg$success) {
++    return peg$result;
++  } else {
++    peg$throw();
+   }
+ }
++
+ // src/Parser.js
+-var parserModule = __toESM(require_parser_generated(), 1);
++var DEFAULT_PUNCTUATION_SYMBOLS = [",", ".", ";", "!", "?"];
++var DEFAULT_MATH_SYMBOLS = ["+", "-", "*", "/", "=", "<", ">", "%", "^"];
+ 
+ class Parser {
+-  constructor() {}
++  constructor(options = {}) {
++    this.maxInputSize = options.maxInputSize || 10 * 1024 * 1024;
++    this.maxDepth = options.maxDepth || 1000;
++    this.tokenizeSymbols = options.tokenizeSymbols !== false;
++    this.punctuationSymbols = options.punctuationSymbols || DEFAULT_PUNCTUATION_SYMBOLS;
++    this.mathSymbols = options.mathSymbols || DEFAULT_MATH_SYMBOLS;
++  }
+   parse(input) {
++    if (typeof input !== "string") {
++      throw new TypeError("Input must be a string");
++    }
++    if (input.length > this.maxInputSize) {
++      throw new Error(`Input size exceeds maximum allowed size of ${this.maxInputSize} bytes`);
++    }
+     try {
+-      const rawResult = parserModule.parse(input);
++      const processedInput = this.tokenizeSymbols ? this.tokenize(input) : input;
++      const rawResult = peg$parse(processedInput);
+       return this.transformResult(rawResult);
+     } catch (error) {
+-      throw new Error(`Parse error: ${error.message}`);
++      const parseError = new Error(`Parse error: ${error.message}`);
++      parseError.cause = error;
++      parseError.location = error.location;
++      throw parseError;
++    }
++  }
++  isLetter(char) {
++    if (!char)
++      return false;
++    return /[a-zA-Z]/.test(char);
++  }
++  isDigit(char) {
++    if (!char)
++      return false;
++    return /[0-9]/.test(char);
++  }
++  tokenize(input) {
++    const punctuationSet = new Set(this.punctuationSymbols);
++    const mathSet = new Set(this.mathSymbols);
++    let result = "";
++    let inSingleQuote = false;
++    let inDoubleQuote = false;
++    let i = 0;
++    while (i < input.length) {
++      const char = input[i];
++      const prevChar = i > 0 ? input[i - 1] : "";
++      const nextChar = i + 1 < input.length ? input[i + 1] : "";
++      if (char === '"' && !inSingleQuote) {
++        inDoubleQuote = !inDoubleQuote;
++        result += char;
++        i++;
++        continue;
++      }
++      if (char === "'" && !inDoubleQuote) {
++        inSingleQuote = !inSingleQuote;
++        result += char;
++        i++;
++        continue;
++      }
++      if (inSingleQuote || inDoubleQuote) {
++        result += char;
++        i++;
++        continue;
++      }
++      if (punctuationSet.has(char)) {
++        const prevIsAlphanumeric = /[a-zA-Z0-9]/.test(prevChar);
++        if (prevIsAlphanumeric) {
++          if (result.length > 0 && !result.endsWith(" ") && !result.endsWith("\t") && !result.endsWith(`
++`)) {
++            result += " ";
++          }
++          result += char;
++          if (nextChar && /[a-zA-Z0-9]/.test(nextChar)) {
++            result += " ";
++          }
++        } else {
++          result += char;
++        }
++        i++;
++        continue;
++      }
++      if (mathSet.has(char)) {
++        const prevIsDigit = this.isDigit(prevChar);
++        const nextIsDigit = this.isDigit(nextChar);
++        if (prevIsDigit && nextIsDigit) {
++          if (result.length > 0 && !result.endsWith(" ") && !result.endsWith("\t") && !result.endsWith(`
++`)) {
++            result += " ";
++          }
++          result += char;
++          result += " ";
++        } else {
++          result += char;
++        }
++        i++;
++        continue;
++      }
++      result += char;
++      i++;
+     }
++    return result;
+   }
+   transformResult(rawResult) {
+     const links = [];
+     const items = Array.isArray(rawResult) ? rawResult : [rawResult];
+     for (const item of items) {
+-      if (item) {
++      if (item !== null && item !== undefined) {
+         this.collectLinks(item, [], links);
+       }
+     }
+     return links;
+   }
+   collectLinks(item, parentPath, result) {
+-    if (!item)
++    if (item === null || item === undefined)
+       return;
+     if (item.children && item.children.length > 0) {
+-      if (item.id !== undefined) {
++      if (item.id && (!item.values || item.values.length === 0)) {
++        const childValues = item.children.map((child) => {
++          if (child.values && child.values.length === 1) {
++            return this.transformLink(child.values[0]);
++          }
++          return this.transformLink(child);
++        });
++        const linkWithChildren = {
++          id: item.id,
++          values: childValues
++        };
++        const currentLink = this.transformLink(linkWithChildren);
+         if (parentPath.length === 0) {
+-          result.push(new Link(item.id));
++          result.push(currentLink);
+         } else {
+-          result.push(this.combinePathElements(parentPath, new Link(item.id)));
++          result.push(this.combinePathElements(parentPath, currentLink));
++        }
++      } else {
++        const currentLink = this.transformLink(item);
++        if (parentPath.length === 0) {
++          result.push(currentLink);
++        } else {
++          result.push(this.combinePathElements(parentPath, currentLink));
++        }
++        const newPath = [...parentPath, currentLink];
++        for (const child of item.children) {
++          this.collectLinks(child, newPath, result);
+         }
+-      }
+-      const currentElement = item.id !== undefined ? new Link(item.id) : null;
+-      const newPath = currentElement ? [...parentPath, currentElement] : parentPath;
+-      for (const child of item.children) {
+-        this.collectLinks(child, newPath, result);
+       }
+     } else {
+       const currentLink = this.transformLink(item);
+@@ -1378,37 +1824,113 @@ class Parser {
+     if (pathElements.length === 0)
+       return current;
+     if (pathElements.length === 1) {
+-      return new Link(null, [pathElements[0], current]);
++      const combined2 = new Link(null, [pathElements[0], current]);
++      combined2._isFromPathCombination = true;
++      return combined2;
+     }
+     const parentPath = pathElements.slice(0, -1);
+     const lastElement = pathElements[pathElements.length - 1];
+     let parent = this.combinePathElements(parentPath, lastElement);
+-    return new Link(null, [parent, current]);
++    const combined = new Link(null, [parent, current]);
++    combined._isFromPathCombination = true;
++    return combined;
+   }
+   transformLink(item) {
+-    if (!item)
++    if (item === null || item === undefined)
+       return null;
+     if (item instanceof Link) {
+       return item;
+     }
+-    const link = new Link(item.id || null, []);
++    if (item.id !== undefined && !item.values && !item.children) {
++      return new Link(item.id);
++    }
+     if (item.values && Array.isArray(item.values)) {
++      const link = new Link(item.id || null, []);
+       link.values = item.values.map((v) => this.transformLink(v));
++      return link;
++    }
++    return new Link(item.id || null, []);
++  }
++}
++// src/FormatOptions.js
++class FormatOptions {
++  constructor(options = {}) {
++    this.lessParentheses = options.lessParentheses ?? false;
++    this.maxLineLength = options.maxLineLength ?? 80;
++    this.indentLongLines = options.indentLongLines ?? false;
++    this.maxInlineRefs = options.maxInlineRefs ?? null;
++    this.groupConsecutive = options.groupConsecutive ?? false;
++    this.indentString = options.indentString ?? "  ";
++    this.preferInline = options.preferInline ?? true;
++    this.compactSymbols = options.compactSymbols ?? false;
++    this.punctuationSymbols = options.punctuationSymbols ?? DEFAULT_PUNCTUATION_SYMBOLS;
++    this.mathSymbols = options.mathSymbols ?? DEFAULT_MATH_SYMBOLS;
++  }
++  shouldIndentByLength(line) {
++    if (!this.indentLongLines) {
++      return false;
++    }
++    return line.length > this.maxLineLength;
++  }
++  shouldIndentByRefCount(refCount) {
++    if (this.maxInlineRefs === null) {
++      return false;
+     }
+-    if (item.children && Array.isArray(item.children)) {
+-      for (const child of item.children) {
+-        const childLink = this.transformLink(child);
+-        if (childLink) {
+-          link.values.push(childLink);
++    return refCount > this.maxInlineRefs;
++  }
++  compactOutput(output) {
++    if (!this.compactSymbols) {
++      return output;
++    }
++    const allSymbols = new Set([...this.punctuationSymbols, ...this.mathSymbols]);
++    let result = "";
++    let inSingleQuote = false;
++    let inDoubleQuote = false;
++    let i = 0;
++    while (i < output.length) {
++      const char = output[i];
++      if (char === '"' && !inSingleQuote) {
++        inDoubleQuote = !inDoubleQuote;
++        result += char;
++        i++;
++        continue;
++      }
++      if (char === "'" && !inDoubleQuote) {
++        inSingleQuote = !inSingleQuote;
++        result += char;
++        i++;
++        continue;
++      }
++      if (inSingleQuote || inDoubleQuote) {
++        result += char;
++        i++;
++        continue;
++      }
++      if (char === " ") {
++        const prevChar = result.length > 0 ? result[result.length - 1] : "";
++        const nextChar = i + 1 < output.length ? output[i + 1] : "";
++        if (allSymbols.has(prevChar) || allSymbols.has(nextChar)) {
++          i++;
++          continue;
+         }
+       }
++      result += char;
++      i++;
+     }
+-    return link;
++    return result;
+   }
+ }
++
++// src/FormatConfig.js
++class FormatConfig extends FormatOptions {
++}
+ export {
+   formatLinks,
+   Parser,
+   LinksGroup,
+-  Link
++  Link,
++  FormatOptions,
++  FormatConfig,
++  DEFAULT_PUNCTUATION_SYMBOLS,
++  DEFAULT_MATH_SYMBOLS
+ };
+diff --git a/js/package.json b/js/package.json
+index f32327bb..da563f1a 100644
+--- a/js/package.json
++++ b/js/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "links-notation",
+-  "version": "0.12.0",
++  "version": "0.13.0",
+   "description": "Links Notation parser for JavaScript",
+   "main": "dist/index.js",
+   "type": "module",
+diff --git a/js/src/FormatOptions.js b/js/src/FormatOptions.js
+index c1b55f5e..80c242dc 100644
+--- a/js/src/FormatOptions.js
++++ b/js/src/FormatOptions.js
+@@ -1,3 +1,5 @@
++import { DEFAULT_PUNCTUATION_SYMBOLS, DEFAULT_MATH_SYMBOLS } from './Parser.js';
++
+ /**
+  * FormatOptions for Lino notation formatting.
+  *
+@@ -14,6 +16,9 @@ export class FormatOptions {
+    * @param {boolean} [options.groupConsecutive=false] - If true, group consecutive links with same ID
+    * @param {string} [options.indentString="  "] - String to use for indentation
+    * @param {boolean} [options.preferInline=true] - If true, prefer inline format when under thresholds
++   * @param {boolean} [options.compactSymbols=false] - If true, format output with no spaces around punctuation/math symbols
++   * @param {string[]} [options.punctuationSymbols] - Symbols to compact around (default: [',', '.', ';', '!', '?'])
++   * @param {string[]} [options.mathSymbols] - Math symbols to compact around (default: ['+', '-', '*', '/', '=', '<', '>', '%', '^'])
+    */
+   constructor(options = {}) {
+     this.lessParentheses = options.lessParentheses ?? false;
+@@ -23,6 +28,9 @@ export class FormatOptions {
+     this.groupConsecutive = options.groupConsecutive ?? false;
+     this.indentString = options.indentString ?? "  ";
+     this.preferInline = options.preferInline ?? true;
++    this.compactSymbols = options.compactSymbols ?? false;
++    this.punctuationSymbols = options.punctuationSymbols ?? DEFAULT_PUNCTUATION_SYMBOLS;
++    this.mathSymbols = options.mathSymbols ?? DEFAULT_MATH_SYMBOLS;
+   }
+ 
+   /**
+@@ -49,4 +57,66 @@ export class FormatOptions {
+     }
+     return refCount > this.maxInlineRefs;
+   }
++
++  /**
++   * Compact symbols in the formatted output by removing spaces around punctuation and math symbols.
++   * Only called when compactSymbols is true.
++   * @param {string} output - The formatted output string
++   * @returns {string} Output with spaces around symbols removed
++   */
++  compactOutput(output) {
++    if (!this.compactSymbols) {
++      return output;
++    }
++
++    const allSymbols = new Set([...this.punctuationSymbols, ...this.mathSymbols]);
++    let result = '';
++    let inSingleQuote = false;
++    let inDoubleQuote = false;
++    let i = 0;
++
++    while (i < output.length) {
++      const char = output[i];
++
++      // Handle quote toggling
++      if (char === '"' && !inSingleQuote) {
++        inDoubleQuote = !inDoubleQuote;
++        result += char;
++        i++;
++        continue;
++      }
++      if (char === "'" && !inDoubleQuote) {
++        inSingleQuote = !inSingleQuote;
++        result += char;
++        i++;
++        continue;
++      }
++
++      // If inside quotes, preserve as-is
++      if (inSingleQuote || inDoubleQuote) {
++        result += char;
++        i++;
++        continue;
++      }
++
++      // Check if this is a space that should be removed
++      if (char === ' ') {
++        // Check if previous or next char is a symbol
++        const prevChar = result.length > 0 ? result[result.length - 1] : '';
++        const nextChar = i + 1 < output.length ? output[i + 1] : '';
++
++        // Skip space if it's between a word and a symbol, or between symbols
++        // But keep space if both prev and next are non-symbols (regular word separation)
++        if (allSymbols.has(prevChar) || allSymbols.has(nextChar)) {
++          i++;
++          continue;
++        }
++      }
++
++      result += char;
++      i++;
++    }
++
++    return result;
++  }
+ }
+diff --git a/js/src/Link.js b/js/src/Link.js
+index 8ed21eaf..0f96dd84 100644
+--- a/js/src/Link.js
++++ b/js/src/Link.js
+@@ -409,7 +409,14 @@ export function formatLinks(links, lessParentheses = false) {
+     if (options.groupConsecutive) {
+       linksToFormat = _groupConsecutiveLinks(links);
+     }
+-    return linksToFormat.map(link => link.format(options)).join('\n');
++    let result = linksToFormat.map(link => link.format(options)).join('\n');
++
++    // Apply compact formatting if enabled
++    if (options.compactSymbols && typeof options.compactOutput === 'function') {
++      result = options.compactOutput(result);
++    }
++
++    return result;
+   }
+ 
+   // Backward compatibility with boolean parameter
+diff --git a/js/src/Parser.js b/js/src/Parser.js
+index 65e9f13e..8f8b4b2c 100644
+--- a/js/src/Parser.js
++++ b/js/src/Parser.js
+@@ -1,16 +1,34 @@
+ import { Link } from './Link.js';
+ import * as parserModule from './parser-generated.js';
+ 
++/**
++ * Default punctuation symbols that should be tokenized as separate references.
++ * These are separated from adjacent characters during parsing.
++ */
++export const DEFAULT_PUNCTUATION_SYMBOLS = [',', '.', ';', '!', '?'];
++
++/**
++ * Default math symbols that should be tokenized as separate references.
++ * These are separated from adjacent characters during parsing.
++ */
++export const DEFAULT_MATH_SYMBOLS = ['+', '-', '*', '/', '=', '<', '>', '%', '^'];
++
+ export class Parser {
+   /**
+    * Create a new Parser instance
+    * @param {Object} options - Parser options
+    * @param {number} options.maxInputSize - Maximum input size in bytes (default: 10MB)
+    * @param {number} options.maxDepth - Maximum nesting depth (default: 1000)
++   * @param {boolean} options.tokenizeSymbols - If true, tokenize punctuation and math symbols (default: true)
++   * @param {string[]} options.punctuationSymbols - Custom punctuation symbols to tokenize
++   * @param {string[]} options.mathSymbols - Custom math symbols to tokenize
+    */
+   constructor(options = {}) {
+     this.maxInputSize = options.maxInputSize || 10 * 1024 * 1024; // 10MB default
+     this.maxDepth = options.maxDepth || 1000;
++    this.tokenizeSymbols = options.tokenizeSymbols !== false; // default true
++    this.punctuationSymbols = options.punctuationSymbols || DEFAULT_PUNCTUATION_SYMBOLS;
++    this.mathSymbols = options.mathSymbols || DEFAULT_MATH_SYMBOLS;
+   }
+ 
+   /**
+@@ -30,7 +48,9 @@ export class Parser {
+     }
+ 
+     try {
+-      const rawResult = parserModule.parse(input);
++      // Apply tokenization if enabled
++      const processedInput = this.tokenizeSymbols ? this.tokenize(input) : input;
++      const rawResult = parserModule.parse(processedInput);
+       return this.transformResult(rawResult);
+     } catch (error) {
+       // Preserve original error information
+@@ -41,6 +61,120 @@ export class Parser {
+     }
+   }
+ 
++  /**
++   * Check if a character is a letter (alphabetic)
++   * @param {string} char - Single character to check
++   * @returns {boolean} True if the character is a letter
++   */
++  isLetter(char) {
++    if (!char) return false;
++    return /[a-zA-Z]/.test(char);
++  }
++
++  /**
++   * Check if a character is a digit
++   * @param {string} char - Single character to check
++   * @returns {boolean} True if the character is a digit
++   */
++  isDigit(char) {
++    if (!char) return false;
++    return /[0-9]/.test(char);
++  }
++
++  /**
++   * Tokenize input by separating punctuation and math symbols from adjacent characters.
++   * Quoted strings are preserved as-is.
++   * Math symbols are only tokenized when between digits (e.g., "1+1" → "1 + 1").
++   * Punctuation is only tokenized when following an alphanumeric character (e.g., "hello," → "hello ,").
++   * @param {string} input - The input text to tokenize
++   * @returns {string} Tokenized input with symbols separated by spaces
++   */
++  tokenize(input) {
++    const punctuationSet = new Set(this.punctuationSymbols);
++    const mathSet = new Set(this.mathSymbols);
++    let result = '';
++    let inSingleQuote = false;
++    let inDoubleQuote = false;
++    let i = 0;
++
++    while (i < input.length) {
++      const char = input[i];
++      const prevChar = i > 0 ? input[i - 1] : '';
++      const nextChar = i + 1 < input.length ? input[i + 1] : '';
++
++      // Handle quote toggling
++      if (char === '"' && !inSingleQuote) {
++        inDoubleQuote = !inDoubleQuote;
++        result += char;
++        i++;
++        continue;
++      }
++      if (char === "'" && !inDoubleQuote) {
++        inSingleQuote = !inSingleQuote;
++        result += char;
++        i++;
++        continue;
++      }
++
++      // If inside quotes, preserve as-is
++      if (inSingleQuote || inDoubleQuote) {
++        result += char;
++        i++;
++        continue;
++      }
++
++      // Check if current char is a punctuation symbol
++      if (punctuationSet.has(char)) {
++        // Only tokenize punctuation when it follows an alphanumeric character
++        // This handles "hello," → "hello ," but not standalone punctuation
++        const prevIsAlphanumeric = /[a-zA-Z0-9]/.test(prevChar);
++
++        if (prevIsAlphanumeric) {
++          // Add space before
++          if (result.length > 0 && !result.endsWith(' ') && !result.endsWith('\t') && !result.endsWith('\n')) {
++            result += ' ';
++          }
++          result += char;
++          // Add space after if next char is alphanumeric (not whitespace or more punctuation)
++          if (nextChar && /[a-zA-Z0-9]/.test(nextChar)) {
++            result += ' ';
++          }
++        } else {
++          result += char;
++        }
++        i++;
++        continue;
++      }
++
++      // Check if current char is a math symbol
++      if (mathSet.has(char)) {
++        // Only tokenize math symbols when BOTH sides are digits
++        // This handles "1+1" → "1 + 1" but preserves "Jean-Luc", "a-b", "bmFtZQ=="
++        const prevIsDigit = this.isDigit(prevChar);
++        const nextIsDigit = this.isDigit(nextChar);
++
++        if (prevIsDigit && nextIsDigit) {
++          // Tokenize: both sides are digits
++          if (result.length > 0 && !result.endsWith(' ') && !result.endsWith('\t') && !result.endsWith('\n')) {
++            result += ' ';
++          }
++          result += char;
++          result += ' ';
++        } else {
++          // Don't tokenize: preserve as part of identifier
++          result += char;
++        }
++        i++;
++        continue;
++      }
++
++      result += char;
++      i++;
++    }
++
++    return result;
++  }
++
+   transformResult(rawResult) {
+     const links = [];
+     const items = Array.isArray(rawResult) ? rawResult : [rawResult];
+diff --git a/js/src/index.js b/js/src/index.js
+index f86d1e13..6bb5c134 100644
+--- a/js/src/index.js
++++ b/js/src/index.js
+@@ -1,5 +1,5 @@
+ export { Link, formatLinks } from './Link.js';
+ export { LinksGroup } from './LinksGroup.js';
+-export { Parser } from './Parser.js';
++export { Parser, DEFAULT_PUNCTUATION_SYMBOLS, DEFAULT_MATH_SYMBOLS } from './Parser.js';
+ export { FormatConfig } from './FormatConfig.js';
+ export { FormatOptions } from './FormatOptions.js';
+\ No newline at end of file
+diff --git a/js/tests/PunctuationAndMathSymbols.test.js b/js/tests/PunctuationAndMathSymbols.test.js
+new file mode 100644
+index 00000000..2d54eefe
+--- /dev/null
++++ b/js/tests/PunctuationAndMathSymbols.test.js
+@@ -0,0 +1,188 @@
++/**
++ * Tests for punctuation and math symbol tokenization (Issue #148)
++ *
++ * These tests verify that:
++ * 1. Punctuation is tokenized when following alphanumeric characters
++ * 2. Math symbols are tokenized only when between digits
++ * 3. Hyphenated words are preserved
++ * 4. Quoted strings preserve their content
++ * 5. Compact formatting can restore human-readable output
++ */
++import { test, expect } from 'bun:test';
++import { Parser, DEFAULT_PUNCTUATION_SYMBOLS, DEFAULT_MATH_SYMBOLS } from '../src/Parser.js';
++import { formatLinks } from '../src/Link.js';
++import { FormatOptions } from '../src/FormatOptions.js';
++
++const parser = new Parser();
++const parserNoTokenize = new Parser({ tokenizeSymbols: false });
++
++// Test punctuation tokenization
++test('Punctuation: comma separates numbers', () => {
++  const links = parser.parse('1, 2 and 3');
++  expect(links[0].values.length).toBe(5);
++  expect(links[0].values[0].id).toBe('1');
++  expect(links[0].values[1].id).toBe(',');
++  expect(links[0].values[2].id).toBe('2');
++  expect(links[0].values[3].id).toBe('and');
++  expect(links[0].values[4].id).toBe('3');
++});
++
++test('Punctuation: comma without space', () => {
++  const links = parser.parse('1,2,3');
++  expect(links[0].values.length).toBe(5);
++  expect(links[0].values[0].id).toBe('1');
++  expect(links[0].values[1].id).toBe(',');
++  expect(links[0].values[2].id).toBe('2');
++  expect(links[0].values[3].id).toBe(',');
++  expect(links[0].values[4].id).toBe('3');
++});
++
++test('Punctuation: period between numbers', () => {
++  const links = parser.parse('1.2.3');
++  expect(links[0].values.length).toBe(5);
++  expect(links[0].values[0].id).toBe('1');
++  expect(links[0].values[1].id).toBe('.');
++  expect(links[0].values[2].id).toBe('2');
++});
++
++test('Punctuation: hello world with comma', () => {
++  const links = parser.parse('hello, world');
++  expect(links[0].values.length).toBe(3);
++  expect(links[0].values[0].id).toBe('hello');
++  expect(links[0].values[1].id).toBe(',');
++  expect(links[0].values[2].id).toBe('world');
++});
++
++// Test math symbol tokenization
++test('Math: addition between digits', () => {
++  const links = parser.parse('1+1');
++  expect(links[0].values.length).toBe(3);
++  expect(links[0].values[0].id).toBe('1');
++  expect(links[0].values[1].id).toBe('+');
++  expect(links[0].values[2].id).toBe('1');
++});
++
++test('Math: multiple operations', () => {
++  const links = parser.parse('1+1,1/1,1*1');
++  expect(links[0].values.length).toBe(11);
++  expect(links[0].values[1].id).toBe('+');
++  expect(links[0].values[5].id).toBe('/');
++  expect(links[0].values[9].id).toBe('*');
++});
++
++test('Math: subtraction between digits', () => {
++  const links = parser.parse('10-20');
++  expect(links[0].values.length).toBe(3);
++  expect(links[0].values[0].id).toBe('10');
++  expect(links[0].values[1].id).toBe('-');
++  expect(links[0].values[2].id).toBe('20');
++});
++
++// Test hyphenated words are preserved
++test('Hyphenated: Jean-Luc preserved', () => {
++  const links = parser.parse('Jean-Luc Picard');
++  expect(links[0].values.length).toBe(2);
++  expect(links[0].values[0].id).toBe('Jean-Luc');
++  expect(links[0].values[1].id).toBe('Picard');
++});
++
++test('Hyphenated: conan-center-index preserved', () => {
++  const links = parser.parse('conan-center-index');
++  expect(links[0].values.length).toBe(1);
++  expect(links[0].values[0].id).toBe('conan-center-index');
++});
++
++test('Hyphenated: a-b preserved', () => {
++  const links = parser.parse('a-b');
++  expect(links[0].values.length).toBe(1);
++  expect(links[0].values[0].id).toBe('a-b');
++});
++
++test('Math symbols between letters are preserved', () => {
++  const links = parser.parse('x+y=z');
++  expect(links[0].values.length).toBe(1);
++  expect(links[0].values[0].id).toBe('x+y=z');
++});
++
++// Test quoted strings preserve content
++test('Quoted: double quoted comma preserved', () => {
++  const links = parser.parse('"1,"');
++  expect(links[0].values.length).toBe(1);
++  expect(links[0].values[0].id).toBe('1,');
++});
++
++test('Quoted: double quoted period preserved', () => {
++  const links = parser.parse('"1."');
++  expect(links[0].values.length).toBe(1);
++  expect(links[0].values[0].id).toBe('1.');
++});
++
++test('Quoted: double quoted multiple commas preserved', () => {
++  const links = parser.parse('"1,2,3"');
++  expect(links[0].values.length).toBe(1);
++  expect(links[0].values[0].id).toBe('1,2,3');
++});
++
++test('Quoted: hello world with comma preserved', () => {
++  const links = parser.parse('"hello, world"');
++  expect(links[0].values.length).toBe(1);
++  expect(links[0].values[0].id).toBe('hello, world');
++});
++
++test('Quoted: mixed quoted and unquoted', () => {
++  const links = parser.parse('test "1,2,3" more');
++  expect(links[0].values.length).toBe(3);
++  expect(links[0].values[0].id).toBe('test');
++  expect(links[0].values[1].id).toBe('1,2,3');
++  expect(links[0].values[2].id).toBe('more');
++});
++
++// Test base64 strings are preserved
++test('Base64: padding equals preserved', () => {
++  const links = parser.parse('bmFtZQ==');
++  expect(links[0].values.length).toBe(1);
++  expect(links[0].values[0].id).toBe('bmFtZQ==');
++});
++
++// Test compact formatting
++test('Compact: restore 1,2,3', () => {
++  const links = parser.parse('1,2,3');
++  const options = new FormatOptions({ compactSymbols: true });
++  const formatted = formatLinks(links, options);
++  expect(formatted).toBe('(1,2,3)');
++});
++
++test('Compact: restore 1+1', () => {
++  const links = parser.parse('1+1');
++  const options = new FormatOptions({ compactSymbols: true });
++  const formatted = formatLinks(links, options);
++  expect(formatted).toBe('(1+1)');
++});
++
++test('Compact: restore hello, world', () => {
++  const links = parser.parse('hello, world');
++  const options = new FormatOptions({ compactSymbols: true });
++  const formatted = formatLinks(links, options);
++  expect(formatted).toBe('(hello,world)');
++});
++
++// Test backward compatibility with tokenizeSymbols: false
++test('Backward compat: tokenizeSymbols false preserves 1,2,3', () => {
++  const links = parserNoTokenize.parse('1,2,3');
++  expect(links[0].values.length).toBe(1);
++  expect(links[0].values[0].id).toBe('1,2,3');
++});
++
++test('Backward compat: tokenizeSymbols false preserves 1+1', () => {
++  const links = parserNoTokenize.parse('1+1');
++  expect(links[0].values.length).toBe(1);
++  expect(links[0].values[0].id).toBe('1+1');
++});
++
++// Test default symbols are exported
++test('Default symbols exported', () => {
++  expect(DEFAULT_PUNCTUATION_SYMBOLS).toContain(',');
++  expect(DEFAULT_PUNCTUATION_SYMBOLS).toContain('.');
++  expect(DEFAULT_MATH_SYMBOLS).toContain('+');
++  expect(DEFAULT_MATH_SYMBOLS).toContain('-');
++});
+diff --git a/python/links_notation/__init__.py b/python/links_notation/__init__.py
+index c9c1e50b..8e384a80 100644
+--- a/python/links_notation/__init__.py
++++ b/python/links_notation/__init__.py
+@@ -9,7 +9,16 @@
+ from .parser import Parser
+ from .formatter import format_links
+ from .format_config import FormatConfig
++from .tokenizer import Tokenizer, DEFAULT_PUNCTUATION_SYMBOLS, DEFAULT_MATH_SYMBOLS
+ 
+-__version__ = "0.7.0"
++__version__ = "0.13.0"
+ 
+-__all__ = ["Link", "Parser", "format_links", "FormatConfig"]
++__all__ = [
++    "Link",
++    "Parser",
++    "format_links",
++    "FormatConfig",
++    "Tokenizer",
++    "DEFAULT_PUNCTUATION_SYMBOLS",
++    "DEFAULT_MATH_SYMBOLS",
++]
+diff --git a/python/links_notation/parser.py b/python/links_notation/parser.py
+index c4c2ad98..5367c986 100644
+--- a/python/links_notation/parser.py
++++ b/python/links_notation/parser.py
+@@ -7,6 +7,7 @@
+ 
+ from typing import List, Optional, Dict, Any
+ from .link import Link
++from .tokenizer import Tokenizer, DEFAULT_PUNCTUATION_SYMBOLS, DEFAULT_MATH_SYMBOLS
+ 
+ 
+ class ParseError(Exception):
+@@ -20,13 +21,23 @@ class Parser:
+     Handles both inline and indented syntax for defining links.
+     """
+ 
+-    def __init__(self, max_input_size: int = 10 * 1024 * 1024, max_depth: int = 1000):
++    def __init__(
++        self,
++        max_input_size: int = 10 * 1024 * 1024,
++        max_depth: int = 1000,
++        tokenize_symbols: bool = True,
++        punctuation_symbols: Optional[List[str]] = None,
++        math_symbols: Optional[List[str]] = None
++    ):
+         """
+         Initialize the parser.
+ 
+         Args:
+             max_input_size: Maximum input size in bytes (default: 10MB)
+             max_depth: Maximum nesting depth (default: 1000)
++            tokenize_symbols: If True, tokenize punctuation and math symbols (default: True)
++            punctuation_symbols: Custom punctuation symbols to tokenize
++            math_symbols: Custom math symbols to tokenize
+         """
+         self.indentation_stack = [0]
+         self.pos = 0
+@@ -35,6 +46,11 @@ def __init__(self, max_input_size: int = 10 * 1024 * 1024, max_depth: int = 1000
+         self.base_indentation = None
+         self.max_input_size = max_input_size
+         self.max_depth = max_depth
++        self.tokenizer = Tokenizer(
++            punctuation_symbols=punctuation_symbols,
++            math_symbols=math_symbols,
++            enabled=tokenize_symbols
++        )
+ 
+     def parse(self, input_text: str) -> List[Link]:
+         """
+@@ -63,9 +79,12 @@ def parse(self, input_text: str) -> List[Link]:
+             if not input_text or not input_text.strip():
+                 return []
+ 
+-            self.text = input_text
++            # Apply tokenization to separate punctuation and math symbols
++            tokenized_text = self.tokenizer.tokenize(input_text)
++
++            self.text = tokenized_text
+             # Use smart line splitting that respects quoted strings
+-            self.lines = self._split_lines_respecting_quotes(input_text)
++            self.lines = self._split_lines_respecting_quotes(tokenized_text)
+             self.pos = 0
+             self.indentation_stack = [0]
+             self.base_indentation = None
+diff --git a/python/links_notation/tokenizer.py b/python/links_notation/tokenizer.py
+new file mode 100644
+index 00000000..3457a0b2
+--- /dev/null
++++ b/python/links_notation/tokenizer.py
+@@ -0,0 +1,173 @@
++"""
++Tokenizer module for separating punctuation and math symbols from adjacent characters.
++
++This module provides functionality to tokenize input text by inserting spaces
++around punctuation and math symbols, making them separate references in Links Notation.
++"""
++
++from typing import List, Optional
++
++# Default punctuation symbols that should be tokenized as separate references
++DEFAULT_PUNCTUATION_SYMBOLS: List[str] = [',', '.', ';', '!', '?']
++
++# Default math symbols that should be tokenized as separate references
++# Note: These are only tokenized when between digits, not when between letters
++# (to preserve hyphenated words like "Jean-Luc" or "conan-center-index")
++DEFAULT_MATH_SYMBOLS: List[str] = ['+', '-', '*', '/', '=', '<', '>', '%', '^']
++
++
++class Tokenizer:
++    """Tokenizer for separating punctuation and math symbols from adjacent characters."""
++
++    def __init__(
++        self,
++        punctuation_symbols: Optional[List[str]] = None,
++        math_symbols: Optional[List[str]] = None,
++        enabled: bool = True
++    ):
++        """
++        Initialize the tokenizer.
++
++        Args:
++            punctuation_symbols: Custom punctuation symbols to tokenize (default: DEFAULT_PUNCTUATION_SYMBOLS)
++            math_symbols: Custom math symbols to tokenize (default: DEFAULT_MATH_SYMBOLS)
++            enabled: Whether tokenization is enabled (default: True)
++        """
++        self.punctuation_symbols = punctuation_symbols or DEFAULT_PUNCTUATION_SYMBOLS.copy()
++        self.math_symbols = math_symbols or DEFAULT_MATH_SYMBOLS.copy()
++        self.enabled = enabled
++
++    @staticmethod
++    def _is_digit(char: str) -> bool:
++        """Check if a character is a digit."""
++        return char.isdigit() if char else False
++
++    @staticmethod
++    def _is_alphanumeric(char: str) -> bool:
++        """Check if a character is alphanumeric."""
++        return char.isalnum() if char else False
++
++    def tokenize(self, input_text: str) -> str:
++        """
++        Tokenize input by separating punctuation and math symbols from adjacent characters.
++        Quoted strings are preserved as-is.
++        Math symbols are only tokenized when between digits (to preserve hyphenated words).
++        Punctuation is only tokenized when following an alphanumeric character.
++
++        Args:
++            input_text: The input text to tokenize
++
++        Returns:
++            Tokenized input with symbols separated by spaces
++        """
++        if not self.enabled:
++            return input_text
++
++        result = []
++        in_single_quote = False
++        in_double_quote = False
++        chars = list(input_text)
++
++        for i, char in enumerate(chars):
++            prev_char = chars[i - 1] if i > 0 else ''
++            next_char = chars[i + 1] if i + 1 < len(chars) else ''
++
++            # Handle quote toggling
++            if char == '"' and not in_single_quote:
++                in_double_quote = not in_double_quote
++                result.append(char)
++                continue
++            if char == "'" and not in_double_quote:
++                in_single_quote = not in_single_quote
++                result.append(char)
++                continue
++
++            # If inside quotes, preserve as-is
++            if in_single_quote or in_double_quote:
++                result.append(char)
++                continue
++
++            # Check if current char is a punctuation symbol
++            if char in self.punctuation_symbols:
++                # Only tokenize punctuation when it follows an alphanumeric character
++                if self._is_alphanumeric(prev_char):
++                    # Add space before if not already present
++                    if result and not result[-1] in ' \t\n':
++                        result.append(' ')
++                    result.append(char)
++                    # Add space after if next char is alphanumeric
++                    if self._is_alphanumeric(next_char):
++                        result.append(' ')
++                else:
++                    result.append(char)
++                continue
++
++            # Check if current char is a math symbol
++            if char in self.math_symbols:
++                # Only tokenize math symbols when BOTH sides are digits
++                prev_is_digit = self._is_digit(prev_char)
++                next_is_digit = self._is_digit(next_char)
++
++                if prev_is_digit and next_is_digit:
++                    # Tokenize: both sides are digits
++                    if result and not result[-1] in ' \t\n':
++                        result.append(' ')
++                    result.append(char)
++                    result.append(' ')
++                else:
++                    # Don't tokenize: preserve as part of identifier
++                    result.append(char)
++                continue
++
++            result.append(char)
++
++        return ''.join(result)
++
++    def compact(self, output: str) -> str:
++        """
++        Compact output by removing spaces around symbols (inverse of tokenize).
++        This is used for formatting output in a more human-readable way.
++
++        Args:
++            output: The formatted output string
++
++        Returns:
++            Output with spaces around symbols removed
++        """
++        if not self.enabled:
++            return output
++
++        all_symbols = set(self.punctuation_symbols + self.math_symbols)
++        result = []
++        in_single_quote = False
++        in_double_quote = False
++        chars = list(output)
++
++        for i, char in enumerate(chars):
++            # Handle quote toggling
++            if char == '"' and not in_single_quote:
++                in_double_quote = not in_double_quote
++                result.append(char)
++                continue
++            if char == "'" and not in_double_quote:
++                in_single_quote = not in_single_quote
++                result.append(char)
++                continue
++
++            # If inside quotes, preserve as-is
++            if in_single_quote or in_double_quote:
++                result.append(char)
++                continue
++
++            # Check if this is a space that should be removed
++            if char == ' ':
++                prev_char = result[-1] if result else ''
++                next_char = chars[i + 1] if i + 1 < len(chars) else ''
++
++                # Skip space if it's between a word and a symbol, or between symbols
++                if prev_char in all_symbols or next_char in all_symbols:
++                    continue
++
++            result.append(char)
++
++        return ''.join(result)
+diff --git a/python/pyproject.toml b/python/pyproject.toml
+index dd010902..6bc36697 100644
+--- a/python/pyproject.toml
++++ b/python/pyproject.toml
+@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
+ 
+ [project]
+ name = "links-notation"
+-version = "0.12.0"
++version = "0.13.0"
+ description = "Python implementation of the Links Notation parser"
+ readme = "README.md"
+ license = {text = "Unlicense"}
+diff --git a/python/tests/test_tokenizer.py b/python/tests/test_tokenizer.py
+new file mode 100644
+index 00000000..65f3e5c2
+--- /dev/null
++++ b/python/tests/test_tokenizer.py
+@@ -0,0 +1,177 @@
++"""
++Tests for punctuation and math symbol tokenization (Issue #148)
++
++These tests verify that:
++1. Punctuation is tokenized when following alphanumeric characters
++2. Math symbols are tokenized only when between digits
++3. Hyphenated words are preserved
++4. Quoted strings preserve their content
++5. Compact formatting can restore human-readable output
++"""
++
++import pytest
++from links_notation import Parser, Tokenizer, format_links, DEFAULT_PUNCTUATION_SYMBOLS, DEFAULT_MATH_SYMBOLS
++
++
++@pytest.fixture
++def parser():
++    return Parser()
++
++
++@pytest.fixture
++def parser_no_tokenize():
++    return Parser(tokenize_symbols=False)
++
++
++# Test punctuation tokenization
++def test_punctuation_comma_separates_numbers(parser):
++    links = parser.parse("1, 2 and 3")
++    assert len(links) == 1
++    values = [v.id for v in links[0].values]
++    assert values == ["1", ",", "2", "and", "3"]
++
++
++def test_punctuation_comma_without_space(parser):
++    links = parser.parse("1,2,3")
++    assert len(links) == 1
++    values = [v.id for v in links[0].values]
++    assert values == ["1", ",", "2", ",", "3"]
++
++
++def test_punctuation_period_between_numbers(parser):
++    links = parser.parse("1.2.3")
++    values = [v.id for v in links[0].values]
++    assert values[0] == "1"
++    assert values[1] == "."
++    assert values[2] == "2"
++
++
++def test_punctuation_hello_world_with_comma(parser):
++    links = parser.parse("hello, world")
++    values = [v.id for v in links[0].values]
++    assert values == ["hello", ",", "world"]
++
++
++# Test math symbol tokenization
++def test_math_addition_between_digits(parser):
++    links = parser.parse("1+1")
++    values = [v.id for v in links[0].values]
++    assert values == ["1", "+", "1"]
++
++
++def test_math_multiple_operations(parser):
++    links = parser.parse("1+1,1/1,1*1")
++    values = [v.id for v in links[0].values]
++    assert "+" in values
++    assert "/" in values
++    assert "*" in values
++
++
++def test_math_subtraction_between_digits(parser):
++    links = parser.parse("10-20")
++    values = [v.id for v in links[0].values]
++    assert values == ["10", "-", "20"]
++
++
++# Test hyphenated words are preserved
++def test_hyphenated_jean_luc_preserved(parser):
++    links = parser.parse("Jean-Luc Picard")
++    values = [v.id for v in links[0].values]
++    assert values == ["Jean-Luc", "Picard"]
++
++
++def test_hyphenated_conan_center_index_preserved(parser):
++    links = parser.parse("conan-center-index")
++    values = [v.id for v in links[0].values]
++    assert values == ["conan-center-index"]
++
++
++def test_hyphenated_a_b_preserved(parser):
++    links = parser.parse("a-b")
++    values = [v.id for v in links[0].values]
++    assert values == ["a-b"]
++
++
++def test_math_symbols_between_letters_preserved(parser):
++    links = parser.parse("x+y=z")
++    values = [v.id for v in links[0].values]
++    assert values == ["x+y=z"]
++
++
++# Test quoted strings preserve content
++def test_quoted_double_quoted_comma_preserved(parser):
++    links = parser.parse('"1,"')
++    values = [v.id for v in links[0].values]
++    assert values == ["1,"]
++
++
++def test_quoted_double_quoted_period_preserved(parser):
++    links = parser.parse('"1."')
++    values = [v.id for v in links[0].values]
++    assert values == ["1."]
++
++
++def test_quoted_multiple_commas_preserved(parser):
++    links = parser.parse('"1,2,3"')
++    values = [v.id for v in links[0].values]
++    assert values == ["1,2,3"]
++
++
++def test_quoted_hello_world_preserved(parser):
++    links = parser.parse('"hello, world"')
++    values = [v.id for v in links[0].values]
++    assert values == ["hello, world"]
++
++
++def test_quoted_mixed_quoted_and_unquoted(parser):
++    links = parser.parse('test "1,2,3" more')
++    values = [v.id for v in links[0].values]
++    assert values == ["test", "1,2,3", "more"]
++
++
++# Test base64 strings are preserved
++def test_base64_padding_equals_preserved(parser):
++    links = parser.parse("bmFtZQ==")
++    values = [v.id for v in links[0].values]
++    assert values == ["bmFtZQ=="]
++
++
++# Test tokenizer directly
++def test_tokenizer_tokenize():
++    tokenizer = Tokenizer()
++    assert tokenizer.tokenize("1,2,3") == "1 , 2 , 3"
++    assert tokenizer.tokenize("1+1") == "1 + 1"
++    assert tokenizer.tokenize("Jean-Luc") == "Jean-Luc"
++
++
++def test_tokenizer_compact():
++    tokenizer = Tokenizer()
++    assert tokenizer.compact("1 , 2 , 3") == "1,2,3"
++    assert tokenizer.compact("1 + 1") == "1+1"
++
++
++def test_tokenizer_disabled():
++    tokenizer = Tokenizer(enabled=False)
++    assert tokenizer.tokenize("1,2,3") == "1,2,3"
++    assert tokenizer.tokenize("1+1") == "1+1"
++
++
++# Test backward compatibility with tokenize_symbols=False
++def test_backward_compat_tokenize_false_preserves_comma(parser_no_tokenize):
++    links = parser_no_tokenize.parse("1,2,3")
++    values = [v.id for v in links[0].values]
++    assert values == ["1,2,3"]
++
++
++def test_backward_compat_tokenize_false_preserves_plus(parser_no_tokenize):
++    links = parser_no_tokenize.parse("1+1")
++    values = [v.id for v in links[0].values]
++    assert values == ["1+1"]
++
++
++# Test default symbols are exported
++def test_default_symbols_exported():
++    assert "," in DEFAULT_PUNCTUATION_SYMBOLS
++    assert "." in DEFAULT_PUNCTUATION_SYMBOLS
++    assert "+" in DEFAULT_MATH_SYMBOLS
++    assert "-" in DEFAULT_MATH_SYMBOLS
+diff --git a/rust/Cargo.lock b/rust/Cargo.lock
+index 21d9397f..9dfde872 100644
+--- a/rust/Cargo.lock
++++ b/rust/Cargo.lock
+@@ -4,7 +4,7 @@ version = 4
+ 
+ [[package]]
+ name = "links-notation"
+-version = "0.12.0"
++version = "0.13.0"
+ dependencies = [
+  "nom",
+ ]
+diff --git a/rust/Cargo.toml b/rust/Cargo.toml
+index 9a2794ad..85b2f92d 100644
+--- a/rust/Cargo.toml
++++ b/rust/Cargo.toml
+@@ -1,6 +1,6 @@
+ [package]
+ name = "links-notation"
+-version = "0.12.0"
++version = "0.13.0"
+ edition = "2021"
+ description = "Rust implementation of the Links Notation parser"
+ license = "Unlicense"
+diff --git a/rust/src/lib.rs b/rust/src/lib.rs
+index 218d4370..0ca910bc 100644
+--- a/rust/src/lib.rs
++++ b/rust/src/lib.rs
+@@ -1,8 +1,10 @@
+ pub mod parser;
+ pub mod format_config;
++pub mod tokenizer;
+ 
+ use std::fmt;
+ use std::error::Error as StdError;
++pub use tokenizer::{Tokenizer, DEFAULT_PUNCTUATION_SYMBOLS, DEFAULT_MATH_SYMBOLS};
+ 
+ /// Error type for Lino parsing
+ #[derive(Debug)]
+@@ -210,13 +212,23 @@ fn flatten_link_recursive(link: &parser::Link, parent: Option<&LiNo<String>>, re
+     }
+ }
+ 
++/// Parse a Lino document with default tokenization enabled.
++/// This tokenizes punctuation and math symbols as separate references.
+ pub fn parse_lino(document: &str) -> Result<LiNo<String>, ParseError> {
++    parse_lino_with_tokenizer(document, &Tokenizer::new())
++}
++
++/// Parse a Lino document with a custom tokenizer.
++pub fn parse_lino_with_tokenizer(document: &str, tokenizer: &Tokenizer) -> Result<LiNo<String>, ParseError> {
+     // Handle empty or whitespace-only input by returning empty result
+     if document.trim().is_empty() {
+         return Ok(LiNo::Link { id: None, values: vec![] });
+     }
+ 
+-    match parser::parse_document(document) {
++    // Apply tokenization
++    let tokenized = tokenizer.tokenize(document);
++
++    match parser::parse_document(&tokenized) {
+         Ok((_, links)) => {
+             if links.is_empty() {
+                 Ok(LiNo::Link { id: None, values: vec![] })
+@@ -230,14 +242,28 @@ pub fn parse_lino(document: &str) -> Result<LiNo<String>, ParseError> {
+     }
+ }
+ 
+-// New function that matches C# and JS API - returns collection of links
++/// Parse a Lino document without tokenization (backward compatible).
++pub fn parse_lino_raw(document: &str) -> Result<LiNo<String>, ParseError> {
++    parse_lino_with_tokenizer(document, &Tokenizer::disabled())
++}
++
++/// Parse Lino notation to a collection of links (matches C# and JS API).
++/// This uses default tokenization.
+ pub fn parse_lino_to_links(document: &str) -> Result<Vec<LiNo<String>>, ParseError> {
++    parse_lino_to_links_with_tokenizer(document, &Tokenizer::new())
++}
++
++/// Parse Lino notation to a collection of links with a custom tokenizer.
++pub fn parse_lino_to_links_with_tokenizer(document: &str, tokenizer: &Tokenizer) -> Result<Vec<LiNo<String>>, ParseError> {
+     // Handle empty or whitespace-only input by returning empty collection
+     if document.trim().is_empty() {
+         return Ok(vec![]);
+     }
+ 
+-    match parser::parse_document(document) {
++    // Apply tokenization
++    let tokenized = tokenizer.tokenize(document);
++
++    match parser::parse_document(&tokenized) {
+         Ok((_, links)) => {
+             if links.is_empty() {
+                 Ok(vec![])
+@@ -251,6 +277,11 @@ pub fn parse_lino_to_links(document: &str) -> Result<Vec<LiNo<String>>, ParseErr
+     }
+ }
+ 
++/// Parse Lino notation to a collection of links without tokenization (backward compatible).
++pub fn parse_lino_to_links_raw(document: &str) -> Result<Vec<LiNo<String>>, ParseError> {
++    parse_lino_to_links_with_tokenizer(document, &Tokenizer::disabled())
++}
++
+ /// Formats a collection of LiNo links as a multi-line string.
+ /// Each link is formatted on a separate line.
+ pub fn format_links(links: &[LiNo<String>]) -> String {
+@@ -260,3 +291,11 @@ pub fn format_links(links: &[LiNo<String>]) -> String {
+         .join("\n")
+ }
+ 
++/// Formats a collection of LiNo links with compact symbols (no spaces around punctuation/math).
++/// This is useful for making output more human-readable.
++pub fn format_links_compact(links: &[LiNo<String>]) -> String {
++    let tokenizer = Tokenizer::new();
++    let formatted = format_links(links);
++    tokenizer.compact(&formatted)
++}
++
+diff --git a/rust/src/tokenizer.rs b/rust/src/tokenizer.rs
+new file mode 100644
+index 00000000..eab9f1ba
+--- /dev/null
++++ b/rust/src/tokenizer.rs
+@@ -0,0 +1,278 @@
++//! Tokenizer module for separating punctuation and math symbols from adjacent characters.
++//!
++//! This module provides functionality to tokenize input text by inserting spaces
++//! around punctuation and math symbols, making them separate references in Links Notation.
++
++/// Default punctuation symbols that should be tokenized as separate references.
++pub const DEFAULT_PUNCTUATION_SYMBOLS: &[char] = &[',', '.', ';', '!', '?'];
++
++/// Default math symbols that should be tokenized as separate references.
++/// Note: These are only tokenized when between digits, not when between letters
++/// (to preserve hyphenated words like "Jean-Luc" or "conan-center-index").
++pub const DEFAULT_MATH_SYMBOLS: &[char] = &['+', '-', '*', '/', '=', '<', '>', '%', '^'];
++
++/// Tokenizer for separating punctuation and math symbols from adjacent characters.
++#[derive(Debug, Clone)]
++pub struct Tokenizer {
++    /// Punctuation symbols to tokenize
++    pub punctuation_symbols: Vec<char>,
++    /// Math symbols to tokenize (only when between digits)
++    pub math_symbols: Vec<char>,
++    /// Whether tokenization is enabled
++    pub enabled: bool,
++}
++
++impl Default for Tokenizer {
++    fn default() -> Self {
++        Self {
++            punctuation_symbols: DEFAULT_PUNCTUATION_SYMBOLS.to_vec(),
++            math_symbols: DEFAULT_MATH_SYMBOLS.to_vec(),
++            enabled: true,
++        }
++    }
++}
++
++impl Tokenizer {
++    /// Create a new Tokenizer with default settings
++    pub fn new() -> Self {
++        Self::default()
++    }
++
++    /// Create a new Tokenizer with custom symbols
++    pub fn with_symbols(punctuation: Vec<char>, math: Vec<char>) -> Self {
++        Self {
++            punctuation_symbols: punctuation,
++            math_symbols: math,
++            enabled: true,
++        }
++    }
++
++    /// Create a disabled tokenizer (pass-through)
++    pub fn disabled() -> Self {
++        Self {
++            punctuation_symbols: vec![],
++            math_symbols: vec![],
++            enabled: false,
++        }
++    }
++
++    /// Check if a character is a digit
++    fn is_digit(c: char) -> bool {
++        c.is_ascii_digit()
++    }
++
++    /// Check if a character is alphanumeric
++    fn is_alphanumeric(c: char) -> bool {
++        c.is_ascii_alphanumeric()
++    }
++
++    /// Tokenize input by separating punctuation and math symbols from adjacent characters.
++    /// Quoted strings are preserved as-is.
++    /// Math symbols are only tokenized when between digits (to preserve hyphenated words).
++    /// Punctuation is only tokenized when following an alphanumeric character.
++    pub fn tokenize(&self, input: &str) -> String {
++        if !self.enabled {
++            return input.to_string();
++        }
++
++        let chars: Vec<char> = input.chars().collect();
++        let mut result = String::with_capacity(input.len() * 2);
++        let mut in_single_quote = false;
++        let mut in_double_quote = false;
++
++        for i in 0..chars.len() {
++            let c = chars[i];
++            let prev_char = if i > 0 { Some(chars[i - 1]) } else { None };
++            let next_char = if i + 1 < chars.len() { Some(chars[i + 1]) } else { None };
++
++            // Handle quote toggling
++            if c == '"' && !in_single_quote {
++                in_double_quote = !in_double_quote;
++                result.push(c);
++                continue;
++            }
++            if c == '\'' && !in_double_quote {
++                in_single_quote = !in_single_quote;
++                result.push(c);
++                continue;
++            }
++
++            // If inside quotes, preserve as-is
++            if in_single_quote || in_double_quote {
++                result.push(c);
++                continue;
++            }
++
++            // Check if current char is a punctuation symbol
++            if self.punctuation_symbols.contains(&c) {
++                // Only tokenize punctuation when it follows an alphanumeric character
++                if let Some(prev) = prev_char {
++                    if Self::is_alphanumeric(prev) {
++                        // Add space before if not already present
++                        if !result.ends_with(' ') && !result.ends_with('\t') && !result.ends_with('\n') {
++                            result.push(' ');
++                        }
++                        result.push(c);
++                        // Add space after if next char is alphanumeric
++                        if let Some(next) = next_char {
++                            if Self::is_alphanumeric(next) {
++                                result.push(' ');
++                            }
++                        }
++                        continue;
++                    }
++                }
++                result.push(c);
++                continue;
++            }
++
++            // Check if current char is a math symbol
++            if self.math_symbols.contains(&c) {
++                // Only tokenize math symbols when BOTH sides are digits
++                let prev_is_digit = prev_char.map(Self::is_digit).unwrap_or(false);
++                let next_is_digit = next_char.map(Self::is_digit).unwrap_or(false);
++
++                if prev_is_digit && next_is_digit {
++                    // Tokenize: both sides are digits
++                    if !result.ends_with(' ') && !result.ends_with('\t') && !result.ends_with('\n') {
++                        result.push(' ');
++                    }
++                    result.push(c);
++                    result.push(' ');
++                } else {
++                    // Don't tokenize: preserve as part of identifier
++                    result.push(c);
++                }
++                continue;
++            }
++
++            result.push(c);
++        }
++
++        result
++    }
++
++    /// Compact output by removing spaces around symbols (inverse of tokenize).
++    /// This is used for formatting output in a more human-readable way.
++    pub fn compact(&self, input: &str) -> String {
++        if !self.enabled {
++            return input.to_string();
++        }
++
++        let chars: Vec<char> = input.chars().collect();
++        let mut result = String::with_capacity(input.len());
++        let mut in_single_quote = false;
++        let mut in_double_quote = false;
++
++        let all_symbols: Vec<char> = self.punctuation_symbols.iter()
++            .chain(self.math_symbols.iter())
++            .copied()
++            .collect();
++
++        for i in 0..chars.len() {
++            let c = chars[i];
++
++            // Handle quote toggling
++            if c == '"' && !in_single_quote {
++                in_double_quote = !in_double_quote;
++                result.push(c);
++                continue;
++            }
++            if c == '\'' && !in_double_quote {
++                in_single_quote = !in_single_quote;
++                result.push(c);
++                continue;
++            }
++
++            // If inside quotes, preserve as-is
++            if in_single_quote || in_double_quote {
++                result.push(c);
++                continue;
++            }
++
++            // Check if this is a space that should be removed
++            if c == ' ' {
++                let prev_char = if !result.is_empty() {
++                    result.chars().last()
++                } else {
++                    None
++                };
++                let next_char = if i + 1 < chars.len() { Some(chars[i + 1]) } else { None };
++
++                // Skip space if it's between a word and a symbol, or between symbols
++                if let Some(prev) = prev_char {
++                    if all_symbols.contains(&prev) {
++                        continue;
++                    }
++                }
++                if let Some(next) = next_char {
++                    if all_symbols.contains(&next) {
++                        continue;
++                    }
++                }
++            }
++
++            result.push(c);
++        }
++
++        result
++    }
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++
++    #[test]
++    fn test_tokenize_punctuation() {
++        let tokenizer = Tokenizer::new();
++
++        assert_eq!(tokenizer.tokenize("1,2,3"), "1 , 2 , 3");
++        assert_eq!(tokenizer.tokenize("hello, world"), "hello , world");
++        assert_eq!(tokenizer.tokenize("1. 2. 3."), "1 . 2 . 3 .");
++    }
++
++    #[test]
++    fn test_tokenize_math_between_digits() {
++        let tokenizer = Tokenizer::new();
++
++        assert_eq!(tokenizer.tokenize("1+1"), "1 + 1");
++        assert_eq!(tokenizer.tokenize("10-20"), "10 - 20");
++        assert_eq!(tokenizer.tokenize("1+1,1/1,1*1"), "1 + 1 , 1 / 1 , 1 * 1");
++    }
++
++    #[test]
++    fn test_preserve_hyphenated_words() {
++        let tokenizer = Tokenizer::new();
++
++        assert_eq!(tokenizer.tokenize("Jean-Luc"), "Jean-Luc");
++        assert_eq!(tokenizer.tokenize("conan-center-index"), "conan-center-index");
++        assert_eq!(tokenizer.tokenize("a-b"), "a-b");
++        assert_eq!(tokenizer.tokenize("x+y=z"), "x+y=z");
++    }
++
++    #[test]
++    fn test_preserve_quoted_strings() {
++        let tokenizer = Tokenizer::new();
++
++        assert_eq!(tokenizer.tokenize("\"1,2,3\""), "\"1,2,3\"");
++        assert_eq!(tokenizer.tokenize("'hello, world'"), "'hello, world'");
++    }
++
++    #[test]
++    fn test_compact_output() {
++        let tokenizer = Tokenizer::new();
++
++        assert_eq!(tokenizer.compact("1 , 2 , 3"), "1,2,3");
++        assert_eq!(tokenizer.compact("1 + 1"), "1+1");
++        assert_eq!(tokenizer.compact("hello , world"), "hello,world");
++    }
++
++    #[test]
++    fn test_disabled_tokenizer() {
++        let tokenizer = Tokenizer::disabled();
++
++        assert_eq!(tokenizer.tokenize("1,2,3"), "1,2,3");
++        assert_eq!(tokenizer.tokenize("1+1"), "1+1");
++    }
++}
+diff --git a/rust/tests/tokenizer_tests.rs b/rust/tests/tokenizer_tests.rs
+new file mode 100644
+index 00000000..24b9b759
+--- /dev/null
++++ b/rust/tests/tokenizer_tests.rs
+@@ -0,0 +1,158 @@
++//! Tests for punctuation and math symbol tokenization (Issue #148)
++//!
++//! These tests verify that:
++//! 1. Punctuation is tokenized when following alphanumeric characters
++//! 2. Math symbols are tokenized only when between digits
++//! 3. Hyphenated words are preserved
++//! 4. Quoted strings preserve their content
++//! 5. Compact formatting can restore human-readable output
++
++use links_notation::{parse_lino_to_links, format_links, format_links_compact, Tokenizer, LiNo};
++
++fn get_values(lino: &LiNo<String>) -> Vec<String> {
++    match lino {
++        LiNo::Ref(id) => vec![id.clone()],
++        LiNo::Link { values, .. } => {
++            values.iter().filter_map(|v| {
++                match v {
++                    LiNo::Ref(id) => Some(id.clone()),
++                    LiNo::Link { values: inner, .. } => {
++                        inner.iter().filter_map(|iv| {
++                            match iv {
++                                LiNo::Ref(id) => Some(id.clone()),
++                                _ => None
++                            }
++                        }).next()
++                    }
++                }
++            }).collect()
++        }
++    }
++}
++
++// Test punctuation tokenization
++#[test]
++fn test_punctuation_comma_separates_numbers() {
++    let links = parse_lino_to_links("1, 2 and 3").unwrap();
++    assert_eq!(links.len(), 1);
++    let values = get_values(&links[0]);
++    assert_eq!(values, vec!["1", ",", "2", "and", "3"]);
++}
++
++#[test]
++fn test_punctuation_comma_without_space() {
++    let links = parse_lino_to_links("1,2,3").unwrap();
++    let values = get_values(&links[0]);
++    assert_eq!(values, vec!["1", ",", "2", ",", "3"]);
++}
++
++#[test]
++fn test_punctuation_hello_world_with_comma() {
++    let links = parse_lino_to_links("hello, world").unwrap();
++    let values = get_values(&links[0]);
++    assert_eq!(values, vec!["hello", ",", "world"]);
++}
++
++// Test math symbol tokenization
++#[test]
++fn test_math_addition_between_digits() {
++    let links = parse_lino_to_links("1+1").unwrap();
++    let values = get_values(&links[0]);
++    assert_eq!(values, vec!["1", "+", "1"]);
++}
++
++#[test]
++fn test_math_subtraction_between_digits() {
++    let links = parse_lino_to_links("10-20").unwrap();
++    let values = get_values(&links[0]);
++    assert_eq!(values, vec!["10", "-", "20"]);
++}
++
++// Test hyphenated words are preserved
++#[test]
++fn test_hyphenated_jean_luc_preserved() {
++    let links = parse_lino_to_links("Jean-Luc Picard").unwrap();
++    let values = get_values(&links[0]);
++    assert_eq!(values, vec!["Jean-Luc", "Picard"]);
++}
++
++#[test]
++fn test_hyphenated_conan_center_index_preserved() {
++    let links = parse_lino_to_links("conan-center-index").unwrap();
++    let values = get_values(&links[0]);
++    assert_eq!(values, vec!["conan-center-index"]);
++}
++
++#[test]
++fn test_math_symbols_between_letters_preserved() {
++    let links = parse_lino_to_links("x+y=z").unwrap();
++    let values = get_values(&links[0]);
++    assert_eq!(values, vec!["x+y=z"]);
++}
++
++// Test quoted strings preserve content
++#[test]
++fn test_quoted_comma_preserved() {
++    let links = parse_lino_to_links("\"1,\"").unwrap();
++    let values = get_values(&links[0]);
++    assert_eq!(values, vec!["1,"]);
++}
++
++#[test]
++fn test_quoted_multiple_commas_preserved() {
++    let links = parse_lino_to_links("\"1,2,3\"").unwrap();
++    let values = get_values(&links[0]);
++    assert_eq!(values, vec!["1,2,3"]);
++}
++
++// Test base64 strings are preserved
++#[test]
++fn test_base64_padding_equals_preserved() {
++    let links = parse_lino_to_links("bmFtZQ==").unwrap();
++    let values = get_values(&links[0]);
++    assert_eq!(values, vec!["bmFtZQ=="]);
++}
++
++// Test compact formatting
++#[test]
++fn test_compact_restore_numbers_with_commas() {
++    let links = parse_lino_to_links("1,2,3").unwrap();
++    let formatted = format_links(&links);
++    assert!(formatted.contains("1 , 2 , 3"));
++
++    let compact = format_links_compact(&links);
++    assert!(compact.contains("1,2,3"));
++}
++
++#[test]
++fn test_compact_restore_addition() {
++    let links = parse_lino_to_links("1+1").unwrap();
++    let formatted = format_links(&links);
++    assert!(formatted.contains("1 + 1"));
++
++    let compact = format_links_compact(&links);
++    assert!(compact.contains("1+1"));
++}
++
++// Test tokenizer directly
++#[test]
++fn test_tokenizer_tokenize() {
++    let tokenizer = Tokenizer::new();
++    assert_eq!(tokenizer.tokenize("1,2,3"), "1 , 2 , 3");
++    assert_eq!(tokenizer.tokenize("1+1"), "1 + 1");
++    assert_eq!(tokenizer.tokenize("Jean-Luc"), "Jean-Luc");
++}
++
++#[test]
++fn test_tokenizer_compact() {
++    let tokenizer = Tokenizer::new();
++    assert_eq!(tokenizer.compact("1 , 2 , 3"), "1,2,3");
++    assert_eq!(tokenizer.compact("1 + 1"), "1+1");
++}
++
++#[test]
++fn test_tokenizer_disabled() {
++    let tokenizer = Tokenizer::disabled();
++    assert_eq!(tokenizer.tokenize("1,2,3"), "1,2,3");
++    assert_eq!(tokenizer.tokenize("1+1"), "1+1");
++}

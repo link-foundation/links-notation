@@ -18,13 +18,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 244 | 22 |
-| JavaScript | 302 | 27 |
-| Rust | 400 | 28 |
-| C# | 294 | 26 |
-| Go | 138 | 16 |
-| Java | 184 | 15 |
-| PHP | 234 | 22 |
+| Python | 245 | 23 |
+| JavaScript | 303 | 28 |
+| Rust | 401 | 29 |
+| C# | 295 | 27 |
+| Go | 139 | 17 |
+| Java | 185 | 16 |
+| PHP | 235 | 23 |
 
 ---
 
@@ -767,6 +767,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | reference literals at every chunk split | [✅](python/tests/test_reference_fidelity.py#L31) | [✅](js/tests/ReferenceFidelity.test.js#L44) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L62) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L31) | [✅](go/reference_fidelity_test.go#L51) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L42) | [✅](php/tests/ReferenceFidelityTest.php#L36) |
 
 **Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4, Go: 4, Java: 4, PHP: 4
+
+## Shared Text Parity
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP |
+|-----------|---|---|---|---|---|---|---|
+| shared text parity | [✅](python/tests/test_shared_text_parity.py#L18) | [✅](js/tests/SharedTextParity.test.js#L15) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L41) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L16) | [✅](go/shared_text_parity_test.go#L23) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L38) | [✅](php/tests/SharedTextParityTest.php#L20) |
+
+**Category totals:** Python: 1, JavaScript: 1, Rust: 1, C#: 1, Go: 1, Java: 1, PHP: 1
 
 ## Single Line Parser
 

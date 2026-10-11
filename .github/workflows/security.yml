@@ -1,14 +1,7 @@
 name: security
 
 on:
-  push:
-    branches: main
-  pull_request:
-  # A dependency becomes vulnerable without anyone touching this repository,
-  # so the analysis also runs on a schedule.
-  schedule:
-    - cron: '0 6 * * 1'
-  workflow_dispatch:
+  workflow_call:
     inputs:
       verbose:
         description: 'Print extra diagnostics (never secret values)'
@@ -28,8 +21,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-codeql-${{ matrix.language }}
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-security-${{ github.ref }}-codeql-${{ matrix.language }}
+      cancel-in-progress: false
     permissions:
       contents: read
       security-events: write
@@ -76,8 +69,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-dependency-review
-      cancel-in-progress: true
+      group: ci-security-${{ github.ref }}-dependency-review
+      cancel-in-progress: false
     permissions:
       contents: read
       pull-requests: write
@@ -96,8 +89,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-secrets
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-security-${{ github.ref }}-secrets
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -125,8 +118,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-npm-audit-${{ matrix.directory }}
-      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+      group: ci-security-${{ github.ref }}-npm-audit-${{ matrix.directory }}
+      cancel-in-progress: false
     strategy:
       fail-fast: false
       matrix:

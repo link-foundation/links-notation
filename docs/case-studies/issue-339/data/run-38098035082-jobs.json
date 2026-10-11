@@ -1,0 +1,178 @@
+[
+  {
+    "id": 114347944093,
+    "run_id": 38098035082,
+    "workflow_name": "release-audit",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38098035082",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAan6sonQ",
+    "head_sha": "d99f425353e7ac56dc6bdb6631ac0877214b4a1e",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114347944093",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38098035082/job/114347944093",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T00:19:30Z",
+    "started_at": "2026-10-11T00:19:38Z",
+    "completed_at": "2026-10-11T00:19:46Z",
+    "name": "audit",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T00:19:39Z",
+        "completed_at": "2026-10-11T00:19:39Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T00:19:39Z",
+        "completed_at": "2026-10-11T00:19:40Z"
+      },
+      {
+        "name": "Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T00:19:40Z",
+        "completed_at": "2026-10-11T00:19:41Z"
+      },
+      {
+        "name": "Wait for this commit's publish workflows",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 4,
+        "started_at": "2026-10-11T00:19:41Z",
+        "completed_at": "2026-10-11T00:19:41Z"
+      },
+      {
+        "name": "Audit declared versions against the registries",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-11T00:19:41Z",
+        "completed_at": "2026-10-11T00:19:44Z"
+      },
+      {
+        "name": "Post Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T00:19:44Z",
+        "completed_at": "2026-10-11T00:19:44Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-11T00:19:44Z",
+        "completed_at": "2026-10-11T00:19:45Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-11T00:19:45Z",
+        "completed_at": "2026-10-11T00:19:45Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114347944093",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000101991,
+    "runner_name": "GitHub Actions 1000101991",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 114347944270,
+    "run_id": 38098035082,
+    "workflow_name": "release-audit",
+    "head_branch": "issue-339-12b617cefd5b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/38098035082",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAan6spTg",
+    "head_sha": "d99f425353e7ac56dc6bdb6631ac0877214b4a1e",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/114347944270",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/38098035082/job/114347944270",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T00:19:30Z",
+    "started_at": "2026-10-11T00:19:43Z",
+    "completed_at": "2026-10-11T00:19:49Z",
+    "name": "consistency",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-11T00:19:44Z",
+        "completed_at": "2026-10-11T00:19:45Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-11T00:19:45Z",
+        "completed_at": "2026-10-11T00:19:46Z"
+      },
+      {
+        "name": "Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-11T00:19:46Z",
+        "completed_at": "2026-10-11T00:19:47Z"
+      },
+      {
+        "name": "Check that every implementation declares the same version",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-11T00:19:47Z",
+        "completed_at": "2026-10-11T00:19:47Z"
+      },
+      {
+        "name": "Post Setup Node.js",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-11T00:19:47Z",
+        "completed_at": "2026-10-11T00:19:47Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-11T00:19:47Z",
+        "completed_at": "2026-10-11T00:19:47Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-11T00:19:47Z",
+        "completed_at": "2026-10-11T00:19:47Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/114347944270",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000101995,
+    "runner_name": "GitHub Actions 1000101995",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

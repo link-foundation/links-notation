@@ -9,8 +9,22 @@
 # it with backoff first.
 accept = ["200..=299", "429"]
 
+# GitHub's HTML blob endpoint repeatedly returned 503 while the corresponding
+# raw file returned 200. Check that exact owner/repo/ref/path through the raw
+# content endpoint; missing files still return 404. Only file links are mapped:
+# issues, trees, actions, and releases retain their original URL checks.
+# Exercise the production expression with a local server using
+# experiments/issue-339/test_github_blob_remap.py.
+remap = ['^https://github\.com/([^/]+)/([^/]+)/blob/(.+)$ https://raw.githubusercontent.com/$1/$2/$3']
+
 [hosts."github.com"]
 # The default is 10 parallel requests 50ms apart, which is what tripped the
 # secondary rate limit on unauthenticated HTML pages.
 concurrency = 2
 request_interval = "1s"
+# GitHub blob requests intermittently return 503 (issue 339). A bounded probe
+# saw a Lychee-agent 503 and a curl-agent 200; later both recovered. Apply the
+# documented user-agent workaround to this host while retaining retries and
+# 404 failures. Reproduce the response variation with
+# experiments/issue-339/probe_github_links.py.
+headers = { "User-Agent" = "curl/8.4.0" }

@@ -1,0 +1,3 @@
+{"path": "/flaky", "exit_code": 2, "cumulative_requests": 1, "successful": 0, "errors": 1}
+{"path": "/flaky", "exit_code": 0, "cumulative_requests": 2, "successful": 1, "errors": 0}
+{"path": "/gone", "exit_code": 2, "cumulative_requests": 1, "successful": 0, "errors": 1}

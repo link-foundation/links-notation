@@ -1,0 +1,215 @@
+name: publish-rust
+
+on:
+  workflow_call:
+    inputs:
+      verbose:
+        description: "Print extra diagnostics (never secret values)"
+        type: boolean
+        required: false
+        default: false
+    secrets:
+      CARGO_TOKEN:
+        required: false
+
+permissions:
+  contents: read
+
+env:
+  CARGO_INCREMENTAL: "0"
+  CARGO_BUILD_JOBS: "2"
+  CARGO_PROFILE_DEV_DEBUG: "0"
+  CARGO_PROFILE_TEST_DEBUG: "0"
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+defaults:
+  run:
+    working-directory: rust
+
+jobs:
+  publishToCratesIO:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    concurrency:
+      group: ci-rust-publish-crates-io
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      # Required by rust-lang/crates-io-auth-action (RFC 3691 trusted publishing).
+      id-token: write
+    outputs:
+      published: ${{ steps.publish.outputs.published }}
+      version: ${{ steps.publish.outputs.version }}
+      name: ${{ steps.publish.outputs.name }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2.9.2
+        with:
+          workspaces: rust
+      - name: Build
+        run: cargo build --release
+      # Exchanges the workflow's OIDC identity for a short-lived crates.io
+      # token. Trusted publishing has to be registered on crates.io before it
+      # can be used; until that is done the action fails with
+      # "No Trusted Publishing config found" and, because it writes an
+      # `::error::` annotation, paints a red cross on a run that then publishes
+      # perfectly well through CARGO_TOKEN. Gating on an opt-in repository
+      # variable keeps that false positive out of the run summary. Set the
+      # `CRATES_IO_TRUSTED_PUBLISHING` variable to `true` after configuring
+      # https://crates.io/crates/links-notation/settings to switch over.
+      - name: Authenticate to crates.io
+        id: cratesio-auth
+        if: ${{ vars.CRATES_IO_TRUSTED_PUBLISHING == 'true' }}
+        continue-on-error: true
+        uses: rust-lang/crates-io-auth-action@v1.0.5
+      - name: Publish to crates.io
+        id: publish
+        env:
+          # Prefer the short-lived OIDC token; fall back to the long-lived
+          # secret for as long as trusted publishing is not configured.
+          OIDC_TOKEN: ${{ steps.cratesio-auth.outputs.token }}
+          CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
+        run: |
+          set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+
+          read_field() { grep "^$2 = " "$1" | head -1 | sed "s/$2 = \"\(.*\)\"/\1/"; }
+          MACRO_VERSION=$(read_field links-notation-macro/Cargo.toml version)
+          PACKAGE_NAME=$(read_field links-notation/Cargo.toml name)
+          PACKAGE_VERSION=$(read_field links-notation/Cargo.toml version)
+          echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+
+          if crate_version_published links-notation-macro "$MACRO_VERSION" && crate_version_published "$PACKAGE_NAME" "$PACKAGE_VERSION"; then
+            echo "published=skipped" >> "$GITHUB_OUTPUT"
+            echo "Both exact crate versions are already published"
+            exit 0
+          fi
+
+          # The token never appears on the command line, where it would be
+          # visible to every other process on the runner via /proc.
+          export CARGO_REGISTRY_TOKEN="${OIDC_TOKEN:-$CARGO_TOKEN}"
+          if [ -n "${OIDC_TOKEN:-}" ]; then
+            echo "crates.io credential: trusted publishing (OIDC)"
+          elif [ -n "${CARGO_TOKEN:-}" ]; then
+            echo "crates.io credential: CARGO_TOKEN present"
+          else
+            echo "published=failed" >> "$GITHUB_OUTPUT"
+            echo "::error::No crates.io credential (neither trusted publishing nor CARGO_TOKEN). No GitHub release will be created."
+            exit 1
+          fi
+
+          publish_crate() {
+            local crate="$1" version="$2" log="$3"
+            # Every other language workflow checks the registry before pushing.
+            # Without it `cargo publish` prints a red "already exists on
+            # crates.io index" error on any re-run of an already released
+            # version, which reads as a failure in a job that is working
+            # exactly as intended.
+            if crate_version_published "$crate" "$version"; then
+              echo "${crate}@${version} is already on crates.io"
+              return 2
+            fi
+            if cargo publish -p "$crate" 2>&1 | tee "$log"; then
+              echo "Published ${crate}@${version}"
+              return 0
+            fi
+            if grep -q "already exists on crates.io index" "$log"; then
+              echo "${crate}@${version} is already on crates.io"
+              return 2
+            fi
+            echo "::error::Failed to publish ${crate}@${version}"
+            return 1
+          }
+
+          # The main crate depends on links-notation-macro, so that one has to
+          # land, and be visible in the index, first.
+          set +e
+          publish_crate links-notation-macro "$MACRO_VERSION" macro_publish.log
+          MACRO_STATUS=$?
+          set -e
+          if [ $MACRO_STATUS -eq 1 ]; then exit 1; fi
+
+          if [ $MACRO_STATUS -eq 0 ]; then
+            # The sparse index, not the JSON API, is what `cargo publish`
+            # resolves the dependency against, so that is what has to catch up.
+            if ! wait_for_crate_version links-notation-macro "$MACRO_VERSION" 20 15; then
+              echo "::warning::Continuing anyway; cargo will fail explicitly if the dependency is still unresolvable"
+            fi
+          fi
+
+          set +e
+          publish_crate "$PACKAGE_NAME" "$PACKAGE_VERSION" publish.log
+          STATUS=$?
+          set -e
+          case $STATUS in
+            0) echo "published=true" >> "$GITHUB_OUTPUT" ;;
+            2) echo "published=skipped" >> "$GITHUB_OUTPUT" ;;
+            *) echo "published=failed" >> "$GITHUB_OUTPUT"; exit 1 ;;
+          esac
+      - name: Verify the crate is really on crates.io
+        if: steps.publish.outputs.published == 'true'
+        env:
+          PACKAGE_NAME: ${{ steps.publish.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.publish.outputs.version }}
+        run: |
+          set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          # Check the index first: it is the artifact consumers actually
+          # resolve against, and unlike the JSON API it is not rate limited.
+          wait_for_crate_version "$PACKAGE_NAME" "$PACKAGE_VERSION" 20 15
+          wait_for_registry \
+            "${PACKAGE_NAME}@${PACKAGE_VERSION} on crates.io" \
+            "https://crates.io/api/v1/crates/${PACKAGE_NAME}/${PACKAGE_VERSION}" 20 15
+      # `cargo publish` unpacks each crate, its tests/ folder included, under
+      # target/package. rust-cache's post step treats every directory named
+      # `tests` as a profile and probes tests/target and tests/trybuild
+      # without awaiting the result, so the missing folders became four
+      # `ENOENT` error annotations on a green job (issue #330,
+      # https://github.com/Swatinem/rust-cache/issues/193). The unpacked copy
+      # is never reused, so it does not belong in the cache either.
+      # Reproduce with experiments/issue-330/rust-cache-enoent.sh.
+      - name: Drop the unpacked crates before the cache is saved
+        run: rm -rf target/package
+
+  publishRelease:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    needs: [publishToCratesIO]
+    # See csharp.yml: `result == 'success'` is true for a job that published
+    # nothing, so the gate is the explicit `published` output instead.
+    if: ${{ (needs.publishToCratesIO.outputs.published == 'true' || needs.publishToCratesIO.outputs.published == 'skipped') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_SHA: ${{ github.sha }}
+          PACKAGE_NAME: ${{ needs.publishToCratesIO.outputs.name }}
+          PACKAGE_VERSION: ${{ needs.publishToCratesIO.outputs.version }}
+        run: |
+          set -euo pipefail
+          TAG="rust_${PACKAGE_VERSION}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists"
+            exit 0
+          fi
+          gh release create "$TAG" \
+            --target "$RELEASE_SHA" \
+            --title "[Rust] $PACKAGE_VERSION" \
+            --notes "https://crates.io/crates/$PACKAGE_NAME"

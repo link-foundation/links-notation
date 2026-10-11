@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Require successful same-commit JavaScript checks before every language stage,
+  validate shared text parity in all seven bindings, and fail incomplete registry
+  delivery visibly. Prepare 0.25.2; see [the release fragment](changelog.d/339.md)
+  and [issue 339](https://github.com/link-foundation/links-notation/issues/339).
+
 - Declare Rust 1.87 as the minimum supported version for `links-notation` and
   `links-notation-macro`, so Cargo reports the required compiler version before
   compilation and MSRV-aware resolvers can select compatible releases. Test
