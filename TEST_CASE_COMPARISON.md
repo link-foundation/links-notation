@@ -25,7 +25,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Go | 139 | 17 |
 | Java | 185 | 16 |
 | PHP | 235 | 23 |
-| C++ | 345 | 28 |
+| C++ | 346 | 29 |
 
 ---
 
@@ -68,6 +68,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | whitespace only | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L49) | ❌ | ❌ |
 
 **Category totals:** Python: 15, JavaScript: 15, Rust: 15, C#: 15, Go: 13, Java: 17, PHP: 14, C++: 15
+
+## Benchmark Documents
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ |
+|-----------|---|---|---|---|---|---|---|---|
+| every generated document parses | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/benchmark_documents_tests.cpp#L32) |
+
+**Category totals:** Python: 0, JavaScript: 0, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0, C++: 1
 
 ## Binary
 
@@ -935,6 +943,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - tripletexample
 - whitespaceonly
 
+**Benchmark Documents** (1 missing):
+- everygenerateddocumentparses
+
 **Binary** (17 missing):
 - allnativetextmodelssurviveallbinaryoptions
 - binarylimitsandmalformed
@@ -1359,7 +1370,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 390 tests**
+**Total missing: 391 tests**
 
 ### JavaScript Missing Tests
 
@@ -1382,6 +1393,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - readmeexample
 - tripletexample
 - whitespaceonly
+
+**Benchmark Documents** (1 missing):
+- everygenerateddocumentparses
 
 **Binary** (16 missing):
 - binarylimitsandmalformed
@@ -1744,7 +1758,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 333 tests**
+**Total missing: 334 tests**
 
 ### Rust Missing Tests
 
@@ -1767,6 +1781,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - readmeexample
 - tripletexample
 - whitespaceonly
+
+**Benchmark Documents** (1 missing):
+- everygenerateddocumentparses
 
 **Binary** (22 missing):
 - allnativetextmodelssurviveallbinaryoptions
@@ -2023,7 +2040,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - namedtupletolink
 - tupletolink
 
-**Total missing: 235 tests**
+**Total missing: 236 tests**
 
 ### C# Missing Tests
 
@@ -2046,6 +2063,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - readmeexample
 - tripletexample
 - whitespaceonly
+
+**Benchmark Documents** (1 missing):
+- everygenerateddocumentparses
 
 **Binary** (22 missing):
 - allnativetextmodelssurviveallbinaryoptions
@@ -2417,7 +2437,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 340 tests**
+**Total missing: 341 tests**
 
 ### Go Missing Tests
 
@@ -2442,6 +2462,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - quotedreferencesparsing
 - tripletexample
 - whitespaceonly
+
+**Benchmark Documents** (1 missing):
+- everygenerateddocumentparses
 
 **Binary** (17 missing):
 - allnativetextmodelssurviveallbinaryoptions
@@ -2975,7 +2998,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 492 tests**
+**Total missing: 493 tests**
 
 ### Java Missing Tests
 
@@ -2996,6 +3019,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - quotedreferencesparsing
 - simplelink
 - singlelineformat
+
+**Benchmark Documents** (1 missing):
+- everygenerateddocumentparses
 
 **Binary** (16 missing):
 - allnativetextmodelssurviveallbinaryoptions
@@ -3491,7 +3517,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 450 tests**
+**Total missing: 451 tests**
 
 ### PHP Missing Tests
 
@@ -3515,6 +3541,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - readmeexample
 - tripletexample
 - whitespaceonly
+
+**Benchmark Documents** (1 missing):
+- everygenerateddocumentparses
 
 **Binary** (16 missing):
 - allnativetextmodelssurviveallbinaryoptions
@@ -3949,7 +3978,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 400 tests**
+**Total missing: 401 tests**
 
 ### C++ Missing Tests
 

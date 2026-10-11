@@ -15,7 +15,6 @@
 
 namespace links_notation_test {
 
-/// Reads a file of the repository, given relative to its root.
 /// How many times longer than usual the timing tests may take, from
 /// LINKS_NOTATION_TIME_SCALE. Sanitizers slow every step a few times over;
 /// the readings the bounds guard against were slower by orders of magnitude.
@@ -25,6 +24,7 @@ inline int time_scale() {
   return scale > 0 ? scale : 1;
 }
 
+/// Reads a file of the repository, given relative to its root.
 inline std::string read_repository_file(const std::string& path) {
   std::ifstream in(std::string(LINKS_NOTATION_REPOSITORY_ROOT) + "/" + path, std::ios::binary);
   if (!in) throw std::runtime_error("cannot read " + path);
