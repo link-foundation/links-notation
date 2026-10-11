@@ -43,6 +43,7 @@ def collect(number, branch):
     (ROOT / f"pr-{number}-runs.json").write_text(json.dumps(runs, indent=2) + "\n")
     with ThreadPoolExecutor(max_workers=3) as pool:
         all_jobs = list(pool.map(jobs, runs))
+    jobs_by_run = {run["id"]: group for run, group in zip(runs, all_jobs)}
     minutes = sum(
         max(0, (stamp(job["completed_at"]) - stamp(job["started_at"])).total_seconds())
         / 60
@@ -62,7 +63,20 @@ def collect(number, branch):
             run for run in group if run["name"] in LANGUAGES or run["name"] == "CI"
         ]
         covered = {run["name"] for run in native}
-        if ("CI" in covered or LANGUAGES <= covered) and all(
+        summaries = {"JavaScript", "Rust", "Python", "Java", "Go", "CSharp", "PHP"}
+        unified = any(
+            summaries <= {job["name"] for job in jobs_by_run[run["id"]]}
+            for run in native
+        )
+        legacy_tested = LANGUAGES <= covered and all(
+            any(
+                "test" in job["name"].lower() and job["conclusion"] == "success"
+                for job in jobs_by_run[run["id"]]
+            )
+            for run in native
+        )
+        # GitHub can display a workflow's old default-branch name until merge.
+        if (unified or legacy_tested) and all(
             run["conclusion"] == "success" for run in native
         ):
             greens.append((max(stamp(run["updated_at"]) for run in native), sha))

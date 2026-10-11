@@ -15,9 +15,9 @@ prepared branch: `d99f425353e7ac56dc6bdb6631ac0877214b4a1e`.
 | 2: Incomplete parity              | Binary interop tested protocol vectors, but there was no common text oracle or reviewed feature inventory. The libraries are separately maintained.                                                                                                                       | 20 feature rows, per-language implementation/test evidence, 14 shared text fixtures, seven native adapters, source inventory review, and documented host API exceptions.                                                                                              |
 | 3: Green Java without delivery    | Main run 37858059228 explicitly warned about four absent secrets (raw log line 1774), returned success, and skipped its GitHub release. Java's namespace and exact 0.25.1 POM return 404. PHP run 37858059237 similarly warned about unregistered Packagist at line 1746. | Missing credentials/registration now fail. Central waits for `published`, public namespace/POM verification precedes `[Java]`, and every registry audit checks exact versions and GitHub releases. **Actual Java/PHP publication remains blocked by provider setup.** |
 | 4: Stale conflicting PRs          | All six drafts are `CONFLICTING`; snapshots include all comment types, diffs, branch run metadata, linked traces, and log availability.                                                                                                                                   | Individual closure decisions preserve the feature issues and branches; see the decision records below. No unique feature is silently merged or removed.                                                                                                               |
-| 5: Unprotected main               | `rulesets-before.json` is empty; `branch-protection-before.json` records GitHub's 404 response.                                                                                                                                                                           | Checked-in ruleset requires JavaScript plus Rust/Python/Java/Go/CSharp/PHP, with no bypass actor. Activation/readback is recorded after real check names are verified.                                                                                                |
+| 5: Unprotected main               | `rulesets-before.json` is empty; `protection-before.json` records GitHub's 404 response.                                                                                                                                                                                  | Checked-in ruleset requires JavaScript plus Rust/Python/Java/Go/CSharp/PHP, with no bypass actor. Activated ruleset 24860631 requires all seven verified GitHub Actions contexts; creation and enforced-rules readback are retained.                                  |
 | 6: Missing workflow docs          | Root contributor and agent instructions did not exist.                                                                                                                                                                                                                    | `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md`: JS-first tests/ports, one push owner, completed failure batches, bounded Rust builds, no push during active runs.                                                                                                        |
-| 7: Independent release paths      | Seven independently triggered publishers, no fragments; registry presence was accepted as “skip” instead of proof of current version.                                                                                                                                     | `changelog.d/339.md`, coordinated 0.25.2 versions, one gated run, publisher verification, and a final audit even after publisher failure. Per-provider tags remain compatible with existing consumers.                                                                |
+| 7: Independent release paths      | Seven independently triggered publishers, no fragments; registry presence was accepted as “skip” instead of proof of current version.                                                                                                                                     | `changelog.d/339.md`, coordinated 0.25.2 versions, one gated run with all seven native stages completed before publication, publisher verification, and a final audit even after publisher failure. Per-provider tags remain compatible with existing consumers.      |
 
 <!-- markdownlint-enable MD013 -->
 
@@ -27,14 +27,14 @@ prepared branch: `d99f425353e7ac56dc6bdb6631ac0877214b4a1e`.
 
 | Issue requirement                                              | Reviewable implementation / evidence                                                                                                                                                                                                             |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| R1: Same-commit JS gate; no failed/cancelled/skipped JS bypass | Six reusable-only language workflows; `needs: [js]` in entry; 16 mutation regressions in `experiments/issue-339/ci-contract.test.mjs`.                                                                                                           |
+| R1: Same-commit JS gate; no failed/cancelled/skipped JS bypass | Six reusable-only language workflows; `needs: [js]` in entry; 22 workflow regressions in `experiments/issue-339/ci-contract.test.mjs`.                                                                                                           |
 | R2: Always run JS lint/test/parity                             | Unfiltered PR/main entry; unconditional format/lint/test/parity jobs; generated Peggy source comparison.                                                                                                                                         |
 | R3: Reject ungated non-JS workflows                            | `scripts/ci/check-js-gate.mjs` parses every workflow, checks reusable callers, toolchain jobs, conditions, checkout refs, and concurrency. Includes security/binary/benchmarks/docs.                                                             |
 | R4: Manifest and shared text corpus in seven libraries         | `parity/language-features.json`, `parity/text-fixtures.json`, generated TSV, native parsing/formatting/round-trip/stream tests. Missing binding/evidence/fixture/inventory fails the checker.                                                    |
 | R5: JS-first development; generated vs hand-written truth      | Contributor/agent/parity docs; only per-language Peggy/Pegasus parsers are generated. Structural meta-language translation is an experiment, not semantic parity evidence.                                                                       |
 | R6: Java public artifact, `[Java]`, all-provider exact audit   | Publication path and fail-visible regression tests implemented; live baseline audit fails for Java/PHP. Provider credentials, verified namespace, first Packagist submission, and main merge remain necessary. No fake Java release was created. |
 | R7: Disposition of PRs 204/185/170/167/80/76                   | `decisions/pr-*.md`, closure comments and after-state snapshots. Underlying feature issues remain open.                                                                                                                                          |
-| R8: Main ruleset and branch concurrency                        | `.github/main-ruleset.json`; entry and gated jobs use `cancel-in-progress: false`. Actual activation evidence is saved under `data/`.                                                                                                            |
+| R8: Main ruleset and branch concurrency                        | `.github/main-ruleset.json`; entry and gated jobs use `cancel-in-progress: false`. Active ruleset 24860631 and enforced branch rules are saved under `data/`.                                                                                    |
 | R9: Single-push protocol and minimal local load                | Three root documents plus the 2 GiB Rust target budget helper; experiments kept in `experiments/issue-339/`.                                                                                                                                     |
 | R10: Case study, per-language CI, before/after measurements    | This document, raw compressed logs/API data, local verification, and `measure_ci.py`. Post-push measurements are updated after completed checks.                                                                                                 |
 
@@ -83,7 +83,7 @@ fails with credential names only, without exposing their values.
 
 | Binding | Full local suite                       | Shared fixture coverage | Additional checks                                                                            |
 | ------- | -------------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------- |
-| JS      | 321 passed                             | 14 cases                | Prettier, ESLint, build/generated diff, TypeScript examples                                  |
+| JS      | 308 passed                             | 14 cases                | Prettier, ESLint, build/generated diff, TypeScript examples                                  |
 | Rust    | Workspace and no-default suites passed | 14 cases                | rustfmt, Clippy all targets/features; target below 2 GiB, incremental off, two compiler jobs |
 | Python  | 272 passed, 1 skipped                  | 14 cases                | Black, isort, flake8 with project configuration                                              |
 | Java    | 185 passed                             | 14 cases                | Google Java Format and Spotless                                                              |
@@ -208,3 +208,69 @@ main and prepared-branch runs, registry responses, before/after protection
 state, local reproductions, and CI timing data. New CI failures are matched to
 their exact SHA, preserved with line-numbered findings, fixed as a complete
 batch, and rerun before the PR is marked ready.
+
+## First implementation CI batch
+
+Commit `97414a829ef77902dcfcc1a0cf21b0311edd4d71` started seven workflow
+runs at 2026-10-11 00:58:28 UTC. Unified CI run 38100234094 passed every
+native language summary, binary interoperability, CodeQL, and security audit.
+The two failing jobs were generated-file drift, preserved as complete job logs:
+
+- `docs-test-cases-first.log.gz`, lines 200–201: the six new native test
+  declarations changed `TEST_CASE_COMPARISON.md` and both README count tables.
+  The comparison only extracts static declarations. JS's fourteen dynamically
+  named fixtures were initially invisible, so the adapter now uses one named
+  test with all fourteen fixtures, matching the other six adapters; assertion
+  messages retain the individual fixture ID. The generator and its check pass.
+- `benchmark-first.log.gz`, lines 535–549: benchmark generation changed only
+  the report's library version line from 0.25.1 to 0.25.2. A verbose local
+  `--check` reproduced the drift, then regeneration and all 73 output checks
+  passed without changing measured data.
+- Separate links run 38100233916 failed after its retry on seven unique GitHub
+  blob URLs with HTTP 503 (`links-38100233916.log.gz`, lines 499–535). The
+  scratch report was also scanned on retry, duplicating error occurrences.
+  Local HTML and authenticated contents-API probes returned 200. The second
+  Actions attempt recovered with no code changes, checking 2321 links with
+  zero errors at 01:09:32 UTC. This confirms intermittent provider responses
+  rather than missing files. A bounded probe also observed 503 with the Lychee
+  agent and 200 with curl; subsequent probes returned 200 for both agents, so
+  bot filtering is an inference, not a proven cause. The documented GitHub-only
+  user-agent workaround retains 404 failures; the scratch report is excluded
+  and optional verbose diagnostics are connected to both action invocations.
+
+No commit was pushed while any branch run was active.
+All fifty executed unified-CI job logs, including successful jobs, are retained
+as `run-38100234094-*.log.gz`. GitHub CLI could not assemble the full run log
+because of its API-request limit; the authenticated Actions ZIP supplied the
+complete logs instead. `gh pr diff 341` also exceeded GitHub's 300-file diff
+limit; review uses the paginated PR files API plus the local diff at the same
+SHA. Most files are raw evidence, and no implementation files were deleted.
+
+Main's active [ruleset 24860631](https://github.com/link-foundation/links-notation/rules/24860631)
+requires `JavaScript`, `Rust`, `Python`, `Java`, `Go`, `CSharp`, and `PHP`
+from GitHub Actions integration 15368. Their actual check names and successful
+head SHA were verified before activation. Readback confirms strict checks,
+PR-only changes, deletion/force-push protection, and no bypass actors; snapshots
+are `main-ruleset-created.json`, `main-ruleset-readback.json`, and
+`main-enforced-rules.json`.
+
+Review also reproduced two static-guard gaps: bare `pytest` / `python3 -m
+pytest`, and language commands hidden by a native working directory. Both
+mutation tests failed before the fix and pass afterward; the guard now has 22
+regressions. No parser or formatter behavior was changed. The link-check
+workaround follows [Lychee's own troubleshooting guidance](https://lychee.cli.rs/troubleshooting/redirects/)
+and per-host header configuration. No external software defect was established.
+
+## Publication barrier review
+
+Final review reproduced another release-ordering defect: a provider could
+publish after only its own language tests had passed. The original 19th
+regression failed because the entry had no all-language release prerequisite
+(`data/local-checks/all-native-release-before.log.gz`). Publishers now live in
+seven reusable `publish-*.yml` files called by `release.yml`; its entry needs all
+seven native stages and runs only on main pushes. Provider-to-GitHub-release
+dependencies and C# PDF/DocFX coverage remain intact. Native tests receive no
+provider credentials. The final audit explicitly waits for release completion
+and still runs after a provider failure. Three mutation checks reject a removed
+native prerequisite, publication moved into a native stage, and a skipped final
+audit. All 22 workflow regressions and four Python checks pass locally.

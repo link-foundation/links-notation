@@ -1,9 +1,17 @@
-"""Migrate existing jobs intact to same-commit reusable workflows."""
+"""Historical one-time migration of the pre-339 workflow layout.
+
+The final workflows also include subsequent reviewed publishing and guard
+changes; this experiment must not overwrite that layout when rerun.
+"""
 
 import re
 from pathlib import Path
 
 WORKFLOWS = Path(".github/workflows")
+if (WORKFLOWS / "javascript.yml").exists():
+    raise SystemExit(
+        "Baseline-only migration: reusable JavaScript workflow already exists."
+    )
 LANGUAGES = ["js", "rust", "python", "java", "go", "csharp", "php"]
 REUSABLE = LANGUAGES + [
     "binary-interop",

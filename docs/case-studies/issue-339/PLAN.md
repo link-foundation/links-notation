@@ -13,13 +13,14 @@
       implementing fixes.
 - [x] Introduce a single CI entry workflow with unconditional JS
       lint/test/parity, same-commit reusable language workflows, protected
-      release conditions, and queued per-branch concurrency.
+      release conditions, an all-seven-native publication barrier, and queued
+      per-branch concurrency.
 - [x] Audit every other workflow (security, binary interop, benchmarks, docs)
       for non-JS execution and gate applicable jobs.
 - [x] Add a validated feature manifest, shared parser/formatter fixtures, all
       seven language runners, and explicit documented exceptions for existing
       JS-only APIs.
-- [ ] Correct Java Central publishing and registry audits; verify public
+- [x] Correct Java Central publishing and registry audits; verify public
       versions or record concrete credential/namespace blockers and visible
       failed release behavior.
 - [x] Review PRs 204, 185, 170, 167, 80, and 76 thoroughly; document and execute
@@ -29,7 +30,7 @@
 - [x] Run all relevant local checks, keep bounded Rust build settings, commit
       useful atomic steps on the prepared branch, and preserve test/experiment
       scripts.
-- [ ] Configure and verify main's required-check ruleset after final check names
+- [x] Configure and verify main's required-check ruleset after final check names
       are concrete.
 - [ ] Wait for active runs before pushing; push only `issue-339-12b617cefd5b`;
       collect every failure from the latest SHA before any subsequent push.
