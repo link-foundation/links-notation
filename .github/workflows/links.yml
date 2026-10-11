@@ -49,6 +49,7 @@ jobs:
         --exclude-path docs/website/dist
         --exclude-path js/node_modules
         --exclude-path docs/website/node_modules
+        --exclude-path lychee
         './**/*.md'
     steps:
       - uses: actions/checkout@v7.0.1
@@ -71,6 +72,7 @@ jobs:
           args: ${{ env.LYCHEE_ARGS }}
           fail: false
           jobSummary: true
+          debug: ${{ inputs.verbose || false }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # lychee retries a 429 but never a 5xx answer: a rejected status code only
@@ -91,5 +93,6 @@ jobs:
           args: ${{ env.LYCHEE_ARGS }}
           fail: true
           jobSummary: true
+          debug: ${{ inputs.verbose || false }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
