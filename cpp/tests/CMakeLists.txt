@@ -14,13 +14,14 @@ if(NOT GTest_FOUND)
 endif()
 
 include(GoogleTest)
+find_package(Threads REQUIRED)
 
 # Every suite is one file named after the Rust suite it mirrors, so the test
 # case comparison in TEST_CASE_COMPARISON.md lines them up by name.
 file(GLOB LINKS_NOTATION_TEST_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*_tests.cpp")
 
 add_executable(links_notation_tests ${LINKS_NOTATION_TEST_SOURCES})
-target_link_libraries(links_notation_tests PRIVATE links_notation::links_notation GTest::gtest_main)
+target_link_libraries(links_notation_tests PRIVATE links_notation::links_notation GTest::gtest_main Threads::Threads)
 # The shared fixtures (parity/, docs/protocol/, docs/test-corpora/) are read
 # from the repository rather than copied, so every language checks one corpus.
 get_filename_component(LINKS_NOTATION_REPOSITORY_ROOT "${PROJECT_SOURCE_DIR}/.." ABSOLUTE)
