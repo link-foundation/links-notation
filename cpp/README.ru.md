@@ -1,6 +1,6 @@
 # Парсер Links Notation для C++
 
-[![Actions Status](https://github.com/link-foundation/links-notation/actions/workflows/cpp.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/cpp.yml)
+[![Actions Status](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml)
 [![GitHub release](https://img.shields.io/github/v/release/link-foundation/links-notation?filter=cpp_*&label=release)](https://github.com/link-foundation/links-notation/releases?q=cpp_&expanded=true)
 
 Реализация парсера и форматтера нотации связей (Links Notation, lino) от Link

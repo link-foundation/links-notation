@@ -1,6 +1,6 @@
 # Links Notation Parser for C++
 
-[![Actions Status](https://github.com/link-foundation/links-notation/actions/workflows/cpp.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/cpp.yml)
+[![Actions Status](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml)
 [![GitHub release](https://img.shields.io/github/v/release/link-foundation/links-notation?filter=cpp_*&label=release)](https://github.com/link-foundation/links-notation/releases?q=cpp_&expanded=true)
 
 C++17 implementation of Link Foundation's Links Notation (Lino) parser and
