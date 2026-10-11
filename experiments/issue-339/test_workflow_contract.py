@@ -25,7 +25,8 @@ class WorkflowContract(unittest.TestCase):
         self.assertNotIn("isJsFilesChanged", text)
 
     def test_missing_java_credentials_fail(self):
-        text = (ROOT / ".github/workflows/java.yml").read_text()
+        text = (ROOT / ".github/workflows/publish-java.yml").read_text()
+        self.assertIn("require-java-credentials.sh", text)
         self.assertNotRegex(text, r"published=failed[^\n]*\n\s+exit 0")
         self.assertNotIn("::warning::Skipping Maven Central", text)
 

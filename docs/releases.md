@@ -1,8 +1,9 @@
 # Release setup and recovery
 
 The CI entry is `js.yml`, and every called workflow uses the caller's commit.
-Publishers run only on pushes to main, after their tests; a final audit waits
-for all of them, including failures, then checks exact versions and GitHub
+The main-only `release.yml` call waits for all seven native language stages.
+It then calls the seven `publish-*.yml` workflows. A final audit waits
+for all providers, including failures, then checks exact versions and GitHub
 releases. Pull requests expect their new version to be absent and never publish.
 HTTP/authentication/transport errors still fail PR audits. A successful release
 requires all seven registries; green tests alone do not prove delivery.

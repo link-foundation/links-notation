@@ -5,11 +5,11 @@ on:
     branches: [main]
   pull_request:
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: "0 6 * * 1"
   workflow_dispatch:
     inputs:
       verbose:
-        description: 'Print extra diagnostics (never secret values)'
+        description: "Print extra diagnostics (never secret values)"
         type: boolean
         default: false
 
@@ -26,80 +26,42 @@ jobs:
     uses: ./.github/workflows/javascript.yml
     with:
       verbose: ${{ inputs.verbose || false }}
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-    permissions:
-      contents: write
-      id-token: write
 
   rust:
     needs: [js]
     uses: ./.github/workflows/rust.yml
     with:
       verbose: ${{ inputs.verbose || false }}
-    secrets:
-      CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
-    permissions:
-      contents: write
-      id-token: write
 
   python:
     needs: [js]
     uses: ./.github/workflows/python.yml
     with:
       verbose: ${{ inputs.verbose || false }}
-    secrets:
-      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-    permissions:
-      contents: write
-      id-token: write
 
   java:
     needs: [js]
     uses: ./.github/workflows/java.yml
     with:
       verbose: ${{ inputs.verbose || false }}
-    secrets:
-      CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
-      CENTRAL_TOKEN: ${{ secrets.CENTRAL_TOKEN }}
-      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-    permissions:
-      contents: write
-      id-token: write
 
   go:
     needs: [js]
     uses: ./.github/workflows/go.yml
     with:
       verbose: ${{ inputs.verbose || false }}
-    permissions:
-      contents: write
-      id-token: write
 
   csharp:
     needs: [js]
     uses: ./.github/workflows/csharp.yml
     with:
       verbose: ${{ inputs.verbose || false }}
-    secrets:
-      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-      NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
-    permissions:
-      contents: write
-      id-token: write
 
   php:
     needs: [js]
     uses: ./.github/workflows/php.yml
     with:
       verbose: ${{ inputs.verbose || false }}
-    secrets:
-      PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
-      PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
-    permissions:
-      contents: write
-      id-token: write
 
   binary_interop:
     needs: [js]
@@ -133,8 +95,30 @@ jobs:
     with:
       verbose: ${{ inputs.verbose || false }}
 
-  release_audit:
+  release:
     needs: [js, rust, python, java, go, csharp, php]
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    uses: ./.github/workflows/release.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+      CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+      CENTRAL_TOKEN: ${{ secrets.CENTRAL_TOKEN }}
+      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+      PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
+      PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+    permissions:
+      contents: write
+      id-token: write
+
+  release_audit:
+    needs: [js, rust, python, java, go, csharp, php, release]
     if: ${{ always() && needs.js.result == 'success' }}
     uses: ./.github/workflows/release-audit.yml
     with:

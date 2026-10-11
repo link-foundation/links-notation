@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       verbose:
-        description: 'Print extra diagnostics (never secret values)'
+        description: "Print extra diagnostics (never secret values)"
         type: boolean
         required: false
         default: false
@@ -35,7 +35,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v7.0.0
         with:
-          go-version: '1.26'
+          go-version: "1.26"
           # This module has no dependencies: go/go.sum does not exist and
           # go.mod has no require block. Pointing the dependency cache at a
           # file that is not there made setup-go emit "Restore cache failed:
@@ -72,7 +72,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v7.0.0
         with:
-          go-version: '1.26'
+          go-version: "1.26"
           # This module has no dependencies: go/go.sum does not exist and
           # go.mod has no require block. Pointing the dependency cache at a
           # file that is not there made setup-go emit "Restore cache failed:
@@ -107,69 +107,3 @@ jobs:
       - name: Note that coverage was not uploaded
         if: env.CODECOV_TOKEN == ''
         run: echo "::notice::CODECOV_TOKEN is not configured, so coverage was not uploaded"
-
-  publishRelease:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    needs: [test]
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    concurrency:
-      group: ci-go-publish-go
-      cancel-in-progress: false
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v7.0.1
-        with:
-          persist-credentials: false
-          submodules: true
-      - name: Read the module version
-        id: version-check
-        run: |
-          set -euo pipefail
-          PACKAGE_VERSION=$(tr -d '[:space:]' < VERSION)
-          if [ -z "$PACKAGE_VERSION" ]; then
-            echo "::error::go/VERSION is empty"
-            exit 1
-          fi
-          MODULE=$(sed -n 's/^module //p' go.mod | head -1)
-          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
-          echo "module=$MODULE" >> "$GITHUB_OUTPUT"
-          echo "Module: $MODULE@v$PACKAGE_VERSION"
-      # Go has no registry to push to: the module proxy serves whatever the
-      # tag points at, so creating the tag *is* the publish. That is why this
-      # job both releases and verifies, unlike the other languages.
-      - name: Create Go module tag and GitHub release
-        id: publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_SHA: ${{ github.sha }}
-          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
-        run: |
-          set -euo pipefail
-          # Go modules living in the go/ subdirectory require go/vX.Y.Z tags.
-          TAG="go/v${PACKAGE_VERSION}"
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            echo "Release $TAG already exists"
-            echo "published=skipped" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          gh release create "$TAG" \
-            --target "$RELEASE_SHA" \
-            --title "[Go] $PACKAGE_VERSION" \
-            --notes "Go module release. Install with: \`go get github.com/link-foundation/links-notation/go@v$PACKAGE_VERSION\`"
-          echo "published=true" >> "$GITHUB_OUTPUT"
-      - name: Verify the module is really on proxy.golang.org
-        if: steps.publish.outputs.published == 'true'
-        env:
-          MODULE: ${{ steps.version-check.outputs.module }}
-          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
-        run: |
-          set -euo pipefail
-          # shellcheck source=scripts/ci/registry-probe.sh
-          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
-          # The proxy only fetches a version once someone asks for it, so this
-          # also warms it for the first consumer.
-          wait_for_registry \
-            "${MODULE}@v${PACKAGE_VERSION} on proxy.golang.org" \
-            "https://proxy.golang.org/${MODULE}/@v/v${PACKAGE_VERSION}.info" 20 15

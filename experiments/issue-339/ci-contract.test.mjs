@@ -133,3 +133,46 @@ test("a native working directory cannot hide a language job", () =>
       };
     }),
   ).not.toEqual([]));
+
+test("publication waits for all seven native stages", () => {
+  const workflows = readWorkflows();
+  expect(workflows["js.yml"].jobs.release?.needs?.toSorted()).toEqual(
+    ["js", "rust", "python", "java", "go", "csharp", "php"].toSorted(),
+  );
+  for (const language of [
+    "javascript",
+    "rust",
+    "python",
+    "java",
+    "go",
+    "csharp",
+    "php",
+  ]) {
+    expect(
+      Object.keys(workflows[`${language}.yml`].jobs).some((name) =>
+        /publish|pushToNuget/i.test(name),
+      ),
+    ).toBe(false);
+  }
+  expect(workflows["js.yml"].jobs.release_audit.needs).toContain("release");
+});
+
+test("a missing native release prerequisite is rejected", () =>
+  expect(
+    mutate((w) => {
+      w["js.yml"].jobs.release.needs = ["js"];
+    }),
+  ).not.toEqual([]));
+test("a publisher inside a native stage is rejected", () =>
+  expect(
+    mutate((w) => {
+      w["csharp.yml"].jobs.pushToNuget =
+        w["publish-csharp.yml"].jobs.pushToNuget;
+    }),
+  ).not.toEqual([]));
+test("provider failures cannot skip the final release audit", () =>
+  expect(
+    mutate((w) => {
+      delete w["js.yml"].jobs.release_audit.if;
+    }),
+  ).not.toEqual([]));

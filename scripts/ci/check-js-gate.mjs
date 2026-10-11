@@ -50,6 +50,22 @@ export function checkGate(workflows) {
   }
   if (js.jobs?.findChangedJsFiles)
     fail("JS checks cannot have a change detector");
+  const release = entry.jobs?.release;
+  if (
+    release?.uses !== "./.github/workflows/release.yml" ||
+    !Array.isArray(release.needs) ||
+    JSON.stringify(release.needs?.toSorted()) !==
+      JSON.stringify(["js", ...languageNames].toSorted()) ||
+    release.if !==
+      "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}"
+  )
+    fail("Publication must wait for all seven native stages on main pushes");
+  if (
+    !entry.jobs?.release_audit?.needs?.includes("release") ||
+    entry.jobs.release_audit.if !==
+      "${{ always() && needs.js.result == 'success' }}"
+  )
+    fail("The final audit must run after publication, including failures");
 
   function dependsOnJs(document, name, visited = new Set()) {
     if (visited.has(name)) return false;
@@ -92,10 +108,17 @@ export function checkGate(workflows) {
     }
     for (const [name, job] of Object.entries(document.jobs)) {
       if (
-        job.concurrency?.["cancel-in-progress"] !== undefined &&
-        job.concurrency["cancel-in-progress"] !== false &&
         ["javascript", ...languageNames].some(
           (language) => file === `${language}.yml`,
+        ) &&
+        /publish|pushToNuget/i.test(name)
+      )
+        fail(`${file}/${name}: publishing belongs after all native stages`);
+      if (
+        job.concurrency?.["cancel-in-progress"] !== undefined &&
+        job.concurrency["cancel-in-progress"] !== false &&
+        /^(?:javascript|rust|python|java|go|csharp|php|publish-.+)\.yml$/.test(
+          file,
         )
       )
         fail(`${file}/${name}: gated jobs cannot cancel runs`);

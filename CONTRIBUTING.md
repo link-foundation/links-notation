@@ -33,6 +33,8 @@ node scripts/ci/check-parity.mjs
 node --test experiments/issue-339/parity-contract.test.mjs experiments/issue-339/release-audit.test.mjs
 python3 experiments/issue-339/test_workflow_contract.py
 node scripts/version-consistency.mjs
+python3 experiments/issue-332/test_test_comparison.py
+node scripts/create-test-case-comparison.mjs --check
 ```
 
 After reviewing feature coverage, run
@@ -48,7 +50,12 @@ Black/isort/flake8 for Python, `go test ./...` and `go vet ./...` for Go,
 for C#, and `composer run-script test` / `lint` for PHP. Workflow changes also
 require actionlint with shellcheck on PATH, `shellcheck -x scripts/ci/*.sh`,
 `bash scripts/ci/registry-probe.test.sh`, and the zizmor command in
-`.github/workflows/workflows.yml`. Save verbose logs in `ci-logs/`.
+`.github/workflows/workflows.yml`. After adding tests, regenerate the comparison
+with `node scripts/create-test-case-comparison.mjs`. After a library version bump,
+regenerate benchmarks with `cargo run -p links-notation-benchmark --release`
+from `rust/`, using the bounded Rust settings below. Check the result with
+`cargo run -p links-notation-benchmark --release -- --check`. Save verbose logs
+in `ci-logs/`.
 
 For Rust use one shared, bounded build directory rather than a separate target
 tree per agent:
@@ -111,7 +118,8 @@ Add a fragment under `changelog.d/` for each user-visible change. Release PRs
 combine the reviewed fragments into `CHANGELOG.md` and update all seven declared
 versions together. This PR prepares 0.25.2. Per-registry tags remain for
 existing consumers, especially Go's required `go/vVERSION` tag. One CI run
-coordinates publishing and performs the final exact-version audit. A distributed
+waits for all seven native stages before calling `release.yml`, coordinates
+publishing, and performs the final exact-version audit. A distributed
 release cannot be atomic across registries: a partial delivery fails the final
 audit and must be recovered by rerunning after the failing provider is repaired.
 
