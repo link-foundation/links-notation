@@ -1,0 +1,1563 @@
+diff --git a/csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs b/csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs
+index 62fb7f63..132f94ba 100644
+--- a/csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs
++++ b/csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs
+@@ -431,5 +431,169 @@ public static void QuotedReferencesWithSpacesInLinkTest()
+             Assert.Single(result[0].Values);
+             Assert.Equal("value with spaces", result[0].Values?[0].Id);
+         }
++
++        // Tests for alternative bracket delimiters (issue #143)
++
++        [Fact]
++        public static void CurlyBracesAsDelimitersLinkWithIdTest()
++        {
++            var input = "{id: source target}";
++            var parser = new Parser();
++            var result = parser.Parse(input);
++
++            Assert.Single(result);
++            Assert.Equal("id", result[0].Id);
++            Assert.NotNull(result[0].Values);
++            Assert.Equal(2, result[0].Values!.Count);
++            Assert.Equal("source", result[0].Values![0].Id);
++            Assert.Equal("target", result[0].Values![1].Id);
++        }
++
++        [Fact]
++        public static void SquareBracketsAsDelimitersLinkWithIdTest()
++        {
++            var input = "[id: source target]";
++            var parser = new Parser();
++            var result = parser.Parse(input);
++
++            Assert.Single(result);
++            Assert.Equal("id", result[0].Id);
++            Assert.NotNull(result[0].Values);
++            Assert.Equal(2, result[0].Values!.Count);
++            Assert.Equal("source", result[0].Values![0].Id);
++            Assert.Equal("target", result[0].Values![1].Id);
++        }
++
++        [Fact]
++        public static void CurlyBracesAsDelimitersValueLinkTest()
++        {
++            var input = "{a b c}";
++            var parser = new Parser();
++            var result = parser.Parse(input);
++
++            Assert.Single(result);
++            Assert.Null(result[0].Id);
++            Assert.Equal(3, result[0].Values?.Count);
++        }
++
++        [Fact]
++        public static void SquareBracketsAsDelimitersValueLinkTest()
++        {
++            var input = "[a b c]";
++            var parser = new Parser();
++            var result = parser.Parse(input);
++
++            Assert.Single(result);
++            Assert.Null(result[0].Id);
++            Assert.Equal(3, result[0].Values?.Count);
++        }
++
++        [Fact]
++        public static void CurlyBracesSingletTest()
++        {
++            var input = "{singlet}";
++            var parser = new Parser();
++            var result = parser.Parse(input);
++
++            Assert.Single(result);
++            Assert.Null(result[0].Id);
++            Assert.Single(result[0].Values);
++            Assert.Equal("singlet", result[0].Values?[0].Id);
++        }
++
++        [Fact]
++        public static void SquareBracketsSingletTest()
++        {
++            var input = "[singlet]";
++            var parser = new Parser();
++            var result = parser.Parse(input);
++
++            Assert.Single(result);
++            Assert.Null(result[0].Id);
++            Assert.Single(result[0].Values);
++            Assert.Equal("singlet", result[0].Values?[0].Id);
++        }
++
++        [Fact]
++        public static void NestedCurlyBracesTest()
++        {
++            var input = "{outer: {inner: value}}";
++            var parser = new Parser();
++            var result = parser.Parse(input);
++
++            Assert.Single(result);
++            Assert.Equal("outer", result[0].Id);
++            Assert.Single(result[0].Values);
++            Assert.Equal("inner", result[0].Values?[0].Id);
++        }
++
++        [Fact]
++        public static void NestedSquareBracketsTest()
++        {
++            var input = "[outer: [inner: value]]";
++            var parser = new Parser();
++            var result = parser.Parse(input);
++
++            Assert.Single(result);
++            Assert.Equal("outer", result[0].Id);
++            Assert.Single(result[0].Values);
++            Assert.Equal("inner", result[0].Values?[0].Id);
++        }
++
++        [Fact]
++        public static void MixedDelimitersParenthesesWithCurlyBracesTest()
++        {
++            var input = "(outer: {inner: value})";
++            var parser = new Parser();
++            var result = parser.Parse(input);
++
++            Assert.Single(result);
++            Assert.Equal("outer", result[0].Id);
++            Assert.Single(result[0].Values);
++            Assert.Equal("inner", result[0].Values?[0].Id);
++        }
++
++        [Fact]
++        public static void MixedDelimitersSquareBracketsWithParenthesesTest()
++        {
++            var input = "[outer: (inner: value)]";
++            var parser = new Parser();
++            var result = parser.Parse(input);
++
++            Assert.Single(result);
++            Assert.Equal("outer", result[0].Id);
++            Assert.Single(result[0].Values);
++            Assert.Equal("inner", result[0].Values?[0].Id);
++        }
++
++        [Fact]
++        public static void CurlyBracesEquivalentToParenthesesTest()
++        {
++            var parenInput = "(id: source target)";
++            var curlyInput = "{id: source target}";
++            var parser = new Parser();
++
++            var parenResult = parser.Parse(parenInput);
++            var curlyResult = parser.Parse(curlyInput);
++
++            Assert.Equal(parenResult.Count, curlyResult.Count);
++            Assert.Equal(parenResult[0].Id, curlyResult[0].Id);
++            Assert.Equal(parenResult[0].Values?.Count, curlyResult[0].Values?.Count);
++        }
++
++        [Fact]
++        public static void SquareBracketsEquivalentToParenthesesTest()
++        {
++            var parenInput = "(id: source target)";
++            var bracketInput = "[id: source target]";
++            var parser = new Parser();
++
++            var parenResult = parser.Parse(parenInput);
++            var bracketResult = parser.Parse(bracketInput);
++
++            Assert.Equal(parenResult.Count, bracketResult.Count);
++            Assert.Equal(parenResult[0].Id, bracketResult[0].Id);
++            Assert.Equal(parenResult[0].Values?.Count, bracketResult[0].Values?.Count);
++        }
+     }
+ }
+\ No newline at end of file
+diff --git a/csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj b/csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
+index 82dc8303..c96c58b1 100644
+--- a/csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
++++ b/csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
+@@ -4,7 +4,7 @@
+     <Description>Link.Foundation's Platform.Protocols.Lino Class Library</Description>
+     <Copyright>Konstantin Diachenko</Copyright>
+     <AssemblyTitle>Link.Foundation.Links.Notation</AssemblyTitle>
+-    <VersionPrefix>0.12.0</VersionPrefix>
++    <VersionPrefix>0.13.0</VersionPrefix>
+     <Authors>Konstantin Diachenko</Authors>
+     <TargetFramework>net8</TargetFramework>
+     <PackageId>Link.Foundation.Links.Notation</PackageId>
+@@ -23,8 +23,7 @@
+     <IncludeSymbols>true</IncludeSymbols>
+     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+     <LangVersion>latest</LangVersion>
+-    <PackageReleaseNotes>Bug fixes.
+-Test cases suite is updated.</PackageReleaseNotes>
++    <PackageReleaseNotes>Added support for alternative bracket delimiters { } and [ ] as equivalent to ( ).</PackageReleaseNotes>
+     <Nullable>enable</Nullable>
+     <RootNamespace>Link.Foundation.Links.Notation</RootNamespace>
+     <NoWarn>$(NoWarn);CS8981;CS1591;CS1584;CS1658</NoWarn>
+diff --git a/csharp/Link.Foundation.Links.Notation/Link.cs b/csharp/Link.Foundation.Links.Notation/Link.cs
+index 73abf631..d34f2bac 100644
+--- a/csharp/Link.Foundation.Links.Notation/Link.cs
++++ b/csharp/Link.Foundation.Links.Notation/Link.cs
+@@ -146,6 +146,10 @@ public static string EscapeReference(string? reference)
+                     reference.Contains(":") ||
+                     reference.Contains("(") ||
+                     reference.Contains(")") ||
++                    reference.Contains("{") ||
++                    reference.Contains("}") ||
++                    reference.Contains("[") ||
++                    reference.Contains("]") ||
+                     reference.Contains(" ") ||
+                     reference.Contains("\t") ||
+                     reference.Contains("\n") ||
+diff --git a/csharp/Link.Foundation.Links.Notation/Parser.peg b/csharp/Link.Foundation.Links.Notation/Parser.peg
+index 6b1bcaf6..238c6212 100644
+--- a/csharp/Link.Foundation.Links.Notation/Parser.peg
++++ b/csharp/Link.Foundation.Links.Notation/Parser.peg
+@@ -16,9 +16,11 @@ multiLineValues <IList<Link<string>>> = _ list:multiLineValueAndWhitespace* { li
+ singleLineValueAndWhitespace <Link<string>> = __ value:referenceOrLink { value }
+ singleLineValues <IList<Link<string>>> = list:singleLineValueAndWhitespace+ { list }
+ singleLineLink <Link<string>> = __ id:(reference) __ ":" v:singleLineValues { new Link<string>(id, v) }
+-multiLineLink <Link<string>> = "(" _ id:(reference) _ ":" v:multiLineValues _ ")" { new Link<string>(id, v) }
++multiLineLink <Link<string>> = openBracket _ id:(reference) _ ":" v:multiLineValues _ closeBracket { new Link<string>(id, v) }
+ singleLineValueLink <Link<string>> = v:singleLineValues { new Link<string>(v) }
+-multiLineValueLink <Link<string>> = "(" v:multiLineValues _ ")" { new Link<string>(v) }
++multiLineValueLink <Link<string>> = openBracket v:multiLineValues _ closeBracket { new Link<string>(v) }
++openBracket = "(" / "{" / "["
++closeBracket = ")" / "}" / "]"
+ indentedIdLink <Link<string>> = id:(reference) __ ":" eol { new Link<string>(id) }
+ 
+ reference <string> = doubleQuotedReference / singleQuotedReference / simpleReference
+@@ -34,4 +36,4 @@ eof = !.
+ __ = [ \t]*
+ _ = whiteSpaceSymbol*
+ whiteSpaceSymbol = [ \t\n\r]
+-referenceSymbol = [^ \t\n\r(:)]
++referenceSymbol = [^ \t\n\r(:)\[\]{}]
+diff --git a/js/package.json b/js/package.json
+index f32327bb..da563f1a 100644
+--- a/js/package.json
++++ b/js/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "links-notation",
+-  "version": "0.12.0",
++  "version": "0.13.0",
+   "description": "Links Notation parser for JavaScript",
+   "main": "dist/index.js",
+   "type": "module",
+diff --git a/js/src/grammar.pegjs b/js/src/grammar.pegjs
+index a48e1a20..eb036c57 100644
+--- a/js/src/grammar.pegjs
++++ b/js/src/grammar.pegjs
+@@ -71,11 +71,14 @@ singleLineValues = list:singleLineValueAndWhitespace+ { return list; }
+ 
+ singleLineLink = __ id:reference __ ":" v:singleLineValues { return { id: id, values: v }; }
+ 
+-multiLineLink = "(" _ id:reference _ ":" v:multiLineValues _ ")" { return { id: id, values: v }; }
++multiLineLink = openBracket _ id:reference _ ":" v:multiLineValues _ closeBracket { return { id: id, values: v }; }
+ 
+ singleLineValueLink = v:singleLineValues { return { values: v }; }
+ 
+-multiLineValueLink = "(" v:multiLineValues _ ")" { return { values: v }; }
++multiLineValueLink = openBracket v:multiLineValues _ closeBracket { return { values: v }; }
++
++openBracket = "(" / "{" / "["
++closeBracket = ")" / "}" / "]"
+ 
+ indentedIdLink = id:reference __ ":" eol { return { id: id, values: [] }; }
+ 
+@@ -103,4 +106,4 @@ _ = whiteSpaceSymbol*
+ 
+ whiteSpaceSymbol = [ \t\n\r]
+ 
+-referenceSymbol = [^ \t\n\r(:)]
+\ No newline at end of file
++referenceSymbol = [^ \t\n\r(:)\[\]{}]
+\ No newline at end of file
+diff --git a/js/src/parser-generated.js b/js/src/parser-generated.js
+index 6d7c669e..76046039 100644
+--- a/js/src/parser-generated.js
++++ b/js/src/parser-generated.js
+@@ -165,24 +165,24 @@ function peg$parse(input, options) {
+   let peg$startRuleFunction = peg$parsedocument;
+ 
+   const peg$c0 = ":";
+-  const peg$c1 = "(";
+-  const peg$c2 = ")";
+-  const peg$c3 = "\"";
+-  const peg$c4 = "'";
+-  const peg$c5 = " ";
++  const peg$c1 = "\"";
++  const peg$c2 = "'";
++  const peg$c3 = " ";
+ 
+   const peg$r0 = /^[ \t]/;
+   const peg$r1 = /^[\r\n]/;
+-  const peg$r2 = /^[^"]/;
+-  const peg$r3 = /^[^']/;
+-  const peg$r4 = /^[ \t\n\r]/;
+-  const peg$r5 = /^[^ \t\n\r(:)]/;
++  const peg$r2 = /^[([{]/;
++  const peg$r3 = /^[)\]}]/;
++  const peg$r4 = /^[^"]/;
++  const peg$r5 = /^[^']/;
++  const peg$r6 = /^[ \t\n\r]/;
++  const peg$r7 = /^[^ \t\n\r(:)[\]{}]/;
+ 
+   const peg$e0 = peg$classExpectation([" ", "\t"], false, false, false);
+   const peg$e1 = peg$classExpectation(["\r", "\n"], false, false, false);
+   const peg$e2 = peg$literalExpectation(":", false);
+-  const peg$e3 = peg$literalExpectation("(", false);
+-  const peg$e4 = peg$literalExpectation(")", false);
++  const peg$e3 = peg$classExpectation(["(", "[", "{"], false, false, false);
++  const peg$e4 = peg$classExpectation([")", "]", "}"], false, false, false);
+   const peg$e5 = peg$literalExpectation("\"", false);
+   const peg$e6 = peg$classExpectation(["\""], true, false, false);
+   const peg$e7 = peg$literalExpectation("'", false);
+@@ -190,7 +190,7 @@ function peg$parse(input, options) {
+   const peg$e9 = peg$literalExpectation(" ", false);
+   const peg$e10 = peg$anyExpectation();
+   const peg$e11 = peg$classExpectation([" ", "\t", "\n", "\r"], false, false, false);
+-  const peg$e12 = peg$classExpectation([" ", "\t", "\n", "\r", "(", ":", ")"], true, false, false);
++  const peg$e12 = peg$classExpectation([" ", "\t", "\n", "\r", "(", ":", ")", "[", "]", "{", "}"], true, false, false);
+ 
+   function peg$f0() {    indentationStack = [0]; baseIndentation = null; return true;  }
+   function peg$f1(links) {    return links;  }
+@@ -858,13 +858,7 @@ function peg$parse(input, options) {
+     let s0, s1, s2, s3, s4, s5, s6, s7, s8;
+ 
+     s0 = peg$currPos;
+-    if (input.charCodeAt(peg$currPos) === 40) {
+-      s1 = peg$c1;
+-      peg$currPos++;
+-    } else {
+-      s1 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e3); }
+-    }
++    s1 = peg$parseopenBracket();
+     if (s1 !== peg$FAILED) {
+       s2 = peg$parse_();
+       s3 = peg$parsereference();
+@@ -880,13 +874,7 @@ function peg$parse(input, options) {
+         if (s5 !== peg$FAILED) {
+           s6 = peg$parsemultiLineValues();
+           s7 = peg$parse_();
+-          if (input.charCodeAt(peg$currPos) === 41) {
+-            s8 = peg$c2;
+-            peg$currPos++;
+-          } else {
+-            s8 = peg$FAILED;
+-            if (peg$silentFails === 0) { peg$fail(peg$e4); }
+-          }
++          s8 = peg$parsecloseBracket();
+           if (s8 !== peg$FAILED) {
+             peg$savedPos = s0;
+             s0 = peg$f21(s3, s6);
+@@ -928,23 +916,11 @@ function peg$parse(input, options) {
+     let s0, s1, s2, s3, s4;
+ 
+     s0 = peg$currPos;
+-    if (input.charCodeAt(peg$currPos) === 40) {
+-      s1 = peg$c1;
+-      peg$currPos++;
+-    } else {
+-      s1 = peg$FAILED;
+-      if (peg$silentFails === 0) { peg$fail(peg$e3); }
+-    }
++    s1 = peg$parseopenBracket();
+     if (s1 !== peg$FAILED) {
+       s2 = peg$parsemultiLineValues();
+       s3 = peg$parse_();
+-      if (input.charCodeAt(peg$currPos) === 41) {
+-        s4 = peg$c2;
+-        peg$currPos++;
+-      } else {
+-        s4 = peg$FAILED;
+-        if (peg$silentFails === 0) { peg$fail(peg$e4); }
+-      }
++      s4 = peg$parsecloseBracket();
+       if (s4 !== peg$FAILED) {
+         peg$savedPos = s0;
+         s0 = peg$f23(s2);
+@@ -960,6 +936,34 @@ function peg$parse(input, options) {
+     return s0;
+   }
+ 
++  function peg$parseopenBracket() {
++    let s0;
++
++    s0 = input.charAt(peg$currPos);
++    if (peg$r2.test(s0)) {
++      peg$currPos++;
++    } else {
++      s0 = peg$FAILED;
++      if (peg$silentFails === 0) { peg$fail(peg$e3); }
++    }
++
++    return s0;
++  }
++
++  function peg$parsecloseBracket() {
++    let s0;
++
++    s0 = input.charAt(peg$currPos);
++    if (peg$r3.test(s0)) {
++      peg$currPos++;
++    } else {
++      s0 = peg$FAILED;
++      if (peg$silentFails === 0) { peg$fail(peg$e4); }
++    }
++
++    return s0;
++  }
++
+   function peg$parseindentedIdLink() {
+     let s0, s1, s2, s3, s4;
+ 
+@@ -1037,7 +1041,7 @@ function peg$parse(input, options) {
+ 
+     s0 = peg$currPos;
+     if (input.charCodeAt(peg$currPos) === 34) {
+-      s1 = peg$c3;
++      s1 = peg$c1;
+       peg$currPos++;
+     } else {
+       s1 = peg$FAILED;
+@@ -1046,7 +1050,7 @@ function peg$parse(input, options) {
+     if (s1 !== peg$FAILED) {
+       s2 = [];
+       s3 = input.charAt(peg$currPos);
+-      if (peg$r2.test(s3)) {
++      if (peg$r4.test(s3)) {
+         peg$currPos++;
+       } else {
+         s3 = peg$FAILED;
+@@ -1056,7 +1060,7 @@ function peg$parse(input, options) {
+         while (s3 !== peg$FAILED) {
+           s2.push(s3);
+           s3 = input.charAt(peg$currPos);
+-          if (peg$r2.test(s3)) {
++          if (peg$r4.test(s3)) {
+             peg$currPos++;
+           } else {
+             s3 = peg$FAILED;
+@@ -1068,7 +1072,7 @@ function peg$parse(input, options) {
+       }
+       if (s2 !== peg$FAILED) {
+         if (input.charCodeAt(peg$currPos) === 34) {
+-          s3 = peg$c3;
++          s3 = peg$c1;
+           peg$currPos++;
+         } else {
+           s3 = peg$FAILED;
+@@ -1098,7 +1102,7 @@ function peg$parse(input, options) {
+ 
+     s0 = peg$currPos;
+     if (input.charCodeAt(peg$currPos) === 39) {
+-      s1 = peg$c4;
++      s1 = peg$c2;
+       peg$currPos++;
+     } else {
+       s1 = peg$FAILED;
+@@ -1107,7 +1111,7 @@ function peg$parse(input, options) {
+     if (s1 !== peg$FAILED) {
+       s2 = [];
+       s3 = input.charAt(peg$currPos);
+-      if (peg$r3.test(s3)) {
++      if (peg$r5.test(s3)) {
+         peg$currPos++;
+       } else {
+         s3 = peg$FAILED;
+@@ -1117,7 +1121,7 @@ function peg$parse(input, options) {
+         while (s3 !== peg$FAILED) {
+           s2.push(s3);
+           s3 = input.charAt(peg$currPos);
+-          if (peg$r3.test(s3)) {
++          if (peg$r5.test(s3)) {
+             peg$currPos++;
+           } else {
+             s3 = peg$FAILED;
+@@ -1129,7 +1133,7 @@ function peg$parse(input, options) {
+       }
+       if (s2 !== peg$FAILED) {
+         if (input.charCodeAt(peg$currPos) === 39) {
+-          s3 = peg$c4;
++          s3 = peg$c2;
+           peg$currPos++;
+         } else {
+           s3 = peg$FAILED;
+@@ -1160,7 +1164,7 @@ function peg$parse(input, options) {
+     s0 = peg$currPos;
+     s1 = [];
+     if (input.charCodeAt(peg$currPos) === 32) {
+-      s2 = peg$c5;
++      s2 = peg$c3;
+       peg$currPos++;
+     } else {
+       s2 = peg$FAILED;
+@@ -1169,7 +1173,7 @@ function peg$parse(input, options) {
+     while (s2 !== peg$FAILED) {
+       s1.push(s2);
+       if (input.charCodeAt(peg$currPos) === 32) {
+-        s2 = peg$c5;
++        s2 = peg$c3;
+         peg$currPos++;
+       } else {
+         s2 = peg$FAILED;
+@@ -1189,7 +1193,7 @@ function peg$parse(input, options) {
+     s0 = peg$currPos;
+     s1 = [];
+     if (input.charCodeAt(peg$currPos) === 32) {
+-      s2 = peg$c5;
++      s2 = peg$c3;
+       peg$currPos++;
+     } else {
+       s2 = peg$FAILED;
+@@ -1198,7 +1202,7 @@ function peg$parse(input, options) {
+     while (s2 !== peg$FAILED) {
+       s1.push(s2);
+       if (input.charCodeAt(peg$currPos) === 32) {
+-        s2 = peg$c5;
++        s2 = peg$c3;
+         peg$currPos++;
+       } else {
+         s2 = peg$FAILED;
+@@ -1229,7 +1233,7 @@ function peg$parse(input, options) {
+     s0 = peg$currPos;
+     s1 = [];
+     if (input.charCodeAt(peg$currPos) === 32) {
+-      s2 = peg$c5;
++      s2 = peg$c3;
+       peg$currPos++;
+     } else {
+       s2 = peg$FAILED;
+@@ -1238,7 +1242,7 @@ function peg$parse(input, options) {
+     while (s2 !== peg$FAILED) {
+       s1.push(s2);
+       if (input.charCodeAt(peg$currPos) === 32) {
+-        s2 = peg$c5;
++        s2 = peg$c3;
+         peg$currPos++;
+       } else {
+         s2 = peg$FAILED;
+@@ -1369,7 +1373,7 @@ function peg$parse(input, options) {
+     let s0;
+ 
+     s0 = input.charAt(peg$currPos);
+-    if (peg$r4.test(s0)) {
++    if (peg$r6.test(s0)) {
+       peg$currPos++;
+     } else {
+       s0 = peg$FAILED;
+@@ -1383,7 +1387,7 @@ function peg$parse(input, options) {
+     let s0;
+ 
+     s0 = input.charAt(peg$currPos);
+-    if (peg$r5.test(s0)) {
++    if (peg$r7.test(s0)) {
+       peg$currPos++;
+     } else {
+       s0 = peg$FAILED;
+diff --git a/js/tests/SingleLineParser.test.js b/js/tests/SingleLineParser.test.js
+index 5ca37c63..8ef56ba1 100644
+--- a/js/tests/SingleLineParser.test.js
++++ b/js/tests/SingleLineParser.test.js
+@@ -306,4 +306,124 @@ test('Single line with id', () => {
+   const result = parser.parse(input);
+   expect(result.length).toBeGreaterThan(0);
+   expect(result[0].id).toBe('myid');
++});
++
++// Tests for alternative bracket delimiters (issue #143)
++
++test('Curly braces as delimiters - link with id', () => {
++  const input = '{id: source target}';
++  const result = parser.parse(input);
++  expect(result.length).toBe(1);
++  expect(result[0].id).toBe('id');
++  expect(result[0].values.length).toBe(2);
++  expect(result[0].values[0].id).toBe('source');
++  expect(result[0].values[1].id).toBe('target');
++});
++
++test('Square brackets as delimiters - link with id', () => {
++  const input = '[id: source target]';
++  const result = parser.parse(input);
++  expect(result.length).toBe(1);
++  expect(result[0].id).toBe('id');
++  expect(result[0].values.length).toBe(2);
++  expect(result[0].values[0].id).toBe('source');
++  expect(result[0].values[1].id).toBe('target');
++});
++
++test('Curly braces as delimiters - value link', () => {
++  const input = '{a b c}';
++  const result = parser.parse(input);
++  expect(result.length).toBe(1);
++  expect(result[0].id).toBe(null);
++  expect(result[0].values.length).toBe(3);
++});
++
++test('Square brackets as delimiters - value link', () => {
++  const input = '[a b c]';
++  const result = parser.parse(input);
++  expect(result.length).toBe(1);
++  expect(result[0].id).toBe(null);
++  expect(result[0].values.length).toBe(3);
++});
++
++test('Curly braces - singlet', () => {
++  const input = '{singlet}';
++  const result = parser.parse(input);
++  expect(result.length).toBe(1);
++  expect(result[0].id).toBe(null);
++  expect(result[0].values.length).toBe(1);
++  expect(result[0].values[0].id).toBe('singlet');
++});
++
++test('Square brackets - singlet', () => {
++  const input = '[singlet]';
++  const result = parser.parse(input);
++  expect(result.length).toBe(1);
++  expect(result[0].id).toBe(null);
++  expect(result[0].values.length).toBe(1);
++  expect(result[0].values[0].id).toBe('singlet');
++});
++
++test('Nested curly braces', () => {
++  const input = '{outer: {inner: value}}';
++  const result = parser.parse(input);
++  expect(result.length).toBe(1);
++  expect(result[0].id).toBe('outer');
++  expect(result[0].values.length).toBe(1);
++  expect(result[0].values[0].id).toBe('inner');
++  expect(result[0].values[0].values.length).toBe(1);
++  expect(result[0].values[0].values[0].id).toBe('value');
++});
++
++test('Nested square brackets', () => {
++  const input = '[outer: [inner: value]]';
++  const result = parser.parse(input);
++  expect(result.length).toBe(1);
++  expect(result[0].id).toBe('outer');
++  expect(result[0].values.length).toBe(1);
++  expect(result[0].values[0].id).toBe('inner');
++  expect(result[0].values[0].values.length).toBe(1);
++  expect(result[0].values[0].values[0].id).toBe('value');
++});
++
++test('Mixed delimiters - parentheses with curly braces', () => {
++  const input = '(outer: {inner: value})';
++  const result = parser.parse(input);
++  expect(result.length).toBe(1);
++  expect(result[0].id).toBe('outer');
++  expect(result[0].values.length).toBe(1);
++  expect(result[0].values[0].id).toBe('inner');
++});
++
++test('Mixed delimiters - square brackets with parentheses', () => {
++  const input = '[outer: (inner: value)]';
++  const result = parser.parse(input);
++  expect(result.length).toBe(1);
++  expect(result[0].id).toBe('outer');
++  expect(result[0].values.length).toBe(1);
++  expect(result[0].values[0].id).toBe('inner');
++});
++
++test('Curly braces equivalent to parentheses', () => {
++  const parenInput = '(id: source target)';
++  const curlyInput = '{id: source target}';
++
++  const parenResult = parser.parse(parenInput);
++  const curlyResult = parser.parse(curlyInput);
++
++  expect(parenResult.length).toBe(curlyResult.length);
++  expect(parenResult[0].id).toBe(curlyResult[0].id);
++  expect(parenResult[0].values.length).toBe(curlyResult[0].values.length);
++});
++
++test('Square brackets equivalent to parentheses', () => {
++  const parenInput = '(id: source target)';
++  const bracketInput = '[id: source target]';
++
++  const parenResult = parser.parse(parenInput);
++  const bracketResult = parser.parse(bracketInput);
++
++  expect(parenResult.length).toBe(bracketResult.length);
++  expect(parenResult[0].id).toBe(bracketResult[0].id);
++  expect(parenResult[0].values.length).toBe(bracketResult[0].values.length);
+ });
+\ No newline at end of file
+diff --git a/python/links_notation.egg-info/PKG-INFO b/python/links_notation.egg-info/PKG-INFO
+new file mode 100644
+index 00000000..c04e58a9
+--- /dev/null
++++ b/python/links_notation.egg-info/PKG-INFO
+@@ -0,0 +1,190 @@
++Metadata-Version: 2.4
++Name: links-notation
++Version: 0.12.0
++Summary: Python implementation of the Links Notation parser
++Author-email: "Link.Foundation" <drakonard@gmail.com>
++License: Unlicense
++Project-URL: Homepage, https://github.com/link-foundation/links-notation
++Project-URL: Repository, https://github.com/link-foundation/links-notation
++Project-URL: Issues, https://github.com/link-foundation/links-notation/issues
++Keywords: lino,parser,links,notation,protocol
++Classifier: Development Status :: 4 - Beta
++Classifier: Intended Audience :: Developers
++Classifier: License :: Public Domain
++Classifier: Programming Language :: Python :: 3
++Classifier: Programming Language :: Python :: 3.9
++Classifier: Programming Language :: Python :: 3.10
++Classifier: Programming Language :: Python :: 3.11
++Classifier: Programming Language :: Python :: 3.12
++Classifier: Programming Language :: Python :: 3.13
++Classifier: Topic :: Software Development :: Libraries :: Python Modules
++Classifier: Topic :: Text Processing
++Requires-Python: >=3.9
++Description-Content-Type: text/markdown
++Provides-Extra: test
++Requires-Dist: pytest>=7.0; extra == "test"
++Requires-Dist: pytest-timeout>=2.1; extra == "test"
++
++# Links Notation Parser for Python
++
++[![PyPI version](https://img.shields.io/pypi/v/links-notation.svg)](https://pypi.org/project/links-notation/)
++[![Python versions](https://img.shields.io/pypi/pyversions/links-notation.svg)](https://pypi.org/project/links-notation/)
++[![License](https://img.shields.io/badge/license-Unlicense-blue.svg)](../LICENSE)
++
++Python implementation of the Links Notation parser.
++
++## Installation
++
++```bash
++pip install links-notation
++```
++
++## Quick Start
++
++```python
++from links_notation import Parser
++
++parser = Parser()
++links = parser.parse("papa (lovesMama: loves mama)")
++
++# Access parsed links
++for link in links:
++    print(link)
++```
++
++## Usage
++
++### Basic Parsing
++
++```python
++from links_notation import Parser, format_links
++
++parser = Parser()
++
++# Parse simple links
++links = parser.parse("(papa: loves mama)")
++print(links[0].id)  # 'papa'
++print(len(links[0].values))  # 2
++
++# Format links back to string
++output = format_links(links)
++print(output)  # (papa: loves mama)
++```
++
++### Working with Link Objects
++
++```python
++from links_notation import Link
++
++# Create links programmatically
++link = Link('parent', [Link('child1'), Link('child2')])
++print(str(link))  # (parent: child1 child2)
++
++# Access link properties
++print(link.id)  # 'parent'
++print(link.values[0].id)  # 'child1'
++
++# Combine links
++combined = link.combine(Link('another'))
++print(str(combined))  # ((parent: child1 child2) another)
++```
++
++### Indented Syntax
++
++```python
++parser = Parser()
++
++# Parse indented notation
++text = """3:
++  papa
++  loves
++  mama"""
++
++links = parser.parse(text)
++# Produces: (3: papa loves mama)
++```
++
++## API Reference
++
++### Parser
++
++The main parser class for Links Notation.
++
++- `parse(input_text: str) -> List[Link]`: Parse Links Notation text into Link objects
++
++### Link
++
++Represents a link in Links Notation.
++
++- `__init__(id: Optional[str] = None, values: Optional[List[Link]] = None)`
++- `format(less_parentheses: bool = False) -> str`: Format as string
++- `simplify() -> Link`: Simplify link structure
++- `combine(other: Link) -> Link`: Combine with another link
++
++### format_links
++
++Format a list of links into Links Notation.
++
++- `format_links(links: List[Link], less_parentheses: bool = False) -> str`
++
++## Examples
++
++### Doublets (2-tuple)
++
++```python
++parser = Parser()
++text = """
++papa (lovesMama: loves mama)
++son lovesMama
++daughter lovesMama
++"""
++links = parser.parse(text)
++```
++
++### Triplets (3-tuple)
++
++```python
++text = """
++papa has car
++mama has house
++(papa and mama) are happy
++"""
++links = parser.parse(text)
++```
++
++### Quoted References
++
++```python
++# References with special characters need quotes
++text = '("has space": "value with: colon")'
++links = parser.parse(text)
++```
++
++## Development
++
++### Running Tests
++
++```bash
++# Install development dependencies
++pip install pytest
++
++# Run tests
++pytest
++```
++
++### Building
++
++```bash
++pip install build
++python -m build
++```
++
++## License
++
++This project is released into the public domain under the [Unlicense](../LICENSE).
++
++## Links
++
++- [Main Repository](https://github.com/link-foundation/links-notation)
++- [PyPI Package](https://pypi.org/project/links-notation/)
++- [Documentation](https://link-foundation.github.io/links-notation/)
+diff --git a/python/links_notation.egg-info/SOURCES.txt b/python/links_notation.egg-info/SOURCES.txt
+new file mode 100644
+index 00000000..616071cd
+--- /dev/null
++++ b/python/links_notation.egg-info/SOURCES.txt
+@@ -0,0 +1,26 @@
++MANIFEST.in
++README.md
++pyproject.toml
++links_notation/__init__.py
++links_notation/format_config.py
++links_notation/formatter.py
++links_notation/link.py
++links_notation/parser.py
++links_notation.egg-info/PKG-INFO
++links_notation.egg-info/SOURCES.txt
++links_notation.egg-info/dependency_links.txt
++links_notation.egg-info/requires.txt
++links_notation.egg-info/top_level.txt
++tests/test_api.py
++tests/test_edge_case_parser.py
++tests/test_format_config.py
++tests/test_indentation_consistency.py
++tests/test_indented_id_syntax.py
++tests/test_link.py
++tests/test_links_group.py
++tests/test_mixed_indentation_modes.py
++tests/test_multiline_parser.py
++tests/test_multiline_quoted_string.py
++tests/test_nested_parser.py
++tests/test_nested_self_reference.py
++tests/test_single_line_parser.py
+\ No newline at end of file
+diff --git a/python/links_notation.egg-info/dependency_links.txt b/python/links_notation.egg-info/dependency_links.txt
+new file mode 100644
+index 00000000..8b137891
+--- /dev/null
++++ b/python/links_notation.egg-info/dependency_links.txt
+@@ -0,0 +1 @@
++
+diff --git a/python/links_notation.egg-info/requires.txt b/python/links_notation.egg-info/requires.txt
+new file mode 100644
+index 00000000..436f23fe
+--- /dev/null
++++ b/python/links_notation.egg-info/requires.txt
+@@ -0,0 +1,4 @@
++
++[test]
++pytest>=7.0
++pytest-timeout>=2.1
+diff --git a/python/links_notation.egg-info/top_level.txt b/python/links_notation.egg-info/top_level.txt
+new file mode 100644
+index 00000000..45a048c6
+--- /dev/null
++++ b/python/links_notation.egg-info/top_level.txt
+@@ -0,0 +1 @@
++links_notation
+diff --git a/python/links_notation/parser.py b/python/links_notation/parser.py
+index c4c2ad98..092401dd 100644
+--- a/python/links_notation/parser.py
++++ b/python/links_notation/parser.py
+@@ -13,6 +13,17 @@ class ParseError(Exception):
+     """Exception raised when parsing fails."""
+ 
+ 
++# Bracket pairs for multiline link delimiters
++OPEN_BRACKETS = '([{'
++CLOSE_BRACKETS = ')]}'
++BRACKET_PAIRS = {'(': ')', '[': ']', '{': '}'}
++
++
++def _is_matching_brackets(open_char: str, close_char: str) -> bool:
++    """Check if open and close characters are matching bracket pairs."""
++    return BRACKET_PAIRS.get(open_char) == close_char
++
++
+ class Parser:
+     """
+     Parser for Lino notation.
+@@ -85,17 +96,18 @@ def parse(self, input_text: str) -> List[Link]:
+     def _split_lines_respecting_quotes(self, text: str) -> List[str]:
+         """
+         Split text into lines, but preserve newlines inside quoted strings
+-        and handle multiline parenthesized expressions.
++        and handle multiline bracketed expressions.
+ 
+         Quoted strings can span multiple lines, and newlines within them
+-        should be preserved as part of the string value. Also, parenthesized
+-        expressions that span multiple lines are kept together.
++        should be preserved as part of the string value. Also, bracketed
++        expressions (parentheses, braces, brackets) that span multiple lines
++        are kept together.
+         """
+         lines = []
+         current_line = ""
+         in_single = False
+         in_double = False
+-        paren_depth = 0
++        bracket_depth = 0
+         i = 0
+ 
+         while i < len(text):
+@@ -108,18 +120,18 @@ def _split_lines_respecting_quotes(self, text: str) -> List[str]:
+             elif char == "'" and not in_double:
+                 in_single = not in_single
+                 current_line += char
+-            elif char == '(' and not in_single and not in_double:
+-                paren_depth += 1
++            elif char in OPEN_BRACKETS and not in_single and not in_double:
++                bracket_depth += 1
+                 current_line += char
+-            elif char == ')' and not in_single and not in_double:
+-                paren_depth -= 1
++            elif char in CLOSE_BRACKETS and not in_single and not in_double:
++                bracket_depth -= 1
+                 current_line += char
+             elif char == '\n':
+-                if in_single or in_double or paren_depth > 0:
+-                    # Inside quotes or unclosed parens: preserve the newline
++                if in_single or in_double or bracket_depth > 0:
++                    # Inside quotes or unclosed brackets: preserve the newline
+                     current_line += char
+                 else:
+-                    # Outside quotes and parens balanced: this is a line break
++                    # Outside quotes and brackets balanced: this is a line break
+                     lines.append(current_line)
+                     current_line = ""
+             else:
+@@ -202,8 +214,11 @@ def _parse_element(self, current_indent: int) -> Optional[Dict]:
+ 
+     def _parse_line_content(self, content: str) -> Dict:
+         """Parse the content of a single line."""
+-        # Try multiline link format: (id: values) or (values)
+-        if content.startswith('(') and content.endswith(')'):
++        # Try multiline link format: (id: values) or (values) or {id: values} or [id: values]
++        if (len(content) >= 2 and
++            content[0] in OPEN_BRACKETS and
++            content[-1] in CLOSE_BRACKETS and
++            _is_matching_brackets(content[0], content[-1])):
+             inner = content[1:-1].strip()
+             return self._parse_parenthesized(inner)
+ 
+@@ -244,28 +259,28 @@ def _parse_parenthesized(self, inner: str) -> Dict:
+ 
+     def _find_colon_outside_quotes(self, text: str) -> int:
+         """
+-        Find the position of a colon that's not inside quotes or parentheses.
++        Find the position of a colon that's not inside quotes or brackets.
+ 
+         This is crucial for correctly parsing nested self-referenced objects.
+         For example, in: ((str key) (obj_1: dict ...))
+         The colon after obj_1 should NOT be found as a top-level colon
+-        because it's inside the second parenthesized expression.
++        because it's inside the second bracketed expression.
+         """
+         in_single = False
+         in_double = False
+-        paren_depth = 0
++        bracket_depth = 0
+ 
+         for i, char in enumerate(text):
+             if char == "'" and not in_double:
+                 in_single = not in_single
+             elif char == '"' and not in_single:
+                 in_double = not in_double
+-            elif char == '(' and not in_single and not in_double:
+-                paren_depth += 1
+-            elif char == ')' and not in_single and not in_double:
+-                paren_depth -= 1
+-            elif char == ':' and not in_single and not in_double and paren_depth == 0:
+-                # Only return colon if it's outside quotes AND at parenthesis depth 0
++            elif char in OPEN_BRACKETS and not in_single and not in_double:
++                bracket_depth += 1
++            elif char in CLOSE_BRACKETS and not in_single and not in_double:
++                bracket_depth -= 1
++            elif char == ':' and not in_single and not in_double and bracket_depth == 0:
++                # Only return colon if it's outside quotes AND at bracket depth 0
+                 return i
+ 
+         return -1
+@@ -279,7 +294,7 @@ def _parse_values(self, text: str) -> List[Dict]:
+         current = ""
+         in_single = False
+         in_double = False
+-        paren_depth = 0
++        bracket_depth = 0
+ 
+         i = 0
+         while i < len(text):
+@@ -291,13 +306,13 @@ def _parse_values(self, text: str) -> List[Dict]:
+             elif char == '"' and not in_single:
+                 in_double = not in_double
+                 current += char
+-            elif char == '(' and not in_single and not in_double:
+-                paren_depth += 1
++            elif char in OPEN_BRACKETS and not in_single and not in_double:
++                bracket_depth += 1
+                 current += char
+-            elif char == ')' and not in_single and not in_double:
+-                paren_depth -= 1
++            elif char in CLOSE_BRACKETS and not in_single and not in_double:
++                bracket_depth -= 1
+                 current += char
+-            elif char == ' ' and not in_single and not in_double and paren_depth == 0:
++            elif char == ' ' and not in_single and not in_double and bracket_depth == 0:
+                 # End of current value
+                 if current.strip():
+                     values.append(self._parse_value(current.strip()))
+@@ -315,8 +330,11 @@ def _parse_values(self, text: str) -> List[Dict]:
+ 
+     def _parse_value(self, value: str) -> Dict:
+         """Parse a single value (could be a reference or nested link)."""
+-        # Nested link in parentheses
+-        if value.startswith('(') and value.endswith(')'):
++        # Nested link in brackets (parentheses, braces, or square brackets)
++        if (len(value) >= 2 and
++            value[0] in OPEN_BRACKETS and
++            value[-1] in CLOSE_BRACKETS and
++            _is_matching_brackets(value[0], value[-1])):
+             inner = value[1:-1].strip()
+             return self._parse_parenthesized(inner)
+ 
+diff --git a/python/pyproject.toml b/python/pyproject.toml
+index dd010902..6bc36697 100644
+--- a/python/pyproject.toml
++++ b/python/pyproject.toml
+@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
+ 
+ [project]
+ name = "links-notation"
+-version = "0.12.0"
++version = "0.13.0"
+ description = "Python implementation of the Links Notation parser"
+ readme = "README.md"
+ license = {text = "Unlicense"}
+diff --git a/python/tests/test_single_line_parser.py b/python/tests/test_single_line_parser.py
+index 454aee03..9ca1b563 100644
+--- a/python/tests/test_single_line_parser.py
++++ b/python/tests/test_single_line_parser.py
+@@ -346,3 +346,136 @@ def test_quoted_references_with_special_chars():
+     assert len(result[0].values) == 2
+     assert result[0].values[0].id == 'special:char'
+     assert result[0].values[1].id == 'another@char'
++
++
++# Tests for alternative bracket delimiters (issue #143)
++
++
++def test_curly_braces_as_delimiters_link_with_id():
++    """Test curly braces as delimiters - link with id."""
++    input_text = '{id: source target}'
++    result = parser.parse(input_text)
++    assert len(result) == 1
++    assert result[0].id == 'id'
++    assert len(result[0].values) == 2
++    assert result[0].values[0].id == 'source'
++    assert result[0].values[1].id == 'target'
++
++
++def test_square_brackets_as_delimiters_link_with_id():
++    """Test square brackets as delimiters - link with id."""
++    input_text = '[id: source target]'
++    result = parser.parse(input_text)
++    assert len(result) == 1
++    assert result[0].id == 'id'
++    assert len(result[0].values) == 2
++    assert result[0].values[0].id == 'source'
++    assert result[0].values[1].id == 'target'
++
++
++def test_curly_braces_as_delimiters_value_link():
++    """Test curly braces as delimiters - value link."""
++    input_text = '{a b c}'
++    result = parser.parse(input_text)
++    assert len(result) == 1
++    assert result[0].id is None
++    assert len(result[0].values) == 3
++
++
++def test_square_brackets_as_delimiters_value_link():
++    """Test square brackets as delimiters - value link."""
++    input_text = '[a b c]'
++    result = parser.parse(input_text)
++    assert len(result) == 1
++    assert result[0].id is None
++    assert len(result[0].values) == 3
++
++
++def test_curly_braces_singlet():
++    """Test curly braces - singlet."""
++    input_text = '{singlet}'
++    result = parser.parse(input_text)
++    assert len(result) == 1
++    assert result[0].id is None
++    assert len(result[0].values) == 1
++    assert result[0].values[0].id == 'singlet'
++
++
++def test_square_brackets_singlet():
++    """Test square brackets - singlet."""
++    input_text = '[singlet]'
++    result = parser.parse(input_text)
++    assert len(result) == 1
++    assert result[0].id is None
++    assert len(result[0].values) == 1
++    assert result[0].values[0].id == 'singlet'
++
++
++def test_nested_curly_braces():
++    """Test nested curly braces."""
++    input_text = '{outer: {inner: value}}'
++    result = parser.parse(input_text)
++    assert len(result) == 1
++    assert result[0].id == 'outer'
++    assert len(result[0].values) == 1
++    assert result[0].values[0].id == 'inner'
++    assert len(result[0].values[0].values) == 1
++    assert result[0].values[0].values[0].id == 'value'
++
++
++def test_nested_square_brackets():
++    """Test nested square brackets."""
++    input_text = '[outer: [inner: value]]'
++    result = parser.parse(input_text)
++    assert len(result) == 1
++    assert result[0].id == 'outer'
++    assert len(result[0].values) == 1
++    assert result[0].values[0].id == 'inner'
++    assert len(result[0].values[0].values) == 1
++    assert result[0].values[0].values[0].id == 'value'
++
++
++def test_mixed_delimiters_parentheses_with_curly_braces():
++    """Test mixed delimiters - parentheses with curly braces."""
++    input_text = '(outer: {inner: value})'
++    result = parser.parse(input_text)
++    assert len(result) == 1
++    assert result[0].id == 'outer'
++    assert len(result[0].values) == 1
++    assert result[0].values[0].id == 'inner'
++
++
++def test_mixed_delimiters_square_brackets_with_parentheses():
++    """Test mixed delimiters - square brackets with parentheses."""
++    input_text = '[outer: (inner: value)]'
++    result = parser.parse(input_text)
++    assert len(result) == 1
++    assert result[0].id == 'outer'
++    assert len(result[0].values) == 1
++    assert result[0].values[0].id == 'inner'
++
++
++def test_curly_braces_equivalent_to_parentheses():
++    """Test curly braces are equivalent to parentheses."""
++    paren_input = '(id: source target)'
++    curly_input = '{id: source target}'
++
++    paren_result = parser.parse(paren_input)
++    curly_result = parser.parse(curly_input)
++
++    assert len(paren_result) == len(curly_result)
++    assert paren_result[0].id == curly_result[0].id
++    assert len(paren_result[0].values) == len(curly_result[0].values)
++
++
++def test_square_brackets_equivalent_to_parentheses():
++    """Test square brackets are equivalent to parentheses."""
++    paren_input = '(id: source target)'
++    bracket_input = '[id: source target]'
++
++    paren_result = parser.parse(paren_input)
++    bracket_result = parser.parse(bracket_input)
++
++    assert len(paren_result) == len(bracket_result)
++    assert paren_result[0].id == bracket_result[0].id
++    assert len(paren_result[0].values) == len(bracket_result[0].values)
+diff --git a/rust/Cargo.toml b/rust/Cargo.toml
+index 9a2794ad..85b2f92d 100644
+--- a/rust/Cargo.toml
++++ b/rust/Cargo.toml
+@@ -1,6 +1,6 @@
+ [package]
+ name = "links-notation"
+-version = "0.12.0"
++version = "0.13.0"
+ edition = "2021"
+ description = "Rust implementation of the Links Notation parser"
+ license = "Unlicense"
+diff --git a/rust/src/parser.rs b/rust/src/parser.rs
+index 3fe04e21..5ec883e6 100644
+--- a/rust/src/parser.rs
++++ b/rust/src/parser.rs
+@@ -123,7 +123,23 @@ fn is_horizontal_whitespace(c: char) -> bool {
+ }
+ 
+ fn is_reference_char(c: char) -> bool {
+-    !is_whitespace_char(c) && c != '(' && c != ':' && c != ')'
++    !is_whitespace_char(c) && c != '(' && c != ')' && c != '{' && c != '}' && c != '[' && c != ']' && c != ':'
++}
++
++fn open_bracket(input: &str) -> IResult<&str, char> {
++    alt((
++        char('('),
++        char('{'),
++        char('['),
++    )).parse(input)
++}
++
++fn close_bracket(input: &str) -> IResult<&str, char> {
++    alt((
++        char(')'),
++        char('}'),
++        char(']'),
++    )).parse(input)
+ }
+ 
+ fn horizontal_whitespace(input: &str) -> IResult<&str, &str> {
+@@ -222,14 +238,14 @@ fn single_line_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str,
+ 
+ fn multi_line_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
+     (
+-        char('('),
++        open_bracket,
+         whitespace,
+         reference,
+         whitespace,
+         char(':'),
+         |i| multi_line_values(i, state),
+         whitespace,
+-        char(')')
++        close_bracket
+     ).map(|(_, _, id, _, _, values, _, _)| Link::new_link(Some(id), values))
+     .parse(input)
+ }
+@@ -258,10 +274,10 @@ fn indented_id_link<'a>(input: &'a str, _state: &ParserState) -> IResult<&'a str
+ 
+ fn multi_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
+     (
+-        char('('),
++        open_bracket,
+         |i| multi_line_values(i, state),
+         whitespace,
+-        char(')')
++        close_bracket
+     ).map(|(_, values, _, _)| {
+         if values.len() == 1 && values[0].id.is_some() && values[0].values.is_empty() && values[0].children.is_empty() {
+             Link::new_singlet(values[0].id.clone().unwrap())
+diff --git a/rust/tests/single_line_parser_tests.rs b/rust/tests/single_line_parser_tests.rs
+index 9f99380e..7cdcb777 100644
+--- a/rust/tests/single_line_parser_tests.rs
++++ b/rust/tests/single_line_parser_tests.rs
+@@ -453,4 +453,222 @@ fn test_single_line_without_id() {
+         }
+         _ => panic!("Expected Link"),
+     }
++}
++
++// Tests for alternative bracket delimiters (issue #143)
++
++#[test]
++fn test_curly_braces_as_delimiters_link_with_id() {
++    use links_notation::parse_lino_to_links;
++
++    let input = "{id: source target}";
++    let result = parse_lino_to_links(input).expect("Failed to parse");
++
++    assert_eq!(result.len(), 1);
++    match &result[0] {
++        links_notation::LiNo::Link { id, values } => {
++            assert_eq!(id, &Some("id".to_string()));
++            assert_eq!(values.len(), 2);
++        }
++        _ => panic!("Expected Link"),
++    }
++}
++
++#[test]
++fn test_square_brackets_as_delimiters_link_with_id() {
++    use links_notation::parse_lino_to_links;
++
++    let input = "[id: source target]";
++    let result = parse_lino_to_links(input).expect("Failed to parse");
++
++    assert_eq!(result.len(), 1);
++    match &result[0] {
++        links_notation::LiNo::Link { id, values } => {
++            assert_eq!(id, &Some("id".to_string()));
++            assert_eq!(values.len(), 2);
++        }
++        _ => panic!("Expected Link"),
++    }
++}
++
++#[test]
++fn test_curly_braces_as_delimiters_value_link() {
++    use links_notation::parse_lino_to_links;
++
++    let input = "{a b c}";
++    let result = parse_lino_to_links(input).expect("Failed to parse");
++
++    assert_eq!(result.len(), 1);
++    match &result[0] {
++        links_notation::LiNo::Link { id, values } => {
++            assert_eq!(id, &None);
++            assert_eq!(values.len(), 3);
++        }
++        _ => panic!("Expected Link"),
++    }
++}
++
++#[test]
++fn test_square_brackets_as_delimiters_value_link() {
++    use links_notation::parse_lino_to_links;
++
++    let input = "[a b c]";
++    let result = parse_lino_to_links(input).expect("Failed to parse");
++
++    assert_eq!(result.len(), 1);
++    match &result[0] {
++        links_notation::LiNo::Link { id, values } => {
++            assert_eq!(id, &None);
++            assert_eq!(values.len(), 3);
++        }
++        _ => panic!("Expected Link"),
++    }
++}
++
++#[test]
++fn test_curly_braces_singlet() {
++    use links_notation::parse_lino_to_links;
++
++    let input = "{singlet}";
++    let result = parse_lino_to_links(input).expect("Failed to parse");
++
++    assert_eq!(result.len(), 1);
++    match &result[0] {
++        links_notation::LiNo::Ref(id) => {
++            assert_eq!(id, "singlet");
++        }
++        _ => panic!("Expected Ref"),
++    }
++}
++
++#[test]
++fn test_square_brackets_singlet() {
++    use links_notation::parse_lino_to_links;
++
++    let input = "[singlet]";
++    let result = parse_lino_to_links(input).expect("Failed to parse");
++
++    assert_eq!(result.len(), 1);
++    match &result[0] {
++        links_notation::LiNo::Ref(id) => {
++            assert_eq!(id, "singlet");
++        }
++        _ => panic!("Expected Ref"),
++    }
++}
++
++#[test]
++fn test_nested_curly_braces() {
++    use links_notation::parse_lino_to_links;
++
++    let input = "{outer: {inner: value}}";
++    let result = parse_lino_to_links(input).expect("Failed to parse");
++
++    assert_eq!(result.len(), 1);
++    match &result[0] {
++        links_notation::LiNo::Link { id, values } => {
++            assert_eq!(id, &Some("outer".to_string()));
++            assert_eq!(values.len(), 1);
++        }
++        _ => panic!("Expected Link"),
++    }
++}
++
++#[test]
++fn test_nested_square_brackets() {
++    use links_notation::parse_lino_to_links;
++
++    let input = "[outer: [inner: value]]";
++    let result = parse_lino_to_links(input).expect("Failed to parse");
++
++    assert_eq!(result.len(), 1);
++    match &result[0] {
++        links_notation::LiNo::Link { id, values } => {
++            assert_eq!(id, &Some("outer".to_string()));
++            assert_eq!(values.len(), 1);
++        }
++        _ => panic!("Expected Link"),
++    }
++}
++
++#[test]
++fn test_mixed_delimiters_parentheses_with_curly_braces() {
++    use links_notation::parse_lino_to_links;
++
++    let input = "(outer: {inner: value})";
++    let result = parse_lino_to_links(input).expect("Failed to parse");
++
++    assert_eq!(result.len(), 1);
++    match &result[0] {
++        links_notation::LiNo::Link { id, values } => {
++            assert_eq!(id, &Some("outer".to_string()));
++            assert_eq!(values.len(), 1);
++        }
++        _ => panic!("Expected Link"),
++    }
++}
++
++#[test]
++fn test_mixed_delimiters_square_brackets_with_parentheses() {
++    use links_notation::parse_lino_to_links;
++
++    let input = "[outer: (inner: value)]";
++    let result = parse_lino_to_links(input).expect("Failed to parse");
++
++    assert_eq!(result.len(), 1);
++    match &result[0] {
++        links_notation::LiNo::Link { id, values } => {
++            assert_eq!(id, &Some("outer".to_string()));
++            assert_eq!(values.len(), 1);
++        }
++        _ => panic!("Expected Link"),
++    }
++}
++
++#[test]
++fn test_curly_braces_equivalent_to_parentheses() {
++    use links_notation::parse_lino_to_links;
++
++    let paren_input = "(id: source target)";
++    let curly_input = "{id: source target}";
++
++    let paren_result = parse_lino_to_links(paren_input).expect("Failed to parse paren");
++    let curly_result = parse_lino_to_links(curly_input).expect("Failed to parse curly");
++
++    assert_eq!(paren_result.len(), curly_result.len());
++
++    match (&paren_result[0], &curly_result[0]) {
++        (
++            links_notation::LiNo::Link { id: paren_id, values: paren_values },
++            links_notation::LiNo::Link { id: curly_id, values: curly_values },
++        ) => {
++            assert_eq!(paren_id, curly_id);
++            assert_eq!(paren_values.len(), curly_values.len());
++        }
++        _ => panic!("Expected Links"),
++    }
++}
++
++#[test]
++fn test_square_brackets_equivalent_to_parentheses() {
++    use links_notation::parse_lino_to_links;
++
++    let paren_input = "(id: source target)";
++    let bracket_input = "[id: source target]";
++
++    let paren_result = parse_lino_to_links(paren_input).expect("Failed to parse paren");
++    let bracket_result = parse_lino_to_links(bracket_input).expect("Failed to parse bracket");
++
++    assert_eq!(paren_result.len(), bracket_result.len());
++
++    match (&paren_result[0], &bracket_result[0]) {
++        (
++            links_notation::LiNo::Link { id: paren_id, values: paren_values },
++            links_notation::LiNo::Link { id: bracket_id, values: bracket_values },
++        ) => {
++            assert_eq!(paren_id, bracket_id);
++            assert_eq!(paren_values.len(), bracket_values.len());
++        }
++        _ => panic!("Expected Links"),
++    }
+ }
+\ No newline at end of file

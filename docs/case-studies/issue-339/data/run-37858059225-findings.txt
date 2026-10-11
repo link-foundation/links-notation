@@ -1,0 +1,3 @@
+415: audit	UNKNOWN STEP	2026-10-08T23:20:00.6643925Z ##[warning]go: declared 0.25.1, latest on proxy.golang.org is 0.25.0.
+416: audit	UNKNOWN STEP	2026-10-08T23:20:00.7439944Z ##[warning]java: declared 0.25.1, but nothing is published on Maven Central. The publish job for this language has never successfully released anything.
+417: audit	UNKNOWN STEP	2026-10-08T23:20:01.3478447Z ##[warning]php: declared 0.25.1, but nothing is published on Packagist. The publish job for this language has never successfully released anything.

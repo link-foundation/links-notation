@@ -1,0 +1,410 @@
+[
+  {
+    "id": 113570182823,
+    "run_id": 37852934726,
+    "workflow_name": "benchmarks",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934726",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacU92pw",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570182823",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934726/job/113570182823",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:21:20Z",
+    "started_at": "2026-10-08T22:21:22Z",
+    "completed_at": "2026-10-08T22:21:27Z",
+    "name": "findChangedBenchmarkFiles",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:21:23Z",
+        "completed_at": "2026-10-08T22:21:23Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:21:23Z",
+        "completed_at": "2026-10-08T22:21:25Z"
+      },
+      {
+        "name": "Get changed files using defaults",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:21:25Z",
+        "completed_at": "2026-10-08T22:21:25Z"
+      },
+      {
+        "name": "Set output isBenchmarkFilesChanged",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:21:25Z",
+        "completed_at": "2026-10-08T22:21:26Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:21:26Z",
+        "completed_at": "2026-10-08T22:21:26Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:21:26Z",
+        "completed_at": "2026-10-08T22:21:26Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570182823",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096740,
+    "runner_name": "GitHub Actions 1000096740",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113570228556,
+    "run_id": 37852934726,
+    "workflow_name": "benchmarks",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934726",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVApTA",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570228556",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934726/job/113570228556",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-10-08T22:21:28Z",
+    "started_at": "2026-10-08T22:21:32Z",
+    "completed_at": "2026-10-08T22:21:56Z",
+    "name": "benchmark",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:21:32Z",
+        "completed_at": "2026-10-08T22:21:33Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:21:33Z",
+        "completed_at": "2026-10-08T22:21:35Z"
+      },
+      {
+        "name": "Setup Rust",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:21:35Z",
+        "completed_at": "2026-10-08T22:21:37Z"
+      },
+      {
+        "name": "Cache Cargo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:21:37Z",
+        "completed_at": "2026-10-08T22:21:39Z"
+      },
+      {
+        "name": "Test the benchmark",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:21:39Z",
+        "completed_at": "2026-10-08T22:21:50Z"
+      },
+      {
+        "name": "Regenerate the documents and the report",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:21:50Z",
+        "completed_at": "2026-10-08T22:21:54Z"
+      },
+      {
+        "name": "Fail on drift in a pull request",
+        "status": "completed",
+        "conclusion": "failure",
+        "number": 7,
+        "started_at": "2026-10-08T22:21:54Z",
+        "completed_at": "2026-10-08T22:21:54Z"
+      },
+      {
+        "name": "Upload the benchmark output",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 8,
+        "started_at": "2026-10-08T22:21:54Z",
+        "completed_at": "2026-10-08T22:21:54Z"
+      },
+      {
+        "name": "Post Cache Cargo",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 15,
+        "started_at": "2026-10-08T22:21:54Z",
+        "completed_at": "2026-10-08T22:21:54Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-10-08T22:21:54Z",
+        "completed_at": "2026-10-08T22:21:55Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-10-08T22:21:55Z",
+        "completed_at": "2026-10-08T22:21:55Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570228556",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096753,
+    "runner_name": "GitHub Actions 1000096753",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113570395049,
+    "run_id": 37852934726,
+    "workflow_name": "benchmarks",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934726",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVKzqQ",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570395049",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934726/job/113570395049",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:21:57Z",
+    "started_at": "2026-10-08T22:21:57Z",
+    "completed_at": "2026-10-08T22:21:57Z",
+    "name": "javascript",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570395049",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 113570395441,
+    "run_id": 37852934726,
+    "workflow_name": "benchmarks",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934726",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVK1MQ",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570395441",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934726/job/113570395441",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:21:57Z",
+    "started_at": "2026-10-08T22:21:57Z",
+    "completed_at": "2026-10-08T22:21:57Z",
+    "name": "python",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570395441",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 113570395602,
+    "run_id": 37852934726,
+    "workflow_name": "benchmarks",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934726",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVK10g",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570395602",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934726/job/113570395602",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:21:57Z",
+    "started_at": "2026-10-08T22:21:57Z",
+    "completed_at": "2026-10-08T22:21:57Z",
+    "name": "java",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570395602",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 113570395899,
+    "run_id": 37852934726,
+    "workflow_name": "benchmarks",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934726",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVK2-w",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570395899",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934726/job/113570395899",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:21:57Z",
+    "started_at": "2026-10-08T22:21:57Z",
+    "completed_at": "2026-10-08T22:21:57Z",
+    "name": "datasets",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570395899",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 113570396116,
+    "run_id": 37852934726,
+    "workflow_name": "benchmarks",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934726",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVK31A",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570396116",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934726/job/113570396116",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:21:57Z",
+    "started_at": "2026-10-08T22:21:57Z",
+    "completed_at": "2026-10-08T22:21:57Z",
+    "name": "csharp",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570396116",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 113570396161,
+    "run_id": 37852934726,
+    "workflow_name": "benchmarks",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934726",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVK4AQ",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570396161",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934726/job/113570396161",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:21:57Z",
+    "started_at": "2026-10-08T22:21:57Z",
+    "completed_at": "2026-10-08T22:21:57Z",
+    "name": "go",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570396161",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 113570396582,
+    "run_id": 37852934726,
+    "workflow_name": "benchmarks",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934726",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVK5pg",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570396582",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934726/job/113570396582",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:21:57Z",
+    "started_at": "2026-10-08T22:21:57Z",
+    "completed_at": "2026-10-08T22:21:57Z",
+    "name": "php",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570396582",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 113570397727,
+    "run_id": 37852934726,
+    "workflow_name": "benchmarks",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934726",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVK-Hw",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570397727",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934726/job/113570397727",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:21:57Z",
+    "started_at": "2026-10-08T22:21:57Z",
+    "completed_at": "2026-10-08T22:21:57Z",
+    "name": "publish",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570397727",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  }
+]

@@ -1,0 +1,21 @@
+  GET https://registry.npmjs.org/links-notation -> 200
+  GET https://api.github.com/repos/link-foundation/links-notation/releases/tags/js_0.25.1 -> 200
+js: 0.25.1 (in sync with npm)
+  GET https://pypi.org/pypi/links-notation/json -> 200
+  GET https://api.github.com/repos/link-foundation/links-notation/releases/tags/python_0.25.1 -> 200
+python: 0.25.1 (in sync with PyPI)
+  GET https://crates.io/api/v1/crates/links-notation -> 200
+  GET https://api.github.com/repos/link-foundation/links-notation/releases/tags/rust_0.25.1 -> 200
+rust: 0.25.1 (in sync with crates.io)
+  GET https://api.nuget.org/v3-flatcontainer/link.foundation.links.notation/index.json -> 200
+  GET https://api.github.com/repos/link-foundation/links-notation/releases/tags/csharp_0.25.1 -> 200
+csharp: 0.25.1 (in sync with NuGet.org)
+  GET https://proxy.golang.org/github.com/link-foundation/links-notation/go/@latest -> 200
+  GET https://api.github.com/repos/link-foundation/links-notation/releases/tags/go%2Fv0.25.1 -> 200
+go: 0.25.1 (in sync with proxy.golang.org)
+  GET https://repo1.maven.org/maven2/io/github/link-foundation/links-notation/maven-metadata.xml -> 404
+::warning::java: declared 0.25.1, but nothing is published on Maven Central. The publish job for this language has never successfully released anything.
+  GET https://repo.packagist.org/p2/link-foundation/links-notation.json -> 404
+::warning::php: declared 0.25.1, but nothing is published on Packagist. The publish job for this language has never successfully released anything.
+
+2 implementation(s) drifted.

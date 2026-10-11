@@ -1,0 +1,70 @@
+[
+  {
+    "id": 113571027401,
+    "run_id": 37853190567,
+    "workflow_name": "bom-check",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853190567",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacVxZyQ",
+    "head_sha": "a2daba237e1440cc36d55e843077197d0eec2d63",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571027401",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853190567/job/113571027401",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:23:46Z",
+    "started_at": "2026-10-08T22:23:48Z",
+    "completed_at": "2026-10-08T22:23:55Z",
+    "name": "check-bom-consistency",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:23:48Z",
+        "completed_at": "2026-10-08T22:23:49Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:23:49Z",
+        "completed_at": "2026-10-08T22:23:51Z"
+      },
+      {
+        "name": "Check for Unicode BOM in text files",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:23:51Z",
+        "completed_at": "2026-10-08T22:23:53Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:23:53Z",
+        "completed_at": "2026-10-08T22:23:53Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:23:53Z",
+        "completed_at": "2026-10-08T22:23:53Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571027401",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096812,
+    "runner_name": "GitHub Actions 1000096812",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

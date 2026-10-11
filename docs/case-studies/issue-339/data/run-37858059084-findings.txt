@@ -1,0 +1,1 @@
+1869: publishToNpm	UNKNOWN STEP	2026-10-08T23:13:29.9500124Z ^[[36;1m  echo "published=failed" >> "$GITHUB_OUTPUT"^[[0m

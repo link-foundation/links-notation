@@ -3,8 +3,8 @@ repos:
     rev: v6.0.0
     hooks:
       - id: trailing-whitespace
-        # Four TSV columns must preserve empty input/tree/format fields.
-        exclude: ^parity/text-vectors\.tsv$
+        # Preserve empty TSV fields and original archived patch context.
+        exclude: ^(parity/text-vectors\.tsv|docs/case-studies/issue-339/data/.*\.diff)$
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files

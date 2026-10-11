@@ -1,2 +1,4 @@
 # Empty TSV fields are significant, including the final empty formatted output.
 parity/text-vectors.tsv whitespace=-blank-at-eol
+# Archived patches preserve the original context markers and whitespace.
+docs/case-studies/issue-339/data/*.diff -whitespace

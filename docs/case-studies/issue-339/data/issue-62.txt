@@ -1,0 +1,9 @@
+author:	konard
+association:	member
+edited:	false
+status:	none
+--
+At the moment this is not highest priority, will add complexity without clear value.
+
+Also it may be done as a interpreter layer.
+--

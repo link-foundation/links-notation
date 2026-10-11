@@ -1,0 +1,17 @@
+{
+  "pr": 336,
+  "branch": "issue-333-056bb2173c3b",
+  "runs": 41,
+  "pull_request_commits": 3,
+  "native_workflow_runs": 14,
+  "runner_wall_minutes": 65.6,
+  "first_run": "2026-10-08T22:23:45+00:00",
+  "first_green": "2026-10-08T22:36:32+00:00",
+  "first_green_sha": "b84905a9978c615008d580f5b2558dd0ae9697d1",
+  "time_to_first_green_minutes": 12.783,
+  "conclusions": {
+    "failure": 2,
+    "skipped": 3,
+    "success": 36
+  }
+}

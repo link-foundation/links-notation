@@ -1,0 +1,359 @@
+diff --git a/csharp/Platform.Protocols.Lino.Tests/SingleLineParserTests.cs b/csharp/Platform.Protocols.Lino.Tests/SingleLineParserTests.cs
+index 015fc1f5..f57b6121 100644
+--- a/csharp/Platform.Protocols.Lino.Tests/SingleLineParserTests.cs
++++ b/csharp/Platform.Protocols.Lino.Tests/SingleLineParserTests.cs
+@@ -312,5 +312,51 @@ public static void TestValueLinkParserTest()
+             Assert.Null(result[0].Id);
+             Assert.Equal(3, result[0].Values?.Count);
+         }
++
++        [Fact]
++        public static void TestRightArrowSyntaxTest()
++        {
++            var input = "(1 → 2)";
++            var parser = new Parser();
++            var links = parser.Parse(input);
++            var target = links.Format();
++            Assert.Equal("(1 2)", target);
++        }
++
++        [Fact]
++        public static void TestLeftArrowSyntaxTest()
++        {
++            var input = "(2 ← 1)";
++            var parser = new Parser();
++            var links = parser.Parse(input);
++            var target = links.Format();
++            Assert.Equal("(1 2)", target);
++        }
++
++        [Fact]
++        public static void TestArrowSyntaxEquivalenceTest()
++        {
++            var parser = new Parser();
++            var normal = parser.Parse("(1 2)");
++            var rightArrow = parser.Parse("(1 → 2)");
++            var leftArrow = parser.Parse("(2 ← 1)");
++
++            var normalFormatted = normal.Format();
++            var rightArrowFormatted = rightArrow.Format();
++            var leftArrowFormatted = leftArrow.Format();
++
++            Assert.Equal(normalFormatted, rightArrowFormatted);
++            Assert.Equal(normalFormatted, leftArrowFormatted);
++        }
++
++        [Fact]
++        public static void TestArrowSyntaxWithNamesTest()
++        {
++            var input = "(papa → mama)";
++            var parser = new Parser();
++            var links = parser.Parse(input);
++            var target = links.Format();
++            Assert.Equal("(papa mama)", target);
++        }
+     }
+ }
+\ No newline at end of file
+diff --git a/csharp/Platform.Protocols.Lino/Parser.peg b/csharp/Platform.Protocols.Lino/Parser.peg
+index 6a79128f..7ed08bc8 100644
+--- a/csharp/Platform.Protocols.Lino/Parser.peg
++++ b/csharp/Platform.Protocols.Lino/Parser.peg
+@@ -11,9 +11,9 @@ anyLink <Link<string>> = ml:multiLineAnyLink eol { ml } / sl:singleLineAnyLink {
+ multiLineAnyLink <Link<string>> = multiLineValueLink / multiLineLink
+ singleLineAnyLink <Link<string>> = fl:singleLineLink eol { fl } / vl:singleLineValueLink eol { vl }
+ multiLineValueAndWhitespace <Link<string>> = value:referenceOrLink _ { value }
+-multiLineValues <IList<Link<string>>> = _ list:multiLineValueAndWhitespace* { list }
++multiLineValues <IList<Link<string>>> = _ list:arrowValues { list } / _ list:multiLineValueAndWhitespace* { list }
+ singleLineValueAndWhitespace <Link<string>> = __ value:referenceOrLink { value }
+-singleLineValues <IList<Link<string>>> = list:singleLineValueAndWhitespace+ { list }
++singleLineValues <IList<Link<string>>> = arrowValues / list:singleLineValueAndWhitespace+ { list }
+ singleLineLink <Link<string>> = __ id:(reference) __ ":" v:singleLineValues { new Link<string>(id, v) }
+ multiLineLink <Link<string>> = "(" _ id:(reference) _ ":" v:multiLineValues _ ")" { new Link<string>(id, v) }
+ singleLineValueLink <Link<string>> = v:singleLineValues { new Link<string>(v) }
+@@ -32,3 +32,7 @@ __ = [ \t]*
+ _ = whiteSpaceSymbol*
+ whiteSpaceSymbol = [ \t\n\r]
+ referenceSymbol = [^ \t\n\r(:)]
++
++arrowValues <IList<Link<string>>> = rightArrowValues / leftArrowValues
++rightArrowValues <IList<Link<string>>> = left:referenceOrLink _ "→" _ right:referenceOrLink { new List<Link<string>> { left, right } }
++leftArrowValues <IList<Link<string>>> = right:referenceOrLink _ "←" _ left:referenceOrLink { new List<Link<string>> { left, right } }
+diff --git a/csharp/Platform.Protocols.Lino/Platform.Protocols.Lino.csproj b/csharp/Platform.Protocols.Lino/Platform.Protocols.Lino.csproj
+index 3dd410d9..aec75cbb 100644
+--- a/csharp/Platform.Protocols.Lino/Platform.Protocols.Lino.csproj
++++ b/csharp/Platform.Protocols.Lino/Platform.Protocols.Lino.csproj
+@@ -4,7 +4,7 @@
+     <Description>LinksPlatform's Platform.Protocols.Lino Class Library</Description>
+     <Copyright>Konstantin Diachenko</Copyright>
+     <AssemblyTitle>Platform.Protocols.Lino</AssemblyTitle>
+-    <VersionPrefix>0.6.0</VersionPrefix>
++    <VersionPrefix>0.7.0</VersionPrefix>
+     <Authors>Konstantin Diachenko</Authors>
+     <TargetFramework>net8</TargetFramework>
+     <PackageId>Platform.Protocols.Lino</PackageId>
+@@ -22,7 +22,9 @@
+     <IncludeSymbols>true</IncludeSymbols>
+     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+     <LangVersion>latest</LangVersion>
+-    <PackageReleaseNotes>Now empty list of links is supported.
++    <PackageReleaseNotes>Added support for optional arrow syntax: (2 ← 1) = (1 → 2) = (1 2).
++Arrow syntax provides intuitive directional notation for links.
++Now empty list of links is supported.
+ (:) and : syntax for empty links is now forbidden, to reduce confusion.
+ Singlet links are supported, no more point link terminology.</PackageReleaseNotes>
+     <Nullable>enable</Nullable>
+diff --git a/examples/arrow_syntax_test.js b/examples/arrow_syntax_test.js
+new file mode 100644
+index 00000000..91ff12c4
+--- /dev/null
++++ b/examples/arrow_syntax_test.js
+@@ -0,0 +1,35 @@
++#!/usr/bin/env bun
++
++import { Parser } from '../js/src/Parser.js';
++import { formatLinks } from '../js/src/Link.js';
++
++const parser = new Parser();
++
++console.log("Testing Arrow Syntax Implementation");
++console.log("===================================");
++
++// Test the examples from the issue
++const tests = [
++    "(2 ← 1)",
++    "(1 → 2)", 
++    "(1 2)",
++    "(papa → mama)",
++    "(daughter ← papa)"
++];
++
++console.log("Testing equivalence: (2 ← 1) = (1 → 2) = (1 2)");
++console.log("");
++
++for (const test of tests) {
++    try {
++        const result = parser.parse(test);
++        const formatted = formatLinks(result);
++        console.log(`Input:  ${test}`);
++        console.log(`Output: ${formatted}`);
++        console.log("");
++    } catch (error) {
++        console.log(`Error parsing "${test}": ${error.message}`);
++    }
++}
++
++console.log("All tests completed!");
+\ No newline at end of file
+diff --git a/js/package.json b/js/package.json
+index 99494d71..6704ed87 100644
+--- a/js/package.json
++++ b/js/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "@linksplatform/protocols-lino",
+-  "version": "0.6.0",
++  "version": "0.7.0",
+   "description": "Lino protocol parser for JavaScript",
+   "main": "dist/index.js",
+   "type": "module",
+diff --git a/js/src/grammar.pegjs b/js/src/grammar.pegjs
+index b313eeb9..219b29d9 100644
+--- a/js/src/grammar.pegjs
++++ b/js/src/grammar.pegjs
+@@ -45,11 +45,11 @@ singleLineAnyLink = fl:singleLineLink eol { return fl; }
+ 
+ multiLineValueAndWhitespace = value:referenceOrLink _ { return value; }
+ 
+-multiLineValues = _ list:multiLineValueAndWhitespace* { return list; }
++multiLineValues = _ list:arrowValues { return list; } / _ list:multiLineValueAndWhitespace* { return list; }
+ 
+ singleLineValueAndWhitespace = __ value:referenceOrLink { return value; }
+ 
+-singleLineValues = list:singleLineValueAndWhitespace+ { return list; }
++singleLineValues = arrowValues / list:singleLineValueAndWhitespace+ { return list; }
+ 
+ singleLineLink = __ id:reference __ ":" v:singleLineValues { return { id: id, values: v }; }
+ 
+@@ -81,4 +81,10 @@ _ = whiteSpaceSymbol*
+ 
+ whiteSpaceSymbol = [ \t\n\r]
+ 
+-referenceSymbol = [^ \t\n\r(:)]
+\ No newline at end of file
++referenceSymbol = [^ \t\n\r(:)]
++
++arrowValues = rightArrowValues / leftArrowValues
++
++rightArrowValues = left:referenceOrLink _ "→" _ right:referenceOrLink { return [left, right]; }
++
++leftArrowValues = right:referenceOrLink _ "←" _ left:referenceOrLink { return [left, right]; }
+\ No newline at end of file
+diff --git a/js/tests/SingleLineParser.test.js b/js/tests/SingleLineParser.test.js
+index 70c1438c..fbba4b2c 100644
+--- a/js/tests/SingleLineParser.test.js
++++ b/js/tests/SingleLineParser.test.js
+@@ -226,4 +226,38 @@ test('Test value link (parser)', () => {
+   expect(result.length).toBe(1);
+   expect(result[0].id).toBe(null);
+   expect(result[0].values.length).toBe(3);
++});
++
++test('Test right arrow syntax', () => {
++  const input = '(1 → 2)';
++  const result = parser.parse(input);
++  const target = formatLinks(result);
++  expect(target).toBe('(1 2)');
++});
++
++test('Test left arrow syntax', () => {
++  const input = '(2 ← 1)';
++  const result = parser.parse(input);
++  const target = formatLinks(result);
++  expect(target).toBe('(1 2)');
++});
++
++test('Test arrow syntax equivalence', () => {
++  const normal = parser.parse('(1 2)');
++  const rightArrow = parser.parse('(1 → 2)');
++  const leftArrow = parser.parse('(2 ← 1)');
++
++  const normalFormatted = formatLinks(normal);
++  const rightArrowFormatted = formatLinks(rightArrow);
++  const leftArrowFormatted = formatLinks(leftArrow);
++
++  expect(rightArrowFormatted).toBe(normalFormatted);
++  expect(leftArrowFormatted).toBe(normalFormatted);
++});
++
++test('Test arrow syntax with names', () => {
++  const input = '(papa → mama)';
++  const result = parser.parse(input);
++  const target = formatLinks(result);
++  expect(target).toBe('(papa mama)');
+ });
+\ No newline at end of file
+diff --git a/rust/Cargo.toml b/rust/Cargo.toml
+index 6ccebfe7..bf7484a6 100644
+--- a/rust/Cargo.toml
++++ b/rust/Cargo.toml
+@@ -1,6 +1,6 @@
+ [package]
+ name = "platform-lino"
+-version = "0.6.0"
++version = "0.7.0"
+ edition = "2021"
+ description = "Rust implementation of the Lino protocol parser"
+ license = "Unlicense"
+diff --git a/rust/src/parser.rs b/rust/src/parser.rs
+index cffc71ce..f10114a7 100644
+--- a/rust/src/parser.rs
++++ b/rust/src/parser.rs
+@@ -91,6 +91,35 @@ fn is_reference_char(c: char) -> bool {
+     !is_whitespace_char(c) && c != '(' && c != ':' && c != ')'
+ }
+ 
++fn arrow_values<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>> {
++    alt((
++        |i| right_arrow_values(i, state),
++        |i| left_arrow_values(i, state)
++    )).parse(input)
++}
++
++fn right_arrow_values<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>> {
++    (
++        |i| reference_or_link(i, state),
++        whitespace,
++        char('→'),
++        whitespace,
++        |i| reference_or_link(i, state)
++    ).map(|(left, _, _, _, right)| vec![left, right])
++    .parse(input)
++}
++
++fn left_arrow_values<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>> {
++    (
++        |i| reference_or_link(i, state),
++        whitespace,
++        char('←'),
++        whitespace,
++        |i| reference_or_link(i, state)
++    ).map(|(right, _, _, _, left)| vec![left, right])  // Note: order is swapped for left arrow
++    .parse(input)
++}
++
+ fn horizontal_whitespace(input: &str) -> IResult<&str, &str> {
+     take_while(is_horizontal_whitespace)(input)
+ }
+@@ -159,7 +188,10 @@ fn multi_line_value_and_whitespace<'a>(input: &'a str, state: &ParserState) -> I
+ fn multi_line_values<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>> {
+     preceded(
+         whitespace,
+-        many0(|i| multi_line_value_and_whitespace(i, state))
++        alt((
++            |i| arrow_values(i, state),
++            many0(|i| multi_line_value_and_whitespace(i, state))
++        ))
+     ).parse(input)
+ }
+ 
+@@ -171,7 +203,10 @@ fn single_line_value_and_whitespace<'a>(input: &'a str, state: &ParserState) ->
+ }
+ 
+ fn single_line_values<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>> {
+-    many1(|i| single_line_value_and_whitespace(i, state)).parse(input)
++    alt((
++        |i| arrow_values(i, state),
++        many1(|i| single_line_value_and_whitespace(i, state))
++    )).parse(input)
+ }
+ 
+ fn single_line_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
+diff --git a/rust/tests/single_line_parser_tests.rs b/rust/tests/single_line_parser_tests.rs
+index fd44f358..3a51ca2b 100644
+--- a/rust/tests/single_line_parser_tests.rs
++++ b/rust/tests/single_line_parser_tests.rs
+@@ -321,4 +321,42 @@ fn test_single_line_link() {
+     assert_eq!(result.1.len(), 1);
+     assert_eq!(result.1[0].id, Some("id".to_string()));
+     assert_eq!(result.1[0].values.len(), 2);
++}
++
++#[test]
++fn test_right_arrow_syntax() {
++    let input = "(1 → 2)";
++    let result = parse_lino(input).unwrap();
++    let formatted = format_links_multiline(&result);
++    assert_eq!(formatted, "(1 2)");
++}
++
++#[test]
++fn test_left_arrow_syntax() {
++    let input = "(2 ← 1)";
++    let result = parse_lino(input).unwrap();
++    let formatted = format_links_multiline(&result);
++    assert_eq!(formatted, "(1 2)");
++}
++
++#[test]
++fn test_arrow_syntax_equivalence() {
++    let normal = parse_lino("(1 2)").unwrap();
++    let right_arrow = parse_lino("(1 → 2)").unwrap();
++    let left_arrow = parse_lino("(2 ← 1)").unwrap();
++
++    let normal_formatted = format_links_multiline(&normal);
++    let right_arrow_formatted = format_links_multiline(&right_arrow);
++    let left_arrow_formatted = format_links_multiline(&left_arrow);
++
++    assert_eq!(normal_formatted, right_arrow_formatted);
++    assert_eq!(normal_formatted, left_arrow_formatted);
++}
++
++#[test]
++fn test_arrow_syntax_with_names() {
++    let input = "(papa → mama)";
++    let result = parse_lino(input).unwrap();
++    let formatted = format_links_multiline(&result);
++    assert_eq!(formatted, "(papa mama)");
+ }
+\ No newline at end of file

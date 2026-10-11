@@ -1,0 +1,218 @@
+[
+  {
+    "id": 113571927639,
+    "run_id": 37853467008,
+    "workflow_name": "docs",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853467008",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoWVw",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927639",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853467008/job/113571927639",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:21Z",
+    "started_at": "2026-10-08T22:26:35Z",
+    "completed_at": "2026-10-08T22:26:45Z",
+    "name": "comparison",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:26:36Z",
+        "completed_at": "2026-10-08T22:26:37Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:26:37Z",
+        "completed_at": "2026-10-08T22:26:39Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:26:39Z",
+        "completed_at": "2026-10-08T22:26:41Z"
+      },
+      {
+        "name": "Run actions/setup-python@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:26:41Z",
+        "completed_at": "2026-10-08T22:26:41Z"
+      },
+      {
+        "name": "Install the generator dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:26:41Z",
+        "completed_at": "2026-10-08T22:26:42Z"
+      },
+      {
+        "name": "Check the generated documents and pictures",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:26:42Z",
+        "completed_at": "2026-10-08T22:26:42Z"
+      },
+      {
+        "name": "Show what drifted",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 7,
+        "started_at": "2026-10-08T22:26:42Z",
+        "completed_at": "2026-10-08T22:26:42Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-08T22:26:42Z",
+        "completed_at": "2026-10-08T22:26:42Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-08T22:26:42Z",
+        "completed_at": "2026-10-08T22:26:42Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-08T22:26:42Z",
+        "completed_at": "2026-10-08T22:26:42Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-08T22:26:42Z",
+        "completed_at": "2026-10-08T22:26:42Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927639",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096853,
+    "runner_name": "GitHub Actions 1000096853",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927875,
+    "run_id": 37853467008,
+    "workflow_name": "docs",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853467008",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoXQw",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927875",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853467008/job/113571927875",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:21Z",
+    "started_at": "2026-10-08T22:27:28Z",
+    "completed_at": "2026-10-08T22:27:33Z",
+    "name": "test-cases",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:27:29Z",
+        "completed_at": "2026-10-08T22:27:30Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:27:30Z",
+        "completed_at": "2026-10-08T22:27:31Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:27:31Z",
+        "completed_at": "2026-10-08T22:27:31Z"
+      },
+      {
+        "name": "Test comparison extraction",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:27:31Z",
+        "completed_at": "2026-10-08T22:27:31Z"
+      },
+      {
+        "name": "Check the test case comparison",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:27:31Z",
+        "completed_at": "2026-10-08T22:27:32Z"
+      },
+      {
+        "name": "Show what drifted",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 6,
+        "started_at": "2026-10-08T22:27:32Z",
+        "completed_at": "2026-10-08T22:27:32Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-08T22:27:32Z",
+        "completed_at": "2026-10-08T22:27:32Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-08T22:27:32Z",
+        "completed_at": "2026-10-08T22:27:32Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-08T22:27:32Z",
+        "completed_at": "2026-10-08T22:27:32Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927875",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096892,
+    "runner_name": "GitHub Actions 1000096892",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

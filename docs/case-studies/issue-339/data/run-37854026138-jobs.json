@@ -1,0 +1,254 @@
+[
+  {
+    "id": 113573759919,
+    "run_id": 37854026138,
+    "workflow_name": "workflows",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37854026138",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacYYLrw",
+    "head_sha": "b84905a9978c615008d580f5b2558dd0ae9697d1",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113573759919",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37854026138/job/113573759919",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:31:38Z",
+    "started_at": "2026-10-08T22:31:41Z",
+    "completed_at": "2026-10-08T22:31:53Z",
+    "name": "actionlint",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:31:43Z",
+        "completed_at": "2026-10-08T22:31:43Z"
+      },
+      {
+        "name": "Pull rhysd/actionlint:1.7.12",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:31:43Z",
+        "completed_at": "2026-10-08T22:31:48Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:31:48Z",
+        "completed_at": "2026-10-08T22:31:49Z"
+      },
+      {
+        "name": "Run actionlint",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:31:49Z",
+        "completed_at": "2026-10-08T22:31:51Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:31:51Z",
+        "completed_at": "2026-10-08T22:31:51Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:31:51Z",
+        "completed_at": "2026-10-08T22:31:51Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113573759919",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096981,
+    "runner_name": "GitHub Actions 1000096981",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113573760052,
+    "run_id": 37854026138,
+    "workflow_name": "workflows",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37854026138",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacYYMNA",
+    "head_sha": "b84905a9978c615008d580f5b2558dd0ae9697d1",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113573760052",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37854026138/job/113573760052",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:31:38Z",
+    "started_at": "2026-10-08T22:31:40Z",
+    "completed_at": "2026-10-08T22:31:49Z",
+    "name": "ci-scripts",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:31:40Z",
+        "completed_at": "2026-10-08T22:31:41Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:31:41Z",
+        "completed_at": "2026-10-08T22:31:42Z"
+      },
+      {
+        "name": "Run shellcheck",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:31:42Z",
+        "completed_at": "2026-10-08T22:31:48Z"
+      },
+      {
+        "name": "Test the registry probe",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:31:48Z",
+        "completed_at": "2026-10-08T22:31:48Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:31:48Z",
+        "completed_at": "2026-10-08T22:31:48Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:31:48Z",
+        "completed_at": "2026-10-08T22:31:48Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113573760052",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096980,
+    "runner_name": "GitHub Actions 1000096980",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113573760113,
+    "run_id": 37854026138,
+    "workflow_name": "workflows",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37854026138",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacYYMcQ",
+    "head_sha": "b84905a9978c615008d580f5b2558dd0ae9697d1",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113573760113",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37854026138/job/113573760113",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:31:38Z",
+    "started_at": "2026-10-08T22:31:40Z",
+    "completed_at": "2026-10-08T22:31:54Z",
+    "name": "zizmor",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:31:40Z",
+        "completed_at": "2026-10-08T22:31:41Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:31:41Z",
+        "completed_at": "2026-10-08T22:31:42Z"
+      },
+      {
+        "name": "Set up Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:31:42Z",
+        "completed_at": "2026-10-08T22:31:43Z"
+      },
+      {
+        "name": "Install zizmor",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:31:43Z",
+        "completed_at": "2026-10-08T22:31:50Z"
+      },
+      {
+        "name": "Run zizmor",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:31:50Z",
+        "completed_at": "2026-10-08T22:31:53Z"
+      },
+      {
+        "name": "Check that hosted runners are pinned",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:31:53Z",
+        "completed_at": "2026-10-08T22:31:53Z"
+      },
+      {
+        "name": "Post Set up Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-08T22:31:53Z",
+        "completed_at": "2026-10-08T22:31:53Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-10-08T22:31:53Z",
+        "completed_at": "2026-10-08T22:31:53Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-08T22:31:53Z",
+        "completed_at": "2026-10-08T22:31:53Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113573760113",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096979,
+    "runner_name": "GitHub Actions 1000096979",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

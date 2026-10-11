@@ -1,0 +1,22 @@
+GET https://registry.npmjs.org/links-notation/0.25.1 -> 200
+GET https://api.github.com/repos/link-foundation/links-notation/releases/tags/js_0.25.1 -> 200
+js: 0.25.1 registry and GitHub release verified
+GET https://pypi.org/pypi/links-notation/0.25.1/json -> 200
+GET https://api.github.com/repos/link-foundation/links-notation/releases/tags/python_0.25.1 -> 200
+python: 0.25.1 registry and GitHub release verified
+GET https://crates.io/api/v1/crates/links-notation/0.25.1 -> 200
+GET https://api.github.com/repos/link-foundation/links-notation/releases/tags/rust_0.25.1 -> 200
+rust: 0.25.1 registry and GitHub release verified
+GET https://api.nuget.org/v3-flatcontainer/link.foundation.links.notation/index.json -> 200
+GET https://api.nuget.org/v3-flatcontainer/link.foundation.links.notation/0.25.1/link.foundation.links.notation.0.25.1.nupkg -> 200
+GET https://api.github.com/repos/link-foundation/links-notation/releases/tags/csharp_0.25.1 -> 200
+csharp: 0.25.1 registry and GitHub release verified
+GET https://proxy.golang.org/github.com/link-foundation/links-notation/go/@v/v0.25.1.info -> 200
+GET https://api.github.com/repos/link-foundation/links-notation/releases/tags/go%2Fv0.25.1 -> 200
+go: 0.25.1 registry and GitHub release verified
+GET https://repo1.maven.org/maven2/io/github/link-foundation/links-notation/0.25.1/links-notation-0.25.1.pom -> 404
+GET https://repo1.maven.org/maven2/io/github/link-foundation/ -> 404
+::error::java: 0.25.1 is absent from Maven Central
+GET https://repo.packagist.org/p2/link-foundation/links-notation.json -> 404
+::error::php: 0.25.1 is absent from Packagist
+7 languages audited; 2 delivery failure(s).

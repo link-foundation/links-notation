@@ -1,0 +1,23 @@
+https://github.com/link-foundation/links-notation/pull/204#issuecomment-6103907464
+✓ Closed pull request link-foundation/links-notation#204 (Fix Java and Go package publishing and CI/CD)
+{"closedAt":"2026-10-11T00:48:31Z","state":"CLOSED","url":"https://github.com/link-foundation/links-notation/pull/204"}
+
+https://github.com/link-foundation/links-notation/pull/185#issuecomment-6103907885
+✓ Closed pull request link-foundation/links-notation#185 (feat: Add multi-reference support for unquoted multi-word IDs (#184))
+{"closedAt":"2026-10-11T00:48:35Z","state":"CLOSED","url":"https://github.com/link-foundation/links-notation/pull/185"}
+
+https://github.com/link-foundation/links-notation/pull/170#issuecomment-6103908459
+✓ Closed pull request link-foundation/links-notation#170 (feat: Add punctuation and math symbol tokenization)
+{"closedAt":"2026-10-11T00:48:39Z","state":"CLOSED","url":"https://github.com/link-foundation/links-notation/pull/170"}
+
+https://github.com/link-foundation/links-notation/pull/167#issuecomment-6103908906
+✓ Closed pull request link-foundation/links-notation#167 (Add support for alternative bracket delimiters { } and [ ] (closes #143))
+{"closedAt":"2026-10-11T00:48:43Z","state":"CLOSED","url":"https://github.com/link-foundation/links-notation/pull/167"}
+
+https://github.com/link-foundation/links-notation/pull/80#issuecomment-6103909381
+✓ Closed pull request link-foundation/links-notation#80 (Add support for optional arrow syntax: (2 ← 1) = (1 → 2) = (1 2))
+{"closedAt":"2026-10-11T00:48:47Z","state":"CLOSED","url":"https://github.com/link-foundation/links-notation/pull/80"}
+
+https://github.com/link-foundation/links-notation/pull/76#issuecomment-6103909904
+✓ Closed pull request link-foundation/links-notation#76 (Implement optional right-to-left mode with arrow syntax)
+{"closedAt":"2026-10-11T00:48:51Z","state":"CLOSED","url":"https://github.com/link-foundation/links-notation/pull/76"}

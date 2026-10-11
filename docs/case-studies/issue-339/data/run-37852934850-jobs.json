@@ -1,0 +1,126 @@
+[
+  {
+    "id": 113570183293,
+    "run_id": 37852934850,
+    "workflow_name": "dependency freshness",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37852934850",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacU94fQ",
+    "head_sha": "25de363e6f8bd363086014e45251c968868a18d0",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113570183293",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37852934850/job/113570183293",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-10-08T22:21:20Z",
+    "started_at": "2026-10-08T22:21:22Z",
+    "completed_at": "2026-10-08T22:21:33Z",
+    "name": "latest-stable",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:21:23Z",
+        "completed_at": "2026-10-08T22:21:25Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:21:25Z",
+        "completed_at": "2026-10-08T22:21:27Z"
+      },
+      {
+        "name": "Run actions/setup-python@v7.0.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:21:27Z",
+        "completed_at": "2026-10-08T22:21:27Z"
+      },
+      {
+        "name": "Test the dependency checker without network access",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:21:27Z",
+        "completed_at": "2026-10-08T22:21:27Z"
+      },
+      {
+        "name": "Require current stable dependencies and actions",
+        "status": "completed",
+        "conclusion": "failure",
+        "number": 5,
+        "started_at": "2026-10-08T22:21:27Z",
+        "completed_at": "2026-10-08T22:21:31Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 6,
+        "started_at": "2026-10-08T22:21:31Z",
+        "completed_at": "2026-10-08T22:21:31Z"
+      },
+      {
+        "name": "Run oven-sh/setup-bun@v2.2.0",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 7,
+        "started_at": "2026-10-08T22:21:31Z",
+        "completed_at": "2026-10-08T22:21:31Z"
+      },
+      {
+        "name": "Require current compatible transitive npm dependencies and both JS locks",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 8,
+        "started_at": "2026-10-08T22:21:31Z",
+        "completed_at": "2026-10-08T22:21:31Z"
+      },
+      {
+        "name": "Preserve dependency resolution evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:21:31Z",
+        "completed_at": "2026-10-08T22:21:31Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v7.0.0",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 17,
+        "started_at": "2026-10-08T22:21:31Z",
+        "completed_at": "2026-10-08T22:21:31Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-10-08T22:21:31Z",
+        "completed_at": "2026-10-08T22:21:31Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-10-08T22:21:31Z",
+        "completed_at": "2026-10-08T22:21:31Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113570183293",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096735,
+    "runner_name": "GitHub Actions 1000096735",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

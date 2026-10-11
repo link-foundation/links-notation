@@ -1,0 +1,6 @@
+5457: publishToCratesIO	UNKNOWN STEP	2026-10-08T23:14:34.0389651Z ##[error]ENOENT: no such file or directory, opendir '/home/runner/work/links-notation/links-notation/rust/target/package/links-notation-0.23.0/tests/target'
+5458: publishToCratesIO	UNKNOWN STEP	2026-10-08T23:14:34.0402415Z ##[error]Error: ENOENT: no such file or directory, opendir '/home/runner/work/links-notation/links-notation/rust/target/package/links-notation-0.23.0/tests/target'
+5459: publishToCratesIO	UNKNOWN STEP	2026-10-08T23:14:34.0406278Z ##[error]ENOENT: no such file or directory, opendir '/home/runner/work/links-notation/links-notation/rust/target/package/links-notation-0.23.0/tests/trybuild'
+5460: publishToCratesIO	UNKNOWN STEP	2026-10-08T23:14:34.0409875Z ##[error]Error: ENOENT: no such file or directory, opendir '/home/runner/work/links-notation/links-notation/rust/target/package/links-notation-0.23.0/tests/trybuild'
+5498: publishToCratesIO	UNKNOWN STEP	2026-10-08T23:14:39.1991064Z ^[[36;1m  echo "published=failed" >> "$GITHUB_OUTPUT"^[[0m
+5549: publishToCratesIO	UNKNOWN STEP	2026-10-08T23:14:39.2009082Z ^[[36;1m  *) echo "published=failed" >> "$GITHUB_OUTPUT"; exit 1 ;;^[[0m

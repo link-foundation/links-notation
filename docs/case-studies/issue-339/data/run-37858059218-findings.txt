@@ -1,0 +1,2 @@
+2240: publishToPyPI	UNKNOWN STEP	2026-10-08T23:13:24.9786578Z ##[warning]Trusted Publishers allows publishing packages to PyPI from automated environments like GitHub Actions without needing to use username/password combinations or API tokens to authenticate with PyPI. Read more: https://docs.pypi.org/trusted-publishers
+2241: publishToPyPI	UNKNOWN STEP	2026-10-08T23:13:24.9789780Z ##[warning]A new Trusted Publisher for the currently running publishing workflow can be created by accessing the following link(s) while logged-in as an owner of the package(s):

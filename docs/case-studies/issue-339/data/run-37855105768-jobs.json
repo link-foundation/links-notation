@@ -1,0 +1,432 @@
+[
+  {
+    "id": 113577283430,
+    "run_id": 37855105768,
+    "workflow_name": "js",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105768",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacbvPZg",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577283430",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105768/job/113577283430",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:42:04Z",
+    "started_at": "2026-10-08T22:42:11Z",
+    "completed_at": "2026-10-08T22:42:19Z",
+    "name": "findChangedJsFiles",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:42:12Z",
+        "completed_at": "2026-10-08T22:42:14Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:42:14Z",
+        "completed_at": "2026-10-08T22:42:16Z"
+      },
+      {
+        "name": "Get changed files using defaults",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:42:16Z",
+        "completed_at": "2026-10-08T22:42:16Z"
+      },
+      {
+        "name": "Set output isJsFilesChanged",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:42:16Z",
+        "completed_at": "2026-10-08T22:42:16Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:42:16Z",
+        "completed_at": "2026-10-08T22:42:17Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:42:17Z",
+        "completed_at": "2026-10-08T22:42:17Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577283430",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000097168,
+    "runner_name": "GitHub Actions 1000097168",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113577371028,
+    "run_id": 37855105768,
+    "workflow_name": "js",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105768",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacb0llA",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577371028",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105768/job/113577371028",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:42:20Z",
+    "started_at": "2026-10-08T22:43:04Z",
+    "completed_at": "2026-10-08T22:43:14Z",
+    "name": "format",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:43:05Z",
+        "completed_at": "2026-10-08T22:43:06Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:43:06Z",
+        "completed_at": "2026-10-08T22:43:08Z"
+      },
+      {
+        "name": "Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:43:08Z",
+        "completed_at": "2026-10-08T22:43:09Z"
+      },
+      {
+        "name": "Install Dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:43:09Z",
+        "completed_at": "2026-10-08T22:43:10Z"
+      },
+      {
+        "name": "Check formatting with Prettier",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:43:10Z",
+        "completed_at": "2026-10-08T22:43:11Z"
+      },
+      {
+        "name": "Post Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:43:11Z",
+        "completed_at": "2026-10-08T22:43:11Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-08T22:43:11Z",
+        "completed_at": "2026-10-08T22:43:12Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-08T22:43:12Z",
+        "completed_at": "2026-10-08T22:43:12Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577371028",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000097203,
+    "runner_name": "GitHub Actions 1000097203",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113577676831,
+    "run_id": 37855105768,
+    "workflow_name": "js",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105768",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaccHQHw",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577676831",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105768/job/113577676831",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:43:15Z",
+    "started_at": "2026-10-08T22:43:48Z",
+    "completed_at": "2026-10-08T22:43:57Z",
+    "name": "lint",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:43:49Z",
+        "completed_at": "2026-10-08T22:43:50Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:43:50Z",
+        "completed_at": "2026-10-08T22:43:52Z"
+      },
+      {
+        "name": "Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:43:52Z",
+        "completed_at": "2026-10-08T22:43:53Z"
+      },
+      {
+        "name": "Install Dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:43:53Z",
+        "completed_at": "2026-10-08T22:43:53Z"
+      },
+      {
+        "name": "Lint",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:43:53Z",
+        "completed_at": "2026-10-08T22:43:54Z"
+      },
+      {
+        "name": "Post Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:43:54Z",
+        "completed_at": "2026-10-08T22:43:55Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-10-08T22:43:55Z",
+        "completed_at": "2026-10-08T22:43:55Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-10-08T22:43:55Z",
+        "completed_at": "2026-10-08T22:43:55Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577676831",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000097225,
+    "runner_name": "GitHub Actions 1000097225",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113577913997,
+    "run_id": 37855105768,
+    "workflow_name": "js",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105768",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaccVujQ",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113577913997",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105768/job/113577913997",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:43:58Z",
+    "started_at": "2026-10-08T22:44:02Z",
+    "completed_at": "2026-10-08T22:44:13Z",
+    "name": "test",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:44:02Z",
+        "completed_at": "2026-10-08T22:44:04Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:44:04Z",
+        "completed_at": "2026-10-08T22:44:06Z"
+      },
+      {
+        "name": "Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:44:06Z",
+        "completed_at": "2026-10-08T22:44:07Z"
+      },
+      {
+        "name": "Install Dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:44:07Z",
+        "completed_at": "2026-10-08T22:44:08Z"
+      },
+      {
+        "name": "Build",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:44:08Z",
+        "completed_at": "2026-10-08T22:44:08Z"
+      },
+      {
+        "name": "Test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:44:08Z",
+        "completed_at": "2026-10-08T22:44:09Z"
+      },
+      {
+        "name": "Check binary API TypeScript declarations",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:44:09Z",
+        "completed_at": "2026-10-08T22:44:09Z"
+      },
+      {
+        "name": "Check indented document API TypeScript declarations",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:44:09Z",
+        "completed_at": "2026-10-08T22:44:10Z"
+      },
+      {
+        "name": "Post Setup Bun",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-08T22:44:10Z",
+        "completed_at": "2026-10-08T22:44:10Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-10-08T22:44:10Z",
+        "completed_at": "2026-10-08T22:44:10Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-10-08T22:44:10Z",
+        "completed_at": "2026-10-08T22:44:10Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113577913997",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000097229,
+    "runner_name": "GitHub Actions 1000097229",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113578002189,
+    "run_id": 37855105768,
+    "workflow_name": "js",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105768",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaccbHDQ",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113578002189",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105768/job/113578002189",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:44:13Z",
+    "started_at": "2026-10-08T22:44:13Z",
+    "completed_at": "2026-10-08T22:44:13Z",
+    "name": "publishToNpm",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113578002189",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 113578002452,
+    "run_id": 37855105768,
+    "workflow_name": "js",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37855105768",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAaccbIFA",
+    "head_sha": "bc035a5f57a6f22cfc6dc8b85b2e1d57ae1b639f",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113578002452",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37855105768/job/113578002452",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:44:13Z",
+    "started_at": "2026-10-08T22:44:13Z",
+    "completed_at": "2026-10-08T22:44:13Z",
+    "name": "publishRelease",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113578002452",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  }
+]

@@ -1,0 +1,348 @@
+[
+  {
+    "id": 113573759169,
+    "run_id": 37854026037,
+    "workflow_name": "python",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37854026037",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacYYIwQ",
+    "head_sha": "b84905a9978c615008d580f5b2558dd0ae9697d1",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113573759169",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37854026037/job/113573759169",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:31:38Z",
+    "started_at": "2026-10-08T22:31:40Z",
+    "completed_at": "2026-10-08T22:31:47Z",
+    "name": "findChangedPythonFiles",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:31:41Z",
+        "completed_at": "2026-10-08T22:31:42Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:31:42Z",
+        "completed_at": "2026-10-08T22:31:44Z"
+      },
+      {
+        "name": "Get changed files",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:31:44Z",
+        "completed_at": "2026-10-08T22:31:44Z"
+      },
+      {
+        "name": "Set output isPythonFilesChanged",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:31:44Z",
+        "completed_at": "2026-10-08T22:31:44Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:31:44Z",
+        "completed_at": "2026-10-08T22:31:44Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:31:44Z",
+        "completed_at": "2026-10-08T22:31:44Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113573759169",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096971,
+    "runner_name": "GitHub Actions 1000096971",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113573814154,
+    "run_id": 37854026037,
+    "workflow_name": "python",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37854026037",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacYbfig",
+    "head_sha": "b84905a9978c615008d580f5b2558dd0ae9697d1",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113573814154",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37854026037/job/113573814154",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:31:47Z",
+    "started_at": "2026-10-08T22:31:49Z",
+    "completed_at": "2026-10-08T22:31:58Z",
+    "name": "lint",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:31:50Z",
+        "completed_at": "2026-10-08T22:31:51Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:31:51Z",
+        "completed_at": "2026-10-08T22:31:52Z"
+      },
+      {
+        "name": "Set up Python 3.13",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:31:52Z",
+        "completed_at": "2026-10-08T22:31:52Z"
+      },
+      {
+        "name": "Install linting tools",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:31:52Z",
+        "completed_at": "2026-10-08T22:31:54Z"
+      },
+      {
+        "name": "Check formatting with Black",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:31:54Z",
+        "completed_at": "2026-10-08T22:31:55Z"
+      },
+      {
+        "name": "Check import sorting with isort",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:31:55Z",
+        "completed_at": "2026-10-08T22:31:55Z"
+      },
+      {
+        "name": "Lint with flake8",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:31:55Z",
+        "completed_at": "2026-10-08T22:31:56Z"
+      },
+      {
+        "name": "Post Set up Python 3.13",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-08T22:31:56Z",
+        "completed_at": "2026-10-08T22:31:56Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-08T22:31:56Z",
+        "completed_at": "2026-10-08T22:31:56Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-08T22:31:56Z",
+        "completed_at": "2026-10-08T22:31:56Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113573814154",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096991,
+    "runner_name": "GitHub Actions 1000096991",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113573878096,
+    "run_id": 37854026037,
+    "workflow_name": "python",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37854026037",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacYfZUA",
+    "head_sha": "b84905a9978c615008d580f5b2558dd0ae9697d1",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113573878096",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37854026037/job/113573878096",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:31:58Z",
+    "started_at": "2026-10-08T22:32:12Z",
+    "completed_at": "2026-10-08T22:32:32Z",
+    "name": "test",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:32:13Z",
+        "completed_at": "2026-10-08T22:32:13Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:32:13Z",
+        "completed_at": "2026-10-08T22:32:15Z"
+      },
+      {
+        "name": "Set up Python 3.13",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:32:15Z",
+        "completed_at": "2026-10-08T22:32:15Z"
+      },
+      {
+        "name": "Install dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:32:15Z",
+        "completed_at": "2026-10-08T22:32:23Z"
+      },
+      {
+        "name": "Build package",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-10-08T22:32:23Z",
+        "completed_at": "2026-10-08T22:32:26Z"
+      },
+      {
+        "name": "Check package metadata",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:32:26Z",
+        "completed_at": "2026-10-08T22:32:27Z"
+      },
+      {
+        "name": "Run tests",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:32:27Z",
+        "completed_at": "2026-10-08T22:32:29Z"
+      },
+      {
+        "name": "Post Set up Python 3.13",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-10-08T22:32:29Z",
+        "completed_at": "2026-10-08T22:32:29Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-10-08T22:32:29Z",
+        "completed_at": "2026-10-08T22:32:30Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-10-08T22:32:30Z",
+        "completed_at": "2026-10-08T22:32:30Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113573878096",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000097008,
+    "runner_name": "GitHub Actions 1000097008",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113574077188,
+    "run_id": 37854026037,
+    "workflow_name": "python",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37854026037",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacYrjBA",
+    "head_sha": "b84905a9978c615008d580f5b2558dd0ae9697d1",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113574077188",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37854026037/job/113574077188",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:32:33Z",
+    "started_at": "2026-10-08T22:32:33Z",
+    "completed_at": "2026-10-08T22:32:33Z",
+    "name": "publishToPyPI",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113574077188",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 113574078043,
+    "run_id": 37854026037,
+    "workflow_name": "python",
+    "head_branch": "issue-333-056bb2173c3b",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37854026037",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacYrmWw",
+    "head_sha": "b84905a9978c615008d580f5b2558dd0ae9697d1",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113574078043",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37854026037/job/113574078043",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-10-08T22:32:33Z",
+    "started_at": "2026-10-08T22:32:33Z",
+    "completed_at": "2026-10-08T22:32:33Z",
+    "name": "publishRelease",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113574078043",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  }
+]

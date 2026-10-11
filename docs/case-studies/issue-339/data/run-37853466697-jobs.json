@@ -1,0 +1,1202 @@
+[
+  {
+    "id": 113571926723,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoSww",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571926723",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571926723",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:20Z",
+    "started_at": "2026-10-08T22:26:22Z",
+    "completed_at": "2026-10-08T22:26:35Z",
+    "name": "Dependency review",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:26:23Z",
+        "completed_at": "2026-10-08T22:26:25Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:26:25Z",
+        "completed_at": "2026-10-08T22:26:27Z"
+      },
+      {
+        "name": "Review dependency changes",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:26:27Z",
+        "completed_at": "2026-10-08T22:26:32Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:26:32Z",
+        "completed_at": "2026-10-08T22:26:32Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:26:32Z",
+        "completed_at": "2026-10-08T22:26:32Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571926723",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096838,
+    "runner_name": "GitHub Actions 1000096838",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927025,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoT8Q",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927025",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927025",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:20Z",
+    "started_at": "2026-10-08T22:26:22Z",
+    "completed_at": "2026-10-08T22:26:29Z",
+    "name": "Audit npm lock (docs/comparison)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:26:23Z",
+        "completed_at": "2026-10-08T22:26:24Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:26:24Z",
+        "completed_at": "2026-10-08T22:26:26Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:26:26Z",
+        "completed_at": "2026-10-08T22:26:26Z"
+      },
+      {
+        "name": "Audit the committed lockfile",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:26:26Z",
+        "completed_at": "2026-10-08T22:26:27Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:26:27Z",
+        "completed_at": "2026-10-08T22:26:27Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:26:27Z",
+        "completed_at": "2026-10-08T22:26:27Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:26:27Z",
+        "completed_at": "2026-10-08T22:26:27Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927025",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096839,
+    "runner_name": "GitHub Actions 1000096839",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927049,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoUCQ",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927049",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927049",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:20Z",
+    "started_at": "2026-10-08T22:26:23Z",
+    "completed_at": "2026-10-08T22:27:23Z",
+    "name": "CodeQL (go)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:26:23Z",
+        "completed_at": "2026-10-08T22:26:26Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:26:26Z",
+        "completed_at": "2026-10-08T22:26:28Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:26:28Z",
+        "completed_at": "2026-10-08T22:26:38Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:26:38Z",
+        "completed_at": "2026-10-08T22:27:19Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:27:19Z",
+        "completed_at": "2026-10-08T22:27:19Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:27:19Z",
+        "completed_at": "2026-10-08T22:27:20Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:27:20Z",
+        "completed_at": "2026-10-08T22:27:20Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:27:20Z",
+        "completed_at": "2026-10-08T22:27:20Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927049",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096840,
+    "runner_name": "GitHub Actions 1000096840",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927142,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoUZg",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927142",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927142",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:20Z",
+    "started_at": "2026-10-08T22:26:23Z",
+    "completed_at": "2026-10-08T22:26:59Z",
+    "name": "CodeQL (actions)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:26:24Z",
+        "completed_at": "2026-10-08T22:26:25Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:26:25Z",
+        "completed_at": "2026-10-08T22:26:26Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:26:26Z",
+        "completed_at": "2026-10-08T22:26:34Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:26:34Z",
+        "completed_at": "2026-10-08T22:26:57Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:26:57Z",
+        "completed_at": "2026-10-08T22:26:57Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:26:57Z",
+        "completed_at": "2026-10-08T22:26:58Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:26:58Z",
+        "completed_at": "2026-10-08T22:26:58Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:26:58Z",
+        "completed_at": "2026-10-08T22:26:58Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927142",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096841,
+    "runner_name": "GitHub Actions 1000096841",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927160,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoUeA",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927160",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927160",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:20Z",
+    "started_at": "2026-10-08T22:27:30Z",
+    "completed_at": "2026-10-08T22:27:38Z",
+    "name": "Audit npm lock (benchmarks/tools)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:27:31Z",
+        "completed_at": "2026-10-08T22:27:32Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:27:32Z",
+        "completed_at": "2026-10-08T22:27:33Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:27:33Z",
+        "completed_at": "2026-10-08T22:27:34Z"
+      },
+      {
+        "name": "Audit the committed lockfile",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:27:34Z",
+        "completed_at": "2026-10-08T22:27:36Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:27:36Z",
+        "completed_at": "2026-10-08T22:27:36Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:27:36Z",
+        "completed_at": "2026-10-08T22:27:36Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:27:36Z",
+        "completed_at": "2026-10-08T22:27:36Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927160",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096893,
+    "runner_name": "GitHub Actions 1000096893",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927237,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoUxQ",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927237",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927237",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:20Z",
+    "started_at": "2026-10-08T22:27:48Z",
+    "completed_at": "2026-10-08T22:28:01Z",
+    "name": "Secret scan",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:27:49Z",
+        "completed_at": "2026-10-08T22:27:51Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:27:51Z",
+        "completed_at": "2026-10-08T22:27:54Z"
+      },
+      {
+        "name": "Scan the repository for verified secrets",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:27:54Z",
+        "completed_at": "2026-10-08T22:27:59Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:27:59Z",
+        "completed_at": "2026-10-08T22:27:59Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:27:59Z",
+        "completed_at": "2026-10-08T22:27:59Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927237",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096903,
+    "runner_name": "GitHub Actions 1000096903",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927240,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoUyA",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927240",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927240",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:20Z",
+    "started_at": "2026-10-08T22:26:36Z",
+    "completed_at": "2026-10-08T22:26:43Z",
+    "name": "Audit npm lock (benchmarks/js)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:26:37Z",
+        "completed_at": "2026-10-08T22:26:38Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:26:38Z",
+        "completed_at": "2026-10-08T22:26:39Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:26:39Z",
+        "completed_at": "2026-10-08T22:26:40Z"
+      },
+      {
+        "name": "Audit the committed lockfile",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:26:40Z",
+        "completed_at": "2026-10-08T22:26:40Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:26:40Z",
+        "completed_at": "2026-10-08T22:26:41Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:26:41Z",
+        "completed_at": "2026-10-08T22:26:41Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:26:41Z",
+        "completed_at": "2026-10-08T22:26:41Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927240",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096854,
+    "runner_name": "GitHub Actions 1000096854",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927273,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoU6Q",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927273",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927273",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:20Z",
+    "started_at": "2026-10-08T22:27:49Z",
+    "completed_at": "2026-10-08T22:28:00Z",
+    "name": "Audit npm lock (docs/website)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:27:51Z",
+        "completed_at": "2026-10-08T22:27:52Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:27:52Z",
+        "completed_at": "2026-10-08T22:27:55Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:27:55Z",
+        "completed_at": "2026-10-08T22:27:55Z"
+      },
+      {
+        "name": "Audit the committed lockfile",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:27:55Z",
+        "completed_at": "2026-10-08T22:27:56Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:27:56Z",
+        "completed_at": "2026-10-08T22:27:56Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:27:56Z",
+        "completed_at": "2026-10-08T22:27:56Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:27:56Z",
+        "completed_at": "2026-10-08T22:27:56Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927273",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096905,
+    "runner_name": "GitHub Actions 1000096905",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927275,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoU6w",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927275",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927275",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:21Z",
+    "started_at": "2026-10-08T22:27:48Z",
+    "completed_at": "2026-10-08T22:30:21Z",
+    "name": "CodeQL (rust)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:27:49Z",
+        "completed_at": "2026-10-08T22:27:50Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:27:50Z",
+        "completed_at": "2026-10-08T22:27:52Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:27:52Z",
+        "completed_at": "2026-10-08T22:28:01Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:28:01Z",
+        "completed_at": "2026-10-08T22:30:16Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:30:16Z",
+        "completed_at": "2026-10-08T22:30:17Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:30:17Z",
+        "completed_at": "2026-10-08T22:30:17Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:30:17Z",
+        "completed_at": "2026-10-08T22:30:18Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:30:18Z",
+        "completed_at": "2026-10-08T22:30:18Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927275",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096904,
+    "runner_name": "GitHub Actions 1000096904",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927291,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoU-w",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927291",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927291",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:21Z",
+    "started_at": "2026-10-08T22:27:33Z",
+    "completed_at": "2026-10-08T22:29:24Z",
+    "name": "CodeQL (csharp)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:27:34Z",
+        "completed_at": "2026-10-08T22:27:35Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:27:35Z",
+        "completed_at": "2026-10-08T22:27:37Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:27:37Z",
+        "completed_at": "2026-10-08T22:27:51Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:27:51Z",
+        "completed_at": "2026-10-08T22:29:20Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:29:20Z",
+        "completed_at": "2026-10-08T22:29:21Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:29:21Z",
+        "completed_at": "2026-10-08T22:29:21Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:29:21Z",
+        "completed_at": "2026-10-08T22:29:22Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:29:22Z",
+        "completed_at": "2026-10-08T22:29:22Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927291",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096896,
+    "runner_name": "GitHub Actions 1000096896",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927300,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoVBA",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927300",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927300",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:21Z",
+    "started_at": "2026-10-08T22:26:52Z",
+    "completed_at": "2026-10-08T22:26:59Z",
+    "name": "Audit npm lock (js)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:26:53Z",
+        "completed_at": "2026-10-08T22:26:54Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:26:54Z",
+        "completed_at": "2026-10-08T22:26:56Z"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:26:56Z",
+        "completed_at": "2026-10-08T22:26:57Z"
+      },
+      {
+        "name": "Audit the committed lockfile",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:26:57Z",
+        "completed_at": "2026-10-08T22:26:57Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:26:57Z",
+        "completed_at": "2026-10-08T22:26:58Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:26:58Z",
+        "completed_at": "2026-10-08T22:26:58Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:26:58Z",
+        "completed_at": "2026-10-08T22:26:58Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927300",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096870,
+    "runner_name": "GitHub Actions 1000096870",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927310,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoVDg",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927310",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927310",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:21Z",
+    "started_at": "2026-10-08T22:27:53Z",
+    "completed_at": "2026-10-08T22:29:37Z",
+    "name": "CodeQL (java-kotlin)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:27:54Z",
+        "completed_at": "2026-10-08T22:27:56Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:27:56Z",
+        "completed_at": "2026-10-08T22:27:57Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:27:57Z",
+        "completed_at": "2026-10-08T22:28:15Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:28:15Z",
+        "completed_at": "2026-10-08T22:29:32Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:29:32Z",
+        "completed_at": "2026-10-08T22:29:33Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:29:33Z",
+        "completed_at": "2026-10-08T22:29:33Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:29:33Z",
+        "completed_at": "2026-10-08T22:29:34Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:29:34Z",
+        "completed_at": "2026-10-08T22:29:34Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927310",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096910,
+    "runner_name": "GitHub Actions 1000096910",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927457,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoVoQ",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927457",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927457",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:21Z",
+    "started_at": "2026-10-08T22:28:09Z",
+    "completed_at": "2026-10-08T22:29:02Z",
+    "name": "CodeQL (javascript-typescript)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:28:10Z",
+        "completed_at": "2026-10-08T22:28:11Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:28:11Z",
+        "completed_at": "2026-10-08T22:28:12Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:28:12Z",
+        "completed_at": "2026-10-08T22:28:22Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:28:22Z",
+        "completed_at": "2026-10-08T22:28:59Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:28:59Z",
+        "completed_at": "2026-10-08T22:29:00Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:29:00Z",
+        "completed_at": "2026-10-08T22:29:00Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:29:00Z",
+        "completed_at": "2026-10-08T22:29:01Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:29:01Z",
+        "completed_at": "2026-10-08T22:29:01Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927457",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096917,
+    "runner_name": "GitHub Actions 1000096917",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 113571927527,
+    "run_id": 37853466697,
+    "workflow_name": "security",
+    "head_branch": "issue-332-f564abf51726",
+    "run_url": "https://api.github.com/repos/link-foundation/links-notation/actions/runs/37853466697",
+    "run_attempt": 1,
+    "node_id": "CR_kwDODRLdSM8AAAAacWoV5w",
+    "head_sha": "d90b6b99a176572fd5d9c2be87638a0f49a68f1a",
+    "url": "https://api.github.com/repos/link-foundation/links-notation/actions/jobs/113571927527",
+    "html_url": "https://github.com/link-foundation/links-notation/actions/runs/37853466697/job/113571927527",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-08T22:26:21Z",
+    "started_at": "2026-10-08T22:28:11Z",
+    "completed_at": "2026-10-08T22:29:03Z",
+    "name": "CodeQL (python)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-10-08T22:28:12Z",
+        "completed_at": "2026-10-08T22:28:13Z"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-10-08T22:28:13Z",
+        "completed_at": "2026-10-08T22:28:14Z"
+      },
+      {
+        "name": "Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-10-08T22:28:14Z",
+        "completed_at": "2026-10-08T22:28:28Z"
+      },
+      {
+        "name": "Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-10-08T22:28:28Z",
+        "completed_at": "2026-10-08T22:28:59Z"
+      },
+      {
+        "name": "Post Analyze",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-10-08T22:28:59Z",
+        "completed_at": "2026-10-08T22:28:59Z"
+      },
+      {
+        "name": "Post Initialize CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-10-08T22:28:59Z",
+        "completed_at": "2026-10-08T22:29:00Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-10-08T22:29:00Z",
+        "completed_at": "2026-10-08T22:29:00Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-10-08T22:29:00Z",
+        "completed_at": "2026-10-08T22:29:00Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/link-foundation/links-notation/check-runs/113571927527",
+    "labels": [
+      "ubuntu-24.04"
+    ],
+    "runner_id": 1000096918,
+    "runner_name": "GitHub Actions 1000096918",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

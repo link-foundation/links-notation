@@ -343,6 +343,9 @@ target/venv/
 .venv/
 venv/
 
+# Scratch command logs; durable compressed evidence lives in case studies.
+ci-logs/
+
 # java
 java/target/
 benchmarks/java/target/

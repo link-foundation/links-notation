@@ -1,0 +1,1 @@
+Command '['gh', 'pr', 'diff', '331', '--repo', 'link-foundation/links-notation']' returned non-zero exit status 1.
