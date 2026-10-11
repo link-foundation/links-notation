@@ -1,0 +1,299 @@
+[
+  {
+    "id": "empty",
+    "feature": "core-text",
+    "input": "",
+    "expected": [],
+    "format": ""
+  },
+  {
+    "id": "singlet",
+    "feature": "core-text",
+    "input": "alpha",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "alpha",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(alpha)"
+  },
+  {
+    "id": "tuple",
+    "feature": "core-text",
+    "input": "(alpha beta)",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "alpha",
+            "values": []
+          },
+          {
+            "id": "beta",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(alpha beta)"
+  },
+  {
+    "id": "named",
+    "feature": "named-links",
+    "input": "(root: alpha beta)",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": "alpha",
+            "values": []
+          },
+          {
+            "id": "beta",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(root: alpha beta)"
+  },
+  {
+    "id": "nested",
+    "feature": "nested-links",
+    "input": "(root: (child: leaf) tail)",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": "child",
+            "values": [
+              {
+                "id": "leaf",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": "tail",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(root: (child: leaf) tail)"
+  },
+  {
+    "id": "indent",
+    "feature": "indentation",
+    "input": "root:\n  child:\n    leaf\n  tail",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": "child",
+            "values": [
+              {
+                "id": "leaf",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": "tail",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(root: (child: leaf) tail)"
+  },
+  {
+    "id": "context",
+    "feature": "nested-contexts",
+    "input": "value (\n  id \"1\"\n  label \"one\"\n)",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "value",
+            "values": []
+          },
+          {
+            "id": null,
+            "values": [
+              {
+                "id": null,
+                "values": [
+                  {
+                    "id": "id",
+                    "values": []
+                  },
+                  {
+                    "id": "1",
+                    "values": []
+                  }
+                ]
+              },
+              {
+                "id": null,
+                "values": [
+                  {
+                    "id": "label",
+                    "values": []
+                  },
+                  {
+                    "id": "one",
+                    "values": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(value ((id 1) (label one)))"
+  },
+  {
+    "id": "quotes",
+    "feature": "quoted-references",
+    "input": "(\"a a\": 'b b' \"c c\")",
+    "expected": [
+      {
+        "id": "a a",
+        "values": [
+          {
+            "id": "b b",
+            "values": []
+          },
+          {
+            "id": "c c",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "('a a': 'b b' 'c c')"
+  },
+  {
+    "id": "empty-ref",
+    "feature": "empty-references",
+    "input": "(root: \"\" ~1{})",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": "",
+            "values": []
+          },
+          {
+            "id": "",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(root: ~1{} ~1{})"
+  },
+  {
+    "id": "unicode",
+    "feature": "unicode-fidelity",
+    "input": "(根: café 🙂)",
+    "expected": [
+      {
+        "id": "根",
+        "values": [
+          {
+            "id": "café",
+            "values": []
+          },
+          {
+            "id": "🙂",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(根: café 🙂)"
+  },
+  {
+    "id": "comments",
+    "feature": "comments",
+    "input": "root: value # comment\n# standalone",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": "value",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(root: value)"
+  },
+  {
+    "id": "quote-runs",
+    "feature": "quote-runs",
+    "input": "(root: '''has ' and \" quotes''')",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": "has ' and \" quotes",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(root: `has ' and \" quotes`)"
+  },
+  {
+    "id": "multiline",
+    "feature": "multiline-references",
+    "input": "(root: \"line1\nline2\")",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": "line1\nline2",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(root: ~1{6c696e65310a6c696e6532})"
+  },
+  {
+    "id": "literal",
+    "feature": "reference-literals",
+    "input": "(root: ~1{610062})",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": "a\u0000b",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(root: ~1{610062})"
+  }
+]

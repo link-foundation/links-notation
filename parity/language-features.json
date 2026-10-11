@@ -1,0 +1,1492 @@
+{
+  "schemaVersion": 1,
+  "languages": [
+    "js",
+    "rust",
+    "python",
+    "java",
+    "go",
+    "csharp",
+    "php"
+  ],
+  "features": [
+    {
+      "id": "core-text",
+      "description": "core text parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "named-links",
+      "description": "named links parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "nested-links",
+      "description": "nested links parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "indentation",
+      "description": "indentation parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "nested-contexts",
+      "description": "nested contexts parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "quoted-references",
+      "description": "quoted references parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "empty-references",
+      "description": "empty references parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "unicode-fidelity",
+      "description": "unicode fidelity parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "comments",
+      "description": "comments parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "quote-runs",
+      "description": "quote runs parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "multiline-references",
+      "description": "multiline references parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "reference-literals",
+      "description": "reference literals parse tree and default formatter contract",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "streaming",
+      "description": "Incremental text parsing with character chunks",
+      "contract": "native-suite",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/StreamParser.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/stream_parser.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/stream_parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/stream_parser.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/StreamParser.cs"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/StreamParser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "binary-protocol",
+      "description": "Configurable binary codec and shared protocol vectors",
+      "contract": "native-suite",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Binary.js"
+          ],
+          "evidence": [
+            "js/tests/Binary.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/binary/mod.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/binary_notation_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/binary.py"
+          ],
+          "evidence": [
+            "python/tests/test_binary.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/BinaryLinoCodec.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/binary.go"
+          ],
+          "evidence": [
+            "go/binary_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Binary/BinaryLinoCodec.cs"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Binary/BinaryLinoCodec.php"
+          ],
+          "evidence": [
+            "php/tests/BinaryTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "nesting-limits",
+      "description": "Bounded parser depth with predictable errors",
+      "contract": "native-suite",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/NestingLimit.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/nesting_limit_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_nesting_limit.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/NestingLimitTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/nesting_limit_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Parser.peg"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/NestingLimitTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/NestingLimitTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "indented-document-api",
+      "description": "Parent/children document representation and minimal quoting introduced in PR 336",
+      "contract": "documented-exception",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/IndentedDocument.js"
+          ],
+          "evidence": [
+            "js/tests/IndentedDocument.test.js"
+          ]
+        },
+        "rust": {
+          "status": "exception",
+          "reason": "PR 336 intentionally added a JS convenience API. The shared Link model and text syntax remain covered; equivalent convenience APIs await a JS-first port.",
+          "documentation": "parity/README.md"
+        },
+        "python": {
+          "status": "exception",
+          "reason": "PR 336 intentionally added a JS convenience API. The shared Link model and text syntax remain covered; equivalent convenience APIs await a JS-first port.",
+          "documentation": "parity/README.md"
+        },
+        "java": {
+          "status": "exception",
+          "reason": "PR 336 intentionally added a JS convenience API. The shared Link model and text syntax remain covered; equivalent convenience APIs await a JS-first port.",
+          "documentation": "parity/README.md"
+        },
+        "go": {
+          "status": "exception",
+          "reason": "PR 336 intentionally added a JS convenience API. The shared Link model and text syntax remain covered; equivalent convenience APIs await a JS-first port.",
+          "documentation": "parity/README.md"
+        },
+        "csharp": {
+          "status": "exception",
+          "reason": "PR 336 intentionally added a JS convenience API. The shared Link model and text syntax remain covered; equivalent convenience APIs await a JS-first port.",
+          "documentation": "parity/README.md"
+        },
+        "php": {
+          "status": "exception",
+          "reason": "PR 336 intentionally added a JS convenience API. The shared Link model and text syntax remain covered; equivalent convenience APIs await a JS-first port.",
+          "documentation": "parity/README.md"
+        }
+      }
+    },
+    {
+      "id": "link-object-model",
+      "description": "Nullable single identifier and recursive link values, with host-language collections",
+      "contract": "native-suite",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Link.js"
+          ],
+          "evidence": [
+            "js/tests/Link.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/link_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/link.py"
+          ],
+          "evidence": [
+            "python/tests/test_link.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Link.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/lino.go"
+          ],
+          "evidence": [
+            "go/lino_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Link.cs"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/LinkTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Link.php"
+          ],
+          "evidence": [
+            "php/tests/LinkTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "format-config-api",
+      "description": "Configurable inline/grouped/indented formatting with language-specific options",
+      "contract": "native-suite",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/FormatConfig.js"
+          ],
+          "evidence": [
+            "js/tests/FormatConfig.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/format_config.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/format_config_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/format_config.py"
+          ],
+          "evidence": [
+            "python/tests/test_format_config.py"
+          ]
+        },
+        "java": {
+          "status": "exception",
+          "reason": "Java provides boolean format options but has no FormatConfig object. Shared default formatting is tested.",
+          "documentation": "parity/README.md"
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/format_config.go"
+          ],
+          "evidence": [
+            "go/lino_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/FormatConfig.cs"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/FormatConfig.php"
+          ],
+          "evidence": [
+            "php/tests/FormatConfigTest.php"
+          ]
+        }
+      }
+    },
+    {
+      "id": "links-group-class-api",
+      "description": "LinksGroup class API in bindings that expose it",
+      "contract": "native-suite",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/LinksGroup.js"
+          ],
+          "evidence": [
+            "js/tests/LinksGroup.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/links_group_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "exception",
+          "reason": "This binding uses nested Link values/collections without a separate LinksGroup class; nested-tree parity is tested.",
+          "documentation": "parity/README.md"
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/LinksGroupTest.java"
+          ]
+        },
+        "go": {
+          "status": "exception",
+          "reason": "This binding uses nested Link values/collections without a separate LinksGroup class; nested-tree parity is tested.",
+          "documentation": "parity/README.md"
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/LinksGroup.cs"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/LinksGroupTests.cs"
+          ]
+        },
+        "php": {
+          "status": "exception",
+          "reason": "This binding uses nested Link values/collections without a separate LinksGroup class; nested-tree parity is tested.",
+          "documentation": "parity/README.md"
+        }
+      }
+    },
+    {
+      "id": "rust-compile-time-macro",
+      "description": "Rust compile-time lino! macro and Rust tuple conversions",
+      "contract": "native-suite",
+      "implementations": {
+        "js": {
+          "status": "exception",
+          "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
+          "documentation": "parity/README.md"
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation-macro/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/macro_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "exception",
+          "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
+          "documentation": "parity/README.md"
+        },
+        "java": {
+          "status": "exception",
+          "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
+          "documentation": "parity/README.md"
+        },
+        "go": {
+          "status": "exception",
+          "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
+          "documentation": "parity/README.md"
+        },
+        "csharp": {
+          "status": "exception",
+          "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
+          "documentation": "parity/README.md"
+        },
+        "php": {
+          "status": "exception",
+          "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
+          "documentation": "parity/README.md"
+        }
+      }
+    }
+  ],
+  "sources": {
+    "js": {
+      "files": [
+        "js/src/Binary.js",
+        "js/src/FormatConfig.js",
+        "js/src/FormatOptions.js",
+        "js/src/IndentedDocument.js",
+        "js/src/Link.js",
+        "js/src/LinksGroup.js",
+        "js/src/ParseError.js",
+        "js/src/Parser.js",
+        "js/src/ReferenceLiteral.js",
+        "js/src/StreamParser.js",
+        "js/src/comments.js",
+        "js/src/grammar.pegjs",
+        "js/src/index.js",
+        "js/src/parser-generated.js",
+        "js/src/quotes.js",
+        "js/src/references.js"
+      ],
+      "sha256": "1b065236842e11fd246742a362b18fd39102920b489af2321b645cb883c5612a"
+    },
+    "rust": {
+      "files": [
+        "rust/links-notation-macro/src/lib.rs",
+        "rust/links-notation-macro/src/tests.rs",
+        "rust/links-notation/src/binary/error.rs",
+        "rust/links-notation/src/binary/format.rs",
+        "rust/links-notation/src/binary/mapping.rs",
+        "rust/links-notation/src/binary/mod.rs",
+        "rust/links-notation/src/binary/packet.rs",
+        "rust/links-notation/src/comments.rs",
+        "rust/links-notation/src/format_config.rs",
+        "rust/links-notation/src/lib.rs",
+        "rust/links-notation/src/parser.rs",
+        "rust/links-notation/src/parser_config.rs",
+        "rust/links-notation/src/quotes.rs",
+        "rust/links-notation/src/reference_literal.rs",
+        "rust/links-notation/src/stream_parser.rs"
+      ],
+      "sha256": "86dc98b340395a2b50219c6831ee43a3983565e2ed4f0bf9977648ad21af1438"
+    },
+    "python": {
+      "files": [
+        "python/links_notation/__init__.py",
+        "python/links_notation/binary.py",
+        "python/links_notation/comments.py",
+        "python/links_notation/format_config.py",
+        "python/links_notation/formatter.py",
+        "python/links_notation/link.py",
+        "python/links_notation/parser.py",
+        "python/links_notation/quotes.py",
+        "python/links_notation/reference_literal.py",
+        "python/links_notation/stream_parser.py"
+      ],
+      "sha256": "ca9c3bd78097da9f5a335a56c7ecc4a4baf88c3ef0f4cd785db262ef6f4fa494"
+    },
+    "java": {
+      "files": [
+        "java/src/main/java/io/github/linkfoundation/linksnotation/BinaryLinoCodec.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/Comments.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/Link.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/NestingTooDeepException.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/ParseException.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/ReferenceLiteral.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParseException.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParseRuntimeException.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParser.java"
+      ],
+      "sha256": "704c134927382fbc7079ef48a6f461bfdee9d553c8f14f61c16c5f6565eb733d"
+    },
+    "go": {
+      "files": [
+        "go/binary.go",
+        "go/comments.go",
+        "go/format_config.go",
+        "go/lino.go",
+        "go/parser.go",
+        "go/reference_literal.go",
+        "go/stream_parser.go"
+      ],
+      "sha256": "e53ec1d0212e7d4c53864fd023cb8b75e6b99ee52a8bd6821e5d0879a3560c83"
+    },
+    "csharp": {
+      "files": [
+        "csharp/Link.Foundation.Links.Notation/Binary/ArityRange.cs",
+        "csharp/Link.Foundation.Links.Notation/Binary/BinaryLinoCodec.cs",
+        "csharp/Link.Foundation.Links.Notation/Binary/BinaryNotationException.cs",
+        "csharp/Link.Foundation.Links.Notation/Binary/LinksPacket.cs",
+        "csharp/Link.Foundation.Links.Notation/Binary/LinoFormat.cs",
+        "csharp/Link.Foundation.Links.Notation/Binary/LinoMapping.cs",
+        "csharp/Link.Foundation.Links.Notation/Binary/PacketReader.cs",
+        "csharp/Link.Foundation.Links.Notation/Binary/SectionPlanner.cs",
+        "csharp/Link.Foundation.Links.Notation/Comments.cs",
+        "csharp/Link.Foundation.Links.Notation/FormatConfig.cs",
+        "csharp/Link.Foundation.Links.Notation/FormatOptions.cs",
+        "csharp/Link.Foundation.Links.Notation/FurthestFailureTracer.cs",
+        "csharp/Link.Foundation.Links.Notation/ILinksGroupListExtensions.cs",
+        "csharp/Link.Foundation.Links.Notation/IListExtensions.cs",
+        "csharp/Link.Foundation.Links.Notation/Link.cs",
+        "csharp/Link.Foundation.Links.Notation/LinkFormatExtensions.cs",
+        "csharp/Link.Foundation.Links.Notation/LinksGroup.cs",
+        "csharp/Link.Foundation.Links.Notation/ParseException.cs",
+        "csharp/Link.Foundation.Links.Notation/Parser.cs",
+        "csharp/Link.Foundation.Links.Notation/Parser.peg",
+        "csharp/Link.Foundation.Links.Notation/Quotes.cs",
+        "csharp/Link.Foundation.Links.Notation/ReferenceLiteral.cs",
+        "csharp/Link.Foundation.Links.Notation/StreamParseException.cs",
+        "csharp/Link.Foundation.Links.Notation/StreamParser.cs",
+        "csharp/Link.Foundation.Links.Notation/_.cs",
+        "csharp/Link.Foundation.Links.Notation/id.cs"
+      ],
+      "sha256": "fc14981926c4c312ad13d62938c3ebf057d26d160307ba9531c0bd8fdec088a1"
+    },
+    "php": {
+      "files": [
+        "php/src/Binary/ArityRange.php",
+        "php/src/Binary/BinaryLinoCodec.php",
+        "php/src/Binary/DecodeLimits.php",
+        "php/src/Binary/Decoder.php",
+        "php/src/Binary/Encoder.php",
+        "php/src/Binary/LinksPacket.php",
+        "php/src/Binary/Options.php",
+        "php/src/Binary/PacketReader.php",
+        "php/src/Binary/Reference.php",
+        "php/src/Binary/Section.php",
+        "php/src/Binary/UInt64.php",
+        "php/src/Comments.php",
+        "php/src/FormatConfig.php",
+        "php/src/Formatter.php",
+        "php/src/Link.php",
+        "php/src/ParseException.php",
+        "php/src/Parser.php",
+        "php/src/ReferenceLiteral.php",
+        "php/src/StreamParseException.php",
+        "php/src/StreamParser.php"
+      ],
+      "sha256": "c2067af09156c618e2f5f3fda752c0c5da23f95468f6f65a0ebc5025a04d7b9f"
+    }
+  }
+}
