@@ -1,4 +1,4 @@
-# Nested contexts, checked in all seven implementations
+# Nested contexts, checked in all eight implementations
 
 [Issue #282](https://github.com/link-foundation/links-notation/issues/282) asked
 what a parenthesis does to the lines inside it. The answer the parsers settled on
@@ -30,8 +30,8 @@ each a link of its own. The reading this rules out is the flat one -
 bash experiments/issue-282/parity/run.sh
 ```
 
-The script parses the document with the JavaScript, Python, PHP, Rust, Go, Java
-and C# libraries in this repository, formats the result back to notation, and
+The script parses the document with the JavaScript, Python, PHP, Rust, Go, Java,
+C# and C++ libraries in this repository, formats the result back to notation, and
 compares each against `expected.txt`. It exits non-zero if any implementation
 disagrees. A language whose toolchain is not installed is reported as skipped
 rather than failed, so the script is still useful on a machine that has only
@@ -39,7 +39,7 @@ some of them; PHP additionally needs `composer install` in `php/` and an
 interpreter new enough for the package, which the script looks for by version
 rather than by binary name.
 
-Output on a machine with all seven:
+Output on a machine with all eight:
 
 ```
 JavaScript   (value ((id 1) (label one)))
@@ -48,6 +48,7 @@ PHP          (value ((id 1) (label one)))
 Rust         (value ((id 1) (label one)))
 Go           (value ((id 1) (label one)))
 Java         (value ((id 1) (label one)))
+C++          (value ((id 1) (label one)))
 C#           (value ((id 1) (label one)))
 
 Every implementation that ran agrees.
@@ -57,7 +58,7 @@ Every implementation that ran agrees.
 
 | File | What it does |
 |------|--------------|
-| `document.lino` | The input, shared by all seven checks |
+| `document.lino` | The input, shared by all eight checks |
 | `expected.txt` | The one reading they must all produce |
 | `run.sh` | Runs every check and compares the output |
 | `check.mjs` | JavaScript, against `js/src` directly |
@@ -67,6 +68,7 @@ Every implementation that ran agrees.
 | `go/` | A module with a `replace` pointing at `go/` |
 | `java/Check.java` | Compiled against the sources in `java/src/main/java` |
 | `csharp/` | A project referencing `csharp/Link.Foundation.Links.Notation` |
+| `cpp/` | A CMake project that adds `cpp/` as a subdirectory |
 
 Each one reaches into the library in this working tree rather than a published
 package, so the check reports what the code here does today.

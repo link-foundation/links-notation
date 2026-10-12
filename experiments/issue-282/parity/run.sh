@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
-# Parse one document with all seven implementations and fail unless they agree.
+# Parse one document with all eight implementations and fail unless they agree.
 #
 # The document is the one from issue #282: a parenthesised group whose body is
 # written across several lines. Before that issue was fixed, the body collapsed
 # into a flat list of references and the record boundaries were unrecoverable.
 # The point of this script is that the fix is the same fix everywhere, so the
-# seven implementations must print the same thing.
+# eight implementations must print the same thing.
 #
 # Usage: bash experiments/issue-282/parity/run.sh
 #
@@ -88,6 +88,16 @@ if command -v javac > /dev/null 2>&1 && command -v java > /dev/null 2>&1; then
     report Java "$(java -cp "$classes" Check "$here/document.lino" | tail -n 1)"
 else
     skipped+=("Java (no javac/java)")
+fi
+
+if command -v cmake > /dev/null 2>&1; then
+    cpp_build="$(mktemp -d)"
+    cmake -S "$here/cpp" -B "$cpp_build" -DCMAKE_BUILD_TYPE=Release > /dev/null
+    cmake --build "$cpp_build" --parallel 2 > /dev/null
+    report "C++" "$("$cpp_build/check" "$here/document.lino" | tail -n 1)"
+    rm -rf "$cpp_build"
+else
+    skipped+=("C++ (no cmake)")
 fi
 
 # The library targets a recent .NET, and an older SDK fails the build with

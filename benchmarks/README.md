@@ -40,6 +40,9 @@ One source of truth, everything else derived from it:
 5. Each of the seven supported languages parses every generated `.lino` with its own
    implementation, counts every document with its own tokenizer, and fails unless every number
    matches Rust's. The seven files in `results/` differ only in which language wrote them.
+   The C++ binding has no maintained offline o200k or cl100k tokenizer, so it is not one of the
+   seven: its test suite (`cpp/tests/benchmark_documents_tests.cpp`) parses every generated
+   `.lino` document instead, without counting tokens.
 
 ### Why Links Notation has three rows
 

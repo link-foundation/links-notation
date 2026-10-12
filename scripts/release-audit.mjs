@@ -65,6 +65,15 @@ export function registryTargets(version) {
           (item) => item.version.replace(/^v/, "") === version.php,
         ),
     },
+    {
+      // C++ has no central registry: the release's source archive is what
+      // CMake's FetchContent downloads, so its presence is the publication.
+      name: "cpp",
+      registry: "GitHub Releases",
+      urls: [
+        `https://github.com/link-foundation/links-notation/releases/download/cpp_${version.cpp}/links-notation-cpp-${version.cpp}.tar.gz`,
+      ],
+    },
   ];
 }
 
@@ -112,7 +121,7 @@ export async function audit({
           await response.body?.cancel();
           throw new Error(`GET ${url}: HTTP ${response.status}`);
         }
-        if (index === 0) {
+        if (index === 0 && target.valid) {
           const body = target.text
             ? await response.text()
             : await response.json();

@@ -32,6 +32,17 @@ else
   printf '\n-- PHP skipped (PHPUnit unavailable) --\n'
 fi
 
+# The C++ suite is one GoogleTest binary; the filter selects its stream tests.
+cpp_stream_tests() {
+  local build
+  build="$(mktemp -d)"
+  cmake -S cpp -B "$build" -DCMAKE_BUILD_TYPE=Release -DLINKS_NOTATION_BUILD_EXAMPLES=OFF >/dev/null
+  cmake --build "$build" --target links_notation_tests --parallel 2 >/dev/null
+  "$build/tests/links_notation_tests" --gtest_filter='StreamParser*'
+  rm -rf "$build"
+}
+run_if_available cmake C++ cpp_stream_tests
+
 # The repository opts into Microsoft.Testing.Platform in csharp/global.json;
 # invoking a project from the repository root would fall back to VSTest.
 run_if_available dotnet CSharp bash -c 'cd csharp && dotnet test --no-restore'

@@ -7,7 +7,8 @@
     "java",
     "go",
     "csharp",
-    "php"
+    "php",
+    "cpp"
   ],
   "features": [
     {
@@ -76,6 +77,15 @@
           ],
           "evidence": [
             "php/tests/SharedTextParityTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
           ]
         }
       }
@@ -147,6 +157,15 @@
           "evidence": [
             "php/tests/SharedTextParityTest.php"
           ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
+          ]
         }
       }
     },
@@ -216,6 +235,15 @@
           ],
           "evidence": [
             "php/tests/SharedTextParityTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
           ]
         }
       }
@@ -287,6 +315,15 @@
           "evidence": [
             "php/tests/SharedTextParityTest.php"
           ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
+          ]
         }
       }
     },
@@ -356,6 +393,15 @@
           ],
           "evidence": [
             "php/tests/SharedTextParityTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
           ]
         }
       }
@@ -427,6 +473,15 @@
           "evidence": [
             "php/tests/SharedTextParityTest.php"
           ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
+          ]
         }
       }
     },
@@ -496,6 +551,15 @@
           ],
           "evidence": [
             "php/tests/SharedTextParityTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
           ]
         }
       }
@@ -567,6 +631,15 @@
           "evidence": [
             "php/tests/SharedTextParityTest.php"
           ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
+          ]
         }
       }
     },
@@ -636,6 +709,15 @@
           ],
           "evidence": [
             "php/tests/SharedTextParityTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
           ]
         }
       }
@@ -707,6 +789,15 @@
           "evidence": [
             "php/tests/SharedTextParityTest.php"
           ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
+          ]
         }
       }
     },
@@ -776,6 +867,15 @@
           ],
           "evidence": [
             "php/tests/SharedTextParityTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
           ]
         }
       }
@@ -847,6 +947,15 @@
           "evidence": [
             "php/tests/SharedTextParityTest.php"
           ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
+          ]
         }
       }
     },
@@ -916,6 +1025,16 @@
           ],
           "evidence": [
             "php/tests/SharedTextParityTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/stream_parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp",
+            "cpp/tests/stream_parser_tests.cpp"
           ]
         }
       }
@@ -987,6 +1106,15 @@
           "evidence": [
             "php/tests/BinaryTest.php"
           ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/binary.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/binary_notation_tests.cpp"
+          ]
         }
       }
     },
@@ -1057,6 +1185,16 @@
           "evidence": [
             "php/tests/NestingLimitTest.php"
           ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/nesting_limit_tests.cpp",
+            "cpp/tests/nesting_depth_tests.cpp"
+          ]
         }
       }
     },
@@ -1103,6 +1241,15 @@
           "status": "exception",
           "reason": "PR 336 intentionally added a JS convenience API. The shared Link model and text syntax remain covered; equivalent convenience APIs await a JS-first port.",
           "documentation": "parity/README.md"
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/indented_document.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/indented_document_tests.cpp"
+          ]
         }
       }
     },
@@ -1173,6 +1320,15 @@
           "evidence": [
             "php/tests/LinkTest.php"
           ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/link.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/link_tests.cpp"
+          ]
         }
       }
     },
@@ -1239,6 +1395,16 @@
           "evidence": [
             "php/tests/FormatConfigTest.php"
           ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/include/links_notation/format_config.hpp",
+            "cpp/src/link.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/format_config_tests.cpp"
+          ]
         }
       }
     },
@@ -1297,6 +1463,15 @@
           "status": "exception",
           "reason": "This binding uses nested Link values/collections without a separate LinksGroup class; nested-tree parity is tested.",
           "documentation": "parity/README.md"
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/links_group.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/links_group_tests.cpp"
+          ]
         }
       }
     },
@@ -1340,6 +1515,11 @@
           "documentation": "parity/README.md"
         },
         "php": {
+          "status": "exception",
+          "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
+          "documentation": "parity/README.md"
+        },
+        "cpp": {
           "status": "exception",
           "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
           "documentation": "parity/README.md"
@@ -1487,6 +1667,37 @@
         "php/src/StreamParser.php"
       ],
       "sha256": "c2067af09156c618e2f5f3fda752c0c5da23f95468f6f65a0ebc5025a04d7b9f"
+    },
+    "cpp": {
+      "files": [
+        "cpp/include/links_notation.hpp",
+        "cpp/include/links_notation/binary.hpp",
+        "cpp/include/links_notation/comments.hpp",
+        "cpp/include/links_notation/format_config.hpp",
+        "cpp/include/links_notation/indented_document.hpp",
+        "cpp/include/links_notation/link.hpp",
+        "cpp/include/links_notation/links_group.hpp",
+        "cpp/include/links_notation/parse_error.hpp",
+        "cpp/include/links_notation/parser.hpp",
+        "cpp/include/links_notation/references.hpp",
+        "cpp/include/links_notation/stream_parser.hpp",
+        "cpp/include/links_notation/version.hpp.in",
+        "cpp/src/binary.cpp",
+        "cpp/src/comments.cpp",
+        "cpp/src/indented_document.cpp",
+        "cpp/src/link.cpp",
+        "cpp/src/links_group.cpp",
+        "cpp/src/parse_error.cpp",
+        "cpp/src/parser.cpp",
+        "cpp/src/quotes.cpp",
+        "cpp/src/quotes.hpp",
+        "cpp/src/reference_literal.cpp",
+        "cpp/src/references.cpp",
+        "cpp/src/stream_parser.cpp",
+        "cpp/src/unicode.cpp",
+        "cpp/src/unicode.hpp"
+      ],
+      "sha256": "d6af9fcad27e7fde5f84425f97ff4fad276b22f92c80f00d0a73345d435bb245"
     }
   }
 }

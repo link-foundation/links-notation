@@ -14,7 +14,7 @@ updates:
 
   # Python dependencies
   - package-ecosystem: "pip"
-    directories: ["/python", "/benchmarks/python", "/scripts/ci"]
+    directories: ["/python", "/benchmarks/python", "/scripts/ci", "/cpp/tools"]
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10

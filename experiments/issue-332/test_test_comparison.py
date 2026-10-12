@@ -21,6 +21,7 @@ class TestComparisonExtraction(unittest.TestCase):
                 "go",
                 "java/src/test/java/io/github/linkfoundation/linksnotation",
                 "php/tests",
+                "cpp/tests",
             ):
                 (root / path).mkdir(parents=True)
             shutil.copy2(
@@ -42,6 +43,10 @@ class TestComparisonExtraction(unittest.TestCase):
                 "[Fact(Timeout = 30000)]\n"
                 "public static void ReferenceLiteralsAtEveryChunkSplit() {}\n"
             )
+            (root / "cpp/tests/reference_fidelity_tests.cpp").write_text(
+                "#include <gtest/gtest.h>\n"
+                "TEST(ReferenceFidelityTests, ReferenceLiteralsAtEveryChunkSplit) {}\n"
+            )
             subprocess.run(
                 ["node", str(root / "scripts/create-test-case-comparison.mjs")],
                 check=True,
@@ -56,8 +61,10 @@ class TestComparisonExtraction(unittest.TestCase):
                 if line.startswith("| reference literals")
             )
             self.assertIn("ReferenceFidelityTests.cs#L2", row)
+            self.assertIn("reference_fidelity_tests.cpp#L2", row)
             self.assertIn("| JavaScript | 1 |", (root / "README.md").read_text())
             self.assertIn("| C# | 1 |", (root / "README.md").read_text())
+            self.assertIn("| C++ | 1 |", (root / "README.md").read_text())
 
 
 if __name__ == "__main__":

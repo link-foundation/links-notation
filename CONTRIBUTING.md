@@ -2,12 +2,12 @@
 
 Develop shared behavior in JavaScript first. Start with a small failing JS test,
 implement the behavior, then add a reviewed input/tree/format fixture in
-`parity/text-fixtures.json` and port it to the other six libraries. A port of
+`parity/text-fixtures.json` and port it to the other seven libraries. A port of
 behavior already implemented in JS can reference that existing JS test. Do not
 merge a new shared feature with missing bindings: update its manifest evidence
 or record an explicit, explained exception in `parity/README.md`.
 
-All seven libraries are hand-written. JS's Peggy parser and C#'s Pegasus parser
+All eight libraries are hand-written. JS's Peggy parser and C#'s Pegasus parser
 are generated from their own hand-written grammars; none of the language
 libraries is translated from JS.
 [Meta-language translation rules](https://github.com/link-foundation/meta-language/blob/main/docs/translation-rules.md)
@@ -49,7 +49,10 @@ For native checks use the commands in the reusable workflows: `pytest` and
 Black/isort/flake8 for Python, `go test ./...` and `go vet ./...` for Go,
 `mvn test`, `bash format.sh --check` and `mvn spotless:check` for Java,
 `dotnet test --configuration Release` and `dotnet format --verify-no-changes`
-for C#, and `composer run-script test` / `lint` for PHP. PHP distribution changes
+for C#, `composer run-script test` / `lint` for PHP, and
+`cmake -S cpp -B build && cmake --build build && ctest --test-dir build` plus
+`clang-format --dry-run --Werror` (version pinned in `cpp/tools/requirements.txt`)
+for C++. PHP distribution changes
 also require `python3 experiments/issue-339/test_php_distribution.py` from the
 root, using PHP 8.4+ and Composer. Refresh root metadata after changing
 `php/composer.json` with `node scripts/ci/php-distribution.mjs --write`.
@@ -121,15 +124,15 @@ in; otherwise provide their bootstrap tokens. Do not register a reusable callee
 as the PyPI publisher. See [release setup](docs/releases.md).
 
 Add a fragment under `changelog.d/` for each user-visible change. Release PRs
-combine the reviewed fragments into `CHANGELOG.md` and update all seven declared
-versions together. This PR prepares 0.25.2. Per-registry tags remain for
+combine the reviewed fragments into `CHANGELOG.md` and update all eight declared
+versions together. This PR prepares 0.26.0. Per-registry tags remain for
 existing consumers, especially Go's required `go/vVERSION` tag. One CI run
-waits for all seven native stages before calling `release.yml`, coordinates
+waits for all eight native stages before calling `release.yml`, coordinates
 publishing, and performs the final exact-version audit. A distributed
 release cannot be atomic across registries: a partial delivery fails the final
 audit and must be recovered by rerunning after the failing provider is repaired.
 
-Main's ruleset requires JavaScript, Rust, Python, Java, Go, CSharp, and PHP. Use
+Main's ruleset requires JavaScript, Rust, Python, Java, Go, CSharp, PHP, and Cpp. Use
 a pull request for changes to main. Wait for every check, inspect the whole
 diff, ensure no existing feature disappeared, update the PR title/body with
 reproduction and validation, and mark the completed draft ready.

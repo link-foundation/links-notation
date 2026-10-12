@@ -168,6 +168,42 @@ class DependencyCheckTests(unittest.TestCase):
             CHECK.update(CHECK.Dependency(cs, "nuget", "A", "1.0.0", "1.0.0"), "2.0.0")
             self.assertIn('Include="B" Version="1.0.0"', cs.read_text())
 
+    def test_cmake_fetchcontent_archive_pin_is_checked_and_rehashed(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            cmake = root / "cpp/tests/CMakeLists.txt"
+            cmake.parent.mkdir(parents=True)
+            cmake.write_text(
+                "FetchContent_Declare(googletest\n"
+                "  URL https://github.com/google/googletest/releases/download/v1.17.0/googletest-1.17.0.tar.gz\n"
+                "  URL_HASH SHA256=" + "0" * 64 + ")\n"
+            )
+            # A configured build tree holds the fetched project's own CMakeLists.
+            fetched = root / "cpp/build/_deps/demo-src/CMakeLists.txt"
+            fetched.parent.mkdir(parents=True)
+            fetched.write_text(
+                "URL https://github.com/demo/demo/releases/download/v0.1/demo.tar.gz\n"
+            )
+            records = CHECK.manifests(root)
+            self.assertEqual(
+                [(d.ecosystem, d.name, d.literal) for d in records],
+                [("github", "google/googletest", "v1.17.0")],
+            )
+            with patch.object(CHECK, "get", return_value=b"archive") as get:
+                CHECK.update(records[0], "v1.18.0")
+            get.assert_called_once_with(
+                "https://github.com/google/googletest/releases/download/v1.18.0/googletest-1.18.0.tar.gz",
+                accept="*/*",
+            )
+            text = cmake.read_text()
+            self.assertIn("download/v1.18.0/googletest-1.18.0.tar.gz", text)
+            self.assertIn(
+                "URL_HASH SHA256="
+                + CHECK.hashlib.sha256(b"archive").hexdigest()
+                + ")",
+                text,
+            )
+
     def test_maven_property_is_resolved_without_changing_other_versions(self):
         with tempfile.TemporaryDirectory() as temporary:
             pom = Path(temporary) / "pom.xml"

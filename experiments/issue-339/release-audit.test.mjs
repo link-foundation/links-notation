@@ -4,7 +4,7 @@ import test from "node:test";
 import { audit } from "../../scripts/release-audit.mjs";
 
 const versions = Object.fromEntries(
-  ["js", "rust", "python", "java", "go", "csharp", "php"].map((name) => [
+  ["js", "rust", "python", "java", "go", "csharp", "php", "cpp"].map((name) => [
     name,
     "1.2.3",
   ]),
@@ -69,7 +69,20 @@ test("a missing release for an existing package fails even on PRs", async () =>
         false,
       )
     ).failures,
-    7,
+    8,
+  ));
+test("a missing C++ source archive fails main", async () =>
+  assert.equal(
+    (
+      await run(
+        mockFetch((url) =>
+          url.endsWith("/cpp_1.2.3/links-notation-cpp-1.2.3.tar.gz")
+            ? new Response("", { status: 404 })
+            : null,
+        ),
+      )
+    ).failures,
+    1,
   ));
 test("registry outages fail instead of being reported as absence", async () =>
   assert.equal(

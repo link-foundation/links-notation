@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Build TEST_CASE_COMPARISON.md: which test exists in which of the seven
+ * Build TEST_CASE_COMPARISON.md: which test exists in which of the eight
  * supported languages, with a link to each one.
  *
  * The document is generated, never edited. Run it with `--check` to fail when
@@ -81,7 +81,7 @@ function scan({ baseDir, directory, isTestFile, categoryOf, pattern, nameOf }) {
 }
 
 /**
- * The seven supported languages, in the order the columns appear.
+ * The eight supported languages, in the order the columns appear.
  *
  * `flat` marks a language that does not keep one test file per category; see
  * `placeFlatTests` for how its tests find a category.
@@ -178,6 +178,20 @@ const LANGUAGES = [
       isTestFile: (file) => file.endsWith('Test.php'),
       categoryOf: (file) => toSnakeCase(file.replace('Test.php', '')),
       pattern: /public function (test\w+)\s*\(/g,
+      nameOf: toSnakeCase
+    })
+  },
+  {
+    key: 'cpp',
+    label: 'C++',
+    // GoogleTest names a test by its suite and its own name; the suite repeats
+    // the file name, so only the second argument is the test's name.
+    extract: (baseDir) => scan({
+      baseDir,
+      directory: 'cpp/tests',
+      isTestFile: (file) => file.endsWith('_tests.cpp'),
+      categoryOf: (file) => file.replace('_tests.cpp', ''),
+      pattern: /\bTEST(?:_F)?\(\s*\w+\s*,\s*(\w+)\s*\)/g,
       nameOf: toSnakeCase
     })
   }

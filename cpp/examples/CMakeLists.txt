@@ -1,0 +1,18 @@
+file(GLOB LINKS_NOTATION_EXAMPLE_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+foreach(source ${LINKS_NOTATION_EXAMPLE_SOURCES})
+  get_filename_component(name "${source}" NAME_WE)
+  add_executable(${name} "${source}")
+  target_link_libraries(${name} PRIVATE links_notation::links_notation)
+  if(MSVC)
+    target_compile_options(${name} PRIVATE /utf-8)
+  endif()
+  if(LINKS_NOTATION_BUILD_TESTS)
+    # Each example checks what it prints, so running it is a test. The binary
+    # example reads the corpus that every language's binary example shares.
+    if(name STREQUAL "binary_lino")
+      add_test(NAME example_${name} COMMAND ${name} "${PROJECT_SOURCE_DIR}/../examples/binary/corpus.txt")
+    else()
+      add_test(NAME example_${name} COMMAND ${name})
+    endif()
+  endif()
+endforeach()

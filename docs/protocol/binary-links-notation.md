@@ -406,6 +406,6 @@ actual byte length is strictly smaller than uniform output.
 Each language's binary tests load this one vector file. They also round trip
 native parser models under all twelve option combinations, enforce caller limits,
 and cover malformed packets. Run the normal language test suite to include them.
-[`examples/binary/`](../../examples/binary/README.md) compares all seven ports
+[`examples/binary/`](../../examples/binary/README.md) compares all eight ports
 byte for byte for all twelve option combinations; CI runs this check separately
 from the language unit suites.

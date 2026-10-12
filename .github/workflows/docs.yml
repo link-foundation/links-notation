@@ -56,7 +56,7 @@ jobs:
           git --no-pager diff -- docs/comparison
 
   test-cases:
-    # TEST_CASE_COMPARISON.md says which of the seven implementations has which
+    # TEST_CASE_COMPARISON.md says which of the eight implementations has which
     # test. It is generated from the test files themselves, so a test added in
     # one language and forgotten in the others shows up as a gap in the table
     # rather than as a document that quietly went stale.

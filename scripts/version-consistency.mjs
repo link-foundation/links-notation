@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Fails when the language implementations do not all declare the same version.
 //
-// The point of shipping the same grammar in seven languages is that a document
+// The point of shipping the same grammar in eight languages is that a document
 // written by one reads identically in the others, which only holds while they
 // are the same release. They had drifted to js/python/rust/csharp/go 0.15.0,
 // java 0.3.0 and php 0.2.0 before this check existed, and nothing failed.
@@ -70,6 +70,33 @@ const versionReferences = [
     file: 'php/README.ru.md',
     what: 'the composer.json snippet',
     re: /"link-foundation\/links-notation":\s*"\^([^"]+)"/,
+    expected: (version) => version.split('.').slice(0, 2).join('.'),
+  },
+  {
+    of: 'cpp',
+    file: 'cpp/README.md',
+    what: 'the FetchContent URL',
+    // The tag and the archive name must name the same release.
+    re: /releases\/download\/cpp_([^/]+)\/links-notation-cpp-\1\.tar\.gz/,
+  },
+  {
+    of: 'cpp',
+    file: 'cpp/README.md',
+    what: 'the find_package call',
+    re: /find_package\(links_notation ([^ ]+) REQUIRED/,
+    expected: (version) => version.split('.').slice(0, 2).join('.'),
+  },
+  {
+    of: 'cpp',
+    file: 'cpp/README.ru.md',
+    what: 'the FetchContent URL',
+    re: /releases\/download\/cpp_([^/]+)\/links-notation-cpp-\1\.tar\.gz/,
+  },
+  {
+    of: 'cpp',
+    file: 'cpp/README.ru.md',
+    what: 'the find_package call',
+    re: /find_package\(links_notation ([^ ]+) REQUIRED/,
     expected: (version) => version.split('.').slice(0, 2).join('.'),
   },
 ];

@@ -65,6 +65,12 @@ jobs:
     with:
       verbose: ${{ inputs.verbose || false }}
 
+  cpp:
+    needs: [js]
+    uses: ./.github/workflows/cpp.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+
   binary_interop:
     needs: [js]
     uses: ./.github/workflows/binary-interop.yml
@@ -98,7 +104,7 @@ jobs:
       verbose: ${{ inputs.verbose || false }}
 
   release:
-    needs: [js, rust, python, java, go, csharp, php]
+    needs: [js, rust, python, java, go, csharp, php, cpp]
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/release.yml
     with:
@@ -120,7 +126,7 @@ jobs:
       id-token: write
 
   release_audit:
-    needs: [js, rust, python, java, go, csharp, php, release]
+    needs: [js, rust, python, java, go, csharp, php, cpp, release]
     if: ${{ always() && needs.js.result == 'success' }}
     uses: ./.github/workflows/release-audit.yml
     with:
@@ -208,4 +214,16 @@ jobs:
       - name: Require a successful stage
         env:
           STAGE_RESULT: ${{ needs.php.result }}
+        run: test "$STAGE_RESULT" = success
+
+  cpp_check:
+    name: Cpp
+    needs: [cpp]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require a successful stage
+        env:
+          STAGE_RESULT: ${{ needs.cpp.result }}
         run: test "$STAGE_RESULT" = success
