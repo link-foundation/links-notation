@@ -1,0 +1,74 @@
+Every non-JS entry point waits for successful same-commit JS.
+bun test v1.4.3 (c6da4a4d3)
+
+ 25 pass
+ 0 fail
+ 38 expect() calls
+Ran 25 tests across 1 file. [2.53s]
+20 features, 14 shared text cases, 8 languages; 0 violations.
+js: 0.27.0
+python: 0.27.0
+rust: 0.27.0
+csharp: 0.27.0
+go: 0.27.0
+java: 0.27.0
+php: 0.27.0
+cpp: 0.27.0
+
+All 8 implementations declare 0.27.0.
+Root PHP distribution metadata matches the native package.
+✔ current manifest covers every fixture and language (43.942236ms)
+✔ a new JS-only feature fails the gate (6.593484ms)
+✔ removing a binding fails the gate (4.064447ms)
+✔ an undocumented exception fails the gate (3.877157ms)
+✔ a shared feature without golden cases fails the gate (4.469529ms)
+✔ stale source evidence fails the gate (21.003487ms)
+✔ missing evidence is rejected (10.802869ms)
+✔ a feature without a C++ row fails the gate (8.121558ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 375.734414
+✔ every exact version and release is verified (86.93666ms)
+✔ missing Central namespace fails main even when the POM exists (9.016965ms)
+✔ an unpublished PR version is expected (2.050037ms)
+✔ a missing release for an existing package fails even on PRs (3.344185ms)
+✔ a missing C++ source archive fails main (3.457095ms)
+✔ registry outages fail instead of being reported as absence (3.91608ms)
+✔ latest versions cannot stand in for the declared version (6.801923ms)
+✔ missing signing credentials fail without leaking values (8.638781ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 498.278004
+✔ the distribution descriptor prefixes runtime paths and omits development metadata (2.617171ms)
+✔ an absent Composer version tag is created at the gated SHA (0.791965ms)
+✔ matching tag prefixes do not stand in for the exact version (0.347688ms)
+✔ an exact existing version tag is reused without mutation (0.2263ms)
+✔ annotated version tags are resolved to their commit (0.38632ms)
+✔ a version tag at another commit fails without retagging (0.645903ms)
+✔ invalid versions and API errors cannot create tags (0.862815ms)
+✔ registered packages with only dev versions can publish their first stable tag (62.463475ms)
+✔ an unregistered package fails preflight and an exact v-prefixed version is reusable (1.254113ms)
+✔ registry outages and wrong-version metadata cannot become successful skips (1.217126ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 400.304023
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.004s
+
+OK

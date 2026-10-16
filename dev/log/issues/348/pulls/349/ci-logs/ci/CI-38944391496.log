@@ -1,0 +1,307 @@
+js / parity	UNKNOWN STEP	﻿2026-10-16T18:03:39.4075107Z Current runner version: '2.337.0'
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4093039Z ##[group]Runner Image Provisioner
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4093641Z Hosted Compute Agent
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4094022Z Version: 20261012.601
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4094524Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4095017Z Build Date: 2026-10-12T17:48:21Z
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4095500Z Worker ID: {236a34f3-61f7-412a-9978-27b95be1d2dc}
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4095971Z Region: centralus
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4096326Z Cloud: Azure
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4096707Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4097800Z ##[group]Operating System
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4098237Z Ubuntu
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4098640Z 26.04.1
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4098988Z LTS
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4099347Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4099741Z ##[group]Runner Image
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4100165Z Image: ubuntu-26.04
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4100559Z Version: 20261012.163.1
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4101424Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261012.163/images/ubuntu/Ubuntu2604-Readme.md
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4102657Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261012.163
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4103314Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4104050Z ##[group]GITHUB_TOKEN Permissions
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4105552Z Contents: read
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4105942Z Metadata: read
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4106335Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4107697Z Secret source: Actions
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4108327Z Cache mode: write
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4108800Z Prepare workflow directory
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4718842Z Prepare all required actions
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.4758894Z Getting action download info
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.6906476Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+js / parity	UNKNOWN STEP	2026-10-16T18:03:39.9774868Z Download action repository 'oven-sh/setup-bun@v2.2.0' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5192733Z Uses: link-foundation/links-notation/.github/workflows/javascript.yml@refs/pull/349/merge (3bd2a042008ac914ce5fc2fb1b5260e9077a64a4)
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5196439Z ##[group] Inputs
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5197099Z   verbose: false
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5197542Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5198037Z Complete job name: js / parity
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5758992Z ##[group]Run actions/checkout@v7.0.1
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5760052Z with:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5760602Z   persist-credentials: false
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5761353Z   repository: link-foundation/links-notation
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5765458Z   token: ***
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5765892Z   ssh-strict: true
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5766316Z   ssh-user: git
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5766713Z   clean: true
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5767164Z   sparse-checkout-cone-mode: true
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5767637Z   fetch-depth: 1
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5768025Z   fetch-tags: false
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5768469Z   show-progress: true
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5768883Z   lfs: false
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5769289Z   submodules: false
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5769742Z   set-safe-directory: true
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5770220Z   allow-unsafe-pr-checkout: false
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5771028Z env:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5774388Z   GITHUB_TOKEN: ***
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5774838Z   CI_VERBOSE: false
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.5775298Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6614397Z Syncing repository: link-foundation/links-notation
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6616304Z ##[group]Getting Git version info
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6617112Z Working directory is '/home/runner/work/links-notation/links-notation'
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6618322Z [command]/usr/bin/git version
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6650651Z git version 2.55.0
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6668649Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6677721Z Temporarily overriding HOME='/home/runner/work/_temp/64c82d3a-dc14-4490-a118-8efbc0a5ab41' before making global git config changes
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6679248Z Adding repository directory to the temporary git global config as a safe directory
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6683834Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6885624Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6889171Z ##[group]Determining repository object format
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6890240Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6891134Z ##[group]Initializing the repository
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.6894841Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7193344Z hint: Using 'master' as the name for the initial branch. This default branch name
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7194757Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7202577Z hint: to use in all of your new repositories, which will suppress this warning,
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7203676Z hint: call:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7204286Z hint:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7204945Z hint: 	git config --global init.defaultBranch <name>
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7205640Z hint:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7206336Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7207449Z hint: 'development'. The just-created branch can be renamed via this command:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7208290Z hint:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7208759Z hint: 	git branch -m <name>
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7209626Z hint:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7210466Z hint: Disable this message with "git config set advice.defaultBranchName false"
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7211368Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7213148Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7579073Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7580036Z ##[group]Disabling automatic garbage collection
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7582274Z [command]/usr/bin/git config --local gc.auto 0
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7879860Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7881046Z ##[group]Setting up auth
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7881672Z Removing SSH command configuration
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7885084Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.7909255Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.8391446Z Removing HTTP extra header
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.8395836Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.8424873Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.8612431Z Removing includeIf entries pointing to credentials config files
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.8615773Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.8637628Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.8828003Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-10005b2b-e9be-4bba-82af-07a417c8fcad.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.8873870Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-10005b2b-e9be-4bba-82af-07a417c8fcad.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.8984369Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-10005b2b-e9be-4bba-82af-07a417c8fcad.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.9174221Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-10005b2b-e9be-4bba-82af-07a417c8fcad.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.9271204Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-10005b2b-e9be-4bba-82af-07a417c8fcad.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.9473737Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.9474687Z ##[group]Fetching the repository
+js / parity	UNKNOWN STEP	2026-10-16T18:03:40.9479678Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +3bd2a042008ac914ce5fc2fb1b5260e9077a64a4:refs/remotes/pull/349/merge
+js / parity	UNKNOWN STEP	2026-10-16T18:03:41.8638682Z From https://github.com/link-foundation/links-notation
+js / parity	UNKNOWN STEP	2026-10-16T18:03:41.8639340Z  * [new ref]         3bd2a042008ac914ce5fc2fb1b5260e9077a64a4 -> pull/349/merge
+js / parity	UNKNOWN STEP	2026-10-16T18:03:41.8643027Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:41.8643961Z ##[group]Determining the checkout info
+js / parity	UNKNOWN STEP	2026-10-16T18:03:41.8644616Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:41.8649332Z [command]/usr/bin/git sparse-checkout disable
+js / parity	UNKNOWN STEP	2026-10-16T18:03:41.8881605Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+js / parity	UNKNOWN STEP	2026-10-16T18:03:41.9068702Z ##[group]Checking out the ref
+js / parity	UNKNOWN STEP	2026-10-16T18:03:41.9079463Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/349/merge
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0894168Z Note: switching to 'refs/remotes/pull/349/merge'.
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0895268Z 
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0895876Z You are in 'detached HEAD' state. You can look around, make experimental
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0896739Z changes and commit them, and you can discard any commits you make in this
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0897418Z state without impacting any branches by switching back to a branch.
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0897831Z 
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0898148Z If you want to create a new branch to retain commits you create, you may
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0898650Z do so (now or later) by using -c with the switch command. Example:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0898893Z 
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0899107Z   git switch -c <new-branch-name>
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0899324Z 
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0899480Z Or undo this operation with:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0899694Z 
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0899811Z   git switch -
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0900016Z 
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0900255Z Turn off this advice by setting config variable advice.detachedHead to false
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0900608Z 
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0900968Z HEAD is now at 3bd2a04 Merge 4b9b1c42bc01cd8e98fe870308ae8355a9aef9ef into ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0910295Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0947665Z [command]/usr/bin/git log -1 --format=%H
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0966921Z 3bd2a042008ac914ce5fc2fb1b5260e9077a64a4
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0974982Z ##[group]Removing auth
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0975521Z Removing SSH command configuration
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.0978821Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1003777Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1202282Z Removing HTTP extra header
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1205351Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1227721Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1420889Z Removing includeIf entries pointing to credentials config files
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1423385Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1440128Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1440834Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1441469Z includeif.gitdir:/github/workspace/.git.path
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1442148Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1447144Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1464498Z /home/runner/work/_temp/git-credentials-10005b2b-e9be-4bba-82af-07a417c8fcad.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1478736Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-10005b2b\-e9be\-4bba\-82af\-07a417c8fcad\.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1586377Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1604008Z /home/runner/work/_temp/git-credentials-10005b2b-e9be-4bba-82af-07a417c8fcad.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1609445Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-10005b2b\-e9be\-4bba\-82af\-07a417c8fcad\.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1784117Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1800944Z /github/runner_temp/git-credentials-10005b2b-e9be-4bba-82af-07a417c8fcad.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1807294Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-10005b2b\-e9be\-4bba\-82af\-07a417c8fcad\.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1889204Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1906843Z /github/runner_temp/git-credentials-10005b2b-e9be-4bba-82af-07a417c8fcad.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1920724Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-10005b2b\-e9be\-4bba\-82af\-07a417c8fcad\.config
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.1969335Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.2156382Z Removing credentials config '/home/runner/work/_temp/git-credentials-10005b2b-e9be-4bba-82af-07a417c8fcad.config'
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.2197124Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.3013773Z ##[group]Run oven-sh/setup-bun@v2.2.0
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.3014164Z with:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.3014441Z   bun-version: latest
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.3014725Z   no-cache: false
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.3016996Z   token: ***
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.3017261Z env:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.3019402Z   GITHUB_TOKEN: ***
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.3019680Z   CI_VERBOSE: false
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.3019953Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:42.8560958Z Downloading a new version of Bun: https://github.com/oven-sh/bun/releases/download/bun-v1.4.3/bun-linux-x64.zip
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.1734108Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/a766a4b9-43e8-4d7e-af12-1912ed6afc4c.zip
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8196232Z [command]/home/runner/.bun/bin/bun --revision
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8233954Z 1.4.3+c6da4a4d3
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8391650Z ##[group]Run bun scripts/ci/check-js-gate.mjs
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8392490Z ^[[36;1mbun scripts/ci/check-js-gate.mjs^[[0m
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8392857Z ^[[36;1mbun test experiments/issue-339/ci-contract.test.mjs^[[0m
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8393246Z ^[[36;1mnode scripts/ci/check-parity.mjs^[[0m
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8393555Z ^[[36;1mnode scripts/version-consistency.mjs^[[0m
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8394164Z ^[[36;1mnode scripts/ci/php-distribution.mjs^[[0m
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8394564Z ^[[36;1mnode --test experiments/issue-339/parity-contract.test.mjs^[[0m
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8394999Z ^[[36;1mnode --test experiments/issue-339/release-audit.test.mjs^[[0m
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8395451Z ^[[36;1mnode --test experiments/issue-339/php-distribution.test.mjs^[[0m
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8395934Z ^[[36;1mpython3 experiments/issue-339/test_workflow_contract.py^[[0m
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8534110Z shell: /usr/bin/bash -e {0}
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8534583Z env:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8536978Z   GITHUB_TOKEN: ***
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8537394Z   CI_VERBOSE: false
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8537614Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8736993Z Every non-JS entry point waits for successful same-commit JS.
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8752808Z bun test v1.4.3 (c6da4a4d3)
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8791578Z 
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8792493Z ##[group]experiments/issue-339/ci-contract.test.mjs:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8899261Z (pass) the repository satisfies the JS gate [6.06ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.8953779Z (pass) independent Rust trigger is rejected [5.23ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9000889Z (pass) a removed language dependency is rejected [4.93ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9063783Z (pass) a cancelled JS run cannot be bypassed [6.24ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9110370Z (pass) a JS-only path filter is rejected [4.60ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9177540Z (pass) skipped JS parity is rejected [5.74ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9220126Z (pass) a hidden Cargo job in another workflow is rejected [4.99ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9283416Z (pass) an ungated reusable caller is rejected [5.30ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9321914Z (pass) checking out main after gating a PR is rejected [4.95ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9377286Z (pass) gated stages cannot cancel each other [5.47ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9423495Z (pass) a reusable side workflow cannot also trigger independently [4.60ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9467866Z (pass) mentioning JS success in an unsafe OR does not establish a gate [4.40ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9531942Z (pass) explicit success OR true cannot bypass the default success condition [6.36ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9567023Z (pass) a YAML boolean false cannot silently skip JS parity [3.51ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9598668Z (pass) a conditional ancestor cannot silently skip the JS stage [3.15ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9628894Z (pass) one failed JS check cannot skip another mandatory check [3.04ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9720577Z (pass) Python test commands in another workflow require JS [9.09ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9750451Z (pass) a native working directory cannot hide a language job [3.02ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9770083Z (pass) publication waits for all eight native stages [1.96ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9799780Z (pass) a missing native release prerequisite is rejected [2.97ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9830580Z (pass) a publisher inside a native stage is rejected [2.97ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9861120Z (pass) provider failures cannot skip the final release audit [3.03ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9891578Z (pass) workflow defaults cannot hide a native working directory [3.04ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9932979Z (pass) a bare Composer command in another workflow requires JS [4.12ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9951810Z (pass) Go coverage keeps its optional repository credential [1.92ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9952403Z 
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9953054Z ##[endgroup]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9953422Z 
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9953516Z  25 pass
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9953770Z  0 fail
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9954076Z  38 expect() calls
+js / parity	UNKNOWN STEP	2026-10-16T18:03:43.9954342Z Ran 25 tests across 1 file. [120.00ms]
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.1876623Z ##[error]rust: source inventory changed; review feature coverage then run --refresh-inventory
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.1883188Z ##[error]python: source inventory changed; review feature coverage then run --refresh-inventory
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.1884632Z ##[error]go: source inventory changed; review feature coverage then run --refresh-inventory
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.1885383Z 20 features, 14 shared text cases, 8 languages; 3 violations.
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.2106558Z ##[error]Process completed with exit code 1.
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.2284335Z Post job cleanup.
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.2927223Z [command]/usr/bin/git version
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.2962714Z git version 2.55.0
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.2991078Z Temporarily overriding HOME='/home/runner/work/_temp/e3ec3269-d708-4d5d-9b72-6ed5adf44002' before making global git config changes
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.2991922Z Adding repository directory to the temporary git global config as a safe directory
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.2995510Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.3280693Z Removing SSH command configuration
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.3286176Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.3313282Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.3510520Z Removing HTTP extra header
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.3514653Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.3536725Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.3705993Z Removing includeIf entries pointing to credentials config files
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.3709872Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.3731164Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+js / parity	UNKNOWN STEP	2026-10-16T18:03:44.3999751Z Cleaning up orphan processes
+JavaScript	Require a successful stage	﻿2026-10-16T18:04:16.3641607Z ##[group]Run test "$STAGE_RESULT" = success
+JavaScript	Require a successful stage	2026-10-16T18:04:16.3642719Z ^[[36;1mtest "$STAGE_RESULT" = success^[[0m
+JavaScript	Require a successful stage	2026-10-16T18:04:16.4736415Z shell: /usr/bin/bash -e {0}
+JavaScript	Require a successful stage	2026-10-16T18:04:16.4737500Z env:
+JavaScript	Require a successful stage	2026-10-16T18:04:16.4738058Z   STAGE_RESULT: failure
+JavaScript	Require a successful stage	2026-10-16T18:04:16.4738660Z ##[endgroup]
+JavaScript	Require a successful stage	2026-10-16T18:04:16.4966552Z ##[error]Process completed with exit code 1.
+Rust	Require a successful stage	﻿2026-10-16T18:04:12.0184639Z ##[group]Run test "$STAGE_RESULT" = success
+Rust	Require a successful stage	2026-10-16T18:04:12.0185400Z ^[[36;1mtest "$STAGE_RESULT" = success^[[0m
+Rust	Require a successful stage	2026-10-16T18:04:12.0849521Z shell: /usr/bin/bash -e {0}
+Rust	Require a successful stage	2026-10-16T18:04:12.0850433Z env:
+Rust	Require a successful stage	2026-10-16T18:04:12.0850813Z   STAGE_RESULT: skipped
+Rust	Require a successful stage	2026-10-16T18:04:12.0851219Z ##[endgroup]
+Rust	Require a successful stage	2026-10-16T18:04:12.1070200Z ##[error]Process completed with exit code 1.
+Python	Require a successful stage	﻿2026-10-16T18:04:11.8054331Z ##[group]Run test "$STAGE_RESULT" = success
+Python	Require a successful stage	2026-10-16T18:04:11.8055098Z ^[[36;1mtest "$STAGE_RESULT" = success^[[0m
+Python	Require a successful stage	2026-10-16T18:04:11.8736541Z shell: /usr/bin/bash -e {0}
+Python	Require a successful stage	2026-10-16T18:04:11.8737432Z env:
+Python	Require a successful stage	2026-10-16T18:04:11.8737794Z   STAGE_RESULT: skipped
+Python	Require a successful stage	2026-10-16T18:04:11.8738241Z ##[endgroup]
+Python	Require a successful stage	2026-10-16T18:04:11.8965078Z ##[error]Process completed with exit code 1.
+Go	Require a successful stage	﻿2026-10-16T18:04:11.7546103Z ##[group]Run test "$STAGE_RESULT" = success
+Go	Require a successful stage	2026-10-16T18:04:11.7546733Z ^[[36;1mtest "$STAGE_RESULT" = success^[[0m
+Go	Require a successful stage	2026-10-16T18:04:12.2586525Z shell: /usr/bin/bash -e {0}
+Go	Require a successful stage	2026-10-16T18:04:12.2587453Z env:
+Go	Require a successful stage	2026-10-16T18:04:12.2587878Z   STAGE_RESULT: skipped
+Go	Require a successful stage	2026-10-16T18:04:12.2588334Z ##[endgroup]
+Go	Require a successful stage	2026-10-16T18:04:12.2783111Z ##[error]Process completed with exit code 1.
+PHP	Require a successful stage	﻿2026-10-16T18:04:16.9745666Z ##[group]Run test "$STAGE_RESULT" = success
+PHP	Require a successful stage	2026-10-16T18:04:16.9747177Z ^[[36;1mtest "$STAGE_RESULT" = success^[[0m
+PHP	Require a successful stage	2026-10-16T18:04:17.0271378Z shell: /usr/bin/bash -e {0}
+PHP	Require a successful stage	2026-10-16T18:04:17.0272447Z env:
+PHP	Require a successful stage	2026-10-16T18:04:17.0273173Z   STAGE_RESULT: skipped
+PHP	Require a successful stage	2026-10-16T18:04:17.0273736Z ##[endgroup]
+PHP	Require a successful stage	2026-10-16T18:04:17.0580673Z ##[error]Process completed with exit code 1.
+Java	Require a successful stage	﻿2026-10-16T18:04:16.6000507Z ##[group]Run test "$STAGE_RESULT" = success
+Java	Require a successful stage	2026-10-16T18:04:16.6001121Z ^[[36;1mtest "$STAGE_RESULT" = success^[[0m
+Java	Require a successful stage	2026-10-16T18:04:16.6741414Z shell: /usr/bin/bash -e {0}
+Java	Require a successful stage	2026-10-16T18:04:16.6742475Z env:
+Java	Require a successful stage	2026-10-16T18:04:16.6742842Z   STAGE_RESULT: skipped
+Java	Require a successful stage	2026-10-16T18:04:16.6743245Z ##[endgroup]
+Java	Require a successful stage	2026-10-16T18:04:16.6953691Z ##[error]Process completed with exit code 1.
+Cpp	Require a successful stage	﻿2026-10-16T18:04:16.0987062Z ##[group]Run test "$STAGE_RESULT" = success
+Cpp	Require a successful stage	2026-10-16T18:04:16.0987932Z ^[[36;1mtest "$STAGE_RESULT" = success^[[0m
+Cpp	Require a successful stage	2026-10-16T18:04:16.1610883Z shell: /usr/bin/bash -e {0}
+Cpp	Require a successful stage	2026-10-16T18:04:16.1611636Z env:
+Cpp	Require a successful stage	2026-10-16T18:04:16.1611908Z   STAGE_RESULT: skipped
+Cpp	Require a successful stage	2026-10-16T18:04:16.1612201Z ##[endgroup]
+Cpp	Require a successful stage	2026-10-16T18:04:16.1808087Z ##[error]Process completed with exit code 1.
+CSharp	Require a successful stage	﻿2026-10-16T18:04:17.7051210Z ##[group]Run test "$STAGE_RESULT" = success
+CSharp	Require a successful stage	2026-10-16T18:04:17.7052083Z ^[[36;1mtest "$STAGE_RESULT" = success^[[0m
+CSharp	Require a successful stage	2026-10-16T18:04:17.7997276Z shell: /usr/bin/bash -e {0}
+CSharp	Require a successful stage	2026-10-16T18:04:17.7998228Z env:
+CSharp	Require a successful stage	2026-10-16T18:04:17.7998723Z   STAGE_RESULT: skipped
+CSharp	Require a successful stage	2026-10-16T18:04:17.7999243Z ##[endgroup]
+CSharp	Require a successful stage	2026-10-16T18:04:17.8243675Z ##[error]Process completed with exit code 1.
