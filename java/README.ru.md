@@ -30,7 +30,7 @@ implementation 'io.github.link-foundation:links-notation:0.26.0'
 
 ```bash
 cd java
-mvn install
+./mvnw install
 ```
 
 ## Сборка
@@ -38,7 +38,7 @@ mvn install
 Сборка проекта:
 
 ```bash
-mvn clean compile
+./mvnw clean compile
 ```
 
 ## Тестирование
@@ -46,7 +46,7 @@ mvn clean compile
 Запуск тестов:
 
 ```bash
-mvn test
+./mvnw test
 ```
 
 ## Использование
@@ -353,19 +353,20 @@ Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
 Проект использует Google Java Format через Spotless:
 
 ```bash
-mvn spotless:apply
+./mvnw spotless:apply
 ```
 
 Проверка форматирования:
 
 ```bash
-mvn spotless:check
+./mvnw spotless:check
 ```
 
 ## Требования
 
 - Java 21 или выше
-- Maven 3.6+
+- Maven 3.6.3 или новее (минимум, который принимают плагины сборки). `./mvnw` загружает
+  Maven, которым собирается этот репозиторий (3.10.0, указан в `.mvn/wrapper/maven-wrapper.properties`)
 
 ## Информация о пакете
 

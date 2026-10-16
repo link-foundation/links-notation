@@ -47,7 +47,7 @@ establish parity.
 
 For native checks use the commands in the reusable workflows: `pytest` and
 Black/isort/flake8 for Python, `go test ./...` and `go vet ./...` for Go,
-`mvn test`, `bash format.sh --check` and `mvn spotless:check` for Java,
+`./mvnw test`, `bash format.sh --check` and `./mvnw spotless:check` for Java,
 `dotnet test --configuration Release` and `dotnet format --verify-no-changes`
 for C#, `composer run-script test` / `lint` for PHP, and
 `cmake -S cpp -B build && cmake --build build && ctest --test-dir build` plus

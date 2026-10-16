@@ -99,8 +99,8 @@ dotnet run --project benchmarks/csharp -c Release
 # Go
 cd benchmarks/go && go run .
 
-# Java (after `mvn -f java/pom.xml install -DskipTests`)
-cd benchmarks/java && mvn -q compile exec:java
+# Java (after `java/mvnw -f java/pom.xml install -DskipTests`)
+cd benchmarks/java && ../../java/mvnw -q compile exec:java
 
 # PHP
 cd benchmarks/php && composer install && php benchmark.php

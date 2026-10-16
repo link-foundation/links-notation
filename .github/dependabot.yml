@@ -131,6 +131,10 @@ updates:
     commit-message:
       prefix: "chore(deps)"
 
+  # java/.mvn/wrapper/maven-wrapper.properties pins the Maven ./mvnw runs.
+  # Dependabot's maven ecosystem learned the wrapper in dependabot-core#14812
+  # (rolling out behind a flag); until it reaches this repository,
+  # scripts/ci/check-dependencies.py fails CI when a newer Maven is out.
   - package-ecosystem: "maven"
     directories:
       - "/java"

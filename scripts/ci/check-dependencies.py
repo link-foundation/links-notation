@@ -41,6 +41,9 @@ ACTIVE = (
 # A stale input is as outdated as a stale action ref, but it is not part of
 # the `uses:` line, so it is listed here explicitly.
 TOOL_INPUTS = {"trufflesecurity/trufflehog": "version"}
+# The Maven Wrapper's two pins, under the coordinates Maven Central lists.
+MAVEN_DISTRIBUTION = "org.apache.maven:apache-maven"
+MAVEN_WRAPPER = "org.apache.maven.wrapper:maven-wrapper"
 STABLE = re.compile(r"^v?(\d+(?:\.\d+)*)(?:\.RELEASE)?$")
 
 
@@ -274,6 +277,20 @@ def manifests(root=ROOT):
                         "com.google.googlejavaformat:google-java-format",
                         element.text,
                     )
+            elif path.name == "maven-wrapper.properties":
+                # ./mvnw downloads this Maven, so it is the build's toolchain.
+                for key, _, value in (
+                    line.partition("=") for line in path.read_text().splitlines()
+                ):
+                    if key == "wrapperVersion":
+                        add(path, "maven", MAVEN_WRAPPER, value.strip())
+                    elif key == "distributionUrl":
+                        match = re.search(
+                            r"/org/apache/maven/apache-maven/([^/]+)/", value
+                        )
+                        if not match:
+                            raise ValueError(f"unsupported distributionUrl: {path}")
+                        add(path, "maven", MAVEN_DISTRIBUTION, match[1])
             elif path.name == "composer.json":
                 data = json.loads(path.read_text())
                 local = {"link-foundation/links-notation"}
@@ -475,6 +492,28 @@ def update(dependency, release):
             + r"\"",
             lambda m: m[1] + replacement + '"',
             source,
+        )
+    elif path.name == "maven-wrapper.properties":
+        if dependency.name == MAVEN_WRAPPER:
+            # mvnw and mvnw.cmd belong to the wrapper release, so only the
+            # wrapper plugin can update all three files consistently.
+            print(
+                f"  regenerate {path.parents[2].relative_to(ROOT)}: ./mvnw -q "
+                f"wrapper:wrapper -Dtype=only-script -DwrapperVersion={release}"
+            )
+            return
+        url = re.search(r"^distributionUrl=(\S+)$", source, re.M)[1]
+        updated = url.replace("/" + original + "/", "/" + release + "/").replace(
+            "-" + original + "-", "-" + release + "-"
+        )
+        # The wrapper checks the archive against this hash before running it.
+        digest = hashlib.sha256(get(updated, accept="*/*")).hexdigest()
+        source = source.replace(url, updated)
+        source = re.sub(
+            r"^(distributionSha256Sum=)[0-9a-fA-F]{64}$",
+            lambda m: m[1] + digest,
+            source,
+            flags=re.M,
         )
     elif dependency.ecosystem == "maven":
         group, artifact = dependency.name.split(":")

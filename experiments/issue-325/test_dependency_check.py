@@ -268,6 +268,48 @@ class DependencyCheckTests(unittest.TestCase):
                 text,
             )
 
+    def test_maven_wrapper_distribution_is_checked_and_rehashed(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            properties = root / "java/.mvn/wrapper/maven-wrapper.properties"
+            properties.parent.mkdir(parents=True)
+            url = "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/{0}/apache-maven-{0}-bin.zip"
+            properties.write_text(
+                "# The Maven ./mvnw runs.\n"
+                "wrapperVersion=3.3.4\n"
+                "distributionType=only-script\n"
+                "distributionUrl=" + url.format("3.9.15") + "\n"
+                "distributionSha256Sum=" + "0" * 64 + "\n"
+            )
+            records = CHECK.manifests(root)
+            self.assertEqual(
+                [(d.ecosystem, d.name, d.literal) for d in records],
+                [
+                    ("maven", "org.apache.maven.wrapper:maven-wrapper", "3.3.4"),
+                    ("maven", "org.apache.maven:apache-maven", "3.9.15"),
+                ],
+            )
+            with patch.object(CHECK, "get", return_value=b"archive") as get:
+                CHECK.update(records[1], "3.10.0")
+            get.assert_called_once_with(url.format("3.10.0"), accept="*/*")
+            text = properties.read_text()
+            self.assertIn("distributionUrl=" + url.format("3.10.0") + "\n", text)
+            self.assertIn(
+                "distributionSha256Sum="
+                + CHECK.hashlib.sha256(b"archive").hexdigest()
+                + "\n",
+                text,
+            )
+            # The scripts come with the wrapper release, so --update only says
+            # how to regenerate them and leaves every file as it was.
+            with (
+                patch.object(CHECK, "ROOT", root),
+                contextlib.redirect_stdout(io.StringIO()) as output,
+            ):
+                CHECK.update(records[0], "3.3.5")
+            self.assertIn("wrapper:wrapper", output.getvalue())
+            self.assertEqual(properties.read_text(), text)
+
     def test_maven_property_is_resolved_without_changing_other_versions(self):
         with tempfile.TemporaryDirectory() as temporary:
             pom = Path(temporary) / "pom.xml"

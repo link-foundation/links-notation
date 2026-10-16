@@ -325,10 +325,10 @@ jobs:
       # has to be in the local repository, or Maven would measure the last
       # release instead of this commit.
       - name: Install the library into the local Maven repository
-        run: mvn -B -q -f java/pom.xml install -DskipTests
+        run: java/mvnw -B -q -f java/pom.xml install -DskipTests
       - name: Parse and count in Java
         working-directory: benchmarks/java
-        run: mvn -B -q compile exec:java
+        run: ../../java/mvnw -B -q compile exec:java
       - name: Upload the Java result
         uses: actions/upload-artifact@v7.0.2
         with:

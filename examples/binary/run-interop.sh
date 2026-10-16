@@ -15,7 +15,7 @@ if [ "${1:-}" != "--rust-csharp-only" ]; then
   node examples/binary/js.mjs > "$evidence_dir/js.tsv"
   php examples/binary/php.php > "$evidence_dir/php.tsv"
   (cd go && go run ./examples/binary) > "$evidence_dir/go.tsv"
-  "${MAVEN_COMMAND:-mvn}" -q -f java/pom.xml compile > "$evidence_dir/java-build.log" 2>&1 || {
+  "${MAVEN_COMMAND:-java/mvnw}" -q -f java/pom.xml compile > "$evidence_dir/java-build.log" 2>&1 || {
     cat "$evidence_dir/java-build.log"
     exit 1
   }

@@ -30,7 +30,7 @@ For contributors working on the source code:
 
 ```bash
 cd java
-mvn install
+./mvnw install
 ```
 
 ## Build
@@ -38,7 +38,7 @@ mvn install
 Build the project:
 
 ```bash
-mvn clean compile
+./mvnw clean compile
 # Check Google Java formatting with the current formatter CLI:
 bash format.sh --check
 ```
@@ -48,7 +48,7 @@ bash format.sh --check
 Run tests:
 
 ```bash
-mvn test
+./mvnw test
 ```
 
 ## Usage
@@ -362,13 +362,14 @@ Check formatting:
 
 ```bash
 bash format.sh --check
-mvn spotless:check
+./mvnw spotless:check
 ```
 
 ## Requirements
 
 - Java 21 or higher
-- Maven 3.6+
+- Maven 3.6.3 or newer, the oldest the build plugins accept. `./mvnw` downloads the
+  Maven this repository builds with (3.10.0, pinned in `.mvn/wrapper/maven-wrapper.properties`)
 
 ## Package Information
 

@@ -67,9 +67,9 @@ jobs:
           set -euo pipefail
           # shellcheck source=scripts/ci/registry-probe.sh
           . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
-          PACKAGE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          PACKAGE_GROUP=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)
-          PACKAGE_ARTIFACT=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
+          PACKAGE_VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
+          PACKAGE_GROUP=$(./mvnw help:evaluate -Dexpression=project.groupId -q -DforceStdout)
+          PACKAGE_ARTIFACT=$(./mvnw help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
           {
             echo "version=$PACKAGE_VERSION"
             echo "group=$PACKAGE_GROUP"
@@ -103,10 +103,10 @@ jobs:
             exit 0
           fi
           bash "$GITHUB_WORKSPACE/scripts/ci/require-java-credentials.sh"
-          mvn -B deploy -Prelease --file pom.xml
+          ./mvnw -B deploy -Prelease --file pom.xml
           echo "published=true" >> "$GITHUB_OUTPUT"
       # `autoPublish` hands the bundle to the Portal, which validates and
-      # syncs it asynchronously, so a successful `mvn deploy` is not yet a
+      # syncs it asynchronously, so a successful `./mvnw deploy` is not yet a
       # published artifact. Nothing is released until it is really there.
       - name: Verify the artifact is really on Maven Central
         if: steps.publish.outputs.published == 'true' || steps.publish.outputs.published == 'skipped'
