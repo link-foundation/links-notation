@@ -16,3 +16,5 @@ No known vulnerabilities found
 No known vulnerabilities found
 == pip-audit cpp/tools/requirements.txt
 No known vulnerabilities found
+== govulncheck benchmarks/go (after 9a484e1, testify 1.12.1)
+No vulnerabilities found.

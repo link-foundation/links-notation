@@ -1,0 +1,14 @@
+== csharp --vulnerable --include-transitive
+The given project `Link.Foundation.Links.Notation` has no vulnerable packages given the current sources.
+The given project `Link.Foundation.Links.Notation.Tests` has no vulnerable packages given the current sources.
+== csharp --deprecated --include-transitive
+The given project `Link.Foundation.Links.Notation` has no deprecated packages given the current sources.
+The given project `Link.Foundation.Links.Notation.Tests` has no deprecated packages given the current sources.
+== benchmarks/csharp --vulnerable --include-transitive
+The given project `Benchmark` has no vulnerable packages given the current sources.
+== benchmarks/csharp --deprecated --include-transitive
+The given project `Benchmark` has no deprecated packages given the current sources.
+== examples/binary/csharp --vulnerable --include-transitive
+The given project `BinaryExample` has no vulnerable packages given the current sources.
+== examples/binary/csharp --deprecated --include-transitive
+The given project `BinaryExample` has no deprecated packages given the current sources.

@@ -138,6 +138,7 @@ and `after/direct.json` (both produced by `experiments/issue-348/inventory.py`).
 | active | `benchmarks/go/go.mod` | `github.com/google/uuid` | `v1.6.0` | `v1.6.0` | `1.6.0` | yes |
 | active | `benchmarks/go/go.mod` | `github.com/pkoukk/tiktoken-go` | `v0.1.8` | `v0.1.8` | `0.1.8` | yes |
 | active | `benchmarks/go/go.mod` | `github.com/pkoukk/tiktoken-go-loader` | `v0.0.2` | `v0.0.2` | `0.0.2` | yes |
+| active | `benchmarks/go/go.mod` | `github.com/stretchr/testify` | `(added)` | `v1.12.1` | `1.12.1` | yes |
 
 ## maven
 
@@ -147,12 +148,16 @@ and `after/direct.json` (both produced by `experiments/issue-348/inventory.py`).
 | active | `benchmarks/java/pom.xml` | `com.google.code.gson:gson` | `2.14.0` | `2.14.0` | `2.14.0` | yes |
 | active | `benchmarks/java/pom.xml` | `com.knuddels:jtokkit` | `1.1.0` | `1.1.0` | `1.1.0` | yes |
 | active | `benchmarks/java/pom.xml` | `org.apache.maven.plugins:maven-compiler-plugin` | `3.16.0` | `3.16.0` | `3.16.0` | yes |
+| active | `benchmarks/java/pom.xml` | `org.apache.maven.plugins:maven-enforcer-plugin` | `(added)` | `3.6.3` | `3.6.3` | yes |
 | active | `benchmarks/java/pom.xml` | `org.apache.maven.plugins:maven-jar-plugin` | `3.5.1` | `3.5.1` | `3.5.1` | yes |
 | active | `benchmarks/java/pom.xml` | `org.codehaus.mojo:exec-maven-plugin` | `3.6.4` | `3.6.4` | `3.6.4` | yes |
+| active | `java/.mvn/wrapper/maven-wrapper.properties` | `org.apache.maven.wrapper:maven-wrapper` | `(added)` | `3.3.4` | `3.3.4` | yes |
+| active | `java/.mvn/wrapper/maven-wrapper.properties` | `org.apache.maven:apache-maven` | `(added)` | `3.10.0` | `3.10.0` | yes |
 | active | `java/pom.xml` | `com.diffplug.spotless:spotless-maven-plugin` | `3.10.4` | `3.10.4` | `3.10.4` | yes |
 | active | `java/pom.xml` | `com.google.googlejavaformat:google-java-format` | `1.37.0` | `1.37.0` | `1.37.0` | yes |
 | active | `java/pom.xml` | `org.apache.maven.plugins:maven-compiler-plugin` | `3.16.0` | `3.16.0` | `3.16.0` | yes |
 | active | `java/pom.xml` | `org.apache.maven.plugins:maven-dependency-plugin` | `3.11.0` | `3.11.0` | `3.11.0` | yes |
+| active | `java/pom.xml` | `org.apache.maven.plugins:maven-enforcer-plugin` | `(added)` | `3.6.3` | `3.6.3` | yes |
 | active | `java/pom.xml` | `org.apache.maven.plugins:maven-gpg-plugin` | `3.2.8` | `3.2.8` | `3.2.8` | yes |
 | active | `java/pom.xml` | `org.apache.maven.plugins:maven-jar-plugin` | `3.5.1` | `3.5.1` | `3.5.1` | yes |
 | active | `java/pom.xml` | `org.apache.maven.plugins:maven-javadoc-plugin` | `3.12.0` | `3.12.0` | `3.12.0` | yes |

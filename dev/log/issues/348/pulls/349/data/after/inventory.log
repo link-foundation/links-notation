@@ -1,5 +1,5 @@
-UNPARSED dev/log/issues/330/pulls/331/templates/python/pyproject.toml: unsupported dependency requirement: /tmp/tmpkhj7237j/scan/pyproject.toml: hatchling
-213 declarations, 115 packages, 45 not current
+UNPARSED dev/log/issues/330/pulls/331/templates/python/pyproject.toml: unsupported dependency requirement: /tmp/tmpigsz572f/scan/pyproject.toml: hatchling
+219 declarations, 118 packages, 45 not current
 archived experiments/issue-316/rust-timing/Cargo.toml: links-notation =0.21.1 -> 0.26.0
 snapshot dev/log/issues/330/pulls/331/templates/rust/Cargo.toml: clap 4.4 -> 4.6.7
 snapshot dev/log/issues/330/pulls/331/templates/rust/Cargo.toml: lino-arguments 0.3 -> 0.5.0

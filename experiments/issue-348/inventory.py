@@ -41,6 +41,7 @@ NAMES = {
     "composer.json",
     "go.mod",
     "CMakeLists.txt",
+    "maven-wrapper.properties",
 }
 SKIP = {
     ".git",

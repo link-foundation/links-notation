@@ -1351,6 +1351,16 @@
   },
   {
     "scope": "active",
+    "path": "benchmarks/go/go.mod",
+    "ecosystem": "go",
+    "name": "github.com/stretchr/testify",
+    "declared": "v1.12.1",
+    "latest": "1.12.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
     "path": "benchmarks/java/pom.xml",
     "ecosystem": "maven",
     "name": "com.diffplug.spotless:spotless-maven-plugin",
@@ -1393,6 +1403,16 @@
     "scope": "active",
     "path": "benchmarks/java/pom.xml",
     "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-enforcer-plugin",
+    "declared": "3.6.3",
+    "latest": "3.6.3",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
     "name": "org.apache.maven.plugins:maven-jar-plugin",
     "declared": "3.5.1",
     "latest": "3.5.1",
@@ -1406,6 +1426,26 @@
     "name": "org.codehaus.mojo:exec-maven-plugin",
     "declared": "3.6.4",
     "latest": "3.6.4",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/.mvn/wrapper/maven-wrapper.properties",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.wrapper:maven-wrapper",
+    "declared": "3.3.4",
+    "latest": "3.3.4",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/.mvn/wrapper/maven-wrapper.properties",
+    "ecosystem": "maven",
+    "name": "org.apache.maven:apache-maven",
+    "declared": "3.10.0",
+    "latest": "3.10.0",
     "error": null,
     "current": true
   },
@@ -1446,6 +1486,16 @@
     "name": "org.apache.maven.plugins:maven-dependency-plugin",
     "declared": "3.11.0",
     "latest": "3.11.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-enforcer-plugin",
+    "declared": "3.6.3",
+    "latest": "3.6.3",
     "error": null,
     "current": true
   },
