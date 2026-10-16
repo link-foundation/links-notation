@@ -1,4 +1,4 @@
-use links_notation::{format_links, LiNo, LiNoBuilder};
+use links_notation::{LiNo, LiNoBuilder, format_links};
 
 #[test]
 fn test_tuple_to_link_basic() {

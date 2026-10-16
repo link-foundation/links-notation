@@ -1,0 +1,51 @@
+  Determining projects to restore...
+  Restored /tmp/gh-issue-solver-1792166601059/csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj (in 2.27 sec).
+  1 of 2 projects are up-to-date for restore.
+  Link.Foundation.Links.Notation -> /tmp/gh-issue-solver-1792166601059/csharp/Link.Foundation.Links.Notation/bin/Release/net10.0/Link.Foundation.Links.Notation.dll
+  Link.Foundation.Links.Notation.Tests -> /tmp/gh-issue-solver-1792166601059/csharp/Link.Foundation.Links.Notation.Tests/bin/Release/net10.0/Link.Foundation.Links.Notation.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:06.50
+Running tests from /tmp/gh-issue-solver-1792166601059/csharp/Link.Foundation.Links.Notation.Tests/bin/Release/net10.0/Link.Foundation.Links.Notation.Tests.dll (net10.0|x64)
+/tmp/gh-issue-solver-1792166601059/csharp/Link.Foundation.Links.Notation.Tests/bin/Release/net10.0/Link.Foundation.Links.Notation.Tests.dll (net10.0|x64) passed (9s 735ms)
+
+Test run summary: Passed!
+  total: 321
+  failed: 0
+  succeeded: 321
+  skipped: 0
+  duration: 10s 336ms
+test rc 0
+format rc 0
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+The following sources were used:
+   https://api.nuget.org/v3/index.json
+
+The given project `Link.Foundation.Links.Notation` has no updates given the current sources.
+Project `Link.Foundation.Links.Notation.Tests` has the following updates to its packages
+   [net10.0]: 
+   Transitive Package                   Resolved   Latest 
+   > Microsoft.ApplicationInsights      2.23.0     3.2.0  
+   > Microsoft.Bcl.AsyncInterfaces      6.0.0      10.0.13
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+The following sources were used:
+   https://api.nuget.org/v3/index.json
+
+The given project `Link.Foundation.Links.Notation` has no vulnerable packages given the current sources.
+The given project `Link.Foundation.Links.Notation.Tests` has no vulnerable packages given the current sources.
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+The following sources were used:
+   https://api.nuget.org/v3/index.json
+
+The given project `Link.Foundation.Links.Notation` has no deprecated packages given the current sources.
+The given project `Link.Foundation.Links.Notation.Tests` has no deprecated packages given the current sources.

@@ -61,6 +61,29 @@ class DependencyCheckTests(unittest.TestCase):
             )
             self.assertEqual(dependency.floor, "2.0.0")
 
+    def test_self_referencing_extra_is_not_a_registry_pin(self):
+        # Issue #348: `dev = ["links-notation[test,lint]"]` reuses the pinned
+        # extras instead of repeating them; it has no version of its own.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "python").mkdir()
+            (root / "python/pyproject.toml").write_text(
+                '[project]\nname = "demo"\n'
+                "[project.optional-dependencies]\n"
+                'test = ["pytest>=9.1.1"]\n'
+                'dev = ["demo[test]"]\n'
+            )
+            self.assertEqual(
+                [(d.name, d.declared) for d in CHECK.manifests(root)],
+                [("pytest", ">=9.1.1")],
+            )
+            (root / "python/pyproject.toml").write_text(
+                '[project]\nname = "demo"\n'
+                '[project.optional-dependencies]\ndev = ["other[test]"]\n'
+            )
+            with self.assertRaisesRegex(ValueError, "unsupported dependency"):
+                CHECK.manifests(root)
+
     def test_github_preserves_real_tag_spelling(self):
         with patch.object(
             CHECK.subprocess,
@@ -120,6 +143,49 @@ class DependencyCheckTests(unittest.TestCase):
             self.assertIn("      version: 3.99.0\n", text)
             self.assertIn("trufflehog@v3.99.0\n", text)
             self.assertIn("      version: 1.0.0\n", text)
+
+    def test_pre_commit_hook_dependencies_are_pinned_checked_and_updated(self):
+        # Issue #348: the eslint hook installed an unpinned `eslint`, so each
+        # machine ran whatever release was newest when its hook was built.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            config = root / ".pre-commit-config.yaml"
+            config.write_text(
+                "repos:\n"
+                "  - repo: https://github.com/pre-commit/mirrors-eslint\n"
+                "    rev: v10.12.0\n"
+                "    hooks:\n"
+                "      - id: eslint\n"
+                "        additional_dependencies:\n"
+                "          - eslint@10.12.0\n"
+                "          - '@eslint/js@10.0.1'\n"
+                "        args: ['--fix']\n"
+            )
+            pins = [
+                (d.ecosystem, d.name, d.literal)
+                for d in CHECK.manifests(root)
+                if d.path == config
+            ]
+            self.assertEqual(
+                pins,
+                [
+                    ("github", "pre-commit/mirrors-eslint", "v10.12.0"),
+                    ("npm", "eslint", "10.12.0"),
+                    ("npm", "@eslint/js", "10.0.1"),
+                ],
+            )
+            CHECK.update(
+                CHECK.Dependency(config, "npm", "eslint", "10.12.0", "10.12.0"),
+                "10.13.0",
+            )
+            text = config.read_text()
+            self.assertIn("          - eslint@10.13.0\n", text)
+            self.assertIn("    rev: v10.12.0\n", text)
+            self.assertIn("'@eslint/js@10.0.1'", text)
+
+            config.write_text(text.replace("eslint@10.13.0", "eslint"))
+            with self.assertRaisesRegex(ValueError, "unpinned dependency"):
+                CHECK.manifests(root)
 
     def test_stable_versions_ignore_prereleases_and_sort_numerically(self):
         self.assertEqual(
@@ -198,11 +264,51 @@ class DependencyCheckTests(unittest.TestCase):
             text = cmake.read_text()
             self.assertIn("download/v1.18.0/googletest-1.18.0.tar.gz", text)
             self.assertIn(
-                "URL_HASH SHA256="
-                + CHECK.hashlib.sha256(b"archive").hexdigest()
-                + ")",
+                "URL_HASH SHA256=" + CHECK.hashlib.sha256(b"archive").hexdigest() + ")",
                 text,
             )
+
+    def test_maven_wrapper_distribution_is_checked_and_rehashed(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            properties = root / "java/.mvn/wrapper/maven-wrapper.properties"
+            properties.parent.mkdir(parents=True)
+            url = "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/{0}/apache-maven-{0}-bin.zip"
+            properties.write_text(
+                "# The Maven ./mvnw runs.\n"
+                "wrapperVersion=3.3.4\n"
+                "distributionType=only-script\n"
+                "distributionUrl=" + url.format("3.9.15") + "\n"
+                "distributionSha256Sum=" + "0" * 64 + "\n"
+            )
+            records = CHECK.manifests(root)
+            self.assertEqual(
+                [(d.ecosystem, d.name, d.literal) for d in records],
+                [
+                    ("maven", "org.apache.maven.wrapper:maven-wrapper", "3.3.4"),
+                    ("maven", "org.apache.maven:apache-maven", "3.9.15"),
+                ],
+            )
+            with patch.object(CHECK, "get", return_value=b"archive") as get:
+                CHECK.update(records[1], "3.10.0")
+            get.assert_called_once_with(url.format("3.10.0"), accept="*/*")
+            text = properties.read_text()
+            self.assertIn("distributionUrl=" + url.format("3.10.0") + "\n", text)
+            self.assertIn(
+                "distributionSha256Sum="
+                + CHECK.hashlib.sha256(b"archive").hexdigest()
+                + "\n",
+                text,
+            )
+            # The scripts come with the wrapper release, so --update only says
+            # how to regenerate them and leaves every file as it was.
+            with (
+                patch.object(CHECK, "ROOT", root),
+                contextlib.redirect_stdout(io.StringIO()) as output,
+            ):
+                CHECK.update(records[0], "3.3.5")
+            self.assertIn("wrapper:wrapper", output.getvalue())
+            self.assertEqual(properties.read_text(), text)
 
     def test_maven_property_is_resolved_without_changing_other_versions(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -255,18 +361,6 @@ class DependencyCheckTests(unittest.TestCase):
             ):
                 self.assertTrue(CHECK.main())
                 self.assertIn("registry unavailable", errors.getvalue())
-
-    def test_python39_build_floor_ignores_incompatible_and_yanked_releases(self):
-        releases = {
-            "81.0.0": [{"requires_python": ">=3.9"}],
-            "82.0.1": [{"requires_python": ">=3.9"}],
-            "83.0.0": [{"requires_python": ">=3.9", "yanked": True}],
-            "84.0.0": [{"requires_python": ">=3.10"}],
-        }
-        with patch.object(
-            CHECK, "get", return_value=json.dumps({"releases": releases}).encode()
-        ):
-            self.assertEqual(CHECK.latest("pypi-py39", "setuptools"), "82.0.1")
 
 
 if __name__ == "__main__":

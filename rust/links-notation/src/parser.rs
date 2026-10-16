@@ -1,12 +1,12 @@
-use crate::quotes::{read_reference, DelimitedReferences, Reading};
+use crate::quotes::{DelimitedReferences, Reading, read_reference};
 use nom::{
+    IResult, Parser,
     branch::alt,
     bytes::complete::{tag, take_while, take_while1},
     character::complete::{char, line_ending},
     combinator::eof,
     multi::{many0, many1},
     sequence::{preceded, terminated},
-    IResult, Parser,
 };
 use std::cell::{OnceCell, RefCell};
 use std::collections::HashMap;
@@ -613,14 +613,14 @@ fn read_any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Li
         // nothing else can read a line that opens one. Report it the way the
         // single-line value link does, as a missing reference.
         Err(_) if input.starts_with('(') => {
-            return reference(input, state).map(|(rest, id)| (rest, Link::new_singlet(id)))
+            return reference(input, state).map(|(rest, id)| (rest, Link::new_singlet(id)));
         }
         Err(_) => {
             return alt((
                 |i| indented_id_link(i, state),
                 |i| single_line_any_link(i, state),
             ))
-            .parse(input)
+            .parse(input);
         }
     };
     if let Ok((rest, _)) = eol(rest, state) {

@@ -1,0 +1,42 @@
+== composer outdated php
+
+Direct dependencies required in composer.json:
+Everything up to date
+
+Transitive dependencies not required in composer.json:
+Everything up to date
+rc=0
+== composer outdated benchmarks/php
+
+Direct dependencies required in composer.json:
+Everything up to date
+
+Transitive dependencies not required in composer.json:
+Everything up to date
+rc=0
+== go list -m -u all benchmarks/go (updates only)
+github.com/stretchr/testify v1.8.2 -> v1.12.1
+rc=0
+== go list -m -u all experiments/issue-282/parity/go (updates only)
+github.com/link-foundation/links-notation/go v0.0.0 -> v0.26.0
+rc=0
+== go list -m -u all experiments/issue-288/go (updates only)
+github.com/link-foundation/links-notation/go v0.0.0 -> v0.26.0
+rc=0
+== go list -m -u all experiments/issue-301/go-probe (updates only)
+github.com/link-foundation/links-notation/go v0.0.0 -> v0.26.0
+rc=0
+== go list -m -u all experiments/issue-302/go-probe (updates only)
+github.com/link-foundation/links-notation/go v0.0.0 -> v0.26.0
+rc=0
+== go list -m -u all experiments/issue-314/ports/go-probe (updates only)
+github.com/link-foundation/links-notation/go v0.0.0 -> v0.26.0
+rc=0
+== go list -m -u all experiments/issue-315/go-probe (updates only)
+github.com/link-foundation/links-notation/go v0.0.0 -> v0.26.0
+rc=0
+== go list -m -u all go (updates only)
+rc=0
+== go list -m -u all benchmarks/go after 9a484e1 (updates only)
+github.com/stretchr/objx v0.5.3 -> v0.8.0
+objx in go.sum: 0

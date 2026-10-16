@@ -1,0 +1,1296 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling memchr v2.8.3
+   Compiling unicode-ident v1.0.27
+   Compiling nom v8.0.0
+   Compiling syn v3.0.9
+   Compiling aho-corasick v1.1.5
+   Compiling regex-syntax v0.8.11
+   Compiling links-notation-macro v0.1.2 (/tmp/gh-issue-solver-1792166601059/rust/links-notation-macro)
+   Compiling links-notation v0.26.0 (/tmp/gh-issue-solver-1792166601059/rust/links-notation)
+   Compiling regex-automata v0.4.18
+   Compiling serde_core v1.0.229
+   Compiling anyhow v1.0.104
+   Compiling zmij v1.0.23
+   Compiling bit-vec v0.8.0
+   Compiling bit-set v0.8.0
+   Compiling hashbrown v0.17.1
+   Compiling equivalent v1.0.3
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.154
+   Compiling indexmap v2.14.2
+   Compiling bstr v1.13.1
+   Compiling regex v1.13.1
+   Compiling fancy-regex v0.19.2
+   Compiling serde_derive v1.0.229
+   Compiling itoa v1.0.18
+   Compiling foldhash v0.2.0
+   Compiling rustc-hash v2.1.3
+   Compiling base64 v0.22.1
+   Compiling tiktoken-rs v0.12.1
+   Compiling links-notation-benchmark v0.1.0 (/tmp/gh-issue-solver-1792166601059/rust/links-notation-benchmark)
+    Finished `test` profile [unoptimized] target(s) in 1m 02s
+     Running unittests src/lib.rs (/tmp/links-notation-cargo/debug/deps/links_notation-5e6dc6d8abb87f40)
+
+running 4 tests
+test format_config::tests::test_builder ... ok
+test format_config::tests::test_should_indent_by_ref_count ... ok
+test format_config::tests::test_should_indent_by_length ... ok
+test format_config::tests::test_default_values ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/api_tests.rs (/tmp/links-notation-cargo/debug/deps/api_tests-cd98572d51c3b570)
+
+running 15 tests
+test test_empty_link ... ok
+test test_is_link ... ok
+test test_indented_id_syntax_parsing ... ok
+test test_is_link_equivalent ... ok
+test test_is_ref_equivalent ... ok
+test test_indented_id_syntax_roundtrip ... ok
+test test_is_ref ... ok
+test test_link_with_source_target ... ok
+test test_link_with_source_type_target ... ok
+test test_multiple_indented_id_syntax_roundtrip ... ok
+test test_quoted_references ... ok
+test test_single_line_format ... ok
+test test_multiple_indented_id_syntax_parsing ... ok
+test test_quoted_references_parsing ... ok
+test test_simple_link ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/binary_notation_tests.rs (/tmp/links-notation-cargo/debug/deps/binary_notation_tests-02ace5239062c3e3)
+
+running 35 tests
+test arities_without_doublets_are_unencodable ... ok
+test arity_ranges_parse_and_display ... ok
+test arity_options_choose_doublets_triplets_or_any_length ... ok
+test compact_address_overflow_is_rejected_before_reading_links ... ok
+test comment_references_survive_binary_and_text_round_trips ... ok
+test external_references_match_platform_data_hybrid ... ok
+test default_depth_limit_rejects_a_bounded_deep_packet ... ok
+test codec_encoder_uses_configured_limits ... ok
+test canonical_text_round_trips_the_corpus ... ok
+test hand_built_packets_decode ... ok
+test golden_packets_are_stable ... ok
+test in_memory_packets_obey_limits ... ok
+test hostile_packets_hit_limits ... ok
+test in_memory_packets_reject_invalid_wire_shapes ... ok
+test invalid_code_points_are_rejected ... ok
+test invalid_encoder_models_and_address_overflow_are_errors ... ok
+test malformed_packets_are_rejected ... ok
+test large_external_values_widen_only_their_section ... ok
+test ids_do_not_add_an_extra_model_nesting_level ... ok
+test golden_documents_are_stable ... ok
+test packing_rejects_links_it_cannot_lay_out ... ok
+test references_are_quoted_only_when_needed ... ok
+test reply_options_follow_the_received_packet ... ok
+test repeated_references_obey_a_total_utf8_expansion_budget ... ok
+test stream_failures_are_io_errors_and_interruptions_are_retried ... ok
+test string_budget_stops_before_later_scalars ... ok
+test stream_packets_are_read_one_at_a_time_and_truncation_is_rejected ... ok
+test text_helpers_preserve_unicode_whitespace_references ... ok
+test width_tiers_follow_the_number_of_links ... ok
+test writing_rejects_sections_that_do_not_hold_their_links ... ok
+test every_option_set_round_trips_the_corpus ... ok
+test native_parser_groups_round_trip_without_canonicalization ... ok
+test uniform_widths_grow_past_256_addresses_and_packed_widths_stay_small ... ok
+test packed_widths_never_take_more_bytes_than_uniform_ones ... ok
+test every_short_reference_over_delimiters_round_trips ... ok
+
+test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.09s
+
+     Running tests/comments_tests.rs (/tmp/links-notation-cargo/debug/deps/comments_tests-0567f2c198368c7e)
+
+running 23 tests
+test a_comment_line_inside_a_group_is_skipped ... ok
+test a_comment_may_follow_a_delimited_reference ... ok
+test a_comment_line_inside_an_indented_block_is_skipped ... ok
+test a_comment_may_follow_a_group ... ok
+test a_comment_does_not_move_the_position_a_later_error_is_reported_at ... ok
+test a_comment_may_hold_anything_at_all ... ok
+test a_comment_may_hold_a_colon ... ok
+test a_comment_may_follow_a_link ... ok
+test a_comment_needs_no_closing_newline ... ok
+test a_document_of_comments_alone_holds_no_links ... ok
+test a_hash_inside_a_multiline_delimited_reference_is_content ... ok
+test a_comment_ends_at_the_end_of_its_line ... ok
+test a_hash_inside_a_delimited_reference_is_content ... ok
+test a_hash_that_cannot_open_a_comment_is_left_unquoted ... ok
+test a_hash_inside_a_token_is_an_ordinary_character ... ok
+test a_hash_that_opens_a_token_is_an_ordinary_character ... ok
+test a_line_of_spaces_separates_links_the_way_an_empty_line_does ... ok
+test a_parser_without_comments_keeps_the_hash ... ok
+test a_line_that_starts_with_a_hash_is_a_comment ... ok
+test comments_are_on_by_default ... ok
+test blanking_a_comment_keeps_the_length_of_the_document ... ok
+test a_parser_without_comments_still_rejects_the_document_from_the_issue ... ok
+test a_reference_that_begins_with_a_hash_is_written_quoted ... ok
+
+test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/edge_case_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/edge_case_parser_tests-308e15205f224f8c)
+
+running 9 tests
+test empty_link_test ... ok
+test empty_link_with_parentheses_test ... ok
+test empty_link_with_empty_self_reference_test ... ok
+test test_empty_document_test ... ok
+test test_invalid_input ... ok
+test test_empty_links_test ... ok
+test test_whitespace_only_test ... ok
+test test_singlet_links ... ok
+test test_all_features_test ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/empty_reference_tests.rs (/tmp/links-notation-cargo/debug/deps/empty_reference_tests-63305d6ce6fb1c70)
+
+running 9 tests
+test bare_delimiter_pair_is_the_empty_reference ... ok
+test adjacent_empty_references_stay_separate ... ok
+test a_single_space_still_reads_as_a_space ... ok
+test empty_reference_is_valid_as_an_id ... ok
+test empty_reference_is_written_as_a_versioned_literal ... ok
+test n_quote_delimited_bodies_are_unchanged ... ok
+test every_delimiter_style_yields_the_same_empty_reference ... ok
+test empty_reference_survives_a_round_trip ... ok
+test nested_empty_references_parse ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/format_config_tests.rs (/tmp/links-notation-cargo/debug/deps/format_config_tests-257c15b895978620)
+
+running 17 tests
+test format_config_basic ... ok
+test format_config_custom_indent ... ok
+test format_config_less_parentheses ... ok
+test format_empty_links_with_config ... ok
+test format_link_with_custom_indent_integration ... ok
+test format_link_with_less_parentheses_integration ... ok
+test format_link_with_line_length_limit_integration ... ok
+test format_with_consecutive_grouping ... ok
+test format_roundtrip_with_config_integration ... ok
+test format_single_ref_with_config ... ok
+test format_link_with_max_inline_refs_integration ... ok
+test should_indent_by_length ... ok
+test roundtrip_with_line_length_formatting ... ok
+test should_indent_by_ref_count ... ok
+test format_with_line_length_limit ... ok
+test format_links_with_consecutive_grouping_integration ... ok
+test format_with_max_inline_refs ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/indentation_consistency_tests.rs (/tmp/links-notation-cargo/debug/deps/indentation_consistency_tests-be5551fa793ff78a)
+
+running 4 tests
+test tests::test_three_level_nesting_with_different_indentation ... ok
+test tests::test_two_spaces_vs_four_spaces_indentation ... ok
+test tests::test_simple_two_vs_four_spaces_indentation ... ok
+test tests::test_leading_spaces_vs_no_leading_spaces ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/indented_id_nested_values_tests.rs (/tmp/links-notation-cargo/debug/deps/indented_id_nested_values_tests-a89390b68f28b4f1)
+
+running 1 test
+test indented_id_retains_nested_values ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/indented_id_syntax_tests.rs (/tmp/links-notation-cargo/debug/deps/indented_id_syntax_tests-f7a320c73acd5dee)
+
+running 11 tests
+test tests::equivalence_test_comprehensive ... ok
+test tests::indented_id_syntax_with_multiple_values_test ... ok
+test tests::basic_indented_id_syntax_test ... ok
+test tests::indented_id_syntax_with_numeric_id_test ... ok
+test tests::indented_id_with_deeper_nesting_test ... ok
+test tests::multiple_indented_id_links_test ... ok
+test tests::mixed_indented_and_regular_syntax_test ... ok
+test tests::indented_id_syntax_with_single_value_test ... ok
+test tests::empty_indented_id_should_work_test ... ok
+test tests::indented_id_syntax_with_quoted_id_test ... ok
+test tests::unsupported_colon_only_syntax_should_fail_test ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/issue312_conformance_tests.rs (/tmp/links-notation-cargo/debug/deps/issue312_conformance_tests-c221074fb5444b65)
+
+running 5 tests
+test a_single_reference_is_a_link_value_at_every_depth ... ok
+test cr_is_a_line_break ... ok
+test trailing_indentation_is_document_whitespace ... ok
+test unicode_spaces_are_substantive_even_quote_bodies ... ok
+test only_grammar_whitespace_makes_an_empty_document ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/issue316_quote_runs_tests.rs (/tmp/links-notation-cargo/debug/deps/issue316_quote_runs_tests-86f5e716215cdb01)
+
+running 9 tests
+test a_reference_can_open_inside_a_run ... ok
+test a_run_inside_a_body_is_read_as_escapes_then_a_closing_run ... ok
+test a_run_that_never_closes_the_reference_leaves_it_unclosed ... ok
+test a_reference_that_opens_with_a_wide_run_is_read_in_linear_time ... ok
+test wide_quote_over_a_long_run_is_parsed_within_the_time_bound ... ok
+test closed_wide_quote_over_quotes_is_parsed_within_the_time_bound ... ok
+test unclosed_widths_over_an_even_run_is_parsed_within_the_time_bound ... ok
+test a_stream_of_wide_quotes_is_read_within_the_time_bound ... ok
+test narrowing_unclosed_quotes_is_parsed_within_the_time_bound ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.87s
+
+     Running tests/link_tests.rs (/tmp/links-notation-cargo/debug/deps/link_tests-98974678551cd222)
+
+running 10 tests
+test link_constructor_with_id_only_test ... ok
+test link_equals_test ... ok
+test link_escape_reference_simple_test ... ok
+test link_simplify_test ... ok
+test link_to_string_with_id_and_values_test ... ok
+test link_to_string_with_id_only_test ... ok
+test link_to_string_with_values_only_test ... ok
+test link_constructor_with_id_and_values_test ... ok
+test link_escape_reference_with_special_characters_test ... ok
+test link_combine_test ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/links_group_tests.rs (/tmp/links-notation-cargo/debug/deps/links_group_tests-3203dea5512b257f)
+
+running 5 tests
+test links_group_append_to_links_list_test ... ok
+test links_group_to_list_flattens_structure_test ... ok
+test links_group_to_string_test ... ok
+test links_group_constructor_test ... ok
+test links_group_constructor_equivalent_test ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/macro_tests.rs (/tmp/links-notation-cargo/debug/deps/macro_tests-9d65c91a1088ef6a)
+
+running 28 tests
+test macro_tests::test_direct_equivalence_with_nested ... ok
+test macro_tests::test_compile_time_validation ... ok
+test macro_tests::test_direct_complex_runtime_equivalence ... ok
+test macro_tests::test_direct_compile_time_validation ... ok
+test macro_tests::test_direct_deeply_nested ... ok
+test macro_tests::test_direct_link_with_id_and_values ... ok
+test macro_tests::test_direct_equivalence_with_string_literal ... ok
+test macro_tests::test_direct_formatting_works ... ok
+test macro_tests::test_direct_nested_links ... ok
+test macro_tests::test_direct_equivalence_with_id ... ok
+test macro_tests::test_direct_runtime_equivalence ... ok
+test macro_tests::test_direct_simple_reference ... ok
+test macro_tests::test_direct_triplet ... ok
+test macro_tests::test_direct_with_numbers ... ok
+test macro_tests::test_direct_multiple_links ... ok
+test macro_tests::test_indented_syntax ... ok
+test macro_tests::test_formatting_works ... ok
+test macro_tests::test_link_with_id_and_values ... ok
+test macro_tests::test_multiple_lines ... ok
+test macro_tests::test_nested_links ... ok
+test macro_tests::test_direct_parenthesized_link ... ok
+test macro_tests::test_empty_input ... ok
+test macro_tests::test_parenthesized_link ... ok
+test macro_tests::test_quoted_strings ... ok
+test macro_tests::test_simple_reference ... ok
+test macro_tests::test_runtime_equivalence ... ok
+test macro_tests::test_runtime_failure_says_where_the_text_stopped_parsing - should panic ... ok
+test macro_tests::test_triplet ... ok
+
+test result: ok. 28 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/mixed_indentation_modes_tests.rs (/tmp/links-notation-cargo/debug/deps/mixed_indentation_modes_tests-52982d00cdf005d9)
+
+running 8 tests
+test tests::deeply_nested_mixed_modes_test ... ok
+test tests::hero_example_equivalence_test ... ok
+test tests::set_context_without_colon_test ... ok
+test tests::hero_example_alternative_format_test ... ok
+test tests::nested_set_and_sequence_contexts_test ... ok
+test tests::sequence_context_with_complex_values_test ... ok
+test tests::sequence_context_with_colon_test ... ok
+test tests::hero_example_mixed_modes_test ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/multi_quote_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/multi_quote_parser_tests-030c8a7b6e1bea90)
+
+running 44 tests
+test test_backtick_quoted_with_escaped_backtick ... ok
+test test_code_block_like_content ... ok
+test test_double_backtick_quotes ... ok
+test test_double_backtick_quotes_with_backtick_inside ... ok
+test test_backtick_quoted_reference ... ok
+test test_double_double_quotes ... ok
+test test_backtick_as_id_in_link ... ok
+test test_backtick_quoted_with_spaces ... ok
+test test_backtick_quoted_multiline ... ok
+test test_double_backtick_quotes_with_escape ... ok
+test test_double_double_quotes_with_single_quote_inside ... ok
+test test_double_quote_with_escaped_double_quote ... ok
+test test_double_single_quotes ... ok
+test test_json_string_with_quotes ... ok
+test test_double_single_quotes_with_escape ... ok
+test test_mixed_quotes_in_link ... ok
+test test_double_double_quotes_with_escape ... ok
+test test_multiline_in_double_double_quotes ... ok
+test test_double_single_quotes_with_single_quote_inside ... ok
+test test_quadruple_double_quotes ... ok
+test test_quadruple_double_quotes_with_triple_quote_inside ... ok
+test test_quadruple_backtick_quotes ... ok
+test test_quadruple_single_quotes ... ok
+test test_quintuple_backtick_quotes ... ok
+test test_nested_quotes_in_markdown ... ok
+test test_quintuple_single_quotes ... ok
+test test_triple_backtick_quotes ... ok
+test test_quintuple_double_quotes_with_quad_quote_inside ... ok
+test test_triple_backtick_quotes_with_double_backtick_inside ... ok
+test test_single_quote_with_escaped_single_quote ... ok
+test test_triple_backtick_quotes_with_escape ... ok
+test test_quintuple_double_quotes ... ok
+test test_triple_double_quotes ... ok
+test test_triple_double_quotes_with_escape ... ok
+test test_triple_single_quotes ... ok
+test test_triple_double_quotes_with_double_quote_inside ... ok
+test test_triple_single_quotes_with_double_quote_inside ... ok
+test test_triple_single_quotes_with_escape ... ok
+test test_unlimited_backticks_8 ... ok
+test test_unlimited_quotes_6 ... ok
+test test_unlimited_quotes_10 ... ok
+test test_whitespace_preserved_in_quotes ... ok
+test test_unlimited_quotes_6_with_inner_quotes ... ok
+test test_unlimited_single_quotes_7 ... ok
+
+test result: ok. 44 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/multiline_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/multiline_parser_tests-c26f9b10e2416eae)
+
+running 11 tests
+test parse_and_stringify_with_less_parentheses_test ... ok
+test test_indented_children ... ok
+test parse_and_stringify_test ... ok
+test duplicate_identifiers_test ... ok
+test test_multiline_simple_links ... ok
+test test_multiple_top_level_elements ... ok
+test test_mixed_formats ... ok
+test test_complex_structure ... ok
+test test_multiline_with_id ... ok
+test parse_and_stringify_test_2 ... ok
+test two_links_test ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/multiline_quoted_string_tests.rs (/tmp/links-notation-cargo/debug/deps/multiline_quoted_string_tests-9a05f0eaf6de5feb)
+
+running 4 tests
+test test_simple_multiline_double_quoted ... ok
+test test_multiline_quoted_as_id ... ok
+test test_simple_multiline_single_quoted ... ok
+test test_multiline_double_quoted_reference ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/nested_indentation_tests.rs (/tmp/links-notation-cargo/debug/deps/nested_indentation_tests-c922a09f81a2ace1)
+
+running 8 tests
+test parentheses_keep_record_boundaries ... ok
+test blank_lines_inside_parentheses_are_skipped ... ok
+test employee_records_keep_their_fields ... ok
+test parentheses_with_indented_id_syntax ... ok
+test parentheses_keep_several_records_separate ... ok
+test single_line_parentheses_are_unchanged ... ok
+test parentheses_nest_deeply ... ok
+test parentheses_reproduce_root_indentation ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/nested_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/nested_parser_tests-60d969cd80145689)
+
+running 13 tests
+test test_complex_indentation ... ok
+test test_deep_nested_structure_roundtrip ... ok
+test simple_significant_whitespace_test ... ok
+test parse_nested_structure_with_indentation ... ok
+test significant_whitespace_test ... ok
+test test_indentation_based_children ... ok
+test test_multiple_nested_links_roundtrip ... ok
+test test_nested_indentation_parser ... ok
+test test_indentation_parser ... ok
+test test_indentation_consistency ... ok
+test test_three_level_nesting_roundtrip ... ok
+test two_spaces_sized_whitespace_test ... ok
+test test_nested_links ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/nested_self_reference_tests.rs (/tmp/links-notation-cargo/debug/deps/nested_self_reference_tests-5fed3cd2853e2de1)
+
+running 2 tests
+test test_self_reference_as_direct_child_works_correctly ... ok
+test test_nested_self_referenced_object_in_pair_value ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/nesting_depth_tests.rs (/tmp/links-notation-cargo/debug/deps/nesting_depth_tests-e6e0d8881ecc6204)
+
+running 7 tests
+test unclosed_groups_fail_in_linear_time ... ok
+test group_followed_by_values_keeps_its_structure ... ok
+test unclosed_groups_on_indented_lines_fail_in_linear_time ... ok
+test values_after_groups_read_in_linear_time ... ok
+test closed_groups_read_in_linear_time ... ok
+test parse_lino_to_links_does_not_copy_each_level ... ok
+test values_after_very_deep_groups_read_in_linear_time ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+
+     Running tests/nesting_limit_tests.rs (/tmp/links-notation-cargo/debug/deps/nesting_limit_tests-3859b1b0f87d376b)
+
+running 10 tests
+test test_default_limit_is_shared_by_every_implementation ... ok
+test test_parentheses_past_the_limit_are_refused_at_the_group_that_is_too_deep ... ok
+test test_groups_and_indentation_add_up ... ok
+test test_indentation_past_the_limit_is_refused_at_the_line_that_is_too_deep ... ok
+test test_groups_in_value_position_count_like_any_other_group ... ok
+test test_trailing_spaces_on_a_deep_line_are_not_a_deeper_line ... ok
+test test_stream_parser_reports_where_the_nesting_is_too_deep ... ok
+test test_parentheses_up_to_the_limit_are_accepted ... ok
+test test_indentation_up_to_the_limit_is_accepted ... ok
+test test_refuses_a_document_far_past_the_limit_without_overflowing_the_stack ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
+
+     Running tests/parse_error_position_tests.rs (/tmp/links-notation-cargo/debug/deps/parse_error_position_tests-e01a5d68a649d8b6)
+
+running 17 tests
+test test_column_counts_characters_rather_than_bytes ... ok
+test test_a_document_that_parses_reports_nothing ... ok
+test test_error_display_starts_with_the_position ... ok
+test test_message_of_a_long_line_stays_a_message ... ok
+test test_both_entry_points_report_the_same_position ... ok
+test test_message_quotes_one_line_rather_than_the_rest_of_the_document ... ok
+test test_lone_cr_counts_as_one_line_break_in_diagnostics ... ok
+test test_points_at_the_defect_rather_than_at_the_line_it_starts_on ... ok
+test test_offset_agrees_with_the_javascript_port ... ok
+test test_reports_an_unmatched_closing_parenthesis ... ok
+test test_nom_internals_stay_out_of_the_message ... ok
+test test_reports_the_end_of_the_document_when_a_group_is_never_closed ... ok
+test test_reports_the_line_a_late_defect_is_on ... ok
+test test_says_what_could_have_stood_there ... ok
+test test_reports_the_line_and_column_of_the_defect ... ok
+test test_summary_reads_as_a_sentence ... ok
+test test_snippet_points_a_caret_at_the_offending_character ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/reference_fidelity_tests.rs (/tmp/links-notation-cargo/debug/deps/reference_fidelity_tests-db69566ac143e3e7)
+
+running 4 tests
+test malformed_reference_literals_are_rejected ... ok
+test native_reference_fidelity ... ok
+test binary_reference_fidelity ... ok
+test reference_literals_at_every_chunk_split ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.52s
+
+     Running tests/shared_text_parity_tests.rs (/tmp/links-notation-cargo/debug/deps/shared_text_parity_tests-5719e57a932ffd3b)
+
+running 1 test
+test shared_text_parity ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/single_line_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/single_line_parser_tests-a276fdb0d6a5a166)
+
+running 39 tests
+test parse_reference_with_colon_and_values ... ok
+test parse_values_only ... ok
+test parse_multiline_link ... ok
+test parse_quoted_references ... ok
+test parse_simple_reference ... ok
+test quoted_references_test ... ok
+test bug_test_1 ... ok
+test single_link_test ... ok
+test test_link_with_id ... ok
+test test_hyphenated_identifiers ... ok
+test test_link_without_id_single_line ... ok
+test test_link_without_id_multi_line ... ok
+test test_multi_line_link_with_id ... ok
+test test_multiple_words_in_quotes ... ok
+test test_multiline_without_id ... ok
+test test_parse_quoted_references_values_only ... ok
+test quoted_references_with_spaces_test ... ok
+test test_quoted_reference_parser ... ok
+test test_deeply_nested ... ok
+test test_quoted_references_with_spaces_in_link ... ok
+test test_quoted_reference ... ok
+test test_simple_reference ... ok
+test test_quoted_references_with_special_chars ... ok
+test test_simple_ref ... ok
+test test_nested_links ... ok
+test test_parse_values_only_standalone_colon ... ok
+test test_single_line_link_with_id ... ok
+test test_simple_reference_parser ... ok
+test test_quoted_references ... ok
+test test_single_line_without_id ... ok
+test test_single_line_link ... ok
+test test_single_line_with_id ... ok
+test test_special_characters_in_quotes ... ok
+test test_singlet_link_parser ... ok
+test test_single_quoted_references ... ok
+test test_singlet_link ... ok
+test test_value_link_parser ... ok
+test triplet_single_link_test ... ok
+test test_value_link ... ok
+
+test result: ok. 39 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/stream_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/stream_parser_tests-d80d9df568266adf)
+
+running 6 tests
+test provides_lazy_adapters ... ok
+test rejects_writes_after_finish ... ok
+test emits_only_complete_records ... ok
+test supports_line_chunks_final_record_and_position ... ok
+test matches_canonical_parser_one_symbol_at_a_time ... ok
+test supports_drain_reset_and_bounded_memory ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/tuple_tests.rs (/tmp/links-notation-cargo/debug/deps/tuple_tests-58be3d4c6cfab37e)
+
+running 47 tests
+test test_lino_anonymous_static_method ... ok
+test test_empty_string_tuple ... ok
+test test_anonymous_link_from_two_lino ... ok
+test test_complex_example_matching_csharp ... ok
+test test_four_lino_anonymous_link ... ok
+test test_lino_builder_anonymous ... ok
+test test_lino_builder_basic ... ok
+test test_lino_builder_chaining ... ok
+test test_anonymous_link_from_three_lino ... ok
+test test_lino_builder_large_link ... ok
+test test_lino_builder_linos_batch ... ok
+test test_lino_new_static_method ... ok
+test test_lino_builder_with_lino ... ok
+test test_lino_reference_static_method ... ok
+test test_tuple_10_elements_str ... ok
+test test_tuple_12_elements_lino ... ok
+test test_tuple_11_elements_str ... ok
+test test_tuple_3_elements ... ok
+test test_tuple_4_elements ... ok
+test test_tuple_12_elements_str ... ok
+test test_tuple_5_elements_lino ... ok
+test test_tuple_5_elements_str ... ok
+test test_tuple_5_elements_string ... ok
+test test_tuple_7_elements_str ... ok
+test test_lino_new_arbitrary_size ... ok
+test test_tuple_9_elements_str ... ok
+test test_tuple_collection_format ... ok
+test test_tuple_ergonomics ... ok
+test test_tuple_8_elements_str ... ok
+test test_tuple_6_elements_str ... ok
+test test_tuple_id_vec_lino_named_link ... ok
+test test_lino_builder_values_batch ... ok
+test test_nested_links_with_tuples ... ok
+test test_tuple_id_vec_str_named_link ... ok
+test test_tuple_id_vec_string_named_link ... ok
+test test_tuple_to_link_basic ... ok
+test test_tuple_large_with_str_lino_mixed ... ok
+test test_tuple_with_lino_values ... ok
+test test_tuple_to_link_with_owned_strings ... ok
+test test_tuple_with_nested_link_values ... ok
+test test_tuple_with_special_characters ... ok
+test test_vec_large_arbitrary_size ... ok
+test test_tuple_with_mixed_lino_types ... ok
+test test_tuple_large_with_nested_links ... ok
+test test_vec_str_to_anonymous_link ... ok
+test test_vec_lino_to_anonymous_link ... ok
+test test_vec_string_to_anonymous_link ... ok
+
+test result: ok. 47 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/main.rs (/tmp/links-notation-cargo/debug/deps/benchmark-b7a54c435c310eec)
+
+running 34 tests
+test csv::tests::writes_a_header_once_for_uniform_records ... ok
+test csv::tests::quotes_fields_holding_a_separator ... ok
+test lino::tests::encodes_an_array_as_one_value_per_line ... ok
+test lino::tests::encodes_a_nested_object_the_way_the_codec_does ... ok
+test csv::tests::refuses_nested_and_ragged_data ... ok
+test lino::tests::escapes_only_the_characters_the_form_cannot_carry ... ok
+test csv::tests::writes_tuples_without_a_header ... ok
+test lino::tests::keeps_a_newline_in_the_indented_form_but_escapes_it_on_one_line ... ok
+test lino::tests::keeps_the_minimal_form_readable_as_the_same_object ... ok
+test lino::tests::keeps_empty_containers_apart ... ok
+test lino::tests::reads_numbers_the_way_the_codec_does ... ok
+test lino::tests::quotes_text_holding_a_quote ... ok
+test lino::tests::quotes_only_what_would_read_back_as_something_else ... ok
+test lino::tests::round_trips_a_single_pair_object_inside_an_array ... ok
+test lino::tests::writes_a_list_of_links_one_link_per_line ... ok
+test lino::tests::round_trips_scalars_of_every_type ... ok
+test lino::tests::writes_every_other_shape_as_the_indented_form ... ok
+test lino::tests::round_trips_numeric_looking_text ... ok
+test lino::tests::writes_the_single_line_form_with_the_object_marker ... ok
+test lino::tests::round_trips_tuples ... ok
+test metrics::tests::reports_savings_as_a_percentage ... ok
+test xml::tests::repeats_the_key_element_for_an_array ... ok
+test xml::tests::escapes_markup_characters ... ok
+test xml::tests::keeps_the_key_of_an_empty_array ... ok
+test yaml::tests::keeps_empty_containers_on_one_line ... ok
+test yaml::tests::leaves_dates_and_timestamps_plain ... ok
+test xml::tests::wraps_a_root_array_in_one_root_element ... ok
+test yaml::tests::quotes_the_words_a_yaml_1_1_reader_takes_for_booleans ... ok
+test yaml::tests::quotes_text_that_would_read_back_as_another_type ... ok
+test yaml::tests::writes_nested_mappings_as_blocks ... ok
+test yaml::tests::starts_a_sequence_item_on_the_dash_line ... ok
+test yaml::tests::writes_nested_sequences_of_scalars ... ok
+test metrics::tests::counts_tokens_with_both_encodings ... ok
+test metrics::tests::counts_characters_not_bytes ... ok
+
+test result: ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.29s
+
+     Running unittests src/lib.rs (/tmp/links-notation-cargo/debug/deps/links_notation_macro-01c5793f09b0d4e2)
+
+running 9 tests
+test tests::test_validate_balanced_parens ... ok
+test tests::test_tokens_to_lino_with_parens ... ok
+test tests::test_tokens_to_lino_nested ... ok
+test tests::test_validate_quotes ... ok
+test tests::test_tokens_to_lino_basic ... ok
+test tests::test_validate_nested_quotes ... ok
+test tests::test_tokens_to_lino_with_colon ... ok
+test tests::test_validate_empty ... ok
+test tests::test_validate_unbalanced_parens ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests links_notation
+
+running 21 tests
+test links-notation/src/lib.rs - LiNo<T>::anonymous (line 376) ... ok
+test links-notation/src/lib.rs - LiNo<String> (line 1907) ... ok
+test links-notation/src/binary/mod.rs - binary (line 6) ... ok
+test links-notation/src/lib.rs - LiNo<String> (line 1946) ... ok
+test links-notation/src/comments.rs - comments::strip_comments (line 34) ... ok
+test links-notation/src/lib.rs - LiNo<T>::new (line 360) ... ok
+test links-notation/src/lib.rs - SyntaxError::snippet (line 145) ... ok
+test links-notation/src/lib.rs - NestingTooDeep (line 174) ... ok
+test links-notation/src/lib.rs - SyntaxError::summary (line 110) ... ok
+test links-notation/src/lib.rs - LiNo<T>::reference (line 390) ... ok
+test links-notation/src/lib.rs - SyntaxError (line 80) ... ok
+test links-notation/src/lib.rs - LiNoBuilder (line 407) ... ok
+test links-notation/src/lib.rs - VERSION (line 32) ... ok
+test links-notation/src/lib.rs - parse_lino (line 928) ... ok
+test links-notation/src/lib.rs - impl_tuple_from (line 1181) ... ok
+test links-notation/src/lib.rs - parse_lino_to_links_with_config (line 992) ... ok
+test links-notation/src/parser_config.rs - parser_config::ParserConfig::new (line 32) ... ok
+test links-notation/src/parser_config.rs - parser_config::ParserConfig::with_comments (line 58) ... ok
+test links-notation/src/lib.rs - parse_lino_with_config (line 941) ... ok
+test links-notation/src/parser_config.rs - parser_config::ParserConfig::with_max_depth (line 76) ... ok
+test links-notation/src/parser_config.rs - parser_config::ParserConfig::without_comments (line 45) ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+   Doc-tests links_notation_macro
+
+running 3 tests
+test links-notation-macro/src/lib.rs - lino (line 20) ... ignored
+test links-notation-macro/src/lib.rs - lino (line 32) ... ignored
+test links-notation-macro/src/lib.rs - lino (line 42) ... ignored
+
+test result: ok. 0 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling links-notation v0.26.0 (/tmp/gh-issue-solver-1792166601059/rust/links-notation)
+    Finished `test` profile [unoptimized] target(s) in 15.80s
+     Running unittests src/lib.rs (/tmp/links-notation-cargo/debug/deps/links_notation-7cb36ce11f05ae63)
+
+running 4 tests
+test format_config::tests::test_builder ... ok
+test format_config::tests::test_should_indent_by_ref_count ... ok
+test format_config::tests::test_should_indent_by_length ... ok
+test format_config::tests::test_default_values ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/api_tests.rs (/tmp/links-notation-cargo/debug/deps/api_tests-41083415a4b8f199)
+
+running 15 tests
+test test_empty_link ... ok
+test test_indented_id_syntax_parsing ... ok
+test test_is_link ... ok
+test test_indented_id_syntax_roundtrip ... ok
+test test_is_ref ... ok
+test test_is_ref_equivalent ... ok
+test test_link_with_source_target ... ok
+test test_multiple_indented_id_syntax_parsing ... ok
+test test_quoted_references ... ok
+test test_is_link_equivalent ... ok
+test test_link_with_source_type_target ... ok
+test test_multiple_indented_id_syntax_roundtrip ... ok
+test test_simple_link ... ok
+test test_single_line_format ... ok
+test test_quoted_references_parsing ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/binary_notation_tests.rs (/tmp/links-notation-cargo/debug/deps/binary_notation_tests-a28eb3619a63c905)
+
+running 35 tests
+test arity_ranges_parse_and_display ... ok
+test compact_address_overflow_is_rejected_before_reading_links ... ok
+test comment_references_survive_binary_and_text_round_trips ... ok
+test arity_options_choose_doublets_triplets_or_any_length ... ok
+test arities_without_doublets_are_unencodable ... ok
+test codec_encoder_uses_configured_limits ... ok
+test default_depth_limit_rejects_a_bounded_deep_packet ... ok
+test golden_packets_are_stable ... ok
+test external_references_match_platform_data_hybrid ... ok
+test canonical_text_round_trips_the_corpus ... ok
+test hand_built_packets_decode ... ok
+test in_memory_packets_obey_limits ... ok
+test in_memory_packets_reject_invalid_wire_shapes ... ok
+test invalid_code_points_are_rejected ... ok
+test invalid_encoder_models_and_address_overflow_are_errors ... ok
+test golden_documents_are_stable ... ok
+test malformed_packets_are_rejected ... ok
+test large_external_values_widen_only_their_section ... ok
+test hostile_packets_hit_limits ... ok
+test packing_rejects_links_it_cannot_lay_out ... ok
+test ids_do_not_add_an_extra_model_nesting_level ... ok
+test repeated_references_obey_a_total_utf8_expansion_budget ... ok
+test reply_options_follow_the_received_packet ... ok
+test references_are_quoted_only_when_needed ... ok
+test stream_failures_are_io_errors_and_interruptions_are_retried ... ok
+test string_budget_stops_before_later_scalars ... ok
+test stream_packets_are_read_one_at_a_time_and_truncation_is_rejected ... ok
+test text_helpers_preserve_unicode_whitespace_references ... ok
+test width_tiers_follow_the_number_of_links ... ok
+test writing_rejects_sections_that_do_not_hold_their_links ... ok
+test every_option_set_round_trips_the_corpus ... ok
+test uniform_widths_grow_past_256_addresses_and_packed_widths_stay_small ... ok
+test native_parser_groups_round_trip_without_canonicalization ... ok
+test packed_widths_never_take_more_bytes_than_uniform_ones ... ok
+test every_short_reference_over_delimiters_round_trips ... ok
+
+test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.64s
+
+     Running tests/comments_tests.rs (/tmp/links-notation-cargo/debug/deps/comments_tests-1dbc08e295c6dea3)
+
+running 23 tests
+test a_comment_ends_at_the_end_of_its_line ... ok
+test a_comment_line_inside_an_indented_block_is_skipped ... ok
+test a_comment_may_follow_a_delimited_reference ... ok
+test a_comment_may_follow_a_link ... ok
+test a_comment_may_hold_anything_at_all ... ok
+test a_document_of_comments_alone_holds_no_links ... ok
+test a_comment_line_inside_a_group_is_skipped ... ok
+test a_comment_may_follow_a_group ... ok
+test a_comment_needs_no_closing_newline ... ok
+test a_comment_may_hold_a_colon ... ok
+test a_hash_inside_a_delimited_reference_is_content ... ok
+test a_hash_inside_a_token_is_an_ordinary_character ... ok
+test a_hash_that_opens_a_token_is_an_ordinary_character ... ok
+test a_hash_inside_a_multiline_delimited_reference_is_content ... ok
+test a_line_of_spaces_separates_links_the_way_an_empty_line_does ... ok
+test a_line_that_starts_with_a_hash_is_a_comment ... ok
+test a_hash_that_cannot_open_a_comment_is_left_unquoted ... ok
+test a_parser_without_comments_keeps_the_hash ... ok
+test a_parser_without_comments_still_rejects_the_document_from_the_issue ... ok
+test blanking_a_comment_keeps_the_length_of_the_document ... ok
+test a_reference_that_begins_with_a_hash_is_written_quoted ... ok
+test comments_are_on_by_default ... ok
+test a_comment_does_not_move_the_position_a_later_error_is_reported_at ... ok
+
+test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/edge_case_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/edge_case_parser_tests-3fecf2609c5075c5)
+
+running 9 tests
+test empty_link_test ... ok
+test test_empty_document_test ... ok
+test empty_link_with_parentheses_test ... ok
+test empty_link_with_empty_self_reference_test ... ok
+test test_all_features_test ... ok
+test test_singlet_links ... ok
+test test_empty_links_test ... ok
+test test_whitespace_only_test ... ok
+test test_invalid_input ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/empty_reference_tests.rs (/tmp/links-notation-cargo/debug/deps/empty_reference_tests-82bf422daf2e4cb4)
+
+running 9 tests
+test a_single_space_still_reads_as_a_space ... ok
+test bare_delimiter_pair_is_the_empty_reference ... ok
+test adjacent_empty_references_stay_separate ... ok
+test every_delimiter_style_yields_the_same_empty_reference ... ok
+test empty_reference_is_valid_as_an_id ... ok
+test empty_reference_is_written_as_a_versioned_literal ... ok
+test n_quote_delimited_bodies_are_unchanged ... ok
+test empty_reference_survives_a_round_trip ... ok
+test nested_empty_references_parse ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/format_config_tests.rs (/tmp/links-notation-cargo/debug/deps/format_config_tests-5187b31b4fa3f78c)
+
+running 17 tests
+test format_config_basic ... ok
+test format_config_less_parentheses ... ok
+test format_empty_links_with_config ... ok
+test format_link_with_less_parentheses_integration ... ok
+test format_link_with_max_inline_refs_integration ... ok
+test format_config_custom_indent ... ok
+test format_links_with_consecutive_grouping_integration ... ok
+test format_single_ref_with_config ... ok
+test format_with_consecutive_grouping ... ok
+test format_roundtrip_with_config_integration ... ok
+test format_with_max_inline_refs ... ok
+test roundtrip_with_line_length_formatting ... ok
+test should_indent_by_length ... ok
+test should_indent_by_ref_count ... ok
+test format_with_line_length_limit ... ok
+test format_link_with_custom_indent_integration ... ok
+test format_link_with_line_length_limit_integration ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/indentation_consistency_tests.rs (/tmp/links-notation-cargo/debug/deps/indentation_consistency_tests-810b9262141ef889)
+
+running 4 tests
+test tests::test_simple_two_vs_four_spaces_indentation ... ok
+test tests::test_leading_spaces_vs_no_leading_spaces ... ok
+test tests::test_two_spaces_vs_four_spaces_indentation ... ok
+test tests::test_three_level_nesting_with_different_indentation ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/indented_id_nested_values_tests.rs (/tmp/links-notation-cargo/debug/deps/indented_id_nested_values_tests-c383248cda80a894)
+
+running 1 test
+test indented_id_retains_nested_values ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/indented_id_syntax_tests.rs (/tmp/links-notation-cargo/debug/deps/indented_id_syntax_tests-64dc16f3fed7b7e0)
+
+running 11 tests
+test tests::empty_indented_id_should_work_test ... ok
+test tests::basic_indented_id_syntax_test ... ok
+test tests::equivalence_test_comprehensive ... ok
+test tests::indented_id_syntax_with_multiple_values_test ... ok
+test tests::indented_id_syntax_with_quoted_id_test ... ok
+test tests::unsupported_colon_only_syntax_should_fail_test ... ok
+test tests::multiple_indented_id_links_test ... ok
+test tests::indented_id_syntax_with_numeric_id_test ... ok
+test tests::mixed_indented_and_regular_syntax_test ... ok
+test tests::indented_id_with_deeper_nesting_test ... ok
+test tests::indented_id_syntax_with_single_value_test ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+     Running tests/issue312_conformance_tests.rs (/tmp/links-notation-cargo/debug/deps/issue312_conformance_tests-d9f6c2a331933402)
+
+running 5 tests
+test only_grammar_whitespace_makes_an_empty_document ... ok
+test a_single_reference_is_a_link_value_at_every_depth ... ok
+test trailing_indentation_is_document_whitespace ... ok
+test cr_is_a_line_break ... ok
+test unicode_spaces_are_substantive_even_quote_bodies ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/issue316_quote_runs_tests.rs (/tmp/links-notation-cargo/debug/deps/issue316_quote_runs_tests-4ff8cfc2f556f03a)
+
+running 9 tests
+test a_reference_can_open_inside_a_run ... ok
+test a_run_that_never_closes_the_reference_leaves_it_unclosed ... ok
+test a_run_inside_a_body_is_read_as_escapes_then_a_closing_run ... ok
+test a_reference_that_opens_with_a_wide_run_is_read_in_linear_time ... ok
+test wide_quote_over_a_long_run_is_parsed_within_the_time_bound ... ok
+test a_stream_of_wide_quotes_is_read_within_the_time_bound ... ok
+test closed_wide_quote_over_quotes_is_parsed_within_the_time_bound ... ok
+test unclosed_widths_over_an_even_run_is_parsed_within_the_time_bound ... ok
+test narrowing_unclosed_quotes_is_parsed_within_the_time_bound ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.31s
+
+     Running tests/link_tests.rs (/tmp/links-notation-cargo/debug/deps/link_tests-a2efaa8645c62500)
+
+running 10 tests
+test link_escape_reference_with_special_characters_test ... ok
+test link_combine_test ... ok
+test link_constructor_with_id_only_test ... ok
+test link_constructor_with_id_and_values_test ... ok
+test link_simplify_test ... ok
+test link_equals_test ... ok
+test link_escape_reference_simple_test ... ok
+test link_to_string_with_id_and_values_test ... ok
+test link_to_string_with_id_only_test ... ok
+test link_to_string_with_values_only_test ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/links_group_tests.rs (/tmp/links-notation-cargo/debug/deps/links_group_tests-4179f2573c894edd)
+
+running 5 tests
+test links_group_constructor_equivalent_test ... ok
+test links_group_to_string_test ... ok
+test links_group_constructor_test ... ok
+test links_group_append_to_links_list_test ... ok
+test links_group_to_list_flattens_structure_test ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/macro_tests.rs (/tmp/links-notation-cargo/debug/deps/macro_tests-a9c8a613e721be9e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/mixed_indentation_modes_tests.rs (/tmp/links-notation-cargo/debug/deps/mixed_indentation_modes_tests-29378ece45453ebc)
+
+running 8 tests
+test tests::deeply_nested_mixed_modes_test ... ok
+test tests::sequence_context_with_colon_test ... ok
+test tests::hero_example_alternative_format_test ... ok
+test tests::nested_set_and_sequence_contexts_test ... ok
+test tests::sequence_context_with_complex_values_test ... ok
+test tests::hero_example_mixed_modes_test ... ok
+test tests::set_context_without_colon_test ... ok
+test tests::hero_example_equivalence_test ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/multi_quote_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/multi_quote_parser_tests-72e908d50a4bcfa3)
+
+running 44 tests
+test test_code_block_like_content ... ok
+test test_backtick_quoted_with_escaped_backtick ... ok
+test test_backtick_as_id_in_link ... ok
+test test_backtick_quoted_multiline ... ok
+test test_backtick_quoted_with_spaces ... ok
+test test_double_double_quotes_with_escape ... ok
+test test_backtick_quoted_reference ... ok
+test test_double_backtick_quotes_with_backtick_inside ... ok
+test test_double_double_quotes_with_single_quote_inside ... ok
+test test_double_single_quotes ... ok
+test test_double_single_quotes_with_escape ... ok
+test test_double_single_quotes_with_single_quote_inside ... ok
+test test_json_string_with_quotes ... ok
+test test_double_backtick_quotes ... ok
+test test_double_backtick_quotes_with_escape ... ok
+test test_mixed_quotes_in_link ... ok
+test test_multiline_in_double_double_quotes ... ok
+test test_nested_quotes_in_markdown ... ok
+test test_quadruple_backtick_quotes ... ok
+test test_quadruple_double_quotes ... ok
+test test_double_quote_with_escaped_double_quote ... ok
+test test_quintuple_backtick_quotes ... ok
+test test_quintuple_double_quotes ... ok
+test test_quadruple_single_quotes ... ok
+test test_quintuple_double_quotes_with_quad_quote_inside ... ok
+test test_quintuple_single_quotes ... ok
+test test_single_quote_with_escaped_single_quote ... ok
+test test_triple_backtick_quotes ... ok
+test test_quadruple_double_quotes_with_triple_quote_inside ... ok
+test test_triple_backtick_quotes_with_escape ... ok
+test test_triple_backtick_quotes_with_double_backtick_inside ... ok
+test test_double_double_quotes ... ok
+test test_triple_double_quotes ... ok
+test test_triple_double_quotes_with_escape ... ok
+test test_triple_single_quotes ... ok
+test test_triple_double_quotes_with_double_quote_inside ... ok
+test test_triple_single_quotes_with_double_quote_inside ... ok
+test test_triple_single_quotes_with_escape ... ok
+test test_unlimited_quotes_10 ... ok
+test test_unlimited_quotes_6_with_inner_quotes ... ok
+test test_unlimited_backticks_8 ... ok
+test test_unlimited_quotes_6 ... ok
+test test_whitespace_preserved_in_quotes ... ok
+test test_unlimited_single_quotes_7 ... ok
+
+test result: ok. 44 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/multiline_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/multiline_parser_tests-2bad76783f82e93f)
+
+running 11 tests
+test duplicate_identifiers_test ... ok
+test parse_and_stringify_test ... ok
+test parse_and_stringify_test_2 ... ok
+test test_indented_children ... ok
+test test_complex_structure ... ok
+test test_multiline_simple_links ... ok
+test test_mixed_formats ... ok
+test test_multiline_with_id ... ok
+test test_multiple_top_level_elements ... ok
+test two_links_test ... ok
+test parse_and_stringify_with_less_parentheses_test ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/multiline_quoted_string_tests.rs (/tmp/links-notation-cargo/debug/deps/multiline_quoted_string_tests-86a97bee26de135d)
+
+running 4 tests
+test test_simple_multiline_double_quoted ... ok
+test test_multiline_quoted_as_id ... ok
+test test_multiline_double_quoted_reference ... ok
+test test_simple_multiline_single_quoted ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/nested_indentation_tests.rs (/tmp/links-notation-cargo/debug/deps/nested_indentation_tests-703d5c13968ab48c)
+
+running 8 tests
+test blank_lines_inside_parentheses_are_skipped ... ok
+test employee_records_keep_their_fields ... ok
+test parentheses_keep_record_boundaries ... ok
+test parentheses_keep_several_records_separate ... ok
+test parentheses_reproduce_root_indentation ... ok
+test parentheses_with_indented_id_syntax ... ok
+test parentheses_nest_deeply ... ok
+test single_line_parentheses_are_unchanged ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/nested_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/nested_parser_tests-c856fc9843eed429)
+
+running 13 tests
+test simple_significant_whitespace_test ... ok
+test parse_nested_structure_with_indentation ... ok
+test test_deep_nested_structure_roundtrip ... ok
+test significant_whitespace_test ... ok
+test test_complex_indentation ... ok
+test test_indentation_parser ... ok
+test test_indentation_consistency ... ok
+test test_multiple_nested_links_roundtrip ... ok
+test test_nested_indentation_parser ... ok
+test test_three_level_nesting_roundtrip ... ok
+test test_nested_links ... ok
+test two_spaces_sized_whitespace_test ... ok
+test test_indentation_based_children ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/nested_self_reference_tests.rs (/tmp/links-notation-cargo/debug/deps/nested_self_reference_tests-468c9cfd85edba60)
+
+running 2 tests
+test test_self_reference_as_direct_child_works_correctly ... ok
+test test_nested_self_referenced_object_in_pair_value ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/nesting_depth_tests.rs (/tmp/links-notation-cargo/debug/deps/nesting_depth_tests-f770716ad0469639)
+
+running 7 tests
+test group_followed_by_values_keeps_its_structure ... ok
+test closed_groups_read_in_linear_time ... ok
+test unclosed_groups_on_indented_lines_fail_in_linear_time ... ok
+test unclosed_groups_fail_in_linear_time ... ok
+test values_after_groups_read_in_linear_time ... ok
+test parse_lino_to_links_does_not_copy_each_level ... ok
+test values_after_very_deep_groups_read_in_linear_time ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+
+     Running tests/nesting_limit_tests.rs (/tmp/links-notation-cargo/debug/deps/nesting_limit_tests-702c06c0f337d2d4)
+
+running 10 tests
+test test_parentheses_past_the_limit_are_refused_at_the_group_that_is_too_deep ... ok
+test test_groups_and_indentation_add_up ... ok
+test test_indentation_past_the_limit_is_refused_at_the_line_that_is_too_deep ... ok
+test test_groups_in_value_position_count_like_any_other_group ... ok
+test test_default_limit_is_shared_by_every_implementation ... ok
+test test_trailing_spaces_on_a_deep_line_are_not_a_deeper_line ... ok
+test test_parentheses_up_to_the_limit_are_accepted ... ok
+test test_stream_parser_reports_where_the_nesting_is_too_deep ... ok
+test test_indentation_up_to_the_limit_is_accepted ... ok
+test test_refuses_a_document_far_past_the_limit_without_overflowing_the_stack ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.22s
+
+     Running tests/parse_error_position_tests.rs (/tmp/links-notation-cargo/debug/deps/parse_error_position_tests-0bdea7b863b029b7)
+
+running 17 tests
+test test_both_entry_points_report_the_same_position ... ok
+test test_message_quotes_one_line_rather_than_the_rest_of_the_document ... ok
+test test_a_document_that_parses_reports_nothing ... ok
+test test_error_display_starts_with_the_position ... ok
+test test_nom_internals_stay_out_of_the_message ... ok
+test test_lone_cr_counts_as_one_line_break_in_diagnostics ... ok
+test test_column_counts_characters_rather_than_bytes ... ok
+test test_message_of_a_long_line_stays_a_message ... ok
+test test_offset_agrees_with_the_javascript_port ... ok
+test test_reports_an_unmatched_closing_parenthesis ... ok
+test test_points_at_the_defect_rather_than_at_the_line_it_starts_on ... ok
+test test_reports_the_end_of_the_document_when_a_group_is_never_closed ... ok
+test test_reports_the_line_a_late_defect_is_on ... ok
+test test_snippet_points_a_caret_at_the_offending_character ... ok
+test test_says_what_could_have_stood_there ... ok
+test test_summary_reads_as_a_sentence ... ok
+test test_reports_the_line_and_column_of_the_defect ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/reference_fidelity_tests.rs (/tmp/links-notation-cargo/debug/deps/reference_fidelity_tests-4fafd1fd4edc3bed)
+
+running 4 tests
+test malformed_reference_literals_are_rejected ... ok
+test binary_reference_fidelity ... ok
+test native_reference_fidelity ... ok
+test reference_literals_at_every_chunk_split ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.77s
+
+     Running tests/shared_text_parity_tests.rs (/tmp/links-notation-cargo/debug/deps/shared_text_parity_tests-d5061c170157b0df)
+
+running 1 test
+test shared_text_parity ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/single_line_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/single_line_parser_tests-d373a5fcb612712b)
+
+running 39 tests
+test bug_test_1 ... ok
+test parse_multiline_link ... ok
+test parse_reference_with_colon_and_values ... ok
+test quoted_references_test ... ok
+test parse_simple_reference ... ok
+test parse_values_only ... ok
+test parse_quoted_references ... ok
+test quoted_references_with_spaces_test ... ok
+test single_link_test ... ok
+test test_deeply_nested ... ok
+test test_link_with_id ... ok
+test test_hyphenated_identifiers ... ok
+test test_multiline_without_id ... ok
+test test_link_without_id_single_line ... ok
+test test_link_without_id_multi_line ... ok
+test test_nested_links ... ok
+test test_parse_quoted_references_values_only ... ok
+test test_parse_values_only_standalone_colon ... ok
+test test_quoted_reference_parser ... ok
+test test_multi_line_link_with_id ... ok
+test test_quoted_references ... ok
+test test_quoted_references_with_special_chars ... ok
+test test_quoted_references_with_spaces_in_link ... ok
+test test_quoted_reference ... ok
+test test_simple_ref ... ok
+test test_simple_reference ... ok
+test test_multiple_words_in_quotes ... ok
+test test_simple_reference_parser ... ok
+test test_single_line_link ... ok
+test test_single_line_without_id ... ok
+test test_single_line_with_id ... ok
+test test_single_line_link_with_id ... ok
+test test_single_quoted_references ... ok
+test test_singlet_link ... ok
+test test_singlet_link_parser ... ok
+test test_special_characters_in_quotes ... ok
+test test_value_link ... ok
+test triplet_single_link_test ... ok
+test test_value_link_parser ... ok
+
+test result: ok. 39 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/stream_parser_tests.rs (/tmp/links-notation-cargo/debug/deps/stream_parser_tests-c10bd541570f51b7)
+
+running 6 tests
+test provides_lazy_adapters ... ok
+test rejects_writes_after_finish ... ok
+test matches_canonical_parser_one_symbol_at_a_time ... ok
+test supports_line_chunks_final_record_and_position ... ok
+test emits_only_complete_records ... ok
+test supports_drain_reset_and_bounded_memory ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/tuple_tests.rs (/tmp/links-notation-cargo/debug/deps/tuple_tests-f9b2667dd2360fab)
+
+running 47 tests
+test test_empty_string_tuple ... ok
+test test_anonymous_link_from_two_lino ... ok
+test test_lino_anonymous_static_method ... ok
+test test_lino_builder_chaining ... ok
+test test_lino_builder_large_link ... ok
+test test_lino_builder_linos_batch ... ok
+test test_complex_example_matching_csharp ... ok
+test test_four_lino_anonymous_link ... ok
+test test_lino_builder_values_batch ... ok
+test test_lino_builder_basic ... ok
+test test_lino_builder_anonymous ... ok
+test test_anonymous_link_from_three_lino ... ok
+test test_lino_builder_with_lino ... ok
+test test_lino_new_arbitrary_size ... ok
+test test_lino_new_static_method ... ok
+test test_lino_reference_static_method ... ok
+test test_tuple_10_elements_str ... ok
+test test_tuple_11_elements_str ... ok
+test test_tuple_12_elements_lino ... ok
+test test_tuple_12_elements_str ... ok
+test test_tuple_4_elements ... ok
+test test_tuple_5_elements_lino ... ok
+test test_tuple_5_elements_str ... ok
+test test_tuple_3_elements ... ok
+test test_tuple_5_elements_string ... ok
+test test_nested_links_with_tuples ... ok
+test test_tuple_6_elements_str ... ok
+test test_tuple_collection_format ... ok
+test test_tuple_7_elements_str ... ok
+test test_tuple_9_elements_str ... ok
+test test_tuple_id_vec_lino_named_link ... ok
+test test_tuple_8_elements_str ... ok
+test test_tuple_ergonomics ... ok
+test test_tuple_id_vec_str_named_link ... ok
+test test_tuple_id_vec_string_named_link ... ok
+test test_tuple_to_link_basic ... ok
+test test_tuple_large_with_nested_links ... ok
+test test_tuple_large_with_str_lino_mixed ... ok
+test test_tuple_with_lino_values ... ok
+test test_tuple_to_link_with_owned_strings ... ok
+test test_tuple_with_mixed_lino_types ... ok
+test test_vec_large_arbitrary_size ... ok
+test test_vec_str_to_anonymous_link ... ok
+test test_vec_lino_to_anonymous_link ... ok
+test test_vec_string_to_anonymous_link ... ok
+test test_tuple_with_nested_link_values ... ok
+test test_tuple_with_special_characters ... ok
+
+test result: ok. 47 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+   Doc-tests links_notation
+
+running 21 tests
+test links-notation/src/binary/mod.rs - binary (line 6) ... ok
+test links-notation/src/lib.rs - LiNo<String> (line 1946) ... ok
+test links-notation/src/comments.rs - comments::strip_comments (line 34) ... ok
+test links-notation/src/lib.rs - NestingTooDeep (line 174) ... ok
+test links-notation/src/lib.rs - LiNo<T>::reference (line 390) ... ok
+test links-notation/src/lib.rs - LiNo<String> (line 1907) ... ok
+test links-notation/src/lib.rs - LiNo<T>::new (line 360) ... ok
+test links-notation/src/lib.rs - LiNo<T>::anonymous (line 376) ... ok
+test links-notation/src/lib.rs - LiNoBuilder (line 407) ... ok
+test links-notation/src/lib.rs - impl_tuple_from (line 1181) ... ok
+test links-notation/src/lib.rs - SyntaxError::snippet (line 145) ... ok
+test links-notation/src/lib.rs - SyntaxError::summary (line 110) ... ok
+test links-notation/src/lib.rs - SyntaxError (line 80) ... ok
+test links-notation/src/lib.rs - parse_lino (line 928) ... ok
+test links-notation/src/lib.rs - VERSION (line 32) ... ok
+test links-notation/src/parser_config.rs - parser_config::ParserConfig::new (line 32) ... ok
+test links-notation/src/lib.rs - parse_lino_to_links_with_config (line 992) ... ok
+test links-notation/src/lib.rs - parse_lino_with_config (line 941) ... ok
+test links-notation/src/parser_config.rs - parser_config::ParserConfig::without_comments (line 45) ... ok
+test links-notation/src/parser_config.rs - parser_config::ParserConfig::with_max_depth (line 76) ... ok
+test links-notation/src/parser_config.rs - parser_config::ParserConfig::with_comments (line 58) ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+

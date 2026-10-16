@@ -4,7 +4,7 @@
 //! same input, so the two implementations can be held to the same contract
 //! ([#302](https://github.com/link-foundation/links-notation/issues/302)).
 
-use links_notation::{parse_lino, parse_lino_to_links, ParseError, SyntaxError};
+use links_notation::{ParseError, SyntaxError, parse_lino, parse_lino_to_links};
 
 fn syntax_error(document: &str) -> SyntaxError {
     match parse_lino(document) {

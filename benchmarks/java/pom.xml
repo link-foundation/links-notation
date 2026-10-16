@@ -20,10 +20,10 @@
 
     <dependencies>
         <dependency>
-            <!-- The parser under measurement, built from ../../java by `mvn install`. -->
+            <!-- The parser under measurement, built from ../../java by `java/mvnw install`. -->
             <groupId>io.github.link-foundation</groupId>
             <artifactId>links-notation</artifactId>
-            <version>0.26.0</version>
+            <version>0.27.0</version>
         </dependency>
         <dependency>
             <!-- JTokkit carries the BPE ranks with the jar, so counting a token
@@ -41,6 +41,27 @@
 
     <build>
         <plugins>
+            <plugin>
+                <!-- Same floor as ../../java/pom.xml: the oldest Maven these plugins accept. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.6.3</version>
+                <executions>
+                    <execution>
+                        <id>require-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.6.3</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

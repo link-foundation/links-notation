@@ -9,8 +9,8 @@
 use links_notation::comments::strip_comments;
 use links_notation::format_config::FormatConfig;
 use links_notation::{
-    format_links_with_config, parse_lino, parse_lino_to_links, parse_lino_to_links_with_config,
-    LiNo, ParserConfig,
+    LiNo, ParserConfig, format_links_with_config, parse_lino, parse_lino_to_links,
+    parse_lino_to_links_with_config,
 };
 
 /// Render a parsed node unambiguously: every reference is wrapped in angle

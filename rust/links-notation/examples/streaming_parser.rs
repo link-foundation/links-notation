@@ -2,8 +2,8 @@
 
 use links_notation::StreamParser;
 use std::sync::{
-    atomic::{AtomicUsize, Ordering},
     Arc,
+    atomic::{AtomicUsize, Ordering},
 };
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {

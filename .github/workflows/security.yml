@@ -18,7 +18,7 @@ env:
 jobs:
   codeql:
     name: CodeQL (${{ matrix.language }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     concurrency:
       group: ci-security-${{ github.ref }}-codeql-${{ matrix.language }}
@@ -53,20 +53,20 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4.38.3
+        uses: github/codeql-action/init@v4.39.0
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
           config-file: ./.github/codeql/codeql-config.yml
       - name: Analyze
-        uses: github/codeql-action/analyze@v4.38.3
+        uses: github/codeql-action/analyze@v4.39.0
         with:
           category: /language:${{ matrix.language }}
 
   dependencyReview:
     name: Dependency review
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-security-${{ github.ref }}-dependency-review
@@ -86,7 +86,7 @@ jobs:
 
   secrets:
     name: Secret scan
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     concurrency:
       group: ci-security-${{ github.ref }}-secrets
@@ -115,7 +115,7 @@ jobs:
 
   npmAudit:
     name: Audit npm lock (${{ matrix.directory }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-security-${{ github.ref }}-npm-audit-${{ matrix.directory }}
@@ -132,7 +132,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v7.1.0
         with:
-          node-version: '22'
+          node-version: '24'
       - name: Audit the committed lockfile
         working-directory: ${{ matrix.directory }}
         run: npm audit --package-lock-only --audit-level=high

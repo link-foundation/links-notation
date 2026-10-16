@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   latest-stable:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7.0.1
@@ -25,9 +25,15 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v7.0.0
         with:
-          python-version: '3.13'
+          python-version: '3.15'
       - name: Test the dependency checker without network access
         run: python experiments/issue-325/test_dependency_check.py
+      # A manifest Dependabot is not told about never receives an update; the
+      # old config missed 35 committed manifests (issue #348).
+      - name: Require a Dependabot entry for every committed manifest
+        run: |
+          python experiments/issue-348/test_dependabot_check.py
+          python scripts/ci/check-dependabot.py
       - name: Require current stable dependencies and actions
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

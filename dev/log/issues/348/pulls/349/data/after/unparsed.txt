@@ -1,0 +1,1 @@
+dev/log/issues/330/pulls/331/templates/python/pyproject.toml: unsupported dependency requirement: /tmp/tmpigsz572f/scan/pyproject.toml: hatchling

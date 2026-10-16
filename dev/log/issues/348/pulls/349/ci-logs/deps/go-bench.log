@@ -1,0 +1,1 @@
+go: wrote results/go.json; every measurement agrees with the Rust results.

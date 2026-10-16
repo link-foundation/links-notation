@@ -6,7 +6,7 @@
 //! Python, C#, Go, Java and PHP suites, so a document written by one
 //! implementation reads the same in all of them.
 
-use links_notation::{format_links, parse_lino_to_links, LiNo};
+use links_notation::{LiNo, format_links, parse_lino_to_links};
 
 /// Render a parsed node unambiguously: every reference is wrapped in angle
 /// brackets so an empty one is visible as `<>`.

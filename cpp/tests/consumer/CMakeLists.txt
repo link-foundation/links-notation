@@ -1,7 +1,7 @@
 # Builds against links_notation the way a downstream project does: through
 # find_package on an installed copy, or, when LINKS_NOTATION_SOURCE_DIR is
 # set, by adding its sources as FetchContent_MakeAvailable would.
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.16...4.4)
 project(links_notation_consumer LANGUAGES CXX)
 
 set(LINKS_NOTATION_SOURCE_DIR "" CACHE PATH "Build links_notation from this source tree")

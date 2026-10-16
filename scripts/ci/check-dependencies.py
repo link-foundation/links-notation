@@ -41,6 +41,9 @@ ACTIVE = (
 # A stale input is as outdated as a stale action ref, but it is not part of
 # the `uses:` line, so it is listed here explicitly.
 TOOL_INPUTS = {"trufflesecurity/trufflehog": "version"}
+# The Maven Wrapper's two pins, under the coordinates Maven Central lists.
+MAVEN_DISTRIBUTION = "org.apache.maven:apache-maven"
+MAVEN_WRAPPER = "org.apache.maven.wrapper:maven-wrapper"
 STABLE = re.compile(r"^v?(\d+(?:\.\d+)*)(?:\.RELEASE)?$")
 
 
@@ -73,22 +76,6 @@ def latest(ecosystem, name):
     if ecosystem == "npm":
         data = json.loads(get("https://registry.npmjs.org/" + encoded))
         return data["dist-tags"]["latest"]
-    if ecosystem == "pypi-py39":
-        data = json.loads(get("https://pypi.org/pypi/" + encoded + "/json"))
-        versions = []
-        for version, files in data["releases"].items():
-            if (
-                not version_key(version)
-                or not files
-                or all(f.get("yanked") for f in files)
-            ):
-                continue
-            requirement = files[0].get("requires_python") or ""
-            minimum = re.search(r">=\s*(3\.\d+)", requirement)
-            if minimum and tuple(map(int, minimum[1].split("."))) > (3, 9):
-                continue
-            versions.append(version)
-        return newest(versions)
     if ecosystem == "pypi":
         return json.loads(get("https://pypi.org/pypi/" + encoded + "/json"))["info"][
             "version"
@@ -200,7 +187,13 @@ def manifests(root=ROOT):
                         .values()
                     ):
                         requirements += items
+                    project = data.get("project", {}).get("name")
                     for requirement in requirements:
+                        if re.fullmatch(
+                            re.escape(project or "") + r"\[[^]]+\]", requirement
+                        ):
+                            # An extra that combines this project's other extras.
+                            continue
                         match = re.fullmatch(
                             r"([\w.-]+)(?:\[[^]]+\])?([><=~!].*)", requirement
                         )
@@ -208,12 +201,7 @@ def manifests(root=ROOT):
                             raise ValueError(
                                 f"unsupported dependency requirement: {path}: {requirement}"
                             )
-                        if "python_version < '3.10'" in match[2]:
-                            # setuptools 84 dropped Python 3.9. The compatibility
-                            # floor is checked against the latest 3.9 release.
-                            add(path, "pypi-py39", match[1], match[2])
-                        else:
-                            add(path, "pypi", match[1], match[2])
+                        add(path, "pypi", match[1], match[2])
                 else:
                     for section in (
                         "dependencies",
@@ -242,12 +230,7 @@ def manifests(root=ROOT):
                     )
                     if not match:
                         raise ValueError(f"unpinned dependency: {path}: {requirement}")
-                    if "python_version < '3.10'" in match[2]:
-                        # setuptools 84 dropped Python 3.9. The compatibility
-                        # floor is checked against the latest 3.9 release.
-                        add(path, "pypi-py39", match[1], match[2])
-                    else:
-                        add(path, "pypi", match[1], match[2])
+                    add(path, "pypi", match[1], match[2])
             elif path.suffix == ".csproj":
                 for element in ET.fromstring(path.read_text()).iter("PackageReference"):
                     add(
@@ -294,6 +277,20 @@ def manifests(root=ROOT):
                         "com.google.googlejavaformat:google-java-format",
                         element.text,
                     )
+            elif path.name == "maven-wrapper.properties":
+                # ./mvnw downloads this Maven, so it is the build's toolchain.
+                for key, _, value in (
+                    line.partition("=") for line in path.read_text().splitlines()
+                ):
+                    if key == "wrapperVersion":
+                        add(path, "maven", MAVEN_WRAPPER, value.strip())
+                    elif key == "distributionUrl":
+                        match = re.search(
+                            r"/org/apache/maven/apache-maven/([^/]+)/", value
+                        )
+                        if not match:
+                            raise ValueError(f"unsupported distributionUrl: {path}")
+                        add(path, "maven", MAVEN_DISTRIBUTION, match[1])
             elif path.name == "composer.json":
                 data = json.loads(path.read_text())
                 local = {"link-foundation/links-notation"}
@@ -358,6 +355,20 @@ def manifests(root=ROOT):
             precommit.read_text(),
         ):
             add(precommit, "github", match[1], match[2])
+        # pre-commit builds a hook's environment once per machine, so an
+        # unpinned additional dependency freezes whichever release was newest
+        # at that moment.
+        for block in re.finditer(
+            r"^(\s*)additional_dependencies:\s*\n((?:\1\s+-[^\n]*\n)+)",
+            precommit.read_text(),
+            re.M,
+        ):
+            for item in re.findall(r"-\s*['\"]?([^'\"\s]+)", block[2]):
+                pin = re.fullmatch(r"(@?[^@]+)@(\d[^@]*)", item)
+                if pin:
+                    add(precommit, "npm", pin[1], pin[2])
+                else:
+                    add(precommit, "npm", item, None)
     return list(dict.fromkeys(found))
 
 
@@ -449,12 +460,17 @@ def update(dependency, release):
             source,
         )
     elif dependency.ecosystem == "npm":
+        prefix = (
+            r"(-\s*['\"]?"
+            if path.name == ".pre-commit-config.yaml"
+            else r"(npm install -g "
+        )
         source = re.sub(
-            r"(npm install -g " + name + r"@)" + re.escape(original) + r"(?=\s|$)",
+            prefix + name + r"@)" + re.escape(original) + r"(?=['\"\s]|$)",
             lambda m: m[1] + replacement,
             source,
         )
-    elif dependency.ecosystem in {"pypi", "pypi-py39", "go"}:
+    elif dependency.ecosystem in {"pypi", "go"}:
         source = re.sub(
             r"(" + name + r"(?:\[[^]]+\])?)" + re.escape(original),
             lambda m: m[1] + replacement,
@@ -476,6 +492,28 @@ def update(dependency, release):
             + r"\"",
             lambda m: m[1] + replacement + '"',
             source,
+        )
+    elif path.name == "maven-wrapper.properties":
+        if dependency.name == MAVEN_WRAPPER:
+            # mvnw and mvnw.cmd belong to the wrapper release, so only the
+            # wrapper plugin can update all three files consistently.
+            print(
+                f"  regenerate {path.parents[2].relative_to(ROOT)}: ./mvnw -q "
+                f"wrapper:wrapper -Dtype=only-script -DwrapperVersion={release}"
+            )
+            return
+        url = re.search(r"^distributionUrl=(\S+)$", source, re.M)[1]
+        updated = url.replace("/" + original + "/", "/" + release + "/").replace(
+            "-" + original + "-", "-" + release + "-"
+        )
+        # The wrapper checks the archive against this hash before running it.
+        digest = hashlib.sha256(get(updated, accept="*/*")).hexdigest()
+        source = source.replace(url, updated)
+        source = re.sub(
+            r"^(distributionSha256Sum=)[0-9a-fA-F]{64}$",
+            lambda m: m[1] + digest,
+            source,
+            flags=re.M,
         )
     elif dependency.ecosystem == "maven":
         group, artifact = dependency.name.split(":")

@@ -1,0 +1,88 @@
+++ bun install --cwd js --frozen-lockfile
+bun install v1.4.3 (c6da4a4d3)
+
+Checked 89 installs across 109 packages (no changes) [57.00ms]
+++ bun run --cwd js format:check
+$ prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+++ bun run --cwd js lint
+$ eslint src/ tests/
+++ bun run --cwd js build
+$ bun run build:grammar && bun build src/index.js --outdir=dist --target=node
+$ peggy --format es -o src/parser-generated.js src/grammar.pegjs
+Bundled 15 modules in 166ms
+
+  index.js  111.63 KB  (entry point)
+
+++ bun test js/tests
+++ tail -5
+
+ 308 pass
+ 0 fail
+ 15716 expect() calls
+Ran 308 tests across 28 files. [9.79s]
+++ bun scripts/ci/check-js-gate.mjs
+Every non-JS entry point waits for successful same-commit JS.
+++ tail -3
+++ bun test experiments/issue-339/ci-contract.test.mjs
+ 0 fail
+ 38 expect() calls
+Ran 25 tests across 1 file. [1191.00ms]
+++ node scripts/ci/check-parity.mjs
+20 features, 14 shared text cases, 8 languages; 0 violations.
+++ node --test experiments/issue-339/parity-contract.test.mjs experiments/issue-339/release-audit.test.mjs
+++ tail -8
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1452.693505
+++ tail -3
+++ python3 experiments/issue-339/test_workflow_contract.py
+Ran 4 tests in 0.010s
+
+OK
+++ node scripts/version-consistency.mjs
+js: 0.26.0
+python: 0.26.0
+rust: 0.26.0
+csharp: 0.26.0
+go: 0.26.0
+java: 0.26.0
+php: 0.26.0
+cpp: 0.26.0
+
+All 8 implementations declare 0.26.0.
+++ node scripts/ci/php-distribution.mjs
+Root PHP distribution metadata matches the native package.
+++ node --test experiments/issue-339/php-distribution.test.mjs
+++ tail -3
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 339.946264
+++ python3 experiments/issue-332/test_test_comparison.py
+++ tail -3
+Ran 1 test in 0.113s
+
+OK
+++ node scripts/create-test-case-comparison.mjs --check
+The generated test documents are up to date.
+
+================================================================================
+SUMMARY
+================================================================================
+Python:      245 tests across 23 categories
+JavaScript:  303 tests across 28 categories
+Rust:        401 tests across 29 categories
+C#:          295 tests across 27 categories
+Go:          139 tests across 17 categories
+Java:        185 tests across 16 categories
+PHP:         235 tests across 23 categories
+C++:         346 tests across 29 categories
+================================================================================
+++ echo FINAL 0
+FINAL 0

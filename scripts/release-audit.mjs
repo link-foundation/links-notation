@@ -9,24 +9,31 @@ export function registryTargets(version) {
   return [
     {
       name: "js",
+      setup:
+        "configure npm trusted publishing for js.yml or the NPM_TOKEN secret",
       registry: "npm",
       urls: [`https://registry.npmjs.org/links-notation/${version.js}`],
       valid: (body) => body.version === version.js,
     },
     {
       name: "python",
+      setup:
+        "configure PyPI trusted publishing for js.yml with PYPI_TRUSTED_PUBLISHING=true, or the PYPI_TOKEN secret",
       registry: "PyPI",
       urls: [`https://pypi.org/pypi/links-notation/${version.python}/json`],
       valid: (body) => body.info?.version === version.python,
     },
     {
       name: "rust",
+      setup:
+        "configure crates.io trusted publishing for js.yml with CRATES_IO_TRUSTED_PUBLISHING=true, or the CARGO_TOKEN secret",
       registry: "crates.io",
       urls: [`https://crates.io/api/v1/crates/links-notation/${version.rust}`],
       valid: (body) => body.version?.num === version.rust,
     },
     {
       name: "csharp",
+      setup: "configure the NUGET_API_KEY secret",
       registry: "NuGet",
       urls: [
         "https://api.nuget.org/v3-flatcontainer/link.foundation.links.notation/index.json",
@@ -36,6 +43,7 @@ export function registryTargets(version) {
     },
     {
       name: "go",
+      setup: `check the publish-go log for the go/v${version.go} tag push`,
       registry: "Go proxy",
       urls: [
         `https://proxy.golang.org/github.com/link-foundation/links-notation/go/@v/v${version.go}.info`,
@@ -44,6 +52,8 @@ export function registryTargets(version) {
     },
     {
       name: "java",
+      setup:
+        "configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace",
       registry: "Maven Central",
       urls: [
         `https://repo1.maven.org/maven2/io/github/link-foundation/links-notation/${version.java}/links-notation-${version.java}.pom`,
@@ -56,6 +66,8 @@ export function registryTargets(version) {
     },
     {
       name: "php",
+      setup:
+        "submit the repository once at https://packagist.org/packages/submit and configure the PACKAGIST_USERNAME and PACKAGIST_TOKEN secrets",
       registry: "Packagist",
       urls: [
         "https://repo.packagist.org/p2/link-foundation/links-notation.json",
@@ -69,6 +81,7 @@ export function registryTargets(version) {
       // C++ has no central registry: the release's source archive is what
       // CMake's FetchContent downloads, so its presence is the publication.
       name: "cpp",
+      setup: `check the publish-cpp log for the cpp_${version.cpp} release upload`,
       registry: "GitHub Releases",
       urls: [
         `https://github.com/link-foundation/links-notation/releases/download/cpp_${version.cpp}/links-notation-cpp-${version.cpp}.tar.gz`,
@@ -129,8 +142,12 @@ export async function audit({
         } else await response.body?.cancel();
       }
       if (!present) {
+        // On main the version must exist, so the error names the fix.
+        const absent = `${target.name}: ${record.version} is absent from ${target.registry}`;
         report(
-          `${target.name}: ${record.version} is absent from ${target.registry}`,
+          expectPublished
+            ? `${absent}. To publish it, ${target.setup}, then re-run the main CI run (docs/releases.md).`
+            : absent,
           expectPublished,
         );
         continue;

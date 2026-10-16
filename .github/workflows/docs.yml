@@ -21,7 +21,7 @@ jobs:
     # docs/comparison/comparison.json. This job proves it: it regenerates the
     # documents and the SVGs and fails if the committed ones differ, which is
     # what stopped the YAML from quietly growing fields no other document had.
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-docs-${{ github.ref }}-comparison
@@ -32,12 +32,12 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v7.1.0
         with:
-          node-version: '22'
+          node-version: '24'
           cache: npm
           cache-dependency-path: docs/comparison/package-lock.json
       - uses: actions/setup-python@v7.0.0
         with:
-          python-version: '3.13'
+          python-version: '3.15'
       - name: Install the generator dependencies
         working-directory: docs/comparison
         run: npm ci
@@ -60,7 +60,7 @@ jobs:
     # test. It is generated from the test files themselves, so a test added in
     # one language and forgotten in the others shows up as a gap in the table
     # rather than as a document that quietly went stale.
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-docs-${{ github.ref }}-test-cases
@@ -71,7 +71,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v7.1.0
         with:
-          node-version: '22'
+          node-version: '24'
       - name: Test comparison extraction
         run: python3 experiments/issue-332/test_test_comparison.py
       - name: Check the test case comparison

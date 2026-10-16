@@ -1,6 +1,6 @@
 #[cfg(feature = "macro")]
 mod macro_tests {
-    use links_notation::{lino, LiNo};
+    use links_notation::{LiNo, lino};
 
     // ============================================================
     // Tests for String Literal Syntax (Original)

@@ -528,7 +528,7 @@ impl<T: ToString + Clone> LiNo<T> {
 
                 // Link with only ID, no values
                 if values.is_empty() {
-                    if let Some(ref id_val) = id {
+                    if let Some(id_val) = id {
                         let escaped_id = escape_reference(&id_val.to_string());
                         return if config.less_parentheses && !needs_parentheses(&id_val.to_string())
                         {
@@ -556,7 +556,7 @@ impl<T: ToString + Clone> LiNo<T> {
                         .collect::<Vec<_>>()
                         .join(" ");
 
-                    let test_line = if let Some(ref id_val) = id {
+                    let test_line = if let Some(id_val) = id {
                         let id_str = escape_reference(&id_val.to_string());
                         if config.less_parentheses {
                             format!("{}: {}", id_str, values_str)
@@ -1086,8 +1086,8 @@ fn group_consecutive_links(links: &[LiNo<String>]) -> Vec<LiNo<String>> {
 
         // Look ahead for consecutive links with same ID
         if let LiNo::Link {
-            id: Some(ref current_id),
-            values: ref current_values,
+            id: Some(current_id),
+            values: current_values,
         } = current
         {
             if !current_values.is_empty() {
@@ -1097,8 +1097,8 @@ fn group_consecutive_links(links: &[LiNo<String>]) -> Vec<LiNo<String>> {
 
                 while j < links.len() {
                     if let LiNo::Link {
-                        id: Some(ref next_id),
-                        values: ref next_values,
+                        id: Some(next_id),
+                        values: next_values,
                     } = &links[j]
                     {
                         if next_id == current_id && !next_values.is_empty() {
@@ -1148,7 +1148,7 @@ fn format_value<T: ToString>(value: &LiNo<T>) -> String {
         LiNo::Link { id, values } => {
             // Simple link with just an ID - don't wrap in extra parentheses
             if values.is_empty() {
-                if let Some(ref id_val) = id {
+                if let Some(id_val) = id {
                     return escape_reference(&id_val.to_string());
                 }
                 return String::new();

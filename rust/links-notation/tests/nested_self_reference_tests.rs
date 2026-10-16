@@ -1,5 +1,5 @@
-use links_notation::parse_lino_to_links;
 use links_notation::LiNo;
+use links_notation::parse_lino_to_links;
 
 #[test]
 fn test_nested_self_referenced_object_in_pair_value() {

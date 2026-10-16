@@ -23,7 +23,7 @@ defaults:
 
 jobs:
   lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-cpp-${{ github.ref }}-lint
@@ -50,15 +50,15 @@ jobs:
       matrix:
         include:
           - name: gcc
-            os: ubuntu-24.04
+            os: ubuntu-26.04
             cxx: g++
           - name: clang
-            os: ubuntu-24.04
+            os: ubuntu-26.04
             cxx: clang++
           - name: msvc
             os: windows-2025
           - name: apple-clang
-            os: macos-15
+            os: macos-26
     concurrency:
       group: ci-cpp-${{ github.ref }}-test-${{ matrix.name }}
       cancel-in-progress: false
@@ -95,10 +95,71 @@ jobs:
             -DLINKS_NOTATION_SOURCE_DIR:PATH="$GITHUB_WORKSPACE/cpp"
           cmake --build "$RUNNER_TEMP/sources" --config RelWithDebInfo
           ctest --test-dir "$RUNNER_TEMP/sources" --build-config RelWithDebInfo --output-on-failure
+      # The release asset is built by the script publish-cpp.yml runs. The
+      # cpp_0.26.0 asset was empty because the archive command depended on the
+      # job's working directory, and only the release job ever ran it.
+      - name: Consume the release archive
+        if: matrix.name == 'gcc'
+        run: |
+          set -euo pipefail
+          bash "$GITHUB_WORKSPACE/scripts/ci/cpp-release-archive.sh" "$RUNNER_TEMP/release"
+          VERSION=$(tr -d '[:space:]' < VERSION)
+          tar -xzf "$RUNNER_TEMP/release/links-notation-cpp-$VERSION.tar.gz" -C "$RUNNER_TEMP/release"
+          cmake -S tests/consumer -B "$RUNNER_TEMP/archive" -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DLINKS_NOTATION_SOURCE_DIR:PATH="$RUNNER_TEMP/release/links-notation-cpp-$VERSION"
+          cmake --build "$RUNNER_TEMP/archive" --config RelWithDebInfo
+          ctest --test-dir "$RUNNER_TEMP/archive" --build-config RelWithDebInfo --output-on-failure
+
+  # README.md promises CMake 3.16, while every runner ships CMake 4. Without
+  # this job nothing tested that promise, and a 3.24-only FetchContent keyword
+  # had already broken the test build on CMake 3.16-3.23 (issue #348).
+  cmake-floor:
+    needs: [lint]
+    runs-on: ubuntu-26.04
+    timeout-minutes: 25
+    concurrency:
+      group: ci-cpp-${{ github.ref }}-cmake-floor
+      cancel-in-progress: false
+    env:
+      # The minimum in cmake_minimum_required(VERSION 3.16...), at its last
+      # patch release; the hash is Kitware's cmake-3.16.9-SHA-256.txt entry.
+      CMAKE_FLOOR: "3.16.9"
+      CMAKE_FLOOR_SHA256: 96d79367dcafb47d606573a4687021d3cb18dd53d83458fc1d6d9c89bf31b553
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Install the oldest supported CMake
+        run: |
+          set -euo pipefail
+          archive="cmake-$CMAKE_FLOOR-Linux-x86_64"
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/$archive.tar.gz" \
+            "https://github.com/Kitware/CMake/releases/download/v$CMAKE_FLOOR/$archive.tar.gz"
+          echo "$CMAKE_FLOOR_SHA256  $RUNNER_TEMP/$archive.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/$archive.tar.gz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/$archive/bin" >> "$GITHUB_PATH"
+      - name: Configure
+        run: |
+          cmake --version
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLINKS_NOTATION_WARNINGS_AS_ERRORS=ON
+      - name: Build
+        run: cmake --build build --parallel
+      # ctest --test-dir arrived in CMake 3.20.
+      - name: Test
+        working-directory: cpp/build
+        run: ctest --output-on-failure --parallel 4
+      - name: Consume the sources
+        run: |
+          set -euo pipefail
+          cmake -S tests/consumer -B "$RUNNER_TEMP/sources" -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DLINKS_NOTATION_SOURCE_DIR:PATH="$GITHUB_WORKSPACE/cpp"
+          cmake --build "$RUNNER_TEMP/sources"
+          cd "$RUNNER_TEMP/sources" && ctest --output-on-failure
 
   sanitizers:
     needs: [lint]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 25
     concurrency:
       group: ci-cpp-${{ github.ref }}-sanitizers

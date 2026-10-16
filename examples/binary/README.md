@@ -19,7 +19,7 @@ empty identifiers and groups. The additional 91 documents exercise the shared
 all three quote kinds, controls, multiline strings and reserved literal prefixes.
 
 The default run requires all eight toolchains. `--rust-csharp-only` runs the
-original two-language check. `MAVEN_COMMAND` may name an alternative Maven
+original two-language check. `MAVEN_COMMAND` may name a Maven other than the `java/mvnw` wrapper
 executable. Each program can also be run separately to inspect its output:
 
 ```sh
@@ -30,7 +30,7 @@ node examples/binary/js.mjs
 bun run examples/binary/typescript.ts # Optional typed example
 php examples/binary/php.php
 (cd go && go run ./examples/binary)
-mvn -q -f java/pom.xml compile
+java/mvnw -q -f java/pom.xml compile
 java -cp java/target/classes examples/binary/java/BinaryExample.java
 cmake -S cpp -B cpp/build && cmake --build cpp/build --target binary_lino
 cpp/build/examples/binary_lino examples/binary/corpus.txt

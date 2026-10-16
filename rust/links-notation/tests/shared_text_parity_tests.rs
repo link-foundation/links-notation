@@ -1,4 +1,4 @@
-use links_notation::{format_links, parse_lino_to_links, LiNo, StreamParser};
+use links_notation::{LiNo, StreamParser, format_links, parse_lino_to_links};
 
 fn decode(hex: &str) -> String {
     String::from_utf8(

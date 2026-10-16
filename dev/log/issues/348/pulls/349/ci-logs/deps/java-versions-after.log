@@ -1,0 +1,220 @@
+[INFO] Scanning for projects...
+[INFO] Loaded 24116 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions-maven-plugin/maven-metadata.xml
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions-maven-plugin/maven-metadata.xml (1.5 kB at 2.8 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions-maven-plugin/2.23.0/versions-maven-plugin-2.23.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions-maven-plugin/2.23.0/versions-maven-plugin-2.23.0.pom (7.9 kB at 155 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions/2.23.0/versions-2.23.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions/2.23.0/versions-2.23.0.pom (17 kB at 334 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions-maven-plugin/2.23.0/versions-maven-plugin-2.23.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions-maven-plugin/2.23.0/versions-maven-plugin-2.23.0.jar (318 kB at 3.5 MB/s)
+[INFO] 
+[INFO] --------------< io.github.link-foundation:links-notation >--------------
+[INFO] Building Links Notation 0.26.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- versions:2.23.0:display-dependency-updates (default-cli) @ links-notation ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-common/2.23.0/versions-common-2.23.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-model-report/2.23.0/versions-model-report-2.23.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-model/2.23.0/versions-model-2.23.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-api/2.23.0/versions-api-2.23.0.pom
+[INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-model-report/2.23.0/versions-model-report-2.23.0.pom (2.6 kB at 53 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-model/2.23.0/versions-model-2.23.0.pom (2.7 kB at 27 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-common/2.23.0/versions-common-2.23.0.pom (5.2 kB at 47 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-api/2.23.0/versions-api-2.23.0.pom (940 B at 7.3 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-core/2.1.0/doxia-core-2.1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-core/2.1.0/doxia-core-2.1.0.pom (2.9 kB at 45 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-i18n/1.2.0/plexus-i18n-1.2.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interactivity-api/1.6.0/plexus-interactivity-api-1.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-i18n/1.2.0/plexus-i18n-1.2.0.pom (3.3 kB at 71 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interactivity-api/1.6.0/plexus-interactivity-api-1.6.0.pom (2.1 kB at 38 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interactivity/1.6.0/plexus-interactivity-1.6.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/woodstox/woodstox-core/7.3.0/woodstox-core-7.3.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/woodstox/woodstox-core/7.3.0/woodstox-core-7.3.0.pom (10 kB at 222 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/79/oss-parent-79.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interactivity/1.6.0/plexus-interactivity-1.6.0.pom (1.8 kB at 22 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.pom (36 kB at 809 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/79/oss-parent-79.pom (24 kB at 349 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.pom (28 kB at 591 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-integration-tools/2.1.0/doxia-integration-tools-2.1.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/105/commons-parent-105.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-integration-tools/2.1.0/doxia-integration-tools-2.1.0.pom (7.5 kB at 144 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/105/commons-parent-105.pom (80 kB at 1.5 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sitetools/2.1.0/doxia-sitetools-2.1.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/eclipse/sisu/org.eclipse.sisu.plexus/1.1.0/org.eclipse.sisu.plexus-1.1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sitetools/2.1.0/doxia-sitetools-2.1.0.pom (12 kB at 238 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/woodstox/stax2-api/4.3.1/stax2-api-4.3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/eclipse/sisu/org.eclipse.sisu.plexus/1.1.0/org.eclipse.sisu.plexus-1.1.0.pom (18 kB at 326 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/eclipse/sisu/sisu-inject/1.1.0/sisu-inject-1.1.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-site-model/2.1.0/doxia-site-model-2.1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/woodstox/stax2-api/4.3.1/stax2-api-4.3.1.pom (5.9 kB at 144 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-site-model/2.1.0/doxia-site-model-2.1.0.pom (5.7 kB at 162 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.14.0/plexus-archiver-4.14.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/80/oss-parent-80.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/eclipse/sisu/sisu-inject/1.1.0/sisu-inject-1.1.0.pom (28 kB at 475 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.14.0/plexus-archiver-4.14.0.pom (6.6 kB at 212 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/eclipse/sisu/org.eclipse.sisu.inject/1.1.0/org.eclipse.sisu.inject-1.1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/80/oss-parent-80.pom (24 kB at 611 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-classworlds/2.12.0/plexus-classworlds-2.12.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/eclipse/sisu/org.eclipse.sisu.inject/1.1.0/org.eclipse.sisu.inject-1.1.0.pom (18 kB at 449 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-classworlds/2.12.0/plexus-classworlds-2.12.0.pom (7.4 kB at 195 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.7.0/plexus-io-3.7.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.7-15/zstd-jni-1.5.7-15.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.7-15/zstd-jni-1.5.7-15.pom (2.2 kB at 79 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.7.0/plexus-io-3.7.0.pom (4.0 kB at 109 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-api/2.23.0/versions-api-2.23.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-api/2.23.0/versions-api-2.23.0.jar (6.7 kB at 229 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-model/2.23.0/versions-model-2.23.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-model-report/2.23.0/versions-model-report-2.23.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-common/2.23.0/versions-common-2.23.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-core/2.1.0/doxia-core-2.1.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-i18n/1.2.0/plexus-i18n-1.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-model/2.23.0/versions-model-2.23.0.jar (13 kB at 391 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interactivity-api/1.6.0/plexus-interactivity-api-1.6.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-model-report/2.23.0/versions-model-report-2.23.0.jar (47 kB at 986 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/woodstox/woodstox-core/7.3.0/woodstox-core-7.3.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-core/2.1.0/doxia-core-2.1.0.jar (183 kB at 3.7 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interactivity-api/1.6.0/plexus-interactivity-api-1.6.0.jar (10 kB at 190 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/versions/versions-common/2.23.0/versions-common-2.23.0.jar (187 kB at 2.5 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-integration-tools/2.1.0/doxia-integration-tools-2.1.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-i18n/1.2.0/plexus-i18n-1.2.0.jar (10 kB at 131 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/woodstox/stax2-api/4.3.1/stax2-api-4.3.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.jar (749 kB at 6.9 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.14.0/plexus-archiver-4.14.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-integration-tools/2.1.0/doxia-integration-tools-2.1.0.jar (51 kB at 445 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/eclipse/sisu/org.eclipse.sisu.inject/1.1.0/org.eclipse.sisu.inject-1.1.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/woodstox/stax2-api/4.3.1/stax2-api-4.3.1.jar (194 kB at 1.4 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.7.0/plexus-io-3.7.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-archiver/4.14.0/plexus-archiver-4.14.0.jar (228 kB at 1.5 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.7-15/zstd-jni-1.5.7-15.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar (934 kB at 5.8 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/eclipse/sisu/org.eclipse.sisu.inject/1.1.0/org.eclipse.sisu.inject-1.1.0.jar (307 kB at 1.7 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/3.7.0/plexus-io-3.7.0.jar (81 kB at 433 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/woodstox/woodstox-core/7.3.0/woodstox-core-7.3.0.jar (1.6 MB at 8.2 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.5.7-15/zstd-jni-1.5.7-15.jar (6.5 MB at 17 MB/s)
+[INFO] No dependencies in Dependencies have newer versions.
+[INFO] 
+[INFO] 
+[INFO] --- versions:2.23.0:display-plugin-updates (default-cli) @ links-notation ---
+[INFO] 
+[INFO] All plugins with a version specified are using the latest versions.
+[INFO] 
+[INFO] All plugins have a version specified.
+[INFO] 
+[WARNING] Project does not define minimum Maven version required for build
+[INFO] Plugins require minimum Maven version of: 3.6.3
+[INFO] 
+[ERROR] Project does not define required minimum version of Maven.
+[ERROR] Update the pom.xml to contain maven-enforcer-plugin to
+[ERROR] force the Maven version which is needed to build this project.
+[ERROR] See https://maven.apache.org/enforcer/enforcer-rules/requireMavenVersion.html
+[ERROR] Using the minimum version of Maven: 3.6.3
+[INFO] 
+[INFO] Require Maven 2.0 to use the following plugin updates:
+[INFO]   maven-compiler-plugin ......................................................................................... 3.16.0 -> 2.0.2
+[INFO]   maven-gpg-plugin ......................................................................................... 3.2.8 -> 1.0-alpha-3
+[INFO]   maven-jar-plugin ................................................................................................. 3.5.1 -> 2.1
+[INFO]   maven-source-plugin ............................................................................................ 3.4.0 -> 2.0.4
+[INFO] 
+[INFO] Require Maven 2.0.2 to use the following plugin updates:
+[INFO]   maven-javadoc-plugin ............................................................................................ 3.12.0 -> 2.2
+[INFO] 
+[INFO] Require Maven 2.0.3 to use the following plugin updates:
+[INFO]   maven-dependency-plugin ......................................................................................... 3.11.0 -> 2.2
+[INFO] 
+[INFO] Require Maven 2.0.5 to use the following plugin updates:
+[INFO]   maven-gpg-plugin ......................................................................................... 3.2.8 -> 1.0-alpha-4
+[INFO] 
+[INFO] Require Maven 2.0.6 to use the following plugin updates:
+[INFO]   maven-gpg-plugin ................................................................................................. 3.2.8 -> 1.5
+[INFO]   maven-jar-plugin ................................................................................................. 3.5.1 -> 2.5
+[INFO]   maven-javadoc-plugin ............................................................................................ 3.12.0 -> 2.3
+[INFO]   maven-source-plugin ............................................................................................ 3.4.0 -> 2.1.2
+[INFO]   maven-surefire-plugin .......................................................................................... 3.6.0 -> 2.4.3
+[INFO] 
+[INFO] Require Maven 2.0.8 to use the following plugin updates:
+[INFO]   maven-javadoc-plugin ............................................................................................ 3.12.0 -> 2.4
+[INFO] 
+[INFO] Require Maven 2.0.9 to use the following plugin updates:
+[INFO]   maven-compiler-plugin ........................................................................................... 3.16.0 -> 3.2
+[INFO]   maven-dependency-plugin ......................................................................................... 3.11.0 -> 2.8
+[INFO]   maven-javadoc-plugin .......................................................................................... 3.12.0 -> 2.8.1
+[INFO]   maven-source-plugin .............................................................................................. 3.4.0 -> 2.3
+[INFO]   maven-surefire-plugin ........................................................................................... 3.6.0 -> 2.17
+[INFO] 
+[INFO] Require Maven 2.2.1 to use the following plugin updates:
+[INFO]   maven-compiler-plugin ........................................................................................... 3.16.0 -> 3.3
+[INFO]   maven-dependency-plugin ........................................................................................ 3.11.0 -> 2.10
+[INFO]   maven-gpg-plugin ................................................................................................. 3.2.8 -> 1.6
+[INFO]   maven-jar-plugin ................................................................................................. 3.5.1 -> 2.6
+[INFO]   maven-javadoc-plugin ......................................................................................... 3.12.0 -> 2.10.4
+[INFO]   maven-source-plugin .............................................................................................. 3.4.0 -> 2.4
+[INFO]   maven-surefire-plugin ......................................................................................... 3.6.0 -> 2.22.2
+[INFO] 
+[INFO] Require Maven 3.0 to use the following plugin updates:
+[INFO]   maven-compiler-plugin ......................................................................................... 3.16.0 -> 3.8.1
+[INFO]   maven-dependency-plugin ....................................................................................... 3.11.0 -> 3.1.2
+[INFO]   maven-gpg-plugin ............................................................................................... 3.2.8 -> 3.0.1
+[INFO]   maven-jar-plugin ............................................................................................... 3.5.1 -> 3.2.0
+[INFO]   maven-javadoc-plugin .......................................................................................... 3.12.0 -> 3.3.2
+[INFO]   maven-source-plugin ............................................................................................ 3.4.0 -> 3.2.1
+[INFO]   maven-surefire-plugin ....................................................................................... 3.6.0 -> 3.0.0-M5
+[INFO] 
+[INFO] Require Maven 3.1.0 to use the following plugin updates:
+[INFO]   com.diffplug.spotless:spotless-maven-plugin ............................................................................ 3.10.4
+[INFO]   maven-jar-plugin ............................................................................................... 3.5.1 -> 3.2.2
+[INFO] 
+[INFO] Require Maven 3.1.1 to use the following plugin updates:
+[INFO]   maven-dependency-plugin ....................................................................................... 3.11.0 -> 3.3.0
+[INFO] 
+[INFO] Require Maven 3.2.5 to use the following plugin updates:
+[INFO]   maven-compiler-plugin ........................................................................................ 3.16.0 -> 3.12.1
+[INFO]   maven-dependency-plugin ....................................................................................... 3.11.0 -> 3.6.1
+[INFO]   maven-gpg-plugin ............................................................................................... 3.2.8 -> 3.2.4
+[INFO]   maven-jar-plugin ............................................................................................... 3.5.1 -> 3.3.0
+[INFO]   maven-javadoc-plugin .......................................................................................... 3.12.0 -> 3.6.3
+[INFO]   maven-source-plugin ............................................................................................ 3.4.0 -> 3.3.1
+[INFO]   maven-surefire-plugin .......................................................................................... 3.6.0 -> 3.2.5
+[INFO] 
+[INFO] Require Maven 3.6.3 to use the following plugin updates:
+[INFO]   maven-compiler-plugin .................................................................................................. 3.16.0
+[INFO]   maven-dependency-plugin ................................................................................................ 3.11.0
+[INFO]   maven-gpg-plugin ........................................................................................................ 3.2.8
+[INFO]   maven-jar-plugin ........................................................................................................ 3.5.1
+[INFO]   maven-javadoc-plugin ................................................................................................... 3.12.0
+[INFO]   maven-source-plugin ..................................................................................................... 3.4.0
+[INFO]   maven-surefire-plugin ................................................................................................... 3.6.0
+[INFO] 
+[INFO] Require Maven 4.0.0-beta-3 to use the following plugin updates:
+[INFO]   maven-compiler-plugin .................................................................................. 3.16.0 -> 4.0.0-beta-1
+[INFO]   maven-jar-plugin ........................................................................................ 3.5.1 -> 4.0.0-beta-1
+[INFO]   maven-source-plugin ..................................................................................... 3.4.0 -> 4.0.0-beta-1
+[INFO] 
+[INFO] Require Maven 4.0.0-rc-2 to use the following plugin updates:
+[INFO]   maven-compiler-plugin .................................................................................. 3.16.0 -> 4.0.0-beta-2
+[INFO] 
+[INFO] Require Maven 4.0.0-rc-4 to use the following plugin updates:
+[INFO]   maven-compiler-plugin .................................................................................. 3.16.0 -> 4.0.0-beta-4
+[INFO] 
+[INFO] Require Maven 4.0.0-rc-6 to use the following plugin updates:
+[INFO]   maven-compiler-plugin .................................................................................. 3.16.0 -> 4.0.0-beta-5
+[INFO] 
+[INFO] 
+[INFO] --- versions:2.23.0:display-property-updates (default-cli) @ links-notation ---
+[INFO] 
+[INFO] The following version properties are referencing the newest available version:
+[INFO]   ${junit.version} .......................................................................................................... 6.1.3
+[INFO] All version properties are referencing the newest version available.
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  12.602 s
+[INFO] Finished at: 2026-10-16T17:59:21Z
+[INFO] ------------------------------------------------------------------------

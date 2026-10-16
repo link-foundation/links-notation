@@ -1,0 +1,60 @@
+== experiments/issue-282/parity/go
+module issue282parity
+
+go 1.26
+
+require github.com/link-foundation/links-notation/go v0.0.0
+
+replace github.com/link-foundation/links-notation/go => ../../../../go
+github.com/link-foundation/links-notation/go v0.0.0 [v0.26.0] => ../../../../go
+OK
+== experiments/issue-288/go
+module issue288
+
+go 1.26
+
+require github.com/link-foundation/links-notation/go v0.0.0
+
+replace github.com/link-foundation/links-notation/go => ../../../go
+github.com/link-foundation/links-notation/go v0.0.0 [v0.26.0] => ../../../go
+OK
+== experiments/issue-301/go-probe
+module probe
+
+go 1.26
+
+require github.com/link-foundation/links-notation/go v0.0.0
+
+replace github.com/link-foundation/links-notation/go => ../../../go
+github.com/link-foundation/links-notation/go v0.0.0 [v0.26.0] => ../../../go
+OK
+== experiments/issue-302/go-probe
+module probe
+
+go 1.26
+
+require github.com/link-foundation/links-notation/go v0.0.0
+
+replace github.com/link-foundation/links-notation/go => ../../../go
+github.com/link-foundation/links-notation/go v0.0.0 [v0.26.0] => ../../../go
+OK
+== experiments/issue-314/ports/go-probe
+module issue314probe
+
+go 1.26
+
+require github.com/link-foundation/links-notation/go v0.0.0
+
+replace github.com/link-foundation/links-notation/go => ../../../../go
+github.com/link-foundation/links-notation/go v0.0.0 [v0.26.0] => ../../../../go
+OK
+== experiments/issue-315/go-probe
+module probe
+
+go 1.26
+
+require github.com/link-foundation/links-notation/go v0.0.0
+
+replace github.com/link-foundation/links-notation/go => ../../../go
+github.com/link-foundation/links-notation/go v0.0.0 [v0.26.0] => ../../../go
+OK

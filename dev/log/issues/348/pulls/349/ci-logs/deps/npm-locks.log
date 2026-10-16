@@ -1,0 +1,8 @@
+js: checked installed direct and transitive dependencies
+docs/website: checked installed direct and transitive dependencies
+docs/comparison: checked installed direct and transitive dependencies
+benchmarks/js: checked installed direct and transitive dependencies
+benchmarks/tools: checked installed direct and transitive dependencies
+bun install v1.4.3 (c6da4a4d3)
+
+Checked 89 installs across 109 packages (no changes) [9.00ms]

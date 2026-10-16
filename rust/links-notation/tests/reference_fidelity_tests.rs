@@ -1,7 +1,8 @@
 use links_notation::{
-    binary::{format_document, format_reference, BinaryLinoCodec},
+    LiNo, StreamParser,
+    binary::{BinaryLinoCodec, format_document, format_reference},
     decode_reference_literal, encode_reference_literal, format_links, format_links_with_config,
-    parse_lino_to_links, LiNo, StreamParser,
+    parse_lino_to_links,
 };
 
 fn fixtures() -> Vec<String> {

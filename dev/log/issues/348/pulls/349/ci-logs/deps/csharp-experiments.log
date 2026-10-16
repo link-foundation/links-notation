@@ -1,0 +1,109 @@
+=== docs/case-studies/csharp-peg-simplification/solutions/01-parse-expression/project/TestParseExpression.csproj
+skip: expected failure
+=== docs/case-studies/csharp-peg-simplification/solutions/02-capture-validate/project/TestCaptureValidate.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.06
+=== docs/case-studies/csharp-peg-simplification/solutions/03-semantic-predicates/project/TestSemanticPredicates.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.11
+=== docs/case-studies/csharp-peg-simplification/solutions/04-hybrid-approach/project/TestHybrid.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.60
+=== docs/case-studies/csharp-peg-simplification/solutions/05-minimized-hybrid/project/TestMinimizedHybrid.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.76
+=== examples/binary/csharp/BinaryExample.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.57
+=== experiments/DebugParser/DebugParser.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.25
+=== experiments/cref-repro/p.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.83
+=== experiments/debug_test.csproj
+skip: expected failure
+=== experiments/issue-282/parity/csharp/parity.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.05
+=== experiments/issue-288/csharp/GroundTruth.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.11
+=== experiments/issue-301/csharp-probe/Probe.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.92
+=== experiments/issue-302/csharp-probe/Probe.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.04
+=== experiments/issue-314/ports/csharp-differential/csharp-differential.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.18
+=== experiments/issue-314/ports/csharp-probe/csharp-probe.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.18
+=== experiments/issue-315/csharp-probe/Probe.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.01
+=== experiments/minimal-peg-rules/TestMinimalRules.csproj
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.38

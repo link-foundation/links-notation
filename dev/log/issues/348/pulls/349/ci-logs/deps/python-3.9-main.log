@@ -1,0 +1,8 @@
+== main (origin/main), Python 3.9.25: uv pip install -e '.[test]'
+error: No solution found when resolving dependencies
+  cause: Because the current Python version (3.9.25) does not satisfy Python>=3.10 and pytest==9.1.1 depends on Python>=3.10, we can conclude that pytest==9.1.1 cannot be used.
+         And because only pytest<=9.1.1 is available and links-notation[test]==0.26.0 depends on pytest>=9.1.1, we can conclude that links-notation[test]==0.26.0 cannot be used.
+         And because only links-notation[test]==0.26.0 is available and you require links-notation[test], we can conclude that your requirements are unsatisfiable.
+== same checkout, library only, with pytest<9: pytest -q
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+272 passed, 1 skipped, 3 warnings in 5.69s

@@ -1,7 +1,7 @@
 use proc_macro::TokenStream;
 use proc_macro2::TokenTree;
 use quote::quote;
-use syn::{parse::Parse, parse::ParseStream, LitStr};
+use syn::{LitStr, parse::Parse, parse::ParseStream};
 
 /// Procedural macro that provides compile-time validation of Links Notation syntax.
 ///

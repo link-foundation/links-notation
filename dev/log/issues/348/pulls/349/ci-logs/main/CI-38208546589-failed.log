@@ -1,0 +1,1070 @@
+release / php / publishToPackagist	UNKNOWN STEP	﻿2026-10-12T05:40:40.3403443Z Current runner version: '2.337.0'
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3428598Z ##[group]Runner Image Provisioner
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3429523Z Hosted Compute Agent
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3430348Z Version: 20261002.596
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3431177Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3431898Z Build Date: 2026-10-02T22:28:27Z
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3432628Z Worker ID: {bd4432b5-b226-4db4-871e-06872b65dd28}
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3433353Z Region: westus
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3433924Z Cloud: Azure
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3434603Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3436184Z ##[group]Operating System
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3436960Z Ubuntu
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3437505Z 24.04.5
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3438019Z LTS
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3438606Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3439163Z ##[group]Runner Image
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3439755Z Image: ubuntu-24.04
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3440723Z Version: 20261004.327.1
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3441981Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3443650Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3444597Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3445787Z ##[group]GITHUB_TOKEN Permissions
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3447937Z Contents: write
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3448682Z Metadata: read
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3449246Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3451665Z Secret source: Actions
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3452660Z Cache mode: write
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.3453442Z Prepare workflow directory
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.4024153Z Prepare all required actions
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.4075147Z Getting action download info
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.7338435Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:40.8355008Z Download action repository 'shivammathur/setup-php@2.40.0' (SHA:eb7c497e18156a6bbabfef1d3a82760b9eda3962)
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2253197Z Uses: link-foundation/links-notation/.github/workflows/publish-php.yml@refs/heads/main (ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d)
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2257801Z ##[group] Inputs
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2258709Z   verbose: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2259184Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2259732Z Complete job name: release / php / publishToPackagist
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2971047Z ##[group]Run actions/checkout@v7.0.1
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2972071Z with:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2972529Z   persist-credentials: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2973046Z   submodules: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2973541Z   repository: link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2977542Z   token: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2977991Z   ssh-strict: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2978439Z   ssh-user: git
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2978865Z   clean: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2979372Z   sparse-checkout-cone-mode: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2979905Z   fetch-depth: 1
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2980530Z   fetch-tags: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2980980Z   show-progress: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2981427Z   lfs: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2981852Z   set-safe-directory: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2982385Z   allow-unsafe-pr-checkout: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2983150Z env:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2986991Z   GITHUB_TOKEN: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2987439Z   CI_VERBOSE: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.2987872Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.3979670Z Syncing repository: link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.3982639Z ##[group]Getting Git version info
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.3983929Z Working directory is '/home/runner/work/links-notation/links-notation'
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.3985699Z [command]/usr/bin/git version
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4101903Z git version 2.55.0
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4139815Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4151475Z Temporarily overriding HOME='/home/runner/work/_temp/a18018fd-dfcc-403e-8c34-d388a2252305' before making global git config changes
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4154132Z Adding repository directory to the temporary git global config as a safe directory
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4161903Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4232075Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4236236Z ##[group]Determining repository object format
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4238156Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4239381Z ##[group]Initializing the repository
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4251472Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4409065Z hint: Using 'master' as the name for the initial branch. This default branch name
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4412247Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4414028Z hint: to use in all of your new repositories, which will suppress this warning,
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4415341Z hint: call:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4416138Z hint:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4417131Z hint: 	git config --global init.defaultBranch <name>
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4418234Z hint:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4419268Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4422779Z hint: 'development'. The just-created branch can be renamed via this command:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4425035Z hint:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4425880Z hint: 	git branch -m <name>
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4426788Z hint:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4427968Z hint: Disable this message with "git config set advice.defaultBranchName false"
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4430228Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4445679Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4530142Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4532073Z ##[group]Disabling automatic garbage collection
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4536787Z [command]/usr/bin/git config --local gc.auto 0
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4594702Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4596352Z ##[group]Setting up auth
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4597694Z Removing SSH command configuration
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4599395Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.4684202Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5075429Z Removing HTTP extra header
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5082326Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5118259Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5338380Z Removing includeIf entries pointing to credentials config files
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5344670Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5383237Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5609824Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5650698Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5687435Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5725797Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5762234Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5793787Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5799744Z ##[group]Fetching the repository
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:41.5801426Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d:refs/remotes/origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0103309Z From https://github.com/link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0105461Z  * [new ref]         ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d -> origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0112953Z [command]/usr/bin/git branch --list --remote origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0143388Z   origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0151776Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0178895Z ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0184480Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0185344Z ##[group]Determining the checkout info
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0188453Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0190219Z [command]/usr/bin/git sparse-checkout disable
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0253621Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0293776Z ##[group]Checking out the ref
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.0299133Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2507306Z Switched to a new branch 'main'
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2512194Z branch 'main' set up to track 'origin/main'.
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2534692Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2536231Z ##[group]Setting up auth for fetching submodules
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2541001Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2586687Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2623019Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2666244Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2704604Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2738854Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2741406Z ##[group]Fetching submodules
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2743025Z [command]/usr/bin/git submodule sync
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.2979392Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.3219453Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.3450717Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.3529608Z [command]/usr/bin/git log -1 --format=%H
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.3562630Z ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.3572287Z ##[group]Removing auth
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.3573860Z Removing SSH command configuration
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.3576337Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.3616404Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.3888197Z Removing HTTP extra header
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.3890758Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.3935300Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4158722Z Removing includeIf entries pointing to credentials config files
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4162207Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4193735Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4196975Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4199017Z includeif.gitdir:/github/workspace/.git.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4201476Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4205726Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4231304Z /home/runner/work/_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4241496Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-8d204e31\-73e2\-4e37\-b7fe\-aa0d1cc1cc85\.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4281658Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4312109Z /home/runner/work/_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4322077Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-8d204e31\-73e2\-4e37\-b7fe\-aa0d1cc1cc85\.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4358397Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4385208Z /github/runner_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4392782Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-8d204e31\-73e2\-4e37\-b7fe\-aa0d1cc1cc85\.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4429625Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4456415Z /github/runner_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4464392Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-8d204e31\-73e2\-4e37\-b7fe\-aa0d1cc1cc85\.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4506456Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4732358Z Removing credentials config '/home/runner/work/_temp/git-credentials-8d204e31-73e2-4e37-b7fe-aa0d1cc1cc85.config'
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.4740883Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5099350Z ##[group]Run shivammathur/setup-php@2.40.0
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5100915Z with:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5101772Z   php-version: 8.4
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5102692Z   extensions: mbstring
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5103832Z   tools: composer:v2
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5104973Z   ini-file: production
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5114655Z   github-token: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5115579Z env:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5125049Z   GITHUB_TOKEN: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5126004Z   CI_VERBOSE: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5126939Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5568986Z [command]/usr/bin/bash /home/runner/work/_actions/shivammathur/setup-php/2.40.0/src/scripts/run.sh
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5987732Z 
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:43.5989335Z ^[[90;1m==> ^[[0m^[[37;1mSetup PHP^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.5555024Z ^[[32;1m✓ ^[[0m^[[34;1mPHP ^[[0m^[[90;1mInstalled PHP 8.4.26^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.5556394Z 
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.5557393Z ^[[90;1m==> ^[[0m^[[37;1mSetup Extensions^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.6078249Z ^[[32;1m✓ ^[[0m^[[34;1mmbstring ^[[0m^[[90;1mEnabled^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.6080319Z 
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.6081141Z ^[[90;1m==> ^[[0m^[[37;1mSetup Tools^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9197845Z ^[[32;1m✓ ^[[0m^[[34;1mcomposer ^[[0m^[[90;1mAdded composer 2.10.3^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9200519Z 
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9200894Z ^[[90;1m==> ^[[0m^[[37;1mSponsor setup-php^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9201777Z ^[[32;1m✓ ^[[0m^[[34;1msetup-php ^[[0m^[[90;1mhttps://setup-php.com/sponsor^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9396883Z ##[group]Run set -euo pipefail
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9397294Z ^[[36;1mset -euo pipefail^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9398039Z ^[[36;1mPACKAGE_NAME=$(php -r 'echo json_decode(file_get_contents("composer.json"))->name;')^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9398723Z ^[[36;1mPACKAGE_VERSION=$(php -r 'echo json_decode(file_get_contents("composer.json"))->version;')^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9399290Z ^[[36;1mecho "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9399701Z ^[[36;1mecho "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9400393Z ^[[36;1mecho "Package: $PACKAGE_NAME@$PACKAGE_VERSION"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9400819Z ^[[36;1m^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9401080Z ^[[36;1mnode ../scripts/ci/php-distribution.mjs^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9401434Z ^[[36;1mexport PACKAGE_NAME PACKAGE_VERSION^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9401776Z ^[[36;1mnode ../scripts/ci/packagist-status.mjs^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9649582Z shell: /usr/bin/bash -e {0}
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9649914Z env:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9653316Z   GITHUB_TOKEN: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9653592Z   CI_VERBOSE: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9653879Z   COMPOSER_PROCESS_TIMEOUT: 0
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9654172Z   COMPOSER_NO_INTERACTION: 1
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9654451Z   COMPOSER_NO_AUDIT: 1
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:51.9654712Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:52.0764574Z Package: link-foundation/links-notation@0.26.0
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:53.2651408Z Root PHP distribution metadata matches the native package.
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1253724Z Packagist registration: false; publication needed: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1411252Z ##[group]Run set -euo pipefail
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1411612Z ^[[36;1mset -euo pipefail^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1411870Z ^[[36;1mif [ "true" != "true" ]; then^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1412189Z ^[[36;1m  echo "published=skipped" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1412670Z ^[[36;1m  echo "::notice::Version ${PACKAGE_VERSION} is already on Packagist, nothing to publish"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1413116Z ^[[36;1m  exit 0^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1413310Z ^[[36;1mfi^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1413490Z ^[[36;1m^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1413803Z ^[[36;1m# Packagist has no OIDC trusted publishing and it builds the package^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1414327Z ^[[36;1m# straight from this repository, so "publishing" is asking it to^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1414820Z ^[[36;1m# re-read the repository. That only works once the package has been^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1415299Z ^[[36;1m# submitted at https://packagist.org/packages/submit.^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1415681Z ^[[36;1mif [ "false" != "true" ]; then^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1415990Z ^[[36;1m  echo "published=failed" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1416725Z ^[[36;1m  echo "::error::${PACKAGE_NAME} is not registered on Packagist. Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created."^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1417400Z ^[[36;1m  exit 1^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1417588Z ^[[36;1mfi^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1417768Z ^[[36;1m^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1418051Z ^[[36;1mif [ -z "$PACKAGIST_TOKEN" ] || [ -z "$PACKAGIST_USERNAME" ]; then^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1418454Z ^[[36;1m  echo "published=failed" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1419091Z ^[[36;1m  echo "::error::PACKAGIST_USERNAME/PACKAGIST_TOKEN are not configured; skipping the Packagist update. No PHP release will be created."^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1419678Z ^[[36;1m  exit 1^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1419867Z ^[[36;1mfi^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1420380Z ^[[36;1mecho "Packagist credentials: present"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1420672Z ^[[36;1m^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1420916Z ^[[36;1mnode ../scripts/ci/ensure-php-version-tag.mjs^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1421308Z ^[[36;1mcurl -fsS -XPOST -H'content-type:application/json' \^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1421919Z ^[[36;1m  "https://packagist.org/api/update-package?username=${PACKAGIST_USERNAME}&apiToken=${PACKAGIST_TOKEN}" \^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1422501Z ^[[36;1m  -d"{\"repository\":{\"url\":\"${REPOSITORY_URL}\"}}"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1422855Z ^[[36;1mecho "published=true" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1488391Z shell: /usr/bin/bash -e {0}
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1488645Z env:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1491698Z   GITHUB_TOKEN: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1491925Z   CI_VERBOSE: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1492136Z   COMPOSER_PROCESS_TIMEOUT: 0
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1492384Z   COMPOSER_NO_INTERACTION: 1
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1492619Z   COMPOSER_NO_AUDIT: 1
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1492849Z   PACKAGIST_USERNAME: 
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1493058Z   PACKAGIST_TOKEN: 
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1493367Z   REPOSITORY_URL: https://github.com/link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1493762Z   PACKAGE_NAME: link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1494055Z   PACKAGE_VERSION: 0.26.0
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1494327Z   RELEASE_SHA: ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1494623Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1594007Z ##[error]link-foundation/links-notation is not registered on Packagist. Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created.
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1602693Z ##[error]Process completed with exit code 1.
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.1743232Z Post job cleanup.
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.2546042Z [command]/usr/bin/git version
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.2602745Z git version 2.55.0
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.2673526Z Temporarily overriding HOME='/home/runner/work/_temp/f980b820-704d-49e2-9f5d-d0f131109a5b' before making global git config changes
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.2674851Z Adding repository directory to the temporary git global config as a safe directory
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.2681304Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.2716092Z Removing SSH command configuration
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.2726034Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.2772559Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.3036404Z Removing HTTP extra header
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.3037424Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.3069356Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.3314476Z Removing includeIf entries pointing to credentials config files
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.3320684Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.3397228Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.3792219Z Evaluate and set job outputs
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.3798290Z Set output 'published'
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.3799927Z Set output 'version'
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.3800948Z Set output 'name'
+release / php / publishToPackagist	UNKNOWN STEP	2026-10-12T05:40:54.3801676Z Cleaning up orphan processes
+release / java / publishToMavenCentral	UNKNOWN STEP	﻿2026-10-12T05:40:39.6378273Z Current runner version: '2.337.0'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6391775Z ##[group]Runner Image Provisioner
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6392259Z Hosted Compute Agent
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6392722Z Version: 20261002.596
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6393080Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6393516Z Build Date: 2026-10-02T22:28:27Z
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6393918Z Worker ID: {16d943d7-f68b-4de1-ad73-54f03b0bd9cf}
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6394521Z Region: southcentralus
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6394941Z Cloud: Azure
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6395260Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6395990Z ##[group]Operating System
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6396345Z Ubuntu
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6396647Z 24.04.5
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6397007Z LTS
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6397305Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6397610Z ##[group]Runner Image
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6397995Z Image: ubuntu-24.04
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6398323Z Version: 20261004.327.1
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6399107Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6399948Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6400536Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6401183Z ##[group]GITHUB_TOKEN Permissions
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6402296Z Contents: read
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6402624Z Metadata: read
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6402992Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6404349Z Secret source: Actions
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6404926Z Cache mode: write
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6405347Z Prepare workflow directory
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6716573Z Prepare all required actions
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.6746255Z Getting action download info
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.8890049Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:39.9900845Z Download action repository 'actions/setup-java@v6.0.1' (SHA:de7274f081f381c8f8158605e0321c36c376e2e6)
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.2723256Z Uses: link-foundation/links-notation/.github/workflows/publish-java.yml@refs/heads/main (ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d)
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.2727104Z ##[group] Inputs
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.2727893Z   verbose: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.2728492Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.2729209Z Complete job name: release / java / publishToMavenCentral
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3212189Z ##[group]Run actions/checkout@v7.0.1
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3212955Z with:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3213468Z   persist-credentials: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3214242Z   submodules: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3214838Z   repository: link-foundation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3219445Z   token: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3219985Z   ssh-strict: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3220513Z   ssh-user: git
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3221024Z   clean: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3221573Z   sparse-checkout-cone-mode: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3222204Z   fetch-depth: 1
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3222727Z   fetch-tags: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3223265Z   show-progress: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3223804Z   lfs: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3224387Z   set-safe-directory: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3225019Z   allow-unsafe-pr-checkout: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3225727Z env:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3230077Z   GITHUB_TOKEN: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3230614Z   CI_VERBOSE: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3231135Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3897018Z Syncing repository: link-foundation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3898731Z ##[group]Getting Git version info
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3899801Z Working directory is '/home/runner/work/links-notation/links-notation'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3901091Z [command]/usr/bin/git version
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3955996Z git version 2.55.0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3973189Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3983838Z Temporarily overriding HOME='/home/runner/work/_temp/e98f8577-39ba-4174-8225-389fd1aafeb4' before making global git config changes
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3985725Z Adding repository directory to the temporary git global config as a safe directory
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.3988052Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4044370Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4046344Z ##[group]Determining repository object format
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4047816Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4049096Z ##[group]Initializing the repository
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4050413Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4153392Z hint: Using 'master' as the name for the initial branch. This default branch name
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4154902Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4155989Z hint: to use in all of your new repositories, which will suppress this warning,
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4156875Z hint: call:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4157351Z hint:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4158023Z hint: 	git config --global init.defaultBranch <name>
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4159086Z hint:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4160092Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4161756Z hint: 'development'. The just-created branch can be renamed via this command:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4163030Z hint:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4163752Z hint: 	git branch -m <name>
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4164758Z hint:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4165867Z hint: Disable this message with "git config set advice.defaultBranchName false"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4167746Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4170822Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4261475Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4263026Z ##[group]Disabling automatic garbage collection
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4264520Z [command]/usr/bin/git config --local gc.auto 0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4352338Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4354339Z ##[group]Setting up auth
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4355395Z Removing SSH command configuration
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4357905Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4390035Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4658038Z Removing HTTP extra header
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4660837Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4687550Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4848938Z Removing includeIf entries pointing to credentials config files
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4852060Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.4878749Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.5051023Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.5240143Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.5442304Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.5644530Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.5743632Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.6049934Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.6051190Z ##[group]Fetching the repository
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:41.6053614Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d:refs/remotes/origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.3320287Z From https://github.com/link-foundation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.3321137Z  * [new ref]         ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d -> origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.3327930Z [command]/usr/bin/git branch --list --remote origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.3351562Z   origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.3356916Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.3376656Z ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.3379720Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.3380112Z ##[group]Determining the checkout info
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.3380520Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.3382909Z [command]/usr/bin/git sparse-checkout disable
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.4340872Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.4944830Z ##[group]Checking out the ref
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.4948128Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.7567885Z Switched to a new branch 'main'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.7575629Z branch 'main' set up to track 'origin/main'.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.7590915Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.7591259Z ##[group]Setting up auth for fetching submodules
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.7596651Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.7842727Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.7945820Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.7972978Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8042279Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8137957Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8138488Z ##[group]Fetching submodules
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8140219Z [command]/usr/bin/git submodule sync
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8312028Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8495856Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8660097Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8848981Z [command]/usr/bin/git log -1 --format=%H
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8873915Z ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8882789Z ##[group]Removing auth
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8883037Z Removing SSH command configuration
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8883364Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.8909671Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9104934Z Removing HTTP extra header
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9118224Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9144602Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9314556Z Removing includeIf entries pointing to credentials config files
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9316284Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9346058Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9346802Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9347175Z includeif.gitdir:/github/workspace/.git.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9347473Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9351618Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9372293Z /home/runner/work/_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9378310Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-c74bccf7\-5380\-4799\-9596\-6100962acd71\.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9462081Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9485712Z /home/runner/work/_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9490840Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-c74bccf7\-5380\-4799\-9596\-6100962acd71\.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9647783Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9667683Z /github/runner_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9672755Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-c74bccf7\-5380\-4799\-9596\-6100962acd71\.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9745418Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9766211Z /github/runner_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:43.9771431Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-c74bccf7\-5380\-4799\-9596\-6100962acd71\.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0154959Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0328197Z Removing credentials config '/home/runner/work/_temp/git-credentials-c74bccf7-5380-4799-9596-6100962acd71.config'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0335683Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0560745Z ##[group]Run actions/setup-java@v6.0.1
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0560898Z with:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0561004Z   java-version: 21
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0561118Z   distribution: temurin
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0561234Z   cache: maven
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0561339Z   server-id: central
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0561468Z   server-username-env-var: MAVEN_USERNAME
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0561625Z   server-password-env-var: MAVEN_PASSWORD
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0561791Z   gpg-passphrase-env-var: MAVEN_GPG_PASSPHRASE
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0561967Z   java-package: jdk
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0562079Z   check-latest: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0562193Z   force-download: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0562308Z   set-default: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0562434Z   mvn-repositories-include-central: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0562600Z   mvn-repositories-prioritize-central: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0562753Z   overwrite-settings: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0562878Z   cache-read-only: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0562997Z   job-status: success
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0564449Z   token: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0564563Z   show-download-progress: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0564697Z   problem-matcher: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0564811Z env:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0565955Z   GITHUB_TOKEN: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0566065Z   CI_VERBOSE: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.0566172Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1010045Z ##[group]Installed distributions
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1883921Z Resolved Java 21.0.12+1 from tool-cache
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1884302Z Setting Java 21.0.12+1 as the default
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1888902Z 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1888983Z Java configuration:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1889389Z   Distribution: temurin
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1889618Z   Version: 21.0.12+1
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1889898Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1890140Z 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1915810Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1953506Z Creating settings.xml with server-id: central
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1955665Z Creating toolchains.xml for JDK version 21 from temurin
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1963576Z Writing to /home/runner/.m2/settings.xml
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1967032Z Writing to /home/runner/.m2/toolchains.xml
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.1972255Z Configured MAVEN_ARGS to include -ntp to suppress Maven transfer progress logs. Set 'show-download-progress: true' to keep the download progress output.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:44.4737689Z Cache hit for: setup-java-Linux-x64-maven-278dae4b276c25565cc2be8407e11970f111addd41f526bb7eb8b233d3f77d14
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.0953451Z Received 3832877 of 3832877 (100.0%), 7.5 MBs/sec
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.0953753Z Cache Size: ~4 MB (3832877 B)
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1029116Z [command]/usr/bin/tar -xf /home/runner/work/_temp/aaeb96d5-c6d4-4069-8781-d08b9843035a/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1232381Z Cache restored successfully
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1236608Z Cache restored from key: setup-java-Linux-x64-maven-278dae4b276c25565cc2be8407e11970f111addd41f526bb7eb8b233d3f77d14
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1354967Z ##[group]Run set -euo pipefail
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1355190Z ^[[36;1mset -euo pipefail^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1355386Z ^[[36;1m# shellcheck source=scripts/ci/registry-probe.sh^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1355604Z ^[[36;1m. "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1355860Z ^[[36;1mPACKAGE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1356169Z ^[[36;1mPACKAGE_GROUP=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1356489Z ^[[36;1mPACKAGE_ARTIFACT=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1356722Z ^[[36;1m{^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1356845Z ^[[36;1m  echo "version=$PACKAGE_VERSION"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1357006Z ^[[36;1m  echo "group=$PACKAGE_GROUP"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1357161Z ^[[36;1m  echo "artifact=$PACKAGE_ARTIFACT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1357317Z ^[[36;1m} >> "$GITHUB_OUTPUT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1357525Z ^[[36;1mecho "Package: $PACKAGE_GROUP:$PACKAGE_ARTIFACT:$PACKAGE_VERSION"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1357715Z ^[[36;1m^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1358039Z ^[[36;1mURL="https://repo1.maven.org/maven2/$(echo "$PACKAGE_GROUP" | tr '.' '/')/$PACKAGE_ARTIFACT/$PACKAGE_VERSION/$PACKAGE_ARTIFACT-$PACKAGE_VERSION.pom"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1358370Z ^[[36;1mif probe_registry "$URL"; then^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1358561Z ^[[36;1m  echo "Version $PACKAGE_VERSION already exists on Maven Central"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1358784Z ^[[36;1m  echo "should_publish=false" >> "$GITHUB_OUTPUT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1358945Z ^[[36;1melse^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1359105Z ^[[36;1m  echo "Version $PACKAGE_VERSION does not exist on Maven Central"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1359319Z ^[[36;1m  echo "should_publish=true" >> "$GITHUB_OUTPUT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1359477Z ^[[36;1mfi^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1547887Z shell: /usr/bin/bash -e {0}
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1548028Z env:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1549389Z   GITHUB_TOKEN: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1549515Z   CI_VERBOSE: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1549683Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1549936Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1550138Z   MAVEN_ARGS: -ntp
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:40:45.1550256Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.0332167Z Package: io.github.link-foundation:links-notation:0.26.0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2532226Z Version 0.26.0 does not exist on Maven Central
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2588982Z ##[group]Run set -euo pipefail
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2589148Z ^[[36;1mset -euo pipefail^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2589283Z ^[[36;1mif [ "true" != "true" ]; then^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2589453Z ^[[36;1m  echo "published=skipped" >> "$GITHUB_OUTPUT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2589688Z ^[[36;1m  echo "::notice::Version 0.26.0 is already on Maven Central, nothing to publish"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2589893Z ^[[36;1m  exit 0^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2589998Z ^[[36;1mfi^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2590162Z ^[[36;1mbash "$GITHUB_WORKSPACE/scripts/ci/require-java-credentials.sh"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2590383Z ^[[36;1mmvn -B deploy -Prelease --file pom.xml^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2590558Z ^[[36;1mecho "published=true" >> "$GITHUB_OUTPUT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2639843Z shell: /usr/bin/bash -e {0}
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2639978Z env:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2641214Z   GITHUB_TOKEN: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2641332Z   CI_VERBOSE: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2641524Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2641783Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2641980Z   MAVEN_ARGS: -ntp
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2642092Z   CENTRAL_USERNAME: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2642206Z   CENTRAL_TOKEN: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2642313Z   GPG_PRIVATE_KEY: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2642422Z   GPG_PASSPHRASE: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2642528Z   MAVEN_USERNAME: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2642631Z   MAVEN_PASSWORD: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2642743Z   MAVEN_GPG_PASSPHRASE: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2642865Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2720651Z ##[error]Maven Central version is absent and publishing credentials are missing: CENTRAL_USERNAME CENTRAL_TOKEN GPG_PRIVATE_KEY GPG_PASSPHRASE. Follow docs/releases.md; publishing cannot be skipped.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2725919Z ##[error]Process completed with exit code 1.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.2837830Z Post job cleanup.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.3425216Z Post job cleanup.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.3968883Z [command]/usr/bin/git version
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4005353Z git version 2.55.0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4026117Z Temporarily overriding HOME='/home/runner/work/_temp/ce6510c4-5ef3-4588-a862-d2c1337072a8' before making global git config changes
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4026870Z Adding repository directory to the temporary git global config as a safe directory
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4029498Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4053122Z Removing SSH command configuration
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4057699Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4087695Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4277239Z Removing HTTP extra header
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4282128Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4312063Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4493962Z Removing includeIf entries pointing to credentials config files
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4498649Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4526363Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4812412Z Evaluate and set job outputs
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4817396Z Set output 'version'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4818390Z Set output 'group'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4818824Z Set output 'artifact'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-10-12T05:41:02.4819130Z Cleaning up orphan processes
+release / cpp / publishRelease	UNKNOWN STEP	﻿2026-10-12T05:40:39.7330225Z Current runner version: '2.337.0'
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7355390Z ##[group]Runner Image Provisioner
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7356240Z Hosted Compute Agent
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7356912Z Version: 20261002.596
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7357821Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7358547Z Build Date: 2026-10-02T22:28:27Z
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7359325Z Worker ID: {bdc95300-a8c0-4810-a7cb-a81c0d199fa9}
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7360041Z Region: eastus
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7360629Z Cloud: Azure
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7361235Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7362796Z ##[group]Operating System
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7363524Z Ubuntu
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7364057Z 24.04.5
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7364919Z LTS
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7365468Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7366046Z ##[group]Runner Image
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7366738Z Image: ubuntu-24.04
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7367504Z Version: 20261004.327.1
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7368918Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7370478Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7371527Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7372638Z ##[group]GITHUB_TOKEN Permissions
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7374894Z Contents: write
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7375498Z Metadata: read
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7376184Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7378746Z Secret source: Actions
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7379801Z Cache mode: write
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7380491Z Prepare workflow directory
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7935267Z Prepare all required actions
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:39.7984886Z Getting action download info
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.0391076Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.2421120Z Uses: link-foundation/links-notation/.github/workflows/publish-cpp.yml@refs/heads/main (ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d)
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.2425671Z ##[group] Inputs
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.2426575Z   verbose: false
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.2427066Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.2427824Z Complete job name: release / cpp / publishRelease
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3154272Z ##[group]Run actions/checkout@v7.0.1
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3155203Z with:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3155670Z   persist-credentials: false
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3156213Z   submodules: true
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3156729Z   repository: link-foundation/links-notation
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3161112Z   token: ***
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3161575Z   ssh-strict: true
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3162048Z   ssh-user: git
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3162491Z   clean: true
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3162954Z   sparse-checkout-cone-mode: true
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3163542Z   fetch-depth: 1
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3163989Z   fetch-tags: false
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3164459Z   show-progress: true
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3164922Z   lfs: false
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3165367Z   set-safe-directory: true
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3165887Z   allow-unsafe-pr-checkout: false
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3166733Z env:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3170647Z   GITHUB_TOKEN: ***
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3171121Z   CI_VERBOSE: false
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.3171574Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4214532Z Syncing repository: link-foundation/links-notation
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4217487Z ##[group]Getting Git version info
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4218986Z Working directory is '/home/runner/work/links-notation/links-notation'
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4220797Z [command]/usr/bin/git version
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4330032Z git version 2.55.0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4359133Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4369817Z Temporarily overriding HOME='/home/runner/work/_temp/46b0ca7a-20cc-4c92-853c-b884490f1701' before making global git config changes
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4372242Z Adding repository directory to the temporary git global config as a safe directory
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4376732Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4429222Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4432564Z ##[group]Determining repository object format
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4434067Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4434902Z ##[group]Initializing the repository
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4439900Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4571327Z hint: Using 'master' as the name for the initial branch. This default branch name
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4573264Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4575398Z hint: to use in all of your new repositories, which will suppress this warning,
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4577374Z hint: call:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4578705Z hint:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4580340Z hint: 	git config --global init.defaultBranch <name>
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4582003Z hint:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4583497Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4585393Z hint: 'development'. The just-created branch can be renamed via this command:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4587482Z hint:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4588831Z hint: 	git branch -m <name>
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4590261Z hint:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4591717Z hint: Disable this message with "git config set advice.defaultBranchName false"
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4594081Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4598553Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4663171Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4664508Z ##[group]Disabling automatic garbage collection
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4665987Z [command]/usr/bin/git config --local gc.auto 0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4701572Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4702775Z ##[group]Setting up auth
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4703696Z Removing SSH command configuration
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4708045Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.4747937Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5136665Z Removing HTTP extra header
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5142857Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5181228Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5399880Z Removing includeIf entries pointing to credentials config files
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5405640Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5447678Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5673199Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5752715Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5768724Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5818158Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5859102Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5894687Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5896227Z ##[group]Fetching the repository
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:40.5904355Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d:refs/remotes/origin/main
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4239831Z From https://github.com/link-foundation/links-notation
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4240617Z  * [new ref]         ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d -> origin/main
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4244178Z [command]/usr/bin/git branch --list --remote origin/main
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4275266Z   origin/main
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4284336Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4313361Z ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4317997Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4318881Z ##[group]Determining the checkout info
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4319951Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4323974Z [command]/usr/bin/git sparse-checkout disable
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4381895Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4418237Z ##[group]Checking out the ref
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.4422718Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6617099Z Switched to a new branch 'main'
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6622747Z branch 'main' set up to track 'origin/main'.
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6642845Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6643730Z ##[group]Setting up auth for fetching submodules
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6651733Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6706738Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6749223Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6797976Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6843196Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6878895Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6879812Z ##[group]Fetching submodules
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.6883561Z [command]/usr/bin/git submodule sync
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.7143826Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.7411135Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.7666247Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.7718943Z [command]/usr/bin/git log -1 --format=%H
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.7761629Z ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.7771969Z ##[group]Removing auth
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.7772639Z Removing SSH command configuration
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.7776795Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.7814822Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8118835Z Removing HTTP extra header
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8142018Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8182440Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8408893Z Removing includeIf entries pointing to credentials config files
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8425144Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8449168Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8450619Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8452483Z includeif.gitdir:/github/workspace/.git.path
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8453496Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8459041Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8485830Z /home/runner/work/_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8497028Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-b6af84dd\-826a\-4637\-bba1\-51443a6f2e9d\.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8538854Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8566103Z /home/runner/work/_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8574001Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-b6af84dd\-826a\-4637\-bba1\-51443a6f2e9d\.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8611947Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8638768Z /github/runner_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8646259Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-b6af84dd\-826a\-4637\-bba1\-51443a6f2e9d\.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8684168Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8710806Z /github/runner_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8719160Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-b6af84dd\-826a\-4637\-bba1\-51443a6f2e9d\.config
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8757394Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8980331Z Removing credentials config '/home/runner/work/_temp/git-credentials-b6af84dd-826a-4637-bba1-51443a6f2e9d.config'
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.8989705Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9190091Z ##[group]Run set -euo pipefail
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9190573Z ^[[36;1mset -euo pipefail^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9190954Z ^[[36;1mPACKAGE_VERSION=$(tr -d '[:space:]' < VERSION)^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9191329Z ^[[36;1mif [ -z "$PACKAGE_VERSION" ]; then^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9191665Z ^[[36;1m  echo "::error::cpp/VERSION is empty"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9191985Z ^[[36;1m  exit 1^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9192235Z ^[[36;1mfi^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9192508Z ^[[36;1mecho "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9193002Z ^[[36;1mecho "asset=links-notation-cpp-$PACKAGE_VERSION.tar.gz" >> "$GITHUB_OUTPUT"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9193532Z ^[[36;1mecho "Library: links-notation-cpp $PACKAGE_VERSION"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9474353Z shell: /usr/bin/bash -e {0}
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9474711Z env:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9478632Z   GITHUB_TOKEN: ***
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9478921Z   CI_VERBOSE: false
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9479175Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9678659Z Library: links-notation-cpp 0.26.0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9746155Z ##[group]Run set -euo pipefail
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9746492Z ^[[36;1mset -euo pipefail^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9746933Z ^[[36;1mgit archive --format=tar.gz --prefix="links-notation-cpp-${PACKAGE_VERSION}/" \^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9747750Z ^[[36;1m  --output="$RUNNER_TEMP/$ASSET" HEAD:cpp^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9748156Z ^[[36;1m(cd "$RUNNER_TEMP" && sha256sum "$ASSET" | tee "$ASSET.sha256")^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9812074Z shell: /usr/bin/bash -e {0}
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9812337Z env:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9815018Z   GITHUB_TOKEN: ***
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9815257Z   CI_VERBOSE: false
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9815684Z   ASSET: links-notation-cpp-0.26.0.tar.gz
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9815985Z   PACKAGE_VERSION: 0.26.0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9816224Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9939883Z b5812bb4bb117c84a7470064456145f79acf53074371bae9527ecbfe8897a8c7  links-notation-cpp-0.26.0.tar.gz
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9982844Z ##[group]Run set -euo pipefail
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9983186Z ^[[36;1mset -euo pipefail^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9983458Z ^[[36;1mTAG="cpp_${PACKAGE_VERSION}"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9983797Z ^[[36;1mif gh release view "$TAG" >/dev/null 2>&1; then^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9984228Z ^[[36;1m  # A release from an earlier run keeps its archive: the version is^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9984724Z ^[[36;1m  # immutable. Only a missing archive is backfilled, from this commit.^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9985281Z ^[[36;1m  if gh release view "$TAG" --json assets --jq '.assets[].name' | grep -qxF "$ASSET"; then^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9985756Z ^[[36;1m    echo "Release $TAG already has $ASSET"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9986134Z ^[[36;1m    echo "published=skipped" >> "$GITHUB_OUTPUT"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9986448Z ^[[36;1m    exit 0^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9986657Z ^[[36;1m  fi^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9986991Z ^[[36;1m  gh release upload "$TAG" "$RUNNER_TEMP/$ASSET" "$RUNNER_TEMP/$ASSET.sha256"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9987613Z ^[[36;1melse^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9987835Z ^[[36;1m  gh release create "$TAG" \^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9988121Z ^[[36;1m    --target "$RELEASE_SHA" \^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9988429Z ^[[36;1m    --title "[C++] $PACKAGE_VERSION" \^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9989370Z ^[[36;1m    --notes "C++17 library release. Add it to a CMake project with \`FetchContent_Declare(links_notation URL https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/${ASSET})\` and link \`links_notation::links_notation\`." \^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9990364Z ^[[36;1m    "$RUNNER_TEMP/$ASSET" "$RUNNER_TEMP/$ASSET.sha256"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9990683Z ^[[36;1mfi^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:41.9990939Z ^[[36;1mecho "published=true" >> "$GITHUB_OUTPUT"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:42.0050405Z shell: /usr/bin/bash -e {0}
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:42.0050671Z env:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:42.0053346Z   GITHUB_TOKEN: ***
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:42.0053585Z   CI_VERBOSE: false
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:42.0053853Z   RELEASE_SHA: ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:42.0054220Z   ASSET: links-notation-cpp-0.26.0.tar.gz
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:42.0054517Z   PACKAGE_VERSION: 0.26.0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:42.0054750Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3593184Z https://github.com/link-foundation/links-notation/releases/tag/cpp_0.26.0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3669832Z ##[group]Run set -euo pipefail
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3670160Z ^[[36;1mset -euo pipefail^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3670469Z ^[[36;1m# shellcheck source=scripts/ci/registry-probe.sh^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3670868Z ^[[36;1m. "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3671416Z ^[[36;1mURL="https://github.com/${GITHUB_REPOSITORY}/releases/download/cpp_${PACKAGE_VERSION}/${ASSET}"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3671985Z ^[[36;1mwait_for_registry "$ASSET on GitHub Releases" "$URL" 20 15^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3672388Z ^[[36;1mmkdir "$RUNNER_TEMP/download"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3672857Z ^[[36;1mcurl --fail --silent --show-error --location --output "$RUNNER_TEMP/download/$ASSET" "$URL"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3673539Z ^[[36;1m(cd "$RUNNER_TEMP/download" && cp "$RUNNER_TEMP/$ASSET.sha256" . && sha256sum --check "$ASSET.sha256")^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3674118Z ^[[36;1mtar -xzf "$RUNNER_TEMP/download/$ASSET" -C "$RUNNER_TEMP/download"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3674592Z ^[[36;1mcmake -S tests/consumer -B "$RUNNER_TEMP/consumer" \^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3675118Z ^[[36;1m  -DLINKS_NOTATION_SOURCE_DIR="$RUNNER_TEMP/download/links-notation-cpp-${PACKAGE_VERSION}"^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3675637Z ^[[36;1mcmake --build "$RUNNER_TEMP/consumer" --parallel^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3676054Z ^[[36;1mctest --test-dir "$RUNNER_TEMP/consumer" --output-on-failure^[[0m
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3741508Z shell: /usr/bin/bash -e {0}
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3741762Z env:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3744638Z   GITHUB_TOKEN: ***
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3744939Z   CI_VERBOSE: false
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3745182Z   ASSET: links-notation-cpp-0.26.0.tar.gz
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3745476Z   PACKAGE_VERSION: 0.26.0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.3745720Z ##[endgroup]
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.7561262Z Verified links-notation-cpp-0.26.0.tar.gz on GitHub Releases (attempt 1/20)
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:44.8294167Z links-notation-cpp-0.26.0.tar.gz: OK
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.3675667Z -- The CXX compiler identification is GNU 13.3.0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.4639426Z -- Detecting CXX compiler ABI info
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.6866940Z -- Detecting CXX compiler ABI info - done
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7040269Z -- Check for working CXX compiler: /usr/bin/c++ - skipped
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7094023Z -- Detecting CXX compile features
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7150256Z -- Detecting CXX compile features - done
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7378694Z CMake Error at CMakeLists.txt:9 (add_subdirectory):
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7379177Z   The source directory
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7379439Z 
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7379644Z     /home/runner/work/_temp/download/links-notation-cpp-0.26.0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7379948Z 
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7380073Z   does not contain a CMakeLists.txt file.
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7380298Z 
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7380305Z 
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7426181Z -- Configuring incomplete, errors occurred!
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7519697Z ##[error]Process completed with exit code 1.
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.7653226Z Post job cleanup.
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.8535888Z [command]/usr/bin/git version
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.8588495Z git version 2.55.0
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.8634444Z Temporarily overriding HOME='/home/runner/work/_temp/33d67220-1a10-4fa4-b4f7-0cec3df70217' before making global git config changes
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.8635759Z Adding repository directory to the temporary git global config as a safe directory
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.8638615Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.8671626Z Removing SSH command configuration
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.8678761Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.8721349Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.8982448Z Removing HTTP extra header
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.8983402Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.9019977Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.9264073Z Removing includeIf entries pointing to credentials config files
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.9271839Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.9311443Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / cpp / publishRelease	UNKNOWN STEP	2026-10-12T05:40:46.9698993Z Cleaning up orphan processes
+release_audit / audit	UNKNOWN STEP	﻿2026-10-12T05:52:21.0690855Z Current runner version: '2.337.0'
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0711247Z ##[group]Runner Image Provisioner
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0711931Z Hosted Compute Agent
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0712549Z Version: 20261002.596
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0713089Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0713724Z Build Date: 2026-10-02T22:28:27Z
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0714289Z Worker ID: {fc7375aa-47ff-4a94-88e2-731c30f0c5e6}
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0714854Z Region: westus
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0715366Z Cloud: Azure
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0715841Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0717524Z ##[group]Operating System
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0718057Z Ubuntu
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0718489Z 24.04.5
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0718955Z LTS
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0719447Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0719922Z ##[group]Runner Image
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0720434Z Image: ubuntu-24.04
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0720899Z Version: 20261004.327.1
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0721978Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0723294Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0724108Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0725058Z ##[group]GITHUB_TOKEN Permissions
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0726725Z Contents: read
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0727211Z Metadata: read
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0727755Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0729375Z Secret source: Actions
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0730245Z Cache mode: write
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.0730810Z Prepare workflow directory
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.1871048Z Prepare all required actions
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.1909611Z Getting action download info
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:21.5303906Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:22.1285351Z Download action repository 'actions/setup-node@v7.1.0' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:22.6060137Z Download action repository 'actions/upload-artifact@v7.0.2' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.1700232Z Uses: link-foundation/links-notation/.github/workflows/release-audit.yml@refs/heads/main (ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d)
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.1704899Z ##[group] Inputs
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.1706196Z   verbose: false
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.1706928Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.1707689Z Complete job name: release_audit / audit
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2421180Z ##[group]Run actions/checkout@v7.0.1
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2422326Z with:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2423026Z   persist-credentials: false
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2423916Z   repository: link-foundation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2430363Z   token: ***
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2431056Z   ssh-strict: true
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2431771Z   ssh-user: git
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2432464Z   clean: true
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2433191Z   sparse-checkout-cone-mode: true
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2434038Z   fetch-depth: 1
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2434742Z   fetch-tags: false
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2435483Z   show-progress: true
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2436319Z   lfs: false
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2437013Z   submodules: false
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2437752Z   set-safe-directory: true
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2438578Z   allow-unsafe-pr-checkout: false
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.2439601Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3274958Z Syncing repository: link-foundation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3278291Z ##[group]Getting Git version info
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3280189Z Working directory is '/home/runner/work/links-notation/links-notation'
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3282807Z [command]/usr/bin/git version
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3334958Z git version 2.55.0
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3351647Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3360097Z Temporarily overriding HOME='/home/runner/work/_temp/bc72f951-5bfc-4722-8198-6dc3abbf1089' before making global git config changes
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3363381Z Adding repository directory to the temporary git global config as a safe directory
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3373346Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3425050Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3427715Z ##[group]Determining repository object format
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3429918Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3431213Z ##[group]Initializing the repository
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3433785Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3557649Z hint: Using 'master' as the name for the initial branch. This default branch name
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3560116Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3562361Z hint: to use in all of your new repositories, which will suppress this warning,
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3564173Z hint: call:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3565222Z hint:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3566534Z hint: 	git config --global init.defaultBranch <name>
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3568015Z hint:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3569379Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3571589Z hint: 'development'. The just-created branch can be renamed via this command:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3573404Z hint:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3574343Z hint: 	git branch -m <name>
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3575462Z hint:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3577103Z hint: Disable this message with "git config set advice.defaultBranchName false"
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3583843Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3590894Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3644204Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3645976Z ##[group]Disabling automatic garbage collection
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3647726Z [command]/usr/bin/git config --local gc.auto 0
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3675973Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3677821Z ##[group]Setting up auth
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3679015Z Removing SSH command configuration
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3680870Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.3709511Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4014192Z Removing HTTP extra header
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4019993Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4050831Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4235790Z Removing includeIf entries pointing to credentials config files
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4239688Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4269550Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4460429Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-a8347f18-2884-4f48-92eb-462f18b97789.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4494416Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-a8347f18-2884-4f48-92eb-462f18b97789.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4523953Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-a8347f18-2884-4f48-92eb-462f18b97789.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4555504Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-a8347f18-2884-4f48-92eb-462f18b97789.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4584626Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-a8347f18-2884-4f48-92eb-462f18b97789.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4612225Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4613361Z ##[group]Fetching the repository
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:23.4617469Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d:refs/remotes/origin/main
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7327421Z From https://github.com/link-foundation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7328119Z  * [new ref]         ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d -> origin/main
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7334539Z [command]/usr/bin/git branch --list --remote origin/main
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7360132Z   origin/main
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7365987Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7388362Z ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7391438Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7391913Z ##[group]Determining the checkout info
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7392452Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7395304Z [command]/usr/bin/git sparse-checkout disable
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7442770Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7471498Z ##[group]Checking out the ref
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.7475118Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9302723Z Switched to a new branch 'main'
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9307009Z branch 'main' set up to track 'origin/main'.
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9326643Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9371733Z [command]/usr/bin/git log -1 --format=%H
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9399057Z ef32b5bb8987fe2ed8e2391862af82ccc4c90a7d
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9409777Z ##[group]Removing auth
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9410197Z Removing SSH command configuration
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9410747Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9443721Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9656321Z Removing HTTP extra header
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9659620Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9691909Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9882624Z Removing includeIf entries pointing to credentials config files
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9897736Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9913841Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9914757Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9915620Z includeif.gitdir:/github/workspace/.git.path
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9916554Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9927218Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9945225Z /home/runner/work/_temp/git-credentials-a8347f18-2884-4f48-92eb-462f18b97789.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9954256Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-a8347f18\-2884\-4f48\-92eb\-462f18b97789\.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:24.9989098Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0011845Z /home/runner/work/_temp/git-credentials-a8347f18-2884-4f48-92eb-462f18b97789.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0018571Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-a8347f18\-2884\-4f48\-92eb\-462f18b97789\.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0100840Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0101503Z /github/runner_temp/git-credentials-a8347f18-2884-4f48-92eb-462f18b97789.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0102673Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-a8347f18\-2884\-4f48\-92eb\-462f18b97789\.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0116783Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0140075Z /github/runner_temp/git-credentials-a8347f18-2884-4f48-92eb-462f18b97789.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0145977Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-a8347f18\-2884\-4f48\-92eb\-462f18b97789\.config
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0177352Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0370149Z Removing credentials config '/home/runner/work/_temp/git-credentials-a8347f18-2884-4f48-92eb-462f18b97789.config'
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0373931Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0577687Z ##[group]Run actions/setup-node@v7.1.0
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0577922Z with:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0578083Z   node-version: 22
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0578261Z   check-latest: false
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0580065Z   token: ***
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0580254Z   package-manager-cache: true
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.0580457Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.1560797Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.2355566Z ##[group]Environment details
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5033046Z node: v22.23.3
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5033300Z npm: 10.9.9
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5033460Z yarn: 1.22.22
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5034295Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5179736Z ##[group]Run node scripts/release-audit.mjs
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5180081Z ^[[36;1mnode scripts/release-audit.mjs^[[0m
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5397733Z shell: /usr/bin/bash -e {0}
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5397972Z env:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5398133Z   CI_VERBOSE: false
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5398321Z   AUDIT_EXPECT_PUBLISHED: true
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5398589Z   AUDIT_REPORT: /home/runner/work/_temp/registry-audit.json
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5400524Z   GH_TOKEN: ***
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.5400702Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:25.9682157Z js: 0.26.0 registry and GitHub release verified
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:26.2594083Z python: 0.26.0 registry and GitHub release verified
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:26.8176662Z rust: 0.26.0 registry and GitHub release verified
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:27.2165080Z csharp: 0.26.0 registry and GitHub release verified
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:27.4995651Z go: 0.26.0 registry and GitHub release verified
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:27.6572646Z ##[error]java: 0.26.0 is absent from Maven Central
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:27.7030865Z ##[error]php: 0.26.0 is absent from Packagist
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2181730Z cpp: 0.26.0 registry and GitHub release verified
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2182124Z 8 languages audited; 2 delivery failure(s).
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2265829Z ##[error]Process completed with exit code 1.
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2333145Z ##[group]Run actions/upload-artifact@v7.0.2
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2333382Z with:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2333557Z   name: registry-audit-38208546589
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2333799Z   path: /home/runner/work/_temp/registry-audit.json
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2334054Z   if-no-files-found: warn
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2334245Z   compression-level: 6
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2334425Z   overwrite: false
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2334608Z   include-hidden-files: false
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2334802Z   archive: true
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.2334967Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.3403552Z With the provided path, there will be 1 file uploaded
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.3408652Z Artifact name is valid!
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.3446854Z Root directory input is valid!
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.6909217Z Uploading artifact: registry-audit-38208546589.zip
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.6938655Z Beginning upload of artifact content to blob storage
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:28.9773266Z Uploaded bytes 715
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.0479243Z Finished uploading artifact content to blob storage!
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.0487455Z SHA256 digest of uploaded artifact is 121081207f3b44ccb660f2e5eda6c84955143b5cf55bc9ac7e45036dd69d752b
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.0488147Z Finalizing artifact upload
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.4271243Z Artifact registry-audit-38208546589 successfully finalized. Artifact ID 11728322602
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.4272288Z Artifact registry-audit-38208546589 has been successfully uploaded! Final size is 715 bytes. Artifact ID is 11728322602
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.4277049Z Artifact download URL: https://github.com/link-foundation/links-notation/actions/runs/38208546589/artifacts/11728322602
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.4425469Z Post job cleanup.
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5095935Z [command]/usr/bin/git version
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5138664Z git version 2.55.0
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5169156Z Temporarily overriding HOME='/home/runner/work/_temp/311034bd-b603-4db0-a74e-ff8d2948b5fe' before making global git config changes
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5169923Z Adding repository directory to the temporary git global config as a safe directory
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5173357Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5198956Z Removing SSH command configuration
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5203925Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5232378Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5437337Z Removing HTTP extra header
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5442182Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5470500Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5678653Z Removing includeIf entries pointing to credentials config files
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5684629Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.5715520Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release_audit / audit	UNKNOWN STEP	2026-10-12T05:52:29.6063267Z Cleaning up orphan processes

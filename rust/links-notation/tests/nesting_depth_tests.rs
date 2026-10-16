@@ -8,7 +8,7 @@
 
 use links_notation::parser::parse_document_with_max_depth;
 use links_notation::{
-    format_links, parse_lino_to_links, parse_lino_to_links_with_config, ParseError, ParserConfig,
+    ParseError, ParserConfig, format_links, parse_lino_to_links, parse_lino_to_links_with_config,
 };
 use std::sync::mpsc;
 use std::thread;

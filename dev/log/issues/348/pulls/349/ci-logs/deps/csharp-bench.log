@@ -1,0 +1,11 @@
+  Determining projects to restore...
+  Restored /tmp/gh-issue-solver-1792166601059/benchmarks/csharp/Benchmark.csproj (in 782 ms).
+  1 of 2 projects are up-to-date for restore.
+  Link.Foundation.Links.Notation -> /tmp/gh-issue-solver-1792166601059/csharp/Link.Foundation.Links.Notation/bin/Release/net10.0/Link.Foundation.Links.Notation.dll
+  Benchmark -> /tmp/gh-issue-solver-1792166601059/benchmarks/csharp/bin/Release/net10.0/LinksNotation.Benchmark.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:05.96

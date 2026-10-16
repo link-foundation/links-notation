@@ -1,0 +1,2182 @@
+[
+  {
+    "scope": "active",
+    "path": "rust/links-notation-benchmark/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "serde",
+    "declared": "1.0.229",
+    "latest": "1.0.229",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "rust/links-notation-benchmark/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "serde_json",
+    "declared": "1.0.154",
+    "latest": "1.0.154",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "rust/links-notation-benchmark/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "tiktoken-rs",
+    "declared": "0.12.1",
+    "latest": "0.12.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "rust/links-notation-macro/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "proc-macro2",
+    "declared": "1.0.107",
+    "latest": "1.0.107",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "rust/links-notation-macro/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "quote",
+    "declared": "1.0.47",
+    "latest": "1.0.47",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "rust/links-notation-macro/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "syn",
+    "declared": "3.0.8",
+    "latest": "3.0.9",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "rust/links-notation/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "nom",
+    "declared": "8.0.0",
+    "latest": "8.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "archived",
+    "path": "experiments/issue-316/rust-timing/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "links-notation",
+    "declared": "=0.21.1",
+    "latest": "0.26.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "clap",
+    "declared": "4.4",
+    "latest": "4.6.7",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "lino-arguments",
+    "declared": "0.3",
+    "latest": "0.5.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "regex",
+    "declared": "1",
+    "latest": "1.13.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "serde_json",
+    "declared": "1",
+    "latest": "1.0.154",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "walkdir",
+    "declared": "2",
+    "latest": "2.5.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/php/composer.json",
+    "ecosystem": "composer",
+    "name": "squizlabs/php_codesniffer",
+    "declared": "^4.0.4",
+    "latest": "4.0.4",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/php/composer.json",
+    "ecosystem": "composer",
+    "name": "yethee/tiktoken",
+    "declared": "^1.1.1",
+    "latest": "1.1.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "php/composer.json",
+    "ecosystem": "composer",
+    "name": "phpunit/phpunit",
+    "declared": "^13.4.1",
+    "latest": "13.4.3",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "php/composer.json",
+    "ecosystem": "composer",
+    "name": "squizlabs/php_codesniffer",
+    "declared": "^4.0.4",
+    "latest": "4.0.4",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/php/composer.json",
+    "ecosystem": "composer",
+    "name": "friendsofphp/php-cs-fixer",
+    "declared": "^3.64",
+    "latest": "3.95.27",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/php/composer.json",
+    "ecosystem": "composer",
+    "name": "phpstan/phpstan",
+    "declared": "^1.12",
+    "latest": "2.3.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/php/composer.json",
+    "ecosystem": "composer",
+    "name": "phpunit/phpunit",
+    "declared": "^10.5",
+    "latest": "13.4.3",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/AutoMerge.yml",
+    "ecosystem": "github",
+    "name": "dependabot/fetch-metadata",
+    "declared": "v3.1.0",
+    "latest": "v3.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "Swatinem/rust-cache",
+    "declared": "v2.9.2",
+    "latest": "v2.9.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "latest": "v6.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "latest": "v8.0.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.0.0",
+    "latest": "v6.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-go",
+    "declared": "v7.0.0",
+    "latest": "v7.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.0.1",
+    "latest": "v6.1.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "latest": "v7.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.0.0",
+    "latest": "v7.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "latest": "v7.0.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "latest": "2.40.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "latest": "v47.0.6",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.0.0",
+    "latest": "v6.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-go",
+    "declared": "v7.0.0",
+    "latest": "v7.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.0.1",
+    "latest": "v6.1.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "latest": "v7.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.0.0",
+    "latest": "v7.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "latest": "2.40.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/bom-check.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/cpp.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "Swatinem/rust-cache",
+    "declared": "v2.9.2",
+    "latest": "v2.9.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "latest": "v6.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.0.0",
+    "latest": "v6.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "latest": "v7.0.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/dependencies.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/dependencies.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "latest": "v7.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/dependencies.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.0.0",
+    "latest": "v7.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/dependencies.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "latest": "v7.0.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/dependencies.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "latest": "v2.2.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "latest": "v7.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.0.0",
+    "latest": "v7.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/go.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/go.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-go",
+    "declared": "v7.0.0",
+    "latest": "v7.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/go.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "latest": "v7.1.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/java.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/java.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.0.1",
+    "latest": "v6.1.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/javascript.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/javascript.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "latest": "v2.2.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "latest": "v2.9.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "latest": "v6.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "latest": "v5.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "latest": "v7.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "latest": "v5.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "latest": "v47.0.6",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/php.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/php.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "latest": "2.40.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-cpp.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "latest": "v8.0.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.0.0",
+    "latest": "v6.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-go.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-java.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-java.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.0.1",
+    "latest": "v6.1.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-js.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-js.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "latest": "v7.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-js.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "latest": "v2.2.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-php.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-php.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "latest": "2.40.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-python.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-python.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.0.0",
+    "latest": "v7.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-python.yml",
+    "ecosystem": "github",
+    "name": "pypa/gh-action-pypi-publish",
+    "declared": "v1.14.2",
+    "latest": "v1.14.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-rust.yml",
+    "ecosystem": "github",
+    "name": "Swatinem/rust-cache",
+    "declared": "v2.9.2",
+    "latest": "v2.9.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-rust.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-rust.yml",
+    "ecosystem": "github",
+    "name": "rust-lang/crates-io-auth-action",
+    "declared": "v1.0.5",
+    "latest": "v1.0.5",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/python.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/python.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.0.0",
+    "latest": "v7.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/release-audit.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/release-audit.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "latest": "v7.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/release-audit.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "latest": "v7.0.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/rust.yml",
+    "ecosystem": "github",
+    "name": "Swatinem/rust-cache",
+    "declared": "v2.9.2",
+    "latest": "v2.9.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/rust.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "latest": "v5.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "latest": "v7.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.38.3",
+    "latest": "v4.39.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "trufflesecurity/trufflehog",
+    "declared": "v3.99.2",
+    "latest": "v3.99.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "latest": "v7.0.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.0.0",
+    "latest": "v7.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "rhysd/actionlint",
+    "declared": "1.7.12",
+    "latest": "v1.7.12",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "PyCQA/flake8",
+    "declared": "7.4.1",
+    "latest": "7.4.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "PyCQA/isort",
+    "declared": "9.0.2",
+    "latest": "9.0.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "doublify/pre-commit-rust",
+    "declared": "v1.0",
+    "latest": "v1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "igorshubovych/markdownlint-cli",
+    "declared": "v0.49.1",
+    "latest": "v0.49.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/mirrors-eslint",
+    "declared": "v10.12.0",
+    "latest": "v10.12.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "latest": "v6.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "psf/black",
+    "declared": "26.10.1",
+    "latest": "26.10.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "cpp/tests/CMakeLists.txt",
+    "ecosystem": "github",
+    "name": "google/googletest",
+    "declared": "v1.18.0",
+    "latest": "v1.18.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7",
+    "latest": "v7.4.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4",
+    "latest": "v4.6.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/metadata-action",
+    "declared": "v6",
+    "latest": "v6.2.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/actions/setup-buildx-resilient/action.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4",
+    "latest": "v4.4.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/actions/setup-buildx-resilient/action.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4",
+    "latest": "v4.4.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v5.0.0",
+    "latest": "v6.0.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/go/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v5.0.0",
+    "latest": "v6.0.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v5.0.0",
+    "latest": "v6.0.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7",
+    "latest": "v7.4.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4",
+    "latest": "v4.6.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/metadata-action",
+    "declared": "v6",
+    "latest": "v6.2.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/actions/setup-buildx-resilient/action.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4",
+    "latest": "v4.4.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/python/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "astral-sh/ruff-pre-commit",
+    "declared": "v0.8.4",
+    "latest": "v0.17.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/python/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/mirrors-mypy",
+    "declared": "v1.13.0",
+    "latest": "v2.4.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/python/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v5.0.0",
+    "latest": "v6.0.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/actions/setup-buildx-resilient/action.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4",
+    "latest": "v4.4.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v5.0.0",
+    "latest": "v6.0.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github-input",
+    "name": "trufflesecurity/trufflehog",
+    "declared": "3.99.2",
+    "latest": "v3.99.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/go/go.mod",
+    "ecosystem": "go",
+    "name": "github.com/dlclark/regexp2",
+    "declared": "v1.12.0",
+    "latest": "1.12.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/go/go.mod",
+    "ecosystem": "go",
+    "name": "github.com/google/uuid",
+    "declared": "v1.6.0",
+    "latest": "1.6.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/go/go.mod",
+    "ecosystem": "go",
+    "name": "github.com/pkoukk/tiktoken-go",
+    "declared": "v0.1.8",
+    "latest": "0.1.8",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/go/go.mod",
+    "ecosystem": "go",
+    "name": "github.com/pkoukk/tiktoken-go-loader",
+    "declared": "v0.0.2",
+    "latest": "0.0.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.diffplug.spotless:spotless-maven-plugin",
+    "declared": "3.10.4",
+    "latest": "3.10.4",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.google.code.gson:gson",
+    "declared": "2.14.0",
+    "latest": "2.14.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.knuddels:jtokkit",
+    "declared": "1.1.0",
+    "latest": "1.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-compiler-plugin",
+    "declared": "3.16.0",
+    "latest": "3.16.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-jar-plugin",
+    "declared": "3.5.1",
+    "latest": "3.5.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.codehaus.mojo:exec-maven-plugin",
+    "declared": "3.6.4",
+    "latest": "3.6.4",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.diffplug.spotless:spotless-maven-plugin",
+    "declared": "3.10.4",
+    "latest": "3.10.4",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.google.googlejavaformat:google-java-format",
+    "declared": "1.37.0",
+    "latest": "1.37.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-compiler-plugin",
+    "declared": "3.16.0",
+    "latest": "3.16.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-dependency-plugin",
+    "declared": "3.11.0",
+    "latest": "3.11.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-gpg-plugin",
+    "declared": "3.2.8",
+    "latest": "3.2.8",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-jar-plugin",
+    "declared": "3.5.1",
+    "latest": "3.5.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-javadoc-plugin",
+    "declared": "3.12.0",
+    "latest": "3.12.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-source-plugin",
+    "declared": "3.4.0",
+    "latest": "3.4.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-surefire-plugin",
+    "declared": "3.6.0",
+    "latest": "3.6.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.junit.jupiter:junit-jupiter",
+    "declared": "6.1.3",
+    "latest": "6.1.3",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.sonatype.central:central-publishing-maven-plugin",
+    "declared": "0.11.0",
+    "latest": "0.12.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.diffplug.spotless:spotless-maven-plugin",
+    "declared": "2.43.0",
+    "latest": "3.10.4",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.github.spotbugs:spotbugs-maven-plugin",
+    "declared": "4.8.3.1",
+    "latest": "4.10.5.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.google.googlejavaformat:google-java-format",
+    "declared": "1.19.2",
+    "latest": "1.37.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-compiler-plugin",
+    "declared": "3.12.1",
+    "latest": "3.16.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-enforcer-plugin",
+    "declared": "3.4.1",
+    "latest": "3.6.3",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-gpg-plugin",
+    "declared": "3.1.0",
+    "latest": "3.2.8",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-jar-plugin",
+    "declared": "3.3.0",
+    "latest": "3.5.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-javadoc-plugin",
+    "declared": "3.6.3",
+    "latest": "3.12.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-source-plugin",
+    "declared": "3.3.0",
+    "latest": "3.4.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-surefire-plugin",
+    "declared": "3.2.5",
+    "latest": "3.6.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.jacoco:jacoco-maven-plugin",
+    "declared": "0.8.11",
+    "latest": "0.8.15",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.junit.jupiter:junit-jupiter",
+    "declared": "5.10.2",
+    "latest": "6.1.3",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.junit.jupiter:junit-jupiter-params",
+    "declared": "5.10.2",
+    "latest": "6.1.3",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": ".github/workflows/publish-js.yml",
+    "ecosystem": "npm",
+    "name": "npm",
+    "declared": "12.2.0",
+    "latest": "12.2.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/js/package.json",
+    "ecosystem": "npm",
+    "name": "gpt-tokenizer",
+    "declared": "^4.0.0",
+    "latest": "4.0.3",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/tools/package.json",
+    "ecosystem": "npm",
+    "name": "csv-parse",
+    "declared": "^7.0.3",
+    "latest": "7.0.3",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/tools/package.json",
+    "ecosystem": "npm",
+    "name": "fast-xml-parser",
+    "declared": "^5.11.2",
+    "latest": "5.11.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/tools/package.json",
+    "ecosystem": "npm",
+    "name": "lino-objects-codec",
+    "declared": "^0.9.2",
+    "latest": "0.9.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/tools/package.json",
+    "ecosystem": "npm",
+    "name": "yaml",
+    "declared": "^2.9.1",
+    "latest": "2.9.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "docs/comparison/package.json",
+    "ecosystem": "npm",
+    "name": "lino-objects-codec",
+    "declared": "^0.9.2",
+    "latest": "0.9.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "docs/comparison/package.json",
+    "ecosystem": "npm",
+    "name": "yaml",
+    "declared": "^2.9.1",
+    "latest": "2.9.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "docs/website/package.json",
+    "ecosystem": "npm",
+    "name": "eslint",
+    "declared": "^10.12.0",
+    "latest": "10.13.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "docs/website/package.json",
+    "ecosystem": "npm",
+    "name": "lino-objects-codec",
+    "declared": "^0.9.2",
+    "latest": "0.9.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "docs/website/package.json",
+    "ecosystem": "npm",
+    "name": "vite",
+    "declared": "^8.3.4",
+    "latest": "8.3.4",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "js/package.json",
+    "ecosystem": "npm",
+    "name": "bun-types",
+    "declared": "^1.4.3",
+    "latest": "1.4.3",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "js/package.json",
+    "ecosystem": "npm",
+    "name": "eslint",
+    "declared": "^10.12.0",
+    "latest": "10.13.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "js/package.json",
+    "ecosystem": "npm",
+    "name": "peggy",
+    "declared": "^5.1.0",
+    "latest": "5.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "js/package.json",
+    "ecosystem": "npm",
+    "name": "prettier",
+    "declared": "^3.9.10",
+    "latest": "3.9.10",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "js/package.json",
+    "ecosystem": "npm",
+    "name": "typescript",
+    "declared": "^7.0.2",
+    "latest": "7.0.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "@changesets/cli",
+    "declared": "^3.0.3",
+    "latest": "3.0.3",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "eslint",
+    "declared": "^9.38.0",
+    "latest": "10.13.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "eslint-config-prettier",
+    "declared": "^10.1.8",
+    "latest": "10.1.8",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "eslint-plugin-prettier",
+    "declared": "^5.5.4",
+    "latest": "5.5.7",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "husky",
+    "declared": "^9.1.7",
+    "latest": "9.1.7",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "jscpd",
+    "declared": "^5.4.0",
+    "latest": "5.4.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "lint-staged",
+    "declared": "^16.4.0",
+    "latest": "17.6.0",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "prettier",
+    "declared": "^3.6.2",
+    "latest": "3.9.10",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "snapshot",
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "test-anywhere",
+    "declared": "^0.8.48",
+    "latest": "0.9.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/csharp/Benchmark.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Bcl.Memory",
+    "declared": "10.0.12",
+    "latest": "10.0.13",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/csharp/Benchmark.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.ML.Tokenizers",
+    "declared": "2.0.0",
+    "latest": "2.0.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/csharp/Benchmark.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.ML.Tokenizers.Data.Cl100kBase",
+    "declared": "2.0.0",
+    "latest": "2.0.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/csharp/Benchmark.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.ML.Tokenizers.Data.O200kBase",
+    "declared": "2.0.0",
+    "latest": "2.0.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.NETFramework.ReferenceAssemblies",
+    "declared": "1.0.3",
+    "latest": "1.0.3",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "xunit.v3",
+    "declared": "4.0.2",
+    "latest": "4.0.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.NETFramework.ReferenceAssemblies",
+    "declared": "1.0.3",
+    "latest": "1.0.3",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.SourceLink.GitHub",
+    "declared": "10.0.401",
+    "latest": "10.0.402",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "latest": "4.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj",
+    "ecosystem": "nuget",
+    "name": "Platform.Collections",
+    "declared": "0.4.0",
+    "latest": "0.4.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "archived",
+    "path": "docs/case-studies/csharp-peg-simplification/solutions/01-parse-expression/project/TestParseExpression.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "latest": "4.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "archived",
+    "path": "docs/case-studies/csharp-peg-simplification/solutions/02-capture-validate/project/TestCaptureValidate.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "latest": "4.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "archived",
+    "path": "docs/case-studies/csharp-peg-simplification/solutions/03-semantic-predicates/project/TestSemanticPredicates.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "latest": "4.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "archived",
+    "path": "docs/case-studies/csharp-peg-simplification/solutions/04-hybrid-approach/project/TestHybrid.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "latest": "4.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "archived",
+    "path": "docs/case-studies/csharp-peg-simplification/solutions/05-minimized-hybrid/project/TestMinimizedHybrid.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "latest": "4.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "archived",
+    "path": "experiments/minimal-peg-rules/TestMinimalRules.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "latest": "4.1.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "benchmarks/python/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "tiktoken",
+    "declared": ">=0.14.0",
+    "latest": "0.14.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "cpp/tools/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "clang-format",
+    "declared": "==23.1.3",
+    "latest": "23.1.3",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "black",
+    "declared": ">=26.10.1",
+    "latest": "26.10.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "flake8",
+    "declared": ">=7.4.1",
+    "latest": "7.4.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "isort",
+    "declared": ">=9.0.2",
+    "latest": "9.0.2",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pytest",
+    "declared": ">=9.1.1",
+    "latest": "9.1.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pytest-timeout",
+    "declared": ">=2.4.0",
+    "latest": "2.4.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "setuptools",
+    "declared": ">=84.0.0; python_version >= '3.10'",
+    "latest": "84.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "scripts/ci/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "build",
+    "declared": ">=1.6.1",
+    "latest": "1.6.1",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "scripts/ci/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "twine",
+    "declared": ">=7.0.0",
+    "latest": "7.0.0",
+    "error": null,
+    "current": true
+  },
+  {
+    "scope": "active",
+    "path": "scripts/ci/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "zizmor",
+    "declared": "==1.30.1",
+    "latest": "1.31.1",
+    "error": null,
+    "current": false
+  },
+  {
+    "scope": "active",
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi-py39",
+    "name": "setuptools",
+    "declared": ">=82.0.1; python_version < '3.10'",
+    "latest": "82.0.1",
+    "error": null,
+    "current": true
+  }
+]

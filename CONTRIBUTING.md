@@ -47,7 +47,7 @@ establish parity.
 
 For native checks use the commands in the reusable workflows: `pytest` and
 Black/isort/flake8 for Python, `go test ./...` and `go vet ./...` for Go,
-`mvn test`, `bash format.sh --check` and `mvn spotless:check` for Java,
+`./mvnw test`, `bash format.sh --check` and `./mvnw spotless:check` for Java,
 `dotnet test --configuration Release` and `dotnet format --verify-no-changes`
 for C#, `composer run-script test` / `lint` for PHP, and
 `cmake -S cpp -B build && cmake --build build && ctest --test-dir build` plus
@@ -125,7 +125,7 @@ as the PyPI publisher. See [release setup](docs/releases.md).
 
 Add a fragment under `changelog.d/` for each user-visible change. Release PRs
 combine the reviewed fragments into `CHANGELOG.md` and update all eight declared
-versions together. This PR prepares 0.26.0. Per-registry tags remain for
+versions together. This PR prepares 0.27.0. Per-registry tags remain for
 existing consumers, especially Go's required `go/vVERSION` tag. One CI run
 waits for all eight native stages before calling `release.yml`, coordinates
 publishing, and performs the final exact-version audit. A distributed

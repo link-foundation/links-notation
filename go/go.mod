@@ -1,4 +1,3 @@
 module github.com/link-foundation/links-notation/go
 
-go 1.24
-
+go 1.26

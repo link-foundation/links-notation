@@ -14,7 +14,7 @@ func referenceFixtures(t *testing.T) []string {
 		t.Fatal(err)
 	}
 	var result []string
-	for _, line := range strings.Split(strings.TrimSpace(string(data)), "\n") {
+	for line := range strings.SplitSeq(strings.TrimSpace(string(data)), "\n") {
 		if strings.HasPrefix(line, "#") {
 			continue
 		}
@@ -112,7 +112,7 @@ func TestMalformedReferenceLiteralsAreRejected(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, literal := range strings.Split(strings.TrimSpace(string(data)), "\n") {
+	for literal := range strings.SplitSeq(strings.TrimSpace(string(data)), "\n") {
 		if strings.HasPrefix(literal, "#") {
 			continue
 		}

@@ -1,0 +1,703 @@
+Test project /tmp/cpp316
+        Start   1: example_basic_usage
+        Start   2: example_binary_lino
+        Start   3: example_features
+        Start   4: ApiTests.TestIsRef
+  1/349 Test   #1: example_basic_usage ...............................................................................   Passed    0.03 sec
+        Start   5: ApiTests.TestIsLink
+  2/349 Test   #3: example_features ..................................................................................   Passed    0.04 sec
+        Start   6: ApiTests.TestIsRefEquivalent
+  3/349 Test   #4: ApiTests.TestIsRef ................................................................................   Passed    0.04 sec
+        Start   7: ApiTests.TestIsLinkEquivalent
+  4/349 Test   #5: ApiTests.TestIsLink ...............................................................................   Passed    0.04 sec
+        Start   8: ApiTests.TestEmptyLink
+  5/349 Test   #6: ApiTests.TestIsRefEquivalent ......................................................................   Passed    0.01 sec
+        Start   9: ApiTests.TestSimpleLink
+  6/349 Test   #7: ApiTests.TestIsLinkEquivalent .....................................................................   Passed    0.01 sec
+        Start  10: ApiTests.TestLinkWithSourceTarget
+  7/349 Test   #8: ApiTests.TestEmptyLink ............................................................................   Passed    0.01 sec
+        Start  11: ApiTests.TestLinkWithSourceTypeTarget
+  8/349 Test   #9: ApiTests.TestSimpleLink ...........................................................................   Passed    0.01 sec
+        Start  12: ApiTests.TestSingleLineFormat
+  9/349 Test  #10: ApiTests.TestLinkWithSourceTarget .................................................................   Passed    0.01 sec
+        Start  13: ApiTests.TestQuotedReferences
+ 10/349 Test  #11: ApiTests.TestLinkWithSourceTypeTarget .............................................................   Passed    0.01 sec
+        Start  14: ApiTests.TestQuotedReferencesParsing
+ 11/349 Test  #12: ApiTests.TestSingleLineFormat .....................................................................   Passed    0.01 sec
+        Start  15: ApiTests.TestIndentedIdSyntaxParsing
+ 12/349 Test  #14: ApiTests.TestQuotedReferencesParsing ..............................................................   Passed    0.01 sec
+        Start  16: ApiTests.TestMultipleIndentedIdSyntaxParsing
+ 13/349 Test  #13: ApiTests.TestQuotedReferences .....................................................................   Passed    0.01 sec
+        Start  17: ApiTests.TestIndentedIdSyntaxRoundtrip
+ 14/349 Test  #15: ApiTests.TestIndentedIdSyntaxParsing ..............................................................   Passed    0.01 sec
+        Start  18: ApiTests.TestMultipleIndentedIdSyntaxRoundtrip
+ 15/349 Test  #16: ApiTests.TestMultipleIndentedIdSyntaxParsing ......................................................   Passed    0.01 sec
+        Start  19: BenchmarkDocumentsTests.EveryGeneratedDocumentParses
+ 16/349 Test  #17: ApiTests.TestIndentedIdSyntaxRoundtrip ............................................................   Passed    0.01 sec
+        Start  20: BinaryNotationTests.StringBudgetStopsBeforeLaterScalars
+ 17/349 Test  #18: ApiTests.TestMultipleIndentedIdSyntaxRoundtrip ....................................................   Passed    0.01 sec
+        Start  21: BinaryNotationTests.SharedVectors
+ 18/349 Test  #20: BinaryNotationTests.StringBudgetStopsBeforeLaterScalars ...........................................   Passed    0.01 sec
+        Start  22: BinaryNotationTests.GoldenDocumentsAreStable
+ 19/349 Test  #21: BinaryNotationTests.SharedVectors .................................................................   Passed    0.02 sec
+        Start  23: BinaryNotationTests.GoldenPacketsAreStable
+ 20/349 Test  #22: BinaryNotationTests.GoldenDocumentsAreStable ......................................................   Passed    0.03 sec
+        Start  24: BinaryNotationTests.EveryOptionSetRoundTripsTheCorpus
+ 21/349 Test  #23: BinaryNotationTests.GoldenPacketsAreStable ........................................................   Passed    0.02 sec
+        Start  25: BinaryNotationTests.CanonicalTextRoundTripsTheCorpus
+ 22/349 Test  #25: BinaryNotationTests.CanonicalTextRoundTripsTheCorpus ..............................................   Passed    0.01 sec
+        Start  26: BinaryNotationTests.ReferencesAreQuotedOnlyWhenNeeded
+ 23/349 Test  #26: BinaryNotationTests.ReferencesAreQuotedOnlyWhenNeeded .............................................   Passed    0.01 sec
+        Start  27: BinaryNotationTests.WidthTiersFollowTheNumberOfLinks
+ 24/349 Test  #27: BinaryNotationTests.WidthTiersFollowTheNumberOfLinks ..............................................   Passed    0.01 sec
+        Start  28: BinaryNotationTests.ExternalReferencesMatchPlatformDataHybrid
+ 25/349 Test  #28: BinaryNotationTests.ExternalReferencesMatchPlatformDataHybrid .....................................   Passed    0.01 sec
+        Start  29: BinaryNotationTests.UniformWidthsGrowPast256AddressesAndPackedWidthsStaySmall
+ 26/349 Test  #19: BenchmarkDocumentsTests.EveryGeneratedDocumentParses ..............................................   Passed    0.13 sec
+        Start  30: BinaryNotationTests.PackedWidthsNeverTakeMoreBytesThanUniformOnes
+ 27/349 Test  #24: BinaryNotationTests.EveryOptionSetRoundTripsTheCorpus .............................................   Passed    0.09 sec
+        Start  31: BinaryNotationTests.LargeExternalValuesWidenOnlyTheirSection
+ 28/349 Test  #31: BinaryNotationTests.LargeExternalValuesWidenOnlyTheirSection ......................................   Passed    0.01 sec
+        Start  32: BinaryNotationTests.ArityOptionsChooseDoubletsTripletsOrAnyLength
+ 29/349 Test  #32: BinaryNotationTests.ArityOptionsChooseDoubletsTripletsOrAnyLength .................................   Passed    0.01 sec
+        Start  33: BinaryNotationTests.AritiesWithoutDoubletsAreUnencodable
+ 30/349 Test  #33: BinaryNotationTests.AritiesWithoutDoubletsAreUnencodable ..........................................   Passed    0.01 sec
+        Start  34: BinaryNotationTests.ArityRangesParseAndDisplay
+ 31/349 Test  #34: BinaryNotationTests.ArityRangesParseAndDisplay ....................................................   Passed    0.01 sec
+        Start  35: BinaryNotationTests.ReplyOptionsFollowTheReceivedPacket
+ 32/349 Test  #35: BinaryNotationTests.ReplyOptionsFollowTheReceivedPacket ...........................................   Passed    0.02 sec
+        Start  36: BinaryNotationTests.HandBuiltPacketsDecode
+ 33/349 Test  #36: BinaryNotationTests.HandBuiltPacketsDecode ........................................................   Passed    0.01 sec
+        Start  37: BinaryNotationTests.PackingRejectsLinksItCannotLayOut
+ 34/349 Test  #37: BinaryNotationTests.PackingRejectsLinksItCannotLayOut .............................................   Passed    0.01 sec
+        Start  38: BinaryNotationTests.WritingRejectsSectionsThatDoNotHoldTheirLinks
+ 35/349 Test  #38: BinaryNotationTests.WritingRejectsSectionsThatDoNotHoldTheirLinks .................................   Passed    0.01 sec
+        Start  39: BinaryNotationTests.MalformedPacketsAreRejected
+ 36/349 Test  #29: BinaryNotationTests.UniformWidthsGrowPast256AddressesAndPackedWidthsStaySmall .....................   Passed    0.15 sec
+        Start  40: BinaryNotationTests.InvalidCodePointsAreRejected
+ 37/349 Test  #39: BinaryNotationTests.MalformedPacketsAreRejected ...................................................   Passed    0.01 sec
+        Start  41: BinaryNotationTests.HostilePacketsHitLimits
+ 38/349 Test  #40: BinaryNotationTests.InvalidCodePointsAreRejected ..................................................   Passed    0.01 sec
+        Start  42: BinaryNotationTests.StreamFailuresAreIoErrorsAndInterruptionsAreRetried
+ 39/349 Test  #41: BinaryNotationTests.HostilePacketsHitLimits .......................................................   Passed    0.02 sec
+        Start  43: BinaryNotationTests.EveryShortReferenceOverDelimitersRoundTrips
+ 40/349 Test  #42: BinaryNotationTests.StreamFailuresAreIoErrorsAndInterruptionsAreRetried ...........................   Passed    0.02 sec
+        Start  44: BinaryNotationTests.CommentReferencesSurviveBinaryAndTextRoundTrips
+ 41/349 Test  #44: BinaryNotationTests.CommentReferencesSurviveBinaryAndTextRoundTrips ...............................   Passed    0.01 sec
+        Start  45: BinaryNotationTests.TextHelpersPreserveUnicodeWhitespaceReferences
+ 42/349 Test  #45: BinaryNotationTests.TextHelpersPreserveUnicodeWhitespaceReferences ................................   Passed    0.01 sec
+        Start  46: BinaryNotationTests.NativeParserGroupsRoundTripWithoutCanonicalization
+ 43/349 Test  #46: BinaryNotationTests.NativeParserGroupsRoundTripWithoutCanonicalization ............................   Passed    0.10 sec
+        Start  47: BinaryNotationTests.StreamPacketsAreReadOneAtATimeAndTruncationIsRejected
+ 44/349 Test  #47: BinaryNotationTests.StreamPacketsAreReadOneAtATimeAndTruncationIsRejected .........................   Passed    0.01 sec
+        Start  48: BinaryNotationTests.InMemoryPacketsObeyLimits
+ 45/349 Test  #48: BinaryNotationTests.InMemoryPacketsObeyLimits .....................................................   Passed    0.01 sec
+        Start  49: BinaryNotationTests.InMemoryPacketsRejectInvalidWireShapes
+ 46/349 Test  #30: BinaryNotationTests.PackedWidthsNeverTakeMoreBytesThanUniformOnes .................................   Passed    0.29 sec
+        Start  50: BinaryNotationTests.CompactAddressOverflowIsRejectedBeforeReadingLinks
+ 47/349 Test  #49: BinaryNotationTests.InMemoryPacketsRejectInvalidWireShapes ........................................   Passed    0.01 sec
+        Start  51: BinaryNotationTests.RepeatedReferencesObeyATotalUtf8ExpansionBudget
+ 48/349 Test  #50: BinaryNotationTests.CompactAddressOverflowIsRejectedBeforeReadingLinks ............................   Passed    0.01 sec
+        Start  52: BinaryNotationTests.InvalidEncoderModelsAndAddressOverflowAreErrors
+ 49/349 Test  #51: BinaryNotationTests.RepeatedReferencesObeyATotalUtf8ExpansionBudget ...............................   Passed    0.01 sec
+        Start  53: BinaryNotationTests.DefaultDepthLimitRejectsABoundedDeepPacket
+ 50/349 Test  #52: BinaryNotationTests.InvalidEncoderModelsAndAddressOverflowAreErrors ...............................   Passed    0.01 sec
+        Start  54: BinaryNotationTests.IdsDoNotAddAnExtraModelNestingLevel
+ 51/349 Test  #53: BinaryNotationTests.DefaultDepthLimitRejectsABoundedDeepPacket ....................................   Passed    0.01 sec
+        Start  55: BinaryNotationTests.CodecEncoderUsesConfiguredLimits
+ 52/349 Test  #55: BinaryNotationTests.CodecEncoderUsesConfiguredLimits ..............................................   Passed    0.01 sec
+        Start  56: BinaryNotationTests.NativeModels
+ 53/349 Test  #54: BinaryNotationTests.IdsDoNotAddAnExtraModelNestingLevel ...........................................   Passed    0.03 sec
+        Start  57: BinaryNotationTests.LimitsAndMalformed
+ 54/349 Test  #57: BinaryNotationTests.LimitsAndMalformed ............................................................   Passed    0.01 sec
+        Start  58: BinaryNotationTests.StreamsUint64TruncationAndDepth
+ 55/349 Test  #58: BinaryNotationTests.StreamsUint64TruncationAndDepth ...............................................   Passed    0.01 sec
+        Start  59: CommentsTests.ALineThatStartsWithAHashIsAComment
+ 56/349 Test  #59: CommentsTests.ALineThatStartsWithAHashIsAComment ..................................................   Passed    0.01 sec
+        Start  60: CommentsTests.ACommentMayHoldAColon
+ 57/349 Test  #56: BinaryNotationTests.NativeModels ..................................................................   Passed    0.04 sec
+        Start  61: CommentsTests.ACommentMayHoldAnythingAtAll
+ 58/349 Test  #60: CommentsTests.ACommentMayHoldAColon ...............................................................   Passed    0.01 sec
+        Start  62: CommentsTests.ACommentEndsAtTheEndOfItsLine
+ 59/349 Test  #61: CommentsTests.ACommentMayHoldAnythingAtAll ........................................................   Passed    0.01 sec
+        Start  63: CommentsTests.ACommentMayFollowALink
+ 60/349 Test  #62: CommentsTests.ACommentEndsAtTheEndOfItsLine .......................................................   Passed    0.01 sec
+        Start  64: CommentsTests.ACommentMayFollowAGroup
+ 61/349 Test  #63: CommentsTests.ACommentMayFollowALink ..............................................................   Passed    0.01 sec
+        Start  65: CommentsTests.ACommentNeedsNoClosingNewline
+ 62/349 Test  #64: CommentsTests.ACommentMayFollowAGroup .............................................................   Passed    0.01 sec
+        Start  66: CommentsTests.ACommentLineInsideAnIndentedBlockIsSkipped
+ 63/349 Test  #65: CommentsTests.ACommentNeedsNoClosingNewline .......................................................   Passed    0.01 sec
+        Start  67: CommentsTests.ACommentLineInsideAGroupIsSkipped
+ 64/349 Test  #66: CommentsTests.ACommentLineInsideAnIndentedBlockIsSkipped ..........................................   Passed    0.01 sec
+        Start  68: CommentsTests.ADocumentOfCommentsAloneHoldsNoLinks
+ 65/349 Test   #2: example_binary_lino ...............................................................................   Passed    0.63 sec
+        Start  69: CommentsTests.AHashInsideATokenIsAnOrdinaryCharacter
+ 66/349 Test  #67: CommentsTests.ACommentLineInsideAGroupIsSkipped ...................................................   Passed    0.01 sec
+        Start  70: CommentsTests.AHashThatOpensATokenIsAnOrdinaryCharacter
+ 67/349 Test  #68: CommentsTests.ADocumentOfCommentsAloneHoldsNoLinks ................................................   Passed    0.01 sec
+        Start  71: CommentsTests.AHashInsideADelimitedReferenceIsContent
+ 68/349 Test  #69: CommentsTests.AHashInsideATokenIsAnOrdinaryCharacter ..............................................   Passed    0.01 sec
+        Start  72: CommentsTests.ACommentMayFollowADelimitedReference
+ 69/349 Test  #70: CommentsTests.AHashThatOpensATokenIsAnOrdinaryCharacter ...........................................   Passed    0.01 sec
+        Start  73: CommentsTests.AHashInsideAMultilineDelimitedReferenceIsContent
+ 70/349 Test  #71: CommentsTests.AHashInsideADelimitedReferenceIsContent .............................................   Passed    0.01 sec
+        Start  74: CommentsTests.AParserWithoutCommentsKeepsTheHash
+ 71/349 Test  #72: CommentsTests.ACommentMayFollowADelimitedReference ................................................   Passed    0.01 sec
+        Start  75: CommentsTests.AParserWithoutCommentsStillRejectsTheDocumentFromTheIssue
+ 72/349 Test  #73: CommentsTests.AHashInsideAMultilineDelimitedReferenceIsContent ....................................   Passed    0.01 sec
+        Start  76: CommentsTests.CommentsAreOnByDefault
+ 73/349 Test  #74: CommentsTests.AParserWithoutCommentsKeepsTheHash ..................................................   Passed    0.01 sec
+        Start  77: CommentsTests.ACommentDoesNotMoveThePositionALaterErrorIsReportedAt
+ 74/349 Test  #75: CommentsTests.AParserWithoutCommentsStillRejectsTheDocumentFromTheIssue ...........................   Passed    0.01 sec
+        Start  78: CommentsTests.ALineOfSpacesSeparatesLinksTheWayAnEmptyLineDoes
+ 75/349 Test  #76: CommentsTests.CommentsAreOnByDefault ..............................................................   Passed    0.01 sec
+        Start  79: CommentsTests.AReferenceThatBeginsWithAHashIsWrittenQuoted
+ 76/349 Test  #77: CommentsTests.ACommentDoesNotMoveThePositionALaterErrorIsReportedAt ...............................   Passed    0.01 sec
+        Start  80: CommentsTests.AHashThatCannotOpenACommentIsLeftUnquoted
+ 77/349 Test  #79: CommentsTests.AReferenceThatBeginsWithAHashIsWrittenQuoted ........................................   Passed    0.01 sec
+        Start  81: CommentsTests.BlankingACommentKeepsTheLengthOfTheDocument
+ 78/349 Test  #78: CommentsTests.ALineOfSpacesSeparatesLinksTheWayAnEmptyLineDoes ....................................   Passed    0.01 sec
+        Start  82: EdgeCaseParserTests.EmptyLinkTest
+ 79/349 Test  #80: CommentsTests.AHashThatCannotOpenACommentIsLeftUnquoted ...........................................   Passed    0.01 sec
+        Start  83: EdgeCaseParserTests.EmptyLinkWithParenthesesTest
+ 80/349 Test  #81: CommentsTests.BlankingACommentKeepsTheLengthOfTheDocument .........................................   Passed    0.01 sec
+        Start  84: EdgeCaseParserTests.EmptyLinkWithEmptySelfReferenceTest
+ 81/349 Test  #83: EdgeCaseParserTests.EmptyLinkWithParenthesesTest ..................................................   Passed    0.01 sec
+        Start  85: EdgeCaseParserTests.TestAllFeaturesTest
+ 82/349 Test  #84: EdgeCaseParserTests.EmptyLinkWithEmptySelfReferenceTest ...........................................   Passed    0.01 sec
+        Start  86: EdgeCaseParserTests.TestEmptyDocumentTest
+ 83/349 Test  #82: EdgeCaseParserTests.EmptyLinkTest .................................................................   Passed    0.02 sec
+        Start  87: EdgeCaseParserTests.TestWhitespaceOnlyTest
+ 84/349 Test  #85: EdgeCaseParserTests.TestAllFeaturesTest ...........................................................   Passed    0.01 sec
+        Start  88: EdgeCaseParserTests.TestEmptyLinksTest
+ 85/349 Test  #86: EdgeCaseParserTests.TestEmptyDocumentTest .........................................................   Passed    0.01 sec
+        Start  89: EdgeCaseParserTests.TestSingletLinks
+ 86/349 Test  #88: EdgeCaseParserTests.TestEmptyLinksTest ............................................................   Passed    0.01 sec
+        Start  90: EdgeCaseParserTests.TestInvalidInput
+ 87/349 Test  #87: EdgeCaseParserTests.TestWhitespaceOnlyTest ........................................................   Passed    0.03 sec
+        Start  91: EmptyReferenceTests.BareDelimiterPairIsTheEmptyReference
+ 88/349 Test  #89: EdgeCaseParserTests.TestSingletLinks ..............................................................   Passed    0.02 sec
+        Start  92: EmptyReferenceTests.EveryDelimiterStyleYieldsTheSameEmptyReference
+ 89/349 Test  #90: EdgeCaseParserTests.TestInvalidInput ..............................................................   Passed    0.02 sec
+        Start  93: EmptyReferenceTests.AdjacentEmptyReferencesStaySeparate
+ 90/349 Test  #91: EmptyReferenceTests.BareDelimiterPairIsTheEmptyReference ..........................................   Passed    0.01 sec
+        Start  94: EmptyReferenceTests.NestedEmptyReferencesParse
+ 91/349 Test  #92: EmptyReferenceTests.EveryDelimiterStyleYieldsTheSameEmptyReference ................................   Passed    0.01 sec
+        Start  95: EmptyReferenceTests.EmptyReferenceIsValidAsAnId
+ 92/349 Test  #93: EmptyReferenceTests.AdjacentEmptyReferencesStaySeparate ...........................................   Passed    0.01 sec
+        Start  96: EmptyReferenceTests.NQuoteDelimitedBodiesAreUnchanged
+ 93/349 Test  #94: EmptyReferenceTests.NestedEmptyReferencesParse ....................................................   Passed    0.01 sec
+        Start  97: EmptyReferenceTests.ASingleSpaceStillReadsAsASpace
+ 94/349 Test  #95: EmptyReferenceTests.EmptyReferenceIsValidAsAnId ...................................................   Passed    0.01 sec
+        Start  98: EmptyReferenceTests.EmptyReferenceSurvivesARoundTrip
+ 95/349 Test  #96: EmptyReferenceTests.NQuoteDelimitedBodiesAreUnchanged .............................................   Passed    0.01 sec
+        Start  99: EmptyReferenceTests.EmptyReferenceIsWrittenAsAVersionedLiteral
+ 96/349 Test  #97: EmptyReferenceTests.ASingleSpaceStillReadsAsASpace ................................................   Passed    0.01 sec
+        Start 100: FormatConfigTests.FormatConfigBasic
+ 97/349 Test  #98: EmptyReferenceTests.EmptyReferenceSurvivesARoundTrip ..............................................   Passed    0.01 sec
+        Start 101: FormatConfigTests.FormatWithLineLengthLimit
+ 98/349 Test  #99: EmptyReferenceTests.EmptyReferenceIsWrittenAsAVersionedLiteral ....................................   Passed    0.01 sec
+        Start 102: FormatConfigTests.FormatWithMaxInlineRefs
+ 99/349 Test #100: FormatConfigTests.FormatConfigBasic ...............................................................   Passed    0.01 sec
+        Start 103: FormatConfigTests.FormatWithConsecutiveGrouping
+100/349 Test #101: FormatConfigTests.FormatWithLineLengthLimit .......................................................   Passed    0.02 sec
+        Start 104: FormatConfigTests.FormatConfigCustomIndent
+101/349 Test #102: FormatConfigTests.FormatWithMaxInlineRefs .........................................................   Passed    0.02 sec
+        Start 105: FormatConfigTests.FormatConfigLessParentheses
+102/349 Test #103: FormatConfigTests.FormatWithConsecutiveGrouping ...................................................   Passed    0.01 sec
+        Start 106: FormatConfigTests.RoundtripWithLineLengthFormatting
+103/349 Test #104: FormatConfigTests.FormatConfigCustomIndent ........................................................   Passed    0.01 sec
+        Start 107: FormatConfigTests.ShouldIndentByLength
+104/349 Test #105: FormatConfigTests.FormatConfigLessParentheses .....................................................   Passed    0.01 sec
+        Start 108: FormatConfigTests.ShouldIndentByRefCount
+105/349 Test #106: FormatConfigTests.RoundtripWithLineLengthFormatting ...............................................   Passed    0.02 sec
+        Start 109: FormatConfigTests.FormatLinkWithLessParenthesesIntegration
+106/349 Test #107: FormatConfigTests.ShouldIndentByLength ............................................................   Passed    0.02 sec
+        Start 110: FormatConfigTests.FormatLinkWithMaxInlineRefsIntegration
+107/349 Test #109: FormatConfigTests.FormatLinkWithLessParenthesesIntegration ........................................   Passed    0.01 sec
+        Start 111: FormatConfigTests.FormatLinkWithLineLengthLimitIntegration
+108/349 Test #108: FormatConfigTests.ShouldIndentByRefCount ..........................................................   Passed    0.03 sec
+        Start 112: FormatConfigTests.FormatLinksWithConsecutiveGroupingIntegration
+109/349 Test #110: FormatConfigTests.FormatLinkWithMaxInlineRefsIntegration ..........................................   Passed    0.01 sec
+        Start 113: FormatConfigTests.FormatLinkWithCustomIndentIntegration
+110/349 Test #112: FormatConfigTests.FormatLinksWithConsecutiveGroupingIntegration ...................................   Passed    0.01 sec
+        Start 114: FormatConfigTests.FormatRoundtripWithConfigIntegration
+111/349 Test #111: FormatConfigTests.FormatLinkWithLineLengthLimitIntegration ........................................   Passed    0.01 sec
+        Start 115: FormatConfigTests.FormatEmptyLinksWithConfig
+112/349 Test #113: FormatConfigTests.FormatLinkWithCustomIndentIntegration ...........................................   Passed    0.01 sec
+        Start 116: FormatConfigTests.FormatSingleRefWithConfig
+113/349 Test #114: FormatConfigTests.FormatRoundtripWithConfigIntegration ............................................   Passed    0.01 sec
+        Start 117: IndentationConsistencyTests.TestLeadingSpacesVsNoLeadingSpaces
+114/349 Test #115: FormatConfigTests.FormatEmptyLinksWithConfig ......................................................   Passed    0.01 sec
+        Start 118: IndentationConsistencyTests.TestTwoSpacesVsFourSpacesIndentation
+115/349 Test #116: FormatConfigTests.FormatSingleRefWithConfig .......................................................   Passed    0.01 sec
+        Start 119: IndentationConsistencyTests.TestSimpleTwoVsFourSpacesIndentation
+116/349 Test #117: IndentationConsistencyTests.TestLeadingSpacesVsNoLeadingSpaces ....................................   Passed    0.01 sec
+        Start 120: IndentationConsistencyTests.TestThreeLevelNestingWithDifferentIndentation
+117/349 Test #118: IndentationConsistencyTests.TestTwoSpacesVsFourSpacesIndentation ..................................   Passed    0.01 sec
+        Start 121: IndentedDocumentTests.MixedQuotesRoundTripThroughTheExistingLinkFormatter
+118/349 Test #119: IndentationConsistencyTests.TestSimpleTwoVsFourSpacesIndentation ..................................   Passed    0.01 sec
+        Start 122: IndentedDocumentTests.MinimalEscapingLeavesOrdinaryProseUnquoted
+119/349 Test #120: IndentationConsistencyTests.TestThreeLevelNestingWithDifferentIndentation .........................   Passed    0.01 sec
+        Start 123: IndentedDocumentTests.PublicGroupsPreserveImmediateChildrenAndDeeperIndentation
+120/349 Test #121: IndentedDocumentTests.MixedQuotesRoundTripThroughTheExistingLinkFormatter .........................   Passed    0.01 sec
+        Start 124: IndentedDocumentTests.GroupsRetainNamedAndNestedLinksAndShareParserDiagnostics
+121/349 Test #122: IndentedDocumentTests.MinimalEscapingLeavesOrdinaryProseUnquoted ..................................   Passed    0.01 sec
+        Start 125: IndentedDocumentTests.ParseTheIssueDocumentWithoutInspectingPrivatePathFlags
+122/349 Test #123: IndentedDocumentTests.PublicGroupsPreserveImmediateChildrenAndDeeperIndentation ...................   Passed    0.01 sec
+        Start 126: IndentedDocumentTests.MultipleChildLinesHaveExplicitArrayOrJoinedTextBehavior
+123/349 Test #124: IndentedDocumentTests.GroupsRetainNamedAndNestedLinksAndShareParserDiagnostics ....................   Passed    0.02 sec
+        Start 127: IndentedDocumentTests.FormatTheIssueDocumentWithTwoSpaceIndentationAndAFinalNewline
+124/349 Test #125: IndentedDocumentTests.ParseTheIssueDocumentWithoutInspectingPrivatePathFlags ......................   Passed    0.02 sec
+        Start 128: IndentedDocumentTests.EmptyTextExactWhitespaceCommentsQuotesAndMultilineTextSurvive
+125/349 Test #126: IndentedDocumentTests.MultipleChildLinesHaveExplicitArrayOrJoinedTextBehavior .....................   Passed    0.02 sec
+        Start 129: IndentedDocumentTests.UnescapingUsesTheGrammarAndNeverDecodesAlreadyParsedIdsAgain
+126/349 Test #127: IndentedDocumentTests.FormatTheIssueDocumentWithTwoSpaceIndentationAndAFinalNewline ...............   Passed    0.02 sec
+        Start 130: IndentedDocumentTests.DocumentHelpersRejectDeeperOrNamedValueStructuresInsteadOfLosingData
+127/349 Test #128: IndentedDocumentTests.EmptyTextExactWhitespaceCommentsQuotesAndMultilineTextSurvive ...............   Passed    0.02 sec
+        Start 131: IndentedDocumentTests.DocumentParsingRespectsCommentsAndExistingParserOptions
+128/349 Test #129: IndentedDocumentTests.UnescapingUsesTheGrammarAndNeverDecodesAlreadyParsedIdsAgain ................   Passed    0.02 sec
+        Start 132: IndentedDocumentTests.OneElementArraysNormalizeToStringsAndUnansweredParentsRemainDistinct
+129/349 Test #130: IndentedDocumentTests.DocumentHelpersRejectDeeperOrNamedValueStructuresInsteadOfLosingData ........   Passed    0.01 sec
+        Start 133: IndentedDocumentTests.DocumentHelpersPreserveTheSharedUnicodeReferenceCorpusAndReservedPrefixes
+130/349 Test #131: IndentedDocumentTests.DocumentParsingRespectsCommentsAndExistingParserOptions .....................   Passed    0.01 sec
+        Start 134: IndentedDocumentTests.UnescapingDecodesVersionedLiteralsWithoutDecodingParsedDocumentIdsTwice
+131/349 Test #134: IndentedDocumentTests.UnescapingDecodesVersionedLiteralsWithoutDecodingParsedDocumentIdsTwice .....   Passed    0.01 sec
+        Start 135: IndentedIdNestedValuesTests.IndentedIdRetainsNestedValues
+132/349 Test #132: IndentedDocumentTests.OneElementArraysNormalizeToStringsAndUnansweredParentsRemainDistinct ........   Passed    0.02 sec
+        Start 136: IndentedIdSyntaxTests.BasicIndentedIdSyntaxTest
+133/349 Test #133: IndentedDocumentTests.DocumentHelpersPreserveTheSharedUnicodeReferenceCorpusAndReservedPrefixes ...   Passed    0.02 sec
+        Start 137: IndentedIdSyntaxTests.IndentedIdSyntaxWithSingleValueTest
+134/349 Test #135: IndentedIdNestedValuesTests.IndentedIdRetainsNestedValues .........................................   Passed    0.01 sec
+        Start 138: IndentedIdSyntaxTests.IndentedIdSyntaxWithMultipleValuesTest
+135/349 Test #136: IndentedIdSyntaxTests.BasicIndentedIdSyntaxTest ...................................................   Passed    0.01 sec
+        Start 139: IndentedIdSyntaxTests.IndentedIdSyntaxWithNumericIdTest
+136/349 Test #137: IndentedIdSyntaxTests.IndentedIdSyntaxWithSingleValueTest .........................................   Passed    0.01 sec
+        Start 140: IndentedIdSyntaxTests.UnsupportedColonOnlySyntaxShouldFailTest
+137/349 Test #138: IndentedIdSyntaxTests.IndentedIdSyntaxWithMultipleValuesTest ......................................   Passed    0.01 sec
+        Start 141: IndentedIdSyntaxTests.EmptyIndentedIdShouldWorkTest
+138/349 Test #139: IndentedIdSyntaxTests.IndentedIdSyntaxWithNumericIdTest ...........................................   Passed    0.01 sec
+        Start 142: IndentedIdSyntaxTests.IndentedIdSyntaxWithQuotedIdTest
+139/349 Test #140: IndentedIdSyntaxTests.UnsupportedColonOnlySyntaxShouldFailTest ....................................   Passed    0.01 sec
+        Start 143: IndentedIdSyntaxTests.MultipleIndentedIdLinksTest
+140/349 Test #143: IndentedIdSyntaxTests.MultipleIndentedIdLinksTest .................................................   Passed    0.01 sec
+        Start 144: IndentedIdSyntaxTests.MixedIndentedAndRegularSyntaxTest
+141/349 Test #141: IndentedIdSyntaxTests.EmptyIndentedIdShouldWorkTest ...............................................   Passed    0.02 sec
+        Start 145: IndentedIdSyntaxTests.IndentedIdWithDeeperNestingTest
+142/349 Test #142: IndentedIdSyntaxTests.IndentedIdSyntaxWithQuotedIdTest ............................................   Passed    0.02 sec
+        Start 146: IndentedIdSyntaxTests.EquivalenceTestComprehensive
+143/349 Test #144: IndentedIdSyntaxTests.MixedIndentedAndRegularSyntaxTest ...........................................   Passed    0.01 sec
+        Start 147: Issue312ConformanceTests.CrIsALineBreak
+144/349 Test #145: IndentedIdSyntaxTests.IndentedIdWithDeeperNestingTest .............................................   Passed    0.01 sec
+        Start 148: Issue312ConformanceTests.OnlyGrammarWhitespaceMakesAnEmptyDocument
+145/349 Test #146: IndentedIdSyntaxTests.EquivalenceTestComprehensive ................................................   Passed    0.02 sec
+        Start 149: Issue312ConformanceTests.UnicodeSpacesAreSubstantiveEvenQuoteBodies
+146/349 Test #147: Issue312ConformanceTests.CrIsALineBreak ...........................................................   Passed    0.01 sec
+        Start 150: Issue312ConformanceTests.TrailingIndentationIsDocumentWhitespace
+147/349 Test #148: Issue312ConformanceTests.OnlyGrammarWhitespaceMakesAnEmptyDocument ................................   Passed    0.01 sec
+        Start 151: Issue312ConformanceTests.ASingleReferenceIsALinkValueAtEveryDepth
+148/349 Test #149: Issue312ConformanceTests.UnicodeSpacesAreSubstantiveEvenQuoteBodies ...............................   Passed    0.01 sec
+        Start 152: Issue316QuoteRunsTests.ARunInsideABodyIsReadAsEscapesThenAClosingRun
+149/349 Test #150: Issue312ConformanceTests.TrailingIndentationIsDocumentWhitespace ..................................   Passed    0.02 sec
+        Start 153: Issue316QuoteRunsTests.ARunThatNeverClosesTheReferenceLeavesItUnclosed
+150/349 Test #151: Issue312ConformanceTests.ASingleReferenceIsALinkValueAtEveryDepth .................................   Passed    0.01 sec
+        Start 154: Issue316QuoteRunsTests.AReferenceCanOpenInsideARun
+151/349 Test #153: Issue316QuoteRunsTests.ARunThatNeverClosesTheReferenceLeavesItUnclosed ............................   Passed    0.01 sec
+        Start 155: Issue316QuoteRunsTests.AReferenceThatOpensWithAWideRunIsReadInLinearTime
+152/349 Test #152: Issue316QuoteRunsTests.ARunInsideABodyIsReadAsEscapesThenAClosingRun ..............................   Passed    0.02 sec
+        Start 156: Issue316QuoteRunsTests.WideQuoteOverALongRunIsParsedWithinTheTimeBound
+153/349 Test #154: Issue316QuoteRunsTests.AReferenceCanOpenInsideARun ................................................   Passed    0.02 sec
+        Start 157: Issue316QuoteRunsTests.NarrowingUnclosedQuotesIsParsedWithinTheTimeBound
+154/349 Test #155: Issue316QuoteRunsTests.AReferenceThatOpensWithAWideRunIsReadInLinearTime ..........................   Passed    0.10 sec
+        Start 158: Issue316QuoteRunsTests.ClosedWideQuoteOverQuotesIsParsedWithinTheTimeBound
+155/349 Test #156: Issue316QuoteRunsTests.WideQuoteOverALongRunIsParsedWithinTheTimeBound ............................   Passed    0.13 sec
+        Start 159: Issue316QuoteRunsTests.UnclosedWidthsOverAnEvenRunIsParsedWithinTheTimeBound
+156/349 Test #158: Issue316QuoteRunsTests.ClosedWideQuoteOverQuotesIsParsedWithinTheTimeBound ........................   Passed    0.33 sec
+        Start 160: Issue316QuoteRunsTests.AStreamOfWideQuotesIsReadWithinTheTimeBound
+157/349 Test #159: Issue316QuoteRunsTests.UnclosedWidthsOverAnEvenRunIsParsedWithinTheTimeBound ......................   Passed    0.46 sec
+        Start 161: LinkTests.LinkConstructorWithIdOnlyTest
+158/349 Test #161: LinkTests.LinkConstructorWithIdOnlyTest ...........................................................   Passed    0.01 sec
+        Start 162: LinkTests.LinkConstructorWithIdAndValuesTest
+159/349 Test #162: LinkTests.LinkConstructorWithIdAndValuesTest ......................................................   Passed    0.01 sec
+        Start 163: LinkTests.LinkToStringWithIdOnlyTest
+160/349 Test #163: LinkTests.LinkToStringWithIdOnlyTest ..............................................................   Passed    0.02 sec
+        Start 164: LinkTests.LinkToStringWithValuesOnlyTest
+161/349 Test #164: LinkTests.LinkToStringWithValuesOnlyTest ..........................................................   Passed    0.01 sec
+        Start 165: LinkTests.LinkToStringWithIdAndValuesTest
+162/349 Test #160: Issue316QuoteRunsTests.AStreamOfWideQuotesIsReadWithinTheTimeBound ................................   Passed    0.21 sec
+        Start 166: LinkTests.LinkEqualsTest
+163/349 Test #166: LinkTests.LinkEqualsTest ..........................................................................   Passed    0.01 sec
+        Start 167: LinkTests.LinkCombineTest
+164/349 Test #165: LinkTests.LinkToStringWithIdAndValuesTest .........................................................   Passed    0.02 sec
+        Start 168: LinkTests.LinkEscapeReferenceSimpleTest
+165/349 Test #167: LinkTests.LinkCombineTest .........................................................................   Passed    0.01 sec
+        Start 169: LinkTests.LinkEscapeReferenceWithSpecialCharactersTest
+166/349 Test #168: LinkTests.LinkEscapeReferenceSimpleTest ...........................................................   Passed    0.01 sec
+        Start 170: LinkTests.LinkSimplifyTest
+167/349 Test #169: LinkTests.LinkEscapeReferenceWithSpecialCharactersTest ............................................   Passed    0.01 sec
+        Start 171: LinksGroupTests.LinksGroupConstructorTest
+168/349 Test #170: LinkTests.LinkSimplifyTest ........................................................................   Passed    0.01 sec
+        Start 172: LinksGroupTests.LinksGroupConstructorEquivalentTest
+169/349 Test #171: LinksGroupTests.LinksGroupConstructorTest .........................................................   Passed    0.01 sec
+        Start 173: LinksGroupTests.LinksGroupToListFlattensStructureTest
+170/349 Test #172: LinksGroupTests.LinksGroupConstructorEquivalentTest ...............................................   Passed    0.01 sec
+        Start 174: LinksGroupTests.LinksGroupToStringTest
+171/349 Test #173: LinksGroupTests.LinksGroupToListFlattensStructureTest .............................................   Passed    0.01 sec
+        Start 175: LinksGroupTests.LinksGroupAppendToLinksListTest
+172/349 Test #174: LinksGroupTests.LinksGroupToStringTest ............................................................   Passed    0.01 sec
+        Start 176: MixedIndentationModesTests.HeroExampleMixedModesTest
+173/349 Test #175: LinksGroupTests.LinksGroupAppendToLinksListTest ...................................................   Passed    0.01 sec
+        Start 177: MixedIndentationModesTests.HeroExampleAlternativeFormatTest
+174/349 Test #157: Issue316QuoteRunsTests.NarrowingUnclosedQuotesIsParsedWithinTheTimeBound ..........................   Passed    0.71 sec
+        Start 178: MixedIndentationModesTests.HeroExampleEquivalenceTest
+175/349 Test #176: MixedIndentationModesTests.HeroExampleMixedModesTest ..............................................   Passed    0.01 sec
+        Start 179: MixedIndentationModesTests.SetContextWithoutColonTest
+176/349 Test #177: MixedIndentationModesTests.HeroExampleAlternativeFormatTest .......................................   Passed    0.01 sec
+        Start 180: MixedIndentationModesTests.SequenceContextWithColonTest
+177/349 Test #178: MixedIndentationModesTests.HeroExampleEquivalenceTest .............................................   Passed    0.01 sec
+        Start 181: MixedIndentationModesTests.SequenceContextWithComplexValuesTest
+178/349 Test #179: MixedIndentationModesTests.SetContextWithoutColonTest .............................................   Passed    0.01 sec
+        Start 182: MixedIndentationModesTests.NestedSetAndSequenceContextsTest
+179/349 Test #180: MixedIndentationModesTests.SequenceContextWithColonTest ...........................................   Passed    0.01 sec
+        Start 183: MixedIndentationModesTests.DeeplyNestedMixedModesTest
+180/349 Test #181: MixedIndentationModesTests.SequenceContextWithComplexValuesTest ...................................   Passed    0.01 sec
+        Start 184: MultiQuoteParserTests.TestBacktickQuotedReference
+181/349 Test #182: MixedIndentationModesTests.NestedSetAndSequenceContextsTest .......................................   Passed    0.01 sec
+        Start 185: MultiQuoteParserTests.TestBacktickQuotedWithSpaces
+182/349 Test #183: MixedIndentationModesTests.DeeplyNestedMixedModesTest .............................................   Passed    0.01 sec
+        Start 186: MultiQuoteParserTests.TestBacktickQuotedMultiline
+183/349 Test #184: MultiQuoteParserTests.TestBacktickQuotedReference .................................................   Passed    0.01 sec
+        Start 187: MultiQuoteParserTests.TestBacktickQuotedWithEscapedBacktick
+184/349 Test #185: MultiQuoteParserTests.TestBacktickQuotedWithSpaces ................................................   Passed    0.02 sec
+        Start 188: MultiQuoteParserTests.TestSingleQuoteWithEscapedSingleQuote
+185/349 Test #186: MultiQuoteParserTests.TestBacktickQuotedMultiline .................................................   Passed    0.02 sec
+        Start 189: MultiQuoteParserTests.TestDoubleQuoteWithEscapedDoubleQuote
+186/349 Test #187: MultiQuoteParserTests.TestBacktickQuotedWithEscapedBacktick .......................................   Passed    0.02 sec
+        Start 190: MultiQuoteParserTests.TestDoubleDoubleQuotes
+187/349 Test #189: MultiQuoteParserTests.TestDoubleQuoteWithEscapedDoubleQuote .......................................   Passed    0.01 sec
+        Start 191: MultiQuoteParserTests.TestDoubleDoubleQuotesWithSingleQuoteInside
+188/349 Test #188: MultiQuoteParserTests.TestSingleQuoteWithEscapedSingleQuote .......................................   Passed    0.02 sec
+        Start 192: MultiQuoteParserTests.TestDoubleDoubleQuotesWithEscape
+189/349 Test #190: MultiQuoteParserTests.TestDoubleDoubleQuotes ......................................................   Passed    0.01 sec
+        Start 193: MultiQuoteParserTests.TestDoubleSingleQuotes
+190/349 Test #191: MultiQuoteParserTests.TestDoubleDoubleQuotesWithSingleQuoteInside .................................   Passed    0.01 sec
+        Start 194: MultiQuoteParserTests.TestDoubleSingleQuotesWithSingleQuoteInside
+191/349 Test #192: MultiQuoteParserTests.TestDoubleDoubleQuotesWithEscape ............................................   Passed    0.01 sec
+        Start 195: MultiQuoteParserTests.TestDoubleSingleQuotesWithEscape
+192/349 Test #193: MultiQuoteParserTests.TestDoubleSingleQuotes ......................................................   Passed    0.01 sec
+        Start 196: MultiQuoteParserTests.TestDoubleBacktickQuotes
+193/349 Test #194: MultiQuoteParserTests.TestDoubleSingleQuotesWithSingleQuoteInside .................................   Passed    0.01 sec
+        Start 197: MultiQuoteParserTests.TestDoubleBacktickQuotesWithBacktickInside
+194/349 Test #195: MultiQuoteParserTests.TestDoubleSingleQuotesWithEscape ............................................   Passed    0.01 sec
+        Start 198: MultiQuoteParserTests.TestDoubleBacktickQuotesWithEscape
+195/349 Test #196: MultiQuoteParserTests.TestDoubleBacktickQuotes ....................................................   Passed    0.01 sec
+        Start 199: MultiQuoteParserTests.TestTripleDoubleQuotes
+196/349 Test #197: MultiQuoteParserTests.TestDoubleBacktickQuotesWithBacktickInside ..................................   Passed    0.01 sec
+        Start 200: MultiQuoteParserTests.TestTripleDoubleQuotesWithDoubleQuoteInside
+197/349 Test #198: MultiQuoteParserTests.TestDoubleBacktickQuotesWithEscape ..........................................   Passed    0.01 sec
+        Start 201: MultiQuoteParserTests.TestTripleDoubleQuotesWithEscape
+198/349 Test #199: MultiQuoteParserTests.TestTripleDoubleQuotes ......................................................   Passed    0.01 sec
+        Start 202: MultiQuoteParserTests.TestTripleSingleQuotes
+199/349 Test #200: MultiQuoteParserTests.TestTripleDoubleQuotesWithDoubleQuoteInside .................................   Passed    0.01 sec
+        Start 203: MultiQuoteParserTests.TestTripleSingleQuotesWithDoubleQuoteInside
+200/349 Test #201: MultiQuoteParserTests.TestTripleDoubleQuotesWithEscape ............................................   Passed    0.01 sec
+        Start 204: MultiQuoteParserTests.TestTripleSingleQuotesWithEscape
+201/349 Test #202: MultiQuoteParserTests.TestTripleSingleQuotes ......................................................   Passed    0.01 sec
+        Start 205: MultiQuoteParserTests.TestTripleBacktickQuotes
+202/349 Test #204: MultiQuoteParserTests.TestTripleSingleQuotesWithEscape ............................................   Passed    0.01 sec
+        Start 206: MultiQuoteParserTests.TestTripleBacktickQuotesWithDoubleBacktickInside
+203/349 Test #203: MultiQuoteParserTests.TestTripleSingleQuotesWithDoubleQuoteInside .................................   Passed    0.02 sec
+        Start 207: MultiQuoteParserTests.TestTripleBacktickQuotesWithEscape
+204/349 Test #205: MultiQuoteParserTests.TestTripleBacktickQuotes ....................................................   Passed    0.02 sec
+        Start 208: MultiQuoteParserTests.TestQuadrupleDoubleQuotes
+205/349 Test #206: MultiQuoteParserTests.TestTripleBacktickQuotesWithDoubleBacktickInside ............................   Passed    0.01 sec
+        Start 209: MultiQuoteParserTests.TestQuadrupleDoubleQuotesWithTripleQuoteInside
+206/349 Test #207: MultiQuoteParserTests.TestTripleBacktickQuotesWithEscape ..........................................   Passed    0.01 sec
+        Start 210: MultiQuoteParserTests.TestQuadrupleSingleQuotes
+207/349 Test #208: MultiQuoteParserTests.TestQuadrupleDoubleQuotes ...................................................   Passed    0.01 sec
+        Start 211: MultiQuoteParserTests.TestQuadrupleBacktickQuotes
+208/349 Test #209: MultiQuoteParserTests.TestQuadrupleDoubleQuotesWithTripleQuoteInside ..............................   Passed    0.01 sec
+        Start 212: MultiQuoteParserTests.TestQuintupleDoubleQuotes
+209/349 Test #210: MultiQuoteParserTests.TestQuadrupleSingleQuotes ...................................................   Passed    0.01 sec
+        Start 213: MultiQuoteParserTests.TestQuintupleDoubleQuotesWithQuadQuoteInside
+210/349 Test #211: MultiQuoteParserTests.TestQuadrupleBacktickQuotes .................................................   Passed    0.01 sec
+        Start 214: MultiQuoteParserTests.TestQuintupleSingleQuotes
+211/349 Test #212: MultiQuoteParserTests.TestQuintupleDoubleQuotes ...................................................   Passed    0.01 sec
+        Start 215: MultiQuoteParserTests.TestQuintupleBacktickQuotes
+212/349 Test #213: MultiQuoteParserTests.TestQuintupleDoubleQuotesWithQuadQuoteInside ................................   Passed    0.01 sec
+        Start 216: MultiQuoteParserTests.TestMixedQuotesInLink
+213/349 Test #214: MultiQuoteParserTests.TestQuintupleSingleQuotes ...................................................   Passed    0.02 sec
+        Start 217: MultiQuoteParserTests.TestBacktickAsIdInLink
+214/349 Test #215: MultiQuoteParserTests.TestQuintupleBacktickQuotes .................................................   Passed    0.01 sec
+        Start 218: MultiQuoteParserTests.TestCodeBlockLikeContent
+215/349 Test #216: MultiQuoteParserTests.TestMixedQuotesInLink .......................................................   Passed    0.01 sec
+        Start 219: MultiQuoteParserTests.TestNestedQuotesInMarkdown
+216/349 Test #217: MultiQuoteParserTests.TestBacktickAsIdInLink ......................................................   Passed    0.01 sec
+        Start 220: MultiQuoteParserTests.TestJsonStringWithQuotes
+217/349 Test #218: MultiQuoteParserTests.TestCodeBlockLikeContent ....................................................   Passed    0.01 sec
+        Start 221: MultiQuoteParserTests.TestWhitespacePreservedInQuotes
+218/349 Test #219: MultiQuoteParserTests.TestNestedQuotesInMarkdown ..................................................   Passed    0.01 sec
+        Start 222: MultiQuoteParserTests.TestMultilineInDoubleDoubleQuotes
+219/349 Test #220: MultiQuoteParserTests.TestJsonStringWithQuotes ....................................................   Passed    0.02 sec
+        Start 223: MultiQuoteParserTests.TestUnlimitedQuotes6
+220/349 Test #221: MultiQuoteParserTests.TestWhitespacePreservedInQuotes .............................................   Passed    0.02 sec
+        Start 224: MultiQuoteParserTests.TestUnlimitedQuotes10
+221/349 Test  #43: BinaryNotationTests.EveryShortReferenceOverDelimitersRoundTrips ...................................   Passed    1.59 sec
+        Start 225: MultiQuoteParserTests.TestUnlimitedQuotes6WithInnerQuotes
+222/349 Test #222: MultiQuoteParserTests.TestMultilineInDoubleDoubleQuotes ...........................................   Passed    0.01 sec
+        Start 226: MultiQuoteParserTests.TestUnlimitedSingleQuotes7
+223/349 Test #223: MultiQuoteParserTests.TestUnlimitedQuotes6 ........................................................   Passed    0.01 sec
+        Start 227: MultiQuoteParserTests.TestUnlimitedBackticks8
+224/349 Test #224: MultiQuoteParserTests.TestUnlimitedQuotes10 .......................................................   Passed    0.01 sec
+        Start 228: MultilineParserTests.TwoLinksTest
+225/349 Test #225: MultiQuoteParserTests.TestUnlimitedQuotes6WithInnerQuotes .........................................   Passed    0.01 sec
+        Start 229: MultilineParserTests.ParseAndStringifyTest
+226/349 Test #226: MultiQuoteParserTests.TestUnlimitedSingleQuotes7 ..................................................   Passed    0.01 sec
+        Start 230: MultilineParserTests.ParseAndStringifyTest2
+227/349 Test #227: MultiQuoteParserTests.TestUnlimitedBackticks8 .....................................................   Passed    0.01 sec
+        Start 231: MultilineParserTests.ParseAndStringifyWithLessParenthesesTest
+228/349 Test #228: MultilineParserTests.TwoLinksTest .................................................................   Passed    0.01 sec
+        Start 232: MultilineParserTests.DuplicateIdentifiersTest
+229/349 Test #229: MultilineParserTests.ParseAndStringifyTest ........................................................   Passed    0.01 sec
+        Start 233: MultilineParserTests.TestComplexStructure
+230/349 Test #230: MultilineParserTests.ParseAndStringifyTest2 .......................................................   Passed    0.01 sec
+        Start 234: MultilineParserTests.TestMixedFormats
+231/349 Test #231: MultilineParserTests.ParseAndStringifyWithLessParenthesesTest .....................................   Passed    0.01 sec
+        Start 235: MultilineParserTests.TestMultipleTopLevelElements
+232/349 Test #232: MultilineParserTests.DuplicateIdentifiersTest .....................................................   Passed    0.01 sec
+        Start 236: MultilineParserTests.TestMultilineWithId
+233/349 Test #233: MultilineParserTests.TestComplexStructure .........................................................   Passed    0.01 sec
+        Start 237: MultilineParserTests.TestMultilineSimpleLinks
+234/349 Test #234: MultilineParserTests.TestMixedFormats .............................................................   Passed    0.01 sec
+        Start 238: MultilineParserTests.TestIndentedChildren
+235/349 Test #235: MultilineParserTests.TestMultipleTopLevelElements .................................................   Passed    0.01 sec
+        Start 239: MultilineQuotedStringTests.TestMultilineDoubleQuotedReference
+236/349 Test #236: MultilineParserTests.TestMultilineWithId ..........................................................   Passed    0.01 sec
+        Start 240: MultilineQuotedStringTests.TestSimpleMultilineDoubleQuoted
+237/349 Test #237: MultilineParserTests.TestMultilineSimpleLinks .....................................................   Passed    0.01 sec
+        Start 241: MultilineQuotedStringTests.TestSimpleMultilineSingleQuoted
+238/349 Test #238: MultilineParserTests.TestIndentedChildren .........................................................   Passed    0.01 sec
+        Start 242: MultilineQuotedStringTests.TestMultilineQuotedAsId
+239/349 Test #239: MultilineQuotedStringTests.TestMultilineDoubleQuotedReference .....................................   Passed    0.01 sec
+        Start 243: NestedIndentationTests.ParenthesesReproduceRootIndentation
+240/349 Test #240: MultilineQuotedStringTests.TestSimpleMultilineDoubleQuoted ........................................   Passed    0.02 sec
+        Start 244: NestedIndentationTests.ParenthesesKeepRecordBoundaries
+241/349 Test #241: MultilineQuotedStringTests.TestSimpleMultilineSingleQuoted ........................................   Passed    0.01 sec
+        Start 245: NestedIndentationTests.ParenthesesKeepSeveralRecordsSeparate
+242/349 Test #242: MultilineQuotedStringTests.TestMultilineQuotedAsId ................................................   Passed    0.01 sec
+        Start 246: NestedIndentationTests.ParenthesesNestDeeply
+243/349 Test #243: NestedIndentationTests.ParenthesesReproduceRootIndentation ........................................   Passed    0.02 sec
+        Start 247: NestedIndentationTests.SingleLineParenthesesAreUnchanged
+244/349 Test #244: NestedIndentationTests.ParenthesesKeepRecordBoundaries ............................................   Passed    0.02 sec
+        Start 248: NestedIndentationTests.ParenthesesWithIndentedIdSyntax
+245/349 Test #245: NestedIndentationTests.ParenthesesKeepSeveralRecordsSeparate ......................................   Passed    0.01 sec
+        Start 249: NestedIndentationTests.BlankLinesInsideParenthesesAreSkipped
+246/349 Test #246: NestedIndentationTests.ParenthesesNestDeeply ......................................................   Passed    0.01 sec
+        Start 250: NestedIndentationTests.EmployeeRecordsKeepTheirFields
+247/349 Test #247: NestedIndentationTests.SingleLineParenthesesAreUnchanged ..........................................   Passed    0.01 sec
+        Start 251: NestedParserTests.SignificantWhitespaceTest
+248/349 Test #248: NestedIndentationTests.ParenthesesWithIndentedIdSyntax ............................................   Passed    0.01 sec
+        Start 252: NestedParserTests.SimpleSignificantWhitespaceTest
+249/349 Test #249: NestedIndentationTests.BlankLinesInsideParenthesesAreSkipped ......................................   Passed    0.01 sec
+        Start 253: NestedParserTests.TwoSpacesSizedWhitespaceTest
+250/349 Test #250: NestedIndentationTests.EmployeeRecordsKeepTheirFields .............................................   Passed    0.01 sec
+        Start 254: NestedParserTests.ParseNestedStructureWithIndentation
+251/349 Test #251: NestedParserTests.SignificantWhitespaceTest .......................................................   Passed    0.02 sec
+        Start 255: NestedParserTests.TestIndentationConsistency
+252/349 Test #252: NestedParserTests.SimpleSignificantWhitespaceTest .................................................   Passed    0.01 sec
+        Start 256: NestedParserTests.TestIndentationBasedChildren
+253/349 Test #253: NestedParserTests.TwoSpacesSizedWhitespaceTest ....................................................   Passed    0.01 sec
+        Start 257: NestedParserTests.TestComplexIndentation
+254/349 Test #254: NestedParserTests.ParseNestedStructureWithIndentation .............................................   Passed    0.01 sec
+        Start 258: NestedParserTests.TestNestedLinks
+255/349 Test #255: NestedParserTests.TestIndentationConsistency ......................................................   Passed    0.01 sec
+        Start 259: NestedParserTests.TestIndentationParser
+256/349 Test #256: NestedParserTests.TestIndentationBasedChildren ....................................................   Passed    0.01 sec
+        Start 260: NestedParserTests.TestNestedIndentationParser
+257/349 Test #257: NestedParserTests.TestComplexIndentation ..........................................................   Passed    0.01 sec
+        Start 261: NestedParserTests.TestThreeLevelNestingRoundtrip
+258/349 Test #258: NestedParserTests.TestNestedLinks .................................................................   Passed    0.01 sec
+        Start 262: NestedParserTests.TestDeepNestedStructureRoundtrip
+259/349 Test #259: NestedParserTests.TestIndentationParser ...........................................................   Passed    0.01 sec
+        Start 263: NestedParserTests.TestMultipleNestedLinksRoundtrip
+260/349 Test #260: NestedParserTests.TestNestedIndentationParser .....................................................   Passed    0.01 sec
+        Start 264: NestedSelfReferenceTests.TestNestedSelfReferencedObjectInPairValue
+261/349 Test #261: NestedParserTests.TestThreeLevelNestingRoundtrip ..................................................   Passed    0.01 sec
+        Start 265: NestedSelfReferenceTests.TestSelfReferenceAsDirectChildWorksCorrectly
+262/349 Test #262: NestedParserTests.TestDeepNestedStructureRoundtrip ................................................   Passed    0.01 sec
+        Start 266: NestingDepthTests.ClosedGroupsReadInLinearTime
+263/349 Test #263: NestedParserTests.TestMultipleNestedLinksRoundtrip ................................................   Passed    0.01 sec
+        Start 267: NestingDepthTests.ValuesAfterGroupsReadInLinearTime
+264/349 Test #264: NestedSelfReferenceTests.TestNestedSelfReferencedObjectInPairValue ................................   Passed    0.01 sec
+        Start 268: NestingDepthTests.UnclosedGroupsFailInLinearTime
+265/349 Test #265: NestedSelfReferenceTests.TestSelfReferenceAsDirectChildWorksCorrectly .............................   Passed    0.03 sec
+        Start 269: NestingDepthTests.UnclosedGroupsOnIndentedLinesFailInLinearTime
+266/349 Test #266: NestingDepthTests.ClosedGroupsReadInLinearTime ....................................................   Passed    0.02 sec
+        Start 270: NestingDepthTests.ParseLinoToLinksDoesNotCopyEachLevel
+267/349 Test #267: NestingDepthTests.ValuesAfterGroupsReadInLinearTime ...............................................   Passed    0.02 sec
+        Start 271: NestingDepthTests.ValuesAfterVeryDeepGroupsReadInLinearTime
+268/349 Test #268: NestingDepthTests.UnclosedGroupsFailInLinearTime ..................................................   Passed    0.02 sec
+        Start 272: NestingDepthTests.GroupFollowedByValuesKeepsItsStructure
+269/349 Test #269: NestingDepthTests.UnclosedGroupsOnIndentedLinesFailInLinearTime ...................................   Passed    0.02 sec
+        Start 273: NestingLimitTests.TestDefaultLimitIsSharedByEveryImplementation
+270/349 Test #272: NestingDepthTests.GroupFollowedByValuesKeepsItsStructure ..........................................   Passed    0.01 sec
+        Start 274: NestingLimitTests.TestParenthesesUpToTheLimitAreAccepted
+271/349 Test #273: NestingLimitTests.TestDefaultLimitIsSharedByEveryImplementation ...................................   Passed    0.01 sec
+        Start 275: NestingLimitTests.TestParenthesesPastTheLimitAreRefusedAtTheGroupThatIsTooDeep
+272/349 Test #274: NestingLimitTests.TestParenthesesUpToTheLimitAreAccepted ..........................................   Passed    0.01 sec
+        Start 276: NestingLimitTests.TestGroupsInValuePositionCountLikeAnyOtherGroup
+273/349 Test #275: NestingLimitTests.TestParenthesesPastTheLimitAreRefusedAtTheGroupThatIsTooDeep ....................   Passed    0.01 sec
+        Start 277: NestingLimitTests.TestIndentationUpToTheLimitIsAccepted
+274/349 Test #276: NestingLimitTests.TestGroupsInValuePositionCountLikeAnyOtherGroup .................................   Passed    0.01 sec
+        Start 278: NestingLimitTests.TestIndentationPastTheLimitIsRefusedAtTheLineThatIsTooDeep
+275/349 Test #278: NestingLimitTests.TestIndentationPastTheLimitIsRefusedAtTheLineThatIsTooDeep ......................   Passed    0.01 sec
+        Start 279: NestingLimitTests.TestGroupsAndIndentationAddUp
+276/349 Test #279: NestingLimitTests.TestGroupsAndIndentationAddUp ...................................................   Passed    0.01 sec
+        Start 280: NestingLimitTests.TestTrailingSpacesOnADeepLineAreNotADeeperLine
+277/349 Test #280: NestingLimitTests.TestTrailingSpacesOnADeepLineAreNotADeeperLine ..................................   Passed    0.01 sec
+        Start 281: NestingLimitTests.TestRefusesADocumentFarPastTheLimitWithoutOverflowingTheStack
+278/349 Test #277: NestingLimitTests.TestIndentationUpToTheLimitIsAccepted ...........................................   Passed    0.05 sec
+        Start 282: NestingLimitTests.TestStreamParserReportsWhereTheNestingIsTooDeep
+279/349 Test #270: NestingDepthTests.ParseLinoToLinksDoesNotCopyEachLevel ............................................   Passed    0.10 sec
+        Start 283: ParseErrorPositionTests.TestReportsTheLineAndColumnOfTheDefect
+280/349 Test #282: NestingLimitTests.TestStreamParserReportsWhereTheNestingIsTooDeep .................................   Passed    0.01 sec
+        Start 284: ParseErrorPositionTests.TestOffsetAgreesWithTheJavascriptPort
+281/349 Test #283: ParseErrorPositionTests.TestReportsTheLineAndColumnOfTheDefect ....................................   Passed    0.02 sec
+        Start 285: ParseErrorPositionTests.TestPointsAtTheDefectRatherThanAtTheLineItStartsOn
+282/349 Test #285: ParseErrorPositionTests.TestPointsAtTheDefectRatherThanAtTheLineItStartsOn ........................   Passed    0.01 sec
+        Start 286: ParseErrorPositionTests.TestReportsTheLineALateDefectIsOn
+283/349 Test #271: NestingDepthTests.ValuesAfterVeryDeepGroupsReadInLinearTime .......................................   Passed    0.13 sec
+        Start 287: ParseErrorPositionTests.TestLoneCrCountsAsOneLineBreakInDiagnostics
+284/349 Test #284: ParseErrorPositionTests.TestOffsetAgreesWithTheJavascriptPort .....................................   Passed    0.14 sec
+        Start 288: ParseErrorPositionTests.TestSaysWhatCouldHaveStoodThere
+285/349 Test #286: ParseErrorPositionTests.TestReportsTheLineALateDefectIsOn .........................................   Passed    0.13 sec
+        Start 289: ParseErrorPositionTests.TestReportsTheEndOfTheDocumentWhenAGroupIsNeverClosed
+286/349 Test #287: ParseErrorPositionTests.TestLoneCrCountsAsOneLineBreakInDiagnostics ...............................   Passed    0.11 sec
+        Start 290: ParseErrorPositionTests.TestReportsAnUnmatchedClosingParenthesis
+287/349 Test #288: ParseErrorPositionTests.TestSaysWhatCouldHaveStoodThere ...........................................   Passed    0.01 sec
+        Start 291: ParseErrorPositionTests.TestSummaryReadsAsASentence
+288/349 Test #289: ParseErrorPositionTests.TestReportsTheEndOfTheDocumentWhenAGroupIsNeverClosed .....................   Passed    0.01 sec
+        Start 292: ParseErrorPositionTests.TestSnippetPointsACaretAtTheOffendingCharacter
+289/349 Test #290: ParseErrorPositionTests.TestReportsAnUnmatchedClosingParenthesis ..................................   Passed    0.02 sec
+        Start 293: ParseErrorPositionTests.TestMessageQuotesOneLineRatherThanTheRestOfTheDocument
+290/349 Test #291: ParseErrorPositionTests.TestSummaryReadsAsASentence ...............................................   Passed    0.01 sec
+        Start 294: ParseErrorPositionTests.TestMessageOfALongLineStaysAMessage
+291/349 Test #292: ParseErrorPositionTests.TestSnippetPointsACaretAtTheOffendingCharacter ............................   Passed    0.01 sec
+        Start 295: ParseErrorPositionTests.TestErrorDisplayStartsWithThePosition
+292/349 Test #281: NestingLimitTests.TestRefusesADocumentFarPastTheLimitWithoutOverflowingTheStack ...................   Passed    0.21 sec
+        Start 296: ParseErrorPositionTests.TestNomInternalsStayOutOfTheMessage
+293/349 Test #293: ParseErrorPositionTests.TestMessageQuotesOneLineRatherThanTheRestOfTheDocument ....................   Passed    0.02 sec
+        Start 297: ParseErrorPositionTests.TestBothEntryPointsReportTheSamePosition
+294/349 Test #294: ParseErrorPositionTests.TestMessageOfALongLineStaysAMessage .......................................   Passed    0.02 sec
+        Start 298: ParseErrorPositionTests.TestColumnCountsCharactersRatherThanBytes
+295/349 Test #295: ParseErrorPositionTests.TestErrorDisplayStartsWithThePosition .....................................   Passed    0.02 sec
+        Start 299: ParseErrorPositionTests.TestADocumentThatParsesReportsNothing
+296/349 Test #296: ParseErrorPositionTests.TestNomInternalsStayOutOfTheMessage .......................................   Passed    0.02 sec
+        Start 300: ReferenceFidelityTests.NativeReferenceFidelity
+297/349 Test #297: ParseErrorPositionTests.TestBothEntryPointsReportTheSamePosition ..................................   Passed    0.02 sec
+        Start 301: ReferenceFidelityTests.ReferenceLiteralsAtEveryChunkSplit
+298/349 Test #298: ParseErrorPositionTests.TestColumnCountsCharactersRatherThanBytes .................................   Passed    0.01 sec
+        Start 302: ReferenceFidelityTests.BinaryReferenceFidelity
+299/349 Test #299: ParseErrorPositionTests.TestADocumentThatParsesReportsNothing .....................................   Passed    0.02 sec
+        Start 303: ReferenceFidelityTests.MalformedReferenceLiteralsAreRejected
+300/349 Test #303: ReferenceFidelityTests.MalformedReferenceLiteralsAreRejected ......................................   Passed    0.02 sec
+        Start 304: SharedTextParityTests.SharedTextParity
+301/349 Test #304: SharedTextParityTests.SharedTextParity ............................................................   Passed    0.01 sec
+        Start 305: SingleLineParserTests.SingleLinkTest
+302/349 Test #305: SingleLineParserTests.SingleLinkTest ..............................................................   Passed    0.01 sec
+        Start 306: SingleLineParserTests.TripletSingleLinkTest
+303/349 Test #300: ReferenceFidelityTests.NativeReferenceFidelity ....................................................   Passed    0.05 sec
+        Start 307: SingleLineParserTests.BugTest1
+304/349 Test #302: ReferenceFidelityTests.BinaryReferenceFidelity ....................................................   Passed    0.06 sec
+        Start 308: SingleLineParserTests.QuotedReferencesTest
+305/349 Test #307: SingleLineParserTests.BugTest1 ....................................................................   Passed    0.01 sec
+        Start 309: SingleLineParserTests.QuotedReferencesWithSpacesTest
+306/349 Test #306: SingleLineParserTests.TripletSingleLinkTest .......................................................   Passed    0.04 sec
+        Start 310: SingleLineParserTests.ParseSimpleReference
+307/349 Test #308: SingleLineParserTests.QuotedReferencesTest ........................................................   Passed    0.03 sec
+        Start 311: SingleLineParserTests.ParseReferenceWithColonAndValues
+308/349 Test #309: SingleLineParserTests.QuotedReferencesWithSpacesTest ..............................................   Passed    0.03 sec
+        Start 312: SingleLineParserTests.ParseMultilineLink
+309/349 Test #311: SingleLineParserTests.ParseReferenceWithColonAndValues ............................................   Passed    0.02 sec
+        Start 313: SingleLineParserTests.ParseQuotedReferences
+310/349 Test #313: SingleLineParserTests.ParseQuotedReferences .......................................................   Passed    0.01 sec
+        Start 314: SingleLineParserTests.ParseValuesOnly
+311/349 Test #312: SingleLineParserTests.ParseMultilineLink ..........................................................   Passed    0.03 sec
+        Start 315: SingleLineParserTests.TestSingleLineLinkWithId
+312/349 Test #314: SingleLineParserTests.ParseValuesOnly .............................................................   Passed    0.02 sec
+        Start 316: SingleLineParserTests.TestMultiLineLinkWithId
+313/349 Test #315: SingleLineParserTests.TestSingleLineLinkWithId ....................................................   Passed    0.03 sec
+        Start 317: SingleLineParserTests.TestLinkWithoutIdSingleLine
+314/349 Test #310: SingleLineParserTests.ParseSimpleReference ........................................................   Passed    0.10 sec
+        Start 318: SingleLineParserTests.TestLinkWithoutIdMultiLine
+315/349 Test #316: SingleLineParserTests.TestMultiLineLinkWithId .....................................................   Passed    0.05 sec
+        Start 319: SingleLineParserTests.TestSingletLink
+316/349 Test #318: SingleLineParserTests.TestLinkWithoutIdMultiLine ..................................................   Passed    0.03 sec
+        Start 320: SingleLineParserTests.TestValueLink
+317/349 Test #319: SingleLineParserTests.TestSingletLink .............................................................   Passed    0.03 sec
+        Start 321: SingleLineParserTests.TestQuotedReferences
+318/349 Test #317: SingleLineParserTests.TestLinkWithoutIdSingleLine .................................................   Passed    0.07 sec
+        Start 322: SingleLineParserTests.TestSingleQuotedReferences
+319/349 Test #320: SingleLineParserTests.TestValueLink ...............................................................   Passed    0.05 sec
+        Start 323: SingleLineParserTests.TestNestedLinks
+320/349 Test #322: SingleLineParserTests.TestSingleQuotedReferences ..................................................   Passed    0.02 sec
+        Start 324: SingleLineParserTests.TestSpecialCharactersInQuotes
+321/349 Test #321: SingleLineParserTests.TestQuotedReferences ........................................................   Passed    0.04 sec
+        Start 325: SingleLineParserTests.TestDeeplyNested
+322/349 Test #323: SingleLineParserTests.TestNestedLinks .............................................................   Passed    0.02 sec
+        Start 326: SingleLineParserTests.TestHyphenatedIdentifiers
+323/349 Test #324: SingleLineParserTests.TestSpecialCharactersInQuotes ...............................................   Passed    0.02 sec
+        Start 327: SingleLineParserTests.TestMultipleWordsInQuotes
+324/349 Test #325: SingleLineParserTests.TestDeeplyNested ............................................................   Passed    0.01 sec
+        Start 328: SingleLineParserTests.TestSimpleReference
+325/349 Test #326: SingleLineParserTests.TestHyphenatedIdentifiers ...................................................   Passed    0.02 sec
+        Start 329: SingleLineParserTests.TestQuotedReference
+326/349 Test #327: SingleLineParserTests.TestMultipleWordsInQuotes ...................................................   Passed    0.01 sec
+        Start 330: SingleLineParserTests.TestSingletLinkParser
+327/349 Test #328: SingleLineParserTests.TestSimpleReference .........................................................   Passed    0.01 sec
+        Start 331: SingleLineParserTests.TestValueLinkParser
+328/349 Test #329: SingleLineParserTests.TestQuotedReference .........................................................   Passed    0.01 sec
+        Start 332: SingleLineParserTests.TestLinkWithId
+329/349 Test #330: SingleLineParserTests.TestSingletLinkParser .......................................................   Passed    0.01 sec
+        Start 333: SingleLineParserTests.TestSingleLineLink
+330/349 Test #331: SingleLineParserTests.TestValueLinkParser .........................................................   Passed    0.02 sec
+        Start 334: SingleLineParserTests.TestParseQuotedReferencesValuesOnly
+331/349 Test #332: SingleLineParserTests.TestLinkWithId ..............................................................   Passed    0.01 sec
+        Start 335: SingleLineParserTests.TestQuotedReferenceParser
+332/349 Test #333: SingleLineParserTests.TestSingleLineLink ..........................................................   Passed    0.01 sec
+        Start 336: SingleLineParserTests.TestSimpleRef
+333/349 Test #334: SingleLineParserTests.TestParseQuotedReferencesValuesOnly .........................................   Passed    0.01 sec
+        Start 337: SingleLineParserTests.TestSimpleReferenceParser
+334/349 Test #335: SingleLineParserTests.TestQuotedReferenceParser ...................................................   Passed    0.02 sec
+        Start 338: SingleLineParserTests.TestMultilineWithoutId
+335/349 Test #336: SingleLineParserTests.TestSimpleRef ...............................................................   Passed    0.02 sec
+        Start 339: SingleLineParserTests.TestParseValuesOnlyStandaloneColon
+336/349 Test #338: SingleLineParserTests.TestMultilineWithoutId ......................................................   Passed    0.01 sec
+        Start 340: SingleLineParserTests.TestQuotedReferencesWithSpacesInLink
+337/349 Test #337: SingleLineParserTests.TestSimpleReferenceParser ...................................................   Passed    0.02 sec
+        Start 341: SingleLineParserTests.TestQuotedReferencesWithSpecialChars
+338/349 Test #340: SingleLineParserTests.TestQuotedReferencesWithSpacesInLink ........................................   Passed    0.01 sec
+        Start 342: SingleLineParserTests.TestSingleLineWithId
+339/349 Test #339: SingleLineParserTests.TestParseValuesOnlyStandaloneColon ..........................................   Passed    0.03 sec
+        Start 343: SingleLineParserTests.TestSingleLineWithoutId
+340/349 Test #341: SingleLineParserTests.TestQuotedReferencesWithSpecialChars ........................................   Passed    0.02 sec
+        Start 344: StreamParserTests.MatchesCanonicalParserOneSymbolAtATime
+341/349 Test #342: SingleLineParserTests.TestSingleLineWithId ........................................................   Passed    0.02 sec
+        Start 345: StreamParserTests.EmitsOnlyCompleteRecords
+342/349 Test #343: SingleLineParserTests.TestSingleLineWithoutId .....................................................   Passed    0.01 sec
+        Start 346: StreamParserTests.SupportsLineChunksFinalRecordAndPosition
+343/349 Test #344: StreamParserTests.MatchesCanonicalParserOneSymbolAtATime ..........................................   Passed    0.01 sec
+        Start 347: StreamParserTests.SupportsDrainResetAndBoundedMemory
+344/349 Test #345: StreamParserTests.EmitsOnlyCompleteRecords ........................................................   Passed    0.02 sec
+        Start 348: StreamParserTests.ProvidesLazyAdapters
+345/349 Test #347: StreamParserTests.SupportsDrainResetAndBoundedMemory ..............................................   Passed    0.01 sec
+        Start 349: StreamParserTests.RejectsWritesAfterFinish
+346/349 Test #346: StreamParserTests.SupportsLineChunksFinalRecordAndPosition ........................................   Passed    0.02 sec
+347/349 Test #348: StreamParserTests.ProvidesLazyAdapters ............................................................   Passed    0.01 sec
+348/349 Test #349: StreamParserTests.RejectsWritesAfterFinish ........................................................   Passed    0.01 sec
+349/349 Test #301: ReferenceFidelityTests.ReferenceLiteralsAtEveryChunkSplit .........................................   Passed    1.47 sec
+
+100% tests passed, 0 tests failed out of 349
+
+Total Test time (real) =   3.93 sec

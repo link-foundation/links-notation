@@ -8,7 +8,7 @@
     "start": "node benchmark.mjs"
   },
   "dependencies": {
-    "gpt-tokenizer": "^4.0.0",
+    "gpt-tokenizer": "^4.0.3",
     "links-notation": "file:../../js"
   }
 }

@@ -1,4 +1,4 @@
-use links_notation::{format_links, parse_lino_to_links, StreamParser};
+use links_notation::{StreamParser, format_links, parse_lino_to_links};
 use std::sync::{Arc, Mutex};
 
 const DOCUMENT: &str = "first loves data\n\
@@ -29,10 +29,12 @@ fn emits_only_complete_records() {
     let mut stream = StreamParser::new();
     stream.on_link(move |link| callback_seen.lock().unwrap().push(link.to_string()));
 
-    assert!(stream
-        .write("profile:\n  name Ada\n  note \"first\nsecond\"\n")
-        .unwrap()
-        .is_empty());
+    assert!(
+        stream
+            .write("profile:\n  name Ada\n  note \"first\nsecond\"\n")
+            .unwrap()
+            .is_empty()
+    );
     let emitted = stream.write("n").unwrap();
 
     assert_eq!(emitted.len(), 1);

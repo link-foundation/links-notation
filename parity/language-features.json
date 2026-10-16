@@ -1567,7 +1567,7 @@
         "rust/links-notation/src/reference_literal.rs",
         "rust/links-notation/src/stream_parser.rs"
       ],
-      "sha256": "86dc98b340395a2b50219c6831ee43a3983565e2ed4f0bf9977648ad21af1438"
+      "sha256": "cdc3d824dd748a0992048dcda6dff956b181a8328283e81f29b2bd7a9795027b"
     },
     "python": {
       "files": [
@@ -1582,7 +1582,7 @@
         "python/links_notation/reference_literal.py",
         "python/links_notation/stream_parser.py"
       ],
-      "sha256": "ca9c3bd78097da9f5a335a56c7ecc4a4baf88c3ef0f4cd785db262ef6f4fa494"
+      "sha256": "3a0ab8b6266c2fcc92af0ee25f84b4516be85250369e461900f333cfe7137363"
     },
     "java": {
       "files": [
@@ -1610,7 +1610,7 @@
         "go/reference_literal.go",
         "go/stream_parser.go"
       ],
-      "sha256": "e53ec1d0212e7d4c53864fd023cb8b75e6b99ee52a8bd6821e5d0879a3560c83"
+      "sha256": "0b78ad5121afaf00ca377fc20ac0cc1730ee5e6c68d9af7a0831ce472144959b"
     },
     "csharp": {
       "files": [

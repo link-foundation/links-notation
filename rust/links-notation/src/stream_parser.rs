@@ -1,7 +1,7 @@
 //! Incremental parsing for long-lived Links Notation streams.
 
 use crate::quotes::DelimitedReferences;
-use crate::{parse_lino_to_links_with_config, LiNo, ParseError, ParserConfig};
+use crate::{LiNo, ParseError, ParserConfig, parse_lino_to_links_with_config};
 use std::collections::VecDeque;
 use std::fmt;
 

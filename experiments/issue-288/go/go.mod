@@ -1,6 +1,6 @@
 module issue288
 
-go 1.21
+go 1.26
 
 require github.com/link-foundation/links-notation/go v0.0.0
 

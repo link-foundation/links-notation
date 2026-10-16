@@ -1,0 +1,16 @@
+com.google.code.gson:gson 2.14.0: no known vulnerabilities
+com.google.errorprone:error_prone_annotations 2.48.0: no known vulnerabilities
+com.knuddels:jtokkit 1.1.0: no known vulnerabilities
+io.github.link-foundation:links-notation 0.26.0: no known vulnerabilities
+org.apiguardian:apiguardian-api 1.1.2: no known vulnerabilities
+org.jspecify:jspecify 1.0.0: no known vulnerabilities
+org.junit.jupiter:junit-jupiter 6.1.3: no known vulnerabilities
+org.junit.jupiter:junit-jupiter-api 6.1.3: no known vulnerabilities
+org.junit.jupiter:junit-jupiter-engine 6.1.3: no known vulnerabilities
+org.junit.jupiter:junit-jupiter-params 6.1.3: no known vulnerabilities
+org.junit.platform:junit-platform-commons 6.1.3: no known vulnerabilities
+org.junit.platform:junit-platform-engine 6.1.3: no known vulnerabilities
+org.opentest4j:opentest4j 1.3.0: no known vulnerabilities
+13 artifacts, 0 with known vulnerabilities
+org.apache.maven:apache-maven 3.10.0: no known vulnerabilities
+org.apache.maven.wrapper:maven-wrapper 3.3.4: no known vulnerabilities

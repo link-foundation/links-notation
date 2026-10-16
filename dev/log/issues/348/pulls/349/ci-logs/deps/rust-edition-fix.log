@@ -1,0 +1,134 @@
+   Migrating links-notation/Cargo.toml from 2021 edition to 2024
+   Migrating links-notation-macro/Cargo.toml from 2021 edition to 2024
+   Migrating links-notation-benchmark/Cargo.toml from 2021 edition to 2024
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+    Checking memchr v2.8.3
+   Compiling unicode-ident v1.0.27
+    Checking nom v8.0.0
+   Compiling syn v3.0.9
+    Checking aho-corasick v1.1.5
+    Checking regex-syntax v0.8.11
+    Checking regex-automata v0.4.18
+   Compiling links-notation-macro v0.1.2 (/tmp/gh-issue-solver-1792166601059/rust/links-notation-macro)
+   Migrating links-notation-macro/src/lib.rs from 2021 edition to 2024
+warning: relative drop order changing in Rust 2024
+   --> links-notation-macro/src/lib.rs:155:29
+    |
+155 |     while let Some(token) = tokens_iter.next() {
+    |                    -----    ^^^^^^^^^^^^^^^^^^
+    |                    |        |
+    |                    |        this value will be stored in a temporary; let us call it `#1`
+    |                    |        up until Edition 2021 `#1` is dropped last but will be dropped earlier in Edition 2024
+    |                    `token` calls a custom destructor
+    |                    `token` will be dropped later as of Edition 2024
+...
+242 |             TokenTree::Group(group) => {
+    |                              -----
+    |                              |
+    |                              `group` calls a custom destructor
+    |                              `group` will be dropped later as of Edition 2024
+...
+282 |     }
+    |     - now the temporary value is dropped here, before the local variables in the block or statement
+    |
+note: `#1` invokes this custom destructor
+   --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/proc_macro/src/bridge/client.rs:21:0
+note: `token` invokes this custom destructor
+   --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/proc_macro/src/bridge/client.rs:21:0
+note: `group` invokes this custom destructor
+   --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/proc_macro/src/bridge/client.rs:21:0
+    = note: most of the time, changing drop order is harmless; inspect the `impl Drop`s for side effects like releasing locks or sending messages
+    = warning: this changes meaning in Rust 2024
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/temporary-tail-expr-scope.html>
+    = note: `--force-warn tail-expr-drop-order` implied by `--force-warn rust-2024-compatibility`
+
+warning: `links-notation-macro` (lib) generated 1 warning
+    Checking links-notation v0.26.0 (/tmp/gh-issue-solver-1792166601059/rust/links-notation)
+   Migrating links-notation/src/lib.rs from 2021 edition to 2024
+   Compiling serde_core v1.0.229
+       Fixed links-notation/src/lib.rs (5 fixes)
+warning: relative drop order changing in Rust 2024
+   --> links-notation/src/stream_parser.rs:406:19
+    |
+406 |             match self.chunks.next() {
+    |                   ^^^^^^^^^^^^^^^^^^
+    |                   |
+    |                   this value will be stored in a temporary; let us call it `#1`
+    |                   up until Edition 2021 `#1` is dropped last but will be dropped earlier in Edition 2024
+407 |                 Some(chunk) => match self.parser.write(chunk.as_ref()) {
+    |                      -----
+    |                      |
+    |                      `chunk` calls a custom destructor
+    |                      `chunk` will be dropped later as of Edition 2024
+...
+422 |         }
+    |         - now the temporary value is dropped here, before the local variables in the block or statement
+    |
+    = note: most of the time, changing drop order is harmless; inspect the `impl Drop`s for side effects like releasing locks or sending messages
+    = warning: this changes meaning in Rust 2024
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/temporary-tail-expr-scope.html>
+    = note: `--force-warn tail-expr-drop-order` implied by `--force-warn rust-2024-compatibility`
+
+warning: `links-notation` (lib) generated 1 warning
+   Compiling anyhow v1.0.104
+    Checking bit-vec v0.8.0
+   Compiling zmij v1.0.23
+    Checking bit-set v0.8.0
+   Compiling serde_json v1.0.154
+   Compiling serde v1.0.229
+    Checking hashbrown v0.17.1
+    Checking equivalent v1.0.3
+    Checking indexmap v2.14.2
+    Checking fancy-regex v0.19.2
+    Checking bstr v1.13.1
+    Checking regex v1.13.1
+   Compiling serde_derive v1.0.229
+    Checking foldhash v0.2.0
+    Checking itoa v1.0.18
+    Checking base64 v0.22.1
+    Checking rustc-hash v2.1.3
+    Checking tiktoken-rs v0.12.1
+    Checking links-notation-benchmark v0.1.0 (/tmp/gh-issue-solver-1792166601059/rust/links-notation-benchmark)
+   Migrating links-notation-benchmark/src/main.rs from 2021 edition to 2024
+warning: `links-notation-macro` (lib) generated 1 warning (1 duplicate)
+   Migrating links-notation-benchmark/examples/bare_reference_probe.rs from 2021 edition to 2024
+warning: `links-notation-macro` (lib test) generated 1 warning (1 duplicate)
+   Migrating links-notation/tests/link_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/nested_self_reference_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/api_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/comments_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/shared_text_parity_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/format_config_tests.rs from 2021 edition to 2024
+   Migrating links-notation/examples/comments.rs from 2021 edition to 2024
+   Migrating links-notation/tests/issue316_quote_runs_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/nested_parser_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/empty_reference_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/edge_case_parser_tests.rs from 2021 edition to 2024
+   Migrating links-notation/examples/tuple_conversion.rs from 2021 edition to 2024
+   Migrating links-notation/tests/multi_quote_parser_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/reference_fidelity_tests.rs from 2021 edition to 2024
+   Migrating links-notation/examples/binary_lino.rs from 2021 edition to 2024
+   Migrating links-notation/tests/issue312_conformance_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/nested_indentation_tests.rs from 2021 edition to 2024
+   Migrating links-notation/examples/streaming_parser.rs from 2021 edition to 2024
+   Migrating links-notation/tests/mixed_indentation_modes_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/parse_error_position_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/tuple_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/indented_id_syntax_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/multiline_quoted_string_tests.rs from 2021 edition to 2024
+   Migrating links-notation/examples/parse_error_positions.rs from 2021 edition to 2024
+   Migrating links-notation/tests/multiline_parser_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/macro_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/nesting_limit_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/stream_parser_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/indented_id_nested_values_tests.rs from 2021 edition to 2024
+   Migrating links-notation/examples/leading_spaces_test.rs from 2021 edition to 2024
+   Migrating links-notation/tests/links_group_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/nesting_depth_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/single_line_parser_tests.rs from 2021 edition to 2024
+   Migrating links-notation/tests/indentation_consistency_tests.rs from 2021 edition to 2024
+   Migrating links-notation/examples/indentation_test.rs from 2021 edition to 2024
+   Migrating links-notation/tests/binary_notation_tests.rs from 2021 edition to 2024
+warning: `links-notation` (lib test) generated 1 warning (1 duplicate)
+    Finished `dev` profile [unoptimized] target(s) in 37.70s

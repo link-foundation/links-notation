@@ -1,6 +1,6 @@
 //! Encode and decode the same corpus as examples/binary/csharp/Program.cs.
 use links_notation::binary::{
-    format_document, parse_document, ArityRange, BinaryLinoCodec, BinaryLinoOptions, BinaryResult,
+    ArityRange, BinaryLinoCodec, BinaryLinoOptions, BinaryResult, format_document, parse_document,
 };
 
 fn main() -> BinaryResult<()> {

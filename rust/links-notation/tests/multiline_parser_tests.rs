@@ -1,4 +1,4 @@
-use links_notation::{parse_lino, LiNo};
+use links_notation::{LiNo, parse_lino};
 
 /// Helper function to format links similar to C# and JS versions
 fn format_links(lino: &LiNo<String>, less_parentheses: bool) -> String {

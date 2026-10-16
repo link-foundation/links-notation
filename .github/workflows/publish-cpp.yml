@@ -22,7 +22,7 @@ defaults:
 
 jobs:
   publishRelease:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     concurrency:
@@ -50,15 +50,10 @@ jobs:
       # C++ has no central registry. The release asset is the distribution: a
       # source archive of cpp/ that CMake's FetchContent downloads by URL and
       # hash, or that installs with `cmake --install`.
+      # cpp.yml builds a consumer from the same script's archive on every pull
+      # request, so an archive that cannot build fails review, not the release.
       - name: Archive the sources
-        env:
-          ASSET: ${{ steps.version-check.outputs.asset }}
-          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
-        run: |
-          set -euo pipefail
-          git archive --format=tar.gz --prefix="links-notation-cpp-${PACKAGE_VERSION}/" \
-            --output="$RUNNER_TEMP/$ASSET" HEAD:cpp
-          (cd "$RUNNER_TEMP" && sha256sum "$ASSET" | tee "$ASSET.sha256")
+        run: bash "$GITHUB_WORKSPACE/scripts/ci/cpp-release-archive.sh" "$RUNNER_TEMP"
       - name: Create the GitHub release
         id: publish
         env:

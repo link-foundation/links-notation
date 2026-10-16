@@ -12,7 +12,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.26.0</version>
+    <version>0.27.0</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ Add the dependency to your `pom.xml`:
 Add the dependency to your `build.gradle`:
 
 ```groovy
-implementation 'io.github.link-foundation:links-notation:0.26.0'
+implementation 'io.github.link-foundation:links-notation:0.27.0'
 ```
 
 ### Local Development Setup
@@ -30,7 +30,7 @@ For contributors working on the source code:
 
 ```bash
 cd java
-mvn install
+./mvnw install
 ```
 
 ## Build
@@ -38,7 +38,7 @@ mvn install
 Build the project:
 
 ```bash
-mvn clean compile
+./mvnw clean compile
 # Check Google Java formatting with the current formatter CLI:
 bash format.sh --check
 ```
@@ -48,7 +48,7 @@ bash format.sh --check
 Run tests:
 
 ```bash
-mvn test
+./mvnw test
 ```
 
 ## Usage
@@ -362,13 +362,15 @@ Check formatting:
 
 ```bash
 bash format.sh --check
-mvn spotless:check
+./mvnw spotless:check
 ```
 
 ## Requirements
 
 - Java 21 or higher
-- Maven 3.6+
+- Maven 3.6.3 or newer, the oldest the build plugins accept (`pom.xml` enforces it and CI
+  builds with it). `./mvnw` downloads the
+  Maven this repository builds with (3.10.0, pinned in `.mvn/wrapper/maven-wrapper.properties`)
 
 ## Package Information
 

@@ -136,7 +136,7 @@ jobs:
     name: JavaScript
     needs: [js]
     if: ${{ always() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - name: Require a successful stage
@@ -148,7 +148,7 @@ jobs:
     name: Rust
     needs: [rust]
     if: ${{ always() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - name: Require a successful stage
@@ -160,7 +160,7 @@ jobs:
     name: Python
     needs: [python]
     if: ${{ always() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - name: Require a successful stage
@@ -172,7 +172,7 @@ jobs:
     name: Java
     needs: [java]
     if: ${{ always() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - name: Require a successful stage
@@ -184,7 +184,7 @@ jobs:
     name: Go
     needs: [go]
     if: ${{ always() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - name: Require a successful stage
@@ -196,7 +196,7 @@ jobs:
     name: CSharp
     needs: [csharp]
     if: ${{ always() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - name: Require a successful stage
@@ -208,7 +208,7 @@ jobs:
     name: PHP
     needs: [php]
     if: ${{ always() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - name: Require a successful stage
@@ -220,7 +220,7 @@ jobs:
     name: Cpp
     needs: [cpp]
     if: ${{ always() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - name: Require a successful stage

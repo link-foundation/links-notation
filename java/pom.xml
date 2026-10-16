@@ -6,7 +6,7 @@
 
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.26.0</version>
+    <version>0.27.0</version>
     <packaging>jar</packaging>
 
     <name>Links Notation</name>
@@ -57,6 +57,30 @@
 
     <build>
         <plugins>
+            <plugin>
+                <!-- The oldest Maven the build plugins accept. Declaring it fails an
+                     older Maven with one clear message (and stops versions:display-plugin-updates
+                     from proposing 2.x "updates"); ./mvnw itself runs the Maven pinned in
+                     .mvn/wrapper/maven-wrapper.properties. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.6.3</version>
+                <executions>
+                    <execution>
+                        <id>require-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.6.3</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -116,9 +140,11 @@
     </build>
 
     <profiles>
-        <!-- Spotless 3.10.3 calls Style.valueOf(), removed by google-java-format
-             1.37.0. format.sh runs the current formatter CLI instead. The
-             dependency is confined to this tooling profile, not the library. -->
+        <!-- Spotless 3.10.4 calls Style.valueOf(), removed by google-java-format
+             1.37.0 (diffplug/spotless#3126, fixed by google-java-format commit
+             a51e46a, not yet released). format.sh runs the current formatter
+             CLI instead. The dependency is confined to this tooling profile,
+             not the library. -->
         <profile>
             <id>format</id>
             <dependencies>
@@ -159,7 +185,7 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.11.0</version>
+                        <version>0.12.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>

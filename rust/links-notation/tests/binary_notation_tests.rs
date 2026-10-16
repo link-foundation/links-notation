@@ -1,14 +1,14 @@
 //! Shared binary links notation conformance tests, adapted from link-cli.
 
+use links_notation::LiNo;
 use links_notation::binary::packet::{
     address_tier, decode_external, encode_external, external_capacity, internal_capacity,
 };
 use links_notation::binary::{
-    decode_document, encode_document, format_document, format_reference, parse_document,
     ArityRange, BinaryError, BinaryLinoCodec, BinaryLinoOptions, DecodeLimits, LinksPacket,
-    Reference, Section,
+    Reference, Section, decode_document, encode_document, format_document, format_reference,
+    parse_document,
 };
-use links_notation::LiNo;
 use std::io::{self, Cursor, Read};
 
 #[test]
@@ -410,9 +410,11 @@ fn arity_options_choose_doublets_triplets_or_any_length() {
             .map(|(_, link)| link.len())
             .collect::<Vec<_>>()
     };
-    assert!(arities(ArityRange::DOUBLETS)
-        .iter()
-        .all(|&length| length == 2));
+    assert!(
+        arities(ArityRange::DOUBLETS)
+            .iter()
+            .all(|&length| length == 2)
+    );
     // `(a b c)` is one triplet; the strings `(String code point)` stay doublets.
     let triplets = arities(ArityRange::between(2, 3));
     assert_eq!(triplets.iter().filter(|&&length| length == 3).count(), 1);
@@ -625,8 +627,14 @@ fn malformed_packets_are_rejected() {
     for (bytes, detail) in [
         ("", "empty input"),
         ("20 00", "unsupported binary header byte 0x20"),
-        ("10 01 06 00", "link 6 refers to Internal(6), which is not an earlier link"),
-        ("10 01 07 00", "link 6 refers to Internal(7), which is not an earlier link"),
+        (
+            "10 01 06 00",
+            "link 6 refers to Internal(6), which is not an earlier link",
+        ),
+        (
+            "10 01 07 00",
+            "link 6 refers to Internal(7), which is not an earlier link",
+        ),
         ("10 02 00", "unexpected end of packet"),
         ("10 00 00", "trailing bytes after the packet"),
         // A tenth byte above 1, then an eleventh byte.
@@ -1103,12 +1111,14 @@ fn codec_encoder_uses_configured_limits() {
             ..DecodeLimits::default()
         },
     ] {
-        assert!(BinaryLinoCodec {
-            limits,
-            ..BinaryLinoCodec::new()
-        }
-        .encode(&document)
-        .is_err());
+        assert!(
+            BinaryLinoCodec {
+                limits,
+                ..BinaryLinoCodec::new()
+            }
+            .encode(&document)
+            .is_err()
+        );
     }
     let mut deep = LiNo::Ref("a".into());
     for _ in 0..70 {

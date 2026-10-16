@@ -30,7 +30,7 @@ defaults:
 jobs:
   publishToCratesIO:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     concurrency:
       group: ci-rust-publish-crates-io
@@ -183,7 +183,7 @@ jobs:
         run: rm -rf target/package
 
   publishRelease:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs: [publishToCratesIO]
     # See csharp.yml: `result == 'success'` is true for a job that published

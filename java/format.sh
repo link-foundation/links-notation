@@ -11,7 +11,7 @@ case "$mode" in
 esac
 format_evidence=$(mktemp -d)
 trap 'rm -rf "$format_evidence"' EXIT
-"${MAVEN_COMMAND:-mvn}" -q -f "$project_dir/pom.xml" -Pformat dependency:build-classpath \
+"${MAVEN_COMMAND:-$project_dir/mvnw}" -q -f "$project_dir/pom.xml" -Pformat dependency:build-classpath \
   -Dmdep.outputFile="$format_evidence/classpath" > "$format_evidence/maven.log" 2>&1 || {
   cat "$format_evidence/maven.log"
   exit 1

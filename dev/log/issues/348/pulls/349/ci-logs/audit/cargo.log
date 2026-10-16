@@ -1,0 +1,10 @@
+== cargo audit experiments/Cargo.lock
+rc=0
+== cargo audit experiments/issue-209/lino-shapes/Cargo.lock
+rc=0
+== cargo audit experiments/issue-282/parity/rust/Cargo.lock
+rc=0
+== cargo audit experiments/issue-315/rust-probe/Cargo.lock
+rc=0
+== cargo audit experiments/issue-316/rust-timing/Cargo.lock
+rc=0

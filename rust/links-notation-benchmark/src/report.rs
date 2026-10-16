@@ -5,7 +5,7 @@
 //! compared against, so that seven implementations have to agree on every
 //! number before a result is published.
 
-use crate::metrics::{savings, Metrics};
+use crate::metrics::{Metrics, savings};
 use crate::{DatasetResult, FORMATS};
 use std::collections::BTreeMap;
 use std::fmt::Write as _;

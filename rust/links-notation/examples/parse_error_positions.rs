@@ -3,7 +3,7 @@
 //!
 //! Run with `cargo run --example parse_error_positions`.
 
-use links_notation::{parse_lino, ParseError};
+use links_notation::{ParseError, parse_lino};
 
 fn main() {
     let documents = [

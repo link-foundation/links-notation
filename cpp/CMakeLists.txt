@@ -1,4 +1,8 @@
-cmake_minimum_required(VERSION 3.16)
+# 3.16 is the oldest CMake the library and its consumers build with (the
+# cmake-floor job in cpp.yml checks it). The upper end opts into every policy
+# up to the newest CMake CI runs, so newer releases need no per-feature
+# switches and print no policy warnings.
+cmake_minimum_required(VERSION 3.16...4.4)
 
 # The version lives in VERSION so release tooling reads one plain file, the
 # same way go/VERSION works for the Go module.
