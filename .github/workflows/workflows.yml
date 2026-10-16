@@ -63,6 +63,8 @@ jobs:
       # flaky.
       - name: Test the registry probe
         run: bash scripts/ci/registry-probe.test.sh
+      - name: Test the C++ release archive
+        run: bash scripts/ci/cpp-release-archive.test.sh
 
   zizmor:
     runs-on: ubuntu-26.04

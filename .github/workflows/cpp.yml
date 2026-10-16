@@ -95,6 +95,20 @@ jobs:
             -DLINKS_NOTATION_SOURCE_DIR:PATH="$GITHUB_WORKSPACE/cpp"
           cmake --build "$RUNNER_TEMP/sources" --config RelWithDebInfo
           ctest --test-dir "$RUNNER_TEMP/sources" --build-config RelWithDebInfo --output-on-failure
+      # The release asset is built by the script publish-cpp.yml runs. The
+      # cpp_0.26.0 asset was empty because the archive command depended on the
+      # job's working directory, and only the release job ever ran it.
+      - name: Consume the release archive
+        if: matrix.name == 'gcc'
+        run: |
+          set -euo pipefail
+          bash "$GITHUB_WORKSPACE/scripts/ci/cpp-release-archive.sh" "$RUNNER_TEMP/release"
+          VERSION=$(tr -d '[:space:]' < VERSION)
+          tar -xzf "$RUNNER_TEMP/release/links-notation-cpp-$VERSION.tar.gz" -C "$RUNNER_TEMP/release"
+          cmake -S tests/consumer -B "$RUNNER_TEMP/archive" -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DLINKS_NOTATION_SOURCE_DIR:PATH="$RUNNER_TEMP/release/links-notation-cpp-$VERSION"
+          cmake --build "$RUNNER_TEMP/archive" --config RelWithDebInfo
+          ctest --test-dir "$RUNNER_TEMP/archive" --build-config RelWithDebInfo --output-on-failure
 
   # README.md promises CMake 3.16, while every runner ships CMake 4. Without
   # this job nothing tested that promise, and a 3.24-only FetchContent keyword
