@@ -20,7 +20,7 @@ pub mod packet;
 pub use error::{BinaryError, BinaryResult};
 pub use format::{canonical, format_document, format_link, format_reference, parse_document};
 pub use mapping::{
-    decode_document, encode_document, encode_document_with_limits, BinaryLinoOptions, LinoDocument,
+    BinaryLinoOptions, LinoDocument, decode_document, encode_document, encode_document_with_limits,
 };
 pub use packet::{ArityRange, DecodeLimits, LinksPacket, Reference, Section};
 

@@ -1,4 +1,4 @@
-use links_notation::{parse_lino, LiNo};
+use links_notation::{LiNo, parse_lino};
 
 // Helper to extract the single reference from a parsed singlet link, with
 // parse_lino's outer document link around it.

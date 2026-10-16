@@ -27,8 +27,8 @@
 
 use super::error::{BinaryError, BinaryResult};
 use super::packet::{
-    external_capacity, ArityRange, DecodeLimits, LinksPacket, Reference, FIRST_LINK_ADDRESS,
-    IDENTIFIED, LIST, NULL, NUMBER, ONE, STRING,
+    ArityRange, DecodeLimits, FIRST_LINK_ADDRESS, IDENTIFIED, LIST, LinksPacket, NULL, NUMBER, ONE,
+    Reference, STRING, external_capacity,
 };
 use crate::LiNo;
 use std::cell::Cell;

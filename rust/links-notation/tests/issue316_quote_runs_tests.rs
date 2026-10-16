@@ -6,7 +6,7 @@
 
 use links_notation::comments::strip_comments;
 use links_notation::parser::quoted_reference_end;
-use links_notation::{parse_lino_to_links, LiNo, StreamParser};
+use links_notation::{LiNo, StreamParser, parse_lino_to_links};
 use std::time::{Duration, Instant};
 
 const BOUND: Duration = Duration::from_secs(2);

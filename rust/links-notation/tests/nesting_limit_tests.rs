@@ -7,8 +7,8 @@
 
 use links_notation::parser::DEFAULT_MAX_DEPTH;
 use links_notation::{
-    parse_lino_to_links, parse_lino_to_links_with_config, NestingTooDeep, ParseError, ParserConfig,
-    StreamParser,
+    NestingTooDeep, ParseError, ParserConfig, StreamParser, parse_lino_to_links,
+    parse_lino_to_links_with_config,
 };
 
 fn parens(depth: usize) -> String {

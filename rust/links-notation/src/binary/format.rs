@@ -7,7 +7,7 @@
 
 use super::error::{BinaryError, BinaryResult};
 use super::mapping::LinoDocument;
-use crate::{parse_lino_to_links, LiNo};
+use crate::{LiNo, parse_lino_to_links};
 
 /// Parses LiNo text into a canonical document. Blank input is the empty document.
 pub fn parse_document(text: &str) -> BinaryResult<LinoDocument> {

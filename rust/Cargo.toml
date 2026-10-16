@@ -4,4 +4,12 @@ members = [
     "links-notation-macro",
     "links-notation-benchmark",
 ]
-resolver = "2"
+resolver = "3"
+
+[workspace.package]
+edition = "2024"
+# usize::is_multiple_of (issue #334); experiments/issue-334/check-msrv.sh
+# proves 1.86 is rejected.
+rust-version = "1.87"
+license = "Unlicense"
+repository = "https://github.com/link-foundation/links-notation"

@@ -675,7 +675,7 @@ impl LinksPacket {
                 let length = if section.arity.is_fixed() {
                     section.arity.min
                 } else {
-                    let length = read_leb128(reader)?
+                    read_leb128(reader)?
                         .checked_add(section.arity.min)
                         .filter(|&length| section.arity.contains(length))
                         .ok_or_else(|| {
@@ -683,8 +683,7 @@ impl LinksPacket {
                                 "link length outside the section arity {}",
                                 section.arity
                             ))
-                        })?;
-                    length
+                        })?
                 };
                 references_left = references_left.checked_sub(length).ok_or_else(|| {
                     BinaryError::LimitExceeded(format!(

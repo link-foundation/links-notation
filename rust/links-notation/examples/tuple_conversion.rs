@@ -1,4 +1,4 @@
-use links_notation::{format_links, LiNo};
+use links_notation::{LiNo, format_links};
 
 fn main() {
     println!("=== Rust Tuple Conversion Examples ===\n");

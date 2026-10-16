@@ -1,4 +1,4 @@
-use links_notation::{parse_lino, parse_lino_to_links, LiNo};
+use links_notation::{LiNo, parse_lino, parse_lino_to_links};
 
 #[test]
 fn test_multiline_double_quoted_reference() {

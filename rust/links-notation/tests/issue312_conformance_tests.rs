@@ -1,6 +1,6 @@
 //! The JavaScript and Rust parsers must give the same links for these documents.
 
-use links_notation::{parse_lino_to_links, LiNo};
+use links_notation::{LiNo, parse_lino_to_links};
 
 fn render(node: &LiNo<String>) -> String {
     match node {

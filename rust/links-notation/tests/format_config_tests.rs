@@ -1,5 +1,5 @@
 use links_notation::format_config::FormatConfig;
-use links_notation::{format_links_with_config, parse_lino_to_links, LiNo};
+use links_notation::{LiNo, format_links_with_config, parse_lino_to_links};
 
 #[test]
 fn format_config_basic() {

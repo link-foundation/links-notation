@@ -22,7 +22,7 @@ mod report;
 mod xml;
 mod yaml;
 
-use metrics::{measure, Metrics};
+use metrics::{Metrics, measure};
 use serde::Serialize;
 use serde_json::{Map, Value};
 use std::collections::BTreeMap;

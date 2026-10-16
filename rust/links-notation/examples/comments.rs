@@ -4,7 +4,7 @@
 //!
 //! Run with `cargo run --example comments`.
 
-use links_notation::{parse_lino, parse_lino_with_config, ParserConfig};
+use links_notation::{ParserConfig, parse_lino, parse_lino_with_config};
 
 fn main() {
     let documents = [

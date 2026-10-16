@@ -1,10 +1,11 @@
 [package]
 name = "links-notation-benchmark"
 version = "0.1.0"
-edition = "2021"
+edition.workspace = true
+rust-version.workspace = true
 description = "UTF-8 character count benchmarks comparing Links Notation with JSON, YAML, and XML"
-license = "Unlicense"
-repository = "https://github.com/link-foundation/links-notation"
+license.workspace = true
+repository.workspace = true
 publish = false
 
 [[bin]]
