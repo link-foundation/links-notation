@@ -119,3 +119,26 @@ test("missing signing credentials fail without leaking values", () => {
   assert.match(result.stdout, /CENTRAL_USERNAME/);
   assert.doesNotMatch(result.stdout, /never-print-this-token/);
 });
+test("a version missing on main says what a maintainer must do", async () => {
+  const lines = [];
+  await audit({
+    versions,
+    fetcher: mockFetch((url) =>
+      url.includes("repo1.maven.org") || url.includes("packagist.org")
+        ? new Response("", { status: 404 })
+        : null,
+    ),
+    log: (line) => lines.push(line),
+  });
+  const errors = lines.filter((line) => line.startsWith("::error::"));
+  assert.equal(errors.length, 2);
+  assert.match(
+    errors[0],
+    /^::error::java: 1\.2\.3 is absent from Maven Central\. /,
+  );
+  assert.match(errors[0], /CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY/);
+  assert.match(errors[1], /https:\/\/packagist\.org\/packages\/submit/);
+  assert.match(errors[1], /PACKAGIST_USERNAME and PACKAGIST_TOKEN/);
+  for (const error of errors)
+    assert.match(error, /re-run the main CI run \(docs\/releases\.md\)\.$/);
+});

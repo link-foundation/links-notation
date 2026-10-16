@@ -130,9 +130,13 @@ reproduce it.
   for a consumer" with "does not contain a CMakeLists.txt file"
   (`../ci-logs/main/CI-38208546589-failed.log`, lines 823-832). The scheduled audit that followed,
   run 38263509676, found the asset by URL and did not report it
-  (`../ci-logs/main/CI-38263509676-failed.log`). Its only errors are Java and PHP, which need a
-  maintainer (credentials, a Packagist submission) and already print what to do. A re-run of the
-  release would also pass, because the job skips a release that already has its asset.
+  (`../ci-logs/main/CI-38263509676-failed.log`). Its only errors are Java and PHP (lines
+  180-181), which need a maintainer: Central credentials and a Packagist submission. The publish
+  jobs say so, but the audit only printed "java: 0.26.0 is absent from Maven Central". Since
+  this pull request, every audit error on `main` names the secrets or the submission to set up
+  and says to re-run the main CI run (`scripts/release-audit.mjs`, tested in
+  `experiments/issue-339/release-audit.test.mjs`). A re-run of the release would also pass,
+  because the job skips a release that already has its asset.
 - **Root cause:** `publish-cpp.yml` ran `git archive ... HEAD:cpp` with
   `working-directory: cpp`. git archive limits a tree-ish to the caller's subdirectory, so it
   archived `cpp/cpp`, which does not exist. Only the release job ran the command, so no pull
