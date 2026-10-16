@@ -205,9 +205,12 @@ updates:
     commit-message:
       prefix: "chore(deps)"
 
-  # .gitpod.Dockerfile
+  # .gitpod.Dockerfile, and the probe that builds the same image with the
+  # SDK csharp/global.json pins (experiments/issue-348/gitpod-sdk.Dockerfile).
   - package-ecosystem: "docker"
-    directory: "/"
+    directories:
+      - "/"
+      - "/experiments/issue-348"
     schedule:
       interval: "daily"
     labels: ["dependencies"]
