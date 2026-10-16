@@ -89,7 +89,7 @@ reproduce it.
   passes 185/185 tests and 3.6.2 stops with "requires Maven version 3.6.3"
   (`java-maven-3.6.3.log`, `java-maven-3.6.2.log`).
 
-## D7. A 2019 copy of `fvextra.sty`, outside every inventory, broke the C# PDF on TeX Live 2025
+## D7. The C# PDF did not build on ubuntu-26.04: a 2019 `fvextra.sty`, then latexminted on Python 3.14
 
 - **Fact:** on `ubuntu-26.04`, `csharp / generatePdfWithCode` stopped with LaTeX's "you have
   requested version `2025/05/14' of package fvextra, but only version`2019/02/04 v1.4'
@@ -100,10 +100,28 @@ reproduce it.
   ships TeX Live 2025 with minted 3, which needs fvextra 2025/05/14. The pin was a raw URL in a
   shell script, so no manifest, bot or gate saw it.
 - **Fix (`db1f94f`):** the download is removed. `texlive-latex-extra`, which the job already
-  installs, ships an fvextra that matches its minted. The job builds the PDF again in CI.
-- **Reproduce:** run `bash scripts/generate-pdf.sh` in `csharp/` on ubuntu-26.04 with the
-  `PDF_APT_PACKAGES` from `csharp.yml`, at `5a6d248`. TeX Live could not be installed in this
-  environment (no root), so the fix was verified only in CI.
+  installs, ships an fvextra that matches its minted.
+- **Second layer:** with fvextra fixed, minted 3 ran its highlighter, `latexminted`, and every
+  listing failed with "minted v3+ executable is not installed". The executable is there, but
+  Ubuntu's TeX Live 2025 (texlive-extra 2025.20260124-1) bundles latexminted 0.6.0, and that
+  version raises `TypeError: ArgParser.__init__() got an unexpected keyword argument 'color'`
+  on Python 3.14, the system Python of ubuntu-26.04 (CI run 38949537786,
+  `../ci-logs/ci/CI-38949537786-failed.log`, line 1272). This is
+  [Launchpad bug 2154292](https://bugs.launchpad.net/ubuntu/+source/texlive-extra/+bug/2154292)
+  and [gpoore/minted#463](https://github.com/gpoore/minted/issues/463). latexminted 0.7.0 fixes
+  it, but it also refuses minted.sty older than 3.8.0
+  ([gpoore/minted#478](https://github.com/gpoore/minted/issues/478)), and TeX Live 2025 ships
+  3.7.0. Installing 0.7.1 from PyPI would just swap one error for another.
+- **Fix (`9e1dce6`):** `csharp.yml` installs Python 3.13 with setup-python
+  (`update-environment: false`, so the job's `python3` stays the system one), and puts a
+  `latexminted` wrapper on PATH that runs `/usr/bin/latexminted` with it. The bundled wheels,
+  pygments among them, sit next to the launcher, so 3.13 needs nothing else. When
+  `/usr/bin/latexminted --version` works on the system Python again, the step prints a warning
+  to remove the wrapper.
+- **Reproduce:** `experiments/issue-348/latexminted-python314.sh` rebuilds Ubuntu's layout from
+  the same launcher (minted at `97fed42`) and the same four wheels. On 3.14 it raises the
+  `TypeError`, and through the wrapper it prints `latexminted 0.6.0`. TeX Live could not be
+  installed in this environment (no root), so the full PDF build was verified only in CI.
 
 ## D8. The `cpp_0.26.0` release asset is an empty archive
 
