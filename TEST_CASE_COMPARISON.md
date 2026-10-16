@@ -18,7 +18,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 245 | 23 |
+| Python | 247 | 24 |
 | JavaScript | 303 | 28 |
 | Rust | 401 | 29 |
 | C# | 295 | 27 |
@@ -35,35 +35,35 @@ Go keeps most of its tests in a single file rather than one file per category, s
 |-----------|---|---|---|---|---|---|---|---|
 | access link properties | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L102) | ❌ | ❌ |
 | create link programmatically | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L83) | ❌ | ❌ |
-| empty input | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L516) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L43) | ❌ | ❌ |
-| empty link | [✅](python/tests/test_api.py#L39) | [✅](js/tests/ApiTests.test.js#L38) | [✅](rust/links-notation/tests/api_tests.rs#L40) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L50) | [✅](go/lino_test.go#L40) | ❌ | [✅](php/tests/ApiTest.php#L41) | [✅](cpp/tests/api_tests.cpp#L44) |
+| empty input | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L511) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L43) | ❌ | ❌ |
+| empty link | [✅](python/tests/test_api.py#L39) | [✅](js/tests/ApiTests.test.js#L38) | [✅](rust/links-notation/tests/api_tests.rs#L40) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L50) | [✅](go/lino_test.go#L35) | ❌ | [✅](php/tests/ApiTest.php#L41) | [✅](cpp/tests/api_tests.cpp#L44) |
 | format with less parentheses | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L127) | ❌ | ❌ |
 | full readme example | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L28) | ❌ | ❌ |
-| indented id syntax parsing | [✅](python/tests/test_api.py#L110) | [✅](js/tests/ApiTests.test.js#L103) | [✅](rust/links-notation/tests/api_tests.rs#L128) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L135) | [✅](go/lino_test.go#L111) | ❌ | [✅](php/tests/ApiTest.php#L91) | [✅](cpp/tests/api_tests.cpp#L88) |
+| indented id syntax parsing | [✅](python/tests/test_api.py#L110) | [✅](js/tests/ApiTests.test.js#L103) | [✅](rust/links-notation/tests/api_tests.rs#L128) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L135) | [✅](go/lino_test.go#L106) | ❌ | [✅](php/tests/ApiTest.php#L91) | [✅](cpp/tests/api_tests.cpp#L88) |
 | indented id syntax roundtrip | [✅](python/tests/test_api.py#L125) | [✅](js/tests/ApiTests.test.js#L120) | [✅](rust/links-notation/tests/api_tests.rs#L166) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L153) | ❌ | ❌ | [✅](php/tests/ApiTest.php#L100) | [✅](cpp/tests/api_tests.cpp#L102) |
 | input size limit | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L60) | ❌ | ❌ |
 | input size limit is enforced | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/ApiTest.php#L125) | ❌ |
-| is link | [✅](python/tests/test_api.py#L16) | [✅](js/tests/ApiTests.test.js#L15) | [✅](rust/links-notation/tests/api_tests.rs#L11) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L19) | [✅](go/lino_test.go#L27) | ❌ | [✅](php/tests/ApiTest.php#L33) | [✅](cpp/tests/api_tests.cpp#L24) |
+| is link | [✅](python/tests/test_api.py#L16) | [✅](js/tests/ApiTests.test.js#L15) | [✅](rust/links-notation/tests/api_tests.rs#L11) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L19) | [✅](go/lino_test.go#L22) | ❌ | [✅](php/tests/ApiTest.php#L33) | [✅](cpp/tests/api_tests.cpp#L24) |
 | is link equivalent | [✅](python/tests/test_api.py#L31) | [✅](js/tests/ApiTests.test.js#L30) | [✅](rust/links-notation/tests/api_tests.rs#L29) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L39) | ❌ | ❌ | ❌ | [✅](cpp/tests/api_tests.cpp#L37) |
-| is ref | [✅](python/tests/test_api.py#L8) | [✅](js/tests/ApiTests.test.js#L8) | [✅](rust/links-notation/tests/api_tests.rs#L4) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L10) | [✅](go/lino_test.go#L17) | ❌ | [✅](php/tests/ApiTest.php#L25) | [✅](cpp/tests/api_tests.cpp#L18) |
+| is ref | [✅](python/tests/test_api.py#L8) | [✅](js/tests/ApiTests.test.js#L8) | [✅](rust/links-notation/tests/api_tests.rs#L4) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L10) | [✅](go/lino_test.go#L12) | ❌ | [✅](php/tests/ApiTest.php#L25) | [✅](cpp/tests/api_tests.cpp#L18) |
 | is ref equivalent | [✅](python/tests/test_api.py#L24) | [✅](js/tests/ApiTests.test.js#L23) | [✅](rust/links-notation/tests/api_tests.rs#L21) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L30) | ❌ | ❌ | ❌ | [✅](cpp/tests/api_tests.cpp#L30) |
 | link combine | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L154) | ❌ | ❌ |
-| link equality | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L480) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L135) | ❌ | ❌ |
+| link equality | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L475) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L135) | ❌ | ❌ |
 | links group usage | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L92) | ❌ | ❌ |
 | link simplify | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L144) | ❌ | ❌ |
-| link with source target | [✅](python/tests/test_api.py#L57) | [✅](js/tests/ApiTests.test.js#L54) | [✅](rust/links-notation/tests/api_tests.rs#L65) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L71) | [✅](go/lino_test.go#L63) | ❌ | [✅](php/tests/ApiTest.php#L52) | [✅](cpp/tests/api_tests.cpp#L57) |
-| link with source type target | [✅](python/tests/test_api.py#L67) | [✅](js/tests/ApiTests.test.js#L63) | [✅](rust/links-notation/tests/api_tests.rs#L80) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L83) | [✅](go/lino_test.go#L75) | ❌ | [✅](php/tests/ApiTest.php#L59) | [✅](cpp/tests/api_tests.cpp#L63) |
-| multiple indented id syntax parsing | [✅](python/tests/test_api.py#L135) | [✅](js/tests/ApiTests.test.js#L134) | [✅](rust/links-notation/tests/api_tests.rs#L147) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L170) | [✅](go/lino_test.go#L135) | ❌ | [✅](php/tests/ApiTest.php#L107) | [✅](cpp/tests/api_tests.cpp#L95) |
+| link with source target | [✅](python/tests/test_api.py#L57) | [✅](js/tests/ApiTests.test.js#L54) | [✅](rust/links-notation/tests/api_tests.rs#L65) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L71) | [✅](go/lino_test.go#L58) | ❌ | [✅](php/tests/ApiTest.php#L52) | [✅](cpp/tests/api_tests.cpp#L57) |
+| link with source type target | [✅](python/tests/test_api.py#L67) | [✅](js/tests/ApiTests.test.js#L63) | [✅](rust/links-notation/tests/api_tests.rs#L80) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L83) | [✅](go/lino_test.go#L70) | ❌ | [✅](php/tests/ApiTest.php#L59) | [✅](cpp/tests/api_tests.cpp#L63) |
+| multiple indented id syntax parsing | [✅](python/tests/test_api.py#L135) | [✅](js/tests/ApiTests.test.js#L134) | [✅](rust/links-notation/tests/api_tests.rs#L147) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L170) | [✅](go/lino_test.go#L130) | ❌ | [✅](php/tests/ApiTest.php#L107) | [✅](cpp/tests/api_tests.cpp#L95) |
 | multiple indented id syntax roundtrip | [✅](python/tests/test_api.py#L150) | [✅](js/tests/ApiTests.test.js#L156) | [✅](rust/links-notation/tests/api_tests.rs#L191) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L188) | ❌ | ❌ | [✅](php/tests/ApiTest.php#L116) | [✅](cpp/tests/api_tests.cpp#L111) |
 | nested link access | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L115) | ❌ | ❌ |
 | null input throws exception | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L55) | ❌ | ❌ |
 | parse and format round trip | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L67) | ❌ | ❌ |
 | parse and format round trip multiple | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L75) | ❌ | ❌ |
-| quoted references | [✅](python/tests/test_api.py#L89) | [✅](js/tests/ApiTests.test.js#L83) | [✅](rust/links-notation/tests/api_tests.rs#L105) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L109) | [✅](go/lino_test.go#L187) | ❌ | [✅](php/tests/ApiTest.php#L75) | [✅](cpp/tests/api_tests.cpp#L76) |
+| quoted references | [✅](python/tests/test_api.py#L89) | [✅](js/tests/ApiTests.test.js#L83) | [✅](rust/links-notation/tests/api_tests.rs#L105) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L109) | [✅](go/lino_test.go#L182) | ❌ | [✅](php/tests/ApiTest.php#L75) | [✅](cpp/tests/api_tests.cpp#L76) |
 | quoted references parsing | [✅](python/tests/test_api.py#L99) | [✅](js/tests/ApiTests.test.js#L92) | [✅](rust/links-notation/tests/api_tests.rs#L114) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L121) | ❌ | ❌ | [✅](php/tests/ApiTest.php#L83) | [✅](cpp/tests/api_tests.cpp#L82) |
-| r e a d m e example | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L822) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L21) | ❌ | ❌ |
-| simple link | [✅](python/tests/test_api.py#L46) | [✅](js/tests/ApiTests.test.js#L44) | [✅](rust/links-notation/tests/api_tests.rs#L50) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L58) | [✅](go/lino_test.go#L48) | ❌ | [✅](php/tests/ApiTest.php#L46) | [✅](cpp/tests/api_tests.cpp#L49) |
-| single line format | [✅](python/tests/test_api.py#L77) | [✅](js/tests/ApiTests.test.js#L72) | [✅](rust/links-notation/tests/api_tests.rs#L95) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L95) | [✅](go/lino_test.go#L87) | ❌ | [✅](php/tests/ApiTest.php#L66) | [✅](cpp/tests/api_tests.cpp#L69) |
+| r e a d m e example | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L817) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L21) | ❌ | ❌ |
+| simple link | [✅](python/tests/test_api.py#L46) | [✅](js/tests/ApiTests.test.js#L44) | [✅](rust/links-notation/tests/api_tests.rs#L50) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L58) | [✅](go/lino_test.go#L43) | ❌ | [✅](php/tests/ApiTest.php#L46) | [✅](cpp/tests/api_tests.cpp#L49) |
+| single line format | [✅](python/tests/test_api.py#L77) | [✅](js/tests/ApiTests.test.js#L72) | [✅](rust/links-notation/tests/api_tests.rs#L95) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ApiTests.cs#L95) | [✅](go/lino_test.go#L82) | ❌ | [✅](php/tests/ApiTest.php#L66) | [✅](cpp/tests/api_tests.cpp#L69) |
 | triplet example | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L36) | ❌ | ❌ |
 | whitespace only | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ApiTest.java#L49) | ❌ | ❌ |
 
@@ -157,45 +157,45 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ |
 |-----------|---|---|---|---|---|---|---|---|
-| arities without doublets are unencodable | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L453) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L529) |
+| arities without doublets are unencodable | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L455) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L529) |
 | arity options choose doublets triplets or any length | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L395) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L496) |
-| arity ranges parse and display | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L470) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L536) |
+| arity ranges parse and display | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L472) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L536) |
 | canonical text round trips the corpus | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L197) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L370) |
-| codec encoder uses configured limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1079) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L886) |
-| comment references survive binary and text round trips | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L884) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L770) |
-| compact address overflow is rejected before reading links | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L988) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L836) |
-| default depth limit rejects a bounded deep packet | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1041) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L866) |
+| codec encoder uses configured limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1087) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L886) |
+| comment references survive binary and text round trips | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L892) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L770) |
+| compact address overflow is rejected before reading links | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L996) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L836) |
+| default depth limit rejects a bounded deep packet | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1049) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L866) |
 | every option set round trips the corpus | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L180) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L357) |
-| every short reference over delimiters round trips | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L841) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L746) |
+| every short reference over delimiters round trips | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L849) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L746) |
 | external references match platform data hybrid | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L291) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L426) |
 | golden documents are stable | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L130) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L322) |
 | golden packets are stable | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L156) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L340) |
-| hand built packets decode | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L508) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L569) |
-| hostile packets hit limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L725) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L685) |
-| ids do not add an extra model nesting level | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1057) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L875) |
-| in memory packets obey limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L947) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L812) |
-| in memory packets reject invalid wire shapes | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L971) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L823) |
-| invalid code points are rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L706) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L673) |
-| invalid encoder models and address overflow are errors | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1017) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L857) |
+| hand built packets decode | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L510) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L569) |
+| hostile packets hit limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L733) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L685) |
+| ids do not add an extra model nesting level | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1065) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L875) |
+| in memory packets obey limits | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L955) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L812) |
+| in memory packets reject invalid wire shapes | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L979) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L823) |
+| invalid code points are rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L714) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L673) |
+| invalid encoder models and address overflow are errors | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1025) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L857) |
 | large external values widen only their section | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L380) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L487) |
 | limits and malformed | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L922) |
-| malformed packets are rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L623) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L629) |
+| malformed packets are rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L625) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L629) |
 | native models | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L907) |
-| native parser groups round trip without canonicalization | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L910) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L788) |
+| native parser groups round trip without canonicalization | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L918) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L788) |
 | packed widths never take more bytes than uniform ones | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L356) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L472) |
-| packing rejects links it cannot lay out | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L544) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L590) |
+| packing rejects links it cannot lay out | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L546) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L590) |
 | references are quoted only when needed | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L228) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L385) |
-| repeated references obey a total utf8 expansion budget | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L997) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L843) |
-| reply options follow the received packet | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L492) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L555) |
+| repeated references obey a total utf8 expansion budget | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L1005) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L843) |
+| reply options follow the received packet | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L494) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L555) |
 | shared vectors | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L299) |
-| stream failures are io errors and interruptions are retried | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L822) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L728) |
-| stream packets are read one at a time and truncation is rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L924) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L798) |
+| stream failures are io errors and interruptions are retried | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L830) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L728) |
+| stream packets are read one at a time and truncation is rejected | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L932) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L798) |
 | streams uint64 truncation and depth | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L955) |
 | string budget stops before later scalars | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L15) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L280) |
-| text helpers preserve unicode whitespace references | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L898) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L780) |
+| text helpers preserve unicode whitespace references | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L906) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L780) |
 | uniform widths grow past 256 addresses and packed widths stay small | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L324) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L447) |
 | width tiers follow the number of links | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L266) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L401) |
-| writing rejects sections that do not hold their links | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L572) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L610) |
+| writing rejects sections that do not hold their links | ❌ | ❌ | [✅](rust/links-notation/tests/binary_notation_tests.rs#L574) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/binary_notation_tests.cpp#L610) |
 
 **Category totals:** Python: 0, JavaScript: 0, Rust: 35, C#: 0, Go: 0, Java: 0, PHP: 0, C++: 39
 
@@ -235,7 +235,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 |-----------|---|---|---|---|---|---|---|---|
 | all features | [✅](python/tests/test_edge_case_parser.py#L33) | [✅](js/tests/EdgeCaseParser.test.js#L27) | [✅](rust/links-notation/tests/edge_case_parser_tests.rs#L31) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs#L38) | ❌ | ❌ | [✅](php/tests/EdgeCaseParserTest.php#L40) | [✅](cpp/tests/edge_case_parser_tests.cpp#L35) |
 | empty document | [✅](python/tests/test_edge_case_parser.py#L87) | [✅](js/tests/EdgeCaseParser.test.js#L76) | [✅](rust/links-notation/tests/edge_case_parser_tests.rs#L87) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs#L146) | ❌ | ❌ | [✅](php/tests/EdgeCaseParserTest.php#L60) | [✅](cpp/tests/edge_case_parser_tests.cpp#L71) |
-| empty link | [✅](python/tests/test_edge_case_parser.py#L8) | [✅](js/tests/EdgeCaseParser.test.js#L7) | [✅](rust/links-notation/tests/edge_case_parser_tests.rs#L4) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs#L9) | [✅](go/lino_test.go#L40) | ❌ | [✅](php/tests/EdgeCaseParserTest.php#L24) | [✅](cpp/tests/edge_case_parser_tests.cpp#L19) |
+| empty link | [✅](python/tests/test_edge_case_parser.py#L8) | [✅](js/tests/EdgeCaseParser.test.js#L7) | [✅](rust/links-notation/tests/edge_case_parser_tests.rs#L4) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs#L9) | [✅](go/lino_test.go#L35) | ❌ | [✅](php/tests/EdgeCaseParserTest.php#L24) | [✅](cpp/tests/edge_case_parser_tests.cpp#L19) |
 | empty links | [✅](python/tests/test_edge_case_parser.py#L103) | [✅](js/tests/EdgeCaseParser.test.js#L90) | [✅](rust/links-notation/tests/edge_case_parser_tests.rs#L107) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs#L164) | ❌ | ❌ | [✅](php/tests/EdgeCaseParserTest.php#L70) | [✅](cpp/tests/edge_case_parser_tests.cpp#L85) |
 | empty link with empty self reference | [✅](python/tests/test_edge_case_parser.py#L25) | [✅](js/tests/EdgeCaseParser.test.js#L21) | [✅](rust/links-notation/tests/edge_case_parser_tests.rs#L23) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs#L29) | ❌ | ❌ | [✅](php/tests/EdgeCaseParserTest.php#L35) | [✅](cpp/tests/edge_case_parser_tests.cpp#L30) |
 | empty link with parentheses | [✅](python/tests/test_edge_case_parser.py#L16) | [✅](js/tests/EdgeCaseParser.test.js#L13) | [✅](rust/links-notation/tests/edge_case_parser_tests.rs#L12) | [✅](csharp/Link.Foundation.Links.Notation.Tests/EdgeCaseParserTests.cs#L18) | ❌ | ❌ | [✅](php/tests/EdgeCaseParserTest.php#L30) | [✅](cpp/tests/edge_case_parser_tests.cpp#L24) |
@@ -269,7 +269,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 |-----------|---|---|---|---|---|---|---|---|
 | format config basic | [✅](python/tests/test_format_config.py#L8) | [✅](js/tests/FormatConfig.test.js#L6) | [✅](rust/links-notation/tests/format_config_tests.rs#L5) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs#L8) | ❌ | ❌ | [✅](php/tests/FormatConfigTest.php#L26) | [✅](cpp/tests/format_config_tests.cpp#L23) |
 | format config custom indent | [✅](python/tests/test_format_config.py#L70) | [✅](js/tests/FormatConfig.test.js#L90) | [✅](rust/links-notation/tests/format_config_tests.rs#L53) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs#L65) | ❌ | ❌ | [✅](php/tests/FormatConfigTest.php#L88) | [✅](cpp/tests/format_config_tests.cpp#L50) |
-| format config less parentheses | [✅](python/tests/test_format_config.py#L59) | [✅](js/tests/FormatConfig.test.js#L80) | [✅](rust/links-notation/tests/format_config_tests.rs#L64) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs#L78) | [✅](go/lino_test.go#L561) | ❌ | [✅](php/tests/FormatConfigTest.php#L79) | [✅](cpp/tests/format_config_tests.cpp#L56) |
+| format config less parentheses | [✅](python/tests/test_format_config.py#L59) | [✅](js/tests/FormatConfig.test.js#L80) | [✅](rust/links-notation/tests/format_config_tests.rs#L64) | [✅](csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs#L78) | [✅](go/lino_test.go#L556) | ❌ | [✅](php/tests/FormatConfigTest.php#L79) | [✅](cpp/tests/format_config_tests.cpp#L56) |
 | format empty links with config | ❌ | ❌ | [✅](rust/links-notation/tests/format_config_tests.rs#L261) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/format_config_tests.cpp#L137) |
 | format links with consecutive grouping integration | ❌ | ❌ | [✅](rust/links-notation/tests/format_config_tests.rs#L174) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/format_config_tests.cpp#L107) |
 | format link with custom indent integration | ❌ | ❌ | [✅](rust/links-notation/tests/format_config_tests.rs#L204) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/format_config_tests.cpp#L118) |
@@ -403,12 +403,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | create link with id | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L20) | ❌ | ❌ |
 | create link with id and values | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L27) | ❌ | ❌ |
 | equality | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L92) | ❌ | ❌ |
-| escape reference simple | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L700) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L77) | ❌ | ❌ |
-| escape reference with colon | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L679) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L67) | ❌ | ❌ |
-| escape reference with double quote | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L686) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L87) | ❌ | ❌ |
+| escape reference simple | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L695) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L77) | ❌ | ❌ |
+| escape reference with colon | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L674) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L67) | ❌ | ❌ |
+| escape reference with double quote | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L681) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L87) | ❌ | ❌ |
 | escape reference with parentheses | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L72) | ❌ | ❌ |
-| escape reference with single quote | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L693) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L82) | ❌ | ❌ |
-| escape reference with space | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L672) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L62) | ❌ | ❌ |
+| escape reference with single quote | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L688) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L82) | ❌ | ❌ |
+| escape reference with space | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L667) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L62) | ❌ | ❌ |
 | format links | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L146) | ❌ | ❌ |
 | format links empty | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L154) | ❌ | ❌ |
 | format link with values | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/LinkTest.java#L41) | ❌ | ❌ |
@@ -463,33 +463,33 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ |
 |-----------|---|---|---|---|---|---|---|---|
-| backtick quoted string | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L639) | ❌ | ❌ | ❌ |
-| bug1 | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L178) | ❌ | ❌ | ❌ |
-| double quoted references | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L286) | ❌ | ❌ | ❌ |
-| double quoted string | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L611) | ❌ | ❌ | ❌ |
-| format config default | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L570) | ❌ | ❌ | ❌ |
-| format config with indent by length | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L597) | ❌ | ❌ | ❌ |
-| format config with indent by ref count | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L587) | ❌ | ❌ | ❌ |
-| format config with indent string | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L580) | ❌ | ❌ | ❌ |
-| group consecutive links | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L711) | ❌ | ❌ | ❌ |
-| indented i d syntax basic | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L780) | ❌ | ❌ | ❌ |
-| indented i d syntax multiple | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L797) | ❌ | ❌ | ❌ |
-| link inequality different i d | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L488) | ❌ | ❌ | ❌ |
-| link inequality different value count | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L504) | ❌ | ❌ | ❌ |
-| link inequality different values | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L496) | ❌ | ❌ | ❌ |
-| max input size | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L767) | ❌ | ❌ | ❌ |
-| mixed inline and indented | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L864) | ❌ | ❌ | ❌ |
-| multiline links preserved | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L548) | ❌ | ❌ | ❌ |
-| multiline with embedded newlines | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L882) | ❌ | ❌ | ❌ |
-| nested links parser | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L437) | ❌ | ❌ | ❌ |
-| nested self reference | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L898) | ❌ | ❌ | ❌ |
-| no grouping different i ds | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L728) | ❌ | ❌ | ❌ |
-| r e a d m e doublets | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L833) | ❌ | ❌ | ❌ |
-| r e a d m e triplets | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L847) | ❌ | ❌ | ❌ |
-| roundtrip simple | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L743) | ❌ | ❌ | ❌ |
-| single quoted string | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L625) | ❌ | ❌ | ❌ |
-| triple quoted string | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L653) | ❌ | ❌ | ❌ |
-| whitespace only input | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L526) | ❌ | ❌ | ❌ |
+| backtick quoted string | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L634) | ❌ | ❌ | ❌ |
+| bug1 | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L173) | ❌ | ❌ | ❌ |
+| double quoted references | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L281) | ❌ | ❌ | ❌ |
+| double quoted string | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L606) | ❌ | ❌ | ❌ |
+| format config default | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L565) | ❌ | ❌ | ❌ |
+| format config with indent by length | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L592) | ❌ | ❌ | ❌ |
+| format config with indent by ref count | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L582) | ❌ | ❌ | ❌ |
+| format config with indent string | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L575) | ❌ | ❌ | ❌ |
+| group consecutive links | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L706) | ❌ | ❌ | ❌ |
+| indented i d syntax basic | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L775) | ❌ | ❌ | ❌ |
+| indented i d syntax multiple | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L792) | ❌ | ❌ | ❌ |
+| link inequality different i d | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L483) | ❌ | ❌ | ❌ |
+| link inequality different value count | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L499) | ❌ | ❌ | ❌ |
+| link inequality different values | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L491) | ❌ | ❌ | ❌ |
+| max input size | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L762) | ❌ | ❌ | ❌ |
+| mixed inline and indented | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L859) | ❌ | ❌ | ❌ |
+| multiline links preserved | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L543) | ❌ | ❌ | ❌ |
+| multiline with embedded newlines | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L877) | ❌ | ❌ | ❌ |
+| nested links parser | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L432) | ❌ | ❌ | ❌ |
+| nested self reference | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L893) | ❌ | ❌ | ❌ |
+| no grouping different i ds | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L723) | ❌ | ❌ | ❌ |
+| r e a d m e doublets | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L828) | ❌ | ❌ | ❌ |
+| r e a d m e triplets | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L842) | ❌ | ❌ | ❌ |
+| roundtrip simple | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L738) | ❌ | ❌ | ❌ |
+| single quoted string | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L620) | ❌ | ❌ | ❌ |
+| triple quoted string | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L648) | ❌ | ❌ | ❌ |
+| whitespace only input | ❌ | ❌ | ❌ | ❌ | [✅](go/lino_test.go#L521) | ❌ | ❌ | ❌ |
 
 **Category totals:** Python: 0, JavaScript: 0, Rust: 0, C#: 0, Go: 27, Java: 0, PHP: 0, C++: 0
 
@@ -513,12 +513,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | direct simple reference | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L276) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | direct triplet | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L297) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | direct with numbers | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L481) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| empty input | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L206) | ❌ | [✅](go/lino_test.go#L516) | ❌ | ❌ | ❌ |
+| empty input | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L206) | ❌ | [✅](go/lino_test.go#L511) | ❌ | ❌ | ❌ |
 | formatting works | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L220) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | indented syntax | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L235) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | link with id and values | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L31) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | multiple lines | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L170) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| nested links | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L129) | ❌ | [✅](go/lino_test.go#L308) | ❌ | ❌ | ❌ |
+| nested links | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L129) | ❌ | [✅](go/lino_test.go#L303) | ❌ | ❌ | ❌ |
 | parenthesized link | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L100) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | quoted strings | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L181) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | runtime equivalence | ❌ | ❌ | [✅](rust/links-notation/tests/macro_tests.rs#L227) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -660,27 +660,27 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ |
 |-----------|---|---|---|---|---|---|---|---|
-| complex indentation | [✅](python/tests/test_nested_parser.py#L137) | [✅](js/tests/NestedParser.test.js#L127) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L91) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L143) | [✅](go/lino_test.go#L424) | ❌ | [✅](php/tests/NestedParserTest.php#L122) | [✅](cpp/tests/nested_parser_tests.cpp#L102) |
+| complex indentation | [✅](python/tests/test_nested_parser.py#L137) | [✅](js/tests/NestedParser.test.js#L127) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L91) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L143) | [✅](go/lino_test.go#L419) | ❌ | [✅](php/tests/NestedParserTest.php#L122) | [✅](cpp/tests/nested_parser_tests.cpp#L102) |
 | complex structure | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestedParserTest.java#L103) | ❌ | ❌ |
 | deeply nested structure | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestedParserTest.java#L55) | ❌ | ❌ |
-| deep nested structure roundtrip | [✅](python/tests/test_nested_parser.py#L192) | [✅](js/tests/NestedParser.test.js#L179) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L154) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L211) | [✅](go/lino_test.go#L458) | ❌ | [✅](php/tests/NestedParserTest.php#L163) | [✅](cpp/tests/nested_parser_tests.cpp#L146) |
+| deep nested structure roundtrip | [✅](python/tests/test_nested_parser.py#L192) | [✅](js/tests/NestedParser.test.js#L179) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L154) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L211) | [✅](go/lino_test.go#L453) | ❌ | [✅](php/tests/NestedParserTest.php#L163) | [✅](cpp/tests/nested_parser_tests.cpp#L146) |
 | double nested link | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestedParserTest.java#L33) | ❌ | ❌ |
-| indentation based children | [✅](python/tests/test_nested_parser.py#L127) | [✅](js/tests/NestedParser.test.js#L118) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L80) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L128) | [✅](go/lino_test.go#L413) | ❌ | [✅](php/tests/NestedParserTest.php#L116) | [✅](cpp/tests/nested_parser_tests.cpp#L96) |
+| indentation based children | [✅](python/tests/test_nested_parser.py#L127) | [✅](js/tests/NestedParser.test.js#L118) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L80) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L128) | [✅](go/lino_test.go#L408) | ❌ | [✅](php/tests/NestedParserTest.php#L116) | [✅](cpp/tests/nested_parser_tests.cpp#L96) |
 | indentation consistency | [✅](python/tests/test_nested_parser.py#L116) | [✅](js/tests/NestedParser.test.js#L108) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L69) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L116) | ❌ | ❌ | ❌ | [✅](cpp/tests/nested_parser_tests.cpp#L88) |
 | indentation parser | [✅](python/tests/test_nested_parser.py#L163) | [✅](js/tests/NestedParser.test.js#L151) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L123) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L177) | ❌ | ❌ | [✅](php/tests/NestedParserTest.php#L135) | [✅](cpp/tests/nested_parser_tests.cpp#L124) |
 | mixed nested and simple | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestedParserTest.java#L73) | ❌ | ❌ |
-| multiple nested links roundtrip | [✅](python/tests/test_nested_parser.py#L202) | [✅](js/tests/NestedParser.test.js#L188) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L166) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L223) | [✅](go/lino_test.go#L467) | ❌ | [✅](php/tests/NestedParserTest.php#L169) | [✅](cpp/tests/nested_parser_tests.cpp#L152) |
+| multiple nested links roundtrip | [✅](python/tests/test_nested_parser.py#L202) | [✅](js/tests/NestedParser.test.js#L188) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L166) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L223) | [✅](go/lino_test.go#L462) | ❌ | [✅](php/tests/NestedParserTest.php#L169) | [✅](cpp/tests/nested_parser_tests.cpp#L152) |
 | multiple top level links | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestedParserTest.java#L94) | ❌ | ❌ |
 | nested indentation parser | [✅](python/tests/test_nested_parser.py#L173) | [✅](js/tests/NestedParser.test.js#L162) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L133) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L188) | ❌ | ❌ | [✅](php/tests/NestedParserTest.php#L151) | [✅](cpp/tests/nested_parser_tests.cpp#L133) |
 | nested link | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestedParserTest.java#L20) | ❌ | ❌ |
 | nested link no id | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestedParserTest.java#L46) | ❌ | ❌ |
-| nested links | [✅](python/tests/test_nested_parser.py#L149) | [✅](js/tests/NestedParser.test.js#L138) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L106) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L161) | [✅](go/lino_test.go#L308) | ❌ | [✅](php/tests/NestedParserTest.php#L128) | [✅](cpp/tests/nested_parser_tests.cpp#L111) |
+| nested links | [✅](python/tests/test_nested_parser.py#L149) | [✅](js/tests/NestedParser.test.js#L138) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L106) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L161) | [✅](go/lino_test.go#L303) | ❌ | [✅](php/tests/NestedParserTest.php#L128) | [✅](cpp/tests/nested_parser_tests.cpp#L111) |
 | nested link with quoted values | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/NestedParserTest.java#L85) | ❌ | ❌ |
-| parse nested structure with indentation | [✅](python/tests/test_nested_parser.py#L99) | [✅](js/tests/NestedParser.test.js#L93) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L60) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L103) | [✅](go/lino_test.go#L403) | ❌ | [✅](php/tests/NestedParserTest.php#L104) | [✅](cpp/tests/nested_parser_tests.cpp#L83) |
+| parse nested structure with indentation | [✅](python/tests/test_nested_parser.py#L99) | [✅](js/tests/NestedParser.test.js#L93) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L60) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L103) | [✅](go/lino_test.go#L398) | ❌ | [✅](php/tests/NestedParserTest.php#L104) | [✅](cpp/tests/nested_parser_tests.cpp#L83) |
 | significant whitespace | [✅](python/tests/test_nested_parser.py#L10) | [✅](js/tests/NestedParser.test.js#L7) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L5) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L10) | ❌ | ❌ | [✅](php/tests/NestedParserTest.php#L24) | [✅](cpp/tests/nested_parser_tests.cpp#L30) |
-| simple significant whitespace | [✅](python/tests/test_nested_parser.py#L74) | [✅](js/tests/NestedParser.test.js#L70) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L42) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L74) | [✅](go/lino_test.go#L376) | ❌ | [✅](php/tests/NestedParserTest.php#L90) | [✅](cpp/tests/nested_parser_tests.cpp#L75) |
-| three level nesting roundtrip | [✅](python/tests/test_nested_parser.py#L182) | [✅](js/tests/NestedParser.test.js#L170) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L142) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L199) | [✅](go/lino_test.go#L449) | ❌ | [✅](php/tests/NestedParserTest.php#L157) | [✅](cpp/tests/nested_parser_tests.cpp#L140) |
-| two spaces sized whitespace | [✅](python/tests/test_nested_parser.py#L87) | [✅](js/tests/NestedParser.test.js#L82) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L51) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L89) | [✅](go/lino_test.go#L390) | ❌ | [✅](php/tests/NestedParserTest.php#L97) | [✅](cpp/tests/nested_parser_tests.cpp#L79) |
+| simple significant whitespace | [✅](python/tests/test_nested_parser.py#L74) | [✅](js/tests/NestedParser.test.js#L70) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L42) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L74) | [✅](go/lino_test.go#L371) | ❌ | [✅](php/tests/NestedParserTest.php#L90) | [✅](cpp/tests/nested_parser_tests.cpp#L75) |
+| three level nesting roundtrip | [✅](python/tests/test_nested_parser.py#L182) | [✅](js/tests/NestedParser.test.js#L170) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L142) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L199) | [✅](go/lino_test.go#L444) | ❌ | [✅](php/tests/NestedParserTest.php#L157) | [✅](cpp/tests/nested_parser_tests.cpp#L140) |
+| two spaces sized whitespace | [✅](python/tests/test_nested_parser.py#L87) | [✅](js/tests/NestedParser.test.js#L82) | [✅](rust/links-notation/tests/nested_parser_tests.rs#L51) | [✅](csharp/Link.Foundation.Links.Notation.Tests/NestedParserTests.cs#L89) | [✅](go/lino_test.go#L385) | ❌ | [✅](php/tests/NestedParserTest.php#L97) | [✅](cpp/tests/nested_parser_tests.cpp#L79) |
 
 **Category totals:** Python: 13, JavaScript: 13, Rust: 13, C#: 13, Go: 9, Java: 8, PHP: 12, C++: 13
 
@@ -775,10 +775,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ |
 |-----------|---|---|---|---|---|---|---|---|
-| binary reference fidelity | [✅](python/tests/test_reference_fidelity.py#L49) | [✅](js/tests/ReferenceFidelity.test.js#L68) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L95) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L54) | [✅](go/reference_fidelity_test.go#L85) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L67) | [✅](php/tests/ReferenceFidelityTest.php#L60) | [✅](cpp/tests/reference_fidelity_tests.cpp#L75) |
-| malformed reference literals are rejected | [✅](python/tests/test_reference_fidelity.py#L58) | [✅](js/tests/ReferenceFidelity.test.js#L80) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L112) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L67) | [✅](go/reference_fidelity_test.go#L110) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L78) | [✅](php/tests/ReferenceFidelityTest.php#L71) | [✅](cpp/tests/reference_fidelity_tests.cpp#L85) |
-| native reference fidelity | [✅](python/tests/test_reference_fidelity.py#L24) | [✅](js/tests/ReferenceFidelity.test.js#L27) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L28) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L19) | [✅](go/reference_fidelity_test.go#L34) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L28) | [✅](php/tests/ReferenceFidelityTest.php#L26) | [✅](cpp/tests/reference_fidelity_tests.cpp#L33) |
-| reference literals at every chunk split | [✅](python/tests/test_reference_fidelity.py#L31) | [✅](js/tests/ReferenceFidelity.test.js#L44) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L62) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L31) | [✅](go/reference_fidelity_test.go#L51) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L42) | [✅](php/tests/ReferenceFidelityTest.php#L36) | [✅](cpp/tests/reference_fidelity_tests.cpp#L54) |
+| binary reference fidelity | [✅](python/tests/test_reference_fidelity.py#L49) | [✅](js/tests/ReferenceFidelity.test.js#L68) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L96) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L54) | [✅](go/reference_fidelity_test.go#L85) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L67) | [✅](php/tests/ReferenceFidelityTest.php#L60) | [✅](cpp/tests/reference_fidelity_tests.cpp#L75) |
+| malformed reference literals are rejected | [✅](python/tests/test_reference_fidelity.py#L58) | [✅](js/tests/ReferenceFidelity.test.js#L80) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L113) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L67) | [✅](go/reference_fidelity_test.go#L110) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L78) | [✅](php/tests/ReferenceFidelityTest.php#L71) | [✅](cpp/tests/reference_fidelity_tests.cpp#L85) |
+| native reference fidelity | [✅](python/tests/test_reference_fidelity.py#L24) | [✅](js/tests/ReferenceFidelity.test.js#L27) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L29) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L19) | [✅](go/reference_fidelity_test.go#L34) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L28) | [✅](php/tests/ReferenceFidelityTest.php#L26) | [✅](cpp/tests/reference_fidelity_tests.cpp#L33) |
+| reference literals at every chunk split | [✅](python/tests/test_reference_fidelity.py#L31) | [✅](js/tests/ReferenceFidelity.test.js#L44) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L63) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L31) | [✅](go/reference_fidelity_test.go#L51) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L42) | [✅](php/tests/ReferenceFidelityTest.php#L36) | [✅](cpp/tests/reference_fidelity_tests.cpp#L54) |
 
 **Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4, Go: 4, Java: 4, PHP: 4, C++: 4
 
@@ -795,28 +795,28 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ |
 |-----------|---|---|---|---|---|---|---|---|
 | bug test 1 | [✅](python/tests/test_single_line_parser.py#L24) | [✅](js/tests/SingleLineParser.test.js#L21) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L84) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L29) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L36) | [✅](php/tests/SingleLineParserTest.php#L36) | [✅](cpp/tests/single_line_parser_tests.cpp#L76) |
-| deeply nested | [✅](python/tests/test_single_line_parser.py#L212) | [✅](js/tests/SingleLineParser.test.js#L170) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L262) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L214) | [✅](go/lino_test.go#L339) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L170) | [✅](php/tests/SingleLineParserTest.php#L158) | [✅](cpp/tests/single_line_parser_tests.cpp#L181) |
-| hyphenated identifiers | [✅](python/tests/test_single_line_parser.py#L219) | [✅](js/tests/SingleLineParser.test.js#L176) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L269) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L180) | [✅](go/lino_test.go#L350) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L177) | [✅](php/tests/SingleLineParserTest.php#L165) | [✅](cpp/tests/single_line_parser_tests.cpp#L183) |
+| deeply nested | [✅](python/tests/test_single_line_parser.py#L212) | [✅](js/tests/SingleLineParser.test.js#L170) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L262) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L214) | [✅](go/lino_test.go#L334) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L170) | [✅](php/tests/SingleLineParserTest.php#L158) | [✅](cpp/tests/single_line_parser_tests.cpp#L181) |
+| hyphenated identifiers | [✅](python/tests/test_single_line_parser.py#L219) | [✅](js/tests/SingleLineParser.test.js#L176) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L269) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L180) | [✅](go/lino_test.go#L345) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L177) | [✅](php/tests/SingleLineParserTest.php#L165) | [✅](cpp/tests/single_line_parser_tests.cpp#L183) |
 | link with id | [✅](python/tests/test_single_line_parser.py#L298) | [✅](js/tests/SingleLineParser.test.js#L263) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L330) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L353) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L258) | [✅](php/tests/SingleLineParserTest.php#L205) | [✅](cpp/tests/single_line_parser_tests.cpp#L226) |
 | link without id multiline | [✅](python/tests/test_single_line_parser.py#L280) | [✅](js/tests/SingleLineParser.test.js#L108) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L201) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L263) | ❌ | ❌ | ❌ | [✅](cpp/tests/single_line_parser_tests.cpp#L151) |
 | link without id singleline | [✅](python/tests/test_single_line_parser.py#L289) | [✅](js/tests/SingleLineParser.test.js#L102) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L193) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L330) | ❌ | ❌ | ❌ | [✅](cpp/tests/single_line_parser_tests.cpp#L146) |
 | multi line link with id | [✅](python/tests/test_single_line_parser.py#L110) | [✅](js/tests/SingleLineParser.test.js#L96) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L186) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L255) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L113) | ❌ | [✅](cpp/tests/single_line_parser_tests.cpp#L144) |
 | multiline without id | [✅](python/tests/test_single_line_parser.py#L130) | [✅](js/tests/SingleLineParser.test.js#L231) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L392) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L239) | ❌ | ❌ | [✅](php/tests/SingleLineParserTest.php#L100) | [✅](cpp/tests/single_line_parser_tests.cpp#L256) |
-| multiple words in quotes | [✅](python/tests/test_single_line_parser.py#L226) | [✅](js/tests/SingleLineParser.test.js#L182) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L276) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L191) | [✅](go/lino_test.go#L361) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L184) | [✅](php/tests/SingleLineParserTest.php#L172) | [✅](cpp/tests/single_line_parser_tests.cpp#L187) |
-| nested links | [✅](python/tests/test_single_line_parser.py#L194) | [✅](js/tests/SingleLineParser.test.js#L154) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L244) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L171) | [✅](go/lino_test.go#L308) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L152) | [✅](php/tests/SingleLineParserTest.php#L139) | [✅](cpp/tests/single_line_parser_tests.cpp#L174) |
-| parse multiline link | [✅](python/tests/test_single_line_parser.py#L72) | [✅](js/tests/SingleLineParser.test.js#L64) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L149) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L91) | [✅](go/lino_test.go#L244) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L84) | [✅](php/tests/SingleLineParserTest.php#L74) | [✅](cpp/tests/single_line_parser_tests.cpp#L122) |
+| multiple words in quotes | [✅](python/tests/test_single_line_parser.py#L226) | [✅](js/tests/SingleLineParser.test.js#L182) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L276) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L191) | [✅](go/lino_test.go#L356) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L184) | [✅](php/tests/SingleLineParserTest.php#L172) | [✅](cpp/tests/single_line_parser_tests.cpp#L187) |
+| nested links | [✅](python/tests/test_single_line_parser.py#L194) | [✅](js/tests/SingleLineParser.test.js#L154) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L244) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L171) | [✅](go/lino_test.go#L303) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L152) | [✅](php/tests/SingleLineParserTest.php#L139) | [✅](cpp/tests/single_line_parser_tests.cpp#L174) |
+| parse multiline link | [✅](python/tests/test_single_line_parser.py#L72) | [✅](js/tests/SingleLineParser.test.js#L64) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L149) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L91) | [✅](go/lino_test.go#L239) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L84) | [✅](php/tests/SingleLineParserTest.php#L74) | [✅](cpp/tests/single_line_parser_tests.cpp#L122) |
 | parse quoted references | [✅](python/tests/test_single_line_parser.py#L81) | [✅](js/tests/SingleLineParser.test.js#L72) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L163) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L317) | ❌ | ❌ | [✅](php/tests/SingleLineParserTest.php#L82) | [✅](cpp/tests/single_line_parser_tests.cpp#L132) |
 | parse quoted references values | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L93) | ❌ | ❌ |
 | parse quoted references values only | [✅](python/tests/test_single_line_parser.py#L168) | [✅](js/tests/SingleLineParser.test.js#L130) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L348) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L154) | ❌ | ❌ | ❌ | [✅](cpp/tests/single_line_parser_tests.cpp#L242) |
-| parse reference with colon and values | [✅](python/tests/test_single_line_parser.py#L61) | [✅](js/tests/SingleLineParser.test.js#L54) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L135) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L76) | [✅](go/lino_test.go#L230) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L73) | [✅](php/tests/SingleLineParserTest.php#L64) | [✅](cpp/tests/single_line_parser_tests.cpp#L112) |
-| parse simple reference | [✅](python/tests/test_single_line_parser.py#L50) | [✅](js/tests/SingleLineParser.test.js#L44) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L121) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L60) | [✅](go/lino_test.go#L215) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L62) | [✅](php/tests/SingleLineParserTest.php#L54) | [✅](cpp/tests/single_line_parser_tests.cpp#L102) |
-| parse values only | [✅](python/tests/test_single_line_parser.py#L271) | [✅](js/tests/SingleLineParser.test.js#L84) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L171) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L104) | [✅](go/lino_test.go#L536) | ❌ | ❌ | [✅](cpp/tests/single_line_parser_tests.cpp#L137) |
+| parse reference with colon and values | [✅](python/tests/test_single_line_parser.py#L61) | [✅](js/tests/SingleLineParser.test.js#L54) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L135) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L76) | [✅](go/lino_test.go#L225) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L73) | [✅](php/tests/SingleLineParserTest.php#L64) | [✅](cpp/tests/single_line_parser_tests.cpp#L112) |
+| parse simple reference | [✅](python/tests/test_single_line_parser.py#L50) | [✅](js/tests/SingleLineParser.test.js#L44) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L121) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L60) | [✅](go/lino_test.go#L210) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L62) | [✅](php/tests/SingleLineParserTest.php#L54) | [✅](cpp/tests/single_line_parser_tests.cpp#L102) |
+| parse values only | [✅](python/tests/test_single_line_parser.py#L271) | [✅](js/tests/SingleLineParser.test.js#L84) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L171) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L104) | [✅](go/lino_test.go#L531) | ❌ | ❌ | [✅](cpp/tests/single_line_parser_tests.cpp#L137) |
 | parse values only standalone colon | [✅](python/tests/test_single_line_parser.py#L94) | [✅](js/tests/SingleLineParser.test.js#L238) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L402) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L412) | ❌ | ❌ | [✅](php/tests/SingleLineParserTest.php#L93) | [✅](cpp/tests/single_line_parser_tests.cpp#L261) |
 | quoted reference | [✅](python/tests/test_single_line_parser.py#L307) | [✅](js/tests/SingleLineParser.test.js#L271) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L293) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L365) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L267) | ❌ | [✅](cpp/tests/single_line_parser_tests.cpp#L199) |
 | quoted reference parser | [✅](python/tests/test_single_line_parser.py#L252) | [✅](js/tests/SingleLineParser.test.js#L204) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L365) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L282) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L209) | [✅](php/tests/SingleLineParserTest.php#L188) | [✅](cpp/tests/single_line_parser_tests.cpp#L250) |
-| quoted references | [✅](python/tests/test_single_line_parser.py#L32) | [✅](js/tests/SingleLineParser.test.js#L142) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L230) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L38) | [✅](go/lino_test.go#L187) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L44) | [✅](php/tests/SingleLineParserTest.php#L42) | [✅](cpp/tests/single_line_parser_tests.cpp#L168) |
+| quoted references | [✅](python/tests/test_single_line_parser.py#L32) | [✅](js/tests/SingleLineParser.test.js#L142) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L230) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L38) | [✅](go/lino_test.go#L182) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L44) | [✅](php/tests/SingleLineParserTest.php#L42) | [✅](cpp/tests/single_line_parser_tests.cpp#L168) |
 | quoted references in link | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L138) | ❌ | ❌ |
-| quoted references with spaces | [✅](python/tests/test_single_line_parser.py#L41) | [✅](js/tests/SingleLineParser.test.js#L36) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L107) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L49) | [✅](go/lino_test.go#L201) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L53) | [✅](php/tests/SingleLineParserTest.php#L48) | [✅](cpp/tests/single_line_parser_tests.cpp#L92) |
+| quoted references with spaces | [✅](python/tests/test_single_line_parser.py#L41) | [✅](js/tests/SingleLineParser.test.js#L36) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L107) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L49) | [✅](go/lino_test.go#L196) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L53) | [✅](php/tests/SingleLineParserTest.php#L48) | [✅](cpp/tests/single_line_parser_tests.cpp#L92) |
 | quoted references with spaces in link | [✅](python/tests/test_single_line_parser.py#L180) | [✅](js/tests/SingleLineParser.test.js#L245) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L412) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L423) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L239) | [✅](php/tests/SingleLineParserTest.php#L123) | [✅](cpp/tests/single_line_parser_tests.cpp#L266) |
 | quoted references with special chars | [✅](python/tests/test_single_line_parser.py#L339) | [✅](js/tests/SingleLineParser.test.js#L280) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L429) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L136) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L277) | [✅](php/tests/SingleLineParserTest.php#L221) | [✅](cpp/tests/single_line_parser_tests.cpp#L274) |
 | simple ref | [✅](python/tests/test_single_line_parser.py#L235) | [✅](js/tests/SingleLineParser.test.js#L189) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L374) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L247) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L192) | ❌ | [✅](cpp/tests/single_line_parser_tests.cpp#L252) |
@@ -827,13 +827,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | single line with id | [✅](python/tests/test_single_line_parser.py#L331) | [✅](js/tests/SingleLineParser.test.js#L304) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L446) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L222) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L106) | ❌ | [✅](cpp/tests/single_line_parser_tests.cpp#L282) |
 | single line with id field | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L304) | ❌ | ❌ |
 | single line without id | [✅](python/tests/test_single_line_parser.py#L117) | [✅](js/tests/SingleLineParser.test.js#L254) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L463) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L231) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L249) | ❌ | [✅](cpp/tests/single_line_parser_tests.cpp#L290) |
-| single link | [✅](python/tests/test_single_line_parser.py#L8) | [✅](js/tests/SingleLineParser.test.js#L7) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L68) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L9) | [✅](go/lino_test.go#L160) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L20) | [✅](php/tests/SingleLineParserTest.php#L24) | [✅](cpp/tests/single_line_parser_tests.cpp#L64) |
-| single quoted references | [✅](python/tests/test_single_line_parser.py#L187) | [✅](js/tests/SingleLineParser.test.js#L148) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L237) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L145) | [✅](go/lino_test.go#L297) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L145) | [✅](php/tests/SingleLineParserTest.php#L131) | [✅](cpp/tests/single_line_parser_tests.cpp#L172) |
-| singlet link | [✅](python/tests/test_single_line_parser.py#L139) | [✅](js/tests/SingleLineParser.test.js#L114) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L209) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L113) | [✅](go/lino_test.go#L258) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L120) | [✅](php/tests/SingleLineParserTest.php#L106) | [✅](cpp/tests/single_line_parser_tests.cpp#L156) |
+| single link | [✅](python/tests/test_single_line_parser.py#L8) | [✅](js/tests/SingleLineParser.test.js#L7) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L68) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L9) | [✅](go/lino_test.go#L155) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L20) | [✅](php/tests/SingleLineParserTest.php#L24) | [✅](cpp/tests/single_line_parser_tests.cpp#L64) |
+| single quoted references | [✅](python/tests/test_single_line_parser.py#L187) | [✅](js/tests/SingleLineParser.test.js#L148) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L237) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L145) | [✅](go/lino_test.go#L292) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L145) | [✅](php/tests/SingleLineParserTest.php#L131) | [✅](cpp/tests/single_line_parser_tests.cpp#L172) |
+| singlet link | [✅](python/tests/test_single_line_parser.py#L139) | [✅](js/tests/SingleLineParser.test.js#L114) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L209) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L113) | [✅](go/lino_test.go#L253) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L120) | [✅](php/tests/SingleLineParserTest.php#L106) | [✅](cpp/tests/single_line_parser_tests.cpp#L156) |
 | singlet link parser | [✅](python/tests/test_single_line_parser.py#L150) | [✅](js/tests/SingleLineParser.test.js#L213) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L309) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L294) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L219) | ❌ | [✅](cpp/tests/single_line_parser_tests.cpp#L207) |
-| special characters in quotes | [✅](python/tests/test_single_line_parser.py#L201) | [✅](js/tests/SingleLineParser.test.js#L160) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L251) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L202) | [✅](go/lino_test.go#L319) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L159) | [✅](php/tests/SingleLineParserTest.php#L147) | [✅](cpp/tests/single_line_parser_tests.cpp#L176) |
-| triplet single link | [✅](python/tests/test_single_line_parser.py#L16) | [✅](js/tests/SingleLineParser.test.js#L14) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L76) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L19) | [✅](go/lino_test.go#L169) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L28) | [✅](php/tests/SingleLineParserTest.php#L30) | [✅](cpp/tests/single_line_parser_tests.cpp#L70) |
-| value link | [✅](python/tests/test_single_line_parser.py#L161) | [✅](js/tests/SingleLineParser.test.js#L124) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L223) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L127) | [✅](go/lino_test.go#L272) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L131) | [✅](php/tests/SingleLineParserTest.php#L116) | [✅](cpp/tests/single_line_parser_tests.cpp#L166) |
+| special characters in quotes | [✅](python/tests/test_single_line_parser.py#L201) | [✅](js/tests/SingleLineParser.test.js#L160) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L251) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L202) | [✅](go/lino_test.go#L314) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L159) | [✅](php/tests/SingleLineParserTest.php#L147) | [✅](cpp/tests/single_line_parser_tests.cpp#L176) |
+| triplet single link | [✅](python/tests/test_single_line_parser.py#L16) | [✅](js/tests/SingleLineParser.test.js#L14) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L76) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L19) | [✅](go/lino_test.go#L164) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L28) | [✅](php/tests/SingleLineParserTest.php#L30) | [✅](cpp/tests/single_line_parser_tests.cpp#L70) |
+| value link | [✅](python/tests/test_single_line_parser.py#L161) | [✅](js/tests/SingleLineParser.test.js#L124) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L223) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L127) | [✅](go/lino_test.go#L267) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L131) | [✅](php/tests/SingleLineParserTest.php#L116) | [✅](cpp/tests/single_line_parser_tests.cpp#L166) |
 | value link parser | [✅](python/tests/test_single_line_parser.py#L262) | [✅](js/tests/SingleLineParser.test.js#L223) | [✅](rust/links-notation/tests/single_line_parser_tests.rs#L321) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L307) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SingleLineParserTest.java#L230) | [✅](php/tests/SingleLineParserTest.php#L197) | [✅](cpp/tests/single_line_parser_tests.cpp#L218) |
 | values only in parentheses test | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SingleLineParserTests.cs#L400) | ❌ | ❌ | ❌ | ❌ |
 
@@ -851,12 +851,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | limits only the unresolved record, not total stream size | ❌ | [✅](js/tests/StreamParser.test.js#L141) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | matches canonical parser one symbol at a time | [✅](python/tests/test_stream_parser.py#L22) | [✅](js/tests/StreamParser.test.js#L22) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L13) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L24) | [✅](go/stream_parser_test.go#L19) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L30) | [✅](php/tests/StreamParserTest.php#L30) | [✅](cpp/tests/stream_parser_tests.cpp#L53) |
 | provides an async enumerable adapter | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L97) | ❌ | ❌ | ❌ | ❌ |
-| provides lazy adapters | [✅](python/tests/test_stream_parser.py#L66) | [✅](js/tests/StreamParser.test.js#L125) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L78) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L80) | [✅](go/stream_parser_test.go#L103) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L77) | [✅](php/tests/StreamParserTest.php#L87) | [✅](cpp/tests/stream_parser_tests.cpp#L103) |
-| rejects writes after finish | [✅](python/tests/test_stream_parser.py#L79) | [✅](js/tests/StreamParser.test.js#L148) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L87) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L88) | [✅](go/stream_parser_test.go#L147) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L87) | [✅](php/tests/StreamParserTest.php#L94) | [✅](cpp/tests/stream_parser_tests.cpp#L113) |
+| provides lazy adapters | [✅](python/tests/test_stream_parser.py#L66) | [✅](js/tests/StreamParser.test.js#L125) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L80) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L80) | [✅](go/stream_parser_test.go#L103) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L77) | [✅](php/tests/StreamParserTest.php#L87) | [✅](cpp/tests/stream_parser_tests.cpp#L103) |
+| rejects writes after finish | [✅](python/tests/test_stream_parser.py#L79) | [✅](js/tests/StreamParser.test.js#L148) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L89) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L88) | [✅](go/stream_parser_test.go#L147) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L87) | [✅](php/tests/StreamParserTest.php#L94) | [✅](cpp/tests/stream_parser_tests.cpp#L113) |
 | reports positions relative to the whole stream | ❌ | [✅](js/tests/StreamParser.test.js#L85) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | stream parser preserves indented and multiline records | ❌ | ❌ | ❌ | ❌ | [✅](go/stream_parser_test.go#L56) | ❌ | ❌ | ❌ |
-| supports drain reset and bounded memory | [✅](python/tests/test_stream_parser.py#L51) | [✅](js/tests/StreamParser.test.js#L111) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L58) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L64) | [✅](go/stream_parser_test.go#L75) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L62) | [✅](php/tests/StreamParserTest.php#L66) | [✅](cpp/tests/stream_parser_tests.cpp#L85) |
-| supports line chunks final record and position | [✅](python/tests/test_stream_parser.py#L41) | [✅](js/tests/StreamParser.test.js#L31) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L43) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L50) | [✅](go/stream_parser_test.go#L123) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L50) | [✅](php/tests/StreamParserTest.php#L54) | [✅](cpp/tests/stream_parser_tests.cpp#L74) |
+| supports drain reset and bounded memory | [✅](python/tests/test_stream_parser.py#L51) | [✅](js/tests/StreamParser.test.js#L111) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L60) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L64) | [✅](go/stream_parser_test.go#L75) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L62) | [✅](php/tests/StreamParserTest.php#L66) | [✅](cpp/tests/stream_parser_tests.cpp#L85) |
+| supports line chunks final record and position | [✅](python/tests/test_stream_parser.py#L41) | [✅](js/tests/StreamParser.test.js#L31) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L45) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L50) | [✅](go/stream_parser_test.go#L123) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L50) | [✅](php/tests/StreamParserTest.php#L54) | [✅](cpp/tests/stream_parser_tests.cpp#L74) |
 | tracks the absolute stream position | ❌ | [✅](js/tests/StreamParser.test.js#L155) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 **Category totals:** Python: 6, JavaScript: 13, Rust: 6, C#: 7, Go: 7, Java: 6, PHP: 6, C++: 6
@@ -916,6 +916,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | vec str to anonymous link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L313) | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 **Category totals:** Python: 0, JavaScript: 0, Rust: 47, C#: 2, Go: 0, Java: 0, PHP: 0, C++: 0
+
+## Version
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ |
+|-----------|---|---|---|---|---|---|---|---|
+| uninstalled checkout reads pyproject | [✅](python/tests/test_version.py#L22) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| version matches pyproject | [✅](python/tests/test_version.py#L18) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+**Category totals:** Python: 2, JavaScript: 0, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0, C++: 0
 
 ---
 
@@ -1758,7 +1767,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 334 tests**
+**Version** (2 missing):
+- uninstalledcheckoutreadspyproject
+- versionmatchespyproject
+
+**Total missing: 336 tests**
 
 ### Rust Missing Tests
 
@@ -2040,7 +2053,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - namedtupletolink
 - tupletolink
 
-**Total missing: 236 tests**
+**Version** (2 missing):
+- uninstalledcheckoutreadspyproject
+- versionmatchespyproject
+
+**Total missing: 238 tests**
 
 ### C# Missing Tests
 
@@ -2437,7 +2454,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 341 tests**
+**Version** (2 missing):
+- uninstalledcheckoutreadspyproject
+- versionmatchespyproject
+
+**Total missing: 343 tests**
 
 ### Go Missing Tests
 
@@ -2998,7 +3019,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 493 tests**
+**Version** (2 missing):
+- uninstalledcheckoutreadspyproject
+- versionmatchespyproject
+
+**Total missing: 495 tests**
 
 ### Java Missing Tests
 
@@ -3517,7 +3542,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 451 tests**
+**Version** (2 missing):
+- uninstalledcheckoutreadspyproject
+- versionmatchespyproject
+
+**Total missing: 453 tests**
 
 ### PHP Missing Tests
 
@@ -3978,7 +4007,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 401 tests**
+**Version** (2 missing):
+- uninstalledcheckoutreadspyproject
+- versionmatchespyproject
+
+**Total missing: 403 tests**
 
 ### C++ Missing Tests
 
@@ -4313,5 +4346,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 291 tests**
+**Version** (2 missing):
+- uninstalledcheckoutreadspyproject
+- versionmatchespyproject
+
+**Total missing: 293 tests**
 

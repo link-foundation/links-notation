@@ -269,7 +269,7 @@ All eight language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP,
 <!-- test-counts:start -->
 | Language | Tests | Test categories |
 | --- | --- | --- |
-| Python | 245 | 23 |
+| Python | 247 | 24 |
 | JavaScript | 303 | 28 |
 | Rust | 401 | 29 |
 | C# | 295 | 27 |

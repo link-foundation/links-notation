@@ -265,7 +265,7 @@ deploy: staging # пока только staging
 <!-- test-counts:start -->
 | Язык | Тестов | Категорий тестов |
 | --- | --- | --- |
-| Python | 245 | 23 |
+| Python | 247 | 24 |
 | JavaScript | 303 | 28 |
 | Rust | 401 | 29 |
 | C# | 295 | 27 |
