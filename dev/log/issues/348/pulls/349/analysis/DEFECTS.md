@@ -3,7 +3,9 @@
 Updating "everything" meant checking every claim the repository makes about versions: floors in
 manifests and READMEs, pins in tool configs and images, and which manifests Dependabot watches.
 Six of those claims were false or untested on `main` (`ef32b5b`, the base of this pull request).
-Each entry gives the evidence, the root cause, the fix, and how to reproduce it.
+Two more defects surfaced in CI: one through the runner image update (D7), and one in `main`'s
+own release run (D8). Each entry gives the evidence, the root cause, the fix, and how to
+reproduce it.
 
 ## D1. The C++ test build did not configure on the CMake floor it declares
 
@@ -86,3 +88,46 @@ Each entry gives the evidence, the root cause, the fix, and how to reproduce it.
   `maven-enforcer-plugin` declares 3.6.3, and the `maven-floor` job builds with it. Locally 3.6.3
   passes 185/185 tests and 3.6.2 stops with "requires Maven version 3.6.3"
   (`java-maven-3.6.3.log`, `java-maven-3.6.2.log`).
+
+## D7. A 2019 copy of `fvextra.sty`, outside every inventory, broke the C# PDF on TeX Live 2025
+
+- **Fact:** on `ubuntu-26.04`, `csharp / generatePdfWithCode` stopped with LaTeX's "you have
+  requested version `2025/05/14' of package fvextra, but only version`2019/02/04 v1.4'
+  is available" (CI run 38946567310, `../ci-logs/ci/CI-38946567310-failed.log`, line 1759).
+- **Root cause:** `csharp/scripts/format-document.sh` downloaded `fvextra.sty` from a 2019 commit
+  of gpoore/fvextra into the working directory, where LaTeX finds it before the TeX Live copy.
+  ubuntu-24.04 shipped TeX Live 2023 with minted 2, which accepted that version. ubuntu-26.04
+  ships TeX Live 2025 with minted 3, which needs fvextra 2025/05/14. The pin was a raw URL in a
+  shell script, so no manifest, bot or gate saw it.
+- **Fix (`db1f94f`):** the download is removed. `texlive-latex-extra`, which the job already
+  installs, ships an fvextra that matches its minted. The job builds the PDF again in CI.
+- **Reproduce:** run `bash scripts/generate-pdf.sh` in `csharp/` on ubuntu-26.04 with the
+  `PDF_APT_PACKAGES` from `csharp.yml`, at `5a6d248`. TeX Live could not be installed in this
+  environment (no root), so the fix was verified only in CI.
+
+## D8. The `cpp_0.26.0` release asset is an empty archive
+
+- **Fact:** `main`'s release run 38208546589 created release `cpp_0.26.0`, uploaded
+  `links-notation-cpp-0.26.0.tar.gz` (125 bytes), and then failed in "Verify the archive builds
+  for a consumer" with "does not contain a CMakeLists.txt file"
+  (`../ci-logs/main/CI-38208546589-failed.log`, lines 823-832). The scheduled audit that followed,
+  run 38263509676, found the asset by URL and did not report it
+  (`../ci-logs/main/CI-38263509676-failed.log`). Its only errors are Java and PHP, which need a
+  maintainer (credentials, a Packagist submission) and already print what to do. A re-run of the
+  release would also pass, because the job skips a release that already has its asset.
+- **Root cause:** `publish-cpp.yml` ran `git archive ... HEAD:cpp` with
+  `working-directory: cpp`. git archive limits a tree-ish to the caller's subdirectory, so it
+  archived `cpp/cpp`, which does not exist. Only the release job ran the command, so no pull
+  request could catch it.
+- **Fix (`9d38c36`):** `scripts/ci/cpp-release-archive.sh` writes the archive with
+  `git -C <top level>`, and fails before any upload when the archive has no `CMakeLists.txt`.
+  `cpp.yml` builds and tests the consumer from that archive on every pull request (gcc), and
+  `scripts/ci/cpp-release-archive.test.sh` (run by `workflows.yml`) runs the script from three
+  directories and compares its file list with `git ls-tree HEAD:cpp`. Put the old command back
+  and the test fails.
+- **Reproduce:** `cd cpp && git archive --format=tar HEAD:cpp | tar -t` lists nothing.
+- **Left for a maintainer:** releases are immutable here, so the workflow never replaces an
+  asset, and 0.27.0 is released with a correct archive. The empty `cpp_0.26.0` asset stays
+  until someone deletes it (`gh release delete-asset cpp_0.26.0 links-notation-cpp-0.26.0.tar.gz`
+  and the `.sha256`). It was not deleted from this pull request, because that changes a
+  published release.

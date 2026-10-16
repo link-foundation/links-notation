@@ -36,3 +36,8 @@ These are the places where no upstream tool reads a pin. Each is checked by
 4. The `CMAKE_FLOOR` (`cpp.yml`) and `MAVEN_FLOOR` (`java.yml`) archives. These pins are old on
    purpose, so they are not tracked: each is the floor a manifest declares. If a floor changes,
    so does its pin.
+
+One pin was outside even this list: `csharp/scripts/format-document.sh` downloaded a 2019
+`fvextra.sty` by URL. It surfaced only when the runner image moved to TeX Live 2025, and it was
+removed, not tracked, because TeX Live already ships the package ([`DEFECTS.md`](DEFECTS.md)
+D7).
