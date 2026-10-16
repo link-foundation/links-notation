@@ -33,7 +33,7 @@
   "homepage": "https://github.com/link-foundation/links-notation#readme",
   "devDependencies": {
     "bun-types": "^1.4.3",
-    "eslint": "^10.12.0",
+    "eslint": "^10.13.0",
     "peggy": "^5.1.0",
     "prettier": "^3.9.10",
     "typescript": "^7.0.2"
