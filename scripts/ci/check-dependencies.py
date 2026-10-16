@@ -73,22 +73,6 @@ def latest(ecosystem, name):
     if ecosystem == "npm":
         data = json.loads(get("https://registry.npmjs.org/" + encoded))
         return data["dist-tags"]["latest"]
-    if ecosystem == "pypi-py39":
-        data = json.loads(get("https://pypi.org/pypi/" + encoded + "/json"))
-        versions = []
-        for version, files in data["releases"].items():
-            if (
-                not version_key(version)
-                or not files
-                or all(f.get("yanked") for f in files)
-            ):
-                continue
-            requirement = files[0].get("requires_python") or ""
-            minimum = re.search(r">=\s*(3\.\d+)", requirement)
-            if minimum and tuple(map(int, minimum[1].split("."))) > (3, 9):
-                continue
-            versions.append(version)
-        return newest(versions)
     if ecosystem == "pypi":
         return json.loads(get("https://pypi.org/pypi/" + encoded + "/json"))["info"][
             "version"
@@ -200,7 +184,13 @@ def manifests(root=ROOT):
                         .values()
                     ):
                         requirements += items
+                    project = data.get("project", {}).get("name")
                     for requirement in requirements:
+                        if re.fullmatch(
+                            re.escape(project or "") + r"\[[^]]+\]", requirement
+                        ):
+                            # An extra that combines this project's other extras.
+                            continue
                         match = re.fullmatch(
                             r"([\w.-]+)(?:\[[^]]+\])?([><=~!].*)", requirement
                         )
@@ -208,12 +198,7 @@ def manifests(root=ROOT):
                             raise ValueError(
                                 f"unsupported dependency requirement: {path}: {requirement}"
                             )
-                        if "python_version < '3.10'" in match[2]:
-                            # setuptools 84 dropped Python 3.9. The compatibility
-                            # floor is checked against the latest 3.9 release.
-                            add(path, "pypi-py39", match[1], match[2])
-                        else:
-                            add(path, "pypi", match[1], match[2])
+                        add(path, "pypi", match[1], match[2])
                 else:
                     for section in (
                         "dependencies",
@@ -242,12 +227,7 @@ def manifests(root=ROOT):
                     )
                     if not match:
                         raise ValueError(f"unpinned dependency: {path}: {requirement}")
-                    if "python_version < '3.10'" in match[2]:
-                        # setuptools 84 dropped Python 3.9. The compatibility
-                        # floor is checked against the latest 3.9 release.
-                        add(path, "pypi-py39", match[1], match[2])
-                    else:
-                        add(path, "pypi", match[1], match[2])
+                    add(path, "pypi", match[1], match[2])
             elif path.suffix == ".csproj":
                 for element in ET.fromstring(path.read_text()).iter("PackageReference"):
                     add(
@@ -454,7 +434,7 @@ def update(dependency, release):
             lambda m: m[1] + replacement,
             source,
         )
-    elif dependency.ecosystem in {"pypi", "pypi-py39", "go"}:
+    elif dependency.ecosystem in {"pypi", "go"}:
         source = re.sub(
             r"(" + name + r"(?:\[[^]]+\])?)" + re.escape(original),
             lambda m: m[1] + replacement,

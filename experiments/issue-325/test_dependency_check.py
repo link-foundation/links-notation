@@ -61,6 +61,29 @@ class DependencyCheckTests(unittest.TestCase):
             )
             self.assertEqual(dependency.floor, "2.0.0")
 
+    def test_self_referencing_extra_is_not_a_registry_pin(self):
+        # Issue #348: `dev = ["links-notation[test,lint]"]` reuses the pinned
+        # extras instead of repeating them; it has no version of its own.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "python").mkdir()
+            (root / "python/pyproject.toml").write_text(
+                '[project]\nname = "demo"\n'
+                "[project.optional-dependencies]\n"
+                'test = ["pytest>=9.1.1"]\n'
+                'dev = ["demo[test]"]\n'
+            )
+            self.assertEqual(
+                [(d.name, d.declared) for d in CHECK.manifests(root)],
+                [("pytest", ">=9.1.1")],
+            )
+            (root / "python/pyproject.toml").write_text(
+                '[project]\nname = "demo"\n'
+                '[project.optional-dependencies]\ndev = ["other[test]"]\n'
+            )
+            with self.assertRaisesRegex(ValueError, "unsupported dependency"):
+                CHECK.manifests(root)
+
     def test_github_preserves_real_tag_spelling(self):
         with patch.object(
             CHECK.subprocess,
@@ -198,9 +221,7 @@ class DependencyCheckTests(unittest.TestCase):
             text = cmake.read_text()
             self.assertIn("download/v1.18.0/googletest-1.18.0.tar.gz", text)
             self.assertIn(
-                "URL_HASH SHA256="
-                + CHECK.hashlib.sha256(b"archive").hexdigest()
-                + ")",
+                "URL_HASH SHA256=" + CHECK.hashlib.sha256(b"archive").hexdigest() + ")",
                 text,
             )
 
@@ -255,18 +276,6 @@ class DependencyCheckTests(unittest.TestCase):
             ):
                 self.assertTrue(CHECK.main())
                 self.assertIn("registry unavailable", errors.getvalue())
-
-    def test_python39_build_floor_ignores_incompatible_and_yanked_releases(self):
-        releases = {
-            "81.0.0": [{"requires_python": ">=3.9"}],
-            "82.0.1": [{"requires_python": ">=3.9"}],
-            "83.0.0": [{"requires_python": ">=3.9", "yanked": True}],
-            "84.0.0": [{"requires_python": ">=3.10"}],
-        }
-        with patch.object(
-            CHECK, "get", return_value=json.dumps({"releases": releases}).encode()
-        ):
-            self.assertEqual(CHECK.latest("pypi-py39", "setuptools"), "82.0.1")
 
 
 if __name__ == "__main__":

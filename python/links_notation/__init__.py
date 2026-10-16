@@ -5,7 +5,7 @@ Lino (Links Notation) is a simple, intuitive format for representing
 structured data as links between references.
 """
 
-import re
+import tomllib
 from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as _distribution_version
 from pathlib import Path
@@ -37,9 +37,7 @@ def _read_version() -> str:
     released 0.16.1, so ``links_notation.__version__`` answered for a release
     nine minor versions old. pyproject.toml is the one place the version is
     written; when the package is imported from a source checkout that was never
-    installed, that file is still next to us, so read it there. The read is a
-    regex rather than tomllib because this package supports Python 3.9, and
-    tomllib arrived in 3.11.
+    installed, that file is still next to us, so read it there.
     """
     try:
         return _distribution_version("links-notation")
@@ -48,12 +46,10 @@ def _read_version() -> str:
 
     pyproject = Path(__file__).resolve().parent.parent / "pyproject.toml"
     try:
-        text = pyproject.read_text(encoding="utf-8")
-    except OSError:
+        with pyproject.open("rb") as file:
+            return tomllib.load(file)["project"]["version"]
+    except (OSError, tomllib.TOMLDecodeError, KeyError):
         return "unknown"
-
-    found = re.search(r'^version\s*=\s*"([^"]+)"', text, re.MULTILINE)
-    return found.group(1) if found else "unknown"
 
 
 __version__ = _read_version()

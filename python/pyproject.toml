@@ -1,8 +1,5 @@
 [build-system]
-requires = [
-    "setuptools>=84.0.0; python_version >= '3.10'",
-    "setuptools>=82.0.1; python_version < '3.10'",
-]
+requires = ["setuptools>=84.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -20,21 +17,21 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Text Processing",
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
 test = ["pytest>=9.1.1", "pytest-timeout>=2.4.0"]
 lint = ["black>=26.10.1", "isort>=9.0.2", "flake8>=7.4.1"]
-dev = ["pytest>=9.1.1", "pytest-timeout>=2.4.0", "black>=26.10.1", "isort>=9.0.2", "flake8>=7.4.1"]
+dev = ["links-notation[test,lint]"]
 
 [project.urls]
 Homepage = "https://github.com/link-foundation/links-notation"
@@ -54,12 +51,8 @@ timeout_func_only = true
 
 [tool.black]
 line-length = 120
-target-version = ["py39", "py310", "py311", "py312", "py313"]
+target-version = ["py311", "py312", "py313", "py314", "py315"]
 
 [tool.isort]
 profile = "black"
 line_length = 120
-
-[tool.flake8]
-max-line-length = 120
-extend-ignore = ["E203", "W503"]

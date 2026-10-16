@@ -32,9 +32,27 @@ def scope(path):
     return "active"
 
 
-NAMES = {"package.json", "pyproject.toml", "Cargo.toml", "requirements.txt", "pom.xml",
-         "composer.json", "go.mod", "CMakeLists.txt"}
-SKIP = {".git", "node_modules", "vendor", "target", "bin", "obj", ".venv", "dist", "_deps"}
+NAMES = {
+    "package.json",
+    "pyproject.toml",
+    "Cargo.toml",
+    "requirements.txt",
+    "pom.xml",
+    "composer.json",
+    "go.mod",
+    "CMakeLists.txt",
+}
+SKIP = {
+    ".git",
+    "node_modules",
+    "vendor",
+    "target",
+    "bin",
+    "obj",
+    ".venv",
+    "dist",
+    "_deps",
+}
 
 
 def collect():
@@ -59,7 +77,11 @@ def collect():
             CHECK.ACTIVE = ("scan",)
             try:
                 for d in CHECK.manifests(Path(temporary)):
-                    found.append(CHECK.Dependency(path, d.ecosystem, d.name, d.declared, d.literal))
+                    found.append(
+                        CHECK.Dependency(
+                            path, d.ecosystem, d.name, d.declared, d.literal
+                        )
+                    )
             except Exception as error:
                 problems.append(f"{relative}: {error}")
     CHECK.ACTIVE = ()
@@ -67,14 +89,21 @@ def collect():
     # Composite actions and nested pre-commit configs are not scanned by the gate.
     import re
 
-    for path in sorted(ROOT.rglob("action.y*ml")) + sorted(ROOT.rglob(".pre-commit-config.yaml")):
-        if SKIP.intersection(path.relative_to(ROOT).parts) or path == ROOT / ".pre-commit-config.yaml":
+    for path in sorted(ROOT.rglob("action.y*ml")) + sorted(
+        ROOT.rglob(".pre-commit-config.yaml")
+    ):
+        if (
+            SKIP.intersection(path.relative_to(ROOT).parts)
+            or path == ROOT / ".pre-commit-config.yaml"
+        ):
             continue
         text = path.read_text()
         for match in re.finditer(r"uses:\s*([\w.-]+/[\w./-]+)@([^\s#]+)", text):
             repo = "/".join(match[1].split("/")[:2])
             found.append(CHECK.Dependency(path, "github", repo, match[2], match[2]))
-        for match in re.finditer(r"repo:\s*https://github.com/([\w.-]+/[\w.-]+)\s+rev:\s*([^\s]+)", text):
+        for match in re.finditer(
+            r"repo:\s*https://github.com/([\w.-]+/[\w.-]+)\s+rev:\s*([^\s]+)", text
+        ):
             found.append(CHECK.Dependency(path, "github", match[1], match[2], match[2]))
     return list(dict.fromkeys(found)), problems
 
@@ -92,7 +121,9 @@ def main():
             return key, None, str(error)
 
     with ThreadPoolExecutor(max_workers=8) as pool:
-        results = {key: (release, error) for key, release, error in pool.map(query, keys)}
+        results = {
+            key: (release, error) for key, release, error in pool.map(query, keys)
+        }
 
     rows = []
     for d in found:
@@ -141,7 +172,9 @@ def main():
     (output / "unparsed.txt").write_text("\n".join(problems) + "\n")
     print(f"{len(rows)} declarations, {len(keys)} packages, {len(stale)} not current")
     for r in stale:
-        print(f"{r['scope']:8} {r['path']}: {r['name']} {r['declared']} -> {r['latest'] or r['error']}")
+        print(
+            f"{r['scope']:8} {r['path']}: {r['name']} {r['declared']} -> {r['latest'] or r['error']}"
+        )
 
 
 if __name__ == "__main__":
