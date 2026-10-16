@@ -31,14 +31,6 @@
     <NoWarn>$(NoWarn);CS8981;CS1591;CS1584;CS1658</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith('net4')) AND '$(MSBuildRuntimeType)' == 'Core' AND '$(OS)' != 'Windows_NT'">
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.401" PrivateAssets="All" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Pegasus" Version="4.1.0" />
     <PackageReference Include="Platform.Collections" Version="0.4.0" />
