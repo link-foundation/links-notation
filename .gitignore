@@ -382,3 +382,6 @@ docs/website/dist/
 # C++ build trees
 cpp/build/
 cpp/out/
+
+# CTest writes this when ctest runs inside cpp/.
+cpp/Testing/
