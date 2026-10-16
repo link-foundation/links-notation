@@ -12,10 +12,11 @@ find "./$PROJECT/obj" -type f -iname "*.cs" -delete
 find "./$PROJECT.Tests/obj" -type f -iname "*.cs" -delete
 set -e
 
-# fvextra is pinned to a commit so the document renders the same way tomorrow.
-if [ ! -f fvextra.sty ]; then
-  wget -q https://raw.githubusercontent.com/gpoore/fvextra/cc1c0c5f7b92023cfec67084e2a87bdac520414c/fvextra/fvextra.sty
-fi
+# fvextra and minted both come from the TeX Live that texlive-latex-extra
+# installs. minted 3 (TeX Live 2025) requires fvextra 2025/05/14 or newer, so a
+# separately pinned fvextra.sty in this directory would shadow the matching one
+# and stop LaTeX with "package fvextra is outdated".
+rm -f fvextra.sty
 
 cat <<'PREAMBLE'
 \documentclass[11pt,a4paper,fleqn]{report}
