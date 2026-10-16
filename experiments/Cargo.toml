@@ -1,11 +1,11 @@
 [package]
 name = "debug_rust"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [[bin]]
 name = "debug_equivalence"
 path = "debug_rust_equivalence.rs"
 
 [dependencies]
-platform-lino = { path = "../rust" }
+lino = { package = "links-notation", path = "../rust/links-notation" }

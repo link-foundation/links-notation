@@ -1,7 +1,7 @@
 [package]
 name = "issue-316-rust-timing"
 version = "0.0.0"
-edition = "2021"
+edition = "2024"
 publish = false
 
 [workspace]
