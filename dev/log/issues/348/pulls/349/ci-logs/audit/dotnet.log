@@ -1,0 +1,19 @@
+== csharp
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+The following sources were used:
+   https://api.nuget.org/v3/index.json
+The given project `Link.Foundation.Links.Notation` has no vulnerable packages given the current sources.
+The given project `Link.Foundation.Links.Notation.Tests` has no vulnerable packages given the current sources.
+== benchmarks/csharp
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+The following sources were used:
+   https://api.nuget.org/v3/index.json
+The given project `Benchmark` has no vulnerable packages given the current sources.
+== examples/binary/csharp
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+The following sources were used:
+   https://api.nuget.org/v3/index.json
+The given project `BinaryExample` has no vulnerable packages given the current sources.

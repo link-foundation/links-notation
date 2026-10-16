@@ -1,0 +1,31 @@
+ INFO zizmor: 🌈 zizmor v1.31.1
+ INFO audit: zizmor: 🌈 completed .github/workflows/AutoMerge.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/benchmarks.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/binary-interop.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/bom-check.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/cpp.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/csharp.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/dependencies.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/docs.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/go.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/java.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/javascript.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/js.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/links.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/pages.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/php.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/publish-cpp.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/publish-csharp.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/publish-go.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/publish-java.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/publish-js.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/publish-php.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/publish-python.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/publish-rust.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/python.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/release-audit.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/release.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/rust.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/security.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/workflows.yml
+No findings to report. Good job! (37 ignored, 104 suppressed)

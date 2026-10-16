@@ -1,0 +1,17 @@
+openjdk version "27" 2026-09-15
+[INFO] Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.224 s -- in io.github.linkfoundation.linksnotation.CommentsTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.204 s -- in io.github.linkfoundation.linksnotation.EmptyReferenceTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.182 s -- in io.github.linkfoundation.linksnotation.IndentedSyntaxTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.210 s -- in io.github.linkfoundation.linksnotation.LinkTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.090 s -- in io.github.linkfoundation.linksnotation.NestedParserTest
+[INFO] Tests run: 33, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.370 s -- in io.github.linkfoundation.linksnotation.SingleLineParserTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.573 s -- in io.github.linkfoundation.linksnotation.ReferenceFidelityTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.049 s -- in io.github.linkfoundation.linksnotation.LinksGroupTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in io.github.linkfoundation.linksnotation.NestedIndentationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in io.github.linkfoundation.linksnotation.IndentedIdNestedValuesTest
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.064 s -- in io.github.linkfoundation.linksnotation.ApiTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.298 s -- in io.github.linkfoundation.linksnotation.BinaryTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.060 s -- in io.github.linkfoundation.linksnotation.MultiQuoteParserTest
+[INFO] Tests run: 185, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+rc=0

@@ -1,0 +1,18 @@
+== composer .
+No installed packages found. Please run "composer install" before running "audit" or pass "--locked" to audit the lock file.
+== composer php
+No security vulnerability advisories found.
+== composer benchmarks/php
+No security vulnerability advisories found.
+== govulncheck go
+No vulnerabilities found.
+== govulncheck benchmarks/go
+No vulnerabilities found.
+== pip-audit python
+No known vulnerabilities found
+== pip-audit benchmarks/python/requirements.txt
+No known vulnerabilities found
+== pip-audit scripts/ci/requirements.txt
+No known vulnerabilities found
+== pip-audit cpp/tools/requirements.txt
+No known vulnerabilities found

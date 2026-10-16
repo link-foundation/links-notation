@@ -1,0 +1,7 @@
+OUTDATED .github/workflows/security.yml: github/codeql-action v4.38.3 -> v4.39.0
+OUTDATED .github/workflows/benchmarks.yml: actions/setup-java v6.0.1 -> v6.1.0
+OUTDATED .github/workflows/binary-interop.yml: actions/setup-java v6.0.1 -> v6.1.0
+OUTDATED .github/workflows/publish-java.yml: actions/setup-java v6.0.1 -> v6.1.0
+OUTDATED .github/workflows/java.yml: actions/setup-java v6.0.1 -> v6.1.0
+Checked 159 declarations, 91 published packages/actions.
+Regenerate lockfiles and run tests before committing the updates.

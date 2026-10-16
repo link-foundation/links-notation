@@ -1,0 +1,107 @@
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 28 installs, 0 updates, 0 removals
+  - Locking myclabs/deep-copy (1.14.0)
+  - Locking nikic/php-parser (v5.9.0)
+  - Locking phar-io/manifest (2.0.4)
+  - Locking phar-io/version (3.2.1)
+  - Locking phpunit/php-code-coverage (14.4.1)
+  - Locking phpunit/php-file-iterator (7.0.2)
+  - Locking phpunit/php-invoker (7.0.0)
+  - Locking phpunit/php-text-template (6.0.1)
+  - Locking phpunit/php-timer (9.0.0)
+  - Locking phpunit/phpunit (13.4.3)
+  - Locking sebastian/cli-parser (5.0.1)
+  - Locking sebastian/comparator (8.4.0)
+  - Locking sebastian/complexity (6.0.0)
+  - Locking sebastian/diff (9.0.1)
+  - Locking sebastian/environment (9.3.3)
+  - Locking sebastian/exporter (8.2.1)
+  - Locking sebastian/file-filter (1.0.0)
+  - Locking sebastian/git-state (1.0.0)
+  - Locking sebastian/global-state (9.0.1)
+  - Locking sebastian/lines-of-code (5.0.2)
+  - Locking sebastian/object-enumerator (8.1.0)
+  - Locking sebastian/object-reflector (6.1.0)
+  - Locking sebastian/recursion-context (8.0.1)
+  - Locking sebastian/type (7.0.2)
+  - Locking sebastian/version (7.0.1)
+  - Locking squizlabs/php_codesniffer (4.0.4)
+  - Locking staabm/side-effects-detector (1.0.5)
+  - Locking theseer/tokenizer (2.0.1)
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 28 installs, 0 updates, 0 removals
+  - Downloading staabm/side-effects-detector (1.0.5)
+  - Downloading sebastian/version (7.0.1)
+  - Downloading sebastian/type (7.0.2)
+  - Downloading sebastian/recursion-context (8.0.1)
+  - Downloading sebastian/object-enumerator (8.1.0)
+  - Downloading sebastian/object-reflector (6.1.0)
+  - Downloading sebastian/global-state (9.0.1)
+  - Downloading sebastian/git-state (1.0.0)
+  - Downloading sebastian/file-filter (1.0.0)
+  - Downloading sebastian/exporter (8.2.1)
+  - Downloading sebastian/environment (9.3.3)
+  - Downloading sebastian/diff (9.0.1)
+  - Downloading sebastian/comparator (8.4.0)
+  - Downloading sebastian/cli-parser (5.0.1)
+  - Downloading phpunit/php-timer (9.0.0)
+  - Downloading phpunit/php-text-template (6.0.1)
+  - Downloading phpunit/php-invoker (7.0.0)
+  - Downloading phpunit/php-file-iterator (7.0.2)
+  - Downloading theseer/tokenizer (2.0.1)
+  - Downloading nikic/php-parser (v5.9.0)
+  - Downloading sebastian/lines-of-code (5.0.2)
+  - Downloading sebastian/complexity (6.0.0)
+  - Downloading phpunit/php-code-coverage (14.4.1)
+  - Downloading phar-io/version (3.2.1)
+  - Downloading phar-io/manifest (2.0.4)
+  - Downloading myclabs/deep-copy (1.14.0)
+  - Downloading phpunit/phpunit (13.4.3)
+  - Downloading squizlabs/php_codesniffer (4.0.4)
+  0/28 [>---------------------------]   0%
+ 10/28 [==========>-----------------]  35%
+ 13/28 [=============>--------------]  46%
+ 20/28 [====================>-------]  71%
+ 25/28 [=========================>--]  89%
+ 27/28 [===========================>]  96%
+ 28/28 [============================] 100%
+  - Installing staabm/side-effects-detector (1.0.5): Extracting archive
+  - Installing sebastian/version (7.0.1): Extracting archive
+  - Installing sebastian/type (7.0.2): Extracting archive
+  - Installing sebastian/recursion-context (8.0.1): Extracting archive
+  - Installing sebastian/object-enumerator (8.1.0): Extracting archive
+  - Installing sebastian/object-reflector (6.1.0): Extracting archive
+  - Installing sebastian/global-state (9.0.1): Extracting archive
+  - Installing sebastian/git-state (1.0.0): Extracting archive
+  - Installing sebastian/file-filter (1.0.0): Extracting archive
+  - Installing sebastian/exporter (8.2.1): Extracting archive
+  - Installing sebastian/environment (9.3.3): Extracting archive
+  - Installing sebastian/diff (9.0.1): Extracting archive
+  - Installing sebastian/comparator (8.4.0): Extracting archive
+  - Installing sebastian/cli-parser (5.0.1): Extracting archive
+  - Installing phpunit/php-timer (9.0.0): Extracting archive
+  - Installing phpunit/php-text-template (6.0.1): Extracting archive
+  - Installing phpunit/php-invoker (7.0.0): Extracting archive
+  - Installing phpunit/php-file-iterator (7.0.2): Extracting archive
+  - Installing theseer/tokenizer (2.0.1): Extracting archive
+  - Installing nikic/php-parser (v5.9.0): Extracting archive
+  - Installing sebastian/lines-of-code (5.0.2): Extracting archive
+  - Installing sebastian/complexity (6.0.0): Extracting archive
+  - Installing phpunit/php-code-coverage (14.4.1): Extracting archive
+  - Installing phar-io/version (3.2.1): Extracting archive
+  - Installing phar-io/manifest (2.0.4): Extracting archive
+  - Installing myclabs/deep-copy (1.14.0): Extracting archive
+  - Installing phpunit/phpunit (13.4.3): Extracting archive
+  - Installing squizlabs/php_codesniffer (4.0.4): Extracting archive
+  0/28 [>---------------------------]   0%
+ 18/28 [==================>---------]  64%
+ 22/28 [======================>-----]  78%
+ 26/28 [==========================>-]  92%
+ 28/28 [============================] 100%
+2 package suggestions were added by new dependencies, use `composer suggest` to see details.
+Generating autoload files
+26 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+No security vulnerability advisories found.

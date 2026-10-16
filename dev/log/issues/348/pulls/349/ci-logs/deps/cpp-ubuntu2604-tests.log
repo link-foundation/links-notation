@@ -1,0 +1,4 @@
+g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+Ubuntu clang version 21.1.8 (6ubuntu1)
+== g++
+time="2026-10-16T17:24:58Z" level=error msg="error waiting for container: unexpected EOF"

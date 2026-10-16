@@ -1,0 +1,16 @@
+== experiments
+note: to see how you depend on a package, run `cargo tree --invert <dep>@<ver>`
+warning: not updating lockfile due to dry run
+== experiments/issue-209/lino-shapes
+note: to see how you depend on a package, run `cargo tree --invert <dep>@<ver>`
+warning: not updating lockfile due to dry run
+== experiments/issue-282/parity/rust
+note: to see how you depend on a package, run `cargo tree --invert <dep>@<ver>`
+warning: not updating lockfile due to dry run
+== experiments/issue-315/rust-probe
+note: to see how you depend on a package, run `cargo tree --invert <dep>@<ver>`
+warning: not updating lockfile due to dry run
+== experiments/issue-316/rust-timing
+   Unchanged links-notation v0.21.1 (available: v0.21.3)
+note: to see how you depend on a package, run `cargo tree --invert <dep>@<ver>`
+warning: not updating lockfile due to dry run

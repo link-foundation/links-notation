@@ -1,0 +1,89 @@
+== js
+
+added 89 packages in 13s
+
+changed 1 package in 12s
+Package                                Current  Wanted  Latest  Location                                                                      Depended by
+@humanfs/core                           0.19.2  0.19.2  0.20.0  node_modules/@humanfs/core                                                    @humanfs/node
+@humanfs/node                           0.16.8  0.16.8  0.17.0  node_modules/@humanfs/node                                                    eslint
+@humanfs/types                          0.15.0  0.15.0  0.16.0  node_modules/@humanfs/types                                                   @humanfs/core
+@humanfs/types                          0.15.0  0.15.0  0.16.0  node_modules/@humanfs/types                                                   @humanfs/node
+@keyv/bigmap                             1.3.1   1.3.1   6.1.0  node_modules/@keyv/bigmap                                                     @cacheable/memory
+@peggyjs/from-mem                        3.1.3   3.1.3   4.0.0  node_modules/@peggyjs/from-mem                                                peggy
+@typescript/typescript-aix-ppc64       MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-darwin-arm64    MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-darwin-x64      MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-freebsd-arm64   MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-freebsd-x64     MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-linux-arm       MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-linux-arm64     MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-linux-loong64   MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-linux-mips64el  MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-linux-ppc64     MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-linux-riscv64   MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-linux-s390x     MISSING   7.0.2   7.0.2  -                                                                             typescript
+@typescript/typescript-netbsd-arm64    MISSING   7.0.2   7.0.2  -                                                                             typescript
+== docs/website
+
+added 94 packages in 10s
+
+changed 4 packages in 20s
+Package                                Current   Wanted   Latest  Location                                                                               Depended by
+@humanfs/core                           0.19.2   0.19.2   0.20.0  node_modules/@humanfs/core                                                             @humanfs/node
+@humanfs/core                           0.19.2   0.19.2   0.20.0  ../../js/node_modules/@humanfs/core                                                    @humanfs/node
+@humanfs/node                           0.16.8   0.16.8   0.17.0  node_modules/@humanfs/node                                                             eslint
+@humanfs/node                           0.16.8   0.16.8   0.17.0  ../../js/node_modules/@humanfs/node                                                    eslint
+@humanfs/types                          0.15.0   0.15.0   0.16.0  node_modules/@humanfs/types                                                            @humanfs/core
+@humanfs/types                          0.15.0   0.15.0   0.16.0  ../../js/node_modules/@humanfs/types                                                   @humanfs/core
+@humanfs/types                          0.15.0   0.15.0   0.16.0  node_modules/@humanfs/types                                                            @humanfs/node
+@humanfs/types                          0.15.0   0.15.0   0.16.0  ../../js/node_modules/@humanfs/types                                                   @humanfs/node
+@keyv/bigmap                             1.3.1    1.3.1    6.1.0  node_modules/@keyv/bigmap                                                              @cacheable/memory
+@keyv/bigmap                             1.3.1    1.3.1    6.1.0  ../../js/node_modules/@keyv/bigmap                                                     @cacheable/memory
+@peggyjs/from-mem                        3.1.3    3.1.3    4.0.0  ../../js/node_modules/@peggyjs/from-mem                                                peggy
+@rolldown/binding-android-arm-eabi     MISSING   1.2.14   1.2.14  -                                                                                      rolldown
+@rolldown/binding-android-arm64        MISSING   1.2.14   1.2.14  -                                                                                      rolldown
+@rolldown/binding-darwin-arm64         MISSING   1.2.14   1.2.14  -                                                                                      rolldown
+@rolldown/binding-darwin-x64           MISSING   1.2.14   1.2.14  -                                                                                      rolldown
+@rolldown/binding-freebsd-x64          MISSING   1.2.14   1.2.14  -                                                                                      rolldown
+@rolldown/binding-linux-arm-gnueabihf  MISSING   1.2.14   1.2.14  -                                                                                      rolldown
+@rolldown/binding-linux-arm64-gnu      MISSING   1.2.14   1.2.14  -                                                                                      rolldown
+@rolldown/binding-linux-arm64-musl     MISSING   1.2.14   1.2.14  -                                                                                      rolldown
+== docs/comparison
+
+added 3 packages in 4s
+
+up to date in 2s
+Package         Current  Wanted  Latest  Location                     Depended by
+links-notation   0.25.2  0.25.2  0.26.0  node_modules/links-notation  lino-objects-codec
+== benchmarks/js
+
+added 2 packages in 12s
+
+up to date in 2s
+Package                                Current  Wanted  Latest  Location                                                                               Depended by
+@humanfs/core                           0.19.2  0.19.2  0.20.0  ../../js/node_modules/@humanfs/core                                                    @humanfs/node
+@humanfs/node                           0.16.8  0.16.8  0.17.0  ../../js/node_modules/@humanfs/node                                                    eslint
+@humanfs/types                          0.15.0  0.15.0  0.16.0  ../../js/node_modules/@humanfs/types                                                   @humanfs/core
+@humanfs/types                          0.15.0  0.15.0  0.16.0  ../../js/node_modules/@humanfs/types                                                   @humanfs/node
+@keyv/bigmap                             1.3.1   1.3.1   6.1.0  ../../js/node_modules/@keyv/bigmap                                                     @cacheable/memory
+@peggyjs/from-mem                        3.1.3   3.1.3   4.0.0  ../../js/node_modules/@peggyjs/from-mem                                                peggy
+@typescript/typescript-aix-ppc64       MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-darwin-arm64    MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-darwin-x64      MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-freebsd-arm64   MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-freebsd-x64     MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-linux-arm       MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-linux-arm64     MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-linux-loong64   MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-linux-mips64el  MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-linux-ppc64     MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-linux-riscv64   MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-linux-s390x     MISSING   7.0.2   7.0.2  -                                                                                      typescript
+@typescript/typescript-netbsd-arm64    MISSING   7.0.2   7.0.2  -                                                                                      typescript
+== benchmarks/tools
+
+added 12 packages in 3s
+
+up to date in 2s
+Package         Current  Wanted  Latest  Location                     Depended by
+links-notation   0.25.2  0.25.2  0.26.0  node_modules/links-notation  lino-objects-codec

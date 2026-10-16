@@ -1,0 +1,13 @@
+g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+Ubuntu clang version 21.1.8 (6ubuntu1)
+cmake version 4.2.3
+== g++
+build=0
+[ 31%] Building CXX object CMakeFiles/links_notation.dir/src/parse_error.cpp.o
+Test project /w-g++/build
+No tests were found!!!
+== clang++
+build=0
+[ 31%] Building CXX object CMakeFiles/links_notation.dir/src/parse_error.cpp.o
+Test project /w-clang++/build
+No tests were found!!!
