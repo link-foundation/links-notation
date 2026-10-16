@@ -27,7 +27,7 @@ concurrency:
 
 jobs:
   actionlint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7.0.1
@@ -43,7 +43,7 @@ jobs:
           args: -color
 
   ci-scripts:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7.0.1
@@ -65,7 +65,7 @@ jobs:
         run: bash scripts/ci/registry-probe.test.sh
 
   zizmor:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     permissions:
       contents: read
@@ -78,7 +78,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7.0.0
         with:
-          python-version: '3.13'
+          python-version: '3.15'
       - name: Install zizmor
         run: pip install -r scripts/ci/requirements.txt
       # Fails on medium and above. The informational findings that remain are
@@ -96,6 +96,6 @@ jobs:
         run: |
           set -euo pipefail
           if grep -nE '^\s*(runs-on:|os:|-)\s.*(ubuntu|windows|macos)-latest' .github/workflows/*.yml; then
-            echo "::error::Pin hosted runners to an explicit image such as ubuntu-24.04 instead of a -latest alias"
+            echo "::error::Pin hosted runners to an explicit image such as ubuntu-26.04 instead of a -latest alias"
             exit 1
           fi

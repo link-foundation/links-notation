@@ -26,7 +26,7 @@ defaults:
 jobs:
   publishToNpm:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Must outlast the 20 minute registry wait below plus the build.
     timeout-minutes: 35
     concurrency:
@@ -55,7 +55,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7.1.0
         with:
-          node-version: "22"
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
       # Node 22 bundles npm 10.x; trusted publishing (OIDC) needs >= 11.5.1.
       # Pin the exact CLI version so publish behaviour changes are reviewed.
@@ -136,7 +136,7 @@ jobs:
             "https://registry.npmjs.org/${PACKAGE_NAME}/${PACKAGE_VERSION}" 80 15
 
   publishRelease:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs: [publishToNpm]
     # `result == 'success'` was true even when the publish step was skipped,

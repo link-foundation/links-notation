@@ -23,7 +23,7 @@ defaults:
 
 jobs:
   lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-cpp-${{ github.ref }}-lint
@@ -50,15 +50,15 @@ jobs:
       matrix:
         include:
           - name: gcc
-            os: ubuntu-24.04
+            os: ubuntu-26.04
             cxx: g++
           - name: clang
-            os: ubuntu-24.04
+            os: ubuntu-26.04
             cxx: clang++
           - name: msvc
             os: windows-2025
           - name: apple-clang
-            os: macos-15
+            os: macos-26
     concurrency:
       group: ci-cpp-${{ github.ref }}-test-${{ matrix.name }}
       cancel-in-progress: false
@@ -98,7 +98,7 @@ jobs:
 
   sanitizers:
     needs: [lint]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 25
     concurrency:
       group: ci-cpp-${{ github.ref }}-sanitizers

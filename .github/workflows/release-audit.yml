@@ -31,7 +31,7 @@ jobs:
   # Hard failure: reads only the working tree, so a disagreement between the
   # implementations is always a defect and never a transient registry answer.
   consistency:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7.0.1
@@ -40,12 +40,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7.1.0
         with:
-          node-version: '22'
+          node-version: '24'
       - name: Check that every implementation declares the same version
         run: node scripts/version-consistency.mjs
 
   audit:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # The caller has already waited for every publisher and propagation probe.
     timeout-minutes: 10
     permissions:
@@ -57,7 +57,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7.1.0
         with:
-          node-version: '22'
+          node-version: '24'
       - name: Audit declared versions against the registries
         env:
           CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}

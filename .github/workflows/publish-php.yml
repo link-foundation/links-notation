@@ -28,7 +28,7 @@ defaults:
 jobs:
   publishToPackagist:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     permissions:
       contents: write
@@ -47,7 +47,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@2.40.0
         with:
-          php-version: "8.4"
+          php-version: "8.5"
           extensions: mbstring
           tools: composer:v2
       - name: Check if version already published
@@ -119,7 +119,7 @@ jobs:
             "\"version\":\"${PACKAGE_VERSION}\"" 20 30
 
   publishRelease:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs: [publishToPackagist]
     # See csharp.yml: gate on what was published, not on the job result.

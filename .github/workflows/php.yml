@@ -22,7 +22,7 @@ defaults:
 
 jobs:
   lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-php-${{ github.ref }}-lint
@@ -32,10 +32,10 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      - name: Set up PHP 8.4
+      - name: Set up PHP 8.5
         uses: shivammathur/setup-php@2.40.0
         with:
-          php-version: "8.4"
+          php-version: "8.5"
           extensions: mbstring
           tools: composer:v2
       - name: Validate composer.json
@@ -47,7 +47,7 @@ jobs:
 
   test:
     needs: [lint]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     concurrency:
       # The matrix value belongs in the group. Without it all four legs share

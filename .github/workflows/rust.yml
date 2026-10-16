@@ -26,7 +26,7 @@ defaults:
 
 jobs:
   lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-rust-${{ github.ref }}-lint
@@ -56,7 +56,7 @@ jobs:
   test:
     name: test (${{ matrix.toolchain }})
     needs: [lint]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     strategy:
       fail-fast: false
@@ -86,7 +86,7 @@ jobs:
         run: cargo test -p links-notation --no-default-features
 
   msrv-rejection:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-rust-${{ github.ref }}-msrv-rejection

@@ -26,7 +26,7 @@ defaults:
 
 jobs:
   lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-csharp-${{ github.ref }}-lint
@@ -39,7 +39,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v6.0.0
         with:
-          dotnet-version: "10.0.x"
+          global-json-file: csharp/global.json
       - name: Restore Dependencies
         run: dotnet restore
       - name: Check formatting
@@ -52,7 +52,7 @@ jobs:
 
   test:
     needs: [lint]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     concurrency:
       group: ci-csharp-${{ github.ref }}-test
@@ -65,7 +65,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v6.0.0
         with:
-          dotnet-version: "10.0.x"
+          global-json-file: csharp/global.json
       - name: Restore Dependencies
         run: dotnet restore
       - name: Build
@@ -84,7 +84,7 @@ jobs:
         run: bash ../examples/binary/run-interop.sh --rust-csharp-only
 
   generatePdfWithCode:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     needs: [test]
     # Builds on pull requests too: only main used to run it, so a test string
@@ -102,7 +102,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v6.0.0
         with:
-          dotnet-version: "10.0.x"
+          global-json-file: csharp/global.json
       # These packages are 293 MB. On 2026-10-06 the runner's apt mirror served
       # them at 223 kB/s, so the download took 22 of the job's 30 minutes
       # instead of the usual 1.5 (issue #330). Keeping the .deb files in the
@@ -112,7 +112,7 @@ jobs:
         uses: actions/cache@v6.1.0
         with:
           path: ~/apt-archives/*.deb
-          key: ${{ runner.os }}-ubuntu-24.04-apt-${{ env.PDF_APT_PACKAGES }}
+          key: ${{ runner.os }}-${{ env.ImageOS }}-apt-${{ env.PDF_APT_PACKAGES }}
       - name: Install dependencies for PDF generation
         run: |
           mkdir -p ~/apt-archives/partial

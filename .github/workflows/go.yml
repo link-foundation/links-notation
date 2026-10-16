@@ -25,7 +25,7 @@ defaults:
 
 jobs:
   lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-go-${{ github.ref }}-lint
@@ -38,7 +38,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v7.0.0
         with:
-          go-version: "1.26"
+          go-version: "1.27"
           # This module has no dependencies: go/go.sum does not exist and
           # go.mod has no require block. Pointing the dependency cache at a
           # file that is not there made setup-go emit "Restore cache failed:
@@ -64,10 +64,15 @@ jobs:
 
   test:
     needs: [lint]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        # The go.mod floor (the oldest maintained release) and the newest.
+        go: ["1.26", "1.27"]
     concurrency:
-      group: ci-go-${{ github.ref }}-test
+      group: ci-go-${{ github.ref }}-test-${{ matrix.go }}
       cancel-in-progress: false
     env:
       # A step `if:` cannot read the secrets context, so the presence of the
@@ -81,7 +86,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v7.0.0
         with:
-          go-version: "1.26"
+          go-version: ${{ matrix.go }}
           # This module has no dependencies: go/go.sum does not exist and
           # go.mod has no require block. Pointing the dependency cache at a
           # file that is not there made setup-go emit "Restore cache failed:

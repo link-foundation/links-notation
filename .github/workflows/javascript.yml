@@ -22,7 +22,7 @@ defaults:
 
 jobs:
   format:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-js-${{ github.ref }}-format
@@ -44,7 +44,7 @@ jobs:
         run: bun run format:check
 
   lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ci-js-${{ github.ref }}-lint
@@ -64,7 +64,7 @@ jobs:
         run: bun run lint
 
   test:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     concurrency:
       group: ci-js-${{ github.ref }}-test
@@ -92,7 +92,7 @@ jobs:
         run: bunx tsc --ignoreConfig --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler ../examples/js_indented_document.ts
 
   parity:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7.0.1
