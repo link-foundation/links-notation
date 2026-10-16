@@ -116,9 +116,11 @@
     </build>
 
     <profiles>
-        <!-- Spotless 3.10.3 calls Style.valueOf(), removed by google-java-format
-             1.37.0. format.sh runs the current formatter CLI instead. The
-             dependency is confined to this tooling profile, not the library. -->
+        <!-- Spotless 3.10.4 calls Style.valueOf(), removed by google-java-format
+             1.37.0 (diffplug/spotless#3126, fixed by google-java-format commit
+             a51e46a, not yet released). format.sh runs the current formatter
+             CLI instead. The dependency is confined to this tooling profile,
+             not the library. -->
         <profile>
             <id>format</id>
             <dependencies>
@@ -159,7 +161,7 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.11.0</version>
+                        <version>0.12.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
