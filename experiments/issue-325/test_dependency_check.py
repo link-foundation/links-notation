@@ -144,6 +144,49 @@ class DependencyCheckTests(unittest.TestCase):
             self.assertIn("trufflehog@v3.99.0\n", text)
             self.assertIn("      version: 1.0.0\n", text)
 
+    def test_pre_commit_hook_dependencies_are_pinned_checked_and_updated(self):
+        # Issue #348: the eslint hook installed an unpinned `eslint`, so each
+        # machine ran whatever release was newest when its hook was built.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            config = root / ".pre-commit-config.yaml"
+            config.write_text(
+                "repos:\n"
+                "  - repo: https://github.com/pre-commit/mirrors-eslint\n"
+                "    rev: v10.12.0\n"
+                "    hooks:\n"
+                "      - id: eslint\n"
+                "        additional_dependencies:\n"
+                "          - eslint@10.12.0\n"
+                "          - '@eslint/js@10.0.1'\n"
+                "        args: ['--fix']\n"
+            )
+            pins = [
+                (d.ecosystem, d.name, d.literal)
+                for d in CHECK.manifests(root)
+                if d.path == config
+            ]
+            self.assertEqual(
+                pins,
+                [
+                    ("github", "pre-commit/mirrors-eslint", "v10.12.0"),
+                    ("npm", "eslint", "10.12.0"),
+                    ("npm", "@eslint/js", "10.0.1"),
+                ],
+            )
+            CHECK.update(
+                CHECK.Dependency(config, "npm", "eslint", "10.12.0", "10.12.0"),
+                "10.13.0",
+            )
+            text = config.read_text()
+            self.assertIn("          - eslint@10.13.0\n", text)
+            self.assertIn("    rev: v10.12.0\n", text)
+            self.assertIn("'@eslint/js@10.0.1'", text)
+
+            config.write_text(text.replace("eslint@10.13.0", "eslint"))
+            with self.assertRaisesRegex(ValueError, "unpinned dependency"):
+                CHECK.manifests(root)
+
     def test_stable_versions_ignore_prereleases_and_sort_numerically(self):
         self.assertEqual(
             CHECK.newest(["v1.9.0", "v1.10.0", "2.0.0-rc1", "stable"]), "1.10.0"

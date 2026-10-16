@@ -338,6 +338,20 @@ def manifests(root=ROOT):
             precommit.read_text(),
         ):
             add(precommit, "github", match[1], match[2])
+        # pre-commit builds a hook's environment once per machine, so an
+        # unpinned additional dependency freezes whichever release was newest
+        # at that moment.
+        for block in re.finditer(
+            r"^(\s*)additional_dependencies:\s*\n((?:\1\s+-[^\n]*\n)+)",
+            precommit.read_text(),
+            re.M,
+        ):
+            for item in re.findall(r"-\s*['\"]?([^'\"\s]+)", block[2]):
+                pin = re.fullmatch(r"(@?[^@]+)@(\d[^@]*)", item)
+                if pin:
+                    add(precommit, "npm", pin[1], pin[2])
+                else:
+                    add(precommit, "npm", item, None)
     return list(dict.fromkeys(found))
 
 
@@ -429,8 +443,13 @@ def update(dependency, release):
             source,
         )
     elif dependency.ecosystem == "npm":
+        prefix = (
+            r"(-\s*['\"]?"
+            if path.name == ".pre-commit-config.yaml"
+            else r"(npm install -g "
+        )
         source = re.sub(
-            r"(npm install -g " + name + r"@)" + re.escape(original) + r"(?=\s|$)",
+            prefix + name + r"@)" + re.escape(original) + r"(?=['\"\s]|$)",
             lambda m: m[1] + replacement,
             source,
         )
