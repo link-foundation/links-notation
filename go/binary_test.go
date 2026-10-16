@@ -28,7 +28,7 @@ func TestBinarySharedVectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	count := 0
-	for _, line := range strings.Split(string(data), "\n") {
+	for line := range strings.SplitSeq(string(data), "\n") {
 		if line == "" || strings.HasPrefix(line, "#") {
 			continue
 		}
@@ -138,7 +138,7 @@ func TestBinaryLimitsAndMalformed(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	for i := 0; i < 5; i++ {
+	for i := range 5 {
 		limits := DefaultDecodeLimits()
 		switch i {
 		case 0:
@@ -188,7 +188,7 @@ func TestBinaryStreamsUint64TruncationAndDepth(t *testing.T) {
 			t.Fatal(err)
 		}
 		stream := bytes.NewReader(append(append([]byte{}, data...), data...))
-		for i := 0; i < 2; i++ {
+		for i := range 2 {
 			got, err := ReadPacket(stream, DefaultDecodeLimits())
 			if err != nil || !reflect.DeepEqual(got.Links(), links) {
 				t.Fatal(err, got)
@@ -201,7 +201,7 @@ func TestBinaryStreamsUint64TruncationAndDepth(t *testing.T) {
 		if err != nil || eof != nil {
 			t.Fatal(eof, err)
 		}
-		for end := 0; end < len(data); end++ {
+		for end := range data {
 			if _, err := PacketFromBytes(data[:end], DefaultDecodeLimits()); err == nil {
 				t.Fatal("Accepted truncated prefix", end)
 			}
@@ -209,7 +209,7 @@ func TestBinaryStreamsUint64TruncationAndDepth(t *testing.T) {
 	}
 	leaf := "leaf"
 	document := []*Link{{ID: &leaf}}
-	for i := 0; i < 70; i++ {
+	for range 70 {
 		document = []*Link{&Link{Values: document}}
 	}
 	codec := NewBinaryLinoCodec()

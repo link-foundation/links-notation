@@ -1,6 +1,6 @@
 module issue314probe
 
-go 1.24
+go 1.26
 
 require github.com/link-foundation/links-notation/go v0.0.0
 

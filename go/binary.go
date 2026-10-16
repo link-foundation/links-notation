@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"math"
+	"slices"
 	"strconv"
 	"strings"
 	"unicode/utf8"
@@ -344,7 +345,7 @@ func ReadPacket(reader io.Reader, limits DecodeLimits) (packet *LinksPacket, err
 		sections := readLeb(reader)
 		demand(sections <= limits.MaxLinks, "too many sections")
 		address, total := uint64(1), uint64(0)
-		for i := uint64(0); i < sections; i++ {
+		for range sections {
 			shape := readLeb(reader)
 			gap := uint64(0)
 			if shape&4 != 0 {
@@ -429,7 +430,7 @@ func PacketFromBytes(data []byte, limits DecodeLimits) (packet *LinksPacket, err
 func ParsePacketLinks(text string) (result []PacketLink, err error) {
 	defer binaryRecover(&err)
 	result = []PacketLink{}
-	for _, entry := range strings.Split(text, ";") {
+	for entry := range strings.SplitSeq(text, ";") {
 		if strings.TrimSpace(entry) == "" {
 			continue
 		}
@@ -440,7 +441,7 @@ func ParsePacketLinks(text string) (result []PacketLink, err error) {
 			failBinary(e)
 		}
 		refs := []Reference{}
-		for _, word := range strings.Fields(parts[1]) {
+		for word := range strings.FieldsSeq(parts[1]) {
 			external := strings.HasPrefix(word, "#")
 			v, e := strconv.ParseUint(strings.TrimPrefix(word, "#"), 10, 64)
 			if e != nil {
@@ -509,7 +510,7 @@ func packLinks(external bool, links []PacketLink, packed bool) *LinksPacket {
 				before = costs[best]
 			}
 			var next [8]uint64
-			for state := 0; state < 8; state++ {
+			for state := range 8 {
 				next[state] = unreachable
 				width := binaryWidths[state/2]
 				variable := uint64(state % 2)
@@ -533,7 +534,7 @@ func packLinks(external bool, links []PacketLink, packed bool) *LinksPacket {
 		}
 		result := []run{}
 		end, state := len(links), cheapest(costs)
-		for i := len(links) - 1; i >= 0; i-- {
+		for i := range slices.Backward(links) {
 			if opens[i]&(1<<state) != 0 {
 				result = append(result, run{end - i, binaryWidths[state/2]})
 				end = i
@@ -618,8 +619,8 @@ func (e *binaryEncoder) link(items []binaryNode) binaryNode {
 }
 func (e *binaryEncoder) chain(items []binaryNode) binaryNode {
 	tail := binaryNode{'i', 0}
-	for i := len(items) - 1; i >= 0; i-- {
-		tail = e.link([]binaryNode{items[i], tail})
+	for _, item := range slices.Backward(items) {
+		tail = e.link([]binaryNode{item, tail})
 	}
 	return tail
 }

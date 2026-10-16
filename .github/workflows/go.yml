@@ -55,6 +55,12 @@ jobs:
           fi
       - name: Run go vet
         run: go vet ./...
+      # `go fix` applies the modernizers of the Go release in go.mod (range
+      # over int, strings.SplitSeq, errors.AsType, new(expr)); `-diff` exits
+      # non-zero when one is pending, so the code cannot drift back to the
+      # hand-rolled forms issue #348 removed.
+      - name: Check go fix
+        run: go fix -diff ./...
 
   test:
     needs: [lint]

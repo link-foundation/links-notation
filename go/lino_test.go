@@ -5,11 +5,6 @@ import (
 	"testing"
 )
 
-// Helper function to create a string pointer
-func strPtr(s string) *string {
-	return &s
-}
-
 // =====================
 // API Tests
 // =====================
@@ -25,7 +20,7 @@ func TestIsRef(t *testing.T) {
 }
 
 func TestIsLink(t *testing.T) {
-	link := NewLink(strPtr("id"), []*Link{NewRef("child")})
+	link := NewLink(new("id"), []*Link{NewRef("child")})
 	if !link.IsLink() {
 		t.Error("Expected link to be a link with values")
 	}
@@ -478,32 +473,32 @@ func TestMultipleNestedLinksRoundtrip(t *testing.T) {
 // =====================
 
 func TestLinkEquality(t *testing.T) {
-	link1 := NewLink(strPtr("id"), []*Link{NewRef("a"), NewRef("b")})
-	link2 := NewLink(strPtr("id"), []*Link{NewRef("a"), NewRef("b")})
+	link1 := NewLink(new("id"), []*Link{NewRef("a"), NewRef("b")})
+	link2 := NewLink(new("id"), []*Link{NewRef("a"), NewRef("b")})
 	if !link1.Equal(link2) {
 		t.Error("Expected links to be equal")
 	}
 }
 
 func TestLinkInequalityDifferentID(t *testing.T) {
-	link1 := NewLink(strPtr("id1"), []*Link{NewRef("a")})
-	link2 := NewLink(strPtr("id2"), []*Link{NewRef("a")})
+	link1 := NewLink(new("id1"), []*Link{NewRef("a")})
+	link2 := NewLink(new("id2"), []*Link{NewRef("a")})
 	if link1.Equal(link2) {
 		t.Error("Expected links to be not equal (different ID)")
 	}
 }
 
 func TestLinkInequalityDifferentValues(t *testing.T) {
-	link1 := NewLink(strPtr("id"), []*Link{NewRef("a")})
-	link2 := NewLink(strPtr("id"), []*Link{NewRef("b")})
+	link1 := NewLink(new("id"), []*Link{NewRef("a")})
+	link2 := NewLink(new("id"), []*Link{NewRef("b")})
 	if link1.Equal(link2) {
 		t.Error("Expected links to be not equal (different values)")
 	}
 }
 
 func TestLinkInequalityDifferentValueCount(t *testing.T) {
-	link1 := NewLink(strPtr("id"), []*Link{NewRef("a"), NewRef("b")})
-	link2 := NewLink(strPtr("id"), []*Link{NewRef("a")})
+	link1 := NewLink(new("id"), []*Link{NewRef("a"), NewRef("b")})
+	link2 := NewLink(new("id"), []*Link{NewRef("a")})
 	if link1.Equal(link2) {
 		t.Error("Expected links to be not equal (different value count)")
 	}
@@ -559,7 +554,7 @@ func TestMultilineLinksPreserved(t *testing.T) {
 // =====================
 
 func TestFormatConfigLessParentheses(t *testing.T) {
-	link := NewLink(strPtr("id"), []*Link{NewRef("value1"), NewRef("value2")})
+	link := NewLink(new("id"), []*Link{NewRef("value1"), NewRef("value2")})
 	config := NewFormatConfig(true)
 	output := link.FormatWithConfig(config)
 	if strings.HasPrefix(output, "(") && strings.HasSuffix(output, ")") {
@@ -710,9 +705,9 @@ func TestEscapeReferenceSimple(t *testing.T) {
 
 func TestGroupConsecutiveLinks(t *testing.T) {
 	links := []*Link{
-		NewLink(strPtr("SetA"), []*Link{NewRef("a")}),
-		NewLink(strPtr("SetA"), []*Link{NewRef("b")}),
-		NewLink(strPtr("SetA"), []*Link{NewRef("c")}),
+		NewLink(new("SetA"), []*Link{NewRef("a")}),
+		NewLink(new("SetA"), []*Link{NewRef("b")}),
+		NewLink(new("SetA"), []*Link{NewRef("c")}),
 	}
 	config := DefaultFormatConfig().WithGroupConsecutive(true)
 	grouped := groupConsecutiveLinks(links)
@@ -727,8 +722,8 @@ func TestGroupConsecutiveLinks(t *testing.T) {
 
 func TestNoGroupingDifferentIDs(t *testing.T) {
 	links := []*Link{
-		NewLink(strPtr("SetA"), []*Link{NewRef("a")}),
-		NewLink(strPtr("SetB"), []*Link{NewRef("b")}),
+		NewLink(new("SetA"), []*Link{NewRef("a")}),
+		NewLink(new("SetB"), []*Link{NewRef("b")}),
 	}
 	grouped := groupConsecutiveLinks(links)
 	if len(grouped) != 2 {

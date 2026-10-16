@@ -494,10 +494,7 @@ func (p *Parser) parseElement(currentIndent int) *internalLink {
 	if p.baseIndentation != nil {
 		base = *p.baseIndentation
 	}
-	indent := rawIndent - base
-	if indent < 0 {
-		indent = 0
-	}
+	indent := max(rawIndent-base, 0)
 
 	if indent < currentIndent {
 		return nil
@@ -539,10 +536,7 @@ func (p *Parser) parseElement(currentIndent int) *internalLink {
 		}
 
 		rawNextIndent := countLeadingSpaces(p.lines[following])
-		nextIndent := rawNextIndent - base
-		if nextIndent < 0 {
-			nextIndent = 0
-		}
+		nextIndent := max(rawNextIndent-base, 0)
 
 		if nextIndent <= indent {
 			break

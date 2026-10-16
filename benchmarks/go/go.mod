@@ -1,9 +1,9 @@
 module github.com/link-foundation/links-notation/benchmarks/go
 
-go 1.24
+go 1.26
 
 require (
-	github.com/link-foundation/links-notation/go v0.16.1
+	github.com/link-foundation/links-notation/go v0.26.0
 	github.com/pkoukk/tiktoken-go v0.1.8
 	github.com/pkoukk/tiktoken-go-loader v0.0.2
 )

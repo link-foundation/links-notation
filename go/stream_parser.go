@@ -242,8 +242,7 @@ func (p *StreamParser) advanceSegment(document string) {
 
 func (p *StreamParser) streamError(err error, document string) error {
 	localOffset := 0
-	var parseError *ParseError
-	if errors.As(err, &parseError) {
+	if parseError, ok := errors.AsType[*ParseError](err); ok {
 		localOffset = parseError.Pos
 	}
 	if localOffset < 0 || localOffset > len(document) {

@@ -11,8 +11,8 @@ import (
 func main() {
 	raw, err := os.ReadFile("../examples/binary/corpus.txt")
 	check(err)
-	corpus := strings.Split(strings.TrimSuffix(string(raw), "\n"), "\n")
-	for _, source := range corpus {
+	corpus := strings.SplitSeq(strings.TrimSuffix(string(raw), "\n"), "\n")
+	for source := range corpus {
 		text := strings.ReplaceAll(source, `\n`, "\n")
 		codec := lino.NewBinaryLinoCodec()
 		document, err := codec.ParseDocument(text)
