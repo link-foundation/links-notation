@@ -124,6 +124,36 @@ jobs:
             -o Dir::Cache::Archives="$HOME/apt-archives" \
             -o APT::Sandbox::User=root \
             $PDF_APT_PACKAGES
+      # Ubuntu 26.04's TeX Live 2025 bundles latexminted 0.6.0, the program
+      # minted 3 runs to highlight code. It fails on the system Python 3.14,
+      # whose argparse passes `color` to subparsers (Launchpad bug 2154292,
+      # gpoore/minted#463). latexminted 0.7.0 fixes that but needs a newer
+      # minted.sty than TeX Live 2025 ships, so the bundled script runs on
+      # Python 3.13 instead. update-environment keeps the job's python3.
+      - name: Setup Python for latexminted
+        id: latexminted-python
+        uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.13'
+          update-environment: false
+      - name: Run latexminted on Python 3.13
+        env:
+          LATEXMINTED_PYTHON: ${{ steps.latexminted-python.outputs.python-path }}
+        run: |
+          set -euo pipefail
+          if /usr/bin/latexminted --version > /dev/null 2>&1; then
+            echo "::warning::/usr/bin/latexminted runs on the system Python again (Launchpad bug 2154292 is fixed). Remove the latexminted steps from csharp.yml."
+            exit 0
+          fi
+          bin="$RUNNER_TEMP/latexminted"
+          mkdir -p "$bin"
+          cat > "$bin/latexminted" <<EOF
+          #!/bin/sh
+          exec "$LATEXMINTED_PYTHON" /usr/bin/latexminted "\$@"
+          EOF
+          chmod +x "$bin/latexminted"
+          echo "$bin" >> "$GITHUB_PATH"
+          "$bin/latexminted" --version
       - name: Check the listing only contains characters LaTeX can typeset
         run: python3 ../experiments/issue-330/test_pdf_unicode.py
       - name: Generate PDF with code
