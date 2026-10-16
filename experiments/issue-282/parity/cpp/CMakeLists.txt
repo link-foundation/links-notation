@@ -1,6 +1,6 @@
 # Kept out of the library's own build on purpose: this is an experiment, not
 # something the published package should build or depend on.
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.16...4.4)
 project(issue_282_parity LANGUAGES CXX)
 
 set(LINKS_NOTATION_BUILD_TESTS OFF CACHE BOOL "" FORCE)

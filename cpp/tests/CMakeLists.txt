@@ -1,12 +1,14 @@
 # GoogleTest is taken from the system when CMake can find it, and otherwise
-# downloaded once at a pinned release whose archive hash is checked.
+# downloaded once at a pinned release whose archive hash is checked. The
+# policy range in ../CMakeLists.txt sets CMP0135 on CMake 3.24+, so extracted
+# files get fresh timestamps without DOWNLOAD_EXTRACT_TIMESTAMP, a keyword
+# CMake 3.16 rejects.
 find_package(GTest 1.11 QUIET)
 if(NOT GTest_FOUND)
   include(FetchContent)
   FetchContent_Declare(googletest
     URL https://github.com/google/googletest/releases/download/v1.18.0/googletest-1.18.0.tar.gz
-    URL_HASH SHA256=6e3191c1455468b3fc35a417fb565c1c5071aee1b7e7f85e30cf48a98d37d8b5
-    DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
+    URL_HASH SHA256=6e3191c1455468b3fc35a417fb565c1c5071aee1b7e7f85e30cf48a98d37d8b5)
   set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
   set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
   set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
