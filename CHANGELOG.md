@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update every dependency and toolchain in all eight bindings, pin Maven, test
+  the Maven and CMake floors, and require Python 3.11 and Go 1.26. Prepare
+  0.27.0; see [the release fragment](changelog.d/348.md) and
+  [issue 348](https://github.com/link-foundation/links-notation/issues/348).
+
 ### Added
 
 - Add C++ as the eighth binding, with full feature parity and a GitHub-release
