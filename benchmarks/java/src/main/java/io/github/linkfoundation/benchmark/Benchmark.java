@@ -37,7 +37,7 @@ import java.util.TreeMap;
  * <p>It writes {@code benchmarks/results/java.json} and fails when a count differs from {@code
  * benchmarks/results/rust.json}.
  *
- * <p>Usage: {@code mvn -q exec:java -Dexec.args="--check --verbose"} from {@code benchmarks/java}.
+ * <p>Usage: {@code ../../java/mvnw -q exec:java -Dexec.args="--check --verbose"} from {@code benchmarks/java}.
  * With {@code --check} the results file is compared instead of written, which is what CI runs to
  * catch a stale commit.
  */
@@ -140,7 +140,7 @@ public final class Benchmark {
     if (check) {
       if (!text.equals(readText(root, path))) {
         throw new IllegalStateException(
-            path + " is out of date; run mvn exec:java from benchmarks/java");
+            path + " is out of date; run ../../java/mvnw exec:java from benchmarks/java");
       }
       System.out.println(
           LANGUAGE + ": " + path + " is up to date and agrees with the Rust results.");

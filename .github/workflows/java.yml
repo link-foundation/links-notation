@@ -86,3 +86,42 @@ jobs:
           cache: maven
       - name: Check Google Java formatting and whitespace
         run: bash format.sh --check && ./mvnw -B spotless:check --file pom.xml
+
+  # pom.xml's maven-enforcer-plugin declares Maven 3.6.3, the oldest the build
+  # plugins accept, while ./mvnw runs the newest. This job keeps that floor a
+  # tested fact rather than a claim (issue #348).
+  maven-floor:
+    needs: [build]
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    concurrency:
+      group: ci-java-${{ github.ref }}-maven-floor
+      cancel-in-progress: false
+    env:
+      MAVEN_FLOOR: "3.6.3"
+      # sha256sum of the archive whose SHA-512 matches
+      # archive.apache.org/dist/maven/maven-3/3.6.3/binaries/*.sha512.
+      MAVEN_FLOOR_SHA256: 26ad91d751b3a9a53087aefa743f4e16a17741d3915b219cf74112bf87a438c5
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Set up JDK 25
+        uses: actions/setup-java@v6.1.0
+        with:
+          java-version: "25"
+          distribution: "temurin"
+          cache: maven
+      - name: Install the oldest supported Maven
+        run: |
+          set -euo pipefail
+          archive="apache-maven-$MAVEN_FLOOR-bin.tar.gz"
+          curl -fsSL --retry 3 -o "$RUNNER_TEMP/$archive" \
+            "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/$MAVEN_FLOOR/$archive"
+          echo "$MAVEN_FLOOR_SHA256  $RUNNER_TEMP/$archive" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/$archive" -C "$RUNNER_TEMP"
+      - name: Test and check formatting with Maven ${{ env.MAVEN_FLOOR }}
+        run: |
+          "$RUNNER_TEMP/apache-maven-$MAVEN_FLOOR/bin/mvn" --version
+          "$RUNNER_TEMP/apache-maven-$MAVEN_FLOOR/bin/mvn" -B test spotless:check --file pom.xml

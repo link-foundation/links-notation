@@ -368,7 +368,8 @@ bash format.sh --check
 ## Requirements
 
 - Java 21 or higher
-- Maven 3.6.3 or newer, the oldest the build plugins accept. `./mvnw` downloads the
+- Maven 3.6.3 or newer, the oldest the build plugins accept (`pom.xml` enforces it and CI
+  builds with it). `./mvnw` downloads the
   Maven this repository builds with (3.10.0, pinned in `.mvn/wrapper/maven-wrapper.properties`)
 
 ## Package Information

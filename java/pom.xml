@@ -58,6 +58,30 @@
     <build>
         <plugins>
             <plugin>
+                <!-- The oldest Maven the build plugins accept. Declaring it fails an
+                     older Maven with one clear message (and stops versions:display-plugin-updates
+                     from proposing 2.x "updates"); ./mvnw itself runs the Maven pinned in
+                     .mvn/wrapper/maven-wrapper.properties. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.6.3</version>
+                <executions>
+                    <execution>
+                        <id>require-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.6.3</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.16.0</version>
