@@ -18,8 +18,8 @@ Foundation на C++17. Она не зависит ни от чего, кроме
 include(FetchContent)
 FetchContent_Declare(
   links_notation
-  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.27.0/links-notation-cpp-0.27.0.tar.gz
-  # Необязательно: контрольная сумма из links-notation-cpp-0.27.0.tar.gz.sha256
+  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.27.1/links-notation-cpp-0.27.1.tar.gz
+  # Необязательно: контрольная сумма из links-notation-cpp-0.27.1.tar.gz.sha256
   # URL_HASH SHA256=...
 )
 FetchContent_MakeAvailable(links_notation)
