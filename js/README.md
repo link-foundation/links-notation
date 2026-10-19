@@ -27,6 +27,14 @@ bun add links-notation
 import { Parser, Link } from 'npm:links-notation@^0.6.0';
 ```
 
+#### In browsers
+
+The package has no runtime dependencies and imports no Node.js built-in
+modules, so bundlers need no polyfills. For example, esbuild bundles it with
+`esbuild entry.js --bundle --platform=browser`. Before 0.27.1, `StreamParser`
+imported Node's `events` module, and browser bundles needed the `events`
+package installed as a polyfill.
+
 ### Local Development Setup
 
 For contributors working on the source code:
@@ -443,7 +451,11 @@ Container for grouping related links.
 
 #### `StreamParser`
 
-EventEmitter-based streaming parser for incremental parsing.
+Event-emitting streaming parser for incremental parsing. Its built-in emitter
+has the Node.js `EventEmitter` listener methods (`on`, `once`, `off`,
+`addListener`, `removeListener`, `prependListener`, `prependOnceListener`,
+`removeAllListeners`, `emit`, `listeners`, `listenerCount`, `eventNames`) and
+works in browsers without a polyfill. It is not an `instanceof EventEmitter`.
 
 - `constructor(options)` - Create a new streaming parser
   - `options.maxInputSize` - Maximum input size in bytes (default: 10MB)

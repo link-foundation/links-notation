@@ -6,7 +6,7 @@
   "types": "index.d.ts",
   "type": "module",
   "scripts": {
-    "build": "bun run build:grammar && bun build src/index.js --outdir=dist --target=node",
+    "build": "bun run build:grammar && bun build src/index.js --outdir=dist --target=browser",
     "build:grammar": "peggy --format es -o src/parser-generated.js src/grammar.pegjs",
     "test": "bun test",
     "test:watch": "bun test --watch",

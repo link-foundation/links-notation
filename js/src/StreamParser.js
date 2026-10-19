@@ -1,4 +1,4 @@
-import { EventEmitter } from 'events';
+import { Emitter } from './Emitter.js';
 import { Parser } from './Parser.js';
 import { DelimitedReferences } from './quotes.js';
 
@@ -39,7 +39,7 @@ export class StreamParseError extends Error {
  * uses the regular Parser as the source of truth, which keeps quoted strings,
  * nested contexts, comments, and future grammar changes in one place.
  */
-export class StreamParser extends EventEmitter {
+export class StreamParser extends Emitter {
   constructor(options = {}) {
     super();
     this.parser = options.parser ?? new Parser(options);

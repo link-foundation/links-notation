@@ -251,7 +251,10 @@ export class StreamParseError extends Error {
   snippet: string;
 }
 
-/** Incrementally emits complete top-level Links Notation records. */
+/**
+ * Incrementally emits complete top-level Links Notation records. Its listener
+ * methods mirror Node.js EventEmitter without depending on Node built-ins.
+ */
 export class StreamParser {
   parser: Parser;
   comments: boolean;
@@ -282,6 +285,21 @@ export class StreamParser {
   once(event: 'end', listener: (links: Link[]) => void): this;
   once(event: 'error', listener: (error: Error) => void): this;
   off(event: string, listener: (...arguments_: any[]) => void): this;
+  addListener(event: string, listener: (...arguments_: any[]) => void): this;
+  removeListener(event: string, listener: (...arguments_: any[]) => void): this;
+  prependListener(
+    event: string,
+    listener: (...arguments_: any[]) => void
+  ): this;
+  prependOnceListener(
+    event: string,
+    listener: (...arguments_: any[]) => void
+  ): this;
+  removeAllListeners(event?: string): this;
+  emit(event: string, ...arguments_: any[]): boolean;
+  listeners(event: string): Array<(...arguments_: any[]) => void>;
+  listenerCount(event: string): number;
+  eventNames(): string[];
 
   /** Lazily parse a synchronous iterable of chunks. */
   static parse(
