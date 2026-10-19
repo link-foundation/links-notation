@@ -19,7 +19,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
 | Python | 247 | 24 |
-| JavaScript | 315 | 29 |
+| JavaScript | 316 | 29 |
 | Rust | 401 | 29 |
 | C# | 295 | 27 |
 | Go | 139 | 17 |
@@ -210,13 +210,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | off removes the latest registration, including once listeners | ❌ | [✅](js/tests/BrowserBundle.test.js#L97) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | once listeners run a single time | ❌ | [✅](js/tests/BrowserBundle.test.js#L86) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | rejects listeners that are not functions | ❌ | [✅](js/tests/BrowserBundle.test.js#L152) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| stream parser still throws the stream error without a listener | ❌ | [✅](js/tests/BrowserBundle.test.js#L164) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| stream parser still throws the stream error without a listener | ❌ | [✅](js/tests/BrowserBundle.test.js#L183) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | the dist bundle parses and streams like the source | ❌ | [✅](js/tests/BrowserBundle.test.js#L52) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | the published dist entry point imports no  node built ins or packages | ❌ | [✅](js/tests/BrowserBundle.test.js#L42) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | the source entry point imports no  node built ins or packages | ❌ | [✅](js/tests/BrowserBundle.test.js#L36) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| works with the  node.js events.on async iterator | ❌ | [✅](js/tests/BrowserBundle.test.js#L164) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | works with the  node.js events.once helper | ❌ | [✅](js/tests/BrowserBundle.test.js#L156) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
-**Category totals:** Python: 0, JavaScript: 12, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0, C++: 0
+**Category totals:** Python: 0, JavaScript: 13, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0, C++: 0
 
 ## Comments
 
@@ -1071,7 +1072,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
 
-**Browser Bundle** (12 missing):
+**Browser Bundle** (13 missing):
 - anunhandlederroreventthrowslikenode.js
 - callslistenersinorderwiththeemitterasthis
 - inspectsandremoveslisteners
@@ -1083,6 +1084,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thedistbundleparsesandstreamslikethesource
 - thepublisheddistentrypointimportsnonodebuiltinsorpackages
 - thesourceentrypointimportsnonodebuiltinsorpackages
+- workswiththenode.jsevents.onasynciterator
 - workswiththenode.jsevents.oncehelper
 
 **Comments** (2 missing):
@@ -1412,7 +1414,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 403 tests**
+**Total missing: 404 tests**
 
 ### JavaScript Missing Tests
 
@@ -1898,7 +1900,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedvectors
 - streamsuint 64 truncationanddepth
 
-**Browser Bundle** (12 missing):
+**Browser Bundle** (13 missing):
 - anunhandlederroreventthrowslikenode.js
 - callslistenersinorderwiththeemitterasthis
 - inspectsandremoveslisteners
@@ -1910,6 +1912,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thedistbundleparsesandstreamslikethesource
 - thepublisheddistentrypointimportsnonodebuiltinsorpackages
 - thesourceentrypointimportsnonodebuiltinsorpackages
+- workswiththenode.jsevents.onasynciterator
 - workswiththenode.jsevents.oncehelper
 
 **Empty Reference** (2 missing):
@@ -2104,7 +2107,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 250 tests**
+**Total missing: 251 tests**
 
 ### C# Missing Tests
 
@@ -2196,7 +2199,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
 
-**Browser Bundle** (12 missing):
+**Browser Bundle** (13 missing):
 - anunhandlederroreventthrowslikenode.js
 - callslistenersinorderwiththeemitterasthis
 - inspectsandremoveslisteners
@@ -2208,6 +2211,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thedistbundleparsesandstreamslikethesource
 - thepublisheddistentrypointimportsnonodebuiltinsorpackages
 - thesourceentrypointimportsnonodebuiltinsorpackages
+- workswiththenode.jsevents.onasynciterator
 - workswiththenode.jsevents.oncehelper
 
 **Comments** (1 missing):
@@ -2519,7 +2523,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 355 tests**
+**Total missing: 356 tests**
 
 ### Go Missing Tests
 
@@ -2645,7 +2649,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
 
-**Browser Bundle** (12 missing):
+**Browser Bundle** (13 missing):
 - anunhandlederroreventthrowslikenode.js
 - callslistenersinorderwiththeemitterasthis
 - inspectsandremoveslisteners
@@ -2657,6 +2661,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thedistbundleparsesandstreamslikethesource
 - thepublisheddistentrypointimportsnonodebuiltinsorpackages
 - thesourceentrypointimportsnonodebuiltinsorpackages
+- workswiththenode.jsevents.onasynciterator
 - workswiththenode.jsevents.oncehelper
 
 **Comments** (2 missing):
@@ -3098,7 +3103,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 507 tests**
+**Total missing: 508 tests**
 
 ### Java Missing Tests
 
@@ -3219,7 +3224,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
 
-**Browser Bundle** (12 missing):
+**Browser Bundle** (13 missing):
 - anunhandlederroreventthrowslikenode.js
 - callslistenersinorderwiththeemitterasthis
 - inspectsandremoveslisteners
@@ -3231,6 +3236,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thedistbundleparsesandstreamslikethesource
 - thepublisheddistentrypointimportsnonodebuiltinsorpackages
 - thesourceentrypointimportsnonodebuiltinsorpackages
+- workswiththenode.jsevents.onasynciterator
 - workswiththenode.jsevents.oncehelper
 
 **Comments** (2 missing):
@@ -3635,7 +3641,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 465 tests**
+**Total missing: 466 tests**
 
 ### PHP Missing Tests
 
@@ -3759,7 +3765,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
 
-**Browser Bundle** (12 missing):
+**Browser Bundle** (13 missing):
 - anunhandlederroreventthrowslikenode.js
 - callslistenersinorderwiththeemitterasthis
 - inspectsandremoveslisteners
@@ -3771,6 +3777,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thedistbundleparsesandstreamslikethesource
 - thepublisheddistentrypointimportsnonodebuiltinsorpackages
 - thesourceentrypointimportsnonodebuiltinsorpackages
+- workswiththenode.jsevents.onasynciterator
 - workswiththenode.jsevents.oncehelper
 
 **Comments** (2 missing):
@@ -4114,7 +4121,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 415 tests**
+**Total missing: 416 tests**
 
 ### C++ Missing Tests
 
@@ -4199,7 +4206,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - stringbudgetstopsbeforelaterscalars
 - texthelperspreserveunicodewhitespacereferences
 
-**Browser Bundle** (12 missing):
+**Browser Bundle** (13 missing):
 - anunhandlederroreventthrowslikenode.js
 - callslistenersinorderwiththeemitterasthis
 - inspectsandremoveslisteners
@@ -4211,6 +4218,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thedistbundleparsesandstreamslikethesource
 - thepublisheddistentrypointimportsnonodebuiltinsorpackages
 - thesourceentrypointimportsnonodebuiltinsorpackages
+- workswiththenode.jsevents.onasynciterator
 - workswiththenode.jsevents.oncehelper
 
 **Empty Reference** (2 missing):
@@ -4467,5 +4475,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 305 tests**
+**Total missing: 306 tests**
 

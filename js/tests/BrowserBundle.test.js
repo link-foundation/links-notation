@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { once } from 'node:events';
+import { on, once } from 'node:events';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath, URL } from 'node:url';
 import { Emitter } from '../src/Emitter.js';
@@ -159,6 +159,25 @@ describe('Emitter', () => {
     stream.end('a b');
     const [links] = await ended;
     expect(links.map(String)).toEqual(['(a b)']);
+  });
+
+  test('works with the Node.js events.on async iterator', async () => {
+    const stream = new StreamParser();
+    const controller = new globalThis.AbortController();
+    const links = on(stream, 'link', { signal: controller.signal });
+    globalThis.setTimeout(() => stream.end('a b\nc d'), 0);
+    const seen = [];
+    try {
+      for await (const [link] of links) {
+        seen.push(String(link));
+        if (seen.length === 2) controller.abort();
+      }
+    } catch (error) {
+      if (error.name !== 'AbortError') throw error;
+    }
+    expect(seen).toEqual(['(a b)', '(c d)']);
+    expect(stream.listenerCount('link')).toBe(0);
+    expect(stream.listenerCount('error')).toBe(0);
   });
 
   test('StreamParser still throws the stream error without a listener', () => {
