@@ -967,10 +967,13 @@
         "js": {
           "status": "implemented",
           "implementation": [
-            "js/src/StreamParser.js"
+            "js/src/StreamParser.js",
+            "js/src/Emitter.js"
           ],
           "evidence": [
-            "js/tests/SharedTextParity.test.js"
+            "js/tests/SharedTextParity.test.js",
+            "js/tests/StreamParser.test.js",
+            "js/tests/BrowserBundle.test.js"
           ]
         },
         "rust": {
@@ -1531,6 +1534,7 @@
     "js": {
       "files": [
         "js/src/Binary.js",
+        "js/src/Emitter.js",
         "js/src/FormatConfig.js",
         "js/src/FormatOptions.js",
         "js/src/IndentedDocument.js",
@@ -1547,7 +1551,7 @@
         "js/src/quotes.js",
         "js/src/references.js"
       ],
-      "sha256": "1b065236842e11fd246742a362b18fd39102920b489af2321b645cb883c5612a"
+      "sha256": "f85aab9f93f37d0578dd7e485014e016d09361e162b0a59a199ea997677f147c"
     },
     "rust": {
       "files": [

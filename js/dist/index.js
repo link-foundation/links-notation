@@ -3072,8 +3072,104 @@ function formatIndentedDocument(entries) {
 `) + `
 ` : "";
 }
+// src/Emitter.js
+class Emitter {
+  #listeners = new Map;
+  on(event, listener) {
+    return this.#add(event, listener, false, false);
+  }
+  addListener(event, listener) {
+    return this.on(event, listener);
+  }
+  prependListener(event, listener) {
+    return this.#add(event, listener, false, true);
+  }
+  once(event, listener) {
+    return this.#add(event, listener, true, false);
+  }
+  prependOnceListener(event, listener) {
+    return this.#add(event, listener, true, true);
+  }
+  off(event, listener) {
+    checkListener(listener);
+    const entries = this.#listeners.get(event);
+    if (!entries)
+      return this;
+    const entry = entries.findLast((entry) => entry.listener === listener);
+    if (entry)
+      this.#remove(event, entry);
+    return this;
+  }
+  removeListener(event, listener) {
+    return this.off(event, listener);
+  }
+  removeAllListeners(event) {
+    if (event === undefined) {
+      this.#listeners.clear();
+    } else {
+      this.#listeners.delete(event);
+    }
+    return this;
+  }
+  emit(event, ...arguments_) {
+    const entries = this.#listeners.get(event);
+    if (!entries || entries.length === 0) {
+      if (event === "error") {
+        const error = arguments_[0];
+        if (error instanceof Error)
+          throw error;
+        throw new Error(`Unhandled error. (${String(error)})`);
+      }
+      return false;
+    }
+    for (const entry of [...entries]) {
+      if (entry.once)
+        this.#remove(event, entry);
+      entry.listener.apply(this, arguments_);
+    }
+    return true;
+  }
+  listeners(event) {
+    return (this.#listeners.get(event) ?? []).map((entry) => entry.listener);
+  }
+  listenerCount(event) {
+    return this.#listeners.get(event)?.length ?? 0;
+  }
+  eventNames() {
+    return [...this.#listeners.keys()];
+  }
+  #remove(event, entry) {
+    const entries = this.#listeners.get(event);
+    const index = entries?.indexOf(entry) ?? -1;
+    if (index === -1)
+      return;
+    entries.splice(index, 1);
+    if (entries.length === 0)
+      this.#listeners.delete(event);
+  }
+  #add(event, listener, once, prepend) {
+    checkListener(listener);
+    let entries = this.#listeners.get(event);
+    if (!entries) {
+      entries = [];
+      this.#listeners.set(event, entries);
+    }
+    const entry = { listener, once };
+    if (prepend) {
+      entries.unshift(entry);
+    } else {
+      entries.push(entry);
+    }
+    return this;
+  }
+}
+function checkListener(listener) {
+  if (typeof listener !== "function") {
+    throw new TypeError(`The "listener" argument must be a function. Received ${typeof listener}`);
+  }
+}
+
 // src/StreamParser.js
-import { EventEmitter } from "events";
 var DEFAULT_MAX_BUFFER_SIZE = 10 * 1024 * 1024;
 
 class StreamParseError extends Error {
@@ -3094,7 +3190,7 @@ class StreamParseError extends Error {
   }
 }
 
-class StreamParser extends EventEmitter {
+class StreamParser extends Emitter {
   constructor(options = {}) {
     super();
     this.parser = options.parser ?? new Parser(options);

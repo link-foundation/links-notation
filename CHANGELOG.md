@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Bundle the JavaScript package for browsers without an `events` polyfill.
+  Prepare 0.27.1; see [the release fragment](changelog.d/351.md) and
+  [issue 351](https://github.com/link-foundation/links-notation/issues/351).
+
 ### Changed
 
 - Update every dependency and toolchain in all eight bindings, pin Maven, test
