@@ -77,7 +77,7 @@ jobs:
       - name: Setup Rust for binary interoperability checks
         uses: dtolnay/rust-toolchain@stable
       - name: Cache Cargo
-        uses: Swatinem/rust-cache@v2.9.2
+        uses: Swatinem/rust-cache@v2.9.3
         with:
           workspaces: rust
       - name: Compare Rust and C# binary codecs
@@ -132,7 +132,7 @@ jobs:
       # Python 3.13 instead. update-environment keeps the job's python3.
       - name: Setup Python for latexminted
         id: latexminted-python
-        uses: actions/setup-python@v7.0.0
+        uses: actions/setup-python@v7.1.0
         with:
           python-version: '3.13'
           update-environment: false
