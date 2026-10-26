@@ -46,7 +46,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Set up Python
-        uses: actions/setup-python@v7.0.0
+        uses: actions/setup-python@v7.1.0
         with:
           python-version: "3.15"
       - name: Install dependencies
@@ -93,7 +93,7 @@ jobs:
       # and set the `PYPI_TRUSTED_PUBLISHING` repository variable to `true`.
       - name: Publish to PyPI
         if: steps.version-check.outputs.should_publish == 'true'
-        uses: pypa/gh-action-pypi-publish@v1.14.2
+        uses: pypa/gh-action-pypi-publish@v1.14.3
         with:
           packages-dir: python/dist
           password: ${{ vars.PYPI_TRUSTED_PUBLISHING == 'true' && '' || secrets.PYPI_TOKEN }}
