@@ -175,7 +175,14 @@ def main():
     repository = os.environ.get("GITHUB_REPOSITORY")
     if repository:
         existing = subprocess.run(
-            ["gh", "api", f"repos/{repository}/labels", "--paginate", "--jq", ".[].name"],
+            [
+                "gh",
+                "api",
+                f"repos/{repository}/labels",
+                "--paginate",
+                "--jq",
+                ".[].name",
+            ],
             check=True,
             capture_output=True,
             text=True,

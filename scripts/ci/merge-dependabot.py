@@ -28,12 +28,12 @@ approval, so it is never used.
 """
 
 import argparse
-from dataclasses import dataclass, field
 import json
 import os
 import re
 import subprocess
 import sys
+from dataclasses import dataclass, field
 
 DEPENDABOT = "dependabot[bot]"
 AUTOMATIC = {"version-update:semver-minor", "version-update:semver-patch"}
@@ -151,7 +151,11 @@ def plan(pulls, required, strict):
         if gate != "passed":
             decided[pull.number] = ("skip", pull, "behind; " + detail)
         elif rebased:
-            decided[pull.number] = ("skip", pull, "behind; updated after the next merge")
+            decided[pull.number] = (
+                "skip",
+                pull,
+                "behind; updated after the next merge",
+            )
         elif pull.rebase_requested and not merged:
             decided[pull.number] = ("skip", pull, "behind; update already requested")
         else:
@@ -185,8 +189,12 @@ class GitHub:
         for rule in self.api("rules/branches/" + branch):
             if rule["type"] == "required_status_checks":
                 parameters = rule["parameters"]
-                required.update(c["context"] for c in parameters["required_status_checks"])
-                strict = strict or parameters.get("strict_required_status_checks_policy", False)
+                required.update(
+                    c["context"] for c in parameters["required_status_checks"]
+                )
+                strict = strict or parameters.get(
+                    "strict_required_status_checks_policy", False
+                )
         return required, strict
 
     def checks(self, sha):
@@ -201,7 +209,10 @@ class GitHub:
         for line in output.splitlines():
             identifier, name, status, conclusion = json.loads(line)
             if name not in latest or identifier > latest[name][0]:
-                latest[name] = (identifier, conclusion if status == "completed" else None)
+                latest[name] = (
+                    identifier,
+                    conclusion if status == "completed" else None,
+                )
         checks = {name: conclusion for name, (_, conclusion) in latest.items()}
         statuses = self.api(f"commits/{sha}/status")["statuses"]
         for status in statuses:
@@ -251,14 +262,17 @@ class GitHub:
         committed = self.api(f"commits/{pull.head}")["commit"]["committer"]["date"]
         comments = self.api(f"issues/{pull.number}/comments?per_page=100")
         return any(
-            c["body"].strip() == REBASE and c["created_at"] > committed for c in comments
+            c["body"].strip() == REBASE and c["created_at"] > committed
+            for c in comments
         )
 
 
 def usable(github, token):
     """Whether `token` can push to the repository (an expired PAT cannot)."""
     try:
-        return bool(github.api("", "--jq", "{push: .permissions.push}", token=token)["push"])
+        return bool(
+            github.api("", "--jq", "{push: .permissions.push}", token=token)["push"]
+        )
     except (RuntimeError, TypeError, KeyError):
         return False
 

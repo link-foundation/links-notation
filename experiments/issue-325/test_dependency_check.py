@@ -379,14 +379,20 @@ class DependencyCheckTests(unittest.TestCase):
             selected = CHECK.changed(CHECK.manifests(root), "HEAD", root)
             self.assertEqual(
                 sorted((d.name, d.declared) for d in selected),
-                [("added", "^3.0.0"), ("bumped", "^1.0.1"), ("example.com/new", "v1.2.3")],
+                [
+                    ("added", "^3.0.0"),
+                    ("bumped", "^1.0.1"),
+                    ("example.com/new", "v1.2.3"),
+                ],
             )
 
     def test_changed_since_checks_everything_when_the_revision_is_unpinned(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             (root / "js").mkdir()
-            (root / "js/package.json").write_text(json.dumps({"dependencies": {"a": 1}}))
+            (root / "js/package.json").write_text(
+                json.dumps({"dependencies": {"a": 1}})
+            )
             for args in (["init", "-q"], ["add", "."], ["commit", "-qm", "base"]):
                 subprocess.run(
                     ["git", "-c", "user.name=t", "-c", "user.email=t@t", *args],
@@ -432,7 +438,9 @@ class DependencyCheckTests(unittest.TestCase):
                 contextlib.redirect_stdout(io.StringIO()) as output,
             ):
                 self.assertTrue(CHECK.main())
-            self.assertIn("OUTDATED js/package.json: bumped ^1.0.1 -> 1.0.2", output.getvalue())
+            self.assertIn(
+                "OUTDATED js/package.json: bumped ^1.0.1 -> 1.0.2", output.getvalue()
+            )
 
             # A registry error fails only for a package that can fail the check.
             def unavailable(failing):

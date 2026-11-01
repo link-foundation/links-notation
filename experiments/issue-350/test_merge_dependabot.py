@@ -142,7 +142,10 @@ class Plan(unittest.TestCase):
         broken = dict(GREEN, Rust="failure")
         self.assertEqual(
             actions(
-                [pull(1, behind=True, checks=broken), pull(2, behind=True, checks=stale)]
+                [
+                    pull(1, behind=True, checks=broken),
+                    pull(2, behind=True, checks=stale),
+                ]
             ),
             [
                 ("rebase", 2, "behind the base branch"),
@@ -242,6 +245,7 @@ class Main(unittest.TestCase):
         self.assertEqual(github.run.call_count, 2)
         self.assertIn("::error::#1 merge failed: gh pr merge: head changed", output)
         self.assertIn("#2 rebase", output)
+
 
 if __name__ == "__main__":
     unittest.main()
