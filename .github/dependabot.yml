@@ -8,7 +8,7 @@
 #
 # Updates run daily, like the freshness gate in dependencies.yml that fails
 # CI once a release is out. In each ecosystem, minor and patch updates arrive as
-# one grouped pull request (AutoMerge.yml can merge it once CI passes); a
+# one grouped pull request (AutoMerge.yml merges it once CI passes); a
 # major update arrives on its own, because crossing a major means reading the
 # changelog and adapting the code, not just bumping a number.
 version: 2
@@ -194,7 +194,8 @@ updates:
       actions-minor-and-patch:
         update-types: ["minor", "patch"]
     open-pull-requests-limit: 10
-    labels: ["dependencies", "github-actions"]
+    # Dependabot's own default label for this ecosystem, which exists here.
+    labels: ["dependencies", "github_actions"]
     commit-message:
       prefix: "chore(deps)"
 

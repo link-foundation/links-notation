@@ -4,6 +4,7 @@ import contextlib
 import importlib.util
 import io
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -333,6 +334,131 @@ class DependencyCheckTests(unittest.TestCase):
         with patch.object(CHECK, "get", side_effect=OSError("registry unavailable")):
             with self.assertRaisesRegex(OSError, "registry unavailable"):
                 CHECK.latest("npm", "example")
+
+    def test_changed_since_selects_only_declarations_the_revision_lacks(self):
+        # Issue #350: a pull request is gated on the declarations it changes,
+        # not on every other package in the same or another manifest.
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+
+            def git(*args):
+                subprocess.run(
+                    ["git", "-c", "user.name=t", "-c", "user.email=t@t", *args],
+                    cwd=root,
+                    check=True,
+                    capture_output=True,
+                )
+
+            (root / "js").mkdir()
+            (root / "js/package.json").write_text(
+                json.dumps({"dependencies": {"bumped": "^1.0.0", "kept": "^1.0.0"}})
+            )
+            (root / "php").mkdir()
+            (root / "php/composer.json").write_text(
+                json.dumps({"require": {"demo/kept": "^1.0.0"}})
+            )
+            git("init", "-q")
+            git("add", ".")
+            git("commit", "-qm", "base")
+            (root / "js/package.json").write_text(
+                json.dumps(
+                    {
+                        "dependencies": {
+                            "bumped": "^1.0.1",
+                            "kept": "^1.0.0",
+                            "added": "^3.0.0",
+                        }
+                    }
+                )
+            )
+            # A manifest the base revision does not have at all.
+            (root / "go").mkdir()
+            (root / "go/go.mod").write_text(
+                "module demo\n\nrequire (\n\texample.com/new v1.2.3\n)\n"
+            )
+            selected = CHECK.changed(CHECK.manifests(root), "HEAD", root)
+            self.assertEqual(
+                sorted((d.name, d.declared) for d in selected),
+                [
+                    ("added", "^3.0.0"),
+                    ("bumped", "^1.0.1"),
+                    ("example.com/new", "v1.2.3"),
+                ],
+            )
+
+    def test_changed_since_checks_everything_when_the_revision_is_unpinned(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "js").mkdir()
+            (root / "js/package.json").write_text(
+                json.dumps({"dependencies": {"a": 1}})
+            )
+            for args in (["init", "-q"], ["add", "."], ["commit", "-qm", "base"]):
+                subprocess.run(
+                    ["git", "-c", "user.name=t", "-c", "user.email=t@t", *args],
+                    cwd=root,
+                    check=True,
+                    capture_output=True,
+                )
+            (root / "js/package.json").write_text(
+                json.dumps({"dependencies": {"a": "^1.0.0", "b": "^2.0.0"}})
+            )
+            current = CHECK.manifests(root)
+            with contextlib.redirect_stdout(io.StringIO()) as output:
+                self.assertEqual(CHECK.changed(current, "HEAD", root), current)
+            self.assertIn("cannot be compared", output.getvalue())
+
+    def test_changed_since_fails_only_for_changed_declarations(self):
+        bumped = CHECK.Dependency(
+            CHECK.ROOT / "js/package.json", "npm", "bumped", "^1.0.1", "^1.0.1"
+        )
+        other = CHECK.Dependency(
+            CHECK.ROOT / "java/pom.xml", "maven", "demo:other", "1.0.0", "1.0.0"
+        )
+        releases = {"bumped": "1.0.1", "demo:other": "2.0.0"}
+        with (
+            patch.object(CHECK, "manifests", return_value=[bumped, other]),
+            patch.object(CHECK, "changed", return_value=[bumped]) as changed,
+            patch.object(sys, "argv", ["check", "--changed-since", "HEAD^1"]),
+        ):
+            with (
+                patch.object(CHECK, "latest", side_effect=lambda _, n: releases[n]),
+                contextlib.redirect_stdout(io.StringIO()) as output,
+            ):
+                self.assertFalse(CHECK.main())
+            changed.assert_called_with([bumped, other], "HEAD^1")
+            self.assertIn(
+                "NOTE java/pom.xml: demo:other 1.0.0 -> 2.0.0 (not changed by this pull request)",
+                output.getvalue(),
+            )
+            self.assertNotIn("OUTDATED", output.getvalue())
+            # The changed declaration is still held to the latest release.
+            with (
+                patch.object(CHECK, "latest", return_value="1.0.2"),
+                contextlib.redirect_stdout(io.StringIO()) as output,
+            ):
+                self.assertTrue(CHECK.main())
+            self.assertIn(
+                "OUTDATED js/package.json: bumped ^1.0.1 -> 1.0.2", output.getvalue()
+            )
+
+            # A registry error fails only for a package that can fail the check.
+            def unavailable(failing):
+                def latest(_, name):
+                    if name == failing:
+                        raise OSError("registry unavailable")
+                    return releases[name]
+
+                return latest
+
+            for failing, expected in (("demo:other", False), ("bumped", True)):
+                with (
+                    self.subTest(failing=failing),
+                    patch.object(CHECK, "latest", side_effect=unavailable(failing)),
+                    contextlib.redirect_stdout(io.StringIO()),
+                    contextlib.redirect_stderr(io.StringIO()),
+                ):
+                    self.assertEqual(CHECK.main(), expected)
 
     def test_gate_fails_for_stale_dependencies_and_registry_errors(self):
         dependency = CHECK.Dependency(

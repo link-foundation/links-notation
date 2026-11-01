@@ -12,10 +12,12 @@ on:
     paths:
       - '.github/**'
       - 'scripts/ci/**'
+      - 'experiments/issue-350/**'
   pull_request:
     paths:
       - '.github/**'
       - 'scripts/ci/**'
+      - 'experiments/issue-350/**'
   workflow_dispatch:
 
 permissions:
@@ -65,6 +67,10 @@ jobs:
         run: bash scripts/ci/registry-probe.test.sh
       - name: Test the C++ release archive
         run: bash scripts/ci/cpp-release-archive.test.sh
+      # AutoMerge.yml never runs on a pull request that changes it, so the
+      # merge planner it calls is tested here (issue #350).
+      - name: Test the Dependabot merge planner
+        run: python3 experiments/issue-350/test_merge_dependabot.py
 
   zizmor:
     runs-on: ubuntu-26.04

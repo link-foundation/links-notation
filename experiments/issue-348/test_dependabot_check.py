@@ -1,9 +1,13 @@
 """Offline regressions for the Dependabot coverage CI gate (issue #348)."""
 
+import contextlib
 import importlib.util
+import io
+import os
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 SPEC = importlib.util.spec_from_file_location(
     "dependabot",
@@ -99,8 +103,39 @@ class DependabotCheckTests(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertEqual(CHECK.ecosystems(path), expected)
 
+    def test_labels_in_both_list_styles_are_read(self):
+        text = (
+            'updates:\n  - package-ecosystem: "npm"\n'
+            '    labels: ["dependencies", "javascript"]\n'
+            "  - package-ecosystem: maven\n    labels:\n      - java\n"
+            "      - 'help wanted'  # quoted\n    schedule:\n      interval: daily\n"
+        )
+        self.assertEqual(
+            CHECK.labels(text), {"dependencies", "javascript", "java", "help wanted"}
+        )
+
+    def test_a_label_the_repository_lacks_is_reported(self):
+        # Issue #350: Dependabot only comments "The following labels could
+        # not be found: `csharp`" on each pull request.
+        text = '    labels: ["dependencies", "csharp"]\n'
+        self.assertEqual(
+            CHECK.missing_labels(text, ["dependencies"]),
+            [
+                "label 'csharp' does not exist; create it with "
+                "`gh label create csharp` or remove it"
+            ],
+        )
+        self.assertEqual(CHECK.missing_labels(text, ["dependencies", "csharp"]), [])
+
     def test_repository_config_covers_every_manifest(self):
-        self.assertEqual(CHECK.main(), 0)
+        # Offline: the labels are checked against the live repository by the
+        # workflow step that runs the script itself.
+        environment = {k: v for k, v in os.environ.items() if k != "GITHUB_REPOSITORY"}
+        with (
+            mock.patch.dict(os.environ, environment, clear=True),
+            contextlib.redirect_stdout(io.StringIO()),
+        ):
+            self.assertEqual(CHECK.main(), 0)
 
 
 if __name__ == "__main__":
