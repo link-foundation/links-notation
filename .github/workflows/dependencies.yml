@@ -31,8 +31,11 @@ jobs:
       - name: Test the dependency checker without network access
         run: python experiments/issue-325/test_dependency_check.py
       # A manifest Dependabot is not told about never receives an update; the
-      # old config missed 35 committed manifests (issue #348).
+      # old config missed 35 committed manifests (issue #348). A label it is
+      # told to apply has to exist, or it is silently dropped (issue #350).
       - name: Require a Dependabot entry for every committed manifest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python experiments/issue-348/test_dependabot_check.py
           python scripts/ci/check-dependabot.py
