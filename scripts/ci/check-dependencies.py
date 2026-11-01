@@ -4,18 +4,27 @@
 Archived experiments, case studies and dev/log snapshots deliberately retain
 historical versions. Platform runtimes and local project references are not
 registry dependencies. Registry errors fail the check rather than hide updates.
+
+With --changed-since REV (pull requests), only the declarations that differ
+from REV can fail; the rest are listed as NOTE lines. A pull request that bumps
+one package would otherwise fail for every other package that is behind,
+including the ones other open Dependabot pull requests update (issue #350).
+The scheduled and main-branch runs still check the whole repository.
 """
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
 import re
 import subprocess
 import sys
+import tarfile
+import tempfile
 import tomllib
 import urllib.parse
 import urllib.request
@@ -372,6 +381,51 @@ def manifests(root=ROOT):
     return list(dict.fromkeys(found))
 
 
+def changed(dependencies, revision, root=ROOT):
+    """The declarations in `dependencies` that `revision` does not have.
+
+    A declaration is the manifest path, package and version requirement, so
+    a bumped or newly added dependency is changed; an untouched one is not,
+    even in a manifest the pull request edits.
+    """
+    paths = [
+        path
+        for path in (*ACTIVE, ".github/workflows", ".pre-commit-config.yaml")
+        if subprocess.run(
+            ["git", "cat-file", "-e", revision + ":" + path],
+            cwd=root,
+            capture_output=True,
+        ).returncode
+        == 0
+    ]
+    with tempfile.TemporaryDirectory() as temporary:
+        base = Path(temporary)
+        if paths:
+            archive = subprocess.run(
+                ["git", "archive", "--format=tar", revision, "--", *paths],
+                cwd=root,
+                check=True,
+                capture_output=True,
+            ).stdout
+            with tarfile.open(fileobj=io.BytesIO(archive)) as tar:
+                tar.extractall(base, filter="data")
+        try:
+            before = {
+                (d.path.relative_to(base), d.ecosystem, d.name, d.declared)
+                for d in manifests(base)
+            }
+        except ValueError as error:
+            # The revision itself would fail this check, so nothing it
+            # declares can be trusted as already checked.
+            print(f"NOTE {revision} cannot be compared ({error}); checking everything")
+            return list(dependencies)
+    return [
+        d
+        for d in dependencies
+        if (d.path.relative_to(root), d.ecosystem, d.name, d.declared) not in before
+    ]
+
+
 def registry_literal(dependency, release):
     if dependency.ecosystem == "github-input" or (
         dependency.ecosystem == "github" and dependency.name == "rhysd/actionlint"
@@ -559,9 +613,20 @@ def main():
     parser.add_argument(
         "--snapshot", type=Path, help="save registry responses for review"
     )
+    parser.add_argument(
+        "--changed-since",
+        metavar="REV",
+        help="fail only for declarations that differ from git revision REV",
+    )
     args = parser.parse_args()
     dependencies = manifests()
+    gated = (
+        set(changed(dependencies, args.changed_since))
+        if args.changed_since
+        else set(dependencies)
+    )
     keys = sorted({(d.ecosystem, d.name) for d in dependencies})
+    gated_keys = {(d.ecosystem, d.name) for d in gated}
     releases = {}
 
     def query(key):
@@ -581,7 +646,10 @@ def main():
             json.dumps({f"{e}:{n}": v for (e, n), v in releases.items()}, indent=2)
             + "\n"
         )
-    failures = len(keys) - len(releases)
+    # A registry error hides whether the package is current, so it fails the
+    # check for every package that can fail it.
+    failures = len(gated_keys - set(releases))
+    stale = 0
     for dependency in dependencies:
         release = releases.get((dependency.ecosystem, dependency.name))
         if release is None:
@@ -590,9 +658,12 @@ def main():
             dependency.ecosystem == "github"
             and dependency.literal != registry_literal(dependency, release)
         ):
-            print(
-                f"OUTDATED {dependency.path.relative_to(ROOT)}: {dependency.name} {dependency.declared} -> {release}"
-            )
+            line = f"{dependency.path.relative_to(ROOT)}: {dependency.name} {dependency.declared} -> {release}"
+            if dependency not in gated:
+                print(f"NOTE {line} (not changed by this pull request)")
+                stale += 1
+                continue
+            print(f"OUTDATED {line}")
             if args.update:
                 update(dependency, release)
             else:
@@ -600,8 +671,20 @@ def main():
     print(
         f"Checked {len(dependencies)} declarations, {len(keys)} published packages/actions."
     )
+    if args.changed_since:
+        print(
+            f"{len(gated)} declarations differ from {args.changed_since} and can "
+            f"fail this check; {stale} unchanged ones are behind and fail the "
+            "scheduled check on main instead."
+        )
     if args.update:
         print("Regenerate lockfiles and run tests before committing the updates.")
+    elif failures:
+        print(
+            "To fix: merge the open Dependabot pull requests, or run "
+            "`python scripts/ci/check-dependencies.py --update`, regenerate the "
+            "lockfiles and commit the result."
+        )
     return bool(failures)
 
 
