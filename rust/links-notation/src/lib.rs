@@ -1,5 +1,6 @@
 pub mod binary;
 pub mod comments;
+pub mod cst;
 pub mod format_config;
 pub mod parser;
 pub mod parser_config;
@@ -7,14 +8,17 @@ mod quotes;
 pub mod reference_literal;
 pub use reference_literal::{decode_reference_literal, encode_reference_literal};
 pub mod stream_parser;
+pub mod syntax;
 
 use comments::strip_comments;
+pub use cst::{CstKind, CstNode, parse_lino_to_cst, parse_lino_to_cst_with_config};
 use format_config::FormatConfig;
 pub use parser_config::ParserConfig;
 use std::borrow::Cow;
 pub use stream_parser::{
-    ErrorLocation, StreamIterator, StreamParseError, StreamParser, StreamPosition,
+    ErrorLocation, StreamIterator, StreamParseError, StreamParser, StreamPosition, StreamReference,
 };
+pub use syntax::{SyntaxReference, reference_quote};
 
 // Re-export the lino! macro when the macro feature is enabled
 #[cfg(feature = "macro")]
@@ -686,11 +690,68 @@ impl<T: ToString> fmt::Display for LiNo<T> {
     }
 }
 
+impl LiNo<SyntaxReference> {
+    /// The same link with plain IDs, which is what the AST mode reads: every
+    /// [`SyntaxReference`] becomes its [`value`](SyntaxReference::value).
+    ///
+    /// # Examples
+    /// ```
+    /// use links_notation::{LiNo, parse_lino_to_links, parse_lino_to_syntax_links};
+    ///
+    /// let syntax = parse_lino_to_syntax_links("('a': \"b\")").unwrap();
+    /// let plain: LiNo<String> = syntax[0].clone().into_values();
+    /// assert_eq!(plain, parse_lino_to_links("(a: b)").unwrap()[0]);
+    /// assert_eq!(LiNo::<String>::from(syntax[0].clone()), plain);
+    /// ```
+    pub fn into_values(self) -> LiNo<String> {
+        match self {
+            LiNo::Ref(reference) => LiNo::Ref(reference.value),
+            LiNo::Link { id, values } => LiNo::Link {
+                id: id.map(|id| id.value),
+                values: values.into_iter().map(LiNo::into_values).collect(),
+            },
+        }
+    }
+
+    /// The ID exactly as the document wrote it: the text of a reference, or of
+    /// a link's ID. `None` for a link without an ID and for a reference built
+    /// in code.
+    ///
+    /// # Examples
+    /// ```
+    /// use links_notation::{LiNo, parse_lino_to_syntax_links};
+    ///
+    /// let links = parse_lino_to_syntax_links("'a': ~1{62}").unwrap();
+    /// assert_eq!(links[0].raw_id(), Some("'a'"));
+    /// let LiNo::Link { values, .. } = &links[0] else { unreachable!() };
+    /// assert_eq!(values[0].raw_id(), Some("~1{62}"));
+    /// ```
+    pub fn raw_id(&self) -> Option<&str> {
+        match self {
+            LiNo::Ref(reference) => reference.raw.as_deref(),
+            LiNo::Link { id, .. } => id.as_ref().and_then(|id| id.raw.as_deref()),
+        }
+    }
+
+    /// The delimiter the ID was written between: `'`, `"` or `` ` `` when it
+    /// was quoted, and `None` otherwise; see [`SyntaxReference::quote`].
+    pub fn quote(&self) -> Option<char> {
+        self.raw_id().and_then(reference_quote)
+    }
+}
+
+/// Drops how the IDs were written; see [`LiNo::into_values`].
+impl From<LiNo<SyntaxReference>> for LiNo<String> {
+    fn from(link: LiNo<SyntaxReference>) -> Self {
+        link.into_values()
+    }
+}
+
 // Convert from parser::Link to LiNo (without flattening)
 impl From<parser::Link> for LiNo<String> {
     fn from(link: parser::Link) -> Self {
         if let Some(body) = &link.nested {
-            return transform_nested(body);
+            return transform_nested(body, &plain_id);
         }
         if link.values.is_empty() && link.children.is_empty() {
             if let Some(id) = link.id {
@@ -711,6 +772,30 @@ impl From<parser::Link> for LiNo<String> {
     }
 }
 
+/// How the links of a parsed document get their IDs: as the plain value, or as
+/// a [`SyntaxReference`] that also records how the ID was written.
+trait IdReader<T>: Fn(&parser::Link) -> Option<T> {}
+
+impl<T, F: Fn(&parser::Link) -> Option<T>> IdReader<T> for F {}
+
+/// The ID of a parsed link, as its plain value.
+fn plain_id(link: &parser::Link) -> Option<String> {
+    link.id.clone()
+}
+
+/// The ID of a parsed link with the text it was written as, sliced from the
+/// document the caller passed in rather than from the comment-blanked copy the
+/// parser read, which keeps every byte where it was.
+fn syntax_id(link: &parser::Link, document: &str) -> Option<SyntaxReference> {
+    let value = link.id.clone()?;
+    let raw = link
+        .id_span
+        .as_ref()
+        .and_then(|span| document.get(span.clone()))
+        .map(str::to_owned);
+    Some(SyntaxReference { value, raw })
+}
+
 // A parenthesized group is a nested document: its body follows the same rules as
 // the root, so it is flattened the same way. A body that produces a single link
 // collapses to that link, unless the body is a single parenthesized group, which
@@ -718,8 +803,8 @@ impl From<parser::Link> for LiNo<String> {
 //
 // The body is borrowed, not copied: copying it at every level would copy the
 // levels below once per level above them, which is quadratic in the nesting.
-fn transform_nested(body: &[parser::Link]) -> LiNo<String> {
-    let links = flatten_links(body);
+fn transform_nested<T: Clone, F: IdReader<T>>(body: &[parser::Link], id: &F) -> LiNo<T> {
+    let links = flatten_links(body, id);
     let wraps_single_group =
         body.len() == 1 && body[0].nested.is_some() && body[0].children.is_empty();
     if links.len() == 1 && !wraps_single_group {
@@ -732,20 +817,21 @@ fn transform_nested(body: &[parser::Link]) -> LiNo<String> {
 }
 
 // Helper function to flatten indented structures according to Lino spec
-fn flatten_links(links: &[parser::Link]) -> Vec<LiNo<String>> {
+fn flatten_links<T: Clone, F: IdReader<T>>(links: &[parser::Link], id: &F) -> Vec<LiNo<T>> {
     let mut result = vec![];
 
     for link in links {
-        flatten_link_recursive(link, None, &mut result);
+        flatten_link_recursive(link, None, &mut result, id);
     }
 
     result
 }
 
-fn flatten_link_recursive(
+fn flatten_link_recursive<T: Clone, F: IdReader<T>>(
     link: &parser::Link,
-    parent: Option<&LiNo<String>>,
-    result: &mut Vec<LiNo<String>>,
+    parent: Option<&LiNo<T>>,
+    result: &mut Vec<LiNo<T>>,
+    id: &F,
 ) {
     // Special case: If this is an indented ID (with colon) with children,
     // the children should become the values of the link (indented ID syntax)
@@ -754,11 +840,14 @@ fn flatten_link_recursive(
         && link.values.is_empty()
         && !link.children.is_empty()
     {
-        let child_values: Vec<LiNo<String>> =
-            link.children.iter().map(transform_indented_value).collect();
+        let child_values: Vec<LiNo<T>> = link
+            .children
+            .iter()
+            .map(|child| transform_indented_value(child, id))
+            .collect();
 
         let current = LiNo::Link {
-            id: link.id.clone(),
+            id: id(link),
             values: child_values,
         };
 
@@ -786,10 +875,10 @@ fn flatten_link_recursive(
 
     // Create the current link without children
     let current = if let Some(body) = &link.nested {
-        transform_nested(body)
+        transform_nested(body, id)
     } else if link.values.is_empty() {
-        if let Some(id) = &link.id {
-            LiNo::Ref(id.clone())
+        if let Some(id) = id(link) {
+            LiNo::Ref(id)
         } else {
             LiNo::Link {
                 id: None,
@@ -798,8 +887,12 @@ fn flatten_link_recursive(
         }
     } else {
         LiNo::Link {
-            id: link.id.clone(),
-            values: link.values.iter().map(transform_value).collect(),
+            id: id(link),
+            values: link
+                .values
+                .iter()
+                .map(|value| transform_value(value, id))
+                .collect(),
         }
     };
 
@@ -842,18 +935,18 @@ fn flatten_link_recursive(
 
     // Process children
     for child in &link.children {
-        flatten_link_recursive(child, Some(&combined), result);
+        flatten_link_recursive(child, Some(&combined), result, id);
     }
 }
 
 // Convert a link without its indented children, borrowing the parsed tree.
-fn transform_value(link: &parser::Link) -> LiNo<String> {
+fn transform_value<T: Clone, F: IdReader<T>>(link: &parser::Link, id: &F) -> LiNo<T> {
     if let Some(body) = &link.nested {
-        return transform_nested(body);
+        return transform_nested(body, id);
     }
     if link.values.is_empty() {
-        return match &link.id {
-            Some(id) => LiNo::Ref(id.clone()),
+        return match id(link) {
+            Some(id) => LiNo::Ref(id),
             None => LiNo::Link {
                 id: None,
                 values: vec![],
@@ -861,21 +954,29 @@ fn transform_value(link: &parser::Link) -> LiNo<String> {
         };
     }
     LiNo::Link {
-        id: link.id.clone(),
-        values: link.values.iter().map(transform_value).collect(),
+        id: id(link),
+        values: link
+            .values
+            .iter()
+            .map(|value| transform_value(value, id))
+            .collect(),
     }
 }
 
 // Convert a child line and all its descendants into one value of an indented ID.
-fn transform_indented_value(link: &parser::Link) -> LiNo<String> {
-    let children: Vec<_> = link.children.iter().map(transform_indented_value).collect();
+fn transform_indented_value<T: Clone, F: IdReader<T>>(link: &parser::Link, id: &F) -> LiNo<T> {
+    let children: Vec<_> = link
+        .children
+        .iter()
+        .map(|child| transform_indented_value(child, id))
+        .collect();
     if !children.is_empty() && link.is_indented_id && link.id.is_some() && link.values.is_empty() {
         return LiNo::Link {
-            id: link.id.clone(),
+            id: id(link),
             values: children,
         };
     }
-    let current = transform_value(link);
+    let current = transform_value(link, id);
 
     if !children.is_empty() {
         match current {
@@ -924,6 +1025,11 @@ fn prepare<'a>(document: &'a str, config: &ParserConfig) -> Cow<'a, str> {
 /// the end of the line; [`parse_lino_with_config`] reads a document without
 /// them.
 ///
+/// This is the AST mode: the links hold what each reference means, not how it
+/// was written. [`parse_lino_to_syntax_links`] reads the same links with the
+/// text of every ID, and [`parse_lino_to_cst`] reads every character of the
+/// document.
+///
 /// # Examples
 /// ```
 /// use links_notation::parse_lino;
@@ -970,7 +1076,7 @@ pub fn parse_lino_with_config(
                 })
             } else {
                 // Flatten the indented structure according to Lino spec
-                let flattened = flatten_links(&links);
+                let flattened = flatten_links(&links, &plain_id);
                 Ok(LiNo::Link {
                     id: None,
                     values: flattened,
@@ -981,7 +1087,19 @@ pub fn parse_lino_with_config(
     }
 }
 
-// New function that matches C# and JS API - returns collection of links
+/// Reads a document into a collection of links, with comments.
+///
+/// This is the AST mode: `1` and `'1'` are both read as the reference `1`.
+/// [`parse_lino_to_syntax_links`] reads the same links and records how each ID
+/// was written, and [`parse_lino_to_cst`] keeps every character of the document.
+///
+/// # Examples
+/// ```
+/// use links_notation::{format_links, parse_lino_to_links};
+///
+/// let links = parse_lino_to_links("(t 1 '1')").unwrap();
+/// assert_eq!(format_links(&links), "(t 1 1)");
+/// ```
 pub fn parse_lino_to_links(document: &str) -> Result<Vec<LiNo<String>>, ParseError> {
     parse_lino_to_links_with_config(document, &ParserConfig::default())
 }
@@ -1000,6 +1118,74 @@ pub fn parse_lino_to_links_with_config(
     document: &str,
     config: &ParserConfig,
 ) -> Result<Vec<LiNo<String>>, ParseError> {
+    read_links(document, config, &plain_id)
+}
+
+/// Reads a document into a collection of links whose references record how
+/// they were written.
+///
+/// The links are the ones [`parse_lino_to_links`] reads, with every ID a
+/// [`SyntaxReference`]: its [`value`](SyntaxReference::value) is the ID
+/// `parse_lino_to_links` reads and its [`raw`](SyntaxReference::raw) is the ID
+/// exactly as written, so `(t 1 '1')` still holds two equal references `1` but
+/// the second one knows it was quoted. A link made by combining the lines of an
+/// indented document has no ID, so it has no raw text either.
+///
+/// [`parse_lino_to_links`] and [`parse_lino`] are the AST mode: they read the
+/// same links without the syntax. Turn one into the other with
+/// [`LiNo::into_values`] or `From`. [`StreamParser::syntax`] reads the same
+/// links from a stream.
+///
+/// # Examples
+/// ```
+/// use links_notation::{LiNo, format_links, parse_lino_to_links, parse_lino_to_syntax_links};
+///
+/// let links = parse_lino_to_syntax_links("(\"a\": 'b' c)").unwrap();
+/// let LiNo::Link { id: Some(id), values } = &links[0] else { unreachable!() };
+/// assert_eq!(id.value, "a");
+/// assert_eq!(id.raw.as_deref(), Some("\"a\""));
+/// assert_eq!(id.quote(), Some('"'));
+/// assert_eq!(values[0].raw_id(), Some("'b'"));
+/// assert_eq!(values[1].quote(), None);
+///
+/// // Formatting and the plain links are exactly what the AST mode reads.
+/// assert_eq!(format!("{}", links[0]), "(a: b c)");
+/// let plain: Vec<LiNo<String>> = links.into_iter().map(LiNo::into_values).collect();
+/// assert_eq!(plain, parse_lino_to_links("(\"a\": 'b' c)").unwrap());
+/// assert_eq!(format_links(&plain), "(a: b c)");
+/// ```
+pub fn parse_lino_to_syntax_links(
+    document: &str,
+) -> Result<Vec<LiNo<SyntaxReference>>, ParseError> {
+    parse_lino_to_syntax_links_with_config(document, &ParserConfig::default())
+}
+
+/// Reads a document the way `config` says to into a collection of links whose
+/// references record how they were written; see [`parse_lino_to_syntax_links`].
+///
+/// # Examples
+/// ```
+/// use links_notation::{LiNo, ParserConfig, parse_lino_to_syntax_links_with_config};
+///
+/// let config = ParserConfig::without_comments();
+/// let links = parse_lino_to_syntax_links_with_config("a #b", &config).unwrap();
+/// let LiNo::Link { values, .. } = &links[0] else { unreachable!() };
+/// assert_eq!(values[1].raw_id(), Some("#b"));
+/// ```
+pub fn parse_lino_to_syntax_links_with_config(
+    document: &str,
+    config: &ParserConfig,
+) -> Result<Vec<LiNo<SyntaxReference>>, ParseError> {
+    read_links(document, config, &|link| syntax_id(link, document))
+}
+
+/// Reads a document into a collection of links, giving each link the ID `id`
+/// reads from the parsed link.
+fn read_links<T: Clone, F: IdReader<T>>(
+    document: &str,
+    config: &ParserConfig,
+    id: &F,
+) -> Result<Vec<LiNo<T>>, ParseError> {
     // Handle empty or whitespace-only input by returning empty collection
     if document.trim_matches(parser::is_whitespace_char).is_empty() {
         return Ok(vec![]);
@@ -1012,10 +1198,27 @@ pub fn parse_lino_to_links_with_config(
                 Ok(vec![])
             } else {
                 // Flatten the indented structure according to Lino spec
-                let flattened = flatten_links(&links);
+                let flattened = flatten_links(&links, id);
                 Ok(flattened)
             }
         }
+        Err(failure) => Err(parse_error(document, failure)),
+    }
+}
+
+/// Parses a document only to find out whether it parses, returning the document
+/// as the parser read it: with its comments blanked when `config` asks for
+/// comments.
+pub(crate) fn check_document<'a>(
+    document: &'a str,
+    config: &ParserConfig,
+) -> Result<Cow<'a, str>, ParseError> {
+    let prepared = prepare(document, config);
+    if document.trim_matches(parser::is_whitespace_char).is_empty() {
+        return Ok(prepared);
+    }
+    match parser::parse_document_with_max_depth(&prepared, config.max_depth) {
+        Ok(_) => Ok(prepared),
         Err(failure) => Err(parse_error(document, failure)),
     }
 }

@@ -1,7 +1,10 @@
 //! Incremental parsing for long-lived Links Notation streams.
 
 use crate::quotes::DelimitedReferences;
-use crate::{LiNo, ParseError, ParserConfig, parse_lino_to_links_with_config};
+use crate::{
+    LiNo, ParseError, ParserConfig, SyntaxReference, parse_lino_to_links_with_config,
+    parse_lino_to_syntax_links_with_config,
+};
 use std::collections::VecDeque;
 use std::fmt;
 
@@ -78,10 +81,39 @@ impl From<ParseError> for StreamParseError {
 }
 
 /// Callback invoked for every completed link.
-pub type LinkCallback = Box<dyn FnMut(&LiNo<String>) + Send>;
+pub type LinkCallback<T = String> = Box<dyn FnMut(&LiNo<T>) + Send>;
 
 /// Callback invoked when a write or finish operation fails.
 pub type ErrorCallback = Box<dyn FnMut(&StreamParseError) + Send>;
+
+mod sealed {
+    pub trait Sealed {}
+    impl Sealed for String {}
+    impl Sealed for crate::SyntaxReference {}
+}
+
+/// The reference type a [`StreamParser`] emits: `String` for the plain links
+/// (the AST mode), or [`SyntaxReference`] for links that record how each ID
+/// was written. The trait is sealed.
+pub trait StreamReference: sealed::Sealed + Clone + Send + 'static {
+    /// Parses one completed record.
+    #[doc(hidden)]
+    fn parse_record(document: &str, config: &ParserConfig) -> Result<Vec<LiNo<Self>>, ParseError>;
+}
+
+impl StreamReference for String {
+    fn parse_record(document: &str, config: &ParserConfig) -> Result<Vec<LiNo<Self>>, ParseError> {
+        parse_lino_to_links_with_config(document, config)
+    }
+}
+
+impl StreamReference for SyntaxReference {
+    fn parse_record(document: &str, config: &ParserConfig) -> Result<Vec<LiNo<Self>>, ParseError> {
+        // Each record is parsed on its own, so raw IDs are sliced from the
+        // record, which holds the exact text the stream received.
+        parse_lino_to_syntax_links_with_config(document, config)
+    }
+}
 
 /// Incrementally emits complete top-level Links Notation records.
 ///
@@ -89,17 +121,35 @@ pub type ErrorCallback = Box<dyn FnMut(&StreamParseError) + Send>;
 /// itself a safe boundary. A record is committed when the next non-indented
 /// content line begins, and the canonical parser validates every committed
 /// segment. Set collection off for bounded-memory callback or iterator use.
-pub struct StreamParser {
+///
+/// `StreamParser::new()` emits `LiNo<String>`, like
+/// [`parse_lino_to_links`](crate::parse_lino_to_links).
+/// [`StreamParser::syntax`] emits `LiNo<SyntaxReference>`, like
+/// [`parse_lino_to_syntax_links`](crate::parse_lino_to_syntax_links), so every
+/// link remembers how its ID was written:
+///
+/// ```
+/// use links_notation::StreamParser;
+///
+/// let mut stream = StreamParser::syntax();
+/// stream.write("(t 1 '1')\n").unwrap();
+/// let links = stream.finish().unwrap();
+/// assert_eq!(links[0].to_string(), "(t 1 1)");
+/// let links_notation::LiNo::Link { values, .. } = &links[0] else { unreachable!() };
+/// assert_eq!(values[2].raw_id(), Some("'1'"));
+/// assert_eq!(values[2].quote(), Some('\''));
+/// ```
+pub struct StreamParser<T: StreamReference = String> {
     config: ParserConfig,
     buffer: String,
     current_line: String,
     base_indentation: Option<usize>,
     line_classified: bool,
-    link_callback: Option<LinkCallback>,
+    link_callback: Option<LinkCallback<T>>,
     error_callback: Option<ErrorCallback>,
     collect: bool,
     max_buffer_size: usize,
-    links: Vec<LiNo<String>>,
+    links: Vec<LiNo<T>>,
     offset: usize,
     line: usize,
     column: usize,
@@ -122,6 +172,44 @@ impl StreamParser {
 
     /// Create a parser with explicit canonical parser options.
     pub fn with_config(config: ParserConfig) -> Self {
+        Self::create(config)
+    }
+
+    /// Lazily parse any iterator of string-like chunks.
+    pub fn parse_chunks<I, S>(chunks: I) -> StreamIterator<I::IntoIter>
+    where
+        I: IntoIterator<Item = S>,
+        S: AsRef<str>,
+    {
+        StreamIterator::new(chunks.into_iter(), Self::new())
+    }
+}
+
+impl StreamParser<SyntaxReference> {
+    /// Create a parser whose links record how each ID was written.
+    pub fn syntax() -> Self {
+        Self::syntax_with_config(ParserConfig::default())
+    }
+
+    /// Create a parser with explicit options whose links record how each ID
+    /// was written.
+    pub fn syntax_with_config(config: ParserConfig) -> Self {
+        Self::create(config)
+    }
+
+    /// Lazily parse any iterator of string-like chunks into links that record
+    /// how each ID was written.
+    pub fn parse_syntax_chunks<I, S>(chunks: I) -> StreamIterator<I::IntoIter, SyntaxReference>
+    where
+        I: IntoIterator<Item = S>,
+        S: AsRef<str>,
+    {
+        StreamIterator::new(chunks.into_iter(), Self::syntax())
+    }
+}
+
+impl<T: StreamReference> StreamParser<T> {
+    fn create(config: ParserConfig) -> Self {
         Self {
             config,
             buffer: String::new(),
@@ -145,7 +233,7 @@ impl StreamParser {
     /// Register a callback invoked once for every completed link.
     pub fn on_link<F>(&mut self, callback: F) -> &mut Self
     where
-        F: FnMut(&LiNo<String>) + Send + 'static,
+        F: FnMut(&LiNo<T>) + Send + 'static,
     {
         self.link_callback = Some(Box::new(callback));
         self
@@ -183,7 +271,7 @@ impl StreamParser {
     }
 
     /// Consume a string chunk and return links made complete by it.
-    pub fn write(&mut self, chunk: &str) -> Result<Vec<LiNo<String>>, StreamParseError> {
+    pub fn write(&mut self, chunk: &str) -> Result<Vec<LiNo<T>>, StreamParseError> {
         if self.ended {
             return self.fail(StreamParseError {
                 message: "cannot write after finish()".to_string(),
@@ -229,7 +317,7 @@ impl StreamParser {
     }
 
     /// Finish the stream and return all undrained or newly emitted links.
-    pub fn finish(&mut self) -> Result<Vec<LiNo<String>>, StreamParseError> {
+    pub fn finish(&mut self) -> Result<Vec<LiNo<T>>, StreamParseError> {
         if self.ended {
             return Ok(if self.collect {
                 self.links.clone()
@@ -241,7 +329,7 @@ impl StreamParser {
         let mut emitted = Vec::new();
         let document = format!("{}{}", self.buffer, self.current_line);
         if !document.is_empty() {
-            let parsed = match parse_lino_to_links_with_config(&document, &self.config) {
+            let parsed = match T::parse_record(&document, &self.config) {
                 Ok(links) => links,
                 Err(error) => {
                     let stream_error = self.stream_error(error);
@@ -264,7 +352,7 @@ impl StreamParser {
     }
 
     /// Return and forget retained links.
-    pub fn drain(&mut self) -> Vec<LiNo<String>> {
+    pub fn drain(&mut self) -> Vec<LiNo<T>> {
         std::mem::take(&mut self.links)
     }
 
@@ -294,30 +382,14 @@ impl StreamParser {
         }
     }
 
-    /// Lazily parse any iterator of string-like chunks.
-    pub fn parse_chunks<I, S>(chunks: I) -> StreamIterator<I::IntoIter>
-    where
-        I: IntoIterator<Item = S>,
-        S: AsRef<str>,
-    {
-        let mut parser = Self::new();
-        parser.set_collect(false);
-        StreamIterator {
-            chunks: chunks.into_iter(),
-            parser,
-            ready: VecDeque::new(),
-            finished: false,
-        }
-    }
-
-    fn start_content_line(&mut self, indentation: usize, emitted: &mut Vec<LiNo<String>>) {
+    fn start_content_line(&mut self, indentation: usize, emitted: &mut Vec<LiNo<T>>) {
         if !self.buffer.is_empty()
             && self
                 .base_indentation
                 .is_some_and(|base| indentation <= base)
             && structurally_complete(&self.buffer, self.config.comments)
         {
-            if let Ok(parsed) = parse_lino_to_links_with_config(&self.buffer, &self.config) {
+            if let Ok(parsed) = T::parse_record(&self.buffer, &self.config) {
                 let document = std::mem::take(&mut self.buffer);
                 self.publish(parsed, emitted);
                 self.advance_segment(&document);
@@ -327,7 +399,7 @@ impl StreamParser {
         self.base_indentation.get_or_insert(indentation);
     }
 
-    fn publish(&mut self, parsed: Vec<LiNo<String>>, emitted: &mut Vec<LiNo<String>>) {
+    fn publish(&mut self, parsed: Vec<LiNo<T>>, emitted: &mut Vec<LiNo<T>>) {
         for link in parsed {
             emitted.push(link.clone());
             if self.collect {
@@ -372,7 +444,7 @@ impl StreamParser {
         }
     }
 
-    fn fail<T>(&mut self, error: StreamParseError) -> Result<T, StreamParseError> {
+    fn fail<R>(&mut self, error: StreamParseError) -> Result<R, StreamParseError> {
         if let Some(callback) = &mut self.error_callback {
             callback(&error);
         }
@@ -380,20 +452,34 @@ impl StreamParser {
     }
 }
 
-/// Lazy iterator returned by [`StreamParser::parse_chunks`].
-pub struct StreamIterator<I> {
+/// Lazy iterator returned by [`StreamParser::parse_chunks`] and
+/// [`StreamParser::parse_syntax_chunks`].
+pub struct StreamIterator<I, T: StreamReference = String> {
     chunks: I,
-    parser: StreamParser,
-    ready: VecDeque<LiNo<String>>,
+    parser: StreamParser<T>,
+    ready: VecDeque<LiNo<T>>,
     finished: bool,
 }
 
-impl<I, S> Iterator for StreamIterator<I>
+impl<I, T: StreamReference> StreamIterator<I, T> {
+    fn new(chunks: I, mut parser: StreamParser<T>) -> Self {
+        parser.set_collect(false);
+        Self {
+            chunks,
+            parser,
+            ready: VecDeque::new(),
+            finished: false,
+        }
+    }
+}
+
+impl<I, S, T> Iterator for StreamIterator<I, T>
 where
     I: Iterator<Item = S>,
     S: AsRef<str>,
+    T: StreamReference,
 {
-    type Item = Result<LiNo<String>, StreamParseError>;
+    type Item = Result<LiNo<T>, StreamParseError>;
 
     fn next(&mut self) -> Option<Self::Item> {
         loop {
