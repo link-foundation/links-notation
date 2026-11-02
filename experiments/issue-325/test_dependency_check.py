@@ -601,6 +601,37 @@ class DependencyCheckTests(unittest.TestCase):
                 self.assertIn("registry unavailable", errors.getvalue())
 
 
+    def test_warn_only_turns_outdated_declarations_into_warnings(self):
+        # Push and scheduled runs on main (issue #377, best practice 17).
+        dependency = CHECK.Dependency(
+            CHECK.ROOT / "js/package.json", "npm", "demo", "^1.0.0", "^1.0.0"
+        )
+        with (
+            patch.object(CHECK, "manifests", return_value=[dependency]),
+            patch.object(sys, "argv", ["check", "--warn-only"]),
+        ):
+            with (
+                patch.object(CHECK, "latest", return_value="2.0.0"),
+                contextlib.redirect_stdout(io.StringIO()) as output,
+            ):
+                self.assertFalse(CHECK.main())
+            self.assertIn(
+                "::warning file=js/package.json::demo ^1.0.0 is behind the latest "
+                "stable release 2.0.0",
+                output.getvalue(),
+            )
+            self.assertNotIn("OUTDATED", output.getvalue())
+            self.assertIn("check-dependencies.py --update", output.getvalue())
+            # Not knowing whether a package is current is still a failure.
+            with (
+                patch.object(
+                    CHECK, "latest", side_effect=OSError("registry unavailable")
+                ),
+                contextlib.redirect_stdout(io.StringIO()),
+                contextlib.redirect_stderr(io.StringIO()),
+            ):
+                self.assertTrue(CHECK.main())
+
 if __name__ == "__main__":
     # A leaked HTTP response surfaces only as a ResourceWarning in a
     # destructor, which never fails a test by itself (issue #377).

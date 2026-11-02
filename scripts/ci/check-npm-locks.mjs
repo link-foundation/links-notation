@@ -3,11 +3,12 @@
 // incompatible major through a parent's constraint. Direct majors are checked
 // independently by check-dependencies.py.
 //
-// --advisory (pull requests, issue #350): report stale transitive packages
-// without failing. A Dependabot bump of one package cannot refresh every
-// other lock entry, so failing would block every such pull request; the push
-// and scheduled runs on main stay blocking. npm ci and bun's frozen lockfile
-// check fail in both modes.
+// A stale transitive package never fails the check: a newer compatible
+// release is a fact about the world, not about the commit (issue #377, CI/CD
+// best practice 17). Without --advisory (push and scheduled runs on main) each
+// one is a ::warning:: annotation. With --advisory (pull requests, issue #350)
+// it is a plain line: a Dependabot bump of one package cannot refresh every
+// other lock entry. npm ci and bun's frozen lockfile check fail in both modes.
 import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
@@ -37,7 +38,8 @@ for (const directory of projects) {
         continue;
       }
       if (entry.current && entry.current !== entry.wanted) {
-        console.error(`${directory}: ${name} ${entry.current} -> ${entry.wanted} (compatible update)`);
+        const line = `${directory}: ${name} ${entry.current} -> ${entry.wanted} (compatible update)`;
+        console.log(advisory ? line : `::warning file=${directory}/package-lock.json::${line}`);
         stale += 1;
       }
     }
@@ -46,9 +48,8 @@ for (const directory of projects) {
 }
 // Both committed JS package-manager locks must be valid after refresh.
 execFileSync('bun', ['install', '--frozen-lockfile', '--ignore-scripts'], { cwd: 'js', stdio: 'inherit' });
-if (stale && advisory) {
-  console.log(`${stale} compatible transitive updates are pending; the scheduled check on main fails until they are applied.`);
-} else if (stale) {
-  console.error('To fix: run `npm update --prefix <directory>` for each directory above (and `bun install` in js), then commit the lockfiles.');
+if (stale) {
+  console.log(
+    `${stale} compatible transitive updates are pending. To apply them: run \`npm update --prefix <directory>\` for each directory above (and \`bun install\` in js), then commit the lockfiles.`,
+  );
 }
-process.exitCode = stale && !advisory ? 1 : 0;

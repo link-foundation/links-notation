@@ -9,7 +9,12 @@ With --changed-since REV (pull requests), only the declarations that differ
 from REV can fail; the rest are listed as NOTE lines. A pull request that bumps
 one package would otherwise fail for every other package that is behind,
 including the ones other open Dependabot pull requests update (issue #350).
-The scheduled and main-branch runs still check the whole repository.
+
+With --warn-only (push, schedule and dispatch on main), every outdated
+declaration is a ::warning:: annotation instead of a failure. A newer upstream
+release is a fact about the world, not about the commit; failing main for it
+kept main red with no change to the repository (issue #377, CI/CD best
+practice 17). Registry errors and an --update that rewrites nothing still fail.
 """
 
 import argparse
@@ -734,6 +739,11 @@ def main():
         metavar="REV",
         help="fail only for declarations that differ from git revision REV",
     )
+    parser.add_argument(
+        "--warn-only",
+        action="store_true",
+        help="report outdated declarations as warnings instead of failing",
+    )
     args = parser.parse_args()
     dependencies = manifests()
     gated = (
@@ -779,6 +789,14 @@ def main():
                 print(f"NOTE {line} (not changed by this pull request)")
                 stale += 1
                 continue
+            if args.warn_only and not args.update:
+                path = dependency.path.relative_to(ROOT)
+                print(
+                    f"::warning file={path}::{dependency.name} {dependency.declared}"
+                    f" is behind the latest stable release {release}"
+                )
+                stale += 1
+                continue
             print(f"OUTDATED {line}")
             if args.update:
                 if update(dependency, release) is False:
@@ -791,8 +809,15 @@ def main():
     if args.changed_since:
         print(
             f"{len(gated)} declarations differ from {args.changed_since} and can "
-            f"fail this check; {stale} unchanged ones are behind and fail the "
-            "scheduled check on main instead."
+            f"fail this check; {stale} unchanged ones are behind and are "
+            "reported as warnings on main."
+        )
+    if args.warn_only and stale:
+        print(
+            f"{stale} declarations are behind their latest stable release; a newer "
+            "release does not fail main. To update: merge the open Dependabot pull "
+            "requests, or run `python scripts/ci/check-dependencies.py --update`, "
+            "regenerate the lockfiles and commit the result."
         )
     if args.update:
         print("Regenerate lockfiles and run tests before committing the updates.")
