@@ -37,6 +37,35 @@ final class ReferenceLiteral
         return preg_match('/\A~[0-9]+\{/', $text) === 1;
     }
 
+    /**
+     * Find where the versioned literal `~<digits>{<payload>}` that starts at
+     * $start of $text ends.
+     *
+     * The payload holds no `}`, space, tab, line break or parenthesis. A
+     * single forward scan, as the grammar reads a literal.
+     *
+     * @return int The position right after the closing brace, or -1 when no
+     *             literal starts at $start
+     */
+    public static function end(string $text, int $start): int
+    {
+        $length = strlen($text);
+        if ($start >= $length || $text[$start] !== '~') {
+            return -1;
+        }
+        $index = $start + 1 + strspn($text, '0123456789', $start + 1);
+        if ($index === $start + 1 || $index >= $length || $text[$index] !== '{') {
+            return -1;
+        }
+        $index++;
+        $index += strcspn($text, "} \t\r\n()", $index);
+        if ($index < $length && $text[$index] === '}') {
+            return $index + 1;
+        }
+
+        return -1;
+    }
+
     public static function format(string $text): string
     {
         if (preg_match('//u', $text) !== 1) {

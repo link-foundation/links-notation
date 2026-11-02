@@ -173,6 +173,39 @@ class CommentsTest extends TestCase
         $this->assertSame("     \n", Comments::stripComments("# why\n"));
     }
 
+    public function testAHashInsideAReferenceThatFollowsAGroupIsContent(): void
+    {
+        $this->assertParsesAs('((<a>) < #b>)', "(a)\" #b\"\n");
+    }
+
+    public function testAHashInsideAReferenceThatFollowsAnotherReferenceIsContent(): void
+    {
+        $this->assertParsesAs('(<x> < #y>)', "\"x\"' #y'\n");
+        $this->assertParsesAs("(<q> < #c\n\">)", "```q```\"\" #c\n\"\"\"\n");
+    }
+
+    public function testAHashInsideAReferenceThatFollowsALiteralIsContent(): void
+    {
+        $this->assertParsesAs('(<b> < #b>)', "~1{62}\" #b\"\n");
+    }
+
+    public function testAReferenceIsReadInTheDocumentAsWrittenCommentsIncluded(): void
+    {
+        // The body of the first `""` straddles a parenthesis, so it is the
+        // empty reference and the `#` after it opens a comment. Blanking that
+        // comment must not turn the `""` into a reference that holds the
+        // blanked text.
+        $this->assertParsesAs("(<> <a>)\n(<>)", "\"\" a #)b\n\"\"\n");
+    }
+
+    public function testTheCommentReaderSkipsTheReferencesTheParserReads(): void
+    {
+        $this->assertSame("(a)\" #b\"\n", Comments::stripComments("(a)\" #b\"\n"));
+        $this->assertSame("\"x\"' #y'\n", Comments::stripComments("\"x\"' #y'\n"));
+        $this->assertSame("~1{62}\" #b\"\n", Comments::stripComments("~1{62}\" #b\"\n"));
+        $this->assertSame("a\"b    \n", Comments::stripComments("a\"b #c\"\n"));
+    }
+
     public function testAReferenceThatBeginsWithAHashIsWrittenQuoted(): void
     {
         // Without the quotes the document would read as `a` followed by a comment.

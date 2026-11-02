@@ -37,6 +37,20 @@ class StreamParserTest extends TestCase
         $this->assertSame($this->render((new Parser())->parse(self::DOCUMENT)), $this->render($stream->finish()));
     }
 
+    public function testWaitsForTheLineThatClosesAnEvenRunOfQuotes(): void
+    {
+        // `""` is the empty reference only when nothing closes it, and here
+        // the next line does, so the first line cannot be emitted on its own
+        // (issue #377).
+        $input = "a \"\" b\n\"\" c\n";
+        $stream = new StreamParser();
+        for ($index = 0; $index < strlen($input); $index++) {
+            $this->assertSame([], $stream->write($input[$index]));
+        }
+
+        $this->assertSame($this->render((new Parser())->parse($input)), $this->render($stream->finish()));
+    }
+
     public function testEmitsOnlyCompleteRecords(): void
     {
         $seen = [];
