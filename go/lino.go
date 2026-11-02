@@ -23,9 +23,20 @@ import (
 //   - A reference (ID only, no values)
 //   - A link with ID and values
 //   - A link with only values (no ID)
+//
+// A link read by a Parser also records how its ID was written, in RawID. That
+// is syntax metadata only: Equal, String, Format and every other formatter
+// ignore it, so 1 and '1' are still the same reference.
 type Link struct {
 	ID     *string
 	Values []*Link
+
+	// RawID is the ID exactly as the parsed document wrote it: '1' for a quoted
+	// 1, 1 for a bare one, ~1{31} for a versioned literal. It is nil for a link
+	// without an ID, a link built in code, a link made by combining the lines
+	// of an indented document, and every link read by a Parser whose Syntax is
+	// false. It takes no part in Equal or in formatting.
+	RawID *string
 }
 
 // NewRef creates a new reference Link (ID only, no values).
@@ -41,6 +52,33 @@ func NewLink(id *string, values []*Link) *Link {
 // NewValuesLink creates a new Link with values only (no ID).
 func NewValuesLink(values []*Link) *Link {
 	return &Link{ID: nil, Values: values}
+}
+
+// Quote returns the delimiter the ID was written between: "'", "\"" or "`"
+// when it was quoted, and "" when it was bare, a versioned literal, or not
+// read from a document (see RawID). 1 and '1' stay equal links; this only says
+// how each was written.
+func (l *Link) Quote() string {
+	if l.RawID == nil {
+		return ""
+	}
+	return ReferenceQuote(*l.RawID)
+}
+
+// ReferenceQuote returns the delimiter a reference was written between, read
+// from the reference exactly as it was written: "'", "\"" or "`" for one
+// complete quoted reference (however many quotes open it), and "" for a bare
+// reference, a versioned literal, or anything else. "'unclosed" is a bare
+// reference that starts with a quote, so it has no delimiter, and neither has
+// "'a' b", which is more than one reference.
+func ReferenceQuote(raw string) string {
+	if raw == "" || !isQuote(raw[0]) {
+		return ""
+	}
+	if _, end, ok := parseQuotedStringAt(raw, 0); ok && end == len(raw) {
+		return raw[:1]
+	}
+	return ""
 }
 
 // IsRef returns true if this Link is a simple reference (ID only, no values).
