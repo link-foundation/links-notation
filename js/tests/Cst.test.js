@@ -75,6 +75,32 @@ describe('concrete syntax tree (issue #364)', () => {
     ]);
   });
 
+  test('reads versioned literals in linear time', () => {
+    // CodeQL js/polynomial-redos flagged the regular expression that used to
+    // find where a literal ends; the scanner that replaced it is one pass.
+    const input = [
+      `~1{${'61'.repeat(50000)}}`,
+      `~${'1'.repeat(50000)}x`,
+      '~1{61} '.repeat(20000),
+    ].join('\n');
+    const started = Date.now();
+    const cst = new Parser().parseCst(input);
+    expect(Date.now() - started).toBeLessThan(5000);
+    expect(cst.toString()).toBe(input);
+    expect(
+      new Parser()
+        .parseCst('(~1{64} ~{} ~a{b} ~1x)')
+        .tokens()
+        .filter((token) => token.kind === CstKind.REFERENCE)
+        .map((token) => [token.text, token.value])
+    ).toEqual([
+      ['~1{64}', 'd'],
+      ['~{}', '~{}'],
+      ['~a{b}', '~a{b}'],
+      ['~1x', '~1x'],
+    ]);
+  });
+
   test('rejects what parse() rejects', () => {
     expect(() => new Parser().parseCst('(a')).toThrow();
     expect(() => new Parser().parseCst('a)')).toThrow();

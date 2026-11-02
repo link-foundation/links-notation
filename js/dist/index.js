@@ -569,7 +569,23 @@ var ESCAPES = {
 function quoteText(text) {
   return `"${text.replace(/[\\"\n\r\t]/g, (character) => ESCAPES[character])}"`;
 }
-var LITERAL = /~[0-9]+\{[^} \t\r\n()]*\}/y;
+var LITERAL_PAYLOAD_END = new Set(["}", " ", "\t", "\r", `
+`, "(", ")"]);
+function literalEnd(text, start) {
+  if (text[start] !== "~")
+    return -1;
+  let index = start + 1;
+  while (index < text.length && text[index] >= "0" && text[index] <= "9") {
+    index++;
+  }
+  if (index === start + 1 || text[index] !== "{")
+    return -1;
+  index++;
+  while (index < text.length && !LITERAL_PAYLOAD_END.has(text[index])) {
+    index++;
+  }
+  return text[index] === "}" ? index + 1 : -1;
+}
 var BARE_REFERENCE_END = new Set([" ", "\t", "\r", `
 `, "(", ":", ")"]);
 function buildCst(input, { comments = true } = {}) {
@@ -638,11 +654,9 @@ function buildCst(input, { comments = true } = {}) {
   return document;
 }
 function referenceEnd(prepared, start, references) {
-  if (prepared[start] === "~") {
-    LITERAL.lastIndex = start;
-    if (LITERAL.test(prepared))
-      return LITERAL.lastIndex;
-  }
+  const literal = literalEnd(prepared, start);
+  if (literal !== -1)
+    return literal;
   if (QUOTES.includes(prepared[start])) {
     const end = references.endAt(start);
     if (end !== null)
@@ -654,8 +668,7 @@ function referenceEnd(prepared, start, references) {
   return end;
 }
 function isLiteral(prepared, start, end) {
-  LITERAL.lastIndex = start;
-  return LITERAL.test(prepared) && LITERAL.lastIndex === end;
+  return literalEnd(prepared, start) === end;
 }
 // src/LinksGroup.js
 class LinksGroup {
