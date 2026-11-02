@@ -2219,7 +2219,7 @@
         "js/src/quotes.js",
         "js/src/references.js"
       ],
-      "sha256": "330c809427e51f44aa0add3e6ce1c97bfc9058fd775107f5cc839304872502be"
+      "sha256": "a05a56b30bac5fabaa076a46eff5b0fadefd36c7934641e5b4d8ab6f44782ce6"
     },
     "rust": {
       "files": [
@@ -2257,7 +2257,7 @@
         "python/links_notation/reference_literal.py",
         "python/links_notation/stream_parser.py"
       ],
-      "sha256": "33e150cddcb863bcd814e170c960575adfc4075206942b8d5c9826ac4ad27393"
+      "sha256": "87af12c1aac1ae5f46955522f7ecb0370afb668ba9c5dbfebed285811ffa5d2a"
     },
     "java": {
       "files": [
