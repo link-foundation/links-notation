@@ -87,4 +87,11 @@ std::string unescape_reference(std::string_view reference) {
   return std::move(reading->value);
 }
 
+std::optional<char> reference_quote(std::string_view raw) {
+  if (raw.empty() || !detail::is_quote(raw[0])) return std::nullopt;
+  const auto reading = detail::read_reference(raw);
+  if (!reading || reading->length != raw.size()) return std::nullopt;
+  return raw[0];
+}
+
 }  // namespace links_notation

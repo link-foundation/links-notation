@@ -21,6 +21,7 @@ public class Link {
   private final String id;
   private final List<Link> values;
   private boolean isFromPathCombination = false;
+  private String rawId;
 
   /** Creates an empty link with no id and no values. */
   public Link() {
@@ -81,6 +82,66 @@ public class Link {
    */
   public void setFromPathCombination(boolean fromPathCombination) {
     this.isFromPathCombination = fromPathCombination;
+  }
+
+  /**
+   * Gets the ID exactly as the parsed document wrote it.
+   *
+   * <p>{@code '1'} for a quoted {@code 1}, {@code 1} for a bare one, {@code ~1{31}} for a versioned
+   * literal, a multi-line quoted reference with its line breaks. Null for a link without an ID, a
+   * link built in code, a link made by combining the lines of an indented document, and every link
+   * read by a parser in AST mode. It takes no part in {@link #equals(Object)}, {@link #hashCode()},
+   * {@link #toString()} or {@link #format(boolean)}.
+   *
+   * @return the ID as written, or null
+   */
+  public String getRawId() {
+    return rawId;
+  }
+
+  /**
+   * Sets the ID exactly as a document wrote it.
+   *
+   * @param rawId the ID as written, or null
+   */
+  public void setRawId(String rawId) {
+    this.rawId = rawId;
+  }
+
+  /**
+   * Gets the delimiter the ID was written between.
+   *
+   * <p>{@code '}, {@code "} or {@code `} when {@link #getRawId()} is one complete quoted reference
+   * (however many delimiters open it), and null when it is bare, a versioned literal, or not read
+   * from a document. {@code 1} and {@code '1'} stay equal links; this only says how each was
+   * written.
+   *
+   * @return the delimiter, or null
+   */
+  public String getQuote() {
+    return referenceQuote(rawId);
+  }
+
+  /**
+   * Reads the delimiter a reference was written between.
+   *
+   * <p>Returns the first character of {@code raw} when it is a quote and the delimited reference
+   * that starts there takes up all of {@code raw}; otherwise null. {@code 'unclosed} is a bare
+   * reference, {@code 'a' b} is more than one reference, and {@code ~1{31}} is a literal, so all
+   * three give null.
+   *
+   * @param raw one reference exactly as written, or null
+   * @return {@code '}, {@code "} or {@code `}, or null
+   */
+  public static String referenceQuote(String raw) {
+    if (raw == null || raw.isEmpty()) {
+      return null;
+    }
+    char first = raw.charAt(0);
+    if (first != '\'' && first != '"' && first != '`') {
+      return null;
+    }
+    return Parser.quotedReferenceEnd(raw, 0) == raw.length() ? String.valueOf(first) : null;
   }
 
   /**

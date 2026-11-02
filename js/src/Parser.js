@@ -2,6 +2,7 @@ import { Link } from './Link.js';
 import { LinksGroup } from './LinksGroup.js';
 import { ParseError } from './ParseError.js';
 import { stripComments } from './comments.js';
+import { buildCst } from './Cst.js';
 import * as parserModule from './parser-generated.js';
 
 /**
@@ -18,11 +19,13 @@ export class Parser {
    * @param {number} options.maxInputSize - Maximum input size in bytes (default: 10MB)
    * @param {number} options.maxDepth - How deep links may nest: every parenthesized group and every indentation level is one level (default: 64)
    * @param {boolean} options.comments - If false, read `#` as an ordinary character instead of the start of a comment (default: true)
+   * @param {boolean} options.syntax - If false, read links as a bare abstract syntax tree: they do not record how their IDs were written, so `rawId` and `quote` are null (default: true)
    */
   constructor(options = {}) {
     this.maxInputSize = options.maxInputSize || 10 * 1024 * 1024; // 10MB default
     this.maxDepth = options.maxDepth ?? DEFAULT_MAX_DEPTH;
     this.comments = options.comments ?? true;
+    this.syntax = options.syntax ?? true;
   }
 
   /**
@@ -46,6 +49,20 @@ export class Parser {
     return this._parse(input, (raw) =>
       raw.map((item) => this._transformGroup(item))
     );
+  }
+
+  /**
+   * Read the document as a lossless concrete syntax tree: every character of
+   * the input, comments and whitespace included, belongs to exactly one token,
+   * so `parseCst(input).toString() === input`. The document is first parsed
+   * with this parser's options, so it is refused exactly when `parse()` would
+   * refuse it.
+   * @param {string} input - The Lino document
+   * @returns {CstNode} The `document` node
+   */
+  parseCst(input) {
+    this.parse(input);
+    return buildCst(input, { comments: this.comments });
   }
 
   _transformGroup(item) {
@@ -74,6 +91,7 @@ export class Parser {
     try {
       const rawResult = parserModule.parse(prepared, {
         maxDepth: this.maxDepth,
+        source: input,
       });
       return transform(rawResult);
     } catch (error) {
@@ -119,6 +137,7 @@ export class Parser {
         );
         const linkWithChildren = {
           id: item.id,
+          rawId: item.rawId,
           values: childValues,
         };
         const currentLink = this.transformLink(linkWithChildren);
@@ -163,18 +182,24 @@ export class Parser {
   transformIndentedValue(item) {
     const children = item.children || [];
     if (children.length && item.id != null && !item.values?.length) {
-      return new Link(
-        item.id,
-        children.map((child) => this.transformIndentedValue(child))
+      return this._withRawId(
+        new Link(
+          item.id,
+          children.map((child) => this.transformIndentedValue(child))
+        ),
+        item
       );
     }
 
     const current = this.transformLink(item);
     if (children.length) {
-      return new Link(current.id, [
-        ...current.values,
-        ...children.map((child) => this.transformIndentedValue(child)),
-      ]);
+      return this._withRawId(
+        new Link(current.id, [
+          ...current.values,
+          ...children.map((child) => this.transformIndentedValue(child)),
+        ]),
+        item
+      );
     }
     if (
       item.id == null &&
@@ -252,18 +277,32 @@ export class Parser {
 
     // Handle simple reference objects like {id: 'a'}
     if (item.id !== undefined && !item.values && !item.children) {
-      return new Link(item.id);
+      return this._withRawId(new Link(item.id), item);
     }
 
     // For items with values, create a link with those values
     if (item.values && Array.isArray(item.values)) {
       // Create a link with id (if present) and transformed values
-      const link = new Link(item.id ?? null, []);
+      const link = this._withRawId(new Link(item.id ?? null, []), item);
       link.values = item.values.map((v) => this.transformLink(v));
       return link;
     }
 
     // Default case
-    return new Link(item.id ?? null, []);
+    return this._withRawId(new Link(item.id ?? null, []), item);
+  }
+
+  /**
+   * Record how the parsed item wrote its ID, unless this parser reads a bare
+   * abstract syntax tree.
+   * @param {Link} link - The link made from the item
+   * @param {Object} item - The parsed item, with the `rawId` the grammar read
+   * @returns {Link} The same link
+   */
+  _withRawId(link, item) {
+    if (this.syntax && link.id !== null && typeof item.rawId === 'string') {
+      link.rawId = item.rawId;
+    }
+    return link;
   }
 }

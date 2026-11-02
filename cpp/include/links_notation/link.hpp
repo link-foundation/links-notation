@@ -31,6 +31,17 @@ class Link {
   /// Set on links the parser builds by combining an indented path, whose
   /// values format in parentheses.
   bool from_path_combination = false;
+  /// The id exactly as the document wrote it, quotes, doubled quote runs and
+  /// `~1{...}` literal syntax included: `'1'` for the id `1` written quoted.
+  /// The parser sets it on every link it reads with an id, unless
+  /// ParserOptions::syntax is off; links built in code and links made by
+  /// combining an indented path have none. Equality and formatting ignore it,
+  /// so `(t 1 '1')` still has two equal references and formats as `(t 1 1)`.
+  std::optional<std::string> raw_id;
+
+  /// The delimiter (`'`, `"` or `` ` ``) raw_id was written between when it is
+  /// one complete quoted reference, and nothing otherwise.
+  std::optional<char> quote() const;
 
   /// Whether this link has no values.
   bool is_reference() const { return values.empty(); }
@@ -50,7 +61,8 @@ class Link {
   /// The escaped id of a reference, or the whole link otherwise.
   std::string to_link_or_id_string() const;
 
-  /// Whether both links have the same id and equal values.
+  /// Whether both links have the same id and equal values. How the ids were
+  /// written (raw_id) does not matter.
   bool equals(const Link& other) const;
 
   /// Writes the link. `less_parentheses` omits parentheses where safe; a

@@ -14,7 +14,7 @@ Add this to your `Cargo.toml`:
 [dependencies]
 links-notation = { path = "." }  # For local development
 # Or from a registry:
-# links-notation = "0.27.1"
+# links-notation = "0.28.0"
 ```
 
 ### From Source
@@ -558,6 +558,56 @@ let links = parse_lino_to_links_with_config("# a b\n", &config)?;
 println!("{}", format_links(&links)); // (# a b)
 ```
 
+### How references were written
+
+`parse_lino_to_links` reads what each reference means, so `1` and `'1'` are the
+same reference. `parse_lino_to_syntax_links` reads the same links with each ID
+held in a `SyntaxReference`, which keeps the `value` and also the `raw` text the
+reference was written as; `quote()` gives its delimiter. Equality, hashing and
+formatting use the value only, and `into_values()` (or `LiNo::<String>::from`)
+turns the links back into the plain ones:
+
+```rust
+use links_notation::{format_links, parse_lino_to_syntax_links, LiNo};
+
+let links = parse_lino_to_syntax_links("(t 1 '1')")?;
+let LiNo::Link { values, .. } = &links[0] else { unreachable!() };
+assert_eq!(values[1], values[2]);
+assert_eq!((values[1].raw_id(), values[1].quote()), (Some("1"), None));
+assert_eq!((values[2].raw_id(), values[2].quote()), (Some("'1'"), Some('\'')));
+let plain: Vec<LiNo<String>> = links.into_iter().map(LiNo::into_values).collect();
+assert_eq!(format_links(&plain), "(t 1 1)");
+```
+
+The raw text is taken from the document as passed, comments included. A link
+without a written ID (a group, or a path combined from indentation) has none.
+`reference_quote(raw)` reads the delimiter from raw text on its own.
+`StreamParser::syntax()` (and `StreamParser::parse_syntax_chunks`) streams the
+same `LiNo<SyntaxReference>` links; `StreamParser::new()` stays in AST mode.
+
+### Lossless syntax tree
+
+`parse_lino_to_cst` returns a concrete syntax tree whose tokens hold every
+character of the document, so printing it gives the document back exactly:
+whitespace, comments, line endings and the way each reference was written.
+It rejects exactly what the parser rejects.
+
+```rust
+use links_notation::parse_lino_to_cst;
+
+let cst = parse_lino_to_cst("(t 1 '1') # note\n")?;
+assert_eq!(cst.to_string(), "(t 1 '1') # note\n");
+for token in cst.tokens() {
+    println!("{} {:?} {:?}", token.kind, token.text(), token.quote);
+}
+println!("{}", cst.to_s_expression());
+```
+
+A tree is a `document` of `line`s; a `group` holds its `open_paren`, its own
+lines and its `close_paren`. Tokens are `whitespace`, `newline`, `comment`,
+`colon`, `open_paren`, `close_paren` and `reference`; a reference token also
+carries its `value` and `quote`.
+
 ## API Reference
 
 ### Enums
@@ -588,6 +638,11 @@ Parses a Links Notation document string and returns the parsed structure or an e
 Parses the same way, with the parser configured. `parse_lino_to_links` and
 `parse_lino_to_links_with_config` are the same pair, returning the top-level
 links rather than one document link.
+
+These functions are the AST mode: they read what references mean.
+`parse_lino_to_syntax_links[_with_config]` returns
+`Vec<LiNo<SyntaxReference>>`, keeping how each ID was written, and
+`parse_lino_to_cst[_with_config]` returns the lossless `CstNode` tree.
 
 ### Configuration
 

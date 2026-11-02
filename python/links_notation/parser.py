@@ -6,12 +6,15 @@ converting text into structured Link objects.
 """
 
 import re
-from typing import Any, Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple
 
 from .comments import strip_comments
 from .link import Link
 from .quotes import _parse_quoted_string_at
 from .reference_literal import decode_reference_literal
+
+if TYPE_CHECKING:
+    from .cst import CstNode
 
 #: How deep links may nest unless a parser is told otherwise: every
 #: parenthesized group and every indentation level is one level, and the lines
@@ -149,6 +152,7 @@ class Parser:
         max_input_size: int = 10 * 1024 * 1024,
         max_depth: int = DEFAULT_MAX_DEPTH,
         comments: bool = True,
+        syntax: bool = True,
     ):
         """
         Initialize the parser.
@@ -161,6 +165,9 @@ class Parser:
                 deeper is refused with a ParseError whose ``max_depth`` is set
             comments: Whether ``#`` starts a comment that runs to the end of
                 its line; when False it is an ordinary character (default: True)
+            syntax: Whether parsed links record how their IDs were written, in
+                ``raw_id`` and ``quote``; when False the parser reads a bare
+                abstract syntax tree and both are None (default: True)
         """
         self.indentation_stack = [0]
         self.pos = 0
@@ -178,6 +185,7 @@ class Parser:
         self.max_input_size = max_input_size
         self.max_depth = max_depth
         self.comments = comments
+        self.syntax = syntax
 
     def parse(self, input_text: str) -> List[Link]:
         """
@@ -239,6 +247,32 @@ class Parser:
                 "Parse error: the document is nested too deeply for Python's recursion limit; "
                 f"lower max_depth (currently {self.max_depth}) to refuse it with a located error"
             ) from None
+
+    def parse_cst(self, input_text: str) -> "CstNode":
+        """
+        Read the document as a lossless concrete syntax tree.
+
+        Every character of the input, comments and whitespace included, belongs
+        to exactly one token, so ``str(parser.parse_cst(text)) == text``. The
+        document is first parsed with this parser's options, so it is refused
+        whenever :meth:`parse` would refuse it, and also when its parentheses
+        do not balance.
+
+        Args:
+            input_text: Text in Lino notation
+
+        Returns:
+            The ``document`` node of the tree
+
+        Raises:
+            ParseError: If parsing fails or the parentheses do not balance
+            TypeError: If input is not a string
+            ValueError: If input exceeds maximum size
+        """
+        from .cst import build_cst
+
+        self.parse(input_text)
+        return build_cst(input_text, comments=self.comments)
 
     def _skip_quoted_string(self, text: str, start: int) -> int:
         """
@@ -405,20 +439,18 @@ class Parser:
 
         # Try indented ID syntax: id:
         if content.endswith(":"):
-            id_part = content[:-1].strip()
-            ref = self._extract_reference(id_part)
-            return {"id": ref, "values": [], "is_indented_id": True}
+            ref, raw = self._read_reference(content[:-1], offset)
+            return {"id": ref, "raw_id": raw, "values": [], "is_indented_id": True}
 
         # Try single-line link: id: values
         colon_pos = self._find_colon_outside_quotes(content)
         if colon_pos >= 0:
-            id_part = content[:colon_pos].strip()
             after_colon = content[colon_pos + 1 :]
             values_part = after_colon.strip()
             values_offset = offset + colon_pos + 1 + len(after_colon) - len(after_colon.lstrip())
-            ref = self._extract_reference(id_part)
+            ref, raw = self._read_reference(content[:colon_pos], offset)
             values = self._parse_values(values_part, values_offset)
-            return {"id": ref, "values": values}
+            return {"id": ref, "raw_id": raw, "values": values}
 
         # Simple value list
         values = self._parse_values(content, offset)
@@ -579,23 +611,14 @@ class Parser:
                 return (end + 1, text[start : end + 1])
             return (len(text), text[start:])
 
-        # Regular value - read until space or end
-        in_single = False
-        in_double = False
-        in_backtick = False
-        i = start
-
-        while i < len(text):
-            char = text[i]
-            if char == "'" and not in_double and not in_backtick:
-                in_single = not in_single
-            elif char == '"' and not in_single and not in_backtick:
-                in_double = not in_double
-            elif char == "`" and not in_single and not in_double:
-                in_backtick = not in_backtick
-            elif char == " " and not in_single and not in_double and not in_backtick:
-                break
-            i += 1
+        # Regular value - read until space or end. A delimited reference was
+        # tried above, so a quote here is an ordinary character of a bare
+        # reference and does not hide the spaces after it: ('x y) is the two
+        # references 'x and y, as the reference grammar (js/src/grammar.pegjs)
+        # reads it.
+        i = text.find(" ", start)
+        if i < 0:
+            i = len(text)
 
         return (i, text[start:i])
 
@@ -606,8 +629,8 @@ class Parser:
             return self._parse_parenthesized(value[1:-1], offset)
 
         # Simple reference
-        ref = self._extract_reference(value)
-        return {"id": ref}
+        ref, raw = self._read_reference(value, offset)
+        return {"id": ref, "raw_id": raw}
 
     def _extract_reference(self, text: str) -> str:
         """Extract reference, handling quoted strings with escaping support."""
@@ -623,6 +646,33 @@ class Parser:
 
         # Unquoted
         return text
+
+    def _read_reference(self, text: str, offset: int) -> Tuple[str, str]:
+        """
+        Read the reference ``text`` written at ``offset`` (surrounding
+        whitespace allowed): what it means, and the text it was written as.
+
+        The text is sliced from the document as the caller wrote it, which has
+        the same positions as the one with its comments blanked out.
+        """
+        reference = text.strip()
+        start = offset + len(text) - len(text.lstrip())
+        end = start + len(reference)
+        if not re.match(r"~[0-9]+\{", reference):
+            quoted = _parse_quoted_string_at(reference, 0)
+            if quoted is not None:
+                end = start + quoted[1]
+        return self._extract_reference(reference), self.source[start:end]
+
+    def _with_raw_id(self, link: Link, item: Dict) -> Link:
+        """
+        Record how the parsed item wrote its ID on the link made from it,
+        unless this parser reads a bare abstract syntax tree.
+        """
+        raw = item.get("raw_id")
+        if self.syntax and link.id is not None and isinstance(raw, str):
+            link.raw_id = raw
+        return link
 
     def _transform_result(self, raw_result: List[Dict]) -> List[Link]:
         """Transform raw parse result into Link objects."""
@@ -652,7 +702,7 @@ class Parser:
         if item.get("is_indented_id") and item.get("id") is not None and not item.get("values") and children:
             child_values = [self._transform_indented_value(child) for child in children]
 
-            link_with_children = {"id": item["id"], "values": child_values}
+            link_with_children = {"id": item["id"], "raw_id": item.get("raw_id"), "values": child_values}
             current_link = self._transform_link(link_with_children)
 
             if not parent_path:
@@ -689,13 +739,19 @@ class Parser:
         """Keep a child line's name and recursively attach its indented lines."""
         children = item.get("children", [])
         if children and item.get("id") is not None and not item.get("values"):
-            return Link(item["id"], [self._transform_indented_value(child) for child in children])
+            return self._with_raw_id(
+                Link(item["id"], [self._transform_indented_value(child) for child in children]),
+                item,
+            )
 
         current = self._transform_link(item)
         if children:
-            return Link(
-                current.id,
-                current.values + [self._transform_indented_value(child) for child in children],
+            return self._with_raw_id(
+                Link(
+                    current.id,
+                    current.values + [self._transform_indented_value(child) for child in children],
+                ),
+                item,
             )
         if item.get("id") is None and "nested" not in item and len(current.values) == 1:
             return current.values[0]
@@ -737,16 +793,16 @@ class Parser:
 
         # Simple reference
         if "id" in item and "values" not in item:
-            return Link(item["id"])
+            return self._with_raw_id(Link(item["id"]), item)
 
         # Link with values
         if "values" in item:
             link_id = item.get("id")
             values = [self._transform_link(v) for v in item["values"]]
-            return Link(link_id, values)
+            return self._with_raw_id(Link(link_id, values), item)
 
         # Default
-        return Link(item.get("id"))
+        return self._with_raw_id(Link(item.get("id")), item)
 
     def _transform_nested(self, nested: List[Dict]) -> Link:
         """

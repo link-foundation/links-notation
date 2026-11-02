@@ -53,6 +53,13 @@ inline std::string escape_reference(const char* reference, bool minimal = false)
 /// whole text or a literal is invalid.
 std::string unescape_reference(std::string_view reference);
 
+/// The delimiter (`'`, `"` or `` ` ``) `raw` is written between when it is one
+/// complete quoted reference: its first character is a quote and the
+/// delimited reference read from there takes all of `raw`. Anything else,
+/// such as `1`, `~1{31}`, `'a' b` or the bare reference `'unclosed`, gives
+/// nothing.
+std::optional<char> reference_quote(std::string_view raw);
+
 }  // namespace links_notation
 
 #endif  // LINKS_NOTATION_REFERENCES_HPP

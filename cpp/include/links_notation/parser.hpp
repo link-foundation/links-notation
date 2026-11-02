@@ -7,6 +7,7 @@
 #include <string_view>
 #include <vector>
 
+#include "links_notation/cst.hpp"
 #include "links_notation/link.hpp"
 #include "links_notation/links_group.hpp"
 #include "links_notation/parse_error.hpp"
@@ -27,6 +28,9 @@ struct ParserOptions {
   std::size_t max_depth = default_max_depth;
   /// Whether a `#` that starts a line or a token opens a comment.
   bool comments = true;
+  /// Whether parsed links record how their ids were written (Link::raw_id).
+  /// Turning it off is the AST mode: links carry only what the document means.
+  bool syntax = true;
 };
 
 /// Reads Links Notation documents.
@@ -46,6 +50,14 @@ class Parser {
   /// Reads the indentation tree of a document: each group's element is the
   /// link on that line, and its children are the lines indented under it.
   std::vector<LinksGroup> parse_groups(std::string_view document) const;
+
+  /// Reads the concrete syntax tree of a document: every byte belongs to
+  /// exactly one token, so the tree's text() is `document` itself, comments,
+  /// whitespace and line endings included.
+  ///
+  /// The document is parsed first, so this throws exactly what parse() throws
+  /// for it, with the same options.
+  CstNode parse_cst(std::string_view document) const;
 
  private:
   ParserOptions options_;

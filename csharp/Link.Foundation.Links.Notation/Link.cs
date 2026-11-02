@@ -27,6 +27,26 @@ namespace Link.Foundation.Links.Notation
         public readonly IList<Link<TLinkAddress>>? Values;
 
         /// <summary>
+        /// Gets the identifier exactly as the parsed document wrote it: <c>'1'</c> for a
+        /// quoted <c>1</c>, <c>1</c> for a bare one, <c>~1{31}</c> for a versioned literal.
+        /// </summary>
+        /// <remarks>
+        /// <see langword="null"/> for a link without an identifier, a link built in code, a
+        /// link made by combining the lines of an indented document, and every link read by
+        /// a parser whose <see cref="Parser.Syntax"/> is <see langword="false"/>. It takes no
+        /// part in <see cref="Equals(Link{TLinkAddress})"/>, <see cref="GetHashCode"/>,
+        /// <see cref="ToString"/> or formatting, so <c>1</c> and <c>'1'</c> stay equal links.
+        /// </remarks>
+        public string? RawId { get; init; }
+
+        /// <summary>
+        /// Gets the delimiter the identifier was written between: <c>'</c>, <c>"</c> or
+        /// <c>`</c> when it was quoted, and <see langword="null"/> when it was bare, a
+        /// versioned literal, or not read from a document (see <see cref="RawId"/>).
+        /// </summary>
+        public char? Quote => ReferenceQuote(RawId);
+
+        /// <summary>
         /// Initializes a new link with the specified identifier and values.
         /// </summary>
         /// <param name="id">The link identifier or address.</param>
@@ -144,6 +164,28 @@ namespace Link.Foundation.Links.Notation
             }
             return ReferenceLiteral.Format(reference);
         }
+
+        /// <summary>
+        /// Reads the delimiter a reference was written between from the reference as it was
+        /// written.
+        /// </summary>
+        /// <param name="raw">One reference exactly as written.</param>
+        /// <returns>
+        /// <c>'</c>, <c>"</c> or <c>`</c> when <paramref name="raw"/> is one complete quoted
+        /// reference, however many delimiters open it; <see langword="null"/> for a bare
+        /// reference (<c>'unclosed</c> is one), a versioned literal, more than one reference
+        /// (<c>'a' b</c>) or no text.
+        /// </returns>
+        public static char? ReferenceQuote(string? raw) => Quotes.ReferenceQuote(raw);
+
+        /// <summary>
+        /// Returns a copy of this link that records <paramref name="rawId"/> as the way its
+        /// identifier was written.
+        /// </summary>
+        /// <param name="rawId">The identifier exactly as written, or <see langword="null"/>.</param>
+        /// <returns>An equal link whose <see cref="RawId"/> is <paramref name="rawId"/>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Link<TLinkAddress> WithRawId(string? rawId) => this with { RawId = rawId };
 
         /// <summary>
         /// Converts the link to its string representation, choosing between simple reference format or full link format.

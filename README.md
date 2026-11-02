@@ -235,6 +235,32 @@ is enabled by default; disable it when callbacks or lazy iteration should keep
 memory bounded. See the [cross-language parity experiment](experiments/issue-197/README.md)
 and each language README for runnable examples.
 
+## How a document was written
+
+`1` and `'1'` are the same reference, so equality and formatting treat
+`(t 1 '1')` and `(t 1 1)` alike. The parser still records how each ID was
+written: every parsed link with an ID carries its raw text (`'1'`) and its
+quote (`'`). This metadata is on by default; an AST mode leaves it out. For the
+whole text, every implementation also returns a lossless concrete syntax tree
+(CST): each character, comments, whitespace, blank lines and line endings
+included, belongs to exactly one token, so the tree's text is the document.
+
+| Language | Raw text and quote | AST mode | CST |
+| --- | --- | --- | --- |
+| C# | `RawId`, `Quote` | `new Parser { Syntax = false }` | `ParseCst` |
+| JavaScript | `rawId`, `quote` | `new Parser({ syntax: false })` | `parseCst` |
+| Rust | `parse_lino_to_syntax_links` → `raw_id()`, `quote()` | `parse_lino` | `parse_lino_to_cst` |
+| Python | `raw_id`, `quote` | `Parser(syntax=False)` | `parse_cst` |
+| Go | `RawID`, `Quote()` | `Parser.Syntax = false` | `ParseCst` |
+| Java | `getRawId()`, `getQuote()` | `new Parser(comments, false)` | `parseCst` |
+| PHP | `getRawId()`, `getQuote()` | `new Parser(syntax: false)` | `parseCst` |
+| C++ | `raw_id`, `quote()` | `ParserOptions::syntax = false` | `parse_cst` |
+
+Every implementation checks the shared golden data in
+[`parity/syntax-fixtures.json`](parity/syntax-fixtures.json) and restores every
+shared fixture exactly from its CST. See the
+[issue 364 case study](docs/case-studies/issue-364/README.md).
+
 ## Documentation
 
 For detailed implementation guides and API references, see the
@@ -269,14 +295,14 @@ All eight language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP,
 <!-- test-counts:start -->
 | Language | Tests | Test categories |
 | --- | --- | --- |
-| Python | 247 | 24 |
-| JavaScript | 316 | 29 |
-| Rust | 401 | 29 |
-| C# | 295 | 27 |
-| Go | 139 | 17 |
-| Java | 185 | 16 |
-| PHP | 235 | 23 |
-| C++ | 346 | 29 |
+| Python | 270 | 27 |
+| JavaScript | 333 | 32 |
+| Rust | 421 | 32 |
+| C# | 316 | 30 |
+| Go | 158 | 20 |
+| Java | 206 | 19 |
+| PHP | 256 | 26 |
+| C++ | 370 | 32 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files

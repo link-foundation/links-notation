@@ -64,6 +64,48 @@ stream.Finish("next link")
 It also implements `io.Writer`; `ParseChunks` exposes a lazy `iter.Seq2`.
 `Position`, `Drain`, `Reset`, and `MaxBufferSize` support long-lived streams.
 
+## How References Were Written
+
+A parsed link records its ID exactly as the document wrote it in `RawID`, and
+`Quote()` derives the delimiter from it. `1` and `'1'` are still the same
+reference: `Equal`, `String`, `Format` and `FormatWithConfig` ignore `RawID`.
+
+```go
+links, _ := lino.Parse("(t 1 '1')")
+bare, quoted := links[0].Values[1], links[0].Values[2]
+fmt.Println(*bare.RawID, *quoted.RawID)      // 1 '1'
+fmt.Printf("%q %q\n", bare.Quote(), quoted.Quote()) // "" "'"
+fmt.Println(bare.Equal(quoted), links[0])    // true (t 1 1)
+```
+
+`RawID` is `nil` for a link without an ID, a link built in code, a link made by
+combining the lines of an indented document, and every link read in AST mode
+(`parser.Syntax = false`). `Quote()` returns `"'"`, `"\""` or `` "`" `` for a
+quoted ID and `""` otherwise; `ReferenceQuote(raw)` does the same for any
+reference text. The stream parser keeps the metadata of the parser it wraps.
+
+## Concrete Syntax Tree
+
+`parser.ParseCst(input)` parses the document with the parser's options, so it
+fails whenever `Parse` fails (and also when parentheses do not balance, with
+`ErrUnbalancedParentheses`), then returns a lossless `*CstNode` tree: every byte
+of the input, comments, whitespace and line endings included, belongs to exactly
+one token, so `cst.String() == input`.
+
+```go
+cst, _ := lino.NewParser().ParseCst("(t 1 '1') # note")
+fmt.Println(cst.String() == "(t 1 '1') # note") // true
+fmt.Println(cst.SExpression())
+// (document (line (group open_paren:"(" (line reference:"t" whitespace:" " reference:"1" whitespace:" " reference:"'1'") close_paren:")") whitespace:" " comment:"# note"))
+```
+
+Nodes are `document`, `line` (up to and including its line ending) and `group`
+(`(`, its lines, `)`); tokens are `whitespace`, `newline`, `comment`,
+`open_paren`, `close_paren`, `colon` and `reference`. A `CstNode` has `Kind`,
+`Children`, `Value` (a reference token's decoded value, else `nil`), `Quote`
+(a quoted reference's delimiter, else `""`), `Text()`, `String()`, `Tokens()`
+and `SExpression()`.
+
 ## API Reference
 
 ### Types
@@ -74,6 +116,7 @@ It also implements `io.Writer`; `ParseChunks` exposes a lazy `iter.Seq2`.
 type Link struct {
     ID     *string
     Values []*Link
+    RawID  *string // How a parsed ID was written; ignored by Equal and formatting
 }
 ```
 
@@ -118,6 +161,8 @@ Creates a parser with the default limits and with `#` comments on. Setting
 - `MaxDepth` - How deep links may nest (default: `DefaultMaxDepth`, which is
   64); see [Nesting Depth](#nesting-depth)
 - `Comments` - Whether `#` starts a comment (default: `true`)
+- `Syntax` - Whether parsed links record `RawID`; `false` is AST mode
+  (default: `true`)
 
 #### Format
 

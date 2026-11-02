@@ -128,6 +128,11 @@ std::string Link::to_link_or_id_string() const {
   return to_string();
 }
 
+std::optional<char> Link::quote() const {
+  if (!raw_id) return std::nullopt;
+  return reference_quote(*raw_id);
+}
+
 bool Link::equals(const Link& other) const {
   if (id != other.id || values.size() != other.values.size()) return false;
   for (std::size_t index = 0; index < values.size(); ++index) {

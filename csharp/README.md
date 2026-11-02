@@ -116,6 +116,49 @@ stream.Finish("next link");
 `ParseChunks` and `ParseChunksAsync` expose native enumerable adapters. The
 parser also provides `Position`, `Drain`, `Reset`, and `MaxBufferSize`.
 
+### How a Document Was Written (CST)
+
+Parsing keeps how every ID was written. Quoting never changes a reference: `1`
+and `'1'` are the same reference, so `Equals`, `GetHashCode`, `ToString` and
+`Format` stay as they were. Each parsed link also carries `RawId`, the ID
+exactly as written, and `Quote`, the delimiter it was written between:
+
+```csharp
+var link = new Parser().Parse("(t 1 '1')")[0];
+var (bare, quoted) = (link.Values![1], link.Values[2]);
+bare == quoted;                // true: the same reference
+(bare.RawId, bare.Quote);      // ("1", null)
+(quoted.RawId, quoted.Quote);  // ("'1'", '\'')
+link.ToString();               // "(t 1 1)"
+```
+
+`RawId` is `null` for links without an ID, links built in code, and links made
+by indentation path combination; `StreamParser` keeps it. Set it on a link
+built in code with `new Link<string>("a") { RawId = "'a'" }` or
+`link.WithRawId("'a'")`. `Link<T>.ReferenceQuote(raw)` reads the delimiter of
+one complete written reference. Use `new Parser { Syntax = false }` (AST mode)
+to leave the metadata out.
+
+`ParseCst(input)` returns the lossless concrete syntax tree. Every character,
+including comments, blank lines, indentation, quotes and line endings, belongs
+to exactly one token, so the original text is always recovered:
+
+```csharp
+var cst = new Parser().ParseCst("(t 1 '1') # note\n");
+cst.ToString(); // "(t 1 '1') # note\n"
+cst.Tokens().Select(token => (token.Kind, token.Text));
+// (OpenParen, "("), (Reference, "t"), (Whitespace, " "), ...
+cst.ToSExpression();
+// (document (line (group open_paren:"(" (line reference:"t" ...)
+//   close_paren:")") whitespace:" " comment:"# note" newline:"\n"))
+```
+
+A `Document` node holds `Line` nodes. A line holds its tokens up to and
+including its line ending. A `Group` node holds `(`, the lines inside it, and
+`)`. Reference tokens carry `Value` (what the reference means) and `Quote`.
+`ParseCst` throws a `ParseException` exactly when `Parse` does. See
+[the issue 364 case study](../docs/case-studies/issue-364/README.md).
+
 ## Syntax Examples
 
 ### Doublets (2-tuple)
@@ -209,6 +252,8 @@ Console.WriteLine(plain.Parse("# a b\n")[0]); // (# a b)
 - **Link\<TLinkAddress\>**: Represents a single link with ID and values
 - **LinksGroup\<TLinkAddress\>**: Container for grouping related links
 - **ParseException**: Thrown when a document does not parse
+- **CstNode** / **CstKind**: The lossless concrete syntax tree returned by
+  `Parser.ParseCst`
 
 ### Error Handling
 

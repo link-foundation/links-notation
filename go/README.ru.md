@@ -64,6 +64,51 @@ stream.Finish("следующая связь")
 Парсер реализует `io.Writer`, а `ParseChunks` предоставляет ленивый `iter.Seq2`.
 Для долгоживущих потоков доступны `Position`, `Drain`, `Reset` и `MaxBufferSize`.
 
+## Как документ был записан
+
+Разобранная связь хранит в `RawID` ID в точности так, как он записан в
+документе, а `Quote()` выводит из него кавычку. `1` и `'1'` - по-прежнему одна
+и та же ссылка: `Equal`, `String`, `Format` и `FormatWithConfig` не учитывают
+`RawID`.
+
+```go
+links, _ := lino.Parse("(t 1 '1')")
+bare, quoted := links[0].Values[1], links[0].Values[2]
+fmt.Println(*bare.RawID, *quoted.RawID)      // 1 '1'
+fmt.Printf("%q %q\n", bare.Quote(), quoted.Quote()) // "" "'"
+fmt.Println(bare.Equal(quoted), links[0])    // true (t 1 1)
+```
+
+`RawID` равен `nil` у связи без ID, у связи, созданной в коде, у связи,
+построенной объединением строк документа с отступами, и у любой связи,
+прочитанной в режиме AST (`parser.Syntax = false`). `Quote()` возвращает
+`"'"`, `"\""` или `` "`" `` для ID в кавычках и `""` в остальных случаях;
+`ReferenceQuote(raw)` делает то же для любого текста ссылки. Потоковый парсер
+сохраняет метаданные парсера, который он оборачивает.
+
+## Конкретное синтаксическое дерево
+
+`parser.ParseCst(input)` разбирает документ с параметрами парсера, поэтому
+возвращает ошибку всякий раз, когда её возвращает `Parse` (а также при
+несбалансированных скобках - `ErrUnbalancedParentheses`), и затем строит
+дерево `*CstNode` без потерь: каждый байт входа, включая комментарии, пробелы
+и переводы строк, принадлежит ровно одному токену, поэтому
+`cst.String() == input`.
+
+```go
+cst, _ := lino.NewParser().ParseCst("(t 1 '1') # note")
+fmt.Println(cst.String() == "(t 1 '1') # note") // true
+fmt.Println(cst.SExpression())
+// (document (line (group open_paren:"(" (line reference:"t" whitespace:" " reference:"1" whitespace:" " reference:"'1'") close_paren:")") whitespace:" " comment:"# note"))
+```
+
+Узлы: `document`, `line` (вместе с переводом строки) и `group` (`(`, строки
+внутри и `)`); токены: `whitespace`, `newline`, `comment`, `open_paren`,
+`close_paren`, `colon` и `reference`. У `CstNode` есть `Kind`, `Children`,
+`Value` (значение токена ссылки, иначе `nil`), `Quote` (кавычка ссылки в
+кавычках, иначе `""`), `Text()`, `String()`, `Tokens()` и `SExpression()`.
+Подробности - в [разборе issue 364](../docs/case-studies/issue-364/README.md).
+
 ## Справочник API
 
 ### Типы
@@ -74,6 +119,7 @@ stream.Finish("следующая связь")
 type Link struct {
     ID     *string
     Values []*Link
+    RawID  *string // Как был записан разобранный ID; Equal и форматирование его не учитывают
 }
 ```
 
@@ -119,6 +165,8 @@ func NewParser() *Parser
 - `MaxDepth` - допустимая глубина вложенности связей (по умолчанию
   `DefaultMaxDepth`, то есть 64); см. [Глубина вложенности](#глубина-вложенности)
 - `Comments` - начинает ли `#` комментарий (по умолчанию `true`)
+- `Syntax` - сохраняют ли разобранные связи `RawID`; `false` - режим AST
+  (по умолчанию `true`)
 
 #### Format
 

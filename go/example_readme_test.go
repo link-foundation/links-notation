@@ -95,3 +95,27 @@ func ExampleParser_maxDepth() {
 	// 1 | ((((a))))
 	//   |    ^
 }
+
+// A parsed link records how its ID was written; equality and formatting do not
+// look at it.
+func ExampleLink_Quote() {
+	links, _ := Parse("(t 1 '1')")
+	bare, quoted := links[0].Values[1], links[0].Values[2]
+	fmt.Println(*bare.RawID, *quoted.RawID)
+	fmt.Printf("%q %q\n", bare.Quote(), quoted.Quote())
+	fmt.Println(bare.Equal(quoted), links[0])
+	// Output:
+	// 1 '1'
+	// "" "'"
+	// true (t 1 1)
+}
+
+// The concrete syntax tree keeps every byte of the document.
+func ExampleParser_ParseCst() {
+	cst, _ := NewParser().ParseCst("(t 1 '1') # note")
+	fmt.Println(cst.String() == "(t 1 '1') # note")
+	fmt.Println(cst.SExpression())
+	// Output:
+	// true
+	// (document (line (group open_paren:"(" (line reference:"t" whitespace:" " reference:"1" whitespace:" " reference:"'1'") close_paren:")") whitespace:" " comment:"# note"))
+}

@@ -1,6 +1,16 @@
-import { escapeReference, unescapeReference } from './references.js';
+import {
+  escapeReference,
+  referenceQuote,
+  unescapeReference,
+} from './references.js';
 
 export class Link {
+  /**
+   * The ID exactly as the parsed document wrote it, kept out of the link's own
+   * enumerable properties so that comparing or serializing links is unchanged.
+   */
+  #rawId = null;
+
   /**
    * Create a new Link
    * @param {string|null} id - Optional identifier for the link
@@ -19,6 +29,36 @@ export class Link {
     } else {
       this.values = [];
     }
+  }
+
+  /**
+   * The ID exactly as the parsed document wrote it: `'1'` for a quoted `1`,
+   * `1` for a bare one, `~1{31}` for a versioned literal. Null for a link
+   * without an ID, a link built in code, a link made by combining the lines of
+   * an indented document, and every link read by a parser created with
+   * `syntax: false`. It takes no part in `equals()` or `format()`.
+   * @type {string|null}
+   */
+  get rawId() {
+    return this.#rawId;
+  }
+
+  set rawId(raw) {
+    if (raw !== null && raw !== undefined && typeof raw !== 'string') {
+      throw new TypeError('rawId must be a string or null');
+    }
+    this.#rawId = raw ?? null;
+  }
+
+  /**
+   * The delimiter the ID was written between: `'`, `"` or `` ` `` when it was
+   * quoted, and null when it was bare, a versioned literal, or not read from a
+   * document (see {@link Link#rawId}). `1` and `'1'` stay equal links; this
+   * only says how each was written.
+   * @type {string|null}
+   */
+  get quote() {
+    return referenceQuote(this.#rawId);
   }
 
   /**

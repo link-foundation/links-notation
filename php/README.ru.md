@@ -15,7 +15,7 @@ composer require link-foundation/links-notation
 ```json
 {
     "require": {
-        "link-foundation/links-notation": "^0.27"
+        "link-foundation/links-notation": "^0.28"
     }
 }
 ```
@@ -158,6 +158,55 @@ $stream->finish('следующая связь');
 `StreamParser::parseChunks($chunks)` возвращает ленивый `Generator`; также
 доступны позиция, drain, reset и ограничение буфера.
 
+### Как документ был записан
+
+Разобранная связь помнит, как был записан её ID. `1` и `'1'` - по-прежнему одна
+и та же ссылка, но `getRawId()` возвращает ID в точности так, как он записан,
+а `getQuote()` - кавычку, в которую он заключён:
+
+```php
+[$link] = (new Parser())->parse("(t 1 '1')");
+[, $bare, $quoted] = $link->values;
+
+$bare->getRawId();    // '1'
+$quoted->getRawId();  // "'1'"
+$quoted->getQuote();  // "'"
+$bare->getQuote();    // null
+$bare->equals($quoted); // true
+echo $link;             // (t 1 1)
+```
+
+`equals()`, `==`, форматирование, `__toString()`, `json_encode()` и
+`serialize()` не учитывают эти метаданные. `getRawId()` равен `null` у связи без
+ID, у связи, созданной в коде, и у связи, построенной объединением строк
+документа с отступами. `new Parser(syntax: false)` (режим AST) их не сохраняет.
+
+### Конкретное синтаксическое дерево
+
+`parseCst()` возвращает конкретное синтаксическое дерево без потерь: каждый
+символ, включая комментарии, пробелы и переводы строк, принадлежит ровно одному
+токену, поэтому `(string) $cst === $input`.
+
+```php
+use LinkFoundation\LinksNotation\CstKind;
+
+$cst = (new Parser())->parseCst("(t 1 '1') # note\n");
+echo $cst->toSExpression();
+// (document (line (group open_paren:"(" (line reference:"t" whitespace:" " reference:"1"
+//   whitespace:" " reference:"'1'") close_paren:")") whitespace:" " comment:"# note" newline:"\n"))
+
+foreach ($cst->tokens() as $token) {
+    if ($token->kind === CstKind::REFERENCE) {
+        echo $token->text(), ' => ', $token->value, ' ', $token->quote ?? '-', "\n";
+    }
+}
+```
+
+Сначала вход разбирается, поэтому `parseCst()` выбрасывает то же, что и
+`parse()`; кроме того, при несбалансированных скобках он выбрасывает
+`ParseException`. Подробности - в
+[разборе issue 364](../docs/case-studies/issue-364/README.md).
+
 ## Примеры синтаксиса
 
 ### Дуплеты (2-кортежи)
@@ -289,12 +338,14 @@ echo Formatter::formatLinks($plain->parse("# a b\n")); // (# a b)
 
 Основной класс парсера, превращающий строки в связи.
 
-- `__construct(int $maxInputSize = 10485760, int $maxDepth = Parser::DEFAULT_MAX_DEPTH, bool $comments = true)` — создать
-  парсер с ограничениями и с комментариями `#`, если `$comments` не `false`
+- `__construct(int $maxInputSize = 10485760, int $maxDepth = Parser::DEFAULT_MAX_DEPTH, bool $comments = true,
+  bool $syntax = true)` — создать парсер с ограничениями, с комментариями `#`, если `$comments` не `false`,
+  и с сохранением записи ID, если `$syntax` не `false` (режим AST)
 - `parse(string $input): Link[]` — разобрать строку lino и вернуть связи
   - выбрасывает `InvalidArgumentException`, если вход больше `$maxInputSize`
   - выбрасывает `LinkFoundation\LinksNotation\ParseException`, если вход не удалось разобрать
     или связи в нем вложены глубже `$maxDepth`
+- `parseCst(string $input): CstNode` — разобрать и вернуть конкретное синтаксическое дерево без потерь
 - `Parser::DEFAULT_MAX_DEPTH` — значение `$maxDepth` по умолчанию, 64, одинаковое во всех реализациях
 
 `$maxDepth` — насколько глубоко могут вкладываться связи (по умолчанию 64).
@@ -319,6 +370,22 @@ echo Formatter::formatLinks($plain->parse("# a b\n")); // (# a b)
 - `getValuesString(): string` — отформатировать значения без обрамляющей связи
 - `toLinkOrIdString(): string` — вернуть идентификатор, если связь является простой ссылкой
 - `static escapeReference(?string $reference): string` — заключить ссылку в кавычки при необходимости
+- `getRawId(): ?string` / `setRawId(?string $rawId): void` — ID в точности так, как он записан в документе
+- `getQuote(): ?string` — кавычка, в которую заключён ID, или `null`
+- `static referenceQuote(?string $raw): ?string` — кавычка одной целой ссылки в кавычках или `null`
+
+#### `LinkFoundation\LinksNotation\CstNode`
+
+Узел (`document`, `line`, `group`) или токен (`whitespace`, `newline`,
+`comment`, `open_paren`, `close_paren`, `colon`, `reference`) конкретного
+синтаксического дерева; виды - константы `CstKind`.
+
+- `public string $kind`, `public CstNode[] $children` — пусто у токена
+- `public ?string $value` — значение токена ссылки
+- `public ?string $quote` — кавычка токена ссылки в кавычках
+- `text(): string`, `__toString(): string` — точный текст
+- `tokens(): CstNode[]` — все токены в порядке документа
+- `toSExpression(): string` — дерево в виде S-выражения
 
 #### `LinkFoundation\LinksNotation\Formatter`
 
@@ -369,6 +436,7 @@ Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
 - `src/FormatConfig.php` — параметры форматирования
 - `src/Parser.php` — реализация парсера
 - `src/ParseException.php` — исключение разбора
+- `src/CstNode.php`, `src/CstKind.php`, `src/CstBuilder.php` — конкретное синтаксическое дерево
 - `tests/` — набор тестов PHPUnit
 
 ## Требования

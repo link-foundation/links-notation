@@ -16,6 +16,8 @@
   // until the stack overflows.
   let contextDepth = 0;
   const maxDepth = options.maxDepth ?? Infinity;
+  // The document as the caller wrote it, comments included.
+  const source = options.source ?? input;
   // Lines already found unreadable, keyed by where they start and whether they
   // are inside a parenthesised group. Reading a line depends on nothing else: a
   // group starts a fresh indentation context, and indentation only decides
@@ -164,7 +166,7 @@ element = &{ return !unreadableLines.has(lineKey(offset())); }
   // succeed without consuming input.
   / &{ unreadableLines.add(lineKey(offset())); return false; } .
 
-referenceOrLink = l:multiLineAnyLink { return l; } / i:reference { return { id: i }; }
+referenceOrLink = l:multiLineAnyLink { return l; } / r:reference { return { id: r.value, rawId: r.raw }; }
 
 // A line that starts with a parenthesised group reads that group once and then
 // branches on what follows it: the end of the line makes the group the whole
@@ -210,15 +212,24 @@ singleLineValueAndWhitespace = __ value:referenceOrLink { return value; }
 
 singleLineValues = list:singleLineValueAndWhitespace+ { return list; }
 
-singleLineLink = __ id:reference __ ":" v:singleLineValues { return { id: id, values: v }; }
+singleLineLink = __ id:reference __ ":" v:singleLineValues { return { id: id.value, rawId: id.raw, values: v }; }
 
 singleLineValueLink = v:singleLineValues { return { values: v }; }
 
-indentedIdLink = id:reference __ ":" eol { return { id: id, values: [] }; }
+indentedIdLink = id:reference __ ":" eol { return { id: id.value, rawId: id.raw, values: [] }; }
+
+// A reference is read as its value together with the text it was written as,
+// so a parsed link can say whether its ID was bare, quoted or a literal. The
+// text is taken from the document as the caller wrote it, which keeps the same
+// offsets as the document with its comments blanked out.
+reference = value:referenceValue {
+    const { start, end } = range();
+    return { value: value, raw: source.slice(start, end) };
+  }
 
 // Reference can be quoted (with any number of quotes N >= 1) or simple unquoted
 // Universal approach: use procedural parsing for all quote types and counts
-reference = referenceLiteral / quotedReference / simpleReference
+referenceValue = referenceLiteral / quotedReference / simpleReference
 
 // Versioned literals reserve ~<version>{<UTF-8 hex>} at a reference boundary.
 // A malformed reserved token must fail rather than fall back to a bare name.

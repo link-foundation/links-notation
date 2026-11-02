@@ -18,6 +18,10 @@ import java.util.Map;
  *   <li>Quoted references (single, double, backtick)
  *   <li>Multi-quote strings (e.g., triple quotes)
  * </ul>
+ *
+ * <p>Parsed links record how their IDs were written ({@link Link#getRawId()} and {@link
+ * Link#getQuote()}) unless the parser is created in AST mode, and {@link #parseCst(String)} reads a
+ * document as a lossless concrete syntax tree.
  */
 public class Parser {
 
@@ -36,6 +40,7 @@ public class Parser {
   private final int maxInputSize;
   private final int maxDepth;
   private final boolean comments;
+  private final boolean syntax;
 
   private String source;
   private List<String> lines;
@@ -81,9 +86,39 @@ public class Parser {
    *     comment
    */
   public Parser(int maxInputSize, int maxDepth, boolean comments) {
+    this(maxInputSize, maxDepth, comments, true);
+  }
+
+  /**
+   * Creates a parser with default limits that reads {@code #} and records how IDs were written the
+   * way the flags ask.
+   *
+   * @param comments if false, read {@code #} as an ordinary character instead of the start of a
+   *     comment
+   * @param syntax if false (AST mode), parsed links do not record how their IDs were written, so
+   *     {@link Link#getRawId()} and {@link Link#getQuote()} are null
+   */
+  public Parser(boolean comments, boolean syntax) {
+    this(DEFAULT_MAX_INPUT_SIZE, DEFAULT_MAX_DEPTH, comments, syntax);
+  }
+
+  /**
+   * Creates a parser with custom options.
+   *
+   * @param maxInputSize maximum input size in bytes
+   * @param maxDepth how deep links may nest: every parenthesized group and every indentation level
+   *     is one level, and a document nested deeper is refused with a {@link
+   *     NestingTooDeepException}
+   * @param comments if false, read {@code #} as an ordinary character instead of the start of a
+   *     comment
+   * @param syntax if false (AST mode), parsed links do not record how their IDs were written, so
+   *     {@link Link#getRawId()} and {@link Link#getQuote()} are null
+   */
+  public Parser(int maxInputSize, int maxDepth, boolean comments, boolean syntax) {
     this.maxInputSize = maxInputSize;
     this.maxDepth = maxDepth;
     this.comments = comments;
+    this.syntax = syntax;
   }
 
   /** Return the maximum document size accepted by this parser. */
@@ -99,6 +134,15 @@ public class Parser {
   /** Return whether {@code #} starts comments. */
   public boolean isCommentsEnabled() {
     return comments;
+  }
+
+  /**
+   * Return whether parsed links record how their IDs were written; false in AST mode.
+   *
+   * @return true unless the parser was created in AST mode
+   */
+  public boolean isSyntaxEnabled() {
+    return syntax;
   }
 
   /**
@@ -146,6 +190,25 @@ public class Parser {
   }
 
   /**
+   * Read the document as a lossless concrete syntax tree.
+   *
+   * <p>Every character of the input, comments, whitespace and line endings included, belongs to
+   * exactly one token, so {@code parseCst(input).toString()} equals {@code input}. The document is
+   * first parsed with this parser's options, so it is refused whenever {@link #parse(String)}
+   * refuses it, and also when its parentheses do not balance.
+   *
+   * @param input text in Lino notation
+   * @return the {@link CstKind#DOCUMENT} node
+   * @throws ParseException if parsing fails or the parentheses do not balance
+   * @throws NestingTooDeepException if links nest deeper than the maximum depth
+   * @throws IllegalArgumentException if input is null or exceeds maximum size
+   */
+  public CstNode parseCst(String input) throws ParseException {
+    parse(input);
+    return CstBuilder.build(input, comments);
+  }
+
+  /**
    * Report whether a body written between an even run of delimiters is substantive.
    *
    * <p>A substantive body holds at least one visible character and does not straddle a parenthesis.
@@ -175,7 +238,7 @@ public class Parser {
   }
 
   /** The decoded value of a delimited reference and the position right after it. */
-  private static final class QuotedString {
+  static final class QuotedString {
     final String value;
     final int end;
 
@@ -195,7 +258,7 @@ public class Parser {
    *
    * <p>Returns null when text does not start a delimited reference.
    */
-  private static QuotedString parseQuotedStringAt(String text, int start) {
+  static QuotedString parseQuotedStringAt(String text, int start) {
     if (start >= text.length()) {
       return null;
     }
@@ -477,9 +540,7 @@ public class Parser {
 
     // Try indented ID syntax: id:
     if (content.endsWith(":")) {
-      String idPart = content.substring(0, content.length() - 1).trim();
-      String ref = extractReference(idPart);
-      result.put("id", ref);
+      putReference(result, content.substring(0, content.length() - 1), offset);
       result.put("values", new ArrayList<>());
       result.put("isIndentedId", true);
       return result;
@@ -488,13 +549,11 @@ public class Parser {
     // Try single-line link: id: values
     int colonPos = findColonOutsideQuotes(content);
     if (colonPos >= 0) {
-      String idPart = content.substring(0, colonPos).trim();
       String afterColon = content.substring(colonPos + 1);
       String valuesPart = afterColon.trim();
       int valuesOffset = offset + colonPos + 1 + leadingTrimmed(afterColon);
-      String ref = extractReference(idPart);
+      putReference(result, content.substring(0, colonPos), offset);
       List<Map<String, Object>> values = parseValues(valuesPart, valuesOffset, depth);
-      result.put("id", ref);
       result.put("values", values);
       return result;
     }
@@ -668,27 +727,12 @@ public class Parser {
       return new int[] {end >= 0 ? end + 1 : text.length()};
     }
 
-    // Regular value - read until space or end
-    boolean inSingle = false;
-    boolean inDouble = false;
-    boolean inBacktick = false;
-    int i = start;
-
-    while (i < text.length()) {
-      char c = text.charAt(i);
-      if (c == '\'' && !inDouble && !inBacktick) {
-        inSingle = !inSingle;
-      } else if (c == '"' && !inSingle && !inBacktick) {
-        inDouble = !inDouble;
-      } else if (c == '`' && !inSingle && !inDouble) {
-        inBacktick = !inBacktick;
-      } else if (c == ' ' && !inSingle && !inDouble && !inBacktick) {
-        break;
-      }
-      i++;
-    }
-
-    return new int[] {i};
+    // Regular value - read until space or end. A delimited reference was tried
+    // above, so a quote here is an ordinary character of a bare reference and
+    // does not hide the spaces after it: ('x y) is the two references 'x and y,
+    // as the reference grammar (js/src/grammar.pegjs) reads it.
+    int i = text.indexOf(' ', start);
+    return new int[] {i < 0 ? text.length() : i};
   }
 
   /**
@@ -707,23 +751,54 @@ public class Parser {
     }
 
     // Simple reference
-    String ref = extractReference(value);
-    result.put("id", ref);
+    putReference(result, value, offset);
     return result;
   }
 
-  /** Extract reference, handling quoted strings with escaping support. */
-  private String extractReference(String text) {
-    text = text.trim();
-    if (ReferenceLiteral.hasPrefix(text)) return ReferenceLiteral.decode(text);
-
-    QuotedString quoted = parseQuotedStringAt(text, 0);
-    if (quoted != null) {
-      return quoted.value;
+  /**
+   * Read the reference written in {@code text} into {@code result}: its value as {@code id}, and
+   * the text it was written as, sliced from the document the caller wrote, as {@code rawId}.
+   *
+   * @param text the reference, possibly with whitespace around it
+   * @param offset where {@code text} starts in the document
+   */
+  private void putReference(Map<String, Object> result, String text, int offset) {
+    int start = leadingTrimmed(text);
+    String trimmed = text.trim();
+    String value;
+    int length = trimmed.length();
+    if (ReferenceLiteral.hasPrefix(trimmed)) {
+      value = ReferenceLiteral.decode(trimmed);
+    } else {
+      QuotedString quoted = parseQuotedStringAt(trimmed, 0);
+      if (quoted != null) {
+        value = quoted.value;
+        length = quoted.end;
+      } else {
+        // Unquoted
+        value = trimmed;
+      }
     }
+    result.put("id", value);
+    // Comments are blanked without moving anything, so the offsets of the
+    // prepared text are offsets in the document as written.
+    result.put("rawId", source.substring(offset + start, offset + start + length));
+  }
 
-    // Unquoted
-    return text;
+  /**
+   * Record how a parsed item wrote its ID on the link made from it, unless this parser reads a bare
+   * abstract syntax tree.
+   *
+   * @param link the link made from the item
+   * @param item the parsed item, with the {@code rawId} it was read with
+   * @return the same link
+   */
+  private Link withRawId(Link link, Map<String, Object> item) {
+    Object raw = item.get("rawId");
+    if (syntax && link.getId() != null && raw instanceof String) {
+      link.setRawId((String) raw);
+    }
+    return link;
   }
 
   private static String repeatChar(char c, int count) {
@@ -771,6 +846,7 @@ public class Parser {
 
       Map<String, Object> linkWithChildren = new HashMap<>();
       linkWithChildren.put("id", item.get("id"));
+      linkWithChildren.put("rawId", item.get("rawId"));
       linkWithChildren.put("values", childValues);
       Link currentLink = transformLinkFromValues(linkWithChildren, childValues);
 
@@ -823,7 +899,7 @@ public class Parser {
       for (Map<String, Object> child : children) {
         values.add(transformIndentedValue(child));
       }
-      return new Link((String) item.get("id"), values);
+      return withRawId(new Link((String) item.get("id"), values), item);
     }
 
     Link current = transformLink(item);
@@ -832,7 +908,7 @@ public class Parser {
       for (Map<String, Object> child : children) {
         values.add(transformIndentedValue(child));
       }
-      return new Link(current.getId(), values);
+      return withRawId(new Link(current.getId(), values), item);
     }
     if (item.get("id") == null && !item.containsKey("nested") && current.getValues().size() == 1) {
       return current.getValues().get(0);
@@ -910,7 +986,7 @@ public class Parser {
 
     // Simple reference
     if (item.containsKey("id") && !item.containsKey("values")) {
-      return new Link((String) item.get("id"));
+      return withRawId(new Link((String) item.get("id")), item);
     }
 
     // Link with values
@@ -927,16 +1003,16 @@ public class Parser {
         }
       }
 
-      return new Link(linkId, values);
+      return withRawId(new Link(linkId, values), item);
     }
 
     // Default
-    return new Link((String) item.get("id"));
+    return withRawId(new Link((String) item.get("id")), item);
   }
 
   /** Transform link with already-transformed values. */
   private Link transformLinkFromValues(Map<String, Object> item, List<Link> values) {
     String linkId = (String) item.get("id");
-    return new Link(linkId, values);
+    return withRawId(new Link(linkId, values), item);
   }
 }

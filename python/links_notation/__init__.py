@@ -22,10 +22,12 @@ from .binary import (
 from .binary import format_document as format_binary_document
 from .binary import format_reference as format_binary_reference
 from .comments import strip_comments
+from .cst import CstKind, CstNode, build_cst
 from .format_config import FormatConfig
 from .formatter import format_links
 from .link import Link
 from .parser import DEFAULT_MAX_DEPTH, ParseError, Parser
+from .quotes import reference_quote
 from .reference_literal import decode_reference_literal, encode_reference_literal
 from .stream_parser import StreamParseError, StreamParser, StreamPosition, parse_async_chunks, parse_chunks
 
@@ -78,5 +80,9 @@ __all__ = [
     "parse_chunks",
     "FormatConfig",
     "strip_comments",
+    "CstKind",
+    "CstNode",
+    "build_cst",
+    "reference_quote",
     "__version__",
 ]

@@ -8,8 +8,9 @@ use nom::{
     multi::{many0, many1},
     sequence::{preceded, terminated},
 };
-use std::cell::{OnceCell, RefCell};
+use std::cell::{Cell, OnceCell, RefCell};
 use std::collections::HashMap;
+use std::ops::Range;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Link {
@@ -20,6 +21,12 @@ pub struct Link {
     /// Body of a parenthesized group, kept unflattened until the whole document
     /// is transformed. `None` for every link that is not a parenthesized group.
     pub nested: Option<Vec<Link>>,
+    /// Where the ID was written: the byte range of the reference, quotes,
+    /// escapes and literal syntax included, in the document that was parsed.
+    /// The parser reads a copy of the document with its comments blanked, which
+    /// keeps every byte where it was, so the range also locates the ID in the
+    /// document as the caller wrote it. `None` when the link has no ID.
+    pub id_span: Option<Range<usize>>,
 }
 
 impl Link {
@@ -30,6 +37,7 @@ impl Link {
             children: vec![],
             is_indented_id: false,
             nested: None,
+            id_span: None,
         }
     }
 
@@ -40,6 +48,7 @@ impl Link {
             children: vec![],
             is_indented_id: true,
             nested: None,
+            id_span: None,
         }
     }
 
@@ -50,6 +59,7 @@ impl Link {
             children: vec![],
             is_indented_id: false,
             nested: None,
+            id_span: None,
         }
     }
 
@@ -60,6 +70,7 @@ impl Link {
             children: vec![],
             is_indented_id: false,
             nested: None,
+            id_span: None,
         }
     }
 
@@ -72,11 +83,18 @@ impl Link {
             children: vec![],
             is_indented_id: false,
             nested: Some(body),
+            id_span: None,
         }
     }
 
     pub fn with_children(mut self, children: Vec<Link>) -> Self {
         self.children = children;
+        self
+    }
+
+    /// The same link, recording where its ID was written.
+    pub fn with_id_span(mut self, span: Range<usize>) -> Self {
+        self.id_span = Some(span);
         self
     }
 }
@@ -106,6 +124,9 @@ pub struct ParserState {
     unreadable_lines: RefCell<HashMap<LineKey, LineFailure>>,
     /// The delimited references of the document being parsed.
     references: OnceCell<DelimitedReferences>,
+    /// Address of the first byte of the document being parsed, which turns the
+    /// part of the document a reference was read from into a byte range.
+    document_start: Cell<usize>,
 }
 
 /// Where a line starts, as an address into the document, and whether it is
@@ -183,6 +204,7 @@ impl ParserState {
             furthest: RefCell::new(FurthestFailure::default()),
             unreadable_lines: RefCell::new(HashMap::new()),
             references: OnceCell::new(),
+            document_start: Cell::new(0),
         }
     }
 
@@ -422,6 +444,18 @@ fn reference<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, String
     parsed
 }
 
+/// A reference together with the byte range it was written at, so that a link
+/// can say how its ID was written.
+fn spanned_reference<'a>(
+    input: &'a str,
+    state: &ParserState,
+) -> IResult<&'a str, (String, Range<usize>)> {
+    let (rest, value) = reference(input, state)?;
+    let start = (input.as_ptr() as usize).saturating_sub(state.document_start.get());
+    let end = start + (input.len() - rest.len());
+    Ok((rest, (value, start..end)))
+}
+
 fn eol<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, &'a str> {
     let parsed = alt((
         preceded(horizontal_whitespace, alt((line_ending, tag("\r")))),
@@ -475,7 +509,8 @@ fn strip_line_ending(input: &str) -> Option<&str> {
 fn reference_or_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     alt((
         |i| nested_group(i, state),
-        (|i| reference(i, state)).map(Link::new_singlet),
+        (|i| spanned_reference(i, state))
+            .map(|(id, span)| Link::new_singlet(id).with_id_span(span)),
     ))
     .parse(input)
 }
@@ -493,11 +528,11 @@ fn single_line_values<'a>(input: &'a str, state: &ParserState) -> IResult<&'a st
 
 fn single_line_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
     let (input, _) = horizontal_whitespace(input)?;
-    let (input, id) = reference(input, state)?;
+    let (input, (id, span)) = spanned_reference(input, state)?;
     let (input, _) = horizontal_whitespace(input)?;
     let (input, _) = colon(input, state)?;
     let (input, values) = single_line_values(input, state)?;
-    Ok((input, Link::new_link(Some(id), values)))
+    Ok((input, Link::new_link(Some(id), values).with_id_span(span)))
 }
 
 /// The colon that separates an identifier from its values.
@@ -526,11 +561,11 @@ fn single_line_value_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'
 }
 
 fn indented_id_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Link> {
-    let (input, id) = reference(input, state)?;
+    let (input, (id, span)) = spanned_reference(input, state)?;
     let (input, _) = horizontal_whitespace(input)?;
     let (input, _) = colon(input, state)?;
     let (input, _) = eol(input, state)?;
-    Ok((input, Link::new_indented_id(id)))
+    Ok((input, Link::new_indented_id(id).with_id_span(span)))
 }
 
 /// A parenthesized group opens a nested context: its body starts fresh at
@@ -613,7 +648,8 @@ fn read_any_link<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Li
         // nothing else can read a line that opens one. Report it the way the
         // single-line value link does, as a missing reference.
         Err(_) if input.starts_with('(') => {
-            return reference(input, state).map(|(rest, id)| (rest, Link::new_singlet(id)));
+            return spanned_reference(input, state)
+                .map(|(rest, (id, span))| (rest, Link::new_singlet(id).with_id_span(span)));
         }
         Err(_) => {
             return alt((
@@ -748,6 +784,7 @@ fn document<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Lin
     state
         .references
         .get_or_init(|| DelimitedReferences::new(input));
+    state.document_start.set(input.as_ptr() as usize);
 
     // Skip leading blank lines but preserve the line structure
     let document = skip_empty_lines(input);

@@ -234,6 +234,47 @@ call it on already decoded `Link.id` values.
 
 See the [Q&A document example](../examples/js_indented_document.js).
 
+### How a Document Was Written (CST)
+
+Parsing keeps how every ID was written. Quoting never changes a reference:
+`1` and `'1'` are the same reference, so equality, formatting and JSON stay as
+they were. Each parsed link also carries `rawId`, the ID exactly as written,
+and `quote`, the delimiter it was written between:
+
+```javascript
+import { Parser } from 'links-notation';
+
+const [link] = new Parser().parse("(t 1 '1')");
+const [, bare, quoted] = link.values;
+bare.equals(quoted); // true: the same reference
+[bare.rawId, bare.quote]; // ['1', null]
+[quoted.rawId, quoted.quote]; // ["'1'", "'"]
+link.format(); // '(t 1 1)'
+```
+
+`rawId` is `null` for links without an ID, links built in code, and links
+made by indentation path combination. Use `new Parser({ syntax: false })` (AST
+mode) to leave it out.
+
+`parseCst(input)` returns the lossless concrete syntax tree. Every character,
+including comments, blank lines, indentation, quotes and line endings, belongs
+to exactly one token, so the original text is always recovered:
+
+```javascript
+const cst = new Parser().parseCst("(t 1 '1') # note\n");
+cst.toString(); // "(t 1 '1') # note\n"
+cst.tokens().map((token) => [token.kind, token.text]);
+// [['open_paren', '('], ['reference', 't'], ['whitespace', ' '], ...]
+cst.toSExpression();
+// (document (line (group open_paren:"(" (line reference:"t" ...) close_paren:")") whitespace:" " comment:"# note" newline:"\n"))
+```
+
+A `document` node holds `line` nodes. A line holds its tokens up to and
+including its line ending. A `group` node holds `(`, the lines inside it, and
+`)`. Reference tokens carry `value` (what the reference means) and `quote`.
+`parseCst` refuses exactly what `parse` refuses. See
+[the issue 364 case study](../docs/case-studies/issue-364/README.md).
+
 ### Streaming Parser (for Large Messages)
 
 The `StreamParser` allows you to parse Links Notation incrementally, processing data as it arrives without loading the entire message into memory. This is ideal for:
@@ -429,6 +470,9 @@ Main parser class for converting strings to links.
 - `initialize()` - Initialize the parser (async)
 - `parse(input)` - Parse a Lino string and return links
 - `parseGroups(input)` - Read an indentation tree as `LinksGroup` instances
+- `parseCst(input)` - Read the lossless concrete syntax tree (`CstNode`)
+  - `options.syntax` - If `false` (AST mode), parsed links leave `rawId` null
+    (default: `true`)
 
 #### `Link`
 
@@ -438,6 +482,9 @@ Represents a single link with ID and values.
 - `toString()` - Convert link to string format
 - `id` - Link identifier
 - `values` - Array of child values/links
+- `rawId` - The ID exactly as the parsed document wrote it, or `null`; ignored
+  by `equals`, `format` and JSON
+- `quote` - `'`, `"` or `` ` `` when `rawId` is quoted, otherwise `null`
 - `escapeReference(reference, options)` - Quote a reference; `minimal: true`
   allows ordinary prose on a text document line
 - `unescapeReference(reference)` - Decode a complete serialized reference

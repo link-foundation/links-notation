@@ -40,6 +40,13 @@ class Parser
     /** @var bool Whether `#` starts a comment. */
     public bool $comments;
 
+    /**
+     * @var bool Whether parsed links record how their IDs were written
+     *           (Link::getRawId() and Link::getQuote()); false reads a bare
+     *           abstract syntax tree.
+     */
+    public bool $syntax;
+
     /** @var int[] */
     private array $indentationStack = [0];
 
@@ -77,15 +84,21 @@ class Parser
      *                           getMaxDepth() is set
      * @param bool $comments     If false, read `#` as an ordinary character
      *                           instead of the start of a comment (default: true)
+     * @param bool $syntax       If false, read links as a bare abstract syntax
+     *                           tree: they do not record how their IDs were
+     *                           written, so Link::getRawId() and
+     *                           Link::getQuote() are null (default: true)
      */
     public function __construct(
         int $maxInputSize = 10 * 1024 * 1024,
         int $maxDepth = self::DEFAULT_MAX_DEPTH,
-        bool $comments = true
+        bool $comments = true,
+        bool $syntax = true
     ) {
         $this->maxInputSize = $maxInputSize;
         $this->maxDepth = $maxDepth;
         $this->comments = $comments;
+        $this->syntax = $syntax;
     }
 
     /**
@@ -126,6 +139,30 @@ class Parser
         $this->depth = 0;
 
         return $this->transformResult($this->parseDocument());
+    }
+
+    /**
+     * Read the document as a lossless concrete syntax tree.
+     *
+     * Every character of the input, comments and whitespace included, belongs
+     * to exactly one token, so `(string) $parser->parseCst($input) === $input`.
+     * The document is first parsed with this parser's options, so it is
+     * refused whenever parse() would refuse it. A tree also needs balanced
+     * parentheses, so a document whose parentheses are unbalanced is refused
+     * as well, even where parse() reads it leniently.
+     *
+     * @param  string $input Text in Lino notation
+     * @return CstNode The `document` node
+     *
+     * @throws InvalidArgumentException If input exceeds maximum size
+     * @throws ParseException           If parsing fails, or the parentheses
+     *                                  are unbalanced
+     */
+    public function parseCst(string $input): CstNode
+    {
+        $this->parse($input);
+
+        return CstBuilder::build($input, $this->comments);
     }
 
     /**
@@ -231,6 +268,19 @@ class Parser
     private static function skipQuotedString(string $text, int $start): int
     {
         return self::quotedReferenceEnd($text, $start);
+    }
+
+    /**
+     * Read the delimited reference starting at $start, as the parser reads it.
+     *
+     * @return array{0: string, 1: int}|null The decoded value and the position
+     *                                       right after the closing quotes, or
+     *                                       null when $text does not start a
+     *                                       delimited reference
+     */
+    public static function readDelimitedReference(string $text, int $start): ?array
+    {
+        return self::parseQuotedStringAt($text, $start);
     }
 
     /**
@@ -451,21 +501,21 @@ class Parser
 
         // Try indented id syntax: id:
         if (str_ends_with($content, ':')) {
-            $idPart = trim(substr($content, 0, -1));
-
-            return ['id' => $this->extractReference($idPart), 'values' => [], 'is_indented_id' => true];
+            return $this->readReference(substr($content, 0, -1), $offset) + [
+                'values' => [],
+                'is_indented_id' => true,
+            ];
         }
 
         // Try single-line link: id: values
         $colonPos = $this->findColonOutsideQuotes($content);
         if ($colonPos >= 0) {
-            $idPart = trim(substr($content, 0, $colonPos));
+            $idPart = substr($content, 0, $colonPos);
             $afterColon = substr($content, $colonPos + 1);
             $valuesPart = trim($afterColon);
             $valuesOffset = $offset + $colonPos + 1 + strlen($afterColon) - strlen(ltrim($afterColon));
 
-            return [
-                'id' => $this->extractReference($idPart),
+            return $this->readReference($idPart, $offset) + [
                 'values' => $this->parseValues($valuesPart, $valuesOffset),
             ];
         }
@@ -682,25 +732,11 @@ class Parser
             return [$length, substr($text, $start)];
         }
 
-        // Regular value - read until space or end
-        $inSingle = false;
-        $inDouble = false;
-        $inBacktick = false;
-        $i = $start;
-
-        while ($i < $length) {
-            $char = $text[$i];
-            if ($char === "'" && !$inDouble && !$inBacktick) {
-                $inSingle = !$inSingle;
-            } elseif ($char === '"' && !$inSingle && !$inBacktick) {
-                $inDouble = !$inDouble;
-            } elseif ($char === '`' && !$inSingle && !$inDouble) {
-                $inBacktick = !$inBacktick;
-            } elseif ($char === ' ' && !$inSingle && !$inDouble && !$inBacktick) {
-                break;
-            }
-            $i++;
-        }
+        // Regular value - read until space or end. A delimited reference was
+        // tried above, so a quote here is an ordinary character of a bare
+        // reference and does not hide the spaces after it: ('x y) is the two
+        // references 'x and y, as in every other implementation.
+        $i = $start + strcspn($text, ' ', $start);
 
         return [$i, substr($text, $start, $i - $start)];
     }
@@ -719,26 +755,37 @@ class Parser
         }
 
         // Simple reference
-        return ['id' => $this->extractReference($value)];
+        return $this->readReference($value, $offset);
     }
 
     /**
-     * Extract reference, handling quoted strings with escaping support.
+     * Read the reference written in $text, which starts at $offset, handling
+     * quoted strings with escaping support.
+     *
+     * @return array{id: string, raw: string} The reference and the text it was
+     *                                        written as, taken from the
+     *                                        document as the caller wrote it
      */
-    private function extractReference(string $text): string
+    private function readReference(string $text, int $offset): array
     {
-        $text = trim($text);
-        if (ReferenceLiteral::hasPrefix($text)) {
-            return ReferenceLiteral::decode($text);
+        $trimmed = trim($text);
+        $start = $offset + strlen($text) - strlen(ltrim($text));
+        $length = strlen($trimmed);
+        if (ReferenceLiteral::hasPrefix($trimmed)) {
+            $id = ReferenceLiteral::decode($trimmed);
+        } else {
+            $quoted = self::parseQuotedStringAt($trimmed, 0);
+            if ($quoted !== null) {
+                [$id, $length] = $quoted;
+            } else {
+                // Unquoted
+                $id = $trimmed;
+            }
         }
 
-        $quoted = self::parseQuotedStringAt($text, 0);
-        if ($quoted !== null) {
-            return $quoted[0];
-        }
-
-        // Unquoted
-        return $text;
+        // The comments of the document read were blanked, which keeps every
+        // position, so the text written is at the same place in the source.
+        return ['id' => $id, 'raw' => substr($this->source, $start, $length)];
     }
 
     /**
@@ -782,7 +829,7 @@ class Parser
         if ($isIndentedId) {
             $childValues = array_map([$this, 'transformIndentedValue'], $children);
 
-            $currentLink = new Link($id, $childValues);
+            $currentLink = $this->withRawId(new Link($id, $childValues), $item);
             $result[] = $parentPath ? $this->combinePathElements($parentPath, $currentLink) : $currentLink;
 
             return;
@@ -807,13 +854,16 @@ class Parser
     {
         $children = $item['children'] ?? [];
         if ($children && isset($item['id']) && !($item['values'] ?? [])) {
-            return new Link($item['id'], array_map([$this, 'transformIndentedValue'], $children));
+            return $this->withRawId(
+                new Link($item['id'], array_map([$this, 'transformIndentedValue'], $children)),
+                $item
+            );
         }
 
         $current = $this->transformLink($item);
         if ($children) {
             $values = array_merge($current->values, array_map([$this, 'transformIndentedValue'], $children));
-            return new Link($current->id, $values);
+            return $this->withRawId(new Link($current->id, $values), $item);
         }
         if (!isset($item['id']) && !array_key_exists('nested', $item) && count($current->values) === 1) {
             return $current->values[0];
@@ -867,16 +917,35 @@ class Parser
 
         // Simple reference
         if (array_key_exists('id', $item) && !array_key_exists('values', $item)) {
-            return new Link($item['id']);
+            return $this->withRawId(new Link($item['id']), $item);
         }
 
         // Link with values
         if (array_key_exists('values', $item)) {
-            return new Link($item['id'] ?? null, array_map([$this, 'transformLink'], $item['values']));
+            return $this->withRawId(
+                new Link($item['id'] ?? null, array_map([$this, 'transformLink'], $item['values'])),
+                $item
+            );
         }
 
         // Default
-        return new Link($item['id'] ?? null);
+        return $this->withRawId(new Link($item['id'] ?? null), $item);
+    }
+
+    /**
+     * Record how the parsed item wrote its ID, unless this parser reads a bare
+     * abstract syntax tree.
+     *
+     * @param array<string, mixed> $item The parsed item, with the `raw` text
+     *                                   its reference was read from
+     */
+    private function withRawId(Link $link, array $item): Link
+    {
+        if ($this->syntax && $link->id !== null && is_string($item['raw'] ?? null)) {
+            $link->setRawId($item['raw']);
+        }
+
+        return $link;
     }
 
     /**

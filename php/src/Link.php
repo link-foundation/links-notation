@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace LinkFoundation\LinksNotation;
 
+use WeakMap;
+
 /**
  * Represents a link in Lino notation.
  *
@@ -26,6 +28,14 @@ class Link
 
     /** @var bool True when the link was built by combining an indentation path. */
     public bool $isFromPathCombination = false;
+
+    /**
+     * @var WeakMap<Link, string>|null How each parsed link wrote its ID, kept
+     *                                  outside the links themselves so that
+     *                                  comparing (`==`, equals()), exporting or
+     *                                  serializing a link is unchanged.
+     */
+    private static ?WeakMap $rawIds = null;
 
     /**
      * @param string|null $id     Optional identifier for the link
@@ -66,6 +76,49 @@ class Link
         }
 
         return true;
+    }
+
+    /**
+     * The ID exactly as the parsed document wrote it: `'1'` for a quoted `1`,
+     * `1` for a bare one, `~1{31}` for a versioned literal, quotes, doubled
+     * quote runs and line breaks included.
+     *
+     * Null for a link without an ID, a link built in code, a link made by
+     * combining the lines of an indented document, a copy made with `clone`,
+     * and every link read by a parser created with `syntax: false`. It takes
+     * no part in equals(), `==`, format(), `__toString()` or serialization.
+     */
+    public function getRawId(): ?string
+    {
+        return self::$rawIds !== null && isset(self::$rawIds[$this]) ? self::$rawIds[$this] : null;
+    }
+
+    /**
+     * Record how the ID of this link was written (see getRawId()); null
+     * forgets it.
+     */
+    public function setRawId(?string $rawId): void
+    {
+        if ($rawId === null) {
+            if (self::$rawIds !== null) {
+                unset(self::$rawIds[$this]);
+            }
+
+            return;
+        }
+        self::$rawIds ??= new WeakMap();
+        self::$rawIds[$this] = $rawId;
+    }
+
+    /**
+     * The delimiter the ID was written between: `'`, `"` or `` ` `` when it
+     * was quoted, and null when it was bare, a versioned literal, or not read
+     * from a document (see getRawId()). `1` and `'1'` stay equal links; this
+     * only says how each was written.
+     */
+    public function getQuote(): ?string
+    {
+        return self::referenceQuote($this->getRawId());
     }
 
     /**
@@ -124,6 +177,24 @@ class Link
             return '';
         }
         return ReferenceLiteral::format($reference);
+    }
+
+    /**
+     * The delimiter one reference was written between, read from the reference
+     * as it was written: `'`, `"` or `` ` `` for a quoted reference (however
+     * many of them open it), and null for a bare reference, a versioned
+     * literal, or no text.
+     *
+     * `'1'` gives `'`, `""a b""` gives `"`, while `1`, `~1{31}`, `'a' b` and
+     * `'unclosed` (a bare reference that starts with a quote) give null.
+     */
+    public static function referenceQuote(?string $raw): ?string
+    {
+        if ($raw === null || $raw === '' || !str_contains('\'"`', $raw[0])) {
+            return null;
+        }
+
+        return Parser::quotedReferenceEnd($raw, 0) === strlen($raw) ? $raw[0] : null;
     }
 
     /**

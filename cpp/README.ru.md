@@ -18,8 +18,8 @@ Foundation на C++17. Она не зависит ни от чего, кроме
 include(FetchContent)
 FetchContent_Declare(
   links_notation
-  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.27.1/links-notation-cpp-0.27.1.tar.gz
-  # Необязательно: контрольная сумма из links-notation-cpp-0.27.1.tar.gz.sha256
+  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.28.0/links-notation-cpp-0.28.0.tar.gz
+  # Необязательно: контрольная сумма из links-notation-cpp-0.28.0.tar.gz.sha256
   # URL_HASH SHA256=...
 )
 FetchContent_MakeAvailable(links_notation)
@@ -42,7 +42,7 @@ cmake --install build --prefix /usr/local
 Затем подключите её в своём проекте:
 
 ```cmake
-find_package(links_notation 0.27 REQUIRED CONFIG)
+find_package(links_notation 0.28 REQUIRED CONFIG)
 target_link_libraries(your_target PRIVATE links_notation::links_notation)
 ```
 
@@ -81,6 +81,8 @@ int main() {
 - Форматирование `Link` обратно в нотацию связей
 - Поддержка однострочного синтаксиса и синтаксиса с отступами
 - Комментарии `#`, включённые по умолчанию и отключаемые
+- Разобранные связи помнят, как были записаны их ID (`raw_id`, `quote()`), а
+  `parse_cst` даёт конкретное синтаксическое дерево без потерь
 - Строки в кавычках со специальными символами
 - Строки в тройных кавычках для вложенных кавычек
 - Настраиваемое форматирование через `FormatConfig`
@@ -131,8 +133,10 @@ class Link {
  public:
   std::optional<std::string> id;
   std::vector<Link> values;
+  std::optional<std::string> raw_id;  // как парсер прочитал записанный ID
 
   bool is_reference() const;
+  std::optional<char> quote() const;
   std::string format(bool less_parentheses = false, bool compound = false) const;
   std::string format(const FormatConfig& config, bool compound = false) const;
   bool equals(const Link& other) const;
@@ -169,6 +173,7 @@ options.max_depth = 16;
 const links_notation::Parser parser(options);
 std::vector<links_notation::Link> links = parser.parse(document);
 std::vector<links_notation::LinksGroup> groups = parser.parse_groups(document);
+links_notation::CstNode cst = parser.parse_cst(document);
 ```
 
 `ParserOptions` содержит:
@@ -178,9 +183,52 @@ std::vector<links_notation::LinksGroup> groups = parser.parse_groups(document);
 - `max_depth` - допустимая глубина вложенности связей (по умолчанию
   `default_max_depth`, то есть 64); см. [Глубина вложенности](#глубина-вложенности)
 - `comments` - начинает ли `#` комментарий (по умолчанию `true`)
+- `syntax` - записывают ли разобранные связи в `raw_id`, как был записан их ID
+  (по умолчанию `true`); `false` - режим AST
 
 `parse_groups` хранит связь каждой строки вместе со строками, вложенными под
 неё отступом, в виде `LinksGroup{element, children}`.
+
+### Синтаксические метаданные и конкретное синтаксическое дерево
+
+Разобранная связь помнит, как был записан её ID. `raw_id` - это ID ровно в том
+виде, в каком он записан в документе, вместе с кавычками, удвоенными сериями
+кавычек и литералами `~1{...}`, а `quote()` - его ограничитель (`'`, `"` или
+`` ` ``), если это одна полная ссылка в кавычках. Сравнение, форматирование и
+`operator<<` не учитывают ни то, ни другое, поэтому `1` и `'1'` по-прежнему
+одна и та же ссылка:
+
+```cpp
+const links_notation::Parser parser;
+const links_notation::Link link = parser.parse("(t 1 '1')")[0];
+// link.values[1].raw_id == "1",   link.values[1].quote() == std::nullopt
+// link.values[2].raw_id == "'1'", link.values[2].quote() == '\''
+// link.values[1] == link.values[2], а link.format() == "(t 1 1)"
+```
+
+У связей, созданных в коде, связей без ID и связей, полученных объединением
+пути отступов, `raw_id` нет. `parse_groups` и `StreamParser` его сохраняют, а
+`ParserOptions::syntax = false` (режим AST) отключает. `reference_quote(raw)`
+так же определяет ограничитель любой записанной ссылки.
+
+`parse_cst` читает конкретное синтаксическое дерево без потерь: каждый байт
+принадлежит ровно одному токену, поэтому `to_string()` в точности возвращает
+документ вместе с комментариями, пробелами и переводами строк. Для того же
+документа он выбрасывает то же, что и `parse`.
+
+```cpp
+const links_notation::CstNode cst = parser.parse_cst("a '1' # note\n");
+// cst.to_string() == "a '1' # note\n"
+// cst.to_s_expression() ==
+//   (document (line reference:"a" whitespace:" " reference:"'1'"
+//     whitespace:" " comment:"# note" newline:"\n"))
+```
+
+У `CstNode` есть `kind` (`CstKind::document`, `line` или `group` для узлов и
+`whitespace`, `newline`, `comment`, `open_paren`, `close_paren`, `colon` или
+`reference` для токенов), дочерние узлы `children`, а у токена-ссылки ещё и
+декодированное значение `value` и кавычка `quote`. Их читают `text()`,
+`tokens()`, `is_token()` и `to_s_expression()`.
 
 ### FormatConfig
 

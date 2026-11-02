@@ -61,3 +61,21 @@ export function unescapeReference(reference) {
   }
   return reading.value;
 }
+
+/**
+ * The delimiter a reference was written between, read from the reference as it
+ * was written: `'`, `"` or `` ` `` for a quoted reference (however many of them
+ * open it), and null for a bare reference, a versioned literal, or no text.
+ * @param {string|null|undefined} raw - One reference exactly as written
+ * @returns {string|null} The delimiter character, or null
+ * @example
+ * referenceQuote("'1'"); // "'"
+ * referenceQuote('""a b""'); // '"'
+ * referenceQuote('1'); // null
+ * referenceQuote("'unclosed"); // null: a bare reference that starts with '
+ */
+export function referenceQuote(raw) {
+  if (typeof raw !== 'string' || !QUOTES.includes(raw[0])) return null;
+  const reading = readReference(raw, 0);
+  return reading !== null && reading.length === raw.length ? raw[0] : null;
+}

@@ -136,6 +136,18 @@ namespace Link.Foundation.Links.Notation
             TryParse(subject, start, out var ignored, out var length) ? start + length : -1;
 
         /// <summary>
+        /// The delimiter of a reference written as <paramref name="raw"/>, when
+        /// <paramref name="raw"/> is exactly one delimited reference.
+        /// </summary>
+        /// <param name="raw">One reference exactly as written.</param>
+        /// <returns>The first character when reading a reference there consumes all of
+        /// <paramref name="raw"/>; otherwise <see langword="null"/>.</returns>
+        internal static char? ReferenceQuote(string? raw) =>
+            raw != null && raw.Length > 0 && IsQuote(raw[0]) && ReferenceEnd(raw, 0) == raw.Length
+                ? raw[0]
+                : null;
+
+        /// <summary>
         /// A run of an even number of delimiters that does not open a reference with a
         /// substantive body is the empty reference: the shortest reading, a bare
         /// delimiter pair enclosing nothing, wins over a longer n-quote delimiter.

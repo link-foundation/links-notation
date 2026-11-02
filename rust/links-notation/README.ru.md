@@ -15,7 +15,7 @@
 [dependencies]
 links-notation = { path = "." }  # Для локальной разработки
 # Или из реестра:
-# links-notation = "0.27.1"
+# links-notation = "0.28.0"
 ```
 
 ### Из исходного кода
@@ -269,6 +269,57 @@ let config = ParserConfig::without_comments();
 let links = parse_lino_to_links_with_config("# a b\n", &config)?;
 println!("{}", format_links(&links)); // (# a b)
 ```
+
+### Как были записаны ссылки
+
+`parse_lino_to_links` читает, что означает каждая ссылка, поэтому `1` и `'1'` -
+одна и та же ссылка. `parse_lino_to_syntax_links` читает те же связи, но
+хранит каждый ID в `SyntaxReference`: в нём есть `value` и `raw` - текст, в
+точности как ссылка записана; `quote()` возвращает её кавычку. Сравнение,
+хеширование и форматирование учитывают только значение, а `into_values()` (или
+`LiNo::<String>::from`) превращает связи обратно в обычные:
+
+```rust
+use links_notation::{format_links, parse_lino_to_syntax_links, LiNo};
+
+let links = parse_lino_to_syntax_links("(t 1 '1')")?;
+let LiNo::Link { values, .. } = &links[0] else { unreachable!() };
+assert_eq!(values[1], values[2]);
+assert_eq!((values[1].raw_id(), values[1].quote()), (Some("1"), None));
+assert_eq!((values[2].raw_id(), values[2].quote()), (Some("'1'"), Some('\'')));
+let plain: Vec<LiNo<String>> = links.into_iter().map(LiNo::into_values).collect();
+assert_eq!(format_links(&plain), "(t 1 1)");
+```
+
+Исходный текст берётся из документа в том виде, в каком он передан, вместе с
+комментариями. У связи без записанного ID (группы или пути, собранного по
+отступам) его нет. `reference_quote(raw)` определяет кавычку по одному тексту.
+`StreamParser::syntax()` (и `StreamParser::parse_syntax_chunks`) читает из потока
+те же связи `LiNo<SyntaxReference>`; `StreamParser::new()` остаётся в режиме AST.
+
+### Синтаксическое дерево без потерь
+
+`parse_lino_to_cst` возвращает конкретное синтаксическое дерево, токены которого
+содержат каждый символ документа, поэтому его печать в точности возвращает
+документ: пробелы, комментарии, переводы строк и запись каждой ссылки. Он
+отклоняет ровно то, что отклоняет парсер.
+
+```rust
+use links_notation::parse_lino_to_cst;
+
+let cst = parse_lino_to_cst("(t 1 '1') # note\n")?;
+assert_eq!(cst.to_string(), "(t 1 '1') # note\n");
+for token in cst.tokens() {
+    println!("{} {:?} {:?}", token.kind, token.text(), token.quote);
+}
+println!("{}", cst.to_s_expression());
+```
+
+Дерево - это `document` из строк `line`; `group` содержит свой `open_paren`,
+свои строки и `close_paren`. Токены: `whitespace`, `newline`, `comment`,
+`colon`, `open_paren`, `close_paren` и `reference`; токен ссылки также хранит
+`value` и `quote`. Подробности - в
+[разборе issue 364](../../docs/case-studies/issue-364/README.md).
 
 ## Справочник API
 

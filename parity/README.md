@@ -23,6 +23,48 @@ literals. The manifest additionally points to native binary and depth limit
 suites. This is executable evidence for the listed contracts, not a claim that a
 finite fixture corpus proves every possible input equivalent.
 
+## Syntax metadata and concrete syntax tree
+
+`syntax-fixtures.json` is the reviewed golden corpus for how a document was
+written (issue 364). Each case has an input; the expected parse tree with each
+link's `raw` ID text and `quote`; and the S-expression of its lossless concrete
+syntax tree. `syntax-vectors.tsv` is its generated twin: four tab-separated
+fields (case ID, input UTF-8 hex, tree, CST S-expression UTF-8 hex). Tree nodes
+are `(ID|RAW|QUOTE children…)`, where each slot is UTF-8 hex or `~` for null.
+The `syntax-metadata` and `concrete-syntax-tree` rows use the `shared-syntax`
+contract. Every binding runs the corpus. It also checks that every text and
+syntax fixture input comes back exactly from its CST, by string conversion and
+by joining its tokens. The contract is in
+`docs/case-studies/issue-364/specification.md`.
+
+The metadata never changes equality, hashing, formatting or serialization.
+Each binding's parser records it by default and has an AST mode that leaves it
+out. Hosts express this in their own idiom:
+
+- Rust keeps `LiNo<String>` for the existing functions, so their results and
+  `PartialEq` stay as they were. `parse_lino_to_syntax_links` returns
+  `LiNo<SyntaxReference>`, whose `raw_id()` and `quote()` hold the metadata, and
+  `into_values()` turns it back into `LiNo<String>`.
+- Go adds a `RawID` field and a `Quote()` method. `NewParser()` turns
+  `Syntax` on, while the zero value `Parser{}` is AST mode.
+- PHP exposes `getRawId()`/`getQuote()` and stores the text outside the object.
+  This keeps `==`, `serialize()` and `json_encode()` unchanged; a `clone`
+  therefore does not carry it.
+- C# adds `RawId { get; init; }` and `Quote` to `Link<TLinkAddress>`; the
+  parser's `Syntax { get; init; }` property defaults to true, so
+  `new Parser { Syntax = false }` is AST mode.
+- Java adds `getRawId()` and `getQuote()`, and the constructors
+  `Parser(boolean comments, boolean syntax)` and
+  `Parser(int, int, boolean comments, boolean syntax)`; the existing
+  constructors keep the metadata on.
+- Rust's `StreamParser::new()` yields `LiNo<String>` as before, and
+  `StreamParser::syntax()` yields `LiNo<SyntaxReference>`.
+
+`parseCst` parses the document first, so it fails whenever `parse` fails. In
+bindings whose `parse` accepts unbalanced parentheses (`(a` or `a)`), the CST
+cannot nest them, so `parseCst` also rejects them. The shared corpus contains
+only balanced documents.
+
 ## Explicit API exceptions
 
 PR 336 introduced `parseIndentedDocument`, `formatIndentedDocument`, and minimal

@@ -181,6 +181,11 @@ type Parser struct {
 	// line; when false it is an ordinary character.
 	Comments bool
 
+	// Syntax tells whether parsed links record how their IDs were written, in
+	// Link.RawID. When false the parser reads a bare abstract syntax tree (AST
+	// mode) and every RawID is nil. NewParser turns it on.
+	Syntax bool
+
 	// Internal state
 	source          string
 	text            string
@@ -198,12 +203,14 @@ func NewParser() *Parser {
 		MaxInputSize: 10 * 1024 * 1024, // 10MB
 		MaxDepth:     DefaultMaxDepth,
 		Comments:     true,
+		Syntax:       true,
 	}
 }
 
 // internalLink is an internal representation during parsing.
 type internalLink struct {
 	id           *string
+	rawID        *string // the ID exactly as the document wrote it
 	values       []*internalLink
 	children     []*internalLink
 	isIndentedID bool
@@ -593,19 +600,17 @@ func (p *Parser) parseLineContent(content string, offset int) *internalLink {
 
 	// Try indented ID syntax: id:
 	if strings.HasSuffix(content, ":") {
-		idPart := strings.TrimSpace(content[:len(content)-1])
-		ref := p.extractReference(idPart)
-		return &internalLink{id: &ref, values: nil, isIndentedID: true}
+		ref, raw := p.extractReference(content[:len(content)-1], offset)
+		return &internalLink{id: &ref, rawID: raw, values: nil, isIndentedID: true}
 	}
 
 	// Try single-line link: id: values
 	if colonPos := p.findColonOutsideQuotes(content); colonPos >= 0 {
-		idPart := strings.TrimSpace(content[:colonPos])
 		afterColon := content[colonPos+1:]
 		valuesPart := strings.TrimSpace(afterColon)
-		ref := p.extractReference(idPart)
+		ref, raw := p.extractReference(content[:colonPos], offset)
 		values := p.parseValues(valuesPart, offset+colonPos+1+leadingSpaceLength(afterColon))
-		return &internalLink{id: &ref, values: values}
+		return &internalLink{id: &ref, rawID: raw, values: values}
 	}
 
 	// Simple value list
@@ -739,32 +744,12 @@ func (p *Parser) extractNextValue(text string, start int) (int, string) {
 		return len(text), text[start:]
 	}
 
-	// Regular value - read until space or end
-	inSingle := false
-	inDouble := false
-	inBacktick := false
+	// Regular value - read until space or end. A quote that does not open a
+	// delimited reference is an ordinary character of a bare reference, as in
+	// the grammar, so it does not carry the value past a space: ('x y) holds
+	// the two references 'x and y.
 	i := start
-
-	for i < len(text) {
-		char := text[i]
-		switch char {
-		case '\'':
-			if !inDouble && !inBacktick {
-				inSingle = !inSingle
-			}
-		case '"':
-			if !inSingle && !inBacktick {
-				inDouble = !inDouble
-			}
-		case '`':
-			if !inSingle && !inDouble {
-				inBacktick = !inBacktick
-			}
-		case ' ':
-			if !inSingle && !inDouble && !inBacktick {
-				return i, text[start:i]
-			}
-		}
+	for i < len(text) && text[i] != ' ' {
 		i++
 	}
 
@@ -779,27 +764,54 @@ func (p *Parser) parseValue(value string, offset int) *internalLink {
 	}
 
 	// Simple reference
-	ref := p.extractReference(value)
-	return &internalLink{id: &ref}
+	ref, raw := p.extractReference(value, offset)
+	return &internalLink{id: &ref, rawID: raw}
 }
 
-func (p *Parser) extractReference(text string) string {
+// extractReference reads the reference written in text, which starts at offset
+// in the document. It returns the reference's value and the text it was
+// written as, sliced from the document as the caller wrote it (comments
+// included), which has every byte at the same offset as the prepared copy.
+func (p *Parser) extractReference(text string, offset int) (string, *string) {
+	leading := leadingSpaceLength(text)
 	text = strings.TrimSpace(text)
+	start := offset + leading
 	if literalPrefix.MatchString(text) {
 		value, err := DecodeReferenceLiteral(text)
 		if err != nil {
 			panic(referenceLiteralError{err})
 		}
-		return value
+		return value, p.rawReference(start, len(text))
 	}
 
 	// Try delimited references (any N quotes, or a bare delimiter pair)
-	if value, _, ok := parseQuotedStringAt(text, 0); ok {
-		return value
+	if value, end, ok := parseQuotedStringAt(text, 0); ok {
+		return value, p.rawReference(start, end)
 	}
 
 	// Unquoted
-	return text
+	return text, p.rawReference(start, len(text))
+}
+
+// rawReference is the length bytes of the document as written from start: how
+// a reference was written.
+func (p *Parser) rawReference(start, length int) *string {
+	end := start + length
+	if start < 0 || end > len(p.source) {
+		return nil
+	}
+	raw := p.source[start:end]
+	return &raw
+}
+
+// withRawID records on link how its ID was written, unless the parser reads a
+// bare abstract syntax tree or the link has no ID.
+func (p *Parser) withRawID(link *Link, item *internalLink) *Link {
+	if p.Syntax && link.ID != nil && item.rawID != nil {
+		raw := *item.rawID
+		link.RawID = &raw
+	}
+	return link
 }
 
 func (p *Parser) transformResult(rawResult []*internalLink) []*Link {
@@ -828,7 +840,7 @@ func (p *Parser) collectLinks(item *internalLink, parentPath []*Link, result *[]
 			childValues = append(childValues, p.transformIndentedValue(child))
 		}
 
-		currentLink := &Link{ID: item.id, Values: childValues}
+		currentLink := p.withRawID(&Link{ID: item.id, Values: childValues}, item)
 
 		if len(parentPath) == 0 {
 			*result = append(*result, currentLink)
@@ -875,7 +887,7 @@ func (p *Parser) transformIndentedValue(item *internalLink) *Link {
 		for _, child := range children {
 			values = append(values, p.transformIndentedValue(child))
 		}
-		return &Link{ID: item.id, Values: values}
+		return p.withRawID(&Link{ID: item.id, Values: values}, item)
 	}
 
 	current := p.transformLink(item)
@@ -884,7 +896,7 @@ func (p *Parser) transformIndentedValue(item *internalLink) *Link {
 		for _, child := range children {
 			values = append(values, p.transformIndentedValue(child))
 		}
-		return &Link{ID: current.ID, Values: values}
+		return &Link{ID: current.ID, RawID: current.RawID, Values: values}
 	}
 	if item.id == nil && !item.isNested && len(current.Values) == 1 {
 		return current.Values[0]
@@ -952,7 +964,7 @@ func (p *Parser) transformLink(item *internalLink) *Link {
 
 	// Simple reference
 	if item.id != nil && len(item.values) == 0 {
-		return &Link{ID: item.id}
+		return p.withRawID(&Link{ID: item.id}, item)
 	}
 
 	// Link with values
@@ -961,9 +973,9 @@ func (p *Parser) transformLink(item *internalLink) *Link {
 		for _, v := range item.values {
 			values = append(values, p.transformLink(v))
 		}
-		return &Link{ID: item.id, Values: values}
+		return p.withRawID(&Link{ID: item.id, Values: values}, item)
 	}
 
 	// Default
-	return &Link{ID: item.id}
+	return p.withRawID(&Link{ID: item.id}, item)
 }

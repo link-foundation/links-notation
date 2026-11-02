@@ -1,5 +1,10 @@
 export { Link, formatLinks } from './Link.js';
-export { escapeReference, unescapeReference } from './references.js';
+export {
+  escapeReference,
+  unescapeReference,
+  referenceQuote,
+} from './references.js';
+export { CstKind, CstNode } from './Cst.js';
 export {
   parseIndentedDocument,
   formatIndentedDocument,
