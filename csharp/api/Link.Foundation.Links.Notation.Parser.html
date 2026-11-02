@@ -342,6 +342,41 @@ rather than recursed into until the stack runs out.</p>
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Parser_Syntax.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Parser.Syntax%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Parser.cs/#L85">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Parser_Syntax_" data-uid="Link.Foundation.Links.Notation.Parser.Syntax*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Parser_Syntax" data-uid="Link.Foundation.Links.Notation.Parser.Syntax">Syntax</h4>
+  <div class="markdown level1 summary"><p>Whether parsed links record how their identifiers were written, in
+<a class="xref" href="Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_RawId">RawId</a> and <a class="xref" href="Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_Quote">Quote</a>.
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> by default; set it to <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> to read links
+as a bare abstract syntax tree (AST mode), in which both are always
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>. Equality and formatting are the same either way.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Syntax { get; init; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
 </h3>
   <span class="small pull-right mobile-hide">
@@ -349,7 +384,7 @@ rather than recursed into until the stack runs out.</p>
     <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Parser_Parse_System_String_System_String_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Parser.Parse(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Parser.cs/#L89">View Source</a>
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Parser.cs/#L98">View Source</a>
   </span>
   <a id="Link_Foundation_Links_Notation_Parser_Parse_" data-uid="Link.Foundation.Links.Notation.Parser.Parse*"></a>
   <h4 id="Link_Foundation_Links_Notation_Parser_Parse_System_String_System_String_" data-uid="Link.Foundation.Links.Notation.Parser.Parse(System.String,System.String)">Parse(string, string?)</h4>
@@ -414,6 +449,75 @@ rather than recursed into until the stack runs out.</p>
         <td><p>Thrown when the document does not parse, or nests deeper than
 <a class="xref" href="Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_MaxDepth">MaxDepth</a>. The exception carries the line, the column and the
 offending line of the position the parser stopped at.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Parser_ParseCst_System_String_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Parser.ParseCst(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Parser.cs/#L132">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_Parser_ParseCst_" data-uid="Link.Foundation.Links.Notation.Parser.ParseCst*"></a>
+  <h4 id="Link_Foundation_Links_Notation_Parser_ParseCst_System_String_" data-uid="Link.Foundation.Links.Notation.Parser.ParseCst(System.String)">ParseCst(string)</h4>
+  <div class="markdown level1 summary"><p>Reads a Links Notation document as a lossless concrete syntax tree.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CstNode ParseCst(string subject)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">subject</span></td>
+        <td><p>The document to read.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.CstNode.html">CstNode</a></td>
+        <td><p>The <a class="xref" href="Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Document">Document</a> node. Every character of the document,
+comments, whitespace and line endings included, belongs to exactly one token, so
+its <a class="xref" href="Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Text">Text</a> is <code class="paramref">subject</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.ParseException.html">ParseException</a></td>
+        <td><p>Thrown exactly when <a class="xref" href="Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_Parse_System_String_System_String_">Parse(string, string?)</a> refuses the document: it is parsed with
+this parser's options first.</p>
 </td>
       </tr>
     </tbody>

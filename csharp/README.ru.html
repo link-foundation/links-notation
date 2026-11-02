@@ -152,6 +152,42 @@ stream.Finish(&quot;следующая связь&quot;);
 </code></pre>
 <p><code>ParseChunks</code> и <code>ParseChunksAsync</code> предоставляют нативные перечислители. Также
 доступны <code>Position</code>, <code>Drain</code>, <code>Reset</code> и <code>MaxBufferSize</code>.</p>
+<h3 id="как-был-записан-документ-cst">Как был записан документ (CST)</h3>
+<p>Разбор сохраняет то, как был записан каждый ID. Кавычки не меняют ссылку: <code>1</code>
+и <code>'1'</code> — одна и та же ссылка, поэтому <code>Equals</code>, <code>GetHashCode</code>, <code>ToString</code> и
+<code>Format</code> работают как прежде. Каждая разобранная связь также хранит <code>RawId</code> —
+ID точно в том виде, в каком он записан, и <code>Quote</code> — кавычку, в которую он
+заключён:</p>
+<pre><code class="lang-csharp">var link = new Parser().Parse(&quot;(t 1 '1')&quot;)[0];
+var (bare, quoted) = (link.Values![1], link.Values[2]);
+bare == quoted;                // true: одна и та же ссылка
+(bare.RawId, bare.Quote);      // (&quot;1&quot;, null)
+(quoted.RawId, quoted.Quote);  // (&quot;'1'&quot;, '\'')
+link.ToString();               // &quot;(t 1 1)&quot;
+</code></pre>
+<p><code>RawId</code> равен <code>null</code> у связей без ID, у связей, созданных в коде, и у связей,
+полученных объединением путей по отступам; <code>StreamParser</code> его сохраняет. Для
+связи, созданной в коде, его можно задать как
+<code>new Link&lt;string&gt;(&quot;a&quot;) { RawId = &quot;'a'&quot; }</code> или <code>link.WithRawId(&quot;'a'&quot;)</code>.
+<code>Link&lt;T&gt;.ReferenceQuote(raw)</code> возвращает кавычку одной полностью записанной
+ссылки. <code>new Parser { Syntax = false }</code> (режим AST) не сохраняет эти данные.</p>
+<p><code>ParseCst(input)</code> возвращает конкретное синтаксическое дерево без потерь.
+Каждый символ, включая комментарии, пустые строки, отступы, кавычки и концы
+строк, принадлежит ровно одному токену, поэтому исходный текст всегда
+восстанавливается:</p>
+<pre><code class="lang-csharp">var cst = new Parser().ParseCst(&quot;(t 1 '1') # note\n&quot;);
+cst.ToString(); // &quot;(t 1 '1') # note\n&quot;
+cst.Tokens().Select(token =&gt; (token.Kind, token.Text));
+// (OpenParen, &quot;(&quot;), (Reference, &quot;t&quot;), (Whitespace, &quot; &quot;), ...
+cst.ToSExpression();
+// (document (line (group open_paren:&quot;(&quot; (line reference:&quot;t&quot; ...)
+//   close_paren:&quot;)&quot;) whitespace:&quot; &quot; comment:&quot;# note&quot; newline:&quot;\n&quot;))
+</code></pre>
+<p>Узел <code>Document</code> содержит узлы <code>Line</code>. Строка содержит свои токены вплоть до
+конца строки включительно. Узел <code>Group</code> содержит <code>(</code>, строки внутри и <code>)</code>.
+Токены ссылок хранят <code>Value</code> (что означает ссылка) и <code>Quote</code>. <code>ParseCst</code>
+выбрасывает <code>ParseException</code> ровно тогда, когда это делает <code>Parse</code>. См.
+<a href="../docs/case-studies/issue-364/README.md">разбор задачи 364</a>.</p>
 <h2 id="примеры-синтаксиса">Примеры синтаксиса</h2>
 <h3 id="дуплеты-2-кортежи">Дуплеты (2-кортежи)</h3>
 <pre><code class="lang-lino">папа (любитМаму: любит маму)
@@ -218,6 +254,8 @@ Console.WriteLine(plain.Parse(&quot;# a b\n&quot;)[0]); // (# a b)
 <li><strong>Link&lt;TLinkAddress&gt;</strong>: Представляет одну связь с ID и значениями</li>
 <li><strong>LinksGroup&lt;TLinkAddress&gt;</strong>: Контейнер для группировки связанных связей</li>
 <li><strong>ParseException</strong>: Выбрасывается, когда документ не разбирается</li>
+<li><strong>CstNode</strong> / <strong>CstKind</strong>: Конкретное синтаксическое дерево без потерь,
+которое возвращает <code>Parser.ParseCst</code></li>
 </ul>
 <h3 id="обработка-ошибок">Обработка ошибок</h3>
 <p><code>Parse</code> выбрасывает <code>ParseException</code>, сообщение которого говорит, где документ

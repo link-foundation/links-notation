@@ -229,6 +229,48 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.CstKind.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.CstKind.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.CstKind",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.CstKind.yml\" sourcestartlinenumber=\"1\">The kinds of nodes and tokens of a concrete syntax tree; see <xref href=\"Link.Foundation.Links.Notation.CstNode\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.CstKindExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.CstKindExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.CstKindExtensions",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.CstKindExtensions.yml\" sourcestartlinenumber=\"1\">Provides the names every Links Notation implementation gives the kinds of\n<xref href=\"Link.Foundation.Links.Notation.CstKind\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.CstNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.CstNode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.CstNode",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.CstNode.yml\" sourcestartlinenumber=\"1\">One node or token of the concrete syntax tree of a Links Notation document.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Link.Foundation.Links.Notation.FormatConfig.yml",
       "output": {
         ".html": {

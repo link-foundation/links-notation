@@ -151,6 +151,40 @@ stream.Finish(&quot;next link&quot;);
 </code></pre>
 <p><code>ParseChunks</code> and <code>ParseChunksAsync</code> expose native enumerable adapters. The
 parser also provides <code>Position</code>, <code>Drain</code>, <code>Reset</code>, and <code>MaxBufferSize</code>.</p>
+<h3 id="how-a-document-was-written-cst">How a Document Was Written (CST)</h3>
+<p>Parsing keeps how every ID was written. Quoting never changes a reference: <code>1</code>
+and <code>'1'</code> are the same reference, so <code>Equals</code>, <code>GetHashCode</code>, <code>ToString</code> and
+<code>Format</code> stay as they were. Each parsed link also carries <code>RawId</code>, the ID
+exactly as written, and <code>Quote</code>, the delimiter it was written between:</p>
+<pre><code class="lang-csharp">var link = new Parser().Parse(&quot;(t 1 '1')&quot;)[0];
+var (bare, quoted) = (link.Values![1], link.Values[2]);
+bare == quoted;                // true: the same reference
+(bare.RawId, bare.Quote);      // (&quot;1&quot;, null)
+(quoted.RawId, quoted.Quote);  // (&quot;'1'&quot;, '\'')
+link.ToString();               // &quot;(t 1 1)&quot;
+</code></pre>
+<p><code>RawId</code> is <code>null</code> for links without an ID, links built in code, and links made
+by indentation path combination; <code>StreamParser</code> keeps it. Set it on a link
+built in code with <code>new Link&lt;string&gt;(&quot;a&quot;) { RawId = &quot;'a'&quot; }</code> or
+<code>link.WithRawId(&quot;'a'&quot;)</code>. <code>Link&lt;T&gt;.ReferenceQuote(raw)</code> reads the delimiter of
+one complete written reference. Use <code>new Parser { Syntax = false }</code> (AST mode)
+to leave the metadata out.</p>
+<p><code>ParseCst(input)</code> returns the lossless concrete syntax tree. Every character,
+including comments, blank lines, indentation, quotes and line endings, belongs
+to exactly one token, so the original text is always recovered:</p>
+<pre><code class="lang-csharp">var cst = new Parser().ParseCst(&quot;(t 1 '1') # note\n&quot;);
+cst.ToString(); // &quot;(t 1 '1') # note\n&quot;
+cst.Tokens().Select(token =&gt; (token.Kind, token.Text));
+// (OpenParen, &quot;(&quot;), (Reference, &quot;t&quot;), (Whitespace, &quot; &quot;), ...
+cst.ToSExpression();
+// (document (line (group open_paren:&quot;(&quot; (line reference:&quot;t&quot; ...)
+//   close_paren:&quot;)&quot;) whitespace:&quot; &quot; comment:&quot;# note&quot; newline:&quot;\n&quot;))
+</code></pre>
+<p>A <code>Document</code> node holds <code>Line</code> nodes. A line holds its tokens up to and
+including its line ending. A <code>Group</code> node holds <code>(</code>, the lines inside it, and
+<code>)</code>. Reference tokens carry <code>Value</code> (what the reference means) and <code>Quote</code>.
+<code>ParseCst</code> throws a <code>ParseException</code> exactly when <code>Parse</code> does. See
+<a href="../docs/case-studies/issue-364/README.md">the issue 364 case study</a>.</p>
 <h2 id="syntax-examples">Syntax Examples</h2>
 <h3 id="doublets-2-tuple">Doublets (2-tuple)</h3>
 <pre><code class="lang-lino">papa (lovesMama: loves mama)
@@ -217,6 +251,8 @@ Console.WriteLine(plain.Parse(&quot;# a b\n&quot;)[0]); // (# a b)
 <li><strong>Link&lt;TLinkAddress&gt;</strong>: Represents a single link with ID and values</li>
 <li><strong>LinksGroup&lt;TLinkAddress&gt;</strong>: Container for grouping related links</li>
 <li><strong>ParseException</strong>: Thrown when a document does not parse</li>
+<li><strong>CstNode</strong> / <strong>CstKind</strong>: The lossless concrete syntax tree returned by
+<code>Parser.ParseCst</code></li>
 </ul>
 <h3 id="error-handling">Error Handling</h3>
 <p><code>Parse</code> throws a <code>ParseException</code> whose message says where the document stopped

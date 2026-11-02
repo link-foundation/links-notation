@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class CstNode | Link.Foundation.Links.Notation Library </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class CstNode | Link.Foundation.Links.Notation Library ">
+    
+    <meta name="description" content="One node or token of the concrete syntax tree of a Links Notation document.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Link.Foundation.Links.Notation.CstNode">
+
+
+
+  <h1 id="Link_Foundation_Links_Notation_CstNode" data-uid="Link.Foundation.Links.Notation.CstNode" class="text-break">Class CstNode</h1>
+  <div class="markdown level0 summary"><p>One node or token of the concrete syntax tree of a Links Notation document.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">CstNode</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <span class="xref">Link</span>.<span class="xref">Foundation</span>.<span class="xref">Links</span>.<a class="xref" href="Link.Foundation.Links.Notation.html">Notation</a></h6>
+  <h6><strong>Assembly</strong>: Link.Foundation.Links.Notation.dll</h6>
+  <h5 id="Link_Foundation_Links_Notation_CstNode_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class CstNode</code></pre>
+  </div>
+  <h5 id="Link_Foundation_Links_Notation_CstNode_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Every character of a document belongs to exactly one token, so the text of the
+tree is the document itself, comments, blank lines, indentation, quotes and line
+endings included. A <a class="xref" href="Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Document">Document</a> holds <a class="xref" href="Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Line">Line</a>
+nodes; a line holds the tokens up to and including its line ending, and a
+parenthesized <a class="xref" href="Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Group">Group</a> holds its own parentheses and the lines
+written between them. A group is part of the line it opens on, however many lines
+it spans. Read a tree with <a class="xref" href="Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_ParseCst_System_String_">ParseCst(string)</a>.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode__ctor_Link_Foundation_Links_Notation_CstKind_System_Collections_Generic_IEnumerable_Link_Foundation_Links_Notation_CstNode__.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode.%23ctor(Link.Foundation.Links.Notation.CstKind%2CSystem.Collections.Generic.IEnumerable%7BLink.Foundation.Links.Notation.CstNode%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L52">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_CstNode__ctor_" data-uid="Link.Foundation.Links.Notation.CstNode.#ctor*"></a>
+  <h4 id="Link_Foundation_Links_Notation_CstNode__ctor_Link_Foundation_Links_Notation_CstKind_System_Collections_Generic_IEnumerable_Link_Foundation_Links_Notation_CstNode__" data-uid="Link.Foundation.Links.Notation.CstNode.#ctor(Link.Foundation.Links.Notation.CstKind,System.Collections.Generic.IEnumerable{Link.Foundation.Links.Notation.CstNode})">CstNode(CstKind, IEnumerable&lt;CstNode&gt;?)</h4>
+  <div class="markdown level1 summary"><p>Creates a node.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CstNode(CstKind kind, IEnumerable&lt;CstNode&gt;? children = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.CstKind.html">CstKind</a></td>
+        <td><span class="parametername">kind</span></td>
+        <td><p>A node kind.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Link.Foundation.Links.Notation.CstNode.html">CstNode</a>&gt;</td>
+        <td><span class="parametername">children</span></td>
+        <td><p>The node's children, in document order.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p><code class="paramref">kind</code> is a token kind.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode__ctor_Link_Foundation_Links_Notation_CstKind_System_String_System_String_System_Nullable_System_Char__.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode.%23ctor(Link.Foundation.Links.Notation.CstKind%2CSystem.String%2CSystem.String%2CSystem.Nullable%7BSystem.Char%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L34">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_CstNode__ctor_" data-uid="Link.Foundation.Links.Notation.CstNode.#ctor*"></a>
+  <h4 id="Link_Foundation_Links_Notation_CstNode__ctor_Link_Foundation_Links_Notation_CstKind_System_String_System_String_System_Nullable_System_Char__" data-uid="Link.Foundation.Links.Notation.CstNode.#ctor(Link.Foundation.Links.Notation.CstKind,System.String,System.String,System.Nullable{System.Char})">CstNode(CstKind, string, string?, char?)</h4>
+  <div class="markdown level1 summary"><p>Creates a token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CstNode(CstKind kind, string text, string? value = null, char? quote = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.CstKind.html">CstKind</a></td>
+        <td><span class="parametername">kind</span></td>
+        <td><p>A token kind.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>The token's text exactly as written.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>What a reference token means; <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> otherwise.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.char">char</a>?</td>
+        <td><span class="parametername">quote</span></td>
+        <td><p>The delimiter of a quoted reference token; <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p><code class="paramref">kind</code> is a node kind.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode_Children.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode.Children%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L67">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_CstNode_Children_" data-uid="Link.Foundation.Links.Notation.CstNode.Children*"></a>
+  <h4 id="Link_Foundation_Links_Notation_CstNode_Children" data-uid="Link.Foundation.Links.Notation.CstNode.Children">Children</h4>
+  <div class="markdown level1 summary"><p>The children of a node, in document order; empty for a token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;CstNode&gt; Children { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Link.Foundation.Links.Notation.CstNode.html">CstNode</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode_IsToken.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode.IsToken%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L82">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_CstNode_IsToken_" data-uid="Link.Foundation.Links.Notation.CstNode.IsToken*"></a>
+  <h4 id="Link_Foundation_Links_Notation_CstNode_IsToken" data-uid="Link.Foundation.Links.Notation.CstNode.IsToken">IsToken</h4>
+  <div class="markdown level1 summary"><p>Whether this is a token rather than a node with children.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsToken { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode_Kind.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode.Kind%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L64">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_CstNode_Kind_" data-uid="Link.Foundation.Links.Notation.CstNode.Kind*"></a>
+  <h4 id="Link_Foundation_Links_Notation_CstNode_Kind" data-uid="Link.Foundation.Links.Notation.CstNode.Kind">Kind</h4>
+  <div class="markdown level1 summary"><p>The kind of this node or token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CstKind Kind { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Link.Foundation.Links.Notation.CstKind.html">CstKind</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode_Quote.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode.Quote%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L79">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_CstNode_Quote_" data-uid="Link.Foundation.Links.Notation.CstNode.Quote*"></a>
+  <h4 id="Link_Foundation_Links_Notation_CstNode_Quote" data-uid="Link.Foundation.Links.Notation.CstNode.Quote">Quote</h4>
+  <div class="markdown level1 summary"><p>The delimiter a quoted reference token was written between (<code>'</code>, <code>&quot;</code> or
+<code>`</code>); <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> for a bare or literal reference and every other kind.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public char? Quote { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.char">char</a>?</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode_Text.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode.Text%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L88">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_CstNode_Text_" data-uid="Link.Foundation.Links.Notation.CstNode.Text*"></a>
+  <h4 id="Link_Foundation_Links_Notation_CstNode_Text" data-uid="Link.Foundation.Links.Notation.CstNode.Text">Text</h4>
+  <div class="markdown level1 summary"><p>The exact text this node or token was read from: a token's own text, and the
+text of its children one after another for a node.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Text { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode_Value.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode.Value%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L73">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_CstNode_Value_" data-uid="Link.Foundation.Links.Notation.CstNode.Value*"></a>
+  <h4 id="Link_Foundation_Links_Notation_CstNode_Value" data-uid="Link.Foundation.Links.Notation.CstNode.Value">Value</h4>
+  <div class="markdown level1 summary"><p>What a reference token means, its delimiters and escapes resolved: the ID a
+parsed link has. <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> for every other node and token.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Value { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode_ToSExpression.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode.ToSExpression%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L129">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_CstNode_ToSExpression_" data-uid="Link.Foundation.Links.Notation.CstNode.ToSExpression*"></a>
+  <h4 id="Link_Foundation_Links_Notation_CstNode_ToSExpression" data-uid="Link.Foundation.Links.Notation.CstNode.ToSExpression">ToSExpression()</h4>
+  <div class="markdown level1 summary"><p>The tree as an S-expression: <code>(kind child ...)</code> for a node and
+<code>kind:&quot;text&quot;</code> for a token, the text with <code>&lt;/code&gt;, <code>&quot;</code>, line feeds,
+carriage returns and tabs escaped. Every Links Notation implementation writes the
+same S-expression for the same document, and two trees are the same exactly when
+their S-expressions are.</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ToSExpression()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The S-expression of this subtree.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Link_Foundation_Links_Notation_CstNode_ToSExpression_examples">Examples</h5>
+  <p><code>new Parser().ParseCst(&quot;a '1'&quot;).ToSExpression()</code> is
+<code>(document (line reference:&quot;a&quot; whitespace:&quot; &quot; reference:&quot;'1'&quot;))</code>.</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode_ToString.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode.ToString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L104">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_CstNode_ToString_" data-uid="Link.Foundation.Links.Notation.CstNode.ToString*"></a>
+  <h4 id="Link_Foundation_Links_Notation_CstNode_ToString" data-uid="Link.Foundation.Links.Notation.CstNode.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>The exact text this node or token was read from; see <a class="xref" href="Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Text">Text</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The text of this node or token.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode_Tokens.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode.Tokens%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L110">View Source</a>
+  </span>
+  <a id="Link_Foundation_Links_Notation_CstNode_Tokens_" data-uid="Link.Foundation.Links.Notation.CstNode.Tokens*"></a>
+  <h4 id="Link_Foundation_Links_Notation_CstNode_Tokens" data-uid="Link.Foundation.Links.Notation.CstNode.Tokens">Tokens()</h4>
+  <div class="markdown level1 summary"><p>Every token of this subtree, in document order; a token yields just itself.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;CstNode&gt; Tokens()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Link.Foundation.Links.Notation.CstNode.html">CstNode</a>&gt;</td>
+        <td><p>The tokens of this subtree.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_CstNode.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.CstNode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/CstNode.cs/#L19" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

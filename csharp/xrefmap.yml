@@ -1413,6 +1413,255 @@ references:
   isSpec: "True"
   fullName: Link.Foundation.Links.Notation.Comments.StripComments
   nameWithType: Comments.StripComments
+- uid: Link.Foundation.Links.Notation.CstKind
+  name: CstKind
+  href: api/Link.Foundation.Links.Notation.CstKind.html
+  commentId: T:Link.Foundation.Links.Notation.CstKind
+  fullName: Link.Foundation.Links.Notation.CstKind
+  nameWithType: CstKind
+- uid: Link.Foundation.Links.Notation.CstKind.CloseParen
+  name: CloseParen
+  href: api/Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_CloseParen
+  commentId: F:Link.Foundation.Links.Notation.CstKind.CloseParen
+  fullName: Link.Foundation.Links.Notation.CstKind.CloseParen
+  nameWithType: CstKind.CloseParen
+- uid: Link.Foundation.Links.Notation.CstKind.Colon
+  name: Colon
+  href: api/Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Colon
+  commentId: F:Link.Foundation.Links.Notation.CstKind.Colon
+  fullName: Link.Foundation.Links.Notation.CstKind.Colon
+  nameWithType: CstKind.Colon
+- uid: Link.Foundation.Links.Notation.CstKind.Comment
+  name: Comment
+  href: api/Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Comment
+  commentId: F:Link.Foundation.Links.Notation.CstKind.Comment
+  fullName: Link.Foundation.Links.Notation.CstKind.Comment
+  nameWithType: CstKind.Comment
+- uid: Link.Foundation.Links.Notation.CstKind.Document
+  name: Document
+  href: api/Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Document
+  commentId: F:Link.Foundation.Links.Notation.CstKind.Document
+  fullName: Link.Foundation.Links.Notation.CstKind.Document
+  nameWithType: CstKind.Document
+- uid: Link.Foundation.Links.Notation.CstKind.Group
+  name: Group
+  href: api/Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Group
+  commentId: F:Link.Foundation.Links.Notation.CstKind.Group
+  fullName: Link.Foundation.Links.Notation.CstKind.Group
+  nameWithType: CstKind.Group
+- uid: Link.Foundation.Links.Notation.CstKind.Line
+  name: Line
+  href: api/Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Line
+  commentId: F:Link.Foundation.Links.Notation.CstKind.Line
+  fullName: Link.Foundation.Links.Notation.CstKind.Line
+  nameWithType: CstKind.Line
+- uid: Link.Foundation.Links.Notation.CstKind.Newline
+  name: Newline
+  href: api/Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Newline
+  commentId: F:Link.Foundation.Links.Notation.CstKind.Newline
+  fullName: Link.Foundation.Links.Notation.CstKind.Newline
+  nameWithType: CstKind.Newline
+- uid: Link.Foundation.Links.Notation.CstKind.OpenParen
+  name: OpenParen
+  href: api/Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_OpenParen
+  commentId: F:Link.Foundation.Links.Notation.CstKind.OpenParen
+  fullName: Link.Foundation.Links.Notation.CstKind.OpenParen
+  nameWithType: CstKind.OpenParen
+- uid: Link.Foundation.Links.Notation.CstKind.Reference
+  name: Reference
+  href: api/Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Reference
+  commentId: F:Link.Foundation.Links.Notation.CstKind.Reference
+  fullName: Link.Foundation.Links.Notation.CstKind.Reference
+  nameWithType: CstKind.Reference
+- uid: Link.Foundation.Links.Notation.CstKind.Whitespace
+  name: Whitespace
+  href: api/Link.Foundation.Links.Notation.CstKind.html#Link_Foundation_Links_Notation_CstKind_Whitespace
+  commentId: F:Link.Foundation.Links.Notation.CstKind.Whitespace
+  fullName: Link.Foundation.Links.Notation.CstKind.Whitespace
+  nameWithType: CstKind.Whitespace
+- uid: Link.Foundation.Links.Notation.CstKindExtensions
+  name: CstKindExtensions
+  href: api/Link.Foundation.Links.Notation.CstKindExtensions.html
+  commentId: T:Link.Foundation.Links.Notation.CstKindExtensions
+  fullName: Link.Foundation.Links.Notation.CstKindExtensions
+  nameWithType: CstKindExtensions
+- uid: Link.Foundation.Links.Notation.CstKindExtensions.IsNode(Link.Foundation.Links.Notation.CstKind)
+  name: IsNode(CstKind)
+  href: api/Link.Foundation.Links.Notation.CstKindExtensions.html#Link_Foundation_Links_Notation_CstKindExtensions_IsNode_Link_Foundation_Links_Notation_CstKind_
+  commentId: M:Link.Foundation.Links.Notation.CstKindExtensions.IsNode(Link.Foundation.Links.Notation.CstKind)
+  fullName: Link.Foundation.Links.Notation.CstKindExtensions.IsNode(Link.Foundation.Links.Notation.CstKind)
+  nameWithType: CstKindExtensions.IsNode(CstKind)
+- uid: Link.Foundation.Links.Notation.CstKindExtensions.IsNode*
+  name: IsNode
+  href: api/Link.Foundation.Links.Notation.CstKindExtensions.html#Link_Foundation_Links_Notation_CstKindExtensions_IsNode_
+  commentId: Overload:Link.Foundation.Links.Notation.CstKindExtensions.IsNode
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.CstKindExtensions.IsNode
+  nameWithType: CstKindExtensions.IsNode
+- uid: Link.Foundation.Links.Notation.CstKindExtensions.ToName(Link.Foundation.Links.Notation.CstKind)
+  name: ToName(CstKind)
+  href: api/Link.Foundation.Links.Notation.CstKindExtensions.html#Link_Foundation_Links_Notation_CstKindExtensions_ToName_Link_Foundation_Links_Notation_CstKind_
+  commentId: M:Link.Foundation.Links.Notation.CstKindExtensions.ToName(Link.Foundation.Links.Notation.CstKind)
+  fullName: Link.Foundation.Links.Notation.CstKindExtensions.ToName(Link.Foundation.Links.Notation.CstKind)
+  nameWithType: CstKindExtensions.ToName(CstKind)
+- uid: Link.Foundation.Links.Notation.CstKindExtensions.ToName*
+  name: ToName
+  href: api/Link.Foundation.Links.Notation.CstKindExtensions.html#Link_Foundation_Links_Notation_CstKindExtensions_ToName_
+  commentId: Overload:Link.Foundation.Links.Notation.CstKindExtensions.ToName
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.CstKindExtensions.ToName
+  nameWithType: CstKindExtensions.ToName
+- uid: Link.Foundation.Links.Notation.CstNode
+  name: CstNode
+  href: api/Link.Foundation.Links.Notation.CstNode.html
+  commentId: T:Link.Foundation.Links.Notation.CstNode
+  fullName: Link.Foundation.Links.Notation.CstNode
+  nameWithType: CstNode
+- uid: Link.Foundation.Links.Notation.CstNode.#ctor(Link.Foundation.Links.Notation.CstKind,System.Collections.Generic.IEnumerable{Link.Foundation.Links.Notation.CstNode})
+  name: CstNode(CstKind, IEnumerable<CstNode>?)
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode__ctor_Link_Foundation_Links_Notation_CstKind_System_Collections_Generic_IEnumerable_Link_Foundation_Links_Notation_CstNode__
+  commentId: M:Link.Foundation.Links.Notation.CstNode.#ctor(Link.Foundation.Links.Notation.CstKind,System.Collections.Generic.IEnumerable{Link.Foundation.Links.Notation.CstNode})
+  name.vb: New(CstKind, IEnumerable(Of CstNode))
+  fullName: Link.Foundation.Links.Notation.CstNode.CstNode(Link.Foundation.Links.Notation.CstKind, System.Collections.Generic.IEnumerable<Link.Foundation.Links.Notation.CstNode>?)
+  fullName.vb: Link.Foundation.Links.Notation.CstNode.New(Link.Foundation.Links.Notation.CstKind, System.Collections.Generic.IEnumerable(Of Link.Foundation.Links.Notation.CstNode))
+  nameWithType: CstNode.CstNode(CstKind, IEnumerable<CstNode>?)
+  nameWithType.vb: CstNode.New(CstKind, IEnumerable(Of CstNode))
+- uid: Link.Foundation.Links.Notation.CstNode.#ctor(Link.Foundation.Links.Notation.CstKind,System.String,System.String,System.Nullable{System.Char})
+  name: CstNode(CstKind, string, string?, char?)
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode__ctor_Link_Foundation_Links_Notation_CstKind_System_String_System_String_System_Nullable_System_Char__
+  commentId: M:Link.Foundation.Links.Notation.CstNode.#ctor(Link.Foundation.Links.Notation.CstKind,System.String,System.String,System.Nullable{System.Char})
+  name.vb: New(CstKind, String, String, Char?)
+  fullName: Link.Foundation.Links.Notation.CstNode.CstNode(Link.Foundation.Links.Notation.CstKind, string, string?, char?)
+  fullName.vb: Link.Foundation.Links.Notation.CstNode.New(Link.Foundation.Links.Notation.CstKind, String, String, Char?)
+  nameWithType: CstNode.CstNode(CstKind, string, string?, char?)
+  nameWithType.vb: CstNode.New(CstKind, String, String, Char?)
+- uid: Link.Foundation.Links.Notation.CstNode.#ctor*
+  name: CstNode
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode__ctor_
+  commentId: Overload:Link.Foundation.Links.Notation.CstNode.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Link.Foundation.Links.Notation.CstNode.CstNode
+  fullName.vb: Link.Foundation.Links.Notation.CstNode.New
+  nameWithType: CstNode.CstNode
+  nameWithType.vb: CstNode.New
+- uid: Link.Foundation.Links.Notation.CstNode.Children
+  name: Children
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Children
+  commentId: P:Link.Foundation.Links.Notation.CstNode.Children
+  fullName: Link.Foundation.Links.Notation.CstNode.Children
+  nameWithType: CstNode.Children
+- uid: Link.Foundation.Links.Notation.CstNode.Children*
+  name: Children
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Children_
+  commentId: Overload:Link.Foundation.Links.Notation.CstNode.Children
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.CstNode.Children
+  nameWithType: CstNode.Children
+- uid: Link.Foundation.Links.Notation.CstNode.IsToken
+  name: IsToken
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_IsToken
+  commentId: P:Link.Foundation.Links.Notation.CstNode.IsToken
+  fullName: Link.Foundation.Links.Notation.CstNode.IsToken
+  nameWithType: CstNode.IsToken
+- uid: Link.Foundation.Links.Notation.CstNode.IsToken*
+  name: IsToken
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_IsToken_
+  commentId: Overload:Link.Foundation.Links.Notation.CstNode.IsToken
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.CstNode.IsToken
+  nameWithType: CstNode.IsToken
+- uid: Link.Foundation.Links.Notation.CstNode.Kind
+  name: Kind
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Kind
+  commentId: P:Link.Foundation.Links.Notation.CstNode.Kind
+  fullName: Link.Foundation.Links.Notation.CstNode.Kind
+  nameWithType: CstNode.Kind
+- uid: Link.Foundation.Links.Notation.CstNode.Kind*
+  name: Kind
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Kind_
+  commentId: Overload:Link.Foundation.Links.Notation.CstNode.Kind
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.CstNode.Kind
+  nameWithType: CstNode.Kind
+- uid: Link.Foundation.Links.Notation.CstNode.Quote
+  name: Quote
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Quote
+  commentId: P:Link.Foundation.Links.Notation.CstNode.Quote
+  fullName: Link.Foundation.Links.Notation.CstNode.Quote
+  nameWithType: CstNode.Quote
+- uid: Link.Foundation.Links.Notation.CstNode.Quote*
+  name: Quote
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Quote_
+  commentId: Overload:Link.Foundation.Links.Notation.CstNode.Quote
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.CstNode.Quote
+  nameWithType: CstNode.Quote
+- uid: Link.Foundation.Links.Notation.CstNode.Text
+  name: Text
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Text
+  commentId: P:Link.Foundation.Links.Notation.CstNode.Text
+  fullName: Link.Foundation.Links.Notation.CstNode.Text
+  nameWithType: CstNode.Text
+- uid: Link.Foundation.Links.Notation.CstNode.Text*
+  name: Text
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Text_
+  commentId: Overload:Link.Foundation.Links.Notation.CstNode.Text
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.CstNode.Text
+  nameWithType: CstNode.Text
+- uid: Link.Foundation.Links.Notation.CstNode.ToSExpression
+  name: ToSExpression()
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_ToSExpression
+  commentId: M:Link.Foundation.Links.Notation.CstNode.ToSExpression
+  fullName: Link.Foundation.Links.Notation.CstNode.ToSExpression()
+  nameWithType: CstNode.ToSExpression()
+- uid: Link.Foundation.Links.Notation.CstNode.ToSExpression*
+  name: ToSExpression
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_ToSExpression_
+  commentId: Overload:Link.Foundation.Links.Notation.CstNode.ToSExpression
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.CstNode.ToSExpression
+  nameWithType: CstNode.ToSExpression
+- uid: Link.Foundation.Links.Notation.CstNode.ToString
+  name: ToString()
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_ToString
+  commentId: M:Link.Foundation.Links.Notation.CstNode.ToString
+  fullName: Link.Foundation.Links.Notation.CstNode.ToString()
+  nameWithType: CstNode.ToString()
+- uid: Link.Foundation.Links.Notation.CstNode.ToString*
+  name: ToString
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_ToString_
+  commentId: Overload:Link.Foundation.Links.Notation.CstNode.ToString
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.CstNode.ToString
+  nameWithType: CstNode.ToString
+- uid: Link.Foundation.Links.Notation.CstNode.Tokens
+  name: Tokens()
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Tokens
+  commentId: M:Link.Foundation.Links.Notation.CstNode.Tokens
+  fullName: Link.Foundation.Links.Notation.CstNode.Tokens()
+  nameWithType: CstNode.Tokens()
+- uid: Link.Foundation.Links.Notation.CstNode.Tokens*
+  name: Tokens
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Tokens_
+  commentId: Overload:Link.Foundation.Links.Notation.CstNode.Tokens
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.CstNode.Tokens
+  nameWithType: CstNode.Tokens
+- uid: Link.Foundation.Links.Notation.CstNode.Value
+  name: Value
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Value
+  commentId: P:Link.Foundation.Links.Notation.CstNode.Value
+  fullName: Link.Foundation.Links.Notation.CstNode.Value
+  nameWithType: CstNode.Value
+- uid: Link.Foundation.Links.Notation.CstNode.Value*
+  name: Value
+  href: api/Link.Foundation.Links.Notation.CstNode.html#Link_Foundation_Links_Notation_CstNode_Value_
+  commentId: Overload:Link.Foundation.Links.Notation.CstNode.Value
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.CstNode.Value
+  nameWithType: CstNode.Value
 - uid: Link.Foundation.Links.Notation.FormatConfig
   name: FormatConfig
   href: api/Link.Foundation.Links.Notation.FormatConfig.html
@@ -1810,6 +2059,58 @@ references:
   fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).Id
   nameWithType: Link<TLinkAddress>.Id
   nameWithType.vb: Link(Of TLinkAddress).Id
+- uid: Link.Foundation.Links.Notation.Link`1.Quote
+  name: Quote
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_Quote
+  commentId: P:Link.Foundation.Links.Notation.Link`1.Quote
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.Quote
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).Quote
+  nameWithType: Link<TLinkAddress>.Quote
+  nameWithType.vb: Link(Of TLinkAddress).Quote
+- uid: Link.Foundation.Links.Notation.Link`1.Quote*
+  name: Quote
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_Quote_
+  commentId: Overload:Link.Foundation.Links.Notation.Link`1.Quote
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.Quote
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).Quote
+  nameWithType: Link<TLinkAddress>.Quote
+  nameWithType.vb: Link(Of TLinkAddress).Quote
+- uid: Link.Foundation.Links.Notation.Link`1.RawId
+  name: RawId
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_RawId
+  commentId: P:Link.Foundation.Links.Notation.Link`1.RawId
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.RawId
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).RawId
+  nameWithType: Link<TLinkAddress>.RawId
+  nameWithType.vb: Link(Of TLinkAddress).RawId
+- uid: Link.Foundation.Links.Notation.Link`1.RawId*
+  name: RawId
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_RawId_
+  commentId: Overload:Link.Foundation.Links.Notation.Link`1.RawId
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.RawId
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).RawId
+  nameWithType: Link<TLinkAddress>.RawId
+  nameWithType.vb: Link(Of TLinkAddress).RawId
+- uid: Link.Foundation.Links.Notation.Link`1.ReferenceQuote(System.String)
+  name: ReferenceQuote(string?)
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_ReferenceQuote_System_String_
+  commentId: M:Link.Foundation.Links.Notation.Link`1.ReferenceQuote(System.String)
+  name.vb: ReferenceQuote(String)
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.ReferenceQuote(string?)
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).ReferenceQuote(String)
+  nameWithType: Link<TLinkAddress>.ReferenceQuote(string?)
+  nameWithType.vb: Link(Of TLinkAddress).ReferenceQuote(String)
+- uid: Link.Foundation.Links.Notation.Link`1.ReferenceQuote*
+  name: ReferenceQuote
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_ReferenceQuote_
+  commentId: Overload:Link.Foundation.Links.Notation.Link`1.ReferenceQuote
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.ReferenceQuote
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).ReferenceQuote
+  nameWithType: Link<TLinkAddress>.ReferenceQuote
+  nameWithType.vb: Link(Of TLinkAddress).ReferenceQuote
 - uid: Link.Foundation.Links.Notation.Link`1.Simplify
   name: Simplify()
   href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_Simplify
@@ -1869,6 +2170,24 @@ references:
   fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).Values
   nameWithType: Link<TLinkAddress>.Values
   nameWithType.vb: Link(Of TLinkAddress).Values
+- uid: Link.Foundation.Links.Notation.Link`1.WithRawId(System.String)
+  name: WithRawId(string?)
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_WithRawId_System_String_
+  commentId: M:Link.Foundation.Links.Notation.Link`1.WithRawId(System.String)
+  name.vb: WithRawId(String)
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.WithRawId(string?)
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).WithRawId(String)
+  nameWithType: Link<TLinkAddress>.WithRawId(string?)
+  nameWithType.vb: Link(Of TLinkAddress).WithRawId(String)
+- uid: Link.Foundation.Links.Notation.Link`1.WithRawId*
+  name: WithRawId
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_WithRawId_
+  commentId: Overload:Link.Foundation.Links.Notation.Link`1.WithRawId
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.WithRawId
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).WithRawId
+  nameWithType: Link<TLinkAddress>.WithRawId
+  nameWithType.vb: Link(Of TLinkAddress).WithRawId
 - uid: Link.Foundation.Links.Notation.Link`1.op_Equality(Link.Foundation.Links.Notation.Link{`0},Link.Foundation.Links.Notation.Link{`0})
   name: operator ==(Link<TLinkAddress>, Link<TLinkAddress>)
   href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_op_Equality_Link_Foundation_Links_Notation_Link__0__Link_Foundation_Links_Notation_Link__0__
@@ -2424,6 +2743,35 @@ references:
   isSpec: "True"
   fullName: Link.Foundation.Links.Notation.Parser.Parse
   nameWithType: Parser.Parse
+- uid: Link.Foundation.Links.Notation.Parser.ParseCst(System.String)
+  name: ParseCst(string)
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_ParseCst_System_String_
+  commentId: M:Link.Foundation.Links.Notation.Parser.ParseCst(System.String)
+  name.vb: ParseCst(String)
+  fullName: Link.Foundation.Links.Notation.Parser.ParseCst(string)
+  fullName.vb: Link.Foundation.Links.Notation.Parser.ParseCst(String)
+  nameWithType: Parser.ParseCst(string)
+  nameWithType.vb: Parser.ParseCst(String)
+- uid: Link.Foundation.Links.Notation.Parser.ParseCst*
+  name: ParseCst
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_ParseCst_
+  commentId: Overload:Link.Foundation.Links.Notation.Parser.ParseCst
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Parser.ParseCst
+  nameWithType: Parser.ParseCst
+- uid: Link.Foundation.Links.Notation.Parser.Syntax
+  name: Syntax
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_Syntax
+  commentId: P:Link.Foundation.Links.Notation.Parser.Syntax
+  fullName: Link.Foundation.Links.Notation.Parser.Syntax
+  nameWithType: Parser.Syntax
+- uid: Link.Foundation.Links.Notation.Parser.Syntax*
+  name: Syntax
+  href: api/Link.Foundation.Links.Notation.Parser.html#Link_Foundation_Links_Notation_Parser_Syntax_
+  commentId: Overload:Link.Foundation.Links.Notation.Parser.Syntax
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Parser.Syntax
+  nameWithType: Parser.Syntax
 - uid: Link.Foundation.Links.Notation.ReferenceLiteral
   name: ReferenceLiteral
   href: api/Link.Foundation.Links.Notation.ReferenceLiteral.html
