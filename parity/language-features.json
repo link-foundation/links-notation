@@ -1752,7 +1752,7 @@
         "js/src/quotes.js",
         "js/src/references.js"
       ],
-      "sha256": "a8db2c4cc051d914d9d6f710c7738c38f3502ebcc0aa6b6fe35a61551e932400"
+      "sha256": "330c809427e51f44aa0add3e6ce1c97bfc9058fd775107f5cc839304872502be"
     },
     "rust": {
       "files": [
