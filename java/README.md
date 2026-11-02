@@ -255,6 +255,46 @@ System.out.println(new Parser().parse(document).get(0).format(false)); // (deplo
 System.out.println(new Parser(false).parse("# a b\n").get(0).format(false)); // (# a b)
 ```
 
+### How a Document Was Written (CST)
+
+Parsing keeps how every ID was written. Quoting never changes a reference:
+`1` and `'1'` are the same reference, so `equals`, `hashCode`, `toString` and
+`format` stay as they were. Each parsed link also carries `getRawId()`, the ID
+exactly as written, and `getQuote()`, the delimiter it was written between:
+
+```java
+Link link = new Parser().parse("(t 1 '1')").get(0);
+Link bare = link.getValues().get(1);
+Link quoted = link.getValues().get(2);
+bare.equals(quoted); // true: the same reference
+bare.getRawId(); // "1", and bare.getQuote() is null
+quoted.getRawId(); // "'1'", and quoted.getQuote() is "'"
+link.format(false); // (t 1 1)
+```
+
+`getRawId()` is `null` for links without an ID, links built in code, and links
+made by indentation path combination. `new Parser(true, false)` (AST mode)
+leaves it out. `StreamParser` keeps it.
+
+`parseCst(input)` returns the lossless concrete syntax tree. Every character,
+including comments, blank lines, indentation, quotes and line endings, belongs
+to exactly one token, so the original text is always recovered:
+
+```java
+CstNode cst = new Parser().parseCst("(t 1 '1') # note\n");
+cst.toString(); // "(t 1 '1') # note\n"
+cst.toSExpression();
+// (document (line (group open_paren:"(" (line reference:"t" ...)
+//   close_paren:")") whitespace:" " comment:"# note" newline:"\n"))
+```
+
+A `document` node holds `line` nodes. A line holds its tokens up to and
+including its line ending. A `group` node holds `(`, the lines inside it, and
+`)`. Reference tokens carry `getValue()` (what the reference means) and
+`getQuote()`. `parseCst` refuses what `parse` refuses, and also refuses
+unbalanced parentheses (`(a`, `a)`), which `parse` reads leniently. See
+[the issue 364 case study](../docs/case-studies/issue-364/README.md).
+
 ## API Reference
 
 ### Classes
@@ -268,7 +308,12 @@ Main parser class for converting strings to links.
 - `Parser(boolean comments)` - Create a parser that reads `#` as an ordinary
   character when `comments` is `false`
 - `Parser(int maxInputSize, int maxDepth, boolean comments)` - Create a parser with both
+- `Parser(boolean comments, boolean syntax)` and
+  `Parser(int maxInputSize, int maxDepth, boolean comments, boolean syntax)` - With
+  `syntax` `false` (AST mode), parsed links leave `getRawId()` null
 - `parse(String input)` - Parse a Lino string and return links
+- `parseCst(String input)` - Read the lossless concrete syntax tree (`CstNode`)
+- `isSyntaxEnabled()` - Whether parsed links record how their IDs were written
 - `getMaxDepth()` - How deep links may nest
 - `Parser.DEFAULT_MAX_DEPTH` - The default `maxDepth`, 64, the same in every
   implementation
@@ -296,6 +341,24 @@ Represents a single link with ID and values.
 - `format(boolean lessParentheses)` - Format with optional parentheses reduction
 - `equals(Object other)` - Check equality with another Link
 - `static formatLinks(List<Link> links)` - Format a list of links
+- `getRawId()` / `setRawId(String rawId)` - The ID exactly as the parsed document
+  wrote it, or `null`; ignored by `equals`, `hashCode`, `toString` and `format`
+- `getQuote()` - `'`, `"` or `` ` `` when `getRawId()` is quoted, otherwise `null`
+- `static referenceQuote(String raw)` - The delimiter of one complete quoted
+  reference as written, otherwise `null`
+
+#### `CstNode` and `CstKind`
+
+One node or token of the concrete syntax tree returned by `parseCst`.
+
+- `getKind()` - A `CstKind`: `DOCUMENT`, `LINE`, `GROUP`, `WHITESPACE`, `NEWLINE`,
+  `COMMENT`, `OPEN_PAREN`, `CLOSE_PAREN`, `COLON` or `REFERENCE`; its
+  `toString()` is the shared S-expression name (`open_paren`, ...)
+- `getChildren()` - The children of a node; empty for a token
+- `getText()` / `toString()` - The exact text it was read from
+- `getValue()`, `getQuote()` - A reference token's decoded value and delimiter
+- `isToken()`, `tokens()` - Whether it is a token, and every token in order
+- `toSExpression()` - The tree as `(kind child ...)` with tokens as `kind:"text"`
 
 #### `LinksGroup`
 
@@ -342,6 +405,8 @@ from the start of the stream.
 - `src/main/java/io/github/linkfoundation/linksnotation/Link.java` - Link data structure
 - `src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java` - Links group container
 - `src/main/java/io/github/linkfoundation/linksnotation/Parser.java` - Parser implementation
+- `src/main/java/io/github/linkfoundation/linksnotation/CstNode.java`, `CstKind.java`,
+  `CstBuilder.java` - Lossless concrete syntax tree
 - `src/main/java/io/github/linkfoundation/linksnotation/ParseException.java` - Parse exception
 - `src/main/java/io/github/linkfoundation/linksnotation/NestingTooDeepException.java` - Nesting
   too deep exception

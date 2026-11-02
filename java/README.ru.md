@@ -254,6 +254,38 @@ System.out.println(new Parser().parse(document).get(0).format(false)); // (deplo
 System.out.println(new Parser(false).parse("# a b\n").get(0).format(false)); // (# a b)
 ```
 
+### Как документ был записан (CST)
+
+Парсер сохраняет, как была записана каждая ссылка. Кавычки не меняют ссылку:
+`1` и `'1'` - одна и та же ссылка, поэтому `equals`, `hashCode`, `toString` и
+`format` остаются прежними. Каждая разобранная связь хранит `getRawId()` - ID в
+точности так, как он записан, и `getQuote()` - кавычку, в которую он заключён:
+
+```java
+Link link = new Parser().parse("(t 1 '1')").get(0);
+Link bare = link.getValues().get(1);
+Link quoted = link.getValues().get(2);
+bare.equals(quoted); // true: это одна ссылка
+bare.getRawId(); // "1", а bare.getQuote() равен null
+quoted.getRawId(); // "'1'", а quoted.getQuote() равен "'"
+link.format(false); // (t 1 1)
+```
+
+`getRawId()` равен `null` у связей без ID, у связей, созданных в коде, и у
+связей, построенных объединением путей по отступам. `new Parser(true, false)`
+(режим AST) не сохраняет его. `StreamParser` его сохраняет.
+
+`parseCst(input)` возвращает конкретное синтаксическое дерево без потерь:
+каждый символ, включая комментарии, пустые строки, отступы, кавычки и
+переводы строк, принадлежит ровно одному токену, поэтому исходный текст
+всегда восстанавливается: `new Parser().parseCst(text).toString()` равно
+`text`. Узел `document` содержит узлы `line`; строка содержит свои токены
+вместе с переводом строки; узел `group` содержит `(`, строки внутри и `)`.
+Токены ссылок хранят `getValue()` (что означает ссылка) и `getQuote()`.
+`parseCst` отклоняет то, что отклоняет `parse`, а также несбалансированные
+скобки (`(a`, `a)`), которые `parse` читает снисходительно. Подробности - в
+[разборе issue 364](../docs/case-studies/issue-364/README.md).
+
 ## Справочник API
 
 ### Классы
@@ -267,7 +299,12 @@ System.out.println(new Parser(false).parse("# a b\n").get(0).format(false)); // 
 - `Parser(boolean comments)` - Создать парсер, читающий `#` как обычный символ,
   если `comments` равно `false`
 - `Parser(int maxInputSize, int maxDepth, boolean comments)` - Создать парсер и с тем, и с другим
+- `Parser(boolean comments, boolean syntax)` и
+  `Parser(int maxInputSize, int maxDepth, boolean comments, boolean syntax)` - Со
+  значением `syntax`, равным `false` (режим AST), связи не хранят `getRawId()`
 - `parse(String input)` - Распарсить строку Lino и вернуть связи
+- `parseCst(String input)` - Конкретное синтаксическое дерево без потерь (`CstNode`)
+- `isSyntaxEnabled()` - Сохраняют ли разобранные связи, как записаны их ID
 - `getMaxDepth()` - Насколько глубоко могут быть вложены связи
 - `Parser.DEFAULT_MAX_DEPTH` - Значение `maxDepth` по умолчанию, 64, одинаковое
   во всех реализациях
@@ -295,6 +332,25 @@ System.out.println(new Parser(false).parse("# a b\n").get(0).format(false)); // 
 - `format(boolean lessParentheses)` - Форматировать с опциональным сокращением скобок
 - `equals(Object other)` - Проверить равенство с другой связью
 - `static formatLinks(List<Link> links)` - Форматировать список связей
+- `getRawId()` / `setRawId(String rawId)` - ID в точности так, как он записан в
+  разобранном документе, или `null`; не влияет на `equals`, `hashCode`,
+  `toString` и `format`
+- `getQuote()` - `'`, `"` или `` ` ``, если `getRawId()` в кавычках, иначе `null`
+- `static referenceQuote(String raw)` - Кавычка одной целой ссылки в кавычках,
+  иначе `null`
+
+#### `CstNode` и `CstKind`
+
+Узел или токен конкретного синтаксического дерева, которое возвращает `parseCst`.
+
+- `getKind()` - `CstKind`: `DOCUMENT`, `LINE`, `GROUP`, `WHITESPACE`, `NEWLINE`,
+  `COMMENT`, `OPEN_PAREN`, `CLOSE_PAREN`, `COLON` или `REFERENCE`; его
+  `toString()` - общее для всех реализаций имя в S-выражении (`open_paren`, ...)
+- `getChildren()` - Дочерние элементы узла; пусто у токена
+- `getText()` / `toString()` - Точный текст, из которого он прочитан
+- `getValue()`, `getQuote()` - Значение и кавычка токена ссылки
+- `isToken()`, `tokens()` - Токен ли это, и все токены по порядку
+- `toSExpression()` - Дерево в виде `(kind child ...)`, токены - `kind:"text"`
 
 #### `LinksGroup`
 
@@ -341,6 +397,8 @@ Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
 - `src/main/java/io/github/linkfoundation/linksnotation/Link.java` - Структура данных Link
 - `src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java` - Контейнер группы связей
 - `src/main/java/io/github/linkfoundation/linksnotation/Parser.java` - Реализация парсера
+- `src/main/java/io/github/linkfoundation/linksnotation/CstNode.java`, `CstKind.java`,
+  `CstBuilder.java` - Конкретное синтаксическое дерево без потерь
 - `src/main/java/io/github/linkfoundation/linksnotation/ParseException.java` - Исключение парсинга
 - `src/main/java/io/github/linkfoundation/linksnotation/NestingTooDeepException.java` - Исключение
   слишком глубокой вложенности
