@@ -10,18 +10,18 @@ requires all ten registries; green tests alone do not prove delivery.
 
 <!-- markdownlint-disable MD013 -->
 
-| Language | Provider / identity                                            | Repository configuration                                                            |
-| -------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| JS       | npm trusted publisher for `js.yml`                             | Configure this repository/caller on npm; optional `NPM_TOKEN` fallback              |
-| Rust     | crates.io trusted publisher for `js.yml`                       | Set `CRATES_IO_TRUSTED_PUBLISHING=true` after registration; otherwise `CARGO_TOKEN` |
-| Python   | PyPI trusted publisher for `js.yml`                            | Set `PYPI_TRUSTED_PUBLISHING=true` after registration; otherwise `PYPI_TOKEN`       |
-| Java     | Central Portal, verified `io.github.link-foundation` namespace | `CENTRAL_USERNAME`, `CENTRAL_TOKEN`, `GPG_PRIVATE_KEY`, `GPG_PASSPHRASE`            |
-| Go       | Git tag in the module's subdirectory                           | Workflow `GITHUB_TOKEN`; `go/vVERSION` tag at the gated SHA                         |
-| C#       | NuGet package API key                                          | `NUGET_API_KEY` or existing `NUGET_TOKEN`                                           |
-| PHP      | Packagist package submission and update API                    | Submit package once, then `PACKAGIST_USERNAME`, `PACKAGIST_TOKEN`                   |
-| C++      | GitHub release `cpp_VERSION` with the CMake source archive     | Workflow `GITHUB_TOKEN`; no registry account                                        |
-| Swift    | Bare `VERSION` tag that SwiftPM resolves, `[Swift] VERSION`    | Workflow `GITHUB_TOKEN`; no registry account                                        |
-| Kotlin   | Central Portal, verified `io.github.link-foundation` namespace | The same four secrets as Java                                                       |
+| Language | Provider / identity                                             | Repository configuration                                                                             |
+| -------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| JS       | npm trusted publisher for `js.yml`                              | Configure this repository/caller on npm; optional `NPM_TOKEN` fallback                               |
+| Rust     | crates.io trusted publisher for `js.yml`                        | Set `CRATES_IO_TRUSTED_PUBLISHING=true` after registration; otherwise `CARGO_TOKEN`                  |
+| Python   | PyPI trusted publisher for `js.yml`                             | Set `PYPI_TRUSTED_PUBLISHING=true` after registration; otherwise `PYPI_TOKEN`                        |
+| Java     | Central Portal, verified `io.github.link-foundation` namespace  | `CENTRAL_USERNAME`, `CENTRAL_TOKEN`, `GPG_PRIVATE_KEY`, `GPG_PASSPHRASE`                             |
+| Go       | Git tag in the module's subdirectory                            | Workflow `GITHUB_TOKEN`; `go/vVERSION` tag at the gated SHA                                          |
+| C#       | NuGet.org trusted publishing policy for `js.yml`, or an API key | Set `NUGET_USER` to the policy owner; otherwise `NUGET_API_KEY` (expires; renew it) or `NUGET_TOKEN` |
+| PHP      | Packagist package submission and update API                     | Submit package once, then `PACKAGIST_USERNAME`, `PACKAGIST_TOKEN`                                    |
+| C++      | GitHub release `cpp_VERSION` with the CMake source archive      | Workflow `GITHUB_TOKEN`; no registry account                                                         |
+| Swift    | Bare `VERSION` tag that SwiftPM resolves, `[Swift] VERSION`     | Workflow `GITHUB_TOKEN`; no registry account                                                         |
+| Kotlin   | Central Portal, verified `io.github.link-foundation` namespace  | The same four secrets as Java                                                                        |
 
 <!-- markdownlint-enable MD013 -->
 

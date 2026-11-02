@@ -58,6 +58,7 @@ PUSH_WORKFLOWS = {
         "scripts/ci/**",
         "experiments/issue-350/**",
         "experiments/issue-377/test_rerun_unacquired.py",
+        "experiments/issue-377/test_nuget_publish.py",
     ],
     "links.yml": [
         "**.md",

@@ -216,7 +216,7 @@ test("an absence after a successful release still names the credentials", async 
   });
   const errors = lines.filter((line) => line.startsWith("::error::"));
   assert.equal(errors.length, 1);
-  assert.match(errors[0], /To publish it, configure the NUGET_API_KEY secret/);
+  assert.match(errors[0], /To publish it, configure NuGet.org trusted publishing for js.yml with the NUGET_USER variable, or renew the NUGET_API_KEY secret/);
 });
 test("a pull request ignores the release result", async () =>
   assert.equal(

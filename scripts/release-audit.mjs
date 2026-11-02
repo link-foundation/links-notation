@@ -33,7 +33,8 @@ export function registryTargets(version) {
     },
     {
       name: "csharp",
-      setup: "configure the NUGET_API_KEY secret",
+      setup:
+        "configure NuGet.org trusted publishing for js.yml with the NUGET_USER variable, or renew the NUGET_API_KEY secret (NuGet API keys expire)",
       registry: "NuGet",
       urls: [
         "https://api.nuget.org/v3-flatcontainer/link.foundation.links.notation/index.json",

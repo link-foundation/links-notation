@@ -38,6 +38,10 @@ jobs:
     concurrency:
       group: ci-csharp-publish-nuget
       cancel-in-progress: false
+    permissions:
+      contents: read
+      # Required by NuGet/login (NuGet.org trusted publishing).
+      id-token: write
     outputs:
       # 'true' published now, 'skipped' nothing to do, 'failed' credential missing.
       published: ${{ steps.publish.outputs.published }}
@@ -78,34 +82,74 @@ jobs:
       - name: Pack
         if: steps.version-check.outputs.should_publish == 'true'
         run: dotnet pack "$PROJECT_PATH" --configuration Release --output artifacts
+      # NuGet.org trusted publishing: once a trusted publishing policy for this
+      # repository and js.yml exists on NuGet.org, set the NUGET_USER repository
+      # variable to the policy owner's NuGet.org user name. NuGet/login then
+      # trades the job's OIDC token for an API key valid for one hour, and the
+      # long-lived NUGET_API_KEY (which expires; run 41424977881 failed with
+      # "The specified API key has expired") is only a fallback.
+      - name: Log in to NuGet.org with trusted publishing
+        id: nuget-login
+        if: steps.version-check.outputs.should_publish == 'true' && vars.NUGET_USER != ''
+        uses: NuGet/login@v1.2.0
+        with:
+          user: ${{ vars.NUGET_USER }}
       - name: Publish NuGet package
         id: publish
         env:
-          # NuGet.org has no OIDC trusted publishing yet, so an API key is the
-          # only option. Accept either name; NUGET_TOKEN is the historical one.
+          # Trusted publishing first; then either secret name (NUGET_TOKEN is
+          # the historical one).
+          NUGET_LOGIN_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
           NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+          SHOULD_PUBLISH: ${{ steps.version-check.outputs.should_publish }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
         run: |
           set -euo pipefail
-          if [ "${{ steps.version-check.outputs.should_publish }}" != "true" ]; then
+          if [ "$SHOULD_PUBLISH" != "true" ]; then
             echo "published=skipped" >> "$GITHUB_OUTPUT"
-            echo "::notice::Version ${{ steps.version-check.outputs.version }} is already on NuGet.org, nothing to publish"
+            echo "::notice::Version $PACKAGE_VERSION is already on NuGet.org, nothing to publish"
             exit 0
           fi
 
-          API_KEY="${NUGET_API_KEY:-$NUGET_TOKEN}"
-          # Report presence, never the value.
+          REMEDY="Create a new API key at https://www.nuget.org/account/apikeys (push scope, package Link.Foundation.Links.Notation) and store it as the NUGET_API_KEY secret, or add a NuGet.org trusted publishing policy for this repository and js.yml and set the NUGET_USER repository variable to its owner"
+          if [ -n "$NUGET_LOGIN_KEY" ]; then
+            API_KEY="$NUGET_LOGIN_KEY"
+            SOURCE="trusted publishing (NUGET_USER)"
+          elif [ -n "$NUGET_API_KEY" ]; then
+            API_KEY="$NUGET_API_KEY"
+            SOURCE="NUGET_API_KEY secret"
+          else
+            API_KEY="$NUGET_TOKEN"
+            SOURCE="NUGET_TOKEN secret"
+          fi
+          # Report presence and origin, never the value.
           if [ -z "$API_KEY" ]; then
             echo "published=failed" >> "$GITHUB_OUTPUT"
-            echo "::error::Neither NUGET_API_KEY nor NUGET_TOKEN is configured; skipping the NuGet push. No GitHub release will be created."
+            echo "::error::No NuGet credential: NUGET_USER is unset and neither NUGET_API_KEY nor NUGET_TOKEN is configured. $REMEDY. No GitHub release will be created."
             exit 1
           fi
-          echo "NuGet credential: present"
+          echo "NuGet credential: present, from the $SOURCE"
+          echo "::add-mask::$API_KEY"
 
+          set +e
           dotnet nuget push "artifacts/*.nupkg" \
             --api-key "$API_KEY" \
             --source https://api.nuget.org/v3/index.json \
-            --skip-duplicate
+            --skip-duplicate 2>&1 | tee "$RUNNER_TEMP/nuget-push.log"
+          status=${PIPESTATUS[0]}
+          set -e
+          if [ "$status" -ne 0 ]; then
+            echo "published=failed" >> "$GITHUB_OUTPUT"
+            # NuGet answers 401 or 403 for a key that expired, was revoked or
+            # does not cover the package (run 41424977881).
+            if grep -Eq '(401|403) \(|API key (has )?expired|API key is invalid' "$RUNNER_TEMP/nuget-push.log"; then
+              echo "::error::NuGet.org rejected the key from the $SOURCE (expired, revoked or without push scope for $PACKAGE_ID). $REMEDY. No GitHub release will be created."
+            else
+              echo "::error::dotnet nuget push failed with exit code $status; see the output above. No GitHub release will be created."
+            fi
+            exit "$status"
+          fi
           echo "published=true" >> "$GITHUB_OUTPUT"
       - name: Verify the package is really on NuGet.org
         if: steps.publish.outputs.published == 'true'
