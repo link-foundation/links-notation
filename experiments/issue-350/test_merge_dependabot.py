@@ -187,6 +187,7 @@ class Main(unittest.TestCase):
         github.checks.side_effect = lambda sha: dict(GREEN)
         github.behind.side_effect = lambda base, head: head == pulls[-1].head
         github.rebase_requested.return_value = False
+        github.files.return_value = ["js/package.json", "js/bun.lock"]
         environment = {
             "GITHUB_REPOSITORY": "owner/repo",
             "GITHUB_TOKEN": "actions-token",
@@ -245,6 +246,82 @@ class Main(unittest.TestCase):
         self.assertEqual(github.run.call_count, 2)
         self.assertIn("::error::#1 merge failed: gh pr merge: head changed", output)
         self.assertIn("#2 rebase", output)
+
+    def test_a_github_token_merge_dispatches_the_push_workflows(self):
+        _, github, output = self.run_main([pull(1), pull(2)])
+        github.run.assert_any_call(
+            "workflow", "run", "js.yml", "--repo", "owner/repo", "--ref", "main"
+        )
+        dispatched = [
+            c.args[2] for c in github.run.call_args_list if c.args[0] == "workflow"
+        ]
+        self.assertEqual(dispatched, ["js.yml", "dependencies.yml", "bom-check.yml"])
+        self.assertIn("::notice::GITHUB_TOKEN merges start no push workflows", output)
+
+    def test_a_token_merge_or_no_merge_dispatches_nothing(self):
+        # pull(1) is behind (see run_main), so it is not merged.
+        _, github, _ = self.run_main([pull(1)])
+        self.assertNotIn("workflow", [c.args[0] for c in github.run.call_args_list])
+        _, github, _ = self.run_main([pull(2), pull(1)], pat="pat")
+        self.assertNotIn("workflow", [c.args[0] for c in github.run.call_args_list])
+        _, github, _ = self.run_main([pull(1)], argv=["--dry-run"])
+        github.run.assert_not_called()
+
+    def test_a_failed_dispatch_fails_the_run_and_names_the_command(self):
+        # merge #1, ask #2 to rebase, then dispatch: js.yml is refused.
+        failures = ["", "", RuntimeError("gh workflow run: HTTP 403"), "", ""]
+        code, _, output = self.run_main([pull(1), pull(2)], failures=failures)
+        self.assertEqual(code, 1)
+        self.assertIn("`gh workflow run js.yml --ref main`", output)
+
+
+def push_paths(text):
+    """The `on.push.paths` of a workflow, or None when push has no filter.
+
+    Returns False when the workflow has no push trigger. A plain reader,
+    since the runner's Python has no YAML module.
+    """
+    lines = text.splitlines()
+    start = next(i for i, line in enumerate(lines) if line.startswith("on:"))
+    section, paths, found = None, None, False
+    for line in lines[start + 1 :]:
+        if line and not line.startswith(" "):
+            break
+        stripped = line.strip()
+        if line.startswith("  ") and not line.startswith("   ") and stripped:
+            section = stripped.rstrip(":")
+            found = found or section == "push"
+        elif section == "push" and stripped == "paths:":
+            paths = []
+        elif section == "push" and paths is not None and stripped.startswith("- "):
+            paths.append(stripped[2:].strip("'\""))
+    return paths if found else False
+
+
+class Dispatch(unittest.TestCase):
+    def test_the_table_lists_every_push_workflow_with_its_paths(self):
+        found = {}
+        for path in sorted((ROOT / ".github/workflows").glob("*.yml")):
+            paths = push_paths(path.read_text())
+            if paths is not False:
+                found[path.name] = paths
+                self.assertIn("workflow_dispatch:", path.read_text(), path.name)
+        self.assertEqual(found, MERGE.PUSH_WORKFLOWS)
+
+    def test_paths_filters_match_like_github(self):
+        self.assertTrue(MERGE.matches("docs/website/package.json", "docs/**"))
+        self.assertTrue(MERGE.matches("js/README.md", "**.md"))
+        self.assertTrue(MERGE.matches("README.md", "**.md"))
+        self.assertFalse(MERGE.matches("docs/a/b.json", "docs/*"))
+        self.assertFalse(MERGE.matches("lychee.toml.bak", "lychee.toml"))
+
+    def test_only_the_workflows_whose_paths_changed_are_dispatched(self):
+        always = ["js.yml", "dependencies.yml", "bom-check.yml"]
+        self.assertEqual(MERGE.dispatches(["rust/Cargo.lock"]), always)
+        self.assertEqual(
+            MERGE.dispatches([".github/workflows/js.yml", "docs/website/package.json"]),
+            always + ["workflows.yml", "pages.yml"],
+        )
 
 
 if __name__ == "__main__":
