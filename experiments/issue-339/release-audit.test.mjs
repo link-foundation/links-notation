@@ -4,7 +4,7 @@ import test from "node:test";
 import { audit } from "../../scripts/release-audit.mjs";
 
 const versions = Object.fromEntries(
-  ["js", "rust", "python", "java", "go", "csharp", "php", "cpp"].map((name) => [
+  ["js", "rust", "python", "java", "go", "csharp", "php", "cpp", "swift"].map((name) => [
     name,
     "1.2.3",
   ]),
@@ -23,6 +23,8 @@ function mockFetch(change = () => null) {
       body = {
         packages: { "link-foundation/links-notation": [{ version: "v1.2.3" }] },
       };
+    if (url.endsWith("/Package.swift"))
+      return new Response('let package = Package(\n    name: "LinksNotation",');
     if (url.endsWith(".pom"))
       return new Response(
         "<artifactId>links-notation</artifactId><version>1.2.3</version>",
@@ -69,7 +71,7 @@ test("a missing release for an existing package fails even on PRs", async () =>
         false,
       )
     ).failures,
-    8,
+    9,
   ));
 test("a missing C++ source archive fails main", async () =>
   assert.equal(
@@ -84,6 +86,44 @@ test("a missing C++ source archive fails main", async () =>
     ).failures,
     1,
   ));
+test("a missing Swift tag fails main", async () =>
+  assert.equal(
+    (
+      await run(
+        mockFetch((url) =>
+          url.endsWith("/links-notation/1.2.3/Package.swift")
+            ? new Response("", { status: 404 })
+            : null,
+        ),
+      )
+    ).failures,
+    1,
+  ));
+test("a Swift tag on another package's manifest is not a publication", async () =>
+  assert.equal(
+    (
+      await run(
+        mockFetch((url) =>
+          url.endsWith("/Package.swift")
+            ? new Response('let package = Package(name: "Other")')
+            : null,
+        ),
+      )
+    ).failures,
+    1,
+  ));
+test("the Swift GitHub release is the bare version tag", async () => {
+  const urls = [];
+  await audit({
+    versions,
+    fetcher: async (url, options) => {
+      urls.push(url);
+      return mockFetch()(url, options);
+    },
+    log: () => {},
+  });
+  assert.ok(urls.includes("https://api.github.com/repos/link-foundation/links-notation/releases/tags/1.2.3"));
+});
 test("registry outages fail instead of being reported as absence", async () =>
   assert.equal(
     (

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Fails when the language implementations do not all declare the same version.
 //
-// The point of shipping the same grammar in eight languages is that a document
+// The point of shipping the same grammar in nine languages is that a document
 // written by one reads identically in the others, which only holds while they
 // are the same release. They had drifted to js/python/rust/csharp/go 0.15.0,
 // java 0.3.0 and php 0.2.0 before this check existed, and nothing failed.
@@ -98,6 +98,18 @@ const versionReferences = [
     what: 'the find_package call',
     re: /find_package\(links_notation ([^ ]+) REQUIRED/,
     expected: (version) => version.split('.').slice(0, 2).join('.'),
+  },
+  {
+    of: 'swift',
+    file: 'swift/README.md',
+    what: 'the Package.swift dependency',
+    re: /links-notation\.git",\s*from:\s*"([^"]+)"/,
+  },
+  {
+    of: 'swift',
+    file: 'swift/README.ru.md',
+    what: 'the Package.swift dependency',
+    re: /links-notation\.git",\s*from:\s*"([^"]+)"/,
   },
 ];
 
