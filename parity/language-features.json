@@ -9,6 +9,7 @@
     "csharp",
     "php",
     "cpp",
+    "swift",
     "kotlin"
   ],
   "features": [
@@ -87,6 +88,19 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift",
+            "swift/Sources/LinksNotation/Formatter.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift"
           ]
         },
         "kotlin": {
@@ -178,6 +192,18 @@
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -265,6 +291,18 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift"
           ]
         },
         "kotlin": {
@@ -356,6 +394,18 @@
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -443,6 +493,18 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift"
           ]
         },
         "kotlin": {
@@ -534,6 +596,19 @@
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift",
+            "swift/Sources/LinksNotation/Formatter.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -621,6 +696,18 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift"
           ]
         },
         "kotlin": {
@@ -712,6 +799,18 @@
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -799,6 +898,19 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift",
+            "swift/Tests/LinksNotationTests/CommentsTests.swift"
           ]
         },
         "kotlin": {
@@ -891,6 +1003,19 @@
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift",
+            "swift/Tests/LinksNotationTests/Issue316QuoteRunsTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -981,6 +1106,18 @@
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -1068,6 +1205,20 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Quotes.swift",
+            "swift/Sources/LinksNotation/Formatter.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/ParityTests.swift",
+            "swift/Tests/LinksNotationTests/ReferenceFidelityTests.swift"
           ]
         },
         "kotlin": {
@@ -1164,6 +1315,16 @@
             "cpp/tests/stream_parser_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/StreamParser.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
+            "swift/Tests/LinksNotationTests/StreamParserTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -1251,6 +1412,15 @@
           ],
           "evidence": [
             "cpp/tests/binary_notation_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Binary.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/BinaryTests.swift"
           ]
         },
         "kotlin": {
@@ -1342,6 +1512,19 @@
             "cpp/tests/nesting_depth_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/ParseError.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/NestingLimitTests.swift",
+            "swift/Tests/LinksNotationTests/NestingDepthTests.swift",
+            "swift/Tests/LinksNotationTests/LimitsTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -1407,6 +1590,15 @@
           ],
           "evidence": [
             "cpp/tests/indented_document_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/IndentedDocument.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/IndentedDocumentTests.swift"
           ]
         },
         "kotlin": {
@@ -1497,6 +1689,15 @@
             "cpp/tests/link_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Link.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/LinkTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -1582,6 +1783,16 @@
             "cpp/tests/format_config_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/FormatOptions.swift",
+            "swift/Sources/LinksNotation/Formatter.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/FormatConfigTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -1659,6 +1870,15 @@
             "cpp/tests/links_group_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/LinksGroup.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/LinksGroupTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -1715,6 +1935,11 @@
           "documentation": "parity/README.md"
         },
         "cpp": {
+          "status": "exception",
+          "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
+          "documentation": "parity/README.md"
+        },
+        "swift": {
           "status": "exception",
           "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
           "documentation": "parity/README.md"
@@ -1830,6 +2055,19 @@
             "cpp/tests/syntax_metadata_tests.cpp"
           ]
         },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Link.swift",
+            "swift/Sources/LinksNotation/Parser.swift",
+            "swift/Sources/LinksNotation/Grammar.swift",
+            "swift/Sources/LinksNotation/Formatter.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedSyntaxParityTests.swift",
+            "swift/Tests/LinksNotationTests/SyntaxMetadataTests.swift"
+          ]
+        },
         "kotlin": {
           "status": "implemented",
           "implementation": [
@@ -1934,6 +2172,16 @@
           "evidence": [
             "cpp/tests/shared_syntax_parity_tests.cpp",
             "cpp/tests/cst_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Cst.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedSyntaxParityTests.swift",
+            "swift/Tests/LinksNotationTests/CstTests.swift"
           ]
         },
         "kotlin": {
@@ -2137,6 +2385,24 @@
         "cpp/src/unicode.hpp"
       ],
       "sha256": "5fb1e25f7886d22cb44e3a6694e28836e62810e0cef5d6376c3dac51d5777178"
+    },
+    "swift": {
+      "files": [
+        "swift/Sources/BinaryLinoExample/main.swift",
+        "swift/Sources/LinksNotation/Binary.swift",
+        "swift/Sources/LinksNotation/Cst.swift",
+        "swift/Sources/LinksNotation/FormatOptions.swift",
+        "swift/Sources/LinksNotation/Formatter.swift",
+        "swift/Sources/LinksNotation/Grammar.swift",
+        "swift/Sources/LinksNotation/IndentedDocument.swift",
+        "swift/Sources/LinksNotation/Link.swift",
+        "swift/Sources/LinksNotation/LinksGroup.swift",
+        "swift/Sources/LinksNotation/ParseError.swift",
+        "swift/Sources/LinksNotation/Parser.swift",
+        "swift/Sources/LinksNotation/Quotes.swift",
+        "swift/Sources/LinksNotation/StreamParser.swift"
+      ],
+      "sha256": "8d439af587341ca261044aa2534d99b788796a1fd5f3a2d14d89e7629f39080c"
     },
     "kotlin": {
       "files": [

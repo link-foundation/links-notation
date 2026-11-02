@@ -385,3 +385,9 @@ cpp/out/
 
 # CTest writes this when ctest runs inside cpp/.
 cpp/Testing/
+
+# Swift Package Manager
+/.build/
+/.swiftpm/
+Package.resolved
+swift/.build/

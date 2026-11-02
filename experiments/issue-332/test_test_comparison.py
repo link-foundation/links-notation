@@ -22,6 +22,7 @@ class TestComparisonExtraction(unittest.TestCase):
                 "java/src/test/java/io/github/linkfoundation/linksnotation",
                 "php/tests",
                 "cpp/tests",
+                "swift/Tests/LinksNotationTests",
                 "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation",
             ):
                 (root / path).mkdir(parents=True)

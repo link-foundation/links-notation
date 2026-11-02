@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Build TEST_CASE_COMPARISON.md: which test exists in which of the nine
+ * Build TEST_CASE_COMPARISON.md: which test exists in which of the ten
  * supported languages, with a link to each one.
  *
  * The document is generated, never edited. Run it with `--check` to fail when
@@ -33,7 +33,7 @@ function normalizeTestName(testName) {
     .toLowerCase()                             // Lowercase everything
     .replace(/^test[_\s-]*/g, '')             // Remove "test" prefix with separators
     .replace(/[_\s-]*test[_\s-]*$/g, '')      // Remove "test" suffix with leading/trailing separators
-    .replace(/[_\s\-()'":#/\\]/g, '')         // Remove ALL separators and special chars
+    .replace(/[^a-z0-9]/g, '')                // Remove ALL separators and special chars
     .trim();
 }
 
@@ -53,8 +53,9 @@ function withTestPrefix(name) {
 /**
  * Collect the tests of one language.
  *
- * `pattern` must capture the test name in group 1; the link points at the line
- * the name is on, not at the line the attribute above it is on.
+ * `pattern` must capture the test name in its first matching group; the link
+ * points at the line the name is on, not at the line the attribute above it is
+ * on.
  */
 function scan({ baseDir, directory, isTestFile, categoryOf, pattern, nameOf }) {
   const tests = {};
@@ -65,11 +66,12 @@ function scan({ baseDir, directory, isTestFile, categoryOf, pattern, nameOf }) {
     const collected = tests[category] ?? (tests[category] = []);
 
     for (const match of content.matchAll(pattern)) {
-      const original = withTestPrefix(nameOf(match[1]));
-      const nameOffset = match.index + match[0].lastIndexOf(match[1]);
+      const name = match.slice(1).find((group) => group !== undefined);
+      const original = withTestPrefix(nameOf(name));
+      const nameOffset = match.index + match[0].lastIndexOf(name);
       collected.push({
         original,
-        originalName: match[1],
+        originalName: name,
         normalized: normalizeTestName(original),
         file: `${directory}/${file}`,
         line: content.slice(0, nameOffset).split('\n').length
@@ -81,7 +83,7 @@ function scan({ baseDir, directory, isTestFile, categoryOf, pattern, nameOf }) {
 }
 
 /**
- * The nine supported languages, in the order the columns appear.
+ * The ten supported languages, in the order the columns appear.
  *
  * `flat` marks a language that does not keep one test file per category; see
  * `placeFlatTests` for how its tests find a category.
@@ -110,7 +112,9 @@ const LANGUAGES = [
       directory: 'js/tests',
       isTestFile: (file) => file.endsWith('.test.js'),
       categoryOf: (file) => toSnakeCase(file.replace('.test.js', '').replace('Tests', '')),
-      pattern: /(?<![\w.])(?:test|it)\(['"]([^'"]+)['"]/g,
+      // The closing quote must match the opening one: a name such as
+      // "1 and '1' are the same reference" contains the other kind.
+      pattern: /(?<![\w.])(?:test|it)\((?:'([^']+)'|"([^"]+)")/g,
       nameOf: toSnakeCase
     })
   },
@@ -193,6 +197,20 @@ const LANGUAGES = [
       categoryOf: (file) => file.replace('_tests.cpp', ''),
       pattern: /\bTEST(?:_F)?\(\s*\w+\s*,\s*(\w+)\s*\)/g,
       nameOf: toSnakeCase
+    })
+  },
+  {
+    key: 'swift',
+    label: 'Swift',
+    // XCTest runs every `func test...()` of an XCTestCase subclass.
+    extract: (baseDir) => scan({
+      baseDir,
+      directory: 'swift/Tests/LinksNotationTests',
+      isTestFile: (file) => file.endsWith('Tests.swift'),
+      categoryOf: (file) => toSnakeCase(file.replace('Tests.swift', '')),
+      pattern: /\bfunc (test\w+)\s*\(/g,
+      // Drop the prefix first, so `test1And1...` reads as `1_and1_...`.
+      nameOf: (name) => toSnakeCase(name.replace(/^test/, ''))
     })
   },
   {

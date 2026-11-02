@@ -134,7 +134,7 @@ test("a native working directory cannot hide a language job", () =>
     }),
   ).not.toEqual([]));
 
-test("publication waits for all nine native stages", () => {
+test("publication waits for all ten native stages", () => {
   const workflows = readWorkflows();
   expect(workflows["js.yml"].jobs.release?.needs?.toSorted()).toEqual(
     [
@@ -146,6 +146,7 @@ test("publication waits for all nine native stages", () => {
       "csharp",
       "php",
       "cpp",
+      "swift",
       "kotlin",
     ].toSorted(),
   );
@@ -158,6 +159,7 @@ test("publication waits for all nine native stages", () => {
     "csharp",
     "php",
     "cpp",
+    "swift",
     "kotlin",
   ]) {
     expect(

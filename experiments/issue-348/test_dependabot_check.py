@@ -61,6 +61,10 @@ class DependabotCheckTests(unittest.TestCase):
             missing, ["examples/go/go.mod: no gomod entry for /examples/go"]
         )
 
+    def test_swift_package_manifest_needs_a_swift_entry(self):
+        missing = CHECK.problems({"Package.swift"}, CONFIG)
+        self.assertEqual(missing, ["Package.swift: no swift entry for /"])
+
     def test_second_lockfile_needs_its_own_ecosystem(self):
         missing = CHECK.problems({"js/package.json", "js/bun.lock"}, CONFIG)
         self.assertEqual(missing, ["js/bun.lock: no bun entry for /js"])

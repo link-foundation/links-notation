@@ -88,6 +88,20 @@ export function registryTargets(version) {
       ],
     },
     {
+      // SwiftPM resolves a package from a plain semantic-version tag of its Git
+      // repository, so the tag (with Package.swift at the root) is the
+      // publication, and it is also the release's tag.
+      name: "swift",
+      tag: version.swift,
+      setup: `check the publish-swift log for the ${version.swift} tag`,
+      registry: "GitHub tags (SwiftPM)",
+      urls: [
+        `https://raw.githubusercontent.com/link-foundation/links-notation/${version.swift}/Package.swift`,
+      ],
+      text: true,
+      valid: (body) => body.includes('name: "LinksNotation"'),
+    },
+    {
       // One Gradle module per target behind the root artifact's module
       // metadata; the root POM stands for the whole multiplatform release.
       name: "kotlin",
@@ -170,9 +184,10 @@ export async function audit({
       }
       record.published = true;
       const tag =
-        target.name === "go"
+        target.tag ??
+        (target.name === "go"
           ? `go/v${record.version}`
-          : `${target.name}_${record.version}`;
+          : `${target.name}_${record.version}`);
       const url = `https://api.github.com/repos/${repository}/releases/tags/${encodeURIComponent(tag)}`;
       const response = await fetcher(url, {
         headers: {

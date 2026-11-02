@@ -1,5 +1,5 @@
 {
-  "name": "Main requires same-commit nine-language CI",
+  "name": "Main requires same-commit ten-language CI",
   "target": "branch",
   "enforcement": "active",
   "bypass_actors": [],
@@ -36,6 +36,7 @@
           {"context": "CSharp", "integration_id": 15368},
           {"context": "PHP", "integration_id": 15368},
           {"context": "Cpp", "integration_id": 15368},
+          {"context": "Swift", "integration_id": 15368},
           {"context": "Kotlin", "integration_id": 15368}
         ]
       }

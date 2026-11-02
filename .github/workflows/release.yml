@@ -117,6 +117,14 @@ jobs:
       contents: write
       id-token: write
 
+  swift:
+    uses: ./.github/workflows/publish-swift.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    permissions:
+      contents: write
+      id-token: write
+
   kotlin:
     uses: ./.github/workflows/publish-kotlin.yml
     with:

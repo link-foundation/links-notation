@@ -10,13 +10,13 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Check if any test files are being committed. All nine supported languages
+# Check if any test files are being committed. All ten supported languages
 # count: the pattern used to list four, so a test added in Go, Java or PHP left
 # the comparison document stale. Go keeps its tests next to the code rather
-# than under tests/, and Kotlin keeps its common tests under src/commonTest/,
-# hence the second and third alternatives.
+# than under tests/, Swift under Tests/, and Kotlin keeps its common tests
+# under src/commonTest/, hence the other alternatives.
 test_files_changed=$(git diff --cached --name-only \
-    | grep -E '(tests?/.*\.(py|js|rs|cs|java|php|cpp)|go/[^/]*_test\.go|kotlin/src/commonTest/.*\.kt)$')
+    | grep -E '(tests?/.*\.(py|js|rs|cs|java|php|cpp)|go/[^/]*_test\.go|swift/Tests/.*\.swift|kotlin/src/commonTest/.*\.kt)$')
 
 if [ -n "$test_files_changed" ]; then
     echo -e "${YELLOW}Test files modified, regenerating TEST_CASE_COMPARISON.md...${NC}"

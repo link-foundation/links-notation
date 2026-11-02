@@ -203,6 +203,23 @@ updates:
     commit-message:
       prefix: "chore(deps)"
 
+  # The root Package.swift has no dependencies, and examples/swift depends on
+  # it by path; the entries keep a future dependency from going unwatched.
+  # The repository has no swift label, so only "dependencies" is applied.
+  - package-ecosystem: "swift"
+    directories:
+      - "/"
+      - "/examples/swift"
+    schedule:
+      interval: "daily"
+    groups:
+      swift-minor-and-patch:
+        update-types: ["minor", "patch"]
+    open-pull-requests-limit: 10
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "chore(deps)"
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

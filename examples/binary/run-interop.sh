@@ -32,7 +32,12 @@ if [ "${1:-}" != "--rust-csharp-only" ]; then
     exit 1
   fi
   "$evidence_dir/cpp-build/examples/binary_lino" examples/binary/corpus.txt > "$evidence_dir/cpp.tsv"
-  languages+=(python js php go java kotlin cpp)
+  swift build -c release -j 2 --product binary-lino > "$evidence_dir/swift-build.log" 2>&1 || {
+    cat "$evidence_dir/swift-build.log"
+    exit 1
+  }
+  "$(swift build -c release --show-bin-path)/binary-lino" examples/binary/corpus.txt > "$evidence_dir/swift.tsv"
+  languages+=(python js php go java cpp swift kotlin)
 fi
 for language in "${languages[@]}"; do
   diff -u "$evidence_dir/rust.tsv" "$evidence_dir/$language.tsv"

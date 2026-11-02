@@ -22,7 +22,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <LangVersion>latest</LangVersion>
-    <PackageReleaseNotes>No C# changes: Kotlin Multiplatform joins as the ninth binding.</PackageReleaseNotes>
+    <PackageReleaseNotes>No C# changes: this release adds the Swift implementation.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
     <RootNamespace>Link.Foundation.Links.Notation</RootNamespace>
     <!-- CS1584/CS1658: Pegasus 4.1.0 emits an invalid <see cref="IList{Link{string}}"/>

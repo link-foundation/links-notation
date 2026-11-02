@@ -8,6 +8,7 @@
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Версия Maven Central](https://img.shields.io/maven-central/v/io.github.link-foundation/links-notation?label=maven&style=flat)](https://central.sonatype.com/artifact/io.github.link-foundation/links-notation) | **[Java](java/README.ru.md)** |
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Версия Packagist и количество загрузок](https://img.shields.io/packagist/v/link-foundation/links-notation?label=packagist&style=flat)](https://packagist.org/packages/link-foundation/links-notation) | **[PHP](php/README.ru.md)** |
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Выпуск на GitHub](https://img.shields.io/github/v/release/link-foundation/links-notation?filter=cpp_*&label=release&style=flat)](https://github.com/link-foundation/links-notation/releases?q=cpp_&expanded=true) | **[C++](cpp/README.ru.md)** |
+| [![Состояние Actions](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Swift Package Manager](https://img.shields.io/badge/SwiftPM-compatible-F05138?logo=swift&style=flat)](swift/README.ru.md#установка) | **[Swift](swift/README.ru.md)** |
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Версия Maven Central](https://img.shields.io/maven-central/v/io.github.link-foundation/links-notation-kotlin?label=maven&style=flat)](https://central.sonatype.com/artifact/io.github.link-foundation/links-notation-kotlin) | **[Kotlin](kotlin/README.ru.md)** |
 
 [![Gitpod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/link-foundation/links-notation)
@@ -81,6 +82,13 @@ $links = $parser->parse("папа (любитМаму: любит маму)");
 ```cpp
 #include "links_notation.hpp"
 std::vector<links_notation::Link> links = links_notation::parse("папа (любитМаму: любит маму)");
+```
+
+### Swift
+
+```swift
+import LinksNotation
+let links = try Parser().parse("папа (любитМаму: любит маму)")
 ```
 
 ### Kotlin
@@ -159,7 +167,7 @@ value (
 как в корне, а тело, умещающееся в одну строку, по-прежнему сворачивается в
 одну связь, так что `(a b c)` не меняется.
 
-Все девять реализаций читают это одинаково: тесты каждой из них читают
+Все десять реализаций читают это одинаково: тесты каждой из них читают
 приведённый выше документ как общий пример `context` из
 [`parity/text-fixtures.json`](parity/text-fixtures.json), а
 `experiments/issue-282/parity` разбирает его восемью более ранними
@@ -229,6 +237,7 @@ deploy: staging # пока только staging
 | Java | `Consumer<Link>` | `Stream<Link>` |
 | PHP | callable | `Generator` |
 | C++ | callback-и `on_link` / `on_error` | `ChunkedLinks` / `parse_chunks` |
+| Swift | обработчики `onLink` / `onError` | `Sequence` / `AsyncSequence` |
 | Kotlin | обработчики `onLink`, `onError` и `onEnd` | `Sequence` через `StreamParser.parse` |
 
 Все варианты поддерживают запись/подачу порций, завершение потока, абсолютную
@@ -258,6 +267,7 @@ ID: у каждой разобранной связи с ID есть исход�
 | Java | `getRawId()`, `getQuote()` | `new Parser(comments, false)` | `parseCst` |
 | PHP | `getRawId()`, `getQuote()` | `new Parser(syntax: false)` | `parseCst` |
 | C++ | `raw_id`, `quote()` | `ParserOptions::syntax = false` | `parse_cst` |
+| Swift | `rawId`, `quote` | `ParserOptions(syntax: false)` | `parseCst` |
 | Kotlin | `rawId`, `quote` | `Parser(ParserOptions(syntax = false))` | `parseCst` |
 
 Каждая реализация проверяет общие эталонные данные из
@@ -284,6 +294,7 @@ ID: у каждой разобранной связи с ID есть исход�
 - **[README Java](java/README.ru.md)** - Руководство по работе с пакетом Java/Maven
 - **[README PHP](php/README.ru.md)** - Руководство по работе с пакетом PHP/Composer
 - **[README C++](cpp/README.ru.md)** - Руководство по библиотеке C++17/CMake
+- **[README Swift](swift/README.ru.md)** - Руководство по пакету Swift
 - **[README Kotlin](kotlin/README.ru.md)** - Руководство по библиотеке Kotlin Multiplatform/Gradle
 
 Дополнительные ресурсы:
@@ -292,13 +303,13 @@ ID: у каждой разобранной связи с ID есть исход�
   правилами отступов и вложенных контекстов
   ([синтаксические диаграммы](docs/grammar/syntax-diagrams.md))
 - [Сравнение тестовых сценариев](TEST_CASE_COMPARISON.md) - Сравнение
-  тестового покрытия по всем девяти реализациям, тест за тестом
+  тестового покрытия по всем десяти реализациям, тест за тестом
 - [Теория связей 0.0.2](https://habr.com/ru/articles/804617/) -
   Теоретическая основа, которую Нотация Связей полностью поддерживает
 
 ## Тестовое покрытие и паритет реализаций
 
-Все девять реализаций (C#, JavaScript, Rust, Python, Go, Java, PHP, C++, Kotlin) сохраняют
+Все десять реализаций (C#, JavaScript, Rust, Python, Go, Java, PHP, C++, Swift, Kotlin) сохраняют
 **эквивалентную базовую функциональность**, и совпадение проверяется тест за тестом,
 а не декларируется:
 
@@ -313,6 +324,7 @@ ID: у каждой разобранной связи с ID есть исход�
 | Java | 206 | 19 |
 | PHP | 256 | 26 |
 | C++ | 370 | 32 |
+| Swift | 339 | 35 |
 | Kotlin | 348 | 33 |
 <!-- test-counts:end -->
 
@@ -329,7 +341,8 @@ ID: у каждой разобранной связи с ID есть исход�
 - **`LinksGroup`** - разобранная группа связей как один объект - есть в
   [JavaScript](js/src/LinksGroup.js), [C#](csharp/Link.Foundation.Links.Notation/LinksGroup.cs),
   [Java](java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java),
-  [C++](cpp/include/links_notation/links_group.hpp) и
+  [C++](cpp/include/links_notation/links_group.hpp),
+  [Swift](swift/Sources/LinksNotation/LinksGroup.swift) и
   [Kotlin](kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/LinksGroup.kt).
   Python, Rust, Go и PHP представляют ту же структуру вложенными значениями
   `Link`.
@@ -343,7 +356,7 @@ ID: у каждой разобранной связи с ID есть исход�
 
 [Спецификация версии 1](docs/protocol/binary-links-notation.md) определяет общий
 формат пакетов и отображение документов LiNo на связи. JavaScript, Python, Rust,
-C#, Go, Java, PHP, C++ и Kotlin предоставляют кодеки рядом с текстовыми парсерами и
+C#, Go, Java, PHP, C++, Swift и Kotlin предоставляют кодеки рядом с текстовыми парсерами и
 проверяют одни и те же
 [эталонные векторы](docs/protocol/binary-links-notation-vectors.txt).
 [Пример взаимодействия языков](examples/binary/README.md) показывает параметры
