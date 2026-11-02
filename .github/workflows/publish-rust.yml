@@ -51,7 +51,7 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Cache Cargo
-        uses: Swatinem/rust-cache@v2.9.2
+        uses: Swatinem/rust-cache@v2.9.3
         with:
           workspaces: rust
       - name: Build
@@ -69,7 +69,7 @@ jobs:
         id: cratesio-auth
         if: ${{ vars.CRATES_IO_TRUSTED_PUBLISHING == 'true' }}
         continue-on-error: true
-        uses: rust-lang/crates-io-auth-action@v1.0.5
+        uses: rust-lang/crates-io-auth-action@v1.0.6
       - name: Publish to crates.io
         id: publish
         env:

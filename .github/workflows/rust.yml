@@ -45,7 +45,7 @@ jobs:
       # miss), and cached `target` without the compiler version in the key,
       # which silently poisons the cache across toolchain updates.
       - name: Cache Cargo
-        uses: Swatinem/rust-cache@v2.9.2
+        uses: Swatinem/rust-cache@v2.9.3
         with:
           workspaces: rust
       - name: Check formatting
@@ -75,7 +75,7 @@ jobs:
         with:
           toolchain: ${{ matrix.toolchain }}
       - name: Cache Cargo
-        uses: Swatinem/rust-cache@v2.9.2
+        uses: Swatinem/rust-cache@v2.9.3
         with:
           workspaces: rust
       - name: Build
