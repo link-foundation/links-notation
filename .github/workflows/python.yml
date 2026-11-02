@@ -33,7 +33,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Set up Python 3.15
-        uses: actions/setup-python@v7.0.0
+        uses: actions/setup-python@v7.1.0
         with:
           python-version: "3.15"
       - name: Install linting tools
@@ -65,7 +65,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v7.0.0
+        uses: actions/setup-python@v7.1.0
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
