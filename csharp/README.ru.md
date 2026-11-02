@@ -117,6 +117,51 @@ stream.Finish("следующая связь");
 `ParseChunks` и `ParseChunksAsync` предоставляют нативные перечислители. Также
 доступны `Position`, `Drain`, `Reset` и `MaxBufferSize`.
 
+### Как был записан документ (CST)
+
+Разбор сохраняет то, как был записан каждый ID. Кавычки не меняют ссылку: `1`
+и `'1'` — одна и та же ссылка, поэтому `Equals`, `GetHashCode`, `ToString` и
+`Format` работают как прежде. Каждая разобранная связь также хранит `RawId` —
+ID точно в том виде, в каком он записан, и `Quote` — кавычку, в которую он
+заключён:
+
+```csharp
+var link = new Parser().Parse("(t 1 '1')")[0];
+var (bare, quoted) = (link.Values![1], link.Values[2]);
+bare == quoted;                // true: одна и та же ссылка
+(bare.RawId, bare.Quote);      // ("1", null)
+(quoted.RawId, quoted.Quote);  // ("'1'", '\'')
+link.ToString();               // "(t 1 1)"
+```
+
+`RawId` равен `null` у связей без ID, у связей, созданных в коде, и у связей,
+полученных объединением путей по отступам; `StreamParser` его сохраняет. Для
+связи, созданной в коде, его можно задать как
+`new Link<string>("a") { RawId = "'a'" }` или `link.WithRawId("'a'")`.
+`Link<T>.ReferenceQuote(raw)` возвращает кавычку одной полностью записанной
+ссылки. `new Parser { Syntax = false }` (режим AST) не сохраняет эти данные.
+
+`ParseCst(input)` возвращает конкретное синтаксическое дерево без потерь.
+Каждый символ, включая комментарии, пустые строки, отступы, кавычки и концы
+строк, принадлежит ровно одному токену, поэтому исходный текст всегда
+восстанавливается:
+
+```csharp
+var cst = new Parser().ParseCst("(t 1 '1') # note\n");
+cst.ToString(); // "(t 1 '1') # note\n"
+cst.Tokens().Select(token => (token.Kind, token.Text));
+// (OpenParen, "("), (Reference, "t"), (Whitespace, " "), ...
+cst.ToSExpression();
+// (document (line (group open_paren:"(" (line reference:"t" ...)
+//   close_paren:")") whitespace:" " comment:"# note" newline:"\n"))
+```
+
+Узел `Document` содержит узлы `Line`. Строка содержит свои токены вплоть до
+конца строки включительно. Узел `Group` содержит `(`, строки внутри и `)`.
+Токены ссылок хранят `Value` (что означает ссылка) и `Quote`. `ParseCst`
+выбрасывает `ParseException` ровно тогда, когда это делает `Parse`. См.
+[разбор задачи 364](../docs/case-studies/issue-364/README.md).
+
 ## Примеры синтаксиса
 
 ### Дуплеты (2-кортежи)
@@ -210,6 +255,8 @@ Console.WriteLine(plain.Parse("# a b\n")[0]); // (# a b)
 - **Link\<TLinkAddress\>**: Представляет одну связь с ID и значениями
 - **LinksGroup\<TLinkAddress\>**: Контейнер для группировки связанных связей
 - **ParseException**: Выбрасывается, когда документ не разбирается
+- **CstNode** / **CstKind**: Конкретное синтаксическое дерево без потерь,
+  которое возвращает `Parser.ParseCst`
 
 ### Обработка ошибок
 

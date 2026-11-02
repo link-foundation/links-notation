@@ -51,6 +51,30 @@
     public int MaxDepth { get; set; } = Parser.DefaultMaxDepth;
 
     /// <summary>
+    /// Whether a link read from a reference records how that reference was written;
+    /// see <see cref="Parser.Syntax"/>.
+    /// </summary>
+    public bool Syntax { get; set; } = true;
+
+    /// <summary>
+    /// The document as the caller wrote it, comments included. The rules read the copy
+    /// with its comments blanked, which keeps every offset of this one, so the text a
+    /// reference was written as is sliced from here. When unset, the subject is used.
+    /// </summary>
+    public string Source { get; set; }
+
+    /// <summary>
+    /// A link to the reference read between <paramref name="start"/> and
+    /// <paramref name="end"/>, recording the text it was written as unless
+    /// <see cref="Syntax"/> is off.
+    /// </summary>
+    private Link<string> WrittenReference(Cursor state, string value, int start, int end)
+    {
+        var link = new Link<string>(value);
+        return Syntax ? link.WithRawId((Source ?? state.Subject).Substring(start, end - start)) : link;
+    }
+
+    /// <summary>
     /// Raised by the rules when the document nests deeper than <see cref="MaxDepth"/>;
     /// <see cref="Parser"/> turns it into a <see cref="ParseException"/>.
     /// </summary>
@@ -301,7 +325,7 @@ element <LinksGroup<string>> = &{ !IsUnreadableLine(state) } s:here e:anyLink &{
 / &{ MarkUnreadableLine(state) } . { default(LinksGroup<string>) }
 indentedLinks <IList<LinksGroup<string>>> = PUSH_INDENTATION l:links { l }
 here <int> = "" { state.Location }
-referenceOrLink <Link<string>> = l:multiLineAnyLink { l } / i:reference { i }
+referenceOrLink <Link<string>> = l:multiLineAnyLink { l } / i:writtenReference { i }
 
 // A line that starts with a parenthesized group reads that group once and then
 // branches on what follows it: the end of the line makes the group the whole
@@ -334,9 +358,13 @@ EXIT_NESTED_CONTEXT = #{ ExitNestedContext(state); }
 
 singleLineValueAndWhitespace <Link<string>> = __ value:referenceOrLink { value }
 singleLineValues <IList<Link<string>>> = list:singleLineValueAndWhitespace+ { list }
-singleLineLink <Link<string>> = __ id:(reference) __ ":" v:singleLineValues { new Link<string>(id, v) }
+singleLineLink <Link<string>> = __ id:writtenReference __ ":" v:singleLineValues { new Link<string>(id.Id, v) { RawId = id.RawId } }
 singleLineValueLink <Link<string>> = v:singleLineValues { new Link<string>(v) }
-indentedIdLink <Link<string>> = id:(reference) __ ":" eol { new Link<string>(id) }
+indentedIdLink <Link<string>> = id:writtenReference __ ":" eol { id }
+
+// A reference read as a link that also records the text the reference was written
+// as, so a parsed link can say whether its ID was bare, quoted or a literal.
+writtenReference <Link<string>> = s:here r:reference e:here { WrittenReference(state, r, s, e) }
 
 // Reference can be quoted (with any number of delimiters N >= 1) or simple unquoted
 // Universal approach: use procedural parsing for all delimiter styles and counts

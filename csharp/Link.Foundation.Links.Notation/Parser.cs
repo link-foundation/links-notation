@@ -76,6 +76,15 @@ namespace Link.Foundation.Links.Notation
         private readonly int _maxDepth;
 
         /// <summary>
+        /// Whether parsed links record how their identifiers were written, in
+        /// <see cref="Link{TLinkAddress}.RawId"/> and <see cref="Link{TLinkAddress}.Quote"/>.
+        /// <see langword="true"/> by default; set it to <see langword="false"/> to read links
+        /// as a bare abstract syntax tree (AST mode), in which both are always
+        /// <see langword="null"/>. Equality and formatting are the same either way.
+        /// </summary>
+        public bool Syntax { get; init; } = true;
+
+        /// <summary>
         /// Parses a Links Notation document.
         /// </summary>
         /// <param name="subject">The document to parse.</param>
@@ -92,7 +101,7 @@ namespace Link.Foundation.Links.Notation
             // prepared document is the same position in the document the caller wrote.
             var prepared = Comments ? Notation.Comments.StripComments(subject) : subject;
             var tracer = new FurthestFailureTracer();
-            var parser = new GeneratedParser { Tracer = tracer, MaxDepth = MaxDepth };
+            var parser = new GeneratedParser { Tracer = tracer, MaxDepth = MaxDepth, Syntax = Syntax, Source = subject };
             try
             {
                 return parser.Parse(prepared, fileName);
@@ -105,6 +114,26 @@ namespace Link.Foundation.Links.Notation
             {
                 throw new ParseException(subject, tracer.Furthest, error);
             }
+        }
+
+        /// <summary>
+        /// Reads a Links Notation document as a lossless concrete syntax tree.
+        /// </summary>
+        /// <param name="subject">The document to read.</param>
+        /// <returns>
+        /// The <see cref="CstKind.Document"/> node. Every character of the document,
+        /// comments, whitespace and line endings included, belongs to exactly one token, so
+        /// its <see cref="CstNode.Text"/> is <paramref name="subject"/>.
+        /// </returns>
+        /// <exception cref="ParseException">
+        /// Thrown exactly when <see cref="Parse"/> refuses the document: it is parsed with
+        /// this parser's options first.
+        /// </exception>
+        public CstNode ParseCst(string subject)
+        {
+            ArgumentNullException.ThrowIfNull(subject);
+            Parse(subject);
+            return CstBuilder.Build(subject, Comments);
         }
     }
 }

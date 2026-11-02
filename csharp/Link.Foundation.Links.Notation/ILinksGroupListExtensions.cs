@@ -44,7 +44,7 @@ namespace Link.Foundation.Links.Notation
                         childValues.Add(transformedLink);
                     }
 
-                    var linkWithChildren = new Link<TLinkAddress>(link.Id, childValues);
+                    var linkWithChildren = new Link<TLinkAddress>(link.Id, childValues) { RawId = link.RawId };
                     list.Add(linkWithChildren);
                 }
                 else
@@ -100,7 +100,7 @@ namespace Link.Foundation.Links.Notation
                     var transformedChild = TransformIndentedIdLink(groups[i]);
                     childValues.Add(transformedChild);
                 }
-                return new Link<TLinkAddress>(link.Id, childValues);
+                return new Link<TLinkAddress>(link.Id, childValues) { RawId = link.RawId };
             }
             else if (groups != null && groups.Count > 0)
             {
@@ -113,7 +113,7 @@ namespace Link.Foundation.Links.Notation
                 {
                     values.Add(TransformIndentedIdLink(groups[i]));
                 }
-                return new Link<TLinkAddress>(link.Id, values);
+                return new Link<TLinkAddress>(link.Id, values) { RawId = link.RawId };
             }
             else if (!group.IsParenthesized && link.Id == null && link.Values != null && link.Values.Count == 1)
             {
