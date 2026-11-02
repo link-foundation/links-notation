@@ -137,12 +137,13 @@ jobs:
       contents: write
       id-token: write
 
-  # Runs after a failed or skipped release too, so main reports what is
-  # missing, but not after a cancellation. The *_check gates below keep
-  # always(): a required check that is skipped counts as passed.
+  # Runs after a failed, skipped or cancelled release too, so main reports
+  # what is missing; release-result lets the audit name the failed stage
+  # instead of blaming credentials (issue #377). scripts/ci/check-js-gate.mjs
+  # requires this exact condition.
   release_audit:
     needs: [js, rust, python, java, go, csharp, php, cpp, swift, kotlin, release]
-    if: ${{ !cancelled() && needs.js.result == 'success' }}
+    if: ${{ always() && needs.js.result == 'success' }}
     uses: ./.github/workflows/release-audit.yml
     with:
       verbose: ${{ inputs.verbose || false }}
