@@ -365,27 +365,44 @@ private func leadingSpaces(_ line: String.UnicodeScalarView) -> Int {
 /// Whether every quoted reference and every group of the buffered records is
 /// closed, so they may be parsed.
 private func structurallyComplete(_ document: [Unicode.Scalar], comments: Bool) -> Bool {
-    let beforeReference: [Unicode.Scalar] = [" ", "\t", "\n", "\r", "(", ":"]
+    // Tokens are read as the comment reader and the grammar read them: a
+    // reference may start after a separator, and right after a delimited
+    // reference or a literal (issue #377).
     let beforeComment: [Unicode.Scalar] = [" ", "\t", "\n", "\r"]
     let references = DelimitedReferences(document)
     var depth = 0
     var position = 0
+    var tokenStart = true
     while position < document.count {
         let character = document[position]
         let previous: Unicode.Scalar? = position == 0 ? nil : document[position - 1]
 
-        if quoteScalars.contains(character) && (previous.map { beforeReference.contains($0) } ?? true) {
-            guard let end = references.end(at: position) else { return false }
+        if comments && character == "#" && (previous.map { beforeComment.contains($0) } ?? true) {
+            guard let newline = document[position...].firstIndex(of: "\n") else { return true }
+            // The newline ends the comment and is read as a separator.
+            position = newline
+            continue
+        }
+        if tokenSeparators.contains(character) {
+            if character == "(" { depth += 1 }
+            if character == ")" { depth -= 1 }
+            tokenStart = true
+            position += 1
+            continue
+        }
+        if tokenStart && quoteScalars.contains(character) {
+            // A reference nothing closes yet may be closed by a later line,
+            // which changes what it holds: an even run is the empty reference
+            // only when no run in the whole document closes it.
+            guard let reading = references.read(at: position), reading.closed else { return false }
+            position += reading.length
+            continue
+        }
+        if tokenStart, let end = referenceLiteralEnd(document, position) {
             position = end
             continue
         }
-        if comments && character == "#" && (previous.map { beforeComment.contains($0) } ?? true) {
-            guard let newline = document[position...].firstIndex(of: "\n") else { return true }
-            position = newline + 1
-            continue
-        }
-        if character == "(" { depth += 1 }
-        if character == ")" { depth -= 1 }
+        tokenStart = false
         position += 1
     }
     return depth == 0

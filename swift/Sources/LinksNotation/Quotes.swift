@@ -7,10 +7,14 @@
 // reference. A run of R delimiters in a body closes the reference exactly when
 // `R / N` is odd; the last N of it close it and the rest is content.
 
-/// What a delimited reference holds and how many scalars it takes.
+/// What a delimited reference holds, how many scalars it takes and whether a
+/// run of delimiters closes it. An even run nothing closes is the empty
+/// reference, until a closing run is written after it, which turns it into one
+/// holding what follows: a stream must wait for that run.
 struct Reading: Equatable {
     var value: String
     var length: Int
+    var closed = true
 }
 
 /// Every delimited reference of one document, read on demand and at most once.
@@ -77,7 +81,11 @@ private func reading(
     _ document: [Unicode.Scalar], start: Int, quote: Unicode.Scalar, count: Int, end: Int?
 ) -> Reading? {
     let emptyReference = count % 2 == 0 ? Reading(value: "", length: count) : nil
-    guard let end else { return emptyReference }
+    guard let end else {
+        // Nothing closes the run: an even one is the empty reference, which a
+        // later closing run would still turn into one holding what follows.
+        return count % 2 == 0 ? Reading(value: "", length: count, closed: false) : nil
+    }
 
     var value = String.UnicodeScalarView()
     var position = start + count
@@ -191,8 +199,12 @@ func stripComments(_ document: [Unicode.Scalar]) -> [Unicode.Scalar] {
     var blanked = document
     var position = 0
     let references = DelimitedReferences(document)
-    let beforeReference: [Unicode.Scalar] = [" ", "\t", "\n", "\r", "(", ":"]
     let beforeComment: [Unicode.Scalar] = [" ", "\t", "\n", "\r"]
+    // Whether a token may start at `position`. The document is read token by
+    // token, as the grammar reads it, so a `#` inside a reference that starts
+    // right after a group, another reference or a literal stays content
+    // (issue #377).
+    var tokenStart = true
 
     func follows(_ allowed: [Unicode.Scalar]) -> Bool {
         position == 0 || allowed.contains(document[position - 1])
@@ -200,10 +212,6 @@ func stripComments(_ document: [Unicode.Scalar]) -> [Unicode.Scalar] {
 
     while position < document.count {
         let scalar = document[position]
-        if quoteScalars.contains(scalar) && follows(beforeReference) {
-            position = references.end(at: position) ?? position + 1
-            continue
-        }
         if scalar == "#" && follows(beforeComment) {
             while position < document.count && document[position] != "\n"
                 && document[position] != "\r"
@@ -213,9 +221,53 @@ func stripComments(_ document: [Unicode.Scalar]) -> [Unicode.Scalar] {
             }
             continue
         }
+        if tokenSeparators.contains(scalar) {
+            tokenStart = true
+            position += 1
+            continue
+        }
+        if tokenStart, let end = delimitedTokenEnd(document, position, references) {
+            position = end
+            continue
+        }
+        // Anything else is part of a bare reference, which runs to a separator.
+        tokenStart = false
         position += 1
     }
     return blanked
+}
+
+/// What ends a bare reference. A token starts after one of these, at the
+/// start of the document, and right after a delimited reference or a
+/// versioned literal: the places the grammar reads a reference from.
+let tokenSeparators: [Unicode.Scalar] = [" ", "\t", "\n", "\r", "(", ":", ")"]
+
+/// Where the versioned literal `~<digits>{<payload>}` that starts at `start`
+/// ends, or `nil` when none starts there.
+func referenceLiteralEnd(_ text: [Unicode.Scalar], _ start: Int) -> Int? {
+    guard start < text.count, text[start] == "~" else { return nil }
+    var index = start + 1
+    while index < text.count && isDigit(text[index]) {
+        index += 1
+    }
+    guard index > start + 1, index < text.count, text[index] == "{" else { return nil }
+    index += 1
+    while index < text.count && !"} \t\r\n()".unicodeScalars.contains(text[index]) {
+        index += 1
+    }
+    return index < text.count && text[index] == "}" ? index + 1 : nil
+}
+
+/// Where the versioned literal or delimited reference that starts the token at
+/// `start` ends, or `nil` when the token there is a bare reference: a
+/// delimiter run that never closes is read as one, as the grammar reads it.
+private func delimitedTokenEnd(
+    _ document: [Unicode.Scalar], _ start: Int, _ references: DelimitedReferences
+) -> Int? {
+    if let literal = referenceLiteralEnd(document, start) {
+        return literal
+    }
+    return quoteScalars.contains(document[start]) ? references.end(at: start) : nil
 }
 
 /// The document with every comment replaced by spaces of the same length, so

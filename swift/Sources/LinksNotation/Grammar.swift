@@ -70,7 +70,11 @@ final class Grammar {
         self.input = input
         self.source = source ?? input
         self.maxDepth = maxDepth
-        self.references = DelimitedReferences(input)
+        // Delimited references are read in the document as written, so
+        // blanking a comment never changes what a reference holds or how far
+        // it reaches (issue #377). A delimiter is never blanked, so one in
+        // `input` opens the same reference in `source`.
+        self.references = DelimitedReferences(self.source)
     }
 
     /// The raw items of the document.

@@ -156,4 +156,36 @@ final class CommentsTests: XCTestCase {
         XCTAssertEqual(escapeReference("#"), "'#'")
         XCTAssertEqual(escapeReference("#ff0000"), "'#ff0000'")
     }
+
+    // Issue #377: the comment reader and the parser must agree on where every
+    // delimited reference starts and how far it reaches, or a comment is
+    // blanked inside what the parser then reads as a reference.
+
+    func testAHashInsideAReferenceThatFollowsAGroupIsContent() throws {
+        XCTAssertEqual(try parsesAs("(a)\" #b\"\n"), "((<a>) < #b>)")
+    }
+
+    func testAHashInsideAReferenceThatFollowsAnotherReferenceIsContent() throws {
+        XCTAssertEqual(try parsesAs("\"x\"' #y'\n"), "(<x> < #y>)")
+        XCTAssertEqual(try parsesAs("```q```\"\" #c\n\"\"\"\n"), "(<q> < #c\n\">)")
+    }
+
+    func testAHashInsideAReferenceThatFollowsALiteralIsContent() throws {
+        XCTAssertEqual(try parsesAs("~1{62}\" #b\"\n"), "(<b> < #b>)")
+    }
+
+    func testAReferenceIsReadInTheDocumentAsWrittenCommentsIncluded() throws {
+        // The body of the first `""` straddles a parenthesis, so it is the
+        // empty reference and the `#` after it opens a comment. Blanking that
+        // comment must not turn the `""` into a reference that holds the
+        // blanked text.
+        XCTAssertEqual(try parsesAs("\"\" a #)b\n\"\"\n"), "(<> <a>)\n(<>)")
+    }
+
+    func testTheCommentReaderSkipsTheReferencesTheParserReads() {
+        XCTAssertEqual(stripComments("(a)\" #b\"\n"), "(a)\" #b\"\n")
+        XCTAssertEqual(stripComments("\"x\"' #y'\n"), "\"x\"' #y'\n")
+        XCTAssertEqual(stripComments("~1{62}\" #b\"\n"), "~1{62}\" #b\"\n")
+        XCTAssertEqual(stripComments("a\"b #c\"\n"), "a\"b    \n")
+    }
 }

@@ -115,29 +115,16 @@ private func quoteText(_ text: String) -> String {
     return result + "\""
 }
 
-/// Where the reference literal `~<digits>{<payload>}` that starts at `start`
-/// ends, or `nil` when none starts there.
-private func literalEnd(_ text: [Unicode.Scalar], _ start: Int) -> Int? {
-    guard start < text.count, text[start] == "~" else { return nil }
-    var index = start + 1
-    while index < text.count && isDigit(text[index]) {
-        index += 1
-    }
-    guard index > start + 1, index < text.count, text[index] == "{" else { return nil }
-    index += 1
-    while index < text.count && !"} \t\r\n()".unicodeScalars.contains(text[index]) {
-        index += 1
-    }
-    return index < text.count && text[index] == "}" ? index + 1 : nil
-}
-
 /// The concrete syntax tree of a document that has already been parsed.
 func buildCst(_ input: String, comments: Bool = true) throws -> CstNode {
     let source = Array(input.unicodeScalars)
-    // References are read in the document the grammar reads: the one with
-    // its comments blanked, which keeps every position of the one written.
+    // Bare references end where they end in the document the grammar reads:
+    // the one with its comments blanked, which keeps every position of the one
+    // written. Delimited references and literals are read, as the grammar
+    // reads them, in the document as written, so a comment never changes what
+    // a reference holds (issue #377).
     let prepared = comments ? stripComments(source) : source
-    let references = DelimitedReferences(prepared)
+    let references = DelimitedReferences(source)
 
     // The open containers, innermost last, each with the line being filled.
     var containers: [(node: CstNode, line: CstNode?)] = [(CstNode(.document), nil)]
@@ -200,13 +187,13 @@ func buildCst(_ input: String, comments: Bool = true) throws -> CstNode {
         } else if character == ":" {
             add(CstNode(.colon, text: ":"))
         } else {
-            end = referenceEnd(prepared, position, references)
+            end = referenceEnd(source, prepared, position, references)
             let text = slice(position, end)
             let quoted = quoteScalars.contains(character) ? references.read(at: position) : nil
             let value: String
             if let quoted {
                 value = quoted.value
-            } else if character == "~" && literalEnd(prepared, position) == end {
+            } else if character == "~" && referenceLiteralEnd(source, position) == end {
                 value = try decodeReferenceLiteral(text)
             } else {
                 value = text
@@ -224,12 +211,15 @@ func buildCst(_ input: String, comments: Bool = true) throws -> CstNode {
 }
 
 /// Where the reference that starts at `start` ends, read as the grammar
-/// reads it.
-private func referenceEnd(_ prepared: [Unicode.Scalar], _ start: Int, _ references: DelimitedReferences) -> Int {
-    if let literal = literalEnd(prepared, start) {
+/// reads it: a literal or a delimited reference in the document as written,
+/// a bare reference in the one with its comments blanked.
+private func referenceEnd(
+    _ source: [Unicode.Scalar], _ prepared: [Unicode.Scalar], _ start: Int, _ references: DelimitedReferences
+) -> Int {
+    if let literal = referenceLiteralEnd(source, start) {
         return literal
     }
-    if quoteScalars.contains(prepared[start]), let end = references.end(at: start) {
+    if quoteScalars.contains(source[start]), let end = references.end(at: start) {
         return end
     }
     var end = start + 1
