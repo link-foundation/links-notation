@@ -7,20 +7,29 @@ package io.github.linkfoundation.linksnotation
 fun formatLinks(links: List<Link>): String = formatLinks(links, lessParentheses = false)
 
 /** The links as Links Notation text, like JavaScript `formatLinks(links, lessParentheses)`. */
-fun formatLinks(links: List<Link>, lessParentheses: Boolean): String =
-    links.joinToString("\n") { it.format(lessParentheses) }
+fun formatLinks(
+    links: List<Link>,
+    lessParentheses: Boolean,
+): String = links.joinToString("\n") { it.format(lessParentheses) }
 
 /**
  * The links as Links Notation text written as [options] say, one link per
  * line, like JavaScript `formatLinks(links, formatOptions)`.
  */
-fun formatLinks(links: List<Link>, options: FormatOptions): String {
+fun formatLinks(
+    links: List<Link>,
+    options: FormatOptions,
+): String {
     val toFormat = if (options.groupConsecutive) groupConsecutiveLinks(links) else links
     return toFormat.joinToString("\n") { it.format(options) }
 }
 
 /** Port of `Link.format(lessParentheses, isCompoundValue)` of `js/src/Link.js`. */
-internal fun formatLink(link: Link, lessParentheses: Boolean, isCompoundValue: Boolean): String {
+internal fun formatLink(
+    link: Link,
+    lessParentheses: Boolean,
+    isCompoundValue: Boolean,
+): String {
     val id = link.id
     val values = link.values
 
@@ -57,7 +66,11 @@ internal fun formatLink(link: Link, lessParentheses: Boolean, isCompoundValue: B
 }
 
 /** Port of `Link._formatWithOptions(options, isCompoundValue)` of `js/src/Link.js`. */
-internal fun formatLinkWithOptions(link: Link, options: FormatOptions, isCompoundValue: Boolean): String {
+internal fun formatLinkWithOptions(
+    link: Link,
+    options: FormatOptions,
+    isCompoundValue: Boolean,
+): String {
     val id = link.id
     val values = link.values
 
@@ -107,7 +120,10 @@ internal fun formatLinkWithOptions(link: Link, options: FormatOptions, isCompoun
 }
 
 /** Port of `Link._formatIndented(options)`: the values on indented lines. */
-private fun formatIndented(link: Link, options: FormatOptions): String {
+private fun formatIndented(
+    link: Link,
+    options: FormatOptions,
+): String {
     val lines = ArrayList<String>()
     if (link.id != null) {
         lines.add("${escapeReference(link.id)}:")
@@ -147,7 +163,10 @@ private fun groupConsecutiveLinks(links: List<Link>): List<Link> {
 }
 
 /** Port of `Link.formatValue(value)`: how [value] is written inside [parent]. */
-private fun formatValue(parent: Link, value: Link): String {
+private fun formatValue(
+    parent: Link,
+    value: Link,
+): String {
     if (parent.isFromPathCombination) {
         return formatLink(value, lessParentheses = false, isCompoundValue = true)
     }

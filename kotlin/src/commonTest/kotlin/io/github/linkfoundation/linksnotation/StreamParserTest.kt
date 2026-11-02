@@ -124,12 +124,13 @@ last sees first"""
             StreamParser.parse(listOf("one link\n", "two link")).map { it.toString() }.toList(),
         )
         var pulled = 0
-        val chunks = sequence {
-            pulled++
-            yield("one link\n")
-            pulled++
-            yield("two link")
-        }
+        val chunks =
+            sequence {
+                pulled++
+                yield("one link\n")
+                pulled++
+                yield("two link")
+            }
         val links = StreamParser.parse(chunks).iterator()
         assertEquals("(one link)", links.next().toString())
         assertEquals(2, pulled)

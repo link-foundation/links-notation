@@ -19,7 +19,10 @@ class MultiQuoteParserTest {
             result.firstOrNull()?.id
         }
 
-    private fun assertSingleReference(expected: String, input: String) {
+    private fun assertSingleReference(
+        expected: String,
+        input: String,
+    ) {
         val result = parser.parse(input)
         assertEquals(1, result.size)
         assertEquals(expected, singleReferenceId(result))
@@ -47,7 +50,8 @@ class MultiQuoteParserTest {
     fun testDoubleDoubleQuotesWithSingleQuoteInside() = assertSingleReference("text with \" inside", "\"\"text with \" inside\"\"")
 
     @Test
-    fun testDoubleDoubleQuotesWithEscape() = assertSingleReference("text with \"\" escaped double", "\"\"text with \"\"\"\" escaped double\"\"")
+    fun testDoubleDoubleQuotesWithEscape() =
+        assertSingleReference("text with \"\" escaped double", "\"\"text with \"\"\"\" escaped double\"\"")
 
     @Test
     fun testDoubleSingleQuotes() = assertSingleReference("double single quotes", "''double single quotes''")
@@ -74,7 +78,8 @@ class MultiQuoteParserTest {
     fun testTripleDoubleQuotesWithDoubleQuoteInside() = assertSingleReference("text with \"\" inside", "\"\"\"text with \"\" inside\"\"\"")
 
     @Test
-    fun testTripleDoubleQuotesWithEscape() = assertSingleReference("text with \"\"\" escaped triple", "\"\"\"text with \"\"\"\"\"\" escaped triple\"\"\"")
+    fun testTripleDoubleQuotesWithEscape() =
+        assertSingleReference("text with \"\"\" escaped triple", "\"\"\"text with \"\"\"\"\"\" escaped triple\"\"\"")
 
     @Test
     fun testTripleSingleQuotes() = assertSingleReference("triple single quotes", "'''triple single quotes'''")
@@ -92,16 +97,19 @@ class MultiQuoteParserTest {
     fun testTripleBacktickQuotesWithDoubleBacktickInside() = assertSingleReference("text with `` inside", "```text with `` inside```")
 
     @Test
-    fun testTripleBacktickQuotesWithEscape() = assertSingleReference("text with ``` escaped triple", "```text with `````` escaped triple```")
+    fun testTripleBacktickQuotesWithEscape() =
+        assertSingleReference("text with ``` escaped triple", "```text with `````` escaped triple```")
 
     @Test
     fun testQuadrupleDoubleQuotes() = assertSingleReference("quadruple double quotes", "\"\"\"\"quadruple double quotes\"\"\"\"")
 
     @Test
-    fun testQuadrupleDoubleQuotesWithTripleQuoteInside() = assertSingleReference("text with \"\"\" inside", "\"\"\"\"text with \"\"\" inside\"\"\"\"")
+    fun testQuadrupleDoubleQuotesWithTripleQuoteInside() =
+        assertSingleReference("text with \"\"\" inside", "\"\"\"\"text with \"\"\" inside\"\"\"\"")
 
     @Test
-    fun testQuadrupleDoubleQuotesWithEscape() = assertSingleReference("text with \"\"\"\" escaped quad", "\"\"\"\"text with \"\"\"\"\"\"\"\" escaped quad\"\"\"\"")
+    fun testQuadrupleDoubleQuotesWithEscape() =
+        assertSingleReference("text with \"\"\"\" escaped quad", "\"\"\"\"text with \"\"\"\"\"\"\"\" escaped quad\"\"\"\"")
 
     @Test
     fun testQuadrupleSingleQuotes() = assertSingleReference("quadruple single quotes", "''''quadruple single quotes''''")
@@ -113,10 +121,12 @@ class MultiQuoteParserTest {
     fun testQuintupleDoubleQuotes() = assertSingleReference("quintuple double quotes", "\"\"\"\"\"quintuple double quotes\"\"\"\"\"")
 
     @Test
-    fun testQuintupleDoubleQuotesWithQuadQuoteInside() = assertSingleReference("text with \"\"\"\" inside", "\"\"\"\"\"text with \"\"\"\" inside\"\"\"\"\"")
+    fun testQuintupleDoubleQuotesWithQuadQuoteInside() =
+        assertSingleReference("text with \"\"\"\" inside", "\"\"\"\"\"text with \"\"\"\" inside\"\"\"\"\"")
 
     @Test
-    fun testQuintupleDoubleQuotesWithEscape() = assertSingleReference("text with \"\"\"\"\" escaped quint", "\"\"\"\"\"text with \"\"\"\"\"\"\"\"\"\" escaped quint\"\"\"\"\"")
+    fun testQuintupleDoubleQuotesWithEscape() =
+        assertSingleReference("text with \"\"\"\"\" escaped quint", "\"\"\"\"\"text with \"\"\"\"\"\"\"\"\"\" escaped quint\"\"\"\"\"")
 
     @Test
     fun testQuintupleSingleQuotes() = assertSingleReference("quintuple single quotes", "'''''quintuple single quotes'''''")
@@ -131,7 +141,8 @@ class MultiQuoteParserTest {
     fun testNestedQuotesInMarkdown() = assertSingleReference("Use `code` in markdown", "``Use `code` in markdown``")
 
     @Test
-    fun testSQLWithQuotes() = assertSingleReference("SELECT * FROM users WHERE name = ''John''", "''SELECT * FROM users WHERE name = ''''John''''''")
+    fun testSQLWithQuotes() =
+        assertSingleReference("SELECT * FROM users WHERE name = ''John''", "''SELECT * FROM users WHERE name = ''''John''''''")
 
     @Test
     fun testJSONStringWithQuotes() = assertSingleReference("{\"key\": \"value\"}", "\"\"{\"key\": \"value\"}\"\"")
@@ -146,7 +157,11 @@ class MultiQuoteParserTest {
     fun testUnlimitedQuotes10() = assertSingleReference("very deeply quoted", "\"\"\"\"\"\"\"\"\"\"very deeply quoted\"\"\"\"\"\"\"\"\"\"")
 
     @Test
-    fun testUnlimitedQuotes6WithInnerQuotes() = assertSingleReference("hello with \"\"\"\"\" five quotes inside", "\"\"\"\"\"\"hello with \"\"\"\"\" five quotes inside\"\"\"\"\"\"")
+    fun testUnlimitedQuotes6WithInnerQuotes() =
+        assertSingleReference(
+            "hello with \"\"\"\"\" five quotes inside",
+            "\"\"\"\"\"\"hello with \"\"\"\"\" five quotes inside\"\"\"\"\"\"",
+        )
 
     @Test
     fun testUnlimitedSingleQuotes7() = assertSingleReference("seven single quotes", "'''''''seven single quotes'''''''")

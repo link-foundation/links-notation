@@ -8,7 +8,10 @@ package io.github.linkfoundation.linksnotation
  * @property element The link on the line.
  * @property children The groups of the lines indented directly under it.
  */
-data class LinksGroup(val element: Link, val children: List<LinksGroup> = emptyList()) {
+data class LinksGroup(
+    val element: Link,
+    val children: List<LinksGroup> = emptyList(),
+) {
     /** The element and then every descendant's element, depth first. */
     fun toList(): List<Link> {
         val result = ArrayList<Link>()

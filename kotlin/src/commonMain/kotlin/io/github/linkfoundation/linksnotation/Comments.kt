@@ -48,9 +48,14 @@ fun stripComments(document: String): String {
 }
 
 /** Whether the character before [position] is one of [allowed]; the document start counts as allowed. */
-private fun follows(document: String, position: Int, allowed: String): Boolean =
-    position == 0 || document[position - 1] in allowed
+private fun follows(
+    document: String,
+    position: Int,
+    allowed: String,
+): Boolean = position == 0 || document[position - 1] in allowed
 
 /** Position just past the delimited reference opened at [start] of [document], or null: `quotedReferenceEnd` of the JavaScript reference. */
-internal fun quotedReferenceEnd(document: String, start: Int): Int? =
-    readReference(document, start)?.let { start + it.length }
+internal fun quotedReferenceEnd(
+    document: String,
+    start: Int,
+): Int? = readReference(document, start)?.let { start + it.length }

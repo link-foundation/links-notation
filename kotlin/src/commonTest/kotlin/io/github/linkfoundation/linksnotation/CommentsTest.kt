@@ -39,12 +39,10 @@ class CommentsTest {
         assertEquals(parsesAs("parent\n  child\n"), parsesAs("parent\n  # what the child is for\n  child\n"))
 
     @Test
-    fun aCommentLineInsideAGroupIsSkipped() =
-        assertEquals(parsesAs("(\n  a\n  b\n)\n"), parsesAs("(\n  a\n  # why\n  b\n)\n"))
+    fun aCommentLineInsideAGroupIsSkipped() = assertEquals(parsesAs("(\n  a\n  b\n)\n"), parsesAs("(\n  a\n  # why\n  b\n)\n"))
 
     @Test
-    fun aLineOfSpacesSeparatesLinksTheWayAnEmptyLineDoes() =
-        assertEquals(parsesAs("a\n\nb\n"), parsesAs("a\n   \nb\n"))
+    fun aLineOfSpacesSeparatesLinksTheWayAnEmptyLineDoes() = assertEquals(parsesAs("a\n\nb\n"), parsesAs("a\n   \nb\n"))
 
     @Test
     fun aDocumentOfCommentsAloneHoldsNoLinks() = assertEquals("", parsesAs("# one\n# two\n"))
@@ -56,19 +54,16 @@ class CommentsTest {
     fun aHashThatOpensATokenIsAnOrdinaryCharacter() = assertEquals("(<a>: <b#c>)", parsesAs("a: b#c\n"))
 
     @Test
-    fun aHashInsideADelimitedReferenceIsContent() =
-        assertEquals("(<# not a comment> <a>)", parsesAs("\"# not a comment\" a\n"))
+    fun aHashInsideADelimitedReferenceIsContent() = assertEquals("(<# not a comment> <a>)", parsesAs("\"# not a comment\" a\n"))
 
     @Test
     fun aCommentMayFollowADelimitedReference() = assertEquals("(<a>)", parsesAs("\"a\" # why\n"))
 
     @Test
-    fun aHashInsideAMultilineDelimitedReferenceIsContent() =
-        assertEquals("(<a # b\nc> <d>)", parsesAs("\"a # b\nc\" d\n"))
+    fun aHashInsideAMultilineDelimitedReferenceIsContent() = assertEquals("(<a # b\nc> <d>)", parsesAs("\"a # b\nc\" d\n"))
 
     @Test
-    fun aParserWithoutCommentsKeepsTheHash() =
-        assertEquals("(<#> <a> <b>)", parsesAs("# a b\n", Parser(ParserOptions(comments = false))))
+    fun aParserWithoutCommentsKeepsTheHash() = assertEquals("(<#> <a> <b>)", parsesAs("# a b\n", Parser(ParserOptions(comments = false))))
 
     @Test
     fun aParserWithoutCommentsStillRejectsTheDocumentFromTheIssue() {

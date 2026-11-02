@@ -5,7 +5,9 @@ package io.github.linkfoundation.linksnotation
  * parser (`links-notation` on npm) does: the same links for every document it
  * reads, and the same line and column for every document it refuses.
  */
-class Parser(val options: ParserOptions = ParserOptions()) {
+class Parser(
+    val options: ParserOptions = ParserOptions(),
+) {
     /**
      * The links of [text].
      *
@@ -46,8 +48,7 @@ class Parser(val options: ParserOptions = ParserOptions()) {
         return buildCst(text, options.comments)
     }
 
-    private fun transformGroup(item: RawItem): LinksGroup =
-        LinksGroup(transformLink(item), item.children.orEmpty().map(::transformGroup))
+    private fun transformGroup(item: RawItem): LinksGroup = LinksGroup(transformLink(item), item.children.orEmpty().map(::transformGroup))
 
     private fun read(text: String): List<RawItem> {
         val limit = options.maxInputSize ?: ParserOptions.DEFAULT_MAX_INPUT_SIZE
@@ -65,7 +66,11 @@ class Parser(val options: ParserOptions = ParserOptions()) {
         }
     }
 
-    private fun collectLinks(item: RawItem, parentPath: List<Link>, result: MutableList<Link>) {
+    private fun collectLinks(
+        item: RawItem,
+        parentPath: List<Link>,
+        result: MutableList<Link>,
+    ) {
         val children = item.children
         if (children.isNullOrEmpty()) {
             result.add(combinePathElements(parentPath, transformLink(item)))
@@ -102,7 +107,10 @@ class Parser(val options: ParserOptions = ParserOptions()) {
         return current
     }
 
-    private fun combinePathElements(path: List<Link>, current: Link): Link {
+    private fun combinePathElements(
+        path: List<Link>,
+        current: Link,
+    ): Link {
         if (path.isEmpty()) return current
         val parent = if (path.size == 1) path[0] else combinePathElements(path.dropLast(1), path.last())
         return Link(null, listOf(parent, current)).also { it.isFromPathCombination = true }
@@ -131,14 +139,20 @@ class Parser(val options: ParserOptions = ParserOptions()) {
 
     // Record how the item wrote its ID, unless these options read a bare
     // abstract syntax tree.
-    private fun withRawId(link: Link, item: RawItem): Link {
+    private fun withRawId(
+        link: Link,
+        item: RawItem,
+    ): Link {
         if (options.syntax && link.id != null && item.rawId != null) {
             link.rawId = item.rawId
         }
         return link
     }
 
-    private fun toParseException(text: String, error: GrammarError): ParseException {
+    private fun toParseException(
+        text: String,
+        error: GrammarError,
+    ): ParseException {
         val position = positionAt(text, error.offset)
         val lineText = lineAt(text, position.offset)
         val summary = "line ${position.line}, column ${position.column}: ${error.message}"

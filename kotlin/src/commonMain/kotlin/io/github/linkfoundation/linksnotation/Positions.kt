@@ -11,10 +11,17 @@ private const val QUOTED_LINE_WIDTH = 80
 /** What a message writes in place of the part of a long line it left out. */
 private const val ELLIPSIS = "..."
 
-internal class Position(val offset: Int, val line: Int, val column: Int)
+internal class Position(
+    val offset: Int,
+    val line: Int,
+    val column: Int,
+)
 
 /** The line and column of [offset], counting CR, LF and CRLF as one line break each. */
-internal fun positionAt(input: String, offset: Int): Position {
+internal fun positionAt(
+    input: String,
+    offset: Int,
+): Position {
     val at = offset.coerceIn(0, input.length)
     var line = 1
     var column = 1
@@ -26,11 +33,15 @@ internal fun positionAt(input: String, offset: Int): Position {
                 column = 1
                 if (index + 1 < at && input[index + 1] == '\n') index++
             }
+
             '\n' -> {
                 line++
                 column = 1
             }
-            else -> column++
+
+            else -> {
+                column++
+            }
         }
         index++
     }
@@ -38,7 +49,10 @@ internal fun positionAt(input: String, offset: Int): Position {
 }
 
 /** The line [offset] falls on, without its line ending. */
-internal fun lineAt(input: String, offset: Int): String {
+internal fun lineAt(
+    input: String,
+    offset: Int,
+): String {
     val at = offset.coerceIn(0, input.length)
     val start = maxOf(input.lastIndexOf('\n', at - 1), input.lastIndexOf('\r', at - 1)) + 1
     var end = start
@@ -47,7 +61,11 @@ internal fun lineAt(input: String, offset: Int): String {
 }
 
 /** The offending line with a caret under the offending column. */
-internal fun quoteLine(number: Int, lineText: String, column: Int): String {
+internal fun quoteLine(
+    number: Int,
+    lineText: String,
+    column: Int,
+): String {
     var quoted = lineText
     var at = column
     if (lineText.length > QUOTED_LINE_WIDTH) {

@@ -14,7 +14,10 @@ class EdgeCaseParserTest {
         assertFailsWith<ParseException> { parser.parse(input) }
     }
 
-    private fun assertReferences(input: String, vararg ids: String) {
+    private fun assertReferences(
+        input: String,
+        vararg ids: String,
+    ) {
         val result = parser.parse(input)
         assertEquals(1, result.size)
         assertNull(result[0].id)

@@ -34,7 +34,14 @@ class SyntaxMetadataTest {
 
     @Test
     fun keepsRawTextFromTheSourceNotFromCommentStripping() {
-        assertEquals("'b # c'", Parser().parse("(a 'b # c') # d").single().values[1].rawId)
+        assertEquals(
+            "'b # c'",
+            Parser()
+                .parse("(a 'b # c') # d")
+                .single()
+                .values[1]
+                .rawId,
+        )
     }
 
     @Test
@@ -70,7 +77,13 @@ class SyntaxMetadataTest {
     fun parseGroupsAndStreamParserKeepTheMetadata() {
         val groups = Parser().parseGroups("'root':\n  \"child\"")
         assertEquals("'root'", groups[0].element.rawId)
-        assertEquals("\"child\"", groups[0].children[0].element.values[0].rawId)
+        assertEquals(
+            "\"child\"",
+            groups[0]
+                .children[0]
+                .element.values[0]
+                .rawId,
+        )
         val stream = StreamParser()
         stream.write("(a '")
         stream.write("b')")

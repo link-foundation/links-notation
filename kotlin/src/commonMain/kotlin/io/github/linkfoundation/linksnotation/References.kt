@@ -6,7 +6,10 @@ package io.github.linkfoundation.linksnotation
  */
 
 /** Whether [text] has the reserved versioned-literal prefix `~<digits>{` at [start]. */
-internal fun hasReferenceLiteralPrefix(text: String, start: Int = 0): Boolean {
+internal fun hasReferenceLiteralPrefix(
+    text: String,
+    start: Int = 0,
+): Boolean {
     var position = start
     if (position >= text.length || text[position] != '~') return false
     position++
@@ -81,6 +84,7 @@ internal fun isSpaceLike(character: Char): Boolean =
         in '\u0009'..'\u000d', '\u0020', '\u0085', '\u00a0', '\u1680', in '\u2000'..'\u200a',
         '\u2028', '\u2029', '\u202f', '\u205f', '\u3000', '\ufeff',
         -> true
+
         else -> false
     }
 
@@ -125,7 +129,10 @@ internal fun formatReference(text: String): String {
  * ordinary single-space prose stays unquoted; a null reference is written as
  * nothing.
  */
-fun escapeReference(reference: String?, minimal: Boolean = false): String {
+fun escapeReference(
+    reference: String?,
+    minimal: Boolean = false,
+): String {
     if (reference == null) return ""
     requireWellFormed(reference)
     if (!minimal || reference.isEmpty() || reference.any(::isControl)) {

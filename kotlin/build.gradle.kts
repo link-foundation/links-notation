@@ -6,18 +6,23 @@ import groovy.json.JsonSlurper
 plugins {
     kotlin("multiplatform") version "2.4.21"
     id("com.android.kotlin.multiplatform.library") version "9.5.0" apply false
+    id("com.vanniktech.maven.publish") version "0.37.0"
+    id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
 }
 
 group = "io.github.link-foundation"
-version = "0.1.0"
+version = "0.29.0"
 
 // Android needs an SDK. CI runners have one; elsewhere the Android target is
 // left out rather than failing the build of every other target.
 val androidSdk: String? =
     System.getenv("ANDROID_HOME")?.takeIf { it.isNotBlank() }
         ?: System.getenv("ANDROID_SDK_ROOT")?.takeIf { it.isNotBlank() }
-        ?: file("local.properties").takeIf { it.isFile }?.readLines()
-            ?.firstOrNull { it.startsWith("sdk.dir=") }?.substringAfter("=")
+        ?: file("local.properties")
+            .takeIf { it.isFile }
+            ?.readLines()
+            ?.firstOrNull { it.startsWith("sdk.dir=") }
+            ?.substringAfter("=")
 val withAndroid = androidSdk != null && file(androidSdk).isDirectory
 
 if (withAndroid) {
@@ -79,7 +84,10 @@ abstract class GenerateParityCases : DefaultTask() {
         target.writeText(out.toString())
     }
 
-    private fun appendCases(out: StringBuilder, file: java.io.File) {
+    private fun appendCases(
+        out: StringBuilder,
+        file: java.io.File,
+    ) {
         @Suppress("UNCHECKED_CAST")
         val cases = JsonSlurper().parse(file, "UTF-8") as List<Map<String, Any?>>
         for (case in cases) {
@@ -87,7 +95,8 @@ abstract class GenerateParityCases : DefaultTask() {
             out.append("        id = ").append(literal(case["id"] as String)).append(",\n")
             out.append("        input = ").append(literal(case["input"] as String)).append(",\n")
             val expected = case["expected"] as List<*>?
-            out.append("        expected = ")
+            out
+                .append("        expected = ")
                 .append(if (expected == null) "null" else links(expected))
                 .append(",\n")
             val format = case["format"] as String?
@@ -103,7 +112,10 @@ abstract class GenerateParityCases : DefaultTask() {
         }
     }
 
-    private fun appendSyntaxCases(out: StringBuilder, file: java.io.File) {
+    private fun appendSyntaxCases(
+        out: StringBuilder,
+        file: java.io.File,
+    ) {
         @Suppress("UNCHECKED_CAST")
         val cases = JsonSlurper().parse(file, "UTF-8") as List<Map<String, Any?>>
         for (case in cases) {
@@ -116,7 +128,11 @@ abstract class GenerateParityCases : DefaultTask() {
         }
     }
 
-    private fun appendLines(out: StringBuilder, name: String, file: java.io.File) {
+    private fun appendLines(
+        out: StringBuilder,
+        name: String,
+        file: java.io.File,
+    ) {
         out.append("internal val ").append(name).append(": List<String> = listOf(\n")
         for (line in file.readLines(Charsets.UTF_8)) {
             out.append("    ").append(literal(line)).append(",\n")
@@ -157,17 +173,18 @@ abstract class GenerateParityCases : DefaultTask() {
     }
 }
 
-val generateParityCases = tasks.register<GenerateParityCases>("generateParityCases") {
-    description = "Generates ParityCases.kt from the shared parity fixtures and protocol vectors."
-    group = "verification"
-    val root = layout.projectDirectory.dir("..")
-    parityCorpus.set(root.file("parity/text-fixtures.json"))
-    syntaxCorpus.set(root.file("parity/syntax-fixtures.json"))
-    binaryVectors.set(root.file("docs/protocol/binary-links-notation-vectors.txt"))
-    referenceLiterals.set(root.file("docs/protocol/reference-literals.txt"))
-    invalidReferenceLiterals.set(root.file("docs/protocol/invalid-reference-literals.txt"))
-    outputDir.set(layout.buildDirectory.dir("generated/commonTest"))
-}
+val generateParityCases =
+    tasks.register<GenerateParityCases>("generateParityCases") {
+        description = "Generates ParityCases.kt from the shared parity fixtures and protocol vectors."
+        group = "verification"
+        val root = layout.projectDirectory.dir("..")
+        parityCorpus.set(root.file("parity/text-fixtures.json"))
+        syntaxCorpus.set(root.file("parity/syntax-fixtures.json"))
+        binaryVectors.set(root.file("docs/protocol/binary-links-notation-vectors.txt"))
+        referenceLiterals.set(root.file("docs/protocol/reference-literals.txt"))
+        invalidReferenceLiterals.set(root.file("docs/protocol/invalid-reference-literals.txt"))
+        outputDir.set(layout.buildDirectory.dir("generated/commonTest"))
+    }
 
 kotlin {
     jvm {
@@ -175,12 +192,20 @@ kotlin {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
         }
     }
+    // Mocha's default of 2 s per test is below the budget the JavaScript
+    // reference gives its slowest test ("reference literals at every chunk
+    // split" runs with 10000 ms in js/tests/ReferenceFidelity.test.js), so a
+    // busy runner failed it although it never hangs. Same budget here.
     js {
-        nodejs()
+        nodejs {
+            testTask { useMocha { timeout = "10s" } }
+        }
     }
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
     wasmJs {
-        nodejs()
+        nodejs {
+            testTask { useMocha { timeout = "10s" } }
+        }
     }
     iosArm64()
     iosSimulatorArm64()
@@ -202,5 +227,55 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
+    }
+}
+
+// Maven Central: io.github.link-foundation:links-notation-kotlin, with one
+// artifact per target (links-notation-kotlin-jvm, -js, -iosarm64, ...) behind
+// the Gradle module metadata of the root one. .github/workflows/publish-kotlin.yml
+// passes the Central token and the signing key as ORG_GRADLE_PROJECT_ properties.
+mavenPublishing {
+    publishToMavenCentral(automaticRelease = true)
+    if (providers.gradleProperty("signingInMemoryKey").isPresent) {
+        signAllPublications()
+    }
+    coordinates("io.github.link-foundation", "links-notation-kotlin", version.toString())
+
+    pom {
+        name.set("Links Notation for Kotlin")
+        description.set(
+            "A Kotlin Multiplatform parser and formatter for Links Notation (LiNo), " +
+                "with no runtime dependencies.",
+        )
+        inceptionYear.set("2026")
+        url.set("https://github.com/link-foundation/links-notation")
+        licenses {
+            license {
+                name.set("Unlicense")
+                url.set("https://unlicense.org/")
+                distribution.set("repo")
+            }
+        }
+        developers {
+            developer {
+                name.set("Link.Foundation")
+                email.set("drakonard@gmail.com")
+                organization.set("Link Foundation")
+                organizationUrl.set("https://github.com/link-foundation")
+            }
+        }
+        scm {
+            url.set("https://github.com/link-foundation/links-notation")
+            connection.set("scm:git:git://github.com/link-foundation/links-notation.git")
+            developerConnection.set("scm:git:ssh://github.com:link-foundation/links-notation.git")
+        }
+    }
+}
+
+ktlint {
+    version.set("1.8.0")
+    filter {
+        // The generated parity fixtures are not hand formatted.
+        exclude { it.file.path.contains("/build/generated/") }
     }
 }

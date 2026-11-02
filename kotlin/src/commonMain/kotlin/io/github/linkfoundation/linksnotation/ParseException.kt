@@ -7,7 +7,10 @@ package io.github.linkfoundation.linksnotation
  * unit `String.length` counts in Kotlin and in the JavaScript reference parser,
  * so a position reported here is the position the JavaScript parser reports.
  */
-sealed class ParseException(message: String, cause: Throwable? = null) : Exception(message, cause) {
+sealed class ParseException(
+    message: String,
+    cause: Throwable? = null,
+) : Exception(message, cause) {
     /**
      * The document cannot be read at [line] and [column]: the furthest
      * position the parser reached, exactly as the JavaScript reference reports
@@ -50,8 +53,9 @@ sealed class ParseException(message: String, cause: Throwable? = null) : Excepti
     ) : Syntax(line, column, message, offset, lineText, snippet, found)
 
     /** The document is longer than [limit] UTF-16 code units; it was not read. */
-    class InputTooLarge(val limit: Int) :
-        ParseException("Input size exceeds maximum allowed size of $limit bytes")
+    class InputTooLarge(
+        val limit: Int,
+    ) : ParseException("Input size exceeds maximum allowed size of $limit bytes")
 }
 
 /**
@@ -76,7 +80,11 @@ class StreamParseException(
 ) : ParseException("Stream parse error at line $line, column $column: ${cause.message}", cause) {
     internal companion object {
         /** [error], a refusal of the record that starts at [startOffset] and [startLine] of the stream. */
-        fun of(error: ParseException, startOffset: Int, startLine: Int): StreamParseException {
+        fun of(
+            error: ParseException,
+            startOffset: Int,
+            startLine: Int,
+        ): StreamParseException {
             val syntax = error as? ParseException.Syntax
             val localLine = syntax?.line ?: 1
             val line = startLine + localLine - 1

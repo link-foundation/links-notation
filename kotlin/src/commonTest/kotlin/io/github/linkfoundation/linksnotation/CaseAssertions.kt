@@ -12,7 +12,10 @@ import kotlin.test.fail
  * links, the same formatted text, and the same links again from that text; or,
  * for an error case, the same error at the same line and column.
  */
-internal fun assertCase(case: Case, options: ParserOptions = ParserOptions()) {
+internal fun assertCase(
+    case: Case,
+    options: ParserOptions = ParserOptions(),
+) {
     val parser = Parser(options)
     if (case.error) {
         val error = assertFailsWith<ParseException.Syntax>("${case.id} must be refused") { parser.parse(case.input) }

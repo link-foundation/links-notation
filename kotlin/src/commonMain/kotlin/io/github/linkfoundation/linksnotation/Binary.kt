@@ -15,12 +15,18 @@ private val WIDTHS = intArrayOf(1, 2, 4, 8)
 private const val TOP_BIT: ULong = 0x8000000000000000uL
 
 /** Throw [IllegalArgumentException] with [message] unless [condition] holds. */
-private fun requireValue(condition: Boolean, message: String) {
+private fun requireValue(
+    condition: Boolean,
+    message: String,
+) {
     if (!condition) throw IllegalArgumentException(message)
 }
 
 /** `a + b`, refusing to wrap past 2^64 - 1. */
-private fun add64(a: ULong, b: ULong): ULong {
+private fun add64(
+    a: ULong,
+    b: ULong,
+): ULong {
     requireValue(a <= ULong.MAX_VALUE - b, "uint64 overflow")
     return a + b
 }
@@ -38,20 +44,30 @@ sealed interface PacketReference {
 }
 
 /** A reference to the link at [value]: 0 and 1 are the reserved points, 2 to 5 the markers. */
-data class Address(override val value: ULong) : PacketReference {
+data class Address(
+    override val value: ULong,
+) : PacketReference {
     override fun toString(): String = value.toString()
 }
 
 /** A Hybrid external value: a number outside the address space of the packet. */
-data class External(override val value: ULong) : PacketReference {
+data class External(
+    override val value: ULong,
+) : PacketReference {
     override fun toString(): String = "#$value"
 }
 
 /** A raw link of a packet with its implicit [address]. */
-data class PacketLink(val address: ULong, val references: List<PacketReference>)
+data class PacketLink(
+    val address: ULong,
+    val references: List<PacketReference>,
+)
 
 /** An inclusive range of link lengths; a null [max] is unbounded. */
-data class ArityRange(val min: ULong = 2u, val max: ULong? = 2u) {
+data class ArityRange(
+    val min: ULong = 2u,
+    val max: ULong? = 2u,
+) {
     init {
         requireValue(min > 0u && min <= ULong.MAX_VALUE shr 4 && (max == null || max >= min), "invalid arity")
     }
@@ -105,8 +121,7 @@ data class DecodeLimits(
 
     companion object {
         /** No limit at all, for trusted input. */
-        fun unlimited(): DecodeLimits =
-            DecodeLimits(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE)
+        fun unlimited(): DecodeLimits = DecodeLimits(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE)
     }
 }
 
@@ -132,7 +147,10 @@ data class BinaryLinoOptions(
             return BinaryLinoOptions(
                 packet.externalReferences,
                 ArityRange(min, max),
-                packet.sections.map { it.width }.toSet().size > 1,
+                packet.sections
+                    .map { it.width }
+                    .toSet()
+                    .size > 1,
             )
         }
     }
@@ -147,7 +165,10 @@ data class Section(
 )
 
 /** The fewest bytes that hold [reference]; external values give up the top bit. */
-private fun referenceWidth(reference: PacketReference, external: Boolean): Int {
+private fun referenceWidth(
+    reference: PacketReference,
+    external: Boolean,
+): Int {
     requireValue(reference !is External || external, "external references disabled")
     val value = reference.value
     for (width in WIDTHS) {
@@ -180,7 +201,10 @@ private class ByteWriter {
 }
 
 /** A cursor that reads one packet at a time without consuming any following packet. */
-class PacketReader(private val bytes: ByteArray, offset: Int = 0) {
+class PacketReader(
+    private val bytes: ByteArray,
+    offset: Int = 0,
+) {
     /** Where the next packet starts. */
     var offset: Int = offset
         private set
@@ -230,7 +254,17 @@ class PacketReader(private val bytes: ByteArray, offset: Int = 0) {
                 val gap = if (shape and 4u != 0uL) leb() else 0uL
                 val min = shape shr 4
                 val extra = if (shape and 8u != 0uL) leb() else null
-                val arity = ArityRange(min, if (extra == null) min else if (extra == 0uL) null else add64(min, extra))
+                val arity =
+                    ArityRange(
+                        min,
+                        if (extra == null) {
+                            min
+                        } else if (extra == 0uL) {
+                            null
+                        } else {
+                            add64(min, extra)
+                        },
+                    )
                 val count = leb()
                 address = add64(add64(address, gap), count)
                 requireValue(count <= maxLinks - total, "too many links")
@@ -249,30 +283,31 @@ class PacketReader(private val bytes: ByteArray, offset: Int = 0) {
         }
         var references = 0uL
         val maxReferences = limits.maxReferences.toULong()
-        val sections = shapes.mapIndexed { i, section ->
-            val links = ArrayList<List<PacketReference>>()
-            for (j in 0L until counts[i]) {
-                val length = add64(section.arity.min, if (section.arity.fixed) 0uL else leb())
-                requireValue(section.arity.contains(length), "link outside arity")
-                requireValue(length <= maxReferences - references, "too many references")
-                references += length
-                val link = ArrayList<PacketReference>()
-                val top = 1uL shl (section.width * 8 - 1)
-                for (k in 0uL until length) {
-                    val raw = raw(section.width)
-                    link.add(
-                        if (header and 1 != 0 && raw >= top) {
-                            // (top << 1) - raw wraps to 2^64 - raw for eight-byte references.
-                            External(if (raw == top) 0uL else (top shl 1) - raw)
-                        } else {
-                            Address(raw)
-                        },
-                    )
+        val sections =
+            shapes.mapIndexed { i, section ->
+                val links = ArrayList<List<PacketReference>>()
+                for (j in 0L until counts[i]) {
+                    val length = add64(section.arity.min, if (section.arity.fixed) 0uL else leb())
+                    requireValue(section.arity.contains(length), "link outside arity")
+                    requireValue(length <= maxReferences - references, "too many references")
+                    references += length
+                    val link = ArrayList<PacketReference>()
+                    val top = 1uL shl (section.width * 8 - 1)
+                    for (k in 0uL until length) {
+                        val raw = raw(section.width)
+                        link.add(
+                            if (header and 1 != 0 && raw >= top) {
+                                // (top << 1) - raw wraps to 2^64 - raw for eight-byte references.
+                                External(if (raw == top) 0uL else (top shl 1) - raw)
+                            } else {
+                                Address(raw)
+                            },
+                        )
+                    }
+                    links.add(link)
                 }
-                links.add(link)
+                section.copy(links = links)
             }
-            section.copy(links = links)
-        }
         return LinksPacket(header and 1 != 0, sections)
     }
 }
@@ -321,10 +356,11 @@ data class LinksPacket(
     fun toBytes(limits: DecodeLimits = DecodeLimits()): ByteArray {
         validate(limits)
         val first = sections.firstOrNull()
-        val compact = first == null ||
-            (
-                sections.size == 1 && first.gap == 5uL && first.arity.min == 2uL &&
-                    first.arity.max == 2uL && first.links.isNotEmpty()
+        val compact =
+            first == null ||
+                (
+                    sections.size == 1 && first.gap == 5uL && first.arity.min == 2uL &&
+                        first.arity.max == 2uL && first.links.isNotEmpty()
                 )
         val out = ByteWriter()
         var header = 0x10 or (if (externalReferences) 1 else 0)
@@ -350,14 +386,20 @@ data class LinksPacket(
                 if (!s.arity.fixed) out.leb(link.size.toULong() - s.arity.min)
                 for (r in link) {
                     val bits = s.width * 8
-                    var raw = when (r) {
-                        is External -> when {
-                            r.value == 0uL -> 1uL shl (bits - 1)
-                            bits == 64 -> 0uL - r.value
-                            else -> (1uL shl bits) - r.value
+                    var raw =
+                        when (r) {
+                            is External -> {
+                                when {
+                                    r.value == 0uL -> 1uL shl (bits - 1)
+                                    bits == 64 -> 0uL - r.value
+                                    else -> (1uL shl bits) - r.value
+                                }
+                            }
+
+                            is Address -> {
+                                r.value
+                            }
                         }
-                        is Address -> r.value
-                    }
                     for (i in 0 until s.width) {
                         out.push((raw and 255u).toInt())
                         raw = raw shr 8
@@ -370,7 +412,10 @@ data class LinksPacket(
 
     companion object {
         /** The one packet [bytes] hold, with nothing after it. */
-        fun fromBytes(bytes: ByteArray, limits: DecodeLimits = DecodeLimits()): LinksPacket {
+        fun fromBytes(
+            bytes: ByteArray,
+            limits: DecodeLimits = DecodeLimits(),
+        ): LinksPacket {
             val reader = PacketReader(bytes)
             val packet = reader.read(limits)
             requireValue(packet != null, "empty input")
@@ -396,17 +441,22 @@ data class LinksPacket(
          * that take the fewest bytes; with [packedWidths], sections may differ
          * in width.
          */
-        fun pack(externalReferences: Boolean, input: List<PacketLink>, packedWidths: Boolean = false): LinksPacket {
+        fun pack(
+            externalReferences: Boolean,
+            input: List<PacketLink>,
+            packedWidths: Boolean = false,
+        ): LinksPacket {
             val links = input
             var previous = 0uL
-            val needs = links.map { link ->
-                requireValue(
-                    link.address > previous && link.address < ULong.MAX_VALUE && link.references.isNotEmpty(),
-                    "invalid address order or empty link",
-                )
-                previous = link.address
-                link.references.fold(1) { need, r -> maxOf(need, referenceWidth(r, externalReferences)) }
-            }
+            val needs =
+                links.map { link ->
+                    requireValue(
+                        link.address > previous && link.address < ULong.MAX_VALUE && link.references.isNotEmpty(),
+                        "invalid address order or empty link",
+                    )
+                    previous = link.address
+                    link.references.fold(1) { need, r -> maxOf(need, referenceWidth(r, externalReferences)) }
+                }
 
             fun cheapest(costs: DoubleArray): Int {
                 var best = 0
@@ -545,9 +595,14 @@ private fun isWellFormed(text: String): Boolean {
 private fun utf8Length(text: String): Long = text.encodeToByteArray().size.toLong()
 
 /** A point of the document graph while it is built: kind `e`, `i`, `d` or `t` and a number. */
-private data class Node(val kind: Char, val value: ULong)
+private data class Node(
+    val kind: Char,
+    val value: ULong,
+)
 
-private class Encoder(private val options: BinaryLinoOptions) {
+private class Encoder(
+    private val options: BinaryLinoOptions,
+) {
     private val doublets = ArrayList<List<Node>>()
     private val tuples = ArrayList<List<Node>>()
     private val created = HashMap<String, Node>()
@@ -570,7 +625,10 @@ private class Encoder(private val options: BinaryLinoOptions) {
         return tail
     }
 
-    fun typed(marker: Int, elements: List<Node>): Node {
+    fun typed(
+        marker: Int,
+        elements: List<Node>,
+    ): Node {
         val items = listOf(Node('i', marker.toULong())) + elements
         return if (items.size != 2 && options.arity.contains(items.size)) {
             link(items)
@@ -600,8 +658,7 @@ private class Encoder(private val options: BinaryLinoOptions) {
         return sum
     }
 
-    fun scalar(value: ULong): Node =
-        if (options.externalReferences && value < TOP_BIT) Node('e', value) else unary(value)
+    fun scalar(value: ULong): Node = if (options.externalReferences && value < TOP_BIT) Node('e', value) else unary(value)
 
     fun reference(text: String): Node {
         val number = if (DECIMAL.matches(text) && text.length <= 20) text.toULongOrNull() else null
@@ -641,7 +698,10 @@ private class Encoder(private val options: BinaryLinoOptions) {
     }
 }
 
-private class Decoder(packet: LinksPacket, private val limits: DecodeLimits) {
+private class Decoder(
+    packet: LinksPacket,
+    private val limits: DecodeLimits,
+) {
     private val links = ArrayList<List<PacketReference>>()
     private val unary = ArrayList<ULong?>()
     private var nodes = limits.maxNodes
@@ -654,6 +714,7 @@ private class Decoder(packet: LinksPacket, private val limits: DecodeLimits) {
                 address == 6uL + links.size.toULong() && refs.all { it is External || it.value < address },
                 "document addresses must be contiguous and references backward",
             )
+
             fun value(r: PacketReference): ULong? =
                 when {
                     r is External -> null
@@ -682,12 +743,13 @@ private class Decoder(packet: LinksPacket, private val limits: DecodeLimits) {
     }
 
     private fun number(r: PacketReference): ULong {
-        val value = when {
-            r is External -> r.value
-            r.value <= 1u -> r.value
-            r.value >= 6u -> unary[(r.value - 6u).toInt()]
-            else -> null
-        }
+        val value =
+            when {
+                r is External -> r.value
+                r.value <= 1u -> r.value
+                r.value >= 6u -> unary[(r.value - 6u).toInt()]
+                else -> null
+            }
         requireValue(value != null, "expected unary number")
         return value!!
     }
@@ -700,7 +762,10 @@ private class Decoder(packet: LinksPacket, private val limits: DecodeLimits) {
 
     private fun isMarker(r: PacketReference): Boolean = r is Address && r.value >= 1u && r.value <= 5u
 
-    fun decode(r: PacketReference, depth: Long): Link {
+    fun decode(
+        r: PacketReference,
+        depth: Long,
+    ): Link {
         requireValue(depth < limits.maxDepth && --nodes >= 0, "node or depth budget exceeded")
         if (r is External) return text(r.value.toString())
         if (r.value == 0uL) return Link(null)
@@ -720,7 +785,16 @@ private class Decoder(packet: LinksPacket, private val limits: DecodeLimits) {
                 for (e in elements) {
                     val p = number(e)
                     requireValue(p <= 0x10ffffu && !(p >= 0xd800u && p <= 0xdfffu), "invalid Unicode scalar")
-                    val size = if (p <= 0x7fu) 1 else if (p <= 0x7ffu) 2 else if (p <= 0xffffu) 3 else 4
+                    val size =
+                        if (p <= 0x7fu) {
+                            1
+                        } else if (p <= 0x7ffu) {
+                            2
+                        } else if (p <= 0xffffu) {
+                            3
+                        } else {
+                            4
+                        }
                     requireValue(size <= strings - byteCount, "string budget exceeded")
                     byteCount += size
                     chars.appendCodePoint(p.toInt())
@@ -743,12 +817,13 @@ private class Decoder(packet: LinksPacket, private val limits: DecodeLimits) {
     fun document(): List<Link> {
         if (links.isEmpty()) return emptyList()
         val root = links.last()
-        val elements = if (root.size == 2 && root[0] == Address(4u)) {
-            chain(root[1])
-        } else {
-            requireValue(!isMarker(root[0]), "root must be list")
-            root
-        }
+        val elements =
+            if (root.size == 2 && root[0] == Address(4u)) {
+                chain(root[1])
+            } else {
+                requireValue(!isMarker(root[0]), "root must be list")
+                root
+            }
         return elements.map { decode(it, 0) }
     }
 }
@@ -772,7 +847,10 @@ fun formatBinaryReference(text: String): String = formatReference(text)
 
 /** The text of a decoded binary [document], read back by [BinaryLinoCodec.parseDocument] as the same links. */
 fun formatBinaryDocument(document: List<Link>): String {
-    fun nested(node: Link, top: Boolean = false): String {
+    fun nested(
+        node: Link,
+        top: Boolean = false,
+    ): String {
         val id = node.id
         if (id != null && node.values.isEmpty()) return formatBinaryReference(id)
         val values = node.values.joinToString(" ") { nested(it) }
@@ -824,13 +902,19 @@ class BinaryLinoCodec(
     fun decode(bytes: ByteArray): List<Link> = decodePacket(LinksPacket.fromBytes(bytes, limits))
 
     /** The document model of [text]: its links, an anonymous link around one bare reference unwrapped. */
-    fun parseDocument(text: String, parser: Parser = Parser()): List<Link> = parser.parse(text).map(::canonical)
+    fun parseDocument(
+        text: String,
+        parser: Parser = Parser(),
+    ): List<Link> = parser.parse(text).map(::canonical)
 
     /** The text of [document]; see [formatBinaryDocument]. */
     fun formatDocument(document: List<Link>): String = formatBinaryDocument(document)
 
     /** The bytes the document [text] maps to. */
-    fun encodeText(text: String, parser: Parser = Parser()): ByteArray = encode(parseDocument(text, parser))
+    fun encodeText(
+        text: String,
+        parser: Parser = Parser(),
+    ): ByteArray = encode(parseDocument(text, parser))
 
     /** The text of the document [bytes] hold. */
     fun decodeText(bytes: ByteArray): String = formatDocument(decode(bytes))

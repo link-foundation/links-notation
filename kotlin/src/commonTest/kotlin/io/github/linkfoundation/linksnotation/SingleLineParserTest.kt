@@ -9,8 +9,10 @@ import kotlin.test.assertTrue
 class SingleLineParserTest {
     private val parser = Parser()
 
-    private fun roundTrips(source: String, target: String = source) =
-        assertEquals(target, formatLinks(parser.parse(source)))
+    private fun roundTrips(
+        source: String,
+        target: String = source,
+    ) = assertEquals(target, formatLinks(parser.parse(source)))
 
     private fun parses(input: String) = assertTrue(parser.parse(input).isNotEmpty())
 
@@ -19,7 +21,11 @@ class SingleLineParserTest {
     }
 
     /** One link of [input], with [id] and value references [values]. */
-    private fun assertLink(input: String, id: String?, vararg values: String) {
+    private fun assertLink(
+        input: String,
+        id: String?,
+        vararg values: String,
+    ) {
         val result = parser.parse(input)
         assertEquals(1, result.size)
         assertEquals(id, result[0].id)
@@ -152,8 +158,7 @@ class SingleLineParserTest {
     fun quotedReference() = assertLink("\"quoted value\"", null, "quoted value")
 
     @Test
-    fun quotedReferencesWithSpecialChars() =
-        assertLink("(\"special:char\" \"another@char\")", null, "special:char", "another@char")
+    fun quotedReferencesWithSpecialChars() = assertLink("(\"special:char\" \"another@char\")", null, "special:char", "another@char")
 
     @Test
     fun simpleReference() = parses("simplereference")

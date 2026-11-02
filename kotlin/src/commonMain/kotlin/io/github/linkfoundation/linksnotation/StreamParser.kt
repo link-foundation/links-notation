@@ -169,7 +169,10 @@ class StreamParser(
     /** Where the stream is: just after the last character written. */
     fun position(): Position = Position(offset, line, column, buffer.length + currentLine.length)
 
-    private fun startContentLine(indentation: Int, emitted: MutableList<Link>) {
+    private fun startContentLine(
+        indentation: Int,
+        emitted: MutableList<Link>,
+    ) {
         val base = baseIndentation
         if (buffer.isNotEmpty() && base != null && indentation <= base) {
             val record = buffer.toString()
@@ -193,7 +196,10 @@ class StreamParser(
         }
     }
 
-    private fun publish(read: List<Link>, emitted: MutableList<Link>) {
+    private fun publish(
+        read: List<Link>,
+        emitted: MutableList<Link>,
+    ) {
         for (link in read) {
             emitted.add(link)
             if (collect) links.add(link)
@@ -220,11 +226,16 @@ class StreamParser(
          * `StreamParser.parse`: each link is produced as soon as the chunks
          * that complete it are read.
          */
-        fun parse(chunks: Iterable<String>, options: ParserOptions = ParserOptions()): Sequence<Link> =
-            parse(chunks.asSequence(), options)
+        fun parse(
+            chunks: Iterable<String>,
+            options: ParserOptions = ParserOptions(),
+        ): Sequence<Link> = parse(chunks.asSequence(), options)
 
         /** The links of [chunks], read lazily; see the [Iterable] overload. */
-        fun parse(chunks: Sequence<String>, options: ParserOptions = ParserOptions()): Sequence<Link> =
+        fun parse(
+            chunks: Sequence<String>,
+            options: ParserOptions = ParserOptions(),
+        ): Sequence<Link> =
             sequence {
                 val stream = StreamParser(options, collect = false)
                 for (chunk in chunks) {
@@ -245,7 +256,10 @@ private fun leadingSpaces(line: CharSequence): Int {
  * Whether [document] closes every quote and parenthesis it opens, so that the
  * next non-indented line may start a new record.
  */
-private fun structurallyComplete(document: String, comments: Boolean): Boolean {
+private fun structurallyComplete(
+    document: String,
+    comments: Boolean,
+): Boolean {
     val references = DelimitedReferences(document)
     var depth = 0
     var position = 0

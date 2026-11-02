@@ -59,16 +59,25 @@ class LimitsTest {
     @Test
     fun theSizeIsCountedInUtf16Units() {
         val parser = Parser(ParserOptions(maxInputSize = 2))
-        assertEquals("😀", parser.parse("😀").single().values.single().id)
+        assertEquals(
+            "😀",
+            parser
+                .parse("😀")
+                .single()
+                .values
+                .single()
+                .id,
+        )
         assertFailsWith<ParseException.InputTooLarge> { parser.parse("😀a") }
     }
 
     @Test
     fun theDefaultSizeLimitIsTenMebibytes() {
         assertEquals(10 * 1024 * 1024, ParserOptions.DEFAULT_MAX_INPUT_SIZE)
-        val error = assertFailsWith<ParseException.InputTooLarge> {
-            Parser().parse("a".repeat(ParserOptions.DEFAULT_MAX_INPUT_SIZE + 1))
-        }
+        val error =
+            assertFailsWith<ParseException.InputTooLarge> {
+                Parser().parse("a".repeat(ParserOptions.DEFAULT_MAX_INPUT_SIZE + 1))
+            }
         assertEquals(ParserOptions.DEFAULT_MAX_INPUT_SIZE, error.limit)
     }
 }

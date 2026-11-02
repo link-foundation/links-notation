@@ -86,11 +86,12 @@ class IndentedIdSyntaxTest {
 
     @Test
     fun equivalenceTestComprehensive() {
-        val cases = listOf(
-            "test:\n  one" to "(test: one)",
-            "x:\n  a\n  b\n  c" to "(x: a b c)",
-            "\"quoted\":\n  value" to "(\"quoted\": value)",
-        )
+        val cases =
+            listOf(
+                "test:\n  one" to "(test: one)",
+                "x:\n  a\n  b\n  c" to "(x: a b c)",
+                "\"quoted\":\n  value" to "(\"quoted\": value)",
+            )
         for ((indented, inline) in cases) {
             val indentedResult = parser.parse(indented)
             val inlineResult = parser.parse(inline)

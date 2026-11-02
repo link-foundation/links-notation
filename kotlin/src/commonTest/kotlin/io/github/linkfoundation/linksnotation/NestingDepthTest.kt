@@ -15,8 +15,11 @@ class NestingDepthTest {
     private val veryDeep = 256
 
     private fun closed(depth: Int) = "(".repeat(depth) + "a" + ")".repeat(depth)
+
     private fun valueAfter(depth: Int) = "(".repeat(depth) + "a" + ") b".repeat(depth)
+
     private fun unclosed(depth: Int) = "(".repeat(depth) + "a"
+
     private fun indentedUnclosed(depth: Int) = (0 until depth).joinToString("\n") { " ".repeat(it) + "(a" }
 
     /** Like the JavaScript worker, which reads with `maxDepth: Infinity`. */
@@ -54,14 +57,15 @@ class NestingDepthTest {
 
     @Test
     fun groupFollowedByValuesKeepsItsStructure() {
-        val cases = listOf(
-            "(a) b" to "((a) b)",
-            "(a) (b) c" to "((a) (b) c)",
-            "((a) b) c" to "(((a) b) c)",
-            "(a: b) c" to "((a: b) c)",
-            "(a)\n(b) c" to "(a)\n((b) c)",
-            "x\n  (a) b\n  (c)" to "(x)\n((x) ((a) b))\n((x) (c))",
-        )
+        val cases =
+            listOf(
+                "(a) b" to "((a) b)",
+                "(a) (b) c" to "((a) (b) c)",
+                "((a) b) c" to "(((a) b) c)",
+                "(a: b) c" to "((a: b) c)",
+                "(a)\n(b) c" to "(a)\n((b) c)",
+                "x\n  (a) b\n  (c)" to "(x)\n((x) ((a) b))\n((x) (c))",
+            )
         for ((source, expected) in cases) {
             assertEquals(expected, formatted(source))
         }

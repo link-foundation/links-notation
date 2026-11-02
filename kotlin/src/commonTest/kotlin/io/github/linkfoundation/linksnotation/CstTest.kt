@@ -7,11 +7,12 @@ import kotlin.time.TimeSource
 
 /** Port of `js/tests/Cst.test.js`. */
 class CstTest {
-    private fun roundTrip(input: String, options: ParserOptions = ParserOptions()) =
-        Parser(options).parseCst(input).toString()
+    private fun roundTrip(
+        input: String,
+        options: ParserOptions = ParserOptions(),
+    ) = Parser(options).parseCst(input).toString()
 
-    private fun references(input: String) =
-        Parser().parseCst(input).tokens().filter { it.kind == CstKind.REFERENCE }
+    private fun references(input: String) = Parser().parseCst(input).tokens().filter { it.kind == CstKind.REFERENCE }
 
     @Test
     fun isTheDefaultLosslessViewOfADocument() {
@@ -78,8 +79,9 @@ class CstTest {
 
     @Test
     fun readsVersionedLiteralsInLinearTime() {
-        val input = listOf("~1{" + "61".repeat(50000) + "}", "~" + "1".repeat(50000) + "x", "~1{61} ".repeat(20000))
-            .joinToString("\n")
+        val input =
+            listOf("~1{" + "61".repeat(50000) + "}", "~" + "1".repeat(50000) + "x", "~1{61} ".repeat(20000))
+                .joinToString("\n")
         val started = TimeSource.Monotonic.markNow()
         val cst = Parser().parseCst(input)
         assertEquals(true, started.elapsedNow().inWholeMilliseconds < 5000)

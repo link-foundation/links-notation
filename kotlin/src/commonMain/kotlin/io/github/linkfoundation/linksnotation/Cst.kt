@@ -152,7 +152,10 @@ private const val BARE_REFERENCE_END = " \t\r\n(:)"
  * Where the versioned literal `~<digits>{<payload>}` that starts at [start]
  * ends, or -1 if none starts there. A single forward scan, so it stays linear.
  */
-private fun literalEnd(text: String, start: Int): Int {
+private fun literalEnd(
+    text: String,
+    start: Int,
+): Int {
     if (start >= text.length || text[start] != '~') return -1
     var index = start + 1
     while (index < text.length && text[index] in '0'..'9') index++
@@ -163,7 +166,11 @@ private fun literalEnd(text: String, start: Int): Int {
 }
 
 /** Where the reference that starts at [start] ends, read as the grammar reads it. */
-private fun referenceEnd(prepared: String, start: Int, references: DelimitedReferences): Int {
+private fun referenceEnd(
+    prepared: String,
+    start: Int,
+    references: DelimitedReferences,
+): Int {
     val literal = literalEnd(prepared, start)
     if (literal != -1) return literal
     if (prepared[start] in QUOTES) {
@@ -176,7 +183,9 @@ private fun referenceEnd(prepared: String, start: Int, references: DelimitedRefe
 }
 
 /** An open container of the tree, and the line of it being filled. */
-private class Container(val node: CstNode) {
+private class Container(
+    val node: CstNode,
+) {
     var line: CstNode? = null
 }
 
@@ -187,7 +196,10 @@ private class Container(val node: CstNode) {
  * @throws IllegalArgumentException when the parentheses of [input] do not
  *   balance, which a parsed document never does.
  */
-internal fun buildCst(input: String, comments: Boolean = true): CstNode {
+internal fun buildCst(
+    input: String,
+    comments: Boolean = true,
+): CstNode {
     // References are read in the document the grammar reads: the one with its
     // comments blanked, which keeps every position of the one written.
     val prepared = if (comments) stripComments(input) else input
@@ -199,10 +211,11 @@ internal fun buildCst(input: String, comments: Boolean = true): CstNode {
 
     fun add(token: CstNode) {
         val container = containers.last()
-        val line = container.line ?: CstNode(CstKind.LINE).also {
-            container.line = it
-            container.node.mutableChildren.add(it)
-        }
+        val line =
+            container.line ?: CstNode(CstKind.LINE).also {
+                container.line = it
+                container.node.mutableChildren.add(it)
+            }
         line.mutableChildren.add(token)
     }
 
@@ -229,7 +242,10 @@ internal fun buildCst(input: String, comments: Boolean = true): CstNode {
             containers.add(Container(group))
         } else if (character == ')') {
             require(containers.size > 1) { "Unbalanced \")\" at offset $position" }
-            containers.removeAt(containers.size - 1).node.mutableChildren.add(CstNode(CstKind.CLOSE_PAREN, ")"))
+            containers
+                .removeAt(containers.size - 1)
+                .node.mutableChildren
+                .add(CstNode(CstKind.CLOSE_PAREN, ")"))
         } else if (character == ':') {
             add(CstNode(CstKind.COLON, ":"))
         } else {

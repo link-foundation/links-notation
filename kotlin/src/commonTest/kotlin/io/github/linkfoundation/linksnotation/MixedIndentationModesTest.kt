@@ -8,7 +8,8 @@ import kotlin.test.assertTrue
 class MixedIndentationModesTest {
     private val parser = Parser()
 
-    private val heroVersion1 = """
+    private val heroVersion1 =
+        """
         |empInfo
         |  employees:
         |    (
@@ -23,9 +24,10 @@ class MixedIndentationModesTest {
         |      name (Wesley Crusher)
         |      age 27
         |    )
-    """.trimMargin()
+        """.trimMargin()
 
-    private val heroVersion2 = """
+    private val heroVersion2 =
+        """
         |empInfo
         |  (
         |    employees:
@@ -42,10 +44,13 @@ class MixedIndentationModesTest {
         |        age 27
         |      )
         |  )
-    """.trimMargin()
+        """.trimMargin()
 
     /** Parses [input] and checks the formatted links contain every one of [parts]. */
-    private fun assertFormattedContains(input: String, vararg parts: String): List<Link> {
+    private fun assertFormattedContains(
+        input: String,
+        vararg parts: String,
+    ): List<Link> {
         val result = parser.parse(input)
         assertTrue(result.isNotEmpty())
         val formatted = formatLinks(result)
@@ -77,19 +82,26 @@ class MixedIndentationModesTest {
 
     @Test
     fun sequenceContextWithColon() {
-        val result = assertFormattedContains(
-            "employees:\n  James Kirk\n  Jean-Luc Picard\n  Wesley Crusher",
-            "employees:", "James Kirk", "Jean-Luc Picard", "Wesley Crusher",
-        )
+        val result =
+            assertFormattedContains(
+                "employees:\n  James Kirk\n  Jean-Luc Picard\n  Wesley Crusher",
+                "employees:",
+                "James Kirk",
+                "Jean-Luc Picard",
+                "Wesley Crusher",
+            )
         assertEquals(1, result.size)
     }
 
     @Test
     fun sequenceContextWithComplexValues() {
-        val result = assertFormattedContains(
-            "employees:\n  (\n    name (James Kirk)\n    age 40\n  )\n  (\n    name (Jean-Luc Picard)\n    age 45\n  )",
-            "employees:", "James Kirk", "Jean-Luc Picard",
-        )
+        val result =
+            assertFormattedContains(
+                "employees:\n  (\n    name (James Kirk)\n    age 40\n  )\n  (\n    name (Jean-Luc Picard)\n    age 45\n  )",
+                "employees:",
+                "James Kirk",
+                "Jean-Luc Picard",
+            )
         assertEquals(1, result.size)
     }
 
@@ -97,7 +109,9 @@ class MixedIndentationModesTest {
     fun nestedSetAndSequenceContexts() {
         assertFormattedContains(
             "company\n  departments:\n    engineering\n    sales\n  employees:\n    (name John)\n    (name Jane)",
-            "company", "departments:", "employees:",
+            "company",
+            "departments:",
+            "employees:",
         )
     }
 
@@ -105,7 +119,8 @@ class MixedIndentationModesTest {
     fun deeplyNestedMixedModes() {
         assertFormattedContains(
             "root\n  level1\n    level2:\n      value1\n      value2\n    level2b\n      level3",
-            "root", "level2:",
+            "root",
+            "level2:",
         )
     }
 }

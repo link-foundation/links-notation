@@ -10,8 +10,9 @@ class MultilineQuotedStringTest {
 
     @Test
     fun multilineDoubleQuotedReference() {
-        val input = "(\n  \"long\nstring literal representing\nthe reference\"\n\n" +
-            "  'another\nlong string literal\nas another reference'\n)"
+        val input =
+            "(\n  \"long\nstring literal representing\nthe reference\"\n\n" +
+                "  'another\nlong string literal\nas another reference'\n)"
         val result = parser.parse(input)
         assertEquals(1, result.size)
         val link = result[0]

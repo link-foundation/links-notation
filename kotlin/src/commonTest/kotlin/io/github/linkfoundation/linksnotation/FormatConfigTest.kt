@@ -49,8 +49,9 @@ class FormatConfigTest {
 
     @Test
     fun formatConfigCustomIndent() {
-        val output = Link("id", refs("1", "2", "3", "4"))
-            .format(FormatConfig(maxInlineRefs = 3, preferInline = false, indentString = "    "))
+        val output =
+            Link("id", refs("1", "2", "3", "4"))
+                .format(FormatConfig(maxInlineRefs = 3, preferInline = false, indentString = "    "))
         assertTrue("    " in output)
     }
 

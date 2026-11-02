@@ -14,7 +14,10 @@ import kotlin.test.assertTrue
 class ParserTest {
     private fun ref(id: String) = Link(id)
 
-    private fun parse(text: String, options: ParserOptions = ParserOptions()) = Parser(options).parse(text)
+    private fun parse(
+        text: String,
+        options: ParserOptions = ParserOptions(),
+    ) = Parser(options).parse(text)
 
     @Test
     fun quotedReferencesAreUnquoted() {

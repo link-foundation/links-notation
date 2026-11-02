@@ -43,6 +43,7 @@ class SharedSyntaxParityTest {
             assertEquals(syntax, ast, case.id)
             assertEquals(syntax.hashCode(), ast.hashCode(), case.id)
             assertEquals(formatLinks(syntax), formatLinks(ast), case.id)
+
             fun noMetadata(links: List<Link>) {
                 for (link in links) {
                     assertNull(link.rawId, case.id)
@@ -57,6 +58,5 @@ class SharedSyntaxParityTest {
 
     private fun hasRaw(links: List<Link>): Boolean = links.any { it.rawId != null || hasRaw(it.values) }
 
-    private fun syntaxTree(links: List<Link>): List<SyntaxLink> =
-        links.map { SyntaxLink(it.id, it.rawId, it.quote, syntaxTree(it.values)) }
+    private fun syntaxTree(links: List<Link>): List<SyntaxLink> = links.map { SyntaxLink(it.id, it.rawId, it.quote, syntaxTree(it.values)) }
 }

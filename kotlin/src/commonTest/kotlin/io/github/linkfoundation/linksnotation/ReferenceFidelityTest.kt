@@ -61,7 +61,7 @@ class ReferenceFidelityTest {
         }
         assertFailsWith<IllegalArgumentException> { decodeReferenceLiteral("~1{61}\n") }
         assertEquals("é", decodeReferenceLiteral("~1{C3A9}"))
-        assertFailsWith<IllegalArgumentException> { encodeReferenceLiteral("\ud800") }
-        assertFailsWith<IllegalArgumentException> { escapeReference("\ud800") }
+        assertFailsWith<IllegalArgumentException> { encodeReferenceLiteral(LONE_SURROGATE) }
+        assertFailsWith<IllegalArgumentException> { escapeReference(LONE_SURROGATE) }
     }
 }

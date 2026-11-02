@@ -15,8 +15,7 @@ import kotlin.test.assertTrue
 class ParseErrorPositionTest {
     private val parser = Parser()
 
-    private fun syntaxError(document: String): ParseException.Syntax =
-        assertFailsWith<ParseException.Syntax> { parser.parse(document) }
+    private fun syntaxError(document: String): ParseException.Syntax = assertFailsWith<ParseException.Syntax> { parser.parse(document) }
 
     @Test
     fun reportsTheLineAndColumnOfTheDefect() {

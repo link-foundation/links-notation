@@ -86,15 +86,16 @@ class Issue316QuoteRunsTest {
 
     @Test
     fun aReferenceCanOpenInsideARun() {
-        val cases = listOf(
-            Triple("x'''a'''", 1, 8),
-            Triple("x'''a''", 2, 7),
-            Triple("x'''a'", 3, 6),
-            Triple("'''a", 0, null),
-            Triple("''''a", 0, 4),
-            Triple("a", 0, null),
-            Triple("'a'", 3, null),
-        )
+        val cases =
+            listOf(
+                Triple("x'''a'''", 1, 8),
+                Triple("x'''a''", 2, 7),
+                Triple("x'''a'", 3, 6),
+                Triple("'''a", 0, null),
+                Triple("''''a", 0, 4),
+                Triple("a", 0, null),
+                Triple("'a'", 3, null),
+            )
         for ((document, start, end) in cases) {
             assertEquals(end, quotedReferenceEnd(document, start), document)
             assertEquals(end, DelimitedReferences(document).endAt(start), document)
@@ -117,23 +118,22 @@ class Issue316QuoteRunsTest {
     fun narrowingUnclosedQuotesIsParsedWithinTheTimeBound() = assertParsedWithinBound(narrowingUnclosedQuotes(size))
 
     @Test
-    fun closedWideQuoteOverQuotesIsParsedWithinTheTimeBound() =
-        assertParsedWithinBound(closedWideQuoteOverQuotes(size))
+    fun closedWideQuoteOverQuotesIsParsedWithinTheTimeBound() = assertParsedWithinBound(closedWideQuoteOverQuotes(size))
 
     @Test
-    fun unclosedWidthsOverAnEvenRunIsParsedWithinTheTimeBound() =
-        assertParsedWithinBound(unclosedWidthsOverAnEvenRun(size))
+    fun unclosedWidthsOverAnEvenRunIsParsedWithinTheTimeBound() = assertParsedWithinBound(unclosedWidthsOverAnEvenRun(size))
 
     @Test
     fun aStreamOfWideQuotesIsReadWithinTheTimeBound() {
         val source = "${closedWideQuoteOverQuotes(size)}\nb"
         val links = ArrayList<Link>()
-        val (_, elapsed) = timed {
-            val stream = StreamParser()
-            stream.onLink { links.add(it) }
-            stream.write(source)
-            stream.end()
-        }
+        val (_, elapsed) =
+            timed {
+                val stream = StreamParser()
+                stream.onLink { links.add(it) }
+                stream.write(source)
+                stream.end()
+            }
         assertEquals(2, links.size)
         assertTrue(elapsed < bound)
     }

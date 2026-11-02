@@ -1,0 +1,13 @@
+# ktlint reads its rules from here (./gradlew ktlintCheck, ktlintFormat).
+root = true
+
+[*.{kt,kts}]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+max_line_length = 140
+ktlint_code_style = ktlint_official
+# Tests name cases after the behaviour they pin, as the other ports do.
+ktlint_function_naming_ignore_when_annotated_with = Test

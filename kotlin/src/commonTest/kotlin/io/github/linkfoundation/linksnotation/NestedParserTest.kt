@@ -13,7 +13,8 @@ class NestedParserTest {
 
     @Test
     fun significantWhitespaceTest() {
-        val source = """
+        val source =
+            """
             |
             |users
             |    user1
@@ -42,8 +43,9 @@ class NestedParserTest {
             |            Moscow
             |        age
             |            20
-        """.trimMargin()
-        val target = """
+            """.trimMargin()
+        val target =
+            """
             |(users)
             |((users) (user1))
             |(((users) (user1)) (id))
@@ -71,17 +73,15 @@ class NestedParserTest {
             |((((users) (user2)) (location)) (Moscow))
             |(((users) (user2)) (age))
             |((((users) (user2)) (age)) (20))
-        """.trimMargin()
+            """.trimMargin()
         assertEquals(target, format("\n" + source.removePrefix("\n")))
     }
 
     @Test
-    fun simpleSignificantWhitespaceTest() =
-        assertEquals("(a)\n((a) (b))\n((a) (c))", format("a\n    b\n    c"))
+    fun simpleSignificantWhitespaceTest() = assertEquals("(a)\n((a) (b))\n((a) (c))", format("a\n    b\n    c"))
 
     @Test
-    fun twoSpacesSizedWhitespaceTest() =
-        assertEquals("(users)\n((users) (user1))", format("\nusers\n  user1"))
+    fun twoSpacesSizedWhitespaceTest() = assertEquals("(users)\n((users) (user1))", format("\nusers\n  user1"))
 
     @Test
     fun parseNestedStructureWithIndentation() {
@@ -101,12 +101,10 @@ class NestedParserTest {
     }
 
     @Test
-    fun indentationBasedChildren() =
-        assertEquals(4, parser.parse("parent\n  child1\n  child2\n    grandchild").size)
+    fun indentationBasedChildren() = assertEquals(4, parser.parse("parent\n  child1\n  child2\n    grandchild").size)
 
     @Test
-    fun complexIndentation() =
-        assertEquals(6, parser.parse("root\n  level1a\n    level2a\n    level2b\n  level1b\n    level2c").size)
+    fun complexIndentation() = assertEquals(6, parser.parse("root\n  level1a\n    level2a\n    level2b\n  level1b\n    level2c").size)
 
     @Test
     fun nestedLinks() {
@@ -134,8 +132,9 @@ class NestedParserTest {
     fun deepNestedStructureRoundtrip() = assertEquals("(a: (b: (c: (d: d))))", format("(a: (b: (c: (d: d))))"))
 
     @Test
-    fun multipleNestedLinksRoundtrip() = assertEquals(
-        "(parent: (child1: value1) (child2: value2))",
-        format("(parent: (child1: value1) (child2: value2))"),
-    )
+    fun multipleNestedLinksRoundtrip() =
+        assertEquals(
+            "(parent: (child1: value1) (child2: value2))",
+            format("(parent: (child1: value1) (child2: value2))"),
+        )
 }

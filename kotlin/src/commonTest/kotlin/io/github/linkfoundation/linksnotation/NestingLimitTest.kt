@@ -14,19 +14,27 @@ import kotlin.test.assertTrue
  */
 class NestingLimitTest {
     private fun parens(depth: Int) = "(".repeat(depth) + "a" + ")".repeat(depth)
+
     private fun values(depth: Int) = "(a ".repeat(depth) + "b" + ")".repeat(depth)
+
     private fun indentation(depth: Int) = (0..depth).joinToString("") { " ".repeat(it) + "a\n" }
 
-    private fun tooDeep(document: String, maxDepth: Int): ParseException.DepthExceeded {
-        val error = assertFailsWith<ParseException.DepthExceeded> {
-            Parser(ParserOptions(maxDepth = maxDepth)).parse(document)
-        }
+    private fun tooDeep(
+        document: String,
+        maxDepth: Int,
+    ): ParseException.DepthExceeded {
+        val error =
+            assertFailsWith<ParseException.DepthExceeded> {
+                Parser(ParserOptions(maxDepth = maxDepth)).parse(document)
+            }
         assertEquals(maxDepth, error.limit)
         return error
     }
 
-    private fun accepted(document: String, maxDepth: Int = ParserOptions.DEFAULT_MAX_DEPTH) =
-        Parser(ParserOptions(maxDepth = maxDepth)).parse(document).isNotEmpty()
+    private fun accepted(
+        document: String,
+        maxDepth: Int = ParserOptions.DEFAULT_MAX_DEPTH,
+    ) = Parser(ParserOptions(maxDepth = maxDepth)).parse(document).isNotEmpty()
 
     @Test
     fun theDefaultLimitIsSharedByEveryImplementation() {

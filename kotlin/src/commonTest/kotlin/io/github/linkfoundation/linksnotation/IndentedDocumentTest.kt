@@ -32,14 +32,28 @@ class IndentedDocumentTest {
 
     @Test
     fun publicGroupsPreserveImmediateChildrenAndDeeperIndentation() {
-        val groups = Parser().parseGroups(
-            "What is your experience?\n  JavaScript\n  Python\n    Django\nOther question\n  Answer",
-        )
+        val groups =
+            Parser().parseGroups(
+                "What is your experience?\n  JavaScript\n  Python\n    Django\nOther question\n  Answer",
+            )
         assertEquals(2, groups.size)
         assertEquals(listOf("What", "is", "your", "experience?"), groups[0].element.values.map { it.id })
         assertEquals(2, groups[0].children.size)
-        assertEquals("Django", groups[0].children[1].children[0].element.values[0].id)
-        assertEquals("Answer", groups[1].children[0].element.values[0].id)
+        assertEquals(
+            "Django",
+            groups[0]
+                .children[1]
+                .children[0]
+                .element.values[0]
+                .id,
+        )
+        assertEquals(
+            "Answer",
+            groups[1]
+                .children[0]
+                .element.values[0]
+                .id,
+        )
     }
 
     @Test
@@ -52,16 +66,18 @@ class IndentedDocumentTest {
         assertEquals(1, root.children[1].children.size)
         assertFailsWith<ParseException.Syntax> { parser.parseGroups("root: child: value") }
         assertFailsWith<ParseException.DepthExceeded> { Parser(ParserOptions(maxDepth = 0)).parseGroups("root\n  child") }
-        val error = assertFailsWith<ParseException.InputTooLarge> {
-            Parser(ParserOptions(maxInputSize = 2)).parseGroups("root")
-        }
+        val error =
+            assertFailsWith<ParseException.InputTooLarge> {
+                Parser(ParserOptions(maxInputSize = 2)).parseGroups("root")
+            }
         assertEquals(true, error.message!!.startsWith("Input size exceeds"))
     }
 
     @Test
     fun parseTheIssueDocumentWithoutInspectingPrivatePathFlags() {
-        val input = "What is your experience?\n  I have worked with JavaScript\n" +
-            "'Question with \"quotes\": and colon'\n  Answer\n"
+        val input =
+            "What is your experience?\n  I have worked with JavaScript\n" +
+                "'Question with \"quotes\": and colon'\n  Answer\n"
         assertEquals(
             mapOf(
                 "What is your experience?" to listOf("I have worked with JavaScript"),
@@ -86,10 +102,11 @@ class IndentedDocumentTest {
 
     @Test
     fun formatTheIssueDocumentWithTwoSpaceIndentationAndAFinalNewline() {
-        val entries = mapOf(
-            "What is your experience?" to listOf("I have worked with JavaScript"),
-            "Skills" to listOf("JavaScript", "Python"),
-        )
+        val entries =
+            mapOf(
+                "What is your experience?" to listOf("I have worked with JavaScript"),
+                "Skills" to listOf("JavaScript", "Python"),
+            )
         assertEquals(
             "What is your experience?\n  I have worked with JavaScript\nSkills\n  JavaScript\n  Python\n",
             formatIndentedDocument(entries),
@@ -102,10 +119,27 @@ class IndentedDocumentTest {
     @Test
     fun emptyTextExactWhitespaceCommentsQuotesAndMultilineTextSurvive() {
         for (text in listOf(
-            "", " ", "  leading", "trailing  ", "two  spaces", "a\tb", "# question", "text # literal", "issue#333",
-            "Question: (details)", "`backticks`", "\"double\" and 'single'", "'starts with both \"quotes\"",
-            "\"starts with both 'quotes'", "ends with both '\"", "repeated ''' and \"\"\"", "literal \\n and \\'",
-            "line one\n  line two", "carriage\rreturn", "Windows\r\nline", "Привет 🌍",
+            "",
+            " ",
+            "  leading",
+            "trailing  ",
+            "two  spaces",
+            "a\tb",
+            "# question",
+            "text # literal",
+            "issue#333",
+            "Question: (details)",
+            "`backticks`",
+            "\"double\" and 'single'",
+            "'starts with both \"quotes\"",
+            "\"starts with both 'quotes'",
+            "ends with both '\"",
+            "repeated ''' and \"\"\"",
+            "literal \\n and \\'",
+            "line one\n  line two",
+            "carriage\rreturn",
+            "Windows\r\nline",
+            "Привет 🌍",
         )) {
             assertEquals(text, unescapeReference(escapeReference(text, minimal = true)), text)
             val entries = mapOf(text to listOf(text))
@@ -151,9 +185,17 @@ class IndentedDocumentTest {
 
     @Test
     fun documentHelpersPreserveTheSharedUnicodeReferenceCorpusAndReservedPrefixes() {
-        for (text in REFERENCES + listOf(
-            "~1{61}", "~2{00}", "~1{invalid}", "text ~1{61} after", "text ~2{00}", "text ~1{invalid}",
-        )) {
+        for (
+        text in REFERENCES +
+            listOf(
+                "~1{61}",
+                "~2{00}",
+                "~1{invalid}",
+                "text ~1{61} after",
+                "text ~2{00}",
+                "text ~1{invalid}",
+            )
+        ) {
             assertEquals(formatBinaryReference(text), escapeReference(text))
             assertEquals(text, unescapeReference(escapeReference(text)))
             assertEquals(text, unescapeReference(escapeReference(text, minimal = true)))
@@ -172,6 +214,6 @@ class IndentedDocumentTest {
         }
         val entries = mapOf("~1{61}" to listOf("~1{62}"))
         assertEquals(entries, roundTrip(entries))
-        assertFailsWith<IllegalArgumentException> { escapeReference("\ud800", minimal = true) }
+        assertFailsWith<IllegalArgumentException> { escapeReference(LONE_SURROGATE, minimal = true) }
     }
 }

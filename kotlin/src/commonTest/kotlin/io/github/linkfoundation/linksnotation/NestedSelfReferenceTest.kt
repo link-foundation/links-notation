@@ -6,7 +6,11 @@ import kotlin.test.assertNull
 
 /** Port of `js/tests/NestedSelfReference.test.js`. */
 class NestedSelfReferenceTest {
-    private fun assertPair(pair: Link, first: String, second: String) {
+    private fun assertPair(
+        pair: Link,
+        first: String,
+        second: String,
+    ) {
         assertNull(pair.id)
         assertEquals(listOf("str", first), pair.values[0].values.map { it.id })
         assertEquals(listOf("str", second), pair.values[1].values.map { it.id })
@@ -14,8 +18,9 @@ class NestedSelfReferenceTest {
 
     @Test
     fun nestedSelfReferencedObjectInPairValue() {
-        val notation = "(obj_0: dict ((str bmFtZQ==) (str ZGljdDE=)) ((str b3RoZXI=) " +
-            "(obj_1: dict ((str bmFtZQ==) (str ZGljdDI=)) ((str b3RoZXI=) obj_0))))"
+        val notation =
+            "(obj_0: dict ((str bmFtZQ==) (str ZGljdDE=)) ((str b3RoZXI=) " +
+                "(obj_1: dict ((str bmFtZQ==) (str ZGljdDI=)) ((str b3RoZXI=) obj_0))))"
         val links = Parser().parse(notation)
         assertEquals(1, links.size)
         val link = links[0]

@@ -35,7 +35,11 @@ internal class Grammar(
     private val unreadableLines = HashSet<Int>()
     private val delimitedReferences = DelimitedReferences(input)
 
-    private class SavedContext(val indentationStack: MutableList<Int>, val baseIndentation: Int?, val contextDepth: Int)
+    private class SavedContext(
+        val indentationStack: MutableList<Int>,
+        val baseIndentation: Int?,
+        val contextDepth: Int,
+    )
 
     /** Read the document, or throw [GrammarError]. */
     fun parse(): List<RawItem> {
@@ -79,7 +83,10 @@ internal class Grammar(
 
     private fun depth(): Int = contextDepth + indentationStack.size - 1
 
-    private fun checkDepth(levels: Int, where: Int) {
+    private fun checkDepth(
+        levels: Int,
+        where: Int,
+    ) {
         if (levels > maxDepth) {
             throw GrammarError(where, "nesting depth exceeds the maximum of $maxDepth", depthLimit = maxDepth)
         }
@@ -104,7 +111,10 @@ internal class Grammar(
     private fun at(character: Char): Boolean = pos < input.length && input[pos] == character
 
     /** A literal of one character; records [expected] when it does not match. */
-    private fun literal(character: Char, expected: String): Boolean {
+    private fun literal(
+        character: Char,
+        expected: String,
+    ): Boolean {
         if (at(character)) {
             pos++
             return true
@@ -114,7 +124,11 @@ internal class Grammar(
     }
 
     /** `[...]*` (or `+` with [atLeastOne]): how many characters it matched, or -1 when it failed. */
-    private fun repeatClass(expected: String, atLeastOne: Boolean = false, test: (Char) -> Boolean): Int {
+    private inline fun repeatClass(
+        expected: String,
+        atLeastOne: Boolean = false,
+        test: (Char) -> Boolean,
+    ): Int {
         val start = pos
         while (pos < input.length && test(input[pos])) {
             pos++
@@ -266,7 +280,9 @@ internal class Grammar(
         return if (rest.values == null) group else RawItem(values = listOf(group) + rest.values)
     }
 
-    private class Rest(val values: List<RawItem>?)
+    private class Rest(
+        val values: List<RawItem>?,
+    )
 
     // groupLinkRest = eol { null } / singleLineValueAndWhitespace* eol
     private fun groupLinkRest(): Rest? {
@@ -379,7 +395,10 @@ internal class Grammar(
     }
 
     /** What a reference means, and the text it was written as. */
-    private class Reference(val value: String, val raw: String)
+    private class Reference(
+        val value: String,
+        val raw: String,
+    )
 
     // reference = HERE value:(referenceLiteral / quotedReference / simpleReference) HERE
     //             { return { value, raw: source.slice(start, end) } }
@@ -423,9 +442,10 @@ internal class Grammar(
     private fun simpleReference(): String? {
         if (hasReferenceLiteralPrefix(input, pos)) return null
         val start = pos
-        val length = repeatClass(REFERENCE_SYMBOL, atLeastOne = true) {
-            it != ' ' && it != '\t' && it != '\n' && it != '\r' && it != '(' && it != ':' && it != ')'
-        }
+        val length =
+            repeatClass(REFERENCE_SYMBOL, atLeastOne = true) {
+                it != ' ' && it != '\t' && it != '\n' && it != '\r' && it != '(' && it != ':' && it != ')'
+            }
         return if (length < 0) null else input.substring(start, pos)
     }
 
@@ -479,13 +499,14 @@ internal class Grammar(
             }
         val found =
             if (maxFailPos < input.length) {
-                val end = if (input[maxFailPos].isHighSurrogate() && maxFailPos + 1 < input.length &&
-                    input[maxFailPos + 1].isLowSurrogate()
-                ) {
-                    maxFailPos + 2
-                } else {
-                    maxFailPos + 1
-                }
+                val end =
+                    if (input[maxFailPos].isHighSurrogate() && maxFailPos + 1 < input.length &&
+                        input[maxFailPos + 1].isLowSurrogate()
+                    ) {
+                        maxFailPos + 2
+                    } else {
+                        maxFailPos + 1
+                    }
                 "\"" + literalEscape(input.substring(maxFailPos, end)) + "\""
             } else {
                 END_OF_INPUT
@@ -516,16 +537,41 @@ internal class Grammar(
             val escaped = StringBuilder()
             for (character in text) {
                 when {
-                    character == '\\' -> escaped.append("\\\\")
-                    character == '"' -> escaped.append("\\\"")
-                    character == '\u0000' -> escaped.append("\\0")
-                    character == '\t' -> escaped.append("\\t")
-                    character == '\n' -> escaped.append("\\n")
-                    character == '\r' -> escaped.append("\\r")
-                    character < '\u0010' -> escaped.append("\\x0").append(character.code.toString(16).uppercase())
-                    character < ' ' || character in '\u007f'..'\u009f' ->
+                    character == '\\' -> {
+                        escaped.append("\\\\")
+                    }
+
+                    character == '"' -> {
+                        escaped.append("\\\"")
+                    }
+
+                    character == '\u0000' -> {
+                        escaped.append("\\0")
+                    }
+
+                    character == '\t' -> {
+                        escaped.append("\\t")
+                    }
+
+                    character == '\n' -> {
+                        escaped.append("\\n")
+                    }
+
+                    character == '\r' -> {
+                        escaped.append("\\r")
+                    }
+
+                    character < '\u0010' -> {
+                        escaped.append("\\x0").append(character.code.toString(16).uppercase())
+                    }
+
+                    character < ' ' || character in '\u007f'..'\u009f' -> {
                         escaped.append("\\x").append(character.code.toString(16).uppercase())
-                    else -> escaped.append(character)
+                    }
+
+                    else -> {
+                        escaped.append(character)
+                    }
                 }
             }
             return escaped.toString()
@@ -537,4 +583,8 @@ internal class Grammar(
  * Where and why the grammar stopped: [offset] into the document, and, for a
  * document nested too deep, the [depthLimit] it went past.
  */
-internal class GrammarError(val offset: Int, message: String, val depthLimit: Int?) : RuntimeException(message)
+internal class GrammarError(
+    val offset: Int,
+    message: String,
+    val depthLimit: Int?,
+) : RuntimeException(message)

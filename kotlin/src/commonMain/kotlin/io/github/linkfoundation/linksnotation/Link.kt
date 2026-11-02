@@ -7,7 +7,10 @@ package io.github.linkfoundation.linksnotation
  * reference. Two links are equal when their ids and values are equal; how a
  * link was read ([rawId], [quote]) does not take part in equality.
  */
-data class Link(val id: String?, val values: List<Link> = emptyList()) {
+data class Link(
+    val id: String?,
+    val values: List<Link> = emptyList(),
+) {
     /**
      * Set on the links the parser builds from an indentation path (a line and
      * the lines indented under it). Such a link writes every value in

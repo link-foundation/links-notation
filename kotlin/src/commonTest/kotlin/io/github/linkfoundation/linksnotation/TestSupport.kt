@@ -28,5 +28,14 @@ internal fun render(link: Link): String {
 }
 
 /** Every link [input] reads as, [render]ed a line each. */
-internal fun parsesAs(input: String, parser: Parser = Parser()): String =
-    parser.parse(input).joinToString("\n") { render(it) }
+internal fun parsesAs(
+    input: String,
+    parser: Parser = Parser(),
+): String = parser.parse(input).joinToString("\n") { render(it) }
+
+/**
+ * A lone high surrogate, built at run time: Kotlin/JS writes a `"\ud800"`
+ * literal into its UTF-8 output as `?`, so a test written with the literal
+ * would check a well-formed reference in Node.js.
+ */
+internal val LONE_SURROGATE: String = StringBuilder().append(Char(0xD800)).toString()

@@ -40,8 +40,9 @@ class MultilineParserTest {
 
     @Test
     fun complexStructure() {
-        val input = "(Type: Type Type)\n  Number\n  String\n  Array\n  Value\n" +
-            "    (property: name type)\n    (method: name params return)"
+        val input =
+            "(Type: Type Type)\n  Number\n  String\n  Array\n  Value\n" +
+                "    (property: name type)\n    (method: name params return)"
         assertTrue(parser.parse(input).isNotEmpty())
     }
 

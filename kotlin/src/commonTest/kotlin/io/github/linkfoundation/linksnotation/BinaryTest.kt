@@ -34,9 +34,10 @@ class BinaryTest {
             val f = line.split('\t')
             val bytes = hexBytes(f.last())
             if (f[0] == "document") {
-                val codec = BinaryLinoCodec(
-                    BinaryLinoOptions(f[2] == "external", ArityRange.parse(f[3]), f[4] == "packed"),
-                )
+                val codec =
+                    BinaryLinoCodec(
+                        BinaryLinoOptions(f[2] == "external", ArityRange.parse(f[3]), f[4] == "packed"),
+                    )
                 val model = codec.parseDocument(f[1].replace("\\n", "\n"))
                 assertContentEquals(bytes, codec.encode(model), line)
                 assertEquals(model, codec.decode(bytes), line)
@@ -137,6 +138,6 @@ class BinaryTest {
         assertEquals("((a))", formatBinaryDocument(listOf(Link(null, listOf(Link("a"))))))
         assertFailsWith<IllegalArgumentException> { DecodeLimits(maxLinks = -1) }
         assertFailsWith<IllegalArgumentException> { PacketReader(ByteArray(1), 2) }
-        assertFailsWith<IllegalArgumentException> { codec.encode(listOf(Link("\ud800"))) }
+        assertFailsWith<IllegalArgumentException> { codec.encode(listOf(Link(LONE_SURROGATE))) }
     }
 }
