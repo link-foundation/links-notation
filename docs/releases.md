@@ -1,12 +1,12 @@
 # Release setup and recovery
 
 The CI entry is `js.yml`, and every called workflow uses the caller's commit.
-The main-only `release.yml` call waits for all nine native language stages.
-It then calls the nine `publish-*.yml` workflows. A final audit waits
+The main-only `release.yml` call waits for all ten native language stages.
+It then calls the ten `publish-*.yml` workflows. A final audit waits
 for all providers, including failures, then checks exact versions and GitHub
 releases. Pull requests expect their new version to be absent and never publish.
 HTTP/authentication/transport errors still fail PR audits. A successful release
-requires all nine registries; green tests alone do not prove delivery.
+requires all ten registries; green tests alone do not prove delivery.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -21,6 +21,7 @@ requires all nine registries; green tests alone do not prove delivery.
 | PHP      | Packagist package submission and update API                    | Submit package once, then `PACKAGIST_USERNAME`, `PACKAGIST_TOKEN`                   |
 | C++      | GitHub release `cpp_VERSION` with the CMake source archive     | Workflow `GITHUB_TOKEN`; no registry account                                        |
 | Swift    | Bare `VERSION` tag that SwiftPM resolves, `[Swift] VERSION`    | Workflow `GITHUB_TOKEN`; no registry account                                        |
+| Kotlin   | Central Portal, verified `io.github.link-foundation` namespace | The same four secrets as Java                                                       |
 
 <!-- markdownlint-enable MD013 -->
 
@@ -60,6 +61,24 @@ curl -f https://repo1.maven.org/maven2/io/github/link-foundation/links-notation/
 AUDIT_EXPECT_PUBLISHED=true node scripts/release-audit.mjs
 ```
 
+Kotlin publishes `io.github.link-foundation:links-notation-kotlin` to the same
+Central namespace with the same four secrets. Kotlin/Native builds iOS klibs
+only on macOS, so `publish-kotlin.yml` runs the whole multiplatform publication
+(JVM, Android, iOS, JS and Wasm: one artifact per target behind the root
+Gradle module) on `macos-26` with the vanniktech `maven-publish` plugin and
+`automaticRelease`. `scripts/ci/require-java-credentials.sh` fails the job
+before Gradle runs when a credential is missing, naming it without printing
+any value. The namespace URL and the exact `links-notation-kotlin` POM must
+return 200 before `[Kotlin] VERSION` (tag `kotlin_VERSION`) is created:
+
+```sh
+curl -f https://repo1.maven.org/maven2/io/github/link-foundation/links-notation-kotlin/0.30.0/links-notation-kotlin-0.30.0.pom
+```
+
+The required `Kotlin` check is in `.github/main-ruleset.json`; an
+administrator applies that file to the live main ruleset, since the workflow
+token cannot edit repository rules.
+
 The issue-339 investigation found Java and PHP 0.25.1 absent, and no Central or
 Packagist secrets configured. The implementation makes these failures visible;
 the case study records provider setup as an unresolved delivery requirement. Do
@@ -86,9 +105,9 @@ version tag. See
 After provider setup, rerun the main CI run. Existing versions
 are verified and reused, failed providers retry, and missing GitHub releases are
 backfilled. The final audit checks exact npm/PyPI/crates metadata, NuGet package
-content availability, Go module info, the Java POM/namespace, Packagist
-version metadata, and the Swift tag's `Package.swift`. Any mismatch or missing
-release is an error. Preserve the `registry-audit-RUN` artifact when
+content availability, Go module info, the Java and Kotlin POMs/namespace,
+Packagist version metadata, and the Swift tag's `Package.swift`. Any mismatch or
+missing release is an error. Preserve the `registry-audit-RUN` artifact when
 investigating partial delivery.
 
 GitHub release tags must explicitly target `github.sha`; never let

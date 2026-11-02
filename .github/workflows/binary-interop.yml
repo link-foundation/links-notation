@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  nine-languages:
+  ten-languages:
     runs-on: ubuntu-26.04
     timeout-minutes: 20
     steps:
@@ -46,6 +46,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '25'
+          # The Kotlin example builds with kotlin/gradlew on this JDK.
+          cache: gradle
       - uses: shivammathur/setup-php@2.40.0
         with:
           php-version: '8.5'
@@ -55,5 +57,5 @@ jobs:
       # the image's Swift toolchain builds the Swift example.
       - name: Install PHP autoloader
         run: composer install --working-dir=php --no-dev --no-interaction
-      - name: Compare bytes and decoded text in all nine languages
+      - name: Compare bytes and decoded text in all ten languages
         run: bash examples/binary/run-interop.sh

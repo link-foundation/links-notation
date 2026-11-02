@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Fails when the language implementations do not all declare the same version.
 //
-// The point of shipping the same grammar in nine languages is that a document
+// The point of shipping the same grammar in ten languages is that a document
 // written by one reads identically in the others, which only holds while they
 // are the same release. They had drifted to js/python/rust/csharp/go 0.15.0,
 // java 0.3.0 and php 0.2.0 before this check existed, and nothing failed.
@@ -98,6 +98,17 @@ const versionReferences = [
     what: 'the find_package call',
     re: /find_package\(links_notation ([^ ]+) REQUIRED/,
     expected: (version) => version.split('.').slice(0, 2).join('.'),
+  },  {
+    of: 'kotlin',
+    file: 'kotlin/README.md',
+    what: 'the Gradle snippet',
+    re: /"io\.github\.link-foundation:links-notation-kotlin:([^"]+)"/,
+  },
+  {
+    of: 'kotlin',
+    file: 'kotlin/README.ru.md',
+    what: 'the Gradle snippet',
+    re: /"io\.github\.link-foundation:links-notation-kotlin:([^"]+)"/,
   },
   {
     of: 'swift',

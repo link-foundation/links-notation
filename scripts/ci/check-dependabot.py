@@ -47,6 +47,10 @@ def ecosystems(path):
         return ["dotnet-sdk"]
     if name == "pom.xml":
         return ["maven"]
+    if re.fullmatch(r"(build|settings)\.gradle(\.kts)?", name) or (
+        name == "gradle-wrapper.properties"
+    ):
+        return ["gradle"]
     if name == "composer.json":
         return ["composer"]
     if name == "go.mod":
@@ -126,6 +130,11 @@ def owners(path, files):
     directory = "/" + parent.as_posix() if parent.as_posix() != "." else "/"
     if path.startswith(".github/workflows/"):
         return ["/"]
+    # The Gradle wrapper lives in <project>/gradle/wrapper; Dependabot updates
+    # it from the project directory, beside settings.gradle(.kts).
+    if path.endswith("gradle/wrapper/gradle-wrapper.properties"):
+        project = parent.parent.parent.as_posix()
+        return ["/" + project if project != "." else "/"]
     candidates = [directory]
     for ancestor in parent.parents:
         prefix = "" if ancestor.as_posix() == "." else ancestor.as_posix() + "/"

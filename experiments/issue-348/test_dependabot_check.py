@@ -69,6 +69,24 @@ class DependabotCheckTests(unittest.TestCase):
         missing = CHECK.problems({"js/package.json", "js/bun.lock"}, CONFIG)
         self.assertEqual(missing, ["js/bun.lock: no bun entry for /js"])
 
+    def test_gradle_build_and_wrapper_belong_to_the_project(self):
+        config = '  - package-ecosystem: "gradle"\n    directory: "/kotlin"\n'
+        files = {
+            "kotlin/build.gradle.kts",
+            "kotlin/settings.gradle.kts",
+            "kotlin/gradle/wrapper/gradle-wrapper.properties",
+        }
+        self.assertEqual(CHECK.problems(files, config), [])
+        self.assertEqual(
+            CHECK.problems(files, CONFIG),
+            [
+                "kotlin/build.gradle.kts: no gradle entry for /kotlin",
+                "kotlin/gradle/wrapper/gradle-wrapper.properties: "
+                "no gradle entry for /kotlin",
+                "kotlin/settings.gradle.kts: no gradle entry for /kotlin",
+            ],
+        )
+
     def test_snapshots_under_dev_log_are_ignored(self):
         files = {"dev/log/issues/1/template/package.json"}
         self.assertEqual(CHECK.problems(files, CONFIG), [])

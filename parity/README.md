@@ -1,7 +1,7 @@
 # Cross-language contract
 
 JavaScript defines new behavior first. `language-features.json` lists the
-implementation and executable evidence for each feature in all nine bindings.
+implementation and executable evidence for each feature in all ten bindings.
 `node scripts/ci/check-parity.mjs` rejects missing languages, missing evidence,
 undocumented exceptions, uncovered text features, and changed source
 inventories. After reviewing feature coverage, use `--refresh-inventory` to
@@ -59,6 +59,9 @@ out. Hosts express this in their own idiom:
   constructors keep the metadata on.
 - Swift adds `rawId` and `quote` to the `Link` struct, which `==` and `hash`
   ignore; `ParserOptions(syntax: false)` is AST mode.
+- Kotlin adds `rawId` and the derived `quote` to `Link`, outside the data
+  class's constructor, so `equals` and `hashCode` ignore them;
+  `ParserOptions(syntax = false)` is AST mode.
 - Rust's `StreamParser::new()` yields `LiNo<String>` as before, and
   `StreamParser::syntax()` yields `LiNo<SyntaxReference>`.
 
@@ -71,8 +74,8 @@ only balanced documents.
 
 PR 336 introduced `parseIndentedDocument`, `formatIndentedDocument`, and minimal
 quoting as JavaScript convenience APIs. C++ ports them as
-`parse_indented_document` and `format_indented_document`, and Swift as
-`parseIndentedDocument` and `formatIndentedDocument`, with the JS tests
+`parse_indented_document` and `format_indented_document`, and Swift and Kotlin
+as `parseIndentedDocument` and `formatIndentedDocument`, with the JS tests
 translated. The other six bindings retain the shared Link representation and
 its syntax; they do not yet expose those convenience APIs. The
 `indented-document-api` manifest row records this existing exception. Porting
@@ -90,12 +93,12 @@ they do not expose JS's `LinksGroup` class. The manifest records the class API
 exception separately from the common nested-tree contract. Java lacks the full
 `FormatConfig` object, while default formatting is covered by the shared corpus.
 Rust's compile-time macro and tuple adapters are host-specific exceptions in the
-other eight bindings. These existing differences must not be silently represented
+other nine bindings. These existing differences must not be silently represented
 as implemented APIs.
 
 ## Generated code
 
-All nine language libraries are hand-written. JavaScript's Peggy parser and
+All ten language libraries are hand-written. JavaScript's Peggy parser and
 C#'s Pegasus parser are generated from hand-written grammars within their own
 language. There is currently no JS-to-Rust translation pipeline. Meta-language's
 structural translation can be explored in `experiments/`, but a translated

@@ -19,6 +19,7 @@ class WorkflowContract(unittest.TestCase):
             "csharp",
             "php",
             "cpp",
+            "kotlin",
         ):
             with self.subTest(language=language):
                 text = (ROOT / f".github/workflows/{language}.yml").read_text()
@@ -34,10 +35,13 @@ class WorkflowContract(unittest.TestCase):
         self.assertNotIn("isJsFilesChanged", text)
 
     def test_missing_java_credentials_fail(self):
-        text = (ROOT / ".github/workflows/publish-java.yml").read_text()
-        self.assertIn("require-java-credentials.sh", text)
-        self.assertNotRegex(text, r"published=failed[^\n]*\n\s+exit 0")
-        self.assertNotIn("::warning::Skipping Maven Central", text)
+        # Java and Kotlin both publish to Maven Central with the same secrets.
+        for workflow in ("publish-java.yml", "publish-kotlin.yml"):
+            with self.subTest(workflow=workflow):
+                text = (ROOT / ".github/workflows" / workflow).read_text()
+                self.assertIn("require-java-credentials.sh", text)
+                self.assertNotRegex(text, r"published=failed[^\n]*\n\s+exit 0")
+                self.assertNotIn("::warning::Skipping Maven Central", text)
 
     def test_release_audit_enforces_main(self):
         text = (ROOT / "scripts/release-audit.mjs").read_text()

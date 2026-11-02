@@ -4,7 +4,7 @@ import test from "node:test";
 import { audit } from "../../scripts/release-audit.mjs";
 
 const versions = Object.fromEntries(
-  ["js", "rust", "python", "java", "go", "csharp", "php", "cpp", "swift"].map((name) => [
+  ["js", "rust", "python", "java", "go", "csharp", "php", "cpp", "swift", "kotlin"].map((name) => [
     name,
     "1.2.3",
   ]),
@@ -27,7 +27,7 @@ function mockFetch(change = () => null) {
       return new Response('let package = Package(\n    name: "LinksNotation",');
     if (url.endsWith(".pom"))
       return new Response(
-        "<artifactId>links-notation</artifactId><version>1.2.3</version>",
+        `<artifactId>${url.includes("/links-notation-kotlin/") ? "links-notation-kotlin" : "links-notation"}</artifactId><version>1.2.3</version>`,
       );
     return new Response(JSON.stringify(body));
   };
@@ -47,7 +47,7 @@ test("missing Central namespace fails main even when the POM exists", async () =
         ),
       )
     ).failures,
-    1,
+    2,
   ));
 test("an unpublished PR version is expected", async () =>
   assert.equal(
@@ -71,7 +71,7 @@ test("a missing release for an existing package fails even on PRs", async () =>
         false,
       )
     ).failures,
-    9,
+    10,
   ));
 test("a missing C++ source archive fails main", async () =>
   assert.equal(
@@ -135,7 +135,7 @@ test("registry outages fail instead of being reported as absence", async () =>
         ),
       )
     ).failures,
-    1,
+    2,
   ));
 test("latest versions cannot stand in for the declared version", async () =>
   assert.equal(
@@ -171,7 +171,7 @@ test("a version missing on main says what a maintainer must do", async () => {
     log: (line) => lines.push(line),
   });
   const errors = lines.filter((line) => line.startsWith("::error::"));
-  assert.equal(errors.length, 2);
+  assert.equal(errors.length, 3);
   assert.match(
     errors[0],
     /^::error::java: 1\.2\.3 is absent from Maven Central\. /,
@@ -179,6 +179,11 @@ test("a version missing on main says what a maintainer must do", async () => {
   assert.match(errors[0], /CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY/);
   assert.match(errors[1], /https:\/\/packagist\.org\/packages\/submit/);
   assert.match(errors[1], /PACKAGIST_USERNAME and PACKAGIST_TOKEN/);
+  assert.match(
+    errors[2],
+    /^::error::kotlin: 1\.2\.3 is absent from Maven Central\. /,
+  );
+  assert.match(errors[2], /CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY/);
   for (const error of errors)
     assert.match(error, /re-run the main CI run \(docs\/releases\.md\)\.$/);
 });

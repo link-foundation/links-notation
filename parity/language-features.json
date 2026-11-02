@@ -9,7 +9,8 @@
     "csharp",
     "php",
     "cpp",
-    "swift"
+    "swift",
+    "kotlin"
   ],
   "features": [
     {
@@ -100,6 +101,16 @@
           "evidence": [
             "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
             "swift/Tests/LinksNotationTests/ParityTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
           ]
         }
       }
@@ -192,6 +203,16 @@
             "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
             "swift/Tests/LinksNotationTests/ParityTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
         }
       }
     },
@@ -282,6 +303,16 @@
           "evidence": [
             "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
             "swift/Tests/LinksNotationTests/ParityTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
           ]
         }
       }
@@ -374,6 +405,16 @@
             "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
             "swift/Tests/LinksNotationTests/ParityTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
         }
       }
     },
@@ -464,6 +505,16 @@
           "evidence": [
             "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
             "swift/Tests/LinksNotationTests/ParityTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
           ]
         }
       }
@@ -557,6 +608,16 @@
             "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
             "swift/Tests/LinksNotationTests/ParityTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
         }
       }
     },
@@ -648,6 +709,16 @@
             "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
             "swift/Tests/LinksNotationTests/ParityTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
         }
       }
     },
@@ -738,6 +809,16 @@
           "evidence": [
             "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
             "swift/Tests/LinksNotationTests/ParityTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
           ]
         }
       }
@@ -831,6 +912,17 @@
             "swift/Tests/LinksNotationTests/ParityTests.swift",
             "swift/Tests/LinksNotationTests/CommentsTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Comments.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt"
+          ]
         }
       }
     },
@@ -923,6 +1015,17 @@
             "swift/Tests/LinksNotationTests/ParityTests.swift",
             "swift/Tests/LinksNotationTests/Issue316QuoteRunsTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Quotes.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/Issue316QuoteRunsTest.kt"
+          ]
         }
       }
     },
@@ -1013,6 +1116,16 @@
           "evidence": [
             "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
             "swift/Tests/LinksNotationTests/ParityTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
           ]
         }
       }
@@ -1107,6 +1220,17 @@
             "swift/Tests/LinksNotationTests/ParityTests.swift",
             "swift/Tests/LinksNotationTests/ReferenceFidelityTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/References.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.kt"
+          ]
         }
       }
     },
@@ -1200,6 +1324,16 @@
             "swift/Tests/LinksNotationTests/SharedTextParityTests.swift",
             "swift/Tests/LinksNotationTests/StreamParserTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/StreamParser.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt"
+          ]
         }
       }
     },
@@ -1287,6 +1421,15 @@
           ],
           "evidence": [
             "swift/Tests/LinksNotationTests/BinaryTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Binary.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/BinaryTest.kt"
           ]
         }
       }
@@ -1381,6 +1524,18 @@
             "swift/Tests/LinksNotationTests/NestingDepthTests.swift",
             "swift/Tests/LinksNotationTests/LimitsTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/ParserOptions.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/ParseException.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/NestingLimitTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/LimitsTest.kt"
+          ]
         }
       }
     },
@@ -1444,6 +1599,15 @@
           ],
           "evidence": [
             "swift/Tests/LinksNotationTests/IndentedDocumentTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/IndentedDocument.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/IndentedDocumentTest.kt"
           ]
         }
       }
@@ -1533,6 +1697,15 @@
           "evidence": [
             "swift/Tests/LinksNotationTests/LinkTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Link.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/LinkTest.kt"
+          ]
         }
       }
     },
@@ -1619,6 +1792,16 @@
           "evidence": [
             "swift/Tests/LinksNotationTests/FormatConfigTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/FormatOptions.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Formatter.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/FormatConfigTest.kt"
+          ]
         }
       }
     },
@@ -1695,6 +1878,15 @@
           "evidence": [
             "swift/Tests/LinksNotationTests/LinksGroupTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/LinksGroup.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/LinksGroupTest.kt"
+          ]
         }
       }
     },
@@ -1748,6 +1940,11 @@
           "documentation": "parity/README.md"
         },
         "swift": {
+          "status": "exception",
+          "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
+          "documentation": "parity/README.md"
+        },
+        "kotlin": {
           "status": "exception",
           "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
           "documentation": "parity/README.md"
@@ -1870,6 +2067,18 @@
             "swift/Tests/LinksNotationTests/SharedSyntaxParityTests.swift",
             "swift/Tests/LinksNotationTests/SyntaxMetadataTests.swift"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Link.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/RawItem.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.kt"
+          ]
         }
       }
     },
@@ -1973,6 +2182,16 @@
           "evidence": [
             "swift/Tests/LinksNotationTests/SharedSyntaxParityTests.swift",
             "swift/Tests/LinksNotationTests/CstTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Cst.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CstTest.kt"
           ]
         }
       }
@@ -2184,6 +2403,28 @@
         "swift/Sources/LinksNotation/StreamParser.swift"
       ],
       "sha256": "8d439af587341ca261044aa2534d99b788796a1fd5f3a2d14d89e7629f39080c"
+    },
+    "kotlin": {
+      "files": [
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Binary.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Comments.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Cst.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/FormatOptions.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Formatter.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/IndentedDocument.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Link.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/LinksGroup.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/ParseException.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/ParserOptions.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Positions.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Quotes.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/RawItem.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/References.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/StreamParser.kt"
+      ],
+      "sha256": "972c4a5773977fc228ca32fb3b1cbb1ffcb7a91cfcca594ad121033b10103846"
     }
   }
 }

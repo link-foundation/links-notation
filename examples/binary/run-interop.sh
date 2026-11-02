@@ -20,6 +20,10 @@ if [ "${1:-}" != "--rust-csharp-only" ]; then
     exit 1
   }
   java -cp java/target/classes examples/binary/java/BinaryExample.java > "$evidence_dir/java.tsv"
+  kotlin/gradlew --no-daemon --console=plain -q -p kotlin binaryExample > "$evidence_dir/kotlin.tsv" 2> "$evidence_dir/kotlin-build.log" || {
+    cat "$evidence_dir/kotlin-build.log"
+    exit 1
+  }
   if ! {
     cmake -S cpp -B "$evidence_dir/cpp-build" -DCMAKE_BUILD_TYPE=Release -DLINKS_NOTATION_BUILD_TESTS=OFF &&
       cmake --build "$evidence_dir/cpp-build" --config Release --target binary_lino --parallel
@@ -33,7 +37,7 @@ if [ "${1:-}" != "--rust-csharp-only" ]; then
     exit 1
   }
   "$(swift build -c release --show-bin-path)/binary-lino" examples/binary/corpus.txt > "$evidence_dir/swift.tsv"
-  languages+=(python js php go java cpp swift)
+  languages+=(python js php go java cpp swift kotlin)
 fi
 for language in "${languages[@]}"; do
   diff -u "$evidence_dir/rust.tsv" "$evidence_dir/$language.tsv"

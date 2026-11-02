@@ -36,4 +36,5 @@ export const declaredVersions = {
   php: () => JSON.parse(read('php/composer.json')).version,
   cpp: () => read('cpp/VERSION').trim(),
   swift: () => read('swift/VERSION').trim(),
+  kotlin: () => match(read('kotlin/build.gradle.kts'), /^version\s*=\s*"([^"]+)"/m, 'kotlin version'),
 };

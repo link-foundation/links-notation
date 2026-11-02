@@ -14,11 +14,12 @@ const languageNames = [
   "php",
   "cpp",
   "swift",
+  "kotlin",
 ];
 const languageAction = /(?:rust-toolchain|setup-(?:dotnet|java|go|php))/;
 const languageRun =
-  /\b(?:cargo|dotnet|mvn|php|composer|pytest|cmake|ctest|go\s+(?:test|build|run|vet)|swift\s+(?:build|test|run|package|format))\b|(?:python\/|python[23]?\s+-m\s+(?:pytest|unittest|build))/;
-const nativeDirectory = /^(?:\.\/)?(?:rust|python|java|go|csharp|php|cpp|swift)(?:\/|$)/;
+  /\b(?:cargo|dotnet|mvn|gradlew?|php|composer|pytest|cmake|ctest|go\s+(?:test|build|run|vet)|swift\s+(?:build|test|run|package|format))\b|(?:python\/|python[23]?\s+-m\s+(?:pytest|unittest|build))/;
+const nativeDirectory = /^(?:\.\/)?(?:rust|python|java|go|csharp|php|cpp|swift|kotlin)(?:\/|$)/;
 
 export function checkGate(workflows) {
   const errors = [];
@@ -68,7 +69,7 @@ export function checkGate(workflows) {
     release.if !==
       "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}"
   )
-    fail("Publication must wait for all nine native stages on main pushes");
+    fail("Publication must wait for all ten native stages on main pushes");
   if (
     !entry.jobs?.release_audit?.needs?.includes("release") ||
     entry.jobs.release_audit.if !==
@@ -126,7 +127,7 @@ export function checkGate(workflows) {
       if (
         job.concurrency?.["cancel-in-progress"] !== undefined &&
         job.concurrency["cancel-in-progress"] !== false &&
-        /^(?:javascript|rust|python|java|go|csharp|php|cpp|swift|publish-.+)\.yml$/.test(
+        /^(?:javascript|rust|python|java|go|csharp|php|cpp|swift|kotlin|publish-.+)\.yml$/.test(
           file,
         )
       )

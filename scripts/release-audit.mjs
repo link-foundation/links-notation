@@ -101,6 +101,22 @@ export function registryTargets(version) {
       text: true,
       valid: (body) => body.includes('name: "LinksNotation"'),
     },
+    {
+      // One Gradle module per target behind the root artifact's module
+      // metadata; the root POM stands for the whole multiplatform release.
+      name: "kotlin",
+      setup:
+        "configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace",
+      registry: "Maven Central",
+      urls: [
+        `https://repo1.maven.org/maven2/io/github/link-foundation/links-notation-kotlin/${version.kotlin}/links-notation-kotlin-${version.kotlin}.pom`,
+        "https://repo1.maven.org/maven2/io/github/link-foundation/",
+      ],
+      text: true,
+      valid: (body) =>
+        body.includes(`<version>${version.kotlin}</version>`) &&
+        body.includes("<artifactId>links-notation-kotlin</artifactId>"),
+    },
   ];
 }
 

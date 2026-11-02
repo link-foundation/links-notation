@@ -1,0 +1,23 @@
+// Runs link-foundation/ui's ui-dialect/0 parser vectors (docs/spec/
+// parser-vectors.json there) through the Kotlin port, as ui's vendored copy
+// did before the port moved here. They take the place of
+// parity/text-fixtures.json (same case schema) for this one build, and
+// ui-vectors/UiVectorsTest.kt checks every one with the shared assertCase.
+//
+//   mkdir -p /tmp/uivec
+//   gh api "repos/link-foundation/ui/contents/docs/spec/parser-vectors.json?ref=issue-31-217fba2577e5" \
+//     --jq .content | base64 -d > /tmp/uivec/parser-vectors.json
+//   kotlin/gradlew -p kotlin --no-daemon --no-configuration-cache \
+//     -I "$PWD/experiments/issue-370/ui-vectors.init.gradle" -PuiVectors=/tmp/uivec/parser-vectors.json \
+//     jvmTest --tests '*UiVectorsTest*' jsNodeTest --tests '*UiVectorsTest*' \
+//     wasmJsNodeTest --tests '*UiVectorsTest*'
+//
+// Run any normal build afterwards: the task reruns with the shared fixtures.
+allprojects {
+    afterEvaluate {
+        tasks.matching { it.name == 'generateParityCases' }.configureEach { task ->
+            task.parityCorpus.set(new File(project.property('uiVectors').toString()))
+        }
+        kotlin.sourceSets.commonTest.kotlin.srcDir(new File(rootDir, '../experiments/issue-370/ui-vectors'))
+    }
+}

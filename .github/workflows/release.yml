@@ -124,3 +124,16 @@ jobs:
     permissions:
       contents: write
       id-token: write
+
+  kotlin:
+    uses: ./.github/workflows/publish-kotlin.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+    secrets:
+      CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+      CENTRAL_TOKEN: ${{ secrets.CENTRAL_TOKEN }}
+      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+    permissions:
+      contents: write
+      id-token: write

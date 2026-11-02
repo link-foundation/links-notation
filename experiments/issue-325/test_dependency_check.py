@@ -311,6 +311,90 @@ class DependencyCheckTests(unittest.TestCase):
             self.assertIn("wrapper:wrapper", output.getvalue())
             self.assertEqual(properties.read_text(), text)
 
+    def test_gradle_plugins_ktlint_and_wrapper_are_checked_and_updated(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            build = root / "kotlin/build.gradle.kts"
+            build.parent.mkdir(parents=True)
+            build.write_text(
+                "plugins {\n"
+                '    kotlin("multiplatform") version "2.4.21"\n'
+                '    id("com.vanniktech.maven.publish") version "0.37.0"\n'
+                "}\n"
+                'version = "0.29.0"\n'
+                'ktlint {\n    version.set("1.8.0")\n}\n'
+            )
+            properties = root / "kotlin/gradle/wrapper/gradle-wrapper.properties"
+            properties.parent.mkdir(parents=True)
+            url = "https\\://services.gradle.org/distributions/gradle-{0}-bin.zip"
+            properties.write_text(
+                "distributionSha256Sum=" + "0" * 64 + "\n"
+                "distributionUrl=" + url.format("9.8.2") + "\n"
+            )
+            # Kotlin/JS writes package.json files into build/js.
+            generated = root / "kotlin/build/js/package.json"
+            generated.parent.mkdir(parents=True)
+            generated.write_text('{"devDependencies": {"mocha": "1.0.0"}}')
+            records = CHECK.manifests(root)
+            self.assertEqual(
+                [(d.ecosystem, d.name, d.literal) for d in records],
+                [
+                    ("gradle-plugin", "org.jetbrains.kotlin.multiplatform", "2.4.21"),
+                    ("gradle-plugin", "com.vanniktech.maven.publish", "0.37.0"),
+                    ("maven", "com.pinterest.ktlint:ktlint-cli", "1.8.0"),
+                    ("gradle", "gradle", "9.8.2"),
+                ],
+            )
+            CHECK.update(records[0], "2.5.0")
+            CHECK.update(records[1], "0.38.0")
+            CHECK.update(records[2], "1.9.0")
+            text = build.read_text()
+            self.assertIn('kotlin("multiplatform") version "2.5.0"', text)
+            self.assertIn('id("com.vanniktech.maven.publish") version "0.38.0"', text)
+            self.assertIn('version.set("1.9.0")', text)
+            self.assertIn('version = "0.29.0"', text)
+            digest = "a" * 64
+            with (
+                patch.object(CHECK, "ROOT", root),
+                patch.object(CHECK, "get", return_value=digest.encode() + b"\n") as get,
+                contextlib.redirect_stdout(io.StringIO()) as output,
+            ):
+                CHECK.update(records[3], "9.9.0")
+            get.assert_called_once_with(
+                "https://services.gradle.org/distributions/gradle-9.9.0-bin.zip.sha256",
+                accept="*/*",
+            )
+            self.assertEqual(
+                properties.read_text(),
+                "distributionSha256Sum=" + digest + "\n"
+                "distributionUrl=" + url.format("9.9.0") + "\n",
+            )
+            self.assertIn("./gradlew wrapper --gradle-version 9.9.0", output.getvalue())
+
+    def test_gradle_plugin_is_looked_up_in_every_plugin_repository(self):
+        def fake(url, accept="application/json"):
+            if url.startswith("https://dl.google.com/"):
+                return (
+                    b"<metadata><versioning><versions><version>9.5.0</version>"
+                    b"<version>9.6.0-alpha01</version></versions></versioning></metadata>"
+                )
+            raise CHECK.urllib.error.HTTPError(url, 404, "Not Found", {}, None)
+
+        with patch.object(CHECK, "get", side_effect=fake):
+            self.assertEqual(
+                CHECK.latest(
+                    "gradle-plugin", "com.android.kotlin.multiplatform.library"
+                ),
+                "9.5.0",
+            )
+        with patch.object(
+            CHECK,
+            "get",
+            side_effect=CHECK.urllib.error.HTTPError("u", 404, "Not Found", {}, None),
+        ):
+            with self.assertRaisesRegex(ValueError, "no plugin marker"):
+                CHECK.latest("gradle-plugin", "missing.plugin")
+
     def test_maven_property_is_resolved_without_changing_other_versions(self):
         with tempfile.TemporaryDirectory() as temporary:
             pom = Path(temporary) / "pom.xml"

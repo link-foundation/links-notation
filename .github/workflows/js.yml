@@ -77,6 +77,12 @@ jobs:
     with:
       verbose: ${{ inputs.verbose || false }}
 
+  kotlin:
+    needs: [js]
+    uses: ./.github/workflows/kotlin.yml
+    with:
+      verbose: ${{ inputs.verbose || false }}
+
   binary_interop:
     needs: [js]
     uses: ./.github/workflows/binary-interop.yml
@@ -110,7 +116,7 @@ jobs:
       verbose: ${{ inputs.verbose || false }}
 
   release:
-    needs: [js, rust, python, java, go, csharp, php, cpp, swift]
+    needs: [js, rust, python, java, go, csharp, php, cpp, swift, kotlin]
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     uses: ./.github/workflows/release.yml
     with:
@@ -132,7 +138,7 @@ jobs:
       id-token: write
 
   release_audit:
-    needs: [js, rust, python, java, go, csharp, php, cpp, swift, release]
+    needs: [js, rust, python, java, go, csharp, php, cpp, swift, kotlin, release]
     if: ${{ always() && needs.js.result == 'success' }}
     uses: ./.github/workflows/release-audit.yml
     with:
@@ -244,4 +250,16 @@ jobs:
       - name: Require a successful stage
         env:
           STAGE_RESULT: ${{ needs.swift.result }}
+        run: test "$STAGE_RESULT" = success
+
+  kotlin_check:
+    name: Kotlin
+    needs: [kotlin]
+    if: ${{ always() }}
+    runs-on: ubuntu-26.04
+    timeout-minutes: 5
+    steps:
+      - name: Require a successful stage
+        env:
+          STAGE_RESULT: ${{ needs.kotlin.result }}
         run: test "$STAGE_RESULT" = success
