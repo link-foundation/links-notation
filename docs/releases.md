@@ -110,6 +110,14 @@ Packagist version metadata, and the Swift tag's `Package.swift`. Any mismatch or
 missing release is an error. Preserve the `registry-audit-RUN` artifact when
 investigating partial delivery.
 
+When a language stage fails or is cancelled the release job is skipped, and the
+audit then says that the release did not run to completion instead of naming a
+credential: fix or re-run the failed stage first. A job that no hosted runner
+picked up ("The job was not acquired by Runner of type hosted", seen on
+`macos-26` during capacity shortages) is re-run automatically by
+`rerun-unacquired.yml`, up to the third attempt; after that, run
+`gh run rerun RUN_ID --failed` once runners are available (issue #377).
+
 GitHub release tags must explicitly target `github.sha`; never let
 `gh release create` select a later main head. The Swift release, whose tag is
 created first, uses `--verify-tag` instead. Benchmark regeneration uses a pull
