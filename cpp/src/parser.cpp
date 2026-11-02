@@ -30,6 +30,8 @@ namespace {
 /// A line as the grammar reads it, before indentation is expanded.
 struct RawLink {
   std::optional<std::string> id;
+  /// The id as the document wrote it, when the parser keeps syntax.
+  std::optional<std::string> raw_id;
   std::vector<RawLink> values;
   std::vector<RawLink> children;
   /// Whether this link stands for a parenthesized group, whose body is kept
@@ -37,9 +39,10 @@ struct RawLink {
   bool is_nested = false;
   std::vector<RawLink> nested;
 
-  static RawLink singlet(std::string id) {
+  static RawLink singlet(std::string id, std::optional<std::string> raw_id) {
     RawLink link;
     link.id = std::move(id);
+    link.raw_id = std::move(raw_id);
     return link;
   }
 
@@ -91,8 +94,12 @@ struct Failure {
 
 class Grammar {
  public:
-  Grammar(std::string_view document, std::size_t max_depth)
-      : document_(document), references_(document), max_depth_(max_depth) {}
+  /// Reads `document`, the prepared copy of `source` whose comments are
+  /// blanked. Both have the same length, so the text a reference was written
+  /// as is sliced from `source` at the positions read in `document`; with
+  /// `syntax` off it is not kept at all.
+  Grammar(std::string_view document, std::string_view source, bool syntax, std::size_t max_depth)
+      : document_(document), source_(source), syntax_(syntax), references_(document), max_depth_(max_depth) {}
 
   /// Reads the whole document, or says where it stopped.
   std::vector<RawLink> read() {
@@ -228,6 +235,14 @@ class Grammar {
     return error_at(input);
   }
 
+  /// Reads a reference like reference() does, and with it the text the
+  /// document wrote it as when the parser keeps syntax.
+  Step written_reference(std::size_t input, std::string& out, std::optional<std::string>& raw) {
+    const Step step = reference(input, out);
+    if (step.ok() && syntax_) raw = std::string(source_.substr(input, step.at - input));
+    return step;
+  }
+
   Step eol(std::size_t input) {
     const std::size_t after_space = horizontal_whitespace(input);
     if (const auto next = strip_line_ending(after_space)) return ok_at(*next);
@@ -250,8 +265,9 @@ class Grammar {
     const Step group = nested_group(input, out);
     if (group.status != Status::error) return group;
     std::string id;
-    const Step step = reference(input, id);
-    if (step.ok()) out = RawLink::singlet(std::move(id));
+    std::optional<std::string> raw;
+    const Step step = written_reference(input, id, raw);
+    if (step.ok()) out = RawLink::singlet(std::move(id), std::move(raw));
     return step;
   }
 
@@ -289,7 +305,8 @@ class Grammar {
 
   Step single_line_link(std::size_t input, RawLink& out) {
     std::string id;
-    Step step = reference(horizontal_whitespace(input), id);
+    std::optional<std::string> raw;
+    Step step = written_reference(horizontal_whitespace(input), id, raw);
     if (!step.ok()) return step;
     step = colon(horizontal_whitespace(step.at));
     if (!step.ok()) return step;
@@ -298,6 +315,7 @@ class Grammar {
     if (!step.ok()) return step;
     out = RawLink();
     out.id = std::move(id);
+    out.raw_id = std::move(raw);
     out.values = std::move(values);
     return step;
   }
@@ -311,12 +329,13 @@ class Grammar {
 
   Step indented_id_link(std::size_t input, RawLink& out) {
     std::string id;
-    Step step = reference(input, id);
+    std::optional<std::string> raw;
+    Step step = written_reference(input, id, raw);
     if (!step.ok()) return step;
     step = colon(horizontal_whitespace(step.at));
     if (!step.ok()) return step;
     step = eol(step.at);
-    if (step.ok()) out = RawLink::singlet(std::move(id));
+    if (step.ok()) out = RawLink::singlet(std::move(id), std::move(raw));
     return step;
   }
 
@@ -400,8 +419,9 @@ class Grammar {
       // the single-line value link does, as a missing reference.
       if (at(input) == '(') {
         std::string id;
-        const Step step = reference(input, id);
-        if (step.ok()) out = RawLink::singlet(std::move(id));
+        std::optional<std::string> raw;
+        const Step step = written_reference(input, id, raw);
+        if (step.ok()) out = RawLink::singlet(std::move(id), std::move(raw));
         return step;
       }
       RawLink link;
@@ -520,6 +540,8 @@ class Grammar {
   }
 
   std::string_view document_;
+  std::string_view source_;
+  bool syntax_;
   detail::DelimitedReferences references_;
   std::size_t max_depth_;
 
@@ -536,6 +558,13 @@ class Grammar {
 // ---- From the parsed tree to links, as js/src/Parser.js does it ----
 
 Link transform_link(const RawLink& item);
+
+/// `link` with the text its id was written as. The grammar keeps that text
+/// only when the parser keeps syntax, and a link without an id has none.
+Link with_raw_id(Link link, const std::optional<std::string>& raw_id) {
+  if (link.id) link.raw_id = raw_id;
+  return link;
+}
 
 Link combine_path_elements(const std::vector<Link>& path, std::size_t count, Link current) {
   if (count == 0) return current;
@@ -555,14 +584,14 @@ Link transform_indented_value(const RawLink& item) {
   if (!item.children.empty() && item.id && item.values.empty()) {
     std::vector<Link> values;
     for (const RawLink& child : item.children) values.push_back(transform_indented_value(child));
-    return Link(item.id, std::move(values));
+    return with_raw_id(Link(item.id, std::move(values)), item.raw_id);
   }
 
   Link current = transform_link(item);
   if (!item.children.empty()) {
     std::vector<Link> values = current.values;
     for (const RawLink& child : item.children) values.push_back(transform_indented_value(child));
-    return Link(current.id, std::move(values));
+    return with_raw_id(Link(current.id, std::move(values)), current.raw_id);
   }
   if (!item.id && !item.is_nested && current.values.size() == 1) return current.values[0];
   return current;
@@ -577,7 +606,7 @@ void collect_links(const RawLink& item, const std::vector<Link>& path, std::vect
   if (item.id && item.values.empty()) {
     std::vector<Link> values;
     for (const RawLink& child : item.children) values.push_back(transform_indented_value(child));
-    push_combined(path, Link(item.id, std::move(values)), result);
+    push_combined(path, with_raw_id(Link(item.id, std::move(values)), item.raw_id), result);
     return;
   }
   Link current = transform_link(item);
@@ -603,7 +632,7 @@ Link transform_link(const RawLink& item) {
   std::vector<Link> values;
   values.reserve(item.values.size());
   for (const RawLink& value : item.values) values.push_back(transform_link(value));
-  return Link(item.id, std::move(values));
+  return with_raw_id(Link(item.id, std::move(values)), item.raw_id);
 }
 
 LinksGroup transform_group(const RawLink& item) {
@@ -630,7 +659,7 @@ std::vector<RawLink> read_document(std::string_view document, const ParserOption
   // Comments are blanked rather than removed, so a position reported for the
   // prepared document is the same position in the document the caller wrote.
   const std::string prepared = options.comments ? strip_comments(document) : std::string(document);
-  Grammar grammar(prepared, options.max_depth);
+  Grammar grammar(prepared, document, options.syntax, options.max_depth);
   try {
     return grammar.read();
   } catch (const Failure& failure) {

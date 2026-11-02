@@ -11,5 +11,7 @@ int main() {
   const std::string source = "(papa: loves mama)";
   const std::string formatted = links_notation::format_links(links_notation::parse(source));
   std::cout << "links_notation " << LINKS_NOTATION_VERSION_STRING << ": " << formatted << '\n';
-  return formatted == source ? EXIT_SUCCESS : EXIT_FAILURE;
+  // The concrete syntax tree lives in its own source file and header.
+  const std::string recovered = links_notation::Parser().parse_cst(source).to_string();
+  return formatted == source && recovered == source ? EXIT_SUCCESS : EXIT_FAILURE;
 }

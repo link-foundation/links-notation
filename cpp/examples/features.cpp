@@ -69,6 +69,22 @@ int main() {
            "Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3\n1 | ((((a))))\n  |    ^");
   }
 
+  // Syntax metadata: equal references remember how they were written.
+  const Link written = Parser().parse("(t 1 '1')")[0];
+  expect("raw ids", *written.values[1].raw_id + " " + *written.values[2].raw_id, "1 '1'");
+  expect("quote", std::string(1, written.values[2].quote().value_or('-')), "'");
+  expect("raw ids are ignored", written.values[1] == written.values[2] ? written.format() : "not equal", "(t 1 1)");
+  ParserOptions ast_options;
+  ast_options.syntax = false;
+  expect("AST mode", Parser(ast_options).parse("(t 1 '1')")[0].values[2].raw_id.value_or("none"), "none");
+
+  // Concrete syntax tree: every byte of the document, comments included.
+  const CstNode cst = Parser().parse_cst("a '1' # note\n");
+  expect("parse_cst", cst.to_string(), "a '1' # note\n");
+  expect("cst tree", cst.to_s_expression(),
+         "(document (line reference:\"a\" whitespace:\" \" reference:\"'1'\" whitespace:\" \" "
+         "comment:\"# note\" newline:\"\\n\"))");
+
   // Lazy reading: links come out of a sequence of chunks one at a time.
   ChunkedLinks chunked = parse_chunks(std::vector<std::string>{"a b\nc", " d\n"});
   std::string lazily;

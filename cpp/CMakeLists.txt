@@ -44,6 +44,7 @@ include(GNUInstallDirs)
 add_library(links_notation
   src/binary.cpp
   src/comments.cpp
+  src/cst.cpp
   src/indented_document.cpp
   src/link.cpp
   src/links_group.cpp

@@ -18,8 +18,8 @@ release `cpp_VERSION`, together with its SHA-256 checksum.
 include(FetchContent)
 FetchContent_Declare(
   links_notation
-  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.27.1/links-notation-cpp-0.27.1.tar.gz
-  # Optional: the checksum from links-notation-cpp-0.27.1.tar.gz.sha256
+  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.28.0/links-notation-cpp-0.28.0.tar.gz
+  # Optional: the checksum from links-notation-cpp-0.28.0.tar.gz.sha256
   # URL_HASH SHA256=...
 )
 FetchContent_MakeAvailable(links_notation)
@@ -42,7 +42,7 @@ cmake --install build --prefix /usr/local
 Then use it from your project:
 
 ```cmake
-find_package(links_notation 0.27 REQUIRED CONFIG)
+find_package(links_notation 0.28 REQUIRED CONFIG)
 target_link_libraries(your_target PRIVATE links_notation::links_notation)
 ```
 
@@ -81,6 +81,8 @@ int main() {
 - Format `Link` objects back to Lino notation
 - Support for inline and indented syntax
 - `#` comments, on by default and switchable off
+- Parsed links remember how their ids were written (`raw_id`, `quote()`), and
+  `parse_cst` gives a lossless concrete syntax tree
 - Quoted strings with special characters
 - Triple-quoted strings for embedded quotes
 - Configurable formatting with `FormatConfig`
@@ -130,8 +132,10 @@ class Link {
  public:
   std::optional<std::string> id;
   std::vector<Link> values;
+  std::optional<std::string> raw_id;  // how the parser read the id written
 
   bool is_reference() const;
+  std::optional<char> quote() const;
   std::string format(bool less_parentheses = false, bool compound = false) const;
   std::string format(const FormatConfig& config, bool compound = false) const;
   bool equals(const Link& other) const;
@@ -168,6 +172,7 @@ options.max_depth = 16;
 const links_notation::Parser parser(options);
 std::vector<links_notation::Link> links = parser.parse(document);
 std::vector<links_notation::LinksGroup> groups = parser.parse_groups(document);
+links_notation::CstNode cst = parser.parse_cst(document);
 ```
 
 `ParserOptions` holds:
@@ -177,9 +182,51 @@ std::vector<links_notation::LinksGroup> groups = parser.parse_groups(document);
 - `max_depth` - How deep links may nest (default: `default_max_depth`, which is
   64); see [Nesting Depth](#nesting-depth)
 - `comments` - Whether `#` starts a comment (default: `true`)
+- `syntax` - Whether parsed links record how their ids were written in
+  `raw_id` (default: `true`); `false` is the AST mode
 
 `parse_groups` keeps each line's link together with the lines indented under
 it, as `LinksGroup{element, children}`.
+
+### Syntax Metadata and the Concrete Syntax Tree
+
+A parsed link records how its id was written. `raw_id` is the id exactly as
+the document wrote it, quotes, doubled quote runs and `~1{...}` literals
+included, and `quote()` is its delimiter (`'`, `"` or `` ` ``) when it is one
+complete quoted reference. Equality, formatting and `operator<<` ignore both,
+so `1` and `'1'` are still the same reference:
+
+```cpp
+const links_notation::Parser parser;
+const links_notation::Link link = parser.parse("(t 1 '1')")[0];
+// link.values[1].raw_id == "1",   link.values[1].quote() == std::nullopt
+// link.values[2].raw_id == "'1'", link.values[2].quote() == '\''
+// link.values[1] == link.values[2], and link.format() == "(t 1 1)"
+```
+
+Links built in code, links without an id and links made by combining an
+indented path have no `raw_id`. `parse_groups` and `StreamParser` keep it, and
+`ParserOptions::syntax = false` (AST mode) drops it. `reference_quote(raw)`
+reads the delimiter of any written reference the same way.
+
+`parse_cst` reads the lossless concrete syntax tree: every byte belongs to
+exactly one token, so `to_string()` gives the document back exactly, comments,
+whitespace and line endings included. It throws whatever `parse` throws for the
+same document.
+
+```cpp
+const links_notation::CstNode cst = parser.parse_cst("a '1' # note\n");
+// cst.to_string() == "a '1' # note\n"
+// cst.to_s_expression() ==
+//   (document (line reference:"a" whitespace:" " reference:"'1'"
+//     whitespace:" " comment:"# note" newline:"\n"))
+```
+
+A `CstNode` has a `kind` (`CstKind::document`, `line` or `group` for nodes, and
+`whitespace`, `newline`, `comment`, `open_paren`, `close_paren`, `colon` or
+`reference` for tokens), its `children`, and for a reference token its decoded
+`value` and its `quote`. `text()`, `tokens()`, `is_token()` and
+`to_s_expression()` read it.
 
 ### FormatConfig
 

@@ -5,6 +5,7 @@
 
 #include "links_notation/binary.hpp"
 #include "links_notation/comments.hpp"
+#include "links_notation/cst.hpp"
 #include "links_notation/format_config.hpp"
 #include "links_notation/indented_document.hpp"
 #include "links_notation/link.hpp"
