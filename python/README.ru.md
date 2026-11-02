@@ -77,6 +77,51 @@ links = parser.parse(text)
 # Результат: (3: папа любит маму)
 ```
 
+### Как документ был записан (CST)
+
+Парсер сохраняет, как была записана каждая ссылка. Кавычки не меняют ссылку:
+`1` и `'1'` - одна и та же ссылка, поэтому сравнение, `str()`, `repr()` и
+`format()` остаются прежними. Каждая разобранная связь хранит `raw_id` - ID в
+точности так, как он записан, и `quote` - кавычку, в которую он заключён:
+
+```python
+from links_notation import Parser
+
+[link] = Parser().parse("(t 1 '1')")
+_, bare, quoted = link.values
+bare == quoted                # True: это одна ссылка
+(bare.raw_id, bare.quote)     # ('1', None)
+(quoted.raw_id, quoted.quote) # ("'1'", "'")
+link.format()                 # '(t 1 1)'
+```
+
+`raw_id` равен `None` у связей без ID, у связей, созданных в коде, и у связей,
+построенных объединением путей по отступам. `Parser(syntax=False)` (режим AST)
+не сохраняет его. `reference_quote(raw)` возвращает кавычку одной записанной
+ссылки.
+
+`parse_cst(input)` возвращает конкретное синтаксическое дерево без потерь:
+каждый символ, включая комментарии, пустые строки, отступы, кавычки и
+переводы строк, принадлежит ровно одному токену, поэтому исходный текст
+всегда восстанавливается:
+
+```python
+cst = Parser().parse_cst("(t 1 '1') # note\n")
+str(cst)  # "(t 1 '1') # note\n"
+[(token.kind, token.text) for token in cst.tokens()]
+# [('open_paren', '('), ('reference', 't'), ('whitespace', ' '), ...]
+cst.to_s_expression()
+# (document (line (group open_paren:"(" (line reference:"t" ...)
+#   close_paren:")") whitespace:" " comment:"# note" newline:"\n"))
+```
+
+Узел `document` содержит узлы `line`; строка содержит свои токены вместе с
+переводом строки; узел `group` содержит `(`, строки внутри и `)`. Токены
+ссылок хранят `value` (что означает ссылка) и `quote`. `parse_cst` сначала
+разбирает документ, поэтому отклоняет то, что отклоняет `parse`, а также
+несбалансированные скобки. Подробности - в
+[разборе issue 364](../docs/case-studies/issue-364/README.md).
+
 ### Потоковый разбор
 
 `StreamParser` принимает произвольные порции данных и выдаёт только завершённые
@@ -103,12 +148,15 @@ for link in parse_chunks(["одна свя", "зь\nвторая связь"]):
 
 Основной класс парсера для Links Notation.
 
-- `__init__(max_input_size: int = 10 * 1024 * 1024, max_depth: int = DEFAULT_MAX_DEPTH, comments: bool = True)`:
+- `__init__(max_input_size: int = 10 * 1024 * 1024, max_depth: int = DEFAULT_MAX_DEPTH, comments: bool = True, syntax: bool = True)`:
   создать парсер; при `comments=False` `#` — обычный символ, а не начало
-  комментария
+  комментария; при `syntax=False` (режим AST) у разобранных связей `raw_id` и
+  `quote` равны `None`
 - `parse(input_text: str) -> List[Link]`: Парсинг текста Links Notation в
   объекты Link; выбрасывает `ParseError`, если текст не удалось разобрать или
   связи в нем вложены глубже `max_depth`
+- `parse_cst(input_text: str) -> CstNode`: конкретное синтаксическое дерево без
+  потерь; `str()` от него равен входному тексту
 - `DEFAULT_MAX_DEPTH`: значение `max_depth` по умолчанию, 64, одинаковое во всех
   реализациях
 
@@ -149,6 +197,9 @@ Nesting too deep at line 1, column 4: nesting depth exceeds the maximum of 3
 - `format(less_parentheses: bool = False) -> str`: Форматирование в строку
 - `simplify() -> Link`: Упрощение структуры связи
 - `combine(other: Link) -> Link`: Объединение с другой связью
+- `raw_id`: ID в точности так, как он записан в разобранном документе, или
+  `None`; не учитывается в `==`, `str()`, `repr()` и `format()`
+- `quote`: `'`, `"` или `` ` ``, если `raw_id` записан в кавычках, иначе `None`
 
 ### format_links
 

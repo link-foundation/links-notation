@@ -4,6 +4,7 @@ Link class representing a Lino link with optional ID and values.
 
 from typing import TYPE_CHECKING, List, Optional, Union
 
+from .quotes import reference_quote
 from .reference_literal import format_reference
 
 if TYPE_CHECKING:
@@ -31,6 +32,36 @@ class Link:
         self.id = link_id
         self.values = values if values is not None else []
         self._is_from_path_combination = False
+        self._raw_id: Optional[str] = None
+
+    @property
+    def raw_id(self) -> Optional[str]:
+        """
+        The ID exactly as the parsed document wrote it: ``'1'`` for a quoted
+        ``1``, ``1`` for a bare one, ``~1{31}`` for a versioned literal.
+
+        None for a link without an ID, a link built in code, a link made by
+        combining the lines of an indented document, and every link read by a
+        parser created with ``syntax=False``. It takes no part in equality,
+        ``str()``, ``repr()`` or ``format()``.
+        """
+        return self._raw_id
+
+    @raw_id.setter
+    def raw_id(self, raw: Optional[str]) -> None:
+        if raw is not None and not isinstance(raw, str):
+            raise TypeError("raw_id must be a string or None")
+        self._raw_id = raw
+
+    @property
+    def quote(self) -> Optional[str]:
+        """
+        The delimiter the ID was written between: ``'``, ``"`` or a backtick
+        when it was quoted, and None when it was bare, a versioned literal, or
+        not read from a document (see :attr:`raw_id`). ``1`` and ``'1'`` stay
+        equal links; this only says how each was written.
+        """
+        return reference_quote(self._raw_id)
 
     def __str__(self) -> str:
         """String representation using standard formatting."""

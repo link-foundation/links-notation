@@ -86,3 +86,28 @@ def _parse_quoted_string_at(text: str, start: int) -> Optional[tuple]:
         pos += 1
 
     return empty_reference
+
+
+def reference_quote(raw: Optional[str]) -> Optional[str]:
+    """
+    The delimiter a reference was written between, read from the reference as
+    it was written: ``'``, ``"`` or a backtick for a quoted reference (however
+    many of them open it), and None for a bare reference, a versioned literal,
+    or no text.
+
+    The first character counts only when reading a delimited reference at the
+    start of ``raw`` takes all of ``raw``.
+
+    >>> reference_quote("'1'")
+    "'"
+    >>> reference_quote('""a b""')
+    '"'
+    >>> reference_quote("1") is None
+    True
+    >>> reference_quote("'unclosed") is None
+    True
+    """
+    if not isinstance(raw, str) or not raw or raw[0] not in QUOTE_CHARS:
+        return None
+    reading = _parse_quoted_string_at(raw, 0)
+    return raw[0] if reading is not None and reading[1] == len(raw) else None

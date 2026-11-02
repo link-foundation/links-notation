@@ -77,6 +77,50 @@ links = parser.parse(text)
 # Produces: (3: papa loves mama)
 ```
 
+### How a Document Was Written (CST)
+
+Parsing keeps how every ID was written. Quoting never changes a reference:
+`1` and `'1'` are the same reference, so equality, `str()`, `repr()` and
+`format()` stay as they were. Each parsed link also carries `raw_id`, the ID
+exactly as written, and `quote`, the delimiter it was written between:
+
+```python
+from links_notation import Parser
+
+[link] = Parser().parse("(t 1 '1')")
+_, bare, quoted = link.values
+bare == quoted                # True: the same reference
+(bare.raw_id, bare.quote)     # ('1', None)
+(quoted.raw_id, quoted.quote) # ("'1'", "'")
+link.format()                 # '(t 1 1)'
+```
+
+`raw_id` is `None` for links without an ID, links built in code, and links
+made by indentation path combination. Use `Parser(syntax=False)` (AST mode) to
+leave it out. `reference_quote(raw)` reads the delimiter of one written
+reference.
+
+`parse_cst(input)` returns the lossless concrete syntax tree. Every character,
+including comments, blank lines, indentation, quotes and line endings, belongs
+to exactly one token, so the original text is always recovered:
+
+```python
+cst = Parser().parse_cst("(t 1 '1') # note\n")
+str(cst)  # "(t 1 '1') # note\n"
+[(token.kind, token.text) for token in cst.tokens()]
+# [('open_paren', '('), ('reference', 't'), ('whitespace', ' '), ...]
+cst.to_s_expression()
+# (document (line (group open_paren:"(" (line reference:"t" ...)
+#   close_paren:")") whitespace:" " comment:"# note" newline:"\n"))
+```
+
+A `document` node holds `line` nodes. A line holds its tokens up to and
+including its line ending. A `group` node holds `(`, the lines inside it, and
+`)`. Reference tokens carry `value` (what the reference means) and `quote`.
+`parse_cst` parses the document first, so it refuses what `parse` refuses,
+and it also refuses unbalanced parentheses. See the
+[issue 364 case study](../docs/case-studies/issue-364/README.md).
+
 ### Streaming Parsing
 
 `StreamParser` accepts arbitrary chunks and emits only complete top-level
@@ -102,12 +146,15 @@ stream also exposes `position`, `drain()`, `reset()`, and a buffer-size limit.
 
 The main parser class for Links Notation.
 
-- `__init__(max_input_size: int = 10 * 1024 * 1024, max_depth: int = DEFAULT_MAX_DEPTH, comments: bool = True)`:
+- `__init__(max_input_size: int = 10 * 1024 * 1024, max_depth: int = DEFAULT_MAX_DEPTH, comments: bool = True, syntax: bool = True)`:
   Create a parser; with `comments=False` a `#` is an ordinary character instead
-  of the start of a comment
+  of the start of a comment; with `syntax=False` (AST mode) parsed links leave
+  `raw_id` and `quote` as `None`
 - `parse(input_text: str) -> List[Link]`: Parse Links Notation text into Link
   objects; raises `ParseError` when the text does not parse or nests links
   deeper than `max_depth`
+- `parse_cst(input_text: str) -> CstNode`: Read the lossless concrete syntax
+  tree; `str()` of it is the input
 - `DEFAULT_MAX_DEPTH`: The default `max_depth`, 64, the same in every
   implementation
 
@@ -147,6 +194,9 @@ Represents a link in Links Notation.
 - `format(less_parentheses: bool = False) -> str`: Format as string
 - `simplify() -> Link`: Simplify link structure
 - `combine(other: Link) -> Link`: Combine with another link
+- `raw_id`: The ID exactly as the parsed document wrote it, or `None`; ignored
+  by `==`, `str()`, `repr()` and `format()`
+- `quote`: `'`, `"` or `` ` `` when `raw_id` is quoted, otherwise `None`
 
 ### format_links
 
