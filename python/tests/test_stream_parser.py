@@ -81,3 +81,13 @@ def test_rejects_writes_after_finish():
     stream.finish("one")
     with pytest.raises(RuntimeError, match="after finish"):
         stream.write("two")
+
+
+def test_waits_for_the_line_that_closes_an_even_run_of_quotes():
+    # ``""`` is the empty reference only when nothing closes it, and here the
+    # next line does, so the first line cannot be emitted on its own (#377).
+    document = 'a "" b\n"" c\n'
+    stream = StreamParser()
+    for character in document:
+        assert stream.write(character) == []
+    assert format_links(stream.finish()) == format_links(Parser().parse(document))

@@ -122,3 +122,32 @@ class TestFormattingAReferenceThatBeginsWithAHash:
         assert Link.escape_reference("issue#1047") == "issue#1047"
         assert Link.escape_reference("#") == "'#'"
         assert Link.escape_reference("#ff0000") == "'#ff0000'"
+
+
+class TestReferencesTheCommentReaderSkips:
+    """
+    Issue #377: the comment reader and the parser agree on where every
+    delimited reference starts and how far it reaches.
+    """
+
+    def test_a_hash_inside_a_reference_that_follows_a_group_is_content(self):
+        assert rendered('(a)" #b"\n') == "((<a>) < #b>)"
+
+    def test_a_hash_inside_a_reference_that_follows_another_reference_is_content(self):
+        assert rendered("\"x\"' #y'\n") == "(<x> < #y>)"
+        assert rendered('```q```"" #c\n"""\n') == '(<q> < #c\n">)'
+
+    def test_a_hash_inside_a_reference_that_follows_a_literal_is_content(self):
+        assert rendered('~1{62}" #b"\n') == "(<b> < #b>)"
+
+    def test_a_reference_is_read_in_the_document_as_written(self):
+        # The body of the first ``""`` straddles a parenthesis, so it is the
+        # empty reference and the ``#`` after it opens a comment. Blanking that
+        # comment must not turn the ``""`` into a reference holding the blanks.
+        assert rendered('"" a #)b\n""\n') == "(<> <a>)\n(<>)"
+
+    def test_the_comment_reader_skips_the_references_the_parser_reads(self):
+        assert strip_comments('(a)" #b"\n') == '(a)" #b"\n'
+        assert strip_comments("\"x\"' #y'\n") == "\"x\"' #y'\n"
+        assert strip_comments('~1{62}" #b"\n') == '~1{62}" #b"\n'
+        assert strip_comments('a"b #c"\n') == 'a"b    \n'

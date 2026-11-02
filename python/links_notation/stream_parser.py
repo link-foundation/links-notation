@@ -5,7 +5,8 @@ from typing import AsyncIterable, AsyncIterator, Callable, Iterable, Iterator, L
 
 from .link import Link
 from .parser import DEFAULT_MAX_DEPTH, ParseError, Parser
-from .quotes import QUOTE_CHARS, _parse_quoted_string_at
+from .quotes import QUOTE_CHARS, _closing_run_follows, _parse_quoted_string_at
+from .reference_literal import reference_literal_end
 
 
 @dataclass(frozen=True)
@@ -210,30 +211,47 @@ def _leading_spaces(line: str) -> int:
 
 
 def _structurally_complete(document: str, comments: bool) -> bool:
+    # Tokens are read as the comment reader and the parser read them: a
+    # reference may start after a separator, and right after a delimited
+    # reference or a literal (issue #377).
     depth = 0
     position = 0
-    before_reference = " \t\n\r(:"
+    token_start = True
+    separators = " \t\n\r(:)"
     before_comment = " \t\n\r"
 
     while position < len(document):
         character = document[position]
         previous = None if position == 0 else document[position - 1]
-        if character in QUOTE_CHARS and (previous is None or previous in before_reference):
-            parsed = _parse_quoted_string_at(document, position)
-            if parsed is None:
-                return False
-            position = parsed[1]
-            continue
         if comments and character == "#" and (previous is None or previous in before_comment):
             newline = document.find("\n", position)
             if newline < 0:
                 break
-            position = newline + 1
+            position = newline
             continue
-        if character == "(":
-            depth += 1
-        elif character == ")":
-            depth -= 1
+        if character in separators:
+            if character == "(":
+                depth += 1
+            elif character == ")":
+                depth -= 1
+            token_start = True
+            position += 1
+            continue
+        if token_start and character in QUOTE_CHARS:
+            # A reference nothing closes yet may be closed by a later line,
+            # which changes what it holds: an even run is the empty reference
+            # only when no run in the whole document closes it.
+            parsed = _parse_quoted_string_at(document, position)
+            if parsed is None or not _closing_run_follows(document, position):
+                return False
+            position = parsed[1]
+            continue
+        if token_start:
+            end = reference_literal_end(document, position)
+            if end != -1:
+                position = end
+                continue
+        token_start = False
         position += 1
 
     return depth == 0
