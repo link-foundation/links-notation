@@ -501,5 +501,152 @@
     "input": "",
     "links": [],
     "cst": "(document)"
+  },
+  {
+    "id": "comment-after-group-quote",
+    "feature": "concrete-syntax-tree",
+    "input": "(a)\" #b\"\n",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": null,
+            "raw": null,
+            "quote": null,
+            "values": [
+              {
+                "id": "a",
+                "raw": "a",
+                "quote": null,
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": " #b",
+            "raw": "\" #b\"",
+            "quote": "\"",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line (group open_paren:\"(\" (line reference:\"a\") close_paren:\")\") reference:\"\\\" #b\\\"\" newline:\"\\n\"))"
+  },
+  {
+    "id": "comment-after-adjacent-quote",
+    "feature": "concrete-syntax-tree",
+    "input": "\"x\"' #y'\n```q```\"\" #c\n\"\"\"\n",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "x",
+            "raw": "\"x\"",
+            "quote": "\"",
+            "values": []
+          },
+          {
+            "id": " #y",
+            "raw": "' #y'",
+            "quote": "'",
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "q",
+            "raw": "```q```",
+            "quote": "`",
+            "values": []
+          },
+          {
+            "id": " #c\n\"",
+            "raw": "\"\" #c\n\"\"\"",
+            "quote": "\"",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line reference:\"\\\"x\\\"\" reference:\"' #y'\" newline:\"\\n\") (line reference:\"```q```\" reference:\"\\\"\\\" #c\\n\\\"\\\"\\\"\" newline:\"\\n\"))"
+  },
+  {
+    "id": "comment-after-literal-quote",
+    "feature": "concrete-syntax-tree",
+    "input": "~1{62}\" #b\"\n",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "b",
+            "raw": "~1{62}",
+            "quote": null,
+            "values": []
+          },
+          {
+            "id": " #b",
+            "raw": "\" #b\"",
+            "quote": "\"",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line reference:\"~1{62}\" reference:\"\\\" #b\\\"\" newline:\"\\n\"))"
+  },
+  {
+    "id": "comment-after-empty-quote",
+    "feature": "concrete-syntax-tree",
+    "input": "\"\" a #)b\n\"\"\n",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "",
+            "raw": "\"\"",
+            "quote": "\"",
+            "values": []
+          },
+          {
+            "id": "a",
+            "raw": "a",
+            "quote": null,
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "",
+            "raw": "\"\"",
+            "quote": "\"",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line reference:\"\\\"\\\"\" whitespace:\" \" reference:\"a\" whitespace:\" \" comment:\"#)b\" newline:\"\\n\") (line reference:\"\\\"\\\"\" newline:\"\\n\"))"
   }
 ]

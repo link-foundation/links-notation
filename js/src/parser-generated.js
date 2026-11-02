@@ -2316,8 +2316,10 @@ function peg$parse(input, options) {
   }
 
   // Delimited references of this document, each read once however many
-  // alternatives ask for it (see quotes.js for how a reference is read)
-  const delimitedReferences = new DelimitedReferences(input);
+  // alternatives ask for it (see quotes.js for how a reference is read). They
+  // are read in the document as written, as the comment reader reads them, so
+  // blanking a comment never changes how far a reference reaches (issue #377).
+  const delimitedReferences = new DelimitedReferences(source);
 
   // Universal procedural parser for N-quote strings (any N >= 1)
   // Parses from the given position in the input string

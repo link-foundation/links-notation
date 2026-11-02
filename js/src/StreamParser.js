@@ -1,6 +1,7 @@
 import { Emitter } from './Emitter.js';
 import { Parser } from './Parser.js';
 import { DelimitedReferences } from './quotes.js';
+import { referenceLiteralEnd } from './ReferenceLiteral.js';
 
 const DEFAULT_MAX_BUFFER_SIZE = 10 * 1024 * 1024;
 
@@ -246,25 +247,19 @@ function countNewlines(value) {
 }
 
 function structurallyComplete(document, comments) {
+  // Tokens are read as the comment reader and the grammar read them: a
+  // reference may start after a separator, and right after a delimited
+  // reference or a literal (issue #377).
   const quotes = ['"', "'", '`'];
-  const beforeReference = [' ', '\t', '\n', '\r', '(', ':'];
+  const separators = [' ', '\t', '\n', '\r', '(', ':', ')'];
   const beforeComment = [' ', '\t', '\n', '\r'];
   const references = new DelimitedReferences(document);
   let depth = 0;
+  let tokenStart = true;
 
   for (let position = 0; position < document.length; position++) {
     const character = document[position];
     const previous = position === 0 ? null : document[position - 1];
-
-    if (
-      quotes.includes(character) &&
-      (previous === null || beforeReference.includes(previous))
-    ) {
-      const end = references.endAt(position);
-      if (end === null) return false;
-      position = end - 1;
-      continue;
-    }
 
     if (
       comments &&
@@ -274,11 +269,33 @@ function structurallyComplete(document, comments) {
       const newline = document.indexOf('\n', position);
       if (newline === -1) return true;
       position = newline;
+      tokenStart = true;
       continue;
     }
 
-    if (character === '(') depth += 1;
-    if (character === ')') depth -= 1;
+    if (separators.includes(character)) {
+      if (character === '(') depth += 1;
+      if (character === ')') depth -= 1;
+      tokenStart = true;
+      continue;
+    }
+
+    if (tokenStart && quotes.includes(character)) {
+      const end = references.endAt(position);
+      if (end === null) return false;
+      position = end - 1;
+      continue;
+    }
+
+    if (tokenStart) {
+      const end = referenceLiteralEnd(document, position);
+      if (end !== -1) {
+        position = end - 1;
+        continue;
+      }
+    }
+
+    tokenStart = false;
   }
 
   return depth === 0;

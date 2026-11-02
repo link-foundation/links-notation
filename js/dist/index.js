@@ -158,6 +158,23 @@ function isSubstantiveBody(content) {
 function hasReferenceLiteralPrefix(text, start = 0) {
   return /^~[0-9]+\{/.test(text.slice(start));
 }
+var LITERAL_PAYLOAD_END = new Set(["}", " ", "\t", "\r", `
+`, "(", ")"]);
+function referenceLiteralEnd(text, start) {
+  if (text[start] !== "~")
+    return -1;
+  let index = start + 1;
+  while (index < text.length && text[index] >= "0" && text[index] <= "9") {
+    index++;
+  }
+  if (index === start + 1 || text[index] !== "{")
+    return -1;
+  index++;
+  while (index < text.length && !LITERAL_PAYLOAD_END.has(text[index])) {
+    index++;
+  }
+  return text[index] === "}" ? index + 1 : -1;
+}
 function encodeReferenceLiteral(text) {
   if (typeof text !== "string" || !text.isWellFormed()) {
     throw new TypeError("Reference must be well-formed Unicode text");
@@ -481,21 +498,17 @@ function formatLinks(links, lessParentheses = false) {
 }
 // src/comments.js
 var COMMENT = "#";
-var BEFORE_REFERENCE = [" ", "\t", `
-`, "\r", "(", ":"];
+var SEPARATORS = [" ", "\t", `
+`, "\r", "(", ":", ")"];
 var BEFORE_COMMENT = [" ", "\t", `
 `, "\r"];
 function stripComments(document) {
   let blanked = null;
   let position = 0;
+  let tokenStart = true;
   const references = new DelimitedReferences(document);
   while (position < document.length) {
     const character = document[position];
-    if (QUOTES.includes(character) && follows(document, position, BEFORE_REFERENCE)) {
-      const end = references.endAt(position);
-      position = end === null ? position + 1 : end;
-      continue;
-    }
     if (character === COMMENT && follows(document, position, BEFORE_COMMENT)) {
       blanked = blanked ?? document.split("");
       while (position < document.length && document[position] !== `
@@ -505,9 +518,29 @@ function stripComments(document) {
       }
       continue;
     }
+    if (SEPARATORS.includes(character)) {
+      tokenStart = true;
+      position++;
+      continue;
+    }
+    if (tokenStart) {
+      const end = delimitedTokenEnd(document, position, references);
+      if (end !== null) {
+        position = end;
+        continue;
+      }
+    }
+    tokenStart = false;
     position++;
   }
   return blanked === null ? document : blanked.join("");
+}
+function delimitedTokenEnd(document, start, references) {
+  const literal = referenceLiteralEnd(document, start);
+  if (literal !== -1) {
+    return literal;
+  }
+  return QUOTES.includes(document[start]) ? references.endAt(start) : null;
 }
 function follows(document, position, allowed) {
   return position === 0 || allowed.includes(document[position - 1]);
@@ -569,28 +602,11 @@ var ESCAPES = {
 function quoteText(text) {
   return `"${text.replace(/[\\"\n\r\t]/g, (character) => ESCAPES[character])}"`;
 }
-var LITERAL_PAYLOAD_END = new Set(["}", " ", "\t", "\r", `
-`, "(", ")"]);
-function literalEnd(text, start) {
-  if (text[start] !== "~")
-    return -1;
-  let index = start + 1;
-  while (index < text.length && text[index] >= "0" && text[index] <= "9") {
-    index++;
-  }
-  if (index === start + 1 || text[index] !== "{")
-    return -1;
-  index++;
-  while (index < text.length && !LITERAL_PAYLOAD_END.has(text[index])) {
-    index++;
-  }
-  return text[index] === "}" ? index + 1 : -1;
-}
 var BARE_REFERENCE_END = new Set([" ", "\t", "\r", `
 `, "(", ":", ")"]);
 function buildCst(input, { comments = true } = {}) {
   const prepared = comments ? stripComments(input) : input;
-  const references = new DelimitedReferences(prepared);
+  const references = new DelimitedReferences(input);
   const document = new CstNode(CstKind.DOCUMENT);
   const containers = [{ node: document, line: null }];
   const add = (token) => {
@@ -654,7 +670,7 @@ function buildCst(input, { comments = true } = {}) {
   return document;
 }
 function referenceEnd(prepared, start, references) {
-  const literal = literalEnd(prepared, start);
+  const literal = referenceLiteralEnd(prepared, start);
   if (literal !== -1)
     return literal;
   if (QUOTES.includes(prepared[start])) {
@@ -668,7 +684,7 @@ function referenceEnd(prepared, start, references) {
   return end;
 }
 function isLiteral(prepared, start, end) {
-  return literalEnd(prepared, start) === end;
+  return referenceLiteralEnd(prepared, start) === end;
 }
 // src/LinksGroup.js
 class LinksGroup {
@@ -3019,7 +3035,7 @@ function peg$parse(input, options) {
   function getCurrentIndentation() {
     return indentationStack[indentationStack.length - 1];
   }
-  const delimitedReferences = new DelimitedReferences(input);
+  const delimitedReferences = new DelimitedReferences(source);
   function parseQuotedStringAt(inputStr, startPos, quoteChar) {
     if (startPos >= inputStr.length || inputStr[startPos] !== quoteChar) {
       return null;
@@ -3559,34 +3575,48 @@ function countNewlines(value) {
 }
 function structurallyComplete(document, comments) {
   const quotes = ['"', "'", "`"];
-  const beforeReference = [" ", "\t", `
-`, "\r", "(", ":"];
+  const separators = [" ", "\t", `
+`, "\r", "(", ":", ")"];
   const beforeComment = [" ", "\t", `
 `, "\r"];
   const references = new DelimitedReferences(document);
   let depth = 0;
+  let tokenStart = true;
   for (let position = 0;position < document.length; position++) {
     const character = document[position];
     const previous = position === 0 ? null : document[position - 1];
-    if (quotes.includes(character) && (previous === null || beforeReference.includes(previous))) {
-      const end = references.endAt(position);
-      if (end === null)
-        return false;
-      position = end - 1;
-      continue;
-    }
     if (comments && character === "#" && (previous === null || beforeComment.includes(previous))) {
       const newline = document.indexOf(`
 `, position);
       if (newline === -1)
         return true;
       position = newline;
+      tokenStart = true;
       continue;
     }
-    if (character === "(")
-      depth += 1;
-    if (character === ")")
-      depth -= 1;
+    if (separators.includes(character)) {
+      if (character === "(")
+        depth += 1;
+      if (character === ")")
+        depth -= 1;
+      tokenStart = true;
+      continue;
+    }
+    if (tokenStart && quotes.includes(character)) {
+      const end = references.endAt(position);
+      if (end === null)
+        return false;
+      position = end - 1;
+      continue;
+    }
+    if (tokenStart) {
+      const end = referenceLiteralEnd(document, position);
+      if (end !== -1) {
+        position = end - 1;
+        continue;
+      }
+    }
+    tokenStart = false;
   }
   return depth === 0;
 }

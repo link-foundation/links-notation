@@ -5,6 +5,28 @@ export function hasReferenceLiteralPrefix(text, start = 0) {
   return /^~[0-9]+\{/.test(text.slice(start));
 }
 
+/** What a versioned literal's payload cannot contain. */
+const LITERAL_PAYLOAD_END = new Set(['}', ' ', '\t', '\r', '\n', '(', ')']);
+
+/**
+ * Where the versioned literal `~<digits>{<payload>}` that starts at `start`
+ * ends, or -1 if none starts there. A single forward scan, so it stays linear
+ * on any input (a regular expression here was flagged as a ReDoS risk).
+ */
+export function referenceLiteralEnd(text, start) {
+  if (text[start] !== '~') return -1;
+  let index = start + 1;
+  while (index < text.length && text[index] >= '0' && text[index] <= '9') {
+    index++;
+  }
+  if (index === start + 1 || text[index] !== '{') return -1;
+  index++;
+  while (index < text.length && !LITERAL_PAYLOAD_END.has(text[index])) {
+    index++;
+  }
+  return text[index] === '}' ? index + 1 : -1;
+}
+
 /** Encode exact Unicode text as a version 1 UTF-8 hexadecimal reference. */
 export function encodeReferenceLiteral(text) {
   if (typeof text !== 'string' || !text.isWellFormed()) {
