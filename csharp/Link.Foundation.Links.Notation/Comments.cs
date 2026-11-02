@@ -17,9 +17,11 @@ namespace Link.Foundation.Links.Notation
         public const char Comment = '#';
 
         /// <summary>
-        /// What a delimited reference may start after.
+        /// What ends a bare reference. A token starts after one of these, at the start of
+        /// the document, and right after a delimited reference or a versioned literal: the
+        /// places the grammar reads a reference from.
         /// </summary>
-        private const string BeforeReference = " \t\n\r(:";
+        internal const string Separators = " \t\n\r(:)";
 
         /// <summary>
         /// What a comment may start after.
@@ -37,23 +39,21 @@ namespace Link.Foundation.Links.Notation
         /// Every character of a comment is replaced rather than removed, so every later
         /// character keeps the position it had in the document the caller wrote, and
         /// anything the parser reports about a position still points at what the reader
-        /// can see.
+        /// can see. The document is read token by token, the way the grammar reads it, so
+        /// a <c>#</c> inside a delimited reference that starts right after a group,
+        /// another reference or a literal is content, as it is in one that starts after a
+        /// space (issue #377).
         /// </remarks>
         public static string StripComments(string document)
         {
             char[]? blanked = null;
             int position = 0;
+            // Whether a token may start at the position.
+            bool tokenStart = true;
 
             while (position < document.Length)
             {
                 char character = document[position];
-
-                if (Quotes.IsQuote(character) && Follows(document, position, BeforeReference))
-                {
-                    int end = Quotes.ReferenceEnd(document, position);
-                    position = end < 0 ? position + 1 : end;
-                    continue;
-                }
 
                 if (character == Comment && Follows(document, position, BeforeComment))
                 {
@@ -69,10 +69,42 @@ namespace Link.Foundation.Links.Notation
                     continue;
                 }
 
+                if (Separators.IndexOf(character) >= 0)
+                {
+                    tokenStart = true;
+                    position++;
+                    continue;
+                }
+
+                if (tokenStart)
+                {
+                    int end = DelimitedTokenEnd(document, position);
+                    if (end >= 0)
+                    {
+                        position = end;
+                        continue;
+                    }
+                }
+
+                // Anything else is part of a bare reference, which runs to a separator.
+                tokenStart = false;
                 position++;
             }
 
             return blanked == null ? document : new string(blanked);
+        }
+
+        /// <summary>
+        /// The position just past the versioned literal or delimited reference that starts
+        /// the token at <paramref name="start"/>, or -1 when the token there is a bare
+        /// reference: a delimiter run that never closes is read as one, as the grammar
+        /// reads it.
+        /// </summary>
+        private static int DelimitedTokenEnd(string document, int start)
+        {
+            int literal = ReferenceLiteral.End(document, start);
+            if (literal >= 0) return literal;
+            return Quotes.IsQuote(document[start]) ? Quotes.ReferenceEnd(document, start) : -1;
         }
 
         /// <summary>

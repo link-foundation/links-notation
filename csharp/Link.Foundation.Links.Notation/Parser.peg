@@ -14,9 +14,10 @@
 
     /// <summary>
     /// Universal procedural parser for N-quote references (any N >= 1), reading
-    /// from the given position of the subject. The reading itself lives in
+    /// from the given position of the document as written (<see cref="Source"/>),
+    /// which keeps every position of the subject. The reading itself lives in
     /// <see cref="Quotes"/>, so blanking a comment reaches a reference exactly as
-    /// far as these rules do.
+    /// far as these rules do, and never changes what a reference holds (issue #377).
     /// Stores the result in _quoteValue and its length in _quoteLength.
     /// </summary>
     /// <param name="subject">The whole input being parsed</param>
@@ -28,7 +29,7 @@
         _quoteValue = null;
         _quoteLength = 0;
         if (subject == null || startPos >= subject.Length || subject[startPos] != quoteChar) return false;
-        if (!Quotes.TryParse(subject, startPos, out var value, out var length)) return false;
+        if (!Quotes.TryParse(Source ?? subject, startPos, out var value, out var length)) return false;
 
         _quoteValue = value;
         _quoteLength = length;

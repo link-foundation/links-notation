@@ -11,7 +11,6 @@ namespace Link.Foundation.Links.Notation
     public sealed class StreamParser
     {
         private const int DefaultMaxBufferSize = 10 * 1024 * 1024;
-        private const string BeforeReference = " \t\n\r(:";
         private const string BeforeComment = " \t\n\r";
 
         private readonly Parser _parser;
@@ -250,26 +249,49 @@ namespace Link.Foundation.Links.Notation
 
         private static bool StructurallyComplete(string document, bool comments)
         {
+            // Tokens are read as the comment reader and the grammar read them: a reference
+            // may start after a separator, and right after a delimited reference or a
+            // literal (issue #377).
             var depth = 0;
+            var tokenStart = true;
             for (var position = 0; position < document.Length; position++)
             {
                 var character = document[position];
-                if (Quotes.IsQuote(character) && Follows(document, position, BeforeReference))
-                {
-                    var end = Quotes.ReferenceEnd(document, position);
-                    if (end < 0) return false;
-                    position = end - 1;
-                    continue;
-                }
                 if (comments && character == Comments.Comment && Follows(document, position, BeforeComment))
                 {
                     var newline = document.IndexOf('\n', position);
                     if (newline < 0) break;
                     position = newline;
+                    tokenStart = true;
                     continue;
                 }
-                if (character == '(') depth++;
-                else if (character == ')') depth--;
+                if (Comments.Separators.IndexOf(character) >= 0)
+                {
+                    if (character == '(') depth++;
+                    else if (character == ')') depth--;
+                    tokenStart = true;
+                    continue;
+                }
+                if (tokenStart && Quotes.IsQuote(character))
+                {
+                    // A reference nothing closes yet may be closed by a later line, which
+                    // changes what it holds: an even run is the empty reference only when
+                    // no run in the whole document closes it.
+                    var end = Quotes.ReferenceEnd(document, position);
+                    if (end < 0 || !Quotes.ClosingRunFollows(document, position)) return false;
+                    position = end - 1;
+                    continue;
+                }
+                if (tokenStart)
+                {
+                    var end = ReferenceLiteral.End(document, position);
+                    if (end >= 0)
+                    {
+                        position = end - 1;
+                        continue;
+                    }
+                }
+                tokenStart = false;
             }
             return depth == 0;
         }
