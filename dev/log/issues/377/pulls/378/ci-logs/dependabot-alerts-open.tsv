@@ -1,0 +1,5 @@
+43	minimatch	kotlin/kotlin-js-store/yarn.lock	medium	< 11.0.1	11.0.1	GHSA-g3hv-75wg-m249
+42	glob	kotlin/kotlin-js-store/yarn.lock	medium	>= 9.0.0, <= 14.0.1	14.0.2	GHSA-3g3m-2fjr-6pw4
+41	diff	kotlin/kotlin-js-store/yarn.lock	low	>= 6.0.0, < 8.0.3	8.0.3	GHSA-73rr-hh4g-fpgx
+40	minimatch	js/package-lock.json	medium	< 11.0.1	11.0.1	GHSA-g3hv-75wg-m249
+39	minimatch	docs/website/package-lock.json	medium	< 11.0.1	11.0.1	GHSA-g3hv-75wg-m249

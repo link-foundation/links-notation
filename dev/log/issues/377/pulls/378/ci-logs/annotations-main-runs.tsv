@@ -1,0 +1,79 @@
+41395268880	go / test (1.26)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41395268880	go / test (1.27)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41395268880	cpp / test (apple-clang)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41395268880	release / csharp / pushToNuget	success	notice	Version 0.27.1 is already on NuGet.org, nothing to publish
+41395268880	release / js / publishToNpm	success	notice	Version 0.27.1 is already on npm, nothing to publish
+41395268880	release / python / publishToPyPI	success	notice	Version 0.27.1 is already on PyPI, nothing to publish
+41395268880	release / java / publishToMavenCentral	failure	failure	Process completed with exit code 1.
+41395268880	release / java / publishToMavenCentral	failure	failure	Maven Central version is absent and publishing credentials are missing: CENTRAL_USERNAME CENTRAL_TOKEN GPG_PRIVATE_KEY GPG_PASSPHRASE. Follow docs/releases.md; publishing cannot be skipped.
+41395268880	release / php / publishToPackagist	failure	failure	Process completed with exit code 1.
+41395268880	release / php / publishToPackagist	failure	failure	link-foundation/links-notation is not registered on Packagist. Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created.
+41395268880	release_audit / audit	failure	failure	Process completed with exit code 1.
+41395268880	release_audit / audit	failure	failure	php: 0.27.1 is absent from Packagist. To publish it, submit the repository once at https://packagist.org/packages/submit and configure the PACKAGIST_USERNAME and PACKAGIST_TOKEN secrets, then re-run the main CI run (docs/releases.md).
+41395268880	release_audit / audit	failure	failure	java: 0.27.1 is absent from Maven Central. To publish it, configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace, then re-run the main CI run (docs/releases.md).
+41424977881	cpp / test (apple-clang)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41424977881	go / test (1.26)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41424977881	go / test (1.27)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41424977881	release / csharp / pushToNuget	failure	failure	Process completed with exit code 1.
+41424977881	release / java / publishToMavenCentral	failure	failure	Process completed with exit code 1.
+41424977881	release / java / publishToMavenCentral	failure	failure	Maven Central version is absent and publishing credentials are missing: CENTRAL_USERNAME CENTRAL_TOKEN GPG_PRIVATE_KEY GPG_PASSPHRASE. Follow docs/releases.md; publishing cannot be skipped.
+41424977881	release / python / publishToPyPI	success	warning	A new Trusted Publisher for the currently running publishing workflow can be created by accessing the following link(s) while logged-in as an owner of the package(s):
+41424977881	release / python / publishToPyPI	success	warning	Trusted Publishers allows publishing packages to PyPI from automated environments like GitHub Actions without needing to use username/password combinations or API tokens to authenticate with PyPI. Read more: https://docs.pypi.org/trusted-publishers
+41424977881	release / php / publishToPackagist	failure	failure	Process completed with exit code 1.
+41424977881	release / php / publishToPackagist	failure	failure	link-foundation/links-notation is not registered on Packagist. Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created.
+41424977881	release_audit / audit	failure	failure	Process completed with exit code 1.
+41424977881	release_audit / audit	failure	failure	php: 0.28.0 is absent from Packagist. To publish it, submit the repository once at https://packagist.org/packages/submit and configure the PACKAGIST_USERNAME and PACKAGIST_TOKEN secrets, then re-run the main CI run (docs/releases.md).
+41424977881	release_audit / audit	failure	failure	java: 0.28.0 is absent from Maven Central. To publish it, configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace, then re-run the main CI run (docs/releases.md).
+41424977881	release_audit / audit	failure	failure	csharp: 0.28.0 is absent from NuGet. To publish it, configure the NUGET_API_KEY secret, then re-run the main CI run (docs/releases.md).
+41439293166	go / test (1.26)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41439293166	go / test (1.27)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41439293166	swift / differential	failure	failure	Process completed with exit code 1.
+41439293166	swift / test (macos)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41439293166	cpp / test (apple-clang)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41439293166	Swift	failure	failure	Process completed with exit code 1.
+41439293166	release_audit / audit	failure	failure	Process completed with exit code 1.
+41439293166	release_audit / audit	failure	failure	swift: 0.29.0 is absent from GitHub tags (SwiftPM). To publish it, check the publish-swift log for the 0.29.0 tag, then re-run the main CI run (docs/releases.md).
+41439293166	release_audit / audit	failure	failure	cpp: 0.29.0 is absent from GitHub Releases. To publish it, check the publish-cpp log for the cpp_0.29.0 release upload, then re-run the main CI run (docs/releases.md).
+41439293166	release_audit / audit	failure	failure	php: 0.29.0 is absent from Packagist. To publish it, submit the repository once at https://packagist.org/packages/submit and configure the PACKAGIST_USERNAME and PACKAGIST_TOKEN secrets, then re-run the main CI run (docs/releases.md).
+41439293166	release_audit / audit	failure	failure	java: 0.29.0 is absent from Maven Central. To publish it, configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace, then re-run the main CI run (docs/releases.md).
+41439293166	release_audit / audit	failure	failure	go: 0.29.0 is absent from Go proxy. To publish it, check the publish-go log for the go/v0.29.0 tag push, then re-run the main CI run (docs/releases.md).
+41439293166	release_audit / audit	failure	failure	csharp: 0.29.0 is absent from NuGet. To publish it, configure the NUGET_API_KEY secret, then re-run the main CI run (docs/releases.md).
+41439293166	release_audit / audit	failure	failure	rust: 0.29.0 is absent from crates.io. To publish it, configure crates.io trusted publishing for js.yml with CRATES_IO_TRUSTED_PUBLISHING=true, or the CARGO_TOKEN secret, then re-run the main CI run (docs/releases.md).
+41439293166	release_audit / audit	failure	failure	python: 0.29.0 is absent from PyPI. To publish it, configure PyPI trusted publishing for js.yml with PYPI_TRUSTED_PUBLISHING=true, or the PYPI_TOKEN secret, then re-run the main CI run (docs/releases.md).
+41439293166	release_audit / audit	failure	failure	js: 0.29.0 is absent from npm. To publish it, configure npm trusted publishing for js.yml or the NPM_TOKEN secret, then re-run the main CI run (docs/releases.md).
+41465947978	cpp / test (apple-clang)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41465947978	swift / test (macos)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41465947978	go / test (1.27)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41465947978	go / test (1.26)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41465947978	release_audit / audit	failure	failure	Process completed with exit code 1.
+41465947978	release_audit / audit	failure	failure	swift: 0.29.0 is absent from GitHub tags (SwiftPM). To publish it, check the publish-swift log for the 0.29.0 tag, then re-run the main CI run (docs/releases.md).
+41465947978	release_audit / audit	failure	failure	cpp: 0.29.0 is absent from GitHub Releases. To publish it, check the publish-cpp log for the cpp_0.29.0 release upload, then re-run the main CI run (docs/releases.md).
+41465947978	release_audit / audit	failure	failure	php: 0.29.0 is absent from Packagist. To publish it, submit the repository once at https://packagist.org/packages/submit and configure the PACKAGIST_USERNAME and PACKAGIST_TOKEN secrets, then re-run the main CI run (docs/releases.md).
+41465947978	release_audit / audit	failure	failure	java: 0.29.0 is absent from Maven Central. To publish it, configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace, then re-run the main CI run (docs/releases.md).
+41465947978	release_audit / audit	failure	failure	go: 0.29.0 is absent from Go proxy. To publish it, check the publish-go log for the go/v0.29.0 tag push, then re-run the main CI run (docs/releases.md).
+41465947978	release_audit / audit	failure	failure	csharp: 0.29.0 is absent from NuGet. To publish it, configure the NUGET_API_KEY secret, then re-run the main CI run (docs/releases.md).
+41465947978	release_audit / audit	failure	failure	rust: 0.29.0 is absent from crates.io. To publish it, configure crates.io trusted publishing for js.yml with CRATES_IO_TRUSTED_PUBLISHING=true, or the CARGO_TOKEN secret, then re-run the main CI run (docs/releases.md).
+41465947978	release_audit / audit	failure	failure	python: 0.29.0 is absent from PyPI. To publish it, configure PyPI trusted publishing for js.yml with PYPI_TRUSTED_PUBLISHING=true, or the PYPI_TOKEN secret, then re-run the main CI run (docs/releases.md).
+41465947978	release_audit / audit	failure	failure	js: 0.29.0 is absent from npm. To publish it, configure npm trusted publishing for js.yml or the NPM_TOKEN secret, then re-run the main CI run (docs/releases.md).
+41477660740	cpp / test (apple-clang)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	go / test (1.27)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41477660740	go / test (1.26)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41477660740	swift / test (macos)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	swift / test (macos)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	kotlin / ios	cancelled	failure	The job was not acquired by Runner of type hosted even after multiple attempts
+41477660740	kotlin / ios	cancelled	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	kotlin / ios	cancelled	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	kotlin / ios	cancelled	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	Kotlin	failure	failure	Process completed with exit code 1.
+41477660740	release_audit / audit	failure	failure	kotlin: 0.30.0 is absent from Maven Central. To publish it, configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	swift: 0.30.0 is absent from GitHub tags (SwiftPM). To publish it, check the publish-swift log for the 0.30.0 tag, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	cpp: 0.30.0 is absent from GitHub Releases. To publish it, check the publish-cpp log for the cpp_0.30.0 release upload, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	php: 0.30.0 is absent from Packagist. To publish it, submit the repository once at https://packagist.org/packages/submit and configure the PACKAGIST_USERNAME and PACKAGIST_TOKEN secrets, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	java: 0.30.0 is absent from Maven Central. To publish it, configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	go: 0.30.0 is absent from Go proxy. To publish it, check the publish-go log for the go/v0.30.0 tag push, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	csharp: 0.30.0 is absent from NuGet. To publish it, configure the NUGET_API_KEY secret, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	rust: 0.30.0 is absent from crates.io. To publish it, configure crates.io trusted publishing for js.yml with CRATES_IO_TRUSTED_PUBLISHING=true, or the CARGO_TOKEN secret, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	python: 0.30.0 is absent from PyPI. To publish it, configure PyPI trusted publishing for js.yml with PYPI_TRUSTED_PUBLISHING=true, or the PYPI_TOKEN secret, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	js: 0.30.0 is absent from npm. To publish it, configure npm trusted publishing for js.yml or the NPM_TOKEN secret, then re-run the main CI run (docs/releases.md).
+41477659797	latest-stable	failure	failure	Process completed with exit code 1.
+41475104458	latest-stable	failure	failure	Process completed with exit code 1.

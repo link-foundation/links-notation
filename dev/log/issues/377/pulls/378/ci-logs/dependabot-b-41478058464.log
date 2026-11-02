@@ -1,0 +1,125 @@
+Dependabot	Set up job	﻿2026-11-02T16:06:33.3670045Z Current runner version: '2.338.2'
+Dependabot	Set up job	2026-11-02T16:06:33.3695938Z ##[group]Runner Image Provisioner
+Dependabot	Set up job	2026-11-02T16:06:33.3696848Z Hosted Compute Agent
+Dependabot	Set up job	2026-11-02T16:06:33.3697530Z Version: 20261021.618
+Dependabot	Set up job	2026-11-02T16:06:33.3698769Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+Dependabot	Set up job	2026-11-02T16:06:33.3699604Z Build Date: 2026-10-21T00:45:21Z
+Dependabot	Set up job	2026-11-02T16:06:33.3700349Z Worker ID: {e8887920-1b9e-4549-89c3-13943f8f9f39}
+Dependabot	Set up job	2026-11-02T16:06:33.3701098Z Region: eastus
+Dependabot	Set up job	2026-11-02T16:06:33.3701769Z Cloud: Azure
+Dependabot	Set up job	2026-11-02T16:06:33.3702379Z ##[endgroup]
+Dependabot	Set up job	2026-11-02T16:06:33.3704012Z ##[group]Operating System
+Dependabot	Set up job	2026-11-02T16:06:33.3704692Z Ubuntu
+Dependabot	Set up job	2026-11-02T16:06:33.3705294Z 26.04.1
+Dependabot	Set up job	2026-11-02T16:06:33.3705883Z LTS
+Dependabot	Set up job	2026-11-02T16:06:33.3706436Z ##[endgroup]
+Dependabot	Set up job	2026-11-02T16:06:33.3707076Z ##[group]Runner Image
+Dependabot	Set up job	2026-11-02T16:06:33.3707747Z Image: ubuntu-26.04
+Dependabot	Set up job	2026-11-02T16:06:33.3708834Z Version: 20261025.179.1
+Dependabot	Set up job	2026-11-02T16:06:33.3710002Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+Dependabot	Set up job	2026-11-02T16:06:33.3711862Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+Dependabot	Set up job	2026-11-02T16:06:33.3712860Z ##[endgroup]
+Dependabot	Set up job	2026-11-02T16:06:33.3714597Z ##[group]GITHUB_TOKEN Permissions
+Dependabot	Set up job	2026-11-02T16:06:33.3716753Z Contents: read
+Dependabot	Set up job	2026-11-02T16:06:33.3717548Z Metadata: read
+Dependabot	Set up job	2026-11-02T16:06:33.3718549Z Packages: read
+Dependabot	Set up job	2026-11-02T16:06:33.3719262Z ##[endgroup]
+Dependabot	Set up job	2026-11-02T16:06:33.3721855Z Secret source: None
+Dependabot	Set up job	2026-11-02T16:06:33.3722988Z Cache mode: read
+Dependabot	Set up job	2026-11-02T16:06:33.3723986Z Prepare workflow directory
+Dependabot	Set up job	2026-11-02T16:06:33.4056855Z Prepare all required actions
+Dependabot	Set up job	2026-11-02T16:06:33.4104825Z Getting action download info
+Dependabot	Set up job	2026-11-02T16:06:33.6300964Z Download action repository 'github/dependabot-action@main' (SHA:de7cd8d335c6983d5fa80c63106206a283c34ff4)
+Dependabot	Set up job	2026-11-02T16:06:33.9103508Z Complete job name: Dependabot
+Dependabot	Create job directory	﻿2026-11-02T16:06:34.0026504Z ##[group]Run mkdir -p  ./dependabot-job-1674697008-1793635537
+Dependabot	Create job directory	2026-11-02T16:06:34.0027449Z ^[[36;1mmkdir -p  ./dependabot-job-1674697008-1793635537^[[0m
+Dependabot	Create job directory	2026-11-02T16:06:34.0060793Z shell: /usr/bin/bash -e {0}
+Dependabot	Create job directory	2026-11-02T16:06:34.0061656Z ##[endgroup]
+Dependabot	Run Dependabot	﻿2026-11-02T16:06:34.0376045Z ##[group]Run github/dependabot-action@main
+Dependabot	Run Dependabot	2026-11-02T16:06:34.0376731Z env:
+Dependabot	Run Dependabot	2026-11-02T16:06:34.0377183Z   DEPENDABOT_DISABLE_CLEANUP: 1
+Dependabot	Run Dependabot	2026-11-02T16:06:34.0378072Z   DEPENDABOT_ENABLE_CONNECTIVITY_CHECK: 0
+Dependabot	Run Dependabot	2026-11-02T16:06:34.0382173Z   GITHUB_TOKEN: ***
+Dependabot	Run Dependabot	2026-11-02T16:06:34.0383045Z   GITHUB_DEPENDABOT_JOB_TOKEN: ***
+Dependabot	Run Dependabot	2026-11-02T16:06:34.0383965Z   GITHUB_DEPENDABOT_CRED_TOKEN: ***
+Dependabot	Run Dependabot	2026-11-02T16:06:34.0384557Z   GITHUB_REGISTRIES_PROXY: ***
+Dependabot	Run Dependabot	2026-11-02T16:06:34.0385086Z ##[endgroup]
+Dependabot	Run Dependabot	2026-11-02T16:06:34.4105855Z 🤖 ~ starting update ~
+Dependabot	Run Dependabot	2026-11-02T16:06:34.4125696Z Fetching job details
+Dependabot	Run Dependabot	2026-11-02T16:06:35.1833129Z Adding GitHub Packages credential
+Dependabot	Run Dependabot	2026-11-02T16:06:35.1835854Z ##[group]Pulling updater images
+Dependabot	Run Dependabot	2026-11-02T16:06:35.1928890Z Pulling image ghcr.io/dependabot/dependabot-updater-npm:9eade5e74219dc0599ffe5ea8b587da8703ee7f8 (attempt 1)...
+Dependabot	Run Dependabot	2026-11-02T16:06:35.2609231Z Successfully sent metric (dependabot.action.ghcr_image_pull) to remote API endpoint
+Dependabot	Run Dependabot	2026-11-02T16:06:54.2861449Z Pulled image ghcr.io/dependabot/dependabot-updater-npm:9eade5e74219dc0599ffe5ea8b587da8703ee7f8
+Dependabot	Run Dependabot	2026-11-02T16:06:54.2881886Z Pulling image ghcr.io/dependabot/proxy:v2.0.20261027153815@sha256:28df67a345e3d3fea99a053fc5cc37a6bfa39a330e35861fe560ccf1d992ba7c (attempt 1)...
+Dependabot	Run Dependabot	2026-11-02T16:06:54.3270508Z Successfully sent metric (dependabot.action.ghcr_image_pull) to remote API endpoint
+Dependabot	Run Dependabot	2026-11-02T16:06:54.7318629Z Pulled image ghcr.io/dependabot/proxy:v2.0.20261027153815@sha256:28df67a345e3d3fea99a053fc5cc37a6bfa39a330e35861fe560ccf1d992ba7c
+Dependabot	Run Dependabot	2026-11-02T16:06:54.7321224Z ##[endgroup]
+Dependabot	Run Dependabot	2026-11-02T16:06:54.7324148Z Starting update process
+Dependabot	Run Dependabot	2026-11-02T16:06:56.0095558Z Created proxy container: c4e1cf698cd2ff29ca6b03d8c526ad9f51525419392423e615dc73101dfbcad6
+Dependabot	Run Dependabot	2026-11-02T16:06:56.5898940Z   proxy | 2026/11/02 16:06:56 proxy starting, commit: af8b1c64c4da1b5851ac31c617bed6f5e03ecc1a
+Dependabot	Run Dependabot	2026-11-02T16:06:56.5904375Z   proxy | 2026/11/02 16:06:56 Listening (:1080)
+Dependabot	Run Dependabot	2026-11-02T16:06:56.7712881Z Created container: 0cd5a9947b259b93b0ba6be6f6f14b01b6ccf23825460f86009d3236b7eeaf74
+Dependabot	Run Dependabot	2026-11-02T16:06:56.8868913Z Started container 0cd5a9947b259b93b0ba6be6f6f14b01b6ccf23825460f86009d3236b7eeaf74
+Dependabot	Run Dependabot	2026-11-02T16:06:56.9274126Z updater | Updating certificates in /etc/ssl/certs...
+Dependabot	Run Dependabot	2026-11-02T16:06:57.5222121Z updater | rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+Dependabot	Run Dependabot	2026-11-02T16:06:57.5266471Z updater | 1 added, 0 removed; done.
+Dependabot	Run Dependabot	2026-11-02T16:06:57.5267472Z Running hooks in /etc/ca-certificates/update.d...
+Dependabot	Run Dependabot	2026-11-02T16:06:57.5276887Z updater | done.
+Dependabot	Run Dependabot	2026-11-02T16:06:57.8101955Z updater | fetch_files command is no longer used directly
+Dependabot	Run Dependabot	2026-11-02T16:06:59.6526461Z updater | 2026/11/02 16:06:59 INFO <job_1674697008> Starting job processing
+Dependabot	Run Dependabot	2026-11-02T16:06:59.6544949Z updater | 2026/11/02 16:06:59 INFO <job_1674697008> Job definition: {"job":{"command":"security","allowed-updates":[{"dependency-type":"direct","update-type":"all"}],"commit-message-options":{"prefix":null,"prefix-development":null,"include-scope":null},"credentials-metadata":[{"type":"git_source","host":"github.com"}],"debug":null,"dependencies":["glob"],"dependency-groups":[],"dependency-group-to-refresh":null,"existing-pull-requests":[],"existing-group-pull-requests":[],"experiments":{"record-ecosystem-versions":true,"record-update-job-unknown-error":true,"azure-registry-backup":true,"automatic-github-packages-auth":true,"blocked-versions":true,"workflow-job-summary":true,"async-retry":true,"enable-npmrc-credential-generation":true,"proxy-read-only-git-credentials":true,"proxy-egress-observe":true,"proxy-egress-enforce":true,"github-actions-lockfile":true,"maven-wrapper-updater":true,"prioritize-scm-source":true,"enable-yarn-berry-conflicting-dependencies":true},"ignore-conditions":[],"lockfile-only":false,"package-manager":"npm_and_yarn","requirements-update-strategy":null,"reject-external-code":false,"security-advisories":[{"dependency-name":"glob","patched-versions":[],"unaffected-versions":[],"affected-versions":[">= 9.0.0 <= 14.0.1"]},{"dependency-name":"glob","patched-versions":[],"unaffected-versions":[],"affected-versions":[">= 11.0.0 < 11.1.0",">= 10.2.0 < 10.5.0"]}],"security-updates-only":true,"source":{"provider":"github","repo":"link-foundation/links-notation","branch":null,"api-endpoint":"https://api.github.com/","hostname":"github.com","directories":["/kotlin/kotlin-js-store"]},"updating-a-pull-request":false,"update-subdependencies":false,"vendor-dependencies":false,"enable-beta-ecosystems":false,"repo-private":true,"multi-ecosystem-update":false,"exclude-paths":[]}}
+Dependabot	Run Dependabot	2026-11-02T16:06:59.7799333Z   proxy | 2026/11/02 16:06:59 [002] GET https://github.com:443/link-foundation/links-notation.git/info/refs?service=git-upload-pack
+Dependabot	Run Dependabot	2026-11-02T16:06:59.7803642Z   proxy | 2026/11/02 16:06:59 [002] * authenticating git server request (host: github.com)
+Dependabot	Run Dependabot	2026-11-02T16:06:59.8897083Z   proxy | 2026/11/02 16:06:59 [002] 200 https://github.com:443/link-foundation/links-notation.git/info/refs?service=git-upload-pack
+Dependabot	Run Dependabot	2026-11-02T16:06:59.9734989Z updater | 2026/11/02 16:06:59 INFO <job_1674697008> Started process PID: 999 with command: {} git clone --no-tags --depth 1 --recurse-submodules --shallow-submodules https://github.com/link-foundation/links-notation /home/dependabot/dependabot-updater/repo {}
+Dependabot	Run Dependabot	2026-11-02T16:07:00.0224605Z   proxy | 2026/11/02 16:07:00 [004] GET https://github.com:443/link-foundation/links-notation/info/refs?service=git-upload-pack
+Dependabot	Run Dependabot	2026-11-02T16:07:00.0823580Z   proxy | 2026/11/02 16:07:00 [004] * authenticating git server request (host: github.com)
+Dependabot	Run Dependabot	2026-11-02T16:07:00.0824997Z   proxy | 2026/11/02 16:07:00 [004] 200 https://github.com:443/link-foundation/links-notation/info/refs?service=git-upload-pack
+Dependabot	Run Dependabot	2026-11-02T16:07:00.0832253Z   proxy | 2026/11/02 16:07:00 [005] POST https://github.com:443/link-foundation/links-notation/git-upload-pack
+Dependabot	Run Dependabot	2026-11-02T16:07:00.0839900Z   proxy | 2026/11/02 16:07:00 [005] * authenticating git server request (host: github.com)
+Dependabot	Run Dependabot	2026-11-02T16:07:00.1520219Z   proxy | 2026/11/02 16:07:00 [005] 200 https://github.com:443/link-foundation/links-notation/git-upload-pack
+Dependabot	Run Dependabot	2026-11-02T16:07:00.1579123Z   proxy | 2026/11/02 16:07:00 [006] POST https://github.com:443/link-foundation/links-notation/git-upload-pack
+Dependabot	Run Dependabot	2026-11-02T16:07:00.1581125Z 2026/11/02 16:07:00 [006] * authenticating git server request (host: github.com)
+Dependabot	Run Dependabot	2026-11-02T16:07:00.5805333Z   proxy | 2026/11/02 16:07:00 [006] 200 https://github.com:443/link-foundation/links-notation/git-upload-pack
+Dependabot	Run Dependabot	2026-11-02T16:07:01.2853492Z updater | 2026/11/02 16:07:01 INFO <job_1674697008> Process PID: 999 completed with status: pid 999 exit 0
+Dependabot	Run Dependabot	2026-11-02T16:07:01.2854243Z updater | 2026/11/02 16:07:01 INFO <job_1674697008> Total execution time: 1.31 seconds
+Dependabot	Run Dependabot	2026-11-02T16:07:01.2860648Z updater | 2026/11/02 16:07:01 INFO <job_1674697008> Started process PID: 1041 with command: {} git -C /home/dependabot/dependabot-updater/repo ls-files --stage {}
+Dependabot	Run Dependabot	2026-11-02T16:07:01.3112751Z updater | 2026/11/02 16:07:01 INFO <job_1674697008> Process PID: 1041 completed with status: pid 1041 exit 0
+Dependabot	Run Dependabot	2026-11-02T16:07:01.3113927Z 2026/11/02 16:07:01 INFO <job_1674697008> Total execution time: 0.03 seconds
+Dependabot	Run Dependabot	2026-11-02T16:07:01.3677186Z updater | 2026/11/02 16:07:01 INFO <job_1674697008> Started process PID: 1134 with command: {} git lfs pull --include .yarn,./.yarn/cache {}
+Dependabot	Run Dependabot	2026-11-02T16:07:01.4065799Z updater | 2026/11/02 16:07:01 INFO <job_1674697008> Process PID: 1134 completed with status: pid 1134 exit 0
+Dependabot	Run Dependabot	2026-11-02T16:07:01.4067050Z 2026/11/02 16:07:01 INFO <job_1674697008> Total execution time: 0.04 seconds
+Dependabot	Run Dependabot	2026-11-02T16:07:01.4575577Z updater | 2026/11/02 16:07:01 INFO <job_1674697008> Started process PID: 1253 with command: {} git rev-parse HEAD {}
+Dependabot	Run Dependabot	2026-11-02T16:07:01.4619112Z updater | 2026/11/02 16:07:01 INFO <job_1674697008> Process PID: 1253 completed with status: pid 1253 exit 0
+Dependabot	Run Dependabot	2026-11-02T16:07:01.4620552Z 2026/11/02 16:07:01 INFO <job_1674697008> Total execution time: 0.0 seconds
+Dependabot	Run Dependabot	2026-11-02T16:07:01.4631021Z updater | 2026/11/02 16:07:01 ERROR <job_1674697008> Error during file fetching; aborting: /kotlin/kotlin-js-store/package.json not found
+Dependabot	Run Dependabot	2026-11-02T16:07:01.5626499Z   proxy | 2026/11/02 16:07:01 [008] POST /update_jobs/1674697008/record_update_job_error
+Dependabot	Run Dependabot	2026-11-02T16:07:01.9281005Z   proxy | 2026/11/02 16:07:01 [008] 204 /update_jobs/1674697008/record_update_job_error
+Dependabot	Run Dependabot	2026-11-02T16:07:02.0113697Z   proxy | 2026/11/02 16:07:02 [010] PATCH /update_jobs/1674697008/mark_as_processed
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5757094Z   proxy | 2026/11/02 16:07:02 [010] 204 /update_jobs/1674697008/mark_as_processed
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5770681Z updater | 2026/11/02 16:07:02 INFO <job_1674697008> Finished job processing
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5820732Z updater | 2026/11/02 16:07:02 INFO Results:
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5821683Z Dependabot encountered '1' error(s) during execution, please check the logs for more details.
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5822845Z +--------------------------------------------------------------------------------------------+
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5823755Z |                                           Errors                                           |
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5824704Z +---------------------------+----------------------------------------------------------------+
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5825672Z | Type                      | Details                                                        |
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5826617Z +---------------------------+----------------------------------------------------------------+
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5827564Z | dependency_file_not_found | {                                                              |
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5828872Z |                           |   "message": "/kotlin/kotlin-js-store/package.json not found", |
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5829819Z |                           |   "file-path": "/kotlin/kotlin-js-store/package.json"          |
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5830659Z |                           | }                                                              |
+Dependabot	Run Dependabot	2026-11-02T16:07:02.5831959Z +---------------------------+----------------------------------------------------------------+
+Dependabot	Run Dependabot	2026-11-02T16:07:02.7120748Z Failure running container 0cd5a9947b259b93b0ba6be6f6f14b01b6ccf23825460f86009d3236b7eeaf74: Error: Command failed with exit code 1: /bin/sh -c $DEPENDABOT_HOME/dependabot-updater/bin/run update_files
+Dependabot	Run Dependabot	2026-11-02T16:07:03.0611304Z Cleaned up container 0cd5a9947b259b93b0ba6be6f6f14b01b6ccf23825460f86009d3236b7eeaf74
+Dependabot	Run Dependabot	2026-11-02T16:07:03.0719842Z   proxy | 2026/11/02 16:07:03 0/6 calls cached (0%)
+Dependabot	Run Dependabot	2026-11-02T16:07:03.0721727Z 2026/11/02 16:07:03 Posting metrics to remote API endpoint
+Dependabot	Run Dependabot	2026-11-02T16:07:03.7541737Z ##[error]Dependabot encountered an error performing the update
+Dependabot	Run Dependabot	
+Dependabot	Run Dependabot	Error: The updater encountered one or more errors.
+Dependabot	Run Dependabot	
+Dependabot	Run Dependabot	For more information see: https://github.com/link-foundation/links-notation/network/updates/1674697008 (write access to the repository is required to view the log)
+Dependabot	Run Dependabot	2026-11-02T16:07:03.7550733Z 🤖 ~ finished: error reported to Dependabot ~
+Dependabot	Post Run Dependabot	﻿2026-11-02T16:07:03.7704562Z Post job cleanup.
+Dependabot	Complete job	﻿2026-11-02T16:07:03.9229259Z Cleaning up orphan processes

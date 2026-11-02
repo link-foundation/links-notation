@@ -1,0 +1,205 @@
+name: Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1'
+
+permissions:
+  contents: read
+
+# Configure git init before actions/checkout runs.
+env:
+  GIT_CONFIG_COUNT: '1'
+  GIT_CONFIG_KEY_0: init.defaultBranch
+  GIT_CONFIG_VALUE_0: main
+
+jobs:
+  codeql:
+    name: CodeQL (${{ matrix.language }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-codeql-${{ matrix.language }}
+      cancel-in-progress: true
+    permissions:
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [csharp, actions, javascript-typescript]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+      - uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
+        with:
+          output: artifacts/sarif
+      - name: Require complete clean SARIF
+        run: node scripts/security-gates.mjs sarif artifacts/sarif
+      - name: Retain original SARIF
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: sarif-${{ matrix.language }}-${{ github.sha }}
+          path: artifacts/sarif
+          if-no-files-found: error
+
+  dependency-review:
+    name: Dependency Review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5
+        with:
+          fail-on-severity: high
+          comment-summary-in-pr: on-failure
+
+  audit:
+    name: Full Dependency Audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+      - name: Audit every project and all transitive dependencies
+        run: node scripts/audit-dependencies.mjs
+      - name: Retain exact dependency graph and audit
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: dependency-audit-${{ github.sha }}
+          path: artifacts/security
+          if-no-files-found: error
+
+  helper-checks:
+    name: Helper Checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: '1.4.4'
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+      - name: Run helper regressions and quality policy
+        run: |
+          bun install --frozen-lockfile
+          bun run check
+          bun test scripts/*.test.mjs
+          node scripts/audit-javascript.mjs
+          bash experiments/issue-82/verify-local-package.sh
+      - name: Retain helper dependency and tested package evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: helper-evidence-${{ github.sha }}
+          path: artifacts/security
+          if-no-files-found: error
+
+  artifact-upload:
+    name: Artifact Upload Probe
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      digest: ${{ steps.upload.outputs.artifact-digest }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Create deterministic test bytes
+        run: >-
+          node --input-type=module -e
+          "import { makeZip } from './experiments/issue-82/zip-fixture.mjs';
+          import { writeFileSync } from 'node:fs';
+          writeFileSync('probe.zip', makeZip([{name: 'probe.txt', bytes: 'artifact integrity probe\n'}]));"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        id: upload
+        env:
+          NODE_OPTIONS: --throw-deprecation
+        with:
+          # archive:false registers the original filename, ignoring name.
+          name: probe.zip
+          path: probe.zip
+          archive: false
+          if-no-files-found: error
+
+  artifact-download:
+    name: Artifact Download Probe
+    needs: artifact-upload
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        env:
+          NODE_OPTIONS: --throw-deprecation
+        with:
+          name: probe.zip
+          path: downloaded
+          skip-decompress: true
+          digest-mismatch: error
+      - name: Verify raw bytes and recorded digest
+        env:
+          EXPECTED_SHA256: ${{ needs.artifact-upload.outputs.digest }}
+        run: |
+          mkdir -p artifacts/security
+          printf 'SHA=%s\nRUN=%s/%s/actions/runs/%s\n' "$GITHUB_SHA" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > artifacts/security/artifact-run.txt
+          printf '%s\n' "$EXPECTED_SHA256" > artifacts/security/artifact-expected.sha256
+          printf 'artifact integrity probe\n' > expected.txt
+          printf '%s  downloaded/probe.zip\n' "$EXPECTED_SHA256" | sha256sum --check
+          ARTIFACT_SHA256="$EXPECTED_SHA256" node --throw-deprecation scripts/zip-archive.mjs downloaded/probe.zip extracted
+          cmp expected.txt extracted/probe.txt
+          sha256sum downloaded/probe.zip extracted/probe.txt > artifacts/security/artifact-actual.sha256
+      - name: Retain artifact round-trip evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: artifact-integrity-${{ github.sha }}
+          path: artifacts/security
+          if-no-files-found: error
+
+  security-status:
+    name: Security Status
+    needs: [codeql, audit, helper-checks, artifact-upload, artifact-download, dependency-review]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Require every expected security result
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          node scripts/security-gates.mjs jobs codeql audit helper-checks artifact-upload artifact-download
+          if [ "$EVENT_NAME" = pull_request ]; then
+            node scripts/security-gates.mjs jobs dependency-review
+          fi

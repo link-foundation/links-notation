@@ -1,0 +1,29 @@
+name: Detect C# layout
+description: Locate the standalone or csharp-subdirectory project root
+outputs:
+  root:
+    description: C# project root
+    value: ${{ steps.layout.outputs.root }}
+  multi-language:
+    description: Whether this is a multi-language repository
+    value: ${{ steps.layout.outputs.multi-language }}
+runs:
+  using: composite
+  steps:
+    - id: layout
+      shell: bash
+      run: |
+        set -euo pipefail
+        if compgen -G "*.csproj" > /dev/null || compgen -G "*.sln" > /dev/null || find src -maxdepth 5 -name "*.csproj" -print -quit 2>/dev/null | grep -q .; then
+          CSHARP_ROOT="."
+          MULTI_LANGUAGE="false"
+        elif find csharp -maxdepth 6 -name "*.csproj" -print -quit 2>/dev/null | grep -q .; then
+          CSHARP_ROOT="csharp"
+          MULTI_LANGUAGE="true"
+        else
+          echo "::error::Could not find a C# project at the repository root or under csharp/"
+          exit 1
+        fi
+        echo "root=$CSHARP_ROOT" >> "$GITHUB_OUTPUT"
+        echo "multi-language=$MULTI_LANGUAGE" >> "$GITHUB_OUTPUT"
+        echo "Detected C# layout: root=$CSHARP_ROOT, multi-language=$MULTI_LANGUAGE"

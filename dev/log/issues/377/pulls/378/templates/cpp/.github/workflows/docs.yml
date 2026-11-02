@@ -1,0 +1,163 @@
+name: Docs
+
+# Builds the Doxygen API reference on every push and pull request. The
+# Doxyfile sets WARN_AS_ERROR = FAIL_ON_WARNINGS with WARN_IF_UNDOCUMENTED, so
+# an undocumented public symbol or a broken @ref fails this workflow before
+# merge. The HTML (and the XML for Sphinx/Breathe) is kept as a workflow
+# artifact; on pushes to main it is published to GitHub Pages once deployment
+# is explicitly enabled.
+#
+# One-time setup: in the repository's Settings -> Pages, set Source to
+# "GitHub Actions", then set the DEPLOY_GITHUB_PAGES repository variable to
+# "true". Without the variable, deployment is skipped with a notice. Without
+# Pages configured, actions/deploy-pages fails with "Get Pages site failed".
+#
+# Multi-language repositories (C++ under cpp/) publish the reference under
+# <pages-url>/cpp/ with a redirect at the root. A Pages site has exactly one
+# source, so when another language also deploys Pages, build both sites into
+# one artifact in a single workflow instead of enabling DEPLOY_GITHUB_PAGES
+# here. See docs/ci-cd.md "Documentation".
+#
+# No `paths:` filter on purpose: a skipped workflow never reports a status, so
+# a required docs check would block every pull request that does not touch
+# the filtered paths. Doxygen takes seconds.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+# Least-privilege default; the write scopes GitHub Pages needs are granted
+# per job, to the deployment job that actually publishes.
+permissions:
+  contents: read
+
+env:
+  GIT_CONFIG_COUNT: '1'
+  GIT_CONFIG_KEY_0: init.defaultBranch
+  GIT_CONFIG_VALUE_0: main
+
+jobs:
+  build:
+    name: Build Doxygen docs
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-build
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Install Doxygen
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends doxygen
+          doxygen --version
+
+      - name: Locate the C++ project
+        run: |
+          {
+            echo "CPP_DIR=$(python3 scripts/get_version.py --print cpp_root)"
+            echo "DOXYGEN_PROJECT_NUMBER=$(python3 scripts/get_version.py --print version)"
+            echo "MULTI_LANGUAGE=$(python3 scripts/get_version.py --print multi_language)"
+          } >> "$GITHUB_ENV"
+
+      - name: Build API reference
+        working-directory: ${{ env.CPP_DIR }}
+        run: |
+          doxygen Doxyfile
+          # Doxygen can exit 0 after writing nothing (for example an INPUT
+          # that matches no file), so check the outputs that are published.
+          test -s docs/api/html/index.html
+          test -s docs/api/xml/index.xml
+
+      - name: Assemble site
+        env:
+          HTML_DIR: ${{ env.CPP_DIR }}/docs/api/html
+        run: |
+          if [ "$MULTI_LANGUAGE" = "true" ]; then
+            mkdir -p _site
+            cp -R "$HTML_DIR" _site/cpp
+            printf '<!doctype html><meta http-equiv="refresh" content="0; url=cpp/index.html">\n' > _site/index.html
+          else
+            cp -R "$HTML_DIR" _site
+          fi
+          touch _site/.nojekyll
+          find _site -maxdepth 2 -name 'index.html' -print
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: api-reference
+          path: |
+            _site
+            ${{ env.CPP_DIR }}/docs/api/xml
+          if-no-files-found: error
+          include-hidden-files: true
+
+      - name: Report skipped GitHub Pages deployment
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.DEPLOY_GITHUB_PAGES != 'true'
+        run: echo "::notice::Skipping GitHub Pages deployment. To enable publishing, set Settings -> Pages -> Source = GitHub Actions, then add repository variable DEPLOY_GITHUB_PAGES=true."
+
+      - name: Upload GitHub Pages artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.DEPLOY_GITHUB_PAGES == 'true'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
+        with:
+          path: _site
+          include-hidden-files: true
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: [build]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.DEPLOY_GITHUB_PAGES == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: repository-main-write
+      cancel-in-progress: false
+      queue: max
+    permissions:
+      contents: read
+      # actions/deploy-pages publishes the artifact using an OIDC token.
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
+
+      - name: Deploy Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
+
+  # Terminal status gate: GitHub reports jobs killed by timeout-minutes as
+  # cancelled. Observe every other job so a timeout on main becomes a visible
+  # failure instead of a grey run, while a run that was superseded by a newer
+  # commit is recognised as expected churn.
+  pipeline-status:
+    name: Pipeline Status
+    needs:
+      - build
+      - deploy
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Check aggregate pipeline status
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+        run: bash scripts/check-pipeline-status.sh

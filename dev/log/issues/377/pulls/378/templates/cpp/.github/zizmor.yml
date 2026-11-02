@@ -1,0 +1,11 @@
+# zizmor configuration for the workflow security audit run by
+# `.github/workflows/workflows.yml`.
+#
+# Blanket policy: all remote actions must be pinned to a commit hash, because
+# a mutable tag or branch of a repository we do not control is arbitrary code
+# execution in any job that holds credentials. Dependabot updates these pins.
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        '*': hash-pin

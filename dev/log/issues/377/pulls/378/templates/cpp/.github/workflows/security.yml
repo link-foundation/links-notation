@@ -1,0 +1,218 @@
+name: Security
+
+# CodeQL findings gate, full ecosystem dependency audits on every event, and
+# an additional dependency-diff review on eligible pull requests.
+#
+# C/C++ is traced through the real C++20 build, including all consumer examples
+# and the Conan package test. Inferring flags in build-mode:none leaves partial
+# extraction when C++17 is guessed or external test headers are unavailable.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  GIT_CONFIG_COUNT: '1'
+  GIT_CONFIG_KEY_0: init.defaultBranch
+  GIT_CONFIG_VALUE_0: main
+
+jobs:
+  codeql:
+    name: CodeQL (${{ matrix.language }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-codeql-${{ matrix.language }}
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    permissions:
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: c-cpp
+            build-mode: manual
+          - language: actions
+            build-mode: none
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Build pinned external libraries before compiler tracing
+        if: matrix.build-mode == 'manual'
+        env:
+          CMAKE_BUILD_PARALLEL_LEVEL: '2'
+        run: python3 scripts/build_codeql.py --prepare-dependencies --dependency-dir "$RUNNER_TEMP/codeql-dependencies"
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+          queries: security-extended,security-and-quality
+
+      - name: Build all C++ entry points with their real compiler flags
+        if: matrix.build-mode == 'manual'
+        env:
+          CMAKE_BUILD_PARALLEL_LEVEL: '2'
+        run: python3 scripts/build_codeql.py
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
+        with:
+          category: /language:${{ matrix.language }}
+          output: security-reports/codeql
+
+      - name: Reject CodeQL findings and incomplete scans
+        if: always()
+        run: python3 scripts/check_sarif.py security-reports/codeql
+
+      - name: Retain CodeQL reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: codeql-${{ matrix.language }}
+          path: security-reports/codeql
+          if-no-files-found: error
+
+  python-audit:
+    name: Full Python Dependency Audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-python-audit
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.13'
+
+      - name: Install pinned audit tool
+        run: python3 -m pip install --disable-pip-version-check -r scripts/requirements-security.txt
+
+      - name: Audit all CI tools and their transitive dependencies
+        run: |
+          mkdir -p security-reports/python
+          python3 -m pip_audit --strict \
+            -r scripts/requirements-ci.txt -r scripts/requirements-security.txt \
+            --format=json --output=security-reports/python/pip-audit.json
+
+      - name: Validate full Python audit report
+        if: always()
+        run: python3 scripts/check_python_audit.py security-reports/python/pip-audit.json
+
+      - name: Retain resolved Python coordinates and verdicts
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: python-dependency-audit
+          path: security-reports/python
+          if-no-files-found: error
+
+  native-audit:
+    name: Full Native Dependency Audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-native-audit
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.13'
+
+      - name: Install pinned Conan and detect profile
+        run: |
+          python3 -m pip install --disable-pip-version-check -r <(sed -n '/^conan==/p' scripts/requirements-ci.txt)
+          conan profile detect --force
+
+      - name: Resolve and audit every native dependency
+        env:
+          CONAN_AUDIT_PROVIDER_TOKEN_CONANCENTER: ${{ secrets.CONAN_AUDIT_PROVIDER_TOKEN_CONANCENTER }}
+        run: python3 scripts/audit_native_dependencies.py
+
+      - name: Retain native graphs, coordinates and coverage status
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: native-dependency-audit
+          path: security-reports/native
+          if-no-files-found: error
+
+  dependency-review:
+    name: Dependency Review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-dependency-review
+      cancel-in-progress: true
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      # The review needs the dependency graph, a repository setting that a
+      # repository created from this template starts without; skip with a
+      # warning instead of failing every pull request until it is enabled.
+      - name: Check that the dependency graph is enabled
+        id: graph
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: bash scripts/check-dependency-review-support.sh
+
+      - name: Review dependency changes
+        if: steps.graph.outputs.supported == 'true'
+        uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+        with:
+          fail-on-severity: high
+          comment-summary-in-pr: on-failure
+
+  # Terminal status gate: GitHub reports jobs killed by timeout-minutes as
+  # cancelled. Observe every other job so a timeout on main becomes a visible
+  # failure instead of a grey run, while a run that was superseded by a newer
+  # commit is recognised as expected churn.
+  pipeline-status:
+    name: Pipeline Status
+    needs:
+      - codeql
+      - python-audit
+      - native-audit
+      - dependency-review
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Check aggregate pipeline status
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+        run: bash scripts/check-pipeline-status.sh

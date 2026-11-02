@@ -1,0 +1,298 @@
+release / java / publishToMavenCentral	UNKNOWN STEP	﻿2026-11-02T10:09:18.2801449Z Current runner version: '2.338.2'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2827222Z ##[group]Runner Image Provisioner
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2828413Z Hosted Compute Agent
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2829091Z Version: 20261021.618
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2829731Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2830462Z Build Date: 2026-10-21T00:45:21Z
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2831235Z Worker ID: {26c02cf3-5f29-4130-b7d1-2205b316945c}
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2831944Z Region: southcentralus
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2832543Z Cloud: Azure
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2833096Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2834665Z ##[group]Operating System
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2835420Z Ubuntu
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2835942Z 26.04.1
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2836473Z LTS
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2836990Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2837590Z ##[group]Runner Image
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2838481Z Image: ubuntu-26.04
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2839048Z Version: 20261025.179.1
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2840349Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2841934Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2842955Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2844026Z ##[group]GITHUB_TOKEN Permissions
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2846187Z Contents: read
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2846837Z Metadata: read
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2847492Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2849901Z Secret source: Actions
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2850940Z Cache mode: write
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.2851915Z Prepare workflow directory
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.4908152Z Prepare all required actions
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.4960633Z Getting action download info
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.7703091Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:18.8697066Z Download action repository 'actions/setup-java@v6.1.0' (SHA:b843ebf9b913146b38da2eaa7aeddf76074ae1ad)
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:19.6945737Z Uses: link-foundation/links-notation/.github/workflows/publish-java.yml@refs/heads/main (8ea4d6cca4bc08acaf69ad6927d9256ffc47a944)
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:19.6952059Z ##[group] Inputs
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:19.6953136Z   verbose: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:19.6953653Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:19.6954257Z Complete job name: release / java / publishToMavenCentral
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1061049Z ##[group]Run actions/checkout@v7.0.1
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1062766Z with:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1063894Z   persist-credentials: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1065174Z   submodules: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1066417Z   repository: link-foundation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1078779Z   token: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1079929Z   ssh-strict: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1081096Z   ssh-user: git
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1082204Z   clean: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1083383Z   sparse-checkout-cone-mode: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1084796Z   fetch-depth: 1
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1085945Z   fetch-tags: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1087126Z   show-progress: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1088446Z   lfs: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1089585Z   set-safe-directory: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1090951Z   allow-unsafe-pr-checkout: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1092542Z env:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1104139Z   GITHUB_TOKEN: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1105235Z   CI_VERBOSE: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.1106284Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4165169Z Syncing repository: link-foundation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4169599Z ##[group]Getting Git version info
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4171957Z Working directory is '/home/runner/work/links-notation/links-notation'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4175372Z [command]/usr/bin/git version
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4177107Z git version 2.56.0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4202960Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4213699Z Temporarily overriding HOME='/home/runner/work/_temp/37e4293e-86da-4f27-9ca2-28191d20be7d' before making global git config changes
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4219647Z Adding repository directory to the temporary git global config as a safe directory
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4224720Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4293080Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4297612Z ##[group]Determining repository object format
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4301453Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4304408Z ##[group]Initializing the repository
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4307539Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4439988Z hint: Using 'master' as the name for the initial branch. This default branch name
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4444131Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4448394Z hint: to use in all of your new repositories, which will suppress this warning,
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4451566Z hint: call:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4453330Z hint:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4455519Z hint: 	git config --global init.defaultBranch <name>
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4458269Z hint:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4461835Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4466523Z hint: 'development'. The just-created branch can be renamed via this command:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4470031Z hint:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4471931Z hint: 	git branch -m <name>
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4474323Z hint:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4477413Z hint: Disable this message with "git config set advice.defaultBranchName false"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4482444Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4490431Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4528613Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4531912Z ##[group]Disabling automatic garbage collection
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4534653Z [command]/usr/bin/git config --local gc.auto 0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4573128Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4576139Z ##[group]Setting up auth
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4579407Z Removing SSH command configuration
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4583054Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.4620905Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5130772Z Removing HTTP extra header
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5137460Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5175090Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5451976Z Removing includeIf entries pointing to credentials config files
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5456024Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5494944Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5776701Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5816410Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5850250Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5886678Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5920908Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5954256Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5957177Z ##[group]Fetching the repository
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:20.5961576Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8ea4d6cca4bc08acaf69ad6927d9256ffc47a944:refs/remotes/origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7675347Z From https://github.com/link-foundation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7678216Z  * [new ref]         8ea4d6cca4bc08acaf69ad6927d9256ffc47a944 -> origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7683944Z [command]/usr/bin/git branch --list --remote origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7713958Z   origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7722697Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7748269Z 8ea4d6cca4bc08acaf69ad6927d9256ffc47a944
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7752841Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7753594Z ##[group]Determining the checkout info
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7754284Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7760336Z [command]/usr/bin/git sparse-checkout disable
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7820664Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7851809Z ##[group]Checking out the ref
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:21.7857194Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0204170Z Switched to a new branch 'main'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0210932Z branch 'main' set up to track 'origin/main'.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0232783Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0234755Z ##[group]Setting up auth for fetching submodules
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0237534Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0282702Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0318584Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0349895Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0384958Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0415336Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0416097Z ##[group]Fetching submodules
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0419117Z [command]/usr/bin/git submodule sync
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.0709001Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.1011100Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.1294042Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.1343920Z [command]/usr/bin/git log -1 --format=%H
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.1371424Z 8ea4d6cca4bc08acaf69ad6927d9256ffc47a944
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.1380700Z ##[group]Removing auth
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.1381161Z Removing SSH command configuration
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.1384368Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.1424114Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.1700296Z Removing HTTP extra header
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.1705012Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.1738531Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2011827Z Removing includeIf entries pointing to credentials config files
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2014947Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2043292Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2044563Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2045159Z includeif.gitdir:/github/workspace/.git.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2045619Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2052058Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2075670Z /home/runner/work/_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2086366Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-ec419d57\-01ef\-40f3\-97cf\-2cd9f63c3052\.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2189486Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2218879Z /home/runner/work/_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2229992Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-ec419d57\-01ef\-40f3\-97cf\-2cd9f63c3052\.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2264692Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2290326Z /github/runner_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2299883Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-ec419d57\-01ef\-40f3\-97cf\-2cd9f63c3052\.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2349954Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2368677Z /github/runner_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2379231Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-ec419d57\-01ef\-40f3\-97cf\-2cd9f63c3052\.config
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2420761Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2707366Z Removing credentials config '/home/runner/work/_temp/git-credentials-ec419d57-01ef-40f3-97cf-2cd9f63c3052.config'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.2716706Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9319380Z ##[group]Run actions/setup-java@v6.1.0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9319762Z with:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9325642Z   java-version: 25
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9325887Z   distribution: temurin
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9326118Z   cache: maven
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9326325Z   server-id: central
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9326571Z   server-username-env-var: MAVEN_USERNAME
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9326890Z   server-password-env-var: MAVEN_PASSWORD
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9327220Z   gpg-passphrase-env-var: MAVEN_GPG_PASSPHRASE
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9327547Z   java-package: jdk
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9327764Z   check-latest: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9328193Z   force-download: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9328416Z   set-default: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9328653Z   mvn-repositories-include-central: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9328974Z   mvn-repositories-prioritize-central: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9329286Z   overwrite-settings: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9329529Z   cache-read-only: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9329764Z   job-status: success
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9332712Z   token: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9332944Z   show-download-progress: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9333213Z   problem-matcher: true
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9333434Z env:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9336195Z   GITHUB_TOKEN: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9336409Z   CI_VERBOSE: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:22.9336611Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0074721Z ##[group]Installed distributions
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0608126Z Resolved Java 25.0.5+8 from tool-cache
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0608869Z Setting Java 25.0.5+8 as the default
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0616974Z 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0617390Z Java configuration:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0618249Z   Distribution: temurin
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0618907Z   Version: 25.0.5+8
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0619800Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0620634Z 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0675473Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0727594Z Creating settings.xml with server-id: central
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0731420Z Creating toolchains.xml for JDK version 25 from temurin
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0744981Z Writing to /home/runner/.m2/settings.xml
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0750244Z Writing to /home/runner/.m2/toolchains.xml
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.0758761Z Configured MAVEN_ARGS to include -ntp to suppress Maven transfer progress logs. Set 'show-download-progress: true' to keep the download progress output.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.5759662Z Cache hit for: setup-java-Linux-x64-maven-5a059833b71a5d3bd8ab6cf93ef032a0d0a5bfd627d0f67463e86a066629c373
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:23.6025137Z Cache hit for: setup-java-Linux-x64-maven-wrapper-4606797fb925e6c6efbc030d02f1c4dc9cb7dc6bea2d8c732c7c618317864e9d
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.2083310Z Received 9822746 of 9822746 (100.0%), 19.6 MBs/sec
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.2083823Z Cache Size: ~9 MB (9822746 B)
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.2111122Z [command]/usr/bin/tar -xf /home/runner/work/_temp/f1fc915e-c1c1-4f99-9ccd-ac22c75e4c41/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.2438651Z Cache restored successfully
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.2471514Z Received 5563317 of 5563317 (100.0%), 10.4 MBs/sec
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.2472186Z Cache Size: ~5 MB (5563317 B)
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.2474450Z maven-wrapper cache restored from key: setup-java-Linux-x64-maven-wrapper-4606797fb925e6c6efbc030d02f1c4dc9cb7dc6bea2d8c732c7c618317864e9d
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.2495775Z [command]/usr/bin/tar -xf /home/runner/work/_temp/c191c1ef-524c-4fae-88e4-c76c2a8a223c/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.2837831Z Cache restored successfully
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.2843938Z Cache restored from key: setup-java-Linux-x64-maven-5a059833b71a5d3bd8ab6cf93ef032a0d0a5bfd627d0f67463e86a066629c373
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3229803Z ##[group]Run set -euo pipefail
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3230206Z ^[[36;1mset -euo pipefail^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3230553Z ^[[36;1m# shellcheck source=scripts/ci/registry-probe.sh^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3230980Z ^[[36;1m. "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3231525Z ^[[36;1mPACKAGE_VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3232166Z ^[[36;1mPACKAGE_GROUP=$(./mvnw help:evaluate -Dexpression=project.groupId -q -DforceStdout)^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3232833Z ^[[36;1mPACKAGE_ARTIFACT=$(./mvnw help:evaluate -Dexpression=project.artifactId -q -DforceStdout)^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3233306Z ^[[36;1m{^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3233527Z ^[[36;1m  echo "version=$PACKAGE_VERSION"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3233856Z ^[[36;1m  echo "group=$PACKAGE_GROUP"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3234159Z ^[[36;1m  echo "artifact=$PACKAGE_ARTIFACT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3234460Z ^[[36;1m} >> "$GITHUB_OUTPUT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3234851Z ^[[36;1mecho "Package: $PACKAGE_GROUP:$PACKAGE_ARTIFACT:$PACKAGE_VERSION"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3235241Z ^[[36;1m^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3235851Z ^[[36;1mURL="https://repo1.maven.org/maven2/$(echo "$PACKAGE_GROUP" | tr '.' '/')/$PACKAGE_ARTIFACT/$PACKAGE_VERSION/$PACKAGE_ARTIFACT-$PACKAGE_VERSION.pom"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3236541Z ^[[36;1mif probe_registry "$URL"; then^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3236944Z ^[[36;1m  echo "Version $PACKAGE_VERSION already exists on Maven Central"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3237408Z ^[[36;1m  echo "should_publish=false" >> "$GITHUB_OUTPUT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3237734Z ^[[36;1melse^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3238245Z ^[[36;1m  echo "Version $PACKAGE_VERSION does not exist on Maven Central"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3238696Z ^[[36;1m  echo "should_publish=true" >> "$GITHUB_OUTPUT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3239207Z ^[[36;1mfi^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3274858Z shell: /usr/bin/bash -e {0}
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3275145Z env:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3278232Z   GITHUB_TOKEN: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3278492Z   CI_VERBOSE: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3278830Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3279363Z   JAVA_HOME_25_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3279777Z   MAVEN_ARGS: -ntp
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:24.3279993Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:35.9679731Z Package: io.github.link-foundation:links-notation:0.28.0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.1806475Z Version 0.28.0 does not exist on Maven Central
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2058540Z ##[group]Run set -euo pipefail
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2058924Z ^[[36;1mset -euo pipefail^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2059201Z ^[[36;1mif [ "true" != "true" ]; then^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2059539Z ^[[36;1m  echo "published=skipped" >> "$GITHUB_OUTPUT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2060027Z ^[[36;1m  echo "::notice::Version 0.28.0 is already on Maven Central, nothing to publish"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2060462Z ^[[36;1m  exit 0^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2060664Z ^[[36;1mfi^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2060984Z ^[[36;1mbash "$GITHUB_WORKSPACE/scripts/ci/require-java-credentials.sh"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2061433Z ^[[36;1m./mvnw -B deploy -Prelease --file pom.xml^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2061806Z ^[[36;1mecho "published=true" >> "$GITHUB_OUTPUT"^[[0m
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2091638Z shell: /usr/bin/bash -e {0}
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2091913Z env:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2094800Z   GITHUB_TOKEN: ***
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2095052Z   CI_VERBOSE: false
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2095443Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2095975Z   JAVA_HOME_25_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2096394Z   MAVEN_ARGS: -ntp
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2096617Z   CENTRAL_USERNAME: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2096837Z   CENTRAL_TOKEN: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2097059Z   GPG_PRIVATE_KEY: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2097291Z   GPG_PASSPHRASE: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2097509Z   MAVEN_USERNAME: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2097729Z   MAVEN_PASSWORD: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2098224Z   MAVEN_GPG_PASSPHRASE: 
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2098485Z ##[endgroup]
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2186387Z ##[error]Maven Central version is absent and publishing credentials are missing: CENTRAL_USERNAME CENTRAL_TOKEN GPG_PRIVATE_KEY GPG_PASSPHRASE. Follow docs/releases.md; publishing cannot be skipped.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.2195963Z ##[error]Process completed with exit code 1.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.3621899Z Post job cleanup.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.5441950Z Post job cleanup.
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.6384379Z [command]/usr/bin/git version
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.6435733Z git version 2.56.0
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.6478889Z Temporarily overriding HOME='/home/runner/work/_temp/d7812e79-4ab5-408c-997a-a6fca4d53f66' before making global git config changes
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.6480526Z Adding repository directory to the temporary git global config as a safe directory
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.6484889Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.6518835Z Removing SSH command configuration
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.6525513Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.6567512Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.6904840Z Removing HTTP extra header
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.6911546Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.6953548Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.7253937Z Removing includeIf entries pointing to credentials config files
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.7260177Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.7294883Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.7721918Z Evaluate and set job outputs
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.7767320Z Set output 'version'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.7769249Z Set output 'group'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.7769886Z Set output 'artifact'
+release / java / publishToMavenCentral	UNKNOWN STEP	2026-11-02T10:09:36.7770922Z Cleaning up orphan processes

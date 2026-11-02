@@ -1,0 +1,286 @@
+release / csharp / pushToNuget	UNKNOWN STEP	﻿2026-11-02T10:06:54.1881454Z Current runner version: '2.338.2'
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1897279Z ##[group]Runner Image Provisioner
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1897801Z Hosted Compute Agent
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1898197Z Version: 20261021.618
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1898632Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1899036Z Build Date: 2026-10-21T00:45:21Z
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1899475Z Worker ID: {c9cc3847-7c2b-4a9a-958a-eefcd7b584e7}
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1899901Z Region: centralus
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1900258Z Cloud: Azure
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1900652Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1901375Z ##[group]Operating System
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1901806Z Ubuntu
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1902165Z 26.04.1
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1902558Z LTS
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1902935Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1903424Z ##[group]Runner Image
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1903874Z Image: ubuntu-26.04
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1904246Z Version: 20261025.179.1
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1905152Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1906018Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1906631Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1907398Z ##[group]GITHUB_TOKEN Permissions
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1908588Z Contents: read
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1908952Z Metadata: read
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1909394Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1910688Z Secret source: Actions
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1911331Z Cache mode: write
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.1911767Z Prepare workflow directory
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.3030282Z Prepare all required actions
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.3059788Z Getting action download info
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.5263592Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:54.6286248Z Download action repository 'actions/setup-dotnet@v6.0.0' (SHA:a98b56852c35b8e3190ac28c8c2271da59106c68)
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.1648069Z Uses: link-foundation/links-notation/.github/workflows/publish-csharp.yml@refs/heads/main (8ea4d6cca4bc08acaf69ad6927d9256ffc47a944)
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.1651458Z ##[group] Inputs
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.1651970Z   verbose: false
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.1652241Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.1652547Z Complete job name: release / csharp / pushToNuget
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3789819Z ##[group]Run actions/checkout@v7.0.1
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3790285Z with:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3790547Z   persist-credentials: false
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3790847Z   submodules: true
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3791135Z   repository: link-foundation/links-notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3793601Z   token: ***
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3793854Z   ssh-strict: true
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3794117Z   ssh-user: git
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3794368Z   clean: true
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3794633Z   sparse-checkout-cone-mode: true
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3794949Z   fetch-depth: 1
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3795201Z   fetch-tags: false
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3795462Z   show-progress: true
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3795728Z   lfs: false
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3795981Z   set-safe-directory: true
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3796310Z   allow-unsafe-pr-checkout: false
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3796686Z env:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3798664Z   GITHUB_TOKEN: ***
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3798926Z   CI_VERBOSE: false
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3799240Z   PACKAGE_ID: Link.Foundation.Links.Notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3799729Z   PROJECT_PATH: Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.3800194Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.5965106Z Syncing repository: link-foundation/links-notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.5966673Z ##[group]Getting Git version info
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.5967105Z Working directory is '/home/runner/work/links-notation/links-notation'
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.5967686Z [command]/usr/bin/git version
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.5984900Z git version 2.56.0
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.5996410Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6002161Z Temporarily overriding HOME='/home/runner/work/_temp/9368e367-38c0-45a5-9acf-819c04133c15' before making global git config changes
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6003366Z Adding repository directory to the temporary git global config as a safe directory
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6006850Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6062608Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6064449Z ##[group]Determining repository object format
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6065356Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6066038Z ##[group]Initializing the repository
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6067909Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6162657Z hint: Using 'master' as the name for the initial branch. This default branch name
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6163985Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6165631Z hint: to use in all of your new repositories, which will suppress this warning,
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6166459Z hint: call:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6167038Z hint:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6167455Z hint: 	git config --global init.defaultBranch <name>
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6167875Z hint:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6168240Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6168745Z hint: 'development'. The just-created branch can be renamed via this command:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6169311Z hint:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6169545Z hint: 	git branch -m <name>
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6169811Z hint:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6170150Z hint: Disable this message with "git config set advice.defaultBranchName false"
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6172348Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6179343Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6223630Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6224263Z ##[group]Disabling automatic garbage collection
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6226729Z [command]/usr/bin/git config --local gc.auto 0
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6253657Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6254662Z ##[group]Setting up auth
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6255127Z Removing SSH command configuration
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6257096Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6283919Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6627203Z Removing HTTP extra header
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6631304Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6656913Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6859599Z Removing includeIf entries pointing to credentials config files
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6863344Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.6888325Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.7087543Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.7116584Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.7141947Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.7174112Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.7198731Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.7268574Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.7268990Z ##[group]Fetching the repository
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:55.7272187Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8ea4d6cca4bc08acaf69ad6927d9256ffc47a944:refs/remotes/origin/main
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7104130Z From https://github.com/link-foundation/links-notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7106035Z  * [new ref]         8ea4d6cca4bc08acaf69ad6927d9256ffc47a944 -> origin/main
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7112015Z [command]/usr/bin/git branch --list --remote origin/main
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7135089Z   origin/main
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7140745Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7159839Z 8ea4d6cca4bc08acaf69ad6927d9256ffc47a944
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7164083Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7165416Z ##[group]Determining the checkout info
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7166897Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7167599Z [command]/usr/bin/git sparse-checkout disable
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7213456Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7238833Z ##[group]Checking out the ref
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.7240053Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.8840171Z Switched to a new branch 'main'
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.8843478Z branch 'main' set up to track 'origin/main'.
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.8861327Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.8862968Z ##[group]Setting up auth for fetching submodules
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.8867206Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.8901869Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.8928420Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.8952302Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.8978146Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9001846Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9003320Z ##[group]Fetching submodules
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9004409Z [command]/usr/bin/git submodule sync
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9215753Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9430377Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9636614Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9669992Z [command]/usr/bin/git log -1 --format=%H
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9691972Z 8ea4d6cca4bc08acaf69ad6927d9256ffc47a944
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9701462Z ##[group]Removing auth
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9702211Z Removing SSH command configuration
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9704474Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9730525Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9930434Z Removing HTTP extra header
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9933431Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:56.9959010Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0161670Z Removing includeIf entries pointing to credentials config files
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0164547Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0184821Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0187384Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0189543Z includeif.gitdir:/github/workspace/.git.path
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0191240Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0195667Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0214253Z /home/runner/work/_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0223948Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-e160c44d\-d99a\-401a\-b9a1\-7a49b1e7f6d8\.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0266058Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0282100Z /home/runner/work/_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0288751Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-e160c44d\-d99a\-401a\-b9a1\-7a49b1e7f6d8\.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0314812Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0334217Z /github/runner_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0341715Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-e160c44d\-d99a\-401a\-b9a1\-7a49b1e7f6d8\.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0369253Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0390533Z /github/runner_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0397540Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-e160c44d\-d99a\-401a\-b9a1\-7a49b1e7f6d8\.config
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0423927Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0625877Z Removing credentials config '/home/runner/work/_temp/git-credentials-e160c44d-d99a-401a-b9a1-7a49b1e7f6d8.config'
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.0632449Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.2180327Z ##[group]Run actions/setup-dotnet@v6.0.0
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.2181026Z with:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.2181538Z   global-json-file: csharp/global.json
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.2182195Z   cache: false
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.2182684Z env:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.2187629Z   GITHUB_TOKEN: ***
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.2188170Z   CI_VERBOSE: false
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.2188756Z   PACKAGE_ID: Link.Foundation.Links.Notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.2189798Z   PROJECT_PATH: Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.2190810Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.3067660Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6.0.0/externals/install-dotnet.sh --skip-non-versioned-files --runtime dotnet --channel LTS
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.7421175Z dotnet-install: .NET Core Runtime with version '10.0.14' is already installed.
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:57.7439194Z [command]/home/runner/work/_actions/actions/setup-dotnet/v6.0.0/externals/install-dotnet.sh --skip-non-versioned-files --channel 10.0
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.0744602Z dotnet-install: .NET Core SDK with version '10.0.403' is already installed.
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1304095Z ##[group]Run set -euo pipefail
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1304406Z ^[[36;1mset -euo pipefail^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1304637Z ^[[36;1m# shellcheck source=scripts/ci/registry-probe.sh^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1305053Z ^[[36;1m. "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1305357Z ^[[36;1mPACKAGE_VERSION=$(sed -n 's|.*<VersionPrefix>\(.*\)</VersionPrefix>.*|\1|p' "$PROJECT_PATH")^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1305643Z ^[[36;1mif [ -z "$PACKAGE_VERSION" ]; then^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1305884Z ^[[36;1m  echo "::error::Could not read <VersionPrefix> from $PROJECT_PATH"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1306116Z ^[[36;1m  exit 1^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1306259Z ^[[36;1mfi^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1306456Z ^[[36;1mPACKAGE_ID_LOWER=$(echo "$PACKAGE_ID" | tr '[:upper:]' '[:lower:]')^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1306734Z ^[[36;1mecho "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1306995Z ^[[36;1mecho "package_id_lower=$PACKAGE_ID_LOWER" >> "$GITHUB_OUTPUT"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1307270Z ^[[36;1mecho "Package: $PACKAGE_ID@$PACKAGE_VERSION"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1307466Z ^[[36;1m^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1307648Z ^[[36;1m# Flat-container URLs are lowercase-only.^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1308110Z ^[[36;1mif probe_registry "https://api.nuget.org/v3-flatcontainer/$PACKAGE_ID_LOWER/$PACKAGE_VERSION/$PACKAGE_ID_LOWER.nuspec"; then^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1308492Z ^[[36;1m  echo "Version $PACKAGE_VERSION already exists on NuGet.org"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1308738Z ^[[36;1m  echo "should_publish=false" >> "$GITHUB_OUTPUT"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1308933Z ^[[36;1melse^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1309120Z ^[[36;1m  echo "Version $PACKAGE_VERSION does not exist on NuGet.org"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1309365Z ^[[36;1m  echo "should_publish=true" >> "$GITHUB_OUTPUT"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1309562Z ^[[36;1mfi^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1337381Z shell: /usr/bin/bash -e {0}
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1337561Z env:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1339003Z   GITHUB_TOKEN: ***
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1339162Z   CI_VERBOSE: false
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1339346Z   PACKAGE_ID: Link.Foundation.Links.Notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1339635Z   PROJECT_PATH: Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1339940Z   DOTNET_ROOT: /usr/share/dotnet
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1340132Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1437162Z Package: Link.Foundation.Links.Notation@0.28.0
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.1925996Z Version 0.28.0 does not exist on NuGet.org
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.2412647Z ##[group]Run dotnet pack "$PROJECT_PATH" --configuration Release --output artifacts
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.2413028Z ^[[36;1mdotnet pack "$PROJECT_PATH" --configuration Release --output artifacts^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.2436510Z shell: /usr/bin/bash -e {0}
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.2436676Z env:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.2438084Z   GITHUB_TOKEN: ***
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.2438243Z   CI_VERBOSE: false
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.2438419Z   PACKAGE_ID: Link.Foundation.Links.Notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.2438707Z   PROJECT_PATH: Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.2438983Z   DOTNET_ROOT: /usr/share/dotnet
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:06:58.2439164Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:03.0155982Z   Determining projects to restore...
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:04.1717238Z   Restored /home/runner/work/links-notation/links-notation/csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj (in 721 ms).
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.4144373Z   Link.Foundation.Links.Notation -> /home/runner/work/links-notation/links-notation/csharp/Link.Foundation.Links.Notation/bin/Release/net10.0/Link.Foundation.Links.Notation.dll
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.6840147Z   Successfully created package '/home/runner/work/links-notation/links-notation/csharp/artifacts/Link.Foundation.Links.Notation.0.28.0.nupkg'.
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.6870875Z   Successfully created package '/home/runner/work/links-notation/links-notation/csharp/artifacts/Link.Foundation.Links.Notation.0.28.0.snupkg'.
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7312754Z ##[group]Run set -euo pipefail
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7312962Z ^[[36;1mset -euo pipefail^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7313275Z ^[[36;1mif [ "true" != "true" ]; then^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7313494Z ^[[36;1m  echo "published=skipped" >> "$GITHUB_OUTPUT"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7313739Z ^[[36;1m  echo "::notice::Version 0.28.0 is already on NuGet.org, nothing to publish"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7314098Z ^[[36;1m  exit 0^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7314216Z ^[[36;1mfi^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7314320Z ^[[36;1m^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7314447Z ^[[36;1mAPI_KEY="${NUGET_API_KEY:-$NUGET_TOKEN}"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7314621Z ^[[36;1m# Report presence, never the value.^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7314787Z ^[[36;1mif [ -z "$API_KEY" ]; then^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7314949Z ^[[36;1m  echo "published=failed" >> "$GITHUB_OUTPUT"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7315268Z ^[[36;1m  echo "::error::Neither NUGET_API_KEY nor NUGET_TOKEN is configured; skipping the NuGet push. No GitHub release will be created."^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7315592Z ^[[36;1m  exit 1^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7315708Z ^[[36;1mfi^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7315832Z ^[[36;1mecho "NuGet credential: present"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7315980Z ^[[36;1m^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7316111Z ^[[36;1mdotnet nuget push "artifacts/*.nupkg" \^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7316289Z ^[[36;1m  --api-key "$API_KEY" \^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7316494Z ^[[36;1m  --source https://api.nuget.org/v3/index.json \^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7316697Z ^[[36;1m  --skip-duplicate^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7316875Z ^[[36;1mecho "published=true" >> "$GITHUB_OUTPUT"^[[0m
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7340893Z shell: /usr/bin/bash -e {0}
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7341029Z env:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7342415Z   GITHUB_TOKEN: ***
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7342533Z   CI_VERBOSE: false
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7342674Z   PACKAGE_ID: Link.Foundation.Links.Notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7342917Z   PROJECT_PATH: Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7343228Z   DOTNET_ROOT: /usr/share/dotnet
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7343438Z   NUGET_API_KEY: ***
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7343616Z   NUGET_TOKEN: ***
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7343732Z ##[endgroup]
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.7382911Z NuGet credential: present
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.9631301Z Pushing Link.Foundation.Links.Notation.0.28.0.nupkg to 'https://www.nuget.org/api/v2/package'...
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:08.9690176Z   PUT https://www.nuget.org/api/v2/package/
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.1165710Z   Forbidden https://www.nuget.org/api/v2/package/ 146ms
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.1200785Z error: Response status code does not indicate success: 403 (The specified API key has expired. Please create a new API key at https://www.nuget.org/account/apikeys.).
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.1839252Z ##[error]Process completed with exit code 1.
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.2472497Z Post job cleanup.
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3008407Z [command]/usr/bin/git version
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3040506Z git version 2.56.0
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3062690Z Temporarily overriding HOME='/home/runner/work/_temp/c3fef5f0-359b-4301-bc74-7f5bc5c73c5c' before making global git config changes
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3063968Z Adding repository directory to the temporary git global config as a safe directory
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3065971Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3092076Z Removing SSH command configuration
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3096498Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3124561Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3368434Z Removing HTTP extra header
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3372526Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3402486Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3621195Z Removing includeIf entries pointing to credentials config files
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3625957Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3650854Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.3968926Z Evaluate and set job outputs
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.4037142Z Set output 'version'
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.4038247Z Cleaning up orphan processes
+release / csharp / pushToNuget	UNKNOWN STEP	2026-11-02T10:07:09.4239590Z Terminate orphan process: pid (2535) (VBCSCompiler)

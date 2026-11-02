@@ -1,0 +1,233 @@
+auto-merge	Set up job	﻿2026-11-02T16:46:53.8396309Z Current runner version: '2.338.2'
+auto-merge	Set up job	2026-11-02T16:46:53.8412337Z ##[group]Runner Image Provisioner
+auto-merge	Set up job	2026-11-02T16:46:53.8412927Z Hosted Compute Agent
+auto-merge	Set up job	2026-11-02T16:46:53.8413337Z Version: 20261021.618
+auto-merge	Set up job	2026-11-02T16:46:53.8413734Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+auto-merge	Set up job	2026-11-02T16:46:53.8414190Z Build Date: 2026-10-21T00:45:21Z
+auto-merge	Set up job	2026-11-02T16:46:53.8414658Z Worker ID: {f0da92aa-c87c-4455-99e5-0384cc6e90b6}
+auto-merge	Set up job	2026-11-02T16:46:53.8415116Z Region: centralus
+auto-merge	Set up job	2026-11-02T16:46:53.8415477Z Cloud: Azure
+auto-merge	Set up job	2026-11-02T16:46:53.8415819Z ##[endgroup]
+auto-merge	Set up job	2026-11-02T16:46:53.8416592Z ##[group]Operating System
+auto-merge	Set up job	2026-11-02T16:46:53.8417060Z Ubuntu
+auto-merge	Set up job	2026-11-02T16:46:53.8417386Z 26.04.1
+auto-merge	Set up job	2026-11-02T16:46:53.8417723Z LTS
+auto-merge	Set up job	2026-11-02T16:46:53.8418052Z ##[endgroup]
+auto-merge	Set up job	2026-11-02T16:46:53.8418387Z ##[group]Runner Image
+auto-merge	Set up job	2026-11-02T16:46:53.8418784Z Image: ubuntu-26.04
+auto-merge	Set up job	2026-11-02T16:46:53.8419499Z Version: 20261025.179.1
+auto-merge	Set up job	2026-11-02T16:46:53.8420151Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+auto-merge	Set up job	2026-11-02T16:46:53.8421152Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+auto-merge	Set up job	2026-11-02T16:46:53.8421784Z ##[endgroup]
+auto-merge	Set up job	2026-11-02T16:46:53.8422581Z ##[group]GITHUB_TOKEN Permissions
+auto-merge	Set up job	2026-11-02T16:46:53.8423986Z Checks: read
+auto-merge	Set up job	2026-11-02T16:46:53.8424338Z Contents: write
+auto-merge	Set up job	2026-11-02T16:46:53.8424717Z Metadata: read
+auto-merge	Set up job	2026-11-02T16:46:53.8425132Z PullRequests: write
+auto-merge	Set up job	2026-11-02T16:46:53.8425466Z Statuses: read
+auto-merge	Set up job	2026-11-02T16:46:53.8426001Z ##[endgroup]
+auto-merge	Set up job	2026-11-02T16:46:53.8427255Z Secret source: Actions
+auto-merge	Set up job	2026-11-02T16:46:53.8427881Z Cache mode: read
+auto-merge	Set up job	2026-11-02T16:46:53.8428286Z Prepare workflow directory
+auto-merge	Set up job	2026-11-02T16:46:53.8637063Z Prepare all required actions
+auto-merge	Set up job	2026-11-02T16:46:53.8667606Z Getting action download info
+auto-merge	Set up job	2026-11-02T16:46:54.0655062Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+auto-merge	Set up job	2026-11-02T16:46:54.1281949Z Download action repository 'actions/setup-python@v7.1.0' (SHA:6d4fd22b20465ccc0f7354476588e8df7c9ca0e0)
+auto-merge	Set up job	2026-11-02T16:46:54.6578019Z Complete job name: auto-merge
+auto-merge	Run actions/checkout@v7.0.1	﻿2026-11-02T16:46:54.7099884Z ##[group]Run actions/checkout@v7.0.1
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7100426Z with:
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7100701Z   ref: 7a55d339146f01312abde79f5a04a79a5bfb4311
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7101051Z   persist-credentials: false
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7101368Z   repository: link-foundation/links-notation
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7103673Z   token: ***
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7103920Z   ssh-strict: true
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7104163Z   ssh-user: git
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7104409Z   clean: true
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7104663Z   sparse-checkout-cone-mode: true
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7104954Z   fetch-depth: 1
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7105201Z   fetch-tags: false
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7105451Z   show-progress: true
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7105706Z   lfs: false
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7105949Z   submodules: false
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7106204Z   set-safe-directory: true
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7106494Z   allow-unsafe-pr-checkout: false
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.7106875Z ##[endgroup]
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9049998Z Syncing repository: link-foundation/links-notation
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9059402Z ##[group]Getting Git version info
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9060331Z Working directory is '/home/runner/work/links-notation/links-notation'
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9061391Z [command]/usr/bin/git version
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9087654Z git version 2.56.0
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9102027Z ##[endgroup]
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9109988Z Temporarily overriding HOME='/home/runner/work/_temp/b9470ef8-f11c-4539-bb43-89192a229e46' before making global git config changes
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9113414Z Adding repository directory to the temporary git global config as a safe directory
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9114118Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9167278Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9169414Z ##[group]Determining repository object format
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9170454Z ##[endgroup]
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9171072Z ##[group]Initializing the repository
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9173313Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9257083Z hint: Using 'master' as the name for the initial branch. This default branch name
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9257712Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9258381Z hint: to use in all of your new repositories, which will suppress this warning,
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9258812Z hint: call:
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9259244Z hint:
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9259540Z hint: 	git config --global init.defaultBranch <name>
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9259891Z hint:
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9260261Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9260864Z hint: 'development'. The just-created branch can be renamed via this command:
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9261303Z hint:
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9261539Z hint: 	git branch -m <name>
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9261966Z hint:
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9262536Z hint: Disable this message with "git config set advice.defaultBranchName false"
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9268242Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9276446Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9320068Z ##[endgroup]
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9320730Z ##[group]Disabling automatic garbage collection
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9325624Z [command]/usr/bin/git config --local gc.auto 0
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9355144Z ##[endgroup]
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9355820Z ##[group]Setting up auth
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9356281Z Removing SSH command configuration
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9359462Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9388039Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9739378Z Removing HTTP extra header
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9743521Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9776954Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9983441Z Removing includeIf entries pointing to credentials config files
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:54.9987081Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:55.0012813Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:55.0225383Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-9818fe64-706c-4090-86ec-956461627bf1.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:55.0254915Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-9818fe64-706c-4090-86ec-956461627bf1.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:55.0280987Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-9818fe64-706c-4090-86ec-956461627bf1.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:55.0306615Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-9818fe64-706c-4090-86ec-956461627bf1.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:55.0332876Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-9818fe64-706c-4090-86ec-956461627bf1.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:55.0356094Z ##[endgroup]
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:55.0356534Z ##[group]Fetching the repository
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:55.0360301Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 7a55d339146f01312abde79f5a04a79a5bfb4311
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.1261472Z From https://github.com/link-foundation/links-notation
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.1263558Z  * branch            7a55d339146f01312abde79f5a04a79a5bfb4311 -> FETCH_HEAD
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.1269516Z [command]/usr/bin/git rev-parse --verify --quiet 7a55d339146f01312abde79f5a04a79a5bfb4311^{object}
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.1294620Z 7a55d339146f01312abde79f5a04a79a5bfb4311
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.1298765Z ##[endgroup]
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.1300143Z ##[group]Determining the checkout info
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.1301418Z ##[endgroup]
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.1302087Z [command]/usr/bin/git sparse-checkout disable
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.1338610Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.1363408Z ##[group]Checking out the ref
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.1365461Z [command]/usr/bin/git checkout --progress --force 7a55d339146f01312abde79f5a04a79a5bfb4311
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3056578Z Note: switching to '7a55d339146f01312abde79f5a04a79a5bfb4311'.
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3057584Z 
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3058190Z You are in 'detached HEAD' state. You can look around, make experimental
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3059650Z changes and commit them, and you can discard any commits you make in this
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3060876Z state without impacting any branches by switching back to a branch.
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3061597Z 
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3062168Z If you want to create a new branch to retain commits you create, you may
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3063542Z do so (now or later) by using -c with the switch command. Example:
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3064292Z 
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3064676Z   git switch -c <new-branch-name>
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3065237Z 
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3065670Z Or undo this operation with:
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3066189Z 
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3066532Z   git switch -
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3066941Z 
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3067593Z Turn off this advice by setting config variable advice.detachedHead to false
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3068487Z 
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3069936Z HEAD is now at 7a55d33 Merge pull request #376 from link-foundation/dependabot/pre_commit/https-/github.com/pre-commit/mirrors-eslint-10.14.0
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3076194Z ##[endgroup]
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3115471Z [command]/usr/bin/git log -1 --format=%H
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3137145Z 7a55d339146f01312abde79f5a04a79a5bfb4311
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3144716Z ##[group]Removing auth
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3145992Z Removing SSH command configuration
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3147840Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3174750Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3391330Z Removing HTTP extra header
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3393252Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3420617Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3628491Z Removing includeIf entries pointing to credentials config files
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3630274Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3651229Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3653677Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3655795Z includeif.gitdir:/github/workspace/.git.path
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3657318Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3661514Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3683391Z /home/runner/work/_temp/git-credentials-9818fe64-706c-4090-86ec-956461627bf1.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3690880Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-9818fe64\-706c\-4090\-86ec\-956461627bf1\.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3720332Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3744031Z /home/runner/work/_temp/git-credentials-9818fe64-706c-4090-86ec-956461627bf1.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3751518Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-9818fe64\-706c\-4090\-86ec\-956461627bf1\.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3782210Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3806868Z /github/runner_temp/git-credentials-9818fe64-706c-4090-86ec-956461627bf1.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3856498Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-9818fe64\-706c\-4090\-86ec\-956461627bf1\.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3886939Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3905894Z /github/runner_temp/git-credentials-9818fe64-706c-4090-86ec-956461627bf1.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3912546Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-9818fe64\-706c\-4090\-86ec\-956461627bf1\.config
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.3939572Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.4144025Z Removing credentials config '/home/runner/work/_temp/git-credentials-9818fe64-706c-4090-86ec-956461627bf1.config'
+auto-merge	Run actions/checkout@v7.0.1	2026-11-02T16:46:56.4150751Z ##[endgroup]
+auto-merge	Run actions/setup-python@v7.1.0	﻿2026-11-02T16:46:56.4452842Z ##[group]Run actions/setup-python@v7.1.0
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.4453574Z with:
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.4454086Z   python-version: 3.15
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.4454662Z   check-latest: false
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.4460198Z   token: ***
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.4460965Z   mirror: https://raw.githubusercontent.com/actions/python-versions/main
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.4461921Z   update-environment: true
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.4462538Z   allow-prereleases: false
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.4463141Z   freethreaded: false
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.4463693Z ##[endgroup]
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.5177059Z ##[group]Installed versions
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.5235929Z Successfully set up CPython (3.15.1)
+auto-merge	Run actions/setup-python@v7.1.0	2026-11-02T16:46:56.5237340Z ##[endgroup]
+auto-merge	Test the merge planner without network access	﻿2026-11-02T16:46:56.5380408Z ##[group]Run python experiments/issue-350/test_merge_dependabot.py
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:56.5382288Z ^[[36;1mpython experiments/issue-350/test_merge_dependabot.py^[[0m
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:56.5606919Z shell: /usr/bin/bash -e {0}
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:56.5607709Z env:
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:56.5608383Z   pythonLocation: /opt/hostedtoolcache/Python/3.15.1/x64
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:56.5609570Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib/pkgconfig
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:56.5610627Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:56.5611582Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:56.5612541Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:56.5613507Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:56.5614340Z ##[endgroup]
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:57.8490975Z ................
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:57.8491455Z ----------------------------------------------------------------------
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:57.8491734Z Ran 16 tests in 0.008s
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:57.8491960Z 
+auto-merge	Test the merge planner without network access	2026-11-02T16:46:57.8492030Z OK
+auto-merge	Merge passing Dependabot pull requests	﻿2026-11-02T16:46:57.8640951Z ##[group]Run python scripts/ci/merge-dependabot.py --base "$BASE" ${DRY_RUN:+"$DRY_RUN"}
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8641350Z ^[[36;1mpython scripts/ci/merge-dependabot.py --base "$BASE" ${DRY_RUN:+"$DRY_RUN"}^[[0m
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8667303Z shell: /usr/bin/bash -e {0}
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8667474Z env:
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8667662Z   pythonLocation: /opt/hostedtoolcache/Python/3.15.1/x64
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8667925Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib/pkgconfig
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8668192Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8668434Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8668674Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8669046Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8670815Z   GITHUB_TOKEN: ***
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8671064Z   DEPENDABOT_AUTO_MERGE_TOKEN: ***
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8671242Z   DRY_RUN: 
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8671383Z   BASE: main
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:46:57.8671552Z ##[endgroup]
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:47:13.5463453Z ##[warning]DEPENDABOT_AUTO_MERGE_TOKEN cannot push to this repository (expired or missing the repo scope); merging with GITHUB_TOKEN instead. Merges by GITHUB_TOKEN do not start the push workflows on main.
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:47:13.5471022Z main requires CSharp, Go, Java, JavaScript, PHP, Python, Rust on an up-to-date branch.
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:47:13.5471490Z #361 skip: behind; update already requested
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:47:13.5471781Z #363 skip: behind; failed: Java
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:47:13.5472053Z #373 skip: behind; waiting for: kotlin / ios
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:47:13.5472437Z #374 skip: behind; failed: CSharp, Go, Java, JavaScript, PHP, Python, Rust
+auto-merge	Merge passing Dependabot pull requests	2026-11-02T16:47:13.5475324Z #375 skip: waiting for: CSharp, Go, Java, PHP, Python, Rust, benchmarks / findChangedBenchmarkFiles, binary_interop / ten-languages, cpp / lint, csharp / lint, docs / comparison, docs / test-cases, go / lint, java / maven-floor, java / test (21), java / test (25), java / test (27), kotlin / lint, php / lint, python / lint, rust / msrv-rejection, rust / test (1.87.0), rust / test (stable), security / Audit npm lock (benchmarks/js), security / Audit npm lock (benchmarks/tools), security / Audit npm lock (docs/comparison), security / Audit npm lock (docs/website), security / Audit npm lock (js), security / CodeQL (actions), security / CodeQL (csharp), security / CodeQL (go), security / CodeQL (java-kotlin), security / CodeQL (javascript-typescript), security / CodeQL (python), security / CodeQL (rust), security / Dependency review, security / Secret scan, swift / lint
+auto-merge	Post Run actions/setup-python@v7.1.0	﻿2026-11-02T16:47:13.5592724Z Post job cleanup.
+auto-merge	Post Run actions/checkout@v7.0.1	﻿2026-11-02T16:47:13.6458397Z Post job cleanup.
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7052409Z [command]/usr/bin/git version
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7090507Z git version 2.56.0
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7112829Z Temporarily overriding HOME='/home/runner/work/_temp/2e51f08a-5ba6-41d5-be14-bc24273c57a3' before making global git config changes
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7113897Z Adding repository directory to the temporary git global config as a safe directory
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7116272Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7146485Z Removing SSH command configuration
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7150804Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7184644Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7433875Z Removing HTTP extra header
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7434300Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7466665Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7712263Z Removing includeIf entries pointing to credentials config files
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7717259Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+auto-merge	Post Run actions/checkout@v7.0.1	2026-11-02T16:47:13.7746097Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+auto-merge	Complete job	﻿2026-11-02T16:47:13.8088188Z Cleaning up orphan processes

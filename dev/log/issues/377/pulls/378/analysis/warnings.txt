@@ -1,0 +1,33 @@
+# Non-annotation warnings in ci-logs/*.log (issue #377). Columns: count, pattern, files.
+# Counted with grep -c over the saved logs. ROOT-CAUSES.md section W explains each one.
+15	sun.misc.Unsafe	CI-41439729658-java-maven-floor.log CI-41477660740-kotlin-lint.log 
+2	enable-native-access	CI-41439729658-java-maven-floor.log 
+3	incompatible with Gradle 10	CI-41477660740-kotlin-lint.log CI-41477660740-kotlin-android.log CI-41477660740-kotlin-test.log 
+1	DEP0005	CI-41477660740-benchmarks-java.log 
+2	ResourceWarning	dependency-freshness-41477659797.log 
+1	DEPENDABOT_AUTO_MERGE_TOKEN cannot push	auto-merge-41484505687.log 
+162	hint: 	CI-41424977881-java-publishToMavenCentral.log CI-41439293166-release_audit-audit.log CI-41424977881-release_audit-audit.log CI-41439293166-swift-differential.log CI-41424977881-php-publishToPackagist.log CI-41465947978-release_audit-audit.log CI-41477660740-release_audit-audit.log CI-41477660740-kotlin-lint.log CI-41477660740-kotlin-android.log CI-41477660740-kotlin-test.log CI-41477660740-benchmarks-java.log dependency-freshness-41477659797.log CI-41478085102-js-test.log CI-41478329697-swift-differential.log dependency-freshness-schedule-41475104458.log auto-merge-41484505687.log CI-41439729658-java-maven-floor.log CI-41424977881-csharp-pushToNuget.log 
+3	rehash	dependabot-a-41478058822.log dependabot-b-41478058464.log dependabot-minimatch-41478063329.log 
+
+# Annotations (ci-logs/annotations-main-runs.tsv, 7 runs on main), by level and message prefix:
+     14 failure	Process completed with exit code 1.
+     12 notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience long
+     10 notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+      5 failure	php: X.Y.Z is absent from Packagist. To publish it, submit the repository once at 
+      5 failure	java: X.Y.Z is absent from Maven Central. To publish it, configure the CENTRAL_USE
+      4 failure	csharp: X.Y.Z is absent from NuGet. To publish it, configure the NUGET_API_KEY sec
+      3 failure	swift: X.Y.Z is absent from GitHub tags (SwiftPM). To publish it, check the publis
+      3 failure	rust: X.Y.Z is absent from crates.io. To publish it, configure crates.io trusted p
+      3 failure	python: X.Y.Z is absent from PyPI. To publish it, configure PyPI trusted publishin
+      3 failure	js: X.Y.Z is absent from npm. To publish it, configure npm trusted publishing for 
+      3 failure	go: X.Y.Z is absent from Go proxy. To publish it, check the publish-go log for the
+      3 failure	cpp: X.Y.Z is absent from GitHub Releases. To publish it, check the publish-cpp lo
+      2 failure	link-foundation/links-notation is not registered on Packagist. Submit it once at h
+      2 failure	Maven Central version is absent and publishing credentials are missing: CENTRAL_US
+      1 warning	Trusted Publishers allows publishing packages to PyPI from automated environments 
+      1 warning	A new Trusted Publisher for the currently running publishing workflow can be creat
+      1 notice	Version X.Y.Z is already on npm, nothing to publish
+      1 notice	Version X.Y.Z is already on PyPI, nothing to publish
+      1 notice	Version X.Y.Z is already on NuGet.org, nothing to publish
+      1 failure	kotlin: X.Y.Z is absent from Maven Central. To publish it, configure the CENTRAL_U
+      1 failure	The job was not acquired by Runner of type hosted even after multiple attempts

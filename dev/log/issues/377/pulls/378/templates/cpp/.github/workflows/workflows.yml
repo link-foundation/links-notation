@@ -1,0 +1,153 @@
+name: Workflows
+# Shared with link-foundation/python-ai-driven-development-pipeline-template;
+# "python template issue #N" refers to an issue in that repository.
+
+# actionlint validates the schema and, through shellcheck, every run block.
+# Version 1.7.12 predates GitHub's concurrency.queue field: validate that one
+# field independently, then comment out only validated queue lines in this
+# disposable checkout. Every other field still goes unchanged to actionlint.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/**'
+      - 'scripts/check_workflow_concurrency.py'
+      - 'scripts/tests/test_check_workflow_concurrency.py'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '.github/**'
+      - 'scripts/check_workflow_concurrency.py'
+      - 'scripts/tests/test_check_workflow_concurrency.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  # Set the initial branch before checkout invokes git init.
+  GIT_CONFIG_COUNT: '1'
+  GIT_CONFIG_KEY_0: init.defaultBranch
+  GIT_CONFIG_VALUE_0: main
+
+jobs:
+  actionlint:
+    name: Lint Workflows
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
+      cancel-in-progress: true
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      # The Docker image bundles shellcheck and pyflakes, so this lints every
+      # `run:` block too. A native actionlint binary without shellcheck on
+      # PATH silently skips the shell checks and still exits 0 -- worth knowing
+      # before trying to reproduce a finding locally.
+      #
+      # 1.7.12 (python template issue #71) adds the `glob` check for `paths:` filters that can
+      # never match (a workflow filtered with `./src/**` stops running and
+      # reports nothing) and knows the modern hosted runner labels, so real
+      # labels like macos-15-intel are no longer reported as unknown.
+      #
+      # Pinned by digest because a mutable tag of a repository we do not
+      # control is arbitrary code execution in any job that holds credentials
+      # (the same reasoning as the `'*': hash-pin` policy in
+      # .github/zizmor.yml; the `unpinned-images` audit that would flag this
+      # is Pedantic-persona and runs in the step below). Re-resolve when
+      # bumping:
+      #   docker pull rhysd/actionlint:<tag> &&
+      #   docker inspect --format='{{index .RepoDigests 0}}' rhysd/actionlint:<tag>
+      - name: Validate concurrency queue policy
+        run: python3 scripts/check_workflow_concurrency.py --actionlint-compat
+
+      - name: Lint workflow files
+        uses: docker://rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 # v1.7.12
+        with:
+          args: -color
+
+  # actionlint validates workflow schema and shell; it does not detect
+  # credential persistence, template injection or unpinned actions. zizmor
+  # covers exactly those, so both linters run on every change under .github/.
+  # Reproduce locally with:
+  #   pipx run zizmor==1.29.0 --min-confidence medium --persona regular \
+  #     --config .github/zizmor.yml .github/workflows
+  zizmor:
+    name: Audit Workflows
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
+      cancel-in-progress: true
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      # Annotations instead of SARIF: forks of this template do not necessarily
+      # have code scanning enabled, and the job should fail loudly either way.
+      #
+      # `version` is named rather than left at the default, because the
+      # action's `latest` entry is its own frozen table (v0.6.2 -> zizmor
+      # 1.29.0), not the latest zizmor -- the comment beside this step used to
+      # name 1.30.0, a version the action cannot install (python template issue #76). Naming
+      # the version keeps the next bump a visible line in the diff rather than
+      # a side effect of bumping the action, and documents exactly which
+      # analyser reproduces a finding.
+      - name: Audit workflow files
+        uses: zizmorcore/zizmor-action@cc914d7f3750a2d13d75c7f184a1060aa0e9d482 # v0.6.4
+        with:
+          advanced-security: false
+          annotations: true
+          config: .github/zizmor.yml
+          min-confidence: medium
+          version: 1.29.0
+
+      # The step above runs `--persona regular`, which is the right default:
+      # pedantic surfaces dozens of stylistic findings. But the audits that
+      # cover container image references (`unpinned-images` among them) are
+      # Pedantic-only, so the `'*': hash-pin` policy declared in
+      # .github/zizmor.yml is not enforced against `uses: docker://` or
+      # `container:` references by the regular pass. Narrowing this second
+      # pass to high severity *and* high confidence keeps that enforcement
+      # without importing the noise. Measured: after the digest pin of the
+      # actionlint image above it reports nothing, and stays silent until
+      # someone reintroduces a mutable image reference (python template issue #75).
+      - name: Audit for pedantic-only high-severity findings
+        timeout-minutes: 5
+        run: |
+          pipx run zizmor==1.29.0 --config .github/zizmor.yml \
+            --persona pedantic --min-severity high --min-confidence high \
+            .github/workflows
+
+  # Terminal status gate (python template issue #69): GitHub reports jobs killed by
+  # timeout-minutes as cancelled. Observe every other job so a timeout on main
+  # becomes a visible failure instead of a grey run, while a run that was
+  # superseded by a newer commit is recognised as expected churn.
+  pipeline-status:
+    name: Pipeline Status
+    needs:
+      - actionlint
+      - zizmor
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Check aggregate pipeline status
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+        run: bash scripts/check-pipeline-status.sh

@@ -1,0 +1,270 @@
+latest-stable	UNKNOWN STEP	﻿2026-11-02T15:47:54.8369063Z Current runner version: '2.338.2'
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8394524Z ##[group]Runner Image Provisioner
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8395572Z Hosted Compute Agent
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8396192Z Version: 20261021.618
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8397295Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8398123Z Build Date: 2026-10-21T00:45:21Z
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8398826Z Worker ID: {7d4e3286-7d0d-4275-8cc8-11bc781bacd7}
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8399604Z Region: westus3
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8400172Z Cloud: Azure
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8400711Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8402586Z ##[group]Operating System
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8403244Z Ubuntu
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8403862Z 26.04.1
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8404390Z LTS
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8404913Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8405579Z ##[group]Runner Image
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8406203Z Image: ubuntu-26.04
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8407279Z Version: 20261025.179.1
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8408656Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8410478Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8411463Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8413022Z ##[group]GITHUB_TOKEN Permissions
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8415368Z Contents: read
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8416145Z Metadata: read
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8417155Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8419439Z Secret source: Actions
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8420510Z Cache mode: write
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8421223Z Prepare workflow directory
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8783924Z Prepare all required actions
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:54.8833081Z Getting action download info
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:55.2089966Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:55.3473792Z Download action repository 'actions/setup-python@v7.1.0' (SHA:6d4fd22b20465ccc0f7354476588e8df7c9ca0e0)
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:55.9828780Z Download action repository 'actions/setup-node@v7.1.0' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.0418457Z Download action repository 'oven-sh/setup-bun@v2.2.0' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.5935661Z Download action repository 'actions/upload-artifact@v7.0.2' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.7875531Z Complete job name: latest-stable
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9032687Z ##[group]Run actions/checkout@v7.0.1
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9034205Z with:
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9035133Z   persist-credentials: false
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9036196Z   fetch-depth: 1
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9037427Z   repository: link-foundation/links-notation
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9046135Z   token: ***
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9047248Z   ssh-strict: true
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9048164Z   ssh-user: git
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9049058Z   clean: true
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9049992Z   sparse-checkout-cone-mode: true
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9051089Z   fetch-tags: false
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9052013Z   show-progress: true
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9052938Z   lfs: false
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9053841Z   submodules: false
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9054774Z   set-safe-directory: true
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9055882Z   allow-unsafe-pr-checkout: false
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:56.9057416Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2002000Z Syncing repository: link-foundation/links-notation
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2005866Z ##[group]Getting Git version info
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2008808Z Working directory is '/home/runner/work/links-notation/links-notation'
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2012348Z [command]/usr/bin/git version
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2023324Z git version 2.56.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2050936Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2067138Z Temporarily overriding HOME='/home/runner/work/_temp/ae9215ea-9e13-47ce-9ed0-2c26d1817ebc' before making global git config changes
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2072324Z Adding repository directory to the temporary git global config as a safe directory
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2076996Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2144096Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2148489Z ##[group]Determining repository object format
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2152784Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2155233Z ##[group]Initializing the repository
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2158102Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2281693Z hint: Using 'master' as the name for the initial branch. This default branch name
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2284020Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2286146Z hint: to use in all of your new repositories, which will suppress this warning,
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2288305Z hint: call:
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2289181Z hint:
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2290405Z hint: 	git config --global init.defaultBranch <name>
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2291687Z hint:
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2293006Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2296295Z hint: 'development'. The just-created branch can be renamed via this command:
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2299471Z hint:
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2301096Z hint: 	git branch -m <name>
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2302859Z hint:
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2305192Z hint: Disable this message with "git config set advice.defaultBranchName false"
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2311450Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2318093Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2370349Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2373260Z ##[group]Disabling automatic garbage collection
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2375721Z [command]/usr/bin/git config --local gc.auto 0
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2513662Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2521945Z ##[group]Setting up auth
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2524139Z Removing SSH command configuration
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2527310Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2535974Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2915214Z Removing HTTP extra header
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2922972Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.2961213Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.3230171Z Removing includeIf entries pointing to credentials config files
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.3235413Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.3272626Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.3549519Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-52a1599e-ca8a-4a84-b7aa-a94df9533223.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.3589118Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-52a1599e-ca8a-4a84-b7aa-a94df9533223.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.3621899Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-52a1599e-ca8a-4a84-b7aa-a94df9533223.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.3658102Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-52a1599e-ca8a-4a84-b7aa-a94df9533223.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.3690074Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-52a1599e-ca8a-4a84-b7aa-a94df9533223.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.3719822Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.3721384Z ##[group]Fetching the repository
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:57.3726567Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +be05f2c0643bde006256832384a409c78d72ae93:refs/remotes/origin/main
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7591170Z From https://github.com/link-foundation/links-notation
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7591762Z  * [new ref]         be05f2c0643bde006256832384a409c78d72ae93 -> origin/main
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7601531Z [command]/usr/bin/git branch --list --remote origin/main
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7630351Z   origin/main
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7639687Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7666454Z be05f2c0643bde006256832384a409c78d72ae93
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7670864Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7671263Z ##[group]Determining the checkout info
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7672065Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7676211Z [command]/usr/bin/git sparse-checkout disable
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7729047Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7761558Z ##[group]Checking out the ref
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:58.7765660Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0144165Z Switched to a new branch 'main'
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0150138Z branch 'main' set up to track 'origin/main'.
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0169755Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0225784Z [command]/usr/bin/git log -1 --format=%H
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0255045Z be05f2c0643bde006256832384a409c78d72ae93
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0270410Z ##[group]Removing auth
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0270921Z Removing SSH command configuration
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0271598Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0310719Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0602168Z Removing HTTP extra header
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0607649Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0644914Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0928976Z Removing includeIf entries pointing to credentials config files
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0933121Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0966050Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0967697Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0968722Z includeif.gitdir:/github/workspace/.git.path
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0969534Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.0975558Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1002613Z /home/runner/work/_temp/git-credentials-52a1599e-ca8a-4a84-b7aa-a94df9533223.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1014398Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-52a1599e\-ca8a\-4a84\-b7aa\-a94df9533223\.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1054276Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1084190Z /home/runner/work/_temp/git-credentials-52a1599e-ca8a-4a84-b7aa-a94df9533223.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1096066Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-52a1599e\-ca8a\-4a84\-b7aa\-a94df9533223\.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1136376Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1160822Z /github/runner_temp/git-credentials-52a1599e-ca8a-4a84-b7aa-a94df9533223.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1178808Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-52a1599e\-ca8a\-4a84\-b7aa\-a94df9533223\.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1206996Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1231812Z /github/runner_temp/git-credentials-52a1599e-ca8a-4a84-b7aa-a94df9533223.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1242266Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-52a1599e\-ca8a\-4a84\-b7aa\-a94df9533223\.config
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1280608Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1569275Z Removing credentials config '/home/runner/work/_temp/git-credentials-52a1599e-ca8a-4a84-b7aa-a94df9533223.config'
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1579815Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1821346Z ##[group]Run actions/setup-python@v7.1.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1821649Z with:
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1821849Z   python-version: 3.15
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1822077Z   check-latest: false
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1824422Z   token: ***
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1824757Z   mirror: https://raw.githubusercontent.com/actions/python-versions/main
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1825156Z   update-environment: true
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1825395Z   allow-prereleases: false
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1825617Z   freethreaded: false
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.1825823Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.2978536Z ##[group]Installed versions
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3083385Z Successfully set up CPython (3.15.1)
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3084137Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3254868Z ##[group]Run python experiments/issue-325/test_dependency_check.py
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3255440Z ^[[36;1mpython experiments/issue-325/test_dependency_check.py^[[0m
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3316323Z shell: /usr/bin/bash -e {0}
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3316586Z env:
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3317257Z   pythonLocation: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3317716Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib/pkgconfig
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3318145Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3318529Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3318941Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3319333Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib
+latest-stable	UNKNOWN STEP	2026-11-02T15:47:59.3319664Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.2737701Z .................
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.2738260Z ----------------------------------------------------------------------
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.2738817Z Ran 17 tests in 0.112s
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.2738994Z 
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.2739089Z OK
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.2971135Z ##[group]Run python experiments/issue-348/test_dependabot_check.py
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.2971649Z ^[[36;1mpython experiments/issue-348/test_dependabot_check.py^[[0m
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.2972041Z ^[[36;1mpython scripts/ci/check-dependabot.py^[[0m
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.3001015Z shell: /usr/bin/bash -e {0}
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.3001263Z env:
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.3001524Z   pythonLocation: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.3001963Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib/pkgconfig
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.3002390Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.3002770Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.3003152Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.3003525Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.3005993Z   GH_TOKEN: ***
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.3006374Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.6156095Z ............
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.6156983Z ----------------------------------------------------------------------
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.6157571Z Ran 12 tests in 0.219s
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.6157764Z 
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:00.6157860Z OK
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4475802Z .github/dependabot.yml covers every committed manifest outside dev/log.
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4477015Z Every label it applies exists in link-foundation/links-notation.
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4566084Z ##[group]Run python scripts/ci/check-dependencies.py ${CHANGED_SINCE:+--changed-since "$CHANGED_SINCE"}
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4567234Z ^[[36;1mpython scripts/ci/check-dependencies.py ${CHANGED_SINCE:+--changed-since "$CHANGED_SINCE"}^[[0m
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4597759Z shell: /usr/bin/bash -e {0}
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4598001Z env:
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4598258Z   pythonLocation: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4598695Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib/pkgconfig
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4599152Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4599535Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4599903Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4600273Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4602909Z   GH_TOKEN: ***
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4603122Z   CHANGED_SINCE: 
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:01.4603356Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0313783Z OUTDATED js/package.json: bun-types ^1.4.3 -> 1.4.4
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0314387Z OUTDATED js/package.json: eslint ^10.13.0 -> 10.14.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0314906Z OUTDATED js/package.json: peggy ^5.1.0 -> 5.1.1
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0315437Z OUTDATED python/pyproject.toml: setuptools >=84.0.0 -> 84.2.1
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0316052Z OUTDATED python/pyproject.toml: pytest >=9.1.1 -> 9.2.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0316911Z OUTDATED python/pyproject.toml: flake8 >=7.4.1 -> 7.5.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0317650Z OUTDATED java/pom.xml: com.google.googlejavaformat:google-java-format 1.37.0 -> 2.0.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0318524Z OUTDATED java/pom.xml: org.apache.maven.plugins:maven-enforcer-plugin 3.6.3 -> 3.7.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0319386Z OUTDATED java/pom.xml: org.apache.maven.plugins:maven-surefire-plugin 3.6.0 -> 3.6.1
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0320125Z OUTDATED php/composer.json: phpunit/phpunit ^13.4.3 -> 13.4.6
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0320852Z OUTDATED benchmarks/java/pom.xml: com.google.code.gson:gson 2.14.0 -> 2.15.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0321737Z OUTDATED benchmarks/java/pom.xml: org.apache.maven.plugins:maven-enforcer-plugin 3.6.3 -> 3.7.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0322693Z OUTDATED benchmarks/tools/package.json: lino-objects-codec ^0.9.2 -> 0.9.5
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0323500Z OUTDATED docs/website/package.json: lino-objects-codec ^0.9.2 -> 0.9.5
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0324204Z OUTDATED docs/website/package.json: eslint ^10.13.0 -> 10.14.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0324803Z OUTDATED docs/website/package.json: vite ^8.3.4 -> 8.3.5
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0325499Z OUTDATED docs/comparison/package.json: lino-objects-codec ^0.9.2 -> 0.9.5
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0326334Z OUTDATED .github/workflows/security.yml: trufflesecurity/trufflehog 3.99.2 -> v3.99.7
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0327426Z OUTDATED .github/workflows/publish-js.yml: npm 12.2.0 -> 12.2.1
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0328164Z OUTDATED .pre-commit-config.yaml: pre-commit/mirrors-eslint v10.13.0 -> v10.14.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0328928Z OUTDATED .pre-commit-config.yaml: eslint 10.13.0 -> 10.14.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0329549Z Checked 170 declarations, 94 published packages/actions.
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0330693Z To fix: merge the open Dependabot pull requests, or run `python scripts/ci/check-dependencies.py --update`, regenerate the lockfiles and commit the result.
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0527850Z ##[error]Process completed with exit code 1.
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0646994Z ##[group]Run actions/upload-artifact@v7.0.2
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0647331Z with:
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0647546Z   name: dependency-check-logs
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0648062Z   path: ci-logs/dependencies/
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0648306Z   if-no-files-found: ignore
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0648540Z   compression-level: 6
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0648753Z   overwrite: false
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0648958Z   include-hidden-files: false
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0649180Z   archive: true
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0649362Z env:
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0649609Z   pythonLocation: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0650031Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib/pkgconfig
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0650438Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0650803Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0651173Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.15.1/x64
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0651565Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.15.1/x64/lib
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.0651878Z ##[endgroup]
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.2083688Z No files were found with the provided path: ci-logs/dependencies/. No artifacts will be uploaded.
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.2352539Z Post job cleanup.
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.3255437Z [command]/usr/bin/git version
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.3307187Z git version 2.56.0
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.3368092Z Temporarily overriding HOME='/home/runner/work/_temp/9454fd4c-1984-48a0-bfc6-d376a310f55e' before making global git config changes
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.3369591Z Adding repository directory to the temporary git global config as a safe directory
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.3370841Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.3450541Z Removing SSH command configuration
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.3451346Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.3489373Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.3928104Z Removing HTTP extra header
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.3929139Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.3990164Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.4348541Z Removing includeIf entries pointing to credentials config files
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.4359191Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.4402155Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+latest-stable	UNKNOWN STEP	2026-11-02T15:48:06.4868375Z Cleaning up orphan processes

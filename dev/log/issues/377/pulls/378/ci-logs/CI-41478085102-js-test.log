@@ -1,0 +1,870 @@
+js / test	UNKNOWN STEP	﻿2026-11-02T16:11:29.7332519Z Current runner version: '2.338.2'
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7360720Z ##[group]Runner Image Provisioner
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7361705Z Hosted Compute Agent
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7362338Z Version: 20261021.618
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7363034Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7363774Z Build Date: 2026-10-21T00:45:21Z
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7364459Z Worker ID: {56ddd7b4-8306-4a5e-9361-49f33f729ebe}
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7365516Z Region: eastus
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7366108Z Cloud: Azure
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7366691Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7368216Z ##[group]Operating System
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7368860Z Ubuntu
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7369496Z 26.04.1
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7370048Z LTS
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7370599Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7371179Z ##[group]Runner Image
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7371787Z Image: ubuntu-26.04
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7372404Z Version: 20261025.179.1
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7373718Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7375776Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7376790Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7378069Z ##[group]GITHUB_TOKEN Permissions
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7380237Z Contents: read
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7380952Z Metadata: read
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7381638Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7384461Z Secret source: Dependabot
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7386419Z Cache mode: write
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.7387472Z Prepare workflow directory
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.8232347Z Prepare all required actions
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.8310157Z Getting action download info
+js / test	UNKNOWN STEP	2026-11-02T16:11:29.9998205Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.1671561Z Download action repository 'oven-sh/setup-bun@v2.2.0' (SHA:0c5077e51419868618aeaa5fe8019c62421857d6)
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.3806216Z Uses: link-foundation/links-notation/.github/workflows/javascript.yml@refs/pull/374/merge (99e748ca3c5a3d8edeefca236b274185097f8cf6)
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.3811340Z ##[group] Inputs
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.3812293Z   verbose: false
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.3812785Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.3813268Z Complete job name: js / test
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4671027Z ##[group]Run actions/checkout@v7.0.1
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4671984Z with:
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4672452Z   persist-credentials: false
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4672997Z   submodules: true
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4673515Z   repository: link-foundation/links-notation
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4678130Z   token: ***
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4678599Z   ssh-strict: true
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4679062Z   ssh-user: git
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4679521Z   clean: true
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4679991Z   sparse-checkout-cone-mode: true
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4680556Z   fetch-depth: 1
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4681015Z   fetch-tags: false
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4681488Z   show-progress: true
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4681964Z   lfs: false
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4682410Z   set-safe-directory: true
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4682971Z   allow-unsafe-pr-checkout: false
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4683811Z env:
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4688107Z   GITHUB_TOKEN: ***
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4688578Z   CI_VERBOSE: false
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.4689017Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7416934Z Syncing repository: link-foundation/links-notation
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7419075Z ##[group]Getting Git version info
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7420040Z Working directory is '/home/runner/work/links-notation/links-notation'
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7421361Z [command]/usr/bin/git version
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7458833Z git version 2.56.0
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7482100Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7492810Z Temporarily overriding HOME='/home/runner/work/_temp/8551fc60-605b-45a0-b7a1-8a07c1dbc509' before making global git config changes
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7494986Z Adding repository directory to the temporary git global config as a safe directory
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7498735Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7576385Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7579403Z ##[group]Determining repository object format
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7581914Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7584016Z ##[group]Initializing the repository
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7587000Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7753305Z hint: Using 'master' as the name for the initial branch. This default branch name
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7756699Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7760668Z hint: to use in all of your new repositories, which will suppress this warning,
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7762693Z hint: call:
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7763864Z hint:
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7765549Z hint: 	git config --global init.defaultBranch <name>
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7767368Z hint:
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7768878Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7771141Z hint: 'development'. The just-created branch can be renamed via this command:
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7772710Z hint:
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7773653Z hint: 	git branch -m <name>
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7774932Z hint:
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7776611Z hint: Disable this message with "git config set advice.defaultBranchName false"
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7779436Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7796424Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7861748Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7864380Z ##[group]Disabling automatic garbage collection
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7866617Z [command]/usr/bin/git config --local gc.auto 0
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7918499Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7920289Z ##[group]Setting up auth
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7921433Z Removing SSH command configuration
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7923179Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.7967554Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.8478884Z Removing HTTP extra header
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.8486533Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.8527181Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.8820905Z Removing includeIf entries pointing to credentials config files
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.8827501Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.8865010Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.9148384Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.9190714Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.9228173Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.9269908Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.9304510Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.9337374Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.9338377Z ##[group]Fetching the repository
+js / test	UNKNOWN STEP	2026-11-02T16:11:30.9346261Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +99e748ca3c5a3d8edeefca236b274185097f8cf6:refs/remotes/pull/374/merge
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.4133276Z From https://github.com/link-foundation/links-notation
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.4137983Z  * [new ref]         99e748ca3c5a3d8edeefca236b274185097f8cf6 -> pull/374/merge
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.4146260Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.4149697Z ##[group]Determining the checkout info
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.4152741Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.4154521Z [command]/usr/bin/git sparse-checkout disable
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.4209101Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.4240895Z ##[group]Checking out the ref
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.4246539Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/374/merge
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6713169Z Note: switching to 'refs/remotes/pull/374/merge'.
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6713888Z 
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6714339Z You are in 'detached HEAD' state. You can look around, make experimental
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6715647Z changes and commit them, and you can discard any commits you make in this
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6716595Z state without impacting any branches by switching back to a branch.
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6717141Z 
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6717579Z If you want to create a new branch to retain commits you create, you may
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6718556Z do so (now or later) by using -c with the switch command. Example:
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6719146Z 
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6719411Z   git switch -c <new-branch-name>
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6719829Z 
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6720103Z Or undo this operation with:
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6720483Z 
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6720712Z   git switch -
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6721031Z 
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6721527Z Turn off this advice by setting config variable advice.detachedHead to false
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6722283Z 
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6723072Z HEAD is now at 99e748c Merge c8235dc34329cca0b131a09402de265317971e5a into 940986b4ccbee9b67b6db83c2d44e824b11ca666
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6742390Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6743288Z ##[group]Setting up auth for fetching submodules
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6749973Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6795595Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6829964Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6862762Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6898293Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6929498Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6930170Z ##[group]Fetching submodules
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.6933135Z [command]/usr/bin/git submodule sync
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.7230601Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.7526092Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.7807562Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.7868080Z [command]/usr/bin/git log -1 --format=%H
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.7905337Z 99e748ca3c5a3d8edeefca236b274185097f8cf6
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.7916161Z ##[group]Removing auth
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.7916667Z Removing SSH command configuration
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.7919416Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8011878Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8247790Z Removing HTTP extra header
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8251574Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8290870Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8573747Z Removing includeIf entries pointing to credentials config files
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8578493Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8606687Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8607758Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8608472Z includeif.gitdir:/github/workspace/.git.path
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8609021Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8615276Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8641018Z /home/runner/work/_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8652405Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-4047336d\-8c1a\-456c\-87a2\-02078f791bc6\.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8688347Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8712915Z /home/runner/work/_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8722940Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-4047336d\-8c1a\-456c\-87a2\-02078f791bc6\.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8795681Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8846884Z /github/runner_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8849060Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-4047336d\-8c1a\-456c\-87a2\-02078f791bc6\.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8884169Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8909420Z /github/runner_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8916721Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-4047336d\-8c1a\-456c\-87a2\-02078f791bc6\.config
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.8953313Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.9243483Z Removing credentials config '/home/runner/work/_temp/git-credentials-4047336d-8c1a-456c-87a2-02078f791bc6.config'
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.9245734Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.9557156Z ##[group]Run oven-sh/setup-bun@v2.2.0
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.9557557Z with:
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.9557841Z   bun-version: latest
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.9558143Z   no-cache: false
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.9560925Z   token: ***
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.9561194Z env:
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.9563914Z   GITHUB_TOKEN: ***
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.9564205Z   CI_VERBOSE: false
+js / test	UNKNOWN STEP	2026-11-02T16:11:32.9564485Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:33.5340231Z Downloading a new version of Bun: https://github.com/oven-sh/bun/releases/download/bun-v1.4.4/bun-linux-x64.zip
+js / test	UNKNOWN STEP	2026-11-02T16:11:33.8291031Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/b94d05a1-dfc6-4814-a4b1-f88552270fda.zip
+js / test	UNKNOWN STEP	2026-11-02T16:11:34.6922985Z [command]/home/runner/.bun/bin/bun --revision
+js / test	UNKNOWN STEP	2026-11-02T16:11:34.6982053Z 1.4.4+38afee6c8
+js / test	UNKNOWN STEP	2026-11-02T16:11:34.7214152Z ##[group]Run bun install --frozen-lockfile
+js / test	UNKNOWN STEP	2026-11-02T16:11:34.7214621Z ^[[36;1mbun install --frozen-lockfile^[[0m
+js / test	UNKNOWN STEP	2026-11-02T16:11:34.7250323Z shell: /usr/bin/bash -e {0}
+js / test	UNKNOWN STEP	2026-11-02T16:11:34.7250641Z env:
+js / test	UNKNOWN STEP	2026-11-02T16:11:34.7253961Z   GITHUB_TOKEN: ***
+js / test	UNKNOWN STEP	2026-11-02T16:11:34.7254237Z   CI_VERBOSE: false
+js / test	UNKNOWN STEP	2026-11-02T16:11:34.7254484Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:34.7362523Z bun install v1.4.4 (38afee6c8)
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0026339Z 
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0026840Z + bun-types@1.4.4
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0027230Z + eslint@10.14.0
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0027557Z + peggy@5.1.1
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0027876Z + prettier@3.9.10
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0028206Z + typescript@7.0.2
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0028412Z 
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0028570Z 89 packages installed [268.00ms]
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0121203Z ##[group]Run bun run build
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0121538Z ^[[36;1mbun run build^[[0m
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0152521Z shell: /usr/bin/bash -e {0}
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0152853Z env:
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0156705Z   GITHUB_TOKEN: ***
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0157013Z   CI_VERBOSE: false
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0157300Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0235748Z $ bun run build:grammar && bun build src/index.js --outdir=dist --target=browser
+js / test	UNKNOWN STEP	2026-11-02T16:11:35.0276279Z $ peggy --format es -o src/parser-generated.js src/grammar.pegjs
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0004082Z Bundled 17 modules in 8ms
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0011609Z 
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0022730Z   index.js  116.87 KB  (entry point)
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0023520Z 
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0066035Z ##[group]Run git diff --exit-code -- src/parser-generated.js
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0066695Z ^[[36;1mgit diff --exit-code -- src/parser-generated.js^[[0m
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0098563Z shell: /usr/bin/bash -e {0}
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0098901Z env:
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0102515Z   GITHUB_TOKEN: ***
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0102819Z   CI_VERBOSE: false
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0103097Z ##[endgroup]
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0202494Z diff --git a/js/src/parser-generated.js b/js/src/parser-generated.js
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0203487Z index f59af56..257bfb9 100644
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0204009Z --- a/js/src/parser-generated.js
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0204582Z +++ b/js/src/parser-generated.js
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0205347Z @@ -1,4 +1,4 @@
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0205799Z -// @generated by Peggy 5.1.0.
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0206341Z +// @generated by Peggy 5.1.1.
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0206862Z  //
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0207278Z  // https://peggyjs.org/
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0207887Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0208573Z @@ -62,10 +62,9 @@ class peg$SyntaxError extends SyntaxError {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0209392Z        return s;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0209825Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0210066Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0210313Z -    function literalEscape(s) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0210829Z +    function escape(s, special) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0211357Z        return unicodeEscape(s
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0211857Z -        .replace(/\\/g, "\\\\")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0212302Z -        .replace(/"/g,  "\\\"")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0212766Z +        .replace(special, "\\$&")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0213247Z          .replace(/\0/g, "\\0")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0213711Z          .replace(/\t/g, "\\t")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0214139Z          .replace(/\n/g, "\\n")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0214964Z @@ -74,18 +73,12 @@ class peg$SyntaxError extends SyntaxError {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0215698Z          .replace(/[\x10-\x1F\x7F-\x9F]/g, ch => "\\x"  + hex(ch)));
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0216282Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0216590Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0216959Z +    function literalEscape(s) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0217421Z +      return escape(s, /[\\"]/g);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0217851Z +    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0218160Z +
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0218386Z      function classEscape(s) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0218692Z -      return unicodeEscape(s
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0218992Z -        .replace(/\\/g, "\\\\")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0219285Z -        .replace(/\]/g, "\\]")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0219567Z -        .replace(/\^/g, "\\^")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0219852Z -        .replace(/-/g,  "\\-")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0220361Z -        .replace(/\0/g, "\\0")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0220634Z -        .replace(/\t/g, "\\t")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0220908Z -        .replace(/\n/g, "\\n")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0221174Z -        .replace(/\r/g, "\\r")
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0221524Z -        .replace(/[\x00-\x0F]/g,          ch => "\\x0" + hex(ch))
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0221999Z -        .replace(/[\x10-\x1F\x7F-\x9F]/g, ch => "\\x"  + hex(ch)));
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0222420Z +      return escape(s, /[\\\]^-]/g);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0222718Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0222919Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0223148Z      const DESCRIBE_EXPECTATION_FNS = {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0223532Z @@ -179,12 +172,6 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0223899Z    const peg$c8 = "`";
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0224147Z    const peg$c9 = " ";
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0224380Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0224590Z -  const peg$r0 = /^[ \t]/;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0225205Z -  const peg$r1 = /^[\r\n]/;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0225482Z -  const peg$r2 = /^[0-9]/;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0225948Z -  const peg$r3 = /^[^} \t\r\n()]/;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0226395Z -  const peg$r4 = /^[ \t\n\r]/;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0226909Z -  const peg$r5 = /^[^ \t\n\r(:)]/;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0227509Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0227989Z    const peg$e0 = peg$classExpectation([" ", "\t"], false, false, false);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0228795Z    const peg$e1 = peg$classExpectation(["\r", "\n"], false, false, false);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0229914Z @@ -314,6 +301,7 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0230360Z    let peg$silentFails = options.peg$silentFails | 0;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0230680Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0230860Z    let peg$result;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0231073Z +  let peg$charCode;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0231277Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0231468Z    if (options.startRule) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0231772Z      if (!(options.startRule in peg$startRuleFunctions)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0232164Z @@ -540,62 +528,22 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0232490Z      let s0, s1, s2, s3;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0232708Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0232894Z      s0 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0233104Z -    s1 = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0233318Z -    s2 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0233529Z -    s3 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0233805Z -    if (peg$r0.test(s3)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0234042Z -      peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0234250Z -    } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0234442Z -      s3 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0235077Z -      if (peg$silentFails === 0) { peg$fail(peg$e0); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0235431Z -    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0235635Z -    while (s3 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0235890Z -      s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0236163Z -      s3 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0236445Z -      if (peg$r0.test(s3)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0236683Z -        peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0236894Z -      } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0237090Z -        s3 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0237386Z -        if (peg$silentFails === 0) { peg$fail(peg$e0); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0237699Z -      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0237880Z -    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0238111Z -    s3 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0238389Z -    if (peg$r1.test(s3)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0238626Z -      peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0238854Z -    } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0239286Z -      s3 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0239632Z -      if (peg$silentFails === 0) { peg$fail(peg$e1); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0240019Z -    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0240243Z -    if (s3 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0240553Z -      s2 = [s2, s3];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0240910Z -      s1 = s2;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0241118Z -    } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0241317Z -      peg$currPos = s1;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0241543Z -      s1 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0241748Z -    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0241936Z -    while (s1 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0242178Z -      s0.push(s1);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0242379Z +    for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0242747Z        s1 = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0242961Z        s2 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0243179Z -      s3 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0243455Z -      if (peg$r0.test(s3)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0243693Z -        peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0243905Z -      } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0244102Z -        s3 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0244445Z -        if (peg$silentFails === 0) { peg$fail(peg$e0); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0245224Z -      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0245443Z -      while (s3 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0245706Z -        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0245921Z +      for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0246151Z          s3 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0246434Z -        if (peg$r0.test(s3)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0246831Z +        if ((peg$charCode = s3.charCodeAt(0), peg$charCode === 32 || peg$charCode === 9)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0247262Z            peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0247490Z          } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0247698Z            s3 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0247973Z            if (peg$silentFails === 0) { peg$fail(peg$e0); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0248280Z          }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0248478Z +        if (s3 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0248748Z +        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0248958Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0249164Z        s3 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0249440Z -      if (peg$r1.test(s3)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0250037Z +      if ((peg$charCode = s3.charCodeAt(0), peg$charCode === 13 || peg$charCode === 10)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0250595Z          peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0250814Z        } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0251018Z          s3 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0251302Z @@ -608,6 +556,8 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0251924Z          peg$currPos = s1;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0252321Z          s1 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0252537Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0252731Z +      if (s1 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0253007Z +      s0.push(s1);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0253203Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0253373Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0253549Z      return s0;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0253797Z @@ -620,10 +570,10 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0254123Z      s1 = peg$parsefirstLine();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0254375Z      if (s1 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0254604Z        s2 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0255072Z -      s3 = peg$parseline();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0255323Z -      while (s3 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0255572Z -        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0255785Z +      for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0255991Z          s3 = peg$parseline();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0256243Z +        if (s3 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0256508Z +        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0256711Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0256898Z        peg$savedPos = s0;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0257129Z        s0 = peg$f4(s1, s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0257419Z @@ -890,10 +840,10 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0257740Z      if (s0 === peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0257976Z        s0 = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0258193Z        s1 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0258454Z -      s2 = peg$parsesingleLineValueAndWhitespace();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0258779Z -      while (s2 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0259027Z -        s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0259234Z +      for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0259488Z          s2 = peg$parsesingleLineValueAndWhitespace();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0259817Z +        if (s2 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0260084Z +        s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0260349Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0260635Z        s2 = peg$parseeol();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0260876Z        if (s2 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0261177Z @@ -1118,13 +1068,12 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0261511Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0261692Z      s0 = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0261903Z      s1 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0262307Z -    s2 = peg$parsesingleLineValueAndWhitespace();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0262629Z -    if (s2 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0262874Z -      while (s2 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0263116Z -        s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0263370Z -        s2 = peg$parsesingleLineValueAndWhitespace();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0263676Z -      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0263909Z -    } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0264096Z +    for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0264347Z +      s2 = peg$parsesingleLineValueAndWhitespace();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0264906Z +      if (s2 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0265178Z +      s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0265373Z +    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0265562Z +    if (s1.length < 1) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0265784Z        s1 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0265995Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0266176Z      if (s1 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0266466Z @@ -1289,25 +1238,18 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0266786Z          }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0266974Z          if (s5 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0267214Z            s6 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0267436Z -          s7 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0267719Z -          if (peg$r2.test(s7)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0267972Z -            peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0268195Z -          } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0268395Z -            s7 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0268689Z -            if (peg$silentFails === 0) { peg$fail(peg$e7); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0269124Z -          }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0269332Z -          if (s7 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0269594Z -            while (s7 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0269858Z -              s6.push(s7);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0270108Z -              s7 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0270408Z -              if (peg$r2.test(s7)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0270838Z -                peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0271075Z -              } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0271298Z -                s7 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0271581Z -                if (peg$silentFails === 0) { peg$fail(peg$e7); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0271892Z -              }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0272085Z +          for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0272305Z +            s7 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0272719Z +            if ((peg$charCode = s7.charCodeAt(0), (peg$charCode >= 48 && peg$charCode <= 57))) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0273135Z +              peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0273361Z +            } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0273566Z +              s7 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0273840Z +              if (peg$silentFails === 0) { peg$fail(peg$e7); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0274142Z              }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0274323Z -          } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0274537Z +            if (s7 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0275073Z +            s6.push(s7);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0275281Z +          }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0275466Z +          if (s6.length < 1) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0275694Z              s6 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0275905Z            }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0276093Z            if (s6 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0276390Z @@ -1320,22 +1262,16 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0276692Z              }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0276885Z              if (s7 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0277125Z                s8 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0277357Z -              s9 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0277637Z -              if (peg$r3.test(s9)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0277886Z -                peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0278111Z -              } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0278316Z -                s9 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0278596Z -                if (peg$silentFails === 0) { peg$fail(peg$e9); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0278896Z -              }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0279100Z -              while (s9 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0279356Z -                s8.push(s9);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0279733Z +              for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0279968Z                  s9 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0280646Z -                if (peg$r3.test(s9)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0281461Z +                if (s9 !== "" && !(peg$charCode = s9.charCodeAt(0), peg$charCode === 125 || peg$charCode === 32 || peg$charCode === 9 || peg$charCode === 13 || peg$charCode === 10 || peg$charCode === 40 || peg$charCode === 41)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0282223Z                    peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0282468Z                  } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0282684Z                    s9 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0282976Z                    if (peg$silentFails === 0) { peg$fail(peg$e9); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0283287Z                  }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0283503Z +                if (s9 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0283787Z +                s8.push(s9);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0284002Z                }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0284236Z                if (input.charCodeAt(peg$currPos) === 125) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0284540Z                  s9 = peg$c5;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0285091Z @@ -1400,13 +1336,12 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0285402Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0285585Z      if (s1 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0285803Z        s2 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0286014Z -      s3 = peg$parsereferenceSymbol();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0286282Z -      if (s3 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0286519Z -        while (s3 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0286917Z -          s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0287155Z -          s3 = peg$parsereferenceSymbol();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0287418Z -        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0287597Z -      } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0287780Z +      for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0288002Z +        s3 = peg$parsereferenceSymbol();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0288282Z +        if (s3 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0288533Z +        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0288727Z +      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0288913Z +      if (s2.length < 1) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0289133Z          s2 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0289335Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0289523Z        if (s2 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0289806Z @@ -1500,10 +1435,10 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0290105Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0290293Z      if (s1 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0290511Z        s2 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0290884Z -      s3 = peg$parseconsumeDoubleMore();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0291168Z -      while (s3 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0291407Z -        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0291606Z +      for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0291823Z          s3 = peg$parseconsumeDoubleMore();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0292101Z +        if (s3 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0292359Z +        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0292555Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0292736Z        peg$savedPos = s0;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0292959Z        s0 = peg$f36(s1, s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0293241Z @@ -1611,10 +1546,10 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0293549Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0293729Z      if (s1 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0293950Z        s2 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0294162Z -      s3 = peg$parseconsumeSingleMore();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0294437Z -      while (s3 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0294956Z -        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0295187Z +      for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0295404Z          s3 = peg$parseconsumeSingleMore();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0295685Z +        if (s3 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0295940Z +        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0296136Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0296320Z        peg$savedPos = s0;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0296535Z        s0 = peg$f41(s1, s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0296803Z @@ -1722,10 +1657,10 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0297096Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0297271Z      if (s1 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0297486Z        s2 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0297853Z -      s3 = peg$parseconsumeBacktickMore();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0298132Z -      while (s3 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0298368Z -        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0298560Z +      for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0298781Z          s3 = peg$parseconsumeBacktickMore();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0299067Z +        if (s3 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0299315Z +        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0299505Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0299684Z        peg$savedPos = s0;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0299907Z        s0 = peg$f46(s1, s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0300175Z @@ -1788,15 +1723,7 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0300482Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0300822Z      s0 = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0301028Z      s1 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0301246Z -    if (input.charCodeAt(peg$currPos) === 32) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0301527Z -      s2 = peg$c9;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0301724Z -      peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0301925Z -    } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0302115Z -      s2 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0302371Z -      if (peg$silentFails === 0) { peg$fail(peg$e14); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0302663Z -    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0302851Z -    while (s2 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0303085Z -      s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0303278Z +    for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0303496Z        if (input.charCodeAt(peg$currPos) === 32) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0303772Z          s2 = peg$c9;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0303970Z          peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0304416Z @@ -1804,6 +1731,8 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0305033Z          s2 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0305302Z          if (peg$silentFails === 0) { peg$fail(peg$e14); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0305592Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0305780Z +      if (s2 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0306066Z +      s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0306255Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0306442Z      peg$savedPos = s0;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0306655Z      s1 = peg$f50(s1);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0306920Z @@ -1817,15 +1746,7 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0307213Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0307382Z      s0 = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0307582Z      s1 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0307795Z -    if (input.charCodeAt(peg$currPos) === 32) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0308072Z -      s2 = peg$c9;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0308264Z -      peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0308459Z -    } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0308642Z -      s2 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0308902Z -      if (peg$silentFails === 0) { peg$fail(peg$e14); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0309189Z -    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0309374Z -    while (s2 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0309611Z -      s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0309800Z +    for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0310024Z        if (input.charCodeAt(peg$currPos) === 32) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0310300Z          s2 = peg$c9;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0310503Z          peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0310922Z @@ -1833,6 +1754,8 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0311243Z          s2 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0311500Z          if (peg$silentFails === 0) { peg$fail(peg$e14); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0311791Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0311978Z +      if (s2 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0312233Z +      s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0312422Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0312607Z      peg$savedPos = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0312845Z      s2 = peg$f51(s1);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0313104Z @@ -1857,15 +1780,7 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0313398Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0313572Z      s0 = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0313771Z      s1 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0313990Z -    if (input.charCodeAt(peg$currPos) === 32) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0314273Z -      s2 = peg$c9;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0314476Z -      peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0314925Z -    } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0315120Z -      s2 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0315379Z -      if (peg$silentFails === 0) { peg$fail(peg$e14); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0315817Z -    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0316000Z -    while (s2 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0316232Z -      s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0316422Z +    for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0316644Z        if (input.charCodeAt(peg$currPos) === 32) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0316921Z          s2 = peg$c9;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0317121Z          peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0317393Z @@ -1873,6 +1788,8 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0317696Z          s2 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0317947Z          if (peg$silentFails === 0) { peg$fail(peg$e14); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0318228Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0318415Z +      if (s2 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0318662Z +      s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0318850Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0319031Z      peg$savedPos = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0319264Z      s2 = peg$f53(s1);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0319524Z @@ -1920,132 +1837,53 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0319832Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0320007Z      s0 = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0320201Z      s1 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0320400Z -    s2 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0320825Z -    if (peg$r1.test(s2)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0321055Z -      peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0321251Z -    } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0321431Z -      s2 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0321676Z -      if (peg$silentFails === 0) { peg$fail(peg$e1); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0321959Z -    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0322301Z -    if (s2 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0322549Z -      while (s2 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0322795Z -        s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0323011Z -        s2 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0323280Z -        if (peg$r1.test(s2)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0323513Z -          peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0323722Z -        } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0323921Z -          s2 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0343662Z -          if (peg$silentFails === 0) { peg$fail(peg$e1); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0344230Z -        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0344560Z +    for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0345260Z +      s2 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0345725Z +      if ((peg$charCode = s2.charCodeAt(0), peg$charCode === 13 || peg$charCode === 10)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0346161Z +        peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0346387Z +      } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0346595Z +        s2 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0346881Z +        if (peg$silentFails === 0) { peg$fail(peg$e1); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0347188Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0347371Z -    } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0347579Z +      if (s2 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0347844Z +      s1.push(s2);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0348048Z +    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0348239Z +    if (s1.length < 1) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0348470Z        s1 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0348680Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0348872Z      if (s1 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0349114Z        s2 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0349314Z -      s3 = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0349539Z -      s4 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0349764Z -      s5 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0350054Z -      if (peg$r0.test(s5)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0350327Z -        peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0350547Z -      } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0350745Z -        s5 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0351163Z -        if (peg$silentFails === 0) { peg$fail(peg$e0); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0351494Z -      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0351689Z -      if (s5 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0351962Z -        while (s5 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0352230Z -          s4.push(s5);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0352446Z +      for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0352655Z +        s3 = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0352876Z +        s4 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0353069Z +        for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0353299Z            s5 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0353589Z -          if (peg$r0.test(s5)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0354196Z +          if ((peg$charCode = s5.charCodeAt(0), peg$charCode === 32 || peg$charCode === 9)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0354878Z              peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0355149Z            } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0355366Z              s5 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0355654Z              if (peg$silentFails === 0) { peg$fail(peg$e0); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0355964Z            }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0356171Z +          if (s5 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0356457Z +          s4.push(s5);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0356669Z          }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0356848Z -      } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0357048Z -        s4 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0357260Z -      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0357448Z -      if (s4 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0357682Z -        s5 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0357905Z -        s6 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0358188Z -        if (peg$r1.test(s6)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0358428Z -          peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0358650Z -        } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0358848Z -          s6 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0359122Z -          if (peg$silentFails === 0) { peg$fail(peg$e1); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0359437Z +        if (s4.length < 1) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0359669Z +          s4 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0359881Z          }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0360070Z -        if (s6 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0360329Z -          while (s6 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0360733Z -            s5.push(s6);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0360976Z +        if (s4 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0361282Z +          s5 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0361590Z +          for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0361824Z              s6 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0362117Z -            if (peg$r1.test(s6)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0362540Z +            if ((peg$charCode = s6.charCodeAt(0), peg$charCode === 13 || peg$charCode === 10)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0362971Z                peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0363209Z              } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0363419Z                s6 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0363706Z                if (peg$silentFails === 0) { peg$fail(peg$e1); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0364053Z              }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0364262Z +            if (s6 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0364539Z +            s5.push(s6);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0365057Z            }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0365254Z -        } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0365466Z -          s5 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0365687Z -        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0365881Z -        if (s5 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0366127Z -          s4 = [s4, s5];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0366345Z -          s3 = s4;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0366539Z -        } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0366740Z -          peg$currPos = s3;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0366980Z -          s3 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0367197Z -        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0367373Z -      } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0367576Z -        peg$currPos = s3;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0367795Z -        s3 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0368000Z -      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0368191Z -      while (s3 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0368434Z -        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0368643Z -        s3 = peg$currPos;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0368854Z -        s4 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0369066Z -        s5 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0369342Z -        if (peg$r0.test(s5)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0369581Z -          peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0369794Z -        } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0369988Z -          s5 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0370255Z -          if (peg$silentFails === 0) { peg$fail(peg$e0); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0370558Z -        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0370746Z -        if (s5 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0370999Z -          while (s5 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0371256Z -            s4.push(s5);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0371496Z -            s5 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0372087Z -            if (peg$r0.test(s5)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0372354Z -              peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0372587Z -            } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0372801Z -              s5 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0373083Z -              if (peg$silentFails === 0) { peg$fail(peg$e0); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0373386Z -            }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0373569Z -          }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0373749Z -        } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0373943Z -          s4 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0374163Z -        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0374356Z -        if (s4 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0374597Z -          s5 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0375105Z -          s6 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0375398Z -          if (peg$r1.test(s6)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0375649Z -            peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0375873Z -          } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0376076Z -            s6 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0376358Z -            if (peg$silentFails === 0) { peg$fail(peg$e1); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0376672Z -          }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0376866Z -          if (s6 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0377120Z -            while (s6 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0377376Z -              s5.push(s6);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0377619Z -              s6 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0377906Z -              if (peg$r1.test(s6)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0378157Z -                peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0378386Z -              } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0378737Z -                s6 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0379036Z -                if (peg$silentFails === 0) { peg$fail(peg$e1); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0379344Z -              }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0379532Z -            }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0379715Z -          } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0379914Z +          if (s5.length < 1) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0380148Z              s5 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0380377Z            }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0380570Z            if (s5 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0380883Z @@ -2059,6 +1897,8 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0381201Z            peg$currPos = s3;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0381429Z            s3 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0381725Z          }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0382003Z +        if (s3 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0382269Z +        s2.push(s3);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0382466Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0382644Z        s1 = [s1, s2];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0382843Z        s0 = s1;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0383106Z @@ -2140,22 +1980,16 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0383422Z      let s0, s1;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0383609Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0383777Z      s0 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0383983Z -    s1 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0384247Z -    if (peg$r0.test(s1)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0384477Z -      peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0384920Z -    } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0385120Z -      s1 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0385382Z -      if (peg$silentFails === 0) { peg$fail(peg$e0); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0385673Z -    }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0385864Z -    while (s1 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0386105Z -      s0.push(s1);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0386310Z +    for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0386521Z        s1 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0386788Z -      if (peg$r0.test(s1)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0387169Z +      if ((peg$charCode = s1.charCodeAt(0), peg$charCode === 32 || peg$charCode === 9)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0387581Z          peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0387781Z        } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0387969Z          s1 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0388226Z          if (peg$silentFails === 0) { peg$fail(peg$e0); }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0388515Z        }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0388708Z +      if (s1 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0388965Z +      s0.push(s1);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0389154Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0389319Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0389482Z      return s0;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0389873Z @@ -2165,10 +1999,10 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0390180Z      let s0, s1;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0390362Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0390528Z      s0 = [];
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0390732Z -    s1 = peg$parsewhiteSpaceSymbol();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0391006Z -    while (s1 !== peg$FAILED) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0391250Z -      s0.push(s1);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0391498Z +    for (;;) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0391828Z        s1 = peg$parsewhiteSpaceSymbol();
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0392114Z +      if (s1 === peg$FAILED) { break; }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0392364Z +      s0.push(s1);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0392549Z      }
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0392712Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0392875Z      return s0;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0393124Z @@ -2178,7 +2012,7 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0393422Z      let s0;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0393600Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0393787Z      s0 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0394058Z -    if (peg$r4.test(s0)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0394582Z +    if ((peg$charCode = s0.charCodeAt(0), peg$charCode === 32 || peg$charCode === 9 || peg$charCode === 10 || peg$charCode === 13)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0395418Z        peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0395625Z      } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0395814Z        s0 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0396078Z @@ -2192,7 +2026,7 @@ function peg$parse(input, options) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0396376Z      let s0;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0396552Z  
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0396739Z      s0 = input.charAt(peg$currPos);
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0397135Z -    if (peg$r5.test(s0)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0397838Z +    if (s0 !== "" && !(peg$charCode = s0.charCodeAt(0), peg$charCode === 32 || peg$charCode === 9 || peg$charCode === 10 || peg$charCode === 13 || peg$charCode === 40 || peg$charCode === 58 || peg$charCode === 41)) {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0398560Z        peg$currPos++;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0398756Z      } else {
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0398943Z        s0 = peg$FAILED;
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0410686Z ##[error]Process completed with exit code 1.
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.0585615Z Post job cleanup.
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.1547886Z [command]/usr/bin/git version
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.1606530Z git version 2.56.0
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.1635850Z Temporarily overriding HOME='/home/runner/work/_temp/1483ad2c-eb28-4670-9939-426117cc5463' before making global git config changes
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.1637262Z Adding repository directory to the temporary git global config as a safe directory
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.1638567Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.1676346Z Removing SSH command configuration
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.1679019Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.1726780Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.2094427Z Removing HTTP extra header
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.2126913Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.2187511Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.2524498Z Removing includeIf entries pointing to credentials config files
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.2532419Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.2574510Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+js / test	UNKNOWN STEP	2026-11-02T16:11:37.3026142Z Cleaning up orphan processes

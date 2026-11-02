@@ -1,0 +1,26 @@
+# Keeps the action versions of .github/workflows and the pinned CI tools of
+# scripts/requirements-ci.txt current. Each update is an ordinary pull request
+# that runs the whole pipeline before it can merge. The cooldown waits a week
+# after a release before proposing it, so a compromised release is usually
+# found and yanked before it reaches the pipeline.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ['*']
+
+  - package-ecosystem: pip
+    directory: /scripts
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      ci-tools:
+        patterns: ['*']

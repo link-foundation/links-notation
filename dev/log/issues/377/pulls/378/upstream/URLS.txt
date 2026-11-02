@@ -1,0 +1,18 @@
+cpp-runner-acquisition-rerun	https://github.com/link-foundation/cpp-ai-driven-development-pipeline-template/issues/19
+csharp-runner-acquisition-rerun	https://github.com/link-foundation/csharp-ai-driven-development-pipeline-template/issues/96
+go-freshness-gate-on-push	https://github.com/link-foundation/go-ai-driven-development-pipeline-template/issues/13
+go-runner-acquisition-rerun	https://github.com/link-foundation/go-ai-driven-development-pipeline-template/issues/14
+java-freshness-gate-on-push	https://github.com/link-foundation/java-ai-driven-development-pipeline-template/issues/14
+java-no-dependency-audit	https://github.com/link-foundation/java-ai-driven-development-pipeline-template/issues/15
+java-runner-acquisition-rerun	https://github.com/link-foundation/java-ai-driven-development-pipeline-template/issues/16
+js-npm-audit-moderate	https://github.com/link-foundation/js-ai-driven-development-pipeline-template/issues/279
+js-runner-acquisition-rerun	https://github.com/link-foundation/js-ai-driven-development-pipeline-template/issues/280
+php-freshness-gate-on-push	https://github.com/link-foundation/php-ai-driven-development-pipeline-template/issues/20
+python-npm-action-lock-unaudited	https://github.com/link-foundation/python-ai-driven-development-pipeline-template/issues/132
+rust-runner-acquisition-rerun	https://github.com/link-foundation/rust-ai-driven-development-pipeline-template/issues/226
+dependabot-core-maven-plugin-configuration-version	https://github.com/dependabot/dependabot-core/issues/16797
+dependabot-core-yarn-lock-without-package-json	https://github.com/dependabot/dependabot-core/issues/16798
+youtrack-KT-rootPackageJson-ignores-resolutions	BLOCKED (not on GitHub: JetBrains/kotlin has issues disabled; needs a YouTrack account) - draft in third-party/
+ktlint-gradle-944-unsafe-worker-warnings (comment on existing issue)	https://github.com/JLLeitschuh/ktlint-gradle/issues/944#issuecomment-6584621670
+gradle-kgp-native-bundle-enum-message	https://github.com/gradle/gradle/issues/39685
+download-artifact-dep0005-buffer (existing issue, not re-filed)	https://github.com/actions/download-artifact/issues/484

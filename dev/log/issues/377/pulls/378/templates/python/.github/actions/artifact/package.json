@@ -1,0 +1,22 @@
+{
+  "name": "template-artifact-transport",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "ncc build index.mjs -o dist --minify --license licenses.txt",
+    "test": "node --test ../../../tests/artifact.test.mjs"
+  },
+  "dependencies": {
+    "@actions/artifact": "6.3.1",
+    "@actions/core": "3.0.1",
+    "@actions/glob": "0.7.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "0.45.0"
+  },
+  "overrides": {
+    "archiver-utils": {
+      "glob": "13.0.6"
+    }
+  }
+}

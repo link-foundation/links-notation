@@ -1,0 +1,887 @@
+name: CI/CD Pipeline
+
+# The C++ counterpart of the release.yml in the Rust, Python, JavaScript and
+# PHP link-foundation templates: the same job graph, triggers, gates and
+# release model (changelog fragments -> bump -> tag -> publish), with the
+# C++ build, lint and distribution channels. See docs/ci-cd.md.
+#
+# Single-language repositories keep the C++ project at the root (tags
+# v1.2.3); multi-language repositories keep it under cpp/ (tags cpp_v1.2.3).
+# Every script detects the layout itself, and each job exports CPP_DIR for the
+# steps that run CMake.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      release_mode:
+        description: 'Manual release mode'
+        required: true
+        type: choice
+        default: 'instant'
+        options:
+          - instant
+          - changelog-pr
+      bump_type:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      description:
+        description: 'Release description (optional)'
+        required: false
+        type: string
+
+# Least-privilege default for every job; jobs that need more escalate explicitly.
+permissions:
+  contents: read
+
+env:
+  # Provide Git's initial branch before actions/checkout runs git init so
+  # Git 2.54+ does not emit the upcoming Git 3.0 default-branch hint.
+  GIT_CONFIG_COUNT: '1'
+  GIT_CONFIG_KEY_0: init.defaultBranch
+  GIT_CONFIG_VALUE_0: main
+  CLICOLOR_FORCE: '1'
+  # The NuGet, Conan and Codecov credentials are deliberately *not* declared
+  # here. A workflow-level `env:` is inherited by every job, including the
+  # `pull_request` jobs that configure and build branch code (CMake scripts
+  # run arbitrary commands), so a workflow-level token is readable by any
+  # branch pull request. They are declared on the steps that need them.
+
+# Concurrency is intentionally job-scoped. Each read-only job cancels only its
+# superseded counterpart for the same non-main ref. Main checks are not
+# cancelled, so a cancelled main job is always exceptional and the terminal
+# status gate can safely report it as a failure. Jobs that can mutate the
+# repository, registries or releases all use one shared concurrency group
+# instead, also shared by Pages. A started write is never cancelled, and
+# queue: max retains up to 100 pending writers rather than replacing them.
+jobs:
+  # === DETECT CHANGES - determines which jobs should run ===
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    if: github.event_name != 'workflow_dispatch'
+    outputs:
+      any-code-changed: ${{ steps.changes.outputs.any-code-changed }}
+      cpp-changed: ${{ steps.changes.outputs.cpp-changed }}
+      docs-changed: ${{ steps.changes.outputs.docs-changed }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Detect changes
+        id: changes
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          GITHUB_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+        run: python3 scripts/detect_code_changes.py
+
+  # === DOCS VALIDATION - required documents and their sections ===
+  # A diff review reliably misses a deleted CONTRIBUTING.md or a gutted
+  # README, and the link checker actually gets greener when the sections that
+  # contained the links go away. The .md size limit lives in the lint job.
+  validate-docs:
+    name: Validate Documentation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-validate-docs
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    needs: [detect-changes]
+    if: needs.detect-changes.outputs.docs-changed == 'true'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Check required documentation
+        run: bash scripts/check-required-docs.sh
+
+  # === RELEASE PREFLIGHT - check publishing credentials ===
+  # A non-empty secret proves nothing (an expired token is non-empty), and a
+  # login proves authentication, not authorisation -- so
+  # scripts/preflight-credentials.sh probes supported authorization boundaries
+  # and reports deferred OIDC exchanges or uncheckable scope as unknown. In
+  # release mode a refused credential blocks publishing; the build matrix
+  # runs alongside the probe. In report mode (pull requests -- a fork has no
+  # publishing secrets) the same probes annotate without blocking, which is
+  # why the publishing jobs gate on `result == 'success'` rather than on the
+  # run being green.
+  release-preflight:
+    name: Release Preflight
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      # The GitHub probe creates an invalid ref: 422 proves write access
+      # without writing anything.
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Probe every release credential
+        env:
+          PREFLIGHT_MODE: >-
+            ${{
+              (
+                (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+                (github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'instant')
+              ) && 'release' || 'report'
+            }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUGET_PUBLISH: ${{ vars.NUGET_PUBLISH }}
+          NUGET_PACKAGE_ID: ${{ vars.NUGET_PACKAGE_ID }}
+          NUGET_USER: ${{ vars.NUGET_USER }}
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          CONAN_REMOTE_URL: ${{ vars.CONAN_REMOTE_URL }}
+          CONAN_LOGIN_USERNAME: ${{ vars.CONAN_LOGIN_USERNAME || secrets.CONAN_LOGIN_USERNAME }}
+          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
+        run: bash scripts/preflight-credentials.sh
+
+  # === CHANGELOG CHECK - only runs on PRs with code changes ===
+  # Docs-only PRs (./docs folder, markdown files) don't require changelog fragments
+  changelog:
+    name: Changelog Fragment Check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-changelog
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    needs: [detect-changes]
+    if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Check for changelog fragments
+        env:
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
+        run: python3 scripts/check_changelog_fragment.py
+
+  # === VERSION CHECK - prevents manual version modification in PRs ===
+  # Versions are only modified by the automated release pipeline.
+  version-check:
+    name: Version Modification Check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-version-check
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Check for manual version changes
+        env:
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
+        run: python3 scripts/check_version_modification.py
+
+  # === SECRETS SCAN ===
+  # Language-agnostic credential scan; runs via npx so no Node dependency is committed.
+  secrets-scan:
+    name: Secrets Scan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-secrets-scan
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Run secretlint
+        run: npx --yes -p secretlint -p @secretlint/secretlint-rule-preset-recommend secretlint --secretlintignore .gitignore "**/*"
+
+  # === FRESH MERGE SIMULATION ===
+  # Catches semantic merge conflicts: a pull request that is green in isolation but
+  # breaks the base branch once merged into its current tip.
+  fresh-merge:
+    name: Fresh Merge Simulation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-fresh-merge
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    needs: [detect-changes]
+    if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Simulate fresh merge with base branch
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: bash scripts/simulate-fresh-merge.sh
+
+      - name: Locate the C++ project
+        run: |
+          {
+            echo "CPP_DIR=$(python3 scripts/get_version.py --print cpp_root)"
+            echo "SCRIPTS_DIR=$PWD/scripts"
+          } >> "$GITHUB_ENV"
+
+      - name: Build and test the merge result
+        working-directory: ${{ env.CPP_DIR }}
+        env:
+          FRESH_MERGE_BUDGET_SECONDS: 1200
+        run: >-
+          bash "$SCRIPTS_DIR/run-with-budget-warning.sh" "$FRESH_MERGE_BUDGET_SECONDS" "Fresh merge build and test"
+          cmake --workflow --preset dev
+
+  # === LINT AND FORMAT CHECK ===
+  # Lint runs independently of changelog check - it's a fast check that should always run
+  # See: https://github.com/link-assistant/hive-mind/pull/1024 for why this dependency was removed
+  lint:
+    name: Lint and Format Check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-lint
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    needs: [detect-changes]
+    # Note: !cancelled() is required because detect-changes is skipped on workflow_dispatch,
+    # and without it, this job would also be skipped even though its condition includes workflow_dispatch.
+    # See: https://github.com/actions/runner/issues/491
+    if: |
+      !cancelled() && (
+        github.event_name == 'workflow_dispatch' ||
+        needs.detect-changes.outputs.any-code-changed == 'true'
+      )
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.13'
+
+      - name: Install pinned lint tools
+        # clang-format, clang-tidy and cppcheck come from PyPI wheels pinned in
+        # scripts/requirements-ci.txt, so CI and every contributor run exactly
+        # the same versions (`pip install -r scripts/requirements-ci.txt`).
+        run: |
+          python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
+          clang-format --version
+          clang-tidy --version
+          cppcheck --version
+
+      - name: Locate the C++ project
+        run: echo "CPP_DIR=$(python scripts/get_version.py --print cpp_root)" >> "$GITHUB_ENV"
+
+      - name: Configure the lint build tree
+        # compile_commands.json for clang-tidy and cppcheck, with tests,
+        # examples and benchmarks enabled so every source is analysed.
+        working-directory: ${{ env.CPP_DIR }}
+        run: cmake --preset lint
+
+      - name: Run clang-format, clang-tidy and cppcheck
+        env:
+          LINT_BUDGET_SECONDS: 600
+        run: >-
+          bash scripts/run-with-budget-warning.sh "$LINT_BUDGET_SECONDS" "C++ lint"
+          python scripts/lint_cpp.py
+
+      # Warning-band annotations are limited to files this pull request changed,
+      # so unchanged files stop repeating the same warning on every run.
+      # The 1000-line hard limit still applies to the whole repository.
+      - name: Collect changed files
+        id: changed-files
+        env:
+          BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          {
+            echo 'files<<CHANGED_FILES_EOF'
+            if [ -n "$BASE_SHA" ] && git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
+              git diff --name-only "$BASE_SHA" HEAD
+            else
+              # No usable base (e.g. workflow_dispatch): fall back to annotating every warning.
+              git ls-files
+            fi
+            echo 'CHANGED_FILES_EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Check file size limit
+        env:
+          CHANGED_FILES: ${{ steps.changed-files.outputs.files }}
+        run: python scripts/check_file_size.py
+
+  # === TEST ===
+  # Every supported toolchain builds and tests Debug and Release, then builds
+  # and runs the consumer examples: add_subdirectory, FetchContent, CPM.cmake,
+  # find_package after `cmake --install`, and pkg-config (not on Windows).
+  test:
+    name: Test (${{ matrix.name }})
+    runs-on: ${{ matrix.os }}
+    # Backstop only. The budgeted steps below own the real deadline; see
+    # scripts/run-with-budget-warning.sh for why that distinction matters.
+    timeout-minutes: 45
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-test-${{ matrix.name }}
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    needs: [detect-changes]
+    # Note: !cancelled() is required because detect-changes is skipped on workflow_dispatch,
+    # and without it, this job would also be skipped even though its condition includes workflow_dispatch.
+    # See: https://github.com/actions/runner/issues/491
+    if: |
+      !cancelled() && (
+        github.event_name == 'workflow_dispatch' ||
+        needs.detect-changes.outputs.any-code-changed == 'true'
+      )
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-gcc
+            os: ubuntu-24.04
+          - name: linux-clang
+            os: ubuntu-24.04
+            cc: clang
+            cxx: clang++
+          - name: macos-appleclang
+            os: macos-15
+          - name: windows-msvc
+            os: windows-2025
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.13'
+
+      - name: Select the compiler and locate the C++ project
+        env:
+          MATRIX_CC: ${{ matrix.cc }}
+          MATRIX_CXX: ${{ matrix.cxx }}
+        run: |
+          {
+            if [ -n "$MATRIX_CC" ]; then
+              echo "CC=$MATRIX_CC"
+              echo "CXX=$MATRIX_CXX"
+            fi
+            echo "CPP_DIR=$(python scripts/get_version.py --print cpp_root)"
+            echo "SCRIPTS_DIR=$PWD/scripts"
+          } >> "$GITHUB_ENV"
+          cmake --version
+
+      - name: Build and test (Debug)
+        working-directory: ${{ env.CPP_DIR }}
+        env:
+          TEST_BUDGET_SECONDS: 900
+        run: >-
+          bash "$SCRIPTS_DIR/run-with-budget-warning.sh" "$TEST_BUDGET_SECONDS" "Debug build and tests"
+          cmake --workflow --preset dev
+
+      - name: Build and test (Release, with benchmarks)
+        working-directory: ${{ env.CPP_DIR }}
+        env:
+          TEST_BUDGET_SECONDS: 900
+        run: >-
+          bash "$SCRIPTS_DIR/run-with-budget-warning.sh" "$TEST_BUDGET_SECONDS" "Release build and tests"
+          cmake --workflow --preset release
+
+      - name: Build and run the consumer examples
+        env:
+          CONSUMERS_BUDGET_SECONDS: 900
+        run: >-
+          bash scripts/run-with-budget-warning.sh "$CONSUMERS_BUDGET_SECONDS" "Consumer examples"
+          python scripts/check_consumers.py
+
+  # === SANITIZERS ===
+  # AddressSanitizer and UndefinedBehaviorSanitizer over the whole test suite.
+  sanitizers:
+    name: Sanitizers (ASan + UBSan)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-sanitizers
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    needs: [detect-changes]
+    # Note: !cancelled() is required because detect-changes is skipped on workflow_dispatch,
+    # and without it, this job would also be skipped even though its condition includes workflow_dispatch.
+    # See: https://github.com/actions/runner/issues/491
+    if: |
+      !cancelled() && (
+        github.event_name == 'workflow_dispatch' ||
+        needs.detect-changes.outputs.any-code-changed == 'true'
+      )
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Locate the C++ project
+        run: |
+          {
+            echo "CPP_DIR=$(python3 scripts/get_version.py --print cpp_root)"
+            echo "SCRIPTS_DIR=$PWD/scripts"
+          } >> "$GITHUB_ENV"
+
+      - name: Build and test with sanitizers
+        working-directory: ${{ env.CPP_DIR }}
+        env:
+          SANITIZER_BUDGET_SECONDS: 1200
+        run: >-
+          bash "$SCRIPTS_DIR/run-with-budget-warning.sh" "$SANITIZER_BUDGET_SECONDS" "Sanitizer build and tests"
+          cmake --workflow --preset asan
+
+  # === RELEASE SCRIPT TESTS ===
+  # The release scripts are part of the product: a broken version bump or
+  # package script only shows up at release time otherwise.
+  script-tests:
+    name: Release Script Tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-script-tests
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    needs: [detect-changes]
+    # Note: !cancelled() is required because detect-changes is skipped on workflow_dispatch,
+    # and without it, this job would also be skipped even though its condition includes workflow_dispatch.
+    # See: https://github.com/actions/runner/issues/491
+    if: |
+      !cancelled() && (
+        github.event_name == 'workflow_dispatch' ||
+        needs.detect-changes.outputs.any-code-changed == 'true'
+      )
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.13'
+
+      - name: Install pinned tools
+        run: python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
+
+      - name: Run release script tests
+        env:
+          SCRIPT_TESTS_BUDGET_SECONDS: 600
+        run: >-
+          bash scripts/run-with-budget-warning.sh "$SCRIPT_TESTS_BUDGET_SECONDS" "Release script tests"
+          python -m pytest scripts/tests -q
+
+  # === CODE COVERAGE ===
+  # gcov instrumentation (coverage preset) and gcovr; gcovr.cfg sets the
+  # report filter and the line-coverage floor.
+  coverage:
+    name: Code Coverage
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-coverage
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    needs: [detect-changes]
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    # Note: !cancelled() is required because detect-changes is skipped on workflow_dispatch,
+    # and without it, this job would also be skipped even though its condition includes workflow_dispatch.
+    # See: https://github.com/actions/runner/issues/491
+    if: |
+      !cancelled() && (
+        github.event_name == 'workflow_dispatch' ||
+        needs.detect-changes.outputs.cpp-changed == 'true'
+      )
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.13'
+
+      - name: Install gcovr
+        run: python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
+
+      - name: Locate the C++ project
+        run: |
+          {
+            echo "CPP_DIR=$(python scripts/get_version.py --print cpp_root)"
+            echo "SCRIPTS_DIR=$PWD/scripts"
+          } >> "$GITHUB_ENV"
+
+      - name: Build and test with coverage instrumentation
+        working-directory: ${{ env.CPP_DIR }}
+        env:
+          COVERAGE_BUDGET_SECONDS: 900
+        run: >-
+          bash "$SCRIPTS_DIR/run-with-budget-warning.sh" "$COVERAGE_BUDGET_SECONDS" "Code coverage"
+          cmake --workflow --preset coverage
+
+      - name: Generate coverage report
+        working-directory: ${{ env.CPP_DIR }}
+        run: gcovr --object-directory build/coverage
+
+      - name: Upload coverage to Codecov
+        if: env.CODECOV_TOKEN != ''
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
+        with:
+          token: ${{ env.CODECOV_TOKEN }}
+          files: ${{ env.CPP_DIR }}/build/coverage/coverage.xml
+          disable_search: true
+          fail_ci_if_error: true
+
+      - name: Report skipped Codecov upload
+        if: env.CODECOV_TOKEN == ''
+        run: echo "::notice::Skipping Codecov upload because CODECOV_TOKEN is not configured"
+
+  # === BUILD - every distribution channel, before anything is published ===
+  # Builds exactly the assets a release would publish and consumes each one
+  # the way a user would: the NuGet package is restored by the NuGet client,
+  # `conan create` builds and runs test_package, and the vcpkg overlay port
+  # downloads the source archive, verifies its SHA512 and installs.
+  build:
+    name: Build Packages
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-build
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    needs: [lint, test, sanitizers, script-tests]
+    if: ${{ !cancelled() && needs.lint.result == 'success' && needs.test.result == 'success' && needs.sanitizers.result == 'success' && needs.script-tests.result == 'success' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+          # git archive of HEAD needs the commit time; the tags are not needed.
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.13'
+
+      - name: Install pinned tools
+        run: python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
+
+      - name: Locate the C++ project
+        run: echo "CPP_DIR=$(python scripts/get_version.py --print cpp_root)" >> "$GITHUB_ENV"
+
+      - name: Build the release assets
+        id: package
+        env:
+          NUGET_PACKAGE_ID: ${{ vars.NUGET_PACKAGE_ID }}
+          RELEASE_ARCHIVE_BASENAME: ${{ vars.RELEASE_ARCHIVE_BASENAME }}
+        run: python scripts/package_release.py --out-dir dist --nuget
+
+      - name: Restore the NuGet package with the NuGet client
+        env:
+          NUPKG: ${{ steps.package.outputs.nupkg }}
+        run: bash scripts/check-nuget-package.sh "$NUPKG"
+
+      - name: Build and test the Conan package
+        env:
+          CONAN_BUDGET_SECONDS: 900
+        run: |
+          conan profile detect --force
+          bash scripts/run-with-budget-warning.sh "$CONAN_BUDGET_SECONDS" "Conan package" \
+            conan create "$CPP_DIR" -s compiler.cppstd=20 --build=missing
+
+      - name: Install the vcpkg port and build its consumer
+        env:
+          VCPKG_BUDGET_SECONDS: 900
+        run: |
+          # GitHub-hosted Ubuntu images ship a bootstrapped vcpkg; bootstrap
+          # one for self-hosted runners that do not.
+          VCPKG_ROOT="${VCPKG_INSTALLATION_ROOT:-}"
+          if [ -z "$VCPKG_ROOT" ] || [ ! -x "$VCPKG_ROOT/vcpkg" ]; then
+            VCPKG_ROOT="$RUNNER_TEMP/vcpkg"
+            git clone --quiet --depth 1 https://github.com/microsoft/vcpkg.git "$VCPKG_ROOT"
+            "$VCPKG_ROOT/bootstrap-vcpkg.sh" -disableMetrics
+          fi
+          export VCPKG_ROOT
+          bash scripts/run-with-budget-warning.sh "$VCPKG_BUDGET_SECONDS" "vcpkg port" \
+            bash scripts/check-vcpkg-port.sh
+
+      - name: Upload release assets
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: release-assets
+          path: dist
+          if-no-files-found: error
+
+  # === AUTO RELEASE ===
+  # Automatic release on push to main using changelog fragments.
+  # This job bumps the version from the fragments in changelog.d/, commits,
+  # tags, and publishes. A push without fragments completes a release whose
+  # publication failed half-way (scripts/check_release_needed.py).
+  auto-release:
+    name: Auto Release
+    needs: [lint, test, build, release-preflight]
+    concurrency:
+      group: repository-main-write
+      cancel-in-progress: false
+      queue: max
+    # Note: !cancelled() ensures consistent behavior with other jobs that depend on skipped jobs.
+    if: |
+      !cancelled() &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      needs.release-preflight.result == 'success' &&
+      needs.build.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      # This job pushes the version bump commit and tag back to `main`, so the
+      # checkout credentials have to stay in `.git/config` (no
+      # `persist-credentials: false` here, unlike every read-only checkout).
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.13'
+
+      - name: Install Conan
+        if: vars.CONAN_REMOTE_URL != ''
+        run: python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
+
+      - name: Determine bump type from changelog fragments
+        id: bump_type
+        run: python scripts/get_bump_type.py
+
+      - name: Check if version already released or no fragments
+        id: check
+        env:
+          HAS_FRAGMENTS: ${{ steps.bump_type.outputs.has_fragments }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUGET_PUBLISH: ${{ vars.NUGET_PUBLISH }}
+          NUGET_PACKAGE_ID: ${{ vars.NUGET_PACKAGE_ID }}
+        run: python scripts/check_release_needed.py
+
+      - name: Collect changelog and bump version
+        id: version
+        if: steps.check.outputs.should_release == 'true' && steps.check.outputs.skip_bump != 'true'
+        env:
+          BUMP_TYPE: ${{ steps.bump_type.outputs.bump_type }}
+        run: python scripts/version_and_commit.py --bump-type "$BUMP_TYPE"
+
+      - name: Log in to NuGet with trusted publishing
+        id: nuget-login
+        if: >-
+          steps.check.outputs.should_release == 'true' &&
+          steps.check.outputs.nuget_published != 'true' &&
+          vars.NUGET_PUBLISH == 'true' && vars.NUGET_USER != ''
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1
+        with:
+          user: ${{ vars.NUGET_USER }}
+
+      - name: Publish the release
+        if: steps.check.outputs.should_release == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUGET_PUBLISH: ${{ vars.NUGET_PUBLISH }}
+          NUGET_PACKAGE_ID: ${{ vars.NUGET_PACKAGE_ID }}
+          RELEASE_ARCHIVE_BASENAME: ${{ vars.RELEASE_ARCHIVE_BASENAME }}
+          # Set only when there were no fragments and the lookup found the
+          # current version on NuGet already.
+          NUGET_PUBLISHED: ${{ steps.check.outputs.nuget_published }}
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY || secrets.NUGET_API_KEY }}
+          CONAN_REMOTE_URL: ${{ vars.CONAN_REMOTE_URL }}
+          CONAN_LOGIN_USERNAME: ${{ vars.CONAN_LOGIN_USERNAME || secrets.CONAN_LOGIN_USERNAME }}
+          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
+        run: bash scripts/publish-release.sh
+
+  # === MANUAL INSTANT RELEASE ===
+  # Manual release via workflow_dispatch - only after CI passes
+  manual-release:
+    name: Instant Release
+    needs: [lint, test, build, release-preflight]
+    concurrency:
+      group: repository-main-write
+      cancel-in-progress: false
+      queue: max
+    # Note: !cancelled() is required to evaluate the condition when dependencies may be skipped.
+    # The build job ensures lint and test passed before this job runs.
+    if: |
+      !cancelled() &&
+      github.event_name == 'workflow_dispatch' &&
+      github.event.inputs.release_mode == 'instant' &&
+      needs.release-preflight.result == 'success' &&
+      needs.build.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      # This job pushes the version bump commit and tag back to `main`, so the
+      # checkout credentials have to stay in `.git/config` (no
+      # `persist-credentials: false` here, unlike every read-only checkout).
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.13'
+
+      - name: Install Conan
+        if: vars.CONAN_REMOTE_URL != ''
+        run: python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
+
+      - name: Version and commit
+        id: version
+        env:
+          BUMP_TYPE: ${{ github.event.inputs.bump_type }}
+          DESCRIPTION: ${{ github.event.inputs.description }}
+        run: python scripts/version_and_commit.py --bump-type "$BUMP_TYPE" --description "$DESCRIPTION"
+
+      - name: Log in to NuGet with trusted publishing
+        id: nuget-login
+        if: >-
+          (steps.version.outputs.version_committed == 'true' || steps.version.outputs.already_released == 'true') &&
+          vars.NUGET_PUBLISH == 'true' && vars.NUGET_USER != ''
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1
+        with:
+          user: ${{ vars.NUGET_USER }}
+
+      - name: Publish the release
+        if: steps.version.outputs.version_committed == 'true' || steps.version.outputs.already_released == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUGET_PUBLISH: ${{ vars.NUGET_PUBLISH }}
+          NUGET_PACKAGE_ID: ${{ vars.NUGET_PACKAGE_ID }}
+          RELEASE_ARCHIVE_BASENAME: ${{ vars.RELEASE_ARCHIVE_BASENAME }}
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY || secrets.NUGET_API_KEY }}
+          CONAN_REMOTE_URL: ${{ vars.CONAN_REMOTE_URL }}
+          CONAN_LOGIN_USERNAME: ${{ vars.CONAN_LOGIN_USERNAME || secrets.CONAN_LOGIN_USERNAME }}
+          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
+        run: bash scripts/publish-release.sh
+
+  # === MANUAL CHANGELOG PR ===
+  changelog-pr:
+    name: Create Changelog PR
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changelog-pr'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: repository-main-write
+      cancel-in-progress: false
+      queue: max
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Create changelog fragment
+        env:
+          BUMP_TYPE: ${{ github.event.inputs.bump_type }}
+          DESCRIPTION: ${{ github.event.inputs.description }}
+        run: python3 scripts/create_changelog_fragment.py --bump-type "$BUMP_TYPE" --description "$DESCRIPTION"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: add changelog for manual ${{ github.event.inputs.bump_type }} release'
+          branch: changelog-manual-release-${{ github.run_id }}
+          delete-branch: true
+          title: 'chore: manual ${{ github.event.inputs.bump_type }} release'
+          body: |
+            ## Manual Release Request
+
+            This PR was created by a manual workflow trigger to prepare a **${{ github.event.inputs.bump_type }}** release.
+
+            ### Release Details
+            - **Type:** ${{ github.event.inputs.bump_type }}
+            - **Description:** ${{ github.event.inputs.description || 'Manual release' }}
+            - **Triggered by:** @${{ github.actor }}
+
+            ### Next Steps
+            1. Review the changelog fragment in this PR
+            2. Merge this PR to main
+            3. The automated release workflow will create the GitHub release and publish to every configured channel
+
+  # === PIPELINE STATUS ===
+  # Terminal status gate: GitHub reports jobs killed by timeout-minutes as
+  # cancelled. Observe every other job so a timeout on main becomes a visible
+  # failure instead of a grey run, while a run that was superseded by a newer
+  # commit is recognised as expected churn.
+  pipeline-status:
+    name: Pipeline Status
+    needs:
+      - detect-changes
+      - validate-docs
+      - release-preflight
+      - changelog
+      - version-check
+      - secrets-scan
+      - fresh-merge
+      - lint
+      - test
+      - sanitizers
+      - script-tests
+      - coverage
+      - build
+      - auto-release
+      - manual-release
+      - changelog-pr
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Check aggregate pipeline status
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          RUN_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+        run: bash scripts/check-pipeline-status.sh

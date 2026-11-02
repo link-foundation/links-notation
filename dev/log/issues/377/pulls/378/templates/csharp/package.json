@@ -1,0 +1,25 @@
+{
+  "name": "csharp-pipeline-helpers",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint scripts experiments eslint.config.mjs --max-warnings 0",
+    "format": "prettier --write 'scripts/**/*.{mjs,ts}' 'experiments/**/*.mjs' '*.mjs' '*.json'",
+    "format:check": "prettier --check 'scripts/**/*.{mjs,ts}' 'experiments/**/*.mjs' '*.mjs' '*.json'",
+    "typecheck": "tsc --project jsconfig.json",
+    "check": "bun run lint && bun run format:check && bun run typecheck",
+    "test": "bun test scripts/*.test.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/bun": "1.4.4",
+    "@types/node": "26.6.6",
+    "eslint": "10.14.0",
+    "globals": "17.13.0",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2"
+  },
+  "overrides": {
+    "minimatch": "11.0.3"
+  }
+}

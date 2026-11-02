@@ -1,0 +1,304 @@
+benchmarks / java	UNKNOWN STEP	﻿2026-11-02T16:16:56.3855052Z Current runner version: '2.338.2'
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3879634Z ##[group]Runner Image Provisioner
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3880577Z Hosted Compute Agent
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3881240Z Version: 20261021.618
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3881872Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3882677Z Build Date: 2026-10-21T00:45:21Z
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3883351Z Worker ID: {07943ec5-8826-4855-8619-28dc0635c129}
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3884550Z Region: eastus
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3885256Z Cloud: Azure
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3885772Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3887528Z ##[group]Operating System
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3888238Z Ubuntu
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3888874Z 26.04.1
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3889395Z LTS
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3889905Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3890522Z ##[group]Runner Image
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3891131Z Image: ubuntu-26.04
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3891770Z Version: 20261025.179.1
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3893102Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3895146Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3896130Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3897359Z ##[group]GITHUB_TOKEN Permissions
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3899497Z Contents: read
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3900234Z Metadata: read
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3900797Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3902902Z Secret source: Actions
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3904181Z Cache mode: write
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.3904928Z Prepare workflow directory
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.4451038Z Prepare all required actions
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.4500800Z Getting action download info
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.6256098Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.7226303Z Download action repository 'actions/download-artifact@v8.0.2' (SHA:9000827ccba6bdab643e8b6fd33ac0654aef8333)
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:56.8620844Z Download action repository 'actions/setup-java@v6.1.0' (SHA:b843ebf9b913146b38da2eaa7aeddf76074ae1ad)
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.0809699Z Download action repository 'actions/upload-artifact@v7.0.2' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.2353108Z Uses: link-foundation/links-notation/.github/workflows/benchmarks.yml@refs/heads/main (940986b4ccbee9b67b6db83c2d44e824b11ca666)
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.2357997Z ##[group] Inputs
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.2358939Z   verbose: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.2359417Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.2359874Z Complete job name: benchmarks / java
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3213745Z ##[group]Run actions/checkout@v7.0.1
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3214931Z with:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3215386Z   persist-credentials: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3215900Z   submodules: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3216392Z   repository: link-foundation/links-notation
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3220234Z   token: ***
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3220669Z   ssh-strict: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3221100Z   ssh-user: git
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3221517Z   clean: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3221959Z   sparse-checkout-cone-mode: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3222506Z   fetch-depth: 1
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3222941Z   fetch-tags: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3223378Z   show-progress: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3223828Z   lfs: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3224520Z   set-safe-directory: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3225036Z   allow-unsafe-pr-checkout: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3225844Z env:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3226248Z   CI_VERBOSE: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.3226687Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6555415Z Syncing repository: link-foundation/links-notation
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6557427Z ##[group]Getting Git version info
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6558247Z Working directory is '/home/runner/work/links-notation/links-notation'
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6559354Z [command]/usr/bin/git version
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6581145Z git version 2.56.0
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6608718Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6622007Z Temporarily overriding HOME='/home/runner/work/_temp/7380d26d-4c4d-4b55-a3b8-c1c395453be7' before making global git config changes
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6626042Z Adding repository directory to the temporary git global config as a safe directory
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6629827Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6711015Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6715388Z ##[group]Determining repository object format
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6717313Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6718819Z ##[group]Initializing the repository
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6722698Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6855864Z hint: Using 'master' as the name for the initial branch. This default branch name
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6857871Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6859728Z hint: to use in all of your new repositories, which will suppress this warning,
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6861168Z hint: call:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6862030Z hint:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6863375Z hint: 	git config --global init.defaultBranch <name>
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6864899Z hint:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6866344Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6867741Z hint: 'development'. The just-created branch can be renamed via this command:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6868621Z hint:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6869156Z hint: 	git branch -m <name>
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6869748Z hint:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6870566Z hint: Disable this message with "git config set advice.defaultBranchName false"
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6885906Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6896925Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6953437Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6955527Z ##[group]Disabling automatic garbage collection
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6957333Z [command]/usr/bin/git config --local gc.auto 0
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6996126Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6998191Z ##[group]Setting up auth
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.6999321Z Removing SSH command configuration
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.7002496Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.7045879Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.7576559Z Removing HTTP extra header
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.7583536Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.7619405Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.7891281Z Removing includeIf entries pointing to credentials config files
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.7897987Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.7935273Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.8237573Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.8272642Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.8331037Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.8371942Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.8408506Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.8442974Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.8444636Z ##[group]Fetching the repository
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:57.8449114Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +940986b4ccbee9b67b6db83c2d44e824b11ca666:refs/remotes/origin/main
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3696072Z From https://github.com/link-foundation/links-notation
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3699120Z  * [new ref]         940986b4ccbee9b67b6db83c2d44e824b11ca666 -> origin/main
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3706500Z [command]/usr/bin/git branch --list --remote origin/main
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3736171Z   origin/main
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3745051Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3772686Z 940986b4ccbee9b67b6db83c2d44e824b11ca666
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3778149Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3779463Z ##[group]Determining the checkout info
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3780729Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3786040Z [command]/usr/bin/git sparse-checkout disable
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3866099Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3902293Z ##[group]Checking out the ref
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.3906862Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6516891Z Switched to a new branch 'main'
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6542798Z branch 'main' set up to track 'origin/main'.
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6562234Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6563078Z ##[group]Setting up auth for fetching submodules
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6568060Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6613524Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6650359Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6684369Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6720526Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6751233Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6752159Z ##[group]Fetching submodules
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.6756171Z [command]/usr/bin/git submodule sync
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.7057858Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.7391449Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.7705062Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.7765831Z [command]/usr/bin/git log -1 --format=%H
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.7800300Z 940986b4ccbee9b67b6db83c2d44e824b11ca666
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.7812271Z ##[group]Removing auth
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.7812832Z Removing SSH command configuration
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.7818274Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.7869714Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8161826Z Removing HTTP extra header
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8166578Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8200732Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8478220Z Removing includeIf entries pointing to credentials config files
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8481274Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8507683Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8508761Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8509718Z includeif.gitdir:/github/workspace/.git.path
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8510381Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8517346Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8543316Z /home/runner/work/_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8553676Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-f0949af9\-5f80\-4657\-ae80\-f24b96fa5faf\.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8630142Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8632768Z /home/runner/work/_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8641407Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-f0949af9\-5f80\-4657\-ae80\-f24b96fa5faf\.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8678478Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8704193Z /github/runner_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8713424Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-f0949af9\-5f80\-4657\-ae80\-f24b96fa5faf\.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8755936Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8782864Z /github/runner_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8792292Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-f0949af9\-5f80\-4657\-ae80\-f24b96fa5faf\.config
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.8832159Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9135338Z Removing credentials config '/home/runner/work/_temp/git-credentials-f0949af9-5f80-4657-ae80-f24b96fa5faf.config'
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9146886Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9449364Z ##[group]Run actions/download-artifact@v8.0.2
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9449725Z with:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9449939Z   name: benchmark-output
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9450187Z   path: benchmarks
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9450418Z   merge-multiple: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9450693Z   repository: link-foundation/links-notation
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9451007Z   run-id: 41477660740
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9451241Z   skip-decompress: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9451484Z   digest-mismatch: error
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9451704Z env:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9451890Z   CI_VERBOSE: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:58.9452103Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.0865426Z Downloading single artifact
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.2506426Z Preparing to download the following artifacts:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.2508188Z - benchmark-output (ID: 13157769346, Size: 56166, Expected Digest: sha256:5908edfb70f96b2cb4aed9c0b01f5ebf3ec9e8d5e2c837213c6ba99ff128107a)
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.4593448Z Redirecting to blob download url: https://productionresultssa11.blob.core.windows.net/actions-results/22ce9815-3f5e-8fa4-96dd-2f6cf9e2ecb0/workflow-job-run-00fff512-96b9-5343-a5ef-d10a78e52d84/artifacts/8b194f24b630211a098816e7c9ad938858c159ce3376008d568989c68abc42e7.zip
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.4596533Z Starting download of artifact to: /home/runner/work/links-notation/links-notation/benchmarks
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.4816105Z (node:2550) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.4818282Z (Use `node --trace-deprecation ...` to show where the warning was created)
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5387844Z SHA256 digest of downloaded artifact is 5908edfb70f96b2cb4aed9c0b01f5ebf3ec9e8d5e2c837213c6ba99ff128107a
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5389168Z Artifact download completed successfully.
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5389685Z Total of 1 artifact(s) downloaded
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5392887Z Download artifact has finished successfully
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5827737Z ##[group]Run actions/setup-java@v6.1.0
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5828054Z with:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5828268Z   java-version: 25
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5828483Z   distribution: temurin
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5828700Z   cache: maven
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5828907Z   java-package: jdk
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5829128Z   check-latest: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5829368Z   force-download: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5829584Z   set-default: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5829796Z   server-id: github
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5830029Z   mvn-repositories-include-central: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5830354Z   mvn-repositories-prioritize-central: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5830654Z   overwrite-settings: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5830893Z   cache-read-only: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5831115Z   job-status: success
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5833576Z   token: ***
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5833798Z   show-download-progress: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5834367Z   problem-matcher: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5834591Z env:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5834812Z   CI_VERBOSE: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.5835014Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.6592268Z ##[group]Installed distributions
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7124308Z Resolved Java 25.0.5+8 from tool-cache
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7124857Z Setting Java 25.0.5+8 as the default
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7134195Z 
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7134462Z Java configuration:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7134789Z   Distribution: temurin
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7135067Z   Version: 25.0.5+8
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7135543Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7136034Z 
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7194689Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7258691Z Creating settings.xml with server-id: github
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7262612Z Creating toolchains.xml for JDK version 25 from temurin
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7277711Z Writing to /home/runner/.m2/settings.xml
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7283132Z Writing to /home/runner/.m2/toolchains.xml
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:16:59.7292777Z Configured MAVEN_ARGS to include -ntp to suppress Maven transfer progress logs. Set 'show-download-progress: true' to keep the download progress output.
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.1273175Z Cache hit for: setup-java-Linux-x64-maven-e7dea05f4370d2d7ac8b84383cadbfdc35546cd1e6f31321d91e4dfd9a7c4e48
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.1286353Z Cache hit for: setup-java-Linux-x64-maven-wrapper-4606797fb925e6c6efbc030d02f1c4dc9cb7dc6bea2d8c732c7c618317864e9d
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.3946815Z Received 5564532 of 5564532 (100.0%), 27.1 MBs/sec
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.3949808Z Cache Size: ~5 MB (5564532 B)
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.3994946Z [command]/usr/bin/tar -xf /home/runner/work/_temp/d7a2ab59-70d7-4c34-883d-40c8009e7cbc/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4271242Z Received 9822746 of 9822746 (100.0%), 40.0 MBs/sec
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4272779Z Cache Size: ~9 MB (9822746 B)
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4305889Z [command]/usr/bin/tar -xf /home/runner/work/_temp/02a52e0c-8668-4d4c-ab9a-124b7108a018/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4474552Z Cache restored successfully
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4482209Z Cache restored from key: setup-java-Linux-x64-maven-e7dea05f4370d2d7ac8b84383cadbfdc35546cd1e6f31321d91e4dfd9a7c4e48
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4724492Z Cache restored successfully
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4726953Z maven-wrapper cache restored from key: setup-java-Linux-x64-maven-wrapper-4606797fb925e6c6efbc030d02f1c4dc9cb7dc6bea2d8c732c7c618317864e9d
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4953697Z ##[group]Run java/mvnw -B -q -f java/pom.xml install -DskipTests
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4954523Z ^[[36;1mjava/mvnw -B -q -f java/pom.xml install -DskipTests^[[0m
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4991190Z shell: /usr/bin/bash -e {0}
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4991479Z env:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4991688Z   CI_VERBOSE: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4992052Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4992577Z   JAVA_HOME_25_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4992989Z   MAVEN_ARGS: -ntp
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:00.4993216Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:21.8877643Z ##[group]Run ../../java/mvnw -B -q compile exec:java
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:21.8878075Z ^[[36;1m../../java/mvnw -B -q compile exec:java^[[0m
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:21.8909009Z shell: /usr/bin/bash -e {0}
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:21.8909280Z env:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:21.8909484Z   CI_VERBOSE: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:21.8909859Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:21.8910401Z   JAVA_HOME_25_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:21.8910810Z   MAVEN_ARGS: -ntp
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:21.8911032Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:27.9923921Z java: wrote results/java.json; every measurement agrees with the Rust results.
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0402919Z ##[group]Run actions/upload-artifact@v7.0.2
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0403258Z with:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0403486Z   name: results-java
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0403739Z   path: benchmarks/results/java.json
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0404326Z   retention-days: 1
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0404571Z   if-no-files-found: warn
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0404819Z   compression-level: 6
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0405210Z   overwrite: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0405517Z   include-hidden-files: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0405772Z   archive: true
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0405972Z env:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0406164Z   CI_VERBOSE: false
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0406510Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0407016Z   JAVA_HOME_25_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0407408Z   MAVEN_ARGS: -ntp
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.0407626Z ##[endgroup]
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.1933200Z With the provided path, there will be 1 file uploaded
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.1936434Z Artifact name is valid!
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.1937286Z Root directory input is valid!
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.4209026Z Uploading artifact: results-java.zip
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.4251065Z Beginning upload of artifact content to blob storage
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.4853165Z Uploaded bytes 1972
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.4981432Z Finished uploading artifact content to blob storage!
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.4982794Z SHA256 digest of uploaded artifact is 76636e23d4c3215001f2f3d87cee5c83536f4f0cc1b7d99e43df60804e07d724
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.4983620Z Finalizing artifact upload
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.9677250Z Artifact results-java successfully finalized. Artifact ID 13158463734
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.9678858Z Artifact results-java has been successfully uploaded! Final size is 1972 bytes. Artifact ID is 13158463734
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.9682360Z Artifact download URL: https://github.com/link-foundation/links-notation/actions/runs/41477660740/artifacts/13158463734
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:28.9933152Z Post job cleanup.
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.1091141Z Cache hit occurred on the maven-wrapper primary key setup-java-Linux-x64-maven-wrapper-4606797fb925e6c6efbc030d02f1c4dc9cb7dc6bea2d8c732c7c618317864e9d, not saving cache.
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.1099876Z Cache hit occurred on the primary key setup-java-Linux-x64-maven-e7dea05f4370d2d7ac8b84383cadbfdc35546cd1e6f31321d91e4dfd9a7c4e48, not saving cache.
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.1313385Z Post job cleanup.
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.2265444Z [command]/usr/bin/git version
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.2317721Z git version 2.56.0
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.2362013Z Temporarily overriding HOME='/home/runner/work/_temp/3d2a472e-65e3-4e0d-9007-22b9f9a661c0' before making global git config changes
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.2363698Z Adding repository directory to the temporary git global config as a safe directory
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.2367538Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.2405417Z Removing SSH command configuration
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.2412117Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.2453762Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.2766664Z Removing HTTP extra header
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.2773218Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.2826437Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.3230681Z Removing includeIf entries pointing to credentials config files
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.3237280Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.3279265Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+benchmarks / java	UNKNOWN STEP	2026-11-02T16:17:29.3731960Z Cleaning up orphan processes

@@ -1,0 +1,249 @@
+swift / differential	UNKNOWN STEP	﻿2026-11-02T16:25:25.3716546Z Current runner version: '2.338.2'
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3744315Z ##[group]Runner Image Provisioner
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3745243Z Hosted Compute Agent
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3745855Z Version: 20261021.618
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3746466Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3747274Z Build Date: 2026-10-21T00:45:21Z
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3747967Z Worker ID: {a8af4f97-629d-4867-b9a0-0090cc45b4bb}
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3748649Z Region: westus2
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3749292Z Cloud: Azure
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3749850Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3751877Z ##[group]Operating System
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3752521Z Ubuntu
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3753014Z 26.04.1
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3753585Z LTS
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3754088Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3754701Z ##[group]Runner Image
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3755308Z Image: ubuntu-26.04
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3755900Z Version: 20261025.179.1
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3757190Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3758787Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3759757Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3761278Z ##[group]GITHUB_TOKEN Permissions
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3763443Z Contents: read
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3764120Z Metadata: read
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3764769Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3766826Z Secret source: Dependabot
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3767847Z Cache mode: write
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.3768900Z Prepare workflow directory
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.4392477Z Prepare all required actions
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.4442236Z Getting action download info
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.8297806Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:25.9485241Z Download action repository 'actions/setup-node@v7.1.0' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1065040Z Uses: link-foundation/links-notation/.github/workflows/swift.yml@refs/pull/375/merge (07d03182e10a3cd4eae4499d9c05060c1c5436c1)
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1069802Z ##[group] Inputs
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1070964Z   verbose: false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1071498Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1072002Z Complete job name: swift / differential
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1932061Z ##[group]Run actions/checkout@v7.0.1
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1933042Z with:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1933521Z   persist-credentials: false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1934119Z   repository: link-foundation/links-notation
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1938199Z   token: ***
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1938670Z   ssh-strict: true
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1939150Z   ssh-user: git
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1939621Z   clean: true
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1940117Z   sparse-checkout-cone-mode: true
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1940943Z   fetch-depth: 1
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1941407Z   fetch-tags: false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1941883Z   show-progress: true
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1942359Z   lfs: false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1942804Z   submodules: false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1943282Z   set-safe-directory: true
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1943854Z   allow-unsafe-pr-checkout: false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1944664Z env:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1948556Z   GITHUB_TOKEN: ***
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1949046Z   CI_VERBOSE: false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.1949515Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5338020Z Syncing repository: link-foundation/links-notation
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5341483Z ##[group]Getting Git version info
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5343301Z Working directory is '/home/runner/work/links-notation/links-notation'
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5345661Z [command]/usr/bin/git version
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5346398Z git version 2.56.0
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5358454Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5369736Z Temporarily overriding HOME='/home/runner/work/_temp/f4de3037-2f06-4b15-9376-1f7572b1de1c' before making global git config changes
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5373768Z Adding repository directory to the temporary git global config as a safe directory
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5377708Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5471535Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5474984Z ##[group]Determining repository object format
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5477289Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5479067Z ##[group]Initializing the repository
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5483253Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5648572Z hint: Using 'master' as the name for the initial branch. This default branch name
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5652238Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5655433Z hint: to use in all of your new repositories, which will suppress this warning,
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5657870Z hint: call:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5658938Z hint:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5660399Z hint: 	git config --global init.defaultBranch <name>
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5662692Z hint:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5664443Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5667647Z hint: 'development'. The just-created branch can be renamed via this command:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5670109Z hint:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5671474Z hint: 	git branch -m <name>
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5672879Z hint:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5674884Z hint: Disable this message with "git config set advice.defaultBranchName false"
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5678889Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5692703Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5757225Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5759257Z ##[group]Disabling automatic garbage collection
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5761624Z [command]/usr/bin/git config --local gc.auto 0
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5798739Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5801235Z ##[group]Setting up auth
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5802708Z Removing SSH command configuration
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5806435Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.5847307Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.6346683Z Removing HTTP extra header
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.6352804Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.6395019Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.6662465Z Removing includeIf entries pointing to credentials config files
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.6667682Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.6701113Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.6982571Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-03d47be2-5610-4a14-8363-48d47e0a8094.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.7032610Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-03d47be2-5610-4a14-8363-48d47e0a8094.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.7068156Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-03d47be2-5610-4a14-8363-48d47e0a8094.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.7103807Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-03d47be2-5610-4a14-8363-48d47e0a8094.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.7136024Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-03d47be2-5610-4a14-8363-48d47e0a8094.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.7165422Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.7166468Z ##[group]Fetching the repository
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:26.7172833Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +07d03182e10a3cd4eae4499d9c05060c1c5436c1:refs/remotes/pull/375/merge
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:27.9616727Z From https://github.com/link-foundation/links-notation
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:27.9620915Z  * [new ref]         07d03182e10a3cd4eae4499d9c05060c1c5436c1 -> pull/375/merge
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:27.9624497Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:27.9625764Z ##[group]Determining the checkout info
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:27.9627092Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:27.9628576Z [command]/usr/bin/git sparse-checkout disable
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:27.9686682Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:27.9718881Z ##[group]Checking out the ref
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:27.9722552Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/375/merge
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2163466Z Note: switching to 'refs/remotes/pull/375/merge'.
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2164204Z 
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2164645Z You are in 'detached HEAD' state. You can look around, make experimental
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2165676Z changes and commit them, and you can discard any commits you make in this
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2166342Z state without impacting any branches by switching back to a branch.
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2166749Z 
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2167050Z If you want to create a new branch to retain commits you create, you may
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2167641Z do so (now or later) by using -c with the switch command. Example:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2167952Z 
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2168108Z   git switch -c <new-branch-name>
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2168332Z 
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2168498Z Or undo this operation with:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2168718Z 
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2168856Z   git switch -
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2169056Z 
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2169329Z Turn off this advice by setting config variable advice.detachedHead to false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2169760Z 
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2170186Z HEAD is now at 07d0318 Merge dfe0107ca83abace672f06014605715072721164 into 940986b4ccbee9b67b6db83c2d44e824b11ca666
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2198909Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2254459Z [command]/usr/bin/git log -1 --format=%H
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2284599Z 07d03182e10a3cd4eae4499d9c05060c1c5436c1
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2294048Z ##[group]Removing auth
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2294480Z Removing SSH command configuration
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2297998Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2332634Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2617468Z Removing HTTP extra header
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2621535Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2655353Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2927728Z Removing includeIf entries pointing to credentials config files
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2932748Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2959321Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2960898Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2962142Z includeif.gitdir:/github/workspace/.git.path
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2963062Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2969657Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.2993540Z /home/runner/work/_temp/git-credentials-03d47be2-5610-4a14-8363-48d47e0a8094.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3005188Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-03d47be2\-5610\-4a14\-8363\-48d47e0a8094\.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3043757Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3072580Z /home/runner/work/_temp/git-credentials-03d47be2-5610-4a14-8363-48d47e0a8094.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3082858Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-03d47be2\-5610\-4a14\-8363\-48d47e0a8094\.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3116969Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3140346Z /github/runner_temp/git-credentials-03d47be2-5610-4a14-8363-48d47e0a8094.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3148418Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-03d47be2\-5610\-4a14\-8363\-48d47e0a8094\.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3186074Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3210295Z /github/runner_temp/git-credentials-03d47be2-5610-4a14-8363-48d47e0a8094.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3221668Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-03d47be2\-5610\-4a14\-8363\-48d47e0a8094\.config
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3257058Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3528986Z Removing credentials config '/home/runner/work/_temp/git-credentials-03d47be2-5610-4a14-8363-48d47e0a8094.config'
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3538099Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3897635Z ##[group]Run actions/setup-node@v7.1.0
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3898050Z with:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3898327Z   node-version: 24
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3898626Z   check-latest: false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3901780Z   token: ***
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3902107Z   package-manager-cache: true
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3902440Z env:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3904978Z   GITHUB_TOKEN: ***
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3905280Z   CI_VERBOSE: false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.3905560Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.5249353Z Found in cache @ /opt/hostedtoolcache/node/24.22.1/x64
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:28.6282460Z ##[group]Environment details
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:29.0479131Z node: v24.22.1
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:29.0479470Z npm: 11.19.1
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:29.0479739Z yarn: 1.22.22
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:29.0480505Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:29.0636724Z ##[group]Run node experiments/issue-369/differential-vectors.mjs 20000 "$GITHUB_RUN_ID" 8 > "$RUNNER_TEMP/vectors.json"
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:29.0637822Z ^[[36;1mnode experiments/issue-369/differential-vectors.mjs 20000 "$GITHUB_RUN_ID" 8 > "$RUNNER_TEMP/vectors.json"^[[0m
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:29.0684198Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:29.0684660Z env:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:29.0687897Z   GITHUB_TOKEN: ***
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:29.0688217Z   CI_VERBOSE: false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:29.0688501Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:30.4736870Z ##[group]Run swift --version
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:30.4737250Z ^[[36;1mswift --version^[[0m
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:30.4737754Z ^[[36;1mLINKS_NOTATION_VECTORS="$RUNNER_TEMP/vectors.json" swift test --filter DifferentialTests^[[0m
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:30.4768456Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:30.4768858Z env:
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:30.4772294Z   GITHUB_TOKEN: ***
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:30.4772588Z   CI_VERBOSE: false
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:30.4772861Z   LINKS_NOTATION_MAX_DEPTH: 8
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:30.4773158Z ##[endgroup]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:36.1615767Z Swift version 6.4.1 (swift-6.4.1-RELEASE)
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:36.1616856Z Target: x86_64-unknown-linux-gnu
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:47.3031819Z Building for debugging...
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:47.3032874Z [Pre-planning 1 / 153]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:47.8755112Z [Planning deferred tasks]
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:48.0075679Z [32 / 59] LinksNotation
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:49.9793365Z [37 / 64] LinksNotation
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:52.1775300Z [47 / 73] LinksNotationTests-product
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:54.8829216Z [49 / 74] LinksNotationTests-product
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:55.0012928Z [50 / 74] binary-lino-product
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:57.3312934Z [55 / 74] LinksNotationTests-product
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:57.4291497Z [62 / 75] LinksNotation
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:57.6691305Z [64 / 75] binary-lino-product
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:57.7769395Z [64 / 75] LinksNotation-product
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:58.7683221Z [64 / 75] LinksNotationTests-product
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:59.0923355Z [68 / 76] LinksNotationTests-product
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:59.1961986Z [70 / 77] LinksNotationTests-test-runner
+swift / differential	UNKNOWN STEP	2026-11-02T16:25:59.6925689Z [72 / 79] LinksNotationTests-test-runner
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:00.5288261Z [76 / 79] LinksNotationTests-test-runner
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:00.8318430Z [80 / 80] LinksNotationTests-test-runner
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:01.2307519Z Build complete! (14.21 secs)
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7812377Z Test Suite 'Selected tests' started at 2026-11-02 16:26:01.359
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7813622Z Test Suite 'DifferentialTests' started at 2026-11-02 16:26:01.385
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7815783Z Test Case 'DifferentialTests.testTheJavaScriptParserAgrees' started at 2026-11-02 16:26:01.385
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7820866Z /home/runner/work/links-notation/links-notation/swift/Tests/LinksNotationTests/DifferentialTests.swift:44: error: DifferentialTests.testTheJavaScriptParserAgrees : failed - fuzz-2359 "```q```\"\" #🙂\r\n  \n    \'it\'\'s\'\"\"\""
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7824490Z   js:    ok ["nil[\"q\"[],\"    \\r\\n  \\n    \\\'it\\\'\\\'s\\\'\\\"\"[]]"] | (q ~1{202020200d0a20200a202020202769742727732722})
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7826532Z   swift: ok ["nil[\"q\"[],\"   \\r\\n  \\n    \\\'it\\\'\\\'s\\\'\\\"\"[]]"] | (q ~1{2020200d0a20200a202020202769742727732722})
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7828706Z Test Case 'DifferentialTests.testTheJavaScriptParserAgrees' failed (1.175 seconds)
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7830528Z Test Suite 'DifferentialTests' failed at 2026-11-02 16:26:02.559
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7832152Z 	 Executed 1 test, with 1 failure (0 unexpected) in 1.175 (1.175) seconds
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7833217Z Test Suite 'Selected tests' failed at 2026-11-02 16:26:02.559
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7834218Z 	 Executed 1 test, with 1 failure (0 unexpected) in 1.175 (1.175) seconds
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7835108Z Note: Some test targets reported failures:
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7835719Z   - LinksNotationTests (XCTest)
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.7919452Z ##[error]Process completed with exit code 1.
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.8062691Z Post job cleanup.
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.8955599Z [command]/usr/bin/git version
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9003601Z git version 2.56.0
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9043514Z Temporarily overriding HOME='/home/runner/work/_temp/48054e86-716b-4fab-b438-f2820803cc2a' before making global git config changes
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9045286Z Adding repository directory to the temporary git global config as a safe directory
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9048222Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9084749Z Removing SSH command configuration
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9091149Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9129927Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9438626Z Removing HTTP extra header
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9444859Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9487163Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9795782Z Removing includeIf entries pointing to credentials config files
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9803023Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:02.9839596Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+swift / differential	UNKNOWN STEP	2026-11-02T16:26:03.0270415Z Cleaning up orphan processes

@@ -1,0 +1,316 @@
+kotlin / android	UNKNOWN STEP	﻿2026-11-02T16:10:53.6591451Z Current runner version: '2.338.2'
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6619128Z ##[group]Runner Image Provisioner
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6620223Z Hosted Compute Agent
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6620868Z Version: 20261021.618
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6621617Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6622428Z Build Date: 2026-10-21T00:45:21Z
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6623193Z Worker ID: {98b46472-f1ad-4fda-8159-f77f30d25e79}
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6624065Z Region: centralus
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6624727Z Cloud: Azure
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6625398Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6626925Z ##[group]Operating System
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6627638Z Ubuntu
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6628315Z 26.04.1
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6628901Z LTS
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6629501Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6630282Z ##[group]Runner Image
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6630988Z Image: ubuntu-26.04
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6631722Z Version: 20261025.179.1
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6633297Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6635368Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6636627Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6638030Z ##[group]GITHUB_TOKEN Permissions
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6640355Z Contents: read
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6641189Z Metadata: read
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6641894Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6644070Z Secret source: Actions
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6645152Z Cache mode: write
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.6646690Z Prepare workflow directory
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.7143643Z Prepare all required actions
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.7201928Z Getting action download info
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:53.9636938Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.0774125Z Download action repository 'actions/setup-java@v6.1.0' (SHA:b843ebf9b913146b38da2eaa7aeddf76074ae1ad)
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7344558Z Uses: link-foundation/links-notation/.github/workflows/kotlin.yml@refs/heads/main (940986b4ccbee9b67b6db83c2d44e824b11ca666)
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7348758Z ##[group] Inputs
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7349517Z   verbose: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7350067Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7350473Z Complete job name: kotlin / android
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7988762Z ##[group]Run actions/checkout@v7.0.1
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7989511Z with:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7990047Z   persist-credentials: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7990532Z   submodules: true
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7990963Z   repository: link-foundation/links-notation
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7994376Z   token: ***
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7994762Z   ssh-strict: true
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7995155Z   ssh-user: git
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7995527Z   clean: true
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7995927Z   sparse-checkout-cone-mode: true
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7996404Z   fetch-depth: 1
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7996783Z   fetch-tags: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7997173Z   show-progress: true
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7997563Z   lfs: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7997939Z   set-safe-directory: true
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7998417Z   allow-unsafe-pr-checkout: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.7999068Z env:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.8002390Z   GITHUB_TOKEN: ***
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.8002785Z   CI_VERBOSE: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:54.8003165Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0002685Z Syncing repository: link-foundation/links-notation
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0004804Z ##[group]Getting Git version info
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0005638Z Working directory is '/home/runner/work/links-notation/links-notation'
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0007007Z [command]/usr/bin/git version
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0025092Z git version 2.56.0
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0041053Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0049198Z Temporarily overriding HOME='/home/runner/work/_temp/6f1a4034-bbdb-4bad-80ea-fabe7484cc35' before making global git config changes
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0051554Z Adding repository directory to the temporary git global config as a safe directory
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0054011Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0101932Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0104089Z ##[group]Determining repository object format
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0105441Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0106308Z ##[group]Initializing the repository
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0109956Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0186258Z hint: Using 'master' as the name for the initial branch. This default branch name
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0187921Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0189494Z hint: to use in all of your new repositories, which will suppress this warning,
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0190857Z hint: call:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0191685Z hint:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0192710Z hint: 	git config --global init.defaultBranch <name>
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0193412Z hint:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0194260Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0195624Z hint: 'development'. The just-created branch can be renamed via this command:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0196695Z hint:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0197334Z hint: 	git branch -m <name>
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0198055Z hint:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0199025Z hint: Disable this message with "git config set advice.defaultBranchName false"
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0200825Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0207024Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0248098Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0249150Z ##[group]Disabling automatic garbage collection
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0251857Z [command]/usr/bin/git config --local gc.auto 0
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0281033Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0282487Z ##[group]Setting up auth
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0283383Z Removing SSH command configuration
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0285542Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0314913Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0660758Z Removing HTTP extra header
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0670814Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0696613Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0927338Z Removing includeIf entries pointing to credentials config files
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0931050Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.0958389Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.1186789Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.1218849Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.1245135Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.1273693Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.1301525Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.1326952Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.1327673Z ##[group]Fetching the repository
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.1332365Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +940986b4ccbee9b67b6db83c2d44e824b11ca666:refs/remotes/origin/main
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.9938513Z From https://github.com/link-foundation/links-notation
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.9940313Z  * [new ref]         940986b4ccbee9b67b6db83c2d44e824b11ca666 -> origin/main
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.9945791Z [command]/usr/bin/git branch --list --remote origin/main
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.9968569Z   origin/main
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.9975004Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:55.9996426Z 940986b4ccbee9b67b6db83c2d44e824b11ca666
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.0000904Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.0002142Z ##[group]Determining the checkout info
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.0003621Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.0004591Z [command]/usr/bin/git sparse-checkout disable
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.0049458Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.0076090Z ##[group]Checking out the ref
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.0078202Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2130283Z Switched to a new branch 'main'
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2140688Z branch 'main' set up to track 'origin/main'.
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2150757Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2152345Z ##[group]Setting up auth for fetching submodules
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2156393Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2193917Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2223426Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2249951Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2280168Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2305454Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2307124Z ##[group]Fetching submodules
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2308422Z [command]/usr/bin/git submodule sync
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2551503Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.2800869Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3069371Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3072003Z [command]/usr/bin/git log -1 --format=%H
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3094181Z 940986b4ccbee9b67b6db83c2d44e824b11ca666
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3102242Z ##[group]Removing auth
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3183479Z Removing SSH command configuration
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3185817Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3203812Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3373287Z Removing HTTP extra header
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3376626Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3404659Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3635153Z Removing includeIf entries pointing to credentials config files
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3637381Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3658364Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3661334Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3663541Z includeif.gitdir:/github/workspace/.git.path
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3665128Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3668493Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3686361Z /home/runner/work/_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3696120Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-39ccb2a3\-4974\-4b56\-af53\-280d638a590c\.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3735731Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3759475Z /home/runner/work/_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3767096Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-39ccb2a3\-4974\-4b56\-af53\-280d638a590c\.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3796353Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3816645Z /github/runner_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3824705Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-39ccb2a3\-4974\-4b56\-af53\-280d638a590c\.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3854499Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3874842Z /github/runner_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3882126Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-39ccb2a3\-4974\-4b56\-af53\-280d638a590c\.config
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.3911404Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4141991Z Removing credentials config '/home/runner/work/_temp/git-credentials-39ccb2a3-4974-4b56-af53-280d638a590c.config'
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4149188Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4635556Z ##[group]Run actions/setup-java@v6.1.0
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4636791Z with:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4637699Z   java-version: 25
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4638711Z   distribution: temurin
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4639849Z   cache: gradle
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4640815Z   java-package: jdk
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4641811Z   check-latest: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4642847Z   force-download: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4643895Z   set-default: true
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4644878Z   server-id: github
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4645977Z   mvn-repositories-include-central: true
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4647388Z   mvn-repositories-prioritize-central: true
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4648736Z   overwrite-settings: true
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4649920Z   cache-read-only: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4650995Z   job-status: success
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4661491Z   token: ***
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4662517Z   show-download-progress: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4663687Z   problem-matcher: true
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4664705Z env:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4675052Z   GITHUB_TOKEN: ***
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4676052Z   CI_VERBOSE: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.4677034Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5317360Z ##[group]Installed distributions
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5711597Z Resolved Java 25.0.5+8 from tool-cache
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5713093Z Setting Java 25.0.5+8 as the default
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5717796Z 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5718244Z Java configuration:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5719295Z   Distribution: temurin
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5720270Z   Version: 25.0.5+8
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5721516Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5722782Z 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5766212Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5812353Z Creating settings.xml with server-id: github
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5814939Z Creating toolchains.xml for JDK version 25 from temurin
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5826193Z Writing to /home/runner/.m2/settings.xml
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5829449Z Writing to /home/runner/.m2/toolchains.xml
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.5837405Z Configured MAVEN_ARGS to include -ntp to suppress Maven transfer progress logs. Set 'show-download-progress: true' to keep the download progress output.
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:56.9840865Z Cache hit for: setup-java-Linux-x64-gradle-793941b09bcf9fab4a42a2abebb804412724a640b535d619aa86e513539cf7e8
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:57.0006275Z Cache hit for: setup-java-Linux-x64-gradle-wrapper-ace76cb9daf4e966d7d2b77ff6063fae3d799001a3502e34593f684de25fe4e7
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:58.1447565Z Received 113246208 of 262989629 (43.1%), 107.9 MBs/sec
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:58.1533607Z Received 92274688 of 150835932 (61.2%), 88.0 MBs/sec
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:58.5394582Z Received 150835932 of 150835932 (100.0%), 103.8 MBs/sec
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:58.5397411Z Cache Size: ~144 MB (150835932 B)
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:58.5559135Z [command]/usr/bin/tar -xf /home/runner/work/_temp/35823424-fb0b-4c5f-bea7-9786e826f34c/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:58.8253347Z Cache restored successfully
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:58.8329760Z gradle-wrapper cache restored from key: setup-java-Linux-x64-gradle-wrapper-ace76cb9daf4e966d7d2b77ff6063fae3d799001a3502e34593f684de25fe4e7
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.1354264Z Received 262989629 of 262989629 (100.0%), 125.9 MBs/sec
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.1354789Z Cache Size: ~251 MB (262989629 B)
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.1385004Z [command]/usr/bin/tar -xf /home/runner/work/_temp/125d4bd8-7e96-452f-82df-2f807cc2e1f7/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9005141Z Cache restored successfully
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9111529Z Cache restored from key: setup-java-Linux-x64-gradle-793941b09bcf9fab4a42a2abebb804412724a640b535d619aa86e513539cf7e8
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9437453Z ##[group]Run if [ -z "${ANDROID_HOME:-}" ] || [ ! -d "$ANDROID_HOME" ]; then
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9437958Z ^[[36;1mif [ -z "${ANDROID_HOME:-}" ] || [ ! -d "$ANDROID_HOME" ]; then^[[0m
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9438386Z ^[[36;1m  echo "::error::ANDROID_HOME does not name an Android SDK on this runner image"^[[0m
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9438727Z ^[[36;1m  exit 1^[[0m
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9438913Z ^[[36;1mfi^[[0m
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9472860Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9473172Z env:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9475167Z   GITHUB_TOKEN: ***
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9475374Z   CI_VERBOSE: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9475657Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9476074Z   JAVA_HOME_25_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9476415Z   MAVEN_ARGS: -ntp
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9476609Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9572132Z ##[group]Run ./gradlew --no-daemon --console=plain assembleAndroidMain testAndroidHostTest
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9572647Z ^[[36;1m./gradlew --no-daemon --console=plain assembleAndroidMain testAndroidHostTest^[[0m
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9596464Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9596796Z env:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9598709Z   GITHUB_TOKEN: ***
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9598910Z   CI_VERBOSE: false
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9599189Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9599714Z   JAVA_HOME_25_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9600049Z   MAVEN_ARGS: -ntp
+kotlin / android	UNKNOWN STEP	2026-11-02T16:10:59.9600239Z ##[endgroup]
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:00.5686733Z 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:00.5687272Z Welcome to Gradle 9.8.2!
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:00.5687641Z 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:00.5688046Z Here are the highlights of this release:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:00.5688877Z  - Java 27 support
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:00.5689183Z  - Maven mirror settings reuse
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:00.5689569Z  - Linked problem locations in build output
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:00.5689965Z 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:00.5690863Z For more details see https://docs.gradle.org/9.8.2/release-notes.html
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:00.5691101Z 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:00.6702852Z To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:01.5682966Z Daemon will be stopped at the end of the build 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:02.7691572Z Calculating task graph as no cached configuration is available for tasks: assembleAndroidMain testAndroidHostTest
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.1741132Z > Task :androidPreBuild UP-TO-DATE
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.1770352Z > Task :preAndroidMainBuild UP-TO-DATE
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.2711763Z > Task :kmpPartiallyResolvedDependenciesChecker
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.2749233Z > Task :prepareLintJarForPublish
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.2750131Z > Task :mergeAndroidMainJniLibFolders
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.2750798Z > Task :androidJar
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.2751297Z > Task :checkAndroidMainAarMetadata
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.2751962Z > Task :checkKotlinGradlePluginConfigurationErrors SKIPPED
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.2752672Z > Task :mergeAndroidMainNativeLibs NO-SOURCE
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.2753480Z > Task :generateAndroidMainEmptyResourceFiles
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.2754100Z > Task :copyAndroidMainJniLibsProjectOnly
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.2754673Z > Task :prepareAndroidMainArtProfile
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.3683817Z > Task :writeAndroidMainAarMetadata
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.3684288Z > Task :generateParityCases
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.3684659Z > Task :preAndroidHostTestBuild UP-TO-DATE
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.3687530Z > Task :compressAndroidHostTestJavaRes NO-SOURCE
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.3688220Z > Task :extractAndroidHostTestJavaRes
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:15.4682217Z > Task :processAndroidMainManifest
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:20.2690889Z > Task :extractAndroidMainAnnotations
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:29.6727221Z > Task :compileAndroidMain
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:29.6727951Z > Task :mergeAndroidMainGeneratedProguardFiles
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:29.6728573Z > Task :mergeAndroidMainConsumerProguardFiles
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:29.6729090Z > Task :compressAndroidMainJavaRes
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:29.6741822Z > Task :mergeAndroidMainJavaResource
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:29.7710891Z > Task :bundleAndroidMainClassesToCompileJar
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:29.7720595Z > Task :bundleAndroidMainClassesToRuntimeJar
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:29.7721300Z > Task :syncAndroidMainLibJars
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:29.7724222Z > Task :bundleAndroidMainAar
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:29.7725054Z > Task :assembleAndroidMain
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:33.7701091Z > Task :compileAndroidHostTest
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.3682049Z > Task :testAndroidHostTest
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.6684029Z 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.6700279Z [Incubating] Problems report is available at: file:///home/runner/work/links-notation/links-notation/kotlin/build/reports/problems/problems-report.html
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.6701276Z 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.6701972Z Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.6702418Z 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.6702758Z You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.6703147Z 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.6703738Z For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.6704441Z 
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.6708738Z BUILD SUCCESSFUL in 37s
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.6710296Z 24 actionable tasks: 24 executed
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:37.7000393Z Configuration cache entry stored.
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.0332419Z Post job cleanup.
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.1277899Z Cache hit occurred on the gradle-wrapper primary key setup-java-Linux-x64-gradle-wrapper-ace76cb9daf4e966d7d2b77ff6063fae3d799001a3502e34593f684de25fe4e7, not saving cache.
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.1284035Z Cache hit occurred on the primary key setup-java-Linux-x64-gradle-793941b09bcf9fab4a42a2abebb804412724a640b535d619aa86e513539cf7e8, not saving cache.
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.1450037Z Post job cleanup.
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2186630Z [command]/usr/bin/git version
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2233070Z git version 2.56.0
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2263555Z Temporarily overriding HOME='/home/runner/work/_temp/2f637ab4-bc10-4a89-af7d-8f4518498404' before making global git config changes
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2264812Z Adding repository directory to the temporary git global config as a safe directory
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2270305Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2302247Z Removing SSH command configuration
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2308801Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2343396Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2620980Z Removing HTTP extra header
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2625955Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2662868Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2960467Z Removing includeIf entries pointing to credentials config files
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.2968450Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.3001567Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.3387121Z Cleaning up orphan processes
+kotlin / android	UNKNOWN STEP	2026-11-02T16:11:38.3652749Z Terminate orphan process: pid (2512) (java)
