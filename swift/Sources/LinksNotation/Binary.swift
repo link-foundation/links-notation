@@ -105,7 +105,8 @@ public struct DecodeLimits: Hashable, Sendable {
         maxLinks: Int = 1 << 22, maxReferences: Int = 1 << 24, maxNodes: Int = 1 << 22,
         maxStringBytes: Int = 64 << 20, maxDepth: Int = 64
     ) throws {
-        try require([maxLinks, maxReferences, maxNodes, maxStringBytes, maxDepth].allSatisfy { $0 >= 0 }, "invalid limit")
+        try require(
+            [maxLinks, maxReferences, maxNodes, maxStringBytes, maxDepth].allSatisfy { $0 >= 0 }, "invalid limit")
         self.maxLinks = maxLinks
         self.maxReferences = maxReferences
         self.maxNodes = maxNodes
@@ -374,7 +375,8 @@ public struct LinksPacket: Hashable, Sendable {
             out[0] |= 2
             leb(&out, UInt64(sections.count))
             for section in sections {
-                let flags = UInt64(widths.firstIndex(of: section.width)!) | (section.gap != 0 ? 4 : 0)
+                let flags =
+                    UInt64(widths.firstIndex(of: section.width)!) | (section.gap != 0 ? 4 : 0)
                     | (section.arity.fixed ? 0 : 8)
                 leb(&out, section.arity.min << 4 | flags)
                 if section.gap != 0 { leb(&out, section.gap) }

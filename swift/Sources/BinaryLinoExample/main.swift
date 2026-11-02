@@ -38,8 +38,11 @@ do {
                     guard try codec.parseDocument(formatted) == document else {
                         throw BinaryError("text model changed: \(source)")
                     }
-                    let hex = bytes.map { String($0, radix: 16).count == 1 ? "0" + String($0, radix: 16) : String($0, radix: 16) }
-                    output += hex.joined(separator: " ") + "\t" + formatted.replacingOccurrences(of: "\n", with: "\\n") + "\n"
+                    let hex = bytes.map {
+                        String($0, radix: 16).count == 1 ? "0" + String($0, radix: 16) : String($0, radix: 16)
+                    }
+                    output +=
+                        hex.joined(separator: " ") + "\t" + formatted.replacingOccurrences(of: "\n", with: "\\n") + "\n"
                 }
             }
         }
