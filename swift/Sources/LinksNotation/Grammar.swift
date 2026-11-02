@@ -10,9 +10,11 @@
 
 /// What a rule of the grammar returns: the raw items the grammar actions of
 /// the JavaScript parser build (`{id}`, `{id, values}`, `{values}`,
-/// `{nested}`, with `children` added for indented lines).
+/// `{nested}`, with `children` added for indented lines). `rawId` is the
+/// identifier exactly as the document wrote it, quotes and all.
 struct RawItem {
     var id: String?
+    var rawId: String?
     var values: [RawItem]?
     var nested: [RawItem]?
     var children: [RawItem]?
@@ -47,6 +49,9 @@ private enum Expect {
 
 final class Grammar {
     private let input: [Unicode.Scalar]
+    /// The document as written, comments included, which raw identifiers are
+    /// cut from; the same length as `input`, whose comments are blanked.
+    private let source: [Unicode.Scalar]
     private let maxDepth: Int
     private var position = 0
 
@@ -61,8 +66,9 @@ final class Grammar {
     private var maxFailExpected: [String] = []
     private var silentFails = 0
 
-    init(_ input: [Unicode.Scalar], maxDepth: Int) {
+    init(_ input: [Unicode.Scalar], source: [Unicode.Scalar]? = nil, maxDepth: Int) {
         self.input = input
+        self.source = source ?? input
         self.maxDepth = maxDepth
         self.references = DelimitedReferences(input)
     }
@@ -281,7 +287,7 @@ final class Grammar {
         if let group = try nestedGroup() {
             return group
         }
-        return try reference().map { RawItem(id: $0) }
+        return try reference().map { RawItem(id: $0.value, rawId: $0.raw) }
     }
 
     // anyLink = &"(" groupLink / !"(" (indentedIdLink / singleLineAnyLink)
@@ -399,7 +405,7 @@ final class Grammar {
         if let id = try reference() {
             spacesAndTabs()
             if match(":", Expect.colon), let values = try singleLineValues() {
-                return RawItem(id: id, values: values)
+                return RawItem(id: id.value, rawId: id.raw, values: values)
             }
         }
         position = start
@@ -412,22 +418,30 @@ final class Grammar {
         if let id = try reference() {
             spacesAndTabs()
             if match(":", Expect.colon), eol() {
-                return RawItem(id: id, values: [])
+                return RawItem(id: id.value, rawId: id.raw, values: [])
             }
         }
         position = start
         return nil
     }
 
-    // reference = referenceLiteral / quotedReference / simpleReference
-    private func reference() throws -> String? {
+    // reference = HERE r:(referenceLiteral / quotedReference / simpleReference)
+    //             { return { value: r, raw: source.slice(start, end) } }
+    private func reference() throws -> (value: String, raw: String)? {
+        let start = position
+        let value: String
         if let literal = try referenceLiteral() {
-            return literal
+            value = literal
+        } else if let quoted = quotedReference() {
+            value = quoted
+        } else if let simple = simpleReference() {
+            value = simple
+        } else {
+            return nil
         }
-        if let quoted = quotedReference() {
-            return quoted
-        }
-        return simpleReference()
+        var raw = String.UnicodeScalarView()
+        raw.append(contentsOf: source[start..<position])
+        return (value, String(raw))
     }
 
     // referenceLiteral = &'~' &{prefix} $('~' [0-9]+ '{' [^} \t\r\n()]* '}')

@@ -217,3 +217,16 @@ func stripComments(_ document: [Unicode.Scalar]) -> [Unicode.Scalar] {
     }
     return blanked
 }
+
+/// The document with every comment replaced by spaces of the same length, so
+/// offsets, lines and columns stay the same: `stripComments` of the
+/// JavaScript package. `#` starts a comment at the start of the document or
+/// after whitespace, outside quoted references.
+///
+///     stripComments("a: b # why\n")  // "a: b      \n"
+///     stripComments("issue#1047\n")  // "issue#1047\n"
+public func stripComments(_ document: String) -> String {
+    var view = String.UnicodeScalarView()
+    view.append(contentsOf: stripComments(Array(document.unicodeScalars)))
+    return String(view)
+}

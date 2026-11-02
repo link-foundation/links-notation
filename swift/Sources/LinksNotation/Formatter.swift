@@ -10,9 +10,17 @@ let quoteScalars: [Unicode.Scalar] = ["'", "\"", "`"]
 /// that encloses it otherwise, and as a version 1 reference literal
 /// (`~1{<UTF-8 hex>}`) when it is empty or holds a control character.
 /// `nil` (an anonymous link) is written as nothing.
-public func escapeReference(_ reference: String?) -> String {
+///
+/// With `minimal`, ordinary prose separated by single spaces stays as it is,
+/// so a reference can be a plain line of an indented document
+/// (`escapeReference(reference, { minimal: true })` of the JavaScript
+/// package); otherwise it is quoted like a reference inside a link.
+public func escapeReference(_ reference: String?, minimal: Bool = false) -> String {
     guard let text = reference else { return "" }
     let scalars = Array(text.unicodeScalars)
+    if minimal && !scalars.isEmpty && !scalars.contains(where: isControl) {
+        return escapeMinimally(text, scalars)
+    }
     if scalars.isEmpty || scalars.contains(where: isControl) {
         return encodeReferenceLiteral(text)
     }
@@ -133,4 +141,81 @@ private func isControl(_ scalar: Unicode.Scalar) -> Bool {
 /// `[\p{White_Space}﻿]`
 private func isWhiteSpace(_ scalar: Unicode.Scalar) -> Bool {
     scalar.properties.isWhitespace || scalar.value == 0xFEFF
+}
+
+/// The minimal quoting of `escapeReference(_:minimal:)`: quote only text that
+/// would not read back as one plain line, between single quotes unless the
+/// text has more of them than double quotes, doubling the chosen quote inside.
+private func escapeMinimally(_ text: String, _ scalars: [Unicode.Scalar]) -> String {
+    var needsQuoting = false
+    for (index, scalar) in scalars.enumerated() {
+        let atWordStart = index == 0 || scalars[index - 1] == " "
+        if atWordStart && hasReferenceLiteralPrefix(scalars, at: index) {
+            needsQuoting = true  // (^| )~[0-9]+\{
+        } else if ":()'\"`".unicodeScalars.contains(scalar) || (scalar != " " && isWhiteSpace(scalar)) {
+            needsQuoting = true  // [:()'"`]|(?! )[\p{White_Space}\ufeff]
+        } else if atWordStart && scalar == "#" {
+            needsQuoting = true  // (^| )#
+        } else if scalar == " " && (index == 0 || index == scalars.count - 1 || scalars[index + 1] == " ") {
+            needsQuoting = true  // ^ | $| {2,}
+        }
+        if needsQuoting { break }
+    }
+    if !needsQuoting { return text }
+
+    let singleQuotes = scalars.filter { $0 == "'" }.count
+    let doubleQuotes = scalars.filter { $0 == "\"" }.count
+    var quote: Unicode.Scalar = singleQuotes <= doubleQuotes ? "'" : "\""
+    // The opening delimiter must be a run of exactly one quote. Choosing the
+    // other wrapper keeps a leading content quote from extending that run.
+    if scalars.first == quote { quote = quote == "'" ? "\"" : "'" }
+    var result = String.UnicodeScalarView()
+    result.append(quote)
+    for scalar in scalars {
+        result.append(scalar)
+        if scalar == quote { result.append(quote) }
+    }
+    result.append(quote)
+    return String(result)
+}
+
+/// Why `unescapeReference(_:)` could not read a reference.
+public struct UnescapeReferenceError: Error, Equatable, Sendable {
+    public let message: String
+}
+
+/// The text of one complete, escaped reference, read with the parser's rules:
+/// a reference literal is decoded, a quoted reference loses its quotes, and
+/// plain text is returned unchanged. Parsed link identifiers are already
+/// decoded and should not be passed through this a second time.
+/// - Throws: `ReferenceLiteralError` for an invalid reference literal, and
+///   `UnescapeReferenceError` when a quoted reference does not span the text.
+public func unescapeReference(_ reference: String) throws -> String {
+    let scalars = Array(reference.unicodeScalars)
+    if hasReferenceLiteralPrefix(scalars, at: 0) {
+        return try decodeReferenceLiteral(reference)
+    }
+    guard let first = scalars.first, quoteScalars.contains(first) else { return reference }
+    guard let reading = DelimitedReferences(scalars).read(at: 0), reading.length == scalars.count else {
+        throw UnescapeReferenceError(message: "Expected one complete quoted reference")
+    }
+    return reading.value
+}
+
+/// The quote a reference was written between, read from the reference as it
+/// was written: `'`, `"` or `` ` `` for a quoted reference (however many of
+/// them open it), and `nil` for a bare reference, a reference literal, or no
+/// text.
+///
+///     referenceQuote("'1'")        // "'"
+///     referenceQuote("\"\"a b\"\"") // "\""
+///     referenceQuote("1")          // nil
+///     referenceQuote("'unclosed")  // nil: a bare reference that starts with '
+public func referenceQuote(_ raw: String?) -> String? {
+    guard let raw else { return nil }
+    let scalars = Array(raw.unicodeScalars)
+    guard let first = scalars.first, quoteScalars.contains(first),
+        let reading = DelimitedReferences(scalars).read(at: 0), reading.length == scalars.count
+    else { return nil }
+    return String(Character(first))
 }
