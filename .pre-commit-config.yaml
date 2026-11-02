@@ -24,7 +24,7 @@ repos:
         files: ^(js/(src|tests)|docs/website)/.*\.(js|mjs)$
         args: ['--fix']
         additional_dependencies:
-          - eslint@10.13.0
+          - eslint@10.14.0
 
   # Python
   - repo: https://github.com/psf/black
