@@ -31,16 +31,15 @@ class SharedSyntaxParityTest {
   /** The links as {@code (ID|RAW|QUOTE children...)}, each slot UTF-8 hex or {@code ~} for null. */
   private static String tree(List<Link> links) {
     return links.stream()
-        .map(
-            link ->
-                "("
-                    + hex(link.getId())
-                    + "|"
-                    + hex(link.getRawId())
-                    + "|"
-                    + hex(link.getQuote())
-                    + (link.getValues().isEmpty() ? "" : " " + tree(link.getValues()))
-                    + ")")
+        .map(link ->
+            "("
+                + hex(link.getId())
+                + "|"
+                + hex(link.getRawId())
+                + "|"
+                + hex(link.getQuote())
+                + (link.getValues().isEmpty() ? "" : " " + tree(link.getValues()))
+                + ")")
         .collect(Collectors.joining(" "));
   }
 

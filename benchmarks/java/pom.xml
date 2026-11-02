@@ -35,7 +35,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.14.0</version>
+            <version>2.15.0</version>
         </dependency>
     </dependencies>
 
@@ -45,7 +45,7 @@
                 <!-- Same floor as ../../java/pom.xml: the oldest Maven these plugins accept. -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.6.3</version>
+                <version>3.7.0</version>
                 <executions>
                     <execution>
                         <id>require-maven</id>
@@ -55,7 +55,10 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>3.6.3</version>
+                                    <!-- A range, not the bare "3.6.3": Dependabot raises every
+                                         literal equal to a plugin version it bumps, so bumping
+                                         this plugin from 3.6.3 also raised the floor (#363, #377). -->
+                                    <version>[3.6.3,)</version>
                                 </requireMavenVersion>
                             </rules>
                         </configuration>

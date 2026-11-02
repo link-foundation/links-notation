@@ -20,17 +20,16 @@ class SharedTextParityTest {
 
   private String tree(List<Link> links) {
     return links.stream()
-        .map(
-            link -> {
-              String reference =
-                  link.getId() == null
-                      ? "~"
-                      : HexFormat.of().formatHex(link.getId().getBytes(StandardCharsets.UTF_8));
-              return "("
-                  + reference
-                  + (link.getValues().isEmpty() ? "" : " " + tree(link.getValues()))
-                  + ")";
-            })
+        .map(link -> {
+          String reference =
+              link.getId() == null
+                  ? "~"
+                  : HexFormat.of().formatHex(link.getId().getBytes(StandardCharsets.UTF_8));
+          return "("
+              + reference
+              + (link.getValues().isEmpty() ? "" : " " + tree(link.getValues()))
+              + ")";
+        })
         .collect(Collectors.joining(" "));
   }
 

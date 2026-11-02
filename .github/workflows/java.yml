@@ -113,6 +113,13 @@ jobs:
           java-version: "25"
           distribution: "temurin"
           cache: maven
+      - name: Require the floor pom.xml declares
+        run: |
+          declared="$(grep -o '<version>\[[0-9.]*,)</version>' pom.xml | sed 's/.*\[\(.*\),.*/\1/')"
+          if [ "$declared" != "$MAVEN_FLOOR" ]; then
+            echo "::error file=java/pom.xml::requireMavenVersion declares '[${declared},)' but this job tests Maven $MAVEN_FLOOR. Set both to the same version (and MAVEN_FLOOR_SHA256 to its archive)."
+            exit 1
+          fi
       - name: Install the oldest supported Maven
         run: |
           set -euo pipefail
