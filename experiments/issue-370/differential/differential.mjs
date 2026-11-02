@@ -18,10 +18,20 @@ import { Parser, formatLinks } from '../../../js/src/index.js';
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '../../..');
 const count = Number(process.argv[2] ?? 2000);
-let seed = Number(process.argv[3] ?? 1);
 const maxDepth = Number(process.argv[4] ?? 64);
-const rand = () =>
-  (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+// xorshift32 in exact 32-bit integer arithmetic. ui's linear congruential
+// generator multiplied in doubles, so it lost low bits and repeated itself:
+// only about 1,500 of 5,000 documents were distinct. Any seed, including a
+// GitHub run id beyond 2^32, keeps its low 32 bits.
+let state = Number(process.argv[3] ?? 1) >>> 0 || 1;
+const rand = () => {
+  state ^= state << 13;
+  state >>>= 0;
+  state ^= state >>> 17;
+  state ^= state << 5;
+  state >>>= 0;
+  return state / 4294967296;
+};
 const pick = (a) => a[Math.floor(rand() * a.length)];
 const atoms = [
   'a',

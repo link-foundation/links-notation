@@ -68,6 +68,36 @@ jobs:
         if: ${{ always() }}
         run: bash test-summary.sh
 
+  # Random documents, parsed by the JavaScript reference parser and by the
+  # Kotlin parser on the JVM, must give the same links and formatted text, or
+  # the same error at the same position. The run id seeds the generator, so
+  # every run checks new documents and a failure names its reproducible seed.
+  differential:
+    needs: [lint]
+    runs-on: ubuntu-26.04
+    timeout-minutes: 30
+    concurrency:
+      group: ci-kotlin-${{ github.ref }}-differential
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: "24"
+      - name: Set up JDK 25
+        uses: actions/setup-java@v6.1.0
+        with:
+          java-version: "25"
+          distribution: "temurin"
+          cache: gradle
+      - name: Compare the Kotlin parser with the JavaScript parser
+        run: |
+          echo "Seed: $GITHUB_RUN_ID"
+          node ../experiments/issue-370/differential/differential.mjs 20000 "$GITHUB_RUN_ID" 8
+
   # The Android target is built only where an Android SDK exists, so this job
   # fails rather than silently testing nothing when the image lacks one.
   android:
