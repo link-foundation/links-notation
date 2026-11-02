@@ -235,9 +235,16 @@ function unescapeReference(reference) {
   }
   return reading.value;
 }
+function referenceQuote(raw) {
+  if (typeof raw !== "string" || !QUOTES.includes(raw[0]))
+    return null;
+  const reading = readReference(raw, 0);
+  return reading !== null && reading.length === raw.length ? raw[0] : null;
+}
 
 // src/Link.js
 class Link {
+  #rawId = null;
   constructor(id = null, values = null) {
     this.id = id;
     if (values !== null && values !== undefined) {
@@ -248,6 +255,18 @@ class Link {
     } else {
       this.values = [];
     }
+  }
+  get rawId() {
+    return this.#rawId;
+  }
+  set rawId(raw) {
+    if (raw !== null && raw !== undefined && typeof raw !== "string") {
+      throw new TypeError("rawId must be a string or null");
+    }
+    this.#rawId = raw ?? null;
+  }
+  get quote() {
+    return referenceQuote(this.#rawId);
   }
   toString() {
     return this.format(false);
@@ -460,6 +479,184 @@ function formatLinks(links, lessParentheses = false) {
   return links.map((link) => link.format(lessParentheses)).join(`
 `);
 }
+// src/comments.js
+var COMMENT = "#";
+var BEFORE_REFERENCE = [" ", "\t", `
+`, "\r", "(", ":"];
+var BEFORE_COMMENT = [" ", "\t", `
+`, "\r"];
+function stripComments(document) {
+  let blanked = null;
+  let position = 0;
+  const references = new DelimitedReferences(document);
+  while (position < document.length) {
+    const character = document[position];
+    if (QUOTES.includes(character) && follows(document, position, BEFORE_REFERENCE)) {
+      const end = references.endAt(position);
+      position = end === null ? position + 1 : end;
+      continue;
+    }
+    if (character === COMMENT && follows(document, position, BEFORE_COMMENT)) {
+      blanked = blanked ?? document.split("");
+      while (position < document.length && document[position] !== `
+` && document[position] !== "\r") {
+        blanked[position] = " ";
+        position++;
+      }
+      continue;
+    }
+    position++;
+  }
+  return blanked === null ? document : blanked.join("");
+}
+function follows(document, position, allowed) {
+  return position === 0 || allowed.includes(document[position - 1]);
+}
+
+// src/Cst.js
+var CstKind = Object.freeze({
+  DOCUMENT: "document",
+  LINE: "line",
+  GROUP: "group",
+  WHITESPACE: "whitespace",
+  NEWLINE: "newline",
+  COMMENT: "comment",
+  OPEN_PAREN: "open_paren",
+  CLOSE_PAREN: "close_paren",
+  COLON: "colon",
+  REFERENCE: "reference"
+});
+var NODE_KINDS = new Set([CstKind.DOCUMENT, CstKind.LINE, CstKind.GROUP]);
+
+class CstNode {
+  #text;
+  constructor(kind, { text = "", children = [], value = null, quote = null } = {}) {
+    this.kind = kind;
+    this.children = children;
+    this.value = value;
+    this.quote = quote;
+    this.#text = text;
+  }
+  get isToken() {
+    return !NODE_KINDS.has(this.kind);
+  }
+  get text() {
+    if (this.isToken)
+      return this.#text;
+    return this.children.map((child) => child.text).join("");
+  }
+  toString() {
+    return this.text;
+  }
+  tokens() {
+    if (this.isToken)
+      return [this];
+    return this.children.flatMap((child) => child.tokens());
+  }
+  toSExpression() {
+    if (this.isToken)
+      return `${this.kind}:${quoteText(this.#text)}`;
+    return `(${[this.kind, ...this.children.map((child) => child.toSExpression())].join(" ")})`;
+  }
+}
+var ESCAPES = {
+  "\\": "\\\\",
+  '"': "\\\"",
+  "\n": "\\n",
+  "\r": "\\r",
+  "\t": "\\t"
+};
+function quoteText(text) {
+  return `"${text.replace(/[\\"\n\r\t]/g, (character) => ESCAPES[character])}"`;
+}
+var LITERAL = /~[0-9]+\{[^} \t\r\n()]*\}/y;
+var BARE_REFERENCE_END = new Set([" ", "\t", "\r", `
+`, "(", ":", ")"]);
+function buildCst(input, { comments = true } = {}) {
+  const prepared = comments ? stripComments(input) : input;
+  const references = new DelimitedReferences(prepared);
+  const document = new CstNode(CstKind.DOCUMENT);
+  const containers = [{ node: document, line: null }];
+  const add = (token) => {
+    const container = containers[containers.length - 1];
+    if (container.line === null) {
+      container.line = new CstNode(CstKind.LINE);
+      container.node.children.push(container.line);
+    }
+    container.line.children.push(token);
+  };
+  const token = (kind, start, end, parts = {}) => new CstNode(kind, { text: input.slice(start, end), ...parts });
+  let position = 0;
+  while (position < input.length) {
+    const character = input[position];
+    let end = position + 1;
+    if (comments && character === "#" && prepared[position] !== "#") {
+      while (end < input.length && input[end] !== `
+` && input[end] !== "\r") {
+        end++;
+      }
+      add(token(CstKind.COMMENT, position, end));
+    } else if (character === "\r" || character === `
+`) {
+      if (character === "\r" && input[end] === `
+`)
+        end++;
+      add(token(CstKind.NEWLINE, position, end));
+      containers[containers.length - 1].line = null;
+    } else if (character === " " || character === "\t") {
+      while (end < input.length && (input[end] === " " || input[end] === "\t")) {
+        end++;
+      }
+      add(token(CstKind.WHITESPACE, position, end));
+    } else if (character === "(") {
+      const group = new CstNode(CstKind.GROUP, {
+        children: [token(CstKind.OPEN_PAREN, position, end)]
+      });
+      add(group);
+      containers.push({ node: group, line: null });
+    } else if (character === ")") {
+      if (containers.length === 1) {
+        throw new SyntaxError(`Unbalanced ")" at offset ${position}`);
+      }
+      containers.pop().node.children.push(token(CstKind.CLOSE_PAREN, position, end));
+    } else if (character === ":") {
+      add(token(CstKind.COLON, position, end));
+    } else {
+      end = referenceEnd(prepared, position, references);
+      const text = input.slice(position, end);
+      const quoted = QUOTES.includes(character) && references.readAt(position);
+      add(token(CstKind.REFERENCE, position, end, {
+        value: quoted ? quoted.value : character === "~" && isLiteral(prepared, position, end) ? decodeReferenceLiteral(text) : text,
+        quote: quoted ? character : null
+      }));
+    }
+    position = end;
+  }
+  if (containers.length !== 1) {
+    throw new SyntaxError('Unbalanced "(" at the end of the document');
+  }
+  return document;
+}
+function referenceEnd(prepared, start, references) {
+  if (prepared[start] === "~") {
+    LITERAL.lastIndex = start;
+    if (LITERAL.test(prepared))
+      return LITERAL.lastIndex;
+  }
+  if (QUOTES.includes(prepared[start])) {
+    const end = references.endAt(start);
+    if (end !== null)
+      return end;
+  }
+  let end = start + 1;
+  while (end < prepared.length && !BARE_REFERENCE_END.has(prepared[end]))
+    end++;
+  return end;
+}
+function isLiteral(prepared, start, end) {
+  LITERAL.lastIndex = start;
+  return LITERAL.test(prepared) && LITERAL.lastIndex === end;
+}
 // src/LinksGroup.js
 class LinksGroup {
   constructor(element, children = []) {
@@ -562,40 +759,6 @@ function windowAround(lineText, column) {
   const quoted = (start > 0 ? ELLIPSIS : "") + lineText.slice(start, end) + (end < lineText.length ? ELLIPSIS : "");
   const shift = start > 0 ? ELLIPSIS.length : 0;
   return [quoted, target - start + shift + 1];
-}
-
-// src/comments.js
-var COMMENT = "#";
-var BEFORE_REFERENCE = [" ", "\t", `
-`, "\r", "(", ":"];
-var BEFORE_COMMENT = [" ", "\t", `
-`, "\r"];
-function stripComments(document) {
-  let blanked = null;
-  let position = 0;
-  const references = new DelimitedReferences(document);
-  while (position < document.length) {
-    const character = document[position];
-    if (QUOTES.includes(character) && follows(document, position, BEFORE_REFERENCE)) {
-      const end = references.endAt(position);
-      position = end === null ? position + 1 : end;
-      continue;
-    }
-    if (character === COMMENT && follows(document, position, BEFORE_COMMENT)) {
-      blanked = blanked ?? document.split("");
-      while (position < document.length && document[position] !== `
-` && document[position] !== "\r") {
-        blanked[position] = " ";
-        position++;
-      }
-      continue;
-    }
-    position++;
-  }
-  return blanked === null ? document : blanked.join("");
-}
-function follows(document, position, allowed) {
-  return position === 0 || allowed.includes(document[position - 1]);
 }
 
 // src/parser-generated.js
@@ -789,8 +952,8 @@ function peg$parse(input, options) {
   function peg$f11(l) {
     return l;
   }
-  function peg$f12(i) {
-    return { id: i };
+  function peg$f12(r) {
+    return { id: r.value, rawId: r.raw };
   }
   function peg$f13(g, rest) {
     return rest === null ? g : { values: [g].concat(rest) };
@@ -834,27 +997,31 @@ function peg$parse(input, options) {
     return list;
   }
   function peg$f26(id, v) {
-    return { id, values: v };
+    return { id: id.value, rawId: id.raw, values: v };
   }
   function peg$f27(v) {
     return { values: v };
   }
   function peg$f28(id) {
-    return { id, values: [] };
+    return { id: id.value, rawId: id.raw, values: [] };
   }
-  function peg$f29() {
+  function peg$f29(value) {
+    const { start, end } = range();
+    return { value, raw: source.slice(start, end) };
+  }
+  function peg$f30() {
     return hasReferenceLiteralPrefix(input, offset());
   }
-  function peg$f30(literal) {
+  function peg$f31(literal) {
     return decodeReferenceLiteral(literal);
   }
-  function peg$f31() {
+  function peg$f32() {
     return !hasReferenceLiteralPrefix(input, offset());
   }
-  function peg$f32(chars) {
+  function peg$f33(chars) {
     return chars.join("");
   }
-  function peg$f33() {
+  function peg$f34() {
     const pos = offset();
     const result = parseQuotedStringAt(input, pos, '"');
     if (result) {
@@ -864,19 +1031,19 @@ function peg$parse(input, options) {
     }
     return false;
   }
-  function peg$f34(chars) {
+  function peg$f35(chars) {
     return parsedValue;
   }
-  function peg$f35(c, cs) {
+  function peg$f36(c, cs) {
     return [c].concat(cs).join("");
   }
-  function peg$f36() {
+  function peg$f37() {
     return parsedLength > 1 && (parsedLength--, true);
   }
-  function peg$f37(c) {
+  function peg$f38(c) {
     return c;
   }
-  function peg$f38() {
+  function peg$f39() {
     const pos = offset();
     const result = parseQuotedStringAt(input, pos, "'");
     if (result) {
@@ -886,19 +1053,19 @@ function peg$parse(input, options) {
     }
     return false;
   }
-  function peg$f39(chars) {
+  function peg$f40(chars) {
     return parsedValue;
   }
-  function peg$f40(c, cs) {
+  function peg$f41(c, cs) {
     return [c].concat(cs).join("");
   }
-  function peg$f41() {
+  function peg$f42() {
     return parsedLength > 1 && (parsedLength--, true);
   }
-  function peg$f42(c) {
+  function peg$f43(c) {
     return c;
   }
-  function peg$f43() {
+  function peg$f44() {
     const pos = offset();
     const result = parseQuotedStringAt(input, pos, "`");
     if (result) {
@@ -908,34 +1075,34 @@ function peg$parse(input, options) {
     }
     return false;
   }
-  function peg$f44(chars) {
+  function peg$f45(chars) {
     return parsedValue;
   }
-  function peg$f45(c, cs) {
+  function peg$f46(c, cs) {
     return [c].concat(cs).join("");
   }
-  function peg$f46() {
+  function peg$f47() {
     return parsedLength > 1 && (parsedLength--, true);
   }
-  function peg$f47(c) {
+  function peg$f48(c) {
     return c;
   }
-  function peg$f48() {
+  function peg$f49() {
     return indentationStack.slice();
   }
-  function peg$f49(spaces) {
+  function peg$f50(spaces) {
     setBaseIndentation(spaces);
   }
-  function peg$f50(spaces) {
+  function peg$f51(spaces) {
     return normalizeIndentation(spaces) > getCurrentIndentation();
   }
-  function peg$f51(spaces) {
+  function peg$f52(spaces) {
     pushIndentation(spaces);
   }
-  function peg$f52(spaces) {
+  function peg$f53(spaces) {
     return checkIndentation(spaces);
   }
-  function peg$f53() {
+  function peg$f54() {
     return isInsideNestedContext();
   }
   let peg$currPos = options.peg$currPos | 0;
@@ -1781,6 +1948,17 @@ function peg$parse(input, options) {
     return s0;
   }
   function peg$parsereference() {
+    let s0, s1;
+    s0 = peg$currPos;
+    s1 = peg$parsereferenceValue();
+    if (s1 !== peg$FAILED) {
+      peg$savedPos = s0;
+      s1 = peg$f29(s1);
+    }
+    s0 = s1;
+    return s0;
+  }
+  function peg$parsereferenceValue() {
     let s0;
     s0 = peg$parsereferenceLiteral();
     if (s0 === peg$FAILED) {
@@ -1814,7 +1992,7 @@ function peg$parse(input, options) {
     }
     if (s1 !== peg$FAILED) {
       peg$savedPos = peg$currPos;
-      s2 = peg$f29();
+      s2 = peg$f30();
       if (s2) {
         s2 = undefined;
       } else {
@@ -1927,7 +2105,7 @@ function peg$parse(input, options) {
         }
         if (s3 !== peg$FAILED) {
           peg$savedPos = s0;
-          s0 = peg$f30(s3);
+          s0 = peg$f31(s3);
         } else {
           peg$currPos = s0;
           s0 = peg$FAILED;
@@ -1946,7 +2124,7 @@ function peg$parse(input, options) {
     let s0, s1, s2, s3;
     s0 = peg$currPos;
     peg$savedPos = peg$currPos;
-    s1 = peg$f31();
+    s1 = peg$f32();
     if (s1) {
       s1 = undefined;
     } else {
@@ -1965,7 +2143,7 @@ function peg$parse(input, options) {
       }
       if (s2 !== peg$FAILED) {
         peg$savedPos = s0;
-        s0 = peg$f32(s2);
+        s0 = peg$f33(s2);
       } else {
         peg$currPos = s0;
         s0 = peg$FAILED;
@@ -2010,7 +2188,7 @@ function peg$parse(input, options) {
     }
     if (s1 !== peg$FAILED) {
       peg$savedPos = peg$currPos;
-      s2 = peg$f33();
+      s2 = peg$f34();
       if (s2) {
         s2 = undefined;
       } else {
@@ -2020,7 +2198,7 @@ function peg$parse(input, options) {
         s3 = peg$parseconsumeDouble();
         if (s3 !== peg$FAILED) {
           peg$savedPos = s0;
-          s0 = peg$f34(s3);
+          s0 = peg$f35(s3);
         } else {
           peg$currPos = s0;
           s0 = peg$FAILED;
@@ -2055,7 +2233,7 @@ function peg$parse(input, options) {
         s3 = peg$parseconsumeDoubleMore();
       }
       peg$savedPos = s0;
-      s0 = peg$f35(s1, s2);
+      s0 = peg$f36(s1, s2);
     } else {
       peg$currPos = s0;
       s0 = peg$FAILED;
@@ -2066,7 +2244,7 @@ function peg$parse(input, options) {
     let s0, s1, s2;
     s0 = peg$currPos;
     peg$savedPos = peg$currPos;
-    s1 = peg$f36();
+    s1 = peg$f37();
     if (s1) {
       s1 = undefined;
     } else {
@@ -2084,7 +2262,7 @@ function peg$parse(input, options) {
       }
       if (s2 !== peg$FAILED) {
         peg$savedPos = s0;
-        s0 = peg$f37(s2);
+        s0 = peg$f38(s2);
       } else {
         peg$currPos = s0;
         s0 = peg$FAILED;
@@ -2118,7 +2296,7 @@ function peg$parse(input, options) {
     }
     if (s1 !== peg$FAILED) {
       peg$savedPos = peg$currPos;
-      s2 = peg$f38();
+      s2 = peg$f39();
       if (s2) {
         s2 = undefined;
       } else {
@@ -2128,7 +2306,7 @@ function peg$parse(input, options) {
         s3 = peg$parseconsumeSingle();
         if (s3 !== peg$FAILED) {
           peg$savedPos = s0;
-          s0 = peg$f39(s3);
+          s0 = peg$f40(s3);
         } else {
           peg$currPos = s0;
           s0 = peg$FAILED;
@@ -2163,7 +2341,7 @@ function peg$parse(input, options) {
         s3 = peg$parseconsumeSingleMore();
       }
       peg$savedPos = s0;
-      s0 = peg$f40(s1, s2);
+      s0 = peg$f41(s1, s2);
     } else {
       peg$currPos = s0;
       s0 = peg$FAILED;
@@ -2174,7 +2352,7 @@ function peg$parse(input, options) {
     let s0, s1, s2;
     s0 = peg$currPos;
     peg$savedPos = peg$currPos;
-    s1 = peg$f41();
+    s1 = peg$f42();
     if (s1) {
       s1 = undefined;
     } else {
@@ -2192,7 +2370,7 @@ function peg$parse(input, options) {
       }
       if (s2 !== peg$FAILED) {
         peg$savedPos = s0;
-        s0 = peg$f42(s2);
+        s0 = peg$f43(s2);
       } else {
         peg$currPos = s0;
         s0 = peg$FAILED;
@@ -2226,7 +2404,7 @@ function peg$parse(input, options) {
     }
     if (s1 !== peg$FAILED) {
       peg$savedPos = peg$currPos;
-      s2 = peg$f43();
+      s2 = peg$f44();
       if (s2) {
         s2 = undefined;
       } else {
@@ -2236,7 +2414,7 @@ function peg$parse(input, options) {
         s3 = peg$parseconsumeBacktick();
         if (s3 !== peg$FAILED) {
           peg$savedPos = s0;
-          s0 = peg$f44(s3);
+          s0 = peg$f45(s3);
         } else {
           peg$currPos = s0;
           s0 = peg$FAILED;
@@ -2271,7 +2449,7 @@ function peg$parse(input, options) {
         s3 = peg$parseconsumeBacktickMore();
       }
       peg$savedPos = s0;
-      s0 = peg$f45(s1, s2);
+      s0 = peg$f46(s1, s2);
     } else {
       peg$currPos = s0;
       s0 = peg$FAILED;
@@ -2282,7 +2460,7 @@ function peg$parse(input, options) {
     let s0, s1, s2;
     s0 = peg$currPos;
     peg$savedPos = peg$currPos;
-    s1 = peg$f46();
+    s1 = peg$f47();
     if (s1) {
       s1 = undefined;
     } else {
@@ -2300,7 +2478,7 @@ function peg$parse(input, options) {
       }
       if (s2 !== peg$FAILED) {
         peg$savedPos = s0;
-        s0 = peg$f47(s2);
+        s0 = peg$f48(s2);
       } else {
         peg$currPos = s0;
         s0 = peg$FAILED;
@@ -2316,7 +2494,7 @@ function peg$parse(input, options) {
     s0 = peg$currPos;
     s1 = "";
     peg$savedPos = s0;
-    s1 = peg$f48();
+    s1 = peg$f49();
     s0 = s1;
     return s0;
   }
@@ -2346,7 +2524,7 @@ function peg$parse(input, options) {
       }
     }
     peg$savedPos = s0;
-    s1 = peg$f49(s1);
+    s1 = peg$f50(s1);
     s0 = s1;
     return s0;
   }
@@ -2376,7 +2554,7 @@ function peg$parse(input, options) {
       }
     }
     peg$savedPos = peg$currPos;
-    s2 = peg$f50(s1);
+    s2 = peg$f51(s1);
     if (s2) {
       s2 = undefined;
     } else {
@@ -2384,7 +2562,7 @@ function peg$parse(input, options) {
     }
     if (s2 !== peg$FAILED) {
       peg$savedPos = s0;
-      s0 = peg$f51(s1);
+      s0 = peg$f52(s1);
     } else {
       peg$currPos = s0;
       s0 = peg$FAILED;
@@ -2417,7 +2595,7 @@ function peg$parse(input, options) {
       }
     }
     peg$savedPos = peg$currPos;
-    s2 = peg$f52(s1);
+    s2 = peg$f53(s1);
     if (s2) {
       s2 = undefined;
     } else {
@@ -2628,7 +2806,7 @@ function peg$parse(input, options) {
     let s0, s1, s2, s3;
     s0 = peg$currPos;
     peg$savedPos = peg$currPos;
-    s1 = peg$f53();
+    s1 = peg$f54();
     if (s1) {
       s1 = undefined;
     } else {
@@ -2755,6 +2933,7 @@ function peg$parse(input, options) {
   let contextStack = [];
   let contextDepth = 0;
   const maxDepth = options.maxDepth ?? Infinity;
+  const source = options.source ?? input;
   let unreadableLines = new Set;
   function resetState() {
     indentationStack = [0];
@@ -2870,12 +3049,17 @@ class Parser {
     this.maxInputSize = options.maxInputSize || 10 * 1024 * 1024;
     this.maxDepth = options.maxDepth ?? DEFAULT_MAX_DEPTH;
     this.comments = options.comments ?? true;
+    this.syntax = options.syntax ?? true;
   }
   parse(input) {
     return this._parse(input, (raw) => this.transformResult(raw));
   }
   parseGroups(input) {
     return this._parse(input, (raw) => raw.map((item) => this._transformGroup(item)));
+  }
+  parseCst(input) {
+    this.parse(input);
+    return buildCst(input, { comments: this.comments });
   }
   _transformGroup(item) {
     return new LinksGroup(this.transformLink(item), (item.children || []).map((child) => this._transformGroup(child)));
@@ -2890,7 +3074,8 @@ class Parser {
     const prepared = this.comments ? stripComments(input) : input;
     try {
       const rawResult = peg$parse(prepared, {
-        maxDepth: this.maxDepth
+        maxDepth: this.maxDepth,
+        source: input
       });
       return transform(rawResult);
     } catch (error) {
@@ -2920,6 +3105,7 @@ class Parser {
         const childValues = item.children.map((child) => this.transformIndentedValue(child));
         const linkWithChildren = {
           id: item.id,
+          rawId: item.rawId,
           values: childValues
         };
         const currentLink = this.transformLink(linkWithChildren);
@@ -2952,14 +3138,14 @@ class Parser {
   transformIndentedValue(item) {
     const children = item.children || [];
     if (children.length && item.id != null && !item.values?.length) {
-      return new Link(item.id, children.map((child) => this.transformIndentedValue(child)));
+      return this._withRawId(new Link(item.id, children.map((child) => this.transformIndentedValue(child))), item);
     }
     const current = this.transformLink(item);
     if (children.length) {
-      return new Link(current.id, [
+      return this._withRawId(new Link(current.id, [
         ...current.values,
         ...children.map((child) => this.transformIndentedValue(child))
-      ]);
+      ]), item);
     }
     if (item.id == null && item.nested === undefined && current.values.length === 1) {
       return current.values[0];
@@ -3004,14 +3190,20 @@ class Parser {
       return this.transformNested(item.nested);
     }
     if (item.id !== undefined && !item.values && !item.children) {
-      return new Link(item.id);
+      return this._withRawId(new Link(item.id), item);
     }
     if (item.values && Array.isArray(item.values)) {
-      const link = new Link(item.id ?? null, []);
+      const link = this._withRawId(new Link(item.id ?? null, []), item);
       link.values = item.values.map((v) => this.transformLink(v));
       return link;
     }
-    return new Link(item.id ?? null, []);
+    return this._withRawId(new Link(item.id ?? null, []), item);
+  }
+  _withRawId(link, item) {
+    if (this.syntax && link.id !== null && typeof item.rawId === "string") {
+      link.rawId = item.rawId;
+    }
+    return link;
   }
 }
 
@@ -3985,6 +4177,8 @@ export {
   ArityRange,
   BinaryLinoCodec,
   BinaryLinoOptions,
+  CstKind,
+  CstNode,
   DEFAULT_MAX_DEPTH,
   DecodeLimits,
   External,
@@ -4007,6 +4201,7 @@ export {
   formatIndentedDocument,
   formatLinks,
   parseIndentedDocument,
+  referenceQuote,
   stripComments,
   unescapeReference
 };

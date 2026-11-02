@@ -4,7 +4,7 @@ repos:
     hooks:
       - id: trailing-whitespace
         # Preserve empty TSV fields and original archived patch context.
-        exclude: ^(parity/text-vectors\.tsv|docs/case-studies/issue-339/data/.*\.diff)$
+        exclude: ^(parity/(text|syntax)-vectors\.tsv|docs/case-studies/issue-339/data/.*\.diff)$
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files

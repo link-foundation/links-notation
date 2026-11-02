@@ -3,7 +3,12 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { resolve, relative, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { fixtures, renderVectors } from "./text-fixtures.mjs";
+import {
+  fixtures,
+  renderSyntaxVectors,
+  renderVectors,
+  syntaxFixtures,
+} from "./text-fixtures.mjs";
 
 export const root = fileURLToPath(new URL("../../", import.meta.url));
 export const languages = [
@@ -56,7 +61,12 @@ export function sourceInventory(language) {
   return { files, sha256: hash.digest("hex") };
 }
 
-export function checkParity(manifest, cases = fixtures, options = {}) {
+export function checkParity(
+  manifest,
+  cases = fixtures,
+  options = {},
+  syntaxCases = syntaxFixtures,
+) {
   const errors = [];
   const fail = (message) => errors.push(message);
   if (manifest.schemaVersion !== 1) fail("unknown parity schemaVersion");
@@ -91,6 +101,37 @@ export function checkParity(manifest, cases = fixtures, options = {}) {
       }
     }
     if (Array.isArray(fixture.expected)) node(fixture.expected);
+  }
+  const syntaxIds = new Set();
+  for (const fixture of syntaxCases) {
+    if (!fixture.id || syntaxIds.has(fixture.id))
+      fail(`duplicate or missing syntax fixture id: ${fixture.id}`);
+    syntaxIds.add(fixture.id);
+    if (
+      typeof fixture.input !== "string" ||
+      typeof fixture.cst !== "string" ||
+      !Array.isArray(fixture.links)
+    )
+      fail(`${fixture.id}: input, links and cst are required`);
+    function syntaxNode(links) {
+      for (const link of links) {
+        const nullableText = (key) =>
+          link && (link[key] === null || typeof link[key] === "string");
+        if (
+          !nullableText("id") ||
+          !nullableText("raw") ||
+          !nullableText("quote") ||
+          !Array.isArray(link.values) ||
+          (link.id === null && link.raw !== null) ||
+          (link.raw === null && link.quote !== null)
+        ) {
+          fail(`${fixture.id}: invalid syntax node`);
+          continue;
+        }
+        syntaxNode(link.values);
+      }
+    }
+    if (Array.isArray(fixture.links)) syntaxNode(fixture.links);
   }
   for (const feature of manifest.features) {
     if (!feature.id || featureIds.has(feature.id))
@@ -138,8 +179,13 @@ export function checkParity(manifest, cases = fixtures, options = {}) {
       !cases.some((fixture) => fixture.feature === feature.id)
     )
       fail(`${feature.id}: shared text feature needs a golden fixture`);
+    if (
+      feature.contract === "shared-syntax" &&
+      !syntaxCases.some((fixture) => fixture.feature === feature.id)
+    )
+      fail(`${feature.id}: shared syntax feature needs a golden fixture`);
   }
-  for (const fixture of cases)
+  for (const fixture of [...cases, ...syntaxCases])
     if (!featureIds.has(fixture.feature))
       fail(`${fixture.id}: untracked feature ${fixture.feature}`);
   // A source change requires reviewing the manifest, even if it adds no export.
@@ -162,6 +208,14 @@ export function checkParity(manifest, cases = fixtures, options = {}) {
     fail(
       "text-vectors.tsv is stale; regenerate it from the reviewed JSON fixtures",
     );
+  if (
+    options.checkVectors !== false &&
+    readFileSync(join(root, "parity/syntax-vectors.tsv"), "utf8") !==
+      renderSyntaxVectors(syntaxCases)
+  )
+    fail(
+      "syntax-vectors.tsv is stale; regenerate it from the reviewed JSON fixtures",
+    );
   return errors;
 }
 
@@ -182,13 +236,19 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
       );
       writeFileSync(path, JSON.stringify(manifest, null, 2) + "\n");
       writeFileSync(join(root, "parity/text-vectors.tsv"), renderVectors());
-      console.log("Refreshed reviewed source inventory and text vectors.");
+      writeFileSync(
+        join(root, "parity/syntax-vectors.tsv"),
+        renderSyntaxVectors(),
+      );
+      console.log(
+        "Refreshed reviewed source inventory, text vectors and syntax vectors.",
+      );
     }
   } else {
     const errors = checkParity(manifest);
     for (const error of errors) console.error(`::error::${error}`);
     console.log(
-      `${manifest.features.length} features, ${fixtures.length} shared text cases, ${languages.length} languages; ${errors.length} violations.`,
+      `${manifest.features.length} features, ${fixtures.length} shared text cases, ${syntaxFixtures.length} shared syntax cases, ${languages.length} languages; ${errors.length} violations.`,
     );
     process.exitCode = errors.length ? 1 : 0;
   }

@@ -25,6 +25,22 @@ export class Link {
   values: Link[];
 
   /**
+   * The ID exactly as the parsed document wrote it, quotes, escapes and
+   * literal syntax included: `'1'` for a reference written `'1'`, `1` for one
+   * written `1`. Null for a link without an ID, a link built in code, a link
+   * made by indentation path combination, or a parser in AST mode
+   * (`syntax: false`). Equality, formatting and serialization ignore it.
+   * @throws {TypeError} When set to anything but a string or null
+   */
+  rawId: string | null;
+
+  /**
+   * The delimiter the ID was written between (`'`, `"` or `` ` ``), read from
+   * `rawId`; null for a bare or literal reference, or no `rawId`.
+   */
+  readonly quote: "'" | '"' | '`' | null;
+
+  /**
    * Create a new Link
    * @param id - Optional identifier for the link
    * @param values - Optional array of nested links
@@ -124,6 +140,56 @@ export function escapeReference(
 export function unescapeReference(reference: string): string;
 
 /**
+ * The delimiter one reference was written between, read from the reference as
+ * written: `'`, `"` or `` ` `` for a complete quoted reference, otherwise null.
+ */
+export function referenceQuote(
+  raw: string | null | undefined
+): "'" | '"' | '`' | null;
+
+/** The kinds of nodes and tokens of a concrete syntax tree. */
+export const CstKind: Readonly<{
+  DOCUMENT: 'document';
+  LINE: 'line';
+  GROUP: 'group';
+  WHITESPACE: 'whitespace';
+  NEWLINE: 'newline';
+  COMMENT: 'comment';
+  OPEN_PAREN: 'open_paren';
+  CLOSE_PAREN: 'close_paren';
+  COLON: 'colon';
+  REFERENCE: 'reference';
+}>;
+
+export type CstKindName = (typeof CstKind)[keyof typeof CstKind];
+
+/**
+ * One node or token of a lossless concrete syntax tree: every character of
+ * the document belongs to exactly one token, so the document is the text of
+ * the tree.
+ */
+export class CstNode {
+  /** The kind of this node or token. */
+  kind: CstKindName;
+  /** The children of a `document`, `line` or `group` node; empty for a token. */
+  children: CstNode[];
+  /** What a reference token means; null for every other kind. */
+  value: string | null;
+  /** The delimiter of a quoted reference token; null otherwise. */
+  quote: "'" | '"' | '`' | null;
+  /** Whether this is a token rather than a node. */
+  readonly isToken: boolean;
+  /** The exact text this node or token was read from. */
+  readonly text: string;
+  /** The exact text this node or token was read from. */
+  toString(): string;
+  /** Every token of this subtree, in document order. */
+  tokens(): CstNode[];
+  /** The tree as an S-expression: `(kind child ...)` and `kind:"text"`. */
+  toSExpression(): string;
+}
+
+/**
  * Parser options for configuring the parser behavior
  */
 /**
@@ -150,6 +216,12 @@ export interface ParserOptions {
    * comment (default: true)
    */
   comments?: boolean;
+
+  /**
+   * If false (AST mode), parsed links do not keep how their IDs were written:
+   * `rawId` and `quote` stay null (default: true)
+   */
+  syntax?: boolean;
 }
 
 /**
@@ -174,6 +246,11 @@ export class Parser {
   comments: boolean;
 
   /**
+   * Whether parsed links keep how their IDs were written (`rawId`)
+   */
+  syntax: boolean;
+
+  /**
    * Create a new Parser instance
    * @param options - Parser options
    */
@@ -189,6 +266,13 @@ export class Parser {
 
   /** Read the indentation tree without expanding it into path combinations. */
   parseGroups(input: string): IndentedGroup[];
+
+  /**
+   * Read the document as a lossless concrete syntax tree, so that
+   * `parseCst(input).toString() === input`.
+   * @throws {ParseError} When `parse(input)` would throw
+   */
+  parseCst(input: string): CstNode;
 }
 
 /** A parsed line and the immediately indented lines below it. */

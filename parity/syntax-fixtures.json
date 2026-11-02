@@ -1,0 +1,505 @@
+[
+  {
+    "id": "issue-364",
+    "feature": "syntax-metadata",
+    "input": "(t 1 '1')",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "t",
+            "raw": "t",
+            "quote": null,
+            "values": []
+          },
+          {
+            "id": "1",
+            "raw": "1",
+            "quote": null,
+            "values": []
+          },
+          {
+            "id": "1",
+            "raw": "'1'",
+            "quote": "'",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line (group open_paren:\"(\" (line reference:\"t\" whitespace:\" \" reference:\"1\" whitespace:\" \" reference:\"'1'\") close_paren:\")\")))"
+  },
+  {
+    "id": "quote-kinds",
+    "feature": "syntax-metadata",
+    "input": "(\"a\": 'b' `c` d)",
+    "links": [
+      {
+        "id": "a",
+        "raw": "\"a\"",
+        "quote": "\"",
+        "values": [
+          {
+            "id": "b",
+            "raw": "'b'",
+            "quote": "'",
+            "values": []
+          },
+          {
+            "id": "c",
+            "raw": "`c`",
+            "quote": "`",
+            "values": []
+          },
+          {
+            "id": "d",
+            "raw": "d",
+            "quote": null,
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line (group open_paren:\"(\" (line reference:\"\\\"a\\\"\" colon:\":\" whitespace:\" \" reference:\"'b'\" whitespace:\" \" reference:\"`c`\" whitespace:\" \" reference:\"d\") close_paren:\")\")))"
+  },
+  {
+    "id": "quote-runs",
+    "feature": "syntax-metadata",
+    "input": "(''it''''s'' \"\"\"x\"\"\")",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "it''s",
+            "raw": "''it''''s''",
+            "quote": "'",
+            "values": []
+          },
+          {
+            "id": "x",
+            "raw": "\"\"\"x\"\"\"",
+            "quote": "\"",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line (group open_paren:\"(\" (line reference:\"''it''''s''\" whitespace:\" \" reference:\"\\\"\\\"\\\"x\\\"\\\"\\\"\") close_paren:\")\")))"
+  },
+  {
+    "id": "literal",
+    "feature": "syntax-metadata",
+    "input": "(~1{31} 1)",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "1",
+            "raw": "~1{31}",
+            "quote": null,
+            "values": []
+          },
+          {
+            "id": "1",
+            "raw": "1",
+            "quote": null,
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line (group open_paren:\"(\" (line reference:\"~1{31}\" whitespace:\" \" reference:\"1\") close_paren:\")\")))"
+  },
+  {
+    "id": "empty-refs",
+    "feature": "syntax-metadata",
+    "input": "(\"\" '' ~1{})",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "",
+            "raw": "\"\"",
+            "quote": "\"",
+            "values": []
+          },
+          {
+            "id": "",
+            "raw": "''",
+            "quote": "'",
+            "values": []
+          },
+          {
+            "id": "",
+            "raw": "~1{}",
+            "quote": null,
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line (group open_paren:\"(\" (line reference:\"\\\"\\\"\" whitespace:\" \" reference:\"''\" whitespace:\" \" reference:\"~1{}\") close_paren:\")\")))"
+  },
+  {
+    "id": "indented-id",
+    "feature": "syntax-metadata",
+    "input": "'root':\n  'child'\n  leaf",
+    "links": [
+      {
+        "id": "root",
+        "raw": "'root'",
+        "quote": "'",
+        "values": [
+          {
+            "id": "child",
+            "raw": "'child'",
+            "quote": "'",
+            "values": []
+          },
+          {
+            "id": "leaf",
+            "raw": "leaf",
+            "quote": null,
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line reference:\"'root'\" colon:\":\" newline:\"\\n\") (line whitespace:\"  \" reference:\"'child'\" newline:\"\\n\") (line whitespace:\"  \" reference:\"leaf\"))"
+  },
+  {
+    "id": "indented-path",
+    "feature": "syntax-metadata",
+    "input": "a\n  b\n    c",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "a",
+            "raw": "a",
+            "quote": null,
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": null,
+            "raw": null,
+            "quote": null,
+            "values": [
+              {
+                "id": "a",
+                "raw": "a",
+                "quote": null,
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": null,
+            "raw": null,
+            "quote": null,
+            "values": [
+              {
+                "id": "b",
+                "raw": "b",
+                "quote": null,
+                "values": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": null,
+            "raw": null,
+            "quote": null,
+            "values": [
+              {
+                "id": null,
+                "raw": null,
+                "quote": null,
+                "values": [
+                  {
+                    "id": "a",
+                    "raw": "a",
+                    "quote": null,
+                    "values": []
+                  }
+                ]
+              },
+              {
+                "id": null,
+                "raw": null,
+                "quote": null,
+                "values": [
+                  {
+                    "id": "b",
+                    "raw": "b",
+                    "quote": null,
+                    "values": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": null,
+            "raw": null,
+            "quote": null,
+            "values": [
+              {
+                "id": "c",
+                "raw": "c",
+                "quote": null,
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line reference:\"a\" newline:\"\\n\") (line whitespace:\"  \" reference:\"b\" newline:\"\\n\") (line whitespace:\"    \" reference:\"c\"))"
+  },
+  {
+    "id": "unclosed-quote",
+    "feature": "syntax-metadata",
+    "input": "('x y)",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "'x",
+            "raw": "'x",
+            "quote": null,
+            "values": []
+          },
+          {
+            "id": "y",
+            "raw": "y",
+            "quote": null,
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line (group open_paren:\"(\" (line reference:\"'x\" whitespace:\" \" reference:\"y\") close_paren:\")\")))"
+  },
+  {
+    "id": "comments-crlf",
+    "feature": "concrete-syntax-tree",
+    "input": "a 'b' # c\r\n\r\n# only\r\n(d)",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "a",
+            "raw": "a",
+            "quote": null,
+            "values": []
+          },
+          {
+            "id": "b",
+            "raw": "'b'",
+            "quote": "'",
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "d",
+            "raw": "d",
+            "quote": null,
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line reference:\"a\" whitespace:\" \" reference:\"'b'\" whitespace:\" \" comment:\"# c\" newline:\"\\r\\n\") (line newline:\"\\r\\n\") (line comment:\"# only\" newline:\"\\r\\n\") (line (group open_paren:\"(\" (line reference:\"d\") close_paren:\")\")))"
+  },
+  {
+    "id": "comment-in-quote",
+    "feature": "concrete-syntax-tree",
+    "input": "('a # b' c) # d",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "a # b",
+            "raw": "'a # b'",
+            "quote": "'",
+            "values": []
+          },
+          {
+            "id": "c",
+            "raw": "c",
+            "quote": null,
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line (group open_paren:\"(\" (line reference:\"'a # b'\" whitespace:\" \" reference:\"c\") close_paren:\")\") whitespace:\" \" comment:\"# d\"))"
+  },
+  {
+    "id": "whitespace",
+    "feature": "concrete-syntax-tree",
+    "input": "(x\t 'y')  ",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "x",
+            "raw": "x",
+            "quote": null,
+            "values": []
+          },
+          {
+            "id": "y",
+            "raw": "'y'",
+            "quote": "'",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line (group open_paren:\"(\" (line reference:\"x\" whitespace:\"\\t \" reference:\"'y'\") close_paren:\")\") whitespace:\"  \"))"
+  },
+  {
+    "id": "multiline",
+    "feature": "concrete-syntax-tree",
+    "input": "(note: \"line1\nline2\")\n",
+    "links": [
+      {
+        "id": "note",
+        "raw": "note",
+        "quote": null,
+        "values": [
+          {
+            "id": "line1\nline2",
+            "raw": "\"line1\nline2\"",
+            "quote": "\"",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line (group open_paren:\"(\" (line reference:\"note\" colon:\":\" whitespace:\" \" reference:\"\\\"line1\\nline2\\\"\") close_paren:\")\") newline:\"\\n\"))"
+  },
+  {
+    "id": "context",
+    "feature": "concrete-syntax-tree",
+    "input": "value (\n  id \"1\"\n)",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "value",
+            "raw": "value",
+            "quote": null,
+            "values": []
+          },
+          {
+            "id": null,
+            "raw": null,
+            "quote": null,
+            "values": [
+              {
+                "id": "id",
+                "raw": "id",
+                "quote": null,
+                "values": []
+              },
+              {
+                "id": "1",
+                "raw": "\"1\"",
+                "quote": "\"",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line reference:\"value\" whitespace:\" \" (group open_paren:\"(\" (line newline:\"\\n\") (line whitespace:\"  \" reference:\"id\" whitespace:\" \" reference:\"\\\"1\\\"\" newline:\"\\n\") close_paren:\")\")))"
+  },
+  {
+    "id": "unicode",
+    "feature": "concrete-syntax-tree",
+    "input": "(根: 'café' 🙂)",
+    "links": [
+      {
+        "id": "根",
+        "raw": "根",
+        "quote": null,
+        "values": [
+          {
+            "id": "café",
+            "raw": "'café'",
+            "quote": "'",
+            "values": []
+          },
+          {
+            "id": "🙂",
+            "raw": "🙂",
+            "quote": null,
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line (group open_paren:\"(\" (line reference:\"根\" colon:\":\" whitespace:\" \" reference:\"'café'\" whitespace:\" \" reference:\"🙂\") close_paren:\")\")))"
+  },
+  {
+    "id": "empty",
+    "feature": "concrete-syntax-tree",
+    "input": "",
+    "links": [],
+    "cst": "(document)"
+  }
+]
