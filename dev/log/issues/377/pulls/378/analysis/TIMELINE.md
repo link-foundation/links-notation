@@ -69,4 +69,6 @@ Registry state on 2026-11-02 (npm `latest` and crates.io `max_version`): 0.28.0.
 | `6596ad8` | The Maven 3.6.3 floor job runs JDK 25 without launcher warnings (W1). |
 | `332cf3d` | `experiments/issue-377/kgp-named-enum` reproduces the KGP 2.4.21 deprecation (W3). |
 | `0b8992a` | The dependency freshness gate fails pull requests and warns on push and schedule (C2). |
-| next | This folder, and the annotation collector `experiments/issue-377/collect-annotations.sh`. |
+| `0c4336f`, `ffefe86` | The annotation collector `experiments/issue-377/collect-annotations.sh`, and this folder. |
+| `d9c8fcf` | The first CI run of this branch (41501254429) found the KGP reproduction missing from Dependabot coverage. It is now excluded on purpose, because it pins KGP 2.4.21. |
+| `ea87dbe` | The same run's `js / parity` rejected `!cancelled()` on `release_audit` (`check-js-gate.mjs`), so `always()` is restored. The reason is in `BEST-PRACTICES-COMPLIANCE.md`, principle 10. |
