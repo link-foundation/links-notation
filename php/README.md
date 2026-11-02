@@ -157,6 +157,53 @@ $stream->finish('next link');
 `StreamParser::parseChunks($chunks)` returns a lazy `Generator`; position,
 drain, reset, and maximum-buffer controls are also available.
 
+### How References Were Written
+
+A parsed link remembers how its ID was written. `1` and `'1'` are still the same
+reference, but `getRawId()` returns the ID exactly as written, and `getQuote()`
+the quote character it was written between:
+
+```php
+[$link] = (new Parser())->parse("(t 1 '1')");
+[, $bare, $quoted] = $link->values;
+
+$bare->getRawId();    // '1'
+$quoted->getRawId();  // "'1'"
+$quoted->getQuote();  // "'"
+$bare->getQuote();    // null
+$bare->equals($quoted); // true
+echo $link;             // (t 1 1)
+```
+
+`equals()`, `==`, formatting, `__toString()`, `json_encode()` and `serialize()`
+ignore this metadata. `getRawId()` is `null` for a link without an ID, a link
+built in code, and a link made by combining the lines of an indented document.
+`new Parser(syntax: false)` (AST mode) does not record it at all.
+
+### Concrete Syntax Tree
+
+`parseCst()` returns a lossless concrete syntax tree: every character, including
+comments, whitespace and line endings, belongs to exactly one token, so
+`(string) $cst === $input`.
+
+```php
+use LinkFoundation\LinksNotation\CstKind;
+
+$cst = (new Parser())->parseCst("(t 1 '1') # note\n");
+echo $cst->toSExpression();
+// (document (line (group open_paren:"(" (line reference:"t" whitespace:" " reference:"1"
+//   whitespace:" " reference:"'1'") close_paren:")") whitespace:" " comment:"# note" newline:"\n"))
+
+foreach ($cst->tokens() as $token) {
+    if ($token->kind === CstKind::REFERENCE) {
+        echo $token->text(), ' => ', $token->value, ' ', $token->quote ?? '-', "\n";
+    }
+}
+```
+
+The input is parsed first, so `parseCst()` throws whatever `parse()` throws; it
+also throws a `ParseException` when the parentheses are unbalanced.
+
 ## Syntax Examples
 
 ### Doublets (2-tuple)
@@ -288,12 +335,14 @@ escapes it.
 
 Main parser class for converting strings into links.
 
-- `__construct(int $maxInputSize = 10485760, int $maxDepth = Parser::DEFAULT_MAX_DEPTH, bool $comments = true)` - create a
-  parser with optional limits, and with `#` comments on unless `$comments` is `false`
+- `__construct(int $maxInputSize = 10485760, int $maxDepth = Parser::DEFAULT_MAX_DEPTH, bool $comments = true,
+  bool $syntax = true)` - create a parser with optional limits, with `#` comments on unless `$comments` is
+  `false`, and recording how IDs were written unless `$syntax` is `false` (AST mode)
 - `parse(string $input): Link[]` - parse a lino string and return the links
   - throws `InvalidArgumentException` when the input exceeds `$maxInputSize`
   - throws `LinkFoundation\LinksNotation\ParseException` when the input cannot be parsed,
     or nests links deeper than `$maxDepth`
+- `parseCst(string $input): CstNode` - parse, then return the lossless concrete syntax tree
 - `Parser::DEFAULT_MAX_DEPTH` - the default `$maxDepth`, 64, the same in every implementation
 
 `$maxDepth` is how deep links may nest (default: 64). Every parenthesized group
@@ -317,6 +366,23 @@ Represents a single link with an id and values.
 - `getValuesString(): string` - format the values without the surrounding link
 - `toLinkOrIdString(): string` - format as an id when the link is a bare reference
 - `static escapeReference(?string $reference): string` - quote a reference when needed
+- `getRawId(): ?string` / `setRawId(?string $rawId): void` - the ID exactly as the document wrote it
+- `getQuote(): ?string` - the quote character the ID was written between, or `null`
+- `static referenceQuote(?string $raw): ?string` - the quote character of one complete
+  quoted reference, or `null`
+
+#### `LinkFoundation\LinksNotation\CstNode`
+
+One node (`document`, `line`, `group`) or token (`whitespace`, `newline`,
+`comment`, `open_paren`, `close_paren`, `colon`, `reference`) of a concrete
+syntax tree; the kinds are the `CstKind` constants.
+
+- `public string $kind`, `public CstNode[] $children` - empty for a token
+- `public ?string $value` - a reference token's decoded value
+- `public ?string $quote` - a quoted reference token's delimiter
+- `text(): string`, `__toString(): string` - the exact text
+- `tokens(): CstNode[]` - every token in document order
+- `toSExpression(): string` - the tree as an S-expression
 
 #### `LinkFoundation\LinksNotation\Formatter`
 
@@ -368,6 +434,7 @@ counted from the start of the stream.
 - `src/FormatConfig.php` - formatting options
 - `src/Parser.php` - parser implementation
 - `src/ParseException.php` - parse exception
+- `src/CstNode.php`, `src/CstKind.php`, `src/CstBuilder.php` - concrete syntax tree
 - `tests/` - PHPUnit test suite
 
 ## Requirements
