@@ -2,12 +2,12 @@
 
 Develop shared behavior in JavaScript first. Start with a small failing JS test,
 implement the behavior, then add a reviewed input/tree/format fixture in
-`parity/text-fixtures.json` and port it to the other seven libraries. A port of
+`parity/text-fixtures.json` and port it to the other eight libraries. A port of
 behavior already implemented in JS can reference that existing JS test. Do not
 merge a new shared feature with missing bindings: update its manifest evidence
 or record an explicit, explained exception in `parity/README.md`.
 
-All eight libraries are hand-written. JS's Peggy parser and C#'s Pegasus parser
+All nine libraries are hand-written. JS's Peggy parser and C#'s Pegasus parser
 are generated from their own hand-written grammars; none of the language
 libraries is translated from JS.
 [Meta-language translation rules](https://github.com/link-foundation/meta-language/blob/main/docs/translation-rules.md)
@@ -52,7 +52,9 @@ Black/isort/flake8 for Python, `go test ./...` and `go vet ./...` for Go,
 for C#, `composer run-script test` / `lint` for PHP, and
 `cmake -S cpp -B build && cmake --build build && ctest --test-dir build` plus
 `clang-format --dry-run --Werror` (version pinned in `cpp/tools/requirements.txt`)
-for C++. PHP distribution changes
+for C++, and `./gradlew ktlintCheck jvmTest jsNodeTest wasmJsNodeTest` from
+`kotlin/` for Kotlin (`iosSimulatorArm64Test` needs macOS and
+`testAndroidHostTest` an Android SDK; CI runs both). PHP distribution changes
 also require `python3 experiments/issue-339/test_php_distribution.py` from the
 root, using PHP 8.4+ and Composer. Refresh root metadata after changing
 `php/composer.json` with `node scripts/ci/php-distribution.mjs --write`.
@@ -111,8 +113,8 @@ older pending run, so it does not replace this push rule.
 ## CI and releases
 
 `.github/workflows/js.yml` is the single CI entry point. It calls
-`javascript.yml` from the same commit, then the six language workflows, binary
-interop, security, benchmarks, and docs. JS format/lint/test/parity always run
+`javascript.yml` from the same commit, then the eight other language workflows,
+binary interop, security, benchmarks, and docs. JS format/lint/test/parity always run
 for every PR and main push. Cancelled, failed, or skipped JS prevents non-JS
 execution. The static guard rejects independent language triggers, unsafe
 conditions, mutable checkout refs, and ungated reusable callers. The required
@@ -124,15 +126,17 @@ in; otherwise provide their bootstrap tokens. Do not register a reusable callee
 as the PyPI publisher. See [release setup](docs/releases.md).
 
 Add a fragment under `changelog.d/` for each user-visible change. Release PRs
-combine the reviewed fragments into `CHANGELOG.md` and update all eight declared
+combine the reviewed fragments into `CHANGELOG.md` and update all nine declared
 versions together. This PR prepares 0.29.0. Per-registry tags remain for
 existing consumers, especially Go's required `go/vVERSION` tag. One CI run
-waits for all eight native stages before calling `release.yml`, coordinates
+waits for all nine native stages before calling `release.yml`, coordinates
 publishing, and performs the final exact-version audit. A distributed
 release cannot be atomic across registries: a partial delivery fails the final
 audit and must be recovered by rerunning after the failing provider is repaired.
 
-Main's ruleset requires JavaScript, Rust, Python, Java, Go, CSharp, PHP, and Cpp. Use
+Main's ruleset requires JavaScript, Rust, Python, Java, Go, CSharp, PHP, Cpp and
+Kotlin; `.github/main-ruleset.json` is the source, and an administrator applies
+it to the live ruleset after changing it. Use
 a pull request for changes to main. Wait for every check, inspect the whole
 diff, ensure no existing feature disappeared, update the PR title/body with
 reproduction and validation, and mark the completed draft ready.

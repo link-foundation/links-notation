@@ -10,8 +10,8 @@ composer install --working-dir=php --no-dev
 bash examples/binary/run-interop.sh
 ```
 
-All nine programs encode 116 documents from `corpus.txt` with all twelve combinations of external
-references, arity (`2`, `2..3`, `1..`) and packed widths. Each decodes its bytes
+All nine programs encode 116 documents from `corpus.txt` with all twelve
+combinations of external references, arity (`2`, `2..3`, `1..`) and packed widths. Each decodes its bytes
 and checks the original document, then reparses its canonical text. The script compares all 1,392 hexadecimal packets
 and their decoded text across languages, covering empty documents, names,
 Unicode whitespace and parser-specific separators, unsigned 64-bit numbers, comments, indentation, mixed quotes,
