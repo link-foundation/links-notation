@@ -1,0 +1,121 @@
+name: kotlin
+
+on:
+  workflow_call:
+    inputs:
+      verbose:
+        description: "Print extra diagnostics (never secret values)"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+defaults:
+  run:
+    working-directory: kotlin
+    shell: bash
+
+jobs:
+  lint:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    concurrency:
+      group: ci-kotlin-${{ github.ref }}-lint
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Set up JDK 25
+        uses: actions/setup-java@v6.1.0
+        with:
+          java-version: "25"
+          distribution: "temurin"
+          cache: gradle
+      - name: Check ktlint formatting
+        run: ./gradlew --no-daemon --console=plain ktlintCheck
+
+  # JVM, Node.js and WebAssembly from one Linux runner; the shared fixtures
+  # are compiled into every test binary by the generateParityCases task.
+  test:
+    needs: [lint]
+    runs-on: ubuntu-26.04
+    timeout-minutes: 30
+    concurrency:
+      group: ci-kotlin-${{ github.ref }}-test
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Set up JDK 25
+        uses: actions/setup-java@v6.1.0
+        with:
+          java-version: "25"
+          distribution: "temurin"
+          cache: gradle
+      - name: Test on the JVM, Node.js and WebAssembly
+        run: ./gradlew --no-daemon --console=plain jvmTest jsNodeTest wasmJsNodeTest
+      - name: Show the test summary
+        if: ${{ always() }}
+        run: bash test-summary.sh
+
+  # The Android target is built only where an Android SDK exists, so this job
+  # fails rather than silently testing nothing when the image lacks one.
+  android:
+    needs: [lint]
+    runs-on: ubuntu-26.04
+    timeout-minutes: 30
+    concurrency:
+      group: ci-kotlin-${{ github.ref }}-android
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Set up JDK 25
+        uses: actions/setup-java@v6.1.0
+        with:
+          java-version: "25"
+          distribution: "temurin"
+          cache: gradle
+      - name: Require the Android SDK
+        run: |
+          if [ -z "${ANDROID_HOME:-}" ] || [ ! -d "$ANDROID_HOME" ]; then
+            echo "::error::ANDROID_HOME does not name an Android SDK on this runner image"
+            exit 1
+          fi
+      - name: Build and test the Android library
+        run: ./gradlew --no-daemon --console=plain assembleAndroidMain testAndroidHostTest
+
+  # Kotlin/Native for iOS builds only on macOS. The simulator test runs the
+  # whole suite natively; the device and Intel simulator targets are linked.
+  ios:
+    needs: [lint]
+    runs-on: macos-26
+    timeout-minutes: 45
+    concurrency:
+      group: ci-kotlin-${{ github.ref }}-ios
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+          submodules: true
+      - name: Set up JDK 25
+        uses: actions/setup-java@v6.1.0
+        with:
+          java-version: "25"
+          distribution: "temurin"
+          cache: gradle
+      - name: Test on the iOS simulator and build every iOS target
+        run: ./gradlew --no-daemon --console=plain iosSimulatorArm64Test linkDebugTestIosArm64 linkDebugTestIosX64

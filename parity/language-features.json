@@ -8,7 +8,8 @@
     "go",
     "csharp",
     "php",
-    "cpp"
+    "cpp",
+    "kotlin"
   ],
   "features": [
     {
@@ -86,6 +87,16 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
           ]
         }
       }
@@ -166,6 +177,16 @@
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
         }
       }
     },
@@ -244,6 +265,16 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
           ]
         }
       }
@@ -324,6 +355,16 @@
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
         }
       }
     },
@@ -402,6 +443,16 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
           ]
         }
       }
@@ -482,6 +533,16 @@
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
         }
       }
     },
@@ -560,6 +621,16 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
           ]
         }
       }
@@ -640,6 +711,16 @@
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
         }
       }
     },
@@ -718,6 +799,17 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Comments.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt"
           ]
         }
       }
@@ -798,6 +890,17 @@
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Quotes.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/Issue316QuoteRunsTest.kt"
+          ]
         }
       }
     },
@@ -877,6 +980,16 @@
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
         }
       }
     },
@@ -955,6 +1068,17 @@
           ],
           "evidence": [
             "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/References.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.kt"
           ]
         }
       }
@@ -1039,6 +1163,16 @@
             "cpp/tests/shared_text_parity_tests.cpp",
             "cpp/tests/stream_parser_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/StreamParser.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt"
+          ]
         }
       }
     },
@@ -1117,6 +1251,15 @@
           ],
           "evidence": [
             "cpp/tests/binary_notation_tests.cpp"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Binary.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/BinaryTest.kt"
           ]
         }
       }
@@ -1198,6 +1341,18 @@
             "cpp/tests/nesting_limit_tests.cpp",
             "cpp/tests/nesting_depth_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/ParserOptions.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/ParseException.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/NestingLimitTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/LimitsTest.kt"
+          ]
         }
       }
     },
@@ -1252,6 +1407,15 @@
           ],
           "evidence": [
             "cpp/tests/indented_document_tests.cpp"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/IndentedDocument.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/IndentedDocumentTest.kt"
           ]
         }
       }
@@ -1332,6 +1496,15 @@
           "evidence": [
             "cpp/tests/link_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Link.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/LinkTest.kt"
+          ]
         }
       }
     },
@@ -1408,6 +1581,16 @@
           "evidence": [
             "cpp/tests/format_config_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/FormatOptions.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Formatter.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/FormatConfigTest.kt"
+          ]
         }
       }
     },
@@ -1475,6 +1658,15 @@
           "evidence": [
             "cpp/tests/links_group_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/LinksGroup.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/LinksGroupTest.kt"
+          ]
         }
       }
     },
@@ -1523,6 +1715,11 @@
           "documentation": "parity/README.md"
         },
         "cpp": {
+          "status": "exception",
+          "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
+          "documentation": "parity/README.md"
+        },
+        "kotlin": {
           "status": "exception",
           "reason": "Rust compile-time macros/tuple trait adapters are host-specific; other bindings provide runtime parsing.",
           "documentation": "parity/README.md"
@@ -1632,6 +1829,18 @@
             "cpp/tests/shared_syntax_parity_tests.cpp",
             "cpp/tests/syntax_metadata_tests.cpp"
           ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Link.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/RawItem.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.kt"
+          ]
         }
       }
     },
@@ -1725,6 +1934,16 @@
           "evidence": [
             "cpp/tests/shared_syntax_parity_tests.cpp",
             "cpp/tests/cst_tests.cpp"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Cst.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CstTest.kt"
           ]
         }
       }
@@ -1918,6 +2137,28 @@
         "cpp/src/unicode.hpp"
       ],
       "sha256": "5fb1e25f7886d22cb44e3a6694e28836e62810e0cef5d6376c3dac51d5777178"
+    },
+    "kotlin": {
+      "files": [
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Binary.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Comments.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Cst.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/FormatOptions.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Formatter.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Grammar.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/IndentedDocument.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Link.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/LinksGroup.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/ParseException.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/ParserOptions.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Positions.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Quotes.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/RawItem.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/References.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/StreamParser.kt"
+      ],
+      "sha256": "972c4a5773977fc228ca32fb3b1cbb1ffcb7a91cfcca594ad121033b10103846"
     }
   }
 }
