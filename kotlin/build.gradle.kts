@@ -237,6 +237,17 @@ kotlin {
     }
 }
 
+// Mocha 11.7.6, the test runner the Kotlin/JS plugin installs for jsNodeTest,
+// asks for serialize-javascript ^6.0.2, which GHSA-5c6j-r48x-rmvq (high
+// severity, fixed in 7.0.3) reports, so the dependency review of every pull
+// request failed on kotlin-js-store/yarn.lock. Mocha 12 itself moved to ^7.1.1;
+// the 7.x line keeps the same CommonJS entry point. It is a test-only
+// dependency: the published library has no npm dependencies.
+plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
+    the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>()
+        .resolution("serialize-javascript", "^7.1.4")
+}
+
 tasks.register<JavaExec>("binaryExample") {
     description = "Prints the packets and texts of examples/binary/corpus.txt for run-interop.sh."
     group = "application"
