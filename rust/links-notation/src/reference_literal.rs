@@ -41,6 +41,20 @@ pub(crate) fn prefix_end(text: &str) -> Option<usize> {
     (position > 1 && bytes.get(position) == Some(&b'{')).then_some(position + 1)
 }
 
+/// The offset just past the versioned literal `~<digits>{<payload>}` that
+/// starts at `start` of `text`, if one does. The payload holds no `}`, space,
+/// tab, line ending or parenthesis, as the parser reads it.
+pub(crate) fn reference_literal_end(text: &str, start: usize) -> Option<usize> {
+    let rest = text.get(start..)?;
+    let body = prefix_end(rest)?;
+    let bytes = rest.as_bytes();
+    let mut end = body;
+    while end < bytes.len() && !b"} \t\r\n()".contains(&bytes[end]) {
+        end += 1;
+    }
+    (bytes.get(end) == Some(&b'}')).then_some(start + end + 1)
+}
+
 pub(crate) fn format_reference(text: &str) -> String {
     if text.is_empty() || text.chars().any(|c| c < ' ' || c == '\u{7f}') {
         return encode_reference_literal(text);

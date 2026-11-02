@@ -1067,7 +1067,7 @@ pub fn parse_lino_with_config(
     }
 
     let prepared = prepare(document, config);
-    match parser::parse_document_with_max_depth(&prepared, config.max_depth) {
+    match parser::parse_prepared_document(&prepared, document, config.max_depth) {
         Ok(links) => {
             if links.is_empty() {
                 Ok(LiNo::Link {
@@ -1192,7 +1192,7 @@ fn read_links<T: Clone, F: IdReader<T>>(
     }
 
     let prepared = prepare(document, config);
-    match parser::parse_document_with_max_depth(&prepared, config.max_depth) {
+    match parser::parse_prepared_document(&prepared, document, config.max_depth) {
         Ok(links) => {
             if links.is_empty() {
                 Ok(vec![])
@@ -1217,7 +1217,7 @@ pub(crate) fn check_document<'a>(
     if document.trim_matches(parser::is_whitespace_char).is_empty() {
         return Ok(prepared);
     }
-    match parser::parse_document_with_max_depth(&prepared, config.max_depth) {
+    match parser::parse_prepared_document(&prepared, document, config.max_depth) {
         Ok(_) => Ok(prepared),
         Err(failure) => Err(parse_error(document, failure)),
     }

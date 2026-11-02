@@ -194,3 +194,39 @@ fn blanking_a_comment_keeps_the_length_of_the_document() {
     assert_eq!(strip_comments("issue#1047\n"), "issue#1047\n");
     assert_eq!(strip_comments("# why\n"), "     \n");
 }
+
+// Issue #377: the comment reader and the parser must agree on where every
+// delimited reference starts and how far it reaches, or a comment is blanked
+// inside what the parser then reads as a reference.
+
+#[test]
+fn a_hash_inside_a_reference_that_follows_a_group_is_content() {
+    assert_parses_as("(a)\" #b\"\n", "((<a>) < #b>)");
+}
+
+#[test]
+fn a_hash_inside_a_reference_that_follows_another_reference_is_content() {
+    assert_parses_as("\"x\"' #y'\n", "(<x> < #y>)");
+    assert_parses_as("```q```\"\" #c\n\"\"\"\n", "(<q> < #c\n\">)");
+}
+
+#[test]
+fn a_hash_inside_a_reference_that_follows_a_literal_is_content() {
+    assert_parses_as("~1{62}\" #b\"\n", "(<b> < #b>)");
+}
+
+#[test]
+fn a_reference_is_read_in_the_document_as_written_comments_included() {
+    // The body of the first `""` straddles a parenthesis, so it is the empty
+    // reference and the `#` after it opens a comment. Blanking that comment
+    // must not turn the `""` into a reference that holds the blanked text.
+    assert_parses_as("\"\" a #)b\n\"\"\n", "(<> <a>)\n(<>)");
+}
+
+#[test]
+fn the_comment_reader_skips_the_references_the_parser_reads() {
+    assert_eq!(strip_comments("(a)\" #b\"\n"), "(a)\" #b\"\n");
+    assert_eq!(strip_comments("\"x\"' #y'\n"), "\"x\"' #y'\n");
+    assert_eq!(strip_comments("~1{62}\" #b\"\n"), "~1{62}\" #b\"\n");
+    assert_eq!(strip_comments("a\"b #c\"\n"), "a\"b    \n");
+}

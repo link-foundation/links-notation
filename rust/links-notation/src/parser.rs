@@ -1,4 +1,4 @@
-use crate::quotes::{DelimitedReferences, Reading, read_reference};
+use crate::quotes::{DelimitedReferences, QUOTES, Reading, read_reference};
 use nom::{
     IResult, Parser,
     branch::alt,
@@ -122,8 +122,14 @@ pub struct ParserState {
     too_deep: RefCell<Option<usize>>,
     furthest: RefCell<FurthestFailure>,
     unreadable_lines: RefCell<HashMap<LineKey, LineFailure>>,
-    /// The delimited references of the document being parsed.
+    /// The delimited references of the document being parsed, listed from the
+    /// document as written.
     references: OnceCell<DelimitedReferences>,
+    /// The document as written, when the one being parsed has its comments
+    /// blanked. Blanking keeps every byte where it was, and delimited
+    /// references are read here, so blanking a comment never changes what a
+    /// reference holds or how far it reaches (issue #377).
+    source: Option<Box<str>>,
     /// Address of the first byte of the document being parsed, which turns the
     /// part of the document a reference was read from into a byte range.
     document_start: Cell<usize>,
@@ -204,8 +210,33 @@ impl ParserState {
             furthest: RefCell::new(FurthestFailure::default()),
             unreadable_lines: RefCell::new(HashMap::new()),
             references: OnceCell::new(),
+            source: None,
             document_start: Cell::new(0),
         }
+    }
+
+    /// `input`, a part of the document being parsed that runs to its end, in
+    /// the document as written when it opens a delimited reference.
+    ///
+    /// A delimiter is never blanked, so where `input` opens with one the
+    /// document as written has the same delimiter at the same byte.
+    fn written<'s>(&'s self, input: &'s str) -> &'s str {
+        match &self.source {
+            Some(source) if input.as_bytes().first().is_some_and(|b| QUOTES.contains(b)) => source
+                .len()
+                .checked_sub(input.len())
+                .and_then(|start| source.get(start..))
+                .unwrap_or(input),
+            _ => input,
+        }
+    }
+
+    /// The delimited references of the document being parsed, listed from the
+    /// document as written; `input` is that document when it has no comments
+    /// blanked.
+    fn references(&self, input: &str) -> &DelimitedReferences {
+        self.references
+            .get_or_init(|| DelimitedReferences::new(self.source.as_deref().unwrap_or(input)))
     }
 
     pub fn set_base_indentation(&self, indent: usize) {
@@ -408,12 +439,13 @@ pub fn quoted_reference_end(document: &str, start: usize) -> Option<usize> {
 /// A delimited reference with any number of delimiters. A run of an even
 /// number of delimiters that does not open a reference with a substantive body
 /// is the empty reference.
+///
+/// The reference is read in the document as written: blanking a comment keeps
+/// every byte where it was, but may change what an even run encloses, and so
+/// whether it is the empty reference (issue #377).
 fn delimited_reference<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, String> {
-    let references = state
-        .references
-        .get_or_init(|| DelimitedReferences::new(input));
-    match references.read(input) {
-        Some(Reading { value, length }) => Ok((&input[length..], value)),
+    match state.references(input).read(state.written(input)) {
+        Some(Reading { value, length, .. }) => Ok((&input[length..], value)),
         None => Err(nom::Err::Error(nom::error::Error::new(
             input,
             nom::error::ErrorKind::Tag,
@@ -778,12 +810,29 @@ pub fn parse_document_with_max_depth(
     }
 }
 
+/// Parses `prepared`, the document `source` with its comments blanked, the way
+/// [`parse_document_with_max_depth`] does, reading delimited references in
+/// `source`: the document as written.
+pub(crate) fn parse_prepared_document(
+    prepared: &str,
+    source: &str,
+    max_depth: usize,
+) -> Result<Vec<Link>, ParseFailure> {
+    debug_assert_eq!(prepared.len(), source.len());
+    let mut state = ParserState::with_max_depth(max_depth);
+    if prepared != source {
+        state.source = Some(source.into());
+    }
+    match document(prepared, &state) {
+        Ok((_, links)) => Ok(links),
+        Err(error) => Err(state.failure(prepared, &error)),
+    }
+}
+
 fn document<'a>(input: &'a str, state: &ParserState) -> IResult<&'a str, Vec<Link>> {
     // Every reference is read from a part of this document, so the runs of
     // delimiters are listed from all of it.
-    state
-        .references
-        .get_or_init(|| DelimitedReferences::new(input));
+    state.references(input);
     state.document_start.set(input.as_ptr() as usize);
 
     // Skip leading blank lines but preserve the line structure

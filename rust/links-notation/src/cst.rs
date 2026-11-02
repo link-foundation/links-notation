@@ -18,7 +18,7 @@
 
 use crate::comments::COMMENT;
 use crate::quotes::{DelimitedReferences, QUOTES};
-use crate::reference_literal::{decode_reference_literal, prefix_end};
+use crate::reference_literal::{decode_reference_literal, reference_literal_end};
 use crate::{ParseError, ParserConfig, check_document};
 use std::fmt;
 
@@ -308,7 +308,11 @@ fn build_cst(document: &str, prepared: &str, comments: bool) -> Result<CstNode, 
     debug_assert_eq!(document.len(), prepared.len());
     let input = document.as_bytes();
     let blanked = prepared.as_bytes();
-    let references = DelimitedReferences::new(prepared);
+    // Bare references end where they end in the document the parser read.
+    // Delimited references and literals are read, as the parser reads them, in
+    // the document as written, so a comment never changes what a reference
+    // holds (issue #377).
+    let references = DelimitedReferences::new(document);
     // The open containers, innermost last. A group joins the line it opens on
     // when it closes; that line stays open until then, since every line break
     // in between belongs to the group.
@@ -395,14 +399,14 @@ fn read_reference(
     references: &DelimitedReferences,
 ) -> (usize, String, Option<char>) {
     let blanked = prepared.as_bytes();
-    if let Some(end) = literal_end(prepared, start) {
+    if let Some(end) = reference_literal_end(document, start) {
         let text = &document[start..end];
         let value = decode_reference_literal(text).unwrap_or_else(|_| text.to_owned());
         return (end, value, None);
     }
     let first = blanked[start];
     if QUOTES.contains(&first) {
-        if let Some(reading) = references.read(&prepared[start..]) {
+        if let Some(reading) = references.read(&document[start..]) {
             return (start + reading.length, reading.value, Some(first as char));
         }
     }
@@ -411,17 +415,4 @@ fn read_reference(
         end += 1;
     }
     (end, document[start..end].to_owned(), None)
-}
-
-/// The end of the versioned literal `~<digits>{<anything but } space tab line
-/// ending or parenthesis>}` that starts at `start`, if one does.
-fn literal_end(prepared: &str, start: usize) -> Option<usize> {
-    let rest = &prepared[start..];
-    let body = prefix_end(rest)?;
-    let bytes = rest.as_bytes();
-    let mut end = body;
-    while end < bytes.len() && !b"} \t\r\n()".contains(&bytes[end]) {
-        end += 1;
-    }
-    (bytes.get(end) == Some(&b'}')).then_some(start + end + 1)
 }
