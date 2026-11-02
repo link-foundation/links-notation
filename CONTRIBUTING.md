@@ -2,12 +2,12 @@
 
 Develop shared behavior in JavaScript first. Start with a small failing JS test,
 implement the behavior, then add a reviewed input/tree/format fixture in
-`parity/text-fixtures.json` and port it to the other seven libraries. A port of
+`parity/text-fixtures.json` and port it to the other eight libraries. A port of
 behavior already implemented in JS can reference that existing JS test. Do not
 merge a new shared feature with missing bindings: update its manifest evidence
 or record an explicit, explained exception in `parity/README.md`.
 
-All eight libraries are hand-written. JS's Peggy parser and C#'s Pegasus parser
+All nine libraries are hand-written. JS's Peggy parser and C#'s Pegasus parser
 are generated from their own hand-written grammars; none of the language
 libraries is translated from JS.
 [Meta-language translation rules](https://github.com/link-foundation/meta-language/blob/main/docs/translation-rules.md)
@@ -124,15 +124,16 @@ in; otherwise provide their bootstrap tokens. Do not register a reusable callee
 as the PyPI publisher. See [release setup](docs/releases.md).
 
 Add a fragment under `changelog.d/` for each user-visible change. Release PRs
-combine the reviewed fragments into `CHANGELOG.md` and update all eight declared
-versions together. This PR prepares 0.28.0. Per-registry tags remain for
+combine the reviewed fragments into `CHANGELOG.md` and update all nine declared
+versions together. This PR prepares 0.29.0. Per-registry tags remain for
 existing consumers, especially Go's required `go/vVERSION` tag. One CI run
-waits for all eight native stages before calling `release.yml`, coordinates
+waits for all nine native stages before calling `release.yml`, coordinates
 publishing, and performs the final exact-version audit. A distributed
 release cannot be atomic across registries: a partial delivery fails the final
 audit and must be recovered by rerunning after the failing provider is repaired.
 
-Main's ruleset requires JavaScript, Rust, Python, Java, Go, CSharp, PHP, and Cpp. Use
+Main's ruleset ([`.github/main-ruleset.json`](.github/main-ruleset.json))
+requires JavaScript, Rust, Python, Java, Go, CSharp, PHP, Cpp, and Swift. Use
 a pull request for changes to main. Wait for every check, inspect the whole
 diff, ensure no existing feature disappeared, update the PR title/body with
 reproduction and validation, and mark the completed draft ready.

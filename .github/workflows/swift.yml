@@ -1,0 +1,113 @@
+name: swift
+
+on:
+  workflow_call:
+    inputs:
+      verbose:
+        description: "Print extra diagnostics (never secret values)"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+defaults:
+  run:
+    shell: bash
+
+# The Swift package is the repository root (Package.swift), because SwiftPM
+# resolves a dependency from the root of its Git repository; its sources and
+# tests are in swift/.
+jobs:
+  lint:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    concurrency:
+      group: ci-swift-${{ github.ref }}-lint
+      cancel-in-progress: false
+    container:
+      image: swift@sha256:bca121f6eb59fd80340d1296887b2698ed8f3eb9eca7d80c181f8af769dc7ee0 # 6.4-noble
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      # swift-format ships with the toolchain; .swift-format holds the style.
+      - name: Check formatting
+        run: swift format lint --strict --recursive Package.swift swift examples/swift
+
+  test:
+    name: test (${{ matrix.name }})
+    needs: [lint]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # The official Swift image, as the package's Linux users get it.
+          - name: linux
+            os: ubuntu-26.04
+            image: swift@sha256:bca121f6eb59fd80340d1296887b2698ed8f3eb9eca7d80c181f8af769dc7ee0 # 6.4-noble
+          # Package.swift declares swift-tools-version 5.9: the oldest
+          # toolchain the package promises to build with.
+          - name: linux-swift-5.9
+            os: ubuntu-26.04
+            image: swift@sha256:006635153a77dfc9d096dfc954b362d9017f1560d74c357100b50429bf5174c7 # 5.9-jammy
+          # No container: macOS runs the runner's own Xcode toolchain.
+          - name: macos
+            os: macos-26
+            image: ""
+    concurrency:
+      group: ci-swift-${{ github.ref }}-test-${{ matrix.name }}
+      cancel-in-progress: false
+    container: ${{ matrix.image }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Show the toolchain
+        run: swift --version
+      # Warnings fail the build, as in the other languages.
+      - name: Build
+        run: swift build --build-tests -Xswiftc -warnings-as-errors
+      # The timed tests bound a debug build on a shared runner, as cpp.yml
+      # bounds its sanitizer build.
+      - name: Test
+        env:
+          LINKS_NOTATION_TIME_SCALE: "4"
+        run: swift test --skip-build --parallel
+      # Downstream packages depend on the repository root; the in-tree tests
+      # do not exercise that.
+      - name: Consume the package
+        run: swift run --package-path examples/swift links-notation-swift-example
+
+  differential:
+    needs: [lint]
+    runs-on: ubuntu-26.04
+    timeout-minutes: 30
+    concurrency:
+      group: ci-swift-${{ github.ref }}-differential
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+      # The runner image's Swift toolchain parses random documents that the
+      # JavaScript reference parses first, and must agree with it on every
+      # one: the same links, or the same error at the same position.
+      - name: Generate vectors with the JavaScript parser
+        run: node experiments/issue-369/differential-vectors.mjs 20000 "$GITHUB_RUN_ID" 8 > "$RUNNER_TEMP/vectors.json"
+      - name: Compare the Swift parser with the JavaScript parser
+        env:
+          LINKS_NOTATION_MAX_DEPTH: "8"
+        run: |
+          swift --version
+          LINKS_NOTATION_VECTORS="$RUNNER_TEMP/vectors.json" swift test --filter DifferentialTests

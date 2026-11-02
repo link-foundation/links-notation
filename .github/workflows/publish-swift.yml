@@ -1,0 +1,97 @@
+name: publish-swift
+
+on:
+  workflow_call:
+    inputs:
+      verbose:
+        description: "Print extra diagnostics (never secret values)"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  publishRelease:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 20
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    concurrency:
+      group: ci-swift-publish-swift
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Read the package version
+        id: version-check
+        run: |
+          set -euo pipefail
+          PACKAGE_VERSION=$(tr -d '[:space:]' < swift/VERSION)
+          if ! [[ "$PACKAGE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::swift/VERSION must be a semantic version, not '$PACKAGE_VERSION'"
+            exit 1
+          fi
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Package: LinksNotation $PACKAGE_VERSION"
+      # Swift has no registry to upload to: SwiftPM resolves a package from a
+      # semantic-version tag of its Git repository, and Package.swift is at the
+      # repository root for that reason. Creating the tag *is* the publish, as
+      # for Go, so this job both releases and verifies. SwiftPM ignores tags
+      # that are not plain versions (cpp_0.28.0, go/v0.28.0), so the Swift tag
+      # is the bare version, the same tag Composer reads: publish-php creates
+      # it too, at the same gated commit, since every binding shares one
+      # version. ensure-php-version-tag.mjs creates the tag or checks that it
+      # already points at this commit, so a tag on another commit fails instead
+      # of being released; the second run covers losing a race with publish-php.
+      - name: Create the Swift tag and GitHub release
+        id: publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_SHA: ${{ github.sha }}
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+        run: |
+          set -euo pipefail
+          TAG="$PACKAGE_VERSION"
+          node scripts/ci/ensure-php-version-tag.mjs || node scripts/ci/ensure-php-version-tag.mjs
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists"
+            echo "published=skipped" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          gh release create "$TAG" \
+            --verify-tag \
+            --title "[Swift] $PACKAGE_VERSION" \
+            --notes "Swift package release. Add \`.package(url: \"https://github.com/${GITHUB_REPOSITORY}.git\", from: \"$PACKAGE_VERSION\")\` to Package.swift and depend on \`.product(name: \"LinksNotation\", package: \"links-notation\")\`."
+          echo "published=true" >> "$GITHUB_OUTPUT"
+      - name: Verify SwiftPM resolves and builds the release
+        if: steps.publish.outputs.published == 'true'
+        env:
+          PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+        run: |
+          set -euo pipefail
+          # shellcheck source=scripts/ci/registry-probe.sh
+          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
+          wait_for_registry_match "Package.swift at tag $PACKAGE_VERSION" \
+            "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${PACKAGE_VERSION}/Package.swift" \
+            'name: "LinksNotation"' 20 15
+          # A downstream package, resolved from the tag exactly as a user's is.
+          consumer="$RUNNER_TEMP/consumer"
+          mkdir -p "$consumer/Sources/LinksNotationSwiftExample"
+          sed -e "s|\.package(name: \"links-notation\", path: \"../..\")|.package(url: \"https://github.com/${GITHUB_REPOSITORY}.git\", exact: \"${PACKAGE_VERSION}\")|" \
+            examples/swift/Package.swift > "$consumer/Package.swift"
+          grep -qF "exact: \"${PACKAGE_VERSION}\"" "$consumer/Package.swift"
+          cp examples/swift/Sources/LinksNotationSwiftExample/main.swift "$consumer/Sources/LinksNotationSwiftExample/"
+          swift --version
+          swift run --package-path "$consumer" links-notation-swift-example

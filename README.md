@@ -9,6 +9,7 @@
 | [![Actions Status](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Maven Central Version](https://img.shields.io/maven-central/v/io.github.link-foundation/links-notation?label=maven&style=flat)](https://central.sonatype.com/artifact/io.github.link-foundation/links-notation) | **[Java](java/README.md)** |
 | [![Actions Status](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Packagist Version and Downloads count](https://img.shields.io/packagist/v/link-foundation/links-notation?label=packagist&style=flat)](https://packagist.org/packages/link-foundation/links-notation) | **[PHP](php/README.md)** |
 | [![Actions Status](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![GitHub release](https://img.shields.io/github/v/release/link-foundation/links-notation?filter=cpp_*&label=release&style=flat)](https://github.com/link-foundation/links-notation/releases?q=cpp_&expanded=true) | **[C++](cpp/README.md)** |
+| [![Actions Status](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Swift Package Manager](https://img.shields.io/badge/SwiftPM-compatible-F05138?logo=swift&style=flat)](swift/README.md#installation) | **[Swift](swift/README.md)** |
 
 [![Gitpod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/link-foundation/links-notation)
 [![Open in GitHub Codespaces](https://img.shields.io/badge/GitHub%20Codespaces-Open-181717?logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=link-foundation/links-notation)
@@ -18,7 +19,7 @@
 
 Link Foundation's Links Notation Class Library.
 
-Development starts in JavaScript and is checked against all eight hand-written
+Development starts in JavaScript and is checked against all nine hand-written
 bindings. See [contributing](CONTRIBUTING.md), the [parity contract](parity/README.md),
 and [release setup](docs/releases.md). All language CI now uses the same entry workflow.
 
@@ -92,6 +93,13 @@ $links = $parser->parse("papa (lovesMama: loves mama)");
 ```cpp
 #include "links_notation.hpp"
 std::vector<links_notation::Link> links = links_notation::parse("papa (lovesMama: loves mama)");
+```
+
+### Swift
+
+```swift
+import LinksNotation
+let links = try Parser().parse("papa (lovesMama: loves mama)")
 ```
 
 ## Examples
@@ -228,6 +236,7 @@ streaming and whole-document parsing have the same syntax and output.
 | Java | `Consumer<Link>` | `Stream<Link>` |
 | PHP | callable | `Generator` |
 | C++ | `on_link` / `on_error` callbacks | `ChunkedLinks` / `parse_chunks` |
+| Swift | `onLink` / `onError` handlers | `Sequence` / `AsyncSequence` |
 
 All variants expose write/feed and finish operations, absolute position
 tracking, reset/drain controls, and an unresolved-record size limit. Collection
@@ -255,6 +264,7 @@ included, belongs to exactly one token, so the tree's text is the document.
 | Java | `getRawId()`, `getQuote()` | `new Parser(comments, false)` | `parseCst` |
 | PHP | `getRawId()`, `getQuote()` | `new Parser(syntax: false)` | `parseCst` |
 | C++ | `raw_id`, `quote()` | `ParserOptions::syntax = false` | `parse_cst` |
+| Swift | `rawId`, `quote` | `ParserOptions(syntax: false)` | `parseCst` |
 
 Every implementation checks the shared golden data in
 [`parity/syntax-fixtures.json`](parity/syntax-fixtures.json) and restores every
@@ -278,18 +288,19 @@ language-specific documentation:
 - **[Java README](java/README.md)** - Java/Maven package guide
 - **[PHP README](php/README.md)** - PHP/Composer package guide
 - **[C++ README](cpp/README.md)** - C++17/CMake library guide
+- **[Swift README](swift/README.md)** - Swift package guide
 
 Additional resources:
 
 - [Grammar](docs/grammar/GRAMMAR.md) - The notation in EBNF, with the indentation
   and nested context rules spelled out ([syntax diagrams](docs/grammar/syntax-diagrams.md))
-- [Test Case Comparison](TEST_CASE_COMPARISON.md) - Test-by-test coverage comparison across all eight language implementations
+- [Test Case Comparison](TEST_CASE_COMPARISON.md) - Test-by-test coverage comparison across all nine language implementations
 - [Links Theory 0.0.2](https://habr.com/en/articles/895896/) - Theoretical
   foundation that Links Notation fully supports
 
 ## Test Coverage & Implementation Parity
 
-All eight language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP, C++) maintain
+All nine language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP, C++, Swift) maintain
 **equivalent core functionality**, and the overlap is verified test by test rather than asserted:
 
 <!-- test-counts:start -->
@@ -303,6 +314,7 @@ All eight language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP,
 | Java | 206 | 19 |
 | PHP | 256 | 26 |
 | C++ | 370 | 32 |
+| Swift | 339 | 35 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files
@@ -318,8 +330,9 @@ Some language-specific features are intentional:
 
 - **`LinksGroup`** - a parsed group of links kept as one object - exists in
   [JavaScript](js/src/LinksGroup.js), [C#](csharp/Link.Foundation.Links.Notation/LinksGroup.cs),
-  [Java](java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java) and
-  [C++](cpp/include/links_notation/links_group.hpp). Python, Rust, Go and PHP expose the same
+  [Java](java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java),
+  [C++](cpp/include/links_notation/links_group.hpp) and
+  [Swift](swift/Sources/LinksNotation/LinksGroup.swift). Python, Rust, Go and PHP expose the same
   structure as nested `Link` values instead.
 - **Tuple conversion** - building a link from a language tuple - is offered where the language has
   the syntax for it: [C#](csharp/Link.Foundation.Links.Notation/Link.cs) via implicit operators and
@@ -331,7 +344,7 @@ These differences are by design and do not affect core parsing/formatting functi
 
 The [version 1 specification](docs/protocol/binary-links-notation.md) defines
 shared packets and a LiNo document mapping. JavaScript, Python, Rust, C#, Go,
-Java, PHP and C++ provide codecs beside their text parsers; all check the same [golden vectors](docs/protocol/binary-links-notation-vectors.txt).
+Java, PHP, C++ and Swift provide codecs beside their text parsers; all check the same [golden vectors](docs/protocol/binary-links-notation-vectors.txt).
 See the [cross-language example](examples/binary/README.md) for encoding options
 and byte-for-byte interoperability.
 

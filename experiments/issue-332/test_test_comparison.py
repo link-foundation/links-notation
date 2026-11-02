@@ -22,6 +22,7 @@ class TestComparisonExtraction(unittest.TestCase):
                 "java/src/test/java/io/github/linkfoundation/linksnotation",
                 "php/tests",
                 "cpp/tests",
+                "swift/Tests/LinksNotationTests",
             ):
                 (root / path).mkdir(parents=True)
             shutil.copy2(
