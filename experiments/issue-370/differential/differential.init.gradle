@@ -1,0 +1,16 @@
+// Adds the Kotlin side of differential.mjs to the build for one run: a JVM
+// compilation of kotlin/Differential.kt against the library, and a
+// `differential` task that runs it (`--args='<inputs> <maxDepth>'`).
+// differential.mjs passes this file with -I; nothing here is published.
+allprojects {
+    afterEvaluate {
+        def jvm = kotlin.jvm()
+        def compilation = jvm.compilations.create('differential')
+        compilation.associateWith(jvm.compilations.getByName('main'))
+        compilation.defaultSourceSet.kotlin.srcDir(new File(rootDir, '../experiments/issue-370/differential/kotlin'))
+        tasks.register('differential', JavaExec) {
+            classpath = compilation.output.allOutputs + compilation.runtimeDependencyFiles
+            mainClass.set('DifferentialKt')
+        }
+    }
+}
