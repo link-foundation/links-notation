@@ -25,7 +25,7 @@ last sees first"""
     private fun formatted(links: List<Link>) = formatLinks(links)
 
     @Test
-    fun matchesTheCanonicalParserOneSymbolAtATime() {
+    fun matchesCanonicalParserOneSymbolAtATime() {
         val stream = StreamParser()
         for (character in document) stream.write(character.toString())
         assertEquals(formatted(Parser().parse(document)), formatted(stream.end()))

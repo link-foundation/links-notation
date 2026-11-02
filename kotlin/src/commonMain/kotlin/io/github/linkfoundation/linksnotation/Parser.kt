@@ -143,6 +143,7 @@ class Parser(val options: ParserOptions = ParserOptions()) {
         val lineText = lineAt(text, position.offset)
         val summary = "line ${position.line}, column ${position.column}: ${error.message}"
         val snippet = quoteLine(position.line, lineText, position.column)
+        val found = if (position.offset < text.length) text[position.offset].toString() else null
         val depthLimit = error.depthLimit
         if (depthLimit != null) {
             return ParseException.DepthExceeded(
@@ -153,6 +154,7 @@ class Parser(val options: ParserOptions = ParserOptions()) {
                 position.offset,
                 lineText,
                 snippet,
+                found,
             )
         }
         return ParseException.Syntax(
@@ -162,6 +164,7 @@ class Parser(val options: ParserOptions = ParserOptions()) {
             position.offset,
             lineText,
             snippet,
+            found,
         )
     }
 }

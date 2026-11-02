@@ -6,28 +6,11 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * The shared corpora: `parity/text-fixtures.json` (port of
- * `js/tests/SharedTextParity.test.js`) and `parity/syntax-fixtures.json` (port
- * of `js/tests/SharedSyntaxParity.test.js`).
+ * Port of `js/tests/SharedSyntaxParity.test.js`: the shared syntax corpus,
+ * `parity/syntax-fixtures.json`, which `generateParityCases` turns into
+ * [SYNTAX_CASES].
  */
-class ParityTest {
-    @Test
-    fun everyCorpusCaseReadsAndFormatsLikeJavaScript() {
-        assertEquals(14, PARITY_CASES.size)
-        for (case in PARITY_CASES) {
-            assertCase(case)
-        }
-    }
-
-    @Test
-    fun everyCorpusCaseStreamedOneCharacterAtATimeReadsTheSame() {
-        for (case in PARITY_CASES) {
-            val stream = StreamParser()
-            for (character in case.input) stream.write(character.toString())
-            assertEquals(case.expected, stream.end(), case.id)
-        }
-    }
-
+class SharedSyntaxParityTest {
     @Test
     fun sharedSyntaxParityRawReferencesAndConcreteSyntaxTrees() {
         assertEquals(15, SYNTAX_CASES.size)

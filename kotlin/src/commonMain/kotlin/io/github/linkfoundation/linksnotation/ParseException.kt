@@ -18,6 +18,8 @@ sealed class ParseException(message: String, cause: Throwable? = null) : Excepti
      * @property lineText The line the position is on, without its line ending.
      * @property snippet [lineText] with a caret under the position, as the
      *   message quotes it.
+     * @property found The character at the position, or null at the end of the
+     *   document, as `ParseError.found` of the JavaScript reference.
      */
     open class Syntax(
         val line: Int,
@@ -26,6 +28,7 @@ sealed class ParseException(message: String, cause: Throwable? = null) : Excepti
         val offset: Int = 0,
         val lineText: String = "",
         val snippet: String = "",
+        val found: String? = null,
     ) : ParseException(message)
 
     /**
@@ -43,7 +46,8 @@ sealed class ParseException(message: String, cause: Throwable? = null) : Excepti
         offset: Int = 0,
         lineText: String = "",
         snippet: String = "",
-    ) : Syntax(line, column, message, offset, lineText, snippet)
+        found: String? = null,
+    ) : Syntax(line, column, message, offset, lineText, snippet, found)
 
     /** The document is longer than [limit] UTF-16 code units; it was not read. */
     class InputTooLarge(val limit: Int) :
