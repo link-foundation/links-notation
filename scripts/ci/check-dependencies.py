@@ -13,22 +13,23 @@ The scheduled and main-branch runs still check the whole repository.
 """
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass
 import hashlib
 import io
 import json
 import os
-from pathlib import Path
 import re
 import subprocess
 import sys
 import tarfile
 import tempfile
 import tomllib
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 ACTIVE = (
@@ -40,6 +41,7 @@ ACTIVE = (
     "php",
     "go",
     "cpp",
+    "kotlin",
     "benchmarks",
     "docs/website",
     "docs/comparison",
@@ -53,6 +55,15 @@ TOOL_INPUTS = {"trufflesecurity/trufflehog": "version"}
 # The Maven Wrapper's two pins, under the coordinates Maven Central lists.
 MAVEN_DISTRIBUTION = "org.apache.maven:apache-maven"
 MAVEN_WRAPPER = "org.apache.maven.wrapper:maven-wrapper"
+# The Gradle ./gradlew runs, and the repositories kotlin/settings.gradle.kts
+# resolves plugins from. A plugin's marker artifact is published to one of
+# them (Kotlin and vanniktech to Central, AGP to Google, ktlint to the Portal).
+GRADLE_DISTRIBUTION = "gradle"
+GRADLE_PLUGIN_REPOSITORIES = (
+    "https://repo.maven.apache.org/maven2/",
+    "https://dl.google.com/dl/android/maven2/",
+    "https://plugins.gradle.org/m2/",
+)
 STABLE = re.compile(r"^v?(\d+(?:\.\d+)*)(?:\.RELEASE)?$")
 
 
@@ -109,6 +120,25 @@ def latest(ecosystem, name):
             get("https://repo.maven.apache.org/maven2/" + path + "/maven-metadata.xml")
         )
         return newest(v.text for v in data.findall("./versioning/versions/version"))
+    if ecosystem == "gradle-plugin":
+        versions, errors = [], []
+        path = name.replace(".", "/") + "/" + name + ".gradle.plugin"
+        for repository in GRADLE_PLUGIN_REPOSITORIES:
+            try:
+                data = ET.fromstring(get(repository + path + "/maven-metadata.xml"))
+            except urllib.error.HTTPError as error:
+                if error.code != 404:
+                    raise
+                errors.append(f"{repository}: 404")
+                continue
+            versions += [v.text for v in data.findall("./versioning/versions/version")]
+        if not versions:
+            raise ValueError("no plugin marker in " + ", ".join(errors))
+        return newest(versions)
+    if ecosystem == "gradle":
+        return json.loads(get("https://services.gradle.org/versions/current"))[
+            "version"
+        ]
     if ecosystem in {"github", "github-input"}:
         # gh handles authentication and pagination without exposing credentials.
         result = subprocess.run(
@@ -170,6 +200,11 @@ def manifests(root=ROOT):
                     "dist",
                     "generated",
                     "_deps",
+                    # Gradle's output and caches (Kotlin/JS writes package.json
+                    # files under build/js).
+                    "build",
+                    ".gradle",
+                    ".kotlin",
                 }
                 for p in path.relative_to(directory).parts
             ):
@@ -300,6 +335,33 @@ def manifests(root=ROOT):
                         if not match:
                             raise ValueError(f"unsupported distributionUrl: {path}")
                         add(path, "maven", MAVEN_DISTRIBUTION, match[1])
+            elif path.name in {"build.gradle.kts", "settings.gradle.kts"}:
+                text = path.read_text()
+                # plugins { kotlin("multiplatform") version "2.4.21" } is the
+                # plugin org.jetbrains.kotlin.multiplatform.
+                for match in re.finditer(
+                    r'\b(kotlin|id)\("([\w.-]+)"\)\s+version\s+"([^"]+)"', text
+                ):
+                    plugin = match[2]
+                    if match[1] == "kotlin":
+                        plugin = "org.jetbrains.kotlin." + plugin
+                    add(path, "gradle-plugin", plugin, match[3])
+                # ktlint { version.set("1.8.0") } is the ktlint the plugin runs.
+                match = re.search(
+                    r'\bktlint\s*\{[^}]*?\bversion\.set\("([^"]+)"\)', text
+                )
+                if match:
+                    add(path, "maven", "com.pinterest.ktlint:ktlint-cli", match[1])
+            elif path.name == "gradle-wrapper.properties":
+                # ./gradlew downloads this Gradle, so it is the build's toolchain.
+                match = re.search(
+                    r"^distributionUrl=\S*/gradle-([^/]+?)-(?:bin|all)\.zip$",
+                    path.read_text(),
+                    re.M,
+                )
+                if not match:
+                    raise ValueError(f"unsupported distributionUrl: {path}")
+                add(path, "gradle", GRADLE_DISTRIBUTION, match[1])
             elif path.name == "composer.json":
                 data = json.loads(path.read_text())
                 local = {"link-foundation/links-notation"}
@@ -568,6 +630,44 @@ def update(dependency, release):
             lambda m: m[1] + digest,
             source,
             flags=re.M,
+        )
+    elif path.name == "gradle-wrapper.properties":
+        url = re.search(r"^distributionUrl=(\S+)$", source, re.M)[1]
+        updated = url.replace("-" + original + "-", "-" + release + "-")
+        # The wrapper checks the archive against this hash before running it;
+        # Gradle publishes it beside the archive.
+        digest = get(updated.replace("\\:", ":") + ".sha256", accept="*/*")
+        source = source.replace(url, updated)
+        source = re.sub(
+            r"^(distributionSha256Sum=)[0-9a-fA-F]{64}$",
+            lambda m: m[1] + digest.decode().strip(),
+            source,
+            flags=re.M,
+        )
+        # gradlew and gradle-wrapper.jar belong to the Gradle release.
+        print(
+            f"  regenerate {path.parents[2].relative_to(ROOT)}: ./gradlew wrapper "
+            f"--gradle-version {release} --distribution-type bin"
+        )
+    elif dependency.ecosystem == "gradle-plugin":
+        plugin = dependency.name
+        call = (
+            r'kotlin\("'
+            + re.escape(plugin.removeprefix("org.jetbrains.kotlin."))
+            + r'"\)'
+            if plugin.startswith("org.jetbrains.kotlin.")
+            else r'id\("' + name + r'"\)'
+        )
+        source = re.sub(
+            r"(" + call + r'\s+version\s+")' + re.escape(original) + '"',
+            lambda m: m[1] + replacement + '"',
+            source,
+        )
+    elif path.name.endswith(".gradle.kts"):
+        source = re.sub(
+            r'(\bktlint\s*\{[^}]*?\bversion\.set\(")' + re.escape(original) + '"',
+            lambda m: m[1] + replacement + '"',
+            source,
         )
     elif dependency.ecosystem == "maven":
         group, artifact = dependency.name.split(":")

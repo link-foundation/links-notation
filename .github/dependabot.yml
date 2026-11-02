@@ -149,6 +149,23 @@ updates:
     commit-message:
       prefix: "chore(deps)"
 
+  # kotlin/ is one Gradle project: build.gradle.kts holds the plugin and
+  # library versions (Kotlin, AGP, maven-publish, ktlint), settings.gradle.kts
+  # the toolchain resolver, and gradle/wrapper/gradle-wrapper.properties the
+  # Gradle that ./gradlew runs. There is no "kotlin" label; "dependencies"
+  # alone avoids a label that would have to be created first (issue #350).
+  - package-ecosystem: "gradle"
+    directory: "/kotlin"
+    schedule:
+      interval: "daily"
+    groups:
+      gradle-minor-and-patch:
+        update-types: ["minor", "patch"]
+    open-pull-requests-limit: 10
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "chore(deps)"
+
   # The root composer.json is the Packagist distribution of php/
   # (scripts/ci/php-distribution.mjs keeps the two in step).
   - package-ecosystem: "composer"
