@@ -1,7 +1,8 @@
 # Binary links notation
 
 From the repository root, install Rust, .NET 10, Node 22 or newer, Python,
-Go, Java 21 with Maven, PHP 8.4 with mbstring and Composer, and CMake 3.16 or
+Go, Java 21 with Maven (Kotlin builds with its Gradle wrapper on the same
+JDK), PHP 8.4 with mbstring and Composer, and CMake 3.16 or
 newer with a C++17 compiler, then run:
 
 ```sh
@@ -9,7 +10,7 @@ composer install --working-dir=php --no-dev
 bash examples/binary/run-interop.sh
 ```
 
-All eight programs encode 116 documents from `corpus.txt` with all twelve combinations of external
+All nine programs encode 116 documents from `corpus.txt` with all twelve combinations of external
 references, arity (`2`, `2..3`, `1..`) and packed widths. Each decodes its bytes
 and checks the original document, then reparses its canonical text. The script compares all 1,392 hexadecimal packets
 and their decoded text across languages, covering empty documents, names,
@@ -18,7 +19,7 @@ empty identifiers and groups. The additional 91 documents exercise the shared
 [exact-reference corpus](../../docs/protocol/reference-literals.txt), including
 all three quote kinds, controls, multiline strings and reserved literal prefixes.
 
-The default run requires all eight toolchains. `--rust-csharp-only` runs the
+The default run requires all nine toolchains. `--rust-csharp-only` runs the
 original two-language check. `MAVEN_COMMAND` may name a Maven other than the `java/mvnw` wrapper
 executable. Each program can also be run separately to inspect its output:
 
@@ -32,6 +33,7 @@ php examples/binary/php.php
 (cd go && go run ./examples/binary)
 java/mvnw -q -f java/pom.xml compile
 java -cp java/target/classes examples/binary/java/BinaryExample.java
+kotlin/gradlew -q -p kotlin binaryExample
 cmake -S cpp -B cpp/build && cmake --build cpp/build --target binary_lino
 cpp/build/examples/binary_lino examples/binary/corpus.txt
 ```

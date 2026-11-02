@@ -191,6 +191,13 @@ kotlin {
         compilerOptions {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
         }
+        // examples/binary/kotlin, the Kotlin program of the cross-language
+        // binary interoperability check (examples/binary/run-interop.sh). It
+        // is compiled against the library but not published with it.
+        compilations.create("binaryExample") {
+            associateWith(this@jvm.compilations.getByName("main"))
+            defaultSourceSet.kotlin.srcDir("../examples/binary/kotlin")
+        }
     }
     // Mocha's default of 2 s per test is below the budget the JavaScript
     // reference gives its slowest test ("reference literals at every chunk
@@ -228,6 +235,15 @@ kotlin {
             }
         }
     }
+}
+
+tasks.register<JavaExec>("binaryExample") {
+    description = "Prints the packets and texts of examples/binary/corpus.txt for run-interop.sh."
+    group = "application"
+    val compilation = kotlin.jvm().compilations.getByName("binaryExample")
+    classpath = compilation.output.allOutputs + compilation.runtimeDependencyFiles
+    mainClass.set("BinaryExampleKt")
+    workingDir = layout.projectDirectory.dir("..").asFile
 }
 
 // Maven Central: io.github.link-foundation:links-notation-kotlin, with one
