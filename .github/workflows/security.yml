@@ -104,7 +104,7 @@ jobs:
           path: ./
           # The action ref pins the wrapper; this pins the scanner itself,
           # which otherwise resolves to the `latest` image on every run.
-          version: 3.99.2
+          version: 3.99.7
           # --results=verified only reports credentials that the issuing
           # service confirmed are live, which is what makes this safe to fail
           # the build on. Do not add --no-update here: the action already

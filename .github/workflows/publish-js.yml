@@ -60,7 +60,7 @@ jobs:
       # Node 22 bundles npm 10.x; trusted publishing (OIDC) needs >= 11.5.1.
       # Pin the exact CLI version so publish behaviour changes are reviewed.
       - name: Upgrade npm for trusted publishing
-        run: npm install -g npm@12.2.0
+        run: npm install -g npm@12.2.1
       - name: Install Dependencies
         run: bun install --frozen-lockfile
       - name: Build

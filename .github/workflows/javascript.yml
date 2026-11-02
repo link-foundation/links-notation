@@ -82,8 +82,15 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Build
         run: bun run build
+      # A peggy update changes the generated code without touching the
+      # grammar, so a Dependabot bump of peggy fails here until the parser is
+      # regenerated on its branch.
       - name: Verify generated parser matches its grammar
-        run: git diff --exit-code -- src/parser-generated.js
+        run: |
+          if ! git diff --exit-code -- src/parser-generated.js; then
+            echo "::error file=js/src/parser-generated.js::The committed parser differs from src/grammar.pegjs built with the locked peggy ($(bunx peggy --version)). Run 'bun install && bun run build' in js/ and commit src/parser-generated.js and dist/index.js."
+            exit 1
+          fi
       - name: Test
         run: bun test
       - name: Check binary API TypeScript declarations
