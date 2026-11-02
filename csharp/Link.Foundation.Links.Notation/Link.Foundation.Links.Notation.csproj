@@ -4,7 +4,7 @@
     <Description>Link.Foundation's Links Notation parser and formatter for .NET</Description>
     <Copyright>Konstantin Diachenko</Copyright>
     <AssemblyTitle>Link.Foundation.Links.Notation</AssemblyTitle>
-    <VersionPrefix>0.27.1</VersionPrefix>
+    <VersionPrefix>0.28.0</VersionPrefix>
     <Authors>Konstantin Diachenko</Authors>
     <TargetFramework>net10.0</TargetFramework>
     <PackageId>Link.Foundation.Links.Notation</PackageId>
@@ -22,7 +22,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <LangVersion>latest</LangVersion>
-    <PackageReleaseNotes>No C# changes: the JavaScript package now bundles for browsers without an events polyfill.</PackageReleaseNotes>
+    <PackageReleaseNotes>Parsed links keep how their IDs were written (RawId, Quote), an AST mode leaves that out, and ParseCst returns a lossless concrete syntax tree.</PackageReleaseNotes>
     <Nullable>enable</Nullable>
     <RootNamespace>Link.Foundation.Links.Notation</RootNamespace>
     <!-- CS1584/CS1658: Pegasus 4.1.0 emits an invalid <see cref="IList{Link{string}}"/>

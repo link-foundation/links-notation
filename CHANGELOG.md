@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Keep how references were written (raw ID text and quote) on parsed links, add
+  an AST mode that leaves it out, and add a lossless concrete syntax tree, in
+  all eight bindings. Prepare 0.28.0; see
+  [the release fragment](changelog.d/364.md) and
+  [issue 364](https://github.com/link-foundation/links-notation/issues/364).
+
 ### Fixed
 
 - Bundle the JavaScript package for browsers without an `events` polyfill.
@@ -47,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   stored a `maxDepth` that nothing read. Every parser now enforces it, and a
   document nested deeper is refused at the group or the line that is one level
   too deep: `Nesting too deep at line 1, column 65: nesting depth exceeds the
-  maximum of 64`. Rust adds `ParserConfig::max_depth`,
+maximum of 64`. Rust adds `ParserConfig::max_depth`,
   `ParserConfig::with_max_depth` and `ParseError::NestingTooDeep`, C# adds
   a `maxDepth` parser option, and the Python and PHP parse errors now carry
   the offset, line, column, offending line and `max_depth` of the error
@@ -227,6 +235,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   sixteen READMEs ([#301](https://github.com/link-foundation/links-notation/issues/301))
 
 ### Changed
+
 - The broken-document sample in the READMEs of Rust, JavaScript and C# is
   `ci_gate x\nstage: rust: nextest\n` instead of a document whose first two
   lines began with a `#`; those lines are comments now, so the sample no longer
@@ -296,6 +305,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   that catch the base type keep working ([#302](https://github.com/link-foundation/links-notation/issues/302))
 
 ### Fixed
+
 - JavaScript and Rust now agree on lone CR line breaks, Unicode references and
   even quote bodies, trailing indentation, and singlet links. A line of one
   reference is an anonymous link holding that reference in both parsers
@@ -470,6 +480,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.11.2] - 2024-XX-XX
 
 ### Added
+
 - Multi-language support (JavaScript, Python, Rust, C#)
 - Comprehensive test suites for all implementations
 - CI/CD workflows for automated testing and publishing
@@ -478,17 +489,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for mixed indentation modes
 
 ### Fixed
+
 - Various parser improvements and bug fixes
 
 ## [0.11.0] - 2024-XX-XX
 
 ### Added
+
 - Initial multi-language release
 - Core parser functionality
 - Basic link notation support
 
 <!-- This repository never tagged a unified `vX.Y.Z`; every release carries a
      per-language tag, so these links use the tags that actually exist. -->
+
 [Unreleased]: https://github.com/link-foundation/links-notation/compare/0.11.2_rust...main
 [0.11.2]: https://github.com/link-foundation/links-notation/releases/tag/0.11.2_rust
 [0.11.0]: https://github.com/link-foundation/links-notation/releases/tag/0.11.0_rust
