@@ -18,16 +18,16 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 270 | 27 |
-| JavaScript | 333 | 32 |
-| Rust | 421 | 32 |
-| C# | 316 | 30 |
-| Go | 158 | 20 |
-| Java | 206 | 19 |
-| PHP | 256 | 26 |
-| C++ | 370 | 32 |
-| Swift | 339 | 35 |
-| Kotlin | 348 | 33 |
+| Python | 276 | 27 |
+| JavaScript | 339 | 32 |
+| Rust | 427 | 32 |
+| C# | 322 | 30 |
+| Go | 164 | 20 |
+| Java | 212 | 19 |
+| PHP | 262 | 26 |
+| C++ | 376 | 32 |
+| Swift | 345 | 35 |
+| Kotlin | 354 | 33 |
 
 ---
 
@@ -240,18 +240,25 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | a document of comments alone holds no links | [✅](python/tests/test_comments.py#L67) | [✅](js/tests/Comments.test.js#L82) | [✅](rust/links-notation/tests/comments_tests.rs#L92) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L112) | [✅](go/comments_test.go#L92) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L110) | [✅](php/tests/CommentsTest.php#L125) | [✅](cpp/tests/comments_tests.cpp#L79) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L70) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L48) |
 | a hash inside a delimited reference is content | [✅](python/tests/test_comments.py#L80) | [✅](js/tests/Comments.test.js#L94) | [✅](rust/links-notation/tests/comments_tests.rs#L107) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L130) | [✅](go/comments_test.go#L104) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L125) | [✅](php/tests/CommentsTest.php#L140) | [✅](cpp/tests/comments_tests.cpp#L85) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L82) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L57) |
 | a hash inside a multiline delimited reference is content | [✅](python/tests/test_comments.py#L86) | [✅](js/tests/Comments.test.js#L102) | [✅](rust/links-notation/tests/comments_tests.rs#L117) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L142) | [✅](go/comments_test.go#L112) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L135) | [✅](php/tests/CommentsTest.php#L150) | [✅](cpp/tests/comments_tests.cpp#L91) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L90) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L63) |
+| a hash inside a reference that follows a group is content | [✅](python/tests/test_comments.py#L133) | [✅](js/tests/Comments.test.js#L166) | [✅](rust/links-notation/tests/comments_tests.rs#L203) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L202) | [✅](go/comments_test.go#L173) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L158) | [✅](php/tests/CommentsTest.php#L176) | [✅](cpp/tests/comments_tests.cpp#L163) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L164) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L114) |
+| a hash inside a reference that follows a literal is content | [✅](python/tests/test_comments.py#L140) | [✅](js/tests/Comments.test.js#L175) | [✅](rust/links-notation/tests/comments_tests.rs#L214) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L215) | [✅](go/comments_test.go#L182) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L169) | [✅](php/tests/CommentsTest.php#L187) | [✅](cpp/tests/comments_tests.cpp#L172) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L173) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L123) |
+| a hash inside a reference that follows another reference is content | [✅](python/tests/test_comments.py#L136) | [✅](js/tests/Comments.test.js#L170) | [✅](rust/links-notation/tests/comments_tests.rs#L208) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L208) | [✅](go/comments_test.go#L177) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L163) | [✅](php/tests/CommentsTest.php#L181) | [✅](cpp/tests/comments_tests.cpp#L167) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L168) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L117) |
 | a hash inside a token is an ordinary character | [✅](python/tests/test_comments.py#L74) | [✅](js/tests/Comments.test.js#L86) | [✅](rust/links-notation/tests/comments_tests.rs#L97) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L118) | [✅](go/comments_test.go#L96) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L115) | [✅](php/tests/CommentsTest.php#L130) | [✅](cpp/tests/comments_tests.cpp#L81) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L74) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L51) |
-| a hash that cannot open a comment is left unquoted | [✅](python/tests/test_comments.py#L121) | [✅](js/tests/Comments.test.js#L156) | [✅](rust/links-notation/tests/comments_tests.rs#L182) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L190) | [✅](go/comments_test.go#L156) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L168) | [✅](php/tests/CommentsTest.php#L185) | [✅](cpp/tests/comments_tests.cpp#L144) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L154) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L103) |
+| a hash that cannot open a comment is left unquoted | [✅](python/tests/test_comments.py#L121) | [✅](js/tests/Comments.test.js#L156) | [✅](rust/links-notation/tests/comments_tests.rs#L182) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L190) | [✅](go/comments_test.go#L156) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L200) | [✅](php/tests/CommentsTest.php#L218) | [✅](cpp/tests/comments_tests.cpp#L144) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L154) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L103) |
 | a hash that opens a token is an ordinary character | [✅](python/tests/test_comments.py#L77) | [✅](js/tests/Comments.test.js#L90) | [✅](rust/links-notation/tests/comments_tests.rs#L102) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L124) | [✅](go/comments_test.go#L100) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L120) | [✅](php/tests/CommentsTest.php#L135) | [✅](cpp/tests/comments_tests.cpp#L83) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L78) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L54) |
 | a line of spaces separates links the way an empty line does | [✅](python/tests/test_comments.py#L62) | [✅](js/tests/Comments.test.js#L76) | [✅](rust/links-notation/tests/comments_tests.rs#L158) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L104) | [✅](go/comments_test.go#L82) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L103) | [✅](php/tests/CommentsTest.php#L118) | [✅](cpp/tests/comments_tests.cpp#L130) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L64) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L45) |
 | a line that starts with a hash is a comment | [✅](python/tests/test_comments.py#L34) | [✅](js/tests/Comments.test.js#L35) | [✅](rust/links-notation/tests/comments_tests.rs#L43) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L45) | [✅](go/comments_test.go#L37) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L56) | [✅](php/tests/CommentsTest.php#L66) | [✅](cpp/tests/comments_tests.cpp#L54) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L27) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L17) |
 | a parser without comments keeps the hash | [✅](python/tests/test_comments.py#L96) | [✅](js/tests/Comments.test.js#L106) | [✅](rust/links-notation/tests/comments_tests.rs#L122) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L155) | [✅](go/comments_test.go#L122) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L145) | [✅](php/tests/CommentsTest.php#L161) | [✅](cpp/tests/comments_tests.cpp#L95) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L94) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L66) |
 | a parser without comments still rejects the document from the issue | ❌ | [✅](js/tests/Comments.test.js#L112) | [✅](rust/links-notation/tests/comments_tests.rs#L133) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/comments_tests.cpp#L101) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L101) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L69) |
-| a reference that begins with a hash is written quoted | [✅](python/tests/test_comments.py#L114) | [✅](js/tests/Comments.test.js#L146) | [✅](rust/links-notation/tests/comments_tests.rs#L170) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L180) | [✅](go/comments_test.go#L144) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L158) | [✅](php/tests/CommentsTest.php#L176) | [✅](cpp/tests/comments_tests.cpp#L136) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L145) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L96) |
+| a reference is read in the document as written | [✅](python/tests/test_comments.py#L143) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| a reference is read in the document as written, comments included | ❌ | [✅](js/tests/Comments.test.js#L179) | [✅](rust/links-notation/tests/comments_tests.rs#L219) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L221) | [✅](go/comments_test.go#L186) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L174) | [✅](php/tests/CommentsTest.php#L192) | [✅](cpp/tests/comments_tests.cpp#L176) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L177) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L126) |
+| a reference that begins with a hash is written quoted | [✅](python/tests/test_comments.py#L114) | [✅](js/tests/Comments.test.js#L146) | [✅](rust/links-notation/tests/comments_tests.rs#L170) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L180) | [✅](go/comments_test.go#L144) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L190) | [✅](php/tests/CommentsTest.php#L209) | [✅](cpp/tests/comments_tests.cpp#L136) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L145) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L96) |
 | blanking a comment keeps the length of the document | [✅](python/tests/test_comments.py#L105) | [✅](js/tests/Comments.test.js#L139) | [✅](rust/links-notation/tests/comments_tests.rs#L191) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L161) | [✅](go/comments_test.go#L131) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L150) | [✅](php/tests/CommentsTest.php#L168) | [✅](cpp/tests/comments_tests.cpp#L152) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L138) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L88) |
 | comments are on by default | [✅](python/tests/test_comments.py#L93) | [✅](js/tests/Comments.test.js#L118) | [✅](rust/links-notation/tests/comments_tests.rs#L140) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L148) | [✅](go/comments_test.go#L116) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L140) | [✅](php/tests/CommentsTest.php#L155) | [✅](cpp/tests/comments_tests.cpp#L105) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L110) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L74) |
+| the comment reader skips the references the grammar reads | ❌ | [✅](js/tests/Comments.test.js#L186) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L230) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| the comment reader skips the references the parser reads | [✅](python/tests/test_comments.py#L149) | ❌ | [✅](rust/links-notation/tests/comments_tests.rs#L227) | ❌ | [✅](go/comments_test.go#L193) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L182) | [✅](php/tests/CommentsTest.php#L201) | [✅](cpp/tests/comments_tests.cpp#L183) | [✅](swift/Tests/LinksNotationTests/CommentsTests.swift#L185) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/CommentsTest.kt#L135) |
 
-**Category totals:** Python: 21, JavaScript: 23, Rust: 23, C#: 22, Go: 21, Java: 21, PHP: 21, C++: 23, Swift: 23, Kotlin: 23
+**Category totals:** Python: 26, JavaScript: 28, Rust: 28, C#: 27, Go: 26, Java: 26, PHP: 26, C++: 28, Swift: 28, Kotlin: 28
 
 ## Cst
 
@@ -900,10 +907,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
 |-----------|---|---|---|---|---|---|---|---|---|---|
-| binary reference fidelity | [✅](python/tests/test_reference_fidelity.py#L49) | [✅](js/tests/ReferenceFidelity.test.js#L68) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L96) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L54) | [✅](go/reference_fidelity_test.go#L85) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L67) | [✅](php/tests/ReferenceFidelityTest.php#L60) | [✅](cpp/tests/reference_fidelity_tests.cpp#L75) | [✅](swift/Tests/LinksNotationTests/ReferenceFidelityTests.swift#L79) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.kt#L44) |
-| malformed reference literals are rejected | [✅](python/tests/test_reference_fidelity.py#L58) | [✅](js/tests/ReferenceFidelity.test.js#L80) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L113) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L67) | [✅](go/reference_fidelity_test.go#L110) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L78) | [✅](php/tests/ReferenceFidelityTest.php#L71) | [✅](cpp/tests/reference_fidelity_tests.cpp#L85) | [✅](swift/Tests/LinksNotationTests/ReferenceFidelityTests.swift#L89) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.kt#L55) |
-| native reference fidelity | [✅](python/tests/test_reference_fidelity.py#L24) | [✅](js/tests/ReferenceFidelity.test.js#L27) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L29) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L19) | [✅](go/reference_fidelity_test.go#L34) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L28) | [✅](php/tests/ReferenceFidelityTest.php#L26) | [✅](cpp/tests/reference_fidelity_tests.cpp#L33) | [✅](swift/Tests/LinksNotationTests/ReferenceFidelityTests.swift#L40) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.kt#L11) |
-| reference literals at every chunk split | [✅](python/tests/test_reference_fidelity.py#L31) | [✅](js/tests/ReferenceFidelity.test.js#L44) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L63) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L31) | [✅](go/reference_fidelity_test.go#L51) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L42) | [✅](php/tests/ReferenceFidelityTest.php#L36) | [✅](cpp/tests/reference_fidelity_tests.cpp#L54) | [✅](swift/Tests/LinksNotationTests/ReferenceFidelityTests.swift#L56) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.kt#L26) |
+| binary reference fidelity | [✅](python/tests/test_reference_fidelity.py#L49) | [✅](js/tests/ReferenceFidelity.test.js#L68) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L96) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L54) | [✅](go/reference_fidelity_test.go#L85) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L66) | [✅](php/tests/ReferenceFidelityTest.php#L60) | [✅](cpp/tests/reference_fidelity_tests.cpp#L75) | [✅](swift/Tests/LinksNotationTests/ReferenceFidelityTests.swift#L79) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.kt#L44) |
+| malformed reference literals are rejected | [✅](python/tests/test_reference_fidelity.py#L58) | [✅](js/tests/ReferenceFidelity.test.js#L80) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L113) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L67) | [✅](go/reference_fidelity_test.go#L110) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L77) | [✅](php/tests/ReferenceFidelityTest.php#L71) | [✅](cpp/tests/reference_fidelity_tests.cpp#L85) | [✅](swift/Tests/LinksNotationTests/ReferenceFidelityTests.swift#L89) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.kt#L55) |
+| native reference fidelity | [✅](python/tests/test_reference_fidelity.py#L24) | [✅](js/tests/ReferenceFidelity.test.js#L27) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L29) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L19) | [✅](go/reference_fidelity_test.go#L34) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L27) | [✅](php/tests/ReferenceFidelityTest.php#L26) | [✅](cpp/tests/reference_fidelity_tests.cpp#L33) | [✅](swift/Tests/LinksNotationTests/ReferenceFidelityTests.swift#L40) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.kt#L11) |
+| reference literals at every chunk split | [✅](python/tests/test_reference_fidelity.py#L31) | [✅](js/tests/ReferenceFidelity.test.js#L44) | [✅](rust/links-notation/tests/reference_fidelity_tests.rs#L63) | [✅](csharp/Link.Foundation.Links.Notation.Tests/ReferenceFidelityTests.cs#L31) | [✅](go/reference_fidelity_test.go#L51) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.java#L41) | [✅](php/tests/ReferenceFidelityTest.php#L36) | [✅](cpp/tests/reference_fidelity_tests.cpp#L54) | [✅](swift/Tests/LinksNotationTests/ReferenceFidelityTests.swift#L56) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/ReferenceFidelityTest.kt#L26) |
 
 **Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4, Go: 4, Java: 4, PHP: 4, C++: 4, Swift: 4, Kotlin: 4
 
@@ -913,10 +920,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 |-----------|---|---|---|---|---|---|---|---|---|---|
 | ast mode leaves the metadata out and equality ignores it | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.kt#L39) |
 | every shared input is recovered exactly from its concrete syntax tree | ❌ | [✅](js/tests/SharedSyntaxParity.test.js#L35) | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/SharedSyntaxParityTest.php#L55) | ❌ | [✅](swift/Tests/LinksNotationTests/SharedSyntaxParityTests.swift#L71) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.kt#L30) |
-| every shared input is recovered from its concrete syntax tree | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedSyntaxParityTests.cs#L57) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.java#L77) | ❌ | [✅](cpp/tests/shared_syntax_parity_tests.cpp#L73) | ❌ | ❌ |
+| every shared input is recovered from its concrete syntax tree | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedSyntaxParityTests.cs#L57) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.java#L76) | ❌ | [✅](cpp/tests/shared_syntax_parity_tests.cpp#L73) | ❌ | ❌ |
 | every shared input is recovered from its cst | ❌ | ❌ | [✅](rust/links-notation/tests/shared_syntax_parity_tests.rs#L88) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | original text is recovered from the cst | [✅](python/tests/test_shared_syntax_parity.py#L37) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| raw references and concrete syntax trees | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.java#L58) | [✅](php/tests/SharedSyntaxParityTest.php#L37) | [✅](cpp/tests/shared_syntax_parity_tests.cpp#L56) | ❌ | ❌ |
+| raw references and concrete syntax trees | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.java#L57) | [✅](php/tests/SharedSyntaxParityTest.php#L37) | [✅](cpp/tests/shared_syntax_parity_tests.cpp#L56) | ❌ | ❌ |
 | shared inputs are recovered from their cst | ❌ | ❌ | ❌ | ❌ | [✅](go/shared_syntax_parity_test.go#L97) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | shared syntax parity | [✅](python/tests/test_shared_syntax_parity.py#L20) | ❌ | [✅](rust/links-notation/tests/shared_syntax_parity_tests.rs#L66) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedSyntaxParityTests.cs#L35) | [✅](go/shared_syntax_parity_test.go#L56) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | shared syntax parity: raw references and concrete syntax trees | ❌ | [✅](js/tests/SharedSyntaxParity.test.js#L20) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/SharedSyntaxParityTests.swift#L53) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.kt#L15) |
@@ -928,7 +935,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
 |-----------|---|---|---|---|---|---|---|---|---|---|
 | every corpus case streamed one character at a time reads the same | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L21) |
-| shared text parity | [✅](python/tests/test_shared_text_parity.py#L18) | [✅](js/tests/SharedTextParity.test.js#L15) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L41) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L16) | [✅](go/shared_text_parity_test.go#L23) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L38) | [✅](php/tests/SharedTextParityTest.php#L20) | [✅](cpp/tests/shared_text_parity_tests.cpp#L29) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L8) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L13) |
+| shared text parity | [✅](python/tests/test_shared_text_parity.py#L18) | [✅](js/tests/SharedTextParity.test.js#L15) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L41) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L16) | [✅](go/shared_text_parity_test.go#L23) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L37) | [✅](php/tests/SharedTextParityTest.php#L20) | [✅](cpp/tests/shared_text_parity_tests.cpp#L29) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L8) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L13) |
 
 **Category totals:** Python: 1, JavaScript: 1, Rust: 1, C#: 1, Go: 1, Java: 1, PHP: 1, C++: 1, Swift: 1, Kotlin: 2
 
@@ -989,20 +996,22 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | can avoid retaining output for bounded memory event processing | ❌ | [✅](js/tests/StreamParser.test.js#L101) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L107) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L97) |
 | does not split multiline quotes or parenthesized contexts | ❌ | [✅](js/tests/StreamParser.test.js#L68) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L73) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L67) |
 | emits a record as soon as the next top level record starts | ❌ | [✅](js/tests/StreamParser.test.js#L44) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L49) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L46) |
-| emits only complete records | [✅](python/tests/test_stream_parser.py#L30) | [✅](js/tests/StreamParser.test.js#L54) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L26) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L36) | [✅](go/stream_parser_test.go#L39) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L38) | [✅](php/tests/StreamParserTest.php#L40) | [✅](cpp/tests/stream_parser_tests.cpp#L62) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L59) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L56) |
+| emits only complete records | [✅](python/tests/test_stream_parser.py#L30) | [✅](js/tests/StreamParser.test.js#L54) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L26) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L36) | [✅](go/stream_parser_test.go#L39) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L38) | [✅](php/tests/StreamParserTest.php#L54) | [✅](cpp/tests/stream_parser_tests.cpp#L62) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L59) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L56) |
 | follows the parser options | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L166) |
 | limits only the unresolved record, not total stream size | ❌ | [✅](js/tests/StreamParser.test.js#L141) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L152) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L142) |
 | matches canonical parser one symbol at a time | [✅](python/tests/test_stream_parser.py#L22) | [✅](js/tests/StreamParser.test.js#L22) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L13) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L24) | [✅](go/stream_parser_test.go#L19) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L30) | [✅](php/tests/StreamParserTest.php#L30) | [✅](cpp/tests/stream_parser_tests.cpp#L53) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L20) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L28) |
 | provides an async enumerable adapter | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L97) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| provides lazy adapters | [✅](python/tests/test_stream_parser.py#L66) | [✅](js/tests/StreamParser.test.js#L125) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L80) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L80) | [✅](go/stream_parser_test.go#L103) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L77) | [✅](php/tests/StreamParserTest.php#L87) | [✅](cpp/tests/stream_parser_tests.cpp#L103) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L136) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L121) |
-| rejects writes after finish | [✅](python/tests/test_stream_parser.py#L79) | [✅](js/tests/StreamParser.test.js#L148) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L89) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L88) | [✅](go/stream_parser_test.go#L147) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L87) | [✅](php/tests/StreamParserTest.php#L94) | [✅](cpp/tests/stream_parser_tests.cpp#L113) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L159) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L150) |
+| provides lazy adapters | [✅](python/tests/test_stream_parser.py#L66) | [✅](js/tests/StreamParser.test.js#L125) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L80) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L80) | [✅](go/stream_parser_test.go#L103) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L77) | [✅](php/tests/StreamParserTest.php#L101) | [✅](cpp/tests/stream_parser_tests.cpp#L103) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L136) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L121) |
+| rejects writes after finish | [✅](python/tests/test_stream_parser.py#L79) | [✅](js/tests/StreamParser.test.js#L148) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L89) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L88) | [✅](go/stream_parser_test.go#L147) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L87) | [✅](php/tests/StreamParserTest.php#L108) | [✅](cpp/tests/stream_parser_tests.cpp#L113) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L159) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L150) |
 | reports positions relative to the whole stream | ❌ | [✅](js/tests/StreamParser.test.js#L85) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L91) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L85) |
 | stream parser preserves indented and multiline records | ❌ | ❌ | ❌ | ❌ | [✅](go/stream_parser_test.go#L56) | ❌ | ❌ | ❌ | ❌ | ❌ |
-| supports drain reset and bounded memory | [✅](python/tests/test_stream_parser.py#L51) | [✅](js/tests/StreamParser.test.js#L111) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L60) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L64) | [✅](go/stream_parser_test.go#L75) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L62) | [✅](php/tests/StreamParserTest.php#L66) | [✅](cpp/tests/stream_parser_tests.cpp#L85) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L118) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L108) |
-| supports line chunks final record and position | [✅](python/tests/test_stream_parser.py#L41) | [✅](js/tests/StreamParser.test.js#L31) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L45) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L50) | [✅](go/stream_parser_test.go#L123) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L50) | [✅](php/tests/StreamParserTest.php#L54) | [✅](cpp/tests/stream_parser_tests.cpp#L74) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L28) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L35) |
+| supports drain reset and bounded memory | [✅](python/tests/test_stream_parser.py#L51) | [✅](js/tests/StreamParser.test.js#L111) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L60) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L64) | [✅](go/stream_parser_test.go#L75) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L62) | [✅](php/tests/StreamParserTest.php#L80) | [✅](cpp/tests/stream_parser_tests.cpp#L85) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L118) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L108) |
+| supports line chunks final record and position | [✅](python/tests/test_stream_parser.py#L41) | [✅](js/tests/StreamParser.test.js#L31) | [✅](rust/links-notation/tests/stream_parser_tests.rs#L45) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L50) | [✅](go/stream_parser_test.go#L123) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L50) | [✅](php/tests/StreamParserTest.php#L68) | [✅](cpp/tests/stream_parser_tests.cpp#L74) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L28) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L35) |
 | tracks the absolute stream position | ❌ | [✅](js/tests/StreamParser.test.js#L155) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L169) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L159) |
+| waits for the line that closes an even run of quotes | [✅](python/tests/test_stream_parser.py#L86) | ❌ | [✅](rust/links-notation/tests/stream_parser_tests.rs#L98) | [✅](csharp/Link.Foundation.Links.Notation.Tests/StreamParserTests.cs#L115) | [✅](go/stream_parser_test.go#L172) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/StreamParserTest.java#L95) | [✅](php/tests/StreamParserTest.php#L40) | [✅](cpp/tests/stream_parser_tests.cpp#L121) | [✅](swift/Tests/LinksNotationTests/StreamParserTests.swift#L175) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/StreamParserTest.kt#L175) |
+| waits for the line that closes an even run of quotes (issue #377) | ❌ | [✅](js/tests/StreamParser.test.js#L166) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
-**Category totals:** Python: 6, JavaScript: 13, Rust: 6, C#: 7, Go: 7, Java: 6, PHP: 6, C++: 6, Swift: 13, Kotlin: 14
+**Category totals:** Python: 7, JavaScript: 14, Rust: 7, C#: 8, Go: 8, Java: 7, PHP: 7, C++: 7, Swift: 14, Kotlin: 15
 
 ## Syntax Metadata
 
@@ -1266,9 +1275,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - workswiththenodejseventsonasynciterator
 - workswiththenodejseventsoncehelper
 
-**Comments** (2 missing):
+**Comments** (4 missing):
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
+- areferenceisreadinthedocumentaswrittencommentsincluded
+- thecommentreaderskipsthereferencesthegrammarreads
 
 **Cst** (27 missing):
 - anemptydocumenthasnolines
@@ -1609,7 +1620,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singlelinewithidfield
 - valuesonlyinparentheses
 
-**Stream Parser** (10 missing):
+**Stream Parser** (11 missing):
 - acceptsafinalrecordwithoutanewline
 - canavoidretainingoutputforboundedmemoryeventprocessing
 - doesnotsplitmultilinequotesorparenthesizedcontexts
@@ -1620,6 +1631,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - reportspositionsrelativetothewholestream
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
+- waitsforthelinethatclosesanevenrunofquotesissue 377
 
 **Syntax Metadata** (36 missing):
 - 1 and 1 arethesamereferencebutkeephowtheywerewritten
@@ -1710,7 +1722,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 507 tests**
+**Total missing: 510 tests**
 
 ### JavaScript Missing Tests
 
@@ -1834,6 +1846,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uniformwidthsgrowpast 256 addressesandpackedwidthsstaysmall
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
+
+**Comments** (2 missing):
+- areferenceisreadinthedocumentaswritten
+- thecommentreaderskipsthereferencestheparserreads
 
 **Cst** (31 missing):
 - anemptydocumenthasnolines
@@ -2125,10 +2141,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singlelinewithidfield
 - valuesonlyinparentheses
 
-**Stream Parser** (3 missing):
+**Stream Parser** (4 missing):
 - followstheparseroptions
 - providesanasyncenumerableadapter
 - streamparserpreservesindentedandmultilinerecords
+- waitsforthelinethatclosesanevenrunofquotes
 
 **Syntax Metadata** (38 missing):
 - anunclosedquoteisabarereference
@@ -2225,7 +2242,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 445 tests**
+**Total missing: 448 tests**
 
 ### Rust Missing Tests
 
@@ -2335,6 +2352,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thesourceentrypointimportsnonodebuiltinsorpackages
 - workswiththenodejseventsonasynciterator
 - workswiththenodejseventsoncehelper
+
+**Comments** (2 missing):
+- areferenceisreadinthedocumentaswritten
+- thecommentreaderskipsthereferencesthegrammarreads
 
 **Cst** (29 missing):
 - anemptydocumenthasnolines
@@ -2589,7 +2610,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singlelinewithidfield
 - valuesonlyinparentheses
 
-**Stream Parser** (10 missing):
+**Stream Parser** (11 missing):
 - acceptsafinalrecordwithoutanewline
 - canavoidretainingoutputforboundedmemoryeventprocessing
 - doesnotsplitmultilinequotesorparenthesizedcontexts
@@ -2600,6 +2621,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - reportspositionsrelativetothewholestream
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
+- waitsforthelinethatclosesanevenrunofquotesissue 377
 
 **Syntax Metadata** (37 missing):
 - 1 and 1 arethesamereferencebutkeephowtheywerewritten
@@ -2648,7 +2670,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 357 tests**
+**Total missing: 360 tests**
 
 ### C# Missing Tests
 
@@ -2757,8 +2779,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - workswiththenodejseventsonasynciterator
 - workswiththenodejseventsoncehelper
 
-**Comments** (1 missing):
+**Comments** (3 missing):
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
+- areferenceisreadinthedocumentaswritten
+- thecommentreaderskipsthereferencestheparserreads
 
 **Cst** (28 missing):
 - anemptydocumenthasnolines
@@ -3082,7 +3106,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - quotedreferencesinlink
 - singlelinewithidfield
 
-**Stream Parser** (9 missing):
+**Stream Parser** (10 missing):
 - acceptsafinalrecordwithoutanewline
 - canavoidretainingoutputforboundedmemoryeventprocessing
 - doesnotsplitmultilinequotesorparenthesizedcontexts
@@ -3092,6 +3116,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - reportspositionsrelativetothewholestream
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
+- waitsforthelinethatclosesanevenrunofquotesissue 377
 
 **Syntax Metadata** (37 missing):
 - 1 and 1 arethesamereferencebutkeephowtheywerewritten
@@ -3185,7 +3210,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 461 tests**
+**Total missing: 464 tests**
 
 ### Go Missing Tests
 
@@ -3328,9 +3353,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - workswiththenodejseventsonasynciterator
 - workswiththenodejseventsoncehelper
 
-**Comments** (2 missing):
+**Comments** (4 missing):
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
+- areferenceisreadinthedocumentaswritten
+- thecommentreaderskipsthereferencesthegrammarreads
 
 **Cst** (31 missing):
 - agroupbelongstothelineitopenson
@@ -3784,7 +3811,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - valuelinkparser
 - valuesonlyinparentheses
 
-**Stream Parser** (9 missing):
+**Stream Parser** (10 missing):
 - acceptsafinalrecordwithoutanewline
 - canavoidretainingoutputforboundedmemoryeventprocessing
 - doesnotsplitmultilinequotesorparenthesizedcontexts
@@ -3794,6 +3821,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - providesanasyncenumerableadapter
 - reportspositionsrelativetothewholestream
 - trackstheabsolutestreamposition
+- waitsforthelinethatclosesanevenrunofquotesissue 377
 
 **Syntax Metadata** (36 missing):
 - 1 and 1 arethesamereferencebutkeephowtheywerewritten
@@ -3888,7 +3916,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 615 tests**
+**Total missing: 618 tests**
 
 ### Java Missing Tests
 
@@ -4026,9 +4054,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - workswiththenodejseventsonasynciterator
 - workswiththenodejseventsoncehelper
 
-**Comments** (2 missing):
+**Comments** (4 missing):
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
+- areferenceisreadinthedocumentaswritten
+- thecommentreaderskipsthereferencesthegrammarreads
 
 **Cst** (29 missing):
 - anunclosedquoteisabarereference
@@ -4442,7 +4472,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singlelinelinkwithid
 - valuesonlyinparentheses
 
-**Stream Parser** (10 missing):
+**Stream Parser** (11 missing):
 - acceptsafinalrecordwithoutanewline
 - canavoidretainingoutputforboundedmemoryeventprocessing
 - doesnotsplitmultilinequotesorparenthesizedcontexts
@@ -4453,6 +4483,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - reportspositionsrelativetothewholestream
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
+- waitsforthelinethatclosesanevenrunofquotesissue 377
 
 **Syntax Metadata** (36 missing):
 - 1 and 1 arethesamereferencebutkeephowtheywerewritten
@@ -4547,7 +4578,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 571 tests**
+**Total missing: 574 tests**
 
 ### PHP Missing Tests
 
@@ -4688,9 +4719,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - workswiththenodejseventsonasynciterator
 - workswiththenodejseventsoncehelper
 
-**Comments** (2 missing):
+**Comments** (4 missing):
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
+- areferenceisreadinthedocumentaswritten
+- thecommentreaderskipsthereferencesthegrammarreads
 
 **Cst** (29 missing):
 - anunclosedquoteisabarereference
@@ -5043,7 +5076,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singletlinkparser
 - valuesonlyinparentheses
 
-**Stream Parser** (10 missing):
+**Stream Parser** (11 missing):
 - acceptsafinalrecordwithoutanewline
 - canavoidretainingoutputforboundedmemoryeventprocessing
 - doesnotsplitmultilinequotesorparenthesizedcontexts
@@ -5054,6 +5087,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - reportspositionsrelativetothewholestream
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
+- waitsforthelinethatclosesanevenrunofquotesissue 377
 
 **Syntax Metadata** (36 missing):
 - 1 and 1 arethesamereferencebutkeephowtheywerewritten
@@ -5148,7 +5182,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 521 tests**
+**Total missing: 524 tests**
 
 ### C++ Missing Tests
 
@@ -5249,6 +5283,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thesourceentrypointimportsnonodebuiltinsorpackages
 - workswiththenodejseventsonasynciterator
 - workswiththenodejseventsoncehelper
+
+**Comments** (2 missing):
+- areferenceisreadinthedocumentaswritten
+- thecommentreaderskipsthereferencesthegrammarreads
 
 **Cst** (26 missing):
 - cstgroupbelongstothelineitopenson
@@ -5513,7 +5551,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singlelinewithidfield
 - valuesonlyinparentheses
 
-**Stream Parser** (10 missing):
+**Stream Parser** (11 missing):
 - acceptsafinalrecordwithoutanewline
 - canavoidretainingoutputforboundedmemoryeventprocessing
 - doesnotsplitmultilinequotesorparenthesizedcontexts
@@ -5524,6 +5562,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - reportspositionsrelativetothewholestream
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
+- waitsforthelinethatclosesanevenrunofquotesissue 377
 
 **Syntax Metadata** (36 missing):
 - 1 and 1 arethesamereferencebutkeephowtheywerewritten
@@ -5618,7 +5657,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 408 tests**
+**Total missing: 411 tests**
 
 ### Swift Missing Tests
 
@@ -5754,6 +5793,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thesourceentrypointimportsnonodebuiltinsorpackages
 - workswiththenodejseventsonasynciterator
 - workswiththenodejseventsoncehelper
+
+**Comments** (2 missing):
+- areferenceisreadinthedocumentaswritten
+- thecommentreaderskipsthereferencesthegrammarreads
 
 **Cst** (30 missing):
 - anemptydocumenthasnolines
@@ -6023,10 +6066,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singlelinewithidfield
 - valuesonlyinparentheses
 
-**Stream Parser** (3 missing):
+**Stream Parser** (4 missing):
 - followstheparseroptions
 - providesanasyncenumerableadapter
 - streamparserpreservesindentedandmultilinerecords
+- waitsforthelinethatclosesanevenrunofquotesissue 377
 
 **Syntax Metadata** (38 missing):
 - anunclosedquoteisabarereference
@@ -6123,7 +6167,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 439 tests**
+**Total missing: 442 tests**
 
 ### Kotlin Missing Tests
 
@@ -6261,6 +6305,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thesourceentrypointimportsnonodebuiltinsorpackages
 - workswiththenodejseventsonasynciterator
 - workswiththenodejseventsoncehelper
+
+**Comments** (2 missing):
+- areferenceisreadinthedocumentaswritten
+- thecommentreaderskipsthereferencesthegrammarreads
 
 **Cst** (30 missing):
 - anemptydocumenthasnolines
@@ -6522,9 +6570,10 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - singlelinewithidfield
 - valuesonlyinparentheses
 
-**Stream Parser** (2 missing):
+**Stream Parser** (3 missing):
 - providesanasyncenumerableadapter
 - streamparserpreservesindentedandmultilinerecords
+- waitsforthelinethatclosesanevenrunofquotesissue 377
 
 **Syntax Metadata** (38 missing):
 - 1 and 1 arethesamereferencebutkeephowtheywerewritten
@@ -6621,5 +6670,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 430 tests**
+**Total missing: 433 tests**
 
