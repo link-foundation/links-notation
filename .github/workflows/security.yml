@@ -53,13 +53,13 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4.39.0
+        uses: github/codeql-action/init@v4.39.1
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
           config-file: ./.github/codeql/codeql-config.yml
       - name: Analyze
-        uses: github/codeql-action/analyze@v4.39.0
+        uses: github/codeql-action/analyze@v4.39.1
         with:
           category: /language:${{ matrix.language }}
 
@@ -99,7 +99,7 @@ jobs:
           # scan needs the whole history, not just the tip.
           fetch-depth: 0
       - name: Scan the repository for verified secrets
-        uses: trufflesecurity/trufflehog@v3.99.2
+        uses: trufflesecurity/trufflehog@v3.99.7
         with:
           path: ./
           # The action ref pins the wrapper; this pins the scanner itself,

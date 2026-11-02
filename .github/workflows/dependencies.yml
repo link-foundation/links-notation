@@ -25,7 +25,7 @@ jobs:
           persist-credentials: false
           # A pull request's merge commit and its base (HEAD^1).
           fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 1 }}
-      - uses: actions/setup-python@v7.0.0
+      - uses: actions/setup-python@v7.1.0
         with:
           python-version: '3.15'
       - name: Test the dependency checker without network access
