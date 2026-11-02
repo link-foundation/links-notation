@@ -168,3 +168,30 @@ func stringsAfter(value string, delimiter byte) []string {
 	}
 	return chunks
 }
+
+func TestWaitsForTheLineThatClosesAnEvenRunOfQuotes(t *testing.T) {
+	// "" is the empty reference only when nothing closes it, and here the next
+	// line does, so the first line cannot be emitted on its own (issue #377).
+	input := "a \"\" b\n\"\" c\n"
+	stream := NewStreamParser()
+	for _, symbol := range input {
+		emitted, err := stream.Feed(string(symbol))
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(emitted) != 0 {
+			t.Fatalf("emitted %v before the end of the stream", linkStrings(emitted))
+		}
+	}
+	actual, err := stream.Finish()
+	if err != nil {
+		t.Fatal(err)
+	}
+	expected, err := Parse(input)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !slices.Equal(linkStrings(actual), linkStrings(expected)) {
+		t.Fatalf("streamed links %v, want %v", linkStrings(actual), linkStrings(expected))
+	}
+}

@@ -12,32 +12,33 @@ package lino
 // the caller wrote, and anything reported about a position still points at
 // what the reader can see.
 
+import "strings"
+
 // Comment is the character that starts a comment.
 const Comment = '#'
 
-// beforeReference lists what a delimited reference may start after.
-const beforeReference = " \t\n\r(:"
+// separators lists what ends a bare reference. A token starts after one of
+// these, at the start of the document, and right after a delimited reference
+// or a versioned literal: the places the parser reads a reference from.
+const separators = " \t\n\r(:)"
 
 // beforeComment lists what a comment may start after.
 const beforeComment = " \t\n\r"
 
 // StripComments returns document with every comment blanked out. The result
 // has the same length as the document it was given.
+//
+// The document is read token by token, the way the parser reads it, so a # inside
+// a delimited reference that starts right after a group, another reference or a
+// literal is content, as it is in one that starts after a space (issue #377).
 func StripComments(document string) string {
 	var blanked []byte
 	position := 0
+	// Whether a token may start at position.
+	tokenStart := true
 
 	for position < len(document) {
 		char := document[position]
-
-		if isQuote(char) && follows(document, position, beforeReference) {
-			if _, end, ok := parseQuotedStringAt(document, position); ok {
-				position = end
-			} else {
-				position++
-			}
-			continue
-		}
 
 		if char == Comment && follows(document, position, beforeComment) {
 			if blanked == nil {
@@ -50,6 +51,21 @@ func StripComments(document string) string {
 			continue
 		}
 
+		if strings.IndexByte(separators, char) >= 0 {
+			tokenStart = true
+			position++
+			continue
+		}
+
+		if tokenStart {
+			if end := delimitedTokenEnd(document, position); end >= 0 {
+				position = end
+				continue
+			}
+		}
+
+		// Anything else is part of a bare reference, which runs to a separator.
+		tokenStart = false
 		position++
 	}
 
@@ -57,6 +73,22 @@ func StripComments(document string) string {
 		return document
 	}
 	return string(blanked)
+}
+
+// delimitedTokenEnd is the position just past the versioned literal or
+// delimited reference that starts the token at start, or -1 when the token
+// there is a bare reference: a delimiter run that never closes is read as one,
+// as the parser reads it.
+func delimitedTokenEnd(document string, start int) int {
+	if end := referenceLiteralEnd(document, start); end >= 0 {
+		return end
+	}
+	if isQuote(document[start]) {
+		if _, end, ok := parseQuotedStringAt(document, start); ok {
+			return end
+		}
+	}
+	return -1
 }
 
 // isQuote reports whether char is one of the delimiters a reference can be

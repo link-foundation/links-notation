@@ -294,29 +294,76 @@ func leadingSpaces(line string) int {
 }
 
 func structurallyComplete(document string, comments bool) bool {
+	// Tokens are read as the comment reader and the parser read them: a
+	// reference may start after a separator, and right after a delimited
+	// reference or a literal (issue #377).
 	depth := 0
+	tokenStart := true
 	for position := 0; position < len(document); position++ {
 		character := document[position]
-		if isQuote(character) && follows(document, position, beforeReference) {
+		if comments && character == Comment && follows(document, position, beforeComment) {
+			if newline := strings.IndexByte(document[position:], '\n'); newline >= 0 {
+				position += newline
+				tokenStart = true
+				continue
+			}
+			break
+		}
+		if strings.IndexByte(separators, character) >= 0 {
+			if character == '(' {
+				depth++
+			} else if character == ')' {
+				depth--
+			}
+			tokenStart = true
+			continue
+		}
+		if tokenStart && isQuote(character) {
+			// A reference nothing closes yet may be closed by a later line,
+			// which changes what it holds: an even run is the empty reference
+			// only when no run in the whole document closes it.
 			_, end, ok := parseQuotedStringAt(document, position)
-			if !ok {
+			if !ok || !closingRunFollows(document, position) {
 				return false
 			}
 			position = end - 1
 			continue
 		}
-		if comments && character == Comment && follows(document, position, beforeComment) {
-			if newline := strings.IndexByte(document[position:], '\n'); newline >= 0 {
-				position += newline
+		if tokenStart {
+			if end := referenceLiteralEnd(document, position); end >= 0 {
+				position = end - 1
 				continue
 			}
-			break
 		}
-		if character == '(' {
-			depth++
-		} else if character == ')' {
-			depth--
-		}
+		tokenStart = false
 	}
 	return depth == 0
+}
+
+// closingRunFollows reports whether a run of delimiters after the one opening
+// at start closes it: a run of R closes a reference opened by N exactly when
+// R / N is odd. An even run nothing closes is the empty reference, until a
+// closing run is written after it.
+func closingRunFollows(document string, start int) bool {
+	quote := document[start]
+	count := 0
+	for start+count < len(document) && document[start+count] == quote {
+		count++
+	}
+	position := start + count
+	for {
+		next := strings.IndexByte(document[position:], quote)
+		if next < 0 {
+			return false
+		}
+		position += next
+		length := 0
+		for position+length < len(document) && document[position+length] == quote {
+			length++
+		}
+		if (length/count)%2 == 1 {
+			return true
+		}
+		position += length
+	}
 }
