@@ -1,0 +1,38 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    cooldown:
+      default-days: 7
+    directories:
+      - /
+      - /.github/actions/*
+    schedule:
+      interval: weekly
+  - package-ecosystem: nuget
+    cooldown:
+      default-days: 7
+    directories:
+      - /
+      - /examples
+      - /src/MyPackage
+      - /tests/MyPackage.Tests
+    schedule:
+      interval: weekly
+  - package-ecosystem: dotnet-sdk
+    cooldown:
+      default-days: 7
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: bun
+    cooldown:
+      default-days: 7
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: pre-commit
+    cooldown:
+      default-days: 7
+    directory: /
+    schedule:
+      interval: weekly

@@ -205,14 +205,16 @@ class Parser
      * shortest reading, a bare delimiter pair enclosing nothing, wins over a
      * longer n-quote delimiter.
      *
+     * Nothing at or after $stop is read; it defaults to the end of $text.
+     *
      * @return array{0: string, 1: int}|null The decoded value and the position
      *                                       right after the closing quotes, or
      *                                       null when $text does not start a
      *                                       delimited reference
      */
-    private static function parseQuotedStringAt(string $text, int $start): ?array
+    private static function parseQuotedStringAt(string $text, int $start, ?int $stop = null): ?array
     {
-        $length = strlen($text);
+        $length = $stop === null ? strlen($text) : min($stop, strlen($text));
         if ($start >= $length) {
             return null;
         }
@@ -237,12 +239,12 @@ class Parser
         $content = '';
 
         while ($pos < $length) {
-            if (str_starts_with(substr($text, $pos), $escapeSequence)) {
+            if (self::startsWithin($text, $pos, $length, $escapeSequence)) {
                 $content .= $openClose;
                 $pos += strlen($escapeSequence);
                 continue;
             }
-            if (str_starts_with(substr($text, $pos), $openClose)) {
+            if (self::startsWithin($text, $pos, $length, $openClose)) {
                 $afterClose = $pos + $quoteCount;
                 if ($afterClose >= $length || $text[$afterClose] !== $quoteChar) {
                     if ($isEvenRun && !self::isSubstantiveBody($content)) {
@@ -260,14 +262,52 @@ class Parser
     }
 
     /**
-     * Skip over the quoted string starting at $start.
+     * Report whether $needle is written at $position of $text, ending before
+     * $length.
+     */
+    private static function startsWithin(string $text, int $position, int $length, string $needle): bool
+    {
+        $size = strlen($needle);
+
+        return $position + $size <= $length && substr_compare($text, $needle, $position, $size) === 0;
+    }
+
+    /**
+     * Read the delimited reference at $start of $text, a part of the document
+     * that starts at $offset.
+     *
+     * The reference is read in the document as written, within the extent of
+     * $text. $text comes from the document with its comments blanked, which
+     * keeps every byte at the same offset, and blanking a comment must not
+     * change what a reference holds or how far it reaches (issue #377).
+     *
+     * @return array{0: string, 1: int}|null The decoded value and where it
+     *                                       ends in $text, or null when $text
+     *                                       does not start a delimited
+     *                                       reference at $start
+     */
+    private function quotedAt(string $text, int $start, int $offset): ?array
+    {
+        $quoted = self::parseQuotedStringAt($this->source, $offset + $start, $offset + strlen($text));
+        if ($quoted === null) {
+            return null;
+        }
+
+        return [$quoted[0], $quoted[1] - $offset];
+    }
+
+    /**
+     * Skip over the quoted string starting at $start, $text starting at
+     * $offset in the document.
      *
      * Returns the position right after the closing quotes, or -1 when text does
      * not start a delimited reference.
      */
-    private static function skipQuotedString(string $text, int $start): int
+    private function skipQuotedString(string $text, int $start, int $offset): int
     {
-        return self::quotedReferenceEnd($text, $start);
+        $quoted = $this->quotedAt($text, $start, $offset);
+
+        return $quoted === null ? -1 : $quoted[1];
     }
 
     /**
@@ -341,7 +381,7 @@ class Parser
                     $lineStart = $i + 1;
                 }
             } else {
-                $end = self::skipQuotedString($text, $i);
+                $end = $this->skipQuotedString($text, $i, $base);
                 if ($end > $i) {
                     // A quoted string is opaque: newlines inside it are content
                     $i = $end;
@@ -495,7 +535,7 @@ class Parser
     private function parseLineContent(string $content, int $offset): array
     {
         // A whole parenthesized group: (id: values), (values) or a nested document
-        if (str_starts_with($content, '(') && $this->findMatchingParen($content, 0) === strlen($content) - 1) {
+        if (str_starts_with($content, '(') && $this->findMatchingParen($content, 0, $offset) === strlen($content) - 1) {
             return $this->parseParenthesized(substr($content, 1, -1), $offset);
         }
 
@@ -508,7 +548,7 @@ class Parser
         }
 
         // Try single-line link: id: values
-        $colonPos = $this->findColonOutsideQuotes($content);
+        $colonPos = $this->findColonOutsideQuotes($content, $offset);
         if ($colonPos >= 0) {
             $idPart = substr($content, 0, $colonPos);
             $afterColon = substr($content, $colonPos + 1);
@@ -576,13 +616,14 @@ class Parser
     }
 
     /**
-     * Find the position of the parenthesis closing the one at $start.
+     * Find the position of the parenthesis closing the one at $start, $text
+     * starting at $offset in the document.
      *
      * Quoted strings are skipped, so parentheses inside them are ignored.
      * Returns -1 when the group is not closed, or when $start is not at an
      * opening parenthesis.
      */
-    private function findMatchingParen(string $text, int $start): int
+    private function findMatchingParen(string $text, int $start, int $offset): int
     {
         if (($text[$start] ?? '') !== '(') {
             return -1;
@@ -614,7 +655,7 @@ class Parser
                 $i += $run;
                 continue;
             } else {
-                $end = self::skipQuotedString($text, $i);
+                $end = $this->skipQuotedString($text, $i, $offset);
                 if ($end > $i) {
                     $i = $end;
                     continue;
@@ -632,9 +673,10 @@ class Parser
      * This is crucial for correctly parsing nested self-referenced objects.
      * For example, in: ((str key) (obj_1: dict ...))
      * The colon after obj_1 should NOT be found as a top-level colon
-     * because it's inside the second parenthesized expression.
+     * because it's inside the second parenthesized expression. $text starts at
+     * $offset in the document.
      */
-    private function findColonOutsideQuotes(string $text): int
+    private function findColonOutsideQuotes(string $text, int $offset): int
     {
         $parenDepth = 0;
         $i = 0;
@@ -643,7 +685,7 @@ class Parser
         while ($i < $length) {
             $char = $text[$i];
             if (in_array($char, ['"', "'", '`'], true)) {
-                $end = self::skipQuotedString($text, $i);
+                $end = $this->skipQuotedString($text, $i, $offset);
                 if ($end > $i) {
                     $i = $end;
                     continue;
@@ -687,7 +729,7 @@ class Parser
             }
 
             // Try to extract the next value
-            [$valueEnd, $valueText] = $this->extractNextValue($text, $i);
+            [$valueEnd, $valueText] = $this->extractNextValue($text, $i, $offset);
             if ($valueText !== '' && trim($valueText) !== '') {
                 $values[] = $this->parseValue($valueText, $offset + $i);
             }
@@ -703,11 +745,12 @@ class Parser
     }
 
     /**
-     * Extract the next value from text starting at $start position.
+     * Extract the next value from text starting at $start position, $text
+     * starting at $offset in the document.
      *
      * @return array{0: int, 1: string} The end position and the value text
      */
-    private function extractNextValue(string $text, int $start): array
+    private function extractNextValue(string $text, int $start, int $offset): array
     {
         $length = strlen($text);
         if ($start >= $length) {
@@ -715,16 +758,23 @@ class Parser
         }
 
         // Check if this starts with a delimited reference
-        $quoted = self::parseQuotedStringAt($text, $start);
+        $quoted = $this->quotedAt($text, $start, $offset);
         if ($quoted !== null) {
             [, $end] = $quoted;
 
             return [$end, substr($text, $start, $end - $start)];
         }
 
+        // A versioned literal is a whole token: what follows it starts the
+        // next one, as the reference grammar (js/src/grammar.pegjs) reads it
+        $end = ReferenceLiteral::end($text, $start);
+        if ($end >= 0) {
+            return [$end, substr($text, $start, $end - $start)];
+        }
+
         // Check if this starts with a parenthesized expression
         if ($text[$start] === '(') {
-            $end = $this->findMatchingParen($text, $start);
+            $end = $this->findMatchingParen($text, $start, $offset);
             if ($end >= 0) {
                 return [$end + 1, substr($text, $start, $end + 1 - $start)];
             }
@@ -750,7 +800,7 @@ class Parser
     private function parseValue(string $value, int $offset): array
     {
         // Nested link in parentheses
-        if (str_starts_with($value, '(') && $this->findMatchingParen($value, 0) === strlen($value) - 1) {
+        if (str_starts_with($value, '(') && $this->findMatchingParen($value, 0, $offset) === strlen($value) - 1) {
             return $this->parseParenthesized(substr($value, 1, -1), $offset);
         }
 
@@ -760,7 +810,9 @@ class Parser
 
     /**
      * Read the reference written in $text, which starts at $offset, handling
-     * quoted strings with escaping support.
+     * quoted strings with escaping support. A delimited reference is read in
+     * the document as written, so a comment never changes what it holds
+     * (issue #377).
      *
      * @return array{id: string, raw: string} The reference and the text it was
      *                                        written as, taken from the
@@ -774,7 +826,7 @@ class Parser
         if (ReferenceLiteral::hasPrefix($trimmed)) {
             $id = ReferenceLiteral::decode($trimmed);
         } else {
-            $quoted = self::parseQuotedStringAt($trimmed, 0);
+            $quoted = $this->quotedAt($trimmed, 0, $start);
             if ($quoted !== null) {
                 [$id, $length] = $quoted;
             } else {

@@ -19,6 +19,13 @@ on:
         type: boolean
         required: false
         default: false
+      release-result:
+        description: >-
+          Result of the caller's release job (success, failure, cancelled or
+          skipped). Empty when unknown; ignored on a pull request, where nothing is published.
+        type: string
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -66,6 +73,9 @@ jobs:
           # drift. Reporting it as a warning there would flag every release PR.
           AUDIT_EXPECT_PUBLISHED: ${{ github.event_name != 'pull_request' }}
           AUDIT_REPORT: ${{ runner.temp }}/registry-audit.json
+          # A release that never ran published nothing; the audit then names
+          # the failed stage instead of a missing credential (issue #377).
+          RELEASE_RESULT: ${{ inputs.release-result }}
           # Read-only lookups of each published version's GitHub release.
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/release-audit.mjs

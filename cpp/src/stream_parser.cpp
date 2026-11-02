@@ -13,7 +13,8 @@ namespace links_notation {
 
 namespace {
 
-constexpr std::string_view before_reference = " \t\n\r(:";
+// What ends a bare reference, so that a token starts after it.
+constexpr std::string_view separators = " \t\n\r(:)";
 constexpr std::string_view before_comment = " \t\n\r";
 
 std::size_t leading_spaces(std::string_view line) {
@@ -29,29 +30,48 @@ bool follows(std::string_view document, std::size_t position, std::string_view a
 // Whether every delimited reference and parenthesized group in `document` is
 // closed, so the record it holds could be complete.
 bool structurally_complete(std::string_view document, bool comments) {
+  // Tokens are read as the comment reader and the grammar read them: a
+  // reference may start after a separator, and right after a delimited
+  // reference or a literal (issue #377).
   const detail::DelimitedReferences references(document);
   std::size_t position = 0;
   long depth = 0;
+  bool token_start = true;
 
   while (position < document.size()) {
     const char character = document[position];
-    if (detail::is_quote(character) && follows(document, position, before_reference)) {
-      const auto end = references.end_at(position);
-      if (!end) return false;
-      position = *end;
-      continue;
-    }
     if (comments && character == comment_character && follows(document, position, before_comment)) {
       const std::size_t newline = document.find('\n', position);
       if (newline == std::string_view::npos) break;
-      position = newline + 1;
+      position = newline;
       continue;
     }
-    if (character == '(') {
-      ++depth;
-    } else if (character == ')') {
-      --depth;
+    if (separators.find(character) != std::string_view::npos) {
+      if (character == '(') {
+        ++depth;
+      } else if (character == ')') {
+        --depth;
+      }
+      token_start = true;
+      ++position;
+      continue;
     }
+    if (token_start && detail::is_quote(character)) {
+      // A reference nothing closes yet may be closed by a later line, which
+      // changes what it holds: an even run is the empty reference only when
+      // no run in the whole document closes it.
+      const auto reading = references.read(position);
+      if (!reading || !reading->closed) return false;
+      position += reading->length;
+      continue;
+    }
+    if (token_start) {
+      if (const auto end = detail::reference_literal_end(document, position)) {
+        position = *end;
+        continue;
+      }
+    }
+    token_start = false;
     ++position;
   }
   return depth == 0;

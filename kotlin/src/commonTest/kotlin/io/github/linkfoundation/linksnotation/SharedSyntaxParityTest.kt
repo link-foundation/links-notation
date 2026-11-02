@@ -13,7 +13,7 @@ import kotlin.test.assertTrue
 class SharedSyntaxParityTest {
     @Test
     fun sharedSyntaxParityRawReferencesAndConcreteSyntaxTrees() {
-        assertEquals(15, SYNTAX_CASES.size)
+        assertEquals(20, SYNTAX_CASES.size)
         for (case in SYNTAX_CASES) {
             val parser = Parser()
             assertEquals(case.links, syntaxTree(parser.parse(case.input)), case.id)

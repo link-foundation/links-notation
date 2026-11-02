@@ -117,3 +117,15 @@ TEST(StreamParserTests, RejectsWritesAfterFinish) {
 
   EXPECT_THROW(stream.write("two"), StreamParseError);
 }
+
+TEST(StreamParserTests, WaitsForTheLineThatClosesAnEvenRunOfQuotes) {
+  // `""` is the empty reference only when nothing closes it, and here the
+  // next line does, so the first line cannot be emitted on its own (#377).
+  const std::string input = "a \"\" b\n\"\" c\n";
+  StreamParser stream;
+  for (const std::string& character : characters(input)) {
+    EXPECT_TRUE(stream.write(character).empty()) << "after " << character;
+  }
+
+  EXPECT_EQ(format_links(stream.finish()), format_links(parse(input)));
+}

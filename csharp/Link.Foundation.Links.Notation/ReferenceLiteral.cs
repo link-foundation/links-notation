@@ -34,6 +34,22 @@ public static class ReferenceLiteral
         return position > start + 1 && position < subject.Length && subject[position] == '{';
     }
 
+    /// <summary>
+    /// Where the versioned literal <c>~&lt;digits&gt;{&lt;payload&gt;}</c> that starts at
+    /// <paramref name="start"/> ends, or -1 if none starts there. The payload holds no
+    /// <c>}</c>, space, tab, line break or parenthesis, as the grammar reads it.
+    /// </summary>
+    internal static int End(string text, int start)
+    {
+        if (start >= text.Length || text[start] != '~') return -1;
+        var index = start + 1;
+        while (index < text.Length && text[index] is >= '0' and <= '9') index++;
+        if (index == start + 1 || index >= text.Length || text[index] != '{') return -1;
+        index++;
+        while (index < text.Length && text[index] is not ('}' or ' ' or '\t' or '\r' or '\n' or '(' or ')')) index++;
+        return index < text.Length && text[index] == '}' ? index + 1 : -1;
+    }
+
     internal static bool TryRead(string subject, int start, out string value, out int length)
     {
         value = "";

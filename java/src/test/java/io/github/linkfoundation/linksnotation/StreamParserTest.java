@@ -91,6 +91,19 @@ class StreamParserTest {
     assertThrows(IllegalStateException.class, () -> stream.write("two"));
   }
 
+  @Test
+  void waitsForTheLineThatClosesAnEvenRunOfQuotes() throws Exception {
+    // `""` is the empty reference only when nothing closes it, and here the
+    // next line does, so the first line cannot be emitted on its own (issue #377).
+    String input = "a \"\" b\n\"\" c\n";
+    StreamParser stream = new StreamParser();
+    for (int index = 0; index < input.length(); index++) {
+      assertEquals(List.of(), stream.write(input.substring(index, index + 1)));
+    }
+
+    assertEquals(render(new Parser().parse(input)), render(stream.finish()));
+  }
+
   private static void write(StreamParser parser, String chunk) {
     try {
       parser.write(chunk);

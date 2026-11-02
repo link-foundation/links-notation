@@ -2,6 +2,15 @@
 
 import re
 
+#: A versioned literal ``~<digits>{<payload>}``, as the parser reads one.
+_LITERAL = re.compile(r"~[0-9]+\{[^} \t\r\n()]*\}")
+
+
+def reference_literal_end(text: str, start: int) -> int:
+    """Where the versioned literal that starts at ``start`` ends, or -1 if none starts there."""
+    match = _LITERAL.match(text, start)
+    return -1 if match is None else match.end()
+
 
 def encode_reference_literal(text: str) -> str:
     """Encode exact text as a versioned UTF-8 hexadecimal literal."""

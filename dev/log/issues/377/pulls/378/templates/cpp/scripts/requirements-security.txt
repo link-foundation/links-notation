@@ -1,0 +1,4 @@
+# Installed in the Security workflow only; audited along with requirements-ci.txt.
+pip-audit==2.10.1
+# Also audit the Python-distributed workflow linter invoked through pipx.
+zizmor==1.29.0

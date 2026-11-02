@@ -1,0 +1,20 @@
+41477660740	cpp / test (apple-clang)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	go / test (1.27)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41477660740	go / test (1.26)	success	notice	CODECOV_TOKEN is not configured, so coverage was not uploaded
+41477660740	swift / test (macos)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	swift / test (macos)	success	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	kotlin / ios	cancelled	failure	The job was not acquired by Runner of type hosted even after multiple attempts
+41477660740	kotlin / ios	cancelled	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	kotlin / ios	cancelled	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	kotlin / ios	cancelled	notice	Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+41477660740	Kotlin	failure	failure	Process completed with exit code 1.
+41477660740	release_audit / audit	failure	failure	kotlin: 0.30.0 is absent from Maven Central. To publish it, configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	swift: 0.30.0 is absent from GitHub tags (SwiftPM). To publish it, check the publish-swift log for the 0.30.0 tag, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	cpp: 0.30.0 is absent from GitHub Releases. To publish it, check the publish-cpp log for the cpp_0.30.0 release upload, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	php: 0.30.0 is absent from Packagist. To publish it, submit the repository once at https://packagist.org/packages/submit and configure the PACKAGIST_USERNAME and PACKAGIST_TOKEN secrets, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	java: 0.30.0 is absent from Maven Central. To publish it, configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	go: 0.30.0 is absent from Go proxy. To publish it, check the publish-go log for the go/v0.30.0 tag push, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	csharp: 0.30.0 is absent from NuGet. To publish it, configure the NUGET_API_KEY secret, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	rust: 0.30.0 is absent from crates.io. To publish it, configure crates.io trusted publishing for js.yml with CRATES_IO_TRUSTED_PUBLISHING=true, or the CARGO_TOKEN secret, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	python: 0.30.0 is absent from PyPI. To publish it, configure PyPI trusted publishing for js.yml with PYPI_TRUSTED_PUBLISHING=true, or the PYPI_TOKEN secret, then re-run the main CI run (docs/releases.md).
+41477660740	release_audit / audit	failure	failure	js: 0.30.0 is absent from npm. To publish it, configure npm trusted publishing for js.yml or the NPM_TOKEN secret, then re-run the main CI run (docs/releases.md).

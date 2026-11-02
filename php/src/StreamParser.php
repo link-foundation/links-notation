@@ -12,7 +12,6 @@ use LogicException;
 class StreamParser
 {
     private const DEFAULT_MAX_BUFFER_SIZE = 10 * 1024 * 1024;
-    private const BEFORE_REFERENCE = " \t\n\r(:";
     private const BEFORE_COMMENT = " \t\n\r";
 
     private Parser $parser;
@@ -262,18 +261,14 @@ class StreamParser
 
     private static function structurallyComplete(string $document, bool $comments): bool
     {
+        // Tokens are read as the comment reader and the parser read them: a
+        // reference may start after a separator, and right after a delimited
+        // reference or a literal (issue #377).
         $depth = 0;
+        $tokenStart = true;
         $length = strlen($document);
         for ($position = 0; $position < $length; $position++) {
             $character = $document[$position];
-            if (self::isQuote($character) && self::follows($document, $position, self::BEFORE_REFERENCE)) {
-                $end = Parser::quotedReferenceEnd($document, $position);
-                if ($end < 0) {
-                    return false;
-                }
-                $position = $end - 1;
-                continue;
-            }
             if (
                 $comments
                 && $character === Comments::COMMENT
@@ -284,16 +279,62 @@ class StreamParser
                     break;
                 }
                 $position = $newline;
+                $tokenStart = true;
                 continue;
             }
-            if ($character === '(') {
-                $depth++;
-            } elseif ($character === ')') {
-                $depth--;
+            if (str_contains(Comments::SEPARATORS, $character)) {
+                if ($character === '(') {
+                    $depth++;
+                } elseif ($character === ')') {
+                    $depth--;
+                }
+                $tokenStart = true;
+                continue;
             }
+            if ($tokenStart && self::isQuote($character)) {
+                // A reference nothing closes yet may be closed by a later
+                // line, which changes what it holds: an even run is the empty
+                // reference only when no run in the whole document closes it.
+                $end = Parser::quotedReferenceEnd($document, $position);
+                if ($end < 0 || !self::closingRunFollows($document, $position)) {
+                    return false;
+                }
+                $position = $end - 1;
+                continue;
+            }
+            if ($tokenStart) {
+                $end = ReferenceLiteral::end($document, $position);
+                if ($end >= 0) {
+                    $position = $end - 1;
+                    continue;
+                }
+            }
+            $tokenStart = false;
         }
 
         return $depth === 0;
+    }
+
+    /**
+     * Report whether a run of delimiters after the one opening at $start
+     * closes it: a run of R closes a reference opened by N exactly when R / N
+     * is odd. An even run nothing closes is the empty reference, until a
+     * closing run is written after it.
+     */
+    private static function closingRunFollows(string $document, int $start): bool
+    {
+        $quote = $document[$start];
+        $count = strspn($document, $quote, $start);
+        $position = $start + $count;
+        while (($next = strpos($document, $quote, $position)) !== false) {
+            $run = strspn($document, $quote, $next);
+            if (intdiv($run, $count) % 2 === 1) {
+                return true;
+            }
+            $position = $next + $run;
+        }
+
+        return false;
     }
 
     private static function isQuote(string $character): bool

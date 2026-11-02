@@ -1,0 +1,480 @@
+java / maven-floor	UNKNOWN STEP	﻿2026-11-02T11:58:07.4946282Z Current runner version: '2.338.2'
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4970866Z ##[group]Runner Image Provisioner
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4971822Z Hosted Compute Agent
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4972442Z Version: 20261021.618
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4973073Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4973932Z Build Date: 2026-10-21T00:45:21Z
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4974615Z Worker ID: {6981ab64-0f90-493d-b7ca-f8d3c4fed385}
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4975901Z Region: westus3
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4976498Z Cloud: Azure
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4977091Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4978656Z ##[group]Operating System
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4979308Z Ubuntu
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4979821Z 26.04.1
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4980477Z LTS
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4981008Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4981702Z ##[group]Runner Image
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4982314Z Image: ubuntu-26.04
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4982893Z Version: 20261025.179.1
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4984249Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4986321Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4987299Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4988435Z ##[group]GITHUB_TOKEN Permissions
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4990376Z Contents: read
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4991021Z Metadata: read
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4991703Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4993901Z Secret source: Dependabot
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4995424Z Cache mode: write
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.4996205Z Prepare workflow directory
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.5616758Z Prepare all required actions
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.5664477Z Getting action download info
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:07.9161093Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.0220741Z Download action repository 'actions/setup-java@v6.1.0' (SHA:b843ebf9b913146b38da2eaa7aeddf76074ae1ad)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.8568422Z Uses: link-foundation/links-notation/.github/workflows/java.yml@refs/pull/363/merge (83c660a6e7b1ad668647b09f2bc15a6c5adc140b)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.8573551Z ##[group] Inputs
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.8574670Z   verbose: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.8575779Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.8576406Z Complete job name: java / maven-floor
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9533471Z ##[group]Run actions/checkout@v7.0.1
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9534473Z with:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9535194Z   persist-credentials: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9535764Z   submodules: true
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9536305Z   repository: link-foundation/links-notation
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9540588Z   token: ***
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9541082Z   ssh-strict: true
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9541566Z   ssh-user: git
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9542025Z   clean: true
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9542526Z   sparse-checkout-cone-mode: true
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9543099Z   fetch-depth: 1
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9543568Z   fetch-tags: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9544080Z   show-progress: true
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9544569Z   lfs: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9545195Z   set-safe-directory: true
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9545803Z   allow-unsafe-pr-checkout: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9546660Z env:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9550433Z   GITHUB_TOKEN: ***
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9550920Z   CI_VERBOSE: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9551391Z   MAVEN_FLOOR: 3.6.3
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9552256Z   MAVEN_FLOOR_SHA256: 26ad91d751b3a9a53087aefa743f4e16a17741d3915b219cf74112bf87a438c5
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:08.9553196Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2535684Z Syncing repository: link-foundation/links-notation
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2538368Z ##[group]Getting Git version info
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2539289Z Working directory is '/home/runner/work/links-notation/links-notation'
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2540529Z [command]/usr/bin/git version
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2553041Z git version 2.56.0
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2581966Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2594243Z Temporarily overriding HOME='/home/runner/work/_temp/73063226-640a-4152-a721-e82365489db8' before making global git config changes
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2597139Z Adding repository directory to the temporary git global config as a safe directory
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2602293Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2674408Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2678830Z ##[group]Determining repository object format
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2680547Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2681399Z ##[group]Initializing the repository
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2685768Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2812042Z hint: Using 'master' as the name for the initial branch. This default branch name
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2813641Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2815048Z hint: to use in all of your new repositories, which will suppress this warning,
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2816097Z hint: call:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2816626Z hint:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2817254Z hint: 	git config --global init.defaultBranch <name>
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2818057Z hint:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2818759Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2819845Z hint: 'development'. The just-created branch can be renamed via this command:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2820719Z hint:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2821274Z hint: 	git branch -m <name>
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2821876Z hint:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2822625Z hint: Disable this message with "git config set advice.defaultBranchName false"
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2825435Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2838602Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2893269Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2894994Z ##[group]Disabling automatic garbage collection
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2896944Z [command]/usr/bin/git config --local gc.auto 0
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2934045Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2936203Z ##[group]Setting up auth
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2937418Z Removing SSH command configuration
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2939289Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.2977371Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.3452451Z Removing HTTP extra header
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.3458296Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.3494259Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.3760628Z Removing includeIf entries pointing to credentials config files
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.3766647Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.3801799Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.4073853Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.4112271Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.4144547Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.4185989Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.4220092Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.4250891Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.4252609Z ##[group]Fetching the repository
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:09.4259911Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +83c660a6e7b1ad668647b09f2bc15a6c5adc140b:refs/remotes/pull/363/merge
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:10.8035048Z From https://github.com/link-foundation/links-notation
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:10.8037587Z  * [new ref]         83c660a6e7b1ad668647b09f2bc15a6c5adc140b -> pull/363/merge
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:10.8042253Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:10.8044299Z ##[group]Determining the checkout info
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:10.8046941Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:10.8048383Z [command]/usr/bin/git sparse-checkout disable
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:10.8100451Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:10.8133400Z ##[group]Checking out the ref
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:10.8136861Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/363/merge
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0502839Z Note: switching to 'refs/remotes/pull/363/merge'.
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0503923Z 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0505026Z You are in 'detached HEAD' state. You can look around, make experimental
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0506981Z changes and commit them, and you can discard any commits you make in this
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0600242Z state without impacting any branches by switching back to a branch.
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0601583Z 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0602369Z If you want to create a new branch to retain commits you create, you may
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0604021Z do so (now or later) by using -c with the switch command. Example:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0605260Z 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0605677Z   git switch -c <new-branch-name>
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0606425Z 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0606996Z Or undo this operation with:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0607845Z 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0608359Z   git switch -
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0609007Z 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0610004Z Turn off this advice by setting config variable advice.detachedHead to false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0611554Z 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0613460Z HEAD is now at 83c660a Merge c144aa209b4a53e599a681089863e46d3915207e into 75088035b0d4dc8e51f2b508016dab143ae04d8c
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0621669Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0625207Z ##[group]Setting up auth for fetching submodules
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0631580Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0639721Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0645954Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0661009Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0695069Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0726031Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0729111Z ##[group]Fetching submodules
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.0730657Z [command]/usr/bin/git submodule sync
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.1015681Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.1305218Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.1581984Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.1643028Z [command]/usr/bin/git log -1 --format=%H
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.1669304Z 83c660a6e7b1ad668647b09f2bc15a6c5adc140b
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.1680213Z ##[group]Removing auth
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.1682115Z Removing SSH command configuration
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.1685207Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.1719312Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2001477Z Removing HTTP extra header
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2005044Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2041536Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2329124Z Removing includeIf entries pointing to credentials config files
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2337924Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2376046Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2380479Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2384316Z includeif.gitdir:/github/workspace/.git.path
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2387694Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2395795Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2412306Z /home/runner/work/_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2426000Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-10c98671\-c9f0\-4347\-bb90\-91c4e4a7a2ca\.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2469522Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2496556Z /home/runner/work/_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2509152Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-10c98671\-c9f0\-4347\-bb90\-91c4e4a7a2ca\.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2631995Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2668983Z /github/runner_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2689684Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-10c98671\-c9f0\-4347\-bb90\-91c4e4a7a2ca\.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2719571Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2745292Z /github/runner_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2755904Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-10c98671\-c9f0\-4347\-bb90\-91c4e4a7a2ca\.config
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.2790461Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3086071Z Removing credentials config '/home/runner/work/_temp/git-credentials-10c98671-c9f0-4347-bb90-91c4e4a7a2ca.config'
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3092833Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3489129Z ##[group]Run actions/setup-java@v6.1.0
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3489583Z with:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3489900Z   java-version: 25
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3490250Z   distribution: temurin
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3490596Z   cache: maven
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3490914Z   java-package: jdk
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3491260Z   check-latest: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3491610Z   force-download: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3491956Z   set-default: true
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3492282Z   server-id: github
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3492761Z   mvn-repositories-include-central: true
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3493586Z   mvn-repositories-prioritize-central: true
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3494033Z   overwrite-settings: true
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3494400Z   cache-read-only: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3494926Z   job-status: success
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3497509Z   token: ***
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3497856Z   show-download-progress: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3498243Z   problem-matcher: true
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3498575Z env:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3501147Z   GITHUB_TOKEN: ***
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3501487Z   CI_VERBOSE: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3501810Z   MAVEN_FLOOR: 3.6.3
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3502312Z   MAVEN_FLOOR_SHA256: 26ad91d751b3a9a53087aefa743f4e16a17741d3915b219cf74112bf87a438c5
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.3502875Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.4269418Z ##[group]Installed distributions
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.4904540Z Resolved Java 25.0.5+8 from tool-cache
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.4905346Z Setting Java 25.0.5+8 as the default
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.4914246Z 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.4914908Z Java configuration:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.4915671Z   Distribution: temurin
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.4916132Z   Version: 25.0.5+8
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.4916643Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.4920247Z 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.4974518Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.5030862Z Creating settings.xml with server-id: github
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.5034958Z Creating toolchains.xml for JDK version 25 from temurin
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.5049331Z Writing to /home/runner/.m2/settings.xml
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.5054462Z Writing to /home/runner/.m2/toolchains.xml
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:11.5063817Z Configured MAVEN_ARGS to include -ntp to suppress Maven transfer progress logs. Set 'show-download-progress: true' to keep the download progress output.
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:12.0468293Z Cache hit for: setup-java-Linux-x64-maven-3bc17d0ab6f59d94683258aced4d6878deb1b63484c0eecd1302c975662a9db0
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:12.0484437Z Cache hit for: setup-java-Linux-x64-maven-wrapper-4606797fb925e6c6efbc030d02f1c4dc9cb7dc6bea2d8c732c7c618317864e9d
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:12.9094460Z Received 5635986 of 5635986 (100.0%), 8.4 MBs/sec
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:12.9095426Z Cache Size: ~5 MB (5635986 B)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:12.9237853Z [command]/usr/bin/tar -xf /home/runner/work/_temp/f2468b26-7f71-4a19-9204-a0bf8d5749c5/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:12.9619853Z Cache restored successfully
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:12.9627020Z Cache restored from key: setup-java-Linux-x64-maven-3bc17d0ab6f59d94683258aced4d6878deb1b63484c0eecd1302c975662a9db0
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:12.9856695Z Received 9822746 of 9822746 (100.0%), 13.0 MBs/sec
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:12.9857232Z Cache Size: ~9 MB (9822746 B)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:12.9875317Z [command]/usr/bin/tar -xf /home/runner/work/_temp/c1b2ba01-e9fa-49e8-8561-3c07c787b859/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0168429Z Cache restored successfully
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0176324Z maven-wrapper cache restored from key: setup-java-Linux-x64-maven-wrapper-4606797fb925e6c6efbc030d02f1c4dc9cb7dc6bea2d8c732c7c618317864e9d
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0370350Z ##[group]Run set -euo pipefail
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0370734Z ^[[36;1mset -euo pipefail^[[0m
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0371073Z ^[[36;1marchive="apache-maven-$MAVEN_FLOOR-bin.tar.gz"^[[0m
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0371542Z ^[[36;1mcurl -fsSL --retry 3 -o "$RUNNER_TEMP/$archive" \^[[0m
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0372120Z ^[[36;1m  "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/$MAVEN_FLOOR/$archive"^[[0m
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0372741Z ^[[36;1mecho "$MAVEN_FLOOR_SHA256  $RUNNER_TEMP/$archive" | sha256sum --check -^[[0m
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0373209Z ^[[36;1mtar -xzf "$RUNNER_TEMP/$archive" -C "$RUNNER_TEMP"^[[0m
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0410012Z shell: /usr/bin/bash -e {0}
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0410290Z env:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0412653Z   GITHUB_TOKEN: ***
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0412887Z   CI_VERBOSE: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0413098Z   MAVEN_FLOOR: 3.6.3
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0413476Z   MAVEN_FLOOR_SHA256: 26ad91d751b3a9a53087aefa743f4e16a17741d3915b219cf74112bf87a438c5
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0414310Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0415004Z   JAVA_HOME_25_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0415414Z   MAVEN_ARGS: -ntp
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.0415632Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.1908016Z /home/runner/work/_temp/apache-maven-3.6.3-bin.tar.gz: OK
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2454420Z ##[group]Run "$RUNNER_TEMP/apache-maven-$MAVEN_FLOOR/bin/mvn" --version
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2455280Z ^[[36;1m"$RUNNER_TEMP/apache-maven-$MAVEN_FLOOR/bin/mvn" --version^[[0m
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2455825Z ^[[36;1m"$RUNNER_TEMP/apache-maven-$MAVEN_FLOOR/bin/mvn" -B test spotless:check --file pom.xml^[[0m
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2487326Z shell: /usr/bin/bash -e {0}
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2487587Z env:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2489902Z   GITHUB_TOKEN: ***
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2490139Z   CI_VERBOSE: false
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2490348Z   MAVEN_FLOOR: 3.6.3
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2490713Z   MAVEN_FLOOR_SHA256: 26ad91d751b3a9a53087aefa743f4e16a17741d3915b219cf74112bf87a438c5
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2491279Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2491774Z   JAVA_HOME_25_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2492164Z   MAVEN_ARGS: -ntp
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.2492376Z ##[endgroup]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.5000672Z WARNING: A restricted method in java.lang.System has been called
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.5001960Z WARNING: java.lang.System::load has been called by org.fusesource.hawtjni.runtime.Library in an unnamed module (file:/home/runner/work/_temp/apache-maven-3.6.3/lib/jansi-1.17.1.jar)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.5003105Z WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.5003875Z WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.5004315Z 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.5522253Z Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.5533087Z Maven home: /home/runner/work/_temp/apache-maven-3.6.3
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.5546387Z Java version: 25.0.5, vendor: Eclipse Adoptium, runtime: /usr/lib/jvm/temurin-25-jdk-amd64
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.5552978Z Default locale: en, platform encoding: UTF-8
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.5563059Z OS name: "linux", version: "7.0.0-1017-azure", arch: "amd64", family: "unix"
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.6962771Z WARNING: A restricted method in java.lang.System has been called
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.6964971Z WARNING: java.lang.System::load has been called by org.fusesource.hawtjni.runtime.Library in an unnamed module (file:/home/runner/work/_temp/apache-maven-3.6.3/lib/jansi-1.17.1.jar)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.6967160Z WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.6968629Z WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:13.6969562Z 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:14.0792455Z WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:14.0794534Z WARNING: sun.misc.Unsafe::objectFieldOffset has been called by com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper (file:/home/runner/work/_temp/apache-maven-3.6.3/lib/guava-25.1-android.jar)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:14.0797204Z WARNING: Please consider reporting this to the maintainers of class com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:14.0798725Z WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:14.7486466Z [INFO] Scanning for projects...
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:15.1980093Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-enforcer-plugin/3.7.0/maven-enforcer-plugin-3.7.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:15.8093510Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-enforcer-plugin/3.7.0/maven-enforcer-plugin-3.7.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:15.8706897Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/enforcer/enforcer/3.7.0/enforcer-3.7.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:15.8986725Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/enforcer/enforcer/3.7.0/enforcer-3.7.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:15.9027666Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/50/maven-parent-50.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:15.9316578Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/50/maven-parent-50.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:15.9396069Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/40/apache-40.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:15.9658853Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/40/apache-40.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:15.9786188Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.4/junit-bom-5.14.4.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.0027399Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.4/junit-bom-5.14.4.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.0121136Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-enforcer-plugin/3.7.0/maven-enforcer-plugin-3.7.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.0380508Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-enforcer-plugin/3.7.0/maven-enforcer-plugin-3.7.0.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.0465177Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.16.0/maven-compiler-plugin-3.16.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.0736424Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.16.0/maven-compiler-plugin-3.16.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.0766135Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/49/maven-plugins-49.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.1003564Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/49/maven-plugins-49.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.1037179Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/49/maven-parent-49.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.1323681Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/49/maven-parent-49.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.1396213Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/39/apache-39.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.1629829Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/39/apache-39.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.1726553Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.16.0/maven-compiler-plugin-3.16.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.2030593Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.16.0/maven-compiler-plugin-3.16.0.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.2186205Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/3.6.1/maven-surefire-plugin-3.6.1.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.3063534Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/3.6.1/maven-surefire-plugin-3.6.1.pom (4.3 kB at 47 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.3098591Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire/3.6.1/surefire-3.6.1.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.3671435Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire/3.6.1/surefire-3.6.1.pom (21 kB at 366 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.3760151Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/mockito/mockito-bom/4.11.0/mockito-bom-4.11.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.4040244Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/mockito/mockito-bom/4.11.0/mockito-bom-4.11.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.4087633Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/3.6.1/maven-surefire-plugin-3.6.1.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.4676919Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/3.6.1/maven-surefire-plugin-3.6.1.jar (49 kB at 837 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.4780079Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.5.1/maven-jar-plugin-3.5.1.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.5294110Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.5.1/maven-jar-plugin-3.5.1.pom (7.6 kB at 150 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.5385787Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.5.1/maven-jar-plugin-3.5.1.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.5930137Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jar-plugin/3.5.1/maven-jar-plugin-3.5.1.jar (35 kB at 637 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.5977645Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-source-plugin/3.4.0/maven-source-plugin-3.4.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.6252490Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-source-plugin/3.4.0/maven-source-plugin-3.4.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.6267671Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/45/maven-plugins-45.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.6536874Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/45/maven-plugins-45.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.6566209Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/45/maven-parent-45.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.6795875Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/45/maven-parent-45.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.6843596Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/35/apache-35.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.7081691Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/35/apache-35.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.7142571Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.13.1/junit-bom-5.13.1.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.7375888Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.13.1/junit-bom-5.13.1.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.7414016Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-source-plugin/3.4.0/maven-source-plugin-3.4.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.7692431Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-source-plugin/3.4.0/maven-source-plugin-3.4.0.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.7776504Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-javadoc-plugin/3.12.0/maven-javadoc-plugin-3.12.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.7973185Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-javadoc-plugin/3.12.0/maven-javadoc-plugin-3.12.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.8062634Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-javadoc-plugin/3.12.0/maven-javadoc-plugin-3.12.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.8315530Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-javadoc-plugin/3.12.0/maven-javadoc-plugin-3.12.0.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.8739823Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/diffplug/spotless/spotless-maven-plugin/3.10.4/spotless-maven-plugin-3.10.4.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.9281115Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/diffplug/spotless/spotless-maven-plugin/3.10.4/spotless-maven-plugin-3.10.4.pom (3.5 kB at 65 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.9326443Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/diffplug/spotless/spotless-maven-plugin/3.10.4/spotless-maven-plugin-3.10.4.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:16.9949959Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/diffplug/spotless/spotless-maven-plugin/3.10.4/spotless-maven-plugin-3.10.4.jar (158 kB at 2.6 MB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.0038734Z [INFO] 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.0039724Z [INFO] --------------< io.github.link-foundation:links-notation >--------------
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.0040657Z [INFO] Building Links Notation 0.29.0
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.0041614Z [INFO] --------------------------------[ jar ]---------------------------------
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.0069766Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.0548842Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.pom (8.1 kB at 169 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.0577629Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/23/maven-plugins-23.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.1086937Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/23/maven-plugins-23.pom (9.2 kB at 180 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.1115285Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/22/maven-parent-22.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.1610321Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/22/maven-parent-22.pom (30 kB at 607 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.1638086Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/11/apache-11.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.2209625Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/11/apache-11.pom (15 kB at 260 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.2259986Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.2756699Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.jar (30 kB at 590 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.2904048Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter/6.1.3/junit-jupiter-6.1.3.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.3169937Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter/6.1.3/junit-jupiter-6.1.3.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.3209747Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.1.3/junit-bom-6.1.3.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.3460828Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.1.3/junit-bom-6.1.3.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.3501863Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/6.1.3/junit-jupiter-api-6.1.3.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.3737029Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/6.1.3/junit-jupiter-api-6.1.3.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.3768328Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.4024422Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.4053561Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/6.1.3/junit-platform-commons-6.1.3.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.4319017Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/6.1.3/junit-platform-commons-6.1.3.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.4351205Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.4573747Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.4600413Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.4837145Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.4867611Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/6.1.3/junit-jupiter-params-6.1.3.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.5116678Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/6.1.3/junit-jupiter-params-6.1.3.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.5146162Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/6.1.3/junit-jupiter-engine-6.1.3.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.5413413Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/6.1.3/junit-jupiter-engine-6.1.3.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.5444444Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/6.1.3/junit-platform-engine-6.1.3.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.5695795Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/6.1.3/junit-platform-engine-6.1.3.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.6030996Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter/6.1.3/junit-jupiter-6.1.3.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.6032861Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/6.1.3/junit-platform-commons-6.1.3.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.6036403Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.6045957Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/6.1.3/junit-jupiter-api-6.1.3.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.6048226Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.6637043Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/6.1.3/junit-platform-commons-6.1.3.jar (176 kB at 3.0 MB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.6639407Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7075108Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar (6.8 kB at 65 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7076721Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/6.1.3/junit-jupiter-params-6.1.3.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7101021Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar (14 kB at 134 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7102976Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/6.1.3/junit-jupiter-engine-6.1.3.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7119839Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar (3.8 kB at 35 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7122766Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/6.1.3/junit-platform-engine-6.1.3.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7237774Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter/6.1.3/junit-jupiter-6.1.3.jar (6.4 kB at 52 kB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7309860Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/6.1.3/junit-jupiter-api-6.1.3.jar (313 kB at 2.4 MB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7729097Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/6.1.3/junit-platform-engine-6.1.3.jar (325 kB at 1.9 MB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7786079Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-params/6.1.3/junit-jupiter-params-6.1.3.jar (303 kB at 1.7 MB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7825984Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/6.1.3/junit-jupiter-engine-6.1.3.jar (353 kB at 2.0 MB/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7879794Z [INFO] 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7881682Z [INFO] --- maven-enforcer-plugin:3.7.0:enforce (require-maven) @ links-notation ---
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.7942968Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/4.1.0/plexus-utils-4.1.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.8189100Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/4.1.0/plexus-utils-4.1.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.8215832Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/27/plexus-27.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.8439453Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/27/plexus-27.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.8506186Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-xml/3.0.1/plexus-xml-3.0.1.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.8715721Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-xml/3.0.1/plexus-xml-3.0.1.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.8736695Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/18/plexus-18.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.8963435Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus/18/plexus-18.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.9006027Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.10.2/junit-bom-5.10.2.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.9225224Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.10.2/junit-bom-5.10.2.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.9257877Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/enforcer/enforcer-api/3.7.0/enforcer-api-3.7.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.9490681Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/enforcer/enforcer-api/3.7.0/enforcer-api-3.7.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.9548504Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/enforcer/enforcer-rules/3.7.0/enforcer-rules-3.7.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.9772909Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/enforcer/enforcer-rules/3.7.0/enforcer-rules-3.7.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:17.9835346Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-util/1.9.27/maven-resolver-util-1.9.27.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.0046309Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-util/1.9.27/maven-resolver-util-1.9.27.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.0067555Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver/1.9.27/maven-resolver-1.9.27.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.0299416Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver/1.9.27/maven-resolver-1.9.27.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.0334637Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/47/maven-parent-47.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.0567444Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/47/maven-parent-47.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.0605788Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/37/apache-37.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.0819037Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/37/apache-37.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.0869291Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.2/junit-bom-5.14.2.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.1099982Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.2/junit-bom-5.14.2.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.1128337Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-api/1.9.27/maven-resolver-api-1.9.27.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.1386454Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-api/1.9.27/maven-resolver-api-1.9.27.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.1441282Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.1685530Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.1723374Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/105/commons-parent-105.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.1932590Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/105/commons-parent-105.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.2015961Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.23.0/commons-codec-1.23.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.2290097Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.23.0/commons-codec-1.23.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.2346777Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.22.0/commons-io-2.22.0.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.2618871Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.22.0/commons-io-2.22.0.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.2761689Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/98/commons-parent-98.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.2980190Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/98/commons-parent-98.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3059806Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache-extras/beanshell/bsh/2.0b6/bsh-2.0b6.pom
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3293350Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache-extras/beanshell/bsh/2.0b6/bsh-2.0b6.pom (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3344938Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/4.1.0/plexus-utils-4.1.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3347078Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/enforcer/enforcer-api/3.7.0/enforcer-api-3.7.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3349264Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-xml/3.0.1/plexus-xml-3.0.1.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3351811Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/enforcer/enforcer-rules/3.7.0/enforcer-rules-3.7.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3359997Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-util/1.9.27/maven-resolver-util-1.9.27.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3574480Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/4.1.0/plexus-utils-4.1.0.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3576836Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3578701Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/enforcer/enforcer-api/3.7.0/enforcer-api-3.7.0.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3580589Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.23.0/commons-codec-1.23.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3590385Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/enforcer/enforcer-rules/3.7.0/enforcer-rules-3.7.0.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3592305Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3597633Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-xml/3.0.1/plexus-xml-3.0.1.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3599154Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache-extras/beanshell/bsh/2.0b6/bsh-2.0b6.jar
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3686660Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-util/1.9.27/maven-resolver-util-1.9.27.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3792265Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3801539Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.22.0/commons-io-2.22.0.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3805829Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.23.0/commons-codec-1.23.0.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.3906674Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache-extras/beanshell/bsh/2.0b6/bsh-2.0b6.jar (0 B at 0 B/s)
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5306725Z [INFO] ------------------------------------------------------------------------
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5307820Z [INFO] BUILD FAILURE
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5308543Z [INFO] ------------------------------------------------------------------------
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5354632Z [INFO] Total time:  3.802 s
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5357756Z [INFO] Finished at: 2026-11-02T11:58:18Z
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5358851Z [INFO] ------------------------------------------------------------------------
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5366730Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-enforcer-plugin:3.7.0:enforce (require-maven) on project links-notation: 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5369287Z [ERROR] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion failed with message:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5371125Z [ERROR] Detected Maven Version: 3.6.3 is not in the allowed range [3.7.0,).
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5372206Z [ERROR] -> [Help 1]
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5372846Z [ERROR] 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5373706Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5375156Z [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5376060Z [ERROR] 
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5377114Z [ERROR] For more information about the errors and possible solutions, please read the following articles:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5378573Z [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5563198Z ##[error]Process completed with exit code 1.
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.5765606Z Post job cleanup.
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.6657295Z Post job cleanup.
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.7587256Z [command]/usr/bin/git version
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.7649133Z git version 2.56.0
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.7692592Z Temporarily overriding HOME='/home/runner/work/_temp/3f6ef286-89f9-4742-828f-b69b4d84a3a4' before making global git config changes
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.7696706Z Adding repository directory to the temporary git global config as a safe directory
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.7699476Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.7742079Z Removing SSH command configuration
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.7750743Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.7793011Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.8091041Z Removing HTTP extra header
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.8098186Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.8148516Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.8453046Z Removing includeIf entries pointing to credentials config files
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.8460041Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.8496552Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+java / maven-floor	UNKNOWN STEP	2026-11-02T11:58:18.8992626Z Cleaning up orphan processes

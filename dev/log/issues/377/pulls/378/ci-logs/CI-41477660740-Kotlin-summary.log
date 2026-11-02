@@ -1,0 +1,38 @@
+Kotlin	Set up job	﻿2026-11-02T16:45:29.1117307Z Current runner version: '2.338.2'
+Kotlin	Set up job	2026-11-02T16:45:29.1143752Z ##[group]Runner Image Provisioner
+Kotlin	Set up job	2026-11-02T16:45:29.1144650Z Hosted Compute Agent
+Kotlin	Set up job	2026-11-02T16:45:29.1145319Z Version: 20261021.618
+Kotlin	Set up job	2026-11-02T16:45:29.1145977Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+Kotlin	Set up job	2026-11-02T16:45:29.1146748Z Build Date: 2026-10-21T00:45:21Z
+Kotlin	Set up job	2026-11-02T16:45:29.1147448Z Worker ID: {3f51b28e-488c-4091-98f7-1f7a73cc7241}
+Kotlin	Set up job	2026-11-02T16:45:29.1148152Z Region: eastus
+Kotlin	Set up job	2026-11-02T16:45:29.1149412Z Cloud: Azure
+Kotlin	Set up job	2026-11-02T16:45:29.1150071Z ##[endgroup]
+Kotlin	Set up job	2026-11-02T16:45:29.1151712Z ##[group]Operating System
+Kotlin	Set up job	2026-11-02T16:45:29.1152381Z Ubuntu
+Kotlin	Set up job	2026-11-02T16:45:29.1152919Z 26.04.1
+Kotlin	Set up job	2026-11-02T16:45:29.1153524Z LTS
+Kotlin	Set up job	2026-11-02T16:45:29.1154029Z ##[endgroup]
+Kotlin	Set up job	2026-11-02T16:45:29.1154603Z ##[group]Runner Image
+Kotlin	Set up job	2026-11-02T16:45:29.1155197Z Image: ubuntu-26.04
+Kotlin	Set up job	2026-11-02T16:45:29.1155735Z Version: 20261025.179.1
+Kotlin	Set up job	2026-11-02T16:45:29.1156929Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+Kotlin	Set up job	2026-11-02T16:45:29.1158727Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+Kotlin	Set up job	2026-11-02T16:45:29.1160473Z ##[endgroup]
+Kotlin	Set up job	2026-11-02T16:45:29.1161910Z ##[group]GITHUB_TOKEN Permissions
+Kotlin	Set up job	2026-11-02T16:45:29.1164084Z Contents: read
+Kotlin	Set up job	2026-11-02T16:45:29.1164972Z Metadata: read
+Kotlin	Set up job	2026-11-02T16:45:29.1165548Z ##[endgroup]
+Kotlin	Set up job	2026-11-02T16:45:29.1167741Z Secret source: Actions
+Kotlin	Set up job	2026-11-02T16:45:29.1168843Z Cache mode: write
+Kotlin	Set up job	2026-11-02T16:45:29.1169963Z Prepare workflow directory
+Kotlin	Set up job	2026-11-02T16:45:29.1517057Z Prepare all required actions
+Kotlin	Set up job	2026-11-02T16:45:29.1623311Z Complete job name: Kotlin
+Kotlin	Require a successful stage	﻿2026-11-02T16:45:29.2875323Z ##[group]Run test "$STAGE_RESULT" = success
+Kotlin	Require a successful stage	2026-11-02T16:45:29.2876104Z ^[[36;1mtest "$STAGE_RESULT" = success^[[0m
+Kotlin	Require a successful stage	2026-11-02T16:45:29.5275842Z shell: /usr/bin/bash -e {0}
+Kotlin	Require a successful stage	2026-11-02T16:45:29.5276903Z env:
+Kotlin	Require a successful stage	2026-11-02T16:45:29.5277473Z   STAGE_RESULT: abandoned
+Kotlin	Require a successful stage	2026-11-02T16:45:29.5278112Z ##[endgroup]
+Kotlin	Require a successful stage	2026-11-02T16:45:29.5466918Z ##[error]Process completed with exit code 1.
+Kotlin	Complete job	﻿2026-11-02T16:45:29.5633058Z Cleaning up orphan processes

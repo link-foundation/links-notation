@@ -260,28 +260,52 @@ private fun structurallyComplete(
     document: String,
     comments: Boolean,
 ): Boolean {
+    // Tokens are read as the comment reader and the grammar read them: a
+    // reference may start after a separator, and right after a delimited
+    // reference or a literal (issue #377).
     val references = DelimitedReferences(document)
     var depth = 0
     var position = 0
+    var tokenStart = true
     while (position < document.length) {
         val character = document[position]
         val previous = if (position == 0) null else document[position - 1]
 
-        if (character in QUOTES && (previous == null || previous in " \t\n\r(:")) {
-            val end = references.endAt(position) ?: return false
-            position = end
-            continue
-        }
-
         if (comments && character == '#' && (previous == null || previous in " \t\n\r")) {
             val newline = document.indexOf('\n', position)
             if (newline == -1) return true
-            position = newline + 1
+            // The newline ends the comment and is read as a separator.
+            position = newline
             continue
         }
 
-        if (character == '(') depth++
-        if (character == ')') depth--
+        if (character in TOKEN_SEPARATORS) {
+            if (character == '(') depth++
+            if (character == ')') depth--
+            tokenStart = true
+            position++
+            continue
+        }
+
+        if (tokenStart && character in QUOTES) {
+            // A reference nothing closes yet may be closed by a later line,
+            // which changes what it holds: an even run is the empty reference
+            // only when no run in the whole document closes it.
+            val reading = references.readAt(position)
+            if (reading == null || !reading.closed) return false
+            position += reading.length
+            continue
+        }
+
+        if (tokenStart) {
+            val end = referenceLiteralEnd(document, position)
+            if (end != -1) {
+                position = end
+                continue
+            }
+        }
+
+        tokenStart = false
         position++
     }
     return depth == 0

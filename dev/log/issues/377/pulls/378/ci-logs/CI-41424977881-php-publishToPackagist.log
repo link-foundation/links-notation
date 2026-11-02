@@ -1,0 +1,278 @@
+release / php / publishToPackagist	UNKNOWN STEP	﻿2026-11-02T10:05:58.5149499Z Current runner version: '2.338.2'
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5178295Z ##[group]Runner Image Provisioner
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5179302Z Hosted Compute Agent
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5180270Z Version: 20261021.618
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5180999Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5181768Z Build Date: 2026-10-21T00:45:21Z
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5182505Z Worker ID: {11722ddd-4d18-403e-82d4-11a5dcd7b464}
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5183238Z Region: centralus
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5183812Z Cloud: Azure
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5184394Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5185842Z ##[group]Operating System
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5186470Z Ubuntu
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5187006Z 26.04.1
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5187517Z LTS
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5188015Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5188530Z ##[group]Runner Image
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5189192Z Image: ubuntu-26.04
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5189771Z Version: 20261025.179.1
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5191412Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5193007Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5194080Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5195175Z ##[group]GITHUB_TOKEN Permissions
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5197672Z Contents: write
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5198238Z Metadata: read
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5198825Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5201393Z Secret source: Actions
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5202337Z Cache mode: write
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.5203206Z Prepare workflow directory
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.7022075Z Prepare all required actions
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.7072709Z Getting action download info
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:58.9508326Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.0837102Z Download action repository 'shivammathur/setup-php@2.40.0' (SHA:eb7c497e18156a6bbabfef1d3a82760b9eda3962)
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.5359556Z Uses: link-foundation/links-notation/.github/workflows/publish-php.yml@refs/heads/main (8ea4d6cca4bc08acaf69ad6927d9256ffc47a944)
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.5365152Z ##[group] Inputs
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.5366084Z   verbose: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.5366701Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.5367323Z Complete job name: release / php / publishToPackagist
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8478578Z ##[group]Run actions/checkout@v7.0.1
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8479349Z with:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8479784Z   persist-credentials: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8480506Z   submodules: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8481004Z   repository: link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8485481Z   token: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8485955Z   ssh-strict: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8486377Z   ssh-user: git
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8486784Z   clean: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8487239Z   sparse-checkout-cone-mode: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8487763Z   fetch-depth: 1
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8488179Z   fetch-tags: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8488616Z   show-progress: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8489041Z   lfs: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8489445Z   set-safe-directory: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8490073Z   allow-unsafe-pr-checkout: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8490779Z env:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8494915Z   GITHUB_TOKEN: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8495358Z   CI_VERBOSE: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:05:59.8495835Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1439556Z Syncing repository: link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1442110Z ##[group]Getting Git version info
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1443219Z Working directory is '/home/runner/work/links-notation/links-notation'
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1445103Z [command]/usr/bin/git version
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1461339Z git version 2.56.0
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1480576Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1489373Z Temporarily overriding HOME='/home/runner/work/_temp/0ce934d2-c9a7-4c6a-9b8c-b7479e22ac59' before making global git config changes
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1492800Z Adding repository directory to the temporary git global config as a safe directory
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1496795Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1559063Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1563591Z ##[group]Determining repository object format
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1565692Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1567092Z ##[group]Initializing the repository
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1571413Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1684381Z hint: Using 'master' as the name for the initial branch. This default branch name
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1686057Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1687518Z hint: to use in all of your new repositories, which will suppress this warning,
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1688491Z hint: call:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1689050Z hint:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1689729Z hint: 	git config --global init.defaultBranch <name>
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1691171Z hint:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1692063Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1693221Z hint: 'development'. The just-created branch can be renamed via this command:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1694090Z hint:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1694561Z hint: 	git branch -m <name>
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1695099Z hint:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1695876Z hint: Disable this message with "git config set advice.defaultBranchName false"
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1699272Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1711422Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1761443Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1762998Z ##[group]Disabling automatic garbage collection
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1764759Z [command]/usr/bin/git config --local gc.auto 0
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1802592Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1804682Z ##[group]Setting up auth
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1805897Z Removing SSH command configuration
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1807918Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.1837323Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.2357595Z Removing HTTP extra header
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.2364859Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.2386034Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.2610734Z Removing includeIf entries pointing to credentials config files
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.2615777Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.2646699Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.2878588Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.2913861Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.2943150Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.2975428Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.3004247Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.3035565Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.3036476Z ##[group]Fetching the repository
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:00.3042302Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8ea4d6cca4bc08acaf69ad6927d9256ffc47a944:refs/remotes/origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5709686Z From https://github.com/link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5711687Z  * [new ref]         8ea4d6cca4bc08acaf69ad6927d9256ffc47a944 -> origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5720821Z [command]/usr/bin/git branch --list --remote origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5746126Z   origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5752746Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5775067Z 8ea4d6cca4bc08acaf69ad6927d9256ffc47a944
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5784605Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5785228Z ##[group]Determining the checkout info
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5785834Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5786310Z [command]/usr/bin/git sparse-checkout disable
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5838029Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5867877Z ##[group]Checking out the ref
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.5873094Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8102789Z Switched to a new branch 'main'
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8274639Z branch 'main' set up to track 'origin/main'.
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8291344Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8292028Z ##[group]Setting up auth for fetching submodules
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8296073Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8339799Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8373429Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8399371Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8432417Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8460144Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8461015Z ##[group]Fetching submodules
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8463815Z [command]/usr/bin/git submodule sync
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8708590Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.8964472Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9193309Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9235442Z [command]/usr/bin/git log -1 --format=%H
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9257487Z 8ea4d6cca4bc08acaf69ad6927d9256ffc47a944
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9265875Z ##[group]Removing auth
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9266247Z Removing SSH command configuration
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9268928Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9301084Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9530515Z Removing HTTP extra header
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9534222Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9561280Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9787256Z Removing includeIf entries pointing to credentials config files
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9789337Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9812255Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9813671Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9814353Z includeif.gitdir:/github/workspace/.git.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9814876Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9820494Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9840748Z /home/runner/work/_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9850673Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-d17cded3\-1b4a\-4e45\-8d79\-96c7576e326e\.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9957381Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:01.9998886Z /home/runner/work/_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.0007404Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-d17cded3\-1b4a\-4e45\-8d79\-96c7576e326e\.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.0041536Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.0062065Z /github/runner_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.0070569Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-d17cded3\-1b4a\-4e45\-8d79\-96c7576e326e\.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.0105233Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.0124412Z /github/runner_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.0132184Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-d17cded3\-1b4a\-4e45\-8d79\-96c7576e326e\.config
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.0165554Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.0396715Z Removing credentials config '/home/runner/work/_temp/git-credentials-d17cded3-1b4a-4e45-8d79-96c7576e326e.config'
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.0407649Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.1805766Z ##[group]Run shivammathur/setup-php@2.40.0
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.1806218Z with:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.1806537Z   php-version: 8.5
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.1806794Z   extensions: mbstring
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.1807089Z   tools: composer:v2
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.1807319Z   ini-file: production
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.1809810Z   github-token: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.1810154Z env:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.1812453Z   GITHUB_TOKEN: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.1812683Z   CI_VERBOSE: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.1812923Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.2235651Z [command]/usr/bin/bash /home/runner/work/_actions/shivammathur/setup-php/2.40.0/src/scripts/run.sh
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.2697249Z 
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:02.2698295Z ^[[90;1m==> ^[[0m^[[37;1mSetup PHP^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.3034968Z ^[[32;1m✓ ^[[0m^[[34;1mPHP ^[[0m^[[90;1mUpdated to PHP 8.5.12^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.3038694Z 
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.3739076Z ^[[90;1m==> ^[[0m^[[37;1mSetup Extensions^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.3740492Z ^[[32;1m✓ ^[[0m^[[34;1mmbstring ^[[0m^[[90;1mEnabled^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.3740955Z 
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.3741146Z ^[[90;1m==> ^[[0m^[[37;1mSetup Tools^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.8957609Z ^[[32;1m✓ ^[[0m^[[34;1mcomposer ^[[0m^[[90;1mAdded composer 2.11.1^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.8962031Z 
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.8962400Z ^[[90;1m==> ^[[0m^[[37;1mSponsor setup-php^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.8963271Z ^[[32;1m✓ ^[[0m^[[34;1msetup-php ^[[0m^[[90;1mhttps://setup-php.com/sponsor^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9943483Z ##[group]Run set -euo pipefail
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9943856Z ^[[36;1mset -euo pipefail^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9944477Z ^[[36;1mPACKAGE_NAME=$(php -r 'echo json_decode(file_get_contents("composer.json"))->name;')^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9945066Z ^[[36;1mPACKAGE_VERSION=$(php -r 'echo json_decode(file_get_contents("composer.json"))->version;')^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9945546Z ^[[36;1mecho "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9945914Z ^[[36;1mecho "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9946274Z ^[[36;1mecho "Package: $PACKAGE_NAME@$PACKAGE_VERSION"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9946564Z ^[[36;1m^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9946806Z ^[[36;1mnode ../scripts/ci/php-distribution.mjs^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9947137Z ^[[36;1mexport PACKAGE_NAME PACKAGE_VERSION^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9947451Z ^[[36;1mnode ../scripts/ci/packagist-status.mjs^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9973807Z shell: /usr/bin/bash -e {0}
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9974098Z env:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9976569Z   GITHUB_TOKEN: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9976810Z   CI_VERBOSE: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9977058Z   COMPOSER_PROCESS_TIMEOUT: 0
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9977316Z   COMPOSER_NO_INTERACTION: 1
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9977560Z   COMPOSER_NO_AUDIT: 1
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:04.9977782Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:05.1041742Z Package: link-foundation/links-notation@0.28.0
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:05.5600858Z Root PHP distribution metadata matches the native package.
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6202347Z Packagist registration: false; publication needed: true
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6620516Z ##[group]Run set -euo pipefail
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6620878Z ^[[36;1mset -euo pipefail^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6621139Z ^[[36;1mif [ "true" != "true" ]; then^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6621449Z ^[[36;1m  echo "published=skipped" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6621920Z ^[[36;1m  echo "::notice::Version ${PACKAGE_VERSION} is already on Packagist, nothing to publish"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6622333Z ^[[36;1m  exit 0^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6622560Z ^[[36;1mfi^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6622758Z ^[[36;1m^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6623067Z ^[[36;1m# Packagist has no OIDC trusted publishing and it builds the package^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6623551Z ^[[36;1m# straight from this repository, so "publishing" is asking it to^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6624001Z ^[[36;1m# re-read the repository. That only works once the package has been^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6624445Z ^[[36;1m# submitted at https://packagist.org/packages/submit.^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6624840Z ^[[36;1mif [ "false" != "true" ]; then^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6625174Z ^[[36;1m  echo "published=failed" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6625849Z ^[[36;1m  echo "::error::${PACKAGE_NAME} is not registered on Packagist. Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created."^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6626468Z ^[[36;1m  exit 1^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6626668Z ^[[36;1mfi^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6626857Z ^[[36;1m^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6627145Z ^[[36;1mif [ -z "$PACKAGIST_TOKEN" ] || [ -z "$PACKAGIST_USERNAME" ]; then^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6627541Z ^[[36;1m  echo "published=failed" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6628145Z ^[[36;1m  echo "::error::PACKAGIST_USERNAME/PACKAGIST_TOKEN are not configured; skipping the Packagist update. No PHP release will be created."^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6628697Z ^[[36;1m  exit 1^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6628893Z ^[[36;1mfi^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6629120Z ^[[36;1mecho "Packagist credentials: present"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6629395Z ^[[36;1m^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6629662Z ^[[36;1mnode ../scripts/ci/ensure-php-version-tag.mjs^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6630133Z ^[[36;1mcurl -fsS -XPOST -H'content-type:application/json' \^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6630700Z ^[[36;1m  "https://packagist.org/api/update-package?username=${PACKAGIST_USERNAME}&apiToken=${PACKAGIST_TOKEN}" \^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6631241Z ^[[36;1m  -d"{\"repository\":{\"url\":\"${REPOSITORY_URL}\"}}"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6631588Z ^[[36;1mecho "published=true" >> "$GITHUB_OUTPUT"^[[0m
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6653511Z shell: /usr/bin/bash -e {0}
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6653784Z env:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6656499Z   GITHUB_TOKEN: ***
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6656731Z   CI_VERBOSE: false
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6656958Z   COMPOSER_PROCESS_TIMEOUT: 0
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6657222Z   COMPOSER_NO_INTERACTION: 1
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6657464Z   COMPOSER_NO_AUDIT: 1
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6657694Z   PACKAGIST_USERNAME: 
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6657915Z   PACKAGIST_TOKEN: 
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6658238Z   REPOSITORY_URL: https://github.com/link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6658631Z   PACKAGE_NAME: link-foundation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6658986Z   PACKAGE_VERSION: 0.28.0
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6659275Z   RELEASE_SHA: 8ea4d6cca4bc08acaf69ad6927d9256ffc47a944
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6659580Z ##[endgroup]
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6720676Z ##[error]link-foundation/links-notation is not registered on Packagist. Submit it once at https://packagist.org/packages/submit; until then no PHP release will be created.
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.6729061Z ##[error]Process completed with exit code 1.
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.7738784Z Post job cleanup.
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.8658906Z [command]/usr/bin/git version
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.8685212Z git version 2.56.0
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.8723711Z Temporarily overriding HOME='/home/runner/work/_temp/5927af98-b647-4db6-ad9a-897f478a787a' before making global git config changes
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.8724855Z Adding repository directory to the temporary git global config as a safe directory
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.8729391Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.8761415Z Removing SSH command configuration
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.8768015Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.8802360Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.9081406Z Removing HTTP extra header
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.9082766Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.9095833Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.9374390Z Removing includeIf entries pointing to credentials config files
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.9381292Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:06.9417249Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:07.0544182Z Evaluate and set job outputs
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:07.0606001Z Set output 'published'
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:07.0607463Z Set output 'version'
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:07.0608448Z Set output 'name'
+release / php / publishToPackagist	UNKNOWN STEP	2026-11-02T10:06:07.0609091Z Cleaning up orphan processes

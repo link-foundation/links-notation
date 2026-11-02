@@ -137,12 +137,19 @@ jobs:
       contents: write
       id-token: write
 
+  # Runs after a failed, skipped or cancelled release too, so main reports
+  # what is missing; release-result lets the audit name the failed stage
+  # instead of blaming credentials (issue #377). always(), not the usual
+  # !cancelled(), on purpose: this job only reads the registries, and a run
+  # cancelled mid-publication is a partial delivery the audit must report.
+  # scripts/ci/check-js-gate.mjs requires this exact condition.
   release_audit:
     needs: [js, rust, python, java, go, csharp, php, cpp, swift, kotlin, release]
     if: ${{ always() && needs.js.result == 'success' }}
     uses: ./.github/workflows/release-audit.yml
     with:
       verbose: ${{ inputs.verbose || false }}
+      release-result: ${{ needs.release.result }}
 
   js_check:
     name: JavaScript

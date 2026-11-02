@@ -27,6 +27,12 @@ EXCLUDED = {
     # has not built for many releases; see
     # experiments/issue-348/check-csharp-experiments.sh.
     ("nuget", "/experiments"): "historical, unbuildable debug_test.csproj",
+    # Reproduces a deprecation that KGP 2.4.21 triggers (issue #377, W3); a
+    # Dependabot bump to the fixed 2.5.0 would erase the reproduction.
+    (
+        "gradle",
+        "/experiments/issue-377/kgp-named-enum",
+    ): "reproduction pinned to KGP 2.4.21 on purpose",
 }
 
 

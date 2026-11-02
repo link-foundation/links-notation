@@ -1,0 +1,40 @@
+<Project DefaultTargets="Validate">
+  <UsingTask TaskName="ValidateNuspec" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)/Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <PackageFile ParameterType="System.String" Required="true" />
+      <ExpectedId ParameterType="System.String" Required="true" />
+      <ExpectedVersion ParameterType="System.String" Required="true" />
+      <ExpectedLicense ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.IO.Compression" />
+      <Using Namespace="System.Xml" />
+      <Using Namespace="System.Xml.Linq" />
+      <Using Namespace="System.Linq" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        using (var zip = ZipFile.OpenRead(PackageFile)) {
+          var spec = zip.Entries.Single(e => e.FullName.EndsWith(".nuspec"));
+          using (var stream = spec.Open())
+          using (var reader = XmlReader.Create(stream, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit, XmlResolver = null })) {
+            var doc = XDocument.Load(reader);
+            var ns = doc.Root.Name.Namespace;
+            var metadata = doc.Root.Element(ns + "metadata");
+            var license = metadata?.Element(ns + "license");
+            if (doc.Root.Name.LocalName != "package" || metadata == null ||
+                (string)metadata.Element(ns + "id") != ExpectedId ||
+                (string)metadata.Element(ns + "version") != ExpectedVersion ||
+                string.IsNullOrWhiteSpace((string)metadata.Element(ns + "authors")) ||
+                string.IsNullOrWhiteSpace((string)metadata.Element(ns + "description")) ||
+                (string)license != ExpectedLicense || (string)license.Attribute("type") != "expression") {
+              Log.LogError("Generated package identity/version/license/required metadata mismatch.");
+              return false;
+            }
+          }
+        }
+      ]]></Code>
+    </Task>
+  </UsingTask>
+  <Target Name="Validate">
+    <ValidateNuspec PackageFile="$(PackageFile)" ExpectedId="$(ExpectedId)" ExpectedVersion="$(ExpectedVersion)" ExpectedLicense="$(ExpectedLicense)" />
+  </Target>
+</Project>

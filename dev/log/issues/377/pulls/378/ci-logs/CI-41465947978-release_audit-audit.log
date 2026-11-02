@@ -1,0 +1,223 @@
+release_audit / audit	UNKNOWN STEP	﻿2026-11-02T14:57:15.8974371Z Current runner version: '2.338.2'
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.8999995Z ##[group]Runner Image Provisioner
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9000949Z Hosted Compute Agent
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9001657Z Version: 20261021.618
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9002319Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9003064Z Build Date: 2026-10-21T00:45:21Z
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9003890Z Worker ID: {47ff733e-095f-48bb-b17c-21d18ed68457}
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9004640Z Region: westus
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9005237Z Cloud: Azure
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9005842Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9007395Z ##[group]Operating System
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9008570Z Ubuntu
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9009126Z 26.04.1
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9009688Z LTS
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9010236Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9010801Z ##[group]Runner Image
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9011498Z Image: ubuntu-26.04
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9012089Z Version: 20261025.179.1
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9013443Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9015076Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9016176Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9017402Z ##[group]GITHUB_TOKEN Permissions
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9019680Z Contents: read
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9020354Z Metadata: read
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9021046Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9023132Z Secret source: Actions
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9024544Z Cache mode: write
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9025320Z Prepare workflow directory
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9421942Z Prepare all required actions
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:15.9483101Z Getting action download info
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.3216289Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.4190190Z Download action repository 'actions/setup-node@v7.1.0' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.4803132Z Download action repository 'actions/upload-artifact@v7.0.2' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.6430766Z Uses: link-foundation/links-notation/.github/workflows/release-audit.yml@refs/heads/main (be05f2c0643bde006256832384a409c78d72ae93)
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.6435720Z ##[group] Inputs
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.6436636Z   verbose: false
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.6437126Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.6437617Z Complete job name: release_audit / audit
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7332234Z ##[group]Run actions/checkout@v7.0.1
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7333186Z with:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7333649Z   persist-credentials: false
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7334224Z   repository: link-foundation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7338497Z   token: ***
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7338961Z   ssh-strict: true
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7339409Z   ssh-user: git
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7339861Z   clean: true
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7340318Z   sparse-checkout-cone-mode: true
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7340905Z   fetch-depth: 1
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7341345Z   fetch-tags: false
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7341801Z   show-progress: true
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7342279Z   lfs: false
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7342746Z   submodules: false
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7343207Z   set-safe-directory: true
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7343739Z   allow-unsafe-pr-checkout: false
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.7344620Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9820684Z Syncing repository: link-foundation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9824267Z ##[group]Getting Git version info
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9826022Z Working directory is '/home/runner/work/links-notation/links-notation'
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9828720Z [command]/usr/bin/git version
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9856922Z git version 2.56.0
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9881422Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9894154Z Temporarily overriding HOME='/home/runner/work/_temp/ea7a96a9-94b7-4d7e-914b-12d01df4cf7b' before making global git config changes
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9896969Z Adding repository directory to the temporary git global config as a safe directory
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9902028Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9984960Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9991839Z ##[group]Determining repository object format
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9993950Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:16.9995502Z ##[group]Initializing the repository
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0000324Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0104930Z hint: Using 'master' as the name for the initial branch. This default branch name
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0107126Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0109302Z hint: to use in all of your new repositories, which will suppress this warning,
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0110641Z hint: call:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0111561Z hint:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0112388Z hint: 	git config --global init.defaultBranch <name>
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0113371Z hint:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0114225Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0116017Z hint: 'development'. The just-created branch can be renamed via this command:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0119160Z hint:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0120028Z hint: 	git branch -m <name>
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0120562Z hint:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0121232Z hint: Disable this message with "git config set advice.defaultBranchName false"
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0122325Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0136552Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0195754Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0197871Z ##[group]Disabling automatic garbage collection
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0202306Z [command]/usr/bin/git config --local gc.auto 0
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0244981Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0246869Z ##[group]Setting up auth
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0248333Z Removing SSH command configuration
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0252973Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0299445Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0778750Z Removing HTTP extra header
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0786015Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.0832896Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.1113997Z Removing includeIf entries pointing to credentials config files
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.1119748Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.1156447Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.1446783Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-84371cce-8e95-4e4f-a5ea-51c4da90af73.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.1486481Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-84371cce-8e95-4e4f-a5ea-51c4da90af73.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.1519111Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-84371cce-8e95-4e4f-a5ea-51c4da90af73.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.1555588Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-84371cce-8e95-4e4f-a5ea-51c4da90af73.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.1589831Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-84371cce-8e95-4e4f-a5ea-51c4da90af73.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.1622500Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.1623280Z ##[group]Fetching the repository
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:17.1629191Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +be05f2c0643bde006256832384a409c78d72ae93:refs/remotes/origin/main
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2826267Z From https://github.com/link-foundation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2828949Z  * [new ref]         be05f2c0643bde006256832384a409c78d72ae93 -> origin/main
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2837221Z [command]/usr/bin/git branch --list --remote origin/main
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2869195Z   origin/main
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2878033Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2902973Z be05f2c0643bde006256832384a409c78d72ae93
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2908646Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2910075Z ##[group]Determining the checkout info
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2911986Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2913253Z [command]/usr/bin/git sparse-checkout disable
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2963185Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.2998118Z ##[group]Checking out the ref
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.3000171Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5421337Z Switched to a new branch 'main'
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5424089Z branch 'main' set up to track 'origin/main'.
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5445534Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5497505Z [command]/usr/bin/git log -1 --format=%H
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5525245Z be05f2c0643bde006256832384a409c78d72ae93
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5536227Z ##[group]Removing auth
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5536992Z Removing SSH command configuration
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5541107Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5577222Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5860019Z Removing HTTP extra header
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5864098Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.5900192Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6179968Z Removing includeIf entries pointing to credentials config files
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6187411Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6213262Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6214696Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6215829Z includeif.gitdir:/github/workspace/.git.path
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6216653Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6223467Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6248901Z /home/runner/work/_temp/git-credentials-84371cce-8e95-4e4f-a5ea-51c4da90af73.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6259815Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-84371cce\-8e95\-4e4f\-a5ea\-51c4da90af73\.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6296791Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6322414Z /home/runner/work/_temp/git-credentials-84371cce-8e95-4e4f-a5ea-51c4da90af73.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6339566Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-84371cce\-8e95\-4e4f\-a5ea\-51c4da90af73\.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6378462Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6404025Z /github/runner_temp/git-credentials-84371cce-8e95-4e4f-a5ea-51c4da90af73.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6413543Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-84371cce\-8e95\-4e4f\-a5ea\-51c4da90af73\.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6450123Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6474321Z /github/runner_temp/git-credentials-84371cce-8e95-4e4f-a5ea-51c4da90af73.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6484062Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-84371cce\-8e95\-4e4f\-a5ea\-51c4da90af73\.config
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6519759Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6797619Z Removing credentials config '/home/runner/work/_temp/git-credentials-84371cce-8e95-4e4f-a5ea-51c4da90af73.config'
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.6808953Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.7163098Z ##[group]Run actions/setup-node@v7.1.0
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.7163493Z with:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.7163744Z   node-version: 24
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.7164012Z   check-latest: false
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.7166796Z   token: ***
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.7167079Z   package-manager-cache: true
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.7167388Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.8515760Z Found in cache @ /opt/hostedtoolcache/node/24.22.1/x64
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:18.9172321Z ##[group]Environment details
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.2985183Z node: v24.22.1
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.2986092Z npm: 11.19.1
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.2986445Z yarn: 1.22.22
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.2988793Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.3174902Z ##[group]Run node scripts/release-audit.mjs
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.3175415Z ^[[36;1mnode scripts/release-audit.mjs^[[0m
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.3218119Z shell: /usr/bin/bash -e {0}
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.3218461Z env:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.3218705Z   CI_VERBOSE: false
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.3218997Z   AUDIT_EXPECT_PUBLISHED: true
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.3219408Z   AUDIT_REPORT: /home/runner/work/_temp/registry-audit.json
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.3223278Z   GH_TOKEN: ***
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.3223566Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.6269353Z ##[error]js: 0.29.0 is absent from npm. To publish it, configure npm trusted publishing for js.yml or the NPM_TOKEN secret, then re-run the main CI run (docs/releases.md).
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.7705597Z ##[error]python: 0.29.0 is absent from PyPI. To publish it, configure PyPI trusted publishing for js.yml with PYPI_TRUSTED_PUBLISHING=true, or the PYPI_TOKEN secret, then re-run the main CI run (docs/releases.md).
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:19.8619612Z ##[error]rust: 0.29.0 is absent from crates.io. To publish it, configure crates.io trusted publishing for js.yml with CRATES_IO_TRUSTED_PUBLISHING=true, or the CARGO_TOKEN secret, then re-run the main CI run (docs/releases.md).
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:20.0338877Z ##[error]csharp: 0.29.0 is absent from NuGet. To publish it, configure the NUGET_API_KEY secret, then re-run the main CI run (docs/releases.md).
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:21.2391626Z ##[error]go: 0.29.0 is absent from Go proxy. To publish it, check the publish-go log for the go/v0.29.0 tag push, then re-run the main CI run (docs/releases.md).
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:21.7802236Z ##[error]java: 0.29.0 is absent from Maven Central. To publish it, configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace, then re-run the main CI run (docs/releases.md).
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.1715701Z ##[error]php: 0.29.0 is absent from Packagist. To publish it, submit the repository once at https://packagist.org/packages/submit and configure the PACKAGIST_USERNAME and PACKAGIST_TOKEN secrets, then re-run the main CI run (docs/releases.md).
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.3742814Z ##[error]cpp: 0.29.0 is absent from GitHub Releases. To publish it, check the publish-cpp log for the cpp_0.29.0 release upload, then re-run the main CI run (docs/releases.md).
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.4995124Z ##[error]swift: 0.29.0 is absent from GitHub tags (SwiftPM). To publish it, check the publish-swift log for the 0.29.0 tag, then re-run the main CI run (docs/releases.md).
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5008141Z 9 languages audited; 9 delivery failure(s).
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5141668Z ##[error]Process completed with exit code 1.
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5234312Z ##[group]Run actions/upload-artifact@v7.0.2
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5234637Z with:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5234850Z   name: registry-audit-41465947978
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5235155Z   path: /home/runner/work/_temp/registry-audit.json
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5235467Z   if-no-files-found: warn
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5235707Z   compression-level: 6
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5235948Z   overwrite: false
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5236169Z   include-hidden-files: false
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5236419Z   archive: true
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.5236612Z ##[endgroup]
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.6759141Z With the provided path, there will be 1 file uploaded
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.6761119Z Artifact name is valid!
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:22.6761783Z Root directory input is valid!
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:23.0841699Z Uploading artifact: registry-audit-41465947978.zip
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:23.0883620Z Beginning upload of artifact content to blob storage
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:23.3835953Z Uploaded bytes 699
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:23.4555509Z Finished uploading artifact content to blob storage!
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:23.4558118Z SHA256 digest of uploaded artifact is 939243439c1be96479cc3a4108c86ae0869e911dff4d2675d48d5b759c874e6c
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:23.4560236Z Finalizing artifact upload
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.0957395Z Artifact registry-audit-41465947978 successfully finalized. Artifact ID 13151137794
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.0959555Z Artifact registry-audit-41465947978 has been successfully uploaded! Final size is 699 bytes. Artifact ID is 13151137794
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.0962317Z Artifact download URL: https://github.com/link-foundation/links-notation/actions/runs/41465947978/artifacts/13151137794
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.1175404Z Post job cleanup.
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2035636Z [command]/usr/bin/git version
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2093927Z git version 2.56.0
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2134278Z Temporarily overriding HOME='/home/runner/work/_temp/cecaf0d3-9fc8-4100-ad33-edd1878b5b97' before making global git config changes
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2135771Z Adding repository directory to the temporary git global config as a safe directory
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2140325Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2176135Z Removing SSH command configuration
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2182945Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2232664Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2532620Z Removing HTTP extra header
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2538425Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2580322Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2911246Z Removing includeIf entries pointing to credentials config files
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2918066Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.2952828Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+release_audit / audit	UNKNOWN STEP	2026-11-02T14:57:24.3391870Z Cleaning up orphan processes

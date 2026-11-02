@@ -17,7 +17,10 @@
 
 import { stripComments } from './comments.js';
 import { DelimitedReferences, QUOTES } from './quotes.js';
-import { decodeReferenceLiteral } from './ReferenceLiteral.js';
+import {
+  decodeReferenceLiteral,
+  referenceLiteralEnd as literalEnd,
+} from './ReferenceLiteral.js';
 
 /** The kinds of nodes and tokens of a concrete syntax tree. */
 export const CstKind = Object.freeze({
@@ -131,28 +134,6 @@ function quoteText(text) {
   return `"${text.replace(/[\\"\n\r\t]/g, (character) => ESCAPES[character])}"`;
 }
 
-/** What a versioned literal's payload cannot contain. */
-const LITERAL_PAYLOAD_END = new Set(['}', ' ', '\t', '\r', '\n', '(', ')']);
-
-/**
- * Where the versioned literal `~<digits>{<payload>}` that starts at `start`
- * ends, or -1 if none starts there. A single forward scan, so it stays linear
- * on any input (a regular expression here was flagged as a ReDoS risk).
- */
-function literalEnd(text, start) {
-  if (text[start] !== '~') return -1;
-  let index = start + 1;
-  while (index < text.length && text[index] >= '0' && text[index] <= '9') {
-    index++;
-  }
-  if (index === start + 1 || text[index] !== '{') return -1;
-  index++;
-  while (index < text.length && !LITERAL_PAYLOAD_END.has(text[index])) {
-    index++;
-  }
-  return text[index] === '}' ? index + 1 : -1;
-}
-
 /** What ends a bare reference. */
 const BARE_REFERENCE_END = new Set([' ', '\t', '\r', '\n', '(', ':', ')']);
 
@@ -164,10 +145,12 @@ const BARE_REFERENCE_END = new Set([' ', '\t', '\r', '\n', '(', ':', ')']);
  * @returns {CstNode} The `document` node
  */
 export function buildCst(input, { comments = true } = {}) {
-  // References are read in the document the grammar reads: the one with its
-  // comments blanked, which keeps every position of the one written.
+  // Tokens end where they end in the document the grammar reads: the one with
+  // its comments blanked, which keeps every position of the one written.
+  // Delimited references are read, as the grammar reads them, in the document
+  // as written, so a comment never changes what a reference holds.
   const prepared = comments ? stripComments(input) : input;
-  const references = new DelimitedReferences(prepared);
+  const references = new DelimitedReferences(input);
   const document = new CstNode(CstKind.DOCUMENT);
   // The open containers, innermost last, each with the line being filled.
   const containers = [{ node: document, line: null }];

@@ -13,12 +13,15 @@ still points at what the reader can see.
 """
 
 from .quotes import QUOTE_CHARS, _parse_quoted_string_at
+from .reference_literal import reference_literal_end
 
 #: The character that starts a comment.
 COMMENT = "#"
 
-#: What a delimited reference may start after.
-BEFORE_REFERENCE = (" ", "\t", "\n", "\r", "(", ":")
+#: What ends a token, so that what follows it starts a new one. A delimited
+#: reference or a literal may start at the start of any token, and also right
+#: after a delimited reference or a literal, as the parser reads them.
+SEPARATORS = (" ", "\t", "\n", "\r", "(", ":", ")")
 
 #: What a comment may start after.
 BEFORE_COMMENT = (" ", "\t", "\n", "\r")
@@ -28,7 +31,9 @@ def strip_comments(document: str) -> str:
     """
     Return ``document`` with every comment blanked out.
 
-    The result has the same length as the document it was given.
+    The result has the same length as the document it was given. Tokens are
+    read as the parser reads them, so a ``#`` inside a delimited reference that
+    follows a group, another reference or a literal stays content (issue #377).
 
     >>> strip_comments("a: b # why\\n")
     'a: b      \\n'
@@ -36,17 +41,15 @@ def strip_comments(document: str) -> str:
     '"# kept"\\n'
     >>> strip_comments("issue#1047\\n")
     'issue#1047\\n'
+    >>> strip_comments('(a)" #b"\\n')
+    '(a)" #b"\\n'
     """
     blanked = None
     position = 0
+    token_start = True
 
     while position < len(document):
         char = document[position]
-
-        if char in QUOTE_CHARS and _follows(document, position, BEFORE_REFERENCE):
-            parsed = _parse_quoted_string_at(document, position)
-            position = position + 1 if parsed is None else parsed[1]
-            continue
 
         if char == COMMENT and _follows(document, position, BEFORE_COMMENT):
             if blanked is None:
@@ -56,9 +59,37 @@ def strip_comments(document: str) -> str:
                 position += 1
             continue
 
+        if char in SEPARATORS:
+            token_start = True
+            position += 1
+            continue
+
+        if token_start:
+            end = delimited_token_end(document, position)
+            if end is not None:
+                position = end
+                continue
+
+        token_start = False
         position += 1
 
     return document if blanked is None else "".join(blanked)
+
+
+def delimited_token_end(document: str, start: int):
+    """
+    Where the versioned literal or delimited reference that starts at ``start``
+    ends, or None when neither can be read there. What follows one starts a new
+    token.
+    """
+    literal = reference_literal_end(document, start)
+    if literal != -1:
+        return literal
+    if document[start] in QUOTE_CHARS:
+        parsed = _parse_quoted_string_at(document, start)
+        if parsed is not None:
+            return parsed[1]
+    return None
 
 
 def _follows(document: str, position: int, allowed) -> bool:

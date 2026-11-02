@@ -1,0 +1,55 @@
+# Pre-commit hooks configuration
+# See https://pre-commit.com for more information
+
+repos:
+  # Standard pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^(\.git|target)/
+      - id: end-of-file-fixer
+        exclude: ^(\.git|target)/
+      - id: check-yaml
+      - id: check-xml
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: detect-private-key
+
+  # Local hooks for Java
+  - repo: local
+    hooks:
+      # Spotless formatting check
+      - id: spotless-check
+        name: Spotless Format Check
+        entry: mvn spotless:check -B -q
+        language: system
+        types: [java]
+        pass_filenames: false
+
+      # Maven compile check
+      - id: maven-compile
+        name: Maven Compile
+        entry: mvn compile -B -q
+        language: system
+        types: [java]
+        pass_filenames: false
+
+      # Maven test
+      - id: maven-test
+        name: Maven Test
+        entry: mvn test -B -q
+        language: system
+        types: [java]
+        pass_filenames: false
+        stages: [pre-push]
+
+      # File size check
+      - id: file-size-check
+        name: File Size Check
+        entry: node scripts/check-file-size.mjs
+        language: system
+        types: [java]
+        pass_filenames: false

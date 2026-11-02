@@ -50,6 +50,9 @@ jobs:
       pull-requests: write
       checks: read
       statuses: read
+      # A GITHUB_TOKEN merge starts no push workflow on main, so the script
+      # dispatches them (issue #377).
+      actions: write
     steps:
       # For workflow_run and schedule, github.sha is the latest commit on
       # the default branch, never the pull request's head.
@@ -63,8 +66,10 @@ jobs:
       - name: Test the merge planner without network access
         run: python experiments/issue-350/test_merge_dependabot.py
       # GITHUB_TOKEN can merge, but its merges do not start the push
-      # workflows on main and it cannot update a pull request branch without
-      # a maintainer approving the new runs. A token with the `repo` and
+      # workflows on main (the script dispatches them instead: a
+      # workflow_dispatch is the one event GITHUB_TOKEN may start runs with)
+      # and it cannot update a pull request branch without a maintainer
+      # approving the new runs. A token with the `repo` and
       # `workflow` scopes in the DEPENDABOT_AUTO_MERGE_TOKEN Actions secret
       # does both; without it, behind pull requests get an
       # `@dependabot rebase` comment instead.

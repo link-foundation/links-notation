@@ -26,12 +26,16 @@ use std::collections::HashMap;
 /// The characters a reference can be written between.
 pub(crate) const QUOTES: [u8; 3] = *b"\"'`";
 
-/// What a delimited reference holds, and how many bytes of the document it
-/// takes.
+/// What a delimited reference holds, how many bytes of the document it takes,
+/// and whether a run of delimiters closes it.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct Reading {
     pub(crate) value: String,
     pub(crate) length: usize,
+    /// Whether a run closes the reference. An even run nothing closes is the
+    /// empty reference, until a closing run is written after it, which turns it
+    /// into one holding what follows: a stream must wait for that run.
+    pub(crate) closed: bool,
 }
 
 /// Every delimited reference of one document, read on demand.
@@ -128,12 +132,17 @@ pub(crate) fn read_reference(rest: &str) -> Option<Reading> {
 /// The reading of a reference opened by `count` delimiters at the start of
 /// `rest`, closed by the run that ends at `end` when there is one.
 fn reading(rest: &str, quote: u8, count: usize, end: Option<usize>) -> Option<Reading> {
-    let empty_reference = count.is_multiple_of(2).then(|| Reading {
-        value: String::new(),
-        length: count,
-    });
+    let empty_reference = |closed| {
+        count.is_multiple_of(2).then(|| Reading {
+            value: String::new(),
+            length: count,
+            closed,
+        })
+    };
     let Some(end) = end else {
-        return empty_reference;
+        // Nothing closes the run: an even one is the empty reference, which a
+        // later closing run would still turn into one holding what follows.
+        return empty_reference(false);
     };
 
     let body = &rest[count..end];
@@ -157,10 +166,14 @@ fn reading(rest: &str, quote: u8, count: usize, end: Option<usize>) -> Option<Re
         position = start + length;
     }
 
-    if empty_reference.is_some() && !is_substantive_body(&value) {
-        return empty_reference;
+    if count.is_multiple_of(2) && !is_substantive_body(&value) {
+        return empty_reference(true);
     }
-    Some(Reading { value, length: end })
+    Some(Reading {
+        value,
+        length: end,
+        closed: true,
+    })
 }
 
 /// The number of `quote` delimiters in a row from `start` of `text`.

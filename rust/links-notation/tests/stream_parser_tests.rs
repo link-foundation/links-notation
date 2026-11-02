@@ -93,3 +93,19 @@ fn rejects_writes_after_finish() {
 
     assert!(stream.write("two").is_err());
 }
+
+#[test]
+fn waits_for_the_line_that_closes_an_even_run_of_quotes() {
+    // `""` is the empty reference only when nothing closes it, and here the
+    // next line does, so the first line cannot be emitted on its own (#377).
+    let input = "a \"\" b\n\"\" c\n";
+    let mut stream = StreamParser::new();
+    for character in input.chars() {
+        assert!(stream.write(&character.to_string()).unwrap().is_empty());
+    }
+
+    assert_eq!(
+        format_links(&stream.finish().unwrap()),
+        format_links(&parse_lino_to_links(input).unwrap())
+    );
+}

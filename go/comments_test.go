@@ -165,3 +165,41 @@ func TestAHashThatCannotOpenACommentIsLeftUnquoted(t *testing.T) {
 		}
 	}
 }
+
+// Issue #377: the comment reader and the parser must agree on where every
+// delimited reference starts and how far it reaches, or a comment is blanked
+// inside what the parser then reads as a reference.
+
+func TestAHashInsideAReferenceThatFollowsAGroupIsContent(t *testing.T) {
+	assertParsesAs(t, "(a)\" #b\"\n", "((<a>) < #b>)")
+}
+
+func TestAHashInsideAReferenceThatFollowsAnotherReferenceIsContent(t *testing.T) {
+	assertParsesAs(t, "\"x\"' #y'\n", "(<x> < #y>)")
+	assertParsesAs(t, "```q```\"\" #c\n\"\"\"\n", "(<q> < #c\n\">)")
+}
+
+func TestAHashInsideAReferenceThatFollowsALiteralIsContent(t *testing.T) {
+	assertParsesAs(t, "~1{62}\" #b\"\n", "(<b> < #b>)")
+}
+
+func TestAReferenceIsReadInTheDocumentAsWrittenCommentsIncluded(t *testing.T) {
+	// The body of the first "" straddles a parenthesis, so it is the empty
+	// reference and the # after it opens a comment. Blanking that comment must
+	// not turn the "" into a reference that holds the blanked text.
+	assertParsesAs(t, "\"\" a #)b\n\"\"\n", "(<> <a>)\n(<>)")
+}
+
+func TestTheCommentReaderSkipsTheReferencesTheParserReads(t *testing.T) {
+	cases := map[string]string{
+		"(a)\" #b\"\n":    "(a)\" #b\"\n",
+		"\"x\"' #y'\n":    "\"x\"' #y'\n",
+		"~1{62}\" #b\"\n": "~1{62}\" #b\"\n",
+		"a\"b #c\"\n":     "a\"b    \n",
+	}
+	for document, expected := range cases {
+		if got := StripComments(document); got != expected {
+			t.Errorf("StripComments(%q) = %q, want %q", document, got, expected)
+		}
+	}
+}

@@ -36,9 +36,10 @@ def _is_substantive_body(content: str) -> bool:
     return has_visible and depth == 0
 
 
-def _parse_quoted_string_at(text: str, start: int) -> Optional[tuple]:
+def _parse_quoted_string_at(text: str, start: int, stop: Optional[int] = None) -> Optional[tuple]:
     """
-    Parse the delimited reference that starts at ``start``.
+    Parse the delimited reference that starts at ``start``, reading no further
+    than ``stop`` (the end of ``text`` by default).
 
     Any number N of quotes opens and closes the string, 2*N quotes are an
     escaped quote sequence. A run of an even number of delimiters that does not
@@ -50,7 +51,8 @@ def _parse_quoted_string_at(text: str, start: int) -> Optional[tuple]:
     right after the closing quotes, or ``None`` when ``text`` does not start a
     delimited reference.
     """
-    if start >= len(text):
+    limit = len(text) if stop is None else stop
+    if start >= limit:
         return None
 
     quote_char = text[start]
@@ -59,7 +61,7 @@ def _parse_quoted_string_at(text: str, start: int) -> Optional[tuple]:
 
     quote_count = 0
     pos = start
-    while pos < len(text) and text[pos] == quote_char:
+    while pos < limit and text[pos] == quote_char:
         quote_count += 1
         pos += 1
 
@@ -70,14 +72,14 @@ def _parse_quoted_string_at(text: str, start: int) -> Optional[tuple]:
     escape_seq = quote_char * (quote_count * 2)
     content = []
 
-    while pos < len(text):
-        if text.startswith(escape_seq, pos):
+    while pos < limit:
+        if text.startswith(escape_seq, pos, limit):
             content.append(open_close)
             pos += len(escape_seq)
             continue
-        if text.startswith(open_close, pos):
+        if text.startswith(open_close, pos, limit):
             after_close = pos + quote_count
-            if after_close >= len(text) or text[after_close] != quote_char:
+            if after_close >= limit or text[after_close] != quote_char:
                 value = "".join(content)
                 if is_even_run and not _is_substantive_body(value):
                     return empty_reference
@@ -86,6 +88,29 @@ def _parse_quoted_string_at(text: str, start: int) -> Optional[tuple]:
         pos += 1
 
     return empty_reference
+
+
+def _closing_run_follows(text: str, start: int) -> bool:
+    """
+    Report whether a run of delimiters after the one opening at ``start``
+    closes it. An even run nothing closes is the empty reference, until a
+    closing run is written after it.
+    """
+    quote_char = text[start]
+    count = 0
+    while start + count < len(text) and text[start + count] == quote_char:
+        count += 1
+    pos = start + count
+    while True:
+        pos = text.find(quote_char, pos)
+        if pos < 0:
+            return False
+        length = 0
+        while pos + length < len(text) and text[pos + length] == quote_char:
+            length += 1
+        if (length // count) % 2 == 1:
+            return True
+        pos += length
 
 
 def reference_quote(raw: Optional[str]) -> Optional[str]:

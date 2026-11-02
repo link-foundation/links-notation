@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "my-package",
+  "version": "0.2.2",
+  "description": "Example header-only C++ library of the AI-driven development pipeline template",
+  "homepage": "https://github.com/link-foundation/cpp-ai-driven-development-pipeline-template",
+  "license": "Unlicense",
+  "builtin-baseline": "07f4812200df3d3c931c0c8a6081d3b21fe2bf9f",
+  "features": {
+    "tests": {
+      "description": "Build the unit tests",
+      "dependencies": ["gtest"]
+    },
+    "benchmarks": {
+      "description": "Build the benchmarks",
+      "dependencies": ["benchmark"]
+    }
+  }
+}

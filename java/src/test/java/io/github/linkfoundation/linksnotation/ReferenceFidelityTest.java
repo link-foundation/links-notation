@@ -16,11 +16,10 @@ class ReferenceFidelityTest {
   private List<String> fixtures() throws Exception {
     return Files.readAllLines(Path.of("../docs/protocol/reference-literals.txt")).stream()
         .filter(line -> !line.startsWith("#"))
-        .map(
-            line ->
-                line.equals("-")
-                    ? ""
-                    : new String(HexFormat.of().parseHex(line), StandardCharsets.UTF_8))
+        .map(line ->
+            line.equals("-")
+                ? ""
+                : new String(HexFormat.of().parseHex(line), StandardCharsets.UTF_8))
         .toList();
   }
 

@@ -104,7 +104,7 @@ jobs:
           path: ./
           # The action ref pins the wrapper; this pins the scanner itself,
           # which otherwise resolves to the `latest` image on every run.
-          version: 3.99.2
+          version: 3.99.7
           # --results=verified only reports credentials that the issuing
           # service confirmed are live, which is what makes this safe to fail
           # the build on. Do not add --no-update here: the action already
@@ -133,6 +133,30 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '24'
+      # moderate, not high: the minimatch (GHSA-g3hv-75wg-m249) and glob
+      # (GHSA-3g3m-2fjr-6pw4) advisories are moderate, and at high they stayed
+      # open Dependabot alerts that no run reported (issue #377).
       - name: Audit the committed lockfile
         working-directory: ${{ matrix.directory }}
-        run: npm audit --package-lock-only --audit-level=high
+        run: npm audit --package-lock-only --audit-level=moderate
+
+  # The Kotlin/JS plugin's yarn.lock has no package.json beside it, so neither
+  # npm audit nor Dependabot's security updates can read it (issue #377).
+  yarnAudit:
+    name: Audit Kotlin/JS yarn lock
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    concurrency:
+      group: ci-security-${{ github.ref }}-yarn-audit
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+      - name: Test the yarn lock audit
+        run: node --test experiments/issue-377/audit-yarn-lock.test.mjs
+      - name: Audit the committed lockfile
+        run: node scripts/ci/audit-yarn-lock.mjs kotlin/kotlin-js-store/yarn.lock --audit-level=moderate

@@ -193,5 +193,46 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Equal("'#'", Link<string>.EscapeReference("#"));
             Assert.Equal("'#ff0000'", Link<string>.EscapeReference("#ff0000"));
         }
+
+        // Issue #377: the comment reader and the grammar must agree on where every
+        // delimited reference starts and how far it reaches, or a comment is blanked
+        // inside what the grammar then reads as a reference.
+
+        [Fact]
+        public static void AHashInsideAReferenceThatFollowsAGroupIsContent()
+        {
+            AssertParsesAs("(a)\" #b\"\n", "((<a>) < #b>)");
+        }
+
+        [Fact]
+        public static void AHashInsideAReferenceThatFollowsAnotherReferenceIsContent()
+        {
+            AssertParsesAs("\"x\"' #y'\n", "(<x> < #y>)");
+            AssertParsesAs("```q```\"\" #c\n\"\"\"\n", "(<q> < #c\n\">)");
+        }
+
+        [Fact]
+        public static void AHashInsideAReferenceThatFollowsALiteralIsContent()
+        {
+            AssertParsesAs("~1{62}\" #b\"\n", "(<b> < #b>)");
+        }
+
+        [Fact]
+        public static void AReferenceIsReadInTheDocumentAsWrittenCommentsIncluded()
+        {
+            // The body of the first `""` straddles a parenthesis, so it is the empty
+            // reference and the `#` after it opens a comment. Blanking that comment must
+            // not turn the `""` into a reference that holds the blanked text.
+            AssertParsesAs("\"\" a #)b\n\"\"\n", "(<> <a>)\n(<>)");
+        }
+
+        [Fact]
+        public static void TheCommentReaderSkipsTheReferencesTheGrammarReads()
+        {
+            Assert.Equal("(a)\" #b\"\n", Comments.StripComments("(a)\" #b\"\n"));
+            Assert.Equal("\"x\"' #y'\n", Comments.StripComments("\"x\"' #y'\n"));
+            Assert.Equal("~1{62}\" #b\"\n", Comments.StripComments("~1{62}\" #b\"\n"));
+            Assert.Equal("a\"b    \n", Comments.StripComments("a\"b #c\"\n"));
+        }
     }
 }

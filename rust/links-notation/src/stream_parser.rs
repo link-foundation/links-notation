@@ -1,6 +1,7 @@
 //! Incremental parsing for long-lived Links Notation streams.
 
-use crate::quotes::DelimitedReferences;
+use crate::quotes::{DelimitedReferences, QUOTES};
+use crate::reference_literal::reference_literal_end;
 use crate::{
     LiNo, ParseError, ParserConfig, SyntaxReference, parse_lino_to_links_with_config,
     parse_lino_to_syntax_links_with_config,
@@ -9,7 +10,8 @@ use std::collections::VecDeque;
 use std::fmt;
 
 const DEFAULT_MAX_BUFFER_SIZE: usize = 10 * 1024 * 1024;
-const BEFORE_REFERENCE: &[u8] = b" \t\n\r(:";
+/// What ends a bare reference, so that a token starts after it.
+const SEPARATORS: &[u8] = b" \t\n\r(:)";
 const BEFORE_COMMENT: &[u8] = b" \t\n\r";
 
 /// The point immediately after the last character written to a stream parser.
@@ -518,36 +520,52 @@ fn follows(document: &[u8], position: usize, allowed: &[u8]) -> bool {
 }
 
 fn structurally_complete(document: &str, comments: bool) -> bool {
+    // Tokens are read as the comment reader and the parser read them: a
+    // reference may start after a separator, and right after a delimited
+    // reference or a literal (issue #377).
     let bytes = document.as_bytes();
     let references = DelimitedReferences::new(document);
     let mut position = 0;
     let mut depth = 0_isize;
+    let mut token_start = true;
 
     while position < bytes.len() {
-        let character = document[position..]
-            .chars()
-            .next()
-            .expect("position is a character boundary");
-        if matches!(character, '"' | '\'' | '`') && follows(bytes, position, BEFORE_REFERENCE) {
-            let Some(end) = references.end_at(document, position) else {
-                return false;
-            };
-            position = end;
-            continue;
-        }
-        if comments && character == '#' && follows(bytes, position, BEFORE_COMMENT) {
+        let byte = bytes[position];
+        if comments && byte == b'#' && follows(bytes, position, BEFORE_COMMENT) {
             match document[position..].find('\n') {
-                Some(newline) => position += newline + 1,
+                Some(newline) => position += newline,
                 None => break,
             }
             continue;
         }
-        if character == '(' {
-            depth += 1;
-        } else if character == ')' {
-            depth -= 1;
+        if SEPARATORS.contains(&byte) {
+            match byte {
+                b'(' => depth += 1,
+                b')' => depth -= 1,
+                _ => {}
+            }
+            token_start = true;
+            position += 1;
+            continue;
         }
-        position += character.len_utf8();
+        if token_start && QUOTES.contains(&byte) {
+            // A reference nothing closes yet may be closed by a later line,
+            // which changes what it holds: an even run is the empty reference
+            // only when no run in the whole document closes it.
+            match references.read(&document[position..]) {
+                Some(reading) if reading.closed => position += reading.length,
+                _ => return false,
+            }
+            continue;
+        }
+        if token_start {
+            if let Some(end) = reference_literal_end(document, position) {
+                position = end;
+                continue;
+            }
+        }
+        token_start = false;
+        position += 1;
     }
     depth == 0
 }

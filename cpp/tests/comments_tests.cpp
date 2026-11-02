@@ -155,3 +155,34 @@ TEST(CommentsTests, BlankingACommentKeepsTheLengthOfTheDocument) {
   EXPECT_EQ(strip_comments("issue#1047\n"), "issue#1047\n");
   EXPECT_EQ(strip_comments("# why\n"), "     \n");
 }
+
+// Issue #377: the comment reader and the parser must agree on where every
+// delimited reference starts and how far it reaches, or a comment is blanked
+// inside what the parser then reads as a reference.
+
+TEST(CommentsTests, AHashInsideAReferenceThatFollowsAGroupIsContent) {
+  expect_parses_as("(a)\" #b\"\n", "((<a>) < #b>)");
+}
+
+TEST(CommentsTests, AHashInsideAReferenceThatFollowsAnotherReferenceIsContent) {
+  expect_parses_as("\"x\"' #y'\n", "(<x> < #y>)");
+  expect_parses_as("```q```\"\" #c\n\"\"\"\n", "(<q> < #c\n\">)");
+}
+
+TEST(CommentsTests, AHashInsideAReferenceThatFollowsALiteralIsContent) {
+  expect_parses_as("~1{62}\" #b\"\n", "(<b> < #b>)");
+}
+
+TEST(CommentsTests, AReferenceIsReadInTheDocumentAsWrittenCommentsIncluded) {
+  // The body of the first `""` straddles a parenthesis, so it is the empty
+  // reference and the `#` after it opens a comment. Blanking that comment
+  // must not turn the `""` into a reference that holds the blanked text.
+  expect_parses_as("\"\" a #)b\n\"\"\n", "(<> <a>)\n(<>)");
+}
+
+TEST(CommentsTests, TheCommentReaderSkipsTheReferencesTheParserReads) {
+  EXPECT_EQ(strip_comments("(a)\" #b\"\n"), "(a)\" #b\"\n");
+  EXPECT_EQ(strip_comments("\"x\"' #y'\n"), "\"x\"' #y'\n");
+  EXPECT_EQ(strip_comments("~1{62}\" #b\"\n"), "~1{62}\" #b\"\n");
+  EXPECT_EQ(strip_comments("a\"b #c\"\n"), "a\"b    \n");
+}

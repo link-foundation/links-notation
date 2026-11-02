@@ -21,7 +21,7 @@ from typing import List, Optional, Tuple
 from .comments import strip_comments
 from .parser import ParseError
 from .quotes import QUOTE_CHARS, _parse_quoted_string_at
-from .reference_literal import decode_reference_literal
+from .reference_literal import decode_reference_literal, reference_literal_end
 
 
 class CstKind:
@@ -54,9 +54,6 @@ _NODE_KINDS = frozenset((CstKind.DOCUMENT, CstKind.LINE, CstKind.GROUP))
 #: How a token's text is escaped in an S-expression.
 _ESCAPES = {"\\": "\\\\", '"': '\\"', "\n": "\\n", "\r": "\\r", "\t": "\\t"}
 _ESCAPED = re.compile(r'[\\"\n\r\t]')
-
-#: A versioned literal.
-_LITERAL = re.compile(r"~[0-9]+\{[^} \t\r\n()]*\}")
 
 #: What ends a bare reference.
 _BARE_REFERENCE_END = frozenset(" \t\r\n(:)")
@@ -170,8 +167,11 @@ def build_cst(input_text: str, comments: bool = True) -> CstNode:
     Raises:
         ParseError: If the parentheses are unbalanced
     """
-    # References are read in the document the parser reads: the one with its
-    # comments blanked, which keeps every position of the one written.
+    # Bare references end where they end in the document the parser reads: the
+    # one with its comments blanked, which keeps every position of the one
+    # written. Delimited references and literals are read, as the parser reads
+    # them, in the document as written, so a comment never changes what a
+    # reference holds (issue #377).
     prepared = strip_comments(input_text) if comments else input_text
     document = CstNode(CstKind.DOCUMENT)
     # The open containers, innermost last.
@@ -232,14 +232,12 @@ def _reference(input_text: str, prepared: str, start: int) -> Tuple[CstNode, int
     The reference token that starts at ``start``, read as the parser reads it,
     and where it ends.
     """
-    if prepared[start] == "~":
-        literal = _LITERAL.match(prepared, start)
-        if literal is not None:
-            end = literal.end()
-            text = input_text[start:end]
-            return CstNode(CstKind.REFERENCE, text=text, value=decode_reference_literal(text)), end
-    if prepared[start] in QUOTE_CHARS:
-        quoted = _parse_quoted_string_at(prepared, start)
+    end = reference_literal_end(input_text, start)
+    if end != -1:
+        text = input_text[start:end]
+        return CstNode(CstKind.REFERENCE, text=text, value=decode_reference_literal(text)), end
+    if input_text[start] in QUOTE_CHARS:
+        quoted = _parse_quoted_string_at(input_text, start)
         if quoted is not None:
             value, end = quoted
             reference = CstNode(CstKind.REFERENCE, text=input_text[start:end], value=value, quote=input_text[start])

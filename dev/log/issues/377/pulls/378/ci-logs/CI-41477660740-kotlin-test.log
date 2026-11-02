@@ -1,0 +1,361 @@
+kotlin / test	UNKNOWN STEP	﻿2026-11-02T16:11:16.2754687Z Current runner version: '2.338.2'
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2770753Z ##[group]Runner Image Provisioner
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2771477Z Hosted Compute Agent
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2771868Z Version: 20261021.618
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2772234Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2772664Z Build Date: 2026-10-21T00:45:21Z
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2773078Z Worker ID: {016c7ea0-f217-4fb1-b28d-85bd21ceafb7}
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2773477Z Region: centralus
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2773840Z Cloud: Azure
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2774162Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2774952Z ##[group]Operating System
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2775335Z Ubuntu
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2775635Z 26.04.1
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2775916Z LTS
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2776251Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2776594Z ##[group]Runner Image
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2776958Z Image: ubuntu-26.04
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2777336Z Version: 20261025.179.1
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2778036Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2778918Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2779462Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2780101Z ##[group]GITHUB_TOKEN Permissions
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2781493Z Contents: read
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2781857Z Metadata: read
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2782162Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2783447Z Secret source: Actions
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2783942Z Cache mode: write
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.2784435Z Prepare workflow directory
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.3125532Z Prepare all required actions
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.3155540Z Getting action download info
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.5653197Z Download action repository 'actions/checkout@v7.0.1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:16.7072294Z Download action repository 'actions/setup-java@v6.1.0' (SHA:b843ebf9b913146b38da2eaa7aeddf76074ae1ad)
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.2788330Z Uses: link-foundation/links-notation/.github/workflows/kotlin.yml@refs/heads/main (940986b4ccbee9b67b6db83c2d44e824b11ca666)
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.2790842Z ##[group] Inputs
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.2791398Z   verbose: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.2791645Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.2791897Z Complete job name: kotlin / test
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3239950Z ##[group]Run actions/checkout@v7.0.1
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3240414Z with:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3240657Z   persist-credentials: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3241049Z   submodules: true
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3241316Z   repository: link-foundation/links-notation
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3243527Z   token: ***
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3243752Z   ssh-strict: true
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3243985Z   ssh-user: git
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3244215Z   clean: true
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3244458Z   sparse-checkout-cone-mode: true
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3244737Z   fetch-depth: 1
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3244971Z   fetch-tags: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3245215Z   show-progress: true
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3245458Z   lfs: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3245690Z   set-safe-directory: true
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3245977Z   allow-unsafe-pr-checkout: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3246319Z env:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3248274Z   GITHUB_TOKEN: ***
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3248517Z   CI_VERBOSE: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.3248748Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5435463Z Syncing repository: link-foundation/links-notation
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5436589Z ##[group]Getting Git version info
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5437007Z Working directory is '/home/runner/work/links-notation/links-notation'
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5437558Z [command]/usr/bin/git version
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5453173Z git version 2.56.0
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5464580Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5471228Z Temporarily overriding HOME='/home/runner/work/_temp/7254bb20-9c3e-40e0-a438-591df5a2c8f3' before making global git config changes
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5472208Z Adding repository directory to the temporary git global config as a safe directory
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5475617Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5534314Z Deleting the contents of '/home/runner/work/links-notation/links-notation'
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5536294Z ##[group]Determining repository object format
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5537265Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5537887Z ##[group]Initializing the repository
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5540190Z [command]/usr/bin/git init /home/runner/work/links-notation/links-notation
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5623863Z hint: Using 'master' as the name for the initial branch. This default branch name
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5624497Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5625021Z hint: to use in all of your new repositories, which will suppress this warning,
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5625441Z hint: call:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5625697Z hint:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5626571Z hint: 	git config --global init.defaultBranch <name>
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5627049Z hint:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5627378Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5627881Z hint: 'development'. The just-created branch can be renamed via this command:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5628269Z hint:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5628501Z hint: 	git branch -m <name>
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5628852Z hint:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5629243Z hint: Disable this message with "git config set advice.defaultBranchName false"
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5639530Z Initialized empty Git repository in /home/runner/work/links-notation/links-notation/.git/
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5647189Z [command]/usr/bin/git remote add origin https://github.com/link-foundation/links-notation
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5688685Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5689100Z ##[group]Disabling automatic garbage collection
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5692482Z [command]/usr/bin/git config --local gc.auto 0
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5720557Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5721612Z ##[group]Setting up auth
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5721979Z Removing SSH command configuration
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5725170Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.5753206Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6110903Z Removing HTTP extra header
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6115501Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6142185Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6342875Z Removing includeIf entries pointing to credentials config files
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6346478Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6371143Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6581509Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6612504Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6638198Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6666415Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6694247Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6721307Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6721950Z ##[group]Fetching the repository
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:17.6725568Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +940986b4ccbee9b67b6db83c2d44e824b11ca666:refs/remotes/origin/main
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7110081Z From https://github.com/link-foundation/links-notation
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7110689Z  * [new ref]         940986b4ccbee9b67b6db83c2d44e824b11ca666 -> origin/main
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7117735Z [command]/usr/bin/git branch --list --remote origin/main
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7141052Z   origin/main
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7146641Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7166977Z 940986b4ccbee9b67b6db83c2d44e824b11ca666
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7170216Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7170859Z ##[group]Determining the checkout info
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7171634Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7174428Z [command]/usr/bin/git sparse-checkout disable
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7216551Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7241824Z ##[group]Checking out the ref
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.7244307Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9071440Z Switched to a new branch 'main'
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9074305Z branch 'main' set up to track 'origin/main'.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9091436Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9091936Z ##[group]Setting up auth for fetching submodules
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9096768Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9136437Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9165996Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9192728Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9223047Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-176174013@github.com:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9248267Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9249064Z ##[group]Fetching submodules
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9251465Z [command]/usr/bin/git submodule sync
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9476510Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:18.9791482Z [command]/usr/bin/git submodule foreach git config --local gc.auto 0
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0010557Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0048508Z [command]/usr/bin/git log -1 --format=%H
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0069716Z 940986b4ccbee9b67b6db83c2d44e824b11ca666
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0076369Z ##[group]Removing auth
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0076787Z Removing SSH command configuration
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0078603Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0187497Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0327972Z Removing HTTP extra header
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0331558Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0358991Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0571804Z Removing includeIf entries pointing to credentials config files
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0573561Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0596329Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0597476Z includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0597926Z includeif.gitdir:/github/workspace/.git.path
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0598357Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0603560Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0622875Z /home/runner/work/_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0630196Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-fdbe7b91\-d706\-49ae\-b8e8\-00f31bcec363\.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0660404Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0682227Z /home/runner/work/_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0688131Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/links-notation/links-notation/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-fdbe7b91\-d706\-49ae\-b8e8\-00f31bcec363\.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0716013Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0735305Z /github/runner_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0740508Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-fdbe7b91\-d706\-49ae\-b8e8\-00f31bcec363\.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0768226Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0787125Z /github/runner_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0792600Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-fdbe7b91\-d706\-49ae\-b8e8\-00f31bcec363\.config
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.0819615Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1030110Z Removing credentials config '/home/runner/work/_temp/git-credentials-fdbe7b91-d706-49ae-b8e8-00f31bcec363.config'
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1037568Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1266066Z ##[group]Run actions/setup-java@v6.1.0
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1266373Z with:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1266604Z   java-version: 25
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1266847Z   distribution: temurin
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1267087Z   cache: gradle
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1267317Z   java-package: jdk
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1267552Z   check-latest: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1267800Z   force-download: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1268039Z   set-default: true
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1268272Z   server-id: github
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1268557Z   mvn-repositories-include-central: true
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1268859Z   mvn-repositories-prioritize-central: true
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1269147Z   overwrite-settings: true
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1269402Z   cache-read-only: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1269656Z   job-status: success
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1271393Z   token: ***
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1271632Z   show-download-progress: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1271895Z   problem-matcher: true
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1272133Z env:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1273759Z   GITHUB_TOKEN: ***
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1273993Z   CI_VERBOSE: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1274228Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.1754352Z ##[group]Installed distributions
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2185554Z Resolved Java 25.0.5+8 from tool-cache
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2185942Z Setting Java 25.0.5+8 as the default
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2190191Z 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2190369Z Java configuration:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2190727Z   Distribution: temurin
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2191181Z   Version: 25.0.5+8
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2191639Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2192186Z 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2228326Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2264190Z Creating settings.xml with server-id: github
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2266065Z Creating toolchains.xml for JDK version 25 from temurin
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2275132Z Writing to /home/runner/.m2/settings.xml
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2278513Z Writing to /home/runner/.m2/toolchains.xml
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.2284788Z Configured MAVEN_ARGS to include -ntp to suppress Maven transfer progress logs. Set 'show-download-progress: true' to keep the download progress output.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.5313766Z Cache hit for: setup-java-Linux-x64-gradle-wrapper-ace76cb9daf4e966d7d2b77ff6063fae3d799001a3502e34593f684de25fe4e7
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:19.5457480Z Cache hit for: setup-java-Linux-x64-gradle-793941b09bcf9fab4a42a2abebb804412724a640b535d619aa86e513539cf7e8
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:20.6976258Z Received 134217728 of 262989629 (51.0%), 125.4 MBs/sec
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:20.7127579Z Received 104857600 of 150835932 (69.5%), 99.7 MBs/sec
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.1425499Z Received 150835932 of 150835932 (100.0%), 100.4 MBs/sec
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.1428048Z Cache Size: ~144 MB (150835932 B)
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.1541728Z [command]/usr/bin/tar -xf /home/runner/work/_temp/5ae2c503-21c1-477c-a7b5-3dd4c46d3d73/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.2762400Z Received 262989629 of 262989629 (100.0%), 156.6 MBs/sec
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.2822027Z Cache Size: ~251 MB (262989629 B)
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.2854673Z [command]/usr/bin/tar -xf /home/runner/work/_temp/0cd75fb0-8474-4355-b8bf-c6db4a520887/cache.tzst -P -C /home/runner/work/links-notation/links-notation --use-compress-program unzstd
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.3819872Z Cache restored successfully
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.3905130Z gradle-wrapper cache restored from key: setup-java-Linux-x64-gradle-wrapper-ace76cb9daf4e966d7d2b77ff6063fae3d799001a3502e34593f684de25fe4e7
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9521395Z Cache restored successfully
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9631787Z Cache restored from key: setup-java-Linux-x64-gradle-793941b09bcf9fab4a42a2abebb804412724a640b535d619aa86e513539cf7e8
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9838063Z ##[group]Run ./gradlew --no-daemon --console=plain jvmTest jsNodeTest wasmJsNodeTest
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9838478Z ^[[36;1m./gradlew --no-daemon --console=plain jvmTest jsNodeTest wasmJsNodeTest^[[0m
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9869114Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9869361Z env:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9871143Z   GITHUB_TOKEN: ***
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9871283Z   CI_VERBOSE: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9871484Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9871775Z   JAVA_HOME_25_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9872000Z   MAVEN_ARGS: -ntp
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:21.9872133Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:24.0235595Z 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:24.0236615Z Welcome to Gradle 9.8.2!
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:24.0236876Z 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:24.0237250Z Here are the highlights of this release:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:24.0246006Z  - Java 27 support
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:24.0246292Z  - Maven mirror settings reuse
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:24.0246571Z  - Linked problem locations in build output
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:24.0246784Z 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:24.0246924Z For more details see https://docs.gradle.org/9.8.2/release-notes.html
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:24.0247092Z 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:24.2260895Z To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:25.1243738Z Daemon will be stopped at the end of the build 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:26.5237897Z Calculating task graph as no cached configuration is available for tasks: jvmTest jsNodeTest wasmJsNodeTest
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:30.3242559Z Mocha test framework for Wasm target is not supported. For KotlinWasmNode used
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:32.2229888Z Configuration 'jsNpmAggregated' was resolved during configuration time.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:32.2230771Z This is a build performance and scalability issue.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:32.2231221Z See https://github.com/gradle/gradle/issues/2298
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:32.2231448Z Run with --info for a stacktrace.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:33.2230104Z Configuration 'jsTestNpmAggregated' was resolved during configuration time.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:33.2230767Z This is a build performance and scalability issue.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:33.2231363Z See https://github.com/gradle/gradle/issues/2298
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:33.2231693Z Run with --info for a stacktrace.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:34.8228914Z Configuration 'wasmJsNpmAggregated' was resolved during configuration time.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:34.8229267Z This is a build performance and scalability issue.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:34.8229533Z See https://github.com/gradle/gradle/issues/2298
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:34.8229740Z Run with --info for a stacktrace.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:35.0229668Z Configuration 'wasmJsTestNpmAggregated' was resolved during configuration time.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:35.0230053Z This is a build performance and scalability issue.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:35.0230296Z See https://github.com/gradle/gradle/issues/2298
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:35.0230498Z Run with --info for a stacktrace.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.6241890Z > Task :jvmProcessResources NO-SOURCE
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.6249012Z > Task :jvmTestProcessResources NO-SOURCE
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.6271579Z > Task :processJvmMainResources SKIPPED
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.6301692Z > Task :kmpPartiallyResolvedDependenciesChecker
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.6331375Z > Task :checkKotlinGradlePluginConfigurationErrors SKIPPED
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.6331969Z > Task :processJvmTestResources SKIPPED
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.6359205Z > Task :kotlinKotlinNpmCachesSetup
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.6381405Z > Task :kotlinRestoreYarnLock
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.6388267Z > Task :generateParityCases
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.9231955Z > Task :jsPackageJson
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.9304455Z > Task :jsTestPackageJson
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:38.9305740Z > Task :jsPublicPackageJson
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:39.0266614Z > Task :jsTestPublicPackageJson
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:39.0321772Z > Task :kotlinPackageJsonUmbrella
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:39.0352138Z > Task :rootPackageJson
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:41.7232049Z > Task :kotlinNodeJsSetup
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:41.8241890Z > Task :kotlinYarnSetup
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:41.9292272Z > Task :kotlinWasmNodeJsSetup
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:42.0253341Z > Task :kotlinWasmYarnSetup
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.1272231Z > Task :kotlinNpmInstall
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.1322288Z > Task :jsProcessResources NO-SOURCE
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.1382045Z > Task :jsTestProcessResources NO-SOURCE
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.1442188Z > Task :kotlinStoreYarnLock
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.1502172Z > Task :kotlinWasmKotlinNpmCachesSetup
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.1551784Z > Task :kotlinWasmRestoreYarnLock SKIPPED
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.5235242Z > Task :wasmJsPackageJson
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.5271571Z > Task :wasmJsTestPackageJson
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.5279794Z > Task :wasmJsPublicPackageJson
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.5280260Z > Task :wasmJsTestPublicPackageJson
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.5301561Z > Task :kotlinWasmPackageJsonUmbrella
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:48.5302230Z > Task :wasmRootPackageJson
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:51.2250899Z > Task :compileKotlinJs
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:51.2292119Z > Task :jsMainClasses
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:52.8240853Z > Task :compileKotlinJvm
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:52.8241707Z > Task :compileJvmMainJava NO-SOURCE
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:52.8271919Z > Task :jvmMainClasses
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:52.9248949Z > Task :jvmJar
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:54.9242157Z > Task :compileTestKotlinJs
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:54.9242486Z > Task :jsTestClasses
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:57.6252390Z > Task :compileTestKotlinJvm
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:57.6281410Z > Task :compileJvmTestJava NO-SOURCE
+kotlin / test	UNKNOWN STEP	2026-11-02T16:11:57.6295424Z > Task :jvmTestClasses
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:00.3262283Z > Task :jvmTest
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:02.8241185Z > Task :compileKotlinWasmJs
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:02.8252391Z > Task :wasmJsProcessResources NO-SOURCE
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:02.8277743Z > Task :wasmJsMainClasses
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:04.5232219Z > Task :compileTestKotlinWasmJs
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:04.5261485Z > Task :wasmJsTestProcessResources NO-SOURCE
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:04.5291359Z > Task :wasmJsTestClasses
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:04.7232357Z > Task :compileTestDevelopmentExecutableKotlinJs
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:05.1242221Z > Task :jsTestTestDevelopmentExecutableCompileSync
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:09.3229579Z > Task :compileTestDevelopmentExecutableKotlinWasmJs
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:09.3229929Z > Task :wasmJsTestTestDevelopmentExecutableCompileSync
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:12.0229292Z > Task :kotlinWasmToolingSetup
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:18.5228874Z > Task :kotlinWasmNpmInstall
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:20.8229048Z > Task :kotlinWasmStoreYarnLock
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:22.7245230Z Reporter option 'alsoWithHtml' has no effect. Because custom reporterOptions.Base was provided.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:22.7246233Z > Task :jsNodeTest
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4228620Z > Task :wasmJsNodeTest
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4228874Z 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4229596Z [Incubating] Problems report is available at: file:///home/runner/work/links-notation/links-notation/kotlin/build/reports/problems/problems-report.html
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4230300Z 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4230773Z Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4231371Z 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4231722Z You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4232160Z 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4232704Z For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4233091Z 
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4233157Z BUILD SUCCESSFUL in 1m
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4233321Z 38 actionable tasks: 38 executed
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.4233495Z Configuration cache entry stored.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7548885Z ##[group]Run bash test-summary.sh
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7549117Z ^[[36;1mbash test-summary.sh^[[0m
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7575309Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7575519Z env:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7577036Z   GITHUB_TOKEN: ***
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7577162Z   CI_VERBOSE: false
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7577348Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7577625Z   JAVA_HOME_25_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.5-8/x64
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7577841Z   MAVEN_ARGS: -ntp
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7577970Z ##[endgroup]
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7685286Z jsNodeTest: 348 tests, 0 failures, 0 errors, 0 skipped
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7736609Z jvmTest: 356 tests, 0 failures, 0 errors, 0 skipped
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.7788096Z wasmJsNodeTest: 348 tests, 0 failures, 0 errors, 0 skipped
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.8066523Z Post job cleanup.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.8848244Z Cache hit occurred on the gradle-wrapper primary key setup-java-Linux-x64-gradle-wrapper-ace76cb9daf4e966d7d2b77ff6063fae3d799001a3502e34593f684de25fe4e7, not saving cache.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.8852807Z Cache hit occurred on the primary key setup-java-Linux-x64-gradle-793941b09bcf9fab4a42a2abebb804412724a640b535d619aa86e513539cf7e8, not saving cache.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.9002408Z Post job cleanup.
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.9640396Z [command]/usr/bin/git version
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.9674236Z git version 2.56.0
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.9700747Z Temporarily overriding HOME='/home/runner/work/_temp/f6175662-d78b-4e08-b2ee-16c276498ea0' before making global git config changes
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.9703558Z Adding repository directory to the temporary git global config as a safe directory
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.9705255Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.9759907Z Removing SSH command configuration
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.9760653Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:23.9788662Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:24.0064867Z Removing HTTP extra header
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:24.0065518Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:24.0142859Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:24.0436116Z Removing includeIf entries pointing to credentials config files
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:24.0443509Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:24.0472464Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:24.0832433Z Cleaning up orphan processes
+kotlin / test	UNKNOWN STEP	2026-11-02T16:12:24.1057767Z Terminate orphan process: pid (2497) (java)

@@ -1,0 +1,5 @@
+# Limit bursts of workflow badge requests to avoid GitHub secondary rate limits.
+# 429 and 5xx remain failures until the PHP recheck gets an accepted response.
+[hosts."github.com"]
+concurrency = 2
+request_interval = "1s"

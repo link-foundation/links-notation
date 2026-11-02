@@ -1,0 +1,16 @@
+# Lychee ignore patterns - regex patterns for URLs to skip during link checking
+
+# Localhost and local development URLs
+https?://localhost
+https?://127\.0\.0\.1
+
+# Example and placeholder URLs used by the template
+https?://example\.com
+https://github\.com/owner/repo
+
+# Release assets and Pages that exist only after the first release/deploy
+https://github\.com/link-foundation/cpp-ai-driven-development-pipeline-template/releases/download/
+https://link-foundation\.github\.io/cpp-ai-driven-development-pipeline-template
+
+# Web Archive rejects automated checks despite serving browser requests
+https://web\.archive\.org

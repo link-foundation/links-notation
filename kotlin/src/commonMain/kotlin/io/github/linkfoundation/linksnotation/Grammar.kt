@@ -33,7 +33,12 @@ internal class Grammar(
     private val contextStack = ArrayList<SavedContext>()
     private var contextDepth = 0
     private val unreadableLines = HashSet<Int>()
-    private val delimitedReferences = DelimitedReferences(input)
+
+    // Delimited references are read in the document as written, so blanking a
+    // comment never changes what a reference holds or how far it reaches
+    // (issue #377). A delimiter is never blanked, so one in [input] opens the
+    // same reference in [source].
+    private val delimitedReferences = DelimitedReferences(source)
 
     private class SavedContext(
         val indentationStack: MutableList<Int>,

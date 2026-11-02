@@ -1,0 +1,20 @@
+{
+  "name": "template-artifact-transport",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@actions/artifact": "6.3.1",
+    "@actions/core": "3.0.1",
+    "@actions/glob": "0.7.0",
+    "@zip.js/zip.js": "2.24.0",
+    "punycode": "2.3.1"
+  },
+  "overrides": {
+    "archiver-utils": {
+      "glob": "13.0.6"
+    },
+    "@actions/artifact": {
+      "unzip-stream": "0.3.4"
+    }
+  }
+}

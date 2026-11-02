@@ -1,0 +1,33 @@
+name: Workflow Policy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  workflows:
+    name: Workflow Policy and Dependency Freshness
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    concurrency:
+      group: check-${{ github.workflow }}-${{ github.ref }}-workflows
+      cancel-in-progress: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7.0.1
+
+      - name: Check workflow policies and dependency-check regressions
+        run: node --test scripts/workflow-policy.test.mjs experiments/ci-dependencies.test.mjs
+
+      - name: Check latest stable CI dependencies
+        run: node scripts/check-ci-dependencies.mjs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

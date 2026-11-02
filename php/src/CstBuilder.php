@@ -14,14 +14,11 @@ namespace LinkFoundation\LinksNotation;
  * The tokens are read with the same rules the parser uses, so the tree and the
  * parsed links agree: comments are found by Comments::stripComments(),
  * delimited references by Parser::readDelimitedReference() and versioned
- * literals by the same pattern and ReferenceLiteral::decode(). Use
+ * literals by ReferenceLiteral::end() and ReferenceLiteral::decode(). Use
  * Parser::parseCst(), which parses the document first.
  */
 final class CstBuilder
 {
-    /** A versioned literal at the position the pattern is matched at. */
-    private const LITERAL = '/\G~[0-9]+\{[^} \t\r\n()]*\}/';
-
     /** What ends a bare reference. */
     private const BARE_REFERENCE_END = " \t\r\n(:)";
 
@@ -40,7 +37,7 @@ final class CstBuilder
      */
     public static function build(string $input, bool $comments = true): CstNode
     {
-        // References are read in the document the parser reads: the one with
+        // Comments are found, and bare references end, in the document with
         // its comments blanked, which keeps every position of the one written.
         $prepared = $comments ? Comments::stripComments($input) : $input;
         $document = new CstNode(CstKind::DOCUMENT);
@@ -115,20 +112,25 @@ final class CstBuilder
     /**
      * The reference that starts at $start, read as the parser reads it; $end
      * is set to where it ends.
+     *
+     * A literal and a delimited reference are read in the document as
+     * written, so a comment never changes what they hold (issue #377); only
+     * the end of a bare reference is found in the blanked document.
      */
     private static function reference(string $input, string $prepared, int $start, int &$end): CstNode
     {
-        $first = $prepared[$start];
+        $first = $input[$start];
 
-        if ($first === '~' && preg_match(self::LITERAL, $prepared, $match, 0, $start) === 1) {
-            $end = $start + strlen($match[0]);
+        $literalEnd = ReferenceLiteral::end($input, $start);
+        if ($literalEnd >= 0) {
+            $end = $literalEnd;
             $text = substr($input, $start, $end - $start);
 
             return new CstNode(CstKind::REFERENCE, $text, value: ReferenceLiteral::decode($text));
         }
 
         if ($first === '"' || $first === "'" || $first === '`') {
-            $quoted = Parser::readDelimitedReference($prepared, $start);
+            $quoted = Parser::readDelimitedReference($input, $start);
             if ($quoted !== null) {
                 [$value, $end] = $quoted;
 
@@ -136,7 +138,7 @@ final class CstBuilder
                     CstKind::REFERENCE,
                     substr($input, $start, $end - $start),
                     value: $value,
-                    quote: $input[$start]
+                    quote: $first
                 );
             }
         }

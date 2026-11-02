@@ -40,21 +40,24 @@ jobs:
           python experiments/issue-348/test_dependabot_check.py
           python scripts/ci/check-dependabot.py
       # A pull request fails only for the declarations it adds or changes;
-      # every other outdated one is printed as a note and fails the push and
-      # scheduled runs on main instead. Gating each Dependabot pull request
-      # on every other package kept all of them red (issue #350).
+      # every other outdated one is printed as a note. Gating each Dependabot
+      # pull request on every other package kept all of them red (issue #350).
+      # On main (push, schedule, dispatch) an outdated declaration is a
+      # warning: a newer upstream release is not caused by the commit, and
+      # failing for it kept main red with no change (issue #377, best
+      # practice 17). Registry errors fail on every event.
       - name: Require current stable dependencies and actions
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CHANGED_SINCE: ${{ github.event_name == 'pull_request' && 'HEAD^1' || '' }}
-        run: python scripts/ci/check-dependencies.py ${CHANGED_SINCE:+--changed-since "$CHANGED_SINCE"}
+          MODE: ${{ github.event_name == 'pull_request' && '--changed-since=HEAD^1' || '--warn-only' }}
+        run: python scripts/ci/check-dependencies.py "$MODE"
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '24'
       - uses: oven-sh/setup-bun@v2.2.0
         with:
           bun-version: latest
-      - name: Require current compatible transitive npm dependencies and both JS locks
+      - name: Report stale transitive npm dependencies and require both JS locks
         env:
           ADVISORY: ${{ github.event_name == 'pull_request' && '--advisory' || '' }}
         run: node scripts/ci/check-npm-locks.mjs ${ADVISORY:+"$ADVISORY"}

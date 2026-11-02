@@ -235,6 +235,34 @@ class DependencyCheckTests(unittest.TestCase):
             CHECK.update(CHECK.Dependency(cs, "nuget", "A", "1.0.0", "1.0.0"), "2.0.0")
             self.assertIn('Include="B" Version="1.0.0"', cs.read_text())
 
+    def test_formatter_in_a_maven_profile_is_updated(self):
+        # Issue #377: java/pom.xml declares google-java-format as a dependency
+        # of the format profile, not in Spotless's <googleJavaFormat>, and
+        # --update left it stale while the check kept failing.
+        with tempfile.TemporaryDirectory() as temporary:
+            pom = Path(temporary) / "pom.xml"
+            pom.write_text(
+                "<project><profiles><profile><id>format</id><dependencies><dependency>"
+                "<groupId>com.google.googlejavaformat</groupId>"
+                "<artifactId>google-java-format</artifactId>"
+                "<version>1.37.0</version>"
+                "</dependency></dependencies></profile></profiles></project>"
+            )
+            dependency = CHECK.Dependency(
+                pom, "maven", "com.google.googlejavaformat:google-java-format", "1.37.0", "1.37.0"
+            )
+            self.assertIs(CHECK.update(dependency, "2.0.0"), True)
+            self.assertIn("<version>2.0.0</version>", pom.read_text())
+
+    def test_update_that_rewrites_nothing_fails(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            pom = Path(temporary) / "pom.xml"
+            pom.write_text("<project/>")
+            dependency = CHECK.Dependency(pom, "maven", "g:a", "1.0.0", "1.0.0")
+            with contextlib.redirect_stdout(io.StringIO()) as output:
+                self.assertIs(CHECK.update(dependency, "2.0.0"), False)
+            self.assertIn("edit the declaration by hand", output.getvalue())
+
     def test_cmake_fetchcontent_archive_pin_is_checked_and_rehashed(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -573,5 +601,48 @@ class DependencyCheckTests(unittest.TestCase):
                 self.assertIn("registry unavailable", errors.getvalue())
 
 
+    def test_warn_only_turns_outdated_declarations_into_warnings(self):
+        # Push and scheduled runs on main (issue #377, best practice 17).
+        dependency = CHECK.Dependency(
+            CHECK.ROOT / "js/package.json", "npm", "demo", "^1.0.0", "^1.0.0"
+        )
+        with (
+            patch.object(CHECK, "manifests", return_value=[dependency]),
+            patch.object(sys, "argv", ["check", "--warn-only"]),
+        ):
+            with (
+                patch.object(CHECK, "latest", return_value="2.0.0"),
+                contextlib.redirect_stdout(io.StringIO()) as output,
+            ):
+                self.assertFalse(CHECK.main())
+            self.assertIn(
+                "::warning file=js/package.json::demo ^1.0.0 is behind the latest "
+                "stable release 2.0.0",
+                output.getvalue(),
+            )
+            self.assertNotIn("OUTDATED", output.getvalue())
+            self.assertIn("check-dependencies.py --update", output.getvalue())
+            # Not knowing whether a package is current is still a failure.
+            with (
+                patch.object(
+                    CHECK, "latest", side_effect=OSError("registry unavailable")
+                ),
+                contextlib.redirect_stdout(io.StringIO()),
+                contextlib.redirect_stderr(io.StringIO()),
+            ):
+                self.assertTrue(CHECK.main())
+
 if __name__ == "__main__":
-    unittest.main()
+    # A leaked HTTP response surfaces only as a ResourceWarning in a
+    # destructor, which never fails a test by itself (issue #377).
+    import gc
+    import warnings
+
+    leaks = []
+    warnings.simplefilter("error", ResourceWarning)
+    sys.unraisablehook = leaks.append
+    result = unittest.main(exit=False).result
+    gc.collect()
+    for leak in leaks:
+        print(f"leaked resource: {leak.exc_value}", file=sys.stderr)
+    sys.exit(0 if result.wasSuccessful() and not leaks else 1)

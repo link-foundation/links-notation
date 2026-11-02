@@ -158,3 +158,34 @@ test('a hash that cannot open a comment is left unquoted', () => {
   expect(Link.escapeReference('#')).toBe("'#'");
   expect(Link.escapeReference('#ff0000')).toBe("'#ff0000'");
 });
+
+// Issue #377: the comment reader and the grammar must agree on where every
+// delimited reference starts and how far it reaches, or a comment is blanked
+// inside what the grammar then reads as a reference.
+
+test('a hash inside a reference that follows a group is content', () => {
+  expect(parsesAs('(a)" #b"\n')).toBe('((<a>) < #b>)');
+});
+
+test('a hash inside a reference that follows another reference is content', () => {
+  expect(parsesAs('"x"\' #y\'\n')).toBe('(<x> < #y>)');
+  expect(parsesAs('```q```"" #c\n"""\n')).toBe('(<q> < #c\n">)');
+});
+
+test('a hash inside a reference that follows a literal is content', () => {
+  expect(parsesAs('~1{62}" #b"\n')).toBe('(<b> < #b>)');
+});
+
+test('a reference is read in the document as written, comments included', () => {
+  // The body of the first `""` straddles a parenthesis, so it is the empty
+  // reference and the `#` after it opens a comment. Blanking that comment
+  // must not turn the `""` into a reference that holds the blanked text.
+  expect(parsesAs('"" a #)b\n""\n')).toBe('(<> <a>)\n(<>)');
+});
+
+test('the comment reader skips the references the grammar reads', () => {
+  expect(stripComments('(a)" #b"\n')).toBe('(a)" #b"\n');
+  expect(stripComments('"x"\' #y\'\n')).toBe('"x"\' #y\'\n');
+  expect(stripComments('~1{62}" #b"\n')).toBe('~1{62}" #b"\n');
+  expect(stripComments('a"b #c"\n')).toBe('a"b    \n');
+});

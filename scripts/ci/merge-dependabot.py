@@ -25,6 +25,13 @@ DEPENDABOT_AUTO_MERGE_TOKEN through `gh pr update-branch --rebase`, otherwise
 by asking Dependabot with an `@dependabot rebase` comment. A branch update
 made with GITHUB_TOKEN would start CI runs that wait for a maintainer's
 approval, so it is never used.
+
+A merge made with GITHUB_TOKEN starts no push workflow on the base branch
+(issue #377: main went unchecked after such merges). After one, the script
+dispatches the workflows that push would have started, honouring their
+`paths` filters, which workflow_dispatch ignores. CI's release job runs only
+on a push, so a dispatched run checks main without publishing; Dependabot
+updates change no package version, so there is nothing new to publish.
 """
 
 import argparse
@@ -39,6 +46,48 @@ DEPENDABOT = "dependabot[bot]"
 AUTOMATIC = {"version-update:semver-minor", "version-update:semver-patch"}
 PASSED = {"success", "neutral", "skipped"}
 REBASE = "@dependabot rebase"
+
+# The workflows a push to the base branch starts, with their push `paths`
+# filters (None: every push). The tests compare this with .github/workflows.
+PUSH_WORKFLOWS = {
+    "js.yml": None,
+    "dependencies.yml": None,
+    "bom-check.yml": None,
+    "workflows.yml": [
+        ".github/**",
+        "scripts/ci/**",
+        "experiments/issue-350/**",
+        "experiments/issue-377/test_rerun_unacquired.py",
+        "experiments/issue-377/test_nuget_publish.py",
+    ],
+    "links.yml": [
+        "**.md",
+        ".lycheeignore",
+        "lychee.toml",
+        ".github/workflows/links.yml",
+        "experiments/issue-339/test_github_blob_remap.py",
+    ],
+    "pages.yml": ["docs/**", ".github/workflows/pages.yml"],
+}
+
+
+def matches(path, pattern):
+    """GitHub's paths filter: `**` crosses directories, `*` and `?` do not."""
+    expression = ""
+    for token in re.findall(r"\*\*|\*|\?|[^*?]+", pattern):
+        expression += {"**": ".*", "*": "[^/]*", "?": "[^/]"}.get(
+            token, re.escape(token)
+        )
+    return re.fullmatch(expression, path) is not None
+
+
+def dispatches(files):
+    """The push workflows that changing `files` on the base branch starts."""
+    return [
+        name
+        for name, paths in PUSH_WORKFLOWS.items()
+        if paths is None or any(matches(f, p) for f in files for p in paths)
+    ]
 
 
 def major(version):
@@ -254,6 +303,13 @@ class GitHub:
             (c["commit"]["message"] for c in commits if c["sha"] == pull.head), ""
         )
 
+    def files(self, pull):
+        output = self.run(
+            "api", f"repos/{self.repository}/pulls/{pull.number}/files?per_page=100",
+            "--paginate", "--jq", ".[].filename",
+        )  # fmt: skip
+        return output.splitlines()
+
     def behind(self, base, head):
         return self.api(f"compare/{base}...{head}")["behind_by"] > 0
 
@@ -317,6 +373,7 @@ def main():
     if not pulls:
         print("No open Dependabot pull requests.")
     failures = 0
+    merged = []
     for action, pull, reason in plan(pulls, required, strict):
         print(f"#{pull.number} {action}: {reason}")
         if args.dry_run or action == "skip":
@@ -327,6 +384,7 @@ def main():
                     "pr", "merge", str(pull.number), "--repo", github.repository,
                     "--merge", "--match-head-commit", pull.head, token=pat or None,
                 )  # fmt: skip
+                merged.append(pull)
             elif pat:
                 github.run(
                     "pr", "update-branch", str(pull.number),
@@ -348,7 +406,40 @@ def main():
                     f"#{pull.number} by hand."
                 )
             failures += 1
+    if merged and not pat:
+        failures += dispatch(github, args.base, merged)
     return 1 if failures else 0
+
+
+def dispatch(github, base, merged):
+    """Start the push workflows the GITHUB_TOKEN merges of `merged` did not."""
+    workflows, failures = [], 0
+    try:
+        for pull in merged:
+            for name in dispatches(github.files(pull)):
+                if name not in workflows:
+                    workflows.append(name)
+    except RuntimeError as error:
+        # Dispatching too much is safer than leaving main unchecked.
+        print(f"::warning::Listing the merged files failed ({error}); dispatching all.")
+        workflows = list(PUSH_WORKFLOWS)
+    print(
+        f"::notice::GITHUB_TOKEN merges start no push workflows; dispatching "
+        f"{', '.join(workflows)} on {base}."
+    )
+    for name in workflows:
+        try:
+            github.run(
+                "workflow", "run", name, "--repo", github.repository, "--ref", base
+            )
+        except RuntimeError as error:
+            print(
+                f"::error::Dispatching {name} on {base} failed: {error}. Run "
+                f"`gh workflow run {name} --ref {base}` by hand, or store a token "
+                "with the repo and workflow scopes in DEPENDABOT_AUTO_MERGE_TOKEN."
+            )
+            failures += 1
+    return failures
 
 
 if __name__ == "__main__":

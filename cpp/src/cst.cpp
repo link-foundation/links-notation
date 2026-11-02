@@ -22,33 +22,10 @@ namespace links_notation {
 
 namespace {
 
-bool is_digit(char character) { return character >= '0' && character <= '9'; }
-
 /// What ends a bare reference.
 bool ends_bare_reference(char character) {
   return character == ' ' || character == '\t' || character == '\r' || character == '\n' || character == '(' ||
          character == ':' || character == ')';
-}
-
-/// The end of the versioned literal `~[0-9]+\{[^} \t\r\n()]*\}` that starts at
-/// `start`, if one does.
-std::optional<std::size_t> literal_end(std::string_view prepared, std::size_t start) {
-  std::size_t position = start;
-  if (position >= prepared.size() || prepared[position] != '~') return std::nullopt;
-  ++position;
-  const std::size_t digits = position;
-  while (position < prepared.size() && is_digit(prepared[position])) ++position;
-  if (position == digits || position >= prepared.size() || prepared[position] != '{') return std::nullopt;
-  ++position;
-  for (; position < prepared.size(); ++position) {
-    const char character = prepared[position];
-    if (character == '}') return position + 1;
-    if (character == ' ' || character == '\t' || character == '\r' || character == '\n' || character == '(' ||
-        character == ')') {
-      return std::nullopt;
-    }
-  }
-  return std::nullopt;
 }
 
 void append_escaped(std::string& out, std::string_view text) {
@@ -84,10 +61,13 @@ struct Container {
 
 /// The tree of `input`, which has already been parsed with the same `comments`.
 CstNode build_cst(std::string_view input, bool comments) {
-  // References are read in the document the grammar reads: the one with its
-  // comments blanked, which keeps every position of the one written.
+  // Bare references end where they end in the document the grammar reads: the
+  // one with its comments blanked, which keeps every position of the one
+  // written. Delimited references and literals are read, as the grammar reads
+  // them, in the document as written, so a comment never changes what a
+  // reference holds (issue #377).
   const std::string prepared = comments ? strip_comments(input) : std::string(input);
-  const detail::DelimitedReferences references(prepared);
+  const detail::DelimitedReferences references(input);
   // The open containers, innermost last. A group is added to the line it
   // opens on when it closes: nothing else changes that line in between.
   std::vector<Container> containers;
@@ -133,7 +113,7 @@ CstNode build_cst(std::string_view input, bool comments) {
       add(std::move(group));
     } else if (character == ':') {
       add(CstNode::token(CstKind::colon, slice(position, end)));
-    } else if (const auto literal = character == '~' ? literal_end(prepared, position) : std::nullopt) {
+    } else if (const auto literal = character == '~' ? detail::reference_literal_end(input, position) : std::nullopt) {
       end = *literal;
       add(CstNode::token(CstKind::reference, slice(position, end), decode_reference_literal(slice(position, end))));
     } else if (const auto quoted = detail::is_quote(character) ? references.read(position) : std::nullopt) {

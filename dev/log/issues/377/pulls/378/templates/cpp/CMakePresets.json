@@ -1,0 +1,209 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "MY_PACKAGE_WARNINGS_AS_ERRORS": "ON"
+      }
+    },
+    {
+      "name": "dev",
+      "displayName": "Debug build with tests and examples",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "release",
+      "displayName": "Release build with tests, examples and benchmarks",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "MY_PACKAGE_BUILD_BENCHMARKS": "ON"
+      }
+    },
+    {
+      "name": "asan",
+      "displayName": "AddressSanitizer + UndefinedBehaviorSanitizer (GCC/Clang)",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "MY_PACKAGE_SANITIZERS": "address;undefined"
+      }
+    },
+    {
+      "name": "coverage",
+      "displayName": "Coverage instrumentation (GCC/Clang, use with gcovr)",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "MY_PACKAGE_ENABLE_COVERAGE": "ON"
+      }
+    },
+    {
+      "name": "lint",
+      "displayName": "Compile database of every source (tests, examples, benchmarks) for clang-tidy",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "MY_PACKAGE_BUILD_BENCHMARKS": "ON"
+      }
+    },
+    {
+      "name": "install",
+      "displayName": "Library only, for cmake --install",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "MY_PACKAGE_BUILD_TESTS": "OFF",
+        "MY_PACKAGE_BUILD_EXAMPLES": "OFF",
+        "MY_PACKAGE_INSTALL": "ON",
+        "MY_PACKAGE_BUILD_DOCS": "OFF"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "dev",
+      "configurePreset": "dev",
+      "configuration": "Debug"
+    },
+    {
+      "name": "release",
+      "configurePreset": "release",
+      "configuration": "Release"
+    },
+    {
+      "name": "asan",
+      "configurePreset": "asan",
+      "configuration": "Debug"
+    },
+    {
+      "name": "coverage",
+      "configurePreset": "coverage",
+      "configuration": "Debug"
+    },
+    {
+      "name": "install",
+      "configurePreset": "install",
+      "configuration": "Release"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "timeout": 120
+      }
+    },
+    {
+      "name": "dev",
+      "inherits": "base",
+      "configurePreset": "dev",
+      "configuration": "Debug"
+    },
+    {
+      "name": "release",
+      "inherits": "base",
+      "configurePreset": "release",
+      "configuration": "Release"
+    },
+    {
+      "name": "asan",
+      "inherits": "base",
+      "configurePreset": "asan",
+      "configuration": "Debug"
+    },
+    {
+      "name": "coverage",
+      "inherits": "base",
+      "configurePreset": "coverage",
+      "configuration": "Debug"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "dev",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "dev"
+        },
+        {
+          "type": "build",
+          "name": "dev"
+        },
+        {
+          "type": "test",
+          "name": "dev"
+        }
+      ]
+    },
+    {
+      "name": "release",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "release"
+        },
+        {
+          "type": "build",
+          "name": "release"
+        },
+        {
+          "type": "test",
+          "name": "release"
+        }
+      ]
+    },
+    {
+      "name": "asan",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "asan"
+        },
+        {
+          "type": "build",
+          "name": "asan"
+        },
+        {
+          "type": "test",
+          "name": "asan"
+        }
+      ]
+    },
+    {
+      "name": "coverage",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "coverage"
+        },
+        {
+          "type": "build",
+          "name": "coverage"
+        },
+        {
+          "type": "test",
+          "name": "coverage"
+        }
+      ]
+    }
+  ]
+}

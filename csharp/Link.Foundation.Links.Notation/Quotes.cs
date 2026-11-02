@@ -136,6 +136,32 @@ namespace Link.Foundation.Links.Notation
             TryParse(subject, start, out var ignored, out var length) ? start + length : -1;
 
         /// <summary>
+        /// Reports whether a run of delimiters after the one opening at
+        /// <paramref name="start"/> closes it: a run of R closes a reference opened by N
+        /// exactly when R / N is odd. An even run nothing closes is the empty reference,
+        /// until a closing run is written after it.
+        /// </summary>
+        /// <param name="subject">The whole document being read.</param>
+        /// <param name="start">The position of the opening delimiter.</param>
+        /// <returns><see langword="true"/> when a later run closes the reference.</returns>
+        internal static bool ClosingRunFollows(string subject, int start)
+        {
+            char quote = subject[start];
+            int count = 0;
+            while (start + count < subject.Length && subject[start + count] == quote) count++;
+            int position = start + count;
+            while (true)
+            {
+                position = subject.IndexOf(quote, position);
+                if (position < 0) return false;
+                int length = 0;
+                while (position + length < subject.Length && subject[position + length] == quote) length++;
+                if (length / count % 2 == 1) return true;
+                position += length;
+            }
+        }
+
+        /// <summary>
         /// The delimiter of a reference written as <paramref name="raw"/>, when
         /// <paramref name="raw"/> is exactly one delimited reference.
         /// </summary>

@@ -64,7 +64,7 @@
                      .mvn/wrapper/maven-wrapper.properties. -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.6.3</version>
+                <version>3.7.0</version>
                 <executions>
                     <execution>
                         <id>require-maven</id>
@@ -74,7 +74,10 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>3.6.3</version>
+                                    <!-- A range, not the bare "3.6.3": Dependabot raises every
+                                         literal equal to a plugin version it bumps, so bumping
+                                         this plugin from 3.6.3 also raised the floor (#363, #377). -->
+                                    <version>[3.6.3,)</version>
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
@@ -92,7 +95,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>3.6.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -141,17 +144,17 @@
 
     <profiles>
         <!-- Spotless 3.10.4 calls Style.valueOf(), removed by google-java-format
-             1.37.0 (diffplug/spotless#3126, fixed by google-java-format commit
-             a51e46a, not yet released). format.sh runs the current formatter
-             CLI instead. The dependency is confined to this tooling profile,
-             not the library. -->
+             1.37.0 (diffplug/spotless#3126) and restored in 2.0.0 (commit
+             a51e46a), so this profile could return to Spotless. Until then
+             format.sh runs the formatter CLI. The dependency is confined to
+             this tooling profile, not the library. -->
         <profile>
             <id>format</id>
             <dependencies>
                 <dependency>
                     <groupId>com.google.googlejavaformat</groupId>
                     <artifactId>google-java-format</artifactId>
-                    <version>1.37.0</version>
+                    <version>2.0.0</version>
                 </dependency>
             </dependencies>
             <build>

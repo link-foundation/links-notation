@@ -1,0 +1,36 @@
+# pre-commit install  -- runs the fast subset of the CI lint job on every commit.
+# The full lint (clang-tidy, cppcheck) needs a build tree:
+#   cmake --preset lint && python3 scripts/lint_cpp.py
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v20.1.8
+    hooks:
+      - id: clang-format
+        types_or: [c, c++]
+
+  - repo: local
+    hooks:
+      - id: check-file-size
+        name: check file size
+        entry: python3 scripts/check_file_size.py
+        language: system
+        pass_filenames: false
+
+      - id: script-tests
+        name: release script tests
+        entry: python3 -m pytest -q scripts/tests
+        language: system
+        files: ^scripts/
+        pass_filenames: false

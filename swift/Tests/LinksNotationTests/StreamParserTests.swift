@@ -171,4 +171,16 @@ final class StreamParserTests: XCTestCase {
         try stream.write("one\ntw")
         XCTAssertEqual(stream.position(), StreamPosition(offset: 6, line: 2, column: 3, buffered: 2))
     }
+
+    func testWaitsForTheLineThatClosesAnEvenRunOfQuotes() throws {
+        // `""` is the empty reference only when nothing closes it, and here the
+        // next line does, so the first line cannot be emitted on its own (#377).
+        let input = "a \"\" b\n\"\" c\n"
+        let stream = StreamParser()
+        for scalar in input.unicodeScalars {
+            XCTAssertEqual(try stream.write(String(scalar)), [], "after \(scalar)")
+        }
+
+        XCTAssertEqual(streamFormatted(try stream.end()), streamFormatted(try Parser().parse(input)))
+    }
 }

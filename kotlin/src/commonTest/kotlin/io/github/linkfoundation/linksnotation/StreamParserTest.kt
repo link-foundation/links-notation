@@ -170,4 +170,16 @@ last sees first"""
         assertEquals(null, links.single().rawId)
         assertEquals("'a'", StreamParser().end("('a': b)").single().rawId)
     }
+
+    @Test
+    fun waitsForTheLineThatClosesAnEvenRunOfQuotes() {
+        // `""` is the empty reference only when nothing closes it, and here the
+        // next line does, so the first line cannot be emitted on its own (#377).
+        val input = "a \"\" b\n\"\" c\n"
+        val stream = StreamParser()
+        for (character in input) {
+            assertEquals(emptyList(), stream.write(character.toString()), "after '$character'")
+        }
+        assertEquals(formatted(Parser().parse(input)), formatted(stream.end()))
+    }
 }

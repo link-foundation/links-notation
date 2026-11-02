@@ -73,3 +73,28 @@ func formatReference(text string) string {
 	delimiter := strings.Repeat(string(chosen), count)
 	return delimiter + text + delimiter
 }
+
+// referenceLiteralEnd is where the versioned literal ~<digits>{<payload>} that
+// starts at start of text ends, or -1 if none starts there. The payload holds
+// no "}", space, tab, line break or parenthesis. A single forward scan, as the
+// grammar reads a literal.
+func referenceLiteralEnd(text string, start int) int {
+	if start >= len(text) || text[start] != '~' {
+		return -1
+	}
+	index := start + 1
+	for index < len(text) && text[index] >= '0' && text[index] <= '9' {
+		index++
+	}
+	if index == start+1 || index >= len(text) || text[index] != '{' {
+		return -1
+	}
+	index++
+	for index < len(text) && strings.IndexByte("} \t\r\n()", text[index]) < 0 {
+		index++
+	}
+	if index < len(text) && text[index] == '}' {
+		return index + 1
+	}
+	return -1
+}

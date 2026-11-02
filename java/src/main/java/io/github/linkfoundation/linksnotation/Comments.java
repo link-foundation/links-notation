@@ -16,8 +16,12 @@ public final class Comments {
   /** The character that starts a comment. */
   public static final char COMMENT = '#';
 
-  /** What a delimited reference may start after. */
-  private static final String BEFORE_REFERENCE = " \t\n\r(:";
+  /**
+   * What ends a bare reference. A token starts after one of these, at the start of the document,
+   * and right after a delimited reference or a versioned literal: the places the parser reads a
+   * reference from.
+   */
+  static final String SEPARATORS = " \t\n\r(:)";
 
   /** What a comment may start after. */
   private static final String BEFORE_COMMENT = " \t\n\r";
@@ -27,7 +31,10 @@ public final class Comments {
   /**
    * Return the document with every comment blanked out.
    *
-   * <p>The result has the same length as the document it was given.
+   * <p>The result has the same length as the document it was given. The document is read token by
+   * token, the way the parser reads it, so a {@code #} inside a delimited reference that starts
+   * right after a group, another reference or a literal is content, as it is in one that starts
+   * after a space (issue #377).
    *
    * @param document text in Lino notation
    * @return the same text with the characters of every comment replaced by spaces
@@ -35,15 +42,11 @@ public final class Comments {
   public static String stripComments(String document) {
     char[] blanked = null;
     int position = 0;
+    // Whether a token may start at position.
+    boolean tokenStart = true;
 
     while (position < document.length()) {
       char character = document.charAt(position);
-
-      if (isQuote(character) && follows(document, position, BEFORE_REFERENCE)) {
-        int end = Parser.quotedReferenceEnd(document, position);
-        position = end < 0 ? position + 1 : end;
-        continue;
-      }
 
       if (character == COMMENT && follows(document, position, BEFORE_COMMENT)) {
         if (blanked == null) {
@@ -58,10 +61,43 @@ public final class Comments {
         continue;
       }
 
+      if (SEPARATORS.indexOf(character) >= 0) {
+        tokenStart = true;
+        position++;
+        continue;
+      }
+
+      if (tokenStart) {
+        int end = delimitedTokenEnd(document, position);
+        if (end >= 0) {
+          position = end;
+          continue;
+        }
+      }
+
+      // Anything else is part of a bare reference, which runs to a separator.
+      tokenStart = false;
       position++;
     }
 
     return blanked == null ? document : new String(blanked);
+  }
+
+  /**
+   * Find where the versioned literal or delimited reference that starts the token at start ends.
+   *
+   * @return the position right after it, or -1 when the token there is a bare reference: a
+   *     delimiter run that never closes is read as one, as the parser reads it
+   */
+  private static int delimitedTokenEnd(String document, int start) {
+    int end = ReferenceLiteral.end(document, start);
+    if (end >= 0) {
+      return end;
+    }
+    if (isQuote(document.charAt(start))) {
+      return Parser.quotedReferenceEnd(document, start);
+    }
+    return -1;
   }
 
   /** Report whether character is one of the delimiters a reference can be written between. */

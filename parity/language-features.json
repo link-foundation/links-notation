@@ -2219,7 +2219,7 @@
         "js/src/quotes.js",
         "js/src/references.js"
       ],
-      "sha256": "330c809427e51f44aa0add3e6ce1c97bfc9058fd775107f5cc839304872502be"
+      "sha256": "bcb1cfdb39ae4eb1dcdf589589448cd03decc60b4648bef121d0a6ebe6736a00"
     },
     "rust": {
       "files": [
@@ -2241,7 +2241,7 @@
         "rust/links-notation/src/stream_parser.rs",
         "rust/links-notation/src/syntax.rs"
       ],
-      "sha256": "db70fd0c709bb09a86a03e54c5af4e9891548d92598e16014f5a7f5e30979f68"
+      "sha256": "7c29f2f7e9a4ada1481af0ffc31810ccb0a11089b2af2977fd1e918c13bd7ffe"
     },
     "python": {
       "files": [
@@ -2257,7 +2257,7 @@
         "python/links_notation/reference_literal.py",
         "python/links_notation/stream_parser.py"
       ],
-      "sha256": "33e150cddcb863bcd814e170c960575adfc4075206942b8d5c9826ac4ad27393"
+      "sha256": "87af12c1aac1ae5f46955522f7ecb0370afb668ba9c5dbfebed285811ffa5d2a"
     },
     "java": {
       "files": [
@@ -2276,7 +2276,7 @@
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParseRuntimeException.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParser.java"
       ],
-      "sha256": "334d7ac623f296daf9d9b5b046380451a1bd27bee37430eaeb997f6459823805"
+      "sha256": "8d9381e3f6d6ceb5ee7b466dc37e3eca2c0af2ff1a38963d2236d6abfc561563"
     },
     "go": {
       "files": [
@@ -2289,7 +2289,7 @@
         "go/reference_literal.go",
         "go/stream_parser.go"
       ],
-      "sha256": "0ad54a7cc69c7cddcc430985a914b92d2e280982b8c96b7f59edeeb8f1ac940b"
+      "sha256": "760e49a485f810fb33e98dabcb80add51d1787ffe8cec3257760f348bd7dbc54"
     },
     "csharp": {
       "files": [
@@ -2323,7 +2323,7 @@
         "csharp/Link.Foundation.Links.Notation/_.cs",
         "csharp/Link.Foundation.Links.Notation/id.cs"
       ],
-      "sha256": "a9685d98e80b63c142249f69438e8da9f2e659f83c8f27550a193b17e570c74c"
+      "sha256": "b89fb986549270fb9cfe1ac70aa00b8a6ed058437e9107f34246aed9f23d8479"
     },
     "php": {
       "files": [
@@ -2351,7 +2351,7 @@
         "php/src/StreamParseException.php",
         "php/src/StreamParser.php"
       ],
-      "sha256": "aed251138d7e477a917ed688da2fa246831ef17ecf503e1557bc461f11a924fe"
+      "sha256": "34092c24345dd709f67f5994bd88640303a24d835d87220f707e8f2abc1d8a63"
     },
     "cpp": {
       "files": [
@@ -2384,7 +2384,7 @@
         "cpp/src/unicode.cpp",
         "cpp/src/unicode.hpp"
       ],
-      "sha256": "5fb1e25f7886d22cb44e3a6694e28836e62810e0cef5d6376c3dac51d5777178"
+      "sha256": "23aa018a5c3edf4e8a8717bd407bc69fe1241e560f41bb79e3e601bdc7e00a9a"
     },
     "swift": {
       "files": [
@@ -2402,7 +2402,7 @@
         "swift/Sources/LinksNotation/Quotes.swift",
         "swift/Sources/LinksNotation/StreamParser.swift"
       ],
-      "sha256": "8d439af587341ca261044aa2534d99b788796a1fd5f3a2d14d89e7629f39080c"
+      "sha256": "6e238fb47fc8637733cf8f05eece41cbf34b60741cdfe558ba9f458261adb38a"
     },
     "kotlin": {
       "files": [
@@ -2424,7 +2424,7 @@
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/References.kt",
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/StreamParser.kt"
       ],
-      "sha256": "972c4a5773977fc228ca32fb3b1cbb1ffcb7a91cfcca594ad121033b10103846"
+      "sha256": "359a1ce52529969e457d98bdd63c60f776715a61190c05f17f933baec6b450ab"
     }
   }
 }

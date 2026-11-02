@@ -13,11 +13,15 @@ on:
       - '.github/**'
       - 'scripts/ci/**'
       - 'experiments/issue-350/**'
+      - 'experiments/issue-377/test_rerun_unacquired.py'
+      - 'experiments/issue-377/test_nuget_publish.py'
   pull_request:
     paths:
       - '.github/**'
       - 'scripts/ci/**'
       - 'experiments/issue-350/**'
+      - 'experiments/issue-377/test_rerun_unacquired.py'
+      - 'experiments/issue-377/test_nuget_publish.py'
   workflow_dispatch:
 
 permissions:
@@ -71,6 +75,14 @@ jobs:
       # merge planner it calls is tested here (issue #350).
       - name: Test the Dependabot merge planner
         run: python3 experiments/issue-350/test_merge_dependabot.py
+      # rerun-unacquired.yml runs only after CI on this repository finishes,
+      # so its decision logic is tested here (issue #377).
+      - name: Test the re-run of jobs no runner picked up
+        run: python3 experiments/issue-377/test_rerun_unacquired.py
+      # The NuGet push runs only on main after a version bump, so its
+      # credential handling is run here with a stand-in dotnet (issue #377).
+      - name: Test the NuGet publish step
+        run: python3 experiments/issue-377/test_nuget_publish.py
 
   zizmor:
     runs-on: ubuntu-26.04

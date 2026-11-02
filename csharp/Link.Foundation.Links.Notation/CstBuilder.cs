@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace Link.Foundation.Links.Notation
 {
@@ -15,9 +14,6 @@ namespace Link.Foundation.Links.Notation
     /// </remarks>
     internal static class CstBuilder
     {
-        /// <summary>A versioned literal at the position the match starts at.</summary>
-        private static readonly Regex Literal = new(@"\G~[0-9]+\{[^} \t\r\n()]*\}", RegexOptions.CultureInvariant);
-
         /// <summary>What ends a bare reference.</summary>
         private const string BareReferenceEnd = " \t\r\n(:)";
 
@@ -40,8 +36,11 @@ namespace Link.Foundation.Links.Notation
         /// <exception cref="ParseException">The parentheses of the document are unbalanced.</exception>
         internal static CstNode Build(string input, bool comments)
         {
-            // References are read in the document the grammar reads: the one with its
-            // comments blanked, which keeps every position of the one written.
+            // Bare references end where they end in the document the grammar reads: the
+            // one with its comments blanked, which keeps every position of the one
+            // written. Delimited references and literals are read, as the grammar reads
+            // them, in the document as written, so a comment never changes what a
+            // reference holds (issue #377).
             var prepared = comments ? Notation.Comments.StripComments(input) : input;
             var document = new CstNode(CstKind.Document);
             // The open containers, innermost last.
@@ -133,20 +132,17 @@ namespace Link.Foundation.Links.Notation
         /// </summary>
         private static CstNode ReadReference(string input, string prepared, int start, out int end)
         {
-            if (prepared[start] == '~')
+            var literal = ReferenceLiteral.End(input, start);
+            if (literal >= 0)
             {
-                var literal = Literal.Match(prepared, start);
-                if (literal.Success)
-                {
-                    end = start + literal.Length;
-                    var text = input.Substring(start, end - start);
-                    return new CstNode(CstKind.Reference, text, ReferenceLiteral.Decode(text));
-                }
+                end = literal;
+                var text = input.Substring(start, end - start);
+                return new CstNode(CstKind.Reference, text, ReferenceLiteral.Decode(text));
             }
-            if (Quotes.IsQuote(prepared[start]) && Quotes.TryParse(prepared, start, out var value, out var length))
+            if (Quotes.IsQuote(input[start]) && Quotes.TryParse(input, start, out var value, out var length))
             {
                 end = start + length;
-                return new CstNode(CstKind.Reference, input.Substring(start, length), value, prepared[start]);
+                return new CstNode(CstKind.Reference, input.Substring(start, length), value, input[start]);
             }
             end = start + 1;
             while (end < prepared.Length && BareReferenceEnd.IndexOf(prepared[end]) < 0)

@@ -241,7 +241,7 @@ func (p *Parser) Parse(input string) ([]*Link, error) {
 
 	p.source = input
 	p.text = prepared
-	p.lines, p.lineOffsets = p.splitLinesRespectingQuotes(prepared)
+	p.lines, p.lineOffsets = p.splitLinesRespectingQuotes(prepared, 0)
 	p.pos = 0
 	p.depth = 0
 	p.indentStack = []int{0}
@@ -322,6 +322,13 @@ func isSubstantiveBody(content string) bool {
 // It returns the decoded value and the position right after the closing quotes,
 // or ok == false when text does not start a delimited reference.
 func parseQuotedStringAt(text string, start int) (value string, end int, ok bool) {
+	return parseQuotedStringWithin(text, start, len(text))
+}
+
+// parseQuotedStringWithin parses the delimited reference starting at start, as
+// parseQuotedStringAt does, reading no further than stop.
+func parseQuotedStringWithin(text string, start, stop int) (value string, end int, ok bool) {
+	text = text[:stop]
 	if start >= len(text) {
 		return "", 0, false
 	}
@@ -370,28 +377,46 @@ func parseQuotedStringAt(text string, start int) (value string, end int, ok bool
 	return "", 0, false
 }
 
-// skipQuotedString skips over the quoted string starting at start.
+// quotedAt reads the delimited reference at start of text, a part of the
+// document that starts at offset: its value and where it ends in text, or
+// ok == false.
+//
+// The reference is read in the document as written, within the extent of text.
+// text comes from the document with its comments blanked, which keeps every
+// byte at the same offset, and blanking a comment must not change what a
+// reference holds or how far it reaches (issue #377).
+func (p *Parser) quotedAt(text string, start, offset int) (value string, end int, ok bool) {
+	value, end, ok = parseQuotedStringWithin(p.source, offset+start, offset+len(text))
+	if !ok {
+		return "", 0, false
+	}
+	return value, end - offset, true
+}
+
+// skipQuotedString skips over the quoted string starting at start, text
+// starting at offset in the document.
 // It returns the position right after the closing quotes, or -1 when text does
 // not start a terminated quoted string.
-func (p *Parser) skipQuotedString(text string, start int) int {
-	_, end, ok := parseQuotedStringAt(text, start)
+func (p *Parser) skipQuotedString(text string, start, offset int) int {
+	_, end, ok := p.quotedAt(text, start, offset)
 	if !ok {
 		return -1
 	}
 	return end
 }
 
-// findMatchingParen finds the parenthesis closing the one at start.
+// findMatchingParen finds the parenthesis closing the one at start, text
+// starting at offset in the document.
 // Quoted strings are skipped, so parentheses inside them are ignored.
 // It returns -1 when the group is not closed.
-func (p *Parser) findMatchingParen(text string, start int) int {
+func (p *Parser) findMatchingParen(text string, start, offset int) int {
 	depth := 0
 	i := start
 
 	for i < len(text) {
 		char := text[i]
 		if char == '"' || char == '\'' || char == '`' {
-			if end := p.skipQuotedString(text, i); end > i {
+			if end := p.skipQuotedString(text, i, offset); end > i {
 				i = end
 				continue
 			}
@@ -410,9 +435,10 @@ func (p *Parser) findMatchingParen(text string, start int) int {
 }
 
 // splitLinesRespectingQuotes splits text into lines while preserving newlines inside quotes
-// and handling multiline parenthesized expressions. It also returns the byte
-// offset in text each line starts at.
-func (p *Parser) splitLinesRespectingQuotes(text string) ([]string, []int) {
+// and handling multiline parenthesized expressions. text starts at offset in
+// the document; it also returns the byte offset in the document each line
+// starts at.
+func (p *Parser) splitLinesRespectingQuotes(text string, offset int) ([]string, []int) {
 	var lines []string
 	var offsets []int
 	var currentLine strings.Builder
@@ -424,7 +450,7 @@ func (p *Parser) splitLinesRespectingQuotes(text string) ([]string, []int) {
 		char := text[i]
 
 		if char == '"' || char == '\'' || char == '`' {
-			if end := p.skipQuotedString(text, i); end > i {
+			if end := p.skipQuotedString(text, i, offset); end > i {
 				// A quoted string is opaque: newlines inside it are content
 				currentLine.WriteString(text[i:end])
 				i = end
@@ -443,7 +469,7 @@ func (p *Parser) splitLinesRespectingQuotes(text string) ([]string, []int) {
 				currentLine.WriteByte(char)
 			} else {
 				lines = append(lines, currentLine.String())
-				offsets = append(offsets, lineStart)
+				offsets = append(offsets, offset+lineStart)
 				currentLine.Reset()
 				lineStart = i + 1
 			}
@@ -457,7 +483,7 @@ func (p *Parser) splitLinesRespectingQuotes(text string) ([]string, []int) {
 	// Add the last line if non-empty
 	if currentLine.Len() > 0 {
 		lines = append(lines, currentLine.String())
-		offsets = append(offsets, lineStart)
+		offsets = append(offsets, offset+lineStart)
 	}
 
 	return lines, offsets
@@ -594,7 +620,7 @@ func countLeadingSpaces(s string) int {
 // document the content starts.
 func (p *Parser) parseLineContent(content string, offset int) *internalLink {
 	// A whole parenthesized group: (id: values), (values) or a nested document
-	if strings.HasPrefix(content, "(") && p.findMatchingParen(content, 0) == len(content)-1 {
+	if strings.HasPrefix(content, "(") && p.findMatchingParen(content, 0, offset) == len(content)-1 {
 		return p.parseParenthesized(content[1:len(content)-1], offset)
 	}
 
@@ -605,7 +631,7 @@ func (p *Parser) parseLineContent(content string, offset int) *internalLink {
 	}
 
 	// Try single-line link: id: values
-	if colonPos := p.findColonOutsideQuotes(content); colonPos >= 0 {
+	if colonPos := p.findColonOutsideQuotes(content, offset); colonPos >= 0 {
 		afterColon := content[colonPos+1:]
 		valuesPart := strings.TrimSpace(afterColon)
 		ref, raw := p.extractReference(content[:colonPos], offset)
@@ -641,10 +667,7 @@ func (p *Parser) parseNestedDocument(inner string, offset int) []*internalLink {
 	savedBaseIndentation := p.baseIndentation
 	savedIndentStack := p.indentStack
 
-	p.lines, p.lineOffsets = p.splitLinesRespectingQuotes(inner)
-	for index := range p.lineOffsets {
-		p.lineOffsets[index] += offset
-	}
+	p.lines, p.lineOffsets = p.splitLinesRespectingQuotes(inner, offset)
 	p.pos = 0
 	p.depth = savedDepth + 1
 	p.baseIndentation = nil
@@ -661,15 +684,16 @@ func (p *Parser) parseNestedDocument(inner string, offset int) []*internalLink {
 	return nested
 }
 
-// findColonOutsideQuotes finds a colon that is not inside quotes or parentheses.
-func (p *Parser) findColonOutsideQuotes(text string) int {
+// findColonOutsideQuotes finds a colon that is not inside quotes or
+// parentheses, text starting at offset in the document.
+func (p *Parser) findColonOutsideQuotes(text string, offset int) int {
 	parenDepth := 0
 	i := 0
 
 	for i < len(text) {
 		char := text[i]
 		if char == '"' || char == '\'' || char == '`' {
-			if end := p.skipQuotedString(text, i); end > i {
+			if end := p.skipQuotedString(text, i, offset); end > i {
 				i = end
 				continue
 			}
@@ -706,7 +730,7 @@ func (p *Parser) parseValues(text string, offset int) []*internalLink {
 		}
 
 		// Try to extract the next value
-		valueEnd, valueText := p.extractNextValue(text, i)
+		valueEnd, valueText := p.extractNextValue(text, i, offset)
 		if valueText != "" && strings.TrimSpace(valueText) != "" {
 			values = append(values, p.parseValue(valueText, offset+i))
 		}
@@ -725,20 +749,28 @@ func isWhitespace(c rune) bool {
 	return c == ' ' || c == '\t' || c == '\n' || c == '\r'
 }
 
-func (p *Parser) extractNextValue(text string, start int) (int, string) {
+// extractNextValue reads the value that starts at start of text, text starting
+// at offset in the document: where it ends and its text.
+func (p *Parser) extractNextValue(text string, start, offset int) (int, string) {
 	if start >= len(text) {
 		return start, ""
 	}
 
 	// Check if this starts with a delimited reference (any N quotes, or a bare
 	// delimiter pair standing for the empty reference)
-	if _, end, ok := parseQuotedStringAt(text, start); ok {
+	if _, end, ok := p.quotedAt(text, start, offset); ok {
+		return end, text[start:end]
+	}
+
+	// A versioned literal is a whole token: what follows it starts the next
+	// one, as the reference grammar (js/src/grammar.pegjs) reads it
+	if end := referenceLiteralEnd(text, start); end >= 0 {
 		return end, text[start:end]
 	}
 
 	// Check if this starts with a parenthesized expression
 	if text[start] == '(' {
-		if end := p.findMatchingParen(text, start); end >= 0 {
+		if end := p.findMatchingParen(text, start, offset); end >= 0 {
 			return end + 1, text[start : end+1]
 		}
 		return len(text), text[start:]
@@ -759,7 +791,7 @@ func (p *Parser) extractNextValue(text string, start int) (int, string) {
 // parseValue parses one value; offset is where in the document it starts.
 func (p *Parser) parseValue(value string, offset int) *internalLink {
 	// Nested link in parentheses
-	if strings.HasPrefix(value, "(") && p.findMatchingParen(value, 0) == len(value)-1 {
+	if strings.HasPrefix(value, "(") && p.findMatchingParen(value, 0, offset) == len(value)-1 {
 		return p.parseParenthesized(value[1:len(value)-1], offset)
 	}
 
@@ -771,7 +803,9 @@ func (p *Parser) parseValue(value string, offset int) *internalLink {
 // extractReference reads the reference written in text, which starts at offset
 // in the document. It returns the reference's value and the text it was
 // written as, sliced from the document as the caller wrote it (comments
-// included), which has every byte at the same offset as the prepared copy.
+// included), which has every byte at the same offset as the prepared copy. A
+// delimited reference is read in the document as written too, so a comment
+// never changes what it holds (issue #377).
 func (p *Parser) extractReference(text string, offset int) (string, *string) {
 	leading := leadingSpaceLength(text)
 	text = strings.TrimSpace(text)
@@ -785,7 +819,7 @@ func (p *Parser) extractReference(text string, offset int) (string, *string) {
 	}
 
 	// Try delimited references (any N quotes, or a bare delimiter pair)
-	if value, end, ok := parseQuotedStringAt(text, 0); ok {
+	if value, end, ok := p.quotedAt(text, 0, start); ok {
 		return value, p.rawReference(start, end)
 	}
 

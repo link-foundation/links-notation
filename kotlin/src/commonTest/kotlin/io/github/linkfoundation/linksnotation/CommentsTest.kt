@@ -105,4 +105,37 @@ class CommentsTest {
         assertEquals("'#'", escapeReference("#"))
         assertEquals("'#ff0000'", escapeReference("#ff0000"))
     }
+
+    // Issue #377: the comment reader and the parser must agree on where every
+    // delimited reference starts and how far it reaches, or a comment is
+    // blanked inside what the parser then reads as a reference.
+
+    @Test
+    fun aHashInsideAReferenceThatFollowsAGroupIsContent() = assertEquals("((<a>) < #b>)", parsesAs("(a)\" #b\"\n"))
+
+    @Test
+    fun aHashInsideAReferenceThatFollowsAnotherReferenceIsContent() {
+        assertEquals("(<x> < #y>)", parsesAs("\"x\"' #y'\n"))
+        assertEquals("(<q> < #c\n\">)", parsesAs("```q```\"\" #c\n\"\"\"\n"))
+    }
+
+    @Test
+    fun aHashInsideAReferenceThatFollowsALiteralIsContent() = assertEquals("(<b> < #b>)", parsesAs("~1{62}\" #b\"\n"))
+
+    @Test
+    fun aReferenceIsReadInTheDocumentAsWrittenCommentsIncluded() {
+        // The body of the first `""` straddles a parenthesis, so it is the
+        // empty reference and the `#` after it opens a comment. Blanking that
+        // comment must not turn the `""` into a reference that holds the
+        // blanked text.
+        assertEquals("(<> <a>)\n(<>)", parsesAs("\"\" a #)b\n\"\"\n"))
+    }
+
+    @Test
+    fun theCommentReaderSkipsTheReferencesTheParserReads() {
+        assertEquals("(a)\" #b\"\n", stripComments("(a)\" #b\"\n"))
+        assertEquals("\"x\"' #y'\n", stripComments("\"x\"' #y'\n"))
+        assertEquals("~1{62}\" #b\"\n", stripComments("~1{62}\" #b\"\n"))
+        assertEquals("a\"b    \n", stripComments("a\"b #c\"\n"))
+    }
 }

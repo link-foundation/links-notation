@@ -243,9 +243,23 @@ kotlin {
 // request failed on kotlin-js-store/yarn.lock. Mocha 12 itself moved to ^7.1.1;
 // the 7.x line keeps the same CommonJS entry point. It is a test-only
 // dependency: the published library has no npm dependencies.
+//
+// Mocha's diff ^7.0.0, glob ^10.4.5 and minimatch ^9.0.5 are raised the same
+// way (issue #377): GHSA-73rr-hh4g-fpgx (diff, fixed in 8.0.3),
+// GHSA-3g3m-2fjr-6pw4 (glob, fixed in 14.0.2) and GHSA-g3hv-75wg-m249
+// (minimatch, fixed in 11.0.1). Dependabot cannot raise them: this lockfile
+// has no package.json beside it, so its updates abort with "package.json not
+// found". scripts/ci/audit-yarn-lock.mjs audits it in security.yml instead.
+// After changing a resolution, run `./gradlew rootPackageJson --rerun
+// kotlinUpgradeYarnLock`: rootPackageJson stays up to date when only its
+// resolutions change, and a plain kotlinUpgradeYarnLock keeps the old lock.
 plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
-    the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>()
-        .resolution("serialize-javascript", "^7.1.4")
+    the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>().apply {
+        resolution("serialize-javascript", "^7.1.4")
+        resolution("diff", "^8.0.3")
+        resolution("glob", "^14.0.2")
+        resolution("minimatch", "^11.0.4")
+    }
 }
 
 tasks.register<JavaExec>("binaryExample") {

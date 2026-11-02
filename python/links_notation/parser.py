@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple
 from .comments import strip_comments
 from .link import Link
 from .quotes import _parse_quoted_string_at
-from .reference_literal import decode_reference_literal
+from .reference_literal import decode_reference_literal, reference_literal_end
 
 if TYPE_CHECKING:
     from .cst import CstNode
@@ -274,14 +274,29 @@ class Parser:
         self.parse(input_text)
         return build_cst(input_text, comments=self.comments)
 
-    def _skip_quoted_string(self, text: str, start: int) -> int:
+    def _quoted_at(self, text: str, start: int, offset: int) -> Optional[tuple]:
         """
-        Skip over the quoted string starting at start.
+        Read the delimited reference at ``start`` in ``text``, a part of the
+        document that starts at ``offset``: ``(value, end)`` with ``end`` in
+        ``text``, or None.
+
+        The reference is read in the document as written, within the extent of
+        ``text``. ``text`` comes from the document with its comments blanked,
+        which keeps every position, and blanking a comment must not change what
+        a reference holds or how far it reaches (issue #377).
+        """
+        parsed = _parse_quoted_string_at(self.source, offset + start, offset + len(text))
+        return None if parsed is None else (parsed[0], parsed[1] - offset)
+
+    def _skip_quoted_string(self, text: str, start: int, offset: int) -> int:
+        """
+        Skip over the quoted string starting at start, ``text`` starting at
+        ``offset`` in the document.
 
         Returns the position right after the closing quotes, or -1 when text
         does not start a terminated quoted string.
         """
-        parsed = _parse_quoted_string_at(text, start)
+        parsed = self._quoted_at(text, start, offset)
         return -1 if parsed is None else parsed[1]
 
     def _split_lines_respecting_quotes(self, text: str, base: int) -> Tuple[List[str], List[int]]:
@@ -323,7 +338,7 @@ class Parser:
                 position = i + 1
             else:
                 # A quoted string is opaque: newlines inside it are content
-                end = self._skip_quoted_string(text, i)
+                end = self._skip_quoted_string(text, i, base)
                 position = end if end > i else i + 1
             counted = position
 
@@ -434,7 +449,7 @@ class Parser:
     def _parse_line_content(self, content: str, offset: int) -> Dict:
         """Parse the content of a single line, which starts at ``offset``."""
         # A whole parenthesized group: (id: values), (values) or a nested document
-        if content.startswith("(") and self._find_matching_paren(content, 0) == len(content) - 1:
+        if content.startswith("(") and self._find_matching_paren(content, 0, offset) == len(content) - 1:
             return self._parse_parenthesized(content[1:-1], offset)
 
         # Try indented ID syntax: id:
@@ -443,7 +458,7 @@ class Parser:
             return {"id": ref, "raw_id": raw, "values": [], "is_indented_id": True}
 
         # Try single-line link: id: values
-        colon_pos = self._find_colon_outside_quotes(content)
+        colon_pos = self._find_colon_outside_quotes(content, offset)
         if colon_pos >= 0:
             after_colon = content[colon_pos + 1 :]
             values_part = after_colon.strip()
@@ -496,9 +511,10 @@ class Parser:
             self.context_depth = saved_context_depth
             self.depth = saved_depth
 
-    def _find_matching_paren(self, text: str, start: int) -> int:
+    def _find_matching_paren(self, text: str, start: int, offset: int) -> int:
         """
-        Find the position of the parenthesis closing the one at start.
+        Find the position of the parenthesis closing the one at start, ``text``
+        starting at ``offset`` in the document.
 
         Quoted strings are skipped, so parentheses inside them are ignored.
         Returns -1 when the group is not closed, or when start is not at an
@@ -525,16 +541,17 @@ class Parser:
                         return run_start + depth - 1
                     depth -= run_end - run_start
                 else:
-                    end = self._skip_quoted_string(text, run_start)
+                    end = self._skip_quoted_string(text, run_start, offset)
                     if end > run_start:
                         position = end
                         break
             else:
                 return -1
 
-    def _find_colon_outside_quotes(self, text: str) -> int:
+    def _find_colon_outside_quotes(self, text: str, offset: int) -> int:
         """
-        Find the position of a colon that's not inside quotes or parentheses.
+        Find the position of a colon that's not inside quotes or parentheses,
+        ``text`` starting at ``offset`` in the document.
 
         This is crucial for correctly parsing nested self-referenced objects.
         For example, in: ((str key) (obj_1: dict ...))
@@ -558,7 +575,7 @@ class Parser:
                     return i
                 position = i + 1
             else:
-                end = self._skip_quoted_string(text, i)
+                end = self._skip_quoted_string(text, i, offset)
                 position = end if end > i else i + 1
             counted = position
 
@@ -578,7 +595,7 @@ class Parser:
                 break
 
             # Try to extract the next value
-            value_end, value_text = self._extract_next_value(text, i)
+            value_end, value_text = self._extract_next_value(text, i, offset)
             if value_text and value_text.strip():
                 values.append(self._parse_value(value_text, offset + i))
             if value_end == i:
@@ -589,9 +606,10 @@ class Parser:
 
         return values
 
-    def _extract_next_value(self, text: str, start: int) -> tuple:
+    def _extract_next_value(self, text: str, start: int, offset: int) -> tuple:
         """
-        Extract the next value from text starting at start position.
+        Extract the next value from text starting at start position, ``text``
+        starting at ``offset`` in the document.
         Returns (end_position, value_text).
         """
         if start >= len(text):
@@ -599,14 +617,20 @@ class Parser:
 
         # Check if this starts with a delimited reference (any N quotes, or a
         # bare delimiter pair standing for the empty reference)
-        quoted = _parse_quoted_string_at(text, start)
+        quoted = self._quoted_at(text, start, offset)
         if quoted is not None:
             _, end = quoted
             return (end, text[start:end])
 
+        # A versioned literal is a whole token: what follows it starts the
+        # next one, as the reference grammar (js/src/grammar.pegjs) reads it
+        literal = reference_literal_end(text, start)
+        if literal != -1:
+            return (literal, text[start:literal])
+
         # Check if this starts with a parenthesized expression
         if text[start] == "(":
-            end = self._find_matching_paren(text, start)
+            end = self._find_matching_paren(text, start, offset)
             if end >= 0:
                 return (end + 1, text[start : end + 1])
             return (len(text), text[start:])
@@ -625,44 +649,32 @@ class Parser:
     def _parse_value(self, value: str, offset: int) -> Dict:
         """Parse a single value (could be a reference or nested link) starting at ``offset``."""
         # Nested link in parentheses
-        if value.startswith("(") and self._find_matching_paren(value, 0) == len(value) - 1:
+        if value.startswith("(") and self._find_matching_paren(value, 0, offset) == len(value) - 1:
             return self._parse_parenthesized(value[1:-1], offset)
 
         # Simple reference
         ref, raw = self._read_reference(value, offset)
         return {"id": ref, "raw_id": raw}
 
-    def _extract_reference(self, text: str) -> str:
-        """Extract reference, handling quoted strings with escaping support."""
-        text = text.strip()
-
-        if re.match(r"~[0-9]+\{", text):
-            return decode_reference_literal(text)
-
-        # Try delimited references (any N quotes, or a bare delimiter pair)
-        quoted = _parse_quoted_string_at(text, 0)
-        if quoted is not None:
-            return quoted[0]
-
-        # Unquoted
-        return text
-
     def _read_reference(self, text: str, offset: int) -> Tuple[str, str]:
         """
         Read the reference ``text`` written at ``offset`` (surrounding
         whitespace allowed): what it means, and the text it was written as.
 
-        The text is sliced from the document as the caller wrote it, which has
-        the same positions as the one with its comments blanked out.
+        The reference is read in the document as the caller wrote it, which
+        has the same positions as the one with its comments blanked out.
         """
         reference = text.strip()
         start = offset + len(text) - len(text.lstrip())
         end = start + len(reference)
-        if not re.match(r"~[0-9]+\{", reference):
-            quoted = _parse_quoted_string_at(reference, 0)
-            if quoted is not None:
-                end = start + quoted[1]
-        return self._extract_reference(reference), self.source[start:end]
+        if re.match(r"~[0-9]+\{", reference):
+            return decode_reference_literal(reference), self.source[start:end]
+        # Delimited references (any N quotes, or a bare delimiter pair)
+        quoted = self._quoted_at(reference, 0, start)
+        if quoted is not None:
+            return quoted[0], self.source[start : start + quoted[1]]
+        # Unquoted
+        return reference, self.source[start:end]
 
     def _with_raw_id(self, link: Link, item: Dict) -> Link:
         """

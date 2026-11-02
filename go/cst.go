@@ -18,7 +18,6 @@ package lino
 import (
 	"errors"
 	"fmt"
-	"regexp"
 	"strings"
 )
 
@@ -174,10 +173,6 @@ func (p *Parser) ParseCst(input string) (*CstNode, error) {
 	return buildCst(input, p.Comments)
 }
 
-// cstLiteral is a versioned literal at the start of the text it is matched
-// against.
-var cstLiteral = regexp.MustCompile(`^~[0-9]+\{[^} \t\r\n()]*\}`)
-
 // bareReferenceEnd lists what ends a bare reference.
 const bareReferenceEnd = " \t\r\n(:)"
 
@@ -195,8 +190,10 @@ var ErrUnbalancedParentheses = errors.New("unbalanced parentheses")
 // buildCst builds the concrete syntax tree of a document that has already been
 // parsed. comments tells whether # starts a comment.
 func buildCst(input string, comments bool) (*CstNode, error) {
-	// References are read in the document the parser reads: the one with its
-	// comments blanked, which keeps every byte at the offset it was written at.
+	// Bare references end where they end in the document the parser reads: the
+	// one with its comments blanked, which keeps every byte at the offset it was
+	// written at. Delimited references and literals are read in the document as
+	// written (see readCstReference).
 	prepared := input
 	if comments {
 		prepared = StripComments(input)
@@ -267,23 +264,23 @@ func buildCst(input string, comments bool) (*CstNode, error) {
 	return document, nil
 }
 
-// readCstReference reads the reference token that starts at start, its end
-// found in prepared as the parser finds it, its text taken from input.
+// readCstReference reads the reference token that starts at start. A
+// versioned literal or a delimited reference is read, as the parser reads it,
+// in the document as written, so a comment never changes what a reference
+// holds (issue #377); a bare reference ends where it ends in prepared.
 func readCstReference(input, prepared string, start int) *CstNode {
-	if prepared[start] == '~' {
-		if match := cstLiteral.FindStringIndex(prepared[start:]); match != nil {
-			text := input[start : start+match[1]]
-			value, err := DecodeReferenceLiteral(text)
-			if err != nil {
-				// Parse refuses a malformed literal, so this is never reached
-				// for a parsed document; keep the text as written.
-				value = text
-			}
-			return &CstNode{Kind: CstReference, text: text, Value: &value}
+	if end := referenceLiteralEnd(input, start); end >= 0 {
+		text := input[start:end]
+		value, err := DecodeReferenceLiteral(text)
+		if err != nil {
+			// Parse refuses a malformed literal, so this is never reached
+			// for a parsed document; keep the text as written.
+			value = text
 		}
+		return &CstNode{Kind: CstReference, text: text, Value: &value}
 	}
-	if isQuote(prepared[start]) {
-		if value, end, ok := parseQuotedStringAt(prepared, start); ok {
+	if isQuote(input[start]) {
+		if value, end, ok := parseQuotedStringAt(input, start); ok {
 			return &CstNode{Kind: CstReference, text: input[start:end], Value: &value, Quote: input[start : start+1]}
 		}
 	}

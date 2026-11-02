@@ -23,10 +23,14 @@ inline constexpr std::string_view quotes = "\"'`";
 
 inline bool is_quote(char character) { return quotes.find(character) != std::string_view::npos; }
 
-/// What a delimited reference holds, and how many bytes of the document it takes.
+/// What a delimited reference holds, how many bytes of the document it takes,
+/// and whether a run of delimiters closes it. An even run nothing closes is the
+/// empty reference, until a closing run is written after it, which turns it
+/// into one holding what follows: a stream must wait for that run.
 struct Reading {
   std::string value;
   std::size_t length = 0;
+  bool closed = true;
 };
 
 /// The maximal runs of one delimiter in a document, each linked to the next
@@ -65,6 +69,17 @@ class DelimitedReferences {
 
 /// The reference opened where `rest` starts, read without a list of runs.
 std::optional<Reading> read_reference(std::string_view rest);
+
+/// The offset just past the versioned literal `~[0-9]+\{[^} \t\r\n()]*\}`
+/// that starts at byte `start` of `text`, if one does.
+std::optional<std::size_t> reference_literal_end(std::string_view text, std::size_t start);
+
+/// The offset just past the versioned literal or delimited reference that
+/// starts the token at `start`, or nothing when the token there is a bare
+/// reference: a delimiter run that never closes is read as one, as the grammar
+/// reads it. `references` are those of `document`.
+std::optional<std::size_t> delimited_token_end(std::string_view document, std::size_t start,
+                                               const DelimitedReferences& references);
 
 }  // namespace links_notation::detail
 

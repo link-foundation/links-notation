@@ -37,8 +37,13 @@ bool is_substantive_body(std::string_view content) {
 // `rest`, closed by the run that ends at `end` when there is one.
 std::optional<Reading> reading(std::string_view rest, char quote, std::size_t count, std::optional<std::size_t> end) {
   std::optional<Reading> empty_reference;
-  if (count % 2 == 0) empty_reference = Reading{std::string(), count};
-  if (!end) return empty_reference;
+  if (count % 2 == 0) empty_reference = Reading{std::string(), count, true};
+  if (!end) {
+    // Nothing closes the run: an even one is the empty reference, which a
+    // later closing run would still turn into one holding what follows.
+    if (empty_reference) empty_reference->closed = false;
+    return empty_reference;
+  }
 
   const std::string_view body = rest.substr(count, *end - count);
   std::string value;
@@ -58,7 +63,7 @@ std::optional<Reading> reading(std::string_view rest, char quote, std::size_t co
   value.append(body.substr(position));
 
   if (empty_reference && !is_substantive_body(value)) return empty_reference;
-  return Reading{std::move(value), *end};
+  return Reading{std::move(value), *end, true};
 }
 
 std::size_t quote_index(char quote) { return quotes.find(quote); }
@@ -157,6 +162,32 @@ std::optional<Reading> read_reference(std::string_view rest) {
     }
   }
   return reading(rest, quote, count, end);
+}
+
+std::optional<std::size_t> reference_literal_end(std::string_view text, std::size_t start) {
+  std::size_t position = start;
+  if (position >= text.size() || text[position] != '~') return std::nullopt;
+  ++position;
+  const std::size_t digits = position;
+  while (position < text.size() && text[position] >= '0' && text[position] <= '9') ++position;
+  if (position == digits || position >= text.size() || text[position] != '{') return std::nullopt;
+  ++position;
+  for (; position < text.size(); ++position) {
+    const char character = text[position];
+    if (character == '}') return position + 1;
+    if (character == ' ' || character == '\t' || character == '\r' || character == '\n' || character == '(' ||
+        character == ')') {
+      return std::nullopt;
+    }
+  }
+  return std::nullopt;
+}
+
+std::optional<std::size_t> delimited_token_end(std::string_view document, std::size_t start,
+                                               const DelimitedReferences& references) {
+  if (const auto literal = reference_literal_end(document, start)) return literal;
+  if (start < document.size() && is_quote(document[start])) return references.end_at(start);
+  return std::nullopt;
 }
 
 }  // namespace links_notation::detail
