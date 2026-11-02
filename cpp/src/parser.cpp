@@ -97,9 +97,11 @@ class Grammar {
   /// Reads `document`, the prepared copy of `source` whose comments are
   /// blanked. Both have the same length, so the text a reference was written
   /// as is sliced from `source` at the positions read in `document`; with
-  /// `syntax` off it is not kept at all.
+  /// `syntax` off it is not kept at all. Delimited references are read in
+  /// `source`, so blanking a comment never changes what a reference holds or
+  /// how far it reaches (issue #377).
   Grammar(std::string_view document, std::string_view source, bool syntax, std::size_t max_depth)
-      : document_(document), source_(source), syntax_(syntax), references_(document), max_depth_(max_depth) {}
+      : document_(document), source_(source), syntax_(syntax), references_(source), max_depth_(max_depth) {}
 
   /// Reads the whole document, or says where it stopped.
   std::vector<RawLink> read() {
@@ -221,7 +223,10 @@ class Grammar {
       expected_at(input, "a valid version 1 reference literal");
       return failure_at(input);
     }
-    if (auto reading = references_.read(input)) {
+    // A delimiter is never blanked, so one here opens the same reference in
+    // the document as written.
+    if (auto reading =
+            input < document_.size() && detail::is_quote(document_[input]) ? references_.read(input) : std::nullopt) {
       out = std::move(reading->value);
       return ok_at(input + reading->length);
     }
