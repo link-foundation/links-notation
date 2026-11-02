@@ -19,7 +19,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
 | Python | 270 | 27 |
-| JavaScript | 332 | 32 |
+| JavaScript | 333 | 32 |
 | Rust | 421 | 32 |
 | C# | 316 | 30 |
 | Go | 158 | 20 |
@@ -272,11 +272,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | kinds have the shared names | ❌ | ❌ | [✅](rust/links-notation/tests/cst_tests.rs#L116) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L119) | ❌ | ❌ | ❌ | ❌ |
 | kinds have the shared s expression names | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L116) | ❌ | ❌ |
 | only reference tokens have a value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/cst_tests.cpp#L60) |
+| reads versioned literals in linear time | ❌ | [✅](js/tests/Cst.test.js#L78) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | recovers every document exactly | ❌ | ❌ | [✅](rust/links-notation/tests/cst_tests.rs#L46) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/cst_tests.cpp#L69) |
 | recovers the document exactly | [✅](python/tests/test_cst.py#L80) | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/CstTest.php#L64) | ❌ |
 | reference tokens carry their value and delimiter | [✅](python/tests/test_cst.py#L27) | [✅](js/tests/Cst.test.js#L19) | [✅](rust/links-notation/tests/cst_tests.rs#L20) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L36) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L34) | [✅](php/tests/CstTest.php#L32) | [✅](cpp/tests/cst_tests.cpp#L43) |
 | rejects unbalanced or too deep documents | [✅](python/tests/test_cst.py#L115) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| rejects what parse rejects | [✅](python/tests/test_cst.py#L120) | [✅](js/tests/Cst.test.js#L78) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L127) | ❌ | ❌ | [✅](php/tests/CstTest.php#L130) | [✅](cpp/tests/cst_tests.cpp#L133) |
+| rejects what parse rejects | [✅](python/tests/test_cst.py#L120) | [✅](js/tests/Cst.test.js#L104) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L127) | ❌ | ❌ | [✅](php/tests/CstTest.php#L130) | [✅](cpp/tests/cst_tests.cpp#L133) |
 | rejects what parse rejects and unbalanced parentheses | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L133) | ❌ | ❌ |
 | rejects what the parser rejects | ❌ | ❌ | [✅](rust/links-notation/tests/cst_tests.rs#L159) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | s expression escapes text | [✅](python/tests/test_cst.py#L41) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -288,7 +289,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | writes non ascii as is and escapes control characters | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L81) | ❌ | ❌ |
 | writes non ascii text as it is | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/CstTest.php#L79) | ❌ |
 
-**Category totals:** Python: 10, JavaScript: 5, Rust: 8, C#: 9, Go: 6, Java: 8, PHP: 8, C++: 11
+**Category totals:** Python: 10, JavaScript: 6, Rust: 8, C#: 9, Go: 6, Java: 8, PHP: 8, C++: 11
 
 ## Edge Case Parser
 
@@ -1203,7 +1204,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
 
-**Cst** (24 missing):
+**Cst** (25 missing):
 - anemptydocumenthasnolines
 - anunclosedquoteisabarereference
 - cstgroupbelongstothelineitopenson
@@ -1220,6 +1221,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - kindshavethesharednames
 - kindshavethesharedsexpressionnames
 - onlyreferencetokenshaveavalue
+- readsversionedliteralsinlineartime
 - recoverseverydocumentexactly
 - rejectswhatparserejectsandunbalancedparentheses
 - rejectswhattheparserrejects
@@ -1600,7 +1602,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 472 tests**
+**Total missing: 473 tests**
 
 ### JavaScript Missing Tests
 
@@ -2182,7 +2184,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - workswiththenode.jsevents.onasynciterator
 - workswiththenode.jsevents.oncehelper
 
-**Cst** (26 missing):
+**Cst** (27 missing):
 - anemptydocumenthasnolines
 - anunclosedquoteisabarereference
 - cstgroupbelongstothelineitopenson
@@ -2198,6 +2200,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - kindsarewrittenbyname
 - kindshavethesharedsexpressionnames
 - onlyreferencetokenshaveavalue
+- readsversionedliteralsinlineartime
 - recoversthedocumentexactly
 - rejectsunbalancedortoodeepdocuments
 - rejectswhatparserejects
@@ -2451,7 +2454,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 322 tests**
+**Total missing: 323 tests**
 
 ### C# Missing Tests
 
@@ -2561,7 +2564,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Comments** (1 missing):
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
 
-**Cst** (25 missing):
+**Cst** (26 missing):
 - anemptydocumenthasnolines
 - anunclosedquoteisabarereference
 - cstgroupbelongstothelineitopenson
@@ -2577,6 +2580,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - kindsarewrittenbyname
 - kindshavethesharedsexpressionnames
 - onlyreferencetokenshaveavalue
+- readsversionedliteralsinlineartime
 - recoverseverydocumentexactly
 - recoversthedocumentexactly
 - rejectsunbalancedortoodeepdocuments
@@ -2943,7 +2947,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 426 tests**
+**Total missing: 427 tests**
 
 ### Go Missing Tests
 
@@ -3088,7 +3092,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
 
-**Cst** (28 missing):
+**Cst** (29 missing):
 - agroupbelongstothelineitopenson
 - anemptydocumenthasnolines
 - anunclosedquoteisabarereference
@@ -3102,6 +3106,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - kindshavethesharednames
 - kindshavethesharedsexpressionnames
 - onlyreferencetokenshaveavalue
+- readsversionedliteralsinlineartime
 - recoverseverydocumentexactly
 - recoversthedocumentexactly
 - referencetokenscarrytheirvalueanddelimiter
@@ -3601,7 +3606,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 580 tests**
+**Total missing: 581 tests**
 
 ### Java Missing Tests
 
@@ -3741,7 +3746,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
 
-**Cst** (26 missing):
+**Cst** (27 missing):
 - anunclosedquoteisabarereference
 - cstgroupbelongstothelineitopenson
 - cstisalosslessviewofadocument
@@ -3757,6 +3762,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - kindsarewrittenbyname
 - kindshavethesharednames
 - onlyreferencetokenshaveavalue
+- readsversionedliteralsinlineartime
 - recoverseverydocumentexactly
 - recoversthedocumentexactly
 - rejectsunbalancedortoodeepdocuments
@@ -4215,7 +4221,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 536 tests**
+**Total missing: 537 tests**
 
 ### PHP Missing Tests
 
@@ -4358,7 +4364,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
 
-**Cst** (26 missing):
+**Cst** (27 missing):
 - anunclosedquoteisabarereference
 - cstgroupbelongstothelineitopenson
 - cstisalosslessviewofadocument
@@ -4375,6 +4381,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - kindshavethesharednames
 - kindshavethesharedsexpressionnames
 - onlyreferencetokenshaveavalue
+- readsversionedliteralsinlineartime
 - recoverseverydocumentexactly
 - rejectsunbalancedortoodeepdocuments
 - rejectswhatparserejectsandunbalancedparentheses
@@ -4771,7 +4778,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 486 tests**
+**Total missing: 487 tests**
 
 ### C++ Missing Tests
 
@@ -4871,7 +4878,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - workswiththenode.jsevents.onasynciterator
 - workswiththenode.jsevents.oncehelper
 
-**Cst** (23 missing):
+**Cst** (24 missing):
 - cstgroupbelongstothelineitopenson
 - cstisalosslessviewofadocument
 - cstreadshashasreferencetextwithoutcomments
@@ -4884,6 +4891,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - isthedefaultlosslessviewofadocument
 - kindshavethesharednames
 - kindshavethesharedsexpressionnames
+- readsversionedliteralsinlineartime
 - recoversthedocumentexactly
 - rejectsunbalancedortoodeepdocuments
 - rejectswhatparserejectsandunbalancedparentheses
@@ -5198,5 +5206,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 373 tests**
+**Total missing: 374 tests**
 
