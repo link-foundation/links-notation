@@ -51,6 +51,8 @@ def ecosystems(path):
         return ["composer"]
     if name == "go.mod":
         return ["gomod"]
+    if name == "Package.swift":
+        return ["swift"]
     if name == ".pre-commit-config.yaml":
         return ["pre-commit"]
     if re.search(r"dockerfile|containerfile", name, re.IGNORECASE):
