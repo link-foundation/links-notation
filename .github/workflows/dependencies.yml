@@ -23,21 +23,31 @@ jobs:
       - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
+          # A pull request's merge commit and its base (HEAD^1).
+          fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 1 }}
       - uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.15'
       - name: Test the dependency checker without network access
         run: python experiments/issue-325/test_dependency_check.py
       # A manifest Dependabot is not told about never receives an update; the
-      # old config missed 35 committed manifests (issue #348).
+      # old config missed 35 committed manifests (issue #348). A label it is
+      # told to apply has to exist, or it is silently dropped (issue #350).
       - name: Require a Dependabot entry for every committed manifest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python experiments/issue-348/test_dependabot_check.py
           python scripts/ci/check-dependabot.py
+      # A pull request fails only for the declarations it adds or changes;
+      # every other outdated one is printed as a note and fails the push and
+      # scheduled runs on main instead. Gating each Dependabot pull request
+      # on every other package kept all of them red (issue #350).
       - name: Require current stable dependencies and actions
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python scripts/ci/check-dependencies.py
+          CHANGED_SINCE: ${{ github.event_name == 'pull_request' && 'HEAD^1' || '' }}
+        run: python scripts/ci/check-dependencies.py ${CHANGED_SINCE:+--changed-since "$CHANGED_SINCE"}
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '24'
@@ -45,7 +55,9 @@ jobs:
         with:
           bun-version: latest
       - name: Require current compatible transitive npm dependencies and both JS locks
-        run: node scripts/ci/check-npm-locks.mjs
+        env:
+          ADVISORY: ${{ github.event_name == 'pull_request' && '--advisory' || '' }}
+        run: node scripts/ci/check-npm-locks.mjs ${ADVISORY:+"$ADVISORY"}
       - name: Preserve dependency resolution evidence
         if: failure()
         uses: actions/upload-artifact@v7.0.2

@@ -6,8 +6,13 @@ says so (issue #348). Each committed manifest outside dev/log maps to a
 package ecosystem; its directory, or the workspace or solution directory
 that owns it, must be listed for that ecosystem. Deliberate exclusions are
 named in EXCLUDED with their reason.
+
+With GITHUB_REPOSITORY set (always, in Actions), it also requires every
+label the config applies to exist: Dependabot skips a missing label with
+only a comment on the pull request (issue #350).
 """
 
+import os
 import re
 import subprocess
 import sys
@@ -86,6 +91,33 @@ def configured(text):
     return entries
 
 
+def labels(text):
+    """Every label the `labels:` keys in dependabot.yml apply."""
+    found, in_list = set(), False
+    for line in text.splitlines():
+        stripped = line.split("#", 1)[0].rstrip()
+        match = re.match(r"\s*labels:\s*(.*)$", stripped)
+        if match:
+            inline = re.findall(r"[\"']?([^\"',\[\]]+?)[\"']?\s*(?:,|\])", match[1])
+            found.update(label.strip() for label in inline if label.strip())
+            in_list = not match[1].strip()
+            continue
+        match = re.match(r"\s*-\s*[\"']?([^\"']+?)[\"']?\s*$", stripped)
+        if match and in_list:
+            found.add(match[1])
+            continue
+        in_list = False
+    return found
+
+
+def missing_labels(text, existing):
+    return [
+        f"label {label!r} does not exist; create it with "
+        f"`gh label create {label}` or remove it"
+        for label in sorted(labels(text) - set(existing))
+    ]
+
+
 def owners(path, files):
     """Directories whose Dependabot entry would update the file at `path`."""
     parent = PurePosixPath(path).parent
@@ -138,11 +170,32 @@ def main():
             ["git", "ls-files"], cwd=ROOT, check=True, capture_output=True, text=True
         ).stdout.splitlines()
     )
-    missing = problems(files, (ROOT / CONFIG).read_text())
+    text = (ROOT / CONFIG).read_text()
+    missing = problems(files, text)
+    repository = os.environ.get("GITHUB_REPOSITORY")
+    if repository:
+        existing = subprocess.run(
+            [
+                "gh",
+                "api",
+                f"repos/{repository}/labels",
+                "--paginate",
+                "--jq",
+                ".[].name",
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.splitlines()
+        missing += missing_labels(text, existing)
+    else:
+        print("GITHUB_REPOSITORY is not set; the labels were not checked.")
     for line in missing:
         print(f"::error file={CONFIG}::{line}")
     if not missing:
         print(f"{CONFIG} covers every committed manifest outside dev/log.")
+        if repository:
+            print(f"Every label it applies exists in {repository}.")
     return 1 if missing else 0
 
 

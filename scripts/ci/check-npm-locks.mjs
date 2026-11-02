@@ -2,10 +2,17 @@
 // Refresh every upstream-compatible transitive dependency; never force an
 // incompatible major through a parent's constraint. Direct majors are checked
 // independently by check-dependencies.py.
+//
+// --advisory (pull requests, issue #350): report stale transitive packages
+// without failing. A Dependabot bump of one package cannot refresh every
+// other lock entry, so failing would block every such pull request; the push
+// and scheduled runs on main stay blocking. npm ci and bun's frozen lockfile
+// check fail in both modes.
 import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 const projects = ['js', 'docs/website', 'docs/comparison', 'benchmarks/js', 'benchmarks/tools'];
-let failed = false;
+const advisory = process.argv.includes('--advisory');
+let stale = 0;
 mkdirSync('ci-logs/dependencies', { recursive: true });
 for (const directory of projects) {
   const label = directory.replaceAll('/', '-');
@@ -21,7 +28,7 @@ for (const directory of projects) {
     for (const entry of Array.isArray(entries) ? entries : [entries]) {
       if (entry.current && entry.current !== entry.wanted) {
         console.error(`${directory}: ${name} ${entry.current} -> ${entry.wanted} (compatible update)`);
-        failed = true;
+        stale += 1;
       }
     }
   }
@@ -29,4 +36,9 @@ for (const directory of projects) {
 }
 // Both committed JS package-manager locks must be valid after refresh.
 execFileSync('bun', ['install', '--frozen-lockfile', '--ignore-scripts'], { cwd: 'js', stdio: 'inherit' });
-process.exitCode = failed ? 1 : 0;
+if (stale && advisory) {
+  console.log(`${stale} compatible transitive updates are pending; the scheduled check on main fails until they are applied.`);
+} else if (stale) {
+  console.error('To fix: run `npm update --prefix <directory>` for each directory above (and `bun install` in js), then commit the lockfiles.');
+}
+process.exitCode = stale && !advisory ? 1 : 0;
