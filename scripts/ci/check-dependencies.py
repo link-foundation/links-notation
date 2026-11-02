@@ -129,6 +129,9 @@ def latest(ecosystem, name):
             except urllib.error.HTTPError as error:
                 if error.code != 404:
                     raise
+                # The error owns the response body; an unclosed one is a
+                # ResourceWarning in every run (issue #377).
+                error.close()
                 errors.append(f"{repository}: 404")
                 continue
             versions += [v.text for v in data.findall("./versioning/versions/version")]
@@ -671,15 +674,19 @@ def update(dependency, release):
         )
     elif dependency.ecosystem == "maven":
         group, artifact = dependency.name.split(":")
+        # Spotless names the formatter in <googleJavaFormat>; java/pom.xml now
+        # declares it as an ordinary dependency of the format profile, which
+        # --update silently skipped (issue #377).
+        spotless = 0
         if artifact == "google-java-format":
-            source = re.sub(
+            source, spotless = re.subn(
                 r"(<googleJavaFormat>\s*<version>)"
                 + re.escape(original)
                 + "</version>",
                 lambda m: m[1] + replacement + "</version>",
                 source,
             )
-        else:
+        if not spotless:
             pattern = (
                 r"(<groupId>"
                 + re.escape(group)
@@ -700,7 +707,16 @@ def update(dependency, release):
                 source = re.sub(
                     pattern, lambda m: m[1] + replacement + "</version>", source
                 )
+    if source == path.read_text():
+        # A declaration the checker reads but cannot rewrite would otherwise
+        # stay stale after an --update that reported success.
+        print(
+            f"ERROR {path}: --update found no {dependency.name} {original} to "
+            f"raise to {release}; edit the declaration by hand"
+        )
+        return False
     path.write_text(source)
+    return True
 
 
 def main():
@@ -765,7 +781,8 @@ def main():
                 continue
             print(f"OUTDATED {line}")
             if args.update:
-                update(dependency, release)
+                if update(dependency, release) is False:
+                    failures += 1
             else:
                 failures += 1
     print(
