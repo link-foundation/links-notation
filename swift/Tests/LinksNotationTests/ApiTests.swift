@@ -7,58 +7,58 @@ import XCTest
 final class ApiTests: XCTestCase {
     private let parser = Parser()
 
-    func testTestIsRef() {
+    func testIsRef() {
         // Neither JS nor Swift has separate Ref/Link types; a link without values is a reference.
         let simpleLink = Link(id: "some_value")
         XCTAssertEqual(simpleLink.id, "some_value")
         XCTAssertEqual(simpleLink.values, [])
     }
 
-    func testTestIsLink() {
+    func testIsLink() {
         let link = Link(id: "id", values: [Link(id: "child")])
         XCTAssertEqual(link.id, "id")
         XCTAssertEqual(link.values.count, 1)
         XCTAssertEqual(link.values[0].id, "child")
     }
 
-    func testTestIsRefEquivalent() {
+    func testIsRefEquivalent() {
         // Neither JS nor Swift has separate Ref/Link types; a link without values is a reference.
         let simpleLink = Link(id: "some_value")
         XCTAssertEqual(simpleLink.id, "some_value")
         XCTAssertEqual(simpleLink.values, [])
     }
 
-    func testTestIsLinkEquivalent() {
+    func testIsLinkEquivalent() {
         let link = Link(id: "id", values: [Link(id: "child")])
         XCTAssertEqual(link.id, "id")
         XCTAssertEqual(link.values.count, 1)
         XCTAssertEqual(link.values[0].id, "child")
     }
 
-    func testTestEmptyLink() {
+    func testEmptyLink() {
         // JS toString() is the Swift description.
         let link = Link(id: nil, values: [])
         XCTAssertEqual(link.description, "()")
     }
 
-    func testTestSimpleLink() throws {
+    func testSimpleLink() throws {
         let parsed = try parser.parse("(1: 1 1)")
         XCTAssertEqual(parsed[0].format(), "(1: 1 1)")
     }
 
-    func testTestLinkWithSourceTarget() throws {
+    func testLinkWithSourceTarget() throws {
         let input = "(index: source target)"
         let parsed = try parser.parse(input)
         XCTAssertEqual(parsed[0].format(), input)
     }
 
-    func testTestLinkWithSourceTypeTarget() throws {
+    func testLinkWithSourceTypeTarget() throws {
         let input = "(index: source type target)"
         let parsed = try parser.parse(input)
         XCTAssertEqual(parsed[0].format(), input)
     }
 
-    func testTestSingleLineFormat() throws {
+    func testSingleLineFormat() throws {
         let parsed = try parser.parse("id: value1 value2")
         let output = parsed[0].format(lessParentheses: true)
         XCTAssertTrue(output.contains("id"))
@@ -66,21 +66,21 @@ final class ApiTests: XCTestCase {
         XCTAssertTrue(output.contains("value2"))
     }
 
-    func testTestQuotedReferences() throws {
+    func testQuotedReferences() throws {
         let parsed = try parser.parse(#"("quoted id": "value with spaces")"#)
         let output = parsed[0].format()
         XCTAssertTrue(output.contains("quoted id"))
         XCTAssertTrue(output.contains("value with spaces"))
     }
 
-    func testTestQuotedReferencesParsing() throws {
+    func testQuotedReferencesParsing() throws {
         let parsed = try parser.parse(#"("quoted id": "value with spaces")"#)
         let output = formatLinks(parsed)
         XCTAssertTrue(output.contains("quoted id"))
         XCTAssertTrue(output.contains("value with spaces"))
     }
 
-    func testTestIndentedIdSyntaxParsing() throws {
+    func testIndentedIdSyntaxParsing() throws {
         let indented = "id:\n  value1\n  value2"
         let inline = "(id: value1 value2)"
 
@@ -90,7 +90,7 @@ final class ApiTests: XCTestCase {
         XCTAssertEqual(indentedOutput, "(id: value1 value2)")
     }
 
-    func testTestIndentedIdSyntaxRoundtrip() throws {
+    func testIndentedIdSyntaxRoundtrip() throws {
         let input = "id:\n  value1\n  value2"
         let parsed = try parser.parse(input)
 
@@ -100,7 +100,7 @@ final class ApiTests: XCTestCase {
         XCTAssertEqual(formatLinks(parsed, options: options), input)
     }
 
-    func testTestMultipleIndentedIdSyntaxParsing() throws {
+    func testMultipleIndentedIdSyntaxParsing() throws {
         let indented = "id1:\n  a\n  b\nid2:\n  c\n  d"
         let inline = "(id1: a b)\n(id2: c d)"
 
@@ -110,7 +110,7 @@ final class ApiTests: XCTestCase {
         XCTAssertEqual(indentedOutput, "(id1: a b)\n(id2: c d)")
     }
 
-    func testTestMultipleIndentedIdSyntaxRoundtrip() throws {
+    func testMultipleIndentedIdSyntaxRoundtrip() throws {
         let input = "id1:\n  a\n  b\nid2:\n  c\n  d"
         let parsed = try parser.parse(input)
 

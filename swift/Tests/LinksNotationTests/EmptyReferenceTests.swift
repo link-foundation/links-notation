@@ -23,24 +23,24 @@ final class EmptyReferenceTests: XCTestCase {
         try parser.parse(input).map(render).joined(separator: "\n")
     }
 
-    func testTestBareDelimiterPairIsTheEmptyReference() throws {
+    func testBareDelimiterPairIsTheEmptyReference() throws {
         XCTAssertEqual(try parsesAs("(a \"\" b)"), "(<a> <> <b>)")
     }
 
-    func testTestEveryDelimiterStyleYieldsTheSameEmptyReference() throws {
+    func testEveryDelimiterStyleYieldsTheSameEmptyReference() throws {
         XCTAssertEqual(try parsesAs("(a \"\" b)"), "(<a> <> <b>)")
         XCTAssertEqual(try parsesAs("(a '' b)"), "(<a> <> <b>)")
         XCTAssertEqual(try parsesAs("(a `` b)"), "(<a> <> <b>)")
     }
 
-    func testTestAdjacentEmptyReferencesStaySeparate() throws {
+    func testAdjacentEmptyReferencesStaySeparate() throws {
         XCTAssertEqual(try parsesAs("(a \"\" \"\" b)"), "(<a> <> <> <b>)")
         XCTAssertEqual(try parsesAs("(a '' '' b)"), "(<a> <> <> <b>)")
         XCTAssertEqual(try parsesAs("(a `` `` b)"), "(<a> <> <> <b>)")
         XCTAssertEqual(try parsesAs("(a \"\"  \"\" b)"), "(<a> <> <> <b>)")
     }
 
-    func testTestNestedEmptyReferencesParse() throws {
+    func testNestedEmptyReferencesParse() throws {
         XCTAssertEqual(try parsesAs("(\"\" (\"\" 1))"), "(<> (<> <1>))")
         XCTAssertEqual(try parsesAs("(\"\" ('' 1))"), "(<> (<> <1>))")
         XCTAssertEqual(try parsesAs("(\"x\" (\"\" 1))"), "(<x> (<> <1>))")
@@ -49,12 +49,12 @@ final class EmptyReferenceTests: XCTestCase {
         XCTAssertEqual(try parsesAs("(\"\" 1 (\"\" 1))"), "(<> <1> (<> <1>))")
     }
 
-    func testTestEmptyReferenceIsValidAsAnId() throws {
+    func testEmptyReferenceIsValidAsAnId() throws {
         XCTAssertEqual(try parsesAs("(\"\": 1)"), "(<>: <1>)")
         XCTAssertEqual(try parsesAs("(o: (\"\" (o: (\"\" 1))))"), "(<o>: (<> (<o>: (<> <1>))))")
     }
 
-    func testTestNQuoteDelimitedBodiesAreUnchanged() throws {
+    func testNQuoteDelimitedBodiesAreUnchanged() throws {
         // A run that encloses a substantive body keeps its n-quote meaning.
         XCTAssertEqual(try parsesAs("(a \"\"x\"\" b)"), "(<a> <x> <b>)")
         XCTAssertEqual(try parsesAs("(x \"\" \" \"\")"), "(<x> < \" >)")
@@ -63,11 +63,11 @@ final class EmptyReferenceTests: XCTestCase {
         XCTAssertEqual(try parsesAs("(a \"\"\"\" b)"), "(<a> <> <b>)")
     }
 
-    func testTestSingleSpaceStillReadsAsASpace() throws {
+    func testSingleSpaceStillReadsAsASpace() throws {
         XCTAssertEqual(try parsesAs("(a \" \" b)"), "(<a> < > <b>)")
     }
 
-    func testTestEmptyReferenceSurvivesARoundTrip() throws {
+    func testEmptyReferenceSurvivesARoundTrip() throws {
         let inputs = [
             "(a \"\" b)",
             "(a \"\" \"\" b)",
@@ -82,7 +82,7 @@ final class EmptyReferenceTests: XCTestCase {
         }
     }
 
-    func testTestEmptyReferenceIsWrittenAsAVersionedLiteral() throws {
+    func testEmptyReferenceIsWrittenAsAVersionedLiteral() throws {
         XCTAssertEqual(formatLinks(try parser.parse("(a \"\" b)")), "(a ~1{} b)")
     }
 }

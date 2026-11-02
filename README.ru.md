@@ -300,6 +300,7 @@ ID: у каждой разобранной связи с ID есть исход�
 | Java | 206 | 19 |
 | PHP | 256 | 26 |
 | C++ | 370 | 32 |
+| Swift | 339 | 35 |
 <!-- test-counts:end -->
 
 Таблицу записывает `scripts/create-test-case-comparison.mjs`: он читает сами файлы тестов

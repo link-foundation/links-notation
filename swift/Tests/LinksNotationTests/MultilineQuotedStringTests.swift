@@ -6,7 +6,7 @@ import XCTest
 final class MultilineQuotedStringTests: XCTestCase {
     private let parser = Parser()
 
-    func testTestMultilineDoubleQuotedReference() throws {
+    func testMultilineDoubleQuotedReference() throws {
         let input = """
             (
               "long
@@ -35,7 +35,7 @@ final class MultilineQuotedStringTests: XCTestCase {
         XCTAssertEqual(link.values[1].values.first?.id, "another\nlong string literal\nas another reference")
     }
 
-    func testTestSimpleMultilineDoubleQuoted() throws {
+    func testSimpleMultilineDoubleQuoted() throws {
         let input = "(\"line1\nline2\")"
         let result = try parser.parse(input)
 
@@ -49,7 +49,7 @@ final class MultilineQuotedStringTests: XCTestCase {
         XCTAssertEqual(link.values[0].id, "line1\nline2")
     }
 
-    func testTestSimpleMultilineSingleQuoted() throws {
+    func testSimpleMultilineSingleQuoted() throws {
         let input = "('line1\nline2')"
         let result = try parser.parse(input)
 
@@ -63,7 +63,7 @@ final class MultilineQuotedStringTests: XCTestCase {
         XCTAssertEqual(link.values[0].id, "line1\nline2")
     }
 
-    func testTestMultilineQuotedAsId() throws {
+    func testMultilineQuotedAsId() throws {
         let input = "(\"multi\nline\nid\": value1 value2)"
         let result = try parser.parse(input)
 

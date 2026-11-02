@@ -58,7 +58,7 @@ final class MultilineParserTests: XCTestCase {
         XCTAssertEqual(formattedLinks, target)
     }
 
-    func testTestComplexStructure() throws {
+    func testComplexStructure() throws {
         let input = """
             (Type: Type Type)
               Number
@@ -73,7 +73,7 @@ final class MultilineParserTests: XCTestCase {
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestMixedFormats() throws {
+    func testMixedFormats() throws {
         // Mix of single-line and multi-line formats; `(complex: ` ends with a space.
         let input = "id1: value1\n(id2: value2 value3)\nsimple_ref\n(complex: \n  nested1\n  nested2\n)"
 
@@ -81,21 +81,21 @@ final class MultilineParserTests: XCTestCase {
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestMultilineWithId() throws {
+    func testMultilineWithId() throws {
         // Test multi-line link with id
         let input = "(id: value1 value2)"
         let result = try parser.parse(input)
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestMultipleTopLevelElements() throws {
+    func testMultipleTopLevelElements() throws {
         // Test multiple top-level elements
         let input = "(elem1: val1)\n(elem2: val2)"
         let result = try parser.parse(input)
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestMultilineSimpleLinks() throws {
+    func testMultilineSimpleLinks() throws {
         let input = "(1: 1 1)\n(2: 2 2)"
         let parsed = try parser.parse(input)
         XCTAssertGreaterThan(parsed.count, 0)
@@ -110,7 +110,7 @@ final class MultilineParserTests: XCTestCase {
         XCTAssertEqual(outputAlternate, input)
     }
 
-    func testTestIndentedChildren() throws {
+    func testIndentedChildren() throws {
         let input = "parent\n  child1\n  child2"
         let parsed = try parser.parse(input)
 

@@ -13,7 +13,7 @@ final class NestedIndentationTests: XCTestCase {
         formatLinks(try parser.parse(source), lessParentheses: false)
     }
 
-    func testTestParenthesesReproduceRootIndentation() throws {
+    func testParenthesesReproduceRootIndentation() throws {
         let root = try format("a\n  b\nc\n  d")
 
         XCTAssertEqual(root, "(a)\n((a) (b))\n(c)\n((c) (d))")
@@ -25,7 +25,7 @@ final class NestedIndentationTests: XCTestCase {
         XCTAssertEqual(nested, "(array ((a) ((a) (b)) (c) ((c) (d))))")
     }
 
-    func testTestParenthesesKeepRecordBoundaries() throws {
+    func testParenthesesKeepRecordBoundaries() throws {
         XCTAssertEqual(try format("value (\n  id \"1\"\n  label \"one\"\n)"), "(value ((id 1) (label one)))")
 
         let links = try parser.parse("value (\n  id \"1\"\n  label \"one\"\n)")
@@ -40,19 +40,19 @@ final class NestedIndentationTests: XCTestCase {
         XCTAssertEqual(group.values[1].values[1].id, "one")
     }
 
-    func testTestParenthesesKeepSeveralRecordsSeparate() throws {
+    func testParenthesesKeepSeveralRecordsSeparate() throws {
         XCTAssertEqual(
             try format("value (\n  (id \"1\" label \"one\")\n  (id \"2\" label \"two\")\n)"),
             "(value ((id 1 label one) (id 2 label two)))")
     }
 
-    func testTestParenthesesNestDeeply() throws {
+    func testParenthesesNestDeeply() throws {
         XCTAssertEqual(
             try format("outer (\n  inner (\n    x 1\n    y 2\n  )\n  z 3\n)"),
             "(outer ((inner ((x 1) (y 2))) (z 3)))")
     }
 
-    func testTestSingleLineParenthesesAreUnchanged() throws {
+    func testSingleLineParenthesesAreUnchanged() throws {
         XCTAssertEqual(try format("(a b c)"), "(a b c)")
         XCTAssertEqual(try format("(1: 2 3)"), "(1: 2 3)")
         XCTAssertEqual(try format("(a: b c)"), "(a: b c)")
@@ -61,11 +61,11 @@ final class NestedIndentationTests: XCTestCase {
         XCTAssertEqual(try format("()"), "()")
     }
 
-    func testTestParenthesesWithIndentedIdSyntax() throws {
+    func testParenthesesWithIndentedIdSyntax() throws {
         XCTAssertEqual(try format("(\n  a:\n    b\n    c\n)"), "(a: b c)")
     }
 
-    func testTestEmployeeRecordsKeepTheirFields() throws {
+    func testEmployeeRecordsKeepTheirFields() throws {
         let source = """
             empInfo
               employees:

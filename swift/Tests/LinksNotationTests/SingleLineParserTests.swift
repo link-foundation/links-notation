@@ -77,27 +77,27 @@ final class SingleLineParserTests: XCTestCase {
         XCTAssertThrowsError(try parser.parse(": value1 value2"))
     }
 
-    func testTestSingleLineLinkWithId() throws {
+    func testSingleLineLinkWithId() throws {
         let result = try parser.parse("id: value1 value2")
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestMultiLineLinkWithId() throws {
+    func testMultiLineLinkWithId() throws {
         let result = try parser.parse("(id: value1 value2)")
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestLinkWithoutIdSingleLine() {
+    func testLinkWithoutIdSingleLine() {
         // A standalone ':' is forbidden.
         XCTAssertThrowsError(try parser.parse(": value1 value2"))
     }
 
-    func testTestLinkWithoutIdMultiLine() {
+    func testLinkWithoutIdMultiLine() {
         // '(:)' syntax is forbidden.
         XCTAssertThrowsError(try parser.parse("(: value1 value2)"))
     }
 
-    func testTestSingletLink() throws {
+    func testSingletLink() throws {
         let result = try parser.parse("(singlet)")
         XCTAssertEqual(result.count, 1)
         XCTAssertNil(result[0].id)
@@ -106,7 +106,7 @@ final class SingleLineParserTests: XCTestCase {
         XCTAssertEqual(result[0].values[0].values, [])
     }
 
-    func testTestValueLink() throws {
+    func testValueLink() throws {
         let result = try parser.parse("(value1 value2 value3)")
         XCTAssertGreaterThan(result.count, 0)
     }
@@ -122,22 +122,23 @@ final class SingleLineParserTests: XCTestCase {
         XCTAssertEqual(links[0].values[1].id, "has:colon")
     }
 
+    // JS has both "Quoted references" and "Test quoted references".
     func testTestQuotedReferences() throws {
         let result = try parser.parse(#"("id with spaces": "value with spaces")"#)
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestSingleQuotedReferences() throws {
+    func testSingleQuotedReferences() throws {
         let result = try parser.parse("('id': 'value')")
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestNestedLinks() throws {
+    func testNestedLinks() throws {
         let result = try parser.parse("(outer: (inner: value))")
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestSpecialCharactersInQuotes() throws {
+    func testSpecialCharactersInQuotes() throws {
         var result = try parser.parse(#"("key:with:colons": "value(with)parens")"#)
         XCTAssertGreaterThan(result.count, 0)
 
@@ -145,29 +146,29 @@ final class SingleLineParserTests: XCTestCase {
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestDeeplyNested() throws {
+    func testDeeplyNested() throws {
         let result = try parser.parse("(a: (b: (c: (d: (e: value)))))")
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestHyphenatedIdentifiers() throws {
+    func testHyphenatedIdentifiers() throws {
         let result = try parser.parse("(conan-center-index: repository info)")
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestMultipleWordsInQuotes() throws {
+    func testMultipleWordsInQuotes() throws {
         let result = try parser.parse(#"("New York": city state)"#)
         XCTAssertGreaterThan(result.count, 0)
         // JS checks JSON.stringify(result); the Swift links' description is used instead.
         XCTAssertTrue(String(describing: result).contains("New York"))
     }
 
-    func testTestSimpleRef() throws {
+    func testSimpleRef() throws {
         let result = try parser.parse("simple_ref")
         XCTAssertGreaterThan(result.count, 0)
     }
 
-    func testTestSimpleReferenceParser() throws {
+    func testSimpleReferenceParser() throws {
         let result = try parser.parse("hello")
         XCTAssertEqual(result.count, 1)
         XCTAssertNil(result[0].id)
@@ -175,7 +176,7 @@ final class SingleLineParserTests: XCTestCase {
         XCTAssertEqual(result[0].values[0].id, "hello")
     }
 
-    func testTestQuotedReferenceParser() throws {
+    func testQuotedReferenceParser() throws {
         let result = try parser.parse(#""hello world""#)
         XCTAssertEqual(result.count, 1)
         XCTAssertNil(result[0].id)
@@ -183,7 +184,7 @@ final class SingleLineParserTests: XCTestCase {
         XCTAssertEqual(result[0].values[0].id, "hello world")
     }
 
-    func testTestSingletLinkParser() throws {
+    func testSingletLinkParser() throws {
         let result = try parser.parse("(singlet)")
         XCTAssertEqual(result.count, 1)
         XCTAssertNil(result[0].id)
@@ -192,7 +193,7 @@ final class SingleLineParserTests: XCTestCase {
         XCTAssertEqual(result[0].values[0].values, [])
     }
 
-    func testTestValueLinkParser() throws {
+    func testValueLinkParser() throws {
         let result = try parser.parse("(a b c)")
         XCTAssertEqual(result.count, 1)
         XCTAssertNil(result[0].id)
