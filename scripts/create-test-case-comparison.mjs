@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Build TEST_CASE_COMPARISON.md: which test exists in which of the eight
+ * Build TEST_CASE_COMPARISON.md: which test exists in which of the nine
  * supported languages, with a link to each one.
  *
  * The document is generated, never edited. Run it with `--check` to fail when
@@ -81,7 +81,7 @@ function scan({ baseDir, directory, isTestFile, categoryOf, pattern, nameOf }) {
 }
 
 /**
- * The eight supported languages, in the order the columns appear.
+ * The nine supported languages, in the order the columns appear.
  *
  * `flat` marks a language that does not keep one test file per category; see
  * `placeFlatTests` for how its tests find a category.
@@ -192,6 +192,20 @@ const LANGUAGES = [
       isTestFile: (file) => file.endsWith('_tests.cpp'),
       categoryOf: (file) => file.replace('_tests.cpp', ''),
       pattern: /\bTEST(?:_F)?\(\s*\w+\s*,\s*(\w+)\s*\)/g,
+      nameOf: toSnakeCase
+    })
+  },
+  {
+    key: 'kotlin',
+    label: 'Kotlin',
+    // kotlin.test runs the same common tests on every target, so each test
+    // is counted once, from commonTest.
+    extract: (baseDir) => scan({
+      baseDir,
+      directory: 'kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation',
+      isTestFile: (file) => file.endsWith('Test.kt'),
+      categoryOf: (file) => toSnakeCase(file.replace('Test.kt', '')),
+      pattern: /@Test\s+fun\s+(\w+)\s*\(/g,
       nameOf: toSnakeCase
     })
   }

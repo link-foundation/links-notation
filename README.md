@@ -303,6 +303,7 @@ All eight language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP,
 | Java | 206 | 19 |
 | PHP | 256 | 26 |
 | C++ | 370 | 32 |
+| Kotlin | 348 | 33 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files

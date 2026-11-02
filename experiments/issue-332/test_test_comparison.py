@@ -22,6 +22,7 @@ class TestComparisonExtraction(unittest.TestCase):
                 "java/src/test/java/io/github/linkfoundation/linksnotation",
                 "php/tests",
                 "cpp/tests",
+                "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation",
             ):
                 (root / path).mkdir(parents=True)
             shutil.copy2(
@@ -47,6 +48,16 @@ class TestComparisonExtraction(unittest.TestCase):
                 "#include <gtest/gtest.h>\n"
                 "TEST(ReferenceFidelityTests, ReferenceLiteralsAtEveryChunkSplit) {}\n"
             )
+            (
+                root
+                / "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation"
+                / "ReferenceFidelityTest.kt"
+            ).write_text(
+                "class ReferenceFidelityTest {\n"
+                "    @Test\n"
+                "    fun referenceLiteralsAtEveryChunkSplit() {}\n"
+                "}\n"
+            )
             subprocess.run(
                 ["node", str(root / "scripts/create-test-case-comparison.mjs")],
                 check=True,
@@ -62,9 +73,11 @@ class TestComparisonExtraction(unittest.TestCase):
             )
             self.assertIn("ReferenceFidelityTests.cs#L2", row)
             self.assertIn("reference_fidelity_tests.cpp#L2", row)
+            self.assertIn("ReferenceFidelityTest.kt#L3", row)
             self.assertIn("| JavaScript | 1 |", (root / "README.md").read_text())
             self.assertIn("| C# | 1 |", (root / "README.md").read_text())
             self.assertIn("| C++ | 1 |", (root / "README.md").read_text())
+            self.assertIn("| Kotlin | 1 |", (root / "README.md").read_text())
 
 
 if __name__ == "__main__":
