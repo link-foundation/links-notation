@@ -128,8 +128,14 @@ export async function audit({
   repository = "link-foundation/links-notation",
   verbose = false,
   log = console.log,
+  // The result of the CI run's release job ("success", "failure", "cancelled"
+  // or "skipped"), or "" when the caller does not know it. A release that
+  // never ran published nothing, so its absences are not a credential fault.
+  releaseResult = "",
 }) {
   const findings = [];
+  const releaseIncomplete =
+    expectPublished && releaseResult !== "" && releaseResult !== "success";
   let failures = 0;
   const headers = { "user-agent": "links-notation-release-audit" };
   const report = (message, error = true) => {
@@ -175,9 +181,11 @@ export async function audit({
         // On main the version must exist, so the error names the fix.
         const absent = `${target.name}: ${record.version} is absent from ${target.registry}`;
         report(
-          expectPublished
-            ? `${absent}. To publish it, ${target.setup}, then re-run the main CI run (docs/releases.md).`
-            : absent,
+          !expectPublished
+            ? absent
+            : releaseIncomplete
+              ? `${absent} because the release job did not run to completion (${releaseResult}): a language stage failed or was cancelled, so nothing was published. Fix or re-run the failed jobs of this CI run (docs/releases.md); if the version is still absent after a successful release, ${target.setup}.`
+              : `${absent}. To publish it, ${target.setup}, then re-run the main CI run (docs/releases.md).`,
           expectPublished,
         );
         continue;
@@ -237,6 +245,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     repository:
       process.env.GITHUB_REPOSITORY || "link-foundation/links-notation",
     verbose: process.env.CI_VERBOSE === "true",
+    releaseResult: process.env.RELEASE_RESULT ?? "",
   });
   if (process.env.AUDIT_REPORT)
     writeFileSync(

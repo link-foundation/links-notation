@@ -187,3 +187,47 @@ test("a version missing on main says what a maintainer must do", async () => {
   for (const error of errors)
     assert.match(error, /re-run the main CI run \(docs\/releases\.md\)\.$/);
 });
+test("a release job that never ran names the failed stage, not credentials (issue #377)", async () => {
+  const lines = [];
+  const result = await audit({
+    versions,
+    fetcher: mockFetch((url) =>
+      url.includes("api.github.com") ? null : new Response("", { status: 404 }),
+    ),
+    releaseResult: "skipped",
+    log: (line) => lines.push(line),
+  });
+  assert.equal(result.failures, 10);
+  for (const error of lines.filter((line) => line.startsWith("::error::"))) {
+    assert.match(error, /did not run to completion \(skipped\)/);
+    assert.match(error, /Fix or re-run the failed jobs of this CI run/);
+    assert.doesNotMatch(error, /To publish it/);
+  }
+});
+test("an absence after a successful release still names the credentials", async () => {
+  const lines = [];
+  await audit({
+    versions,
+    fetcher: mockFetch((url) =>
+      url.includes("api.nuget.org") ? new Response("", { status: 404 }) : null,
+    ),
+    releaseResult: "success",
+    log: (line) => lines.push(line),
+  });
+  const errors = lines.filter((line) => line.startsWith("::error::"));
+  assert.equal(errors.length, 1);
+  assert.match(errors[0], /To publish it, configure the NUGET_API_KEY secret/);
+});
+test("a pull request ignores the release result", async () =>
+  assert.equal(
+    (
+      await audit({
+        versions,
+        fetcher: mockFetch(() => new Response("", { status: 404 })),
+        expectPublished: false,
+        releaseResult: "skipped",
+        log: () => {},
+      })
+    ).failures,
+    0,
+  ));
