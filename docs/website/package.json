@@ -19,6 +19,7 @@
     "lino-objects-codec": "^0.9.5"
   },
   "overrides": {
-    "links-notation": "file:../../js"
+    "links-notation": "file:../../js",
+    "minimatch": "^11.0.4"
   }
 }
