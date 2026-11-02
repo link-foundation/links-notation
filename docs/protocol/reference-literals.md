@@ -86,4 +86,4 @@ literal, stream and binary round trips. The shared exact-reference corpus is
 [invalid-reference-literals.txt](invalid-reference-literals.txt). Every binding
 tests identifiers, nested values, both encodings, every two-chunk split, and
 binary decoding against these fixtures. The binary interoperability example
-also compares identical bytes and formatted text across all eight bindings.
+also compares identical bytes and formatted text across all nine bindings.

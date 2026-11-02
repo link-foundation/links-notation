@@ -1,12 +1,12 @@
 # Release setup and recovery
 
 The CI entry is `js.yml`, and every called workflow uses the caller's commit.
-The main-only `release.yml` call waits for all eight native language stages.
-It then calls the eight `publish-*.yml` workflows. A final audit waits
+The main-only `release.yml` call waits for all nine native language stages.
+It then calls the nine `publish-*.yml` workflows. A final audit waits
 for all providers, including failures, then checks exact versions and GitHub
 releases. Pull requests expect their new version to be absent and never publish.
 HTTP/authentication/transport errors still fail PR audits. A successful release
-requires all eight registries; green tests alone do not prove delivery.
+requires all nine registries; green tests alone do not prove delivery.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -20,6 +20,7 @@ requires all eight registries; green tests alone do not prove delivery.
 | C#       | NuGet package API key                                          | `NUGET_API_KEY` or existing `NUGET_TOKEN`                                           |
 | PHP      | Packagist package submission and update API                    | Submit package once, then `PACKAGIST_USERNAME`, `PACKAGIST_TOKEN`                   |
 | C++      | GitHub release `cpp_VERSION` with the CMake source archive     | Workflow `GITHUB_TOKEN`; no registry account                                        |
+| Swift    | Bare `VERSION` tag that SwiftPM resolves, `[Swift] VERSION`    | Workflow `GITHUB_TOKEN`; no registry account                                        |
 
 <!-- markdownlint-enable MD013 -->
 
@@ -33,6 +34,17 @@ its SHA-256 file to the `cpp_VERSION` GitHub release, then downloads the archive
 again, checks the hash, and builds and tests `cpp/tests/consumer` against it. The
 final audit treats that asset as the C++ registry entry; consumers fetch it with
 CMake's `FetchContent`.
+
+Swift has no central package registry either: SwiftPM resolves the root
+`Package.swift` at a bare semantic-version tag, and ignores `cpp_VERSION` and
+`go/vVERSION`. `publish-swift.yml` creates the bare `VERSION` tag at the gated
+SHA, or checks that it already points there, and releases it as
+`[Swift] VERSION`. It then waits for the tagged `Package.swift`, and builds and
+runs `examples/swift` with its path dependency replaced by
+`.package(url: ..., exact: "VERSION")`. Composer reads the same tag, so
+`publish-php.yml` uses it too; both create it with
+`scripts/ci/ensure-php-version-tag.mjs`, so neither moves it. The final audit
+checks that the tagged manifest is this package's.
 
 Java uses `central-publishing-maven-plugin` with `autoPublish=true` and
 `waitUntil=published`; setup-java imports the signing key and supplies server
@@ -74,10 +86,12 @@ version tag. See
 After provider setup, rerun the main CI run. Existing versions
 are verified and reused, failed providers retry, and missing GitHub releases are
 backfilled. The final audit checks exact npm/PyPI/crates metadata, NuGet package
-content availability, Go module info, the Java POM/namespace, and Packagist
-version metadata. Any mismatch or missing release is an error. Preserve the
-`registry-audit-RUN` artifact when investigating partial delivery.
+content availability, Go module info, the Java POM/namespace, Packagist
+version metadata, and the Swift tag's `Package.swift`. Any mismatch or missing
+release is an error. Preserve the `registry-audit-RUN` artifact when
+investigating partial delivery.
 
 GitHub release tags must explicitly target `github.sha`; never let
-`gh release create` select a later main head. Benchmark regeneration uses a pull
+`gh release create` select a later main head. The Swift release, whose tag is
+created first, uses `--verify-tag` instead. Benchmark regeneration uses a pull
 request, so it remains compatible with main's required checks.

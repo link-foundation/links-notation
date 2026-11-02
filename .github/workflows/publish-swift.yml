@@ -50,7 +50,11 @@ jobs:
       # repository root for that reason. Creating the tag *is* the publish, as
       # for Go, so this job both releases and verifies. SwiftPM ignores tags
       # that are not plain versions (cpp_0.28.0, go/v0.28.0), so the Swift tag
-      # is the bare version.
+      # is the bare version, the same tag Composer reads: publish-php creates
+      # it too, at the same gated commit, since every binding shares one
+      # version. ensure-php-version-tag.mjs creates the tag or checks that it
+      # already points at this commit, so a tag on another commit fails instead
+      # of being released; the second run covers losing a race with publish-php.
       - name: Create the Swift tag and GitHub release
         id: publish
         env:
@@ -60,13 +64,14 @@ jobs:
         run: |
           set -euo pipefail
           TAG="$PACKAGE_VERSION"
+          node scripts/ci/ensure-php-version-tag.mjs || node scripts/ci/ensure-php-version-tag.mjs
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Release $TAG already exists"
             echo "published=skipped" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           gh release create "$TAG" \
-            --target "$RELEASE_SHA" \
+            --verify-tag \
             --title "[Swift] $PACKAGE_VERSION" \
             --notes "Swift package release. Add \`.package(url: \"https://github.com/${GITHUB_REPOSITORY}.git\", from: \"$PACKAGE_VERSION\")\` to Package.swift and depend on \`.product(name: \"LinksNotation\", package: \"links-notation\")\`."
           echo "published=true" >> "$GITHUB_OUTPUT"

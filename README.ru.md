@@ -8,6 +8,7 @@
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Версия Maven Central](https://img.shields.io/maven-central/v/io.github.link-foundation/links-notation?label=maven&style=flat)](https://central.sonatype.com/artifact/io.github.link-foundation/links-notation) | **[Java](java/README.ru.md)** |
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Версия Packagist и количество загрузок](https://img.shields.io/packagist/v/link-foundation/links-notation?label=packagist&style=flat)](https://packagist.org/packages/link-foundation/links-notation) | **[PHP](php/README.ru.md)** |
 | [![Состояние Actions](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Выпуск на GitHub](https://img.shields.io/github/v/release/link-foundation/links-notation?filter=cpp_*&label=release&style=flat)](https://github.com/link-foundation/links-notation/releases?q=cpp_&expanded=true) | **[C++](cpp/README.ru.md)** |
+| [![Состояние Actions](https://github.com/link-foundation/links-notation/actions/workflows/js.yml/badge.svg)](https://github.com/link-foundation/links-notation/actions/workflows/js.yml) | [![Swift Package Manager](https://img.shields.io/badge/SwiftPM-compatible-F05138?logo=swift&style=flat)](swift/README.ru.md#установка) | **[Swift](swift/README.ru.md)** |
 
 [![Gitpod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/link-foundation/links-notation)
 [![Open in GitHub Codespaces](https://img.shields.io/badge/GitHub%20Codespaces-Open-181717?logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=link-foundation/links-notation)
@@ -80,6 +81,13 @@ $links = $parser->parse("папа (любитМаму: любит маму)");
 ```cpp
 #include "links_notation.hpp"
 std::vector<links_notation::Link> links = links_notation::parse("папа (любитМаму: любит маму)");
+```
+
+### Swift
+
+```swift
+import LinksNotation
+let links = try Parser().parse("папа (любитМаму: любит маму)")
 ```
 
 ## Примеры
@@ -219,6 +227,7 @@ deploy: staging # пока только staging
 | Java | `Consumer<Link>` | `Stream<Link>` |
 | PHP | callable | `Generator` |
 | C++ | callback-и `on_link` / `on_error` | `ChunkedLinks` / `parse_chunks` |
+| Swift | обработчики `onLink` / `onError` | `Sequence` / `AsyncSequence` |
 
 Все варианты поддерживают запись/подачу порций, завершение потока, абсолютную
 позицию, reset/drain и ограничение размера незавершённой записи. По умолчанию
@@ -247,6 +256,7 @@ ID: у каждой разобранной связи с ID есть исход�
 | Java | `getRawId()`, `getQuote()` | `new Parser(comments, false)` | `parseCst` |
 | PHP | `getRawId()`, `getQuote()` | `new Parser(syntax: false)` | `parseCst` |
 | C++ | `raw_id`, `quote()` | `ParserOptions::syntax = false` | `parse_cst` |
+| Swift | `rawId`, `quote` | `ParserOptions(syntax: false)` | `parseCst` |
 
 Каждая реализация проверяет общие эталонные данные из
 [`parity/syntax-fixtures.json`](parity/syntax-fixtures.json) и в точности
@@ -272,6 +282,7 @@ ID: у каждой разобранной связи с ID есть исход�
 - **[README Java](java/README.ru.md)** - Руководство по работе с пакетом Java/Maven
 - **[README PHP](php/README.ru.md)** - Руководство по работе с пакетом PHP/Composer
 - **[README C++](cpp/README.ru.md)** - Руководство по библиотеке C++17/CMake
+- **[README Swift](swift/README.ru.md)** - Руководство по пакету Swift
 
 Дополнительные ресурсы:
 
@@ -279,13 +290,13 @@ ID: у каждой разобранной связи с ID есть исход�
   правилами отступов и вложенных контекстов
   ([синтаксические диаграммы](docs/grammar/syntax-diagrams.md))
 - [Сравнение тестовых сценариев](TEST_CASE_COMPARISON.md) - Сравнение
-  тестового покрытия по всем восьми реализациям, тест за тестом
+  тестового покрытия по всем девяти реализациям, тест за тестом
 - [Теория связей 0.0.2](https://habr.com/ru/articles/804617/) -
   Теоретическая основа, которую Нотация Связей полностью поддерживает
 
 ## Тестовое покрытие и паритет реализаций
 
-Все восемь реализаций (C#, JavaScript, Rust, Python, Go, Java, PHP, C++) сохраняют
+Все девять реализаций (C#, JavaScript, Rust, Python, Go, Java, PHP, C++, Swift) сохраняют
 **эквивалентную базовую функциональность**, и совпадение проверяется тест за тестом,
 а не декларируется:
 
@@ -315,8 +326,9 @@ ID: у каждой разобранной связи с ID есть исход�
 
 - **`LinksGroup`** - разобранная группа связей как один объект - есть в
   [JavaScript](js/src/LinksGroup.js), [C#](csharp/Link.Foundation.Links.Notation/LinksGroup.cs),
-  [Java](java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java) и
-  [C++](cpp/include/links_notation/links_group.hpp). Python, Rust, Go и PHP представляют ту же
+  [Java](java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java),
+  [C++](cpp/include/links_notation/links_group.hpp) и
+  [Swift](swift/Sources/LinksNotation/LinksGroup.swift). Python, Rust, Go и PHP представляют ту же
   структуру вложенными значениями `Link`.
 - **Преобразование кортежей** - создание связи из кортежа языка - есть там, где у языка есть
   подходящий синтаксис: [C#](csharp/Link.Foundation.Links.Notation/Link.cs) через неявные операторы
@@ -328,7 +340,7 @@ ID: у каждой разобранной связи с ID есть исход�
 
 [Спецификация версии 1](docs/protocol/binary-links-notation.md) определяет общий
 формат пакетов и отображение документов LiNo на связи. JavaScript, Python, Rust,
-C#, Go, Java, PHP и C++ предоставляют кодеки рядом с текстовыми парсерами и
+C#, Go, Java, PHP, C++ и Swift предоставляют кодеки рядом с текстовыми парсерами и
 проверяют одни и те же
 [эталонные векторы](docs/protocol/binary-links-notation-vectors.txt).
 [Пример взаимодействия языков](examples/binary/README.md) показывает параметры
