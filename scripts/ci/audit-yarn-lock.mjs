@@ -85,7 +85,8 @@ async function main() {
     console.error(
       `::error file=${lockfile}::${lines.length} advisories at ${level} or above in ${count} locked packages. ` +
         'Raise the versions with YarnRootExtension.resolution(...) in kotlin/build.gradle.kts, then run ' +
-        '`./gradlew kotlinUpgradeYarnLock` in kotlin/ and commit the lockfile.'
+        '`./gradlew rootPackageJson --rerun kotlinUpgradeYarnLock` in kotlin/ and commit the lockfile ' +
+        '(rootPackageJson does not see a changed resolution, so a plain kotlinUpgradeYarnLock keeps the old one).'
     );
     process.exitCode = 1;
   } else {
