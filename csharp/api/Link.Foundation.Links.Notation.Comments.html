@@ -164,7 +164,7 @@ an ordinary character.</p>
     <a href="https://github.com/link-foundation/links-notation/new/main/apiSpec/new?filename=Link_Foundation_Links_Notation_Comments_StripComments_System_String_.md&amp;value=---%0Auid%3A%20Link.Foundation.Links.Notation.Comments.StripComments(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Comments.cs/#L42">View Source</a>
+    <a href="https://github.com/link-foundation/links-notation/blob/main/csharp/Link.Foundation.Links.Notation/Comments.cs/#L47">View Source</a>
   </span>
   <a id="Link_Foundation_Links_Notation_Comments_StripComments_" data-uid="Link.Foundation.Links.Notation.Comments.StripComments*"></a>
   <h4 id="Link_Foundation_Links_Notation_Comments_StripComments_System_String_" data-uid="Link.Foundation.Links.Notation.Comments.StripComments(System.String)">StripComments(string)</h4>
@@ -213,7 +213,10 @@ an ordinary character.</p>
   <div class="markdown level1 remarks"><p>Every character of a comment is replaced rather than removed, so every later
 character keeps the position it had in the document the caller wrote, and
 anything the parser reports about a position still points at what the reader
-can see.</p>
+can see. The document is read token by token, the way the grammar reads it, so
+a <code>#</code> inside a delimited reference that starts right after a group,
+another reference or a literal is content, as it is in one that starts after a
+space (issue #377).</p>
 </div>
 
 </article>
