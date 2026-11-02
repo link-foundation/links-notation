@@ -1528,12 +1528,213 @@
           "documentation": "parity/README.md"
         }
       }
+    },
+    {
+      "id": "syntax-metadata",
+      "description": "parsed links record how their ID was written (raw ID text and quote), ignored by equality and formatting, with an AST mode that leaves it out",
+      "contract": "shared-syntax",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Link.js",
+            "js/src/Parser.js",
+            "js/src/grammar.pegjs",
+            "js/src/references.js"
+          ],
+          "evidence": [
+            "js/tests/SharedSyntaxParity.test.js",
+            "js/tests/SyntaxMetadata.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/syntax.rs",
+            "rust/links-notation/src/lib.rs",
+            "rust/links-notation/src/parser.rs",
+            "rust/links-notation/src/stream_parser.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_syntax_parity_tests.rs",
+            "rust/links-notation/tests/syntax_metadata_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/link.py",
+            "python/links_notation/quotes.py",
+            "python/links_notation/parser.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_syntax_parity.py",
+            "python/tests/test_syntax_metadata.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Link.java",
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.java",
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/lino.go",
+            "go/parser.go"
+          ],
+          "evidence": [
+            "go/shared_syntax_parity_test.go",
+            "go/syntax_metadata_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Link.cs",
+            "csharp/Link.Foundation.Links.Notation/Parser.peg",
+            "csharp/Link.Foundation.Links.Notation/Parser.cs",
+            "csharp/Link.Foundation.Links.Notation/Quotes.cs"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedSyntaxParityTests.cs",
+            "csharp/Link.Foundation.Links.Notation.Tests/SyntaxMetadataTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Link.php",
+            "php/src/Parser.php"
+          ],
+          "evidence": [
+            "php/tests/SharedSyntaxParityTest.php",
+            "php/tests/SyntaxMetadataTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/include/links_notation/link.hpp",
+            "cpp/include/links_notation/parser.hpp",
+            "cpp/include/links_notation/references.hpp",
+            "cpp/src/link.cpp",
+            "cpp/src/parser.cpp",
+            "cpp/src/references.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_syntax_parity_tests.cpp",
+            "cpp/tests/syntax_metadata_tests.cpp"
+          ]
+        }
+      }
+    },
+    {
+      "id": "concrete-syntax-tree",
+      "description": "lossless concrete syntax tree whose tokens hold every character of the document, so its text is the input",
+      "contract": "shared-syntax",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Cst.js"
+          ],
+          "evidence": [
+            "js/tests/SharedSyntaxParity.test.js",
+            "js/tests/Cst.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/cst.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_syntax_parity_tests.rs",
+            "rust/links-notation/tests/cst_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/cst.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_syntax_parity.py",
+            "python/tests/test_cst.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/CstNode.java",
+            "java/src/main/java/io/github/linkfoundation/linksnotation/CstKind.java",
+            "java/src/main/java/io/github/linkfoundation/linksnotation/CstBuilder.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.java",
+            "java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/cst.go"
+          ],
+          "evidence": [
+            "go/shared_syntax_parity_test.go",
+            "go/cst_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/CstNode.cs",
+            "csharp/Link.Foundation.Links.Notation/CstKind.cs",
+            "csharp/Link.Foundation.Links.Notation/CstBuilder.cs"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedSyntaxParityTests.cs",
+            "csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/CstNode.php",
+            "php/src/CstKind.php",
+            "php/src/CstBuilder.php"
+          ],
+          "evidence": [
+            "php/tests/SharedSyntaxParityTest.php",
+            "php/tests/CstTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/include/links_notation/cst.hpp",
+            "cpp/src/cst.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_syntax_parity_tests.cpp",
+            "cpp/tests/cst_tests.cpp"
+          ]
+        }
+      }
     }
   ],
   "sources": {
     "js": {
       "files": [
         "js/src/Binary.js",
+        "js/src/Cst.js",
         "js/src/Emitter.js",
         "js/src/FormatConfig.js",
         "js/src/FormatOptions.js",
@@ -1551,7 +1752,7 @@
         "js/src/quotes.js",
         "js/src/references.js"
       ],
-      "sha256": "f85aab9f93f37d0578dd7e485014e016d09361e162b0a59a199ea997677f147c"
+      "sha256": "a8db2c4cc051d914d9d6f710c7738c38f3502ebcc0aa6b6fe35a61551e932400"
     },
     "rust": {
       "files": [
@@ -1563,21 +1764,24 @@
         "rust/links-notation/src/binary/mod.rs",
         "rust/links-notation/src/binary/packet.rs",
         "rust/links-notation/src/comments.rs",
+        "rust/links-notation/src/cst.rs",
         "rust/links-notation/src/format_config.rs",
         "rust/links-notation/src/lib.rs",
         "rust/links-notation/src/parser.rs",
         "rust/links-notation/src/parser_config.rs",
         "rust/links-notation/src/quotes.rs",
         "rust/links-notation/src/reference_literal.rs",
-        "rust/links-notation/src/stream_parser.rs"
+        "rust/links-notation/src/stream_parser.rs",
+        "rust/links-notation/src/syntax.rs"
       ],
-      "sha256": "cdc3d824dd748a0992048dcda6dff956b181a8328283e81f29b2bd7a9795027b"
+      "sha256": "db70fd0c709bb09a86a03e54c5af4e9891548d92598e16014f5a7f5e30979f68"
     },
     "python": {
       "files": [
         "python/links_notation/__init__.py",
         "python/links_notation/binary.py",
         "python/links_notation/comments.py",
+        "python/links_notation/cst.py",
         "python/links_notation/format_config.py",
         "python/links_notation/formatter.py",
         "python/links_notation/link.py",
@@ -1586,12 +1790,15 @@
         "python/links_notation/reference_literal.py",
         "python/links_notation/stream_parser.py"
       ],
-      "sha256": "3a0ab8b6266c2fcc92af0ee25f84b4516be85250369e461900f333cfe7137363"
+      "sha256": "33e150cddcb863bcd814e170c960575adfc4075206942b8d5c9826ac4ad27393"
     },
     "java": {
       "files": [
         "java/src/main/java/io/github/linkfoundation/linksnotation/BinaryLinoCodec.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/Comments.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/CstBuilder.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/CstKind.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/CstNode.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/Link.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/NestingTooDeepException.java",
@@ -1602,19 +1809,20 @@
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParseRuntimeException.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParser.java"
       ],
-      "sha256": "704c134927382fbc7079ef48a6f461bfdee9d553c8f14f61c16c5f6565eb733d"
+      "sha256": "334d7ac623f296daf9d9b5b046380451a1bd27bee37430eaeb997f6459823805"
     },
     "go": {
       "files": [
         "go/binary.go",
         "go/comments.go",
+        "go/cst.go",
         "go/format_config.go",
         "go/lino.go",
         "go/parser.go",
         "go/reference_literal.go",
         "go/stream_parser.go"
       ],
-      "sha256": "0b78ad5121afaf00ca377fc20ac0cc1730ee5e6c68d9af7a0831ce472144959b"
+      "sha256": "0ad54a7cc69c7cddcc430985a914b92d2e280982b8c96b7f59edeeb8f1ac940b"
     },
     "csharp": {
       "files": [
@@ -1627,6 +1835,9 @@
         "csharp/Link.Foundation.Links.Notation/Binary/PacketReader.cs",
         "csharp/Link.Foundation.Links.Notation/Binary/SectionPlanner.cs",
         "csharp/Link.Foundation.Links.Notation/Comments.cs",
+        "csharp/Link.Foundation.Links.Notation/CstBuilder.cs",
+        "csharp/Link.Foundation.Links.Notation/CstKind.cs",
+        "csharp/Link.Foundation.Links.Notation/CstNode.cs",
         "csharp/Link.Foundation.Links.Notation/FormatConfig.cs",
         "csharp/Link.Foundation.Links.Notation/FormatOptions.cs",
         "csharp/Link.Foundation.Links.Notation/FurthestFailureTracer.cs",
@@ -1645,7 +1856,7 @@
         "csharp/Link.Foundation.Links.Notation/_.cs",
         "csharp/Link.Foundation.Links.Notation/id.cs"
       ],
-      "sha256": "fc14981926c4c312ad13d62938c3ebf057d26d160307ba9531c0bd8fdec088a1"
+      "sha256": "a9685d98e80b63c142249f69438e8da9f2e659f83c8f27550a193b17e570c74c"
     },
     "php": {
       "files": [
@@ -1661,6 +1872,9 @@
         "php/src/Binary/Section.php",
         "php/src/Binary/UInt64.php",
         "php/src/Comments.php",
+        "php/src/CstBuilder.php",
+        "php/src/CstKind.php",
+        "php/src/CstNode.php",
         "php/src/FormatConfig.php",
         "php/src/Formatter.php",
         "php/src/Link.php",
@@ -1670,13 +1884,14 @@
         "php/src/StreamParseException.php",
         "php/src/StreamParser.php"
       ],
-      "sha256": "c2067af09156c618e2f5f3fda752c0c5da23f95468f6f65a0ebc5025a04d7b9f"
+      "sha256": "aed251138d7e477a917ed688da2fa246831ef17ecf503e1557bc461f11a924fe"
     },
     "cpp": {
       "files": [
         "cpp/include/links_notation.hpp",
         "cpp/include/links_notation/binary.hpp",
         "cpp/include/links_notation/comments.hpp",
+        "cpp/include/links_notation/cst.hpp",
         "cpp/include/links_notation/format_config.hpp",
         "cpp/include/links_notation/indented_document.hpp",
         "cpp/include/links_notation/link.hpp",
@@ -1688,6 +1903,7 @@
         "cpp/include/links_notation/version.hpp.in",
         "cpp/src/binary.cpp",
         "cpp/src/comments.cpp",
+        "cpp/src/cst.cpp",
         "cpp/src/indented_document.cpp",
         "cpp/src/link.cpp",
         "cpp/src/links_group.cpp",
@@ -1701,7 +1917,7 @@
         "cpp/src/unicode.cpp",
         "cpp/src/unicode.hpp"
       ],
-      "sha256": "d6af9fcad27e7fde5f84425f97ff4fad276b22f92c80f00d0a73345d435bb245"
+      "sha256": "5fb1e25f7886d22cb44e3a6694e28836e62810e0cef5d6376c3dac51d5777178"
     }
   }
 }

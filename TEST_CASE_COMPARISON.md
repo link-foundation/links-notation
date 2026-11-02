@@ -18,14 +18,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 247 | 24 |
-| JavaScript | 316 | 29 |
-| Rust | 401 | 29 |
-| C# | 295 | 27 |
-| Go | 139 | 17 |
-| Java | 185 | 16 |
-| PHP | 235 | 23 |
-| C++ | 346 | 29 |
+| Python | 270 | 27 |
+| JavaScript | 332 | 32 |
+| Rust | 421 | 32 |
+| C# | 316 | 30 |
+| Go | 158 | 20 |
+| Java | 206 | 19 |
+| PHP | 256 | 26 |
+| C++ | 370 | 32 |
 
 ---
 
@@ -248,6 +248,47 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | comments are on by default | [✅](python/tests/test_comments.py#L93) | [✅](js/tests/Comments.test.js#L118) | [✅](rust/links-notation/tests/comments_tests.rs#L140) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CommentsTests.cs#L148) | [✅](go/comments_test.go#L116) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CommentsTest.java#L140) | [✅](php/tests/CommentsTest.php#L155) | [✅](cpp/tests/comments_tests.cpp#L105) |
 
 **Category totals:** Python: 21, JavaScript: 23, Rust: 23, C#: 22, Go: 21, Java: 21, PHP: 21, C++: 23
+
+## Cst
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ |
+|-----------|---|---|---|---|---|---|---|---|
+| a group belongs to the line it opens on | [✅](python/tests/test_cst.py#L94) | [✅](js/tests/Cst.test.js#L62) | [✅](rust/links-notation/tests/cst_tests.rs#L97) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L97) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L102) | [✅](php/tests/CstTest.php#L102) | [✅](cpp/tests/cst_tests.cpp#L102) |
+| an empty document has no lines | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L76) | [✅](php/tests/CstTest.php#L74) | [✅](cpp/tests/cst_tests.cpp#L89) |
+| an unclosed quote is a bare reference | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/cst_tests.cpp#L113) |
+| cst group belongs to the line it opens on | ❌ | ❌ | ❌ | ❌ | [✅](go/cst_test.go#L103) | ❌ | ❌ | ❌ |
+| cst is a lossless view of a document | ❌ | ❌ | ❌ | ❌ | [✅](go/cst_test.go#L18) | ❌ | ❌ | ❌ |
+| cst reads hash as reference text without comments | ❌ | ❌ | ❌ | ❌ | [✅](go/cst_test.go#L83) | ❌ | ❌ | ❌ |
+| cst recovers documents exactly | ❌ | ❌ | ❌ | ❌ | [✅](go/cst_test.go#L56) | ❌ | ❌ | ❌ |
+| cst reference tokens carry their value and delimiter | ❌ | ❌ | ❌ | ❌ | [✅](go/cst_test.go#L33) | ❌ | ❌ | ❌ |
+| cst rejects what cannot be parsed | ❌ | ❌ | ❌ | ❌ | [✅](go/cst_test.go#L125) | ❌ | ❌ | ❌ |
+| empty document | [✅](python/tests/test_cst.py#L21) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| empty document has no lines | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L28) | ❌ | ❌ | ❌ | ❌ |
+| escapes the s expression text | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/cst_tests.cpp#L119) |
+| escapes token text in s expressions | ❌ | ❌ | [✅](rust/links-notation/tests/cst_tests.rs#L150) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| is the default lossless view of a document | ❌ | [✅](js/tests/Cst.test.js#L8) | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/CstTest.php#L17) | ❌ |
+| is the lossless view of a document | [✅](python/tests/test_cst.py#L8) | ❌ | [✅](rust/links-notation/tests/cst_tests.rs#L8) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L14) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L20) | ❌ | [✅](cpp/tests/cst_tests.cpp#L28) |
+| kinds are written by name | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/cst_tests.cpp#L124) |
+| kinds have the shared names | ❌ | ❌ | [✅](rust/links-notation/tests/cst_tests.rs#L116) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L119) | ❌ | ❌ | ❌ | ❌ |
+| kinds have the shared s expression names | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L116) | ❌ | ❌ |
+| only reference tokens have a value | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/cst_tests.cpp#L60) |
+| recovers every document exactly | ❌ | ❌ | [✅](rust/links-notation/tests/cst_tests.rs#L46) | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/cst_tests.cpp#L69) |
+| recovers the document exactly | [✅](python/tests/test_cst.py#L80) | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/CstTest.php#L64) | ❌ |
+| reference tokens carry their value and delimiter | [✅](python/tests/test_cst.py#L27) | [✅](js/tests/Cst.test.js#L19) | [✅](rust/links-notation/tests/cst_tests.rs#L20) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L36) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L34) | [✅](php/tests/CstTest.php#L32) | [✅](cpp/tests/cst_tests.cpp#L43) |
+| rejects unbalanced or too deep documents | [✅](python/tests/test_cst.py#L115) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| rejects what parse rejects | [✅](python/tests/test_cst.py#L120) | [✅](js/tests/Cst.test.js#L78) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L127) | ❌ | ❌ | [✅](php/tests/CstTest.php#L130) | [✅](cpp/tests/cst_tests.cpp#L133) |
+| rejects what parse rejects and unbalanced parentheses | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L133) | ❌ | ❌ |
+| rejects what the parser rejects | ❌ | ❌ | [✅](rust/links-notation/tests/cst_tests.rs#L159) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| s expression escapes text | [✅](python/tests/test_cst.py#L41) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| tokens have no children and nodes have no value | [✅](python/tests/test_cst.py#L102) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| tokens have no children and only references have values | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L56) | ❌ | ❌ | ❌ | ❌ |
+| unclosed quote is a bare reference | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L109) | ❌ | ❌ | ❌ | ❌ |
+| without comment support, # is part of references | ❌ | [✅](js/tests/Cst.test.js#L51) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| without comment support hash is part of references | [✅](python/tests/test_cst.py#L86) | ❌ | [✅](rust/links-notation/tests/cst_tests.rs#L73) | [✅](csharp/Link.Foundation.Links.Notation.Tests/CstTests.cs#L83) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L89) | [✅](php/tests/CstTest.php#L87) | [✅](cpp/tests/cst_tests.cpp#L91) |
+| writes non ascii as is and escapes control characters | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/CstTest.java#L81) | ❌ | ❌ |
+| writes non ascii text as it is | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/CstTest.php#L79) | ❌ |
+
+**Category totals:** Python: 10, JavaScript: 5, Rust: 8, C#: 9, Go: 6, Java: 8, PHP: 8, C++: 11
 
 ## Edge Case Parser
 
@@ -802,6 +843,21 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 **Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4, Go: 4, Java: 4, PHP: 4, C++: 4
 
+## Shared Syntax Parity
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ |
+|-----------|---|---|---|---|---|---|---|---|
+| every shared input is recovered exactly from its concrete syntax tree | ❌ | [✅](js/tests/SharedSyntaxParity.test.js#L35) | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/SharedSyntaxParityTest.php#L55) | ❌ |
+| every shared input is recovered from its concrete syntax tree | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedSyntaxParityTests.cs#L57) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.java#L77) | ❌ | [✅](cpp/tests/shared_syntax_parity_tests.cpp#L73) |
+| every shared input is recovered from its cst | ❌ | ❌ | [✅](rust/links-notation/tests/shared_syntax_parity_tests.rs#L88) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| original text is recovered from the cst | [✅](python/tests/test_shared_syntax_parity.py#L37) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| raw references and concrete syntax trees | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedSyntaxParityTest.java#L58) | [✅](php/tests/SharedSyntaxParityTest.php#L37) | [✅](cpp/tests/shared_syntax_parity_tests.cpp#L56) |
+| shared inputs are recovered from their cst | ❌ | ❌ | ❌ | ❌ | [✅](go/shared_syntax_parity_test.go#L97) | ❌ | ❌ | ❌ |
+| shared syntax parity | [✅](python/tests/test_shared_syntax_parity.py#L20) | ❌ | [✅](rust/links-notation/tests/shared_syntax_parity_tests.rs#L66) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedSyntaxParityTests.cs#L35) | [✅](go/shared_syntax_parity_test.go#L56) | ❌ | ❌ | ❌ |
+| shared syntax parity: raw references and concrete syntax trees | ❌ | [✅](js/tests/SharedSyntaxParity.test.js#L20) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+**Category totals:** Python: 2, JavaScript: 2, Rust: 2, C#: 2, Go: 2, Java: 2, PHP: 2, C++: 2
+
 ## Shared Text Parity
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ |
@@ -880,6 +936,62 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | tracks the absolute stream position | ❌ | [✅](js/tests/StreamParser.test.js#L155) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 **Category totals:** Python: 6, JavaScript: 13, Rust: 6, C#: 7, Go: 7, Java: 6, PHP: 6, C++: 6
+
+## Syntax Metadata
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ |
+|-----------|---|---|---|---|---|---|---|---|
+| 1 and | ❌ | [✅](js/tests/SyntaxMetadata.test.js#L11) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| an unclosed quote is a bare reference | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/syntax_metadata_tests.cpp#L142) |
+| a quote that opens no reference is part of a bare reference | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java#L140) | ❌ | ❌ |
+| ast mode drops the metadata | [✅](python/tests/test_syntax_metadata.py#L66) | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SyntaxMetadataTests.cs#L85) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java#L84) | [✅](php/tests/SyntaxMetadataTest.php#L88) | [✅](cpp/tests/syntax_metadata_tests.cpp#L92) |
+| a s t mode (syntax: false) drops the metadata | ❌ | [✅](js/tests/SyntaxMetadata.test.js#L61) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| bare and quoted are the same reference but keep how they were written | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java#L22) | ❌ | ❌ |
+| bare and quoted one are the same reference but keep how they were written | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/syntax_metadata_tests.cpp#L24) |
+| bare and quoted references are equal but keep how they were written | [✅](python/tests/test_syntax_metadata.py#L8) | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SyntaxMetadataTests.cs#L13) | ❌ | ❌ | ❌ | ❌ |
+| does not change equality, formatting or serialization | ❌ | [✅](js/tests/SyntaxMetadata.test.js#L51) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| does not change equality formatting or printing | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/syntax_metadata_tests.cpp#L79) |
+| does not change equality formatting or repr | [✅](python/tests/test_syntax_metadata.py#L56) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| does not change equality formatting or serialization | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/SyntaxMetadataTest.php#L75) | ❌ |
+| does not change equality formatting or the ast mode | ❌ | ❌ | [✅](rust/links-notation/tests/syntax_metadata_tests.rs#L105) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| does not change equality formatting or to string | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java#L72) | ❌ | ❌ |
+| does not change equality or formatting | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SyntaxMetadataTests.cs#L74) | ❌ | ❌ | ❌ | ❌ |
+| indented documents and stream parser keep the metadata | [✅](python/tests/test_syntax_metadata.py#L74) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| indented ids and path combinations | ❌ | ❌ | [✅](rust/links-notation/tests/syntax_metadata_tests.rs#L92) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| indented ids and stream parser keep the metadata | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SyntaxMetadataTests.cs#L99) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java#L98) | ❌ | ❌ |
+| indented path combinations have no raw text | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SyntaxMetadataTests.cs#L61) | ❌ | ❌ | ❌ | ❌ |
+| keeps line breaks of multi line quoted references | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java#L54) | ❌ | ❌ |
+| keeps raw text from the source, not from comment stripping | ❌ | [✅](js/tests/SyntaxMetadata.test.js#L38) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| keeps raw text from the source not from comment stripping | [✅](python/tests/test_syntax_metadata.py#L35) | ❌ | [✅](rust/links-notation/tests/syntax_metadata_tests.rs#L67) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SyntaxMetadataTests.cs#L44) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java#L48) | [✅](php/tests/SyntaxMetadataTest.php#L44) | [✅](cpp/tests/syntax_metadata_tests.cpp#L56) |
+| keeps raw text of multiline and unicode references | ❌ | ❌ | [✅](rust/links-notation/tests/syntax_metadata_tests.rs#L73) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| leaves links without written ids without raw text | [✅](python/tests/test_syntax_metadata.py#L40) | [✅](js/tests/SyntaxMetadata.test.js#L43) | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SyntaxMetadataTests.cs#L51) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java#L60) | [✅](php/tests/SyntaxMetadataTest.php#L58) | [✅](cpp/tests/syntax_metadata_tests.cpp#L62) |
+| links without written ids have no raw text | ❌ | ❌ | [✅](rust/links-notation/tests/syntax_metadata_tests.rs#L81) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| one and quoted one are the same reference but keep how they were written | ❌ | ❌ | [✅](rust/links-notation/tests/syntax_metadata_tests.rs#L28) | ❌ | ❌ | ❌ | [✅](php/tests/SyntaxMetadataTest.php#L17) | ❌ |
+| parse groups and  stream parser keep the metadata | ❌ | [✅](js/tests/SyntaxMetadata.test.js#L69) | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/syntax_metadata_tests.cpp#L102) |
+| path combination links have no raw text | [✅](python/tests/test_syntax_metadata.py#L48) | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/SyntaxMetadataTest.php#L67) | [✅](cpp/tests/syntax_metadata_tests.cpp#L71) |
+| quote inside a bare reference does not span spaces | ❌ | ❌ | ❌ | ❌ | [✅](go/syntax_metadata_test.go#L241) | ❌ | ❌ | ❌ |
+| quote is read only | [✅](python/tests/test_syntax_metadata.py#L96) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| raw id can be set on links built in code | ❌ | ❌ | ❌ | [✅](csharp/Link.Foundation.Links.Notation.Tests/SyntaxMetadataTests.cs#L113) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java#L115) | ❌ | [✅](cpp/tests/syntax_metadata_tests.cpp#L122) |
+| raw id can be set on links built in code and must be text or none | [✅](python/tests/test_syntax_metadata.py#L86) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| raw id can be set on links built in code and must be text or null | ❌ | [✅](js/tests/SyntaxMetadata.test.js#L81) | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/SyntaxMetadataTest.php#L110) | ❌ |
+| raw i ds of the shared corpus read back as their i ds | ❌ | ❌ | ❌ | ❌ | [✅](go/syntax_metadata_test.go#L196) | ❌ | ❌ | ❌ |
+| records every quote kind and run length | [✅](python/tests/test_syntax_metadata.py#L22) | [✅](js/tests/SyntaxMetadata.test.js#L25) | [✅](rust/links-notation/tests/syntax_metadata_tests.rs#L46) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SyntaxMetadataTests.cs#L33) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java#L39) | [✅](php/tests/SyntaxMetadataTest.php#L33) | [✅](cpp/tests/syntax_metadata_tests.cpp#L42) |
+| records indented ids and multiline quoted references | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/SyntaxMetadataTest.php#L50) | ❌ |
+| reference quote | ❌ | ❌ | ❌ | ❌ | [✅](go/syntax_metadata_test.go#L175) | ❌ | ❌ | ❌ |
+| reference quote reads the delimiter of one complete reference | [✅](python/tests/test_syntax_metadata.py#L115) | [✅](js/tests/SyntaxMetadata.test.js#L92) | [✅](rust/links-notation/tests/syntax_metadata_tests.rs#L140) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SyntaxMetadataTests.cs#L125) | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SyntaxMetadataTest.java#L126) | [✅](php/tests/SyntaxMetadataTest.php#L123) | [✅](cpp/tests/syntax_metadata_tests.cpp#L131) |
+| stream parser keeps syntax metadata | ❌ | ❌ | [✅](rust/links-notation/tests/syntax_metadata_tests.rs#L152) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| stream parser keeps the metadata | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/SyntaxMetadataTest.php#L97) | ❌ |
+| syntax links follow the parser config | ❌ | ❌ | [✅](rust/links-notation/tests/syntax_metadata_tests.rs#L129) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| syntax metadata does not change equality or formatting | ❌ | ❌ | ❌ | ❌ | [✅](go/syntax_metadata_test.go#L90) | ❌ | ❌ | ❌ |
+| syntax metadata is absent without a written i d | ❌ | ❌ | ❌ | ❌ | [✅](go/syntax_metadata_test.go#L79) | ❌ | ❌ | ❌ |
+| syntax metadata is dropped in a s t mode | ❌ | ❌ | ❌ | ❌ | [✅](go/syntax_metadata_test.go#L110) | ❌ | ❌ | ❌ |
+| syntax metadata is kept by indentation and the stream parser | ❌ | ❌ | ❌ | ❌ | [✅](go/syntax_metadata_test.go#L125) | ❌ | ❌ | ❌ |
+| syntax metadata keeps how equal references were written | ❌ | ❌ | ❌ | ❌ | [✅](go/syntax_metadata_test.go#L26) | ❌ | ❌ | ❌ |
+| syntax metadata on links built in code | ❌ | ❌ | ❌ | ❌ | [✅](go/syntax_metadata_test.go#L159) | ❌ | ❌ | ❌ |
+| syntax metadata records every quote kind and run length | ❌ | ❌ | ❌ | ❌ | [✅](go/syntax_metadata_test.go#L46) | ❌ | ❌ | ❌ |
+| syntax metadata slices the source not the comment stripped copy | ❌ | ❌ | ❌ | ❌ | [✅](go/syntax_metadata_test.go#L67) | ❌ | ❌ | ❌ |
+
+**Category totals:** Python: 11, JavaScript: 9, Rust: 10, C#: 10, Go: 11, Java: 11, PHP: 11, C++: 11
 
 ## Tuple
 
@@ -1090,6 +1202,32 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Comments** (2 missing):
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
+
+**Cst** (24 missing):
+- anemptydocumenthasnolines
+- anunclosedquoteisabarereference
+- cstgroupbelongstothelineitopenson
+- cstisalosslessviewofadocument
+- cstreadshashasreferencetextwithoutcomments
+- cstrecoversdocumentsexactly
+- cstreferencetokenscarrytheirvalueanddelimiter
+- cstrejectswhatcannotbeparsed
+- emptydocumenthasnolines
+- escapesthesexpressiontext
+- escapestokentextinsexpressions
+- isthedefaultlosslessviewofadocument
+- kindsarewrittenbyname
+- kindshavethesharednames
+- kindshavethesharedsexpressionnames
+- onlyreferencetokenshaveavalue
+- recoverseverydocumentexactly
+- rejectswhatparserejectsandunbalancedparentheses
+- rejectswhattheparserrejects
+- tokenshavenochildrenandonlyreferenceshavevalues
+- unclosedquoteisabarereference
+- withoutcommentsupport,ispartofreferences
+- writesnonasciiasisandescapescontrolcharacters
+- writesnonasciitextasitis
 
 **Empty Reference** (1 missing):
 - singlespacestillreadsasaspace
@@ -1346,6 +1484,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - summaryreadsasasentence
 - thelocationtheparserusedtoreportisstillthere
 
+**Shared Syntax Parity** (6 missing):
+- everysharedinputisrecoveredexactlyfromitsconcretesyntaxtree
+- everysharedinputisrecoveredfromitsconcretesyntaxtree
+- everysharedinputisrecoveredfromitscst
+- rawreferencesandconcretesyntaxtrees
+- sharedinputsarerecoveredfromtheircst
+- sharedsyntaxparityrawreferencesandconcretesyntaxtrees
+
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -1362,6 +1508,46 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - reportspositionsrelativetothewholestream
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
+
+**Syntax Metadata** (38 missing):
+- 1 and
+- anunclosedquoteisabarereference
+- aquotethatopensnoreferenceispartofabarereference
+- astmodesyntaxfalsedropsthemetadata
+- bareandquotedarethesamereferencebutkeephowtheywerewritten
+- bareandquotedonearethesamereferencebutkeephowtheywerewritten
+- doesnotchangeequality,formattingorserialization
+- doesnotchangeequalityformattingorprinting
+- doesnotchangeequalityformattingorserialization
+- doesnotchangeequalityformattingortheastmode
+- doesnotchangeequalityformattingortostring
+- doesnotchangeequalityorformatting
+- indentedidsandpathcombinations
+- indentedidsandstreamparserkeepthemetadata
+- indentedpathcombinationshavenorawtext
+- keepslinebreaksofmultilinequotedreferences
+- keepsrawtextfromthesource,notfromcommentstripping
+- keepsrawtextofmultilineandunicodereferences
+- linkswithoutwrittenidshavenorawtext
+- oneandquotedonearethesamereferencebutkeephowtheywerewritten
+- parsegroupsandstreamparserkeepthemetadata
+- quoteinsideabarereferencedoesnotspanspaces
+- rawidcanbesetonlinksbuiltincode
+- rawidcanbesetonlinksbuiltincodeandmustbetextornull
+- rawidsofthesharedcorpusreadbackastheirids
+- recordsindentedidsandmultilinequotedreferences
+- referencequote
+- streamparserkeepssyntaxmetadata
+- streamparserkeepsthemetadata
+- syntaxlinksfollowtheparserconfig
+- syntaxmetadatadoesnotchangeequalityorformatting
+- syntaxmetadataisabsentwithoutawrittenid
+- syntaxmetadataisdroppedinastmode
+- syntaxmetadataiskeptbyindentationandthestreamparser
+- syntaxmetadatakeepshowequalreferenceswerewritten
+- syntaxmetadataonlinksbuiltincode
+- syntaxmetadatarecordseveryquotekindandrunlength
+- syntaxmetadataslicesthesourcenotthecommentstrippedcopy
 
 **Tuple** (49 missing):
 - anonymouslinkfromthreelino
@@ -1414,7 +1600,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 404 tests**
+**Total missing: 472 tests**
 
 ### JavaScript Missing Tests
 
@@ -1536,6 +1722,37 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uniformwidthsgrowpast 256 addressesandpackedwidthsstaysmall
 - widthtiersfollowthenumberoflinks
 - writingrejectssectionsthatdonotholdtheirlinks
+
+**Cst** (29 missing):
+- anemptydocumenthasnolines
+- anunclosedquoteisabarereference
+- cstgroupbelongstothelineitopenson
+- cstisalosslessviewofadocument
+- cstreadshashasreferencetextwithoutcomments
+- cstrecoversdocumentsexactly
+- cstreferencetokenscarrytheirvalueanddelimiter
+- cstrejectswhatcannotbeparsed
+- emptydocument
+- emptydocumenthasnolines
+- escapesthesexpressiontext
+- escapestokentextinsexpressions
+- isthelosslessviewofadocument
+- kindsarewrittenbyname
+- kindshavethesharednames
+- kindshavethesharedsexpressionnames
+- onlyreferencetokenshaveavalue
+- recoverseverydocumentexactly
+- recoversthedocumentexactly
+- rejectsunbalancedortoodeepdocuments
+- rejectswhatparserejectsandunbalancedparentheses
+- rejectswhattheparserrejects
+- sexpressionescapestext
+- tokenshavenochildrenandnodeshavenovalue
+- tokenshavenochildrenandonlyreferenceshavevalues
+- unclosedquoteisabarereference
+- withoutcommentsupporthashispartofreferences
+- writesnonasciiasisandescapescontrolcharacters
+- writesnonasciitextasitis
 
 **Empty Reference** (2 missing):
 - asinglespacestillreadsasaspace
@@ -1741,6 +1958,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - snippetpointsacaretattheoffendingcharacter
 - summaryreadsasasentence
 
+**Shared Syntax Parity** (6 missing):
+- everysharedinputisrecoveredfromitsconcretesyntaxtree
+- everysharedinputisrecoveredfromitscst
+- originaltextisrecoveredfromthecst
+- rawreferencesandconcretesyntaxtrees
+- sharedinputsarerecoveredfromtheircst
+- sharedsyntaxparity
+
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -1750,6 +1975,48 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Stream Parser** (2 missing):
 - providesanasyncenumerableadapter
 - streamparserpreservesindentedandmultilinerecords
+
+**Syntax Metadata** (40 missing):
+- anunclosedquoteisabarereference
+- aquotethatopensnoreferenceispartofabarereference
+- astmodedropsthemetadata
+- bareandquotedarethesamereferencebutkeephowtheywerewritten
+- bareandquotedonearethesamereferencebutkeephowtheywerewritten
+- bareandquotedreferencesareequalbutkeephowtheywerewritten
+- doesnotchangeequalityformattingorprinting
+- doesnotchangeequalityformattingorrepr
+- doesnotchangeequalityformattingorserialization
+- doesnotchangeequalityformattingortheastmode
+- doesnotchangeequalityformattingortostring
+- doesnotchangeequalityorformatting
+- indenteddocumentsandstreamparserkeepthemetadata
+- indentedidsandpathcombinations
+- indentedidsandstreamparserkeepthemetadata
+- indentedpathcombinationshavenorawtext
+- keepslinebreaksofmultilinequotedreferences
+- keepsrawtextfromthesourcenotfromcommentstripping
+- keepsrawtextofmultilineandunicodereferences
+- linkswithoutwrittenidshavenorawtext
+- oneandquotedonearethesamereferencebutkeephowtheywerewritten
+- pathcombinationlinkshavenorawtext
+- quoteinsideabarereferencedoesnotspanspaces
+- quoteisreadonly
+- rawidcanbesetonlinksbuiltincode
+- rawidcanbesetonlinksbuiltincodeandmustbetextornone
+- rawidsofthesharedcorpusreadbackastheirids
+- recordsindentedidsandmultilinequotedreferences
+- referencequote
+- streamparserkeepssyntaxmetadata
+- streamparserkeepsthemetadata
+- syntaxlinksfollowtheparserconfig
+- syntaxmetadatadoesnotchangeequalityorformatting
+- syntaxmetadataisabsentwithoutawrittenid
+- syntaxmetadataisdroppedinastmode
+- syntaxmetadataiskeptbyindentationandthestreamparser
+- syntaxmetadatakeepshowequalreferenceswerewritten
+- syntaxmetadataonlinksbuiltincode
+- syntaxmetadatarecordseveryquotekindandrunlength
+- syntaxmetadataslicesthesourcenotthecommentstrippedcopy
 
 **Tuple** (49 missing):
 - anonymouslinkfromthreelino
@@ -1806,7 +2073,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 336 tests**
+**Total missing: 411 tests**
 
 ### Rust Missing Tests
 
@@ -1914,6 +2181,34 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thesourceentrypointimportsnonodebuiltinsorpackages
 - workswiththenode.jsevents.onasynciterator
 - workswiththenode.jsevents.oncehelper
+
+**Cst** (26 missing):
+- anemptydocumenthasnolines
+- anunclosedquoteisabarereference
+- cstgroupbelongstothelineitopenson
+- cstisalosslessviewofadocument
+- cstreadshashasreferencetextwithoutcomments
+- cstrecoversdocumentsexactly
+- cstreferencetokenscarrytheirvalueanddelimiter
+- cstrejectswhatcannotbeparsed
+- emptydocument
+- emptydocumenthasnolines
+- escapesthesexpressiontext
+- isthedefaultlosslessviewofadocument
+- kindsarewrittenbyname
+- kindshavethesharedsexpressionnames
+- onlyreferencetokenshaveavalue
+- recoversthedocumentexactly
+- rejectsunbalancedortoodeepdocuments
+- rejectswhatparserejects
+- rejectswhatparserejectsandunbalancedparentheses
+- sexpressionescapestext
+- tokenshavenochildrenandnodeshavenovalue
+- tokenshavenochildrenandonlyreferenceshavevalues
+- unclosedquoteisabarereference
+- withoutcommentsupport,ispartofreferences
+- writesnonasciiasisandescapescontrolcharacters
+- writesnonasciitextasitis
 
 **Empty Reference** (2 missing):
 - nquotedelimitedemptyisstillempty
@@ -2082,6 +2377,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - offsetagreeswiththeotherimplementations
 - thelocationtheparserusedtoreportisstillthere
 
+**Shared Syntax Parity** (6 missing):
+- everysharedinputisrecoveredexactlyfromitsconcretesyntaxtree
+- everysharedinputisrecoveredfromitsconcretesyntaxtree
+- originaltextisrecoveredfromthecst
+- rawreferencesandconcretesyntaxtrees
+- sharedinputsarerecoveredfromtheircst
+- sharedsyntaxparityrawreferencesandconcretesyntaxtrees
+
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -2099,6 +2402,47 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
 
+**Syntax Metadata** (39 missing):
+- 1 and
+- anunclosedquoteisabarereference
+- aquotethatopensnoreferenceispartofabarereference
+- astmodedropsthemetadata
+- astmodesyntaxfalsedropsthemetadata
+- bareandquotedarethesamereferencebutkeephowtheywerewritten
+- bareandquotedonearethesamereferencebutkeephowtheywerewritten
+- bareandquotedreferencesareequalbutkeephowtheywerewritten
+- doesnotchangeequality,formattingorserialization
+- doesnotchangeequalityformattingorprinting
+- doesnotchangeequalityformattingorrepr
+- doesnotchangeequalityformattingorserialization
+- doesnotchangeequalityformattingortostring
+- doesnotchangeequalityorformatting
+- indenteddocumentsandstreamparserkeepthemetadata
+- indentedidsandstreamparserkeepthemetadata
+- indentedpathcombinationshavenorawtext
+- keepslinebreaksofmultilinequotedreferences
+- keepsrawtextfromthesource,notfromcommentstripping
+- leaveslinkswithoutwrittenidswithoutrawtext
+- parsegroupsandstreamparserkeepthemetadata
+- pathcombinationlinkshavenorawtext
+- quoteinsideabarereferencedoesnotspanspaces
+- quoteisreadonly
+- rawidcanbesetonlinksbuiltincode
+- rawidcanbesetonlinksbuiltincodeandmustbetextornone
+- rawidcanbesetonlinksbuiltincodeandmustbetextornull
+- rawidsofthesharedcorpusreadbackastheirids
+- recordsindentedidsandmultilinequotedreferences
+- referencequote
+- streamparserkeepsthemetadata
+- syntaxmetadatadoesnotchangeequalityorformatting
+- syntaxmetadataisabsentwithoutawrittenid
+- syntaxmetadataisdroppedinastmode
+- syntaxmetadataiskeptbyindentationandthestreamparser
+- syntaxmetadatakeepshowequalreferenceswerewritten
+- syntaxmetadataonlinksbuiltincode
+- syntaxmetadatarecordseveryquotekindandrunlength
+- syntaxmetadataslicesthesourcenotthecommentstrippedcopy
+
 **Tuple** (2 missing):
 - namedtupletolink
 - tupletolink
@@ -2107,7 +2451,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 251 tests**
+**Total missing: 322 tests**
 
 ### C# Missing Tests
 
@@ -2216,6 +2560,33 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 **Comments** (1 missing):
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
+
+**Cst** (25 missing):
+- anemptydocumenthasnolines
+- anunclosedquoteisabarereference
+- cstgroupbelongstothelineitopenson
+- cstisalosslessviewofadocument
+- cstreadshashasreferencetextwithoutcomments
+- cstrecoversdocumentsexactly
+- cstreferencetokenscarrytheirvalueanddelimiter
+- cstrejectswhatcannotbeparsed
+- emptydocument
+- escapesthesexpressiontext
+- escapestokentextinsexpressions
+- isthedefaultlosslessviewofadocument
+- kindsarewrittenbyname
+- kindshavethesharedsexpressionnames
+- onlyreferencetokenshaveavalue
+- recoverseverydocumentexactly
+- recoversthedocumentexactly
+- rejectsunbalancedortoodeepdocuments
+- rejectswhatparserejectsandunbalancedparentheses
+- rejectswhattheparserrejects
+- sexpressionescapestext
+- tokenshavenochildrenandnodeshavenovalue
+- withoutcommentsupport,ispartofreferences
+- writesnonasciiasisandescapescontrolcharacters
+- writesnonasciitextasitis
 
 **Empty Reference** (2 missing):
 - nquotedelimitedemptyisstillempty
@@ -2455,6 +2826,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - summaryreadsasasentence
 - thelocationtheparserusedtoreportisstillthere
 
+**Shared Syntax Parity** (6 missing):
+- everysharedinputisrecoveredexactlyfromitsconcretesyntaxtree
+- everysharedinputisrecoveredfromitscst
+- originaltextisrecoveredfromthecst
+- rawreferencesandconcretesyntaxtrees
+- sharedinputsarerecoveredfromtheircst
+- sharedsyntaxparityrawreferencesandconcretesyntaxtrees
+
 **Single Line Parser** (3 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -2469,6 +2848,47 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - reportspositionsrelativetothewholestream
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
+
+**Syntax Metadata** (39 missing):
+- 1 and
+- anunclosedquoteisabarereference
+- aquotethatopensnoreferenceispartofabarereference
+- astmodesyntaxfalsedropsthemetadata
+- bareandquotedarethesamereferencebutkeephowtheywerewritten
+- bareandquotedonearethesamereferencebutkeephowtheywerewritten
+- doesnotchangeequality,formattingorserialization
+- doesnotchangeequalityformattingorprinting
+- doesnotchangeequalityformattingorrepr
+- doesnotchangeequalityformattingorserialization
+- doesnotchangeequalityformattingortheastmode
+- doesnotchangeequalityformattingortostring
+- indenteddocumentsandstreamparserkeepthemetadata
+- indentedidsandpathcombinations
+- keepslinebreaksofmultilinequotedreferences
+- keepsrawtextfromthesource,notfromcommentstripping
+- keepsrawtextofmultilineandunicodereferences
+- linkswithoutwrittenidshavenorawtext
+- oneandquotedonearethesamereferencebutkeephowtheywerewritten
+- parsegroupsandstreamparserkeepthemetadata
+- pathcombinationlinkshavenorawtext
+- quoteinsideabarereferencedoesnotspanspaces
+- quoteisreadonly
+- rawidcanbesetonlinksbuiltincodeandmustbetextornone
+- rawidcanbesetonlinksbuiltincodeandmustbetextornull
+- rawidsofthesharedcorpusreadbackastheirids
+- recordsindentedidsandmultilinequotedreferences
+- referencequote
+- streamparserkeepssyntaxmetadata
+- streamparserkeepsthemetadata
+- syntaxlinksfollowtheparserconfig
+- syntaxmetadatadoesnotchangeequalityorformatting
+- syntaxmetadataisabsentwithoutawrittenid
+- syntaxmetadataisdroppedinastmode
+- syntaxmetadataiskeptbyindentationandthestreamparser
+- syntaxmetadatakeepshowequalreferenceswerewritten
+- syntaxmetadataonlinksbuiltincode
+- syntaxmetadatarecordseveryquotekindandrunlength
+- syntaxmetadataslicesthesourcenotthecommentstrippedcopy
 
 **Tuple** (47 missing):
 - anonymouslinkfromthreelino
@@ -2523,7 +2943,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 356 tests**
+**Total missing: 426 tests**
 
 ### Go Missing Tests
 
@@ -2667,6 +3087,36 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Comments** (2 missing):
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
+
+**Cst** (28 missing):
+- agroupbelongstothelineitopenson
+- anemptydocumenthasnolines
+- anunclosedquoteisabarereference
+- emptydocument
+- emptydocumenthasnolines
+- escapesthesexpressiontext
+- escapestokentextinsexpressions
+- isthedefaultlosslessviewofadocument
+- isthelosslessviewofadocument
+- kindsarewrittenbyname
+- kindshavethesharednames
+- kindshavethesharedsexpressionnames
+- onlyreferencetokenshaveavalue
+- recoverseverydocumentexactly
+- recoversthedocumentexactly
+- referencetokenscarrytheirvalueanddelimiter
+- rejectsunbalancedortoodeepdocuments
+- rejectswhatparserejects
+- rejectswhatparserejectsandunbalancedparentheses
+- rejectswhattheparserrejects
+- sexpressionescapestext
+- tokenshavenochildrenandnodeshavenovalue
+- tokenshavenochildrenandonlyreferenceshavevalues
+- unclosedquoteisabarereference
+- withoutcommentsupport,ispartofreferences
+- withoutcommentsupporthashispartofreferences
+- writesnonasciiasisandescapescontrolcharacters
+- writesnonasciitextasitis
 
 **Edge Case Parser** (8 missing):
 - allfeatures
@@ -3010,6 +3460,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - summaryreadsasasentence
 - thelocationtheparserusedtoreportisstillthere
 
+**Shared Syntax Parity** (6 missing):
+- everysharedinputisrecoveredexactlyfromitsconcretesyntaxtree
+- everysharedinputisrecoveredfromitsconcretesyntaxtree
+- everysharedinputisrecoveredfromitscst
+- originaltextisrecoveredfromthecst
+- rawreferencesandconcretesyntaxtrees
+- sharedsyntaxparityrawreferencesandconcretesyntaxtrees
+
 **Single Line Parser** (26 missing):
 - bugtest 1
 - linkwithid
@@ -3047,6 +3505,46 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - providesanasyncenumerableadapter
 - reportspositionsrelativetothewholestream
 - trackstheabsolutestreamposition
+
+**Syntax Metadata** (38 missing):
+- 1 and
+- anunclosedquoteisabarereference
+- aquotethatopensnoreferenceispartofabarereference
+- astmodedropsthemetadata
+- astmodesyntaxfalsedropsthemetadata
+- bareandquotedarethesamereferencebutkeephowtheywerewritten
+- bareandquotedonearethesamereferencebutkeephowtheywerewritten
+- bareandquotedreferencesareequalbutkeephowtheywerewritten
+- doesnotchangeequality,formattingorserialization
+- doesnotchangeequalityformattingorprinting
+- doesnotchangeequalityformattingorrepr
+- doesnotchangeequalityformattingorserialization
+- doesnotchangeequalityformattingortheastmode
+- doesnotchangeequalityformattingortostring
+- doesnotchangeequalityorformatting
+- indenteddocumentsandstreamparserkeepthemetadata
+- indentedidsandpathcombinations
+- indentedidsandstreamparserkeepthemetadata
+- indentedpathcombinationshavenorawtext
+- keepslinebreaksofmultilinequotedreferences
+- keepsrawtextfromthesource,notfromcommentstripping
+- keepsrawtextfromthesourcenotfromcommentstripping
+- keepsrawtextofmultilineandunicodereferences
+- leaveslinkswithoutwrittenidswithoutrawtext
+- linkswithoutwrittenidshavenorawtext
+- oneandquotedonearethesamereferencebutkeephowtheywerewritten
+- parsegroupsandstreamparserkeepthemetadata
+- pathcombinationlinkshavenorawtext
+- quoteisreadonly
+- rawidcanbesetonlinksbuiltincode
+- rawidcanbesetonlinksbuiltincodeandmustbetextornone
+- rawidcanbesetonlinksbuiltincodeandmustbetextornull
+- recordseveryquotekindandrunlength
+- recordsindentedidsandmultilinequotedreferences
+- referencequotereadsthedelimiterofonecompletereference
+- streamparserkeepssyntaxmetadata
+- streamparserkeepsthemetadata
+- syntaxlinksfollowtheparserconfig
 
 **Tuple** (49 missing):
 - anonymouslinkfromthreelino
@@ -3103,7 +3601,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 508 tests**
+**Total missing: 580 tests**
 
 ### Java Missing Tests
 
@@ -3242,6 +3740,34 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Comments** (2 missing):
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
+
+**Cst** (26 missing):
+- anunclosedquoteisabarereference
+- cstgroupbelongstothelineitopenson
+- cstisalosslessviewofadocument
+- cstreadshashasreferencetextwithoutcomments
+- cstrecoversdocumentsexactly
+- cstreferencetokenscarrytheirvalueanddelimiter
+- cstrejectswhatcannotbeparsed
+- emptydocument
+- emptydocumenthasnolines
+- escapesthesexpressiontext
+- escapestokentextinsexpressions
+- isthedefaultlosslessviewofadocument
+- kindsarewrittenbyname
+- kindshavethesharednames
+- onlyreferencetokenshaveavalue
+- recoverseverydocumentexactly
+- recoversthedocumentexactly
+- rejectsunbalancedortoodeepdocuments
+- rejectswhatparserejects
+- rejectswhattheparserrejects
+- sexpressionescapestext
+- tokenshavenochildrenandnodeshavenovalue
+- tokenshavenochildrenandonlyreferenceshavevalues
+- unclosedquoteisabarereference
+- withoutcommentsupport,ispartofreferences
+- writesnonasciitextasitis
 
 **Edge Case Parser** (9 missing):
 - allfeatures
@@ -3564,6 +4090,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - summaryreadsasasentence
 - thelocationtheparserusedtoreportisstillthere
 
+**Shared Syntax Parity** (6 missing):
+- everysharedinputisrecoveredexactlyfromitsconcretesyntaxtree
+- everysharedinputisrecoveredfromitscst
+- originaltextisrecoveredfromthecst
+- sharedinputsarerecoveredfromtheircst
+- sharedsyntaxparity
+- sharedsyntaxparityrawreferencesandconcretesyntaxtrees
+
 **Single Line Parser** (9 missing):
 - linkwithoutidmultiline
 - linkwithoutidsingleline
@@ -3585,6 +4119,46 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - reportspositionsrelativetothewholestream
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
+
+**Syntax Metadata** (38 missing):
+- 1 and
+- anunclosedquoteisabarereference
+- astmodesyntaxfalsedropsthemetadata
+- bareandquotedonearethesamereferencebutkeephowtheywerewritten
+- bareandquotedreferencesareequalbutkeephowtheywerewritten
+- doesnotchangeequality,formattingorserialization
+- doesnotchangeequalityformattingorprinting
+- doesnotchangeequalityformattingorrepr
+- doesnotchangeequalityformattingorserialization
+- doesnotchangeequalityformattingortheastmode
+- doesnotchangeequalityorformatting
+- indenteddocumentsandstreamparserkeepthemetadata
+- indentedidsandpathcombinations
+- indentedpathcombinationshavenorawtext
+- keepsrawtextfromthesource,notfromcommentstripping
+- keepsrawtextofmultilineandunicodereferences
+- linkswithoutwrittenidshavenorawtext
+- oneandquotedonearethesamereferencebutkeephowtheywerewritten
+- parsegroupsandstreamparserkeepthemetadata
+- pathcombinationlinkshavenorawtext
+- quoteinsideabarereferencedoesnotspanspaces
+- quoteisreadonly
+- rawidcanbesetonlinksbuiltincodeandmustbetextornone
+- rawidcanbesetonlinksbuiltincodeandmustbetextornull
+- rawidsofthesharedcorpusreadbackastheirids
+- recordsindentedidsandmultilinequotedreferences
+- referencequote
+- streamparserkeepssyntaxmetadata
+- streamparserkeepsthemetadata
+- syntaxlinksfollowtheparserconfig
+- syntaxmetadatadoesnotchangeequalityorformatting
+- syntaxmetadataisabsentwithoutawrittenid
+- syntaxmetadataisdroppedinastmode
+- syntaxmetadataiskeptbyindentationandthestreamparser
+- syntaxmetadatakeepshowequalreferenceswerewritten
+- syntaxmetadataonlinksbuiltincode
+- syntaxmetadatarecordseveryquotekindandrunlength
+- syntaxmetadataslicesthesourcenotthecommentstrippedcopy
 
 **Tuple** (49 missing):
 - anonymouslinkfromthreelino
@@ -3641,7 +4215,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 466 tests**
+**Total missing: 536 tests**
 
 ### PHP Missing Tests
 
@@ -3783,6 +4357,34 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Comments** (2 missing):
 - acommentdoesnotmovethepositionalatererrorisreportedat
 - aparserwithoutcommentsstillrejectsthedocumentfromtheissue
+
+**Cst** (26 missing):
+- anunclosedquoteisabarereference
+- cstgroupbelongstothelineitopenson
+- cstisalosslessviewofadocument
+- cstreadshashasreferencetextwithoutcomments
+- cstrecoversdocumentsexactly
+- cstreferencetokenscarrytheirvalueanddelimiter
+- cstrejectswhatcannotbeparsed
+- emptydocument
+- emptydocumenthasnolines
+- escapesthesexpressiontext
+- escapestokentextinsexpressions
+- isthelosslessviewofadocument
+- kindsarewrittenbyname
+- kindshavethesharednames
+- kindshavethesharedsexpressionnames
+- onlyreferencetokenshaveavalue
+- recoverseverydocumentexactly
+- rejectsunbalancedortoodeepdocuments
+- rejectswhatparserejectsandunbalancedparentheses
+- rejectswhattheparserrejects
+- sexpressionescapestext
+- tokenshavenochildrenandnodeshavenovalue
+- tokenshavenochildrenandonlyreferenceshavevalues
+- unclosedquoteisabarereference
+- withoutcommentsupport,ispartofreferences
+- writesnonasciiasisandescapescontrolcharacters
 
 **Empty Reference** (2 missing):
 - nquotedelimitedemptyisstillempty
@@ -4037,6 +4639,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - summaryreadsasasentence
 - thelocationtheparserusedtoreportisstillthere
 
+**Shared Syntax Parity** (6 missing):
+- everysharedinputisrecoveredfromitsconcretesyntaxtree
+- everysharedinputisrecoveredfromitscst
+- originaltextisrecoveredfromthecst
+- sharedinputsarerecoveredfromtheircst
+- sharedsyntaxparity
+- sharedsyntaxparityrawreferencesandconcretesyntaxtrees
+
 **Single Line Parser** (16 missing):
 - linkwithoutidmultiline
 - linkwithoutidsingleline
@@ -4065,6 +4675,46 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - reportspositionsrelativetothewholestream
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
+
+**Syntax Metadata** (38 missing):
+- 1 and
+- anunclosedquoteisabarereference
+- aquotethatopensnoreferenceispartofabarereference
+- astmodesyntaxfalsedropsthemetadata
+- bareandquotedarethesamereferencebutkeephowtheywerewritten
+- bareandquotedonearethesamereferencebutkeephowtheywerewritten
+- bareandquotedreferencesareequalbutkeephowtheywerewritten
+- doesnotchangeequality,formattingorserialization
+- doesnotchangeequalityformattingorprinting
+- doesnotchangeequalityformattingorrepr
+- doesnotchangeequalityformattingortheastmode
+- doesnotchangeequalityformattingortostring
+- doesnotchangeequalityorformatting
+- indenteddocumentsandstreamparserkeepthemetadata
+- indentedidsandpathcombinations
+- indentedidsandstreamparserkeepthemetadata
+- indentedpathcombinationshavenorawtext
+- keepslinebreaksofmultilinequotedreferences
+- keepsrawtextfromthesource,notfromcommentstripping
+- keepsrawtextofmultilineandunicodereferences
+- linkswithoutwrittenidshavenorawtext
+- parsegroupsandstreamparserkeepthemetadata
+- quoteinsideabarereferencedoesnotspanspaces
+- quoteisreadonly
+- rawidcanbesetonlinksbuiltincode
+- rawidcanbesetonlinksbuiltincodeandmustbetextornone
+- rawidsofthesharedcorpusreadbackastheirids
+- referencequote
+- streamparserkeepssyntaxmetadata
+- syntaxlinksfollowtheparserconfig
+- syntaxmetadatadoesnotchangeequalityorformatting
+- syntaxmetadataisabsentwithoutawrittenid
+- syntaxmetadataisdroppedinastmode
+- syntaxmetadataiskeptbyindentationandthestreamparser
+- syntaxmetadatakeepshowequalreferenceswerewritten
+- syntaxmetadataonlinksbuiltincode
+- syntaxmetadatarecordseveryquotekindandrunlength
+- syntaxmetadataslicesthesourcenotthecommentstrippedcopy
 
 **Tuple** (49 missing):
 - anonymouslinkfromthreelino
@@ -4121,7 +4771,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 416 tests**
+**Total missing: 486 tests**
 
 ### C++ Missing Tests
 
@@ -4220,6 +4870,31 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - thesourceentrypointimportsnonodebuiltinsorpackages
 - workswiththenode.jsevents.onasynciterator
 - workswiththenode.jsevents.oncehelper
+
+**Cst** (23 missing):
+- cstgroupbelongstothelineitopenson
+- cstisalosslessviewofadocument
+- cstreadshashasreferencetextwithoutcomments
+- cstrecoversdocumentsexactly
+- cstreferencetokenscarrytheirvalueanddelimiter
+- cstrejectswhatcannotbeparsed
+- emptydocument
+- emptydocumenthasnolines
+- escapestokentextinsexpressions
+- isthedefaultlosslessviewofadocument
+- kindshavethesharednames
+- kindshavethesharedsexpressionnames
+- recoversthedocumentexactly
+- rejectsunbalancedortoodeepdocuments
+- rejectswhatparserejectsandunbalancedparentheses
+- rejectswhattheparserrejects
+- sexpressionescapestext
+- tokenshavenochildrenandnodeshavenovalue
+- tokenshavenochildrenandonlyreferenceshavevalues
+- unclosedquoteisabarereference
+- withoutcommentsupport,ispartofreferences
+- writesnonasciiasisandescapescontrolcharacters
+- writesnonasciitextasitis
 
 **Empty Reference** (2 missing):
 - nquotedelimitedemptyisstillempty
@@ -4403,6 +5078,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - offsetagreeswiththeotherimplementations
 - thelocationtheparserusedtoreportisstillthere
 
+**Shared Syntax Parity** (6 missing):
+- everysharedinputisrecoveredexactlyfromitsconcretesyntaxtree
+- everysharedinputisrecoveredfromitscst
+- originaltextisrecoveredfromthecst
+- sharedinputsarerecoveredfromtheircst
+- sharedsyntaxparity
+- sharedsyntaxparityrawreferencesandconcretesyntaxtrees
+
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -4419,6 +5102,46 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - reportspositionsrelativetothewholestream
 - streamparserpreservesindentedandmultilinerecords
 - trackstheabsolutestreamposition
+
+**Syntax Metadata** (38 missing):
+- 1 and
+- aquotethatopensnoreferenceispartofabarereference
+- astmodesyntaxfalsedropsthemetadata
+- bareandquotedarethesamereferencebutkeephowtheywerewritten
+- bareandquotedreferencesareequalbutkeephowtheywerewritten
+- doesnotchangeequality,formattingorserialization
+- doesnotchangeequalityformattingorrepr
+- doesnotchangeequalityformattingorserialization
+- doesnotchangeequalityformattingortheastmode
+- doesnotchangeequalityformattingortostring
+- doesnotchangeequalityorformatting
+- indenteddocumentsandstreamparserkeepthemetadata
+- indentedidsandpathcombinations
+- indentedidsandstreamparserkeepthemetadata
+- indentedpathcombinationshavenorawtext
+- keepslinebreaksofmultilinequotedreferences
+- keepsrawtextfromthesource,notfromcommentstripping
+- keepsrawtextofmultilineandunicodereferences
+- linkswithoutwrittenidshavenorawtext
+- oneandquotedonearethesamereferencebutkeephowtheywerewritten
+- quoteinsideabarereferencedoesnotspanspaces
+- quoteisreadonly
+- rawidcanbesetonlinksbuiltincodeandmustbetextornone
+- rawidcanbesetonlinksbuiltincodeandmustbetextornull
+- rawidsofthesharedcorpusreadbackastheirids
+- recordsindentedidsandmultilinequotedreferences
+- referencequote
+- streamparserkeepssyntaxmetadata
+- streamparserkeepsthemetadata
+- syntaxlinksfollowtheparserconfig
+- syntaxmetadatadoesnotchangeequalityorformatting
+- syntaxmetadataisabsentwithoutawrittenid
+- syntaxmetadataisdroppedinastmode
+- syntaxmetadataiskeptbyindentationandthestreamparser
+- syntaxmetadatakeepshowequalreferenceswerewritten
+- syntaxmetadataonlinksbuiltincode
+- syntaxmetadatarecordseveryquotekindandrunlength
+- syntaxmetadataslicesthesourcenotthecommentstrippedcopy
 
 **Tuple** (49 missing):
 - anonymouslinkfromthreelino
@@ -4475,5 +5198,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 306 tests**
+**Total missing: 373 tests**
 

@@ -226,6 +226,33 @@ deploy: staging # пока только staging
 итератор работали с ограниченной памятью. См. [эксперимент проверки паритета](experiments/issue-197/README.md)
 и README соответствующего языка.
 
+## Как документ был записан
+
+`1` и `'1'` - одна и та же ссылка, поэтому сравнение и форматирование не
+различают `(t 1 '1')` и `(t 1 1)`. Но парсер запоминает, как был записан каждый
+ID: у каждой разобранной связи с ID есть исходный текст (`'1'`) и кавычка
+(`'`). Эти метаданные включены по умолчанию, а режим AST их не сохраняет. Для
+всего текста каждая реализация также возвращает конкретное синтаксическое
+дерево (CST) без потерь: каждый символ, включая комментарии, пробелы, пустые
+строки и переводы строк, принадлежит ровно одному токену, поэтому текст дерева
+равен документу.
+
+| Язык | Исходный текст и кавычка | Режим AST | CST |
+| --- | --- | --- | --- |
+| C# | `RawId`, `Quote` | `new Parser { Syntax = false }` | `ParseCst` |
+| JavaScript | `rawId`, `quote` | `new Parser({ syntax: false })` | `parseCst` |
+| Rust | `parse_lino_to_syntax_links` → `raw_id()`, `quote()` | `parse_lino` | `parse_lino_to_cst` |
+| Python | `raw_id`, `quote` | `Parser(syntax=False)` | `parse_cst` |
+| Go | `RawID`, `Quote()` | `Parser.Syntax = false` | `ParseCst` |
+| Java | `getRawId()`, `getQuote()` | `new Parser(comments, false)` | `parseCst` |
+| PHP | `getRawId()`, `getQuote()` | `new Parser(syntax: false)` | `parseCst` |
+| C++ | `raw_id`, `quote()` | `ParserOptions::syntax = false` | `parse_cst` |
+
+Каждая реализация проверяет общие эталонные данные из
+[`parity/syntax-fixtures.json`](parity/syntax-fixtures.json) и в точности
+восстанавливает каждый общий пример из его CST. Подробности - в
+[разборе issue 364](docs/case-studies/issue-364/README.md).
+
 ## Документация
 
 Для подробных руководств по реализации и справочников API смотрите
@@ -265,14 +292,14 @@ deploy: staging # пока только staging
 <!-- test-counts:start -->
 | Язык | Тестов | Категорий тестов |
 | --- | --- | --- |
-| Python | 247 | 24 |
-| JavaScript | 316 | 29 |
-| Rust | 401 | 29 |
-| C# | 295 | 27 |
-| Go | 139 | 17 |
-| Java | 185 | 16 |
-| PHP | 235 | 23 |
-| C++ | 346 | 29 |
+| Python | 270 | 27 |
+| JavaScript | 332 | 32 |
+| Rust | 421 | 32 |
+| C# | 316 | 30 |
+| Go | 158 | 20 |
+| Java | 206 | 19 |
+| PHP | 256 | 26 |
+| C++ | 370 | 32 |
 <!-- test-counts:end -->
 
 Таблицу записывает `scripts/create-test-case-comparison.mjs`: он читает сами файлы тестов

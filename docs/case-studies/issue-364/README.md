@@ -102,8 +102,11 @@ is the first answer.
    `parse_lino_to_syntax_links(_with_config)`, which returns
    `LiNo<SyntaxReference>`. `SyntaxReference` holds the value and the raw text,
    and its `PartialEq` compares the value only. The existing `parse_lino*`
-   functions keep returning `LiNo<String>`, which is the AST mode. This is
-   recorded as an idiom in `parity/README.md`.
+   functions keep returning `LiNo<String>`, which is the AST mode. The stream
+   parser follows the same split: `StreamParser::new()` yields
+   `LiNo<String>`, and `StreamParser::syntax()` yields
+   `LiNo<SyntaxReference>`. This is recorded as an idiom in
+   `parity/README.md`.
 
 ## Known limitations
 
@@ -125,6 +128,27 @@ is the first answer.
   its values, and each value has its own `rawId`. Links made by indentation
   path combination are built by the parser, not read from one place in the
   text, so they have no `rawId` either. Their exact text is in the CST.
+- **Quote tracking in bare references (fixed in Python, Go, PHP and Java).**
+  Before this change, these four ports kept reading a bare reference past a
+  space when a quote character appeared inside it, so `('x y)` read one
+  reference `'x y`. JavaScript, Rust, C# and C++ read two bare references, `'x` and
+  `y`, which is what the grammar says. The raw text exposed by this change made
+  the difference visible in the shared fixtures, so the four ports now split
+  the same way JavaScript does. It is listed under "Fixed" in
+  `changelog.d/364.md`.
+- **`parseCst` and unbalanced parentheses.** The specification says
+  `parseCst` throws exactly when `parse` throws. JavaScript, Rust, C# and C++ reject
+  unbalanced parentheses in `parse`. The Python, Go, PHP and Java parsers have
+  always accepted some unbalanced documents, such as `(a` or `a)`, and this
+  change does not tighten them, because that would break existing callers.
+  Their `parseCst` rejects these documents anyway, because a tree that
+  restores the text must know where each group ends. `parity/README.md`
+  records this.
+- **Java tokenization outside the shared corpus.** The Java parser reads
+  `a(b)` and `x<TAB>y` as one reference, while its CST, which follows the
+  shared lexer, splits them. This predates the change and none of the shared
+  text or syntax fixtures contain such input, so the CST still restores the
+  text exactly; only the token boundaries differ from what `parse` returns.
 - The CST does not model indentation-based nesting as tree structure. An
   indented line is a `line` node starting with a `whitespace` token. That is
   enough to restore the text and see the indentation; the nesting meaning is
@@ -132,16 +156,16 @@ is the first answer.
 
 ## Per-language API
 
-| Language | Metadata on a link                                                                            | AST mode                               | CST                                    |
-| -------- | --------------------------------------------------------------------------------------------- | -------------------------------------- | -------------------------------------- |
-| JS       | `link.rawId`, `link.quote`, `referenceQuote(raw)`                                             | `new Parser({ syntax: false })`        | `parser.parseCst(input)` → `CstNode`   |
-| Python   | `link.raw_id`, `link.quote`                                                                   | `Parser(syntax=False)`                 | `parser.parse_cst(input)` → `CstNode`  |
-| Rust     | `SyntaxReference { value, raw }` in `LiNo<SyntaxReference>` from `parse_lino_to_syntax_links` | the existing `parse_lino`              | `parse_lino_to_cst(input)` → `CstNode` |
-| Go       | `link.RawID`, `link.Quote()`                                                                  | `ParserOptions.AST`/equivalent         | `parser.ParseCst(input)`               |
-| C#       | `link.RawId`, `link.Quote`                                                                    | `new Parser(syntax: false)` equivalent | `parser.ParseCst(input)`               |
-| Java     | `link.getRawId()`, `link.getQuote()`                                                          | parser option                          | `parser.parseCst(input)`               |
-| PHP      | `$link->rawId`, `$link->quote()`                                                              | parser option                          | `$parser->parseCst($input)`            |
-| C++      | `link.raw_id`, `link.quote()`                                                                 | parser option                          | `parser.parse_cst(input)`              |
+| Language | Metadata on a link                                                                                                                                               | AST mode                                                | CST                         |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------- |
+| JS       | `link.rawId`, `link.quote`, `referenceQuote(raw)`                                                                                                                | `new Parser({ syntax: false })`                         | `parser.parseCst(input)`    |
+| Python   | `link.raw_id`, `link.quote`, `reference_quote(raw)`                                                                                                              | `Parser(syntax=False)`                                  | `parser.parse_cst(input)`   |
+| Rust     | `SyntaxReference { value, raw }` and `quote()` in `LiNo<SyntaxReference>` from `parse_lino_to_syntax_links` and `StreamParser::syntax()`; `reference_quote(raw)` | the existing `parse_lino*` and `StreamParser::new()`    | `parse_lino_to_cst(input)`  |
+| Go       | `link.RawID`, `link.Quote()`, `ReferenceQuote(raw)`                                                                                                              | `parser.Syntax = false` (`NewParser()` sets it to true) | `parser.ParseCst(input)`    |
+| C#       | `link.RawId`, `link.Quote` (`char?`), `Link<string>.ReferenceQuote(raw)`                                                                                         | `new Parser { Syntax = false }`                         | `parser.ParseCst(input)`    |
+| Java     | `link.getRawId()`, `link.getQuote()`, `Link.referenceQuote(raw)`                                                                                                 | `new Parser(comments, false)`                           | `parser.parseCst(input)`    |
+| PHP      | `$link->getRawId()`, `$link->getQuote()`, `Link::referenceQuote($raw)`                                                                                           | `new Parser(syntax: false)`                             | `$parser->parseCst($input)` |
+| C++      | `link.raw_id`, `link.quote()`, `reference_quote(raw)`                                                                                                            | `ParserOptions::syntax = false`                         | `parser.parse_cst(input)`   |
 
 Each language's README has the exact signatures.
 
