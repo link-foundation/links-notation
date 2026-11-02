@@ -8,9 +8,6 @@ package io.github.linkfoundation.linksnotation
  * inside a delimited reference (`"# not a comment"`) is an ordinary character.
  */
 
-/** What a delimited reference may start after. */
-private const val BEFORE_REFERENCE = " \t\n\r(:"
-
 /** What a comment may start after. */
 private const val BEFORE_COMMENT = " \t\n\r"
 
@@ -23,14 +20,14 @@ fun stripComments(document: String): String {
     var blanked: CharArray? = null
     var position = 0
     val references = DelimitedReferences(document)
+    // Whether a token may start at `position`. The document is read token by
+    // token, as the grammar reads it, so a `#` inside a reference that starts
+    // right after a group, another reference or a literal stays content
+    // (issue #377).
+    var tokenStart = true
 
     while (position < document.length) {
         val character = document[position]
-
-        if (character in QUOTES && follows(document, position, BEFORE_REFERENCE)) {
-            position = references.endAt(position) ?: (position + 1)
-            continue
-        }
 
         if (character == '#' && follows(document, position, BEFORE_COMMENT)) {
             val chars = blanked ?: document.toCharArray().also { blanked = it }
@@ -41,10 +38,41 @@ fun stripComments(document: String): String {
             continue
         }
 
+        if (character in TOKEN_SEPARATORS) {
+            tokenStart = true
+            position++
+            continue
+        }
+
+        if (tokenStart) {
+            val end = delimitedTokenEnd(document, position, references)
+            if (end != null) {
+                position = end
+                continue
+            }
+        }
+
+        // Anything else is part of a bare reference, which runs to a separator.
+        tokenStart = false
         position++
     }
 
     return blanked?.concatToString() ?: document
+}
+
+/**
+ * Where the versioned literal or delimited reference that starts the token at
+ * [start] ends, or null when the token there is a bare reference: a delimiter
+ * run that never closes is read as one, as the grammar reads it.
+ */
+private fun delimitedTokenEnd(
+    document: String,
+    start: Int,
+    references: DelimitedReferences,
+): Int? {
+    val literal = referenceLiteralEnd(document, start)
+    if (literal != -1) return literal
+    return if (document[start] in QUOTES) references.endAt(start) else null
 }
 
 /** Whether the character before [position] is one of [allowed]; the document start counts as allowed. */

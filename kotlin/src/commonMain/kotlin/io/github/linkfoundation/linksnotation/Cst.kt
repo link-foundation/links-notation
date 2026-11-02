@@ -142,38 +142,23 @@ class CstNode internal constructor(
     }
 }
 
-/** What a versioned literal's payload cannot contain. */
-private const val LITERAL_PAYLOAD_END = "} \t\r\n()"
-
 /** What ends a bare reference. */
 private const val BARE_REFERENCE_END = " \t\r\n(:)"
 
 /**
- * Where the versioned literal `~<digits>{<payload>}` that starts at [start]
- * ends, or -1 if none starts there. A single forward scan, so it stays linear.
+ * Where the reference that starts at [start] ends, read as the grammar reads
+ * it: a literal or a delimited reference in the document as written, [source],
+ * a bare reference in the one with its comments blanked, [prepared].
  */
-private fun literalEnd(
-    text: String,
-    start: Int,
-): Int {
-    if (start >= text.length || text[start] != '~') return -1
-    var index = start + 1
-    while (index < text.length && text[index] in '0'..'9') index++
-    if (index == start + 1 || index >= text.length || text[index] != '{') return -1
-    index++
-    while (index < text.length && text[index] !in LITERAL_PAYLOAD_END) index++
-    return if (index < text.length && text[index] == '}') index + 1 else -1
-}
-
-/** Where the reference that starts at [start] ends, read as the grammar reads it. */
 private fun referenceEnd(
+    source: String,
     prepared: String,
     start: Int,
     references: DelimitedReferences,
 ): Int {
-    val literal = literalEnd(prepared, start)
+    val literal = referenceLiteralEnd(source, start)
     if (literal != -1) return literal
-    if (prepared[start] in QUOTES) {
+    if (source[start] in QUOTES) {
         val end = references.endAt(start)
         if (end != null) return end
     }
@@ -200,10 +185,13 @@ internal fun buildCst(
     input: String,
     comments: Boolean = true,
 ): CstNode {
-    // References are read in the document the grammar reads: the one with its
-    // comments blanked, which keeps every position of the one written.
+    // Bare references end where they end in the document the grammar reads:
+    // the one with its comments blanked, which keeps every position of the one
+    // written. Delimited references and literals are read, as the grammar reads
+    // them, in the document as written, so a comment never changes what a
+    // reference holds (issue #377).
     val prepared = if (comments) stripComments(input) else input
-    val references = DelimitedReferences(prepared)
+    val references = DelimitedReferences(input)
     val document = CstNode(CstKind.DOCUMENT)
     // The open containers, innermost last.
     val containers = ArrayList<Container>()
@@ -249,13 +237,13 @@ internal fun buildCst(
         } else if (character == ':') {
             add(CstNode(CstKind.COLON, ":"))
         } else {
-            end = referenceEnd(prepared, position, references)
+            end = referenceEnd(input, prepared, position, references)
             val text = input.substring(position, end)
             val quoted = if (character in QUOTES) references.readAt(position) else null
             val value =
                 when {
                     quoted != null -> quoted.value
-                    character == '~' && literalEnd(prepared, position) == end -> decodeReferenceLiteral(text)
+                    character == '~' && referenceLiteralEnd(input, position) == end -> decodeReferenceLiteral(text)
                     else -> text
                 }
             add(CstNode(CstKind.REFERENCE, text, value, if (quoted != null) character.toString() else null))

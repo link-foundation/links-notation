@@ -13,11 +13,44 @@ package io.github.linkfoundation.linksnotation
 /** The characters a reference can be written between. */
 internal const val QUOTES = "\"'`"
 
-/** What a delimited reference holds, and how many UTF-16 units it takes. */
+/**
+ * What a delimited reference holds, how many UTF-16 units it takes and whether
+ * a run of delimiters closes it. An even run nothing closes is the empty
+ * reference, until a closing run is written after it, which turns it into one
+ * holding what follows: a stream must wait for that run.
+ */
 internal class Reading(
     val value: String,
     val length: Int,
+    val closed: Boolean = true,
 )
+
+/**
+ * What ends a bare reference. A token starts after one of these, at the start
+ * of the document, and right after a delimited reference or a versioned
+ * literal: the places the grammar reads a reference from.
+ */
+internal const val TOKEN_SEPARATORS = " \t\n\r(:)"
+
+/** What a versioned literal's payload cannot contain. */
+private const val LITERAL_PAYLOAD_END = "} \t\r\n()"
+
+/**
+ * Where the versioned literal `~<digits>{<payload>}` that starts at [start]
+ * ends, or -1 if none starts there. A single forward scan, so it stays linear.
+ */
+internal fun referenceLiteralEnd(
+    text: String,
+    start: Int,
+): Int {
+    if (start >= text.length || text[start] != '~') return -1
+    var index = start + 1
+    while (index < text.length && text[index] in '0'..'9') index++
+    if (index == start + 1 || index >= text.length || text[index] != '{') return -1
+    index++
+    while (index < text.length && text[index] !in LITERAL_PAYLOAD_END) index++
+    return if (index < text.length && text[index] == '}') index + 1 else -1
+}
 
 /**
  * Every delimited reference of one document, read on demand, each at most once.
@@ -101,7 +134,9 @@ private fun reading(
 ): Reading? {
     val emptyReference = if (count % 2 == 0) Reading("", count) else null
     if (end == null) {
-        return emptyReference
+        // Nothing closes the run: an even one is the empty reference, which a
+        // later closing run would still turn into one holding what follows.
+        return if (count % 2 == 0) Reading("", count, closed = false) else null
     }
 
     val value = StringBuilder()
