@@ -66,10 +66,10 @@ function readReference(document, start) {
   return reading(document, start, quote, count, end);
 }
 function reading(document, start, quote, count, end) {
-  const emptyReference = count % 2 === 0 ? { value: "", length: count } : null;
   if (end === null) {
-    return emptyReference;
+    return count % 2 === 0 ? { value: "", length: count, closed: false } : null;
   }
+  const emptyReference = count % 2 === 0 ? { value: "", length: count, closed: true } : null;
   const parts = [];
   let position = start + count;
   let run = document.indexOf(quote, position);
@@ -86,7 +86,7 @@ function reading(document, start, quote, count, end) {
   if (emptyReference !== null && !isSubstantiveBody(value)) {
     return emptyReference;
   }
-  return { value, length: end - start };
+  return { value, length: end - start, closed: true };
 }
 function runLength(text, start, quote) {
   let end = start;
@@ -3603,10 +3603,10 @@ function structurallyComplete(document, comments) {
       continue;
     }
     if (tokenStart && quotes.includes(character)) {
-      const end = references.endAt(position);
-      if (end === null)
+      const reading = references.readAt(position);
+      if (reading === null || !reading.closed)
         return false;
-      position = end - 1;
+      position += reading.length - 1;
       continue;
     }
     if (tokenStart) {

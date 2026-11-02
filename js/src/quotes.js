@@ -43,8 +43,10 @@ export class DelimitedReferences {
   /**
    * The reference opened at `start`.
    * @param {number} start - Position of the opening delimiter
-   * @returns {{value: string, length: number}|null} What the reference holds
-   *   and how many characters it takes, or null when nothing opens there
+   * @returns {{value: string, length: number, closed: boolean}|null} What the
+   *   reference holds, how many characters it takes and whether a run closes
+   *   it (an even run nothing closes is the empty reference, until a closing
+   *   run is written after it), or null when nothing opens there
    */
   readAt(start) {
     if (!this.readings.has(start)) {
@@ -103,8 +105,9 @@ export class DelimitedReferences {
  * reference that is as quick, since it is read once.
  * @param {string} document - The document being read
  * @param {number} start - Position of the opening delimiter
- * @returns {{value: string, length: number}|null} What the reference holds
- *   and how many characters it takes, or null when nothing opens there
+ * @returns {{value: string, length: number, closed: boolean}|null} What the
+ *   reference holds, how many characters it takes and whether a run closes it,
+ *   or null when nothing opens there
  */
 export function readReference(document, start) {
   const quote = document[start];
@@ -131,10 +134,13 @@ export function readReference(document, start) {
  * by the run that ends at `end` when there is one.
  */
 function reading(document, start, quote, count, end) {
-  const emptyReference = count % 2 === 0 ? { value: '', length: count } : null;
   if (end === null) {
-    return emptyReference;
+    // Nothing closes the run: an even one is the empty reference, which a
+    // later closing run would still turn into one holding what follows.
+    return count % 2 === 0 ? { value: '', length: count, closed: false } : null;
   }
+  const emptyReference =
+    count % 2 === 0 ? { value: '', length: count, closed: true } : null;
 
   const parts = [];
   let position = start + count;
@@ -154,7 +160,7 @@ function reading(document, start, quote, count, end) {
   if (emptyReference !== null && !isSubstantiveBody(value)) {
     return emptyReference;
   }
-  return { value, length: end - start };
+  return { value, length: end - start, closed: true };
 }
 
 /** The number of `quote` delimiters in a row from `start` of `text`. */

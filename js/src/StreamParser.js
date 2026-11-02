@@ -281,9 +281,12 @@ function structurallyComplete(document, comments) {
     }
 
     if (tokenStart && quotes.includes(character)) {
-      const end = references.endAt(position);
-      if (end === null) return false;
-      position = end - 1;
+      // A reference nothing closes yet may be closed by a later line, which
+      // changes what it holds: an even run is the empty reference only when
+      // no run in the whole document closes it.
+      const reading = references.readAt(position);
+      if (reading === null || !reading.closed) return false;
+      position += reading.length - 1;
       continue;
     }
 

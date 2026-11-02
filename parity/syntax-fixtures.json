@@ -648,5 +648,38 @@
       }
     ],
     "cst": "(document (line reference:\"\\\"\\\"\" whitespace:\" \" reference:\"a\" whitespace:\" \" comment:\"#)b\" newline:\"\\n\") (line reference:\"\\\"\\\"\" newline:\"\\n\"))"
+  },
+  {
+    "id": "stream-empty-quote-closed-later",
+    "feature": "concrete-syntax-tree",
+    "input": "a \"\" b\n\"\" c\n",
+    "links": [
+      {
+        "id": null,
+        "raw": null,
+        "quote": null,
+        "values": [
+          {
+            "id": "a",
+            "raw": "a",
+            "quote": null,
+            "values": []
+          },
+          {
+            "id": " b\n",
+            "raw": "\"\" b\n\"\"",
+            "quote": "\"",
+            "values": []
+          },
+          {
+            "id": "c",
+            "raw": "c",
+            "quote": null,
+            "values": []
+          }
+        ]
+      }
+    ],
+    "cst": "(document (line reference:\"a\" whitespace:\" \" reference:\"\\\"\\\" b\\n\\\"\\\"\" whitespace:\" \" reference:\"c\" newline:\"\\n\"))"
   }
 ]

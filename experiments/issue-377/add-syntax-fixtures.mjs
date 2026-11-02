@@ -12,6 +12,9 @@ const cases = [
   ['comment-after-adjacent-quote', '"x"\' #y\'\n```q```"" #c\n"""\n'],
   ['comment-after-literal-quote', '~1{62}" #b"\n'],
   ['comment-after-empty-quote', '"" a #)b\n""\n'],
+  // A stream must not take an even run for the empty reference before the
+  // line that closes it arrives.
+  ['stream-empty-quote-closed-later', 'a "" b\n"" c\n'],
 ];
 const tree = (links) =>
   links.map((link) => ({
