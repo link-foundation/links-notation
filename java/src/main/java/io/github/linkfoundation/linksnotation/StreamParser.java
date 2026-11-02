@@ -14,7 +14,6 @@ import java.util.stream.StreamSupport;
 /** Incrementally emits complete top-level Links Notation records. */
 public final class StreamParser {
   private static final int DEFAULT_MAX_BUFFER_SIZE = 10 * 1024 * 1024;
-  private static final String BEFORE_REFERENCE = " \t\n\r(:";
   private static final String BEFORE_COMMENT = " \t\n\r";
 
   /** Point immediately after the last character written. */
@@ -254,33 +253,78 @@ public final class StreamParser {
   }
 
   private static boolean structurallyComplete(CharSequence document, boolean comments) {
+    // Tokens are read as the comment reader and the parser read them: a
+    // reference may start after a separator, and right after a delimited
+    // reference or a literal (issue #377).
     String text = document.toString();
     int depth = 0;
+    boolean tokenStart = true;
     for (int position = 0; position < text.length(); position++) {
       char character = text.charAt(position);
-      if (isQuote(character) && follows(text, position, BEFORE_REFERENCE)) {
-        int end = Parser.quotedReferenceEnd(text, position);
-        if (end < 0) {
-          return false;
-        }
-        position = end - 1;
-        continue;
-      }
       if (comments && character == Comments.COMMENT && follows(text, position, BEFORE_COMMENT)) {
         int newline = text.indexOf('\n', position);
         if (newline < 0) {
           break;
         }
         position = newline;
+        tokenStart = true;
         continue;
       }
-      if (character == '(') {
-        depth++;
-      } else if (character == ')') {
-        depth--;
+      if (Comments.SEPARATORS.indexOf(character) >= 0) {
+        if (character == '(') {
+          depth++;
+        } else if (character == ')') {
+          depth--;
+        }
+        tokenStart = true;
+        continue;
       }
+      if (tokenStart && isQuote(character)) {
+        // A reference nothing closes yet may be closed by a later line, which
+        // changes what it holds: an even run is the empty reference only when
+        // no run in the whole document closes it.
+        int end = Parser.quotedReferenceEnd(text, position);
+        if (end < 0 || !closingRunFollows(text, position)) {
+          return false;
+        }
+        position = end - 1;
+        continue;
+      }
+      if (tokenStart) {
+        int end = ReferenceLiteral.end(text, position);
+        if (end >= 0) {
+          position = end - 1;
+          continue;
+        }
+      }
+      tokenStart = false;
     }
     return depth == 0;
+  }
+
+  /**
+   * Report whether a run of delimiters after the one opening at start closes it: a run of R closes
+   * a reference opened by N exactly when R / N is odd. An even run nothing closes is the empty
+   * reference, until a closing run is written after it.
+   */
+  private static boolean closingRunFollows(String document, int start) {
+    char quote = document.charAt(start);
+    int count = 0;
+    while (start + count < document.length() && document.charAt(start + count) == quote) {
+      count++;
+    }
+    int position = start + count;
+    while ((position = document.indexOf(quote, position)) >= 0) {
+      int run = 0;
+      while (position + run < document.length() && document.charAt(position + run) == quote) {
+        run++;
+      }
+      if ((run / count) % 2 == 1) {
+        return true;
+      }
+      position += run;
+    }
+    return false;
   }
 
   private static boolean isQuote(char character) {

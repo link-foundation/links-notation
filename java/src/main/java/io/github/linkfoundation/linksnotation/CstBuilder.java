@@ -2,20 +2,15 @@ package io.github.linkfoundation.linksnotation;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Builds the concrete syntax tree of a document that has already been parsed.
  *
  * <p>The tokens are read with the same rules the parser uses: comments are found by {@link
  * Comments#stripComments(String)}, delimited references by the parser's own reader and versioned
- * literals by the same pattern, so the tree and the parsed links agree on what each character is.
+ * literals by the same scan, so the tree and the parsed links agree on what each character is.
  */
 final class CstBuilder {
-
-  /** A versioned literal, matched at the position a reference starts. */
-  private static final Pattern LITERAL = Pattern.compile("~[0-9]+\\{[^} \\t\\r\\n()]*\\}");
 
   /** What ends a bare reference. */
   private static final String BARE_REFERENCE_END = " \t\r\n(:)";
@@ -41,14 +36,15 @@ final class CstBuilder {
    * @throws ParseException if the parentheses do not balance
    */
   static CstNode build(String input, boolean comments) throws ParseException {
-    // References are read in the document the parser reads: the one with its
-    // comments blanked, which keeps every position of the one written.
+    // Comments are found, and bare references end, in the document with its
+    // comments blanked, which keeps every position of the one written. A
+    // literal and a delimited reference are read in the document as written,
+    // so a comment never changes what they hold (issue #377).
     String prepared = comments ? Comments.stripComments(input) : input;
     CstNode document = new CstNode(CstKind.DOCUMENT);
     // The open containers, innermost first.
     Deque<Container> containers = new ArrayDeque<>();
     containers.push(new Container(document));
-    Matcher literal = LITERAL.matcher(prepared);
 
     int position = 0;
     while (position < input.length()) {
@@ -87,16 +83,16 @@ final class CstBuilder {
       } else {
         String value = null;
         String quote = null;
-        char first = prepared.charAt(position);
         Parser.QuotedString quoted = null;
-        if (first == '~' && literal.region(position, prepared.length()).lookingAt()) {
-          end = literal.end();
+        int literalEnd = ReferenceLiteral.end(input, position);
+        if (literalEnd >= 0) {
+          end = literalEnd;
           value = ReferenceLiteral.decode(input.substring(position, end));
-        } else if ((first == '\'' || first == '"' || first == '`')
-            && (quoted = Parser.parseQuotedStringAt(prepared, position)) != null) {
+        } else if ((character == '\'' || character == '"' || character == '`')
+            && (quoted = Parser.parseQuotedStringAt(input, position)) != null) {
           end = quoted.end;
           value = quoted.value;
-          quote = String.valueOf(first);
+          quote = String.valueOf(character);
         } else {
           while (end < prepared.length() && BARE_REFERENCE_END.indexOf(prepared.charAt(end)) < 0) {
             end++;

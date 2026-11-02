@@ -18,6 +18,34 @@ public final class ReferenceLiteral {
     return PREFIX.matcher(text).find();
   }
 
+  /**
+   * Find where the versioned literal {@code ~<digits>{<payload>}} that starts at start of text
+   * ends. The payload holds no {@code }}, space, tab, line break or parenthesis. A single forward
+   * scan, as the grammar reads a literal.
+   *
+   * @param text the text to read
+   * @param start where the literal would start
+   * @return the position right after the closing brace, or -1 when no literal starts at start
+   */
+  static int end(String text, int start) {
+    int length = text.length();
+    if (start >= length || text.charAt(start) != '~') {
+      return -1;
+    }
+    int index = start + 1;
+    while (index < length && text.charAt(index) >= '0' && text.charAt(index) <= '9') {
+      index++;
+    }
+    if (index == start + 1 || index >= length || text.charAt(index) != '{') {
+      return -1;
+    }
+    index++;
+    while (index < length && "} \t\r\n()".indexOf(text.charAt(index)) < 0) {
+      index++;
+    }
+    return index < length && text.charAt(index) == '}' ? index + 1 : -1;
+  }
+
   /** Encode exact Unicode as a version 1 UTF-8 hexadecimal literal. */
   public static String encode(String text) {
     validate(text);
@@ -62,13 +90,12 @@ public final class ReferenceLiteral {
     if (!hasPrefix(text)
         && !text.startsWith("#")
         && text.codePoints()
-            .noneMatch(
-                c ->
-                    c == 0x85
-                        || Character.isWhitespace(c)
-                        || c == 0xfeff
-                        || Character.isSpaceChar(c)
-                        || "():\"'`".indexOf(c) >= 0)) return text;
+            .noneMatch(c ->
+                c == 0x85
+                    || Character.isWhitespace(c)
+                    || c == 0xfeff
+                    || Character.isSpaceChar(c)
+                    || "():\"'`".indexOf(c) >= 0)) return text;
     char chosen = 0;
     int count = Integer.MAX_VALUE;
     for (char quote : new char[] {'\'', '"', '`'}) {

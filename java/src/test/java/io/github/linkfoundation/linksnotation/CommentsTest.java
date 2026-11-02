@@ -155,6 +155,38 @@ class CommentsTest {
   }
 
   @Test
+  void aHashInsideAReferenceThatFollowsAGroupIsContent() throws ParseException {
+    assertParsesAs("(a)\" #b\"\n", "((<a>) < #b>)");
+  }
+
+  @Test
+  void aHashInsideAReferenceThatFollowsAnotherReferenceIsContent() throws ParseException {
+    assertParsesAs("\"x\"' #y'\n", "(<x> < #y>)");
+    assertParsesAs("```q```\"\" #c\n\"\"\"\n", "(<q> < #c\n\">)");
+  }
+
+  @Test
+  void aHashInsideAReferenceThatFollowsALiteralIsContent() throws ParseException {
+    assertParsesAs("~1{62}\" #b\"\n", "(<b> < #b>)");
+  }
+
+  @Test
+  void aReferenceIsReadInTheDocumentAsWrittenCommentsIncluded() throws ParseException {
+    // The body of the first `""` straddles a parenthesis, so it is the empty
+    // reference and the `#` after it opens a comment. Blanking that comment
+    // must not turn the `""` into a reference that holds the blanked text.
+    assertParsesAs("\"\" a #)b\n\"\"\n", "(<> <a>)\n(<>)");
+  }
+
+  @Test
+  void theCommentReaderSkipsTheReferencesTheParserReads() {
+    assertEquals("(a)\" #b\"\n", Comments.stripComments("(a)\" #b\"\n"));
+    assertEquals("\"x\"' #y'\n", Comments.stripComments("\"x\"' #y'\n"));
+    assertEquals("~1{62}\" #b\"\n", Comments.stripComments("~1{62}\" #b\"\n"));
+    assertEquals("a\"b    \n", Comments.stripComments("a\"b #c\"\n"));
+  }
+
+  @Test
   void aReferenceThatBeginsWithAHashIsWrittenQuoted() throws ParseException {
     // Without the quotes the document would read as `a` followed by a comment.
     String document =

@@ -259,7 +259,16 @@ public class Parser {
    * <p>Returns null when text does not start a delimited reference.
    */
   static QuotedString parseQuotedStringAt(String text, int start) {
-    if (start >= text.length()) {
+    return parseQuotedStringWithin(text, start, text.length());
+  }
+
+  /**
+   * Parse the delimited reference starting at start, as {@link #parseQuotedStringAt(String, int)}
+   * does, reading nothing at or after stop.
+   */
+  private static QuotedString parseQuotedStringWithin(String text, int start, int stop) {
+    int length = Math.min(stop, text.length());
+    if (start >= length) {
       return null;
     }
 
@@ -270,7 +279,7 @@ public class Parser {
 
     int quoteCount = 0;
     int pos = start;
-    while (pos < text.length() && text.charAt(pos) == quoteChar) {
+    while (pos < length && text.charAt(pos) == quoteChar) {
       quoteCount++;
       pos++;
     }
@@ -282,15 +291,15 @@ public class Parser {
     String escapeSeq = repeatChar(quoteChar, quoteCount * 2);
     StringBuilder content = new StringBuilder();
 
-    while (pos < text.length()) {
-      if (text.startsWith(escapeSeq, pos)) {
+    while (pos < length) {
+      if (pos + escapeSeq.length() <= length && text.startsWith(escapeSeq, pos)) {
         content.append(openClose);
         pos += escapeSeq.length();
         continue;
       }
-      if (text.startsWith(openClose, pos)) {
+      if (pos + quoteCount <= length && text.startsWith(openClose, pos)) {
         int afterClose = pos + quoteCount;
-        if (afterClose >= text.length() || text.charAt(afterClose) != quoteChar) {
+        if (afterClose >= length || text.charAt(afterClose) != quoteChar) {
           String value = content.toString();
           if (isEvenRun && !isSubstantiveBody(value)) {
             return emptyReference;
@@ -306,13 +315,30 @@ public class Parser {
   }
 
   /**
-   * Skip over the quoted string starting at start.
+   * Read the delimited reference at start of text, a part of the document that starts at offset.
+   *
+   * <p>The reference is read in the document as written, within the extent of text. The text comes
+   * from the document with its comments blanked, which keeps every character at the same offset,
+   * and blanking a comment must not change what a reference holds or how far it reaches (issue
+   * #377).
+   *
+   * @return the value and where the reference ends in text, or null when text does not start a
+   *     delimited reference at start
+   */
+  private QuotedString quotedAt(String text, int start, int offset) {
+    QuotedString quoted = parseQuotedStringWithin(source, offset + start, offset + text.length());
+    return quoted == null ? null : new QuotedString(quoted.value, quoted.end - offset);
+  }
+
+  /**
+   * Skip over the quoted string starting at start, text starting at offset in the document.
    *
    * <p>Returns the position right after the closing quotes, or -1 when text does not start a
    * delimited reference.
    */
-  private static int skipQuotedString(String text, int start) {
-    return quotedReferenceEnd(text, start);
+  private int skipQuotedString(String text, int start, int offset) {
+    QuotedString quoted = quotedAt(text, start, offset);
+    return quoted == null ? -1 : quoted.end;
   }
 
   /**
@@ -328,19 +354,19 @@ public class Parser {
   }
 
   /**
-   * Find the parenthesis closing the one at start.
+   * Find the parenthesis closing the one at start, text starting at offset in the document.
    *
    * <p>Quoted strings are skipped, so parentheses inside them are ignored. Returns -1 when the
    * group is not closed.
    */
-  private int findMatchingParen(String text, int start) {
+  private int findMatchingParen(String text, int start, int offset) {
     int depth = 0;
     int i = start;
 
     while (i < text.length()) {
       char c = text.charAt(i);
       if (c == '"' || c == '\'' || c == '`') {
-        int end = skipQuotedString(text, i);
+        int end = skipQuotedString(text, i, offset);
         if (end > i) {
           i = end;
           continue;
@@ -366,7 +392,7 @@ public class Parser {
    * <p>Each line goes to {@code result}, and where it starts in the document, {@code textOffset}
    * being where {@code text} starts, goes to {@code offsets}.
    */
-  private static void splitLinesRespectingQuotes(
+  private void splitLinesRespectingQuotes(
       String text, int textOffset, List<String> result, List<Integer> offsets) {
     StringBuilder currentLine = new StringBuilder();
     int lineStart = 0;
@@ -377,7 +403,7 @@ public class Parser {
       char c = text.charAt(i);
 
       if (c == '"' || c == '\'' || c == '`') {
-        int end = skipQuotedString(text, i);
+        int end = skipQuotedString(text, i, textOffset);
         if (end > i) {
           // A quoted string is opaque: newlines inside it are content
           currentLine.append(text, i, end);
@@ -534,7 +560,7 @@ public class Parser {
     Map<String, Object> result = new HashMap<>();
 
     // A whole parenthesized group: (id: values), (values) or a nested document
-    if (content.startsWith("(") && findMatchingParen(content, 0) == content.length() - 1) {
+    if (content.startsWith("(") && findMatchingParen(content, 0, offset) == content.length() - 1) {
       return parseParenthesized(content.substring(1, content.length() - 1), offset, depth);
     }
 
@@ -547,7 +573,7 @@ public class Parser {
     }
 
     // Try single-line link: id: values
-    int colonPos = findColonOutsideQuotes(content);
+    int colonPos = findColonOutsideQuotes(content, offset);
     if (colonPos >= 0) {
       String afterColon = content.substring(colonPos + 1);
       String valuesPart = afterColon.trim();
@@ -635,15 +661,18 @@ public class Parser {
     return count;
   }
 
-  /** Find position of colon that's not inside quotes or parentheses. */
-  private int findColonOutsideQuotes(String text) {
+  /**
+   * Find position of colon that's not inside quotes or parentheses, text starting at offset in the
+   * document.
+   */
+  private int findColonOutsideQuotes(String text, int offset) {
     int parenDepth = 0;
     int i = 0;
 
     while (i < text.length()) {
       char c = text.charAt(i);
       if (c == '"' || c == '\'' || c == '`') {
-        int end = skipQuotedString(text, i);
+        int end = skipQuotedString(text, i, offset);
         if (end > i) {
           i = end;
           continue;
@@ -686,7 +715,7 @@ public class Parser {
       }
 
       // Extract next value
-      int[] result = extractNextValue(text, i);
+      int[] result = extractNextValue(text, i, offset);
       int valueEnd = result[0];
       String valueText = text.substring(i, valueEnd);
 
@@ -709,21 +738,31 @@ public class Parser {
     return c == ' ' || c == '\t' || c == '\n' || c == '\r';
   }
 
-  /** Extract the next value from text starting at start position. */
-  private int[] extractNextValue(String text, int start) {
+  /**
+   * Extract the next value from text starting at start position, text starting at offset in the
+   * document.
+   */
+  private int[] extractNextValue(String text, int start, int offset) {
     if (start >= text.length()) {
       return new int[] {start};
     }
 
     // Check if this starts with a delimited reference
-    QuotedString quoted = parseQuotedStringAt(text, start);
+    QuotedString quoted = quotedAt(text, start, offset);
     if (quoted != null) {
       return new int[] {quoted.end};
     }
 
+    // A versioned literal is a whole token: what follows it starts the next
+    // one, as the reference grammar (js/src/grammar.pegjs) reads it
+    int literalEnd = ReferenceLiteral.end(text, start);
+    if (literalEnd >= 0) {
+      return new int[] {literalEnd};
+    }
+
     // Check if this starts with a parenthesized expression
     if (text.charAt(start) == '(') {
-      int end = findMatchingParen(text, start);
+      int end = findMatchingParen(text, start, offset);
       return new int[] {end >= 0 ? end + 1 : text.length()};
     }
 
@@ -746,7 +785,7 @@ public class Parser {
     Map<String, Object> result = new HashMap<>();
 
     // Nested link in parentheses
-    if (value.startsWith("(") && findMatchingParen(value, 0) == value.length() - 1) {
+    if (value.startsWith("(") && findMatchingParen(value, 0, offset) == value.length() - 1) {
       return parseParenthesized(value.substring(1, value.length() - 1), offset, depth);
     }
 
@@ -757,7 +796,9 @@ public class Parser {
 
   /**
    * Read the reference written in {@code text} into {@code result}: its value as {@code id}, and
-   * the text it was written as, sliced from the document the caller wrote, as {@code rawId}.
+   * the text it was written as, sliced from the document the caller wrote, as {@code rawId}. A
+   * delimited reference is read in the document as written too, so a comment never changes what it
+   * holds (issue #377).
    *
    * @param text the reference, possibly with whitespace around it
    * @param offset where {@code text} starts in the document
@@ -770,7 +811,7 @@ public class Parser {
     if (ReferenceLiteral.hasPrefix(trimmed)) {
       value = ReferenceLiteral.decode(trimmed);
     } else {
-      QuotedString quoted = parseQuotedStringAt(trimmed, 0);
+      QuotedString quoted = quotedAt(trimmed, 0, offset + start);
       if (quoted != null) {
         value = quoted.value;
         length = quoted.end;
