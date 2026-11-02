@@ -75,7 +75,11 @@ jobs:
       # Warnings fail the build, as in the other languages.
       - name: Build
         run: swift build --build-tests -Xswiftc -warnings-as-errors
+      # The timed tests bound a debug build on a shared runner, as cpp.yml
+      # bounds its sanitizer build.
       - name: Test
+        env:
+          LINKS_NOTATION_TIME_SCALE: "4"
         run: swift test --skip-build --parallel
       # Downstream packages depend on the repository root; the in-tree tests
       # do not exercise that.

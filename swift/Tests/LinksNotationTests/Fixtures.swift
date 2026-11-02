@@ -35,6 +35,17 @@ let swiftDirectory = URL(fileURLWithPath: #filePath)
 /// The root of the repository, where the shared `parity/` fixtures live.
 let repositoryRoot = swiftDirectory.deletingLastPathComponent()
 
+/// How much longer than on a fast machine a timed test may take: the
+/// `LINKS_NOTATION_TIME_SCALE` environment variable (default 1), as in the C++
+/// tests. CI sets it for unoptimized builds on shared runners; the bounds only
+/// fail on super-linear behaviour, which no scale hides.
+let timeScale: Double = {
+    guard let value = ProcessInfo.processInfo.environment["LINKS_NOTATION_TIME_SCALE"],
+        let scale = Double(value), scale > 0
+    else { return 1 }
+    return scale
+}()
+
 func loadCases(_ url: URL) throws -> [FixtureCase] {
     try JSONDecoder().decode([FixtureCase].self, from: Data(contentsOf: url))
 }
