@@ -269,7 +269,7 @@ public class Link {
   public String format(boolean lessParentheses, boolean isCompoundValue) {
     // Empty link
     if (id == null && values.isEmpty()) {
-      return lessParentheses ? "" : "()";
+      return "()";
     }
 
     // Link with only ID, no values
@@ -287,7 +287,7 @@ public class Link {
 
     // Link with values only (null id)
     if (id == null) {
-      if (lessParentheses) {
+      if (lessParentheses && !hasLoneNestedValue()) {
         // Check if all values are simple (no nested values)
         boolean allSimple = values.stream().allMatch(v -> v.values.isEmpty());
         if (allSimple) {
@@ -329,6 +329,17 @@ public class Link {
 
     // Complex value with its own structure - format it normally with parentheses
     return value.format(false, false);
+  }
+
+  /**
+   * Check whether this link holds exactly one link that has values. The parentheses of an anonymous
+   * link are what nest such a value: {@code ((b c))} without them is {@code (b c)}, a different
+   * link, so lessParentheses has to keep them.
+   *
+   * @return true if the only value has values of its own
+   */
+  private boolean hasLoneNestedValue() {
+    return values.size() == 1 && !values.get(0).values.isEmpty();
   }
 
   /**

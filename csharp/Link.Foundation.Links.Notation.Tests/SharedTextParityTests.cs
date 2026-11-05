@@ -32,4 +32,22 @@ public static class SharedTextParityTests
             Assert.True(JsonElement.DeepEquals(expected, JsonSerializer.SerializeToElement(Tree(stream.Finish()))));
         }
     }
+
+    [Fact(Timeout = 30000)]
+    public static void SharedLessParenthesesRoundTrip()
+    {
+        using var document = JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Protocol", "text-fixtures.json")));
+        Assert.NotEmpty(document.RootElement.EnumerateArray());
+        foreach (var fixture in document.RootElement.EnumerateArray())
+        {
+            TestContext.Current.CancellationToken.ThrowIfCancellationRequested();
+            var lessParentheses = fixture.GetProperty("lessParentheses").GetString()!;
+            var expected = fixture.GetProperty("expected");
+            var parsed = new Parser().Parse(fixture.GetProperty("input").GetString()!);
+            Assert.Equal(lessParentheses, parsed.Format(new FormatOptions { LessParentheses = true }));
+            Assert.True(JsonElement.DeepEquals(expected, JsonSerializer.SerializeToElement(Tree(new Parser().Parse(lessParentheses)))));
+            // The boolean overload trims ToString(), which writes some text differently but must read back the same.
+            Assert.True(JsonElement.DeepEquals(expected, JsonSerializer.SerializeToElement(Tree(new Parser().Parse(parsed.Format(lessParentheses: true))))));
+        }
+    }
 }

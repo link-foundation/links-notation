@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { checkParity } from "../../scripts/ci/check-parity.mjs";
+import { fixtures } from "../../scripts/ci/text-fixtures.mjs";
 
 const manifest = JSON.parse(
   readFileSync(new URL("../../parity/language-features.json", import.meta.url)),
@@ -46,6 +47,13 @@ test("a shared feature without golden cases fails the gate", () =>
     }).length,
     0,
   ));
+test("a fixture without less parentheses text fails the gate", () => {
+  const { lessParentheses, ...fixture } = fixtures[0];
+  assert.notEqual(
+    checkParity(manifest, [fixture, ...fixtures.slice(1)], options).length,
+    0,
+  );
+});
 test("stale source evidence fails the gate", () => {
   const m = structuredClone(manifest);
   m.sources.rust.sha256 = "stale";

@@ -101,9 +101,6 @@ func (l *Link) String() string {
 func (l *Link) Format(lessParentheses bool) string {
 	// Empty link
 	if l.ID == nil && len(l.Values) == 0 {
-		if lessParentheses {
-			return ""
-		}
 		return "()"
 	}
 
@@ -115,9 +112,6 @@ func (l *Link) Format(lessParentheses bool) string {
 				return escapedID
 			}
 			return "(" + escapedID + ")"
-		}
-		if lessParentheses {
-			return ""
 		}
 		return "()"
 	}
@@ -131,7 +125,7 @@ func (l *Link) Format(lessParentheses bool) string {
 
 	// Link with values only (nil ID)
 	if l.ID == nil {
-		if lessParentheses {
+		if lessParentheses && !l.hasLoneNestedValue() {
 			// Check if all values are simple (no nested values)
 			allSimple := true
 			for _, v := range l.Values {
@@ -171,9 +165,6 @@ func (l *Link) FormatWithConfig(config *FormatConfig) string {
 func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) string {
 	// Empty link
 	if l.ID == nil && len(l.Values) == 0 {
-		if config.LessParentheses {
-			return ""
-		}
 		return "()"
 	}
 
@@ -188,9 +179,6 @@ func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) stri
 				return escapedID
 			}
 			return "(" + escapedID + ")"
-		}
-		if config.LessParentheses {
-			return ""
 		}
 		return "()"
 	}
@@ -215,7 +203,7 @@ func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) stri
 			} else {
 				testLine = "(" + idStr + ": " + valuesStr + ")"
 			}
-		} else if config.LessParentheses {
+		} else if config.LessParentheses && !l.hasLoneNestedValue() {
 			testLine = valuesStr
 		} else {
 			testLine = "(" + valuesStr + ")"
@@ -240,7 +228,7 @@ func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) stri
 
 	// Link with values only (nil ID)
 	if l.ID == nil {
-		if config.LessParentheses {
+		if config.LessParentheses && !l.hasLoneNestedValue() {
 			allSimple := true
 			for _, v := range l.Values {
 				if len(v.Values) > 0 {
@@ -315,6 +303,14 @@ func (l *Link) Equal(other *Link) bool {
 // escapeReference escapes a reference string by adding quotes if necessary.
 func escapeReference(reference string) string {
 	return formatReference(reference)
+}
+
+// hasLoneNestedValue reports whether the link holds exactly one link that has
+// values. The parentheses of an anonymous link are what nest such a value:
+// "((b c))" without them is "(b c)", a different link, so LessParentheses has to
+// keep them.
+func (l *Link) hasLoneNestedValue() bool {
+	return len(l.Values) == 1 && len(l.Values[0].Values) > 0
 }
 
 // needsParentheses checks if a string needs to be wrapped in parentheses.

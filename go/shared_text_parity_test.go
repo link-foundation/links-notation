@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"os"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -20,24 +21,32 @@ func parityTree(links []*Link) []parityNode {
 	return result
 }
 
-func TestSharedTextParity(t *testing.T) {
+type parityFixture struct {
+	ID              string       `json:"id"`
+	Input           string       `json:"input"`
+	Expected        []parityNode `json:"expected"`
+	Format          string       `json:"format"`
+	LessParentheses string       `json:"lessParentheses"`
+}
+
+func parityFixtures(t *testing.T) []parityFixture {
+	t.Helper()
 	data, err := os.ReadFile("../parity/text-fixtures.json")
 	if err != nil {
 		t.Fatal(err)
 	}
-	var fixtures []struct {
-		ID       string       `json:"id"`
-		Input    string       `json:"input"`
-		Expected []parityNode `json:"expected"`
-		Format   string       `json:"format"`
-	}
+	var fixtures []parityFixture
 	if err := json.Unmarshal(data, &fixtures); err != nil {
 		t.Fatal(err)
 	}
 	if len(fixtures) == 0 {
 		t.Fatal("empty fixture corpus")
 	}
-	for _, fixture := range fixtures {
+	return fixtures
+}
+
+func TestSharedTextParity(t *testing.T) {
+	for _, fixture := range parityFixtures(t) {
 		t.Run(fixture.ID, func(t *testing.T) {
 			parsed, err := Parse(fixture.Input)
 			if err != nil {
@@ -62,6 +71,32 @@ func TestSharedTextParity(t *testing.T) {
 			streamed, err := stream.Finish()
 			if err != nil || !reflect.DeepEqual(parityTree(streamed), fixture.Expected) {
 				t.Fatalf("stream tree differs: %v", err)
+			}
+		})
+	}
+}
+
+func TestSharedLessParenthesesRoundTrip(t *testing.T) {
+	for _, fixture := range parityFixtures(t) {
+		t.Run(fixture.ID, func(t *testing.T) {
+			parsed, err := Parse(fixture.Input)
+			if err != nil {
+				t.Fatal(err)
+			}
+			texts := make([]string, 0, len(parsed))
+			for _, link := range parsed {
+				texts = append(texts, link.Format(true))
+			}
+			if got := strings.Join(texts, "\n"); got != fixture.LessParentheses {
+				t.Fatalf("Format(true): got %q, want %q", got, fixture.LessParentheses)
+			}
+			config := &FormatConfig{LessParentheses: true}
+			if got := FormatWithConfig(parsed, config); got != fixture.LessParentheses {
+				t.Fatalf("FormatWithConfig: got %q, want %q", got, fixture.LessParentheses)
+			}
+			reparsed, err := Parse(fixture.LessParentheses)
+			if err != nil || !reflect.DeepEqual(parityTree(reparsed), fixture.Expected) {
+				t.Fatalf("round trip differs: %v", err)
 			}
 		})
 	}

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LinkFoundation\LinksNotation\Tests;
 
+use LinkFoundation\LinksNotation\FormatConfig;
 use LinkFoundation\LinksNotation\Formatter;
 use LinkFoundation\LinksNotation\Link;
 use LinkFoundation\LinksNotation\Parser;
@@ -17,7 +18,7 @@ class SharedTextParityTest extends TestCase
         return array_map(fn (Link $link): array => ['id' => $link->id, 'values' => $this->tree($link->values)], $links);
     }
 
-    public function testSharedTextParity(): void
+    private function fixtures(): array
     {
         $fixtures = json_decode(
             file_get_contents(dirname(__DIR__, 2) . '/parity/text-fixtures.json'),
@@ -25,6 +26,13 @@ class SharedTextParityTest extends TestCase
             flags: JSON_THROW_ON_ERROR
         );
         self::assertNotEmpty($fixtures);
+
+        return $fixtures;
+    }
+
+    public function testSharedTextParity(): void
+    {
+        $fixtures = $this->fixtures();
         foreach ($fixtures as $fixture) {
             $parsed = (new Parser())->parse($fixture['input']);
             self::assertSame($fixture['expected'], $this->tree($parsed), $fixture['id']);
@@ -39,6 +47,24 @@ class SharedTextParityTest extends TestCase
                 $stream->write($character);
             }
             self::assertSame($fixture['expected'], $this->tree($stream->finish()), $fixture['id']);
+        }
+    }
+
+    public function testSharedLessParenthesesRoundTrip(): void
+    {
+        foreach ($this->fixtures() as $fixture) {
+            $parsed = (new Parser())->parse($fixture['input']);
+            self::assertSame($fixture['lessParentheses'], Formatter::formatLinks($parsed, true), $fixture['id']);
+            self::assertSame(
+                $fixture['lessParentheses'],
+                Formatter::formatLinks($parsed, new FormatConfig(lessParentheses: true)),
+                $fixture['id']
+            );
+            self::assertSame(
+                $fixture['expected'],
+                $this->tree((new Parser())->parse($fixture['lessParentheses'])),
+                $fixture['id']
+            );
         }
     }
 }

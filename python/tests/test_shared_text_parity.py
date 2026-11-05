@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from links_notation import Parser, StreamParser, format_links
+from links_notation import FormatConfig, Parser, StreamParser, format_links
 
 FIXTURES = json.loads((Path(__file__).resolve().parents[2] / "parity/text-fixtures.json").read_text(encoding="utf-8"))
 
@@ -24,3 +24,11 @@ def test_shared_text_parity(fixture):
     for character in fixture["input"]:
         stream.write(character)
     assert tree(stream.finish()) == fixture["expected"]
+
+
+@pytest.mark.parametrize("fixture", FIXTURES, ids=lambda fixture: fixture["id"])
+def test_shared_less_parentheses_round_trip(fixture):
+    parsed = Parser().parse(fixture["input"])
+    assert format_links(parsed, True) == fixture["lessParentheses"]
+    assert format_links(parsed, FormatConfig(less_parentheses=True)) == fixture["lessParentheses"]
+    assert tree(Parser().parse(fixture["lessParentheses"])) == fixture["expected"]

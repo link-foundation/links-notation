@@ -1806,6 +1806,103 @@
       }
     },
     {
+      "id": "less-parentheses",
+      "description": "Formatting with less parentheses reads back as the same link, keeping the parentheses of a lone nested value and of an empty link",
+      "contract": "shared-text",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Link.js"
+          ],
+          "evidence": [
+            "js/tests/SharedTextParity.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/link.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Link.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/lino.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/LinkFormatExtensions.cs"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Link.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/link.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Link.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Formatter.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
+        }
+      }
+    },
+    {
       "id": "links-group-class-api",
       "description": "LinksGroup class API in bindings that expose it",
       "contract": "native-suite",
@@ -2219,7 +2316,7 @@
         "js/src/quotes.js",
         "js/src/references.js"
       ],
-      "sha256": "bcb1cfdb39ae4eb1dcdf589589448cd03decc60b4648bef121d0a6ebe6736a00"
+      "sha256": "dbf7f4d2af9346d30183b80aeb87656eef13c2ddf0e87e3619a1cf72ff1f4038"
     },
     "rust": {
       "files": [
@@ -2241,7 +2338,7 @@
         "rust/links-notation/src/stream_parser.rs",
         "rust/links-notation/src/syntax.rs"
       ],
-      "sha256": "7c29f2f7e9a4ada1481af0ffc31810ccb0a11089b2af2977fd1e918c13bd7ffe"
+      "sha256": "14200f6758c7d6904df4fcd1655814df60e6f47122bcc786870e0b27e8620eda"
     },
     "python": {
       "files": [
@@ -2257,7 +2354,7 @@
         "python/links_notation/reference_literal.py",
         "python/links_notation/stream_parser.py"
       ],
-      "sha256": "87af12c1aac1ae5f46955522f7ecb0370afb668ba9c5dbfebed285811ffa5d2a"
+      "sha256": "e0168955fdb95971358c7de3e826779e26bc1d077a2705d05b52403e5f1a67be"
     },
     "java": {
       "files": [
@@ -2276,7 +2373,7 @@
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParseRuntimeException.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParser.java"
       ],
-      "sha256": "8d9381e3f6d6ceb5ee7b466dc37e3eca2c0af2ff1a38963d2236d6abfc561563"
+      "sha256": "50dcff8be070934f5e690196274f558e517dbcb1141af5f7eea71d4789992136"
     },
     "go": {
       "files": [
@@ -2289,7 +2386,7 @@
         "go/reference_literal.go",
         "go/stream_parser.go"
       ],
-      "sha256": "760e49a485f810fb33e98dabcb80add51d1787ffe8cec3257760f348bd7dbc54"
+      "sha256": "99340378bb1724c1360a93692c8f9945052a705b487a6c8329563b72c0e809cd"
     },
     "csharp": {
       "files": [
@@ -2323,7 +2420,7 @@
         "csharp/Link.Foundation.Links.Notation/_.cs",
         "csharp/Link.Foundation.Links.Notation/id.cs"
       ],
-      "sha256": "b89fb986549270fb9cfe1ac70aa00b8a6ed058437e9107f34246aed9f23d8479"
+      "sha256": "c9c116a781c5c8d69c55163ba92f7cda889d99db21ec478befac60c75c0399db"
     },
     "php": {
       "files": [
@@ -2351,7 +2448,7 @@
         "php/src/StreamParseException.php",
         "php/src/StreamParser.php"
       ],
-      "sha256": "34092c24345dd709f67f5994bd88640303a24d835d87220f707e8f2abc1d8a63"
+      "sha256": "cc84e58efb38e855199b45895630ab263f0a13422b5a2778025ff0ae9dfadbe1"
     },
     "cpp": {
       "files": [
@@ -2384,7 +2481,7 @@
         "cpp/src/unicode.cpp",
         "cpp/src/unicode.hpp"
       ],
-      "sha256": "23aa018a5c3edf4e8a8717bd407bc69fe1241e560f41bb79e3e601bdc7e00a9a"
+      "sha256": "ca86ddbd2437fa7b6c9bcdeba07382440b31c85b1e800aa7302af986f65386de"
     },
     "swift": {
       "files": [
@@ -2402,7 +2499,7 @@
         "swift/Sources/LinksNotation/Quotes.swift",
         "swift/Sources/LinksNotation/StreamParser.swift"
       ],
-      "sha256": "6e238fb47fc8637733cf8f05eece41cbf34b60741cdfe558ba9f458261adb38a"
+      "sha256": "0447f5f81ec69c0cda42038f8281d95d20963f8f2a61c055fa8e0773cd8872b1"
     },
     "kotlin": {
       "files": [
@@ -2424,7 +2521,7 @@
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/References.kt",
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/StreamParser.kt"
       ],
-      "sha256": "359a1ce52529969e457d98bdd63c60f776715a61190c05f17f933baec6b450ab"
+      "sha256": "ff474609462a1c91500affb742561adf36a391e2e12788b9f67a296a6f6d5be5"
     }
   }
 }

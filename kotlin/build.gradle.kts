@@ -101,6 +101,11 @@ abstract class GenerateParityCases : DefaultTask() {
                 .append(",\n")
             val format = case["format"] as String?
             out.append("        format = ").append(if (format == null) "null" else literal(format)).append(",\n")
+            val lessParentheses = case["lessParentheses"] as String?
+            out
+                .append("        lessParentheses = ")
+                .append(if (lessParentheses == null) "null" else literal(lessParentheses))
+                .append(",\n")
             out.append("        error = ").append(case["error"] == true).append(",\n")
             val code = case["code"] as String?
             out.append("        code = ").append(if (code == null) "null" else literal(code)).append(",\n")

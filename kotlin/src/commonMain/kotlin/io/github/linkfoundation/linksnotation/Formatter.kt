@@ -35,7 +35,7 @@ internal fun formatLink(
 
     // Empty link
     if (id == null && values.isEmpty()) {
-        return if (lessParentheses) "" else "()"
+        return "()"
     }
 
     // Link with only an ID
@@ -51,7 +51,7 @@ internal fun formatLink(
 
     // Link with values only
     if (id == null) {
-        if (lessParentheses) {
+        if (lessParentheses && !hasLoneNestedValue(values)) {
             if (values.all { it.values.isEmpty() }) {
                 return values.joinToString(" ") { escapeReference(it.id) }
             }
@@ -76,7 +76,7 @@ internal fun formatLinkWithOptions(
 
     // Empty link
     if (id == null && values.isEmpty()) {
-        return if (options.lessParentheses) "" else "()"
+        return "()"
     }
 
     // Link with only an ID
@@ -96,7 +96,7 @@ internal fun formatLinkWithOptions(
                     val idText = escapeReference(id)
                     if (options.lessParentheses) "$idText: $valuesText" else "($idText: $valuesText)"
                 } else {
-                    if (options.lessParentheses) valuesText else "($valuesText)"
+                    if (options.lessParentheses && !hasLoneNestedValue(values)) valuesText else "($valuesText)"
                 },
             )
     if (shouldIndent && !options.preferInline) {
@@ -105,7 +105,7 @@ internal fun formatLinkWithOptions(
 
     // Link with values only
     if (id == null) {
-        if (options.lessParentheses) {
+        if (options.lessParentheses && !hasLoneNestedValue(values)) {
             if (values.all { it.values.isEmpty() }) {
                 return values.joinToString(" ") { escapeReference(it.id) }
             }
@@ -175,6 +175,13 @@ private fun formatValue(
     }
     return formatLink(value, lessParentheses = false, isCompoundValue = false)
 }
+
+/**
+ * Port of `Link._hasLoneNestedValue()`: the parentheses of an anonymous link
+ * are what nest a lone value that has values. `((b c))` without them is
+ * `(b c)`, a different link, so `lessParentheses` has to keep them.
+ */
+private fun hasLoneNestedValue(values: List<Link>): Boolean = values.size == 1 && values[0].values.isNotEmpty()
 
 /** Port of `Link.needsParentheses(str)`. */
 private fun needsParentheses(text: String?): Boolean =

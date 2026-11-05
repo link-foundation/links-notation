@@ -31,7 +31,7 @@ TEST(SharedTextParityTests, SharedTextParity) {
   for (const std::string& line : lines(read_repository_file("parity/text-vectors.tsv"))) {
     if (line.empty() || line[0] == '#') continue;
     const std::vector<std::string> columns = split(line, '\t');
-    ASSERT_EQ(columns.size(), 4u) << line;
+    ASSERT_EQ(columns.size(), 5u) << line;
     const std::string input = text_from_hex(columns[1]);
     const std::string formatted = text_from_hex(columns[3]);
     const std::vector<Link> parsed = parse(input);
@@ -50,6 +50,24 @@ TEST(SharedTextParityTests, SharedTextParity) {
       position += length;
     }
     EXPECT_EQ(tree(stream.finish()), columns[2]) << columns[0] << " stream";
+    ++count;
+  }
+  EXPECT_GT(count, 0u) << "empty fixture corpus";
+}
+
+TEST(SharedTextParityTests, SharedLessParenthesesRoundTrip) {
+  FormatConfig config;
+  config.less_parentheses = true;
+  std::size_t count = 0;
+  for (const std::string& line : lines(read_repository_file("parity/text-vectors.tsv"))) {
+    if (line.empty() || line[0] == '#') continue;
+    const std::vector<std::string> columns = split(line, '\t');
+    ASSERT_EQ(columns.size(), 5u) << line;
+    const std::string less_parentheses = text_from_hex(columns[4]);
+    const std::vector<Link> parsed = parse(text_from_hex(columns[1]));
+    EXPECT_EQ(format_links(parsed, true), less_parentheses) << columns[0] << " boolean";
+    EXPECT_EQ(format_links(parsed, config), less_parentheses) << columns[0] << " config";
+    EXPECT_EQ(tree(parse(less_parentheses)), columns[2]) << columns[0] << " reparse";
     ++count;
   }
   EXPECT_GT(count, 0u) << "empty fixture corpus";
