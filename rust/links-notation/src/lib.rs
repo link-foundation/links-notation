@@ -2,6 +2,8 @@ pub mod binary;
 pub mod comments;
 pub mod cst;
 pub mod format_config;
+mod nested_format;
+pub use nested_format::{format_nested, format_nested_with_indent};
 pub mod parser;
 pub mod parser_config;
 mod quotes;
@@ -624,12 +626,10 @@ impl<T: ToString + Clone> LiNo<T> {
             }
             LiNo::Link { id, values } => {
                 if id.is_none() {
-                    // Values only - format each on separate line
-                    values
-                        .iter()
-                        .map(|v| format!("{}{}", config.indent_string, format_value(v)))
-                        .collect::<Vec<_>>()
-                        .join("\n")
+                    self.format_with_config(&FormatConfig {
+                        less_parentheses: config.less_parentheses,
+                        ..FormatConfig::default()
+                    })
                 } else {
                     // Link with ID - format as id:\n  value1\n  value2
                     let id_str = escape_reference(&id.as_ref().unwrap().to_string());

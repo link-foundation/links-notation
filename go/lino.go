@@ -261,12 +261,7 @@ func (l *Link) formatWithConfig(config *FormatConfig, isCompoundValue bool) stri
 
 func (l *Link) formatIndented(config *FormatConfig) string {
 	if l.ID == nil {
-		// Values only - format each on separate line
-		var lines []string
-		for _, v := range l.Values {
-			lines = append(lines, config.IndentString+formatValue(v))
-		}
-		return strings.Join(lines, "\n")
+		return l.Format(config.LessParentheses)
 	}
 
 	// Link with ID - format as id:\n  value1\n  value2

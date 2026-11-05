@@ -1711,7 +1711,7 @@
     },
     {
       "id": "format-config-api",
-      "description": "Configurable inline/grouped/indented formatting with language-specific options",
+      "description": "Configurable inline/grouped/indented formatting with language-specific options; anonymous threshold output retains its container using an inline fallback",
       "contract": "native-suite",
       "implementations": {
         "js": {
@@ -1720,7 +1720,8 @@
             "js/src/FormatConfig.js"
           ],
           "evidence": [
-            "js/tests/FormatConfig.test.js"
+            "js/tests/FormatConfig.test.js",
+            "js/tests/NestedFormat.test.js"
           ]
         },
         "rust": {
@@ -1729,7 +1730,8 @@
             "rust/links-notation/src/format_config.rs"
           ],
           "evidence": [
-            "rust/links-notation/tests/format_config_tests.rs"
+            "rust/links-notation/tests/format_config_tests.rs",
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
           ]
         },
         "python": {
@@ -1738,7 +1740,8 @@
             "python/links_notation/format_config.py"
           ],
           "evidence": [
-            "python/tests/test_format_config.py"
+            "python/tests/test_format_config.py",
+            "python/tests/test_shared_text_parity.py"
           ]
         },
         "java": {
@@ -1752,7 +1755,8 @@
             "go/format_config.go"
           ],
           "evidence": [
-            "go/lino_test.go"
+            "go/lino_test.go",
+            "go/shared_text_parity_test.go"
           ]
         },
         "csharp": {
@@ -1761,7 +1765,8 @@
             "csharp/Link.Foundation.Links.Notation/FormatConfig.cs"
           ],
           "evidence": [
-            "csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs"
+            "csharp/Link.Foundation.Links.Notation.Tests/FormatConfigTests.cs",
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
           ]
         },
         "php": {
@@ -1770,7 +1775,8 @@
             "php/src/FormatConfig.php"
           ],
           "evidence": [
-            "php/tests/FormatConfigTest.php"
+            "php/tests/FormatConfigTest.php",
+            "php/tests/SharedTextParityTest.php"
           ]
         },
         "cpp": {
@@ -1780,7 +1786,8 @@
             "cpp/src/link.cpp"
           ],
           "evidence": [
-            "cpp/tests/format_config_tests.cpp"
+            "cpp/tests/format_config_tests.cpp",
+            "cpp/tests/shared_text_parity_tests.cpp"
           ]
         },
         "swift": {
@@ -1790,7 +1797,8 @@
             "swift/Sources/LinksNotation/Formatter.swift"
           ],
           "evidence": [
-            "swift/Tests/LinksNotationTests/FormatConfigTests.swift"
+            "swift/Tests/LinksNotationTests/FormatConfigTests.swift",
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift"
           ]
         },
         "kotlin": {
@@ -1800,7 +1808,8 @@
             "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Formatter.kt"
           ],
           "evidence": [
-            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/FormatConfigTest.kt"
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/FormatConfigTest.kt",
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
           ]
         }
       }
@@ -2365,6 +2374,103 @@
           ]
         }
       }
+    },
+    {
+      "id": "nested-format",
+      "description": "Recursive nested writer preserves order and required parentheses; all ten bindings check shared nested text, and the four group APIs verify folding round trips.",
+      "contract": "shared-nested",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/NestedFormat.js"
+          ],
+          "evidence": [
+            "js/tests/NestedFormat.test.js"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/nested_format.py"
+          ],
+          "evidence": [
+            "python/tests/test_shared_text_parity.py"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/nested_format.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/shared_text_parity_tests.rs"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/NestedFormat.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/nested_format.go"
+          ],
+          "evidence": [
+            "go/shared_text_parity_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/NestedFormat.cs"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Formatter.php"
+          ],
+          "evidence": [
+            "php/tests/SharedTextParityTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/nested_format.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/NestedFormat.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/NestedFormat.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
+        }
+      }
     }
   ],
   "sources": {
@@ -2378,6 +2484,7 @@
         "js/src/IndentedDocument.js",
         "js/src/Link.js",
         "js/src/LinksGroup.js",
+        "js/src/NestedFormat.js",
         "js/src/ParseError.js",
         "js/src/Parser.js",
         "js/src/ReferenceLiteral.js",
@@ -2389,7 +2496,7 @@
         "js/src/quotes.js",
         "js/src/references.js"
       ],
-      "sha256": "b6b334587928ee78c761fc53b26eab5079b88a0596bd433fe21b45a08a38c41d"
+      "sha256": "5d00294afbd1aee9f0695098840762b031e24cbc1a1f8f8a65a50edb06191abe"
     },
     "rust": {
       "files": [
@@ -2404,6 +2511,7 @@
         "rust/links-notation/src/cst.rs",
         "rust/links-notation/src/format_config.rs",
         "rust/links-notation/src/lib.rs",
+        "rust/links-notation/src/nested_format.rs",
         "rust/links-notation/src/parser.rs",
         "rust/links-notation/src/parser_config.rs",
         "rust/links-notation/src/quotes.rs",
@@ -2411,7 +2519,7 @@
         "rust/links-notation/src/stream_parser.rs",
         "rust/links-notation/src/syntax.rs"
       ],
-      "sha256": "14200f6758c7d6904df4fcd1655814df60e6f47122bcc786870e0b27e8620eda"
+      "sha256": "696b9cbd9e5f417cdca1ffe185d2de941073d29974d7d7754cc86f1e5e3c4ba8"
     },
     "python": {
       "files": [
@@ -2422,12 +2530,13 @@
         "python/links_notation/format_config.py",
         "python/links_notation/formatter.py",
         "python/links_notation/link.py",
+        "python/links_notation/nested_format.py",
         "python/links_notation/parser.py",
         "python/links_notation/quotes.py",
         "python/links_notation/reference_literal.py",
         "python/links_notation/stream_parser.py"
       ],
-      "sha256": "e0168955fdb95971358c7de3e826779e26bc1d077a2705d05b52403e5f1a67be"
+      "sha256": "9a554641b49bf71c7dc32eecaa0ac761aa083fea2b6b9786ea0d777499246997"
     },
     "java": {
       "files": [
@@ -2438,6 +2547,7 @@
         "java/src/main/java/io/github/linkfoundation/linksnotation/CstNode.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/Link.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/LinksGroup.java",
+        "java/src/main/java/io/github/linkfoundation/linksnotation/NestedFormat.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/NestingTooDeepException.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/ParseException.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/Parser.java",
@@ -2446,7 +2556,7 @@
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParseRuntimeException.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParser.java"
       ],
-      "sha256": "50dcff8be070934f5e690196274f558e517dbcb1141af5f7eea71d4789992136"
+      "sha256": "19ebbadd3e64be0fec74a9d86953a57c2bc29a42528ba87adcd6818baa56a36e"
     },
     "go": {
       "files": [
@@ -2455,11 +2565,12 @@
         "go/cst.go",
         "go/format_config.go",
         "go/lino.go",
+        "go/nested_format.go",
         "go/parser.go",
         "go/reference_literal.go",
         "go/stream_parser.go"
       ],
-      "sha256": "99340378bb1724c1360a93692c8f9945052a705b487a6c8329563b72c0e809cd"
+      "sha256": "bd6b286cc34519b1f2747917ea26c9448fac1821b7f8ba611235b46cbb50528d"
     },
     "csharp": {
       "files": [
@@ -2483,6 +2594,7 @@
         "csharp/Link.Foundation.Links.Notation/Link.cs",
         "csharp/Link.Foundation.Links.Notation/LinkFormatExtensions.cs",
         "csharp/Link.Foundation.Links.Notation/LinksGroup.cs",
+        "csharp/Link.Foundation.Links.Notation/NestedFormat.cs",
         "csharp/Link.Foundation.Links.Notation/ParseException.cs",
         "csharp/Link.Foundation.Links.Notation/Parser.cs",
         "csharp/Link.Foundation.Links.Notation/Parser.peg",
@@ -2493,7 +2605,7 @@
         "csharp/Link.Foundation.Links.Notation/_.cs",
         "csharp/Link.Foundation.Links.Notation/id.cs"
       ],
-      "sha256": "c9c116a781c5c8d69c55163ba92f7cda889d99db21ec478befac60c75c0399db"
+      "sha256": "94c01d91effcee19d6f21380d6af02057340cf41ecf3a2af38e22d72c1d0d17a"
     },
     "php": {
       "files": [
@@ -2521,7 +2633,7 @@
         "php/src/StreamParseException.php",
         "php/src/StreamParser.php"
       ],
-      "sha256": "cc84e58efb38e855199b45895630ab263f0a13422b5a2778025ff0ae9dfadbe1"
+      "sha256": "8fca915b14afdd467675bc4447b78dff2c5fae48a1fddc500e8a7a0864ee3f54"
     },
     "cpp": {
       "files": [
@@ -2544,6 +2656,7 @@
         "cpp/src/indented_document.cpp",
         "cpp/src/link.cpp",
         "cpp/src/links_group.cpp",
+        "cpp/src/nested_format.cpp",
         "cpp/src/parse_error.cpp",
         "cpp/src/parser.cpp",
         "cpp/src/quotes.cpp",
@@ -2554,7 +2667,7 @@
         "cpp/src/unicode.cpp",
         "cpp/src/unicode.hpp"
       ],
-      "sha256": "57f042f0b0507ca966714846dd6b3610602035a1c2addcc89aa7d1a2910b4ed5"
+      "sha256": "68da487403b9e92ea87c0397456be0d40f7ca80238cc7fb66643a1f189294956"
     },
     "swift": {
       "files": [
@@ -2567,12 +2680,13 @@
         "swift/Sources/LinksNotation/IndentedDocument.swift",
         "swift/Sources/LinksNotation/Link.swift",
         "swift/Sources/LinksNotation/LinksGroup.swift",
+        "swift/Sources/LinksNotation/NestedFormat.swift",
         "swift/Sources/LinksNotation/ParseError.swift",
         "swift/Sources/LinksNotation/Parser.swift",
         "swift/Sources/LinksNotation/Quotes.swift",
         "swift/Sources/LinksNotation/StreamParser.swift"
       ],
-      "sha256": "e22ef5a8f196e3aedd575e6adf60d02da2cdde78b4f4e524b7a3e61b92001a3d"
+      "sha256": "2a46a2b7aec4151d4d9d24181a323fa8734f295072f5a42dfdc8791105f21299"
     },
     "kotlin": {
       "files": [
@@ -2585,6 +2699,7 @@
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/IndentedDocument.kt",
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Link.kt",
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/LinksGroup.kt",
+        "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/NestedFormat.kt",
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/ParseException.kt",
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt",
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/ParserOptions.kt",
@@ -2594,7 +2709,7 @@
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/References.kt",
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/StreamParser.kt"
       ],
-      "sha256": "c15e40558620fa3cd47a52ebc491d4de86740cb74d02921138b6ef9b6e5726eb"
+      "sha256": "4248d2bbc5069c29deea069bbac70aedc423fb07feccc85a2cf0d33ebc9ce41d"
     }
   }
 }

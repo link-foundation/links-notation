@@ -91,6 +91,10 @@ std::string format_links(const std::vector<Link>& links, bool less_parentheses =
 /// Writes links one per line following `config`.
 std::string format_links(const std::vector<Link>& links, const FormatConfig& config);
 
+/// Writes recursive nested lines; read by folding Parser::parse_groups().
+/// Indentation must be nonempty spaces. No final newline is added.
+std::string format_nested(const std::vector<Link>& links, const std::string& indent = "  ");
+
 }  // namespace links_notation
 
 #endif  // LINKS_NOTATION_LINK_HPP

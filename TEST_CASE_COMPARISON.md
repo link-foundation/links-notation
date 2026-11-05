@@ -18,16 +18,16 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 277 | 27 |
-| JavaScript | 347 | 33 |
-| Rust | 428 | 32 |
-| C# | 323 | 30 |
-| Go | 165 | 20 |
-| Java | 213 | 19 |
-| PHP | 263 | 26 |
-| C++ | 378 | 32 |
-| Swift | 347 | 35 |
-| Kotlin | 356 | 33 |
+| Python | 279 | 27 |
+| JavaScript | 351 | 34 |
+| Rust | 430 | 32 |
+| C# | 325 | 30 |
+| Go | 167 | 20 |
+| Java | 214 | 19 |
+| PHP | 265 | 26 |
+| C++ | 380 | 32 |
+| Swift | 349 | 35 |
+| Kotlin | 358 | 33 |
 
 ---
 
@@ -758,6 +758,17 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 **Category totals:** Python: 4, JavaScript: 4, Rust: 4, C#: 4, Go: 0, Java: 0, PHP: 4, C++: 4, Swift: 4, Kotlin: 4
 
+## Nested Format
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
+|-----------|---|---|---|---|---|---|---|---|---|---|
+| anonymous threshold output retains the anonymous container | ❌ | [✅](js/tests/NestedFormat.test.js#L26) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| nested writer folds every existing shared text fixture without changing values | ❌ | [✅](js/tests/NestedFormat.test.js#L46) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| recursive nested writer formats the issue form and reads back through groups | ❌ | [✅](js/tests/NestedFormat.test.js#L17) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| shared nested golden corpus and custom indentation read back exactly | ❌ | [✅](js/tests/NestedFormat.test.js#L62) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+**Category totals:** Python: 0, JavaScript: 4, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0, C++: 0, Swift: 0, Kotlin: 0
+
 ## Nested Indentation
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
@@ -945,15 +956,17 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
 |-----------|---|---|---|---|---|---|---|---|---|---|
+| anonymous threshold round trip | [✅](python/tests/test_shared_text_parity.py#L51) | ❌ | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L119) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L67) | [✅](go/shared_text_parity_test.go#L128) | ❌ | [✅](php/tests/SharedTextParityTest.php#L87) | [✅](cpp/tests/shared_text_parity_tests.cpp#L135) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L84) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L92) |
 | every corpus case streamed one character at a time reads the same | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L61) |
 | indented id groups agree with parse | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/shared_text_parity_tests.cpp#L36) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L13) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L21) |
 | less parentheses keeps the parentheses of a lone nested value | ❌ | [✅](js/tests/SharedTextParity.test.js#L54) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | less parentheses keeps the parentheses of an empty link | ❌ | [✅](js/tests/SharedTextParity.test.js#L61) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | line length is measured on the parentheses a lone nested value keeps | ❌ | [✅](js/tests/SharedTextParity.test.js#L68) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | shared less parentheses round trip | [✅](python/tests/test_shared_text_parity.py#L30) | [✅](js/tests/SharedTextParity.test.js#L35) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L72) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L37) | [✅](go/shared_text_parity_test.go#L79) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L63) | [✅](php/tests/SharedTextParityTest.php#L53) | [✅](cpp/tests/shared_text_parity_tests.cpp#L100) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L55) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L50) |
+| shared nested format | [✅](python/tests/test_shared_text_parity.py#L37) | ❌ | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L98) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L54) | [✅](go/shared_text_parity_test.go#L105) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L78) | [✅](php/tests/SharedTextParityTest.php#L70) | [✅](cpp/tests/shared_text_parity_tests.cpp#L118) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L69) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L70) |
 | shared text parity | [✅](python/tests/test_shared_text_parity.py#L18) | [✅](js/tests/SharedTextParity.test.js#L21) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L44) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L16) | [✅](go/shared_text_parity_test.go#L48) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L37) | [✅](php/tests/SharedTextParityTest.php#L33) | [✅](cpp/tests/shared_text_parity_tests.cpp#L71) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L34) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L42) |
 
-**Category totals:** Python: 2, JavaScript: 5, Rust: 2, C#: 2, Go: 2, Java: 2, PHP: 2, C++: 3, Swift: 3, Kotlin: 4
+**Category totals:** Python: 4, JavaScript: 5, Rust: 4, C#: 4, Go: 4, Java: 3, PHP: 4, C++: 5, Swift: 5, Kotlin: 6
 
 ## Single Line Parser
 
@@ -1545,6 +1558,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Multiline Parser** (1 missing):
 - parseandstringify 2
 
+**Nested Format** (4 missing):
+- anonymousthresholdoutputretainstheanonymouscontainer
+- nestedwriterfoldseveryexistingsharedtextfixturewithoutchangingvalues
+- recursivenestedwriterformatstheissueformandreadsbackthroughgroups
+- sharednestedgoldencorpusandcustomindentationreadbackexactly
+
 **Nested Indentation** (1 missing):
 - blanklinesinsideparenthesesareskipped
 
@@ -1748,7 +1767,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 518 tests**
+**Total missing: 522 tests**
 
 ### JavaScript Missing Tests
 
@@ -2158,9 +2177,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedinputsarerecoveredfromtheircst
 - sharedsyntaxparity
 
-**Shared Text Parity** (2 missing):
+**Shared Text Parity** (4 missing):
+- anonymousthresholdroundtrip
 - everycorpuscasestreamedonecharacteratatimereadsthesame
 - indentedidgroupsagreewithparse
+- sharednestedformat
 
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
@@ -2269,7 +2290,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 449 tests**
+**Total missing: 451 tests**
 
 ### Rust Missing Tests
 
@@ -2572,6 +2593,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Multiline Parser** (1 missing):
 - parseandstringify 2
 
+**Nested Format** (4 missing):
+- anonymousthresholdoutputretainstheanonymouscontainer
+- nestedwriterfoldseveryexistingsharedtextfixturewithoutchangingvalues
+- recursivenestedwriterformatstheissueformandreadsbackthroughgroups
+- sharednestedgoldencorpusandcustomindentationreadbackexactly
+
 **Nested Parser** (8 missing):
 - complexstructure
 - deeplynestedstructure
@@ -2707,7 +2734,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 368 tests**
+**Total missing: 372 tests**
 
 ### C# Missing Tests
 
@@ -3071,6 +3098,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Multiline Parser** (1 missing):
 - parseandstringify 2
 
+**Nested Format** (4 missing):
+- anonymousthresholdoutputretainstheanonymouscontainer
+- nestedwriterfoldseveryexistingsharedtextfixturewithoutchangingvalues
+- recursivenestedwriterformatstheissueformandreadsbackthroughgroups
+- sharednestedgoldencorpusandcustomindentationreadbackexactly
+
 **Nested Indentation** (1 missing):
 - blanklinesinsideparenthesesareskipped
 
@@ -3257,7 +3290,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 472 tests**
+**Total missing: 476 tests**
 
 ### Go Missing Tests
 
@@ -3738,6 +3771,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - simplemultilinedoublequoted
 - simplemultilinesinglequoted
 
+**Nested Format** (4 missing):
+- anonymousthresholdoutputretainstheanonymouscontainer
+- nestedwriterfoldseveryexistingsharedtextfixturewithoutchangingvalues
+- recursivenestedwriterformatstheissueformandreadsbackthroughgroups
+- sharednestedgoldencorpusandcustomindentationreadbackexactly
+
 **Nested Indentation** (1 missing):
 - blanklinesinsideparenthesesareskipped
 
@@ -3973,7 +4012,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 626 tests**
+**Total missing: 630 tests**
 
 ### Java Missing Tests
 
@@ -4424,6 +4463,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - simplemultilinedoublequoted
 - simplemultilinesinglequoted
 
+**Nested Format** (4 missing):
+- anonymousthresholdoutputretainstheanonymouscontainer
+- nestedwriterfoldseveryexistingsharedtextfixturewithoutchangingvalues
+- recursivenestedwriterformatstheissueformandreadsbackthroughgroups
+- sharednestedgoldencorpusandcustomindentationreadbackexactly
+
 **Nested Indentation** (1 missing):
 - blanklinesinsideparenthesesareskipped
 
@@ -4521,7 +4566,8 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedsyntaxparity
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (5 missing):
+**Shared Text Parity** (6 missing):
+- anonymousthresholdroundtrip
 - everycorpuscasestreamedonecharacteratatimereadsthesame
 - indentedidgroupsagreewithparse
 - lessparentheseskeepstheparenthesesofalonenestedvalue
@@ -4645,7 +4691,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 582 tests**
+**Total missing: 587 tests**
 
 ### PHP Missing Tests
 
@@ -5039,6 +5085,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Multiline Parser** (1 missing):
 - parseandstringifytest 2
 
+**Nested Format** (4 missing):
+- anonymousthresholdoutputretainstheanonymouscontainer
+- nestedwriterfoldseveryexistingsharedtextfixturewithoutchangingvalues
+- recursivenestedwriterformatstheissueformandreadsbackthroughgroups
+- sharednestedgoldencorpusandcustomindentationreadbackexactly
+
 **Nested Indentation** (1 missing):
 - blanklinesinsideparenthesesareskipped
 
@@ -5259,7 +5311,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 532 tests**
+**Total missing: 536 tests**
 
 ### C++ Missing Tests
 
@@ -5563,6 +5615,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Multiline Parser** (1 missing):
 - parseandstringify 2
 
+**Nested Format** (4 missing):
+- anonymousthresholdoutputretainstheanonymouscontainer
+- nestedwriterfoldseveryexistingsharedtextfixturewithoutchangingvalues
+- recursivenestedwriterformatstheissueformandreadsbackthroughgroups
+- sharednestedgoldencorpusandcustomindentationreadbackexactly
+
 **Nested Parser** (8 missing):
 - complexstructure
 - deeplynestedstructure
@@ -5743,7 +5801,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 418 tests**
+**Total missing: 422 tests**
 
 ### Swift Missing Tests
 
@@ -6080,6 +6138,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Multiline Parser** (1 missing):
 - parseandstringify 2
 
+**Nested Format** (4 missing):
+- anonymousthresholdoutputretainstheanonymouscontainer
+- nestedwriterfoldseveryexistingsharedtextfixturewithoutchangingvalues
+- recursivenestedwriterformatstheissueformandreadsbackthroughgroups
+- sharednestedgoldencorpusandcustomindentationreadbackexactly
+
 **Nested Indentation** (1 missing):
 - blanklinesinsideparenthesesareskipped
 
@@ -6262,7 +6326,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 449 tests**
+**Total missing: 453 tests**
 
 ### Kotlin Missing Tests
 
@@ -6605,6 +6669,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Multiline Parser** (1 missing):
 - parseandstringify 2
 
+**Nested Format** (4 missing):
+- anonymousthresholdoutputretainstheanonymouscontainer
+- nestedwriterfoldseveryexistingsharedtextfixturewithoutchangingvalues
+- recursivenestedwriterformatstheissueformandreadsbackthroughgroups
+- sharednestedgoldencorpusandcustomindentationreadbackexactly
+
 **Nested Indentation** (1 missing):
 - blanklinesinsideparenthesesareskipped
 
@@ -6776,5 +6846,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 440 tests**
+**Total missing: 444 tests**
 

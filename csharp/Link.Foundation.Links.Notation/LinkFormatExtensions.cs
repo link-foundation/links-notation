@@ -115,9 +115,7 @@ namespace Link.Foundation.Links.Notation
 
             if (link.Id == null)
             {
-                // Values only - format each on separate line
-                var lines = values.Select(v => options.IndentString + GetValueString(v));
-                return string.Join(Environment.NewLine, lines);
+                return link.ToString();
             }
 
             // Link with ID - format as id:\n  value1\n  value2

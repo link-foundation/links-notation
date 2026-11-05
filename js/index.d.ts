@@ -724,3 +724,6 @@ export function formatBinaryReference(reference: string): string;
 export function encodeReferenceLiteral(text: string): string;
 /** Decode a complete literal. Throws on malformed hex, UTF-8, or unsupported versions. */
 export function decodeReferenceLiteral(literal: string): string;
+
+/** Write recursive nested lines, read by folding Parser.parseGroups(). No final newline. */
+export function formatNested(links: Link[], indent?: string): string;

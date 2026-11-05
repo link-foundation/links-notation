@@ -159,7 +159,7 @@ public struct Link: Hashable, Sendable {
     private func formatIndented(_ options: FormatOptions) -> String {
         let lines = values.map { options.indentString + formatValue($0) }
         guard let id else {
-            return lines.joined(separator: "\n")
+            return format(lessParentheses: options.lessParentheses)
         }
         return (["\(escapeReference(id)):"] + lines).joined(separator: "\n")
     }

@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "io.github.link-foundation"
-version = "0.30.2"
+version = "0.31.0"
 
 // Android needs an SDK. CI runners have one; elsewhere the Android target is
 // left out rather than failing the build of every other target.
@@ -36,6 +36,7 @@ if (withAndroid) {
  *
  * - `PARITY_CASES`: `parity/text-fixtures.json`, the shared text corpus;
  * - `SYNTAX_CASES`: `parity/syntax-fixtures.json`, the shared syntax corpus;
+ * - `NESTED_VECTOR_LINES`: `parity/nested-vectors.tsv`, the nested writer corpus;
  * - `BINARY_VECTOR_LINES`: `docs/protocol/binary-links-notation-vectors.txt`;
  * - `REFERENCE_LITERAL_LINES` and `INVALID_REFERENCE_LITERAL_LINES`:
  *   `docs/protocol/reference-literals.txt` and
@@ -49,6 +50,10 @@ abstract class GenerateParityCases : DefaultTask() {
     @get:InputFile
     @get:PathSensitive(PathSensitivity.RELATIVE)
     abstract val syntaxCorpus: RegularFileProperty
+
+    @get:InputFile
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val nestedVectors: RegularFileProperty
 
     @get:InputFile
     @get:PathSensitive(PathSensitivity.RELATIVE)
@@ -76,6 +81,7 @@ abstract class GenerateParityCases : DefaultTask() {
         out.append("internal val SYNTAX_CASES: List<SyntaxCase> = listOf(\n")
         appendSyntaxCases(out, syntaxCorpus.get().asFile)
         out.append(")\n\n")
+        appendLines(out, "NESTED_VECTOR_LINES", nestedVectors.get().asFile)
         appendLines(out, "BINARY_VECTOR_LINES", binaryVectors.get().asFile)
         appendLines(out, "REFERENCE_LITERAL_LINES", referenceLiterals.get().asFile)
         appendLines(out, "INVALID_REFERENCE_LITERAL_LINES", invalidReferenceLiterals.get().asFile)
@@ -185,6 +191,7 @@ val generateParityCases =
         val root = layout.projectDirectory.dir("..")
         parityCorpus.set(root.file("parity/text-fixtures.json"))
         syntaxCorpus.set(root.file("parity/syntax-fixtures.json"))
+        nestedVectors.set(root.file("parity/nested-vectors.tsv"))
         binaryVectors.set(root.file("docs/protocol/binary-links-notation-vectors.txt"))
         referenceLiterals.set(root.file("docs/protocol/reference-literals.txt"))
         invalidReferenceLiterals.set(root.file("docs/protocol/invalid-reference-literals.txt"))

@@ -75,5 +75,5 @@ test('line length is measured on the parentheses a lone nested value keeps', () 
       preferInline: false,
     });
   expect(link.format(options(7))).toBe('((b c))');
-  expect(link.format(options(6))).toBe('  (b c)');
+  expect(link.format(options(6))).toBe('((b c))');
 });

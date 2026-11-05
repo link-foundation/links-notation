@@ -93,3 +93,51 @@ fn shared_less_parentheses_round_trip() {
     }
     assert!(count > 0, "empty fixture corpus");
 }
+
+#[test]
+fn shared_nested_format() {
+    let mut count = 0;
+    for line in include_str!("../../../parity/nested-vectors.tsv")
+        .lines()
+        .filter(|line| !line.starts_with('#'))
+    {
+        let columns: Vec<_> = line.split('\t').collect();
+        assert_eq!(columns.len(), 3);
+        let links = parse_lino_to_links(&decode(columns[1])).unwrap();
+        assert_eq!(
+            links_notation::format_nested(&links),
+            decode(columns[2]),
+            "{}",
+            columns[0]
+        );
+        count += 1;
+    }
+    assert!(count > 0);
+}
+
+#[test]
+fn anonymous_threshold_round_trip() {
+    for input in ["a b c", "((b c))", "(a (b c))"] {
+        let links = parse_lino_to_links(input).unwrap();
+        for config in [
+            FormatConfig::builder()
+                .less_parentheses(true)
+                .max_inline_refs(Some(0))
+                .prefer_inline(false)
+                .build(),
+            FormatConfig::builder()
+                .less_parentheses(true)
+                .indent_long_lines(true)
+                .max_line_length(1)
+                .prefer_inline(false)
+                .build(),
+        ] {
+            let text = format_links_with_config(&links, &config);
+            assert_eq!(
+                tree(&parse_lino_to_links(&text).unwrap()),
+                tree(&links),
+                "{input}"
+            );
+        }
+    }
+}

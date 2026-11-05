@@ -114,3 +114,35 @@ TEST(SharedTextParityTests, SharedLessParenthesesRoundTrip) {
   }
   EXPECT_GT(count, 0u) << "empty fixture corpus";
 }
+
+TEST(SharedTextParityTests, SharedNestedFormat) {
+  std::size_t count = 0;
+  for (const std::string& line : lines(read_repository_file("parity/nested-vectors.tsv"))) {
+    if (line.empty() || line[0] == '#') continue;
+    const auto columns = split(line, '\t');
+    ASSERT_EQ(columns.size(), 3u);
+    const auto parsed = parse(text_from_hex(columns[1]));
+    const auto text = format_nested(parsed);
+    EXPECT_EQ(text, text_from_hex(columns[2])) << columns[0];
+    std::vector<Link> folded;
+    for (const auto& group : Parser().parse_groups(text)) folded.push_back(unindent(group));
+    EXPECT_EQ(folded, parsed) << columns[0];
+    ++count;
+  }
+  EXPECT_GT(count, 0u);
+}
+
+TEST(SharedTextParityTests, AnonymousThresholdRoundTrip) {
+  for (const std::string input : {"a b c", "((b c))", "(a (b c))"}) {
+    const auto links = parse(input);
+    FormatConfig refs;
+    refs.less_parentheses = true;
+    refs.max_inline_refs = 0;
+    refs.prefer_inline = false;
+    FormatConfig length = refs;
+    length.max_inline_refs = std::nullopt;
+    length.indent_long_lines = true;
+    length.max_line_length = 1;
+    for (const auto& config : {refs, length}) EXPECT_EQ(parse(format_links(links, config)), links) << input;
+  }
+}

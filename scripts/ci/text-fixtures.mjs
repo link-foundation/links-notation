@@ -64,3 +64,22 @@ export function renderSyntaxVectors(cases = syntaxFixtures) {
     "\n"
   );
 }
+
+// The nested writer has a separate output corpus: canonical parse keeps its
+// existing path semantics; group folding is checked by the four group APIs.
+export const nestedFixtures = JSON.parse(
+  readFileSync(
+    new URL("../../parity/nested-fixtures.json", import.meta.url),
+    "utf8",
+  ),
+);
+export function renderNestedVectors(cases = nestedFixtures) {
+  const hex = (value) => Buffer.from(value).toString("hex");
+  return (
+    "# id\tinput UTF-8 hex\tnested UTF-8 hex\n" +
+    cases
+      .map((f) => [f.id, hex(f.input), hex(f.nested)].join("\t"))
+      .join("\n") +
+    "\n"
+  );
+}

@@ -65,4 +65,39 @@ class SharedTextParityTest {
             assertEquals(case.expected, stream.end(), case.id)
         }
     }
+
+    @Test
+    fun sharedNestedFormat() {
+        fun decode(hex: String): String =
+            hex
+                .chunked(2)
+                .map { it.toInt(16).toByte() }
+                .toByteArray()
+                .decodeToString()
+        var count = 0
+        for (line in NESTED_VECTOR_LINES.filter { !it.startsWith("#") && it.isNotEmpty() }) {
+            val columns = line.split('\t')
+            assertEquals(3, columns.size)
+            val links = Parser().parse(decode(columns[1]))
+            val text = formatNested(links)
+            assertEquals(decode(columns[2]), text, columns[0])
+            assertEquals(links, Parser().parseGroups(text).map(::unindent), columns[0])
+            assertEquals(links, Parser().parseGroups(formatNested(links, "    ")).map(::unindent), columns[0])
+            count++
+        }
+        kotlin.test.assertTrue(count > 0)
+    }
+
+    @Test
+    fun anonymousThresholdRoundTrip() {
+        for (input in listOf("a b c", "((b c))", "(a (b c))")) {
+            val links = Parser().parse(input)
+            for (options in listOf(
+                FormatOptions(maxInlineRefs = 0, preferInline = false),
+                FormatOptions(maxLineLength = 1, indentLongLines = true, preferInline = false),
+            )) {
+                assertEquals(links, Parser().parse(formatLinks(links, options)), input)
+            }
+        }
+    }
 }

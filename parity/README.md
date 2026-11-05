@@ -137,3 +137,45 @@ structural translation can be explored in `experiments/`, but a translated
 module must prove semantic equivalence and have a regenerate-and-diff check
 before it replaces the working library. See `CONTRIBUTING.md` for the
 development order.
+
+## Recursive nested formatting
+
+`formatNested` writes leading atom values on the head line and eligible trailing
+links on indented lines, recursively. Only a trailing run moves, so an atom after
+a link retains its order. Parentheses stay for `()`, `((a b))`, and single-value
+anonymous lines anywhere within a bare `name:` subtree. The formatter uses the
+normal reference escaping, two spaces per level by default, and no final newline.
+Custom indentation must be a nonempty string of spaces; tabs are not indentation
+in the shared grammar.
+
+`nested-fixtures.json` pins the output for every existing text fixture and the
+issue-380 examples, including mixed value order and deeper bare-ID descendants.
+Its generated `nested-vectors.tsv` contains three fields: case ID, input UTF-8
+hex, nested output UTF-8 hex. All ten native suites check the same output.
+JS, C++, Swift, and Kotlin also read it with `parseGroups` and recursively append
+each group's children to the values of its element, checking the original tree.
+Ordinary `parse` retains its path-expansion semantics and is not the inverse of
+this format. The six bindings without a group parser keep that existing API
+boundary; they can write this interchange format for group-aware consumers.
+
+| Binding | Writer |
+| --- | --- |
+| JS | `formatNested(links, indent = '  ')` |
+| Python | `format_nested(links, indent="  ")` |
+| Rust | `format_nested(&links)`, `format_nested_with_indent(&links, "    ")` |
+| Go | `FormatNested(links)`, `FormatNestedWithIndent(links, "    ")` |
+| Java | `NestedFormat.formatNested(links)` (optional indentation overload) |
+| C# | `links.FormatNested()` (optional indentation argument) |
+| PHP | `Formatter::formatNested($links, $indent = '  ')` |
+| C++ | `format_nested(links, indent = "  ")` |
+| Swift | `formatNested(links, indent: "  ")` |
+| Kotlin | `formatNested(links, indent = "  ")` |
+
+Invalid indentation raises a host-language error (JS, Python, Java, C#, PHP,
+C++, Kotlin), a panic (Go, Rust), or a precondition failure (Swift). The writer
+never groups consecutive IDs or uses line-length thresholds. Existing threshold
+formatters keep anonymous links inline because a headless indented list reads
+back as separate links. Java has no threshold formatter, as documented above.
+The existing exclusions for models that cannot read back from inline formatting
+(empty links used as values, and named empty-value links used as values) apply
+here too. A named empty-value root is written as `name:`.

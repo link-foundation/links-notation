@@ -66,4 +66,30 @@ final class SharedTextParityTests: XCTestCase {
             XCTAssertEqual(try Parser().parse(lessParentheses), expected, fixture.id)
         }
     }
+    func testSharedNestedFormat() throws {
+        struct NestedCase: Decodable { let id: String; let input: String; let nested: String }
+        let data = try Data(contentsOf: repositoryRoot.appendingPathComponent("parity/nested-fixtures.json"))
+        let cases = try JSONDecoder().decode([NestedCase].self, from: data)
+        XCTAssertFalse(cases.isEmpty)
+        for fixture in cases {
+            let links = try Parser().parse(fixture.input)
+            let text = formatNested(links)
+            XCTAssertEqual(text, fixture.nested, fixture.id)
+            XCTAssertEqual(try Parser().parseGroups(text).map(unindent), links, fixture.id)
+            XCTAssertEqual(
+                try Parser().parseGroups(formatNested(links, indent: "    ")).map(unindent), links, fixture.id)
+        }
+    }
+
+    func testAnonymousThresholdRoundTrip() throws {
+        for input in ["a b c", "((b c))", "(a (b c))"] {
+            let links = try Parser().parse(input)
+            for options in [
+                FormatOptions(maxInlineRefs: 0, preferInline: false),
+                FormatOptions(maxLineLength: 1, indentLongLines: true, preferInline: false),
+            ] {
+                XCTAssertEqual(try Parser().parse(formatLinks(links, options: options)), links, input)
+            }
+        }
+    }
 }

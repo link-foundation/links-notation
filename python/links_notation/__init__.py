@@ -26,6 +26,7 @@ from .cst import CstKind, CstNode, build_cst
 from .format_config import FormatConfig
 from .formatter import format_links
 from .link import Link
+from .nested_format import format_nested
 from .parser import DEFAULT_MAX_DEPTH, ParseError, Parser
 from .quotes import reference_quote
 from .reference_literal import decode_reference_literal, encode_reference_literal
@@ -76,6 +77,7 @@ __all__ = [
     "StreamParser",
     "StreamPosition",
     "format_links",
+    "format_nested",
     "parse_async_chunks",
     "parse_chunks",
     "FormatConfig",
