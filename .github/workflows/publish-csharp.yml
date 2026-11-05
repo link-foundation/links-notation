@@ -52,7 +52,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: csharp/global.json
       - name: Check if version already published to NuGet.org
@@ -193,7 +193,7 @@ jobs:
           name: csharp-pdf
           path: csharp/pdf-artifact
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: csharp/global.json
       - name: Install DocFX
