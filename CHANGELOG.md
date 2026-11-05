@@ -17,6 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Make indented ID reference leaves in `parseGroups` agree with `parse`, while
+  keeping each ID element's values empty and its children separate, in JS,
+  C++, Swift and Kotlin. Prepare 0.30.2; see
+  [the release fragment](changelog.d/381.md) and
+  [issue 381](https://github.com/link-foundation/links-notation/issues/381).
 - Keep the parentheses of a lone nested value and of an empty link when
   formatting with less parentheses, so the text reads back as the same link, in
   all ten bindings. Prepare 0.30.1; see

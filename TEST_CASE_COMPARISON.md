@@ -19,15 +19,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
 | Python | 277 | 27 |
-| JavaScript | 343 | 32 |
+| JavaScript | 347 | 33 |
 | Rust | 428 | 32 |
 | C# | 323 | 30 |
 | Go | 165 | 20 |
 | Java | 213 | 19 |
 | PHP | 263 | 26 |
-| C++ | 377 | 32 |
-| Swift | 346 | 35 |
-| Kotlin | 355 | 33 |
+| C++ | 378 | 32 |
+| Swift | 347 | 35 |
+| Kotlin | 356 | 33 |
 
 ---
 
@@ -401,6 +401,17 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | unescaping uses the grammar and never decodes already parsed  i ds again | ❌ | [✅](js/tests/IndentedDocument.test.js#L145) | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/indented_document_tests.cpp#L134) | [✅](swift/Tests/LinksNotationTests/IndentedDocumentTests.swift#L151) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/IndentedDocumentTest.kt#L151) |
 
 **Category totals:** Python: 0, JavaScript: 14, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0, C++: 14, Swift: 14, Kotlin: 14
+
+## Indented Id Groups
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
+|-----------|---|---|---|---|---|---|---|---|---|---|
+| a bare  i d group is a self reference with an empty value list | ❌ | [✅](js/tests/IndentedIdGroups.test.js#L37) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| indented  i d groups fold to the same links as parse (#381) | ❌ | [✅](js/tests/IndentedIdGroups.test.js#L18) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| ordinary heads retain one value child links and path expansion | ❌ | [✅](js/tests/IndentedIdGroups.test.js#L59) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| reference children keep syntax metadata and explicit parentheses | ❌ | [✅](js/tests/IndentedIdGroups.test.js#L48) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+**Category totals:** Python: 0, JavaScript: 4, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0, C++: 0, Swift: 0, Kotlin: 0
 
 ## Indented Id Nested Values
 
@@ -934,14 +945,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
 |-----------|---|---|---|---|---|---|---|---|---|---|
-| every corpus case streamed one character at a time reads the same | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L32) |
+| every corpus case streamed one character at a time reads the same | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L61) |
+| indented id groups agree with parse | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](cpp/tests/shared_text_parity_tests.cpp#L36) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L13) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L21) |
 | less parentheses keeps the parentheses of a lone nested value | ❌ | [✅](js/tests/SharedTextParity.test.js#L54) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | less parentheses keeps the parentheses of an empty link | ❌ | [✅](js/tests/SharedTextParity.test.js#L61) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | line length is measured on the parentheses a lone nested value keeps | ❌ | [✅](js/tests/SharedTextParity.test.js#L68) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| shared less parentheses round trip | [✅](python/tests/test_shared_text_parity.py#L30) | [✅](js/tests/SharedTextParity.test.js#L35) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L72) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L37) | [✅](go/shared_text_parity_test.go#L79) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L63) | [✅](php/tests/SharedTextParityTest.php#L53) | [✅](cpp/tests/shared_text_parity_tests.cpp#L58) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L29) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L21) |
-| shared text parity | [✅](python/tests/test_shared_text_parity.py#L18) | [✅](js/tests/SharedTextParity.test.js#L21) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L44) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L16) | [✅](go/shared_text_parity_test.go#L48) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L37) | [✅](php/tests/SharedTextParityTest.php#L33) | [✅](cpp/tests/shared_text_parity_tests.cpp#L29) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L8) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L13) |
+| shared less parentheses round trip | [✅](python/tests/test_shared_text_parity.py#L30) | [✅](js/tests/SharedTextParity.test.js#L35) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L72) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L37) | [✅](go/shared_text_parity_test.go#L79) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L63) | [✅](php/tests/SharedTextParityTest.php#L53) | [✅](cpp/tests/shared_text_parity_tests.cpp#L100) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L55) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L50) |
+| shared text parity | [✅](python/tests/test_shared_text_parity.py#L18) | [✅](js/tests/SharedTextParity.test.js#L21) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L44) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L16) | [✅](go/shared_text_parity_test.go#L48) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L37) | [✅](php/tests/SharedTextParityTest.php#L33) | [✅](cpp/tests/shared_text_parity_tests.cpp#L71) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L34) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L42) |
 
-**Category totals:** Python: 2, JavaScript: 5, Rust: 2, C#: 2, Go: 2, Java: 2, PHP: 2, C++: 2, Swift: 2, Kotlin: 3
+**Category totals:** Python: 2, JavaScript: 5, Rust: 2, C#: 2, Go: 2, Java: 2, PHP: 2, C++: 3, Swift: 3, Kotlin: 4
 
 ## Single Line Parser
 
@@ -1346,6 +1358,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
 - unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
 
+**Indented Id Groups** (4 missing):
+- abareidgroupisaselfreferencewithanemptyvaluelist
+- indentedidgroupsfoldtothesamelinksasparse 381
+- ordinaryheadsretainonevaluechildlinksandpathexpansion
+- referencechildrenkeepsyntaxmetadataandexplicitparentheses
+
 **Indented Id Syntax** (3 missing):
 - emptyindentedidworks
 - equivalencecomprehensive
@@ -1615,8 +1633,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedinputsarerecoveredfromtheircst
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (4 missing):
+**Shared Text Parity** (5 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- indentedidgroupsagreewithparse
 - lessparentheseskeepstheparenthesesofalonenestedvalue
 - lessparentheseskeepstheparenthesesofanemptylink
 - linelengthismeasuredontheparenthesesalonenestedvaluekeeps
@@ -1729,7 +1748,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 513 tests**
+**Total missing: 518 tests**
 
 ### JavaScript Missing Tests
 
@@ -2139,8 +2158,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedinputsarerecoveredfromtheircst
 - sharedsyntaxparity
 
-**Shared Text Parity** (1 missing):
+**Shared Text Parity** (2 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- indentedidgroupsagreewithparse
 
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
@@ -2249,7 +2269,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 448 tests**
+**Total missing: 449 tests**
 
 ### Rust Missing Tests
 
@@ -2417,6 +2437,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - publicgroupspreserveimmediatechildrenanddeeperindentation
 - unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
 - unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
+
+**Indented Id Groups** (4 missing):
+- abareidgroupisaselfreferencewithanemptyvaluelist
+- indentedidgroupsfoldtothesamelinksasparse 381
+- ordinaryheadsretainonevaluechildlinksandpathexpansion
+- referencechildrenkeepsyntaxmetadataandexplicitparentheses
 
 **Indented Id Syntax** (3 missing):
 - emptyindentedidworks
@@ -2608,8 +2634,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedinputsarerecoveredfromtheircst
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (4 missing):
+**Shared Text Parity** (5 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- indentedidgroupsagreewithparse
 - lessparentheseskeepstheparenthesesofalonenestedvalue
 - lessparentheseskeepstheparenthesesofanemptylink
 - linelengthismeasuredontheparenthesesalonenestedvaluekeeps
@@ -2680,7 +2707,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 363 tests**
+**Total missing: 368 tests**
 
 ### C# Missing Tests
 
@@ -2856,6 +2883,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - publicgroupspreserveimmediatechildrenanddeeperindentation
 - unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
 - unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
+
+**Indented Id Groups** (4 missing):
+- abareidgroupisaselfreferencewithanemptyvaluelist
+- indentedidgroupsfoldtothesamelinksasparse 381
+- ordinaryheadsretainonevaluechildlinksandpathexpansion
+- referencechildrenkeepsyntaxmetadataandexplicitparentheses
 
 **Indented Id Syntax** (3 missing):
 - emptyindentedidworks
@@ -3108,8 +3141,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedinputsarerecoveredfromtheircst
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (4 missing):
+**Shared Text Parity** (5 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- indentedidgroupsagreewithparse
 - lessparentheseskeepstheparenthesesofalonenestedvalue
 - lessparentheseskeepstheparenthesesofanemptylink
 - linelengthismeasuredontheparenthesesalonenestedvaluekeeps
@@ -3223,7 +3257,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 467 tests**
+**Total missing: 472 tests**
 
 ### Go Missing Tests
 
@@ -3461,6 +3495,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - publicgroupspreserveimmediatechildrenanddeeperindentation
 - unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
 - unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
+
+**Indented Id Groups** (4 missing):
+- abareidgroupisaselfreferencewithanemptyvaluelist
+- indentedidgroupsfoldtothesamelinksasparse 381
+- ordinaryheadsretainonevaluechildlinksandpathexpansion
+- referencechildrenkeepsyntaxmetadataandexplicitparentheses
 
 **Indented Id Syntax** (14 missing):
 - basicindentedidsyntax
@@ -3793,8 +3833,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - rawreferencesandconcretesyntaxtrees
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (4 missing):
+**Shared Text Parity** (5 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- indentedidgroupsagreewithparse
 - lessparentheseskeepstheparenthesesofalonenestedvalue
 - lessparentheseskeepstheparenthesesofanemptylink
 - linelengthismeasuredontheparenthesesalonenestedvaluekeeps
@@ -3932,7 +3973,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 621 tests**
+**Total missing: 626 tests**
 
 ### Java Missing Tests
 
@@ -4165,6 +4206,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - publicgroupspreserveimmediatechildrenanddeeperindentation
 - unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
 - unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
+
+**Indented Id Groups** (4 missing):
+- abareidgroupisaselfreferencewithanemptyvaluelist
+- indentedidgroupsfoldtothesamelinksasparse 381
+- ordinaryheadsretainonevaluechildlinksandpathexpansion
+- referencechildrenkeepsyntaxmetadataandexplicitparentheses
 
 **Indented Id Syntax** (14 missing):
 - basicindentedidsyntax
@@ -4474,8 +4521,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedsyntaxparity
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (4 missing):
+**Shared Text Parity** (5 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- indentedidgroupsagreewithparse
 - lessparentheseskeepstheparenthesesofalonenestedvalue
 - lessparentheseskeepstheparenthesesofanemptylink
 - linelengthismeasuredontheparenthesesalonenestedvaluekeeps
@@ -4597,7 +4645,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 577 tests**
+**Total missing: 582 tests**
 
 ### PHP Missing Tests
 
@@ -4807,6 +4855,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - publicgroupspreserveimmediatechildrenanddeeperindentation
 - unescapingdecodesversionedliteralswithoutdecodingparseddocumentidstwice
 - unescapingusesthegrammarandneverdecodesalreadyparsedidsagain
+
+**Indented Id Groups** (4 missing):
+- abareidgroupisaselfreferencewithanemptyvaluelist
+- indentedidgroupsfoldtothesamelinksasparse 381
+- ordinaryheadsretainonevaluechildlinksandpathexpansion
+- referencechildrenkeepsyntaxmetadataandexplicitparentheses
 
 **Indented Id Syntax** (3 missing):
 - emptyindentedidshouldwork
@@ -5074,8 +5128,9 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedsyntaxparity
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (4 missing):
+**Shared Text Parity** (5 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- indentedidgroupsagreewithparse
 - lessparentheseskeepstheparenthesesofalonenestedvalue
 - lessparentheseskeepstheparenthesesofanemptylink
 - linelengthismeasuredontheparenthesesalonenestedvaluekeeps
@@ -5204,7 +5259,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 527 tests**
+**Total missing: 532 tests**
 
 ### C++ Missing Tests
 
@@ -5344,6 +5399,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 **Empty Reference** (2 missing):
 - nquotedelimitedemptyisstillempty
 - singlespacestillreadsasaspace
+
+**Indented Id Groups** (4 missing):
+- abareidgroupisaselfreferencewithanemptyvaluelist
+- indentedidgroupsfoldtothesamelinksasparse 381
+- ordinaryheadsretainonevaluechildlinksandpathexpansion
+- referencechildrenkeepsyntaxmetadataandexplicitparentheses
 
 **Indented Id Syntax** (3 missing):
 - emptyindentedidworks
@@ -5682,7 +5743,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 414 tests**
+**Total missing: 418 tests**
 
 ### Swift Missing Tests
 
@@ -5868,6 +5929,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - formatlinkwithmaxinlinerefsintegration
 - formatroundtripwithconfigintegration
 - formatsinglerefwithconfig
+
+**Indented Id Groups** (4 missing):
+- abareidgroupisaselfreferencewithanemptyvaluelist
+- indentedidgroupsfoldtothesamelinksasparse 381
+- ordinaryheadsretainonevaluechildlinksandpathexpansion
+- referencechildrenkeepsyntaxmetadataandexplicitparentheses
 
 **Indented Id Syntax** (3 missing):
 - emptyindentedidworks
@@ -6195,7 +6262,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 445 tests**
+**Total missing: 449 tests**
 
 ### Kotlin Missing Tests
 
@@ -6386,6 +6453,12 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - formatlinkwithmaxinlinerefsintegration
 - formatroundtripwithconfigintegration
 - formatsinglerefwithconfig
+
+**Indented Id Groups** (4 missing):
+- abareidgroupisaselfreferencewithanemptyvaluelist
+- indentedidgroupsfoldtothesamelinksasparse 381
+- ordinaryheadsretainonevaluechildlinksandpathexpansion
+- referencechildrenkeepsyntaxmetadataandexplicitparentheses
 
 **Indented Id Syntax** (3 missing):
 - emptyindentedidworks
@@ -6703,5 +6776,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 436 tests**
+**Total missing: 440 tests**
 

@@ -17,7 +17,7 @@ version number, so add the repository to your package's dependencies:
 ```swift
 // Package.swift
 dependencies: [
-    .package(url: "https://github.com/link-foundation/links-notation.git", from: "0.30.1"),
+    .package(url: "https://github.com/link-foundation/links-notation.git", from: "0.30.2"),
 ],
 targets: [
     .target(
@@ -125,6 +125,13 @@ from 1, and columns and offsets are in UTF-16 code units, as in JavaScript.
 
 `parseGroups` keeps each line's link together with the lines indented under
 it, as `LinksGroup(element, children:)`.
+
+Within an indented ID such as `x:\n  a\n  b`, the `x:` element has an empty
+value list and its children are references `a` and `b`. Folding the children
+into the element gives `(x: a b)`, as canonical `parse` does. Explicit `(a)`
+keeps its one-value link, and ordinary heads such as `x: kind` keep their
+existing child links and path expansion. Since 0.30.2, access a reference
+leaf as `child.element`, rather than `child.element.values[0]`.
 
 ### Syntax Metadata and the Concrete Syntax Tree
 

@@ -17,7 +17,7 @@ iOS 16+ и Linux.
 ```swift
 // Package.swift
 dependencies: [
-    .package(url: "https://github.com/link-foundation/links-notation.git", from: "0.30.1"),
+    .package(url: "https://github.com/link-foundation/links-notation.git", from: "0.30.2"),
 ],
 targets: [
     .target(
@@ -127,6 +127,13 @@ JavaScript.
 
 `parseGroups` хранит связь каждой строки вместе со строками, вложенными под неё
 отступом, как `LinksGroup(element, children:)`.
+
+Для отступного ID, например `x:\n  a\n  b`, элемент `x:` имеет пустой
+список значений, а его дети — ссылки `a` и `b`. Свёртка детей в значения
+элемента даёт `(x: a b)`, как канонический `parse`. Явное `(a)` сохраняет
+связь с одним значением; обычный заголовок `x: kind` сохраняет прежние
+дочерние связи и развёртку путей. Начиная с 0.30.2, ссылка в листе доступна
+как `child.element`, а не `child.element.values[0]`.
 
 ### Синтаксические метаданные и конкретное синтаксическое дерево
 

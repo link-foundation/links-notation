@@ -160,6 +160,15 @@ This is equivalent to:
 (3: papa loves mama)
 ```
 
+For indented IDs, `Parser.parse('x:\n  a\n  b')` reads `(x: a b)`.
+`parse` defines the canonical link values. In JavaScript, C++, Swift and Kotlin,
+`parseGroups` exposes the indentation separately: the `x:` element is a self
+reference with an empty value list, and its children are references `a` and `b`.
+Folding those children into the element's values gives the same link as `parse`.
+Explicit `(a)` remains a one-value link. Under an ordinary head such as
+`x: kind`, child lines remain links and `parse` expands indentation into paths.
+See the [JavaScript folding example](js/README.md#indented-id-groups).
+
 #### Multi-line Groups
 
 A parenthesized group opens a *nested context*: its body starts fresh at
@@ -321,15 +330,15 @@ All ten language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP, C
 | Language | Tests | Test categories |
 | --- | --- | --- |
 | Python | 277 | 27 |
-| JavaScript | 343 | 32 |
+| JavaScript | 347 | 33 |
 | Rust | 428 | 32 |
 | C# | 323 | 30 |
 | Go | 165 | 20 |
 | Java | 213 | 19 |
 | PHP | 263 | 26 |
-| C++ | 377 | 32 |
-| Swift | 346 | 35 |
-| Kotlin | 355 | 33 |
+| C++ | 378 | 32 |
+| Swift | 347 | 35 |
+| Kotlin | 356 | 33 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files
