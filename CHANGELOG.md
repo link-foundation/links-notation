@@ -17,6 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Keep the parentheses of a lone nested value and of an empty link when
+  formatting with less parentheses, so the text reads back as the same link, in
+  all ten bindings. Prepare 0.30.1; see
+  [the release fragment](changelog.d/379.md) and
+  [issue 379](https://github.com/link-foundation/links-notation/issues/379).
 - Bundle the JavaScript package for browsers without an `events` polyfill.
   Prepare 0.27.1; see [the release fragment](changelog.d/351.md) and
   [issue 351](https://github.com/link-foundation/links-notation/issues/351).
