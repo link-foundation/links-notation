@@ -18,6 +18,12 @@ std::string join(const std::vector<std::string>& parts, std::string_view separat
   return result;
 }
 
+// The parentheses of an anonymous link are what nest a lone value that has
+// values: "((b c))" without them is "(b c)", a different link.
+bool has_lone_nested_value(const std::vector<Link>& values) {
+  return values.size() == 1 && !values.front().values.empty();
+}
+
 bool all_simple(const std::vector<Link>& values) {
   for (const Link& value : values) {
     if (!value.values.empty()) return false;
@@ -159,7 +165,7 @@ std::string Link::values_string() const {
 }
 
 std::string Link::format(bool less_parentheses, bool compound) const {
-  if (!id && values.empty()) return less_parentheses ? "" : "()";
+  if (!id && values.empty()) return "()";
 
   if (values.empty()) {
     const std::string escaped = escape_reference(id);
@@ -169,7 +175,9 @@ std::string Link::format(bool less_parentheses, bool compound) const {
 
   const std::string formatted_values = values_string();
   if (!id) {
-    if (less_parentheses) return all_simple(values) ? escaped_ids(values) : formatted_values;
+    if (less_parentheses && !has_lone_nested_value(values)) {
+      return all_simple(values) ? escaped_ids(values) : formatted_values;
+    }
     return "(" + formatted_values + ")";
   }
 
@@ -188,7 +196,8 @@ std::string Link::format(const FormatConfig& config, bool compound) const {
       const std::string with_colon = escape_reference(id) + ": " + formatted_values;
       test_line = config.less_parentheses ? with_colon : "(" + with_colon + ")";
     } else {
-      test_line = config.less_parentheses ? formatted_values : "(" + formatted_values + ")";
+      test_line =
+          config.less_parentheses && !has_lone_nested_value(values) ? formatted_values : "(" + formatted_values + ")";
     }
     should_indent = config.should_indent_by_length(test_line);
   }

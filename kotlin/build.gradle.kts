@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "io.github.link-foundation"
-version = "0.30.0"
+version = "0.30.1"
 
 // Android needs an SDK. CI runners have one; elsewhere the Android target is
 // left out rather than failing the build of every other target.
@@ -101,6 +101,11 @@ abstract class GenerateParityCases : DefaultTask() {
                 .append(",\n")
             val format = case["format"] as String?
             out.append("        format = ").append(if (format == null) "null" else literal(format)).append(",\n")
+            val lessParentheses = case["lessParentheses"] as String?
+            out
+                .append("        lessParentheses = ")
+                .append(if (lessParentheses == null) "null" else literal(lessParentheses))
+                .append(",\n")
             out.append("        error = ").append(case["error"] == true).append(",\n")
             val code = case["code"] as String?
             out.append("        code = ").append(if (code == null) "null" else literal(code)).append(",\n")

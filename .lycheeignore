@@ -3,3 +3,7 @@
 ^https://www\.npmjs\.com/
 ^https://stackoverflow\.com/
 
+# Answers 403 "Access Denied" to GitHub runners (issue 379, run 42020895190), and
+# to curl and a headless browser on a data-centre host, for its home page as well.
+# Whether the alert itself still opens elsewhere could not be checked from there.
+^https://www\.cisa\.gov/

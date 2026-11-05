@@ -196,7 +196,7 @@ export class Link {
     // Original implementation for backward compatibility
     // Empty link
     if (this.id === null && (!this.values || this.values.length === 0)) {
-      return lessParentheses ? '' : '()';
+      return '()';
     }
 
     // Link with only ID, no values
@@ -217,7 +217,7 @@ export class Link {
     // Link with values only (null id)
     if (this.id === null) {
       // For lessParentheses mode with simple values, don't wrap the whole thing
-      if (lessParentheses) {
+      if (lessParentheses && !this._hasLoneNestedValue()) {
         // Check if all values are simple (no nested values)
         const allSimple = this.values.every(
           (v) => !v.values || v.values.length === 0
@@ -289,6 +289,16 @@ export class Link {
   }
 
   /**
+   * Whether this link holds exactly one link that has values. The parentheses
+   * of an anonymous link are what nest such a value: `((b c))` without them is
+   * `(b c)`, a different link, so lessParentheses has to keep them.
+   * @returns {boolean} True if the only value has values of its own
+   */
+  _hasLoneNestedValue() {
+    return this.values.length === 1 && this.values[0].values?.length > 0;
+  }
+
+  /**
    * Format the link using a FormatOptions object
    * @param {FormatOptions} options - FormatOptions object with formatting options
    * @param {boolean} isCompoundValue - If true, this is a value in a compound link
@@ -297,7 +307,7 @@ export class Link {
   _formatWithOptions(options, isCompoundValue = false) {
     // Empty link
     if (this.id === null && (!this.values || this.values.length === 0)) {
-      return options.lessParentheses ? '' : '()';
+      return '()';
     }
 
     // Link with only ID, no values
@@ -325,7 +335,10 @@ export class Link {
           ? `${idStr}: ${valuesStr}`
           : `(${idStr}: ${valuesStr})`;
       } else {
-        testLine = options.lessParentheses ? valuesStr : `(${valuesStr})`;
+        testLine =
+          options.lessParentheses && !this._hasLoneNestedValue()
+            ? valuesStr
+            : `(${valuesStr})`;
       }
 
       if (options.shouldIndentByLength(testLine)) {
@@ -343,7 +356,7 @@ export class Link {
 
     // Link with values only (null id)
     if (this.id === null) {
-      if (options.lessParentheses) {
+      if (options.lessParentheses && !this._hasLoneNestedValue()) {
         const allSimple = this.values.every(
           (v) => !v.values || v.values.length === 0
         );

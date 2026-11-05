@@ -153,7 +153,7 @@ class Link:
         # Original implementation for backward compatibility
         # Empty link
         if self.id is None and not self.values:
-            return "" if less_parentheses else "()"
+            return "()"
 
         # Link with only ID, no values
         if not self.values:
@@ -168,7 +168,7 @@ class Link:
 
         # Link with values only (null id)
         if self.id is None:
-            if less_parentheses:
+            if less_parentheses and not self._has_lone_nested_value():
                 # Check if all values are simple (no nested values)
                 all_simple = all(not v.values for v in self.values)
                 if all_simple:
@@ -212,6 +212,16 @@ class Link:
         """Check if a string needs to be wrapped in parentheses."""
         return s and any(c in s for c in [" ", ":", "(", ")"])
 
+    def _has_lone_nested_value(self) -> bool:
+        """
+        Check whether this link holds exactly one link that has values.
+
+        The parentheses of an anonymous link are what nest such a value:
+        ``((b c))`` without them is ``(b c)``, a different link, so
+        less_parentheses has to keep them.
+        """
+        return len(self.values) == 1 and bool(self.values[0].values)
+
     def _format_with_config(self, config: "FormatConfig", is_compound_value: bool = False) -> str:
         """
         Format the link using a FormatConfig object.
@@ -229,7 +239,7 @@ class Link:
 
         # Empty link
         if self.id is None and not self.values:
-            return "" if config.less_parentheses else "()"
+            return "()"
 
         # Link with only ID, no values
         if not self.values:
@@ -251,7 +261,8 @@ class Link:
                 id_str = Link.escape_reference(self.id)
                 test_line = f"{id_str}: {values_str}" if config.less_parentheses else f"({id_str}: {values_str})"
             else:
-                test_line = values_str if config.less_parentheses else f"({values_str})"
+                keeps_parentheses = not config.less_parentheses or self._has_lone_nested_value()
+                test_line = f"({values_str})" if keeps_parentheses else values_str
 
             if config.should_indent_by_length(test_line):
                 should_indent = True
@@ -265,7 +276,7 @@ class Link:
 
         # Link with values only (null id)
         if self.id is None:
-            if config.less_parentheses:
+            if config.less_parentheses and not self._has_lone_nested_value():
                 all_simple = all(not v.values for v in self.values)
                 if all_simple:
                     return " ".join(Link.escape_reference(v.id) for v in self.values)

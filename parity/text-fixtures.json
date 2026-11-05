@@ -4,7 +4,8 @@
     "feature": "core-text",
     "input": "",
     "expected": [],
-    "format": ""
+    "format": "",
+    "lessParentheses": ""
   },
   {
     "id": "singlet",
@@ -21,7 +22,8 @@
         ]
       }
     ],
-    "format": "(alpha)"
+    "format": "(alpha)",
+    "lessParentheses": "alpha"
   },
   {
     "id": "tuple",
@@ -42,7 +44,8 @@
         ]
       }
     ],
-    "format": "(alpha beta)"
+    "format": "(alpha beta)",
+    "lessParentheses": "alpha beta"
   },
   {
     "id": "named",
@@ -63,7 +66,8 @@
         ]
       }
     ],
-    "format": "(root: alpha beta)"
+    "format": "(root: alpha beta)",
+    "lessParentheses": "root: alpha beta"
   },
   {
     "id": "nested",
@@ -89,7 +93,8 @@
         ]
       }
     ],
-    "format": "(root: (child: leaf) tail)"
+    "format": "(root: (child: leaf) tail)",
+    "lessParentheses": "root: (child: leaf) tail"
   },
   {
     "id": "indent",
@@ -115,7 +120,8 @@
         ]
       }
     ],
-    "format": "(root: (child: leaf) tail)"
+    "format": "(root: (child: leaf) tail)",
+    "lessParentheses": "root: (child: leaf) tail"
   },
   {
     "id": "context",
@@ -163,7 +169,8 @@
         ]
       }
     ],
-    "format": "(value ((id 1) (label one)))"
+    "format": "(value ((id 1) (label one)))",
+    "lessParentheses": "value ((id 1) (label one))"
   },
   {
     "id": "quotes",
@@ -184,7 +191,8 @@
         ]
       }
     ],
-    "format": "('a a': 'b b' 'c c')"
+    "format": "('a a': 'b b' 'c c')",
+    "lessParentheses": "('a a': 'b b' 'c c')"
   },
   {
     "id": "empty-ref",
@@ -205,7 +213,8 @@
         ]
       }
     ],
-    "format": "(root: ~1{} ~1{})"
+    "format": "(root: ~1{} ~1{})",
+    "lessParentheses": "root: ~1{} ~1{}"
   },
   {
     "id": "unicode",
@@ -226,7 +235,8 @@
         ]
       }
     ],
-    "format": "(根: café 🙂)"
+    "format": "(根: café 🙂)",
+    "lessParentheses": "根: café 🙂"
   },
   {
     "id": "comments",
@@ -243,7 +253,8 @@
         ]
       }
     ],
-    "format": "(root: value)"
+    "format": "(root: value)",
+    "lessParentheses": "root: value"
   },
   {
     "id": "quote-runs",
@@ -260,7 +271,8 @@
         ]
       }
     ],
-    "format": "(root: `has ' and \" quotes`)"
+    "format": "(root: `has ' and \" quotes`)",
+    "lessParentheses": "root: `has ' and \" quotes`"
   },
   {
     "id": "multiline",
@@ -277,7 +289,8 @@
         ]
       }
     ],
-    "format": "(root: ~1{6c696e65310a6c696e6532})"
+    "format": "(root: ~1{6c696e65310a6c696e6532})",
+    "lessParentheses": "root: ~1{6c696e65310a6c696e6532}"
   },
   {
     "id": "literal",
@@ -294,6 +307,318 @@
         ]
       }
     ],
-    "format": "(root: ~1{610062})"
+    "format": "(root: ~1{610062})",
+    "lessParentheses": "root: ~1{610062}"
+  },
+  {
+    "id": "less-parentheses-lone-nested",
+    "feature": "less-parentheses",
+    "input": "((b c))",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "b",
+                "values": []
+              },
+              {
+                "id": "c",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "((b c))",
+    "lessParentheses": "((b c))"
+  },
+  {
+    "id": "less-parentheses-lone-singlet",
+    "feature": "less-parentheses",
+    "input": "((b))",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "b",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "((b))",
+    "lessParentheses": "((b))"
+  },
+  {
+    "id": "less-parentheses-lone-named",
+    "feature": "less-parentheses",
+    "input": "((a: b))",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "a",
+            "values": [
+              {
+                "id": "b",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "((a: b))",
+    "lessParentheses": "((a: b))"
+  },
+  {
+    "id": "less-parentheses-lone-quoted",
+    "feature": "less-parentheses",
+    "input": "(('a b' c))",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "a b",
+                "values": []
+              },
+              {
+                "id": "c",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(('a b' c))",
+    "lessParentheses": "(('a b' c))"
+  },
+  {
+    "id": "less-parentheses-lone-deep",
+    "feature": "less-parentheses",
+    "input": "(((b c)))",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": null,
+                "values": [
+                  {
+                    "id": "b",
+                    "values": []
+                  },
+                  {
+                    "id": "c",
+                    "values": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(((b c)))",
+    "lessParentheses": "(((b c)))"
+  },
+  {
+    "id": "less-parentheses-lone-mixed",
+    "feature": "less-parentheses",
+    "input": "(((a b) c))",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": null,
+                "values": [
+                  {
+                    "id": "a",
+                    "values": []
+                  },
+                  {
+                    "id": "b",
+                    "values": []
+                  }
+                ]
+              },
+              {
+                "id": "c",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(((a b) c))",
+    "lessParentheses": "(((a b) c))"
+  },
+  {
+    "id": "less-parentheses-named-lone",
+    "feature": "less-parentheses",
+    "input": "(id: ((b c)))",
+    "expected": [
+      {
+        "id": "id",
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": null,
+                "values": [
+                  {
+                    "id": "b",
+                    "values": []
+                  },
+                  {
+                    "id": "c",
+                    "values": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(id: ((b c)))",
+    "lessParentheses": "id: ((b c))"
+  },
+  {
+    "id": "less-parentheses-empty-link",
+    "feature": "less-parentheses",
+    "input": "()",
+    "expected": [
+      {
+        "id": null,
+        "values": []
+      }
+    ],
+    "format": "()",
+    "lessParentheses": "()"
+  },
+  {
+    "id": "less-parentheses-several-nested",
+    "feature": "less-parentheses",
+    "input": "((b c) (d e))",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "b",
+                "values": []
+              },
+              {
+                "id": "c",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "d",
+                "values": []
+              },
+              {
+                "id": "e",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "((b c) (d e))",
+    "lessParentheses": "(b c) (d e)"
+  },
+  {
+    "id": "less-parentheses-trailing-nested",
+    "feature": "less-parentheses",
+    "input": "(a (b c))",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "a",
+            "values": []
+          },
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "b",
+                "values": []
+              },
+              {
+                "id": "c",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(a (b c))",
+    "lessParentheses": "a (b c)"
+  },
+  {
+    "id": "less-parentheses-leading-nested",
+    "feature": "less-parentheses",
+    "input": "((a) b)",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "a",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": "b",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "((a) b)",
+    "lessParentheses": "(a) b"
   }
 ]

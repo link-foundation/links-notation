@@ -23,7 +23,7 @@ namespace Link.Foundation.Links.Notation
             // Empty link
             if (link.Id == null && (link.Values == null || link.Values.Count == 0))
             {
-                return options.LessParentheses ? "" : "()";
+                return "()";
             }
 
             // Link with only ID, no values
@@ -53,7 +53,7 @@ namespace Link.Foundation.Links.Notation
                 }
                 else
                 {
-                    testLine = options.LessParentheses ? valuesStr : $"({valuesStr})";
+                    testLine = options.LessParentheses && !link.HasLoneNestedValue() ? valuesStr : $"({valuesStr})";
                 }
 
                 if (options.ShouldIndentByLength(testLine))
@@ -74,7 +74,7 @@ namespace Link.Foundation.Links.Notation
             // Link with values only (null id)
             if (link.Id == null)
             {
-                if (options.LessParentheses)
+                if (options.LessParentheses && !link.HasLoneNestedValue())
                 {
                     var allSimple = link.Values.All(v => v.Values == null || v.Values.Count == 0);
                     if (allSimple)
@@ -92,6 +92,16 @@ namespace Link.Foundation.Links.Notation
             return options.LessParentheses && !NeedsParentheses(link.Id?.ToString()) ?
                 withColon :
                 $"({withColon})";
+        }
+
+        /// <summary>
+        /// Whether the link holds exactly one link that has values. The parentheses of an
+        /// anonymous link are what nest such a value: ((b c)) without them is (b c), a
+        /// different link, so less parentheses has to keep them.
+        /// </summary>
+        internal static bool HasLoneNestedValue<TLinkAddress>(this Link<TLinkAddress> link)
+        {
+            return link.Values != null && link.Values.Count == 1 && link.Values[0].Values != null && link.Values[0].Values!.Count > 0;
         }
 
         /// <summary>

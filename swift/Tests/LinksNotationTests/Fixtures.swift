@@ -17,6 +17,8 @@ struct FixtureCase: Decodable {
     let input: String
     let expected: [ExpectedLink]?
     let format: String?
+    /// The exact text with less parentheses (`parity/text-fixtures.json` only).
+    let lessParentheses: String?
     /// `true` when the parser must refuse the input (differential vectors only).
     let error: Bool?
     /// `syntax-error` or `depth-exceeded`.

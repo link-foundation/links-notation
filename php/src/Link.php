@@ -223,7 +223,7 @@ class Link
 
         // Empty link
         if ($this->id === null && !$this->values) {
-            return $lessParentheses ? '' : '()';
+            return '()';
         }
 
         // Link with only id, no values
@@ -244,7 +244,7 @@ class Link
 
         // Link with values only (null id)
         if ($this->id === null) {
-            if ($lessParentheses) {
+            if ($lessParentheses && !$this->hasLoneNestedValue()) {
                 // Check if all values are simple (no nested values)
                 if ($this->allValuesAreSimple()) {
                     // Format each value without extra wrapping
@@ -311,7 +311,7 @@ class Link
     {
         // Empty link
         if ($this->id === null && !$this->values) {
-            return $config->lessParentheses ? '' : '()';
+            return '()';
         }
 
         // Link with only id, no values
@@ -339,7 +339,9 @@ class Link
                     ? $idString . ': ' . $valuesString
                     : '(' . $idString . ': ' . $valuesString . ')';
             } else {
-                $testLine = $config->lessParentheses ? $valuesString : '(' . $valuesString . ')';
+                $testLine = $config->lessParentheses && !$this->hasLoneNestedValue()
+                    ? $valuesString
+                    : '(' . $valuesString . ')';
             }
 
             if ($config->shouldIndentByLength($testLine)) {
@@ -357,7 +359,7 @@ class Link
 
         // Link with values only (null id)
         if ($this->id === null) {
-            if ($config->lessParentheses) {
+            if ($config->lessParentheses && !$this->hasLoneNestedValue()) {
                 if ($this->allValuesAreSimple()) {
                     return implode(
                         ' ',
@@ -409,6 +411,18 @@ class Link
     private function formatValues(): string
     {
         return implode(' ', array_map(fn (Link $value): string => $this->formatValue($value), $this->values));
+    }
+
+    /**
+     * Check whether this link holds exactly one link that has values.
+     *
+     * The parentheses of an anonymous link are what nest such a value: `((b c))`
+     * without them is `(b c)`, a different link, so lessParentheses has to keep
+     * them.
+     */
+    private function hasLoneNestedValue(): bool
+    {
+        return count($this->values) === 1 && $this->values[0]->values;
     }
 
     /**

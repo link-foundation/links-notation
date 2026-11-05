@@ -39,7 +39,7 @@ class SharedTextParityTest {
     for (String line : Files.readAllLines(Path.of("../parity/text-vectors.tsv"))) {
       if (line.startsWith("#")) continue;
       String[] columns = line.split("\t", -1);
-      assertEquals(4, columns.length);
+      assertEquals(5, columns.length);
       String input = decode(columns[1]);
       String formatted = decode(columns[3]);
       List<Link> parsed = new Parser().parse(input);
@@ -54,6 +54,21 @@ class SharedTextParityTest {
         stream.write(new String(Character.toChars(character)));
       }
       assertEquals(columns[2], tree(stream.finish()), columns[0]);
+      count++;
+    }
+    assertTrue(count > 0, "empty fixture corpus");
+  }
+
+  @Test
+  void sharedLessParenthesesRoundTrip() throws Exception {
+    int count = 0;
+    for (String line : Files.readAllLines(Path.of("../parity/text-vectors.tsv"))) {
+      if (line.startsWith("#")) continue;
+      String[] columns = line.split("\t", -1);
+      String input = decode(columns[1]);
+      String lessParentheses = decode(columns[4]);
+      assertEquals(lessParentheses, Link.formatLinks(new Parser().parse(input), true), columns[0]);
+      assertEquals(columns[2], tree(new Parser().parse(lessParentheses)), columns[0]);
       count++;
     }
     assertTrue(count > 0, "empty fixture corpus");

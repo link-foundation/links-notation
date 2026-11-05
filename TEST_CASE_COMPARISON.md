@@ -18,16 +18,16 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 276 | 27 |
-| JavaScript | 339 | 32 |
-| Rust | 427 | 32 |
-| C# | 322 | 30 |
-| Go | 164 | 20 |
-| Java | 212 | 19 |
-| PHP | 262 | 26 |
-| C++ | 376 | 32 |
-| Swift | 345 | 35 |
-| Kotlin | 354 | 33 |
+| Python | 277 | 27 |
+| JavaScript | 343 | 32 |
+| Rust | 428 | 32 |
+| C# | 323 | 30 |
+| Go | 165 | 20 |
+| Java | 213 | 19 |
+| PHP | 263 | 26 |
+| C++ | 377 | 32 |
+| Swift | 346 | 35 |
+| Kotlin | 355 | 33 |
 
 ---
 
@@ -852,7 +852,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
 |-----------|---|---|---|---|---|---|---|---|---|---|
 | corpus has every upstream case | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/ParityTests.swift#L10) | ❌ |
-| parse format and round trip every case | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/ParityTests.swift#L20) | ❌ |
+| parse format and round trip every case | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/ParityTests.swift#L26) | ❌ |
 
 **Category totals:** Python: 0, JavaScript: 0, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0, C++: 0, Swift: 2, Kotlin: 0
 
@@ -934,10 +934,14 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
 |-----------|---|---|---|---|---|---|---|---|---|---|
-| every corpus case streamed one character at a time reads the same | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L21) |
-| shared text parity | [✅](python/tests/test_shared_text_parity.py#L18) | [✅](js/tests/SharedTextParity.test.js#L15) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L41) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L16) | [✅](go/shared_text_parity_test.go#L23) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L37) | [✅](php/tests/SharedTextParityTest.php#L20) | [✅](cpp/tests/shared_text_parity_tests.cpp#L29) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L8) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L13) |
+| every corpus case streamed one character at a time reads the same | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L32) |
+| less parentheses keeps the parentheses of a lone nested value | ❌ | [✅](js/tests/SharedTextParity.test.js#L54) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| less parentheses keeps the parentheses of an empty link | ❌ | [✅](js/tests/SharedTextParity.test.js#L61) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| line length is measured on the parentheses a lone nested value keeps | ❌ | [✅](js/tests/SharedTextParity.test.js#L68) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| shared less parentheses round trip | [✅](python/tests/test_shared_text_parity.py#L30) | [✅](js/tests/SharedTextParity.test.js#L35) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L72) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L37) | [✅](go/shared_text_parity_test.go#L79) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L63) | [✅](php/tests/SharedTextParityTest.php#L53) | [✅](cpp/tests/shared_text_parity_tests.cpp#L58) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L29) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L21) |
+| shared text parity | [✅](python/tests/test_shared_text_parity.py#L18) | [✅](js/tests/SharedTextParity.test.js#L21) | [✅](rust/links-notation/tests/shared_text_parity_tests.rs#L44) | [✅](csharp/Link.Foundation.Links.Notation.Tests/SharedTextParityTests.cs#L16) | [✅](go/shared_text_parity_test.go#L48) | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/SharedTextParityTest.java#L37) | [✅](php/tests/SharedTextParityTest.php#L33) | [✅](cpp/tests/shared_text_parity_tests.cpp#L29) | [✅](swift/Tests/LinksNotationTests/SharedTextParityTests.swift#L8) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt#L13) |
 
-**Category totals:** Python: 1, JavaScript: 1, Rust: 1, C#: 1, Go: 1, Java: 1, PHP: 1, C++: 1, Swift: 1, Kotlin: 2
+**Category totals:** Python: 2, JavaScript: 5, Rust: 2, C#: 2, Go: 2, Java: 2, PHP: 2, C++: 2, Swift: 2, Kotlin: 3
 
 ## Single Line Parser
 
@@ -1611,8 +1615,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedinputsarerecoveredfromtheircst
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (1 missing):
+**Shared Text Parity** (4 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- lessparentheseskeepstheparenthesesofalonenestedvalue
+- lessparentheseskeepstheparenthesesofanemptylink
+- linelengthismeasuredontheparenthesesalonenestedvaluekeeps
 
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
@@ -1722,7 +1729,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
-**Total missing: 510 tests**
+**Total missing: 513 tests**
 
 ### JavaScript Missing Tests
 
@@ -2601,8 +2608,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedinputsarerecoveredfromtheircst
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (1 missing):
+**Shared Text Parity** (4 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- lessparentheseskeepstheparenthesesofalonenestedvalue
+- lessparentheseskeepstheparenthesesofanemptylink
+- linelengthismeasuredontheparenthesesalonenestedvaluekeeps
 
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
@@ -2670,7 +2680,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 360 tests**
+**Total missing: 363 tests**
 
 ### C# Missing Tests
 
@@ -3098,8 +3108,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedinputsarerecoveredfromtheircst
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (1 missing):
+**Shared Text Parity** (4 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- lessparentheseskeepstheparenthesesofalonenestedvalue
+- lessparentheseskeepstheparenthesesofanemptylink
+- linelengthismeasuredontheparenthesesalonenestedvaluekeeps
 
 **Single Line Parser** (3 missing):
 - parsequotedreferencesvalues
@@ -3210,7 +3223,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 464 tests**
+**Total missing: 467 tests**
 
 ### Go Missing Tests
 
@@ -3780,8 +3793,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - rawreferencesandconcretesyntaxtrees
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (1 missing):
+**Shared Text Parity** (4 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- lessparentheseskeepstheparenthesesofalonenestedvalue
+- lessparentheseskeepstheparenthesesofanemptylink
+- linelengthismeasuredontheparenthesesalonenestedvaluekeeps
 
 **Single Line Parser** (26 missing):
 - bugtest 1
@@ -3916,7 +3932,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 618 tests**
+**Total missing: 621 tests**
 
 ### Java Missing Tests
 
@@ -4458,8 +4474,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedsyntaxparity
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (1 missing):
+**Shared Text Parity** (4 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- lessparentheseskeepstheparenthesesofalonenestedvalue
+- lessparentheseskeepstheparenthesesofanemptylink
+- linelengthismeasuredontheparenthesesalonenestedvaluekeeps
 
 **Single Line Parser** (9 missing):
 - linkwithoutidmultiline
@@ -4578,7 +4597,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 574 tests**
+**Total missing: 577 tests**
 
 ### PHP Missing Tests
 
@@ -5055,8 +5074,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedsyntaxparity
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (1 missing):
+**Shared Text Parity** (4 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- lessparentheseskeepstheparenthesesofalonenestedvalue
+- lessparentheseskeepstheparenthesesofanemptylink
+- linelengthismeasuredontheparenthesesalonenestedvaluekeeps
 
 **Single Line Parser** (16 missing):
 - linkwithoutidmultiline
@@ -5182,7 +5204,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 524 tests**
+**Total missing: 527 tests**
 
 ### C++ Missing Tests
 
@@ -5542,8 +5564,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedsyntaxparity
 - sharedsyntaxparityrawreferencesandconcretesyntaxtrees
 
-**Shared Text Parity** (1 missing):
+**Shared Text Parity** (4 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- lessparentheseskeepstheparenthesesofalonenestedvalue
+- lessparentheseskeepstheparenthesesofanemptylink
+- linelengthismeasuredontheparenthesesalonenestedvaluekeeps
 
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
@@ -5657,7 +5682,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 411 tests**
+**Total missing: 414 tests**
 
 ### Swift Missing Tests
 
@@ -6057,8 +6082,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedinputsarerecoveredfromtheircst
 - sharedsyntaxparity
 
-**Shared Text Parity** (1 missing):
+**Shared Text Parity** (4 missing):
 - everycorpuscasestreamedonecharacteratatimereadsthesame
+- lessparentheseskeepstheparenthesesofalonenestedvalue
+- lessparentheseskeepstheparenthesesofanemptylink
+- linelengthismeasuredontheparenthesesalonenestedvaluekeeps
 
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
@@ -6167,7 +6195,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 442 tests**
+**Total missing: 445 tests**
 
 ### Kotlin Missing Tests
 
@@ -6564,6 +6592,11 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - sharedinputsarerecoveredfromtheircst
 - sharedsyntaxparity
 
+**Shared Text Parity** (3 missing):
+- lessparentheseskeepstheparenthesesofalonenestedvalue
+- lessparentheseskeepstheparenthesesofanemptylink
+- linelengthismeasuredontheparenthesesalonenestedvaluekeeps
+
 **Single Line Parser** (4 missing):
 - parsequotedreferencesvalues
 - quotedreferencesinlink
@@ -6670,5 +6703,5 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 433 tests**
+**Total missing: 436 tests**
 

@@ -87,9 +87,12 @@ export function checkParity(
     if (
       typeof fixture.input !== "string" ||
       typeof fixture.format !== "string" ||
+      typeof fixture.lessParentheses !== "string" ||
       !Array.isArray(fixture.expected)
     )
-      fail(`${fixture.id}: input, expected tree and format are required`);
+      fail(
+        `${fixture.id}: input, expected tree, format and lessParentheses are required`,
+      );
     function node(links) {
       for (const link of links) {
         if (

@@ -9,11 +9,12 @@ record source changes and regenerate the text vectors. Inventory hashes detect
 unreviewed source changes; they do not prove semantic equivalence.
 
 `text-fixtures.json` is the reviewed golden corpus. Each case has an input,
-expected recursive `{id, values}` tree, and exact default formatted output.
-Every language's native tests check parsing, formatting, round trips, and
-streamed input. Java and Rust consume `text-vectors.tsv`, generated only from
-that JSON: four tab-separated fields (case ID, input UTF-8 hex, expected tree,
-formatted UTF-8 hex). Tree nodes contain the ID's hex bytes and their children;
+expected recursive `{id, values}` tree, exact default formatted output, and
+exact output with less parentheses. Every language's native tests check parsing,
+formatting, round trips, and streamed input. Java, Rust and C++ consume
+`text-vectors.tsv`, generated only from that JSON: five tab-separated fields
+(case ID, input UTF-8 hex, expected tree, formatted UTF-8 hex, less parentheses
+UTF-8 hex). Tree nodes contain the ID's hex bytes and their children;
 `~` denotes null, while an empty ID remains distinct. CI verifies the two
 representations agree. Empty inputs and outputs are represented by empty fields.
 
@@ -22,6 +23,24 @@ IDs, Unicode, comments, quote runs, multiline strings, and version 1 reference
 literals. The manifest additionally points to native binary and depth limit
 suites. This is executable evidence for the listed contracts, not a claim that a
 finite fixture corpus proves every possible input equivalent.
+
+## Less parentheses
+
+Less parentheses leaves out parentheses only where the text still reads back as
+the same link: `parse(link.format(true))` gives `link`, as `parse(link.format())`
+does. An anonymous link keeps its parentheses when they are what the link is,
+so `((b c))` and `()` stay as they are, while `(a b)` becomes `a b`, `(a (b c))`
+becomes `a (b c)` and `((b c) (d e))` becomes `(b c) (d e)`. Every binding checks
+the text of each corpus case and that it reads back, on the boolean path and on
+the `FormatConfig` path where it has one.
+
+C#'s `Format(lessParentheses: true)` trims the parentheses from `ToString()`, so
+it writes `('a b': c)` as `'a b': c`, which reads back as the same link. It is
+checked for the round trip, and `FormatOptions` for the exact text.
+
+Links that do not read back from `format()` either are outside this contract:
+an empty link as a value (`(())`, `(() a)`), and a link with an ID and an empty
+value list (`(a:)`, read back as `(a)`).
 
 ## Syntax metadata and concrete syntax tree
 

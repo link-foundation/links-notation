@@ -523,11 +523,7 @@ impl<T: ToString + Clone> LiNo<T> {
             LiNo::Link { id, values } => {
                 // Empty link
                 if id.is_none() && values.is_empty() {
-                    return if config.less_parentheses {
-                        String::new()
-                    } else {
-                        "()".to_string()
-                    };
+                    return "()".to_string();
                 }
 
                 // Link with only ID, no values
@@ -541,11 +537,7 @@ impl<T: ToString + Clone> LiNo<T> {
                             format!("({})", escaped_id)
                         };
                     }
-                    return if config.less_parentheses {
-                        String::new()
-                    } else {
-                        "()".to_string()
-                    };
+                    return "()".to_string();
                 }
 
                 // Check if we should use indented format
@@ -567,7 +559,7 @@ impl<T: ToString + Clone> LiNo<T> {
                         } else {
                             format!("({}: {})", id_str, values_str)
                         }
-                    } else if config.less_parentheses {
+                    } else if config.less_parentheses && !has_lone_nested_value(values) {
                         values_str.clone()
                     } else {
                         format!("({})", values_str)
@@ -592,7 +584,7 @@ impl<T: ToString + Clone> LiNo<T> {
 
                 // Link with values only (null id)
                 if id.is_none() {
-                    if config.less_parentheses {
+                    if config.less_parentheses && !has_lone_nested_value(values) {
                         // Check if all values are simple (no nested values)
                         let all_simple = values.iter().all(|v| matches!(v, LiNo::Ref(_)));
                         if all_simple {
@@ -1337,6 +1329,13 @@ fn group_consecutive_links(links: &[LiNo<String>]) -> Vec<LiNo<String>> {
 /// Escape a reference string by adding quotes if necessary.
 fn escape_reference(reference: &str) -> String {
     reference_literal::format_reference(reference)
+}
+
+/// Whether a link holds exactly one link that has values. The parentheses of an
+/// anonymous link are what nest such a value: `((b c))` without them is `(b c)`,
+/// a different link, so `less_parentheses` has to keep them.
+fn has_lone_nested_value<T>(values: &[LiNo<T>]) -> bool {
+    matches!(values, [LiNo::Link { values: nested, .. }] if !nested.is_empty())
 }
 
 /// Check if a string needs to be wrapped in parentheses.

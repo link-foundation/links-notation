@@ -11,9 +11,20 @@ import kotlin.test.assertEquals
 class SharedTextParityTest {
     @Test
     fun sharedTextParity() {
-        assertEquals(14, PARITY_CASES.size)
+        assertEquals(25, PARITY_CASES.size)
         for (case in PARITY_CASES) {
             assertCase(case)
+        }
+    }
+
+    @Test
+    fun sharedLessParenthesesRoundTrip() {
+        val options = FormatOptions(lessParentheses = true)
+        for (case in PARITY_CASES) {
+            val parsed = Parser().parse(case.input)
+            assertEquals(case.lessParentheses, formatLinks(parsed, lessParentheses = true), case.id)
+            assertEquals(case.lessParentheses, formatLinks(parsed, options), case.id)
+            assertEquals(case.expected, Parser().parse(case.lessParentheses!!), case.id)
         }
     }
 

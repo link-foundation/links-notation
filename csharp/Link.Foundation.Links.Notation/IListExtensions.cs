@@ -36,8 +36,19 @@ namespace Link.Foundation.Links.Notation
             }
             else
             {
-                return string.Join(Environment.NewLine, links.Select(l => l.ToString().TrimSingle('(').TrimSingle(')')));
+                return string.Join(Environment.NewLine, links.Select(FormatWithLessParentheses));
             }
+        }
+
+        /// <summary>
+        /// Writes a link without its outer parentheses, unless they are what the link is:
+        /// an empty anonymous link, or an anonymous link that nests one link with values.
+        /// </summary>
+        private static string FormatWithLessParentheses<TLinkAddress>(Link<TLinkAddress> link)
+        {
+            var text = link.ToString();
+            var isEmpty = link.Id == null && (link.Values == null || link.Values.Count == 0);
+            return isEmpty || (link.Id == null && link.HasLoneNestedValue()) ? text : text.TrimSingle('(').TrimSingle(')');
         }
 
         /// <summary>

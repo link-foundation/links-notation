@@ -1,4 +1,7 @@
-use links_notation::{LiNo, StreamParser, format_links, parse_lino_to_links};
+use links_notation::format_config::FormatConfig;
+use links_notation::{
+    LiNo, StreamParser, format_links, format_links_with_config, parse_lino_to_links,
+};
 
 fn decode(hex: &str) -> String {
     String::from_utf8(
@@ -43,7 +46,7 @@ fn shared_text_parity() {
     let mut count = 0;
     for line in vectors.lines().filter(|line| !line.starts_with('#')) {
         let columns: Vec<_> = line.split('\t').collect();
-        assert_eq!(columns.len(), 4);
+        assert_eq!(columns.len(), 5);
         let input = decode(columns[1]);
         let formatted = decode(columns[3]);
         let parsed = parse_lino_to_links(&input).unwrap();
@@ -58,6 +61,32 @@ fn shared_text_parity() {
             tree(&stream.finish().unwrap()),
             columns[2],
             "{} stream",
+            columns[0]
+        );
+        count += 1;
+    }
+    assert!(count > 0, "empty fixture corpus");
+}
+
+#[test]
+fn shared_less_parentheses_round_trip() {
+    let config = FormatConfig::builder().less_parentheses(true).build();
+    let vectors = include_str!("../../../parity/text-vectors.tsv");
+    let mut count = 0;
+    for line in vectors.lines().filter(|line| !line.starts_with('#')) {
+        let columns: Vec<_> = line.split('\t').collect();
+        let less_parentheses = decode(columns[4]);
+        let parsed = parse_lino_to_links(&decode(columns[1])).unwrap();
+        assert_eq!(
+            format_links_with_config(&parsed, &config),
+            less_parentheses,
+            "{} format",
+            columns[0]
+        );
+        assert_eq!(
+            tree(&parse_lino_to_links(&less_parentheses).unwrap()),
+            columns[2],
+            "{} reparse",
             columns[0]
         );
         count += 1;

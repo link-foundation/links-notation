@@ -14,6 +14,12 @@ final class ParityTests: XCTestCase {
             [
                 "empty", "singlet", "tuple", "named", "nested", "indent", "context", "quotes",
                 "empty-ref", "unicode", "comments", "quote-runs", "multiline", "literal",
+                "less-parentheses-lone-nested", "less-parentheses-lone-singlet",
+                "less-parentheses-lone-named", "less-parentheses-lone-quoted",
+                "less-parentheses-lone-deep", "less-parentheses-lone-mixed",
+                "less-parentheses-named-lone", "less-parentheses-empty-link",
+                "less-parentheses-several-nested", "less-parentheses-trailing-nested",
+                "less-parentheses-leading-nested",
             ])
     }
 

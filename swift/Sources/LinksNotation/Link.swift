@@ -91,9 +91,9 @@ public struct Link: Hashable, Sendable {
     func format(_ lessParentheses: Bool, isCompoundValue: Bool) -> String {
         guard let id else {
             if values.isEmpty {
-                return lessParentheses ? "" : "()"
+                return "()"
             }
-            if lessParentheses {
+            if lessParentheses && !hasLoneNestedValue {
                 if values.allSatisfy({ $0.values.isEmpty }) {
                     return values.map { escapeReference($0.id) }.joined(separator: " ")
                 }
@@ -116,7 +116,7 @@ public struct Link: Hashable, Sendable {
     // `_formatWithOptions` of the JavaScript package.
     func format(_ options: FormatOptions, isCompoundValue: Bool) -> String {
         if id == nil && values.isEmpty {
-            return options.lessParentheses ? "" : "()"
+            return "()"
         }
         if values.isEmpty {
             let escapedId = escapeReference(id)
@@ -134,7 +134,7 @@ public struct Link: Hashable, Sendable {
                 let idString = escapeReference(id)
                 testLine = options.lessParentheses ? "\(idString): \(inline)" : "(\(idString): \(inline))"
             } else {
-                testLine = options.lessParentheses ? inline : "(\(inline))"
+                testLine = options.lessParentheses && !hasLoneNestedValue ? inline : "(\(inline))"
             }
             shouldIndent = options.shouldIndentByLength(testLine)
         }
@@ -143,7 +143,7 @@ public struct Link: Hashable, Sendable {
         }
 
         guard let id else {
-            if options.lessParentheses {
+            if options.lessParentheses && !hasLoneNestedValue {
                 if values.allSatisfy({ $0.values.isEmpty }) {
                     return values.map { escapeReference($0.id) }.joined(separator: " ")
                 }
@@ -162,6 +162,14 @@ public struct Link: Hashable, Sendable {
             return lines.joined(separator: "\n")
         }
         return (["\(escapeReference(id)):"] + lines).joined(separator: "\n")
+    }
+
+    /// Whether this link holds exactly one link that has values. The
+    /// parentheses of an anonymous link are what nest such a value: `((b c))`
+    /// without them is `(b c)`, a different link, so `lessParentheses` has to
+    /// keep them.
+    private var hasLoneNestedValue: Bool {
+        values.count == 1 && !values[0].values.isEmpty
     }
 
     private var formattedValues: String {
