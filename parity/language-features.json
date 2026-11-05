@@ -2292,6 +2292,79 @@
           ]
         }
       }
+    },
+    {
+      "id": "indented-id-groups",
+      "description": "Folding an indented ID group subtree agrees with canonical parse values; ID elements stay empty and reference leaves unwrap.",
+      "contract": "documented-exception",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/Parser.js"
+          ],
+          "evidence": [
+            "js/tests/IndentedIdGroups.test.js"
+          ]
+        },
+        "rust": {
+          "status": "exception",
+          "reason": "This parser has no parseGroups API. The common indented ID values remain covered by the ten-language shared text corpus.",
+          "documentation": "parity/README.md"
+        },
+        "python": {
+          "status": "exception",
+          "reason": "This parser has no parseGroups API. The common indented ID values remain covered by the ten-language shared text corpus.",
+          "documentation": "parity/README.md"
+        },
+        "java": {
+          "status": "exception",
+          "reason": "This parser has no parseGroups API. The common indented ID values remain covered by the ten-language shared text corpus.",
+          "documentation": "parity/README.md"
+        },
+        "go": {
+          "status": "exception",
+          "reason": "This parser has no parseGroups API. The common indented ID values remain covered by the ten-language shared text corpus.",
+          "documentation": "parity/README.md"
+        },
+        "csharp": {
+          "status": "exception",
+          "reason": "This parser has no parseGroups API. The common indented ID values remain covered by the ten-language shared text corpus.",
+          "documentation": "parity/README.md"
+        },
+        "php": {
+          "status": "exception",
+          "reason": "This parser has no parseGroups API. The common indented ID values remain covered by the ten-language shared text corpus.",
+          "documentation": "parity/README.md"
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/src/parser.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/shared_text_parity_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Parser.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/SharedTextParityTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/Parser.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/SharedTextParityTest.kt"
+          ]
+        }
+      }
     }
   ],
   "sources": {
@@ -2316,7 +2389,7 @@
         "js/src/quotes.js",
         "js/src/references.js"
       ],
-      "sha256": "dbf7f4d2af9346d30183b80aeb87656eef13c2ddf0e87e3619a1cf72ff1f4038"
+      "sha256": "b6b334587928ee78c761fc53b26eab5079b88a0596bd433fe21b45a08a38c41d"
     },
     "rust": {
       "files": [
@@ -2481,7 +2554,7 @@
         "cpp/src/unicode.cpp",
         "cpp/src/unicode.hpp"
       ],
-      "sha256": "57235f5a49844b70b78704038b98fbc45ed9a1d824070826121be6ecf26b84a0"
+      "sha256": "57f042f0b0507ca966714846dd6b3610602035a1c2addcc89aa7d1a2910b4ed5"
     },
     "swift": {
       "files": [
@@ -2499,7 +2572,7 @@
         "swift/Sources/LinksNotation/Quotes.swift",
         "swift/Sources/LinksNotation/StreamParser.swift"
       ],
-      "sha256": "0447f5f81ec69c0cda42038f8281d95d20963f8f2a61c055fa8e0773cd8872b1"
+      "sha256": "e22ef5a8f196e3aedd575e6adf60d02da2cdde78b4f4e524b7a3e61b92001a3d"
     },
     "kotlin": {
       "files": [
@@ -2521,7 +2594,7 @@
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/References.kt",
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/StreamParser.kt"
       ],
-      "sha256": "ff474609462a1c91500affb742561adf36a391e2e12788b9f67a296a6f6d5be5"
+      "sha256": "c15e40558620fa3cd47a52ebc491d4de86740cb74d02921138b6ef9b6e5726eb"
     }
   }
 }

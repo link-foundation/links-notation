@@ -49,6 +49,8 @@ class Parser {
 
   /// Reads the indentation tree of a document: each group's element is the
   /// link on that line, and its children are the lines indented under it.
+  /// Indented ID elements have no values; single-reference leaves within
+  /// their value subtree are references, agreeing with parse when folded.
   std::vector<LinksGroup> parse_groups(std::string_view document) const;
 
   /// Reads the concrete syntax tree of a document: every byte belongs to

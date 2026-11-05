@@ -64,7 +64,7 @@ final class SyntaxMetadataTests: XCTestCase {
     func testParseGroupsAndStreamParserKeepTheMetadata() throws {
         let groups = try Parser().parseGroups("'root':\n  \"child\"")
         XCTAssertEqual(groups[0].element.rawId, "'root'")
-        XCTAssertEqual(groups[0].children[0].element.values.first?.rawId, "\"child\"")
+        XCTAssertEqual(groups[0].children[0].element.rawId, "\"child\"")
         let stream = StreamParser()
         try stream.write("(a '")
         try stream.write("b')")

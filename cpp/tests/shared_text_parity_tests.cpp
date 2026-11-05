@@ -10,6 +10,13 @@ using namespace links_notation_test;
 
 namespace {
 
+Link unindent(const LinksGroup& group) {
+  if (group.children.empty()) return group.element;
+  std::vector<Link> values = group.element.values;
+  for (const LinksGroup& child : group.children) values.push_back(unindent(child));
+  return Link(group.element.id, std::move(values));
+}
+
 std::string tree(const std::vector<Link>& links) {
   std::string result;
   for (const Link& link : links) {
@@ -25,6 +32,41 @@ std::string tree(const std::vector<Link>& links) {
 }
 
 }  // namespace
+
+TEST(SharedTextParityTests, IndentedIdGroupsAgreeWithParse) {
+  std::size_t count = 0;
+  for (const std::string& line : lines(read_repository_file("parity/text-vectors.tsv"))) {
+    if (line.empty() || line[0] == '#') continue;
+    const std::vector<std::string> columns = split(line, '\t');
+    ASSERT_EQ(columns.size(), 5u);
+    if (columns[0].find("indented-id-") != 0) continue;
+    const std::string input = text_from_hex(columns[1]);
+    const auto groups = Parser().parse_groups(input);
+    ASSERT_EQ(groups.size(), 1u) << columns[0];
+    EXPECT_EQ(groups[0].element.id, "x") << columns[0];
+    EXPECT_TRUE(groups[0].element.values.empty()) << columns[0];
+    EXPECT_EQ(std::vector<Link>{unindent(groups[0])}, parse(input)) << columns[0];
+    ++count;
+  }
+  EXPECT_EQ(count, 6u);
+  for (const std::string input : {"id:", "(id:)"}) {
+    const auto groups = Parser().parse_groups(input);
+    ASSERT_EQ(groups.size(), 1u);
+    EXPECT_EQ(groups[0].element, Link("id"));
+  }
+  const auto ordinary = Parser().parse_groups("x: kind\n  a\n  b");
+  ASSERT_EQ(ordinary.size(), 1u);
+  ASSERT_EQ(ordinary[0].children.size(), 2u);
+  EXPECT_EQ(ordinary[0].children[0].element, Link(std::nullopt, {Link("a")}));
+  EXPECT_EQ(ordinary[0].children[1].element, Link(std::nullopt, {Link("b")}));
+  ParserOptions ast;
+  ast.syntax = false;
+  const auto groups = Parser(ast).parse_groups("x:\n  'a'");
+  ASSERT_EQ(groups.size(), 1u);
+  ASSERT_EQ(groups[0].children.size(), 1u);
+  EXPECT_EQ(groups[0].children[0].element.id, "a");
+  EXPECT_FALSE(groups[0].children[0].element.raw_id);
+}
 
 TEST(SharedTextParityTests, SharedTextParity) {
   std::size_t count = 0;

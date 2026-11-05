@@ -30,10 +30,12 @@ class Parser(
      * combinations, like JavaScript `Parser.parseGroups`: each group's element
      * is the link on that line, and its children are the groups of the lines
      * indented directly under it. Parenthesised values stay links.
+     * Indented ID elements have no values; single-reference leaves within
+     * their value subtree are references, agreeing with [parse] when folded.
      *
      * @throws ParseException when [parse] would.
      */
-    fun parseGroups(text: String): List<LinksGroup> = read(text).map(::transformGroup)
+    fun parseGroups(text: String): List<LinksGroup> = read(text).map { transformGroup(it) }
 
     /**
      * [text] as a lossless concrete syntax tree, like JavaScript
@@ -48,7 +50,19 @@ class Parser(
         return buildCst(text, options.comments)
     }
 
-    private fun transformGroup(item: RawItem): LinksGroup = LinksGroup(transformLink(item), item.children.orEmpty().map(::transformGroup))
+    private fun transformGroup(
+        item: RawItem,
+        indentedValue: Boolean = false,
+    ): LinksGroup {
+        val children = item.children.orEmpty()
+        // Keep containers with descendants, and read leaf values in the same
+        // context as transformIndentedValue when folding an indented ID.
+        val childValues = indentedValue || (item.id != null && item.values.isNullOrEmpty())
+        return LinksGroup(
+            if (indentedValue && children.isEmpty()) transformIndentedValue(item) else transformLink(item),
+            children.map { transformGroup(it, childValues) },
+        )
+    }
 
     private fun read(text: String): List<RawItem> {
         val limit = options.maxInputSize ?: ParserOptions.DEFAULT_MAX_INPUT_SIZE

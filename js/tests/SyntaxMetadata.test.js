@@ -69,7 +69,7 @@ describe('syntax metadata on parsed links (issue #364)', () => {
   test('parseGroups and StreamParser keep the metadata', () => {
     const groups = new Parser().parseGroups('\'root\':\n  "child"');
     expect(groups[0].element.rawId).toBe("'root'");
-    expect(groups[0].children[0].element.values[0].rawId).toBe('"child"');
+    expect(groups[0].children[0].element.rawId).toBe('"child"');
     const stream = new StreamParser();
     stream.write("(a '");
     stream.write("b')");

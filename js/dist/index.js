@@ -2943,8 +2943,10 @@ class Parser {
     this.parse(input);
     return buildCst(input, { comments: this.comments });
   }
-  _transformGroup(item) {
-    return new LinksGroup(this.transformLink(item), (item.children || []).map((child) => this._transformGroup(child)));
+  _transformGroup(item, indentedValue = false) {
+    const children = item.children || [];
+    const childValues = indentedValue || item.id != null && !item.values?.length;
+    return new LinksGroup(indentedValue && children.length === 0 ? this.transformIndentedValue(item) : this.transformLink(item), children.map((child) => this._transformGroup(child, childValues)));
   }
   _parse(input, transform) {
     if (typeof input !== "string") {

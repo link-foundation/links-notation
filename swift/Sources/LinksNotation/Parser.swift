@@ -67,9 +67,11 @@ public struct Parser: Sendable {
     /// combinations: each group's element is the link on that line, and its
     /// children are the groups of the lines indented below it.
     /// Parenthesised values stay links.
+    /// Indented ID elements have no values; single-reference leaves within
+    /// their value subtree are references, agreeing with parse when folded.
     /// - Throws: `LocatedParseError`.
     public func parseGroups(_ text: String) throws -> [LinksGroup] {
-        try rawItems(text).map(transformGroup)
+        try rawItems(text).map { transformGroup($0) }
     }
 
     /// The document as a lossless concrete syntax tree: every character of
@@ -101,8 +103,14 @@ public struct Parser: Sendable {
         }
     }
 
-    private func transformGroup(_ item: RawItem) -> LinksGroup {
-        LinksGroup(transformLink(item), children: (item.children ?? []).map(transformGroup))
+    private func transformGroup(_ item: RawItem, indentedValue: Bool = false) -> LinksGroup {
+        let children = item.children ?? []
+        // Keep containers with descendants, and read leaf values in the same
+        // context as transformIndentedValue when folding an indented ID.
+        let childValues = indentedValue || (item.id != nil && (item.values ?? []).isEmpty)
+        return LinksGroup(
+            indentedValue && children.isEmpty ? transformIndentedValue(item) : transformLink(item),
+            children: children.map { transformGroup($0, indentedValue: childValues) })
     }
 
     // MARK: - Shaping the raw items (transformResult and friends in Parser.js)
