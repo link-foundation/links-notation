@@ -264,7 +264,11 @@ export class Parser {
    */
   parse(input: string): Link[];
 
-  /** Read the indentation tree without expanding it into path combinations. */
+  /**
+   * Read the indentation tree without expanding it into path combinations.
+   * Indented ID elements have no values; their single-reference leaf children
+   * are references, so folding an indented ID subtree agrees with parse().
+   */
   parseGroups(input: string): IndentedGroup[];
 
   /**

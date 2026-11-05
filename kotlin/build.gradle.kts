@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "io.github.link-foundation"
-version = "0.30.1"
+version = "0.30.2"
 
 // Android needs an SDK. CI runners have one; elsewhere the Android target is
 // left out rather than failing the build of every other target.

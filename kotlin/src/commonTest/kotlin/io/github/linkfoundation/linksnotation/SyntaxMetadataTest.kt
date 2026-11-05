@@ -81,7 +81,7 @@ class SyntaxMetadataTest {
             "\"child\"",
             groups[0]
                 .children[0]
-                .element.values[0]
+                .element
                 .rawId,
         )
         val stream = StreamParser()

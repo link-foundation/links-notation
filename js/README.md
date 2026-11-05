@@ -215,6 +215,40 @@ console.log(group.children[0].children[0].element.getValuesString()); // Detail
 `Parser.parse()` continues to return the existing list of links and expanded
 paths. `parseGroups()` preserves indentation even for the `name:` syntax.
 
+#### Indented ID Groups
+
+`parse` defines the canonical link values for `x:\n  a\n  b`: `(x: a b)`.
+`parseGroups` keeps the `x:` element as a self reference (`id: 'x'`,
+`values: []`), with children separate from that empty value list. Leaf lines
+containing a single reference inside an indented ID's value subtree become
+references, so folding that subtree agrees with `parse`:
+
+```javascript
+import { Link, Parser } from 'links-notation';
+
+const parser = new Parser();
+const unindent = ({ element, children }) =>
+  children.length
+    ? new Link(element.id, [...element.values, ...children.map(unindent)])
+    : element;
+const text = 'x:\n  a\n  b';
+console.log(parser.parse(text)[0].format()); // (x: a b)
+console.log(parser.parseGroups(text).map(unindent)[0].format()); // (x: a b)
+```
+
+Parentheses keep their meaning: `x:\n  (a)` gives `(x: (a))` in both readings.
+Named and multi-value children keep their structure too. Under an ordinary
+head such as `x: kind`, the child `a` remains a one-value link `(a)`;
+`parse` expands those lines into paths, so this folding function is only an
+equivalence with `parse` for indented ID subtrees. A standalone `id:` or
+`(id:)` has no values in either API. The Link model represents it with
+`id: 'id', values: []`; its existing default formatter writes `(id)`.
+
+Before 0.30.2, `parseGroups` kept the anonymous one-value wrapper around leaf
+references under `x:`. Callers that accessed `child.element.values[0]` there
+should now use `child.element`. C++ (`parse_groups`), Swift and Kotlin expose
+the same group contract; the other six bindings do not expose this parser API.
+
 `escapeReference` and `unescapeReference` are exported functions and static
 methods on `Link`. Use minimal mode only for whole text lines; default escaping
 still quotes spaces so references can be used inside tuples:

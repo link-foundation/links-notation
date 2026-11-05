@@ -104,7 +104,7 @@ TEST(SyntaxMetadataTests, ParseGroupsAndStreamParserKeepTheMetadata) {
   ASSERT_EQ(groups.size(), 1u);
   EXPECT_EQ(groups[0].element.raw_id, "'root'");
   ASSERT_EQ(groups[0].children.size(), 1u);
-  EXPECT_EQ(groups[0].children[0].element.values[0].raw_id, "\"child\"");
+  EXPECT_EQ(groups[0].children[0].element.raw_id, "\"child\"");
 
   StreamParser stream;
   stream.write("(a '");

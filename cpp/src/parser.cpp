@@ -640,10 +640,14 @@ Link transform_link(const RawLink& item) {
   return with_raw_id(Link(item.id, std::move(values)), item.raw_id);
 }
 
-LinksGroup transform_group(const RawLink& item) {
+LinksGroup transform_group(const RawLink& item, bool indented_value = false) {
+  // Preserve line containers with descendants, but read leaf values in the
+  // same context as transform_indented_value when folding an indented ID.
+  const bool child_values = indented_value || (item.id && item.values.empty());
   std::vector<LinksGroup> children;
-  for (const RawLink& child : item.children) children.push_back(transform_group(child));
-  return LinksGroup(transform_link(item), std::move(children));
+  for (const RawLink& child : item.children) children.push_back(transform_group(child, child_values));
+  return LinksGroup(indented_value && item.children.empty() ? transform_indented_value(item) : transform_link(item),
+                    std::move(children));
 }
 
 bool is_blank(std::string_view document) {

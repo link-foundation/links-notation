@@ -18,8 +18,8 @@ Foundation на C++17. Она не зависит ни от чего, кроме
 include(FetchContent)
 FetchContent_Declare(
   links_notation
-  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.30.1/links-notation-cpp-0.30.1.tar.gz
-  # Необязательно: контрольная сумма из links-notation-cpp-0.30.1.tar.gz.sha256
+  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.30.2/links-notation-cpp-0.30.2.tar.gz
+  # Необязательно: контрольная сумма из links-notation-cpp-0.30.2.tar.gz.sha256
   # URL_HASH SHA256=...
 )
 FetchContent_MakeAvailable(links_notation)
@@ -188,6 +188,13 @@ links_notation::CstNode cst = parser.parse_cst(document);
 
 `parse_groups` хранит связь каждой строки вместе со строками, вложенными под
 неё отступом, в виде `LinksGroup{element, children}`.
+
+Для отступного ID, например `x:\n  a\n  b`, элемент `x:` имеет пустой
+список значений, а его дети — ссылки `a` и `b`. Свёртка детей в значения
+элемента даёт `(x: a b)`, как канонический `parse`. Явное `(a)` сохраняет
+связь с одним значением; обычный заголовок `x: kind` сохраняет прежние
+дочерние связи и развёртку путей. Начиная с 0.30.2, ссылка в листе доступна
+как `child.element`, а не `child.element.values[0]`.
 
 ### Синтаксические метаданные и конкретное синтаксическое дерево
 

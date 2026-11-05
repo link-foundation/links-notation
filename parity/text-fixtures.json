@@ -620,5 +620,192 @@
     ],
     "format": "((a) b)",
     "lessParentheses": "(a) b"
+  },
+  {
+    "id": "indented-id-references",
+    "feature": "indentation",
+    "input": "x:\n  a\n  b",
+    "expected": [
+      {
+        "id": "x",
+        "values": [
+          {
+            "id": "a",
+            "values": []
+          },
+          {
+            "id": "b",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(x: a b)",
+    "lessParentheses": "x: a b"
+  },
+  {
+    "id": "indented-id-quoted",
+    "feature": "indentation",
+    "input": "'x':\n  'a'\n  ~1{62}",
+    "expected": [
+      {
+        "id": "x",
+        "values": [
+          {
+            "id": "a",
+            "values": []
+          },
+          {
+            "id": "b",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(x: a b)",
+    "lessParentheses": "x: a b"
+  },
+  {
+    "id": "indented-id-explicit-links",
+    "feature": "indentation",
+    "input": "x:\n  (a)\n  b c\n  child: value",
+    "expected": [
+      {
+        "id": "x",
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "a",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "b",
+                "values": []
+              },
+              {
+                "id": "c",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": "child",
+            "values": [
+              {
+                "id": "value",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(x: (a) (b c) (child: value))",
+    "lessParentheses": "x: (a) (b c) (child: value)"
+  },
+  {
+    "id": "indented-id-nested",
+    "feature": "indentation",
+    "input": "x:\n  inner:\n    a\n  branch\n    b",
+    "expected": [
+      {
+        "id": "x",
+        "values": [
+          {
+            "id": "inner",
+            "values": [
+              {
+                "id": "a",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "branch",
+                "values": []
+              },
+              {
+                "id": "b",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(x: (inner: a) (branch b))",
+    "lessParentheses": "x: (inner: a) (branch b)"
+  },
+  {
+    "id": "indented-id-inline-descendants",
+    "feature": "indentation",
+    "input": "x:\n  child: kind\n    a\n  (branch)\n    b",
+    "expected": [
+      {
+        "id": "x",
+        "values": [
+          {
+            "id": "child",
+            "values": [
+              {
+                "id": "kind",
+                "values": []
+              },
+              {
+                "id": "a",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "branch",
+                "values": []
+              },
+              {
+                "id": "b",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(x: (child: kind a) (branch b))",
+    "lessParentheses": "x: (child: kind a) (branch b)"
+  },
+  {
+    "id": "indented-id-comments",
+    "feature": "indentation",
+    "input": "x:\r\n  a # comment\r\n\r\n  b",
+    "expected": [
+      {
+        "id": "x",
+        "values": [
+          {
+            "id": "a",
+            "values": []
+          },
+          {
+            "id": "b",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(x: a b)",
+    "lessParentheses": "x: a b"
   }
 ]

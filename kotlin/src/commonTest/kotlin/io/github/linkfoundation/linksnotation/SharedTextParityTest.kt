@@ -2,6 +2,7 @@ package io.github.linkfoundation.linksnotation
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 /**
  * Port of `js/tests/SharedTextParity.test.js`: the shared text corpus,
@@ -9,9 +10,37 @@ import kotlin.test.assertEquals
  * [PARITY_CASES].
  */
 class SharedTextParityTest {
+    private fun unindent(group: LinksGroup): Link =
+        if (group.children.isEmpty()) {
+            group.element
+        } else {
+            Link(group.element.id, group.element.values + group.children.map(::unindent))
+        }
+
+    @Test
+    fun indentedIdGroupsAgreeWithParse() {
+        val cases = PARITY_CASES.filter { it.id.startsWith("indented-id-") }
+        assertEquals(6, cases.size)
+        for (case in cases) {
+            val groups = Parser().parseGroups(case.input)
+            assertEquals(Parser().parse(case.input), groups.map(::unindent), case.id)
+            assertEquals("x", groups[0].element.id, case.id)
+            assertEquals(emptyList(), groups[0].element.values, case.id)
+        }
+        for (input in listOf("id:", "(id:)")) {
+            assertEquals(Link("id", emptyList()), Parser().parseGroups(input)[0].element)
+        }
+        val ordinary = Parser().parseGroups("x: kind\n  a\n  b")[0]
+        assertEquals(Link(null, listOf(Link("a"))), ordinary.children[0].element)
+        assertEquals(Link(null, listOf(Link("b"))), ordinary.children[1].element)
+        val ast = Parser(ParserOptions(syntax = false)).parseGroups("x:\n  'a'")[0]
+        assertEquals("a", ast.children[0].element.id)
+        assertNull(ast.children[0].element.rawId)
+    }
+
     @Test
     fun sharedTextParity() {
-        assertEquals(25, PARITY_CASES.size)
+        assertEquals(31, PARITY_CASES.size)
         for (case in PARITY_CASES) {
             assertCase(case)
         }

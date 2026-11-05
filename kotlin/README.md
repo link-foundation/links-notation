@@ -15,7 +15,7 @@ JavaScript (Node.js) and WebAssembly (`wasmJs`).
 
 ```kotlin
 dependencies {
-    implementation("io.github.link-foundation:links-notation-kotlin:0.30.1")
+    implementation("io.github.link-foundation:links-notation-kotlin:0.30.2")
 }
 ```
 
@@ -161,6 +161,13 @@ val document = parseIndentedDocument("fruits\n  apple\n  pear\n")
 // {fruits=[apple, pear]}
 formatIndentedDocument(document) // "fruits\n  apple\n  pear\n"
 ```
+
+Within an indented ID such as `x:\n  a\n  b`, the `x:` element has an empty
+value list and its children are references `a` and `b`. Folding the children
+into the element gives `(x: a b)`, as canonical `parse` does. Explicit `(a)`
+keeps its one-value link, and ordinary heads such as `x: kind` keep their
+existing child links and path expansion. Since 0.30.2, access a reference
+leaf as `child.element`, rather than `child.element.values[0]`.
 
 ### Binary Codec
 

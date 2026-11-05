@@ -91,6 +91,19 @@ only balanced documents.
 
 ## Explicit API exceptions
 
+`Parser.parseGroups` exists in JavaScript, C++ (`parse_groups`), Swift and
+Kotlin. The other six parsers do not expose it, even where a `LinksGroup`
+class exists. The `indented-id-groups` row records that existing API boundary.
+For bare `id:` lines, the group element is a self reference with no values;
+the indented children stay separate. Within that ID's value subtree, a leaf
+single-reference line becomes a reference, while parenthesized and multi-value
+lines retain their link structure. Folding the children into their elements'
+values agrees with `parse`. Ordinary heads keep their existing child links and
+path expansion, so this is not a general equivalence for arbitrary indentation.
+`parse` remains the canonical shared text contract. All ten native suites run
+the six `indented-id-*` text fixtures; the four group APIs also test folding
+them. See the [example and migration note](../js/README.md#indented-id-groups).
+
 PR 336 introduced `parseIndentedDocument`, `formatIndentedDocument`, and minimal
 quoting as JavaScript convenience APIs. C++ ports them as
 `parse_indented_document` and `format_indented_document`, and Swift and Kotlin

@@ -18,8 +18,8 @@ release `cpp_VERSION`, together with its SHA-256 checksum.
 include(FetchContent)
 FetchContent_Declare(
   links_notation
-  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.30.1/links-notation-cpp-0.30.1.tar.gz
-  # Optional: the checksum from links-notation-cpp-0.30.1.tar.gz.sha256
+  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.30.2/links-notation-cpp-0.30.2.tar.gz
+  # Optional: the checksum from links-notation-cpp-0.30.2.tar.gz.sha256
   # URL_HASH SHA256=...
 )
 FetchContent_MakeAvailable(links_notation)
@@ -187,6 +187,13 @@ links_notation::CstNode cst = parser.parse_cst(document);
 
 `parse_groups` keeps each line's link together with the lines indented under
 it, as `LinksGroup{element, children}`.
+
+Within an indented ID such as `x:\n  a\n  b`, the `x:` element has an empty
+value list and its children are references `a` and `b`. Folding the children
+into the element gives `(x: a b)`, as canonical `parse` does. Explicit `(a)`
+keeps its one-value link, and ordinary heads such as `x: kind` keep their
+existing child links and path expansion. Since 0.30.2, access a reference
+leaf as `child.element`, rather than `child.element.values[0]`.
 
 ### Syntax Metadata and the Concrete Syntax Tree
 

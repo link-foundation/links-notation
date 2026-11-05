@@ -5,6 +5,32 @@ import XCTest
 @testable import LinksNotation
 
 final class SharedTextParityTests: XCTestCase {
+    private func unindent(_ group: LinksGroup) -> Link {
+        if group.children.isEmpty { return group.element }
+        return Link(id: group.element.id, values: group.element.values + group.children.map(unindent))
+    }
+
+    func testIndentedIdGroupsAgreeWithParse() throws {
+        let fixtures = try loadCases(repositoryRoot.appendingPathComponent("parity/text-fixtures.json"))
+        let cases = fixtures.filter { $0.id.hasPrefix("indented-id-") }
+        XCTAssertEqual(cases.count, 6)
+        for fixture in cases {
+            let groups = try Parser().parseGroups(fixture.input)
+            XCTAssertEqual(groups.map(unindent), try Parser().parse(fixture.input), fixture.id)
+            XCTAssertEqual(groups[0].element.id, "x", fixture.id)
+            XCTAssertTrue(groups[0].element.values.isEmpty, fixture.id)
+        }
+        for input in ["id:", "(id:)"] {
+            XCTAssertEqual(try Parser().parseGroups(input)[0].element, Link(id: "id", values: []))
+        }
+        let ordinary = try Parser().parseGroups("x: kind\n  a\n  b")[0]
+        XCTAssertEqual(ordinary.children[0].element, Link(id: nil, values: [Link(id: "a")]))
+        XCTAssertEqual(ordinary.children[1].element, Link(id: nil, values: [Link(id: "b")]))
+        let ast = try Parser(options: ParserOptions(syntax: false)).parseGroups("x:\n  'a'")[0]
+        XCTAssertEqual(ast.children[0].element.id, "a")
+        XCTAssertNil(ast.children[0].element.rawId)
+    }
+
     func testSharedTextParity() throws {
         let fixtures = try loadCases(repositoryRoot.appendingPathComponent("parity/text-fixtures.json"))
         XCTAssertFalse(fixtures.isEmpty)

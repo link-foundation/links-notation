@@ -42,6 +42,8 @@ export class Parser {
    * Read the indentation tree before it is expanded into path combinations.
    * Each group's element is the Link on that line; its children are groups
    * for the immediately indented lines. Parenthesized values remain Links.
+   * In an indented ID value subtree, single-reference leaves are references,
+   * as in parse(); the ID element itself keeps an empty value list.
    * @param {string} input - The Lino document
    * @returns {LinksGroup[]}
    */
@@ -65,10 +67,18 @@ export class Parser {
     return buildCst(input, { comments: this.comments });
   }
 
-  _transformGroup(item) {
+  _transformGroup(item, indentedValue = false) {
+    const children = item.children || [];
+    // Carry the value context through an indented ID subtree, just as
+    // transformIndentedValue does. Keep non-leaf containers: folding their
+    // children later must retain the reference written on the parent line.
+    const childValues =
+      indentedValue || (item.id != null && !item.values?.length);
     return new LinksGroup(
-      this.transformLink(item),
-      (item.children || []).map((child) => this._transformGroup(child))
+      indentedValue && children.length === 0
+        ? this.transformIndentedValue(item)
+        : this.transformLink(item),
+      children.map((child) => this._transformGroup(child, childValues))
     );
   }
 
