@@ -72,7 +72,7 @@ any value. The namespace URL and the exact `links-notation-kotlin` POM must
 return 200 before `[Kotlin] VERSION` (tag `kotlin_VERSION`) is created:
 
 ```sh
-curl -f https://repo1.maven.org/maven2/io/github/link-foundation/links-notation-kotlin/0.30.2/links-notation-kotlin-0.30.2.pom
+curl -f https://repo1.maven.org/maven2/io/github/link-foundation/links-notation-kotlin/0.31.0/links-notation-kotlin-0.31.0.pom
 ```
 
 The required `Kotlin` check is in `.github/main-ruleset.json`; an

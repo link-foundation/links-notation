@@ -1,0 +1,222 @@
+[
+  {
+    "id": "empty",
+    "input": "",
+    "nested": ""
+  },
+  {
+    "id": "singlet",
+    "input": "alpha",
+    "nested": "alpha"
+  },
+  {
+    "id": "tuple",
+    "input": "(alpha beta)",
+    "nested": "alpha beta"
+  },
+  {
+    "id": "named",
+    "input": "(root: alpha beta)",
+    "nested": "root: alpha beta"
+  },
+  {
+    "id": "nested",
+    "input": "(root: (child: leaf) tail)",
+    "nested": "root: (child: leaf) tail"
+  },
+  {
+    "id": "indent",
+    "input": "root:\n  child:\n    leaf\n  tail",
+    "nested": "root: (child: leaf) tail"
+  },
+  {
+    "id": "context",
+    "input": "value (\n  id \"1\"\n  label \"one\"\n)",
+    "nested": "value\n  (id 1) (label one)"
+  },
+  {
+    "id": "quotes",
+    "input": "(\"a a\": 'b b' \"c c\")",
+    "nested": "'a a': 'b b' 'c c'"
+  },
+  {
+    "id": "empty-ref",
+    "input": "(root: \"\" ~1{})",
+    "nested": "root: ~1{} ~1{}"
+  },
+  {
+    "id": "unicode",
+    "input": "(根: café 🙂)",
+    "nested": "根: café 🙂"
+  },
+  {
+    "id": "comments",
+    "input": "root: value # comment\n# standalone",
+    "nested": "root: value"
+  },
+  {
+    "id": "quote-runs",
+    "input": "(root: '''has ' and \" quotes''')",
+    "nested": "root: `has ' and \" quotes`"
+  },
+  {
+    "id": "multiline",
+    "input": "(root: \"line1\nline2\")",
+    "nested": "root: ~1{6c696e65310a6c696e6532}"
+  },
+  {
+    "id": "literal",
+    "input": "(root: ~1{610062})",
+    "nested": "root: ~1{610062}"
+  },
+  {
+    "id": "less-parentheses-lone-nested",
+    "input": "((b c))",
+    "nested": "((b c))"
+  },
+  {
+    "id": "less-parentheses-lone-singlet",
+    "input": "((b))",
+    "nested": "((b))"
+  },
+  {
+    "id": "less-parentheses-lone-named",
+    "input": "((a: b))",
+    "nested": "((a: b))"
+  },
+  {
+    "id": "less-parentheses-lone-quoted",
+    "input": "(('a b' c))",
+    "nested": "(('a b' c))"
+  },
+  {
+    "id": "less-parentheses-lone-deep",
+    "input": "(((b c)))",
+    "nested": "(((b c)))"
+  },
+  {
+    "id": "less-parentheses-lone-mixed",
+    "input": "(((a b) c))",
+    "nested": "(((a b) c))"
+  },
+  {
+    "id": "less-parentheses-named-lone",
+    "input": "(id: ((b c)))",
+    "nested": "id: ((b c))"
+  },
+  {
+    "id": "less-parentheses-empty-link",
+    "input": "()",
+    "nested": "()"
+  },
+  {
+    "id": "less-parentheses-several-nested",
+    "input": "((b c) (d e))",
+    "nested": "(b c) (d e)"
+  },
+  {
+    "id": "less-parentheses-trailing-nested",
+    "input": "(a (b c))",
+    "nested": "a\n  b c"
+  },
+  {
+    "id": "less-parentheses-leading-nested",
+    "input": "((a) b)",
+    "nested": "(a) b"
+  },
+  {
+    "id": "indented-id-references",
+    "input": "x:\n  a\n  b",
+    "nested": "x: a b"
+  },
+  {
+    "id": "indented-id-quoted",
+    "input": "'x':\n  'a'\n  ~1{62}",
+    "nested": "x: a b"
+  },
+  {
+    "id": "indented-id-explicit-links",
+    "input": "x:\n  (a)\n  b c\n  child: value",
+    "nested": "x:\n  (a)\n  b c\n  child: value"
+  },
+  {
+    "id": "indented-id-nested",
+    "input": "x:\n  inner:\n    a\n  branch\n    b",
+    "nested": "x:\n  inner: a\n  branch b"
+  },
+  {
+    "id": "indented-id-inline-descendants",
+    "input": "x:\n  child: kind\n    a\n  (branch)\n    b",
+    "nested": "x:\n  child: kind a\n  branch b"
+  },
+  {
+    "id": "indented-id-comments",
+    "input": "x:\r\n  a # comment\r\n\r\n  b",
+    "nested": "x: a b"
+  },
+  {
+    "id": "issue-form",
+    "input": "(form: stack (direction vertical) (gap 8px) (save: button 'Save' (on press (emit save) (navigate home))))",
+    "nested": "form: stack\n  direction vertical\n  gap 8px\n  save: button Save\n    on press\n      emit save\n      navigate home"
+  },
+  {
+    "id": "bare-name-child",
+    "input": "(root: (a))",
+    "nested": "root:\n  (a)"
+  },
+  {
+    "id": "bare-name-recursive",
+    "input": "(root: (child: (a) (b)))",
+    "nested": "root:\n  child:\n    (a)\n    (b)"
+  },
+  {
+    "id": "order-link-before-atom",
+    "input": "(root: (a b) tail (c d))",
+    "nested": "root: (a b) tail\n  c d"
+  },
+  {
+    "id": "order-interleaved",
+    "input": "(a (b c) d (e f) (g h))",
+    "nested": "a (b c) d\n  e f\n  g h"
+  },
+  {
+    "id": "anonymous-complex-head",
+    "input": "((a b) (c d) (e f))",
+    "nested": "(a b) (c d)\n  e f"
+  },
+  {
+    "id": "anonymous-lone-child",
+    "input": "((a b))",
+    "nested": "((a b))"
+  },
+  {
+    "id": "empty-link",
+    "input": "()",
+    "nested": "()"
+  },
+  {
+    "id": "named-leaf",
+    "input": "(name:)",
+    "nested": "name:"
+  },
+  {
+    "id": "quoted-head",
+    "input": "('a b': (child: (c d)))",
+    "nested": "'a b':\n  child:\n    c d"
+  },
+  {
+    "id": "multiple-roots",
+    "input": "(first: (a b))\n(second: (c d))",
+    "nested": "first:\n  a b\nsecond:\n  c d"
+  },
+  {
+    "id": "control-references",
+    "input": "(root: ~1{} (child ~1{610a62}))",
+    "nested": "root: ~1{}\n  child ~1{610a62}"
+  },
+  {
+    "id": "bare-name-descendant-singlet",
+    "input": "(root: (branch (b)))",
+    "nested": "root:\n  branch\n    (b)"
+  }
+]

@@ -101,3 +101,44 @@ func TestSharedLessParenthesesRoundTrip(t *testing.T) {
 		})
 	}
 }
+
+func TestSharedNestedFormat(t *testing.T) {
+	data, err := os.ReadFile("../parity/nested-fixtures.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var cases []struct{ ID, Input, Nested string }
+	if err := json.Unmarshal(data, &cases); err != nil {
+		t.Fatal(err)
+	}
+	if len(cases) == 0 {
+		t.Fatal("empty nested corpus")
+	}
+	for _, fixture := range cases {
+		links, err := Parse(fixture.Input)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if got := FormatNested(links); got != fixture.Nested {
+			t.Errorf("%s: got %q, want %q", fixture.ID, got, fixture.Nested)
+		}
+	}
+}
+
+func TestAnonymousThresholdRoundTrip(t *testing.T) {
+	for _, input := range []string{"a b c", "((b c))", "(a (b c))"} {
+		links, err := Parse(input)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, config := range []*FormatConfig{
+			{LessParentheses: true, IndentString: "  ", IndentByRefCount: 1},
+			{LessParentheses: true, IndentString: "  ", IndentByLength: 1},
+		} {
+			parsed, err := Parse(FormatWithConfig(links, config))
+			if err != nil || !reflect.DeepEqual(parityTree(parsed), parityTree(links)) {
+				t.Fatalf("%s: anonymous round trip: %v", input, err)
+			}
+		}
+	}
+}

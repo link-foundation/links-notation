@@ -207,6 +207,7 @@ std::string Link::format(const FormatConfig& config, bool compound) const {
 }
 
 std::string Link::format_indented(const FormatConfig& config) const {
+  if (!id) return format(config.less_parentheses);
   std::vector<std::string> lines;
   if (id) lines.push_back(escape_reference(id) + ":");
   for (const Link& value : values) lines.push_back(config.indent_string + format_value(value));

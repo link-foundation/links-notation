@@ -67,4 +67,42 @@ class SharedTextParityTest extends TestCase
             );
         }
     }
+    public function testSharedNestedFormat(): void
+    {
+        $cases = json_decode(
+            file_get_contents(dirname(__DIR__, 2) . '/parity/nested-fixtures.json'),
+            true,
+            flags: JSON_THROW_ON_ERROR
+        );
+        self::assertNotEmpty($cases);
+        foreach ($cases as $case) {
+            self::assertSame(
+                $case['nested'],
+                Formatter::formatNested((new Parser())->parse($case['input'])),
+                $case['id']
+            );
+        }
+    }
+
+    public function testAnonymousThresholdRoundTrip(): void
+    {
+        foreach (['a b c', '((b c))', '(a (b c))'] as $input) {
+            $links = (new Parser())->parse($input);
+            $configs = [
+                new FormatConfig(lessParentheses: true, maxInlineRefs: 0, preferInline: false),
+                new FormatConfig(
+                    lessParentheses: true,
+                    indentLongLines: true,
+                    maxLineLength: 1,
+                    preferInline: false
+                ),
+            ];
+            foreach ($configs as $config) {
+                self::assertSame(
+                    $this->tree($links),
+                    $this->tree((new Parser())->parse(Formatter::formatLinks($links, $config)))
+                );
+            }
+        }
+    }
 }

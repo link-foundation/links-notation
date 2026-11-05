@@ -5,6 +5,8 @@ import { resolve, relative, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import {
   fixtures,
+  nestedFixtures,
+  renderNestedVectors,
   renderSyntaxVectors,
   renderVectors,
   syntaxFixtures,
@@ -47,7 +49,9 @@ export function sourceInventory(language) {
       const path = join(directory, entry.name);
       if (entry.isDirectory()) visit(path);
       else if (
-        /\.(?:js|ts|rs|py|java|go|cs|peg|pegjs|php|cpp|hpp|hpp\.in|swift|kt)$/.test(path) &&
+        /\.(?:js|ts|rs|py|java|go|cs|peg|pegjs|php|cpp|hpp|hpp\.in|swift|kt)$/.test(
+          path,
+        ) &&
         !/_test\.go$/.test(path)
       )
         files.push(relative(root, path));
@@ -78,6 +82,34 @@ export function checkParity(
     fail("all ten languages must be listed");
   if (!Array.isArray(manifest.features) || !manifest.features.length)
     return [...errors, "features must not be empty"];
+  if (
+    !nestedFixtures.length ||
+    nestedFixtures.some(
+      (f) =>
+        !f.id || typeof f.input !== "string" || typeof f.nested !== "string",
+    )
+  )
+    fail("nested fixtures require id, input and nested text");
+  if (
+    options.checkVectors !== false &&
+    readFileSync(join(root, "parity/nested-vectors.tsv"), "utf8") !==
+      renderNestedVectors()
+  )
+    fail(
+      "nested-vectors.tsv is stale; regenerate it from the reviewed JSON fixtures",
+    );
+  if (new Set(nestedFixtures.map((f) => f.id)).size !== nestedFixtures.length)
+    fail("nested fixture IDs must be unique");
+  for (const fixture of cases) {
+    if (
+      !nestedFixtures.some(
+        (n) => n.id === fixture.id && n.input === fixture.input,
+      )
+    )
+      fail(
+        `${fixture.id}: shared text fixture missing from nested writer coverage`,
+      );
+  }
   const featureIds = new Set();
   const fixtureIds = new Set();
   for (const fixture of cases) {
@@ -243,6 +275,10 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
       );
       writeFileSync(path, JSON.stringify(manifest, null, 2) + "\n");
       writeFileSync(join(root, "parity/text-vectors.tsv"), renderVectors());
+      writeFileSync(
+        join(root, "parity/nested-vectors.tsv"),
+        renderNestedVectors(),
+      );
       writeFileSync(
         join(root, "parity/syntax-vectors.tsv"),
         renderSyntaxVectors(),

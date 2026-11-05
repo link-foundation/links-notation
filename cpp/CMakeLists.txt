@@ -46,6 +46,7 @@ add_library(links_notation
   src/comments.cpp
   src/cst.cpp
   src/indented_document.cpp
+  src/nested_format.cpp
   src/link.cpp
   src/links_group.cpp
   src/parse_error.cpp

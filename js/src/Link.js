@@ -383,11 +383,8 @@ export class Link {
    */
   _formatIndented(options) {
     if (this.id === null) {
-      // Values only - format each on separate line
-      const lines = this.values.map(
-        (v) => options.indentString + this.formatValue(v)
-      );
-      return lines.join('\n');
+      // A headless list reads as separate links. Keep the inline container.
+      return this.format(options.lessParentheses);
     }
 
     // Link with ID - format as id:\n  value1\n  value2

@@ -50,4 +50,34 @@ public static class SharedTextParityTests
             Assert.True(JsonElement.DeepEquals(expected, JsonSerializer.SerializeToElement(Tree(new Parser().Parse(parsed.Format(lessParentheses: true))))));
         }
     }
+    [Fact(Timeout = 30000)]
+    public static void SharedNestedFormat()
+    {
+        using var document = JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Protocol", "nested-fixtures.json")));
+        Assert.NotEmpty(document.RootElement.EnumerateArray());
+        foreach (var fixture in document.RootElement.EnumerateArray())
+        {
+            TestContext.Current.CancellationToken.ThrowIfCancellationRequested();
+            var parsed = new Parser().Parse(fixture.GetProperty("input").GetString()!);
+            Assert.Equal(fixture.GetProperty("nested").GetString(), parsed.FormatNested());
+        }
+    }
+
+    [Fact(Timeout = 30000)]
+    public static void AnonymousThresholdRoundTrip()
+    {
+        foreach (var input in new[] { "a b c", "((b c))", "(a (b c))" })
+        {
+            TestContext.Current.CancellationToken.ThrowIfCancellationRequested();
+            var links = new Parser().Parse(input);
+            foreach (var options in new[] {
+                new FormatOptions { LessParentheses = true, MaxInlineRefs = 0, PreferInline = false },
+                new FormatOptions { LessParentheses = true, IndentLongLines = true, MaxLineLength = 1, PreferInline = false }
+            })
+            {
+                var parsed = new Parser().Parse(links.Format(options));
+                Assert.True(JsonElement.DeepEquals(JsonSerializer.SerializeToElement(Tree(links)), JsonSerializer.SerializeToElement(Tree(parsed))));
+            }
+        }
+    }
 }

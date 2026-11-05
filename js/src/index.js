@@ -32,3 +32,5 @@ export {
   formatBinaryDocument,
   formatBinaryReference,
 } from './Binary.js';
+
+export { formatNested } from './NestedFormat.js';

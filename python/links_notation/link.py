@@ -299,9 +299,7 @@ class Link:
             Indented formatted string
         """
         if self.id is None:
-            # Values only - format each on separate line
-            lines = [self.format_value(v) for v in self.values]
-            return "\n".join(config.indent_string + line for line in lines)
+            return self.format(config.less_parentheses)
 
         # Link with ID - format as id:\n  value1\n  value2
         id_str = Link.escape_reference(self.id)

@@ -13,6 +13,78 @@ namespace LinkFoundation\LinksNotation;
 class Formatter
 {
     /**
+     * Write recursive nested lines in value order, without a final newline.
+     * Read by folding groups in a group-aware binding; parse keeps path semantics.
+     *
+     * @param Link[] $links
+     */
+    public static function formatNested(array $links, string $indent = '  '): string
+    {
+        if ($indent === '' || strspn($indent, " ") !== strlen($indent)) {
+            throw new \InvalidArgumentException('indent must contain only spaces and be nonempty');
+        }
+        $lines = [];
+        foreach ($links as $link) {
+            self::writeNested($link, '', $indent, false, $lines);
+        }
+
+        return implode("\n", $lines);
+    }
+
+    private static function nestedAtom(Link $link): bool
+    {
+        return $link->id !== null && $link->values === [];
+    }
+
+    private static function nestedCanNest(Link $link): bool
+    {
+        return !self::nestedAtom($link)
+            && !($link->id === null && count($link->values) === 1 && !self::nestedAtom($link->values[0]));
+    }
+
+    private static function nestedLineHolds(Link $link, int $count): bool
+    {
+        return $link->id !== null || $count >= 2 || ($count === 1 && self::nestedAtom($link->values[0]));
+    }
+
+    /** @param string[] $lines */
+    private static function writeNested(Link $link, string $pad, string $indent, bool $underName, array &$lines): void
+    {
+        if (
+            !self::nestedLineHolds($link, count($link->values))
+            || ($underName && $link->id === null && count($link->values) === 1)
+        ) {
+            $lines[] = $pad . $link->format();
+
+            return;
+        }
+        $count = count($link->values);
+        while ($count > 0 && self::nestedCanNest($link->values[$count - 1])) {
+            --$count;
+        }
+        while ($count < count($link->values) && !self::nestedLineHolds($link, $count)) {
+            ++$count;
+        }
+        $parts = [];
+        if ($link->id !== null) {
+            $parts[] = Link::escapeReference($link->id) . ':';
+        }
+        foreach (array_slice($link->values, 0, $count) as $value) {
+            $parts[] = self::nestedAtom($value) ? Link::escapeReference($value->id) : $value->format();
+        }
+        $lines[] = $pad . implode(' ', $parts);
+        foreach (array_slice($link->values, $count) as $value) {
+            self::writeNested(
+                $value,
+                $pad . $indent,
+                $indent,
+                $underName || ($link->id !== null && $count === 0),
+                $lines
+            );
+        }
+    }
+
+    /**
      * Format a list of links into Lino notation.
      *
      * @param Link[]            $links            List of links to format

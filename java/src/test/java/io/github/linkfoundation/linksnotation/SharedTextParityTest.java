@@ -73,4 +73,20 @@ class SharedTextParityTest {
     }
     assertTrue(count > 0, "empty fixture corpus");
   }
+
+  @Test
+  void sharedNestedFormat() throws Exception {
+    int count = 0;
+    for (String line : Files.readAllLines(Path.of("../parity/nested-vectors.tsv"))) {
+      if (line.startsWith("#")) continue;
+      String[] columns = line.split("\t", -1);
+      assertEquals(3, columns.length);
+      assertEquals(
+          decode(columns[2]),
+          NestedFormat.formatNested(new Parser().parse(decode(columns[1]))),
+          columns[0]);
+      count++;
+    }
+    assertTrue(count > 0);
+  }
 }

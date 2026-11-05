@@ -660,3 +660,48 @@ fail the format check.
 
 Exact Unicode identifiers and values round-trip with the [reference literal contract](../docs/protocol/reference-literals.md)
 introduced in 0.24.0, including mixed quotes, empty strings, controls and multiline text.
+
+### Recursive nested output
+
+`formatNested` writes a link's leading atoms on its line and its trailing link
+values on indented lines, recursively:
+
+```javascript
+import { Link, Parser, formatNested } from 'links-notation';
+const parser = new Parser();
+const links = parser.parse(
+  '(form: stack (direction vertical) (save: button Save (on press (emit save))))'
+);
+const text = formatNested(links);
+// form: stack
+//   direction vertical
+//   save: button Save
+//     on press
+//       emit save
+
+const unindent = ({ element, children }) =>
+  children.length
+    ? new Link(element.id, [...element.values, ...children.map(unindent)])
+    : element;
+const readBack = parser.parseGroups(text).map(unindent);
+console.log(readBack[0].equals(links[0])); // true
+```
+
+Run the complete [form example](../examples/js_nested_format.mjs) with Node.
+
+Use `parseGroups` plus this fold to read nested output. Canonical `parse` keeps
+its path expansion for ordinary indented heads. `formatIndentedDocument` remains
+the separate two-level plain-text document helper.
+
+The default indentation is two spaces; `formatNested(links, '    ')` uses four.
+The result has no final newline. References use normal escaping. Parentheses
+stay where needed for `()`, `((a b))`, or a lone reference under a bare `name:`
+ancestor. An atom after a link stays in place, so `(root: (a b) tail (c d))`
+becomes `root: (a b) tail\n  c d` without changing value order. The existing
+inline formatter's exclusions for empty links and named empty-value links used
+as values also apply to this writer.
+
+Threshold options (`maxInlineRefs`, `indentLongLines`, `preferInline`) retain
+anonymous links inline when indentation would lose their container. Use
+`formatNested` for recursive output. The same writer is available in all ten
+bindings; see the [cross-language API table](../parity/README.md#recursive-nested-formatting).

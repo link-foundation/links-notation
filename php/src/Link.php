@@ -387,13 +387,7 @@ class Link
     private function formatIndented(FormatConfig $config): string
     {
         if ($this->id === null) {
-            // Values only - format each on separate line
-            $lines = array_map(
-                fn (Link $value): string => $config->indentString . $this->formatValue($value),
-                $this->values
-            );
-
-            return implode("\n", $lines);
+            return $this->format($config->lessParentheses);
         }
 
         // Link with id - format as id:\n  value1\n  value2
