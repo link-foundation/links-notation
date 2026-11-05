@@ -2523,6 +2523,28 @@ references:
   fullName.vb: Link.Foundation.Links.Notation.LinksGroup(Of TLinkAddress).<>
   nameWithType: LinksGroup<TLinkAddress>.operator !=
   nameWithType.vb: LinksGroup(Of TLinkAddress).<>
+- uid: Link.Foundation.Links.Notation.NestedFormat
+  name: NestedFormat
+  href: api/Link.Foundation.Links.Notation.NestedFormat.html
+  commentId: T:Link.Foundation.Links.Notation.NestedFormat
+  fullName: Link.Foundation.Links.Notation.NestedFormat
+  nameWithType: NestedFormat
+- uid: Link.Foundation.Links.Notation.NestedFormat.FormatNested*
+  name: FormatNested
+  href: api/Link.Foundation.Links.Notation.NestedFormat.html#Link_Foundation_Links_Notation_NestedFormat_FormatNested_
+  commentId: Overload:Link.Foundation.Links.Notation.NestedFormat.FormatNested
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.NestedFormat.FormatNested
+  nameWithType: NestedFormat.FormatNested
+- uid: Link.Foundation.Links.Notation.NestedFormat.FormatNested``1(System.Collections.Generic.IEnumerable{Link.Foundation.Links.Notation.Link{``0}},System.String)
+  name: FormatNested<T>(IEnumerable<Link<T>>, string)
+  href: api/Link.Foundation.Links.Notation.NestedFormat.html#Link_Foundation_Links_Notation_NestedFormat_FormatNested__1_System_Collections_Generic_IEnumerable_Link_Foundation_Links_Notation_Link___0___System_String_
+  commentId: M:Link.Foundation.Links.Notation.NestedFormat.FormatNested``1(System.Collections.Generic.IEnumerable{Link.Foundation.Links.Notation.Link{``0}},System.String)
+  name.vb: FormatNested(Of T)(IEnumerable(Of Link(Of T)), String)
+  fullName: Link.Foundation.Links.Notation.NestedFormat.FormatNested<T>(System.Collections.Generic.IEnumerable<Link.Foundation.Links.Notation.Link<T>>, string)
+  fullName.vb: Link.Foundation.Links.Notation.NestedFormat.FormatNested(Of T)(System.Collections.Generic.IEnumerable(Of Link.Foundation.Links.Notation.Link(Of T)), String)
+  nameWithType: NestedFormat.FormatNested<T>(IEnumerable<Link<T>>, string)
+  nameWithType.vb: NestedFormat.FormatNested(Of T)(IEnumerable(Of Link(Of T)), String)
 - uid: Link.Foundation.Links.Notation.ParseException
   name: ParseException
   href: api/Link.Foundation.Links.Notation.ParseException.html

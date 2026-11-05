@@ -369,6 +369,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Link.Foundation.Links.Notation.NestedFormat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Link.Foundation.Links.Notation.NestedFormat.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Link.Foundation.Links.Notation.NestedFormat",
+      "Summary": "<p sourcefile=\"obj/api/Link.Foundation.Links.Notation.NestedFormat.yml\" sourcestartlinenumber=\"1\">Recursive nested formatting. Read by folding groups in a group-aware binding.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Link.Foundation.Links.Notation.ParseException.yml",
       "output": {
         ".html": {
