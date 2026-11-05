@@ -20,6 +20,8 @@ final class ParityTests: XCTestCase {
                 "less-parentheses-named-lone", "less-parentheses-empty-link",
                 "less-parentheses-several-nested", "less-parentheses-trailing-nested",
                 "less-parentheses-leading-nested",
+                "indented-id-references", "indented-id-quoted", "indented-id-explicit-links",
+                "indented-id-nested", "indented-id-inline-descendants", "indented-id-comments",
             ])
     }
 

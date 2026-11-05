@@ -863,7 +863,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
 |-----------|---|---|---|---|---|---|---|---|---|---|
 | corpus has every upstream case | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/ParityTests.swift#L10) | ❌ |
-| parse format and round trip every case | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/ParityTests.swift#L26) | ❌ |
+| parse format and round trip every case | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/ParityTests.swift#L28) | ❌ |
 
 **Category totals:** Python: 0, JavaScript: 0, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0, C++: 0, Swift: 2, Kotlin: 0
 

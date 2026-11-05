@@ -71,7 +71,10 @@ class LinksGroupTest {
         val groups = Parser().parseGroups("root:\n  child\n    grandchild\nother")
         assertEquals(2, groups.size)
         assertEquals("root", groups[0].element.id)
-        assertEquals(listOf("child", "grandchild"), groups[0].children[0].toList().map { it.values.single().id })
+        assertEquals(
+            listOf(Link(null, listOf(Link("child"))), Link("grandchild")),
+            groups[0].children[0].toList(),
+        )
         assertEquals(listOf(Link(null, listOf(Link("other")))), groups[1].toList())
     }
 }

@@ -60,6 +60,14 @@ Local verification:
 - Benchmark generation and `--check` agree on all 73 generated files. The
   shared Rust target uses 125264 KiB of its 2097152 KiB budget.
 
+The first full CI run for `d9acb12` exposed two older test expectations:
+Swift's explicit corpus ID list lacked the six additions, and Kotlin's
+indentation-tree test assumed every descendant had a one-value wrapper.
+The latter now checks the exact container and reference shapes. The two
+Swift corpus checks also pass locally after updating the inventory. Logs
+were saved before the follow-up push; see
+[the CI run](https://github.com/link-foundation/links-notation/actions/runs/42090188856).
+
 The existing CI workflows exercise all ten native suites for the exact PR
 head, including every shared fixture. Local command logs and downloaded CI
 logs stay under ignored `ci-logs/`.
