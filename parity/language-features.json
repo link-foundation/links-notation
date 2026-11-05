@@ -2686,7 +2686,7 @@
         "swift/Sources/LinksNotation/Quotes.swift",
         "swift/Sources/LinksNotation/StreamParser.swift"
       ],
-      "sha256": "2a46a2b7aec4151d4d9d24181a323fa8734f295072f5a42dfdc8791105f21299"
+      "sha256": "1eff19f749a682dac2d2a4f86110dbbedfcb20fc1b938a81c960af480492bfa1"
     },
     "kotlin": {
       "files": [

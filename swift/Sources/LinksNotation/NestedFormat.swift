@@ -24,8 +24,12 @@ private func nestedLines(_ link: Link, pad: String, indent: String, underName: B
     while count < link.values.count && !nestedLineHolds(link, count) { count += 1 }
     var parts = link.values.prefix(count).map { nestedAtom($0) ? escapeReference($0.id) : $0.format() }
     if let id = link.id { parts.insert(escapeReference(id) + ":", at: 0) }
-    return [pad + parts.joined(separator: " ")]
-        + link.values.dropFirst(count).flatMap {
-            nestedLines($0, pad: pad + indent, indent: indent, underName: underName || (link.id != nil && count == 0))
-        }
+    var lines = [pad + parts.joined(separator: " ")]
+    for value in link.values.dropFirst(count) {
+        lines.append(
+            contentsOf:
+                nestedLines(
+                    value, pad: pad + indent, indent: indent, underName: underName || (link.id != nil && count == 0)))
+    }
+    return lines
 }
