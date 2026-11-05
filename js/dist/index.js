@@ -348,7 +348,7 @@ class Link {
       return this._formatWithOptions(lessParentheses, isCompoundValue);
     }
     if (this.id === null && (!this.values || this.values.length === 0)) {
-      return lessParentheses ? "" : "()";
+      return "()";
     }
     if (!this.values || this.values.length === 0) {
       const escapedId = Link.escapeReference(this.id);
@@ -359,7 +359,7 @@ class Link {
     }
     const valuesStr = this.values.map((v) => this.formatValue(v)).join(" ");
     if (this.id === null) {
-      if (lessParentheses) {
+      if (lessParentheses && !this._hasLoneNestedValue()) {
         const allSimple = this.values.every((v) => !v.values || v.values.length === 0);
         if (allSimple) {
           const simpleValuesStr = this.values.map((v) => Link.escapeReference(v.id)).join(" ");
@@ -389,9 +389,12 @@ class Link {
   needsParentheses(str) {
     return str && (str.includes(" ") || str.includes(":") || str.includes("(") || str.includes(")"));
   }
+  _hasLoneNestedValue() {
+    return this.values.length === 1 && this.values[0].values?.length > 0;
+  }
   _formatWithOptions(options, isCompoundValue = false) {
     if (this.id === null && (!this.values || this.values.length === 0)) {
-      return options.lessParentheses ? "" : "()";
+      return "()";
     }
     if (!this.values || this.values.length === 0) {
       const escapedId = Link.escapeReference(this.id);
@@ -410,7 +413,7 @@ class Link {
         const idStr = Link.escapeReference(this.id);
         testLine = options.lessParentheses ? `${idStr}: ${valuesStr}` : `(${idStr}: ${valuesStr})`;
       } else {
-        testLine = options.lessParentheses ? valuesStr : `(${valuesStr})`;
+        testLine = options.lessParentheses && !this._hasLoneNestedValue() ? valuesStr : `(${valuesStr})`;
       }
       if (options.shouldIndentByLength(testLine)) {
         shouldIndent = true;
@@ -421,7 +424,7 @@ class Link {
     }
     const valuesStr = this.values.map((v) => this.formatValue(v)).join(" ");
     if (this.id === null) {
-      if (options.lessParentheses) {
+      if (options.lessParentheses && !this._hasLoneNestedValue()) {
         const allSimple = this.values.every((v) => !v.values || v.values.length === 0);
         if (allSimple) {
           return this.values.map((v) => Link.escapeReference(v.id)).join(" ");
