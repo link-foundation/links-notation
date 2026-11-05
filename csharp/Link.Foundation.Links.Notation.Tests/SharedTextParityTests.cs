@@ -68,6 +68,7 @@ public static class SharedTextParityTests
     {
         foreach (var input in new[] { "a b c", "((b c))", "(a (b c))" })
         {
+            TestContext.Current.CancellationToken.ThrowIfCancellationRequested();
             var links = new Parser().Parse(input);
             foreach (var options in new[] {
                 new FormatOptions { LessParentheses = true, MaxInlineRefs = 0, PreferInline = false },
