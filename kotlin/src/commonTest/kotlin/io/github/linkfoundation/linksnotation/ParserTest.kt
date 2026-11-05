@@ -49,7 +49,7 @@ class ParserTest {
         assertEquals("('has space': x)\n(y z)", formatLinks(built))
         assertEquals("('has space': x)\ny z", formatLinks(built, lessParentheses = true))
         assertEquals("()", Link(null).format())
-        assertEquals("", Link(null).format(lessParentheses = true))
+        assertEquals("()", Link(null).format(lessParentheses = true))
     }
 
     @Test

@@ -2481,7 +2481,7 @@
         "cpp/src/unicode.cpp",
         "cpp/src/unicode.hpp"
       ],
-      "sha256": "ca86ddbd2437fa7b6c9bcdeba07382440b31c85b1e800aa7302af986f65386de"
+      "sha256": "57235f5a49844b70b78704038b98fbc45ed9a1d824070826121be6ecf26b84a0"
     },
     "swift": {
       "files": [

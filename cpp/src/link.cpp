@@ -196,8 +196,8 @@ std::string Link::format(const FormatConfig& config, bool compound) const {
       const std::string with_colon = escape_reference(id) + ": " + formatted_values;
       test_line = config.less_parentheses ? with_colon : "(" + with_colon + ")";
     } else {
-      test_line = config.less_parentheses && !has_lone_nested_value(values) ? formatted_values
-                                                                            : "(" + formatted_values + ")";
+      test_line =
+          config.less_parentheses && !has_lone_nested_value(values) ? formatted_values : "(" + formatted_values + ")";
     }
     should_indent = config.should_indent_by_length(test_line);
   }
