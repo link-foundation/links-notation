@@ -3,3 +3,8 @@
 ^https://www\.npmjs\.com/
 ^https://stackoverflow\.com/
 
+
+# Answers 403 "Access Denied" for the whole host, its home page included, from
+# GitHub runners and from a data-centre browser (issue 379, run 42020895190).
+# Whether the alert itself still exists could not be checked from there.
+^https://www\.cisa\.gov/
