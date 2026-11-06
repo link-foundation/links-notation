@@ -177,6 +177,49 @@ test("a missing native release prerequisite is rejected", () =>
       w["js.yml"].jobs.release.needs = ["js"];
     }),
   ).not.toEqual([]));
+test("PyPI publishes directly from js.yml after all ten stages", () => {
+  const workflows = readWorkflows();
+  const publisher = workflows["js.yml"].jobs.publish_python;
+  expect(publisher?.needs?.toSorted()).toEqual(
+    workflows["js.yml"].jobs.release.needs.toSorted(),
+  );
+  expect(publisher?.uses).toBeUndefined();
+  expect(publisher?.environment).toBeUndefined();
+  expect(publisher?.permissions?.["id-token"]).toBe("write");
+  expect(
+    publisher?.steps?.some((step) =>
+      step.run?.includes('publish-package.mjs" pypi'),
+    ),
+  ).toBe(true);
+  expect(workflows["release.yml"].jobs.python).toBeUndefined();
+  expect(workflows["publish-python.yml"]).toBeUndefined();
+  expect(workflows["js.yml"].jobs.release_audit.needs).toContain(
+    "publish_python",
+  );
+  expect(workflows["js.yml"].jobs.release_audit.needs).toContain(
+    "python_release",
+  );
+  expect(
+    workflows["js.yml"].jobs.release_audit.with["release-result"],
+  ).toContain("needs.publish_python.result");
+});
+test("PyPI cannot lose a native prerequisite or move into a reusable workflow", () => {
+  for (const change of [
+    (w) => {
+      w["js.yml"].jobs.publish_python.needs = ["js"];
+    },
+    (w) => {
+      w["js.yml"].jobs.publish_python.uses = "./.github/workflows/release.yml";
+    },
+    (w) => {
+      w["js.yml"].jobs.publish_python.if = "${{ always() }}";
+    },
+    (w) => {
+      w["js.yml"].jobs.release_audit.needs = ["js", "release"];
+    },
+  ])
+    expect(mutate(change)).not.toEqual([]);
+});
 test("a publisher inside a native stage is rejected", () =>
   expect(
     mutate((w) => {

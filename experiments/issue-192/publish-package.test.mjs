@@ -85,7 +85,7 @@ test('NuGet exchange follows the official token protocol and masks no values int
   assert.equal(calls[1][1].headers.authorization, 'Bearer identity-secret');
 });
 
-for (const status of [400, 401, 403, 429, 500]) {
+for (const status of [400, 401, 403, 422, 429, 500]) {
   test(`PyPI token exchange HTTP ${status} has explicit fallback classification`, async () => {
     let calls = 0;
     await assert.rejects(exchangeTrustedCredential('pypi', {
@@ -95,9 +95,205 @@ for (const status of [400, 401, 403, 429, 500]) {
       calls++;
       return calls === 1 ? new Response('{"value":"identity"}')
         : new Response(JSON.stringify({ errors: [{ code: 'invalid-publisher', description: 'not configured' }] }), { status });
-    }), (error) => error.authentication === ([400, 401, 403].includes(status)));
+    }), (error) => error.authentication === ([400, 401, 403, 422].includes(status)));
   });
 }
+
+const oidcEnv = {
+  ACTIONS_ID_TOKEN_REQUEST_URL: 'https://token.actions.githubusercontent.com/token?secret=request-url-secret',
+  ACTIONS_ID_TOKEN_REQUEST_TOKEN: 'request-secret',
+};
+const warehouseError = (...codes) => ({
+  message: 'Token request failed',
+  errors: codes.map((code) => ({ code, description: 'private-identity-secret' })),
+});
+const exchangeResponse = (body, status = 422, stage = 'mint') => {
+  let calls = 0;
+  return async () => ++calls === 1 && stage === 'mint'
+    ? new Response('{"value":"identity-secret"}')
+    : new Response(typeof body === 'string' ? body : JSON.stringify(body), { status });
+};
+
+for (const status of [400, 422]) {
+  for (const codes of [['invalid-publisher'], ['invalid-token'], ['invalid-publisher', 'invalid-token']]) {
+    test(`PyPI HTTP ${status} ${codes.join(',')} retries with safe mint diagnostics`, async () => {
+      const logs = [], uploads = [];
+      await publishWithFallback({
+        provider: 'pypi', trusted: true,
+        exchange: () => exchangeTrustedCredential('pypi', oidcEnv, exchangeResponse(warehouseError(...codes), status)),
+        credentials: [{ source: 'PYPI_TOKEN secret', key: 'fallback-secret' }],
+        upload: async (credential) => { uploads.push(credential.key); return { status: 0 }; },
+        log: (message) => logs.push(message),
+      });
+      assert.deepEqual(uploads, ['fallback-secret']);
+      assert.match(logs.join('\n'), new RegExp(`PyPI token minting.*HTTP ${status}.*${codes[0]}`));
+      assert.doesNotMatch(logs.join('\n'), /request-secret|request-url-secret|identity-secret|fallback-secret|https:\/\/token/);
+    });
+  }
+}
+
+const unsafeBodies = [
+  ['payload defect', warehouseError('invalid-payload')],
+  ['replay', warehouseError('invalid-reuse-token')],
+  ['disabled', warehouseError('not-enabled')],
+  ['pending publisher defect', warehouseError('invalid-pending-publisher')],
+  ['rate limit', warehouseError('rate-limited')],
+  ['unknown code', warehouseError('unknown-private-secret')],
+  ['mixed codes', warehouseError('invalid-publisher', 'invalid-payload')],
+  ['empty errors', warehouseError()],
+  ['missing errors', {}],
+  ['non-list errors', { errors: { code: 'invalid-publisher' } }],
+  ['null entry', { errors: [null] }],
+  ['string entry', { errors: ['invalid-publisher'] }],
+  ['missing code', { errors: [{ description: 'private-secret' }] }],
+  ['non-string code', { errors: [{ code: ['invalid-publisher'], description: 'private-secret' }] }],
+  ['missing description', { errors: [{ code: 'invalid-publisher' }] }],
+  ['non-string description', { errors: [{ code: 'invalid-publisher', description: {} }] }],
+  ['mixed malformed entries', { errors: [...warehouseError('invalid-token').errors, null] }],
+  ['malformed JSON', '{"errors": [private-secret'],
+  ['null body', null],
+];
+for (const status of [400, 401, 403, 422]) {
+  for (const [name, body] of unsafeBodies) {
+    test(`PyPI HTTP ${status} ${name} cannot trigger fallback`, async () => {
+      let uploads = 0;
+      await assert.rejects(publishWithFallback({
+        provider: 'pypi', trusted: true,
+        exchange: () => exchangeTrustedCredential('pypi', oidcEnv, exchangeResponse(body, status)),
+        credentials: [{ source: 'PYPI_TOKEN secret', key: 'fallback-secret' }],
+        upload: async () => { uploads++; return { status: 0 }; }, log: () => {},
+      }), (error) => {
+        assert.equal(error.authentication, false);
+        assert.match(error.message, /PyPI token minting/);
+        assert.match(error.message, new RegExp(`HTTP ${status}`));
+        assert.doesNotMatch(error.message, /private-secret|unknown-private-secret|request-secret|identity-secret|request-url-secret/);
+        return true;
+      });
+      assert.equal(uploads, 0);
+    });
+  }
+}
+
+test('GitHub rejects PyPI authentication bodies at HTTP 400 and 422 without fallback', async () => {
+  for (const status of [400, 422]) {
+    let uploads = 0;
+    await assert.rejects(publishWithFallback({
+      provider: 'pypi', trusted: true,
+      exchange: () => exchangeTrustedCredential('pypi', oidcEnv,
+        exchangeResponse(warehouseError('invalid-publisher'), status, 'identity')),
+      credentials: [{ source: 'supplied token', key: 'fallback-secret' }],
+      upload: async () => { uploads++; return { status: 0 }; }, log: () => {},
+    }), /GitHub identity acquisition/);
+    assert.equal(uploads, 0);
+  }
+});
+
+test('PyPI 422 without a supplied token fails visibly after safe diagnostics', async () => {
+  const logs = [];
+  await assert.rejects(publishWithFallback({
+    provider: 'pypi', trusted: true,
+    exchange: () => exchangeTrustedCredential('pypi', oidcEnv,
+      exchangeResponse(warehouseError('invalid-publisher'))),
+    upload: async () => assert.fail('must not upload'),
+    log: (message) => logs.push(message),
+  }), /No pypi credential accepted/);
+  assert.match(logs.join('\n'), /PyPI token minting.*HTTP 422.*invalid-publisher/);
+});
+
+test('both trusted and supplied upload keys are redacted', async () => {
+  const logs = [];
+  await publishWithFallback({
+    provider: 'pypi', trusted: true, exchange: async () => 'minted-secret',
+    credentials: [{ source: 'supplied token', key: 'fallback-secret' }],
+    upload: async ({ trusted }) => ({
+      status: trusted ? 1 : 0,
+      output: 'HTTPError: 403 minted-secret fallback-secret',
+    }),
+    log: (message) => logs.push(message),
+  });
+  assert.doesNotMatch(logs.join('\n'), /minted-secret|fallback-secret/);
+  assert.match(logs.join('\n'), /\[REDACTED\]/);
+});
+
+for (const stage of ['identity', 'mint']) {
+  for (const status of [401, 403, 422, 429, 500]) {
+    test(`${stage} HTTP ${status} reports the stage without leaking response content`, async () => {
+      await assert.rejects(exchangeTrustedCredential('pypi', oidcEnv,
+        exchangeResponse(warehouseError('invalid-publisher'), status, stage)), (error) => {
+        assert.equal(error.authentication, stage === 'identity' ? [401, 403].includes(status) : [401, 403, 422].includes(status));
+        assert.match(error.message, stage === 'identity' ? /GitHub identity acquisition/ : /PyPI token minting/);
+        assert.match(error.message, new RegExp(`HTTP ${status}`));
+        assert.match(error.message, /invalid-publisher/);
+        assert.doesNotMatch(error.message, /private-identity-secret|request-secret|request-url-secret/);
+        return true;
+      });
+    });
+  }
+  for (const failure of ['transport', 'malformed JSON', 'missing credential']) {
+    test(`${stage} ${failure} is sanitized and cannot trigger fallback`, async () => {
+      let calls = 0;
+      await assert.rejects(exchangeTrustedCredential('pypi', oidcEnv, async () => {
+        if (++calls === 1 && stage === 'mint') return new Response('{"value":"identity-secret"}');
+        if (failure === 'transport') throw new Error(`request-secret ${oidcEnv.ACTIONS_ID_TOKEN_REQUEST_URL}`);
+        return new Response(failure === 'malformed JSON' ? 'private-secret' : '{}');
+      }), (error) => {
+        assert.equal(error.authentication, false);
+        assert.match(error.message, stage === 'identity' ? /GitHub identity acquisition/ : /PyPI token minting/);
+        assert.doesNotMatch(error.message, /private-secret|request-secret|identity-secret|request-url-secret/);
+        return true;
+      });
+    });
+  }
+}
+
+test('OIDC diagnostics bound code lists and do not trust arbitrary code strings', async () => {
+  const body = warehouseError(...Array(50).fill('invalid-publisher'), 'private-secret\n::error::injected');
+  await assert.rejects(exchangeTrustedCredential('pypi', oidcEnv, exchangeResponse(body)), (error) => {
+    assert.equal(error.authentication, false); // Check the entire list, not only the logged prefix.
+    assert.ok(error.message.length < 350);
+    assert.doesNotMatch(error.message, /private-secret|injected|\n/);
+    return true;
+  });
+});
+
+test('invalid GitHub identity URL is sanitized', async () => {
+  await assert.rejects(exchangeTrustedCredential('pypi', {
+    ...oidcEnv, ACTIONS_ID_TOKEN_REQUEST_URL: 'private-url-secret',
+  }), (error) => {
+    assert.equal(error.authentication, false);
+    assert.match(error.message, /GitHub identity acquisition/);
+    assert.doesNotMatch(error.message, /private-url-secret/);
+    return true;
+  });
+});
+
+test('PyPI 422 fallback validates once and uploads the same wheel and sdist', async () => {
+  const originalDirectory = process.cwd();
+  const temp = mkdtempSync(join(tmpdir(), 'lino-pypi-422-'));
+  const commands = [];
+  try {
+    process.chdir(temp);
+    mkdirSync('dist');
+    writeFileSync('dist/example.whl', 'validated-wheel');
+    writeFileSync('dist/example.tar.gz', 'validated-sdist');
+    await publishPackage('pypi', {
+      ...oidcEnv, SHOULD_PUBLISH: 'true', GITHUB_OUTPUT: join(temp, 'output'), PYPI_TOKEN: 'fallback-secret',
+    }, {
+      fetcher: exchangeResponse(warehouseError('invalid-publisher')),
+      executeCommand: (command, args, env) => {
+        commands.push({ command, args, password: env.TWINE_PASSWORD });
+        return { status: 0 };
+      },
+    });
+    assert.equal(commands.length, 2);
+    assert.deepEqual(commands[0].args, ['-m', 'twine', 'check', 'dist/example.tar.gz', 'dist/example.whl']);
+    assert.deepEqual(commands[1].args, ['-m', 'twine', 'upload', '--non-interactive', 'dist/example.tar.gz', 'dist/example.whl']);
+    assert.equal(commands[1].password, 'fallback-secret');
+  } finally {
+    process.chdir(originalDirectory);
+    rmSync(temp, { recursive: true, force: true });
+  }
+});
 
 test('PyPI passes generated attestations to Twine and retries unchanged distributions only', { timeout: 10000 }, async () => {
   const originalDirectory = process.cwd();

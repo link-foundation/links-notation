@@ -10,46 +10,82 @@ const remedy = {
   pypi: 'Configure PyPI trusted publishing for js.yml, or supply PYPI_TOKEN.',
 };
 
-async function requestJson(fetcher, url, options = {}) {
+const pypiMintUrl = 'https://pypi.org/_/oidc/mint-token';
+const authenticationCodes = ['invalid-publisher', 'invalid-token'];
+// Only these literal codes may enter logs. Descriptions, unknown codes and
+// fetch/JSON exception messages can contain identities, URLs or credentials.
+const diagnosticCodes = [...authenticationCodes, 'invalid-payload', 'not-enabled',
+  'invalid-pending-publisher', 'invalid-reuse-token', 'rate-limited'];
+const record = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
+const wellFormedError = (error) => record(error) && typeof error.code === 'string' &&
+  typeof error.description === 'string';
+const safeCodes = (body) => {
+  if (!Array.isArray(body?.errors) || !body.errors.length) return 'unavailable';
+  const codes = body.errors.slice(0, 5).map((error) => !wellFormedError(error) ? 'malformed'
+    : diagnosticCodes.includes(error.code) ? error.code : 'unknown');
+  if (body.errors.length > 5) codes.push('truncated');
+  return codes.join(',');
+};
+
+class OidcExchangeError extends Error {
+  constructor(stage, message, { status, body, authentication = false } = {}) {
+    const diagnostic = status === undefined ? '' : `: HTTP ${status}; codes=${safeCodes(body)}`;
+    super(`${stage}: ${message}${diagnostic}`);
+    this.authentication = authentication;
+  }
+}
+
+async function requestJson(fetcher, stage, url, options = {}) {
   let response;
   try {
     response = await fetcher(url, { ...options, signal: AbortSignal.timeout(30000) });
   } catch {
-    throw new Error('OIDC transport outcome unknown; credential fallback is unsafe.');
+    throw new OidcExchangeError(stage, 'OIDC transport outcome unknown; credential fallback is unsafe.');
   }
   let body;
-  try { body = await response.json(); } catch { body = null; }
+  try { body = await response.json(); } catch {
+    throw new OidcExchangeError(stage, 'Malformed OIDC response; credential fallback is unsafe.', { status: response.status });
+  }
+  if (!record(body))
+    throw new OidcExchangeError(stage, 'Malformed OIDC response; credential fallback is unsafe.', { status: response.status });
   if (!response.ok) {
-    // PyPI uses 400 for a known publisher/token rejection. Other 400s can
-    // indicate a protocol defect and must not be retried with another key.
-    const pypiRejection = url === 'https://pypi.org/_/oidc/mint-token' &&
-      response.status === 400 && Array.isArray(body?.errors) &&
+    // Warehouse uses 422 now (400 historically). Require its complete typed
+    // error list, including on 401/403: unknown/mixed/replay/protocol failures
+    // are never evidence that a supplied credential is safe to try.
+    const pypiRejection = [400, 401, 403, 422].includes(response.status) && Array.isArray(body.errors) &&
       body.errors.length > 0 && body.errors.every((error) =>
-        ['invalid-publisher', 'invalid-token'].includes(error.code));
-    throw Object.assign(new Error(`OIDC request rejected: HTTP ${response.status}`), {
-      authentication: [401, 403].includes(response.status) || pypiRejection,
+        wellFormedError(error) && authenticationCodes.includes(error.code));
+    throw new OidcExchangeError(stage, 'OIDC request rejected', {
+      status: response.status, body,
+      authentication: url === pypiMintUrl ? pypiRejection : [401, 403].includes(response.status),
     });
   }
-  if (!body) throw new Error('Malformed OIDC response; credential fallback is unsafe.');
   return body;
 }
 
 export async function exchangeTrustedCredential(provider, env = process.env, fetcher = fetch) {
   const requestUrl = env.ACTIONS_ID_TOKEN_REQUEST_URL;
   const requestToken = env.ACTIONS_ID_TOKEN_REQUEST_TOKEN;
+  const identityStage = 'GitHub identity acquisition';
   if (!requestUrl || !requestToken) {
-    throw Object.assign(new Error('GitHub OIDC is unavailable; configure id-token: write.'), { authentication: true });
+    throw new OidcExchangeError(identityStage, 'GitHub OIDC is unavailable; configure id-token: write.', { authentication: true });
   }
-  const url = new URL(requestUrl);
-  url.searchParams.set('audience', provider === 'nuget' ? 'https://www.nuget.org' : 'pypi');
-  const identity = await requestJson(fetcher, url.href, {
+  let url;
+  try {
+    url = new URL(requestUrl);
+    url.searchParams.set('audience', provider === 'nuget' ? 'https://www.nuget.org' : 'pypi');
+  } catch {
+    throw new OidcExchangeError(identityStage, 'Invalid OIDC request URL; credential fallback is unsafe.');
+  }
+  const identity = await requestJson(fetcher, identityStage, url.href, {
     headers: { authorization: `Bearer ${requestToken}` },
   });
   if (typeof identity.value !== 'string' || !identity.value)
-    throw new Error('GitHub returned no OIDC identity; credential fallback is unsafe.');
+    throw new OidcExchangeError(identityStage, 'GitHub returned no OIDC identity; credential fallback is unsafe.');
   const nuget = provider === 'nuget';
-  const result = await requestJson(fetcher, nuget
-    ? 'https://www.nuget.org/api/v2/token' : 'https://pypi.org/_/oidc/mint-token', {
+  const mintStage = nuget ? 'NuGet token minting' : 'PyPI token minting';
+  const result = await requestJson(fetcher, mintStage, nuget
+    ? 'https://www.nuget.org/api/v2/token' : pypiMintUrl, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -62,7 +98,7 @@ export async function exchangeTrustedCredential(provider, env = process.env, fet
   });
   const key = nuget ? result.apiKey : result.token;
   if (typeof key !== 'string' || !key)
-    throw new Error('Registry returned no credential; credential fallback is unsafe.');
+    throw new OidcExchangeError(mintStage, 'Registry returned no credential; credential fallback is unsafe.');
   return key;
 }
 
@@ -89,6 +125,7 @@ export async function publishWithFallback({
       candidates.push({ key, source: 'trusted publishing', trusted: true });
     } catch (error) {
       if (!error.authentication) throw error;
+      if (error instanceof OidcExchangeError) safeLog(error.message);
       safeLog('::notice::Trusted publishing authentication was rejected; checking supplied fallback credentials.');
       if (!secrets.length) throw new Error(`No ${provider} credential accepted. ${remedy[provider]}`);
     }
