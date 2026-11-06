@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { publishWithFallback, exchangeTrustedCredential } from '../../scripts/ci/publish-package.mjs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { publishPackage, publishWithFallback, exchangeTrustedCredential } from '../../scripts/ci/publish-package.mjs';
 
 for (const provider of ['nuget', 'pypi']) {
   test(`${provider}: rejected OIDC exchange uses a supplied credential`, async () => {
@@ -95,3 +98,65 @@ for (const status of [400, 401, 403, 429, 500]) {
     }), (error) => error.authentication === ([400, 401, 403].includes(status)));
   });
 }
+
+test('PyPI passes generated attestations to Twine and retries unchanged distributions only', { timeout: 10000 }, async () => {
+  const originalDirectory = process.cwd();
+  const temp = mkdtempSync(join(tmpdir(), 'lino-pypi-'));
+  const commands = [];
+  try {
+    process.chdir(temp);
+    mkdirSync('dist');
+    writeFileSync('dist/example.whl', 'validated-wheel');
+    let exchanges = 0;
+    await publishPackage('pypi', {
+      SHOULD_PUBLISH: 'true', GITHUB_OUTPUT: join(temp, 'output'),
+      ACTIONS_ID_TOKEN_REQUEST_URL: 'https://token.actions.githubusercontent.com/token',
+      ACTIONS_ID_TOKEN_REQUEST_TOKEN: 'request-token', PYPI_TOKEN: 'fallback',
+    }, {
+      fetcher: async () => new Response(JSON.stringify(++exchanges === 1
+        ? { value: 'identity' } : { token: 'short-lived' })),
+      executeCommand: (command, args, env) => {
+        commands.push({ command, args, password: env.TWINE_PASSWORD });
+        if (args.includes('sign')) writeFileSync('dist/example.whl.publish.attestation', '{}');
+        return args.includes('upload') && env.TWINE_PASSWORD === 'short-lived'
+          ? { status: 1, output: 'HTTPError: 403 Forbidden' } : { status: 0 };
+      },
+    });
+    assert.equal(exchanges, 2);
+    const uploads = commands.filter(({ args }) => args.includes('upload'));
+    assert.equal(commands.filter(({ args }) => args.includes('check')).length, 1);
+    assert.equal(commands.filter(({ args }) => args.includes('sign')).length, 1);
+    assert.equal(uploads.length, 2);
+    assert.ok(uploads[0].args.includes('dist/example.whl.publish.attestation'));
+    assert.ok(uploads.every(({ args }) => args.includes('dist/example.whl')));
+    assert.ok(!uploads[1].args.includes('--attestations'));
+    assert.equal(uploads[1].password, 'fallback');
+  } finally {
+    process.chdir(originalDirectory);
+    rmSync(temp, { recursive: true, force: true });
+  }
+});
+
+test('a changed NuGet artifact prevents a credential retry', async () => {
+  const originalDirectory = process.cwd();
+  const temp = mkdtempSync(join(tmpdir(), 'lino-nuget-'));
+  try {
+    process.chdir(temp);
+    mkdirSync('artifacts');
+    writeFileSync('artifacts/example.nupkg', 'validated-package');
+    let uploads = 0;
+    await assert.rejects(publishPackage('nuget', {
+      SHOULD_PUBLISH: 'true', NUGET_LOGIN_KEY: 'short-lived', NUGET_TOKEN: 'fallback',
+    }, {
+      executeCommand: () => {
+        uploads++;
+        writeFileSync('artifacts/example.nupkg', 'modified-package');
+        return { status: 1, output: 'Response status code does not indicate success: 401' };
+      },
+    }), /Built artifacts changed/);
+    assert.equal(uploads, 1);
+  } finally {
+    process.chdir(originalDirectory);
+    rmSync(temp, { recursive: true, force: true });
+  }
+});

@@ -21,7 +21,7 @@ case "$binding" in
   kotlin)
     cp -R "$root/examples/maven/kotlin" "$temp/project"
     # A fresh Gradle cache proves public resolution rather than a local install.
-    "$root/kotlin/gradlew" --project-dir "$temp/project" \
+    GRADLE_USER_HOME="$temp/gradle" "$root/kotlin/gradlew" --project-dir "$temp/project" \
       --gradle-user-home "$temp/gradle" --no-daemon --console=plain \
       --no-configuration-cache --max-workers=1 "-PnotationVersion=$version" run
     ;;

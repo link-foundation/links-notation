@@ -116,7 +116,9 @@ const execute = (command, args, env) => {
   return { status: result.status ?? 1, output: (result.stdout ?? '') + (result.stderr ?? '') };
 };
 
-export async function publishPackage(provider, env = process.env) {
+export async function publishPackage(provider, env = process.env, {
+  executeCommand = execute, fetcher = fetch,
+} = {}) {
   if (!Object.hasOwn(remedy, provider)) throw new Error('Expected nuget or pypi');
   if (env.SHOULD_PUBLISH !== 'true') {
     appendFileSync(env.GITHUB_OUTPUT, 'published=skipped\n');
@@ -133,14 +135,14 @@ export async function publishPackage(provider, env = process.env) {
     createHash('sha256').update(readFileSync(file)).digest('hex')).join(':');
   const original = fingerprint();
   if (!nuget) {
-    const result = execute('python', ['-m', 'twine', 'check', ...files], env);
+    const result = executeCommand('python', ['-m', 'twine', 'check', ...files], env);
     if (result.status !== 0) throw new Error('PyPI artifact metadata validation failed; no authentication attempted.');
   }
   let attested = false;
   await publishWithFallback({
     provider,
     trusted: nuget ? Boolean(env.NUGET_USER || env.NUGET_LOGIN_KEY) : env.PYPI_TRUSTED_PUBLISHING !== 'false',
-    exchange: () => env.NUGET_LOGIN_KEY || exchangeTrustedCredential(provider, env),
+    exchange: () => (nuget && env.NUGET_LOGIN_KEY) || exchangeTrustedCredential(provider, env, fetcher),
     credentials: nuget ? [
       { source: 'NUGET_API_KEY secret', key: env.NUGET_API_KEY },
       { source: 'NUGET_TOKEN secret', key: env.NUGET_TOKEN },
@@ -148,16 +150,19 @@ export async function publishPackage(provider, env = process.env) {
     upload: async (credential) => {
       if (fingerprint() !== original) throw new Error('Built artifacts changed; refusing credential retry.');
       if (!nuget && credential.trusted && !attested) {
-        const result = execute('python', ['-m', 'pypi_attestations', 'sign', ...files], env);
+        const result = executeCommand('python', ['-m', 'pypi_attestations', 'sign', ...files], env);
         if (result.status !== 0) throw new Error('PyPI attestation generation failed; no credential retry.');
         attested = true;
       }
-      return nuget ? execute('dotnet', [
+      const attestations = !nuget && credential.trusted
+        ? readdirSync(directory).filter((file) => file.endsWith('.attestation')).sort()
+          .map((file) => `${directory}/${file}`) : [];
+      return nuget ? executeCommand('dotnet', [
         'nuget', 'push', ...files, '--api-key', credential.key,
         '--source', 'https://api.nuget.org/v3/index.json', '--skip-duplicate',
-      ], env) : execute('python', [
+      ], env) : executeCommand('python', [
         '-m', 'twine', 'upload', '--non-interactive',
-        ...(credential.trusted ? ['--attestations'] : []), ...files,
+        ...(credential.trusted ? ['--attestations'] : []), ...files, ...attestations,
       ], { ...env, TWINE_USERNAME: '__token__', TWINE_PASSWORD: credential.key,
         TWINE_REPOSITORY_URL: 'https://upload.pypi.org/legacy/' });
     },
