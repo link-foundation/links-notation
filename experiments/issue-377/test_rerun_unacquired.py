@@ -2,8 +2,10 @@
 """Offline tests for scripts/ci/rerun-unacquired.py (issue #377)."""
 
 import importlib.util
+import json
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = importlib.util.spec_from_file_location(
@@ -47,6 +49,27 @@ class Decide(unittest.TestCase):
 
     def test_nothing_to_do_without_unacquired_jobs(self):
         self.assertEqual(RERUN.decide([], 1), "nothing")
+
+
+class ListJobs(unittest.TestCase):
+    def test_reads_every_page_of_the_selected_attempt_in_small_responses(self):
+        # The 101-job release run returned HTTP 502 at per_page=100, but all
+        # four pages succeeded at per_page=30. Never mix in another attempt.
+        pages = [{"jobs": [IOS]}, {"jobs": [FAILED, CANCELLED_BY_USER]}]
+        with patch.object(RERUN, "gh", return_value=json.dumps(pages)) as command:
+            self.assertEqual(
+                RERUN.list_jobs("repos/owner/repo/actions/runs/123", 6),
+                [IOS, FAILED, CANCELLED_BY_USER],
+            )
+        command.assert_called_once_with(
+            "api", "--paginate", "--slurp",
+            "repos/owner/repo/actions/runs/123/attempts/6/jobs?per_page=30",
+        )
+
+    def test_api_errors_remain_failures(self):
+        with patch.object(RERUN, "gh", side_effect=RuntimeError("HTTP 502")):
+            with self.assertRaisesRegex(RuntimeError, "HTTP 502"):
+                RERUN.list_jobs("repos/owner/repo/actions/runs/123", 6)
 
 
 if __name__ == "__main__":

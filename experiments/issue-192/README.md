@@ -59,6 +59,12 @@ work that passing PR CI can prove.
   2097152 KiB budget. Macro version 0.1.2 and existing release tags are unchanged.
 - Live ruleset 24860631 was repaired and the effective main branch rules were
   read back with all ten strict checks, preserving the other live settings.
+- Three main runner-recovery failures reported GitHub HTTP 502 when listing
+  the 101-job release attempt with 100 jobs per response. Thirty-job pages
+  retrieved all 101 jobs in four pages. The recovery helper uses those smaller
+  pages, still selecting the exact attempt and preserving API errors, runner
+  annotations and the three-attempt limit; offline regressions and a read-only
+  dry run verify the change. An unrelated Pages HTTP 500 recovered on retry.
 - Packagist setup remains blocked on account access: the browser has no signed-in
   session, and the repository secret-name listing contains neither
   `PACKAGIST_USERNAME` nor `PACKAGIST_TOKEN`. No credential values were printed.

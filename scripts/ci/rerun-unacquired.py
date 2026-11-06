@@ -54,6 +54,15 @@ def gh(*args):
     return result.stdout
 
 
+def list_jobs(run, attempt):
+    # GitHub returned HTTP 502 for 100-job responses in release run 42104467330;
+    # 30-job pages retrieved all 101 jobs. Keep errors visible and attempts exact.
+    pages = json.loads(
+        gh("api", "--paginate", "--slurp", f"{run}/attempts/{attempt}/jobs?per_page=30")
+    )
+    return [job for page in pages for job in page["jobs"]]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--repository", required=True)
@@ -65,10 +74,7 @@ def main():
     verbose = os.environ.get("CI_VERBOSE") == "true"
     run = f"repos/{options.repository}/actions/runs/{options.run_id}"
 
-    pages = json.loads(
-        gh("api", "--paginate", "--slurp", f"{run}/attempts/{options.attempt}/jobs?per_page=100")
-    )
-    jobs = [job for page in pages for job in page["jobs"]]
+    jobs = list_jobs(run, options.attempt)
     annotations = {}
     for job in jobs:
         if job.get("conclusion") == "cancelled" and not job.get("steps"):
