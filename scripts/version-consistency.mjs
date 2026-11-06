@@ -102,13 +102,13 @@ const versionReferences = [
     of: 'kotlin',
     file: 'kotlin/README.md',
     what: 'the Gradle snippet',
-    re: /"io\.github\.link-foundation:links-notation-kotlin:([^"]+)"/,
+    re: /"io\.github\.link-foundation\.kotlin:links-notation:([^"]+)"/,
   },
   {
     of: 'kotlin',
     file: 'kotlin/README.ru.md',
     what: 'the Gradle snippet',
-    re: /"io\.github\.link-foundation:links-notation-kotlin:([^"]+)"/,
+    re: /"io\.github\.link-foundation\.kotlin:links-notation:([^"]+)"/,
   },
   {
     of: 'swift',

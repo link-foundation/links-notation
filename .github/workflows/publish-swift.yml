@@ -44,7 +44,7 @@ jobs:
             exit 1
           fi
           echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
-          echo "Package: LinksNotation $PACKAGE_VERSION"
+          echo "Package: links-notation $PACKAGE_VERSION"
       # Swift has no registry to upload to: SwiftPM resolves a package from a
       # semantic-version tag of its Git repository, and Package.swift is at the
       # repository root for that reason. Creating the tag *is* the publish, as
@@ -85,7 +85,7 @@ jobs:
           . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
           wait_for_registry_match "Package.swift at tag $PACKAGE_VERSION" \
             "https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${PACKAGE_VERSION}/Package.swift" \
-            'name: "LinksNotation"' 20 15
+            'name: "links-notation"' 20 15
           # A downstream package, resolved from the tag exactly as a user's is.
           consumer="$RUNNER_TEMP/consumer"
           mkdir -p "$consumer/Sources/LinksNotationSwiftExample"

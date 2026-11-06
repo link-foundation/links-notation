@@ -15,12 +15,12 @@ JavaScript (Node.js) и WebAssembly (`wasmJs`).
 
 ```kotlin
 dependencies {
-    implementation("io.github.link-foundation:links-notation-kotlin:0.31.1")
+    implementation("io.github.link-foundation.kotlin:links-notation:0.31.2")
 }
 ```
 
 В мультиплатформенном проекте добавьте зависимость в `commonMain`; Gradle сам
-выберет артефакт для каждой платформы (`links-notation-kotlin-jvm`, `-js`,
+выберет артефакт для каждой платформы (`links-notation-jvm`, `-js`,
 `-iosarm64`, ...).
 
 ### Локальная разработка
@@ -206,5 +206,5 @@ codec.decodeText(bytes) // papa loves mama
 ## Информация о пакете
 
 - Пакет: `io.github.linkfoundation.linksnotation`
-- Координаты Maven: `io.github.link-foundation:links-notation-kotlin`
+- Координаты Maven: `io.github.link-foundation.kotlin:links-notation`
 - Лицензия: Unlicense

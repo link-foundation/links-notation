@@ -15,12 +15,12 @@ JavaScript (Node.js) and WebAssembly (`wasmJs`).
 
 ```kotlin
 dependencies {
-    implementation("io.github.link-foundation:links-notation-kotlin:0.31.1")
+    implementation("io.github.link-foundation.kotlin:links-notation:0.31.2")
 }
 ```
 
 In a multiplatform project, add it to `commonMain`; Gradle picks the artifact
-for each target (`links-notation-kotlin-jvm`, `-js`, `-iosarm64`, ...).
+for each target (`links-notation-jvm`, `-js`, `-iosarm64`, ...).
 
 ### Local Development Setup
 
@@ -204,5 +204,5 @@ The behaviour is the same; the shapes follow Kotlin conventions:
 ## Package Information
 
 - Package: `io.github.linkfoundation.linksnotation`
-- Maven coordinates: `io.github.link-foundation:links-notation-kotlin`
+- Maven coordinates: `io.github.link-foundation.kotlin:links-notation`
 - License: Unlicense

@@ -39,8 +39,8 @@ export function registryTargets(version) {
         "configure NuGet.org trusted publishing for publish-csharp.yml with the NUGET_USER variable, or renew the NUGET_API_KEY secret (NuGet API keys expire)",
       registry: "NuGet",
       urls: [
-        "https://api.nuget.org/v3-flatcontainer/link.foundation.links.notation/index.json",
-        `https://api.nuget.org/v3-flatcontainer/link.foundation.links.notation/${version.csharp}/link.foundation.links.notation.${version.csharp}.nupkg`,
+        "https://api.nuget.org/v3-flatcontainer/links-notation/index.json",
+        `https://api.nuget.org/v3-flatcontainer/links-notation/${version.csharp}/links-notation.${version.csharp}.nupkg`,
       ],
       valid: (body) => body.versions?.includes(version.csharp),
     },
@@ -56,6 +56,7 @@ export function registryTargets(version) {
     {
       name: "java",
       artifact: "links-notation",
+      group: "io.github.link-foundation",
       setup:
         "configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace",
       registry: "Maven Central",
@@ -102,23 +103,24 @@ export function registryTargets(version) {
         `https://raw.githubusercontent.com/link-foundation/links-notation/${version.swift}/Package.swift`,
       ],
       text: true,
-      valid: (body) => body.includes('name: "LinksNotation"'),
+      valid: (body) => body.includes('name: "links-notation"'),
     },
     {
       // Verify every target, file, strong hash and detached signature behind
       // the root metadata. A root POM alone is not a multiplatform release.
       name: "kotlin",
-      artifact: "links-notation-kotlin",
+      artifact: "links-notation",
+      group: "io.github.link-foundation.kotlin",
       setup:
         "configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace",
       registry: "Maven Central",
       urls: [
-        `https://repo1.maven.org/maven2/io/github/link-foundation/links-notation-kotlin/${version.kotlin}/links-notation-kotlin-${version.kotlin}.pom`,
+        `https://repo1.maven.org/maven2/io/github/link-foundation/kotlin/links-notation/${version.kotlin}/links-notation-${version.kotlin}.pom`,
       ],
       text: true,
       valid: (body) =>
         body.includes(`<version>${version.kotlin}</version>`) &&
-        body.includes("<artifactId>links-notation-kotlin</artifactId>"),
+        body.includes("<artifactId>links-notation</artifactId>"),
     },
   ];
 }
@@ -158,7 +160,7 @@ export async function audit({
     try {
       let present = true;
       if (target.artifact) {
-        record.maven = await verifyCentral({ artifact: target.artifact,
+        record.maven = await verifyCentral({ group: target.group, artifact: target.artifact,
           version: record.version, fetcher, verifySignature,
           requests: record.requests, verbose, log });
         present = record.maven.present;

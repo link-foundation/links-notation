@@ -32,10 +32,10 @@ function mockFetch(change = () => null) {
       };
     if (url.includes("/git/ref/tags/")) body = { object: { type: "commit", sha: "a".repeat(40) } };
     if (url.endsWith("/Package.swift"))
-      return new Response('let package = Package(\n    name: "LinksNotation",');
+      return new Response('let package = Package(\n    name: "links-notation",');
     if (url.endsWith(".pom"))
       return new Response(
-        `<artifactId>${url.includes("/links-notation-kotlin/") ? "links-notation-kotlin" : "links-notation"}</artifactId><version>1.2.3</version>`,
+        `<artifactId>links-notation</artifactId><version>1.2.3</version>`,
       );
     return new Response(JSON.stringify(body));
   };

@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.link-foundation:links-notation-kotlin:${property("notationVersion")}")
+    implementation("io.github.link-foundation.kotlin:links-notation:${property("notationVersion")}")
 }
 
 application {

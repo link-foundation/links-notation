@@ -25,6 +25,17 @@ requires all ten registries; green tests alone do not prove delivery.
 
 <!-- markdownlint-enable MD013 -->
 
+The primary package name is `links-notation`. NuGet uses that exact ID, and
+SwiftPM declares that package name while its importable module remains
+`LinksNotation`. Composer requires `vendor/package`, so PHP uses
+`link-foundation/links-notation`. Maven requires group/artifact coordinates:
+Java uses `io.github.link-foundation:links-notation`, and Kotlin uses
+`io.github.link-foundation.kotlin:links-notation` to avoid a collision. Kotlin's
+platform artifacts use `-jvm`, `-android`, and other target suffixes. Composer
+and Maven namespaces are required by their registries.
+The previous NuGet and Kotlin identities remain immutable historical releases;
+new consumers should use the names above.
+
 Register npm and PyPI provider identities against the **caller** `js.yml`.
 NuGet evaluates the reusable **`publish-csharp.yml`** workflow instead; this
 was verified by the actual 0.31.0 OIDC exchange. Local reusable calls preserve
@@ -75,7 +86,7 @@ PACKAGE_ARTIFACT=links-notation PACKAGE_VERSION=0.31.0 node scripts/ci/maven-cen
 AUDIT_EXPECT_PUBLISHED=true node scripts/release-audit.mjs
 ```
 
-Kotlin publishes `io.github.link-foundation:links-notation-kotlin` to the same
+Kotlin publishes `io.github.link-foundation.kotlin:links-notation` to the same
 Central namespace with the same four secrets. Kotlin/Native builds iOS klibs
 only on macOS, so `publish-kotlin.yml` runs the whole multiplatform publication
 (JVM, Android, iOS, JS and Wasm: one artifact per target behind the root
@@ -91,7 +102,9 @@ publisher then resolves the root coordinate in a fresh Gradle JVM consumer
 before `[Kotlin] VERSION` (tag `kotlin_VERSION`) is created:
 
 ```sh
-PACKAGE_ARTIFACT=links-notation-kotlin PACKAGE_VERSION=0.31.0 node scripts/ci/maven-central.mjs
+PACKAGE_GROUP=io.github.link-foundation.kotlin \
+  PACKAGE_ARTIFACT=links-notation PACKAGE_VERSION=0.31.2 \
+  node scripts/ci/maven-central.mjs
 ```
 
 Both publishers and the final audit use the same verifier. They never request
