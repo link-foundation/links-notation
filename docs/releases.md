@@ -14,7 +14,7 @@ requires all ten registries; green tests alone do not prove delivery.
 | -------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | JS       | npm trusted publisher for `js.yml`                              | Configure this repository/caller on npm; optional `NPM_TOKEN` fallback                               |
 | Rust     | crates.io trusted publisher for `js.yml`                        | Set `CRATES_IO_TRUSTED_PUBLISHING=true` after registration; otherwise `CARGO_TOKEN`                  |
-| Python   | PyPI trusted publisher for `js.yml`                             | Set `PYPI_TRUSTED_PUBLISHING=true` after registration; otherwise `PYPI_TOKEN`                        |
+| Python   | PyPI trusted publisher for `js.yml`                             | OIDC is attempted by default; fallback `PYPI_TOKEN`; `PYPI_TRUSTED_PUBLISHING=false` disables OIDC    |
 | Java     | Central Portal, verified `io.github.link-foundation` namespace  | `CENTRAL_USERNAME`, `CENTRAL_TOKEN`, `GPG_PRIVATE_KEY`, `GPG_PASSPHRASE`                             |
 | Go       | Git tag in the module's subdirectory                            | Workflow `GITHUB_TOKEN`; `go/vVERSION` tag at the gated SHA                                          |
 | C#       | NuGet.org trusted publishing policy for `publish-csharp.yml`, or an API key | Set `NUGET_USER` to the policy creator; fallback `NUGET_API_KEY` (expires; renew it) or `NUGET_TOKEN` |
