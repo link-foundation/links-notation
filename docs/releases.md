@@ -130,7 +130,12 @@ publisher creates a bare `VERSION` tag at the gated SHA before the update call,
 then verifies the stable version and creates the existing `php_VERSION` GitHub
 release. An existing Composer tag at another commit fails; bump the version
 instead of changing an immutable tag. `php_VERSION` alone is not a Composer
-version tag. See
+version tag. Both new and reused versions must report the canonical GitHub
+source repository and gated SHA; the final audit checks the source against
+the immutable bare version tag. Composer-minified metadata is expanded before
+checking it. The publisher installs the exact stable version in a fresh
+Composer home/cache and runs `examples/php/public_consumer.php` before release.
+See
 [Packagist's requirements](https://packagist.org/about) and
 [Composer version tags](https://getcomposer.org/doc/articles/versions.md).
 

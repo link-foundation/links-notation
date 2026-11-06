@@ -5,6 +5,7 @@ import { writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { declaredVersions } from "./declared-versions.mjs";
 import { verifyCentral, verifyMavenSignature } from "./ci/maven-central.mjs";
+import { packagistVersion, checkPackagistSource } from "./ci/packagist-status.mjs";
 
 export function registryTargets(version) {
   return [
@@ -183,6 +184,11 @@ export async function audit({
             ? await response.text()
             : await response.json();
           if (!target.valid(body)) present = false;
+          if (target.name === "php" && present) {
+            const item = packagistVersion(body, "link-foundation/links-notation", record.version);
+            checkPackagistSource(item, repository);
+            record.source = item.source.reference;
+          }
         } else await response.body?.cancel();
       }
       if (!present) {
@@ -199,6 +205,24 @@ export async function audit({
         continue;
       }
       record.published = true;
+      if (target.name === "php") {
+        let tagUrl = `https://api.github.com/repos/${repository}/git/ref/tags/${encodeURIComponent(record.version)}`;
+        let object;
+        for (let depth = 0; depth < 5; depth++) {
+          const response = await fetcher(tagUrl, {
+            headers: { ...headers, ...(token ? { authorization: `Bearer ${token}` } : {}) },
+            signal: AbortSignal.timeout(30000),
+          });
+          record.requests.push({ url: tagUrl, status: response.status });
+          if (!response.ok) { await response.body?.cancel(); throw new Error(`Packagist version tag: HTTP ${response.status}`); }
+          object = (await response.json()).object;
+          if (object?.type === "commit") break;
+          if (object?.type !== "tag" || !/^[a-f0-9]{40}$/.test(object.sha)) throw new Error("Invalid Packagist version tag");
+          tagUrl = `https://api.github.com/repos/${repository}/git/tags/${object.sha}`;
+        }
+        if (object?.type !== "commit" || object.sha !== record.source)
+          throw new Error("Packagist source differs from the immutable Composer version tag");
+      }
       const tag =
         target.tag ??
         (target.name === "go"

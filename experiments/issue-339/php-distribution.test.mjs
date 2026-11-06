@@ -156,3 +156,13 @@ test("a reused Packagist version must come from the canonical repository and gat
     { sha, repository: "link-foundation/links-notation" }), /source/);
   }
 });
+test("Composer-minified metadata inherits and unsets source fields correctly", async () => {
+  const source = { type: "git", url: "https://github.com/link-foundation/links-notation.git", reference: sha };
+  const fetcher = async () => response({ minified: "composer/2.0", packages: { [packageName]: [
+    { version: "1.2.4", source }, { version: "1.2.3" }, { version: "1.2.2", source: "__unset" },
+  ] } });
+  assert.equal((await packagistStatus(packageName, "1.2.3", fetcher,
+    { sha, repository: "link-foundation/links-notation" })).shouldPublish, false);
+  await assert.rejects(packagistStatus(packageName, "1.2.2", fetcher,
+    { sha, repository: "link-foundation/links-notation" }), /source/);
+});

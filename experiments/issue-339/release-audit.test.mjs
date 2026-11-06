@@ -26,8 +26,11 @@ function mockFetch(change = () => null) {
     if (url.includes("proxy.golang.org")) body = { Version: "v1.2.3" };
     if (url.includes("packagist.org"))
       body = {
-        packages: { "link-foundation/links-notation": [{ version: "v1.2.3" }] },
+        packages: { "link-foundation/links-notation": [{ version: "v1.2.3", source: {
+          type: "git", url: "https://github.com/link-foundation/links-notation.git", reference: "a".repeat(40),
+        } }] },
       };
+    if (url.includes("/git/ref/tags/")) body = { object: { type: "commit", sha: "a".repeat(40) } };
     if (url.endsWith("/Package.swift"))
       return new Response('let package = Package(\n    name: "LinksNotation",');
     if (url.endsWith(".pom"))
@@ -39,6 +42,12 @@ function mockFetch(change = () => null) {
 }
 const run = (fetcher, expectPublished = true) =>
   audit({ versions, fetcher, expectPublished, log: () => {} });
+test("a Packagist source mismatch fails even when the version and release exist", async () => {
+  const result = await run(mockFetch((url) => url.includes('/git/ref/tags/')
+    ? new Response(JSON.stringify({ object: { type: 'commit', sha: 'b'.repeat(40) } })) : null));
+  assert.equal(result.failures, 1);
+  assert.match(result.findings.find((item) => item.language === 'php').error, /Packagist source/);
+});
 test("every exact version and release is verified", async () =>
   assert.equal((await run(mockFetch())).failures, 0));
 test("exact Central artifacts verify even while the parent directory is absent", async () =>
