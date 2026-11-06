@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Repair release authentication fallback, verify complete signed Maven artifacts
+  and Composer provenance, and report partial registry delivery accurately.
+  Prepare 0.31.1; see [the release fragment](changelog.d/192.md) and
+  [issue 192](https://github.com/link-foundation/links-notation/issues/192).
 - Make indented ID reference leaves in `parseGroups` agree with `parse`, while
   keeping each ID element's values empty and its children separate, in JS,
   C++, Swift and Kotlin. Prepare 0.30.2; see

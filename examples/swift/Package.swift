@@ -2,7 +2,7 @@
 // A package that depends on Links Notation the way a downstream project does.
 // It points at this checkout; a real project names the repository instead:
 //
-//     .package(url: "https://github.com/link-foundation/links-notation.git", from: "0.31.0")
+//     .package(url: "https://github.com/link-foundation/links-notation.git", from: "0.31.1")
 import PackageDescription
 
 let package = Package(
