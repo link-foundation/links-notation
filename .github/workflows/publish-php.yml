@@ -52,6 +52,8 @@ jobs:
           tools: composer:v2
       - name: Check if version already published
         id: version-check
+        env:
+          RELEASE_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
           PACKAGE_NAME=$(php -r 'echo json_decode(file_get_contents("composer.json"))->name;')
@@ -103,20 +105,20 @@ jobs:
             -d"{\"repository\":{\"url\":\"${REPOSITORY_URL}\"}}"
           echo "published=true" >> "$GITHUB_OUTPUT"
       - name: Verify the version is really on Packagist
-        if: steps.publish.outputs.published == 'true'
+        if: steps.publish.outputs.published == 'true' || steps.publish.outputs.published == 'skipped'
         env:
           PACKAGE_NAME: ${{ steps.version-check.outputs.name }}
           PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
+          RELEASE_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-          # shellcheck source=scripts/ci/registry-probe.sh
-          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
-          # Packagist crawls asynchronously after the update call returns 202,
-          # and serves every version from one document, so match the body.
-          wait_for_registry_match \
-            "${PACKAGE_NAME}@${PACKAGE_VERSION} on Packagist" \
-            "https://repo.packagist.org/p2/${PACKAGE_NAME}.json" \
-            "\"version\":\"${PACKAGE_VERSION}\"" 20 30
+          node ../scripts/ci/packagist-status.mjs --verify
+          CONSUMER=$(mktemp -d)
+          trap 'rm -rf "$CONSUMER"' EXIT
+          export COMPOSER_HOME="$CONSUMER/home" COMPOSER_CACHE_DIR="$CONSUMER/cache"
+          composer --working-dir="$CONSUMER" require --no-interaction --no-progress \
+            --prefer-dist "${PACKAGE_NAME}:${PACKAGE_VERSION}"
+          php "$GITHUB_WORKSPACE/examples/php/public_consumer.php" "$CONSUMER/vendor/autoload.php"
 
   publishRelease:
     runs-on: ubuntu-26.04

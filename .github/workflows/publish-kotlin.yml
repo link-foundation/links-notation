@@ -81,6 +81,10 @@ jobs:
             echo "Version $PACKAGE_VERSION already exists on Maven Central"
             echo "should_publish=false" >> "$GITHUB_OUTPUT"
           else
+            if [ "$REGISTRY_PROBE_STATUS" != "404" ]; then
+              echo "::error::Registry presence is unknown (HTTP $REGISTRY_PROBE_STATUS); refusing publication"
+              exit 1
+            fi
             echo "Version $PACKAGE_VERSION does not exist on Maven Central"
             echo "should_publish=true" >> "$GITHUB_OUTPUT"
           fi
@@ -116,15 +120,8 @@ jobs:
           PACKAGE_VERSION: ${{ steps.version-check.outputs.version }}
         run: |
           set -euo pipefail
-          # shellcheck source=scripts/ci/registry-probe.sh
-          . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
-          GROUP_PATH=$(echo "$PACKAGE_GROUP" | tr '.' '/')
-          wait_for_registry "Maven Central namespace ${PACKAGE_GROUP}" \
-            "https://repo1.maven.org/maven2/${GROUP_PATH}/" 30 30
-          wait_for_registry \
-            "${PACKAGE_GROUP}:${PACKAGE_ARTIFACT}:${PACKAGE_VERSION} on Maven Central" \
-            "https://repo1.maven.org/maven2/${GROUP_PATH}/${PACKAGE_ARTIFACT}/${PACKAGE_VERSION}/${PACKAGE_ARTIFACT}-${PACKAGE_VERSION}.pom" \
-            30 30
+          node "$GITHUB_WORKSPACE/scripts/ci/maven-central.mjs"
+          bash "$GITHUB_WORKSPACE/scripts/ci/maven-consumer.sh" kotlin "$PACKAGE_VERSION"
 
   publishRelease:
     runs-on: ubuntu-26.04

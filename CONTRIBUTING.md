@@ -31,6 +31,7 @@ bun scripts/ci/check-js-gate.mjs
 bun test experiments/issue-339/ci-contract.test.mjs
 node scripts/ci/check-parity.mjs
 node --test experiments/issue-339/parity-contract.test.mjs experiments/issue-339/release-audit.test.mjs
+node --test experiments/issue-192/*.test.mjs
 python3 experiments/issue-339/test_workflow_contract.py
 node scripts/version-consistency.mjs
 node scripts/ci/php-distribution.mjs
@@ -127,7 +128,7 @@ as the PyPI publisher. See [release setup](docs/releases.md).
 
 Add a fragment under `changelog.d/` for each user-visible change. Release PRs
 combine the reviewed fragments into `CHANGELOG.md` and update all ten declared
-versions together. This PR prepares 0.31.0. Per-registry tags remain for
+versions together. This PR prepares 0.31.1. Per-registry tags remain for
 existing consumers, especially Go's required `go/vVERSION` tag. One CI run
 waits for all ten native stages before calling `release.yml`, coordinates
 publishing, and performs the final exact-version audit. A distributed

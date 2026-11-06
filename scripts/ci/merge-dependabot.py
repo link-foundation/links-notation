@@ -57,6 +57,7 @@ PUSH_WORKFLOWS = {
         ".github/**",
         "scripts/ci/**",
         "experiments/issue-350/**",
+        "experiments/issue-192/**",
         "experiments/issue-377/test_rerun_unacquired.py",
         "experiments/issue-377/test_nuget_publish.py",
     ],

@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
-import { audit } from "../../scripts/release-audit.mjs";
+import { audit as auditReal } from "../../scripts/release-audit.mjs";
+import { mavenResponse } from "../issue-192/maven-fixture.mjs";
+
+const audit = (options) => auditReal({ verifySignature: async () => {}, ...options });
 
 const versions = Object.fromEntries(
   ["js", "rust", "python", "java", "go", "csharp", "php", "cpp", "swift", "kotlin"].map((name) => [
@@ -13,6 +16,8 @@ function mockFetch(change = () => null) {
   return async (url) => {
     const changed = change(url);
     if (changed) return changed;
+    const maven = mavenResponse(url);
+    if (maven) return maven;
     let body = {};
     if (url.includes("registry.npmjs.org")) body = { version: "1.2.3" };
     if (url.includes("pypi.org")) body = { info: { version: "1.2.3" } };
@@ -21,8 +26,11 @@ function mockFetch(change = () => null) {
     if (url.includes("proxy.golang.org")) body = { Version: "v1.2.3" };
     if (url.includes("packagist.org"))
       body = {
-        packages: { "link-foundation/links-notation": [{ version: "v1.2.3" }] },
+        packages: { "link-foundation/links-notation": [{ version: "v1.2.3", source: {
+          type: "git", url: "https://github.com/link-foundation/links-notation.git", reference: "a".repeat(40),
+        } }] },
       };
+    if (url.includes("/git/ref/tags/")) body = { object: { type: "commit", sha: "a".repeat(40) } };
     if (url.endsWith("/Package.swift"))
       return new Response('let package = Package(\n    name: "LinksNotation",');
     if (url.endsWith(".pom"))
@@ -34,9 +42,15 @@ function mockFetch(change = () => null) {
 }
 const run = (fetcher, expectPublished = true) =>
   audit({ versions, fetcher, expectPublished, log: () => {} });
+test("a Packagist source mismatch fails even when the version and release exist", async () => {
+  const result = await run(mockFetch((url) => url.includes('/git/ref/tags/')
+    ? new Response(JSON.stringify({ object: { type: 'commit', sha: 'b'.repeat(40) } })) : null));
+  assert.equal(result.failures, 1);
+  assert.match(result.findings.find((item) => item.language === 'php').error, /Packagist source/);
+});
 test("every exact version and release is verified", async () =>
   assert.equal((await run(mockFetch())).failures, 0));
-test("missing Central namespace fails main even when the POM exists", async () =>
+test("exact Central artifacts verify even while the parent directory is absent", async () =>
   assert.equal(
     (
       await run(
@@ -47,7 +61,7 @@ test("missing Central namespace fails main even when the POM exists", async () =
         ),
       )
     ).failures,
-    2,
+    0,
   ));
 test("an unpublished PR version is expected", async () =>
   assert.equal(
@@ -216,7 +230,25 @@ test("an absence after a successful release still names the credentials", async 
   });
   const errors = lines.filter((line) => line.startsWith("::error::"));
   assert.equal(errors.length, 1);
-  assert.match(errors[0], /To publish it, configure NuGet.org trusted publishing for js.yml with the NUGET_USER variable, or renew the NUGET_API_KEY secret/);
+  assert.match(errors[0], /To publish it, configure NuGet.org trusted publishing for publish-csharp.yml with the NUGET_USER variable, or renew the NUGET_API_KEY secret/);
+});
+test("partial publication names the missing provider without blaming validation", async () => {
+  for (const releaseResult of ["failure", "cancelled"]) {
+    const lines = [];
+    const result = await audit({
+      versions,
+      fetcher: mockFetch((url) => url.includes("packagist.org")
+        ? new Response("", { status: 404 }) : null),
+      releaseResult,
+      log: (line) => lines.push(line),
+    });
+    assert.equal(result.failures, 1);
+    assert.equal(result.findings.filter((item) => item.published && item.release).length, 9);
+    const errors = lines.filter((line) => line.startsWith("::error::"));
+    assert.match(errors[0], /php: .*Packagist/);
+    assert.match(errors[0], /PACKAGIST_USERNAME and PACKAGIST_TOKEN/);
+    assert.doesNotMatch(lines.join("\n"), /nothing was published|a language stage failed/);
+  }
 });
 test("a pull request ignores the release result", async () =>
   assert.equal(

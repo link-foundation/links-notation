@@ -33,6 +33,8 @@ def publish_script():
     start = text.index("      - name: Publish NuGet package\n")
     end = text.index("      - name: Verify the package is really on NuGet.org")
     block = text[start:end]
+    if 'run: node "$GITHUB_WORKSPACE/scripts/ci/publish-package.mjs" nuget' in block:
+        return 'node "$GITHUB_WORKSPACE/scripts/ci/publish-package.mjs" nuget\n'
     body = block[block.index("        run: |\n") + len("        run: |\n") :]
     return "\n".join(line[10:] for line in body.splitlines()) + "\n"
 
@@ -53,8 +55,11 @@ class PublishStep(unittest.TestCase):
             fake.chmod(fake.stat().st_mode | stat.S_IEXEC)
             output = tmp / "github_output"
             output.touch()
+            (tmp / "artifacts").mkdir()
+            (tmp / "artifacts/test.nupkg").write_bytes(b"same-packed-artifact")
             full_env = {
                 "PATH": f"{fake.parent}:{os.environ['PATH']}",
+                "GITHUB_WORKSPACE": str(ROOT),
                 "GITHUB_OUTPUT": str(output),
                 "RUNNER_TEMP": str(tmp),
                 "KEY_SEEN": str(tmp / "key_seen"),
@@ -81,27 +86,27 @@ class PublishStep(unittest.TestCase):
         result, output, _ = self.run_step(EXPIRED, 1, NUGET_API_KEY=SECRET)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("published=failed", output)
-        error = re.search(r"::error::NuGet.org rejected the key from the NUGET_API_KEY secret.*", result.stdout)
-        self.assertIsNotNone(error, result.stdout)
+        error = re.search(r"::error::NuGet.org rejected the key from the NUGET_API_KEY secret.*", result.stderr)
+        self.assertIsNotNone(error, result.stdout + result.stderr)
         self.assertIn("https://www.nuget.org/account/apikeys", error.group(0))
         self.assertIn("NUGET_USER", error.group(0))
 
     def test_the_key_is_never_printed_except_to_mask_it(self):
         result, _, _ = self.run_step(EXPIRED, 1, NUGET_API_KEY=SECRET)
         lines = (result.stdout + result.stderr).splitlines()
-        self.assertEqual([line for line in lines if SECRET in line], [f"::add-mask::{SECRET}"])
+        self.assertEqual([line for line in lines if SECRET in line], [])
 
     def test_another_push_failure_is_not_blamed_on_the_key(self):
         result, _, _ = self.run_step("error: 409 (Conflict)", 1, NUGET_API_KEY=SECRET)
         self.assertNotEqual(result.returncode, 0)
         self.assertNotIn("rejected the key", result.stdout)
-        self.assertIn("::error::dotnet nuget push failed with exit code 1", result.stdout)
+        self.assertIn("::error::dotnet nuget push upload failed with exit code 1", result.stderr)
 
     def test_no_credential_fails_visibly(self):
         result, output, seen = self.run_step()
         self.assertEqual(result.returncode, 1)
         self.assertIn("published=failed", output)
-        self.assertIn("::error::No NuGet credential", result.stdout)
+        self.assertIn("::error::No NuGet credential", result.stderr)
         self.assertIsNone(seen)
 
     def test_trusted_publishing_is_preferred_to_the_secret(self):

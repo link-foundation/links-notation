@@ -146,3 +146,23 @@ test("registry outages and wrong-version metadata cannot become successful skips
     { packageKnown: true, shouldPublish: true },
   );
 });
+test("a reused Packagist version must come from the canonical repository and gated SHA", async () => {
+  for (const source of [
+    { type: "git", url: "https://github.com/other/repository.git", reference: sha },
+    { type: "git", url: "https://github.com/link-foundation/links-notation.git", reference: "b".repeat(40) },
+  ]) {
+    await assert.rejects(packagistStatus(packageName, "1.2.3", async () =>
+      response({ packages: { [packageName]: [{ version: "1.2.3", source }] } }),
+    { sha, repository: "link-foundation/links-notation" }), /source/);
+  }
+});
+test("Composer-minified metadata inherits and unsets source fields correctly", async () => {
+  const source = { type: "git", url: "https://github.com/link-foundation/links-notation.git", reference: sha };
+  const fetcher = async () => response({ minified: "composer/2.0", packages: { [packageName]: [
+    { version: "1.2.4", source }, { version: "1.2.3" }, { version: "1.2.2", source: "__unset" },
+  ] } });
+  assert.equal((await packagistStatus(packageName, "1.2.3", fetcher,
+    { sha, repository: "link-foundation/links-notation" })).shouldPublish, false);
+  await assert.rejects(packagistStatus(packageName, "1.2.2", fetcher,
+    { sha, repository: "link-foundation/links-notation" }), /source/);
+});

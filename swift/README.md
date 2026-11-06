@@ -17,7 +17,7 @@ version number, so add the repository to your package's dependencies:
 ```swift
 // Package.swift
 dependencies: [
-    .package(url: "https://github.com/link-foundation/links-notation.git", from: "0.31.0"),
+    .package(url: "https://github.com/link-foundation/links-notation.git", from: "0.31.1"),
 ],
 targets: [
     .target(

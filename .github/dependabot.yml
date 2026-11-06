@@ -155,7 +155,9 @@ updates:
   # Gradle that ./gradlew runs. There is no "kotlin" label; "dependencies"
   # alone avoids a label that would have to be created first (issue #350).
   - package-ecosystem: "gradle"
-    directory: "/kotlin"
+    directories:
+      - "/kotlin"
+      - "/examples/maven/kotlin"
     schedule:
       interval: "daily"
     groups:

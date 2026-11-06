@@ -4,6 +4,8 @@
 import { writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { declaredVersions } from "./declared-versions.mjs";
+import { verifyCentral, verifyMavenSignature } from "./ci/maven-central.mjs";
+import { packagistVersion, checkPackagistSource } from "./ci/packagist-status.mjs";
 
 export function registryTargets(version) {
   return [
@@ -34,7 +36,7 @@ export function registryTargets(version) {
     {
       name: "csharp",
       setup:
-        "configure NuGet.org trusted publishing for js.yml with the NUGET_USER variable, or renew the NUGET_API_KEY secret (NuGet API keys expire)",
+        "configure NuGet.org trusted publishing for publish-csharp.yml with the NUGET_USER variable, or renew the NUGET_API_KEY secret (NuGet API keys expire)",
       registry: "NuGet",
       urls: [
         "https://api.nuget.org/v3-flatcontainer/link.foundation.links.notation/index.json",
@@ -53,12 +55,12 @@ export function registryTargets(version) {
     },
     {
       name: "java",
+      artifact: "links-notation",
       setup:
         "configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace",
       registry: "Maven Central",
       urls: [
         `https://repo1.maven.org/maven2/io/github/link-foundation/links-notation/${version.java}/links-notation-${version.java}.pom`,
-        "https://repo1.maven.org/maven2/io/github/link-foundation/",
       ],
       text: true,
       valid: (body) =>
@@ -103,15 +105,15 @@ export function registryTargets(version) {
       valid: (body) => body.includes('name: "LinksNotation"'),
     },
     {
-      // One Gradle module per target behind the root artifact's module
-      // metadata; the root POM stands for the whole multiplatform release.
+      // Verify every target, file, strong hash and detached signature behind
+      // the root metadata. A root POM alone is not a multiplatform release.
       name: "kotlin",
+      artifact: "links-notation-kotlin",
       setup:
         "configure the CENTRAL_USERNAME, CENTRAL_TOKEN, GPG_PRIVATE_KEY and GPG_PASSPHRASE secrets for the verified io.github.link-foundation namespace",
       registry: "Maven Central",
       urls: [
         `https://repo1.maven.org/maven2/io/github/link-foundation/links-notation-kotlin/${version.kotlin}/links-notation-kotlin-${version.kotlin}.pom`,
-        "https://repo1.maven.org/maven2/io/github/link-foundation/",
       ],
       text: true,
       valid: (body) =>
@@ -129,14 +131,14 @@ export async function audit({
   repository = "link-foundation/links-notation",
   verbose = false,
   log = console.log,
+  verifySignature = verifyMavenSignature,
   // The result of the CI run's release job ("success", "failure", "cancelled"
-  // or "skipped"), or "" when the caller does not know it. A release that
-  // never ran published nothing, so its absences are not a credential fault.
+  // or "skipped"), or "" when the caller does not know it. An aggregate
+  // failure can mean partial publication; only skipped means no publisher ran.
   releaseResult = "",
 }) {
   const findings = [];
-  const releaseIncomplete =
-    expectPublished && releaseResult !== "" && releaseResult !== "success";
+  const releaseSkipped = expectPublished && releaseResult === "skipped";
   let failures = 0;
   const headers = { "user-agent": "links-notation-release-audit" };
   const report = (message, error = true) => {
@@ -155,7 +157,13 @@ export async function audit({
     findings.push(record);
     try {
       let present = true;
-      for (const [index, url] of target.urls.entries()) {
+      if (target.artifact) {
+        record.maven = await verifyCentral({ artifact: target.artifact,
+          version: record.version, fetcher, verifySignature,
+          requests: record.requests, verbose, log });
+        present = record.maven.present;
+      }
+      for (const [index, url] of (target.artifact ? [] : target.urls).entries()) {
         const response = await fetcher(url, {
           headers,
           signal: AbortSignal.timeout(30000),
@@ -176,6 +184,11 @@ export async function audit({
             ? await response.text()
             : await response.json();
           if (!target.valid(body)) present = false;
+          if (target.name === "php" && present) {
+            const item = packagistVersion(body, "link-foundation/links-notation", record.version);
+            checkPackagistSource(item, repository);
+            record.source = item.source.reference;
+          }
         } else await response.body?.cancel();
       }
       if (!present) {
@@ -184,14 +197,32 @@ export async function audit({
         report(
           !expectPublished
             ? absent
-            : releaseIncomplete
-              ? `${absent} because the release job did not run to completion (${releaseResult}): a language stage failed or was cancelled, so nothing was published. Fix or re-run the failed jobs of this CI run (docs/releases.md); if the version is still absent after a successful release, ${target.setup}.`
-              : `${absent}. To publish it, ${target.setup}, then re-run the main CI run (docs/releases.md).`,
+            : releaseSkipped
+              ? `${absent}; the release job did not run to completion (skipped). Check the event and validation stages. Fix or re-run the failed jobs of this CI run (docs/releases.md).`
+              : `${absent}. To publish it, ${target.setup}, then re-run the main CI run (docs/releases.md).${releaseResult === "failure" || releaseResult === "cancelled" ? ` The release result is ${releaseResult}; inspect this provider's job. Other providers may have delivered successfully.` : ""}`,
           expectPublished,
         );
         continue;
       }
       record.published = true;
+      if (target.name === "php") {
+        let tagUrl = `https://api.github.com/repos/${repository}/git/ref/tags/${encodeURIComponent(record.version)}`;
+        let object;
+        for (let depth = 0; depth < 5; depth++) {
+          const response = await fetcher(tagUrl, {
+            headers: { ...headers, ...(token ? { authorization: `Bearer ${token}` } : {}) },
+            signal: AbortSignal.timeout(30000),
+          });
+          record.requests.push({ url: tagUrl, status: response.status });
+          if (!response.ok) { await response.body?.cancel(); throw new Error(`Packagist version tag: HTTP ${response.status}`); }
+          object = (await response.json()).object;
+          if (object?.type === "commit") break;
+          if (object?.type !== "tag" || !/^[a-f0-9]{40}$/.test(object.sha)) throw new Error("Invalid Packagist version tag");
+          tagUrl = `https://api.github.com/repos/${repository}/git/tags/${object.sha}`;
+        }
+        if (object?.type !== "commit" || object.sha !== record.source)
+          throw new Error("Packagist source differs from the immutable Composer version tag");
+      }
       const tag =
         target.tag ??
         (target.name === "go"
@@ -229,6 +260,7 @@ export async function audit({
       );
     }
   }
+  log(`${findings.filter((item) => item.published && item.release).length} package/release pairs verified; ${findings.filter((item) => item.error).length} verification error(s).`);
   log(`${findings.length} languages audited; ${failures} delivery failure(s).`);
   return { failures, findings };
 }
