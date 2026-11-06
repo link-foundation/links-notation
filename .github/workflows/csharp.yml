@@ -17,7 +17,7 @@ env:
   # Opt-in diagnostics, off unless a maintainer dispatches with verbose=true
   # or sets the CI_VERBOSE repository variable.
   CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}
-  PACKAGE_ID: Link.Foundation.Links.Notation
+  PACKAGE_ID: links-notation
   PROJECT_PATH: Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj
 
 defaults:

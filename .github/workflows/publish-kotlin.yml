@@ -63,8 +63,8 @@ jobs:
           # shellcheck source=scripts/ci/registry-probe.sh
           . "$GITHUB_WORKSPACE/scripts/ci/registry-probe.sh"
           PACKAGE_VERSION=$(sed -n 's/^version[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' build.gradle.kts)
-          PACKAGE_GROUP=io.github.link-foundation
-          PACKAGE_ARTIFACT=links-notation-kotlin
+          PACKAGE_GROUP=io.github.link-foundation.kotlin
+          PACKAGE_ARTIFACT=links-notation
           if [ -z "$PACKAGE_VERSION" ]; then
             echo "::error::Could not read the version from kotlin/build.gradle.kts"
             exit 1

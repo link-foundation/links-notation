@@ -16,9 +16,10 @@ export function mavenResponse(url, version = '1.2.3') {
   if (url.endsWith('.asc')) return new Response('test-detached-signature');
   if (url.endsWith('.sha256')) return new Response(createHash('sha256').update('test-artifact').digest('hex'));
   const module = url.split('/').at(-3);
-  if (url.endsWith('.pom')) return new Response(`<project><groupId>io.github.link-foundation</groupId><artifactId>${module}</artifactId><version>${version}</version></project>`);
+  const group = url.includes('/link-foundation/kotlin/') ? 'io.github.link-foundation.kotlin' : 'io.github.link-foundation';
+  if (url.endsWith('.pom')) return new Response(`<project><groupId>${group}</groupId><artifactId>${module}</artifactId><version>${version}</version></project>`);
   if (url.endsWith('.module')) {
-    const root = 'links-notation-kotlin';
+    const root = 'links-notation';
     const suffix = module === root ? '' : module.slice(root.length + 1);
     const file = { name: `${module}-${version}.jar`, url: `${module}-${version}.jar`, size: 13,
       sha256: createHash('sha256').update('test-artifact').digest('hex') };
@@ -27,11 +28,11 @@ export function mavenResponse(url, version = '1.2.3') {
     }));
     if (!suffix) for (const platform of suffixes) for (const usage of [...usages(platform), 'sources']) {
       variants.push({ name: `${platform}-${usage}`, attributes: attributes(platform, usage), 'available-at': {
-        group: 'io.github.link-foundation', module: `${root}-${platform}`, version,
+        group, module: `${root}-${platform}`, version,
         url: `../../${root}-${platform}/${version}/${root}-${platform}-${version}.module`,
       } });
     }
-    return new Response(JSON.stringify({ formatVersion: '1.1', component: { group: 'io.github.link-foundation', module: root, version }, variants }));
+    return new Response(JSON.stringify({ formatVersion: '1.1', component: { group, module: root, version }, variants }));
   }
   return new Response('test-artifact');
 }

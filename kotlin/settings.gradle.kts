@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "links-notation-kotlin"
+rootProject.name = "links-notation"

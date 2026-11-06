@@ -10,8 +10,8 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
 }
 
-group = "io.github.link-foundation"
-version = "0.31.1"
+group = "io.github.link-foundation.kotlin"
+version = "0.31.2"
 
 // Android needs an SDK. CI runners have one; elsewhere the Android target is
 // left out rather than failing the build of every other target.
@@ -283,8 +283,8 @@ tasks.register<JavaExec>("binaryExample") {
     workingDir = layout.projectDirectory.dir("..").asFile
 }
 
-// Maven Central: io.github.link-foundation:links-notation-kotlin, with one
-// artifact per target (links-notation-kotlin-jvm, -js, -iosarm64, ...) behind
+// Maven Central: io.github.link-foundation.kotlin:links-notation, with one
+// artifact per target (links-notation-jvm, -js, -iosarm64, ...) behind
 // the Gradle module metadata of the root one. .github/workflows/publish-kotlin.yml
 // passes the Central token and the signing key as ORG_GRADLE_PROJECT_ properties.
 mavenPublishing {
@@ -292,7 +292,7 @@ mavenPublishing {
     if (providers.gradleProperty("signingInMemoryKey").isPresent) {
         signAllPublications()
     }
-    coordinates("io.github.link-foundation", "links-notation-kotlin", version.toString())
+    coordinates("io.github.link-foundation.kotlin", "links-notation", version.toString())
 
     pom {
         name.set("Links Notation for Kotlin")

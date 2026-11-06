@@ -8,19 +8,19 @@ generator and Platform.Collections.
 ### Package Manager
 
 ```text
-Install-Package Link.Foundation.Links.Notation
+Install-Package links-notation
 ```
 
 ### .NET CLI
 
 ```bash
-dotnet add package Link.Foundation.Links.Notation
+dotnet add package links-notation
 ```
 
 ### PackageReference
 
 ```xml
-<PackageReference Include="Link.Foundation.Links.Notation" Version="0.9.0" />
+<PackageReference Include="links-notation" Version="0.31.2" />
 ```
 
 ## Build from Source

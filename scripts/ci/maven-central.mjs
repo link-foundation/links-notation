@@ -8,9 +8,9 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const group = 'io.github.link-foundation';
-const base = 'https://repo1.maven.org/maven2/io/github/link-foundation/';
-const root = 'links-notation-kotlin';
+const javaGroup = 'io.github.link-foundation';
+const kotlinGroup = 'io.github.link-foundation.kotlin';
+const root = 'links-notation';
 const fingerprint = '75CE1DB5A7CB47FFCF2D39581FA0DD27D01D0D2C';
 const platforms = {
   android: ['androidJvm', 'java-api', 'java-runtime'],
@@ -65,10 +65,11 @@ export function pomCoordinates(xml) {
   return coordinates;
 }
 
-export async function verifyCentral({ artifact, version, fetcher = fetch,
+export async function verifyCentral({ group = javaGroup, artifact, version, fetcher = fetch,
   verifySignature = verifyMavenSignature, requests = [], verbose = false, log = console.log }) {
-  if (!['links-notation', root].includes(artifact) || !/^\d+\.\d+\.\d+$/.test(version))
+  if (![javaGroup, kotlinGroup].includes(group) || artifact !== root || !/^\d+\.\d+\.\d+$/.test(version))
     throw new Error('Unsupported Maven coordinate');
+  const base = `https://repo1.maven.org/maven2/${group.replaceAll('.', '/')}/`;
   const directory = (module) => `${base}${module}/${version}/`;
   const prefix = (module) => `${directory(module)}${module}-${version}`;
   const stats = { present: true, coordinates: 0, files: 0, signatures: 0 };
@@ -102,7 +103,7 @@ export async function verifyCentral({ artifact, version, fetcher = fetch,
   const first = await get(`${prefix(artifact)}.pom`, true);
   if (first === null) return { ...stats, present: false };
   await pom(artifact, first);
-  if (artifact === 'links-notation') {
+  if (group === javaGroup) {
     for (const suffix of ['', '-sources', '-javadoc']) {
       const url = `${prefix(artifact)}${suffix}.jar`;
       const bytes = await signed(url);
@@ -194,6 +195,6 @@ export async function waitForCentral(options, { attempts = 30, delay = 30000,
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  try { await waitForCentral({ artifact: process.env.PACKAGE_ARTIFACT, version: process.env.PACKAGE_VERSION }); }
+  try { await waitForCentral({ group: process.env.PACKAGE_GROUP, artifact: process.env.PACKAGE_ARTIFACT, version: process.env.PACKAGE_VERSION }); }
   catch (error) { console.error(`::error::${error.message}`); process.exitCode = 1; }
 }

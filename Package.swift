@@ -5,7 +5,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "LinksNotation",
+    name: "links-notation",
     platforms: [.macOS(.v13), .iOS(.v16)],
     products: [
         .library(name: "LinksNotation", targets: ["LinksNotation"]),
