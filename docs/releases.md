@@ -2,8 +2,10 @@
 
 The CI entry is `js.yml`, and every called workflow uses the caller's commit.
 The main-only `release.yml` call waits for all ten native language stages.
-It then calls the ten `publish-*.yml` workflows. A final audit waits
-for all providers, including failures, then checks exact versions and GitHub
+It calls nine `publish-*.yml` workflows; Python publishing runs directly in
+`js.yml` behind the same ten-stage gate so its PyPI identity is `js.yml`.
+A final audit waits for both publishing paths and Python's GitHub release,
+including failures, then checks exact versions and GitHub
 releases. Pull requests expect their new version to be absent and never publish.
 HTTP/authentication/transport errors still fail PR audits. A successful release
 requires all ten registries; green tests alone do not prove delivery.
@@ -37,6 +39,11 @@ The previous NuGet and Kotlin identities remain immutable historical releases;
 new consumers should use the names above.
 
 Register npm and PyPI provider identities against the **caller** `js.yml`.
+Python's publishing job must run directly in that file: Warehouse matches
+[`job_workflow_ref`](https://github.com/pypi/warehouse/blob/0fac80550625bdc75baab04c303eddf249b93ab0/warehouse/oidc/models/github.py),
+which identifies the callee for a reusable job. Moving the job fixes that
+workflow identity mismatch; it does not verify the account's saved publisher
+or establish the endpoint/code of an old undifferentiated 422.
 NuGet evaluates the reusable **`publish-csharp.yml`** workflow instead; this
 was verified by the actual 0.31.0 OIDC exchange. Local reusable calls preserve
 the commit. Secrets are passed explicitly to their own callee.
@@ -52,6 +59,52 @@ packing/building and PyPI metadata checks happen once. OIDC PyPI uploads retain
 Sigstore attestations. A failed attestation is a failure, not a token retry.
 Logs identify credential sources and redact values. Missing credentials fail
 the job and prevent a release. Existing exact versions are verified again.
+
+PyPI's mint endpoint `https://pypi.org/_/oidc/mint-token` returns HTTP 422
+(historically 400) for structured errors. Only a nonempty list of objects with
+string `code` and `description` fields, consisting entirely of `invalid-publisher`
+and/or `invalid-token`, permits the supplied-token fallback. The same validation
+applies to PyPI mint HTTP 401/403. Protocol/payload defects, unknown or mixed
+codes, `invalid-reuse-token`, rate limits, service errors, malformed JSON and
+ambiguous transport failures stop publication. Diagnostics name **GitHub identity
+acquisition**, **PyPI token minting** or **NuGet token minting**, the HTTP status
+when available, and at most five allowlisted codes. Unknown/malformed codes are
+replaced with fixed markers; descriptions, request URLs and exception details
+are never printed. The rejection diagnostic is retained even when fallback
+succeeds or no supplied token exists.
+
+For the current Python job, the saved PyPI publisher must name owner
+`link-foundation`, repository `links-notation`, workflow **`js.yml`**, with the
+environment field **empty**: `publish_python` has no `environment`. Configure or
+verify it in the project's
+[publishing settings](https://pypi.org/manage/project/links-notation/settings/publishing/)
+using an authenticated PyPI owner account. GitHub repository secrets cannot
+read or configure that account setting. Follow
+[PyPI's publisher setup guidance](https://docs.pypi.org/trusted-publishers/adding-a-publisher/).
+A saved publisher should mint a credential and upload with attestations; a
+successful supplied-token fallback alone does not verify that publisher.
+
+### Recovering Python 0.31.2 (issue 392)
+
+Main run [42166559496](https://github.com/link-foundation/links-notation/actions/runs/42166559496)
+validated `42a3249129edcb1eafd2a7cd71c994aa9cbb3d17`. Its Python attempts
+failed with an undifferentiated 422; those logs cannot establish the failed
+endpoint/code. The bare `0.31.2` and other delivered tags belong to that source.
+Never move them or publish the PR's later source as 0.31.2. This code repair
+prepares **0.31.3** across all ten bindings, to be validated and released by a
+new main push after review.
+
+The original run uses both the old helper and a nested `publish-python.yml`
+job. Rerunning it cannot pick up this PR's 422 handling or `js.yml` job identity;
+repairing a saved `js.yml` publisher alone cannot change that old identity.
+Recovery therefore requires an authenticated account and a separately reviewed
+publishing execution using the repaired helper and the exact validated 0.31.2
+source/artifacts. Do not register a reusable callee as the replacement publisher,
+substitute new source or bypass the main-only ten-language release gate.
+Preserve logs and hashes. Completion requires the
+exact public wheel and sdist, provenance against that source, a fresh installed
+parser/formatter consumer, `python_0.31.2`, and a passing ten-distribution audit.
+Until those checks pass, recovery remains unfinished.
 
 C++ has no central package registry. `publish-cpp.yml` archives `cpp/` with
 `git archive` at the gated SHA, attaches `links-notation-cpp-VERSION.tar.gz` and

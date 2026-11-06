@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Handle current PyPI OIDC 422 authentication rejections and report safe
+  exchange-stage diagnostics. Prepare 0.31.3; see
+  [the release fragment](changelog.d/392.md) and
+  [issue 392](https://github.com/link-foundation/links-notation/issues/392).
 - Repair release authentication fallback, verify complete signed Maven artifacts
   and Composer provenance, and report partial registry delivery accurately.
   Prepare 0.31.1; see [the release fragment](changelog.d/192.md) and
