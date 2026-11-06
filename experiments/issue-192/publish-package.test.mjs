@@ -153,7 +153,7 @@ const unsafeBodies = [
   ['malformed JSON', '{"errors": [private-secret'],
   ['null body', null],
 ];
-for (const status of [400, 422]) {
+for (const status of [400, 401, 403, 422]) {
   for (const [name, body] of unsafeBodies) {
     test(`PyPI HTTP ${status} ${name} cannot trigger fallback`, async () => {
       let uploads = 0;
@@ -173,6 +173,47 @@ for (const status of [400, 422]) {
     });
   }
 }
+
+test('GitHub rejects PyPI authentication bodies at HTTP 400 and 422 without fallback', async () => {
+  for (const status of [400, 422]) {
+    let uploads = 0;
+    await assert.rejects(publishWithFallback({
+      provider: 'pypi', trusted: true,
+      exchange: () => exchangeTrustedCredential('pypi', oidcEnv,
+        exchangeResponse(warehouseError('invalid-publisher'), status, 'identity')),
+      credentials: [{ source: 'supplied token', key: 'fallback-secret' }],
+      upload: async () => { uploads++; return { status: 0 }; }, log: () => {},
+    }), /GitHub identity acquisition/);
+    assert.equal(uploads, 0);
+  }
+});
+
+test('PyPI 422 without a supplied token fails visibly after safe diagnostics', async () => {
+  const logs = [];
+  await assert.rejects(publishWithFallback({
+    provider: 'pypi', trusted: true,
+    exchange: () => exchangeTrustedCredential('pypi', oidcEnv,
+      exchangeResponse(warehouseError('invalid-publisher'))),
+    upload: async () => assert.fail('must not upload'),
+    log: (message) => logs.push(message),
+  }), /No pypi credential accepted/);
+  assert.match(logs.join('\n'), /PyPI token minting.*HTTP 422.*invalid-publisher/);
+});
+
+test('both trusted and supplied upload keys are redacted', async () => {
+  const logs = [];
+  await publishWithFallback({
+    provider: 'pypi', trusted: true, exchange: async () => 'minted-secret',
+    credentials: [{ source: 'supplied token', key: 'fallback-secret' }],
+    upload: async ({ trusted }) => ({
+      status: trusted ? 1 : 0,
+      output: 'HTTPError: 403 minted-secret fallback-secret',
+    }),
+    log: (message) => logs.push(message),
+  });
+  assert.doesNotMatch(logs.join('\n'), /minted-secret|fallback-secret/);
+  assert.match(logs.join('\n'), /\[REDACTED\]/);
+});
 
 for (const stage of ['identity', 'mint']) {
   for (const status of [401, 403, 422, 429, 500]) {
