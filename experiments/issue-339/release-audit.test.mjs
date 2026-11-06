@@ -36,7 +36,7 @@ const run = (fetcher, expectPublished = true) =>
   audit({ versions, fetcher, expectPublished, log: () => {} });
 test("every exact version and release is verified", async () =>
   assert.equal((await run(mockFetch())).failures, 0));
-test("missing Central namespace fails main even when the POM exists", async () =>
+test("exact Central artifacts verify even while the parent directory is absent", async () =>
   assert.equal(
     (
       await run(
@@ -47,7 +47,7 @@ test("missing Central namespace fails main even when the POM exists", async () =
         ),
       )
     ).failures,
-    2,
+    0,
   ));
 test("an unpublished PR version is expected", async () =>
   assert.equal(
@@ -216,7 +216,25 @@ test("an absence after a successful release still names the credentials", async 
   });
   const errors = lines.filter((line) => line.startsWith("::error::"));
   assert.equal(errors.length, 1);
-  assert.match(errors[0], /To publish it, configure NuGet.org trusted publishing for js.yml with the NUGET_USER variable, or renew the NUGET_API_KEY secret/);
+  assert.match(errors[0], /To publish it, configure NuGet.org trusted publishing for publish-csharp.yml with the NUGET_USER variable, or renew the NUGET_API_KEY secret/);
+});
+test("partial publication names the missing provider without blaming validation", async () => {
+  for (const releaseResult of ["failure", "cancelled"]) {
+    const lines = [];
+    const result = await audit({
+      versions,
+      fetcher: mockFetch((url) => url.includes("packagist.org")
+        ? new Response("", { status: 404 }) : null),
+      releaseResult,
+      log: (line) => lines.push(line),
+    });
+    assert.equal(result.failures, 1);
+    assert.equal(result.findings.filter((item) => item.published && item.release).length, 9);
+    const errors = lines.filter((line) => line.startsWith("::error::"));
+    assert.match(errors[0], /php: .*Packagist/);
+    assert.match(errors[0], /PACKAGIST_USERNAME and PACKAGIST_TOKEN/);
+    assert.doesNotMatch(lines.join("\n"), /nothing was published|a language stage failed/);
+  }
 });
 test("a pull request ignores the release result", async () =>
   assert.equal(
