@@ -19,7 +19,8 @@ const languageNames = [
 const languageAction = /(?:rust-toolchain|setup-(?:dotnet|java|go|php))/;
 const languageRun =
   /\b(?:cargo|dotnet|mvn|gradlew?|php|composer|pytest|cmake|ctest|go\s+(?:test|build|run|vet)|swift\s+(?:build|test|run|package|format))\b|(?:python\/|python[23]?\s+-m\s+(?:pytest|unittest|build))/;
-const nativeDirectory = /^(?:\.\/)?(?:rust|python|java|go|csharp|php|cpp|swift|kotlin)(?:\/|$)/;
+const nativeDirectory =
+  /^(?:\.\/)?(?:rust|python|java|go|csharp|php|cpp|swift|kotlin)(?:\/|$)/;
 
 export function checkGate(workflows) {
   const errors = [];
@@ -60,18 +61,30 @@ export function checkGate(workflows) {
   }
   if (js.jobs?.findChangedJsFiles)
     fail("JS checks cannot have a change detector");
-  const release = entry.jobs?.release;
+  for (const name of ["release", "publish_python"]) {
+    const publisher = entry.jobs?.[name];
+    if (
+      !publisher ||
+      (name === "release"
+        ? publisher.uses !== "./.github/workflows/release.yml"
+        : publisher.uses !== undefined ||
+          !publisher.steps?.some((step) =>
+            step.run?.includes('publish-package.mjs" pypi'),
+          )) ||
+      !Array.isArray(publisher.needs) ||
+      JSON.stringify(publisher.needs?.toSorted()) !==
+        JSON.stringify(["js", ...languageNames].toSorted()) ||
+      publisher.if !==
+        "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}"
+    )
+      fail(
+        `${name}: publication must wait for all ten native stages on main pushes`,
+      );
+  }
   if (
-    release?.uses !== "./.github/workflows/release.yml" ||
-    !Array.isArray(release.needs) ||
-    JSON.stringify(release.needs?.toSorted()) !==
-      JSON.stringify(["js", ...languageNames].toSorted()) ||
-    release.if !==
-      "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}"
-  )
-    fail("Publication must wait for all ten native stages on main pushes");
-  if (
-    !entry.jobs?.release_audit?.needs?.includes("release") ||
+    !["release", "publish_python", "python_release"].every((name) =>
+      entry.jobs?.release_audit?.needs?.includes(name),
+    ) ||
     entry.jobs.release_audit.if !==
       "${{ always() && needs.js.result == 'success' }}"
   )

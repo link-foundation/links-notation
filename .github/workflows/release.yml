@@ -13,8 +13,6 @@ on:
         required: false
       CARGO_TOKEN:
         required: false
-      PYPI_TOKEN:
-        required: false
       CENTRAL_USERNAME:
         required: false
       CENTRAL_TOKEN:
@@ -52,16 +50,6 @@ jobs:
       verbose: ${{ inputs.verbose || false }}
     secrets:
       CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
-    permissions:
-      contents: write
-      id-token: write
-
-  python:
-    uses: ./.github/workflows/publish-python.yml
-    with:
-      verbose: ${{ inputs.verbose || false }}
-    secrets:
-      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
     permissions:
       contents: write
       id-token: write
