@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
-import { audit } from "../../scripts/release-audit.mjs";
+import { audit as auditReal } from "../../scripts/release-audit.mjs";
+import { mavenResponse } from "../issue-192/maven-fixture.mjs";
+
+const audit = (options) => auditReal({ verifySignature: async () => {}, ...options });
 
 const versions = Object.fromEntries(
   ["js", "rust", "python", "java", "go", "csharp", "php", "cpp", "swift", "kotlin"].map((name) => [
@@ -13,6 +16,8 @@ function mockFetch(change = () => null) {
   return async (url) => {
     const changed = change(url);
     if (changed) return changed;
+    const maven = mavenResponse(url);
+    if (maven) return maven;
     let body = {};
     if (url.includes("registry.npmjs.org")) body = { version: "1.2.3" };
     if (url.includes("pypi.org")) body = { info: { version: "1.2.3" } };

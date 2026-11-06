@@ -73,8 +73,8 @@ jobs:
           # drift. Reporting it as a warning there would flag every release PR.
           AUDIT_EXPECT_PUBLISHED: ${{ github.event_name != 'pull_request' }}
           AUDIT_REPORT: ${{ runner.temp }}/registry-audit.json
-          # A release that never ran published nothing; the audit then names
-          # the failed stage instead of a missing credential (issue #377).
+          # Distinguish skipped validation/event gates from partial delivery.
+          # An aggregate release failure does not mean all providers failed.
           RELEASE_RESULT: ${{ inputs.release-result }}
           # Read-only lookups of each published version's GitHub release.
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

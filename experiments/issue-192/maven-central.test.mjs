@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { verifyCentral } from '../../scripts/ci/maven-central.mjs';
+import { readFileSync } from 'node:fs';
+import { verifyCentral, verifyMavenSignature, waitForCentral } from '../../scripts/ci/maven-central.mjs';
 import { mavenResponse } from './maven-fixture.mjs';
 
 const verify = (artifact, change = () => null) => verifyCentral({
@@ -50,4 +51,25 @@ test('service failures remain unknown, never absence', async () => {
 test('signature rejection fails delivery', async () => {
   await assert.rejects(verifyCentral({ artifact: 'links-notation', version: '1.2.3', fetcher: mavenResponse,
     verifySignature: async () => { throw new Error('bad signature'); } }), /bad signature/);
+});
+
+test('the pinned public key cryptographically verifies an immutable release and rejects tampering', () => {
+  const bytes = readFileSync(new URL('./fixtures/java-0.31.0.pom', import.meta.url));
+  const signature = readFileSync(new URL('./fixtures/java-0.31.0.pom.asc', import.meta.url));
+  verifyMavenSignature(bytes, signature, 'public Java 0.31.0 POM');
+  assert.throws(() => verifyMavenSignature(Buffer.concat([bytes, Buffer.from('tampered')]), signature, 'tampered'), /Signature verification failed/);
+});
+
+test('propagation polling is finite and retries only definite absence', async () => {
+  let attempts = 0, sleeps = 0;
+  await assert.rejects(waitForCentral({ artifact: 'links-notation', version: '1.2.3',
+    fetcher: async () => { attempts++; return new Response('', { status: 404 }); },
+  }, { attempts: 3, delay: 0, sleep: async () => { sleeps++; }, log: () => {} }), /after 3 attempts/);
+  assert.equal(attempts, 3);
+  assert.equal(sleeps, 2);
+  attempts = 0;
+  await assert.rejects(waitForCentral({ artifact: 'links-notation', version: '1.2.3',
+    fetcher: async () => { attempts++; return new Response('', { status: 503 }); },
+  }, { attempts: 3, delay: 0, sleep: async () => {}, log: () => {} }), /HTTP 503/);
+  assert.equal(attempts, 1);
 });
