@@ -18,7 +18,7 @@
   <ItemGroup>
     <!-- The data packages carry the BPE ranks with the build, so counting a
          token never depends on a download. -->
-    <PackageReference Include="Microsoft.ML.Tokenizers" Version="2.0.1" />
+    <PackageReference Include="Microsoft.ML.Tokenizers" Version="3.0.0" />
     <PackageReference Include="Microsoft.ML.Tokenizers.Data.O200kBase" Version="2.0.1" />
     <PackageReference Include="Microsoft.ML.Tokenizers.Data.Cl100kBase" Version="2.0.1" />
   </ItemGroup>
