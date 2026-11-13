@@ -121,3 +121,9 @@ jobs:
           node --test experiments/issue-192/*.test.mjs
           node --test experiments/issue-339/php-distribution.test.mjs
           python3 experiments/issue-339/test_workflow_contract.py
+      - name: Verify archived artifact glob migrations with real files
+        working-directory: .
+        run: |
+          npm ci --ignore-scripts --prefix dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport
+          npm ci --ignore-scripts --prefix dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact
+          node --test experiments/issue-405/artifact-files.test.mjs

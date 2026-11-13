@@ -61,17 +61,6 @@ jobs:
         env:
           ADVISORY: ${{ github.event_name == 'pull_request' && '--advisory' || '' }}
         run: node scripts/ci/check-npm-locks.mjs ${ADVISORY:+"$ADVISORY"}
-      - name: Verify archived artifact glob migrations with real files
-        run: |
-          npm ci --ignore-scripts --prefix dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport
-          npm ci --ignore-scripts --prefix dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact
-          node --test experiments/issue-405/artifact-files.test.mjs
-      - name: Check reproducible Python resolution
-        run: |
-          pip install --require-hashes -r scripts/ci/requirements.lock
-          uv lock --project python --check
-          uv lock --project dev/log/issues/330/pulls/331/templates/python --check
-          uv lock --project dev/log/issues/377/pulls/378/templates/python --check
       - name: Preserve dependency resolution evidence
         if: failure()
         uses: actions/upload-artifact@v7.0.2

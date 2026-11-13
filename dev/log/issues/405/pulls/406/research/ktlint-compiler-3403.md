@@ -28,7 +28,7 @@ association:	none
 edited:	false
 status:	none
 --
-Thanks @paul-dingemans 
+Thanks @paul-dingemans
 --
 author:	masterflitzer
 association:	none

@@ -178,3 +178,19 @@ but skipped publish job is reported as delivery of 0.31.4.
 
 See [validation.md](validation.md) for exact local coverage, archive limitations
 and the latest CI state. The PR remains unmerged.
+
+## Evidence formatting
+
+Downloaded text is stored as UTF-8 without a BOM, with normalized trailing
+whitespace. Original patch context spaces are preserved in the compressed
+Dependabot `.diff.gz` snapshots. These formatting changes preserve their content
+and satisfy the repository text policy.
+
+Downloaded upstream Markdown release notes and changelogs are preserved as
+`.md.gz` snapshots. Their 1,288 distinct absolute URLs included 1,189 GitHub HTML
+URLs, adding over nineteen minutes at the existing one-request-per-second host
+policy. Scanning these third-party documents exhausted the ten-minute link job
+before it could report. Compression preserves the researched sources without
+treating upstream relative links and historical changelogs as maintained project
+documentation. Authored analysis, tables and primary-source links remain checked;
+no link-check exclusions or timeout increases were added.

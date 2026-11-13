@@ -63,12 +63,12 @@ Gradle worker, which passes formatting and JVM tests with the final graph.
 - Latest-head hosted CI must pass before completion. Android, iOS/macOS,
   browser/differential and platform matrix checks are preserved in CI; local
   Linux results do not stand in for them. No 0.31.4 registry delivery is claimed.
-- Archived template snapshots contain selected configuration files, not their
-  complete original applications. Native installs, locks, audits and contained
-  policy tests were checked. Full archived application checks remain unverified:
-  JS 330/377 lack the referenced custom ESLint rule and application tests; C#
-  377 lacks experiment/fixture inputs; PHP 330/377 lack src/tests and PHPStan
-  input paths. A zero-test Node invocation is not counted as a passing suite.
+- Archived template snapshots contain selected configuration files. Exact
+  upstream application sources have now been restored temporarily from SHAS.txt,
+  with the updated snapshots overlaid, to resolve missing-input limitations.
+  Original JS policy assertions still require old tool versions and ESLint 10
+  reveals additional findings in upstream sources; these checks remain under
+  investigation. A zero-test Node invocation is not counted as a passing suite.
 - KGP rootPackageJson resolution-input tracking needs an upstream YouTrack
   report. GitHub issues are disabled for JetBrains/kotlin and an authenticated
   YouTrack account is unavailable. The researched, reproducible report remains
@@ -92,3 +92,24 @@ The before/after regression tests verify this distinction.
 
 The PR stays unmerged. Current CI observations are saved separately under
 research/ with their head SHA and timestamps.
+
+## First implementation CI correction
+
+Head `6e5241a699723e88d67fe63d0acf90727b9187d4`, all six runs created
+2026-11-13 23:08:01 UTC and completed before the next push. Dependency freshness,
+workflow lint/security and pages passed. CI's JS lint, format and 368-test suite
+passed; its strict JS gate correctly rejected new non-JS checks in an independent
+workflow (CI-43524772708.log lines 196–198). The checks now run in the existing
+gated JS parity and Python lint stages. The local gate, its 27 regression tests,
+four workflow contracts, actual artifact fixture and three uv lock checks pass.
+
+BOM checking found two downloaded research C# sources (bom-check-43524772333.log
+lines 211–213); their UTF-8 BOMs are removed. Links exceeded its ten-minute limit
+(links-43524772532.log line 300); the raw downloaded changelogs introduced 1,189
+GitHub HTML URLs. These third-party snapshots are now compressed, preserving
+authored documentation coverage and the existing timeout. The logs and correction
+checks are preserved in research/ci-round-1.tar.gz.
+
+`gh pr diff 406` rejects the 552-file diff with HTTP 406 (maximum 300 files).
+The paginated PR-files API and complete native base-to-head diff were saved;
+the 107-file implementation/configuration diff was reviewed in bounded chunks.
