@@ -26,14 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@2.40.0
         with:
-          php-version: '8.3'
+          php-version: '8.5.12'
           coverage: none
           tools: composer:v2
 
@@ -65,20 +65,20 @@ jobs:
         # where a template's real attack surface lives.
         language: [actions]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
+        uses: github/codeql-action/init@v4.39.3
         with:
           languages: ${{ matrix.language }}
 
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v4
+        uses: github/codeql-action/autobuild@v4.39.3
 
       - name: Analyze
-        uses: github/codeql-action/analyze@v4
+        uses: github/codeql-action/analyze@v4.39.3
 
   dependency-review:
     name: Dependency Review
@@ -89,12 +89,12 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Review dependency changes
-        uses: actions/dependency-review-action@v5
+        uses: actions/dependency-review-action@v5.0.0
         with:
           fail-on-severity: high
           comment-summary-in-pr: on-failure
@@ -114,7 +114,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

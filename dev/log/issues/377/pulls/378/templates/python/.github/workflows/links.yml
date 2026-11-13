@@ -43,12 +43,12 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Restore lychee cache
-        uses: actions/cache@v5
+        uses: actions/cache@v6.1.0
         with:
           path: .lycheecache
           key: cache-lychee-${{ github.sha }}
@@ -56,7 +56,7 @@ jobs:
 
       - name: Check links with lychee
         id: lychee
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@v2.9.0
         with:
           args: >-
             --config lychee.toml
@@ -142,7 +142,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

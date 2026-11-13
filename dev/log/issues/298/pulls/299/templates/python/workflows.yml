@@ -30,7 +30,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
       # The Docker image bundles shellcheck and pyflakes, so this lints every
       # `run:` block too. A native actionlint binary without shellcheck on

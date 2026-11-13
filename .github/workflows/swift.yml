@@ -31,7 +31,7 @@ jobs:
       group: ci-swift-${{ github.ref }}-lint
       cancel-in-progress: false
     container:
-      image: swift@sha256:bca121f6eb59fd80340d1296887b2698ed8f3eb9eca7d80c181f8af769dc7ee0 # 6.4-noble
+      image: swift@sha256:23d9b28ad97fb1cf1999edc3a0cb265ee915ed42299a9344e7173d5a6d2b05f4 # 6.4.2-noble
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -52,7 +52,7 @@ jobs:
           # The official Swift image, as the package's Linux users get it.
           - name: linux
             os: ubuntu-26.04
-            image: swift@sha256:bca121f6eb59fd80340d1296887b2698ed8f3eb9eca7d80c181f8af769dc7ee0 # 6.4-noble
+            image: swift@sha256:23d9b28ad97fb1cf1999edc3a0cb265ee915ed42299a9344e7173d5a6d2b05f4 # 6.4.2-noble
           # Package.swift declares swift-tools-version 5.9: the oldest
           # toolchain the package promises to build with.
           - name: linux-swift-5.9
@@ -99,7 +99,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24'
+          node-version: '26.13.1'
       # The runner image's Swift toolchain parses random documents that the
       # JavaScript reference parses first, and must agree with it on every
       # one: the same links, or the same error at the same position.

@@ -51,15 +51,15 @@ jobs:
       any-code-changed: ${{ steps.changes.outputs.any-code-changed }}
       docs-changed: ${{ steps.changes.outputs.docs-changed }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Detect Python layout
         id: python_layout
@@ -117,7 +117,7 @@ jobs:
         needs.detect-changes.outputs.any-code-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -129,9 +129,9 @@ jobs:
         run: bash scripts/simulate-fresh-merge.sh
 
       - name: Setup Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Detect Python layout
         id: python_layout
@@ -220,7 +220,7 @@ jobs:
         needs.detect-changes.outputs.docs-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -248,7 +248,7 @@ jobs:
       # upload token -- the same exchange the publish step performs.
       id-token: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -288,14 +288,14 @@ jobs:
         needs.detect-changes.outputs.any-code-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Detect Python layout
         id: python_layout
@@ -350,7 +350,7 @@ jobs:
 
       - name: Upload coverage to Codecov
         if: env.CODECOV_TOKEN != ''
-        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f  # v7.0.0 @ 2026-06-07
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           files: ${{ steps.python_layout.outputs.root }}/coverage.xml
           token: ${{ env.CODECOV_TOKEN }}
@@ -377,14 +377,14 @@ jobs:
         needs.test.result == 'success'
       )
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Detect Python layout
         id: python_layout
@@ -446,15 +446,15 @@ jobs:
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.1.0
         with:
-          python-version: "3.13"
+          python-version: "3.15.0"
 
       - name: Detect Python layout
         id: python_layout
@@ -502,7 +502,7 @@ jobs:
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -518,12 +518,12 @@ jobs:
 
       - name: Set up Docker Buildx
         if: steps.dockerfile.outputs.exists == 'true'
-        uses: docker/setup-buildx-action@v4
+        uses: docker/setup-buildx-action@v4.4.1
 
       - name: Build Docker image (no push)
         if: steps.dockerfile.outputs.exists == 'true'
         timeout-minutes: 40
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@v7.4.0
         with:
           context: .
           push: false
@@ -563,15 +563,15 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Detect Python layout
         id: python_layout
@@ -620,7 +620,7 @@ jobs:
 
       - name: Publish to PyPI
         if: steps.version_check.outputs.should_release == 'true'
-        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086  # v1.14.3 @ 2026-10-20
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # v1.14.3
         with:
           skip-existing: true
 
@@ -687,16 +687,16 @@ jobs:
       # .git/config: scripts/version_and_commit.py runs `git push origin main`
       # to publish the version bump, which needs the token wired into the
       # remote. Every other checkout sets persist-credentials: false.
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: true
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Detect Python layout
         id: python_layout
@@ -767,7 +767,7 @@ jobs:
 
       - name: Publish to PyPI
         if: steps.version_check.outputs.should_release == 'true'
-        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086  # v1.14.3 @ 2026-10-20
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # v1.14.3
         with:
           packages-dir: ${{ steps.python_layout.outputs.dist_dir }}
           skip-existing: true
@@ -828,7 +828,7 @@ jobs:
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
       RELEASE_VERSION: ${{ needs.auto-release.outputs.version || needs.manual-release.outputs.version }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -870,15 +870,15 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
+        uses: docker/setup-buildx-action@v4.4.1
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v4
+        uses: docker/login-action@v4.8.0
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -886,7 +886,7 @@ jobs:
       - name: Build and push platform image by digest
         id: docker_build
         timeout-minutes: 40
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@v7.4.0
         with:
           context: .
           platforms: ${{ matrix.platform }}
@@ -921,10 +921,10 @@ jobs:
       contents: read
     steps:
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
+        uses: docker/setup-buildx-action@v4.4.1
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v4
+        uses: docker/login-action@v4.8.0
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -971,7 +971,7 @@ jobs:
             changelog, docker-build, auto-release, manual-release,
             docker-publish-config, docker-publish-build, docker-publish]
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

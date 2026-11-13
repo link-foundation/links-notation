@@ -100,9 +100,9 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15'
+          python-version: '3.15.0'
       - name: Install zizmor
-        run: pip install -r scripts/ci/requirements.txt
+        run: pip install --require-hashes -r scripts/ci/requirements.lock
       # Fails on medium and above. The informational findings that remain are
       # `template-injection` on this repository's own step outputs and
       # `use-trusted-publishing` on the PyPI token, which is the documented

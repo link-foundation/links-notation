@@ -50,7 +50,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -78,7 +78,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-shellcheck
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       - name: Check standalone shell scripts and hooks
@@ -96,7 +96,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-status-gate-coverage
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -122,7 +122,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -136,7 +136,7 @@ jobs:
       # exactly which analyser reproduces a finding:
       #   pipx run zizmor==1.30.1 --config .github/zizmor.yml \
       #     --min-confidence low --persona regular .
-      - uses: zizmorcore/zizmor-action@v0.6.4
+      - uses: zizmorcore/zizmor-action@v0.8.1
         with:
           advanced-security: false
           annotations: true
@@ -175,13 +175,13 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-artifacts
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Install pinned artifact dependencies
         run: npm ci --prefix .github/actions/artifact-transport --ignore-scripts --no-audit --no-fund
@@ -190,7 +190,7 @@ jobs:
         run: node --pending-deprecation --throw-deprecation scripts/check-artifact-archive.mjs
 
       - name: Check out pinned Pages bundle fixture
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
         with:
           repository: actions/deploy-pages
           ref: 368f82528645a54fb793d4d04e342629a3f51346 # v5
@@ -272,14 +272,14 @@ jobs:
       - shellcheck
       - artifact-roundtrip
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Fail the run when a required job was cancelled or failed
         env:

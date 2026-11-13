@@ -37,20 +37,20 @@ jobs:
       matrix:
         language: [javascript-typescript, actions]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
+        uses: github/codeql-action/init@v4.39.3
         with:
           languages: ${{ matrix.language }}
 
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v4
+        uses: github/codeql-action/autobuild@v4.39.3
 
       - name: Analyze
-        uses: github/codeql-action/analyze@v4
+        uses: github/codeql-action/analyze@v4.39.3
 
   dependency-review:
     name: Dependency Review
@@ -64,12 +64,12 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Review dependency changes
-        uses: actions/dependency-review-action@v5
+        uses: actions/dependency-review-action@v5.0.0
         with:
           fail-on-severity: high
           comment-summary-in-pr: on-failure
@@ -86,13 +86,13 @@ jobs:
       matrix:
         directory: ['.', examples/universal-app]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7.1.0
         with:
-          node-version: 24
+          node-version: 26.13.1
 
       - name: Audit current lock
         working-directory: ${{ matrix.directory }}
@@ -119,14 +119,14 @@ jobs:
       - dependency-review
       - npm-audit
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Fail the run when a required job was cancelled or failed
         env:

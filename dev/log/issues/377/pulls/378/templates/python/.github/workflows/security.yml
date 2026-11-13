@@ -24,14 +24,14 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-dependency-audit
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Audit pyproject.toml and docs/requirements.txt
         run: python scripts/audit_dependencies.py
@@ -55,21 +55,21 @@ jobs:
       matrix:
         language: [python, actions]
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
+        uses: github/codeql-action/init@v4.39.3
         with:
           languages: ${{ matrix.language }}
           config-file: ./.github/codeql/codeql-config.yml
 
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v4
+        uses: github/codeql-action/autobuild@v4.39.3
 
       - name: Analyze
-        uses: github/codeql-action/analyze@v4
+        uses: github/codeql-action/analyze@v4.39.3
         with:
           output: codeql-results
 
@@ -92,7 +92,7 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -106,7 +106,7 @@ jobs:
 
       - name: Review dependency changes
         if: github.event_name == 'pull_request' && steps.graph.outputs.enabled == 'true'
-        uses: actions/dependency-review-action@v5
+        uses: actions/dependency-review-action@v5.0.0
         with:
           fail-on-severity: high
           comment-summary-in-pr: on-failure
@@ -125,7 +125,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

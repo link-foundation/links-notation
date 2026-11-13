@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net11.0": {
+      "Pegasus": {
+        "type": "Direct",
+        "requested": "[4.1.0, )",
+        "resolved": "4.1.0",
+        "contentHash": "i7qGKD6i5BEvP7Al2K8T/UzBp2bZABjgItPjRn7OjgQTcgFAb9X3wrxcJV06X5p1FEFDoy4FxnoUmneDgnXTww=="
+      }
+    }
+  }
+}

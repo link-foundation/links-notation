@@ -41,9 +41,9 @@ jobs:
           persist-credentials: false
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
-          php-version: '8.3'
+          php-version: '8.5.12'
           coverage: none
 
       - name: Check runner images and action/tool releases
@@ -107,7 +107,7 @@ jobs:
       # action, and documents exactly which analyser reproduces a finding
       # (issue #6).
       - name: Audit workflow files
-        uses: zizmorcore/zizmor-action@v0.6.4
+        uses: zizmorcore/zizmor-action@v0.8.1
         with:
           advanced-security: false
           annotations: true

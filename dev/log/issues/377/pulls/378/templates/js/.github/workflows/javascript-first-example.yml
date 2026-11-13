@@ -38,7 +38,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-check
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.javascript-first.outputs.tested-sha }}
           persist-credentials: false
@@ -56,7 +56,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-build
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.javascript-first.outputs.tested-sha }}
           persist-credentials: false
@@ -74,7 +74,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-test
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.javascript-first.outputs.tested-sha }}
           persist-credentials: false
@@ -93,7 +93,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-package
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.javascript-first.outputs.tested-sha }}
           persist-credentials: false
@@ -111,7 +111,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-container
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.javascript-first.outputs.tested-sha }}
           persist-credentials: false
@@ -129,7 +129,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-publish
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.javascript-first.outputs.tested-sha }}
           persist-credentials: false

@@ -64,18 +64,19 @@
     "url": "git+https://github.com/link-foundation/js-ai-driven-development-pipeline-template.git"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=26.13.1"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
-    "eslint": "^9.38.0",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-prettier": "^5.5.7",
     "husky": "^9.1.7",
-    "jscpd": "^5.4.0",
-    "lint-staged": "^16.4.0",
-    "prettier": "^3.6.2",
-    "test-anywhere": "^0.8.48"
+    "jscpd": "^5.4.3",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.10.1",
+    "test-anywhere": "^0.9.1"
   },
   "lint-staged": {
     "*.{js,mjs,cjs}": [

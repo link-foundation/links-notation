@@ -24,14 +24,14 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
 
       - name: Test workflow policy
         run: bun test ./scripts

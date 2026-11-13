@@ -26,7 +26,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-artifact-roundtrip
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       - name: Test extraction adapter
@@ -35,12 +35,12 @@ jobs:
         run: |
           mkdir -p artifact-fixture/one artifact-fixture/two
           python3 -c 'from pathlib import Path; Path("artifact-fixture/one/check.bin").write_bytes(bytes(range(256)) * 8); Path("artifact-fixture/two/second.txt").write_bytes(b"check\n")'
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: extraction-one
           path: artifact-fixture/one/
           if-no-files-found: error
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: extraction-two
           path: artifact-fixture/two/
@@ -75,7 +75,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -109,7 +109,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -130,7 +130,7 @@ jobs:
       #     --min-confidence low --persona regular .
       # Scan the repository, including Dependabot and actions outside .github.
       # Future Dependabot configs need cooldown: {default-days: 7} per ecosystem.
-      - uses: zizmorcore/zizmor-action@v0.6.4
+      - uses: zizmorcore/zizmor-action@v0.8.1
         with:
           inputs: .
           advanced-security: false
@@ -167,7 +167,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-shellcheck
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       - name: Shellcheck every tracked shell script
@@ -181,12 +181,12 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-workflow-tools
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           toolchain: stable
 
@@ -211,7 +211,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

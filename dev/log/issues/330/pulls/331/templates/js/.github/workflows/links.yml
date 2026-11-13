@@ -52,13 +52,13 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Check links with lychee
         id: lychee
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@v2.9.0
         with:
           # Check all Markdown and HTML files
           # Exclude case-studies directory - these are research documents from
@@ -155,14 +155,14 @@ jobs:
     needs:
       - link-checker
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Fail the run when a required job was cancelled or failed
         env:

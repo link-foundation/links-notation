@@ -43,9 +43,9 @@ jobs:
           persist-credentials: false
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
-          php-version: '8.3'
+          php-version: '8.5.12'
           coverage: none
           tools: phpDocumentor
 

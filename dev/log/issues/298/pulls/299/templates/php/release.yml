@@ -31,7 +31,7 @@ permissions:
   contents: read
 
 env:
-  PHP_VERSION: '8.3'
+  PHP_VERSION: '8.5.12'
 
 jobs:
   # === DETECT CHANGES - determines which downstream jobs need to run ===
@@ -48,12 +48,12 @@ jobs:
       workflow-changed: ${{ steps.changes.outputs.workflow-changed }}
       any-code-changed: ${{ steps.changes.outputs.any-code-changed }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
@@ -86,10 +86,10 @@ jobs:
         needs.detect-changes.outputs.workflow-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
@@ -102,7 +102,7 @@ jobs:
         run: composer validate --strict --no-check-version
 
       - name: Install dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@4.0.0
 
       - name: Check coding standards (PHP-CS-Fixer)
         run: composer lint
@@ -131,19 +131,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['8.1', '8.2', '8.3', '8.4']
+        php: ['8.4', '8.5']
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ matrix.php }}
           coverage: xdebug
           tools: composer:v2
 
       - name: Install dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@4.0.0
 
       - name: Run tests
         run: php vendor/bin/phpunit --coverage-text
@@ -157,19 +157,19 @@ jobs:
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
           tools: composer:v2
 
       - name: Install dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@4.0.0
 
       - name: Ensure the version was not bumped by hand
         env:
@@ -200,10 +200,10 @@ jobs:
         )
       )
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
@@ -233,20 +233,20 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
           tools: composer:v2
 
       - name: Install dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@4.0.0
 
       - name: Decide whether a release is needed
         id: decide
@@ -295,20 +295,20 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
           tools: composer:v2
 
       - name: Install dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@4.0.0
 
       - name: Version, changelog, commit and tag
         id: version

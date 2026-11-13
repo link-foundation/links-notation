@@ -33,19 +33,19 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@2.40.0
         with:
-          php-version: '8.3'
+          php-version: '8.5.12'
           coverage: none
 
       - name: Check links with lychee
         id: lychee
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@v2.9.0
         with:
           # The case-studies directory holds research copied from sibling repos
           # whose relative links resolve there, not here; exclude it.
@@ -120,7 +120,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

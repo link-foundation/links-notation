@@ -34,7 +34,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -55,13 +55,13 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       # Annotations instead of SARIF: forks of this template do not necessarily
       # have code scanning enabled, and the job should fail loudly either way.
-      - uses: zizmorcore/zizmor-action@v0.6.2
+      - uses: zizmorcore/zizmor-action@v0.8.1
         with:
           advanced-security: false
           annotations: true

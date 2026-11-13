@@ -1,10 +1,6 @@
-# Every committed manifest outside dev/log is listed here, and
-# scripts/ci/check-dependabot.py fails CI when one is missing (issue #348).
-#
-# dev/log/** is not listed: those files are snapshots of other repositories'
-# templates, kept as evidence of what an issue found. Updating them would
-# rewrite the record, so they deliberately keep their historical versions,
-# as scripts/ci/check-dependencies.py already does.
+# Every committed manifest, including template manifests in dev/log, is
+# covered here. Issue #405 explicitly includes these templates in updates;
+# their original versions remain in Git history.
 #
 # Updates run daily, like the freshness gate in dependencies.yml that fails
 # CI once a release is out. In each ecosystem, minor and patch updates arrive as
@@ -20,6 +16,11 @@ updates:
   # requests for one bump in /js; each regenerates its own lockfile.
   - package-ecosystem: "npm"
     directories:
+      - "/dev/log/issues/330/pulls/331/templates/js"
+      - "/dev/log/issues/377/pulls/378/templates/csharp"
+      - "/dev/log/issues/377/pulls/378/templates/js"
+      - "/dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport"
+      - "/dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact"
       - "/js"
       - "/docs/website"
       - "/docs/comparison"
@@ -49,6 +50,9 @@ updates:
 
   - package-ecosystem: "pip"
     directories:
+      - "/dev/log/issues/330/pulls/331/templates/python"
+      - "/dev/log/issues/377/pulls/378/templates/cpp/scripts"
+      - "/dev/log/issues/377/pulls/378/templates/python"
       - "/python"
       - "/benchmarks/python"
       - "/scripts/ci"
@@ -65,6 +69,8 @@ updates:
 
   - package-ecosystem: "cargo"
     directories:
+      - "/dev/log/issues/330/pulls/331/templates/rust"
+      - "/dev/log/issues/377/pulls/378/templates/rust"
       - "/rust"
       - "/experiments"
       - "/experiments/issue-209/lino-shapes"
@@ -94,6 +100,8 @@ updates:
   # (experiments/issue-348/check-csharp-experiments.sh records it).
   - package-ecosystem: "nuget"
     directories:
+      - "/dev/log/issues/377/pulls/378/templates/csharp/src/MyPackage"
+      - "/dev/log/issues/377/pulls/378/templates/csharp/tests/MyPackage.Tests"
       - "/csharp"
       - "/benchmarks/csharp"
       - "/examples/binary/csharp"
@@ -124,7 +132,9 @@ updates:
 
   # csharp/global.json pins the SDK; setup-dotnet and .gitpod.Dockerfile read it.
   - package-ecosystem: "dotnet-sdk"
-    directory: "/csharp"
+    directories:
+      - "/dev/log/issues/377/pulls/378/templates/csharp"
+      - "/csharp"
     schedule:
       interval: "daily"
     labels: ["dependencies", "csharp"]
@@ -137,6 +147,8 @@ updates:
   # scripts/ci/check-dependencies.py fails CI when a newer Maven is out.
   - package-ecosystem: "maven"
     directories:
+      - "/dev/log/issues/330/pulls/331/templates/java"
+      - "/dev/log/issues/377/pulls/378/templates/java"
       - "/java"
       - "/benchmarks/java"
     schedule:
@@ -172,6 +184,8 @@ updates:
   # (scripts/ci/php-distribution.mjs keeps the two in step).
   - package-ecosystem: "composer"
     directories:
+      - "/dev/log/issues/330/pulls/331/templates/php"
+      - "/dev/log/issues/377/pulls/378/templates/php"
       - "/"
       - "/php"
       - "/benchmarks/php"
@@ -187,6 +201,8 @@ updates:
 
   - package-ecosystem: "gomod"
     directories:
+      - "/dev/log/issues/330/pulls/331/templates/go"
+      - "/dev/log/issues/377/pulls/378/templates/go"
       - "/go"
       - "/benchmarks/go"
       - "/experiments/issue-282/parity/go"
@@ -223,7 +239,30 @@ updates:
       prefix: "chore(deps)"
 
   - package-ecosystem: "github-actions"
-    directory: "/"
+    directories:
+      - "/dev/log/issues/290/pulls/291/templates/csharp"
+      - "/dev/log/issues/290/pulls/291/templates/go"
+      - "/dev/log/issues/290/pulls/291/templates/java"
+      - "/dev/log/issues/290/pulls/291/templates/js"
+      - "/dev/log/issues/290/pulls/291/templates/php"
+      - "/dev/log/issues/290/pulls/291/templates/python"
+      - "/dev/log/issues/290/pulls/291/templates/rust"
+      - "/dev/log/issues/330/pulls/331/templates/csharp"
+      - "/dev/log/issues/330/pulls/331/templates/go"
+      - "/dev/log/issues/330/pulls/331/templates/java"
+      - "/dev/log/issues/330/pulls/331/templates/js"
+      - "/dev/log/issues/330/pulls/331/templates/php"
+      - "/dev/log/issues/330/pulls/331/templates/python"
+      - "/dev/log/issues/330/pulls/331/templates/rust"
+      - "/dev/log/issues/377/pulls/378/templates/cpp"
+      - "/dev/log/issues/377/pulls/378/templates/csharp"
+      - "/dev/log/issues/377/pulls/378/templates/go"
+      - "/dev/log/issues/377/pulls/378/templates/java"
+      - "/dev/log/issues/377/pulls/378/templates/js"
+      - "/dev/log/issues/377/pulls/378/templates/php"
+      - "/dev/log/issues/377/pulls/378/templates/python"
+      - "/dev/log/issues/377/pulls/378/templates/rust"
+      - "/"
     schedule:
       interval: "daily"
     groups:
@@ -236,7 +275,19 @@ updates:
       prefix: "chore(deps)"
 
   - package-ecosystem: "pre-commit"
-    directory: "/"
+    directories:
+      - "/dev/log/issues/330/pulls/331/templates/csharp"
+      - "/dev/log/issues/330/pulls/331/templates/go"
+      - "/dev/log/issues/330/pulls/331/templates/java"
+      - "/dev/log/issues/330/pulls/331/templates/python"
+      - "/dev/log/issues/330/pulls/331/templates/rust"
+      - "/dev/log/issues/377/pulls/378/templates/cpp"
+      - "/dev/log/issues/377/pulls/378/templates/csharp"
+      - "/dev/log/issues/377/pulls/378/templates/go"
+      - "/dev/log/issues/377/pulls/378/templates/java"
+      - "/dev/log/issues/377/pulls/378/templates/python"
+      - "/dev/log/issues/377/pulls/378/templates/rust"
+      - "/"
     schedule:
       interval: "daily"
     groups:

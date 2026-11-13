@@ -85,7 +85,7 @@ jobs:
       # a visible line in the diff rather than a side effect of bumping the
       # action, and documents exactly which analyser reproduces a finding.
       - name: Audit workflow files
-        uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
+        uses: zizmorcore/zizmor-action@45d7276c9ca790aabd705e31ca99c6185c3e76dd # v0.8.1
         with:
           advanced-security: false
           annotations: true

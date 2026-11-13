@@ -26,7 +26,7 @@ env:
   GIT_CONFIG_COUNT: '1'
   GIT_CONFIG_KEY_0: init.defaultBranch
   GIT_CONFIG_VALUE_0: main
-  ZIZMOR_VERSION: '1.30.1'
+  ZIZMOR_VERSION: '1.32.0'
 
 jobs:
   actionlint:
@@ -39,7 +39,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -84,7 +84,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -93,7 +93,7 @@ jobs:
       #
       # The action and CLI share one pin supported by this action's digest table.
       - name: Audit workflow files
-        uses: zizmorcore/zizmor-action@v0.6.4
+        uses: zizmorcore/zizmor-action@v0.8.1
         with:
           advanced-security: false
           annotations: true
@@ -129,7 +129,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-shellcheck
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -144,13 +144,13 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-artifacts
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24'
+          node-version: '26.13.1'
 
       - name: Install pinned artifact dependencies
         working-directory: .github/actions/artifact
@@ -231,7 +231,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

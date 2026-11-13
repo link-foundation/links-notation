@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net11.0": {
+      "Microsoft.ML.Tokenizers": {
+        "type": "Direct",
+        "requested": "[3.0.0, )",
+        "resolved": "3.0.0",
+        "contentHash": "0fee9Ydsd6zmq2ofM5cKeV/CzvEjzPbgwuqWyU3+imlDgbGA6DjnxTK13Gb0IyS9PPYdGphq+mILBcQvF+Z95A=="
+      },
+      "Microsoft.ML.Tokenizers.Data.Cl100kBase": {
+        "type": "Direct",
+        "requested": "[3.0.0, )",
+        "resolved": "3.0.0",
+        "contentHash": "TQ+T5fjsfyWczZ2Wgyu1GpI2EdHeu2OSAHPWArCEWiDDeGy1f85HIcYqTYP/QiF3fyVjVeVpuX6+yw/gHD7/iw==",
+        "dependencies": {
+          "Microsoft.ML.Tokenizers": "3.0.0"
+        }
+      },
+      "Microsoft.ML.Tokenizers.Data.O200kBase": {
+        "type": "Direct",
+        "requested": "[3.0.0, )",
+        "resolved": "3.0.0",
+        "contentHash": "x2+bw8YPxh81GvJnxsr+ctmENqL56o07foOWtspn8JUyhayVRf/D38YLXJcMTBVaUFSWrgydbY7I6o5Op7cmzw==",
+        "dependencies": {
+          "Microsoft.ML.Tokenizers": "3.0.0"
+        }
+      },
+      "Pegasus": {
+        "type": "Transitive",
+        "resolved": "4.1.0",
+        "contentHash": "i7qGKD6i5BEvP7Al2K8T/UzBp2bZABjgItPjRn7OjgQTcgFAb9X3wrxcJV06X5p1FEFDoy4FxnoUmneDgnXTww=="
+      },
+      "Platform.Collections": {
+        "type": "Transitive",
+        "resolved": "0.4.0",
+        "contentHash": "ofU+XTf0CJry3dnpSq5pdiz8cArZDlrd3IaGtYoV8L6e+OhTdx2n544s+XLOZK90KJUsNv/docu2Y97Asdbvuw==",
+        "dependencies": {
+          "Platform.Disposables": "0.4.0",
+          "Platform.Interfaces": "0.5.0",
+          "Platform.Random": "0.3.0",
+          "Platform.Ranges": "0.5.0"
+        }
+      },
+      "Platform.Disposables": {
+        "type": "Transitive",
+        "resolved": "0.4.0",
+        "contentHash": "ko0W4cw5XhNxJANdO1T8srpWRVqpPiXtCohumlbTu33kivRBEmk1ivDsySaNhKTyuYjJnrjRYrgA1iEb2sS+/Q==",
+        "dependencies": {
+          "Platform.Exceptions": "0.5.0"
+        }
+      },
+      "Platform.Exceptions": {
+        "type": "Transitive",
+        "resolved": "0.5.0",
+        "contentHash": "htu3iyPVJinbLxU1I1cpc2qFlur7IF2fTc9u2jqQ+3X1Lyzd3aeK9Y7gJu9ZkdnIO3tbdO6wxr1HZG4UhaIG8A=="
+      },
+      "Platform.Interfaces": {
+        "type": "Transitive",
+        "resolved": "0.5.0",
+        "contentHash": "OBViyjgCYWaXH8xhibYL/fbwHfPP/+qVUDxcFGH22IaYzbrFbfNR5TxW6gsk3LR9QXLANnrLsuI7phZueoj/Tw=="
+      },
+      "Platform.Random": {
+        "type": "Transitive",
+        "resolved": "0.3.0",
+        "contentHash": "GX24Xx45cUIr9EZl55evdwb7oYN/nimpoNqDG4zoMDDLqeEpL35zX8IiHHDYITV9F4bjrCrSEiRCVsRFAsi7SQ==",
+        "dependencies": {
+          "Platform.Ranges": "0.5.0"
+        }
+      },
+      "Platform.Ranges": {
+        "type": "Transitive",
+        "resolved": "0.5.0",
+        "contentHash": "CUhZM/4F714NAyrtWtkBx78L4xJpFZ1wp+6ivFvpAXx6DsaBcBsyDxjn5eoLB9LSUYxB11gFkwwmXmJhMgZ3qw==",
+        "dependencies": {
+          "Platform.Exceptions": "0.5.0"
+        }
+      },
+      "links-notation": {
+        "type": "Project",
+        "dependencies": {
+          "Pegasus": "[4.1.0, )",
+          "Platform.Collections": "[0.4.0, )"
+        }
+      }
+    }
+  }
+}

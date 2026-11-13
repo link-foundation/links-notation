@@ -31,7 +31,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -64,7 +64,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -78,7 +78,7 @@ jobs:
       # action, and documents exactly which analyser reproduces a finding
       # (issue #6).
       - name: Audit workflow files
-        uses: zizmorcore/zizmor-action@v0.6.2
+        uses: zizmorcore/zizmor-action@v0.8.1
         with:
           advanced-security: false
           annotations: true
@@ -118,7 +118,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

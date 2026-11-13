@@ -39,7 +39,7 @@ jobs:
       tag: ${{ steps.release.outputs.tag }}
       should_build: ${{ steps.release.outputs.should_build }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       - name: Resolve release tag
@@ -77,11 +77,11 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           ref: ${{ github.event_name != 'pull_request' && needs.resolve.outputs.tag || '' }}
-      - uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+      - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -122,13 +122,13 @@ jobs:
             find . -type f -exec shasum -a 256 {} +
           fi | sed 's#  \./#  #' > "SHA256SUMS-$MATRIX_LABEL.partial"
       - name: Upload packaged assets
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: desktop-assets-${{ matrix.label }}
           path: desktop-dist
           retention-days: 7
       - name: Upload checksum fragment
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: desktop-checksums-${{ matrix.label }}
           path: desktop-dist/SHA256SUMS-${{ matrix.label }}.partial
@@ -150,7 +150,7 @@ jobs:
       id-token: write
       attestations: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       # actionlint 1.7.12 rejects the newer $/ syntax; use the checked-out adapter.
@@ -183,7 +183,7 @@ jobs:
             echo "Run        : $SERVER_URL/$REPOSITORY/actions/runs/$RUN_ID"
           } > BUILD-PROVENANCE.txt
       - name: Attest build provenance
-        uses: actions/attest@v4
+        uses: actions/attest@v4.2.2
         with:
           subject-path: |
             release-assets/**/*
@@ -214,7 +214,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

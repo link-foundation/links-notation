@@ -69,7 +69,7 @@ jobs:
       docs-changed: ${{ steps.changes.outputs.docs-changed }}
       any-code-changed: ${{ steps.changes.outputs.any-code-changed }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -100,14 +100,14 @@ jobs:
     if: |
       needs.detect-changes.outputs.js-changed == 'true'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Check tracked JavaScript syntax
         run: bash scripts/check-mjs-syntax.sh
@@ -126,7 +126,7 @@ jobs:
       needs.detect-changes.outputs.docs-changed == 'true' ||
       needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -155,7 +155,7 @@ jobs:
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -182,15 +182,15 @@ jobs:
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Install dependencies
         run: npm ci
@@ -233,7 +233,7 @@ jobs:
         needs.detect-changes.outputs.any-code-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           # For PRs, fetch enough history to merge with base branch
           fetch-depth: 0
@@ -246,9 +246,9 @@ jobs:
         run: bash scripts/simulate-fresh-merge.sh
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Check for secrets
         run: npx --yes -p secretlint@13.0.7 -p @secretlint/secretlint-rule-preset-recommend@13.0.7 secretlint "**/*"
@@ -328,7 +328,7 @@ jobs:
         os: [ubuntu-24.04, macos-15, windows-2025]
         runtime: [node, bun, deno]
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           # For PRs, fetch enough history to merge with base branch
           fetch-depth: 0
@@ -346,9 +346,9 @@ jobs:
       # installs the owning locks explicitly instead of relying on packages
       # another runtime happened to resolve.
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Install dependencies (runtime tests and native fixtures)
         run: npm ci
@@ -365,7 +365,7 @@ jobs:
         if: matrix.runtime == 'bun'
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
-          bun-version: '1.x'
+          bun-version: '1.4.4'
 
       - name: Run tests (Bun)
         if: matrix.runtime == 'bun'
@@ -417,7 +417,7 @@ jobs:
       DOCKER_CONTEXT: ${{ vars.DOCKER_CONTEXT }}
       DOCKERFILE: ${{ vars.DOCKERFILE }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -436,7 +436,7 @@ jobs:
         # exhausted step budget fails the step, while an exhausted job cap
         # only cancels the job.
         timeout-minutes: 20
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@v7.4.0
         with:
           context: ${{ steps.docker_config.outputs.context }}
           file: ${{ steps.docker_config.outputs.dockerfile }}
@@ -465,7 +465,7 @@ jobs:
     if: |
       needs.detect-changes.outputs.docs-changed == 'true'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -499,7 +499,7 @@ jobs:
       # finding.
       id-token: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -572,15 +572,15 @@ jobs:
       # `git push origin main` to publish the version bump, which needs the
       # token wired into the remote. Every other checkout in this
       # repository sets persist-credentials: false.
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: true
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Remove deprecated npm auth config
@@ -720,15 +720,15 @@ jobs:
       # commit to main, which needs the token wired into the remote.
       # Every other checkout in this repository sets
       # persist-credentials: false.
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: true
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Remove deprecated npm auth config
@@ -819,7 +819,7 @@ jobs:
       DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
       RELEASE_VERSION: ${{ needs.release.outputs.published_version || needs.instant-release.outputs.published_version }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -858,7 +858,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -905,7 +905,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -913,7 +913,7 @@ jobs:
         uses: ./.github/actions/setup-buildx-resilient
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v4
+        uses: docker/login-action@v4.8.0
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -985,7 +985,7 @@ jobs:
     steps:
       # peter-evans/create-pull-request receives the dedicated token directly;
       # dependency installation does not need a credential in .git/config.
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -1000,9 +1000,9 @@ jobs:
           fi
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Install dependencies
         run: npm ci
@@ -1021,7 +1021,7 @@ jobs:
           echo "Formatted changeset files"
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           # The built-in token suppresses pull_request workflows; use the same
           # dedicated automation actor as the release fallback (issue #192).
@@ -1076,14 +1076,14 @@ jobs:
       - docker-publish
       - changeset-pr
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Fail the run when a required job was cancelled or failed
         env:

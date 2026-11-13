@@ -3,7 +3,7 @@
 # policy range in ../CMakeLists.txt sets CMP0135 on CMake 3.24+, so extracted
 # files get fresh timestamps without DOWNLOAD_EXTRACT_TIMESTAMP, a keyword
 # CMake 3.16 rejects.
-find_package(GTest 1.11 QUIET)
+find_package(GTest 1.18.0 QUIET)
 if(NOT GTest_FOUND)
   include(FetchContent)
   FetchContent_Declare(googletest

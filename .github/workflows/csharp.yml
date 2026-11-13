@@ -37,7 +37,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: csharp/global.json
       - name: Restore Dependencies
@@ -63,7 +63,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: csharp/global.json
       - name: Restore Dependencies
@@ -100,7 +100,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: csharp/global.json
       # These packages are 293 MB. On 2026-10-06 the runner's apt mirror served
@@ -134,9 +134,9 @@ jobs:
         id: latexminted-python
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
           update-environment: false
-      - name: Run latexminted on Python 3.13
+      - name: Run latexminted on Python 3.15
         env:
           LATEXMINTED_PYTHON: ${{ steps.latexminted-python.outputs.python-path }}
         run: |

@@ -78,7 +78,7 @@ jobs:
       cpp-changed: ${{ steps.changes.outputs.cpp-changed }}
       docs-changed: ${{ steps.changes.outputs.docs-changed }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -106,7 +106,7 @@ jobs:
     needs: [detect-changes]
     if: needs.detect-changes.outputs.docs-changed == 'true'
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
@@ -132,7 +132,7 @@ jobs:
       # without writing anything.
       contents: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
@@ -167,7 +167,7 @@ jobs:
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -189,7 +189,7 @@ jobs:
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -210,7 +210,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-secrets-scan
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
@@ -230,7 +230,7 @@ jobs:
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -275,15 +275,15 @@ jobs:
         needs.detect-changes.outputs.any-code-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Install pinned lint tools
         # clang-format, clang-tidy and cppcheck come from PyPI wheels pinned in
@@ -375,14 +375,14 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Select the compiler and locate the C++ project
         env:
@@ -441,7 +441,7 @@ jobs:
         needs.detect-changes.outputs.any-code-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
@@ -480,14 +480,14 @@ jobs:
         needs.detect-changes.outputs.any-code-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Install pinned tools
         run: python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
@@ -521,14 +521,14 @@ jobs:
         needs.detect-changes.outputs.cpp-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Install gcovr
         run: python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
@@ -580,16 +580,16 @@ jobs:
     needs: [lint, test, sanitizers, script-tests]
     if: ${{ !cancelled() && needs.lint.result == 'success' && needs.test.result == 'success' && needs.sanitizers.result == 'success' && needs.script-tests.result == 'success' }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           # git archive of HEAD needs the commit time; the tags are not needed.
           fetch-depth: 1
 
       - name: Setup Python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Install pinned tools
         run: python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
@@ -634,7 +634,7 @@ jobs:
             bash scripts/check-vcpkg-port.sh
 
       - name: Upload release assets
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: release-assets
           path: dist
@@ -668,16 +668,16 @@ jobs:
       # This job pushes the version bump commit and tag back to `main`, so the
       # checkout credentials have to stay in `.git/config` (no
       # `persist-credentials: false` here, unlike every read-only checkout).
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: true
 
       - name: Setup Python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Install Conan
         if: vars.CONAN_REMOTE_URL != ''
@@ -709,7 +709,7 @@ jobs:
           steps.check.outputs.should_release == 'true' &&
           steps.check.outputs.nuget_published != 'true' &&
           vars.NUGET_PUBLISH == 'true' && vars.NUGET_USER != ''
-        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
         with:
           user: ${{ vars.NUGET_USER }}
 
@@ -755,16 +755,16 @@ jobs:
       # This job pushes the version bump commit and tag back to `main`, so the
       # checkout credentials have to stay in `.git/config` (no
       # `persist-credentials: false` here, unlike every read-only checkout).
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: true
 
       - name: Setup Python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.15.0'
 
       - name: Install Conan
         if: vars.CONAN_REMOTE_URL != ''
@@ -782,7 +782,7 @@ jobs:
         if: >-
           (steps.version.outputs.version_committed == 'true' || steps.version.outputs.already_released == 'true') &&
           vars.NUGET_PUBLISH == 'true' && vars.NUGET_USER != ''
-        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
         with:
           user: ${{ vars.NUGET_USER }}
 
@@ -813,7 +813,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -825,7 +825,7 @@ jobs:
         run: python3 scripts/create_changelog_fragment.py --bump-type "$BUMP_TYPE" --description "$DESCRIPTION"
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'chore: add changelog for manual ${{ github.event.inputs.bump_type }} release'
@@ -875,7 +875,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 

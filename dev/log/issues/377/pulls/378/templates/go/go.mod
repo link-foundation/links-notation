@@ -1,3 +1,3 @@
 module github.com/link-foundation/go-ai-driven-development-pipeline-template
 
-go 1.21
+go 1.27.4

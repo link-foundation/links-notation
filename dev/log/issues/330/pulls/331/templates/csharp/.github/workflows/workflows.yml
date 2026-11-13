@@ -30,7 +30,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -63,7 +63,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -76,7 +76,7 @@ jobs:
       # a visible line in the diff rather than a side effect of bumping the
       # action, and documents exactly which analyser reproduces a finding.
       - name: Audit workflow files
-        uses: zizmorcore/zizmor-action@v0.6.2
+        uses: zizmorcore/zizmor-action@v0.8.1
         with:
           advanced-security: false
           annotations: true

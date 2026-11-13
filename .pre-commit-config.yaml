@@ -16,6 +16,7 @@ repos:
 
   # JavaScript/TypeScript
   - repo: https://github.com/pre-commit/mirrors-eslint
+    # Mirror tag publication lags npm; the installed ESLint is pinned below.
     rev: v10.14.0
     hooks:
       - id: eslint
@@ -24,7 +25,7 @@ repos:
         files: ^(js/(src|tests)|docs/website)/.*\.(js|mjs)$
         args: ['--fix']
         additional_dependencies:
-          - eslint@10.14.0
+          - eslint@10.15.0
 
   # Python
   - repo: https://github.com/psf/black

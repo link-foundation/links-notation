@@ -34,7 +34,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -65,7 +65,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-status-gate-coverage
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -88,7 +88,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -102,7 +102,7 @@ jobs:
       # exactly which analyser reproduces a finding:
       #   pipx run zizmor==1.29.0 --config .github/zizmor.yml \
       #     --min-confidence low --persona regular .github/workflows
-      - uses: zizmorcore/zizmor-action@v0.6.2
+      - uses: zizmorcore/zizmor-action@v0.8.1
         with:
           advanced-security: false
           annotations: true
@@ -152,14 +152,14 @@ jobs:
       - status-gate-coverage
       - zizmor
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Fail the run when a required job was cancelled or failed
         env:

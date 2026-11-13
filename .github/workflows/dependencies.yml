@@ -27,7 +27,7 @@ jobs:
           fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 1 }}
       - uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15'
+          python-version: '3.15.0'
       - name: Test the dependency checker without network access
         run: python experiments/issue-325/test_dependency_check.py
       # A manifest Dependabot is not told about never receives an update; the
@@ -53,14 +53,25 @@ jobs:
         run: python scripts/ci/check-dependencies.py "$MODE"
       - uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24'
+          node-version: '26.13.1'
       - uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
       - name: Report stale transitive npm dependencies and require both JS locks
         env:
           ADVISORY: ${{ github.event_name == 'pull_request' && '--advisory' || '' }}
         run: node scripts/ci/check-npm-locks.mjs ${ADVISORY:+"$ADVISORY"}
+      - name: Verify archived artifact glob migrations with real files
+        run: |
+          npm ci --ignore-scripts --prefix dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport
+          npm ci --ignore-scripts --prefix dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact
+          node --test experiments/issue-405/artifact-files.test.mjs
+      - name: Check reproducible Python resolution
+        run: |
+          pip install --require-hashes -r scripts/ci/requirements.lock
+          uv lock --project python --check
+          uv lock --project dev/log/issues/330/pulls/331/templates/python --check
+          uv lock --project dev/log/issues/377/pulls/378/templates/python --check
       - name: Preserve dependency resolution evidence
         if: failure()
         uses: actions/upload-artifact@v7.0.2

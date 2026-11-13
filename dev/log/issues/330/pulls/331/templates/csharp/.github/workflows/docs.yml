@@ -46,14 +46,14 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6.1.0
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '11.0.100'
 
       - name: Install DocFX
         run: dotnet tool update -g docfx
@@ -81,13 +81,13 @@ jobs:
         if: |
           ((github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch') &&
           vars.DEPLOY_GITHUB_PAGES == 'true'
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@v6.0.0
 
       - name: Upload GitHub Pages artifact
         if: |
           ((github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch') &&
           vars.DEPLOY_GITHUB_PAGES == 'true'
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: _site
 
@@ -112,7 +112,7 @@ jobs:
     steps:
       - name: Deploy GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v5.0.1
 
       - name: Print resolved deployment URL (debug)
         run: |

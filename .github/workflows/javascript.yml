@@ -35,7 +35,7 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
       - name: Install Dependencies
         run: bun install --frozen-lockfile
       # Uses the pinned devDependency rather than `npx prettier`, which would
@@ -57,7 +57,7 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
       - name: Install Dependencies
         run: bun install --frozen-lockfile
       - name: Lint
@@ -77,7 +77,7 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
       - name: Install Dependencies
         run: bun install --frozen-lockfile
       - name: Build
@@ -107,7 +107,7 @@ jobs:
           persist-credentials: false
       - uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
       - name: Check every CI entry point and parity contract
         working-directory: .
         run: |

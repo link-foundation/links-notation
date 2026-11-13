@@ -2,7 +2,7 @@
 """Require .github/dependabot.yml to cover every committed manifest.
 
 A manifest added without a Dependabot entry is never updated, and nothing
-says so (issue #348). Each committed manifest outside dev/log maps to a
+says so (issue #348). Each committed manifest maps to a
 package ecosystem; its directory, or the workspace or solution directory
 that owns it, must be listed for that ecosystem. Deliberate exclusions are
 named in EXCLUDED with their reason.
@@ -20,8 +20,6 @@ from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[2]
 CONFIG = ".github/dependabot.yml"
-# dev/log holds snapshots of other repositories' templates, kept as evidence.
-SNAPSHOTS = ("dev/log/",)
 EXCLUDED = {
     # Compiles every .cs file under experiments/ against a removed API and
     # has not built for many releases; see
@@ -163,8 +161,6 @@ def problems(files, text):
     entries = configured(text)
     missing = []
     for path in sorted(files):
-        if path.startswith(SNAPSHOTS):
-            continue
         for ecosystem in ecosystems(path):
             candidates = owners(path, files)
             listed = entries.get(ecosystem, set())
@@ -210,7 +206,7 @@ def main():
     for line in missing:
         print(f"::error file={CONFIG}::{line}")
     if not missing:
-        print(f"{CONFIG} covers every committed manifest outside dev/log.")
+        print(f"{CONFIG} covers every committed manifest, including templates.")
         if repository:
             print(f"Every label it applies exists in {repository}.")
     return 1 if missing else 0
