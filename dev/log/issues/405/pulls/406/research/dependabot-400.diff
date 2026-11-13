@@ -1,0 +1,16 @@
+diff --git a/benchmarks/csharp/Benchmark.csproj b/benchmarks/csharp/Benchmark.csproj
+index 7fb57ee7..a33c998d 100644
+--- a/benchmarks/csharp/Benchmark.csproj
++++ b/benchmarks/csharp/Benchmark.csproj
+@@ -18,9 +18,9 @@
+   <ItemGroup>
+     <!-- The data packages carry the BPE ranks with the build, so counting a
+          token never depends on a download. -->
+-    <PackageReference Include="Microsoft.ML.Tokenizers" Version="2.0.1" />
++    <PackageReference Include="Microsoft.ML.Tokenizers" Version="3.0.0" />
+     <PackageReference Include="Microsoft.ML.Tokenizers.Data.O200kBase" Version="2.0.1" />
+-    <PackageReference Include="Microsoft.ML.Tokenizers.Data.Cl100kBase" Version="2.0.1" />
++    <PackageReference Include="Microsoft.ML.Tokenizers.Data.Cl100kBase" Version="3.0.0" />
+   </ItemGroup>
+ 
+ </Project>

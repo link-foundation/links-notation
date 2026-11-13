@@ -1,0 +1,194 @@
+benchmarks/csharp/Benchmark.csproj:21:    <PackageReference Include="Microsoft.ML.Tokenizers" Version="2.0.1" />
+benchmarks/csharp/Benchmark.csproj:22:    <PackageReference Include="Microsoft.ML.Tokenizers.Data.O200kBase" Version="2.0.1" />
+benchmarks/csharp/Benchmark.csproj:23:    <PackageReference Include="Microsoft.ML.Tokenizers.Data.Cl100kBase" Version="2.0.1" />
+csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj:24:    <LangVersion>latest</LangVersion>
+csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj:35:    <PackageReference Include="Pegasus" Version="4.1.0" />
+csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj:36:    <PackageReference Include="Platform.Collections" Version="0.4.0" />
+csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj:9:    <LangVersion>latest</LangVersion>
+csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj:19:    <PackageReference Include="xunit.v3" Version="4.0.3" />
+dev/log/issues/377/pulls/378/templates/csharp/src/MyPackage/MyPackage.csproj:6:    <Version>0.3.16</Version>
+cpp/tools/requirements.txt:3:clang-format==23.1.5
+dev/log/issues/377/pulls/378/templates/csharp/Directory.Build.props:9:    <LangVersion>latest</LangVersion>
+docs/case-studies/csharp-peg-simplification/solutions/03-semantic-predicates/project/TestSemanticPredicates.csproj:9:    <PackageReference Include="Pegasus" Version="4.1.0" />
+experiments/Cargo.toml:2:name = "debug_rust"
+experiments/Cargo.toml:3:version = "0.1.0"
+experiments/Cargo.toml:4:edition = "2024"
+experiments/Cargo.toml:7:name = "debug_equivalence"
+experiments/Cargo.toml:8:path = "debug_rust_equivalence.rs"
+experiments/Cargo.toml:11:lino = { package = "links-notation", path = "../rust/links-notation" }
+dev/log/issues/330/pulls/331/templates/csharp/Directory.Build.props:7:    <LangVersion>latest</LangVersion>
+experiments/issue-282/parity/rust/Cargo.toml:4:name = "issue-282-parity"
+experiments/issue-282/parity/rust/Cargo.toml:5:version = "0.0.0"
+experiments/issue-282/parity/rust/Cargo.toml:6:edition = "2024"
+experiments/issue-282/parity/rust/Cargo.toml:7:publish = false
+experiments/issue-282/parity/rust/Cargo.toml:12:links-notation = { path = "../../../../rust/links-notation" }
+experiments/issue-377/kgp-named-enum/build.gradle.kts:3:    kotlin("multiplatform") version "2.4.21"
+docs/case-studies/csharp-peg-simplification/solutions/04-hybrid-approach/project/TestHybrid.csproj:9:    <PackageReference Include="Pegasus" Version="4.1.0" />
+rust/links-notation-benchmark/Cargo.toml:2:name = "links-notation-benchmark"
+rust/links-notation-benchmark/Cargo.toml:3:version = "0.1.0"
+rust/links-notation-benchmark/Cargo.toml:5:rust-version.workspace = true
+rust/links-notation-benchmark/Cargo.toml:6:description = "UTF-8 character count benchmarks comparing Links Notation with JSON, YAML, and XML"
+rust/links-notation-benchmark/Cargo.toml:9:publish = false
+rust/links-notation-benchmark/Cargo.toml:12:name = "benchmark"
+rust/links-notation-benchmark/Cargo.toml:13:path = "src/main.rs"
+rust/links-notation-benchmark/Cargo.toml:16:links-notation = { version = "0.31.3", path = "../links-notation" }
+rust/links-notation-benchmark/Cargo.toml:17:serde = { version = "1.0.229", features = ["derive"] }
+rust/links-notation-benchmark/Cargo.toml:18:serde_json = { version = "1.0.154", features = ["preserve_order"] }
+rust/links-notation-benchmark/Cargo.toml:19:tiktoken-rs = "0.12.1"
+experiments/issue-314/ports/csharp-differential/csharp-differential.csproj:8:         compare two versions of the parser on the same documents. -->
+experiments/issue-314/rust-differential/Cargo.toml:2:name = "issue-314-rust-differential"
+experiments/issue-314/rust-differential/Cargo.toml:3:version = "0.0.0"
+experiments/issue-314/rust-differential/Cargo.toml:4:edition = "2024"
+experiments/issue-314/rust-differential/Cargo.toml:5:publish = false
+experiments/issue-314/rust-differential/Cargo.toml:11:# two versions of the parser on the same documents.
+experiments/issue-314/rust-differential/Cargo.toml:12:links-notation = { path = "../../../rust/links-notation" }
+experiments/issue-316/rust-timing/Cargo.toml:2:name = "issue-316-rust-timing"
+experiments/issue-316/rust-timing/Cargo.toml:3:version = "0.0.0"
+experiments/issue-316/rust-timing/Cargo.toml:4:edition = "2024"
+experiments/issue-316/rust-timing/Cargo.toml:5:publish = false
+experiments/issue-316/rust-timing/Cargo.toml:10:links-notation = { path = "../../../rust/links-notation" }
+experiments/issue-316/rust-timing/Cargo.toml:12:links-notation-before = { package = "links-notation", version = "=0.21.1", default-features = false }
+rust/links-notation-macro/Cargo.toml:2:name = "links-notation-macro"
+rust/links-notation-macro/Cargo.toml:3:version = "0.1.2"
+rust/links-notation-macro/Cargo.toml:5:rust-version.workspace = true
+rust/links-notation-macro/Cargo.toml:6:description = "Procedural macro for Links Notation compile-time parsing"
+rust/links-notation-macro/Cargo.toml:11:proc-macro = true
+rust/links-notation-macro/Cargo.toml:14:syn = { version = "3.0.9", features = ["full", "extra-traits"] }
+rust/links-notation-macro/Cargo.toml:15:quote = "1.0.47"
+rust/links-notation-macro/Cargo.toml:16:proc-macro2 = "1.0.107"
+rust/Cargo.toml:2:members = [
+rust/Cargo.toml:7:resolver = "3"
+rust/Cargo.toml:10:edition = "2024"
+rust/Cargo.toml:13:rust-version = "1.87"
+rust/Cargo.toml:14:license = "Unlicense"
+rust/Cargo.toml:15:repository = "https://github.com/link-foundation/links-notation"
+docs/case-studies/csharp-peg-simplification/solutions/02-capture-validate/project/TestCaptureValidate.csproj:9:    <PackageReference Include="Pegasus" Version="4.1.0" />
+experiments/issue-315/rust-probe/Cargo.toml:2:name = "probe"
+experiments/issue-315/rust-probe/Cargo.toml:3:version = "0.0.0"
+experiments/issue-315/rust-probe/Cargo.toml:4:edition = "2024"
+experiments/issue-315/rust-probe/Cargo.toml:5:publish = false
+experiments/issue-315/rust-probe/Cargo.toml:11:links-notation = { path = "../../../rust/links-notation" }
+examples/maven/kotlin/build.gradle.kts:2:    kotlin("jvm") version "2.4.21"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:2:name = "example-sum-package-name"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:3:version = "0.19.35"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:4:edition = "2021"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:5:description = "A Rust package template for AI-driven development"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:6:readme = "README.md"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:7:license = "Unlicense"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:8:keywords = ["template", "rust", "ai-driven"]
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:9:categories = ["development-tools"]
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:10:repository = "https://github.com/link-foundation/rust-ai-driven-development-pipeline-template"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:11:documentation = "https://github.com/link-foundation/rust-ai-driven-development-pipeline-template"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:12:rust-version = "1.70"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:18:include = [
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:27:name = "example_sum_package_name"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:28:path = "src/lib.rs"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:31:name = "example-sum-package-name"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:32:path = "src/main.rs"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:35:lino-arguments = "0.3"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:36:clap = { version = "4.4", features = ["derive", "env"] }
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:39:regex = "1"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:40:serde_json = "1"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:41:walkdir = "2"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:44:unsafe_code = "forbid"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:47:all = { level = "warn", priority = -1 }
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:48:pedantic = { level = "warn", priority = -1 }
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:49:nursery = { level = "warn", priority = -1 }
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:52:module_name_repetitions = "allow"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:53:too_many_lines = "allow"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:54:missing_errors_doc = "allow"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:55:missing_panics_doc = "allow"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:58:name = "unit"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:59:path = "tests/unit/mod.rs"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:62:name = "integration"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:63:path = "tests/integration/mod.rs"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:66:lto = true
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:67:codegen-units = 1
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:68:strip = true
+docs/case-studies/csharp-peg-simplification/solutions/01-parse-expression/project/TestParseExpression.csproj:9:    <PackageReference Include="Pegasus" Version="4.1.0" />
+experiments/issue-209/lino-shapes/Cargo.toml:2:name = "lino-shapes"
+experiments/issue-209/lino-shapes/Cargo.toml:3:version = "0.0.0"
+experiments/issue-209/lino-shapes/Cargo.toml:4:edition = "2024"
+experiments/issue-209/lino-shapes/Cargo.toml:5:publish = false
+experiments/issue-209/lino-shapes/Cargo.toml:8:links-notation = { path = "../../../rust/links-notation" }
+experiments/issue-301/rust-probe/Cargo.toml:2:name = "probe"
+experiments/issue-301/rust-probe/Cargo.toml:3:version = "0.0.0"
+experiments/issue-301/rust-probe/Cargo.toml:4:edition = "2024"
+experiments/issue-301/rust-probe/Cargo.toml:5:publish = false
+experiments/issue-301/rust-probe/Cargo.toml:11:links-notation = { path = "../../../rust/links-notation" }
+kotlin/build.gradle.kts:7:    kotlin("multiplatform") version "2.4.21"
+kotlin/build.gradle.kts:8:    id("com.android.kotlin.multiplatform.library") version "9.5.1" apply false
+kotlin/build.gradle.kts:9:    id("com.vanniktech.maven.publish") version "0.37.0"
+kotlin/build.gradle.kts:10:    id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
+kotlin/build.gradle.kts:13:group = "io.github.link-foundation.kotlin"
+kotlin/build.gradle.kts:14:version = "0.31.3"
+kotlin/build.gradle.kts:295:    coordinates("io.github.link-foundation.kotlin", "links-notation", version.toString())
+kotlin/build.gradle.kts:329:    version.set("1.8.0")
+experiments/issue-314/rust-probe/Cargo.toml:2:name = "issue-314-rust-probe"
+experiments/issue-314/rust-probe/Cargo.toml:3:version = "0.0.0"
+experiments/issue-314/rust-probe/Cargo.toml:4:edition = "2024"
+experiments/issue-314/rust-probe/Cargo.toml:5:publish = false
+experiments/issue-314/rust-probe/Cargo.toml:10:links-notation = { path = "../../../rust/links-notation" }
+scripts/ci/requirements.txt:4:zizmor==1.32.0
+experiments/minimal-peg-rules/TestMinimalRules.csproj:9:    <PackageReference Include="Pegasus" Version="4.1.0" />
+rust/links-notation/Cargo.toml:2:name = "links-notation"
+rust/links-notation/Cargo.toml:3:version = "0.31.3"
+rust/links-notation/Cargo.toml:5:rust-version.workspace = true
+rust/links-notation/Cargo.toml:6:description = "Rust implementation of the Links Notation parser"
+rust/links-notation/Cargo.toml:9:keywords = ["lino", "parser", "links", "notation", "protocol"]
+rust/links-notation/Cargo.toml:10:categories = ["parsing"]
+rust/links-notation/Cargo.toml:13:name = "links_notation"
+rust/links-notation/Cargo.toml:14:path = "src/lib.rs"
+rust/links-notation/Cargo.toml:17:nom = "8.0.0"
+rust/links-notation/Cargo.toml:18:links-notation-macro = { path = "../links-notation-macro", version = "0.1.2", optional = true }
+rust/links-notation/Cargo.toml:21:default = ["macro"]
+rust/links-notation/Cargo.toml:22:macro = ["links-notation-macro"]
+docs/case-studies/csharp-peg-simplification/solutions/05-minimized-hybrid/project/TestMinimizedHybrid.csproj:9:    <PackageReference Include="Pegasus" Version="4.1.0" />
+dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-security.txt:2:pip-audit==2.10.1
+dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-security.txt:4:zizmor==1.29.0
+dev/log/issues/377/pulls/378/templates/csharp/tests/MyPackage.Tests/MyPackage.Tests.csproj:20:    <PackageReference Include="coverlet.collector" Version="10.1.0">
+dev/log/issues/377/pulls/378/templates/csharp/tests/MyPackage.Tests/MyPackage.Tests.csproj:24:    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+dev/log/issues/377/pulls/378/templates/csharp/tests/MyPackage.Tests/MyPackage.Tests.csproj:25:    <PackageReference Include="xunit.v3.mtp-off" Version="4.0.2" />
+dev/log/issues/377/pulls/378/templates/csharp/tests/MyPackage.Tests/MyPackage.Tests.csproj:26:    <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1">
+dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt:4:pytest==9.1.1
+dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt:5:clang-format==23.1.3
+dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt:6:clang-tidy==22.1.8
+dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt:8:cppcheck==1.5.3
+dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt:9:gcovr==8.6
+dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt:10:conan==2.33.0
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:2:name = "example-sum-package-name"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:3:version = "0.21.0"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:4:edition = "2021"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:5:description = "A Rust package template for AI-driven development"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:6:readme = "README.md"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:7:license = "Unlicense"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:8:keywords = ["template", "rust", "ai-driven"]
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:9:categories = ["development-tools"]
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:10:repository = "https://github.com/link-foundation/rust-ai-driven-development-pipeline-template"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:11:documentation = "https://github.com/link-foundation/rust-ai-driven-development-pipeline-template"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:12:rust-version = "1.70"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:18:include = [
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:27:name = "example_sum_package_name"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:28:path = "src/lib.rs"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:31:name = "example-sum-package-name"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:32:path = "src/main.rs"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:35:lino-arguments = "0.3"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:36:clap = { version = "4.4", features = ["derive", "env"] }
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:39:regex = "1"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:40:serde_json = "1"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:41:walkdir = "2"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:44:unsafe_code = "forbid"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:47:all = { level = "warn", priority = -1 }
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:48:pedantic = { level = "warn", priority = -1 }
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:49:nursery = { level = "warn", priority = -1 }
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:52:module_name_repetitions = "allow"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:53:too_many_lines = "allow"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:54:missing_errors_doc = "allow"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:55:missing_panics_doc = "allow"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:58:name = "unit"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:59:path = "tests/unit/mod.rs"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:62:name = "integration"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:63:path = "tests/integration/mod.rs"
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:66:lto = true
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:67:codegen-units = 1
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:68:strip = true
