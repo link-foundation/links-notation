@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import * as glob from '@actions/glob';
+import { createSearch } from './glob.mjs';
 import { DefaultArtifactClient } from '@actions/artifact';
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
@@ -35,12 +35,7 @@ async function main() {
     throw new Error('Invalid artifact mode or evidence policy');
   }
   const pages = core.getInput('pages') === 'true';
-  const search = await glob.create(input, {
-    implicitDescendants: true,
-    followSymbolicLinks: true,
-    omitBrokenSymbolicLinks: true,
-    excludeHiddenFiles: true,
-  });
+  const search = await createSearch(input, { follow: true });
   const evidence = await collectArtifactFiles(
     search,
     input,
