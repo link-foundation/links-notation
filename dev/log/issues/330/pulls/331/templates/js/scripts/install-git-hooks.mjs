@@ -18,7 +18,7 @@ const message = execFileSync('npx', ['husky'], { encoding: 'utf8' }).trim();
 
 // `git config --get` exits 1 when the key is unset, which is exactly the
 // case this script exists to catch, so the catch is the expected path.
-let hooksPath = '';
+let hooksPath;
 try {
   hooksPath = execFileSync('git', ['config', '--get', 'core.hooksPath'], {
     encoding: 'utf8',

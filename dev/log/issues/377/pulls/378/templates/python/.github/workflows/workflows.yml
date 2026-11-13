@@ -31,7 +31,7 @@ env:
 jobs:
   actionlint:
     name: Lint Workflows
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
@@ -51,7 +51,7 @@ jobs:
       # 1.7.12 (issue #71) adds the `glob` check for `paths:` filters that can
       # never match (a workflow filtered with `./src/**` stops running and
       # reports nothing) and knows the modern hosted runner labels, so real
-      # labels like macos-15-intel are no longer reported as unknown.
+      # labels like macos-26-intel are no longer reported as unknown.
       #
       # Pinned by digest because a mutable tag of a repository we do not
       # control is arbitrary code execution in any job that holds credentials
@@ -76,7 +76,7 @@ jobs:
   #     --config .github/zizmor.yml .
   zizmor:
     name: Audit Workflows
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
@@ -123,7 +123,7 @@ jobs:
   # actionlint checks inline workflow shells; standalone scripts need this pass.
   shellcheck:
     name: ShellCheck
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-shellcheck
@@ -138,7 +138,7 @@ jobs:
 
   artifact-roundtrip:
     name: Artifact Transport Regression
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-artifacts
@@ -228,7 +228,7 @@ jobs:
       - shellcheck
       - artifact-roundtrip
     if: always()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7.0.1

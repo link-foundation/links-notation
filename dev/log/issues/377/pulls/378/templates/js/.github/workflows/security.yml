@@ -23,7 +23,7 @@ env:
 jobs:
   codeql:
     name: CodeQL (${{ matrix.language }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     env:
       CODEQL_ACTION_DIFF_INFORMED_QUERIES: 'false'
@@ -71,7 +71,7 @@ jobs:
 
   dependency-graph:
     name: Dependency Graph Prerequisite
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-dependency-graph
@@ -99,7 +99,7 @@ jobs:
     name: Dependency Review
     needs: [dependency-graph]
     if: github.event_name == 'pull_request' && needs.dependency-graph.outputs.enabled == 'true'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-dependency-review
@@ -120,7 +120,7 @@ jobs:
 
   npm-audit:
     name: Audit npm lock (${{ matrix.directory }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-npm-audit-${{ matrix.directory }}
@@ -149,7 +149,7 @@ jobs:
   # job in workflows.yml.
   pipeline-status:
     name: Pipeline Status
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-pipeline-status

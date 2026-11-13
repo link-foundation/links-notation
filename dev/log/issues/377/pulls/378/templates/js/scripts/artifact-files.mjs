@@ -33,7 +33,9 @@ export async function collectArtifactFiles(search, input, requiredFile = '') {
   const files = [];
   for (const file of await search.glob()) {
     const info = await stat(file).catch((error) => {
-      if (error.code !== 'ENOENT' && error.code !== 'ENOTDIR') throw error;
+      if (error.code !== 'ENOENT' && error.code !== 'ENOTDIR') {
+        throw error;
+      }
     });
     if (info?.isFile()) {
       files.push(file);

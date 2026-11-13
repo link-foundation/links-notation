@@ -32,7 +32,7 @@ jobs:
     name: Rust check
     needs: [javascript-first]
     if: needs.javascript-first.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-check
@@ -50,7 +50,7 @@ jobs:
     name: Rust build
     needs: [javascript-first]
     if: needs.javascript-first.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-build
@@ -68,7 +68,7 @@ jobs:
     name: Rust test
     needs: [javascript-first]
     if: needs.javascript-first.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-test
@@ -87,7 +87,7 @@ jobs:
     name: Rust package
     needs: [javascript-first]
     if: needs.javascript-first.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-package
@@ -105,7 +105,7 @@ jobs:
     name: Rust container
     needs: [javascript-first]
     if: needs.javascript-first.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-container
@@ -123,7 +123,7 @@ jobs:
     name: Rust publish
     needs: [javascript-first]
     if: needs.javascript-first.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust-publish

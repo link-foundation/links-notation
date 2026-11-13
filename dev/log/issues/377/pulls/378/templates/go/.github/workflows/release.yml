@@ -35,7 +35,7 @@ jobs:
   # === DETECT CHANGES - determines which jobs should run ===
   detect-changes:
     name: Detect Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-detect-changes
       cancel-in-progress: true
@@ -70,7 +70,7 @@ jobs:
   # Docs-only PRs (./docs folder, markdown files) don't require changesets
   changeset-check:
     name: Check for Changeset
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-changeset-check
       cancel-in-progress: true
@@ -99,7 +99,7 @@ jobs:
   # See: https://github.com/link-assistant/hive-mind/pull/1024 for why this dependency was removed
   lint:
     name: Lint
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-lint
       cancel-in-progress: true
@@ -166,7 +166,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, macos-15, windows-2025]
+        os: [ubuntu-26.04, macos-26, windows-2025]
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -186,7 +186,7 @@ jobs:
         run: go test -v -race ./...
 
       - name: Upload coverage (Ubuntu only)
-        if: matrix.os == 'ubuntu-24.04' && env.CODECOV_TOKEN != ''
+        if: matrix.os == 'ubuntu-26.04' && env.CODECOV_TOKEN != ''
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           token: ${{ env.CODECOV_TOKEN }}
@@ -195,13 +195,13 @@ jobs:
           fail_ci_if_error: true
 
       - name: Note that coverage was not uploaded
-        if: matrix.os == 'ubuntu-24.04' && env.CODECOV_TOKEN == ''
+        if: matrix.os == 'ubuntu-26.04' && env.CODECOV_TOKEN == ''
         run: echo "::notice::CODECOV_TOKEN is not configured, so coverage was not uploaded"
 
   # === BUILD ===
   build:
     name: Build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-build
       cancel-in-progress: true
@@ -225,7 +225,7 @@ jobs:
   # === AUTO RELEASE - runs on main when PRs with changesets are merged ===
   auto-release:
     name: Auto Release
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: write
     concurrency:
@@ -297,7 +297,7 @@ jobs:
   # === MANUAL INSTANT RELEASE ===
   instant-release:
     name: Instant Release
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: write
     concurrency:
@@ -347,7 +347,7 @@ jobs:
   # === MANUAL CHANGESET RELEASE - processes existing changesets ===
   changeset-release:
     name: Changeset Release
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: write
     concurrency:

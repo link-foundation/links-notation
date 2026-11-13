@@ -40,7 +40,7 @@ jobs:
   # === DETECT CHANGES - determines which jobs should run ===
   detect-changes:
     name: Detect Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -101,7 +101,7 @@ jobs:
   # See: https://github.com/link-assistant/hive-mind/pull/1024 for why this dependency was removed
   lint:
     name: Lint and Format Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -203,7 +203,7 @@ jobs:
   # link to, and enforces the markdown size budget.
   validate-docs:
     name: Validate Documentation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-validate-docs
@@ -237,7 +237,7 @@ jobs:
   # gate on `result == 'success'` rather than on the run being green.
   release-preflight:
     name: Release Preflight (credentials)
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     permissions:
       contents: read
@@ -269,7 +269,7 @@ jobs:
   # Test on latest Python version only
   test:
     name: Test (Python 3.13)
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-test
@@ -357,7 +357,7 @@ jobs:
   # Build package after required checks pass for detected code changes or dispatches.
   build:
     name: Build Package
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-build
@@ -432,7 +432,7 @@ jobs:
   # Docs-only PRs (./docs folder, markdown files) don't require changelog fragments
   changelog:
     name: Changelog Fragment Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-changelog
@@ -521,7 +521,7 @@ jobs:
   # Skip cleanly when a generated repository does not include a Dockerfile.
   docker-build:
     name: Docker Image Build Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 60
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-docker-build
@@ -581,7 +581,7 @@ jobs:
       needs.test.result == 'success' &&
       needs.build.result == 'success' &&
       needs.release-preflight.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     permissions:
       contents: write
@@ -708,7 +708,7 @@ jobs:
       needs.test.result == 'success' &&
       needs.build.result == 'success' &&
       needs.release-preflight.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     permissions:
       contents: write
@@ -826,7 +826,7 @@ jobs:
         needs.auto-release.outputs.released == 'true' ||
         needs.manual-release.outputs.released == 'true'
       )
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     permissions:
       contents: read
@@ -875,9 +875,9 @@ jobs:
       matrix:
         include:
           - platform: linux/amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
           - platform: linux/arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
     runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
@@ -927,7 +927,7 @@ jobs:
     if: |
       needs.release-preflight.result == 'success' &&
       needs.docker-publish-build.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     permissions:
       contents: read
@@ -975,7 +975,7 @@ jobs:
   # Observe every other job so that state cannot silently hide a broken run.
   pipeline-status:
     name: Pipeline Status
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     if: always()
     needs: [detect-changes, validate-docs, release-preflight, lint, test, build,

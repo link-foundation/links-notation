@@ -212,9 +212,9 @@ describe('workflow linting policy', () => {
     // The regular pass with the repository's own config; `version` is named
     // because the action's `latest` resolves through its own frozen table, so
     // an unlisted bump would silently keep running the old analyser.
-    expect(workflow).toContain('uses: zizmorcore/zizmor-action@v0.6.2');
+    expect(workflow).toContain('uses: zizmorcore/zizmor-action@v0.8.1');
     expect(workflow).toContain('config: .github/zizmor.yml');
-    expect(workflow).toContain('version: 1.29.0');
+    expect(workflow).toContain('version: 1.32.0');
 
     // The audits that cover `uses: docker://` image references are
     // Pedantic-persona only; without this second pass the digest pin above

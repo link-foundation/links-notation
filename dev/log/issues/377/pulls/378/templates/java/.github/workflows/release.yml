@@ -40,7 +40,7 @@ jobs:
   # =============================================================================
   detect-changes:
     name: Detect Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     if: github.event_name != 'workflow_dispatch'
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -78,7 +78,7 @@ jobs:
   # =============================================================================
   lint:
     name: Lint & Format
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: [detect-changes]
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-lint
@@ -143,7 +143,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, macos-26, windows-2025]
+        os: [ubuntu-26.04, macos-26, windows-2025]
         java: ['21', '27.0.1']
     steps:
       - name: Checkout code
@@ -160,7 +160,7 @@ jobs:
         run: mvn test jacoco:report -B
 
       - name: Upload coverage to Codecov
-        if: matrix.os == 'ubuntu-24.04' && matrix.java == '21' && env.CODECOV_TOKEN != ''
+        if: matrix.os == 'ubuntu-26.04' && matrix.java == '21' && env.CODECOV_TOKEN != ''
         uses: codecov/codecov-action@v7.1.1
         with:
           token: ${{ env.CODECOV_TOKEN }}
@@ -170,7 +170,7 @@ jobs:
           fail_ci_if_error: true
 
       - name: Note that coverage was not uploaded
-        if: matrix.os == 'ubuntu-24.04' && matrix.java == '21' && env.CODECOV_TOKEN == ''
+        if: matrix.os == 'ubuntu-26.04' && matrix.java == '21' && env.CODECOV_TOKEN == ''
         run: echo "::notice::CODECOV_TOKEN is not configured, so coverage was not uploaded"
 
   # =============================================================================
@@ -178,7 +178,7 @@ jobs:
   # =============================================================================
   build:
     name: Build Package
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: [lint, test]
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-build
@@ -220,7 +220,7 @@ jobs:
   # =============================================================================
   changeset-check:
     name: Changeset Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: [detect-changes]
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-changeset-check
@@ -247,7 +247,7 @@ jobs:
   # =============================================================================
   auto-release:
     name: Auto Release
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: [build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     concurrency:
@@ -353,7 +353,7 @@ jobs:
   # =============================================================================
   manual-release-changeset:
     name: Manual Release (Changeset)
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: [build]
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changeset'
     concurrency:
@@ -445,7 +445,7 @@ jobs:
   # =============================================================================
   manual-release-instant:
     name: Manual Release (Instant)
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: [build]
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'instant'
     concurrency:
@@ -522,7 +522,7 @@ jobs:
   # =============================================================================
   changeset-pr:
     name: Create Changeset PR
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changeset-pr'
     concurrency:
       group: main-writer-${{ github.repository }}-main

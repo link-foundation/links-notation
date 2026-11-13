@@ -45,7 +45,7 @@ env:
 jobs:
   web-build:
     name: Build web app
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-web-build
@@ -112,7 +112,7 @@ jobs:
     name: Deploy GitHub Pages
     needs: [web-build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: main-writer-${{ github.repository }}-main
@@ -157,7 +157,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, macos-15, windows-2025]
+        os: [ubuntu-26.04, macos-26, windows-2025]
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -204,7 +204,7 @@ jobs:
   android-build:
     name: Build Android app
     if: github.event_name == 'workflow_dispatch' && vars.EXAMPLE_APP_ENABLE_ANDROID_BUILD == 'true'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-android-build
@@ -251,7 +251,7 @@ jobs:
   ios-build:
     name: Build iOS app
     if: github.event_name == 'workflow_dispatch' && vars.EXAMPLE_APP_ENABLE_IOS_BUILD == 'true'
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 30
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-ios-build
@@ -282,7 +282,7 @@ jobs:
   # the current UI. Issue: #62. Implementation: scripts/update-preview-images.mjs.
   preview-regen:
     name: Regenerate Preview Images
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     container:
       # Keep this release in sync with the playwright package version below.
       # Pinned by digest (a mutable tag is arbitrary code execution in a job
@@ -427,7 +427,7 @@ jobs:
   # job in workflows.yml.
   pipeline-status:
     name: Pipeline Status
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-pipeline-status

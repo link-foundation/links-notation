@@ -20,7 +20,7 @@ env:
 jobs:
   cargo-audit:
     name: Cargo audit
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-cargo-audit
@@ -44,7 +44,7 @@ jobs:
 
   codeql:
     name: CodeQL (${{ matrix.language }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-codeql-${{ matrix.language }}
@@ -89,7 +89,7 @@ jobs:
   dependency-graph:
     name: Dependency Graph Availability
     if: github.event_name == 'pull_request' || github.event_name == 'push'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-dependency-graph
@@ -117,7 +117,7 @@ jobs:
     name: Dependency Review
     needs: dependency-graph
     if: github.event_name == 'pull_request' && needs.dependency-graph.outputs.enabled == 'true'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-dependency-review
@@ -147,7 +147,7 @@ jobs:
       - dependency-review
       - dependency-graph
     if: ${{ !cancelled() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7.0.1

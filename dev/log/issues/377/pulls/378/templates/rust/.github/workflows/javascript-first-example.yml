@@ -29,7 +29,7 @@ jobs:
     name: Test, build and package the translated example
     needs: javascript-first
     if: needs.javascript-first.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-rust
@@ -59,7 +59,7 @@ jobs:
     name: Build translated container
     needs: javascript-first
     if: needs.javascript-first.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-container
@@ -82,7 +82,7 @@ jobs:
       - rust
       - container
     if: ${{ !cancelled() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7.0.1

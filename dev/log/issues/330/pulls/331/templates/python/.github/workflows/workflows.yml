@@ -22,7 +22,7 @@ permissions:
 jobs:
   actionlint:
     name: Lint Workflows
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
@@ -42,7 +42,7 @@ jobs:
       # 1.7.12 (issue #71) adds the `glob` check for `paths:` filters that can
       # never match (a workflow filtered with `./src/**` stops running and
       # reports nothing) and knows the modern hosted runner labels, so real
-      # labels like macos-15-intel are no longer reported as unknown.
+      # labels like macos-26-intel are no longer reported as unknown.
       #
       # Pinned by digest because a mutable tag of a repository we do not
       # control is arbitrary code execution in any job that holds credentials
@@ -61,11 +61,11 @@ jobs:
   # credential persistence, template injection or unpinned actions. zizmor
   # covers exactly those, so both linters run on every change under .github/.
   # Reproduce locally with:
-  #   pipx run zizmor==1.29.0 --min-confidence medium --persona regular \
+  #   pipx run zizmor==1.32.0 --min-confidence medium --persona regular \
   #     --config .github/zizmor.yml .github/workflows
   zizmor:
     name: Audit Workflows
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
@@ -94,7 +94,7 @@ jobs:
           annotations: true
           config: .github/zizmor.yml
           min-confidence: medium
-          version: 1.29.0
+          version: 1.32.0
 
       # The step above runs `--persona regular`, which is the right default:
       # pedantic surfaces dozens of stylistic findings. But the audits that
@@ -109,7 +109,7 @@ jobs:
       - name: Audit for pedantic-only high-severity findings
         timeout-minutes: 5
         run: |
-          pipx run zizmor==1.29.0 --config .github/zizmor.yml \
+          pipx run zizmor==1.32.0 --config .github/zizmor.yml \
             --persona pedantic --min-severity high --min-confidence high \
             .github/workflows
 
@@ -123,7 +123,7 @@ jobs:
       - actionlint
       - zizmor
     if: always()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7.0.1

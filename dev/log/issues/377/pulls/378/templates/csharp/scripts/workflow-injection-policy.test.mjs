@@ -221,7 +221,7 @@ describe('workflow linting policy', () => {
     // an unlisted bump would silently keep running the old analyser.
     expect(isShaPinned(workflow, 'zizmorcore/zizmor-action')).toBe(true);
     expect(workflow).toContain('config: .github/zizmor.yml');
-    expect(workflow).toContain('version: 1.29.0');
+    expect(workflow).toContain('version: 1.32.0');
 
     // The audits that cover `uses: docker://` image references are
     // Pedantic-persona only; without this second pass the digest pin above

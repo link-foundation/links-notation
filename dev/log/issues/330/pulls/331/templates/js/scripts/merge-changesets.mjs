@@ -127,7 +127,9 @@ function parseChangeset(filePath, packageName) {
     content = readFileSync(filePath, 'utf-8');
     stats = statSync(filePath);
   } catch (error) {
-    throw new Error(`Failed to read ${filePath}: ${error.message}`);
+    throw new Error(`Failed to read ${filePath}: ${error.message}`, {
+      cause: error,
+    });
   }
 
   // Extract version type - support both quoted and unquoted package names

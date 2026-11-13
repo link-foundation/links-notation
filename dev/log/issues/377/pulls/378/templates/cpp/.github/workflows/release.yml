@@ -67,7 +67,7 @@ jobs:
   # === DETECT CHANGES - determines which jobs should run ===
   detect-changes:
     name: Detect Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -98,7 +98,7 @@ jobs:
   # contained the links go away. The .md size limit lives in the lint job.
   validate-docs:
     name: Validate Documentation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-validate-docs
@@ -125,7 +125,7 @@ jobs:
   # run being green.
   release-preflight:
     name: Release Preflight
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     permissions:
       # The GitHub probe creates an invalid ref: 422 proves write access
@@ -159,7 +159,7 @@ jobs:
   # Docs-only PRs (./docs folder, markdown files) don't require changelog fragments
   changelog:
     name: Changelog Fragment Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-changelog
@@ -182,7 +182,7 @@ jobs:
   # Versions are only modified by the automated release pipeline.
   version-check:
     name: Version Modification Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-version-check
@@ -204,7 +204,7 @@ jobs:
   # Language-agnostic credential scan; runs via npx so no Node dependency is committed.
   secrets-scan:
     name: Secrets Scan
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-secrets-scan
@@ -222,7 +222,7 @@ jobs:
   # breaks the base branch once merged into its current tip.
   fresh-merge:
     name: Fresh Merge Simulation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-fresh-merge
@@ -260,7 +260,7 @@ jobs:
   # See: https://github.com/link-assistant/hive-mind/pull/1024 for why this dependency was removed
   lint:
     name: Lint and Format Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -362,13 +362,13 @@ jobs:
       matrix:
         include:
           - name: linux-gcc
-            os: ubuntu-24.04
+            os: ubuntu-26.04
           - name: linux-clang
-            os: ubuntu-24.04
+            os: ubuntu-26.04
             cc: clang
             cxx: clang++
           - name: macos-appleclang
-            os: macos-15
+            os: macos-26
           - name: windows-msvc
             os: windows-2025
     defaults:
@@ -426,7 +426,7 @@ jobs:
   # AddressSanitizer and UndefinedBehaviorSanitizer over the whole test suite.
   sanitizers:
     name: Sanitizers (ASan + UBSan)
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-sanitizers
@@ -465,7 +465,7 @@ jobs:
   # package script only shows up at release time otherwise.
   script-tests:
     name: Release Script Tests
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-script-tests
@@ -504,7 +504,7 @@ jobs:
   # report filter and the line-coverage floor.
   coverage:
     name: Code Coverage
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-coverage
@@ -572,7 +572,7 @@ jobs:
   # downloads the source archive, verifies its SHA512 and installs.
   build:
     name: Build Packages
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-build
@@ -659,7 +659,7 @@ jobs:
       github.ref == 'refs/heads/main' &&
       needs.release-preflight.result == 'success' &&
       needs.build.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 45
     permissions:
       contents: write
@@ -746,7 +746,7 @@ jobs:
       github.event.inputs.release_mode == 'instant' &&
       needs.release-preflight.result == 'success' &&
       needs.build.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 45
     permissions:
       contents: write
@@ -803,7 +803,7 @@ jobs:
   changelog-pr:
     name: Create Changelog PR
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changelog-pr'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: repository-main-write
@@ -872,7 +872,7 @@ jobs:
       - manual-release
       - changelog-pr
     if: always()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

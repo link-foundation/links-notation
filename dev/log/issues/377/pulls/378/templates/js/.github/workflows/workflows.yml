@@ -44,7 +44,7 @@ env:
 jobs:
   actionlint:
     name: actionlint
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
@@ -72,7 +72,7 @@ jobs:
 
   shellcheck:
     name: ShellCheck
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-shellcheck
@@ -90,7 +90,7 @@ jobs:
   # workflow itself.
   status-gate-coverage:
     name: Status Gate Coverage
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-status-gate-coverage
@@ -116,7 +116,7 @@ jobs:
 
   zizmor:
     name: zizmor
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
@@ -134,7 +134,7 @@ jobs:
       # the latest zizmor. Naming it keeps the next bump a visible line in the
       # diff rather than a side effect of bumping the action, and documents
       # exactly which analyser reproduces a finding:
-      #   pipx run zizmor==1.30.1 --config .github/zizmor.yml \
+      #   pipx run zizmor==1.32.0 --config .github/zizmor.yml \
       #     --min-confidence low --persona regular .
       - uses: zizmorcore/zizmor-action@v0.8.1
         with:
@@ -147,7 +147,7 @@ jobs:
           # pins the same invariant in-repo, so the floor only needs to catch
           # the workflows the test cannot see.
           min-confidence: low
-          version: 1.30.1
+          version: 1.32.0
 
       # The job above runs `--persona regular`, which is the right default:
       # pedantic surfaces dozens of stylistic findings. But the audits that
@@ -163,13 +163,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          pipx run zizmor==1.30.1 --config .github/zizmor.yml \
+          pipx run zizmor==1.32.0 --config .github/zizmor.yml \
             --persona pedantic --min-severity high --min-confidence high \
             .
 
   artifact-roundtrip:
     name: Artifact Transport Regression
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-artifacts
@@ -255,7 +255,7 @@ jobs:
   # status-gate-coverage job above.
   pipeline-status:
     name: Pipeline Status
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-pipeline-status

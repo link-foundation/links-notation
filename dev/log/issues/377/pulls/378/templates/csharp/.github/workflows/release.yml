@@ -49,7 +49,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-detect-changes
       cancel-in-progress: true
     name: Detect Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     if: github.event_name != 'workflow_dispatch'
     outputs:
@@ -85,7 +85,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-changeset-check
       cancel-in-progress: true
     name: Changeset Validation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
@@ -124,7 +124,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-lint
       cancel-in-progress: true
     name: Lint and Format Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     needs: [detect-changes, release-preflight]
     # detect-changes is intentionally skipped for workflow_dispatch. Without a
@@ -199,7 +199,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, macos-15, windows-2025]
+        os: [ubuntu-26.04, macos-26, windows-2025]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -233,12 +233,12 @@ jobs:
         run: bash scripts/run-with-budget-warning.sh 1200 "Test suite" dotnet test --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage"
 
       - name: Skip Codecov upload when token is unavailable
-        if: matrix.os == 'ubuntu-24.04' && env.CODECOV_TOKEN == ''
+        if: matrix.os == 'ubuntu-26.04' && env.CODECOV_TOKEN == ''
         run: echo "::notice::CODECOV_TOKEN is not configured; skipping Codecov upload."
 
       - name: Resolve exact coverage reports
         id: coverage_reports
-        if: matrix.os == 'ubuntu-24.04' && env.CODECOV_TOKEN != ''
+        if: matrix.os == 'ubuntu-26.04' && env.CODECOV_TOKEN != ''
         shell: bash
         env:
           CSHARP_ROOT: ${{ steps.csharp_layout.outputs.root }}
@@ -257,7 +257,7 @@ jobs:
         # step budget fails the step, while an exhausted job cap only cancels
         # the job.
         timeout-minutes: 5
-        if: matrix.os == 'ubuntu-24.04' && env.CODECOV_TOKEN != ''
+        if: matrix.os == 'ubuntu-26.04' && env.CODECOV_TOKEN != ''
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           token: ${{ env.CODECOV_TOKEN }}
@@ -270,7 +270,7 @@ jobs:
   codecov-token:
     name: Check Codecov token
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - name: Require Codecov configuration on main
@@ -289,7 +289,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-build
       cancel-in-progress: true
     name: Build Package
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     needs: [lint, test]
     if: always() && needs.lint.result == 'success' && needs.test.result == 'success'
@@ -341,7 +341,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-release-preflight
       cancel-in-progress: true
     name: Release Preflight
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     permissions:
       contents: read
@@ -396,7 +396,7 @@ jobs:
     name: Release
     needs: [lint, test, build, release-preflight]
     if: always() && github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.lint.result == 'success' && needs.test.result == 'success' && needs.build.result == 'success' && needs.release-preflight.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     permissions:
       contents: write
@@ -628,7 +628,7 @@ jobs:
       needs.test.result == 'success' &&
       needs.build.result == 'success' &&
       needs.release-preflight.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     permissions:
       contents: write
@@ -792,7 +792,7 @@ jobs:
       queue: max
     name: Create Changeset PR
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && github.event.inputs.release_mode == 'changeset-pr'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     permissions:
       contents: write
@@ -885,7 +885,7 @@ jobs:
       - instant-release
       - changeset-pr
     if: always()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

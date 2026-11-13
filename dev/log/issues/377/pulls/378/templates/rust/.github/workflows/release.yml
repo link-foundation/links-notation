@@ -66,7 +66,7 @@ jobs:
   # === DETECT CHANGES - determines which jobs should run ===
   detect-changes:
     name: Detect Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -108,7 +108,7 @@ jobs:
   # scripts/check-file-size.rs (runs in the lint job).
   validate-docs:
     name: Validate Documentation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-validate-docs
@@ -134,7 +134,7 @@ jobs:
   # run being green.
   release-preflight:
     name: Release Preflight
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     permissions:
       contents: read
@@ -165,7 +165,7 @@ jobs:
   # Docs-only PRs (./docs folder, markdown files) don't require changelog fragments
   changelog:
     name: Changelog Fragment Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-changelog
@@ -198,7 +198,7 @@ jobs:
   # This ensures versions are only modified by the automated release pipeline
   version-check:
     name: Version Modification Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-version-check
@@ -231,7 +231,7 @@ jobs:
   # Language-agnostic credential scan; runs via npx so no Node dependency is committed.
   secrets-scan:
     name: Secrets Scan
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-secrets-scan
@@ -249,7 +249,7 @@ jobs:
   # breaks the base branch once merged into its current tip.
   fresh-merge:
     name: Fresh Merge Simulation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-fresh-merge
@@ -296,7 +296,7 @@ jobs:
   # that have no registry credentials.
   docker-build:
     name: Docker Image Build Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # The image compiles the crate from scratch; 30 minutes is not enough cold.
     # The build step is a `uses:` action, so it cannot be wrapped in
     # scripts/run-with-budget-warning.sh; docker/build-push-action owns its own
@@ -347,7 +347,7 @@ jobs:
   # hashFiles('**/Cargo.lock') from silently degrading to the empty hash.
   cargo-lock:
     name: Cargo.lock Guard
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-cargo-lock
@@ -384,7 +384,7 @@ jobs:
   # See: https://github.com/link-assistant/hive-mind/pull/1024 for why this dependency was removed
   lint:
     name: Lint and Format Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -501,7 +501,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, macos-26, windows-2025]
+        os: [ubuntu-26.04, macos-26, windows-2025]
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -553,7 +553,7 @@ jobs:
   # unless a job runs `rust-script --test` on them explicitly.
   script-tests:
     name: Release Script Tests
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-script-tests
@@ -607,7 +607,7 @@ jobs:
   # Generate and upload code coverage using cargo-llvm-cov
   coverage:
     name: Code Coverage
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-coverage
@@ -678,7 +678,7 @@ jobs:
   # Build package - only runs if lint and test pass
   build:
     name: Build Package
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-build
@@ -742,7 +742,7 @@ jobs:
       needs.build.result == 'success' &&
       !contains(needs.*.result, 'failure') &&
       !contains(needs.*.result, 'cancelled')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Covers the crate build, publish, smoke test, and a cold Docker build.
     timeout-minutes: 60
     env:
@@ -932,7 +932,7 @@ jobs:
       needs.build.result == 'success' &&
       !contains(needs.*.result, 'failure') &&
       !contains(needs.*.result, 'cancelled')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Covers the crate build, publish, smoke test, and a cold Docker build.
     timeout-minutes: 60
     env:
@@ -1074,9 +1074,9 @@ jobs:
       matrix:
         include:
           - platform: linux/amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
           - platform: linux/arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
     concurrency:
       group: main-writer-${{ github.repository }}
       cancel-in-progress: false
@@ -1146,7 +1146,7 @@ jobs:
       group: main-writer-${{ github.repository }}
       cancel-in-progress: false
       queue: max
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     env:
       DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME || secrets.DOCKERHUB_USERNAME }}
@@ -1193,7 +1193,7 @@ jobs:
   changelog-pr:
     name: Create Changelog PR
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changelog-pr'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: main-writer-${{ github.repository }}
@@ -1280,7 +1280,7 @@ jobs:
         (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
         (github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'instant')
       )
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     permissions:
       contents: read
@@ -1373,7 +1373,7 @@ jobs:
       - changelog-pr
       - deploy-docs
     if: ${{ !cancelled() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7.0.1

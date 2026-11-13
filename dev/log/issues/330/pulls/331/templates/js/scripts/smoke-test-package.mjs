@@ -258,7 +258,8 @@ export async function installFromNpm({
     } catch (error) {
       if (attempt === maxAttempts) {
         throw new Error(
-          `Failed to install ${packageSpec} after ${maxAttempts} attempts: ${error.message}`
+          `Failed to install ${packageSpec} after ${maxAttempts} attempts: ${error.message}`,
+          { cause: error }
         );
       }
 
@@ -411,7 +412,8 @@ export async function checkServerEntryPoint({
     stdout(`server OK: ${serverHealthUrl} responded`);
   } catch (error) {
     throw new Error(
-      `HTTP server smoke test failed: ${error.message}\nServer stderr:\n${stderr}`
+      `HTTP server smoke test failed: ${error.message}\nServer stderr:\n${stderr}`,
+      { cause: error }
     );
   } finally {
     child.kill?.('SIGINT');

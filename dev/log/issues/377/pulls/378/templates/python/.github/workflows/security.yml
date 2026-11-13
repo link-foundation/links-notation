@@ -18,7 +18,7 @@ env:
 jobs:
   dependency-audit:
     name: Audit Resolved Python Dependencies
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-dependency-audit
@@ -38,7 +38,7 @@ jobs:
 
   codeql:
     name: CodeQL (${{ matrix.language }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     # The compare API truncates at 300 files. This small template always scans
     # the full source, retaining every default query and both languages.
@@ -86,7 +86,7 @@ jobs:
 
   dependency-review:
     name: Dependency Review
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     permissions:
       contents: read
@@ -122,7 +122,7 @@ jobs:
       - codeql
       - dependency-review
     if: always()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7.0.1

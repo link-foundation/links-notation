@@ -50,9 +50,9 @@ jobs:
       matrix:
         include:
           - { label: linux-x64, runner: ubuntu-latest }
-          - { label: linux-arm64, runner: ubuntu-24.04-arm }
-          - { label: macos-x64, runner: macos-15-intel }
-          - { label: macos-arm64, runner: macos-14 }
+          - { label: linux-arm64, runner: ubuntu-26.04-arm }
+          - { label: macos-x64, runner: macos-26-intel }
+          - { label: macos-arm64, runner: macos-26 }
           - { label: windows-x64, runner: windows-latest }
           - { label: windows-arm64, runner: windows-11-arm }
     runs-on: ${{ matrix.runner }}
