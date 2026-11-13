@@ -1,0 +1,34 @@
+{
+  "cmake": {
+    "version": "4.4.4",
+    "requires_python": ">=3.8"
+  },
+  "shellcheck-py": {
+    "version": "0.11.0.1",
+    "requires_python": ">=3.9"
+  },
+  "pytest": {
+    "version": "9.2.0",
+    "requires_python": ">=3.10"
+  },
+  "sphinx": {
+    "version": "9.2.0",
+    "requires_python": ">=3.13"
+  },
+  "furo": {
+    "version": "2025.12.19",
+    "requires_python": ">=3.8"
+  },
+  "myst-parser": {
+    "version": "5.2.0",
+    "requires_python": ">=3.11"
+  },
+  "mypy": {
+    "version": "2.4.1",
+    "requires_python": ">=3.10"
+  },
+  "pytest-asyncio": {
+    "version": "1.5.0",
+    "requires_python": ">=3.10"
+  }
+}

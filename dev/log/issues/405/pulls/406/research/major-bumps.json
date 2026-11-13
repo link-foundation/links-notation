@@ -1,0 +1,131 @@
+{
+  "composer:phpstan/phpstan": [
+    "^1.12 -> 2.3.5"
+  ],
+  "composer:phpunit/phpunit": [
+    "^10.5 -> 13.4.7"
+  ],
+  "github:actions/cache": [
+    "v5 -> v6.1.0"
+  ],
+  "github:actions/checkout": [
+    "v4 -> v7.0.1",
+    "v6 -> v7.0.1"
+  ],
+  "github:actions/configure-pages": [
+    "v5 -> v6.0.0"
+  ],
+  "github:actions/deploy-pages": [
+    "v4 -> v5.0.1"
+  ],
+  "github:actions/download-artifact": [
+    "v7 -> v8.0.2"
+  ],
+  "github:actions/setup-dotnet": [
+    "v5 -> v6.1.0"
+  ],
+  "github:actions/setup-go": [
+    "v5 -> v7.0.0",
+    "v6 -> v7.0.0"
+  ],
+  "github:actions/setup-java": [
+    "v4 -> v6.2.0",
+    "v5 -> v6.2.0"
+  ],
+  "github:actions/setup-node": [
+    "v6 -> v7.1.0"
+  ],
+  "github:actions/setup-python": [
+    "v6 -> v7.1.0"
+  ],
+  "github:actions/upload-artifact": [
+    "v4 -> v7.0.2",
+    "v6 -> v7.0.2"
+  ],
+  "github:actions/upload-pages-artifact": [
+    "v3 -> v5.0.0",
+    "v4 -> v5.0.0"
+  ],
+  "github:android-actions/setup-android": [
+    "v3 -> v4.0.4"
+  ],
+  "github:codecov/codecov-action": [
+    "v4 -> v7.1.1",
+    "v6 -> v7.1.1"
+  ],
+  "github:dependabot/fetch-metadata": [
+    "v2 -> v3.1.0"
+  ],
+  "github:peter-evans/create-pull-request": [
+    "v6 -> v8.1.3"
+  ],
+  "github:pre-commit/mirrors-clang-format": [
+    "v20.1.8 -> v23.1.5"
+  ],
+  "github:pre-commit/mirrors-mypy": [
+    "v1.13.0 -> v2.4.1"
+  ],
+  "github:pre-commit/pre-commit-hooks": [
+    "v5.0.0 -> v6.0.0"
+  ],
+  "github:ramsey/composer-install": [
+    "v3 -> 4.0.0"
+  ],
+  "maven:com.diffplug.spotless:spotless-maven-plugin": [
+    "2.43.0 -> 3.11.0"
+  ],
+  "maven:com.google.googlejavaformat:google-java-format": [
+    "1.19.2 -> 2.0.0"
+  ],
+  "maven:org.junit.jupiter:junit-jupiter": [
+    "5.10.2 -> 6.1.3"
+  ],
+  "maven:org.junit.jupiter:junit-jupiter-params": [
+    "5.10.2 -> 6.1.3"
+  ],
+  "npm:eslint": [
+    "^9.38.0 -> 10.14.0"
+  ],
+  "npm:glob": [
+    "13.0.6 -> 14.0.6"
+  ],
+  "npm:lint-staged": [
+    "^16.4.0 -> 17.6.0"
+  ],
+  "nuget:Microsoft.ML.Tokenizers": [
+    "2.0.1 -> 3.0.0"
+  ],
+  "nuget:Microsoft.ML.Tokenizers.Data.Cl100kBase": [
+    "2.0.1 -> 3.0.0"
+  ],
+  "nuget:Microsoft.ML.Tokenizers.Data.O200kBase": [
+    "2.0.1 -> 3.0.0"
+  ],
+  "pypi:clang-tidy": [
+    "==22.1.8 -> 23.1.4"
+  ],
+  "pypi:furo": [
+    ">=2024.8.6 -> 2025.12.19"
+  ],
+  "pypi:hatchling": [
+    ">=0 -> 1.33.0"
+  ],
+  "pypi:mypy": [
+    ">=1.13.0,<2.0 -> 2.4.1"
+  ],
+  "pypi:myst-parser": [
+    ">=3.0 -> 5.2.0"
+  ],
+  "pypi:pytest": [
+    ">=8.3.0 -> 9.2.0"
+  ],
+  "pypi:pytest-asyncio": [
+    ">=0.24.0 -> 1.5.0"
+  ],
+  "pypi:pytest-cov": [
+    ">=6.0.0 -> 7.1.0"
+  ],
+  "pypi:sphinx": [
+    ">=7.4 -> 9.2.0"
+  ]
+}

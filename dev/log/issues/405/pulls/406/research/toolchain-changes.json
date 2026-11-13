@@ -1,0 +1,692 @@
+[
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "tool": "go-version",
+    "before": "1.27",
+    "after": "1.27.4"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/dependencies.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/docs.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/docs.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/go.yml",
+    "tool": "go-version",
+    "before": "1.27",
+    "after": "1.27.4"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/pages.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/publish-java.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/publish-js.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/publish-kotlin.yml",
+    "tool": "java-version",
+    "before": "25",
+    "after": "27.0.1"
+  },
+  {
+    "path": ".github/workflows/release-audit.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/release-audit.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/security.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/security.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": ".github/workflows/swift.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": "csharp/global.json",
+    "tool": ".NET SDK",
+    "before": "10.0.402",
+    "after": "11.0.100"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": "1.21",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": "1.21",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": "1.21",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "tool": "java-version",
+    "before": "21",
+    "after": "27.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/security.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/go.yml",
+    "tool": "go-version",
+    "before": "1.21",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/go.yml",
+    "tool": "go-version",
+    "before": "1.21",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "tool": "java-version",
+    "before": "11",
+    "after": "27.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "tool": "java-version",
+    "before": "11",
+    "after": "27.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "tool": "java-version",
+    "before": "11",
+    "after": "27.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "tool": "java-version",
+    "before": "11",
+    "after": "27.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/pages.yml",
+    "tool": "node-version",
+    "before": "20",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "go-version",
+    "before": "1.21",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "go-version",
+    "before": "1.21",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "go-version",
+    "before": "1.21",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "tool": "java-version",
+    "before": "21",
+    "after": "27.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/security.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": "1.21",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": "1.21",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": "1.21",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "java-version",
+    "before": "21",
+    "after": "27.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/links.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/security.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/security.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/workflows.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/global.json",
+    "tool": ".NET SDK",
+    "before": "10.0.403",
+    "after": "11.0.100"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": "1.27.1",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": "1.27.1",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": "1.27.1",
+    "after": "1.27.4"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "java-version",
+    "before": "21",
+    "after": "27.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/javascript-first-gate.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/links.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/security.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/security.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/workflows.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/workflows.yml",
+    "tool": "node-version",
+    "before": "24.x",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/workflows.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/javascript-first-gate.yml",
+    "tool": "node-version",
+    "before": "24",
+    "after": "26.13.1"
+  }
+]

@@ -1,0 +1,3286 @@
+[
+  {
+    "path": ".github/workflows/AutoMerge.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.15'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.15'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.27'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "tool": "java-version",
+    "before": [
+      "'25'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.5'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.15'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "tool": "go-version",
+    "before": [],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "tool": "java-version",
+    "before": [
+      "'25'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.5'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/csharp.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/dependencies.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.15'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/dependencies.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/dependencies.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/docs.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/docs.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.15'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/docs.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/go.yml",
+    "tool": "go-version",
+    "before": [
+      "\"1.27\"",
+      "${{ matrix.go }}"
+    ],
+    "after": "\"1.27.4\"",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "tool": "java-version",
+    "before": [
+      "\"25\"",
+      "${{ matrix.java }}"
+    ],
+    "after": "\"27.0.1\"",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "tool": "java-version",
+    "before": [
+      "\"25\"",
+      "${{ matrix.java }}"
+    ],
+    "after": "\"27.0.1\"",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "tool": "java-version",
+    "before": [
+      "\"25\"",
+      "${{ matrix.java }}"
+    ],
+    "after": "\"27.0.1\"",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/javascript.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/javascript.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/javascript.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/javascript.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/js.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.15\""
+    ],
+    "after": "\"3.15.0\"",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "java-version",
+    "before": [
+      "\"25\""
+    ],
+    "after": "\"27.0.1\"",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "java-version",
+    "before": [
+      "\"25\""
+    ],
+    "after": "\"27.0.1\"",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "node-version",
+    "before": [
+      "\"24\""
+    ],
+    "after": "\"26.13.1\"",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "node-version",
+    "before": [
+      "\"24\""
+    ],
+    "after": "\"26.13.1\"",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "java-version",
+    "before": [
+      "\"25\""
+    ],
+    "after": "\"27.0.1\"",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "java-version",
+    "before": [
+      "\"25\""
+    ],
+    "after": "\"27.0.1\"",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "tool": "java-version",
+    "before": [
+      "\"25\""
+    ],
+    "after": "\"27.0.1\"",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/pages.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/php.yml",
+    "tool": "php-version",
+    "before": [
+      "\"8.5\"",
+      "${{ matrix.php-version }}",
+      "[\"8.4\", \"8.5\"]"
+    ],
+    "after": "\"8.5.12\"",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/php.yml",
+    "tool": "php-version",
+    "before": [
+      "\"8.5\"",
+      "${{ matrix.php-version }}",
+      "[\"8.4\", \"8.5\"]"
+    ],
+    "after": "[\"8.4\", \"8.5.12\"]",
+    "latest": "8.5.12",
+    "reason": "Current compiler plus deliberately retained consumer compatibility test lanes"
+  },
+  {
+    "path": ".github/workflows/publish-java.yml",
+    "tool": "java-version",
+    "before": [
+      "\"25\""
+    ],
+    "after": "\"27.0.1\"",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/publish-js.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/publish-js.yml",
+    "tool": "node-version",
+    "before": [
+      "\"24\""
+    ],
+    "after": "\"26.13.1\"",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/publish-kotlin.yml",
+    "tool": "java-version",
+    "before": [
+      "\"25\""
+    ],
+    "after": "\"27.0.1\"",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/publish-php.yml",
+    "tool": "php-version",
+    "before": [
+      "\"8.5\""
+    ],
+    "after": "\"8.5.12\"",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/python.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.15\"",
+      "${{ matrix.python-version }}",
+      "[\"3.11\", \"3.15\"]"
+    ],
+    "after": "\"3.15.0\"",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/python.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.15\"",
+      "${{ matrix.python-version }}",
+      "[\"3.11\", \"3.15\"]"
+    ],
+    "after": "[\"3.11\", \"3.15.0\"]",
+    "latest": "3.15.0",
+    "reason": "Current compiler plus deliberately retained consumer compatibility test lanes"
+  },
+  {
+    "path": ".github/workflows/release-audit.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/release-audit.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/security.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/security.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/swift.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": ".github/workflows/workflows.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.15'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/docs.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.21'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.21'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.21'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "tool": "JAVA_VERSION",
+    "before": [
+      "'21'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "tool": "java-version",
+    "before": [
+      "'21'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/security.yml",
+    "tool": "node-version",
+    "before": [
+      "24"
+    ],
+    "after": "26.13.1",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/docs.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/links.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/release.yml",
+    "tool": "PHP_VERSION",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/docs.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "\"3.15.0\"",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/security.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/go.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.21'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/go.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.21'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "tool": "java-version",
+    "before": [
+      "${{ matrix.java }}",
+      "'11'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "tool": "java-version",
+    "before": [
+      "${{ matrix.java }}",
+      "'11'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "tool": "java-version",
+    "before": [
+      "${{ matrix.java }}",
+      "'11'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "tool": "java-version",
+    "before": [
+      "${{ matrix.java }}",
+      "'11'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/js.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/js.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/js.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/js.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/js.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/pages.yml",
+    "tool": "node-version",
+    "before": [
+      "'20'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/php.yml",
+    "tool": "php-version",
+    "before": [
+      "${{ matrix.php-version }}",
+      "'8.3'",
+      "['8.1', '8.2', '8.3', '8.4']"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/php.yml",
+    "tool": "php-version",
+    "before": [
+      "${{ matrix.php-version }}",
+      "'8.3'",
+      "['8.1', '8.2', '8.3', '8.4']"
+    ],
+    "after": "['8.4', '8.5.12']",
+    "latest": "8.5.12",
+    "reason": "Current compiler plus deliberately retained consumer compatibility test lanes"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/php.yml",
+    "tool": "php-version",
+    "before": [
+      "${{ matrix.php-version }}",
+      "'8.3'",
+      "['8.1', '8.2', '8.3', '8.4']"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/php.yml",
+    "tool": "php-version",
+    "before": [
+      "${{ matrix.php-version }}",
+      "'8.3'",
+      "['8.1', '8.2', '8.3', '8.4']"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/docs.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.21'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.21'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.21'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "tool": "JAVA_VERSION",
+    "before": [
+      "'21'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "tool": "java-version",
+    "before": [
+      "'21'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/security.yml",
+    "tool": "node-version",
+    "before": [
+      "24"
+    ],
+    "after": "26.13.1",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/docs.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/links.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/release.yml",
+    "tool": "PHP_VERSION",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/docs.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "\"3.15.0\"",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/security.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/docs.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "dotnet-version",
+    "before": [
+      "'8.0.x'"
+    ],
+    "after": "'11.0.100'",
+    "latest": "11.0.100",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.21'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.21'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.21'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/workflows.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "tool": "JAVA_VERSION",
+    "before": [
+      "'21'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "latest"
+    ],
+    "after": "1.4.4",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "java-version",
+    "before": [
+      "'21'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/links.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.x'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/security.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'",
+      "24"
+    ],
+    "after": "26.13.1",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/security.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'",
+      "24"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/workflows.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/docs.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/links.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/release.yml",
+    "tool": "PHP_VERSION",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/security.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/docs.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "\"3.15.0\"",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/security.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/security.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/security.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.4'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.4'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.4'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.4'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.4'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.4'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.4'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/security.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.4'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.27.1'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.27.1'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "go-version",
+    "before": [
+      "'1.27.1'"
+    ],
+    "after": "'1.27.4'",
+    "latest": "1.27.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/workflows.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "tool": "JAVA_VERSION",
+    "before": [
+      "'21'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.4.2'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "java-version",
+    "before": [
+      "'21'"
+    ],
+    "after": "'27.0.1'",
+    "latest": "27.0.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/javascript-first-gate.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/links.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "bun-version",
+    "before": [
+      "'1.x'"
+    ],
+    "after": "'1.4.4'",
+    "latest": "1.4.4",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/security.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'",
+      "24"
+    ],
+    "after": "26.13.1",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/security.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'",
+      "24"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/workflows.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/workflows.yml",
+    "tool": "node-version",
+    "before": [
+      "'24.x'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/docs.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/links.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/release.yml",
+    "tool": "PHP_VERSION",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/security.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/workflows.yml",
+    "tool": "php-version",
+    "before": [
+      "'8.3'"
+    ],
+    "after": "'8.5.12'",
+    "latest": "8.5.12",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/docs.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "\"3.15.0\"",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "tool": "python-version",
+    "before": [
+      "\"3.13\"",
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/security.yml",
+    "tool": "python-version",
+    "before": [
+      "'3.13'"
+    ],
+    "after": "'3.15.0'",
+    "latest": "3.15.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/workflows.yml",
+    "tool": "ZIZMOR_VERSION",
+    "before": [
+      "'1.30.1'"
+    ],
+    "after": "'1.32.0'",
+    "latest": "1.32.0",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/workflows.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/javascript-first-gate.yml",
+    "tool": "node-version",
+    "before": [
+      "'24'"
+    ],
+    "after": "'26.13.1'",
+    "latest": "26.13.1",
+    "reason": "Current registry runtime default"
+  }
+]

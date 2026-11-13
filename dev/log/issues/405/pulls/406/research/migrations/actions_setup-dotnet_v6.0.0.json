@@ -1,0 +1,6 @@
+{
+  "html_url": "https://github.com/actions/setup-dotnet/releases/tag/v6.0.0",
+  "tag_name": "v6.0.0",
+  "published_at": "2026-07-16T02:56:10Z",
+  "body": "## What's Changed\r\n\r\n* Migrate to ESM and upgrade dependencies by @priyagupta108 in https://github.com/actions/setup-dotnet/pull/752\r\n* Bump actions/checkout from 6.0.3 to 7.0.0 by @dependabot[bot] in https://github.com/actions/setup-dotnet/pull/751\r\n* chore(deps): bump @actions/cache to 6.2.0 by @philip-gai in https://github.com/actions/setup-dotnet/pull/756\r\n\r\n## New Contributors\r\n* @philip-gai made their first contribution in https://github.com/actions/setup-dotnet/pull/756\r\n\r\n**Full Changelog**: https://github.com/actions/setup-dotnet/compare/v5...v6.0.0"
+}

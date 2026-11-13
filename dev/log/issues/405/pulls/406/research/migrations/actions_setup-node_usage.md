@@ -1,0 +1,567 @@
+## Working with lockfiles
+
+Most supported package managers recommend that you **always** commit the lockfile, although implementations vary doing so generally provides the following benefits:
+
+- Enables faster installation for CI and production environments, due to being able to skip package resolution.
+- Describes a single representation of a dependency tree such that teammates, deployments, and continuous integration are guaranteed to install exactly the same dependencies.
+- Provides a facility for users to "time-travel" to previous states of `node_modules` without having to commit the directory itself.
+- Facilitates greater visibility of tree changes through readable source control diffs.
+
+In order to get the most out of using your lockfile on continuous integration follow the conventions outlined below for your respective package manager.
+
+### NPM
+
+Ensure that `package-lock.json` is always committed, use `npm ci` instead of `npm install` when installing packages.
+
+**See also:**
+- [Documentation of `package-lock.json`](https://docs.npmjs.com/cli/v8/configuring-npm/package-lock-json)
+- [Documentation of `npm ci`](https://docs.npmjs.com/cli/v8/commands/npm-ci)
+
+### Yarn
+
+To ensure that `yarn.lock` is always committed, use `yarn install --immutable` when installing packages.
+
+**See also:**
+- [Documentation of `yarn.lock`](https://classic.yarnpkg.com/en/docs/yarn-lock)
+- [Documentation of `--frozen-lockfile` option](https://classic.yarnpkg.com/en/docs/cli/install#toc-yarn-install-frozen-lockfile)
+- [QA - Should lockfiles be committed to the repository?](https://yarnpkg.com/getting-started/qa/#should-lockfiles-be-committed-to-the-repository)
+- [Documentation of `yarn install`](https://yarnpkg.com/cli/install)
+
+### PNPM
+
+Ensure that `pnpm-lock.yaml` is always committed, when on CI pass `--frozen-lockfile` to `pnpm install` when installing packages.
+
+**See also:**
+- [Working with Git - Lockfiles](https://pnpm.io/git#lockfiles)
+- [Documentation of `--frozen-lockfile` option](https://pnpm.io/cli/install#--frozen-lockfile)
+
+### Running without a lockfile
+
+If you choose not to use a lockfile, you must ensure that **caching is disabled**. The `cache` feature relies on the lockfile to generate a unique key for the cache entry.
+
+To run without a lockfile:
+1. Do not set the `cache` input.
+2. If your `package.json` contains a `packageManager` field set to npm (or devEngines.packageManager), automatic caching is enabled by default. Override this by setting `package-manager-cache: false`.
+
+```yaml
+steps:
+- uses: actions/checkout@v7
+- uses: actions/setup-node@v7
+  with:
+    node-version: '24'
+    package-manager-cache: false # Explicitly disable caching if you don't have a lockfile
+- run: npm install
+- run: npm test
+```
+
+## Check latest version
+
+The `check-latest` flag defaults to `false`. When set to `false`, the action will first check the local cache for a semver match. If unable to find a specific version in the cache, the action will attempt to download a version of Node.js. It will pull LTS versions from [node-versions releases](https://github.com/actions/node-versions/releases) and on miss or failure will fall back to the previous behavior of downloading directly from [node dist](https://nodejs.org/dist/). Use the default or set `check-latest` to `false` if you prefer stability and if you want to ensure a specific version of Node.js is always used.
+
+If `check-latest` is set to `true`, the action first checks if the cached version is the latest one. If the locally cached version is not the most up-to-date, a version of Node.js will then be downloaded. Set `check-latest` to `true` it you want the most up-to-date version of Node.js to always be used.
+
+> Setting `check-latest` to `true` has performance implications as downloading versions of Node is slower than using cached versions.
+
+```yaml
+steps:
+- uses: actions/checkout@v7
+- uses: actions/setup-node@v7
+  with:
+    node-version: '24'
+    check-latest: true
+    package-manager-cache: false # Disable automatic npm caching if not required
+- run: npm ci
+- run: npm test
+```
+
+## Node version file
+
+The `node-version-file` input accepts a path to a file containing the version of Node.js to be used by a project, for example `.nvmrc`, `.node-version`, `.tool-versions`, `mise.toml`, or `package.json`. If both the `node-version` and the `node-version-file` inputs are provided then the `node-version` input is used.
+See [supported version syntax](https://github.com/actions/setup-node#supported-version-syntax).
+
+> The action resolves a relative `node-version-file` path against `GITHUB_WORKSPACE`, which is the repository root by default. If the input is a full absolute path, the action uses that path directly instead of appending it to the workspace.
+
+```yaml
+steps:
+- uses: actions/checkout@v7
+- uses: actions/setup-node@v7
+  with:
+    node-version-file: '.nvmrc'
+    package-manager-cache: false # Disable automatic npm caching if not required
+- run: npm ci
+- run: npm test
+```
+
+When using the `package.json` input, the action will look in the following fields for a specified Node version:
+1. It checks `volta.node` first.
+2. Then it checks `devEngines.runtime` for an entry with `"name": "node"`.
+3. Then it will look for `engines.node`.
+4. Otherwise it tries to resolve the file defined by [`volta.extends`](https://docs.volta.sh/advanced/workspaces)
+   and look for `volta.node`, `devEngines.runtime`, or `engines.node` recursively.
+
+
+```json
+{
+  "engines": {
+    "node": "^22 || ^24"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.3"
+    }
+  },
+  "volta": {
+    "node": "24.11.1"
+  }
+}
+```
+
+## Architecture
+
+You can use any of the [supported operating systems](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners), and the compatible `architecture` can be selected using `architecture`. Values are `x86`, `x64`, `arm64`, `armv6l`, `armv7l`, `ppc64le`, `s390x` (not all of the architectures are available on all platforms).
+
+When using `architecture`, `node-version` must be provided as well.
+```yaml
+jobs:
+  build:
+    runs-on: windows-latest
+    name: Node sample
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          architecture: 'x64' # optional, x64 or x86. If not specified, x64 will be used by default
+          package-manager-cache: false # Disable automatic npm caching if not required
+      - run: npm ci
+      - run: npm test
+```
+
+## V8 Canary versions
+
+You can specify a nightly version to download it from https://nodejs.org/download/v8-canary.
+
+### Install v8 canary build for specific node version
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Node sample
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.0.0-v8-canary' # it will install the latest v8 canary release for node 24.0.0
+          package-manager-cache: false # Disable automatic npm caching if not required
+      - run: npm ci
+      - run: npm test
+```
+### Install v8 canary build for major node version
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Node sample
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24-v8-canary' # it will install the latest v8 canary release for node 24
+          package-manager-cache: false # Disable automatic npm caching if not required
+      - run: npm ci
+      - run: npm test
+```
+
+### Install the exact v8 canary version
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Node sample
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 'v24.0.0-v8-canary2025030537242e55ac'
+          package-manager-cache: false # Disable automatic npm caching if not required
+      - run: npm ci
+      - run: npm test
+```
+
+## Nightly versions
+
+You can specify a nightly version to download it from https://nodejs.org/download/nightly. 
+
+### Install the nightly build for a major version
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Node sample
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24-nightly' # it will install the latest nightly release for node 24
+          package-manager-cache: false # Disable automatic npm caching if not required
+      - run: npm ci
+      - run: npm test
+```
+
+### Install the nightly build for a specific version
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Node sample
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.0.0-nightly' # it will install the latest nightly release for node 24.0.0
+          package-manager-cache: false # Disable automatic npm caching if not required
+      - run: npm ci
+      - run: npm test
+```
+
+### Install an exact nightly version
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Node sample
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.0.0-nightly202505066102159fa1'
+          package-manager-cache: false # Disable automatic npm caching if not required
+      - run: npm ci
+      - run: npm test
+```
+
+## RC versions
+
+You can use specify a rc version to download it from https://nodejs.org/download/rc.
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Node sample
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.0.0-rc.4'
+          package-manager-cache: false # Disable automatic npm caching if not required
+      - run: npm ci
+      - run: npm test
+```
+
+**Note**: Unlike nightly versions, which support version range specifiers, you must specify the exact version for a release candidate: `24.0.0-rc.4`.
+
+## Caching packages data
+The action follows [actions/cache](https://github.com/actions/cache/blob/main/examples.md#node---npm) guidelines, and caches global cache on the machine instead of `node_modules`, so cache can be reused between different Node.js versions.
+
+**Caching yarn dependencies:**
+Yarn caching handles both Yarn Classic (v1) and Yarn Berry (v2, v3, v4+).
+
+```yaml
+steps:
+- uses: actions/checkout@v7
+- uses: actions/setup-node@v7
+  with:
+    node-version: '24'
+    cache: 'yarn'
+- run: yarn install --frozen-lockfile # optional, --immutable
+- run: yarn test
+```
+
+**Caching pnpm (v6.10+) dependencies:**
+```yaml
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# NOTE: pnpm caching support requires pnpm version >= 6.10.0
+
+steps:
+- uses: actions/checkout@v7
+- uses: pnpm/action-setup@v6
+  with:
+    version: 10
+- uses: actions/setup-node@v7
+  with:
+    node-version: '24'
+    cache: 'pnpm'
+- run: pnpm install
+- run: pnpm test
+```
+
+> **Note**: By default `--frozen-lockfile` option is passed starting from pnpm `6.10.x`. It will be automatically added if you run it on [CI](https://pnpm.io/cli/install#--frozen-lockfile). 
+> If the `pnpm-lock.yaml` file changes then pass `--frozen-lockfile` option.
+
+
+**Using wildcard patterns to cache dependencies**
+```yaml
+steps:
+- uses: actions/checkout@v7
+- uses: actions/setup-node@v7
+  with:
+    node-version: '24'
+    cache: 'npm'
+    cache-dependency-path: '**/package-lock.json'
+- run: npm ci
+- run: npm test
+```
+
+**Using a list of file paths to cache dependencies**
+```yaml
+steps:
+- uses: actions/checkout@v7
+- uses: actions/setup-node@v7
+  with:
+    node-version: '24'
+    cache: 'npm'
+    cache-dependency-path: |
+      server/app/package-lock.json
+      frontend/app/package-lock.json
+- run: npm ci
+- run: npm test
+```
+
+**Restore-only cache**
+
+You can restore caches without saving new entries, which helps reduce cache writes and storage usage in read-only cache workflows.
+
+```yaml
+steps:
+- uses: actions/checkout@v7
+# - uses: pnpm/action-setup@v6 
+#   with:
+#     version: 10
+
+- name: Setup Node.js
+  uses: actions/setup-node@v7
+  with:
+    node-version: '24'
+    package-manager-cache: false # Disable automatic npm caching if not required
+
+- name: Normalize runner architecture
+  shell: bash
+  run: echo "ARCH=$(echo '${{ runner.arch }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+    
+- name: Output of cache path
+  id: cachepath
+  shell: bash
+  run: echo "path=$(npm config get cache)" >> $GITHUB_OUTPUT
+  # run: echo "path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+  # For yarn workflow, output of yarn cache dir (v1) or yarn config get cacheFolder (v2+)
+  # run: echo "path=$(yarn cache dir)" >> $GITHUB_OUTPUT 
+    
+- name: Restore Node cache
+  uses: actions/cache/restore@v5
+  with:
+    path: ${{ steps.cachepath.outputs.path }}
+    key: node-cache-${{ runner.os }}-${{ env.ARCH }}-npm-${{ hashFiles('**/package-lock.json') }}
+    # key: node-cache-${{ runner.os }}-${{ env.ARCH }}-yarn-${{ hashFiles('**/yarn.lock') }}
+    # key: node-cache-${{ runner.os }}-${{ env.ARCH }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+    
+- run: npm ci
+# - run: yarn install --frozen-lockfile # optional, --immutable
+# - run: pnpm install
+```
+> **Note**: Uncomment the commands relevant to your project's package manager.
+
+> For more details related to cache scenarios, please refer [actions/cache/restore](https://github.com/actions/cache/tree/main/restore#only-restore-cache).
+
+## Multiple operating systems and architectures
+
+```yaml
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        node_version:
+          - 22
+          - 24
+          - 26
+        architecture:
+          - x64
+        # an extra windows-x86 run:
+        include:
+          - os: windows-latest
+            node_version: 24
+            architecture: x86
+    name: Node ${{ matrix.node_version }} - ${{ matrix.architecture }} on ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup node
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node_version }}
+          architecture: ${{ matrix.architecture }}
+          package-manager-cache: false # Disable automatic npm caching if not required
+      - run: npm ci
+      - run: npm test
+```
+
+## Publish to npmjs and GPR with npm
+```yaml
+steps:
+- uses: actions/checkout@v7
+- uses: actions/setup-node@v7
+  with:
+    node-version: '24.x'
+    registry-url: 'https://registry.npmjs.org'
+    package-manager-cache: false # Disable automatic npm dependency caching to reduce cache poisoning risk
+- run: npm ci
+- run: npm publish
+  env:
+    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+- uses: actions/setup-node@v7
+  with:
+    registry-url: 'https://npm.pkg.github.com'
+    package-manager-cache: false # Disable automatic npm dependency caching to reduce cache poisoning risk
+- run: npm publish
+  env:
+    NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+## Publish to npmjs and GPR with yarn
+```yaml
+steps:
+- uses: actions/checkout@v7
+- uses: actions/setup-node@v7
+  with:
+    node-version: '24.x'
+    registry-url: <registry url>
+    package-manager-cache: false # Disable automatic npm dependency caching to reduce cache poisoning risk
+- run: yarn install --frozen-lockfile
+- run: yarn publish
+  env:
+    NODE_AUTH_TOKEN: ${{ secrets.YARN_TOKEN }}
+- uses: actions/setup-node@v7
+  with:
+    registry-url: 'https://npm.pkg.github.com'
+    package-manager-cache: false # Disable automatic npm dependency caching to reduce cache poisoning risk
+- run: yarn publish
+  env:
+    NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+## Use private packages
+```yaml
+steps:
+- uses: actions/checkout@v7
+- uses: actions/setup-node@v7
+  with:
+    node-version: '24.x'
+    registry-url: 'https://registry.npmjs.org'
+    package-manager-cache: false # Disable automatic npm dependency caching to reduce cache poisoning risk
+# Skip post-install scripts here, as a malicious
+# script could steal NODE_AUTH_TOKEN.
+- run: npm ci --ignore-scripts
+  env:
+    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+# `npm rebuild` will run all those post-install scripts for us.
+- run: npm rebuild && npm run prepare --if-present
+```
+### Yarn2 configuration
+Yarn2 ignores both .npmrc and .yarnrc files created by the action, so before installing dependencies from the private repo it is necessary either to create or to modify existing yarnrc.yml file with `yarn config set` commands.
+
+Below you can find a sample "Setup .yarnrc.yml" step, that is going to allow you to configure a private GitHub registry for 'my-org' organisation.
+
+```yaml
+steps:
+- uses: actions/checkout@v7
+- uses: actions/setup-node@v7
+  with:
+    node-version: '24.x'
+    package-manager-cache: false # Disable automatic npm dependency caching to reduce cache poisoning risk
+- name: Setup .yarnrc.yml
+  run: |
+    yarn config set npmScopes.my-org.npmRegistryServer "https://npm.pkg.github.com"
+    yarn config set npmScopes.my-org.npmAlwaysAuth true
+    yarn config set npmScopes.my-org.npmAuthToken $NPM_AUTH_TOKEN
+  env:
+    NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+- name: Install dependencies
+  run: yarn install --immutable
+```
+
+To access private GitHub Packages within the same organization, go to "Manage Actions access" in Package settings and set the repositories you want to access.
+
+Please refer to the [Ensuring workflow access to your package - Configuring a package's access control and visibility](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility#ensuring-workflow-access-to-your-package) for more details.
+
+## Publishing to npm with Trusted Publisher (OIDC)
+
+npm supports Trusted Publishers, enabling packages to be published from GitHub Actions using OpenID Connect (OIDC) instead of long-lived npm tokens. This improves security by replacing static credentials with short-lived tokens, reducing the risk of credential leakage and simplifying authentication in CI/CD workflows.
+
+### Requirements
+
+Trusted publishing requires a compatible npm version:
+
+* **npm ≥ 11.5.1 (required)**
+* **Node.js 24 or newer (recommended)** — includes a compatible npm version by default
+
+> If npm is below 11.5.1, publishing will fail even if OIDC permissions are correctly configured.
+
+You must also configure a **Trusted Publisher** in npm for your package/scope that matches your GitHub repository and workflow (and optional environment, if used).
+
+> **Note**: In publishing workflows, set `package-manager-cache: false` because setup-node enables npm caching automatically when `package.json` specifies npm via `packageManager` or `devEngines.packageManager` (see [Running without a lockfile](#running-without-a-lockfile)), and a poisoned cache may expose credentials (including OIDC tokens) to attacker-controlled code.
+
+### Example workflow
+
+```yaml
+    permissions:
+      contents: read
+      id-token: write  # Required for OIDC
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false # Disable automatic npm dependency caching to reduce cache poisoning risk
+
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm publish
+```
+
+> **Note**: If the Trusted Publisher configuration (GitHub owner/repo/workflow file, and optional environment) does not match the workflow run identity exactly, publishing may fail with **E404 Not Found** even if the package exists on npm.
+
+For more details, see the [npm Trusted Publishers documentation](https://docs.npmjs.com/trusted-publishers) and the [GitHub Actions OpenID Connect (OIDC) overview](https://docs.github.com/en/actions/concepts/security/openid-connect).
+
+## Use private mirror
+
+It is possible to use a private mirror hosting Node.js binaries. This mirror must be a full mirror of the official Node.js distribution.
+The mirror URL can be set using the `mirror` input.
+It is possible to specify a token to authenticate with the mirror using the `mirror-token` input.
+The token will be passed in the `Authorization` header.
+
+```yaml
+- uses: actions/setup-node@v7
+  with:
+    node-version: '24.x'
+    mirror: 'https://nodejs.org/dist'
+    mirror-token: 'your-mirror-token'
+    package-manager-cache: false # Disable automatic npm caching if not required
+```

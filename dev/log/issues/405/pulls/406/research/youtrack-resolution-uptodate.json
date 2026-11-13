@@ -1,0 +1,8 @@
+[
+  {
+    "idReadable": "KT-70902",
+    "summary": "JS: kotlinUpgradePackageLock doesn't fully update package-lock.json",
+    "description": "Running `kotlinUpgradePackageLock` doesn't always correctly update `package-lock.json`. There are times where it has to be run with `--rerun-tasks`, other times where it has to be run with `--rerun-tasks --no-configuration-cache --no-build-cache`, and other times where `./gradlew clean` has to be run followed by `./gradlew kotlinUpgradePackageLock --rerun-tasks --no-configuration-cache --no-build-cache`.\n\nMaybe this is a duplicate of https://youtrack.jetbrains.com/issue/KT-69684?\n\nThe original issue report was about the `wasmJsRun` task failing; the original context is below.\n\nRunning the `wasmJsRun` (or `wasmJsBrowserProductionRun`, etc...) tasks in Kotlin 2.0.20 are broken:\n\n```\n> Task :samples:todo:webWasmApp:wasmJsBrowserProductionRun FAILED\n[webpack-cli] For using 'serve' command you need to install: 'webpack-dev-server' package.\n[webpack-cli] Would you like to install 'webpack-dev-server' package? (That will run 'npm install -D webpack-dev-server') (Y/n)\n\nFAILURE: Build failed with an exception.\n\n* What went wrong:\nExecution failed for task ':samples:todo:webWasmApp:wasmJsBrowserProductionRun'.\n> Cannot query the value of task ':samples:todo:webWasmApp:wasmJsBrowserProductionRun' property 'outputDirectory' because it has no value available.\n```",
+    "$type": "Issue"
+  }
+]

@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth scroll-pt-20">
+<head>
+	<meta charset="utf-8">
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<title>PHPStan 2.0 Released With Level 10 and Elephpants! | PHPStan</title>
+	
+	
+	<meta property="og:title" content="PHPStan 2.0 Released With Level 10 and Elephpants!" />
+
+	
+	
+		<meta name="twitter:image" content="/assets/social-phpstan-2-0-released-level-10-elephpants-C4lTyEIK.png" />
+<meta property="og:image" content="/assets/social-phpstan-2-0-released-level-10-elephpants-C4lTyEIK.png" />
+	
+
+
+	<link rel="icon" type="image/png" href="/assets/favicon-DrgKtcYh.png">
+	<link rel="alternate" type="application/rss+xml" title="PHPStan Blog" href="/assets/rss-Bk_rHTNU.xml">
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@phpstan" />
+	<meta name="twitter:creator" content="@ondrejmirtes" />
+	<meta name="twitter:title" content="PHPStan 2.0 Released With Level 10 and Elephpants!" />
+	<script src="https://cdn.usefathom.com/script.js" data-site="UDESFNRN" defer></script>
+	<script>
+		const query = window.matchMedia('(prefers-color-scheme: dark)');
+		const themeKey = 'phpstanWebTheme';
+		query.addEventListener('change', (event) => {
+			if (themeKey in localStorage) {
+				return;
+			}
+			if (event.matches) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		});
+		if (localStorage[themeKey] === 'dark' || (!(themeKey in localStorage) && query.matches)) {
+			document.documentElement.classList.add('dark');
+		} else {
+			document.documentElement.classList.remove('dark');
+		}
+	</script>
+  <script type="module" crossorigin src="/assets/inter-BTljlVU5.js"></script>
+  <script type="module" crossorigin src="/assets/MainMenu-BvnPN7nU.js"></script>
+  <script type="module" crossorigin src="/assets/blog-CHsckiBw.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/inter-y-LNL1Qc.css">
+  <link rel="stylesheet" crossorigin href="/assets/MainMenu-zImlOQfY.css">
+</head>
+<body>
+
+<div class="flex flex-col main-area" style="background-color: #fff">
+	<nav class="bg-white dark:bg-black border-b border-gray-200 dark:border-gray-900 flex-shrink z-20 nav-header">
+			<div class="max-w-5xl mx-auto px-4 md:px-6">
+				<div class="flex justify-between h-16">
+					<div class="flex flex-grow">
+						<div class="w-64 flex flex-none items-center">
+							<a href="/"><img class="block h-12 w-auto rounded-lg" src="/assets/logo-D3DIJ-HJ.png" alt="PHPStan" /></a>
+							<a href="/" class="ml-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 text-[#231F20] dark:text-gray-200" viewBox="0 0 275 46" fill="none">
+								<g clip-path="url(#clip0)">
+									<path d="M36.86 16.24C36.86 24.61 31.36 31.05 21.24 31.05H13.12V40.67C13.12 43.1 11.81 44.42 9.37 44.42H3.75C1.31 44.42 0 43.1 0 40.67V4.44C0 2 1.31 0.690002 3.75 0.690002H21.24C31.42 0.690002 36.86 7.87 36.86 16.24ZM23.74 16.37C23.74 14.06 22.11 11.93 19.87 11.93H13.12V20.62H19.87C20.9389 20.5481 21.9386 20.0656 22.6599 19.2735C23.3812 18.4813 23.7682 17.441 23.74 16.37V16.37Z" fill="currentColor"/>
+									<path d="M41.79 40.67V4.44C41.79 2 43.11 0.690002 45.54 0.690002H51.17C53.6 0.690002 54.91 2 54.91 4.44V18.12H67.72V4.44C67.72 2 69 0.690002 71.47 0.690002H77.09C79.53 0.690002 80.84 2 80.84 4.44V40.67C80.84 43.1 79.53 44.42 77.09 44.42H71.47C69.03 44.42 67.72 43.1 67.72 40.67V28.8H54.91V40.67C54.91 43.1 53.6 44.42 51.17 44.42H45.54C43.11 44.42 41.79 43.1 41.79 40.67Z" fill="currentColor"/>
+									<path d="M125.32 16.24C125.32 24.61 119.82 31.05 109.7 31.05H101.58V40.67C101.58 43.1 100.27 44.42 97.83 44.42H92.21C89.78 44.42 88.46 43.1 88.46 40.67V4.44C88.46 2 89.78 0.690002 92.21 0.690002H109.7C119.89 0.690002 125.32 7.87 125.32 16.24ZM112.2 16.37C112.2 14.06 110.58 11.93 108.33 11.93H101.58V20.62H108.33C109.4 20.5505 110.401 20.0688 111.123 19.2761C111.845 18.4834 112.231 17.4416 112.2 16.37V16.37Z" fill="currentColor"/>
+									<path d="M128.51 35.11C127.64 32.73 128.89 31.11 131.26 30.55L134.82 29.74C137.01 29.24 138.13 30.17 139.44 32.17C140.75 34.17 142.88 35.11 145.88 35.11C148.88 35.11 151 34.11 151 32C151 30.94 150.44 29.57 147.31 28.57L142.38 26.69C140.26 26.01 129.63 23.2 129.51 13.89C129.51 5.43 136.63 0 146.19 0C152.94 0 157.68 2.69 160.5 7.68C161.81 9.93 160.75 11.81 158.31 12.49L154.94 13.43C152.81 14.06 151.62 13.18 150.06 11.43C149.597 10.9432 149.033 10.5631 148.408 10.3161C147.782 10.0692 147.111 9.96131 146.44 10C144.32 10 142.32 10.87 142.32 12.74C142.32 13.99 143.19 15.12 145.88 16.05L150.75 17.74C160.5 21.12 163.56 25.36 163.75 31.55C163.75 40.86 155.38 45.1 145.89 45.1C137.26 45.1 131 41.54 128.51 35.11Z" fill="currentColor"/>
+									<path d="M170.56 33.05V20.87H167.93C167.678 20.8949 167.424 20.8636 167.186 20.7785C166.948 20.6933 166.731 20.5563 166.553 20.3775C166.374 20.1986 166.237 19.9822 166.152 19.7441C166.066 19.5059 166.035 19.2517 166.06 19V13.43C166.035 13.1783 166.066 12.9241 166.152 12.6859C166.237 12.4477 166.374 12.2314 166.553 12.0525C166.731 11.8737 166.948 11.7367 167.186 11.6515C167.424 11.5664 167.678 11.5351 167.93 11.56H171.93L173 5.75C173.068 5.08776 173.396 4.47943 173.911 4.05786C174.426 3.63628 175.087 3.43573 175.75 3.5H180.63C180.967 3.46111 181.308 3.49919 181.628 3.61139C181.948 3.72358 182.238 3.90695 182.477 4.14767C182.716 4.38839 182.897 4.68019 183.007 5.00105C183.116 5.32192 183.152 5.66348 183.11 6V11.56H189.05C189.302 11.5351 189.556 11.5664 189.794 11.6515C190.032 11.7367 190.249 11.8737 190.427 12.0525C190.606 12.2314 190.743 12.4477 190.828 12.6859C190.914 12.9241 190.945 13.1783 190.92 13.43V19C190.946 19.2525 190.916 19.5078 190.832 19.7472C190.747 19.9867 190.611 20.2043 190.432 20.3843C190.253 20.5643 190.036 20.7022 189.797 20.788C189.558 20.8737 189.303 20.9051 189.05 20.88H183.11V33.18C183.11 34.62 183.8 35.18 184.68 35.18C185.99 35.18 186.42 33.87 186.42 32.68C186.432 32.3455 186.412 32.0107 186.36 31.68C186.24 30.37 186.67 29.68 187.92 29.68H192.55C193.008 29.6305 193.47 29.7408 193.856 29.9923C194.242 30.2437 194.53 30.6209 194.67 31.06C194.963 31.8838 195.131 32.7466 195.17 33.62C195.17 42.8 188.67 45.11 183.05 45.11C177.18 45.1 170.56 42.67 170.56 33.05Z" fill="currentColor"/>
+									<path d="M197 28C197 18.06 203.69 10.88 212.43 10.88C216.68 10.88 220.06 12.69 221.81 15.69V15.32C221.81 12.88 223.12 11.57 225.55 11.57H230.92C233.36 11.57 234.67 12.88 234.67 15.32V40.67C234.67 43.1 233.36 44.42 230.92 44.42H225.55C223.12 44.42 221.81 43.1 221.81 40.67V40.36C220.06 43.29 216.68 45.1 212.43 45.1C203.67 45.1 197 37.92 197 28ZM222 28C222 23.87 219.69 20.69 215.94 20.69C212.19 20.69 209.88 23.87 209.88 28C209.88 32.13 212.19 35.31 215.94 35.31C219.69 35.31 222 32.11 222 28Z" fill="currentColor"/>
+									<path d="M240.78 40.67V15.31C240.78 12.87 242.09 11.56 244.53 11.56H249.9C252.34 11.56 253.65 12.87 253.65 15.31V15.62C255.46 12.68 258.33 10.87 262.77 10.87C272.95 10.87 274.2 19.8 274.2 25.18V40.67C274.2 43.1 272.89 44.42 270.45 44.42H265.08C262.64 44.42 261.33 43.1 261.33 40.67V26.42C261.33 23.86 260.77 20.87 257.46 20.87C254.15 20.87 253.65 23.87 253.65 26.42V40.67C253.65 43.1 252.34 44.42 249.9 44.42H244.53C242.09 44.42 240.78 43.1 240.78 40.67Z" fill="currentColor"/>
+								</g>
+								<defs>
+									<clipPath id="clip0">
+									<rect width="275" height="46" fill="white"/>
+									</clipPath>
+								</defs>
+							</svg></a>
+						</div>
+						<div class="flex flex-grow justify-between">
+							<div class="hidden md:-my-px md:flex px-4 flex-grow">
+								<div class="flex flex-shrink md:-my-px">
+									
+										
+											<a href="/" class="mr-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-800 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-800 transition duration-150 ease-in-out">
+												<span>Home</span>
+											</a>
+										
+									
+										
+											<a href="/try" class="mr-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-800 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-800 transition duration-150 ease-in-out">
+												<span>Try</span>
+											</a>
+										
+									
+										
+											<a href="/documentation" class="mr-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-800 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-800 transition duration-150 ease-in-out">
+												<span>Documentation</span>
+											</a>
+										
+									
+										
+											<a href="/blog" class="mr-8 inline-flex items-center px-1 pt-1 border-b-2 border-blue-500 dark:border-blue-400 text-md font-medium leading-5 text-gray-900 dark:text-gray-200 focus:outline-none focus:border-blue-700 dark:focus:border-blue-300 transition duration-150 ease-in-out">
+												<span>Blog</span>
+											</a>
+										
+									
+								</div>
+
+								<div class="items-center flex flex-grow justify-end">
+									<div id="docsearch"></div>
+									<a target="_blank" href="https://github.com/phpstan/phpstan" class="ml-4 px-1 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 transition duration-150 ease-in-out">
+										<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+											<path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+										</svg>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="-mr-2 flex items-center md:hidden">
+						<div id="docsearch-mobile"></div>
+						<div id="main-menu-button"></div>
+					</div>
+				</div>
+			</div>
+			<div id="main-menu-panel" class="hidden md:hidden">
+				<div class="pt-2 pb-3">
+					
+						
+							<a href="/" class="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-950 hover:border-gray-300 dark:hover:border-gray-800 focus:outline-none focus:text-gray-800 dark:focus:text-gray-300 focus:bg-gray-50 dark:focus:bg-gray-950 focus:border-gray-300 dark:focus:border-gray-800 transition duration-150 ease-in-out">
+								Home
+							</a>
+						
+					
+						
+							<a href="/try" class="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-950 hover:border-gray-300 dark:hover:border-gray-800 focus:outline-none focus:text-gray-800 dark:focus:text-gray-300 focus:bg-gray-50 dark:focus:bg-gray-950 focus:border-gray-300 dark:focus:border-gray-800 transition duration-150 ease-in-out">
+								Try
+							</a>
+						
+					
+						
+							<a href="/documentation" class="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-950 hover:border-gray-300 dark:hover:border-gray-800 focus:outline-none focus:text-gray-800 dark:focus:text-gray-300 focus:bg-gray-50 dark:focus:bg-gray-950 focus:border-gray-300 dark:focus:border-gray-800 transition duration-150 ease-in-out">
+								Documentation
+							</a>
+						
+					
+						
+							<a href="/blog" class="algolia-active mt-1 block pl-3 pr-4 py-2 border-l-4 border-blue-500 dark:border-blue-400 text-base font-medium text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-gray-950 focus:outline-none focus:text-blue-800 dark:focus:text-blue-300 focus:bg-blue-100 dark:focus:bg-slate-900 focus:border-blue-700 dark:focus:border-blue-300 transition duration-150 ease-in-out">
+								Blog
+							</a>
+						
+					
+
+					<a target="_blank" href="https://github.com/phpstan/phpstan" class="flex items-center mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-950 hover:border-gray-300 dark:hover:border-gray-800 focus:outline-none focus:text-gray-800 dark:focus:text-gray-300 focus:bg-gray-50 dark:focus:bg-gray-950 focus:border-gray-300 dark:focus:border-gray-800 transition duration-150 ease-in-out">
+						<span>GitHub</span>
+						<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-4 h-4 ml-1"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+					</a>
+				</div>
+			</div>
+	</nav>
+	<div>
+		<main>
+			<div class="max-w-5xl mx-auto md:px-6">
+				
+
+<div class="flex">
+		<div id="sidebar" class="sidebar w-64 md:block hidden flex-none pr-4 border-r border-gray-200 dark:border-gray-900 fixed bg-white dark:bg-black dark:text-white overflow-y-auto top-0 bottom-0 mt-16 pt-6 pl-4 md:pl-0 z-10 md:z-auto">
+			
+
+			<div class="flex items-center ">
+				<span id="sectionTitle" class="group flex-grow items-center px-3 py-2 text-lg leading-5 font-bold text-gray-900 dark:text-gray-200">Blog</span>
+
+				<span id="algoliaSectionTitle" class="hidden">Blog</span>
+			
+
+				<div id="sidebar-close"></div>
+			</div>
+
+			
+				<ul>
+					
+						
+							<li><a class="flex px-3 py-2 text-sm leading-5 font-medium rounded-md hover:bg-gray-50 dark:hover:bg-gray-950 transition ease-in-out duration-150" href="/blog">All Articles</a></li>
+						
+					
+						
+							<li><a class="flex px-3 py-2 text-sm leading-5 font-medium rounded-md hover:bg-gray-50 dark:hover:bg-gray-950 transition ease-in-out duration-150" href="/blog/releases">Releases</a></li>
+						
+					
+						
+							<li><a class="flex px-3 py-2 text-sm leading-5 font-medium rounded-md hover:bg-gray-50 dark:hover:bg-gray-950 transition ease-in-out duration-150" href="/blog/guides">Guides</a></li>
+						
+					
+						
+							<li><a class="flex px-3 py-2 text-sm leading-5 font-medium rounded-md hover:bg-gray-50 dark:hover:bg-gray-950 transition ease-in-out duration-150" href="/blog/other">Other</a></li>
+						
+					
+				</ul>
+			
+
+			<div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-900">
+				<div class="px-3 pb-1 text-xs font-semibold text-gray-400 dark:text-gray-600 uppercase tracking-wider">Other Sections</div>
+				<ul>
+					
+						<li>
+							<a href="/rss.xml" class="flex items-center px-3 py-2 text-sm leading-5 font-semibold text-gray-700 dark:text-gray-300 rounded-md hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-950 focus:outline-none focus:bg-blue-50 dark:focus:bg-gray-950 transition ease-in-out duration-150">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-gray-400 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+								RSS
+							</a>
+						</li>
+					
+				</ul>
+			</div>
+			<div class="mt-8 rounded-lg bg-gradient-to-b from-blue-400 to-blue-700 to-80% text-white text-center font-semibold flex justify-center items-center text-2xl">
+				<a class="px-3 py-3 md:py-10" href="/sponsor">Sponsor PHPStan!</a>
+			</div>
+		</div>
+	<div class="content px-4 pt-4 min-w-0 w-full ml-0 md:ml-64">
+		<div id="sidebar-open"></div>
+
+		<div class="flex items-center justify-between gap-4 mb-4">
+			<h1 class="leading-tight !mb-0">PHPStan 2.0 Released With Level 10 and Elephpants!</h1>
+			
+		</div>
+		
+	<p class="text-sm text-gray-500">November 11, 2024 · 10 min read</p>
+
+
+		
+			<img src="/assets/phpstan-2-0-CzaKVtee.jpg" alt="PHPStan 2.0" class="rounded-lg mb-8">
+<p>PHPStan 1.0 was released a little over <a href="/blog/phpstan-1-0-released">three years ago</a>. I’m happy to report the project is thriving! We did about 176 new releases since then, implementing new features, fixing bugs, and laying the groundwork for 2.0. Yeah, we didn’t catch a break and we didn’t rest on our laurels.</p>
+<p>I’ve been looking forward to 2.0 for a long time. Everyone will finally be able to enjoy new features we’ve been working on. Some of them have already been enjoyed by <a href="/blog/what-is-bleeding-edge">early adopters</a> for more than two years.</p>
+<p>But code and analysis changes are not the only things being released today! PHPStan joins <a href="https://elephpant.me/">the family of elephpants</a> with its own take on the legendary PHP mascot.</p>
+<p class="mt-4 rounded-lg mb-8 border border-blue-500 p-4 hover:border-blue-400"><a href="/merch"><img src="/assets/elephpant-trio-Cm_0-9OH.png" alt="PHPStan Elephpant"></a></p>
+<p>You can also order PHPStan T-shirts again, in both blue and white, and straight/fitted cut:</p>
+<a href="/merch" class="flex w-full justify-center mt-4 rounded-lg mb-8 border border-blue-500 py-2 hover:border-blue-400">
+	<img class="aspect-[1610/913] max-w-xs w-1/2" src="/assets/tshirt-2024-blue-straight-BrgeYHhB.jpg">
+	<img class="aspect-[1610/913] max-w-xs w-1/2" src="/assets/tshirt-2024-white-fitted-Ca0gDHXP.jpg">
+</a>
+<p>We’re <a href="/merch">accepting orders</a> for the next four weeks (until Sunday, December 8th), so don’t miss the opportunity and order the elephpant and T-shirt today! I can’t wait to see them in the wild.</p>
+<hr>
+<p>And now to the code part. The <a href="https://github.com/phpstan/phpstan/releases/tag/2.0.0">comprehensive release notes</a> are massive, consisting of over 180 items. That’s why, for the first time ever, PHPStan 2.0 also comes with easy-to-follow <a href="/blog/upgrading-from-phpstan-1-to-2">upgrading guide</a>, for both end users and extension developers.</p>
+<p>It’s really hard to pick and choose my favourite features and changes from 2.0, but I’ll try. Here we go:</p>
+<h2 id="level-10" tabindex="-1">Level 10 <a class="header-anchor ml-1 text-gray-300 hover:text-black" href="#level-10">#</a></h2>
+<p>New challenge for the level max enthusiasts! Previously added level 9 acknowledges using <code>mixed</code> in your code isn’t actually safe at all, and that you should really do something about it. But it has some blind spots and still lets some errors through. Internally it’s named <code>checkExplicitMixed</code>. Meaning it will report errors for explicitly-typed <code>mixed</code> values in your code.</p>
+<p>Level 6 forces you to add missing types. If you manage to skip that with the help of <del>cheating</del>, ahem, <a href="/user-guide/baseline">the baseline</a>, or if you call a third party code that doesn’t use a lot of return types, unknown types may be present in your code during analysis. These are implicitly-typed <code>mixed</code>, and they will be picked up by level 10</p>
+<h2 id="list-type" tabindex="-1">List type <a class="header-anchor ml-1 text-gray-300 hover:text-black" href="#list-type">#</a></h2>
+<p>PHP arrays are really powerful, but they represent several computer science concepts in a single data structure, and sometimes it’s difficult to work with that. That’s why it’s useful to narrow it down when we’re sure we only want a single concept like a list.</p>
+<p><a href="https://en.wikipedia.org/wiki/List_(abstract_data_type)">List</a> in PHPStan is an array with sequential integer keys starting at 0 and with no gaps. It joins <a href="/writing-php-code/phpdoc-types">many other advanced types expressible in PHPDocs</a>:</p>
+<pre class="language-php"><code class="language-diff-php diff-highlight"><span class="token comment">/** @param list&lt;int> $listOfIntegers */</span>
+<span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">doFoo</span><span class="token punctuation">(</span><span class="token keyword type-hint">array</span> <span class="token variable">$listOfIntegers</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">void</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="lower-memory-consumption-leads-to-faster-performance" tabindex="-1">Lower memory consumption leads to faster performance <a class="header-anchor ml-1 text-gray-300 hover:text-black" href="#lower-memory-consumption-leads-to-faster-performance">#</a></h2>
+<p>PHPStan used to be a really hungry beast. To the point of being killed by CI runners because it consumed not just all the memory up to the <code>memory_limit</code> in php.ini, but also all the memory assigned to the runner hardware.</p>
+<p>Now it’s a less hungry beast. How did I make it happen? It’s useful to realize what’s going on inside a running program. It’s fine to consume memory as useful things are being achieved, but in order to consume less memory in total, it has to be freed afterwards so that it can be used again by different data needed when analysing the next file in line.</p>
+<p>To debug memory leaks, I use the <a href="https://github.com/BitOne/php-meminfo"><code>php-meminfo</code></a> extension. I quickly realized that most of the memory is occupied by <a href="/developing-extensions/abstract-syntax-tree">AST</a> nodes. PHP frees the memory occupied by an object when there are no more references to it <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>. It didn’t work in case of AST nodes because they kept pointing at each other:</p>
+<img class="mb-8" src="/assets/mermaid-8ac0f5fd75595643d7c7f06f397551f0d46c5c9ff8582808a3a9e85f69de72c3-BWuvZ3oJ.svg" />
+<p>Getting rid of <code>parent</code>/<code>previous</code>/<code>next</code> node attributes is a backward compatibility break for custom rules that read them. I’ve written <a href="/blog/preprocessing-ast-for-custom-rules">an article on how to make these rules work again</a> even without those memory-consuming references.</p>
+<p>The object graph is now obviously cleaner and with no reference cycles:</p>
+<img class="mb-8" src="/assets/mermaid-8d998e1cd58969a3fb12c7755d01efdbfc2bac1a7c308a1d1927d6014ba537e1-D8KUC951.svg" />
+<p>In my testing PHPStan now consumes around 50–70 % less memory on huge projects with thousands of files. Analysing PrestaShop 8.0 codebase now takes 3 minutes instead of 9 minutes in GitHub Actions with 2 CPU cores.</p>
+<h2 id="validate-inline-phpdoc-%40var-tag-type" tabindex="-1">Validate inline PHPDoc <code>@var</code> tag type <a class="header-anchor ml-1 text-gray-300 hover:text-black" href="#validate-inline-phpdoc-%40var-tag-type">#</a></h2>
+<p>There are multiple problems with inline <code>@var</code> PHPDoc tag. PHP developers use it for two main reasons:</p>
+<ul>
+<li>To fix wrong 3rd party PHPDocs. A dependency <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> might have <code>@return string</code> in a PHPDoc but in reality can return <code>null</code> as well.</li>
+<li>To narrow down the returned type. When a function returns <code>string|null</code> but we know that in this case it can only return <code>string</code>.</li>
+</ul>
+<pre class="language-php"><code class="language-diff-php diff-highlight"><span class="token comment">/** @var Something $a */</span>
+<span class="token variable">$a</span> <span class="token operator">=</span> <span class="token function">makeSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>By looking at the analysed code we can’t really tell which scenario it is. That’s why PHPStan always trusted the type in <code>@var</code> and didn’t report any possible mistakes. Obviously that’s dangerous because the type in <code>@var</code> can get out of sync and be wrong really easily. But I came up with an idea what we could report without any false positives, keeping existing use-cases in mind.</p>
+<p>PHPStan 2.0 validates the inline <code>@var</code> tag type against the native type of the assigned expression. It finds the lies spread around in <code>@var</code> tags:</p>
+<pre class="language-php"><code class="language-diff-php diff-highlight"><span class="token keyword">function</span> <span class="token function-definition function">doFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">string</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/** @var string|null $a */</span>
+<span class="token variable">$a</span> <span class="token operator">=</span> <span class="token function">doFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// PHPDoc tag @var with type string|null is not subtype of native type string.</span></code></pre>
+<p>It doesn’t make sense to allow <code>string|null</code>, because the type can never be <code>null</code>. PHPStan says “string|null is not subtype of native type string”, implying that only subtypes are allowed. Subtype is the same type or narrower, meaning that <code>string</code> or <code>non-empty-string</code> would be okay.</p>
+<p>By default PHPStan isn’t going to report anything about the following code:</p>
+<pre class="language-php"><code class="language-diff-php diff-highlight"><span class="token comment">/** @return string */</span>
+<span class="token keyword">function</span> <span class="token function-definition function">doFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/** @var string|null $a */</span>
+<span class="token variable">$a</span> <span class="token operator">=</span> <span class="token function">doFoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Because the <code>@return</code> PHPDoc might be wrong and that’s what the <code>@var</code> tag might be trying to fix. If you want this scenario to be reported too, enable <a href="/config-reference#reportwrongphpdoctypeinvartag"><code>reportWrongPhpDocTypeInVarTag</code></a>, or install <a href="https://github.com/phpstan/phpstan-strict-rules">phpstan-strict-rules</a>.</p>
+<p>I’d like the PHP community to use inline <code>@var</code> tags less and less over time. There are many great alternatives that promote good practices and code deduplication: <a href="/writing-php-code/phpdoc-types#conditional-return-types">Conditional return types</a>, <a href="/writing-php-code/narrowing-types#custom-type-checking-functions-and-methods"><code>@phpstan-assert</code></a>, <a href="/blog/generics-in-php-using-phpdocs">generics</a>, <a href="/user-guide/stub-files">stub files</a> for overriding 3rd party PHPDocs, or <a href="/developing-extensions/dynamic-return-type-extensions">dynamic return type extensions</a>.</p>
+<h2 id="checking-truthiness-of-%40phpstan-pure-with-impure-points" tabindex="-1">Checking truthiness of <code>@phpstan-pure</code> with impure points <a class="header-anchor ml-1 text-gray-300 hover:text-black" href="#checking-truthiness-of-%40phpstan-pure-with-impure-points">#</a></h2>
+<p>Pure functions always return the same value for the same input (arguments and current object state). They also don’t have any side effects like depending on current time, random number generator, or IO like reading file contents or accessing resources over the network.</p>
+<p>It’s useful to mark functions and methods with <code>@phpstan-pure</code> if their logic should be pure. PHPStan 2.0 now enforces this annotation, meaning it will report any impure code inside as an error.</p>
+<p>We achieved that with the help of impure points. For every statement and expression type PHP supports PHPStan decides if it’s pure or not.</p>
+<p>Knowing impure points for any code also helps PHPStan to report more dead code. There’s no point in calling a pure method on a separate line without using its result. If it does not have any side effect, and we’re not using the returned value, then we can safely delete this line:</p>
+<pre class="language-php"><code class="language-diff-php diff-highlight"><span class="token comment">// Call to method Foo::pureMethod() on a separate line has no effect.</span>
+<span class="token variable">$this</span><span class="token operator">-></span><span class="token function">pureMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Also: if a <code>void</code> method does not have any impure points, it doesn’t have to exist:</p>
+<pre class="language-php"><code class="language-diff-php diff-highlight"><span class="token comment">// Method Foo::add() returns void but does not have any side effects.</span>
+<span class="token keyword">private</span> <span class="token keyword">function</span> <span class="token function-definition function">add</span><span class="token punctuation">(</span><span class="token keyword type-hint">int</span> <span class="token variable">$a</span><span class="token punctuation">,</span> <span class="token keyword type-hint">int</span> <span class="token variable">$b</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword return-type">void</span>
+<span class="token punctuation">{</span>
+    <span class="token variable">$c</span> <span class="token operator">=</span> <span class="token variable">$a</span> <span class="token operator">+</span> <span class="token variable">$b</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="less-caching%2C-disk-space-cleanup" tabindex="-1">Less caching, disk space cleanup <a class="header-anchor ml-1 text-gray-300 hover:text-black" href="#less-caching%2C-disk-space-cleanup">#</a></h2>
+<p>Getting rid of a cache without slowing down the analysis is a clear win. Less stuff to invalidate, less stuff to worry about, less disk space to occupy.</p>
+<p>PHPStan used to cache information whether a function is variadic because of <a href="https://www.php.net/manual/en/function.func-get-args.php"><code>func_get_args()</code></a> call or similar in its body. I realized we have this information freshly available in each run anyway, so we don’t need to cache it. This saves literally tens of thousands of files that PHPStan previously needed to save to disk and then read.</p>
+<p>PHPStan now solely relies on the <a href="https://phpstan.org/user-guide/result-cache">result cache</a> to speed up the analysis.</p>
+<p>We took this opportunity to clean up old cache items on disk, so on the first PHPStan 2.0 run you might see some previously occupied disk space free up. On a proprietary project I test PHPStan on it freed up about 1 GB of space.</p>
+<hr>
+<h2 id="the-future" tabindex="-1">The future <a class="header-anchor ml-1 text-gray-300 hover:text-black" href="#the-future">#</a></h2>
+<p>I said it <a href="/blog/phpstan-1-0-released#a-bright-future">three years ago</a>, and I’m saying it again. PHPStan’s future is bright. It’s my full-time job thanks to <a href="https://phpstan.org/blog/introducing-phpstan-pro">PHPStan Pro</a> and <a href="/sponsor">GitHub Sponsors</a>, splitting the revenue roughly 50-50 between them.</p>
+<p>I love my job, I love PHP and I don’t plan to stop. Contributors are <a href="https://github.com/phpstan/phpstan-src/graphs/contributors?from=11.+11.+2023">very active</a> and indispensable. PHPStan has a thriving <a href="/user-guide/extension-library">ecosystem of extensions</a> as well.</p>
+<p>I have a lot of ambitious and even crazy ideas I’d like to try out. But the first thing I will address once the dust settles on 2.0 is adding support for PHP 8.4. You can expect it to be added before the end of 2024.</p>
+<hr>
+<p>Do you like PHPStan and use it every day? <a href="/sponsor"><strong>Consider sponsoring</strong> further development of PHPStan on GitHub Sponsors and also <strong>subscribe to PHPStan Pro</strong></a>! I’d really appreciate it!</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>That’s called reference counting. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>That probably doesn’t use static analysis. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+		
+
+		
+		
+
+		<div class="mt-16">
+			<div class="md:flex md:items-center md:justify-between mt-8 mb-8">
+	<div class="flex justify-center items-center md:order-2 text-gray-400">
+		<span class="text-sm">Theme</span>
+		<div class="ml-2 flex flex-col">
+			<div id="theme-switcher"></div>
+		</div>
+	</div>
+	<div class="flex justify-center items-center md:order-3 mt-8 md:mt-0">
+		<a href="https://x.com/phpstan" class="ml-6 text-gray-400 hover:text-gray-500" target="_blank">
+			<span class="sr-only">X</span>
+			<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+				<path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+			</svg>
+		</a>
+		<a rel="me" href="https://phpc.social/@phpstan" class="ml-6 text-gray-400 hover:text-gray-500" target="_blank">
+			<span class="sr-only">Mastodon</span>
+			<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 216.4144 232.00976">
+				<path d="M211.80734 139.0875c-3.18125 16.36625-28.4925 34.2775-57.5625 37.74875-15.15875 1.80875-30.08375 3.47125-45.99875 2.74125-26.0275-1.1925-46.565-6.2125-46.565-6.2125 0 2.53375.15625 4.94625.46875 7.2025 3.38375 25.68625 25.47 27.225 46.39125 27.9425 21.11625.7225 39.91875-5.20625 39.91875-5.20625l.8675 19.09s-14.77 7.93125-41.08125 9.39c-14.50875.7975-32.52375-.365-53.50625-5.91875C9.23234 213.82 1.40609 165.31125.20859 116.09125c-.365-14.61375-.14-28.39375-.14-39.91875 0-50.33 32.97625-65.0825 32.97625-65.0825C49.67234 3.45375 78.20359.2425 107.86484 0h.72875c29.66125.2425 58.21125 3.45375 74.8375 11.09 0 0 32.975 14.7525 32.975 65.0825 0 0 .41375 37.13375-4.59875 62.915"/>
+			  	<path fill="#fff" d="M177.50984 80.077v60.94125h-24.14375v-59.15c0-12.46875-5.24625-18.7975-15.74-18.7975-11.6025 0-17.4175 7.5075-17.4175 22.3525v32.37625H96.20734V85.42325c0-14.845-5.81625-22.3525-17.41875-22.3525-10.49375 0-15.74 6.32875-15.74 18.7975v59.15H38.90484V80.077c0-12.455 3.17125-22.3525 9.54125-29.675 6.56875-7.3225 15.17125-11.07625 25.85-11.07625 12.355 0 21.71125 4.74875 27.8975 14.2475l6.01375 10.08125 6.015-10.08125c6.185-9.49875 15.54125-14.2475 27.8975-14.2475 10.6775 0 19.28 3.75375 25.85 11.07625 6.36875 7.3225 9.54 17.22 9.54 29.675"/>
+
+			</svg>
+		</a>
+		<a href="https://www.youtube.com/@phpstan" class="ml-6 text-gray-400 hover:text-gray-500" target="_blank">
+			<span class="sr-only">YouTube</span>
+			<svg viewBox="0 0 28.57 20" class="h-6 w-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<g>
+					<path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z"></path>
+					<path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"></path>
+				</g>
+			</svg>
+		</a>
+		<a href="/rss.xml" class="ml-6 text-gray-400 hover:text-gray-500" target="_blank">
+			<span class="sr-only">RSS</span>
+			<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+				<path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/>
+			</svg>
+		</a>
+	</div>
+	<div class="mt-8 md:mt-0 md:order-1 flex items-center justify-center">
+		<div class="text-center text-sm leading-6 text-gray-400">&copy; 2026 PHPStan s.r.o.</div>
+	</div>
+</div>
+
+		</div>
+	</div>
+</div>
+
+
+			</div>
+		</main>
+	</div>
+</div>
+
+
+
+
+</body>
+</html>

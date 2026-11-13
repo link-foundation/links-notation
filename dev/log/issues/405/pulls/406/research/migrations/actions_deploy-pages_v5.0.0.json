@@ -1,0 +1,6 @@
+{
+  "html_url": "https://github.com/actions/deploy-pages/releases/tag/v5.0.0",
+  "tag_name": "v5.0.0",
+  "published_at": "2026-03-25T16:59:14Z",
+  "body": "# Changelog\r\n\r\n- Update Node.js version to 24.x @salmanmkc (#404)\r\n- Add workflow file for publishing releases to immutable action package @Jcambass (#374)\r\n- Bump braces from 3.0.2 to 3.0.3 in the npm_and_yarn group across 1 directory @dependabot (#360)\r\n- Make the rebuild dist workflow work nicer with Dependabot @yoannchaudet (#361)\r\n- Bump the non-breaking-changes group across 1 directory with 3 updates @dependabot (#358)\r\n- Delete repeated sentence @garethsb (#359)\r\n- Update README.md @tsusdere (#348)\r\n- Bump the non-breaking-changes group with 4 updates @dependabot (#341)\r\n- Remove error message for file permissions @TooManyBees (#340)\r\n\r\n---\r\n\r\nSee details of [all code changes](https://github.com/actions/deploy-pages/compare/v4.0.5...v4.0.6) since previous release.\r\n\r\n:warning: For use with products other than GitHub.com, such as GitHub Enterprise Server, please consult the [compatibility table](https://github.com/actions/deploy-pages/#compatibility).\r\n"
+}

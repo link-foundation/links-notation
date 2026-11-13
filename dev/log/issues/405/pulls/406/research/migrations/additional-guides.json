@@ -1,0 +1,46 @@
+{
+  "pytest9": {
+    "url": "https://docs.pytest.org/en/stable/deprecations.html",
+    "bytes": 187716
+  },
+  "pytest-asyncio1": {
+    "url": "https://pytest-asyncio.readthedocs.io/en/stable/reference/changelog.html",
+    "bytes": 70798
+  },
+  "pytest-cov7": {
+    "url": "https://pytest-cov.readthedocs.io/en/latest/changelog.html",
+    "bytes": 64775
+  },
+  "sphinx9": {
+    "url": "https://www.sphinx-doc.org/en/master/changes/9.0.html",
+    "bytes": 34164
+  },
+  "myst5": {
+    "url": "https://myst-parser.readthedocs.io/en/latest/reference/changelog.html",
+    "error": "HTTP Error 404: Not Found"
+  },
+  "phpunit13": {
+    "url": "https://docs.phpunit.de/en/13.4/migration.html",
+    "error": "HTTP Error 404: Not Found"
+  },
+  "phpstan2": {
+    "url": "https://phpstan.org/blog/phpstan-2-0-released",
+    "error": "HTTP Error 404: Not Found"
+  },
+  "mypy2": {
+    "url": "https://mypy.readthedocs.io/en/stable/changelog.html",
+    "bytes": 730044
+  },
+  "furo": {
+    "url": "https://pradyunsg.me/furo/changelog/",
+    "bytes": 73248
+  },
+  "hatchling": {
+    "url": "https://hatch.pypa.io/latest/history/hatchling/",
+    "bytes": 108331
+  },
+  "llvm23": {
+    "url": "https://releases.llvm.org/23.1.0/tools/clang/docs/ReleaseNotes.html",
+    "bytes": 45424
+  }
+}

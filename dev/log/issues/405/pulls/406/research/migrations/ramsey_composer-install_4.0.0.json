@@ -1,0 +1,6 @@
+{
+  "html_url": "https://github.com/ramsey/composer-install/releases/tag/4.0.0",
+  "tag_name": "4.0.0",
+  "published_at": "2026-03-15T22:49:21Z",
+  "body": "## What's Changed\r\n* chore: Bump actions/cache from 4.2.4 to 5.0.3 by @dependabot[bot] in https://github.com/ramsey/composer-install/pull/278\r\n\r\n  This necessitates a new major version because actions/cache v5 runs on the Node.js 24 runtime and requires a minimum Actions Runner version of 2.327.1. This is a breaking change for anyone using self-hosted runners.\r\n\r\n\r\n**Full Changelog**: https://github.com/ramsey/composer-install/compare/3.2.1...4.0.0"
+}

@@ -1,0 +1,2454 @@
+[
+  {
+    "path": "rust/Cargo.lock",
+    "ecosystem": "cargo",
+    "name": "base64",
+    "before": [],
+    "after": "0.22.1",
+    "latest": "0.23.1",
+    "reason": "tiktoken-rs@0.12.1 selects base64; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "rust/Cargo.lock",
+    "ecosystem": "cargo",
+    "name": "bit-set",
+    "before": [],
+    "after": "0.8.0",
+    "latest": "0.11.1",
+    "reason": "fancy-regex@0.19.2 selects bit-set; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "rust/Cargo.lock",
+    "ecosystem": "cargo",
+    "name": "bit-vec",
+    "before": [],
+    "after": "0.8.0",
+    "latest": "0.10.2",
+    "reason": "bit-set@0.8.0 selects bit-vec; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "rust/Cargo.lock",
+    "ecosystem": "cargo",
+    "name": "fancy-regex",
+    "before": [],
+    "after": "0.19.2",
+    "latest": "0.20.2",
+    "reason": "tiktoken-rs@0.12.1 selects fancy-regex; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "experiments/issue-316/rust-timing/Cargo.lock",
+    "ecosystem": "cargo",
+    "name": "links-notation",
+    "before": [
+      "0.21.1"
+    ],
+    "after": "0.21.1",
+    "latest": "0.31.3",
+    "reason": "Issue-316 immutable before-version performance baseline; upgrading invalidates the comparison"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/Cargo.lock",
+    "ecosystem": "cargo",
+    "name": "windows-link",
+    "before": [],
+    "after": "0.2.1",
+    "latest": "0.100.0",
+    "reason": "windows-sys@0.61.2 selects windows-link; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/Cargo.lock",
+    "ecosystem": "cargo",
+    "name": "windows-link",
+    "before": [],
+    "after": "0.2.1",
+    "latest": "0.100.0",
+    "reason": "windows-sys@0.61.2 selects windows-link; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "benchmarks/php/composer.lock",
+    "ecosystem": "composer",
+    "name": "link-foundation/links-notation",
+    "before": [],
+    "after": "0.31.4",
+    "latest": "0.31.3",
+    "reason": "Local path dependency on this PR's 0.31.4 source; registry still serves the previous release"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@actions/http-client",
+    "before": [],
+    "after": "3.0.2",
+    "latest": "4.0.1",
+    "reason": "@actions/github requires @actions/http-client^3.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@actions/http-client",
+    "before": [],
+    "after": "3.0.2",
+    "latest": "4.0.1",
+    "reason": "@actions/github requires @actions/http-client^3.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@azure/core-lro",
+    "before": [],
+    "after": "2.7.2",
+    "latest": "3.4.2",
+    "reason": "@azure/storage-blob requires @azure/core-lro^2.2.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@azure/core-lro",
+    "before": [],
+    "after": "2.7.2",
+    "latest": "3.4.2",
+    "reason": "@azure/storage-blob requires @azure/core-lro^2.2.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@emnapi/core",
+    "before": [],
+    "after": "2.0.0-beta.2",
+    "latest": "1.11.3",
+    "reason": "@rolldown/binding-wasm32-wasi requires @emnapi/core2.0.0-beta.2; upstream selects a newer prerelease; stable dist-tag is older, not an upgrade"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@emnapi/runtime",
+    "before": [],
+    "after": "2.0.0-beta.2",
+    "latest": "1.11.3",
+    "reason": "@rolldown/binding-wasm32-wasi requires @emnapi/runtime2.0.0-beta.2; upstream selects a newer prerelease; stable dist-tag is older, not an upgrade"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/core",
+    "before": [],
+    "after": "0.19.2",
+    "latest": "0.20.0",
+    "reason": "@humanfs/node requires @humanfs/core^0.19.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/core",
+    "before": [],
+    "after": "0.19.2",
+    "latest": "0.20.0",
+    "reason": "@humanfs/node requires @humanfs/core^0.19.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/core",
+    "before": [],
+    "after": "0.19.2",
+    "latest": "0.20.0",
+    "reason": "@humanfs/node requires @humanfs/core^0.19.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/core",
+    "before": [
+      "0.19.2"
+    ],
+    "after": "0.19.2",
+    "latest": "0.20.0",
+    "reason": "@humanfs/node requires @humanfs/core^0.19.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/core",
+    "before": [
+      "0.19.2"
+    ],
+    "after": "0.19.2",
+    "latest": "0.20.0",
+    "reason": "@humanfs/node requires @humanfs/core^0.19.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/node",
+    "before": [],
+    "after": "0.16.8",
+    "latest": "0.17.0",
+    "reason": "eslint requires @humanfs/node^0.16.8; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/node",
+    "before": [],
+    "after": "0.16.8",
+    "latest": "0.17.0",
+    "reason": "eslint requires @humanfs/node^0.16.8; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/node",
+    "before": [],
+    "after": "0.16.8",
+    "latest": "0.17.0",
+    "reason": "eslint requires @humanfs/node^0.16.8; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/node",
+    "before": [
+      "0.16.8"
+    ],
+    "after": "0.16.8",
+    "latest": "0.17.0",
+    "reason": "eslint requires @humanfs/node^0.16.8; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/node",
+    "before": [
+      "0.16.8"
+    ],
+    "after": "0.16.8",
+    "latest": "0.17.0",
+    "reason": "eslint requires @humanfs/node^0.16.8; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/types",
+    "before": [],
+    "after": "0.15.0",
+    "latest": "0.16.0",
+    "reason": "@humanfs/core requires @humanfs/types^0.15.0; @humanfs/node requires @humanfs/types^0.15.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/types",
+    "before": [],
+    "after": "0.15.0",
+    "latest": "0.16.0",
+    "reason": "@humanfs/core requires @humanfs/types^0.15.0; @humanfs/node requires @humanfs/types^0.15.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/types",
+    "before": [],
+    "after": "0.15.0",
+    "latest": "0.16.0",
+    "reason": "@humanfs/core requires @humanfs/types^0.15.0; @humanfs/node requires @humanfs/types^0.15.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/types",
+    "before": [
+      "0.15.0"
+    ],
+    "after": "0.15.0",
+    "latest": "0.16.0",
+    "reason": "@humanfs/core requires @humanfs/types^0.15.0; @humanfs/node requires @humanfs/types^0.15.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@humanfs/types",
+    "before": [
+      "0.15.0"
+    ],
+    "after": "0.15.0",
+    "latest": "0.16.0",
+    "reason": "@humanfs/core requires @humanfs/types^0.15.0; @humanfs/node requires @humanfs/types^0.15.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@keyv/bigmap",
+    "before": [],
+    "after": "1.3.1",
+    "latest": "6.1.0",
+    "reason": "@cacheable/memory requires @keyv/bigmap^1.3.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@keyv/bigmap",
+    "before": [],
+    "after": "1.3.1",
+    "latest": "6.1.0",
+    "reason": "@cacheable/memory requires @keyv/bigmap^1.3.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@keyv/bigmap",
+    "before": [],
+    "after": "1.3.1",
+    "latest": "6.1.0",
+    "reason": "@cacheable/memory requires @keyv/bigmap^1.3.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@keyv/bigmap",
+    "before": [
+      "1.3.1"
+    ],
+    "after": "1.3.1",
+    "latest": "6.1.0",
+    "reason": "@cacheable/memory requires @keyv/bigmap^1.3.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@keyv/bigmap",
+    "before": [
+      "1.3.1"
+    ],
+    "after": "1.3.1",
+    "latest": "6.1.0",
+    "reason": "@cacheable/memory requires @keyv/bigmap^1.3.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@napi-rs/wasm-runtime",
+    "before": [],
+    "after": "1.2.6",
+    "latest": "1.2.7",
+    "reason": "@rolldown/binding-wasm32-wasi requires @napi-rs/wasm-runtime1.2.6; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/openapi-types",
+    "before": [],
+    "after": "27.0.0",
+    "latest": "29.0.1",
+    "reason": "@octokit/types requires @octokit/openapi-types^27.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/openapi-types",
+    "before": [],
+    "after": "28.0.0",
+    "latest": "29.0.1",
+    "reason": "@octokit/types requires @octokit/openapi-types^28.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/openapi-types",
+    "before": [],
+    "after": "27.0.0",
+    "latest": "29.0.1",
+    "reason": "@octokit/types requires @octokit/openapi-types^27.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/openapi-types",
+    "before": [],
+    "after": "28.0.0",
+    "latest": "29.0.1",
+    "reason": "@octokit/types requires @octokit/openapi-types^28.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/plugin-paginate-rest",
+    "before": [],
+    "after": "14.0.0",
+    "latest": "16.0.0",
+    "reason": "@actions/github requires @octokit/plugin-paginate-rest^14.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/plugin-paginate-rest",
+    "before": [],
+    "after": "14.0.0",
+    "latest": "16.0.0",
+    "reason": "@actions/github requires @octokit/plugin-paginate-rest^14.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/plugin-rest-endpoint-methods",
+    "before": [],
+    "after": "17.0.0",
+    "latest": "18.0.0",
+    "reason": "@actions/github requires @octokit/plugin-rest-endpoint-methods^17.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/plugin-rest-endpoint-methods",
+    "before": [],
+    "after": "17.0.0",
+    "latest": "18.0.0",
+    "reason": "@actions/github requires @octokit/plugin-rest-endpoint-methods^17.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/types",
+    "before": [],
+    "after": "16.0.0",
+    "latest": "18.0.0",
+    "reason": "@octokit/plugin-paginate-rest requires @octokit/types^16.0.0; @octokit/plugin-rest-endpoint-methods requires @octokit/types^16.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/types",
+    "before": [],
+    "after": "17.0.0",
+    "latest": "18.0.0",
+    "reason": "@octokit/plugin-retry requires @octokit/types^17.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/types",
+    "before": [],
+    "after": "16.0.0",
+    "latest": "18.0.0",
+    "reason": "@octokit/plugin-paginate-rest requires @octokit/types^16.0.0; @octokit/plugin-rest-endpoint-methods requires @octokit/types^16.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@octokit/types",
+    "before": [],
+    "after": "17.0.0",
+    "latest": "18.0.0",
+    "reason": "@octokit/plugin-retry requires @octokit/types^17.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@oxc-project/types",
+    "before": [
+      "0.156.0"
+    ],
+    "after": "0.156.0",
+    "latest": "0.158.0",
+    "reason": "rolldown requires @oxc-project/types=0.156.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@peggyjs/from-mem",
+    "before": [],
+    "after": "3.1.3",
+    "latest": "4.0.0",
+    "reason": "peggy requires @peggyjs/from-mem3.1.3; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@pnpm/deps.graph-sequencer",
+    "before": [],
+    "after": "1100.0.1",
+    "latest": "1101.0.1",
+    "reason": "@changesets/cli requires @pnpm/deps.graph-sequencer^1100.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@pnpm/deps.graph-sequencer",
+    "before": [],
+    "after": "1100.0.1",
+    "latest": "1101.0.1",
+    "reason": "@changesets/cli requires @pnpm/deps.graph-sequencer^1100.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-android-arm-eabi",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-android-arm-eabi1.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-android-arm64",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-android-arm641.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-darwin-arm64",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-darwin-arm641.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-darwin-x64",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-darwin-x641.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-freebsd-x64",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-freebsd-x641.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-linux-arm-gnueabihf",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-linux-arm-gnueabihf1.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-linux-arm64-gnu",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-linux-arm64-gnu1.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-linux-arm64-musl",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-linux-arm64-musl1.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-linux-ppc64-gnu",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-linux-ppc64-gnu1.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-linux-s390x-gnu",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-linux-s390x-gnu1.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-linux-x64-gnu",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-linux-x64-gnu1.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-linux-x64-musl",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-linux-x64-musl1.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-openharmony-arm64",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-openharmony-arm641.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-wasm32-wasi",
+    "before": [],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-wasm32-wasi1.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-win32-arm64-msvc",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-win32-arm64-msvc1.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@rolldown/binding-win32-x64-msvc",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "rolldown requires @rolldown/binding-win32-x64-msvc1.2.19; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@sec-ant/readable-stream",
+    "before": [],
+    "after": "0.4.1",
+    "latest": "0.7.1",
+    "reason": "get-stream requires @sec-ant/readable-stream^0.4.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@types/node",
+    "before": [],
+    "after": "25.9.9",
+    "latest": "26.6.6",
+    "reason": "apache-arrow requires @types/node^25.2.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@types/node",
+    "before": [],
+    "after": "25.9.9",
+    "latest": "26.6.6",
+    "reason": "apache-arrow requires @types/node^25.2.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ajv",
+    "before": [],
+    "after": "6.15.0",
+    "latest": "8.20.0",
+    "reason": "eslint requires ajv^6.14.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ajv",
+    "before": [],
+    "after": "6.15.0",
+    "latest": "8.20.0",
+    "reason": "eslint requires ajv^6.14.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ajv",
+    "before": [],
+    "after": "6.15.0",
+    "latest": "8.20.0",
+    "reason": "eslint requires ajv^6.14.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ajv",
+    "before": [
+      "6.15.0"
+    ],
+    "after": "6.15.0",
+    "latest": "8.20.0",
+    "reason": "eslint requires ajv^6.14.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ajv",
+    "before": [
+      "6.15.0"
+    ],
+    "after": "6.15.0",
+    "latest": "8.20.0",
+    "reason": "eslint requires ajv^6.14.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ansi-styles",
+    "before": [],
+    "after": "6.2.3",
+    "latest": "7.0.0",
+    "reason": "wrap-ansi requires ansi-styles^6.2.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "archiver",
+    "before": [],
+    "after": "7.0.1",
+    "latest": "8.0.0",
+    "reason": "@actions/artifact requires archiver^7.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "archiver",
+    "before": [],
+    "after": "7.0.1",
+    "latest": "8.0.0",
+    "reason": "@actions/artifact requires archiver^7.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "balanced-match",
+    "before": [],
+    "after": "4.0.4",
+    "latest": "5.0.0",
+    "reason": "brace-expansion requires balanced-match^4.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "balanced-match",
+    "before": [],
+    "after": "4.0.4",
+    "latest": "5.0.0",
+    "reason": "brace-expansion requires balanced-match^4.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "balanced-match",
+    "before": [],
+    "after": "1.0.2",
+    "latest": "5.0.0",
+    "reason": "brace-expansion requires balanced-match^1.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "balanced-match",
+    "before": [],
+    "after": "4.0.4",
+    "latest": "5.0.0",
+    "reason": "brace-expansion requires balanced-match^4.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "balanced-match",
+    "before": [],
+    "after": "4.0.4",
+    "latest": "5.0.0",
+    "reason": "brace-expansion requires balanced-match^4.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "balanced-match",
+    "before": [],
+    "after": "1.0.2",
+    "latest": "5.0.0",
+    "reason": "brace-expansion requires balanced-match^1.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "balanced-match",
+    "before": [],
+    "after": "4.0.4",
+    "latest": "5.0.0",
+    "reason": "brace-expansion requires balanced-match^4.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "balanced-match",
+    "before": [
+      "4.0.4"
+    ],
+    "after": "4.0.4",
+    "latest": "5.0.0",
+    "reason": "brace-expansion requires balanced-match^4.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "balanced-match",
+    "before": [
+      "4.0.4"
+    ],
+    "after": "4.0.4",
+    "latest": "5.0.0",
+    "reason": "brace-expansion requires balanced-match^4.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "kotlin/kotlin-js-store/yarn.lock",
+    "ecosystem": "npm",
+    "name": "balanced-match",
+    "before": [
+      "4.0.4"
+    ],
+    "after": "4.0.4",
+    "latest": "5.0.0",
+    "reason": "Yarn selectors: balanced-match@^4.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "brace-expansion",
+    "before": [],
+    "after": "2.1.8",
+    "latest": "5.0.13",
+    "reason": "minimatch requires brace-expansion^2.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "brace-expansion",
+    "before": [],
+    "after": "2.1.8",
+    "latest": "5.0.13",
+    "reason": "minimatch requires brace-expansion^2.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "kotlin/kotlin-js-store/yarn.lock",
+    "ecosystem": "npm",
+    "name": "chokidar",
+    "before": [
+      "4.0.3"
+    ],
+    "after": "5.0.0",
+    "latest": "6.0.0",
+    "reason": "Yarn selectors: chokidar@^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "commander",
+    "before": [],
+    "after": "14.0.3",
+    "latest": "15.1.0",
+    "reason": "peggy requires commander^14.0.3; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "commander",
+    "before": [
+      "14.0.3"
+    ],
+    "after": "14.0.3",
+    "latest": "15.1.0",
+    "reason": "peggy requires commander^14.0.3; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "compress-commons",
+    "before": [],
+    "after": "6.0.2",
+    "latest": "7.0.1",
+    "reason": "zip-stream requires compress-commons^6.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "compress-commons",
+    "before": [],
+    "after": "6.0.2",
+    "latest": "7.0.1",
+    "reason": "zip-stream requires compress-commons^6.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "crc32-stream",
+    "before": [],
+    "after": "6.0.0",
+    "latest": "7.0.1",
+    "reason": "compress-commons requires crc32-stream^6.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "crc32-stream",
+    "before": [],
+    "after": "6.0.0",
+    "latest": "7.0.1",
+    "reason": "compress-commons requires crc32-stream^6.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "emoji-regex",
+    "before": [],
+    "after": "10.6.0",
+    "latest": "11.0.0",
+    "reason": "string-width requires emoji-regex^10.3.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "escape-string-regexp",
+    "before": [],
+    "after": "4.0.0",
+    "latest": "5.0.0",
+    "reason": "eslint requires escape-string-regexp^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "escape-string-regexp",
+    "before": [],
+    "after": "4.0.0",
+    "latest": "5.0.0",
+    "reason": "eslint requires escape-string-regexp^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "escape-string-regexp",
+    "before": [],
+    "after": "4.0.0",
+    "latest": "5.0.0",
+    "reason": "eslint requires escape-string-regexp^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "escape-string-regexp",
+    "before": [
+      "4.0.0"
+    ],
+    "after": "4.0.0",
+    "latest": "5.0.0",
+    "reason": "eslint requires escape-string-regexp^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "escape-string-regexp",
+    "before": [
+      "4.0.0"
+    ],
+    "after": "4.0.0",
+    "latest": "5.0.0",
+    "reason": "eslint requires escape-string-regexp^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "eslint-visitor-keys",
+    "before": [],
+    "after": "3.4.3",
+    "latest": "5.0.1",
+    "reason": "@eslint-community/eslint-utils requires eslint-visitor-keys^3.4.3; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "eslint-visitor-keys",
+    "before": [],
+    "after": "3.4.3",
+    "latest": "5.0.1",
+    "reason": "@eslint-community/eslint-utils requires eslint-visitor-keys^3.4.3; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "eslint-visitor-keys",
+    "before": [],
+    "after": "3.4.3",
+    "latest": "5.0.1",
+    "reason": "@eslint-community/eslint-utils requires eslint-visitor-keys^3.4.3; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "eslint-visitor-keys",
+    "before": [
+      "3.4.3",
+      "5.0.1"
+    ],
+    "after": "3.4.3",
+    "latest": "5.0.1",
+    "reason": "@eslint-community/eslint-utils requires eslint-visitor-keys^3.4.3; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "eslint-visitor-keys",
+    "before": [
+      "3.4.3",
+      "5.0.1"
+    ],
+    "after": "3.4.3",
+    "latest": "5.0.1",
+    "reason": "@eslint-community/eslint-utils requires eslint-visitor-keys^3.4.3; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "event-target-shim",
+    "before": [],
+    "after": "5.0.1",
+    "latest": "6.0.2",
+    "reason": "abort-controller requires event-target-shim^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "event-target-shim",
+    "before": [],
+    "after": "5.0.1",
+    "latest": "6.0.2",
+    "reason": "abort-controller requires event-target-shim^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "fast-levenshtein",
+    "before": [],
+    "after": "2.0.6",
+    "latest": "3.0.0",
+    "reason": "optionator requires fast-levenshtein^2.0.6; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "fast-levenshtein",
+    "before": [],
+    "after": "2.0.6",
+    "latest": "3.0.0",
+    "reason": "optionator requires fast-levenshtein^2.0.6; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "fast-levenshtein",
+    "before": [],
+    "after": "2.0.6",
+    "latest": "3.0.0",
+    "reason": "optionator requires fast-levenshtein^2.0.6; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "fast-levenshtein",
+    "before": [
+      "2.0.6"
+    ],
+    "after": "2.0.6",
+    "latest": "3.0.0",
+    "reason": "optionator requires fast-levenshtein^2.0.6; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "fast-levenshtein",
+    "before": [
+      "2.0.6"
+    ],
+    "after": "2.0.6",
+    "latest": "3.0.0",
+    "reason": "optionator requires fast-levenshtein^2.0.6; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "find-up",
+    "before": [],
+    "after": "5.0.0",
+    "latest": "8.0.0",
+    "reason": "eslint requires find-up^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "find-up",
+    "before": [],
+    "after": "5.0.0",
+    "latest": "8.0.0",
+    "reason": "eslint requires find-up^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "find-up",
+    "before": [],
+    "after": "5.0.0",
+    "latest": "8.0.0",
+    "reason": "eslint requires find-up^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "find-up",
+    "before": [
+      "5.0.0"
+    ],
+    "after": "5.0.0",
+    "latest": "8.0.0",
+    "reason": "eslint requires find-up^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "find-up",
+    "before": [
+      "5.0.0"
+    ],
+    "after": "5.0.0",
+    "latest": "8.0.0",
+    "reason": "eslint requires find-up^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "kotlin/kotlin-js-store/yarn.lock",
+    "ecosystem": "npm",
+    "name": "has-flag",
+    "before": [
+      "4.0.0"
+    ],
+    "after": "4.0.0",
+    "latest": "5.0.1",
+    "reason": "Yarn selectors: has-flag@^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hashery",
+    "before": [],
+    "after": "1.5.1",
+    "latest": "3.0.6",
+    "reason": "@cacheable/utils requires hashery^1.5.1; @keyv/bigmap requires hashery^1.4.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hashery",
+    "before": [],
+    "after": "1.5.1",
+    "latest": "3.0.6",
+    "reason": "@cacheable/utils requires hashery^1.5.1; @keyv/bigmap requires hashery^1.4.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hashery",
+    "before": [],
+    "after": "1.5.1",
+    "latest": "3.0.6",
+    "reason": "@cacheable/utils requires hashery^1.5.1; @keyv/bigmap requires hashery^1.4.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hashery",
+    "before": [
+      "1.5.1"
+    ],
+    "after": "1.5.1",
+    "latest": "3.0.6",
+    "reason": "@cacheable/utils requires hashery^1.5.1; @keyv/bigmap requires hashery^1.4.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hashery",
+    "before": [
+      "1.5.1"
+    ],
+    "after": "1.5.1",
+    "latest": "3.0.6",
+    "reason": "@cacheable/utils requires hashery^1.5.1; @keyv/bigmap requires hashery^1.4.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hookified",
+    "before": [],
+    "after": "1.15.1",
+    "latest": "3.1.0",
+    "reason": "@cacheable/memory requires hookified^1.15.1; @keyv/bigmap requires hookified^1.15.0; cacheable requires hookified^1.15.0; flat-cache requires hookified^1.15.0; hashery requires hookified^1.15.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hookified",
+    "before": [],
+    "after": "2.2.0",
+    "latest": "3.1.0",
+    "reason": "qified requires hookified^2.1.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hookified",
+    "before": [],
+    "after": "1.15.1",
+    "latest": "3.1.0",
+    "reason": "@cacheable/memory requires hookified^1.15.1; @keyv/bigmap requires hookified^1.15.0; cacheable requires hookified^1.15.0; flat-cache requires hookified^1.15.0; hashery requires hookified^1.15.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hookified",
+    "before": [],
+    "after": "2.2.0",
+    "latest": "3.1.0",
+    "reason": "qified requires hookified^2.1.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hookified",
+    "before": [],
+    "after": "1.15.1",
+    "latest": "3.1.0",
+    "reason": "@cacheable/memory requires hookified^1.15.1; @keyv/bigmap requires hookified^1.15.0; cacheable requires hookified^1.15.0; flat-cache requires hookified^1.15.0; hashery requires hookified^1.15.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hookified",
+    "before": [],
+    "after": "2.2.0",
+    "latest": "3.1.0",
+    "reason": "qified requires hookified^2.1.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hookified",
+    "before": [
+      "1.15.1",
+      "2.2.0"
+    ],
+    "after": "1.15.1",
+    "latest": "3.1.0",
+    "reason": "@cacheable/memory requires hookified^1.15.1; @keyv/bigmap requires hookified^1.15.0; cacheable requires hookified^1.15.0; flat-cache requires hookified^1.15.0; hashery requires hookified^1.15.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hookified",
+    "before": [
+      "1.15.1",
+      "2.2.0"
+    ],
+    "after": "2.2.0",
+    "latest": "3.1.0",
+    "reason": "qified requires hookified^2.1.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hookified",
+    "before": [
+      "1.15.1",
+      "2.2.0"
+    ],
+    "after": "1.15.1",
+    "latest": "3.1.0",
+    "reason": "@cacheable/memory requires hookified^1.15.1; @keyv/bigmap requires hookified^1.15.0; cacheable requires hookified^1.15.0; flat-cache requires hookified^1.15.0; hashery requires hookified^1.15.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "hookified",
+    "before": [
+      "1.15.1",
+      "2.2.0"
+    ],
+    "after": "2.2.0",
+    "latest": "3.1.0",
+    "reason": "qified requires hookified^2.1.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ignore",
+    "before": [],
+    "after": "5.3.2",
+    "latest": "7.0.14",
+    "reason": "eslint requires ignore^5.2.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ignore",
+    "before": [],
+    "after": "5.3.2",
+    "latest": "7.0.14",
+    "reason": "eslint requires ignore^5.2.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ignore",
+    "before": [],
+    "after": "5.3.2",
+    "latest": "7.0.14",
+    "reason": "eslint requires ignore^5.2.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ignore",
+    "before": [
+      "5.3.2"
+    ],
+    "after": "5.3.2",
+    "latest": "7.0.14",
+    "reason": "eslint requires ignore^5.2.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ignore",
+    "before": [
+      "5.3.2"
+    ],
+    "after": "5.3.2",
+    "latest": "7.0.14",
+    "reason": "eslint requires ignore^5.2.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "is-stream",
+    "before": [],
+    "after": "2.0.1",
+    "latest": "4.0.1",
+    "reason": "archiver-utils requires is-stream^2.0.1; compress-commons requires is-stream^2.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "is-stream",
+    "before": [],
+    "after": "2.0.1",
+    "latest": "4.0.1",
+    "reason": "archiver-utils requires is-stream^2.0.1; compress-commons requires is-stream^2.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "kotlin/kotlin-js-store/yarn.lock",
+    "ecosystem": "npm",
+    "name": "is-unicode-supported",
+    "before": [
+      "0.1.0"
+    ],
+    "after": "0.1.0",
+    "latest": "2.1.0",
+    "reason": "Yarn selectors: is-unicode-supported@^0.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "isarray",
+    "before": [],
+    "after": "1.0.0",
+    "latest": "2.0.5",
+    "reason": "readable-stream requires isarray~1.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "isarray",
+    "before": [],
+    "after": "1.0.0",
+    "latest": "2.0.5",
+    "reason": "readable-stream requires isarray~1.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "isexe",
+    "before": [],
+    "after": "2.0.0",
+    "latest": "4.0.0",
+    "reason": "which requires isexe^2.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "isexe",
+    "before": [],
+    "after": "2.0.0",
+    "latest": "4.0.0",
+    "reason": "which requires isexe^2.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "isexe",
+    "before": [],
+    "after": "2.0.0",
+    "latest": "4.0.0",
+    "reason": "which requires isexe^2.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "isexe",
+    "before": [
+      "2.0.0"
+    ],
+    "after": "2.0.0",
+    "latest": "4.0.0",
+    "reason": "which requires isexe^2.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "isexe",
+    "before": [
+      "2.0.0"
+    ],
+    "after": "2.0.0",
+    "latest": "4.0.0",
+    "reason": "which requires isexe^2.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "json-schema-traverse",
+    "before": [],
+    "after": "0.4.1",
+    "latest": "1.0.0",
+    "reason": "ajv requires json-schema-traverse^0.4.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "json-schema-traverse",
+    "before": [],
+    "after": "0.4.1",
+    "latest": "1.0.0",
+    "reason": "ajv requires json-schema-traverse^0.4.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "json-schema-traverse",
+    "before": [],
+    "after": "0.4.1",
+    "latest": "1.0.0",
+    "reason": "ajv requires json-schema-traverse^0.4.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "json-schema-traverse",
+    "before": [
+      "0.4.1"
+    ],
+    "after": "0.4.1",
+    "latest": "1.0.0",
+    "reason": "ajv requires json-schema-traverse^0.4.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "json-schema-traverse",
+    "before": [
+      "0.4.1"
+    ],
+    "after": "0.4.1",
+    "latest": "1.0.0",
+    "reason": "ajv requires json-schema-traverse^0.4.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "keyv",
+    "before": [],
+    "after": "5.6.0",
+    "latest": "6.1.0",
+    "reason": "@cacheable/memory requires keyv^5.6.0; @cacheable/utils requires keyv^5.6.0; cacheable requires keyv^5.6.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "keyv",
+    "before": [],
+    "after": "5.6.0",
+    "latest": "6.1.0",
+    "reason": "@cacheable/memory requires keyv^5.6.0; @cacheable/utils requires keyv^5.6.0; cacheable requires keyv^5.6.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "keyv",
+    "before": [],
+    "after": "5.6.0",
+    "latest": "6.1.0",
+    "reason": "@cacheable/memory requires keyv^5.6.0; @cacheable/utils requires keyv^5.6.0; cacheable requires keyv^5.6.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "keyv",
+    "before": [
+      "5.6.0"
+    ],
+    "after": "5.6.0",
+    "latest": "6.1.0",
+    "reason": "@cacheable/memory requires keyv^5.6.0; @cacheable/utils requires keyv^5.6.0; cacheable requires keyv^5.6.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "keyv",
+    "before": [
+      "5.6.0"
+    ],
+    "after": "5.6.0",
+    "latest": "6.1.0",
+    "reason": "@cacheable/memory requires keyv^5.6.0; @cacheable/utils requires keyv^5.6.0; cacheable requires keyv^5.6.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "links-notation",
+    "before": [],
+    "after": "0.11.2",
+    "latest": "0.31.3",
+    "reason": "lino-env requires links-notation^0.11.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "links-notation",
+    "before": [],
+    "after": "0.13.0",
+    "latest": "0.31.3",
+    "reason": "meta-language requires links-notation0.13.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "locate-path",
+    "before": [],
+    "after": "6.0.0",
+    "latest": "8.0.0",
+    "reason": "find-up requires locate-path^6.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "locate-path",
+    "before": [],
+    "after": "6.0.0",
+    "latest": "8.0.0",
+    "reason": "find-up requires locate-path^6.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "locate-path",
+    "before": [],
+    "after": "6.0.0",
+    "latest": "8.0.0",
+    "reason": "find-up requires locate-path^6.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "locate-path",
+    "before": [
+      "6.0.0"
+    ],
+    "after": "6.0.0",
+    "latest": "8.0.0",
+    "reason": "find-up requires locate-path^6.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "locate-path",
+    "before": [
+      "6.0.0"
+    ],
+    "after": "6.0.0",
+    "latest": "8.0.0",
+    "reason": "find-up requires locate-path^6.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "minimatch",
+    "before": [],
+    "after": "5.1.9",
+    "latest": "11.0.8",
+    "reason": "readdir-glob requires minimatch^5.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "minimatch",
+    "before": [],
+    "after": "5.1.9",
+    "latest": "11.0.8",
+    "reason": "readdir-glob requires minimatch^5.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "mkdirp",
+    "before": [],
+    "after": "0.5.6",
+    "latest": "3.0.1",
+    "reason": "unzip-stream requires mkdirp^0.5.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "mkdirp",
+    "before": [],
+    "after": "0.5.6",
+    "latest": "3.0.1",
+    "reason": "unzip-stream requires mkdirp^0.5.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "nanoid",
+    "before": [
+      "3.3.20"
+    ],
+    "after": "3.3.20",
+    "latest": "6.0.2",
+    "reason": "postcss requires nanoid^3.3.20; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "node-addon-api",
+    "before": [],
+    "after": "7.1.1",
+    "latest": "8.9.2",
+    "reason": "node-pty requires node-addon-api^7.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "p-limit",
+    "before": [],
+    "after": "3.1.0",
+    "latest": "7.3.3",
+    "reason": "p-locate requires p-limit^3.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "p-limit",
+    "before": [],
+    "after": "3.1.0",
+    "latest": "7.3.3",
+    "reason": "p-locate requires p-limit^3.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "p-limit",
+    "before": [],
+    "after": "3.1.0",
+    "latest": "7.3.3",
+    "reason": "p-locate requires p-limit^3.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "p-limit",
+    "before": [
+      "3.1.0"
+    ],
+    "after": "3.1.0",
+    "latest": "7.3.3",
+    "reason": "p-locate requires p-limit^3.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "p-limit",
+    "before": [
+      "3.1.0"
+    ],
+    "after": "3.1.0",
+    "latest": "7.3.3",
+    "reason": "p-locate requires p-limit^3.0.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "p-locate",
+    "before": [],
+    "after": "5.0.0",
+    "latest": "7.0.0",
+    "reason": "locate-path requires p-locate^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "p-locate",
+    "before": [],
+    "after": "5.0.0",
+    "latest": "7.0.0",
+    "reason": "locate-path requires p-locate^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "p-locate",
+    "before": [],
+    "after": "5.0.0",
+    "latest": "7.0.0",
+    "reason": "locate-path requires p-locate^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "p-locate",
+    "before": [
+      "5.0.0"
+    ],
+    "after": "5.0.0",
+    "latest": "7.0.0",
+    "reason": "locate-path requires p-locate^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "p-locate",
+    "before": [
+      "5.0.0"
+    ],
+    "after": "5.0.0",
+    "latest": "7.0.0",
+    "reason": "locate-path requires p-locate^5.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "parse-ms",
+    "before": [],
+    "after": "4.0.0",
+    "latest": "5.0.0",
+    "reason": "pretty-ms requires parse-ms^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "path-exists",
+    "before": [],
+    "after": "4.0.0",
+    "latest": "5.0.0",
+    "reason": "find-up requires path-exists^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "path-exists",
+    "before": [],
+    "after": "4.0.0",
+    "latest": "5.0.0",
+    "reason": "find-up requires path-exists^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "path-exists",
+    "before": [],
+    "after": "4.0.0",
+    "latest": "5.0.0",
+    "reason": "find-up requires path-exists^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "path-exists",
+    "before": [
+      "4.0.0"
+    ],
+    "after": "4.0.0",
+    "latest": "5.0.0",
+    "reason": "find-up requires path-exists^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "path-exists",
+    "before": [
+      "4.0.0"
+    ],
+    "after": "4.0.0",
+    "latest": "5.0.0",
+    "reason": "find-up requires path-exists^4.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "path-key",
+    "before": [],
+    "after": "3.1.1",
+    "latest": "4.0.0",
+    "reason": "cross-spawn requires path-key^3.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "path-key",
+    "before": [],
+    "after": "3.1.1",
+    "latest": "4.0.0",
+    "reason": "cross-spawn requires path-key^3.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "path-key",
+    "before": [],
+    "after": "3.1.1",
+    "latest": "4.0.0",
+    "reason": "cross-spawn requires path-key^3.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "path-key",
+    "before": [
+      "3.1.1"
+    ],
+    "after": "3.1.1",
+    "latest": "4.0.0",
+    "reason": "cross-spawn requires path-key^3.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "path-key",
+    "before": [
+      "3.1.1"
+    ],
+    "after": "3.1.1",
+    "latest": "4.0.0",
+    "reason": "cross-spawn requires path-key^3.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "peggy",
+    "before": [],
+    "after": "5.1.0",
+    "latest": "5.1.1",
+    "reason": "meta-language requires peggy5.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "pretty-ms",
+    "before": [],
+    "after": "9.3.1",
+    "latest": "10.0.0",
+    "reason": "execa requires pretty-ms^9.3.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "qified",
+    "before": [],
+    "after": "0.10.1",
+    "latest": "0.13.2",
+    "reason": "cacheable requires qified^0.10.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "qified",
+    "before": [],
+    "after": "0.10.1",
+    "latest": "0.13.2",
+    "reason": "cacheable requires qified^0.10.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "qified",
+    "before": [],
+    "after": "0.10.1",
+    "latest": "0.13.2",
+    "reason": "cacheable requires qified^0.10.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "qified",
+    "before": [
+      "0.10.1"
+    ],
+    "after": "0.10.1",
+    "latest": "0.13.2",
+    "reason": "cacheable requires qified^0.10.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "qified",
+    "before": [
+      "0.10.1"
+    ],
+    "after": "0.10.1",
+    "latest": "0.13.2",
+    "reason": "cacheable requires qified^0.10.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "readable-stream",
+    "before": [],
+    "after": "2.3.8",
+    "latest": "4.8.0",
+    "reason": "lazystream requires readable-stream^2.0.5; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "readable-stream",
+    "before": [],
+    "after": "2.3.8",
+    "latest": "4.8.0",
+    "reason": "lazystream requires readable-stream^2.0.5; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "readdir-glob",
+    "before": [],
+    "after": "1.1.3",
+    "latest": "4.0.0",
+    "reason": "archiver requires readdir-glob^1.1.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "readdir-glob",
+    "before": [],
+    "after": "1.1.3",
+    "latest": "4.0.0",
+    "reason": "archiver requires readdir-glob^1.1.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "rolldown",
+    "before": [
+      "1.2.16"
+    ],
+    "after": "1.2.19",
+    "latest": "1.3.2",
+    "reason": "vite requires rolldown~1.2.18; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "safe-buffer",
+    "before": [],
+    "after": "5.1.2",
+    "latest": "5.2.1",
+    "reason": "readable-stream requires safe-buffer~5.1.1; string_decoder requires safe-buffer~5.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "safe-buffer",
+    "before": [],
+    "after": "5.1.2",
+    "latest": "5.2.1",
+    "reason": "readable-stream requires safe-buffer~5.1.1; string_decoder requires safe-buffer~5.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "semver",
+    "before": [],
+    "after": "7.7.4",
+    "latest": "7.8.6",
+    "reason": "@peggyjs/from-mem requires semver7.7.4; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "shebang-regex",
+    "before": [],
+    "after": "3.0.0",
+    "latest": "4.0.0",
+    "reason": "shebang-command requires shebang-regex^3.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "shebang-regex",
+    "before": [],
+    "after": "3.0.0",
+    "latest": "4.0.0",
+    "reason": "shebang-command requires shebang-regex^3.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "shebang-regex",
+    "before": [],
+    "after": "3.0.0",
+    "latest": "4.0.0",
+    "reason": "shebang-command requires shebang-regex^3.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "shebang-regex",
+    "before": [
+      "3.0.0"
+    ],
+    "after": "3.0.0",
+    "latest": "4.0.0",
+    "reason": "shebang-command requires shebang-regex^3.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "shebang-regex",
+    "before": [
+      "3.0.0"
+    ],
+    "after": "3.0.0",
+    "latest": "4.0.0",
+    "reason": "shebang-command requires shebang-regex^3.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "kotlin/kotlin-js-store/yarn.lock",
+    "ecosystem": "npm",
+    "name": "source-map",
+    "before": [
+      "0.6.1"
+    ],
+    "after": "0.6.1",
+    "latest": "0.8.0",
+    "reason": "Yarn selectors: source-map@^0.6.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "source-map-generator",
+    "before": [],
+    "after": "2.0.6",
+    "latest": "2.0.7",
+    "reason": "peggy requires source-map-generator2.0.6; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "string-argv",
+    "before": [],
+    "after": "0.3.2",
+    "latest": "0.4.0",
+    "reason": "lint-staged requires string-argv^0.3.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "string-argv",
+    "before": [],
+    "after": "0.3.2",
+    "latest": "0.4.0",
+    "reason": "lint-staged requires string-argv^0.3.2; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "string-width",
+    "before": [],
+    "after": "7.2.0",
+    "latest": "9.0.0",
+    "reason": "cliui requires string-width^7.2.0; wrap-ansi requires string-width^7.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "string-width",
+    "before": [],
+    "after": "8.3.0",
+    "latest": "9.0.0",
+    "reason": "yargs requires string-width^8.2.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "string_decoder",
+    "before": [],
+    "after": "1.1.1",
+    "latest": "1.3.0",
+    "reason": "readable-stream requires string_decoder~1.1.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "string_decoder",
+    "before": [],
+    "after": "1.1.1",
+    "latest": "1.3.0",
+    "reason": "readable-stream requires string_decoder~1.1.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "kotlin/kotlin-js-store/yarn.lock",
+    "ecosystem": "npm",
+    "name": "supports-color",
+    "before": [
+      "7.2.0",
+      "8.1.1"
+    ],
+    "after": "8.1.1",
+    "latest": "11.0.0",
+    "reason": "Yarn selectors: supports-color@^8.1.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "traverse",
+    "before": [],
+    "after": "0.3.10",
+    "latest": "0.6.14",
+    "reason": "chainsaw requires traverse>=0.3.0 <0.4; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "traverse",
+    "before": [],
+    "after": "0.3.10",
+    "latest": "0.6.14",
+    "reason": "chainsaw requires traverse>=0.3.0 <0.4; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "undici",
+    "before": [],
+    "after": "6.29.1",
+    "latest": "8.12.4",
+    "reason": "@actions/github requires undici^6.23.0; @actions/http-client requires undici^6.23.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "undici",
+    "before": [],
+    "after": "6.29.1",
+    "latest": "8.12.4",
+    "reason": "@actions/github requires undici^6.23.0; @actions/http-client requires undici^6.23.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "undici-types",
+    "before": [],
+    "after": "8.9.0",
+    "latest": "8.12.4",
+    "reason": "@types/node requires undici-types~8.9.0; bun-types requires undici-types*; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "undici-types",
+    "before": [],
+    "after": "7.24.6",
+    "latest": "8.12.4",
+    "reason": "@types/node requires undici-types>=7.24.0 <7.24.7; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "undici-types",
+    "before": [],
+    "after": "7.24.6",
+    "latest": "8.12.4",
+    "reason": "@types/node requires undici-types>=7.24.0 <7.24.7; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "undici-types",
+    "before": [
+      "8.12.3",
+      "8.9.0"
+    ],
+    "after": "8.9.0",
+    "latest": "8.12.4",
+    "reason": "@types/node requires undici-types~8.9.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "unicorn-magic",
+    "before": [],
+    "after": "0.3.0",
+    "latest": "0.4.1",
+    "reason": "npm-run-path requires unicorn-magic^0.3.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "which",
+    "before": [],
+    "after": "2.0.2",
+    "latest": "7.0.0",
+    "reason": "cross-spawn requires which^2.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "which",
+    "before": [],
+    "after": "2.0.2",
+    "latest": "7.0.0",
+    "reason": "cross-spawn requires which^2.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "which",
+    "before": [],
+    "after": "2.0.2",
+    "latest": "7.0.0",
+    "reason": "cross-spawn requires which^2.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "which",
+    "before": [
+      "2.0.2"
+    ],
+    "after": "2.0.2",
+    "latest": "7.0.0",
+    "reason": "cross-spawn requires which^2.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "which",
+    "before": [
+      "2.0.2"
+    ],
+    "after": "2.0.2",
+    "latest": "7.0.0",
+    "reason": "cross-spawn requires which^2.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "wrap-ansi",
+    "before": [],
+    "after": "9.0.2",
+    "latest": "10.0.2",
+    "reason": "cliui requires wrap-ansi^9.0.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "yocto-queue",
+    "before": [],
+    "after": "0.1.0",
+    "latest": "1.2.2",
+    "reason": "p-limit requires yocto-queue^0.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
+    "ecosystem": "npm",
+    "name": "yocto-queue",
+    "before": [],
+    "after": "0.1.0",
+    "latest": "1.2.2",
+    "reason": "p-limit requires yocto-queue^0.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "yocto-queue",
+    "before": [],
+    "after": "0.1.0",
+    "latest": "1.2.2",
+    "reason": "p-limit requires yocto-queue^0.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "docs/website/package-lock.json",
+    "ecosystem": "npm",
+    "name": "yocto-queue",
+    "before": [
+      "0.1.0"
+    ],
+    "after": "0.1.0",
+    "latest": "1.2.2",
+    "reason": "p-limit requires yocto-queue^0.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "yocto-queue",
+    "before": [
+      "0.1.0"
+    ],
+    "after": "0.1.0",
+    "latest": "1.2.2",
+    "reason": "p-limit requires yocto-queue^0.1.0; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
+    "ecosystem": "npm",
+    "name": "zip-stream",
+    "before": [],
+    "after": "6.0.1",
+    "latest": "7.0.5",
+    "reason": "archiver requires zip-stream^6.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json",
+    "ecosystem": "npm",
+    "name": "zip-stream",
+    "before": [],
+    "after": "6.0.1",
+    "latest": "7.0.5",
+    "reason": "archiver requires zip-stream^6.0.1; latest is outside the parent-supported API range; native resolver retained this version"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "click",
+    "before": [],
+    "after": "8.5.0",
+    "latest": "8.5.1",
+    "reason": "Scriv 1.8.1 exact runtime requirement; native resolution rejects latest. Upstream nedbat/scriv#208"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/uv.lock",
+    "ecosystem": "pypi",
+    "name": "click",
+    "before": [],
+    "after": "8.5.0",
+    "latest": "8.5.1",
+    "reason": "Scriv 1.8.1 exact runtime requirement; native resolution rejects latest. Upstream nedbat/scriv#208"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "click",
+    "before": [],
+    "after": "8.5.0",
+    "latest": "8.5.1",
+    "reason": "Scriv 1.8.1 exact runtime requirement; native resolution rejects latest. Upstream nedbat/scriv#208"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/uv.lock",
+    "ecosystem": "pypi",
+    "name": "click",
+    "before": [],
+    "after": "8.5.0",
+    "latest": "8.5.1",
+    "reason": "Scriv 1.8.1 exact runtime requirement; native resolution rejects latest. Upstream nedbat/scriv#208"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "markdown-it-py",
+    "before": [],
+    "after": "4.2.0",
+    "latest": "4.3.0",
+    "reason": "Scriv 1.8.1 exact runtime requirement; native resolution rejects latest. Upstream nedbat/scriv#208"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/uv.lock",
+    "ecosystem": "pypi",
+    "name": "markdown-it-py",
+    "before": [],
+    "after": "4.2.0",
+    "latest": "4.3.0",
+    "reason": "Scriv 1.8.1 exact runtime requirement; native resolution rejects latest. Upstream nedbat/scriv#208"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "markdown-it-py",
+    "before": [],
+    "after": "4.2.0",
+    "latest": "4.3.0",
+    "reason": "Scriv 1.8.1 exact runtime requirement; native resolution rejects latest. Upstream nedbat/scriv#208"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/uv.lock",
+    "ecosystem": "pypi",
+    "name": "markdown-it-py",
+    "before": [],
+    "after": "4.2.0",
+    "latest": "4.3.0",
+    "reason": "Scriv 1.8.1 exact runtime requirement; native resolution rejects latest. Upstream nedbat/scriv#208"
+  }
+]

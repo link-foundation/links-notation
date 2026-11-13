@@ -1,0 +1,27 @@
+Fixes #405
+
+Refresh dependencies, native locks and toolchain selections across all ten language implementations, benchmarks, examples, experiments and the archived templates requested by the issue. This includes or supersedes Dependabot PRs #361, #395, #396, #400, #401, #403 and #404, expands Dependabot manifest coverage, and prepares the normal 0.31.4 release trigger.
+
+The API migrations replace the separate Java formatter launcher with native Spotless, replace removed artifact glob internals with supported glob APIs, and keep Kotlin's reporter working with Mocha 12. Obsolete dependency overrides are removed. Current formatter dependencies eliminate three Logback advisories; the coupled embedded compiler remains at its supported version after a reproducing incompatibility test. Release auditing now retries transient transport failures with a finite bound while retaining HTTP, metadata and exhausted-retry failures.
+
+The [requirement ledger](https://github.com/link-foundation/links-notation/blob/issue-405-e18bfd98e937/dev/log/issues/405/pulls/406/PLAN.md), [analysis and migration review](https://github.com/link-foundation/links-notation/blob/issue-405-e18bfd98e937/dev/log/issues/405/pulls/406/analysis.md), [registry-backed dependency tables](https://github.com/link-foundation/links-notation/blob/issue-405-e18bfd98e937/dev/log/issues/405/pulls/406/research/dependency-tables.md) and [validation record](https://github.com/link-foundation/links-notation/blob/issue-405-e18bfd98e937/dev/log/issues/405/pulls/406/validation.md) contain the complete evidence. Native lock tables, 322 runtime selections, exact JVM graphs, retained-version reasons and compressed command logs are in the same folder.
+
+Local validation covers all ten active language suites plus their build/lint checks, docs/benchmark checks, 21 focused regression tests, workflow/security checks and parity. JavaScript: 368 tests; Java: 226; C#: 363; PHP: 278; C++: 383. Python and Swift retain one existing skip each. Native npm, Yarn, Cargo, Python, Composer, NuGet and Go audits and the final exact Maven/Gradle OSV graph have zero reported advisories. Hosted latest-head platform/matrix CI is still required; successful local checks are not a claim that it has passed.
+
+Reproduce the fixed failures with the saved before-fix regressions and final checks:
+
+```sh
+node --test experiments/issue-339/release-audit.test.mjs
+node --test experiments/issue-405/artifact-files.test.mjs
+node --test experiments/issue-405/mocha-reporter.test.mjs
+python3 experiments/issue-348/test_dependabot_check.py
+node scripts/ci/check-parity.mjs
+```
+
+The artifact fixtures require installing both archived action packages; the Mocha fixture requires Kotlin's generated Node dependencies. CI performs those installations. No shared syntax/API contract changes or removed language features are intended. No registry publication of 0.31.4 is claimed.
+
+New upstream reports/updates after searching existing issues: [Actions glob API](https://github.com/actions/toolkit/issues/2564#issuecomment-6865793053), [Kotlin Mocha reporter](https://github.com/Kotlin/kotlin-web-helpers/issues/19), [Scriv exact pins](https://github.com/nedbat/scriv/issues/208), [vcpkg benchmark port](https://github.com/microsoft/vcpkg/issues/55056), and [ktlint stable Logback graph](https://github.com/ktlint/ktlint/issues/3230#issuecomment-6867101340).
+
+Existing upstream causes rechecked: [Dependabot Maven configuration](https://github.com/dependabot/dependabot-core/issues/16797), [Yarn-only lock](https://github.com/dependabot/dependabot-core/issues/16798), [KGP Gradle warning](https://github.com/gradle/gradle/issues/39685), [ktlint compiler compatibility](https://github.com/ktlint/ktlint/issues/3403), [ktlint Unsafe warning](https://github.com/JLLeitschuh/ktlint-gradle/issues/944), [download-artifact Buffer](https://github.com/actions/download-artifact/issues/484), [deploy-pages punycode](https://github.com/actions/deploy-pages/issues/413), and [ESLint's fixed dependency graph](https://github.com/eslint/eslint/issues/21463). The twelve previously reported template issues are linked individually in the [preserved report index](https://github.com/link-foundation/links-notation/blob/issue-405-e18bfd98e937/dev/log/issues/377/pulls/378/upstream/URLS.txt).
+
+Unfinished criteria remain explicit: the KGP rootPackageJson input-tracking report is researched and drafted but unfiled because upstream requires an authenticated YouTrack account unavailable here; the local workaround remains. Full original archived application suites cannot be run from snapshots that omit their application source, custom rules and fixtures. Available native resolution/audits and contained policy tests were run. These limits are detailed in the validation record. Keep this PR unmerged while these criteria and hosted CI remain unresolved.

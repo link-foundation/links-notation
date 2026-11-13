@@ -1,0 +1,33 @@
+// Lightweight evidence task: resolve the tested JVM and formatter graphs,
+// without compiling sources or requesting unrelated native/Android artifacts.
+import groovy.json.JsonOutput
+
+gradle.projectsEvaluated {
+    rootProject.tasks.register('issue405ResolvedGraph') {
+        doLast {
+            def rows = []
+            rootProject.configurations.findAll {
+                it.canBeResolved && (it.name == 'jvmTestRuntimeClasspath' || it.name.startsWith('ktlint'))
+            }.each { configuration ->
+                configuration.incoming.resolutionResult.allDependencies.each { dependency ->
+                    if (dependency instanceof org.gradle.api.artifacts.result.ResolvedDependencyResult) {
+                        def id = dependency.selected.moduleVersion
+                        if (id != null) {
+                            rows.add([
+                                configuration: configuration.name,
+                                name: "${id.group}:${id.name}",
+                                after: id.version,
+                                parent: dependency.from.id.displayName,
+                                requested: dependency.requested.displayName
+                            ])
+                        }
+                    }
+                }
+            }
+            def output = new File(rootProject.projectDir.parentFile,
+                'dev/log/issues/405/pulls/406/research/gradle-resolved.json')
+            output.text = JsonOutput.prettyPrint(JsonOutput.toJson(rows.unique())) + '\n'
+            println "Saved ${rows.size()} native Gradle dependency edges"
+        }
+    }
+}
