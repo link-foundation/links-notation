@@ -57,6 +57,7 @@ updates:
       - "/benchmarks/python"
       - "/scripts/ci"
       - "/cpp/tools"
+      - "/csharp/tools"
     schedule:
       interval: "daily"
     groups:
