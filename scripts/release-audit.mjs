@@ -138,7 +138,24 @@ export async function audit({
   // or "skipped"), or "" when the caller does not know it. An aggregate
   // failure can mean partial publication; only skipped means no publisher ran.
   releaseResult = "",
+  pause = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)),
 }) {
+  // Registry connection resets are transient. HTTP failures and invalid
+  // metadata still fail immediately; an exhausted transport retry also fails.
+  const transport = fetcher;
+  fetcher = async (url, options) => {
+    for (let attempt = 1; ; attempt++) {
+      try {
+        return await transport(url, options);
+      } catch (error) {
+        const code = error.cause?.code;
+        if (attempt === 3 || !["ECONNRESET", "ETIMEDOUT", "EAI_AGAIN", "UND_ERR_CONNECT_TIMEOUT", "UND_ERR_SOCKET"].includes(code))
+          throw error;
+        if (verbose) log(`GET ${url}: ${code}; retry ${attempt}/2`);
+        await pause(attempt * 1000);
+      }
+    }
+  };
   const findings = [];
   const releaseSkipped = expectPublished && releaseResult === "skipped";
   let failures = 0;

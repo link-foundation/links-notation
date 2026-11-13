@@ -42,6 +42,33 @@ function mockFetch(change = () => null) {
 }
 const run = (fetcher, expectPublished = true) =>
   audit({ versions, fetcher, expectPublished, log: () => {} });
+test("a transient NuGet connection reset is retried before verification", async () => {
+  let attempts = 0;
+  const fetcher = mockFetch();
+  const result = await audit({ versions, log: () => {}, pause: async () => {},
+    fetcher: async (url, options) => {
+      if (url.includes("api.nuget.org") && url.endsWith("index.json") && ++attempts === 1)
+        throw new TypeError("fetch failed", { cause: { code: "ECONNRESET" } });
+      return fetcher(url, options);
+    },
+  });
+  assert.equal(attempts, 2);
+  assert.equal(result.failures, 0);
+});
+test("persistent transport errors fail after three attempts", async () => {
+  let attempts = 0;
+  const result = await audit({ versions, log: () => {}, pause: async () => {},
+    fetcher: mockFetch((url) => {
+      if (url.includes("api.nuget.org")) {
+        attempts++;
+        throw new TypeError("fetch failed", { cause: { code: "ETIMEDOUT" } });
+      }
+    }),
+  });
+  assert.equal(attempts, 3);
+  assert.equal(result.failures, 1);
+  assert.equal(result.findings.find((item) => item.language === "csharp").published, false);
+});
 test("a Packagist source mismatch fails even when the version and release exist", async () => {
   const result = await run(mockFetch((url) => url.includes('/git/ref/tags/')
     ? new Response(JSON.stringify({ object: { type: 'commit', sha: 'b'.repeat(40) } })) : null));
