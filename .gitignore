@@ -338,7 +338,6 @@ ASALocalRun/
 # rust
 rust/target/
 rust/**/target/
-rust/**/Cargo.lock
 target/venv/
 .venv/
 venv/
@@ -352,9 +351,7 @@ benchmarks/java/target/
 
 # PHP
 php/vendor/
-php/composer.lock
 benchmarks/php/vendor/
-benchmarks/php/composer.lock
 php/.phpunit.cache/
 php/.phpunit.result.cache
 
@@ -391,3 +388,14 @@ cpp/Testing/
 /.swiftpm/
 Package.resolved
 swift/.build/
+
+# Historical templates also create disposable dependency/build directories.
+**/node_modules/
+**/vendor/
+**/target/
+**/__pycache__/
+**/bin/Debug/
+**/bin/Release/
+**/obj/
+
+**/dist/
