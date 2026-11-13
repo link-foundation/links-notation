@@ -252,7 +252,7 @@ jobs:
           name: benchmark-output
           path: benchmarks
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: csharp/global.json
       - name: Parse and count in C#
@@ -316,7 +316,7 @@ jobs:
           name: benchmark-output
           path: benchmarks
       - name: Setup Java
-        uses: actions/setup-java@v6.1.0
+        uses: actions/setup-java@v6.2.0
         with:
           java-version: '25'
           distribution: 'temurin'
