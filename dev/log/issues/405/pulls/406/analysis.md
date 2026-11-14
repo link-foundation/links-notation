@@ -196,3 +196,22 @@ before it could report. Compression preserves the researched sources without
 treating upstream relative links and historical changelogs as maintained project
 documentation. Authored analysis, tables and primary-source links remain checked;
 no link-check exclusions or timeout increases were added.
+
+
+## Final artifact contract review
+
+The supported glob API migration also needs the original Actions pattern
+semantics. A plain ignore for a directory omits the directory entry but can
+still collect its children. Both archived copies now expand implicit directory
+descendants for positive and negative patterns, apply negative patterns only
+to preceding includes, and preserve later reinclusion, comments, tilde expansion
+and repeated-negation parity. Native glob options preserve the documented
+simple pattern syntax and Windows path/case behavior. The existing file-layout,
+symlink, hidden-file and missing-path fixture remains unchanged.
+
+The [official Actions glob documentation](https://github.com/actions/toolkit/blob/main/packages/glob/README.md)
+and traversal implementation were reviewed and saved as compressed snapshots.
+Four failing JS regressions reproduce the migration gap in both copies before
+the correction; all five artifact tests pass afterward. The existing upstream
+report comment was updated with this evidence and the supported-API proposal.
+No parser or shared ten-language syntax/API contract changes are introduced.

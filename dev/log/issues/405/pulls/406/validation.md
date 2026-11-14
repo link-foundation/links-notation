@@ -187,3 +187,39 @@ create its protected per-session directory. The restored C# suite then passes
 all 21 tests without the warning. This keeps directory verification enabled;
 no SDK/package downgrade or warning suppression is used. Full upstream text,
 comments and inspected screenshots are preserved with the research/logs.
+
+
+## Third CI round and final artifact regression
+
+Head `9317249dc454ba8bea9b52546bcd6baae4e95b87`, all six runs created
+2026-11-14 00:10:45 UTC. All six completed successfully before the next push:
+CI 43532397346, links 43532397141, bom-check 43532397108, dependency freshness
+43532397150, workflows 43532397089 and pages 43532397102. There were 87
+successful jobs and four existing conditional skips (benchmark publishing,
+release, Python publishing and Python release). This includes native Android,
+iOS/macOS, browser/differential and the remaining platform matrix. Skipped
+publishing is not registry delivery.
+
+`research/ci-round-3.tar.gz` preserves exact run/job metadata and targeted
+success logs for the prior root failures: PHP's native install/tests/distribution
+passed (CI-job-132253326079.log, test result line 297); Python 3.11 installs
+backports-tarfile and passes 443 tests plus one existing skip
+(CI-job-132253384465.log, lines 324 and 1018). The current minted executable
+and all three style checksums pass on Python 3.15; the PDF is generated and its
+artifact finalized (CI-job-132254423697.log, lines 899–935 and 1882–1927).
+
+Final diff review found a directory-exclusion regression in both artifact
+adapters. The expanded JS fixture failed four tests before the fix, including
+incorrectly included children of an excluded directory. Five artifact tests now
+pass, covering both copies' directory recursion, exclusion, ordered reinclusion,
+comments and tilde expansion plus the original layout/symlink/hidden-file cases.
+The active JS suite passes again (368 tests, 16,423 assertions); archived JS lint
+and formatting pass. Together with the release and Mocha checks there are 25
+focused regressions. `research/final-review-checks.tar.gz` preserves before/after
+and final local logs, fresh issue/comment/PR snapshots and the paginated diff
+review. Empty API-error outputs are excluded and failed exploratory commands
+are not counted as passing checks. Both archives have SHA-256 indexes.
+
+This correction requires one fresh exact-head CI run. The live PR checks and
+final PR description record that result without pretending the prior SHA tests
+an unpushed change. The YouTrack reporting blocker above remains unfinished.
