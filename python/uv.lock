@@ -125,7 +125,7 @@ wheels = [
 
 [[package]]
 name = "links-notation"
-version = "0.31.4"
+version = "0.31.5"
 source = { editable = "." }
 
 [package.optional-dependencies]

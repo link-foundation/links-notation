@@ -8,11 +8,11 @@
     "packages": [
         {
             "name": "link-foundation/links-notation",
-            "version": "0.31.4",
+            "version": "0.31.5",
             "dist": {
                 "type": "path",
                 "url": "../../php",
-                "reference": "257a76a0128a966298a203578ecd273dd9225edf"
+                "reference": "22ed33b7d5cd24783e0421195c1a73e234f2b4dd"
             },
             "require": {
                 "ext-mbstring": "*",

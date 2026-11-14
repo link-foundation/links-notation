@@ -5,7 +5,7 @@
   "description": "Example header-only C++ library of the AI-driven development pipeline template",
   "homepage": "https://github.com/link-foundation/cpp-ai-driven-development-pipeline-template",
   "license": "Unlicense",
-  "builtin-baseline": "414b5330a184ea5fbc6ca29f7960b189f6b0392f",
+  "builtin-baseline": "4702e381dbbd9b54d3f7e1eb565cd8981c1814cd",
   "features": {
     "tests": {
       "description": "Build the unit tests",
