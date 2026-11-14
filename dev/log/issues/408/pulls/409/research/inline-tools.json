@@ -1,0 +1,857 @@
+[
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "line": 223,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": ".github/workflows/js.yml",
+    "line": 174,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": ".github/workflows/publish-csharp.yml",
+    "line": 149,
+    "name": "docfx",
+    "before": "latest (unbounded)",
+    "after": "2.81.0",
+    "latest": "2.81.0",
+    "source": "https://api.nuget.org/v3-flatcontainer/docfx/index.json"
+  },
+  {
+    "path": ".github/workflows/publish-js.yml",
+    "line": 63,
+    "name": "npm",
+    "before": "12.2.2",
+    "after": "12.2.2",
+    "latest": "12.2.2",
+    "source": "https://registry.npmjs.org/npm/latest"
+  },
+  {
+    "path": ".github/workflows/python.yml",
+    "line": 41,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": ".github/workflows/python.yml",
+    "line": 79,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/docs.yml",
+    "line": 57,
+    "name": "docfx",
+    "before": "latest (unbounded)",
+    "after": "2.81.0",
+    "latest": "2.81.0",
+    "source": "https://api.nuget.org/v3-flatcontainer/docfx/index.json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "line": 138,
+    "name": "staticcheck",
+    "before": "latest",
+    "after": "2026.2.2",
+    "latest": "2026.2.2",
+    "source": "https://github.com/dominikh/go-tools/releases/tag/2026.2.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "line": 231,
+    "name": "Playwright image",
+    "before": "1.59.1-noble",
+    "after": "1.65.1-noble",
+    "latest": "1.65.1-noble",
+    "source": "https://mcr.microsoft.com/v2/playwright/manifests/v1.65.1-noble"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "line": 258,
+    "name": "browser-commander",
+    "before": "0.8.1",
+    "after": "0.34.1",
+    "latest": "0.34.1",
+    "source": "https://registry.npmjs.org/browser-commander/latest"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "line": 258,
+    "name": "playwright",
+    "before": "1.59.1",
+    "after": "1.65.1",
+    "latest": "1.65.1",
+    "source": "https://registry.npmjs.org/playwright/latest"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/docs.yml",
+    "line": 55,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 161,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 253,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 333,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 334,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 334,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 399,
+    "name": "scriv",
+    "before": "latest (unbounded)",
+    "after": "1.8.1",
+    "latest": "1.8.1",
+    "source": "https://pypi.org/pypi/scriv/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 536,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 537,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 537,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 660,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 661,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 661,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "line": 661,
+    "name": "scriv",
+    "before": "latest (unbounded)",
+    "after": "1.8.1",
+    "latest": "1.8.1",
+    "source": "https://pypi.org/pypi/scriv/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "line": 275,
+    "name": "docfx",
+    "before": "latest (unbounded)",
+    "after": "2.81.0",
+    "latest": "2.81.0",
+    "source": "https://api.nuget.org/v3-flatcontainer/docfx/index.json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "line": 65,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "line": 89,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "line": 90,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "line": 90,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "line": 111,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "line": 112,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "line": 112,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/docs.yml",
+    "line": 57,
+    "name": "docfx",
+    "before": "latest (unbounded)",
+    "after": "2.81.0",
+    "latest": "2.81.0",
+    "source": "https://api.nuget.org/v3-flatcontainer/docfx/index.json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "line": 138,
+    "name": "staticcheck",
+    "before": "latest",
+    "after": "2026.2.2",
+    "latest": "2026.2.2",
+    "source": "https://github.com/dominikh/go-tools/releases/tag/2026.2.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "line": 232,
+    "name": "Playwright image",
+    "before": "1.59.1-noble",
+    "after": "1.65.1-noble",
+    "latest": "1.65.1-noble",
+    "source": "https://mcr.microsoft.com/v2/playwright/manifests/v1.65.1-noble"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "line": 264,
+    "name": "browser-commander",
+    "before": "0.8.1",
+    "after": "0.34.1",
+    "latest": "0.34.1",
+    "source": "https://registry.npmjs.org/browser-commander/latest"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "line": 264,
+    "name": "playwright",
+    "before": "1.59.1",
+    "after": "1.65.1",
+    "latest": "1.65.1",
+    "source": "https://registry.npmjs.org/playwright/latest"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/docs.yml",
+    "line": 55,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 164,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 256,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 336,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 337,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 337,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 402,
+    "name": "scriv",
+    "before": "latest (unbounded)",
+    "after": "1.8.1",
+    "latest": "1.8.1",
+    "source": "https://pypi.org/pypi/scriv/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 538,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 539,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 539,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 661,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 662,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 662,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "line": 662,
+    "name": "scriv",
+    "before": "latest (unbounded)",
+    "after": "1.8.1",
+    "latest": "1.8.1",
+    "source": "https://pypi.org/pypi/scriv/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/docs.yml",
+    "line": 59,
+    "name": "docfx",
+    "before": "latest (unbounded)",
+    "after": "2.81.0",
+    "latest": "2.81.0",
+    "source": "https://api.nuget.org/v3-flatcontainer/docfx/index.json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "line": 142,
+    "name": "staticcheck",
+    "before": "latest",
+    "after": "2026.2.2",
+    "latest": "2026.2.2",
+    "source": "https://github.com/dominikh/go-tools/releases/tag/2026.2.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "line": 243,
+    "name": "Playwright image",
+    "before": "1.59.1-noble",
+    "after": "1.65.1-noble",
+    "latest": "1.65.1-noble",
+    "source": "https://mcr.microsoft.com/v2/playwright/manifests/v1.65.1-noble"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/scripts/setup-npm.mjs",
+    "line": 100,
+    "name": "npm",
+    "before": "11",
+    "after": "12.2.2",
+    "latest": "12.2.2",
+    "source": "https://registry.npmjs.org/npm/latest"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/scripts/setup-npm.mjs",
+    "line": 127,
+    "name": "npm",
+    "before": "11",
+    "after": "12.2.2",
+    "latest": "12.2.2",
+    "source": "https://registry.npmjs.org/npm/latest"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/scripts/setup-npm.mjs",
+    "line": 127,
+    "name": "npm",
+    "before": "11",
+    "after": "12.2.2",
+    "latest": "12.2.2",
+    "source": "https://registry.npmjs.org/npm/latest"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/scripts/setup-npm.mjs",
+    "line": 132,
+    "name": "npm",
+    "before": "11",
+    "after": "12.2.2",
+    "latest": "12.2.2",
+    "source": "https://registry.npmjs.org/npm/latest"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/scripts/setup-npm.mjs",
+    "line": 175,
+    "name": "npm",
+    "before": "11",
+    "after": "12.2.2",
+    "latest": "12.2.2",
+    "source": "https://registry.npmjs.org/npm/latest"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/docs.yml",
+    "line": 61,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 167,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 330,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 412,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 413,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 413,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 479,
+    "name": "scriv",
+    "before": "latest (unbounded)",
+    "after": "1.8.1",
+    "latest": "1.8.1",
+    "source": "https://pypi.org/pypi/scriv/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 627,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 628,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 628,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 760,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 761,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 761,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "line": 761,
+    "name": "scriv",
+    "before": "latest (unbounded)",
+    "after": "1.8.1",
+    "latest": "1.8.1",
+    "source": "https://pypi.org/pypi/scriv/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/docs.yml",
+    "line": 62,
+    "name": "docfx",
+    "before": "latest (unbounded)",
+    "after": "2.81.0",
+    "latest": "2.81.0",
+    "source": "https://api.nuget.org/v3-flatcontainer/docfx/index.json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "line": 142,
+    "name": "staticcheck",
+    "before": "2026.2.1",
+    "after": "2026.2.2",
+    "latest": "2026.2.2",
+    "source": "https://github.com/dominikh/go-tools/releases/tag/2026.2.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "line": 292,
+    "name": "Playwright image",
+    "before": "1.59.1-noble",
+    "after": "1.65.1-noble",
+    "latest": "1.65.1-noble",
+    "source": "https://mcr.microsoft.com/v2/playwright/manifests/v1.65.1-noble"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/scripts/setup-npm.mjs",
+    "line": 100,
+    "name": "npm",
+    "before": "11",
+    "after": "12.2.2",
+    "latest": "12.2.2",
+    "source": "https://registry.npmjs.org/npm/latest"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/scripts/setup-npm.mjs",
+    "line": 127,
+    "name": "npm",
+    "before": "11",
+    "after": "12.2.2",
+    "latest": "12.2.2",
+    "source": "https://registry.npmjs.org/npm/latest"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/scripts/setup-npm.mjs",
+    "line": 127,
+    "name": "npm",
+    "before": "11",
+    "after": "12.2.2",
+    "latest": "12.2.2",
+    "source": "https://registry.npmjs.org/npm/latest"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/scripts/setup-npm.mjs",
+    "line": 132,
+    "name": "npm",
+    "before": "11",
+    "after": "12.2.2",
+    "latest": "12.2.2",
+    "source": "https://registry.npmjs.org/npm/latest"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/scripts/setup-npm.mjs",
+    "line": 175,
+    "name": "npm",
+    "before": "11",
+    "after": "12.2.2",
+    "latest": "12.2.2",
+    "source": "https://registry.npmjs.org/npm/latest"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/docs.yml",
+    "line": 66,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 170,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 334,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 417,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 418,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 418,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 604,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 605,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 605,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 730,
+    "name": "pip",
+    "before": "latest (unbounded)",
+    "after": "26.3",
+    "latest": "26.3",
+    "source": "https://pypi.org/pypi/pip/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 731,
+    "name": "build",
+    "before": "latest (unbounded)",
+    "after": "1.6.1",
+    "latest": "1.6.1",
+    "source": "https://pypi.org/pypi/build/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 731,
+    "name": "twine",
+    "before": "latest (unbounded)",
+    "after": "7.0.0",
+    "latest": "7.0.0",
+    "source": "https://pypi.org/pypi/twine/json"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "line": 731,
+    "name": "scriv",
+    "before": "latest (unbounded)",
+    "after": "1.8.1",
+    "latest": "1.8.1",
+    "source": "https://pypi.org/pypi/scriv/json"
+  }
+]

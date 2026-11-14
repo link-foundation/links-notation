@@ -48,8 +48,9 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Set up JDK 27
-        uses: actions/setup-java@v6.2.0
+        uses: actions/setup-java@v6.3.0
         with:
+          problem-matcher: true
           java-version: "27.0.1"
           distribution: "temurin"
           cache: maven

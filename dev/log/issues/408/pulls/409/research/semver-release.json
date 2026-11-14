@@ -1,0 +1,132 @@
+{
+  "bin": {
+    "semver": "bin/semver.js"
+  },
+  "tap": {
+    "nyc-arg": [
+      "--exclude",
+      "tap-snapshots/**"
+    ],
+    "timeout": 30,
+    "coverage-map": "map.js"
+  },
+  "bugs": {
+    "url": "https://github.com/npm/node-semver/issues"
+  },
+  "dist": {
+    "shasum": "67c0cda133a3ceb6f70b803e67625bf969000424",
+    "tarball": "https://registry.npmjs.org/semver/-/semver-7.8.6.tgz",
+    "fileCount": 54,
+    "integrity": "sha512-9lpSSU4Mly3mrtruwLs1eLK6+gzbzqeBFwRNjIjE+9LuDpWdYctrQlQ3ej1Ilgi7gknpsTRnPoLP8DpCHqHIJw==",
+    "signatures": [
+      {
+        "sig": "MEUCIGCIEBQTOAHBGarcrR//HGrwyNdIKLr4la5Fts0JEBOSAiEAllrBW96kdyqyOM/3g91ioIfqjV2r8ltsu6PmJEQONyU=",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      },
+      {
+        "sig": "MEUCIQDAZnwgrj2Cx+pBC8yjYa0y/eIiGt5/twWLxMQrn/O7RgIgCFZLY4w2Hk5rxj8hyQ/FdvdOil5FuNV9UFaMzx9TPQY=",
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+      }
+    ],
+    "attestations": {
+      "url": "https://registry.npmjs.org/-/npm/v1/attestations/semver@7.8.6",
+      "provenance": {
+        "predicateType": "https://slsa.dev/provenance/v1"
+      }
+    },
+    "unpackedSize": 118657
+  },
+  "main": "index.js",
+  "name": "semver",
+  "author": {
+    "name": "GitHub Inc."
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "gitHead": "b37b033b585ad5e575afeccadb426ea41bc6cea4",
+  "license": "ISC",
+  "scripts": {
+    "lint": "npm run eslint",
+    "snap": "tap",
+    "test": "tap",
+    "eslint": "eslint \"**/*.{js,cjs,ts,mjs,jsx,tsx}\"",
+    "lintfix": "npm run eslint -- --fix",
+    "postlint": "template-oss-check",
+    "posttest": "npm run lint",
+    "template-oss-apply": "template-oss-apply --force"
+  },
+  "_npmUser": {
+    "name": "GitHub Actions",
+    "email": "npm-oidc-no-reply@github.com",
+    "trustedPublisher": {
+      "id": "github",
+      "oidcConfigId": "7a0c479c-0252-4ccd-81e5-c43546a76551"
+    }
+  },
+  "homepage": "https://github.com/npm/node-semver#readme",
+  "repository": {
+    "url": "git+https://github.com/npm/node-semver.git",
+    "type": "git"
+  },
+  "_npmVersion": "12.2.1",
+  "description": "The semantic version parser used by npm.",
+  "directories": {},
+  "maintainers": [
+    {
+      "name": "saquibkhan",
+      "email": "saquibkhan@github.com"
+    },
+    {
+      "name": "npm-cli-ops",
+      "email": "npm-cli+bot@github.com"
+    },
+    {
+      "name": "reggi",
+      "email": "reggi@github.com"
+    },
+    {
+      "name": "martinrrm",
+      "email": "martin.ruiz.mares@gmail.com"
+    }
+  ],
+  "templateOSS": {
+    "engines": ">=10",
+    "publish": "true",
+    "version": "5.0.0",
+    "distPaths": [
+      "classes/",
+      "functions/",
+      "internal/",
+      "ranges/",
+      "index.js",
+      "preload.js",
+      "range.bnf"
+    ],
+    "allowPaths": [
+      "/classes/",
+      "/functions/",
+      "/internal/",
+      "/ranges/",
+      "/index.js",
+      "/preload.js",
+      "/range.bnf",
+      "/benchmarks"
+    ],
+    "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten."
+  },
+  "_nodeVersion": "26.13.0",
+  "_hasShrinkwrap": false,
+  "devDependencies": {
+    "tap": "^16.0.0",
+    "benchmark": "^2.1.4",
+    "@npmcli/template-oss": "5.0.0",
+    "@npmcli/eslint-config": "^7.0.0"
+  },
+  "_npmOperationalInternal": {
+    "tmp": "tmp/semver_7.8.6_1793639143225_0.21865816512038405",
+    "host": "s3://npm-registry-packages-npm-production"
+  },
+  "_id": "semver@7.8.6",
+  "version": "7.8.6"
+}

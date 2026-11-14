@@ -121,7 +121,7 @@ def resolved_evidence():
         )
 
 
-def runtime_evidence():
+def runtime_evidence(versions_override=None):
     versions = {
         "node-version": "26.13.1",
         "python-version": "3.15.0",
@@ -141,6 +141,7 @@ def runtime_evidence():
         "windows-image": "2025",
         "windows-arm-image": "11",
     }
+    versions.update(versions_override or {})
     pattern = re.compile(
         r"^\s*(" + "|".join(versions) + r"):\s*([^\n#]+)", re.M
     )

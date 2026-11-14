@@ -1,0 +1,144 @@
+{
+  "url": "https://registry.npmjs.org/use-m/latest",
+  "metadata": {
+    "bin": {
+      "use": "src/cli.mjs"
+    },
+    "bugs": {
+      "url": "https://github.com/link-foundation/use-m/issues"
+    },
+    "dist": {
+      "shasum": "6f7d94db061b2806c7b0c4fceb3f246f797d79bb",
+      "tarball": "https://registry.npmjs.org/use-m/-/use-m-8.17.1.tgz",
+      "fileCount": 24,
+      "integrity": "sha512-OBcKVxxw8oQwFgUTwDfRb6jbMuYDV0IkNH4UNTN4120qxDzt0FVbOUl9oBxSGM//7bVJFusHQ26lIMZntT5VZA==",
+      "signatures": [
+        {
+          "sig": "MEYCIQDxUUzqbbgZUFcIL55bTiSqw5uVmjRyYhNbEh35AsiaRgIhAMbkmPcMK5D7QGVZzay7pvbGQ+D/kX/EMEaG06m3xDkm",
+          "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+        },
+        {
+          "sig": "MEUCIF0M9oQwKQfznPImtwAEgeyc4zXx1PTBEfU9RKgY0KrSAiEAtr0ltO9g84+vzc4Um7kE91/Kk1iitz4Z2Y1bhwCyWb4=",
+          "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+        }
+      ],
+      "attestations": {
+        "url": "https://registry.npmjs.org/-/npm/v1/attestations/use-m@8.17.1",
+        "provenance": {
+          "predicateType": "https://slsa.dev/provenance/v1"
+        }
+      },
+      "unpackedSize": 897664
+    },
+    "main": "use.cjs",
+    "name": "use-m",
+    "type": "module",
+    "author": {
+      "name": "link-foundation"
+    },
+    "exports": {
+      ".": {
+        "import": "./use.mjs",
+        "require": "./use.cjs"
+      },
+      "./load": {
+        "import": "./src/load.mjs",
+        "require": "./src/load.cjs"
+      },
+      "./use.cjs": "./use.cjs",
+      "./use.mjs": "./use.mjs",
+      "./load.cjs": "./src/load.cjs",
+      "./load.mjs": "./src/load.mjs",
+      "./fetch-polyfill": {
+        "import": "./fetch-polyfill.js",
+        "require": "./fetch-polyfill.cjs"
+      },
+      "./fetch-polyfill.js": {
+        "import": "./fetch-polyfill.js",
+        "require": "./fetch-polyfill.cjs"
+      },
+      "./fetch-polyfill.cjs": "./fetch-polyfill.cjs"
+    },
+    "gitHead": "1c4502cc516e218c56a976cc2ad2bf6dbc8bddb4",
+    "license": "Unlicense",
+    "scripts": {
+      "test": "node --experimental-vm-modules --disable-warning=ExperimentalWarning --disable-warning=DEP0025 --disable-warning=DEP0040 --disable-warning=DEP0125 ./node_modules/jest/bin/jest.js",
+      "build": "node scripts/build-use-bundles.mjs",
+      "prepack": "npm run build",
+      "sync:entries": "npm run build",
+      "test:examples": "./examples/test-examples.mjs"
+    },
+    "_npmUser": {
+      "name": "GitHub Actions",
+      "email": "npm-oidc-no-reply@github.com",
+      "trustedPublisher": {
+        "id": "github",
+        "oidcConfigId": "17541ed4-4abc-4dcc-8eb6-caa950936f47"
+      }
+    },
+    "homepage": "https://github.com/link-foundation/use-m#readme",
+    "keywords": [
+      "use",
+      "import",
+      "require",
+      "npm",
+      "backend",
+      "frontend",
+      "auto load",
+      "auto install",
+      "cache",
+      "global require",
+      "global import",
+      "dynamic require",
+      "dynamic import",
+      "package loader",
+      "module loader",
+      "dependency management",
+      "zx",
+      "execa",
+      "esm.sh",
+      "esm",
+      "unpkg.com",
+      "unpkg"
+    ],
+    "repository": {
+      "url": "git+https://github.com/link-foundation/use-m.git",
+      "type": "git"
+    },
+    "_npmVersion": "11.19.1",
+    "description": "use-m: dynamically import any JavaScript module",
+    "directories": {},
+    "maintainers": [
+      {
+        "name": "konard",
+        "email": "drakonard@gmail.com"
+      }
+    ],
+    "_nodeVersion": "24.22.2",
+    "allowScripts": {
+      "esbuild": true,
+      "puppeteer": true
+    },
+    "dependencies": {
+      "undici": "^6.29.1"
+    },
+    "_hasShrinkwrap": false,
+    "devDependencies": {
+      "jest": "^29.7.0",
+      "semver": "7.8.5",
+      "esbuild": "^0.25.12",
+      "express": "^5.1.0",
+      "puppeteer": "^24.16.2",
+      "babel-jest": "^29.7.0",
+      "command-stream": "^0.0.5",
+      "@babel/preset-env": "^7.28.3",
+      "browser-commander": "^0.8.1"
+    },
+    "_npmOperationalInternal": {
+      "tmp": "tmp/use-m_8.17.1_1794460491545_0.8319174542396514",
+      "host": "s3://npm-registry-packages-npm-production"
+    },
+    "_id": "use-m@8.17.1",
+    "version": "8.17.1"
+  }
+}

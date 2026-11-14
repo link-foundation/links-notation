@@ -76,7 +76,12 @@
     "jscpd": "^5.4.3",
     "lint-staged": "^17.6.0",
     "prettier": "^3.10.1",
-    "test-anywhere": "^0.9.1"
+    "test-anywhere": "^0.9.1",
+    "semver": "^7.8.6",
+    "browser-commander": "0.34.1",
+    "playwright": "1.65.1",
+    "command-stream": "^2.6.0",
+    "lino-arguments": "^0.4.1"
   },
   "lint-staged": {
     "*.{js,mjs,cjs}": [

@@ -18,8 +18,8 @@ release `cpp_VERSION`, together with its SHA-256 checksum.
 include(FetchContent)
 FetchContent_Declare(
   links_notation
-  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.31.4/links-notation-cpp-0.31.4.tar.gz
-  # Optional: the checksum from links-notation-cpp-0.31.4.tar.gz.sha256
+  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.31.5/links-notation-cpp-0.31.5.tar.gz
+  # Optional: the checksum from links-notation-cpp-0.31.5.tar.gz.sha256
   # URL_HASH SHA256=...
 )
 FetchContent_MakeAvailable(links_notation)

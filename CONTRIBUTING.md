@@ -128,7 +128,7 @@ as the PyPI publisher. See [release setup](docs/releases.md).
 
 Add a fragment under `changelog.d/` for each user-visible change. Release PRs
 combine the reviewed fragments into `CHANGELOG.md` and update all ten declared
-versions together. This PR prepares 0.31.4. Per-registry tags remain for
+versions together. This PR prepares 0.31.5. Per-registry tags remain for
 existing consumers, especially Go's required `go/vVERSION` tag. One CI run
 waits for all ten native stages before calling `release.yml` and running the
 Python publishing jobs directly in `js.yml` (its PyPI publisher identity),

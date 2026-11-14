@@ -167,8 +167,9 @@ jobs:
           cache-dependency-path: examples/universal-app/package-lock.json
 
       - name: Setup Java
-        uses: actions/setup-java@v6.2.0
+        uses: actions/setup-java@v6.3.0
         with:
+          problem-matcher: true
           distribution: temurin
           java-version: '27.0.1'
 
@@ -228,7 +229,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       # Keep this tag in sync with the playwright package version below.
-      image: mcr.microsoft.com/playwright:v1.59.1-noble
+      image: mcr.microsoft.com/playwright:v1.65.1-noble
     timeout-minutes: 20
     concurrency:
       group: main-writer-${{ github.repository }}-main
@@ -260,7 +261,7 @@ jobs:
       - name: Install browser automation dependencies
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
-        run: npm install --no-save --package-lock=false --no-audit --no-fund browser-commander@0.8.1 playwright@1.59.1 # zizmor: ignore[adhoc-packages]
+        run: npm install --no-save --package-lock=false --no-audit --no-fund browser-commander@0.34.1 playwright@1.65.1 # zizmor: ignore[adhoc-packages]
 
       - name: Regenerate preview images
         run: node scripts/update-preview-images.mjs

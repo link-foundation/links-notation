@@ -1,0 +1,98 @@
+{
+  "android-actions/setup-android": {
+    "tag": "v4.0.4",
+    "sha": "be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd"
+  },
+  "oven-sh/setup-bun": {
+    "tag": "v2.2.0",
+    "sha": "0c5077e51419868618aeaa5fe8019c62421857d6"
+  },
+  "denoland/setup-deno": {
+    "tag": "v2.0.5",
+    "sha": "22d081ff2d3a40755e97629de92e3bcbfa7cf2ed"
+  },
+  "peter-evans/create-pull-request": {
+    "tag": "v8.1.3",
+    "sha": "3ffccacd46053766916f087ce41d627c0b8cf2d1"
+  },
+  "codecov/codecov-action": {
+    "tag": "v7.1.1",
+    "sha": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5"
+  },
+  "pypa/gh-action-pypi-publish": {
+    "tag": "v1.14.3",
+    "sha": "7245906fb61fa33a13554f9d5fb856fe61758086"
+  },
+  "dtolnay/rust-toolchain": {
+    "tag": "v1",
+    "sha": "683b588c487a69d01f6c6ddf40f036ff682cc2c8"
+  },
+  "taiki-e/install-action": {
+    "tag": "v2.90.4",
+    "sha": "4a76afe23f9e08d2d9550fb56e556444e8611d21"
+  },
+  "actions/checkout": {
+    "tag": "v7.0.1",
+    "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  "actions/upload-artifact": {
+    "tag": "v7.0.2",
+    "sha": "cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+  },
+  "actions/upload-pages-artifact": {
+    "tag": "v5.0.0",
+    "sha": "fc324d3547104276b827a68afc52ff2a11cc49c9"
+  },
+  "actions/configure-pages": {
+    "tag": "v6.0.0",
+    "sha": "45bfe0192ca1faeb007ade9deae92b16b8254a0d"
+  },
+  "actions/deploy-pages": {
+    "tag": "v5.0.1",
+    "sha": "368f82528645a54fb793d4d04e342629a3f51346"
+  },
+  "lycheeverse/lychee-action": {
+    "tag": "v2.9.0",
+    "sha": "e7477775783ea5526144ba13e8db5eec57747ce8"
+  },
+  "actions/setup-python": {
+    "tag": "v7.1.0",
+    "sha": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0"
+  },
+  "NuGet/login": {
+    "tag": "v1.2.0",
+    "sha": "8d196754b4036150537f80ac539e15c2f1028841"
+  },
+  "github/codeql-action": {
+    "tag": "v4.39.3",
+    "sha": "33d7b85da1a04171e211befe2c739303b9a4c066"
+  },
+  "actions/dependency-review-action": {
+    "tag": "v5.0.0",
+    "sha": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+  },
+  "zizmorcore/zizmor-action": {
+    "tag": "v0.8.1",
+    "sha": "45d7276c9ca790aabd705e31ca99c6185c3e76dd"
+  },
+  "actions/setup-dotnet": {
+    "tag": "v6.1.0",
+    "sha": "0f4a354dd5547a28c70b7853dbd95d5b67886e73"
+  },
+  "actions/download-artifact": {
+    "tag": "v8.0.2",
+    "sha": "9000827ccba6bdab643e8b6fd33ac0654aef8333"
+  },
+  "actions/setup-go": {
+    "tag": "v7.0.0",
+    "sha": "b7ad1dad31e06c5925ef5d2fc7ad053ef454303e"
+  },
+  "actions/setup-node": {
+    "tag": "v7.1.0",
+    "sha": "949feb2413d6458794dcd2491c4babbbce0c15c1"
+  },
+  "rust-lang/crates-io-auth-action": {
+    "tag": "v1.0.6",
+    "sha": "3268eb413133e2960fa4ae0e963ca76380c54cd9"
+  }
+}

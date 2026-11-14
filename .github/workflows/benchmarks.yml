@@ -208,7 +208,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
           cache: 'pip'
           cache-dependency-path: benchmarks/python/requirements.lock
       - name: Cache the tiktoken vocabularies
@@ -220,7 +220,7 @@ jobs:
       # parser in this commit and only the tokenizer has to be installed.
       - name: Install dependencies
         run: |
-          python3 -m pip install --upgrade pip
+          python3 -m pip install --upgrade pip==26.3
           python3 -m pip install --require-hashes -r benchmarks/python/requirements.lock
       - name: Parse and count in Python
         run: |
@@ -316,8 +316,9 @@ jobs:
           name: benchmark-output
           path: benchmarks
       - name: Setup Java
-        uses: actions/setup-java@v6.2.0
+        uses: actions/setup-java@v6.3.0
         with:
+          problem-matcher: true
           java-version: '27.0.1'
           distribution: 'temurin'
           cache: 'maven'

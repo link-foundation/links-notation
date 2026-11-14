@@ -37,7 +37,7 @@ jobs:
           cache-dependency-path: docs/comparison/package-lock.json
       - uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
       - name: Install the generator dependencies
         working-directory: docs/comparison
         run: npm ci

@@ -2,6 +2,7 @@
 """Render dependency evidence from native locks and recorded registry responses."""
 
 import json
+import re
 import tomllib
 from collections import defaultdict
 from pathlib import Path
@@ -95,6 +96,8 @@ def reason(row):
         parents = (
             yarn_parents(path, name, row["after"])
             if path.name == "yarn.lock"
+            else bun_parents(path, name)
+            if path.name == "bun.lock"
             else npm_parents(path, name, row["after"])
         )
         if name.startswith("@emnapi/") and "beta" in row["after"]:
@@ -112,6 +115,19 @@ def reason(row):
         "; ".join(parents)
         + "; latest is outside the parent-supported API range; native resolver retained this version"
     )
+
+
+def bun_parents(path, name):
+    parents = set()
+    for match in re.finditer(r'^\s*"[^"\n]+": (\[.*\]),?$', path.read_text(), re.M):
+        package = json.loads(match[1])
+        if len(package) < 3 or not isinstance(package[2], dict):
+            continue
+        for field in ("dependencies", "optionalDependencies", "peerDependencies"):
+            requirement = package[2].get(field, {}).get(name)
+            if requirement:
+                parents.add(f"{package[0]} requires {name}{requirement}")
+    return sorted(parents)
 
 
 def main():

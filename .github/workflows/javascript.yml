@@ -120,7 +120,15 @@ jobs:
           node --test experiments/issue-339/release-audit.test.mjs
           node --test experiments/issue-192/*.test.mjs
           node --test experiments/issue-339/php-distribution.test.mjs
+          node --test experiments/issue-408/actions-migration.test.mjs
           python3 experiments/issue-339/test_workflow_contract.py
+      - name: Check archived npm setup compatibility
+        working-directory: .
+        timeout-minutes: 3
+        run: |
+          npm ci --prefix dev/log/issues/330/pulls/331/templates/js --ignore-scripts --no-audit --no-fund
+          npm ci --prefix dev/log/issues/377/pulls/378/templates/js --ignore-scripts --no-audit --no-fund
+          node --test --test-timeout=30000 experiments/issue-408/inline-tools.test.mjs dev/log/issues/330/pulls/331/templates/js/tests/use-module-integration.test.js
       - name: Verify archived artifact glob migrations with real files
         working-directory: .
         run: |

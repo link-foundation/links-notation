@@ -54,7 +54,7 @@ jobs:
           dotnet-version: '11.0.100'
 
       - name: Install DocFX
-        run: dotnet tool update -g docfx
+        run: dotnet tool update -g docfx --version 2.81.0
 
       - name: Restore dependencies
         run: dotnet restore

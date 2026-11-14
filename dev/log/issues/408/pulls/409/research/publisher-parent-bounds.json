@@ -1,0 +1,48 @@
+{
+  "pypi-attestations": {
+    "url": "https://pypi.org/pypi/pypi-attestations/0.0.31/json",
+    "version": "0.0.31",
+    "requires_dist": [
+      "cryptography>=47.0.0",
+      "packaging",
+      "pydantic>=2.10.0",
+      "requests",
+      "rfc3986",
+      "sigstore<5.0,>=4.5",
+      "sigstore-models",
+      "pdoc; extra == \"doc\"",
+      "pytest; extra == \"test\"",
+      "pytest-cov; extra == \"test\"",
+      "pretend; extra == \"test\"",
+      "coverage[toml]; extra == \"test\"",
+      "ruff~=0.9; extra == \"lint\"",
+      "mypy>=1.0; extra == \"lint\"",
+      "types-html5lib; extra == \"lint\"",
+      "types-requests; extra == \"lint\"",
+      "types-toml; extra == \"lint\"",
+      "interrogate; extra == \"lint\"",
+      "pypi-attestations[test]; extra == \"lint\"",
+      "pypi-attestations[doc,lint,test]; extra == \"dev\"",
+      "build; extra == \"dev\""
+    ]
+  },
+  "sigstore": {
+    "url": "https://pypi.org/pypi/sigstore/4.5.1/json",
+    "version": "4.5.1",
+    "requires_dist": [
+      "cryptography>=47",
+      "id>=1.1.0",
+      "importlib-resources~=5.7; python_full_version < \"3.11\"",
+      "pydantic<3,>=2",
+      "pyjwt>=2.1",
+      "requests",
+      "rich<16,>=13",
+      "rfc8785~=0.1.2",
+      "rfc3161-client<1.1.0,>=1.0.3",
+      "sigstore-models==0.0.6",
+      "sigstore-rekor-types==0.0.18",
+      "tuf<8,>=6",
+      "platformdirs~=4.2"
+    ]
+  }
+}

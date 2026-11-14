@@ -1,0 +1,1970 @@
+[
+  {
+    "path": "ci-logs/issue-408/actionlint.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/actions-matcher-update.log",
+    "bytes": 67,
+    "sha256": "61c7604807145871fbb6c45b849d72844be46787d9c5eff148fc07fe379c9d99",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/actions-update-final.log",
+    "bytes": 68,
+    "sha256": "8bde34264f4e95981768395c342fd3714c0a6e1470a70b092194e7a26f85df55",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/actions-update.log",
+    "bytes": 68,
+    "sha256": "8bde34264f4e95981768395c342fd3714c0a6e1470a70b092194e7a26f85df55",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/all-inline-install-review.txt",
+    "bytes": 17172,
+    "sha256": "39fc63ef927204f618eb76b11089e5b6df7141d3f6236a872487e29abac5e8e8",
+    "lines": 132
+  },
+  {
+    "path": "ci-logs/issue-408/archive-baseline.log",
+    "bytes": 447,
+    "sha256": "f516fd01aaead0a48650de1725109e6dfb1e01c9af47e38611cfd140fe18ce3c",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/archived-actionlint.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-00.log",
+    "bytes": 25776,
+    "sha256": "6bf06dfd7bb125ad5ab10cdb25334e2c0cd3190d326d656f47a027759471aa82",
+    "lines": 168
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-01.log",
+    "bytes": 25776,
+    "sha256": "af9d0f66dc51bf8dfae6612a0a026712bb5688a45d7ecdd2756187a61c75cbcb",
+    "lines": 168
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-02.log",
+    "bytes": 8533,
+    "sha256": "8f7fd7bc9e0b9bc525cdc5a9c7c9a7f7d2bf9efa97bf6476930ebcd0165183a9",
+    "lines": 57
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-03.log",
+    "bytes": 8533,
+    "sha256": "15157496ccec3ebc922bc390eeedc351654751056ff1e85a409774a56a5db161",
+    "lines": 57
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-04.log",
+    "bytes": 8533,
+    "sha256": "5278fe70bf30d0f50a0ff0f5d852e6d880c25c288615f24bede70c6d6151d9c8",
+    "lines": 57
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-05.log",
+    "bytes": 8533,
+    "sha256": "c05bca1ea04f609558493d955439c2d9fd40c1c3628f738e0429c83781cfcf48",
+    "lines": 57
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-06.log",
+    "bytes": 8533,
+    "sha256": "e176fa75adbb72aeaf00f497d67240ef7a8da09f17a525cab3c046edef377726",
+    "lines": 57
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-07.log",
+    "bytes": 8533,
+    "sha256": "b737d48f6fc5183bed1513a8ce1c676ba61ec2fe734c0fd3517a03b7ad761aee",
+    "lines": 57
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-08.log",
+    "bytes": 8533,
+    "sha256": "7a0dd5764e85089e0bb0b8275a822988bffa38bac761f9b5586651258e212a25",
+    "lines": 57
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-09.log",
+    "bytes": 9000,
+    "sha256": "94b2d14f9052dab501f75a1793a9d7abbd28febed5764671163111436aad353c",
+    "lines": 60
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-10.log",
+    "bytes": 18786,
+    "sha256": "ce00990bde5c5db312d5b05c2a3d490c50c62ec58ead7307018d994abfd93e11",
+    "lines": 123
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo-final.log",
+    "bytes": 2194,
+    "sha256": "a6785739c0dc917401e9aa54630f60d8a640100b755679998dfe0f9c2710a89a",
+    "lines": 11
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo.json",
+    "bytes": 2846,
+    "sha256": "c777db57d18f75ecba2ca7b4c55cb40a0ef0b8bc8db2ced868526773e99d1e0f",
+    "lines": 134
+  },
+  {
+    "path": "ci-logs/issue-408/audit-cargo.log",
+    "bytes": 1584,
+    "sha256": "7ad2ffa0dbb33d96f24a14635b33cc41a2d9ad3ac1699e9efb915ba4b6233987",
+    "lines": 8
+  },
+  {
+    "path": "ci-logs/issue-408/audit-composer-00.log",
+    "bytes": 84,
+    "sha256": "0046e84f375c11ed2bdc90e758acd0530b66a6905121613e20e9fac2525684f2",
+    "lines": 6
+  },
+  {
+    "path": "ci-logs/issue-408/audit-composer-01.log",
+    "bytes": 25,
+    "sha256": "43add299dc97ecbd90ec2dc456ef5a0bd824bb9abdae2a3d7cdb520e21f8e86d",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/audit-composer-02.log",
+    "bytes": 84,
+    "sha256": "0046e84f375c11ed2bdc90e758acd0530b66a6905121613e20e9fac2525684f2",
+    "lines": 6
+  },
+  {
+    "path": "ci-logs/issue-408/audit-composer-03.log",
+    "bytes": 84,
+    "sha256": "0046e84f375c11ed2bdc90e758acd0530b66a6905121613e20e9fac2525684f2",
+    "lines": 6
+  },
+  {
+    "path": "ci-logs/issue-408/audit-composer-04.log",
+    "bytes": 84,
+    "sha256": "0046e84f375c11ed2bdc90e758acd0530b66a6905121613e20e9fac2525684f2",
+    "lines": 6
+  },
+  {
+    "path": "ci-logs/issue-408/audit-composer-final.log",
+    "bytes": 958,
+    "sha256": "a5c8a068f5538b7cbc96bab04a36f165079a8b2127d44e73ce977c8ae7df8b34",
+    "lines": 5
+  },
+  {
+    "path": "ci-logs/issue-408/audit-composer.json",
+    "bytes": 1250,
+    "sha256": "9b1370946d4098ce816c483cf5e2165b72d2e9b713d1448e240baacc37317bbe",
+    "lines": 61
+  },
+  {
+    "path": "ci-logs/issue-408/audit-composer.log",
+    "bytes": 756,
+    "sha256": "48b249406ad589a6c0b940d1172aa65d9e66ac2eb04de0e3c8ebd202027650bf",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm-00.log",
+    "bytes": 358,
+    "sha256": "b6712766ae51e2ff9780a9b422c95f36a54e179768d1cd70d640a5ad1b12c61d",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm-01.log",
+    "bytes": 360,
+    "sha256": "1939a6d226c1601c0139b128885a1a6c91df7bf5032dae41ffdb6e82f0499578",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm-02.log",
+    "bytes": 362,
+    "sha256": "6d9be60874179a3c76ae0c928e367ba682704d37471c2ab413dcb889168173bb",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm-03.log",
+    "bytes": 363,
+    "sha256": "57c207e48961bb743cb4b558dc3b21dd13db7823a4a738f235e0a1e49410d348",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm-04.log",
+    "bytes": 362,
+    "sha256": "8756f5058b2b18dfe1ab6db05ca9db57e97a93973b96e47e8565330136b457fb",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm-05.log",
+    "bytes": 363,
+    "sha256": "a3757dd79e75090f4ebfec1fa644d73b21e48bf9d3e91458ff4b5ce775f59b0c",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm-06.log",
+    "bytes": 362,
+    "sha256": "bbd2d16870ad35ca86d295cbb207f02f180985caf0bad78a4e5c6f014207f96e",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm-07.log",
+    "bytes": 358,
+    "sha256": "08886336e9ac4c3334d9e199091490029d90496fed849454723ebd7dbc3ceb6d",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm-08.log",
+    "bytes": 363,
+    "sha256": "556ab17c5ad5c81a72afa8aa38b841c4b25bcf4d01524899ba1a6344a730c028",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm-09.log",
+    "bytes": 363,
+    "sha256": "a1e72e3946382350619bcc55948ae7c50e73cc7f5c165cef8657d739eb397dc3",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm.json",
+    "bytes": 2494,
+    "sha256": "2495e191f2f7758cafd94f3bad7e5930871566e16d534b693a7acfbda937b0e0",
+    "lines": 122
+  },
+  {
+    "path": "ci-logs/issue-408/audit-npm.log",
+    "bytes": 1901,
+    "sha256": "47cff6fd916063692a4ede6b2884adff58bb6df7c02acb7e3ea7a99c3ad8368f",
+    "lines": 10
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-00.log",
+    "bytes": 253,
+    "sha256": "263557d38f995608d45596df8d35bcc72bd0bb5306ee61ad45c439c0407d1dc5",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-01.log",
+    "bytes": 306,
+    "sha256": "cb227d0d588dae70afa25d88eb8b73c5f844c991d676394a4b967f89c298a489",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-02.log",
+    "bytes": 294,
+    "sha256": "f8843579d8de897b624401e6e626790c4cf57ddd03320c6af1901be55da813a2",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-03.log",
+    "bytes": 295,
+    "sha256": "d3c71707f4ecaf19c400638a5b0151c152c0a84eb3df21b2606762f510f95f40",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-04.log",
+    "bytes": 309,
+    "sha256": "3b0deacd63f5ed95a4714b46878e69b11e7d13794ff2feb9cfb9544dfffbf3fc",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-05.log",
+    "bytes": 327,
+    "sha256": "9fe52774b4444c8119c350a191c2793c94fc66de262e668ca94c2bd1d0cdecff",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-06.log",
+    "bytes": 327,
+    "sha256": "dba8872544f465142c7914624f1f57ef5ad4c54ce0862975d9b7cb715ce31bf2",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-07.log",
+    "bytes": 333,
+    "sha256": "70fc62790459aeb0b2a14a6be9efdad841ea33c1483696eec70d4eefb87fb6f6",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-08.log",
+    "bytes": 317,
+    "sha256": "7a2107c24689df1e114ba0f30613e21ce7bcfef58db1a9f0d4f2a19aff1f3906",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-09.log",
+    "bytes": 327,
+    "sha256": "0b5c55f16993a2fcf8b04ceacd8def12607c968c754529a3fcf84092cdd41d32",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-10.log",
+    "bytes": 262,
+    "sha256": "2c8a8cf04e79e4b23ea7693810b8eadf8905af24ae89485718e34154fbff74ac",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-11.log",
+    "bytes": 261,
+    "sha256": "0c0188820c2913c5a5cff31fc87f92f68ea3d66e6388b05ee38ec3ff144bd75a",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-12.log",
+    "bytes": 250,
+    "sha256": "1b4bf3e5c339d1a200c5f622684539cddd88f934c17a92f1c057f337b5e119d8",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-13.log",
+    "bytes": 248,
+    "sha256": "7837fefdca8974a151319c043ff1cd18f320ad8f85aa1118b802fe0e4895af34",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-14.log",
+    "bytes": 268,
+    "sha256": "a7719d782df6b9dee0a103e7918f3ca1b8a07b27b8c4c25b443629158082c9e5",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-15.log",
+    "bytes": 266,
+    "sha256": "b1764ef0ebaa9b14f421bcf33cecc9cbec3374fe803404dd8d00f86919d13ff7",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-16.log",
+    "bytes": 266,
+    "sha256": "1e1055c73004907655edab4e62286f09addb4df551eb68eee6eab854f6f20a04",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-17.log",
+    "bytes": 266,
+    "sha256": "8f4457f49ef56f1345ac7a44e1be5e38930ab9d33ea75dbe210252e362b0d07a",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-18.log",
+    "bytes": 293,
+    "sha256": "cc72795e5d5e2180112af6b7898dc8ad88c8207a78b3d3bfe239bf9c131a1971",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-19.log",
+    "bytes": 279,
+    "sha256": "2404942e6226b2bf481c8603d8ba2779453df256286a3914217fff8ac81733e5",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-20.log",
+    "bytes": 266,
+    "sha256": "904e2c611add9162d22b8fecf9a482545448afda15fd99301129546afc493d53",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget-21.log",
+    "bytes": 272,
+    "sha256": "1e6303844d4f10996803fbcba94b178e70f7e7e0ed0e89e6d1a2eb53faf2d51d",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget.json",
+    "bytes": 9258,
+    "sha256": "4535b691bbc23b39143b08063d0001195be69f1c8c153ee4d7695ca3c4b3f4da",
+    "lines": 398
+  },
+  {
+    "path": "ci-logs/issue-408/audit-nuget.log",
+    "bytes": 7209,
+    "sha256": "cb13e4c43aeba5758ea85b7f8efc9a0932dceeab438f36db508b7d6b8098f18d",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/audit-python-00.log",
+    "bytes": 693,
+    "sha256": "f30877fd68ddcd6307d8f863718cf7770569fe4298a7bf01384fca6153b77dc8",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/audit-python-01.log",
+    "bytes": 357,
+    "sha256": "8e1b8d3082d874b613b58cca5dab652e98d2f2a6c0853138573bdc408c1b5a2f",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/audit-python-02.log",
+    "bytes": 532,
+    "sha256": "9a097fc241e5543fa307d55cc95f2968663ea871de019040d56020882e84c990",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/audit-python-03.log",
+    "bytes": 3661,
+    "sha256": "56b6ba05d06b73c232e82712411945b8c7bb68a4d3d1ecae32b1741c5776e78f",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/audit-python-04.log",
+    "bytes": 1794,
+    "sha256": "97c51f933293eb752d4decd8677e3d474b6bee187f07a61d1d63e6062e222a09",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/audit-python-05.log",
+    "bytes": 1972,
+    "sha256": "4b1ae8c643f5836e5459af40561944454b0b5806d6a77a0fd8029d916624d3b1",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/audit-python-06.log",
+    "bytes": 3661,
+    "sha256": "56b6ba05d06b73c232e82712411945b8c7bb68a4d3d1ecae32b1741c5776e78f",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/audit-python-07.log",
+    "bytes": 1241,
+    "sha256": "92fed6ea3efc5b3df695d29e430815030aaed683b98fa3b7b00dc46686ffe898",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/audit-python-08.log",
+    "bytes": 2041,
+    "sha256": "2897eb4a810d0f934a2148c795b638096601126729e3c7d5491c77409f8ef49f",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/audit-python.json",
+    "bytes": 2671,
+    "sha256": "1823bd858d15196a960fd229d60dfee214b7cad9a90d95c15aa8fa80199ba52b",
+    "lines": 119
+  },
+  {
+    "path": "ci-logs/issue-408/audit-python.log",
+    "bytes": 2083,
+    "sha256": "5a0aae66fcd0d0ee26a5ad480b7b220fe8b25703d14e0be799201dc50042680a",
+    "lines": 9
+  },
+  {
+    "path": "ci-logs/issue-408/baseline-template-330-lint.log",
+    "bytes": 1325,
+    "sha256": "ee6916f37f7b18aae608b213123831169734a74ebbbda1f16ca5783113971f1c",
+    "lines": 24
+  },
+  {
+    "path": "ci-logs/issue-408/baseline-template-330-test.log",
+    "bytes": 10074,
+    "sha256": "c5b79d890758766c5eb9743d8626cb6d4c31cec1eeb8f3341a4393ee9722ecda",
+    "lines": 159
+  },
+  {
+    "path": "ci-logs/issue-408/baseline-template-377-lint.log",
+    "bytes": 1325,
+    "sha256": "47011261dc5eaf0c115ea462a258eb9d9c8e12167d46ed5f2cf8e0bfe110777a",
+    "lines": 24
+  },
+  {
+    "path": "ci-logs/issue-408/baseline-template-377-test.log",
+    "bytes": 13051,
+    "sha256": "68da8f26c8d32938e1618913f6516f49d1fdcdc2d45ff3bb7db49368c570fb49",
+    "lines": 207
+  },
+  {
+    "path": "ci-logs/issue-408/baseline-template-results.json",
+    "bytes": 621,
+    "sha256": "b935f26cc12faff94b41e7eeb32c7efd7537a7ede087a173483c8aae1109d3d0",
+    "lines": 40
+  },
+  {
+    "path": "ci-logs/issue-408/browser-commander-files.txt",
+    "bytes": 108095,
+    "sha256": "24476b8d384550a04fbabbcba5bfbccc7801623bf3895e8a226b60c05e3bc5fc",
+    "lines": 2415
+  },
+  {
+    "path": "ci-logs/issue-408/bun-audit.log",
+    "bytes": 3,
+    "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/cargo-audit-version.log",
+    "bytes": 19,
+    "sha256": "099b5e31c557b0bcbf0fc8152869301670c0fac7bf23306539fb83030a46ec54",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/ci-43575938491-job-132395955896.log",
+    "bytes": 29210,
+    "sha256": "3b682e8e6cee90b67b38babd4ff168b1110692f8b8fd1e7cb977ce622d5f9314",
+    "lines": 243
+  },
+  {
+    "path": "ci-logs/issue-408/ci-43575938491.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/ci-d0109356-js-parity.log",
+    "bytes": 63929,
+    "sha256": "5aca51f4b7ff4517a15fd4bfa2a06a7bdf36cb8777068d77e368af96799510cf",
+    "lines": 578
+  },
+  {
+    "path": "ci-logs/issue-408/ci-d0109356-js-test.log",
+    "bytes": 78871,
+    "sha256": "18da01c03483cb6110a87cf13a08195d83de1131c29e362c0dbc469fbf38d292",
+    "lines": 782
+  },
+  {
+    "path": "ci-logs/issue-408/commit-workflows.log",
+    "bytes": 295,
+    "sha256": "24f06385bd00706054bf8c6774a23cf9f85fa319b4b4edc08473f4f5266ba13e",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/composer-empty-native.log",
+    "bytes": 125,
+    "sha256": "95ad8f9cd86da9a95fd049703afdcfc1da5c1797988c84ab0545544f66bd4221",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/composer-platform-repro.log",
+    "bytes": 626,
+    "sha256": "bcd4fa2ecd965540b85febb8a16ff46a503f6c37f12cd3421f84d715a90793ef",
+    "lines": 11
+  },
+  {
+    "path": "ci-logs/issue-408/current-ci-jobs.tsv",
+    "bytes": 4905,
+    "sha256": "31317178820856b416f206c1eede11aae4cdb8ed1508f03e641821bd39a926c4",
+    "lines": 91
+  },
+  {
+    "path": "ci-logs/issue-408/current-ci-status.tsv",
+    "bytes": 3474,
+    "sha256": "58bcafe693605582ded78463ca4b3ae451fcf0ab3061cdd049ced1138e7e741c",
+    "lines": 85
+  },
+  {
+    "path": "ci-logs/issue-408/current-runs.json",
+    "bytes": 469,
+    "sha256": "d6ff4169469f92cb59eebf01837c34003076afcce731968bd965968f81c3dd72",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/declarations-after.log",
+    "bytes": 52,
+    "sha256": "99aac1695c1975ac46aa77bcadb193a389c57b32ae398ef9807899bdcbd414cd",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/declarations.log",
+    "bytes": 52,
+    "sha256": "99aac1695c1975ac46aa77bcadb193a389c57b32ae398ef9807899bdcbd414cd",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/dependabot-396-failure.log",
+    "bytes": 32724,
+    "sha256": "433943f853608ffb269672485a9622b0721b7b3171193c3b693d20d1c17d7190",
+    "lines": 284
+  },
+  {
+    "path": "ci-logs/issue-408/dependabot-final.log",
+    "bytes": 142,
+    "sha256": "f1662737024a42000ec76c9dba78eeda371f62782f14084943cb65596e5615b9",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/dependabot.log",
+    "bytes": 136,
+    "sha256": "5f924c8ada76019c7ebeff744fcabee04a0e962e4fe2dc19444b82b0775f08b8",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/diff-check.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/docfx-install.log",
+    "bytes": 789,
+    "sha256": "5a554647c787caee771c6fb8babf036ea84c38a24decd02cd78162bc895864d4",
+    "lines": 19
+  },
+  {
+    "path": "ci-logs/issue-408/docfx-version.log",
+    "bytes": 48,
+    "sha256": "b755ebc0c47a7856685eaacd6dc6935ce94894d5332fb975786e18e8a059d371",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/dotnet-install.log",
+    "bytes": 1044,
+    "sha256": "dfddeca6029229ab953069fbb20570525384547eb1f2938cc3fe39712c6c2fbb",
+    "lines": 10
+  },
+  {
+    "path": "ci-logs/issue-408/embedded-tool-pins-verification.log",
+    "bytes": 43,
+    "sha256": "f16ea127dbcd0e0ae4ba1c58064a3061ed20452c9519bfd7dc7e284ac55a8acc",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/embedded-tool-pins.txt",
+    "bytes": 10739,
+    "sha256": "849e86771f71776f37b6103d29e63ba090c4853cab7592fa372027cb9bbba09a",
+    "lines": 73
+  },
+  {
+    "path": "ci-logs/issue-408/evidence-commit-stat.log",
+    "bytes": 7319,
+    "sha256": "242a2936376fc45fde5680a9da3946acbe08c6439c951b2949f0bac7cad6d585",
+    "lines": 116
+  },
+  {
+    "path": "ci-logs/issue-408/final-actionlint.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/final-archive-actionlint.log",
+    "bytes": 19859,
+    "sha256": "7eb6b3d0add783b5626ace3e86be1c3c60eb74469627ed538fabb640926d1c75",
+    "lines": 252
+  },
+  {
+    "path": "ci-logs/issue-408/final-assertion-format.log",
+    "bytes": 166,
+    "sha256": "ed6ee86b9e9041eeda17b138db2072ecbe5086138f6da34919861df6ed100834",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/final-declarations.log",
+    "bytes": 52,
+    "sha256": "c5ac3c8a8eb07ea320e1141ce1b8bdb05ba72d0cfadad8bf0f82005e1f0319c5",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/final-diff-check.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/final-experiments-black.log",
+    "bytes": 56,
+    "sha256": "6a479b5c82191f225899d5e11b6acd828479dbe0a41fbaea811c4de9326eb022",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/final-inline-tests.log",
+    "bytes": 755,
+    "sha256": "bebdeb9bf42402b74849124c90cc2d299fb4de39d6e7005557b6ed6ecc28e016",
+    "lines": 16
+  },
+  {
+    "path": "ci-logs/issue-408/final-java-matcher.log",
+    "bytes": 202,
+    "sha256": "e6ccce3a8018602f8d40f1bd201bc83f37386e0b309e7e03be46e0b850f9aabe",
+    "lines": 9
+  },
+  {
+    "path": "ci-logs/issue-408/final-js.log",
+    "bytes": 22887,
+    "sha256": "348a7f6388d600b63ac31400caf108bf08df0171078d1e08d04b8131c47d90cc",
+    "lines": 442
+  },
+  {
+    "path": "ci-logs/issue-408/final-locks.log",
+    "bytes": 73,
+    "sha256": "b654e2046e688ca714d05e87a02dea3b22b106f1a83b87b084bf547ca02f1edd",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/final-main-fetch.log",
+    "bytes": 103,
+    "sha256": "104d18a689f83056455201da0539bcbce8066ae0533ffb733c17a98afcc8ae82",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/final-npm-helper-lint.log",
+    "bytes": 1,
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/final-prepush-runs.tsv",
+    "bytes": 918,
+    "sha256": "58e3012812437d2d8dba3c4af326676b4a25b409c14eff83a933d25bdfe5ba62",
+    "lines": 9
+  },
+  {
+    "path": "ci-logs/issue-408/final-prettier.log",
+    "bytes": 232,
+    "sha256": "4942ca780cdcbbd700766e3a334b597ca8d2e7e51d87eb13699b022418219020",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/final-probe-format.log",
+    "bytes": 223,
+    "sha256": "f7abce47e7971f4fc5f0920a0789c1f5fd2c429ca9f1aaa205227fd778b247cf",
+    "lines": 6
+  },
+  {
+    "path": "ci-logs/issue-408/final-rust-budget.log",
+    "bytes": 38,
+    "sha256": "5267df7351c16144271ad3759d3ed0b28cef55f37c0314007076281ac5ad023c",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/final-tables.log",
+    "bytes": 124,
+    "sha256": "c4b4afea7c089520b74452d566f3c459e07007f62cad9af7258660e1f7c66836",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-330-audit.log",
+    "bytes": 363,
+    "sha256": "919d74b75749aa4dcfafa64d3b97a3a92d7c11e0e8bab0efe27ca9f2f7458cb6",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-330-lint.log",
+    "bytes": 1334,
+    "sha256": "009ecb70182d9f85a033f34f0f3d0abeccf209e04adac704b391853f02625372",
+    "lines": 24
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-330-preview-contract.log",
+    "bytes": 303,
+    "sha256": "968bc907faf87fcc5b27c934c1f9e4c1b4dfbf94da2f8963bffbd80f7d2fc44c",
+    "lines": 11
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-330-test.log",
+    "bytes": 9764,
+    "sha256": "bcfe61dc5a24e4bfca7d46f3a566ff1cb11b71f2f37fe73c7992f892b35b3b08",
+    "lines": 156
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-377-audit.log",
+    "bytes": 363,
+    "sha256": "919d74b75749aa4dcfafa64d3b97a3a92d7c11e0e8bab0efe27ca9f2f7458cb6",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-377-lint.log",
+    "bytes": 1334,
+    "sha256": "35f3ee8f504709e633a9ce11914a7b72198721e80a6337c9e69f54256415fa4d",
+    "lines": 24
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-377-preview-contract.log",
+    "bytes": 303,
+    "sha256": "de0989aa078bc4ea6a0d9c2c6b8ac3bd6e00e7a576a72d4dc55d65663cc5e2f1",
+    "lines": 11
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-377-test.log",
+    "bytes": 12882,
+    "sha256": "727ee8319a34c630cb1ef118df5d2a2084f1fbe78f2627d9fb04bd62f5b5faf5",
+    "lines": 207
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-results.json",
+    "bytes": 854,
+    "sha256": "972beac571d3e34da76f11d023b63f6e20c4a8d11964483061e92407ac40114d",
+    "lines": 54
+  },
+  {
+    "path": "ci-logs/issue-408/final-workflow-contract.log",
+    "bytes": 102,
+    "sha256": "56e03afda220e7ba78bbcecf9a2e53a0149cfc3e311fa10bbd01b25e8e5ba671",
+    "lines": 5
+  },
+  {
+    "path": "ci-logs/issue-408/final-zizmor.log",
+    "bytes": 176839,
+    "sha256": "e68d8de5ee8a3df74314207e1c08f63a55a9a3ed44e499ed5ce665310821a2a1",
+    "lines": 1352
+  },
+  {
+    "path": "ci-logs/issue-408/go-benchmarks-vuln-current.log",
+    "bytes": 26,
+    "sha256": "3016e51e4eac0d421674d2128bbbdefb2924b4646e0c14a1ab034977ad73fae5",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/go-benchmarks-vuln.log",
+    "bytes": 2793,
+    "sha256": "83c9b67270d457388d880e18acc3a7710f6ee9b32bcd50699c8970f71421bf0c",
+    "lines": 41
+  },
+  {
+    "path": "ci-logs/issue-408/go-vuln-current.log",
+    "bytes": 26,
+    "sha256": "3016e51e4eac0d421674d2128bbbdefb2924b4646e0c14a1ab034977ad73fae5",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/go-vuln.log",
+    "bytes": 301,
+    "sha256": "fcace5a2a45aaa8bf40314f6f9275055f8180faeb22580a275c23a66beb444e8",
+    "lines": 9
+  },
+  {
+    "path": "ci-logs/issue-408/govulncheck-install.log",
+    "bytes": 241,
+    "sha256": "b29e788ff6170e03b088018816d02da0a2616161a187cd1a82bf16284f9c4fc1",
+    "lines": 5
+  },
+  {
+    "path": "ci-logs/issue-408/gradle-locks-graph.log",
+    "bytes": 1947,
+    "sha256": "247eddca84ae6f053a22162f3261254a5a61646adb3f9a3619611f5d69ec82eb",
+    "lines": 43
+  },
+  {
+    "path": "ci-logs/issue-408/initial-checks.log",
+    "bytes": 692,
+    "sha256": "6eb6256d88c56be0f7098a1c0684be9792a4335970343a4e78584624ad0789b5",
+    "lines": 6
+  },
+  {
+    "path": "ci-logs/issue-408/initial-ci-failed.log",
+    "bytes": 29210,
+    "sha256": "3b682e8e6cee90b67b38babd4ff168b1110692f8b8fd1e7cb977ce622d5f9314",
+    "lines": 243
+  },
+  {
+    "path": "ci-logs/issue-408/initial-ci-jobs.json",
+    "bytes": 44600,
+    "sha256": "8426cbb273c01641815af1e5846ffd9085a26131419af86c13ab9953da1276d8",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/initial-ci-status.tsv",
+    "bytes": 3722,
+    "sha256": "6df4011e4b3be491dcf22bc86f81c595f305636c76d0e12cf3e892c4c0be00e8",
+    "lines": 91
+  },
+  {
+    "path": "ci-logs/issue-408/inline-install-review.txt",
+    "bytes": 11884,
+    "sha256": "0b1f2695657036cdbc643991d9b4cb0562e9ccf277eeeb39a192d28fb17320ed",
+    "lines": 94
+  },
+  {
+    "path": "ci-logs/issue-408/inline-inventory.log",
+    "bytes": 41,
+    "sha256": "2e74729f10c1b04315c5ef47f23df114bc0b8df83c30bba9076a1969fbde10bb",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/inline-locations.txt",
+    "bytes": 20285,
+    "sha256": "23a1adc8b98e1f5fa150a562268657e6af5cbb2536f7124087539252081a6fda",
+    "lines": 157
+  },
+  {
+    "path": "ci-logs/issue-408/inline-source-links.log",
+    "bytes": 85,
+    "sha256": "828427a601986935183dd0e1562959a6d915c63d2df45c27456a13fc192d2c87",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/inline-tools-after.log",
+    "bytes": 436,
+    "sha256": "1ff9be6ccaa55a3405182adfe253a33578c39dfbfbc9c14d4c547c2deb5de2eb",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/inline-tools-before.log",
+    "bytes": 4027,
+    "sha256": "02e45fea0c8d038627eca1da9ab35b9b5a01716b097a489d8ac948a6611b8e9c",
+    "lines": 101
+  },
+  {
+    "path": "ci-logs/issue-408/installed-loader-after.log",
+    "bytes": 757,
+    "sha256": "8dca6d41d07773d83117f1144d5f3254310ef99cf815e3e4c30cd9737f050246",
+    "lines": 16
+  },
+  {
+    "path": "ci-logs/issue-408/installed-loader-before.log",
+    "bytes": 1575,
+    "sha256": "35cad7dd0b55f96bd41910a2ab0a3b7a56dce9ba2de0b69d7e555fb567ccfdb9",
+    "lines": 39
+  },
+  {
+    "path": "ci-logs/issue-408/installed-loader-format.log",
+    "bytes": 132,
+    "sha256": "7335e989e88c593c1f6ca3e0e2457e8e5b6dd1efe74c213372eea5b9b69ed447",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/installed-loader-lock.log",
+    "bytes": 25,
+    "sha256": "df9a5f74f9c6f0091535a38eebca1116d6f116e043e5d52197da72f3a121bf8d",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/inventory-final.log",
+    "bytes": 52,
+    "sha256": "99aac1695c1975ac46aa77bcadb193a389c57b32ae398ef9807899bdcbd414cd",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/java-install-test.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/java-matcher-after.log",
+    "bytes": 202,
+    "sha256": "de9318df5acb06d4501036fb6c6a26bdcb6d4ff081d58e28dc0fb0c7cbcb715a",
+    "lines": 9
+  },
+  {
+    "path": "ci-logs/issue-408/java-matcher-before.log",
+    "bytes": 1382,
+    "sha256": "3c55d9028525e1e76697cf4d52cab074c77115d17221d6739d04fb8f46010469",
+    "lines": 27
+  },
+  {
+    "path": "ci-logs/issue-408/java-matcher-final.log",
+    "bytes": 203,
+    "sha256": "9a3da53f21a23ec8bf5c93cc060b0303204ed9400ebda58994f2cb0bac664a0d",
+    "lines": 9
+  },
+  {
+    "path": "ci-logs/issue-408/js-build-final.log",
+    "bytes": 212,
+    "sha256": "19cbea0411c1dff202b2beac8b6814ea5ad3f3e7c8d3c551f42fb981c8057f03",
+    "lines": 6
+  },
+  {
+    "path": "ci-logs/issue-408/js-build.log",
+    "bytes": 212,
+    "sha256": "1676788486a4b3ee6a1c0b60ea35c7f7fe4abab239443fc0fb9e48337d630d2e",
+    "lines": 6
+  },
+  {
+    "path": "ci-logs/issue-408/js-format-final.log",
+    "bytes": 87,
+    "sha256": "1d66faad74f5e8709353f7288592866bd3a9095da1174a916e7aa632949971e2",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/js-format.log",
+    "bytes": 87,
+    "sha256": "1d66faad74f5e8709353f7288592866bd3a9095da1174a916e7aa632949971e2",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/js-gate-final.log",
+    "bytes": 1037,
+    "sha256": "a2300098643899351a871c2d87fe7ccf353b5cd3f2300a89d5cb60431dc2dd34",
+    "lines": 19
+  },
+  {
+    "path": "ci-logs/issue-408/js-install-final.log",
+    "bytes": 64,
+    "sha256": "580c38074a050cc3082eed711872879de700300da3f97f41c8d03cfe07df70e0",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/js-install.log",
+    "bytes": 152,
+    "sha256": "08a69f79f93d2b4aa793a86c6933ce20a5405c54f8e26ab09fccd08b8d530ccb",
+    "lines": 9
+  },
+  {
+    "path": "ci-logs/issue-408/js-lint-final.log",
+    "bytes": 21,
+    "sha256": "ee133e977eb8914cd5684490033ce889957a2b800b3f5888d17bea3a6dda74d9",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/js-lint.log",
+    "bytes": 21,
+    "sha256": "ee133e977eb8914cd5684490033ce889957a2b800b3f5888d17bea3a6dda74d9",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/js-tests-final.log",
+    "bytes": 22892,
+    "sha256": "a38f5f0240b5f9475baf3b7b9e21739d5b32f6d3acf40d15936bea74b90a90cf",
+    "lines": 442
+  },
+  {
+    "path": "ci-logs/issue-408/js-tests-focused.log",
+    "bytes": 22891,
+    "sha256": "536efbde3a46302c51261b943107adf746e043feb576ff496826d0c269eff57e",
+    "lines": 442
+  },
+  {
+    "path": "ci-logs/issue-408/js-tests.log",
+    "bytes": 28360,
+    "sha256": "47ffbd1d752767629ab769a55be3b5433950aecd9b45bb2718587f8c47f8d44b",
+    "lines": 573
+  },
+  {
+    "path": "ci-logs/issue-408/jvm-evidence-audit.log",
+    "bytes": 35,
+    "sha256": "73ebbb679542b8ae0c282d9e11ba5478bcdac4b2dff8e72af6004a39b41341e9",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/kgp-root-inputs-1.log",
+    "bytes": 541,
+    "sha256": "68e44633fb73e8bf198d5f3bd0ca0464d19070bf7e30e09fbcfd1ebcedf4878f",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/kgp-root-inputs-2.log",
+    "bytes": 618,
+    "sha256": "b14073111d0ddb70e8871785f38d0d8b8cf122d271defebfd7f1eecde3247559",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/kgp-root-inputs-3.log",
+    "bytes": 607,
+    "sha256": "8a11a98cbe033228cc36c84dc48394920cbf4d180283bdbad1766611e36807ba",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/kgp-root-inputs-result.json",
+    "bytes": 162,
+    "sha256": "3a820ad265ce3fa6bfd0cf2f46af0f87d84bf1f081456cdbc90f6462530fde43",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/kgp-root-probe.log",
+    "bytes": 124,
+    "sha256": "c7e210bbb953ae246fd140f1560c77880878fb5afea4642715184d713e1e1b63",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/links-43582365362.log",
+    "bytes": 74207,
+    "sha256": "bbd2f76fa8b7821bce3ec44b17c2035d34486e4332b3a0e69a0de647c0b03a95",
+    "lines": 598
+  },
+  {
+    "path": "ci-logs/issue-408/locks-final.log",
+    "bytes": 73,
+    "sha256": "3f006562d794653815c74ef7efce4ca56b22c1ed00ae15510397dcb2d1d79148",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/locks.log",
+    "bytes": 73,
+    "sha256": "520eb8a9ebfa2aede3276861f4b41b4cb1a09b7eced0ed9db12fa40bb4071e38",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/maven-benchmark-graph.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/maven-graph.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/merge-dry-run.log",
+    "bytes": 334,
+    "sha256": "2c096a659d93424a680ff9ac84aa705836f0b482c925abe439a7965daa96c47b",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/merge-planner.log",
+    "bytes": 121,
+    "sha256": "54950e42e526bdcefab1b65c13ed642597d3616da81a277223828b9a286dd247",
+    "lines": 5
+  },
+  {
+    "path": "ci-logs/issue-408/npm-12-migration.txt",
+    "bytes": 4278,
+    "sha256": "a9a2725d05c28bad4b99a80afed7606b2481a4dd416e3e72ce2eb4befa8bbf8b",
+    "lines": 38
+  },
+  {
+    "path": "ci-logs/issue-408/npm-helper-format.log",
+    "bytes": 70,
+    "sha256": "33fac1b7a0d927d24cdbdf127e5f4894a985a7606a0c165bc0e49994da29a473",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/npm-template-330-browser-install.log",
+    "bytes": 25,
+    "sha256": "ce97f1a307a58309c7829d06b11982192ac275420bea4736a459af6ebe71d3d6",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/npm-template-330-install.log",
+    "bytes": 26,
+    "sha256": "b5630963fa433bc94a822725a813ac67b843e5356fe87934b6214fcb2ee25870",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/npm-template-377-browser-install.log",
+    "bytes": 25,
+    "sha256": "5836f1871d36f1a6a957b7bce369677d4dacc90dfedada066248645533c1994b",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/npm-template-377-install.log",
+    "bytes": 27,
+    "sha256": "eb7e97c663f33bb6420babe0227892d7741319c75588f19ed21e129c25705c58",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/oci-link-content-negotiation.log",
+    "bytes": 411,
+    "sha256": "bde221687e27ed92c4f7e9f99dcfc7d8137abe921a01d9ac425b9bfc9b01a3e7",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/parity-final.log",
+    "bytes": 87,
+    "sha256": "3d8bc71b7f72a8e043d939422c56521cc3539504cf7300665212dabd3ae3355a",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/parity.log",
+    "bytes": 87,
+    "sha256": "3d8bc71b7f72a8e043d939422c56521cc3539504cf7300665212dabd3ae3355a",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/php-distribution-final.log",
+    "bytes": 59,
+    "sha256": "414226dfb592ef5f060e65ceb172ba87f89017e69ec1941683921ca149f6e9ea",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/php-lint.log",
+    "bytes": 97,
+    "sha256": "94cf4237c35afcfeac1c3e382acf14992325ac59a3285fad2ce968ff3ef5b596",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/php-metadata.log",
+    "bytes": 59,
+    "sha256": "414226dfb592ef5f060e65ceb172ba87f89017e69ec1941683921ca149f6e9ea",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/php-test.log",
+    "bytes": 635,
+    "sha256": "5fc9b85025d5c15c98c9c4a1ea70e8437f38f8f62097c214c12955ab8cbc9e14",
+    "lines": 14
+  },
+  {
+    "path": "ci-logs/issue-408/post-push-runs.json",
+    "bytes": 1584,
+    "sha256": "c493d8e37e063b2bad601ce0c10a48b874a9b5efa625db340f417af65bacbdcf",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/pr-edit.log",
+    "bytes": 59,
+    "sha256": "29744826249da23bb354ea4ceacc842b00b86d6f403e08f71728911e7e7f4700",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/pre-final-batch-runs.json",
+    "bytes": 1056,
+    "sha256": "fd8c964ae30544854abc838f5688463f29f470ce45f3adc0c5b5bc802b3e7197",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/pre-push-runs.json",
+    "bytes": 479,
+    "sha256": "8d7df38e0c939fee8c6978f827e04c8e41379b151cf9bb465d898607810bf1cc",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/preview-smoke.log",
+    "bytes": 1118,
+    "sha256": "e6cdeae5ff9030e7ace19afd1fb7ead9c9bed9035834c1eba35803c6a591bb69",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/preview-smoke.png",
+    "bytes": 10256,
+    "sha256": "da69d81b85f898fa973f67a66036fb07f6e677a9dce663acb6b11f2a674d43ee",
+    "lines": 16
+  },
+  {
+    "path": "ci-logs/issue-408/publisher-audit.json",
+    "bytes": 2793,
+    "sha256": "2a58db3f4a977de22266bf03310937057501e5ec3de3dec73f1ca98207f27066",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/publisher-audit.log",
+    "bytes": 265,
+    "sha256": "79d30422388543b2563e1dde76bb7e7857d7ef0c6fdf05c8c71598633ca07e1e",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/publisher-lock-refresh.log",
+    "bytes": 154307,
+    "sha256": "fdcff7eae06bd4975c0da19653669a4bd0fd6d8a6b3b563c3e95f6fbcc2a294b",
+    "lines": 1859
+  },
+  {
+    "path": "ci-logs/issue-408/python-black.log",
+    "bytes": 57,
+    "sha256": "1239c20f82d64c540be118ccf284ffd44964051740feb568eaea8620e039e943",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/python-flake8.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/python-isort.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/python-test.log",
+    "bytes": 591,
+    "sha256": "0af2e10dc77f920be2c45b116cacca0be8e15acfb9f8e6d7391bce6cbb39c6a0",
+    "lines": 8
+  },
+  {
+    "path": "ci-logs/issue-408/python-tools-install.log",
+    "bytes": 224231,
+    "sha256": "16dc1844702200f997af5a2dc7ee8cb2149287ecdc61d65d8269bd525baa9463",
+    "lines": 3142
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo-00.log",
+    "bytes": 177,
+    "sha256": "e0469d03fdc96bb0170684017a95f804f3cc3f579ce4bd506f8b6df6af1dd74b",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo-01.log",
+    "bytes": 177,
+    "sha256": "e0469d03fdc96bb0170684017a95f804f3cc3f579ce4bd506f8b6df6af1dd74b",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo-02.log",
+    "bytes": 198,
+    "sha256": "600e6b792e9c2bb60590503bef67c4753bc527a58e267852fc070c9462b6b5c9",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo-03.log",
+    "bytes": 198,
+    "sha256": "600e6b792e9c2bb60590503bef67c4753bc527a58e267852fc070c9462b6b5c9",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo-04.log",
+    "bytes": 198,
+    "sha256": "600e6b792e9c2bb60590503bef67c4753bc527a58e267852fc070c9462b6b5c9",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo-05.log",
+    "bytes": 96,
+    "sha256": "da6302fa7685d4f2eb7d0616dd66026a0f243d8e5cc822db8971835086957cac",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo-06.log",
+    "bytes": 96,
+    "sha256": "da6302fa7685d4f2eb7d0616dd66026a0f243d8e5cc822db8971835086957cac",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo-07.log",
+    "bytes": 96,
+    "sha256": "da6302fa7685d4f2eb7d0616dd66026a0f243d8e5cc822db8971835086957cac",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo-08.log",
+    "bytes": 198,
+    "sha256": "600e6b792e9c2bb60590503bef67c4753bc527a58e267852fc070c9462b6b5c9",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo-09.log",
+    "bytes": 267,
+    "sha256": "1fcbd036090487259b25a4c90022a5d66b839fcd95265d8e7b46af5e939c8418",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo-10.log",
+    "bytes": 196,
+    "sha256": "b409feb6dec663d9a001bc71dacfab49a8eee66020ef05da37c53d1bf8cdfd2d",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo.json",
+    "bytes": 1999,
+    "sha256": "9538a885fa7bc70e67d86cee49edfcc6776aeb3ecda77a069ac1ddd1e50a647a",
+    "lines": 101
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-cargo.log",
+    "bytes": 1545,
+    "sha256": "78048fd9cca9868d4d088bdda77611309c33b783359c7bdf497479d381645a0a",
+    "lines": 11
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-composer-00.log",
+    "bytes": 1146,
+    "sha256": "6d6637aab4b06ad0cd3c5ec896ac2d699262f55c4d93e9e1e870034bca75f31f",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-composer-01.log",
+    "bytes": 292,
+    "sha256": "daf9ddd319282ab774e633b074c59aef7e760214e8b112bb45721f7004e0f1f5",
+    "lines": 8
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-composer-02.log",
+    "bytes": 10084,
+    "sha256": "e78d2a7a770998c455349db6a54a17d6bb9ac14913fe6a21ef5887dd775f662f",
+    "lines": 200
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-composer-03.log",
+    "bytes": 4549,
+    "sha256": "cd2b899ebdf338f6e690c7b4a98c03297b86833e2ab320be8224079b02fc8cc4",
+    "lines": 74
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-composer-04.log",
+    "bytes": 2159,
+    "sha256": "28255268d7e564e1a4ffc7d918f0c08c62be8b85771fdb8a08d5097312dd3302",
+    "lines": 37
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-composer.json",
+    "bytes": 1600,
+    "sha256": "0a0c345c16f7d6151a3df5a298498c68918ef34d6d80631ddf114bf34f623666",
+    "lines": 72
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-composer.log",
+    "bytes": 1242,
+    "sha256": "ef9dc548e832e45dbed73a247d58c4c126c3228ee829866d8307dfb9c6b6c547",
+    "lines": 5
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go-00.log",
+    "bytes": 304,
+    "sha256": "cf5c0d94cfb09de1a5376bcc1b72e1da09ad466c5ee46e273a0a715ece6c4694",
+    "lines": 6
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go-01.log",
+    "bytes": 78,
+    "sha256": "71400519bd90dbd0c55a90ef0201bc0a440735d2c7b3b0d22b316d90644c788d",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go-02.log",
+    "bytes": 39,
+    "sha256": "6c455f054d67b678a24d6b56c6fb106f18767b21ea0790420dd3789b335a386b",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go-03.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go-04.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go-05.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go-06.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go-07.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go-08.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go-09.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go.json",
+    "bytes": 1841,
+    "sha256": "200b90a9c3f57800694417d2cfb0c29275d25c6145a422620742f787ac1f94ba",
+    "lines": 102
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-go.log",
+    "bytes": 1368,
+    "sha256": "a451f77668c2d0d8d1a37dfd2fafd4d01107dc68bd1a7ee0f07d31c3e123d1a9",
+    "lines": 10
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm-00.log",
+    "bytes": 63,
+    "sha256": "abf0e83e16830869e857fc7dc0543b3c2562415419793e571682a3dc706f41a7",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm-01.log",
+    "bytes": 129,
+    "sha256": "1cd912ca78040b9ca9c98f43282936c6e8a983f4ff35ed4b79caeb354e21d9b8",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm-02.log",
+    "bytes": 131,
+    "sha256": "f081a2d81ac48ba8337c053c7d1aa7a0004450227001a06eda61b5f97d90d2d8",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm-03.log",
+    "bytes": 130,
+    "sha256": "22f26a06892187c85b844a665187db61f95f535f34a2c12cf7767af4ca44c46d",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm-04.log",
+    "bytes": 131,
+    "sha256": "059a25e19bbd086e628b61fe01d900e542e09f12e3f50f2ecc657e60c748e2ca",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm-05.log",
+    "bytes": 131,
+    "sha256": "7843d866d28ab9802ed3624b3a1a197d046cfdad8ca079e7b062d533dd7f9eeb",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm-06.log",
+    "bytes": 131,
+    "sha256": "5ce27f0ea9989304847a5075484418e095099eb563fe30ecfc843b27d7057ff5",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm-07.log",
+    "bytes": 129,
+    "sha256": "6b310bce686f05d81a026602b8bfc4993be74f07941f0a01f8e15323c137dbd2",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm-08.log",
+    "bytes": 130,
+    "sha256": "57c3034cc53a5d1423b5a95b247c5b4b2659fc76a75c4f95adf94f08c11ce2f4",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm-09.log",
+    "bytes": 130,
+    "sha256": "c03bbef57761413d0b47d2555aeeed61ec69e4b2a225b3e734557e8db199c883",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm-10.log",
+    "bytes": 346,
+    "sha256": "04ac195a62f0235071d7c18e062e5dd82a9a2e42488b7b31a3639788d5814b15",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm.json",
+    "bytes": 2528,
+    "sha256": "b6e414aa49de4cd2787685e3b06e45efce2adea8ea98f72ddbc3637458e8a24e",
+    "lines": 122
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-npm.log",
+    "bytes": 1948,
+    "sha256": "e0adceef024ea78b7d57e62cd4117f2581678496083f8e4f6a1497883b28243b",
+    "lines": 11
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-00.log",
+    "bytes": 1316,
+    "sha256": "0df53de5994781dfc011c982cd2ed47f688e301c130014b48a428ac889b880a4",
+    "lines": 26
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-01.log",
+    "bytes": 323,
+    "sha256": "eb424505180e9f9dba452debc5cc4ebe8b45f9c0ab765849cc699727a602239e",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-02.log",
+    "bytes": 172,
+    "sha256": "998659bfa158601ccfab4d55f9563ddd624c431882d4f5c6c65777540074412f",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-03.log",
+    "bytes": 173,
+    "sha256": "fd1669686e58c3a7e5b1d00e7cfa0837094119483c74dee9aec3c9419e8e3695",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-04.log",
+    "bytes": 325,
+    "sha256": "3968c0802c23a962c91574b94b3cf9bd217968093256bb777739a9ed1e7c20c9",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-05.log",
+    "bytes": 205,
+    "sha256": "0ebdae8577d94c50a5aa986246724902e3b5dc677dc7257cb55ae2677e600b23",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-06.log",
+    "bytes": 205,
+    "sha256": "3bfb52c31ecb0a08671e39480560655dab86f78ece38a714131c1bf2a07e9cd3",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-07.log",
+    "bytes": 211,
+    "sha256": "d7fb581973366555180e7ab25b69ae4426ff38183c619128fdb9e78980d61091",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-08.log",
+    "bytes": 195,
+    "sha256": "b51ce671580195538708f86f731fa404a7bb78276abb8612ba1e43af49d0fb90",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-09.log",
+    "bytes": 205,
+    "sha256": "976e2e172cc042aa9eae9bf184ecf3f1b062ccbfa11d4504507d91b2fbc40e6b",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-10.log",
+    "bytes": 275,
+    "sha256": "7e3c3bf38d0eabd8a7d96ff4dd66c1ca71069c9c9182eddbc346318a661d06a9",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-11.log",
+    "bytes": 274,
+    "sha256": "6f2e61896a6475ddf1de743fc4e862bd73042e2fc5302d4a3d0ae105f58f338c",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-12.log",
+    "bytes": 128,
+    "sha256": "83db33e0aa011fe0ef511cee572c4da3624df1f47701f3f8825092c7c070af6d",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-13.log",
+    "bytes": 414,
+    "sha256": "e7960068ca39552b2d85ea18d8c4f318075e149a9433dcd566bff51f448772ab",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-14.log",
+    "bytes": 281,
+    "sha256": "a60428be65a6b58a1a347f612ebfbc5cfbc80df62a679bebe4856edf074abd18",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-15.log",
+    "bytes": 279,
+    "sha256": "8eb4daeaa9753e7de0a1c372f661e2e0d11efcdab2d2a2ef2043d5b02eaf73fc",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-16.log",
+    "bytes": 279,
+    "sha256": "b555724f98e33d8e06a9fb6dd20324d1c22fd984f044d76f0218f018bf492a8a",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-17.log",
+    "bytes": 279,
+    "sha256": "2badfb4582c667316fd35f6790abf0f7ac07466f7f6756f050dd868737275a04",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-18.log",
+    "bytes": 306,
+    "sha256": "c57bdd88a63763912f693db894f59f4a5dad9fde9100b7763f273f82f3018d38",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-19.log",
+    "bytes": 292,
+    "sha256": "40f25ed98873f584abe5877a1ba31fdba8f0137cde226c75c2c4f963e4d66474",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-20.log",
+    "bytes": 279,
+    "sha256": "172132c606a22cf6a9d50d39236b7e645f5f1977d8bf8ce0024fe3e518b7c50f",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget-21.log",
+    "bytes": 150,
+    "sha256": "ef8b80b1651be31979f721cbbbcc8370265b2c72866305717ae3f19f5ce0ce15",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget.json",
+    "bytes": 8290,
+    "sha256": "74e295037bb4277238a9a5a7456dd46557889e68f3e20e9cd093c89480e1c107",
+    "lines": 310
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-nuget.log",
+    "bytes": 6725,
+    "sha256": "4110f3087362c5bf95e9aeb360516058e99f2de03b9bc02c26159e1082cb325a",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-00.log",
+    "bytes": 103902,
+    "sha256": "fdd2cabe40ced037b3e029738c337cac5018023551e74ee906c3f98b6de1758f",
+    "lines": 1232
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-01.log",
+    "bytes": 104010,
+    "sha256": "38ad0117f63dc30fb1e555740bb64f12c73116a945f497b4555241525e028211",
+    "lines": 1234
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-02.log",
+    "bytes": 27082,
+    "sha256": "1e47d6fc316cfe7ba647c94fe3271bc5d82d1b4ab34dce67463a26ff05073c6c",
+    "lines": 342
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-03.log",
+    "bytes": 40059,
+    "sha256": "aaebaba479bbeb67093c2b9907c7ac73476fdb53cb448f26f38dfe4a23b42241",
+    "lines": 484
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-04.log",
+    "bytes": 5043,
+    "sha256": "7a3455a9a08f4cffbfd959055db8991a5145b7d5051970daaaf89ca68b493227",
+    "lines": 66
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-05.log",
+    "bytes": 10448,
+    "sha256": "91ec238ebff1af3ee1022f49f655c03d92f2a96050abc775110dc00f7cf98cab",
+    "lines": 152
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-06.log",
+    "bytes": 56477,
+    "sha256": "2cddcc4bf3e74d5e8e7740afd29c39c819f9b5cf43b2fb4b87360cce401c3a6c",
+    "lines": 794
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-07.log",
+    "bytes": 92901,
+    "sha256": "6e00cb51015851f9eb7796a4d58cce76043e2a8d0711c147e2ff3cb80489ab9d",
+    "lines": 1151
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-08.log",
+    "bytes": 67656,
+    "sha256": "bad83b1024c3ed5392f5ecdbc6f1dbef51289a407c790a6739bf1b06a72de44e",
+    "lines": 832
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-09.log",
+    "bytes": 56476,
+    "sha256": "64391150772fc689cacf7792b744ffdb75ca26a700dab126e22715ce986dbb87",
+    "lines": 794
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-10.log",
+    "bytes": 11853,
+    "sha256": "23ca24dde8ff5d4b5ff476a321b7001e7abb0fce1e40363bbfbea34ee4422336",
+    "lines": 175
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-11.log",
+    "bytes": 317602,
+    "sha256": "2096d9a579f5e72f6a60885914def9df239a4e196a2a80c33c43921f955e481a",
+    "lines": 5247
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python-final.log",
+    "bytes": 3261,
+    "sha256": "f8cef7b7df5e9cb4e6a17c99b1f7639e981dc473c3fc51d52bf654e818421c81",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python.json",
+    "bytes": 4170,
+    "sha256": "d8f0fdb982a9db1fbb35b498cedae57bf61772ddcc1e70a87ec6df5697db216b",
+    "lines": 179
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-python.log",
+    "bytes": 2902,
+    "sha256": "227e2e32ec22dfb6756133c2784573b8470ef3b1f03dcad58342c6c003b765d6",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-swift-00.log",
+    "bytes": 33,
+    "sha256": "15187db030020dcc9a69c313826cdfcb473a5214b2fcb6b20d0bb3bf81320982",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-swift-01.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-swift.json",
+    "bytes": 354,
+    "sha256": "1096675276164001f00a716f4eacb779386cf0c01082458a4bd9c37894bbfab4",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/refresh-swift.log",
+    "bytes": 257,
+    "sha256": "d890fe29714badc284b6b1d006ac4e4418fa00a3b829656bb7236bba5ffd010e",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/registry-probe.log",
+    "bytes": 1369,
+    "sha256": "5e41986b05971839e1293537a4666d332e2d428e93721820737c8c6c5aeb460b",
+    "lines": 32
+  },
+  {
+    "path": "ci-logs/issue-408/research-format.log",
+    "bytes": 397,
+    "sha256": "75811b4fa365b01f7aaae7f62a5901d85cec094a82f6411d02dec55177cdf2de",
+    "lines": 10
+  },
+  {
+    "path": "ci-logs/issue-408/research.log",
+    "bytes": 38,
+    "sha256": "6442a74f1bbb0342ced40b98911f14197a333f00fbf6f310f8f7f5cc051dd4e0",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/runtime-evidence.log",
+    "bytes": 18,
+    "sha256": "8b0feb43c8299153997257999d92c55963fc017afba4fbadb54cf143eac27043",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/rust-benchmark-check.log",
+    "bytes": 177,
+    "sha256": "751ab9510f32337b76fcbe4bd4dbc33494b3df56019c48851a79d0978fc32647",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/rust-benchmark.log",
+    "bytes": 1738,
+    "sha256": "a77c93405a88022d026ac8f2c5107de564d60c3cb40afea60971c38581d4f038",
+    "lines": 43
+  },
+  {
+    "path": "ci-logs/issue-408/rust-checks.log",
+    "bytes": 38,
+    "sha256": "5267df7351c16144271ad3759d3ed0b28cef55f37c0314007076281ac5ad023c",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/rust-clippy.log",
+    "bytes": 1175,
+    "sha256": "caab5b91f9472b5736ae434b3cd2ad47ee9a47166f46082600712ea8ff435bab",
+    "lines": 31
+  },
+  {
+    "path": "ci-logs/issue-408/rust-fmt.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/rust-no-default.log",
+    "bytes": 31936,
+    "sha256": "56a4bb8c13e90e18650a14a4fddf2918e9f4209d86b32d178d7f38a9377428c5",
+    "lines": 646
+  },
+  {
+    "path": "ci-logs/issue-408/rust-test.log",
+    "bytes": 38934,
+    "sha256": "51b5a37a5afb0b68746254da09d5beba7ea458dd98efeb75501b78a37757dee4",
+    "lines": 799
+  },
+  {
+    "path": "ci-logs/issue-408/rust-toolchain-install.log",
+    "bytes": 370,
+    "sha256": "b3c8476bffbb53174d6ef7da39280b3a8d1347cbd9eb71e45ffbfa48d4d9b644",
+    "lines": 8
+  },
+  {
+    "path": "ci-logs/issue-408/rust-toolchain-update.log",
+    "bytes": 488,
+    "sha256": "fc45ee47782f5c31021baac8a8228edd9d4f563e06922242247bec6c47102201",
+    "lines": 5
+  },
+  {
+    "path": "ci-logs/issue-408/shellcheck.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/staticcheck-install.log",
+    "bytes": 395,
+    "sha256": "2ef0fb1b593de48f26f7a3a374c7d2fd768b04274383fd1c7389e5047833fd02",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/staticcheck-version.log",
+    "bytes": 29,
+    "sha256": "129e8482ea7967a9991755f5236f4613081e8b49c8ac47acd416013ae6a4a658",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/tables-final.log",
+    "bytes": 124,
+    "sha256": "6d42892a974f4d32407de4b5bd7c6a06ce344bf588423cda90967d223e55019e",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/tables.log",
+    "bytes": 123,
+    "sha256": "acb1bef554c3302cae162a648d14e2a5249bd172ab6048a59026182ece6a2d21",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/tool-pins-final.log",
+    "bytes": 43,
+    "sha256": "f16ea127dbcd0e0ae4ba1c58064a3061ed20452c9519bfd7dc7e284ac55a8acc",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/toolchain-manifest-paths.txt",
+    "bytes": 4100,
+    "sha256": "8bd9a0019003221a86978bd76d23adaddf8dffe63466351bde2d859332c6f700",
+    "lines": 69
+  },
+  {
+    "path": "ci-logs/issue-408/tools-install.log",
+    "bytes": 576,
+    "sha256": "471f7e4193c65f3a4d4694266d5d57714979978aafec5b676c393c0491e48ca7",
+    "lines": 9
+  },
+  {
+    "path": "ci-logs/issue-408/versions-final.log",
+    "bytes": 171,
+    "sha256": "9c1024518977b70d524d5908b466ec6ce7a2d6a61a06b87335f08c0ee6b1d8c5",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/website-build.log",
+    "bytes": 589,
+    "sha256": "875a76629afa0e31f19ecf61d2aa70b97337be584b03e52441f2efffc1ba2731",
+    "lines": 17
+  },
+  {
+    "path": "ci-logs/issue-408/website-install.log",
+    "bytes": 141,
+    "sha256": "be6ec78030303c901f423892b8dce6ee26f948ddc0af9a77d56f49f3ece53be3",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/website-lint.log",
+    "bytes": 50,
+    "sha256": "aa43c689c899846335aaddae9e7af360a4de4a43cf7a882627741ddf5387fe02",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/workflow-tools-fmt.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/workflow-tools-test.log",
+    "bytes": 754,
+    "sha256": "3b11ae6d83c02628157c9fd738e339b9c5291013875f5018684fc5392c33a20f",
+    "lines": 14
+  },
+  {
+    "path": "ci-logs/issue-408/yarn-audit.log",
+    "bytes": 652,
+    "sha256": "1fb8b61df8b68ebee0121ad7370ab1d861824dd1b51a4127c84372393cbb0f04",
+    "lines": 31
+  },
+  {
+    "path": "ci-logs/issue-408/zizmor.log",
+    "bytes": 176596,
+    "sha256": "4341428f8237f684e95f1b3da56f406e7bc49ef5f3d1518589c01eea2ec84339",
+    "lines": 1351
+  }
+]

@@ -1,67 +1,44 @@
 #!/usr/bin/env node
 
 import { resolve } from 'node:path';
+import semver from 'semver';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 /**
  * Update npm for OIDC trusted publishing
- * npm trusted publishing requires npm >= 11.5.1
- * Node.js 20.x ships with npm 10.x, so we need to update
+ * npm trusted publishing requires npm >= 11.5.1; use the reviewed npm 12 release
+ * Validate its exact supported Node ranges before updating
  *
  * Uses link-foundation libraries:
  * - Lockfile-installed command-stream and lino-arguments helpers
  * - command-stream: Modern shell command execution with streaming support
  */
 
-export const NPM_MIN_VERSION = '11.5.1';
-export const NODE_MIN_VERSION = '22.14.0';
-export const NPM_TARGET_MAJOR = 11;
+export const NPM_MIN_VERSION = '12.2.2';
+export const NODE_MIN_VERSION = '22.22.2';
+export const NODE_SUPPORTED_RANGE = '^22.22.2 || ^24.15.0 || >=26.0.0';
+export const NPM_TARGET_MAJOR = 12;
 export const NPM_REGISTRY_METADATA_URL = 'https://registry.npmjs.org/npm';
 
 export function parseVersion(version) {
-  const match = String(version)
-    .trim()
-    .match(
-      /^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z-.]+))?(?:\+[0-9A-Za-z-.]+)?$/
-    );
-
-  if (!match) {
+  const parsed = semver.parse(String(version).trim());
+  if (!parsed) {
     throw new Error(`Invalid semantic version: ${version}`);
   }
-
   return {
-    major: Number(match[1]),
-    minor: Number(match[2]),
-    patch: Number(match[3]),
-    prerelease: match[4] || '',
+    major: parsed.major,
+    minor: parsed.minor,
+    patch: parsed.patch,
+    prerelease: parsed.prerelease.join('.'),
   };
 }
 
 export function compareVersions(leftVersion, rightVersion) {
-  const left = parseVersion(leftVersion);
-  const right = parseVersion(rightVersion);
-  const keys = ['major', 'minor', 'patch'];
-
-  for (const key of keys) {
-    if (left[key] !== right[key]) {
-      return left[key] > right[key] ? 1 : -1;
-    }
-  }
-
-  if (left.prerelease === right.prerelease) {
-    return 0;
-  }
-
-  if (!left.prerelease) {
-    return 1;
-  }
-
-  if (!right.prerelease) {
-    return -1;
-  }
-
-  return left.prerelease > right.prerelease ? 1 : -1;
+  return semver.compare(
+    String(leftVersion).trim(),
+    String(rightVersion).trim()
+  );
 }
 
 export function isVersionAtLeast(version, minimumVersion) {
@@ -73,32 +50,15 @@ export function isSupportedNpmVersion(version) {
 }
 
 export function isSupportedNodeVersion(version) {
-  return isVersionAtLeast(version, NODE_MIN_VERSION);
+  return semver.satisfies(version, NODE_SUPPORTED_RANGE);
 }
 
 export function selectLatestSupportedNpmRelease(metadata) {
-  const releases = Object.entries(metadata?.versions || {})
-    .filter(([version, release]) => {
-      const parsed = parseVersion(version);
-      return (
-        parsed.major === NPM_TARGET_MAJOR &&
-        !parsed.prerelease &&
-        isSupportedNpmVersion(version) &&
-        release?.dist?.tarball
-      );
-    })
-    .sort(([leftVersion], [rightVersion]) =>
-      compareVersions(rightVersion, leftVersion)
-    );
-
-  if (releases.length === 0) {
-    throw new Error(
-      `No npm ${NPM_TARGET_MAJOR}.x release found at or above ${NPM_MIN_VERSION}`
-    );
+  const release = metadata?.versions?.[NPM_MIN_VERSION];
+  if (!release?.dist?.tarball) {
+    throw new Error(`No npm ${NPM_MIN_VERSION} release found`);
   }
-
-  const [version, release] = releases[0];
-  return { version, tarballUrl: release.dist.tarball };
+  return { version: NPM_MIN_VERSION, tarballUrl: release.dist.tarball };
 }
 
 async function fetchNpmRegistryMetadata(fetchFn) {
@@ -121,7 +81,7 @@ async function resolveLatestSupportedNpmRelease(fetchFn) {
 }
 
 // Update npm for OIDC trusted publishing (requires >= 11.5.1)
-// Pin to npm@11 to avoid breaking changes from future major versions
+// Pin to the reviewed release for reproducible publishing setup
 //
 // Known issue: Node.js 22.22.2 on GitHub Actions (ubuntu-24.04 image >= 20260329.72.1)
 // ships with a broken npm 10.9.7 that is missing the 'promise-retry' module,
@@ -131,13 +91,13 @@ async function resolveLatestSupportedNpmRelease(fetchFn) {
 // See: https://github.com/npm/cli/issues/9151
 //
 // Workaround strategies in order of preference:
-// 1. npm install -g npm@11 (standard approach)
+// 1. npm install -g npm@12.2.2 (standard approach)
 // 2. curl tarball download (bypasses broken npm entirely)
-// 3. npx npm@11 install (uses npx cache, bypasses arborist)
+// 3. npx npm@12.2.2 install (uses npx cache, bypasses arborist)
 // 4. corepack as last resort
 
 async function tryStandardInstall($) {
-  await $`npm install -g npm@11`;
+  await $`npm install -g npm@12.2.2`;
 }
 
 async function tryCurlTarball($, fetchFn) {
@@ -164,12 +124,12 @@ async function tryCurlTarball($, fetchFn) {
 }
 
 async function tryNpxInstall($) {
-  await $`npx --yes npm@11 install -g npm@11`;
+  await $`npx --yes npm@12.2.2 install -g npm@12.2.2`;
 }
 
 async function tryCorepack($) {
   await $`corepack enable`;
-  await $`corepack prepare npm@11 --activate`;
+  await $`corepack prepare npm@12.2.2 --activate`;
 }
 
 async function tryStrategy(name, fn) {
@@ -184,7 +144,7 @@ async function tryStrategy(name, fn) {
 
 function failUnsupportedNodeVersion(nodeVersion) {
   console.error(
-    `ERROR: Node.js ${NODE_MIN_VERSION} or later is required for npm OIDC trusted publishing setup.`
+    `ERROR: Node.js ${NODE_SUPPORTED_RANGE} is required for npm ${NPM_MIN_VERSION}.`
   );
   console.error(`Current Node.js version is ${nodeVersion}.`);
   process.exit(1);
@@ -212,7 +172,7 @@ export async function setupNpm($, fetchFn = fetch) {
   console.log(`Current npm version: ${currentVersion}`);
 
   const strategies = [
-    ['npm install -g npm@11', () => tryStandardInstall($)],
+    ['npm install -g npm@12.2.2', () => tryStandardInstall($)],
     ['curl-based tarball download', () => tryCurlTarball($, fetchFn)],
     ['npx-based install', () => tryNpxInstall($)],
     ['corepack', () => tryCorepack($)],

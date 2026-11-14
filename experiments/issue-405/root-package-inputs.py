@@ -4,12 +4,15 @@ Runs only package-JSON generation: no compilation or package installation.
 """
 
 import json
+import os
 import pathlib
 import subprocess
 import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-LOGS = ROOT / "ci-logs"
+LOGS = ROOT / os.environ.get("ISSUE_ROOT_PROBE_LOGS", "ci-logs")
+PREFIX = os.environ.get("ISSUE_ROOT_PROBE_PREFIX", "issue405-root-inputs")
+LOGS.mkdir(parents=True, exist_ok=True)
 BUILD = """plugins { kotlin("multiplatform") version "2.4.21" }
 repositories { mavenCentral() }
 kotlin { js { nodejs() } }
@@ -47,7 +50,7 @@ with tempfile.TemporaryDirectory(prefix="issue405-kgp-inputs-") as directory:
         ]
         if rerun:
             command.append("--rerun")
-        with (LOGS / f"issue405-root-inputs-{number}.log").open("w") as log:
+        with (LOGS / f"{PREFIX}-{number}.log").open("w") as log:
             subprocess.run(
                 command, stdout=log, stderr=subprocess.STDOUT, check=True
             )
@@ -56,7 +59,7 @@ with tempfile.TemporaryDirectory(prefix="issue405-kgp-inputs-") as directory:
     evidence = dict(
         requested=["^11.0.7", "^11.0.8", "^11.0.8"], generated=selected
     )
-    (LOGS / "issue405-root-inputs-result.json").write_text(
+    (LOGS / f"{PREFIX}-result.json").write_text(
         json.dumps(evidence, indent=2) + "\n"
     )
     print(json.dumps(evidence))

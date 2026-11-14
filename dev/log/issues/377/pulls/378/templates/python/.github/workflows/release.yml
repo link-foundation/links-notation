@@ -59,7 +59,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Detect Python layout
         id: python_layout
@@ -131,7 +131,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Detect Python layout
         id: python_layout
@@ -167,7 +167,7 @@ jobs:
           bash scripts/run-with-budget-warning.sh \
             "$INSTALL_BUDGET_SECONDS" "Install dependencies" \
             bash -euo pipefail -c '
-              python -m pip install --upgrade pip
+              python -m pip install --upgrade pip==26.3
               pip install -e ".[dev]"
             '
 
@@ -295,7 +295,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Detect Python layout
         id: python_layout
@@ -331,7 +331,7 @@ jobs:
           bash scripts/run-with-budget-warning.sh \
             "$INSTALL_BUDGET_SECONDS" "Install dependencies" \
             bash -euo pipefail -c '
-              python -m pip install --upgrade pip
+              python -m pip install --upgrade pip==26.3
               pip install -e ".[dev]"
             '
 
@@ -384,7 +384,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Detect Python layout
         id: python_layout
@@ -414,8 +414,8 @@ jobs:
 
       - name: Install build dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install build twine
+          python -m pip install --upgrade pip==26.3
+          pip install build==1.6.1 twine==7.0.0
 
       - name: Build package
         run: |
@@ -454,7 +454,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: "3.15.0"
+          python-version: "3.15.2"
 
       - name: Detect Python layout
         id: python_layout
@@ -571,7 +571,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Detect Python layout
         id: python_layout
@@ -601,8 +601,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install build twine
+          python -m pip install --upgrade pip==26.3
+          pip install build==1.6.1 twine==7.0.0
 
       - name: Check release artifacts
         id: version_check
@@ -696,7 +696,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Detect Python layout
         id: python_layout
@@ -727,8 +727,8 @@ jobs:
       - name: Install dependencies
         run: |
           cd "$PYTHON_ROOT"
-          python -m pip install --upgrade pip
-          pip install build twine "scriv[toml]"
+          python -m pip install --upgrade pip==26.3
+          pip install build==1.6.1 twine==7.0.0 "scriv[toml]==1.8.1"
 
       - name: Configure git
         run: |

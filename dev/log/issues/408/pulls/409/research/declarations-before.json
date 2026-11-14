@@ -1,0 +1,6365 @@
+[
+  {
+    "path": "js/package.json",
+    "ecosystem": "npm",
+    "name": "bun-types",
+    "declared": "^1.4.4",
+    "literal": "^1.4.4"
+  },
+  {
+    "path": "js/package.json",
+    "ecosystem": "npm",
+    "name": "eslint",
+    "declared": "^10.15.0",
+    "literal": "^10.15.0"
+  },
+  {
+    "path": "js/package.json",
+    "ecosystem": "npm",
+    "name": "peggy",
+    "declared": "^5.1.1",
+    "literal": "^5.1.1"
+  },
+  {
+    "path": "js/package.json",
+    "ecosystem": "npm",
+    "name": "prettier",
+    "declared": "^3.10.1",
+    "literal": "^3.10.1"
+  },
+  {
+    "path": "js/package.json",
+    "ecosystem": "npm",
+    "name": "typescript",
+    "declared": "^7.0.2",
+    "literal": "^7.0.2"
+  },
+  {
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "setuptools",
+    "declared": ">=84.2.1",
+    "literal": ">=84.2.1"
+  },
+  {
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pytest",
+    "declared": ">=9.2.0",
+    "literal": ">=9.2.0"
+  },
+  {
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pytest-timeout",
+    "declared": ">=2.4.0",
+    "literal": ">=2.4.0"
+  },
+  {
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "black",
+    "declared": ">=26.10.1",
+    "literal": ">=26.10.1"
+  },
+  {
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "isort",
+    "declared": ">=9.0.2",
+    "literal": ">=9.0.2"
+  },
+  {
+    "path": "python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "flake8",
+    "declared": ">=7.5.0",
+    "literal": ">=7.5.0"
+  },
+  {
+    "path": "rust/links-notation/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "nom",
+    "declared": "8.0.0",
+    "literal": "8.0.0"
+  },
+  {
+    "path": "rust/links-notation-macro/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "syn",
+    "declared": "3.0.10",
+    "literal": "3.0.10"
+  },
+  {
+    "path": "rust/links-notation-macro/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "quote",
+    "declared": "1.0.47",
+    "literal": "1.0.47"
+  },
+  {
+    "path": "rust/links-notation-macro/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "proc-macro2",
+    "declared": "1.0.107",
+    "literal": "1.0.107"
+  },
+  {
+    "path": "rust/links-notation-benchmark/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "serde",
+    "declared": "1.0.229",
+    "literal": "1.0.229"
+  },
+  {
+    "path": "rust/links-notation-benchmark/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "serde_json",
+    "declared": "1.0.154",
+    "literal": "1.0.154"
+  },
+  {
+    "path": "rust/links-notation-benchmark/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "tiktoken-rs",
+    "declared": "0.12.1",
+    "literal": "0.12.1"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "literal": "4.1.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj",
+    "ecosystem": "nuget",
+    "name": "Platform.Collections",
+    "declared": "0.4.0",
+    "literal": "0.4.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "xunit.v3",
+    "declared": "4.0.3",
+    "literal": "4.0.3"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.ApplicationInsights",
+    "declared": "3.2.0",
+    "literal": "3.2.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Testing.Extensions.Telemetry",
+    "declared": "2.5.3",
+    "literal": "2.5.3"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Testing.Extensions.TrxReport.Abstractions",
+    "declared": "2.5.3",
+    "literal": "2.5.3"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Testing.Platform",
+    "declared": "2.5.3",
+    "literal": "2.5.3"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Testing.Platform.MSBuild",
+    "declared": "2.5.3",
+    "literal": "2.5.3"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Azure.Core",
+    "declared": "1.65.0",
+    "literal": "1.65.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Extensions.Configuration",
+    "declared": "11.0.0",
+    "literal": "11.0.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Extensions.Configuration.Binder",
+    "declared": "11.0.0",
+    "literal": "11.0.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Extensions.Configuration.EnvironmentVariables",
+    "declared": "11.0.0",
+    "literal": "11.0.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Extensions.DependencyInjection",
+    "declared": "11.0.0",
+    "literal": "11.0.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Extensions.Logging",
+    "declared": "11.0.0",
+    "literal": "11.0.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Extensions.Logging.Configuration",
+    "declared": "11.0.0",
+    "literal": "11.0.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Extensions.Options.ConfigurationExtensions",
+    "declared": "11.0.0",
+    "literal": "11.0.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Identity.Client",
+    "declared": "4.92.0",
+    "literal": "4.92.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Identity.Client.Extensions.Msal",
+    "declared": "4.92.0",
+    "literal": "4.92.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.IdentityModel.Abstractions",
+    "declared": "8.23.0",
+    "literal": "8.23.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "OpenTelemetry",
+    "declared": "1.21.0",
+    "literal": "1.21.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "OpenTelemetry.Api",
+    "declared": "1.21.0",
+    "literal": "1.21.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "OpenTelemetry.Api.ProviderBuilderExtensions",
+    "declared": "1.21.0",
+    "literal": "1.21.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "OpenTelemetry.Extensions.Hosting",
+    "declared": "1.21.0",
+    "literal": "1.21.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "OpenTelemetry.PersistentStorage.Abstractions",
+    "declared": "1.2.0",
+    "literal": "1.2.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "OpenTelemetry.PersistentStorage.FileSystem",
+    "declared": "1.2.0",
+    "literal": "1.2.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "System.ClientModel",
+    "declared": "1.17.0",
+    "literal": "1.17.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "System.Memory.Data",
+    "declared": "11.0.0",
+    "literal": "11.0.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "System.Security.Cryptography.ProtectedData",
+    "declared": "11.0.0",
+    "literal": "11.0.0"
+  },
+  {
+    "path": "csharp/Link.Foundation.Links.Notation.Tests/Link.Foundation.Links.Notation.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Bcl.AsyncInterfaces",
+    "declared": "11.0.0",
+    "literal": "11.0.0"
+  },
+  {
+    "path": "csharp/tools/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "latexminted",
+    "declared": "==0.7.1",
+    "literal": "==0.7.1"
+  },
+  {
+    "path": "csharp/tools/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "latex2pydata",
+    "declared": ">=0.5.0",
+    "literal": ">=0.5.0"
+  },
+  {
+    "path": "csharp/tools/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "latexrestricted",
+    "declared": ">=0.6.2",
+    "literal": ">=0.6.2"
+  },
+  {
+    "path": "csharp/tools/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "Pygments",
+    "declared": ">=2.21.0",
+    "literal": ">=2.21.0"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.jspecify:jspecify",
+    "declared": "1.0.1",
+    "literal": "1.0.1"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.junit.jupiter:junit-jupiter",
+    "declared": "6.1.3",
+    "literal": "6.1.3"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-enforcer-plugin",
+    "declared": "3.7.0",
+    "literal": "3.7.0"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-compiler-plugin",
+    "declared": "3.16.0",
+    "literal": "3.16.0"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-surefire-plugin",
+    "declared": "3.6.1",
+    "literal": "3.6.1"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-jar-plugin",
+    "declared": "3.5.1",
+    "literal": "3.5.1"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-source-plugin",
+    "declared": "3.4.0",
+    "literal": "3.4.0"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-javadoc-plugin",
+    "declared": "3.12.0",
+    "literal": "3.12.0"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.diffplug.spotless:spotless-maven-plugin",
+    "declared": "3.11.0",
+    "literal": "3.11.0"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-gpg-plugin",
+    "declared": "3.2.8",
+    "literal": "3.2.8"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.sonatype.central:central-publishing-maven-plugin",
+    "declared": "0.12.0",
+    "literal": "0.12.0"
+  },
+  {
+    "path": "java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.google.googlejavaformat:google-java-format",
+    "declared": "2.0.0",
+    "literal": "2.0.0"
+  },
+  {
+    "path": "java/.mvn/wrapper/maven-wrapper.properties",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.wrapper:maven-wrapper",
+    "declared": "3.3.4",
+    "literal": "3.3.4"
+  },
+  {
+    "path": "java/.mvn/wrapper/maven-wrapper.properties",
+    "ecosystem": "maven",
+    "name": "org.apache.maven:apache-maven",
+    "declared": "3.10.0",
+    "literal": "3.10.0"
+  },
+  {
+    "path": "php/composer.json",
+    "ecosystem": "composer",
+    "name": "phpunit/phpunit",
+    "declared": "^13.4.7",
+    "literal": "^13.4.7"
+  },
+  {
+    "path": "php/composer.json",
+    "ecosystem": "composer",
+    "name": "squizlabs/php_codesniffer",
+    "declared": "^4.0.4",
+    "literal": "^4.0.4"
+  },
+  {
+    "path": "cpp/tests/CMakeLists.txt",
+    "ecosystem": "github",
+    "name": "google/googletest",
+    "declared": "v1.18.0",
+    "literal": "v1.18.0"
+  },
+  {
+    "path": "cpp/tools/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "clang-format",
+    "declared": "==23.1.5",
+    "literal": "==23.1.5"
+  },
+  {
+    "path": "kotlin/build.gradle.kts",
+    "ecosystem": "gradle-plugin",
+    "name": "org.jetbrains.kotlin.multiplatform",
+    "declared": "2.4.21",
+    "literal": "2.4.21"
+  },
+  {
+    "path": "kotlin/build.gradle.kts",
+    "ecosystem": "gradle-plugin",
+    "name": "com.android.kotlin.multiplatform.library",
+    "declared": "9.5.1",
+    "literal": "9.5.1"
+  },
+  {
+    "path": "kotlin/build.gradle.kts",
+    "ecosystem": "gradle-plugin",
+    "name": "com.vanniktech.maven.publish",
+    "declared": "0.37.0",
+    "literal": "0.37.0"
+  },
+  {
+    "path": "kotlin/build.gradle.kts",
+    "ecosystem": "gradle-plugin",
+    "name": "org.jlleitschuh.gradle.ktlint",
+    "declared": "14.2.0",
+    "literal": "14.2.0"
+  },
+  {
+    "path": "kotlin/build.gradle.kts",
+    "ecosystem": "maven",
+    "name": "com.pinterest.ktlint:ktlint-cli",
+    "declared": "1.8.0",
+    "literal": "1.8.0"
+  },
+  {
+    "path": "kotlin/gradle/wrapper/gradle-wrapper.properties",
+    "ecosystem": "gradle",
+    "name": "gradle",
+    "declared": "9.9.1",
+    "literal": "9.9.1"
+  },
+  {
+    "path": "benchmarks/csharp/Benchmark.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.ML.Tokenizers",
+    "declared": "3.0.0",
+    "literal": "3.0.0"
+  },
+  {
+    "path": "benchmarks/csharp/Benchmark.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.ML.Tokenizers.Data.O200kBase",
+    "declared": "3.0.0",
+    "literal": "3.0.0"
+  },
+  {
+    "path": "benchmarks/csharp/Benchmark.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.ML.Tokenizers.Data.Cl100kBase",
+    "declared": "3.0.0",
+    "literal": "3.0.0"
+  },
+  {
+    "path": "benchmarks/python/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "tiktoken",
+    "declared": ">=0.14.0",
+    "literal": ">=0.14.0"
+  },
+  {
+    "path": "benchmarks/go/go.mod",
+    "ecosystem": "go",
+    "name": "github.com/pkoukk/tiktoken-go",
+    "declared": "v0.1.8",
+    "literal": "v0.1.8"
+  },
+  {
+    "path": "benchmarks/go/go.mod",
+    "ecosystem": "go",
+    "name": "github.com/pkoukk/tiktoken-go-loader",
+    "declared": "v0.0.2",
+    "literal": "v0.0.2"
+  },
+  {
+    "path": "benchmarks/go/go.mod",
+    "ecosystem": "go",
+    "name": "github.com/dlclark/regexp2",
+    "declared": "v1.12.0",
+    "literal": "v1.12.0"
+  },
+  {
+    "path": "benchmarks/go/go.mod",
+    "ecosystem": "go",
+    "name": "github.com/google/uuid",
+    "declared": "v1.6.0",
+    "literal": "v1.6.0"
+  },
+  {
+    "path": "benchmarks/go/go.mod",
+    "ecosystem": "go",
+    "name": "github.com/stretchr/testify",
+    "declared": "v1.12.1",
+    "literal": "v1.12.1"
+  },
+  {
+    "path": "benchmarks/go/go.mod",
+    "ecosystem": "go",
+    "name": "go.yaml.in/yaml/v3",
+    "declared": "v3.0.6",
+    "literal": "v3.0.6"
+  },
+  {
+    "path": "benchmarks/js/package.json",
+    "ecosystem": "npm",
+    "name": "gpt-tokenizer",
+    "declared": "^4.1.2",
+    "literal": "^4.1.2"
+  },
+  {
+    "path": "benchmarks/php/composer.json",
+    "ecosystem": "composer",
+    "name": "yethee/tiktoken",
+    "declared": "^1.1.1",
+    "literal": "^1.1.1"
+  },
+  {
+    "path": "benchmarks/php/composer.json",
+    "ecosystem": "composer",
+    "name": "squizlabs/php_codesniffer",
+    "declared": "^4.0.4",
+    "literal": "^4.0.4"
+  },
+  {
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.google.errorprone:error_prone_annotations",
+    "declared": "2.52.0",
+    "literal": "2.52.0"
+  },
+  {
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.knuddels:jtokkit",
+    "declared": "1.1.0",
+    "literal": "1.1.0"
+  },
+  {
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.google.code.gson:gson",
+    "declared": "2.15.0",
+    "literal": "2.15.0"
+  },
+  {
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-enforcer-plugin",
+    "declared": "3.7.0",
+    "literal": "3.7.0"
+  },
+  {
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-compiler-plugin",
+    "declared": "3.16.0",
+    "literal": "3.16.0"
+  },
+  {
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-jar-plugin",
+    "declared": "3.5.1",
+    "literal": "3.5.1"
+  },
+  {
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.codehaus.mojo:exec-maven-plugin",
+    "declared": "3.7.0",
+    "literal": "3.7.0"
+  },
+  {
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.diffplug.spotless:spotless-maven-plugin",
+    "declared": "3.11.0",
+    "literal": "3.11.0"
+  },
+  {
+    "path": "benchmarks/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.google.googlejavaformat:google-java-format",
+    "declared": "2.0.0",
+    "literal": "2.0.0"
+  },
+  {
+    "path": "benchmarks/tools/package.json",
+    "ecosystem": "npm",
+    "name": "csv-parse",
+    "declared": "^7.0.3",
+    "literal": "^7.0.3"
+  },
+  {
+    "path": "benchmarks/tools/package.json",
+    "ecosystem": "npm",
+    "name": "fast-xml-parser",
+    "declared": "^5.12.1",
+    "literal": "^5.12.1"
+  },
+  {
+    "path": "benchmarks/tools/package.json",
+    "ecosystem": "npm",
+    "name": "lino-objects-codec",
+    "declared": "^0.9.6",
+    "literal": "^0.9.6"
+  },
+  {
+    "path": "benchmarks/tools/package.json",
+    "ecosystem": "npm",
+    "name": "yaml",
+    "declared": "^2.9.1",
+    "literal": "^2.9.1"
+  },
+  {
+    "path": "docs/website/package.json",
+    "ecosystem": "npm",
+    "name": "lino-objects-codec",
+    "declared": "^0.9.6",
+    "literal": "^0.9.6"
+  },
+  {
+    "path": "docs/website/package.json",
+    "ecosystem": "npm",
+    "name": "eslint",
+    "declared": "^10.15.0",
+    "literal": "^10.15.0"
+  },
+  {
+    "path": "docs/website/package.json",
+    "ecosystem": "npm",
+    "name": "vite",
+    "declared": "^8.3.8",
+    "literal": "^8.3.8"
+  },
+  {
+    "path": "docs/comparison/package.json",
+    "ecosystem": "npm",
+    "name": "lino-objects-codec",
+    "declared": "^0.9.6",
+    "literal": "^0.9.6"
+  },
+  {
+    "path": "docs/comparison/package.json",
+    "ecosystem": "npm",
+    "name": "yaml",
+    "declared": "^2.9.1",
+    "literal": "^2.9.1"
+  },
+  {
+    "path": "examples/maven/kotlin/build.gradle.kts",
+    "ecosystem": "gradle-plugin",
+    "name": "org.jetbrains.kotlin.jvm",
+    "declared": "2.4.21",
+    "literal": "2.4.21"
+  },
+  {
+    "path": "scripts/ci/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "build",
+    "declared": ">=1.6.1",
+    "literal": ">=1.6.1"
+  },
+  {
+    "path": "scripts/ci/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "twine",
+    "declared": ">=7.0.0",
+    "literal": ">=7.0.0"
+  },
+  {
+    "path": "scripts/ci/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "zizmor",
+    "declared": "==1.32.0",
+    "literal": "==1.32.0"
+  },
+  {
+    "path": "scripts/ci/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "uv",
+    "declared": "==0.13.8",
+    "literal": "==0.13.8"
+  },
+  {
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "trufflesecurity/trufflehog",
+    "declared": "v3.99.9",
+    "literal": "v3.99.9"
+  },
+  {
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/security.yml",
+    "ecosystem": "github-input",
+    "name": "trufflesecurity/trufflehog",
+    "declared": "3.99.9",
+    "literal": "3.99.9"
+  },
+  {
+    "path": ".github/workflows/publish-kotlin.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/publish-kotlin.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": ".github/workflows/bom-check.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "literal": "v47.0.6"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "Swatinem/rust-cache",
+    "declared": "v2.9.3",
+    "literal": "v2.9.3"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-go",
+    "declared": "v7.0.0",
+    "literal": "v7.0.0"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": ".github/workflows/rust.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/rust.yml",
+    "ecosystem": "github",
+    "name": "Swatinem/rust-cache",
+    "declared": "v2.9.3",
+    "literal": "v2.9.3"
+  },
+  {
+    "path": ".github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": ".github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "Swatinem/rust-cache",
+    "declared": "v2.9.3",
+    "literal": "v2.9.3"
+  },
+  {
+    "path": ".github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": ".github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-go",
+    "declared": "v7.0.0",
+    "literal": "v7.0.0"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": ".github/workflows/php.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/php.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": ".github/workflows/publish-java.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/publish-java.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": ".github/workflows/go.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/go.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-go",
+    "declared": "v7.0.0",
+    "literal": "v7.0.0"
+  },
+  {
+    "path": ".github/workflows/go.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": ".github/workflows/dependencies.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/dependencies.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/dependencies.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/dependencies.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": ".github/workflows/dependencies.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": ".github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": ".github/workflows/swift.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/swift.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": ".github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "rhysd/actionlint",
+    "declared": "1.7.12",
+    "literal": "1.7.12"
+  },
+  {
+    "path": ".github/workflows/publish-php.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/publish-php.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": ".github/workflows/cpp.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/release-audit.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/release-audit.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/release-audit.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": ".github/workflows/python.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/python.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/publish-js.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/publish-js.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": ".github/workflows/publish-js.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/publish-js.yml",
+    "ecosystem": "npm",
+    "name": "npm",
+    "declared": "12.2.2",
+    "literal": "12.2.2"
+  },
+  {
+    "path": ".github/workflows/publish-csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/publish-csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": ".github/workflows/publish-csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": ".github/workflows/AutoMerge.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/AutoMerge.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/publish-rust.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/publish-rust.yml",
+    "ecosystem": "github",
+    "name": "Swatinem/rust-cache",
+    "declared": "v2.9.3",
+    "literal": "v2.9.3"
+  },
+  {
+    "path": ".github/workflows/publish-rust.yml",
+    "ecosystem": "github",
+    "name": "rust-lang/crates-io-auth-action",
+    "declared": "v1.0.6",
+    "literal": "v1.0.6"
+  },
+  {
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "literal": "v47.0.6"
+  },
+  {
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": ".github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": ".github/workflows/javascript.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/javascript.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": ".github/workflows/publish-go.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/publish-swift.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/publish-cpp.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/js.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".github/workflows/js.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": ".github/workflows/rerun-unacquired.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "psf/black",
+    "declared": "26.10.1",
+    "literal": "26.10.1"
+  },
+  {
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "PyCQA/isort",
+    "declared": "9.0.2",
+    "literal": "9.0.2"
+  },
+  {
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "PyCQA/flake8",
+    "declared": "7.5.0",
+    "literal": "7.5.0"
+  },
+  {
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "doublify/pre-commit-rust",
+    "declared": "v1.0",
+    "literal": "v1.0"
+  },
+  {
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "igorshubovych/markdownlint-cli",
+    "declared": "v0.50.0",
+    "literal": "v0.50.0"
+  },
+  {
+    "path": ".pre-commit-config.yaml",
+    "ecosystem": "npm",
+    "name": "eslint",
+    "declared": "10.15.0",
+    "literal": "10.15.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "v8.1.3",
+    "literal": "v8.1.3"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-go",
+    "declared": "v7.0.0",
+    "literal": "v7.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "v8.1.3",
+    "literal": "v8.1.3"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/metadata-action",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/actions/setup-buildx-resilient/action.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "android-actions/setup-android",
+    "declared": "v4.0.4",
+    "literal": "v4.0.4"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "denoland/setup-deno",
+    "declared": "v2.0.5",
+    "literal": "v2.0.5"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "v8.1.3",
+    "literal": "v8.1.3"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/php/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "ramsey/composer-install",
+    "declared": "4.0.0",
+    "literal": "4.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "pypa/gh-action-pypi-publish",
+    "declared": "v1.14.3",
+    "literal": "v1.14.3"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/actions/setup-buildx-resilient/action.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/attest",
+    "declared": "v4.2.2",
+    "literal": "v4.2.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "taiki-e/install-action",
+    "declared": "v2.90.3",
+    "literal": "v2.90.3"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "v8.1.3",
+    "literal": "v8.1.3"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "taiki-e/install-action",
+    "declared": "v2.90.3",
+    "literal": "v2.90.3"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/AutoMerge.yml",
+    "ecosystem": "github",
+    "name": "dependabot/fetch-metadata",
+    "declared": "v3.1.0",
+    "literal": "v3.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/bom-check.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "literal": "v47.0.6"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/go.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/go.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "literal": "v47.0.6"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/go.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-go",
+    "declared": "v7.0.0",
+    "literal": "v7.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/go.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "literal": "v47.0.6"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/js.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/js.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "literal": "v47.0.6"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/js.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "literal": "v47.0.6"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/pages.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/php.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/php.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "literal": "v47.0.6"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/php.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "literal": "v47.0.6"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/rust.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/rust.yml",
+    "ecosystem": "github",
+    "name": "tj-actions/changed-files",
+    "declared": "v47.0.6",
+    "literal": "v47.0.6"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/rust.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "v8.1.3",
+    "literal": "v8.1.3"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/csharp/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-go",
+    "declared": "v7.0.0",
+    "literal": "v7.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/go/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "v8.1.3",
+    "literal": "v8.1.3"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "ecosystem": "github",
+    "name": "android-actions/setup-android",
+    "declared": "be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd",
+    "literal": "be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "0c5077e51419868618aeaa5fe8019c62421857d6",
+    "literal": "0c5077e51419868618aeaa5fe8019c62421857d6"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "ecosystem": "github",
+    "name": "denoland/setup-deno",
+    "declared": "22d081ff2d3a40755e97629de92e3bcbfa7cf2ed",
+    "literal": "22d081ff2d3a40755e97629de92e3bcbfa7cf2ed"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "3ffccacd46053766916f087ce41d627c0b8cf2d1",
+    "literal": "3ffccacd46053766916f087ce41d627c0b8cf2d1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "v0.8.1",
+    "literal": "v0.8.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/docs.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/links.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/release.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/php/release.yml",
+    "ecosystem": "github",
+    "name": "ramsey/composer-install",
+    "declared": "4.0.0",
+    "literal": "4.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "ecosystem": "github",
+    "name": "pypa/gh-action-pypi-publish",
+    "declared": "v1.14.3",
+    "literal": "v1.14.3"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/python/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/attest",
+    "declared": "v4.2.2",
+    "literal": "v4.2.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "taiki-e/install-action",
+    "declared": "v2.90.3",
+    "literal": "v2.90.3"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "v8.1.3",
+    "literal": "v8.1.3"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/security.yml",
+    "ecosystem": "github",
+    "name": "taiki-e/install-action",
+    "declared": "v2.90.3",
+    "literal": "v2.90.3"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "v8.1.3",
+    "literal": "v8.1.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "v0.8.1",
+    "literal": "v0.8.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/csharp/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-go",
+    "declared": "v7.0.0",
+    "literal": "v7.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5",
+    "literal": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/go/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "v8.1.3",
+    "literal": "v8.1.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.jspecify:jspecify",
+    "declared": "1.0.1",
+    "literal": "1.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.junit.jupiter:junit-jupiter",
+    "declared": "6.1.3",
+    "literal": "6.1.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.junit.jupiter:junit-jupiter-params",
+    "declared": "6.1.3",
+    "literal": "6.1.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-compiler-plugin",
+    "declared": "3.16.0",
+    "literal": "3.16.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-surefire-plugin",
+    "declared": "3.6.1",
+    "literal": "3.6.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-jar-plugin",
+    "declared": "3.5.1",
+    "literal": "3.5.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-source-plugin",
+    "declared": "3.4.0",
+    "literal": "3.4.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-javadoc-plugin",
+    "declared": "3.12.0",
+    "literal": "3.12.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.diffplug.spotless:spotless-maven-plugin",
+    "declared": "3.11.0",
+    "literal": "3.11.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.github.spotbugs:spotbugs-maven-plugin",
+    "declared": "4.10.5.0",
+    "literal": "4.10.5.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.jacoco:jacoco-maven-plugin",
+    "declared": "0.8.16",
+    "literal": "0.8.16"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-enforcer-plugin",
+    "declared": "3.7.0",
+    "literal": "3.7.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-gpg-plugin",
+    "declared": "3.2.8",
+    "literal": "3.2.8"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.google.googlejavaformat:google-java-format",
+    "declared": "2.0.0",
+    "literal": "2.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/metadata-action",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/actions/setup-buildx-resilient/action.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "android-actions/setup-android",
+    "declared": "be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd",
+    "literal": "be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "0c5077e51419868618aeaa5fe8019c62421857d6",
+    "literal": "0c5077e51419868618aeaa5fe8019c62421857d6"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "denoland/setup-deno",
+    "declared": "22d081ff2d3a40755e97629de92e3bcbfa7cf2ed",
+    "literal": "22d081ff2d3a40755e97629de92e3bcbfa7cf2ed"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "3ffccacd46053766916f087ce41d627c0b8cf2d1",
+    "literal": "3ffccacd46053766916f087ce41d627c0b8cf2d1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "v0.8.1",
+    "literal": "v0.8.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "@changesets/cli",
+    "declared": "^3.0.3",
+    "literal": "^3.0.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "@eslint/js",
+    "declared": "^10.0.1",
+    "literal": "^10.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "eslint",
+    "declared": "^10.15.0",
+    "literal": "^10.15.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "eslint-config-prettier",
+    "declared": "^10.1.8",
+    "literal": "^10.1.8"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "eslint-plugin-prettier",
+    "declared": "^5.5.7",
+    "literal": "^5.5.7"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "husky",
+    "declared": "^9.1.7",
+    "literal": "^9.1.7"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "jscpd",
+    "declared": "^5.4.3",
+    "literal": "^5.4.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "lint-staged",
+    "declared": "^17.6.0",
+    "literal": "^17.6.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "prettier",
+    "declared": "^3.10.1",
+    "literal": "^3.10.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "test-anywhere",
+    "declared": "^0.9.1",
+    "literal": "^0.9.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "ramsey/composer-install",
+    "declared": "4.0.0",
+    "literal": "4.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "v0.8.1",
+    "literal": "v0.8.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/composer.json",
+    "ecosystem": "composer",
+    "name": "phpunit/phpunit",
+    "declared": "^13.4.7",
+    "literal": "^13.4.7"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/composer.json",
+    "ecosystem": "composer",
+    "name": "phpstan/phpstan",
+    "declared": "^2.3.5",
+    "literal": "^2.3.5"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/php/composer.json",
+    "ecosystem": "composer",
+    "name": "friendsofphp/php-cs-fixer",
+    "declared": "^3.95.30",
+    "literal": "^3.95.30"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5",
+    "literal": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "pypa/gh-action-pypi-publish",
+    "declared": "7245906fb61fa33a13554f9d5fb856fe61758086",
+    "literal": "7245906fb61fa33a13554f9d5fb856fe61758086"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "v0.8.1",
+    "literal": "v0.8.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "astral-sh/ruff-pre-commit",
+    "declared": "v0.17.5",
+    "literal": "v0.17.5"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/mirrors-mypy",
+    "declared": "v2.4.1",
+    "literal": "v2.4.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "hatchling",
+    "declared": ">=1.33.0",
+    "literal": ">=1.33.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "ruff",
+    "declared": ">=0.17.5",
+    "literal": ">=0.17.5"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "mypy",
+    "declared": ">=2.4.1",
+    "literal": ">=2.4.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pytest",
+    "declared": ">=9.2.0",
+    "literal": ">=9.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pytest-asyncio",
+    "declared": ">=1.5.0",
+    "literal": ">=1.5.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pytest-cov",
+    "declared": ">=7.1.0",
+    "literal": ">=7.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pre-commit",
+    "declared": ">=4.7.0",
+    "literal": ">=4.7.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "scriv",
+    "declared": ">=1.8.1",
+    "literal": ">=1.8.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "sphinx",
+    "declared": ">=9.2.0",
+    "literal": ">=9.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "furo",
+    "declared": ">=2025.12.19",
+    "literal": ">=2025.12.19"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "myst-parser",
+    "declared": ">=5.2.0",
+    "literal": ">=5.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/actions/setup-buildx-resilient/action.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "dtolnay/rust-toolchain",
+    "declared": "683b588c487a69d01f6c6ddf40f036ff682cc2c8",
+    "literal": "683b588c487a69d01f6c6ddf40f036ff682cc2c8"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/attest",
+    "declared": "v4.2.2",
+    "literal": "v4.2.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "dtolnay/rust-toolchain",
+    "declared": "683b588c487a69d01f6c6ddf40f036ff682cc2c8",
+    "literal": "683b588c487a69d01f6c6ddf40f036ff682cc2c8"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "taiki-e/install-action",
+    "declared": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39",
+    "literal": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5",
+    "literal": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "v8.0.2",
+    "literal": "v8.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "3ffccacd46053766916f087ce41d627c0b8cf2d1",
+    "literal": "3ffccacd46053766916f087ce41d627c0b8cf2d1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "taiki-e/install-action",
+    "declared": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39",
+    "literal": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "v0.8.1",
+    "literal": "v0.8.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "lino-arguments",
+    "declared": "0.5.0",
+    "literal": "0.5.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "clap",
+    "declared": "4.6.7",
+    "literal": "4.6.7"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "regex",
+    "declared": "1.13.1",
+    "literal": "1.13.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "serde_json",
+    "declared": "1.0.154",
+    "literal": "1.0.154"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "walkdir",
+    "declared": "2.5.0",
+    "literal": "2.5.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+    "literal": "cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "fc324d3547104276b827a68afc52ff2a11cc49c9",
+    "literal": "fc324d3547104276b827a68afc52ff2a11cc49c9"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "45bfe0192ca1faeb007ade9deae92b16b8254a0d",
+    "literal": "45bfe0192ca1faeb007ade9deae92b16b8254a0d"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "368f82528645a54fb793d4d04e342629a3f51346",
+    "literal": "368f82528645a54fb793d4d04e342629a3f51346"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "e7477775783ea5526144ba13e8db5eec57747ce8",
+    "literal": "e7477775783ea5526144ba13e8db5eec57747ce8"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+    "literal": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5",
+    "literal": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+    "literal": "cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "NuGet/login",
+    "declared": "8d196754b4036150537f80ac539e15c2f1028841",
+    "literal": "8d196754b4036150537f80ac539e15c2f1028841"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "3ffccacd46053766916f087ce41d627c0b8cf2d1",
+    "literal": "3ffccacd46053766916f087ce41d627c0b8cf2d1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "33d7b85da1a04171e211befe2c739303b9a4c066",
+    "literal": "33d7b85da1a04171e211befe2c739303b9a4c066"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+    "literal": "cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+    "literal": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+    "literal": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "45d7276c9ca790aabd705e31ca99c6185c3e76dd",
+    "literal": "45d7276c9ca790aabd705e31ca99c6185c3e76dd"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/mirrors-clang-format",
+    "declared": "v23.1.5",
+    "literal": "v23.1.5"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt",
+    "ecosystem": "pypi",
+    "name": "pytest",
+    "declared": "==9.2.0",
+    "literal": "==9.2.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt",
+    "ecosystem": "pypi",
+    "name": "clang-format",
+    "declared": "==23.1.5",
+    "literal": "==23.1.5"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt",
+    "ecosystem": "pypi",
+    "name": "clang-tidy",
+    "declared": "==23.1.4",
+    "literal": "==23.1.4"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt",
+    "ecosystem": "pypi",
+    "name": "cppcheck",
+    "declared": "==1.5.3",
+    "literal": "==1.5.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt",
+    "ecosystem": "pypi",
+    "name": "gcovr",
+    "declared": "==8.8",
+    "literal": "==8.8"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.txt",
+    "ecosystem": "pypi",
+    "name": "conan",
+    "declared": "==2.34.0",
+    "literal": "==2.34.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-security.txt",
+    "ecosystem": "pypi",
+    "name": "pip-audit",
+    "declared": "==2.10.1",
+    "literal": "==2.10.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-security.txt",
+    "ecosystem": "pypi",
+    "name": "zizmor",
+    "declared": "==1.32.0",
+    "literal": "==1.32.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "0f4a354dd5547a28c70b7853dbd95d5b67886e73",
+    "literal": "0f4a354dd5547a28c70b7853dbd95d5b67886e73"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "45bfe0192ca1faeb007ade9deae92b16b8254a0d",
+    "literal": "45bfe0192ca1faeb007ade9deae92b16b8254a0d"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "fc324d3547104276b827a68afc52ff2a11cc49c9",
+    "literal": "fc324d3547104276b827a68afc52ff2a11cc49c9"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "368f82528645a54fb793d4d04e342629a3f51346",
+    "literal": "368f82528645a54fb793d4d04e342629a3f51346"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "e7477775783ea5526144ba13e8db5eec57747ce8",
+    "literal": "e7477775783ea5526144ba13e8db5eec57747ce8"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "0c5077e51419868618aeaa5fe8019c62421857d6",
+    "literal": "0c5077e51419868618aeaa5fe8019c62421857d6"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "0f4a354dd5547a28c70b7853dbd95d5b67886e73",
+    "literal": "0f4a354dd5547a28c70b7853dbd95d5b67886e73"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5",
+    "literal": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+    "literal": "cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "NuGet/login",
+    "declared": "8d196754b4036150537f80ac539e15c2f1028841",
+    "literal": "8d196754b4036150537f80ac539e15c2f1028841"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "3ffccacd46053766916f087ce41d627c0b8cf2d1",
+    "literal": "3ffccacd46053766916f087ce41d627c0b8cf2d1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "33d7b85da1a04171e211befe2c739303b9a4c066",
+    "literal": "33d7b85da1a04171e211befe2c739303b9a4c066"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+    "literal": "cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+    "literal": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-dotnet",
+    "declared": "0f4a354dd5547a28c70b7853dbd95d5b67886e73",
+    "literal": "0f4a354dd5547a28c70b7853dbd95d5b67886e73"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "0c5077e51419868618aeaa5fe8019c62421857d6",
+    "literal": "0c5077e51419868618aeaa5fe8019c62421857d6"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "9000827ccba6bdab643e8b6fd33ac0654aef8333",
+    "literal": "9000827ccba6bdab643e8b6fd33ac0654aef8333"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "45d7276c9ca790aabd705e31ca99c6185c3e76dd",
+    "literal": "45d7276c9ca790aabd705e31ca99c6185c3e76dd"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package.json",
+    "ecosystem": "npm",
+    "name": "@eslint/js",
+    "declared": "10.0.1",
+    "literal": "10.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package.json",
+    "ecosystem": "npm",
+    "name": "@types/bun",
+    "declared": "1.4.4",
+    "literal": "1.4.4"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package.json",
+    "ecosystem": "npm",
+    "name": "@types/node",
+    "declared": "26.6.6",
+    "literal": "26.6.6"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package.json",
+    "ecosystem": "npm",
+    "name": "eslint",
+    "declared": "^10.15.0",
+    "literal": "^10.15.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package.json",
+    "ecosystem": "npm",
+    "name": "globals",
+    "declared": "17.14.0",
+    "literal": "17.14.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package.json",
+    "ecosystem": "npm",
+    "name": "prettier",
+    "declared": "3.10.1",
+    "literal": "3.10.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/package.json",
+    "ecosystem": "npm",
+    "name": "typescript",
+    "declared": "7.0.2",
+    "literal": "7.0.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/tests/MyPackage.Tests/MyPackage.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "coverlet.collector",
+    "declared": "10.1.0",
+    "literal": "10.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/tests/MyPackage.Tests/MyPackage.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.NET.Test.Sdk",
+    "declared": "18.12.0",
+    "literal": "18.12.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/tests/MyPackage.Tests/MyPackage.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "xunit.v3.mtp-off",
+    "declared": "4.0.3",
+    "literal": "4.0.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/tests/MyPackage.Tests/MyPackage.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "Microsoft.Bcl.AsyncInterfaces",
+    "declared": "11.0.0",
+    "literal": "11.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/csharp/tests/MyPackage.Tests/MyPackage.Tests.csproj",
+    "ecosystem": "nuget",
+    "name": "xunit.runner.visualstudio",
+    "declared": "4.0.1",
+    "literal": "4.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "0c5077e51419868618aeaa5fe8019c62421857d6",
+    "literal": "0c5077e51419868618aeaa5fe8019c62421857d6"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-go",
+    "declared": "b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+    "literal": "b7ad1dad31e06c5925ef5d2fc7ad053ef454303e"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5",
+    "literal": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "0c5077e51419868618aeaa5fe8019c62421857d6",
+    "literal": "0c5077e51419868618aeaa5fe8019c62421857d6"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/go/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "v2.2.0",
+    "literal": "v2.2.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "v7.1.1",
+    "literal": "v7.1.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "v8.1.3",
+    "literal": "v8.1.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.jspecify:jspecify",
+    "declared": "1.0.1",
+    "literal": "1.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.junit.jupiter:junit-jupiter",
+    "declared": "6.1.3",
+    "literal": "6.1.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.junit.jupiter:junit-jupiter-params",
+    "declared": "6.1.3",
+    "literal": "6.1.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-compiler-plugin",
+    "declared": "3.16.0",
+    "literal": "3.16.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-surefire-plugin",
+    "declared": "3.6.1",
+    "literal": "3.6.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-jar-plugin",
+    "declared": "3.5.1",
+    "literal": "3.5.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-source-plugin",
+    "declared": "3.4.0",
+    "literal": "3.4.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-javadoc-plugin",
+    "declared": "3.12.0",
+    "literal": "3.12.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.diffplug.spotless:spotless-maven-plugin",
+    "declared": "3.11.0",
+    "literal": "3.11.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.github.spotbugs:spotbugs-maven-plugin",
+    "declared": "4.10.5.0",
+    "literal": "4.10.5.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.jacoco:jacoco-maven-plugin",
+    "declared": "0.8.16",
+    "literal": "0.8.16"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-enforcer-plugin",
+    "declared": "3.7.0",
+    "literal": "3.7.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "org.apache.maven.plugins:maven-gpg-plugin",
+    "declared": "3.2.8",
+    "literal": "3.2.8"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/pom.xml",
+    "ecosystem": "maven",
+    "name": "com.google.googlejavaformat:google-java-format",
+    "declared": "2.0.0",
+    "literal": "2.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package.json",
+    "ecosystem": "npm",
+    "name": "@actions/artifact",
+    "declared": "6.3.1",
+    "literal": "6.3.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package.json",
+    "ecosystem": "npm",
+    "name": "@actions/core",
+    "declared": "3.0.1",
+    "literal": "3.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package.json",
+    "ecosystem": "npm",
+    "name": "@zip.js/zip.js",
+    "declared": "2.25.0",
+    "literal": "2.25.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package.json",
+    "ecosystem": "npm",
+    "name": "punycode",
+    "declared": "2.3.1",
+    "literal": "2.3.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package.json",
+    "ecosystem": "npm",
+    "name": "glob",
+    "declared": "14.0.6",
+    "literal": "14.0.6"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package.json",
+    "ecosystem": "npm",
+    "name": "glob-parent",
+    "declared": "6.0.2",
+    "literal": "6.0.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package.json",
+    "ecosystem": "npm",
+    "name": "unzip-stream",
+    "declared": "0.3.4",
+    "literal": "0.3.4"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/metadata-action",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/publish-dockerhub/action.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/setup-buildx-resilient/action.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-java",
+    "declared": "v6.2.0",
+    "literal": "v6.2.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "ecosystem": "github",
+    "name": "android-actions/setup-android",
+    "declared": "be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd",
+    "literal": "be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/javascript-first-example.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/javascript-first-gate.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/javascript-first-gate.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "949feb2413d6458794dcd2491c4babbbce0c15c1",
+    "literal": "949feb2413d6458794dcd2491c4babbbce0c15c1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "oven-sh/setup-bun",
+    "declared": "0c5077e51419868618aeaa5fe8019c62421857d6",
+    "literal": "0c5077e51419868618aeaa5fe8019c62421857d6"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "denoland/setup-deno",
+    "declared": "22d081ff2d3a40755e97629de92e3bcbfa7cf2ed",
+    "literal": "22d081ff2d3a40755e97629de92e3bcbfa7cf2ed"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "3ffccacd46053766916f087ce41d627c0b8cf2d1",
+    "literal": "3ffccacd46053766916f087ce41d627c0b8cf2d1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "v0.8.1",
+    "literal": "v0.8.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "@changesets/cli",
+    "declared": "^3.0.3",
+    "literal": "^3.0.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "@eslint/js",
+    "declared": "^10.0.1",
+    "literal": "^10.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "command-stream",
+    "declared": "2.6.0",
+    "literal": "2.6.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "eslint",
+    "declared": "^10.15.0",
+    "literal": "^10.15.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "eslint-config-prettier",
+    "declared": "^10.1.8",
+    "literal": "^10.1.8"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "eslint-plugin-prettier",
+    "declared": "^5.5.7",
+    "literal": "^5.5.7"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "husky",
+    "declared": "^9.1.7",
+    "literal": "^9.1.7"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "jscpd",
+    "declared": "^5.4.3",
+    "literal": "^5.4.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "lino-arguments",
+    "declared": "0.4.1",
+    "literal": "0.4.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "lint-staged",
+    "declared": "^17.6.0",
+    "literal": "^17.6.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "prettier",
+    "declared": "^3.10.1",
+    "literal": "^3.10.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "test-anywhere",
+    "declared": "^0.9.1",
+    "literal": "^0.9.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "ramsey/composer-install",
+    "declared": "4.0.0",
+    "literal": "4.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "shivammathur/setup-php",
+    "declared": "2.40.0",
+    "literal": "2.40.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "v0.8.1",
+    "literal": "v0.8.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/composer.json",
+    "ecosystem": "composer",
+    "name": "phpunit/phpunit",
+    "declared": "^13.4.7",
+    "literal": "^13.4.7"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/composer.json",
+    "ecosystem": "composer",
+    "name": "phpstan/phpstan",
+    "declared": "^2.3.5",
+    "literal": "^2.3.5"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/php/composer.json",
+    "ecosystem": "composer",
+    "name": "friendsofphp/php-cs-fixer",
+    "declared": "^3.95.30",
+    "literal": "^3.95.30"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package.json",
+    "ecosystem": "npm",
+    "name": "@actions/artifact",
+    "declared": "6.3.1",
+    "literal": "6.3.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package.json",
+    "ecosystem": "npm",
+    "name": "@actions/core",
+    "declared": "3.0.1",
+    "literal": "3.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package.json",
+    "ecosystem": "npm",
+    "name": "glob",
+    "declared": "14.0.6",
+    "literal": "14.0.6"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package.json",
+    "ecosystem": "npm",
+    "name": "glob-parent",
+    "declared": "6.0.2",
+    "literal": "6.0.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package.json",
+    "ecosystem": "npm",
+    "name": "@vercel/ncc",
+    "declared": "0.45.0",
+    "literal": "0.45.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/docs.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5",
+    "literal": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "pypa/gh-action-pypi-publish",
+    "declared": "7245906fb61fa33a13554f9d5fb856fe61758086",
+    "literal": "7245906fb61fa33a13554f9d5fb856fe61758086"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-python",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "v0.8.1",
+    "literal": "v0.8.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "v7.1.0",
+    "literal": "v7.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "shellcheck-py/shellcheck-py",
+    "declared": "v0.11.0.1",
+    "literal": "v0.11.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "astral-sh/ruff-pre-commit",
+    "declared": "v0.17.5",
+    "literal": "v0.17.5"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/mirrors-mypy",
+    "declared": "v2.4.1",
+    "literal": "v2.4.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "hatchling",
+    "declared": ">=1.33.0",
+    "literal": ">=1.33.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "ruff",
+    "declared": ">=0.17.5",
+    "literal": ">=0.17.5"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "mypy",
+    "declared": ">=2.4.1",
+    "literal": ">=2.4.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pytest",
+    "declared": ">=9.2.0",
+    "literal": ">=9.2.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pytest-asyncio",
+    "declared": ">=1.5.0",
+    "literal": ">=1.5.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pytest-cov",
+    "declared": ">=7.1.0",
+    "literal": ">=7.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "pre-commit",
+    "declared": ">=4.7.0",
+    "literal": ">=4.7.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "scriv",
+    "declared": ">=1.8.1",
+    "literal": ">=1.8.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "sphinx",
+    "declared": ">=9.2.0",
+    "literal": ">=9.2.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "furo",
+    "declared": ">=2025.12.19",
+    "literal": ">=2025.12.19"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/python/pyproject.toml",
+    "ecosystem": "pypi",
+    "name": "myst-parser",
+    "declared": ">=5.2.0",
+    "literal": ">=5.2.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/actions/download-artifact/action.yml",
+    "ecosystem": "github",
+    "name": "actions/download-artifact",
+    "declared": "9000827ccba6bdab643e8b6fd33ac0654aef8333",
+    "literal": "9000827ccba6bdab643e8b6fd33ac0654aef8333"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/actions/setup-buildx-resilient/action.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "dtolnay/rust-toolchain",
+    "declared": "683b588c487a69d01f6c6ddf40f036ff682cc2c8",
+    "literal": "683b588c487a69d01f6c6ddf40f036ff682cc2c8"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/desktop-release.yml",
+    "ecosystem": "github",
+    "name": "actions/attest",
+    "declared": "v4.2.2",
+    "literal": "v4.2.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/javascript-first-example.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/javascript-first-example.yml",
+    "ecosystem": "github",
+    "name": "dtolnay/rust-toolchain",
+    "declared": "683b588c487a69d01f6c6ddf40f036ff682cc2c8",
+    "literal": "683b588c487a69d01f6c6ddf40f036ff682cc2c8"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/javascript-first-example.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/javascript-first-example.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/javascript-first-gate.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "literal": "3d3c42e5aac5ba805825da76410c181273ba90b1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/javascript-first-gate.yml",
+    "ecosystem": "github",
+    "name": "actions/setup-node",
+    "declared": "949feb2413d6458794dcd2491c4babbbce0c15c1",
+    "literal": "949feb2413d6458794dcd2491c4babbbce0c15c1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "lycheeverse/lychee-action",
+    "declared": "v2.9.0",
+    "literal": "v2.9.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/links.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "dtolnay/rust-toolchain",
+    "declared": "683b588c487a69d01f6c6ddf40f036ff682cc2c8",
+    "literal": "683b588c487a69d01f6c6ddf40f036ff682cc2c8"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/cache",
+    "declared": "v6.1.0",
+    "literal": "v6.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/setup-buildx-action",
+    "declared": "v4.4.1",
+    "literal": "v4.4.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/build-push-action",
+    "declared": "v7.4.0",
+    "literal": "v7.4.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "taiki-e/install-action",
+    "declared": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39",
+    "literal": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "codecov/codecov-action",
+    "declared": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5",
+    "literal": "303a32d7a59b442fa8d48b6a1cc6825c09c847a5"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "rust-lang/crates-io-auth-action",
+    "declared": "3268eb413133e2960fa4ae0e963ca76380c54cd9",
+    "literal": "3268eb413133e2960fa4ae0e963ca76380c54cd9"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "docker/login-action",
+    "declared": "v4.8.0",
+    "literal": "v4.8.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "peter-evans/create-pull-request",
+    "declared": "3ffccacd46053766916f087ce41d627c0b8cf2d1",
+    "literal": "3ffccacd46053766916f087ce41d627c0b8cf2d1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/configure-pages",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-pages-artifact",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "ecosystem": "github",
+    "name": "actions/deploy-pages",
+    "declared": "v5.0.1",
+    "literal": "v5.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "taiki-e/install-action",
+    "declared": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39",
+    "literal": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "github/codeql-action",
+    "declared": "v4.39.3",
+    "literal": "v4.39.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/security.yml",
+    "ecosystem": "github",
+    "name": "actions/dependency-review-action",
+    "declared": "v5.0.0",
+    "literal": "v5.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/checkout",
+    "declared": "v7.0.1",
+    "literal": "v7.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "actions/upload-artifact",
+    "declared": "v7.0.2",
+    "literal": "v7.0.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "zizmorcore/zizmor-action",
+    "declared": "v0.8.1",
+    "literal": "v0.8.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/workflows.yml",
+    "ecosystem": "github",
+    "name": "dtolnay/rust-toolchain",
+    "declared": "683b588c487a69d01f6c6ddf40f036ff682cc2c8",
+    "literal": "683b588c487a69d01f6c6ddf40f036ff682cc2c8"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "pre-commit/pre-commit-hooks",
+    "declared": "v6.0.0",
+    "literal": "v6.0.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.pre-commit-config.yaml",
+    "ecosystem": "github",
+    "name": "shellcheck-py/shellcheck-py",
+    "declared": "v0.11.0.1",
+    "literal": "v0.11.0.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "lino-arguments",
+    "declared": "0.5.0",
+    "literal": "0.5.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "clap",
+    "declared": "4.6.7",
+    "literal": "4.6.7"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "regex",
+    "declared": "1.13.1",
+    "literal": "1.13.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "serde_json",
+    "declared": "1.0.154",
+    "literal": "1.0.154"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "walkdir",
+    "declared": "2.5.0",
+    "literal": "2.5.0"
+  },
+  {
+    "path": "docs/case-studies/csharp-peg-simplification/solutions/01-parse-expression/project/TestParseExpression.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "literal": "4.1.0"
+  },
+  {
+    "path": "docs/case-studies/csharp-peg-simplification/solutions/02-capture-validate/project/TestCaptureValidate.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "literal": "4.1.0"
+  },
+  {
+    "path": "docs/case-studies/csharp-peg-simplification/solutions/03-semantic-predicates/project/TestSemanticPredicates.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "literal": "4.1.0"
+  },
+  {
+    "path": "docs/case-studies/csharp-peg-simplification/solutions/04-hybrid-approach/project/TestHybrid.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "literal": "4.1.0"
+  },
+  {
+    "path": "docs/case-studies/csharp-peg-simplification/solutions/05-minimized-hybrid/project/TestMinimizedHybrid.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "literal": "4.1.0"
+  },
+  {
+    "path": "experiments/issue-316/rust-timing/Cargo.toml",
+    "ecosystem": "cargo",
+    "name": "links-notation",
+    "declared": "=0.21.1",
+    "literal": "=0.21.1"
+  },
+  {
+    "path": "experiments/issue-377/kgp-named-enum/build.gradle.kts",
+    "ecosystem": "gradle-plugin",
+    "name": "org.jetbrains.kotlin.multiplatform",
+    "declared": "2.4.21",
+    "literal": "2.4.21"
+  },
+  {
+    "path": "experiments/minimal-peg-rules/TestMinimalRules.csproj",
+    "ecosystem": "nuget",
+    "name": "Pegasus",
+    "declared": "4.1.0",
+    "literal": "4.1.0"
+  }
+]
