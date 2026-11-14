@@ -1,0 +1,1867 @@
+[
+  {
+    "path": "issue-405-action-immutable-pins.log",
+    "bytes": 2500,
+    "sha256": "4df650a3c4ae7ca9e60c50f2937246a74e35271a6f0824ab2116278d74b8116f"
+  },
+  {
+    "path": "issue-405-actionlint-final.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-actionlint.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-artifact-after.log",
+    "bytes": 212,
+    "sha256": "e6589e5d20307c1e59651f9eaa1e6d68ff3eaa24af22c74e7cdbd5fabbfb6090"
+  },
+  {
+    "path": "issue-405-artifact-before-commit.log",
+    "bytes": 213,
+    "sha256": "20055c1e175265a5cbb022db2cf44ec63bba60affb71349bde10f0e982589c64"
+  },
+  {
+    "path": "issue-405-artifact-before.log",
+    "bytes": 2254,
+    "sha256": "9ee9a87501a6662ebb6b45072dfacbe285935afa98d654b23954853388afee95"
+  },
+  {
+    "path": "issue-405-artifact-broken-link.log",
+    "bytes": 1086,
+    "sha256": "a25d6c8e3f35a13d795af413c185a775e01873fcae52eaae0927fee3a1373efc"
+  },
+  {
+    "path": "issue-405-artifact-files.log",
+    "bytes": 212,
+    "sha256": "ee91c7cb755ee9fb197e4fb4721ff3df32f6484deb6cc61fd63db70f1b7aaeb5"
+  },
+  {
+    "path": "issue-405-artifact-js-audit.log",
+    "bytes": 24,
+    "sha256": "6d8c5c8f3d7684adb070417bd608d01ae90aa3dc26a65af03ffda4955f38d9a3"
+  },
+  {
+    "path": "issue-405-artifact-js-install.log",
+    "bytes": 160,
+    "sha256": "7f77da5c1bf09a93e05b4565c8ee841ac8607e29392e1365ce3b91d02254291c"
+  },
+  {
+    "path": "issue-405-artifact-python-audit.log",
+    "bytes": 24,
+    "sha256": "6d8c5c8f3d7684adb070417bd608d01ae90aa3dc26a65af03ffda4955f38d9a3"
+  },
+  {
+    "path": "issue-405-artifact-python-install.log",
+    "bytes": 160,
+    "sha256": "610bdcc685bcdfa99efc34be7486134c8367e47d369f80c45aea016129d0b26b"
+  },
+  {
+    "path": "issue-405-artifact-regression-final.log",
+    "bytes": 212,
+    "sha256": "f6a2652530ce566d89765599766b5385d9521356ddf47010391ebbe4c2326a2b"
+  },
+  {
+    "path": "issue-405-artifact-sdk-regression.log",
+    "bytes": 74,
+    "sha256": "f100ddf19a78691ab052c42f9042cb83ecc58f0691a22bb7dc19bd8e6620b026"
+  },
+  {
+    "path": "issue-405-audit-dev_log_issues_330_pulls_331_templates_rust_Cargo.lock.json",
+    "bytes": 313,
+    "sha256": "50c89d2dbfb27e850d122a2fadd7bf3ec6af6c87a616e7e25a201f1631fc3b22"
+  },
+  {
+    "path": "issue-405-audit-dev_log_issues_330_pulls_331_templates_rust_Cargo.lock.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-dev_log_issues_377_pulls_378_templates_rust_Cargo.lock.json",
+    "bytes": 313,
+    "sha256": "50c89d2dbfb27e850d122a2fadd7bf3ec6af6c87a616e7e25a201f1631fc3b22"
+  },
+  {
+    "path": "issue-405-audit-dev_log_issues_377_pulls_378_templates_rust_Cargo.lock.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-experiments_Cargo.lock.json",
+    "bytes": 312,
+    "sha256": "da948671bc3ecf395dae0717dfce725719202aa7ddc838043cdf0c12cbab3392"
+  },
+  {
+    "path": "issue-405-audit-experiments_Cargo.lock.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-experiments_issue-209_lino-shapes_Cargo.lock.json",
+    "bytes": 312,
+    "sha256": "da948671bc3ecf395dae0717dfce725719202aa7ddc838043cdf0c12cbab3392"
+  },
+  {
+    "path": "issue-405-audit-experiments_issue-209_lino-shapes_Cargo.lock.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-experiments_issue-282_parity_rust_Cargo.lock.json",
+    "bytes": 312,
+    "sha256": "da948671bc3ecf395dae0717dfce725719202aa7ddc838043cdf0c12cbab3392"
+  },
+  {
+    "path": "issue-405-audit-experiments_issue-282_parity_rust_Cargo.lock.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-experiments_issue-315_rust-probe_Cargo.lock.json",
+    "bytes": 312,
+    "sha256": "da948671bc3ecf395dae0717dfce725719202aa7ddc838043cdf0c12cbab3392"
+  },
+  {
+    "path": "issue-405-audit-experiments_issue-315_rust-probe_Cargo.lock.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-experiments_issue-316_rust-timing_Cargo.lock.json",
+    "bytes": 313,
+    "sha256": "77a7745d385df9c676ec9a74b86fb459b9dceb69304a413c39b80b76e187df9c"
+  },
+  {
+    "path": "issue-405-audit-experiments_issue-316_rust-timing_Cargo.lock.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-benchmarks_csharp_Benchmark.csproj.json",
+    "bytes": 253,
+    "sha256": "614c2d8ce19e7d97d1425aef2681c311bdf85c86cba5bd72a4dad8d555066212"
+  },
+  {
+    "path": "issue-405-audit-nuget-benchmarks_csharp_Benchmark.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-csharp_Link.Foundation.Links.Notation.Tests_Link.Foundation.Links.Notation.Tests.csproj.json",
+    "bytes": 306,
+    "sha256": "ceba1816bd94c03559148fc22369d7d7273c6aeb509bb9fe156dd0504beebd99"
+  },
+  {
+    "path": "issue-405-audit-nuget-csharp_Link.Foundation.Links.Notation.Tests_Link.Foundation.Links.Notation.Tests.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-csharp_Link.Foundation.Links.Notation_Link.Foundation.Links.Notation.csproj.json",
+    "bytes": 294,
+    "sha256": "9754dd04568b0c0ee7f5cd36865720cfa05cb120c32009031072a76a8b1411b2"
+  },
+  {
+    "path": "issue-405-audit-nuget-csharp_Link.Foundation.Links.Notation_Link.Foundation.Links.Notation.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-dev_log_issues_377_pulls_378_templates_csharp_src_MyPackage_MyPackage.csproj.json",
+    "bytes": 295,
+    "sha256": "d8613cd19bbcecd054fed2278d1894610df909a08df0173fa37c251d8166b78b"
+  },
+  {
+    "path": "issue-405-audit-nuget-dev_log_issues_377_pulls_378_templates_csharp_src_MyPackage_MyPackage.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-dev_log_issues_377_pulls_378_templates_csharp_tests_MyPackage.Tests_MyPackage.Tests.csproj.json",
+    "bytes": 309,
+    "sha256": "bf5169502e9e634bb29b9ef5c9cff6d8472fec7a0bf61d18a7f902484a5fd02b"
+  },
+  {
+    "path": "issue-405-audit-nuget-dev_log_issues_377_pulls_378_templates_csharp_tests_MyPackage.Tests_MyPackage.Tests.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-docs_case-studies_csharp-peg-simplification_solutions_01-parse-expression_project_TestParseExpression.csproj.json",
+    "bytes": 327,
+    "sha256": "1343328d6816efea23ca064ab471846e62f5bd33d177405d77344be9c8847109"
+  },
+  {
+    "path": "issue-405-audit-nuget-docs_case-studies_csharp-peg-simplification_solutions_01-parse-expression_project_TestParseExpression.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-docs_case-studies_csharp-peg-simplification_solutions_02-capture-validate_project_TestCaptureValidate.csproj.json",
+    "bytes": 327,
+    "sha256": "be0f829e7801223e3142da800ec1c1531ab31b990132a45cb265f12ee7b31433"
+  },
+  {
+    "path": "issue-405-audit-nuget-docs_case-studies_csharp-peg-simplification_solutions_02-capture-validate_project_TestCaptureValidate.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-docs_case-studies_csharp-peg-simplification_solutions_03-semantic-predicates_project_TestSemanticPredicates.csproj.json",
+    "bytes": 333,
+    "sha256": "72997c7064ac8ba939ab8c48460ea22a240cb4bea1926b064f735d29c9957fb8"
+  },
+  {
+    "path": "issue-405-audit-nuget-docs_case-studies_csharp-peg-simplification_solutions_03-semantic-predicates_project_TestSemanticPredicates.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-docs_case-studies_csharp-peg-simplification_solutions_04-hybrid-approach_project_TestHybrid.csproj.json",
+    "bytes": 317,
+    "sha256": "36d4eed91bdcff30926048a89aeb9cd58e57692a6ae471c7c76f2b2c0eb82890"
+  },
+  {
+    "path": "issue-405-audit-nuget-docs_case-studies_csharp-peg-simplification_solutions_04-hybrid-approach_project_TestHybrid.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-docs_case-studies_csharp-peg-simplification_solutions_05-minimized-hybrid_project_TestMinimizedHybrid.csproj.json",
+    "bytes": 327,
+    "sha256": "4b0335c2e23e6ea2645d4e5fa2eaaac09a55be6f54a84b1d6ae6d2a514d7e090"
+  },
+  {
+    "path": "issue-405-audit-nuget-docs_case-studies_csharp-peg-simplification_solutions_05-minimized-hybrid_project_TestMinimizedHybrid.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-examples_binary_csharp_BinaryExample.csproj.json",
+    "bytes": 262,
+    "sha256": "78fb2c19ca7c108c60f02bb6a1a36a7ce377022387e5e845f1042e548bc397fa"
+  },
+  {
+    "path": "issue-405-audit-nuget-examples_binary_csharp_BinaryExample.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_DebugParser_DebugParser.csproj.json",
+    "bytes": 261,
+    "sha256": "f6a6f28b53ca42b54362f0587eb5327f9725f255a4a5ec171f8870faca720955"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_DebugParser_DebugParser.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_cref-repro_p.csproj.json",
+    "bytes": 250,
+    "sha256": "8e42cfb5f0e20f02b19a87ded6324bd61eef0c4f610aecf1c364b99306d79cb2"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_cref-repro_p.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_debug_test.csproj.json",
+    "bytes": 248,
+    "sha256": "ad921299a01d76b6ceca6ac22ed0b8f0b946717c29612a25ad4880aa0061ef9a"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_debug_test.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-282_parity_csharp_parity.csproj.json",
+    "bytes": 268,
+    "sha256": "5bd7c0153f1bf53264fccf925fdabb710553ab08cbbc788539d8acce1b2b0917"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-282_parity_csharp_parity.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-288_csharp_GroundTruth.csproj.json",
+    "bytes": 266,
+    "sha256": "8ad87b4c5954a1aac55aabed94c1c263e1d62a814ef28201bf20296b156d9e9f"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-288_csharp_GroundTruth.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-301_csharp-probe_Probe.csproj.json",
+    "bytes": 266,
+    "sha256": "21ce6013f463379dcf707f532b31dac22436d0d2cfaf05177521d9a5097905b4"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-301_csharp-probe_Probe.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-302_csharp-probe_Probe.csproj.json",
+    "bytes": 266,
+    "sha256": "f80d09369af61d2e4e07d802af79d30a04d4fba424f4c370b3a1ff330ea8130d"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-302_csharp-probe_Probe.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-314_ports_csharp-differential_csharp-differential.csproj.json",
+    "bytes": 293,
+    "sha256": "e874c2213f12cec9f9ea1de43a3698ac1e848b0db431d983f9fbe91083c731d1"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-314_ports_csharp-differential_csharp-differential.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-314_ports_csharp-probe_csharp-probe.csproj.json",
+    "bytes": 279,
+    "sha256": "b839817cc4758184091f468a6384091b14788a4ad17f76ef59530f4c20f2136c"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-314_ports_csharp-probe_csharp-probe.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-315_csharp-probe_Probe.csproj.json",
+    "bytes": 266,
+    "sha256": "4736a4f726705a1941143f12ffacf50596676c007176d0b14840f51b980559f1"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_issue-315_csharp-probe_Probe.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_minimal-peg-rules_TestMinimalRules.csproj.json",
+    "bytes": 272,
+    "sha256": "c9e8598ce752f51ef7b7899ccb2c0b72d27b671e5c8ca8ae32ff90e665d6ee76"
+  },
+  {
+    "path": "issue-405-audit-nuget-experiments_minimal-peg-rules_TestMinimalRules.csproj.json.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-audit-retry-after.log",
+    "bytes": 1532,
+    "sha256": "207c9accaa662f84aeb71b34a32ef977716730ba923e04a286dde9c0baa28487"
+  },
+  {
+    "path": "issue-405-audit-retry-before.log",
+    "bytes": 1573,
+    "sha256": "93058a88bf02ce17ff6b0ba2ecb62fc66764b87c2edf035decf92a27d2101e7b"
+  },
+  {
+    "path": "issue-405-audit-rust_Cargo.lock.json",
+    "bytes": 313,
+    "sha256": "6c7b02eef06db375401c9050a34dc00e93b0c7d8fa3a82cf4173f2423093fd15"
+  },
+  {
+    "path": "issue-405-audit-rust_Cargo.lock.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-bench-tools-check.log",
+    "bytes": 219,
+    "sha256": "79e945894fb1c38cdfdb337ad0732f492863b3da7b28dc474b98f88925002289"
+  },
+  {
+    "path": "issue-405-bun-final.log",
+    "bytes": 141,
+    "sha256": "1334c9abf6dc0f77d9359cba0192525f6584379578fec76e05924bafd0c7ea45"
+  },
+  {
+    "path": "issue-405-bun-refresh.log",
+    "bytes": 96,
+    "sha256": "61f6058ace47149d1c4c02166734a48a41cf0504136e6bef489f78e6407f7376"
+  },
+  {
+    "path": "issue-405-cargo-lock-dev_log_issues_330_pulls_331_templates_rust_Cargo.toml.log",
+    "bytes": 96,
+    "sha256": "17f7af22abe4fce1fb863484dc3aa02958c702fb518c4e9319b8d7194fabd3b7"
+  },
+  {
+    "path": "issue-405-cargo-lock-dev_log_issues_377_pulls_378_templates_rust_Cargo.toml.log",
+    "bytes": 96,
+    "sha256": "17f7af22abe4fce1fb863484dc3aa02958c702fb518c4e9319b8d7194fabd3b7"
+  },
+  {
+    "path": "issue-405-cargo-lock-experiments_Cargo.toml.log",
+    "bytes": 235,
+    "sha256": "034a8ab0a588cda6cd24b4fc5593aa97f9fde902d9818ee3f99eac8bd1f86062"
+  },
+  {
+    "path": "issue-405-cargo-lock-experiments_issue-209_lino-shapes_Cargo.toml.log",
+    "bytes": 235,
+    "sha256": "034a8ab0a588cda6cd24b4fc5593aa97f9fde902d9818ee3f99eac8bd1f86062"
+  },
+  {
+    "path": "issue-405-cargo-lock-experiments_issue-282_parity_rust_Cargo.toml.log",
+    "bytes": 235,
+    "sha256": "034a8ab0a588cda6cd24b4fc5593aa97f9fde902d9818ee3f99eac8bd1f86062"
+  },
+  {
+    "path": "issue-405-cargo-lock-experiments_issue-301_rust-probe_Cargo.toml.log",
+    "bytes": 96,
+    "sha256": "da6302fa7685d4f2eb7d0616dd66026a0f243d8e5cc822db8971835086957cac"
+  },
+  {
+    "path": "issue-405-cargo-lock-experiments_issue-314_rust-differential_Cargo.toml.log",
+    "bytes": 96,
+    "sha256": "da6302fa7685d4f2eb7d0616dd66026a0f243d8e5cc822db8971835086957cac"
+  },
+  {
+    "path": "issue-405-cargo-lock-experiments_issue-314_rust-probe_Cargo.toml.log",
+    "bytes": 96,
+    "sha256": "da6302fa7685d4f2eb7d0616dd66026a0f243d8e5cc822db8971835086957cac"
+  },
+  {
+    "path": "issue-405-cargo-lock-experiments_issue-315_rust-probe_Cargo.toml.log",
+    "bytes": 235,
+    "sha256": "034a8ab0a588cda6cd24b4fc5593aa97f9fde902d9818ee3f99eac8bd1f86062"
+  },
+  {
+    "path": "issue-405-cargo-lock-experiments_issue-316_rust-timing_Cargo.toml.log",
+    "bytes": 304,
+    "sha256": "134a4ebfbcfde064e885386ebb96967de80dc4d991e8a0dd24b0c625d22bde6f"
+  },
+  {
+    "path": "issue-405-cargo-lock-rust_Cargo.toml.log",
+    "bytes": 95,
+    "sha256": "90dc4065de53ff4de1b9ea0c214f76486b48d4c98a25cb589f1e101732a294ad"
+  },
+  {
+    "path": "issue-405-cargo-locks.log",
+    "bytes": 489,
+    "sha256": "e042576fa2088df913ad6954b35b6ab0da50bb1e764525c177780ed31c989a5e"
+  },
+  {
+    "path": "issue-405-ci-failures.txt",
+    "bytes": 10114,
+    "sha256": "eb78ceaa71fc2aded8287ebab2b063440abe23e1d0b26dfd444d54f9634db25e"
+  },
+  {
+    "path": "issue-405-composer-benchmarks_php_composer.json.log",
+    "bytes": 1349,
+    "sha256": "907d609782ae755496ddf3633af2374604c21cba9589880e6ce29c7a9300eaca"
+  },
+  {
+    "path": "issue-405-composer-composer.json.log",
+    "bytes": 292,
+    "sha256": "daf9ddd319282ab774e633b074c59aef7e760214e8b112bb45721f7004e0f1f5"
+  },
+  {
+    "path": "issue-405-composer-dev_log_issues_330_pulls_331_templates_php_composer.json.log",
+    "bytes": 10084,
+    "sha256": "e78d2a7a770998c455349db6a54a17d6bb9ac14913fe6a21ef5887dd775f662f"
+  },
+  {
+    "path": "issue-405-composer-dev_log_issues_377_pulls_378_templates_php_composer.json.log",
+    "bytes": 7320,
+    "sha256": "0246c42750cf1134f952bf5b8e0ddab279f6e21b2c3067fbcbf267fbd2ea5495"
+  },
+  {
+    "path": "issue-405-composer-install.log",
+    "bytes": 180,
+    "sha256": "5745edb71736f8aff094a0e090a98a6a6c521c7ba22ed95deb523cb61b227ba9"
+  },
+  {
+    "path": "issue-405-composer-locks.log",
+    "bytes": 185,
+    "sha256": "82fa27c5182ac35c6ea4189fb29b0491ab8f973eb6afadde3b246c7391ac033b"
+  },
+  {
+    "path": "issue-405-composer-php_composer.json.log",
+    "bytes": 3401,
+    "sha256": "8f4c858b42277368ef24db2a8277e39a79f17fef9fc4c0ff48b39fe2207a7a75"
+  },
+  {
+    "path": "issue-405-cpp-build.log",
+    "bytes": 5237,
+    "sha256": "1be1c1b5f04e7a66e38cdaab9ebfa3f8dd7b884cde84b9e49f0b3e2f9a43574f"
+  },
+  {
+    "path": "issue-405-cpp-configure.log",
+    "bytes": 2219,
+    "sha256": "2c2757e7f41015dbfd295aea82d4564144cff02b605ed13c2c0959c230079e6f"
+  },
+  {
+    "path": "issue-405-cpp-format.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-cpp-template-ci-lock.log",
+    "bytes": 57760,
+    "sha256": "0da24f3159ae4466eae1643d9789d79a4ac2d8cbe3f271e97b2f62e1a416b19f"
+  },
+  {
+    "path": "issue-405-cpp-template-security-lock.log",
+    "bytes": 35284,
+    "sha256": "a9711578f4d2ca090737d878846a7938adebff6ba1b048b91299828b0d5728aa"
+  },
+  {
+    "path": "issue-405-cpp-test.log",
+    "bytes": 81308,
+    "sha256": "fdfc7462a26437ebeb211daedbbd214b5a09e9524abcbf2608be1e4dd00710db"
+  },
+  {
+    "path": "issue-405-csharp-benchmark-build.log",
+    "bytes": 356,
+    "sha256": "a078ba8073d4339f45e9468fd8dc6ac4ae337e7d36c4cb3e46b705d49d4aedfe"
+  },
+  {
+    "path": "issue-405-csharp-benchmark-check.log",
+    "bytes": 76,
+    "sha256": "e8f1065e99338295f0c79dc00c0071232adf9adf3386b9b5faaafa761eeeec0f"
+  },
+  {
+    "path": "issue-405-csharp-format.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-csharp-test.log",
+    "bytes": 1133,
+    "sha256": "5c71c90ee6f5666c4cd90b93ead8c0beed55051c18f3046772525450ef948855"
+  },
+  {
+    "path": "issue-405-dependabot-after.log",
+    "bytes": 112,
+    "sha256": "342256654db96429ed7c26485d33d3e49ce618b4417304dda99e4174282b7663"
+  },
+  {
+    "path": "issue-405-dependabot-before.log",
+    "bytes": 1274,
+    "sha256": "9505f8a1f2cdcb902907319be56064f7d8840c063a6d1aae95888ddb05638566"
+  },
+  {
+    "path": "issue-405-dependabot-coverage.log",
+    "bytes": 136,
+    "sha256": "5f924c8ada76019c7ebeff744fcabee04a0e962e4fe2dc19444b82b0775f08b8"
+  },
+  {
+    "path": "issue-405-dependencies-before.log",
+    "bytes": 2500,
+    "sha256": "f4c0af6fcfd446e2c737c7dd912d48b4f82c609b54b751db0b7a52f504fc585d"
+  },
+  {
+    "path": "issue-405-dependency-check-tests.log",
+    "bytes": 121,
+    "sha256": "a227fd7fb0a7bed7515f3e334b6f12fbabf8eca0d59cf8720c72da1a60b1cf93"
+  },
+  {
+    "path": "issue-405-diff-stat.txt",
+    "bytes": 16404,
+    "sha256": "823475a9a4246a62ea6e62816860393919558bd1bb30c091a6822603831ff85f"
+  },
+  {
+    "path": "issue-405-docs-comparison-check.log",
+    "bytes": 250,
+    "sha256": "68e560fb3b81fdd7038aa9def6485b3ee9e9efb278e9d84d5d906e0859aa9eeb"
+  },
+  {
+    "path": "issue-405-dotnet-install.log",
+    "bytes": 978,
+    "sha256": "85dad70b230db1339af10260f313c669a8431cc2f9b8518c74acf4813cd4771c"
+  },
+  {
+    "path": "issue-405-dotnet-package-help.txt",
+    "bytes": 4307,
+    "sha256": "480a8530e55d6922200a95a82261ce4003b6a8e97584f97b3da190c7307393aa"
+  },
+  {
+    "path": "issue-405-dotnet-shutdown.log",
+    "bytes": 156,
+    "sha256": "2881c04b9155892ee7347d20ec6d04062cd809122cb6407ac9124f1d28532a64"
+  },
+  {
+    "path": "issue-405-eslint-explicit-config.log",
+    "bytes": 74,
+    "sha256": "8edffe7bcfec5879bd8058b6bb7134bec9c866f81c1bd42775f7b96463c9593f"
+  },
+  {
+    "path": "issue-405-eslint-hook-tag.json",
+    "bytes": 114,
+    "sha256": "e2e3c64edab172132f77ce89a0e8c190db1cd30936a096344f45893bd5b75f8a"
+  },
+  {
+    "path": "issue-405-extra-manifests.txt",
+    "bytes": 658,
+    "sha256": "59b3712c42439b5961d45c391af30965a7a8e55252c25974448680b24cc3694e"
+  },
+  {
+    "path": "issue-405-extra-tool-pins.log",
+    "bytes": 744,
+    "sha256": "876087ad33658af492c2caafdbacbb442cc417597d99dd0c2f1e204b18e61dd6"
+  },
+  {
+    "path": "issue-405-fetch-main.log",
+    "bytes": 101,
+    "sha256": "4f94dfb95da86bebf5e6a684676e62e5e98f01bbe3294319933d735548d887f1"
+  },
+  {
+    "path": "issue-405-format-experiments.log",
+    "bytes": 150,
+    "sha256": "e73550b2a1589eb0d5558dfc2e5e233b00a62240ee67f1dbd0c321a0c93b7e6e"
+  },
+  {
+    "path": "issue-405-go-audit.log",
+    "bytes": 26,
+    "sha256": "3016e51e4eac0d421674d2128bbbdefb2924b4646e0c14a1ab034977ad73fae5"
+  },
+  {
+    "path": "issue-405-go-benchmark-audit.log",
+    "bytes": 26,
+    "sha256": "3016e51e4eac0d421674d2128bbbdefb2924b4646e0c14a1ab034977ad73fae5"
+  },
+  {
+    "path": "issue-405-go-benchmark-check.log",
+    "bytes": 68,
+    "sha256": "7fb6a882e06622a1180e19b40bb1863060eb98b825960e696b40efad385b47fd"
+  },
+  {
+    "path": "issue-405-go-benchmark-test.log",
+    "bytes": 77,
+    "sha256": "2235ecd3484b198695f803dda07eef7fa536c9c49affa1a00655c81f3f9b47e6"
+  },
+  {
+    "path": "issue-405-go-test.log",
+    "bytes": 178,
+    "sha256": "cdb38c5a8166ce5532afb3b7208e7ebccaf3328f97876c413a241dfbc03526db"
+  },
+  {
+    "path": "issue-405-go-update.log",
+    "bytes": 353,
+    "sha256": "4835212194ba22456bcf53f03f63c9f4fe25d1e7ce4a9dc6d5e4326ac2aa00e5"
+  },
+  {
+    "path": "issue-405-go-vet.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-govulncheck-install.log",
+    "bytes": 241,
+    "sha256": "150adcd4f97000739a894552ee378945426cf30fdf85b38563dcec6fa25356a7"
+  },
+  {
+    "path": "issue-405-gradle-lock.log",
+    "bytes": 2053,
+    "sha256": "b0a5ba74e2b7b9257ccdd4d491eaf0a54250df1d41cb6f91fbcf6cbf050c39cb"
+  },
+  {
+    "path": "issue-405-gradle-mocha.log",
+    "bytes": 1486,
+    "sha256": "72e038e1d6e54e594fa9116f96fb00a42cae86fa4014acc147c24fe1ef2506aa"
+  },
+  {
+    "path": "issue-405-install-pins.txt",
+    "bytes": 338,
+    "sha256": "ca146422af4d42cacd02a8f24f8e187b2d57039a90853f1b8949ce60ca81a1dc"
+  },
+  {
+    "path": "issue-405-inventory-current.log",
+    "bytes": 52,
+    "sha256": "36a985372511eb48449f3be60b0e074e1bbf4773495ce82b89536306ab376c1a"
+  },
+  {
+    "path": "issue-405-inventory-final.log",
+    "bytes": 52,
+    "sha256": "43c90899bc2798e4315b2be6203268f073b4a15b8b5ad1ad7c29d959672fe131"
+  },
+  {
+    "path": "issue-405-inventory.log",
+    "bytes": 52,
+    "sha256": "e72be05228ac77f913f9fdc6fe9c064468c279c41ae09fde2da5ec02e6be678b"
+  },
+  {
+    "path": "issue-405-java-benchmark-final.log",
+    "bytes": 7061,
+    "sha256": "d4cabee29553ea9f78954279b2682b3f19d06c2d356d52998ef441deca32cac8"
+  },
+  {
+    "path": "issue-405-java-check.log",
+    "bytes": 83547,
+    "sha256": "9eddf91f1116d2f94b2d04d63b5b87646e9a3019e9dabec3f8a2a5c29dc14f12"
+  },
+  {
+    "path": "issue-405-java-final.log",
+    "bytes": 203174,
+    "sha256": "379cf2861a37a7fcd2a041e1cd1b6a0f89cd5d18c7ee0cdb6e78899965da33c0"
+  },
+  {
+    "path": "issue-405-js-build.log",
+    "bytes": 212,
+    "sha256": "3b8396986e73e30bca1f841bd30f0538123d23a3201293fb845bdd658881ccff"
+  },
+  {
+    "path": "issue-405-js-bun-lock.log",
+    "bytes": 230,
+    "sha256": "867c0b7059c1f979a0079f3cbd43d1b1144f31d857e09b9258b7755f1cc70c67"
+  },
+  {
+    "path": "issue-405-js-eslint-latest.log",
+    "bytes": 52,
+    "sha256": "1129e394e1aa74e68f3fda8f6554d9598ff4b483f8b5ae72958f4862878ef913"
+  },
+  {
+    "path": "issue-405-js-format-changes.log",
+    "bytes": 531,
+    "sha256": "b75ccb66110bc54291b5a038802e4adf6cc39d49b8a51e10166abd0457cdc4c1"
+  },
+  {
+    "path": "issue-405-js-format.log",
+    "bytes": 87,
+    "sha256": "1d66faad74f5e8709353f7288592866bd3a9095da1174a916e7aa632949971e2"
+  },
+  {
+    "path": "issue-405-js-lint.log",
+    "bytes": 21,
+    "sha256": "ee133e977eb8914cd5684490033ce889957a2b800b3f5888d17bea3a6dda74d9"
+  },
+  {
+    "path": "issue-405-js-npm-lock.log",
+    "bytes": 130,
+    "sha256": "ca51c92364474abce5322ccf25581528999d55fa7e338cf192d7bd3905eaed2e"
+  },
+  {
+    "path": "issue-405-js-test.log",
+    "bytes": 22886,
+    "sha256": "4d1e3d691b4a91e3072f27f9bcac73132464298720edf75b7e82f5bd6554caef"
+  },
+  {
+    "path": "issue-405-kgp-mocha-api.log",
+    "bytes": 5111,
+    "sha256": "5222a998d413736e36f8d0ac9e30e3875dfcf8139ba0438e2de080b1ffce1bc6"
+  },
+  {
+    "path": "issue-405-kgp-test-api.log",
+    "bytes": 3746,
+    "sha256": "7339f895752b42ebab3baac2c80904f9ccd591578c1784f12fc1341a58e22775"
+  },
+  {
+    "path": "issue-405-kgp-test-classes.txt",
+    "bytes": 5957,
+    "sha256": "6303e3dcfcc4c3613e48b14bd66425ad872f43cb47aae1a929a211d5ca6106bb"
+  },
+  {
+    "path": "issue-405-kotlin-final.log",
+    "bytes": 6995,
+    "sha256": "5c8cc7223f4ee805251fd0398d8ebb114948a3735cc5a9459c662af3ade0bfb4"
+  },
+  {
+    "path": "issue-405-kotlin-test.log",
+    "bytes": 7109,
+    "sha256": "b99ab4279a452dbd5e1aa89c731b2fb09f7fa986feea28500a4fdd9be877da70"
+  },
+  {
+    "path": "issue-405-lock-inventory-final.log",
+    "bytes": 73,
+    "sha256": "b90246363cc6a38a9cf4cbda4773dbb1d10160cb95548bba8eb8ab9ac186ff9a"
+  },
+  {
+    "path": "issue-405-lock-inventory.log",
+    "bytes": 73,
+    "sha256": "1a4e1f8e3e4fb6fb2a87b3b8fd95d794c3cc966f9b7472d5ee439ae4fd5f1987"
+  },
+  {
+    "path": "issue-405-major-migration-fetch.log",
+    "bytes": 727,
+    "sha256": "8528fecfbea99cfdb8cedfad3d9f6b0f45f4033021a203424e841120c4176be3"
+  },
+  {
+    "path": "issue-405-merge-planner-tests.log",
+    "bytes": 121,
+    "sha256": "5e59f69863ea99f062e0cbc934fab2e6322880d0aacdfec671e0875383080d9d"
+  },
+  {
+    "path": "issue-405-mocha-hook.log",
+    "bytes": 72460,
+    "sha256": "c65ac55ebdfbace048720614015e5f2a5271b50bae2201365479b859a7922fb0"
+  },
+  {
+    "path": "issue-405-mocha-regression.log",
+    "bytes": 209,
+    "sha256": "70e8cc808958519296f8f1737b050deba34dec323fa155b4010ee82eae5f9029"
+  },
+  {
+    "path": "issue-405-new-python-format-fix.log",
+    "bytes": 606,
+    "sha256": "9454cdb3fd6fec7201fb2a6103f86a2b7005a2938c54bbee67027c4cba6bba31"
+  },
+  {
+    "path": "issue-405-new-python-format.log",
+    "bytes": 642,
+    "sha256": "61fda14e177eb28b465126782530a26750aeb16eb296b95186bd5b684ffad9c7"
+  },
+  {
+    "path": "issue-405-new-python-imports-fix.log",
+    "bytes": 264,
+    "sha256": "c48a4218f727976caeed7e0fba7d02cb4a647eb027463b19fe2bc1c0a0b4304a"
+  },
+  {
+    "path": "issue-405-new-python-imports.log",
+    "bytes": 411,
+    "sha256": "f4303152aab335d9550f3bae15ca372b0332a61736869776c91de1015b5d37b2"
+  },
+  {
+    "path": "issue-405-new-python-lint-final.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-new-python-lint.log",
+    "bytes": 9789,
+    "sha256": "6eb22785abd8914da6eb4951014a207359f4b9fdfd50659ef66f35e593d97bde"
+  },
+  {
+    "path": "issue-405-npm-audit-benchmarks_js_package.json.json",
+    "bytes": 358,
+    "sha256": "b6712766ae51e2ff9780a9b422c95f36a54e179768d1cd70d640a5ad1b12c61d"
+  },
+  {
+    "path": "issue-405-npm-audit-benchmarks_tools_package.json.json",
+    "bytes": 360,
+    "sha256": "5be49545351ee19753ad544b78bf3703e24c4928d0b1dc0d3fdd925ebc3c5af4"
+  },
+  {
+    "path": "issue-405-npm-audit-dev_log_issues_330_pulls_331_templates_js_package.json.json",
+    "bytes": 1618,
+    "sha256": "dcdda11802ec35fde5eee08a3b45d9884e1190f7f70a61af606b69d07af09089"
+  },
+  {
+    "path": "issue-405-npm-audit-dev_log_issues_377_pulls_378_templates_csharp_package.json.json",
+    "bytes": 363,
+    "sha256": "57c207e48961bb743cb4b558dc3b21dd13db7823a4a738f235e0a1e49410d348"
+  },
+  {
+    "path": "issue-405-npm-audit-dev_log_issues_377_pulls_378_templates_js_.github_actions_artifact-transport_package.json.json",
+    "bytes": 1649,
+    "sha256": "9cb3ca3dd939885c0d8b5de1dc0851edf52c0956a5f747f778e8f17640fc9982"
+  },
+  {
+    "path": "issue-405-npm-audit-dev_log_issues_377_pulls_378_templates_js_package.json.json",
+    "bytes": 2026,
+    "sha256": "198ce80ec07ba227c909bde1c414313764cbf86ecdf8ccd0c9907c1d968b2926"
+  },
+  {
+    "path": "issue-405-npm-audit-dev_log_issues_377_pulls_378_templates_python_.github_actions_artifact_package.json.json",
+    "bytes": 1649,
+    "sha256": "45f382e65e771615013145f77917a77e295b62a2db7e69c54ebd3a41c6a5bba7"
+  },
+  {
+    "path": "issue-405-npm-audit-docs_comparison_package.json.json",
+    "bytes": 358,
+    "sha256": "b6712766ae51e2ff9780a9b422c95f36a54e179768d1cd70d640a5ad1b12c61d"
+  },
+  {
+    "path": "issue-405-npm-audit-docs_website_package.json.json",
+    "bytes": 363,
+    "sha256": "556ab17c5ad5c81a72afa8aa38b841c4b25bcf4d01524899ba1a6344a730c028"
+  },
+  {
+    "path": "issue-405-npm-audit-js_package.json.json",
+    "bytes": 363,
+    "sha256": "a1e72e3946382350619bcc55948ae7c50e73cc7f5c165cef8657d739eb397dc3"
+  },
+  {
+    "path": "issue-405-npm-benchmarks_js_package.json.log",
+    "bytes": 63,
+    "sha256": "abf0e83e16830869e857fc7dc0543b3c2562415419793e571682a3dc706f41a7"
+  },
+  {
+    "path": "issue-405-npm-benchmarks_tools_package.json.log",
+    "bytes": 129,
+    "sha256": "3ccaea3e80665fb2e9e018720a9e10e14e0213a252f99be7cf9fff1a2a874da1"
+  },
+  {
+    "path": "issue-405-npm-dev_log_issues_330_pulls_331_templates_js_package.json.log",
+    "bytes": 255,
+    "sha256": "ddf1d473f5240fbd84f4e3ec7daeec7189053d9fb095ef37ca886e2cac75162b"
+  },
+  {
+    "path": "issue-405-npm-dev_log_issues_377_pulls_378_templates_csharp_package.json.log",
+    "bytes": 130,
+    "sha256": "2cea7bb00b5bed6a3eaeb5a0d260366198aebbb6902f643b070fb4908652341a"
+  },
+  {
+    "path": "issue-405-npm-dev_log_issues_377_pulls_378_templates_js_.github_actions_artifact-transport_package.json.log",
+    "bytes": 256,
+    "sha256": "75d2a57665433cbf0f42732b73ff548c9d8a2faced92836b5f38faf293080366"
+  },
+  {
+    "path": "issue-405-npm-dev_log_issues_377_pulls_378_templates_js_package.json.log",
+    "bytes": 255,
+    "sha256": "35761e4e2d26ba9978fac2233dd6b1bd1dda9651d2c8009673e0c120bd868b2b"
+  },
+  {
+    "path": "issue-405-npm-dev_log_issues_377_pulls_378_templates_python_.github_actions_artifact_package.json.log",
+    "bytes": 255,
+    "sha256": "7129fc29a2c225fc52d7cdfa1fdd745e95fbcd9aeacc41f0511ecca09221f94d"
+  },
+  {
+    "path": "issue-405-npm-docs_comparison_package.json.log",
+    "bytes": 129,
+    "sha256": "27fda06039fa902635519b6b273298798ca52371edb3556ffcb8b2c29fdd2564"
+  },
+  {
+    "path": "issue-405-npm-docs_website_package.json.log",
+    "bytes": 130,
+    "sha256": "57c3034cc53a5d1423b5a95b247c5b4b2659fc76a75c4f95adf94f08c11ce2f4"
+  },
+  {
+    "path": "issue-405-npm-js_package.json.log",
+    "bytes": 130,
+    "sha256": "c03bbef57761413d0b47d2555aeeed61ec69e4b2a225b3e734557e8db199c883"
+  },
+  {
+    "path": "issue-405-npm-latest-benchmarks_js.log",
+    "bytes": 73,
+    "sha256": "ced358c60c6ba396d04eec63b793466b0df6bb65d1ea075baa40215144d7d6c7"
+  },
+  {
+    "path": "issue-405-npm-latest-benchmarks_tools.log",
+    "bytes": 140,
+    "sha256": "ab6fb8db1ad056a63fc5cf9c0658225d27db9a1840812d586a849dac5427eed5"
+  },
+  {
+    "path": "issue-405-npm-latest-dev_log_issues_330_pulls_331_templates_js.log",
+    "bytes": 143,
+    "sha256": "762f1d87f39804bced7a344d3a790f4ea3e322d083efeeb21b1e40d6ad8b21fa"
+  },
+  {
+    "path": "issue-405-npm-latest-dev_log_issues_377_pulls_378_templates_csharp.log",
+    "bytes": 142,
+    "sha256": "d3c4bbdbd8805182eb17722cef85ee3a25f3f02cfd7598c7afc4f1ce248c70b0"
+  },
+  {
+    "path": "issue-405-npm-latest-dev_log_issues_377_pulls_378_templates_js.log",
+    "bytes": 144,
+    "sha256": "b1e28099563aaca56e6357d5135eb8d55aa2f1f9c41244a01ec6400f1a6af68a"
+  },
+  {
+    "path": "issue-405-npm-latest-dev_log_issues_377_pulls_378_templates_js_.github_actions_artifact-transport.log",
+    "bytes": 131,
+    "sha256": "059a25e19bbd086e628b61fe01d900e542e09f12e3f50f2ecc657e60c748e2ca"
+  },
+  {
+    "path": "issue-405-npm-latest-dev_log_issues_377_pulls_378_templates_python_.github_actions_artifact.log",
+    "bytes": 131,
+    "sha256": "45c21f35e7cdc428e940f474a0928d4238ec1e09bff2e110354f65736403561e"
+  },
+  {
+    "path": "issue-405-npm-latest-docs_comparison.log",
+    "bytes": 136,
+    "sha256": "e0cc6c6d470a376bdbf7755da7b95c4fd8d99051479141f69fdfe7ddd3f1829f"
+  },
+  {
+    "path": "issue-405-npm-latest-docs_website.log",
+    "bytes": 141,
+    "sha256": "e825cdf06a603a7a24d254201337c557c6ac13e2b2db51686a8e9bc33c97fccc"
+  },
+  {
+    "path": "issue-405-npm-latest-js.log",
+    "bytes": 141,
+    "sha256": "24cbfc7df89393334f95bb3a4beccaf7c394e4d378771647f373ac845625644d"
+  },
+  {
+    "path": "issue-405-npm-remediation.log",
+    "bytes": 852,
+    "sha256": "44dc3151ff71d165898b1f40d3261ccbbf2a1094d75dd5aa1b9f2edeff393dab"
+  },
+  {
+    "path": "issue-405-nuget-audits.log",
+    "bytes": 1546,
+    "sha256": "7723c0ff801cae33ad0947a75a4128f7cc2e7e8b5752e9922e95ea85f13d3a90"
+  },
+  {
+    "path": "issue-405-nuget-benchmarks_csharp_Benchmark.csproj.log",
+    "bytes": 267,
+    "sha256": "423eca685220c61142d8c265af0ed071fee8eaa680707762de1602084f117d75"
+  },
+  {
+    "path": "issue-405-nuget-csharp_Link.Foundation.Links.Notation.Tests_Link.Foundation.Links.Notation.Tests.csproj.log",
+    "bytes": 319,
+    "sha256": "a71c654074e57675f30f38893bb5cd3cb89d0ad58f90f2fc1ce8277b0827188b"
+  },
+  {
+    "path": "issue-405-nuget-csharp_Link.Foundation.Links.Notation_Link.Foundation.Links.Notation.csproj.log",
+    "bytes": 172,
+    "sha256": "34e217a52758accc6e6e2705fea9df210e9bc698adf8353f8cfba960afb034d6"
+  },
+  {
+    "path": "issue-405-nuget-dev_log_issues_377_pulls_378_templates_csharp_src_MyPackage_MyPackage.csproj.log",
+    "bytes": 173,
+    "sha256": "886bb0405693ab2e20841467b14bc8120f95dfa683fa0b4cff0745fa289f7d8b"
+  },
+  {
+    "path": "issue-405-nuget-dev_log_issues_377_pulls_378_templates_csharp_tests_MyPackage.Tests_MyPackage.Tests.csproj.log",
+    "bytes": 325,
+    "sha256": "ff14e1276ebf38472855c1e80bdb4f36d352ed4678a12bf4b709a9183f378141"
+  },
+  {
+    "path": "issue-405-nuget-docs_case-studies_csharp-peg-simplification_solutions_01-parse-expression_project_TestParseExpression.csproj.log",
+    "bytes": 205,
+    "sha256": "a3c130d3c3bb7cbbfcbe5045479bb3b3fc24e05eeefef8519493d2e6902dd183"
+  },
+  {
+    "path": "issue-405-nuget-docs_case-studies_csharp-peg-simplification_solutions_02-capture-validate_project_TestCaptureValidate.csproj.log",
+    "bytes": 205,
+    "sha256": "fd132ca09fb1bf4a994b1a4407a4d3e275ec33971995d5e412b0a51fa88841bf"
+  },
+  {
+    "path": "issue-405-nuget-docs_case-studies_csharp-peg-simplification_solutions_03-semantic-predicates_project_TestSemanticPredicates.csproj.log",
+    "bytes": 211,
+    "sha256": "18015ed87d2efcd92b79a2ba1d763d1b44d37a2c639731997fba2b005285edd9"
+  },
+  {
+    "path": "issue-405-nuget-docs_case-studies_csharp-peg-simplification_solutions_04-hybrid-approach_project_TestHybrid.csproj.log",
+    "bytes": 195,
+    "sha256": "208cbd0d23d11e321693257953dcb10c84e70e07962a262a803e72fcd411ef74"
+  },
+  {
+    "path": "issue-405-nuget-docs_case-studies_csharp-peg-simplification_solutions_05-minimized-hybrid_project_TestMinimizedHybrid.csproj.log",
+    "bytes": 205,
+    "sha256": "91c6d16f3f45ada94dd8b7d9d8b8ecce54860bb2859c56f624ba01e321ae65df"
+  },
+  {
+    "path": "issue-405-nuget-examples_binary_csharp_BinaryExample.csproj.log",
+    "bytes": 275,
+    "sha256": "30223e5f80ed232ac9c41dc39641e3a38cf9da931948a1f94e396079457e1afb"
+  },
+  {
+    "path": "issue-405-nuget-experiments_DebugParser_DebugParser.csproj.log",
+    "bytes": 274,
+    "sha256": "e5e6d35c84fab767f489b57752a5487de7a502ee43a2a833950566e1c1d6f3ac"
+  },
+  {
+    "path": "issue-405-nuget-experiments_cref-repro_p.csproj.log",
+    "bytes": 128,
+    "sha256": "3194b5bbf7ea924f0f625ad8f4f8b35dfde7b85b6ccb6f5279b5de9906197ed4"
+  },
+  {
+    "path": "issue-405-nuget-experiments_debug_test.csproj.log",
+    "bytes": 414,
+    "sha256": "f25a310ede5fb3303230d81cb91bb1bc64a39b098f0287ad19c8cc57ac3bbe2c"
+  },
+  {
+    "path": "issue-405-nuget-experiments_issue-282_parity_csharp_parity.csproj.log",
+    "bytes": 285,
+    "sha256": "8b86d01cd5be6b5a5a30bf32bf6e97160351f3a1e2dc8bc89fa9921b59c28389"
+  },
+  {
+    "path": "issue-405-nuget-experiments_issue-288_csharp_GroundTruth.csproj.log",
+    "bytes": 279,
+    "sha256": "9911529c8bb57e8903c944b005e5cdc089ce57b63b1c6d46e4b565fb8b678710"
+  },
+  {
+    "path": "issue-405-nuget-experiments_issue-301_csharp-probe_Probe.csproj.log",
+    "bytes": 279,
+    "sha256": "3f7aa93de3ddbf9563286b4691bfaca716f0c421b54661dda3fe53d2a47c4557"
+  },
+  {
+    "path": "issue-405-nuget-experiments_issue-302_csharp-probe_Probe.csproj.log",
+    "bytes": 279,
+    "sha256": "cbeaaf582bfc7cec11148d3cbc1a70fca8b7cfda25b13b472cb02857b5c46826"
+  },
+  {
+    "path": "issue-405-nuget-experiments_issue-314_ports_csharp-differential_csharp-differential.csproj.log",
+    "bytes": 306,
+    "sha256": "c5fa0e04c189beb513c40ea2f86b47265c8a2b34ea535d5cc520e06ce70a874f"
+  },
+  {
+    "path": "issue-405-nuget-experiments_issue-314_ports_csharp-probe_csharp-probe.csproj.log",
+    "bytes": 292,
+    "sha256": "ad5576a159066d32ab43349fb3e82e95e9c1d0f08280b9bdbe85425290ee50ad"
+  },
+  {
+    "path": "issue-405-nuget-experiments_issue-315_csharp-probe_Probe.csproj.log",
+    "bytes": 279,
+    "sha256": "c6a281f0362c9900ca82b9c044500664fec61e5dca9b987097a6ba0b3393cb95"
+  },
+  {
+    "path": "issue-405-nuget-experiments_minimal-peg-rules_TestMinimalRules.csproj.log",
+    "bytes": 150,
+    "sha256": "1198a42becc7e48cf378a1f785afa498338ae8d3f42b861c611326548619e7ae"
+  },
+  {
+    "path": "issue-405-nuget-locks.log",
+    "bytes": 1533,
+    "sha256": "e30c4946ad8e75bff024515b1372aca91fa7a5e3a5edfed454994caa44827096"
+  },
+  {
+    "path": "issue-405-php-audit.json",
+    "bytes": 84,
+    "sha256": "0046e84f375c11ed2bdc90e758acd0530b66a6905121613e20e9fac2525684f2"
+  },
+  {
+    "path": "issue-405-php-lint.log",
+    "bytes": 105,
+    "sha256": "6627ae17003936c4e0ee8e60d9d64fa48119973acffe55a9ee5da75d00d14546"
+  },
+  {
+    "path": "issue-405-php-template330-check.log",
+    "bytes": 1437,
+    "sha256": "01ca67fa9d538ad9b682e2f17c97aa4e31b729cf07f489c1a1321da3844748fd"
+  },
+  {
+    "path": "issue-405-php-template377-check.log",
+    "bytes": 8938,
+    "sha256": "b294be6d4ce5a5d4388cb411fb8a84b8abc673228132d54efa01159d03ad44b1"
+  },
+  {
+    "path": "issue-405-php-test.log",
+    "bytes": 645,
+    "sha256": "7082405d4e20f212969878c0305bb931857cdc4bd8d4719459356a7c722beb94"
+  },
+  {
+    "path": "issue-405-pin-contracts.log",
+    "bytes": 233,
+    "sha256": "7d5476f76a274b6c5441e726abef815dcdc9e26c37e7551ef0e79293b3f95e72"
+  },
+  {
+    "path": "issue-405-pip-audit-benchmarks_python_requirements.lock.json",
+    "bytes": 428,
+    "sha256": "9dea64f135da37d048dbbc94b9326b49ad03da2d6c5cd10e19fcf3eed8de0459"
+  },
+  {
+    "path": "issue-405-pip-audit-ci.json",
+    "bytes": 1721,
+    "sha256": "9ab67ec859e0b85908bc3caa49424ba23c68cbcf56210ab262ab90825d5f3e2d"
+  },
+  {
+    "path": "issue-405-pip-audit-ci.log",
+    "bytes": 31,
+    "sha256": "15950a68a7ed99c59779717acefdceb3f69cfd31bde67d2c954f2a3cea4d7955"
+  },
+  {
+    "path": "issue-405-pip-audit-cpp_tools_requirements.lock.json",
+    "bytes": 92,
+    "sha256": "cf9735a2f4a1c5c7c7029cbf619288bf8ac1ba2f35b44418cd464decf6ef5aed"
+  },
+  {
+    "path": "issue-405-pip-audit-dev_log_issues_330_pulls_331_templates_python_requirements.lock.json",
+    "bytes": 3341,
+    "sha256": "1740d22a61247cff67b39bde1e18bbd88100cdff243066f96f088cd44a3c5708"
+  },
+  {
+    "path": "issue-405-pip-audit-dev_log_issues_377_pulls_378_templates_cpp_scripts_requirements-ci.lock.json",
+    "bytes": 1474,
+    "sha256": "6b50c1edb06a2ccc87760c35fc5b1194df2171cf19c14f741d51f36a22f6fda8"
+  },
+  {
+    "path": "issue-405-pip-audit-dev_log_issues_377_pulls_378_templates_cpp_scripts_requirements-security.lock.json",
+    "bytes": 1603,
+    "sha256": "ec185db609ce33ddcea2726571c63600621a6e4817d0651ab2127f7dc49e1c31"
+  },
+  {
+    "path": "issue-405-pip-audit-dev_log_issues_377_pulls_378_templates_python_requirements.lock.json",
+    "bytes": 3341,
+    "sha256": "1740d22a61247cff67b39bde1e18bbd88100cdff243066f96f088cd44a3c5708"
+  },
+  {
+    "path": "issue-405-pip-audit-locks.log",
+    "bytes": 595,
+    "sha256": "36e82453c1906530898e973cbe669e3aced5b48b7a80765fc9ad2d44acf8a933"
+  },
+  {
+    "path": "issue-405-pip-audit-python_requirements.lock.json",
+    "bytes": 921,
+    "sha256": "a88c5e1ce60cb64ba453c0e07bec604972da6eac184be669282c39238a6a991e"
+  },
+  {
+    "path": "issue-405-pip-upgrade.log",
+    "bytes": 582,
+    "sha256": "89d1e5196e99a6c49eec29f11cb08c096d364df3e01927ce51264d28a658fd70"
+  },
+  {
+    "path": "issue-405-publish-tests.log",
+    "bytes": 105,
+    "sha256": "5ad84b14b2d41ca9f01c5d7f93e68bd508dae0860382c89144db8317deb7ae4d"
+  },
+  {
+    "path": "issue-405-python-audit.json",
+    "bytes": 3734,
+    "sha256": "3349767db84c252b915d07ce4fe844a205bf02e274a9efc3536a4de324bc77cd"
+  },
+  {
+    "path": "issue-405-python-audit.log",
+    "bytes": 31,
+    "sha256": "15950a68a7ed99c59779717acefdceb3f69cfd31bde67d2c954f2a3cea4d7955"
+  },
+  {
+    "path": "issue-405-python-black.log",
+    "bytes": 57,
+    "sha256": "1239c20f82d64c540be118ccf284ffd44964051740feb568eaea8620e039e943"
+  },
+  {
+    "path": "issue-405-python-build.log",
+    "bytes": 9574,
+    "sha256": "b4dcc34c91083ce76355d3802604abe985e521b447b567337c7c7333285c33a9"
+  },
+  {
+    "path": "issue-405-python-flake8.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-python-install.log",
+    "bytes": 19277,
+    "sha256": "eee815b7941b83c81b7e48eaa7368c5b24d0f8a505000ce6022fb02bc57f0bdb"
+  },
+  {
+    "path": "issue-405-python-isort.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-python-lock-audit.json",
+    "bytes": 976,
+    "sha256": "fc8a8f9607e72c70cd51895369b1424c35cf6b07f13d36ec44afa6e292522b26"
+  },
+  {
+    "path": "issue-405-python-lock-audit.log",
+    "bytes": 265,
+    "sha256": "79d30422388543b2563e1dde76bb7e7857d7ef0c6fdf05c8c71598633ca07e1e"
+  },
+  {
+    "path": "issue-405-python-test.log",
+    "bytes": 2908,
+    "sha256": "94c9aae64f29bf398b42543fbc71dd8ac61cd655a60767196213239839ecbe6e"
+  },
+  {
+    "path": "issue-405-release-audit-format.log",
+    "bytes": 82,
+    "sha256": "2cc785cb1efd14b09e7b82ea4e7c3008a13ca1e66d28a68277c20b6bf6e42750"
+  },
+  {
+    "path": "issue-405-release-audit-tests.log",
+    "bytes": 1532,
+    "sha256": "90c3656d4917af99987c4addc4d0fb66562f3f4bf93953938816d414ac1e6a1a"
+  },
+  {
+    "path": "issue-405-remove-minimatch-overrides.log",
+    "bytes": 701,
+    "sha256": "0a920f8ca5dd2f25fd899b355f4219fd863b3dfb884eead5e77865f798794d67"
+  },
+  {
+    "path": "issue-405-rerun-tests.log",
+    "bytes": 106,
+    "sha256": "75ff54e727b57e4bd7b88956ed0c92c4b9a416e6f0976707e8fb54aa385ac0bd"
+  },
+  {
+    "path": "issue-405-runs.json",
+    "bytes": 479,
+    "sha256": "1053082ee28e43f56d62684c291ce88ddb00210673d4c8a32ccfdca2feb738d3"
+  },
+  {
+    "path": "issue-405-rust-audit.json",
+    "bytes": 374,
+    "sha256": "3e26aa90efa98b38e909612aea693fb3759d014a093eb769625202dd97652f8c"
+  },
+  {
+    "path": "issue-405-rust-audit.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-rust-benchmark-check.log",
+    "bytes": 177,
+    "sha256": "ff67c01960071737a5b223fddbb9507d661194c6d412b5cf792c6b08c007aa23"
+  },
+  {
+    "path": "issue-405-rust-benchmark.log",
+    "bytes": 1738,
+    "sha256": "ecff50427efa996995ea29a833ed41d58be9cb5936614f0912d54b00ba7421cf"
+  },
+  {
+    "path": "issue-405-rust-clippy.log",
+    "bytes": 1175,
+    "sha256": "63158798443c08bd55e7d6f0ab8ca2d038b5ee6724312443d59c744c21259708"
+  },
+  {
+    "path": "issue-405-rust-fmt.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-rust-no-default.log",
+    "bytes": 31936,
+    "sha256": "815fa5601e16adebc84ba65f57c3ca69ee426659d62732ad3d02b64e0a3cfdaa"
+  },
+  {
+    "path": "issue-405-rust-test.log",
+    "bytes": 38882,
+    "sha256": "df263b0ddda615c36c703d500287a81af7f5d89253a7a0edf31092a96624d998"
+  },
+  {
+    "path": "issue-405-rustup-1.100.log",
+    "bytes": 370,
+    "sha256": "b3c8476bffbb53174d6ef7da39280b3a8d1347cbd9eb71e45ffbfa48d4d9b644"
+  },
+  {
+    "path": "issue-405-rustup.log",
+    "bytes": 488,
+    "sha256": "9c092e723090150f81a45e55e3518f815f8152831a691458d8cf46b6b7c99380"
+  },
+  {
+    "path": "issue-405-shellcheck-install.log",
+    "bytes": 577,
+    "sha256": "6c6b9f0d0ee09a24f6f139d4436539705cb240286f04233d94eb0d4f3b34092e"
+  },
+  {
+    "path": "issue-405-shellcheck.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-status.txt",
+    "bytes": 22928,
+    "sha256": "56cde265b6957cc947745d21022192d05eecfc747e33574c5dedf9f6b5d850a4"
+  },
+  {
+    "path": "issue-405-swift-build.log",
+    "bytes": 1018,
+    "sha256": "22d50440e40a9701393effbeb0511c7b26d9f5634a53ad30ad857878be0943c3"
+  },
+  {
+    "path": "issue-405-swift-example.log",
+    "bytes": 1138,
+    "sha256": "e65e4847524e8a6bc7dd862b514f9b3d3f2bc74a37fe4f6a0d75ccdbdc625600"
+  },
+  {
+    "path": "issue-405-swift-format.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue-405-swift-test.log",
+    "bytes": 74939,
+    "sha256": "c9b5f628225f6f5ec28d000e7299062142af5153f45ea2c3db9a8c093f7b75e3"
+  },
+  {
+    "path": "issue-405-swift-update.log",
+    "bytes": 33,
+    "sha256": "15187db030020dcc9a69c313826cdfcb473a5214b2fcb6b20d0bb3bf81320982"
+  },
+  {
+    "path": "issue-405-template-330-js-lint.log",
+    "bytes": 1138,
+    "sha256": "91998299a4aef7d12c1298bf85dfe90f524939e4c85d36c9958b6a643661fcbd"
+  },
+  {
+    "path": "issue-405-template-330-js-test.log",
+    "bytes": 165,
+    "sha256": "3dfa909bfa6e1b4fa95eaa0a4f241d110297ef5d4b39b53c88e36d1b0aacca98"
+  },
+  {
+    "path": "issue-405-template-377-csharp-lint.log",
+    "bytes": 220,
+    "sha256": "f52916d9dfafc8de331a1fe6798412d3c2864197bd0321eb0f51375374209a05"
+  },
+  {
+    "path": "issue-405-template-377-csharp-test.log",
+    "bytes": 44243,
+    "sha256": "87f571384cefcb1fb7c9bee0439ac29232729f2bb975b72ebde76a6ae6d4dab6"
+  },
+  {
+    "path": "issue-405-template-377-csharp-typecheck.log",
+    "bytes": 222,
+    "sha256": "3362964436e27814196ccbec08972cd82dd2a767c5d5a57e501fb83c02fa31e2"
+  },
+  {
+    "path": "issue-405-template-377-js-lint.log",
+    "bytes": 1319,
+    "sha256": "340e4ba8293782ad2dc4087fad6bc6de98daaedf4d88d75c82ec6cd028275666"
+  },
+  {
+    "path": "issue-405-template-377-js-test.log",
+    "bytes": 165,
+    "sha256": "0200ab27adc0918d7b51bd37d8d2dba81a8279f50870e74a6ca004ba09e903eb"
+  },
+  {
+    "path": "issue-405-template-node-checks.log",
+    "bytes": 910,
+    "sha256": "7c1da431bfdc24699291fd78123294422004793386629df3eaf53e922a4283f0"
+  },
+  {
+    "path": "issue-405-update-declarations.log",
+    "bytes": 78791,
+    "sha256": "fc241d18287adcf8aa43d7682de0ec05f9b9135213032b113ae571bff50b4a61"
+  },
+  {
+    "path": "issue-405-uv-benchmark-lock.log",
+    "bytes": 30930,
+    "sha256": "92cf3da79734e465a0bbf1b8cf4f3bfe1e009eb0154f5c3803be6b5c70989af6"
+  },
+  {
+    "path": "issue-405-uv-ci-lock.log",
+    "bytes": 38904,
+    "sha256": "787d28a8b25f68664877c12930b4427333ae742a2b101bd86a6f2a536fa546e1"
+  },
+  {
+    "path": "issue-405-uv-cpp-lock.log",
+    "bytes": 1789,
+    "sha256": "1404d4502b3db2128cbd2a7ea2831942c15f286bb147147b1028135acddfcb20"
+  },
+  {
+    "path": "issue-405-uv-exact-transitives.log",
+    "bytes": 504,
+    "sha256": "d55d6aa96b6c3fd6f950729e6ab5052c2d313cda5c6a8db60622445c1fc4ba1f"
+  },
+  {
+    "path": "issue-405-uv-export330.log",
+    "bytes": 56463,
+    "sha256": "dd808588b87d6a9c9f856ed922223c96081c3cfad52d64dd1e6fe111a6c60c8a"
+  },
+  {
+    "path": "issue-405-uv-export377.log",
+    "bytes": 56462,
+    "sha256": "bf76b18d7243930bed0de999448bfcdb9507fb37b0dd538b641a11de4a8cbefc"
+  },
+  {
+    "path": "issue-405-uv-install.log",
+    "bytes": 422,
+    "sha256": "8c1076eadff01010c4da901355caf1d858163e1c0047ca183f45a0dedb91f7a6"
+  },
+  {
+    "path": "issue-405-uv-python-export.log",
+    "bytes": 10552,
+    "sha256": "e5346500407e6e52a03370b1ca14a958bc1131d3e930ec780d0648826393c808"
+  },
+  {
+    "path": "issue-405-uv-python-lock.log",
+    "bytes": 57793,
+    "sha256": "23d1816cd7f5e630a22a9bad7b149ce55a97ec1a82b9c7c2682b0c839f00987a"
+  },
+  {
+    "path": "issue-405-uv-refresh330.log",
+    "bytes": 112,
+    "sha256": "f82f4de862f113e6c465ce21d57a0f33238cc7c515e786ecd2cf1d3a2e78453c"
+  },
+  {
+    "path": "issue-405-uv-refresh377.log",
+    "bytes": 112,
+    "sha256": "1cc595cbd252b71fd13192eb04b9ef1bc96ce17f86ae18b2a219c24bf0e3dd03"
+  },
+  {
+    "path": "issue-405-uv-template330-lock.log",
+    "bytes": 320552,
+    "sha256": "f7675c4f69158aec9649c011bac242ab536938147c30c11411eccce135acea65"
+  },
+  {
+    "path": "issue-405-uv-template377-lock.log",
+    "bytes": 104300,
+    "sha256": "feb644f64c334e20f6c8498f376f706ddc7361a75f3686b294d014d0071cd137"
+  },
+  {
+    "path": "issue-405-version-consistency.log",
+    "bytes": 171,
+    "sha256": "80f15c8c879ca8fff3991a6935f420529934707bd1bd4ced4091aa6d6becaf49"
+  },
+  {
+    "path": "issue-405-version-files.txt",
+    "bytes": 655,
+    "sha256": "528e4433e793869e69adb3bbf68816587fdf46f3971eb6693f8d5687b04ea159"
+  },
+  {
+    "path": "issue-405-website-build.log",
+    "bytes": 589,
+    "sha256": "de0e7458b2b6912724481904d294901f254cb943f1161207a879750f47c8017e"
+  },
+  {
+    "path": "issue-405-website-lint.log",
+    "bytes": 50,
+    "sha256": "aa43c689c899846335aaddae9e7af360a4de4a43cf7a882627741ddf5387fe02"
+  },
+  {
+    "path": "issue-405-workflow-contract.log",
+    "bytes": 102,
+    "sha256": "4a160235c0add54f7a5997815d0e01a072210439de4899c702c94dd3cd814662"
+  },
+  {
+    "path": "issue-405-yarn-audit.jsonl",
+    "bytes": 189,
+    "sha256": "e07c8d2e8d62752a2a7c1bcb28e1f47c12e1d38e0ba8e90ef8f96fd49f0de080"
+  },
+  {
+    "path": "issue-405-yarn-audit.log",
+    "bytes": 301,
+    "sha256": "9a1d32a8aea3c5cab865e5903639637780afd8ab887c44b052a6948f2222595b"
+  },
+  {
+    "path": "issue-405-yarn-full-audit.log",
+    "bytes": 80,
+    "sha256": "c62d109a617276da61202c167f9207e8ccf4d0977a256801a8cb79cc93efc91b"
+  },
+  {
+    "path": "issue-405-yarn-upgrade.log",
+    "bytes": 1321,
+    "sha256": "5e070af5bb1a31366361e04f3751366bd4524922da300c2d8dfec77ca54cf889"
+  },
+  {
+    "path": "issue-405-zizmor.log",
+    "bytes": 176592,
+    "sha256": "8c2339a8bfa8a752783079b101841f9adc755c03cdc443b26a5d92da5473f3b4"
+  },
+  {
+    "path": "issue405-actionlint-final.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue405-additional-evidence-final.log",
+    "bytes": 53,
+    "sha256": "4cb8dff7aaa9ac3480c2994f05eaf66638c72a02de5f4c9d50c6094e8007718d"
+  },
+  {
+    "path": "issue405-additional-evidence.log",
+    "bytes": 513,
+    "sha256": "881dc0f3a75a3fc1d7735229a905b936980a4f3d8f428ba72ec87f304714eeae"
+  },
+  {
+    "path": "issue405-additional-tool-pins.txt",
+    "bytes": 9948,
+    "sha256": "a0c9d35d60a1523b0202fbb3a130544f5e244f2a38f23024b1ed9feb4760d916"
+  },
+  {
+    "path": "issue405-application-insights3-probe.log",
+    "bytes": 972,
+    "sha256": "9d973f22e729e7af26e32e115ca76b215f89d8ce54cd16e30f5ceb58c7eeedc1"
+  },
+  {
+    "path": "issue405-archive-pins-recheck.log",
+    "bytes": 996,
+    "sha256": "60b91e2ab7ecec77c7c801a2431787f3e24ae38f2df49e800ca0556627bb9af3"
+  },
+  {
+    "path": "issue405-automation-final.log",
+    "bytes": 2085,
+    "sha256": "8bc052156db821f5f8280d9a0de98dbef9990ec716d8f4d3c5a5cb398cb551db"
+  },
+  {
+    "path": "issue405-bun-final.log",
+    "bytes": 64,
+    "sha256": "4cd4fd6538821279638c7d53df62c653b348f93ee11a6737f95fa601bde4ceb4"
+  },
+  {
+    "path": "issue405-change-stat.txt",
+    "bytes": 16623,
+    "sha256": "b2e87f89e1d3dbc9f37462b938f5f88d89da7388cd8b12705a7a970cb14d555f"
+  },
+  {
+    "path": "issue405-composer-local-version.log",
+    "bytes": 588,
+    "sha256": "257b79845ab1511fdfbef6509249b72b8e7b1545ca9952df03ee79ca6ee1327a"
+  },
+  {
+    "path": "issue405-core-diff-review.txt",
+    "bytes": 14914,
+    "sha256": "d5add7ad9cc0963adbcd45d649a18187f9112f34fd86d9fb33f132b6516f1b5c"
+  },
+  {
+    "path": "issue405-csharp-latest-transitives-test.log",
+    "bytes": 1069,
+    "sha256": "5b9d5c203bb186c28af709bfe3a5bfaa0962a6b34ebad58339dbf226bff55023"
+  },
+  {
+    "path": "issue405-csharp-latest-transitives.log",
+    "bytes": 513,
+    "sha256": "05c1adf1d2ad5c7fa5802d574b4e3d4b4a1058b938885a3549c76bc0192cd856"
+  },
+  {
+    "path": "issue405-csharp-transitives-test.log",
+    "bytes": 651,
+    "sha256": "59ead4172622eabbd0a8c2104d3c74b27e1d37ca2bcc03f1e902e62266813646"
+  },
+  {
+    "path": "issue405-current-runtime-pins.txt",
+    "bytes": 16993,
+    "sha256": "3880b3bf9cbc27e3aa0d1c5479fcf3102a0689af6e7b65bdf96ab417f03c27ec"
+  },
+  {
+    "path": "issue405-dependabot-final.log",
+    "bytes": 142,
+    "sha256": "f1662737024a42000ec76c9dba78eeda371f62782f14084943cb65596e5615b9"
+  },
+  {
+    "path": "issue405-dependency-commit-stat.txt",
+    "bytes": 19323,
+    "sha256": "9dab1cb881b3c2315d14ecd143308540258a6bdee88d819dec90f256bde871cf"
+  },
+  {
+    "path": "issue405-dependency-commit.log",
+    "bytes": 3505,
+    "sha256": "f37bd7b14a1423a93f682df7f2befecbee3e1468e0831e7da37f2ce26cd75372"
+  },
+  {
+    "path": "issue405-diff-reviewed.txt",
+    "bytes": 115234,
+    "sha256": "a12602a8a28f6549c129b190567a6a98b8948364ffb82cdf5ce86a5b5bd9f3b8"
+  },
+  {
+    "path": "issue405-env-pins.txt",
+    "bytes": 17409,
+    "sha256": "9ecf14980d0cbb6ad0e29e89d0a76a0a5e225bd53680d3e7fda754093851c95b"
+  },
+  {
+    "path": "issue405-evidence-final.log",
+    "bytes": 123,
+    "sha256": "da73736be8b76e658a8d4a020c17cf6b1e76dd0e7c4a8293d77cc3417154d99e"
+  },
+  {
+    "path": "issue405-evidence-format-final.log",
+    "bytes": 57,
+    "sha256": "a925ced65e8681250f3969d03953c42741f73c9c3429c3d2242fc00c8bc29744"
+  },
+  {
+    "path": "issue405-evidence-format.log",
+    "bytes": 47,
+    "sha256": "8a9d2b62568869f12c3be921b9e992b4488c1a4974ecb63404f04fb0f328acda"
+  },
+  {
+    "path": "issue405-evidence-render.log",
+    "bytes": 123,
+    "sha256": "da73736be8b76e658a8d4a020c17cf6b1e76dd0e7c4a8293d77cc3417154d99e"
+  },
+  {
+    "path": "issue405-fetch-main.log",
+    "bytes": 101,
+    "sha256": "4f94dfb95da86bebf5e6a684676e62e5e98f01bbe3294319933d735548d887f1"
+  },
+  {
+    "path": "issue405-formatter-cli.log",
+    "bytes": 2541,
+    "sha256": "c950737b7e02c297232337b57905b1b5fe7bc8e1bc7bbbd59437ac3900ba8440"
+  },
+  {
+    "path": "issue405-gradle-graph.log",
+    "bytes": 937,
+    "sha256": "9e026919107a8093676122c8c296c42018faa98cf463b82a015688c929ced1d6"
+  },
+  {
+    "path": "issue405-initial-check-names.txt",
+    "bytes": 2416,
+    "sha256": "89c3f062796e1e288c0ec96ce0fd908d95d873eae6c960f24366cfdc239b675c"
+  },
+  {
+    "path": "issue405-inventory-final.log",
+    "bytes": 52,
+    "sha256": "65642097962fc62779cefa3e2ca0570e51d3ad636b5deb20811a16ded49a5be2"
+  },
+  {
+    "path": "issue405-java-transitives.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue405-js-lint-final.log",
+    "bytes": 52,
+    "sha256": "1129e394e1aa74e68f3fda8f6554d9598ff4b483f8b5ae72958f4862878ef913"
+  },
+  {
+    "path": "issue405-jvm-graph-final.log",
+    "bytes": 937,
+    "sha256": "5838da83c0c02ae5f8cd242bb5736a937deaa4efef480eab14abbd742ba04268"
+  },
+  {
+    "path": "issue405-kotlin-current-transitives.log",
+    "bytes": 6952,
+    "sha256": "83b1f1518834aeda9dc19579018d2fa3829c926e395cb5b0f4bf8b9533211f11"
+  },
+  {
+    "path": "issue405-kotlin-final-graph-check.log",
+    "bytes": 4677,
+    "sha256": "a9c0af0ec44117ee2d759b5d8c07e19102eccbfd373420115b3bce4c1519b70b"
+  },
+  {
+    "path": "issue405-ktlint-upgrade-trace.log",
+    "bytes": 23915,
+    "sha256": "843316739305e1e8eb2cc8e1b80896d49f980ac2023e5071507ad1d797e009ed"
+  },
+  {
+    "path": "issue405-local-log-index.txt",
+    "bytes": 17820,
+    "sha256": "15671dc183ad025604c78e2d5cfda3b6bc093be36a2b56e658afb7701cb00020"
+  },
+  {
+    "path": "issue405-lock-check-final.log",
+    "bytes": 396,
+    "sha256": "e74dd27b0ca9c9c40b37f976587d0f925136322f81224a0eb33c1d1362b0a7f5"
+  },
+  {
+    "path": "issue405-lock-inventory-final.log",
+    "bytes": 73,
+    "sha256": "ee06bbd8de57a96475f65856e08df72e47be89a92bd3c3dc4a8ed7eaa87c9943"
+  },
+  {
+    "path": "issue405-maven-graphs.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue405-mtp-source-paths.txt",
+    "bytes": 264,
+    "sha256": "2d721d0164916f51605d2c1df71e5aa80e32b2b164524bd46cd2db7dc44ffb67"
+  },
+  {
+    "path": "issue405-npm-refresh-all.log",
+    "bytes": 373,
+    "sha256": "958bb74f038c66faaf3d1a5f424dac852ab59c2632a8fbea61e73acc61102d49"
+  },
+  {
+    "path": "issue405-npm-refresh-benchmarks_js.log",
+    "bytes": 63,
+    "sha256": "245a11a4018ded00c30134bb66010cfd22ec1afc18fbe2a3e27d0edcb236b37d"
+  },
+  {
+    "path": "issue405-npm-refresh-benchmarks_tools.log",
+    "bytes": 140,
+    "sha256": "84d6a70a95fa83f4fb9f5a9847bf4d397bba0c181a1b8e0d679e21acfe0a425f"
+  },
+  {
+    "path": "issue405-npm-refresh-dev_log_issues_330_pulls_331_templates_js.log",
+    "bytes": 131,
+    "sha256": "f081a2d81ac48ba8337c053c7d1aa7a0004450227001a06eda61b5f97d90d2d8"
+  },
+  {
+    "path": "issue405-npm-refresh-dev_log_issues_377_pulls_378_templates_csharp.log",
+    "bytes": 130,
+    "sha256": "63072d471cf9418cc4e0c63c0ac9b940f1228248cff1715956ba0e6b3e0c9a08"
+  },
+  {
+    "path": "issue405-npm-refresh-dev_log_issues_377_pulls_378_templates_js.log",
+    "bytes": 131,
+    "sha256": "eb1c7017c6d806f8a422efbd1c223a1a5ee8fce441d87b39f054199a7127a48f"
+  },
+  {
+    "path": "issue405-npm-refresh-dev_log_issues_377_pulls_378_templates_js_.github_actions_artifact-transport.log",
+    "bytes": 131,
+    "sha256": "059a25e19bbd086e628b61fe01d900e542e09f12e3f50f2ecc657e60c748e2ca"
+  },
+  {
+    "path": "issue405-npm-refresh-dev_log_issues_377_pulls_378_templates_python_.github_actions_artifact.log",
+    "bytes": 131,
+    "sha256": "3bbd7985fbe01479f7e6c8a14d936d27f69e41472d2468e0bc5bb7b27a4e9256"
+  },
+  {
+    "path": "issue405-npm-refresh-docs_comparison.log",
+    "bytes": 140,
+    "sha256": "b3fefe43cafcadc129b6fc01224afcd8cbf446a13463f8c065b6432c2aa4d15e"
+  },
+  {
+    "path": "issue405-npm-refresh-docs_website.log",
+    "bytes": 130,
+    "sha256": "008ddd2de2a2c3bcf5cdae13ac09ac8b2fef1da1b0d56e88fbb9e0bd2e573f8b"
+  },
+  {
+    "path": "issue405-npm-refresh-js.log",
+    "bytes": 142,
+    "sha256": "575a3211c985d69cb6fdfe65517864b3be12f8c71be1867c0fb0097f9d39a659"
+  },
+  {
+    "path": "issue405-nuget-final-active-audit.json",
+    "bytes": 306,
+    "sha256": "ceba1816bd94c03559148fc22369d7d7273c6aeb509bb9fe156dd0504beebd99"
+  },
+  {
+    "path": "issue405-nuget-final-active-audit.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue405-nuget-final-template-audit.json",
+    "bytes": 309,
+    "sha256": "bf5169502e9e634bb29b9ef5c9cff6d8472fec7a0bf61d18a7f902484a5fd02b"
+  },
+  {
+    "path": "issue405-nuget-final-template-audit.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "issue405-nuget-transitives.log",
+    "bytes": 644,
+    "sha256": "e0caea736a76b305dc0110acba3b371b97c3f1db6421bed31f1037813eec2bdb"
+  },
+  {
+    "path": "issue405-parity-final.log",
+    "bytes": 87,
+    "sha256": "3d8bc71b7f72a8e043d939422c56521cc3539504cf7300665212dabd3ae3355a"
+  },
+  {
+    "path": "issue405-parity-refresh.log",
+    "bytes": 70,
+    "sha256": "759f7c5667727de45cb53c41a1662b18b8fb04cf2f1802c36dcf6f2a51c46882"
+  },
+  {
+    "path": "issue405-pr-before-update.json",
+    "bytes": 619,
+    "sha256": "67ad5be3f8a7c15a478355d6608bb3ff8ead8302f3aca1501c77600b55aae371"
+  },
+  {
+    "path": "issue405-prepush-runs.json",
+    "bytes": 479,
+    "sha256": "1053082ee28e43f56d62684c291ce88ddb00210673d4c8a32ccfdca2feb738d3"
+  },
+  {
+    "path": "issue405-python-release-build.log",
+    "bytes": 9700,
+    "sha256": "efa47154edb94613fe64a36130c453fd6cf7f85d55197c08100d65951f2e62f6"
+  },
+  {
+    "path": "issue405-regressions-final.log",
+    "bytes": 1730,
+    "sha256": "b27c5989a0f3702ccedc1fa1cdf538b71f90cac1a2fd4edb1ac5853d32ca62b2"
+  },
+  {
+    "path": "issue405-source-review-list.txt",
+    "bytes": 3348,
+    "sha256": "873d196d364cb9560c53249c193d0ca1342926c4f75fdcb98779dbf684a42c03"
+  },
+  {
+    "path": "issue405-version-final.log",
+    "bytes": 171,
+    "sha256": "80f15c8c879ca8fff3991a6935f420529934707bd1bd4ced4091aa6d6becaf49"
+  },
+  {
+    "path": "issue405-yarn-lock-store.log",
+    "bytes": 1510,
+    "sha256": "04e1e5ff907d5b46cbcd20fcb091dbe69354910c9273bc79b420ee11ec41a18f"
+  },
+  {
+    "path": "issue405-yarn-refresh-final.log",
+    "bytes": 1408,
+    "sha256": "9fa969fb6a1c19580d3e9a94c3763820ffc9f875c9cf9f4c6845848a61c2f6ee"
+  },
+  {
+    "path": "issue405-yarn-stored-audit.log",
+    "bytes": 87,
+    "sha256": "a407ad48ab03b814b28f53539f8722250e05f649d55affb3888f5a965bfc8d08"
+  },
+  {
+    "path": "issue405-zizmor-final.log",
+    "bytes": 176596,
+    "sha256": "9bc9ef02b3072adb984b2de7b4ce901ffc0790d972f525300b2027dffead161e"
+  }
+]

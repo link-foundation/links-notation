@@ -1,11 +1,11 @@
-import * as glob from '@actions/glob';
+import { createSearch } from './glob.mjs';
 import { lstat, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 
 export async function findFiles(input) {
-  const matcher = await glob.create(input, { followSymbolicLinks: false, excludeHiddenFiles: true });
+  const matcher = await createSearch(input);
   const files = [];
   for (const file of await matcher.glob()) {
     if ((await lstat(file)).isFile()) files.push(file);

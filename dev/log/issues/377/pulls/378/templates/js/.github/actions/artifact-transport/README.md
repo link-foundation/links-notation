@@ -3,12 +3,12 @@
 This action keeps the official `@actions/artifact` client for authentication,
 immutable artifact IDs, digests and transport. Scoped npm overrides pin the
 SDK's original `unzip-stream` 0.3.4 and replace `archiver-utils`' deprecated
-glob 10.5.0 with glob 13.0.6, which preserves the only API it uses,
+glob 10.5.0 with glob 14.0.6, which preserves the only API it uses,
 `glob.sync`.
 
 Downloads use the SDK's documented `skipDecompress` option and pass the digest
 recorded at upload time as `expectedHash`, so the SDK still verifies every
-downloaded archive. `zip.js` 2.24.0 then extracts it. The SDK's own reader,
+downloaded archive. `zip.js` 2.25.0 then extracts it. The SDK's own reader,
 unzip-stream, constructs deprecated `Buffer` instances; zip.js has no runtime
 dependencies and supports ZIP64 and streamed decompression.
 
@@ -66,3 +66,11 @@ stops importing the built-in module; keep the startup and warning assertions.
 Sources: [known upstream defect](https://github.com/actions/deploy-pages/issues/413),
 [userland import instructions](https://github.com/mathiasbynens/punycode.js#installation),
 [Node module hooks](https://nodejs.org/docs/latest-v24.x/api/module.html#moduleregisterhooksoptions).
+
+Artifact discovery uses glob 14 and glob-parent 6 directly. The latest
+`@actions/glob` 0.7.0 still calls minimatch’s removed private `matchOne` API,
+so a blanket minimatch 11 override is incompatible. The migration preserves
+exclusions, roots, hidden-file policy and the actions’ separate symlink
+policies, including ignoring broken links. See the
+[confirmed upstream report](https://github.com/actions/toolkit/issues/2564#issuecomment-6865793053)
+and `experiments/issue-405/artifact-files.test.mjs` in the parent repository.

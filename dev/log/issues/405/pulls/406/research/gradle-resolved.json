@@ -1,0 +1,1528 @@
+[
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.4.21"
+    },
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "org.jetbrains:annotations",
+        "after": "26.1.0",
+        "parent": "org.jetbrains.kotlin:kotlin-stdlib:2.4.21",
+        "requested": "org.jetbrains:annotations:13.0"
+    },
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "org.jetbrains.kotlin:kotlin-test",
+        "after": "2.4.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-test"
+    },
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlin:kotlin-test:2.4.21",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.4.21"
+    },
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "org.jetbrains.kotlin:kotlin-test-junit",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlin:kotlin-test:2.4.21",
+        "requested": "org.jetbrains.kotlin:kotlin-test-junit:2.4.21"
+    },
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "org.jetbrains.kotlin:kotlin-test",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlin:kotlin-test-junit:2.4.21",
+        "requested": "org.jetbrains.kotlin:kotlin-test:2.4.21"
+    },
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "junit:junit",
+        "after": "4.13.2",
+        "parent": "org.jetbrains.kotlin:kotlin-test-junit:2.4.21",
+        "requested": "junit:junit:4.13.2"
+    },
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "org.hamcrest:hamcrest-core",
+        "after": "3.0",
+        "parent": "junit:junit:4.13.2",
+        "requested": "org.hamcrest:hamcrest-core:1.3"
+    },
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "org.hamcrest:hamcrest",
+        "after": "3.0",
+        "parent": "org.hamcrest:hamcrest-core:3.0",
+        "requested": "org.hamcrest:hamcrest:3.0"
+    },
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "org.jetbrains.kotlin:kotlin-test",
+        "after": "2.4.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-test:2.4.21"
+    },
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "org.jetbrains:annotations",
+        "after": "26.1.0",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains:annotations:26.1.0"
+    },
+    {
+        "configuration": "jvmTestRuntimeClasspath",
+        "name": "org.hamcrest:hamcrest-core",
+        "after": "3.0",
+        "parent": "root project 'links-notation'",
+        "requested": "org.hamcrest:hamcrest-core:3.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli",
+        "after": "1.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "com.pinterest.ktlint:ktlint-cli:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-logger",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-logger:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-logger:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations-jvm",
+        "after": "0.23.2",
+        "parent": "dev.drewhamilton.poko:poko-annotations:0.23.2",
+        "requested": "dev.drewhamilton.poko:poko-annotations-jvm:0.23.2"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "io.github.oshai:kotlin-logging-jvm",
+        "after": "8.0.7",
+        "parent": "com.pinterest.ktlint:ktlint-logger:1.8.0",
+        "requested": "io.github.oshai:kotlin-logging-jvm:7.0.13"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-logger:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains:annotations",
+        "after": "26.1.0",
+        "parent": "org.jetbrains.kotlin:kotlin-stdlib:2.4.21",
+        "requested": "org.jetbrains:annotations:13.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-baseline",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-logger",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-logger:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-rule-engine-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-logger",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-logger:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-compiler-embeddable",
+        "after": "2.2.21",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-script-runtime",
+        "after": "2.2.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-script-runtime:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-reflect",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-reflect:1.6.10"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-daemon-embeddable",
+        "after": "2.2.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-daemon-embeddable:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm",
+        "after": "1.11.0",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.ec4j.core:ec4j-core",
+        "after": "1.2.0",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "org.ec4j.core:ec4j-core:1.1.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-plain",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-plain:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-plain:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-plain:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-plain:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-rule-engine",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-rule-engine:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-logger",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-logger:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-rule-engine-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-compiler-embeddable",
+        "after": "2.2.21",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.ec4j.core:ec4j-core",
+        "after": "1.2.0",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine:1.8.0",
+        "requested": "org.ec4j.core:ec4j-core:1.1.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-ruleset-standard",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-logger",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-logger:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-ruleset-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-ruleset-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-ruleset-core:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-rule-engine-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-ruleset-core:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-ruleset-core:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-rule-engine-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.github.ajalt.clikt:clikt",
+        "after": "5.1.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.github.ajalt.clikt:clikt:5.0.3"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.github.ajalt.clikt:clikt-jvm",
+        "after": "5.1.0",
+        "parent": "com.github.ajalt.clikt:clikt:5.1.0",
+        "requested": "com.github.ajalt.clikt:clikt-jvm:5.1.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "ch.qos.logback:logback-classic",
+        "after": "1.6.6",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "ch.qos.logback:logback-classic:1.3.16"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "ch.qos.logback:logback-core",
+        "after": "1.6.6",
+        "parent": "ch.qos.logback:logback-classic:1.6.6",
+        "requested": "ch.qos.logback:logback-core:1.6.6"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.slf4j:slf4j-api",
+        "after": "2.0.20",
+        "parent": "ch.qos.logback:logback-classic:1.6.6",
+        "requested": "org.slf4j:slf4j-api:2.0.19"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-checkstyle",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-checkstyle:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-checkstyle:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-checkstyle:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-checkstyle:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-json",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-json:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-json:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-json:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-json:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-format",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-format:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-format:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-format:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-format:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-html",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-html:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-html:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-html:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-html:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-plain-summary",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-plain-summary:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-plain-summary:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-plain-summary:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-plain-summary:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-sarif",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-sarif:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-sarif:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "io.github.detekt.sarif4k:sarif4k",
+        "after": "0.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-sarif:1.8.0",
+        "requested": "io.github.detekt.sarif4k:sarif4k:0.6.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "io.github.detekt.sarif4k:sarif4k-jvm",
+        "after": "0.8.0",
+        "parent": "io.github.detekt.sarif4k:sarif4k:0.8.0",
+        "requested": "io.github.detekt.sarif4k:sarif4k-jvm:0.8.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-sarif:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-sarif:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "io.github.oshai:kotlin-logging",
+        "after": "8.0.7",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.oshai:kotlin-logging:5.1.0"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "io.github.oshai:kotlin-logging-jvm",
+        "after": "8.0.7",
+        "parent": "io.github.oshai:kotlin-logging:8.0.7",
+        "requested": "io.github.oshai:kotlin-logging-jvm:8.0.7"
+    },
+    {
+        "configuration": "ktlint",
+        "name": "io.github.detekt.sarif4k:sarif4k",
+        "after": "0.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.detekt.sarif4k:sarif4k:0.5.0"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-baseline",
+        "after": "1.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "com.pinterest.ktlint:ktlint-logger",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-logger:1.8.0"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-logger:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "dev.drewhamilton.poko:poko-annotations-jvm",
+        "after": "0.23.2",
+        "parent": "dev.drewhamilton.poko:poko-annotations:0.23.2",
+        "requested": "dev.drewhamilton.poko:poko-annotations-jvm:0.23.2"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "dev.drewhamilton.poko:poko-annotations-jvm:0.23.2",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.4.20"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains:annotations",
+        "after": "26.1.0",
+        "parent": "org.jetbrains.kotlin:kotlin-stdlib:2.4.21",
+        "requested": "org.jetbrains:annotations:13.0"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "io.github.oshai:kotlin-logging-jvm",
+        "after": "8.0.7",
+        "parent": "com.pinterest.ktlint:ktlint-logger:1.8.0",
+        "requested": "io.github.oshai:kotlin-logging-jvm:7.0.13"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "io.github.oshai:kotlin-logging-jvm:8.0.7",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.1.21"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-logger:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "com.pinterest.ktlint:ktlint-rule-engine-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "com.pinterest.ktlint:ktlint-logger",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-logger:1.8.0"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-compiler-embeddable",
+        "after": "2.2.21",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-script-runtime",
+        "after": "2.2.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-script-runtime:2.2.21"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-reflect",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-reflect:1.6.10"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-daemon-embeddable",
+        "after": "2.2.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-daemon-embeddable:2.2.21"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm",
+        "after": "1.11.0",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.ec4j.core:ec4j-core",
+        "after": "1.2.0",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "org.ec4j.core:ec4j-core:1.1.1"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-core:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "io.github.oshai:kotlin-logging",
+        "after": "8.0.7",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.oshai:kotlin-logging:5.1.0"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "io.github.oshai:kotlin-logging-jvm",
+        "after": "8.0.7",
+        "parent": "io.github.oshai:kotlin-logging:8.0.7",
+        "requested": "io.github.oshai:kotlin-logging-jvm:8.0.7"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "io.github.oshai:kotlin-logging",
+        "after": "8.0.7",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.oshai:kotlin-logging:{strictly 8.0.7}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-baseline",
+        "after": "1.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-baseline:{strictly 1.8.0}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "com.pinterest.ktlint:ktlint-logger",
+        "after": "1.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "com.pinterest.ktlint:ktlint-logger:{strictly 1.8.0}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "com.pinterest.ktlint:ktlint-rule-engine-core",
+        "after": "1.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "com.pinterest.ktlint:ktlint-rule-engine-core:{strictly 1.8.0}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "com.pinterest.ktlint:ktlint-cli-reporter-core",
+        "after": "1.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "com.pinterest.ktlint:ktlint-cli-reporter-core:{strictly 1.8.0}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "root project 'links-notation'",
+        "requested": "dev.drewhamilton.poko:poko-annotations:{strictly 0.23.2}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:{strictly 2.4.21}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "io.github.oshai:kotlin-logging-jvm",
+        "after": "8.0.7",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.oshai:kotlin-logging-jvm:{strictly 8.0.7}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-compiler-embeddable",
+        "after": "2.2.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-compiler-embeddable:{strictly 2.2.21}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.ec4j.core:ec4j-core",
+        "after": "1.2.0",
+        "parent": "root project 'links-notation'",
+        "requested": "org.ec4j.core:ec4j-core:{strictly 1.2.0}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "dev.drewhamilton.poko:poko-annotations-jvm",
+        "after": "0.23.2",
+        "parent": "root project 'links-notation'",
+        "requested": "dev.drewhamilton.poko:poko-annotations-jvm:{strictly 0.23.2}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains:annotations",
+        "after": "26.1.0",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains:annotations:{strictly 26.1.0}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-script-runtime",
+        "after": "2.2.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-script-runtime:{strictly 2.2.21}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-reflect",
+        "after": "2.4.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-reflect:{strictly 2.4.21}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlin:kotlin-daemon-embeddable",
+        "after": "2.2.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-daemon-embeddable:{strictly 2.2.21}"
+    },
+    {
+        "configuration": "ktlintBaselineReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm",
+        "after": "1.11.0",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:{strictly 1.11.0}"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "io.github.oshai:kotlin-logging",
+        "after": "8.0.7",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.oshai:kotlin-logging:5.1.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "io.github.oshai:kotlin-logging-jvm",
+        "after": "8.0.7",
+        "parent": "io.github.oshai:kotlin-logging:8.0.7",
+        "requested": "io.github.oshai:kotlin-logging-jvm:8.0.7"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "io.github.oshai:kotlin-logging-jvm:8.0.7",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.1.21"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains:annotations",
+        "after": "26.1.0",
+        "parent": "org.jetbrains.kotlin:kotlin-stdlib:2.4.21",
+        "requested": "org.jetbrains:annotations:13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "io.github.detekt.sarif4k:sarif4k",
+        "after": "0.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.detekt.sarif4k:sarif4k:0.5.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "io.github.detekt.sarif4k:sarif4k-jvm",
+        "after": "0.8.0",
+        "parent": "io.github.detekt.sarif4k:sarif4k:0.8.0",
+        "requested": "io.github.detekt.sarif4k:sarif4k-jvm:0.8.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "io.github.detekt.sarif4k:sarif4k-jvm:0.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-io-core",
+        "after": "0.9.3",
+        "parent": "io.github.detekt.sarif4k:sarif4k-jvm:0.8.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-io-core:0.8.2"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-io-core-jvm",
+        "after": "0.9.3",
+        "parent": "org.jetbrains.kotlinx:kotlinx-io-core:0.9.3",
+        "requested": "org.jetbrains.kotlinx:kotlinx-io-core-jvm:0.9.3"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-io-bytestring",
+        "after": "0.9.3",
+        "parent": "org.jetbrains.kotlinx:kotlinx-io-core-jvm:0.9.3",
+        "requested": "org.jetbrains.kotlinx:kotlinx-io-bytestring:0.9.3"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-io-bytestring-jvm",
+        "after": "0.9.3",
+        "parent": "org.jetbrains.kotlinx:kotlinx-io-bytestring:0.9.3",
+        "requested": "org.jetbrains.kotlinx:kotlinx-io-bytestring-jvm:0.9.3"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlinx:kotlinx-io-bytestring-jvm:0.9.3",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.3.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlinx:kotlinx-io-core-jvm:0.9.3",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.3.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-json",
+        "after": "1.13.0",
+        "parent": "io.github.detekt.sarif4k:sarif4k-jvm:0.8.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-json:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-bom",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-core:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-core:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-bom",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.13.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.4.10"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-json",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-json:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-json-io",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-json-io:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-json-io-jvm",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-json-io:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-json-io-jvm:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-bom",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-json-io-jvm:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-json-io-jvm:1.13.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.4.10"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-json-io-jvm:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-core:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-json",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-json-io-jvm:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-json:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-io-core",
+        "after": "0.9.3",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-json-io-jvm:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-io-core:0.6.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-json-io-jvm",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-bom:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-json-io-jvm:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.13.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.4.10"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-core",
+        "after": "1.13.0",
+        "parent": "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.13.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-core:1.13.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlinx:kotlinx-serialization-json-io",
+        "after": "1.13.0",
+        "parent": "io.github.detekt.sarif4k:sarif4k-jvm:0.8.0",
+        "requested": "org.jetbrains.kotlinx:kotlinx-serialization-json-io:1.9.0"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "io.github.oshai:kotlin-logging",
+        "after": "8.0.7",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.oshai:kotlin-logging:{strictly 8.0.7}"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "io.github.detekt.sarif4k:sarif4k",
+        "after": "0.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.detekt.sarif4k:sarif4k:{strictly 0.8.0}"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "io.github.oshai:kotlin-logging-jvm",
+        "after": "8.0.7",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.oshai:kotlin-logging-jvm:{strictly 8.0.7}"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "io.github.detekt.sarif4k:sarif4k-jvm",
+        "after": "0.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.detekt.sarif4k:sarif4k-jvm:{strictly 0.8.0}"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:{strictly 2.4.21}"
+    },
+    {
+        "configuration": "ktlintReporter",
+        "name": "org.jetbrains:annotations",
+        "after": "26.1.0",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains:annotations:{strictly 26.1.0}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "com.pinterest.ktlint:ktlint-ruleset-standard",
+        "after": "1.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "com.pinterest.ktlint:ktlint-logger",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-logger:1.8.0"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-logger:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "dev.drewhamilton.poko:poko-annotations-jvm",
+        "after": "0.23.2",
+        "parent": "dev.drewhamilton.poko:poko-annotations:0.23.2",
+        "requested": "dev.drewhamilton.poko:poko-annotations-jvm:0.23.2"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "dev.drewhamilton.poko:poko-annotations-jvm:0.23.2",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.4.20"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains:annotations",
+        "after": "26.1.0",
+        "parent": "org.jetbrains.kotlin:kotlin-stdlib:2.4.21",
+        "requested": "org.jetbrains:annotations:13.0"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "io.github.oshai:kotlin-logging-jvm",
+        "after": "8.0.7",
+        "parent": "com.pinterest.ktlint:ktlint-logger:1.8.0",
+        "requested": "io.github.oshai:kotlin-logging-jvm:7.0.13"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "io.github.oshai:kotlin-logging-jvm:8.0.7",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.1.21"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-logger:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "com.pinterest.ktlint:ktlint-cli-ruleset-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-cli-ruleset-core:1.8.0"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-cli-ruleset-core:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "com.pinterest.ktlint:ktlint-rule-engine-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-cli-ruleset-core:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "com.pinterest.ktlint:ktlint-logger",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-logger:1.8.0"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "dev.drewhamilton.poko:poko-annotations:0.20.1"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-compiler-embeddable",
+        "after": "2.2.21",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-script-runtime",
+        "after": "2.2.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-script-runtime:2.2.21"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-reflect",
+        "after": "2.4.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-reflect:1.6.10"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-daemon-embeddable",
+        "after": "2.2.21",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlin:kotlin-daemon-embeddable:2.2.21"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm",
+        "after": "1.11.0",
+        "parent": "org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.21",
+        "requested": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.ec4j.core:ec4j-core",
+        "after": "1.2.0",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "org.ec4j.core:ec4j-core:1.1.1"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-cli-ruleset-core:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "com.pinterest.ktlint:ktlint-rule-engine-core",
+        "after": "1.8.0",
+        "parent": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0",
+        "requested": "com.pinterest.ktlint:ktlint-rule-engine-core:1.8.0"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "com.pinterest.ktlint:ktlint-ruleset-standard:1.8.0",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:2.2.21"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "com.pinterest.ktlint:ktlint-ruleset-standard",
+        "after": "1.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "com.pinterest.ktlint:ktlint-ruleset-standard:{strictly 1.8.0}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "com.pinterest.ktlint:ktlint-logger",
+        "after": "1.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "com.pinterest.ktlint:ktlint-logger:{strictly 1.8.0}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "dev.drewhamilton.poko:poko-annotations",
+        "after": "0.23.2",
+        "parent": "root project 'links-notation'",
+        "requested": "dev.drewhamilton.poko:poko-annotations:{strictly 0.23.2}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "com.pinterest.ktlint:ktlint-cli-ruleset-core",
+        "after": "1.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "com.pinterest.ktlint:ktlint-cli-ruleset-core:{strictly 1.8.0}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "com.pinterest.ktlint:ktlint-rule-engine-core",
+        "after": "1.8.0",
+        "parent": "root project 'links-notation'",
+        "requested": "com.pinterest.ktlint:ktlint-rule-engine-core:{strictly 1.8.0}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-stdlib",
+        "after": "2.4.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-stdlib:{strictly 2.4.21}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "io.github.oshai:kotlin-logging-jvm",
+        "after": "8.0.7",
+        "parent": "root project 'links-notation'",
+        "requested": "io.github.oshai:kotlin-logging-jvm:{strictly 8.0.7}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "dev.drewhamilton.poko:poko-annotations-jvm",
+        "after": "0.23.2",
+        "parent": "root project 'links-notation'",
+        "requested": "dev.drewhamilton.poko:poko-annotations-jvm:{strictly 0.23.2}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-compiler-embeddable",
+        "after": "2.2.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-compiler-embeddable:{strictly 2.2.21}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.ec4j.core:ec4j-core",
+        "after": "1.2.0",
+        "parent": "root project 'links-notation'",
+        "requested": "org.ec4j.core:ec4j-core:{strictly 1.2.0}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains:annotations",
+        "after": "26.1.0",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains:annotations:{strictly 26.1.0}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-script-runtime",
+        "after": "2.2.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-script-runtime:{strictly 2.2.21}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-reflect",
+        "after": "2.4.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-reflect:{strictly 2.4.21}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlin:kotlin-daemon-embeddable",
+        "after": "2.2.21",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlin:kotlin-daemon-embeddable:{strictly 2.2.21}"
+    },
+    {
+        "configuration": "ktlintRuleset",
+        "name": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm",
+        "after": "1.11.0",
+        "parent": "root project 'links-notation'",
+        "requested": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:{strictly 1.11.0}"
+    }
+]

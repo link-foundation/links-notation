@@ -66,7 +66,7 @@ jobs:
   # === DETECT CHANGES - determines which jobs should run ===
   detect-changes:
     name: Detect Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-detect-changes
@@ -79,13 +79,13 @@ jobs:
       any-code-changed: ${{ steps.changes.outputs.any-code-changed }}
       docs-changed: ${{ steps.changes.outputs.docs-changed }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -108,7 +108,7 @@ jobs:
   # scripts/check-file-size.rs (runs in the lint job).
   validate-docs:
     name: Validate Documentation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-validate-docs
@@ -116,7 +116,7 @@ jobs:
     needs: [detect-changes]
     if: needs.detect-changes.outputs.docs-changed == 'true'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -134,13 +134,13 @@ jobs:
   # run being green.
   release-preflight:
     name: Release Preflight
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     permissions:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -165,7 +165,7 @@ jobs:
   # Docs-only PRs (./docs folder, markdown files) don't require changelog fragments
   changelog:
     name: Changelog Fragment Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-changelog
@@ -173,13 +173,13 @@ jobs:
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -198,20 +198,20 @@ jobs:
   # This ensures versions are only modified by the automated release pipeline
   version-check:
     name: Version Modification Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-version-check
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -231,13 +231,13 @@ jobs:
   # Language-agnostic credential scan; runs via npx so no Node dependency is committed.
   secrets-scan:
     name: Secrets Scan
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-secrets-scan
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -249,7 +249,7 @@ jobs:
   # breaks the base branch once merged into its current tip.
   fresh-merge:
     name: Fresh Merge Simulation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-fresh-merge
@@ -257,13 +257,13 @@ jobs:
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -271,7 +271,7 @@ jobs:
           components: rustfmt, clippy
 
       - name: Cache cargo registry
-        uses: actions/cache@v6
+        uses: actions/cache@v6.1.0
         with:
           path: |
             ~/.cargo/registry
@@ -296,7 +296,7 @@ jobs:
   # that have no registry credentials.
   docker-build:
     name: Docker Image Build Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # The image compiles the crate from scratch; 30 minutes is not enough cold.
     # The build step is a `uses:` action, so it cannot be wrapped in
     # scripts/run-with-budget-warning.sh; docker/build-push-action owns its own
@@ -309,7 +309,7 @@ jobs:
     needs: [detect-changes]
     if: ${{ !cancelled() && (github.event_name == 'workflow_dispatch' || needs.detect-changes.outputs.any-code-changed == 'true') }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -325,11 +325,11 @@ jobs:
 
       - name: Set up Docker Buildx
         if: steps.dockerfile.outputs.exists == 'true'
-        uses: docker/setup-buildx-action@v4
+        uses: docker/setup-buildx-action@v4.4.1
 
       - name: Build image (no push)
         if: steps.dockerfile.outputs.exists == 'true'
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@v7.4.0
         with:
           context: .
           push: false
@@ -347,7 +347,7 @@ jobs:
   # hashFiles('**/Cargo.lock') from silently degrading to the empty hash.
   cargo-lock:
     name: Cargo.lock Guard
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-cargo-lock
@@ -362,12 +362,12 @@ jobs:
         needs.detect-changes.outputs.any-code-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -384,7 +384,7 @@ jobs:
   # See: https://github.com/link-assistant/hive-mind/pull/1024 for why this dependency was removed
   lint:
     name: Lint and Format Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-lint
@@ -404,13 +404,13 @@ jobs:
         )
       )
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -421,7 +421,7 @@ jobs:
         run: ./scripts/install-rust-script.sh
 
       - name: Cache cargo registry
-        uses: actions/cache@v6
+        uses: actions/cache@v6.1.0
         with:
           path: |
             ~/.cargo/registry
@@ -501,14 +501,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, macos-26, windows-2025]
+        os: [ubuntu-26.04, macos-26, windows-2025]
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -516,7 +516,7 @@ jobs:
 
       - name: Cache cargo registry on Windows
         if: runner.os == 'Windows'
-        uses: actions/cache@v6
+        uses: actions/cache@v6.1.0
         with:
           path: |
             ~/.cargo/registry
@@ -527,7 +527,7 @@ jobs:
 
       - name: Cache cargo registry and target on Unix
         if: runner.os != 'Windows'
-        uses: actions/cache@v6
+        uses: actions/cache@v6.1.0
         with:
           path: |
             ~/.cargo/registry
@@ -553,7 +553,7 @@ jobs:
   # unless a job runs `rust-script --test` on them explicitly.
   script-tests:
     name: Release Script Tests
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-script-tests
@@ -573,12 +573,12 @@ jobs:
         )
       )
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -588,7 +588,7 @@ jobs:
         run: ./scripts/install-rust-script.sh
 
       - name: Cache cargo registry
-        uses: actions/cache@v6
+        uses: actions/cache@v6.1.0
         with:
           path: |
             ~/.cargo/registry
@@ -607,7 +607,7 @@ jobs:
   # Generate and upload code coverage using cargo-llvm-cov
   coverage:
     name: Code Coverage
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-coverage
@@ -624,12 +624,12 @@ jobs:
         )
       )
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -637,7 +637,7 @@ jobs:
           components: llvm-tools-preview
 
       - name: Cache cargo registry
-        uses: actions/cache@v6
+        uses: actions/cache@v6.1.0
         with:
           path: |
             ~/.cargo/registry
@@ -648,7 +648,7 @@ jobs:
             ${{ runner.os }}-cargo-coverage-
 
       - name: Install cargo-llvm-cov
-        uses: taiki-e/install-action@e67fa11c4b9316fa714ddf0abed07a0c3143b95b # v2.87.4
+        uses: taiki-e/install-action@cfdb7ed4ccc7c7dce37759eae89dc5674b469b39 # v2.90.3
         with:
           # The `cargo-llvm-cov` ref is what supplied the tool name; once
           # pinned to a hash the input has to be restated explicitly.
@@ -663,7 +663,7 @@ jobs:
 
       - name: Upload coverage to Codecov
         if: env.CODECOV_TOKEN != ''
-        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           token: ${{ env.CODECOV_TOKEN }}
           files: lcov.info
@@ -678,7 +678,7 @@ jobs:
   # Build package - only runs if lint and test pass
   build:
     name: Build Package
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-build
@@ -686,12 +686,12 @@ jobs:
     needs: [lint, test, script-tests]
     if: ${{ !cancelled() && needs.lint.result == 'success' && needs.test.result == 'success' && needs.script-tests.result == 'success' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -701,7 +701,7 @@ jobs:
         run: ./scripts/install-rust-script.sh
 
       - name: Cache cargo registry
-        uses: actions/cache@v6
+        uses: actions/cache@v6.1.0
         with:
           path: |
             ~/.cargo/registry
@@ -742,7 +742,7 @@ jobs:
       needs.build.result == 'success' &&
       !contains(needs.*.result, 'failure') &&
       !contains(needs.*.result, 'cancelled')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Covers the crate build, publish, smoke test, and a cold Docker build.
     timeout-minutes: 60
     env:
@@ -754,14 +754,14 @@ jobs:
     steps:
       # This job pushes the version bump commit and tag back to `main`, so the
       # checkout explicitly persists credentials for these serialized writers.
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: true
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -786,7 +786,7 @@ jobs:
 
       - name: Authenticate with crates.io (trusted publishing)
         id: crates_auth
-        uses: rust-lang/crates-io-auth-action@c6f97d42243bad5fab37ca0427f495c86d5b1a18 # v1.0.5
+        uses: rust-lang/crates-io-auth-action@3268eb413133e2960fa4ae0e963ca76380c54cd9 # v1.0.6
         continue-on-error: true # Existing repositories may still need token fallback.
         if: steps.check.outputs.should_release == 'true' && steps.check.outputs.crate_published != 'true'
 
@@ -932,7 +932,7 @@ jobs:
       needs.build.result == 'success' &&
       !contains(needs.*.result, 'failure') &&
       !contains(needs.*.result, 'cancelled')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Covers the crate build, publish, smoke test, and a cold Docker build.
     timeout-minutes: 60
     env:
@@ -944,14 +944,14 @@ jobs:
     steps:
       # This job pushes the version bump commit and tag back to `main`, so the
       # checkout explicitly persists credentials for these serialized writers.
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: true
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -965,7 +965,7 @@ jobs:
 
       - name: Authenticate with crates.io (trusted publishing)
         id: crates_auth
-        uses: rust-lang/crates-io-auth-action@c6f97d42243bad5fab37ca0427f495c86d5b1a18 # v1.0.5
+        uses: rust-lang/crates-io-auth-action@3268eb413133e2960fa4ae0e963ca76380c54cd9 # v1.0.6
         continue-on-error: true # Existing repositories may still need token fallback.
 
       - name: Verify selected publishing credential
@@ -1074,9 +1074,9 @@ jobs:
       matrix:
         include:
           - platform: linux/amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
           - platform: linux/arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
     concurrency:
       group: main-writer-${{ github.repository }}
       cancel-in-progress: false
@@ -1088,13 +1088,13 @@ jobs:
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
       RELEASE_VERSION: ${{ needs.auto-release.outputs.release_version || needs.manual-release.outputs.release_version }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           ref: v${{ env.RELEASE_VERSION }}
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v4
+        uses: docker/login-action@v4.8.0
         with:
           username: ${{ env.DOCKERHUB_USERNAME }}
           password: ${{ env.DOCKERHUB_TOKEN }}
@@ -1107,7 +1107,7 @@ jobs:
 
       - name: Build and push architecture digest
         id: build
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@v7.4.0
         with:
           context: .
           platforms: ${{ matrix.platform }}
@@ -1128,7 +1128,7 @@ jobs:
           touch "/tmp/digests/${digest#sha256:}"
 
       - name: Upload digest
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: docker-digest-${{ strategy.job-index }}
           path: /tmp/digests/*
@@ -1146,14 +1146,14 @@ jobs:
       group: main-writer-${{ github.repository }}
       cancel-in-progress: false
       queue: max
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     env:
       DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME || secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
       RELEASE_VERSION: ${{ needs.auto-release.outputs.release_version || needs.manual-release.outputs.release_version }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -1166,13 +1166,13 @@ jobs:
           merge-multiple: true
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v4
+        uses: docker/login-action@v4.8.0
         with:
           username: ${{ env.DOCKERHUB_USERNAME }}
           password: ${{ env.DOCKERHUB_TOKEN }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
+        uses: docker/setup-buildx-action@v4.4.1
 
       - name: Create multi-architecture manifest
         working-directory: /tmp/digests
@@ -1193,7 +1193,7 @@ jobs:
   changelog-pr:
     name: Create Changelog PR
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'changelog-pr'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: main-writer-${{ github.repository }}
@@ -1212,13 +1212,13 @@ jobs:
             exit 1
           fi
 
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -1234,7 +1234,7 @@ jobs:
         run: rust-script scripts/create-changelog-fragment.rs --bump-type "$BUMP_TYPE" --description "$DESCRIPTION"
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           token: ${{ secrets.RELEASE_PR_TOKEN }}
           commit-message: 'chore: add changelog for manual ${{ github.event.inputs.bump_type }} release'
@@ -1280,7 +1280,7 @@ jobs:
         (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
         (github.event_name == 'workflow_dispatch' && github.event.inputs.release_mode == 'instant')
       )
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     permissions:
       contents: read
@@ -1290,13 +1290,13 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           ref: main
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@e2a55d2ffb04f378e9626c28d38b36d230d1e12f # safely handle action inputs (#187)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # v1
         with:
           # The `stable` ref is what supplied the action's default toolchain;
           # once pinned to a hash the input has to be restated explicitly.
@@ -1328,20 +1328,20 @@ jobs:
             docs/download/index.html > target/doc/download/index.html
 
       - name: Configure GitHub Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@v6.0.0
 
       - name: Verify site tree
         run: find target/doc -maxdepth 2 -print
 
       - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: target/doc
           include-hidden-files: true
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v5.0.1
         # Remove when actions/deploy-pages#434 ships; retain every other warning.
         env:
           NODE_OPTIONS: --disable-warning=DEP0040
@@ -1373,10 +1373,10 @@ jobs:
       - changelog-pr
       - deploy-docs
     if: ${{ !cancelled() }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

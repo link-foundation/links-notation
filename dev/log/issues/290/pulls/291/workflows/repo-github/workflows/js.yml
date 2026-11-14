@@ -26,12 +26,12 @@ jobs:
     outputs:
       isJsFilesChanged: ${{ steps.setIsJsFilesChangedOutput.outputs.isJsFilesChanged }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: Get changed files using defaults
         id: changed-files
-        uses: tj-actions/changed-files@v47
+        uses: tj-actions/changed-files@v47.0.6
       - name: Set output isJsFilesChanged
         id: setIsJsFilesChangedOutput
         run: |
@@ -53,13 +53,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           submodules: true
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
       - name: Check formatting with Prettier
         run: npx prettier --check .
 
@@ -69,13 +69,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           submodules: true
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
       - name: Install Dependencies
         run: bun install
       - name: Lint
@@ -87,13 +87,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           submodules: true
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
       - name: Install Dependencies
         run: bun install
       - name: Build
@@ -107,13 +107,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           submodules: true
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
       - name: Install Dependencies
         run: bun install
       - name: Build
@@ -147,13 +147,13 @@ jobs:
     needs: [findChangedJsFiles, publishToNpm]
     if: ${{ needs.findChangedJsFiles.outputs.isJsFilesChanged == 'true' && needs.publishToNpm.result == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           submodules: true
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
       - name: Check if GitHub release already exists
         id: release-check
         run: |

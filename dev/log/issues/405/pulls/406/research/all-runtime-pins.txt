@@ -1,0 +1,193 @@
+.github/workflows/benchmarks.yml:140:          node-version: '24'
+.github/workflows/benchmarks.yml:171:          node-version: '24'
+.github/workflows/benchmarks.yml:288:          go-version: '1.27'
+.github/workflows/benchmarks.yml:321:          java-version: '25'
+.github/workflows/binary-interop.yml:33:          node-version: '24'
+.github/workflows/binary-interop.yml:48:          java-version: '25'
+.github/workflows/dependencies.yml:56:          node-version: '24'
+.github/workflows/docs.yml:35:          node-version: '24'
+.github/workflows/docs.yml:74:          node-version: '24'
+.github/workflows/go.yml:41:          go-version: "1.27"
+.github/workflows/go.yml:89:          go-version: ${{ matrix.go }}
+.github/workflows/java.yml:38:          java-version: "25"
+.github/workflows/java.yml:64:          java-version: ${{ matrix.java }}
+.github/workflows/java.yml:84:          java-version: "25"
+.github/workflows/java.yml:113:          java-version: "25"
+.github/workflows/kotlin.yml:39:          java-version: "25"
+.github/workflows/kotlin.yml:62:          java-version: "25"
+.github/workflows/kotlin.yml:89:          node-version: "24"
+.github/workflows/kotlin.yml:93:          java-version: "25"
+.github/workflows/kotlin.yml:118:          java-version: "25"
+.github/workflows/kotlin.yml:147:          java-version: "25"
+.github/workflows/pages.yml:98:          node-version: '24'
+.github/workflows/publish-java.yml:53:          java-version: "25"
+.github/workflows/publish-js.yml:58:          node-version: "24"
+.github/workflows/publish-kotlin.yml:56:          java-version: "25"
+.github/workflows/python.yml:57:        # The requires-python floor and the newest release.
+.github/workflows/release-audit.yml:50:          node-version: '24'
+.github/workflows/release-audit.yml:67:          node-version: '24'
+.github/workflows/security.yml:135:          node-version: '24'
+.github/workflows/security.yml:158:          node-version: '24'
+.github/workflows/swift.yml:56:          # Package.swift declares swift-tools-version 5.9: the oldest
+.github/workflows/swift.yml:102:          node-version: '24'
+Package.swift:1:// swift-tools-version:5.9
+benchmarks/go/go.mod:3:go 1.26
+benchmarks/php/composer.json:7:        "php": ">=8.4",
+composer.json:26:        "php": ">=8.4",
+csharp/global.json:3:    "version": "10.0.402",
+dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/docs.yml:54:          dotnet-version: '8.0.x'
+dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml:186:          dotnet-version: '8.0.x'
+dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml:256:          dotnet-version: '8.0.x'
+dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml:314:          dotnet-version: '8.0.x'
+dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml:372:          dotnet-version: '8.0.x'
+dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/release.yml:601:          dotnet-version: '8.0.x'
+dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml:118:          go-version: '1.21'
+dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml:164:          go-version: '1.21'
+dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml:195:          go-version: '1.21'
+dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml:99:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml:138:          java-version: ${{ matrix.java }}
+dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml:171:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml:238:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml:312:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml:371:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml:49:          node-version: '24.x'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml:119:          node-version: '24.x'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml:164:          node-version: '24.x'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml:172:          java-version: '21'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml:209:          node-version: '24.x'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml:165:          node-version: '24.x'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml:226:          node-version: '24.x'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml:307:          node-version: '24.x'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml:480:          node-version: '24.x'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml:583:          node-version: '24.x'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml:798:          node-version: '24.x'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/release.yml:873:          node-version: '24.x'
+dev/log/issues/290/pulls/291/templates/js/.github/workflows/security.yml:89:          node-version: 24
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml:62:          dotnet-version: '8.0.x'
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml:80:          dotnet-version: '8.0.x' # Specify your desired .NET version
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml:100:          dotnet-version: '8.0.x' # Ensure this matches your project's target
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml:143:          dotnet-version: '8.0.x' # Ensure this matches your project's target
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml:197:          dotnet-version: '8.0.x' # Ensure this matches your project's target
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/csharp.yml:267:          dotnet-version: '8.0.x' # Ensure this matches your project's target
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/go.yml:61:          go-version: '1.21'
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/go.yml:86:          go-version: '1.21'
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml:61:          java-version: '11'
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml:82:          java-version: ${{ matrix.java }}
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml:100:          java-version: '11'
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml:130:          java-version: '11'
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml:176:          java-version: '11'
+dev/log/issues/290/pulls/291/workflows/repo-github/workflows/pages.yml:62:          node-version: '20'
+dev/log/issues/298/pulls/299/templates/csharp/docs.yml:54:          dotnet-version: '8.0.x'
+dev/log/issues/298/pulls/299/templates/csharp/release.yml:189:          dotnet-version: '8.0.x'
+dev/log/issues/298/pulls/299/templates/csharp/release.yml:259:          dotnet-version: '8.0.x'
+dev/log/issues/298/pulls/299/templates/csharp/release.yml:317:          dotnet-version: '8.0.x'
+dev/log/issues/298/pulls/299/templates/csharp/release.yml:375:          dotnet-version: '8.0.x'
+dev/log/issues/298/pulls/299/templates/csharp/release.yml:604:          dotnet-version: '8.0.x'
+dev/log/issues/298/pulls/299/templates/go/release.yml:118:          go-version: '1.21'
+dev/log/issues/298/pulls/299/templates/go/release.yml:164:          go-version: '1.21'
+dev/log/issues/298/pulls/299/templates/go/release.yml:195:          go-version: '1.21'
+dev/log/issues/298/pulls/299/templates/java/release.yml:99:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/298/pulls/299/templates/java/release.yml:138:          java-version: ${{ matrix.java }}
+dev/log/issues/298/pulls/299/templates/java/release.yml:171:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/298/pulls/299/templates/java/release.yml:238:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/298/pulls/299/templates/java/release.yml:312:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/298/pulls/299/templates/java/release.yml:371:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/298/pulls/299/templates/js/example-app.yml:49:          node-version: '24.x'
+dev/log/issues/298/pulls/299/templates/js/example-app.yml:119:          node-version: '24.x'
+dev/log/issues/298/pulls/299/templates/js/example-app.yml:165:          node-version: '24.x'
+dev/log/issues/298/pulls/299/templates/js/example-app.yml:173:          java-version: '21'
+dev/log/issues/298/pulls/299/templates/js/example-app.yml:210:          node-version: '24.x'
+dev/log/issues/298/pulls/299/templates/js/release.yml:165:          node-version: '24.x'
+dev/log/issues/298/pulls/299/templates/js/release.yml:226:          node-version: '24.x'
+dev/log/issues/298/pulls/299/templates/js/release.yml:307:          node-version: '24.x'
+dev/log/issues/298/pulls/299/templates/js/release.yml:480:          node-version: '24.x'
+dev/log/issues/298/pulls/299/templates/js/release.yml:587:          node-version: '24.x'
+dev/log/issues/298/pulls/299/templates/js/release.yml:809:          node-version: '24.x'
+dev/log/issues/298/pulls/299/templates/js/release.yml:884:          node-version: '24.x'
+dev/log/issues/298/pulls/299/templates/js/security.yml:89:          node-version: 24
+dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/docs.yml:56:          dotnet-version: '8.0.x'
+dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml:198:          dotnet-version: '8.0.x'
+dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml:270:          dotnet-version: '8.0.x'
+dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml:341:          dotnet-version: '8.0.x'
+dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml:449:          dotnet-version: '8.0.x'
+dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/release.yml:696:          dotnet-version: '8.0.x'
+dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml:122:          go-version: '1.21'
+dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml:177:          go-version: '1.21'
+dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml:216:          go-version: '1.21'
+dev/log/issues/330/pulls/331/templates/go/go.mod:3:go 1.21
+dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml:101:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml:155:          java-version: ${{ matrix.java }}
+dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml:195:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml:269:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml:363:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml:442:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml:51:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml:123:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml:171:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml:179:          java-version: '21'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml:218:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml:372:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/links.yml:165:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml:184:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml:246:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml:328:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml:553:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml:699:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml:970:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/release.yml:1051:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/security.yml:95:          node-version: 24
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/security.yml:129:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/js/.github/workflows/workflows.yml:162:          node-version: '24.x'
+dev/log/issues/330/pulls/331/templates/php/composer.json:23:        "php": ">=8.1"
+dev/log/issues/330/pulls/331/templates/python/pyproject.toml:11:requires-python = ">=3.9"
+dev/log/issues/330/pulls/331/templates/rust/Cargo.toml:12:rust-version = "1.70"
+dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml:122:          go-version: '1.27.1'
+dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml:177:          go-version: '1.27.1'
+dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml:216:          go-version: '1.27.1'
+dev/log/issues/377/pulls/378/templates/go/go.mod:3:go 1.21
+dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml:101:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml:155:          java-version: ${{ matrix.java }}
+dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml:195:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml:269:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml:375:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml:467:          java-version: ${{ env.JAVA_VERSION }}
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml:67:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml:137:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml:169:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml:220:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml:228:          java-version: '21'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml:267:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml:455:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/javascript-first-gate.yml:53:          node-version: '24'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/links.yml:192:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml:110:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml:193:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml:251:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml:351:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml:583:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml:731:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml:1005:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/release.yml:1086:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/security.yml:140:          node-version: 24
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/security.yml:175:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/workflows.yml:184:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/js/.github/workflows/workflows.yml:282:          node-version: '24.x'
+dev/log/issues/377/pulls/378/templates/php/composer.json:23:        "php": ">=8.1"
+dev/log/issues/377/pulls/378/templates/python/.github/workflows/workflows.yml:153:          node-version: '24'
+dev/log/issues/377/pulls/378/templates/python/pyproject.toml:11:requires-python = ">=3.9"
+dev/log/issues/377/pulls/378/templates/rust/.github/workflows/javascript-first-gate.yml:59:          node-version: '24'
+dev/log/issues/377/pulls/378/templates/rust/Cargo.toml:12:rust-version = "1.70"
+examples/swift/Package.swift:1:// swift-tools-version:5.9
+experiments/issue-282/parity/go/go.mod:3:go 1.26
+experiments/issue-288/go/go.mod:3:go 1.26
+experiments/issue-301/go-probe/go.mod:3:go 1.26
+experiments/issue-302/go-probe/go.mod:3:go 1.26
+experiments/issue-314/ports/go-probe/go.mod:3:go 1.26
+experiments/issue-315/go-probe/go.mod:3:go 1.26
+go/go.mod:3:go 1.26
+php/composer.json:27:        "php": ">=8.4",
+python/pyproject.toml:28:requires-python = ">=3.11"
+rust/Cargo.toml:13:rust-version = "1.87"
+rust/links-notation-benchmark/Cargo.toml:5:rust-version.workspace = true
+rust/links-notation-macro/Cargo.toml:5:rust-version.workspace = true
+rust/links-notation/Cargo.toml:5:rust-version.workspace = true

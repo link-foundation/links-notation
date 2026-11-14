@@ -51,7 +51,7 @@ jobs:
     outputs:
       any-code-changed: ${{ steps.changes.outputs.any-code-changed }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
@@ -75,9 +75,9 @@ jobs:
           echo "Detected C# layout: root=$CSHARP_ROOT, multi-language=$MULTI_LANGUAGE"
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
 
       - name: Detect changes
         id: changes
@@ -97,7 +97,7 @@ jobs:
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
@@ -121,9 +121,9 @@ jobs:
           echo "Detected C# layout: root=$CSHARP_ROOT, multi-language=$MULTI_LANGUAGE"
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
 
       - name: Validate changeset
         env:
@@ -159,7 +159,7 @@ jobs:
         needs.detect-changes.outputs.any-code-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
       - name: Detect C# layout
         id: csharp_layout
@@ -181,14 +181,14 @@ jobs:
           echo "Detected C# layout: root=$CSHARP_ROOT, multi-language=$MULTI_LANGUAGE"
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6.1.0
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '11.0.100'
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
 
       - name: Restore dependencies
         working-directory: ${{ steps.csharp_layout.outputs.root }}
@@ -229,7 +229,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
       - name: Detect C# layout
         id: csharp_layout
@@ -251,9 +251,9 @@ jobs:
           echo "Detected C# layout: root=$CSHARP_ROOT, multi-language=$MULTI_LANGUAGE"
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6.1.0
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '11.0.100'
 
       - name: Restore dependencies
         working-directory: ${{ steps.csharp_layout.outputs.root }}
@@ -273,7 +273,7 @@ jobs:
 
       - name: Upload coverage to Codecov
         if: matrix.os == 'ubuntu-latest' && env.CODECOV_TOKEN != ''
-        uses: codecov/codecov-action@v7
+        uses: codecov/codecov-action@v7.1.1
         with:
           token: ${{ env.CODECOV_TOKEN }}
           fail_ci_if_error: true
@@ -287,7 +287,7 @@ jobs:
     needs: [lint, test]
     if: always() && needs.lint.result == 'success' && needs.test.result == 'success'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
       - name: Detect C# layout
         id: csharp_layout
@@ -309,9 +309,9 @@ jobs:
           echo "Detected C# layout: root=$CSHARP_ROOT, multi-language=$MULTI_LANGUAGE"
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6.1.0
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '11.0.100'
 
       - name: Restore dependencies
         working-directory: ${{ steps.csharp_layout.outputs.root }}
@@ -326,7 +326,7 @@ jobs:
         run: dotnet pack --no-build --configuration Release --output ./artifacts
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: nuget-package
           path: ${{ steps.csharp_layout.outputs.root }}/artifacts/*.nupkg
@@ -343,7 +343,7 @@ jobs:
       contents: write
       packages: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
@@ -367,14 +367,14 @@ jobs:
           echo "Detected C# layout: root=$CSHARP_ROOT, multi-language=$MULTI_LANGUAGE"
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6.1.0
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '11.0.100'
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
 
       - name: Check for changesets
         id: check_changesets
@@ -571,7 +571,7 @@ jobs:
       contents: write
       packages: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -596,14 +596,14 @@ jobs:
           echo "Detected C# layout: root=$CSHARP_ROOT, multi-language=$MULTI_LANGUAGE"
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6.1.0
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '11.0.100'
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
 
       - name: Version and commit
         id: version
@@ -724,7 +724,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
 
@@ -748,9 +748,9 @@ jobs:
           echo "Detected C# layout: root=$CSHARP_ROOT, multi-language=$MULTI_LANGUAGE"
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: latest
+          bun-version: 1.4.4
 
       - name: Create changeset file
         run: |
@@ -770,7 +770,7 @@ jobs:
           echo "Created changeset: $CHANGESET_FILE"
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v8
+        uses: peter-evans/create-pull-request@v8.1.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'chore: add changeset for manual ${{ github.event.inputs.bump_type }} release'

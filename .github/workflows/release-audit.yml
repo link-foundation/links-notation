@@ -47,7 +47,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24'
+          node-version: '26.13.1'
       - name: Check that every implementation declares the same version
         run: node scripts/version-consistency.mjs
 
@@ -64,7 +64,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24'
+          node-version: '26.13.1'
       - name: Audit declared versions against the registries
         env:
           CI_VERBOSE: ${{ inputs.verbose && 'true' || vars.CI_VERBOSE || 'false' }}

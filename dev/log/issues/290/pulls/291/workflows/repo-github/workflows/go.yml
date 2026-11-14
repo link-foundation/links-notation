@@ -25,12 +25,12 @@ jobs:
     outputs:
       isGoFilesChanged: ${{ steps.setIsGoFilesChangedOutput.outputs.isGoFilesChanged }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - name: Get changed files using defaults
         id: changed-files
-        uses: tj-actions/changed-files@v47
+        uses: tj-actions/changed-files@v47.0.6
       - name: Set output isGoFilesChanged
         id: setIsGoFilesChangedOutput
         run: |
@@ -52,13 +52,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           submodules: true
       - name: Setup Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7.0.0
         with:
-          go-version: '1.21'
+          go-version: '1.27.4'
           cache-dependency-path: go/go.sum
       - name: Check formatting
         run: |
@@ -77,20 +77,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           submodules: true
       - name: Setup Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7.0.0
         with:
-          go-version: '1.21'
+          go-version: '1.27.4'
           cache-dependency-path: go/go.sum
       - name: Build
         run: go build -v ./...
       - name: Test
         run: go test -v -race -coverprofile=coverage.out ./...
       - name: Upload coverage
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7.1.1
         with:
           files: go/coverage.out
           flags: go
@@ -102,7 +102,7 @@ jobs:
     needs: [findChangedGoFiles, test]
     if: ${{ needs.findChangedGoFiles.outputs.isGoFilesChanged == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           submodules: true
       - name: Create Go module tag and GitHub release

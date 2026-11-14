@@ -32,10 +32,10 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      - name: Set up JDK 25
-        uses: actions/setup-java@v6.1.0
+      - name: Set up JDK 27
+        uses: actions/setup-java@v6.2.0
         with:
-          java-version: "25"
+          java-version: "27.0.1"
           distribution: "temurin"
           cache: maven
       - name: Build with Maven
@@ -59,7 +59,7 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Set up JDK ${{ matrix.java }}
-        uses: actions/setup-java@v6.1.0
+        uses: actions/setup-java@v6.2.0
         with:
           java-version: ${{ matrix.java }}
           distribution: "temurin"
@@ -78,14 +78,14 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      - name: Set up JDK 25
-        uses: actions/setup-java@v6.1.0
+      - name: Set up JDK 27
+        uses: actions/setup-java@v6.2.0
         with:
-          java-version: "25"
+          java-version: "27.0.1"
           distribution: "temurin"
           cache: maven
       - name: Check Google Java formatting and whitespace
-        run: bash format.sh --check && ./mvnw -B spotless:check --file pom.xml
+        run: ./mvnw -B spotless:check --file pom.xml
 
   # pom.xml's maven-enforcer-plugin declares Maven 3.6.3, the oldest the build
   # plugins accept, while ./mvnw runs the newest. This job keeps that floor a
@@ -107,10 +107,10 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      - name: Set up JDK 25
-        uses: actions/setup-java@v6.1.0
+      - name: Set up JDK 27
+        uses: actions/setup-java@v6.2.0
         with:
-          java-version: "25"
+          java-version: "27.0.1"
           distribution: "temurin"
           cache: maven
       - name: Require the floor pom.xml declares

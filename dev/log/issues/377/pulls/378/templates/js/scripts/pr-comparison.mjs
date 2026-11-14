@@ -47,7 +47,7 @@ export function getPrChanges(comparison) {
     '--',
   ]).split('\0');
   const changes = [];
-  for (let index = 0; index < fields.length - 1; ) {
+  for (let index = 0; index < fields.length - 1;) {
     const status = fields[index++];
     const path = fields[index++];
     // Exact moves are not additions, but both paths still affect package code.

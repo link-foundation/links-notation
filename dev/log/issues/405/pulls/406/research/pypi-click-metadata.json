@@ -1,0 +1,50 @@
+{
+  "author": null,
+  "author_email": null,
+  "bugtrack_url": null,
+  "classifiers": [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Typing :: Typed"
+  ],
+  "description": "<div align=\"center\"><img src=\"https://raw.githubusercontent.com/pallets/click/refs/heads/stable/docs/_static/click-name.svg\" alt=\"\" height=\"150\"></div>\n\n# Click\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\n## A Simple Example\n\n```python\nimport click\n\n@click.command()\n@click.option(\"--count\", default=1, help=\"Number of greetings.\")\n@click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\ndef hello(count, name):\n    \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n    for _ in range(count):\n        click.echo(f\"Hello, {name}!\")\n\nif __name__ == '__main__':\n    hello()\n```\n\n```\n$ python hello.py --count=3\nYour name: Click\nHello, Click!\nHello, Click!\nHello, Click!\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/\n\n",
+  "description_content_type": "text/markdown",
+  "docs_url": null,
+  "download_url": null,
+  "downloads": {
+    "last_day": -1,
+    "last_month": -1,
+    "last_week": -1
+  },
+  "dynamic": null,
+  "home_page": null,
+  "keywords": null,
+  "license": null,
+  "license_expression": "BSD-3-Clause",
+  "license_files": [
+    "LICENSE.txt"
+  ],
+  "maintainer": null,
+  "maintainer_email": "Pallets <contact@palletsprojects.com>",
+  "name": "click",
+  "package_url": "https://pypi.org/project/click/",
+  "platform": null,
+  "project_url": "https://pypi.org/project/click/",
+  "project_urls": {
+    "Changes": "https://click.palletsprojects.com/page/changes/",
+    "Chat": "https://discord.gg/pallets",
+    "Documentation": "https://click.palletsprojects.com/",
+    "Donate": "https://palletsprojects.com/donate",
+    "Source": "https://github.com/pallets/click/"
+  },
+  "provides_extra": null,
+  "release_url": "https://pypi.org/project/click/8.5.1/",
+  "requires_dist": null,
+  "requires_python": ">=3.10",
+  "summary": "Composable command line interface toolkit",
+  "version": "8.5.1",
+  "yanked": false,
+  "yanked_reason": null
+}

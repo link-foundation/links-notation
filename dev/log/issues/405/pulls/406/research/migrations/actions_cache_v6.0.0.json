@@ -1,0 +1,6 @@
+{
+  "html_url": "https://github.com/actions/cache/releases/tag/v6.0.0",
+  "tag_name": "v6.0.0",
+  "published_at": "2026-06-23T14:49:39Z",
+  "body": "## What's Changed\r\n* Update packages, migrate to ESM by @Samirat in https://github.com/actions/cache/pull/1760\r\n\r\n**Full Changelog**: https://github.com/actions/cache/compare/v5...v6.0.0"
+}

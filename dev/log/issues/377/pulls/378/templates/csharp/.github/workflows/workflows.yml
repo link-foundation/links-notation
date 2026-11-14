@@ -23,7 +23,7 @@ env:
 jobs:
   actionlint:
     name: Lint Workflows
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Typical run: <1min. 10min prevents an image pull stall from hanging.
     timeout-minutes: 10
     concurrency:
@@ -64,7 +64,7 @@ jobs:
 
   zizmor:
     name: zizmor
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
@@ -85,14 +85,14 @@ jobs:
       # a visible line in the diff rather than a side effect of bumping the
       # action, and documents exactly which analyser reproduces a finding.
       - name: Audit workflow files
-        uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
+        uses: zizmorcore/zizmor-action@45d7276c9ca790aabd705e31ca99c6185c3e76dd # v0.8.1
         with:
           advanced-security: false
           annotations: true
           config: .github/zizmor.yml
           inputs: .github
           min-confidence: medium
-          version: 1.29.0
+          version: 1.32.0
 
       # The step above runs the default (regular) persona, which is the right
       # default: pedantic surfaces dozens of stylistic findings. But the audits
@@ -106,6 +106,6 @@ jobs:
       - name: Audit for pedantic-only high-severity findings
         timeout-minutes: 5
         run: |
-          pipx run zizmor==1.29.0 --config .github/zizmor.yml \
+          pipx run zizmor==1.32.0 --config .github/zizmor.yml \
             --persona pedantic --min-severity high --min-confidence high \
             .github

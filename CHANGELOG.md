@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Refresh dependency declarations, locks, CI toolchains and archived templates;
+  prepare 0.31.4. See [the release fragment](changelog.d/405.md).
+
 - Handle current PyPI OIDC 422 authentication rejections and report safe
   exchange-stage diagnostics. Prepare 0.31.3; see
   [the release fragment](changelog.d/392.md) and

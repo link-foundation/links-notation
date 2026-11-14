@@ -1,0 +1,7 @@
+{
+  "repository": {
+    "url": "git+https://github.com/Kotlin/kotlin-web-helpers.git"
+  },
+  "dist.tarball": "https://registry.npmjs.org/kotlin-web-helpers/-/kotlin-web-helpers-3.5.4.tgz",
+  "dependencies": {}
+}

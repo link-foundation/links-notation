@@ -2,3 +2,6 @@
 build>=1.6.1
 twine>=7.0.0
 zizmor==1.32.0
+
+# Native resolver for reproducible Python project and requirements locks.
+uv==0.13.8

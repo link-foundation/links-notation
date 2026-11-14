@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "io.github.link-foundation.kotlin"
-version = "0.31.3"
+version = "0.31.4"
 
 // Android needs an SDK. CI runners have one; elsewhere the Android target is
 // left out rather than failing the build of every other target.
@@ -217,7 +217,11 @@ kotlin {
     // busy runner failed it although it never hangs. Same budget here.
     js {
         nodejs {
-            testTask { useMocha { timeout = "10s" } }
+            testTask {
+                useMocha { timeout = "10s" }
+                nodeJsArgs.addAll(listOf("--import", file("mocha-base.mjs").absolutePath))
+                inputs.file("mocha-base.mjs")
+            }
         }
     }
     @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
@@ -249,28 +253,28 @@ kotlin {
     }
 }
 
-// Mocha 11.7.6, the test runner the Kotlin/JS plugin installs for jsNodeTest,
-// asks for serialize-javascript ^6.0.2, which GHSA-5c6j-r48x-rmvq (high
-// severity, fixed in 7.0.3) reports, so the dependency review of every pull
-// request failed on kotlin-js-store/yarn.lock. Mocha 12 itself moved to ^7.1.1;
-// the 7.x line keeps the same CommonJS entry point. It is a test-only
-// dependency: the published library has no npm dependencies.
-//
-// Mocha's diff ^7.0.0, glob ^10.4.5 and minimatch ^9.0.5 are raised the same
-// way (issue #377): GHSA-73rr-hh4g-fpgx (diff, fixed in 8.0.3),
-// GHSA-3g3m-2fjr-6pw4 (glob, fixed in 14.0.2) and GHSA-g3hv-75wg-m249
-// (minimatch, fixed in 11.0.1). Dependabot cannot raise them: this lockfile
-// has no package.json beside it, so its updates abort with "package.json not
-// found". scripts/ci/audit-yarn-lock.mjs audits it in security.yml instead.
-// After changing a resolution, run `./gradlew rootPackageJson --rerun
-// kotlinUpgradeYarnLock`: rootPackageJson stays up to date when only its
-// resolutions change, and a plain kotlinUpgradeYarnLock keeps the old lock.
+// Use the supported Kotlin npm-version API to select current Mocha. Its
+// upstream dependency updates replace the former serialize-javascript and diff
+// overrides. Glob/minimatch overrides remain until Mocha publishes compatible
+// requirements (GHSA-3g3m-2fjr-6pw4 and GHSA-g3hv-75wg-m249).
+plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
+    the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().apply {
+        versions.mocha.version = "12.0.3"
+        versions.kotlinWebHelpers.version = "3.5.4"
+    }
+}
+plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin> {
+    the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec>().version.set("26.13.1")
+}
+plugins.withType<org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsPlugin> {
+    the<org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsEnvSpec>().version.set("26.13.1")
+}
+// rootPackageJson currently misses changes in resolutions (upstream report in
+// the issue evidence). Refresh with rootPackageJson --rerun kotlinUpgradeYarnLock.
 plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
     the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>().apply {
-        resolution("serialize-javascript", "^7.1.4")
-        resolution("diff", "^8.0.3")
-        resolution("glob", "^14.0.2")
-        resolution("minimatch", "^11.0.4")
+        resolution("glob", "^14.0.6")
+        resolution("minimatch", "^11.0.8")
     }
 }
 
@@ -330,5 +334,55 @@ ktlint {
     filter {
         // The generated parity fixtures are not hand formatted.
         exclude { it.file.path.contains("/build/generated/") }
+    }
+}
+
+// Select current formatter dependencies explicitly: ktlint otherwise keeps old
+// transitive minima, including vulnerable logback-core (issue #405).
+// Its compiler/daemon/script-runtime stay at ktlint's embedded 2.2.21:
+// 2.4.21 fails initialization (ktlint/ktlint#3403; reviewed experiment logs).
+val formatterDependencyVersions =
+    mapOf(
+        "ch.qos.logback:logback-classic" to "1.6.6",
+        "ch.qos.logback:logback-core" to "1.6.6",
+        "com.github.ajalt.clikt:clikt" to "5.1.0",
+        "com.github.ajalt.clikt:clikt-jvm" to "5.1.0",
+        "dev.drewhamilton.poko:poko-annotations" to "0.23.2",
+        "dev.drewhamilton.poko:poko-annotations-jvm" to "0.23.2",
+        "io.github.detekt.sarif4k:sarif4k" to "0.8.0",
+        "io.github.detekt.sarif4k:sarif4k-jvm" to "0.8.0",
+        "io.github.oshai:kotlin-logging" to "8.0.7",
+        "io.github.oshai:kotlin-logging-jvm" to "8.0.7",
+        "org.ec4j.core:ec4j-core" to "1.2.0",
+        "org.jetbrains.kotlin:kotlin-reflect" to "2.4.21",
+        "org.jetbrains.kotlin:kotlin-stdlib" to "2.4.21",
+        "org.jetbrains.kotlin:kotlin-stdlib-common" to "2.4.21",
+        "org.jetbrains.kotlin:kotlin-stdlib-jdk7" to "2.4.21",
+        "org.jetbrains.kotlin:kotlin-stdlib-jdk8" to "2.4.21",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm" to "1.11.0",
+        "org.jetbrains.kotlinx:kotlinx-io-bytestring" to "0.9.3",
+        "org.jetbrains.kotlinx:kotlinx-io-bytestring-jvm" to "0.9.3",
+        "org.jetbrains.kotlinx:kotlinx-io-core" to "0.9.3",
+        "org.jetbrains.kotlinx:kotlinx-io-core-jvm" to "0.9.3",
+        "org.jetbrains.kotlinx:kotlinx-serialization-core" to "1.13.0",
+        "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm" to "1.13.0",
+        "org.jetbrains.kotlinx:kotlinx-serialization-json" to "1.13.0",
+        "org.jetbrains.kotlinx:kotlinx-serialization-json-jvm" to "1.13.0",
+        "org.jetbrains:annotations" to "26.1.0",
+        "org.slf4j:slf4j-api" to "2.0.20",
+    )
+configurations.matching { it.name.startsWith("ktlint") }.configureEach {
+    resolutionStrategy.eachDependency {
+        formatterDependencyVersions["${requested.group}:${requested.name}"]?.let {
+            useVersion(it)
+            because("Use the reviewed issue-405 formatter dependency graph")
+        }
+    }
+}
+
+dependencies {
+    constraints {
+        add("jvmTestImplementation", "org.hamcrest:hamcrest-core:3.0")
+        add("jvmTestImplementation", "org.jetbrains:annotations:26.1.0")
     }
 }

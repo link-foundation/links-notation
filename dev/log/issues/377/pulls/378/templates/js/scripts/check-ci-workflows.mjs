@@ -4,9 +4,9 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-// Verified against the action tag's support/versions table, without network in CI:
-// https://github.com/zizmorcore/zizmor-action/blob/v0.6.4/support/versions
-const supportedZizmor = { 'v0.6.4': '1.30.1' };
+// Verified against the action tag's native hashed lock, without network in CI:
+// https://github.com/zizmorcore/zizmor-action/blob/v0.8.1/support/locks/zizmor-1.32.0.txt
+const supportedZizmor = { 'v0.8.1': '1.32.0' };
 
 export function checkWorkflowPolicy(text) {
   const errors = [];

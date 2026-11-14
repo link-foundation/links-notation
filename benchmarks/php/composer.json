@@ -7,7 +7,7 @@
         "php": ">=8.4",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "link-foundation/links-notation": "*",
+        "link-foundation/links-notation": "^0.31.4",
         "yethee/tiktoken": "^1.1.1"
     },
     "require-dev": {

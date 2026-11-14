@@ -1,0 +1,6 @@
+{
+  "html_url": "https://github.com/pre-commit/pre-commit-hooks/releases/tag/v6.0.0",
+  "tag_name": "v6.0.0",
+  "published_at": "2025-08-09T19:31:54Z",
+  "body": "## Fixes\r\n- `check-shebang-scripts-are-executable`: improve error message.\r\n    - #1115 PR by @homebysix.\r\n\r\n## Migrating\r\n- now requires python >= 3.9.\r\n    - #1098 PR by @asottile.\r\n- `file-contents-sorter`: disallow `--unique` and `--ignore-case` at the same\r\n  time.\r\n    - #1095 PR by @nemacysts.\r\n    - #794 issue by @teksturi.\r\n- Removed `check-byte-order-marker` and `fix-encoding-pragma`.\r\n    - `check-byte-order-marker`: migrate to `fix-byte-order-marker`.\r\n    - `fix-encoding-pragma`: migrate to `pyupgrade`.\r\n    - #1034 PR by @mxr.\r\n    - #1032 issue by @mxr.\r\n    - #522 PR by @jgowdy.\r\n\r\n"
+}

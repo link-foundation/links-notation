@@ -4,13 +4,22 @@ import test from "node:test";
 import { audit as auditReal } from "../../scripts/release-audit.mjs";
 import { mavenResponse } from "../issue-192/maven-fixture.mjs";
 
-const audit = (options) => auditReal({ verifySignature: async () => {}, ...options });
+const audit = (options) =>
+  auditReal({ verifySignature: async () => {}, ...options });
 
 const versions = Object.fromEntries(
-  ["js", "rust", "python", "java", "go", "csharp", "php", "cpp", "swift", "kotlin"].map((name) => [
-    name,
-    "1.2.3",
-  ]),
+  [
+    "js",
+    "rust",
+    "python",
+    "java",
+    "go",
+    "csharp",
+    "php",
+    "cpp",
+    "swift",
+    "kotlin",
+  ].map((name) => [name, "1.2.3"]),
 );
 function mockFetch(change = () => null) {
   return async (url) => {
@@ -26,13 +35,25 @@ function mockFetch(change = () => null) {
     if (url.includes("proxy.golang.org")) body = { Version: "v1.2.3" };
     if (url.includes("packagist.org"))
       body = {
-        packages: { "link-foundation/links-notation": [{ version: "v1.2.3", source: {
-          type: "git", url: "https://github.com/link-foundation/links-notation.git", reference: "a".repeat(40),
-        } }] },
+        packages: {
+          "link-foundation/links-notation": [
+            {
+              version: "v1.2.3",
+              source: {
+                type: "git",
+                url: "https://github.com/link-foundation/links-notation.git",
+                reference: "a".repeat(40),
+              },
+            },
+          ],
+        },
       };
-    if (url.includes("/git/ref/tags/")) body = { object: { type: "commit", sha: "a".repeat(40) } };
+    if (url.includes("/git/ref/tags/"))
+      body = { object: { type: "commit", sha: "a".repeat(40) } };
     if (url.endsWith("/Package.swift"))
-      return new Response('let package = Package(\n    name: "links-notation",');
+      return new Response(
+        'let package = Package(\n    name: "links-notation",',
+      );
     if (url.endsWith(".pom"))
       return new Response(
         `<artifactId>links-notation</artifactId><version>1.2.3</version>`,
@@ -42,11 +63,61 @@ function mockFetch(change = () => null) {
 }
 const run = (fetcher, expectPublished = true) =>
   audit({ versions, fetcher, expectPublished, log: () => {} });
-test("a Packagist source mismatch fails even when the version and release exist", async () => {
-  const result = await run(mockFetch((url) => url.includes('/git/ref/tags/')
-    ? new Response(JSON.stringify({ object: { type: 'commit', sha: 'b'.repeat(40) } })) : null));
+test("a transient NuGet connection reset is retried before verification", async () => {
+  let attempts = 0;
+  const fetcher = mockFetch();
+  const result = await audit({
+    versions,
+    log: () => {},
+    pause: async () => {},
+    fetcher: async (url, options) => {
+      if (
+        url.includes("api.nuget.org") &&
+        url.endsWith("index.json") &&
+        ++attempts === 1
+      )
+        throw new TypeError("fetch failed", { cause: { code: "ECONNRESET" } });
+      return fetcher(url, options);
+    },
+  });
+  assert.equal(attempts, 2);
+  assert.equal(result.failures, 0);
+});
+test("persistent transport errors fail after three attempts", async () => {
+  let attempts = 0;
+  const result = await audit({
+    versions,
+    log: () => {},
+    pause: async () => {},
+    fetcher: mockFetch((url) => {
+      if (url.includes("api.nuget.org")) {
+        attempts++;
+        throw new TypeError("fetch failed", { cause: { code: "ETIMEDOUT" } });
+      }
+    }),
+  });
+  assert.equal(attempts, 3);
   assert.equal(result.failures, 1);
-  assert.match(result.findings.find((item) => item.language === 'php').error, /Packagist source/);
+  assert.equal(
+    result.findings.find((item) => item.language === "csharp").published,
+    false,
+  );
+});
+test("a Packagist source mismatch fails even when the version and release exist", async () => {
+  const result = await run(
+    mockFetch((url) =>
+      url.includes("/git/ref/tags/")
+        ? new Response(
+            JSON.stringify({ object: { type: "commit", sha: "b".repeat(40) } }),
+          )
+        : null,
+    ),
+  );
+  assert.equal(result.failures, 1);
+  assert.match(
+    result.findings.find((item) => item.language === "php").error,
+    /Packagist source/,
+  );
 });
 test("every exact version and release is verified", async () =>
   assert.equal((await run(mockFetch())).failures, 0));
@@ -136,7 +207,11 @@ test("the Swift GitHub release is the bare version tag", async () => {
     },
     log: () => {},
   });
-  assert.ok(urls.includes("https://api.github.com/repos/link-foundation/links-notation/releases/tags/1.2.3"));
+  assert.ok(
+    urls.includes(
+      "https://api.github.com/repos/link-foundation/links-notation/releases/tags/1.2.3",
+    ),
+  );
 });
 test("registry outages fail instead of being reported as absence", async () =>
   assert.equal(
@@ -230,24 +305,36 @@ test("an absence after a successful release still names the credentials", async 
   });
   const errors = lines.filter((line) => line.startsWith("::error::"));
   assert.equal(errors.length, 1);
-  assert.match(errors[0], /To publish it, configure NuGet.org trusted publishing for publish-csharp.yml with the NUGET_USER variable, or renew the NUGET_API_KEY secret/);
+  assert.match(
+    errors[0],
+    /To publish it, configure NuGet.org trusted publishing for publish-csharp.yml with the NUGET_USER variable, or renew the NUGET_API_KEY secret/,
+  );
 });
 test("partial publication names the missing provider without blaming validation", async () => {
   for (const releaseResult of ["failure", "cancelled"]) {
     const lines = [];
     const result = await audit({
       versions,
-      fetcher: mockFetch((url) => url.includes("packagist.org")
-        ? new Response("", { status: 404 }) : null),
+      fetcher: mockFetch((url) =>
+        url.includes("packagist.org")
+          ? new Response("", { status: 404 })
+          : null,
+      ),
       releaseResult,
       log: (line) => lines.push(line),
     });
     assert.equal(result.failures, 1);
-    assert.equal(result.findings.filter((item) => item.published && item.release).length, 9);
+    assert.equal(
+      result.findings.filter((item) => item.published && item.release).length,
+      9,
+    );
     const errors = lines.filter((line) => line.startsWith("::error::"));
     assert.match(errors[0], /php: .*Packagist/);
     assert.match(errors[0], /PACKAGIST_USERNAME and PACKAGIST_TOKEN/);
-    assert.doesNotMatch(lines.join("\n"), /nothing was published|a language stage failed/);
+    assert.doesNotMatch(
+      lines.join("\n"),
+      /nothing was published|a language stage failed/,
+    );
   }
 });
 test("a pull request ignores the release result", async () =>

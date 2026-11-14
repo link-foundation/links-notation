@@ -87,9 +87,11 @@ class DependabotCheckTests(unittest.TestCase):
             ],
         )
 
-    def test_snapshots_under_dev_log_are_ignored(self):
+    def test_template_manifests_under_dev_log_require_coverage(self):
         files = {"dev/log/issues/1/template/package.json"}
-        self.assertEqual(CHECK.problems(files, CONFIG), [])
+        self.assertEqual(CHECK.problems(files, CONFIG), [
+            "dev/log/issues/1/template/package.json: no npm entry for /dev/log/issues/1/template"
+        ])
 
     def test_solution_directory_covers_its_projects(self):
         config = '  - package-ecosystem: "nuget"\n    directory: "/csharp"\n'

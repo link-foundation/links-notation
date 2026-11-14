@@ -15,7 +15,7 @@
 [dependencies]
 links-notation = { path = "." }  # Для локальной разработки
 # Или из реестра:
-# links-notation = "0.31.3"
+# links-notation = "0.31.4"
 ```
 
 ### Из исходного кода

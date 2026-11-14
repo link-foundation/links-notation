@@ -28,13 +28,13 @@ env:
 jobs:
   actionlint:
     name: actionlint
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -59,13 +59,13 @@ jobs:
   # workflow itself.
   status-gate-coverage:
     name: Status Gate Coverage
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-status-gate-coverage
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -82,13 +82,13 @@ jobs:
 
   zizmor:
     name: zizmor
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -100,9 +100,9 @@ jobs:
       # the latest zizmor. Naming it keeps the next bump a visible line in the
       # diff rather than a side effect of bumping the action, and documents
       # exactly which analyser reproduces a finding:
-      #   pipx run zizmor==1.29.0 --config .github/zizmor.yml \
+      #   pipx run zizmor==1.32.0 --config .github/zizmor.yml \
       #     --min-confidence low --persona regular .github/workflows
-      - uses: zizmorcore/zizmor-action@v0.6.2
+      - uses: zizmorcore/zizmor-action@v0.8.1
         with:
           advanced-security: false
           annotations: true
@@ -113,7 +113,7 @@ jobs:
           # pins the same invariant in-repo, so the floor only needs to catch
           # the workflows the test cannot see.
           min-confidence: low
-          version: 1.29.0
+          version: 1.32.0
 
       # The job above runs `--persona regular`, which is the right default:
       # pedantic surfaces dozens of stylistic findings. But the audits that
@@ -127,7 +127,7 @@ jobs:
       - name: Audit for pedantic-only high-severity findings
         timeout-minutes: 10
         run: |
-          pipx run zizmor==1.30.0 --config .github/zizmor.yml \
+          pipx run zizmor==1.32.0 --config .github/zizmor.yml \
             --persona pedantic --min-severity high --min-confidence high \
             .github/workflows .github/actions
 
@@ -137,7 +137,7 @@ jobs:
   # status-gate-coverage job above.
   pipeline-status:
     name: Pipeline Status
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-pipeline-status
@@ -152,14 +152,14 @@ jobs:
       - status-gate-coverage
       - zizmor
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Fail the run when a required job was cancelled or failed
         env:

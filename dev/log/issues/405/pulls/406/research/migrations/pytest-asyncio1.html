@@ -1,0 +1,856 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog &mdash; pytest-asyncio 0.1.dev50 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f1cd1eb5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Getting support" href="../support.html" />
+    <link rel="prev" title="Decorators" href="decorators/index.html" />
+<script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="pytest-asyncio" /><meta name="readthedocs-version-slug" content="stable" /><meta name="readthedocs-resolver-filename" content="/reference/changelog.html" /><meta name="readthedocs-http-status" content="200" /></head>
+
+<body class="wy-body-for-nav">
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+          <a href="../index.html" class="icon icon-home">
+            pytest-asyncio
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to-guides/index.html">How-To Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures/index.html">Fixtures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks.html">Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="markers/index.html">Markers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decorators/index.html">Decorators</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Changelog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.5.0 - 2026-11-12</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#added">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fixed">Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#post1-2026-11-01">1.4.1.post1 - 2026-11-01</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#changed">Changed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">1.4.1 - 2026-10-25</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Fixed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes-for-downstream-packagers">Notes for Downstream Packagers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">1.4.0 - 2026-05-26</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#deprecated">Deprecated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">Fixed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">Notes for Downstream Packagers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">1.3.0 - 2025-11-10</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#removed">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">Notes for Downstream Packagers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id35">1.2.0 - 2025-09-12</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id36">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id40">Fixed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id43">Notes for Downstream Packagers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id45">1.1.0 - 2025-07-16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id46">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id49">Fixed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id51">Notes for Downstream Packagers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id53">1.0.0 - 2025-05-26</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id54">Removed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id56">Added</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id58">Changed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id61">Fixed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id65">Notes for Downstream Packagers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id67">0.26.0 (2025-03-25)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id71">0.25.3 (2025-01-28)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id73">0.25.2 (2025-01-08)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id75">0.25.1 (2025-01-02)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id78">0.25.0 (2024-12-13)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id84">0.24.0 (2024-08-22)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id89">0.23.8 (2024-07-17)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id91">0.23.7 (2024-05-19)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id93">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id94">0.23.6 (2024-03-19)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id96">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id97">0.23.5 (2024-02-09)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id101">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id102">0.23.4 (2024-01-28)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id105">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id106">0.23.3 (2024-01-01)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id111">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id112">0.23.2 (2023-12-04)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id114">0.23.1 (2023-12-03)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id116">0.23.0 (2023-12-03)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id122">0.22.0 (2023-10-31)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id125">0.21.2 (2024-04-29)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id127">0.21.1 (2023-07-12)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id129">0.21.0 (2023-03-19)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id130">0.20.3 (2022-12-08)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id132">0.20.2 (2022-11-11)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id135">0.20.1 (2022-10-21)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id137">0.20.0 (2022-10-21)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id139">0.19.0 (2022-07-13)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id142">0.18.3 (2022-03-25)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id144">0.18.2 (2022-03-03)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id147">0.18.1 (2022-02-10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id149">0.18.0 (2022-02-07)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id152">0.17.2 (2022-01-17)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id155">0.17.1 (2022-01-16)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id161">0.17.0 (2022-01-13)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id169">0.16.0 (2021-10-16)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id170">0.15.1 (2021-04-22)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id173">0.15.0 (2021-04-19)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id176">0.14.0 (2020-06-24)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id179">0.12.0 (2020-05-04)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id181">0.11.0 (2020-04-20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id185">0.10.0 (2019-01-08)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id188">0.9.0 (2018-07-28)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id189">0.8.0 (2017-09-23)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id191">0.7.0 (2017-09-08)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id192">0.6.0 (2017-05-28)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id195">0.5.0 (2016-09-07)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id199">0.4.1 (2016-06-01)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id201">0.4.0 (2016-05-30)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id204">0.3.0 (2015-12-19)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id206">0.2.0 (2015-08-01)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id208">0.1.1 (2015-04-23)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Getting support</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pytest-asyncio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Reference</a></li>
+      <li class="breadcrumb-item active">Changelog</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/reference/changelog.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading"></a></h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on <a class="reference external" href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>, and this project adheres to <a class="reference external" href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<p>This project uses <a class="reference external" href="https://towncrier.readthedocs.io/">towncrier</a> for changelog management and the changes for the upcoming release can be found in <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/tree/main/changelog.d/">https://github.com/pytest-dev/pytest-asyncio/tree/main/changelog.d/</a>.</p>
+<section id="id2">
+<h2><a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/tree/1.5.0">1.5.0</a> - 2026-11-12<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">fixture-scope</span></code> value for <code class="docutils literal notranslate"><span class="pre">asyncio_default_fixture_loop_scope</span></code>. With it, an asynchronous fixture without <code class="docutils literal notranslate"><span class="pre">loop_scope</span></code> uses its <code class="docutils literal notranslate"><span class="pre">scope</span></code> as its loop scope. This is the behavior of an unset option in pytest-asyncio 1.x. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1095">#1095</a>)</p></li>
+</ul>
+</section>
+<section id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Invalid arguments to the <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> marker, including an invalid <code class="docutils literal notranslate"><span class="pre">loop_scope</span></code>, are reported with a message that names the test instead of a traceback. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1584">#1584</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="post1-2026-11-01">
+<h2><a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/tree/1.4.1.post1">1.4.1.post1</a> - 2026-11-01<a class="headerlink" href="#post1-2026-11-01" title="Link to this heading"></a></h2>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Removed the upper version bound on the <code class="docutils literal notranslate"><span class="pre">pytest</span></code> dependency. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1605">#1605</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id7">
+<h2><a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/tree/1.4.1">1.4.1</a> - 2026-10-25<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<section id="id8">
+<h3>Added<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Declared support for Python 3.15 (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1588">#1588</a>)</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3>Fixed<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Allow <cite>AsyncIterable</cite> as a return type for asynchronous generator fixtures decorated with <cite>pytest_asyncio.fixture</cite> (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1090">#1090</a>)</p></li>
+</ul>
+</section>
+<section id="notes-for-downstream-packagers">
+<h3>Notes for Downstream Packagers<a class="headerlink" href="#notes-for-downstream-packagers" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Source-tree development dependencies now use PEP 735 dependency groups and <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1518">#1518</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id14">
+<h2><a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/tree/1.4.0">1.4.0</a> - 2026-05-26<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<section id="deprecated">
+<h3>Deprecated<a class="headerlink" href="#deprecated" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Overriding the <em>event_loop_policy</em> fixture is deprecated. Use the <code class="docutils literal notranslate"><span class="pre">pytest_asyncio_loop_factories</span></code> hook instead. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1419">#1419</a>)</p></li>
+</ul>
+</section>
+<section id="id16">
+<h3>Added<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Added the <code class="docutils literal notranslate"><span class="pre">pytest_asyncio_loop_factories</span></code> hook to parametrize asyncio tests with custom event loop factories.</p>
+<p>The hook returns a mapping of factory names to loop factories, and <code class="docutils literal notranslate"><span class="pre">pytest.mark.asyncio(loop_factories=[...])</span></code> selects a subset of configured factories per test. When a single factory is configured, test names are unchanged.</p>
+<p>Synchronous <code class="docutils literal notranslate"><span class="pre">&#64;pytest_asyncio.fixture</span></code> functions now see the correct event loop when custom loop factories are configured, even when test code disrupts the current event loop (e.g., via <code class="docutils literal notranslate"><span class="pre">asyncio.run()</span></code> or <code class="docutils literal notranslate"><span class="pre">asyncio.set_event_loop(None)</span></code>). (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1164">#1164</a>)</p>
+</li>
+</ul>
+</section>
+<section id="id18">
+<h3>Changed<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Improved the readability of the warning message that is displayed when <code class="docutils literal notranslate"><span class="pre">asyncio_default_fixture_loop_scope</span></code> is unset (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1298">#1298</a>)</p></li>
+<li><p>Only import <code class="docutils literal notranslate"><span class="pre">asyncio.AbstractEventLoopPolicy</span></code> for type checking to avoid raising
+a DeprecationWarning. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1394">#1394</a>)</p></li>
+<li><p>Updated minimum supported pytest version to v8.4.0. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1397">#1397</a>)</p></li>
+</ul>
+</section>
+<section id="id22">
+<h3>Fixed<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fixed a <code class="docutils literal notranslate"><span class="pre">ResourceWarning:</span> <span class="pre">unclosed</span> <span class="pre">event</span> <span class="pre">loop</span></code> warning that could occur when a synchronous test called <code class="docutils literal notranslate"><span class="pre">asyncio.run()</span></code> or otherwise unset the current event loop after pytest-asyncio had run an async test or fixture. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/724">#724</a>)</p></li>
+</ul>
+</section>
+<section id="id24">
+<h3>Notes for Downstream Packagers<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added dependency on <code class="docutils literal notranslate"><span class="pre">sphinx-tabs</span> <span class="pre">&gt;=</span> <span class="pre">3.5</span></code> to organize documentation examples into tabs. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1395">#1395</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id27">
+<h2><a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/tree/1.3.0">1.3.0</a> - 2025-11-10<a class="headerlink" href="#id27" title="Link to this heading"></a></h2>
+<section id="removed">
+<h3>Removed<a class="headerlink" href="#removed" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Support for Python 3.9 (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1278">#1278</a>)</p></li>
+</ul>
+</section>
+<section id="id29">
+<h3>Added<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Support for pytest 9 (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1279">#1279</a>)</p></li>
+</ul>
+</section>
+<section id="id31">
+<h3>Notes for Downstream Packagers<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Tested Python versions include free threaded Python 3.14t (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1274">#1274</a>)</p></li>
+<li><p>Tests are run in the same pytest process, instead of spawning a subprocess with <cite>pytest.Pytester.runpytest_subprocess</cite>. This prevents the test suite from accidentally using a system installation of pytest-asyncio, which could result in test errors. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1275">#1275</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id35">
+<h2><a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/tree/1.2.0">1.2.0</a> - 2025-09-12<a class="headerlink" href="#id35" title="Link to this heading"></a></h2>
+<section id="id36">
+<h3>Added<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--asyncio-debug</span></code> CLI option and <code class="docutils literal notranslate"><span class="pre">asyncio_debug</span></code> configuration option to enable asyncio debug mode for the default event loop. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/980">#980</a>)</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">pytest.UsageError</span></code> for invalid configuration values of <code class="docutils literal notranslate"><span class="pre">asyncio_default_fixture_loop_scope</span></code> and <code class="docutils literal notranslate"><span class="pre">asyncio_default_test_loop_scope</span></code>. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1189">#1189</a>)</p></li>
+<li><p>Compatibility with the <cite>Pyright</cite> type checker (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/731">#731</a>)</p></li>
+</ul>
+</section>
+<section id="id40">
+<h3>Fixed<a class="headerlink" href="#id40" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RuntimeError:</span> <span class="pre">There</span> <span class="pre">is</span> <span class="pre">no</span> <span class="pre">current</span> <span class="pre">event</span> <span class="pre">loop</span> <span class="pre">in</span> <span class="pre">thread</span> <span class="pre">'MainThread'</span></code> when any test unsets the event loop (such as when using <code class="docutils literal notranslate"><span class="pre">asyncio.run</span></code> and <code class="docutils literal notranslate"><span class="pre">asyncio.Runner</span></code>). (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1177">#1177</a>)</p></li>
+<li><p>Deprecation warning when decorating an asynchronous fixture with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.fixture</span></code> in <cite>strict</cite> mode. The warning message now refers to the correct package. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1198">#1198</a>)</p></li>
+</ul>
+</section>
+<section id="id43">
+<h3>Notes for Downstream Packagers<a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Bump the minimum required version of tox to v4.28. This change is only relevant if you use the <code class="docutils literal notranslate"><span class="pre">tox.ini</span></code> file provided by pytest-asyncio to run tests.</p></li>
+<li><p>Extend dependency on typing-extensions&gt;=4.12 from Python&lt;3.10 to Python&lt;3.13.</p></li>
+</ul>
+</section>
+</section>
+<section id="id45">
+<h2><a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/tree/1.1.0">1.1.0</a> - 2025-07-16<a class="headerlink" href="#id45" title="Link to this heading"></a></h2>
+<section id="id46">
+<h3>Added<a class="headerlink" href="#id46" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Propagation of ContextVars from async fixtures to other fixtures and tests on Python 3.10 and older (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/127">#127</a>)</p></li>
+<li><p>Cancellation of tasks when the <cite>loop_scope</cite> ends (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/200">#200</a>)</p></li>
+<li><p>Warning when the current event loop is closed by a test</p></li>
+</ul>
+</section>
+<section id="id49">
+<h3>Fixed<a class="headerlink" href="#id49" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Error about missing loop when calling functions requiring a loop in the <cite>finally</cite> clause of a task (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/878">#878</a>)</p></li>
+<li><p>An error that could cause duplicate warnings to be issued</p></li>
+</ul>
+</section>
+<section id="id51">
+<h3>Notes for Downstream Packagers<a class="headerlink" href="#id51" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added runtime dependency on <a class="reference external" href="https://pypi.org/project/backports.asyncio.runner/">backports.asyncio.runner</a> for use with Python 3.10 and older</p></li>
+</ul>
+</section>
+</section>
+<section id="id53">
+<h2><a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/tree/1.0.0">1.0.0</a> - 2025-05-26<a class="headerlink" href="#id53" title="Link to this heading"></a></h2>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../how-to-guides/migrate_from_0_23.html#how-to-guides-migrate-from-0-23"><span class="std std-ref">How to migrate from pytest-asyncio v0.23</span></a></p>
+</div>
+<section id="id54">
+<h3>Removed<a class="headerlink" href="#id54" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The deprecated <em>event_loop</em> fixture. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1106">#1106</a>)</p></li>
+</ul>
+</section>
+<section id="id56">
+<h3>Added<a class="headerlink" href="#id56" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Prelimiary support for Python 3.14 (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1025">#1025</a>)</p></li>
+</ul>
+</section>
+<section id="id58">
+<h3>Changed<a class="headerlink" href="#id58" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Scoped event loops (e.g. module-scoped loops) are created once rather than per scope (e.g. per module). This reduces the number of fixtures and speeds up collection time, especially for large test suites. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1107">#1107</a>)</p></li>
+<li><p>The <em>loop_scope</em> argument to <code class="docutils literal notranslate"><span class="pre">pytest.mark.asyncio</span></code> no longer forces that a pytest Collector exists at the level of the specified scope. For example, a test function marked with <code class="docutils literal notranslate"><span class="pre">pytest.mark.asyncio(loop_scope=&quot;class&quot;)</span></code> no longer requires a class surrounding the test. This is consistent with the behavior of the <em>scope</em> argument to <code class="docutils literal notranslate"><span class="pre">pytest_asyncio.fixture</span></code>. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1112">#1112</a>)</p></li>
+</ul>
+</section>
+<section id="id61">
+<h3>Fixed<a class="headerlink" href="#id61" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>An error caused when using pytest’s <cite>–setup-plan</cite> option. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/630">#630</a>)</p></li>
+<li><p>Unsuppressed import errors with pytest option <code class="docutils literal notranslate"><span class="pre">--doctest-ignore-import-errors</span></code> (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/797">#797</a>)</p></li>
+<li><p>A “fixture not found” error in connection with package-scoped loops (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1052">#1052</a>)</p></li>
+</ul>
+</section>
+<section id="id65">
+<h3>Notes for Downstream Packagers<a class="headerlink" href="#id65" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Removed a test that had an ordering dependency on other tests. (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1114">#1114</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id67">
+<h2>0.26.0 (2025-03-25)<a class="headerlink" href="#id67" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Adds configuration option that sets default event loop scope for all tests <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/793">#793</a></p></li>
+<li><p>Improved type annotations for <code class="docutils literal notranslate"><span class="pre">pytest_asyncio.fixture</span></code> <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/1045">#1045</a></p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">typing-extensions</span></code> as additional dependency for Python <code class="docutils literal notranslate"><span class="pre">&lt;3.10</span></code> <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/1045">#1045</a></p></li>
+</ul>
+</section>
+<section id="id71">
+<h2>0.25.3 (2025-01-28)<a class="headerlink" href="#id71" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Avoid errors in cleanup of async generators when event loop is already closed <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/1040">#1040</a></p></li>
+</ul>
+</section>
+<section id="id73">
+<h2>0.25.2 (2025-01-08)<a class="headerlink" href="#id73" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">loop.shutdown_asyncgens()</span></code> before closing the event loop to ensure async generators are closed in the same manner as <code class="docutils literal notranslate"><span class="pre">asyncio.run</span></code> does <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/1034">#1034</a></p></li>
+</ul>
+</section>
+<section id="id75">
+<h2>0.25.1 (2025-01-02)<a class="headerlink" href="#id75" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fixes an issue that caused a broken event loop when a function-scoped test was executed in between two tests with wider loop scope <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/950">#950</a></p></li>
+<li><p>Improves test collection speed in auto mode <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/1020">#1020</a></p></li>
+<li><p>Corrects the warning that is emitted upon redefining the event_loop fixture</p></li>
+</ul>
+</section>
+<section id="id78">
+<h2>0.25.0 (2024-12-13)<a class="headerlink" href="#id78" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Deprecated: Added warning when asyncio test requests async <code class="docutils literal notranslate"><span class="pre">&#64;pytest.fixture</span></code> in strict mode. This will become an error in a future version of pytest-asyncio. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/979">#979</a></p></li>
+<li><p>Updates the error message about <cite>pytest.mark.asyncio</cite>’s <cite>scope</cite> keyword argument to say <cite>loop_scope</cite> instead. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/1004">#1004</a></p></li>
+<li><p>Verbose log displays correct parameter name: asyncio_default_fixture_loop_scope <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/990">#990</a></p></li>
+<li><p>Propagates <cite>contextvars</cite> set in async fixtures to other fixtures and tests on Python 3.11 and above. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/1008">#1008</a></p></li>
+<li><p>Remove support for Python 3.8 (<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/968">#968</a>)</p></li>
+</ul>
+</section>
+<section id="id84">
+<h2>0.24.0 (2024-08-22)<a class="headerlink" href="#id84" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>BREAKING: Updated minimum supported pytest version to v8.2.0</p></li>
+<li><p>Adds an optional <cite>loop_scope</cite> keyword argument to <cite>pytest.mark.asyncio</cite>. This argument controls which event loop is used to run the marked async test. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/706">#706</a>, <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/871">#871</a></p></li>
+<li><p>Deprecates the optional <cite>scope</cite> keyword argument to <cite>pytest.mark.asyncio</cite> for API consistency with <code class="docutils literal notranslate"><span class="pre">pytest_asyncio.fixture</span></code>. Users are encouraged to use the <cite>loop_scope</cite> keyword argument, which does exactly the same.</p></li>
+<li><p>Raises an error when passing <cite>scope</cite> or <cite>loop_scope</cite> as a positional argument to <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.asyncio</span></code>. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/812">#812</a></p></li>
+<li><p>Fixes a bug that caused module-scoped async fixtures to fail when reused in other modules <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/862">#862</a> <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/668">#668</a></p></li>
+<li><p>Added the <code class="docutils literal notranslate"><span class="pre">asyncio_default_fixture_loop_scope</span></code> configuration option <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/commit/c74d1c3fba1afac0b8316763257c915bfba5f5e3">c74d1c3</a></p></li>
+</ul>
+</section>
+<section id="id89">
+<h2>0.23.8 (2024-07-17)<a class="headerlink" href="#id89" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fixes a bug that caused duplicate markers in async tests <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/813">#813</a></p></li>
+<li><p>Declare support for Python 3.13</p></li>
+</ul>
+<section id="known-issues">
+<h3>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h3>
+<p>As of v0.23, pytest-asyncio attaches an asyncio event loop to each item of the test suite (i.e. session, packages, modules, classes, functions) and allows tests to be run in those loops when marked accordingly. Pytest-asyncio currently assumes that async fixture scope is correlated with the new event loop scope. This prevents fixtures from being evaluated independently from the event loop scope and breaks some existing test suites (see <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/706">#706</a>). For example, a test suite may require all fixtures and tests to run in the same event loop, but have async fixtures that are set up and torn down for each module. If you’re affected by this issue, please continue using the v0.21 release, until it is resolved.</p>
+</section>
+</section>
+<section id="id91">
+<h2>0.23.7 (2024-05-19)<a class="headerlink" href="#id91" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Silence deprecation warnings about unclosed event loops that occurred with certain CPython patch releases <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/817">#817</a></p></li>
+</ul>
+<section id="id93">
+<h3>Known issues<a class="headerlink" href="#id93" title="Link to this heading"></a></h3>
+<p>As of v0.23, pytest-asyncio attaches an asyncio event loop to each item of the test suite (i.e. session, packages, modules, classes, functions) and allows tests to be run in those loops when marked accordingly. Pytest-asyncio currently assumes that async fixture scope is correlated with the new event loop scope. This prevents fixtures from being evaluated independently from the event loop scope and breaks some existing test suites (see <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/706">#706</a>). For example, a test suite may require all fixtures and tests to run in the same event loop, but have async fixtures that are set up and torn down for each module. If you’re affected by this issue, please continue using the v0.21 release, until it is resolved.</p>
+</section>
+</section>
+<section id="id94">
+<h2>0.23.6 (2024-03-19)<a class="headerlink" href="#id94" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix compatibility with pytest 8.2 <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/800">#800</a></p></li>
+</ul>
+<section id="id96">
+<h3>Known issues<a class="headerlink" href="#id96" title="Link to this heading"></a></h3>
+<p>As of v0.23, pytest-asyncio attaches an asyncio event loop to each item of the test suite (i.e. session, packages, modules, classes, functions) and allows tests to be run in those loops when marked accordingly. Pytest-asyncio currently assumes that async fixture scope is correlated with the new event loop scope. This prevents fixtures from being evaluated independently from the event loop scope and breaks some existing test suites (see <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/706">#706</a>). For example, a test suite may require all fixtures and tests to run in the same event loop, but have async fixtures that are set up and torn down for each module. If you’re affected by this issue, please continue using the v0.21 release, until it is resolved.</p>
+</section>
+</section>
+<section id="id97">
+<h2>0.23.5 (2024-02-09)<a class="headerlink" href="#id97" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Declare compatibility with pytest 8 <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/737">#737</a></p></li>
+<li><p>Fix typing errors with recent versions of mypy <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/769">#769</a></p></li>
+<li><p>Prevent DeprecationWarning about internal use of <cite>asyncio.get_event_loop()</cite> from affecting test cases <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/757">#757</a></p></li>
+</ul>
+<section id="id101">
+<h3>Known issues<a class="headerlink" href="#id101" title="Link to this heading"></a></h3>
+<p>As of v0.23, pytest-asyncio attaches an asyncio event loop to each item of the test suite (i.e. session, packages, modules, classes, functions) and allows tests to be run in those loops when marked accordingly. Pytest-asyncio currently assumes that async fixture scope is correlated with the new event loop scope. This prevents fixtures from being evaluated independently from the event loop scope and breaks some existing test suites (see <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/706">#706</a>). For example, a test suite may require all fixtures and tests to run in the same event loop, but have async fixtures that are set up and torn down for each module. If you’re affected by this issue, please continue using the v0.21 release, until it is resolved.</p>
+</section>
+</section>
+<section id="id102">
+<h2>0.23.4 (2024-01-28)<a class="headerlink" href="#id102" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>pytest-asyncio no longer imports additional, unrelated packages during test collection <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/729">#729</a></p></li>
+<li><p>Addresses further issues that caused an internal pytest error during test collection</p></li>
+<li><p>Declares incompatibility with pytest 8 <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/737">#737</a></p></li>
+</ul>
+<section id="id105">
+<h3>Known issues<a class="headerlink" href="#id105" title="Link to this heading"></a></h3>
+<p>As of v0.23, pytest-asyncio attaches an asyncio event loop to each item of the test suite (i.e. session, packages, modules, classes, functions) and allows tests to be run in those loops when marked accordingly. Pytest-asyncio currently assumes that async fixture scope is correlated with the new event loop scope. This prevents fixtures from being evaluated independently from the event loop scope and breaks some existing test suites (see <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/706">#706</a>). For example, a test suite may require all fixtures and tests to run in the same event loop, but have async fixtures that are set up and torn down for each module. If you’re affected by this issue, please continue using the v0.21 release, until it is resolved.</p>
+</section>
+</section>
+<section id="id106">
+<h2>0.23.3 (2024-01-01)<a class="headerlink" href="#id106" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fixes a bug that caused event loops to be closed prematurely when using async generator fixtures with class scope or wider in a function-scoped test <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/706">#706</a></p></li>
+<li><p>Fixes various bugs that caused an internal pytest error during test collection <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/711">#711</a> <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/713">#713</a> <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/719">#719</a></p></li>
+</ul>
+<section id="id111">
+<h3>Known issues<a class="headerlink" href="#id111" title="Link to this heading"></a></h3>
+<p>As of v0.23, pytest-asyncio attaches an asyncio event loop to each item of the test suite (i.e. session, packages, modules, classes, functions) and allows tests to be run in those loops when marked accordingly. Pytest-asyncio currently assumes that async fixture scope is correlated with the new event loop scope. This prevents fixtures from being evaluated independently from the event loop scope and breaks some existing test suites (see <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/706">#706</a>). For example, a test suite may require all fixtures and tests to run in the same event loop, but have async fixtures that are set up and torn down for each module. If you’re affected by this issue, please continue using the v0.21 release, until it is resolved.</p>
+</section>
+</section>
+<section id="id112">
+<h2>0.23.2 (2023-12-04)<a class="headerlink" href="#id112" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fixes a bug that caused an internal pytest error when collecting .txt files <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/703">#703</a></p></li>
+</ul>
+</section>
+<section id="id114">
+<h2>0.23.1 (2023-12-03)<a class="headerlink" href="#id114" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fixes a bug that caused an internal pytest error when using module-level skips <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/701">#701</a></p></li>
+</ul>
+</section>
+<section id="id116">
+<h2>0.23.0 (2023-12-03)<a class="headerlink" href="#id116" title="Link to this heading"></a></h2>
+<p>This release is backwards-compatible with v0.21.
+Changes are non-breaking, unless you upgrade from v0.22.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../how-to-guides/migrate_from_0_21.html#how-to-guides-migrate-from-0-21"><span class="std std-ref">How to migrate from pytest-asyncio v0.21</span></a></p>
+</div>
+<ul class="simple">
+<li><p>BREAKING: The <em>asyncio_event_loop</em> mark has been removed. Event loops with class, module, package, and session scopes can be requested via the <em>scope</em> keyword argument to the _asyncio_ mark.</p></li>
+<li><p>Introduces the <em>event_loop_policy</em> fixture which allows testing with non-default or multiple event loops  <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/662">#662</a></p></li>
+<li><p>Introduces <code class="docutils literal notranslate"><span class="pre">pytest_asyncio.is_async_test</span></code> which returns whether a test item is managed by pytest-asyncio <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/376">#376</a></p></li>
+<li><p>Removes and <em>pytest-trio,</em> <em>mypy,</em> and <em>flaky</em> from the test dependencies <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/620">#620</a>, <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/674">#674</a>, <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/678">#678</a>,</p></li>
+</ul>
+</section>
+<section id="id122">
+<h2>0.22.0 (2023-10-31)<a class="headerlink" href="#id122" title="Link to this heading"></a></h2>
+<p>This release has been yanked from PyPI due to fundamental issues with the _asyncio_event_loop_ mark.</p>
+<ul class="simple">
+<li><p>Class-scoped and module-scoped event loops can be requested
+via the _asyncio_event_loop_ mark. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/620">#620</a></p></li>
+<li><p>Deprecate redefinition of the <cite>event_loop</cite> fixture. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/531">#587</a>
+Users requiring a class-scoped or module-scoped asyncio event loop for their tests
+should mark the corresponding class or module with <cite>asyncio_event_loop</cite>.</p></li>
+<li><p>Test items based on asynchronous generators always exit with <em>xfail</em> status and emit a warning during the collection phase. This behavior is consistent with synchronous yield tests. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/642">#642</a></p></li>
+<li><p>Remove support for Python 3.7</p></li>
+<li><p>Declare support for Python 3.12</p></li>
+</ul>
+</section>
+<section id="id125">
+<h2>0.21.2 (2024-04-29)<a class="headerlink" href="#id125" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix compatibility with pytest 8.2. Backport of <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/800">#800</a> to pytest-asyncio v0.21 for users who are unable to upgrade to a more recent version (see <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/706">#706</a>)</p></li>
+</ul>
+</section>
+<section id="id127">
+<h2>0.21.1 (2023-07-12)<a class="headerlink" href="#id127" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Output a proper error message when an invalid <code class="docutils literal notranslate"><span class="pre">asyncio_mode</span></code> is selected.</p></li>
+<li><p>Extend warning message about unclosed event loops with additional possible cause.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/531">#531</a></p></li>
+<li><p>Previously, some tests reported “skipped” or “xfailed” as a result. Now all tests report a “success” result.</p></li>
+</ul>
+</section>
+<section id="id129">
+<h2>0.21.0 (2023-03-19)<a class="headerlink" href="#id129" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Drop compatibility with pytest 6.1. Pytest-asyncio now depends on pytest 7.0 or newer.</p></li>
+<li><p>pytest-asyncio cleans up any stale event loops when setting up and tearing down the
+event_loop fixture. This behavior has been deprecated and pytest-asyncio emits a
+DeprecationWarning when tearing down the event_loop fixture and current event loop
+has not been closed.</p></li>
+</ul>
+</section>
+<section id="id130">
+<h2>0.20.3 (2022-12-08)<a class="headerlink" href="#id130" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Prevent DeprecationWarning to bubble up on CPython 3.10.9 and 3.11.1.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/460">#460</a></p></li>
+</ul>
+</section>
+<section id="id132">
+<h2>0.20.2 (2022-11-11)<a class="headerlink" href="#id132" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fixes an issue with async fixtures that are defined as methods on a test class not being rebound to the actual test instance. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/197">#197</a></p></li>
+<li><p>Replaced usage of deprecated <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.tryfirst</span></code> with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.hookimpl(tryfirst=True)</span></code> <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/438">#438</a></p></li>
+</ul>
+</section>
+<section id="id135">
+<h2>0.20.1 (2022-10-21)<a class="headerlink" href="#id135" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fixes an issue that warned about using an old version of pytest, even though the most recent version was installed. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/430">#430</a></p></li>
+</ul>
+</section>
+<section id="id137">
+<h2>0.20.0 (2022-10-21)<a class="headerlink" href="#id137" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>BREAKING: Removed <em>legacy</em> mode. If you’re upgrading from v0.19 and you haven’t configured <code class="docutils literal notranslate"><span class="pre">asyncio_mode</span> <span class="pre">=</span> <span class="pre">legacy</span></code>, you can upgrade without taking any additional action. If you’re upgrading from an earlier version or you have explicitly enabled <em>legacy</em> mode, you need to switch to <em>auto</em> or <em>strict</em> mode before upgrading to this version.</p></li>
+<li><p>Deprecate use of pytest v6.</p></li>
+<li><p>Fixed an issue which prevented fixture setup from being cached. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/404">#404</a></p></li>
+</ul>
+</section>
+<section id="id139">
+<h2>0.19.0 (2022-07-13)<a class="headerlink" href="#id139" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>BREAKING: The default <code class="docutils literal notranslate"><span class="pre">asyncio_mode</span></code> is now <em>strict</em>. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/293">#293</a></p></li>
+<li><p>Removes <cite>setup.py</cite> since all relevant configuration is present <cite>setup.cfg</cite>. Users requiring an editable installation of pytest-asyncio need to use pip v21.1 or newer. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/283">#283</a></p></li>
+<li><p>Declare support for Python 3.11.</p></li>
+</ul>
+</section>
+<section id="id142">
+<h2>0.18.3 (2022-03-25)<a class="headerlink" href="#id142" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Adds <a class="reference external" href="https://pypi.org/project/pytest-trio/">pytest-trio</a> to the test dependencies</p></li>
+<li><p>Fixes a bug that caused pytest-asyncio to try to set up async pytest_trio fixtures in strict mode. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/298">#298</a></p></li>
+</ul>
+</section>
+<section id="id144">
+<h2>0.18.2 (2022-03-03)<a class="headerlink" href="#id144" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix asyncio auto mode not marking static methods. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/295">#295</a></p></li>
+<li><p>Fix a compatibility issue with Hypothesis 6.39.0. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/302">#302</a></p></li>
+</ul>
+</section>
+<section id="id147">
+<h2>0.18.1 (2022-02-10)<a class="headerlink" href="#id147" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fixes a regression that prevented async fixtures from working in synchronous tests. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/286">#286</a></p></li>
+</ul>
+</section>
+<section id="id149">
+<h2>0.18.0 (2022-02-07)<a class="headerlink" href="#id149" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Raise a warning if &#64;pytest.mark.asyncio is applied to non-async function. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/275">#275</a></p></li>
+<li><p>Support parametrized <code class="docutils literal notranslate"><span class="pre">event_loop</span></code> fixture. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/278">#278</a></p></li>
+</ul>
+</section>
+<section id="id152">
+<h2>0.17.2 (2022-01-17)<a class="headerlink" href="#id152" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Require <code class="docutils literal notranslate"><span class="pre">typing-extensions</span></code> on Python&lt;3.8 only. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/269">#269</a></p></li>
+<li><p>Fix a regression in tests collection introduced by 0.17.1, the plugin works fine with non-python tests again. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/267">#267</a></p></li>
+</ul>
+</section>
+<section id="id155">
+<h2>0.17.1 (2022-01-16)<a class="headerlink" href="#id155" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fixes a bug that prevents async Hypothesis tests from working without explicit <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> marker when <code class="docutils literal notranslate"><span class="pre">--asyncio-mode=auto</span></code> is set. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/258">#258</a></p></li>
+<li><p>Fixed a bug that closes the default event loop if the loop doesn’t exist <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/257">#257</a></p></li>
+<li><p>Added type annotations. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/198">#198</a></p></li>
+<li><p>Show asyncio mode in pytest report headers. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/266">#266</a></p></li>
+<li><p>Relax <code class="docutils literal notranslate"><span class="pre">asyncio_mode</span></code> type definition; it allows to support pytest 6.1+. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/262">#262</a></p></li>
+</ul>
+</section>
+<section id="id161">
+<h2>0.17.0 (2022-01-13)<a class="headerlink" href="#id161" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><cite>pytest-asyncio</cite> no longer alters existing event loop policies. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/168">#168</a>, <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/168">#188</a></p></li>
+<li><p>Drop support for Python 3.6</p></li>
+<li><p>Fixed an issue when pytest-asyncio was used in combination with <cite>flaky</cite> or inherited asynchronous Hypothesis tests. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/178">#178</a> <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/231">#231</a></p></li>
+<li><p>Added <a class="reference external" href="https://pypi.org/project/flaky/">flaky</a> to test dependencies</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">unused_udp_port</span></code> and <code class="docutils literal notranslate"><span class="pre">unused_udp_port_factory</span></code> fixtures (similar to <code class="docutils literal notranslate"><span class="pre">unused_tcp_port</span></code> and <code class="docutils literal notranslate"><span class="pre">unused_tcp_port_factory</span></code> counterparts. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/99">#99</a></p></li>
+<li><p>Added the plugin modes: <em>strict</em>, <em>auto</em>, and <em>legacy</em>. See <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio#modes">documentation</a> for details. <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/125">#125</a></p></li>
+<li><p>Correctly process <code class="docutils literal notranslate"><span class="pre">KeyboardInterrupt</span></code> during async fixture setup phase <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/219">#219</a></p></li>
+</ul>
+</section>
+<section id="id169">
+<h2>0.16.0 (2021-10-16)<a class="headerlink" href="#id169" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add support for Python 3.10</p></li>
+</ul>
+</section>
+<section id="id170">
+<h2>0.15.1 (2021-04-22)<a class="headerlink" href="#id170" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Hotfix for errors while closing event loops while replacing them.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/209">#209</a>
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/210">#210</a></p></li>
+</ul>
+</section>
+<section id="id173">
+<h2>0.15.0 (2021-04-19)<a class="headerlink" href="#id173" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add support for Python 3.9</p></li>
+<li><p>Abandon support for Python 3.5. If you still require support for Python 3.5, please use pytest-asyncio v0.14 or earlier.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">unused_tcp_port_factory</span></code> fixture scope to ‘session’.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/163">#163</a></p></li>
+<li><p>Properly close event loops when replacing them.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/208">#208</a></p></li>
+</ul>
+</section>
+<section id="id176">
+<h2>0.14.0 (2020-06-24)<a class="headerlink" href="#id176" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix <a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/162">#162</a>, and <code class="docutils literal notranslate"><span class="pre">event_loop</span></code> fixture behavior now is coherent on all scopes.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/164">#164</a></p></li>
+</ul>
+</section>
+<section id="id179">
+<h2>0.12.0 (2020-05-04)<a class="headerlink" href="#id179" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Run the event loop fixture as soon as possible. This helps with fixtures that have an implicit dependency on the event loop.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/156">#156</a></p></li>
+</ul>
+</section>
+<section id="id181">
+<h2>0.11.0 (2020-04-20)<a class="headerlink" href="#id181" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Test on 3.8, drop 3.3 and 3.4. Stick to 0.10 for these versions.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/152">#152</a></p></li>
+<li><p>Use the new Pytest 5.4.0 Function API. We therefore depend on pytest &gt;= 5.4.0.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/142">#142</a></p></li>
+<li><p>Better <code class="docutils literal notranslate"><span class="pre">pytest.skip</span></code> support.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/126">#126</a></p></li>
+</ul>
+</section>
+<section id="id185">
+<h2>0.10.0 (2019-01-08)<a class="headerlink" href="#id185" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pytest-asyncio</span></code> integrates with <a class="reference external" href="https://hypothesis.readthedocs.io">Hypothesis</a>
+to support <code class="docutils literal notranslate"><span class="pre">&#64;given</span></code> on async test functions using <code class="docutils literal notranslate"><span class="pre">asyncio</span></code>.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/102">#102</a></p></li>
+<li><p>Pytest 4.1 support.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/105">#105</a></p></li>
+</ul>
+</section>
+<section id="id188">
+<h2>0.9.0 (2018-07-28)<a class="headerlink" href="#id188" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Python 3.7 support.</p></li>
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">event_loop_process_pool</span></code> fixture and
+<code class="docutils literal notranslate"><span class="pre">pytest.mark.asyncio_process_pool</span></code> marker (see
+<a class="reference external" href="https://bugs.python.org/issue34075">https://bugs.python.org/issue34075</a> for deprecation and removal details)</p></li>
+</ul>
+</section>
+<section id="id189">
+<h2>0.8.0 (2017-09-23)<a class="headerlink" href="#id189" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Improve integration with other packages (like aiohttp) with more careful event loop handling.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/64">#64</a></p></li>
+</ul>
+</section>
+<section id="id191">
+<h2>0.7.0 (2017-09-08)<a class="headerlink" href="#id191" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Python versions pre-3.6 can use the async_generator library for async fixtures.
+<cite>#62 &lt;https://github.com/pytest-dev/pytest-asyncio/pull/62&gt;</cite></p></li>
+</ul>
+</section>
+<section id="id192">
+<h2>0.6.0 (2017-05-28)<a class="headerlink" href="#id192" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Support for Python versions pre-3.5 has been dropped.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytestmark</span></code> now works on both module and class level.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">forbid_global_loop</span></code> parameter has been removed.</p></li>
+<li><p>Support for async and async gen fixtures has been added.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/45">#45</a></p></li>
+<li><p>The deprecation warning regarding <code class="docutils literal notranslate"><span class="pre">asyncio.async()</span></code> has been fixed.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/51">#51</a></p></li>
+</ul>
+</section>
+<section id="id195">
+<h2>0.5.0 (2016-09-07)<a class="headerlink" href="#id195" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Introduced a changelog.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/31">#31</a></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">event_loop</span></code> fixture is again responsible for closing itself.
+This makes the fixture slightly harder to correctly override, but enables
+other fixtures to depend on it correctly.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/30">#30</a></p></li>
+<li><p>Deal with the event loop policy by wrapping a special pytest hook,
+<code class="docutils literal notranslate"><span class="pre">pytest_fixture_setup</span></code>. This allows setting the policy before fixtures
+dependent on the <code class="docutils literal notranslate"><span class="pre">event_loop</span></code> fixture run, thus allowing them to take
+advantage of the <code class="docutils literal notranslate"><span class="pre">forbid_global_loop</span></code> parameter. As a consequence of this,
+we now depend on pytest 3.0.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/29">#29</a></p></li>
+</ul>
+</section>
+<section id="id199">
+<h2>0.4.1 (2016-06-01)<a class="headerlink" href="#id199" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix a bug preventing the propagation of exceptions from the plugin.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/25">#25</a></p></li>
+</ul>
+</section>
+<section id="id201">
+<h2>0.4.0 (2016-05-30)<a class="headerlink" href="#id201" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Make <code class="docutils literal notranslate"><span class="pre">event_loop</span></code> fixtures simpler to override by closing them in the
+plugin, instead of directly in the fixture.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/21">#21</a></p></li>
+<li><p>Introduce the <code class="docutils literal notranslate"><span class="pre">forbid_global_loop</span></code> parameter.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/21">#21</a></p></li>
+</ul>
+</section>
+<section id="id204">
+<h2>0.3.0 (2015-12-19)<a class="headerlink" href="#id204" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Support for Python 3.5 <code class="docutils literal notranslate"><span class="pre">async</span></code>/<code class="docutils literal notranslate"><span class="pre">await</span></code> syntax.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/pull/17">#17</a></p></li>
+</ul>
+</section>
+<section id="id206">
+<h2>0.2.0 (2015-08-01)<a class="headerlink" href="#id206" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">unused_tcp_port_factory</span></code> fixture.
+<a class="reference external" href="https://github.com/pytest-dev/pytest-asyncio/issues/10">#10</a></p></li>
+</ul>
+</section>
+<section id="id208">
+<h2>0.1.1 (2015-04-23)<a class="headerlink" href="#id208" title="Link to this heading"></a></h2>
+<p>Initial release.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="decorators/index.html" class="btn btn-neutral float-left" title="Decorators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../support.html" class="btn btn-neutral float-right" title="Getting support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, pytest-asyncio contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+</body>
+</html>

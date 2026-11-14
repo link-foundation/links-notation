@@ -1,0 +1,6 @@
+{
+  "html_url": "https://github.com/peter-evans/create-pull-request/releases/tag/v8.0.0",
+  "tag_name": "v8.0.0",
+  "published_at": "2025-12-09T20:24:51Z",
+  "body": "## What's new in v8\r\n\r\n- Requires [Actions Runner v2.327.1](https://github.com/actions/runner/releases/tag/v2.327.1) or later if you are using a self-hosted runner for Node 24 support.\r\n\r\n## What's Changed\r\n* chore: Update checkout action version to v6 by @yonas in https://github.com/peter-evans/create-pull-request/pull/4258\r\n* Update actions/checkout references to @v6 in docs by @Copilot in https://github.com/peter-evans/create-pull-request/pull/4259\r\n* feat: v8 by @peter-evans in https://github.com/peter-evans/create-pull-request/pull/4260\r\n\r\n## New Contributors\r\n* @yonas made their first contribution in https://github.com/peter-evans/create-pull-request/pull/4258\r\n* @Copilot made their first contribution in https://github.com/peter-evans/create-pull-request/pull/4259\r\n\r\n**Full Changelog**: https://github.com/peter-evans/create-pull-request/compare/v7.0.11...v8.0.0"
+}

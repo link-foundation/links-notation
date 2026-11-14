@@ -20,7 +20,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -29,7 +29,7 @@ jobs:
       # PATH silently skips the shell checks and exits 0, which is how the
       # SC2016 defect in release.yml (issue #141) went unnoticed.
       #
-      # 1.7.12 knows the modern hosted runner labels (macos-15-intel,
+      # 1.7.12 knows the modern hosted runner labels (macos-26-intel,
       # windows-11-arm), so the old .github/actionlint.yaml false-positive
       # allowlist was removed with this bump (issue #160).
       #
@@ -53,7 +53,7 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -70,15 +70,15 @@ jobs:
       # visible line in the diff rather than a side effect of bumping the
       # action, and documents exactly which analyser reproduces a finding
       # (issue #166):
-      #   pipx run zizmor==1.29.0 --config .github/zizmor.yml \
+      #   pipx run zizmor==1.32.0 --config .github/zizmor.yml \
       #     --min-confidence medium --persona regular .github/workflows
-      - uses: zizmorcore/zizmor-action@v0.6.2
+      - uses: zizmorcore/zizmor-action@v0.8.1
         with:
           advanced-security: false
           annotations: true
           config: .github/zizmor.yml
           min-confidence: medium
-          version: 1.29.0
+          version: 1.32.0
 
       # The run above uses `--persona regular`, which is the right default:
       # pedantic surfaces dozens of stylistic findings. But the audits that
@@ -93,7 +93,7 @@ jobs:
       - name: Audit for pedantic-only high-severity findings
         timeout-minutes: 10
         run: |
-          pipx run zizmor==1.29.0 --config .github/zizmor.yml \
+          pipx run zizmor==1.32.0 --config .github/zizmor.yml \
             --persona pedantic --min-severity high --min-confidence high \
             .github/workflows .github/actions
 
@@ -110,7 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

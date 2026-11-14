@@ -45,7 +45,7 @@ env:
 jobs:
   web-build:
     name: Build web app
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-web-build
@@ -57,14 +57,14 @@ jobs:
       contents: read
       pages: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           cache: npm
           cache-dependency-path: examples/universal-app/package-lock.json
 
@@ -79,7 +79,7 @@ jobs:
 
       - name: Configure GitHub Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@v6.0.0
 
       - name: Install app dependencies
         run: npm ci --prefix examples/universal-app --no-audit --no-fund
@@ -112,7 +112,7 @@ jobs:
     name: Deploy GitHub Pages
     needs: [web-build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: main-writer-${{ github.repository }}-main
@@ -128,20 +128,20 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Install pinned Pages compatibility dependency
         run: npm ci --prefix .github/actions/artifact-transport --ignore-scripts --no-audit --no-fund
 
       - name: Deploy Pages artifact
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v5.0.1
         env:
           NODE_OPTIONS: >-
             --import="${{ github.workspace }}/.github/actions/artifact-transport/punycode.mjs"
@@ -157,16 +157,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, macos-15, windows-2025]
+        os: [ubuntu-26.04, macos-26, windows-2025]
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           cache: npm
           cache-dependency-path: examples/universal-app/package-lock.json
 
@@ -204,31 +204,31 @@ jobs:
   android-build:
     name: Build Android app
     if: github.event_name == 'workflow_dispatch' && vars.EXAMPLE_APP_ENABLE_ANDROID_BUILD == 'true'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-android-build
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           cache: npm
           cache-dependency-path: examples/universal-app/package-lock.json
 
       - name: Setup Java
-        uses: actions/setup-java@v6
+        uses: actions/setup-java@v6.2.0
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: '27.0.1'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407 # v3.2.2
+        uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4.0.4
 
       - name: Install app dependencies
         run: npm ci --prefix examples/universal-app --no-audit --no-fund
@@ -251,20 +251,20 @@ jobs:
   ios-build:
     name: Build iOS app
     if: github.event_name == 'workflow_dispatch' && vars.EXAMPLE_APP_ENABLE_IOS_BUILD == 'true'
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 30
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-ios-build
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           cache: npm
           cache-dependency-path: examples/universal-app/package-lock.json
 
@@ -282,7 +282,7 @@ jobs:
   # the current UI. Issue: #62. Implementation: scripts/update-preview-images.mjs.
   preview-regen:
     name: Regenerate Preview Images
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     container:
       # Keep this release in sync with the playwright package version below.
       # Pinned by digest (a mutable tag is arbitrary code execution in a job
@@ -306,7 +306,7 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           # Regenerate against main HEAD so the bot commit lands on a
           # fast-forward parent regardless of which trigger started the job.
@@ -427,7 +427,7 @@ jobs:
   # job in workflows.yml.
   pipeline-status:
     name: Pipeline Status
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-pipeline-status
@@ -445,14 +445,14 @@ jobs:
       - ios-build
       - preview-regen
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Fail the run when a required job was cancelled or failed
         env:

@@ -1,0 +1,145 @@
+[
+  {
+    "path": ".github/workflows/AutoMerge.yml",
+    "before": [
+      "          python-version: '3.15'"
+    ],
+    "after": [
+      "          python-version: '3.15.0'"
+    ]
+  },
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "before": [
+      "          python-version: '3.15'",
+      "          php-version: '8.5'"
+    ],
+    "after": [
+      "          python-version: '3.15.0'",
+      "          php-version: '8.5.12'"
+    ]
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "before": [
+      "          python-version: '3.15'",
+      "          php-version: '8.5'"
+    ],
+    "after": [
+      "          python-version: '3.15.0'",
+      "          php-version: '8.5.12'"
+    ]
+  },
+  {
+    "path": ".github/workflows/csharp.yml",
+    "before": [
+      "          python-version: '3.13'"
+    ],
+    "after": [
+      "          python-version: '3.15.0'"
+    ]
+  },
+  {
+    "path": ".github/workflows/dependencies.yml",
+    "before": [
+      "          python-version: '3.15'"
+    ],
+    "after": [
+      "          python-version: '3.15.0'"
+    ]
+  },
+  {
+    "path": ".github/workflows/docs.yml",
+    "before": [
+      "          python-version: '3.15'"
+    ],
+    "after": [
+      "          python-version: '3.15.0'"
+    ]
+  },
+  {
+    "path": ".github/workflows/js.yml",
+    "before": [
+      "          python-version: \"3.15\""
+    ],
+    "after": [
+      "          python-version: \"3.15.0\""
+    ]
+  },
+  {
+    "path": ".github/workflows/php.yml",
+    "before": [
+      "          php-version: \"8.5\"",
+      "        php-version: [\"8.4\", \"8.5\"]",
+      "          php-version: ${{ matrix.php-version }}"
+    ],
+    "after": [
+      "          php-version: \"8.5.12\"",
+      "        php-version: [\"8.4\", \"8.5.12\"]",
+      "          php-version: ${{ matrix.php-version }}"
+    ]
+  },
+  {
+    "path": ".github/workflows/publish-php.yml",
+    "before": [
+      "          php-version: \"8.5\""
+    ],
+    "after": [
+      "          php-version: \"8.5.12\""
+    ]
+  },
+  {
+    "path": ".github/workflows/python.yml",
+    "before": [
+      "          python-version: \"3.15\"",
+      "        python-version: [\"3.11\", \"3.15\"]",
+      "          python-version: ${{ matrix.python-version }}"
+    ],
+    "after": [
+      "          python-version: \"3.15.0\"",
+      "        python-version: [\"3.11\", \"3.15.0\"]",
+      "          python-version: ${{ matrix.python-version }}"
+    ]
+  },
+  {
+    "path": ".github/workflows/workflows.yml",
+    "before": [
+      "          python-version: '3.15'"
+    ],
+    "after": [
+      "          python-version: '3.15.0'"
+    ]
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/php.yml",
+    "before": [
+      "          php-version: '8.3'",
+      "        php-version: ['8.1', '8.2', '8.3', '8.4']",
+      "          php-version: ${{ matrix.php-version }}",
+      "          php-version: '8.3'",
+      "          php-version: '8.3'"
+    ],
+    "after": [
+      "          php-version: '8.5.12'",
+      "        php-version: ['8.4', '8.5.12']",
+      "          php-version: ${{ matrix.php-version }}",
+      "          php-version: '8.5.12'",
+      "          php-version: '8.5.12'"
+    ]
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml",
+    "before": [
+      "          python-version: '3.13'",
+      "          python-version: '3.13'",
+      "          python-version: '3.13'",
+      "          python-version: '3.13'"
+    ],
+    "after": [
+      "          python-version: '3.15.0'",
+      "          python-version: '3.15.0'",
+      "          python-version: '3.15.0'",
+      "          python-version: '3.15.0'"
+    ]
+  }
+]

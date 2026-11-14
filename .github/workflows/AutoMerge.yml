@@ -62,7 +62,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15'
+          python-version: '3.15.0'
       - name: Test the merge planner without network access
         run: python experiments/issue-350/test_merge_dependabot.py
       # GITHUB_TOKEN can merge, but its merges do not start the push

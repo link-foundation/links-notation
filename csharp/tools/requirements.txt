@@ -1,0 +1,5 @@
+# minted 3.8's current Python executable and highlighting runtime.
+latexminted==0.7.1
+latex2pydata>=0.5.0
+latexrestricted>=0.6.2
+Pygments>=2.21.0

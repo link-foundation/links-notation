@@ -18,7 +18,7 @@ from conan.tools.build import check_min_cppstd
 from conan.tools.cmake import CMake, CMakeToolchain, cmake_layout
 from conan.tools.files import copy, load, rmdir
 
-required_conan_version = ">=2.0"
+required_conan_version = ">=2.34.0"
 
 
 class MyPackageConan(ConanFile):

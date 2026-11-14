@@ -48,14 +48,14 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
       - name: Test Web Archive report parser
         run: node --test scripts/check-web-archive.test.mjs
 
       - name: Check links with lychee
         id: lychee
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@v2.9.0
         with:
           # Check all Markdown and HTML files
           # Exclude case-studies directory - these are research documents from

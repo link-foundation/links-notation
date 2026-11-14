@@ -48,7 +48,7 @@ jobs:
   # === DETECT CHANGES - determines which jobs should run ===
   detect-changes:
     name: Detect Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Typical run: ~6s. Cap at 5min so a hung detection step
     # surfaces quickly instead of stalling the whole pipeline.
     timeout-minutes: 5
@@ -68,7 +68,7 @@ jobs:
       docs-changed: ${{ steps.changes.outputs.docs-changed }}
       any-code-changed: ${{ steps.changes.outputs.any-code-changed }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -89,7 +89,7 @@ jobs:
   # Syntax check all .mjs files with node --check (~7s)
   test-compilation:
     name: Test Compilation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Typical run: <10s. Tight cap fails fast on syntax-check hangs.
     timeout-minutes: 5
     concurrency:
@@ -99,7 +99,7 @@ jobs:
     if: |
       needs.detect-changes.outputs.js-changed == 'true'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -109,7 +109,7 @@ jobs:
   # Enforce 1500-line limit on .mjs files and release.yml
   check-file-line-limits:
     name: Check File Line Limits
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Typical run: <10s. This job only walks tracked files and counts lines.
     timeout-minutes: 5
     concurrency:
@@ -120,7 +120,7 @@ jobs:
       needs.detect-changes.outputs.docs-changed == 'true' ||
       needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -141,7 +141,7 @@ jobs:
   # Prohibit manual version changes in package.json - versions should only be changed by CI/CD
   version-check:
     name: Check for Manual Version Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Typical run: ~6s. Read-only package.json diff inspection.
     timeout-minutes: 5
     concurrency:
@@ -149,7 +149,7 @@ jobs:
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -164,7 +164,7 @@ jobs:
   # Docs-only PRs (./docs folder, markdown files) don't require changesets
   changeset-check:
     name: Check for Changesets
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Typical run: <30s including npm install. 10min covers cold runners.
     timeout-minutes: 10
     concurrency:
@@ -173,15 +173,15 @@ jobs:
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Install dependencies
         run: npm install
@@ -212,7 +212,7 @@ jobs:
   # See docs/case-studies/issue-23 for why fresh merge simulation is critical
   lint:
     name: Lint and Format Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Typical run: <1min including install, ESLint, Prettier, jscpd,
     # and secretlint. 10min protects against a hung lint plugin.
     timeout-minutes: 10
@@ -228,7 +228,7 @@ jobs:
         needs.detect-changes.outputs.any-code-changed == 'true'
       )
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           # For PRs, fetch enough history to merge with base branch
           fetch-depth: 0
@@ -241,9 +241,9 @@ jobs:
         run: bash scripts/simulate-fresh-merge.sh
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Install dependencies
         run: npm install
@@ -305,10 +305,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, macos-latest, windows-latest]
+        os: [ubuntu-26.04, macos-latest, windows-latest]
         runtime: [node, bun, deno]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           # For PRs, fetch enough history to merge with base branch
           fetch-depth: 0
@@ -323,9 +323,9 @@ jobs:
 
       - name: Setup Node.js
         if: matrix.runtime == 'node'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Install dependencies (Node.js)
         if: matrix.runtime == 'node'
@@ -340,7 +340,7 @@ jobs:
         if: matrix.runtime == 'bun'
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
-          bun-version: '1.x'
+          bun-version: '1.4.4'
 
       - name: Install dependencies (Bun)
         if: matrix.runtime == 'bun'
@@ -374,7 +374,7 @@ jobs:
   # which have no registry credentials. Skipped when no Dockerfile exists.
   docker-build:
     name: Docker Image Build Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Typical run: a few minutes with a warm GHA layer cache. 30min covers
     # a cold, uncached build without allowing a 6h hang.
     timeout-minutes: 30
@@ -389,7 +389,7 @@ jobs:
       DOCKER_CONTEXT: ${{ vars.DOCKER_CONTEXT }}
       DOCKERFILE: ${{ vars.DOCKERFILE }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -408,7 +408,7 @@ jobs:
         # exhausted step budget fails the step, while an exhausted job cap
         # only cancels the job.
         timeout-minutes: 20
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@v7.4.0
         with:
           context: ${{ steps.docker_config.outputs.context }}
           file: ${{ steps.docker_config.outputs.dockerfile }}
@@ -427,7 +427,7 @@ jobs:
   # Validate documentation files when docs change (hive-mind principle #12)
   validate-docs:
     name: Validate Documentation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Typical run: <10s. Pure shell checks over documentation files.
     timeout-minutes: 5
     concurrency:
@@ -437,7 +437,7 @@ jobs:
     if: |
       needs.detect-changes.outputs.docs-changed == 'true'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -461,7 +461,7 @@ jobs:
   # of surfacing as a registry error after the matrix.
   release-preflight:
     name: Release Preflight
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     permissions:
       contents: read
@@ -471,7 +471,7 @@ jobs:
       # finding.
       id-token: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -526,7 +526,7 @@ jobs:
       needs.test.result == 'success' &&
       !contains(needs.*.result, 'failure') &&
       !contains(needs.*.result, 'cancelled')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Permissions required for npm OIDC trusted publishing
     permissions:
       contents: write
@@ -542,15 +542,15 @@ jobs:
       # `git push origin main` to publish the version bump, which needs the
       # token wired into the remote. Every other checkout in this
       # repository sets persist-credentials: false.
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: true
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Remove deprecated npm auth config
@@ -667,7 +667,7 @@ jobs:
       needs.test.result == 'success' &&
       !contains(needs.*.result, 'failure') &&
       !contains(needs.*.result, 'cancelled')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # Same publish envelope as the automated release path.
     timeout-minutes: 50
     concurrency:
@@ -688,15 +688,15 @@ jobs:
       # commit to main, which needs the token wired into the remote.
       # Every other checkout in this repository sets
       # persist-credentials: false.
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: true
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Remove deprecated npm auth config
@@ -769,7 +769,7 @@ jobs:
         (needs.release.result == 'success' && needs.release.outputs.published == 'true') ||
         (needs.instant-release.result == 'success' && needs.instant-release.outputs.published == 'true')
       )
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     outputs:
@@ -786,7 +786,7 @@ jobs:
       DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
       RELEASE_VERSION: ${{ needs.release.outputs.published_version || needs.instant-release.outputs.published_version }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -818,14 +818,14 @@ jobs:
       matrix:
         include:
           - platform: linux/amd64
-            runner: ubuntu-24.04
+            runner: ubuntu-26.04
           - platform: linux/arm64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-26.04-arm
     runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -852,7 +852,7 @@ jobs:
           touch "/tmp/digests/${DIGEST#sha256:}"
 
       - name: Upload image digest
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: docker-digest-${{ strategy.job-index }}
           path: /tmp/digests/*
@@ -867,11 +867,11 @@ jobs:
     concurrency:
       group: main-writer-${{ github.repository }}-main
       cancel-in-progress: false
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -879,13 +879,13 @@ jobs:
         uses: ./.github/actions/setup-buildx-resilient
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v4
+        uses: docker/login-action@v4.8.0
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Download image digests
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@v8.0.2
         env:
           NODE_OPTIONS: --disable-warning=DEP0005
         with:
@@ -939,7 +939,7 @@ jobs:
       github.event_name == 'workflow_dispatch' &&
       github.event.inputs.release_mode == 'changeset-pr' &&
       needs.lint.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # PR creation only: install, create a changeset, format, and open a PR.
     timeout-minutes: 10
     concurrency:
@@ -950,7 +950,7 @@ jobs:
     steps:
       # peter-evans/create-pull-request receives the dedicated token directly;
       # dependency installation does not need a credential in .git/config.
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -965,9 +965,9 @@ jobs:
           fi
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Install dependencies
         run: npm install
@@ -986,7 +986,7 @@ jobs:
           echo "Formatted changeset files"
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           # The built-in token suppresses pull_request workflows; use the same
           # dedicated automation actor as the release fallback (issue #192).
@@ -1016,7 +1016,7 @@ jobs:
   # workflow explicitly permits when a newer commit supersedes this run.
   pipeline-status:
     name: Pipeline Status
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-pipeline-status
@@ -1041,14 +1041,14 @@ jobs:
       - docker-publish
       - changeset-pr
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
 
       - name: Fail the run when a required job was cancelled or failed
         env:

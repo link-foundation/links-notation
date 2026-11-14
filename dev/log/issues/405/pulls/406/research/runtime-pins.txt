@@ -1,0 +1,75 @@
+csharp/global.json:3:    "version": "10.0.402",
+go/go.mod:3:go 1.26
+.gitpod.Dockerfile:3:FROM gitpod/workspace-dotnet:2026-02-12-23-06-03@sha256:253772ffe6d042a39b7802e3101ace08b6b21914e8116d9bf6d9f84332b78e11
+.gitpod.Dockerfile:5:# The image ships .NET SDK 8.0.100, which cannot satisfy csharp/global.json.
+.github/workflows/publish-java.yml:42:      version: ${{ steps.version-check.outputs.version }}
+.github/workflows/publish-java.yml:53:          java-version: "25"
+.github/workflows/benchmarks.yml:140:          node-version: '24'
+.github/workflows/benchmarks.yml:171:          node-version: '24'
+.github/workflows/benchmarks.yml:211:          python-version: '3.15'
+.github/workflows/benchmarks.yml:254:      - name: Setup .NET SDK
+.github/workflows/benchmarks.yml:288:          go-version: '1.27'
+.github/workflows/benchmarks.yml:321:          java-version: '25'
+.github/workflows/benchmarks.yml:364:          php-version: '8.5'
+.github/workflows/publish-kotlin.yml:45:      version: ${{ steps.version-check.outputs.version }}
+.github/workflows/publish-kotlin.yml:56:          java-version: "25"
+.github/workflows/php.yml:38:          php-version: "8.5"
+.github/workflows/php.yml:61:        php-version: ["8.4", "8.5"]
+.github/workflows/php.yml:70:          php-version: ${{ matrix.php-version }}
+.github/workflows/security.yml:107:          version: 3.99.9
+.github/workflows/security.yml:135:          node-version: '24'
+.github/workflows/security.yml:158:          node-version: '24'
+.github/workflows/binary-interop.yml:33:          node-version: '24'
+.github/workflows/binary-interop.yml:36:          python-version: '3.15'
+.github/workflows/binary-interop.yml:48:          java-version: '25'
+.github/workflows/binary-interop.yml:53:          php-version: '8.5'
+.github/workflows/csharp.yml:39:      - name: Setup .NET SDK
+.github/workflows/csharp.yml:65:      - name: Setup .NET SDK
+.github/workflows/csharp.yml:102:      - name: Setup .NET SDK
+.github/workflows/csharp.yml:137:          python-version: '3.13'
+.github/workflows/docs.yml:35:          node-version: '24'
+.github/workflows/docs.yml:40:          python-version: '3.15'
+.github/workflows/docs.yml:74:          node-version: '24'
+.github/workflows/js.yml:161:      version: ${{ steps.version-check.outputs.version }}
+.github/workflows/js.yml:171:          python-version: "3.15"
+.github/workflows/release-audit.yml:50:          node-version: '24'
+.github/workflows/release-audit.yml:67:          node-version: '24'
+.github/workflows/kotlin.yml:39:          java-version: "25"
+.github/workflows/kotlin.yml:62:          java-version: "25"
+.github/workflows/kotlin.yml:89:          node-version: "24"
+.github/workflows/kotlin.yml:93:          java-version: "25"
+.github/workflows/kotlin.yml:118:          java-version: "25"
+.github/workflows/kotlin.yml:147:          java-version: "25"
+.github/workflows/rust.yml:64:        toolchain: [stable, "1.87.0"]
+.github/workflows/rust.yml:76:          toolchain: ${{ matrix.toolchain }}
+.github/workflows/rust.yml:101:          toolchain: "1.86.0"
+.github/workflows/swift.yml:56:          # Package.swift declares swift-tools-version 5.9: the oldest
+.github/workflows/swift.yml:102:          node-version: '24'
+.github/workflows/go.yml:41:          go-version: "1.27"
+.github/workflows/go.yml:89:          go-version: ${{ matrix.go }}
+.github/workflows/dependencies.yml:30:          python-version: '3.15'
+.github/workflows/dependencies.yml:56:          node-version: '24'
+.github/workflows/dependencies.yml:59:          bun-version: latest
+.github/workflows/pages.yml:98:          node-version: '24'
+.github/workflows/publish-php.yml:40:      version: ${{ steps.version-check.outputs.version }}
+.github/workflows/publish-php.yml:50:          php-version: "8.5"
+.github/workflows/workflows.yml:103:          python-version: '3.15'
+.github/workflows/java.yml:38:          java-version: "25"
+.github/workflows/java.yml:64:          java-version: ${{ matrix.java }}
+.github/workflows/java.yml:84:          java-version: "25"
+.github/workflows/java.yml:113:          java-version: "25"
+.github/workflows/publish-js.yml:42:      version: ${{ steps.version-check.outputs.version }}
+.github/workflows/publish-js.yml:52:          bun-version: latest
+.github/workflows/publish-js.yml:58:          node-version: "24"
+.github/workflows/publish-csharp.yml:48:      version: ${{ steps.version-check.outputs.version }}
+.github/workflows/publish-csharp.yml:54:      - name: Setup .NET SDK
+.github/workflows/publish-csharp.yml:143:      - name: Setup .NET SDK
+.github/workflows/publish-rust.yml:44:      version: ${{ steps.publish.outputs.version }}
+.github/workflows/AutoMerge.yml:65:          python-version: '3.15'
+.github/workflows/javascript.yml:38:          bun-version: latest
+.github/workflows/javascript.yml:60:          bun-version: latest
+.github/workflows/javascript.yml:80:          bun-version: latest
+.github/workflows/javascript.yml:110:          bun-version: latest
+.github/workflows/python.yml:38:          python-version: "3.15"
+.github/workflows/python.yml:58:        python-version: ["3.11", "3.15"]
+.github/workflows/python.yml:70:          python-version: ${{ matrix.python-version }}

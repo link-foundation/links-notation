@@ -37,9 +37,9 @@ import java.util.TreeMap;
  * <p>It writes {@code benchmarks/results/java.json} and fails when a count differs from {@code
  * benchmarks/results/rust.json}.
  *
- * <p>Usage: {@code ../../java/mvnw -q exec:java -Dexec.args="--check --verbose"} from {@code benchmarks/java}.
- * With {@code --check} the results file is compared instead of written, which is what CI runs to
- * catch a stale commit.
+ * <p>Usage: {@code ../../java/mvnw -q exec:java -Dexec.args="--check --verbose"} from {@code
+ * benchmarks/java}. With {@code --check} the results file is compared instead of written, which is
+ * what CI runs to catch a stale commit.
  */
 public final class Benchmark {
 

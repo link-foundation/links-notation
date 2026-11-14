@@ -1,0 +1,495 @@
+{
+  "info": {
+    "author": null,
+    "author_email": "\"Geoffrey M. Poore\" <gpoore@gmail.com>",
+    "bugtrack_url": null,
+    "classifiers": [
+      "Development Status :: 4 - Beta",
+      "Environment :: Console",
+      "Intended Audience :: Developers",
+      "License :: OSI Approved",
+      "Operating System :: OS Independent",
+      "Programming Language :: Python",
+      "Topic :: Text Processing :: Markup :: LaTeX"
+    ],
+    "description": "# `latexrestricted` \u2014 Python library for creating executables compatible with LaTeX restricted shell escape\r\n\r\n\r\nThis Python package is designed to simplify the process of creating Python\r\nexecutables compatible with [LaTeX](https://www.latex-project.org/) restricted\r\nshell escape.  Restricted shell escape allows LaTeX to run trusted executables\r\nas part of compiling documents.  These executables have restricted access to\r\nthe file system and restricted ability to launch subprocesses.\r\n\r\n`latexrestricted` provides access to LaTeX configuration and implements\r\nwrappers around Python's\r\n[`pathlib.Path`](https://docs.python.org/3/library/pathlib.html) and\r\n[`subprocess.run()`](https://docs.python.org/3/library/subprocess.html#subprocess.run)\r\nthat follow LaTeX security settings.\r\n\r\n\r\n\r\n## Usage considerations\r\n\r\n\r\n### Importing\r\n\r\n`latexrestricted` should be imported as soon as possible during the\r\ninitialization of an executable.  When it is imported, it sets the current\r\nworking directory as the TeX working directory.  If it is imported after the\r\ncurrent working directory is changed, then the TeX working directory will be\r\nset incorrectly and security restrictions will fail.\r\n\r\n\r\n### Failure modes on systems with multiple TeX installations\r\n\r\n`latexrestricted` works correctly when used on systems with no more than one\r\n[TeX Live](https://www.tug.org/texlive/) installation and no more than one\r\n[MiKTeX](https://miktex.org/) installation.  If multiple TeX Live\r\ninstallations or multiple MiKTeX installations are present, it is not always\r\npossible for `latexrestricted` to determine the correct TeX Live or MiKTeX\r\ninstallation, and in these cases the first installation on `PATH` is used.\r\n**In these cases, `latexrestricted` may fail to return the correct TeX\r\nconfiguration values, and there is no way to detect this.**  See\r\n`LatexConfig._init_tex_paths()` for implementation details.\r\n\r\n  * Multiple TeX Live installations:  The correct installation will be used\r\n    under non-Windows operating systems.  Under Windows, the first\r\n    installation on `PATH` is used.\r\n\r\n  * Multiple MiKTeX installations:  Under all operating systems, the first\r\n    installation on `PATH` is used.\r\n\r\nThe user can avoid any issues with multiple installations by modifying `PATH`\r\nto put the correct TeX Live or MiKTeX installation first.\r\n\r\n\r\n\r\n## LaTeX configuration\r\n\r\n```\r\nfrom latexrestricted import latex_config\r\n```\r\n\r\nThe `latex_config` instance of the `LatexConfig` class provides access to\r\nLaTeX configuration and related environment variables.  If there are errors in\r\ndetermining LaTeX configuration (for example, a TeX installation cannot be\r\nlocated), then `latexrestricted.LatexConfigError` is raised.\r\n\r\n\r\n### `latex_config` attributes and properties\r\n\r\nPaths:\r\n\r\n* `tex_cwd: str`:  Current working directory when `latexrestricted` was\r\n  first imported.\r\n\r\n* `texlive_bin: str | None` and `texlive_kpsewhich: str | None`:  If an\r\n  executable using `latexrestricted` is launched via `\\ShellEscape` with TeX\r\n  Live, these will be the paths to the TeX Live `bin/` directory and the TeX\r\n  Live `kpsewhich` executable.  Otherwise, both are `None`.\r\n\r\n  TeX Live is detected by the absence of a `TEXSYSTEM` environment variable,\r\n  or by this variable having a value other than `miktex`.  Under non-Windows\r\n  operating systems, the `SELFAUTOLOC` environment variable set by `kpathsea`\r\n  is used to locate the TeX Live binary directory, so it will be correct even\r\n  on systems with multiple TeX Live installations.  Under Windows, shell\r\n  escape executables are often launched with TeX Live's executable wrapper\r\n  `runscript.exe`, which overwrites `SELFAUTOLOC` with the location of the\r\n  wrapper.  In this case, the TeX Live binary directory is located by using\r\n  Python's `shutil.which()` to search `PATH` for a `tlmgr` executable with\r\n  accompanying `kpsewhich`.  On systems with multiple TeX Live installations,\r\n  this will give the first TeX Live installation on `PATH`, which is not\r\n  guaranteed to be correct unless the user ensures that the correct\r\n  installation has precedence on `PATH`.\r\n\r\n* `miktex_bin: str | None`, `miktex_initexmf: str | None`, and\r\n  `miktex_kpsewhich: str | None`:  If an executable using `latexrestricted`\r\n  is launched via `\\ShellEscape` with MiKTeX, these will be the paths to the\r\n  MiKTeX `bin/` directory and the MiKTeX `initexmf` and `kpsewhich`\r\n  executables.  Otherwise, all are `None`.\r\n\r\n  MiKTeX is detected by checking the `TEXSYSTEM` environment variable for  the\r\n  value `miktex`.  `TEXSYSTEM` only declares that MiKTeX is in use; unlike the\r\n  TeX Live case with `SELFAUTOLOC`, `TEXSYSTEM` does not give the location of\r\n  TeX binaries.  The location of TeX binaries is determined using Python's\r\n  `shutil.which()` to search `PATH` for an `initexmf` executable with\r\n  accompanying `kpsewhich`.  On systems with multiple MiKTeX installations,\r\n  this will give the first MiKTeX installation on `PATH`, which is not\r\n  guaranteed to be correct unless the user ensures that the correct\r\n  installation has precedence on `PATH`.\r\n\r\nFile system access:\r\n\r\n* `can_read_dotfiles: bool`, `can_read_anywhere: bool`,\r\n  `can_write_dotfiles: bool`, `can_write_anywhere: bool`:  These summarize\r\n  the file system security settings for TeX Live (`openin_any` and\r\n  `openout_any` in `texmf.cnf`) and MiKTeX (`[Core]AllowUnsafeInputFiles`\r\n  and `[Core]AllowUnsafeOutputFiles` in `miktex.ini`).  The `*dotfile`\r\n  properties describe whether dotfiles (files with names beginning with `.`)\r\n  can be read/written.  The `*anywhere` properties describe whether files\r\n  anywhere in the file system can be read/written, or only those under the\r\n  current working directory, `TEXMFOUTPUT`, and `TEXMF_OUTPUT_DIRECTORY`.\r\n\r\n* `can_restricted_shell_escape: bool`:  This describes whether restricted\r\n  shell escape is possible.  It is true when restricted shell escape is\r\n  enabled and also when full shell escape is enabled.  It is based on TeX\r\n  Live's `shell_escape` in `texmf.cnf` and MiKTeX's `[Core]ShellCommandMode`\r\n  in `miktex.ini`.\r\n\r\n* `prohibited_write_file_extensions: frozenset[str] | None`:  Under Windows\r\n  (including Cygwin), this is a frozen set of file extensions that cannot be\r\n  used in writing files.  Under other operating systems, this is `None`.\r\n\r\n  All file extensions are lower case with a leading period (for example,\r\n  `.exe`).  These are determined from the `PATHEXT` environment variable, or\r\n  use a default fallback if `PATHEXT` is not defined or when under Cygwin.\r\n\r\nOther LaTeX configuration variables and environment variables:\r\n\r\n* `TEXMFHOME: str | None`:  Value of `TEXMFHOME` obtained from `kpsewhich`\r\n  or `initexmf`.\r\n\r\n* `TEXMFOUTPUT: str | None`:  Value of `TEXMFOUTPUT` obtained from environment\r\n  variable if defined and otherwise from `kpsewhich` or `initexmf`.\r\n\r\n* `TEXMF_OUTPUT_DIRECTORY: str | None`:  Value of `TEXMF_OUTPUT_DIRECTORY`\r\n  obtained from environment variable.\r\n\r\n* `restricted_shell_escape_commands: frozenset[str]`:  Permitted restricted\r\n  shell escape executables.  Obtained from TeX Live's `shell_escape_commands`\r\n  in `texmf.cnf` or MiKTeX's `[Core]AllowedShellCommands[]` in `miktex.ini`.\r\n\r\n  Note that this will contain permitted restricted shell escape executables\r\n  even when shell escape is completely disabled; it cannot be used to\r\n  determine whether restricted shell escape is permitted.  See\r\n  `can_restricted_shell_escape` to determine whether restricted shell escape\r\n  is permitted.\r\n\r\n\r\n### `latex_config` methods\r\n\r\n* `kpsewhich_find_config_file(file: str)`:  Use `kpsewhich` in a subprocess\r\n  to find a configuration file (`kpsewhich -f othertext <file>`).  Returns\r\n  `kpsewhich` output as a string or `None` if there was no output.\r\n\r\n* `kpsewhich_find_file(file: str, *, cache: bool = False)`:  Use `kpsewhich`\r\n  in a subprocess to find a file (`kpsewhich <file>`).  Returns `kpsewhich`\r\n  output as a string or `None` if there was no output.  The optional\r\n  argument `cache` caches `kpsewhich` output to minimize subprocesses.  This\r\n  can be useful when the file system is not being modified and `kpsewhich` is\r\n  simply returning values from its own cache.\r\n\r\n\r\n\r\n## Restricted file system access\r\n\r\nTeX limits file system access.  The file system security settings for TeX Live\r\n(`openin_any` and `openout_any` in `texmf.cnf`) and MiKTeX\r\n(`[Core]AllowUnsafeInputFiles` and `[Core]AllowUnsafeOutputFiles` in\r\n`miktex.ini`) determine whether dotfiles can be read/written and whether files\r\nanywhere in the file system can be read/written, or only those under the\r\ncurrent working directory, `TEXMFOUTPUT`, and `TEXMF_OUTPUT_DIRECTORY`.\r\n\r\nThe `latexrestricted` package provides `RestrictedPath` subclasses of Python's\r\n[`pathlib.Path`](https://docs.python.org/3/library/pathlib.html) that respect\r\nthese security settings or enforce more stringent security.  Under Python 3.8,\r\nthese subclasses backport the methods `.is_relative_to()` and `.with_stem()`\r\nfrom Python 3.9.  When these subclasses are used to modify the file system,\r\n`latexrestricted.PathSecurityError` is raised if reading/writing a given path\r\nis not permitted.\r\n\r\n**With `RestrictedPath` classes, relative paths are always relative to the TeX\r\nworking directory.**  If the current working directory has been changed to\r\nanother location (for example, via `os.chdir()`), then it will temporarily be\r\nswitched back to the TeX working directory during any `RestrictedPath`\r\noperations that access the file system.\r\n\r\n**The `SafeWrite*` classes should be preferred unless access to additional\r\nwrite locations is absolutely necessary.**  When multiple TeX Live\r\ninstallations are present under Windows or multiple MiKTeX installations are\r\npresent under all operating systems, there is no guarantee that\r\n`latexrestricted` will find the correct installation and thus use the correct\r\nTeX configuration, unless `PATH` has been modified to put the correct\r\ninstallation first.\r\n\r\n```\r\nfrom latexrestricted import <RestrictedPathClass>\r\n```\r\n\r\n### `RestrictedPath` classes\r\n\r\n#### `BaseRestrictedPath`\r\n\r\nThis is the base class for `RestrictedPath` classes.  It cannot be used\r\ndirectly.  Subclasses define methods `.readable_dir()`, `.readable_file()`,\r\n`.writable_dir()`, and `.writable_file()` that determine whether a given path\r\nis readable/writable.  Most methods for opening, reading, writing, replacing,\r\nand deleting files as well as methods for creating and deleting directories\r\nare supported.  Methods related to modifying file permissions and creating\r\nlinks are not supported.  Unsupported methods raise `NotImplementedError`.\r\n\r\n\r\n#### `StringRestrictedPath` classes\r\n\r\n* `StringRestrictedPath`:  This follows the approach taken in TeX's file\r\n  system security.  TeX configuration determines whether dotfiles are\r\n  readable/writable and which locations are readable/writable.  Paths are\r\n  analyzed as strings; the file system is never consulted.  When read/write\r\n  locations are restricted, paths are restricted using the following criteria:\r\n\r\n  - All relative paths are relative to the TeX working directory.\r\n\r\n  - All absolute paths must be under `TEXMF_OUTPUT_DIRECTORY` and\r\n    `TEXMFOUTPUT`.\r\n\r\n  - Paths cannot contain `..` to access a parent directory, even if the\r\n    parent directory is a valid location.\r\n\r\n  When read/write locations are restricted, it is still possible to access\r\n  locations outside the TeX working directory, `TEXMF_OUTPUT_DIRECTORY`, and\r\n  `TEXMFOUTPUT` if there are symlinks in those locations.\r\n\r\n  Under Windows (including Cygwin), writing files with file extensions in\r\n  `PATHEXT` (for example, `.exe`) is also disabled.\r\n\r\n* `SafeStringRestrictedPath`:  Same as `StringRestrictedPath`, except that TeX\r\n  configuration is ignored and all security settings are at maximum:  dotfiles\r\n  cannot be read/written, and all reading/writing is limited to the TeX\r\n  working directory, `TEXMF_OUTPUT_DIRECTORY`, and `TEXMFOUTPUT`.\r\n\r\n* `SafeWriteStringRestrictedPath`:  Same as `StringRestrictedPath`, except\r\n  that TeX configuration for writing is ignored and all security settings\r\n  related to writing are at maximum.\r\n\r\n\r\n#### `ResolvedRestrictedPath` classes\r\n\r\n* `ResolvedRestrictedPath`:  This resolves any symlinks in paths using the\r\n  file system before determining whether paths are readable/writable.  TeX\r\n  configuration determines whether dotfiles are readable/writable and which\r\n  locations are readable/writable.  When read/write locations are restricted,\r\n  paths are restricted using the following criteria:\r\n\r\n  - Resolved paths must be under the TeX working directory,\r\n    resolved `TEXMF_OUTPUT_DIRECTORY`, or resolved `TEXMFOUTPUT`.\r\n\r\n  - All relative paths are resolved relative to the TeX working directory.\r\n\r\n  - Unlike `StringRestrictedPath`, paths are allowed to contain `..`, and\r\n    `TEXMF_OUTPUT_DIRECTORY` and `TEXMFOUTPUT` can be accessed via relative\r\n    paths.  This is possible since paths are fully resolved with the file\r\n    system before being compared with permitted read/write locations.\r\n\r\n  Because paths are resolved before being compared with permitted read/write\r\n  locations, it is not possible to access locations outside the TeX working\r\n  directory, `TEXMF_OUTPUT_DIRECTORY`, and `TEXMFOUTPUT` via symlinks in\r\n  those locations.\r\n\r\n  Under Windows (including Cygwin), writing files with file extensions in\r\n  `PATHEXT` (for example, `.exe`) is also disabled.\r\n\r\n* `SafeResolvedRestrictedPath`:  Same as `ResolvedRestrictedPath`,  except\r\n  that TeX configuration is ignored and all security settings are at maximum:\r\n  dotfiles cannot be read/written, and all other reading/writing is limited to\r\n  the TeX working directory, `TEXMF_OUTPUT_DIRECTORY`, and `TEXMFOUTPUT`.\r\n\r\n* `SafeWriteResolvedRestrictedPath`:  Same as `ResolvedRestrictedPath`, except\r\n  that TeX configuration for writing is ignored and all security settings\r\n  related to writing are at maximum.\r\n\r\n\r\n#### `RestrictedPath` class methods\r\n\r\n* `tex_cwd() -> Self`:  TeX working directory.\r\n\r\n* `TEXMFOUTPUT() -> Self | None`:  Path of `TEXMFOUTPUT` from LaTeX\r\n  configuration or environment variable, or `None` if not defined.\r\n\r\n* `TEXMF_OUTPUT_DIRECTORY() -> Self | None`:  Path of `TEXMF_OUTPUT_DIRECTORY`\r\n  from environment variable, or `None` if not defined.\r\n\r\n* `tex_roots() -> frozenset[Self]`:  All root locations where TeX might write\r\n  output, under default configuration with restricted access to the file\r\n  system.  This includes `tex_cwd()` plus `TEXMFOUTPUT()` and\r\n  `TEXMF_OUTPUT_DIRECTORY()` if they are defined.\r\n\r\n* `tex_roots_resolved() -> frozenset[Self]`:  Same as `tex_roots()` except\r\n  all paths are resolved with the file system.\r\n\r\n* `tex_roots_with_resolved() -> frozenset[Self]`:  Union of `tex_roots()` and\r\n  `tex_roots_resolved()`.\r\n\r\n* `tex_openout_roots() -> tuple[Self]`:  Locations where TeX will attempt to\r\n  write with `\\openout`, in order.  The first element of the tuple is\r\n  `TEXMF_OUTPUT_DIRECTORY()` if not `None` and otherwise `tex_cwd()`.  If\r\n  `TEXMFOUTPUT()` is not `None` and is not already in the tuple, then it is\r\n  the second element.\r\n\r\n  TeX attempts to write to `TEXMFOUTPUT` (if defined) when the default write\r\n  location (`TEXMF_OUTPUT_DIRECTORY` if defined, else TeX working directory)\r\n  is read-only.\r\n\r\n* `tex_texmfoutput_roots() -> frozenset[Self]`:  `TEXMFOUTPUT()` and/or\r\n  `TEXMF_OUTPUT_DIRECTORY()` if they are defined.\r\n\r\n\r\n## Restricted subprocesses\r\n\r\nWhen LaTeX runs with restricted shell escape, only executables specified in\r\nTeX configuration can be executed via `\\ShellEscape`.  The `latexrestricted`\r\npackage allows these same executables to run in subprocesses via\r\n`restricted_run()`.  This is a wrapper around Python's\r\n[`subprocess.run()`](https://docs.python.org/3/library/subprocess.html#subprocess.run).\r\n\r\n```\r\nfrom latexrestricted import restricted_run\r\nrestricted_run(args: list[str], allow_restricted_executables: bool = False)\r\n```\r\n\r\n* It is *always* possible to run `kpsewhich` (including `miktex-kpsewhich`)\r\n  and `initexmf`.  These are necessary to access TeX configuration values.\r\n\r\n  Running other executables allowed by TeX configuration for restricted shell\r\n  escape requires the optional argument `allow_restricted_executables=True`.\r\n  In this case, TeX configuration is checked to determine whether restricted\r\n  shell escape is enabled, although this should be redundant if\r\n  `latexrestricted` itself is being used in a restricted shell escape\r\n  executable.\r\n\r\n* When `allow_restricted_executables=True`, the executable must be in the same\r\n  directory as `kpsewhich` or `initexmf`, as previously located during TeX\r\n  configuration detection, or the executable must exist on `PATH`, as found by\r\n  Python's `shutil.which()`.\r\n\r\n  The executable must not be in a location writable by LaTeX.  For added\r\n  security, locations writable by LaTeX cannot be under the executable parent\r\n  directory.\r\n\r\n* The executable cannot be a batch file (no `*.bat` or `*.cmd`):\r\n  https://docs.python.org/3/library/subprocess.html#security-considerations.\r\n  This is enforced by requiring `*.exe` under Windows and completely\r\n  prohibiting `*.bat` and `*.cmd` everywhere.\r\n\r\n* The subprocess runs with `shell=False`.\r\n\r\n`restricted_run()` will raise `latexrestricted.ExecutableNotFoundError` if an\r\nexecutable (`args[0]`) cannot be found in the same directory as `kpsewhich` or\r\n`initexmf`, or on `PATH`.  It will raise\r\n`latexrestricted.UnapprovedExecutableError` when the executable is not in the\r\napproved list of executables from LaTeX configuration\r\n(`latex_config.restricted_shell_escape_commands`).  It will raise\r\n`latexrestricted.ExecutablePathSecurityError` if the executable is found and\r\nis in the approved list, but is in an insecure location relative to locations\r\nwritable by LaTeX.\r\n\r\n\r\n\r\n## Security limitations with TeX Live and `TEXMFOUTPUT`\r\n\r\nTeX Live allows `TEXMFOUTPUT` to be set in a `texmf.cnf` config file.  In this\r\ncase, `latexrestricted` will retrieve the value of `TEXMFOUTPUT` by running\r\n`kpsewhich --var-value TEXMFOUTPUT` in a subprocess.  If the user has modified\r\n`TEXMFOUTPUT` to an unsafe value in a `texmf.cnf` config file, then the\r\n`kpsewhich` executable (and all other TeX-related executables) are potentially\r\ncompromised, and `latexrestricted` cannot detect this until *after* running\r\n`kpsewhich`.\r\n\r\nIt is possible to set `TEXMFOUTPUT` to unsafe values in a `texmf.cnf` config\r\nfile.  For example, if `TEXMFOUTPUT` is set to a location in the file system\r\nthat contains executables, this could allow LaTeX documents to modify those\r\nexecutables or their resources.  With TeX Live, `latexrestricted` retrieves\r\nthe value of `TEXMFOUTPUT` by running `kpsewhich`.  However, the `kpsewhich`\r\nexecutable itself could be compromised if `TEXMFOUTPUT` is set to a directory\r\nthat contains the `kpsewhich` executable (or other parts of a TeX\r\ninstallation).  If `latexrestricted` detects an unsafe value of `TEXMFOUTPUT`,\r\nit raises `latexrestricted.LatexConfigError`, but this is only possible\r\n*after* running the potentially compromised `kpsewhich` executable to obtain\r\nthe value of `TEXMFOUTPUT`.  (And if `kpsewhich` is compromised, there is\r\nalways the possibility that it will not return the true value of\r\n`TEXMFOUTPUT`.)\r\n\r\nWhile raising a security-related error after running the potentially\r\ncompromised executable is not ideal, this will typically have a negligible\r\nimpact on overall security.  If `TEXMFOUTPUT` is set to a directory that\r\ncontains the `kpsewhich` executable (or other parts of a TeX installation),\r\nthen all other TeX-related executables are also potentially compromised.  If\r\n`latexrestricted` is being used in a Python executable designed for LaTeX\r\nshell escape, then presumably a LaTeX executable is already running, and LaTeX\r\nmay invoke additional trusted executables such as `kpsewhich` in shells.\r\nThus, before `latexrestricted` ever runs `kpsewhich` to retrieve the value of\r\n`TEXMFOUTPUT`, potentially compromised executables would already be running.\r\n",
+    "description_content_type": "text/markdown",
+    "docs_url": null,
+    "download_url": null,
+    "downloads": {
+      "last_day": -1,
+      "last_month": -1,
+      "last_week": -1
+    },
+    "dynamic": null,
+    "home_page": null,
+    "keywords": "LaTeX, security, restricted shell escape",
+    "license": "latexrestricted Python package Copyright (c) 2024 Geoffrey M. Poore  This work may be distributed and/or modified under the conditions of the LaTeX Project Public License, either version 1.3c of this license or (at your option) any later version. The latest version of this license is in https://www.latex-project.org/lppl.txt and version 1.3c or later is part of all distributions of LaTeX version 2008 or later.  This work has the LPPL maintenance status `maintained'.  The Current Maintainer of this work is Geoffrey M. Poore.  This work consists of the files in the latexrestricted Python package. ",
+    "license_expression": null,
+    "license_files": null,
+    "maintainer": null,
+    "maintainer_email": null,
+    "name": "latexrestricted",
+    "package_url": "https://pypi.org/project/latexrestricted/",
+    "platform": null,
+    "project_url": "https://pypi.org/project/latexrestricted/",
+    "project_urls": {
+      "changelog": "https://github.com/gpoore/latexrestricted/blob/main/CHANGELOG.md",
+      "homepage": "https://github.com/gpoore/latexrestricted",
+      "repository": "https://github.com/gpoore/latexrestricted"
+    },
+    "provides_extra": null,
+    "release_url": "https://pypi.org/project/latexrestricted/0.6.2/",
+    "requires_dist": null,
+    "requires_python": ">=3.8",
+    "summary": "Library for creating Python executables compatible with LaTeX restricted shell escape",
+    "version": "0.6.2",
+    "yanked": false,
+    "yanked_reason": null
+  },
+  "last_serial": 26154735,
+  "ownership": {
+    "organization": null,
+    "roles": [
+      {
+        "role": "Owner",
+        "user": "gpoore"
+      }
+    ]
+  },
+  "releases": {
+    "0.1.0": [
+      {
+        "comment_text": "",
+        "core-metadata": {
+          "sha256": "3f1882e5af5e16922c408fc3da55c6b198b360b868852208bc5db8f76512c3e6"
+        },
+        "digests": {
+          "blake2b_256": "40deaf8e9225a55e0dc33a948ee94b3e034b054a138e8320281c9009f6af71d6",
+          "md5": "ae715e526d6a0b66b30e8c3ecbba6226",
+          "sha256": "3a7c29ac57ad20eb2760d20ad9d837680f2a1d1e2fdaf8e560215047d550a304"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.1.0-py3-none-any.whl",
+        "has_sig": false,
+        "md5_digest": "ae715e526d6a0b66b30e8c3ecbba6226",
+        "packagetype": "bdist_wheel",
+        "python_version": "py3",
+        "requires_python": ">=3.8",
+        "size": 24686,
+        "upload_time": "2024-07-27T20:25:30",
+        "upload_time_iso_8601": "2024-07-27T20:25:30.141515Z",
+        "url": "https://files.pythonhosted.org/packages/40/de/af8e9225a55e0dc33a948ee94b3e034b054a138e8320281c9009f6af71d6/latexrestricted-0.1.0-py3-none-any.whl",
+        "yanked": false,
+        "yanked_reason": null
+      },
+      {
+        "comment_text": "",
+        "core-metadata": false,
+        "digests": {
+          "blake2b_256": "33caa7c631d7c753249799d48bebe216d4ad9b4ec212d7169a33efa538b15b9c",
+          "md5": "06040d5266cd8e74c72d1c3e16c12afb",
+          "sha256": "ae79565bf14e2189a6471f61468507a8b36dd859d143f0e2c1fdd90a8b081141"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.1.0.tar.gz",
+        "has_sig": false,
+        "md5_digest": "06040d5266cd8e74c72d1c3e16c12afb",
+        "packagetype": "sdist",
+        "python_version": "source",
+        "requires_python": ">=3.8",
+        "size": 25387,
+        "upload_time": "2024-07-27T20:25:33",
+        "upload_time_iso_8601": "2024-07-27T20:25:33.548155Z",
+        "url": "https://files.pythonhosted.org/packages/33/ca/a7c631d7c753249799d48bebe216d4ad9b4ec212d7169a33efa538b15b9c/latexrestricted-0.1.0.tar.gz",
+        "yanked": false,
+        "yanked_reason": null
+      }
+    ],
+    "0.2.0": [
+      {
+        "comment_text": "",
+        "core-metadata": {
+          "sha256": "ea541bf91d28b2aabb02267f5d7200dde394d5dfd41c56be6f4a275b7bb87523"
+        },
+        "digests": {
+          "blake2b_256": "a2816833c1d699e1ebe3f30455aa5a78a20bbf3370aac77cad646fb250de8061",
+          "md5": "132bffd365b71935c98cffac840ee731",
+          "sha256": "e4d88c3d70757690fdb9cf628cd81b4c2edfc6f1ba832a223af1ff65a9638d11"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.2.0-py3-none-any.whl",
+        "has_sig": false,
+        "md5_digest": "132bffd365b71935c98cffac840ee731",
+        "packagetype": "bdist_wheel",
+        "python_version": "py3",
+        "requires_python": ">=3.8",
+        "size": 25735,
+        "upload_time": "2024-08-10T19:23:20",
+        "upload_time_iso_8601": "2024-08-10T19:23:20.796442Z",
+        "url": "https://files.pythonhosted.org/packages/a2/81/6833c1d699e1ebe3f30455aa5a78a20bbf3370aac77cad646fb250de8061/latexrestricted-0.2.0-py3-none-any.whl",
+        "yanked": false,
+        "yanked_reason": null
+      },
+      {
+        "comment_text": "",
+        "core-metadata": false,
+        "digests": {
+          "blake2b_256": "0ed82848c7202df80e7cf645fff077b448049c3f9eb09d3e09a4a486ac89ba8a",
+          "md5": "896b2546aed20fe68057eeae20319ff1",
+          "sha256": "e96982e42f0c152abbe966fdadf547b367543009eee227fbfbe3c0e73a045d2a"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.2.0.tar.gz",
+        "has_sig": false,
+        "md5_digest": "896b2546aed20fe68057eeae20319ff1",
+        "packagetype": "sdist",
+        "python_version": "source",
+        "requires_python": ">=3.8",
+        "size": 26962,
+        "upload_time": "2024-08-10T19:23:22",
+        "upload_time_iso_8601": "2024-08-10T19:23:22.677694Z",
+        "url": "https://files.pythonhosted.org/packages/0e/d8/2848c7202df80e7cf645fff077b448049c3f9eb09d3e09a4a486ac89ba8a/latexrestricted-0.2.0.tar.gz",
+        "yanked": false,
+        "yanked_reason": null
+      }
+    ],
+    "0.3.0": [
+      {
+        "comment_text": "",
+        "core-metadata": {
+          "sha256": "7c28249c9e2bc442eedff5f718a11269d8a43e505d2095496dcc3cbcc414ef36"
+        },
+        "digests": {
+          "blake2b_256": "0e8a7a4b254824c577db30bb590b0a5c1979b5f38b420f6c1e1049914443d31e",
+          "md5": "bc2330b84fd3415f2a6d0078ae6f16a9",
+          "sha256": "9fcef2ae917ba94d2d00dc8e10b5b1146222fe837d27f9d6259a6c2d29a26452"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.3.0-py3-none-any.whl",
+        "has_sig": false,
+        "md5_digest": "bc2330b84fd3415f2a6d0078ae6f16a9",
+        "packagetype": "bdist_wheel",
+        "python_version": "py3",
+        "requires_python": ">=3.8",
+        "size": 25823,
+        "upload_time": "2024-08-12T03:38:10",
+        "upload_time_iso_8601": "2024-08-12T03:38:10.176377Z",
+        "url": "https://files.pythonhosted.org/packages/0e/8a/7a4b254824c577db30bb590b0a5c1979b5f38b420f6c1e1049914443d31e/latexrestricted-0.3.0-py3-none-any.whl",
+        "yanked": false,
+        "yanked_reason": null
+      },
+      {
+        "comment_text": "",
+        "core-metadata": false,
+        "digests": {
+          "blake2b_256": "05861add4b5f1682df44ebe855007247b8f7c505257b3e31ace5285af4039e05",
+          "md5": "0b05b27909b8d81416b7d1931cc045c4",
+          "sha256": "28fd0ec94e2b6520019057544809312fc667157bad7e8419074de0795bac7400"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.3.0.tar.gz",
+        "has_sig": false,
+        "md5_digest": "0b05b27909b8d81416b7d1931cc045c4",
+        "packagetype": "sdist",
+        "python_version": "source",
+        "requires_python": ">=3.8",
+        "size": 26879,
+        "upload_time": "2024-08-12T03:38:12",
+        "upload_time_iso_8601": "2024-08-12T03:38:12.197443Z",
+        "url": "https://files.pythonhosted.org/packages/05/86/1add4b5f1682df44ebe855007247b8f7c505257b3e31ace5285af4039e05/latexrestricted-0.3.0.tar.gz",
+        "yanked": false,
+        "yanked_reason": null
+      }
+    ],
+    "0.4.0": [
+      {
+        "comment_text": "",
+        "core-metadata": {
+          "sha256": "3898ca91674f8eb5960be107be9c4bfe7ace361548529cae9646a52c7b0f47b5"
+        },
+        "digests": {
+          "blake2b_256": "533bf724a44b71d545b6f4299152cc7078a5e32c6840bd3b366c935feff07b6c",
+          "md5": "f757f4cf2178f521c2191e4f8e7fa685",
+          "sha256": "00a27fd544f3a8711685b2336d222aa91261a3e3d04e51aab5897766501fb25f"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.4.0-py3-none-any.whl",
+        "has_sig": false,
+        "md5_digest": "f757f4cf2178f521c2191e4f8e7fa685",
+        "packagetype": "bdist_wheel",
+        "python_version": "py3",
+        "requires_python": ">=3.8",
+        "size": 26755,
+        "upload_time": "2024-08-17T02:07:59",
+        "upload_time_iso_8601": "2024-08-17T02:07:59.228992Z",
+        "url": "https://files.pythonhosted.org/packages/53/3b/f724a44b71d545b6f4299152cc7078a5e32c6840bd3b366c935feff07b6c/latexrestricted-0.4.0-py3-none-any.whl",
+        "yanked": false,
+        "yanked_reason": null
+      },
+      {
+        "comment_text": "",
+        "core-metadata": false,
+        "digests": {
+          "blake2b_256": "01f76b6b0a3d7edb91a911db0137c2b849b2097dcc5ec8b10f3388732b655071",
+          "md5": "4a6ce2b899ffd1dc8d4ae1c6b68df981",
+          "sha256": "00c7c34ebb8929e8c37575bdf1591e784c042ea979e7ae9bb0bd52bad2c3a6ca"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.4.0.tar.gz",
+        "has_sig": false,
+        "md5_digest": "4a6ce2b899ffd1dc8d4ae1c6b68df981",
+        "packagetype": "sdist",
+        "python_version": "source",
+        "requires_python": ">=3.8",
+        "size": 28067,
+        "upload_time": "2024-08-17T02:08:01",
+        "upload_time_iso_8601": "2024-08-17T02:08:01.348598Z",
+        "url": "https://files.pythonhosted.org/packages/01/f7/6b6b0a3d7edb91a911db0137c2b849b2097dcc5ec8b10f3388732b655071/latexrestricted-0.4.0.tar.gz",
+        "yanked": false,
+        "yanked_reason": null
+      }
+    ],
+    "0.5.0": [
+      {
+        "comment_text": "",
+        "core-metadata": {
+          "sha256": "9d2f4ed3cf9515219ce8dbce033717a985998299881efd3cb6087ec94abc2feb"
+        },
+        "digests": {
+          "blake2b_256": "863b9ae17f6f8ec746a4adaffcf5fbec082492f861020817308864c9bc18a770",
+          "md5": "ea2ad4a00d82942e45586ebfd1755aa7",
+          "sha256": "555ff9b73d79449a24c1540e2214519510dd41d6555c01d10d790de7169dbfe9"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.5.0-py3-none-any.whl",
+        "has_sig": false,
+        "md5_digest": "ea2ad4a00d82942e45586ebfd1755aa7",
+        "packagetype": "bdist_wheel",
+        "python_version": "py3",
+        "requires_python": ">=3.8",
+        "size": 26851,
+        "upload_time": "2024-10-16T12:17:13",
+        "upload_time_iso_8601": "2024-10-16T12:17:13.019422Z",
+        "url": "https://files.pythonhosted.org/packages/86/3b/9ae17f6f8ec746a4adaffcf5fbec082492f861020817308864c9bc18a770/latexrestricted-0.5.0-py3-none-any.whl",
+        "yanked": false,
+        "yanked_reason": null
+      },
+      {
+        "comment_text": "",
+        "core-metadata": false,
+        "digests": {
+          "blake2b_256": "744a254f659c535d6ba85f0a4032e81421e1dbdbbf073eb333cc4915fbc26fe1",
+          "md5": "c25bcfbfe016d6f24daf3600b74ef536",
+          "sha256": "3f08552a0a17ba388b0bedc53c0b5476f04481e3700fa6812be239a7cc5e2f0a"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.5.0.tar.gz",
+        "has_sig": false,
+        "md5_digest": "c25bcfbfe016d6f24daf3600b74ef536",
+        "packagetype": "sdist",
+        "python_version": "source",
+        "requires_python": ">=3.8",
+        "size": 28194,
+        "upload_time": "2024-10-16T12:17:17",
+        "upload_time_iso_8601": "2024-10-16T12:17:17.458882Z",
+        "url": "https://files.pythonhosted.org/packages/74/4a/254f659c535d6ba85f0a4032e81421e1dbdbbf073eb333cc4915fbc26fe1/latexrestricted-0.5.0.tar.gz",
+        "yanked": false,
+        "yanked_reason": null
+      }
+    ],
+    "0.6.0": [
+      {
+        "comment_text": "",
+        "core-metadata": {
+          "sha256": "00de6890662eb5cfcd8496b84fabfb55ba771ea5f19c5fc82eccf5fb1f2a5eec"
+        },
+        "digests": {
+          "blake2b_256": "c17056ab69fd8183f484fada535769327be5c8b5454cdff850c55cd5488c1322",
+          "md5": "1df906c98386e3bc6c521d9ab6103987",
+          "sha256": "2968743d2d4d6d659e7d4d78196e298c2f598addee6653eda40157a330db5a4b"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.6.0-py3-none-any.whl",
+        "has_sig": false,
+        "md5_digest": "1df906c98386e3bc6c521d9ab6103987",
+        "packagetype": "bdist_wheel",
+        "python_version": "py3",
+        "requires_python": ">=3.8",
+        "size": 27081,
+        "upload_time": "2024-10-29T14:55:04",
+        "upload_time_iso_8601": "2024-10-29T14:55:04.748489Z",
+        "url": "https://files.pythonhosted.org/packages/c1/70/56ab69fd8183f484fada535769327be5c8b5454cdff850c55cd5488c1322/latexrestricted-0.6.0-py3-none-any.whl",
+        "yanked": false,
+        "yanked_reason": null
+      },
+      {
+        "comment_text": "",
+        "core-metadata": false,
+        "digests": {
+          "blake2b_256": "6625b64c7e6065863ae74a523b3ff63a8bf727605d80717fbd2831be2abd3460",
+          "md5": "5b369b700fc4ffe5cedfe386343768fd",
+          "sha256": "fcde5e0b7d8e54deaac56640c00525088acc5760118ad897de06823e2482447b"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.6.0.tar.gz",
+        "has_sig": false,
+        "md5_digest": "5b369b700fc4ffe5cedfe386343768fd",
+        "packagetype": "sdist",
+        "python_version": "source",
+        "requires_python": ">=3.8",
+        "size": 28385,
+        "upload_time": "2024-10-29T14:55:12",
+        "upload_time_iso_8601": "2024-10-29T14:55:12.746969Z",
+        "url": "https://files.pythonhosted.org/packages/66/25/b64c7e6065863ae74a523b3ff63a8bf727605d80717fbd2831be2abd3460/latexrestricted-0.6.0.tar.gz",
+        "yanked": false,
+        "yanked_reason": null
+      }
+    ],
+    "0.6.1": [
+      {
+        "comment_text": "",
+        "core-metadata": {
+          "sha256": "546e1f186c48d422341706d6c0395abdc6fe54d717c42eb9c9ae0ddde828ed11"
+        },
+        "digests": {
+          "blake2b_256": "09e2b4b1a8753c9e1383c89ac3d2fcc3b3abf8e9f65d3b96dfcaefe6f52f0747",
+          "md5": "c30e4fd2d019cdb8bbca70561d3f633c",
+          "sha256": "17a2257462a7d7d6a2e9220e412fb351f33e1b5617b899786e97043b295a48f4"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.6.1-py3-none-any.whl",
+        "has_sig": false,
+        "md5_digest": "c30e4fd2d019cdb8bbca70561d3f633c",
+        "packagetype": "bdist_wheel",
+        "python_version": "py3",
+        "requires_python": ">=3.8",
+        "size": 27170,
+        "upload_time": "2024-11-25T04:10:22",
+        "upload_time_iso_8601": "2024-11-25T04:10:22.870001Z",
+        "url": "https://files.pythonhosted.org/packages/09/e2/b4b1a8753c9e1383c89ac3d2fcc3b3abf8e9f65d3b96dfcaefe6f52f0747/latexrestricted-0.6.1-py3-none-any.whl",
+        "yanked": false,
+        "yanked_reason": null
+      },
+      {
+        "comment_text": "",
+        "core-metadata": false,
+        "digests": {
+          "blake2b_256": "e34ae344f2125802281acc4e6b3cd2fd49ef0d13b843fd32e623e831c50ffb66",
+          "md5": "58222c7a3f3899f5843d647ed6bc8746",
+          "sha256": "5edebcbb40666f17b3bced6ad51cd0a718ac1faf58d46d696e825cc782a041e6"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.6.1.tar.gz",
+        "has_sig": false,
+        "md5_digest": "58222c7a3f3899f5843d647ed6bc8746",
+        "packagetype": "sdist",
+        "python_version": "source",
+        "requires_python": ">=3.8",
+        "size": 28491,
+        "upload_time": "2024-11-25T04:10:25",
+        "upload_time_iso_8601": "2024-11-25T04:10:25.113240Z",
+        "url": "https://files.pythonhosted.org/packages/e3/4a/e344f2125802281acc4e6b3cd2fd49ef0d13b843fd32e623e831c50ffb66/latexrestricted-0.6.1.tar.gz",
+        "yanked": false,
+        "yanked_reason": null
+      }
+    ],
+    "0.6.2": [
+      {
+        "comment_text": "",
+        "core-metadata": {
+          "sha256": "19e6a413e94a45c662dabd2cfd4052f4580e58d346aea22215d976145466acfa"
+        },
+        "digests": {
+          "blake2b_256": "3c9ab99b0f9516a529efa89e5d1d1abeba620d73beebcceeb5f50f3a01970c8e",
+          "md5": "4bd83ab7824cff8302fade973639de66",
+          "sha256": "993bcc1c2a0484e95ce8f167bd8ec19de18cc7386cdb2d1f55d839d036eed590"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.6.2-py3-none-any.whl",
+        "has_sig": false,
+        "md5_digest": "4bd83ab7824cff8302fade973639de66",
+        "packagetype": "bdist_wheel",
+        "python_version": "py3",
+        "requires_python": ">=3.8",
+        "size": 27202,
+        "upload_time": "2024-11-25T04:24:15",
+        "upload_time_iso_8601": "2024-11-25T04:24:15.823779Z",
+        "url": "https://files.pythonhosted.org/packages/3c/9a/b99b0f9516a529efa89e5d1d1abeba620d73beebcceeb5f50f3a01970c8e/latexrestricted-0.6.2-py3-none-any.whl",
+        "yanked": false,
+        "yanked_reason": null
+      },
+      {
+        "comment_text": "",
+        "core-metadata": false,
+        "digests": {
+          "blake2b_256": "69c25174b64463f9530c3d19c47606140b098b2ed6a6cb4ceac8c34b616bafdd",
+          "md5": "5baee23e1d5895948d0f34fa6525031d",
+          "sha256": "d51d21a41197a581ff29c0f818551f16fa0e6890def929799ac0bde762a7aa60"
+        },
+        "downloads": -1,
+        "filename": "latexrestricted-0.6.2.tar.gz",
+        "has_sig": false,
+        "md5_digest": "5baee23e1d5895948d0f34fa6525031d",
+        "packagetype": "sdist",
+        "python_version": "source",
+        "requires_python": ">=3.8",
+        "size": 28504,
+        "upload_time": "2024-11-25T04:24:19",
+        "upload_time_iso_8601": "2024-11-25T04:24:19.551578Z",
+        "url": "https://files.pythonhosted.org/packages/69/c2/5174b64463f9530c3d19c47606140b098b2ed6a6cb4ceac8c34b616bafdd/latexrestricted-0.6.2.tar.gz",
+        "yanked": false,
+        "yanked_reason": null
+      }
+    ]
+  },
+  "urls": [
+    {
+      "comment_text": "",
+      "core-metadata": {
+        "sha256": "19e6a413e94a45c662dabd2cfd4052f4580e58d346aea22215d976145466acfa"
+      },
+      "digests": {
+        "blake2b_256": "3c9ab99b0f9516a529efa89e5d1d1abeba620d73beebcceeb5f50f3a01970c8e",
+        "md5": "4bd83ab7824cff8302fade973639de66",
+        "sha256": "993bcc1c2a0484e95ce8f167bd8ec19de18cc7386cdb2d1f55d839d036eed590"
+      },
+      "downloads": -1,
+      "filename": "latexrestricted-0.6.2-py3-none-any.whl",
+      "has_sig": false,
+      "md5_digest": "4bd83ab7824cff8302fade973639de66",
+      "packagetype": "bdist_wheel",
+      "python_version": "py3",
+      "requires_python": ">=3.8",
+      "size": 27202,
+      "upload_time": "2024-11-25T04:24:15",
+      "upload_time_iso_8601": "2024-11-25T04:24:15.823779Z",
+      "url": "https://files.pythonhosted.org/packages/3c/9a/b99b0f9516a529efa89e5d1d1abeba620d73beebcceeb5f50f3a01970c8e/latexrestricted-0.6.2-py3-none-any.whl",
+      "yanked": false,
+      "yanked_reason": null
+    },
+    {
+      "comment_text": "",
+      "core-metadata": false,
+      "digests": {
+        "blake2b_256": "69c25174b64463f9530c3d19c47606140b098b2ed6a6cb4ceac8c34b616bafdd",
+        "md5": "5baee23e1d5895948d0f34fa6525031d",
+        "sha256": "d51d21a41197a581ff29c0f818551f16fa0e6890def929799ac0bde762a7aa60"
+      },
+      "downloads": -1,
+      "filename": "latexrestricted-0.6.2.tar.gz",
+      "has_sig": false,
+      "md5_digest": "5baee23e1d5895948d0f34fa6525031d",
+      "packagetype": "sdist",
+      "python_version": "source",
+      "requires_python": ">=3.8",
+      "size": 28504,
+      "upload_time": "2024-11-25T04:24:19",
+      "upload_time_iso_8601": "2024-11-25T04:24:19.551578Z",
+      "url": "https://files.pythonhosted.org/packages/69/c2/5174b64463f9530c3d19c47606140b098b2ed6a6cb4ceac8c34b616bafdd/latexrestricted-0.6.2.tar.gz",
+      "yanked": false,
+      "yanked_reason": null
+    }
+  ],
+  "vulnerabilities": []
+}

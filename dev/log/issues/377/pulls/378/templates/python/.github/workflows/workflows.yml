@@ -26,12 +26,12 @@ env:
   GIT_CONFIG_COUNT: '1'
   GIT_CONFIG_KEY_0: init.defaultBranch
   GIT_CONFIG_VALUE_0: main
-  ZIZMOR_VERSION: '1.30.1'
+  ZIZMOR_VERSION: '1.32.0'
 
 jobs:
   actionlint:
     name: Lint Workflows
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-actionlint
@@ -39,7 +39,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -51,7 +51,7 @@ jobs:
       # 1.7.12 (issue #71) adds the `glob` check for `paths:` filters that can
       # never match (a workflow filtered with `./src/**` stops running and
       # reports nothing) and knows the modern hosted runner labels, so real
-      # labels like macos-15-intel are no longer reported as unknown.
+      # labels like macos-26-intel are no longer reported as unknown.
       #
       # Pinned by digest because a mutable tag of a repository we do not
       # control is arbitrary code execution in any job that holds credentials
@@ -76,7 +76,7 @@ jobs:
   #     --config .github/zizmor.yml .
   zizmor:
     name: Audit Workflows
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-zizmor
@@ -84,7 +84,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -93,7 +93,7 @@ jobs:
       #
       # The action and CLI share one pin supported by this action's digest table.
       - name: Audit workflow files
-        uses: zizmorcore/zizmor-action@v0.6.4
+        uses: zizmorcore/zizmor-action@v0.8.1
         with:
           advanced-security: false
           annotations: true
@@ -123,13 +123,13 @@ jobs:
   # actionlint checks inline workflow shells; standalone scripts need this pass.
   shellcheck:
     name: ShellCheck
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-shellcheck
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
@@ -138,19 +138,19 @@ jobs:
 
   artifact-roundtrip:
     name: Artifact Transport Regression
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-artifacts
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24'
+          node-version: '26.13.1'
 
       - name: Install pinned artifact dependencies
         working-directory: .github/actions/artifact
@@ -228,10 +228,10 @@ jobs:
       - shellcheck
       - artifact-roundtrip
     if: always()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 

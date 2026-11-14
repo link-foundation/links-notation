@@ -1,0 +1,6 @@
+{
+  "html_url": "https://github.com/actions/upload-artifact/releases/tag/v7.0.0",
+  "tag_name": "v7.0.0",
+  "published_at": "2026-02-26T18:21:17Z",
+  "body": "## v7 What's new\r\n\r\n### Direct Uploads\r\n\r\nAdds support for uploading single files directly (unzipped). Callers can set the new `archive` parameter to `false` to skip zipping the file during upload. Right now, we only support single files. The action will fail if the glob passed resolves to multiple files. The `name` parameter is also ignored with this setting. Instead, the name of the artifact will be the name of the uploaded file.\r\n\r\n### ESM\r\n\r\nTo support new versions of the `@actions/*` packages, we've upgraded the package to ESM.\r\n\r\n## What's Changed\r\n* Add proxy integration test by @Link- in https://github.com/actions/upload-artifact/pull/754\r\n* Upgrade the module to ESM and bump dependencies by @danwkennedy in https://github.com/actions/upload-artifact/pull/762\r\n* Support direct file uploads by @danwkennedy in https://github.com/actions/upload-artifact/pull/764\r\n\r\n## New Contributors\r\n* @Link- made their first contribution in https://github.com/actions/upload-artifact/pull/754\r\n\r\n**Full Changelog**: https://github.com/actions/upload-artifact/compare/v6...v7.0.0"
+}

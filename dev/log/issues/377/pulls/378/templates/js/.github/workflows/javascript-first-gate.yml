@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   javascript-first:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     outputs:
       tested-sha: ${{ steps.revision.outputs.sha }}
@@ -39,7 +39,7 @@ jobs:
           EXPECTED_SHA: ${{ inputs.source-sha }}
         run: |
           [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ inputs.source-sha }}
           persist-credentials: false
@@ -48,9 +48,9 @@ jobs:
           EXPECTED_SHA: ${{ inputs.source-sha }}
         run: |
           test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '24'
+          node-version: '26.13.1'
           # Caller-selected revisions must not populate the caller's cache scope.
           package-manager-cache: false
       - name: Native JavaScript checks

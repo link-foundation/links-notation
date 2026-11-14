@@ -12,7 +12,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.31.3</version>
+    <version>0.31.4</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ Add the dependency to your `pom.xml`:
 Add the dependency to your `build.gradle`:
 
 ```groovy
-implementation 'io.github.link-foundation:links-notation:0.31.3'
+implementation 'io.github.link-foundation:links-notation:0.31.4'
 ```
 
 ### Local Development Setup
@@ -39,8 +39,8 @@ Build the project:
 
 ```bash
 ./mvnw clean compile
-# Check Google Java formatting with the current formatter CLI:
-bash format.sh --check
+# Check Google Java formatting:
+./mvnw spotless:check
 ```
 
 ## Test
@@ -416,17 +416,16 @@ from the start of the stream.
 
 ### Code Formatting
 
-This project runs the latest Google Java Format CLI. Spotless separately checks
-whitespace. Its current adapter calls an API removed in formatter 1.37.0.
+Spotless runs Google Java Format 2.0 and checks trailing whitespace and final
+newlines. The formatter's restored API replaces the separate CLI launcher.
 
 ```bash
-bash format.sh --write
+./mvnw spotless:apply
 ```
 
 Check formatting:
 
 ```bash
-bash format.sh --check
 ./mvnw spotless:check
 ```
 

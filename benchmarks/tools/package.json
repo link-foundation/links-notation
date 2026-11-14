@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "csv-parse": "^7.0.3",
-    "fast-xml-parser": "^5.12.0",
-    "lino-objects-codec": "^0.9.5",
+    "fast-xml-parser": "^5.12.1",
+    "lino-objects-codec": "^0.9.6",
     "yaml": "^2.9.1"
+  },
+  "overrides": {
+    "links-notation": "file:../../js"
   }
 }

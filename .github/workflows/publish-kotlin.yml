@@ -50,10 +50,10 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      - name: Set up JDK 25
-        uses: actions/setup-java@v6.1.0
+      - name: Set up JDK 27
+        uses: actions/setup-java@v6.2.0
         with:
-          java-version: "25"
+          java-version: "27.0.1"
           distribution: "temurin"
           cache: gradle
       - name: Check if version already published

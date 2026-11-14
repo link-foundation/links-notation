@@ -12,11 +12,18 @@ const { Minimatch } = eslintRequire('minimatch');
 test('ESLint glob preprocessing respects the expansion limit', () => {
   // Four sections produce only sixteen alternatives on the vulnerable version.
   // This reproduces GHSA-g3hv-75wg-m249 without stressing CPU or memory.
-  const matcher = new Minimatch(Array(4).fill('**/../a/b').join('/'), {
+  expect(
+    () =>
+      new Minimatch(Array(4).fill('**/../a/b').join('/'), {
+        optimizationLevel: 2,
+        braceExpandMax: 8,
+      }),
+  ).toThrow(/too many patterns/);
+  const matcher = new Minimatch('scripts/**/*.mjs', {
     optimizationLevel: 2,
     braceExpandMax: 8,
   });
-  expect(matcher.set.length).toBeLessThanOrEqual(8);
+  expect(matcher.match('scripts/nested/helper.mjs')).toBe(true);
 });
 
 test('ESLint still finds nested helpers and honors ignored glob paths', async () => {

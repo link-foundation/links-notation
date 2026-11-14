@@ -36,7 +36,7 @@ jobs:
       # clang-format's output changes between releases, so the exact version
       # in cpp/tools/requirements.txt is installed rather than the runner's.
       - name: Install clang-format
-        run: pip install -r tools/requirements.txt
+        run: pip install --require-hashes -r tools/requirements.lock
       - name: Check formatting
         run: git ls-files -z '*.cpp' '*.hpp' '*.hpp.in' | xargs -0 clang-format --dry-run --Werror
 

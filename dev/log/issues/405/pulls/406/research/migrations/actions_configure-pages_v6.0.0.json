@@ -1,0 +1,6 @@
+{
+  "html_url": "https://github.com/actions/configure-pages/releases/tag/v6.0.0",
+  "tag_name": "v6.0.0",
+  "published_at": "2026-03-25T17:00:49Z",
+  "body": "# Changelog\r\n\r\n- upgrade to node 24 @salmanmkc (#186)\r\n- Upgrade IA Publish @Jcambass (#165)\r\n- Add workflow file for publishing releases to immutable action package @Jcambass (#163)\r\n- pin draft release version @YiMysty (#162)\r\n- Bump espree from 9.6.1 to 10.1.0 @dependabot (#160)\r\n- Bump eslint-config-prettier from 8.8.0 to 9.1.0 @dependabot (#143)\r\n- Be more friendly to Dependabot @yoannchaudet (#158)\r\n- Bump eslint-plugin-github from 4.10.2 to 5.0.1 @dependabot (#154)\r\n- Bump braces from 3.0.2 to 3.0.3 in the npm_and_yarn group @dependabot (#156)\r\n- Bump undici from 5.28.3 to 5.28.4 @dependabot (#145)\r\n\r\nSee details of [all code changes](https://github.com/actions/configure-pages/compare/v5.0.0...v5.0.1) since previous release.\r\n"
+}

@@ -11,15 +11,14 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "eslint": "^10.14.0",
-    "vite": "^8.3.5"
+    "eslint": "^10.15.0",
+    "vite": "^8.3.8"
   },
   "dependencies": {
     "links-notation": "file:../../js",
-    "lino-objects-codec": "^0.9.5"
+    "lino-objects-codec": "^0.9.6"
   },
   "overrides": {
-    "links-notation": "file:../../js",
-    "minimatch": "^11.0.4"
+    "links-notation": "file:../../js"
   }
 }

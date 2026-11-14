@@ -1,0 +1,6 @@
+{
+  "html_url": "https://github.com/junit-team/junit-framework/releases/tag/r6.0.0",
+  "tag_name": "r6.0.0",
+  "published_at": "2025-09-30T08:38:19Z",
+  "body": "JUnit 6.0.0 = Platform 6.0.0 + Jupiter 6.0.0 + Vintage 6.0.0\r\n\r\nSee [Release Notes](https://docs.junit.org/6.0.0/release-notes/).\r\n\r\n## New Contributors\r\n* @2897robo made their first contribution in https://github.com/junit-team/junit-framework/pull/4525\r\n* @strangelookingnerd made their first contribution in https://github.com/junit-team/junit-framework/pull/4683\r\n* @eric6iese made their first contribution in https://github.com/junit-team/junit-framework/pull/4717\r\n* @raccoonback made their first contribution in https://github.com/junit-team/junit-framework/pull/4822\r\n* @currenjin made their first contribution in https://github.com/junit-team/junit-framework/pull/4823\r\n* @mehulimukherjee made their first contribution in https://github.com/junit-team/junit-framework/pull/4913\r\n* @lslonina made their first contribution in https://github.com/junit-team/junit-framework/pull/4629\r\n\r\n**Full Changelog**: https://github.com/junit-team/junit-framework/compare/r5.14.0...r6.0.0"
+}

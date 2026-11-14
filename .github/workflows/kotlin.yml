@@ -33,10 +33,10 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      - name: Set up JDK 25
-        uses: actions/setup-java@v6.1.0
+      - name: Set up JDK 27
+        uses: actions/setup-java@v6.2.0
         with:
-          java-version: "25"
+          java-version: "27.0.1"
           distribution: "temurin"
           cache: gradle
       - name: Check ktlint formatting
@@ -56,14 +56,19 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      - name: Set up JDK 25
-        uses: actions/setup-java@v6.1.0
+      - name: Set up JDK 27
+        uses: actions/setup-java@v6.2.0
         with:
-          java-version: "25"
+          java-version: "27.0.1"
           distribution: "temurin"
           cache: gradle
       - name: Test on the JVM, Node.js and WebAssembly
         run: ./gradlew --no-daemon --console=plain jvmTest jsNodeTest wasmJsNodeTest
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: "26.13.1"
+      - name: Verify Mocha reporter compatibility and failure reporting
+        run: build/js/node_modules/.bin/mocha --version && node --test ../experiments/issue-405/mocha-reporter.test.mjs
       - name: Show the test summary
         if: ${{ always() }}
         run: bash test-summary.sh
@@ -86,11 +91,11 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v7.1.0
         with:
-          node-version: "24"
-      - name: Set up JDK 25
-        uses: actions/setup-java@v6.1.0
+          node-version: "26.13.1"
+      - name: Set up JDK 27
+        uses: actions/setup-java@v6.2.0
         with:
-          java-version: "25"
+          java-version: "27.0.1"
           distribution: "temurin"
           cache: gradle
       - name: Compare the Kotlin parser with the JavaScript parser
@@ -112,10 +117,10 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      - name: Set up JDK 25
-        uses: actions/setup-java@v6.1.0
+      - name: Set up JDK 27
+        uses: actions/setup-java@v6.2.0
         with:
-          java-version: "25"
+          java-version: "27.0.1"
           distribution: "temurin"
           cache: gradle
       - name: Require the Android SDK
@@ -141,10 +146,10 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      - name: Set up JDK 25
-        uses: actions/setup-java@v6.1.0
+      - name: Set up JDK 27
+        uses: actions/setup-java@v6.2.0
         with:
-          java-version: "25"
+          java-version: "27.0.1"
           distribution: "temurin"
           cache: gradle
       - name: Test on the iOS simulator and build every iOS target

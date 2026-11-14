@@ -20,9 +20,9 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-cargo-audit
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
-      - uses: taiki-e/install-action@v2
+      - uses: taiki-e/install-action@v2.90.3
         with:
           tool: cargo-audit@0.22.2
 
@@ -44,15 +44,15 @@ jobs:
       matrix:
         language: [rust, actions]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
-      - uses: github/codeql-action/init@v4
+      - uses: github/codeql-action/init@v4.39.3
         with:
           languages: ${{ matrix.language }}
 
-      - uses: github/codeql-action/autobuild@v4
+      - uses: github/codeql-action/autobuild@v4.39.3
 
-      - uses: github/codeql-action/analyze@v4
+      - uses: github/codeql-action/analyze@v4.39.3
 
   dependency-review:
     name: Dependency Review
@@ -66,9 +66,9 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
-      - uses: actions/dependency-review-action@v5
+      - uses: actions/dependency-review-action@v5.0.0
         with:
           fail-on-severity: high
           comment-summary-in-pr: on-failure

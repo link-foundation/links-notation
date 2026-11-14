@@ -5,7 +5,10 @@ import { writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { declaredVersions } from "./declared-versions.mjs";
 import { verifyCentral, verifyMavenSignature } from "./ci/maven-central.mjs";
-import { packagistVersion, checkPackagistSource } from "./ci/packagist-status.mjs";
+import {
+  packagistVersion,
+  checkPackagistSource,
+} from "./ci/packagist-status.mjs";
 
 export function registryTargets(version) {
   return [
@@ -138,7 +141,34 @@ export async function audit({
   // or "skipped"), or "" when the caller does not know it. An aggregate
   // failure can mean partial publication; only skipped means no publisher ran.
   releaseResult = "",
+  pause = (milliseconds) =>
+    new Promise((resolve) => setTimeout(resolve, milliseconds)),
 }) {
+  // Registry connection resets are transient. HTTP failures and invalid
+  // metadata still fail immediately; an exhausted transport retry also fails.
+  const transport = fetcher;
+  fetcher = async (url, options) => {
+    for (let attempt = 1; ; attempt++) {
+      try {
+        return await transport(url, options);
+      } catch (error) {
+        const code = error.cause?.code;
+        if (
+          attempt === 3 ||
+          ![
+            "ECONNRESET",
+            "ETIMEDOUT",
+            "EAI_AGAIN",
+            "UND_ERR_CONNECT_TIMEOUT",
+            "UND_ERR_SOCKET",
+          ].includes(code)
+        )
+          throw error;
+        if (verbose) log(`GET ${url}: ${code}; retry ${attempt}/2`);
+        await pause(attempt * 1000);
+      }
+    }
+  };
   const findings = [];
   const releaseSkipped = expectPublished && releaseResult === "skipped";
   let failures = 0;
@@ -160,12 +190,22 @@ export async function audit({
     try {
       let present = true;
       if (target.artifact) {
-        record.maven = await verifyCentral({ group: target.group, artifact: target.artifact,
-          version: record.version, fetcher, verifySignature,
-          requests: record.requests, verbose, log });
+        record.maven = await verifyCentral({
+          group: target.group,
+          artifact: target.artifact,
+          version: record.version,
+          fetcher,
+          verifySignature,
+          requests: record.requests,
+          verbose,
+          log,
+        });
         present = record.maven.present;
       }
-      for (const [index, url] of (target.artifact ? [] : target.urls).entries()) {
+      for (const [index, url] of (target.artifact
+        ? []
+        : target.urls
+      ).entries()) {
         const response = await fetcher(url, {
           headers,
           signal: AbortSignal.timeout(30000),
@@ -187,7 +227,11 @@ export async function audit({
             : await response.json();
           if (!target.valid(body)) present = false;
           if (target.name === "php" && present) {
-            const item = packagistVersion(body, "link-foundation/links-notation", record.version);
+            const item = packagistVersion(
+              body,
+              "link-foundation/links-notation",
+              record.version,
+            );
             checkPackagistSource(item, repository);
             record.source = item.source.reference;
           }
@@ -212,18 +256,27 @@ export async function audit({
         let object;
         for (let depth = 0; depth < 5; depth++) {
           const response = await fetcher(tagUrl, {
-            headers: { ...headers, ...(token ? { authorization: `Bearer ${token}` } : {}) },
+            headers: {
+              ...headers,
+              ...(token ? { authorization: `Bearer ${token}` } : {}),
+            },
             signal: AbortSignal.timeout(30000),
           });
           record.requests.push({ url: tagUrl, status: response.status });
-          if (!response.ok) { await response.body?.cancel(); throw new Error(`Packagist version tag: HTTP ${response.status}`); }
+          if (!response.ok) {
+            await response.body?.cancel();
+            throw new Error(`Packagist version tag: HTTP ${response.status}`);
+          }
           object = (await response.json()).object;
           if (object?.type === "commit") break;
-          if (object?.type !== "tag" || !/^[a-f0-9]{40}$/.test(object.sha)) throw new Error("Invalid Packagist version tag");
+          if (object?.type !== "tag" || !/^[a-f0-9]{40}$/.test(object.sha))
+            throw new Error("Invalid Packagist version tag");
           tagUrl = `https://api.github.com/repos/${repository}/git/tags/${object.sha}`;
         }
         if (object?.type !== "commit" || object.sha !== record.source)
-          throw new Error("Packagist source differs from the immutable Composer version tag");
+          throw new Error(
+            "Packagist source differs from the immutable Composer version tag",
+          );
       }
       const tag =
         target.tag ??
@@ -262,7 +315,9 @@ export async function audit({
       );
     }
   }
-  log(`${findings.filter((item) => item.published && item.release).length} package/release pairs verified; ${findings.filter((item) => item.error).length} verification error(s).`);
+  log(
+    `${findings.filter((item) => item.published && item.release).length} package/release pairs verified; ${findings.filter((item) => item.error).length} verification error(s).`,
+  );
   log(`${findings.length} languages audited; ${failures} delivery failure(s).`);
   return { failures, findings };
 }

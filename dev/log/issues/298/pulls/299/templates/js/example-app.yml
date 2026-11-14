@@ -41,18 +41,18 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-web-build
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           cache: npm
           cache-dependency-path: examples/universal-app/package-lock.json
 
       - name: Configure GitHub Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@v6.0.0
 
       - name: Install app dependencies
         run: npm ci --prefix examples/universal-app --no-audit --no-fund
@@ -64,7 +64,7 @@ jobs:
           VITE_REPOSITORY_URL: https://github.com/${{ github.repository }}
 
       - name: Upload web build artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: universal-example-web
           path: examples/universal-app/dist
@@ -72,7 +72,7 @@ jobs:
 
       - name: Upload GitHub Pages artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: examples/universal-app/dist
 
@@ -97,7 +97,7 @@ jobs:
     steps:
       - name: Deploy Pages artifact
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v5.0.1
 
   desktop-package:
     name: Package desktop app (${{ matrix.os }})
@@ -111,12 +111,12 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           cache: npm
           cache-dependency-path: examples/universal-app/package-lock.json
 
@@ -142,7 +142,7 @@ jobs:
           VITE_REPOSITORY_URL: https://github.com/${{ github.repository }}
 
       - name: Upload desktop package
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: universal-example-desktop-${{ matrix.os }}
           path: examples/universal-app/out
@@ -157,23 +157,23 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-android-build
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           cache: npm
           cache-dependency-path: examples/universal-app/package-lock.json
 
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6.2.0
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: '27.0.1'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407 # v3.2.2
+        uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4.0.4
 
       - name: Install app dependencies
         run: npm ci --prefix examples/universal-app --no-audit --no-fund
@@ -185,7 +185,7 @@ jobs:
         run: npm --prefix examples/universal-app run mobile:android:build
 
       - name: Upload Android output
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: universal-example-android
           path: |
@@ -202,12 +202,12 @@ jobs:
       group: check-${{ github.workflow }}-${{ github.ref }}-ios-build
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7.1.0
         with:
-          node-version: '24.x'
+          node-version: '26.13.1'
           cache: npm
           cache-dependency-path: examples/universal-app/package-lock.json
 
@@ -244,7 +244,7 @@ jobs:
     env:
       PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7.0.1
         with:
           # Regenerate against main HEAD so the bot commit lands on a
           # fast-forward parent regardless of which trigger started the job.
@@ -298,7 +298,7 @@ jobs:
 
       - name: Upload screenshot failure artifacts
         if: failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: preview-regen-failure-${{ github.run_id }}
           path: |

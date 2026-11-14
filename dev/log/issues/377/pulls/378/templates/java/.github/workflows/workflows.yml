@@ -15,7 +15,7 @@ permissions:
 jobs:
   workflows:
     name: Workflow Policy and Dependency Freshness
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     concurrency:
       group: check-${{ github.workflow }}-${{ github.ref }}-workflows

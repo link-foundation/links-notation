@@ -1,0 +1,6 @@
+{
+  "html_url": "https://github.com/android-actions/setup-android/releases/tag/v4.0.0",
+  "tag_name": "v4.0.0",
+  "published_at": "2026-03-24T23:02:31Z",
+  "body": "Hello,\r\n\r\nThe long awaited update of setup-android.\r\n\r\n- Migrate action to Node24 (by @TWiStErRob)\r\n- Add and default to cmdline-tools version 20.0 ( 14742923 )\r\n- Update CI runners (by @TWiStErRob)\r\n- Update README.md (by @vil02)\r\n- Update npm dependencies to solve CVE's\r\n\r\nIncrementing major version to safeguard incase node upgrade or default cmdline-tools upgrade breaks something downstream."
+}

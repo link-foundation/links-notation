@@ -31,13 +31,13 @@ permissions:
   contents: read
 
 env:
-  PHP_VERSION: '8.3'
+  PHP_VERSION: '8.5.12'
 
 jobs:
   # === DETECT CHANGES - determines which downstream jobs need to run ===
   detect-changes:
     name: Detect Changes
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     if: github.event_name != 'workflow_dispatch'
     outputs:
@@ -54,7 +54,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
@@ -71,7 +71,7 @@ jobs:
   # Independent of the changeset check so a fast quality gate always runs.
   lint:
     name: Lint and Static Analysis
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     needs: [detect-changes]
     # always() && !cancelled() lets this evaluate even though detect-changes is
@@ -92,7 +92,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
@@ -143,7 +143,7 @@ jobs:
   # `needs.release-preflight.result == 'success'` rather than on greenness.
   release-preflight:
     name: Release Preflight
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7.0.1
@@ -151,7 +151,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
@@ -174,7 +174,7 @@ jobs:
   # === TEST ===
   test:
     name: Test (PHP ${{ matrix.php }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     needs: [detect-changes]
     if: |
@@ -189,14 +189,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['8.1', '8.2', '8.3', '8.4']
+        php: ['8.4', '8.5']
     steps:
       - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ matrix.php }}
           coverage: xdebug
@@ -222,7 +222,7 @@ jobs:
   # Docs-only PRs are exempt (no changelog fragment required).
   changeset:
     name: Changeset Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     needs: [detect-changes]
     if: github.event_name == 'pull_request' && needs.detect-changes.outputs.any-code-changed == 'true'
@@ -233,7 +233,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
@@ -263,7 +263,7 @@ jobs:
   # succeeded or were skipped (docs-only PR).
   build:
     name: Build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     needs: [detect-changes, lint, test]
     if: |
@@ -281,7 +281,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
@@ -317,7 +317,7 @@ jobs:
       always() && !cancelled() &&
       github.event_name == 'push' && github.ref == 'refs/heads/main' &&
       needs.release-preflight.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     permissions:
       contents: write
@@ -334,7 +334,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
@@ -410,7 +410,7 @@ jobs:
       needs.test.result == 'success' &&
       needs.build.result == 'success' &&
       needs.release-preflight.result == 'success'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     permissions:
       contents: write
@@ -427,7 +427,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ env.PHP_VERSION }}
           coverage: none
@@ -493,7 +493,7 @@ jobs:
       - auto-release
       - manual-release
     if: always()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7.0.1

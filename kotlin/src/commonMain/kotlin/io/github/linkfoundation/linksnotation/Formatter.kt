@@ -126,9 +126,7 @@ private fun formatIndented(
 ): String {
     if (link.id == null) return link.format(options.lessParentheses)
     val lines = ArrayList<String>()
-    if (link.id != null) {
-        lines.add("${escapeReference(link.id)}:")
-    }
+    lines.add("${escapeReference(link.id)}:")
     for (value in link.values) {
         lines.add(options.indentString + formatValue(link, value))
     }
