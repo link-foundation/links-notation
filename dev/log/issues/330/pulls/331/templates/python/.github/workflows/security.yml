@@ -26,7 +26,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Audit pyproject.toml and docs/requirements.txt
         run: python scripts/audit_dependencies.py

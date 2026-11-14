@@ -130,7 +130,7 @@ jobs:
       - name: Setup Python for latexminted
         uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
       - name: Install current minted packages
         run: |
           pip install --require-hashes -r tools/requirements.lock

@@ -166,8 +166,9 @@ jobs:
           cache-dependency-path: examples/universal-app/package-lock.json
 
       - name: Setup Java
-        uses: actions/setup-java@v6.2.0
+        uses: actions/setup-java@v6.3.0
         with:
+          problem-matcher: true
           distribution: temurin
           java-version: '27.0.1'
 

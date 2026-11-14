@@ -120,6 +120,7 @@ jobs:
           node --test experiments/issue-339/release-audit.test.mjs
           node --test experiments/issue-192/*.test.mjs
           node --test experiments/issue-339/php-distribution.test.mjs
+          node --test experiments/issue-408/actions-migration.test.mjs
           python3 experiments/issue-339/test_workflow_contract.py
       - name: Verify archived artifact glob migrations with real files
         working-directory: .

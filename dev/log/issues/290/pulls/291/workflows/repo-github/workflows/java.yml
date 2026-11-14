@@ -56,8 +56,9 @@ jobs:
         with:
           submodules: true
       - name: Set up JDK 11
-        uses: actions/setup-java@v6.2.0
+        uses: actions/setup-java@v6.3.0
         with:
+          problem-matcher: true
           java-version: '27.0.1'
           distribution: 'temurin'
           cache: maven
@@ -77,8 +78,9 @@ jobs:
         with:
           submodules: true
       - name: Set up JDK ${{ matrix.java }}
-        uses: actions/setup-java@v6.2.0
+        uses: actions/setup-java@v6.3.0
         with:
+          problem-matcher: true
           java-version: ${{ matrix.java }}
           distribution: 'temurin'
           cache: maven
@@ -95,8 +97,9 @@ jobs:
         with:
           submodules: true
       - name: Set up JDK 11
-        uses: actions/setup-java@v6.2.0
+        uses: actions/setup-java@v6.3.0
         with:
+          problem-matcher: true
           java-version: '27.0.1'
           distribution: 'temurin'
           cache: maven
@@ -125,8 +128,9 @@ jobs:
           fi
       - name: Set up JDK 11
         if: steps.creds.outputs.have_creds == 'true'
-        uses: actions/setup-java@v6.2.0
+        uses: actions/setup-java@v6.3.0
         with:
+          problem-matcher: true
           java-version: '27.0.1'
           distribution: 'temurin'
           cache: maven
@@ -171,8 +175,9 @@ jobs:
         with:
           submodules: true
       - name: Set up JDK 11
-        uses: actions/setup-java@v6.2.0
+        uses: actions/setup-java@v6.3.0
         with:
+          problem-matcher: true
           java-version: '27.0.1'
           distribution: 'temurin'
           cache: maven

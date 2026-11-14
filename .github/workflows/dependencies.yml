@@ -27,7 +27,7 @@ jobs:
           fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 1 }}
       - uses: actions/setup-python@v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
       - name: Test the dependency checker without network access
         run: python experiments/issue-325/test_dependency_check.py
       # A manifest Dependabot is not told about never receives an update; the

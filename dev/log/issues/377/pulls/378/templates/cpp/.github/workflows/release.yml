@@ -283,7 +283,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Install pinned lint tools
         # clang-format, clang-tidy and cppcheck come from PyPI wheels pinned in
@@ -382,7 +382,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Select the compiler and locate the C++ project
         env:
@@ -487,7 +487,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Install pinned tools
         run: python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
@@ -528,7 +528,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Install gcovr
         run: python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
@@ -589,7 +589,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Install pinned tools
         run: python -m pip install --disable-pip-version-check -r scripts/requirements-ci.txt
@@ -677,7 +677,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Install Conan
         if: vars.CONAN_REMOTE_URL != ''
@@ -764,7 +764,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.15.0'
+          python-version: '3.15.2'
 
       - name: Install Conan
         if: vars.CONAN_REMOTE_URL != ''
