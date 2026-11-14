@@ -13379,6 +13379,14 @@
     "latest": "2.18.0"
   },
   {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "backports-tarfile",
+    "before": [],
+    "after": "1.2.0",
+    "latest": "1.2.0"
+  },
+  {
     "path": "dev/log/issues/330/pulls/331/templates/python/requirements.lock",
     "ecosystem": "pypi",
     "name": "beautifulsoup4",
@@ -13772,6 +13780,14 @@
   },
   {
     "path": "python/uv.lock",
+    "ecosystem": "pypi",
+    "name": "colorama",
+    "before": [],
+    "after": "0.4.6",
+    "latest": "0.4.6"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
     "ecosystem": "pypi",
     "name": "colorama",
     "before": [],
@@ -14187,6 +14203,14 @@
     "latest": "10.2.0"
   },
   {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "importlib-metadata",
+    "before": [],
+    "after": "10.2.0",
+    "latest": "10.2.0"
+  },
+  {
     "path": "dev/log/issues/330/pulls/331/templates/python/requirements.lock",
     "ecosystem": "pypi",
     "name": "iniconfig",
@@ -14337,6 +14361,38 @@
     "before": [],
     "after": "25.7.0",
     "latest": "25.7.0"
+  },
+  {
+    "path": "csharp/tools/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "latex2pydata",
+    "before": [],
+    "after": "0.5.0",
+    "latest": "0.5.0"
+  },
+  {
+    "path": "csharp/tools/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "latexminted",
+    "before": [],
+    "after": "0.7.1",
+    "latest": "0.7.1"
+  },
+  {
+    "path": "csharp/tools/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "latexrestricted",
+    "before": [],
+    "after": "0.6.2",
+    "latest": "0.6.2"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "lazy-importer",
+    "before": [],
+    "after": "0.1.0",
+    "latest": "0.1.0"
   },
   {
     "path": "dev/log/issues/330/pulls/331/templates/python/requirements.lock",
@@ -15099,6 +15155,14 @@
     "latest": "4.1.0"
   },
   {
+    "path": "csharp/tools/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "pygments",
+    "before": [],
+    "after": "2.21.0",
+    "latest": "2.21.0"
+  },
+  {
     "path": "dev/log/issues/330/pulls/331/templates/python/requirements.lock",
     "ecosystem": "pypi",
     "name": "pygments",
@@ -15369,6 +15433,14 @@
     "before": [],
     "after": "0.4.1",
     "latest": "0.4.1"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "pywin32-ctypes",
+    "before": [],
+    "after": "0.2.3",
+    "latest": "0.2.3"
   },
   {
     "path": "dev/log/issues/330/pulls/331/templates/python/requirements.lock",
@@ -16132,6 +16204,14 @@
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock",
+    "ecosystem": "pypi",
+    "name": "zipp",
+    "before": [],
+    "after": "4.1.2",
+    "latest": "4.1.2"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
     "ecosystem": "pypi",
     "name": "zipp",
     "before": [],

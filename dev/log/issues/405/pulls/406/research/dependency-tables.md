@@ -921,6 +921,10 @@ Registry queries performed on 2026-11-13 UTC. Raw results: `registry-all.json`. 
 | --- | --- | --- | --- | --- | --- |
 | `benchmarks/python/requirements.txt` | tiktoken | `>=0.14.0` | `>=0.14.0` | `0.14.0` | Current stable floor/ref |
 | `cpp/tools/requirements.txt` | clang-format | `==23.1.5` | `==23.1.5` | `23.1.5` | Current stable floor/ref |
+| `csharp/tools/requirements.txt` | Pygments | `added` | `>=2.21.0` | `2.21.0` | Current stable floor/ref |
+| `csharp/tools/requirements.txt` | latex2pydata | `added` | `>=0.5.0` | `0.5.0` | Current stable floor/ref |
+| `csharp/tools/requirements.txt` | latexminted | `added` | `==0.7.1` | `0.7.1` | Current stable floor/ref |
+| `csharp/tools/requirements.txt` | latexrestricted | `added` | `>=0.6.2` | `0.6.2` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/python/pyproject.toml` | furo | `>=2024.8.6` | `>=2025.12.19` | `2025.12.19` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/python/pyproject.toml` | hatchling | `>=0` | `>=1.33.0` | `1.33.0` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/python/pyproject.toml` | mypy | `>=1.13.0,<2.0` | `>=2.4.1` | `2.4.1` | Current stable floor/ref |

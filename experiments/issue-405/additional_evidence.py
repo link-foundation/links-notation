@@ -28,7 +28,9 @@ def graph_rows():
         name = node["groupId"] + ":" + node["artifactId"]
         if parent and not name.startswith("io.github.link-foundation:"):
             rows.append(
-                dict(path=path, name=name, after=node["version"], parent=parent)
+                dict(
+                    path=path, name=name, after=node["version"], parent=parent
+                )
             )
         for child in node.get("children", []):
             visit(child, path, name + "@" + node["version"])
@@ -80,9 +82,13 @@ def resolved_evidence():
             f"| {row['parent']}; {decision} |"
         )
     (OUT / "jvm-transitives.md").write_text("\n".join(lines) + "\n")
-    (OUT / "jvm-transitives.json").write_text(json.dumps(rows, indent=2) + "\n")
+    (OUT / "jvm-transitives.json").write_text(
+        json.dumps(rows, indent=2) + "\n"
+    )
     maven = [r for r in rows if r["path"].startswith("maven-")]
-    (OUT / "maven-transitives.json").write_text(json.dumps(maven, indent=2) + "\n")
+    (OUT / "maven-transitives.json").write_text(
+        json.dumps(maven, indent=2) + "\n"
+    )
     # OSV batch is advisory evidence for the exact resolved Maven coordinates.
     coordinates = sorted({(r["name"], r["after"]) for r in rows})
     request = urllib.request.Request(
@@ -90,7 +96,10 @@ def resolved_evidence():
         data=json.dumps(
             {
                 "queries": [
-                    {"package": {"ecosystem": "Maven", "name": n}, "version": v}
+                    {
+                        "package": {"ecosystem": "Maven", "name": n},
+                        "version": v,
+                    }
                     for n, v in coordinates
                 ]
             }
@@ -102,10 +111,14 @@ def resolved_evidence():
         dict(name=name, version=version, **result)
         for (name, version), result in zip(coordinates, response["results"])
     ]
-    (OUT / "jvm-osv-audit.json").write_text(json.dumps(evidence, indent=2) + "\n")
+    (OUT / "jvm-osv-audit.json").write_text(
+        json.dumps(evidence, indent=2) + "\n"
+    )
     print("JVM:", len(rows), "edges,", len(coordinates), "exact artifacts")
     if any(row.get("vulns") for row in evidence):
-        raise ValueError("OSV reports JVM advisories; review jvm-osv-audit.json")
+        raise ValueError(
+            "OSV reports JVM advisories; review jvm-osv-audit.json"
+        )
 
 
 def runtime_evidence():
@@ -120,8 +133,44 @@ def runtime_evidence():
         "dotnet-version": "11.0.100",
         "bun-version": "1.4.4",
         "ZIZMOR_VERSION": "1.32.0",
+        "zizmor-action-version": "1.32.0",
+        "zizmor-cli-version": "1.32.0",
+        "shellcheck-py-version": "0.11.0.1",
+        "ubuntu-image": "26.04",
+        "macos-image": "26",
+        "windows-image": "2025",
+        "windows-arm-image": "11",
     }
-    pattern = re.compile(r"^\s*(" + "|".join(versions) + r"):\s*([^\n#]+)", re.M)
+    pattern = re.compile(
+        r"^\s*(" + "|".join(versions) + r"):\s*([^\n#]+)", re.M
+    )
+
+    def selections(source):
+        for match in pattern.finditer(source):
+            yield match[1], match[2].strip().strip("\"'")
+        # Action inputs and inline installers are separate selections: updating
+        # only a uses: reference does not update the installed tool.
+        action = None
+        for line in source.splitlines():
+            match = re.search(r"uses:\s*([^@\s]+)@", line)
+            if match:
+                action = match[1]
+            match = re.match(r"\s+version:\s*([0-9.]+)", line)
+            if action == "zizmorcore/zizmor-action" and match:
+                yield "zizmor-action-version", match[1]
+        for match in re.finditer(r"zizmor==([0-9.]+)", source):
+            yield "zizmor-cli-version", match[1]
+        for match in re.finditer(r"shellcheck-py==([0-9.]+)", source):
+            yield "shellcheck-py-version", match[1]
+        for name, version, architecture in re.findall(
+            r"\b(ubuntu|macos|windows)-(\d+(?:\.\d+)?)(-arm|-intel)?\b",
+            source,
+        ):
+            tool = name + "-image"
+            if name == "windows" and architecture == "-arm":
+                tool = "windows-arm-image"
+            yield tool, version
+
     rows = []
     paths = subprocess.check_output(["git", "ls-files"], cwd=ROOT, text=True)
     for relative in paths.splitlines():
@@ -129,7 +178,7 @@ def runtime_evidence():
         if path.suffix not in {".yml", ".yaml"} or "research/" in relative:
             continue
         source = path.read_text()
-        found = list(pattern.finditer(source))
+        found = list(selections(source))
         if not found:
             continue
         old = subprocess.run(
@@ -137,16 +186,16 @@ def runtime_evidence():
             cwd=ROOT,
             capture_output=True,
             text=True,
-            check=True,
         ).stdout
         before = {}
-        for match in pattern.finditer(old):
-            before.setdefault(match[1], set()).add(match[2].strip())
-        for match in found:
-            key, value = match[1], match[2].strip()
+        for key, value in selections(old):
+            before.setdefault(key, set()).add(value)
+        for key, value in found:
             if "${{" in value:
                 continue
             reason = "Current registry runtime default"
+            if key == "windows-arm-image":
+                reason = "Current hosted Windows ARM label; separate architecture from windows-2025 x64"
             if value.startswith("["):
                 reason = "Current compiler plus deliberately retained consumer compatibility test lanes"
             rows.append(
@@ -221,7 +270,9 @@ def runtime_evidence():
         "",
     ]
     (OUT / "toolchains.md").write_text("\n".join(lines))
-    (OUT / "runtime-inventory.json").write_text(json.dumps(rows, indent=2) + "\n")
+    (OUT / "runtime-inventory.json").write_text(
+        json.dumps(rows, indent=2) + "\n"
+    )
     print("Runtime pins:", len(rows))
 
 

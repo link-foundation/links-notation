@@ -329,6 +329,34 @@
     "literal": "11.0.0"
   },
   {
+    "path": "csharp/tools/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "latexminted",
+    "declared": "==0.7.1",
+    "literal": "==0.7.1"
+  },
+  {
+    "path": "csharp/tools/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "latex2pydata",
+    "declared": ">=0.5.0",
+    "literal": ">=0.5.0"
+  },
+  {
+    "path": "csharp/tools/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "latexrestricted",
+    "declared": ">=0.6.2",
+    "literal": ">=0.6.2"
+  },
+  {
+    "path": "csharp/tools/requirements.txt",
+    "ecosystem": "pypi",
+    "name": "Pygments",
+    "declared": ">=2.21.0",
+    "literal": ">=2.21.0"
+  },
+  {
     "path": "java/pom.xml",
     "ecosystem": "maven",
     "name": "org.jspecify:jspecify",

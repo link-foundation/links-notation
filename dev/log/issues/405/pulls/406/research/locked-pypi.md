@@ -24,6 +24,7 @@ Registry snapshots: 2026-11-13 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | babel | new lock | 2.18.0 | 2.18.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | babel | new lock | 2.18.0 | 2.18.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | babel | new lock | 2.18.0 | 2.18.0 | Current registry release |
+| `scripts/ci/requirements.lock` | backports-tarfile | new lock | 1.2.0 | 1.2.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | beautifulsoup4 | new lock | 4.15.0 | 4.15.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | beautifulsoup4 | new lock | 4.15.0 | 4.15.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | beautifulsoup4 | new lock | 4.15.0 | 4.15.0 | Current registry release |
@@ -74,6 +75,7 @@ Registry snapshots: 2026-11-13 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | colorama | new lock | 0.4.6 | 0.4.6 | Current registry release |
 | `python/requirements.lock` | colorama | new lock | 0.4.6 | 0.4.6 | Current registry release |
 | `python/uv.lock` | colorama | new lock | 0.4.6 | 0.4.6 | Current registry release |
+| `scripts/ci/requirements.lock` | colorama | new lock | 0.4.6 | 0.4.6 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock` | colorlog | new lock | 6.12.0 | 6.12.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock` | conan | new lock | 2.34.0 | 2.34.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | coverage | new lock | 7.17.3 | 7.17.3 | Current registry release |
@@ -125,6 +127,7 @@ Registry snapshots: 2026-11-13 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | imagesize | new lock | 2.0.1 | 2.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | imagesize | new lock | 2.0.1 | 2.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock` | importlib-metadata | new lock | 10.2.0 | 10.2.0 | Current registry release |
+| `scripts/ci/requirements.lock` | importlib-metadata | new lock | 10.2.0 | 10.2.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | iniconfig | new lock | 2.3.1 | 2.3.1 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | iniconfig | new lock | 2.3.1 | 2.3.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock` | iniconfig | new lock | 2.3.1 | 2.3.1 | Current registry release |
@@ -144,6 +147,10 @@ Registry snapshots: 2026-11-13 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | jinja2 | new lock | 3.1.6 | 3.1.6 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | jinja2 | new lock | 3.1.6 | 3.1.6 | Current registry release |
 | `scripts/ci/requirements.lock` | keyring | new lock | 25.7.0 | 25.7.0 | Current registry release |
+| `csharp/tools/requirements.lock` | latex2pydata | new lock | 0.5.0 | 0.5.0 | Current registry release |
+| `csharp/tools/requirements.lock` | latexminted | new lock | 0.7.1 | 0.7.1 | Current registry release |
+| `csharp/tools/requirements.lock` | latexrestricted | new lock | 0.6.2 | 0.6.2 | Current registry release |
+| `scripts/ci/requirements.lock` | lazy-importer | new lock | 0.1.0 | 0.1.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | librt | new lock | 0.16.0 | 0.16.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | librt | new lock | 0.16.0 | 0.16.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | librt | new lock | 0.16.0 | 0.16.0 | Current registry release |
@@ -239,6 +246,7 @@ Registry snapshots: 2026-11-13 UTC, `registry-transitive.json`. Before is the in
 | `scripts/ci/requirements.lock` | pycparser | new lock | 3.12 | 3.12 | Current registry release |
 | `python/requirements.lock` | pyflakes | new lock | 4.1.0 | 4.1.0 | Current registry release |
 | `python/uv.lock` | pyflakes | new lock | 4.1.0 | 4.1.0 | Current registry release |
+| `csharp/tools/requirements.lock` | pygments | new lock | 2.21.0 | 2.21.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | pygments | new lock | 2.21.0 | 2.21.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | pygments | new lock | 2.21.0 | 2.21.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock` | pygments | new lock | 2.21.0 | 2.21.0 | Current registry release |
@@ -273,6 +281,7 @@ Registry snapshots: 2026-11-13 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | python-discovery | new lock | 1.9.5 | 1.9.5 | Current registry release |
 | `python/requirements.lock` | pytokens | new lock | 0.4.1 | 0.4.1 | Current registry release |
 | `python/uv.lock` | pytokens | new lock | 0.4.1 | 0.4.1 | Current registry release |
+| `scripts/ci/requirements.lock` | pywin32-ctypes | new lock | 0.2.3 | 0.2.3 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | pyyaml | new lock | 6.0.3 | 6.0.3 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | pyyaml | new lock | 6.0.3 | 6.0.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock` | pyyaml | new lock | 6.0.3 | 6.0.3 | Current registry release |
@@ -369,5 +378,6 @@ Registry snapshots: 2026-11-13 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | virtualenv | new lock | 21.15.6 | 21.15.6 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | virtualenv | new lock | 21.15.6 | 21.15.6 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock` | zipp | new lock | 4.1.2 | 4.1.2 | Current registry release |
+| `scripts/ci/requirements.lock` | zipp | new lock | 4.1.2 | 4.1.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-security.lock` | zizmor | new lock | 1.32.0 | 1.32.0 | Current registry release |
 | `scripts/ci/requirements.lock` | zizmor | new lock | 1.32.0 | 1.32.0 | Current registry release |

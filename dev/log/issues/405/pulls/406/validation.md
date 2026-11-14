@@ -39,7 +39,7 @@ as a passing check; the final successful evidence is identified below.
 | npm | All ten package trees, including archived nested actions | Zero native audit findings; issue405-npm-refresh-all.log and per-tree logs |
 | Yarn | Stored Kotlin graph, 30 packages | Zero findings at low threshold; issue405-yarn-stored-audit.log |
 | Cargo | All eleven native lockfiles, including probes/templates | Zero RustSec advisories; per-lock issue-405-audit-*.json |
-| Python | All eight hash-checked requirements locks | Zero pip-audit findings; issue-405-pip-audit-locks.log and JSON |
+| Python | All nine hash-checked requirements locks | Zero pip-audit findings; issue-405-pip-audit-locks.log and JSON |
 | Composer | All five locks, including root/benchmarks/templates | Zero native audit findings; issue-405-composer-*.log |
 | NuGet | All 21 independently restored projects; final runner telemetry graph audited again | Zero vulnerable packages; issue-405-audit-nuget-*.json; issue405-nuget-final-active-audit.json |
 | Go | Active and benchmark module graphs | Zero govulncheck findings; saved native command logs |
@@ -63,12 +63,12 @@ Gradle worker, which passes formatting and JVM tests with the final graph.
 - Latest-head hosted CI must pass before completion. Android, iOS/macOS,
   browser/differential and platform matrix checks are preserved in CI; local
   Linux results do not stand in for them. No 0.31.4 registry delivery is claimed.
-- Archived template snapshots contain selected configuration files. Exact
-  upstream application sources have now been restored temporarily from SHAS.txt,
-  with the updated snapshots overlaid, to resolve missing-input limitations.
-  Original JS policy assertions still require old tool versions and ESLint 10
-  reveals additional findings in upstream sources; these checks remain under
-  investigation. A zero-test Node invocation is not counted as a passing suite.
+- Archived snapshots contain selected configuration files. Exact original
+  application sources for the changed JS/PHP/C# integrations were restored
+  temporarily from SHAS.txt, with the updated snapshots overlaid. Their final
+  checks pass as recorded below. These temporary upstream sources are validation
+  inputs, not additional product sources or a claim to test every uncaptured
+  third-party application. A zero-test Node invocation is never counted.
 - KGP rootPackageJson resolution-input tracking needs an upstream YouTrack
   report. GitHub issues are disabled for JetBrains/kotlin and an authenticated
   YouTrack account is unavailable. The researched, reproducible report remains
@@ -113,3 +113,77 @@ checks are preserved in research/ci-round-1.tar.gz.
 `gh pr diff 406` rejects the 552-file diff with HTTP 406 (maximum 300 files).
 The paginated PR-files API and complete native base-to-head diff were saved;
 the 107-file implementation/configuration diff was reviewed in bounded chunks.
+
+## Second CI correction and restored template checks
+
+Head `3aebce8edb143f2333ad8ba3a0cfcd106beb6bb3`, all six runs created
+2026-11-13 23:24:42 UTC and completed before this correction batch.
+The 90 CI jobs concluded with 79 successes, six failures and five existing
+conditional skips. Three failures were rollups of the other three root causes:
+
+| Failed job log | Exact evidence | Correction / local proof |
+| --- | --- | --- |
+| CI-job-132236008048.log | Composer stale content hash, lines 213–216 | Native update --lock; strict validation for root and benchmark passed |
+| CI-job-132237323848.log | Python 3.11 hash install misses backports.tarfile, lines 313–315 | Native universal lock at supported 3.11 floor; hash installs and audits pass on 3.11 and 3.15 |
+| CI-job-132237745384.log | Distro latexminted 0.6.0 argparse `color` failure, line 911 | Current upstream executable/styles installed together; Python 3.15 version/checksums/audit pass; full PDF remains a hosted CI check |
+| links-43526909433.log | One authored migration URL and eight relative links inside downloaded third-party guidance, lines 588–609 | Correct the authored URL; preserve downloaded document as gzip without weakening link coverage |
+
+The six failed job logs and the links log are preserved in
+`research/ci-round-2.tar.gz`, with a SHA-256 index. The full 90-job CLI log
+request hit GitHub's API limit; no empty file is counted as archived evidence.
+The paginated job metadata records exact job IDs and this SHA.
+
+The complete temporary applications used the exact upstream SHAs recorded in
+both template snapshots. `experiments/issue-405/restore-template-inputs.py`
+restores and overlays tracked captures, reuses installed package trees, aligns
+uncaptured validation workflows to the same registry selections, regenerates
+the external Deno mirror lock natively, and initializes a disposable Git index
+required by the original policy tests. Its end-to-end restore passed.
+Deno's 24-hour minimum-age filter was overridden only for this deliberate
+lock refresh, because ESLint 10.15.0 was newly published. Deno's emulated Node
+26.5.1 warns below the declared Node floor; lock resolution is not claimed as
+runtime execution on that Node version.
+
+| Snapshot / command | Final result | Log in additional-checks.tar.gz |
+| --- | --- | --- |
+| 330 JS: declared npm test | 487 passed, zero skipped | issue405-restored-330-js-declared-test-final.log |
+| 377 JS: declared npm test, one worker | 1,050 passed, zero skipped | issue405-restored-377-js-declared-test-corrected.log |
+| Both JS snapshots: lint / format / duplication | Passed; original unchanged-line lint warnings remain reported by the existing policy | issue405-restored-330-js-lint-corrected.log; issue405-restored-377-js-lint-final.log; final format and duplication logs |
+| 330 PHP: Composer check and test | 112 tests / 512 assertions; PHPStan/style passed; no warnings or deprecations | issue405-restored-330-php-check-corrected.log; issue405-restored-330-php-test-corrected.log |
+| 377 PHP: Composer check and test | 128 tests / 579 assertions; PHPStan/style passed; no warnings or deprecations | issue405-restored-377-php-check-corrected.log; issue405-restored-377-php-test-corrected.log |
+| 377 C#: Bun helper suite / lint / format / TypeScript | 303 passed; all checks passed using installed .NET 11 | issue405-restored-377-csharp-script-final.log; issue405-restored-377-csharp-check-final.log |
+| 377 C#: restored core/library tests | 21 passed; library/test formatting checked separately | issue405-restored-377-csharp-test-clean.log; issue405-restored-377-csharp-library-format.log |
+| 330 C#: workflow injection/credential policy | Seven passed | issue405-330-csharp-workflow-final.log |
+| Current tool policy regression | Failed first at old zizmor action map; final eleven pass | issue405-zizmor-policy-before.log; issue405-zizmor-policy-after.log |
+
+The new captured policy tests are the exact original test files with updated
+current-version assertions; the implementation checks were retained. The
+475-line reviewed source delta against the recorded upstream tarballs is saved
+as issue405-restored-source-changes.diff. JS native glob's real broken-link and
+file-layout fixture also passes. PHPUnit's removed executionOrder dependency
+syntax is replaced by its native resolveDependencies setting. Improved PHPStan
+narrowing uses JSON_THROW_ON_ERROR instead of redundant casts/assertions.
+The finite minimatch security probe now verifies the upstream expansion-limit
+error and a valid nested match; no stress size or security limit was increased.
+
+The inline zizmor installer and action inputs now all select 1.32.0. The action's
+native hashed tool lock confirms compatibility. Explicit runner versions are
+updated across every archived snapshot; Windows 11 ARM is the current distinct
+ARM label, alongside Windows Server 2025 x64. The complete runtime table now
+records 800 selections. The three newly explicit TeX styles have their own
+before/current registry table in research/minted-tools.md.
+
+
+The minimal KGP resolution-input probe independently reproduces the remaining
+upstream bug with three successful package-generation commands and no compiler
+or package installation. The second command stays UP-TO-DATE with the previous
+resolution; a forced rerun writes the new resolution. Its report draft records
+the corrected canonical-range assertion and primary-source input inspection.
+
+The new VSTest container warning matches existing
+[microsoft/vstest#16652](https://github.com/microsoft/vstest/issues/16652).
+Setting `VSTEST_ARTIFACTS_BASE_DIRECTORY=/tmp` for this container lets the SDK
+create its protected per-session directory. The restored C# suite then passes
+all 21 tests without the warning. This keeps directory verification enabled;
+no SDK/package downgrade or warning suppression is used. Full upstream text,
+comments and inspected screenshots are preserved with the research/logs.
