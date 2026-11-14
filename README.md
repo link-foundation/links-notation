@@ -329,7 +329,7 @@ All ten language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP, C
 <!-- test-counts:start -->
 | Language | Tests | Test categories |
 | --- | --- | --- |
-| Python | 279 | 27 |
+| Python | 281 | 28 |
 | JavaScript | 351 | 34 |
 | Rust | 430 | 32 |
 | C# | 325 | 30 |

@@ -18,7 +18,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Language | Total Tests | Test Categories |
 |----------|-------------|----------------|
-| Python | 279 | 27 |
+| Python | 281 | 28 |
 | JavaScript | 351 | 34 |
 | Rust | 430 | 32 |
 | C# | 325 | 30 |
@@ -1151,6 +1151,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | vec str to anonymous link | ❌ | ❌ | [✅](rust/links-notation/tests/tuple_tests.rs#L313) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 **Category totals:** Python: 0, JavaScript: 0, Rust: 47, C#: 2, Go: 0, Java: 0, PHP: 0, C++: 0, Swift: 0, Kotlin: 0
+
+## Typed Package
+
+| Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
+|-----------|---|---|---|---|---|---|---|---|---|---|
+| the marker is package data for the wheel and sdist | [✅](python/tests/test_typed_package.py#L14) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| the package has a py typed marker | [✅](python/tests/test_typed_package.py#L10) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+**Category totals:** Python: 2, JavaScript: 0, Rust: 0, C#: 0, Go: 0, Java: 0, PHP: 0, C++: 0, Swift: 0, Kotlin: 0
 
 ## Version
 
@@ -2286,11 +2295,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
+**Typed Package** (2 missing):
+- themarkerispackagedataforthewheelandsdist
+- thepackagehasapytypedmarker
+
 **Version** (2 missing):
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 451 tests**
+**Total missing: 453 tests**
 
 ### Rust Missing Tests
 
@@ -2730,11 +2743,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - namedtupletolink
 - tupletolink
 
+**Typed Package** (2 missing):
+- themarkerispackagedataforthewheelandsdist
+- thepackagehasapytypedmarker
+
 **Version** (2 missing):
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 372 tests**
+**Total missing: 374 tests**
 
 ### C# Missing Tests
 
@@ -3286,11 +3303,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
+**Typed Package** (2 missing):
+- themarkerispackagedataforthewheelandsdist
+- thepackagehasapytypedmarker
+
 **Version** (2 missing):
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 476 tests**
+**Total missing: 478 tests**
 
 ### Go Missing Tests
 
@@ -4008,11 +4029,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
+**Typed Package** (2 missing):
+- themarkerispackagedataforthewheelandsdist
+- thepackagehasapytypedmarker
+
 **Version** (2 missing):
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 630 tests**
+**Total missing: 632 tests**
 
 ### Java Missing Tests
 
@@ -4687,11 +4712,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
+**Typed Package** (2 missing):
+- themarkerispackagedataforthewheelandsdist
+- thepackagehasapytypedmarker
+
 **Version** (2 missing):
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 587 tests**
+**Total missing: 589 tests**
 
 ### PHP Missing Tests
 
@@ -5307,11 +5336,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
+**Typed Package** (2 missing):
+- themarkerispackagedataforthewheelandsdist
+- thepackagehasapytypedmarker
+
 **Version** (2 missing):
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 536 tests**
+**Total missing: 538 tests**
 
 ### C++ Missing Tests
 
@@ -5797,11 +5830,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
+**Typed Package** (2 missing):
+- themarkerispackagedataforthewheelandsdist
+- thepackagehasapytypedmarker
+
 **Version** (2 missing):
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 422 tests**
+**Total missing: 424 tests**
 
 ### Swift Missing Tests
 
@@ -6322,11 +6359,15 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
+**Typed Package** (2 missing):
+- themarkerispackagedataforthewheelandsdist
+- thepackagehasapytypedmarker
+
 **Version** (2 missing):
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 453 tests**
+**Total missing: 455 tests**
 
 ### Kotlin Missing Tests
 
@@ -6842,9 +6883,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 - vecstringtoanonymouslink
 - vecstrtoanonymouslink
 
+**Typed Package** (2 missing):
+- themarkerispackagedataforthewheelandsdist
+- thepackagehasapytypedmarker
+
 **Version** (2 missing):
 - uninstalledcheckoutreadspyproject
 - versionmatchespyproject
 
-**Total missing: 444 tests**
+**Total missing: 446 tests**
 
