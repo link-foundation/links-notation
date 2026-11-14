@@ -12,7 +12,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.31.5</version>
+    <version>0.31.6</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ Add the dependency to your `pom.xml`:
 Add the dependency to your `build.gradle`:
 
 ```groovy
-implementation 'io.github.link-foundation:links-notation:0.31.5'
+implementation 'io.github.link-foundation:links-notation:0.31.6'
 ```
 
 ### Local Development Setup

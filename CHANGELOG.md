@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Python: ship the PEP 561 `py.typed` marker so type checkers use the package's
+  annotations, and type-check an installed-wheel consumer in CI. Prepare
+  0.31.6; see [the release fragment](changelog.d/411.md) and
+  [issue 411](https://github.com/link-foundation/links-notation/issues/411).
 - Keep how references were written (raw ID text and quote) on parsed links, add
   an AST mode that leaves it out, and add a lossless concrete syntax tree, in
   all eight bindings. Prepare 0.28.0; see
@@ -17,6 +21,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Stop posting `@dependabot rebase` comments that Dependabot rejects from
+  `GITHUB_TOKEN`, and close Dependabot pull requests whose versions `main`
+  already has. See [the release fragment](changelog.d/410.md) and
+  [issue 410](https://github.com/link-foundation/links-notation/issues/410).
 - Refresh dependency declarations, locks, CI toolchains and archived templates;
   prepare 0.31.4. See [the release fragment](changelog.d/405.md).
 

@@ -309,7 +309,7 @@ wheels = [
 
 [[package]]
 name = "links-notation"
-version = "0.31.5"
+version = "0.31.6"
 source = { editable = "." }
 
 [package.optional-dependencies]

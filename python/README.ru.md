@@ -144,9 +144,10 @@ for link in parse_chunks(["одна свя", "зь\nвторая связь"]):
 
 ### Проверка типов
 
-Пакет содержит маркер `py.typed` по [PEP 561](https://peps.python.org/pep-0561/),
-поэтому mypy, Pyright и другие анализаторы типов используют его встроенные
-аннотации, а не сообщают `import-untyped`:
+Пакет содержит маркер `py.typed` по
+[PEP 561](https://peps.python.org/pep-0561/), поэтому mypy, Pyright и другие
+анализаторы типов используют его встроенные аннотации, а не сообщают
+`import-untyped`:
 
 ```python
 from links_notation import Link, Parser
