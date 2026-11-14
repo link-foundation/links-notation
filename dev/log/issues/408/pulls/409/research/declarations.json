@@ -765,6 +765,13 @@
   {
     "path": "scripts/ci/requirements.txt",
     "ecosystem": "pypi",
+    "name": "pypi-attestations",
+    "declared": ">=0.0.31",
+    "literal": ">=0.0.31"
+  },
+  {
+    "path": "scripts/ci/requirements.txt",
+    "ecosystem": "pypi",
     "name": "zizmor",
     "declared": "==1.32.0",
     "literal": "==1.32.0"
@@ -3885,6 +3892,41 @@
     "literal": "^0.9.1"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "semver",
+    "declared": "^7.8.6",
+    "literal": "^7.8.6"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "browser-commander",
+    "declared": "0.34.1",
+    "literal": "0.34.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "playwright",
+    "declared": "1.65.1",
+    "literal": "1.65.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "command-stream",
+    "declared": "^2.6.0",
+    "literal": "^2.6.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "lino-arguments",
+    "declared": "^0.4.1",
+    "literal": "^0.4.1"
+  },
+  {
     "path": "dev/log/issues/330/pulls/331/templates/php/.github/workflows/docs.yml",
     "ecosystem": "github",
     "name": "actions/checkout",
@@ -5542,6 +5584,27 @@
     "name": "test-anywhere",
     "declared": "^0.9.1",
     "literal": "^0.9.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "semver",
+    "declared": "^7.8.6",
+    "literal": "^7.8.6"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "browser-commander",
+    "declared": "0.34.1",
+    "literal": "0.34.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package.json",
+    "ecosystem": "npm",
+    "name": "playwright",
+    "declared": "1.65.1",
+    "literal": "1.65.1"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/php/.github/workflows/docs.yml",

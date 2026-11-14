@@ -51,6 +51,25 @@ def main():
         module = load("evidence")
         module.OUT = OUT.parent
         module.RESEARCH = OUT
+        original_reason = module.reason
+
+        def reason(row):
+            if row["ecosystem"] == "pypi" and row["name"] == "sigstore-models":
+                parents = json.loads((OUT / "publisher-parent-bounds.json").read_text())
+                bounds = [
+                    f"{name}@{info['version']} requires {requirement}"
+                    for name, info in parents.items()
+                    for requirement in info["requires_dist"]
+                    if requirement.startswith("sigstore-models")
+                ]
+                assert bounds
+                return (
+                    "; ".join(bounds)
+                    + "; latest is outside the parent-supported API range"
+                )
+            return original_reason(row)
+
+        module.reason = reason
     sys.argv = [sys.argv[0]]
     if args.resolve:
         sys.argv.append("--resolve")

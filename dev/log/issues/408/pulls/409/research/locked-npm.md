@@ -234,6 +234,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | @octokit/types | 16.0.0, 17.0.0, 18.0.0 | 17.0.0 | 18.0.0 | @octokit/plugin-retry requires @octokit/types^17.0.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | @octokit/types | 16.0.0, 17.0.0, 18.0.0 | 18.0.0 | 18.0.0 | Current registry release |
 | `docs/website/package-lock.json` | @oxc-project/types | 0.156.0 | 0.156.0 | 0.158.0 | rolldown requires @oxc-project/types=0.156.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @peggyjs/from-mem | new lock | 3.1.3 | 4.0.0 | peggy requires @peggyjs/from-mem3.1.3; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @peggyjs/from-mem | 3.1.3 | 3.1.3 | 4.0.0 | peggy requires @peggyjs/from-mem3.1.3; latest is outside the parent-supported API range; native resolver retained this version |
 | `js/bun.lock` | @peggyjs/from-mem | 4.0.0 | 4.0.0 | 4.0.0 | Current registry release |
 | `js/package-lock.json` | @peggyjs/from-mem | 4.0.0 | 4.0.0 | 4.0.0 | Current registry release |
@@ -245,18 +246,31 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | @protobuf-ts/runtime | 2.11.1 | 2.11.1 | 2.11.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | @protobuf-ts/runtime-rpc | 2.11.1 | 2.11.1 | 2.11.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | @protobuf-ts/runtime-rpc | 2.11.1 | 2.11.1 | 2.11.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-android-arm-eabi | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-android-arm-eabi | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-android-arm64 | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-android-arm64 | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-darwin-arm64 | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-darwin-arm64 | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-darwin-x64 | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-darwin-x64 | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-linux-arm-gnueabihf | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-linux-arm-gnueabihf | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-linux-arm64-gnu | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-linux-arm64-gnu | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-linux-arm64-musl | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-linux-arm64-musl | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-linux-x64-gnu | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-linux-x64-gnu | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-linux-x64-musl | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-linux-x64-musl | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-win32-arm64-msvc | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-win32-arm64-msvc | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-win32-ia32-msvc | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-win32-ia32-msvc | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @resvg/resvg-js-win32-x64-msvc | new lock | 2.6.2 | 2.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @resvg/resvg-js-win32-x64-msvc | 2.6.2 | 2.6.2 | 2.6.2 | Current registry release |
 | `docs/website/package-lock.json` | @rolldown/binding-android-arm-eabi | 1.2.19 | 1.2.19 | 1.3.2 | rolldown requires @rolldown/binding-android-arm-eabi1.2.19; latest is outside the parent-supported API range; native resolver retained this version |
 | `docs/website/package-lock.json` | @rolldown/binding-android-arm64 | 1.2.19 | 1.2.19 | 1.3.2 | rolldown requires @rolldown/binding-android-arm641.2.19; latest is outside the parent-supported API range; native resolver retained this version |
@@ -275,7 +289,9 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `docs/website/package-lock.json` | @rolldown/binding-win32-arm64-msvc | 1.2.19 | 1.2.19 | 1.3.2 | rolldown requires @rolldown/binding-win32-arm64-msvc1.2.19; latest is outside the parent-supported API range; native resolver retained this version |
 | `docs/website/package-lock.json` | @rolldown/binding-win32-x64-msvc | 1.2.19 | 1.2.19 | 1.3.2 | rolldown requires @rolldown/binding-win32-x64-msvc1.2.19; latest is outside the parent-supported API range; native resolver retained this version |
 | `docs/website/package-lock.json` | @rolldown/pluginutils | 1.1.1 | 1.1.1 | 1.1.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @sec-ant/readable-stream | new lock | 0.4.1 | 0.7.1 | get-stream requires @sec-ant/readable-stream^0.4.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @sec-ant/readable-stream | 0.4.1 | 0.4.1 | 0.7.1 | get-stream requires @sec-ant/readable-stream^0.4.1; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @sindresorhus/merge-streams | new lock | 4.0.0 | 4.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @sindresorhus/merge-streams | 4.0.0 | 4.0.0 | 4.0.0 | Current registry release |
 | `docs/website/package-lock.json` | @tybys/wasm-util | 0.10.4 | 0.10.4 | 0.10.4 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/csharp/package-lock.json` | @types/bun | 1.4.4 | 1.4.4 | 1.4.4 | Current registry release |
@@ -365,6 +381,9 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | @typespec/ts-http-runtime | 0.3.10 | 0.3.10 | 0.3.10 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | @typespec/ts-http-runtime | 0.3.10 | 0.3.10 | 0.3.10 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | @vercel/ncc | 0.45.0 | 0.45.0 | 0.45.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @xmldom/xmldom | new lock | 0.9.12 | 0.9.12 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @xmldom/xmldom | new lock | 0.9.12 | 0.9.12 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | @xterm/headless | new lock | 6.0.0 | 6.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | @xterm/headless | 6.0.0 | 6.0.0 | 6.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | @zip.js/zip.js | 2.25.0 | 2.25.0 | 2.25.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | abort-controller | 3.0.0 | 3.0.0 | 3.0.0 | Current registry release |
@@ -389,7 +408,9 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `docs/website/package-lock.json` | ajv | 6.15.0 | 6.15.0 | 8.20.0 | eslint requires ajv^6.14.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `js/bun.lock` | ajv | 6.15.0 | 6.15.0 | 8.20.0 | eslint@10.15.0 requires ajv^6.14.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `js/package-lock.json` | ajv | 6.15.0 | 6.15.0 | 8.20.0 | eslint requires ajv^6.14.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | ansi-regex | new lock | 6.6.0 | 6.6.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | ansi-regex | 6.6.0 | 6.6.0 | 6.6.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | ansi-styles | new lock | 6.2.3 | 7.0.0 | wrap-ansi requires ansi-styles^6.2.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | ansi-styles | 6.2.3 | 6.2.3 | 7.0.0 | wrap-ansi requires ansi-styles^6.2.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `benchmarks/tools/package-lock.json` | anynum | 1.0.1 | 1.0.1 | 1.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | anynum | 1.0.1 | 1.0.1 | 1.0.1 | Current registry release |
@@ -440,10 +461,14 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | base64-js | 1.5.1 | 1.5.1 | 1.5.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | before-after-hook | 4.0.0 | 4.0.0 | 4.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | before-after-hook | 4.0.0 | 4.0.0 | 4.0.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | better-sqlite3 | new lock | 13.2.0 | 13.2.0 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | better-sqlite3 | new lock | 13.2.0 | 13.2.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | binary | 0.3.0 | 0.3.0 | 0.3.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | binary | 0.3.0 | 0.3.0 | 0.3.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | bottleneck | 2.19.5 | 2.19.5 | 2.19.5 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | bottleneck | 2.19.5 | 2.19.5 | 2.19.5 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | bplist-parser | new lock | 0.5.0 | 0.5.0 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | bplist-parser | new lock | 0.5.0 | 0.5.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | brace-expansion | 5.0.13 | 5.0.13 | 5.0.13 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/csharp/package-lock.json` | brace-expansion | 5.0.13 | 5.0.13 | 5.0.13 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | brace-expansion | 2.1.8, 5.0.13 | 2.1.8 | 5.0.13 | minimatch requires brace-expansion^2.0.1; latest is outside the parent-supported API range; native resolver retained this version |
@@ -455,6 +480,8 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `js/bun.lock` | brace-expansion | 5.0.12 | 5.0.13 | 5.0.13 | Current registry release |
 | `js/package-lock.json` | brace-expansion | 5.0.13 | 5.0.13 | 5.0.13 | Current registry release |
 | `kotlin/kotlin-js-store/yarn.lock` | brace-expansion | 5.0.13 | 5.0.13 | 5.0.13 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | browser-commander | new lock | 0.34.1 | 0.34.1 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | browser-commander | new lock | 0.34.1 | 0.34.1 | Current registry release |
 | `kotlin/kotlin-js-store/yarn.lock` | browser-stdout | 1.3.1 | 1.3.1 | 1.3.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | buffer | 6.0.3 | 6.0.3 | 6.0.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | buffer | 6.0.3 | 6.0.3 | 6.0.3 | Current registry release |
@@ -483,8 +510,11 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | chainsaw | 0.1.0 | 0.1.0 | 0.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | chainsaw | 0.1.0 | 0.1.0 | 0.1.0 | Current registry release |
 | `kotlin/kotlin-js-store/yarn.lock` | chokidar | 5.0.0 | 5.0.0 | 6.0.0 | Yarn selectors: chokidar@^5.0.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | cliui | new lock | 9.0.1 | 9.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | cliui | 9.0.1 | 9.0.1 | 9.0.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | command-stream | new lock | 2.6.0 | 2.6.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | command-stream | 2.6.0 | 2.6.0 | 2.6.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | commander | new lock | 14.0.3 | 15.1.0 | peggy requires commander^14.0.3; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | commander | 14.0.3 | 14.0.3 | 15.1.0 | peggy requires commander^14.0.3; latest is outside the parent-supported API range; native resolver retained this version |
 | `js/bun.lock` | commander | 14.0.3 | 14.0.3 | 15.1.0 | peggy@5.1.1 requires commander^14.0.3; latest is outside the parent-supported API range; native resolver retained this version |
 | `js/package-lock.json` | commander | 14.0.3 | 14.0.3 | 15.1.0 | peggy requires commander^14.0.3; latest is outside the parent-supported API range; native resolver retained this version |
@@ -505,6 +535,8 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `js/bun.lock` | cross-spawn | 7.0.6 | 7.0.6 | 7.0.6 | Current registry release |
 | `js/package-lock.json` | cross-spawn | 7.0.6 | 7.0.6 | 7.0.6 | Current registry release |
 | `benchmarks/tools/package-lock.json` | csv-parse | 7.0.3 | 7.0.3 | 7.0.3 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | csv-parse | new lock | 7.0.3 | 7.0.3 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | csv-parse | new lock | 7.0.3 | 7.0.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | data-view-buffer | 1.0.2 | 1.0.2 | 1.0.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | data-view-buffer | 1.0.2 | 1.0.2 | 1.0.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | data-view-byte-length | 1.0.2 | 1.0.2 | 1.0.2 | Current registry release |
@@ -534,6 +566,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `kotlin/kotlin-js-store/yarn.lock` | diff | 9.0.0 | 9.0.0 | 9.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | dunder-proto | 1.0.1 | 1.0.1 | 1.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | dunder-proto | 1.0.1 | 1.0.1 | 1.0.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | emoji-regex | new lock | 10.6.0 | 11.0.0 | string-width requires emoji-regex^10.3.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | emoji-regex | 10.6.0 | 10.6.0 | 11.0.0 | string-width requires emoji-regex^10.3.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | es-abstract | 1.24.2 | 1.24.2 | 1.24.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | es-abstract | 1.24.2 | 1.24.2 | 1.24.2 | Current registry release |
@@ -549,6 +582,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | es-set-tostringtag | 2.1.0 | 2.1.0 | 2.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | es-to-primitive | 1.3.4 | 1.3.4 | 1.3.4 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | es-to-primitive | 1.3.4 | 1.3.4 | 1.3.4 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | escalade | new lock | 3.2.0 | 3.2.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | escalade | 3.2.0 | 3.2.0 | 3.2.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | escape-string-regexp | 4.0.0 | 4.0.0 | 5.0.0 | eslint requires escape-string-regexp^4.0.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/csharp/package-lock.json` | escape-string-regexp | 4.0.0 | 4.0.0 | 5.0.0 | eslint requires escape-string-regexp^4.0.0; latest is outside the parent-supported API range; native resolver retained this version |
@@ -620,6 +654,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | events | 3.3.0 | 3.3.0 | 3.3.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | events-universal | 1.0.1 | 1.0.1 | 1.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | events-universal | 1.0.1 | 1.0.1 | 1.0.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | execa | new lock | 10.2.1 | 10.2.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | execa | 10.2.1 | 10.2.1 | 10.2.1 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | fast-deep-equal | 3.1.3 | 3.1.3 | 3.1.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/csharp/package-lock.json` | fast-deep-equal | 3.1.3 | 3.1.3 | 3.1.3 | Current registry release |
@@ -658,6 +693,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | fdir | 6.5.0 | 6.5.0 | 6.5.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | fdir | 6.5.0 | 6.5.0 | 6.5.0 | Current registry release |
 | `docs/website/package-lock.json` | fdir | 6.5.0 | 6.5.0 | 6.5.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | figures | new lock | 6.1.0 | 6.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | figures | 6.1.0 | 6.1.0 | 6.1.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | file-entry-cache | 11.1.5 | 11.1.5 | 11.1.5 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/csharp/package-lock.json` | file-entry-cache | 11.1.5 | 11.1.5 | 11.1.5 | Current registry release |
@@ -697,16 +733,21 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | functions-have-names | 1.2.3 | 1.2.3 | 1.2.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | generator-function | 2.0.1 | 2.0.1 | 2.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | generator-function | 2.0.1 | 2.0.1 | 2.0.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | get-caller-file | new lock | 2.0.5 | 2.0.5 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | get-caller-file | 2.0.5 | 2.0.5 | 2.0.5 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | get-east-asian-width | new lock | 1.7.0 | 1.7.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | get-east-asian-width | 1.7.0 | 1.7.0 | 1.7.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | get-intrinsic | 1.3.0 | 1.3.0 | 1.3.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | get-intrinsic | 1.3.0 | 1.3.0 | 1.3.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | get-proto | 1.0.1 | 1.0.1 | 1.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | get-proto | 1.0.1 | 1.0.1 | 1.0.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | get-stream | new lock | 9.0.1 | 9.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | get-stream | 9.0.1 | 9.0.1 | 9.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | get-symbol-description | 1.1.0 | 1.1.0 | 1.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | get-symbol-description | 1.1.0 | 1.1.0 | 1.1.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | getenv | new lock | 2.0.0 | 2.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | getenv | 2.0.0 | 2.0.0 | 2.0.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | gifenc | new lock | 1.0.3 | 1.0.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | gifenc | 1.0.3 | 1.0.3 | 1.0.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | glob | 14.0.6 | 14.0.6 | 14.0.6 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | glob | 14.0.6 | 14.0.6 | 14.0.6 | Current registry release |
@@ -764,6 +805,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | https-proxy-agent | 9.1.0 | 9.1.0 | 9.1.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | human-id | 4.2.2 | 4.2.2 | 4.2.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | human-id | 4.2.2 | 4.2.2 | 4.2.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | human-signals | new lock | 8.0.1 | 8.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | human-signals | 8.0.1 | 8.0.1 | 8.0.1 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | husky | 9.1.7 | 9.1.7 | 9.1.7 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | husky | 9.1.7 | 9.1.7 | 9.1.7 | Current registry release |
@@ -830,6 +872,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | is-number-object | 1.1.1 | 1.1.1 | 1.1.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | is-number-object | 1.1.1 | 1.1.1 | 1.1.1 | Current registry release |
 | `kotlin/kotlin-js-store/yarn.lock` | is-path-inside | 4.0.0 | 4.0.0 | 4.0.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | is-plain-obj | new lock | 4.1.0 | 4.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | is-plain-obj | 4.1.0 | 4.1.0 | 4.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | is-regex | 1.2.1 | 1.2.1 | 1.2.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | is-regex | 1.2.1 | 1.2.1 | 1.2.1 | Current registry release |
@@ -837,6 +880,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | is-set | 2.0.3 | 2.0.3 | 2.0.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | is-shared-array-buffer | 1.0.4 | 1.0.4 | 1.0.4 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | is-shared-array-buffer | 1.0.4 | 1.0.4 | 1.0.4 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | is-stream | new lock | 4.0.1 | 4.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | is-stream | 2.0.1 | 2.0.1 | 4.0.1 | archiver-utils requires is-stream^2.0.1; compress-commons requires is-stream^2.0.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | is-stream | 4.0.1 | 4.0.1 | 4.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | is-stream | 2.0.1 | 2.0.1 | 4.0.1 | archiver-utils requires is-stream^2.0.1; compress-commons requires is-stream^2.0.1; latest is outside the parent-supported API range; native resolver retained this version |
@@ -846,6 +890,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | is-symbol | 1.1.1 | 1.1.1 | 1.1.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | is-typed-array | 1.1.15 | 1.1.15 | 1.1.15 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | is-typed-array | 1.1.15 | 1.1.15 | 1.1.15 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | is-unicode-supported | new lock | 2.1.0 | 2.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | is-unicode-supported | 2.1.0 | 2.1.0 | 2.1.0 | Current registry release |
 | `kotlin/kotlin-js-store/yarn.lock` | is-unicode-supported | 0.1.0 | 0.1.0 | 2.1.0 | Yarn selectors: is-unicode-supported@^0.1.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `benchmarks/tools/package-lock.json` | is-unsafe | 2.0.3 | 2.0.3 | 2.0.3 | Current registry release |
@@ -935,10 +980,17 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `docs/website/package-lock.json` | lightningcss-linux-x64-musl | 1.33.0 | 1.33.0 | 1.33.0 | Current registry release |
 | `docs/website/package-lock.json` | lightningcss-win32-arm64-msvc | 1.33.0 | 1.33.0 | 1.33.0 | Current registry release |
 | `docs/website/package-lock.json` | lightningcss-win32-x64-msvc | 1.33.0 | 1.33.0 | 1.33.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | links-notation | new lock | 0.11.2 | 0.31.4 | lino-env requires links-notation^0.11.2; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | links-notation | new lock | 0.13.0 | 0.31.4 | meta-language requires links-notation0.13.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | links-notation | new lock | 0.25.2 | 0.31.4 | browser-commander requires links-notation^0.25.2; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | links-notation | new lock | 0.31.4 | 0.31.4 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | links-notation | 0.11.2, 0.13.0, 0.31.3 | 0.11.2 | 0.31.4 | lino-env requires links-notation^0.11.2; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | links-notation | 0.11.2, 0.13.0, 0.31.3 | 0.13.0 | 0.31.4 | meta-language requires links-notation0.13.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | links-notation | 0.11.2, 0.13.0, 0.31.3 | 0.25.2 | 0.31.4 | browser-commander requires links-notation^0.25.2; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | links-notation | 0.11.2, 0.13.0, 0.31.3 | 0.31.4 | 0.31.4 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | lino-arguments | new lock | 0.4.1 | 0.4.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | lino-arguments | 0.4.1 | 0.4.1 | 0.4.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | lino-env | new lock | 0.2.8 | 0.2.8 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | lino-env | 0.2.8 | 0.2.8 | 0.2.8 | Current registry release |
 | `benchmarks/tools/package-lock.json` | lino-objects-codec | 0.9.6 | 0.9.6 | 0.9.6 | Current registry release |
 | `docs/comparison/package-lock.json` | lino-objects-codec | 0.9.6 | 0.9.6 | 0.9.6 | Current registry release |
@@ -953,11 +1005,14 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `js/package-lock.json` | locate-path | 6.0.0 | 6.0.0 | 8.0.0 | find-up requires locate-path^6.0.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | lodash | 4.18.1 | 4.18.1 | 4.18.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | lodash | 4.18.1 | 4.18.1 | 4.18.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | log-lazy | new lock | 1.0.4 | 1.0.4 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | log-lazy | new lock | 1.0.4 | 1.0.4 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | lru-cache | 11.5.3 | 11.5.3 | 11.5.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | lru-cache | 11.5.3 | 11.5.3 | 11.5.3 | Current registry release |
 | `kotlin/kotlin-js-store/yarn.lock` | lru-cache | 11.5.3 | 11.5.3 | 11.5.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | math-intrinsics | 1.1.0 | 1.1.0 | 1.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | math-intrinsics | 1.1.0 | 1.1.0 | 1.1.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | meta-language | new lock | 0.46.0 | 0.46.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | meta-language | 0.46.0 | 0.46.0 | 0.46.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | minimatch | 11.0.8 | 11.0.8 | 11.0.8 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/csharp/package-lock.json` | minimatch | 11.0.8 | 11.0.8 | 11.0.8 | Current registry release |
@@ -994,10 +1049,15 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `docs/website/package-lock.json` | natural-compare | 1.4.0 | 1.4.0 | 1.4.0 | Current registry release |
 | `js/bun.lock` | natural-compare | 1.4.0 | 1.4.0 | 1.4.0 | Current registry release |
 | `js/package-lock.json` | natural-compare | 1.4.0 | 1.4.0 | 1.4.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | node-addon-api | new lock | 7.1.1 | 8.9.2 | node-pty requires node-addon-api^7.1.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | node-addon-api | new lock | 8.9.2 | 8.9.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | node-addon-api | 7.1.1 | 7.1.1 | 8.9.2 | node-pty requires node-addon-api^7.1.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | node-addon-api | 7.1.1 | 8.9.2 | 8.9.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | node-pty | new lock | 1.1.0 | 1.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | node-pty | 1.1.0 | 1.1.0 | 1.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | normalize-path | 3.0.0 | 3.0.0 | 3.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | normalize-path | 3.0.0 | 3.0.0 | 3.0.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | npm-run-path | new lock | 6.0.0 | 6.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | npm-run-path | 6.0.0 | 6.0.0 | 6.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | object-inspect | 1.13.4 | 1.13.4 | 1.13.4 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | object-inspect | 1.13.4 | 1.13.4 | 1.13.4 | Current registry release |
@@ -1027,6 +1087,9 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `js/package-lock.json` | p-locate | 5.0.0 | 5.0.0 | 7.0.0 | locate-path requires p-locate^5.0.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | package-manager-detector | 1.9.0 | 1.9.0 | 1.9.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | package-manager-detector | 1.9.0 | 1.9.0 | 1.9.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | pako | new lock | 1.0.11 | 3.0.3 | upng-js requires pako^1.0.5; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | pako | new lock | 1.0.11 | 3.0.3 | upng-js requires pako^1.0.5; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | parse-ms | new lock | 4.0.0 | 5.0.0 | pretty-ms requires parse-ms^4.0.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | parse-ms | 4.0.0 | 4.0.0 | 5.0.0 | pretty-ms requires parse-ms^4.0.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | path-exists | 4.0.0 | 4.0.0 | 5.0.0 | find-up requires path-exists^4.0.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/csharp/package-lock.json` | path-exists | 4.0.0 | 4.0.0 | 5.0.0 | find-up requires path-exists^4.0.0; latest is outside the parent-supported API range; native resolver retained this version |
@@ -1038,6 +1101,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | path-expression-matcher | 1.6.2 | 1.6.2 | 1.6.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | path-expression-matcher | 1.6.2 | 1.6.2 | 1.6.2 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | path-key | 3.1.1 | 3.1.1 | 4.0.0 | cross-spawn requires path-key^3.1.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | path-key | 3.1.1 | 4.0.0 | 4.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/csharp/package-lock.json` | path-key | 3.1.1 | 3.1.1 | 4.0.0 | cross-spawn requires path-key^3.1.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | path-key | 3.1.1, 4.0.0 | 3.1.1 | 4.0.0 | cross-spawn requires path-key^3.1.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | path-key | 3.1.1, 4.0.0 | 4.0.0 | 4.0.0 | Current registry release |
@@ -1047,6 +1111,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | path-scurry | 3.0.0 | 3.0.0 | 3.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | path-scurry | 3.0.0 | 3.0.0 | 3.0.0 | Current registry release |
 | `kotlin/kotlin-js-store/yarn.lock` | path-scurry | 3.0.0 | 3.0.0 | 3.0.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | peggy | new lock | 5.1.0 | 5.1.1 | meta-language requires peggy5.1.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | peggy | 5.1.0 | 5.1.0 | 5.1.1 | meta-language requires peggy5.1.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `js/bun.lock` | peggy | 5.1.1 | 5.1.1 | 5.1.1 | Current registry release |
 | `js/package-lock.json` | peggy | 5.1.1 | 5.1.1 | 5.1.1 | Current registry release |
@@ -1057,6 +1122,12 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | picomatch | 4.0.7 | 4.0.7 | 4.0.7 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | picomatch | 4.0.7 | 4.0.7 | 4.0.7 | Current registry release |
 | `docs/website/package-lock.json` | picomatch | 4.0.7 | 4.0.7 | 4.0.7 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | playwright | new lock | 1.65.1 | 1.65.1 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | playwright | new lock | 1.65.1 | 1.65.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | playwright-core | new lock | 1.65.1 | 1.65.1 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | playwright-core | new lock | 1.65.1 | 1.65.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | plist | new lock | 5.1.1 | 5.1.1 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | plist | new lock | 5.1.1 | 5.1.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | possible-typed-array-names | 1.1.0 | 1.1.0 | 1.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | possible-typed-array-names | 1.1.0 | 1.1.0 | 1.1.0 | Current registry release |
 | `docs/website/package-lock.json` | postcss | 8.5.32 | 8.5.33 | 8.5.33 | Current registry release |
@@ -1073,6 +1144,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `js/package-lock.json` | prettier | 3.10.1 | 3.10.1 | 3.10.1 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | prettier-linter-helpers | 1.0.1 | 1.0.1 | 1.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | prettier-linter-helpers | 1.0.1 | 1.0.1 | 1.0.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | pretty-ms | new lock | 9.3.1 | 10.0.0 | execa requires pretty-ms^9.3.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | pretty-ms | 9.3.1 | 9.3.1 | 10.0.0 | execa requires pretty-ms^9.3.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | process | 0.11.10 | 0.11.10 | 0.11.10 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | process | 0.11.10 | 0.11.10 | 0.11.10 | Current registry release |
@@ -1115,6 +1187,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | safe-push-apply | 1.0.0 | 1.0.0 | 1.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | safe-regex-test | 1.1.0 | 1.1.0 | 1.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | safe-regex-test | 1.1.0 | 1.1.0 | 1.1.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | semver | 7.8.6 | 7.7.4 | 7.8.6 | @peggyjs/from-mem requires semver7.7.4; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | semver | 7.8.6 | 7.8.6 | 7.8.6 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | semver | 7.7.4, 7.8.6 | 7.7.4 | 7.8.6 | @peggyjs/from-mem requires semver7.7.4; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | semver | 7.7.4, 7.8.6 | 7.8.6 | 7.8.6 | Current registry release |
@@ -1149,10 +1222,12 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | side-channel-map | 1.0.1 | 1.0.1 | 1.0.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | side-channel-weakmap | 1.0.2 | 1.0.2 | 1.0.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | side-channel-weakmap | 1.0.2 | 1.0.2 | 1.0.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | signal-exit | new lock | 4.1.0 | 4.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | signal-exit | 4.1.0 | 4.1.0 | 4.1.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | sisteransi | 2.0.0 | 2.0.0 | 2.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | sisteransi | 2.0.0 | 2.0.0 | 2.0.0 | Current registry release |
 | `kotlin/kotlin-js-store/yarn.lock` | source-map | 0.6.1 | 0.6.1 | 0.8.0 | Yarn selectors: source-map@^0.6.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | source-map-generator | new lock | 2.0.6 | 2.0.7 | peggy requires source-map-generator2.0.6; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | source-map-generator | 2.0.6 | 2.0.6 | 2.0.7 | peggy requires source-map-generator2.0.6; latest is outside the parent-supported API range; native resolver retained this version |
 | `js/bun.lock` | source-map-generator | 2.0.7 | 2.0.7 | 2.0.7 | Current registry release |
 | `js/package-lock.json` | source-map-generator | 2.0.7 | 2.0.7 | 2.0.7 | Current registry release |
@@ -1164,6 +1239,8 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | streamx | 2.28.1 | 2.28.1 | 2.28.1 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | string-argv | 0.3.2 | 0.3.2 | 0.4.0 | lint-staged requires string-argv^0.3.2; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | string-argv | 0.3.2 | 0.3.2 | 0.4.0 | lint-staged requires string-argv^0.3.2; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | string-width | new lock | 7.2.0 | 9.0.0 | cliui requires string-width^7.2.0; wrap-ansi requires string-width^7.0.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | string-width | new lock | 8.3.0 | 9.0.0 | yargs requires string-width^8.2.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | string-width | 7.2.0, 8.3.0 | 7.2.0 | 9.0.0 | cliui requires string-width^7.2.0; wrap-ansi requires string-width^7.0.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | string-width | 7.2.0, 8.3.0 | 8.3.0 | 9.0.0 | yargs requires string-width^8.2.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | string.prototype.trim | 1.2.11 | 1.2.11 | 1.2.11 | Current registry release |
@@ -1176,7 +1253,9 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | string_decoder | 1.1.1, 1.3.0 | 1.3.0 | 1.3.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | string_decoder | 1.1.1, 1.3.0 | 1.1.1 | 1.3.0 | readable-stream requires string_decoder~1.1.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | string_decoder | 1.1.1, 1.3.0 | 1.3.0 | 1.3.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | strip-ansi | new lock | 7.2.0 | 7.2.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | strip-ansi | 7.2.0 | 7.2.0 | 7.2.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | strip-final-newline | new lock | 4.0.0 | 4.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | strip-final-newline | 4.0.0 | 4.0.0 | 4.0.0 | Current registry release |
 | `kotlin/kotlin-js-store/yarn.lock` | strip-json-comments | 5.0.3 | 5.0.3 | 5.1.0 | Yarn selectors: strip-json-comments@^5.0.3; latest is outside the parent-supported API range; native resolver retained this version |
 | `benchmarks/tools/package-lock.json` | strnum | 2.5.1 | 2.5.1 | 2.5.1 | Current registry release |
@@ -1234,11 +1313,14 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `js/bun.lock` | undici-types | 8.12.2, 8.9.0 | 8.9.0 | 8.12.4 | @types/node@26.6.6 requires undici-types~8.9.0; bun-types@1.4.4 requires undici-types*; latest is outside the parent-supported API range; native resolver retained this version |
 | `js/package-lock.json` | undici-types | 8.12.4, 8.9.0 | 8.12.4 | 8.12.4 | Current registry release |
 | `js/package-lock.json` | undici-types | 8.12.4, 8.9.0 | 8.9.0 | 8.12.4 | @types/node requires undici-types~8.9.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | unicorn-magic | new lock | 0.3.0 | 0.4.1 | npm-run-path requires unicorn-magic^0.3.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | unicorn-magic | 0.3.0 | 0.3.0 | 0.4.1 | npm-run-path requires unicorn-magic^0.3.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | universal-user-agent | 7.0.3 | 7.0.3 | 7.0.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | universal-user-agent | 7.0.3 | 7.0.3 | 7.0.3 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | unzip-stream | 0.3.4 | 0.3.4 | 0.3.4 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | unzip-stream | 0.3.4 | 0.3.4 | 0.3.4 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | upng-js | new lock | 2.1.0 | 2.1.0 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | upng-js | new lock | 2.1.0 | 2.1.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | uri-js | 4.4.1 | 4.4.1 | 4.4.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/csharp/package-lock.json` | uri-js | 4.4.1 | 4.4.1 | 4.4.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | uri-js | 4.4.1 | 4.4.1 | 4.4.1 | Current registry release |
@@ -1248,6 +1330,8 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | util-deprecate | 1.0.2 | 1.0.2 | 1.0.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | util-deprecate | 1.0.2 | 1.0.2 | 1.0.2 | Current registry release |
 | `docs/website/package-lock.json` | vite | 8.3.8 | 8.3.8 | 8.3.8 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | webp-wasm | new lock | 1.0.6 | 1.0.6 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | webp-wasm | new lock | 1.0.6 | 1.0.6 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | which | 2.0.2 | 2.0.2 | 7.0.0 | cross-spawn requires which^2.0.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/csharp/package-lock.json` | which | 2.0.2 | 2.0.2 | 7.0.0 | cross-spawn requires which^2.0.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | which | 2.0.2 | 2.0.2 | 7.0.0 | cross-spawn requires which^2.0.1; latest is outside the parent-supported API range; native resolver retained this version |
@@ -1260,6 +1344,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | which-builtin-type | 1.2.1 | 1.2.1 | 1.2.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | which-collection | 1.0.2 | 1.0.2 | 1.0.2 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | which-collection | 1.0.2 | 1.0.2 | 1.0.2 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | which-command | new lock | 0.1.0 | 0.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | which-command | 0.1.0 | 0.1.0 | 0.1.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | which-typed-array | 1.1.24 | 1.1.24 | 1.1.24 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | which-typed-array | 1.1.24 | 1.1.24 | 1.1.24 | Current registry release |
@@ -1270,16 +1355,22 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `js/bun.lock` | word-wrap | 1.2.5 | 1.2.5 | 1.2.5 | Current registry release |
 | `js/package-lock.json` | word-wrap | 1.2.5 | 1.2.5 | 1.2.5 | Current registry release |
 | `kotlin/kotlin-js-store/yarn.lock` | workerpool | 10.0.3 | 10.0.3 | 10.0.3 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | wrap-ansi | new lock | 9.0.2 | 10.0.2 | cliui requires wrap-ansi^9.0.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | wrap-ansi | 9.0.2 | 9.0.2 | 10.0.2 | cliui requires wrap-ansi^9.0.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `benchmarks/tools/package-lock.json` | xml-naming | 0.3.0 | 0.3.0 | 0.3.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | xml-naming | 0.3.0 | 0.3.0 | 0.3.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | xml-naming | 0.3.0 | 0.3.0 | 0.3.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | xmlbuilder | new lock | 15.1.1 | 15.1.1 | Current registry release |
+| `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | xmlbuilder | new lock | 15.1.1 | 15.1.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | y18n | new lock | 5.0.8 | 5.0.8 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | y18n | 5.0.8 | 5.0.8 | 5.0.8 | Current registry release |
 | `benchmarks/tools/package-lock.json` | yaml | 2.9.1 | 2.9.1 | 2.9.1 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | yaml | 2.9.1 | 2.9.1 | 2.9.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | yaml | 2.9.1 | 2.9.1 | 2.9.1 | Current registry release |
 | `docs/comparison/package-lock.json` | yaml | 2.9.1 | 2.9.1 | 2.9.1 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | yargs | new lock | 18.2.0 | 18.2.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | yargs | 18.2.0 | 18.2.0 | 18.2.0 | Current registry release |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | yargs-parser | new lock | 22.0.0 | 22.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | yargs-parser | 22.0.0 | 22.0.0 | 22.0.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | yocto-queue | 0.1.0 | 0.1.0 | 1.2.2 | p-limit requires yocto-queue^0.1.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/csharp/package-lock.json` | yocto-queue | 0.1.0 | 0.1.0 | 1.2.2 | p-limit requires yocto-queue^0.1.0; latest is outside the parent-supported API range; native resolver retained this version |
@@ -1287,6 +1378,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `docs/website/package-lock.json` | yocto-queue | 0.1.0 | 0.1.0 | 1.2.2 | p-limit requires yocto-queue^0.1.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `js/bun.lock` | yocto-queue | 0.1.0 | 0.1.0 | 1.2.2 | p-limit@3.1.0 requires yocto-queue^0.1.0; latest is outside the parent-supported API range; native resolver retained this version |
 | `js/package-lock.json` | yocto-queue | 0.1.0 | 0.1.0 | 1.2.2 | p-limit requires yocto-queue^0.1.0; latest is outside the parent-supported API range; native resolver retained this version |
+| `dev/log/issues/330/pulls/331/templates/js/package-lock.json` | yoctocolors | new lock | 2.2.0 | 2.2.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/package-lock.json` | yoctocolors | 2.2.0 | 2.2.0 | 2.2.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json` | zip-stream | 6.0.1 | 6.0.1 | 7.0.5 | archiver requires zip-stream^6.0.1; latest is outside the parent-supported API range; native resolver retained this version |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package-lock.json` | zip-stream | 6.0.1 | 6.0.1 | 7.0.5 | archiver requires zip-stream^6.0.1; latest is outside the parent-supported API range; native resolver retained this version |

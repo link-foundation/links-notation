@@ -146,7 +146,7 @@ jobs:
           global-json-file: csharp/global.json
       - name: Install DocFX
         run: |
-          dotnet tool install -g docfx
+          dotnet tool install -g docfx --version 2.81.0
           echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
       - name: Publish documentation to gh-pages branch
         run: |

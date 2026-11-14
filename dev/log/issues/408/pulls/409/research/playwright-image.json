@@ -1,0 +1,47 @@
+{
+  "url": "https://mcr.microsoft.com/v2/playwright/manifests/v1.65.1-noble",
+  "digest": "sha256:1507cbfc550a63a6b7396791ca4f00df17beb56342d2447b3f106c306f525579",
+  "headers": {
+    "Content-Length": "705",
+    "Content-Type": "application/vnd.oci.image.index.v1+json",
+    "ETag": "\"sha256:1507cbfc550a63a6b7396791ca4f00df17beb56342d2447b3f106c306f525579\"",
+    "Access-Control-Expose-Headers": "Docker-Content-Digest",
+    "Docker-Content-Digest": "sha256:1507cbfc550a63a6b7396791ca4f00df17beb56342d2447b3f106c306f525579",
+    "Docker-Distribution-Api-Version": "registry/2.0",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+    "X-Content-Type-Options": "nosniff",
+    "X-Ms-Client-Request-Id": "",
+    "X-Ms-Correlation-Request-Id": "68f1b6d1-1aeb-475c-b993-bfc1f6dec27d",
+    "X-Ms-Request-Id": "17dde90b-2268-4bcd-8c9e-4147eaacff8f",
+    "X-Cache": "CONFIG_NOCACHE",
+    "x-mcr-env": "prod",
+    "x-mcr-privacy": "https://privacy.microsoft.com/en-us/privacystatement",
+    "X-MSEdge-Ref": "Ref A: 13C2A81305564C2EAEA607A593C1253C Ref B: FRA261110502054 Ref C: 2026-11-14T09:26:16Z",
+    "Date": "Sat, 14 Nov 2026 09:26:16 GMT",
+    "Connection": "close"
+  },
+  "manifest": {
+    "schemaVersion": 2,
+    "mediaType": "application/vnd.oci.image.index.v1+json",
+    "manifests": [
+      {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "size": 1644,
+        "digest": "sha256:766137e2d9caad4744187e53cdc89320ba6f2eb57cff097374020944b44dd0a9",
+        "platform": {
+          "architecture": "amd64",
+          "os": "linux"
+        }
+      },
+      {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "size": 1644,
+        "digest": "sha256:56be08aca06bf736a928da2e3235a3b63ef71ee97313beb18c6019fea791aba4",
+        "platform": {
+          "architecture": "arm64",
+          "os": "linux"
+        }
+      }
+    ]
+  }
+}

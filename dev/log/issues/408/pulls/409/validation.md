@@ -17,11 +17,21 @@ container's 2.92 GiB memory limit.
 | .NET / Swift / Go | Native .NET SDK 11 restore across all 22 projects, SwiftPM updates for both manifests, and Go tidy across all ten modules passed. Full test/build/lint platform coverage remains in hosted CI. |
 | C++ | Full build/test/lint, CMake minimum and sanitizers remain in hosted CI; no C++ source or API changes. Latest vcpkg registry metadata reviewed. |
 | Workflow quality | actionlint 1.7.12 with ShellCheck, ShellCheck on CI scripts, zizmor 1.32 offline medium-or-higher audit, merge-planner tests and live dry run passed. |
+| Embedded tools | All ten embedded Cargo tool selections match fresh crates.io stable metadata. Four cargo-audit action inputs now match the audited 0.23.0 binary. All nine native workflow-checker tests pass after aligning their illustrative pins. |
+| Inline tools and templates | All 95 tool/image selections match current registries. Eight npm/installed-loader tests, both Playwright image/package contract checks and the actual preview script pass. Native Staticcheck 2026.2.2 and DocFX 2.81.0 install/version checks pass. Both refreshed npm graphs and the expanded hashed publisher graph have zero audit findings. |
 | Freshness | All declarations and transitive registry queries completed without errors; live Dependabot manifest/label coverage and dependency freshness checks passed. |
 | Shared contract | Version consistency: ten bindings at 0.31.5. Parity: 25 features, 31 text fixtures, 20 syntax fixtures, ten languages, zero violations. No source inventory refresh was needed. |
 | Native resolution | 10 npm graphs plus Bun, 11 Cargo projects, 12 Python lock/export commands, five Composer updates, 22 NuGet restores, ten Go tidy commands, two Swift updates, native Gradle/Yarn refresh and Maven graphs passed. |
 
 ## Security
+
+Full tests/lint were also attempted for both archived JS snapshots. Their
+remaining failures concern absent snapshot files: example-app HTML/lock,
+`eslint-rules/no-changelog-comments.js`, and (issue 377) `tests/helpers/skip.js`.
+The same failures reproduce against initial SHA `e3dc638c` using
+`experiments/issue-408/archive-baseline.py`; baseline/final logs are preserved.
+These archive checks are not reported as passing. The updated preview assertions
+pass separately, with no regression remaining relative to that baseline.
 
 Native npm audit checked all ten package locks, Bun audit checked its separate
 text lock, Yarn checked 30 packages, cargo-audit checked all eleven Cargo locks,
@@ -55,3 +65,12 @@ Initial-SHA or previous-main passes are not substituted for final-head checks.
 No push is made during an active run on the same branch/range. Every completed
 failure is downloaded and reviewed before a correction batch. Publishing jobs
 skipped on pull requests are not registry delivery evidence.
+
+Pre-final-batch SHA `8f5b4b409cd0a4bfbe27c53f17eeb0da734960b7` completed
+all six workflows successfully, including 87 successful CI jobs and four
+skipped publishing jobs. The full job metadata is preserved as
+`research/verified-ci-8f5b4b40.json`. The final batch is verified separately
+on the PR checks page and its final verification comment. Additional archive
+workflow lint attempts expose existing snapshot placeholder actions, shell
+warnings and unsupported schema labels; those attempts are retained as failures,
+while active workflow lint passes.

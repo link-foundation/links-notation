@@ -1,0 +1,92 @@
+[
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/security.yml",
+    "line": 27,
+    "name": "cargo-audit",
+    "before": "0.22.2",
+    "after": "0.23.0",
+    "latest": "0.23.0",
+    "source": "https://crates.io/api/v1/crates/cargo-audit"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/security.yml",
+    "line": 27,
+    "name": "cargo-audit",
+    "before": "0.22.2",
+    "after": "0.23.0",
+    "latest": "0.23.0",
+    "source": "https://crates.io/api/v1/crates/cargo-audit"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/security.yml",
+    "line": 29,
+    "name": "cargo-audit",
+    "before": "0.22.2",
+    "after": "0.23.0",
+    "latest": "0.23.0",
+    "source": "https://crates.io/api/v1/crates/cargo-audit"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/security.yml",
+    "line": 35,
+    "name": "cargo-audit",
+    "before": "0.22.2",
+    "after": "0.23.0",
+    "latest": "0.23.0",
+    "source": "https://crates.io/api/v1/crates/cargo-audit"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/scripts/check-workflow-tools.rs",
+    "line": 228,
+    "name": "rust-script",
+    "before": "0.36.0",
+    "after": "0.36.0",
+    "latest": "0.36.0",
+    "source": "https://crates.io/api/v1/crates/rust-script"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/scripts/check-workflow-tools.rs",
+    "line": 255,
+    "name": "cargo-cyclonedx",
+    "before": "0.5.9",
+    "after": "0.5.10",
+    "latest": "0.5.10",
+    "source": "https://crates.io/api/v1/crates/cargo-cyclonedx"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/scripts/check-workflow-tools.rs",
+    "line": 263,
+    "name": "rust-script",
+    "before": "0.36.0",
+    "after": "0.36.0",
+    "latest": "0.36.0",
+    "source": "https://crates.io/api/v1/crates/rust-script"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/scripts/check-workflow-tools.rs",
+    "line": 269,
+    "name": "cargo-llvm-cov",
+    "before": "0.9.1",
+    "after": "0.9.1",
+    "latest": "0.9.1",
+    "source": "https://crates.io/api/v1/crates/cargo-llvm-cov"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/scripts/check-workflow-tools.rs",
+    "line": 283,
+    "name": "cargo-audit",
+    "before": "0.22.2",
+    "after": "0.23.0",
+    "latest": "0.23.0",
+    "source": "https://crates.io/api/v1/crates/cargo-audit"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/scripts/install-rust-script.sh",
+    "line": 10,
+    "name": "rust-script",
+    "before": "0.36.0",
+    "after": "0.36.0",
+    "latest": "0.36.0",
+    "source": "https://crates.io/api/v1/crates/rust-script"
+  }
+]

@@ -38,7 +38,7 @@ jobs:
           python-version: "3.15.2"
       - name: Install linting tools
         run: |
-          python -m pip install --upgrade pip
+          python -m pip install --upgrade pip==26.3
           pip install --require-hashes -r requirements.lock -r ../scripts/ci/requirements.lock
           pip install --no-deps -e .
       - name: Check reproducible Python resolution
@@ -76,7 +76,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
+          python -m pip install --upgrade pip==26.3
           pip install --require-hashes -r requirements.lock -r ../scripts/ci/requirements.lock
           pip install --no-deps -e .
       - name: Build package

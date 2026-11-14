@@ -8,11 +8,13 @@ Initial branch SHA: `e3dc638c395d9e0c15c3ad143a73299f634ed912`.
 - [Requirements and solution plans](PLAN.md): every issue requirement and its verification state.
 - [Analysis](analysis.md): root causes, migrations, alternatives, compatibility decisions and upstream reports.
 - [Validation](validation.md): native commands, security results and exact-SHA CI evidence.
-- [Every declaration](research/dependency-tables.md): 909 selections, before/current/latest registry results.
+- [Every declaration](research/dependency-tables.md): 918 selections, before/current/latest registry results.
 - [Toolchains and compatibility floors](research/toolchains.md): 800 workflow/runtime selections and explicit exceptions.
+- [Embedded Cargo tool pins](research/tool-pins.md): ten action inputs, installer defaults and illustrative test inputs, resolved from crates.io.
+- [Inline workflow tools and images](research/inline-tools.md): 95 additional selections, including npm, browser tooling, pip, Staticcheck and DocFX.
 - Native lock entries: [npm/Bun/Yarn](research/locked-npm.md), [Cargo](research/locked-cargo.md), [Python](research/locked-pypi.md), [Composer](research/locked-composer.md), [NuGet](research/locked-nuget.md), [Go](research/locked-go.md).
 - [Native JVM graphs](research/jvm-transitives.md): 230 edges, 62 exact artifacts and their current registry releases.
-- [Retained-version decisions](research/retained-lock-review.json): an individual explanation for each of 283 non-latest lock selections.
+- [Retained-version decisions](research/retained-lock-review.json): an individual explanation for each of 305 non-latest lock selections.
 - [Primary source index](research/primary-source-index.json): dated runtime/image/upstream snapshots; package results are `registry-all.json`, `registry-transitive.json`, and `registry-jvm-transitive.json` in `research/`.
 - [Upstream report ledger](upstream/README.md), including a new Composer report and the unfinished YouTrack submission.
 

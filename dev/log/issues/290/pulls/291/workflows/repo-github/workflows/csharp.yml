@@ -272,7 +272,7 @@ jobs:
           sudo apt-get install -y mono-complete || echo "Mono installation not required"
           
           # Install docfx as a dotnet global tool
-          dotnet tool install -g docfx
+          dotnet tool install -g docfx --version 2.81.0
           
           # Add dotnet tools to PATH
           echo "~/.dotnet/tools" >> $GITHUB_PATH

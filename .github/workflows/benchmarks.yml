@@ -220,7 +220,7 @@ jobs:
       # parser in this commit and only the tokenizer has to be installed.
       - name: Install dependencies
         run: |
-          python3 -m pip install --upgrade pip
+          python3 -m pip install --upgrade pip==26.3
           python3 -m pip install --require-hashes -r benchmarks/python/requirements.lock
       - name: Parse and count in Python
         run: |

@@ -252,7 +252,7 @@ jobs:
 
     #[test]
     fn a_use_before_the_install_is_reported() {
-        let workflow = "jobs:\n  late:\n    steps:\n      - run: cargo cyclonedx --format json\n      - run: cargo install cargo-cyclonedx --version 0.5.9 --locked\n";
+        let workflow = "jobs:\n  late:\n    steps:\n      - run: cargo cyclonedx --format json\n      - run: cargo install cargo-cyclonedx --version 0.5.10 --locked\n";
         let problems = missing_installs(&jobs(workflow)[0]);
         assert_eq!(problems.len(), 1, "{problems:?}");
         assert!(problems[0].contains("before installing it on line 5"));
@@ -280,7 +280,7 @@ jobs:
 
     #[test]
     fn install_action_tool_lists_and_the_template_helper_count_as_installs() {
-        let workflow = "jobs:\n  audit:\n    steps:\n      - uses: taiki-e/install-action@e67fa11c4b9316fa714ddf0abed07a0c3143b95b\n        with:\n          tool: cargo-llvm-cov, cargo-audit@0.22.2\n      - run: ./scripts/install-rust-script.sh\n      - run: cargo audit --deny warnings\n      - run: rust-script scripts/check.rs\n  other:\n    steps:\n      - uses: taiki-e/install-action@e67fa11c4b9316fa714ddf0abed07a0c3143b95b\n        with:\n          tool: cargo-audit-extra\n      - run: cargo audit\n";
+        let workflow = "jobs:\n  audit:\n    steps:\n      - uses: taiki-e/install-action@4a76afe23f9e08d2d9550fb56e556444e8611d21\n        with:\n          tool: cargo-llvm-cov, cargo-audit@0.23.0\n      - run: ./scripts/install-rust-script.sh\n      - run: cargo audit --deny warnings\n      - run: rust-script scripts/check.rs\n  other:\n    steps:\n      - uses: taiki-e/install-action@4a76afe23f9e08d2d9550fb56e556444e8611d21\n        with:\n          tool: cargo-audit-extra\n      - run: cargo audit\n";
         let jobs = jobs(workflow);
         assert!(missing_installs(&jobs[0]).is_empty());
         let problems = missing_installs(&jobs[1]);

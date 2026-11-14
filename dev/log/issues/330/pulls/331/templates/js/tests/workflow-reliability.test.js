@@ -340,11 +340,16 @@ describe('workflow reliability policy', () => {
     const imageVersion = previewRegenJob.match(
       /image:\s*mcr\.microsoft\.com\/playwright@sha256:[0-9a-f]{64} # v([0-9.]+)-noble/
     )?.[1];
-    const packageVersion = previewRegenJob.match(/playwright@([0-9.]+)/)?.[1];
+    const packageVersion = JSON.parse(
+      readWorkflow('package.json')
+    ).devDependencies.playwright;
 
     expect(previewRegenJob).toContain('container:');
-    expect(imageVersion).toBe('1.59.1');
+    expect(imageVersion).toBe('1.65.1');
     expect(packageVersion).toBe(imageVersion);
+    expect(previewRegenJob).toContain(
+      'npm ci --ignore-scripts --no-audit --no-fund'
+    );
     expect(previewRegenJob).toContain("PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'");
     expect(previewRegenJob).not.toContain('npx playwright install');
     expect(previewRegenJob).not.toContain('~/.cache/ms-playwright');

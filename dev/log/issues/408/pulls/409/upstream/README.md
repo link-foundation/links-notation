@@ -27,3 +27,5 @@ Historical template-specific reports and code proposals remain preserved in
 `dev/log/issues/377/pulls/378/upstream/URLS.txt` at the repository root. Those
 workarounds remain necessary in executable template copies; this refresh does
 not claim unrelated duplicated application logic belongs in dependencies.
+
+The additional archived `use-m` path was also checked against current npm 8.17.1 and [use-m#72](https://github.com/link-foundation/use-m/issues/72) (closed). The older template now uses the newer template's existing native installed-module loader: CDN evaluation, retry deadlines and platform/network skips are removed. Its command-stream 2.6.0 and lino-arguments 0.4.1 dependencies are declared and locked; native import and nonzero-exit tests pass. No duplicate upstream report is needed.

@@ -1,0 +1,287 @@
+{
+  "cargo-audit": {
+    "latest": "0.23.0",
+    "url": "https://crates.io/api/v1/crates/cargo-audit",
+    "release": {
+      "id": 3773112,
+      "crate": "cargo-audit",
+      "num": "0.23.0",
+      "dl_path": "/api/v1/crates/cargo-audit/0.23.0/download",
+      "readme_path": "/api/v1/crates/cargo-audit/0.23.0/readme",
+      "updated_at": "2026-11-10T13:43:53.390706Z",
+      "created_at": "2026-11-10T13:43:53.390706Z",
+      "downloads": 146083,
+      "features": {
+        "binary-scanning": [
+          "rustsec/binary-scanning",
+          "dep:object",
+          "dep:rustc-demangle",
+          "dep:syn"
+        ],
+        "default": [
+          "binary-scanning"
+        ],
+        "fix": []
+      },
+      "yanked": false,
+      "yank_message": null,
+      "lib_links": null,
+      "license": "Apache-2.0 OR MIT",
+      "links": {
+        "dependencies": "/api/v1/crates/cargo-audit/0.23.0/dependencies",
+        "version_downloads": "/api/v1/crates/cargo-audit/0.23.0/downloads",
+        "authors": "/api/v1/crates/cargo-audit/0.23.0/authors"
+      },
+      "crate_size": 64105,
+      "published_by": {
+        "id": 4556,
+        "login": "djc",
+        "name": "Dirkjan Ochtman",
+        "avatar": "https://avatars.githubusercontent.com/u/158471?v=4",
+        "url": "https://github.com/djc",
+        "github_username_matches": true,
+        "created_at": "2009-11-26T12:00:10Z"
+      },
+      "audit_actions": [
+        {
+          "action": "publish",
+          "user": {
+            "id": 4556,
+            "login": "djc",
+            "name": "Dirkjan Ochtman",
+            "avatar": "https://avatars.githubusercontent.com/u/158471?v=4",
+            "url": "https://github.com/djc",
+            "github_username_matches": true,
+            "created_at": "2009-11-26T12:00:10Z"
+          },
+          "time": "2026-11-10T13:43:53.390706Z"
+        }
+      ],
+      "checksum": "956f85aedfb64db887ec38466f982fc2b1ae55de726d4a12f2fddd5b812c6446",
+      "rust_version": "1.88",
+      "has_lib": true,
+      "bin_names": [
+        "cargo-audit"
+      ],
+      "edition": "2024",
+      "description": "Audit Cargo.lock for crates with security vulnerabilities",
+      "homepage": "https://rustsec.org",
+      "documentation": null,
+      "repository": "https://github.com/rustsec/rustsec",
+      "trustpub_data": null,
+      "linecounts": {
+        "languages": {
+          "Rust": {
+            "code_lines": 2414,
+            "comment_lines": 80,
+            "files": 17
+          }
+        },
+        "total_code_lines": 2414,
+        "total_comment_lines": 80
+      }
+    }
+  },
+  "rust-script": {
+    "latest": "0.36.0",
+    "url": "https://crates.io/api/v1/crates/rust-script",
+    "release": {
+      "id": 1688153,
+      "crate": "rust-script",
+      "num": "0.36.0",
+      "dl_path": "/api/v1/crates/rust-script/0.36.0/download",
+      "readme_path": "/api/v1/crates/rust-script/0.36.0/readme",
+      "updated_at": "2025-08-16T09:37:28.037127Z",
+      "created_at": "2025-08-16T09:37:28.037127Z",
+      "downloads": 268295,
+      "features": {
+        "default": [],
+        "online_tests": []
+      },
+      "yanked": false,
+      "yank_message": null,
+      "lib_links": null,
+      "license": "MIT/Apache-2.0",
+      "links": {
+        "dependencies": "/api/v1/crates/rust-script/0.36.0/dependencies",
+        "version_downloads": "/api/v1/crates/rust-script/0.36.0/downloads",
+        "authors": "/api/v1/crates/rust-script/0.36.0/authors"
+      },
+      "crate_size": 53678,
+      "published_by": {
+        "id": 34284,
+        "login": "fornwall",
+        "name": "Fredrik Fornwall",
+        "avatar": "https://avatars.githubusercontent.com/u/277251?v=4",
+        "url": "https://github.com/fornwall",
+        "github_username_matches": true,
+        "created_at": "2010-05-14T21:24:58Z"
+      },
+      "audit_actions": [
+        {
+          "action": "publish",
+          "user": {
+            "id": 34284,
+            "login": "fornwall",
+            "name": "Fredrik Fornwall",
+            "avatar": "https://avatars.githubusercontent.com/u/277251?v=4",
+            "url": "https://github.com/fornwall",
+            "github_username_matches": true,
+            "created_at": "2010-05-14T21:24:58Z"
+          },
+          "time": "2025-08-16T09:37:28.037127Z"
+        }
+      ],
+      "checksum": "23e059746299df5ffc93ef9178c90ec6d1e82097ca7352fbaef87b2761cd801f",
+      "rust_version": "1.74",
+      "has_lib": false,
+      "bin_names": [
+        "rust-script"
+      ],
+      "edition": "2021",
+      "description": "Command-line tool to run Rust \"scripts\" which can make use of crates.",
+      "homepage": "https://rust-script.org",
+      "documentation": "https://rust-script.org",
+      "repository": "https://github.com/fornwall/rust-script",
+      "trustpub_data": null,
+      "linecounts": {
+        "languages": {
+          "Rust": {
+            "code_lines": 2340,
+            "comment_lines": 242,
+            "files": 10
+          }
+        },
+        "total_code_lines": 2340,
+        "total_comment_lines": 242
+      }
+    }
+  },
+  "cargo-llvm-cov": {
+    "latest": "0.9.1",
+    "url": "https://crates.io/api/v1/crates/cargo-llvm-cov",
+    "release": {
+      "id": 3172789,
+      "crate": "cargo-llvm-cov",
+      "num": "0.9.1",
+      "dl_path": "/api/v1/crates/cargo-llvm-cov/0.9.1/download",
+      "readme_path": "/api/v1/crates/cargo-llvm-cov/0.9.1/readme",
+      "updated_at": "2026-09-06T16:20:49.621751Z",
+      "created_at": "2026-09-06T16:20:49.621751Z",
+      "downloads": 982263,
+      "features": {},
+      "yanked": false,
+      "yank_message": null,
+      "lib_links": null,
+      "license": "Apache-2.0 OR MIT",
+      "links": {
+        "dependencies": "/api/v1/crates/cargo-llvm-cov/0.9.1/dependencies",
+        "version_downloads": "/api/v1/crates/cargo-llvm-cov/0.9.1/downloads",
+        "authors": "/api/v1/crates/cargo-llvm-cov/0.9.1/authors"
+      },
+      "crate_size": 106418,
+      "published_by": null,
+      "audit_actions": [],
+      "checksum": "5e00647cc92940c4dd82249c480fe08fd3809767e89f056bcec46d8a7962ea5b",
+      "rust_version": "1.87",
+      "has_lib": true,
+      "bin_names": [
+        "cargo-llvm-cov"
+      ],
+      "edition": "2021",
+      "description": "Cargo subcommand to easily use LLVM source-based code coverage (-C instrument-coverage).\n",
+      "homepage": null,
+      "documentation": null,
+      "repository": "https://github.com/taiki-e/cargo-llvm-cov",
+      "trustpub_data": {
+        "provider": "github",
+        "repository": "taiki-e/cargo-llvm-cov",
+        "run_id": "34045076644",
+        "sha": "ff7de46c296060ef86cd0975c3ff724c8bb22b24"
+      },
+      "linecounts": {
+        "languages": {
+          "Rust": {
+            "code_lines": 5223,
+            "comment_lines": 382,
+            "files": 16
+          }
+        },
+        "total_code_lines": 5223,
+        "total_comment_lines": 382
+      }
+    }
+  },
+  "cargo-cyclonedx": {
+    "latest": "0.5.10",
+    "url": "https://crates.io/api/v1/crates/cargo-cyclonedx",
+    "release": {
+      "id": 3729081,
+      "crate": "cargo-cyclonedx",
+      "num": "0.5.10",
+      "dl_path": "/api/v1/crates/cargo-cyclonedx/0.5.10/download",
+      "readme_path": "/api/v1/crates/cargo-cyclonedx/0.5.10/readme",
+      "updated_at": "2026-11-06T10:35:19.547976Z",
+      "created_at": "2026-11-06T10:35:19.547976Z",
+      "downloads": 18417,
+      "features": {},
+      "yanked": false,
+      "yank_message": null,
+      "lib_links": null,
+      "license": "Apache-2.0",
+      "links": {
+        "dependencies": "/api/v1/crates/cargo-cyclonedx/0.5.10/dependencies",
+        "version_downloads": "/api/v1/crates/cargo-cyclonedx/0.5.10/downloads",
+        "authors": "/api/v1/crates/cargo-cyclonedx/0.5.10/authors"
+      },
+      "crate_size": 49615,
+      "published_by": {
+        "id": 133536,
+        "login": "cdx-automation",
+        "name": null,
+        "avatar": "https://avatars.githubusercontent.com/u/91295044?v=4",
+        "url": "https://github.com/cdx-automation",
+        "github_username_matches": true,
+        "created_at": "2021-09-23T23:35:47Z"
+      },
+      "audit_actions": [
+        {
+          "action": "publish",
+          "user": {
+            "id": 133536,
+            "login": "cdx-automation",
+            "name": null,
+            "avatar": "https://avatars.githubusercontent.com/u/91295044?v=4",
+            "url": "https://github.com/cdx-automation",
+            "github_username_matches": true,
+            "created_at": "2021-09-23T23:35:47Z"
+          },
+          "time": "2026-11-06T10:35:19.547976Z"
+        }
+      ],
+      "checksum": "705522d9b1837be5dfdd3829791140a85cbba18f64b9af577c932bbbe5dbdba7",
+      "rust_version": "1.86.0",
+      "has_lib": true,
+      "bin_names": [
+        "cargo-cyclonedx"
+      ],
+      "edition": "2021",
+      "description": "CycloneDX Software Bill of Materials (SBOM) for Rust Crates",
+      "homepage": "https://cyclonedx.org/",
+      "documentation": null,
+      "repository": "https://github.com/CycloneDX/cyclonedx-rust-cargo",
+      "trustpub_data": null,
+      "linecounts": {
+        "languages": {
+          "Rust": {
+            "code_lines": 1913,
+            "comment_lines": 244,
+            "files": 8
+          }
+        },
+        "total_code_lines": 1913,
+        "total_comment_lines": 244
+      }
+    }
+  }
+}

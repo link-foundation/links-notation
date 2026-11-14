@@ -171,8 +171,8 @@ jobs:
           python-version: "3.15.2"
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install build twine pypi-attestations
+          python -m pip install --upgrade pip==26.3
+          pip install --require-hashes -r ../scripts/ci/requirements.lock
       - name: Build package
         run: python -m build
       - name: Check if version already published

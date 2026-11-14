@@ -12,6 +12,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | alabaster | 1.0.0 | 1.0.0 | 1.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | alabaster | 1.0.0 | 1.0.0 | 1.0.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | alabaster | 1.0.0 | 1.0.0 | 1.0.0 | Current registry release |
+| `scripts/ci/requirements.lock` | annotated-types | new lock | 0.8.0 | 0.8.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | ast-serialize | 0.13.1 | 0.13.1 | 0.13.1 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | ast-serialize | 0.13.1 | 0.13.1 | 0.13.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | ast-serialize | 0.13.1 | 0.13.1 | 0.13.1 | Current registry release |
@@ -91,11 +92,13 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | distlib | 0.4.4 | 0.4.4 | 0.4.4 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | distlib | 0.4.4 | 0.4.4 | 0.4.4 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock` | distro | 1.9.0 | 1.9.0 | 1.9.0 | Current registry release |
+| `scripts/ci/requirements.lock` | dnspython | new lock | 2.9.2 | 2.9.2 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | docutils | 0.23 | 0.23 | 0.23 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | docutils | 0.23 | 0.23 | 0.23 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | docutils | 0.23 | 0.23 | 0.23 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | docutils | 0.23 | 0.23 | 0.23 | Current registry release |
 | `scripts/ci/requirements.lock` | docutils | 0.23 | 0.23 | 0.23 | Current registry release |
+| `scripts/ci/requirements.lock` | email-validator | new lock | 2.3.0 | 2.3.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock` | fasteners | 0.20 | 0.20 | 0.20 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | filelock | 4.2.10 | 4.2.10 | 4.2.10 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | filelock | 4.2.10 | 4.2.10 | 4.2.10 | Current registry release |
@@ -229,6 +232,7 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | platformdirs | 4.14.5 | 4.14.5 | 4.14.5 | Current registry release |
 | `python/requirements.lock` | platformdirs | 4.14.5 | 4.14.5 | 4.14.5 | Current registry release |
 | `python/uv.lock` | platformdirs | 4.14.5 | 4.14.5 | 4.14.5 | Current registry release |
+| `scripts/ci/requirements.lock` | platformdirs | new lock | 4.14.5 | 4.14.5 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | pluggy | 1.7.0 | 1.7.0 | 1.7.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | pluggy | 1.7.0 | 1.7.0 | 1.7.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock` | pluggy | 1.7.0 | 1.7.0 | 1.7.0 | Current registry release |
@@ -244,6 +248,8 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `python/requirements.lock` | pycodestyle | 2.15.0 | 2.15.0 | 2.15.0 | Current registry release |
 | `python/uv.lock` | pycodestyle | 2.15.0 | 2.15.0 | 2.15.0 | Current registry release |
 | `scripts/ci/requirements.lock` | pycparser | 3.12 | 3.12 | 3.12 | Current registry release |
+| `scripts/ci/requirements.lock` | pydantic | new lock | 2.14.3 | 2.14.3 | Current registry release |
+| `scripts/ci/requirements.lock` | pydantic-core | new lock | 2.50.4 | 2.50.4 | Current registry release |
 | `python/requirements.lock` | pyflakes | 4.1.0 | 4.1.0 | 4.1.0 | Current registry release |
 | `python/uv.lock` | pyflakes | 4.1.0 | 4.1.0 | 4.1.0 | Current registry release |
 | `csharp/tools/requirements.lock` | pygments | 2.21.0 | 2.21.0 | 2.21.0 | Current registry release |
@@ -256,7 +262,9 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `python/requirements.lock` | pygments | 2.21.0 | 2.21.0 | 2.21.0 | Current registry release |
 | `python/uv.lock` | pygments | 2.21.0 | 2.21.0 | 2.21.0 | Current registry release |
 | `scripts/ci/requirements.lock` | pygments | 2.21.0 | 2.21.0 | 2.21.0 | Current registry release |
+| `scripts/ci/requirements.lock` | pyjwt | new lock | 2.15.1 | 2.15.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-security.lock` | pyparsing | 3.3.3 | 3.3.3 | 3.3.3 | Current registry release |
+| `scripts/ci/requirements.lock` | pypi-attestations | new lock | 0.0.31 | 0.0.31 | Current registry release |
 | `scripts/ci/requirements.lock` | pyproject-hooks | 1.3.3 | 1.3.3 | 1.3.3 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | pytest | 9.2.0 | 9.2.0 | 9.2.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | pytest | 9.2.0 | 9.2.0 | 9.2.0 | Current registry release |
@@ -298,7 +306,9 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | requests | 2.34.2 | 2.34.2 | 2.34.2 | Current registry release |
 | `scripts/ci/requirements.lock` | requests | 2.34.2 | 2.34.2 | 2.34.2 | Current registry release |
 | `scripts/ci/requirements.lock` | requests-toolbelt | 1.0.0 | 1.0.0 | 1.0.0 | Current registry release |
+| `scripts/ci/requirements.lock` | rfc3161-client | new lock | 1.0.9 | 1.0.9 | Current registry release |
 | `scripts/ci/requirements.lock` | rfc3986 | 2.0.0 | 2.0.0 | 2.0.0 | Current registry release |
+| `scripts/ci/requirements.lock` | rfc8785 | new lock | 0.1.4 | 0.1.4 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-security.lock` | rich | 15.0.0 | 15.0.0 | 15.0.0 | Current registry release |
 | `scripts/ci/requirements.lock` | rich | 15.0.0 | 15.0.0 | 15.0.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | roman-numerals | 4.1.0 | 4.1.0 | 4.1.0 | Current registry release |
@@ -314,6 +324,10 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | scriv | 1.8.1 | 1.8.1 | 1.8.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | scriv | 1.8.1 | 1.8.1 | 1.8.1 | Current registry release |
 | `scripts/ci/requirements.lock` | secretstorage | 3.5.0 | 3.5.0 | 3.5.0 | Current registry release |
+| `scripts/ci/requirements.lock` | securesystemslib | new lock | 1.6.0 | 1.6.0 | Current registry release |
+| `scripts/ci/requirements.lock` | sigstore | new lock | 4.5.1 | 4.5.1 | Current registry release |
+| `scripts/ci/requirements.lock` | sigstore-models | new lock | 0.0.6 | 0.0.7 | pypi-attestations@0.0.31 requires sigstore-models; sigstore@4.5.1 requires sigstore-models==0.0.6; latest is outside the parent-supported API range |
+| `scripts/ci/requirements.lock` | sigstore-rekor-types | new lock | 0.0.18 | 0.0.18 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | snowballstemmer | 3.1.1 | 3.1.1 | 3.1.1 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | snowballstemmer | 3.1.1 | 3.1.1 | 3.1.1 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | snowballstemmer | 3.1.1 | 3.1.1 | 3.1.1 | Current registry release |
@@ -359,11 +373,14 @@ Registry snapshots: 2026-11-14 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-security.lock` | tomli | 2.5.0 | 2.5.0 | 2.5.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-security.lock` | tomli-w | 1.2.0 | 1.2.0 | 1.2.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock` | truststore | 0.10.5 | 0.10.5 | 0.10.5 | Current registry release |
+| `scripts/ci/requirements.lock` | tuf | new lock | 7.0.1 | 7.0.1 | Current registry release |
 | `scripts/ci/requirements.lock` | twine | 7.0.0 | 7.0.0 | 7.0.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | typing-extensions | 4.16.0 | 4.16.0 | 4.16.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | typing-extensions | 4.16.0 | 4.16.0 | 4.16.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/requirements.lock` | typing-extensions | 4.16.0 | 4.16.0 | 4.16.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/python/uv.lock` | typing-extensions | 4.16.0 | 4.16.0 | 4.16.0 | Current registry release |
+| `scripts/ci/requirements.lock` | typing-extensions | new lock | 4.16.0 | 4.16.0 | Current registry release |
+| `scripts/ci/requirements.lock` | typing-inspection | new lock | 0.4.5 | 0.4.5 | Current registry release |
 | `benchmarks/python/requirements.lock` | urllib3 | 2.8.0 | 2.8.0 | 2.8.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/requirements.lock` | urllib3 | 2.8.0 | 2.8.0 | 2.8.0 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/python/uv.lock` | urllib3 | 2.8.0 | 2.8.0 | 2.8.0 | Current registry release |

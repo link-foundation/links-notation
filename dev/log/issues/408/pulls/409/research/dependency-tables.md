@@ -817,13 +817,18 @@ Registry queries performed on 2026-11-14 UTC. Raw results: `registry-all.json`. 
 | `benchmarks/tools/package.json` | yaml | `^2.9.1` | `^2.9.1` | `2.9.1` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/js/package.json` | @changesets/cli | `^3.0.3` | `^3.0.3` | `3.0.3` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/js/package.json` | @eslint/js | `^10.0.1` | `^10.0.1` | `10.0.1` | Current stable floor/ref |
+| `dev/log/issues/330/pulls/331/templates/js/package.json` | browser-commander | `added` | `0.34.1` | `0.34.1` | Current stable floor/ref |
+| `dev/log/issues/330/pulls/331/templates/js/package.json` | command-stream | `added` | `^2.6.0` | `2.6.0` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/js/package.json` | eslint | `^10.15.0` | `^10.15.0` | `10.15.0` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/js/package.json` | eslint-config-prettier | `^10.1.8` | `^10.1.8` | `10.1.8` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/js/package.json` | eslint-plugin-prettier | `^5.5.7` | `^5.5.7` | `5.5.7` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/js/package.json` | husky | `^9.1.7` | `^9.1.7` | `9.1.7` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/js/package.json` | jscpd | `^5.4.3` | `^5.4.3` | `5.4.3` | Current stable floor/ref |
+| `dev/log/issues/330/pulls/331/templates/js/package.json` | lino-arguments | `added` | `^0.4.1` | `0.4.1` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/js/package.json` | lint-staged | `^17.6.0` | `^17.6.0` | `17.6.0` | Current stable floor/ref |
+| `dev/log/issues/330/pulls/331/templates/js/package.json` | playwright | `added` | `1.65.1` | `1.65.1` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/js/package.json` | prettier | `^3.10.1` | `^3.10.1` | `3.10.1` | Current stable floor/ref |
+| `dev/log/issues/330/pulls/331/templates/js/package.json` | semver | `added` | `^7.8.6` | `7.8.6` | Current stable floor/ref |
 | `dev/log/issues/330/pulls/331/templates/js/package.json` | test-anywhere | `^0.9.1` | `^0.9.1` | `0.9.1` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/csharp/package.json` | @eslint/js | `10.0.1` | `10.0.1` | `10.0.1` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/csharp/package.json` | @types/bun | `1.4.4` | `1.4.4` | `1.4.4` | Current stable floor/ref |
@@ -841,6 +846,7 @@ Registry queries performed on 2026-11-14 UTC. Raw results: `registry-all.json`. 
 | `dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package.json` | unzip-stream | `0.3.4` | `0.3.4` | `0.3.4` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/js/package.json` | @changesets/cli | `^3.0.3` | `^3.0.3` | `3.0.3` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/js/package.json` | @eslint/js | `^10.0.1` | `^10.0.1` | `10.0.1` | Current stable floor/ref |
+| `dev/log/issues/377/pulls/378/templates/js/package.json` | browser-commander | `added` | `0.34.1` | `0.34.1` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/js/package.json` | command-stream | `2.6.0` | `2.6.0` | `2.6.0` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/js/package.json` | eslint | `^10.15.0` | `^10.15.0` | `10.15.0` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/js/package.json` | eslint-config-prettier | `^10.1.8` | `^10.1.8` | `10.1.8` | Current stable floor/ref |
@@ -849,7 +855,9 @@ Registry queries performed on 2026-11-14 UTC. Raw results: `registry-all.json`. 
 | `dev/log/issues/377/pulls/378/templates/js/package.json` | jscpd | `^5.4.3` | `^5.4.3` | `5.4.3` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/js/package.json` | lino-arguments | `0.4.1` | `0.4.1` | `0.4.1` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/js/package.json` | lint-staged | `^17.6.0` | `^17.6.0` | `17.6.0` | Current stable floor/ref |
+| `dev/log/issues/377/pulls/378/templates/js/package.json` | playwright | `added` | `1.65.1` | `1.65.1` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/js/package.json` | prettier | `^3.10.1` | `^3.10.1` | `3.10.1` | Current stable floor/ref |
+| `dev/log/issues/377/pulls/378/templates/js/package.json` | semver | `added` | `^7.8.6` | `7.8.6` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/js/package.json` | test-anywhere | `^0.9.1` | `^0.9.1` | `0.9.1` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package.json` | @actions/artifact | `6.3.1` | `6.3.1` | `6.3.1` | Current stable floor/ref |
 | `dev/log/issues/377/pulls/378/templates/python/.github/actions/artifact/package.json` | @actions/core | `3.0.1` | `3.0.1` | `3.0.1` | Current stable floor/ref |
@@ -962,6 +970,7 @@ Registry queries performed on 2026-11-14 UTC. Raw results: `registry-all.json`. 
 | `python/pyproject.toml` | pytest-timeout | `>=2.4.0` | `>=2.4.0` | `2.4.0` | Current stable floor/ref |
 | `python/pyproject.toml` | setuptools | `>=84.2.1` | `>=84.2.1` | `84.2.1` | Current stable floor/ref |
 | `scripts/ci/requirements.txt` | build | `>=1.6.1` | `>=1.6.1` | `1.6.1` | Current stable floor/ref |
+| `scripts/ci/requirements.txt` | pypi-attestations | `added` | `>=0.0.31` | `0.0.31` | Current stable floor/ref |
 | `scripts/ci/requirements.txt` | twine | `>=7.0.0` | `>=7.0.0` | `7.0.0` | Current stable floor/ref |
 | `scripts/ci/requirements.txt` | uv | `==0.13.8` | `==0.13.8` | `0.13.8` | Current stable floor/ref |
 | `scripts/ci/requirements.txt` | zizmor | `==1.32.0` | `==1.32.0` | `1.32.0` | Current stable floor/ref |

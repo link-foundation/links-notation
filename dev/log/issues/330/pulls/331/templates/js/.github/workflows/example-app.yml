@@ -240,7 +240,7 @@ jobs:
       # Pinned by digest (a mutable tag is arbitrary code execution in a job
       # that holds contents: write). Re-resolve when bumping:
       #   docker buildx imagetools inspect mcr.microsoft.com/playwright:<tag>
-      image: mcr.microsoft.com/playwright@sha256:b0ab6f3cb99aa7803adbc14d9027ec1785fc6e433b97e134e0f8fe61683b6b53 # v1.59.1-noble
+      image: mcr.microsoft.com/playwright@sha256:1507cbfc550a63a6b7396791ca4f00df17beb56342d2447b3f106c306f525579 # v1.65.1-noble
     timeout-minutes: 20
     concurrency:
       group: main-writer-${{ github.repository }}-main
@@ -265,12 +265,11 @@ jobs:
       - name: Install example app dependencies
         run: npm ci --prefix examples/universal-app --no-audit --no-fund
 
-      # Deliberately installed outside the lockfile: these tools are only used
-      # by this preview-image job and both versions are pinned exactly.
+      # Browser tooling is resolved by the root native lockfile.
       - name: Install browser automation dependencies
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
-        run: npm install --no-save --package-lock=false --no-audit --no-fund browser-commander@0.8.1 playwright@1.59.1 # zizmor: ignore[adhoc-packages]
+        run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: Regenerate preview images
         run: node scripts/update-preview-images.mjs

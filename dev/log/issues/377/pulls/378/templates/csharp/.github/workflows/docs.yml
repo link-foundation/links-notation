@@ -59,7 +59,7 @@ jobs:
           global-json-file: global.json
 
       - name: Install DocFX
-        run: dotnet tool update -g docfx
+        run: dotnet tool update -g docfx --version 2.81.0
 
       - name: Restore dependencies
         run: dotnet restore

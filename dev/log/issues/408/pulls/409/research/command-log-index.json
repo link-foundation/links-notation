@@ -24,6 +24,24 @@
     "lines": 1
   },
   {
+    "path": "ci-logs/issue-408/all-inline-install-review.txt",
+    "bytes": 17172,
+    "sha256": "39fc63ef927204f618eb76b11089e5b6df7141d3f6236a872487e29abac5e8e8",
+    "lines": 132
+  },
+  {
+    "path": "ci-logs/issue-408/archive-baseline.log",
+    "bytes": 447,
+    "sha256": "f516fd01aaead0a48650de1725109e6dfb1e01c9af47e38611cfd140fe18ce3c",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/archived-actionlint.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
     "path": "ci-logs/issue-408/audit-cargo-00.log",
     "bytes": 25776,
     "sha256": "6bf06dfd7bb125ad5ab10cdb25334e2c0cd3190d326d656f47a027759471aa82",
@@ -438,9 +456,51 @@
     "lines": 9
   },
   {
+    "path": "ci-logs/issue-408/baseline-template-330-lint.log",
+    "bytes": 1325,
+    "sha256": "ee6916f37f7b18aae608b213123831169734a74ebbbda1f16ca5783113971f1c",
+    "lines": 24
+  },
+  {
+    "path": "ci-logs/issue-408/baseline-template-330-test.log",
+    "bytes": 10074,
+    "sha256": "c5b79d890758766c5eb9743d8626cb6d4c31cec1eeb8f3341a4393ee9722ecda",
+    "lines": 159
+  },
+  {
+    "path": "ci-logs/issue-408/baseline-template-377-lint.log",
+    "bytes": 1325,
+    "sha256": "47011261dc5eaf0c115ea462a258eb9d9c8e12167d46ed5f2cf8e0bfe110777a",
+    "lines": 24
+  },
+  {
+    "path": "ci-logs/issue-408/baseline-template-377-test.log",
+    "bytes": 13051,
+    "sha256": "68da8f26c8d32938e1618913f6516f49d1fdcdc2d45ff3bb7db49368c570fb49",
+    "lines": 207
+  },
+  {
+    "path": "ci-logs/issue-408/baseline-template-results.json",
+    "bytes": 621,
+    "sha256": "b935f26cc12faff94b41e7eeb32c7efd7537a7ede087a173483c8aae1109d3d0",
+    "lines": 40
+  },
+  {
+    "path": "ci-logs/issue-408/browser-commander-files.txt",
+    "bytes": 108095,
+    "sha256": "24476b8d384550a04fbabbcba5bfbccc7801623bf3895e8a226b60c05e3bc5fc",
+    "lines": 2415
+  },
+  {
     "path": "ci-logs/issue-408/bun-audit.log",
     "bytes": 3,
     "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/cargo-audit-version.log",
+    "bytes": 19,
+    "sha256": "099b5e31c557b0bcbf0fc8152869301670c0fac7bf23306539fb83030a46ec54",
     "lines": 1
   },
   {
@@ -462,12 +522,6 @@
     "lines": 4
   },
   {
-    "path": "ci-logs/issue-408/composer-AuditCommand.php",
-    "bytes": 7281,
-    "sha256": "db1d06e122c1052abc9929ccbd32ee8a5da1887127c9176e9c6c7fbbfc23bb6c",
-    "lines": 167
-  },
-  {
     "path": "ci-logs/issue-408/composer-empty-native.log",
     "bytes": 125,
     "sha256": "95ad8f9cd86da9a95fd049703afdcfc1da5c1797988c84ab0545544f66bd4221",
@@ -478,6 +532,18 @@
     "bytes": 626,
     "sha256": "bcd4fa2ecd965540b85febb8a16ff46a503f6c37f12cd3421f84d715a90793ef",
     "lines": 11
+  },
+  {
+    "path": "ci-logs/issue-408/current-ci-jobs.tsv",
+    "bytes": 4905,
+    "sha256": "31317178820856b416f206c1eede11aae4cdb8ed1508f03e641821bd39a926c4",
+    "lines": 91
+  },
+  {
+    "path": "ci-logs/issue-408/current-ci-status.tsv",
+    "bytes": 3474,
+    "sha256": "58bcafe693605582ded78463ca4b3ae451fcf0ab3061cdd049ced1138e7e741c",
+    "lines": 85
   },
   {
     "path": "ci-logs/issue-408/current-runs.json",
@@ -522,10 +588,208 @@
     "lines": 0
   },
   {
+    "path": "ci-logs/issue-408/docfx-install.log",
+    "bytes": 789,
+    "sha256": "5a554647c787caee771c6fb8babf036ea84c38a24decd02cd78162bc895864d4",
+    "lines": 19
+  },
+  {
+    "path": "ci-logs/issue-408/docfx-version.log",
+    "bytes": 48,
+    "sha256": "b755ebc0c47a7856685eaacd6dc6935ce94894d5332fb975786e18e8a059d371",
+    "lines": 1
+  },
+  {
     "path": "ci-logs/issue-408/dotnet-install.log",
     "bytes": 1044,
     "sha256": "dfddeca6029229ab953069fbb20570525384547eb1f2938cc3fe39712c6c2fbb",
     "lines": 10
+  },
+  {
+    "path": "ci-logs/issue-408/embedded-tool-pins-verification.log",
+    "bytes": 43,
+    "sha256": "f16ea127dbcd0e0ae4ba1c58064a3061ed20452c9519bfd7dc7e284ac55a8acc",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/embedded-tool-pins.txt",
+    "bytes": 10739,
+    "sha256": "849e86771f71776f37b6103d29e63ba090c4853cab7592fa372027cb9bbba09a",
+    "lines": 73
+  },
+  {
+    "path": "ci-logs/issue-408/evidence-commit-stat.log",
+    "bytes": 7319,
+    "sha256": "242a2936376fc45fde5680a9da3946acbe08c6439c951b2949f0bac7cad6d585",
+    "lines": 116
+  },
+  {
+    "path": "ci-logs/issue-408/final-actionlint.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/final-archive-actionlint.log",
+    "bytes": 19859,
+    "sha256": "7eb6b3d0add783b5626ace3e86be1c3c60eb74469627ed538fabb640926d1c75",
+    "lines": 252
+  },
+  {
+    "path": "ci-logs/issue-408/final-assertion-format.log",
+    "bytes": 166,
+    "sha256": "ed6ee86b9e9041eeda17b138db2072ecbe5086138f6da34919861df6ed100834",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/final-declarations.log",
+    "bytes": 52,
+    "sha256": "c5ac3c8a8eb07ea320e1141ce1b8bdb05ba72d0cfadad8bf0f82005e1f0319c5",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/final-diff-check.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/final-experiments-black.log",
+    "bytes": 56,
+    "sha256": "6a479b5c82191f225899d5e11b6acd828479dbe0a41fbaea811c4de9326eb022",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/final-inline-tests.log",
+    "bytes": 755,
+    "sha256": "bebdeb9bf42402b74849124c90cc2d299fb4de39d6e7005557b6ed6ecc28e016",
+    "lines": 16
+  },
+  {
+    "path": "ci-logs/issue-408/final-java-matcher.log",
+    "bytes": 202,
+    "sha256": "e6ccce3a8018602f8d40f1bd201bc83f37386e0b309e7e03be46e0b850f9aabe",
+    "lines": 9
+  },
+  {
+    "path": "ci-logs/issue-408/final-js.log",
+    "bytes": 22887,
+    "sha256": "348a7f6388d600b63ac31400caf108bf08df0171078d1e08d04b8131c47d90cc",
+    "lines": 442
+  },
+  {
+    "path": "ci-logs/issue-408/final-locks.log",
+    "bytes": 73,
+    "sha256": "b654e2046e688ca714d05e87a02dea3b22b106f1a83b87b084bf547ca02f1edd",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/final-main-fetch.log",
+    "bytes": 103,
+    "sha256": "104d18a689f83056455201da0539bcbce8066ae0533ffb733c17a98afcc8ae82",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/final-npm-helper-lint.log",
+    "bytes": 1,
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/final-prepush-runs.tsv",
+    "bytes": 918,
+    "sha256": "58e3012812437d2d8dba3c4af326676b4a25b409c14eff83a933d25bdfe5ba62",
+    "lines": 9
+  },
+  {
+    "path": "ci-logs/issue-408/final-prettier.log",
+    "bytes": 232,
+    "sha256": "4942ca780cdcbbd700766e3a334b597ca8d2e7e51d87eb13699b022418219020",
+    "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/final-probe-format.log",
+    "bytes": 223,
+    "sha256": "f7abce47e7971f4fc5f0920a0789c1f5fd2c429ca9f1aaa205227fd778b247cf",
+    "lines": 6
+  },
+  {
+    "path": "ci-logs/issue-408/final-rust-budget.log",
+    "bytes": 38,
+    "sha256": "5267df7351c16144271ad3759d3ed0b28cef55f37c0314007076281ac5ad023c",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/final-tables.log",
+    "bytes": 124,
+    "sha256": "c4b4afea7c089520b74452d566f3c459e07007f62cad9af7258660e1f7c66836",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-330-audit.log",
+    "bytes": 363,
+    "sha256": "919d74b75749aa4dcfafa64d3b97a3a92d7c11e0e8bab0efe27ca9f2f7458cb6",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-330-lint.log",
+    "bytes": 1334,
+    "sha256": "009ecb70182d9f85a033f34f0f3d0abeccf209e04adac704b391853f02625372",
+    "lines": 24
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-330-preview-contract.log",
+    "bytes": 303,
+    "sha256": "968bc907faf87fcc5b27c934c1f9e4c1b4dfbf94da2f8963bffbd80f7d2fc44c",
+    "lines": 11
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-330-test.log",
+    "bytes": 9764,
+    "sha256": "bcfe61dc5a24e4bfca7d46f3a566ff1cb11b71f2f37fe73c7992f892b35b3b08",
+    "lines": 156
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-377-audit.log",
+    "bytes": 363,
+    "sha256": "919d74b75749aa4dcfafa64d3b97a3a92d7c11e0e8bab0efe27ca9f2f7458cb6",
+    "lines": 22
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-377-lint.log",
+    "bytes": 1334,
+    "sha256": "35f3ee8f504709e633a9ce11914a7b72198721e80a6337c9e69f54256415fa4d",
+    "lines": 24
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-377-preview-contract.log",
+    "bytes": 303,
+    "sha256": "de0989aa078bc4ea6a0d9c2c6b8ac3bd6e00e7a576a72d4dc55d65663cc5e2f1",
+    "lines": 11
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-377-test.log",
+    "bytes": 12882,
+    "sha256": "727ee8319a34c630cb1ef118df5d2a2084f1fbe78f2627d9fb04bd62f5b5faf5",
+    "lines": 207
+  },
+  {
+    "path": "ci-logs/issue-408/final-template-results.json",
+    "bytes": 854,
+    "sha256": "972beac571d3e34da76f11d023b63f6e20c4a8d11964483061e92407ac40114d",
+    "lines": 53
+  },
+  {
+    "path": "ci-logs/issue-408/final-workflow-contract.log",
+    "bytes": 102,
+    "sha256": "56e03afda220e7ba78bbcecf9a2e53a0149cfc3e311fa10bbd01b25e8e5ba671",
+    "lines": 5
+  },
+  {
+    "path": "ci-logs/issue-408/final-zizmor.log",
+    "bytes": 176839,
+    "sha256": "e68d8de5ee8a3df74314207e1c08f63a55a9a3ed44e499ed5ce665310821a2a1",
+    "lines": 1352
   },
   {
     "path": "ci-logs/issue-408/go-benchmarks-vuln-current.log",
@@ -586,6 +850,60 @@
     "bytes": 3722,
     "sha256": "6df4011e4b3be491dcf22bc86f81c595f305636c76d0e12cf3e892c4c0be00e8",
     "lines": 91
+  },
+  {
+    "path": "ci-logs/issue-408/inline-install-review.txt",
+    "bytes": 11884,
+    "sha256": "0b1f2695657036cdbc643991d9b4cb0562e9ccf277eeeb39a192d28fb17320ed",
+    "lines": 94
+  },
+  {
+    "path": "ci-logs/issue-408/inline-inventory.log",
+    "bytes": 41,
+    "sha256": "2e74729f10c1b04315c5ef47f23df114bc0b8df83c30bba9076a1969fbde10bb",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/inline-locations.txt",
+    "bytes": 20285,
+    "sha256": "23a1adc8b98e1f5fa150a562268657e6af5cbb2536f7124087539252081a6fda",
+    "lines": 157
+  },
+  {
+    "path": "ci-logs/issue-408/inline-tools-after.log",
+    "bytes": 436,
+    "sha256": "1ff9be6ccaa55a3405182adfe253a33578c39dfbfbc9c14d4c547c2deb5de2eb",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/inline-tools-before.log",
+    "bytes": 4027,
+    "sha256": "02e45fea0c8d038627eca1da9ab35b9b5a01716b097a489d8ac948a6611b8e9c",
+    "lines": 101
+  },
+  {
+    "path": "ci-logs/issue-408/installed-loader-after.log",
+    "bytes": 757,
+    "sha256": "8dca6d41d07773d83117f1144d5f3254310ef99cf815e3e4c30cd9737f050246",
+    "lines": 16
+  },
+  {
+    "path": "ci-logs/issue-408/installed-loader-before.log",
+    "bytes": 1575,
+    "sha256": "35cad7dd0b55f96bd41910a2ab0a3b7a56dce9ba2de0b69d7e555fb567ccfdb9",
+    "lines": 39
+  },
+  {
+    "path": "ci-logs/issue-408/installed-loader-format.log",
+    "bytes": 132,
+    "sha256": "7335e989e88c593c1f6ca3e0e2457e8e5b6dd1efe74c213372eea5b9b69ed447",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/installed-loader-lock.log",
+    "bytes": 25,
+    "sha256": "df9a5f74f9c6f0091535a38eebca1116d6f116e043e5d52197da72f3a121bf8d",
+    "lines": 2
   },
   {
     "path": "ci-logs/issue-408/inventory-final.log",
@@ -762,6 +1080,42 @@
     "lines": 5
   },
   {
+    "path": "ci-logs/issue-408/npm-12-migration.txt",
+    "bytes": 4278,
+    "sha256": "a9a2725d05c28bad4b99a80afed7606b2481a4dd416e3e72ce2eb4befa8bbf8b",
+    "lines": 38
+  },
+  {
+    "path": "ci-logs/issue-408/npm-helper-format.log",
+    "bytes": 70,
+    "sha256": "33fac1b7a0d927d24cdbdf127e5f4894a985a7606a0c165bc0e49994da29a473",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/npm-template-330-browser-install.log",
+    "bytes": 25,
+    "sha256": "ce97f1a307a58309c7829d06b11982192ac275420bea4736a459af6ebe71d3d6",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/npm-template-330-install.log",
+    "bytes": 26,
+    "sha256": "b5630963fa433bc94a822725a813ac67b843e5356fe87934b6214fcb2ee25870",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/npm-template-377-browser-install.log",
+    "bytes": 25,
+    "sha256": "5836f1871d36f1a6a957b7bce369677d4dacc90dfedada066248645533c1994b",
+    "lines": 2
+  },
+  {
+    "path": "ci-logs/issue-408/npm-template-377-install.log",
+    "bytes": 27,
+    "sha256": "eb7e97c663f33bb6420babe0227892d7741319c75588f19ed21e129c25705c58",
+    "lines": 2
+  },
+  {
     "path": "ci-logs/issue-408/parity-final.log",
     "bytes": 87,
     "sha256": "3d8bc71b7f72a8e043d939422c56521cc3539504cf7300665212dabd3ae3355a",
@@ -796,6 +1150,60 @@
     "bytes": 635,
     "sha256": "5fc9b85025d5c15c98c9c4a1ea70e8437f38f8f62097c214c12955ab8cbc9e14",
     "lines": 14
+  },
+  {
+    "path": "ci-logs/issue-408/post-push-runs.json",
+    "bytes": 1584,
+    "sha256": "c493d8e37e063b2bad601ce0c10a48b874a9b5efa625db340f417af65bacbdcf",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/pr-edit.log",
+    "bytes": 59,
+    "sha256": "29744826249da23bb354ea4ceacc842b00b86d6f403e08f71728911e7e7f4700",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/pre-final-batch-runs.json",
+    "bytes": 1056,
+    "sha256": "fd8c964ae30544854abc838f5688463f29f470ce45f3adc0c5b5bc802b3e7197",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/pre-push-runs.json",
+    "bytes": 479,
+    "sha256": "8d7df38e0c939fee8c6978f827e04c8e41379b151cf9bb465d898607810bf1cc",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/preview-smoke.log",
+    "bytes": 1118,
+    "sha256": "e6cdeae5ff9030e7ace19afd1fb7ead9c9bed9035834c1eba35803c6a591bb69",
+    "lines": 12
+  },
+  {
+    "path": "ci-logs/issue-408/preview-smoke.png",
+    "bytes": 10256,
+    "sha256": "da69d81b85f898fa973f67a66036fb07f6e677a9dce663acb6b11f2a674d43ee",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/publisher-audit.json",
+    "bytes": 2793,
+    "sha256": "2a58db3f4a977de22266bf03310937057501e5ec3de3dec73f1ca98207f27066",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/publisher-audit.log",
+    "bytes": 265,
+    "sha256": "79d30422388543b2563e1dde76bb7e7857d7ef0c6fdf05c8c71598633ca07e1e",
+    "lines": 3
+  },
+  {
+    "path": "ci-logs/issue-408/publisher-lock-refresh.log",
+    "bytes": 154307,
+    "sha256": "fdcff7eae06bd4975c0da19653669a4bd0fd6d8a6b3b563c3e95f6fbcc2a294b",
+    "lines": 1859
   },
   {
     "path": "ci-logs/issue-408/python-black.log",
@@ -1440,6 +1848,18 @@
     "lines": 0
   },
   {
+    "path": "ci-logs/issue-408/staticcheck-install.log",
+    "bytes": 395,
+    "sha256": "2ef0fb1b593de48f26f7a3a374c7d2fd768b04274383fd1c7389e5047833fd02",
+    "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/staticcheck-version.log",
+    "bytes": 29,
+    "sha256": "129e8482ea7967a9991755f5236f4613081e8b49c8ac47acd416013ae6a4a658",
+    "lines": 1
+  },
+  {
     "path": "ci-logs/issue-408/tables-final.log",
     "bytes": 124,
     "sha256": "6d42892a974f4d32407de4b5bd7c6a06ce344bf588423cda90967d223e55019e",
@@ -1450,6 +1870,18 @@
     "bytes": 123,
     "sha256": "acb1bef554c3302cae162a648d14e2a5249bd172ab6048a59026182ece6a2d21",
     "lines": 7
+  },
+  {
+    "path": "ci-logs/issue-408/tool-pins-final.log",
+    "bytes": 43,
+    "sha256": "f16ea127dbcd0e0ae4ba1c58064a3061ed20452c9519bfd7dc7e284ac55a8acc",
+    "lines": 1
+  },
+  {
+    "path": "ci-logs/issue-408/toolchain-manifest-paths.txt",
+    "bytes": 4100,
+    "sha256": "8bd9a0019003221a86978bd76d23adaddf8dffe63466351bde2d859332c6f700",
+    "lines": 69
   },
   {
     "path": "ci-logs/issue-408/tools-install.log",
@@ -1480,6 +1912,18 @@
     "bytes": 50,
     "sha256": "aa43c689c899846335aaddae9e7af360a4de4a43cf7a882627741ddf5387fe02",
     "lines": 4
+  },
+  {
+    "path": "ci-logs/issue-408/workflow-tools-fmt.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lines": 0
+  },
+  {
+    "path": "ci-logs/issue-408/workflow-tools-test.log",
+    "bytes": 754,
+    "sha256": "3b11ae6d83c02628157c9fd738e339b9c5291013875f5018684fc5392c33a20f",
+    "lines": 14
   },
   {
     "path": "ci-logs/issue-408/yarn-audit.log",

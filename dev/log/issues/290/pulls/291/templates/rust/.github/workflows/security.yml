@@ -24,7 +24,7 @@ jobs:
 
       - uses: taiki-e/install-action@v2.90.4
         with:
-          tool: cargo-audit@0.22.2
+          tool: cargo-audit@0.23.0
 
       - name: Audit committed Cargo.lock
         run: cargo audit --file Cargo.lock

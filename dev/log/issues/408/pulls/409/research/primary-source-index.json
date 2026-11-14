@@ -113,5 +113,65 @@
     "file": "vcpkg-latest-baseline.json",
     "url": "https://api.github.com/repos/microsoft/vcpkg/commits/master",
     "observed": "2026-11-14T08:39:21.218422+00:00"
+  },
+  {
+    "file": "inline-tools-registry.json",
+    "observed": "2026-11-14T09:47:02.779180+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
+  },
+  {
+    "file": "extra-inline-registry.json",
+    "observed": "2026-11-14T09:47:02.779245+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
+  },
+  {
+    "file": "playwright-image.json",
+    "observed": "2026-11-14T09:47:02.779251+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
+  },
+  {
+    "file": "npm-release.json",
+    "observed": "2026-11-14T09:47:02.779255+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
+  },
+  {
+    "file": "browser-commander-release.json",
+    "observed": "2026-11-14T09:47:02.779259+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
+  },
+  {
+    "file": "playwright-release.json",
+    "observed": "2026-11-14T09:47:02.779264+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
+  },
+  {
+    "file": "semver-release.json",
+    "observed": "2026-11-14T09:47:02.779267+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
+  },
+  {
+    "file": "staticcheck-release.json",
+    "observed": "2026-11-14T09:47:02.779271+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
+  },
+  {
+    "file": "cargo-tools-registry.json",
+    "observed": "2026-11-14T09:47:02.779275+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
+  },
+  {
+    "file": "publisher-parent-bounds.json",
+    "observed": "2026-11-14T09:47:02.779279+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
+  },
+  {
+    "file": "use-m-registry.json",
+    "observed": "2026-11-14T09:47:02.779283+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
+  },
+  {
+    "file": "use-m-issue72.json",
+    "observed": "2026-11-14T09:47:02.779288+00:00",
+    "description": "Fresh primary registry/release metadata; source URLs recorded in the snapshot or its associated inventory table."
   }
 ]

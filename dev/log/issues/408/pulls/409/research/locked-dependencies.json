@@ -5464,6 +5464,14 @@
     "latest": "0.158.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@peggyjs/from-mem",
+    "before": [],
+    "after": "3.1.3",
+    "latest": "4.0.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "@peggyjs/from-mem",
@@ -5574,12 +5582,28 @@
     "latest": "2.11.1"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js",
+    "before": [],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "@resvg/resvg-js",
     "before": [
       "2.6.2"
     ],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-android-arm-eabi",
+    "before": [],
     "after": "2.6.2",
     "latest": "2.6.2"
   },
@@ -5594,12 +5618,28 @@
     "latest": "2.6.2"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-android-arm64",
+    "before": [],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "@resvg/resvg-js-android-arm64",
     "before": [
       "2.6.2"
     ],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-darwin-arm64",
+    "before": [],
     "after": "2.6.2",
     "latest": "2.6.2"
   },
@@ -5614,12 +5654,28 @@
     "latest": "2.6.2"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-darwin-x64",
+    "before": [],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "@resvg/resvg-js-darwin-x64",
     "before": [
       "2.6.2"
     ],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-linux-arm-gnueabihf",
+    "before": [],
     "after": "2.6.2",
     "latest": "2.6.2"
   },
@@ -5634,12 +5690,28 @@
     "latest": "2.6.2"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-linux-arm64-gnu",
+    "before": [],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "@resvg/resvg-js-linux-arm64-gnu",
     "before": [
       "2.6.2"
     ],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-linux-arm64-musl",
+    "before": [],
     "after": "2.6.2",
     "latest": "2.6.2"
   },
@@ -5654,12 +5726,28 @@
     "latest": "2.6.2"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-linux-x64-gnu",
+    "before": [],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "@resvg/resvg-js-linux-x64-gnu",
     "before": [
       "2.6.2"
     ],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-linux-x64-musl",
+    "before": [],
     "after": "2.6.2",
     "latest": "2.6.2"
   },
@@ -5674,6 +5762,14 @@
     "latest": "2.6.2"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-win32-arm64-msvc",
+    "before": [],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "@resvg/resvg-js-win32-arm64-msvc",
@@ -5684,12 +5780,28 @@
     "latest": "2.6.2"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-win32-ia32-msvc",
+    "before": [],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "@resvg/resvg-js-win32-ia32-msvc",
     "before": [
       "2.6.2"
     ],
+    "after": "2.6.2",
+    "latest": "2.6.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@resvg/resvg-js-win32-x64-msvc",
+    "before": [],
     "after": "2.6.2",
     "latest": "2.6.2"
   },
@@ -5874,6 +5986,14 @@
     "latest": "1.1.1"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@sec-ant/readable-stream",
+    "before": [],
+    "after": "0.4.1",
+    "latest": "0.7.1"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "@sec-ant/readable-stream",
@@ -5882,6 +6002,14 @@
     ],
     "after": "0.4.1",
     "latest": "0.7.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@sindresorhus/merge-streams",
+    "before": [],
+    "after": "4.0.0",
+    "latest": "4.0.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -6774,6 +6902,30 @@
     "latest": "0.45.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@xmldom/xmldom",
+    "before": [],
+    "after": "0.9.12",
+    "latest": "0.9.12"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@xmldom/xmldom",
+    "before": [],
+    "after": "0.9.12",
+    "latest": "0.9.12"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "@xterm/headless",
+    "before": [],
+    "after": "6.0.0",
+    "latest": "6.0.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "@xterm/headless",
@@ -7014,6 +7166,14 @@
     "latest": "8.20.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ansi-regex",
+    "before": [],
+    "after": "6.6.0",
+    "latest": "6.6.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "ansi-regex",
@@ -7022,6 +7182,14 @@
     ],
     "after": "6.6.0",
     "latest": "6.6.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "ansi-styles",
+    "before": [],
+    "after": "6.2.3",
+    "latest": "7.0.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -7528,6 +7696,22 @@
     "latest": "4.0.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "better-sqlite3",
+    "before": [],
+    "after": "13.2.0",
+    "latest": "13.2.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "better-sqlite3",
+    "before": [],
+    "after": "13.2.0",
+    "latest": "13.2.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
     "ecosystem": "npm",
     "name": "binary",
@@ -7566,6 +7750,22 @@
     ],
     "after": "2.19.5",
     "latest": "2.19.5"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "bplist-parser",
+    "before": [],
+    "after": "0.5.0",
+    "latest": "0.5.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "bplist-parser",
+    "before": [],
+    "after": "0.5.0",
+    "latest": "0.5.0"
   },
   {
     "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
@@ -7680,6 +7880,22 @@
     ],
     "after": "5.0.13",
     "latest": "5.0.13"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "browser-commander",
+    "before": [],
+    "after": "0.34.1",
+    "latest": "0.34.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "browser-commander",
+    "before": [],
+    "after": "0.34.1",
+    "latest": "0.34.1"
   },
   {
     "path": "kotlin/kotlin-js-store/yarn.lock",
@@ -7962,6 +8178,14 @@
     "latest": "6.0.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "cliui",
+    "before": [],
+    "after": "9.0.1",
+    "latest": "9.0.1"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "cliui",
@@ -7972,6 +8196,14 @@
     "latest": "9.0.1"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "command-stream",
+    "before": [],
+    "after": "2.6.0",
+    "latest": "2.6.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "command-stream",
@@ -7980,6 +8212,14 @@
     ],
     "after": "2.6.0",
     "latest": "2.6.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "commander",
+    "before": [],
+    "after": "14.0.3",
+    "latest": "15.1.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -8178,6 +8418,22 @@
     "before": [
       "7.0.3"
     ],
+    "after": "7.0.3",
+    "latest": "7.0.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "csv-parse",
+    "before": [],
+    "after": "7.0.3",
+    "latest": "7.0.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "csv-parse",
+    "before": [],
     "after": "7.0.3",
     "latest": "7.0.3"
   },
@@ -8472,6 +8728,14 @@
     "latest": "1.0.1"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "emoji-regex",
+    "before": [],
+    "after": "10.6.0",
+    "latest": "11.0.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "emoji-regex",
@@ -8620,6 +8884,14 @@
     ],
     "after": "1.3.4",
     "latest": "1.3.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "escalade",
+    "before": [],
+    "after": "3.2.0",
+    "latest": "3.2.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -9344,6 +9616,14 @@
     "latest": "1.0.1"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "execa",
+    "before": [],
+    "after": "10.2.1",
+    "latest": "10.2.1"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "execa",
@@ -9722,6 +10002,14 @@
     ],
     "after": "6.5.0",
     "latest": "6.5.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "figures",
+    "before": [],
+    "after": "6.1.0",
+    "latest": "6.1.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -10114,6 +10402,14 @@
     "latest": "2.0.1"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "get-caller-file",
+    "before": [],
+    "after": "2.0.5",
+    "latest": "2.0.5"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "get-caller-file",
@@ -10122,6 +10418,14 @@
     ],
     "after": "2.0.5",
     "latest": "2.0.5"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "get-east-asian-width",
+    "before": [],
+    "after": "1.7.0",
+    "latest": "1.7.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -10174,6 +10478,14 @@
     "latest": "1.0.1"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "get-stream",
+    "before": [],
+    "after": "9.0.1",
+    "latest": "9.0.1"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "get-stream",
@@ -10204,6 +10516,14 @@
     "latest": "1.1.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "getenv",
+    "before": [],
+    "after": "2.0.0",
+    "latest": "2.0.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "getenv",
@@ -10212,6 +10532,14 @@
     ],
     "after": "2.0.0",
     "latest": "2.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "gifenc",
+    "before": [],
+    "after": "1.0.3",
+    "latest": "1.0.3"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -10794,6 +11122,14 @@
     ],
     "after": "4.2.2",
     "latest": "4.2.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "human-signals",
+    "before": [],
+    "after": "8.0.1",
+    "latest": "8.0.1"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -11456,6 +11792,14 @@
     "latest": "4.0.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "is-plain-obj",
+    "before": [],
+    "after": "4.1.0",
+    "latest": "4.1.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "is-plain-obj",
@@ -11524,6 +11868,14 @@
     ],
     "after": "1.0.4",
     "latest": "1.0.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "is-stream",
+    "before": [],
+    "after": "4.0.1",
+    "latest": "4.0.1"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
@@ -11614,6 +11966,14 @@
     ],
     "after": "1.1.15",
     "latest": "1.1.15"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "is-unicode-supported",
+    "before": [],
+    "after": "2.1.0",
+    "latest": "2.1.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -12510,6 +12870,38 @@
     "latest": "1.33.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "links-notation",
+    "before": [],
+    "after": "0.11.2",
+    "latest": "0.31.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "links-notation",
+    "before": [],
+    "after": "0.13.0",
+    "latest": "0.31.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "links-notation",
+    "before": [],
+    "after": "0.25.2",
+    "latest": "0.31.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "links-notation",
+    "before": [],
+    "after": "0.31.4",
+    "latest": "0.31.4"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "links-notation",
@@ -12542,8 +12934,28 @@
       "0.13.0",
       "0.31.3"
     ],
+    "after": "0.25.2",
+    "latest": "0.31.4"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "links-notation",
+    "before": [
+      "0.11.2",
+      "0.13.0",
+      "0.31.3"
+    ],
     "after": "0.31.4",
     "latest": "0.31.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "lino-arguments",
+    "before": [],
+    "after": "0.4.1",
+    "latest": "0.4.1"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -12554,6 +12966,14 @@
     ],
     "after": "0.4.1",
     "latest": "0.4.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "lino-env",
+    "before": [],
+    "after": "0.2.8",
+    "latest": "0.2.8"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -12696,6 +13116,22 @@
     "latest": "4.18.1"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "log-lazy",
+    "before": [],
+    "after": "1.0.4",
+    "latest": "1.0.4"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "log-lazy",
+    "before": [],
+    "after": "1.0.4",
+    "latest": "1.0.4"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
     "ecosystem": "npm",
     "name": "lru-cache",
@@ -12744,6 +13180,14 @@
     ],
     "after": "1.1.0",
     "latest": "1.1.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "meta-language",
+    "before": [],
+    "after": "0.46.0",
+    "latest": "0.46.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -13110,6 +13554,22 @@
     "latest": "1.4.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "node-addon-api",
+    "before": [],
+    "after": "7.1.1",
+    "latest": "8.9.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "node-addon-api",
+    "before": [],
+    "after": "8.9.2",
+    "latest": "8.9.2"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "node-addon-api",
@@ -13118,6 +13578,24 @@
     ],
     "after": "7.1.1",
     "latest": "8.9.2"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "node-addon-api",
+    "before": [
+      "7.1.1"
+    ],
+    "after": "8.9.2",
+    "latest": "8.9.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "node-pty",
+    "before": [],
+    "after": "1.1.0",
+    "latest": "1.1.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -13148,6 +13626,14 @@
     ],
     "after": "3.0.0",
     "latest": "3.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "npm-run-path",
+    "before": [],
+    "after": "6.0.0",
+    "latest": "6.0.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -13440,6 +13926,30 @@
     "latest": "1.9.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "pako",
+    "before": [],
+    "after": "1.0.11",
+    "latest": "3.0.3"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "pako",
+    "before": [],
+    "after": "1.0.11",
+    "latest": "3.0.3"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "parse-ms",
+    "before": [],
+    "after": "4.0.0",
+    "latest": "5.0.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "parse-ms",
@@ -13550,6 +14060,16 @@
     "latest": "4.0.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "path-key",
+    "before": [
+      "3.1.1"
+    ],
+    "after": "4.0.0",
+    "latest": "4.0.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/csharp/package-lock.json",
     "ecosystem": "npm",
     "name": "path-key",
@@ -13640,6 +14160,14 @@
     ],
     "after": "3.0.0",
     "latest": "3.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "peggy",
+    "before": [],
+    "after": "5.1.0",
+    "latest": "5.1.1"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -13740,6 +14268,54 @@
     ],
     "after": "4.0.7",
     "latest": "4.0.7"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "playwright",
+    "before": [],
+    "after": "1.65.1",
+    "latest": "1.65.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "playwright",
+    "before": [],
+    "after": "1.65.1",
+    "latest": "1.65.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "playwright-core",
+    "before": [],
+    "after": "1.65.1",
+    "latest": "1.65.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "playwright-core",
+    "before": [],
+    "after": "1.65.1",
+    "latest": "1.65.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "plist",
+    "before": [],
+    "after": "5.1.1",
+    "latest": "5.1.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "plist",
+    "before": [],
+    "after": "5.1.1",
+    "latest": "5.1.1"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",
@@ -13900,6 +14476,14 @@
     ],
     "after": "1.0.1",
     "latest": "1.0.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "pretty-ms",
+    "before": [],
+    "after": "9.3.1",
+    "latest": "10.0.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -14336,6 +14920,16 @@
     "before": [
       "7.8.6"
     ],
+    "after": "7.7.4",
+    "latest": "7.8.6"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "semver",
+    "before": [
+      "7.8.6"
+    ],
     "after": "7.8.6",
     "latest": "7.8.6"
   },
@@ -14672,6 +15266,14 @@
     "latest": "1.0.2"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "signal-exit",
+    "before": [],
+    "after": "4.1.0",
+    "latest": "4.1.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "signal-exit",
@@ -14710,6 +15312,14 @@
     ],
     "after": "0.6.1",
     "latest": "0.8.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "source-map-generator",
+    "before": [],
+    "after": "2.0.6",
+    "latest": "2.0.7"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -14820,6 +15430,22 @@
     ],
     "after": "0.3.2",
     "latest": "0.4.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "string-width",
+    "before": [],
+    "after": "7.2.0",
+    "latest": "9.0.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "string-width",
+    "before": [],
+    "after": "8.3.0",
+    "latest": "9.0.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -14948,6 +15574,14 @@
     "latest": "1.3.0"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "strip-ansi",
+    "before": [],
+    "after": "7.2.0",
+    "latest": "7.2.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "strip-ansi",
@@ -14956,6 +15590,14 @@
     ],
     "after": "7.2.0",
     "latest": "7.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "strip-final-newline",
+    "before": [],
+    "after": "4.0.0",
+    "latest": "4.0.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -15531,6 +16173,14 @@
     "latest": "8.12.4"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "unicorn-magic",
+    "before": [],
+    "after": "0.3.0",
+    "latest": "0.4.1"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "unicorn-magic",
@@ -15579,6 +16229,22 @@
     ],
     "after": "0.3.4",
     "latest": "0.3.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "upng-js",
+    "before": [],
+    "after": "2.1.0",
+    "latest": "2.1.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "upng-js",
+    "before": [],
+    "after": "2.1.0",
+    "latest": "2.1.0"
   },
   {
     "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
@@ -15673,6 +16339,22 @@
   {
     "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
     "ecosystem": "npm",
+    "name": "webp-wasm",
+    "before": [],
+    "after": "1.0.6",
+    "latest": "1.0.6"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "webp-wasm",
+    "before": [],
+    "after": "1.0.6",
+    "latest": "1.0.6"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
     "name": "which",
     "before": [
       "2.0.2"
@@ -15789,6 +16471,14 @@
     ],
     "after": "1.0.2",
     "latest": "1.0.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "which-command",
+    "before": [],
+    "after": "0.1.0",
+    "latest": "0.1.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -15891,6 +16581,14 @@
     "latest": "10.0.3"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "wrap-ansi",
+    "before": [],
+    "after": "9.0.2",
+    "latest": "10.0.2"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "wrap-ansi",
@@ -15929,6 +16627,30 @@
     ],
     "after": "0.3.0",
     "latest": "0.3.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "xmlbuilder",
+    "before": [],
+    "after": "15.1.1",
+    "latest": "15.1.1"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "xmlbuilder",
+    "before": [],
+    "after": "15.1.1",
+    "latest": "15.1.1"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "y18n",
+    "before": [],
+    "after": "5.0.8",
+    "latest": "5.0.8"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -15981,6 +16703,14 @@
     "latest": "2.9.1"
   },
   {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "yargs",
+    "before": [],
+    "after": "18.2.0",
+    "latest": "18.2.0"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
     "ecosystem": "npm",
     "name": "yargs",
@@ -15989,6 +16719,14 @@
     ],
     "after": "18.2.0",
     "latest": "18.2.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "yargs-parser",
+    "before": [],
+    "after": "22.0.0",
+    "latest": "22.0.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -16059,6 +16797,14 @@
     ],
     "after": "0.1.0",
     "latest": "1.2.2"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/package-lock.json",
+    "ecosystem": "npm",
+    "name": "yoctocolors",
+    "before": [],
+    "after": "2.2.0",
+    "latest": "2.2.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/package-lock.json",
@@ -17651,6 +18397,14 @@
     "latest": "1.0.0"
   },
   {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "annotated-types",
+    "before": [],
+    "after": "0.8.0",
+    "latest": "0.8.0"
+  },
+  {
     "path": "dev/log/issues/330/pulls/331/templates/python/requirements.lock",
     "ecosystem": "pypi",
     "name": "ast-serialize",
@@ -18441,6 +19195,14 @@
     "latest": "1.9.0"
   },
   {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "dnspython",
+    "before": [],
+    "after": "2.9.2",
+    "latest": "2.9.2"
+  },
+  {
     "path": "dev/log/issues/330/pulls/331/templates/python/requirements.lock",
     "ecosystem": "pypi",
     "name": "docutils",
@@ -18489,6 +19251,14 @@
     ],
     "after": "0.23",
     "latest": "0.23"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "email-validator",
+    "before": [],
+    "after": "2.3.0",
+    "latest": "2.3.0"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-ci.lock",
@@ -19821,6 +20591,14 @@
     "latest": "4.14.5"
   },
   {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "platformdirs",
+    "before": [],
+    "after": "4.14.5",
+    "latest": "4.14.5"
+  },
+  {
     "path": "dev/log/issues/330/pulls/331/templates/python/requirements.lock",
     "ecosystem": "pypi",
     "name": "pluggy",
@@ -19971,6 +20749,22 @@
     "latest": "3.12"
   },
   {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "pydantic",
+    "before": [],
+    "after": "2.14.3",
+    "latest": "2.14.3"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "pydantic-core",
+    "before": [],
+    "after": "2.50.4",
+    "latest": "2.50.4"
+  },
+  {
     "path": "python/requirements.lock",
     "ecosystem": "pypi",
     "name": "pyflakes",
@@ -20091,6 +20885,14 @@
     "latest": "2.21.0"
   },
   {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "pyjwt",
+    "before": [],
+    "after": "2.15.1",
+    "latest": "2.15.1"
+  },
+  {
     "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-security.lock",
     "ecosystem": "pypi",
     "name": "pyparsing",
@@ -20099,6 +20901,14 @@
     ],
     "after": "3.3.3",
     "latest": "3.3.3"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "pypi-attestations",
+    "before": [],
+    "after": "0.0.31",
+    "latest": "0.0.31"
   },
   {
     "path": "scripts/ci/requirements.lock",
@@ -20513,12 +21323,28 @@
   {
     "path": "scripts/ci/requirements.lock",
     "ecosystem": "pypi",
+    "name": "rfc3161-client",
+    "before": [],
+    "after": "1.0.9",
+    "latest": "1.0.9"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
     "name": "rfc3986",
     "before": [
       "2.0.0"
     ],
     "after": "2.0.0",
     "latest": "2.0.0"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "rfc8785",
+    "before": [],
+    "after": "0.1.4",
+    "latest": "0.1.4"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/cpp/scripts/requirements-security.lock",
@@ -20669,6 +21495,38 @@
     ],
     "after": "3.5.0",
     "latest": "3.5.0"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "securesystemslib",
+    "before": [],
+    "after": "1.6.0",
+    "latest": "1.6.0"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "sigstore",
+    "before": [],
+    "after": "4.5.1",
+    "latest": "4.5.1"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "sigstore-models",
+    "before": [],
+    "after": "0.0.6",
+    "latest": "0.0.7"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "sigstore-rekor-types",
+    "before": [],
+    "after": "0.0.18",
+    "latest": "0.0.18"
   },
   {
     "path": "dev/log/issues/330/pulls/331/templates/python/requirements.lock",
@@ -21123,6 +21981,14 @@
   {
     "path": "scripts/ci/requirements.lock",
     "ecosystem": "pypi",
+    "name": "tuf",
+    "before": [],
+    "after": "7.0.1",
+    "latest": "7.0.1"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
     "name": "twine",
     "before": [
       "7.0.0"
@@ -21169,6 +22035,22 @@
     ],
     "after": "4.16.0",
     "latest": "4.16.0"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "typing-extensions",
+    "before": [],
+    "after": "4.16.0",
+    "latest": "4.16.0"
+  },
+  {
+    "path": "scripts/ci/requirements.lock",
+    "ecosystem": "pypi",
+    "name": "typing-inspection",
+    "before": [],
+    "after": "0.4.5",
+    "latest": "0.4.5"
   },
   {
     "path": "benchmarks/python/requirements.lock",
