@@ -1,0 +1,117 @@
+[
+  {
+    "file": "toolchain-node.json",
+    "url": "https://nodejs.org/dist/index.json",
+    "observed": "2026-11-14T08:39:18.335877+00:00"
+  },
+  {
+    "file": "toolchain-go.json",
+    "url": "https://go.dev/dl/?mode=json",
+    "observed": "2026-11-14T08:39:18.339549+00:00"
+  },
+  {
+    "file": "toolchain-php.json",
+    "url": "https://www.php.net/releases/index.php?json&version=8.5",
+    "observed": "2026-11-14T08:39:18.340896+00:00"
+  },
+  {
+    "file": "toolchain-dotnet.json",
+    "url": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json",
+    "observed": "2026-11-14T08:39:18.452372+00:00"
+  },
+  {
+    "file": "toolchain-rust.toml.gz",
+    "url": "https://static.rust-lang.org/dist/channel-rust-stable.toml",
+    "observed": "2026-11-14T08:39:18.476054+00:00"
+  },
+  {
+    "file": "toolchain-java.json",
+    "url": "https://api.adoptium.net/v3/info/available_releases",
+    "observed": "2026-11-14T08:39:18.483872+00:00"
+  },
+  {
+    "file": "toolchain-java-releases.json",
+    "url": "https://api.adoptium.net/v3/info/release_names?architecture=x64&heap_size=normal&image_type=jdk&jvm_impl=hotspot&os=linux&project=jdk&release_type=ga&version=%5B27,28%29",
+    "observed": "2026-11-14T08:39:18.525922+00:00"
+  },
+  {
+    "file": "docker-swift.json",
+    "url": "https://hub.docker.com/v2/repositories/library/swift/tags/6.4.2-noble",
+    "observed": "2026-11-14T08:39:18.590025+00:00"
+  },
+  {
+    "file": "toolchain-docker.json",
+    "url": "https://hub.docker.com/v2/repositories/gitpod/workspace-dotnet/tags?page_size=100&ordering=last_updated",
+    "observed": "2026-11-14T08:39:18.666295+00:00"
+  },
+  {
+    "file": "upstream-scriv.json",
+    "url": "https://api.github.com/repos/nedbat/scriv/issues/208",
+    "observed": "2026-11-14T08:39:18.736401+00:00"
+  },
+  {
+    "file": "upstream-ktlint.json",
+    "url": "https://api.github.com/repos/ktlint/ktlint/issues/3403",
+    "observed": "2026-11-14T08:39:18.862361+00:00"
+  },
+  {
+    "file": "upstream-ktlint-security.json",
+    "url": "https://api.github.com/repos/ktlint/ktlint/issues/3230",
+    "observed": "2026-11-14T08:39:18.952714+00:00"
+  },
+  {
+    "file": "upstream-unsafe.json",
+    "url": "https://api.github.com/repos/JLLeitschuh/ktlint-gradle/issues/944",
+    "observed": "2026-11-14T08:39:19.284556+00:00"
+  },
+  {
+    "file": "upstream-gradle-enum.json",
+    "url": "https://api.github.com/repos/gradle/gradle/issues/39685",
+    "observed": "2026-11-14T08:39:19.410161+00:00"
+  },
+  {
+    "file": "upstream-mocha.json",
+    "url": "https://api.github.com/repos/Kotlin/kotlin-web-helpers/issues/19",
+    "observed": "2026-11-14T08:39:19.501957+00:00"
+  },
+  {
+    "file": "upstream-toolkit.json",
+    "url": "https://api.github.com/repos/actions/toolkit/issues/2564",
+    "observed": "2026-11-14T08:39:19.823348+00:00"
+  },
+  {
+    "file": "upstream-vcpkg.json",
+    "url": "https://api.github.com/repos/microsoft/vcpkg/issues/55056",
+    "observed": "2026-11-14T08:39:20.013719+00:00"
+  },
+  {
+    "file": "upstream-vstest.json",
+    "url": "https://api.github.com/repos/microsoft/vstest/issues/16652",
+    "observed": "2026-11-14T08:39:20.065989+00:00"
+  },
+  {
+    "file": "upstream-dependabot-gradle.json",
+    "url": "https://api.github.com/repos/dependabot/dependabot-core/issues/16797",
+    "observed": "2026-11-14T08:39:20.438595+00:00"
+  },
+  {
+    "file": "upstream-dependabot-yarn.json",
+    "url": "https://api.github.com/repos/dependabot/dependabot-core/issues/16798",
+    "observed": "2026-11-14T08:39:20.628847+00:00"
+  },
+  {
+    "file": "toolchain-python.json",
+    "url": "https://api.github.com/repos/python/cpython/tags?per_page=100",
+    "observed": "2026-11-14T08:39:20.631527+00:00"
+  },
+  {
+    "file": "toolchain-swift.json",
+    "url": "https://api.github.com/repos/swiftlang/swift/releases?per_page=30",
+    "observed": "2026-11-14T08:39:21.064795+00:00"
+  },
+  {
+    "file": "vcpkg-latest-baseline.json",
+    "url": "https://api.github.com/repos/microsoft/vcpkg/commits/master",
+    "observed": "2026-11-14T08:39:21.218422+00:00"
+  }
+]

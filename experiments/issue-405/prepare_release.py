@@ -5,10 +5,15 @@ with python3 experiments/issue-405/prepare_release.py, then regenerate and
 check benchmark output using the bounded Rust settings in CONTRIBUTING.md.
 """
 
+import argparse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OLD, NEW = "0.31.3", "0.31.4"
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--from-version", default="0.31.3")
+parser.add_argument("--to-version", default="0.31.4")
+args = parser.parse_args()
+OLD, NEW = args.from_version, args.to_version
 CSPROJ = "csharp/Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj"
 FILES = (
     "js/package.json",

@@ -1,0 +1,49 @@
+{
+  "groupId": "io.github.link-foundation",
+  "artifactId": "links-notation-benchmark",
+  "version": "0.1.0",
+  "type": "jar",
+  "scope": "",
+  "classifier": "",
+  "optional": "false",
+  "children": [
+    {
+      "groupId": "io.github.link-foundation",
+      "artifactId": "links-notation",
+      "version": "0.31.5",
+      "type": "jar",
+      "scope": "compile",
+      "classifier": "",
+      "optional": "false"
+    },
+    {
+      "groupId": "com.knuddels",
+      "artifactId": "jtokkit",
+      "version": "1.1.0",
+      "type": "jar",
+      "scope": "compile",
+      "classifier": "",
+      "optional": "false"
+    },
+    {
+      "groupId": "com.google.code.gson",
+      "artifactId": "gson",
+      "version": "2.15.0",
+      "type": "jar",
+      "scope": "compile",
+      "classifier": "",
+      "optional": "false",
+      "children": [
+        {
+          "groupId": "com.google.errorprone",
+          "artifactId": "error_prone_annotations",
+          "version": "2.52.0",
+          "type": "jar",
+          "scope": "compile",
+          "classifier": "",
+          "optional": "false"
+        }
+        ]
+    }
+    ]
+}

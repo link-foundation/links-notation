@@ -1,0 +1,380 @@
+[
+  {
+    "path": ".github/workflows/benchmarks.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/binary-interop.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/java.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/kotlin.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/publish-java.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": ".github/workflows/publish-kotlin.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/release.yml",
+    "name": "taiki-e/install-action",
+    "before": "v2.90.3",
+    "after": "v2.90.4",
+    "tag": "v2.90.4"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/templates/rust/.github/workflows/security.yml",
+    "name": "taiki-e/install-action",
+    "before": "v2.90.3",
+    "after": "v2.90.4",
+    "tag": "v2.90.4"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/290/pulls/291/workflows/repo-github/workflows/java.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/java/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/js/example-app.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/release.yml",
+    "name": "taiki-e/install-action",
+    "before": "v2.90.3",
+    "after": "v2.90.4",
+    "tag": "v2.90.4"
+  },
+  {
+    "path": "dev/log/issues/298/pulls/299/templates/rust/security.yml",
+    "name": "taiki-e/install-action",
+    "before": "v2.90.3",
+    "after": "v2.90.4",
+    "tag": "v2.90.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/release.yml",
+    "name": "taiki-e/install-action",
+    "before": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39",
+    "after": "4a76afe23f9e08d2d9550fb56e556444e8611d21",
+    "tag": "v2.90.4"
+  },
+  {
+    "path": "dev/log/issues/330/pulls/331/templates/rust/.github/workflows/security.yml",
+    "name": "taiki-e/install-action",
+    "before": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39",
+    "after": "4a76afe23f9e08d2d9550fb56e556444e8611d21",
+    "tag": "v2.90.4"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/java/.github/workflows/release.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml",
+    "name": "actions/setup-java",
+    "before": "v6.2.0",
+    "after": "v6.3.0",
+    "tag": "v6.3.0"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/release.yml",
+    "name": "taiki-e/install-action",
+    "before": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39",
+    "after": "4a76afe23f9e08d2d9550fb56e556444e8611d21",
+    "tag": "v2.90.4"
+  },
+  {
+    "path": "dev/log/issues/377/pulls/378/templates/rust/.github/workflows/security.yml",
+    "name": "taiki-e/install-action",
+    "before": "cfdb7ed4ccc7c7dce37759eae89dc5674b469b39",
+    "after": "4a76afe23f9e08d2d9550fb56e556444e8611d21",
+    "tag": "v2.90.4"
+  }
+]

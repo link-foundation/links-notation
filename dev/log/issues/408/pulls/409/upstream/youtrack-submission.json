@@ -1,0 +1,6 @@
+{
+  "url": "https://youtrack.jetbrains.com/api/issues?fields=id,idReadable",
+  "date": "2026-11-14",
+  "http_status": 403,
+  "response": "{\"error\":\"Forbidden\",\"error_description\":\"HTTP 403 Forbidden\"}"
+}

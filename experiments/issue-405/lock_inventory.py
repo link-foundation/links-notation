@@ -27,7 +27,15 @@ SPEC.loader.exec_module(CHECK)
 
 
 def entries(name, source):
-    if name == "package-lock.json":
+    if name == "bun.lock":
+        # Bun's text lock is JSONC, with each resolved package on one line.
+        for match in re.finditer(r'^\s*"[^"\n]+": (\[.*\]),?$', source, re.M):
+            package = json.loads(match[1])
+            if package and isinstance(package[0], str) and "@" in package[0]:
+                dependency, version = package[0].rsplit("@", 1)
+                if version[:1].isdigit():
+                    yield "npm", dependency, version
+    elif name == "package-lock.json":
         data = json.loads(source)
         for location, package in data.get("packages", {}).items():
             if (
@@ -86,6 +94,7 @@ def main():
     )
     names = {
         "package-lock.json",
+        "bun.lock",
         "Cargo.lock",
         "uv.lock",
         "composer.lock",

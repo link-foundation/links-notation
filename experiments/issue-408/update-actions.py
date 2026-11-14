@@ -56,23 +56,41 @@ for relative in subprocess.check_output(["git", "ls-files"], text=True).splitlin
         if "uses: actions/setup-java@" not in lines[index]:
             continue
         end = next(
-            (j for j in range(index + 1, len(lines)) if re.match(r"\s*- (?:name|uses):", lines[j])),
+            (
+                j
+                for j in range(index + 1, len(lines))
+                if re.match(r"\s*- (?:name|uses):", lines[j])
+            ),
             len(lines),
         )
         if any("problem-matcher:" in line for line in lines[index:end]):
             continue
-        with_index = next(j for j in range(index + 1, end) if lines[j].strip() == "with:")
+        with_index = next(
+            j for j in range(index + 1, end) if lines[j].strip() == "with:"
+        )
         indent = re.match(r"\s*", lines[with_index])[0]
         lines.insert(with_index + 1, indent + "  problem-matcher: true\n")
     updated = "".join(lines)
     if source != updated:
         path.write_text(updated)
-    original = subprocess.check_output(["git", "show", BASE + ":" + relative], text=True)
+    original = subprocess.check_output(
+        ["git", "show", BASE + ":" + relative], text=True
+    )
     for old, new in zip(pattern.finditer(original), pattern.finditer(updated)):
         if old[3] != new[3]:
             repo = "/".join(new[2].split("/")[:2])
-            changes.append(dict(path=relative, name=repo, before=old[3], after=new[3], tag=releases["github:" + repo]))
+            changes.append(
+                dict(
+                    path=relative,
+                    name=repo,
+                    before=old[3],
+                    after=new[3],
+                    tag=releases["github:" + repo],
+                )
+            )
 
 (OUT / "registry-action-shas.json").write_text(json.dumps(pins, indent=2) + "\n")
 (OUT / "action-changes.json").write_text(json.dumps(changes, indent=2) + "\n")
-print(f"Updated {len(changes)} Action references; verified {len(pins)} immutable release commits")
+print(
+    f"Updated {len(changes)} Action references; verified {len(pins)} immutable release commits"
+)

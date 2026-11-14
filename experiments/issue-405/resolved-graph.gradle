@@ -24,8 +24,10 @@ gradle.projectsEvaluated {
                     }
                 }
             }
-            def output = new File(rootProject.projectDir.parentFile,
-                'dev/log/issues/405/pulls/406/research/gradle-resolved.json')
+            def output = System.getenv('ISSUE_RESOLVED_GRAPH') ?
+                new File(System.getenv('ISSUE_RESOLVED_GRAPH')) :
+                new File(rootProject.projectDir.parentFile,
+                    'dev/log/issues/405/pulls/406/research/gradle-resolved.json')
             output.text = JsonOutput.prettyPrint(JsonOutput.toJson(rows.unique())) + '\n'
             println "Saved ${rows.size()} native Gradle dependency edges"
         }
