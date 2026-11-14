@@ -52,6 +52,10 @@ jobs:
         run: isort --check-only --diff .
       - name: Lint with flake8
         run: flake8 --max-line-length=120
+      # The package ships py.typed (issue #411), so its annotations are part
+      # of the public API; [tool.mypy] in pyproject.toml sets the flags.
+      - name: Type-check the package with mypy
+        run: mypy
 
   test:
     needs: [lint]
@@ -83,5 +87,20 @@ jobs:
         run: python -m build
       - name: Check package metadata
         run: twine check dist/*
+      - name: Check that the wheel and sdist ship py.typed
+        run: python tests/check_distributions.py dist
+      # A consumer sees only the installed wheel: install it into its own
+      # environment and type-check a copy of the consumer outside the source
+      # tree, so mypy cannot fall back to the checkout (issue #411).
+      - name: Type-check a consumer of the installed wheel
+        env:
+          CONSUMER: ${{ runner.temp }}/typed-consumer
+        run: |
+          python -m venv "$CONSUMER/venv"
+          "$CONSUMER/venv/bin/python" -m pip install --no-deps dist/*.whl
+          cp tests/typed_consumer.py "$CONSUMER/"
+          cd "$CONSUMER"
+          mypy --strict --no-incremental --python-executable "$CONSUMER/venv/bin/python" typed_consumer.py
+          "$CONSUMER/venv/bin/python" typed_consumer.py
       - name: Run tests
         run: pytest -v

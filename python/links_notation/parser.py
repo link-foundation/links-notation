@@ -172,9 +172,9 @@ class Parser:
         self.indentation_stack = [0]
         self.pos = 0
         self.text = ""
-        self.lines = []
+        self.lines: List[str] = []
         self.line_offsets: List[int] = []
-        self.base_indentation = None
+        self.base_indentation: Optional[int] = None
         # The document as written, for quoting the offending line in an error
         self.source = ""
         # Depth of the lines at level 0 of the context being parsed: the number
@@ -688,7 +688,7 @@ class Parser:
 
     def _transform_result(self, raw_result: List[Dict]) -> List[Link]:
         """Transform raw parse result into Link objects."""
-        links = []
+        links: List[Link] = []
 
         for item in raw_result:
             # Use explicit None check

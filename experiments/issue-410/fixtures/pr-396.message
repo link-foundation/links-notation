@@ -1,0 +1,47 @@
+chore(deps): Bump the actions-minor-and-patch group across 1 directory with 4 updates
+
+Bumps the actions-minor-and-patch group with 4 updates in the / directory: [actions/setup-dotnet](https://github.com/actions/setup-dotnet), [actions/setup-java](https://github.com/actions/setup-java), [github/codeql-action](https://github.com/github/codeql-action) and [trufflesecurity/trufflehog](https://github.com/trufflesecurity/trufflehog).
+
+
+Updates `actions/setup-dotnet` from 6.0.0 to 6.1.0
+- [Release notes](https://github.com/actions/setup-dotnet/releases)
+- [Commits](https://github.com/actions/setup-dotnet/compare/v6.0.0...v6.1.0)
+
+Updates `actions/setup-java` from 6.1.0 to 6.2.0
+- [Release notes](https://github.com/actions/setup-java/releases)
+- [Commits](https://github.com/actions/setup-java/compare/v6.1.0...v6.2.0)
+
+Updates `github/codeql-action` from 4.39.1 to 4.39.3
+- [Release notes](https://github.com/github/codeql-action/releases)
+- [Changelog](https://github.com/github/codeql-action/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/github/codeql-action/compare/v4.39.1...v4.39.3)
+
+Updates `trufflesecurity/trufflehog` from 3.99.7 to 3.99.8
+- [Release notes](https://github.com/trufflesecurity/trufflehog/releases)
+- [Commits](https://github.com/trufflesecurity/trufflehog/compare/v3.99.7...v3.99.8)
+
+---
+updated-dependencies:
+- dependency-name: actions/setup-dotnet
+  dependency-version: 6.1.0
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+  dependency-group: actions-minor-and-patch
+- dependency-name: actions/setup-java
+  dependency-version: 6.2.0
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+  dependency-group: actions-minor-and-patch
+- dependency-name: github/codeql-action
+  dependency-version: 4.39.3
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+  dependency-group: actions-minor-and-patch
+- dependency-name: trufflesecurity/trufflehog
+  dependency-version: 3.99.8
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+  dependency-group: actions-minor-and-patch
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>

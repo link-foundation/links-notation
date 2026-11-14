@@ -2,3 +2,4 @@ include README.md
 include README.ru.md
 include LICENSE
 recursive-include links_notation *.py
+include links_notation/py.typed

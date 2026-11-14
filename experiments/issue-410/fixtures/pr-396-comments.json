@@ -1,0 +1,58 @@
+[
+    {
+        "body": "@dependabot rebase",
+        "created_at": "2026-11-09T23:10:50Z",
+        "user": {
+            "login": "github-actions[bot]"
+        }
+    },
+    {
+        "body": "Sorry, only users with push access can use that command.",
+        "created_at": "2026-11-09T23:10:53Z",
+        "user": {
+            "login": "dependabot[bot]"
+        }
+    },
+    {
+        "body": "@dependabot rebase",
+        "created_at": "2026-11-10T23:56:27Z",
+        "user": {
+            "login": "github-actions[bot]"
+        }
+    },
+    {
+        "body": "@dependabot rebase",
+        "created_at": "2026-11-11T23:31:48Z",
+        "user": {
+            "login": "github-actions[bot]"
+        }
+    },
+    {
+        "body": "Sorry, only users with push access can use that command.",
+        "created_at": "2026-11-11T23:31:52Z",
+        "user": {
+            "login": "dependabot[bot]"
+        }
+    },
+    {
+        "body": "@dependabot rebase",
+        "created_at": "2026-11-12T23:06:26Z",
+        "user": {
+            "login": "github-actions[bot]"
+        }
+    },
+    {
+        "body": "@dependabot rebase",
+        "created_at": "2026-11-14T06:43:12Z",
+        "user": {
+            "login": "github-actions[bot]"
+        }
+    },
+    {
+        "body": "Sorry, only users with push access can use that command.",
+        "created_at": "2026-11-14T06:43:15Z",
+        "user": {
+            "login": "dependabot[bot]"
+        }
+    }
+]

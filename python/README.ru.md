@@ -142,6 +142,28 @@ for link in parse_chunks(["одна свя", "зь\nвторая связь"]):
 `parse_async_chunks` предоставляет асинхронный генератор. Также доступны
 `position`, `drain()`, `reset()` и ограничение размера буфера.
 
+### Проверка типов
+
+Пакет содержит маркер `py.typed` по
+[PEP 561](https://peps.python.org/pep-0561/), поэтому mypy, Pyright и другие
+анализаторы типов используют его встроенные аннотации, а не сообщают
+`import-untyped`:
+
+```python
+from links_notation import Link, Parser
+
+links: list[Link] = Parser().parse("папа (любитМаму: любит маму)")
+```
+
+Состояние типизации: все публичные функции, методы и классы аннотированы, CI
+проверяет пакет с помощью mypy (`--disallow-untyped-defs`,
+`--disallow-incomplete-defs`, `--no-implicit-reexport`; см. `[tool.mypy]` в
+`pyproject.toml`) и запускает `mypy --strict` для потребителя установленного
+wheel. Два места намеренно типизированы свободнее: внутренние узлы дерева
+разбора в парсере — обычные `Dict`, а `Link.needs_parentheses` возвращает сам
+аргумент (`None` или `""`), если он ложен, поэтому его тип —
+`Union[bool, str, None]`.
+
 ## Справочник API
 
 ### Parser

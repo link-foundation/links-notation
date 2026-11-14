@@ -140,6 +140,27 @@ for link in parse_chunks(["one li", "nk\ntwo link"]):
 `parse_async_chunks` provides the equivalent native async generator. The
 stream also exposes `position`, `drain()`, `reset()`, and a buffer-size limit.
 
+### Type Checking
+
+The package ships a [PEP 561](https://peps.python.org/pep-0561/) `py.typed`
+marker, so mypy, Pyright and other type checkers use its inline annotations
+instead of reporting `import-untyped`:
+
+```python
+from links_notation import Link, Parser
+
+links: list[Link] = Parser().parse("papa (lovesMama: loves mama)")
+```
+
+Typing status: every public function, method and class is annotated, and CI
+type-checks the package with mypy (`--disallow-untyped-defs`,
+`--disallow-incomplete-defs`, `--no-implicit-reexport`; see `[tool.mypy]` in
+`pyproject.toml`) and runs `mypy --strict` on a consumer of the installed
+wheel. Two places are deliberately loose: the parser's internal parse-tree
+nodes are plain `Dict`s, and `Link.needs_parentheses` returns its argument
+itself (`None` or `""`) when that is falsy, so it is typed
+`Union[bool, str, None]`.
+
 ## API Reference
 
 ### Parser
@@ -317,8 +338,9 @@ python -m build
 ### Linting and Formatting
 
 This project uses [Black](https://github.com/psf/black) for code formatting,
-[isort](https://pycqa.github.io/isort/) for import sorting, and
-[flake8](https://flake8.pycqa.org/en/latest/) for linting.
+[isort](https://pycqa.github.io/isort/) for import sorting,
+[flake8](https://flake8.pycqa.org/en/latest/) for linting, and
+[mypy](https://mypy-lang.org/) for type checking.
 
 Install linting tools:
 
@@ -341,6 +363,7 @@ isort .
 black --check --diff .
 isort --check-only --diff .
 flake8 --max-line-length=120
+mypy
 ```
 
 These checks are enforced in CI. Pull requests with unformatted code will fail

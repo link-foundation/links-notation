@@ -11,7 +11,7 @@ dependencies = [
 
 [[package]]
 name = "links-notation"
-version = "0.31.5"
+version = "0.31.6"
 dependencies = [
  "links-notation-macro",
  "nom",

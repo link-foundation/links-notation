@@ -46,6 +46,19 @@ class StreamParser:
     remains the source of truth for each completed record.
     """
 
+    # State set by reset(), which __init__ calls.
+    _buffer: str
+    _current_line: str
+    _base_indentation: Optional[int]
+    _line_classified: bool
+    _links: List[Link]
+    _offset: int
+    _line: int
+    _column: int
+    _segment_offset: int
+    _segment_line: int
+    _ended: bool
+
     def __init__(
         self,
         parser: Optional[Parser] = None,
@@ -125,9 +138,9 @@ class StreamParser:
         """Reuse the parser while preserving its configuration and callback."""
         self._buffer = ""
         self._current_line = ""
-        self._base_indentation: Optional[int] = None
+        self._base_indentation = None
         self._line_classified = False
-        self._links: List[Link] = []
+        self._links = []
         self._offset = 0
         self._line = 1
         self._column = 1
