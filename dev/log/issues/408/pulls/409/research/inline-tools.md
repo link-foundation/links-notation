@@ -5,7 +5,9 @@ the manifest, Cargo tool and runtime tables. Before values come from the initial
 issue SHA; repeated alternatives in one installer share its original selection.
 The two workflow-only snapshots lack package manifests; their browser installs
 use exact current releases. Both complete JS snapshots instead use native npm
-locks for browser tooling. Image digest evidence is in `playwright-image.json`.
+locks for browser tooling. Image sources link to the saved registry response:
+the OCI API requires content negotiation and returns 404 to ordinary browser
+requests. The saved response includes its URL, headers, digest and manifest.
 
 | Location | Dependency | Before | After | Registry current | Source |
 | --- | --- | --- | --- | --- | --- |
@@ -17,7 +19,7 @@ locks for browser tooling. Image digest evidence is in `playwright-image.json`.
 | `.github/workflows/python.yml:79` | pip | latest (unbounded) | 26.3 | 26.3 | [Registry](https://pypi.org/pypi/pip/json) |
 | `dev/log/issues/290/pulls/291/templates/csharp/.github/workflows/docs.yml:57` | docfx | latest (unbounded) | 2.81.0 | 2.81.0 | [Registry](https://api.nuget.org/v3-flatcontainer/docfx/index.json) |
 | `dev/log/issues/290/pulls/291/templates/go/.github/workflows/release.yml:138` | staticcheck | latest | 2026.2.2 | 2026.2.2 | [Registry](https://github.com/dominikh/go-tools/releases/tag/2026.2.2) |
-| `dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml:231` | Playwright image | 1.59.1-noble | 1.65.1-noble | 1.65.1-noble | [Registry](https://mcr.microsoft.com/v2/playwright/manifests/v1.65.1-noble) |
+| `dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml:231` | Playwright image | 1.59.1-noble | 1.65.1-noble | 1.65.1-noble | [Registry](playwright-image.json) |
 | `dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml:258` | browser-commander | 0.8.1 | 0.34.1 | 0.34.1 | [Registry](https://registry.npmjs.org/browser-commander/latest) |
 | `dev/log/issues/290/pulls/291/templates/js/.github/workflows/example-app.yml:258` | playwright | 1.59.1 | 1.65.1 | 1.65.1 | [Registry](https://registry.npmjs.org/playwright/latest) |
 | `dev/log/issues/290/pulls/291/templates/python/.github/workflows/docs.yml:55` | pip | latest (unbounded) | 26.3 | 26.3 | [Registry](https://pypi.org/pypi/pip/json) |
@@ -44,7 +46,7 @@ locks for browser tooling. Image digest evidence is in `playwright-image.json`.
 | `dev/log/issues/290/pulls/291/workflows/repo-github/workflows/python.yml:112` | twine | latest (unbounded) | 7.0.0 | 7.0.0 | [Registry](https://pypi.org/pypi/twine/json) |
 | `dev/log/issues/298/pulls/299/templates/csharp/docs.yml:57` | docfx | latest (unbounded) | 2.81.0 | 2.81.0 | [Registry](https://api.nuget.org/v3-flatcontainer/docfx/index.json) |
 | `dev/log/issues/298/pulls/299/templates/go/release.yml:138` | staticcheck | latest | 2026.2.2 | 2026.2.2 | [Registry](https://github.com/dominikh/go-tools/releases/tag/2026.2.2) |
-| `dev/log/issues/298/pulls/299/templates/js/example-app.yml:232` | Playwright image | 1.59.1-noble | 1.65.1-noble | 1.65.1-noble | [Registry](https://mcr.microsoft.com/v2/playwright/manifests/v1.65.1-noble) |
+| `dev/log/issues/298/pulls/299/templates/js/example-app.yml:232` | Playwright image | 1.59.1-noble | 1.65.1-noble | 1.65.1-noble | [Registry](playwright-image.json) |
 | `dev/log/issues/298/pulls/299/templates/js/example-app.yml:264` | browser-commander | 0.8.1 | 0.34.1 | 0.34.1 | [Registry](https://registry.npmjs.org/browser-commander/latest) |
 | `dev/log/issues/298/pulls/299/templates/js/example-app.yml:264` | playwright | 1.59.1 | 1.65.1 | 1.65.1 | [Registry](https://registry.npmjs.org/playwright/latest) |
 | `dev/log/issues/298/pulls/299/templates/python/docs.yml:55` | pip | latest (unbounded) | 26.3 | 26.3 | [Registry](https://pypi.org/pypi/pip/json) |
@@ -63,7 +65,7 @@ locks for browser tooling. Image digest evidence is in `playwright-image.json`.
 | `dev/log/issues/298/pulls/299/templates/python/release.yml:662` | scriv | latest (unbounded) | 1.8.1 | 1.8.1 | [Registry](https://pypi.org/pypi/scriv/json) |
 | `dev/log/issues/330/pulls/331/templates/csharp/.github/workflows/docs.yml:59` | docfx | latest (unbounded) | 2.81.0 | 2.81.0 | [Registry](https://api.nuget.org/v3-flatcontainer/docfx/index.json) |
 | `dev/log/issues/330/pulls/331/templates/go/.github/workflows/release.yml:142` | staticcheck | latest | 2026.2.2 | 2026.2.2 | [Registry](https://github.com/dominikh/go-tools/releases/tag/2026.2.2) |
-| `dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml:243` | Playwright image | 1.59.1-noble | 1.65.1-noble | 1.65.1-noble | [Registry](https://mcr.microsoft.com/v2/playwright/manifests/v1.65.1-noble) |
+| `dev/log/issues/330/pulls/331/templates/js/.github/workflows/example-app.yml:243` | Playwright image | 1.59.1-noble | 1.65.1-noble | 1.65.1-noble | [Registry](playwright-image.json) |
 | `dev/log/issues/330/pulls/331/templates/js/scripts/setup-npm.mjs:100` | npm | 11 | 12.2.2 | 12.2.2 | [Registry](https://registry.npmjs.org/npm/latest) |
 | `dev/log/issues/330/pulls/331/templates/js/scripts/setup-npm.mjs:127` | npm | 11 | 12.2.2 | 12.2.2 | [Registry](https://registry.npmjs.org/npm/latest) |
 | `dev/log/issues/330/pulls/331/templates/js/scripts/setup-npm.mjs:127` | npm | 11 | 12.2.2 | 12.2.2 | [Registry](https://registry.npmjs.org/npm/latest) |
@@ -85,7 +87,7 @@ locks for browser tooling. Image digest evidence is in `playwright-image.json`.
 | `dev/log/issues/330/pulls/331/templates/python/.github/workflows/release.yml:761` | scriv | latest (unbounded) | 1.8.1 | 1.8.1 | [Registry](https://pypi.org/pypi/scriv/json) |
 | `dev/log/issues/377/pulls/378/templates/csharp/.github/workflows/docs.yml:62` | docfx | latest (unbounded) | 2.81.0 | 2.81.0 | [Registry](https://api.nuget.org/v3-flatcontainer/docfx/index.json) |
 | `dev/log/issues/377/pulls/378/templates/go/.github/workflows/release.yml:142` | staticcheck | 2026.2.1 | 2026.2.2 | 2026.2.2 | [Registry](https://github.com/dominikh/go-tools/releases/tag/2026.2.2) |
-| `dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml:292` | Playwright image | 1.59.1-noble | 1.65.1-noble | 1.65.1-noble | [Registry](https://mcr.microsoft.com/v2/playwright/manifests/v1.65.1-noble) |
+| `dev/log/issues/377/pulls/378/templates/js/.github/workflows/example-app.yml:292` | Playwright image | 1.59.1-noble | 1.65.1-noble | 1.65.1-noble | [Registry](playwright-image.json) |
 | `dev/log/issues/377/pulls/378/templates/js/scripts/setup-npm.mjs:100` | npm | 11 | 12.2.2 | 12.2.2 | [Registry](https://registry.npmjs.org/npm/latest) |
 | `dev/log/issues/377/pulls/378/templates/js/scripts/setup-npm.mjs:127` | npm | 11 | 12.2.2 | 12.2.2 | [Registry](https://registry.npmjs.org/npm/latest) |
 | `dev/log/issues/377/pulls/378/templates/js/scripts/setup-npm.mjs:127` | npm | 11 | 12.2.2 | 12.2.2 | [Registry](https://registry.npmjs.org/npm/latest) |

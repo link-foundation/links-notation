@@ -516,6 +516,18 @@
     "lines": 0
   },
   {
+    "path": "ci-logs/issue-408/ci-d0109356-js-parity.log",
+    "bytes": 63929,
+    "sha256": "5aca51f4b7ff4517a15fd4bfa2a06a7bdf36cb8777068d77e368af96799510cf",
+    "lines": 578
+  },
+  {
+    "path": "ci-logs/issue-408/ci-d0109356-js-test.log",
+    "bytes": 78871,
+    "sha256": "18da01c03483cb6110a87cf13a08195d83de1131c29e362c0dbc469fbf38d292",
+    "lines": 782
+  },
+  {
     "path": "ci-logs/issue-408/commit-workflows.log",
     "bytes": 295,
     "sha256": "24f06385bd00706054bf8c6774a23cf9f85fa319b4b4edc08473f4f5266ba13e",
@@ -777,7 +789,7 @@
     "path": "ci-logs/issue-408/final-template-results.json",
     "bytes": 854,
     "sha256": "972beac571d3e34da76f11d023b63f6e20c4a8d11964483061e92407ac40114d",
-    "lines": 53
+    "lines": 54
   },
   {
     "path": "ci-logs/issue-408/final-workflow-contract.log",
@@ -868,6 +880,12 @@
     "bytes": 20285,
     "sha256": "23a1adc8b98e1f5fa150a562268657e6af5cbb2536f7124087539252081a6fda",
     "lines": 157
+  },
+  {
+    "path": "ci-logs/issue-408/inline-source-links.log",
+    "bytes": 85,
+    "sha256": "828427a601986935183dd0e1562959a6d915c63d2df45c27456a13fc192d2c87",
+    "lines": 1
   },
   {
     "path": "ci-logs/issue-408/inline-tools-after.log",
@@ -1044,6 +1062,12 @@
     "lines": 1
   },
   {
+    "path": "ci-logs/issue-408/links-43582365362.log",
+    "bytes": 74207,
+    "sha256": "bbd2f76fa8b7821bce3ec44b17c2035d34486e4332b3a0e69a0de647c0b03a95",
+    "lines": 598
+  },
+  {
     "path": "ci-logs/issue-408/locks-final.log",
     "bytes": 73,
     "sha256": "3f006562d794653815c74ef7efce4ca56b22c1ed00ae15510397dcb2d1d79148",
@@ -1116,6 +1140,12 @@
     "lines": 2
   },
   {
+    "path": "ci-logs/issue-408/oci-link-content-negotiation.log",
+    "bytes": 411,
+    "sha256": "bde221687e27ed92c4f7e9f99dcfc7d8137abe921a01d9ac425b9bfc9b01a3e7",
+    "lines": 3
+  },
+  {
     "path": "ci-logs/issue-408/parity-final.log",
     "bytes": 87,
     "sha256": "3d8bc71b7f72a8e043d939422c56521cc3539504cf7300665212dabd3ae3355a",
@@ -1185,7 +1215,7 @@
     "path": "ci-logs/issue-408/preview-smoke.png",
     "bytes": 10256,
     "sha256": "da69d81b85f898fa973f67a66036fb07f6e677a9dce663acb6b11f2a674d43ee",
-    "lines": 7
+    "lines": 16
   },
   {
     "path": "ci-logs/issue-408/publisher-audit.json",

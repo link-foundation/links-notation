@@ -74,3 +74,14 @@ on the PR checks page and its final verification comment. Additional archive
 workflow lint attempts expose existing snapshot placeholder actions, shell
 warnings and unsupported schema labels; those attempts are retained as failures,
 while active workflow lint passes.
+
+On `d01093561facd52c555d4888d0369fdb54d436ed`, the
+[link check](https://github.com/link-foundation/links-notation/actions/runs/43582365362)
+reported four HTTP 404 responses for the same OCI registry endpoint
+(`links-43582365362.log:574-577`). A focused native request reproduced
+`MANIFEST_UNKNOWN: OCI image index found, but accept header does not support
+OCI image index`; supplying the OCI Accept header returned HTTP 200 and the
+committed digest. The generated table now links to the preserved registry
+response, which includes the original URL, response headers, digest and manifest.
+All four replacement links were checked locally. The raw registry evidence and
+workflow image pins are unchanged; link-check policy remains enforced.

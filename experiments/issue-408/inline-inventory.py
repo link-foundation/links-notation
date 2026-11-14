@@ -110,14 +110,19 @@ table = [
     "issue SHA; repeated alternatives in one installer share its original selection.",
     "The two workflow-only snapshots lack package manifests; their browser installs",
     "use exact current releases. Both complete JS snapshots instead use native npm",
-    "locks for browser tooling. Image digest evidence is in `playwright-image.json`.",
+    "locks for browser tooling. Image sources link to the saved registry response:",
+    "the OCI API requires content negotiation and returns 404 to ordinary browser",
+    "requests. The saved response includes its URL, headers, digest and manifest.",
     "",
     "| Location | Dependency | Before | After | Registry current | Source |",
     "| --- | --- | --- | --- | --- | --- |",
 ]
 for row in rows:
+    source = (
+        "playwright-image.json" if row["name"] == "Playwright image" else row["source"]
+    )
     table.append(
-        f"| `{row['path']}:{row['line']}` | {row['name']} | {row['before']} | {row['after']} | {row['latest']} | [Registry]({row['source']}) |"
+        f"| `{row['path']}:{row['line']}` | {row['name']} | {row['before']} | {row['after']} | {row['latest']} | [Registry]({source}) |"
     )
 (OUT / "inline-tools.md").write_text("\n".join(table) + "\n")
 print(f"Verified {len(rows)} inline tool/image selections")
