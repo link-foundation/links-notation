@@ -2536,7 +2536,7 @@
         "python/links_notation/reference_literal.py",
         "python/links_notation/stream_parser.py"
       ],
-      "sha256": "9a554641b49bf71c7dc32eecaa0ac761aa083fea2b6b9786ea0d777499246997"
+      "sha256": "1bb9ccfde0d3d866413e06116c2089001d853154a670c0a55d2334dbc3152616"
     },
     "java": {
       "files": [
