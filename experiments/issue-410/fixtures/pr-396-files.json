@@ -1,0 +1,47 @@
+[
+    {
+        "filename": ".github/workflows/benchmarks.yml",
+        "patch": "@@ -252,7 +252,7 @@ jobs:\n           name: benchmark-output\n           path: benchmarks\n       - name: Setup .NET SDK\n-        uses: actions/setup-dotnet@v6.0.0\n+        uses: actions/setup-dotnet@v6.1.0\n         with:\n           global-json-file: csharp/global.json\n       - name: Parse and count in C#\n@@ -316,7 +316,7 @@ jobs:\n           name: benchmark-output\n           path: benchmarks\n       - name: Setup Java\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: '25'\n           distribution: 'temurin'",
+        "status": "modified"
+    },
+    {
+        "filename": ".github/workflows/binary-interop.yml",
+        "patch": "@@ -25,7 +25,7 @@ jobs:\n         with:\n           persist-credentials: false\n       - uses: dtolnay/rust-toolchain@stable\n-      - uses: actions/setup-dotnet@v6.0.0\n+      - uses: actions/setup-dotnet@v6.1.0\n         with:\n           global-json-file: csharp/global.json\n       - uses: actions/setup-node@v7.1.0\n@@ -42,7 +42,7 @@ jobs:\n           # found\" on every run (issue #330). go.yml disables it for the same\n           # reason.\n           cache: false\n-      - uses: actions/setup-java@v6.1.0\n+      - uses: actions/setup-java@v6.2.0\n         with:\n           distribution: temurin\n           java-version: '25'",
+        "status": "modified"
+    },
+    {
+        "filename": ".github/workflows/csharp.yml",
+        "patch": "@@ -37,7 +37,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Setup .NET SDK\n-        uses: actions/setup-dotnet@v6.0.0\n+        uses: actions/setup-dotnet@v6.1.0\n         with:\n           global-json-file: csharp/global.json\n       - name: Restore Dependencies\n@@ -63,7 +63,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Setup .NET SDK\n-        uses: actions/setup-dotnet@v6.0.0\n+        uses: actions/setup-dotnet@v6.1.0\n         with:\n           global-json-file: csharp/global.json\n       - name: Restore Dependencies\n@@ -100,7 +100,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Setup .NET SDK\n-        uses: actions/setup-dotnet@v6.0.0\n+        uses: actions/setup-dotnet@v6.1.0\n         with:\n           global-json-file: csharp/global.json\n       # These packages are 293 MB. On 2026-10-06 the runner's apt mirror served",
+        "status": "modified"
+    },
+    {
+        "filename": ".github/workflows/java.yml",
+        "patch": "@@ -33,7 +33,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Set up JDK 25\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: \"25\"\n           distribution: \"temurin\"\n@@ -59,7 +59,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Set up JDK ${{ matrix.java }}\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: ${{ matrix.java }}\n           distribution: \"temurin\"\n@@ -79,7 +79,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Set up JDK 25\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: \"25\"\n           distribution: \"temurin\"\n@@ -108,7 +108,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Set up JDK 25\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: \"25\"\n           distribution: \"temurin\"",
+        "status": "modified"
+    },
+    {
+        "filename": ".github/workflows/kotlin.yml",
+        "patch": "@@ -34,7 +34,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Set up JDK 25\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: \"25\"\n           distribution: \"temurin\"\n@@ -57,7 +57,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Set up JDK 25\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: \"25\"\n           distribution: \"temurin\"\n@@ -88,7 +88,7 @@ jobs:\n         with:\n           node-version: \"24\"\n       - name: Set up JDK 25\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: \"25\"\n           distribution: \"temurin\"\n@@ -113,7 +113,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Set up JDK 25\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: \"25\"\n           distribution: \"temurin\"\n@@ -142,7 +142,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Set up JDK 25\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: \"25\"\n           distribution: \"temurin\"",
+        "status": "modified"
+    },
+    {
+        "filename": ".github/workflows/publish-csharp.yml",
+        "patch": "@@ -52,7 +52,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Setup .NET SDK\n-        uses: actions/setup-dotnet@v6.0.0\n+        uses: actions/setup-dotnet@v6.1.0\n         with:\n           global-json-file: csharp/global.json\n       - name: Check if version already published to NuGet.org\n@@ -141,7 +141,7 @@ jobs:\n           name: csharp-pdf\n           path: csharp/pdf-artifact\n       - name: Setup .NET SDK\n-        uses: actions/setup-dotnet@v6.0.0\n+        uses: actions/setup-dotnet@v6.1.0\n         with:\n           global-json-file: csharp/global.json\n       - name: Install DocFX",
+        "status": "modified"
+    },
+    {
+        "filename": ".github/workflows/publish-java.yml",
+        "patch": "@@ -48,7 +48,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Set up JDK 25\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: \"25\"\n           distribution: \"temurin\"",
+        "status": "modified"
+    },
+    {
+        "filename": ".github/workflows/publish-kotlin.yml",
+        "patch": "@@ -51,7 +51,7 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Set up JDK 25\n-        uses: actions/setup-java@v6.1.0\n+        uses: actions/setup-java@v6.2.0\n         with:\n           java-version: \"25\"\n           distribution: \"temurin\"",
+        "status": "modified"
+    },
+    {
+        "filename": ".github/workflows/security.yml",
+        "patch": "@@ -53,13 +53,13 @@ jobs:\n           persist-credentials: false\n           submodules: true\n       - name: Initialize CodeQL\n-        uses: github/codeql-action/init@v4.39.1\n+        uses: github/codeql-action/init@v4.39.3\n         with:\n           languages: ${{ matrix.language }}\n           build-mode: ${{ matrix.build-mode }}\n           config-file: ./.github/codeql/codeql-config.yml\n       - name: Analyze\n-        uses: github/codeql-action/analyze@v4.39.1\n+        uses: github/codeql-action/analyze@v4.39.3\n         with:\n           category: /language:${{ matrix.language }}\n \n@@ -99,7 +99,7 @@ jobs:\n           # scan needs the whole history, not just the tip.\n           fetch-depth: 0\n       - name: Scan the repository for verified secrets\n-        uses: trufflesecurity/trufflehog@v3.99.7\n+        uses: trufflesecurity/trufflehog@v3.99.8\n         with:\n           path: ./\n           # The action ref pins the wrapper; this pins the scanner itself,",
+        "status": "modified"
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {
+        "filename": "csharp/global.json",
+        "patch": "@@ -1,6 +1,6 @@\n {\n   \"sdk\": {\n-    \"version\": \"10.0.402\",\n+    \"version\": \"11.0.100\",\n     \"rollForward\": \"latestFeature\"\n   },\n   \"test\": {",
+        "status": "modified"
+    }
+]

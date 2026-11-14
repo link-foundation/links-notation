@@ -71,8 +71,10 @@ jobs:
       # and it cannot update a pull request branch without a maintainer
       # approving the new runs. A token with the `repo` and
       # `workflow` scopes in the DEPENDABOT_AUTO_MERGE_TOKEN Actions secret
-      # does both; without it, behind pull requests get an
-      # `@dependabot rebase` comment instead.
+      # does both. Without it, behind pull requests are named in a warning
+      # and no `@dependabot rebase` comment is posted: Dependabot rejects
+      # commands from github-actions[bot], which has no push access (#410).
+      # Pull requests whose versions main already has are closed either way.
       - name: Merge passing Dependabot pull requests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

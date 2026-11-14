@@ -20,11 +20,21 @@ checks were read cannot be merged unchecked.
 
 The rules on main require pull requests to be up to date, and Dependabot
 only rebases a pull request that conflicts. After a merge, one green pull
-request that fell behind is brought up to date per run: with
-DEPENDABOT_AUTO_MERGE_TOKEN through `gh pr update-branch --rebase`, otherwise
-by asking Dependabot with an `@dependabot rebase` comment. A branch update
-made with GITHUB_TOKEN would start CI runs that wait for a maintainer's
-approval, so it is never used.
+request that fell behind is brought up to date per run with
+DEPENDABOT_AUTO_MERGE_TOKEN through `gh pr update-branch --rebase`. A branch
+update made with GITHUB_TOKEN would start CI runs that wait for a
+maintainer's approval, so it is never used. Without a usable token the
+behind pull requests are named in a warning instead (issue #410): an
+`@dependabot rebase` comment posted with GITHUB_TOKEN comes from
+github-actions[bot], and Dependabot rejects it with "Sorry, only users with
+push access can use that command." A request a maintainer posted, and that
+Dependabot did not reject, is waited for.
+
+A Dependabot pull request that the base branch has overtaken, because the
+base already has every version it sets or a newer one (issue #410: #396 and
+#407 stayed open after #408 had moved main past them), is closed with a
+comment that names the versions. Anything that cannot be compared keeps it
+open, so a pull request is never closed on a guess.
 
 A merge made with GITHUB_TOKEN starts no push workflow on the base branch
 (issue #377: main went unchecked after such merges). After one, the script
@@ -41,11 +51,18 @@ import re
 import subprocess
 import sys
 from dataclasses import dataclass, field
+from urllib.parse import quote
 
 DEPENDABOT = "dependabot[bot]"
 AUTOMATIC = {"version-update:semver-minor", "version-update:semver-patch"}
 PASSED = {"success", "neutral", "skipped"}
 REBASE = "@dependabot rebase"
+# Comments that ask Dependabot to bring its branch up to date.
+UPDATE_COMMANDS = {REBASE, "@dependabot recreate"}
+# Dependabot's answer to a command from someone without push access.
+REJECTED = "only users with push access"
+# GITHUB_TOKEN comments come from this account, which has no push access.
+ACTIONS_BOT = "github-actions[bot]"
 
 # The workflows a push to the base branch starts, with their push `paths`
 # filters (None: every push). The tests compare this with .github/workflows.
@@ -57,6 +74,7 @@ PUSH_WORKFLOWS = {
         ".github/**",
         "scripts/ci/**",
         "experiments/issue-350/**",
+        "experiments/issue-410/**",
         "experiments/issue-192/**",
         "experiments/issue-377/test_rerun_unacquired.py",
         "experiments/issue-377/test_nuget_publish.py",
@@ -117,6 +135,102 @@ def update_types(message):
     return types
 
 
+# Lockfiles are regenerated with the manifest a pull request bumps, and most
+# of their changed lines (hashes, resolved URLs, transitive entries) name no
+# version the base branch could be compared with, so the manifest decides.
+LOCKFILE = re.compile(
+    r"(^|/)(package-lock\.json|npm-shrinkwrap\.json|yarn\.lock|pnpm-lock\.yaml"
+    r"|bun\.lockb?|Cargo\.lock|uv\.lock|poetry\.lock|Pipfile\.lock|pdm\.lock"
+    r"|composer\.lock|Gemfile\.lock|go\.sum|Package\.resolved|packages\.lock\.json"
+    r"|gradle\.lockfile|[^/]*\.lockfile)$"
+)
+# Commit SHAs and checksums change with a version but do not order versions.
+DIGEST = re.compile(r"\b[0-9a-fA-F]{32,}\b")
+NUMBER = re.compile(r"\d+(?:\.\d+)*")
+
+
+def shape(line):
+    """(`line` with its versions blanked out, its versions as int tuples).
+
+    `- uses: a/b@v6.1.0` and `uses: a/b@v6.2.0` share a shape, as do the
+    last and the other entries of a JSON object (`"x": "1.0",`).
+    """
+    text = re.sub(r"^-\s+", "", line.strip()).rstrip(",").rstrip()
+    text = DIGEST.sub("\x01", text)
+    versions = [tuple(int(p) for p in n.split(".")) for n in NUMBER.findall(text)]
+    return NUMBER.sub("\x00", text), versions
+
+
+def at_least(have, want):
+    """Whether every version in `have` is the one in `want` or newer."""
+    for a, b in zip(have, want):
+        width = max(len(a), len(b))
+        if a + (0,) * (width - len(a)) < b + (0,) * (width - len(b)):
+            return False
+    return True
+
+
+def added_lines(patch):
+    """The lines a unified diff hunk (the API's `patch`) adds."""
+    return [
+        line[1:]
+        for line in patch.splitlines()
+        if line.startswith("+") and not line.startswith("+++")
+    ]
+
+
+def superseded(changes, contents):
+    """(True, reason) when the base branch already has every version a pull
+    request sets, or a newer one; (False, why not) otherwise.
+
+    `changes` are the pull request's files, as the API lists them
+    (`filename`, `status`, `patch`), and `contents` maps each compared
+    file to its text on the base branch, None when it is not there. Every
+    line the pull request adds outside its lockfiles must appear on the base
+    branch in the same shape, with the same or newer versions on each such
+    line there (one action pinned in several jobs: the oldest pin decides).
+    A file without a patch, a line the base does not have, or a pull request
+    that changes no version is not superseded.
+    """
+    compared, found = 0, {}
+    for change in changes:
+        path = change["filename"]
+        if LOCKFILE.search(path):
+            continue
+        if change.get("patch") is None:
+            return False, f"no diff for {path}"
+        content = contents.get(path)
+        if content is None:
+            return False, f"{path} is not on the base branch"
+        base = {}
+        for line in content.splitlines():
+            template, versions = shape(line)
+            base.setdefault(template, []).append((versions, line.strip()))
+        for line in added_lines(change["patch"]):
+            if not line.strip():
+                continue
+            template, versions = shape(line)
+            candidates = base.get(template)
+            if not candidates:
+                return False, f"{path} has no line like `{line.strip()}`"
+            older = [text for have, text in candidates if not at_least(have, versions)]
+            if older:
+                return False, f"{path} still has `{older[0]}`"
+            if versions:
+                compared += 1
+                oldest = min(candidates)[1]
+                found.setdefault((oldest, line.strip()), []).append(path)
+    if not compared:
+        return False, "no version change to compare"
+    parts = []
+    for (have, want), paths in found.items():
+        where = ", ".join(sorted(set(paths)))
+        parts.append(
+            f"`{have}`" + ("" if have == want else f" for `{want}`") + f" in {where}"
+        )
+    return True, "the base branch already has " + "; ".join(parts)
+
+
 @dataclass
 class Pull:
     number: int
@@ -129,10 +243,12 @@ class Pull:
     checks: dict = field(default_factory=dict)
     behind: bool = False
     rebase_requested: bool = False
+    rebase_rejected: bool = False
+    superseded: str = ""
 
 
-def ineligible(pull):
-    """Why `pull` must not be merged automatically, or None."""
+def foreign(pull):
+    """Why `pull` is not Dependabot's alone to manage, or None."""
     if pull.author != DEPENDABOT or not pull.branch.startswith("dependabot/"):
         return "not opened by Dependabot"
     if pull.draft:
@@ -140,6 +256,14 @@ def ineligible(pull):
     others = sorted({a for a in pull.commit_authors if a != DEPENDABOT})
     if others:
         return "has commits by " + ", ".join(others)
+    return None
+
+
+def ineligible(pull):
+    """Why `pull` must not be merged automatically, or None."""
+    reason = foreign(pull)
+    if reason:
+        return reason
     types = update_types(pull.message)
     if not types:
         return "no version change in the commit message"
@@ -165,17 +289,26 @@ def check_state(checks, required):
     return "passed", "all checks passed"
 
 
-def plan(pulls, required, strict):
-    """The actions for one run: ("merge" | "rebase" | "skip", pull, reason).
+BEHIND_NO_TOKEN = "behind; cannot be updated without DEPENDABOT_AUTO_MERGE_TOKEN"
 
+
+def plan(pulls, required, strict, update=True):
+    """The actions for one run:
+    ("close" | "merge" | "rebase" | "skip", pull, reason).
+
+    A superseded pull request is closed whatever its checks or update type.
     With `strict` (branches must be up to date) at most one pull request is
     merged, since the merge leaves every other one behind, and at most one
     is brought up to date, after the merge, so that its new checks are not
-    outdated again by the time they finish.
+    outdated again by the time they finish. Without `update` (no token that
+    can update a branch) behind pull requests are only reported.
     """
     decided = {}
     merged = False
     for pull in sorted(pulls, key=lambda p: p.number):
+        if pull.superseded and not foreign(pull):
+            decided[pull.number] = ("close", pull, pull.superseded)
+            continue
         reason = ineligible(pull)
         if reason:
             decided[pull.number] = ("skip", pull, reason)
@@ -200,18 +333,20 @@ def plan(pulls, required, strict):
         )
         if gate != "passed":
             decided[pull.number] = ("skip", pull, "behind; " + detail)
+        elif pull.rebase_requested and not merged:
+            decided[pull.number] = ("skip", pull, "behind; update already requested")
+        elif not update:
+            decided[pull.number] = ("skip", pull, BEHIND_NO_TOKEN)
         elif rebased:
             decided[pull.number] = (
                 "skip",
                 pull,
                 "behind; updated after the next merge",
             )
-        elif pull.rebase_requested and not merged:
-            decided[pull.number] = ("skip", pull, "behind; update already requested")
         else:
             decided[pull.number] = ("rebase", pull, "behind the base branch")
             rebased = True
-    order = {"merge": 0, "rebase": 1, "skip": 2}
+    order = {"close": 0, "merge": 1, "rebase": 2, "skip": 3}
     return sorted(decided.values(), key=lambda a: (order[a[0]], a[1].number))
 
 
@@ -314,14 +449,68 @@ class GitHub:
     def behind(self, base, head):
         return self.api(f"compare/{base}...{head}")["behind_by"] > 0
 
-    def rebase_requested(self, pull):
-        """Whether an `@dependabot rebase` request is newer than the head."""
+    def update_request(self, pull):
+        """`update_request` for `pull`'s comments since its head commit."""
         committed = self.api(f"commits/{pull.head}")["commit"]["committer"]["date"]
-        comments = self.api(f"issues/{pull.number}/comments?per_page=100")
-        return any(
-            c["body"].strip() == REBASE and c["created_at"] > committed
-            for c in comments
-        )
+        output = self.run(
+            "api", f"repos/{self.repository}/issues/{pull.number}/comments?per_page=100",
+            "--paginate", "--jq", ".[] | @json",
+        )  # fmt: skip
+        comments = [json.loads(line) for line in output.splitlines()]
+        return update_request(comments, committed)
+
+    def changes(self, pull):
+        """`pull`'s changed files: filename, status and patch."""
+        output = self.run(
+            "api", f"repos/{self.repository}/pulls/{pull.number}/files?per_page=100",
+            "--paginate", "--jq", ".[] | {filename, status, patch} | @json",
+        )  # fmt: skip
+        return [json.loads(line) for line in output.splitlines()]
+
+    def content(self, path, ref):
+        """The text of `path` on `ref`, or None when it is not there."""
+        try:
+            return self.run(
+                "api", f"repos/{self.repository}/contents/{quote(path)}?ref={quote(ref)}",
+                "-H", "Accept: application/vnd.github.raw",
+            )  # fmt: skip
+        except RuntimeError as error:
+            if "404" in str(error) or "Not Found" in str(error):
+                return None
+            raise
+
+    def supersession(self, pull, base):
+        """`superseded` for `pull` against `base`, read through the API."""
+        changes = self.changes(pull)
+        contents = {
+            c["filename"]: self.content(c["filename"], base)
+            for c in changes
+            if not LOCKFILE.search(c["filename"]) and c.get("patch") is not None
+        }
+        return superseded(changes, contents)
+
+
+def update_request(comments, since):
+    """ "requested", "rejected" or None: the latest `@dependabot rebase` (or
+    `recreate`) comment newer than `since`, and whether it can work.
+
+    Dependabot answers a command from someone without push access with
+    "Sorry, only users with push access can use that command." and does
+    nothing; github-actions[bot] (GITHUB_TOKEN) never has push access, and
+    Dependabot does not always answer it (issue #410), so its requests count
+    as rejected either way.
+    """
+    state = None
+    for comment in sorted(comments, key=lambda c: c["created_at"]):
+        if comment["created_at"] <= since:
+            continue
+        login = (comment.get("user") or {}).get("login")
+        body = comment["body"].strip()
+        if body in UPDATE_COMMANDS:
+            state = "rejected" if login == ACTIONS_BOT else "requested"
+        elif login == DEPENDABOT and REJECTED in body and state == "requested":
+            state = "rejected"
+    return state
 
 
 def usable(github, token):
@@ -353,7 +542,7 @@ def main():
     elif not pat:
         print(
             "::notice::DEPENDABOT_AUTO_MERGE_TOKEN is not set: merging with "
-            "GITHUB_TOKEN and asking Dependabot to rebase behind pull requests."
+            "GITHUB_TOKEN, which cannot bring behind pull requests up to date."
         )
     required, strict = github.rules(args.base)
     print(
@@ -364,37 +553,50 @@ def main():
     for pull in pulls:
         if pull.author == DEPENDABOT:
             github.commits(pull)
+        if foreign(pull):
+            continue
+        try:
+            done, why = github.supersession(pull, args.base)
+        except RuntimeError as error:
+            done, why = False, f"could not compare with {args.base}: {error}"
+            print(f"::warning::#{pull.number}: {why}")
+        if done:
+            pull.superseded = why
+            continue
         if ineligible(pull):
             continue
         pull.checks = github.checks(pull.head)
         if strict:
             pull.behind = github.behind(args.base, pull.head)
             if pull.behind and not pat:
-                pull.rebase_requested = github.rebase_requested(pull)
+                request = github.update_request(pull)
+                pull.rebase_requested = request == "requested"
+                pull.rebase_rejected = request == "rejected"
     if not pulls:
         print("No open Dependabot pull requests.")
     failures = 0
     merged = []
-    for action, pull, reason in plan(pulls, required, strict):
+    actions = plan(pulls, required, strict, update=bool(pat))
+    for action, pull, reason in actions:
         print(f"#{pull.number} {action}: {reason}")
         if args.dry_run or action == "skip":
             continue
         try:
-            if action == "merge":
+            if action == "close":
+                github.run(
+                    "pr", "close", str(pull.number), "--repo", github.repository,
+                    "--comment", closing_comment(args.base, reason),
+                )  # fmt: skip
+            elif action == "merge":
                 github.run(
                     "pr", "merge", str(pull.number), "--repo", github.repository,
                     "--merge", "--match-head-commit", pull.head, token=pat or None,
                 )  # fmt: skip
                 merged.append(pull)
-            elif pat:
+            else:
                 github.run(
                     "pr", "update-branch", str(pull.number),
                     "--repo", github.repository, "--rebase", token=pat,
-                )  # fmt: skip
-            else:
-                github.run(
-                    "pr", "comment", str(pull.number),
-                    "--repo", github.repository, "--body", REBASE,
                 )  # fmt: skip
         except RuntimeError as error:
             # Another run, or a person, may have merged or pushed meanwhile.
@@ -407,9 +609,43 @@ def main():
                     f"#{pull.number} by hand."
                 )
             failures += 1
+    behind = [p for _, p, reason in actions if reason == BEHIND_NO_TOKEN]
+    if behind:
+        print(not_updated(args.base, behind))
     if merged and not pat:
         failures += dispatch(github, args.base, merged)
     return 1 if failures else 0
+
+
+def closing_comment(base, reason):
+    return (
+        f"Closing as superseded: {reason}, so `{base}` already has every "
+        "version this pull request sets, or a newer one.\n\n"
+        "Closed by the auto-merge workflow (`scripts/ci/merge-dependabot.py`, "
+        "issue #410). Reopen it if that is wrong."
+    )
+
+
+def not_updated(base, pulls):
+    """The warning for green pull requests that stay behind without a token.
+
+    An `@dependabot rebase` comment is not posted for them: with GITHUB_TOKEN
+    it comes from github-actions[bot], which Dependabot always rejects.
+    """
+    numbers = ", ".join(f"#{p.number}" for p in pulls)
+    rejected = [f"#{p.number}" for p in pulls if p.rebase_rejected]
+    return (
+        f"::warning::{numbers} {'is' if len(pulls) == 1 else 'are'} behind "
+        f"{base}, which requires up-to-date branches, and cannot be brought up "
+        "to date: DEPENDABOT_AUTO_MERGE_TOKEN is not set or cannot push. "
+        "Dependabot rejects an `@dependabot rebase` comment from GITHUB_TOKEN "
+        '("Sorry, only users with push access can use that command."), so none '
+        "is posted"
+        + (f" (rejected before on {', '.join(rejected)})" if rejected else "")
+        + ". Store a token with the repo and workflow scopes in the "
+        "DEPENDABOT_AUTO_MERGE_TOKEN Actions secret, or comment "
+        "`@dependabot rebase` on them as a maintainer with push access."
+    )
 
 
 def dispatch(github, base, merged):

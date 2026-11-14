@@ -1,0 +1,15 @@
+chore(deps): Bump dotnet-sdk from 10.0.402 to 11.0.100 in /csharp
+
+Bumps [dotnet-sdk](https://github.com/dotnet/sdk) from 10.0.402 to 11.0.100.
+- [Release notes](https://github.com/dotnet/sdk/releases)
+- [Commits](https://github.com/dotnet/sdk/compare/v10.0.402...v11.0.100)
+
+---
+updated-dependencies:
+- dependency-name: dotnet-sdk
+  dependency-version: 11.0.100
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
