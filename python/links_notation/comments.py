@@ -12,6 +12,8 @@ the document the caller wrote, and anything the parser reports about a position
 still points at what the reader can see.
 """
 
+from typing import Optional, Tuple
+
 from .quotes import QUOTE_CHARS, _parse_quoted_string_at
 from .reference_literal import reference_literal_end
 
@@ -76,7 +78,7 @@ def strip_comments(document: str) -> str:
     return document if blanked is None else "".join(blanked)
 
 
-def delimited_token_end(document: str, start: int):
+def delimited_token_end(document: str, start: int) -> Optional[int]:
     """
     Where the versioned literal or delimited reference that starts at ``start``
     ends, or None when neither can be read there. What follows one starts a new
@@ -92,7 +94,7 @@ def delimited_token_end(document: str, start: int):
     return None
 
 
-def _follows(document: str, position: int, allowed) -> bool:
+def _follows(document: str, position: int, allowed: Tuple[str, ...]) -> bool:
     """
     Report whether the character before ``position`` is one of ``allowed``, the
     start of the document counting as allowed.

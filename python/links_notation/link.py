@@ -71,7 +71,7 @@ class Link:
         """Developer-friendly representation."""
         return f"Link(id={self.id!r}, values={self.values!r})"
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: object) -> bool:
         """Check equality with another Link."""
         if not isinstance(other, Link):
             return False
@@ -208,8 +208,11 @@ class Link:
         # Complex value with its own structure - format it normally with parentheses
         return value.format(False, False)
 
-    def needs_parentheses(self, s: Optional[str]) -> bool:
-        """Check if a string needs to be wrapped in parentheses."""
+    def needs_parentheses(self, s: Optional[str]) -> Union[bool, str, None]:
+        """Check if a string needs to be wrapped in parentheses.
+
+        The result is truthy when it does; for None or ``""`` it is ``s`` itself.
+        """
         return s and any(c in s for c in [" ", ":", "(", ")"])
 
     def _has_lone_nested_value(self) -> bool:

@@ -8,7 +8,7 @@ All integers on the wire are unsigned 64-bit values.
 import io
 import re
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import BinaryIO, Iterable, Optional, Sequence, Union
 
 from .link import Link
 from .parser import Parser
@@ -18,12 +18,12 @@ U64 = (1 << 64) - 1
 WIDTHS = (1, 2, 4, 8)
 
 
-def _require(condition, message):
+def _require(condition: object, message: str) -> None:
     if not condition:
         raise ValueError(message)
 
 
-def _u64(value):
+def _u64(value: int) -> int:
     _require(isinstance(value, int) and not isinstance(value, bool) and 0 <= value <= U64, "expected uint64")
     return value
 
@@ -34,8 +34,16 @@ class External:
 
     value: int
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         _u64(self.value)
+
+
+# A reference inside a raw link: an internal address or an External.
+_Reference = Union[int, External]
+_RawLinks = list[tuple[int, list[_Reference]]]
+# An encoder node: a kind and a value. "i" is an address, "e" an external
+# reference, and "d"/"t" an index into the encoder's doublets/tuples.
+_Node = tuple[str, int]
 
 
 @dataclass(frozen=True)
@@ -43,19 +51,19 @@ class ArityRange:
     min: int = 2
     max: Optional[int] = 2
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         _require(1 <= _u64(self.min) <= U64 >> 4, "invalid minimum arity")
         _require(self.max is None or _u64(self.max) >= self.min, "invalid maximum arity")
 
-    def contains(self, length):
+    def contains(self, length: int) -> bool:
         return length >= self.min and (self.max is None or length <= self.max)
 
     @property
-    def fixed(self):
+    def fixed(self) -> bool:
         return self.min == self.max
 
     @classmethod
-    def parse(cls, text):
+    def parse(cls, text: str) -> "ArityRange":
         _require(re.fullmatch(r"[0-9]+(?:\.\.[0-9]*)?", text), "invalid arity")
         parts = text.split("..")
         return cls(int(parts[0]), int(parts[-1]) if parts[-1] else None)
@@ -71,12 +79,12 @@ class DecodeLimits:
     max_string_bytes: int = 64 << 20
     max_depth: int = 64
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         for value in vars(self).values():
             _u64(value)
 
     @classmethod
-    def unlimited(cls):
+    def unlimited(cls) -> "DecodeLimits":
         """For trusted input; caller must provide adequate memory/stack."""
         return cls(U64, U64, U64, U64, U64)
 
@@ -88,7 +96,7 @@ class BinaryLinoOptions:
     packed_widths: bool = False
 
     @classmethod
-    def of_packet(cls, packet):
+    def of_packet(cls, packet: "LinksPacket") -> "BinaryLinoOptions":
         lengths = [2] + [len(link) for _, link in packet.links()]
         return cls(
             packet.external_references,
@@ -102,10 +110,10 @@ class Section:
     gap: int
     arity: ArityRange
     width: int
-    links: list
+    links: list[list[_Reference]]
 
 
-def _width(reference, external):
+def _width(reference: _Reference, external: bool) -> int:
     value = reference.value if isinstance(reference, External) else _u64(reference)
     _require(not isinstance(reference, External) or external, "external reference disabled")
     for width in WIDTHS:
@@ -115,7 +123,7 @@ def _width(reference, external):
     raise ValueError("reference exceeds capacity")
 
 
-def _leb(out, value):
+def _leb(out: bytearray, value: int) -> None:
     value = _u64(value)
     while value >= 128:
         out.append((value & 127) | 128)
@@ -124,10 +132,10 @@ def _leb(out, value):
 
 
 class _Reader:
-    def __init__(self, stream):
+    def __init__(self, stream: BinaryIO):
         self.stream = stream
 
-    def raw(self, count):
+    def raw(self, count: int) -> int:
         chunks = bytearray()
         while len(chunks) < count:
             part = self.stream.read(count - len(chunks))
@@ -135,7 +143,7 @@ class _Reader:
             chunks.extend(part)
         return int.from_bytes(chunks, "little")
 
-    def leb(self):
+    def leb(self) -> int:
         value = 0
         for shift in range(0, 64, 7):
             byte = self.raw(1)
@@ -150,9 +158,9 @@ class _Reader:
 @dataclass
 class LinksPacket:
     external_references: bool = False
-    sections: list = field(default_factory=list)
+    sections: list[Section] = field(default_factory=list)
 
-    def links(self):
+    def links(self) -> _RawLinks:
         result, address = [], 1
         for section in self.sections:
             address = _u64(address + _u64(section.gap))
@@ -161,7 +169,7 @@ class LinksPacket:
                 address = _u64(address + 1)
         return result
 
-    def validate(self, limits=DecodeLimits()):
+    def validate(self, limits: DecodeLimits = DecodeLimits()) -> "LinksPacket":
         _require(len(self.sections) <= limits.max_links, "too many sections")
         links = self.links()
         _require(len(links) <= limits.max_links, "too many links")
@@ -178,7 +186,7 @@ class LinksPacket:
                     _require(_width(reference, self.external_references) <= section.width, "reference outside width")
         return self
 
-    def to_bytes(self, limits=DecodeLimits()):
+    def to_bytes(self, limits: DecodeLimits = DecodeLimits()) -> bytes:
         self.validate(limits)
         compact = not self.sections or (
             len(self.sections) == 1
@@ -223,7 +231,7 @@ class LinksPacket:
                     out.extend(value.to_bytes(section.width, "little"))
         return bytes(out)
 
-    def write_to(self, stream, limits=DecodeLimits()):
+    def write_to(self, stream: BinaryIO, limits: DecodeLimits = DecodeLimits()) -> None:
         data = self.to_bytes(limits)
         offset = 0
         while offset < len(data):
@@ -232,7 +240,7 @@ class LinksPacket:
             offset += written
 
     @classmethod
-    def read_from(cls, stream, limits=DecodeLimits()):
+    def read_from(cls, stream: BinaryIO, limits: DecodeLimits = DecodeLimits()) -> Optional["LinksPacket"]:
         """Read exactly one packet; None only at a clean end of stream."""
         first = stream.read(1)
         if not first:
@@ -285,15 +293,16 @@ class LinksPacket:
         return cls(bool(header & 1), sections)
 
     @classmethod
-    def from_bytes(cls, data, limits=DecodeLimits()):
+    def from_bytes(cls, data: bytes, limits: DecodeLimits = DecodeLimits()) -> "LinksPacket":
         stream = io.BytesIO(data)
         packet = cls.read_from(stream, limits)
         _require(packet is not None, "empty input")
+        assert packet is not None  # for type checkers; _require has raised
         _require(not stream.read(1), "trailing bytes")
         return packet
 
     @classmethod
-    def parse_links(cls, text):
+    def parse_links(cls, text: str) -> _RawLinks:
         links = []
         for entry in text.split(";"):
             if not entry.strip():
@@ -308,7 +317,12 @@ class LinksPacket:
         return links
 
     @classmethod
-    def pack(cls, external_references, links, packed_widths=False):
+    def pack(
+        cls,
+        external_references: bool,
+        links: Iterable[tuple[int, Sequence[_Reference]]],
+        packed_widths: bool = False,
+    ) -> "LinksPacket":
         links = list(links)
         needs, previous = [], 0
         for address, refs in links:
@@ -317,7 +331,7 @@ class LinksPacket:
             previous = address
             needs.append(max(_width(r, external_references) for r in refs))
 
-        def layout(packed):
+        def layout(packed: bool) -> list[tuple[int, int]]:
             if not links:
                 return []
             widest, costs, opens, bests = max(needs), [float("inf")] * 8, [], []
@@ -352,7 +366,7 @@ class LinksPacket:
                     end, state = index, bests[index]
             return list(reversed(result))
 
-        def packet(plan):
+        def packet(plan: list[tuple[int, int]]) -> "LinksPacket":
             sections, index, address = [], 0, 1
             for count, width in plan:
                 members = links[index : index + count]
@@ -381,12 +395,16 @@ class LinksPacket:
 
 
 class _Encoder:
-    def __init__(self, options):
+    doublets: list[list[_Node]]
+    tuples: list[list[_Node]]
+    created: dict[tuple[_Node, ...], _Node]
+
+    def __init__(self, options: BinaryLinoOptions):
         self.options = options
         self.doublets, self.tuples, self.created = [], [], {}
         self.powers = [("i", 1)]
 
-    def link(self, items):
+    def link(self, items: list[_Node]) -> _Node:
         key = tuple(items)
         if key not in self.created:
             doublet = len(items) == 2 and all(kind != "t" for kind, _ in items)
@@ -396,13 +414,13 @@ class _Encoder:
             self.created[key] = node
         return self.created[key]
 
-    def chain(self, items):
+    def chain(self, items: list[_Node]) -> _Node:
         tail = ("i", 0)
         for head in reversed(items):
             tail = self.link([head, tail])
         return tail
 
-    def typed(self, marker, elements):
+    def typed(self, marker: int, elements: list[_Node]) -> _Node:
         items = [("i", marker)] + elements
         return (
             self.link(items)
@@ -410,14 +428,14 @@ class _Encoder:
             else self.link([("i", marker), self.chain(elements)])
         )
 
-    def list(self, elements):
+    def list(self, elements: list[_Node]) -> _Node:
         if not elements:
             return ("i", 0)
         if len(elements) == 2 or self.options.arity.contains(len(elements)):
             return self.link(elements)
         return self.typed(4, elements)
 
-    def unary(self, value):
+    def unary(self, value: int) -> _Node:
         powers = []
         for bit in range(63, -1, -1):
             if value & (1 << bit):
@@ -431,10 +449,10 @@ class _Encoder:
             result = self.link([power, result])
         return result
 
-    def scalar(self, value):
+    def scalar(self, value: int) -> _Node:
         return ("e", value) if self.options.external_references and value < 1 << 63 else self.unary(value)
 
-    def reference(self, text):
+    def reference(self, text: str) -> _Node:
         if re.fullmatch(r"0|[1-9][0-9]*", text) and len(text) <= 20 and int(text) <= U64:
             value = int(text)
             if self.options.external_references and value < 1 << 63:
@@ -442,7 +460,7 @@ class _Encoder:
             return self.link([("i", 2), self.unary(value)])
         return self.typed(3, [self.scalar(ord(c)) for c in text])
 
-    def encode_identified(self, node):
+    def encode_identified(self, node: Link) -> _Node:
         if node.id is not None and node.values:
             identifier = self.reference(node.id)
             return self.typed(5, [identifier] + [self.encode_identified(v) for v in node.values])
@@ -450,8 +468,8 @@ class _Encoder:
             return self.reference(node.id)
         return self.list([self.encode_identified(v) for v in node.values])
 
-    def finish(self):
-        def resolve(node):
+    def finish(self) -> "LinksPacket":
+        def resolve(node: _Node) -> _Reference:
             kind, value = node
             return (
                 External(value)
@@ -464,7 +482,10 @@ class _Encoder:
 
 
 class _Decoder:
-    def __init__(self, packet, limits):
+    links: list[list[_Reference]]
+    unary: list[Optional[int]]
+
+    def __init__(self, packet: LinksPacket, limits: DecodeLimits):
         packet.validate(limits)
         self.limits = limits
         self.links, self.unary = [], []
@@ -473,7 +494,7 @@ class _Decoder:
             _require(address == 6 + len(self.links), "document links must be contiguous from 6")
             _require(all(isinstance(r, External) or r < address for r in refs), "document contains forward reference")
 
-            def value(r):
+            def value(r: _Reference) -> Optional[int]:
                 if isinstance(r, External):
                     return None
                 return r if r <= 1 else (self.unary[r - 6] if r >= 6 else None)
@@ -482,10 +503,11 @@ class _Decoder:
             self.unary.append(a + b if a is not None and b is not None and a + b <= U64 else None)
             self.links.append(refs)
 
-    def chain(self, tail):
-        result = []
+    def chain(self, tail: _Reference) -> list[_Reference]:
+        result: list[_Reference] = []
         while tail != 0:
             _require(isinstance(tail, int) and tail >= 6, "broken element chain")
+            assert isinstance(tail, int)  # for type checkers; _require has raised
             items = self.links[tail - 6]
             _require(len(items) == 2, "broken element chain")
             _require(len(result) < self.limits.max_nodes, "chain too long")
@@ -493,21 +515,22 @@ class _Decoder:
             tail = items[1]
         return result
 
-    def number(self, reference):
+    def number(self, reference: _Reference) -> int:
         if isinstance(reference, External):
             return reference.value
         if reference <= 1:
             return reference
         value = self.unary[reference - 6] if reference >= 6 else None
         _require(value is not None, "expected unary number")
+        assert value is not None  # for type checkers; _require has raised
         return value
 
-    def text(self, text):
+    def text(self, text: str) -> Link:
         self.strings -= len(text.encode("utf-8"))
         _require(self.strings >= 0, "too many expanded string bytes")
         return Link(text)
 
-    def decode(self, reference, depth):
+    def decode(self, reference: _Reference, depth: int) -> Link:
         _require(depth < self.limits.max_depth, "nesting limit exceeded")
         self.nodes -= 1
         _require(self.nodes >= 0, "too many expanded nodes")
@@ -543,7 +566,7 @@ class _Decoder:
             elements = items
         return Link(None, [self.decode(e, depth + 1) for e in elements])
 
-    def document(self):
+    def document(self) -> list[Link]:
         if not self.links:
             return []
         root = self.links[-1]
@@ -555,14 +578,14 @@ class _Decoder:
         return [self.decode(e, 0) for e in elements]
 
 
-def _canonical(node):
+def _canonical(node: Link) -> Link:
     if node.id is None and len(node.values) == 1 and node.values[0].id is not None and not node.values[0].values:
         return node.values[0]
     return Link(node.id, [_canonical(v) for v in node.values])
 
 
-def format_document(document):
-    def nested(node, top=False):
+def format_document(document: Iterable[Link]) -> str:
+    def nested(node: Link, top: bool = False) -> str:
         if node.id is not None and not node.values:
             return format_reference(node.id)
         values = " ".join(nested(v) for v in node.values)
@@ -576,11 +599,11 @@ def format_document(document):
 
 
 class BinaryLinoCodec:
-    def __init__(self, options=None, limits=None):
+    def __init__(self, options: Optional[BinaryLinoOptions] = None, limits: Optional[DecodeLimits] = None):
         self.options = options or BinaryLinoOptions()
         self.limits = limits or DecodeLimits()
 
-    def encode_packet(self, document):
+    def encode_packet(self, document: Sequence[Link]) -> LinksPacket:
         _require(self.options.arity.contains(2), "arity must contain 2")
         pending = [(node, 0) for node in document]
         nodes, strings = 0, 0
@@ -600,25 +623,25 @@ class BinaryLinoCodec:
             encoder.list([encoder.encode_identified(node) for node in document])
         return encoder.finish().validate(self.limits)
 
-    def encode(self, document):
+    def encode(self, document: Sequence[Link]) -> bytes:
         return self.encode_packet(document).to_bytes(self.limits)
 
-    def decode_packet(self, packet):
+    def decode_packet(self, packet: LinksPacket) -> list[Link]:
         return _Decoder(packet, self.limits).document()
 
-    def decode(self, data):
+    def decode(self, data: bytes) -> list[Link]:
         return self.decode_packet(LinksPacket.from_bytes(data, self.limits))
 
     @staticmethod
-    def parse_document(text, parser=None):
+    def parse_document(text: str, parser: Optional[Parser] = None) -> list[Link]:
         return [_canonical(n) for n in (parser or Parser()).parse(text)]
 
     @staticmethod
-    def format_document(document):
+    def format_document(document: Iterable[Link]) -> str:
         return format_document(document)
 
-    def encode_text(self, text, parser=None):
+    def encode_text(self, text: str, parser: Optional[Parser] = None) -> bytes:
         return self.encode(self.parse_document(text, parser))
 
-    def decode_text(self, data):
+    def decode_text(self, data: bytes) -> str:
         return format_document(self.decode(data))

@@ -20,7 +20,6 @@ from .binary import (
     Section,
 )
 from .binary import format_document as format_binary_document
-from .binary import format_reference as format_binary_reference
 from .comments import strip_comments
 from .cst import CstKind, CstNode, build_cst
 from .format_config import FormatConfig
@@ -30,6 +29,7 @@ from .nested_format import format_nested
 from .parser import DEFAULT_MAX_DEPTH, ParseError, Parser
 from .quotes import reference_quote
 from .reference_literal import decode_reference_literal, encode_reference_literal
+from .reference_literal import format_reference as format_binary_reference
 from .stream_parser import StreamParseError, StreamParser, StreamPosition, parse_async_chunks, parse_chunks
 
 
