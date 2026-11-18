@@ -42,4 +42,3 @@ for (const [layout, options] of layouts) {
     })
   );
 }
-

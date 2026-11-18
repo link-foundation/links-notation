@@ -268,7 +268,9 @@ const writer = new BinaryLinoCodec(
   limits
 );
 const reader = new BinaryLinoCodec(undefined, limits);
-const document = writer.parseDocument('(row: 0 1 127 128 "é猫😀")\n(row: 255 256 "é猫😀")');
+const document = writer.parseDocument(
+  '(row: 0 1 127 128 "é猫😀")\n(row: 255 256 "é猫😀")'
+);
 const bytes = writer.encode(document);
 const decoded = reader.decode(bytes);
 ```
