@@ -1,0 +1,4 @@
+195:security / Audit npm lock (dev/log/issues/330/pulls/331/templates/js)	UNKNOWN STEP	2026-11-17T23:14:12.7824990Z picomatch vulnerable to ReDoS through single-branch repeated extglobs - https://github.com/advisories/GHSA-fc5q-39xc-vjpf
+250:security / Audit npm lock (dev/log/issues/330/pulls/331/templates/js)	UNKNOWN STEP	2026-11-17T23:14:12.8142243Z ##[error]Process completed with exit code 1.
+461:security / Audit npm lock (dev/log/issues/377/pulls/378/templates/js)	UNKNOWN STEP	2026-11-17T23:14:37.3933081Z picomatch vulnerable to ReDoS through single-branch repeated extglobs - https://github.com/advisories/GHSA-fc5q-39xc-vjpf
+516:security / Audit npm lock (dev/log/issues/377/pulls/378/templates/js)	UNKNOWN STEP	2026-11-17T23:14:37.4245118Z ##[error]Process completed with exit code 1.

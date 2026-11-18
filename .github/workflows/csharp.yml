@@ -74,6 +74,11 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Test
         run: dotnet test --configuration Release --no-build
+      - name: Build API documentation
+        run: |
+          dotnet tool restore
+          dotnet tool run docfx docfx.json
+          test -f _site/api/Link.Foundation.Links.Notation.html
       - name: Setup Rust for binary interoperability checks
         uses: dtolnay/rust-toolchain@stable
       - name: Cache Cargo

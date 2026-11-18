@@ -10,12 +10,15 @@
     "@actions/artifact": "6.3.1",
     "@actions/core": "3.0.1",
     "glob": "14.0.6",
-    "glob-parent": "6.0.2"
+    "glob-parent": "7.0.0"
   },
   "devDependencies": {
     "@vercel/ncc": "0.45.0"
   },
   "overrides": {
+    "glob-parent": {
+      "minimatch": "11.0.9"
+    },
     "archiver-utils": {
       "glob": "14.0.6"
     }

@@ -1,0 +1,17 @@
+   514	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.6989341Z ✔ 330/pulls/331: npm 12 uses its actual supported Node ranges (9.325495ms)
+   515	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7001410Z ✖ 330/pulls/331: npm selection stays at the reviewed current release (0.906632ms)
+   516	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7002361Z ✔ 377/pulls/378: npm 12 uses its actual supported Node ranges (1.390806ms)
+   517	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7003907Z ✖ 377/pulls/378: npm selection stays at the reviewed current release (0.140623ms)
+   518	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7005936Z ✔ 330/pulls/331: release helpers load only installed dependencies (180.208311ms)
+   519	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7006850Z ✔ 377/pulls/378: release helpers load only installed dependencies (98.691221ms)
+   531	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7117521Z test at experiments/issue-408/inline-tools.test.mjs:16:3
+   532	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7118519Z ✖ 330/pulls/331: npm selection stays at the reviewed current release (0.906632ms)
+   533	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7118879Z   Error: No npm 12.2.3 release found
+   534	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7119519Z       at Module.selectLatestSupportedNpmRelease (file:///home/runner/work/links-notation/links-notation/dev/log/issues/330/pulls/331/templates/js/scripts/setup-npm.mjs:59:11)
+   535	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7120373Z       at TestContext.<anonymous> (file:///home/runner/work/links-notation/links-notation/experiments/issue-408/inline-tools.test.mjs:28:14)
+   543	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7123274Z test at experiments/issue-408/inline-tools.test.mjs:16:3
+   544	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7123972Z ✖ 377/pulls/378: npm selection stays at the reviewed current release (0.140623ms)
+   545	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7124381Z   Error: No npm 12.2.3 release found
+   546	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7124988Z       at Module.selectLatestSupportedNpmRelease (file:///home/runner/work/links-notation/links-notation/dev/log/issues/377/pulls/378/templates/js/scripts/setup-npm.mjs:59:11)
+   547	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7126242Z       at TestContext.<anonymous> (file:///home/runner/work/links-notation/links-notation/experiments/issue-408/inline-tools.test.mjs:28:14)
+   554	js / parity	UNKNOWN STEP	2026-11-18T18:42:17.7163336Z ##[error]Process completed with exit code 1.

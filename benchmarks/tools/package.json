@@ -11,7 +11,7 @@
   "dependencies": {
     "csv-parse": "^7.0.3",
     "fast-xml-parser": "^5.12.1",
-    "lino-objects-codec": "^0.9.6",
+    "lino-objects-codec": "^1.0.0",
     "yaml": "^2.9.1"
   },
   "overrides": {

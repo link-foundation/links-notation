@@ -728,7 +728,7 @@ jobs:
         run: |
           cd "$PYTHON_ROOT"
           python -m pip install --upgrade pip==26.3
-          pip install build==1.6.1 twine==7.0.0 "scriv[toml]==1.8.1"
+          pip install build==1.6.1 twine==7.0.0 "scriv[toml]==1.8.2"
 
       - name: Configure git
         run: |

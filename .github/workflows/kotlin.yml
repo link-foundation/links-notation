@@ -38,6 +38,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: "27.0.1"
+          check-latest: true
           distribution: "temurin"
           cache: gradle
       - name: Check ktlint formatting
@@ -62,6 +63,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: "27.0.1"
+          check-latest: true
           distribution: "temurin"
           cache: gradle
       - name: Test on the JVM, Node.js and WebAssembly
@@ -71,6 +73,8 @@ jobs:
           node-version: "26.13.1"
       - name: Verify Mocha reporter compatibility and failure reporting
         run: build/js/node_modules/.bin/mocha --version && node --test ../experiments/issue-405/mocha-reporter.test.mjs
+      - name: Test the public Maven consumer on the current JDK
+        run: bash ../scripts/ci/maven-consumer.sh kotlin 0.31.6
       - name: Show the test summary
         if: ${{ always() }}
         run: bash test-summary.sh
@@ -99,6 +103,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: "27.0.1"
+          check-latest: true
           distribution: "temurin"
           cache: gradle
       - name: Compare the Kotlin parser with the JavaScript parser
@@ -125,6 +130,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: "27.0.1"
+          check-latest: true
           distribution: "temurin"
           cache: gradle
       - name: Require the Android SDK
@@ -155,6 +161,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: "27.0.1"
+          check-latest: true
           distribution: "temurin"
           cache: gradle
       - name: Test on the iOS simulator and build every iOS target

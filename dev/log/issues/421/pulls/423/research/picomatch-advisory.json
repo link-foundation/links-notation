@@ -1,0 +1,1 @@
+{"ghsa_id":"GHSA-fc5q-39xc-vjpf","html_url":"https://github.com/advisories/GHSA-fc5q-39xc-vjpf","published_at":"2026-10-19T18:32:12Z","vulnerabilities":[{"first_patched_version":null,"package":{"ecosystem":"npm","name":"picomatch"},"vulnerable_functions":[],"vulnerable_version_range":"\u003c= 4.0.7"}],"withdrawn_at":"2026-11-18T15:38:56Z"}

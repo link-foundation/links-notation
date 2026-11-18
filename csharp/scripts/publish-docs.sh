@@ -11,7 +11,7 @@ TARGET_BRANCH="gh-pages"
 SHA=$(git rev-parse --verify HEAD)
 REPOSITORY="github.com/${GITHUB_REPOSITORY}"
 
-docfx docfx.json
+dotnet tool run docfx docfx.json
 
 # The PDF is produced by a separate job and downloaded as an artifact.
 if [ -f pdf-artifact/Link.Foundation.Links.Notation.pdf ]; then

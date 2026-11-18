@@ -15,7 +15,7 @@ for (const issue of ["330/pulls/331", "377/pulls/378"]) {
   });
   test(`${issue}: npm selection stays at the reviewed current release`, () => {
     const versions = Object.fromEntries(
-      ["11.15.0", "12.2.2", "12.3.0"].map((version) => [
+      ["11.15.0", "12.2.2", "12.2.3", "12.3.0"].map((version) => [
         version,
         {
           dist: {
@@ -26,7 +26,7 @@ for (const issue of ["330/pulls/331", "377/pulls/378"]) {
     );
     assert.equal(
       module.selectLatestSupportedNpmRelease({ versions }).version,
-      "12.2.2",
+      "12.2.3",
     );
     assert.ok(module.compareVersions("12.2.2-rc.10", "12.2.2-rc.2") > 0);
   });

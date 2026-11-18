@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
 
-      - uses: taiki-e/install-action@v2.90.4
+      - uses: taiki-e/install-action@v2.90.6
         with:
           tool: cargo-audit@0.23.0
 
@@ -68,7 +68,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
 
-      - uses: actions/dependency-review-action@v5.0.0
+      - uses: actions/dependency-review-action@v5.0.1
         with:
           fail-on-severity: high
           comment-summary-in-pr: on-failure

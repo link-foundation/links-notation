@@ -1,0 +1,12 @@
+193:release_audit / audit	UNKNOWN STEP	2026-11-18T18:31:53.5113038Z js: 0.31.6 registry and GitHub release verified
+194:release_audit / audit	UNKNOWN STEP	2026-11-18T18:31:53.9065861Z python: 0.31.6 registry and GitHub release verified
+195:release_audit / audit	UNKNOWN STEP	2026-11-18T18:31:54.5815832Z rust: 0.31.6 registry and GitHub release verified
+196:release_audit / audit	UNKNOWN STEP	2026-11-18T18:31:54.9818289Z csharp: 0.31.6 registry and GitHub release verified
+197:release_audit / audit	UNKNOWN STEP	2026-11-18T18:31:55.2938833Z go: 0.31.6 registry and GitHub release verified
+198:release_audit / audit	UNKNOWN STEP	2026-11-18T18:31:56.1212350Z java: 0.31.6 registry and GitHub release verified
+199:release_audit / audit	UNKNOWN STEP	2026-11-18T18:31:57.0616511Z php: 0.31.6 registry and GitHub release verified
+200:release_audit / audit	UNKNOWN STEP	2026-11-18T18:31:57.5927759Z cpp: 0.31.6 registry and GitHub release verified
+201:release_audit / audit	UNKNOWN STEP	2026-11-18T18:31:57.9631051Z swift: 0.31.6 registry and GitHub release verified
+202:release_audit / audit	UNKNOWN STEP	2026-11-18T18:32:00.3839352Z ##[error]kotlin: registry version 0.31.6 has no GitHub release kotlin_0.31.6
+204:release_audit / audit	UNKNOWN STEP	2026-11-18T18:32:00.3849889Z 10 languages audited; 1 delivery failure(s).
+205:release_audit / audit	UNKNOWN STEP	2026-11-18T18:32:00.3917709Z ##[error]Process completed with exit code 1.

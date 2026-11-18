@@ -5,4 +5,4 @@ pypi-attestations>=0.0.31
 zizmor==1.32.0
 
 # Native resolver for reproducible Python project and requirements locks.
-uv==0.13.8
+uv==0.13.9

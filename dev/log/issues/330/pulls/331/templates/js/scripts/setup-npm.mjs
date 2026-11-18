@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
  * - command-stream: Modern shell command execution with streaming support
  */
 
-export const NPM_MIN_VERSION = '12.2.2';
+export const NPM_MIN_VERSION = '12.2.3';
 export const NODE_MIN_VERSION = '22.22.2';
 export const NODE_SUPPORTED_RANGE = '^22.22.2 || ^24.15.0 || >=26.0.0';
 export const NPM_TARGET_MAJOR = 12;
@@ -91,13 +91,13 @@ async function resolveLatestSupportedNpmRelease(fetchFn) {
 // See: https://github.com/npm/cli/issues/9151
 //
 // Workaround strategies in order of preference:
-// 1. npm install -g npm@12.2.2 (standard approach)
+// 1. npm install -g npm@12.2.3 (standard approach)
 // 2. curl tarball download (bypasses broken npm entirely)
-// 3. npx npm@12.2.2 install (uses npx cache, bypasses arborist)
+// 3. npx npm@12.2.3 install (uses npx cache, bypasses arborist)
 // 4. corepack as last resort
 
 async function tryStandardInstall($) {
-  await $`npm install -g npm@12.2.2`;
+  await $`npm install -g npm@12.2.3`;
 }
 
 async function tryCurlTarball($, fetchFn) {
@@ -124,12 +124,12 @@ async function tryCurlTarball($, fetchFn) {
 }
 
 async function tryNpxInstall($) {
-  await $`npx --yes npm@12.2.2 install -g npm@12.2.2`;
+  await $`npx --yes npm@12.2.3 install -g npm@12.2.3`;
 }
 
 async function tryCorepack($) {
   await $`corepack enable`;
-  await $`corepack prepare npm@12.2.2 --activate`;
+  await $`corepack prepare npm@12.2.3 --activate`;
 }
 
 async function tryStrategy(name, fn) {
@@ -172,7 +172,7 @@ export async function setupNpm($, fetchFn = fetch) {
   console.log(`Current npm version: ${currentVersion}`);
 
   const strategies = [
-    ['npm install -g npm@12.2.2', () => tryStandardInstall($)],
+    ['npm install -g npm@12.2.3', () => tryStandardInstall($)],
     ['curl-based tarball download', () => tryCurlTarball($, fetchFn)],
     ['npx-based install', () => tryNpxInstall($)],
     ['corepack', () => tryCorepack($)],

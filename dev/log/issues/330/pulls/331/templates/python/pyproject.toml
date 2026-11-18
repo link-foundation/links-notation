@@ -31,7 +31,7 @@ dev = [
     "pytest-asyncio>=1.5.0",
     "pytest-cov>=7.1.0",
     "pre-commit>=4.7.0",
-    "scriv[toml]>=1.8.1",
+    "scriv[toml]>=1.8.2",
 ]
 docs = [
     "sphinx>=9.2.0",

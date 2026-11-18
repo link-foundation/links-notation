@@ -1,0 +1,19 @@
+   247	2026-11-18T18:52:06.4622379Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/3.6.1/maven-surefire-plugin-3.6.1.pom failed (attempt 1 of 4) due to status 429. Retrying in 5000 ms (due to retryInterval 5000 ms multiplied by execution count 1)...
+   248	2026-11-18T18:52:11.5081186Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/3.6.1/maven-surefire-plugin-3.6.1.pom failed (attempt 2 of 4) due to status 429. Retrying in 10000 ms (due to retryInterval 5000 ms multiplied by execution count 2)...
+   249	2026-11-18T18:52:21.5494517Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/3.6.1/maven-surefire-plugin-3.6.1.pom failed (attempt 3 of 4) due to status 429. Retrying in 15000 ms (due to retryInterval 5000 ms multiplied by execution count 3)...
+   250	2026-11-18T18:52:36.6124442Z [INFO] ------------------------------------------------------------------------
+   251	2026-11-18T18:52:36.6124979Z [ERROR] BUILD FAILURE
+   252	2026-11-18T18:52:36.6125556Z [INFO] ------------------------------------------------------------------------
+   253	2026-11-18T18:52:36.6126027Z [INFO] Total time:  31.843 s
+   254	2026-11-18T18:52:36.6127256Z [INFO] Finished at: 2026-11-18T18:52:36Z
+   255	2026-11-18T18:52:36.6127727Z [INFO] ------------------------------------------------------------------------
+   256	2026-11-18T18:52:36.6132465Z [ERROR] Plugin org.apache.maven.plugins:maven-surefire-plugin:3.6.1 or one of its dependencies could not be resolved:
+   257	2026-11-18T18:52:36.6134147Z [ERROR] 	The following artifacts could not be resolved: org.apache.maven.plugins:maven-surefire-plugin:pom:3.6.1 (absent): Could not transfer artifact org.apache.maven.plugins:maven-surefire-plugin:pom:3.6.1 from/to central (https://repo.maven.apache.org/maven2): HTTP Status: 429
+   258	2026-11-18T18:52:36.6135680Z [ERROR] -> [Help 1]
+   259	2026-11-18T18:52:36.6136011Z [ERROR]
+   260	2026-11-18T18:52:36.6136498Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+   261	2026-11-18T18:52:36.6137124Z [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+   262	2026-11-18T18:52:36.6137545Z [ERROR]
+   263	2026-11-18T18:52:36.6138066Z [ERROR] For more information about the errors and possible solutions, please read the following articles:
+   264	2026-11-18T18:52:36.6138892Z [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginResolutionException
+   265	2026-11-18T18:52:36.6233180Z ##[error]Process completed with exit code 1.

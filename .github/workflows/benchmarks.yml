@@ -283,7 +283,7 @@ jobs:
           name: benchmark-output
           path: benchmarks
       - name: Setup Go
-        uses: actions/setup-go@v7.0.0
+        uses: actions/setup-go@v7.1.0
         with:
           go-version: '1.27.4'
           cache-dependency-path: benchmarks/go/go.sum
@@ -320,6 +320,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: '27.0.1'
+          check-latest: true
           distribution: 'temurin'
           cache: 'maven'
       # The benchmark depends on the library by coordinates, so the working copy
