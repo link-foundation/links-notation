@@ -283,6 +283,9 @@ def manifests(root=ROOT):
                     if not match:
                         raise ValueError(f"unpinned dependency: {path}: {requirement}")
                     add(path, "pypi", match[1], match[2])
+            elif path.name == "dotnet-tools.json" and path.parent.name == ".config":
+                for name, tool in json.loads(path.read_text())["tools"].items():
+                    add(path, "nuget", name, tool["version"])
             elif path.suffix == ".csproj":
                 for element in ET.fromstring(path.read_text()).iter("PackageReference"):
                     add(
