@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   [the release fragment](changelog.d/364.md) and
   [issue 364](https://github.com/link-foundation/links-notation/issues/364).
 
+### Changed
+
+- Document the binary object-transport preset and skip leading zero work in
+  unary scalar encoding across all ten bindings. Prepare 0.31.7. See
+  [the release fragment](changelog.d/420.md).
+
 ### Fixed
 
 - Stop posting `@dependabot rebase` comments that Dependabot rejects from

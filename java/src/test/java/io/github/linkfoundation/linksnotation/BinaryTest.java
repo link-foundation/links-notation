@@ -53,7 +53,7 @@ class BinaryTest {
       }
       count++;
     }
-    assertEquals(96, count);
+    assertEquals(98, count);
   }
 
   @Test

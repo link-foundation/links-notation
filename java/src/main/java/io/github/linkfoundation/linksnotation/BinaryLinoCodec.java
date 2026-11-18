@@ -546,7 +546,7 @@ public final class BinaryLinoCodec {
 
     Node unary(BigInteger value) {
       var elements = new ArrayList<Node>();
-      for (int bit = 63; bit >= 0; bit--)
+      for (int bit = value.bitLength() - 1; bit >= 0; bit--)
         if (value.testBit(bit)) {
           while (powers.size() <= bit) {
             Node previous = powers.getLast();

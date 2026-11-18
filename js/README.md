@@ -155,6 +155,12 @@ const group = new LinksGroup(parsed);
 console.log(group.format());
 ```
 
+### Binary object transport
+
+The [object-transport preset](../docs/protocol/binary-links-notation.md#object-transport-preset)
+combines external references and variable arity for encoding record-shaped
+documents. The codec defaults to pure doublets for associative graph use.
+
 ### Indented Text Documents
 
 Use `parseIndentedDocument` and `formatIndentedDocument` for text parents and

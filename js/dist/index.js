@@ -3869,9 +3869,11 @@ class Encoder {
     return elements.length === 2 || this.options.arity.contains(elements.length) ? this.link(elements) : this.typed(4, elements);
   }
   unary(value) {
+    const digits = value.toString(2);
     const powers = [];
-    for (let bit = 63;bit >= 0; bit--)
-      if (value & 1n << BigInt(bit)) {
+    for (let i = 0;i < digits.length; i++)
+      if (digits[i] === "1") {
+        const bit = digits.length - 1 - i;
         while (this.powers.length <= bit) {
           const p = this.powers.at(-1);
           this.powers.push(this.link([p, p]));

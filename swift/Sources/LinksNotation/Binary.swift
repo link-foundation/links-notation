@@ -583,7 +583,8 @@ private final class Encoder {
 
     func unary(_ value: UInt64) -> Node {
         var terms: [Node] = []
-        for bit in stride(from: 63, through: 0, by: -1) where value & (UInt64(1) << UInt64(bit)) != 0 {
+        let highestBit = UInt64.bitWidth - 1 - value.leadingZeroBitCount
+        for bit in stride(from: highestBit, through: 0, by: -1) where value & (UInt64(1) << UInt64(bit)) != 0 {
             while powers.count <= bit {
                 let power = powers.last!
                 powers.append(link([power, power]))

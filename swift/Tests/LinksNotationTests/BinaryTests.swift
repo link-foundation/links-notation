@@ -55,7 +55,7 @@ final class BinaryTests: XCTestCase {
             }
             count += 1
         }
-        XCTAssertEqual(count, 96)
+        XCTAssertEqual(count, 98)
     }
 
     func testAllNativeTextModelsSurviveAllBinaryOptions() throws {
