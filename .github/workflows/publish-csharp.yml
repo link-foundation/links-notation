@@ -144,15 +144,13 @@ jobs:
         uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: csharp/global.json
-      - name: Install DocFX
-        run: |
-          dotnet tool install -g docfx --version 2.81.0
-          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
+      - name: Restore DocFX
+        run: dotnet tool restore
       - name: Publish documentation to gh-pages branch
         run: |
           if [ "$CI_VERBOSE" = "true" ]; then
             set -x
-            docfx --version
+            dotnet tool run docfx --version
           fi
           bash scripts/publish-docs.sh
 

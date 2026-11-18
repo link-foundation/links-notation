@@ -3,7 +3,7 @@
     {
       "src": [
         {
-          "files": [ "**/*.sln" ],
+          "files": [ "Link.Foundation.Links.Notation/Link.Foundation.Links.Notation.csproj" ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
           "src": ""
         }
