@@ -69,6 +69,11 @@ merged first with that version, so this PR includes its changes and prepares
 0.31.8 across all ten languages. Registry delivery and matching release tags
 require a successful main release, followed by the exact-version audit.
 
+The [first 0.31.8 PHP run](https://github.com/link-foundation/links-notation/actions/runs/44387636054/job/135096676998)
+rejected the Composer lock because its content hash includes the package
+version. Composer 2.11.2 regenerated the hash with no dependency changes.
+Strict validation, the coding standard and all 278 PHPUnit tests passed.
+
 The [reported link check](https://github.com/link-foundation/links-notation/actions/runs/43903758448)
 failed on a 503 from the external Railroad Diagram Generator. The grammar URL
 belongs to that upstream service. The captured error is in [research/ci](research/ci/).
