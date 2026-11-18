@@ -36,7 +36,7 @@ def test_shared_vectors():
             assert packet.to_bytes() == expected, line
             assert LinksPacket.from_bytes(expected).links() == links, line
         count += 1
-    assert count == 96
+    assert count == 98
 
 
 @pytest.mark.parametrize(

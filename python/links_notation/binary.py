@@ -437,7 +437,7 @@ class _Encoder:
 
     def unary(self, value: int) -> _Node:
         powers = []
-        for bit in range(63, -1, -1):
+        for bit in range(value.bit_length() - 1, -1, -1):
             if value & (1 << bit):
                 while len(self.powers) <= bit:
                     self.powers.append(self.link([self.powers[-1], self.powers[-1]]))

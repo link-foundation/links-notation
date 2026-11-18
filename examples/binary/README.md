@@ -42,6 +42,23 @@ swift run -c release binary-lino examples/binary/corpus.txt
 
 See the [shared specification](../../docs/protocol/binary-links-notation.md)
 for packet APIs, independent encoding options and resource limits. Unit tests
-in every port consume the same 96 golden vectors, exercise native text models,
+in every port consume the same 98 golden vectors, exercise native text models,
 and reject malformed input. The binary interoperability workflow runs this
 example in CI whenever a codec, shared fixture or example changes.
+
+## Object-transport benchmark
+
+From the repository root, run the finite JavaScript benchmark:
+
+```sh
+node --max-old-space-size=192 --stack-size=1024 examples/binary/benchmark-object-transport.mjs
+```
+
+It encodes the same 101 records with the pure-doublet default and with the
+[object-transport preset](../../docs/protocol/binary-links-notation.md#object-transport-preset).
+The records contain URLs and prose with accented text, Japanese, and emoji.
+Each sample is decoded with a default reader and explicit finite limits
+and checked against the original document. The benchmark reports byte lengths
+and the median of five encode-only samples after one warm-up per layout.
+Set `LINKS_NOTATION_MODULE` to an installed package name or absolute module
+path to repeat the benchmark with a different build.

@@ -472,8 +472,11 @@ class Encoder {
   }
 
   Node unary(u64 value) {
+    if (value == 0) return Node{'i', 0};
+    int highest_bit = 0;
+    for (u64 remaining = value; remaining > 1; remaining >>= 1) ++highest_bit;
     std::vector<Node> powers;
-    for (int bit = 63; bit >= 0; --bit) {
+    for (int bit = highest_bit; bit >= 0; --bit) {
       if ((value & (u64{1} << bit)) == 0) continue;
       while (powers_.size() <= static_cast<std::size_t>(bit)) {
         const Node power = powers_.back();
@@ -481,7 +484,6 @@ class Encoder {
       }
       powers.push_back(powers_[static_cast<std::size_t>(bit)]);
     }
-    if (powers.empty()) return Node{'i', 0};
     Node sum = powers.back();
     for (std::size_t index = powers.size() - 1; index-- > 0;) sum = link({powers[index], sum});
     return sum;

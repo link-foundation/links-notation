@@ -1339,7 +1339,7 @@
     },
     {
       "id": "binary-protocol",
-      "description": "Configurable binary codec and shared protocol vectors",
+      "description": "Configurable binary codec and shared wire vectors, including the pure-doublet and object-transport layouts",
       "contract": "native-suite",
       "implementations": {
         "js": {
@@ -1354,7 +1354,8 @@
         "rust": {
           "status": "implemented",
           "implementation": [
-            "rust/links-notation/src/binary/mod.rs"
+            "rust/links-notation/src/binary/mod.rs",
+            "rust/links-notation/src/binary/mapping.rs"
           ],
           "evidence": [
             "rust/links-notation/tests/binary_notation_tests.rs"
@@ -1390,16 +1391,19 @@
         "csharp": {
           "status": "implemented",
           "implementation": [
-            "csharp/Link.Foundation.Links.Notation/Binary/BinaryLinoCodec.cs"
+            "csharp/Link.Foundation.Links.Notation/Binary/BinaryLinoCodec.cs",
+            "csharp/Link.Foundation.Links.Notation/Binary/LinoMapping.cs"
           ],
           "evidence": [
-            "csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs"
+            "csharp/Link.Foundation.Links.Notation.Tests/BinaryLinoCodecTests.cs",
+            "csharp/Link.Foundation.Links.Notation.Tests/BinaryLinksNotationTests.cs"
           ]
         },
         "php": {
           "status": "implemented",
           "implementation": [
-            "php/src/Binary/BinaryLinoCodec.php"
+            "php/src/Binary/BinaryLinoCodec.php",
+            "php/src/Binary/Encoder.php"
           ],
           "evidence": [
             "php/tests/BinaryTest.php"
@@ -2496,7 +2500,7 @@
         "js/src/quotes.js",
         "js/src/references.js"
       ],
-      "sha256": "5d00294afbd1aee9f0695098840762b031e24cbc1a1f8f8a65a50edb06191abe"
+      "sha256": "efa63844b433fd29830f17d422c631381e1014bbbba33c7501426b9a657d5679"
     },
     "rust": {
       "files": [
@@ -2519,7 +2523,7 @@
         "rust/links-notation/src/stream_parser.rs",
         "rust/links-notation/src/syntax.rs"
       ],
-      "sha256": "696b9cbd9e5f417cdca1ffe185d2de941073d29974d7d7754cc86f1e5e3c4ba8"
+      "sha256": "a5f3a93f2c22c4e35592a07ad568d34aa7a61d1c7d87767379fe22e287a013da"
     },
     "python": {
       "files": [
@@ -2536,7 +2540,7 @@
         "python/links_notation/reference_literal.py",
         "python/links_notation/stream_parser.py"
       ],
-      "sha256": "1bb9ccfde0d3d866413e06116c2089001d853154a670c0a55d2334dbc3152616"
+      "sha256": "c1c8140fe15d1a311ddd442d6adbd70be0631484cab1ae6cc2fc852ff916a686"
     },
     "java": {
       "files": [
@@ -2556,7 +2560,7 @@
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParseRuntimeException.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParser.java"
       ],
-      "sha256": "19ebbadd3e64be0fec74a9d86953a57c2bc29a42528ba87adcd6818baa56a36e"
+      "sha256": "ba19a7b1bf55530b55704cb02d0700e0821e25793c95dbdf525dd6966407ea9e"
     },
     "go": {
       "files": [
@@ -2570,7 +2574,7 @@
         "go/reference_literal.go",
         "go/stream_parser.go"
       ],
-      "sha256": "bd6b286cc34519b1f2747917ea26c9448fac1821b7f8ba611235b46cbb50528d"
+      "sha256": "f91bf62c06132d96b4d0e6ce62e474d401ad493d7f10dd94c2dd4f9f785bc0bb"
     },
     "csharp": {
       "files": [
@@ -2605,7 +2609,7 @@
         "csharp/Link.Foundation.Links.Notation/_.cs",
         "csharp/Link.Foundation.Links.Notation/id.cs"
       ],
-      "sha256": "94c01d91effcee19d6f21380d6af02057340cf41ecf3a2af38e22d72c1d0d17a"
+      "sha256": "222aaf5939a3e98f41dbc6b9d6a77d750ea052d25f399da418cc9956e93b2e06"
     },
     "php": {
       "files": [
@@ -2633,7 +2637,7 @@
         "php/src/StreamParseException.php",
         "php/src/StreamParser.php"
       ],
-      "sha256": "8fca915b14afdd467675bc4447b78dff2c5fae48a1fddc500e8a7a0864ee3f54"
+      "sha256": "24eaa5bad038afb8f72abc011fdf7b175ca517bdb0c9644c61328119592a04ba"
     },
     "cpp": {
       "files": [
@@ -2667,7 +2671,7 @@
         "cpp/src/unicode.cpp",
         "cpp/src/unicode.hpp"
       ],
-      "sha256": "68da487403b9e92ea87c0397456be0d40f7ca80238cc7fb66643a1f189294956"
+      "sha256": "82b05f8ff264fd15e5c55d8094e6fd09a04e843996e8e3b19921a9e1207806ca"
     },
     "swift": {
       "files": [
@@ -2686,7 +2690,7 @@
         "swift/Sources/LinksNotation/Quotes.swift",
         "swift/Sources/LinksNotation/StreamParser.swift"
       ],
-      "sha256": "1eff19f749a682dac2d2a4f86110dbbedfcb20fc1b938a81c960af480492bfa1"
+      "sha256": "739fac540d39c00c94da7f920d925c055a05327ebe406ac3615472553ec1c451"
     },
     "kotlin": {
       "files": [
@@ -2709,7 +2713,7 @@
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/References.kt",
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/StreamParser.kt"
       ],
-      "sha256": "b192d1793cf41a73d7a2f6469772953ae9bb20f73e7cb446dbf8f7d095d49899"
+      "sha256": "27250665af581e469bd53413c351411cfd4dc2ffe682c703d0f0a69b7ba0c935"
     }
   }
 }

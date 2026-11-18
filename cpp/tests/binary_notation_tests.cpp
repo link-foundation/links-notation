@@ -316,7 +316,7 @@ TEST(BinaryNotationTests, SharedVectors) {
     }
     ++count;
   }
-  EXPECT_EQ(count, 96u);
+  EXPECT_EQ(count, 98u);
 }
 
 TEST(BinaryNotationTests, GoldenDocumentsAreStable) {

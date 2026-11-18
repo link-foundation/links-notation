@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Globalization;
+using System.Numerics;
 using System.Text;
 
 using LinoLink = Link.Foundation.Links.Notation.Link<string>;
@@ -310,7 +311,7 @@ public static class LinoMapping
         private Node Unary(ulong value)
         {
             var powers = new List<Node>();
-            for (var bit = 63; bit >= 0; bit--)
+            for (var bit = 63 - BitOperations.LeadingZeroCount(value); bit >= 0; bit--)
             {
                 if ((value & (1UL << bit)) != 0)
                 {

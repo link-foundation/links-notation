@@ -89,6 +89,16 @@ bindings whose `parse` accepts unbalanced parentheses (`(a` or `a)`), the CST
 cannot nest them, so `parseCst` also rejects them. The shared corpus contains
 only balanced documents.
 
+## Binary object transport
+
+The [object-transport preset](../docs/protocol/binary-links-notation.md#object-transport-preset)
+uses the existing external-reference and arity options in each binding. The
+shared binary vectors pin the pure-doublet and transport bytes for the same
+two records, including repeated Unicode text and numeric boundary values.
+All ten native binary suites read and re-encode both layouts. Unary encoders
+skip leading zero bits (whole zero bytes in PHP) and retain the order in
+which powers and sums are created.
+
 ## Explicit API exceptions
 
 `Parser.parseGroups` exists in JavaScript, C++ (`parse_groups`), Swift and
