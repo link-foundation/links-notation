@@ -8,9 +8,12 @@
     "@zip.js/zip.js": "2.25.0",
     "punycode": "2.3.1",
     "glob": "14.0.6",
-    "glob-parent": "6.0.2"
+    "glob-parent": "7.0.0"
   },
   "overrides": {
+    "glob-parent": {
+      "minimatch": "11.0.9"
+    },
     "archiver-utils": {
       "glob": "14.0.6"
     },

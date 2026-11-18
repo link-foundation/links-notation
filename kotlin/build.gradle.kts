@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "io.github.link-foundation.kotlin"
-version = "0.31.6"
+version = "0.31.7"
 
 // Android needs an SDK. CI runners have one; elsewhere the Android target is
 // left out rather than failing the build of every other target.
@@ -274,7 +274,7 @@ plugins.withType<org.jetbrains.kotlin.gradle.targets.wasm.nodejs.WasmNodeJsPlugi
 plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
     the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>().apply {
         resolution("glob", "^14.0.6")
-        resolution("minimatch", "^11.0.8")
+        resolution("minimatch", "^11.0.9")
     }
 }
 

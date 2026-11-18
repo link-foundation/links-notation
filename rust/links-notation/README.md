@@ -14,7 +14,7 @@ Add this to your `Cargo.toml`:
 [dependencies]
 links-notation = { path = "." }  # For local development
 # Or from a registry:
-# links-notation = "0.31.6"
+# links-notation = "0.31.7"
 ```
 
 ### From Source

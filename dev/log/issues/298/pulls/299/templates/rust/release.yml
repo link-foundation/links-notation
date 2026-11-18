@@ -481,7 +481,7 @@ jobs:
             ${{ runner.os }}-cargo-coverage-
 
       - name: Install cargo-llvm-cov
-        uses: taiki-e/install-action@v2.90.4
+        uses: taiki-e/install-action@v2.90.6
         with:
           tool: cargo-llvm-cov
 
