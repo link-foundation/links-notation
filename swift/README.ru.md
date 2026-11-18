@@ -17,7 +17,7 @@ iOS 16+ и Linux.
 ```swift
 // Package.swift
 dependencies: [
-    .package(url: "https://github.com/link-foundation/links-notation.git", from: "0.31.6"),
+    .package(url: "https://github.com/link-foundation/links-notation.git", from: "0.31.7"),
 ],
 targets: [
     .target(
