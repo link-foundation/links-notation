@@ -55,6 +55,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: "27.0.1"
+          check-latest: true
           distribution: "temurin"
           cache: gradle
       - name: Check if version already published

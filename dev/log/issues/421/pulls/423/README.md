@@ -8,7 +8,7 @@ The issue, its comment, and all three classes of PR feedback are captured in [re
 | --- | --- |
 | Preserve PR 414 and fix every related failure | Keep the template xUnit runner update. Compare default-branch CI with the original publication run and restore, test and audit NuGet. [CI excerpts](research/ci/) |
 | Fix the reported security failures | Verify the three failing npm trees and all other locks. GitHub withdrew the picomatch advisory. The fresh audit separately identified the glob-parent minimatch pin. Use a scoped override and test both artifact helpers. [Advisory evidence](research/picomatch-advisory.json) |
-| Fix release audit and restore green main CI | Verify the existing registry versions, retry the original PHP and Kotlin 0.31.6 publishers at the original SHA and validate their release tags. Build DocFX on PRs with the same tool as deployment. Prepare the independent 0.31.7 release in this PR. |
+| Fix release audit and restore green main CI | Recover the PHP and Kotlin release records at the original source SHA and verify all ten 0.31.6 registry/release pairs. Build DocFX on PRs with the same tool as deployment. The 0.31.7 publish run and main status require the code in this PR. [Verification](verification.md) |
 | Apply PR 415 | Put Maven 3.10.1 and its verified archive checksum in the Java wrapper. Run Maven verify. |
 | Apply PRs 416–418 | Update lino-objects-codec in all three consumers. Check website lint and build, compression comparison reproducibility and benchmark round trips. |
 | Apply PR 419 | Update the mirror to v10.15.0 and remove the local ESLint pin supplied by the hook itself. Confirm the tag and pre-commit configuration. |

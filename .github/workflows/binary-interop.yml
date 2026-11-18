@@ -47,6 +47,7 @@ jobs:
           problem-matcher: true
           distribution: temurin
           java-version: '27.0.1'
+          check-latest: true
           # The Kotlin example builds with kotlin/gradlew on this JDK.
           cache: gradle
       - uses: shivammathur/setup-php@2.40.0

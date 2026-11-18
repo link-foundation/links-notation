@@ -37,6 +37,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: "27.0.1"
+          check-latest: true
           distribution: "temurin"
           cache: maven
       - name: Build with Maven
@@ -64,6 +65,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: ${{ matrix.java }}
+          check-latest: true
           distribution: "temurin"
           cache: maven
       - name: Test with Maven
@@ -85,6 +87,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: "27.0.1"
+          check-latest: true
           distribution: "temurin"
           cache: maven
       - name: Check Google Java formatting and whitespace
@@ -115,6 +118,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: "27.0.1"
+          check-latest: true
           distribution: "temurin"
           cache: maven
       - name: Require the floor pom.xml declares

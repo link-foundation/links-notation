@@ -29,9 +29,25 @@ targeted retry restored the [PHP 0.31.6 release](https://github.com/link-foundat
 at that SHA. Kotlin recovery uses the
 [original release run](https://github.com/link-foundation/links-notation/actions/runs/43628697572).
 Maven Central verified eight coordinates, 19 files and 35 signatures for
-Kotlin 0.31.6. The public Gradle consumer built and ran against that version.
-GitHub rejected the individual Kotlin job rerun with HTTP 403 because that
-job belonged to an earlier attempt. A failed-jobs rerun was accepted.
+Kotlin 0.31.6. GitHub rejected the individual Kotlin job rerun with HTTP 403
+because that job belonged to an earlier attempt. The failed-jobs rerun verified
+the signed artifacts and identified a consumer failure. JDK 27 selected Java
+target 27, while Kotlin 2.4.21 selected 26. The same failure reproduced locally
+on Temurin 27.0.1.1+4 with `bash scripts/ci/maven-consumer.sh kotlin 0.31.6`.
+Setting both consumer targets to JVM 11 made the same command pass against the
+public artifacts. The current-JDK workflow now runs that check. The missing
+[Kotlin 0.31.6 release](https://github.com/link-foundation/links-notation/releases/tag/kotlin_0.31.6)
+was restored at the original source SHA after verifying the tag and release
+were absent. Maven Central retained the existing signed deployment.
+The release audit then verified the exact registry version and matching GitHub
+release for all ten languages, with zero delivery failures.
+[Kotlin consumer and audit output](research/ci/kotlin-recovery.txt)
+
+The [latest default branch run checked](https://github.com/link-foundation/links-notation/actions/runs/44355881870/attempts/3)
+also shows why the full publisher cannot pass at `e01fdfaff7148f72e6a347f92686080de4b7cfc5`.
+PHP and Swift refuse to relabel the existing 0.31.6 source as a different commit,
+and C# ran DocFX against the test project. The 0.31.7 manifests and the DocFX
+configuration fix are in this PR. [CI excerpts](research/ci/44355881870.txt)
 
 The [first refresh CI run](https://github.com/link-foundation/links-notation/actions/runs/44372476527)
 found that both archived npm-selection test fixtures still expected 12.2.2.
@@ -41,6 +57,11 @@ and all five artifact tests passed locally. The failed assertions are in
 The [link check](https://github.com/link-foundation/links-notation/actions/runs/44372475728)
 found that the codec's GitHub release URL returns 404. The research now links
 to the exact npm registry record for codec 1.0.0.
+
+The [Java 25 job at 9d798aaa](https://github.com/link-foundation/links-notation/actions/runs/44373808370/job/135047997473)
+exhausted Maven's retries for the Surefire 3.6.1 POM with HTTP 429. The public
+POM returned HTTP 200 separately, and the Java 21, Java 27 and Maven minimum
+jobs passed at that revision. [Job log excerpt](research/ci/44373808370.txt)
 
 The release auditor saw 0.31.7 pending across all ten registries in the PR
 checkout. The PR contains version preparation. Registry delivery and matching

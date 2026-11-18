@@ -1,0 +1,33 @@
+   478	2026-11-14T18:59:03.9277380Z Uploaded bundle to Central Portal as AUTOMATIC, deployment id: c6ccd232-194a-4b1a-8308-468d5b89636d
+   479	2026-11-14T18:59:03.9381770Z Validating deployment c6ccd232-194a-4b1a-8308-468d5b89636d...
+   321	2026-11-18T19:00:09.3566730Z Verified links-notation@0.31.6: 8 coordinates, 19 files, 35 signatures
+   338	2026-11-18T19:00:38.0860280Z Kotlin does not yet support 27 JDK target, falling back to Kotlin JVM_26 JVM target
+   350	2026-11-18T19:00:45.0402850Z 1 actionable task: 1 executed
+   351	2026-11-18T19:00:45.0528850Z * What went wrong:
+   352	2026-11-18T19:00:45.0618370Z Execution failed for task ':compileKotlin' (registered by plugin 'org.jetbrains.kotlin.jvm').
+   353	2026-11-18T19:00:45.0736470Z > ⛔ Inconsistent JVM Target Compatibility Between Java and Kotlin Tasks
+   354	2026-11-18T19:00:45.0762580Z   Inconsistent JVM-target compatibility detected for tasks 'compileJava' (27) and 'compileKotlin' (26).
+   355	2026-11-18T19:00:45.0838630Z   Solution: Consider using JVM Toolchain: https://kotl.in/gradle/jvm/toolchain
+   356	2026-11-18T19:00:45.0942000Z   Learn more about JVM-target validation: https://kotl.in/gradle/jvm/target-validation
+  Inconsistent JVM-target compatibility detected for tasks 'compileJava' (27) and 'compileKotlin' (26).
+      Inconsistent JVM-target compatibility detected for tasks 'compileJava' (27) and 'compileKotlin' (26).
+BUILD FAILED in 1m 22s
+> Task :classes UP-TO-DATE
+
+> Task :run
+Public Kotlin root-coordinate JVM parser/formatter consumer passed
+
+BUILD SUCCESSFUL in 1m 28s
+2 actionable tasks: 2 executed
+js: 0.31.6 registry and GitHub release verified
+python: 0.31.6 registry and GitHub release verified
+rust: 0.31.6 registry and GitHub release verified
+csharp: 0.31.6 registry and GitHub release verified
+go: 0.31.6 registry and GitHub release verified
+java: 0.31.6 registry and GitHub release verified
+php: 0.31.6 registry and GitHub release verified
+cpp: 0.31.6 registry and GitHub release verified
+swift: 0.31.6 registry and GitHub release verified
+kotlin: 0.31.6 registry and GitHub release verified
+10 package/release pairs verified; 0 verification error(s).
+10 languages audited; 0 delivery failure(s).

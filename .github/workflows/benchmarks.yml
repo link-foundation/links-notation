@@ -320,6 +320,7 @@ jobs:
         with:
           problem-matcher: true
           java-version: '27.0.1'
+          check-latest: true
           distribution: 'temurin'
           cache: 'maven'
       # The benchmark depends on the library by coordinates, so the working copy
