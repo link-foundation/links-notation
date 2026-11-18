@@ -20,7 +20,7 @@ Registry snapshots: 2026-11-18 UTC, `registry-transitive.json`. Before is the in
 | `dev/log/issues/377/pulls/378/templates/php/composer.lock` | fidry/cpu-core-counter | 1.4.1 | 1.4.1 | 1.4.1 | Current registry release |
 | `dev/log/issues/330/pulls/331/templates/php/composer.lock` | friendsofphp/php-cs-fixer | 3.95.30 | 3.95.32 | 3.95.32 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/php/composer.lock` | friendsofphp/php-cs-fixer | 3.95.30 | 3.95.32 | 3.95.32 | Current registry release |
-| `benchmarks/php/composer.lock` | link-foundation/links-notation | 0.31.6 | 0.31.7 | 0.31.6 | Benchmark uses the local 0.31.7 checkout through a Composer path repository |
+| `benchmarks/php/composer.lock` | link-foundation/links-notation | 0.31.6 | 0.31.8 | 0.31.6 | Benchmark uses the local 0.31.8 checkout through a Composer path repository |
 | `dev/log/issues/330/pulls/331/templates/php/composer.lock` | myclabs/deep-copy | 1.14.0 | 1.14.0 | 1.14.0 | Current registry release |
 | `dev/log/issues/377/pulls/378/templates/php/composer.lock` | myclabs/deep-copy | 1.14.0 | 1.14.0 | 1.14.0 | Current registry release |
 | `php/composer.lock` | myclabs/deep-copy | 1.14.0 | 1.14.0 | 1.14.0 | Current registry release |

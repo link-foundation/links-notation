@@ -15,7 +15,7 @@ JavaScript (Node.js) and WebAssembly (`wasmJs`).
 
 ```kotlin
 dependencies {
-    implementation("io.github.link-foundation.kotlin:links-notation:0.31.7")
+    implementation("io.github.link-foundation.kotlin:links-notation:0.31.8")
 }
 ```
 

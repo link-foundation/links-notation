@@ -83,9 +83,9 @@
     "before": [
       "0.31.6"
     ],
-    "after": "0.31.7",
+    "after": "0.31.8",
     "latest": "0.31.6",
-    "reason": "Benchmark uses the local 0.31.7 checkout through a Composer path repository"
+    "reason": "Benchmark uses the local 0.31.8 checkout through a Composer path repository"
   },
   {
     "path": "dev/log/issues/377/pulls/378/templates/js/.github/actions/artifact-transport/package-lock.json",

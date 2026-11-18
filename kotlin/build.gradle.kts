@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "io.github.link-foundation.kotlin"
-version = "0.31.7"
+version = "0.31.8"
 
 // Android needs an SDK. CI runners have one; elsewhere the Android target is
 // left out rather than failing the build of every other target.

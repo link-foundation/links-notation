@@ -46,7 +46,7 @@ release for all ten languages, with zero delivery failures.
 The [latest default branch run checked](https://github.com/link-foundation/links-notation/actions/runs/44355881870/attempts/3)
 also shows why the full publisher cannot pass at `e01fdfaff7148f72e6a347f92686080de4b7cfc5`.
 PHP and Swift refuse to relabel the existing 0.31.6 source as a different commit,
-and C# ran DocFX against the test project. The 0.31.7 manifests and the DocFX
+and C# ran DocFX against the test project. The updated manifests and the DocFX
 configuration fix are in this PR. [CI excerpts](research/ci/44355881870.txt)
 
 The [first refresh CI run](https://github.com/link-foundation/links-notation/actions/runs/44372476527)
@@ -63,10 +63,11 @@ exhausted Maven's retries for the Surefire 3.6.1 POM with HTTP 429. The public
 POM returned HTTP 200 separately, and the Java 21, Java 27 and Maven minimum
 jobs passed at that revision. [Job log excerpt](research/ci/44373808370.txt)
 
-The release auditor saw 0.31.7 pending across all ten registries in the PR
-checkout. The PR contains version preparation. Registry delivery and matching
-release tags require a successful main release, followed by the exact-version
-audit.
+The release auditor saw 0.31.7 pending across all ten registries in the initial
+PR checkout. [PR #422](https://github.com/link-foundation/links-notation/pull/422)
+merged first with that version, so this PR includes its changes and prepares
+0.31.8 across all ten languages. Registry delivery and matching release tags
+require a successful main release, followed by the exact-version audit.
 
 The [reported link check](https://github.com/link-foundation/links-notation/actions/runs/43903758448)
 failed on a 503 from the external Railroad Diagram Generator. The grammar URL

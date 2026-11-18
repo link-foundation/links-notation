@@ -105,7 +105,7 @@ def render_tables():
                         requirement = block.rstrip(chr(92)).strip()
                         return f"Native universal Python lock selects {requirement}"
         if row["ecosystem"] == "composer" and name == "link-foundation/links-notation":
-            return "Benchmark uses the local 0.31.7 checkout through a Composer path repository"
+            return "Benchmark uses the local 0.31.8 checkout through a Composer path repository"
         if row["ecosystem"] == "go" and row["path"].endswith("go.sum"):
             return "Go checksum retained by module tidy; see go.mod for selected module versions"
         try:
