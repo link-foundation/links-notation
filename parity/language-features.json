@@ -2523,7 +2523,7 @@
         "rust/links-notation/src/stream_parser.rs",
         "rust/links-notation/src/syntax.rs"
       ],
-      "sha256": "a5f3a93f2c22c4e35592a07ad568d34aa7a61d1c7d87767379fe22e287a013da"
+      "sha256": "356cf2e036e78c20dfd93641008ded284283e3f9518a0f9dad2dd73de52b7174"
     },
     "python": {
       "files": [
