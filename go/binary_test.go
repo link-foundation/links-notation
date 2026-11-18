@@ -88,7 +88,7 @@ func TestBinarySharedVectors(t *testing.T) {
 		}
 		count++
 	}
-	if count != 96 {
+	if count != 98 {
 		t.Fatal(count)
 	}
 }

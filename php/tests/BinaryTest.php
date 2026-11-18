@@ -62,7 +62,7 @@ class BinaryTest extends TestCase
             }
             $count++;
         }
-        self::assertSame(96, $count);
+        self::assertSame(98, $count);
     }
 
     public function testNativeTextModels(): void

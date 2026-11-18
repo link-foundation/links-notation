@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"math"
+	"math/bits"
 	"slices"
 	"strconv"
 	"strings"
@@ -642,7 +643,7 @@ func (e *binaryEncoder) list(elements []binaryNode) binaryNode {
 }
 func (e *binaryEncoder) unary(value uint64) binaryNode {
 	powers := []binaryNode{}
-	for bit := 63; bit >= 0; bit-- {
+	for bit := bits.Len64(value) - 1; bit >= 0; bit-- {
 		if value&(uint64(1)<<bit) != 0 {
 			for len(e.powers) <= bit {
 				p := e.powers[len(e.powers)-1]

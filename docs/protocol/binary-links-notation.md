@@ -10,7 +10,7 @@ The format and vectors originate in
 [link-cli PR #106](https://github.com/link-foundation/link-cli/pull/106),
 pinned at commit `6417179b0ce7669f482e50268f4a8bdb506bb034` (Unlicense).
 The Rust and C# codecs in this repository are adapted from that implementation.
-Existing version 1 packets and the 96 golden vectors retain their bytes.
+Existing version 1 packets retain their bytes.
 
 ## 1. Conventions
 
@@ -242,6 +242,45 @@ represent an ID with no children as a reference, matching their text parsers;
 parser metadata are not stored. A binary round trip preserves the semantic
 native model, including identifiers, empty references, groups, Unicode and
 noncanonical numeric strings. It does not preserve the original text spelling.
+
+#### Object-transport preset
+
+For record-shaped documents, enable external references and use arity
+`2..` (no maximum). Leave packed widths off to use the uniform-width
+layout. External references carry code points and small numbers directly,
+and variable arity lets the encoder write strings, lists, and records as
+tuples. This can reduce the number of graph links and encoding work. Packet
+size depends on the data. Large external code points can widen a section,
+and the pure-doublet layout can share repeated sub-links. Use the default
+when consumers need the associative graph of doublets and unary values.
+
+```js
+import {
+  ArityRange,
+  BinaryLinoCodec,
+  BinaryLinoOptions,
+  DecodeLimits,
+} from 'links-notation';
+
+const limits = new DecodeLimits({ maxNodes: 1_000, maxStringBytes: 32_768 });
+const writer = new BinaryLinoCodec(
+  new BinaryLinoOptions(true, new ArityRange(2, null)),
+  limits
+);
+const reader = new BinaryLinoCodec(undefined, limits);
+const document = writer.parseDocument(
+  '(row: 0 1 127 128 "é猫😀")\n(row: 255 256 "é猫😀")'
+);
+const bytes = writer.encode(document);
+const decoded = reader.decode(bytes);
+```
+
+Keep finite limits appropriate for the receiving application. The packet
+describes its own layout, so a default-configured version 1 reader can
+decode both forms subject to its normal limits. The two matching
+[golden vectors](binary-links-notation-vectors.txt) encode this document in
+150 bytes with pure doublets and 99 bytes with the transport preset. Both
+decode to the same document.
 
 ### 7.2 Example
 

@@ -83,7 +83,7 @@ Go keeps most of its tests in a single file rather than one file per category, s
 
 | Test Name | Python | JavaScript | Rust | C# | Go | Java | PHP | C++ | Swift | Kotlin |
 |-----------|---|---|---|---|---|---|---|---|---|---|
-| all native text models survive all binary options | ❌ | [✅](js/tests/Binary.test.js#L85) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/BinaryTests.swift#L61) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/BinaryTest.kt#L55) |
+| all native text models survive all binary options | ❌ | [✅](js/tests/Binary.test.js#L86) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/BinaryTests.swift#L61) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/BinaryTest.kt#L55) |
 | binary limits and malformed | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L134) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | binary native models | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L106) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | binary shared vectors | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L25) | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -91,13 +91,13 @@ Go keeps most of its tests in a single file rather than one file per category, s
 | binary string budget stops before later scalars | ❌ | ❌ | ❌ | ❌ | [✅](go/binary_test.go#L12) | ❌ | ❌ | ❌ | ❌ | ❌ |
 | binary text quotes every  unicode grammar whitespace character | ❌ | [✅](js/tests/Binary.test.js#L15) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/BinaryTests.swift#L14) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/BinaryTest.kt#L13) |
 | configurable limits apply in both directions and malformed packets are rejected | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/BinaryTest.kt#L82) |
-| configurable limits apply in both directions; reject malformed packets | ❌ | [✅](js/tests/Binary.test.js#L113) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/BinaryTests.swift#L92) | ❌ |
+| configurable limits apply in both directions; reject malformed packets | ❌ | [✅](js/tests/Binary.test.js#L114) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/BinaryTests.swift#L92) | ❌ |
 | limits and malformed | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L87) | [✅](php/tests/BinaryTest.php#L100) | ❌ | ❌ | ❌ |
 | limits and malformed packets | [✅](python/tests/test_binary.py#L67) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | native text model round trip | [✅](python/tests/test_binary.py#L58) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | native text models | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L60) | [✅](php/tests/BinaryTest.php#L68) | ❌ | ❌ | ❌ |
 | options arity and text helpers | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/BinaryTest.kt#L126) |
-| packet cursor boundaries, uint64, truncation and configurable depth | ❌ | [✅](js/tests/Binary.test.js#L141) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/BinaryTests.swift#L112) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/BinaryTest.kt#L102) |
+| packet cursor boundaries, uint64, truncation and configurable depth | ❌ | [✅](js/tests/Binary.test.js#L142) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](swift/Tests/LinksNotationTests/BinaryTests.swift#L112) | [✅](kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/BinaryTest.kt#L102) |
 | packet stream boundaries uint64 and every truncated prefix | [✅](python/tests/test_binary.py#L86) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | packet streams uint64 and truncation | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](java/src/test/java/io/github/linkfoundation/linksnotation/BinaryTest.java#L108) | ❌ | ❌ | ❌ | ❌ |
 | packet streams uint64 truncation and depth | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | [✅](php/tests/BinaryTest.php#L132) | ❌ | ❌ | ❌ |

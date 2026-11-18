@@ -43,6 +43,7 @@ test('string decoding stops at the UTF-8 budget before reading later scalars', (
 
 test('shared binary golden vectors', () => {
   let count = 0;
+  const reader = new BinaryLinoCodec();
   for (const line of readFileSync(
     new globalThis.URL(
       '../../docs/protocol/binary-links-notation-vectors.txt',
@@ -63,7 +64,7 @@ test('shared binary golden vectors', () => {
       );
       const model = codec.parseDocument(f[1].replaceAll('\\n', '\n'));
       expect(Buffer.from(codec.encode(model))).toEqual(bytes);
-      expect(codec.decode(bytes)).toEqual(model);
+      expect(reader.decode(bytes)).toEqual(model);
     } else {
       const links = LinksPacket.parseLinks(f[1]);
       expect(
@@ -79,7 +80,7 @@ test('shared binary golden vectors', () => {
     }
     count++;
   }
-  expect(count).toBe(96);
+  expect(count).toBe(98);
 });
 
 test('all native text models survive all binary options', () => {

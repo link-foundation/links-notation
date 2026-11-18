@@ -644,7 +644,7 @@ private class Encoder(
 
     fun unary(value: ULong): Node {
         val terms = ArrayList<Node>()
-        for (bit in 63 downTo 0) {
+        for (bit in (ULong.SIZE_BITS - 1 - value.countLeadingZeroBits()) downTo 0) {
             if (value and (1uL shl bit) != 0uL) {
                 while (powers.size <= bit) {
                     val p = powers.last()

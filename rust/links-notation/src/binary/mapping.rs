@@ -287,7 +287,10 @@ impl Encoder {
     }
 
     fn unary(&mut self, value: u64) -> Node {
-        let bits = (0..64).rev().filter(|bit| value & (1u64 << bit) != 0);
+        let bit_count = (u64::BITS - value.leading_zeros()) as usize;
+        let bits = (0..bit_count)
+            .rev()
+            .filter(|bit| value & (1u64 << bit) != 0);
         let powers = bits.map(|bit| self.power(bit)).collect::<Vec<_>>();
         let Some((&last, rest)) = powers.split_last() else {
             return Node::Internal(NULL);

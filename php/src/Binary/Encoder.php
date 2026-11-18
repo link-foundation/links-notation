@@ -57,9 +57,9 @@ final class Encoder
     }
     private function unary(string $value): array
     {
-        $bytes = UInt64::bytes($value, 8);
+        $bytes = rtrim(UInt64::bytes($value, 8), "\0");
         $powers = [];
-        for ($bit = 63; $bit >= 0; $bit--) {
+        for ($bit = strlen($bytes) * 8 - 1; $bit >= 0; $bit--) {
             if (ord($bytes[intdiv($bit, 8)]) & (1 << $bit % 8)) {
                 while (count($this->powers) <= $bit) {
                     $p = $this->powers[count($this->powers) - 1];
