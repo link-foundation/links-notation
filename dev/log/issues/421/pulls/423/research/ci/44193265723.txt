@@ -1,0 +1,10 @@
+195:security / Audit npm lock (dev/log/issues/377/pulls/378/templates/js)	UNKNOWN STEP	2026-11-17T23:00:17.9190455Z picomatch vulnerable to ReDoS through single-branch repeated extglobs - https://github.com/advisories/GHSA-fc5q-39xc-vjpf
+250:security / Audit npm lock (dev/log/issues/377/pulls/378/templates/js)	UNKNOWN STEP	2026-11-17T23:00:17.9503661Z ##[error]Process completed with exit code 1.
+461:security / Audit npm lock (docs/website)	UNKNOWN STEP	2026-11-17T23:09:36.8275512Z picomatch vulnerable to ReDoS through single-branch repeated extglobs - https://github.com/advisories/GHSA-fc5q-39xc-vjpf
+481:security / Audit npm lock (docs/website)	UNKNOWN STEP	2026-11-17T23:09:36.8680574Z ##[error]Process completed with exit code 1.
+692:security / Audit npm lock (dev/log/issues/330/pulls/331/templates/js)	UNKNOWN STEP	2026-11-17T23:04:19.6592008Z picomatch vulnerable to ReDoS through single-branch repeated extglobs - https://github.com/advisories/GHSA-fc5q-39xc-vjpf
+747:security / Audit npm lock (dev/log/issues/330/pulls/331/templates/js)	UNKNOWN STEP	2026-11-17T23:04:19.6988688Z ##[error]Process completed with exit code 1.
+962:release_audit / audit	UNKNOWN STEP	2026-11-17T23:13:32.6824277Z ##[error]php: registry version 0.31.6 has no GitHub release php_0.31.6
+965:release_audit / audit	UNKNOWN STEP	2026-11-17T23:13:40.2697113Z ##[error]kotlin: registry version 0.31.6 has no GitHub release kotlin_0.31.6
+966:release_audit / audit	UNKNOWN STEP	2026-11-17T23:13:40.2698859Z 8 package/release pairs verified; 0 verification error(s).
+968:release_audit / audit	UNKNOWN STEP	2026-11-17T23:13:40.2798155Z ##[error]Process completed with exit code 1.

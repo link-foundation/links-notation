@@ -1,0 +1,4 @@
+199:release_audit / audit	UNKNOWN STEP	2026-11-16T23:07:03.4565969Z ##[error]php: registry version 0.31.6 has no GitHub release php_0.31.6
+202:release_audit / audit	UNKNOWN STEP	2026-11-16T23:07:06.8191406Z ##[error]kotlin: registry version 0.31.6 has no GitHub release kotlin_0.31.6
+203:release_audit / audit	UNKNOWN STEP	2026-11-16T23:07:06.8193635Z 8 package/release pairs verified; 0 verification error(s).
+205:release_audit / audit	UNKNOWN STEP	2026-11-16T23:07:06.8257035Z ##[error]Process completed with exit code 1.

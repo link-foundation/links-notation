@@ -1,0 +1,13 @@
+301:release / php / publishToPackagist	UNKNOWN STEP	2026-11-14T19:05:21.0830805Z     if (result.shouldPublish) throw new Error("Exact Packagist version did not appear after 20 attempts");
+304:release / php / publishToPackagist	UNKNOWN STEP	2026-11-14T19:05:21.0832280Z Error: Exact Packagist version did not appear after 20 attempts
+309:release / php / publishToPackagist	UNKNOWN STEP	2026-11-14T19:05:21.0902962Z ##[error]Process completed with exit code 1.
+596:release / csharp / publishDocumentation	UNKNOWN STEP	2026-11-14T18:56:10.8189648Z ^[[38;5;11mwarning: No .NET API detected. Check the input files and earlier load or compilation diagnostics.^[[0m
+623:release / csharp / publishDocumentation	UNKNOWN STEP	2026-11-14T18:56:12.4725129Z ##[error]Process completed with exit code 255.
+880:release / go / publishRelease	UNKNOWN STEP	2026-11-14T19:00:29.8830536Z ##[error]github.com/link-foundation/links-notation/go@v0.31.6 on proxy.golang.org was not visible at https://proxy.golang.org/github.com/link-foundation/links-notation/go/@v/v0.31.6.info after 20 attempts (last status: HTTP 404)
+881:release / go / publishRelease	UNKNOWN STEP	2026-11-14T19:00:29.8840846Z ##[error]Process completed with exit code 1.
+1434:release / kotlin / publishToMavenCentral	UNKNOWN STEP	2026-11-14T19:13:43.4007420Z ##[error]Maven publication incomplete after 30 attempts
+1435:release / kotlin / publishToMavenCentral	UNKNOWN STEP	2026-11-14T19:13:43.4171010Z ##[error]Process completed with exit code 1.
+1645:release_audit / audit	UNKNOWN STEP	2026-11-14T19:21:37.2338366Z ##[error]php: 0.31.6 is absent from Packagist. To publish it, submit the repository once at https://packagist.org/packages/submit and configure the PACKAGIST_USERNAME and PACKAGIST_TOKEN secrets, then re-run the main CI run (docs/releases.md). The release result is failure; inspect this provider's job. Other providers may have delivered successfully.
+1648:release_audit / audit	UNKNOWN STEP	2026-11-14T19:21:48.8564545Z ##[error]kotlin: registry version 0.31.6 has no GitHub release kotlin_0.31.6
+1649:release_audit / audit	UNKNOWN STEP	2026-11-14T19:21:48.8567946Z 8 package/release pairs verified; 0 verification error(s).
+1651:release_audit / audit	UNKNOWN STEP	2026-11-14T19:21:48.8659166Z ##[error]Process completed with exit code 1.

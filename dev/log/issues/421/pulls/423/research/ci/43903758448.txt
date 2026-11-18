@@ -1,0 +1,3 @@
+310:linkChecker	UNKNOWN STEP	2026-11-16T16:10:00.9221356Z * [503] <https://www.bottlecaps.de/rr/ui> (at 534:3) | Rejected status code: 503 Service Unavailable
+559:linkChecker	UNKNOWN STEP	2026-11-16T16:12:07.2225520Z * [503] <https://www.bottlecaps.de/rr/ui> (at 534:3) | Rejected status code: 503 Service Unavailable
+563:linkChecker	UNKNOWN STEP	2026-11-16T16:12:07.2502140Z ##[error]Process completed with exit code 2.
